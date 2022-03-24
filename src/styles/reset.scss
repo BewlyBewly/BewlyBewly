@@ -1,0 +1,23 @@
+/**
+  * this stylesheet is used to reset the styles of the bilibili default style
+  */
+
+html, body {
+  font-size: 14px;
+  min-width: unset;
+}
+
+a,
+a:hover {
+  color: unset;
+}
+
+button {
+  border: unset;
+  background: unset;
+
+  &:focus,
+  &:active {
+    background: currentColor
+  }
+}
