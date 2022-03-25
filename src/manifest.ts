@@ -36,6 +36,7 @@ export async function getManifest() {
       'storage',
       'activeTab',
       'https://app.bilibili.com/*',
+      'https://api.bilibili.com/*',
       'https://passport.bilibili.com/*',
       'https://*.mcbbs.net/*',
       'http://*/',

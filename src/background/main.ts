@@ -65,6 +65,7 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
         width: 100%;
         height: 100%;
         content: '';
+        overflow: hidden;
         background: ${isDark ? 'hsl(230 12% 6%)' : 'rgb(243 244 246)'}!important;
         z-index: 99999;
       }

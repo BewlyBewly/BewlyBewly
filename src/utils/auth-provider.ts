@@ -16,6 +16,7 @@ export const grantAccessKey = (element: HTMLButtonElement): void => {
     <span class="animate-pulse">Loading...</span>
   `
   element.style.pointerEvents = 'none'
+  element.disabled = true
 
   const tip = 'Failed to grant Access Key'
 
@@ -67,6 +68,7 @@ export const grantAccessKey = (element: HTMLButtonElement): void => {
     .catch((error) => {
       element.innerHTML = orginalInnerHTML
       element.style.pointerEvents = 'auto'
+      element.disabled = false
 
       // eslint-disable-next-line no-alert
       alert(`${error.tip}: ${error.msg}`)
