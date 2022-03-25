@@ -305,7 +305,7 @@ header {
 }
 .right-side {
   @apply flex h-60px items-center rounded-full p-2
-  bg-$bew-content-1;
+    bg-$bew-content-1 text-$bew-text-1;
   backdrop-filter: var(--bew-filter-glass);
   box-shadow: var(--bew-shadow-2);
 

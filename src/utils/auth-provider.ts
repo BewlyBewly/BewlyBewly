@@ -10,9 +10,12 @@ export const revokeAccessKey = () => {
   accessKey.value = null
 }
 
-export const grantAccessKey = (element?: HTMLButtonElement): void => {
-  if (element)
-    setBtnState(element, 'loading')
+export const grantAccessKey = (element: HTMLButtonElement): void => {
+  const orginalInnerHTML = element.innerHTML
+  element.innerHTML = `
+    <span class="animate-pulse">Loading...</span>
+  `
+  element.style.pointerEvents = 'none'
 
   const tip = 'Failed to grant Access Key'
 
@@ -41,7 +44,8 @@ export const grantAccessKey = (element?: HTMLButtonElement): void => {
 
           const timeout = setTimeout(() => {
             document.body.contains(iframe) && document.body.removeChild(iframe)
-            reject(new Error(`${tip}: Request timeout`))
+            // eslint-disable-next-line prefer-promise-reject-errors
+            reject({ tip, msg: 'Request timeout' })
           }, 5000)
 
           window.addEventListener('message', (ev) => {
@@ -61,25 +65,11 @@ export const grantAccessKey = (element?: HTMLButtonElement): void => {
         }),
     )
     .catch((error) => {
-      // eslint-disable-next-line no-alert
-      alert(`${error.tip}: ${error.msg}`)
-      console.error(`${error.msg}: `, error)
-    }).then(() => {
-      if (element)
-        setBtnState(element, 'default')
-    })
-
-  function setBtnState(element: HTMLButtonElement, state: string) {
-    const orginalInnerHTML = element.innerHTML
-    if (state === 'loading') {
-      element.innerHTML = `
-      <span class="animate-pulse">Loading...</span>
-    `
-      element.style.pointerEvents = 'none'
-    }
-    else if (state === 'default') {
       element.innerHTML = orginalInnerHTML
       element.style.pointerEvents = 'auto'
-    }
-  }
+
+      // eslint-disable-next-line no-alert
+      alert(`${error.tip}: ${error.msg}`)
+      console.error(`${error.msg}: `, error.data)
+    })
 }
