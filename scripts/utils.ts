@@ -1,7 +1,7 @@
 import { resolve } from 'path'
 import { bgCyan, black } from 'kolorist'
 
-export const port = parseInt(process.env.PORT || '') || 3303
+export const port = parseInt(process.env.PORT || '') || 10804
 export const r = (...args: string[]) => resolve(__dirname, '..', ...args)
 export const isDev = process.env.NODE_ENV !== 'production'
 
