@@ -35,12 +35,9 @@ export async function getManifest() {
       'tabs',
       'storage',
       'activeTab',
-      'https://app.bilibili.com/*',
-      'https://api.bilibili.com/*',
-      'https://passport.bilibili.com/*',
-      'https://*.mcbbs.net/*',
-      'http://*/',
-      'https://*/',
+      '*://www.mcbbs.net/*',
+      '*://*.hdslb.com/*',
+      '*://*.bilibili.com/*',
     ],
     content_scripts: [
       {
