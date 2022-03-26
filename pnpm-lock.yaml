@@ -22,6 +22,7 @@ specifiers:
   kolorist: ^1.5.0
   npm-run-all: ^4.1.5
   rimraf: ^3.0.2
+  sass: ^1.49.9
   typescript: ^4.4.3
   unplugin-auto-import: ^0.5.11
   unplugin-icons: ^0.11.4
@@ -60,11 +61,12 @@ devDependencies:
   kolorist: 1.5.0
   npm-run-all: 4.1.5
   rimraf: 3.0.2
+  sass: 1.49.9
   typescript: 4.4.3
   unplugin-auto-import: 0.5.11_@vueuse+core@7.5.1+vite@2.6.2
   unplugin-icons: 0.11.4_d7afbeb2654c3780066bb7395b84518f
   unplugin-vue-components: 0.15.5_vite@2.6.2+vue@3.2.19
-  vite: 2.6.2
+  vite: 2.6.2_sass@1.49.9
   vite-plugin-windicss: 1.4.8_typescript@4.4.3+vite@2.6.2
   vue: 3.2.19
   vue-demi: 0.11.4_vue@3.2.19
@@ -790,7 +792,7 @@ packages:
     peerDependencies:
       vite: ^2.5.10
     dependencies:
-      vite: 2.6.2
+      vite: 2.6.2_sass@1.49.9
     dev: true
 
   /@vue/compiler-core/3.2.19:
@@ -3075,6 +3077,10 @@ packages:
     resolution: {integrity: sha1-nbHb0Pr43m++D13V5Wu2BigN5ps=}
     dev: true
 
+  /immutable/4.0.0:
+    resolution: {integrity: sha512-zIE9hX70qew5qTUjSS7wi1iwj/l7+m54KWU247nhM3v806UdGj1yDndXj+IOYxxtW9zyLI+xqFNZjTuDaLUqFw==}
+    dev: true
+
   /import-cwd/3.0.0:
     resolution: {integrity: sha512-4pnzH16plW+hgvRECbDWpQl3cqtvSofHWh44met7ESfZ8UZOWWddm8hEyDTqREJ9RbYHY8gi8DqmaelApoOGMg==}
     engines: {node: '>=8'}
@@ -4691,6 +4697,16 @@ packages:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
     dev: true
 
+  /sass/1.49.9:
+    resolution: {integrity: sha512-YlYWkkHP9fbwaFRZQRXgDi3mXZShslVmmo+FVK3kHLUELHHEYrCmL1x6IUjC7wLS6VuJSAFXRQS/DxdsC4xL1A==}
+    engines: {node: '>=12.0.0'}
+    hasBin: true
+    dependencies:
+      chokidar: 3.5.2
+      immutable: 4.0.0
+      source-map-js: 0.6.2
+    dev: true
+
   /sax/1.2.4:
     resolution: {integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==}
     dev: true
@@ -5404,7 +5420,7 @@ packages:
       webpack:
         optional: true
     dependencies:
-      vite: 2.6.2
+      vite: 2.6.2_sass@1.49.9
       webpack-virtual-modules: 0.4.3
     dev: true
 
@@ -5425,7 +5441,7 @@ packages:
       webpack:
         optional: true
     dependencies:
-      vite: 2.6.2
+      vite: 2.6.2_sass@1.49.9
       webpack-virtual-modules: 0.4.3
     dev: true
 
@@ -5510,7 +5526,7 @@ packages:
       '@windicss/plugin-utils': 1.4.8_typescript@4.4.3
       chalk: 4.1.2
       debug: 4.3.2
-      vite: 2.6.2
+      vite: 2.6.2_sass@1.49.9
       windicss: 3.1.7
     transitivePeerDependencies:
       - supports-color
@@ -5518,7 +5534,7 @@ packages:
       - typescript
     dev: true
 
-  /vite/2.6.2:
+  /vite/2.6.2_sass@1.49.9:
     resolution: {integrity: sha512-HSIg9U15LOnbD3CUxX364Pdrm7DUjftuBljowGxvkFHgDZU/SKPqApg9t86MX/Qq1VCO7wS+mGJHlfuTF7c0Sg==}
     engines: {node: '>=12.2.0'}
     hasBin: true
@@ -5538,6 +5554,7 @@ packages:
       postcss: 8.3.8
       resolve: 1.20.0
       rollup: 2.57.0
+      sass: 1.49.9
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
