@@ -60,6 +60,8 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
       body {
         opacity: 0;
         transition: opacity 0.5s;
+        overflow-y: hidden;
+        pointer-events: none;
       }
       `
 
@@ -74,6 +76,8 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
       const css = `
       body {
         opacity: 1;
+        overflow-y: auto;
+        pointer-events: auto;
       }
       `
 
