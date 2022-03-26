@@ -55,19 +55,11 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
   || /https?:\/\/www.bilibili.com\/?$/.test(`${tab.url}`)
   || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(`${tab.url}`)
   || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(`${tab.url}`)) {
-    const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
     if (changInfo.status === 'loading') {
       const css = `
-      body::after {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        content: '';
-        overflow: hidden;
-        background: ${isDark ? 'hsl(230 12% 6%)' : 'rgb(243 244 246)'}!important;
-        z-index: 99999;
+      body {
+        opacity: 0;
+        transition: opacity 0.5s;
       }
       `
 
@@ -80,8 +72,8 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
 
     else if (changInfo.status === 'complete') {
       const css = `
-      body::after {
-        display: none;
+      body {
+        opacity: 1;
       }
       `
 
@@ -98,6 +90,13 @@ chrome.runtime.onMessage.addListener((message: any, sender: chrome.runtime.Messa
   const APP_URL = 'https://app.bilibili.com'
   const API_URL = 'https://api.bilibili.com'
 
+  if (message.contentScriptQuery === 'getAccessKey') {
+    const url = message.confirmUri
+    fetch(url)
+      .then(response => sendResponse({ accessKey: `${response.url}`.match(/access_key=([0-9a-z]{32})/)![1] }))
+      .catch(error => console.error(error))
+    return true
+  }
   if (message.contentScriptQuery === 'getRecommendVideo') {
     const url = `${APP_URL}/x/feed/index?build=1&idx=${message.idx}&appkey=27eb53fc9058f8c3&access_key=${message.accessKey}`
     fetch(url)

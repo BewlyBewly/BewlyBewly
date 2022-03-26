@@ -38,31 +38,17 @@ export const grantAccessKey = (element: HTMLButtonElement): void => {
     .then(
       url =>
         new Promise<void>((resolve, reject) => {
-          const iframe = document.createElement('iframe')
-          iframe.src = url
-          iframe.style.display = 'none'
-          document.body.appendChild(iframe)
-
-          const timeout = setTimeout(() => {
-            document.body.contains(iframe) && document.body.removeChild(iframe)
-            // eslint-disable-next-line prefer-promise-reject-errors
-            reject({ tip, msg: 'Request timeout' })
-          }, 5000)
-
-          window.addEventListener('message', (ev) => {
-            if (`${ev.origin}` !== 'https://www.mcbbs.net' || !ev.data) return
-            const key = ev.data.match(/access_key=([0-9a-z]{32})/)
-            if (key) {
-              accessKey.value = key[1]
-              clearTimeout(timeout)
-              document.body.contains(iframe) && document.body.removeChild(iframe)
+          browser.runtime
+            .sendMessage({
+              contentScriptQuery: 'getAccessKey',
+              confirmUri: url,
+            }).then((res: {accessKey: string}) => {
+              accessKey.value = res.accessKey
               resolve()
-            }
-            else {
+            }).catch((err: any) => {
               // eslint-disable-next-line prefer-promise-reject-errors
-              reject({ tip, msg: 'Failed to get Access Key', data: ev })
-            }
-          })
+              reject({ tip, msg: 'Failed to get Access Key', data: err })
+            })
         }),
     )
     .catch((error) => {
