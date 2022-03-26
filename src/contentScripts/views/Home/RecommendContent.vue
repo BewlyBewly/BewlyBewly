@@ -153,17 +153,11 @@ export default defineComponent({
       this.isLoading = true
       this.videoList = []
     },
-    onEnter(el, done) {
-      // el.dataset.index > 10
-      const delay = (el.dataset.index / 10).toFixed(1).split('.')[1]
-      el.style.transitionDelay = `${delay * 0.1}s`
+    onEnter(el: Element, done: () => void) {
+      const element = el as HTMLElement
+      const delay = (parseInt(`${element.dataset.index}`, 10) / 10).toFixed(1).split('.')[1] as string
+      element.style.transitionDelay = `${parseInt(delay, 10) * 0.1}s`
       done()
-      // gsap.to(el, {
-      //   opacity: 1,
-      //   height: '1.6em',
-      //   delay: el.dataset.index * 0.15,
-      //   onComplete: done,
-      // })
     },
   },
 
