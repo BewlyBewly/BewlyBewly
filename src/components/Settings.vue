@@ -24,7 +24,7 @@
       <div>
         Authorize BewlyBewly to use Access Key
         <br />
-        <span class="desc">this change will make you able to use recommend videos</span>
+        <span class="desc">this change will make you able to get suggested videos</span>
       </div>
       <button
         v-if="accessKey + '' === 'undefined' || accessKey + '' === 'null'"
