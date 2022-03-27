@@ -6,9 +6,6 @@
 
 Bringing you the suggested videos on the bilibili homepage, clean and simple.
 
-
-
-
 <p align="center">
 <sub>Inject Vue App into bilibili homepage</sub><br/>
 <img width="655" src="https://user-images.githubusercontent.com/33394391/160250313-6a3db903-53c5-431a-8ddd-80a50725087a.png"><br/>
@@ -16,7 +13,7 @@ Bringing you the suggested videos on the bilibili homepage, clean and simple.
 
 ## Installation
 
-> Ensure you installed [extension.zip](https://github.com/hakadao/BewlyBewly/releases) and decompress this file.
+> Ensure you installed [bewlybewly-extension.zip](https://github.com/hakadao/BewlyBewly/releases) and decompress this file.
 
 ### Chrome
 
@@ -28,9 +25,7 @@ Bringing you the suggested videos on the bilibili homepage, clean and simple.
 
 1. Type in `edge://extensions/` in the address bar and press Enter
 2. Turn on `Developer mode` then press `Load unpacked` <br/> <img width="655" alt="image" src="https://user-images.githubusercontent.com/33394391/160278008-37899cd2-e12f-4153-91e9-7ad72a11457e.png">
-3. Load decompressed exetension folder in your browser 
-
-
+3. Load decompressed exetension folder in your browser
 
 ## Getting started
 
