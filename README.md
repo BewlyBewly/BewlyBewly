@@ -1,6 +1,6 @@
 # BewlyBewly
 
-Bringing you the suggested videos on bilibili homepage, clean and simple.
+Bringing you the suggested videos on the bilibili homepage, clean and simple.
 
 <p align="center">
 <img width="200" src="https://user-images.githubusercontent.com/33394391/160250512-410b71fc-7f25-4caf-b850-429227ff082a.png"><br/>

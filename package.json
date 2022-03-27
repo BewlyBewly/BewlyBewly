@@ -2,7 +2,7 @@
   "name": "bewly-bewly",
   "displayName": "BewlyBewly",
   "version": "0.0.1",
-  "description": "[description]",
+  "description": "Bringing you the suggested videos on the bilibili homepage",
   "private": true,
   "scripts": {
     "dev": "npm run clear && cross-env NODE_ENV=development run-p dev:*",
