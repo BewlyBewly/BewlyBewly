@@ -79,7 +79,7 @@
     justify="center"
   >
     <button
-      style="box-shadow: var(--bew-shadow-2);"
+      style="box-shadow: var(--bew-shadow-1);"
       bg="$bew-content-1"
       p="x-8 y-4"
       text="$bew-text-1"
