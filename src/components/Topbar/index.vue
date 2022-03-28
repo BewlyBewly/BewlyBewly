@@ -93,7 +93,12 @@
             ></user-panel-dropdown>
           </transition>
         </div>
-        <div class="right-side-item">
+
+        <div
+          class="right-side-item"
+          @mouseenter="showNotificationsDropDown = true"
+          @mouseleave="showNotificationsDropDown = false"
+        >
           <div
             v-if="unReadmessageCount !== 0"
             class="unread-message"
@@ -103,7 +108,23 @@
           <a href="https://message.bilibili.com" target="_blank" title="Notifications">
             <tabler:bell />
           </a>
+
+          <transition name="slide">
+            <notifications-dropdown
+              v-if="showNotificationsDropDown"
+              pos="absolute top-60px left-1/2"
+              m="-l-85px"
+              after:content="t"
+              after:select="none"
+              after:opacity="0"
+              after:w="full"
+              after:h="32"
+              after:pos="absolute -top-16 left-0"
+              after:z="-1"
+            ></notifications-dropdown>
+          </transition>
         </div>
+
         <div class="right-side-item">
           <div
             v-if="newMomentsCount !== 0"
@@ -170,6 +191,7 @@ export default defineComponent({
       showLogoDropDown: false,
       showUserPanel: false,
       showTopbarMask: false,
+      showNotificationsDropDown: false,
       isLogin: !!getUserID(),
       unReadmessage: {},
       unReadDm: {},
@@ -239,12 +261,9 @@ export default defineComponent({
         }).then(res => this.unReadDm = res.data)
 
       for (const [key, value] of Object.entries(this.unReadmessage))
-        if (key !== 'up') this.unReadmessageCount += parseInt(value)
-      for (const [key, value] of Object.entries(this.unReadDm))
-        this.unReadmessageCount += parseInt(value)
-
-      // this.unReadmessageCount = this.unReadmessage.at + this.unReadmessage.chat + this.unReadmessage.like
-      //   + this.unReadmessage.reply + this.unReadmessage.sys_msg
+        if (key !== 'up') this.unReadmessageCount += parseInt(`${value}`)
+      for (const [, value] of Object.entries(this.unReadDm))
+        this.unReadmessageCount += parseInt(`${value}`)
     },
     getNewMomentsCount() {
       browser.runtime
