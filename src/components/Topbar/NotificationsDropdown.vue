@@ -20,79 +20,86 @@
       m="b-1 last:b-0"
       flex="~"
       justify="between"
-      align="center"
+      items="center"
     >
       {{ item.name }}
-      <div
+      <template
         v-if="item.unreadCount > 0"
-        bg="$bew-theme-color"
-        rounded="full"
-        text="white xs"
-        p="1"
-        min-w="21px"
-        min-h="21px"
       >
-        {{ item.unreadCount > 999 ? '999+' : item.unreadCount }}
-      </div>
+        <div
+          bg="$bew-theme-color"
+          rounded="full"
+          text="white xs leading-none center"
+          p="1"
+          min-w="21px"
+          min-h="21px"
+        >
+          {{ item.unreadCount > 999 ? '999+' : item.unreadCount }}
+        </div>
+      </template>
     </a>
   </div>
 </template>
 
-<script setup lang="ts">
-let unreadReplys = 0
-let unreadMentions = 0
-let unreadLikes = 0
-let unreadMessages = 0
-let unreadChats = 0
+<script lang="ts">
+export default defineComponent({
+  data() {
+    return {
+      list: [
+        {
+          name: 'Replys',
+          url: 'https://message.bilibili.com/#/reply',
+          unreadCount: 0,
+        },
+        {
+          name: 'Mentions',
+          url: 'https://message.bilibili.com/#/at',
+          unreadCount: 0,
+        },
+        {
+          name: 'Likes',
+          url: 'https://message.bilibili.com/#/love',
+          unreadCount: 0,
+        },
+        {
+          name: 'Messages',
+          url: 'https://message.bilibili.com/#/system',
+          unreadCount: 0,
+        },
+        {
+          name: 'Chats',
+          url: 'https://message.bilibili.com/#/whisper',
+          unreadCount: 0,
+        },
+      ],
 
-const list = [
-  {
-    name: 'Replys',
-    url: 'https://message.bilibili.com/#/reply',
-    unreadCount: unreadReplys,
+    }
   },
-  {
-    name: 'Mentions',
-    url: 'https://message.bilibili.com/#/at',
-    unreadCount: unreadMentions,
+  mounted() {
+    this.getUnreadMessageCount()
   },
-  {
-    name: 'Likes',
-    url: 'https://message.bilibili.com/#/love',
-    unreadCount: unreadLikes,
-  },
-  {
-    name: 'Messages',
-    url: 'https://message.bilibili.com/#/system',
-    unreadCount: unreadMessages,
-  },
-  {
-    name: 'Chats',
-    url: 'https://message.bilibili.com/#/whisper',
-    unreadCount: unreadChats,
-  },
-]
+  methods: {
+    getUnreadMessageCount() {
+      browser.runtime
+        .sendMessage({
+          contentScriptQuery: 'getUnreadMsg',
+        }).then((res) => {
+          const resData = res.data
+          this.list[0].unreadCount = resData.reply
+          this.list[1].unreadCount = resData.at
+          this.list[2].unreadCount = resData.like
+          this.list[3].unreadCount = resData.sys_msg
+        })
 
-getUnreadMessageCount()
+      browser.runtime
+        .sendMessage({
+          contentScriptQuery: 'getUnreadDm',
+        }).then((res) => {
+          const resData = res.data
+          this.list[4].unreadCount = parseInt(resData.unfollow_unread) + parseInt(resData.follow_unread)
+        })
+    },
+  },
+})
 
-async function getUnreadMessageCount() {
-  await browser.runtime
-    .sendMessage({
-      contentScriptQuery: 'getUnreadMsg',
-    }).then((res) => {
-      const resData = res.data
-      unreadReplys = resData.reply
-      unreadMentions = resData.at
-      unreadLikes = resData.like
-      unreadMessages = resData.sys_msg
-    })
-
-  await browser.runtime
-    .sendMessage({
-      contentScriptQuery: 'getUnreadDm',
-    }).then((res) => {
-      const resData = res.data
-      unreadChats = resData.unfollow_unread + resData.follow_unread
-    })
-}
 </script>
