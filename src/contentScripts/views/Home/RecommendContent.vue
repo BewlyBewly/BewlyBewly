@@ -155,8 +155,7 @@ export default defineComponent({
     },
     onEnter(el: Element, done: () => void) {
       const element = el as HTMLElement
-      const delay = (parseInt(`${element.dataset.index}`, 10) / 10).toFixed(1).split('.')[1] as string
-      element.style.transitionDelay = `${parseInt(delay, 10) * 0.1}s`
+      element.style.transitionDelay = '0.1s'
       done()
     },
   },
