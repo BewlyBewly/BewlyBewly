@@ -1,3 +1,44 @@
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { revokeAccessKey } from '../../utils/index'
+import { getCSRF, getUserID, numFormatter } from '~/utils'
+export default defineComponent({
+  props: {
+    userInfo: {
+      type: Object,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      mid: getUserID(),
+      userStat: {} as any,
+      numFormatter,
+    }
+  },
+  mounted() {
+    browser.runtime
+      .sendMessage({
+        contentScriptQuery: 'getUserStat',
+      })
+      .then((res) => {
+        if (res.code === 0) this.userStat = res.data
+      })
+  },
+  methods: {
+    async logout() {
+      revokeAccessKey()
+      await browser.runtime
+        .sendMessage({
+          contentScriptQuery: 'logout',
+          biliCSRF: getCSRF(),
+        })
+      location.reload()
+    },
+  },
+})
+</script>
+
 <template>
   <div id="user-info-panel">
     <div id="base-info">
@@ -76,47 +117,6 @@
     </div>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { revokeAccessKey } from '../../utils/index'
-import { getCSRF, getUserID, numFormatter } from '~/utils'
-export default defineComponent({
-  props: {
-    userInfo: {
-      type: Object,
-      required: true,
-    },
-  },
-  data() {
-    return {
-      mid: getUserID(),
-      userStat: {} as any,
-      numFormatter,
-    }
-  },
-  mounted() {
-    browser.runtime
-      .sendMessage({
-        contentScriptQuery: 'getUserStat',
-      })
-      .then((res) => {
-        if (res.code === 0) this.userStat = res.data
-      })
-  },
-  methods: {
-    async logout() {
-      revokeAccessKey()
-      await browser.runtime
-        .sendMessage({
-          contentScriptQuery: 'logout',
-          biliCSRF: getCSRF(),
-        })
-      location.reload()
-    },
-  },
-})
-</script>
 
 <style lang="scss" scoped>
 #user-info-panel {
