@@ -44,23 +44,15 @@
 </template>
 
 <script setup lang="ts">
-import { accessKey, apperance, isShowTopbar } from '~/logic/storage'
 import { useToggle, useDark } from '@vueuse/core'
+import { apperance, isShowTopbar } from '~/logic/storage'
 import 'virtual:windi.css'
 import '~/styles/index.ts'
 import Home from './Home/index.vue'
-import { getUserID, grantAccessKey } from '~/utils'
 
 const [showSettings, toggle] = useToggle(false)
-
-// auto dark mode
-// const style = document.createElement('style')
-
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
-
-// if (getUserID())
-//   grantAccessKey()
 
 </script>
 
