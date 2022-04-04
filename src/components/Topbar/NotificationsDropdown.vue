@@ -21,6 +21,7 @@
       flex="~"
       justify="between"
       items="center"
+      h="35px"
     >
       {{ item.name }}
       <template
