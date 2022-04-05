@@ -259,7 +259,7 @@
         />
       </svg>
 
-      <div>Creator center</div>
+      <div>Management</div>
     </a>
   </div>
 </template>
