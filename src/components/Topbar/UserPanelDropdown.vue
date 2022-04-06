@@ -54,11 +54,11 @@ export default defineComponent({
         class="mr-4"
         href="https://account.bilibili.com/account/coin"
         target="_blank"
-      >Money: {{ userInfo.money }}</a>
+      >{{ $t('topbar.user_dropdown.money') + userInfo.money }}</a>
       <a
         href="https://pay.bilibili.com/pay-v2-web/bcoin_index"
         target="_blank"
-      >B-coin: {{ userInfo.wallet?.bcoin_balance }}</a>
+      >{{ $t('topbar.user_dropdown.b_coins') + userInfo.wallet?.bcoin_balance }}</a>
     </div>
     <div id="channel-info">
       <a
@@ -67,7 +67,7 @@ export default defineComponent({
         :title="userStat.following"
       >
         <div class="num">{{ userStat.following ? numFormatter(userStat.following) : '0' }}</div>
-        <div>following</div>
+        <div>{{ $t('topbar.user_dropdown.following') }}</div>
       </a>
       <a
         :href="'https://space.bilibili.com/' + mid + '/fans/fans'"
@@ -75,7 +75,7 @@ export default defineComponent({
         :title="userStat.follower"
       >
         <div class="num">{{ userStat.follower ? numFormatter(userStat.follower) : '0' }}</div>
-        <div>follower</div>
+        <div>{{ $t('topbar.user_dropdown.followers') }}</div>
       </a>
       <a
         href="https://t.bilibili.com/"
@@ -83,36 +83,36 @@ export default defineComponent({
         :title="userStat.dynamic_count"
       >
         <div class="num">{{ userStat.dynamic_count ? numFormatter(userStat.dynamic_count) : '0' }}</div>
-        <div>posts</div>
+        <div>{{ $t('topbar.user_dropdown.posts') }}</div>
       </a>
     </div>
     <div id="other-link">
       <a href="https://account.bilibili.com/account/home" target="_blank">
-        Account settings
+        {{ $t('topbar.user_dropdown.accout_settings') }}
         <tabler:arrow-right />
       </a>
       <a href="https://member.bilibili.com/v2#/upload-manager/article" target="_blank">
-        Uploads manager
+        {{ $t('topbar.user_dropdown.uploads_manager') }}
         <tabler:arrow-right />
       </a>
       <a href="https://pay.bilibili.com/" target="_blank">
-        B-coin Wallet
+        {{ $t('topbar.user_dropdown.b_coins_wallet') }}
         <tabler:arrow-right />
       </a>
       <a href="https://show.bilibili.com/orderlist" target="_blank">
-        Orders
+        {{ $t('topbar.user_dropdown.orders') }}
         <tabler:arrow-right />
       </a>
       <a href="https://link.bilibili.com/p/center/index" target="_blank">
-        My stream info
+        {{ $t('topbar.user_dropdown.my_stream_info') }}
         <tabler:arrow-right />
       </a>
       <a href="https://www.bilibili.com/cheese/mine/list" target="_blank">
-        My course
+        {{ $t('topbar.user_dropdown.my_courses') }}
         <tabler:arrow-right />
       </a>
       <div id="logout" @click="logout()">
-        Log out
+        {{ $t('topbar.user_dropdown.log_out') }}
       </div>
     </div>
   </div>
@@ -144,10 +144,10 @@ export default defineComponent({
     }
 
     .num {
-      @apply font-bold text-xl;
+      @apply font-semibold text-xl;
 
       + div {
-        @apply text-$bew-text-2;
+        @apply text-$bew-text-2 mt-1 text-xs font-semibold;
       }
     }
   }

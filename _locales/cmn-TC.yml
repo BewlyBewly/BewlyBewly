@@ -1,0 +1,84 @@
+topbar:
+  sign_in: 登入
+  notifications: 通知
+  moments: 動向
+  faviours: 收藏
+  history: 記錄
+  creative_center: 創作中心
+  upload: 上載
+  logo_dropdown: 
+    anime: 番劇
+    movies: 電影
+    chinese_anime: 國創
+    tv_shows: 電視劇
+    variety_shows: 綜藝
+    documentary_films: 紀錄片
+    animations: 動畫
+    gaming: 遊戲
+    kichiku: 鬼畜
+    music: 音樂
+    dance: 舞蹈
+    cinephile: 影視
+    showbiz: 娛樂
+    knowledge: 知識
+    technology: 科技
+    news: 新聞
+    foods: 美食
+    life: 生活
+    cars: 汽車
+    fashion: 時尚
+    sports: 運動
+    animals: 動物圈
+    vlog: VLOG
+    funny: 搞笑
+    standalone_gaming: 單機遊戲
+    vtubers: Vtubers & Vups
+    charitable_events: 慈善
+    moocs: 開放式線上課程
+    articles: 專欄
+    live: 直播
+    activities: 活動
+    paid_courses: 課堂
+    community: 社羣中心
+    music_plus: 新歌熱榜
+  user_dropdown:
+    money: 硬幣：
+    b_coins: B幣：
+    following: 追蹤
+    followers: 訂閱者
+    posts: 貼文
+    accout_settings: 帳戶資訊
+    uploads_manager: 內容管理
+    b_coins_wallet: B幣錢包
+    orders: 訂單資訊
+    my_stream_info: 實況首頁
+    my_courses: 我的課程
+    log_out: 退出登入
+  noti_dropdown:
+    replys: 回覆留言
+    mentions: 提及我的
+    likes: 按讚訊息
+    messages: 系统通知
+    chats: 聊天室
+  upload_dropdown:
+    article: 上載文章
+    music: 上載音訊
+    sticker: 上載貼圖
+    video: 上載影片
+    manager: 內容管理
+
+home:
+  loading_more: 載入中...
+
+settings:
+  title: 設定
+  authorize_app: 授權 BewlyBewly 使用 Access Key
+  authorize_app_desc: 授權使用後能在首頁推送我可能有興趣觀看的影片
+  topbar_visiable: 頂欄可視性
+  topbar_visiable_desc: 用於相容 Bilibili Evolved 的客製化頂欄
+  btn:
+    authorize: 授權
+    revoke: 解除授權
+  chk_box:
+    show: 顯示
+    hidden: 隱藏

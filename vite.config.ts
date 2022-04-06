@@ -5,6 +5,7 @@ import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
+import VueI18n from '@intlify/vite-plugin-vue-i18n'
 import WindiCSS from 'vite-plugin-windicss'
 import windiConfig from './windi.config'
 import { r, port, isDev } from './scripts/utils'
@@ -49,6 +50,13 @@ export const sharedConfig: UserConfig = {
 
     // https://github.com/antfu/unplugin-icons
     Icons(),
+
+    // https://github.com/intlify/bundle-tools/tree/main/packages/vite-plugin-vue-i18n
+    VueI18n({
+      runtimeOnly: true,
+      compositionOnly: true,
+      include: [r('./_locales/**')],
+    }),
 
     // rewrite assets to use relative path
     {

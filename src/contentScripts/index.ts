@@ -1,11 +1,13 @@
 /* eslint-disable no-console */
 import { onMessage } from 'webext-bridge'
 import { createApp } from 'vue'
-import App from './views/App.vue'
-import { getCookie, setCookie, SVG_ICONS } from '~/utils'
+import { createI18n } from 'vue-i18n'
 
 // Firefox `browser.tabs.executeScript()` requires scripts return a primitive value
-;(() => {
+
+import App from './views/App.vue'
+import { getCookie, i18n, setCookie, SVG_ICONS } from '~/utils'
+(() => {
   console.info('[vitesse-webext] Hello world from content script')
 
   // communication example: send previous tab title from background page
@@ -40,7 +42,8 @@ import { getCookie, setCookie, SVG_ICONS } from '~/utils'
     container.appendChild(styleEl)
     container.appendChild(root)
     document.body.appendChild(container)
-    createApp(App).mount(root)
+
+    createApp(App).use(i18n).mount(root)
 
     // inject svg icons
     const svgDiv = document.createElement('div')

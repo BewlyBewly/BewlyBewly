@@ -26,6 +26,7 @@
     "@antfu/eslint-config": "^0.9.0",
     "@ffflorian/jszip-cli": "^3.1.5",
     "@iconify/json": "^1.1.408",
+    "@intlify/vite-plugin-vue-i18n": "^3.4.0",
     "@types/chrome": "^0.0.179",
     "@types/fs-extra": "^9.0.13",
     "@types/node": "^16.10.2",
@@ -58,6 +59,7 @@
   },
   "dependencies": {
     "esbuild-darwin-64": "0.13.3",
+    "vue-i18n": "9",
     "vue-router": "4"
   }
 }

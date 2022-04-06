@@ -1,10 +1,12 @@
 import { grantAccessKey, revokeAccessKey } from './auth-provider'
 import { SVG_ICONS } from './svgIcons'
+import { i18n } from './i18n'
 
 export {
   grantAccessKey,
   revokeAccessKey,
   SVG_ICONS,
+  i18n,
 }
 export * from './dataFormatter'
 

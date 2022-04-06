@@ -152,7 +152,7 @@ export default defineComponent({
     <div class="right-side">
       <div v-if="!isLogin" class="right-side-item">
         <a href="https://passport.bilibili.com/login" class="login">
-          <ic-outline-account-circle class="text-base mr-2" />LOGIN IN
+          <ic-outline-account-circle class="text-base mr-2" />{{ $t('topbar.sign_in') }}
         </a>
       </div>
       <template v-if="isLogin">
@@ -196,7 +196,11 @@ export default defineComponent({
           >
             {{ unReadmessageCount > 999 ? '999+' : unReadmessageCount }}
           </div>
-          <a href="https://message.bilibili.com" target="_blank" title="Notifications">
+          <a
+            href="https://message.bilibili.com"
+            target="_blank"
+            :title="$t('topbar.notifications')"
+          >
             <tabler:bell />
           </a>
 
@@ -215,7 +219,11 @@ export default defineComponent({
           >
             {{ newMomentsCount > 999 ? '999+' : newMomentsCount }}
           </div>
-          <a href="https://t.bilibili.com" target="_blank" title="Moments">
+          <a
+            href="https://t.bilibili.com"
+            target="_blank"
+            :title="$t('topbar.moments')"
+          >
             <tabler:windmill />
           </a>
         </div>
@@ -223,13 +231,17 @@ export default defineComponent({
           <a
             :href="'https://space.bilibili.com/' + mid + '/favlist'"
             target="_blank"
-            title="Faviours"
+            :title="$t('topbar.favorites')"
           >
             <tabler:star />
           </a>
         </div>
         <div class="right-side-item">
-          <a href="https://www.bilibili.com/account/history" target="_blank" title="History">
+          <a
+            href="https://www.bilibili.com/account/history"
+            target="_blank"
+            :title="$t('topbar.history')"
+          >
             <tabler:clock />
           </a>
         </div>
@@ -237,7 +249,7 @@ export default defineComponent({
           <a
             href="https://member.bilibili.com/platform/home"
             target="_blank"
-            title="Creative Center"
+            :title="$t('topbar.creative_center')"
           >
             <tabler:bulb />
           </a>
@@ -259,7 +271,7 @@ export default defineComponent({
             <span
               m="l-2"
               display="xl:block <xl:hidden"
-            >Upload</span>
+            >{{ $t('topbar.upload') }}</span>
           </a>
 
           <transition name="slide">

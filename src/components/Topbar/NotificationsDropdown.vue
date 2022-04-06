@@ -48,27 +48,27 @@ export default defineComponent({
     return {
       list: [
         {
-          name: 'Replys',
+          name: this.$t('topbar.noti_dropdown.replys'),
           url: 'https://message.bilibili.com/#/reply',
           unreadCount: 0,
         },
         {
-          name: 'Mentions',
+          name: this.$t('topbar.noti_dropdown.mentions'),
           url: 'https://message.bilibili.com/#/at',
           unreadCount: 0,
         },
         {
-          name: 'Likes',
+          name: this.$t('topbar.noti_dropdown.likes'),
           url: 'https://message.bilibili.com/#/love',
           unreadCount: 0,
         },
         {
-          name: 'Messages',
+          name: this.$t('topbar.noti_dropdown.messages'),
           url: 'https://message.bilibili.com/#/system',
           unreadCount: 0,
         },
         {
-          name: 'Chats',
+          name: this.$t('topbar.noti_dropdown.chats'),
           url: 'https://message.bilibili.com/#/whisper',
           unreadCount: 0,
         },

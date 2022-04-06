@@ -1,98 +1,3 @@
-<template>
-  <div
-    m="x-22 b-0 t-0"
-    grid="~ xl:cols-4 lg:cols-3 md:cols-2 gap-4"
-  >
-    <transition-group
-      name="list"
-      @enter="onEnter"
-    >
-      <div
-        v-for="(video, index) in videoList"
-        :key="video.idx"
-        :data-index="index"
-        class="video-card"
-      >
-        <a :href="'/video/av' + video.uri.split('/')[3]" target="_blank">
-          <div class="thumbnail">
-            <div class="duration">{{ calcCurrentTime(video.duration) }}</div>
-            <div
-              class="overflow-hidden w-full relative rounded-$bew-radius z-1"
-              style="aspect-ratio: 16/9"
-            >
-              <img class="cover" :src="video.cover + '@672w_378h_1c'" loading="lazy" />
-            </div>
-            <img class="cover-shadow" :src="video.cover + '@672w_378h_1c'" loading="lazy" />
-          </div>
-          <div class="detail">
-            <div class="flex">
-              <a class="avatar" @click="gotoChannel(video.mid)">
-                <img
-                  :src="(video.face + '').replace('http:', '') + '@60w_60h_1c'"
-                  width="48"
-                  height="48"
-                  loading="lazy"
-                />
-              </a>
-            </div>
-            <div class="meta">
-              <h3 class="video-title" :title="video.title">{{ video.title }}</h3>
-              <div class="channel-name" @click="gotoChannel(video.mid)">{{ video.name }}</div>
-              <div class="video-info">
-                {{ numFormatter(video.play) }} views
-                <span class="text-xs font-light">•</span>
-                {{ calcTimeSince(new Date(video.ctime * 1000)) }} ago
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-    </transition-group>
-  </div>
-
-  <div
-    v-if="isLoading"
-    w="full"
-    h="46px"
-    p="y-8"
-    flex="~"
-    justify="center"
-    items="center"
-  >
-    <img
-      src="https://s2.loli.net/2022/03/20/4YZhnF1cmya6tHO.gif"
-      alt="loading"
-      w="46px"
-      h="46px"
-      m="r-2"
-    />
-    Loading more...
-  </div>
-
-  <div
-    v-if="!isLoading"
-    style="height: 100px"
-    w="full"
-    p="y-8"
-    flex="~"
-    items="center"
-    justify="center"
-  >
-    <button
-      style="box-shadow: var(--bew-shadow-1);"
-      bg="$bew-content-1"
-      p="x-8 y-4"
-      text="$bew-text-1"
-      rounded="$bew-radius"
-      flex="~"
-      items="center"
-      @click="onRefresh"
-    >
-      <tabler:refresh class="mr-2" />Click to refresh
-    </button>
-  </div>
-</template>
-
 <script lang="ts">
 import { accessKey } from '~/logic/storage'
 import { numFormatter, calcTimeSince, calcCurrentTime } from '~/utils'
@@ -162,6 +67,103 @@ export default defineComponent({
 
 })
 </script>
+
+<template>
+  <div
+    m="x-22 b-0 t-0"
+    grid="~ xl:cols-4 lg:cols-3 md:cols-2 gap-4"
+  >
+    <transition-group
+      name="list"
+      @enter="onEnter"
+    >
+      <div
+        v-for="(video, index) in videoList"
+        :key="video.idx"
+        :data-index="index"
+        class="video-card"
+      >
+        <a :href="'/video/av' + video.uri.split('/')[3]" target="_blank">
+          <div class="thumbnail">
+            <div class="duration">{{ calcCurrentTime(video.duration) }}</div>
+            <div
+              class="overflow-hidden w-full relative rounded-$bew-radius z-1"
+              style="aspect-ratio: 16/9"
+            >
+              <img class="cover" :src="video.cover + '@672w_378h_1c'" loading="lazy" />
+            </div>
+            <img class="cover-shadow" :src="video.cover + '@672w_378h_1c'" loading="lazy" />
+          </div>
+          <div class="detail">
+            <div class="flex">
+              <a class="avatar" @click="gotoChannel(video.mid)">
+                <img
+                  :src="(video.face + '').replace('http:', '') + '@60w_60h_1c'"
+                  width="48"
+                  height="48"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="meta">
+              <h3 class="video-title" :title="video.title">{{ video.title }}</h3>
+              <div class="channel-name" @click="gotoChannel(video.mid)">{{ video.name }}</div>
+              <div class="video-info">
+                {{ numFormatter(video.play) }} views
+                <span class="text-xs font-light">•</span>
+                {{ calcTimeSince(new Date(video.ctime * 1000)) }} ago
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </transition-group>
+  </div>
+
+  <div
+    v-if="isLoading"
+    w="full"
+    h="46px"
+    p="y-8"
+    flex="~"
+    justify="center"
+    items="center"
+  >
+    <img
+      src="https://s2.loli.net/2022/03/20/4YZhnF1cmya6tHO.gif"
+      alt="loading"
+      w="46px"
+      h="46px"
+      m="r-2"
+    />
+    {{ $t('home.loading_more') }}
+  </div>
+
+  <div
+    v-if="!isLoading"
+    style="height: 100px"
+    w="full"
+    p="y-8"
+    flex="~"
+    items="center"
+    justify="center"
+  >
+    <button
+      style="box-shadow: var(--bew-shadow-1);"
+      bg="!$bew-theme-color"
+      w="60px"
+      h="60px"
+      text="white 2xl"
+      rounded="full"
+      flex="~"
+      justify="center"
+      items="center"
+      @click="onRefresh"
+    >
+      <tabler:refresh />
+    </button>
+  </div>
+</template>
 
 <style lang="scss" scoped>
 .list-move,

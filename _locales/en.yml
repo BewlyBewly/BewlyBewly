@@ -1,0 +1,84 @@
+topbar:
+  sign_in: Sign in
+  notifications: Notifications
+  moments: Moments
+  faviours: Faviours
+  history: History
+  creative_center: Creative Center
+  upload: Upload
+  logo_dropdown: 
+    anime: Anime
+    movies: Movies
+    chinese_anime: Chinese anime
+    tv_shows: TV shows
+    variety_shows: Variety shows
+    documentary_films: Documentary films
+    animations: Animations
+    gaming: Gaming
+    kichiku: Kichiku
+    music: Music
+    dance: Dance
+    cinephile: Cinephile
+    showbiz: Showbiz
+    knowledge: Knowledge
+    technology: Technology
+    news: News
+    foods: Foods
+    life: Life
+    cars: Cars
+    fashion: Fashion
+    sports: Sports
+    animals: Animals
+    vlog: VLOG
+    funny: Funny
+    standalone_gaming: Standalone gaming
+    vtubers: Vtubers & Vups
+    charitable_events: Charitable events
+    moocs: MOOCs
+    articles: Articles
+    live: Live
+    activities: Activities
+    paid_courses: Paid courses
+    community: Community
+    music_plus: Music plus
+  user_dropdown:
+    money: 'Money: '
+    b_coins: 'B-coins: '
+    following: FOLLOWING
+    followers: FOLLOWERS
+    posts: POSTS
+    accout_settings: Account settings
+    uploads_manager: Uploads manager
+    b_coins_wallet: B-coins Wallet
+    orders: Orders
+    my_stream_info: My stream info
+    my_courses: My courses
+    log_out: Log out
+  noti_dropdown:
+    replys: Replys
+    mentions: Mentions
+    likes: Likes
+    messages: Messages
+    chats: Chats
+  upload_dropdown:
+    article: Article
+    music: Music
+    sticker: Sticker
+    video: Video
+    manager: Manager
+
+home:
+  loading_more: Loading more...
+
+settings:
+  title: Settings
+  authorize_app: Authorize BewlyBewly to use Access Key
+  authorize_app_desc: After being Authorized, you can get some you might like videos based on what you watch.
+  topbar_visiable: Topbar visiable
+  topbar_visiable_desc: Compatible with Bilibili Evolved customize topbar
+  btn:
+    authorize: Authorize
+    revoke: Revoke
+  chk_box:
+    show: Show
+    hidden: Hidden

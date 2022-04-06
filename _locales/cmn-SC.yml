@@ -1,0 +1,84 @@
+topbar:
+  sign_in: 登录
+  notifications: 通知
+  moments: 动态
+  faviours: 收藏
+  history: 历史
+  creative_center: 创作中心
+  upload: 投稿
+  logo_dropdown: 
+    anime: 番剧
+    movies: 电影
+    chinese_anime: 国创
+    tv_shows: 电视剧
+    variety_shows: 综艺
+    documentary_films: 纪录片
+    animations: 动画
+    gaming: 游戏
+    kichiku: 鬼畜
+    music: 音乐
+    dance: 舞蹈
+    cinephile: 影视
+    showbiz: 娱乐
+    knowledge: 知识
+    technology: 科技
+    news: 资讯
+    foods: 美食
+    life: 生活
+    cars: 汽车
+    fashion: 时尚
+    sports: 运动
+    animals: 动物圈
+    vlog: VLOG
+    funny: 搞笑
+    standalone_gaming: 单机游戏
+    vtubers: 虚拟主播
+    charitable_events: 公益
+    moocs: 公开课
+    articles: 专栏
+    live: 直播
+    activities: 活动
+    paid_courses: 课堂
+    community: 社区中心
+    music_plus: 新歌热榜
+  user_dropdown:
+    money: 硬币：
+    b_coins: B币：
+    following: 关注
+    followers: 观众
+    posts: 动态
+    accout_settings: 个人中心
+    uploads_manager: 投稿管理
+    b_coins_wallet: B币钱包
+    orders: 订单中心
+    my_stream_info: 直播中心
+    my_courses: 我的课程
+    log_out: 退出登录
+  noti_dropdown:
+    replys: 回复我的
+    mentions: 提到我的
+    likes: 收到的赞
+    messages: 系统消息
+    chats: 我的消息
+  upload_dropdown:
+    article: 专栏
+    music: 音频
+    sticker: 贴纸
+    video: 视频
+    manager: 投稿
+
+home:
+  loading_more: 加载中...
+
+settings:
+  title: 设置
+  authorize_app: 授权 BewlyBewly 使用 Access Key
+  authorize_app_desc: 授权使用后能在首页推送我可能有兴趣观看的视频
+  topbar_visiable: 顶栏可见性
+  topbar_visiable_desc: 用于兼容 Bilibili Evolved 自定义顶栏
+  btn:
+    authorize: 授权
+    revoke: 取消授权
+  chk_box:
+    show: 显示
+    hidden: 隐藏

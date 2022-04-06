@@ -5,7 +5,7 @@
     rounded="$bew-radius"
     style="box-shadow: var(--bew-shadow-3);"
     p="4"
-    w="180px"
+    w="150px"
   >
     <a
       class="upload-item"
@@ -60,7 +60,7 @@
         />
       </svg>
 
-      <div>Article</div>
+      <div>{{ $t('topbar.upload_dropdown.article') }}</div>
     </a>
     <a
       class="upload-item"
@@ -123,7 +123,7 @@
         />
       </svg>
 
-      <div>Music</div>
+      <div>{{ $t('topbar.upload_dropdown.music') }}</div>
     </a>
     <a
       class="upload-item"
@@ -182,7 +182,7 @@
         />
       </svg>
 
-      <div>Sticker</div>
+      <div>{{ $t('topbar.upload_dropdown.sticker') }}</div>
     </a>
     <a
       class="upload-item"
@@ -228,7 +228,7 @@
         />
       </svg>
 
-      <div>Video</div>
+      <div>{{ $t('topbar.upload_dropdown.video') }}</div>
     </a>
     <a
       class="upload-item"
@@ -259,7 +259,7 @@
         />
       </svg>
 
-      <div>Management</div>
+      <div>{{ $t('topbar.upload_dropdown.manager') }}</div>
     </a>
   </div>
 </template>
