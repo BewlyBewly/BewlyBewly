@@ -2,7 +2,7 @@ topbar:
   sign_in: 登入
   notifications: 通知
   moments: 動向
-  faviours: 賣飛佛
+  favorites: 賣飛佛
   history: 記錄
   creative_center: 創作中心
   upload: 上載
@@ -72,6 +72,12 @@ home:
 
 settings:
   title: 校做
+  select_language: 介面語文
+  select_language_opt:
+    english: 英文
+    mandarin_sc: 簡體中文
+    mandarin_tc: 正體中文
+    jyut: 粵文
   authorize_app: 授權 BewlyBewly 使用 Access Key
   authorize_app_desc: 授權咗之後首頁就會收到啲可能啱我心水嘅片
   topbar_visiable: 頂欄可睇性

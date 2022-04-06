@@ -2,7 +2,7 @@ topbar:
   sign_in: 登录
   notifications: 通知
   moments: 动态
-  faviours: 收藏
+  favorites: 收藏
   history: 历史
   creative_center: 创作中心
   upload: 投稿
@@ -72,6 +72,12 @@ home:
 
 settings:
   title: 设置
+  select_language: 界面语文
+  select_language_opt:
+    english: 英文
+    mandarin_sc: 简体中文
+    mandarin_tc: 正体中文
+    jyut: 粵文
   authorize_app: 授权 BewlyBewly 使用 Access Key
   authorize_app_desc: 授权使用后能在首页推送我可能有兴趣观看的视频
   topbar_visiable: 顶栏可见性

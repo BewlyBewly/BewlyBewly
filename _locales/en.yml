@@ -2,7 +2,7 @@ topbar:
   sign_in: Sign in
   notifications: Notifications
   moments: Moments
-  faviours: Faviours
+  favorites: Favorites
   history: History
   creative_center: Creative Center
   upload: Upload
@@ -72,6 +72,12 @@ home:
 
 settings:
   title: Settings
+  select_language: Language
+  select_language_opt:
+    english: English
+    mandarin_sc: Mandarin (Simplified Chinese)
+    mandarin_tc: Mandarin (Traditional Chinese)
+    jyut: Cantonese
   authorize_app: Authorize BewlyBewly to use Access Key
   authorize_app_desc: After being Authorized, you can get some you might like videos based on what you watch.
   topbar_visiable: Topbar visiable
