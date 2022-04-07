@@ -46,13 +46,20 @@
 <script setup lang="ts">
 import { useToggle, useDark } from '@vueuse/core'
 import { apperance, isShowTopbar } from '~/logic/storage'
+import { language } from '~/logic'
 import 'virtual:windi.css'
 import '~/styles/index.ts'
 import Home from './Home/index.vue'
+import { useI18n } from 'vue-i18n'
 
 const [showSettings, toggle] = useToggle(false)
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
+const { locale } = useI18n()
+
+window.onload = () => {
+  locale.value = language.value
+}
 
 </script>
 

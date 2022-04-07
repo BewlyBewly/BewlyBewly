@@ -1,14 +1,33 @@
 <script lang="ts">
 import { grantAccessKey, revokeAccessKey } from '~/utils/index'
-import { isShowTopbar, apperance, accessKey } from '~/logic/storage'
+import { language, isShowTopbar, accessKey } from '~/logic'
 
 export default defineComponent({
   emits: ['close'],
+
   data() {
     return {
       isShowTopbar,
-      apperance,
       accessKey,
+      language,
+      langs: [
+        {
+          value: 'en',
+          label: 'settings.select_language_opt.english',
+        },
+        {
+          value: 'cmn_SC',
+          label: 'settings.select_language_opt.mandarin_sc',
+        },
+        {
+          value: 'cmn_TC',
+          label: 'settings.select_language_opt.mandarin_tc',
+        },
+        {
+          value: 'jyut',
+          label: 'settings.select_language_opt.jyut',
+        },
+      ],
     }
   },
   methods: {
@@ -21,6 +40,9 @@ export default defineComponent({
     },
     onRevoke() {
       revokeAccessKey()
+    },
+    onChangeLocale() {
+      this.$i18n.locale = language.value
     },
   },
 })
@@ -48,6 +70,25 @@ export default defineComponent({
     <div text="3xl" m="b-4">
       {{ $t('settings.title') }}
     </div>
+
+    <div class="settings-item">
+      <div>
+        {{ $t('settings.select_language') }}
+      </div>
+      <select
+        v-model="language"
+        @change="onChangeLocale()"
+      >
+        <option
+          v-for="lang in langs"
+          :key="lang.value"
+          :value="lang.value"
+        >
+          {{ $t(lang.label) }}
+        </option>
+      </select>
+    </div>
+
     <div class="settings-item">
       <div>
         {{ $t('settings.authorize_app') }}
@@ -66,6 +107,7 @@ export default defineComponent({
         <span>{{ $t('settings.btn.revoke') }}</span>
       </button>
     </div>
+
     <div class="settings-item">
       <div>
         {{ $t('settings.topbar_visiable') }}
@@ -85,17 +127,25 @@ export default defineComponent({
 
 <style lang="scss">
 #settings-window {
-  @apply fixed top-1/5 left-1/2 w-700px h-1/2
+  @apply fixed top-1/5 left-1/2 w-700px
     transform -translate-x-1/2
     rounded-$bew-radius p-8
     bg-$bew-content-solid-1;
   box-shadow: var(--bew-shadow-3);
 
   .settings-item {
-    @apply flex justify-between items-center py-2;
+    @apply flex justify-between items-center py-2 text-base;
     .desc {
-      @apply text-xs text-$bew-text-3;
+      @apply text-sm text-$bew-text-3;
+    }
+
+    > *:first-child {
+      @apply w-4/5 mr-4;
     }
   }
+}
+button,
+select {
+  @apply w-120px
 }
 </style>
