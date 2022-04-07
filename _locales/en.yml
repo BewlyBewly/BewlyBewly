@@ -80,7 +80,7 @@ settings:
     jyut: Cantonese
   authorize_app: Authorize BewlyBewly to use access key
   authorize_app_desc: >
-    You can get some you might like videos based on what you watch after authentication.
+    You can get some videos you might like based on what you watch after authentication.
     This access key will be valid for about one month,
     after which if you notice you are not interested in these recommended videos,
     please try to re-authorize.
