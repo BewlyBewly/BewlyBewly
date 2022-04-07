@@ -125,7 +125,7 @@ export default defineComponent({
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 #settings-window {
   @apply fixed top-1/5 left-1/2 w-700px
     transform -translate-x-1/2
