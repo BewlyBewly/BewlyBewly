@@ -3,7 +3,7 @@ import messages from '@intlify/vite-plugin-vue-i18n/messages'
 
 export const i18n = createI18n({
   legacy: false,
-  locale: 'jyut',
+  locale: 'en',
   globalInjection: true,
   messages,
 })
