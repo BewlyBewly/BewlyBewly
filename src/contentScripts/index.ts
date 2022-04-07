@@ -23,7 +23,8 @@ import { getCookie, i18n, setCookie, SVG_ICONS } from '~/utils'
     || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(currentUrl)
     || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(currentUrl)
   ) {
-    // if current homepage is old version, redirect to new version
+    // if the current homepage is an old version, redirect to the new version
+    // because they had some style errors in the old version
     if (`${getCookie('i-wanna-go-back')}` === '2') {
       setCookie('i-wanna-go-back', '-1', 1)
       location.reload()
