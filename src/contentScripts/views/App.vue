@@ -58,7 +58,19 @@ const toggleDark = useToggle(isDark)
 const { locale } = useI18n()
 
 window.onload = () => {
+  // if there is first-time load extension, set the default language by browser display language
+  if (language.value === '') {
+    if (browser.i18n.getUILanguage() === 'zh-CN')
+      language.value = 'cmn-SC'
+    else if (browser.i18n.getUILanguage() === 'zh-TW')
+      language.value = 'cmn-TC'
+    else
+      language.value = 'en'
+  }
+
   locale.value = language.value
+
+  // locale.value = language.value
 }
 
 </script>
