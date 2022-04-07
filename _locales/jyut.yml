@@ -5,7 +5,7 @@ topbar:
   favorites: 賣飛佛
   history: 記錄
   creative_center: 創作中心
-  upload: 上載
+  upload: Po 嘢
   logo_dropdown: 
     anime: 番劇
     movies: 電影
@@ -38,26 +38,26 @@ topbar:
     articles: 專欄
     live: 直播
     activities: 活動
-    paid_courses: 課堂
+    paid_courses: 付費課堂
     community: 社羣中心
     music_plus: 新歌熱榜
   user_dropdown:
     money: 銀仔：
-    b_coins: B幣：
+    b_coins: B銀：
     following: 追蹤
     followers: 訂閱者
-    posts: 貼文動向
+    posts: 動向
     accout_settings: 帳戶資料
     uploads_manager: 內容管理
-    b_coins_wallet: B幣荷包
+    b_coins_wallet: B銀荷包
     orders: 訂單資訊
-    my_stream_info: 實況首頁
+    my_stream_info: 實況資訊
     my_courses: 我嘅課程
     log_out: 登出
   noti_dropdown:
     replys: 覆我
-    mentions: 提起我
-    likes: 撳 like 訊息
+    mentions: 提我
+    likes: 撳 like
     messages: 系统通知
     chats: 傾偈室
   upload_dropdown:
@@ -78,8 +78,10 @@ settings:
     mandarin_sc: 簡體中文
     mandarin_tc: 正體中文
     jyut: 粵文
-  authorize_app: 授權 BewlyBewly 使用 Access Key
-  authorize_app_desc: 授權咗之後首頁就會收到啲可能啱我心水嘅片
+  authorize_app: 授權 BewlyBewly 使用 access key
+  authorize_app_desc: >
+    授咗權嘅話首頁會畀啲可能啱我心水嘅片我
+    (授權 key 一個月左右有效，之後若然你撞正啲咩牛鬼蛇神唔開胃嘅嘢試下重新授權)
   topbar_visiable: 頂欄可睇性
   topbar_visiable_desc: 用於兼容 Bilibili Evolved 客製化頂欄
   btn:

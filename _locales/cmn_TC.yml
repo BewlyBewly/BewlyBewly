@@ -34,11 +34,11 @@ topbar:
     standalone_gaming: 單機遊戲
     vtubers: Vtubers & Vups
     charitable_events: 慈善
-    moocs: 開放式線上課程
+    moocs: 線上課堂
     articles: 專欄
     live: 直播
     activities: 活動
-    paid_courses: 課堂
+    paid_courses: 付費課堂
     community: 社羣中心
     music_plus: 新歌熱榜
   user_dropdown:
@@ -46,12 +46,12 @@ topbar:
     b_coins: B幣：
     following: 追蹤
     followers: 訂閱者
-    posts: 貼文
+    posts: 動向
     accout_settings: 帳戶資訊
     uploads_manager: 內容管理
     b_coins_wallet: B幣錢包
     orders: 訂單資訊
-    my_stream_info: 實況首頁
+    my_stream_info: 實況資訊
     my_courses: 我的課程
     log_out: 退出登入
   noti_dropdown:
@@ -78,8 +78,10 @@ settings:
     mandarin_sc: 簡體中文
     mandarin_tc: 正體中文
     jyut: 粵文
-  authorize_app: 授權 BewlyBewly 使用 Access Key
-  authorize_app_desc: 授權使用後能在首頁推送我可能有興趣觀看的影片
+  authorize_app: 授權 BewlyBewly 使用 access key
+  authorize_app_desc: >
+    授權使用後能在首頁推送我可能有興趣觀看的影片
+    (授權 key 有效期約為一個月，之後如果你發現首頁推薦的影片不是你所感興趣的，請嘗試重新授權)
   topbar_visiable: 頂欄可視性
   topbar_visiable_desc: 用於相容 Bilibili Evolved 的客製化頂欄
   btn:

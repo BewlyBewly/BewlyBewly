@@ -78,8 +78,12 @@ settings:
     mandarin_sc: Mandarin (Simplified Chinese)
     mandarin_tc: Mandarin (Traditional Chinese)
     jyut: Cantonese
-  authorize_app: Authorize BewlyBewly to use Access Key
-  authorize_app_desc: After being Authorized, you can get some you might like videos based on what you watch.
+  authorize_app: Authorize BewlyBewly to use access key
+  authorize_app_desc: >
+    You can get some you might like videos based on what you watch after authentication.
+    This access key will be valid for about one month,
+    after which if you notice you are not interested in these recommended videos,
+    please try to re-authorize.
   topbar_visiable: Topbar visiable
   topbar_visiable_desc: Compatible with Bilibili Evolved customize topbar
   btn:
