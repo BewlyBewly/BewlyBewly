@@ -5,6 +5,10 @@ export interface HistoryItem {
   value: string
   timestamp: number
 }
+export interface SuggestionItem {
+  value: string
+  timestamp: number
+}
 
 const historySort = (historyItems: HistoryItem[]) => {
   historyItems.sort((a, b) => b.timestamp - a.timestamp)

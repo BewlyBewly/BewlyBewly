@@ -1,3 +1,112 @@
+<script lang="ts">
+import { addSearchHistory, getSearchHistory, HistoryItem, removeSearchHistory, SuggestionItem } from './search-history-provider'
+
+export default defineComponent({
+  data() {
+    return {
+      isFocus: false,
+      keyword: '',
+      suggestions: [] as SuggestionItem[],
+      selectedIndex: -1,
+      searchHistory: [] as HistoryItem[],
+    }
+  },
+  mounted() {
+    this.searchHistory = getSearchHistory()
+  },
+  methods: {
+    onSearchChange() {
+      browser.runtime
+        .sendMessage({
+          contentScriptQuery: 'getSearchSuggestion',
+          term: this.keyword,
+        })
+        .then((res) => {
+          this.suggestions = res
+        })
+    },
+    goToSearchPage(keyword: string) {
+      if (keyword) {
+        window.open(`//search.bilibili.com/all?keyword=${keyword}`, '_blank')
+        const searchItem = {
+          value: keyword,
+          timestamp: Number(new Date()),
+        }
+        addSearchHistory(searchItem)
+        this.searchHistory = getSearchHistory()
+      }
+    },
+    onDelHistoryItem(value: string) {
+      removeSearchHistory(value)
+      this.searchHistory = getSearchHistory()
+    },
+    onUp() {
+      if (this.selectedIndex <= 0) {
+        this.selectedIndex = 0
+        return
+      }
+
+      this.selectedIndex--
+
+      if (this.isFocus && Object.keys(this.suggestions).length !== 0)
+        this.keyword = this.suggestions[this.selectedIndex].value
+      else if (this.isFocus && this.searchHistory.length !== 0)
+        this.keyword = this.searchHistory[this.selectedIndex].value
+
+      document.querySelectorAll('.suggestion-item').forEach((item, index) => {
+        if (index === this.selectedIndex)
+          item.classList.add('active')
+        else
+          item.classList.remove('active')
+      })
+
+      document.querySelectorAll('.history-item').forEach((item, index) => {
+        if (index === this.selectedIndex)
+          item.classList.add('active')
+        else
+          item.classList.remove('active')
+      })
+    },
+    onDown() {
+      let isShowSuggestion = false
+      if (this.isFocus && Object.keys(this.suggestions).length !== 0)
+        isShowSuggestion = true
+      else if (this.isFocus && !this.keyword && this.searchHistory.length !== 0)
+        isShowSuggestion = false
+
+      if (isShowSuggestion && this.selectedIndex >= Object.keys(this.suggestions).length - 1) {
+        this.selectedIndex = Object.keys(this.suggestions).length - 1
+        return
+      }
+      if (!isShowSuggestion && this.selectedIndex >= this.searchHistory.length - 1) {
+        this.selectedIndex = this.searchHistory.length - 1
+        return
+      }
+
+      this.selectedIndex++
+      this.keyword = isShowSuggestion
+        ? this.suggestions[this.selectedIndex].value
+        : this.searchHistory[this.selectedIndex].value
+
+      document.querySelectorAll('.suggestion-item').forEach((item, index) => {
+        if (index === this.selectedIndex)
+          item.classList.add('active')
+        else
+          item.classList.remove('active')
+      })
+
+      document.querySelectorAll('.history-item').forEach((item, index) => {
+        if (index === this.selectedIndex)
+          item.classList.add('active')
+        else
+          item.classList.remove('active')
+      })
+    },
+  },
+
+})
+</script>
+
 <template>
   <div
     id="search-wrap"
@@ -29,7 +138,7 @@
     </div>
 
     <transition>
-      <div v-if="isFocus && !keyword && searchHistory.length !== 0" id="search-history">
+      <div v-if="isFocus && searchHistory.length !== 0 && Object.keys(suggestions).length === 0" id="search-history">
         <div
           v-for="(item) in searchHistory"
           :key="item.value"
@@ -50,107 +159,14 @@
           v-for="(item, index) in suggestions"
           :key="index"
           class="suggestion-item"
-          @click="goToSearchPage(keyword)"
+          @click="goToSearchPage(item.value)"
         >
-          {{ item.name }}
+          {{ item.value }}
         </div>
       </div>
     </transition>
   </div>
 </template>
-
-<script lang="ts">
-import { addSearchHistory, getSearchHistory, HistoryItem, removeSearchHistory } from './search-history-provider'
-
-export default defineComponent({
-  data() {
-    return {
-      isFocus: false,
-      keyword: '',
-      suggestions: {},
-      selectedIndex: -1,
-      searchHistory: [] as HistoryItem[],
-    }
-  },
-  mounted() {
-    this.searchHistory = getSearchHistory()
-  },
-  methods: {
-    onSearchChange() {
-      browser.runtime
-        .sendMessage({
-          contentScriptQuery: 'getSearchSuggestion',
-          term: this.keyword,
-        })
-        .then((res) => {
-          this.suggestions = res
-        })
-    },
-    goToSearchPage(keyword: string) {
-      if (keyword) {
-        window.open(`https://search.bilibili.com/all?keyword=${keyword}`, '_blank')
-        const searchItem = {
-          value: keyword,
-          timestamp: Number(new Date()),
-        }
-        addSearchHistory(searchItem)
-        this.searchHistory = getSearchHistory()
-      }
-    },
-    onDelHistoryItem(value: string) {
-      removeSearchHistory(value)
-      this.searchHistory = getSearchHistory()
-    },
-    onUp() {
-      if (this.selectedIndex <= 0) {
-        this.selectedIndex = 0
-        return
-      }
-
-      this.selectedIndex--
-      this.keyword = this.suggestions[this.selectedIndex].value
-
-      document.querySelectorAll('.suggestion-item').forEach((item, index) => {
-        if (index === this.selectedIndex)
-          item.classList.add('active')
-        else
-          item.classList.remove('active')
-      })
-
-      document.querySelectorAll('.history-item').forEach((item, index) => {
-        if (index === this.selectedIndex)
-          item.classList.add('active')
-        else
-          item.classList.remove('active')
-      })
-    },
-    onDown() {
-      if (this.selectedIndex >= Object.keys(this.suggestions).length - 1) {
-        this.selectedIndex = Object.keys(this.suggestions).length - 1
-        return
-      }
-
-      this.selectedIndex++
-      this.keyword = this.suggestions[this.selectedIndex].value
-
-      document.querySelectorAll('.suggestion-item').forEach((item, index) => {
-        if (index === this.selectedIndex)
-          item.classList.add('active')
-        else
-          item.classList.remove('active')
-      })
-
-      document.querySelectorAll('.history-item').forEach((item, index) => {
-        if (index === this.selectedIndex)
-          item.classList.add('active')
-        else
-          item.classList.remove('active')
-      })
-    },
-  },
-
-})
-</script>
 
 <style lang="scss" scoped>
 .v-enter-active,
