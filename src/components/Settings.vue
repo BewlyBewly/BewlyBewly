@@ -16,11 +16,11 @@ export default defineComponent({
           label: 'settings.select_language_opt.english',
         },
         {
-          value: 'cmn_SC',
+          value: 'cmn-SC',
           label: 'settings.select_language_opt.mandarin_sc',
         },
         {
-          value: 'cmn_TC',
+          value: 'cmn-TC',
           label: 'settings.select_language_opt.mandarin_tc',
         },
         {
