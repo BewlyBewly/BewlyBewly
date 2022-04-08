@@ -22,6 +22,15 @@ button {
   }
 }
 
+// hide the original home page
 .login-tip {
   display: none;
+}
+body > #i_cecream,
+#i_cecream * {
+  visibility: hidden !important;
+  width: 0;
+  height: 0;
+  overflow: hidden !important;
+  pointer-events: none !important;
 }

@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 import { onMessage } from 'webext-bridge'
 import { createApp } from 'vue'
-import { createI18n } from 'vue-i18n'
 
 // Firefox `browser.tabs.executeScript()` requires scripts return a primitive value
 
@@ -28,10 +27,6 @@ import { getCookie, i18n, setCookie, SVG_ICONS } from '~/utils'
     if (`${getCookie('i-wanna-go-back')}` === '2') {
       setCookie('i-wanna-go-back', '-1', 1)
       location.reload()
-    }
-    else {
-      document.querySelectorAll('script').forEach(script => script.remove())
-      document.body.innerHTML = ''
     }
 
     const container = document.createElement('div')
