@@ -69,6 +69,9 @@ export default defineComponent({
         })
     },
     async getUnreadMessageCount() {
+      if (!this.isLogin)
+        return
+
       await browser.runtime
         .sendMessage({
           contentScriptQuery: 'getUnreadMsg',
@@ -85,6 +88,9 @@ export default defineComponent({
         this.unReadmessageCount += parseInt(`${value}`)
     },
     getNewMomentsCount() {
+      if (!this.isLogin)
+        return
+
       browser.runtime
         .sendMessage({
           contentScriptQuery: 'getNewMomentsCount',
