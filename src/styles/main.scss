@@ -44,6 +44,13 @@
   --bew-fill-4: rgb(120 120 128 / 46%);
 }
 
+@supports not (backdrop-filter: blur(15px)) {
+  :root,
+  :root.dark {
+    --bew-content-1:  var(--bew-content-solid-1);
+  }
+}
+
 html,
 body,
 #app {
