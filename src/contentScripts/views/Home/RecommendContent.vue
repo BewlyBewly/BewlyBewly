@@ -13,9 +13,11 @@ export default defineComponent({
       MAX_LIMIT: 150 as const,
     }
   },
+  beforeUpdate() {
+    this.getRecommendVideo()
+    this.getRecommendVideo()
+  },
   mounted() {
-    this.getRecommendVideo()
-    this.getRecommendVideo()
     window.onscroll = async() => {
       if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
         if (!this.isLoading)
@@ -54,6 +56,26 @@ export default defineComponent({
     gotoChannel(mid: number) {
       window.open(`//space.bilibili.com/${mid}`)
     },
+    gotoVideo(uri: string) {
+      window.open(`/video/av${uri.split('/')[3]}`)
+    },
+    submitDislike(reasonID: number, goto: string, id: string, mid: number, rid: string, tagID: string) {
+      browser.runtime
+        .sendMessage({
+          contentScriptQuery: 'submitDislike',
+          accessKey: accessKey.value,
+          reasonID,
+          goto,
+          id,
+          mid,
+          rid,
+          tagID,
+        })
+        .then((res) => {
+          console.log(res)
+          // this.getRecommendVideo()
+        })
+    },
     onRefresh() {
       this.isLoading = true
       this.videoList = []
@@ -83,9 +105,13 @@ export default defineComponent({
         :data-index="index"
         class="video-card"
       >
-        <a :href="'/video/av' + video.uri.split('/')[3]" target="_blank">
+        <div
+          @click.stop="gotoVideo(video.uri)"
+        >
           <div class="thumbnail">
-            <div class="duration">{{ calcCurrentTime(video.duration) }}</div>
+            <div class="duration">
+              {{ calcCurrentTime(video.duration) }}
+            </div>
             <div
               class="overflow-hidden w-full relative rounded-$bew-radius z-1"
               style="aspect-ratio: 16/9"
@@ -106,8 +132,78 @@ export default defineComponent({
               </a>
             </div>
             <div class="meta">
-              <h3 class="video-title" :title="video.title">{{ video.title }}</h3>
-              <div class="channel-name" @click="gotoChannel(video.mid)">{{ video.name }}</div>
+              <div
+                flex="~"
+                justify="between"
+                w="full"
+                pos="relative"
+              >
+                <h3 class="video-title" :title="video.title">
+                  {{ video.title }}
+                </h3>
+                <div
+                  class="icon-btn"
+                  p="t-0.15rem x-2"
+                  pointer="auto"
+                  @click.stop="video.openControl = !video.openControl"
+                >
+                  <tabler:dots-vertical
+                    text="lg"
+                  />
+                </div>
+
+                <!-- dislike control -->
+                <!-- cover mask -->
+                <!-- <template v-if="video.openControl">
+                  <div
+                    pos="fixed top-0 left-0"
+                    w="full"
+                    h="full"
+                    z="20"
+                    @click.stop="video.openControl = false"
+                  ></div>
+
+                  <div
+                    pos="absolute top-9 right-0"
+                    p="2"
+                    z="20"
+                    w="180px"
+                    bg="$bew-content-1"
+                    rounded="$bew-radius"
+                    style="box-shadow: var(--bew-shadow-2); backdrop-filter: var(--bew-filter-glass);"
+                  >
+                    <p
+                      p="2"
+                      text="$bew-text-3"
+                    >
+                      I don't like...
+                    </p>
+                    <ul>
+                      <li
+                        v-for="reason in video.dislike_reasons"
+                        :key="reason.reason_id"
+                        p="2"
+                        m="b-1"
+                        cursor="pointer"
+                        hover:bg="$bew-fill-2"
+                        transition="all duration-300"
+                        rounded="$bew-radius"
+                        @click.stop="submitDislike(reason.reason_id,
+                                                   video.goto,
+                                                   video.idx,
+                                                   video.mid,
+                                                   video.tid,
+                                                   video.tag.tag_id)"
+                      >
+                        {{ reason.reason_name }}
+                      </li>
+                    </ul>
+                  </div>
+                </template> -->
+              </div>
+              <div class="channel-name" @click="gotoChannel(video.mid)">
+                {{ video.name }}
+              </div>
               <div class="video-info">
                 {{ numFormatter(video.play) }} views
                 <span class="text-xs font-light">•</span>
@@ -115,7 +211,7 @@ export default defineComponent({
               </div>
             </div>
           </div>
-        </a>
+        </div>
       </div>
     </transition-group>
   </div>
@@ -182,7 +278,7 @@ export default defineComponent({
 
 .video-card {
   @apply p-1 rounded-$bew-radius duration-300
-    z-0
+    relative
     active:bg-$bew-fill-2;
 
   &:hover {
@@ -236,7 +332,7 @@ export default defineComponent({
     }
 
     .meta {
-      @apply flex flex-col items-start;
+      @apply flex flex-col items-start '!w-full';
 
       .video-title {
         @apply text-lg max-h-13 overflow-hidden overflow-ellipsis whitespace-normal
