@@ -165,8 +165,22 @@ chrome.runtime.onMessage.addListener((message: any, sender: chrome.runtime.Messa
     return true
   }
   if (message.contentScriptQuery === 'getNewMomentsCount') {
-    // https://api.bilibili.com/x/web-interface/dynamic/entrance
     const url = `${API_URL}/x/web-interface/dynamic/entrance`
+    fetch(url)
+      .then(response => response.json())
+      .then(data => sendResponse(data))
+      .catch(error => console.error(error))
+    return true
+  }
+  if (message.contentScriptQuery === 'submitDislike') {
+    // https://github.com/indefined/UserScripts/blob/master/bilibiliHome/bilibiliHome.API.md#%E6%8F%90%E4%BA%A4%E4%B8%8D%E5%96%9C%E6%AC%A2
+    const url = `${APP_URL}/x/feed/dislike?access_key=${message.accessKey}
+      &goto=${message.goto}
+      &id=${message.id}
+      &mid=${message.mid}
+      &reason_id=${message.reasonID}
+      &rid=${message.rid}
+      &tag_id=${message.tagID}`
     fetch(url)
       .then(response => response.json())
       .then(data => sendResponse(data))

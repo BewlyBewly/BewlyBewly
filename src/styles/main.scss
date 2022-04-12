@@ -89,7 +89,7 @@ body {
   @apply inline-block cursor-pointer select-none
     opacity-75 transition duration-200 ease-in-out
     hover:opacity-100 hover:text-$bew-theme-color;
-  font-size: 0.9em;
+  font-size: 1rem;
 }
 
 .chk-btn {

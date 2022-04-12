@@ -1,5 +1,5 @@
 <script lang="ts">
-import { accessKey } from '~/logic/storage'
+import { accessKey } from '~/logic/index'
 import { numFormatter, calcTimeSince, calcCurrentTime } from '~/utils'
 
 export default defineComponent({
@@ -11,13 +11,16 @@ export default defineComponent({
       calcTimeSince,
       calcCurrentTime,
       MAX_LIMIT: 150 as const,
+      accessKey,
     }
   },
-  beforeUpdate() {
-    this.getRecommendVideo()
-    this.getRecommendVideo()
-  },
   mounted() {
+    // need to wait for accessKey to be loaded, otherwise the accessKey will be undefined
+    setTimeout(() => {
+      this.getRecommendVideo()
+      this.getRecommendVideo()
+    }, 2000)
+
     window.onscroll = async() => {
       if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
         if (!this.isLoading)
@@ -39,7 +42,7 @@ export default defineComponent({
         .sendMessage({
           contentScriptQuery: 'getRecommendVideo',
           idx,
-          accessKey: accessKey.value,
+          accessKey: this.accessKey,
         })
 
       if (response.code === 0) {
@@ -59,7 +62,7 @@ export default defineComponent({
     gotoVideo(uri: string) {
       window.open(`/video/av${uri.split('/')[3]}`)
     },
-    submitDislike(reasonID: number, goto: string, id: string, mid: number, rid: string, tagID: string) {
+    submitDislike(reasonID: number, goto: string, id: string, mid: string, rid: string, tagID: string) {
       browser.runtime
         .sendMessage({
           contentScriptQuery: 'submitDislike',
@@ -92,7 +95,7 @@ export default defineComponent({
 
 <template>
   <div
-    m="x-22 b-0 t-0"
+    m="lg:x-22 <lg:x-16 b-0 t-0"
     grid="~ xl:cols-4 lg:cols-3 md:cols-2 gap-4"
   >
     <transition-group
@@ -105,10 +108,13 @@ export default defineComponent({
         :data-index="index"
         class="video-card"
       >
-        <div
-          @click.stop="gotoVideo(video.uri)"
+        <a
+          :href="'/video/av' + video.uri.split('/')[3]"
+          target="_blank"
         >
-          <div class="thumbnail">
+          <div
+            class="thumbnail"
+          >
             <div class="duration">
               {{ calcCurrentTime(video.duration) }}
             </div>
@@ -120,95 +126,104 @@ export default defineComponent({
             </div>
             <img class="cover-shadow" :src="video.cover + '@672w_378h_1c'" loading="lazy" />
           </div>
-          <div class="detail">
-            <div class="flex">
-              <a class="avatar" @click="gotoChannel(video.mid)">
-                <img
-                  :src="(video.face + '').replace('http:', '') + '@60w_60h_1c'"
-                  width="48"
-                  height="48"
-                  loading="lazy"
-                />
-              </a>
-            </div>
-            <div class="meta">
-              <div
-                flex="~"
-                justify="between"
-                w="full"
-                pos="relative"
+        </a>
+        <div class="detail">
+          <div class="flex">
+            <a
+              class="avatar"
+              cursor="pointer"
+              @click="gotoChannel(video.mid)"
+            >
+              <img
+                :src="(video.face + '').replace('http:', '') + '@60w_60h_1c'"
+                width="48"
+                height="48"
+                loading="lazy"
+              />
+            </a>
+          </div>
+          <div class="meta">
+            <div
+              flex="~"
+              justify="between"
+              w="full"
+              pos="relative"
+            >
+              <h3
+                class="video-title"
+                :title="video.title"
+                cursor="pointer"
+                @click="gotoVideo(video.uri)"
               >
-                <h3 class="video-title" :title="video.title">
-                  {{ video.title }}
-                </h3>
+                {{ video.title }}
+              </h3>
+              <div
+                class="icon-btn"
+                p="t-0.15rem x-2"
+                pointer="auto"
+                @click.stop="video.openControl = !video.openControl"
+              >
+                <tabler:dots-vertical
+                  text="lg"
+                />
+              </div>
+
+              <!-- dislike control -->
+              <!-- cover mask -->
+              <!-- <template v-if="video.openControl">
                 <div
-                  class="icon-btn"
-                  p="t-0.15rem x-2"
-                  pointer="auto"
-                  @click.stop="video.openControl = !video.openControl"
+                  pos="fixed top-0 left-0"
+                  w="full"
+                  h="full"
+                  z="20"
+                  @click.stop="video.openControl = false"
+                ></div>
+
+                <div
+                  pos="absolute top-9 right-0"
+                  p="2"
+                  z="20"
+                  w="180px"
+                  bg="$bew-content-1"
+                  rounded="$bew-radius"
+                  style="box-shadow: var(--bew-shadow-2); backdrop-filter: var(--bew-filter-glass);"
                 >
-                  <tabler:dots-vertical
-                    text="lg"
-                  />
-                </div>
-
-                <!-- dislike control -->
-                <!-- cover mask -->
-                <!-- <template v-if="video.openControl">
-                  <div
-                    pos="fixed top-0 left-0"
-                    w="full"
-                    h="full"
-                    z="20"
-                    @click.stop="video.openControl = false"
-                  ></div>
-
-                  <div
-                    pos="absolute top-9 right-0"
+                  <p
                     p="2"
-                    z="20"
-                    w="180px"
-                    bg="$bew-content-1"
-                    rounded="$bew-radius"
-                    style="box-shadow: var(--bew-shadow-2); backdrop-filter: var(--bew-filter-glass);"
+                    text="$bew-text-3"
                   >
-                    <p
+                    I don't like...
+                  </p>
+                  <ul>
+                    <li
+                      v-for="reason in video.dislike_reasons"
+                      :key="reason.reason_id"
                       p="2"
-                      text="$bew-text-3"
+                      m="b-1"
+                      cursor="pointer"
+                      hover:bg="$bew-fill-2"
+                      transition="all duration-300"
+                      rounded="$bew-radius"
+                      @click.stop="submitDislike(reason.reason_id,
+                                                 video.goto,
+                                                 video.param,
+                                                 video.mid,
+                                                 video.tid,
+                                                 video.tag.tag_id)"
                     >
-                      I don't like...
-                    </p>
-                    <ul>
-                      <li
-                        v-for="reason in video.dislike_reasons"
-                        :key="reason.reason_id"
-                        p="2"
-                        m="b-1"
-                        cursor="pointer"
-                        hover:bg="$bew-fill-2"
-                        transition="all duration-300"
-                        rounded="$bew-radius"
-                        @click.stop="submitDislike(reason.reason_id,
-                                                   video.goto,
-                                                   video.idx,
-                                                   video.mid,
-                                                   video.tid,
-                                                   video.tag.tag_id)"
-                      >
-                        {{ reason.reason_name }}
-                      </li>
-                    </ul>
-                  </div>
-                </template> -->
-              </div>
-              <div class="channel-name" @click="gotoChannel(video.mid)">
-                {{ video.name }}
-              </div>
-              <div class="video-info">
-                {{ numFormatter(video.play) }} views
-                <span class="text-xs font-light">•</span>
-                {{ calcTimeSince(new Date(video.ctime * 1000)) }} ago
-              </div>
+                      {{ reason.reason_name }}
+                    </li>
+                  </ul>
+                </div>
+              </template> -->
+            </div>
+            <div class="channel-name" @click="gotoChannel(video.mid)">
+              {{ video.name }}
+            </div>
+            <div class="video-info">
+              {{ numFormatter(video.play) }} views
+              <span class="text-xs font-light">•</span>
+              {{ calcTimeSince(new Date(video.ctime * 1000)) }} ago
             </div>
           </div>
         </div>

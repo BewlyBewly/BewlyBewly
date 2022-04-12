@@ -5,12 +5,15 @@
   <!-- is home page -->
   <home></home>
   <!-- button -->
-  <div class="fixed bottom-5 right-5" flex="~ col">
+  <div
+    flex="~ col"
+    pos="fixed bottom-5 lg:right-5 <lg:right-3"
+  >
     <button
       class="transform active:scale-90"
-      w="45px"
-      h="45px"
-      p="3"
+      w="lg:45px <lg:40px"
+      h="lg:45px <lg:40px"
+      p="lg:3 <lg:2"
       m="b-3"
       bg="$bew-content-1"
       text="2xl $bew-text-1"
@@ -26,9 +29,9 @@
 
     <button
       class="leading-none transform active:scale-90"
-      w="45px"
-      h="45px"
-      p="3"
+      w="lg:45px <lg:40px"
+      h="lg:45px <lg:40px"
+      p="lg:3 <lg:2"
       bg="$bew-content-1"
       text="2xl $bew-text-1"
       font="leading-0"
@@ -85,4 +88,5 @@ window.onload = () => {
 .v-leave-to {
   @apply opacity-0 transform -translate-y-full;
 }
+
 </style>

@@ -11,6 +11,8 @@ export default defineComponent({
       showTopbarMask: false,
       showNotificationsDropDown: false,
       showUploadDropDown: false,
+      showSearchBar: true,
+      showRightContent: true,
       isLogin: !!getUserID(),
       unReadmessage: {},
       unReadDm: {},
@@ -103,7 +105,13 @@ export default defineComponent({
 </script>
 
 <template>
-  <header>
+  <header
+    flex="~"
+    justify="between"
+    align="items-center"
+    p="lg:x-23 <lg:x-16 y-2"
+    w="screen"
+  >
     <transition name="topbar">
       <div
         v-show="showTopbarMask"
@@ -153,8 +161,27 @@ export default defineComponent({
       </transition>
     </div>
 
-    <search-bar></search-bar>
+    <!-- search bar -->
+    <div
+      flex="~"
+      w="full"
+      justify="md:center <md:end"
+    >
+      <!-- <button
+        class="icon-btn"
+        text="$bew-text-1 2xl"
+        display="!md:hidden !<md:block"
+        m="r-4"
+      >
+        <tabler:search />
+      </button> -->
+      <search-bar
+        v-if="showSearchBar"
+        ref="searchBar"
+      ></search-bar>
+    </div>
 
+    <!-- right content -->
     <div class="right-side">
       <div v-if="!isLogin" class="right-side-item">
         <a href="https://passport.bilibili.com/login" class="login">
@@ -168,12 +195,14 @@ export default defineComponent({
           @mouseenter="openUserPanel"
           @mouseleave="closeUserPanel"
         >
-          <div
+          <a
             id="avatar-img"
             ref="avatarImg"
+            :href="'https://space.bilibili.com/' + mid"
+            target="_blank"
             class="rounded-full z-1 w-40px h-40px bg-$bew-fill-3 bg-cover bg-center"
             :style="{ backgroundImage: `url(${(userInfo.face + '').replace('http:', '')})` }"
-          ></div>
+          ></a>
           <div
             id="avatar-shadow"
             ref="avatarShadow"
@@ -181,11 +210,12 @@ export default defineComponent({
             opacity="80"
             :style="{ backgroundImage: `url(${(userInfo.face + '').replace('http:', '')})` }"
           ></div>
-
           <transition name="slide">
             <user-panel-dropdown
               v-if="showUserPanel"
+              ref="userPanelDropdown"
               :user-info="userInfo"
+              after:h="!0"
               class="bew-popover"
             ></user-panel-dropdown>
           </transition>
@@ -269,7 +299,8 @@ export default defineComponent({
             href="https://member.bilibili.com/platform/upload/video/frame"
             target="_blank"
             class="bg-$bew-theme-color rounded-full !text-white !text-base !px-4 mx-1"
-            w="xl:auto <xl:42px"
+            flex="~ justify-center"
+            w="xl:100px <xl:42px"
             h="xl:auto <xl:42px"
             p="xl:auto <xl:unset"
           >
@@ -323,9 +354,6 @@ export default defineComponent({
     after:absolute after:-top-8 after:left-0 after:-z-1;
 }
 
-header {
-  @apply flex justify-between px-23 py-2 w-screen items-center;
-}
 .left-side {
   @apply relative;
   .logo {
@@ -362,7 +390,7 @@ header {
   }
 
   &-item {
-    @apply relative;
+    @apply relative text-$bew-text-1;
   }
 
   &-item:not(#avatar) {
