@@ -174,13 +174,38 @@ chrome.runtime.onMessage.addListener((message: any, sender: chrome.runtime.Messa
   }
   if (message.contentScriptQuery === 'submitDislike') {
     // https://github.com/indefined/UserScripts/blob/master/bilibiliHome/bilibiliHome.API.md#%E6%8F%90%E4%BA%A4%E4%B8%8D%E5%96%9C%E6%AC%A2
-    const url = `${APP_URL}/x/feed/dislike?access_key=${message.accessKey}
+    let url = `${APP_URL}/x/feed/dislike?access_key=${message.accessKey}
       &goto=${message.goto}
       &id=${message.id}
       &mid=${message.mid}
       &reason_id=${message.reasonID}
       &rid=${message.rid}
-      &tag_id=${message.tagID}`
+      &tag_id=${message.tagID}
+      &build=5000000`
+
+    // remove url empty spaces
+    url = url.replace(/\s+/g, '')
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => sendResponse(data))
+      .catch(error => console.error(error))
+    return true
+  }
+  if (message.contentScriptQuery === 'undoDislike') {
+    // https://github.com/indefined/UserScripts/blob/master/bilibiliHome/bilibiliHome.API.md#%E6%92%A4%E9%94%80%E4%B8%8D%E5%96%9C%E6%AC%A2
+    let url = `${APP_URL}/x/feed/dislike/cancel?access_key=${message.accessKey}
+      &goto=${message.goto}
+      &id=${message.id}
+      &mid=${message.mid}
+      &reason_id=${message.reasonID}
+      &rid=${message.rid}
+      &tag_id=${message.tagID}
+      &build=5000000`
+
+    // remove url empty spaces
+    url = url.replace(/\s+/g, '')
+
     fetch(url)
       .then(response => response.json())
       .then(data => sendResponse(data))

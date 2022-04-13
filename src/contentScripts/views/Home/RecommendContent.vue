@@ -46,13 +46,20 @@ export default defineComponent({
         })
 
       if (response.code === 0) {
+        const resData = [] as any[]
+        response.data.forEach((item: any) => {
+          // remove ad videos
+          if (!item.ad_cb)
+            resData.push(item)
+        })
+
         // when videoList has length property, it means it is the first time to load
         if (!this.videoList.length) {
-          this.videoList = response.data
+          this.videoList = resData
         }
         else {
           // else we concat the new data to the old data
-          this.videoList = this.videoList.concat(response.data)
+          this.videoList = this.videoList.concat(resData)
         }
       }
     },
@@ -62,11 +69,11 @@ export default defineComponent({
     gotoVideo(uri: string) {
       window.open(`/video/av${uri.split('/')[3]}`)
     },
-    submitDislike(reasonID: number, goto: string, id: string, mid: string, rid: string, tagID: string) {
+    submitDislike(videoIndex: number, reasonID: number, goto: string, id: string, mid: string, rid: string, tagID: string) {
       browser.runtime
         .sendMessage({
           contentScriptQuery: 'submitDislike',
-          accessKey: accessKey.value,
+          accessKey: this.accessKey,
           reasonID,
           goto,
           id,
@@ -75,8 +82,30 @@ export default defineComponent({
           tagID,
         })
         .then((res) => {
-          console.log(res)
-          // this.getRecommendVideo()
+          if (res.code === 0) {
+            this.videoList[videoIndex].isDislike = true
+            this.videoList[videoIndex].selectedReasonID = reasonID
+          }
+        })
+    },
+    undoDislike(videoIndex: number, reasonID: number, goto: string, id: string, mid: string, rid: string, tagID: string) {
+      browser.runtime
+        .sendMessage({
+          contentScriptQuery: 'undoDislike',
+          accessKey: this.accessKey,
+          reasonID,
+          goto,
+          id,
+          mid,
+          rid,
+          tagID,
+        })
+        .then((res) => {
+          if (res.code === 0) {
+            this.videoList[videoIndex].isDislike = false
+            this.videoList[videoIndex].selectedReasonID = undefined
+            this.videoList[videoIndex].openControl = false
+          }
         })
     },
     onRefresh() {
@@ -94,139 +123,152 @@ export default defineComponent({
 </script>
 
 <template>
-  <div
-    m="lg:x-22 <lg:x-16 b-0 t-0"
-    grid="~ xl:cols-4 lg:cols-3 md:cols-2 gap-4"
-  >
-    <transition-group
-      name="list"
-      @enter="onEnter"
-    >
+  <div m="lg:x-22 <lg:x-16 b-0 t-0" grid="~ xl:cols-4 lg:cols-3 md:cols-2 gap-4">
+    <transition-group name="list" @enter="onEnter">
       <div
         v-for="(video, index) in videoList"
         :key="video.idx"
         :data-index="index"
         class="video-card"
+        :class="video.isDislike ? 'is-dislike' : ''"
       >
-        <a
-          :href="'/video/av' + video.uri.split('/')[3]"
-          target="_blank"
-        >
+        <!-- Undo control -->
+        <template v-if="video.isDislike">
           <div
-            class="thumbnail"
+            id="dislike-control"
+            pos="absolute top-0 left-0"
+            w="full"
+            h="auto"
+            flex="~ col"
+            justify="center"
+            align="content-center"
+            border="solid $bew-fill-1"
+            text="$bew-text-3 sm center"
+            rounded="$bew-radius"
+            style="aspect-ratio: 16/9;"
           >
-            <div class="duration">
-              {{ calcCurrentTime(video.duration) }}
-            </div>
-            <div
-              class="overflow-hidden w-full relative rounded-$bew-radius z-1"
-              style="aspect-ratio: 16/9"
+            Video removed
+            <button
+              text="$bew-theme-color base"
+              font="bold"
+              m="t-4"
+              @click="undoDislike(
+                index,
+                video.selectedReasonID,
+                video.goto,
+                video.param,
+                video.mid,
+                video.tid,
+                video.tag.tag_id
+              )"
             >
-              <img class="cover" :src="video.cover + '@672w_378h_1c'" loading="lazy" />
-            </div>
-            <img class="cover-shadow" :src="video.cover + '@672w_378h_1c'" loading="lazy" />
+              UNDO
+            </button>
           </div>
-        </a>
-        <div class="detail">
-          <div class="flex">
-            <a
-              class="avatar"
-              cursor="pointer"
-              @click="gotoChannel(video.mid)"
-            >
-              <img
-                :src="(video.face + '').replace('http:', '') + '@60w_60h_1c'"
-                width="48"
-                height="48"
-                loading="lazy"
-              />
-            </a>
-          </div>
-          <div class="meta">
-            <div
-              flex="~"
-              justify="between"
-              w="full"
-              pos="relative"
-            >
-              <h3
-                class="video-title"
-                :title="video.title"
-                cursor="pointer"
-                @click="gotoVideo(video.uri)"
-              >
-                {{ video.title }}
-              </h3>
+        </template>
+        <template v-else>
+          <a :href="'/video/av' + video.uri.split('/')[3]" target="_blank">
+            <div class="thumbnail">
+              <div class="duration">{{ calcCurrentTime(video.duration) }}</div>
               <div
-                class="icon-btn"
-                p="t-0.15rem x-2"
-                pointer="auto"
-                @click.stop="video.openControl = !video.openControl"
+                class="overflow-hidden w-full relative rounded-$bew-radius z-1"
+                style="aspect-ratio: 16/9"
               >
-                <tabler:dots-vertical
-                  text="lg"
-                />
+                <img class="cover" :src="video.cover + '@672w_378h_1c'" loading="lazy" />
               </div>
-
-              <!-- dislike control -->
-              <!-- cover mask -->
-              <!-- <template v-if="video.openControl">
-                <div
-                  pos="fixed top-0 left-0"
-                  w="full"
-                  h="full"
-                  z="20"
-                  @click.stop="video.openControl = false"
-                ></div>
-
-                <div
-                  pos="absolute top-9 right-0"
-                  p="2"
-                  z="20"
-                  w="180px"
-                  bg="$bew-content-1"
-                  rounded="$bew-radius"
-                  style="box-shadow: var(--bew-shadow-2); backdrop-filter: var(--bew-filter-glass);"
+              <img class="cover-shadow" :src="video.cover + '@672w_378h_1c'" loading="lazy" />
+            </div>
+          </a>
+          <div class="detail">
+            <div class="flex">
+              <a class="avatar" cursor="pointer" @click="gotoChannel(video.mid)">
+                <img
+                  :src="(video.face + '').replace('http:', '') + '@60w_60h_1c'"
+                  width="48"
+                  height="48"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="meta">
+              <div flex="~" justify="between" w="full" pos="relative">
+                <h3
+                  class="video-title"
+                  :title="video.title"
+                  cursor="pointer"
+                  @click="gotoVideo(video.uri)"
                 >
-                  <p
-                    p="2"
-                    text="$bew-text-3"
-                  >
-                    I don't like...
-                  </p>
-                  <ul>
-                    <li
-                      v-for="reason in video.dislike_reasons"
-                      :key="reason.reason_id"
-                      p="2"
-                      m="b-1"
-                      cursor="pointer"
-                      hover:bg="$bew-fill-2"
-                      transition="all duration-300"
-                      rounded="$bew-radius"
-                      @click.stop="submitDislike(reason.reason_id,
-                                                 video.goto,
-                                                 video.param,
-                                                 video.mid,
-                                                 video.tid,
-                                                 video.tag.tag_id)"
-                    >
-                      {{ reason.reason_name }}
-                    </li>
-                  </ul>
+                  {{ video.title }}
+                </h3>
+
+                <div
+                  id="dislike-control-btn"
+                  class="icon-btn"
+                  p="t-0.15rem x-2"
+                  pointer="auto"
+                  @click.stop="video.openControl = !video.openControl"
+                >
+                  <tabler:dots-vertical text="lg" />
                 </div>
-              </template> -->
-            </div>
-            <div class="channel-name" @click="gotoChannel(video.mid)">
-              {{ video.name }}
-            </div>
-            <div class="video-info">
-              {{ numFormatter(video.play) }} views
-              <span class="text-xs font-light">•</span>
-              {{ calcTimeSince(new Date(video.ctime * 1000)) }} ago
+
+                <!-- dislike control -->
+                <template v-if="video.openControl">
+                  <!-- cover mask -->
+                  <div
+                    pos="fixed top-0 left-0"
+                    w="full"
+                    h="full"
+                    z="30"
+                    @click="video.openControl = false"
+                  ></div>
+
+                  <div
+                    pos="absolute top-9 right-0"
+                    p="2"
+                    z="30"
+                    w="180px"
+                    bg="$bew-content-1"
+                    rounded="$bew-radius"
+                    style="box-shadow: var(--bew-shadow-2); backdrop-filter: var(--bew-filter-glass);"
+                  >
+                    <p p="2" text="$bew-text-3">
+                      Not interested in...
+                    </p>
+                    <ul>
+                      <li
+                        v-for="reason in video.dislike_reasons"
+                        :key="reason.reason_id"
+                        p="2"
+                        m="b-1"
+                        cursor="pointer"
+                        hover:bg="$bew-fill-2"
+                        transition="all duration-300"
+                        rounded="$bew-radius"
+                        @click.stop="submitDislike(index,
+                                                   reason.reason_id,
+                                                   video.goto,
+                                                   video.param,
+                                                   video.mid,
+                                                   video.tid,
+                                                   video.tag.tag_id)"
+                      >
+                        {{ reason.reason_name }}
+                      </li>
+                    </ul>
+                  </div>
+                </template>
+              </div>
+              <div class="channel-name" @click="gotoChannel(video.mid)">
+                {{ video.name }}
+              </div>
+              <div class="video-info">
+                {{ numFormatter(video.play) }} views
+                <span class="text-xs font-light">•</span>
+                {{ calcTimeSince(new Date(video.ctime * 1000)) }} ago
+              </div>
             </div>
           </div>
-        </div>
+        </template>
       </div>
     </transition-group>
   </div>
@@ -292,12 +334,14 @@ export default defineComponent({
 }
 
 .video-card {
-  @apply p-1 rounded-$bew-radius duration-300
+  @apply p-1 mb-8 rounded-$bew-radius duration-300
     relative
     active:bg-$bew-fill-2;
 
-  &:hover {
-    @apply z-10;
+  &.is-dislike {
+    > *:not(#dislike-control) {
+      @apply invisible pointer-events-none duration-0 transition-none;
+    }
   }
 
   .cover-shadow {
