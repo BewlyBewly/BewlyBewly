@@ -300,7 +300,7 @@ export default defineComponent({
             target="_blank"
             class="bg-$bew-theme-color rounded-full !text-white !text-base !px-4 mx-1"
             flex="~ justify-center"
-            w="xl:100px <xl:42px"
+            w="xl:120px <xl:42px"
             h="xl:auto <xl:42px"
             p="xl:auto <xl:unset"
           >
@@ -402,7 +402,7 @@ export default defineComponent({
 
   .login {
     @apply rounded-full "!text-$bew-theme-color" "!px-4" mx-1 border-1
-      flex items-center "!text-base"
+      flex items-center justify-center "!text-base" w-120px
       border-solid border-$bew-theme-color;
   }
 
