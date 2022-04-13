@@ -96,7 +96,7 @@ export default defineComponent({
         <span class="desc">{{ $t('settings.authorize_app_desc') }}</span>
       </div>
       <button
-        v-if="accessKey + '' === 'undefined' || accessKey + '' === 'null'"
+        v-if="accessKey + '' === 'undefined' || accessKey + '' === 'null' || accessKey === ''"
         ref="authorizeBtn"
         class="btn"
         @click="onAuthorize"
