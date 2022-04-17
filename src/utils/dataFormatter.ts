@@ -36,7 +36,7 @@ export const calcTimeSince = (date: any) => {
   interval = seconds / 60
   if (interval > 1)
     return `${Math.floor(interval) > 1 ? `${Math.floor(interval)} minutes` : `${Math.floor(interval)} minute`}`
-  return `${Math.floor(seconds) > 1 ? `${Math.floor(seconds)} seconds` : `${Math.floor(seconds)}second`}`
+  return `${Math.floor(seconds) > 1 ? `${Math.floor(seconds)} seconds` : `${Math.floor(seconds)} second`}`
 }
 
 export const calcCurrentTime = (totalSeconds: number) => {
