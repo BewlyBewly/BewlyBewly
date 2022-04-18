@@ -1,7 +1,9 @@
 <script lang="ts">
+import MomentsDropdown from './MomentsDropdown.vue'
 import { getUserID } from '~/utils'
 
 export default defineComponent({
+  components: { MomentsDropdown },
   data() {
     return {
       mid: getUserID() || '',
@@ -10,9 +12,10 @@ export default defineComponent({
       showUserPanel: false,
       showTopbarMask: false,
       showNotificationsDropDown: false,
+      showMomentsDropDown: false,
       showUploadDropDown: false,
-      showSearchBar: true,
-      showRightContent: true,
+      // showSearchBar: true,
+      // showRightContent: true,
       isLogin: !!getUserID(),
       unReadmessage: {},
       unReadDm: {},
@@ -60,6 +63,14 @@ export default defineComponent({
       avatarImg.classList.remove('hover')
       avatarShadow.classList.remove('hover')
     },
+    openNotificationsDropdown() {
+      this.showNotificationsDropDown = true
+      // update the unread message count
+      this.getUnreadMessageCount()
+    },
+    closeNotificationsDropdown() {
+      this.showNotificationsDropDown = false
+    },
     getUserInfo() {
       browser.runtime
         .sendMessage({
@@ -84,6 +95,7 @@ export default defineComponent({
           contentScriptQuery: 'getUnreadDm',
         }).then(res => this.unReadDm = res.data)
 
+      this.unReadmessageCount = 0
       for (const [key, value] of Object.entries(this.unReadmessage))
         if (key !== 'up') this.unReadmessageCount += parseInt(`${value}`)
       for (const [, value] of Object.entries(this.unReadDm))
@@ -223,8 +235,8 @@ export default defineComponent({
 
         <div
           class="right-side-item"
-          @mouseenter="showNotificationsDropDown = true"
-          @mouseleave="showNotificationsDropDown = false"
+          @mouseenter="openNotificationsDropdown"
+          @mouseleave="closeNotificationsDropdown"
         >
           <div
             v-if="unReadmessageCount !== 0"
@@ -243,12 +255,17 @@ export default defineComponent({
           <transition name="slide">
             <notifications-dropdown
               v-if="showNotificationsDropDown"
+              ref="notificationsDropdown"
               class="bew-popover"
             ></notifications-dropdown>
           </transition>
         </div>
 
-        <div class="right-side-item">
+        <div
+          class="right-side-item"
+          @mouseenter="showMomentsDropDown = true"
+          @mouseleave="showMomentsDropDown = false"
+        >
           <div
             v-if="newMomentsCount !== 0"
             class="unread-message"
@@ -262,6 +279,14 @@ export default defineComponent({
           >
             <tabler:windmill />
           </a>
+
+          <transition name="slide">
+            <moments-dropdown
+              v-if="showMomentsDropDown"
+              class="bew-popover"
+            >
+            </moments-dropdown>
+          </transition>
         </div>
         <div class="right-side-item">
           <a
@@ -299,8 +324,9 @@ export default defineComponent({
             href="https://member.bilibili.com/platform/upload/video/frame"
             target="_blank"
             class="bg-$bew-theme-color rounded-full !text-white !text-base !px-4 mx-1"
-            flex="~ justify-center"
-            w="xl:120px <xl:42px"
+            flex="~"
+            justify="center"
+            w="xl:100px <xl:42px"
             h="xl:auto <xl:42px"
             p="xl:auto <xl:unset"
           >
@@ -328,7 +354,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .slide-enter-active,
 .slide-leave-active {
-  @apply transition-all duration-300;
+  @apply transition-all duration-300 pointer-events-none;
 }
 
 .slide-leave-to,

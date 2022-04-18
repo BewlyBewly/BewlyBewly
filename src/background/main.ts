@@ -172,6 +172,33 @@ chrome.runtime.onMessage.addListener((message: any, sender: chrome.runtime.Messa
       .catch(error => console.error(error))
     return true
   }
+  if (message.contentScriptQuery === 'getNewMoments') {
+    const url = `https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_new?uid=${message.uid}
+      &type_list=${message.typeList}`
+    fetch(url)
+      .then(response => response.json())
+      .then(data => sendResponse(data))
+      .catch(error => console.error(error))
+    return true
+  }
+  if (message.contentScriptQuery === 'getHistoryMoments') {
+    const url = `https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_history?uid=${message.uid}
+      &type_list=${message.typeList}
+      &offset_dynamic_id=${message.offsetDynamicID}`
+    fetch(url)
+      .then(response => response.json())
+      .then(data => sendResponse(data))
+      .catch(error => console.error(error))
+    return true
+  }
+  if (message.contentScriptQuery === 'getLiveMoments') {
+    const url = `https://api.live.bilibili.com/xlive/web-ucenter/v1/xfetter/FeedList?page=${message.page}&pagesize=${message.pageSize}`
+    fetch(url)
+      .then(response => response.json())
+      .then(data => sendResponse(data))
+      .catch(error => console.error(error))
+    return true
+  }
   if (message.contentScriptQuery === 'submitDislike') {
     // https://github.com/indefined/UserScripts/blob/master/bilibiliHome/bilibiliHome.API.md#%E6%8F%90%E4%BA%A4%E4%B8%8D%E5%96%9C%E6%AC%A2
     let url = `${APP_URL}/x/feed/dislike?access_key=${message.accessKey}
