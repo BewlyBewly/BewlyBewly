@@ -273,24 +273,7 @@ export default defineComponent({
     </transition-group>
   </div>
 
-  <div
-    v-if="isLoading"
-    w="full"
-    h="46px"
-    p="y-8"
-    flex="~"
-    justify="center"
-    items="center"
-  >
-    <img
-      src="https://s2.loli.net/2022/03/20/4YZhnF1cmya6tHO.gif"
-      alt="loading"
-      w="46px"
-      h="46px"
-      m="r-2"
-    />
-    {{ $t('home.loading_more') }}
-  </div>
+  <loading v-if="isLoading"></loading>
 
   <div
     v-if="!isLoading"
