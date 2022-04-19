@@ -1,3 +1,7 @@
+common:
+  view_all: View ALL
+  loading_more: Loading more...
+
 topbar:
   sign_in: Sign in
   notifications: Notifications
@@ -60,15 +64,19 @@ topbar:
     likes: Likes
     messages: Messages
     chats: Chats
+  moments_dropdown: 
+    tabs:
+      videos: Videos
+      live: Live
+      articles: Articles
+    uploaded: 'uploaded: '
+    live_status: LIVE
   upload_dropdown:
     article: Article
     music: Music
     sticker: Sticker
     video: Video
     manager: Manager
-
-home:
-  loading_more: Loading more...
 
 settings:
   title: Settings

@@ -1,3 +1,7 @@
+common:
+  view_all: 查看更多
+  loading_more: 加载中...
+
 topbar:
   sign_in: 登录
   notifications: 通知
@@ -60,15 +64,19 @@ topbar:
     likes: 收到的赞
     messages: 系统消息
     chats: 我的消息
+  moments_dropdown: 
+    tabs:
+      videos: 视频
+      live: 直播
+      articles: 专栏
+    uploaded: '上传了：'
+    live_status: 直播中
   upload_dropdown:
     article: 专栏
     music: 音频
     sticker: 贴纸
     video: 视频
     manager: 投稿
-
-home:
-  loading_more: 加载中...
 
 settings:
   title: 设置

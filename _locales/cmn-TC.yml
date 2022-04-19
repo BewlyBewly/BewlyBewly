@@ -1,3 +1,7 @@
+common:
+  view_all: 檢視所有
+  loading_more: 載入中...
+
 topbar:
   sign_in: 登入
   notifications: 通知
@@ -5,7 +9,7 @@ topbar:
   favorites: 收藏
   history: 記錄
   creative_center: 創作中心
-  upload: 上載
+  upload: 上傳
   logo_dropdown: 
     anime: 番劇
     movies: 電影
@@ -60,15 +64,19 @@ topbar:
     likes: 按讚訊息
     messages: 系统通知
     chats: 聊天室
+  moments_dropdown: 
+    tabs:
+      videos: 影片
+      live: 直播
+      articles: 文章
+    uploaded: '上傳了：'
+    live_status: 直播中
   upload_dropdown:
-    article: 上載文章
-    music: 上載音訊
-    sticker: 上載貼圖
-    video: 上載影片
+    article: 上傳文章
+    music: 上傳音訊
+    sticker: 上傳貼圖
+    video: 上傳影片
     manager: 內容管理
-
-home:
-  loading_more: 載入中...
 
 settings:
   title: 設定

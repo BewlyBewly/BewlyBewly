@@ -1,3 +1,7 @@
+common:
+  view_all: 睇晒佢哋
+  loading_more: 撈緊...
+
 topbar:
   sign_in: 登入
   notifications: 通知
@@ -60,15 +64,19 @@ topbar:
     likes: 撳 like
     messages: 系统通知
     chats: 傾偈室
+  moments_dropdown: 
+    tabs:
+      videos: 影片
+      live: 直播
+      articles: 文章
+    uploaded: 'po 咗：'
+    live_status: 直播緊
   upload_dropdown:
     article: 寫文
     music: 擺音樂
     sticker: 出貼圖
     video: Po 片
     manager: 內容管理
-
-home:
-  loading_more: 撈緊...
 
 settings:
   title: 校做
