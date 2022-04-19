@@ -288,7 +288,7 @@ export default defineComponent({
 
           <transition name="slide">
             <moments-dropdown
-              v-show="showMomentsDropDown"
+              v-if="showMomentsDropDown"
               class="bew-popover"
             >
             </moments-dropdown>
