@@ -1,5 +1,6 @@
 <script lang="ts">
 import MomentsDropdown from './MomentsDropdown.vue'
+import { updateInterval } from './notify'
 import { getUserID } from '~/utils'
 
 export default defineComponent({
@@ -21,6 +22,14 @@ export default defineComponent({
       newMomentsCount: 0,
     }
   },
+  watch: {
+    showNotificationsDropDown(val) {
+      this.getUnreadMessageCount()
+    },
+    showMomentsDropDown(val) {
+      this.getNewMomentsCount()
+    },
+  },
   mounted() {
     this.initUserPanel()
 
@@ -36,6 +45,12 @@ export default defineComponent({
       this.getUserInfo()
       this.getUnreadMessageCount()
       this.getNewMomentsCount()
+
+      // automatically update notifications and moments count
+      setInterval(() => {
+        this.getUnreadMessageCount()
+        this.getNewMomentsCount()
+      }, updateInterval)
     },
     showLogoMenuDropdown() {
       const logo = this.$refs.logo as HTMLElement
@@ -60,14 +75,6 @@ export default defineComponent({
       const avatarShadow = this.$refs.avatarShadow as HTMLImageElement
       avatarImg.classList.remove('hover')
       avatarShadow.classList.remove('hover')
-    },
-    openNotificationsDropdown() {
-      this.showNotificationsDropDown = true
-      // update the unread message count
-      this.getUnreadMessageCount()
-    },
-    closeNotificationsDropdown() {
-      this.showNotificationsDropDown = false
     },
     getUserInfo() {
       browser.runtime
@@ -230,10 +237,11 @@ export default defineComponent({
           </transition>
         </div>
 
+        <!-- Notifications -->
         <div
           class="right-side-item"
-          @mouseenter="openNotificationsDropdown"
-          @mouseleave="closeNotificationsDropdown"
+          @mouseenter="showNotificationsDropDown = true"
+          @mouseleave="showNotificationsDropDown = false"
         >
           <div
             v-if="unReadmessageCount !== 0"
@@ -258,6 +266,7 @@ export default defineComponent({
           </transition>
         </div>
 
+        <!-- Moments -->
         <div
           class="right-side-item"
           @mouseenter="showMomentsDropDown = true"
@@ -279,12 +288,14 @@ export default defineComponent({
 
           <transition name="slide">
             <moments-dropdown
-              v-if="showMomentsDropDown"
+              v-show="showMomentsDropDown"
               class="bew-popover"
             >
             </moments-dropdown>
           </transition>
         </div>
+
+        <!-- Favorites -->
         <div class="right-side-item">
           <a
             :href="'https://space.bilibili.com/' + mid + '/favlist'"
@@ -294,6 +305,8 @@ export default defineComponent({
             <tabler:star />
           </a>
         </div>
+
+        <!-- History -->
         <div class="right-side-item">
           <a
             href="https://www.bilibili.com/account/history"
@@ -351,7 +364,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .slide-enter-active,
 .slide-leave-active {
-  @apply transition-all duration-300 pointer-events-none;
+  @apply transition-all duration-300 pointer-events-none transform-gpu;
 }
 
 .slide-leave-to,
@@ -413,13 +426,12 @@ export default defineComponent({
   }
 
   &-item {
-    @apply relative text-$bew-text-1;
+    @apply relative text-$bew-text-1 mx-2 last:mr-0;
   }
 
   &-item:not(#avatar) {
-    @apply min-w-40px;
     a {
-      @apply text-xl flex items-center py-2 px-4;
+      @apply text-xl flex items-center p-2;
     }
   }
 

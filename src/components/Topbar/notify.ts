@@ -1,6 +1,9 @@
 import { MomentType } from '~/types'
 import { getUserID, getCookie, setCookie } from '~/utils'
 
+/** Update the time interval of topbar notifications and moments counts */
+export const updateInterval = 1000 * 60 * 5 // Updated every 5 minutes
+
 const getVideoOffsetID = (): number => parseInt(`${getCookie(`bp_video_offset_${getUserID()}`)}`, 10) || 0
 const getArticleOffsetID = (): number => parseInt(`${getCookie(`bp_article_offset_${getUserID()}`)}`, 10) || 0
 
