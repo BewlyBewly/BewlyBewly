@@ -18,6 +18,6 @@ const imgURL = browser.runtime.getURL('/assets/loading.gif')
       h="46px"
       m="r-2"
     />
-    {{ $t('home.loading_more') }}
+    {{ $t('common.loading_more') }}
   </div>
 </template>

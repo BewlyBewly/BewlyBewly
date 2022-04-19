@@ -12,17 +12,17 @@ export default defineComponent({
       momentTabs: [
         {
           id: 0,
-          name: 'Videos',
+          name: this.$t('topbar.moments_dropdown.tabs.videos'),
           isSelected: true,
         },
         {
           id: 1,
-          name: 'Live',
+          name: this.$t('topbar.moments_dropdown.tabs.live'),
           isSelected: false,
         },
         {
           id: 2,
-          name: 'Articles',
+          name: this.$t('topbar.moments_dropdown.tabs.articles'),
           isSelected: false,
         },
       ],
@@ -279,7 +279,7 @@ export default defineComponent({
         </div>
       </div>
       <a href="https://t.bilibili.com/" target="_blank" flex="~" items="center">
-        <span text="sm">View ALL</span>
+        <span text="sm">{{ $t('common.view_all') }}</span>
       </a>
     </div>
 
@@ -330,14 +330,14 @@ export default defineComponent({
 
           <div flex="~" justify="between" w="full">
             <div>
-              <span>{{ moment.name }}</span> uploaded: {{ moment.title }}
+              <span>{{ moment.name }}</span> {{ $t('topbar.moments_dropdown.uploaded') }}{{ moment.title }}
               <div v-if="moment.type !== MomentType.Bangumi" text="$bew-text-2 sm" m="y-2">
                 <!-- Videos and articles -->
                 <div v-if="selectedTab === 0 || selectedTab === 2">{{ calcTimeSince(new Date(moment.ctime * 1000)) }} ago
                 </div>
                 <!-- Live -->
                 <div v-else-if="selectedTab === 1" text="$bew-theme-color" font="bold" flex="~" items="center">
-                  <fluent:live-24-filled m="r-2" /> LIVE
+                  <fluent:live-24-filled m="r-2" /> {{ $t('topbar.moments_dropdown.live_status') }}
                 </div>
               </div>
 
