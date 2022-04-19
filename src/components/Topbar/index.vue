@@ -14,8 +14,6 @@ export default defineComponent({
       showNotificationsDropDown: false,
       showMomentsDropDown: false,
       showUploadDropDown: false,
-      // showSearchBar: true,
-      // showRightContent: true,
       isLogin: !!getUserID(),
       unReadmessage: {},
       unReadDm: {},
@@ -188,7 +186,6 @@ export default defineComponent({
         <tabler:search />
       </button> -->
       <search-bar
-        v-if="showSearchBar"
         ref="searchBar"
       ></search-bar>
     </div>
