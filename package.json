@@ -1,7 +1,7 @@
 {
   "name": "bewly-bewly",
   "displayName": "BewlyBewly",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Bringing you the suggested videos on the bilibili homepage",
   "private": true,
   "scripts": {
