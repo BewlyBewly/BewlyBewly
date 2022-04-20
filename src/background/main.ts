@@ -81,9 +81,13 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
             }
 
             ::-webkit-scrollbar-track {
-              // background: var(--bew-bg);
               background: transparent;
             }
+
+            html > ::-webkit-scrollbar-track {
+              background: var(--bew-bg);
+            }
+
 
             ::-webkit-scrollbar-thumb {
               background-color: var(--bew-fill-3);
