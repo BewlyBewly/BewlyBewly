@@ -71,6 +71,29 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
         runAt: 'document_start',
         matchAboutBlank: true,
       })
+
+      // If it not a macOS, we will inject CSS to design the scrollbar
+      if (!navigator.userAgent.includes('Mac OS X')) {
+        browser.tabs.insertCSS(tabId, {
+          code: `
+            ::-webkit-scrollbar {
+              width: 8px;
+            }
+
+            ::-webkit-scrollbar-track {
+              // background: var(--bew-bg);
+              background: transparent;
+            }
+
+            ::-webkit-scrollbar-thumb {
+              background-color: var(--bew-fill-3);
+              border-radius: 20px;
+            }
+          `,
+          runAt: 'document_start',
+          matchAboutBlank: true,
+        })
+      }
     }
 
     else if (changInfo.status === 'complete') {
