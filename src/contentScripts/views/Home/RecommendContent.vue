@@ -17,8 +17,8 @@ export default defineComponent({
   mounted() {
     // need to wait for accessKey to be loaded, otherwise the accessKey will be undefined
     setTimeout(() => {
-      this.getRecommendVideo()
-      this.getRecommendVideo()
+      this.getRecommendVideos()
+      this.getRecommendVideos()
     }, 2000)
 
     window.onscroll = async() => {
@@ -27,8 +27,8 @@ export default defineComponent({
           return
 
         if (this.videoList.length <= (this.MAX_LIMIT - 20)) {
-          await this.getRecommendVideo(this.videoList[this.videoList.length - 1]?.idx)
-          await this.getRecommendVideo(this.videoList[this.videoList.length - 1]?.idx)
+          await this.getRecommendVideos(this.videoList[this.videoList.length - 1]?.idx)
+          await this.getRecommendVideos(this.videoList[this.videoList.length - 1]?.idx)
         }
         else {
           this.isLoading = false
@@ -37,10 +37,10 @@ export default defineComponent({
     }
   },
   methods: {
-    async getRecommendVideo(idx?: number) {
+    async getRecommendVideos(idx?: number) {
       const response = await browser.runtime
         .sendMessage({
-          contentScriptQuery: 'getRecommendVideo',
+          contentScriptQuery: 'getRecommendVideos',
           idx,
           accessKey: this.accessKey,
         })
