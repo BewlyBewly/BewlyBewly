@@ -147,7 +147,7 @@ export default defineComponent({
             rounded="$bew-radius"
             style="aspect-ratio: 16/9;"
           >
-            Video removed
+            {{ $t('home.video_removed') }}
             <button
               text="$bew-theme-color base"
               font="bold"
@@ -162,7 +162,7 @@ export default defineComponent({
                 video.tag.tag_id
               )"
             >
-              UNDO
+              {{ $t('common.undo') }}
             </button>
           </div>
         </template>
@@ -174,9 +174,9 @@ export default defineComponent({
                 class="overflow-hidden w-full relative rounded-$bew-radius z-1"
                 style="aspect-ratio: 16/9"
               >
-                <img class="cover" :src="video.cover + '@672w_378h_1c'" loading="lazy" />
+                <img class="cover" :src="video.cover.replace('http:', '') + '@672w_378h_1c'" loading="lazy" />
               </div>
-              <img class="cover-shadow" :src="video.cover + '@672w_378h_1c'" loading="lazy" />
+              <img class="cover-shadow" :src="video.cover.replace('http:', '') + '@672w_378h_1c'" loading="lazy" />
             </div>
           </a>
           <div class="detail">
@@ -232,7 +232,7 @@ export default defineComponent({
                     style="box-shadow: var(--bew-shadow-2); backdrop-filter: var(--bew-filter-glass);"
                   >
                     <p p="2" text="$bew-text-3">
-                      Not interested in...
+                      {{ $t('home.not_interested_in') }}
                     </p>
                     <ul>
                       <li
