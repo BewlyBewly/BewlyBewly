@@ -1,6 +1,13 @@
 common:
   view_all: 查看更多
   loading_more: 加载中...
+  undo: 还原
+
+auth:
+  err_tip: Failed to grant Access Key
+  plz_login_first: Please login to bilibili first
+  receive_vertified_url_err: Unable to receive verified URL. Please go back and try againe.
+  failed_to_get_accesskey: Failed to get Access Key
 
 topbar:
   sign_in: 登录
@@ -77,6 +84,10 @@ topbar:
     sticker: 贴纸
     video: 视频
     manager: 投稿
+
+home:
+  not_interested_in: 对哪方面不感兴趣？
+  video_removed: 视频已移除
 
 settings:
   title: 设置
