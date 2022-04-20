@@ -1,6 +1,6 @@
 common:
   view_all: 查看更多
-  loading_more: 加载中...
+  loading: 加载中...
   undo: 还原
 
 auth:

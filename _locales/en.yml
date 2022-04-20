@@ -1,6 +1,6 @@
 common:
   view_all: View ALL
-  loading_more: Loading...
+  loading: Loading...
   undo: UNDO
 
 auth:

@@ -1,6 +1,6 @@
 common:
   view_all: 睇晒佢哋
-  loading_more: 撈緊...
+  loading: 撈緊...
   undo: 整返
 
 auth:

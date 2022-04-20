@@ -1,6 +1,6 @@
 common:
   view_all: 檢視所有
-  loading_more: 載入中...
+  loading: 載入中...
   undo: 復原
 
 topbar:
