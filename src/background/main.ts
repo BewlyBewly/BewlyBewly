@@ -88,7 +88,6 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
               background: var(--bew-bg);
             }
 
-
             ::-webkit-scrollbar-thumb {
               background-color: var(--bew-fill-3);
               border-radius: 20px;

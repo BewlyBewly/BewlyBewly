@@ -28,6 +28,8 @@ button {
 }
 body > #i_cecream,
 #i_cecream * {
+  position: absolute;
+  top: 200vh;
   visibility: hidden !important;
   width: 0;
   height: 0;
