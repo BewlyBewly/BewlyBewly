@@ -63,7 +63,7 @@ pnpm build
 
 And then pack files under `extension`
 
-# ❤️ Credits
+## ❤️ Credits
 
 [vitesse-webext](https://github.com/antfu/vitesse-webext)
 
