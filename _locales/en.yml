@@ -2,6 +2,15 @@ common:
   view_all: View ALL
   loading: Loading...
   undo: UNDO
+  view: no view | view | views
+  ago: ago
+  year: year | years
+  month: month | momths
+  week: week | weeks
+  day: day | days
+  hour: hour | hours
+  minute: minute | minutes
+  second: second | seconds
 
 auth:
   err_tip: Failed to grant Access Key

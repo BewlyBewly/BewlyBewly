@@ -1,7 +1,8 @@
 <script lang="ts">
 import { isNewArticle, isNewVideo, setLastestOffsetID } from './notify'
+import { language } from '~/logic'
 import { getUserID, calcTimeSince } from '~/utils'
-import { MomentItem, MomentType } from '~/types'
+import { MomentItem, MomentType, LanguageType } from '~/types'
 
 export default defineComponent({
   data() {
@@ -31,6 +32,8 @@ export default defineComponent({
       // when noMoreContent is true, the user can't scroll down to load more content
       noMoreContent: false,
       livePage: 1,
+      LanguageType,
+      language,
     }
   },
   watch: {
@@ -333,7 +336,8 @@ export default defineComponent({
               <span>{{ moment.name }}</span> {{ $t('topbar.moments_dropdown.uploaded') }}{{ moment.title }}
               <div v-if="moment.type !== MomentType.Bangumi" text="$bew-text-2 sm" m="y-2">
                 <!-- Videos and articles -->
-                <div v-if="selectedTab === 0 || selectedTab === 2">{{ calcTimeSince(new Date(moment.ctime * 1000)) }} ago
+                <div v-if="selectedTab === 0 || selectedTab === 2">
+                  {{ calcTimeSince(new Date(moment.ctime * 1000)) }}{{ language === LanguageType.English ? ' ' + $t('common.ago') : $t('common.ago') }}
                 </div>
                 <!-- Live -->
                 <div v-else-if="selectedTab === 1" text="$bew-theme-color" font="bold" flex="~" items="center">

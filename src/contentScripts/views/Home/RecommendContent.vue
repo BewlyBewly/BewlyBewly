@@ -1,6 +1,7 @@
 <script lang="ts">
-import { accessKey } from '~/logic/index'
+import { accessKey, language } from '~/logic/index'
 import { numFormatter, calcTimeSince, calcCurrentTime } from '~/utils'
+import { LanguageType } from '~/types'
 
 export default defineComponent({
   data() {
@@ -12,6 +13,8 @@ export default defineComponent({
       calcCurrentTime,
       MAX_LIMIT: 150 as const,
       accessKey,
+      LanguageType,
+      language,
     }
   },
   mounted() {
@@ -262,9 +265,13 @@ export default defineComponent({
                 {{ video.name }}
               </div>
               <div class="video-info">
-                {{ numFormatter(video.play) }} views
+                {{ numFormatter(video.play) }}{{ language === LanguageType.English ?
+                  ' ' + $t('common.view', video.play) :
+                  $t('common.view', video.play) }}
                 <span class="text-xs font-light">•</span>
-                {{ calcTimeSince(new Date(video.ctime * 1000)) }} ago
+                {{ calcTimeSince(new Date(video.ctime * 1000)) }}{{ language === LanguageType.English ?
+                  ' ' + $t('common.ago') :
+                  $t('common.ago') }}
               </div>
             </div>
           </div>

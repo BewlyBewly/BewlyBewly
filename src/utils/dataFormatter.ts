@@ -1,14 +1,34 @@
+import { language } from '~/logic'
+import { i18n } from '~/utils'
+export const { t } = i18n.global
+
 export const numFormatter = (num: number) => {
   const digits = 1 // specify number of digits after decimal
-  const lookup = [
-    { value: 1, symbol: '' },
-    { value: 1e3, symbol: 'K' },
-    { value: 1e6, symbol: 'M' },
-    { value: 1e9, symbol: 'G' },
-    { value: 1e12, symbol: 'T' },
-    { value: 1e15, symbol: 'P' },
-    { value: 1e18, symbol: 'E' },
-  ]
+  let lookup
+  if (language.value === 'en') {
+    lookup = [
+      { value: 1, symbol: '' },
+      { value: 1e3, symbol: 'K' },
+      { value: 1e6, symbol: 'M' },
+      { value: 1e9, symbol: 'B' },
+    ]
+  }
+  else if (language.value === 'cmn-SC') {
+    lookup = [
+      { value: 1, symbol: ' ' },
+      { value: 1e4, symbol: ' 万' },
+      { value: 1e7, symbol: ' 千万' },
+      { value: 1e8, symbol: ' 亿' },
+    ]
+  }
+  else {
+    lookup = [
+      { value: 1, symbol: ' ' },
+      { value: 1e4, symbol: ' 萬' },
+      { value: 1e7, symbol: ' 千萬' },
+      { value: 1e8, symbol: ' 億' },
+    ]
+  }
   const rx = /\.0+$|(\.[0-9]*[1-9])0+$/
   const item = lookup.slice().reverse().find((item) => {
     return num >= item.value
@@ -20,23 +40,23 @@ export const calcTimeSince = (date: any) => {
   const seconds = Math.floor(((new Date() as any) - date) / 1000)
   let interval = seconds / 31536000
   if (interval > 1)
-    return `${Math.floor(interval) > 1 ? `${Math.floor(interval)} years` : `${Math.floor(interval)} year`}`
+    return `${Math.floor(interval)} ${t('common.year', Math.floor(interval))}`
   interval = seconds / 2592000
   if (interval > 1)
-    return `${Math.floor(interval) > 1 ? `${Math.floor(interval)} months` : `${Math.floor(interval)} month`}`
+    return `${Math.floor(interval)} ${t('common.month', Math.floor(interval))}`
   interval = seconds / 604800
   if (interval > 1)
-    return `${Math.floor(interval) > 1 ? `${Math.floor(interval)} weeks` : `${Math.floor(interval)} week`}`
+    return `${Math.floor(interval)} ${t('common.week', Math.floor(interval))}`
   interval = seconds / 86400
   if (interval > 1)
-    return `${Math.floor(interval) > 1 ? `${Math.floor(interval)} days` : `${Math.floor(interval)} day`}`
+    return `${Math.floor(interval)} ${t('common.day', Math.floor(interval))}`
   interval = seconds / 3600
   if (interval > 1)
-    return `${Math.floor(interval) > 1 ? `${Math.floor(interval)} hours` : `${Math.floor(interval)} hour`}`
+    return `${Math.floor(interval)} ${t('common.hour', Math.floor(interval))}`
   interval = seconds / 60
   if (interval > 1)
-    return `${Math.floor(interval) > 1 ? `${Math.floor(interval)} minutes` : `${Math.floor(interval)} minute`}`
-  return `${Math.floor(seconds) > 1 ? `${Math.floor(seconds)} seconds` : `${Math.floor(seconds)} second`}`
+    return `${Math.floor(interval)} ${t('common.minute', Math.floor(interval))}`
+  return `${Math.floor(interval)} ${t('common.second', Math.floor(interval))}`
 }
 
 export const calcCurrentTime = (totalSeconds: number) => {

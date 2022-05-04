@@ -2,6 +2,15 @@ common:
   view_all: 查看更多
   loading: 加载中...
   undo: 还原
+  view: 次
+  ago: 前
+  year: 年
+  month: 个月
+  week: 个星期
+  day: 天
+  hour: 小时
+  minute: 分钟
+  second: 秒
 
 auth:
   err_tip: Failed to grant Access Key
