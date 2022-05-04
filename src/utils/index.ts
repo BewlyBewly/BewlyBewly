@@ -2,12 +2,7 @@ import { grantAccessKey, revokeAccessKey } from './auth-provider'
 import { SVG_ICONS } from './svgIcons'
 import { i18n } from './i18n'
 
-export {
-  grantAccessKey,
-  revokeAccessKey,
-  SVG_ICONS,
-  i18n,
-}
+export { grantAccessKey, revokeAccessKey, SVG_ICONS, i18n }
 export * from './dataFormatter'
 
 /**
@@ -28,7 +23,7 @@ export const getCookie = (name: string) => {
  */
 export const setCookie = (name: string, value: any, expDays: number) => {
   const date = new Date()
-  date.setTime(date.getTime() + (expDays * 24 * 60 * 60 * 1000))
+  date.setTime(date.getTime() + expDays * 24 * 60 * 60 * 1000)
   const expires = `expires=${date.toUTCString()}`
   document.cookie = `${name}=${value}; ${expires}; domain=.bilibili.com; path=/`
 }
