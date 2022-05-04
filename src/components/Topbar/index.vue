@@ -316,6 +316,8 @@ export default defineComponent({
             <tabler:clock />
           </a>
         </div>
+
+        <!-- Createive center -->
         <div class="right-side-item">
           <a
             href="https://member.bilibili.com/platform/home"
