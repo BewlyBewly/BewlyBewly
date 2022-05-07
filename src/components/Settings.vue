@@ -4,7 +4,6 @@ import { language, isShowTopbar, accessKey } from '~/logic'
 
 export default defineComponent({
   emits: ['close'],
-
   data() {
     return {
       isShowTopbar,
@@ -13,22 +12,27 @@ export default defineComponent({
       langs: [
         {
           value: 'en',
-          label: 'settings.select_language_opt.english',
+          label: this.$t('settings.select_language_opt.english'),
         },
         {
           value: 'cmn-SC',
-          label: 'settings.select_language_opt.mandarin_sc',
+          label: this.$t('settings.select_language_opt.mandarin_sc'),
         },
         {
           value: 'cmn-TC',
-          label: 'settings.select_language_opt.mandarin_tc',
+          label: this.$t('settings.select_language_opt.mandarin_tc'),
         },
         {
           value: 'jyut',
-          label: 'settings.select_language_opt.jyut',
+          label: this.$t('settings.select_language_opt.jyut'),
         },
       ],
     }
+  },
+  watch: {
+    language() {
+      this.$i18n.locale = this.language
+    },
   },
   methods: {
     close() {
@@ -40,9 +44,6 @@ export default defineComponent({
     },
     onRevoke() {
       revokeAccessKey()
-    },
-    onChangeLocale() {
-      this.$i18n.locale = language.value
     },
   },
 })
@@ -75,18 +76,13 @@ export default defineComponent({
       <div>
         {{ $t('settings.select_language') }}
       </div>
-      <select
+
+      <bew-select
         v-model="language"
-        @change="onChangeLocale()"
+        :options="langs"
+        w="full"
       >
-        <option
-          v-for="lang in langs"
-          :key="lang.value"
-          :value="lang.value"
-        >
-          {{ $t(lang.label) }}
-        </option>
-      </select>
+      </bew-select>
     </div>
 
     <div class="settings-item">
@@ -140,7 +136,11 @@ export default defineComponent({
     }
 
     > *:first-child {
-      @apply w-4/5 mr-4;
+      @apply w-5/7 mr-4;
+    }
+
+    > *:last-child {
+      @apply w-2/7;
     }
   }
 }
