@@ -103,7 +103,7 @@ export default defineComponent({
           cursor="pointer"
           @click="onClickOption(option)"
         >
-          {{ option.label }}
+          <span v-text="option.label"></span>
         </div>
       </div>
     </transition>
