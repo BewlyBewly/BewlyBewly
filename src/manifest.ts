@@ -9,7 +9,7 @@ export async function getManifest() {
   // update this file to update this manifest.json
   // can also be conditional based on your need
   const manifest: Manifest.WebExtensionManifest = {
-    manifest_version: 2,
+    manifest_version: 3,
     name: pkg.displayName || pkg.name,
     version: pkg.version,
     description: pkg.description,
@@ -23,8 +23,7 @@ export async function getManifest() {
     //   chrome_style: false,
     // },
     background: {
-      page: './dist/background/index.html',
-      persistent: false,
+      service_worker: './dist/background/index.mjs',
     },
     icons: {
       16: './assets/icon-512.png',
@@ -35,6 +34,8 @@ export async function getManifest() {
       'tabs',
       'storage',
       'activeTab',
+    ],
+    host_permissions: [
       '*://www.mcbbs.net/*',
       '*://*.hdslb.com/*',
       '*://*.bilibili.com/*',
@@ -45,7 +46,19 @@ export async function getManifest() {
         js: ['./dist/contentScripts/index.global.js'],
       },
     ],
-    web_accessible_resources: ['dist/contentScripts/style.css', 'assets/*'],
+    web_accessible_resources: [
+      {
+        resources: ['dist/contentScripts/style.css'],
+        matches: ['<all_urls>'],
+        // matches: ['assets/*'],
+      },
+    ],
+    content_security_policy: {
+      extension_pages: isDev
+        // this is required on dev for Vite script to load
+        ? `script-src 'self' http://localhost:${port}; object-src 'self' http://localhost:${port}`
+        : 'script-src \'self\'; object-src \'self\'',
+    },
   }
 
   if (isDev) {
@@ -54,9 +67,6 @@ export async function getManifest() {
     // see src/background/contentScriptHMR.ts
     delete manifest.content_scripts
     manifest.permissions?.push('webNavigation')
-
-    // this is required on dev for Vite script to load
-    manifest.content_security_policy = `script-src \'self\' http://localhost:${port}; object-src \'self\'`
   }
 
   return manifest
