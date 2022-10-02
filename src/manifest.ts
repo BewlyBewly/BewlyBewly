@@ -13,15 +13,14 @@ export async function getManifest() {
     name: pkg.displayName || pkg.name,
     version: pkg.version,
     description: pkg.description,
-    // browser_action: {
-    //   default_icon: './assets/icon-512.png',
-    //   default_popup: './dist/popup/index.html',
-    // },
-    // options_ui: {
-    //   page: './dist/options/index.html',
-    //   open_in_tab: true,
-    //   chrome_style: false,
-    // },
+    action: {
+      default_icon: './assets/icon-512.png',
+      default_popup: './dist/popup/index.html',
+    },
+    options_ui: {
+      page: './dist/options/index.html',
+      open_in_tab: true,
+    },
     background: {
       service_worker: './dist/background/index.mjs',
     },
