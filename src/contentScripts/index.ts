@@ -1,12 +1,13 @@
 /* eslint-disable no-console */
 import { onMessage } from 'webext-bridge'
 import { createApp } from 'vue'
+// import { router } from '~/contentScripts/router'
 
 // Firefox `browser.tabs.executeScript()` requires scripts return a primitive value
 
 import App from './views/App.vue'
-import { getCookie, i18n, setCookie, SVG_ICONS } from '~/utils'
-(() => {
+import { SVG_ICONS, getCookie, i18n, setCookie } from '~/utils'
+;(() => {
   console.info('[vitesse-webext] Hello world from content script')
 
   // communication example: send previous tab title from background page
@@ -26,10 +27,10 @@ import { getCookie, i18n, setCookie, SVG_ICONS } from '~/utils'
   ) {
     // if the current homepage is an old version, redirect to the new version
     // because they had some style errors in the old version
-    if (`${getCookie('i-wanna-go-back')}` === '2') {
-      setCookie('i-wanna-go-back', '-1', 1)
-      location.reload()
-    }
+    // if (`${getCookie('i-wanna-go-back')}` === '2') {
+    //   setCookie('i-wanna-go-back', '-1', 1)
+    //   location.reload()
+    // }
 
     const container = document.createElement('div')
     const root = document.createElement('div')

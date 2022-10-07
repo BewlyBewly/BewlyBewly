@@ -29,16 +29,8 @@ export async function getManifest() {
       48: './assets/icon-512.png',
       128: './assets/icon-512.png',
     },
-    permissions: [
-      'tabs',
-      'storage',
-      'activeTab',
-    ],
-    host_permissions: [
-      '*://www.mcbbs.net/*',
-      '*://*.hdslb.com/*',
-      '*://*.bilibili.com/*',
-    ],
+    permissions: ['tabs', 'storage', 'activeTab'],
+    host_permissions: ['*://www.mcbbs.net/*', '*://*.hdslb.com/*', '*://*.bilibili.com/*'],
     content_scripts: [
       {
         matches: ['http://www.bilibili.com/*', 'https://www.bilibili.com/*'],
@@ -47,15 +39,15 @@ export async function getManifest() {
     ],
     web_accessible_resources: [
       {
-        resources: ['dist/contentScripts/style.css'],
+        resources: ['dist/contentScripts/style.css', 'assets/*'],
         matches: ['<all_urls>'],
         // matches: ['assets/*'],
       },
     ],
     content_security_policy: {
       extension_pages: isDev
-        // this is required on dev for Vite script to load
-        ? `script-src 'self' http://localhost:${port}; object-src 'self' http://localhost:${port}`
+        ? // this is required on dev for Vite script to load
+          `script-src 'self' http://localhost:${port}; object-src 'self' http://localhost:${port}`
         : 'script-src \'self\'; object-src \'self\'',
     },
   }
@@ -65,7 +57,7 @@ export async function getManifest() {
     // we use a background script to always inject the latest version
     // see src/background/contentScriptHMR.ts
     delete manifest.content_scripts
-    manifest.permissions?.push('webNavigation')
+    manifest.permissions?.push('scripting', 'webNavigation')
   }
 
   return manifest

@@ -3,6 +3,9 @@ import browser from 'webextension-polyfill'
 import { onMessage, sendMessage } from 'webext-bridge'
 import { setupAllAPIs } from './apis'
 
+if (__DEV__)
+  import('./contentScriptHMR')
+
 browser.runtime.onInstalled.addListener((): void => {
   // eslint-disable-next-line no-console
   console.log('Extension installed')
@@ -12,7 +15,7 @@ let previousTabId = 0
 
 // communication example: send previous tab title from background page
 // see shim.d.ts for type declaration
-browser.tabs.onActivated.addListener(async({ tabId }) => {
+browser.tabs.onActivated.addListener(async ({ tabId }) => {
   if (!previousTabId) {
     previousTabId = tabId
     return
@@ -33,7 +36,7 @@ browser.tabs.onActivated.addListener(async({ tabId }) => {
   sendMessage('tab-prev', { title: tab.title }, { context: 'content-script', tabId })
 })
 
-onMessage('get-current-tab', async() => {
+onMessage('get-current-tab', async () => {
   try {
     const tab = await browser.tabs.get(previousTabId)
     return {
@@ -63,16 +66,17 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
       }
       `
 
-      browser.tabs.insertCSS(tabId, {
-        code: css,
+      browser.scripting.insertCSS(tabId, {
+        css: css,
         runAt: 'document_start',
+        target: {tabId: tabId},
         matchAboutBlank: true,
       })
 
       // If it not a macOS, we will inject CSS to design the scrollbar
       if (!navigator.userAgent.includes('Mac OS X')) {
-        browser.tabs.insertCSS(tabId, {
-          code: `
+        browser.scripting.insertCSS(tabId, {
+          css: `
             ::-webkit-scrollbar {
               width: 8px;
             }
@@ -91,6 +95,7 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
             }
           `,
           runAt: 'document_start',
+          target: {tabId: tabId},
           matchAboutBlank: true,
         })
       }
@@ -105,9 +110,10 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
       }
       `
 
-      browser.tabs.insertCSS(tabId, {
-        code: css,
+      browser.scripting.insertCSS(tabId, {
+        css: css,
         runAt: 'document_start',
+        target: {tabId: tabId},
         matchAboutBlank: true,
       })
     }
@@ -115,4 +121,4 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
 })
 
 // Setup APIs
-setupAllAPIs()
+// setupAllAPIs()
