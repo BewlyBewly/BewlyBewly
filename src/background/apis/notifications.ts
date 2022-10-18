@@ -1,3 +1,4 @@
+import browser from 'webextension-polyfill'
 import { API_URL } from '.'
 
 export const setupNotificationsAPIs = () => {

@@ -121,4 +121,4 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
 })
 
 // Setup APIs
-// setupAllAPIs()
+setupAllAPIs()

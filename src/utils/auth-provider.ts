@@ -1,4 +1,5 @@
 /* eslint-disable no-throw-literal */
+import browser from 'webextension-polyfill'
 import { accessKey } from '~/logic/storage'
 
 /**
@@ -21,18 +22,19 @@ export const grantAccessKey = (element: HTMLButtonElement): void => {
   const tip = 'Failed to grant Access Key'
 
   fetch(
-    'https://passport.bilibili.com/login/app/third?appkey=27eb53fc9058f8c3'
-      + '&api=https%3A%2F%2Fwww.mcbbs.net%2Ftemplate%2Fmcbbs%2Fimage%2Fspecial_photo_bg.png&sign=04224646d1fea004e79606d3b038c84a',
+    'https://passport.bilibili.com/login/app/third?appkey=27eb53fc9058f8c3' +
+      '&api=https%3A%2F%2Fwww.mcbbs.net%2Ftemplate%2Fmcbbs%2Fimage%2Fspecial_photo_bg.png&sign=04224646d1fea004e79606d3b038c84a',
     {
       method: 'GET',
       credentials: 'include',
-    },
+    }
   )
     .then(res => res.json())
-    .then((data) => {
+    .then(data => {
       if (data.code || !data.data) throw { tip, msg: data.msg || data.message || data.code, data }
       else if (!data.data.has_login) throw { tip, msg: 'Please login to bilibili first', data }
-      else if (!data.data.confirm_uri) throw { tip, msg: 'Unable to receive verified URL. Please go back and try againe.', data }
+      else if (!data.data.confirm_uri)
+        throw { tip, msg: 'Unable to receive verified URL. Please go back and try againe.', data }
       else return data.data.confirm_uri
     })
     .then(
@@ -42,16 +44,18 @@ export const grantAccessKey = (element: HTMLButtonElement): void => {
             .sendMessage({
               contentScriptQuery: 'getAccessKey',
               confirmUri: url,
-            }).then((res: {accessKey: string}) => {
+            })
+            .then((res: { accessKey: string }) => {
               accessKey.value = res.accessKey
               resolve()
-            }).catch((err: any) => {
+            })
+            .catch((err: any) => {
               // eslint-disable-next-line prefer-promise-reject-errors
               reject({ tip, msg: 'Failed to get Access Key', data: err })
             })
-        }),
+        })
     )
-    .catch((error) => {
+    .catch(error => {
       element.innerHTML = orginalInnerHTML
       element.style.pointerEvents = 'auto'
       element.disabled = false
