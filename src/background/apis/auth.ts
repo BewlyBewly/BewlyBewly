@@ -7,7 +7,9 @@ export const setupAuthAPIs = () => {
       fetch(url)
         .then(response => sendResponse({ accessKey: `${response.url}`.match(/access_key=([0-9a-z]{32})/)![1] }))
         .catch(error => console.error(error))
-    } else if (message.contentScriptQuery === 'logout') {
+      return true
+    }
+    else if (message.contentScriptQuery === 'logout') {
       const url = `https://passport.bilibili.com/login/exit/v2?biliCSRF=${message.biliCSRF}`
       fetch(url, {
         method: 'POST',
