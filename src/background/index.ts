@@ -52,10 +52,12 @@ onMessage('get-current-tab', async () => {
 
 // preinsert css
 browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChangeInfoType, tab: Tabs.Tab) => {
-  if (/https?:\/\/bilibili.com\/?$/.test(`${tab.url}`)
-  || /https?:\/\/www.bilibili.com\/?$/.test(`${tab.url}`)
-  || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(`${tab.url}`)
-  || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(`${tab.url}`)) {
+  if (
+    /https?:\/\/bilibili.com\/?$/.test(`${tab.url}`)
+    || /https?:\/\/www.bilibili.com\/?$/.test(`${tab.url}`)
+    || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(`${tab.url}`)
+    || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(`${tab.url}`)
+  ) {
     if (changInfo.status === 'loading') {
       const css = `
       body {
@@ -66,16 +68,16 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
       }
       `
 
-      browser.scripting.insertCSS(tabId, {
-        css: css,
-        runAt: 'document_start',
-        target: {tabId: tabId},
-        matchAboutBlank: true,
+      browser.scripting.insertCSS({
+        css,
+        target: {
+          tabId,
+        },
       })
 
       // If it not a macOS, we will inject CSS to design the scrollbar
       if (!navigator.userAgent.includes('Mac OS X')) {
-        browser.scripting.insertCSS(tabId, {
+        browser.scripting.insertCSS({
           css: `
             ::-webkit-scrollbar {
               width: 8px;
@@ -94,13 +96,12 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
               border-radius: 20px;
             }
           `,
-          runAt: 'document_start',
-          target: {tabId: tabId},
-          matchAboutBlank: true,
+          // runAt: 'document_start',
+          target: { tabId },
+          // matchAboutBlank: true,
         })
       }
     }
-
     else if (changInfo.status === 'complete') {
       const css = `
       body {
@@ -110,11 +111,9 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
       }
       `
 
-      browser.scripting.insertCSS(tabId, {
-        css: css,
-        runAt: 'document_start',
-        target: {tabId: tabId},
-        matchAboutBlank: true,
+      browser.scripting.insertCSS({
+        css,
+        target: { tabId },
       })
     }
   }
