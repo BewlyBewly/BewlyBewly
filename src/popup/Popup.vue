@@ -1,9 +1,8 @@
 <script lang="ts">
-import { isShowTopbar, storageDemo } from '~/logic/storage'
+import { storageDemo } from '~/logic/storage'
 export default defineComponent({
   data() {
     return {
-      isShowTopbar,
       storageDemo,
     }
   },
@@ -13,12 +12,6 @@ export default defineComponent({
     },
   },
 })
-// const isShowTopbar = false
-// console.log(isShowTopbar)
-
-// function openOptionsPage() {
-//   browser.runtime.openOptionsPage()
-// }
 </script>
 
 <template>
@@ -28,11 +21,6 @@ export default defineComponent({
     <p class="mt-2 opacity-50">
       This is the popup page
     </p>
-    <div>
-      Disable topbar (Compatible with bilibili evolved)
-      <input v-model="isShowTopbar" type="checkbox">
-      {{ isShowTopbar }}
-    </div>
     <button class="btn mt-2" @click="openOptionsPage">
       Open Options
     </button>
