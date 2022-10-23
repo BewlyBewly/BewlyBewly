@@ -1,4 +1,5 @@
 /* eslint-disable no-throw-literal */
+import browser from 'webextension-polyfill'
 import { accessKey } from '~/logic/storage'
 
 /**
@@ -30,26 +31,29 @@ export const grantAccessKey = (element: HTMLButtonElement): void => {
   )
     .then(res => res.json())
     .then((data) => {
-      if (data.code || !data.data) throw { tip, msg: data.msg || data.message || data.code, data }
-      else if (!data.data.has_login) throw { tip, msg: 'Please login to bilibili first', data }
-      else if (!data.data.confirm_uri) throw { tip, msg: 'Unable to receive verified URL. Please go back and try againe.', data }
+      if (data.code || !data.data)
+        throw { tip, msg: data.msg || data.message || data.code, data }
+      else if (!data.data.has_login)
+        throw { tip, msg: 'Please login to bilibili first', data }
+      else if (!data.data.confirm_uri)
+        throw { tip, msg: 'Unable to receive verified URL. Please go back and try againe.', data }
       else return data.data.confirm_uri
     })
     .then(
       url =>
-        new Promise<void>((resolve, reject) => {
-          browser.runtime
-            .sendMessage({
-              contentScriptQuery: 'getAccessKey',
-              confirmUri: url,
-            }).then((res: {accessKey: string}) => {
-              accessKey.value = res.accessKey
-              resolve()
-            }).catch((err: any) => {
-              // eslint-disable-next-line prefer-promise-reject-errors
-              reject({ tip, msg: 'Failed to get Access Key', data: err })
-            })
-        }),
+        browser.runtime
+          .sendMessage({
+            contentScriptQuery: 'getAccessKey',
+            confirmUri: url,
+          })
+          .then((res: { accessKey: string }) => {
+            accessKey.value = res.accessKey
+            return Promise.resolve()
+          })
+          .catch((err: any) => {
+            // eslint-disable-next-line prefer-promise-reject-errors
+            return Promise.reject({ tip, msg: 'Failed to get Access Key', data: err })
+          }),
     )
     .catch((error) => {
       element.innerHTML = orginalInnerHTML

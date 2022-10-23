@@ -5,6 +5,7 @@
   "volar.tsPluginStatus": false,
   "vite.autoStart": false,
   "editor.codeActionsOnSave": {
+
     "source.fixAll.eslint": true,
   },
   "files.associations": {

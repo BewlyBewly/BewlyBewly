@@ -1,21 +1,21 @@
-import { createSharedComposable } from '@vueuse/core'
-import { sendMessage, onMessage } from 'webext-bridge'
-import { browserSettings, Tabs } from 'webextension-polyfill'
+import type { Tabs } from 'webextension-polyfill'
+import browser from 'webextension-polyfill'
+import { onMessage, sendMessage } from 'webext-bridge'
 import { setupAllAPIs } from './apis'
 
-// only on dev mode
-if (import.meta.hot) {
-  // @ts-expect-error for background HMR
-  import('/@vite/client')
-  // load latest content script
+if (__DEV__)
   import('./contentScriptHMR')
-}
+
+browser.runtime.onInstalled.addListener((): void => {
+  // eslint-disable-next-line no-console
+  console.log('Extension installed')
+})
 
 let previousTabId = 0
 
 // communication example: send previous tab title from background page
 // see shim.d.ts for type declaration
-browser.tabs.onActivated.addListener(async({ tabId }) => {
+browser.tabs.onActivated.addListener(async ({ tabId }) => {
   if (!previousTabId) {
     previousTabId = tabId
     return
@@ -36,7 +36,7 @@ browser.tabs.onActivated.addListener(async({ tabId }) => {
   sendMessage('tab-prev', { title: tab.title }, { context: 'content-script', tabId })
 })
 
-onMessage('get-current-tab', async() => {
+onMessage('get-current-tab', async () => {
   try {
     const tab = await browser.tabs.get(previousTabId)
     return {
@@ -52,10 +52,12 @@ onMessage('get-current-tab', async() => {
 
 // preinsert css
 browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChangeInfoType, tab: Tabs.Tab) => {
-  if (/https?:\/\/bilibili.com\/?$/.test(`${tab.url}`)
-  || /https?:\/\/www.bilibili.com\/?$/.test(`${tab.url}`)
-  || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(`${tab.url}`)
-  || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(`${tab.url}`)) {
+  if (
+    /https?:\/\/bilibili.com\/?$/.test(`${tab.url}`)
+    || /https?:\/\/www.bilibili.com\/?$/.test(`${tab.url}`)
+    || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(`${tab.url}`)
+    || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(`${tab.url}`)
+  ) {
     if (changInfo.status === 'loading') {
       const css = `
       body {
@@ -66,16 +68,17 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
       }
       `
 
-      browser.tabs.insertCSS(tabId, {
-        code: css,
-        runAt: 'document_start',
-        matchAboutBlank: true,
+      browser.scripting.insertCSS({
+        css,
+        target: {
+          tabId,
+        },
       })
 
       // If it not a macOS, we will inject CSS to design the scrollbar
       if (!navigator.userAgent.includes('Mac OS X')) {
-        browser.tabs.insertCSS(tabId, {
-          code: `
+        browser.scripting.insertCSS({
+          css: `
             ::-webkit-scrollbar {
               width: 8px;
             }
@@ -93,12 +96,12 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
               border-radius: 20px;
             }
           `,
-          runAt: 'document_start',
-          matchAboutBlank: true,
+          // runAt: 'document_start',
+          target: { tabId },
+          // matchAboutBlank: true,
         })
       }
     }
-
     else if (changInfo.status === 'complete') {
       const css = `
       body {
@@ -108,10 +111,9 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
       }
       `
 
-      browser.tabs.insertCSS(tabId, {
-        code: css,
-        runAt: 'document_start',
-        matchAboutBlank: true,
+      browser.scripting.insertCSS({
+        css,
+        target: { tabId },
       })
     }
   }
