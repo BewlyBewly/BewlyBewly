@@ -1,5 +1,6 @@
 <script lang="ts">
-import { addSearchHistory, getSearchHistory, HistoryItem, removeSearchHistory, SuggestionItem } from './search-history-provider'
+import type { HistoryItem, SuggestionItem } from './searchHistoryProvider'
+import { addSearchHistory, getSearchHistory, removeSearchHistory } from './searchHistoryProvider'
 
 export default defineComponent({
   data() {
@@ -121,7 +122,7 @@ export default defineComponent({
       h="full"
       content="~"
       @click="isFocus = false"
-    ></div>
+    />
     <div class="search-bar">
       <input
         v-model.trim="keyword"
@@ -131,7 +132,7 @@ export default defineComponent({
         @keyup.enter="goToSearchPage(keyword)"
         @keyup.up="onUp"
         @keyup.down="onDown"
-      />
+      >
       <button class="search-btn" @click="goToSearchPage(keyword)">
         <tabler:search />
       </button>

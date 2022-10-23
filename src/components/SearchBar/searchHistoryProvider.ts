@@ -34,11 +34,13 @@ export const addSearchHistory = (historyItem: HistoryItem) => {
       hasSameValue = true
     }
   })
-  if (!hasSameValue) history.unshift(historyItem)
+  if (!hasSameValue)
+    history.unshift(historyItem)
 
   // if out of limit, remove overflow items
   history = history.filter((item, index) => {
-    if (index < SEARCH_HISTORY_LIMIT) return item
+    if (index < SEARCH_HISTORY_LIMIT)
+      return item
     else return false
   })
 
