@@ -1,6 +1,6 @@
 <script lang="ts">
 import { accessKey, language } from '~/logic/index'
-import { numFormatter, calcTimeSince, calcCurrentTime } from '~/utils'
+import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils'
 import { LanguageType } from '~/types'
 
 export default defineComponent({
@@ -24,7 +24,7 @@ export default defineComponent({
       this.getRecommendVideos()
     }, 2000)
 
-    window.onscroll = async() => {
+    window.onscroll = async () => {
       if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
         if (!this.isLoading)
           return
@@ -162,7 +162,7 @@ export default defineComponent({
                 video.param,
                 video.mid,
                 video.tid,
-                video.tag.tag_id
+                video.tag.tag_id,
               )"
             >
               {{ $t('common.undo') }}
@@ -170,27 +170,27 @@ export default defineComponent({
           </div>
         </template>
         <template v-else>
-          <a :href="'/video/av' + video.uri.split('/')[3]" target="_blank">
+          <a :href="`/video/av${video.uri.split('/')[3]}`" target="_blank">
             <div class="thumbnail">
               <div class="duration">{{ calcCurrentTime(video.duration) }}</div>
               <div
                 class="overflow-hidden w-full relative rounded-$bew-radius z-1"
                 style="aspect-ratio: 16/9"
               >
-                <img class="cover" :src="video.cover.replace('http:', '') + '@672w_378h_1c'" loading="lazy" />
+                <img class="cover" :src="`${video.cover.replace('http:', '')}@672w_378h_1c`" loading="lazy">
               </div>
-              <img class="cover-shadow" :src="video.cover.replace('http:', '') + '@672w_378h_1c'" loading="lazy" />
+              <img class="cover-shadow" :src="`${video.cover.replace('http:', '')}@672w_378h_1c`" loading="lazy">
             </div>
           </a>
           <div class="detail">
             <div class="flex">
               <a class="avatar" cursor="pointer" @click="gotoChannel(video.mid)">
                 <img
-                  :src="(video.face + '').replace('http:', '') + '@60w_60h_1c'"
+                  :src="`${(`${video.face}`).replace('http:', '')}@60w_60h_1c`"
                   width="48"
                   height="48"
                   loading="lazy"
-                />
+                >
               </a>
             </div>
             <div class="meta">
@@ -223,7 +223,7 @@ export default defineComponent({
                     h="full"
                     z="30"
                     @click="video.openControl = false"
-                  ></div>
+                  />
 
                   <div
                     pos="absolute top-9 right-0"
@@ -265,13 +265,13 @@ export default defineComponent({
                 {{ video.name }}
               </div>
               <div class="video-info">
-                {{ numFormatter(video.play) }}{{ language === LanguageType.English ?
-                  ' ' + $t('common.view', video.play) :
-                  $t('common.view', video.play) }}
+                {{ numFormatter(video.play) }}{{ language === LanguageType.English
+                  ? ` ${$t('common.view', video.play)}`
+                  : $t('common.view', video.play) }}
                 <span class="text-xs font-light">•</span>
-                {{ calcTimeSince(new Date(video.ctime * 1000)) }}{{ language === LanguageType.English ?
-                  ' ' + $t('common.ago') :
-                  $t('common.ago') }}
+                {{ calcTimeSince(new Date(video.ctime * 1000)) }}{{ language === LanguageType.English
+                  ? ` ${$t('common.ago')}`
+                  : $t('common.ago') }}
               </div>
             </div>
           </div>
@@ -280,7 +280,7 @@ export default defineComponent({
     </transition-group>
   </div>
 
-  <loading v-if="isLoading"></loading>
+  <loading v-if="isLoading" />
 
   <div
     v-if="!isLoading"
@@ -336,13 +336,12 @@ export default defineComponent({
 
   .cover-shadow {
     @apply absolute top-0 left-0 w-full h-full filter -z-1
-      pointer-events-none duration-600 rounded-$bew-radius
-      opacity-80;
+      pointer-events-none duration-600 rounded-$bew-radius opacity-70;
     aspect-ratio: 16/9;
   }
 
   &:hover .cover-shadow {
-    @apply blur-lg transform;
+    @apply blur-2xl transform;
   }
 
   .thumbnail {

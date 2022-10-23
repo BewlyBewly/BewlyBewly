@@ -1,8 +1,9 @@
 <script lang="ts">
 import { isNewArticle, isNewVideo, setLastestOffsetID } from './notify'
 import { language } from '~/logic'
-import { getUserID, calcTimeSince } from '~/utils'
-import { MomentItem, MomentType, LanguageType } from '~/types'
+import { calcTimeSince, getUserID } from '~/utils'
+import type { MomentItem } from '~/types'
+import { LanguageType, MomentType } from '~/types'
 
 export default defineComponent({
   data() {
@@ -38,7 +39,8 @@ export default defineComponent({
   },
   watch: {
     selectedTab(newVal: number, oldVal: number) {
-      if (newVal === oldVal) return
+      if (newVal === oldVal)
+        return
 
       this.scrollToTop(this.$refs.momentsWrap as HTMLElement, 300)
       this.moments = []
@@ -73,7 +75,8 @@ export default defineComponent({
   methods: {
     onClickTab(tabId: number) {
       // Prevent changing tab when loading, cuz it will cause a bug
-      if (this.isLoading) return
+      if (this.isLoading)
+        return
 
       this.selectedTab = tabId
       this.momentTabs.forEach((tab) => {
@@ -225,7 +228,8 @@ export default defineComponent({
      */
     scrollToTop(element: HTMLElement, duration: number) {
     // cancel if already on top
-      if (element.scrollTop === 0) return
+      if (element.scrollTop === 0)
+        return
 
       const cosParameter = element.scrollTop / 2
       let scrollCount = 0
@@ -235,7 +239,8 @@ export default defineComponent({
         if (oldTimestamp !== 0) {
           // if duration is 0 scrollCount will be Infinity
           scrollCount += Math.PI * (newTimestamp - oldTimestamp) / duration
-          if (scrollCount >= Math.PI) return element.scrollTop = 0
+          if (scrollCount >= Math.PI)
+            return element.scrollTop = 0
           element.scrollTop = cosParameter + cosParameter * Math.cos(scrollCount)
         }
         oldTimestamp = newTimestamp
@@ -289,10 +294,10 @@ export default defineComponent({
     <!-- moments wrapper -->
     <div ref="momentsWrap" h="430px" overflow="y-scroll" p="x-4">
       <!-- loading -->
-      <loading v-if="isLoading && moments.length === 0" h="full" flex="~" items="center"></loading>
+      <loading v-if="isLoading && moments.length === 0" h="full" flex="~" items="center" />
 
       <!-- empty -->
-      <empty v-if="!isLoading && moments.length === 0" w="full" h="full"></empty>
+      <empty v-if="!isLoading && moments.length === 0" w="full" h="full" />
 
       <!-- moments -->
       <transition-group name="list">
@@ -322,13 +327,13 @@ export default defineComponent({
             bg="$bew-theme-color"
             pos="absolute -top-10px -left-10px"
             style="box-shadow: 0 0 4px var(--bew-theme-color)"
-          ></div>
+          />
 
           <a
-            :href="moment.type === MomentType.Video ? 'https://space.bilibili.com/' + moment.uid : moment.url"
+            :href="moment.type === MomentType.Video ? `https://space.bilibili.com/${moment.uid}` : moment.url"
             target="_blank"
           >
-            <img :src="moment.face + '@60w_60h_1c'" rounded="$bew-radius" w="40px" h="40px" m="r-4" />
+            <img :src="`${moment.face}@60w_60h_1c`" rounded="$bew-radius" w="40px" h="40px" m="r-4">
           </a>
 
           <div flex="~" justify="between" w="full">
@@ -337,7 +342,7 @@ export default defineComponent({
               <div v-if="moment.type !== MomentType.Bangumi" text="$bew-text-2 sm" m="y-2">
                 <!-- Videos and articles -->
                 <div v-if="selectedTab === 0 || selectedTab === 2">
-                  {{ calcTimeSince(new Date(moment.ctime * 1000)) }}{{ language === LanguageType.English ? ' ' + $t('common.ago') : $t('common.ago') }}
+                  {{ calcTimeSince(new Date(moment.ctime * 1000)) }}{{ language === LanguageType.English ? ` ${$t('common.ago')}` : $t('common.ago') }}
                 </div>
                 <!-- Live -->
                 <div v-else-if="selectedTab === 1" text="$bew-theme-color" font="bold" flex="~" items="center">
@@ -346,13 +351,13 @@ export default defineComponent({
               </div>
 
             </div>
-            <img :src="moment.cover + '@128w_72h_1c'" w="82px" h="46px" m="l-4" rounded="$bew-radius" />
+            <img :src="`${moment.cover}@128w_72h_1c`" w="82px" h="46px" m="l-4" rounded="$bew-radius">
           </div>
         </a>
       </transition-group>
 
       <!-- loading -->
-      <loading v-if="isLoading && moments.length !== 0" m="-t-4"></loading>
+      <loading v-if="isLoading && moments.length !== 0" m="-t-4" />
     </div>
   </div>
 </template>

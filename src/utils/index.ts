@@ -1,4 +1,4 @@
-import { grantAccessKey, revokeAccessKey } from './auth-provider'
+import { grantAccessKey, revokeAccessKey } from './authProvider'
 import { SVG_ICONS } from './svgIcons'
 import { i18n } from './i18n'
 
@@ -13,7 +13,8 @@ export * from './dataFormatter'
 export const getCookie = (name: string) => {
   const value = `; ${document.cookie}`
   const parts: Array<string> = value.split(`; ${name}=`)
-  if (parts.length === 2) return parts?.pop()?.split(';').shift()
+  if (parts.length === 2)
+    return parts?.pop()?.split(';').shift()
 }
 
 /**
