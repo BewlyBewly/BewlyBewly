@@ -1,5 +1,6 @@
 <script lang="ts">
 import MomentsDropdown from './MomentsDropdown.vue'
+import HistoryDropdown from './HistoryDropdown.vue'
 import { updateInterval } from './notify'
 import { getUserID } from '~/utils'
 
@@ -15,6 +16,7 @@ export default defineComponent({
       showNotificationsDropDown: false,
       showMomentsDropDown: false,
       showUploadDropDown: false,
+      showHistoryDropDown: false,
       isLogin: !!getUserID(),
       unReadmessage: {},
       unReadDm: {},
@@ -34,10 +36,8 @@ export default defineComponent({
     this.initUserPanel()
 
     document.addEventListener('scroll', () => {
-      if (window.scrollY > 0)
-        this.showTopbarMask = true
-      else
-        this.showTopbarMask = false
+      if (window.scrollY > 0) this.showTopbarMask = true
+      else this.showTopbarMask = false
     })
   },
   methods: {
@@ -82,38 +82,40 @@ export default defineComponent({
           contentScriptQuery: 'getUserInfo',
         })
         .then((res) => {
-          if (res.code === 0)
-            this.userInfo = res.data
+          if (res.code === 0) this.userInfo = res.data
         })
     },
     async getUnreadMessageCount() {
-      if (!this.isLogin)
-        return
+      if (!this.isLogin) return
 
       await browser.runtime
         .sendMessage({
           contentScriptQuery: 'getUnreadMsg',
-        }).then(res => this.unReadmessage = res.data)
+        })
+        .then((res) => (this.unReadmessage = res.data))
 
       await browser.runtime
         .sendMessage({
           contentScriptQuery: 'getUnreadDm',
-        }).then(res => this.unReadDm = res.data)
+        })
+        .then((res) => (this.unReadDm = res.data))
 
       this.unReadmessageCount = 0
-      for (const [key, value] of Object.entries(this.unReadmessage))
+      for (const [key, value] of Object.entries(this.unReadmessage)) {
         if (key !== 'up') this.unReadmessageCount += parseInt(`${value}`)
+      }
+
       for (const [, value] of Object.entries(this.unReadDm))
         this.unReadmessageCount += parseInt(`${value}`)
     },
     getNewMomentsCount() {
-      if (!this.isLogin)
-        return
+      if (!this.isLogin) return
 
       browser.runtime
         .sendMessage({
           contentScriptQuery: 'getNewMomentsCount',
-        }).then((res) => {
+        })
+        .then((res) => {
           this.newMomentsCount = res.data.update_info.item.count
         })
     },
@@ -138,7 +140,7 @@ export default defineComponent({
         opacity="100"
         pointer="none"
         style="background: linear-gradient(var(--bew-bg), transparent)"
-      ></div>
+      />
     </transition>
 
     <div
@@ -146,10 +148,7 @@ export default defineComponent({
       @mouseenter.self="showLogoMenuDropdown()"
       @mouseleave.self="closeLogoMenuDropdown()"
     >
-      <div
-        ref="logo"
-        class="logo"
-      >
+      <div ref="logo" class="logo">
         <svg
           t="1645466458357"
           class="icon"
@@ -166,7 +165,12 @@ export default defineComponent({
           />
         </svg>
 
-        <tabler:chevron-down w="!4" h="!4" m="l-4" icon="stroke-4 fill-$bew-text-1" />
+        <tabler:chevron-down
+          w="!4"
+          h="!4"
+          m="l-4"
+          icon="stroke-4 fill-$bew-text-1"
+        />
       </div>
       <transition name="slide">
         <logo-menu-dropdown
@@ -174,16 +178,12 @@ export default defineComponent({
           class="bew-popover"
           pos="!left-0 !top-70px"
           transform="!translate-x-0"
-        ></logo-menu-dropdown>
+        />
       </transition>
     </div>
 
     <!-- search bar -->
-    <div
-      flex="~"
-      w="full"
-      justify="md:center <md:end"
-    >
+    <div flex="~" w="full" justify="md:center <md:end">
       <!-- <button
         class="icon-btn"
         text="$bew-text-1 2xl"
@@ -192,16 +192,16 @@ export default defineComponent({
       >
         <tabler:search />
       </button> -->
-      <search-bar
-        ref="searchBar"
-      ></search-bar>
+      <search-bar ref="searchBar" />
     </div>
 
     <!-- right content -->
     <div class="right-side">
       <div v-if="!isLogin" class="right-side-item">
         <a href="https://passport.bilibili.com/login" class="login">
-          <ic-outline-account-circle class="text-base mr-2" />{{ $t('topbar.sign_in') }}
+          <ic-outline-account-circle class="text-base mr-2" />{{
+            $t('topbar.sign_in')
+          }}
         </a>
       </div>
       <template v-if="isLogin">
@@ -214,18 +214,28 @@ export default defineComponent({
           <a
             id="avatar-img"
             ref="avatarImg"
-            :href="'https://space.bilibili.com/' + mid"
+            :href="`https://space.bilibili.com/${mid}`"
             target="_blank"
             class="rounded-full z-1 w-40px h-40px bg-$bew-fill-3 bg-cover bg-center"
-            :style="{ backgroundImage: `url(${(userInfo.face + '').replace('http:', '')})` }"
-          ></a>
+            :style="{
+              backgroundImage: `url(${`${userInfo.face}`.replace(
+                'http:',
+                ''
+              )})`,
+            }"
+          />
           <div
             id="avatar-shadow"
             ref="avatarShadow"
             class="absolute top-0 rounded-full z-0 w-40px h-40px filter blur-sm bg-cover bg-center"
             opacity="80"
-            :style="{ backgroundImage: `url(${(userInfo.face + '').replace('http:', '')})` }"
-          ></div>
+            :style="{
+              backgroundImage: `url(${`${userInfo.face}`.replace(
+                'http:',
+                ''
+              )})`,
+            }"
+          />
           <transition name="slide">
             <user-panel-dropdown
               v-if="showUserPanel"
@@ -233,7 +243,7 @@ export default defineComponent({
               :user-info="userInfo"
               after:h="!0"
               class="bew-popover"
-            ></user-panel-dropdown>
+            />
           </transition>
         </div>
 
@@ -243,10 +253,7 @@ export default defineComponent({
           @mouseenter="showNotificationsDropDown = true"
           @mouseleave="showNotificationsDropDown = false"
         >
-          <div
-            v-if="unReadmessageCount !== 0"
-            class="unread-message"
-          >
+          <div v-if="unReadmessageCount !== 0" class="unread-message">
             {{ unReadmessageCount > 999 ? '999+' : unReadmessageCount }}
           </div>
           <a
@@ -262,7 +269,7 @@ export default defineComponent({
               v-if="showNotificationsDropDown"
               ref="notificationsDropdown"
               class="bew-popover"
-            ></notifications-dropdown>
+            />
           </transition>
         </div>
 
@@ -272,10 +279,7 @@ export default defineComponent({
           @mouseenter="showMomentsDropDown = true"
           @mouseleave="showMomentsDropDown = false"
         >
-          <div
-            v-if="newMomentsCount !== 0"
-            class="unread-message"
-          >
+          <div v-if="newMomentsCount !== 0" class="unread-message">
             {{ newMomentsCount > 999 ? '999+' : newMomentsCount }}
           </div>
           <a
@@ -287,18 +291,14 @@ export default defineComponent({
           </a>
 
           <transition name="slide">
-            <moments-dropdown
-              v-if="showMomentsDropDown"
-              class="bew-popover"
-            >
-            </moments-dropdown>
+            <MomentsDropdown v-if="showMomentsDropDown" class="bew-popover" />
           </transition>
         </div>
 
         <!-- Favorites -->
         <div class="right-side-item">
           <a
-            :href="'https://space.bilibili.com/' + mid + '/favlist'"
+            :href="`https://space.bilibili.com/${mid}/favlist`"
             target="_blank"
             :title="$t('topbar.favorites')"
           >
@@ -307,7 +307,11 @@ export default defineComponent({
         </div>
 
         <!-- History -->
-        <div class="right-side-item">
+        <div
+          class="right-side-item"
+          @mouseenter="showHistoryDropDown = true"
+          @mouseleave="showHistoryDropDown = false"
+        >
           <a
             href="https://www.bilibili.com/account/history"
             target="_blank"
@@ -315,6 +319,10 @@ export default defineComponent({
           >
             <tabler:clock />
           </a>
+
+          <transition name="slide">
+            <HistoryDropdown v-if="showHistoryDropDown" class="bew-popover" />
+          </transition>
         </div>
 
         <!-- Createive center -->
@@ -343,10 +351,9 @@ export default defineComponent({
             p="xl:auto <xl:unset"
           >
             <tabler:upload />
-            <span
-              m="l-2"
-              display="xl:block <xl:hidden"
-            >{{ $t('topbar.upload') }}</span>
+            <span m="l-2" display="xl:block <xl:hidden">{{
+              $t('topbar.upload')
+            }}</span>
           </a>
 
           <transition name="slide">
@@ -355,7 +362,7 @@ export default defineComponent({
               class="bew-popover"
               pos="!left-auto !-right-2"
               transform="!translate-x-0"
-            ></upload-dropdown>
+            />
           </transition>
         </div>
       </template>

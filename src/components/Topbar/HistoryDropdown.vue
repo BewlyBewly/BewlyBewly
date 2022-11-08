@@ -1,8 +1,9 @@
 <script lang="ts">
 import { isNewArticle, isNewVideo, setLastestOffsetID } from './notify'
 import { language } from '~/logic'
-import { getUserID, calcTimeSince } from '~/utils'
-import { MomentItem, MomentType, LanguageType } from '~/types'
+import { calcTimeSince, getUserID } from '~/utils'
+import type { MomentItem } from '~/types'
+import { LanguageType, MomentType } from '~/types'
 
 export default defineComponent({
   data() {
@@ -38,7 +39,8 @@ export default defineComponent({
   },
   watch: {
     selectedTab(newVal: number, oldVal: number) {
-      if (newVal === oldVal) return
+      if (newVal === oldVal)
+        return
 
       this.scrollToTop(this.$refs.momentsWrap as HTMLElement, 300)
       this.moments = []
@@ -59,8 +61,12 @@ export default defineComponent({
 
     const momentsWrap = this.$refs.momentsWrap as HTMLDivElement
     momentsWrap.addEventListener('scroll', () => {
-      if (momentsWrap.clientHeight + momentsWrap.scrollTop >= momentsWrap.scrollHeight
-        && this.moments.length > 0 && !this.isLoading) {
+      if (
+        momentsWrap.clientHeight + momentsWrap.scrollTop
+          >= momentsWrap.scrollHeight
+        && this.moments.length > 0
+        && !this.isLoading
+      ) {
         if (this.selectedTab === 0 && !this.noMoreContent)
           this.getHistoryMoments([MomentType.Video, MomentType.Bangumi])
         else if (this.selectedTab === 1 && !this.noMoreContent)
@@ -73,99 +79,139 @@ export default defineComponent({
   methods: {
     onClickTab(tabId: number) {
       // Prevent changing tab when loading, cuz it will cause a bug
-      if (this.isLoading) return
+      if (this.isLoading)
+        return
 
       this.selectedTab = tabId
       this.momentTabs.forEach((tab) => {
         tab.isSelected = tab.id === tabId
       })
     },
+    getHistoryList() {
+      this.isLoading = true
+      browser.runtime
+        .sendMessage({
+          contentScriptQuery: 'getHistoryList',
+          // uid: getUserID(),
+          // typeList,
+        })
+        .then((res) => {
+          if (res.code === 0) {
+            if (this.moments.length !== 0 && res.data.cards.length < 20) {
+              this.isLoading = false
+              this.noMoreContent = true
+              return
+            }
+
+            res.data.cards.forEach((item: any) => {
+              this.pushItemIntoMoments(item)
+            })
+
+            // set this lastest offset id, which will clear the new moment's marker point
+            // after you watch these moments.
+            if (this.selectedTab === 0)
+              setLastestOffsetID(MomentType.Video, this.moments[0].id)
+            else if (this.selectedTab === 2)
+              setLastestOffsetID(MomentType.Article, this.moments[0].id)
+
+            this.noMoreContent = false
+          }
+          this.isLoading = false
+        })
+    },
+
     getNewMoments(typeList: number[]) {
       this.isLoading = true
-      browser.runtime.sendMessage({
-        contentScriptQuery: 'getNewMoments',
-        uid: getUserID(),
-        typeList,
-      }).then((res) => {
-        if (res.code === 0) {
-          if (this.moments.length !== 0 && res.data.cards.length < 20) {
-            this.isLoading = false
-            this.noMoreContent = true
-            return
+      browser.runtime
+        .sendMessage({
+          contentScriptQuery: 'getNewMoments',
+          uid: getUserID(),
+          typeList,
+        })
+        .then((res) => {
+          if (res.code === 0) {
+            if (this.moments.length !== 0 && res.data.cards.length < 20) {
+              this.isLoading = false
+              this.noMoreContent = true
+              return
+            }
+
+            res.data.cards.forEach((item: any) => {
+              this.pushItemIntoMoments(item)
+            })
+
+            // set this lastest offset id, which will clear the new moment's marker point
+            // after you watch these moments.
+            if (this.selectedTab === 0)
+              setLastestOffsetID(MomentType.Video, this.moments[0].id)
+            else if (this.selectedTab === 2)
+              setLastestOffsetID(MomentType.Article, this.moments[0].id)
+
+            this.noMoreContent = false
           }
-
-          res.data.cards.forEach((item: any) => {
-            this.pushItemIntoMoments(item)
-          })
-
-          // set this lastest offset id, which will clear the new moment's marker point
-          // after you watch these moments.
-          if (this.selectedTab === 0)
-            setLastestOffsetID(MomentType.Video, this.moments[0].id)
-          else if (this.selectedTab === 2)
-            setLastestOffsetID(MomentType.Article, this.moments[0].id)
-
-          this.noMoreContent = false
-        }
-        this.isLoading = false
-      })
+          this.isLoading = false
+        })
     },
     getHistoryMoments(typeList: number[]) {
       this.isLoading = true
-      browser.runtime.sendMessage({
-        contentScriptQuery: 'getHistoryMoments',
-        uid: getUserID(),
-        typeList,
-        offsetDynamicID: this.moments[this.moments.length - 1].dynamic_id_str,
-      }).then((res) => {
-        if (res.code === 0) {
-          if (res.data.has_more === 0) {
-            this.isLoading = false
-            this.noMoreContent = true
-            return
-          }
+      browser.runtime
+        .sendMessage({
+          contentScriptQuery: 'getHistoryMoments',
+          uid: getUserID(),
+          typeList,
+          offsetDynamicID: this.moments[this.moments.length - 1].dynamic_id_str,
+        })
+        .then((res) => {
+          if (res.code === 0) {
+            if (res.data.has_more === 0) {
+              this.isLoading = false
+              this.noMoreContent = true
+              return
+            }
 
-          res.data.cards.forEach((item: any) => {
-            this.pushItemIntoMoments(item)
-          })
-          this.noMoreContent = false
-        }
-        this.isLoading = false
-      })
+            res.data.cards.forEach((item: any) => {
+              this.pushItemIntoMoments(item)
+            })
+            this.noMoreContent = false
+          }
+          this.isLoading = false
+        })
     },
     getLiveMoments(page: number) {
       this.isLoading = true
-      browser.runtime.sendMessage({
-        contentScriptQuery: 'getLiveMoments',
-        page,
-        pageSize: 10,
-      }).then((res) => {
-        if (res.code === 0) {
-          // if the length of this list is less then the pageSize, it means that it have no more contents
-          if (this.moments.length !== 0 && res.data.list.length < 10) {
-            this.isLoading = false
-            this.noMoreContent = true
-            return
-          }
+      browser.runtime
+        .sendMessage({
+          contentScriptQuery: 'getLiveMoments',
+          page,
+          pageSize: 10,
+        })
+        .then((res) => {
+          if (res.code === 0) {
+            // if the length of this list is less then the pageSize, it means that it have no more contents
+            if (this.moments.length !== 0 && res.data.list.length < 10) {
+              this.isLoading = false
+              this.noMoreContent = true
+              return
+            }
 
-          // if the length of this list is equal to the pageSize, this means that it may have the next page.
-          if (res.data.list.length === 10)
-            this.livePage++
-          res.data.list.forEach((item: any) => {
-            this.moments.push({
-              id: item.roomid,
-              uid: item.uid,
-              name: item.uname,
-              face: item.face,
-              url: item.link,
-              title: item.title,
-              cover: item.pic,
-            } as MomentItem)
-          })
-          this.noMoreContent = false
-        }
-        this.isLoading = false
-      })
+            // if the length of this list is equal to the pageSize, this means that it may have the next page.
+            if (res.data.list.length === 10)
+              this.livePage++
+            res.data.list.forEach((item: any) => {
+              this.moments.push({
+                id: item.roomid,
+                uid: item.uid,
+                name: item.uname,
+                face: item.face,
+                url: item.link,
+                title: item.title,
+                cover: item.pic,
+              } as MomentItem)
+            })
+            this.noMoreContent = false
+          }
+          this.isLoading = false
+        })
     },
     pushItemIntoMoments(item: any) {
       const card = JSON.parse(item.card)
@@ -224,8 +270,9 @@ export default defineComponent({
      * smooth scroll to the top of the html element
      */
     scrollToTop(element: HTMLElement, duration: number) {
-    // cancel if already on top
-      if (element.scrollTop === 0) return
+      // cancel if already on top
+      if (element.scrollTop === 0)
+        return
 
       const cosParameter = element.scrollTop / 2
       let scrollCount = 0
@@ -234,9 +281,11 @@ export default defineComponent({
       function step(newTimestamp: number) {
         if (oldTimestamp !== 0) {
           // if duration is 0 scrollCount will be Infinity
-          scrollCount += Math.PI * (newTimestamp - oldTimestamp) / duration
-          if (scrollCount >= Math.PI) return element.scrollTop = 0
-          element.scrollTop = cosParameter + cosParameter * Math.cos(scrollCount)
+          scrollCount += (Math.PI * (newTimestamp - oldTimestamp)) / duration
+          if (scrollCount >= Math.PI)
+            return (element.scrollTop = 0)
+          element.scrollTop
+            = cosParameter + cosParameter * Math.cos(scrollCount)
         }
         oldTimestamp = newTimestamp
         window.requestAnimationFrame(step)
@@ -289,10 +338,15 @@ export default defineComponent({
     <!-- moments wrapper -->
     <div ref="momentsWrap" h="430px" overflow="y-scroll" p="x-4">
       <!-- loading -->
-      <loading v-if="isLoading && moments.length === 0" h="full" flex="~" items="center"></loading>
+      <loading
+        v-if="isLoading && moments.length === 0"
+        h="full"
+        flex="~"
+        items="center"
+      />
 
       <!-- empty -->
-      <empty v-if="!isLoading && moments.length === 0" w="full" h="full"></empty>
+      <empty v-if="!isLoading && moments.length === 0" w="full" h="full" />
 
       <!-- moments -->
       <transition-group name="list">
@@ -322,37 +376,69 @@ export default defineComponent({
             bg="$bew-theme-color"
             pos="absolute -top-10px -left-10px"
             style="box-shadow: 0 0 4px var(--bew-theme-color)"
-          ></div>
+          />
 
           <a
-            :href="moment.type === MomentType.Video ? 'https://space.bilibili.com/' + moment.uid : moment.url"
+            :href="
+              moment.type === MomentType.Video
+                ? `https://space.bilibili.com/${moment.uid}`
+                : moment.url
+            "
             target="_blank"
           >
-            <img :src="moment.face + '@60w_60h_1c'" rounded="$bew-radius" w="40px" h="40px" m="r-4" />
+            <img
+              :src="`${moment.face}@60w_60h_1c`"
+              rounded="$bew-radius"
+              w="40px"
+              h="40px"
+              m="r-4"
+            >
           </a>
 
           <div flex="~" justify="between" w="full">
             <div>
-              <span>{{ moment.name }}</span> {{ $t('topbar.moments_dropdown.uploaded') }}{{ moment.title }}
-              <div v-if="moment.type !== MomentType.Bangumi" text="$bew-text-2 sm" m="y-2">
+              <span>{{ moment.name }}</span>
+              {{ $t('topbar.moments_dropdown.uploaded') }}{{ moment.title }}
+              <div
+                v-if="moment.type !== MomentType.Bangumi"
+                text="$bew-text-2 sm"
+                m="y-2"
+              >
                 <!-- Videos and articles -->
                 <div v-if="selectedTab === 0 || selectedTab === 2">
-                  {{ calcTimeSince(new Date(moment.ctime * 1000)) }}{{ language === LanguageType.English ? ' ' + $t('common.ago') : $t('common.ago') }}
+                  {{ calcTimeSince(new Date(moment.ctime * 1000))
+                  }}{{
+                    language === LanguageType.English
+                      ? ` ${$t('common.ago')}`
+                      : $t('common.ago')
+                  }}
                 </div>
                 <!-- Live -->
-                <div v-else-if="selectedTab === 1" text="$bew-theme-color" font="bold" flex="~" items="center">
-                  <fluent:live-24-filled m="r-2" /> {{ $t('topbar.moments_dropdown.live_status') }}
+                <div
+                  v-else-if="selectedTab === 1"
+                  text="$bew-theme-color"
+                  font="bold"
+                  flex="~"
+                  items="center"
+                >
+                  <fluent:live-24-filled m="r-2" />
+                  {{ $t('topbar.moments_dropdown.live_status') }}
                 </div>
               </div>
-
             </div>
-            <img :src="moment.cover + '@128w_72h_1c'" w="82px" h="46px" m="l-4" rounded="$bew-radius" />
+            <img
+              :src="`${moment.cover}@128w_72h_1c`"
+              w="82px"
+              h="46px"
+              m="l-4"
+              rounded="$bew-radius"
+            >
           </div>
         </a>
       </transition-group>
 
       <!-- loading -->
-      <loading v-if="isLoading && moments.length !== 0" m="-t-4"></loading>
+      <loading v-if="isLoading && moments.length !== 0" m="-t-4" />
     </div>
   </div>
 </template>
