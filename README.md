@@ -6,6 +6,9 @@
 
 <p align="center">Bringing you the suggested videos on the bilibili homepage, clean and simple.</p>
 
+<details>
+ <summary>開發中, 佛系更新 = =</summary>
+
 <p align="center">
 <img width="655" src="https://user-images.githubusercontent.com/33394391/160250313-6a3db903-53c5-431a-8ddd-80a50725087a.png"><br/>
 </p>
@@ -72,3 +75,5 @@ And then pack files under `extension`
 [Bilibili-Evolved](https://github.com/the1812/Bilibili-Evolved)
 
 [bilibili-API-collect](https://github.com/SocialSisterYi/bilibili-API-collect)
+
+</details>
