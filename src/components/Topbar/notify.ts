@@ -1,5 +1,5 @@
-import { MomentType } from '~/types'
-import { getUserID, getCookie, setCookie } from '~/utils'
+import { MomentType } from './types'
+import { getCookie, getUserID, setCookie } from '~/utils'
 
 /** Update the time interval of topbar notifications and moments counts */
 export const updateInterval = 1000 * 60 * 5 // Updated every 5 minutes

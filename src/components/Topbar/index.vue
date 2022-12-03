@@ -5,7 +5,7 @@ import { updateInterval } from './notify'
 import { getUserID } from '~/utils'
 
 export default defineComponent({
-  components: { MomentsDropdown },
+  components: { MomentsDropdown, HistoryDropdown },
   data() {
     return {
       mid: getUserID() || '',
@@ -16,7 +16,7 @@ export default defineComponent({
       showNotificationsDropDown: false,
       showMomentsDropDown: false,
       showUploadDropDown: false,
-      showHistoryDropDown: false,
+      showHistoryDropDown: true,
       isLogin: !!getUserID(),
       unReadmessage: {},
       unReadDm: {},
@@ -36,7 +36,8 @@ export default defineComponent({
     this.initUserPanel()
 
     document.addEventListener('scroll', () => {
-      if (window.scrollY > 0) this.showTopbarMask = true
+      if (window.scrollY > 0)
+        this.showTopbarMask = true
       else this.showTopbarMask = false
     })
   },
@@ -82,34 +83,38 @@ export default defineComponent({
           contentScriptQuery: 'getUserInfo',
         })
         .then((res) => {
-          if (res.code === 0) this.userInfo = res.data
+          if (res.code === 0)
+            this.userInfo = res.data
         })
     },
     async getUnreadMessageCount() {
-      if (!this.isLogin) return
+      if (!this.isLogin)
+        return
 
       await browser.runtime
         .sendMessage({
           contentScriptQuery: 'getUnreadMsg',
         })
-        .then((res) => (this.unReadmessage = res.data))
+        .then(res => (this.unReadmessage = res.data))
 
       await browser.runtime
         .sendMessage({
           contentScriptQuery: 'getUnreadDm',
         })
-        .then((res) => (this.unReadDm = res.data))
+        .then(res => (this.unReadDm = res.data))
 
       this.unReadmessageCount = 0
       for (const [key, value] of Object.entries(this.unReadmessage)) {
-        if (key !== 'up') this.unReadmessageCount += parseInt(`${value}`)
+        if (key !== 'up')
+          this.unReadmessageCount += parseInt(`${value}`)
       }
 
       for (const [, value] of Object.entries(this.unReadDm))
         this.unReadmessageCount += parseInt(`${value}`)
     },
     getNewMomentsCount() {
-      if (!this.isLogin) return
+      if (!this.isLogin)
+        return
 
       browser.runtime
         .sendMessage({
@@ -220,7 +225,7 @@ export default defineComponent({
             :style="{
               backgroundImage: `url(${`${userInfo.face}`.replace(
                 'http:',
-                ''
+                '',
               )})`,
             }"
           />
@@ -232,7 +237,7 @@ export default defineComponent({
             :style="{
               backgroundImage: `url(${`${userInfo.face}`.replace(
                 'http:',
-                ''
+                '',
               )})`,
             }"
           />
@@ -310,7 +315,7 @@ export default defineComponent({
         <div
           class="right-side-item"
           @mouseenter="showHistoryDropDown = true"
-          @mouseleave="showHistoryDropDown = false"
+          @mouseleave="showHistoryDropDown = true"
         >
           <a
             href="https://www.bilibili.com/account/history"

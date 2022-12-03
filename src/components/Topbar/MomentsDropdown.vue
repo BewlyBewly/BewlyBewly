@@ -3,10 +3,11 @@ import { useI18n } from 'vue-i18n'
 import type { Ref, UnwrapNestedRefs } from 'vue'
 import { onMounted, reactive, ref, watch } from 'vue'
 import { isNewArticle, isNewVideo, setLastestOffsetID } from './notify'
+import { MomentType } from './types'
+import type { MomentItem } from './types'
 import { language } from '~/logic'
 import { calcTimeSince, getUserID } from '~/utils'
-import type { MomentItem } from '~/types'
-import { LanguageType, MomentType } from '~/types'
+import { LanguageType } from '~/enums/appEnums'
 const { t } = useI18n()
 
 const moments = reactive<Array<MomentItem>>([]) as UnwrapNestedRefs<
