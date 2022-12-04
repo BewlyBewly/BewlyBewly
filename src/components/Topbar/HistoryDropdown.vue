@@ -26,14 +26,17 @@ const historyTabs = reactive([
     isSelected: false,
   },
 ])
-const selectedTab = ref<number>(0)
+/**
+ * Active tab (0: archive, 1: live, 2: article)
+ */
+const activatedTab = ref<number>(0)
 const isLoading = ref<boolean>(false)
 // when noMoreContent is true, the user can't scroll down to load more content
 const noMoreContent = ref<boolean>(false)
 const livePage = ref<number>(1)
 const historysWrap = ref<HTMLElement>() as Ref<HTMLElement>
 
-watch(selectedTab, (newVal: number, oldVal: number) => {
+watch(activatedTab, (newVal: number, oldVal: number) => {
   if (newVal === oldVal)
     return
 
@@ -66,19 +69,19 @@ onMounted(() => {
         && historys.length > 0
         && !isLoading.value
       ) {
-        if (selectedTab.value === 0 && !noMoreContent.value) {
+        if (activatedTab.value === 0 && !noMoreContent.value) {
           getHistoryList(
             HistoryType.Archive,
             historys[historys.length - 1].view_at,
           )
         }
-        else if (selectedTab.value === 1 && !noMoreContent.value) {
+        else if (activatedTab.value === 1 && !noMoreContent.value) {
           getHistoryList(
             HistoryType.Live,
             historys[historys.length - 1].view_at,
           )
         }
-        else if (selectedTab.value === 2 && !noMoreContent.value) {
+        else if (activatedTab.value === 2 && !noMoreContent.value) {
           getHistoryList(
             HistoryType.Article,
             historys[historys.length - 1].view_at,
@@ -94,10 +97,29 @@ function onClickTab(tabId: number) {
   if (isLoading.value)
     return
 
-  selectedTab.value = tabId
+  activatedTab.value = tabId
   historyTabs.forEach((tab) => {
     tab.isSelected = tab.id === tabId
   })
+}
+
+/**
+ * Return the URL of the history item
+ * @param item history item
+ * @return {string} url
+ */
+function getHistoryUrl(item: HistoryItem) {
+  // Video
+  if (activatedTab.value === 0)
+    return item.history.bvid
+  // Live
+  else if (activatedTab.value === 1)
+    return `//live.bilibili.com/${item.history.oid}`
+  // Article
+  else if (activatedTab.value === 2)
+    return `/read/cv${item.history.oid}`
+
+  return ''
 }
 
 /**
@@ -165,7 +187,6 @@ function scrollToTop(element: HTMLElement, duration: number) {
     rounded="$bew-radius"
     pos="relative"
     style="box-shadow: var(--bew-shadow-2)"
-    overflow="hidden"
   >
     <!-- top bar -->
     <div
@@ -216,6 +237,7 @@ function scrollToTop(element: HTMLElement, duration: number) {
         h="full"
         flex="~"
         items="center"
+        border="rounded-$bew-radius"
       />
 
       <!-- empty -->
@@ -226,11 +248,7 @@ function scrollToTop(element: HTMLElement, duration: number) {
         <a
           v-for="historyItem in historys"
           :key="historyItem.kid"
-          :href="
-            historyItem.history.bvid
-              ? historyItem.history.bvid
-              : `/read/cv${historyItem.history.oid}`
-          "
+          :href="getHistoryUrl(historyItem)"
           target="_blank"
           hover:bg="$bew-fill-2"
           border="rounded-$bew-radius"
@@ -249,7 +267,7 @@ function scrollToTop(element: HTMLElement, duration: number) {
               overflow="hidden"
             >
               <!-- Video -->
-              <template v-if="selectedTab === 0">
+              <template v-if="activatedTab === 0">
                 <div pos="relative">
                   <img
                     w="150px"
@@ -282,7 +300,7 @@ function scrollToTop(element: HTMLElement, duration: number) {
               </template>
 
               <!-- Live -->
-              <template v-else-if="selectedTab === 1">
+              <template v-else-if="activatedTab === 1">
                 <div pos="relative">
                   <img
                     w="150px"
@@ -291,11 +309,34 @@ function scrollToTop(element: HTMLElement, duration: number) {
                     :alt="historyItem.title"
                     bg="contain"
                   >
+                  <div
+                    v-if="historyItem.live_status === 1"
+                    pos="absolute top-0 left-0"
+                    bg="rose-600"
+                    text="xs white"
+                    p="x-2 y-1"
+                    m="1"
+                    border="rounded-$bew-radius-half"
+                    font="semibold"
+                  >
+                    LIVE
+                  </div>
+                  <div
+                    v-else
+                    pos="absolute top-0 left-0"
+                    bg="gray-500 opacity-55"
+                    text="xs white"
+                    p="x-2 y-1"
+                    m="1"
+                    border="rounded-$bew-radius-half"
+                  >
+                    Offline
+                  </div>
                 </div>
               </template>
 
               <!-- Article -->
-              <div v-else-if="selectedTab === 2">
+              <div v-else-if="activatedTab === 2">
                 <img
                   w="150px"
                   class="aspect-video"

@@ -16,7 +16,7 @@ export default defineComponent({
       showNotificationsDropDown: false,
       showMomentsDropDown: false,
       showUploadDropDown: false,
-      showHistoryDropDown: true,
+      showHistoryDropDown: false,
       isLogin: !!getUserID(),
       unReadmessage: {},
       unReadDm: {},
@@ -315,7 +315,7 @@ export default defineComponent({
         <div
           class="right-side-item"
           @mouseenter="showHistoryDropDown = true"
-          @mouseleave="showHistoryDropDown = true"
+          @mouseleave="showHistoryDropDown = false"
         >
           <a
             href="https://www.bilibili.com/account/history"
