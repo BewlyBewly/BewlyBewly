@@ -17,7 +17,7 @@ const imgURL = browser.runtime.getURL('/assets/loading.gif')
       w="46px"
       h="46px"
       m="r-2"
-    />
+    >
     {{ $t('common.loading') }}
   </div>
 </template>

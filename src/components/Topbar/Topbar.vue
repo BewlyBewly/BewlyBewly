@@ -136,7 +136,7 @@ export default defineComponent({
     p="lg:x-23 <lg:x-16 y-2"
     w="screen"
   >
-    <transition name="topbar">
+    <Transition name="topbar">
       <div
         v-show="showTopbarMask"
         class="fixed top-0 left-0"
@@ -146,7 +146,7 @@ export default defineComponent({
         pointer="none"
         style="background: linear-gradient(var(--bew-bg), transparent)"
       />
-    </transition>
+    </Transition>
 
     <div
       class="left-side"
@@ -177,14 +177,14 @@ export default defineComponent({
           icon="stroke-4 fill-$bew-text-1"
         />
       </div>
-      <transition name="slide">
-        <logo-menu-dropdown
+      <Transition name="slide">
+        <LogoMenuDropdown
           v-if="showLogoDropDown"
           class="bew-popover"
           pos="!left-0 !top-70px"
           transform="!translate-x-0"
         />
-      </transition>
+      </Transition>
     </div>
 
     <!-- search bar -->
@@ -197,14 +197,14 @@ export default defineComponent({
       >
         <tabler:search />
       </button> -->
-      <search-bar ref="searchBar" />
+      <SearchBar ref="searchBar" />
     </div>
 
     <!-- right content -->
     <div class="right-side">
       <div v-if="!isLogin" class="right-side-item">
         <a href="https://passport.bilibili.com/login" class="login">
-          <ic-outline-account-circle class="text-base mr-2" />{{
+          <ic:outline-account-circle class="text-base mr-2" />{{
             $t('topbar.sign_in')
           }}
         </a>
@@ -241,15 +241,15 @@ export default defineComponent({
               )})`,
             }"
           />
-          <transition name="slide">
-            <user-panel-dropdown
+          <Transition name="slide">
+            <UserPanelDropdown
               v-if="showUserPanel"
               ref="userPanelDropdown"
               :user-info="userInfo"
               after:h="!0"
               class="bew-popover"
             />
-          </transition>
+          </Transition>
         </div>
 
         <!-- Notifications -->
@@ -269,13 +269,13 @@ export default defineComponent({
             <tabler:bell />
           </a>
 
-          <transition name="slide">
-            <notifications-dropdown
+          <Transition name="slide">
+            <NotificationsDropdown
               v-if="showNotificationsDropDown"
               ref="notificationsDropdown"
               class="bew-popover"
             />
-          </transition>
+          </Transition>
         </div>
 
         <!-- Moments -->
@@ -295,9 +295,9 @@ export default defineComponent({
             <tabler:windmill />
           </a>
 
-          <transition name="slide">
+          <Transition name="slide">
             <MomentsDropdown v-if="showMomentsDropDown" class="bew-popover" />
-          </transition>
+          </Transition>
         </div>
 
         <!-- Favorites -->
@@ -325,9 +325,9 @@ export default defineComponent({
             <tabler:clock />
           </a>
 
-          <transition name="slide">
+          <Transition name="slide">
             <HistoryDropdown v-if="showHistoryDropDown" class="bew-popover" />
-          </transition>
+          </Transition>
         </div>
 
         <!-- Createive center -->
@@ -361,14 +361,14 @@ export default defineComponent({
             }}</span>
           </a>
 
-          <transition name="slide">
-            <upload-dropdown
+          <Transition name="slide">
+            <UploadDropdown
               v-if="showUploadDropDown"
               class="bew-popover"
               pos="!left-auto !-right-2"
               transform="!translate-x-0"
             />
-          </transition>
+          </Transition>
         </div>
       </template>
     </div>
