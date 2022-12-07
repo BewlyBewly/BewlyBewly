@@ -1,131 +1,142 @@
-<script lang="ts">
+<script setup lang="ts">
+import type { Ref, UnwrapNestedRefs } from 'vue'
+import { Transition, onMounted, watch } from 'vue'
+import type { UnReadDm, UnReadMessage, UserInfo } from '../topbar/types'
 import MomentsDropdown from './MomentsDropdown.vue'
 import HistoryDropdown from './HistoryDropdown.vue'
 import { updateInterval } from './notify'
 import { getUserID } from '~/utils'
 
-export default defineComponent({
-  components: { MomentsDropdown, HistoryDropdown },
-  data() {
-    return {
-      mid: getUserID() || '',
-      userInfo: {} as any,
-      showLogoDropDown: false,
-      showUserPanel: false,
-      showTopbarMask: false,
-      showNotificationsDropDown: false,
-      showMomentsDropDown: false,
-      showUploadDropDown: false,
-      showHistoryDropDown: false,
-      isLogin: !!getUserID(),
-      unReadmessage: {},
-      unReadDm: {},
-      unReadmessageCount: 0,
-      newMomentsCount: 0,
-    }
+const mid = getUserID() || ''
+const userInfo = reactive<UserInfo | {}>({}) as UnwrapNestedRefs<UserInfo>
+const showLogoDropDown = ref<boolean>(false)
+const showUserPanel = ref<boolean>(false)
+const showTopbarMask = ref<boolean>(false)
+const showNotificationsDropDown = ref<boolean>(false)
+const showMomentsDropDown = ref<boolean>(false)
+const showUploadDropDown = ref<boolean>(false)
+const showHistoryDropDown = ref<boolean>(false)
+const isLogin = ref<boolean>(!!getUserID())
+const unReadMessage = reactive<UnReadMessage | {}>({}) as UnwrapNestedRefs<UnReadMessage>
+const unReadDm = reactive<UnReadDm | {}>({} as UnwrapNestedRefs<UnReadDm>)
+const unReadMessageCount = ref<number>(0)
+const newMomentsCount = ref<number>(0)
+
+const logo = ref<HTMLElement>() as Ref<HTMLElement>
+const avatarImg = ref<HTMLImageElement>() as Ref<HTMLImageElement>
+const avatarShadow = ref<HTMLImageElement>() as Ref<HTMLImageElement>
+
+watch(
+  () => showNotificationsDropDown,
+  (newValue, oldValue) => {
+    getUnreadMessageCount()
   },
-  watch: {
-    showNotificationsDropDown(val) {
-      this.getUnreadMessageCount()
-    },
-    showMomentsDropDown(val) {
-      this.getNewMomentsCount()
-    },
+)
+
+watch(
+  () => showMomentsDropDown,
+  (newValue, oldValue) => {
+    getNewMomentsCount()
   },
-  mounted() {
-    this.initUserPanel()
+)
 
-    document.addEventListener('scroll', () => {
-      if (window.scrollY > 0)
-        this.showTopbarMask = true
-      else this.showTopbarMask = false
-    })
-  },
-  methods: {
-    initUserPanel() {
-      this.getUserInfo()
-      this.getUnreadMessageCount()
-      this.getNewMomentsCount()
+onMounted(() => {
+  initUserPanel()
 
-      // automatically update notifications and moments count
-      setInterval(() => {
-        this.getUnreadMessageCount()
-        this.getNewMomentsCount()
-      }, updateInterval)
-    },
-    showLogoMenuDropdown() {
-      const logo = this.$refs.logo as HTMLElement
-      logo.classList.add('hover')
-      this.showLogoDropDown = true
-    },
-    closeLogoMenuDropdown() {
-      const logo = this.$refs.logo as HTMLElement
-      logo.classList.remove('hover')
-      this.showLogoDropDown = false
-    },
-    openUserPanel() {
-      this.showUserPanel = true
-      const avatarImg = this.$refs.avatarImg as HTMLImageElement
-      const avatarShadow = this.$refs.avatarShadow as HTMLImageElement
-      avatarImg.classList.add('hover')
-      avatarShadow.classList.add('hover')
-    },
-    closeUserPanel() {
-      this.showUserPanel = false
-      const avatarImg = this.$refs.avatarImg as HTMLImageElement
-      const avatarShadow = this.$refs.avatarShadow as HTMLImageElement
-      avatarImg.classList.remove('hover')
-      avatarShadow.classList.remove('hover')
-    },
-    getUserInfo() {
-      browser.runtime
-        .sendMessage({
-          contentScriptQuery: 'getUserInfo',
-        })
-        .then((res) => {
-          if (res.code === 0)
-            this.userInfo = res.data
-        })
-    },
-    async getUnreadMessageCount() {
-      if (!this.isLogin)
-        return
-
-      await browser.runtime
-        .sendMessage({
-          contentScriptQuery: 'getUnreadMsg',
-        })
-        .then(res => (this.unReadmessage = res.data))
-
-      await browser.runtime
-        .sendMessage({
-          contentScriptQuery: 'getUnreadDm',
-        })
-        .then(res => (this.unReadDm = res.data))
-
-      this.unReadmessageCount = 0
-      for (const [key, value] of Object.entries(this.unReadmessage)) {
-        if (key !== 'up')
-          this.unReadmessageCount += parseInt(`${value}`)
-      }
-
-      for (const [, value] of Object.entries(this.unReadDm))
-        this.unReadmessageCount += parseInt(`${value}`)
-    },
-    getNewMomentsCount() {
-      if (!this.isLogin)
-        return
-
-      browser.runtime
-        .sendMessage({
-          contentScriptQuery: 'getNewMomentsCount',
-        })
-        .then((res) => {
-          this.newMomentsCount = res.data.update_info.item.count
-        })
-    },
-  },
+  document.addEventListener('scroll', () => {
+    if (window.scrollY > 0)
+      showTopbarMask.value = true
+    else showTopbarMask.value = false
+  })
 })
+
+function initUserPanel() {
+  getUserInfo()
+  getUnreadMessageCount()
+  getNewMomentsCount()
+
+  // automatically update notifications and moments count
+  setInterval(() => {
+    getUnreadMessageCount()
+    getNewMomentsCount()
+  }, updateInterval)
+}
+
+function showLogoMenuDropdown() {
+  logo.value.classList.add('hover')
+  showLogoDropDown.value = true
+}
+
+function closeLogoMenuDropdown() {
+  logo.value.classList.remove('hover')
+  showLogoDropDown.value = false
+}
+
+function openUserPanel() {
+  showUserPanel.value = true
+  avatarImg.value.classList.add('hover')
+  avatarShadow.value.classList.add('hover')
+}
+
+function closeUserPanel() {
+  showUserPanel.value = false
+  avatarImg.value.classList.remove('hover')
+  avatarShadow.value.classList.remove('hover')
+}
+
+function getUserInfo() {
+  browser.runtime
+    .sendMessage({
+      contentScriptQuery: 'getUserInfo',
+    })
+    .then((res) => {
+      if (res.code === 0)
+        Object.assign(userInfo, res.data)
+    })
+}
+
+async function getUnreadMessageCount() {
+  if (!isLogin)
+    return
+
+  await browser.runtime
+    .sendMessage({
+      contentScriptQuery: 'getUnreadMsg',
+    })
+    .then((res) => {
+      Object.assign(unReadMessage, res.data)
+    })
+
+  await browser.runtime
+    .sendMessage({
+      contentScriptQuery: 'getUnreadDm',
+    })
+    .then(res => Object.assign(unReadDm, res.data))
+
+  unReadMessageCount.value = 0
+
+  Object.keys(unReadMessage).forEach((key) => {
+    if (key !== 'up')
+      unReadMessageCount.value += unReadMessage[key as keyof typeof unReadMessage]
+  })
+
+  Object.keys(unReadDm).forEach((key) => {
+    unReadMessageCount.value += unReadDm[key as keyof typeof unReadDm]
+  })
+}
+
+function getNewMomentsCount() {
+  if (!isLogin)
+    return
+
+  browser.runtime
+    .sendMessage({
+      contentScriptQuery: 'getNewMomentsCount',
+    })
+    .then((res) => {
+      newMomentsCount.value = res.data.update_info.item.count
+    })
+}
 </script>
 
 <template>
@@ -258,8 +269,8 @@ export default defineComponent({
           @mouseenter="showNotificationsDropDown = true"
           @mouseleave="showNotificationsDropDown = false"
         >
-          <div v-if="unReadmessageCount !== 0" class="unread-message">
-            {{ unReadmessageCount > 999 ? '999+' : unReadmessageCount }}
+          <div v-if="unReadMessageCount !== 0" class="unread-message">
+            {{ unReadMessageCount > 999 ? '999+' : unReadMessageCount }}
           </div>
           <a
             href="https://message.bilibili.com"
@@ -463,7 +474,7 @@ export default defineComponent({
       @apply duration-300;
 
       &.hover {
-        @apply transform scale-230 translate-y-4;
+        @apply transform scale-230 "!translate-y-30px";
       }
     }
 
