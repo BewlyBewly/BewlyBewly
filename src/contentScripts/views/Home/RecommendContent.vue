@@ -1,7 +1,7 @@
 <script lang="ts">
 import { accessKey, language } from '~/logic/index'
 import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils'
-import { LanguageType } from '~/types'
+import { LanguageType } from '~/enums/appEnums'
 
 export default defineComponent({
   data() {
@@ -25,13 +25,17 @@ export default defineComponent({
     }, 2000)
 
     window.onscroll = async () => {
-      if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
+      if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
         if (!this.isLoading)
           return
 
-        if (this.videoList.length <= (this.MAX_LIMIT - 20)) {
-          await this.getRecommendVideos(this.videoList[this.videoList.length - 1]?.idx)
-          await this.getRecommendVideos(this.videoList[this.videoList.length - 1]?.idx)
+        if (this.videoList.length <= this.MAX_LIMIT - 20) {
+          await this.getRecommendVideos(
+            this.videoList[this.videoList.length - 1]?.idx,
+          )
+          await this.getRecommendVideos(
+            this.videoList[this.videoList.length - 1]?.idx,
+          )
         }
         else {
           this.isLoading = false
@@ -41,12 +45,11 @@ export default defineComponent({
   },
   methods: {
     async getRecommendVideos(idx?: number) {
-      const response = await browser.runtime
-        .sendMessage({
-          contentScriptQuery: 'getRecommendVideos',
-          idx,
-          accessKey: this.accessKey,
-        })
+      const response = await browser.runtime.sendMessage({
+        contentScriptQuery: 'getRecommendVideos',
+        idx,
+        accessKey: this.accessKey,
+      })
 
       if (response.code === 0) {
         const resData = [] as any[]
@@ -72,7 +75,15 @@ export default defineComponent({
     gotoVideo(uri: string) {
       window.open(`/video/av${uri.split('/')[3]}`)
     },
-    submitDislike(videoIndex: number, reasonID: number, goto: string, id: string, mid: string, rid: string, tagID: string) {
+    submitDislike(
+      videoIndex: number,
+      reasonID: number,
+      goto: string,
+      id: string,
+      mid: string,
+      rid: string,
+      tagID: string,
+    ) {
       browser.runtime
         .sendMessage({
           contentScriptQuery: 'submitDislike',
@@ -91,7 +102,15 @@ export default defineComponent({
           }
         })
     },
-    undoDislike(videoIndex: number, reasonID: number, goto: string, id: string, mid: string, rid: string, tagID: string) {
+    undoDislike(
+      videoIndex: number,
+      reasonID: number,
+      goto: string,
+      id: string,
+      mid: string,
+      rid: string,
+      tagID: string,
+    ) {
       browser.runtime
         .sendMessage({
           contentScriptQuery: 'undoDislike',
@@ -121,12 +140,14 @@ export default defineComponent({
       done()
     },
   },
-
 })
 </script>
 
 <template>
-  <div m="lg:x-22 <lg:x-16 b-0 t-0" grid="~ xl:cols-4 lg:cols-3 md:cols-2 gap-4">
+  <div
+    m="lg:x-22 <lg:x-16 b-0 t-0"
+    grid="~ xl:cols-4 lg:cols-3 md:cols-2 gap-4"
+  >
     <transition-group name="list" @enter="onEnter">
       <div
         v-for="(video, index) in videoList"
@@ -148,22 +169,24 @@ export default defineComponent({
             border="solid $bew-fill-1"
             text="$bew-text-3 sm center"
             rounded="$bew-radius"
-            style="aspect-ratio: 16/9;"
+            style="aspect-ratio: 16/9"
           >
             {{ $t('home.video_removed') }}
             <button
               text="$bew-theme-color base"
               font="bold"
               m="t-4"
-              @click="undoDislike(
-                index,
-                video.selectedReasonID,
-                video.goto,
-                video.param,
-                video.mid,
-                video.tid,
-                video.tag.tag_id,
-              )"
+              @click="
+                undoDislike(
+                  index,
+                  video.selectedReasonID,
+                  video.goto,
+                  video.param,
+                  video.mid,
+                  video.tid,
+                  video.tag.tag_id,
+                )
+              "
             >
               {{ $t('common.undo') }}
             </button>
@@ -177,16 +200,28 @@ export default defineComponent({
                 class="overflow-hidden w-full relative rounded-$bew-radius z-1"
                 style="aspect-ratio: 16/9"
               >
-                <img class="cover" :src="`${video.cover.replace('http:', '')}@672w_378h_1c`" loading="lazy">
+                <img
+                  class="cover"
+                  :src="`${video.cover.replace('http:', '')}@672w_378h_1c`"
+                  loading="lazy"
+                >
               </div>
-              <img class="cover-shadow" :src="`${video.cover.replace('http:', '')}@672w_378h_1c`" loading="lazy">
+              <img
+                class="cover-shadow"
+                :src="`${video.cover.replace('http:', '')}@672w_378h_1c`"
+                loading="lazy"
+              >
             </div>
           </a>
           <div class="detail">
             <div class="flex">
-              <a class="avatar" cursor="pointer" @click="gotoChannel(video.mid)">
+              <a
+                class="avatar"
+                cursor="pointer"
+                @click="gotoChannel(video.mid)"
+              >
                 <img
-                  :src="`${(`${video.face}`).replace('http:', '')}@60w_60h_1c`"
+                  :src="`${`${video.face}`.replace('http:', '')}@60w_60h_1c`"
                   width="48"
                   height="48"
                   loading="lazy"
@@ -232,7 +267,10 @@ export default defineComponent({
                     w="180px"
                     bg="$bew-content-1"
                     rounded="$bew-radius"
-                    style="box-shadow: var(--bew-shadow-2); backdrop-filter: var(--bew-filter-glass);"
+                    style="
+                      box-shadow: var(--bew-shadow-2);
+                      backdrop-filter: var(--bew-filter-glass);
+                    "
                   >
                     <p p="2" text="$bew-text-3">
                       {{ $t('home.not_interested_in') }}
@@ -247,13 +285,17 @@ export default defineComponent({
                         hover:bg="$bew-fill-2"
                         transition="all duration-300"
                         rounded="$bew-radius"
-                        @click.stop="submitDislike(index,
-                                                   reason.reason_id,
-                                                   video.goto,
-                                                   video.param,
-                                                   video.mid,
-                                                   video.tid,
-                                                   video.tag.tag_id)"
+                        @click.stop="
+                          submitDislike(
+                            index,
+                            reason.reason_id,
+                            video.goto,
+                            video.param,
+                            video.mid,
+                            video.tid,
+                            video.tag.tag_id,
+                          )
+                        "
                       >
                         {{ reason.reason_name }}
                       </li>
@@ -265,13 +307,19 @@ export default defineComponent({
                 {{ video.name }}
               </div>
               <div class="video-info">
-                {{ numFormatter(video.play) }}{{ language === LanguageType.English
-                  ? ` ${$t('common.view', video.play)}`
-                  : $t('common.view', video.play) }}
+                {{ numFormatter(video.play)
+                }}{{
+                  language === LanguageType.English
+                    ? ` ${$t('common.view', video.play)}`
+                    : $t('common.view', video.play)
+                }}
                 <span class="text-xs font-light">•</span>
-                {{ calcTimeSince(new Date(video.ctime * 1000)) }}{{ language === LanguageType.English
-                  ? ` ${$t('common.ago')}`
-                  : $t('common.ago') }}
+                {{ calcTimeSince(new Date(video.ctime * 1000))
+                }}{{
+                  language === LanguageType.English
+                    ? ` ${$t('common.ago')}`
+                    : $t('common.ago')
+                }}
               </div>
             </div>
           </div>
@@ -292,7 +340,7 @@ export default defineComponent({
     justify="center"
   >
     <button
-      style="box-shadow: var(--bew-shadow-1);"
+      style="box-shadow: var(--bew-shadow-1)"
       bg="!$bew-theme-color"
       w="60px"
       h="60px"

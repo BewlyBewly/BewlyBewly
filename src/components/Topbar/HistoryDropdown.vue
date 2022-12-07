@@ -1,250 +1,183 @@
-<script lang="ts">
-import { isNewArticle, isNewVideo, setLastestOffsetID } from './notify'
-import { language } from '~/logic'
-import { getUserID, calcTimeSince } from '~/utils'
-import { MomentItem, MomentType, LanguageType } from '~/types'
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+import type { Ref } from 'vue'
+import { onMounted, reactive, ref, watch } from 'vue'
+import { useDateFormat } from '@vueuse/core'
+import type { HistoryItem } from './types'
+import { HistoryType } from './types'
+import { calcCurrentTime } from '~/utils'
+const { t } = useI18n()
 
-export default defineComponent({
-  data() {
-    return {
-      moments: [] as MomentItem[],
-      calcTimeSince,
-      MomentType,
-      momentTabs: [
-        {
-          id: 0,
-          name: this.$t('topbar.moments_dropdown.tabs.videos'),
-          isSelected: true,
-        },
-        {
-          id: 1,
-          name: this.$t('topbar.moments_dropdown.tabs.live'),
-          isSelected: false,
-        },
-        {
-          id: 2,
-          name: this.$t('topbar.moments_dropdown.tabs.articles'),
-          isSelected: false,
-        },
-      ],
-      selectedTab: 0,
-      isLoading: false,
-      // when noMoreContent is true, the user can't scroll down to load more content
-      noMoreContent: false,
-      livePage: 1,
-      LanguageType,
-      language,
-    }
+const historys = reactive<Array<HistoryItem>>([])
+const historyTabs = reactive([
+  {
+    id: 0,
+    name: t('topbar.moments_dropdown.tabs.videos'),
+    isSelected: true,
   },
-  watch: {
-    selectedTab(newVal: number, oldVal: number) {
-      if (newVal === oldVal) return
-
-      this.scrollToTop(this.$refs.momentsWrap as HTMLElement, 300)
-      this.moments = []
-      if (newVal === 0) {
-        this.getNewMoments([MomentType.Video, MomentType.Bangumi])
-      }
-      else if (newVal === 1) {
-        this.livePage = 1
-        this.getLiveMoments(this.livePage)
-      }
-      else if (newVal === 2) {
-        this.getNewMoments([MomentType.Article])
-      }
-    },
+  {
+    id: 1,
+    name: t('topbar.moments_dropdown.tabs.live'),
+    isSelected: false,
   },
-  mounted() {
-    this.getNewMoments([MomentType.Video, MomentType.Bangumi])
+  {
+    id: 2,
+    name: t('topbar.moments_dropdown.tabs.articles'),
+    isSelected: false,
+  },
+])
+/**
+ * Active tab (0: archive, 1: live, 2: article)
+ */
+const activatedTab = ref<number>(0)
+const isLoading = ref<boolean>(false)
+// when noMoreContent is true, the user can't scroll down to load more content
+const noMoreContent = ref<boolean>(false)
+const livePage = ref<number>(1)
+const historysWrap = ref<HTMLElement>() as Ref<HTMLElement>
 
-    const momentsWrap = this.$refs.momentsWrap as HTMLDivElement
-    momentsWrap.addEventListener('scroll', () => {
-      if (momentsWrap.clientHeight + momentsWrap.scrollTop >= momentsWrap.scrollHeight
-        && this.moments.length > 0 && !this.isLoading) {
-        if (this.selectedTab === 0 && !this.noMoreContent)
-          this.getHistoryMoments([MomentType.Video, MomentType.Bangumi])
-        else if (this.selectedTab === 1 && !this.noMoreContent)
-          this.getLiveMoments(this.livePage)
-        else if (this.selectedTab === 2 && !this.noMoreContent)
-          this.getHistoryMoments([MomentType.Article])
+watch(activatedTab, (newVal: number, oldVal: number) => {
+  if (newVal === oldVal)
+    return
+
+  historys.length = 0
+  if (historysWrap.value)
+    scrollToTop(historysWrap.value, 300)
+
+  if (newVal === 0) {
+    getHistoryList(HistoryType.Archive)
+  }
+  else if (newVal === 1) {
+    livePage.value = 1
+    getHistoryList(HistoryType.Live)
+  }
+  else if (newVal === 2) {
+    getHistoryList(HistoryType.Article)
+  }
+})
+
+onMounted(() => {
+  getHistoryList(HistoryType.Archive)
+
+  if (historysWrap.value) {
+    historysWrap.value.addEventListener('scroll', () => {
+      // When you scroll to the bottom, they will automatically
+      // add the next page of data to the history list
+      if (
+        historysWrap.value.clientHeight + historysWrap.value.scrollTop
+          >= historysWrap.value.scrollHeight - 20
+        && historys.length > 0
+        && !isLoading.value
+      ) {
+        if (activatedTab.value === 0 && !noMoreContent.value) {
+          getHistoryList(
+            HistoryType.Archive,
+            historys[historys.length - 1].view_at,
+          )
+        }
+        else if (activatedTab.value === 1 && !noMoreContent.value) {
+          getHistoryList(
+            HistoryType.Live,
+            historys[historys.length - 1].view_at,
+          )
+        }
+        else if (activatedTab.value === 2 && !noMoreContent.value) {
+          getHistoryList(
+            HistoryType.Article,
+            historys[historys.length - 1].view_at,
+          )
+        }
       }
     })
-  },
-  methods: {
-    onClickTab(tabId: number) {
-      // Prevent changing tab when loading, cuz it will cause a bug
-      if (this.isLoading) return
-
-      this.selectedTab = tabId
-      this.momentTabs.forEach((tab) => {
-        tab.isSelected = tab.id === tabId
-      })
-    },
-    getNewMoments(typeList: number[]) {
-      this.isLoading = true
-      browser.runtime.sendMessage({
-        contentScriptQuery: 'getNewMoments',
-        uid: getUserID(),
-        typeList,
-      }).then((res) => {
-        if (res.code === 0) {
-          if (this.moments.length !== 0 && res.data.cards.length < 20) {
-            this.isLoading = false
-            this.noMoreContent = true
-            return
-          }
-
-          res.data.cards.forEach((item: any) => {
-            this.pushItemIntoMoments(item)
-          })
-
-          // set this lastest offset id, which will clear the new moment's marker point
-          // after you watch these moments.
-          if (this.selectedTab === 0)
-            setLastestOffsetID(MomentType.Video, this.moments[0].id)
-          else if (this.selectedTab === 2)
-            setLastestOffsetID(MomentType.Article, this.moments[0].id)
-
-          this.noMoreContent = false
-        }
-        this.isLoading = false
-      })
-    },
-    getHistoryMoments(typeList: number[]) {
-      this.isLoading = true
-      browser.runtime.sendMessage({
-        contentScriptQuery: 'getHistoryMoments',
-        uid: getUserID(),
-        typeList,
-        offsetDynamicID: this.moments[this.moments.length - 1].dynamic_id_str,
-      }).then((res) => {
-        if (res.code === 0) {
-          if (res.data.has_more === 0) {
-            this.isLoading = false
-            this.noMoreContent = true
-            return
-          }
-
-          res.data.cards.forEach((item: any) => {
-            this.pushItemIntoMoments(item)
-          })
-          this.noMoreContent = false
-        }
-        this.isLoading = false
-      })
-    },
-    getLiveMoments(page: number) {
-      this.isLoading = true
-      browser.runtime.sendMessage({
-        contentScriptQuery: 'getLiveMoments',
-        page,
-        pageSize: 10,
-      }).then((res) => {
-        if (res.code === 0) {
-          // if the length of this list is less then the pageSize, it means that it have no more contents
-          if (this.moments.length !== 0 && res.data.list.length < 10) {
-            this.isLoading = false
-            this.noMoreContent = true
-            return
-          }
-
-          // if the length of this list is equal to the pageSize, this means that it may have the next page.
-          if (res.data.list.length === 10)
-            this.livePage++
-          res.data.list.forEach((item: any) => {
-            this.moments.push({
-              id: item.roomid,
-              uid: item.uid,
-              name: item.uname,
-              face: item.face,
-              url: item.link,
-              title: item.title,
-              cover: item.pic,
-            } as MomentItem)
-          })
-          this.noMoreContent = false
-        }
-        this.isLoading = false
-      })
-    },
-    pushItemIntoMoments(item: any) {
-      const card = JSON.parse(item.card)
-
-      if (item.desc.type === MomentType.Video) {
-        // if this is a video moment
-        this.moments.push({
-          type: item.desc.type,
-          id: item.desc.dynamic_id,
-          uid: item.desc.uid,
-          name: item.desc.user_profile.info.uname,
-          face: item.desc.user_profile.info.face,
-          aid: card.aid,
-          bvid: item.desc.bvid,
-          url: card.short_link_v2,
-          ctime: card.ctime,
-          title: card.title,
-          cover: card.pic,
-          dynamic_id_str: item.desc.dynamic_id_str,
-          isNew: isNewVideo(item.desc.dynamic_id),
-        } as MomentItem)
-      }
-      else if (item.desc.type === MomentType.Bangumi) {
-        // bangumi moment
-        this.moments.push({
-          type: item.desc.type,
-          id: item.desc.dynamic_id,
-          name: card.apiSeasonInfo.title,
-          face: card.apiSeasonInfo.cover,
-          episode_id: card.episode_id,
-          url: card.url,
-          title: card.new_desc,
-          cover: card.cover,
-          dynamic_id_str: item.desc.dynamic_id_str,
-          isNew: isNewVideo(item.desc.dynamic_id),
-        } as MomentItem)
-      }
-      else if (item.desc.type === MomentType.Article) {
-        // article moment
-        this.moments.push({
-          type: item.desc.type,
-          id: item.desc.dynamic_id,
-          uid: item.desc.uid,
-          name: item.desc.user_profile.info.uname,
-          face: item.desc.user_profile.info.face,
-          url: `https://www.bilibili.com/read/cv${card.id}`,
-          ctime: card.publish_time,
-          title: card.title,
-          cover: card.image_urls[0],
-          dynamic_id_str: item.desc.dynamic_id_str,
-          isNew: isNewArticle(item.desc.dynamic_id),
-        } as MomentItem)
-      }
-    },
-    /**
-     * smooth scroll to the top of the html element
-     */
-    scrollToTop(element: HTMLElement, duration: number) {
-    // cancel if already on top
-      if (element.scrollTop === 0) return
-
-      const cosParameter = element.scrollTop / 2
-      let scrollCount = 0
-      let oldTimestamp = 0
-
-      function step(newTimestamp: number) {
-        if (oldTimestamp !== 0) {
-          // if duration is 0 scrollCount will be Infinity
-          scrollCount += Math.PI * (newTimestamp - oldTimestamp) / duration
-          if (scrollCount >= Math.PI) return element.scrollTop = 0
-          element.scrollTop = cosParameter + cosParameter * Math.cos(scrollCount)
-        }
-        oldTimestamp = newTimestamp
-        window.requestAnimationFrame(step)
-      }
-      window.requestAnimationFrame(step)
-    },
-  },
+  }
 })
+
+function onClickTab(tabId: number) {
+  // Prevent changing tab when loading, cuz it will cause a bug
+  if (isLoading.value)
+    return
+
+  activatedTab.value = tabId
+  historyTabs.forEach((tab) => {
+    tab.isSelected = tab.id === tabId
+  })
+}
+
+/**
+ * Return the URL of the history item
+ * @param item history item
+ * @return {string} url
+ */
+function getHistoryUrl(item: HistoryItem) {
+  // Video
+  if (activatedTab.value === 0)
+    return item.history.bvid
+  // Live
+  else if (activatedTab.value === 1)
+    return `//live.bilibili.com/${item.history.oid}`
+  // Article
+  else if (activatedTab.value === 2)
+    return `/read/cv${item.history.oid}`
+
+  return ''
+}
+
+/**
+ * Get history list
+ * @param {HistoryType} type
+ * @param {number} viewAt Last viewed timestamp
+ */
+function getHistoryList(type: HistoryType, viewAt = 0 as number) {
+  isLoading.value = true
+  browser.runtime
+    .sendMessage({
+      contentScriptQuery: 'getHistoryList',
+      type,
+      viewAt,
+    })
+    .then((res) => {
+      if (res.code === 0) {
+        if (historys.length !== 0 && res.data.list.length < 20) {
+          isLoading.value = false
+          noMoreContent.value = true
+          return
+        }
+
+        res.data.list.forEach((item: HistoryItem) => {
+          historys.push(item)
+        })
+
+        noMoreContent.value = false
+      }
+      isLoading.value = false
+    })
+}
+
+/**
+ * smooth scroll to the top of the html element
+ */
+function scrollToTop(element: HTMLElement, duration: number) {
+  // cancel if already on top
+  if (element.scrollTop === 0)
+    return
+
+  const cosParameter = element.scrollTop / 2
+  let scrollCount = 0
+  let oldTimestamp = 0
+
+  function step(newTimestamp: number) {
+    if (oldTimestamp !== 0) {
+      // if duration is 0 scrollCount will be Infinity
+      scrollCount += (Math.PI * (newTimestamp - oldTimestamp)) / duration
+      if (scrollCount >= Math.PI)
+        return (element.scrollTop = 0)
+      element.scrollTop = cosParameter + cosParameter * Math.cos(scrollCount)
+    }
+    oldTimestamp = newTimestamp
+    window.requestAnimationFrame(step)
+  }
+  window.requestAnimationFrame(step)
+}
 </script>
 
 <template>
@@ -263,13 +196,13 @@ export default defineComponent({
       pos="fixed top-0 left-0"
       w="full"
       bg="$bew-content-1"
-      z="1"
+      z="2"
       border="!rounded-t-$bew-radius"
       style="backdrop-filter: var(--bew-filter-glass)"
     >
       <div flex="~">
         <div
-          v-for="tab in momentTabs"
+          v-for="tab in historyTabs"
           :key="tab.id"
           m="r-4"
           transition="all duration-300"
@@ -286,73 +219,176 @@ export default defineComponent({
       </a>
     </div>
 
-    <!-- moments wrapper -->
-    <div ref="momentsWrap" h="430px" overflow="y-scroll" p="x-4">
+    <!-- historys wrapper -->
+    <div
+      ref="historysWrap"
+      flex="~ col gap-4"
+      h="430px"
+      overflow="y-scroll"
+      p="x-4"
+    >
       <!-- loading -->
-      <loading v-if="isLoading && moments.length === 0" h="full" flex="~" items="center"></loading>
+      <Loading
+        v-if="isLoading && historys.length === 0"
+        pos="absolute left-0"
+        bg="$bew-content-1"
+        z="1"
+        w="full"
+        h="full"
+        flex="~"
+        items="center"
+        border="rounded-$bew-radius"
+      />
 
       <!-- empty -->
-      <empty v-if="!isLoading && moments.length === 0" w="full" h="full"></empty>
+      <Empty v-if="!isLoading && historys.length === 0" w="full" h="full" />
 
-      <!-- moments -->
+      <!-- historys -->
       <transition-group name="list">
         <a
-          v-for="(moment, index) in moments"
-          :key="index"
-          :href="moment.url"
+          v-for="historyItem in historys"
+          :key="historyItem.kid"
+          :href="getHistoryUrl(historyItem)"
           target="_blank"
-          flex="~"
-          justify="between"
-          m="b-4"
-          first:m="t-16"
-          p="2"
-          rounded="$bew-radius"
           hover:bg="$bew-fill-2"
-          transition="all duration-300"
-          cursor="pointer"
-          pos="relative"
+          border="rounded-$bew-radius"
+          p="2"
+          m="first:t-50px last:b-4"
+          class="group"
+          transition="duration"
         >
-          <!-- new moment dot -->
-          <div
-            v-if="moment.isNew"
-            rounded="full"
-            w="8px"
-            h="8px"
-            m="t-2 l-2"
-            bg="$bew-theme-color"
-            pos="absolute -top-10px -left-10px"
-            style="box-shadow: 0 0 4px var(--bew-theme-color)"
-          ></div>
-
-          <a
-            :href="moment.type === MomentType.Video ? 'https://space.bilibili.com/' + moment.uid : moment.url"
-            target="_blank"
-          >
-            <img :src="moment.face + '@60w_60h_1c'" rounded="$bew-radius" w="40px" h="40px" m="r-4" />
-          </a>
-
-          <div flex="~" justify="between" w="full">
-            <div>
-              <span>{{ moment.name }}</span> {{ $t('topbar.moments_dropdown.uploaded') }}{{ moment.title }}
-              <div v-if="moment.type !== MomentType.Bangumi" text="$bew-text-2 sm" m="y-2">
-                <!-- Videos and articles -->
-                <div v-if="selectedTab === 0 || selectedTab === 2">
-                  {{ calcTimeSince(new Date(moment.ctime * 1000)) }}{{ language === LanguageType.English ? ' ' + $t('common.ago') : $t('common.ago') }}
+          <section flex="~ gap-4" align="item-start">
+            <!-- Video cover, live cover, ariticle cover -->
+            <div
+              bg="$bew-fill-1"
+              w="150px"
+              flex="shrink-0"
+              border="rounded-$bew-radius-half"
+              overflow="hidden"
+            >
+              <!-- Video -->
+              <template v-if="activatedTab === 0">
+                <div pos="relative">
+                  <img
+                    w="150px"
+                    class="aspect-video"
+                    :src="`${historyItem.cover}@256w_144h_1c`"
+                    :alt="historyItem.title"
+                    bg="contain"
+                  >
+                  <div
+                    pos="absolute bottom-0 right-0"
+                    bg="black opacity-60"
+                    m="1"
+                    p="x-2 y-1"
+                    text="white xs"
+                    border="rounded-full"
+                    opacity="0"
+                    group-hover:opacity="100"
+                  >
+                    {{
+                      `${calcCurrentTime(historyItem.progress)} /
+                    ${calcCurrentTime(historyItem.duration)}`
+                    }}
+                  </div>
                 </div>
-                <!-- Live -->
-                <div v-else-if="selectedTab === 1" text="$bew-theme-color" font="bold" flex="~" items="center">
-                  <fluent:live-24-filled m="r-2" /> {{ $t('topbar.moments_dropdown.live_status') }}
+                <Progress
+                  :percentage="
+                    (historyItem.progress / historyItem.duration) * 100
+                  "
+                />
+              </template>
+
+              <!-- Live -->
+              <template v-else-if="activatedTab === 1">
+                <div pos="relative">
+                  <img
+                    w="150px"
+                    class="aspect-video"
+                    :src="`${historyItem.cover}@256w_144h_1c`"
+                    :alt="historyItem.title"
+                    bg="contain"
+                  >
+                  <div
+                    v-if="historyItem.live_status === 1"
+                    pos="absolute top-0 left-0"
+                    bg="rose-600"
+                    text="xs white"
+                    p="x-2 y-1"
+                    m="1"
+                    border="rounded-$bew-radius-half"
+                    font="semibold"
+                  >
+                    LIVE
+                  </div>
+                  <div
+                    v-else
+                    pos="absolute top-0 left-0"
+                    bg="gray-500 opacity-55"
+                    text="xs white"
+                    p="x-2 y-1"
+                    m="1"
+                    border="rounded-$bew-radius-half"
+                  >
+                    Offline
+                  </div>
                 </div>
+              </template>
+
+              <!-- Article -->
+              <div v-else-if="activatedTab === 2">
+                <img
+                  w="150px"
+                  class="aspect-video"
+                  :src="`${
+                    Array.isArray(historyItem.covers)
+                      ? historyItem.covers[0]
+                      : ''
+                  }@256w_144h_1c`"
+                  :alt="historyItem.title"
+                  bg="contain"
+                >
               </div>
-
             </div>
-            <img :src="moment.cover + '@128w_72h_1c'" w="82px" h="46px" m="l-4" rounded="$bew-radius" />
-          </div>
+
+            <!-- Description -->
+            <div>
+              <h3
+                style="
+                  -webkit-line-clamp: 2;
+                  -webkit-box-orient: vertical;
+                  display: -webkit-box;
+                "
+                overflow="hidden"
+                text="overflow-ellipsis"
+              >
+                {{ historyItem.title }}
+              </h3>
+              <div text="$bew-text-2 sm" m="t-4" flex="~" align="items-center">
+                {{ historyItem.author_name }}
+                <span
+                  v-if="historyItem.live_status === 1"
+                  text="$bew-theme-color"
+                  m="l-2"
+                ><tabler:live-photo />
+                  Live
+                </span>
+              </div>
+              <p text="$bew-text-2 sm">
+                {{
+                  useDateFormat(
+                    historyItem.view_at * 1000,
+                    'YYYY-MM-DD HH:mm:ss',
+                  ).value
+                }}
+              </p>
+            </div>
+          </section>
         </a>
       </transition-group>
 
       <!-- loading -->
-      <loading v-if="isLoading && moments.length !== 0" m="-t-4"></loading>
+      <loading v-if="isLoading && historys.length !== 0" m="-t-4" />
     </div>
   </div>
 </template>

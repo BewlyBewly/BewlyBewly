@@ -1,9 +1,40 @@
+<script setup lang="ts">
+import { useDark, useToggle } from '@vueuse/core'
+import { apperance, isShowTopbar } from '~/logic/storage'
+import { language } from '~/logic'
+import 'virtual:windi.css'
+import '~/styles/index.ts'
+import Home from './home/Home.vue'
+import { useI18n } from 'vue-i18n'
+
+const [showSettings, toggle] = useToggle(false)
+const isDark = useDark()
+const toggleDark = useToggle(isDark)
+const { locale } = useI18n()
+
+window.onload = () => {
+  // if there is first-time load extension, set the default language by browser display language
+  if (language.value === '') {
+    if (browser.i18n.getUILanguage() === 'zh-CN')
+      language.value = 'cmn-SC'
+    else if (browser.i18n.getUILanguage() === 'zh-TW')
+      language.value = 'cmn-TC'
+    else
+      language.value = 'en'
+  }
+
+  locale.value = language.value
+
+  // locale.value = language.value
+}
+</script>
+
 <template>
-  <transition>
-    <topbar v-if="isShowTopbar" class="fixed z-50"></topbar>
-  </transition>
+  <Transition>
+    <Topbar v-if="isShowTopbar" class="fixed z-50" />
+  </Transition>
   <!-- is home page -->
-  <home></home>
+  <Home />
   <!-- button -->
   <div
     flex="~ col"
@@ -40,43 +71,11 @@
       style="box-shadow: var(--bew-shadow-2); backdrop-filter: var(--bew-filter-glass);"
       @click="toggle()"
     >
-      <tabler-settings />
+      <tabler:settings />
     </button>
   </div>
-  <settings v-if="showSettings" @close="showSettings = false"></settings>
+  <Settings v-if="showSettings" @close="showSettings = false" />
 </template>
-
-<script setup lang="ts">
-import { useToggle, useDark } from '@vueuse/core'
-import { apperance, isShowTopbar } from '~/logic/storage'
-import { language } from '~/logic'
-import 'virtual:windi.css'
-import '~/styles/index.ts'
-import Home from './Home/index.vue'
-import { useI18n } from 'vue-i18n'
-
-const [showSettings, toggle] = useToggle(false)
-const isDark = useDark()
-const toggleDark = useToggle(isDark)
-const { locale } = useI18n()
-
-window.onload = () => {
-  // if there is first-time load extension, set the default language by browser display language
-  if (language.value === '') {
-    if (browser.i18n.getUILanguage() === 'zh-CN')
-      language.value = 'cmn-SC'
-    else if (browser.i18n.getUILanguage() === 'zh-TW')
-      language.value = 'cmn-TC'
-    else
-      language.value = 'en'
-  }
-
-  locale.value = language.value
-
-  // locale.value = language.value
-}
-
-</script>
 
 <style lang="scss">
 .v-enter-active,
@@ -88,5 +87,4 @@ window.onload = () => {
 .v-leave-to {
   @apply opacity-0 transform -translate-y-full;
 }
-
 </style>

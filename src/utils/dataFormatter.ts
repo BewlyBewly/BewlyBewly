@@ -36,8 +36,8 @@ export const numFormatter = (num: number) => {
   return item ? (num / item.value).toFixed(digits).replace(rx, '$1') + item.symbol : '0'
 }
 
-export const calcTimeSince = (date: any) => {
-  const seconds = Math.floor(((new Date() as any) - date) / 1000)
+export const calcTimeSince = (date: number | string) => {
+  const seconds = Math.floor(((Number(new Date())) - Number(date)) / 1000)
   let interval = seconds / 31536000
   if (interval > 1)
     return `${Math.floor(interval)} ${t('common.year', Math.floor(interval))}`

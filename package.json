@@ -35,6 +35,7 @@
     "@types/webextension-polyfill": "^0.8.3",
     "@typescript-eslint/eslint-plugin": "^5.25.0",
     "@vitejs/plugin-vue": "^2.3.3",
+    "@volar-plugins/vetur": "^0.1.0",
     "@vue/compiler-sfc": "^3.2.35",
     "@vue/test-utils": "^2.0.0",
     "@vueuse/core": "^8.5.0",

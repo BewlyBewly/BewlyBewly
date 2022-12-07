@@ -81,6 +81,7 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
           css: `
             ::-webkit-scrollbar {
               width: 8px;
+              height: 8px;
             }
 
             ::-webkit-scrollbar-track {
@@ -94,6 +95,10 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
             ::-webkit-scrollbar-thumb {
               background-color: var(--bew-fill-3);
               border-radius: 20px;
+            }
+
+            ::-webkit-scrollbar-corner {
+              background: var(--bew-bg)
             }
           `,
           // runAt: 'document_start',
