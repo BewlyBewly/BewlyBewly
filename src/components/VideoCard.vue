@@ -43,7 +43,7 @@ function submitDislike(
   browser.runtime
     .sendMessage({
       contentScriptQuery: 'submitDislike',
-      accessKey,
+      accessKey: accessKey.value,
       reasonID,
       goto,
       id,
@@ -90,7 +90,14 @@ function undoDislike(
 
 <template>
   <div
-    class="video-card group" :class="isDislike ? 'is-dislike' : ''"
+    class="video-card group"
+    :class="isDislike ? 'is-dislike' : ''"
+    p="1"
+    m="b-8"
+    border="rounded-$bew-radius"
+    transition="duration-300"
+    pos="relative"
+    active:bg="$bew-fill-2"
   >
     <!-- Undo control -->
     <template v-if="isDislike">
@@ -127,34 +134,85 @@ function undoDislike(
         </button>
       </div>
     </template>
+
     <template v-else>
       <a :href="`/video/av${param}`" target="_blank">
-        <div class="thumbnail">
-          <div class="duration">{{ calcCurrentTime(duration) }}</div>
+        <div
+          class="aspect-video"
+          w="full"
+          radius="rounded-$bew-radius"
+          pos="relative"
+          transition="duration-300"
+          group-hover:transform="~ scale-105"
+        >
+          <!-- Video duration -->
           <div
+            pos="absolute bottom-0 right-0"
+            z="2"
+            p="x-2 y-1"
+            m="1"
+            border="rounded-$bew-radius"
+            text="!white xs"
+            bg="black opacity-60"
+          >
+            {{ calcCurrentTime(duration) }}
+          </div>
+
+          <div
+            class="aspect-video"
             w="full"
             pos="relative"
             border="rounded-$bew-radius"
             overflow="hidden"
             z="1"
-            style="aspect-ratio: 16/9;"
+            transition="duration-300"
           >
+            <!-- Video cover -->
             <img
-              class="cover"
               :src="`${cover.replace('http:', '')}@672w_378h_1c`"
               loading="lazy"
+              class="aspect-auto"
+              w="full"
+              h="full"
+              bg="cover center $bew-fill-3"
+              transition="duration-300"
+              pos="absolute"
+              transform="~ scale-110"
+              group-hover:transform="~ scale-100"
             >
           </div>
+
+          <!-- Shadow of the video cover -->
           <img
-            class="cover-shadow"
             :src="`${cover.replace('http:', '')}@672w_378h_1c`"
             loading="lazy"
+            class="aspect-video"
+            w="full"
+            h="full"
+            bg="cover center $bew-fill-3"
+            transition="duration-600"
+            pos="absolute left-0 top-0"
+            filter="~ blur-0"
+            z="-1"
+            opacity="90"
+            pointer="none"
+            group-hover:filter="~ blur-2xl"
           >
         </div>
       </a>
-      <div class="detail">
+      <div flex="~" m="t-4">
         <div class="flex">
-          <a class="avatar" cursor="pointer" @click="gotoChannel(mid)">
+          <a
+            m="r-4"
+            w="48px"
+            h="48px"
+            border="rounded-$bew-radius"
+            overflow="hidden"
+            object="center cover"
+            bg="$bew-fill-3"
+            cursor="pointer"
+            @click="gotoChannel(mid)"
+          >
             <img
               :src="`${`${authorAvatar}`.replace('http:', '')}@60w_60h_1c`"
               width="48"
@@ -163,12 +221,20 @@ function undoDislike(
             >
           </a>
         </div>
-        <div class="meta">
+        <div class="meta" flex="~ col" w="full" align="items-start">
           <div flex="~" justify="between" w="full" pos="relative">
             <h3
               class="video-title"
               :title="title"
               cursor="pointer"
+              text="lg overflow-ellipsis space-normal $bew-text-1"
+              h="max-13"
+              overflow="hidden"
+              style="
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+              "
               @click="gotoVideo(param)"
             >
               {{ title }}
@@ -205,9 +271,9 @@ function undoDislike(
                 bg="$bew-content-1"
                 rounded="$bew-radius"
                 style="
-              box-shadow: var(--bew-shadow-2);
-              backdrop-filter: var(--bew-filter-glass);
-            "
+                  box-shadow: var(--bew-shadow-2);
+                  backdrop-filter: var(--bew-filter-glass);
+                "
               >
                 <p p="2" text="$bew-text-3">
                   {{ $t('home.not_interested_in') }}
@@ -239,10 +305,15 @@ function undoDislike(
               </div>
             </template>
           </div>
-          <div class="channel-name" @click="gotoChannel(mid)">
+          <div
+            class="channel-name"
+            text="base $bew-text-2"
+            m="t-2"
+            @click="gotoChannel(mid)"
+          >
             {{ channelName }}
           </div>
-          <div class="video-info">
+          <div class="video-info" text="base $bew-text-2">
             {{ numFormatter(viewCount)
             }}{{
               language === LanguageType.English
@@ -264,82 +335,9 @@ function undoDislike(
 </template>
 
 <style lang="scss" scoped>
-.video-card {
-  @apply p-1 mb-8 rounded-$bew-radius duration-300
-    relative
-    active:bg-$bew-fill-2;
-
-  &.is-dislike {
-    > *:not(#dislike-control) {
-      @apply invisible pointer-events-none duration-0 transition-none;
-    }
-  }
-
-  .cover-shadow {
-    @apply absolute top-0 left-0 w-full h-full filter -z-1
-      pointer-events-none duration-600 rounded-$bew-radius opacity-70;
-    aspect-ratio: 16/9;
-  }
-
-  &:hover .cover-shadow {
-    @apply blur-2xl transform;
-  }
-
-  .thumbnail {
-    @apply w-full rounded-$bew-radius relative duration-300;
-    aspect-ratio: 16/9;
-
-    .duration {
-      @apply absolute z-2 bottom-0 right-0 px-2 py-1
-        m-1 rounded-$bew-radius text-xs
-        text-white
-        bg-black bg-opacity-60;
-    }
-
-    .cover {
-      @apply w-full h-full bg-cover bg-center transform scale-110 duration-300
-        absolute bg-$bew-fill-3;
-      aspect-ratio: 16/9;
-    }
-  }
-
-  &:hover .thumbnail {
-    @apply transform scale-105;
-  }
-
-  &:hover .cover {
-    @apply transform scale-100;
-  }
-
-  .detail {
-    @apply flex mt-4;
-
-    .avatar {
-      @apply mr-4 h-48px rounded-$bew-radius overflow-hidden
-        object-center object-cover
-        bg-$bew-fill-3;
-    }
-
-    .meta {
-      @apply flex flex-col items-start '!w-full';
-
-      .video-title {
-        @apply text-lg max-h-13 overflow-hidden overflow-ellipsis whitespace-normal
-         text-$bew-text-1;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-      }
-
-      .channel-name,
-      .video-info {
-        @apply text-base text-$bew-text-2;
-      }
-
-      .channel-name {
-        @apply mt-2;
-      }
-    }
+.video-card.is-dislike {
+  > *:not(#dislike-control) {
+    @apply invisible pointer-events-none duration-0 transition-none;
   }
 }
 </style>

@@ -8,4 +8,7 @@ export default defineConfig({
   extract: {
     include: [resolve(__dirname, 'src/**/*.{vue,html}')],
   },
+  plugins: [
+    require('windicss/plugin/aspect-ratio'),
+  ],
 })
