@@ -1,12 +1,19 @@
 import browser from 'webextension-polyfill'
-import { APP_URL } from '.'
+import { API_URL, APP_URL } from '.'
 
 export const setupVideosAPIs = () => {
   browser.runtime.onMessage.addListener((message) => {
     /** Recommend Videos */
+    // if (message.contentScriptQuery === 'getRecommendVideos') {
+    //   // https://github.com/indefined/UserScripts/blob/master/bilibiliHome/bilibiliHome.API.md#%E8%8E%B7%E5%8F%96%E9%A6%96%E9%A1%B5%E5%86%85%E5%AE%B9
+    //   const url = `${APP_URL}/x/feed/index?build=1&idx=${message.idx}&appkey=27eb53fc9058f8c3&access_key=${message.accessKey}`
+    //   return fetch(url)
+    //     .then(response => response.json())
+    //     .then(data => data)
+    //     .catch(error => console.error(error))
+    // }
     if (message.contentScriptQuery === 'getRecommendVideos') {
-      // https://github.com/indefined/UserScripts/blob/master/bilibiliHome/bilibiliHome.API.md#%E8%8E%B7%E5%8F%96%E9%A6%96%E9%A1%B5%E5%86%85%E5%AE%B9
-      const url = `${APP_URL}/x/feed/index?build=1&idx=${message.idx}&appkey=27eb53fc9058f8c3&access_key=${message.accessKey}`
+      const url = `${API_URL}/x/web-interface/index/top/feed/rcmd?fresh_idx=${message.refreshIdx}&feed_version=V1&fresh_type=4&ps=30&plat=1`
       return fetch(url)
         .then(response => response.json())
         .then(data => data)

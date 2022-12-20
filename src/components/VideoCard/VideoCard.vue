@@ -1,23 +1,11 @@
 <script lang="ts" setup>
+import type { Video } from './types'
 import { accessKey, language } from '~/logic/index'
 import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils'
 import { LanguageType } from '~/enums/appEnums'
 
 defineProps<{
-  cover: string
-  duration: number
-  mid: number
-  title: string
-  authorAvatar: string
-  param: string
-  viewCount: number
-  channelName: string
-  // Created time
-  ctime: number
-  dislikeReasons: Array<{ reason_id: number; reason_name: string }>
-  goto: string
-  tid: number
-  tag: { tag_id: number; tag_name: string }
+  videoData: Video
 }>()
 
 const isDislike = ref<boolean>(false)
@@ -32,60 +20,60 @@ function gotoVideo(param: string) {
   window.open(`/video/av${param}`)
 }
 
-function submitDislike(
-  reasonID: number,
-  goto: string,
-  id: string,
-  mid: number,
-  rid: number,
-  tagID: number,
-) {
-  browser.runtime
-    .sendMessage({
-      contentScriptQuery: 'submitDislike',
-      accessKey: accessKey.value,
-      reasonID,
-      goto,
-      id,
-      mid,
-      rid,
-      tagID,
-    })
-    .then((res) => {
-      if (res.code === 0) {
-        isDislike.value = true
-        dislikeReasonId.value = reasonID
-      }
-    })
-}
+// function submitDislike(
+//   reasonID: number,
+//   goto: string,
+//   id: string,
+//   mid: number,
+//   rid: number,
+//   tagID: number,
+// ) {
+//   browser.runtime
+//     .sendMessage({
+//       contentScriptQuery: 'submitDislike',
+//       accessKey: accessKey.value,
+//       reasonID,
+//       goto,
+//       id,
+//       mid,
+//       rid,
+//       tagID,
+//     })
+//     .then((res) => {
+//       if (res.code === 0) {
+//         isDislike.value = true
+//         dislikeReasonId.value = reasonID
+//       }
+//     })
+// }
 
-function undoDislike(
-  reasonID: number,
-  goto: string,
-  id: string,
-  mid: number,
-  rid: number,
-  tagID: number,
-) {
-  browser.runtime
-    .sendMessage({
-      contentScriptQuery: 'undoDislike',
-      accessKey,
-      reasonID,
-      goto,
-      id,
-      mid,
-      rid,
-      tagID,
-    })
-    .then((res) => {
-      if (res.code === 0) {
-        isDislike.value = false
-        dislikeReasonId.value = null
-        showPopCtrl.value = false
-      }
-    })
-}
+// function undoDislike(
+//   reasonID: number,
+//   goto: string,
+//   id: string,
+//   mid: number,
+//   rid: number,
+//   tagID: number,
+// ) {
+//   browser.runtime
+//     .sendMessage({
+//       contentScriptQuery: 'undoDislike',
+//       accessKey,
+//       reasonID,
+//       goto,
+//       id,
+//       mid,
+//       rid,
+//       tagID,
+//     })
+//     .then((res) => {
+//       if (res.code === 0) {
+//         isDislike.value = false
+//         dislikeReasonId.value = null
+//         showPopCtrl.value = false
+//       }
+//     })
+// }
 </script>
 
 <template>
@@ -115,7 +103,7 @@ function undoDislike(
         style="aspect-ratio: 16/9"
       >
         {{ $t('home.video_removed') }}
-        <button
+        <!-- <button
           text="$bew-theme-color base"
           font="bold"
           m="t-4"
@@ -131,12 +119,12 @@ function undoDislike(
           "
         >
           {{ $t('common.undo') }}
-        </button>
+        </button> -->
       </div>
     </template>
 
     <template v-else>
-      <a :href="`/video/av${param}`" target="_blank">
+      <a :href="`/video/${videoData.bvid}`" target="_blank">
         <div
           class="aspect-video"
           w="full"
@@ -155,7 +143,7 @@ function undoDislike(
             text="!white xs"
             bg="black opacity-60"
           >
-            {{ calcCurrentTime(duration) }}
+            {{ calcCurrentTime(videoData.duration) }}
           </div>
 
           <div
@@ -169,7 +157,7 @@ function undoDislike(
           >
             <!-- Video cover -->
             <img
-              :src="`${cover.replace('http:', '')}@672w_378h_1c`"
+              :src="`${videoData.pic.replace('http:', '')}@672w_378h_1c`"
               loading="lazy"
               class="aspect-auto"
               w="full"
@@ -184,7 +172,7 @@ function undoDislike(
 
           <!-- Shadow of the video cover -->
           <img
-            :src="`${cover.replace('http:', '')}@672w_378h_1c`"
+            :src="`${videoData.pic.replace('http:', '')}@672w_378h_1c`"
             loading="lazy"
             class="aspect-video"
             w="full"
@@ -211,10 +199,13 @@ function undoDislike(
             object="center cover"
             bg="$bew-fill-3"
             cursor="pointer"
-            @click="gotoChannel(mid)"
+            @click="gotoChannel(videoData.owner.mid)"
           >
             <img
-              :src="`${`${authorAvatar}`.replace('http:', '')}@60w_60h_1c`"
+              :src="`${`${videoData.owner.face}`.replace(
+                'http:',
+                '',
+              )}@60w_60h_1c`"
               width="48"
               height="48"
               loading="lazy"
@@ -225,7 +216,6 @@ function undoDislike(
           <div flex="~" justify="between" w="full" pos="relative">
             <h3
               class="video-title"
-              :title="title"
               cursor="pointer"
               text="lg overflow-ellipsis space-normal $bew-text-1"
               h="max-13"
@@ -235,12 +225,12 @@ function undoDislike(
                 -webkit-box-orient: vertical;
                 -webkit-line-clamp: 2;
               "
-              @click="gotoVideo(param)"
+              @click="gotoVideo(videoData.bvid)"
             >
-              {{ title }}
+              {{ videoData.title }}
             </h3>
 
-            <div
+            <!-- <div
               id="dislike-control-btn"
               class="icon-btn"
               p="t-0.15rem x-2"
@@ -250,7 +240,7 @@ function undoDislike(
               @click.stop="showPopCtrl = !showPopCtrl"
             >
               <tabler:dots-vertical text="lg" />
-            </div>
+            </div> -->
 
             <!-- dislike control -->
             <template v-if="showPopCtrl">
@@ -263,7 +253,8 @@ function undoDislike(
                 @click="showPopCtrl = false"
               />
 
-              <div
+              <!-- dislike reason popup -->
+              <!-- <div
                 pos="absolute top-9 right-0"
                 p="2"
                 z="30"
@@ -302,26 +293,26 @@ function undoDislike(
                     {{ reason.reason_name }}
                   </li>
                 </ul>
-              </div>
+              </div> -->
             </template>
           </div>
           <div
             class="channel-name"
             text="base $bew-text-2"
             m="t-2"
-            @click="gotoChannel(mid)"
+            @click="gotoChannel(videoData.owner.mid)"
           >
-            {{ channelName }}
+            {{ videoData.owner.name }}
           </div>
           <div class="video-info" text="base $bew-text-2">
-            {{ numFormatter(viewCount)
+            {{ numFormatter(videoData.stat.view)
             }}{{
               language === LanguageType.English
-                ? ` ${$t('common.view', viewCount)}`
-                : $t('common.view', viewCount)
+                ? ` ${$t('common.view', videoData.stat.view)}`
+                : $t('common.view', videoData.stat.view)
             }}
             <span class="text-xs font-light">•</span>
-            {{ calcTimeSince(ctime * 1000)
+            {{ calcTimeSince(videoData.pubdate * 1000)
             }}{{
               language === LanguageType.English
                 ? ` ${$t('common.ago')}`
