@@ -2,8 +2,8 @@
 import type { Ref, UnwrapNestedRefs } from 'vue'
 import { Transition, onMounted, watch } from 'vue'
 import type { UnReadDm, UnReadMessage, UserInfo } from '../topbar/types'
-import MomentsDropdown from './MomentsDropdown.vue'
-import HistoryDropdown from './HistoryDropdown.vue'
+import MomentsDropdown from './TopbarMomentsPop.vue'
+import HistoryDropdown from './TopbarHistoryPop.vue'
 import { updateInterval } from './notify'
 import { getUserID } from '~/utils'
 
@@ -189,7 +189,7 @@ function getNewMomentsCount() {
         />
       </div>
       <Transition name="slide">
-        <LogoMenuDropdown
+        <TopbarChannelsPop
           v-if="showLogoDropDown"
           class="bew-popover"
           pos="!left-0 !top-70px"
@@ -253,7 +253,7 @@ function getNewMomentsCount() {
             }"
           />
           <Transition name="slide">
-            <UserPanelDropdown
+            <TopbarUserPanelPop
               v-if="showUserPanel"
               ref="userPanelDropdown"
               :user-info="userInfo"
@@ -281,7 +281,7 @@ function getNewMomentsCount() {
           </a>
 
           <Transition name="slide">
-            <NotificationsDropdown
+            <TopbarNotificationsPop
               v-if="showNotificationsDropDown"
               ref="notificationsDropdown"
               class="bew-popover"
@@ -307,7 +307,7 @@ function getNewMomentsCount() {
           </a>
 
           <Transition name="slide">
-            <MomentsDropdown v-if="showMomentsDropDown" class="bew-popover" />
+            <TopbarMomentsPop v-if="showMomentsDropDown" class="bew-popover" />
           </Transition>
         </div>
 
@@ -337,7 +337,7 @@ function getNewMomentsCount() {
           </a>
 
           <Transition name="slide">
-            <HistoryDropdown v-if="showHistoryDropDown" class="bew-popover" />
+            <TopbarHistoryPop v-if="showHistoryDropDown" class="bew-popover" />
           </Transition>
         </div>
 
@@ -373,7 +373,7 @@ function getNewMomentsCount() {
           </a>
 
           <Transition name="slide">
-            <UploadDropdown
+            <TopbarUploadPop
               v-if="showUploadDropDown"
               class="bew-popover"
               pos="!left-auto !-right-2"
