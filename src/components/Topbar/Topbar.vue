@@ -2,20 +2,19 @@
 import type { Ref, UnwrapNestedRefs } from 'vue'
 import { Transition, onMounted, watch } from 'vue'
 import type { UnReadDm, UnReadMessage, UserInfo } from '../topbar/types'
-import MomentsDropdown from './TopbarMomentsPop.vue'
-import HistoryDropdown from './TopbarHistoryPop.vue'
 import { updateInterval } from './notify'
 import { getUserID } from '~/utils'
 
 const mid = getUserID() || ''
 const userInfo = reactive<UserInfo | {}>({}) as UnwrapNestedRefs<UserInfo>
-const showLogoDropDown = ref<boolean>(false)
-const showUserPanel = ref<boolean>(false)
+const showChannelsPop = ref<boolean>(false)
+const showUserPanelPop = ref<boolean>(false)
 const showTopbarMask = ref<boolean>(false)
-const showNotificationsDropDown = ref<boolean>(false)
-const showMomentsDropDown = ref<boolean>(false)
-const showUploadDropDown = ref<boolean>(false)
-const showHistoryDropDown = ref<boolean>(false)
+const showNotificationsPop = ref<boolean>(false)
+const showMomentsPop = ref<boolean>(false)
+const showFavoritesPop = ref<boolean>(false)
+const showUploadPop = ref<boolean>(false)
+const showHistoryPop = ref<boolean>(false)
 const isLogin = ref<boolean>(!!getUserID())
 const unReadMessage = reactive<UnReadMessage | {}>({}) as UnwrapNestedRefs<UnReadMessage>
 const unReadDm = reactive<UnReadDm | {}>({} as UnwrapNestedRefs<UnReadDm>)
@@ -27,14 +26,14 @@ const avatarImg = ref<HTMLImageElement>() as Ref<HTMLImageElement>
 const avatarShadow = ref<HTMLImageElement>() as Ref<HTMLImageElement>
 
 watch(
-  () => showNotificationsDropDown,
+  () => showNotificationsPop,
   (newValue, oldValue) => {
     getUnreadMessageCount()
   },
 )
 
 watch(
-  () => showMomentsDropDown,
+  () => showMomentsPop,
   (newValue, oldValue) => {
     getNewMomentsCount()
   },
@@ -64,22 +63,22 @@ function initUserPanel() {
 
 function showLogoMenuDropdown() {
   logo.value.classList.add('hover')
-  showLogoDropDown.value = true
+  showChannelsPop.value = true
 }
 
 function closeLogoMenuDropdown() {
   logo.value.classList.remove('hover')
-  showLogoDropDown.value = false
+  showChannelsPop.value = false
 }
 
 function openUserPanel() {
-  showUserPanel.value = true
+  showUserPanelPop.value = true
   avatarImg.value.classList.add('hover')
   avatarShadow.value.classList.add('hover')
 }
 
 function closeUserPanel() {
-  showUserPanel.value = false
+  showUserPanelPop.value = false
   avatarImg.value.classList.remove('hover')
   avatarShadow.value.classList.remove('hover')
 }
@@ -190,7 +189,7 @@ function getNewMomentsCount() {
       </div>
       <Transition name="slide">
         <TopbarChannelsPop
-          v-if="showLogoDropDown"
+          v-if="showChannelsPop"
           class="bew-popover"
           pos="!left-0 !top-70px"
           transform="!translate-x-0"
@@ -254,7 +253,7 @@ function getNewMomentsCount() {
           />
           <Transition name="slide">
             <TopbarUserPanelPop
-              v-if="showUserPanel"
+              v-if="showUserPanelPop"
               ref="userPanelDropdown"
               :user-info="userInfo"
               after:h="!0"
@@ -266,8 +265,8 @@ function getNewMomentsCount() {
         <!-- Notifications -->
         <div
           class="right-side-item"
-          @mouseenter="showNotificationsDropDown = true"
-          @mouseleave="showNotificationsDropDown = false"
+          @mouseenter="showNotificationsPop = true"
+          @mouseleave="showNotificationsPop = false"
         >
           <div v-if="unReadMessageCount !== 0" class="unread-message">
             {{ unReadMessageCount > 999 ? '999+' : unReadMessageCount }}
@@ -282,7 +281,7 @@ function getNewMomentsCount() {
 
           <Transition name="slide">
             <TopbarNotificationsPop
-              v-if="showNotificationsDropDown"
+              v-if="showNotificationsPop"
               ref="notificationsDropdown"
               class="bew-popover"
             />
@@ -292,8 +291,8 @@ function getNewMomentsCount() {
         <!-- Moments -->
         <div
           class="right-side-item"
-          @mouseenter="showMomentsDropDown = true"
-          @mouseleave="showMomentsDropDown = false"
+          @mouseenter="showMomentsPop = true"
+          @mouseleave="showMomentsPop = false"
         >
           <div v-if="newMomentsCount !== 0" class="unread-message">
             {{ newMomentsCount > 999 ? '999+' : newMomentsCount }}
@@ -307,12 +306,16 @@ function getNewMomentsCount() {
           </a>
 
           <Transition name="slide">
-            <TopbarMomentsPop v-if="showMomentsDropDown" class="bew-popover" />
+            <TopbarMomentsPop v-if="showMomentsPop" class="bew-popover" />
           </Transition>
         </div>
 
         <!-- Favorites -->
-        <div class="right-side-item">
+        <div
+          class="right-side-item"
+          @mouseenter="showFavoritesPop = true"
+          @mouseleave="showFavoritesPop = false"
+        >
           <a
             :href="`https://space.bilibili.com/${mid}/favlist`"
             target="_blank"
@@ -320,13 +323,17 @@ function getNewMomentsCount() {
           >
             <tabler:star />
           </a>
+
+          <Transition name="slide">
+            <TopbarFavoritesPop v-if="showFavoritesPop" class="bew-popover" />
+          </Transition>
         </div>
 
         <!-- History -->
         <div
           class="right-side-item"
-          @mouseenter="showHistoryDropDown = true"
-          @mouseleave="showHistoryDropDown = false"
+          @mouseenter="showHistoryPop = true"
+          @mouseleave="showHistoryPop = false"
         >
           <a
             href="https://www.bilibili.com/account/history"
@@ -337,7 +344,7 @@ function getNewMomentsCount() {
           </a>
 
           <Transition name="slide">
-            <TopbarHistoryPop v-if="showHistoryDropDown" class="bew-popover" />
+            <TopbarHistoryPop v-if="showHistoryPop" class="bew-popover" />
           </Transition>
         </div>
 
@@ -353,8 +360,8 @@ function getNewMomentsCount() {
         </div>
         <div
           class="right-side-item"
-          @mouseenter="showUploadDropDown = true"
-          @mouseleave="showUploadDropDown = false"
+          @mouseenter="showUploadPop = true"
+          @mouseleave="showUploadPop = false"
         >
           <a
             href="https://member.bilibili.com/platform/upload/video/frame"
@@ -374,7 +381,7 @@ function getNewMomentsCount() {
 
           <Transition name="slide">
             <TopbarUploadPop
-              v-if="showUploadDropDown"
+              v-if="showUploadPop"
               class="bew-popover"
               pos="!left-auto !-right-2"
               transform="!translate-x-0"

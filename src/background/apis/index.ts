@@ -5,6 +5,7 @@ import { setupSearchAPIs } from './search'
 import { setupNotificationsAPIs } from './notifications'
 import { setupMomentsAPIs } from './moments'
 import { setupHistoryAPIs } from './history'
+import { setupFavoritesAPIs } from './favorites'
 
 export const APP_URL = 'https://app.bilibili.com'
 export const API_URL = 'https://api.bilibili.com'
@@ -17,4 +18,5 @@ export const setupAllAPIs = () => {
   setupNotificationsAPIs()
   setupMomentsAPIs()
   setupHistoryAPIs()
+  setupFavoritesAPIs()
 }
