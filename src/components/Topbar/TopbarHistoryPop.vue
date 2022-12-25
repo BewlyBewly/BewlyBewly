@@ -286,8 +286,9 @@ function scrollToTop(element: HTMLElement, duration: number) {
                     opacity="0"
                     group-hover:opacity="100"
                   >
+                    <!--  When progress = -1 means that the user watched the full video -->
                     {{
-                      `${calcCurrentTime(historyItem.progress)} /
+                      `${historyItem.progress === -1 ? calcCurrentTime(historyItem.duration) : calcCurrentTime(historyItem.progress)} /
                     ${calcCurrentTime(historyItem.duration)}`
                     }}
                   </div>
