@@ -102,3 +102,42 @@ export interface HistoryItem {
   kid: number
   live_status: 0 | 1 // 0：未开播 1：已开播
 }
+
+export interface FavoriteCategory {
+  id: number
+  fid: number
+  mid: number
+  attr: number
+  title: string
+  fav_state: number
+  media_count: number
+}
+
+// https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/fav/list.md#%E8%8E%B7%E5%8F%96%E6%94%B6%E8%97%8F%E5%A4%B9%E5%86%85%E5%AE%B9%E6%98%8E%E7%BB%86%E5%88%97%E8%A1%A8
+export interface FavoriteResource {
+  id: number
+  type: number // 2：视频稿件 12：音频 21：视频合集
+  title: string
+  cover: string
+  intro: string
+  page: number // 视频分P数
+  duration: number // 音频/视频时长
+  /** UP主信息 */
+  upper: {
+    mid: number
+    name: string
+    face: string
+  }
+  /** 状态数 */
+  cnt_info: {
+    collect: number // 收藏数
+    play: number // 播放数
+    danmaku: number // 弹幕数
+  }
+  link: string
+  ctime: number // 投稿时间
+  pubtime: number // 发布时间
+  fav_time: number // 收藏时间
+  bv_id: string
+  bvid: string
+}

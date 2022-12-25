@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import type { Ref, UnwrapNestedRefs } from 'vue'
 import { Transition, onMounted, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import type { UnReadDm, UnReadMessage, UserInfo } from './types'
 import { updateInterval } from './notify'
 import { getUserID } from '~/utils'
+const { t } = useI18n()
 
 const mid = getUserID() || ''
 const userInfo = reactive<UserInfo | {}>({}) as UnwrapNestedRefs<UserInfo>
@@ -222,7 +224,7 @@ function getNewMomentsCount() {
       <div v-if="!isLogin" class="right-side-item">
         <a href="https://passport.bilibili.com/login" class="login">
           <ic:outline-account-circle class="text-base mr-2" />{{
-            $t('topbar.sign_in')
+            t('topbar.sign_in')
           }}
         </a>
       </div>
@@ -281,7 +283,7 @@ function getNewMomentsCount() {
           <a
             href="https://message.bilibili.com"
             target="_blank"
-            :title="$t('topbar.notifications')"
+            :title="t('topbar.notifications')"
           >
             <tabler:bell />
           </a>
@@ -307,7 +309,7 @@ function getNewMomentsCount() {
           <a
             href="https://t.bilibili.com"
             target="_blank"
-            :title="$t('topbar.moments')"
+            :title="t('topbar.moments')"
           >
             <tabler:windmill />
           </a>
@@ -326,13 +328,13 @@ function getNewMomentsCount() {
           <a
             :href="`https://space.bilibili.com/${mid}/favlist`"
             target="_blank"
-            :title="$t('topbar.favorites')"
+            :title="t('topbar.favorites')"
           >
             <tabler:star />
           </a>
 
           <Transition name="slide">
-            <TopbarFavoritesPop v-if="showFavoritesPop" class="bew-popover" />
+            <TopbarFavoritesPop v-show="showFavoritesPop" class="bew-popover" />
           </Transition>
         </div>
 
@@ -345,7 +347,7 @@ function getNewMomentsCount() {
           <a
             href="https://www.bilibili.com/account/history"
             target="_blank"
-            :title="$t('topbar.history')"
+            :title="t('topbar.history')"
           >
             <tabler:clock />
           </a>
@@ -360,7 +362,7 @@ function getNewMomentsCount() {
           <a
             href="https://member.bilibili.com/platform/home"
             target="_blank"
-            :title="$t('topbar.creative_center')"
+            :title="t('topbar.creative_center')"
           >
             <tabler:bulb />
           </a>
@@ -382,7 +384,7 @@ function getNewMomentsCount() {
           >
             <tabler:upload />
             <span m="l-2" display="xl:block <xl:hidden">{{
-              $t('topbar.upload')
+              t('topbar.upload')
             }}</span>
           </a>
 
