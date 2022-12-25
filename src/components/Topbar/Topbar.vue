@@ -16,7 +16,9 @@ const showFavoritesPop = ref<boolean>(false)
 const showUploadPop = ref<boolean>(false)
 const showHistoryPop = ref<boolean>(false)
 const isLogin = ref<boolean>(!!getUserID())
-const unReadMessage = reactive<UnReadMessage | {}>({}) as UnwrapNestedRefs<UnReadMessage>
+const unReadMessage = reactive<UnReadMessage | {}>(
+  {},
+) as UnwrapNestedRefs<UnReadMessage>
 const unReadDm = reactive<UnReadDm | {}>({} as UnwrapNestedRefs<UnReadDm>)
 const unReadMessageCount = ref<number>(0)
 const newMomentsCount = ref<number>(0)
@@ -91,11 +93,14 @@ function getUserInfo() {
     .then((res) => {
       if (res.code === 0)
         Object.assign(userInfo, res.data)
+      // Account not logged in
+      else if (res.code === -101)
+        isLogin.value = false
     })
 }
 
 async function getUnreadMessageCount() {
-  if (!isLogin)
+  if (!isLogin.value)
     return
 
   await browser.runtime
@@ -115,8 +120,10 @@ async function getUnreadMessageCount() {
   unReadMessageCount.value = 0
 
   Object.keys(unReadMessage).forEach((key) => {
-    if (key !== 'up')
-      unReadMessageCount.value += unReadMessage[key as keyof typeof unReadMessage]
+    if (key !== 'up') {
+      unReadMessageCount.value
+        += unReadMessage[key as keyof typeof unReadMessage]
+    }
   })
 
   Object.keys(unReadDm).forEach((key) => {
