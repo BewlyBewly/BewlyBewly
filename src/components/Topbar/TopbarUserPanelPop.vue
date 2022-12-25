@@ -22,7 +22,8 @@ export default defineComponent({
         contentScriptQuery: 'getUserStat',
       })
       .then((res) => {
-        if (res.code === 0) this.userStat = res.data
+        if (res.code === 0)
+          this.userStat = res.data
       })
   },
   methods: {
@@ -62,7 +63,7 @@ export default defineComponent({
     </div>
     <div id="channel-info">
       <a
-        :href="'https://space.bilibili.com/' + mid + '/fans/follow'"
+        :href="`https://space.bilibili.com/${mid}/fans/follow`"
         target="_blank"
         :title="userStat.following"
       >
@@ -70,7 +71,7 @@ export default defineComponent({
         <div>{{ $t('topbar.user_dropdown.following') }}</div>
       </a>
       <a
-        :href="'https://space.bilibili.com/' + mid + '/fans/fans'"
+        :href="`https://space.bilibili.com/${mid}/fans/fans`"
         target="_blank"
         :title="userStat.follower"
       >
