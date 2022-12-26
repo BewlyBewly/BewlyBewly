@@ -4,9 +4,13 @@ import { accessKey, language } from '~/logic/index'
 import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils'
 import { LanguageType } from '~/enums/appEnums'
 
-defineProps<{
+const props = defineProps<{
   videoData: Video
 }>()
+
+const videoUrl = computed(() => {
+  return `/video/${props.videoData.bvid}`
+})
 
 const isDislike = ref<boolean>(false)
 const dislikeReasonId = ref<number | null>(null)
@@ -14,10 +18,6 @@ const showPopCtrl = ref<boolean>(false)
 
 function gotoChannel(mid: number) {
   window.open(`//space.bilibili.com/${mid}`)
-}
-
-function gotoVideo(param: string) {
-  window.open(`/video/av${param}`)
 }
 
 // function submitDislike(
@@ -100,7 +100,7 @@ function gotoVideo(param: string) {
         border="solid $bew-fill-1"
         text="$bew-text-3 sm center"
         rounded="$bew-radius"
-        style="aspect-ratio: 16/9"
+        class="aspect-video"
       >
         {{ $t('home.video_removed') }}
         <!-- <button
@@ -124,7 +124,7 @@ function gotoVideo(param: string) {
     </template>
 
     <template v-else>
-      <a :href="`/video/${videoData.bvid}`" target="_blank">
+      <a :href="videoUrl" target="_blank">
         <div
           class="aspect-video"
           w="full"
@@ -225,9 +225,8 @@ function gotoVideo(param: string) {
                 -webkit-box-orient: vertical;
                 -webkit-line-clamp: 2;
               "
-              @click="gotoVideo(videoData.bvid)"
             >
-              {{ videoData.title }}
+              <a :href="videoUrl" target="_blank"> {{ videoData.title }}</a>
             </h3>
 
             <!-- <div
