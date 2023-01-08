@@ -1,96 +1,52 @@
-# WebExtension Vite Starter
-
-A [Vite](https://vitejs.dev/) powered WebExtension ([Chrome](https://developer.chrome.com/docs/extensions/reference/), [FireFox](https://addons.mozilla.org/en-US/developers/), etc.) starter template.
-
-<p align="center">
-<sub>Popup</sub><br/>
-<img width="655" src="https://user-images.githubusercontent.com/11247099/126741643-813b3773-17ff-4281-9737-f319e00feddc.png"><br/>
-<sub>Options Page</sub><br/>
-<img width="655" src="https://user-images.githubusercontent.com/11247099/126741653-43125b62-6578-4452-83a7-bee19be2eaa2.png"><br/>
-<sub>Inject Vue App into the Content Script</sub><br/>
-<img src="https://user-images.githubusercontent.com/11247099/130695439-52418cf0-e186-4085-8e19-23fe808a274e.png">
+<p align="center" style="margin-bottom: 0px !important;">
+<img width="150" src="https://user-images.githubusercontent.com/33394391/160250512-410b71fc-7f25-4caf-b850-429227ff082a.png"><br/>
 </p>
 
-## Features
+<h1 align="center" style="margin-top: 0px;">BewlyBewly</h1>
 
-- ⚡️ **Instant HMR** - use **Vite** on dev (no more refresh!)
-- 🥝 Vue 3 - Composition API, [`<script setup>` syntax](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0040-script-setup.md) and more!
-- 💬 Effortless communications - powered by [`webext-bridge`](https://github.com/antfu/webext-bridge) and [VueUse](https://github.com/antfu/vueuse) storage
-- 🌈 [UnoCSS](https://github.com/unocss/unocss) - The instant on-demand Atomic CSS engine.
-- 🦾 [TypeScript](https://www.typescriptlang.org/) - type safe
-- 📦 [Components auto importing](./src/components)
-- 🌟 [Icons](./src/components) - Access to icons from any iconset directly
-- 🖥 Content Script - Use Vue even in content script
-- 🌍 WebExtension - isomorphic extension for Chrome, Firefox, and others
-- 📃 Dynamic `manifest.json` with full type support
+<p align="center">Bringing you the suggested videos on the bilibili homepage, clean and simple.</p>
 
-## Pre-packed
+<details>
+ <summary>開發中, 佛系更新 = =</summary>
 
-### WebExtension Libraries
+<p align="center">
+<img width="655" src="https://user-images.githubusercontent.com/33394391/160250313-6a3db903-53c5-431a-8ddd-80a50725087a.png"><br/>
+</p>
 
-- [`webextension-polyfill`](https://github.com/mozilla/webextension-polyfill) - WebExtension browser API Polyfill with types
-- [`webext-bridge`](https://github.com/antfu/webext-bridge) - effortlessly communication between contexts
+## ⬇️ Installation
 
-### Vite Plugins
+### Firefox
 
-- [`unplugin-auto-import`](https://github.com/antfu/unplugin-auto-import) - Directly use `browser` and Vue Composition API without importing
-- [`unplugin-vue-components`](https://github.com/antfu/vite-plugin-components) - components auto import
-- [`unplugin-icons`](https://github.com/antfu/unplugin-icons) - icons as components
-  - [Iconify](https://iconify.design) - use icons from any icon sets [🔍Icônes](https://icones.netlify.app/)
+Comming soon
 
-### Vue Plugins
+### Edge 
 
-- [VueUse](https://github.com/antfu/vueuse) - collection of useful composition APIs
+Edge Add-ons: https://microsoftedge.microsoft.com/addons/detail/bewlybewly/kceadhehfjdiakpiphpjgolbgehjdmja
 
-### UI Frameworks
+### Chrome
+> Ensure you installed [bewlybewly-extension.zip](https://github.com/hakadao/BewlyBewly/releases) and decompress this file.
 
-- [UnoCSS](https://github.com/unocss/unocss) - the instant on-demand Atomic CSS engine
+1. Type in `chrome://extensions/` in the address bar and press Enter
+2. Turn on `Developer mode` then press `Load unpacked` <br/> <img width="655" alt="Snipaste_2022-03-27_18-17-04" src="https://user-images.githubusercontent.com/33394391/160276882-13da0484-92c1-47dd-add8-7655c5c2bf1c.png">
+3. Load decompressed exetension folder in your browser <br/> <img width="655" alt="Snipaste_2022-03-27_18-44-20" src="https://user-images.githubusercontent.com/33394391/160277821-a950074f-cc2f-4bd2-94b6-48c3d2dc851a.png">
 
-### Coding Style
+## 🚩 Getting started
 
-- Use Composition API with [`<script setup>` SFC syntax](https://github.com/vuejs/rfcs/pull/227)
-- [ESLint](https://eslint.org/) with [@antfu/eslint-config](https://github.com/antfu/eslint-config), single quotes, no semi
+To get suggested videos on the homepage, click on the `Settings` button in the bottom right corner.
 
-### Dev tools
+<img width="200" src="https://user-images.githubusercontent.com/33394391/160269696-265fbe8f-00fb-4cb6-bd86-b9c0a385253c.png">
 
-- [TypeScript](https://www.typescriptlang.org/)
-- [pnpm](https://pnpm.js.org/) - fast, disk space efficient package manager
-- [esno](https://github.com/antfu/esno) - TypeScript / ESNext node runtime powered by esbuild
-- [npm-run-all](https://github.com/mysticatea/npm-run-all) - Run multiple npm-scripts in parallel or sequential
-- [web-ext](https://github.com/mozilla/web-ext) - Streamlined experience for developing web extensions
+Make sure you log in to bilibili first and then click on the `Authorize` button.
 
-## Use the Template
+<img width="655" src="https://user-images.githubusercontent.com/33394391/160272991-1351ec1d-32a6-4faf-8cd7-4d12a2445958.png">
 
-### GitHub Template
+When the `Authorize` button changes to the `Revoke` button, you can get suggested videos based on what you watch.
 
-[Create a repo from this template on GitHub](https://github.com/antfu/vitesse-webext/generate).
+## 🤔 Authorization & Access Key
 
-### Clone to local
+https://github.com/indefined/UserScripts/tree/master/bilibiliHome#%E6%8E%88%E6%9D%83%E8%AF%B4%E6%98%8E
 
-If you prefer to do it manually with the cleaner git history
-
-> If you don't have pnpm installed, run: npm install -g pnpm
-
-```bash
-npx degit antfu/vitesse-webext my-webext
-cd my-webext
-pnpm i
-```
-
-## Usage
-
-### Folders
-
-- `src` - main source.
-  - `contentScript` - scripts and components to be injected as `content_script`
-  - `background` - scripts for background.
-  - `components` - auto-imported Vue components that are shared in popup and options page.
-  - `styles` - styles shared in popup and options page
-  - `assets` - assets used in Vue components
-  - `manifest.ts` - manifest for the extension.
-- `assets` - static assets (mainly for `manifest.json`).
-- `extension` - extension package root.
-- `scripts` - development and bundling helper scripts.
+## 🔧 Development & build
 
 ### Development
 
@@ -100,16 +56,6 @@ pnpm dev
 
 Then **load extension in browser with the `extension/` folder**.
 
-For Firefox developers, you can run the following command instead:
-
-```bash
-pnpm start:firefox
-```
-
-`web-ext` auto reload the extension when `extension/` files changed.
-
-> While Vite handles HMR automatically in the most of the case, [Extensions Reloader](https://chrome.google.com/webstore/detail/fimgfedafeadlieiabdeeaodndnlbhid) is still recommanded for cleaner hard reloading.
-
 ### Build
 
 To build the extension, run
@@ -118,14 +64,16 @@ To build the extension, run
 pnpm build
 ```
 
-And then pack files under `extension`, you can upload `extension.crx` or `extension.xpi` to appropriate extension store.
+And then pack files under `extension`
 
-## Credits
+## ❤️ Credits
 
-[![Volta](https://user-images.githubusercontent.com/904724/195351818-9e826ea9-12a0-4b06-8274-352743cd2047.png)](https://volta.net)
+[vitesse-webext](https://github.com/antfu/vitesse-webext)
 
-This template is originally made for the [volta.net](https://volta.net) browser extension.
+[UserScripts/bilibiliHome](https://github.com/indefined/UserScripts/tree/master/bilibiliHome)
 
-## Variations
+[Bilibili-Evolved](https://github.com/the1812/Bilibili-Evolved)
 
-This is a variant of [Vitesse](https://github.com/antfu/vitesse), check out the [full variations list](https://github.com/antfu/vitesse#variations).
+[bilibili-API-collect](https://github.com/SocialSisterYi/bilibili-API-collect)
+
+</details>
