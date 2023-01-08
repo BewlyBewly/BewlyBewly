@@ -3,9 +3,6 @@ import browser from 'webextension-polyfill'
 import { onMessage, sendMessage } from 'webext-bridge'
 import { setupAllAPIs } from './apis'
 
-if (__DEV__)
-  import('./contentScriptHMR')
-
 browser.runtime.onInstalled.addListener((): void => {
   // eslint-disable-next-line no-console
   console.log('Extension installed')

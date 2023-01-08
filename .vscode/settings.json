@@ -1,14 +1,14 @@
 {
   "cSpell.words": ["Vitesse"],
   "typescript.tsdk": "node_modules/typescript/lib",
-  "volar.tsPlugin": true,
-  "volar.tsPluginStatus": false,
   "vite.autoStart": false,
   "editor.codeActionsOnSave": {
-
-    "source.fixAll.eslint": true,
+    "source.fixAll.eslint": true
   },
   "files.associations": {
-    "*.css": "postcss",
+    "*.css": "postcss"
   },
+  "i18n-ally.localesPaths": [
+    "_locales"
+  ]
 }

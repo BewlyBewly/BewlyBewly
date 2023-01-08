@@ -1,3 +1,4 @@
-import './reset.scss'
+import '@unocss/reset/tailwind.css'
 import './main.scss'
-import 'virtual:windi.css'
+import './reset.scss'
+import 'uno.css'

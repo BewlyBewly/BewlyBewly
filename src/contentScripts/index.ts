@@ -1,13 +1,12 @@
-/* eslint-disable no-console */
 import { onMessage } from 'webext-bridge'
 import { createApp } from 'vue'
-// import { router } from '~/contentScripts/router'
-
-// Firefox `browser.tabs.executeScript()` requires scripts return a primitive value
-
 import App from './views/App.vue'
 import { SVG_ICONS, getCookie, i18n, setCookie } from '~/utils'
-;(() => {
+
+/* eslint-disable no-console */
+
+// Firefox `browser.tabs.executeScript()` requires scripts return a primitive value
+(() => {
   console.info('[vitesse-webext] Hello world from content script')
 
   // communication example: send previous tab title from background page

@@ -29,11 +29,10 @@ export default defineComponent({
   methods: {
     async logout() {
       revokeAccessKey()
-      await browser.runtime
-        .sendMessage({
-          contentScriptQuery: 'logout',
-          biliCSRF: getCSRF(),
-        })
+      await browser.runtime.sendMessage({
+        contentScriptQuery: 'logout',
+        biliCSRF: getCSRF(),
+      })
       location.reload()
     },
   },
@@ -47,27 +46,43 @@ export default defineComponent({
       <div
         class="bg-$bew-theme-color px-3 py-1 ml-2 text-white rounded-$bew-radius text-base leading-none"
       >
-        {{ userInfo.level_info?.current_level ? userInfo.level_info.current_level : '0' }}
+        {{
+          userInfo.level_info?.current_level
+            ? userInfo.level_info.current_level
+            : '0'
+        }}
       </div>
     </div>
-    <div class="text-sm text-$bew-text-2" flex="~" items="center" justify="center" m="t-1 b-3">
+    <div
+      class="text-sm text-$bew-text-2"
+      flex="~"
+      items="center"
+      justify="center"
+      m="t-1 b-3"
+    >
       <a
-        class="mr-4"
+        class="group mr-4"
         href="https://account.bilibili.com/account/coin"
         target="_blank"
       >{{ $t('topbar.user_dropdown.money') + userInfo.money }}</a>
       <a
+        class="group"
         href="https://pay.bilibili.com/pay-v2-web/bcoin_index"
         target="_blank"
-      >{{ $t('topbar.user_dropdown.b_coins') + userInfo.wallet?.bcoin_balance }}</a>
+      >{{
+        $t('topbar.user_dropdown.b_coins') + userInfo.wallet?.bcoin_balance
+      }}</a>
     </div>
     <div id="channel-info">
       <a
+        class="group"
         :href="`https://space.bilibili.com/${mid}/fans/follow`"
         target="_blank"
         :title="userStat.following"
       >
-        <div class="num">{{ userStat.following ? numFormatter(userStat.following) : '0' }}</div>
+        <div class="num">
+          {{ userStat.following ? numFormatter(userStat.following) : '0' }}
+        </div>
         <div>{{ $t('topbar.user_dropdown.following') }}</div>
       </a>
       <a
@@ -75,7 +90,9 @@ export default defineComponent({
         target="_blank"
         :title="userStat.follower"
       >
-        <div class="num">{{ userStat.follower ? numFormatter(userStat.follower) : '0' }}</div>
+        <div class="num">
+          {{ userStat.follower ? numFormatter(userStat.follower) : '0' }}
+        </div>
         <div>{{ $t('topbar.user_dropdown.followers') }}</div>
       </a>
       <a
@@ -83,7 +100,11 @@ export default defineComponent({
         target="_blank"
         :title="userStat.dynamic_count"
       >
-        <div class="num">{{ userStat.dynamic_count ? numFormatter(userStat.dynamic_count) : '0' }}</div>
+        <div class="num">
+          {{
+            userStat.dynamic_count ? numFormatter(userStat.dynamic_count) : '0'
+          }}
+        </div>
         <div>{{ $t('topbar.user_dropdown.posts') }}</div>
       </a>
     </div>
@@ -92,7 +113,10 @@ export default defineComponent({
         {{ $t('topbar.user_dropdown.accout_settings') }}
         <tabler:arrow-right />
       </a>
-      <a href="https://member.bilibili.com/v2#/upload-manager/article" target="_blank">
+      <a
+        href="https://member.bilibili.com/v2#/upload-manager/article"
+        target="_blank"
+      >
         {{ $t('topbar.user_dropdown.uploads_manager') }}
         <tabler:arrow-right />
       </a>
@@ -137,8 +161,12 @@ export default defineComponent({
     @apply p-2 m-0 rounded-$bew-radius text-sm
       flex flex-col items-center transition-all duration-300
       bg-$bew-fill-1
-      hover:$bg-$bew-theme-color
-      hover:text-white '!hover:children:text-white';
+      // hover:bg-$bew-theme-color
+      hover:text-white;
+
+    .group & {
+      @apply important-hover:text-white;
+    }
 
     > * {
       @apply duration-300;
@@ -169,7 +197,7 @@ export default defineComponent({
 }
 
 #logout {
-  @apply text-red-400 '!block' px-4 py-2 rounded-$bew-radius
+  @apply text-red-400 important:block px-4 py-2 rounded-$bew-radius
     duration-300 cursor-pointer
     hover:bg-$bew-fill-2;
 }

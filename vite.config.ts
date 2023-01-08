@@ -4,13 +4,13 @@ import { dirname, relative } from 'path'
 import type { UserConfig } from 'vite'
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
+import replace from '@rollup/plugin-replace'
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
-import VueI18n from '@intlify/vite-plugin-vue-i18n'
-import WindiCSS from 'vite-plugin-windicss'
-import windiConfig from './windi.config'
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
+import UnoCSS from 'unocss/vite'
 import { isDev, port, r } from './scripts/utils'
 import { MV3Hmr } from './vite-mv3-hmr'
 
@@ -21,9 +21,6 @@ export const sharedConfig: UserConfig = {
       '~/': `${r('src')}/`,
     },
   },
-  define: {
-    __DEV__: isDev,
-  },
   plugins: [
     Vue(),
 
@@ -31,7 +28,9 @@ export const sharedConfig: UserConfig = {
       imports: [
         'vue',
         {
-          'webextension-polyfill': [['*', 'browser']],
+          'webextension-polyfill': [
+            ['*', 'browser'],
+          ],
         },
       ],
       dts: r('src/auto-imports.d.ts'),
@@ -53,11 +52,21 @@ export const sharedConfig: UserConfig = {
     // https://github.com/antfu/unplugin-icons
     Icons(),
 
-    // https://github.com/intlify/bundle-tools/tree/main/packages/vite-plugin-vue-i18n
-    VueI18n({
+    // https://github.com/intlify/bundle-tools/tree/main/packages/unplugin-vue-i18n
+    VueI18nPlugin({
       runtimeOnly: true,
       compositionOnly: true,
       include: [r('./_locales/**')],
+    }),
+
+    // https://github.com/unocss/unocss
+    UnoCSS(),
+
+    replace({
+      '__DEV__': JSON.stringify(isDev),
+      'process.env.NODE_ENV': JSON.stringify(isDev ? 'development' : 'production'),
+      '__VUE_OPTIONS_API__': JSON.stringify(true),
+      '__VUE_PROD_DEVTOOLS__': JSON.stringify(false),
     }),
 
     // rewrite assets to use relative path
@@ -71,8 +80,14 @@ export const sharedConfig: UserConfig = {
     },
   ],
   optimizeDeps: {
-    include: ['vue', '@vueuse/core', 'webextension-polyfill'],
-    exclude: ['vue-demi'],
+    include: [
+      'vue',
+      '@vueuse/core',
+      'webextension-polyfill',
+    ],
+    exclude: [
+      'vue-demi',
+    ],
   },
 }
 
@@ -90,7 +105,6 @@ export default defineConfig(({ command }) => ({
     emptyOutDir: false,
     sourcemap: isDev ? 'inline' : false,
     // https://developer.chrome.com/docs/webstore/program_policies/#:~:text=Code%20Readability%20Requirements
-    minify: 'terser',
     terserOptions: {
       mangle: false,
     },
@@ -100,14 +114,10 @@ export default defineConfig(({ command }) => ({
         popup: r('src/popup/index.html'),
       },
     },
+    minify: 'terser',
   },
   plugins: [
     ...sharedConfig.plugins!,
-
-    // https://github.com/antfu/vite-plugin-windicss
-    WindiCSS({
-      config: windiConfig,
-    }),
 
     MV3Hmr(),
   ],

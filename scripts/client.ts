@@ -1,8 +1,8 @@
-/* eslint-disable no-console */
 import type { ErrorPayload, HMRPayload, Update } from 'vite'
 import type { ViteHotContext } from 'vite/types/hot'
 import type { InferCustomEventPayload } from 'vite/types/customEvent'
-import { ErrorOverlay, overlayId } from 'vite/src/client/overlay'
+// Vite v3 doesn't export overlay
+// import { ErrorOverlay, overlayId } from 'vite/src/client/overlay'
 
 console.debug('[vite] connecting...')
 
@@ -25,12 +25,12 @@ try {
   socket = new WebSocket(`${socketProtocol}://${socketHost}`, 'vite-hmr')
 
   // Listen for messages
-  socket.addEventListener('message', async({ data }) => {
+  socket.addEventListener('message', async ({ data }) => {
     handleMessage(JSON.parse(data))
   })
 
   // ping server
-  socket.addEventListener('close', async({ wasClean }) => {
+  socket.addEventListener('close', async ({ wasClean }) => {
     if (wasClean)
       return
     console.log('[vite] server connection lost. polling for restart...')
@@ -164,19 +164,20 @@ function notifyListeners(event: string, data: any): void {
     cbs.forEach(cb => cb(data))
 }
 
-function createErrorOverlay(err: ErrorPayload['err']) {
+function createErrorOverlay(_err: ErrorPayload['err']) {
   if (!enableOverlay)
     return
   clearErrorOverlay()
-  document.body.appendChild(new ErrorOverlay(err))
+  // document.body.appendChild(new ErrorOverlay(err))
 }
 
 function clearErrorOverlay() {
-  document.querySelectorAll(overlayId).forEach(n => (n as ErrorOverlay).close())
+  // document.querySelectorAll(overlayId).forEach(n => (n as ErrorOverlay).close())
 }
 
 function hasErrorOverlay() {
-  return document.querySelectorAll(overlayId).length
+  // return document.querySelectorAll(overlayId).length
+  return false
 }
 
 let pending = false
@@ -200,7 +201,6 @@ async function queueUpdate(p: Promise<(() => void) | undefined>) {
 }
 
 async function waitForSuccessfulPing(ms = 1000) {
-  // eslint-disable-next-line no-constant-condition
   while (true) {
     try {
       // A fetch on a websocket URL will return a successful promise with status 400,
@@ -239,7 +239,6 @@ export function updateStyle(id: string, content: string): void {
     if (!style) {
       style = new CSSStyleSheet()
       style.replaceSync(content)
-      // @ts-expect-error: using experimental API
       document.adoptedStyleSheets = [...document.adoptedStyleSheets, style]
     }
     else {
@@ -268,13 +267,12 @@ export function updateStyle(id: string, content: string): void {
 export function removeStyle(id: string): void {
   const style = sheetsMap.get(id)
   if (style) {
-    if (style instanceof CSSStyleSheet) {
-      // @ts-expect-error: using experimental API
+    if (style instanceof CSSStyleSheet)
       document.adoptedStyleSheets = document.adoptedStyleSheets.filter((s: CSSStyleSheet) => s !== style)
-    }
-    else {
+
+    else
       document.head.removeChild(style)
-    }
+
     sheetsMap.delete(id)
   }
 }
@@ -320,7 +318,7 @@ async function fetchUpdate({ path, acceptedPath, timestamp }: Update) {
   })
 
   await Promise.all(
-    Array.from(modulesToUpdate).map(async(dep) => {
+    Array.from(modulesToUpdate).map(async (dep) => {
       const disposer = disposeMap.get(dep)
       if (disposer)
         await disposer(dataMap.get(dep))
@@ -442,7 +440,7 @@ export function createHotContext(ownerPath: string): ViteHotContext {
     },
 
     // TODO
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
+
     decline() { },
 
     invalidate() {
@@ -485,5 +483,3 @@ export function injectQuery(url: string, queryToInject: string): string {
 
   return `${pathname}?${queryToInject}${search ? `&${search.slice(1)}` : ''}${hash || ''}`
 }
-
-export { ErrorOverlay }

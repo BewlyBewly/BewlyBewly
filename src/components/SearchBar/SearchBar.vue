@@ -111,9 +111,11 @@ export default defineComponent({
 <template>
   <div
     id="search-wrap"
-    w="full max-500px"
+    w="full"
+    max-w="500px"
     m="x-8"
     pos="relative"
+    grid="~"
   >
     <div
       v-if="isFocus"
@@ -207,7 +209,7 @@ export default defineComponent({
 
   @mixin search-content {
     @include card-content;
-    @apply mt-2 p-2 absolute rounded-$bew-radius
+    @apply p-2 top-60px absolute rounded-$bew-radius
       hover:block;
   }
 

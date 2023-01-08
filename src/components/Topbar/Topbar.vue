@@ -410,7 +410,7 @@ function getNewMomentsCount() {
 
 .slide-leave-to,
 .slide-enter-from {
-  @apply transform '!-translate-y-4' opacity-0;
+  @apply transform important:translate-y-4 opacity-0;
 }
 
 .topbar-enter-active,
@@ -426,9 +426,10 @@ function getNewMomentsCount() {
 .bew-popover {
   @apply absolute top-60px left-1/2
     transform -translate-x-1/2
-    after:content-open-quote
-    after:opacity-0 after:w-full after:h-16
-    after:absolute after:-top-8 after:left-0 after:-z-1;
+    overflow-visible
+    after:content-empty
+    after:opacity-0 after:w-full after:h-100px
+    after:absolute after:-top-50px after:left-0 after:-z-1;
 }
 
 .left-side {
@@ -459,7 +460,8 @@ function getNewMomentsCount() {
   box-shadow: var(--bew-shadow-2);
 
   .unread-message {
-    @apply absolute -top-1 right-0 "!px-1" "!py-2" rounded-full
+    @apply absolute -top-1 right-0
+      important:px-1 important:py-2 rounded-full
       text-xs leading-0 z-1 min-w-16px h-16px
       flex justify-center items-center
       bg-$bew-theme-color  text-white;
@@ -477,8 +479,9 @@ function getNewMomentsCount() {
   }
 
   .login {
-    @apply rounded-full "!text-$bew-theme-color" "!px-4" mx-1 border-1
-      flex items-center justify-center "!text-base" w-120px
+    @apply rounded-full
+      important:text-$bew-theme-color important:px-4 mx-1 border-1
+      flex items-center justify-center important:text-base w-120px
       border-solid border-$bew-theme-color;
   }
 
@@ -490,7 +493,7 @@ function getNewMomentsCount() {
       @apply duration-300;
 
       &.hover {
-        @apply transform scale-230 "!translate-y-30px";
+        @apply transform scale-230 important:translate-y-30px;
       }
     }
 

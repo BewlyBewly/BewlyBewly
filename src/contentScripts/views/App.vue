@@ -1,37 +1,39 @@
 <script setup lang="ts">
 import { useDark, useToggle } from '@vueuse/core'
+import 'uno.css'
 import { apperance, isShowTopbar } from '~/logic/storage'
 import { language } from '~/logic'
-import 'virtual:windi.css'
 import '~/styles/index.ts'
 import Home from './home/Home.vue'
-import { useI18n } from 'vue-i18n'
+
+// const [show, toggle] = useToggle(false)
 
 const [showSettings, toggle] = useToggle(false)
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
-const { locale } = useI18n()
-
-window.onload = () => {
-  // if there is first-time load extension, set the default language by browser display language
-  if (language.value === '') {
-    if (browser.i18n.getUILanguage() === 'zh-CN')
-      language.value = 'cmn-SC'
-    else if (browser.i18n.getUILanguage() === 'zh-TW')
-      language.value = 'cmn-TC'
-    else
-      language.value = 'en'
-  }
-
-  locale.value = language.value
-
-  // locale.value = language.value
-}
 </script>
 
 <template>
+  <!-- <div class="fixed right-0 bottom-0 m-5 z-100 flex font-sans select-none leading-1em">
+    <div
+      class="bg-white text-gray-800 rounded-full shadow w-max h-min"
+      p="x-4 y-2"
+      m="y-auto r-2"
+      transition="opacity duration-300"
+      :class="show ? 'opacity-100' : 'opacity-0'"
+    >
+      Vitesse WebExt 323143214214
+    </div>
+    <div
+      class="flex w-10 h-10 rounded-full shadow cursor-pointer"
+      bg="teal-600 hover:teal-700"
+      @click="toggle()"
+    >
+      <pixelarticons-power class="block m-auto text-white text-lg" />
+    </div>
+  </div> -->
   <Transition>
-    <Topbar v-if="isShowTopbar" class="fixed z-50" />
+    <Topbar class="fixed z-50" />
   </Transition>
   <!-- is home page -->
   <Home />
