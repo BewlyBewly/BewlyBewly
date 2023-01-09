@@ -33,7 +33,7 @@ const toggleDark = useToggle(isDark)
     </div>
   </div> -->
   <Transition>
-    <Topbar class="fixed z-50" />
+    <Topbar v-show="isShowTopbar" class="fixed z-50" />
   </Transition>
   <!-- is home page -->
   <Home />

@@ -1,6 +1,6 @@
 <script lang="ts">
 import { grantAccessKey, revokeAccessKey } from '~/utils/index'
-import { language, isShowTopbar, accessKey } from '~/logic'
+import { accessKey, isShowTopbar, language } from '~/logic'
 
 export default defineComponent({
   emits: ['close'],
@@ -50,7 +50,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="fixed w-full h-full top-0 left-0 bg-black bg-opacity-30" z="9998" @click="close"></div>
+  <div class="fixed w-full h-full top-0 left-0 bg-black bg-opacity-30" z="9998" @click="close" />
 
   <div id="settings-window" z="9999">
     <div
@@ -81,18 +81,17 @@ export default defineComponent({
         v-model="language"
         :options="langs"
         w="full"
-      >
-      </bew-select>
+      />
     </div>
 
     <div class="settings-item">
       <div>
         {{ $t('settings.authorize_app') }}
-        <br />
+        <br>
         <span class="desc">{{ $t('settings.authorize_app_desc') }}</span>
       </div>
       <button
-        v-if="accessKey + '' === 'undefined' || accessKey + '' === 'null' || accessKey === ''"
+        v-if="`${accessKey}` === 'undefined' || `${accessKey}` === 'null' || accessKey === ''"
         ref="authorizeBtn"
         class="btn"
         @click="onAuthorize"
@@ -107,14 +106,14 @@ export default defineComponent({
     <div class="settings-item">
       <div>
         {{ $t('settings.topbar_visiable') }}
-        <br />
+        <br>
         <span class="desc">{{ $t('settings.topbar_visiable_desc') }}</span>
       </div>
       <div>
         <label for="topbarVisiable" class="chk-btn" cursor="pointer" pointer="auto">
           <template v-if="isShowTopbar">{{ $t('settings.chk_box.show') }}</template>
           <template v-else>{{ $t('settings.chk_box.hidden') }}</template>
-          <input id="topbarVisiable" v-model="isShowTopbar" type="checkbox" />
+          <input id="topbarVisiable" v-model="isShowTopbar" type="checkbox">
         </label>
       </div>
     </div>
