@@ -1,6 +1,10 @@
 <script lang="ts">
 import type { HistoryItem, SuggestionItem } from './searchHistoryProvider'
-import { addSearchHistory, getSearchHistory, removeSearchHistory } from './searchHistoryProvider'
+import {
+  addSearchHistory,
+  getSearchHistory,
+  removeSearchHistory,
+} from './searchHistoryProvider'
 
 export default defineComponent({
   data() {
@@ -57,15 +61,13 @@ export default defineComponent({
       document.querySelectorAll('.suggestion-item').forEach((item, index) => {
         if (index === this.selectedIndex)
           item.classList.add('active')
-        else
-          item.classList.remove('active')
+        else item.classList.remove('active')
       })
 
       document.querySelectorAll('.history-item').forEach((item, index) => {
         if (index === this.selectedIndex)
           item.classList.add('active')
-        else
-          item.classList.remove('active')
+        else item.classList.remove('active')
       })
     },
     onDown() {
@@ -75,11 +77,17 @@ export default defineComponent({
       else if (this.isFocus && !this.keyword && this.searchHistory.length !== 0)
         isShowSuggestion = false
 
-      if (isShowSuggestion && this.selectedIndex >= Object.keys(this.suggestions).length - 1) {
+      if (
+        isShowSuggestion
+        && this.selectedIndex >= Object.keys(this.suggestions).length - 1
+      ) {
         this.selectedIndex = Object.keys(this.suggestions).length - 1
         return
       }
-      if (!isShowSuggestion && this.selectedIndex >= this.searchHistory.length - 1) {
+      if (
+        !isShowSuggestion
+        && this.selectedIndex >= this.searchHistory.length - 1
+      ) {
         this.selectedIndex = this.searchHistory.length - 1
         return
       }
@@ -92,42 +100,37 @@ export default defineComponent({
       document.querySelectorAll('.suggestion-item').forEach((item, index) => {
         if (index === this.selectedIndex)
           item.classList.add('active')
-        else
-          item.classList.remove('active')
+        else item.classList.remove('active')
       })
 
       document.querySelectorAll('.history-item').forEach((item, index) => {
         if (index === this.selectedIndex)
           item.classList.add('active')
-        else
-          item.classList.remove('active')
+        else item.classList.remove('active')
       })
     },
   },
-
 })
 </script>
 
 <template>
-  <div
-    id="search-wrap"
-    w="full"
-    max-w="500px"
-    m="x-8"
-    pos="relative"
-    grid="~"
-  >
+  <div id="search-wrap" w="full" max-w="500px" m="x-8" pos="relative" grid="~">
     <div
       v-if="isFocus"
-      class="fixed top-0 left-0"
+      pos="fixed top-0 left-0"
       w="full"
       h="full"
       content="~"
       @click="isFocus = false"
     />
-    <div class="search-bar">
+    <div class="search-bar group" flex="~" items-center pos="relative">
       <input
         v-model.trim="keyword"
+        rounded="60px focus:$bew-radius"
+        p="l-6 r-16 y-3"
+        text="$bew-text-1"
+        un-border="3 solid transparent focus:$bew-theme-color"
+        transition="all duration-300"
         type="text"
         @focus="isFocus = true"
         @input="onSearchChange()"
@@ -135,29 +138,61 @@ export default defineComponent({
         @keyup.up="onUp"
         @keyup.down="onDown"
       >
-      <button class="search-btn" @click="goToSearchPage(keyword)">
+      <button
+        p-2
+        rounded-full
+        text="lg leading-0 $bew-text-1 group-focus-within:$bew-theme-color"
+        transition="all duration-300"
+        border-none
+        outline-none
+        pos="absolute right-2"
+        bg="hover:bg-$bew-fill-2"
+        @click="goToSearchPage(keyword)"
+      >
         <tabler:search />
       </button>
     </div>
 
-    <transition>
-      <div v-if="isFocus && searchHistory.length !== 0 && Object.keys(suggestions).length === 0" id="search-history">
+    <Transition>
+      <div
+        v-if="
+          isFocus
+            && searchHistory.length !== 0
+            && Object.keys(suggestions).length === 0
+        "
+        id="search-history"
+      >
         <div
-          v-for="(item) in searchHistory"
+          v-for="item in searchHistory"
           :key="item.value"
           class="history-item"
+          flex
+          justify-between
+          items-center
           @click="goToSearchPage(item.value)"
         >
           {{ item.value }}
-          <button class="delete" @click.stop="onDelHistoryItem(item.value)">
+          <button
+            class="delete"
+            rounded-full
+            duration-300
+            pointer-events-auto
+            cursor-pointer
+            text="base $bew-text-2"
+            leading-0
+            @click.stop="onDelHistoryItem(item.value)"
+          >
             <ic-baseline-clear />
           </button>
         </div>
       </div>
-    </transition>
+    </Transition>
 
-    <transition>
-      <div v-if="isFocus && Object.keys(suggestions).length !== 0" id="search-suggestion">
+    <Transition>
+      <div
+        v-if="isFocus && Object.keys(suggestions).length !== 0"
+        id="search-suggestion"
+      >
         <div
           v-for="(item, index) in suggestions"
           :key="index"
@@ -167,59 +202,49 @@ export default defineComponent({
           {{ item.value }}
         </div>
       </div>
-    </transition>
+    </Transition>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .v-enter-active,
 .v-leave-active {
-  @apply transition-all duration-300
+  --at-apply: transition-all duration-300
 }
 
 .v-enter-from,
 .v-leave-to {
-  @apply transform translate-y-4 opacity-0 scale-95
+  --at-apply: transform translate-y-4 opacity-0 scale-95
 }
 
 #search-wrap {
 
   @mixin card-content {
-    @apply text-base border-none outline-none w-full
+    --at-apply: text-base outline-none w-full
       bg-$bew-content-1 backdrop-$bew-filter-glass;
     box-shadow: var(--bew-shadow-2);
     backdrop-filter: var(--bew-filter-glass);
   }
 
   .search-bar {
-    @apply flex items-center relative;
-
     input {
       @include card-content;
-      @apply rounded-$bew-radius pl-6 pr-16 py-3 text-$bew-text-1;
-    }
-
-    .search-btn {
-      @apply p-2 rounded-full text-lg leading-0 duration-300
-       border-none outline-none absolute right-2
-       text-$bew-text-1
-       hover:bg-$bew-fill-2;
     }
   }
 
   @mixin search-content {
     @include card-content;
-    @apply p-2 top-60px absolute rounded-$bew-radius
+    --at-apply: p-2 top-60px absolute rounded-$bew-radius
       hover:block;
   }
 
   @mixin search-content-item {
-    @apply px-4 py-2 w-full rounded-$bew-radius duration-300 cursor-pointer
+    --at-apply: px-4 py-2 w-full rounded-$bew-radius duration-300 cursor-pointer
       not-first:mt-1
       hover:bg-$bew-fill-2;
 
     &.active {
-      @apply bg-$bew-fill-2;
+      --at-apply: bg-$bew-fill-2;
     }
   }
 
@@ -233,16 +258,5 @@ export default defineComponent({
     }
   }
 
-  #search-history {
-    .history-item {
-      @apply flex justify-between items-center;
-
-      .delete {
-        @apply rounded-full duration-300 text-base
-        leading-0 pointer-events-auto cursor-pointer
-        text-$bew-text-2;
-      }
-    }
-  }
 }
 </style>

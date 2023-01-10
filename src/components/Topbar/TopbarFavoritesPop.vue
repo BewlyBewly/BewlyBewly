@@ -168,10 +168,10 @@ function scrollToTop(element: HTMLElement, duration: number) {
       w="full"
       bg="$bew-content-1"
       z="2"
-      border="!rounded-t-$bew-radius"
+      un-border="!rounded-t-$bew-radius"
       style="backdrop-filter: var(--bew-filter-glass)"
     >
-      <h3 cursor="pointer" @click="scrollToTop(favoriteVideosWrap, 300)">
+      <h3 cursor="pointer" font-600 @click="scrollToTop(favoriteVideosWrap, 300)">
         {{ activatedFavoriteTitle }}
       </h3>
 
@@ -185,14 +185,14 @@ function scrollToTop(element: HTMLElement, duration: number) {
         w="120px"
         h="430px"
         overflow="y-scroll"
-        border="rounded-l-$bew-radius"
+        un-border="rounded-l-$bew-radius"
         flex="shrink-0"
       >
         <ul grid="~ cols-1" bg="$bew-fill-2">
           <li
             v-for="item in favoriteCategories"
             :key="item.id"
-            :class="activatedMediaId === item.id ? 'actived-category' : ''"
+            :class="activatedMediaId === item.id ? 'activated-category' : ''"
             p="y-2 x-6"
             first:m="t-[45.5px]"
             cursor="pointer"
@@ -319,7 +319,7 @@ function scrollToTop(element: HTMLElement, duration: number) {
   @apply opacity-0 transform translate-y-2 transform-gpu;
 }
 
-.actived-category {
-  @apply bg-$bew-theme-color;
+.activated-category {
+  @apply bg-$bew-theme-color text-white;
 }
 </style>

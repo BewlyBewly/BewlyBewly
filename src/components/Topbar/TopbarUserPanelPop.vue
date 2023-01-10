@@ -164,12 +164,12 @@ export default defineComponent({
       // hover:bg-$bew-theme-color
       hover:text-white;
 
-    .group & {
-      @apply important-hover:text-white;
+    > * {
+      // @apply transition-all duration-300;
     }
 
-    > * {
-      @apply duration-300;
+    &:hover .num + div{
+      @apply text-white;
     }
 
     .num {
