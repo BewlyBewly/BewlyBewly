@@ -1,47 +1,50 @@
 <script setup lang="ts">
 import { useDark, useToggle } from '@vueuse/core'
 import 'uno.css'
-import { apperance, isShowTopbar } from '~/logic/storage'
+import { useI18n } from 'vue-i18n'
+import browser from 'webextension-polyfill'
+import Home from './Home/Home.vue'
+import { isShowTopbar } from '~/logic/storage'
 import { language } from '~/logic'
 import '~/styles/index.ts'
-import Home from './home/Home.vue'
+import { LanguageType } from '~/enums/appEnums'
 
-// const [show, toggle] = useToggle(false)
-
+const { locale } = useI18n()
 const [showSettings, toggle] = useToggle(false)
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
+
+window.onload = async () => {
+  // if there is first-time load extension, set the default language by browser display language
+  if (!language.value) {
+    if (browser.i18n.getUILanguage() === 'zh-CN') {
+      language.value = LanguageType.Mandarin_CN
+    }
+    else if (browser.i18n.getUILanguage() === 'zh-TW') {
+      // Since getUILanguage() cannot get the zh-HK language code
+      // use getAcceptLanguages() to get the language code
+      const languages: string[] = await browser.i18n.getAcceptLanguages()
+      if (languages.includes('zh-HK'))
+        language.value = LanguageType.Cantonese
+      else language.value = LanguageType.Mandarin_TW
+    }
+    else {
+      language.value = LanguageType.English
+    }
+  }
+
+  locale.value = language.value
+}
 </script>
 
 <template>
-  <!-- <div class="fixed right-0 bottom-0 m-5 z-100 flex font-sans select-none leading-1em">
-    <div
-      class="bg-white text-gray-800 rounded-full shadow w-max h-min"
-      p="x-4 y-2"
-      m="y-auto r-2"
-      transition="opacity duration-300"
-      :class="show ? 'opacity-100' : 'opacity-0'"
-    >
-      Vitesse WebExt 323143214214
-    </div>
-    <div
-      class="flex w-10 h-10 rounded-full shadow cursor-pointer"
-      bg="teal-600 hover:teal-700"
-      @click="toggle()"
-    >
-      <pixelarticons-power class="block m-auto text-white text-lg" />
-    </div>
-  </div> -->
   <Transition>
     <Topbar v-show="isShowTopbar" class="fixed z-50" />
   </Transition>
   <!-- is home page -->
   <Home />
   <!-- button -->
-  <div
-    flex="~ col"
-    pos="fixed bottom-5 lg:right-5 <lg:right-3"
-  >
+  <div flex="~ col" pos="fixed bottom-5 lg:right-5 <lg:right-3">
     <button
       class="transform active:scale-90"
       w="lg:45px <lg:40px"
@@ -53,7 +56,10 @@ const toggleDark = useToggle(isDark)
       font="leading-0"
       duration="300"
       rounded="$bew-radius"
-      style="box-shadow: var(--bew-shadow-2); backdrop-filter: var(--bew-filter-glass);"
+      style="
+        box-shadow: var(--bew-shadow-2);
+        backdrop-filter: var(--bew-filter-glass);
+      "
       @click="toggleDark()"
     >
       <tabler:moon-stars v-if="isDark" />
@@ -70,7 +76,10 @@ const toggleDark = useToggle(isDark)
       font="leading-0"
       duration="300"
       rounded="$bew-radius"
-      style="box-shadow: var(--bew-shadow-2); backdrop-filter: var(--bew-filter-glass);"
+      style="
+        box-shadow: var(--bew-shadow-2);
+        backdrop-filter: var(--bew-filter-glass);
+      "
       @click="toggle()"
     >
       <tabler:settings />

@@ -103,8 +103,8 @@ settings:
   select_language: 界面语文
   select_language_opt:
     english: 英文
-    mandarin_sc: 简体中文
-    mandarin_tc: 正體中文
+    Mandarin_CN: 简体中文
+    Mandarin_TW: 正體中文
     jyut: 粵文
   authorize_app: 授权 BewlyBewly 使用 access key
   authorize_app_desc: >

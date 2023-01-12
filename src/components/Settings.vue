@@ -15,12 +15,12 @@ export default defineComponent({
           label: this.$t('settings.select_language_opt.english'),
         },
         {
-          value: 'cmn-SC',
-          label: this.$t('settings.select_language_opt.mandarin_sc'),
+          value: 'cmn-CN',
+          label: this.$t('settings.select_language_opt.Mandarin_CN'),
         },
         {
-          value: 'cmn-TC',
-          label: this.$t('settings.select_language_opt.mandarin_tc'),
+          value: 'cmn-TW',
+          label: this.$t('settings.select_language_opt.Mandarin_TW'),
         },
         {
           value: 'jyut',
@@ -84,7 +84,7 @@ export default defineComponent({
       />
     </div>
 
-    <div class="settings-item">
+    <!-- <div class="settings-item">
       <div>
         {{ $t('settings.authorize_app') }}
         <br>
@@ -101,7 +101,7 @@ export default defineComponent({
       <button v-else class="line-btn" @click="onRevoke">
         <span>{{ $t('settings.btn.revoke') }}</span>
       </button>
-    </div>
+    </div> -->
 
     <div class="settings-item">
       <div>

@@ -13,7 +13,7 @@ export const numFormatter = (num: number) => {
       { value: 1e9, symbol: 'B' },
     ]
   }
-  else if (language.value === 'cmn-SC') {
+  else if (language.value === 'cmn-CN') {
     lookup = [
       { value: 1, symbol: ' ' },
       { value: 1e4, symbol: ' 万' },
