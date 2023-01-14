@@ -1,0 +1,56 @@
+:root {
+  --bew-radius: 12px;
+  --bew-radius-half: calc(var(--bew-radius) / 2);
+
+  --bew-filter-glass: blur(20px) saturate(180%);
+
+  --bew-shadow-1: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --bew-shadow-2: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --bew-shadow-3: 0 20px 25px -5px rgb(0 0 0 / 0.1),
+    0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --bew-shadow-4: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+
+  --bew-theme-color: rgb(0, 161, 214);
+
+  --bew-logo-color: var(--bew-theme-color);
+
+  --bew-text-1: hsl(217, 33%, 17%);
+  --bew-text-2: hsl(215, 19%, 35%);
+  --bew-text-3: hsl(215, 19%, 55%);
+
+  --bew-bg: rgb(243 244 246);
+  --bew-content-1: hsl(0 0% 100% / 60%);
+  --bew-content-solid-1: hsl(0 0% 100%);
+
+  --bew-fill-1: rgb(120 120 128 / 12%);
+  --bew-fill-2: rgb(120 120 128 / 22%);
+  --bew-fill-3: rgb(120 120 128 / 32%);
+  --bew-fill-4: rgb(120 120 128 / 42%);
+}
+
+:root.dark {
+  // dark mode
+  --bew-logo-color: var(--bew-text-1);
+
+  --bew-text-1: hsl(215, 19%, 98%);
+  --bew-text-2: hsl(215, 19%, 70%);
+  --bew-text-3: hsl(215, 19%, 50%);
+
+  --bew-bg: hsl(230 12% 6%);
+  --bew-content-1: hsl(230 12% 13% / 60%);
+  --bew-content-solid-1: hsl(230 12% 13%);
+
+  --bew-fill-1: rgb(120 120 128 / 16%);
+  --bew-fill-2: rgb(120 120 128 / 26%);
+  --bew-fill-3: rgb(120 120 128 / 36%);
+  --bew-fill-4: rgb(120 120 128 / 46%);
+}
+
+@supports not (backdrop-filter: blur(15px)) {
+  :root,
+  :root.dark {
+    --bew-content-1: var(--bew-content-solid-1);
+  }
+}
