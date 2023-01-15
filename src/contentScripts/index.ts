@@ -19,6 +19,7 @@ import { SVG_ICONS, getCookie, i18n, setCookie } from '~/utils'
   if (
     /https?:\/\/bilibili.com\/?$/.test(currentUrl)
     || /https?:\/\/www.bilibili.com\/?$/.test(currentUrl)
+    || /https?:\/\/www.bilibili.com\/index.html$/.test(currentUrl)
     || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(currentUrl)
     || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(currentUrl)
     // || /https?:\/\/www.bilibili.com\/video\/.*/.test(currentUrl)

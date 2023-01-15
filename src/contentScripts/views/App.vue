@@ -4,6 +4,7 @@ import 'uno.css'
 import { useI18n } from 'vue-i18n'
 import browser from 'webextension-polyfill'
 import Home from './Home/Home.vue'
+import Search from './Search/Search.vue'
 import { isShowTopbar } from '~/logic/storage'
 import { language } from '~/logic'
 import '~/styles/index.ts'
@@ -13,6 +14,7 @@ const { locale } = useI18n()
 const [showSettings, toggle] = useToggle(false)
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
+const activatedPage = ref<'search' | 'home'>('home')
 
 window.onload = async () => {
   // if there is first-time load extension, set the default language by browser display language
@@ -41,8 +43,45 @@ window.onload = async () => {
   <Transition>
     <Topbar v-show="isShowTopbar" class="fixed z-50" />
   </Transition>
-  <!-- is home page -->
-  <Home />
+
+  <div
+    flex="~ col"
+    pos="fixed top-0 left-0"
+    h-full
+    justify-center
+  >
+    <div
+      p-2
+      bg="$bew-content-1"
+      flex="~ col gap-2"
+      rounded="r-$bew-radius"
+      shadow="$bew-shadow-2"
+    >
+      <button
+        class="tab-item"
+        :class="{ active: activatedPage === 'search' }"
+        @click="activatedPage = 'search'"
+      >
+        <tabler:search />
+      </button>
+
+      <button
+        class="tab-item"
+        :class="{ active: activatedPage === 'home' }"
+        @click="activatedPage = 'home'"
+      >
+        <tabler:home />
+      </button>
+    </div>
+  </div>
+
+  <main pt-80px>
+    <keep-alive>
+      <Home v-if="activatedPage === 'home'" />
+      <Search v-else-if="activatedPage === 'search'" />
+    </keep-alive>
+  </main>
+
   <!-- button -->
   <div flex="~ col" pos="fixed bottom-5 lg:right-5 <lg:right-3">
     <button
@@ -87,6 +126,21 @@ window.onload = async () => {
   </div>
   <Settings v-if="showSettings" @close="showSettings = false" />
 </template>
+
+<style lang="scss" scoped>
+.tab-item {
+  --at-apply: transform active:scale-90 lg:w-45px <lg:w-40px
+    aspect-square lg:p-3 <lg:p-2
+    text-2xl text-$bew-text-1 leading-0 duration-300
+    rounded-$bew-radius
+    hover:bg-$bew-theme-color hover:color-white;
+  backdrop-filter: var(--bew-filter-glass);
+
+  &.active {
+    --at-apply: bg-$bew-theme-color color-white;
+  }
+}
+</style>
 
 <style lang="scss">
 .v-enter-active,

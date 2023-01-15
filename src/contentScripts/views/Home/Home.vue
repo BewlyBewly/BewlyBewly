@@ -4,15 +4,8 @@ import RecommendContent from './RecommendContent.vue'
 
 <template>
   <div bg="$bew-bg">
-    <div class="banner flex justify-center items-center flex-col" />
-    <recommend-content />
+    <RecommendContent />
   </div>
 </template>
 
-<style lang="scss">
-.banner {
-  height: 83px;
-  max-height: unset;
-  transition: 0.3s;
-}
-</style>
+<style scoped lang="scss"></style>
