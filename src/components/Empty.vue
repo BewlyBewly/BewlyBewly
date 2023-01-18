@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import browser from 'webextension-polyfill'
 const emptyImg = browser.runtime.getURL('/assets/empty.png')
 </script>
 
