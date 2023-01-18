@@ -5,8 +5,16 @@ import { useI18n } from 'vue-i18n'
 import type { UnReadDm, UnReadMessage, UserInfo } from './types'
 import { updateInterval } from './notify'
 import { getUserID } from '~/utils'
-const { t } = useI18n()
 
+interface Props {
+  showSearchBar: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  showSearchBar: true,
+})
+
+const { t } = useI18n()
 const mid = getUserID() || ''
 const userInfo = reactive<UserInfo | {}>({}) as UnwrapNestedRefs<UserInfo>
 const showChannelsPop = ref<boolean>(false)
@@ -207,7 +215,7 @@ function getNewMomentsCount() {
     </div>
 
     <!-- search bar -->
-    <div flex="~" w="full" justify="md:center <md:end">
+    <div flex="~" w="full" justify="md:center <md:end" items-center>
       <!-- <button
         class="icon-btn"
         text="$bew-text-1 2xl"
@@ -216,7 +224,7 @@ function getNewMomentsCount() {
       >
         <tabler:search />
       </button> -->
-      <SearchBar ref="searchBar" />
+      <SearchBar v-if="props.showSearchBar" ref="searchBar" />
     </div>
 
     <!-- right content -->
@@ -230,17 +238,20 @@ function getNewMomentsCount() {
       </div>
       <template v-if="isLogin">
         <div
-          id="avatar"
-          class="right-side-item"
+          class="avatar right-side-item"
           @mouseenter="openUserPanel"
           @mouseleave="closeUserPanel"
         >
           <a
-            id="avatar-img"
             ref="avatarImg"
             :href="`https://space.bilibili.com/${mid}`"
             target="_blank"
-            class="rounded-full z-1 w-40px h-40px bg-$bew-fill-3 bg-cover bg-center"
+            class="avatar-img"
+            rounded-full
+            z-1
+            w-40px
+            h-40px
+            bg="$bew-fill-3 cover center"
             :style="{
               backgroundImage: `url(${`${userInfo.face}`.replace(
                 'http:',
@@ -249,10 +260,16 @@ function getNewMomentsCount() {
             }"
           />
           <div
-            id="avatar-shadow"
             ref="avatarShadow"
-            class="absolute top-0 rounded-full z-0 w-40px h-40px filter blur-sm bg-cover bg-center"
+            class="avatar-shadow"
+            pos="absolute top-0"
+            bg="cover center"
+            filter="blur-sm"
             opacity="80"
+            rounded-full
+            z-0
+            w-40px
+            h-40px
             :style="{
               backgroundImage: `url(${`${userInfo.face}`.replace(
                 'http:',
@@ -357,7 +374,7 @@ function getNewMomentsCount() {
           </Transition>
         </div>
 
-        <!-- Createive center -->
+        <!-- Creative center -->
         <div class="right-side-item">
           <a
             href="https://member.bilibili.com/platform/home"
@@ -368,7 +385,7 @@ function getNewMomentsCount() {
           </a>
         </div>
         <div
-          class="right-side-item"
+          class="upload right-side-item"
           @mouseenter="showUploadPop = true"
           @mouseleave="showUploadPop = false"
         >
@@ -392,7 +409,7 @@ function getNewMomentsCount() {
             <TopbarUploadPop
               v-if="showUploadPop"
               class="bew-popover"
-              pos="!left-auto !-right-2"
+              pos="!left-auto !right-0"
               transform="!translate-x-0"
             />
           </Transition>
@@ -428,8 +445,9 @@ function getNewMomentsCount() {
     transform -translate-x-1/2
     overflow-visible
     after:content-empty
-    after:opacity-0 after:w-full after:h-100px
-    after:absolute after:-top-50px after:left-0 after:-z-1;
+    after:opacity-100 after:w-100px after:h-100px
+    after:absolute after:-top-30px after:left-1/2 after:-z-1
+    after:transform after:-translate-x-1/2;
 }
 
 .left-side {
@@ -453,6 +471,7 @@ function getNewMomentsCount() {
     }
   }
 }
+
 .right-side {
   @apply flex h-60px items-center rounded-full p-2
     bg-$bew-content-1 text-$bew-text-1;
@@ -468,15 +487,27 @@ function getNewMomentsCount() {
     box-shadow: 0 2px 4px rgba(var(--tw-shadow-color), 0.4);
   }
 
-  &-item {
+  .right-side-item {
     @apply relative text-$bew-text-1 mx-2 last:mr-0;
-  }
 
-  &-item:not(#avatar) {
-    a {
-      @apply text-xl flex items-center p-2;
+    &:not(.avatar) {
+      a {
+        @apply text-xl flex items-center p-2;
+      }
+    }
+
+    &:not(.avatar):not(.upload) a {
+      --un-drop-shadow: drop-shadow(0 0 6px white);
+      --at-apply: filter;
     }
   }
+
+  // .right-side-item:not(#avatar) {
+  //   a {
+  //     --un-drop-shadow-color: var(--bew-theme-color-60);
+  //     @apply text-xl flex items-center p-2 drop-shadow-lg;
+  //   }
+  // }
 
   .login {
     @apply rounded-full
@@ -485,11 +516,11 @@ function getNewMomentsCount() {
       border-solid border-$bew-theme-color;
   }
 
-  #avatar {
+  .avatar {
     @apply flex items-center ml-1 pr-2 relative z-1;
 
-    #avatar-img,
-    #avatar-shadow {
+    .avatar-img,
+    .avatar-shadow {
       @apply duration-300;
 
       &.hover {
@@ -497,7 +528,7 @@ function getNewMomentsCount() {
       }
     }
 
-    #avatar-shadow {
+    .avatar-shadow {
       @apply pointer-events-none;
     }
   }

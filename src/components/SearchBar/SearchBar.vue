@@ -114,7 +114,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div id="search-wrap" w="full" max-w="500px" m="x-8" pos="relative" grid="~">
+  <div id="search-wrap" w="full" max-w="500px" m="x-8" pos="relative">
     <div
       v-if="isFocus"
       pos="fixed top-0 left-0"
@@ -146,7 +146,9 @@ export default defineComponent({
         border-none
         outline-none
         pos="absolute right-2"
-        bg="hover:bg-$bew-fill-2"
+        bg="hover:$bew-fill-2"
+        filter="group-focus-within:~"
+        style="--un-drop-shadow: drop-shadow(0 0 6px var(--bew-theme-color)) "
         @click="goToSearchPage(keyword)"
       >
         <tabler:search />
@@ -214,27 +216,37 @@ export default defineComponent({
 
 .v-enter-from,
 .v-leave-to {
-  --at-apply: transform translate-y-4 opacity-0 scale-95
+  --at-apply: transform translate-y-4 opacity-0 scale-95;
+}
+
+.card-content {
+  --at-apply: text-base outline-none w-full
+    bg-$bew-content-1 shadow-$bew-shadow-2;
+  backdrop-filter: var(--bew-filter-glass);
 }
 
 #search-wrap {
 
   @mixin card-content {
     --at-apply: text-base outline-none w-full
-      bg-$bew-content-1 backdrop-$bew-filter-glass;
-    box-shadow: var(--bew-shadow-2);
+      bg-$bew-content-1 shadow-$bew-shadow-2;
     backdrop-filter: var(--bew-filter-glass);
   }
 
   .search-bar {
     input {
       @include card-content;
+      --at-apply: shadow-$bew-shadow-2;
+
+      &:focus {
+        box-shadow: 0 6px 16px var(--bew-theme-color-40), inset 0 0 6px var(--bew-theme-color-30)
+      }
     }
   }
 
   @mixin search-content {
     @include card-content;
-    --at-apply: p-2 top-60px absolute rounded-$bew-radius
+    --at-apply: p-2 mt-2 absolute rounded-$bew-radius
       hover:block;
   }
 

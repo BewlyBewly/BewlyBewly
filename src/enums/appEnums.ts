@@ -4,3 +4,8 @@ export enum LanguageType {
   Mandarin_TW = 'cmn-TW',
   Cantonese = 'jyut',
 }
+
+export enum AppPage {
+  Home = 'home',
+  Search = 'search',
+}

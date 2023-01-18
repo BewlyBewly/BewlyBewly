@@ -57,7 +57,7 @@ function onEnter(el: Element, done: () => void) {
 
 <template>
   <div
-    m="lg:x-22 <lg:x-16 b-0 t-0"
+    m="b-0 t-0"
     grid="~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-4"
   >
     <TransitionGroup name="list" @enter="onEnter">

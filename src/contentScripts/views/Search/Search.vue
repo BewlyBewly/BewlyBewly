@@ -1,7 +1,13 @@
 <script lang="ts" setup></script>
 
 <template>
-  <div>
-    TODO: SEARCH PAGE
+  <div
+    flex
+    justify-center
+    w-full
+    m="t-10%"
+  >
+    <Logo :size="100" />
+    <SearchBar />
   </div>
 </template>
