@@ -445,7 +445,7 @@ function getNewMomentsCount() {
     transform -translate-x-1/2
     overflow-visible
     after:content-empty
-    after:opacity-100 after:w-100px after:h-100px
+    after:opacity-100 after:w-full after:h-100px
     after:absolute after:-top-30px after:left-1/2 after:-z-1
     after:transform after:-translate-x-1/2;
 }
