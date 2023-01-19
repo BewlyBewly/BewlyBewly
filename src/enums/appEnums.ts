@@ -8,4 +8,5 @@ export enum LanguageType {
 export enum AppPage {
   Home = 'home',
   Search = 'search',
+  Anime = 'anime',
 }

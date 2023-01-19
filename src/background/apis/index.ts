@@ -1,3 +1,4 @@
+import { setupAnimeAPIs } from './anime'
 import { setupAuthAPIs } from './auth'
 import { setupVideosAPIs } from './videos'
 import { setupUserAPIs } from './user'
@@ -19,4 +20,5 @@ export const setupAllAPIs = () => {
   setupMomentsAPIs()
   setupHistoryAPIs()
   setupFavoritesAPIs()
+  setupAnimeAPIs()
 }

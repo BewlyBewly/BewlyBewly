@@ -5,6 +5,7 @@ import { useI18n } from 'vue-i18n'
 import browser from 'webextension-polyfill'
 import Home from './Home/Home.vue'
 import Search from './Search/Search.vue'
+import Anime from './Anime/Anime.vue'
 import { activatedPage, isShowTopbar } from '~/logic/storage'
 import { language } from '~/logic'
 import '~/styles/index.ts'
@@ -75,58 +76,45 @@ function changeActivatePage(pageName: AppPage) {
         >
           <tabler:home />
         </button>
+
+        <button
+          class="tab-item"
+          :class="{ active: activatedPage === AppPage.Anime }"
+          @click="changeActivatePage(AppPage.Anime)"
+        >
+          <tabler:device-tv />
+        </button>
+
+        <!-- dividing line -->
+        <div my-4 w-full h-2px bg="$bew-fill-2" />
+
+        <button
+          class="tab-item"
+          @click="toggleDark()"
+        >
+          <tabler:moon-stars v-if="isDark" />
+          <tabler:sun v-else />
+        </button>
+
+        <button
+          class="tab-item"
+          @click="toggle()"
+        >
+          <tabler:settings />
+        </button>
       </div>
     </aside>
 
     <main p="t-80px x-5" m="l-60px r-60px" w-full>
       <KeepAlive>
-        <Home v-if="activatedPage === 'home'" />
-        <Search v-else-if="activatedPage === 'search'" />
+        <Home v-if="activatedPage === AppPage.Home" />
+        <Search v-else-if="activatedPage === AppPage.Search" />
+        <Anime v-else-if="activatedPage === AppPage.Anime" />
       </KeepAlive>
     </main>
 
     <!-- button -->
-    <div flex="~ col" pos="fixed bottom-5 lg:right-5 <lg:right-3">
-      <button
-        class="transform active:scale-90"
-        w="lg:45px <lg:40px"
-        h="lg:45px <lg:40px"
-        p="lg:3 <lg:2"
-        m="b-3"
-        bg="$bew-content-1"
-        text="2xl $bew-text-1"
-        font="leading-0"
-        duration="300"
-        rounded="$bew-radius"
-        style="
-          box-shadow: var(--bew-shadow-2);
-          backdrop-filter: var(--bew-filter-glass);
-        "
-        @click="toggleDark()"
-      >
-        <tabler:moon-stars v-if="isDark" />
-        <tabler:sun v-else />
-      </button>
-
-      <button
-        class="leading-none transform active:scale-90"
-        w="lg:45px <lg:40px"
-        h="lg:45px <lg:40px"
-        p="lg:3 <lg:2"
-        bg="$bew-content-1"
-        text="2xl $bew-text-1"
-        font="leading-0"
-        duration="300"
-        rounded="$bew-radius"
-        style="
-          box-shadow: var(--bew-shadow-2);
-          backdrop-filter: var(--bew-filter-glass);
-        "
-        @click="toggle()"
-      >
-        <tabler:settings />
-      </button>
-    </div>
+    <div flex="~ col" pos="fixed bottom-5 lg:right-5 <lg:right-3" />
   </div>
   <!-- settings dialog -->
   <Settings v-if="showSettings" @close="showSettings = false" />
@@ -138,11 +126,15 @@ function changeActivatePage(pageName: AppPage) {
     aspect-square lg:p-3 <lg:p-2
     text-2xl text-$bew-text-1 leading-0 duration-300
     rounded-$bew-radius
-    hover:bg-$bew-fill-2;
+    bg-$bew-fill-1
+    hover:bg-$bew-theme-color
+    hover:text-white
+    dark-hover:bg-white
+    dark-hover:text-black;
   backdrop-filter: var(--bew-filter-glass);
 
   &.active {
-    --at-apply: bg-$bew-fill-2;
+    --at-apply: bg-$bew-theme-color dark-bg-white text-white dark-text-black;
   }
 }
 </style>
