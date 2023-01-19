@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import RecommendContent from './RecommendContent.vue'
+import RecommendContent from './components/RecommendContent.vue'
 </script>
 
 <template>
