@@ -60,6 +60,7 @@ function changeActivatePage(pageName: AppPage) {
         flex="~ col gap-2"
         rounded="r-$bew-radius"
         shadow="$bew-shadow-2"
+        style="backdrop-filter: var(--bew-filter-glass)"
       >
         <button
           class="tab-item"
@@ -105,7 +106,7 @@ function changeActivatePage(pageName: AppPage) {
       </div>
     </aside>
 
-    <main p="t-80px x-5" m="l-60px r-60px" w-full>
+    <main p="t-80px x-5" m="x-100px" w-full>
       <KeepAlive>
         <Home v-if="activatedPage === AppPage.Home" />
         <Search v-else-if="activatedPage === AppPage.Search" />
@@ -131,7 +132,6 @@ function changeActivatePage(pageName: AppPage) {
     hover:text-white
     dark-hover:bg-white
     dark-hover:text-black;
-  backdrop-filter: var(--bew-filter-glass);
 
   &.active {
     --at-apply: bg-$bew-theme-color dark-bg-white text-white dark-text-black;
