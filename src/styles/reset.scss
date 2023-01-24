@@ -2,9 +2,10 @@
   * this stylesheet is used to reset the styles of the bilibili default style
   */
 
-html, body {
+html,
+body {
   font-size: 14px;
-  min-width: unset;
+  min-width: unset !important;
 }
 
 a,
@@ -18,7 +19,7 @@ button {
 
   &:focus,
   &:active {
-    background: currentColor
+    background: currentColor;
   }
 }
 

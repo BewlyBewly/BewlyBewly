@@ -17,6 +17,7 @@ const props = withDefaults(defineProps<Props>(), {
 const { t } = useI18n()
 const mid = getUserID() || ''
 const userInfo = reactive<UserInfo | {}>({}) as UnwrapNestedRefs<UserInfo>
+
 const showChannelsPop = ref<boolean>(false)
 const showUserPanelPop = ref<boolean>(false)
 const showTopbarMask = ref<boolean>(false)
@@ -25,6 +26,8 @@ const showMomentsPop = ref<boolean>(false)
 const showFavoritesPop = ref<boolean>(false)
 const showUploadPop = ref<boolean>(false)
 const showHistoryPop = ref<boolean>(false)
+const showMorePop = ref<boolean>(false)
+
 const isLogin = ref<boolean>(!!getUserID())
 const unReadMessage = reactive<UnReadMessage | {}>(
   {},
@@ -160,7 +163,7 @@ function getNewMomentsCount() {
     flex="~"
     justify="between"
     align="items-center"
-    p="lg:x-23 <lg:x-16 y-2"
+    p="lg:x-20 md:x-16 x-14"
     w="screen"
   >
     <Transition name="topbar">
@@ -170,7 +173,7 @@ function getNewMomentsCount() {
         w="full"
         h="160px"
         opacity="100"
-        pointer="none"
+        pointer-events-none
         style="background: linear-gradient(var(--bew-bg), transparent)"
       />
     </Transition>
@@ -216,14 +219,6 @@ function getNewMomentsCount() {
 
     <!-- search bar -->
     <div flex="~" w="full" justify="md:center <md:end" items-center>
-      <!-- <button
-        class="icon-btn"
-        text="$bew-text-1 2xl"
-        display="!md:hidden !<md:block"
-        m="r-4"
-      >
-        <tabler:search />
-      </button> -->
       <SearchBar v-if="props.showSearchBar" ref="searchBar" />
     </div>
 
@@ -237,6 +232,7 @@ function getNewMomentsCount() {
         </a>
       </div>
       <template v-if="isLogin">
+        <!-- Avatar -->
         <div
           class="avatar right-side-item"
           @mouseenter="openUserPanel"
@@ -288,102 +284,130 @@ function getNewMomentsCount() {
           </Transition>
         </div>
 
-        <!-- Notifications -->
-        <div
-          class="right-side-item"
-          @mouseenter="showNotificationsPop = true"
-          @mouseleave="showNotificationsPop = false"
-        >
-          <div v-if="unReadMessageCount !== 0" class="unread-message">
-            {{ unReadMessageCount > 999 ? '999+' : unReadMessageCount }}
+        <div display="lg:flex none">
+          <!-- Notifications -->
+          <div
+            class="right-side-item"
+            :class="{ active: showNotificationsPop }"
+            @mouseenter="showNotificationsPop = true"
+            @mouseleave="showNotificationsPop = false"
+          >
+            <div v-if="unReadMessageCount !== 0" class="unread-message">
+              {{ unReadMessageCount > 999 ? '999+' : unReadMessageCount }}
+            </div>
+            <a
+              href="https://message.bilibili.com"
+              target="_blank"
+              :title="t('topbar.notifications')"
+            >
+              <tabler:bell />
+            </a>
+
+            <Transition name="slide">
+              <TopbarNotificationsPop
+                v-if="showNotificationsPop"
+                ref="notificationsDropdown"
+                class="bew-popover"
+              />
+            </Transition>
           </div>
-          <a
-            href="https://message.bilibili.com"
-            target="_blank"
-            :title="t('topbar.notifications')"
+
+          <!-- Moments -->
+          <div
+            class="right-side-item"
+            :class="{ active: showMomentsPop }"
+            @mouseenter="showMomentsPop = true"
+            @mouseleave="showMomentsPop = false"
           >
-            <tabler:bell />
-          </a>
+            <div v-if="newMomentsCount !== 0" class="unread-message">
+              {{ newMomentsCount > 999 ? '999+' : newMomentsCount }}
+            </div>
+            <a
+              href="https://t.bilibili.com"
+              target="_blank"
+              :title="t('topbar.moments')"
+            >
+              <tabler:windmill />
+            </a>
 
-          <Transition name="slide">
-            <TopbarNotificationsPop
-              v-if="showNotificationsPop"
-              ref="notificationsDropdown"
-              class="bew-popover"
-            />
-          </Transition>
-        </div>
-
-        <!-- Moments -->
-        <div
-          class="right-side-item"
-          @mouseenter="showMomentsPop = true"
-          @mouseleave="showMomentsPop = false"
-        >
-          <div v-if="newMomentsCount !== 0" class="unread-message">
-            {{ newMomentsCount > 999 ? '999+' : newMomentsCount }}
+            <Transition name="slide">
+              <TopbarMomentsPop v-if="showMomentsPop" class="bew-popover" />
+            </Transition>
           </div>
-          <a
-            href="https://t.bilibili.com"
-            target="_blank"
-            :title="t('topbar.moments')"
-          >
-            <tabler:windmill />
-          </a>
 
-          <Transition name="slide">
-            <TopbarMomentsPop v-if="showMomentsPop" class="bew-popover" />
-          </Transition>
+          <!-- Favorites -->
+          <div
+            class="right-side-item"
+            :class="{ active: showFavoritesPop }"
+            @mouseenter="showFavoritesPop = true"
+            @mouseleave="showFavoritesPop = false"
+          >
+            <a
+              :href="`https://space.bilibili.com/${mid}/favlist`"
+              target="_blank"
+              :title="t('topbar.favorites')"
+            >
+              <tabler:star />
+            </a>
+
+            <Transition name="slide">
+              <TopbarFavoritesPop
+                v-show="showFavoritesPop"
+                class="bew-popover"
+              />
+            </Transition>
+          </div>
+
+          <!-- History -->
+          <div
+            class="right-side-item"
+            :class="{ active: showHistoryPop }"
+            @mouseenter="showHistoryPop = true"
+            @mouseleave="showHistoryPop = false"
+          >
+            <a
+              href="https://www.bilibili.com/account/history"
+              target="_blank"
+              :title="t('topbar.history')"
+            >
+              <tabler:clock />
+            </a>
+
+            <Transition name="slide">
+              <TopbarHistoryPop v-if="showHistoryPop" class="bew-popover" />
+            </Transition>
+          </div>
+
+          <!-- Creative center -->
+          <div class="right-side-item">
+            <a
+              href="https://member.bilibili.com/platform/home"
+              target="_blank"
+              :title="t('topbar.creative_center')"
+            >
+              <tabler:bulb />
+            </a>
+          </div>
         </div>
 
-        <!-- Favorites -->
+        <!-- More -->
         <div
           class="right-side-item"
-          @mouseenter="showFavoritesPop = true"
-          @mouseleave="showFavoritesPop = false"
+          :class="{ active: showMorePop }"
+          display="lg:none block"
+          @mouseenter="showMorePop = true"
+          @mouseleave="showMorePop = false"
         >
-          <a
-            :href="`https://space.bilibili.com/${mid}/favlist`"
-            target="_blank"
-            :title="t('topbar.favorites')"
-          >
-            <tabler:star />
+          <a title="More">
+            <tabler:menu-2 />
           </a>
 
           <Transition name="slide">
-            <TopbarFavoritesPop v-show="showFavoritesPop" class="bew-popover" />
+            <TopbarMorePop v-show="showMorePop" class="bew-popover" />
           </Transition>
         </div>
 
-        <!-- History -->
-        <div
-          class="right-side-item"
-          @mouseenter="showHistoryPop = true"
-          @mouseleave="showHistoryPop = false"
-        >
-          <a
-            href="https://www.bilibili.com/account/history"
-            target="_blank"
-            :title="t('topbar.history')"
-          >
-            <tabler:clock />
-          </a>
-
-          <Transition name="slide">
-            <TopbarHistoryPop v-if="showHistoryPop" class="bew-popover" />
-          </Transition>
-        </div>
-
-        <!-- Creative center -->
-        <div class="right-side-item">
-          <a
-            href="https://member.bilibili.com/platform/home"
-            target="_blank"
-            :title="t('topbar.creative_center')"
-          >
-            <tabler:bulb />
-          </a>
-        </div>
+        <!-- Upload -->
         <div
           class="upload right-side-item"
           @mouseenter="showUploadPop = true"
@@ -392,15 +416,21 @@ function getNewMomentsCount() {
           <a
             href="https://member.bilibili.com/platform/upload/video/frame"
             target="_blank"
-            class="bg-$bew-theme-color rounded-full !text-white !text-base !px-4 mx-1"
+            bg="$bew-theme-color"
+            rounded-40px
+            un-text="!white !base"
+            m="x-1"
             flex="~"
             justify="center"
-            w="xl:100px <xl:42px"
-            h="xl:auto <xl:42px"
-            p="xl:auto <xl:unset"
+            w="xl:100px 42px"
+            h="xl:auto 42px"
+            p="xl:auto x-4"
+            shadow
+            filter="hover:brightness-110"
+            style="--un-shadow: 0 0 10px var(--bew-theme-color-60)"
           >
-            <tabler:upload />
-            <span m="l-2" display="xl:block <xl:hidden">{{
+            <tabler:upload flex-shrink-0 />
+            <span m="l-2" display="xl:block none">{{
               t('topbar.upload')
             }}</span>
           </a>
@@ -492,13 +522,21 @@ function getNewMomentsCount() {
 
     &:not(.avatar) {
       a {
-        @apply text-xl flex items-center p-2;
+        --at-apply: text-xl flex items-center p-2 rounded-40px
+          duration-300;
       }
     }
 
     &:not(.avatar):not(.upload) a {
       --un-drop-shadow: drop-shadow(0 0 6px white);
-      --at-apply: filter;
+      --at-apply: dark:filter dark-hover:bg-white dark-hover:text-black
+        hover:bg-$bew-fill-2;
+    }
+
+    &.active a {
+      --un-drop-shadow: drop-shadow(0 0 6px white);
+      --at-apply: dark:filter dark:bg-white dark:text-black
+        bg-$bew-fill-2;
     }
   }
 

@@ -44,7 +44,7 @@ function changeActivatePage(pageName: AppPage) {
 </script>
 
 <template>
-  <Transition>
+  <Transition name="topbar">
     <Topbar
       v-show="isShowTopbar"
       :show-search-bar="activatedPage !== AppPage.Search"
@@ -57,7 +57,7 @@ function changeActivatePage(pageName: AppPage) {
       <div
         p-2
         bg="$bew-content-1"
-        flex="~ col gap-2"
+        flex="~ col gap-2 shrink-0"
         rounded="r-$bew-radius"
         shadow="$bew-shadow-2"
         style="backdrop-filter: var(--bew-filter-glass)"
@@ -106,16 +106,13 @@ function changeActivatePage(pageName: AppPage) {
       </div>
     </aside>
 
-    <main p="t-80px x-5" m="x-100px" w-full>
-      <KeepAlive>
+    <main p="t-80px x-5" m="lg:x-30 md:x-16 x-12" w-full>
+      <Transition name="fade">
         <Home v-if="activatedPage === AppPage.Home" />
         <Search v-else-if="activatedPage === AppPage.Search" />
         <Anime v-else-if="activatedPage === AppPage.Anime" />
-      </KeepAlive>
+      </Transition>
     </main>
-
-    <!-- button -->
-    <div flex="~ col" pos="fixed bottom-5 lg:right-5 <lg:right-3" />
   </div>
   <!-- settings dialog -->
   <Settings v-if="showSettings" @close="showSettings = false" />
@@ -123,9 +120,12 @@ function changeActivatePage(pageName: AppPage) {
 
 <style lang="scss" scoped>
 .tab-item {
-  --at-apply: transform active:scale-90 lg:w-45px <lg:w-40px
-    aspect-square lg:p-3 <lg:p-2
-    text-2xl text-$bew-text-1 leading-0 duration-300
+  --at-apply: transform active:scale-90
+    md:w-45px w-35px
+    md:p-3 p-2
+    md:text-2xl text-xl
+    aspect-square
+    text-$bew-text-1 leading-0 duration-300
     rounded-$bew-radius
     bg-$bew-fill-1
     hover:bg-$bew-theme-color
@@ -140,13 +140,23 @@ function changeActivatePage(pageName: AppPage) {
 </style>
 
 <style lang="scss">
-.v-enter-active,
-.v-leave-active {
+.topbar-enter-active,
+.topbar-leave-active {
   transition: all 0.5s ease;
 }
 
-.v-enter-from,
-.v-leave-to {
+.topbar-enter-from,
+.topbar-leave-to {
   @apply opacity-0 transform -translate-y-full;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  @apply opacity-0;
 }
 </style>
