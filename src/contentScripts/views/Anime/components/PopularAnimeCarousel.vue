@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { PopularAnime } from './types'
+import type { PopularAnime } from '../types'
 
 const popularAnimeList = reactive<PopularAnime[]>([])
 const activatedAnime = ref<PopularAnime>()
@@ -40,39 +40,39 @@ function getPopularAnimeList() {
   <div
     ref="bannerContent"
     w-full
-    h-70vh
-    min-h-400px
+    h-600px
     pos="absolute top-0 left-0"
     z="-1"
-    backdrop-blur-2xl
   >
     <div
-      :style="{ backgroundImage: `url(${activatedAnime?.cover})` }"
+      :style="{ backgroundImage: url(${activatedAnime?.cover}) }"
       bg="cover center"
       duration-600
       w-full
       h-full
       pos="absolute"
-      opacity-60
       after:content-none
       after:pos="absolute top-0 left-0"
       after:w-full after:h-full
       after:backdrop-blur-2xl
+      opacity-30
     />
   </div>
-  <div h-70vh min-h-400px z-1>
-    <div text="3xl">
-      {{ activatedAnime?.title }}
 
+  <div h-600px z-1 pos="relative" flex justify-center>
+    <div>
       <img
-        w="full"
         :src="activatedAnime?.ss_horizontal_cover.replace('https:', '')"
-        rounded="$bew-radius"
+        pointer-events-none
+        h="400px"
       >
+      <div text="2xl white" p-4 pos="relative" bg="black opacity-60">
+        {{ activatedAnime?.title }}
+      </div>
     </div>
   </div>
 
-  <ul w-full flex gap-4 overflow-hidden m="t--150px">
+  <ul w-full flex gap-4 overflow-hidden m="t--150px" z-1 relative>
     <li
       v-for="(item, index) in popularAnimeList"
       :key="index"
@@ -81,7 +81,6 @@ function getPopularAnimeList() {
       @mouseover="activatedAnime = item"
     >
       <img
-        w="full"
         :src="item.ss_horizontal_cover.replace('https:', '')"
         rounded="$bew-radius"
       >

@@ -11,6 +11,14 @@ export const setupAnimeAPIs = () => {
         .then(data => data)
         .catch(error => console.error(error))
     }
+    else if (message.contentScriptQuery === 'getRecommendAnimeList') {
+      const url
+        = `https://api.bilibili.com/pgc/page/web/v3/feed?name=anime&coursor=${message.cursor ?? ''}`
+      return fetch(url)
+        .then(response => response.json())
+        .then(data => data)
+        .catch(error => console.error(error))
+    }
     else if (message.contentScriptQuery === 'getAnimeTimeTable') {
       const url
         = 'https://api.bilibili.com/pgc/web/timeline?types=1&before=6&after=6'

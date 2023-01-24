@@ -25,3 +25,31 @@ export interface PopularAnime {
   title: string
   url: string
 }
+
+export interface RecommendAnimeItem {
+  cover: string
+  episode_id: number
+  evaluate: string
+  hover: {
+    img: string
+    text: string[]
+  }
+  link: string
+  rank_id: number
+  rating: string
+  rating_count: number
+  report: object
+  season_id: number
+  season_type: number
+  stat: {
+    danmaku: number
+    duration: number
+    view: number
+  }
+  sub_title: string
+  text: string[]
+  title: string
+  user_status: {
+    follow: number
+  }
+}
