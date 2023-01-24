@@ -107,11 +107,11 @@ function changeActivatePage(pageName: AppPage) {
     </aside>
 
     <main p="t-80px x-5" m="lg:x-30 md:x-16 x-12" w-full>
-      <Transition name="fade">
-        <Home v-if="activatedPage === AppPage.Home" />
-        <Search v-else-if="activatedPage === AppPage.Search" />
-        <Anime v-else-if="activatedPage === AppPage.Anime" />
-      </Transition>
+      <!-- <Transition name="fade"> -->
+      <Home v-if="activatedPage === AppPage.Home" />
+      <Search v-else-if="activatedPage === AppPage.Search" />
+      <Anime v-else-if="activatedPage === AppPage.Anime" />
+      <!-- </Transition> -->
     </main>
   </div>
   <!-- settings dialog -->
@@ -120,6 +120,9 @@ function changeActivatePage(pageName: AppPage) {
 
 <style lang="scss" scoped>
 .tab-item {
+  --shadow: 0 0 30px 4px var(--bew-theme-color-50);
+  --shadow-dark: 0 0 30px 4px rgba(255, 255, 255, 0.6);
+
   --at-apply: transform active:scale-90
     md:w-45px w-35px
     md:p-3 p-2
@@ -128,13 +131,13 @@ function changeActivatePage(pageName: AppPage) {
     text-$bew-text-1 leading-0 duration-300
     rounded-$bew-radius
     bg-$bew-fill-1
-    hover:bg-$bew-theme-color
-    hover:text-white
-    dark-hover:bg-white
-    dark-hover:text-black;
+    hover:bg-$bew-theme-color hover:text-white hover:shadow-$shadow
+    dark-hover:bg-white dark-hover:text-black dark-hover:shadow-$shadow-dark;
 
   &.active {
-    --at-apply: bg-$bew-theme-color dark-bg-white text-white dark-text-black;
+    --at-apply: bg-$bew-theme-color dark-bg-white
+      text-white dark-text-black
+      shadow-$shadow dark:shadow-$shadow-dark;
   }
 }
 </style>
