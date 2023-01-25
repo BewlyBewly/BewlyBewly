@@ -9,42 +9,50 @@ const isLoading = ref<boolean>(false)
 let refreshIdx = 1
 
 onMounted(() => {
-  getRecommendVideos(refreshIdx)
+  getRecommendVideos()
 
-  window.onscroll = async () => {
+  window.onscroll = () => {
     if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 20) {
       if (isLoading.value)
         return
 
-      isLoading.value = true
-      refreshIdx++
-      await getRecommendVideos(refreshIdx)
-      isLoading.value = false
+      getRecommendVideos()
     }
   }
 })
 
-async function getRecommendVideos(idx?: number) {
-  const response = await browser.runtime.sendMessage({
-    contentScriptQuery: 'getRecommendVideos',
-    refreshIdx: idx,
-  })
+onUnmounted(() => {
+  // remove the global window.onscroll event
+  window.onscroll = () => {}
+})
 
-  if (response.code === 0) {
-    const resData = [] as Video[]
-
-    response.data.item.forEach((item: Video) => {
-      resData.push(item)
+async function getRecommendVideos() {
+  isLoading.value = true
+  try {
+    const response = await browser.runtime.sendMessage({
+      contentScriptQuery: 'getRecommendVideos',
+      refreshIdx: refreshIdx++,
     })
 
-    // when videoList has length property, it means it is the first time to load
-    if (!videoList.length) {
-      Object.assign(videoList, resData)
+    if (response.code === 0) {
+      const resData = [] as Video[]
+
+      response.data.item.forEach((item: Video) => {
+        resData.push(item)
+      })
+
+      // when videoList has length property, it means it is the first time to load
+      if (!videoList.length) {
+        Object.assign(videoList, resData)
+      }
+      else {
+        // else we concat the new data to the old data
+        Object.assign(videoList, videoList.concat(resData))
+      }
     }
-    else {
-      // else we concat the new data to the old data
-      Object.assign(videoList, videoList.concat(resData))
-    }
+  }
+  finally {
+    isLoading.value = false
   }
 }
 
