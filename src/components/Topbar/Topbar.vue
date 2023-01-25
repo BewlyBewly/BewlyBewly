@@ -162,9 +162,10 @@ function getNewMomentsCount() {
   <header
     flex="~"
     justify="between"
-    align="items-center"
+    items-center
     p="lg:x-20 md:x-16 x-14"
     w="screen"
+    h="80px"
   >
     <Transition name="topbar">
       <div
