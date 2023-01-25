@@ -1,4 +1,5 @@
 import browser from 'webextension-polyfill'
+// import { getUserID } from '~/utils'
 
 export const setupAnimeAPIs = () => {
   browser.runtime.onMessage.addListener((message) => {
@@ -11,9 +12,18 @@ export const setupAnimeAPIs = () => {
         .then(data => data)
         .catch(error => console.error(error))
     }
+    // https://github.com/SocialSisterYi/bilibili-API-collect/blob/36e250090800793b41b223b55eefdcbb9391b53e/user/space.md#%E6%9F%A5%E8%AF%A2%E7%94%A8%E6%88%B7%E8%BF%BD%E7%95%AA%E8%BF%BD%E5%89%A7%E6%98%8E%E7%BB%86
+    else if (message.contentScriptQuery === 'getAnimeWatchList') {
+      const url = `https://api.bilibili.com/x/space/bangumi/follow/list?type=1&follow_status=0&pn=${message.pn}&ps=${message.ps}&vmid=${message.vmid}`
+      return fetch(url)
+        .then(response => response.json())
+        .then(data => data)
+        .catch(error => console.error(error))
+    }
     else if (message.contentScriptQuery === 'getRecommendAnimeList') {
-      const url
-        = `https://api.bilibili.com/pgc/page/web/v3/feed?name=anime&coursor=${message.cursor ?? ''}`
+      const url = `https://api.bilibili.com/pgc/page/web/v3/feed?name=anime&coursor=${
+        message.cursor ?? ''
+      }`
       return fetch(url)
         .then(response => response.json())
         .then(data => data)

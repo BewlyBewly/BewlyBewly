@@ -45,7 +45,7 @@ function getPopularAnimeList() {
     z="-1"
   >
     <div
-      :style="{ backgroundImage: url(${activatedAnime?.cover}) }"
+      :style="{ backgroundImage: `url(${activatedAnime?.cover})` }"
       bg="cover center"
       duration-600
       w-full

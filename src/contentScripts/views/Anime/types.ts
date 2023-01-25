@@ -26,7 +26,7 @@ export interface PopularAnime {
   url: string
 }
 
-export interface RecommendAnimeItem {
+export interface AnimeItem {
   cover: string
   episode_id: number
   evaluate: string
@@ -35,6 +35,7 @@ export interface RecommendAnimeItem {
     text: string[]
   }
   link: string
+  url: string
   rank_id: number
   rating: string
   rating_count: number
@@ -47,9 +48,11 @@ export interface RecommendAnimeItem {
     view: number
   }
   sub_title: string
+  subtitle: string
   text: string[]
   title: string
   user_status: {
     follow: number
   }
+  progress: string
 }
