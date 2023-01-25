@@ -15,6 +15,11 @@ const { locale } = useI18n()
 const [showSettings, toggle] = useToggle(false)
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
+const pages = { Home, Search, Anime }
+
+watch(() => activatedPage.value, (newValue, oldValue) => {
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+})
 
 window.onload = async () => {
   // if there is first-time load extension, set the default language by browser display language
@@ -89,29 +94,21 @@ function changeActivatePage(pageName: AppPage) {
         <!-- dividing line -->
         <div my-4 w-full h-2px bg="$bew-fill-2" />
 
-        <button
-          class="tab-item"
-          @click="toggleDark()"
-        >
+        <button class="tab-item" @click="toggleDark()">
           <tabler:moon-stars v-if="isDark" />
           <tabler:sun v-else />
         </button>
 
-        <button
-          class="tab-item"
-          @click="toggle()"
-        >
+        <button class="tab-item" @click="toggle()">
           <tabler:settings />
         </button>
       </div>
     </aside>
 
     <main p="t-80px x-5" m="lg:x-30 md:x-16 x-12" w-full>
-      <!-- <Transition name="fade"> -->
-      <Home v-if="activatedPage === AppPage.Home" />
-      <Search v-else-if="activatedPage === AppPage.Search" />
-      <Anime v-else-if="activatedPage === AppPage.Anime" />
-      <!-- </Transition> -->
+      <Transition name="fade">
+        <Component :is="pages[activatedPage]" />
+      </Transition>
     </main>
   </div>
   <!-- settings dialog -->
@@ -122,6 +119,8 @@ function changeActivatePage(pageName: AppPage) {
 .tab-item {
   --shadow: 0 0 30px 4px var(--bew-theme-color-50);
   --shadow-dark: 0 0 30px 4px rgba(255, 255, 255, 0.6);
+  --shadow-active: 0 0 20px var(--bew-theme-color-50);
+  --shadow-dark-active: 0 0 20px rgba(255, 255, 255, 0.6);
 
   --at-apply: transform active:scale-90
     md:w-45px w-35px
@@ -132,12 +131,14 @@ function changeActivatePage(pageName: AppPage) {
     rounded-$bew-radius
     bg-$bew-fill-1
     hover:bg-$bew-theme-color hover:text-white hover:shadow-$shadow
+    active:shadow-$shadow-active dark-active:shadow-$shadow-dark-active
     dark-hover:bg-white dark-hover:text-black dark-hover:shadow-$shadow-dark;
 
   &.active {
     --at-apply: bg-$bew-theme-color dark-bg-white
       text-white dark-text-black
-      shadow-$shadow dark:shadow-$shadow-dark;
+      shadow-$shadow dark:shadow-$shadow-dark
+      active:shadow-$shadow-active dark-active:shadow-$shadow-dark-active;
   }
 }
 </style>
