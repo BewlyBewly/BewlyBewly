@@ -28,11 +28,12 @@ export interface PopularAnime {
 
 export interface AnimeItem {
   cover: string
+  horizontal_cover_16_9: string
   episode_id: number
   evaluate: string
   hover: {
     img: string
-    text: string[]
+    text: string[] // 番劇風格
   }
   link: string
   url: string
@@ -55,4 +56,7 @@ export interface AnimeItem {
     follow: number
   }
   progress: string
+  is_finish: 1 | 0 // 是否已經完結
+  total_count: number // 當前集數
+  styles: string[] // 番劇風格
 }
