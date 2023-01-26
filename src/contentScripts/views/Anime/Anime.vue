@@ -6,7 +6,7 @@ import { getUserID } from '~/utils'
 
 const recommendAnimeList = reactive<AnimeItem[]>([])
 const animeWatchList = reactive<AnimeItem[]>([])
-const cursor = ref<number>()
+const cursor = ref<number>(29) // 遊標默認必須要非0，否則第一次會出現同樣的結果
 const isLoading = ref<boolean>()
 const activatedSeasonId = ref<number>()
 
