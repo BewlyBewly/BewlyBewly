@@ -167,7 +167,7 @@ function getNewMomentsCount() {
     w="screen"
     h="80px"
   >
-    <Transition name="topbar">
+    <Transition name="fade">
       <div
         v-show="showTopbarMask"
         class="fixed top-0 left-0"
@@ -208,7 +208,7 @@ function getNewMomentsCount() {
           icon="stroke-4 fill-$bew-text-1"
         />
       </div>
-      <Transition name="slide">
+      <Transition name="slide-in">
         <TopbarChannelsPop
           v-if="showChannelsPop"
           class="bew-popover"
@@ -220,7 +220,9 @@ function getNewMomentsCount() {
 
     <!-- search bar -->
     <div flex="~" w="full" justify="md:center <md:end" items-center>
-      <SearchBar v-if="props.showSearchBar" ref="searchBar" />
+      <Transition name="slide-out">
+        <SearchBar v-if="props.showSearchBar" ref="searchBar" />
+      </Transition>
     </div>
 
     <!-- right content -->
@@ -274,7 +276,7 @@ function getNewMomentsCount() {
               )})`,
             }"
           />
-          <Transition name="slide">
+          <Transition name="slide-in">
             <TopbarUserPanelPop
               v-if="showUserPanelPop"
               ref="userPanelDropdown"
@@ -304,7 +306,7 @@ function getNewMomentsCount() {
               <tabler:bell />
             </a>
 
-            <Transition name="slide">
+            <Transition name="slide-in">
               <TopbarNotificationsPop
                 v-if="showNotificationsPop"
                 ref="notificationsDropdown"
@@ -331,7 +333,7 @@ function getNewMomentsCount() {
               <tabler:windmill />
             </a>
 
-            <Transition name="slide">
+            <Transition name="slide-in">
               <TopbarMomentsPop v-if="showMomentsPop" class="bew-popover" />
             </Transition>
           </div>
@@ -351,7 +353,7 @@ function getNewMomentsCount() {
               <tabler:star />
             </a>
 
-            <Transition name="slide">
+            <Transition name="slide-in">
               <TopbarFavoritesPop
                 v-show="showFavoritesPop"
                 class="bew-popover"
@@ -374,7 +376,7 @@ function getNewMomentsCount() {
               <tabler:clock />
             </a>
 
-            <Transition name="slide">
+            <Transition name="slide-in">
               <TopbarHistoryPop v-if="showHistoryPop" class="bew-popover" />
             </Transition>
           </div>
@@ -403,7 +405,7 @@ function getNewMomentsCount() {
             <tabler:menu-2 />
           </a>
 
-          <Transition name="slide">
+          <Transition name="slide-in">
             <TopbarMorePop v-show="showMorePop" class="bew-popover" />
           </Transition>
         </div>
@@ -436,7 +438,7 @@ function getNewMomentsCount() {
             }}</span>
           </a>
 
-          <Transition name="slide">
+          <Transition name="slide-in">
             <TopbarUploadPop
               v-if="showUploadPop"
               class="bew-popover"
@@ -451,28 +453,38 @@ function getNewMomentsCount() {
 </template>
 
 <style lang="scss" scoped>
-.slide-enter-active,
-.slide-leave-active {
-  @apply transition-all duration-300 pointer-events-none transform-gpu;
+.slide-in-enter-active,
+.slide-in-leave-active {
+  --at-apply: transition-all duration-300 pointer-events-none transform-gpu;
 }
 
-.slide-leave-to,
-.slide-enter-from {
-  @apply transform important:translate-y-4 opacity-0;
+.slide-in-leave-to,
+.slide-in-enter-from {
+  --at-apply: transform important:translate-y-4 opacity-0;
 }
 
-.topbar-enter-active,
-.topbar-leave-active {
-  @apply transition-all duration-600;
+.slide-out-enter-active,
+.slide-out-leave-active {
+  --at-apply: transition-all duration-300 pointer-events-none transform-gpu;
 }
 
-.topbar-leave-to,
-.topbar-enter-from {
-  @apply opacity-0;
+.slide-out-leave-to,
+.slide-out-enter-from {
+  --at-apply: transform important:-translate-y-4 opacity-0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  --at-apply: transition-all duration-600;
+}
+
+.fade-leave-to,
+.fade-enter-from {
+  --at-apply: opacity-0;
 }
 
 .bew-popover {
-  @apply absolute top-60px left-1/2
+  --at-apply: absolute top-60px left-1/2
     transform -translate-x-1/2
     overflow-visible
     after:content-empty
@@ -482,35 +494,35 @@ function getNewMomentsCount() {
 }
 
 .left-side {
-  @apply relative;
+  --at-apply: relative;
   .logo {
-    @apply flex items-center;
+    --at-apply: flex items-center;
 
     &.hover {
       svg:nth-child(2) {
-        @apply transform rotate-180;
+        --at-apply: transform rotate-180;
       }
     }
 
     svg {
-      @apply w-60px h-auto filter drop-shadow-lg
+      --at-apply: w-60px h-auto filter drop-shadow-lg
       fill-$bew-logo-color;
 
       &:nth-child(2) {
-        @apply duration-300;
+        --at-apply: duration-300;
       }
     }
   }
 }
 
 .right-side {
-  @apply flex h-60px items-center rounded-full p-2
+  --at-apply: flex h-60px items-center rounded-full p-2
     bg-$bew-content-1 text-$bew-text-1;
   backdrop-filter: var(--bew-filter-glass);
   box-shadow: var(--bew-shadow-2);
 
   .unread-message {
-    @apply absolute -top-1 right-0
+    --at-apply: absolute -top-1 right-0
       important:px-1 important:py-2 rounded-full
       text-xs leading-0 z-1 min-w-16px h-16px
       flex justify-center items-center
@@ -519,24 +531,24 @@ function getNewMomentsCount() {
   }
 
   .right-side-item {
-    @apply relative text-$bew-text-1 mx-2 last:mr-0;
+    --at-apply: relative text-$bew-text-1 mx-2 last:mr-0;
 
     &:not(.avatar) {
       a {
-        --at-apply: text-xl flex items-center p-2 rounded-40px
+        --at-apply:text-xl flex items-center p-2 rounded-40px
           duration-300;
       }
     }
 
     &:not(.avatar):not(.upload) a {
       --un-drop-shadow: drop-shadow(0 0 6px white);
-      --at-apply: dark:filter dark-hover:bg-white dark-hover:text-black
+      --at-apply:dark:filter dark-hover:bg-white dark-hover:text-black
         hover:bg-$bew-fill-2;
     }
 
     &.active a {
       --un-drop-shadow: drop-shadow(0 0 6px white);
-      --at-apply: dark:filter dark:bg-white dark:text-black
+      --at-apply:dark:filter dark:bg-white dark:text-black
         bg-$bew-fill-2;
     }
   }
@@ -544,31 +556,31 @@ function getNewMomentsCount() {
   // .right-side-item:not(#avatar) {
   //   a {
   //     --un-drop-shadow-color: var(--bew-theme-color-60);
-  //     @apply text-xl flex items-center p-2 drop-shadow-lg;
+  //     --at-apply: text-xl flex items-center p-2 drop-shadow-lg;
   //   }
   // }
 
   .login {
-    @apply rounded-full
+    --at-apply: rounded-full
       important:text-$bew-theme-color important:px-4 mx-1 border-1
       flex items-center justify-center important:text-base w-120px
       border-solid border-$bew-theme-color;
   }
 
   .avatar {
-    @apply flex items-center ml-1 pr-2 relative z-1;
+    --at-apply: flex items-center ml-1 pr-2 relative z-1;
 
     .avatar-img,
     .avatar-shadow {
-      @apply duration-300;
+      --at-apply: duration-300;
 
       &.hover {
-        @apply transform scale-230 important:translate-y-30px;
+        --at-apply: transform scale-230 important:translate-y-30px;
       }
     }
 
     .avatar-shadow {
-      @apply pointer-events-none;
+      --at-apply: pointer-events-none;
     }
   }
 }

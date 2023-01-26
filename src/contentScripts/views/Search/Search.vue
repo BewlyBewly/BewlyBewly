@@ -2,12 +2,13 @@
 
 <template>
   <div
-    flex
+    flex="~ col"
     justify-center
+    items-center
     w-full
-    m="t-10%"
+    m="t-20vh"
   >
-    <Logo :size="100" />
+    <Logo :size="180" mb-12 />
     <SearchBar />
   </div>
 </template>
