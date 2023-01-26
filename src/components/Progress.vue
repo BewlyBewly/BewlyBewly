@@ -1,15 +1,25 @@
 <script setup lang="ts">
-defineProps<{
+interface Props {
   percentage: number
-}>()
+  color: string
+  height: number | string
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  color: 'var(--bew-theme-color)',
+})
 </script>
 
 <template>
   <div
-    bg="$bew-theme-color"
     h="6px"
-    border="rounded-$bew-radius"
-    :style="{ width: `${percentage}%` }"
+    rounded="$bew-radius"
+    :style="{
+      width: `${percentage}%`,
+      backgroundColor: props.color,
+      height:
+        typeof props.height === 'number' ? `${props.height}px` : props.height,
+    }"
   />
 </template>
 
