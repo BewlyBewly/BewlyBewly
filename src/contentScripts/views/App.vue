@@ -116,6 +116,26 @@ function changeActivatePage(pageName: AppPage) {
 </template>
 
 <style lang="scss" scoped>
+.topbar-enter-active,
+.topbar-leave-active {
+  transition: all 0.5s ease;
+}
+
+.topbar-enter-from,
+.topbar-leave-to {
+  @apply opacity-0 transform -translate-y-full;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  @apply opacity-0;
+}
+
 .tab-item {
   --shadow: 0 0 30px 4px var(--bew-theme-color-50);
   --shadow-dark: 0 0 30px 4px rgba(255, 255, 255, 0.6);
@@ -140,27 +160,5 @@ function changeActivatePage(pageName: AppPage) {
       shadow-$shadow dark:shadow-$shadow-dark
       active:shadow-$shadow-active dark-active:shadow-$shadow-dark-active;
   }
-}
-</style>
-
-<style lang="scss">
-.topbar-enter-active,
-.topbar-leave-active {
-  transition: all 0.5s ease;
-}
-
-.topbar-enter-from,
-.topbar-leave-to {
-  @apply opacity-0 transform -translate-y-full;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 0.5s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  @apply opacity-0;
 }
 </style>

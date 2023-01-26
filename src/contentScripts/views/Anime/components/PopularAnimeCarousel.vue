@@ -45,7 +45,7 @@ function getPopularAnimeList() {
     z="-1"
   >
     <div
-      :style="{ backgroundImage: `url(${activatedAnime?.cover})` }"
+      :style="{ backgroundImage: `url(${activatedAnime?.ss_horizontal_cover})` }"
       bg="cover center"
       duration-600
       w-full
@@ -54,11 +54,12 @@ function getPopularAnimeList() {
       after:content-none
       after:pos="absolute top-0 left-0"
       after:w-full after:h-full
-      after:backdrop-blur-2xl
+      after:backdrop-blur-xl
       opacity-30
     />
   </div>
 
+  <!-- banner -->
   <div h-600px z-1 pos="relative" flex justify-center>
     <div>
       <img
@@ -72,7 +73,7 @@ function getPopularAnimeList() {
     </div>
   </div>
 
-  <ul w-full flex gap-4 overflow-hidden m="t--150px" z-1 relative>
+  <ul w-full flex gap-6 overflow-hidden m="t--150px" z-1 relative>
     <li
       v-for="(item, index) in popularAnimeList"
       :key="index"
