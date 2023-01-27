@@ -1,14 +1,17 @@
 <script setup lang="ts">
-import type { Ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import PopularAnimeCarousel from './components/PopularAnimeCarousel.vue'
 import type { AnimeItem } from './types'
 import { getUserID } from '~/utils'
+
+const { t } = useI18n()
 
 const recommendAnimeList = reactive<AnimeItem[]>([])
 const animeWatchList = reactive<AnimeItem[]>([])
 const cursor = ref<number>(29) // 遊標默認必須要非0，否則第一次會出現同樣的結果
 const isLoading = ref<boolean>()
 const activatedSeasonId = ref<number>()
+const watchListWrap = ref<HTMLElement>() as Ref<HTMLElement>
 
 onMounted(() => {
   getRecommendAnimeList()
@@ -25,6 +28,11 @@ onMounted(() => {
       getRecommendAnimeList()
     }
   }
+
+  watchListWrap.value.addEventListener('wheel', (event) => {
+    event.preventDefault()
+    watchListWrap.value.scrollLeft += event.deltaY
+  })
 })
 
 onUnmounted(() => {
@@ -39,7 +47,7 @@ function getAnimeWatchList() {
       contentScriptQuery: 'getAnimeWatchList',
       vmid: getUserID() ?? 0,
       pn: 1,
-      ps: 6,
+      ps: 30,
     })
     .then((response) => {
       const {
@@ -88,15 +96,34 @@ function getRecommendAnimeList() {
       </section> -->
 
       <!-- Your Watchlist -->
-      <section mb-16>
-        <h3 text="3xl $bew-text-1" font="bold" mb-6>
-          Your Watchlist
-        </h3>
-        <div grid="~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-6">
-          <article v-for="item in animeWatchList" :key="item.episode_id">
+      <section mb-8>
+        <div flex justify-between items-end mb-6>
+          <h3 text="3xl $bew-text-1" font="bold">
+            Your Watchlist
+          </h3>
+          <a
+            :href="`https://space.bilibili.com/${getUserID() ?? 0}/bangumi`"
+            target="_blank"
+            un-text="$bew-theme-color"
+          >{{ t('common.view_all') }}</a>
+        </div>
+        <div
+          ref="watchListWrap"
+          flex="~"
+          w="[calc(100%+1.5rem)]"
+          overflow-scroll
+          relative
+        >
+          <article
+            v-for="item in animeWatchList"
+            :key="item.episode_id"
+            w="2xl:[calc(100%/6-1.5rem)] xl:[calc(100%/5-1.5rem)] lg:[calc(100%/4-1.5rem)] md:[calc(100%/3-1.5rem)] [calc(100%/2-1.5rem)]"
+            shrink-0
+            m="r-6"
+          >
             <a
               rounded="$bew-radius"
-              aspect="video"
+              aspect="12/16"
               overflow-hidden
               mb-4
               bg="$bew-fill-3"
@@ -104,16 +131,13 @@ function getRecommendAnimeList() {
               target="_blank"
             >
               <img
-                :src="`${item.horizontal_cover_16_9.replace(
-                  'https:',
-                  '',
-                )}@672w_378h_1c`"
+                :src="`${item.cover.replace('https:', '')}@466w_622h.webp`"
                 :alt="item.title"
                 rounded="$bew-radius"
               >
             </a>
             <p un-text="lg" my-4>
-              <a :href="item.link" target="_blank">
+              <a :href="item.url" target="_blank">
                 {{ item.title }}
               </a>
             </p>
@@ -150,7 +174,7 @@ function getRecommendAnimeList() {
                 <div
                   pos="absolute bottom-0"
                   w-full
-                  h-200px
+                  h-180px
                   flex
                   items-end
                   z-1
@@ -160,7 +184,7 @@ function getRecommendAnimeList() {
                   style="
                     background: linear-gradient(
                       transparent,
-                      rgba(0, 0, 0, 0.7)
+                      rgba(0, 0, 0, 0.6)
                     );
                   "
                 >

@@ -58,7 +58,7 @@ function changeActivatePage(pageName: AppPage) {
   </Transition>
 
   <div flex="~">
-    <aside pos="fixed left-0 top-0" flex="~ col" h-100vh justify-center>
+    <aside pos="fixed left-0 top-0" flex="~ col" h-100vh justify-center z-999>
       <div
         p-2
         bg="$bew-content-1"
@@ -105,7 +105,7 @@ function changeActivatePage(pageName: AppPage) {
       </div>
     </aside>
 
-    <main p="t-80px x-5" m="lg:x-30 md:x-16 x-12" w-full>
+    <main p="t-80px lg:x-36 md:x-22 x-18" w-full>
       <Transition name="fade">
         <Component :is="pages[activatedPage]" />
       </Transition>
