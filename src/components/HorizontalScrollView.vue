@@ -5,7 +5,7 @@ const scrollListWrap = ref<HTMLElement>() as Ref<HTMLElement>
 const showLeftMask = ref<boolean>(false)
 const showRightMask = ref<boolean>(false)
 
-window.onload = () => {
+onMounted(() => {
   scrollListWrap.value.addEventListener('scroll', () => {
     if (scrollListWrap.value.scrollLeft > 0) {
       showLeftMask.value = true
@@ -28,7 +28,7 @@ window.onload = () => {
     event.preventDefault()
     scrollListWrap.value.scrollLeft += event.deltaY
   })
-}
+})
 </script>
 
 <template>
