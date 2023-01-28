@@ -215,18 +215,14 @@ function gotoChannel(mid: number) {
         <div class="meta" flex="~ col" w="full" align="items-start">
           <div flex="~" justify="between" w="full" pos="relative">
             <h3
-              class="video-title"
+              class="keep-two-lines"
               cursor="pointer"
               text="lg overflow-ellipsis space-normal $bew-text-1"
               h="max-13"
               overflow="hidden"
-              style="
-                display: -webkit-box;
-                -webkit-box-orient: vertical;
-                -webkit-line-clamp: 2;
-              "
             >
-              <a :href="videoUrl" target="_blank"> {{ videoData.title }}</a>
+              <a :href="videoUrl" target="_blank" :title="videoData.title">
+                {{ videoData.title }}</a>
             </h3>
 
             <!-- <div

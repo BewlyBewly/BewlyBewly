@@ -39,3 +39,12 @@ export const getUserID = () => getCookie('DedeUserID')
  * get csrf token
  */
 export const getCSRF = () => getCookie('bili_jct')
+
+/**
+ * remove 'http://' or 'https://' from a URL
+ * @param url
+ * @returns
+ */
+export const removeHttpFromUrl = (url: string) => {
+  return url.replace(/^https?:/, '')
+}

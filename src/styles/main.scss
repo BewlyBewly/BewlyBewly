@@ -18,6 +18,14 @@ body {
   color: var(--bew-text-1);
 }
 
+.keep-two-lines {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
 .btn {
   @apply px-4 py-2 rounded-$bew-radius inline-block
     cursor-pointer transform duration-300

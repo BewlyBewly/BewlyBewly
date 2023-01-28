@@ -116,3 +116,6 @@ home:
 anime:
   total_episodes: 共 {ep} 集
   update_to_n_episodes: 更新到 {ep} 集
+  your_watch_list: 追緊
+  recommended_for_you: 估你心水
+  havent_seen: 未曾睇過
