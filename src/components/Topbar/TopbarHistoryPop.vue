@@ -5,7 +5,7 @@ import { onMounted, reactive, ref, watch } from 'vue'
 import { useDateFormat } from '@vueuse/core'
 import type { HistoryItem } from './types'
 import { HistoryType } from './types'
-import { calcCurrentTime } from '~/utils'
+import { calcCurrentTime, removeHttpFromUrl } from '~/utils'
 const { t } = useI18n()
 
 const historys = reactive<Array<HistoryItem>>([])
@@ -251,13 +251,14 @@ function scrollToTop(element: HTMLElement, duration: number) {
           :href="getHistoryUrl(historyItem)"
           target="_blank"
           hover:bg="$bew-fill-2"
-          border="rounded-$bew-radius"
+          rounded="$bew-radius"
           p="2"
           m="first:t-50px last:b-4"
           class="group"
           transition="duration"
+          duration-300
         >
-          <section flex="~ gap-4" align="item-start">
+          <section flex="~ gap-4" item-start>
             <!-- Video cover, live cover, ariticle cover -->
             <div
               bg="$bew-fill-1"
@@ -272,7 +273,7 @@ function scrollToTop(element: HTMLElement, duration: number) {
                   <img
                     w="150px"
                     class="aspect-video"
-                    :src="`${historyItem.cover}@256w_144h_1c`"
+                    :src="`${removeHttpFromUrl(historyItem.cover)}@256w_144h_1c`"
                     :alt="historyItem.title"
                     bg="contain"
                   >
@@ -283,8 +284,6 @@ function scrollToTop(element: HTMLElement, duration: number) {
                     p="x-2 y-1"
                     text="white xs"
                     border="rounded-full"
-                    opacity="0"
-                    group-hover:opacity="100"
                   >
                     <!--  When progress = -1 means that the user watched the full video -->
                     {{
@@ -306,7 +305,7 @@ function scrollToTop(element: HTMLElement, duration: number) {
                   <img
                     w="150px"
                     class="aspect-video"
-                    :src="`${historyItem.cover}@256w_144h_1c`"
+                    :src="`${removeHttpFromUrl(historyItem.cover)}@256w_144h_1c`"
                     :alt="historyItem.title"
                     bg="contain"
                   >
@@ -317,7 +316,7 @@ function scrollToTop(element: HTMLElement, duration: number) {
                     text="xs white"
                     p="x-2 y-1"
                     m="1"
-                    border="rounded-$bew-radius-half"
+                    rounded="$bew-radius-half"
                     font="semibold"
                   >
                     LIVE
@@ -329,7 +328,7 @@ function scrollToTop(element: HTMLElement, duration: number) {
                     text="xs white"
                     p="x-2 y-1"
                     m="1"
-                    border="rounded-$bew-radius-half"
+                    rounded="$bew-radius-half"
                   >
                     Offline
                   </div>
@@ -355,11 +354,7 @@ function scrollToTop(element: HTMLElement, duration: number) {
             <!-- Description -->
             <div>
               <h3
-                style="
-                  -webkit-line-clamp: 2;
-                  -webkit-box-orient: vertical;
-                  display: -webkit-box;
-                "
+                class="keep-two-lines"
                 overflow="hidden"
                 text="overflow-ellipsis"
               >

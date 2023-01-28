@@ -1,8 +1,8 @@
 <script setup lang="ts">
 interface Props {
   percentage: number
-  color: string
-  height: number | string
+  color?: string
+  height?: number | string
 }
 
 const props = withDefaults(defineProps<Props>(), {
