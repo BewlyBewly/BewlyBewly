@@ -21,7 +21,7 @@ watch(() => activatedPage.value, (newValue, oldValue) => {
   window.scrollTo({ top: 0, behavior: 'smooth' })
 })
 
-window.onload = async () => {
+onUpdated(async () => {
   // if there is first-time load extension, set the default language by browser display language
   if (!language.value) {
     if (browser.i18n.getUILanguage() === 'zh-CN') {
@@ -41,7 +41,7 @@ window.onload = async () => {
   }
 
   locale.value = language.value
-}
+})
 
 function changeActivatePage(pageName: AppPage) {
   activatedPage.value = pageName
