@@ -11,13 +11,30 @@ common:
   hour: 小时
   minute: 分钟
   second: 秒
-
+settings:
+  title: 设置
+  select_language: 界面语文
+  select_language_opt:
+    english: 英文
+    Mandarin_CN: 简体中文
+    Mandarin_TW: 正體中文
+    jyut: 粵文
+  authorize_app: 授权 BewlyBewly 使用 access key
+  authorize_app_desc: |
+    授权使用后能在首页推送我可能有兴趣观看的视频 (授权 key 有效期约为一个月，之后如果你发现首页推荐的视频不是你所感兴趣的，请尝试重新授权)
+  topbar_visiable: 顶栏可见性
+  topbar_visiable_desc: 用于兼容 Bilibili Evolved 自定义顶栏
+  btn:
+    authorize: 授权
+    revoke: 取消授权
+  chk_box:
+    show: 显示
+    hidden: 隐藏
 auth:
   err_tip: Failed to grant Access Key
   plz_login_first: Please login to bilibili first
   receive_vertified_url_err: Unable to receive verified URL. Please go back and try againe.
   failed_to_get_accesskey: Failed to get Access Key
-
 topbar:
   sign_in: 登录
   notifications: 通知
@@ -26,7 +43,7 @@ topbar:
   history: 历史
   creative_center: 创作中心
   upload: 投稿
-  logo_dropdown: 
+  logo_dropdown:
     anime: 番剧
     movies: 电影
     chinese_anime: 国创
@@ -80,12 +97,12 @@ topbar:
     likes: 收到的赞
     messages: 系统消息
     chats: 我的消息
-  moments_dropdown: 
+  moments_dropdown:
     tabs:
       videos: 视频
       live: 直播
       articles: 专栏
-    uploaded: '上传了：'
+    uploaded: 上传了：
     live_status: 直播中
   upload_dropdown:
     article: 专栏
@@ -93,28 +110,9 @@ topbar:
     sticker: 贴纸
     video: 视频
     manager: 投稿
-
 home:
   not_interested_in: 对哪方面不感兴趣？
   video_removed: 视频已移除
-
-settings:
-  title: 设置
-  select_language: 界面语文
-  select_language_opt:
-    english: 英文
-    Mandarin_CN: 简体中文
-    Mandarin_TW: 正體中文
-    jyut: 粵文
-  authorize_app: 授权 BewlyBewly 使用 access key
-  authorize_app_desc: >
-    授权使用后能在首页推送我可能有兴趣观看的视频
-    (授权 key 有效期约为一个月，之后如果你发现首页推荐的视频不是你所感兴趣的，请尝试重新授权)
-  topbar_visiable: 顶栏可见性
-  topbar_visiable_desc: 用于兼容 Bilibili Evolved 自定义顶栏
-  btn:
-    authorize: 授权
-    revoke: 取消授权
-  chk_box:
-    show: 显示
-    hidden: 隐藏
+anime:
+  total_episodes: 全 {ep} 话
+  update_to_n_episodes: 更新至 {ep} 话

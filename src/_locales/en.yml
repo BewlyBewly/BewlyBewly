@@ -12,6 +12,29 @@ common:
   minute: minute | minutes
   second: second | seconds
 
+settings:
+  title: Settings
+  select_language: Language
+  select_language_opt:
+    english: English
+    Mandarin_CN: Mandarin (Simplified Chinese)
+    Mandarin_TW: Mandarin (Traditional Chinese)
+    jyut: Cantonese
+  authorize_app: Authorize BewlyBewly to use access key
+  authorize_app_desc: >
+    You can get some videos you might like based on what you watch after authentication.
+    This access key will be valid for about one month,
+    after which if you notice you are not interested in these recommended videos,
+    please try to re-authorize.
+  topbar_visiable: Topbar visiable
+  topbar_visiable_desc: Compatible with Bilibili Evolved customize topbar
+  btn:
+    authorize: Authorize
+    revoke: Revoke
+  chk_box:
+    show: Show
+    hidden: Hidden
+
 auth:
   err_tip: Failed to grant Access Key
   plz_login_first: Please login to bilibili first
@@ -26,7 +49,7 @@ topbar:
   history: History
   creative_center: Creative Center
   upload: Upload
-  logo_dropdown: 
+  logo_dropdown:
     anime: Anime
     movies: Movies
     chinese_anime: Chinese anime
@@ -80,7 +103,7 @@ topbar:
     likes: Likes
     messages: Messages
     chats: Chats
-  moments_dropdown: 
+  moments_dropdown:
     tabs:
       videos: Videos
       live: Live
@@ -98,25 +121,6 @@ home:
   not_interested_in: Not interested in...
   video_removed: Video removed
 
-settings:
-  title: Settings
-  select_language: Language
-  select_language_opt:
-    english: English
-    Mandarin_CN: Mandarin (Simplified Chinese)
-    Mandarin_TW: Mandarin (Traditional Chinese)
-    jyut: Cantonese
-  authorize_app: Authorize BewlyBewly to use access key
-  authorize_app_desc: >
-    You can get some videos you might like based on what you watch after authentication.
-    This access key will be valid for about one month,
-    after which if you notice you are not interested in these recommended videos,
-    please try to re-authorize.
-  topbar_visiable: Topbar visiable
-  topbar_visiable_desc: Compatible with Bilibili Evolved customize topbar
-  btn:
-    authorize: Authorize
-    revoke: Revoke
-  chk_box:
-    show: Show
-    hidden: Hidden
+anime:
+  total_episodes: EP {ep}
+  update_to_n_episodes: Update to {ep} Episodes

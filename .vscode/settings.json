@@ -9,6 +9,7 @@
     "*.css": "postcss"
   },
   "i18n-ally.localesPaths": [
-    "_locales"
-  ]
+    "src/_locales"
+  ],
+  "i18n-ally.keystyle": "nested"
 }

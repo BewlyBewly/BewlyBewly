@@ -11,7 +11,25 @@ common:
   hour: 小時
   minute: 分鐘
   second: 秒
-
+settings:
+  title: 設定
+  select_language: 介面語文
+  select_language_opt:
+    english: 英文
+    Mandarin_CN: 簡體中文
+    Mandarin_TW: 正體中文
+    jyut: 粵文
+  authorize_app: 授權 BewlyBewly 使用 access key
+  authorize_app_desc: |
+    授權使用後能在首頁推送我可能有興趣觀看的影片 (授權 key 有效期約為一個月，之後如果你發現首頁推薦的影片不是你所感興趣的，請嘗試重新授權)
+  topbar_visiable: 頂欄可視性
+  topbar_visiable_desc: 用於相容 Bilibili Evolved 的客製化頂欄
+  btn:
+    authorize: 授權
+    revoke: 解除授權
+  chk_box:
+    show: 顯示
+    hidden: 隱藏
 topbar:
   sign_in: 登入
   notifications: 通知
@@ -20,7 +38,7 @@ topbar:
   history: 記錄
   creative_center: 創作中心
   upload: 上傳
-  logo_dropdown: 
+  logo_dropdown:
     anime: 番劇
     movies: 電影
     chinese_anime: 國創
@@ -74,12 +92,12 @@ topbar:
     likes: 按讚訊息
     messages: 系统通知
     chats: 聊天室
-  moments_dropdown: 
+  moments_dropdown:
     tabs:
       videos: 影片
       live: 直播
       articles: 文章
-    uploaded: '上傳了：'
+    uploaded: 上傳了：
     live_status: 直播中
   upload_dropdown:
     article: 上傳文章
@@ -87,28 +105,9 @@ topbar:
     sticker: 上傳貼圖
     video: 上傳影片
     manager: 內容管理
-
 home:
   not_interested_in: 對哪方面不感興趣？
   video_removed: 影片已移除
-
-settings:
-  title: 設定
-  select_language: 介面語文
-  select_language_opt:
-    english: 英文
-    Mandarin_CN: 簡體中文
-    Mandarin_TW: 正體中文
-    jyut: 粵文
-  authorize_app: 授權 BewlyBewly 使用 access key
-  authorize_app_desc: >
-    授權使用後能在首頁推送我可能有興趣觀看的影片
-    (授權 key 有效期約為一個月，之後如果你發現首頁推薦的影片不是你所感興趣的，請嘗試重新授權)
-  topbar_visiable: 頂欄可視性
-  topbar_visiable_desc: 用於相容 Bilibili Evolved 的客製化頂欄
-  btn:
-    authorize: 授權
-    revoke: 解除授權
-  chk_box:
-    show: 顯示
-    hidden: 隱藏
+anime:
+  total_episodes: 全 {ep} 話
+  update_to_n_episodes: 更新至 {ep} 話

@@ -11,13 +11,30 @@ common:
   hour: 個鐘頭
   minute: 分鐘
   second: 秒
-
+settings:
+  title: 校做
+  select_language: 介面語文
+  select_language_opt:
+    english: 英文
+    Mandarin_CN: 簡體中文
+    Mandarin_TW: 正體中文
+    jyut: 粵文
+  authorize_app: 授權 BewlyBewly 使用 access key
+  authorize_app_desc: |
+    授咗權嘅話首頁會畀啲可能啱我心水嘅片我 (授權 key 一個月左右有效，之後若然你撞正啲咩牛鬼蛇神唔開胃嘅嘢試下重新授權)
+  topbar_visiable: 頂欄可睇性
+  topbar_visiable_desc: 用於兼容 Bilibili Evolved 客製化頂欄
+  btn:
+    authorize: 授權
+    revoke: 解除授權
+  chk_box:
+    show: 擺出嚟
+    hidden: 收埋
 auth:
   err_tip: Failed to grant Access Key
   plz_login_first: Please login to bilibili first
   receive_vertified_url_err: Unable to receive verified URL. Please go back and try againe.
   failed_to_get_accesskey: Failed to get Access Key
-
 topbar:
   sign_in: 登入
   notifications: 通知
@@ -26,7 +43,7 @@ topbar:
   history: 記錄
   creative_center: 創作中心
   upload: Po 嘢
-  logo_dropdown: 
+  logo_dropdown:
     anime: 番劇
     movies: 電影
     chinese_anime: 國創
@@ -80,12 +97,12 @@ topbar:
     likes: 撳 like
     messages: 系统通知
     chats: 傾偈室
-  moments_dropdown: 
+  moments_dropdown:
     tabs:
       videos: 影片
       live: 直播
       articles: 文章
-    uploaded: 'po 咗：'
+    uploaded: po 咗：
     live_status: 直播緊
   upload_dropdown:
     article: 寫文
@@ -93,28 +110,9 @@ topbar:
     sticker: 出貼圖
     video: Po 片
     manager: 內容管理
-
 home:
   not_interested_in: 對邊方面冇癮？
   video_removed: 經已鏟咗條片
-
-settings:
-  title: 校做
-  select_language: 介面語文
-  select_language_opt:
-    english: 英文
-    Mandarin_CN: 簡體中文
-    Mandarin_TW: 正體中文
-    jyut: 粵文
-  authorize_app: 授權 BewlyBewly 使用 access key
-  authorize_app_desc: >
-    授咗權嘅話首頁會畀啲可能啱我心水嘅片我
-    (授權 key 一個月左右有效，之後若然你撞正啲咩牛鬼蛇神唔開胃嘅嘢試下重新授權)
-  topbar_visiable: 頂欄可睇性
-  topbar_visiable_desc: 用於兼容 Bilibili Evolved 客製化頂欄
-  btn:
-    authorize: 授權
-    revoke: 解除授權
-  chk_box:
-    show: 擺出嚟
-    hidden: 收埋
+anime:
+  total_episodes: 共 {ep} 集
+  update_to_n_episodes: 更新到 {ep} 集

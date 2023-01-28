@@ -56,7 +56,7 @@ export const sharedConfig: UserConfig = {
     VueI18nPlugin({
       runtimeOnly: true,
       compositionOnly: true,
-      include: [r('./_locales/**')],
+      include: [r('./src/_locales/**')],
     }),
 
     // https://github.com/unocss/unocss
