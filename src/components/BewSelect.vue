@@ -17,12 +17,13 @@ export default defineComponent({
     }
   },
   created() {
-    if (!this.options) return
+    if (!this.options)
+      return
     this.label = `${this.options.find((item: OptionType) => item.value === this.modelValue)?.label}`
   },
   methods: {
 
-    onClickOption(val: {value: string; label: string}) {
+    onClickOption(val: { value: string; label: string }) {
       window.removeEventListener('click', () => {})
       this.label = val.label
       this.$emit('update:modelValue', val.value)
@@ -77,7 +78,7 @@ export default defineComponent({
         display="inline-block"
         transform="~ rotate-45 -translate-y-1/4"
         transition="all duration-300"
-      ></div>
+      />
     </div>
     <transition>
       <div
@@ -103,7 +104,7 @@ export default defineComponent({
           cursor="pointer"
           @click="onClickOption(option)"
         >
-          <span v-text="option.label"></span>
+          <span v-text="option.label" />
         </div>
       </div>
     </transition>
@@ -113,11 +114,11 @@ export default defineComponent({
 <style lang="scss" scoped>
 .v-enter-active,
 .v-leave-active {
-  @apply transition-all duration-500;
+  --at-apply: transition-all duration-500;
 }
 
 .v-enter-from,
 .v-leave-to {
-  @apply opacity-0 transform-gpu scale-95 -translate-y-4 filter blur-sm;
+  --at-apply: opacity-0 transform-gpu scale-95 -translate-y-4 filter blur-sm;
 }
 </style>

@@ -145,59 +145,59 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 #user-info-panel {
-  @apply p-4 rounded-$bew-radius w-300px -z-1
+  --at-apply: p-4 rounded-$bew-radius w-300px -z-1
     bg-$bew-content-solid-1;
   box-shadow: var(--bew-shadow-3);
 }
 
 #base-info {
-  @apply mt-8 text-xl font-medium flex items-center justify-center;
+  --at-apply: mt-8 text-xl font-medium flex items-center justify-center;
 }
 
 #channel-info {
-  @apply grid grid-cols-3 gap-x-2 mb-2;
+  --at-apply: grid grid-cols-3 gap-x-2 mb-2;
 
   a {
-    @apply p-2 m-0 rounded-$bew-radius text-sm
+    --at-apply: p-2 m-0 rounded-$bew-radius text-sm
       flex flex-col items-center transition-all duration-300
       bg-$bew-fill-1
       // hover:bg-$bew-theme-color
       hover:text-white;
 
     > * {
-      // @apply transition-all duration-300;
+      // --at-apply: transition-all duration-300;
     }
 
     &:hover .num + div{
-      @apply text-white;
+      --at-apply: text-white;
     }
 
     .num {
-      @apply font-semibold text-xl;
+      --at-apply: font-semibold text-xl;
 
       + div {
-        @apply text-$bew-text-2 mt-1 text-xs font-semibold;
+        --at-apply: text-$bew-text-2 mt-1 text-xs font-semibold;
       }
     }
   }
 }
 
 #other-link {
-  @apply flex justify-between flex-col mt-4;
+  --at-apply: flex justify-between flex-col mt-4;
 
   a {
-    @apply px-4 py-2 mb-1 flex justify-between items-center
+    --at-apply: px-4 py-2 mb-1 flex justify-between items-center
       rounded-$bew-radius transition-all duration-300
       hover:bg-$bew-fill-2;
 
     span {
-      @apply text-$bew-text-2;
+      --at-apply: text-$bew-text-2;
     }
   }
 }
 
 #logout {
-  @apply text-red-400 important:block px-4 py-2 rounded-$bew-radius
+  --at-apply: text-red-400 important:block px-4 py-2 rounded-$bew-radius
     duration-300 cursor-pointer
     hover:bg-$bew-fill-2;
 }

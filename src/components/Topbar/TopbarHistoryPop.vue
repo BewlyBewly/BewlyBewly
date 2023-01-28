@@ -401,23 +401,23 @@ function scrollToTop(element: HTMLElement, duration: number) {
 }
 .list-enter-from,
 .list-leave-to {
-  @apply opacity-0 transform translate-y-2 transform-gpu;
+  --at-apply: opacity-0 transform translate-y-2 transform-gpu;
 }
 
 .tab {
-  @apply relative text-$bew-text-2;
+  --at-apply: relative text-$bew-text-2;
 
   &::after {
-    @apply absolute bottom-0 left-0 w-full h-12px bg-$bew-theme-color opacity-0 transform scale-x-0 -z-1 transition-all duration-300;
+    --at-apply: absolute bottom-0 left-0 w-full h-12px bg-$bew-theme-color opacity-0 transform scale-x-0 -z-1 transition-all duration-300;
     content: '';
   }
 }
 
 .tab-selected {
-  @apply font-bold text-$bew-text-1;
+  --at-apply: font-bold text-$bew-text-1;
 
   &::after {
-    @apply scale-x-80 opacity-40;
+    --at-apply: scale-x-80 opacity-40;
   }
 }
 </style>

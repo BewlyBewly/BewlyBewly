@@ -1,7 +1,12 @@
 <script lang="ts" setup>
 import type { Video } from './types'
 import { accessKey, language } from '~/logic/index'
-import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils'
+import {
+  calcCurrentTime,
+  calcTimeSince,
+  numFormatter,
+  removeHttpFromUrl,
+} from '~/utils'
 import { LanguageType } from '~/enums/appEnums'
 
 const props = defineProps<{
@@ -157,7 +162,7 @@ function gotoChannel(mid: number) {
           >
             <!-- Video cover -->
             <img
-              :src="`${videoData.pic.replace('http:', '')}@672w_378h_1c`"
+              :src="`${removeHttpFromUrl(videoData.pic)}@672w_378h_1c`"
               loading="lazy"
               class="aspect-auto"
               w="full"
@@ -172,7 +177,7 @@ function gotoChannel(mid: number) {
 
           <!-- Shadow of the video cover -->
           <img
-            :src="`${videoData.pic.replace('http:', '')}@672w_378h_1c`"
+            :src="`${removeHttpFromUrl(videoData.pic)}@672w_378h_1c`"
             loading="lazy"
             class="aspect-video"
             w="full"
@@ -202,10 +207,7 @@ function gotoChannel(mid: number) {
             @click="gotoChannel(videoData.owner.mid)"
           >
             <img
-              :src="`${`${videoData.owner.face}`.replace(
-                'http:',
-                '',
-              )}@60w_60h_1c`"
+              :src="`${removeHttpFromUrl(videoData.owner.face)}@60w_60h_1c`"
               width="48"
               height="48"
               loading="lazy"
@@ -323,7 +325,7 @@ function gotoChannel(mid: number) {
 <style lang="scss" scoped>
 .video-card.is-dislike {
   > *:not(#dislike-control) {
-    @apply invisible pointer-events-none duration-0 transition-none;
+    --at-apply: invisible pointer-events-none duration-0 transition-none;
   }
 }
 </style>

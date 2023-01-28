@@ -123,7 +123,7 @@ function changeActivatePage(pageName: AppPage) {
 
 .topbar-enter-from,
 .topbar-leave-to {
-  @apply opacity-0 transform -translate-y-full;
+  --at-apply: opacity-0 transform -translate-y-full;
 }
 
 .fade-enter-active,
@@ -133,7 +133,7 @@ function changeActivatePage(pageName: AppPage) {
 
 .fade-enter-from,
 .fade-leave-to {
-  @apply opacity-0;
+  --at-apply: opacity-0;
 }
 
 .tab-item {

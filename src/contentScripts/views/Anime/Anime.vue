@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
-import PopularAnimeCarousel from './components/PopularAnimeCarousel.vue'
+// import PopularAnimeCarousel from './components/PopularAnimeCarousel.vue'
 import type { AnimeItem } from './types'
 import { getUserID, removeHttpFromUrl } from '~/utils'
 

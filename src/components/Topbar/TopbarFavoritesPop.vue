@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
 import type { Ref } from 'vue'
 import { TransitionGroup, onMounted, reactive, ref, watch } from 'vue'
 import type { FavoriteCategory, FavoriteResource } from './types'
-import { calcCurrentTime, getUserID } from '~/utils'
-const { t } = useI18n()
+import { calcCurrentTime, getUserID, removeHttpFromUrl } from '~/utils'
 
 const favoriteCategories = reactive<Array<FavoriteCategory>>([])
 const favoriteResources = reactive<Array<FavoriteResource>>([])
@@ -176,7 +174,7 @@ function scrollToTop(element: HTMLElement, duration: number) {
       </h3>
 
       <a :href="favoritesPageUrl" target="_blank" flex="~" items="center">
-        <span text="sm">{{ t('common.view_all') }}</span>
+        <span text="sm">{{ $t('common.view_all') }}</span>
       </a>
     </div>
 
@@ -223,7 +221,7 @@ function scrollToTop(element: HTMLElement, duration: number) {
           h="full"
           flex="~"
           items="center"
-          border="rounded-$bew-radius"
+          rounded="$bew-radius"
         />
 
         <!-- empty -->
@@ -241,25 +239,25 @@ function scrollToTop(element: HTMLElement, duration: number) {
             :href="`//www.bilibili.com/video/${item.bvid}`"
             target="_blank"
             hover:bg="$bew-fill-2"
-            border="rounded-$bew-radius"
+            rounded="$bew-radius"
             p="2"
             m="first:t-50px last:b-4"
             class="group"
             transition="~ duration-300"
           >
-            <section flex="~ gap-4" align="item-start">
+            <section flex="~ gap-4" item-start>
               <div
                 bg="$bew-fill-1"
                 w="150px"
                 flex="shrink-0"
-                border="rounded-$bew-radius-half"
+                rounded="$bew-radius-half"
                 overflow="hidden"
               >
                 <div pos="relative">
                   <img
                     w="150px"
                     class="aspect-video"
-                    :src="`${item.cover.replace('http:', '')}@256w_144h_1c`"
+                    :src="`${removeHttpFromUrl(item.cover)}@256w_144h_1c`"
                     :alt="item.title"
                     bg="contain"
                   >
@@ -269,7 +267,7 @@ function scrollToTop(element: HTMLElement, duration: number) {
                     m="1"
                     p="x-2 y-1"
                     text="white xs"
-                    border="rounded-full"
+                    rounded-full
                   >
                     {{ calcCurrentTime(item.duration) }}
                   </div>
@@ -279,13 +277,7 @@ function scrollToTop(element: HTMLElement, duration: number) {
               <!-- Description -->
               <div>
                 <h3
-                  style="
-                    -webkit-line-clamp: 2;
-                    -webkit-box-orient: vertical;
-                    display: -webkit-box;
-                  "
-                  overflow="hidden"
-                  text="overflow-ellipsis"
+                  class="keep-two-lines"
                 >
                   {{ item.title }}
                 </h3>
@@ -293,7 +285,7 @@ function scrollToTop(element: HTMLElement, duration: number) {
                   text="$bew-text-2 sm"
                   m="t-4"
                   flex="~"
-                  align="items-center"
+                  items-center
                 >
                   {{ item.upper.name }}
                 </div>
@@ -316,10 +308,10 @@ function scrollToTop(element: HTMLElement, duration: number) {
 }
 .list-enter-from,
 .list-leave-to {
-  @apply opacity-0 transform translate-y-2 transform-gpu;
+  --at-apply: opacity-0 transform translate-y-2 transform-gpu;
 }
 
 .activated-category {
-  @apply bg-$bew-theme-color text-white;
+  --at-apply: bg-$bew-theme-color text-white;
 }
 </style>

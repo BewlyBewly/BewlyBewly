@@ -122,29 +122,29 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 #settings-window {
-  @apply fixed top-1/5 left-1/2 w-700px
+  --at-apply: fixed top-1/5 left-1/2 w-700px
     transform -translate-x-1/2
     rounded-$bew-radius p-8
     bg-$bew-content-solid-1;
   box-shadow: var(--bew-shadow-3);
 
   .settings-item {
-    @apply flex justify-between items-center py-2 text-base;
+    --at-apply: flex justify-between items-center py-2 text-base;
     .desc {
-      @apply text-sm text-$bew-text-3;
+      --at-apply: text-sm text-$bew-text-3;
     }
 
     > *:first-child {
-      @apply w-5/7 mr-4;
+      --at-apply: w-5/7 mr-4;
     }
 
     > *:last-child {
-      @apply w-2/7;
+      --at-apply: w-2/7;
     }
   }
 }
 button,
 select {
-  @apply w-120px
+  --at-apply: w-120px
 }
 </style>

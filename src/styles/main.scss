@@ -27,7 +27,7 @@ body {
 }
 
 .btn {
-  @apply px-4 py-2 rounded-$bew-radius inline-block
+  --at-apply: px-4 py-2 rounded-$bew-radius inline-block
     cursor-pointer transform duration-300
     filter outline-none
     border-2 border-solid border-$bew-theme-color
@@ -39,7 +39,7 @@ body {
 }
 
 .line-btn {
-  @apply px-4 py-2 rounded-$bew-radius inline-block
+  --at-apply: px-4 py-2 rounded-$bew-radius inline-block
     cursor-pointer transform duration-300
     bg-transparent filter
     border-2 border-solid border-$bew-fill-4
@@ -49,21 +49,21 @@ body {
 }
 
 .icon-btn {
-  @apply inline-block cursor-pointer select-none
+  --at-apply: inline-block cursor-pointer select-none
     opacity-75 transition duration-200 ease-in-out
     hover:opacity-100 hover:text-$bew-theme-color;
   font-size: 1rem;
 }
 
 .chk-btn {
-  @apply flex px-4 py-2 items-center select-none;
+  --at-apply: flex px-4 py-2 items-center select-none;
 
   input {
-    @apply ml-4;
+    --at-apply: ml-4;
   }
 }
 
 select {
-  @apply px-4 py-2 bg-$bew-fill-1 rounded-$bew-radius border-none
+  --at-apply: px-4 py-2 bg-$bew-fill-1 rounded-$bew-radius border-none
     text-center appearance-none text-$bew-text-1 outline-none;
 }
