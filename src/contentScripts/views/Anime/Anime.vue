@@ -1,9 +1,10 @@
 <script setup lang="ts">
 // import PopularAnimeCarousel from './components/PopularAnimeCarousel.vue'
-import type { AnimeItem } from './types'
+import type { AnimeItem, AnimeTimeTableItem } from './types'
 import { getUserID, removeHttpFromUrl } from '~/utils'
 
 const recommendAnimeList = reactive<AnimeItem[]>([])
+const animeTimeTable = reactive<AnimeTimeTableItem[]>([])
 const animeWatchList = reactive<AnimeItem[]>([])
 const cursor = ref<number>(29) // 遊標默認必須要非0，否則第一次會出現同樣的結果
 const isLoading = ref<boolean>()
@@ -12,6 +13,7 @@ const activatedSeasonId = ref<number>()
 onMounted(() => {
   getRecommendAnimeList()
   getAnimeWatchList()
+  getAnimeTimeTable()
 
   window.onscroll = () => {
     if (
@@ -50,6 +52,18 @@ function getAnimeWatchList() {
     })
     .finally(() => {
       isLoading.value = false
+    })
+}
+
+function getAnimeTimeTable() {
+  browser.runtime
+    .sendMessage({
+      contentScriptQuery: 'getAnimeTimeTable',
+    })
+    .then((res) => {
+      const { code, result } = res
+      if (code === 0)
+        Object.assign(animeTimeTable, result as AnimeTimeTableItem[])
     })
 }
 
@@ -156,6 +170,50 @@ function getRecommendAnimeList() {
               </p>
             </article>
           </div>
+        </HorizontalScrollView>
+      </section>
+
+      <!-- Anime Timetable -->
+      <section mb-8>
+        <div flex justify-between items-end mb-6>
+          <h3 text="3xl $bew-text-1" font="bold">
+            Anime Timetable
+          </h3>
+        </div>
+
+        <HorizontalScrollView>
+          <ul flex="~">
+            <li
+              v-for="item in animeTimeTable"
+              :key="item.date_ts"
+              w="1/7"
+              pr-8
+              shrink-0
+            >
+              <h3 text="2xl" font-bold mb-6>
+                {{ item.date }}
+              </h3>
+
+              <ul grid gap-4>
+                <li v-for="episode in item.episodes" :key="episode.season_id" flex gap-4>
+                  <img
+                    :src="`${removeHttpFromUrl(episode.cover)}@144w_144h.webp`"
+                    :alt="episode.title"
+                    w-18
+                    h-18
+                    rounded="$bew-radius"
+                    shrink-0
+                  >
+                  <div flex="~ col">
+                    <p>{{ episode.title }}</p>
+                    <p mt-auto text="$bew-theme-color">
+                      {{ episode.pub_index }}
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
         </HorizontalScrollView>
       </section>
 
