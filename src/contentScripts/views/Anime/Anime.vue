@@ -9,6 +9,7 @@ const animeWatchList = reactive<AnimeItem[]>([])
 const cursor = ref<number>(29) // 遊標默認必須要非0，否則第一次會出現同樣的結果
 const isLoading = ref<boolean>()
 const activatedSeasonId = ref<number>()
+const daysOfTheWeekList = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
 
 onMounted(() => {
   getRecommendAnimeList()
@@ -190,25 +191,47 @@ function getRecommendAnimeList() {
               pr-8
               shrink-0
             >
-              <h3 text="2xl" font-bold mb-6>
-                {{ item.date }}
+              <h3 mb-6 text="$bew-text-2">
+                <span text="2xl" font-bold>{{
+                  daysOfTheWeekList[item.day_of_week - 1]
+                }}</span>
+                <span text="base $bew-text-2" ml-4>{{ item.date }}</span>
               </h3>
 
               <ul grid gap-4>
-                <li v-for="episode in item.episodes" :key="episode.season_id" flex gap-4>
-                  <img
-                    :src="`${removeHttpFromUrl(episode.cover)}@144w_144h.webp`"
-                    :alt="episode.title"
-                    w-18
-                    h-18
-                    rounded="$bew-radius"
-                    shrink-0
-                  >
-                  <div flex="~ col">
-                    <p>{{ episode.title }}</p>
-                    <p mt-auto text="$bew-theme-color">
-                      {{ episode.pub_index }}
-                    </p>
+                <li
+                  v-for="episode in item.episodes"
+                  :key="episode.season_id"
+                >
+                  <div p="x-2 y-1" w="[fit-content]" mb-2 rounded-4 color="$bew-theme-color" bg="$bew-theme-color-20">
+                    {{ episode.pub_time }}
+                  </div>
+
+                  <div flex gap-4>
+                    <a
+                      :href="`//www.bilibili.com/bangumi/play/ss${episode.season_id}`"
+                      target="_blank"
+                      shrink-0
+                    >
+                      <img
+                        :src="`${removeHttpFromUrl(
+                          episode.cover,
+                        )}@300w_400h.webp`"
+                        :alt="episode.title"
+                        w-18
+                        aspect="3/4"
+                        rounded="$bew-radius-half"
+                      >
+                    </a>
+                    <div flex="~ col">
+                      <a
+                        :href="`//www.bilibili.com/bangumi/play/ss${episode.season_id}`"
+                        target="_blank"
+                      >{{ episode.title }}</a>
+                      <p mt-auto text="$bew-theme-color">
+                        {{ episode.pub_index }}
+                      </p>
+                    </div>
                   </div>
                 </li>
               </ul>
