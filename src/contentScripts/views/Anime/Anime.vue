@@ -188,8 +188,11 @@ function getRecommendAnimeList() {
               v-for="item in animeTimeTable"
               :key="item.date_ts"
               w="1/7"
-              pr-8
+              px-2
               shrink-0
+              :bg="item.is_today ? '!$bew-theme-color-10' : ''"
+              hover:bg="$bew-fill-1"
+              duration-300
             >
               <div flex mb-3 items-end h="66px" overflow-hidden>
                 <div
@@ -228,9 +231,7 @@ function getRecommendAnimeList() {
               <ul
                 grid
                 gap-4
-                :border-l="`~ 2px dashed ${
-                  item.is_today ? '$bew-theme-color-40' : '$bew-text-3'
-                }`"
+                border-l="~ 2px dashed $bew-theme-color-40"
                 p="t-3 l-3"
               >
                 <li v-for="episode in item.episodes" :key="episode.season_id">
@@ -250,7 +251,7 @@ function getRecommendAnimeList() {
                       w-2
                       h-2
                       rounded-6
-                      :bg=" item.is_today ? '$bew-theme-color' : '$bew-text-3'"
+                      bg="$bew-theme-color"
                       transform="~ translate-x-[calc(-0.25rem-1px)]"
                     />
                     {{ episode.pub_time }}
