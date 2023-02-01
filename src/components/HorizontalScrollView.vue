@@ -1,11 +1,19 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
 
+const props = defineProps<{
+  defaultScrollLeft?: number
+}>()
+
 const scrollListWrap = ref<HTMLElement>() as Ref<HTMLElement>
 const showLeftMask = ref<boolean>(false)
 const showRightMask = ref<boolean>(false)
 
 onMounted(() => {
+  // scrollListWrap.value.scrollLeft = props.defaultScrollLeft ? props.defaultScrollLeft : 0
+  // console.log('props.defaultScrollLeft', props.defaultScrollLeft)
+  // console.log(scrollListWrap.value.scrollLeft)
+
   scrollListWrap.value.addEventListener('scroll', () => {
     if (scrollListWrap.value.scrollLeft > 0) {
       showLeftMask.value = true
@@ -24,6 +32,7 @@ onMounted(() => {
       showRightMask.value = false
     }
   })
+
   scrollListWrap.value.addEventListener('wheel', (event: WheelEvent) => {
     event.preventDefault()
     scrollListWrap.value.scrollLeft += event.deltaY

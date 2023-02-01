@@ -1,20 +1,18 @@
 <script setup lang="ts">
 // import PopularAnimeCarousel from './components/PopularAnimeCarousel.vue'
-import type { AnimeItem, AnimeTimeTableItem } from './types'
+import AnimeTimeTable from './components/AnimeTimeTable.vue'
+import type { AnimeItem } from './types'
 import { getUserID, removeHttpFromUrl } from '~/utils'
 
 const recommendAnimeList = reactive<AnimeItem[]>([])
-const animeTimeTable = reactive<AnimeTimeTableItem[]>([])
 const animeWatchList = reactive<AnimeItem[]>([])
 const cursor = ref<number>(29) // 遊標默認必須要非0，否則第一次會出現同樣的結果
 const isLoading = ref<boolean>()
 const activatedSeasonId = ref<number>()
-const daysOfTheWeekList = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
 
 onMounted(() => {
   getRecommendAnimeList()
   getAnimeWatchList()
-  getAnimeTimeTable()
 
   window.onscroll = () => {
     if (
@@ -53,18 +51,6 @@ function getAnimeWatchList() {
     })
     .finally(() => {
       isLoading.value = false
-    })
-}
-
-function getAnimeTimeTable() {
-  browser.runtime
-    .sendMessage({
-      contentScriptQuery: 'getAnimeTimeTable',
-    })
-    .then((res) => {
-      const { code, result } = res
-      if (code === 0)
-        Object.assign(animeTimeTable, result as AnimeTimeTableItem[])
     })
 }
 
@@ -182,112 +168,7 @@ function getRecommendAnimeList() {
           </h3>
         </div>
 
-        <HorizontalScrollView>
-          <ul flex="~">
-            <li
-              v-for="item in animeTimeTable"
-              :key="item.date_ts"
-              w="1/7"
-              px-2
-              shrink-0
-              :bg="item.is_today ? '!$bew-theme-color-10' : ''"
-              hover:bg="$bew-fill-1"
-              duration-300
-            >
-              <div flex mb-3 items-end h="66px" overflow-hidden>
-                <div
-                  :w="item.is_today ? '50px' : '38px'"
-                  :h="item.is_today ? '48px' : '36px'"
-                  mr-4
-                  :style="{
-                    backgroundPosition: item.is_today
-                      ? `-56px ${-36 + (item.day_of_week - 1) * -72}px`
-                      : `-146px ${-36 + (item.day_of_week - 1) * -72}px`,
-                    backgroundSize: item.is_today ? '247px 663px' : '',
-                    filter: item.is_today
-                      ? `drop-shadow(50px 0 var(--bew-text-1))`
-                      : `drop-shadow(38px 0 var(--bew-text-3))`,
-                  }"
-                  style="
-                    transform: translateX(-100%);
-                    background-size: 247px 663px;
-                    background-image: url(//s1.hdslb.com/bfs/static/bangumi-timeline/asserts/icons.png);
-                  "
-                />
-                <h3 :text="item.is_today ? '$bew-text-2' : '$bew-text-3'">
-                  <span text="2xl" font-bold>{{
-                    daysOfTheWeekList[item.day_of_week - 1]
-                  }}</span>
-                  <span text="base $bew-text-2" ml-2>{{ item.date }}</span>
-                </h3>
-              </div>
-              <span
-                block
-                w-full
-                h-4px
-                :bg="item.is_today ? '$bew-theme-color' : '$bew-text-3'"
-                rounded-8
-              />
-              <ul
-                grid
-                gap-4
-                border-l="~ 2px dashed $bew-theme-color-40"
-                p="t-3 l-3"
-              >
-                <li v-for="episode in item.episodes" :key="episode.season_id">
-                  <div
-                    p="x-2 y-1"
-                    w="[fit-content]"
-                    mb-2
-                    rounded-4
-                    color="$bew-theme-color"
-                    bg="$bew-theme-color-20"
-                    relative
-                    grid
-                    place-items-center
-                  >
-                    <i
-                      pos="absolute left--3"
-                      w-2
-                      h-2
-                      rounded-6
-                      bg="$bew-theme-color"
-                      transform="~ translate-x-[calc(-0.25rem-1px)]"
-                    />
-                    {{ episode.pub_time }}
-                  </div>
-
-                  <div flex gap-4>
-                    <a
-                      :href="`//www.bilibili.com/bangumi/play/ss${episode.season_id}`"
-                      target="_blank"
-                      shrink-0
-                    >
-                      <img
-                        :src="`${removeHttpFromUrl(
-                          episode.cover,
-                        )}@300w_400h.webp`"
-                        :alt="episode.title"
-                        w-18
-                        aspect="3/4"
-                        rounded="$bew-radius-half"
-                      >
-                    </a>
-                    <div flex="~ col">
-                      <a
-                        :href="`//www.bilibili.com/bangumi/play/ss${episode.season_id}`"
-                        target="_blank"
-                      >{{ episode.title }}</a>
-                      <p mt-auto text="$bew-theme-color">
-                        {{ episode.pub_index }}
-                      </p>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </HorizontalScrollView>
+        <AnimeTimeTable />
       </section>
 
       <!-- Recommended for you -->
