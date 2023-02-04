@@ -1,18 +1,22 @@
 <script setup lang="ts">
 // import PopularAnimeCarousel from './components/PopularAnimeCarousel.vue'
 import AnimeTimeTable from './components/AnimeTimeTable.vue'
-import type { AnimeItem } from './types'
-import { getUserID, removeHttpFromUrl } from '~/utils'
+import type { AnimeItem, PopularAnime } from './types'
+import { getUserID, numFormatter, removeHttpFromUrl } from '~/utils'
+import { LanguageType } from '~/enums/appEnums'
+import { language } from '~/logic'
 
-const recommendAnimeList = reactive<AnimeItem[]>([])
 const animeWatchList = reactive<AnimeItem[]>([])
-const cursor = ref<number>(29) // 遊標默認必須要非0，否則第一次會出現同樣的結果
+const recommendAnimeList = reactive<AnimeItem[]>([])
+const popularAnimeList = reactive<AnimeItem[]>([])
+const coursor = ref<number>(29) // 遊標默認必須要非0，否則第一次會出現同樣的結果
 const isLoading = ref<boolean>()
 const activatedSeasonId = ref<number>()
 
 onMounted(() => {
-  getRecommendAnimeList()
   getAnimeWatchList()
+  getPopularAnimeList()
+  getRecommendAnimeList()
 
   window.onscroll = () => {
     if (
@@ -59,23 +63,38 @@ function getRecommendAnimeList() {
   browser.runtime
     .sendMessage({
       contentScriptQuery: 'getRecommendAnimeList',
-      cursor: cursor.value ?? '',
+      coursor: coursor.value,
     })
     .then((response) => {
       const {
         code,
-        data: { items, coursor },
+        data: { items, coursor, has_next },
       } = response
-      if (code === 0) {
+      if (code === 0 && has_next) {
         if (recommendAnimeList.length === 0)
           Object.assign(recommendAnimeList, items[0].sub_items as AnimeItem[])
         else recommendAnimeList.push(...items[0].sub_items)
 
-        cursor.value = coursor
+        coursor.value = coursor
       }
     })
     .finally(() => {
       isLoading.value = false
+    })
+}
+
+function getPopularAnimeList() {
+  browser.runtime
+    .sendMessage({
+      contentScriptQuery: 'getPopularAnimeList',
+    })
+    .then((response) => {
+      const {
+        code,
+        result: { list },
+      } = response
+      if (code === 0)
+        Object.assign(popularAnimeList, list as PopularAnime[])
     })
 }
 </script>
@@ -83,7 +102,7 @@ function getRecommendAnimeList() {
 <template>
   <div>
     <div>
-      <!-- <section mb-16>
+      <!-- <section mb-8>
         <PopularAnimeCarousel />
       </section> -->
 
@@ -154,6 +173,86 @@ function getRecommendAnimeList() {
                 {{
                   item.progress !== '' ? item.progress : $t('anime.havent_seen')
                 }}
+              </p>
+            </article>
+          </div>
+        </HorizontalScrollView>
+      </section>
+
+      <!-- Popular Anime -->
+      <section mb-8>
+        <div flex justify-between items-end mb-6>
+          <h3 text="3xl $bew-text-1" font="bold">
+            Popular Anime
+          </h3>
+          <a
+            href="https://www.bilibili.com/v/popular/rank/bangumi"
+            target="_blank"
+            un-text="$bew-theme-color"
+          >{{ $t('common.view_all') }}</a>
+        </div>
+
+        <HorizontalScrollView w="[calc(100%+1.5rem)]">
+          <div w-full flex>
+            <article
+              v-for="item in popularAnimeList"
+              :key="item.episode_id"
+              w="2xl:[calc(100%/6-1.5rem)] xl:[calc(100%/5-1.5rem)] lg:[calc(100%/4-1.5rem)] md:[calc(100%/3-1.5rem)] [calc(100%/2-1.5rem)]"
+              last:w="2xl:1/6 xl:1/5 lg:1/4 md:1/3 1/2"
+              shrink-0
+              m="r-6"
+              last:pr-6
+            >
+              <a
+                rounded="$bew-radius"
+                aspect="12/16"
+                overflow-hidden
+                mb-4
+                bg="$bew-fill-3"
+                :href="item.url"
+                target="_blank"
+                relative
+              >
+                <div
+                  w-full
+                  pos="absolute bottom-0"
+                  text="white 7xl shadow-xl"
+                  px-2
+                  fw-bold
+                  h-150px
+                  flex
+                  items-end
+                  bg="gradient-to-b gradient-from-transparent gradient-to-[rgba(0,0,0,.6)]"
+                >
+                  {{ item.rank }}
+                </div>
+                <img
+                  :src="`${removeHttpFromUrl(item.cover)}@466w_622h.webp`"
+                  :alt="item.title"
+                  rounded="$bew-radius"
+                >
+              </a>
+              <p un-text="lg" my-4>
+                <a
+                  :href="item.url"
+                  target="_blank"
+                  class="keep-two-lines"
+                  :title="item.title"
+                >
+                  {{ item.title }}
+                </a>
+              </p>
+              <p text="$bew-text-2" mb-10>
+                <span
+                  text="$bew-theme-color"
+                  bg="$bew-theme-color-20"
+                  p="x-3 y-1"
+                  mr-2
+                  rounded-4
+                  lh-loose
+                >{{ item.rating }}
+                </span>
+                {{ numFormatter(Number(item.stat.series_follow)) }} follow
               </p>
             </article>
           </div>

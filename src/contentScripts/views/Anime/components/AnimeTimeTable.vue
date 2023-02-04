@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import type { Ref } from 'vue'
 import type { AnimeTimeTableItem } from '../types'
 import { removeHttpFromUrl } from '~/utils'
 
 const animeTimeTable = reactive<AnimeTimeTableItem[]>([])
 const daysOfTheWeekList = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
+const animeTimeTableWrap = ref<HTMLElement>() as Ref<HTMLElement>
 
 onMounted(() => {
   getAnimeTimeTable()
@@ -24,8 +26,8 @@ function getAnimeTimeTable() {
 
 <template>
   <div>
-    <HorizontalScrollView :default-scroll-left="600">
-      <ul flex="~">
+    <HorizontalScrollView>
+      <ul ref="animeTimeTableWrap" flex="~">
         <li
           v-for="item in animeTimeTable"
           :key="item.date_ts"
@@ -108,7 +110,9 @@ function getAnimeTimeTable() {
                   shrink-0
                 >
                   <img
-                    :src="`${removeHttpFromUrl(episode.square_cover)}@300w_300h.webp`"
+                    :src="`${removeHttpFromUrl(
+                      episode.square_cover,
+                    )}@300w_300h.webp`"
                     :alt="episode.title"
                     w-18
                     aspect="square"

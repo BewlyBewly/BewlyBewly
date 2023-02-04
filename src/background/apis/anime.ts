@@ -22,7 +22,7 @@ export const setupAnimeAPIs = () => {
     }
     else if (message.contentScriptQuery === 'getRecommendAnimeList') {
       const url = `https://api.bilibili.com/pgc/page/web/v3/feed?name=anime&coursor=${
-        message.cursor ?? ''
+        message.coursor ?? ''
       }`
       return fetch(url)
         .then(response => response.json())
@@ -45,5 +45,6 @@ export const setupAnimeAPIs = () => {
         .then(data => data)
         .catch(error => console.error(error))
     }
+    // TODO: https://api.bilibili.com/pgc/season/index/condition?season_type=1&type=1
   })
 }
