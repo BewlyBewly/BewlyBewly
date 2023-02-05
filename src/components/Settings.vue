@@ -1,52 +1,52 @@
-<script lang="ts">
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+import type { Ref } from 'vue'
 import { grantAccessKey, revokeAccessKey } from '~/utils/index'
 import { accessKey, isShowTopbar, language } from '~/logic'
 
-export default defineComponent({
-  emits: ['close'],
-  data() {
-    return {
-      isShowTopbar,
-      accessKey,
-      language,
-      langs: [
-        {
-          value: 'en',
-          label: this.$t('settings.select_language_opt.english'),
-        },
-        {
-          value: 'cmn-CN',
-          label: this.$t('settings.select_language_opt.Mandarin_CN'),
-        },
-        {
-          value: 'cmn-TW',
-          label: this.$t('settings.select_language_opt.Mandarin_TW'),
-        },
-        {
-          value: 'jyut',
-          label: this.$t('settings.select_language_opt.jyut'),
-        },
-      ],
-    }
-  },
-  watch: {
-    language() {
-      this.$i18n.locale = this.language
+const emit = defineEmits(['close'])
+
+const { t, locale } = useI18n()
+
+const authorizeBtn = ref<HTMLButtonElement>() as Ref<HTMLButtonElement>
+const langsSelect = ref<HTMLElement>() as Ref<HTMLElement>
+
+const langs = computed(() => {
+  return [
+    {
+      value: 'en',
+      label: t('settings.select_language_opt.english'),
     },
-  },
-  methods: {
-    close() {
-      this.$emit('close')
+    {
+      value: 'cmn-CN',
+      label: t('settings.select_language_opt.Mandarin_CN'),
     },
-    onAuthorize() {
-      const authorizeBtn = this.$refs.authorizeBtn as HTMLButtonElement
-      grantAccessKey(authorizeBtn)
+    {
+      value: 'cmn-TW',
+      label: t('settings.select_language_opt.Mandarin_TW'),
     },
-    onRevoke() {
-      revokeAccessKey()
+    {
+      value: 'jyut',
+      label: t('settings.select_language_opt.jyut'),
     },
-  },
+  ]
 })
+
+watch(() => language.value, (newValue, oldValue) => {
+  locale.value = newValue
+})
+
+function close() {
+  emit('close')
+}
+
+function onAuthorize() {
+  grantAccessKey(authorizeBtn.value)
+}
+
+function onRevoke() {
+  revokeAccessKey()
+}
 </script>
 
 <template>
@@ -78,6 +78,7 @@ export default defineComponent({
       </div>
 
       <bew-select
+        ref="langsSelect"
         v-model="language"
         :options="langs"
         w="full"
