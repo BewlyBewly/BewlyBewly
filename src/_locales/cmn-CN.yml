@@ -16,9 +16,9 @@ settings:
   select_language: 界面语文
   select_language_opt:
     english: 英文
-    Mandarin_CN: 简体中文
-    Mandarin_TW: 正體中文
-    jyut: 粵文
+    Mandarin_CN: 官话
+    Mandarin_TW: 官話
+    jyut: 廣東話
   authorize_app: 授权 BewlyBewly 使用 access key
   authorize_app_desc: |
     授权使用后能在首页推送我可能有兴趣观看的视频 (授权 key 有效期约为一个月，之后如果你发现首页推荐的视频不是你所感兴趣的，请尝试重新授权)
@@ -119,3 +119,15 @@ anime:
   your_watch_list: 正在追
   recommended_for_you: 猜你喜欢
   havent_seen: 尚未观看
+  popular_anime: 番剧热播榜
+  follow: '{num}追番'
+  anime_timetable:
+    title: 新番时间表
+    days_of_week:
+      mon: 周一
+      tue: 周二
+      wed: 周三
+      thu: 周四
+      fri: 周五
+      sat: 周六
+      sun: 周日

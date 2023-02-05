@@ -1,11 +1,25 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import type { AnimeTimeTableItem } from '../types'
 import { removeHttpFromUrl } from '~/utils'
 
+const { t } = useI18n()
+
 const animeTimeTable = reactive<AnimeTimeTableItem[]>([])
-const daysOfTheWeekList = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
 const animeTimeTableWrap = ref<HTMLElement>() as Ref<HTMLElement>
+
+const daysOfTheWeekList = computed(() => {
+  return [
+    t('anime.anime_timetable.days_of_week.mon'),
+    t('anime.anime_timetable.days_of_week.tue'),
+    t('anime.anime_timetable.days_of_week.wed'),
+    t('anime.anime_timetable.days_of_week.thu'),
+    t('anime.anime_timetable.days_of_week.fri'),
+    t('anime.anime_timetable.days_of_week.sat'),
+    t('anime.anime_timetable.days_of_week.sun'),
+  ]
+})
 
 onMounted(() => {
   getAnimeTimeTable()
@@ -58,11 +72,14 @@ function getAnimeTimeTable() {
                 background-image: url(//s1.hdslb.com/bfs/static/bangumi-timeline/asserts/icons.png);
               "
             />
-            <h3 :text="item.is_today ? '$bew-text-2' : '$bew-text-3'">
+            <h3 :text="item.is_today ? '$bew-text-1' : '$bew-text-3'">
               <span text="2xl" font-bold>{{
                 daysOfTheWeekList[item.day_of_week - 1]
               }}</span>
-              <span text="base $bew-text-2" ml-2>{{ item.date }}</span>
+              <span
+                :text="`base ${item.is_today ? '$bew-text-2' : '$bew-text-3'}`"
+                ml-2
+              >{{ item.date }}</span>
             </h3>
           </div>
           <span

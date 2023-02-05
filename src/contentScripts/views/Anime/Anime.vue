@@ -115,7 +115,6 @@ function getPopularAnimeList() {
           <a
             :href="`https://space.bilibili.com/${getUserID() ?? 0}/bangumi`"
             target="_blank"
-            un-text="$bew-theme-color"
           >{{ $t('common.view_all') }}</a>
         </div>
 
@@ -183,7 +182,7 @@ function getPopularAnimeList() {
       <section mb-8>
         <div flex justify-between items-end mb-6>
           <h3 text="3xl $bew-text-1" font="bold">
-            Popular Anime
+            {{ $t('anime.popular_anime') }}
           </h3>
           <a
             href="https://www.bilibili.com/v/popular/rank/bangumi"
@@ -250,9 +249,13 @@ function getPopularAnimeList() {
                   mr-2
                   rounded-4
                   lh-loose
-                >{{ item.rating }}
+                >{{ item.rating.replace('分', '') }}
                 </span>
-                {{ numFormatter(Number(item.stat.series_follow)) }} follow
+                {{
+                  $t('anime.follow', {
+                    num: numFormatter(item.stat.series_follow),
+                  })
+                }}
               </p>
             </article>
           </div>
@@ -263,7 +266,7 @@ function getPopularAnimeList() {
       <section mb-8>
         <div flex justify-between items-end mb-6>
           <h3 text="3xl $bew-text-1" font="bold">
-            Anime Timetable
+            {{ $t('anime.anime_timetable.title') }}
           </h3>
         </div>
 

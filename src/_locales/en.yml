@@ -127,3 +127,15 @@ anime:
   your_watch_list: Your Watchlist 
   recommended_for_you: Recommended for you
   havent_seen: Haven't seen 
+  popular_anime: Popular Anime
+  follow: '{num} follow'
+  anime_timetable:
+    title: Anime Timetable
+    days_of_week:
+      mon: MON
+      tue: TUE
+      wed: WED
+      thu: THU
+      fri: FRI
+      sat: SAT
+      sun: SUN

@@ -16,9 +16,9 @@ settings:
   select_language: 介面語文
   select_language_opt:
     english: 英文
-    Mandarin_CN: 簡體中文
-    Mandarin_TW: 正體中文
-    jyut: 粵文
+    Mandarin_CN: 官话
+    Mandarin_TW: 官話
+    jyut: 廣東話
   authorize_app: 授權 BewlyBewly 使用 access key
   authorize_app_desc: |
     授咗權嘅話首頁會畀啲可能啱我心水嘅片我 (授權 key 一個月左右有效，之後若然你撞正啲咩牛鬼蛇神唔開胃嘅嘢試下重新授權)
@@ -44,13 +44,13 @@ topbar:
   creative_center: 創作中心
   upload: Po 嘢
   logo_dropdown:
-    anime: 番劇
+    anime: 動畫
     movies: 電影
-    chinese_anime: 國創
+    chinese_anime: 中國動畫
     tv_shows: 電視劇
     variety_shows: 綜藝
     documentary_films: 紀錄片
-    animations: 動畫
+    animations: 原創動畫
     gaming: 遊戲
     kichiku: 鬼畜
     music: 音樂
@@ -119,3 +119,15 @@ anime:
   your_watch_list: 追緊
   recommended_for_you: 估你心水
   havent_seen: 未曾睇過
+  popular_anime: 時下至 Hit
+  follow: '{num}人追緊'
+  anime_timetable:
+    title: 動畫日程表
+    days_of_week:
+      mon: 週一
+      tue: 週二
+      wed: 週三
+      thu: 週四
+      fri: 週五
+      sat: 週六
+      sun: 週日
