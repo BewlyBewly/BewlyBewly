@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import browser from 'webextension-polyfill'
 import type { AnimeTimeTableItem } from '../types'
 import { removeHttpFromUrl } from '~/utils'
 
@@ -58,6 +59,7 @@ function getAnimeTimeTable() {
               :h="item.is_today ? '48px' : '36px'"
               mr-4
               :style="{
+                backgroundImage: `url(${browser.runtime.getURL('/assets/anime-timetable-icons.png')})`,
                 backgroundPosition: item.is_today
                   ? `-56px ${-36 + (item.day_of_week - 1) * -72}px`
                   : `-146px ${-36 + (item.day_of_week - 1) * -72}px`,
@@ -69,7 +71,6 @@ function getAnimeTimeTable() {
               style="
                 transform: translateX(-100%);
                 background-size: 247px 663px;
-                background-image: url(//s1.hdslb.com/bfs/static/bangumi-timeline/asserts/icons.png);
               "
             />
             <h3 :text="item.is_today ? '$bew-text-1' : '$bew-text-3'">
