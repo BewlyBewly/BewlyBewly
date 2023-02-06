@@ -1,10 +1,9 @@
 import browser from 'webextension-polyfill'
-import { API_URL } from '.'
 
 export const setupMomentsAPIs = () => {
   browser.runtime.onMessage.addListener((message) => {
     if (message.contentScriptQuery === 'getNewMomentsCount') {
-      const url = `${API_URL}/x/web-interface/dynamic/entrance`
+      const url = 'https://api.bilibili.com/x/web-interface/dynamic/entrance'
       return fetch(url)
         .then(response => response.json())
         .then(data => (data))

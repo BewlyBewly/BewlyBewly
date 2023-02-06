@@ -1,5 +1,4 @@
 import browser from 'webextension-polyfill'
-import { API_URL, APP_URL } from '.'
 
 export const setupVideosAPIs = () => {
   browser.runtime.onMessage.addListener((message) => {
@@ -13,7 +12,7 @@ export const setupVideosAPIs = () => {
     //     .catch(error => console.error(error))
     // }
     if (message.contentScriptQuery === 'getRecommendVideos') {
-      const url = `${API_URL}/x/web-interface/index/top/feed/rcmd?fresh_idx=${message.refreshIdx}&feed_version=V1&fresh_type=4&ps=30&plat=1`
+      const url = `https://api.bilibili.com/x/web-interface/index/top/feed/rcmd?fresh_idx=${message.refreshIdx}&feed_version=V1&fresh_type=4&ps=30&plat=1`
       return fetch(url)
         .then(response => response.json())
         .then(data => data)
@@ -23,7 +22,7 @@ export const setupVideosAPIs = () => {
     /** Submit a video that is not of interest */
     if (message.contentScriptQuery === 'submitDislike') {
       // https://github.com/indefined/UserScripts/blob/master/bilibiliHome/bilibiliHome.API.md#%E6%8F%90%E4%BA%A4%E4%B8%8D%E5%96%9C%E6%AC%A2
-      let url = `${APP_URL}/x/feed/dislike?access_key=${message.accessKey}
+      let url = `https://app.bilibili.com/x/feed/dislike?access_key=${message.accessKey}
         &goto=${message.goto}
         &id=${message.id}
         &mid=${message.mid}
@@ -44,7 +43,7 @@ export const setupVideosAPIs = () => {
     /** Unsubmit a video that is not of interest */
     if (message.contentScriptQuery === 'undoDislike') {
       // https://github.com/indefined/UserScripts/blob/master/bilibiliHome/bilibiliHome.API.md#%E6%92%A4%E9%94%80%E4%B8%8D%E5%96%9C%E6%AC%A2
-      let url = `${APP_URL}/x/feed/dislike/cancel?access_key=${message.accessKey}
+      let url = `https://app.bilibili.com/x/feed/dislike/cancel?access_key=${message.accessKey}
         &goto=${message.goto}
         &id=${message.id}
         &mid=${message.mid}
