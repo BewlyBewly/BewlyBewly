@@ -6,6 +6,7 @@ import browser from 'webextension-polyfill'
 import Home from './Home/Home.vue'
 import Search from './Search/Search.vue'
 import Anime from './Anime/Anime.vue'
+import History from './History/History.vue'
 import { activatedPage, isShowTopbar } from '~/logic/storage'
 import { language } from '~/logic'
 import '~/styles/index.ts'
@@ -15,7 +16,7 @@ const { locale } = useI18n()
 const [showSettings, toggle] = useToggle(false)
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
-const pages = { Home, Search, Anime }
+const pages = { Home, Search, Anime, History }
 
 watch(() => activatedPage.value, (newValue, oldValue) => {
   window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -89,6 +90,14 @@ function changeActivatePage(pageName: AppPage) {
           @click="changeActivatePage(AppPage.Anime)"
         >
           <tabler:device-tv />
+        </button>
+
+        <button
+          class="tab-item"
+          :class="{ active: activatedPage === AppPage.History }"
+          @click="changeActivatePage(AppPage.History)"
+        >
+          <tabler:clock />
         </button>
 
         <!-- dividing line -->
