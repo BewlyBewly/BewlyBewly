@@ -10,9 +10,10 @@ export async function getManifest() {
   // can also be conditional based on your need
   const manifest: Manifest.WebExtensionManifest = {
     manifest_version: 3,
-    name: pkg.displayName || pkg.name,
+    name: `${pkg.displayName || pkg.name}${isDev ? ' Dev' : ''}`,
     version: pkg.version,
     description: pkg.description,
+    homepage_url: pkg.homepage,
     // action: {
     //   default_icon: './assets/icon-512.png',
     //   default_popup: './dist/popup/index.html',
@@ -35,7 +36,7 @@ export async function getManifest() {
       'activeTab',
       'scripting',
     ],
-    host_permissions: ['*://*/*'],
+    host_permissions: ['https://*.bilibili.com/*'],
     content_scripts: [
       {
         matches: ['http://www.bilibili.com/*', 'https://www.bilibili.com/*'],

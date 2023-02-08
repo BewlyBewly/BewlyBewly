@@ -5,6 +5,7 @@
   "private": true,
   "packageManager": "pnpm@7.8.0",
   "description": "[description]",
+  "homepage": "https://github.com/hakadao/BewlyBewly",
   "scripts": {
     "dev": "npm run clear && cross-env NODE_ENV=development run-p dev:*",
     "dev:prepare": "esno scripts/prepare.ts",
