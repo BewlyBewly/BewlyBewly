@@ -205,7 +205,6 @@ function getPopularAnimeList() {
               <a
                 rounded="$bew-radius"
                 aspect="12/16"
-                overflow-hidden
                 mb-4
                 bg="$bew-fill-3"
                 :href="item.url"
@@ -222,6 +221,7 @@ function getPopularAnimeList() {
                   flex
                   items-end
                   bg="gradient-to-b gradient-from-transparent gradient-to-[rgba(0,0,0,.6)]"
+                  rounded-b="$bew-radius"
                 >
                   {{ item.rank }}
                 </div>

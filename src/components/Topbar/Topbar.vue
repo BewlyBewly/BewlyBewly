@@ -227,7 +227,7 @@ function getNewMomentsCount() {
     <div class="right-side">
       <div v-if="!isLogin" class="right-side-item">
         <a href="https://passport.bilibili.com/login" class="login">
-          <ic:outline-account-circle class="text-base mr-2" />{{
+          <ic:outline-account-circle class="text-xl mr-2" />{{
             $t('topbar.sign_in')
           }}
         </a>
@@ -529,7 +529,7 @@ function getNewMomentsCount() {
   }
 
   .right-side-item {
-    --at-apply: relative text-$bew-text-1 mx-2 last:mr-0;
+    --at-apply: relative text-$bew-text-1 mx-2;
 
     &:not(.avatar) {
       a {
@@ -538,7 +538,7 @@ function getNewMomentsCount() {
       }
     }
 
-    &:not(.avatar):not(.upload) a {
+    &:not(.avatar):not(.upload) a:not(.login) {
       --un-drop-shadow: drop-shadow(0 0 6px white);
       --at-apply:dark:filter dark-hover:bg-white dark-hover:text-black
         hover:bg-$bew-fill-2;
@@ -551,18 +551,14 @@ function getNewMomentsCount() {
     }
   }
 
-  // .right-side-item:not(#avatar) {
-  //   a {
-  //     --un-drop-shadow-color: var(--bew-theme-color-60);
-  //     --at-apply: text-xl flex items-center p-2 drop-shadow-lg;
-  //   }
-  // }
-
-  .login {
+  .right-side-item .login {
+    --un-drop-shadow: drop-shadow(0 0 6px var(--bew-theme-color));
     --at-apply: rounded-full
-      important:text-$bew-theme-color important:px-4 mx-1 border-1
+      important:text-$bew-theme-color important:px-4
+      hover:important-bg-$bew-theme-color hover:important-text-white
       flex items-center justify-center important:text-base w-120px
-      border-solid border-$bew-theme-color;
+      border-solid border-$bew-theme-color border-2
+      important:dark:filter;
   }
 
   .avatar {

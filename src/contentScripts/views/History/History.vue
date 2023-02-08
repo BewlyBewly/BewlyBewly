@@ -37,7 +37,10 @@ function getHistoryList() {
     .sendMessage({
       contentScriptQuery: 'getHistoryList',
       type: 'all',
-      viewAt: historyList.length > 0 ? historyList[historyList.length - 1].view_at : 0,
+      viewAt:
+        historyList.length > 0
+          ? historyList[historyList.length - 1].view_at
+          : 0,
     })
     .then((res) => {
       if (res.code === 0) {
@@ -86,54 +89,55 @@ function getHistoryUrl(item: HistoryItem) {
         :key="historyItem.kid"
         :href="getHistoryUrl(historyItem)"
         target="_blank"
-        hover:bg="$bew-fill-2"
         rounded="$bew-radius"
+        block
         p="2"
-        m="first:t-50px last:b-4"
+        m="last:b-4"
         class="group"
-        transition="duration"
+        hover:bg="$bew-fill-2"
         duration-300
+        overflow-hidden
       >
         <section flex="~ gap-4" item-start>
-          <!-- Video cover, live cover, ariticle cover -->
+
+          <!-- Video -->
           <div
-            bg="$bew-fill-1"
+            pos="relative" bg="$bew-fill-5"
             w="300px"
             flex="shrink-0"
-            border="rounded-$bew-radius-half"
-            overflow="hidden"
+            rounded="$bew-radius"
+            overflow-hidden
           >
-            <!-- Video -->
-
-            <div pos="relative">
-              <img
-                w="300px"
-                class="aspect-video"
-                :src="`${removeHttpFromUrl(historyItem.cover)}@672w_378h_1c`"
-                :alt="historyItem.title"
-                bg="contain"
-              >
-              <div
-                pos="absolute bottom-0 right-0"
-                bg="black opacity-60"
-                m="1"
-                p="x-2 y-1"
-                text="white xs"
-                border="rounded-full"
-              >
-                <!--  When progress = -1 means that the user watched the full video -->
-                {{
-                  `${historyItem.progress === -1 ? calcCurrentTime(historyItem.duration) : calcCurrentTime(historyItem.progress)} /
+            <img
+              w="300px"
+              class="aspect-video"
+              :src="`${removeHttpFromUrl(historyItem.cover)}@672w_378h_1c`"
+              :alt="historyItem.title"
+              bg="contain"
+            >
+            <div
+              pos="absolute bottom-0 right-0"
+              bg="black opacity-60"
+              m="2"
+              p="x-2 y-1"
+              text="white xs"
+              rounded-8
+            >
+              <!--  When progress = -1 means that the user watched the full video -->
+              {{
+                `${
+                  historyItem.progress === -1
+                    ? calcCurrentTime(historyItem.duration)
+                    : calcCurrentTime(historyItem.progress)
+                } /
                     ${calcCurrentTime(historyItem.duration)}`
-                }}
-              </div>
+              }}
             </div>
-            <Progress
-              :percentage="
-                (historyItem.progress / historyItem.duration) * 100
-              "
-            />
-
+            <div w-full pos="absolute bottom-0" bg="white opacity-60">
+              <Progress
+                :percentage="(historyItem.progress / historyItem.duration) * 100"
+              />
+            </div>
           </div>
 
           <!-- Description -->
@@ -141,7 +145,7 @@ function getHistoryUrl(item: HistoryItem) {
             <h3
               class="keep-two-lines"
               overflow="hidden"
-              text="overflow-ellipsis"
+              text="lg overflow-ellipsis"
             >
               {{ historyItem.title }}
             </h3>
@@ -157,10 +161,8 @@ function getHistoryUrl(item: HistoryItem) {
             </div>
             <p text="$bew-text-2 sm">
               {{
-                useDateFormat(
-                  historyItem.view_at * 1000,
-                  'YYYY-MM-DD HH:mm:ss',
-                ).value
+                useDateFormat(historyItem.view_at * 1000, 'YYYY-MM-DD HH:mm:ss')
+                  .value
               }}
             </p>
           </div>
@@ -171,3 +173,14 @@ function getHistoryUrl(item: HistoryItem) {
     <loading v-if="isLoading && historyList.length !== 0" m="-t-4" />
   </div>
 </template>
+
+<style lang="scss" scoped>
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.3s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  --at-apply: opacity-0 transform translate-y-2 transform-gpu;
+}
+</style>

@@ -1,4 +1,9 @@
 <script lang="ts">
+// TODO: refactor to composition api
+
+// import { useI18n } from 'vue-i18n'
+// const { locale } = useI18n()
+
 interface OptionType {
   value: string
   label: string
@@ -16,13 +21,18 @@ export default defineComponent({
       showOptions: false as boolean,
     }
   },
+  // watch: {
+  //   locale(newValue) {
+  //     console.log(newValue)
+  //     this.$forceUpdate()
+  //   },
+  // },
   created() {
     if (!this.options)
       return
     this.label = `${this.options.find((item: OptionType) => item.value === this.modelValue)?.label}`
   },
   methods: {
-
     onClickOption(val: { value: string; label: string }) {
       window.removeEventListener('click', () => {})
       this.label = val.label
@@ -59,7 +69,6 @@ export default defineComponent({
       flex="~"
       justify="between"
       items="center"
-      @change="onChange"
       @click="showOptions = !showOptions"
     >
       <div

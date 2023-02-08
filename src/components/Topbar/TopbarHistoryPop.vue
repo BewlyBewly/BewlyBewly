@@ -257,6 +257,7 @@ function scrollToTop(element: HTMLElement, duration: number) {
           class="group"
           transition="duration"
           duration-300
+          block
         >
           <section flex="~ gap-4" item-start>
             <!-- Video cover, live cover, ariticle cover -->
