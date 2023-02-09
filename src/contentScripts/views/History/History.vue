@@ -60,6 +60,10 @@ function getHistoryList() {
     })
 }
 
+function deleteHistoryItem() {
+
+}
+
 /**
  * Return the URL of the history item
  * @param item history item
@@ -82,6 +86,9 @@ function getHistoryUrl(item: HistoryItem) {
 
 <template>
   <div>
+    <h3 mb-6 text="3xl $bew-text-1" font-bold>
+      Watch History
+    </h3>
     <!-- historyList -->
     <transition-group name="list">
       <a
@@ -89,21 +96,63 @@ function getHistoryUrl(item: HistoryItem) {
         :key="historyItem.kid"
         :href="getHistoryUrl(historyItem)"
         target="_blank"
-        rounded="$bew-radius"
         block
-        p="2"
-        m="last:b-4"
         class="group"
-        hover:bg="$bew-fill-2"
-        duration-300
-        overflow-hidden
+        flex
       >
-        <section flex="~ gap-4" item-start>
-
-          <!-- Video -->
+        <div
+          mr-4
+          px-4
+          b-l="~ 2px dashed $bew-fill-2"
+          group-hover:b-l="$bew-theme-color-40"
+          flex
+          items-center
+          justify-center
+          shrink-0
+          relative
+          duration-300
+        >
+          <!-- Dot -->
+          <i
+            pos="absolute left--1px"
+            w-2
+            h-2
+            rounded-6
+            bg="$bew-fill-3"
+            group-hover:bg="$bew-theme-color"
+            transform="~ translate-x--1/2"
+            duration-300
+          />
           <div
-            pos="relative" bg="$bew-fill-5"
-            w="300px"
+            text="sm $bew-text-3"
+            group-hover:text="$bew-theme-color"
+            bg="$bew-fill-1"
+            group-hover:bg="$bew-theme-color-20"
+            p="x-3 y-1"
+            rounded-8
+            duration-300
+          >
+            {{
+              useDateFormat(historyItem.view_at * 1000, 'YYYY-MM-DD HH:mm:ss')
+                .value
+            }}
+          </div>
+        </div>
+        <section
+          rounded="$bew-radius"
+          flex="~ gap-4"
+          item-start
+          relative
+          group-hover:bg="$bew-fill-2"
+          duration-300
+          w-full
+          p="2"
+        >
+          <!-- Cover -->
+          <div
+            pos="relative"
+            bg="$bew-fill-5"
+            w="200px"
             flex="shrink-0"
             rounded="$bew-radius"
             overflow-hidden
@@ -113,7 +162,7 @@ function getHistoryUrl(item: HistoryItem) {
               class="aspect-video"
               :src="`${removeHttpFromUrl(historyItem.cover)}@672w_378h_1c`"
               :alt="historyItem.title"
-              bg="contain"
+              object-cover
             >
             <div
               pos="absolute bottom-0 right-0"
@@ -135,36 +184,46 @@ function getHistoryUrl(item: HistoryItem) {
             </div>
             <div w-full pos="absolute bottom-0" bg="white opacity-60">
               <Progress
-                :percentage="(historyItem.progress / historyItem.duration) * 100"
+                :percentage="
+                  (historyItem.progress / historyItem.duration) * 100
+                "
               />
             </div>
           </div>
 
           <!-- Description -->
-          <div>
-            <h3
-              class="keep-two-lines"
-              overflow="hidden"
-              text="lg overflow-ellipsis"
-            >
-              {{ historyItem.title }}
-            </h3>
-            <div text="$bew-text-2 sm" m="t-4" flex="~" align="items-center">
-              {{ historyItem.author_name }}
-              <span
-                v-if="historyItem.live_status === 1"
-                text="$bew-theme-color"
-                m="l-2"
-              ><tabler:live-photo />
-                Live
-              </span>
+          <div flex justify-between w-full>
+            <div>
+              <h3
+                class="keep-two-lines"
+                overflow="hidden"
+                text="lg overflow-ellipsis"
+              >
+                {{ historyItem.title }}
+              </h3>
+              <div text="$bew-text-2 sm" m="t-4" flex="~" items-center>
+                <img
+                  :src="historyItem.author_face"
+                  w-8
+                  aspect-square
+                  alt=""
+                  rounded="$bew-radius-half"
+                  mr-2
+                >
+                {{ historyItem.author_name }}
+                <!-- <span
+                  v-if="historyItem.live_status === 1"
+                  text="$bew-theme-color"
+                  m="l-2"
+                ><tabler:live-photo />
+                  Live
+                </span> -->
+              </div>
             </div>
-            <p text="$bew-text-2 sm">
-              {{
-                useDateFormat(historyItem.view_at * 1000, 'YYYY-MM-DD HH:mm:ss')
-                  .value
-              }}
-            </p>
+
+            <button text="2xl" p-4>
+              <tabler:trash />
+            </button>
           </div>
         </section>
       </a>
