@@ -62,9 +62,10 @@ function changeActivatePage(pageName: AppPage) {
     <aside pos="fixed left-0 top-0" flex="~ col" h-100vh justify-center z-999>
       <div
         p-2
+        ml-2
         bg="$bew-content-1"
         flex="~ col gap-2 shrink-0"
-        rounded="r-$bew-radius"
+        rounded="$bew-radius"
         shadow="$bew-shadow-2"
         style="backdrop-filter: var(--bew-filter-glass)"
       >
