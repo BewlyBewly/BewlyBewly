@@ -48,3 +48,7 @@ export const getCSRF = () => getCookie('bili_jct')
 export const removeHttpFromUrl = (url: string) => {
   return url.replace(/^https?:/, '')
 }
+
+export const openLinkToNewTab = (url: string) => {
+  window.open(url, '_blank')
+}

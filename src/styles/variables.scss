@@ -4,6 +4,7 @@
 
   --bew-filter-glass: blur(20px) saturate(180%);
 
+  // #region shadow
   --bew-shadow-1: 0 4px 6px -1px rgb(0 0 0 / 0.1),
     0 2px 4px -2px rgb(0 0 0 / 0.1);
   --bew-shadow-2: 0 10px 15px -3px rgb(0 0 0 / 0.1),
@@ -11,28 +12,85 @@
   --bew-shadow-3: 0 20px 25px -5px rgb(0 0 0 / 0.1),
     0 8px 10px -6px rgb(0 0 0 / 0.1);
   --bew-shadow-4: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-
-  --bew-theme-color: rgb(0, 161, 214);
-  --bew-theme-color-10: rgba(0, 161, 214, 0.1);
-  --bew-theme-color-20: rgba(0, 161, 214, 0.2);
-  --bew-theme-color-30: rgba(0, 161, 214, 0.3);
-  --bew-theme-color-40: rgba(0, 161, 214, 0.4);
-  --bew-theme-color-50: rgba(0, 161, 214, 0.5);
-  --bew-theme-color-60: rgba(0, 161, 214, 0.6);
-  --bew-theme-color-70: rgba(0, 161, 214, 0.7);
-  --bew-theme-color-80: rgba(0, 161, 214, 0.8);
-  --bew-theme-color-90: rgba(0, 161, 214, 0.9);
-  --bew-theme-color-100: var(--bew-theme-color);
+  // #endregion
 
   --bew-logo-color: var(--bew-theme-color);
 
+  // #region colors
+  --bew-theme-color: rgb(0 161 214);
+  --bew-theme-color-10: rgba(0 161 214 / 0.1);
+  --bew-theme-color-20: rgba(0 161 214 / 0.2);
+  --bew-theme-color-30: rgba(0 161 214 / 0.3);
+  --bew-theme-color-40: rgba(0 161 214 / 0.4);
+  --bew-theme-color-50: rgba(0 161 214 / 0.5);
+  --bew-theme-color-60: rgba(0 161 214 / 0.6);
+  --bew-theme-color-70: rgba(0 161 214 / 0.7);
+  --bew-theme-color-80: rgba(0 161 214 / 0.8);
+  --bew-theme-color-90: rgba(0 161 214 / 0.9);
+
+  --bew-info-color: rgb(56 189 248);
+  --bew-info-color-10: rgba(56 189 248 / 0.1);
+  --bew-info-color-20: rgba(56 189 248 / 0.2);
+  --bew-info-color-30: rgba(56 189 248 / 0.3);
+  --bew-info-color-40: rgba(56 189 248 / 0.4);
+  --bew-info-color-50: rgba(56 189 248 / 0.5);
+  --bew-info-color-60: rgba(56 189 248 / 0.6);
+  --bew-info-color-70: rgba(56 189 248 / 0.7);
+  --bew-info-color-80: rgba(56 189 248 / 0.8);
+  --bew-info-color-90: rgba(56 189 248 / 0.9);
+
+  --bew-success-color: rgb(110 231 183);
+  --bew-success-color-10: rgba(110 231 183 / 0.1);
+  --bew-success-color-20: rgba(110 231 183 / 0.2);
+  --bew-success-color-30: rgba(110 231 183 / 0.3);
+  --bew-success-color-40: rgba(110 231 183 / 0.4);
+  --bew-success-color-50: rgba(110 231 183 / 0.5);
+  --bew-success-color-60: rgba(110 231 183 / 0.6);
+  --bew-success-color-70: rgba(110 231 183 / 0.7);
+  --bew-success-color-80: rgba(110 231 183 / 0.8);
+  --bew-success-color-90: rgba(110 231 183 / 0.9);
+
+  --bew-warning-color: rgb(250 204 21);
+  --bew-warning-color-10: rgba(250 204 21 / 0.1);
+  --bew-warning-color-20: rgba(250 204 21 / 0.2);
+  --bew-warning-color-30: rgba(250 204 21 / 0.3);
+  --bew-warning-color-40: rgba(250 204 21 / 0.4);
+  --bew-warning-color-50: rgba(250 204 21 / 0.5);
+  --bew-warning-color-60: rgba(250 204 21 / 0.6);
+  --bew-warning-color-70: rgba(250 204 21 / 0.7);
+  --bew-warning-color-80: rgba(250 204 21 / 0.8);
+  --bew-warning-color-90: rgba(250 204 21 / 0.9);
+
+  --bew-error-color: rgb(251 114 153);
+  --bew-error-color-10: rgba(251 114 153 / 0.1);
+  --bew-error-color-20: rgba(251 114 153 / 0.2);
+  --bew-error-color-30: rgba(251 114 153 / 0.3);
+  --bew-error-color-40: rgba(251 114 153 / 0.4);
+  --bew-error-color-50: rgba(251 114 153 / 0.5);
+  --bew-error-color-60: rgba(251 114 153 / 0.6);
+  --bew-error-color-70: rgba(251 114 153 / 0.7);
+  --bew-error-color-80: rgba(251 114 153 / 0.8);
+  --bew-error-color-90: rgba(251 114 153 / 0.9);
+  // #endregion
+
+  // #region text colors
   --bew-text-1: hsl(217, 33%, 17%);
   --bew-text-2: hsl(215, 19%, 35%);
   --bew-text-3: hsl(215, 19%, 55%);
+  --bew-text-4: hsl(215, 19%, 72%);
+  // #endregion
 
-  --bew-bg: rgb(243 244 246);
-  --bew-content-1: hsl(0 0% 100% / 60%);
+  --bew-bg: hsl(220, 14%, 94%);
+
+  --bew-content-opacity: 0.6;
+
+  // #region content colors, used to buttons, cards, popover and so on
+  --bew-content-1: hsl(0 0% 100% / var(--bew-content-opacity));
+  --bew-content-1-hover: hsl(0 0% 85% / var(--bew-content-opacity));
+
   --bew-content-solid-1: hsl(0 0% 100%);
+  --bew-content-solid-1-hover: hsl(0 0% 85%);
+  // #endregion
 
   --bew-fill-1: rgb(120 120 128 / 12%);
   --bew-fill-2: rgb(120 120 128 / 22%);
@@ -49,18 +107,15 @@
   --bew-text-3: hsl(215, 19%, 50%);
 
   --bew-bg: hsl(230 12% 6%);
-  --bew-content-1: hsl(230 12% 13% / 60%);
+
+  --bew-content-1: hsl(230 12% 13% / var(--bew-content-opacity));
+  --bew-content-1-hover: hsl(230 12% 25% / var(--bew-content-opacity));
+
   --bew-content-solid-1: hsl(230 12% 13%);
+  --bew-content-solid-1-hover: hsl(230 12% 25%);
 
   --bew-fill-1: rgb(120 120 128 / 16%);
   --bew-fill-2: rgb(120 120 128 / 26%);
   --bew-fill-3: rgb(120 120 128 / 36%);
   --bew-fill-4: rgb(120 120 128 / 46%);
-}
-
-@supports not (backdrop-filter: blur(15px)) {
-  :root,
-  :root.dark {
-    --bew-content-1: var(--bew-content-solid-1);
-  }
 }
