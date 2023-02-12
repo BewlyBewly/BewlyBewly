@@ -274,7 +274,9 @@ function scrollToTop(element: HTMLElement, duration: number) {
                   <img
                     w="150px"
                     class="aspect-video"
-                    :src="`${removeHttpFromUrl(historyItem.cover)}@256w_144h_1c`"
+                    :src="`${removeHttpFromUrl(
+                      historyItem.cover,
+                    )}@256w_144h_1c`"
                     :alt="historyItem.title"
                     bg="contain"
                   >
@@ -288,7 +290,11 @@ function scrollToTop(element: HTMLElement, duration: number) {
                   >
                     <!--  When progress = -1 means that the user watched the full video -->
                     {{
-                      `${historyItem.progress === -1 ? calcCurrentTime(historyItem.duration) : calcCurrentTime(historyItem.progress)} /
+                      `${
+                        historyItem.progress === -1
+                          ? calcCurrentTime(historyItem.duration)
+                          : calcCurrentTime(historyItem.progress)
+                      } /
                     ${calcCurrentTime(historyItem.duration)}`
                     }}
                   </div>
@@ -306,14 +312,16 @@ function scrollToTop(element: HTMLElement, duration: number) {
                   <img
                     w="150px"
                     class="aspect-video"
-                    :src="`${removeHttpFromUrl(historyItem.cover)}@256w_144h_1c`"
+                    :src="`${removeHttpFromUrl(
+                      historyItem.cover,
+                    )}@256w_144h_1c`"
                     :alt="historyItem.title"
                     bg="contain"
                   >
                   <div
                     v-if="historyItem.live_status === 1"
                     pos="absolute top-0 left-0"
-                    bg="rose-600"
+                    bg="$bew-error-color"
                     text="xs white"
                     p="x-2 y-1"
                     m="1"
@@ -325,7 +333,7 @@ function scrollToTop(element: HTMLElement, duration: number) {
                   <div
                     v-else
                     pos="absolute top-0 left-0"
-                    bg="gray-500 opacity-55"
+                    bg="black opacity-60"
                     text="xs white"
                     p="x-2 y-1"
                     m="1"
@@ -346,6 +354,7 @@ function scrollToTop(element: HTMLElement, duration: number) {
                       ? historyItem.covers[0]
                       : ''
                   }@256w_144h_1c`"
+                  object-cover
                   :alt="historyItem.title"
                   bg="contain"
                 >
@@ -366,6 +375,9 @@ function scrollToTop(element: HTMLElement, duration: number) {
                 <span
                   v-if="historyItem.live_status === 1"
                   text="$bew-theme-color"
+                  flex
+                  items-center
+                  gap-1
                   m="l-2"
                 ><tabler:live-photo />
                   Live
@@ -404,7 +416,8 @@ function scrollToTop(element: HTMLElement, duration: number) {
   --at-apply: relative text-$bew-text-2;
 
   &::after {
-    --at-apply: absolute bottom-0 left-0 w-full h-12px bg-$bew-theme-color opacity-0 transform scale-x-0 -z-1 transition-all duration-300;
+    --at-apply: absolute bottom-0 left-0 w-full h-12px bg-$bew-theme-color
+      opacity-0 transform scale-x-0 -z-1 transition-all duration-300;
     content: '';
   }
 }
