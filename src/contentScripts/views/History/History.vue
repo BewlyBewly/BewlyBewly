@@ -15,24 +15,26 @@ const currentPageNum = ref<number>(1)
 const keyword = ref<string>()
 const historyStatus = ref<boolean>()
 
-watch(() => keyword.value, (newValue, oldValue) => {
-  window.onscroll = () => {
-    if (
-      window.innerHeight + window.scrollY
-      >= document.body.scrollHeight - 20
-    ) {
-      if (isLoading.value)
-        return
+watch(
+  () => keyword.value,
+  (newValue, oldValue) => {
+    window.onscroll = () => {
+      if (
+        window.innerHeight + window.scrollY
+        >= document.body.scrollHeight - 20
+      ) {
+        if (isLoading.value)
+          return
 
-      if (!noMoreContent.value) {
-        if (keyword.value)
-          searchHistoryList()
-        else
-          getHistoryList()
+        if (!noMoreContent.value) {
+          if (keyword.value)
+            searchHistoryList()
+          else getHistoryList()
+        }
       }
     }
-  }
-})
+  },
+)
 
 onMounted(() => {
   getHistoryList()
@@ -49,8 +51,7 @@ onMounted(() => {
       if (!noMoreContent.value) {
         if (keyword.value)
           searchHistoryList()
-        else
-          getHistoryList()
+        else getHistoryList()
       }
     }
   }
@@ -124,8 +125,7 @@ function handleSearch() {
   currentPageNum.value = 1
   if (keyword.value)
     searchHistoryList()
-  else
-    getHistoryList()
+  else getHistoryList()
 }
 
 function deleteHistoryItem(index: number, historyItem: HistoryItem) {
@@ -136,8 +136,6 @@ function deleteHistoryItem(index: number, historyItem: HistoryItem) {
       csrf: getCSRF(),
     })
     .then((res) => {
-      console.log(res)
-
       if (res.code === 0)
         historyList.splice(index, 1)
     })
@@ -149,6 +147,16 @@ function deleteHistoryItem(index: number, historyItem: HistoryItem) {
  * @return {string} url
  */
 function getHistoryUrl(item: HistoryItem) {
+  // anime
+  if (item.history.business === 'pgc')
+    return removeHttpFromUrl(item.uri)
+  // video
+  else if (item.history.business === 'archive')
+    return removeHttpFromUrl(item.history.bvid)
+  else if (item.history.business === 'live')
+    return `//live.bilibili.com/${item.history.oid}`
+  else if (item.history.business === 'article')
+    return `//www.bilibili.com/read/cv${item.history.oid}`
   // Video
   // if (activatedTab.value === 0)
   //   return item.history.bvid
@@ -186,16 +194,41 @@ function setHistoryPauseStatus(isPause: boolean) {
     })
 }
 
+function clearAllHistory() {
+  browser.runtime
+    .sendMessage({
+      contentScriptQuery: 'clearAllHistory',
+      csrf: getCSRF(),
+    })
+    .then((res) => {
+      if (res.code === 0)
+        historyList.length = 0
+    })
+}
+
+function handleClearAllWatchHistory() {
+  // eslint-disable-next-line no-alert
+  const result = confirm(
+    'Clear all watch history?\nThis action cannot be undone. Are you sure you want to clear all watch history?',
+  )
+  if (result)
+    clearAllHistory()
+}
+
 function handlePauseWatchHistory() {
   // eslint-disable-next-line no-alert
-  const result = confirm('Pause watch history?\nAre you sure you want to pause watch history?')
+  const result = confirm(
+    'Pause watch history?\nAre you sure you want to pause watch history?',
+  )
   if (result)
     setHistoryPauseStatus(true)
 }
 
 function handleTurnOnWatchHistory() {
   // eslint-disable-next-line no-alert
-  const result = confirm('t=Turn on watch history?\nAre you sure you want to turn on watch history?')
+  const result = confirm(
+    'Turn on watch history?\nAre you sure you want to turn on watch history?',
+  )
   if (result)
     setHistoryPauseStatus(false)
 }
@@ -329,13 +362,16 @@ function handleTurnOnWatchHistory() {
                     mr-2
                   >
                   {{ historyItem.author_name }}
-                  <!-- <span
+                  <span
                     v-if="historyItem.live_status === 1"
                     text="$bew-theme-color"
+                    flex
+                    items-center
+                    gap-1
                     m="l-2"
                   ><tabler:live-photo />
                     Live
-                  </span> -->
+                  </span>
                 </div>
               </div>
 
@@ -354,7 +390,10 @@ function handleTurnOnWatchHistory() {
         </a>
       </transition-group>
       <!-- loading -->
-      <loading v-if="isLoading && historyList.length !== 0 && !noMoreContent" m="-t-4" />
+      <loading
+        v-if="isLoading && historyList.length !== 0 && !noMoreContent"
+        m="-t-4"
+      />
     </main>
 
     <aside relative w="20%">
@@ -371,13 +410,17 @@ function handleTurnOnWatchHistory() {
           w-full
           @keyup.enter="handleSearch"
         >
-        <Button shadow="$bew-shadow-1">
+        <Button shadow="$bew-shadow-1" @click="handleClearAllWatchHistory">
           <template #left>
             <tabler:trash />
           </template>
           Clear all watch history
         </Button>
-        <Button v-if="!historyStatus" shadow="$bew-shadow-1" @click="handlePauseWatchHistory">
+        <Button
+          v-if="!historyStatus"
+          shadow="$bew-shadow-1"
+          @click="handlePauseWatchHistory"
+        >
           <template #left>
             <ph:pause-circle-bold />
           </template>

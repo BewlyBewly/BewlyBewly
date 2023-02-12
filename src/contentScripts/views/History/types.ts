@@ -13,9 +13,9 @@ export interface HistoryItem {
   covers?: Array<string>
   history: {
     business: HistoryType
-    epid?: number
-    bvid?: string
-    part?: string
+    epid: number
+    bvid: string
+    part: string
     oid: number
   }
   author_name: string
@@ -26,4 +26,5 @@ export interface HistoryItem {
   duration: number
   kid: number
   live_status: 0 | 1 // 0：未开播 1：已开播
+  uri: string
 }
