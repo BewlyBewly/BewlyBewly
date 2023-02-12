@@ -10,7 +10,7 @@ export enum HistoryType {
 export interface HistoryItem {
   title: string
   cover: string
-  covers?: Array<string>
+  covers: Array<string>
   history: {
     business: HistoryType
     epid: number

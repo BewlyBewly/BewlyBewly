@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useDateFormat } from '@vueuse/core'
+import { HistoryType } from './types'
 import type { HistoryItem } from './types'
 import {
   calcCurrentTime,
@@ -157,17 +158,15 @@ function getHistoryUrl(item: HistoryItem) {
     return `//live.bilibili.com/${item.history.oid}`
   else if (item.history.business === 'article')
     return `//www.bilibili.com/read/cv${item.history.oid}`
-  // Video
-  // if (activatedTab.value === 0)
-  //   return item.history.bvid
-  // // Live
-  // else if (activatedTab.value === 1)
-  //   return `//live.bilibili.com/${item.history.oid}`
-  // // Article
-  // else if (activatedTab.value === 2)
-  //   return `/read/cv${item.history.oid}`
 
-  return item.history.bvid
+  return ''
+}
+
+function getHistoryItemCover(item: HistoryItem) {
+  if (item.history.business === 'article')
+    return removeHttpFromUrl(item.covers[0])
+
+  return removeHttpFromUrl(item.cover)
 }
 
 function getHistoryPauseStatus() {
@@ -291,13 +290,14 @@ function handleTurnOnWatchHistory() {
           </div>
           <section
             rounded="$bew-radius"
-            flex="~ gap-4"
+            flex="~ gap-6"
             item-start
             relative
             group-hover:bg="$bew-fill-2"
             duration-300
             w-full
-            p="2"
+            p-2
+            m-1
           >
             <!-- Cover -->
             <div
@@ -311,11 +311,15 @@ function handleTurnOnWatchHistory() {
               <img
                 w="300px"
                 class="aspect-video"
-                :src="`${removeHttpFromUrl(historyItem.cover)}@672w_378h_1c`"
+                :src="`${getHistoryItemCover(historyItem)}@672w_378h_1c`"
                 :alt="historyItem.title"
                 object-cover
               >
               <div
+                v-if="
+                  historyItem.history.business === HistoryType.Archive
+                    || historyItem.history.business === HistoryType.PGC
+                "
                 pos="absolute bottom-0 right-0"
                 bg="black opacity-60"
                 m="2"
@@ -335,6 +339,10 @@ function handleTurnOnWatchHistory() {
               </div>
               <div w-full pos="absolute bottom-0" bg="white opacity-60">
                 <Progress
+                  v-if="
+                    historyItem.history.business === HistoryType.Archive
+                      || historyItem.history.business === HistoryType.PGC
+                  "
                   :percentage="
                     (historyItem.progress / historyItem.duration) * 100
                   "
@@ -352,14 +360,14 @@ function handleTurnOnWatchHistory() {
                 >
                   {{ historyItem.title }}
                 </h3>
-                <div text="$bew-text-2 sm" m="t-4" flex="~" items-center>
+                <div v-if="historyItem.history.business !== HistoryType.PGC" text="$bew-text-2 sm" m="t-4" flex="~" items-center>
                   <img
                     :src="historyItem.author_face"
                     w-8
                     aspect-square
                     alt=""
                     rounded="$bew-radius-half"
-                    mr-2
+                    mr-4
                   >
                   {{ historyItem.author_name }}
                   <span
