@@ -315,6 +315,35 @@ function handleTurnOnWatchHistory() {
                 :alt="historyItem.title"
                 object-cover
               >
+
+              <span
+                v-if="historyItem.history.business !== HistoryType.Archive"
+                pos="absolute right-0 top-0"
+                bg="$bew-theme-color"
+                text="xs white"
+                p="x-2 y-1"
+                m-1
+                rounded="$bew-radius-half"
+              >
+                <template
+                  v-if="historyItem.history.business === HistoryType.Live"
+                >
+                  Livestreaming
+                </template>
+                <template
+                  v-else-if="
+                    historyItem.history.business === HistoryType.Article
+                  "
+                >
+                  Article
+                </template>
+                <template
+                  v-else-if="historyItem.history.business === HistoryType.PGC"
+                >
+                  Anime
+                </template>
+              </span>
+
               <div
                 v-if="
                   historyItem.history.business === HistoryType.Archive
@@ -358,18 +387,50 @@ function handleTurnOnWatchHistory() {
                   overflow="hidden"
                   text="lg overflow-ellipsis"
                 >
-                  {{ historyItem.title }}
+                  {{
+                    historyItem.show_title
+                      ? historyItem.show_title
+                      : historyItem.title
+                  }}
                 </h3>
-                <div v-if="historyItem.history.business !== HistoryType.PGC" text="$bew-text-2 sm" m="t-4" flex="~" items-center>
+                <div
+                  text="$bew-text-2 sm"
+                  m="t-4"
+                  flex="~"
+                  items-center
+                  cursor-pointer
+                  w-fit
+                  rounded="$bew-radius-half"
+                  hover:color="$bew-theme-color"
+                  hover:bg="$bew-theme-color-10"
+                  duration-300
+                  pr-2
+                  @click.stop="
+                    openLinkToNewTab(
+                      historyItem.author_mid
+                        ? `https://space.bilibili.com/${historyItem.author_mid}`
+                        : historyItem.uri,
+                    )
+                  "
+                >
                   <img
-                    :src="historyItem.author_face"
+                    :src="
+                      historyItem.author_face
+                        ? historyItem.author_face
+                        : historyItem.cover
+                    "
                     w-8
                     aspect-square
+                    object-cover
                     alt=""
                     rounded="$bew-radius-half"
-                    mr-4
+                    mr-2
                   >
-                  {{ historyItem.author_name }}
+                  {{
+                    historyItem.author_name
+                      ? historyItem.author_name
+                      : historyItem.title
+                  }}
                   <span
                     v-if="historyItem.live_status === 1"
                     text="$bew-theme-color"
@@ -385,7 +446,7 @@ function handleTurnOnWatchHistory() {
 
               <button
                 text="2xl $bew-text-3"
-                hover:color="$bew-error-color"
+                hover:color="$bew-theme-color"
                 opacity="0 group-hover:100"
                 p-4
                 duration-300

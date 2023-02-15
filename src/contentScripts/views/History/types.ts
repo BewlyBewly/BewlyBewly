@@ -27,4 +27,5 @@ export interface HistoryItem {
   kid: number
   live_status: 0 | 1 // 0：未开播 1：已开播
   uri: string
+  show_title: string
 }
