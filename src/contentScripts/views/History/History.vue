@@ -311,7 +311,7 @@ function handleTurnOnWatchHistory() {
               <img
                 w="300px"
                 class="aspect-video"
-                :src="`${getHistoryItemCover(historyItem)}@672w_378h_1c`"
+                :src="`${getHistoryItemCover(historyItem)}@480w_270h_1c`"
                 :alt="historyItem.title"
                 object-cover
               >
@@ -415,9 +415,9 @@ function handleTurnOnWatchHistory() {
                 >
                   <img
                     :src="
-                      historyItem.author_face
+                      `${historyItem.author_face
                         ? historyItem.author_face
-                        : historyItem.cover
+                        : historyItem.cover}@80w_80h_1c`
                     "
                     w-8
                     aspect-square

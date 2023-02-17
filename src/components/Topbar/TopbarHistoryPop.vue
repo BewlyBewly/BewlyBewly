@@ -189,7 +189,7 @@ function scrollToTop(element: HTMLElement, duration: number) {
     style="box-shadow: var(--bew-shadow-2)"
   >
     <!-- top bar -->
-    <div
+    <header
       flex="~"
       justify="between"
       p="y-4 x-6"
@@ -217,188 +217,190 @@ function scrollToTop(element: HTMLElement, duration: number) {
       <a href="https://t.bilibili.com/" target="_blank" flex="~" items="center">
         <span text="sm">{{ $t('common.view_all') }}</span>
       </a>
-    </div>
+    </header>
 
     <!-- historys wrapper -->
-    <div
-      ref="historysWrap"
-      flex="~ col gap-4"
-      h="430px"
-      overflow="y-scroll"
-      p="x-4"
-    >
-      <!-- loading -->
-      <Loading
-        v-if="isLoading && historys.length === 0"
-        pos="absolute left-0"
-        bg="$bew-content-1"
-        z="1"
-        w="full"
-        h="full"
-        flex="~"
-        items="center"
-        border="rounded-$bew-radius"
-      />
+    <main overflow-hidden rounded="$bew-radius">
+      <div
+        ref="historysWrap"
+        flex="~ col gap-4"
+        h="430px"
+        overflow="y-scroll"
+        p="x-4"
+      >
+        <!-- loading -->
+        <Loading
+          v-if="isLoading && historys.length === 0"
+          pos="absolute left-0"
+          bg="$bew-content-1"
+          z="1"
+          w="full"
+          h="full"
+          flex="~"
+          items="center"
+          border="rounded-$bew-radius"
+        />
 
-      <!-- empty -->
-      <Empty v-if="!isLoading && historys.length === 0" w="full" h="full" />
+        <!-- empty -->
+        <Empty v-if="!isLoading && historys.length === 0" w="full" h="full" />
 
-      <!-- historys -->
-      <transition-group name="list">
-        <a
-          v-for="historyItem in historys"
-          :key="historyItem.kid"
-          :href="getHistoryUrl(historyItem)"
-          target="_blank"
-          hover:bg="$bew-fill-2"
-          rounded="$bew-radius"
-          p="2"
-          m="first:t-50px last:b-4"
-          class="group"
-          transition="duration"
-          duration-300
-          block
-        >
-          <section flex="~ gap-4" item-start>
-            <!-- Video cover, live cover, ariticle cover -->
-            <div
-              bg="$bew-fill-1"
-              w="150px"
-              flex="shrink-0"
-              border="rounded-$bew-radius-half"
-              overflow="hidden"
-            >
-              <!-- Video -->
-              <template v-if="activatedTab === 0">
-                <div pos="relative">
-                  <img
-                    w="150px"
-                    class="aspect-video"
-                    :src="`${removeHttpFromUrl(
-                      historyItem.cover,
-                    )}@256w_144h_1c`"
-                    :alt="historyItem.title"
-                    bg="contain"
-                  >
-                  <div
-                    pos="absolute bottom-0 right-0"
-                    bg="black opacity-60"
-                    m="1"
-                    p="x-2 y-1"
-                    text="white xs"
-                    border="rounded-full"
-                  >
-                    <!--  When progress = -1 means that the user watched the full video -->
-                    {{
-                      `${
-                        historyItem.progress === -1
-                          ? calcCurrentTime(historyItem.duration)
-                          : calcCurrentTime(historyItem.progress)
-                      } /
-                    ${calcCurrentTime(historyItem.duration)}`
-                    }}
-                  </div>
-                </div>
-                <Progress
-                  :percentage="
-                    (historyItem.progress / historyItem.duration) * 100
-                  "
-                />
-              </template>
-
-              <!-- Live -->
-              <template v-else-if="activatedTab === 1">
-                <div pos="relative">
-                  <img
-                    w="150px"
-                    class="aspect-video"
-                    :src="`${removeHttpFromUrl(
-                      historyItem.cover,
-                    )}@256w_144h_1c`"
-                    :alt="historyItem.title"
-                    bg="contain"
-                  >
-                  <div
-                    v-if="historyItem.live_status === 1"
-                    pos="absolute top-0 left-0"
-                    bg="$bew-error-color"
-                    text="xs white"
-                    p="x-2 y-1"
-                    m="1"
-                    rounded="$bew-radius-half"
-                    font="semibold"
-                  >
-                    LIVE
-                  </div>
-                  <div
-                    v-else
-                    pos="absolute top-0 left-0"
-                    bg="black opacity-60"
-                    text="xs white"
-                    p="x-2 y-1"
-                    m="1"
-                    rounded="$bew-radius-half"
-                  >
-                    Offline
-                  </div>
-                </div>
-              </template>
-
-              <!-- Article -->
-              <div v-else-if="activatedTab === 2">
-                <img
-                  w="150px"
-                  class="aspect-video"
-                  :src="`${
-                    Array.isArray(historyItem.covers)
-                      ? historyItem.covers[0]
-                      : ''
-                  }@256w_144h_1c`"
-                  object-cover
-                  :alt="historyItem.title"
-                  bg="contain"
-                >
-              </div>
-            </div>
-
-            <!-- Description -->
-            <div>
-              <h3
-                class="keep-two-lines"
+        <!-- historys -->
+        <transition-group name="list">
+          <a
+            v-for="historyItem in historys"
+            :key="historyItem.kid"
+            :href="getHistoryUrl(historyItem)"
+            target="_blank"
+            hover:bg="$bew-fill-2"
+            rounded="$bew-radius"
+            p="2"
+            m="first:t-50px last:b-4"
+            class="group"
+            transition="duration"
+            duration-300
+            block
+          >
+            <section flex="~ gap-4" item-start>
+              <!-- Video cover, live cover, ariticle cover -->
+              <div
+                bg="$bew-fill-1"
+                w="150px"
+                flex="shrink-0"
+                border="rounded-$bew-radius-half"
                 overflow="hidden"
-                text="overflow-ellipsis"
               >
-                {{ historyItem.title }}
-              </h3>
-              <div text="$bew-text-2 sm" m="t-4" flex="~" align="items-center">
-                {{ historyItem.author_name }}
-                <span
-                  v-if="historyItem.live_status === 1"
-                  text="$bew-theme-color"
-                  flex
-                  items-center
-                  gap-1
-                  m="l-2"
-                ><tabler:live-photo />
-                  Live
-                </span>
-              </div>
-              <p text="$bew-text-2 sm">
-                {{
-                  useDateFormat(
-                    historyItem.view_at * 1000,
-                    'YYYY-MM-DD HH:mm:ss',
-                  ).value
-                }}
-              </p>
-            </div>
-          </section>
-        </a>
-      </transition-group>
+                <!-- Video -->
+                <template v-if="activatedTab === 0">
+                  <div pos="relative">
+                    <img
+                      w="150px"
+                      class="aspect-video"
+                      :src="`${removeHttpFromUrl(
+                        historyItem.cover,
+                      )}@256w_144h_1c`"
+                      :alt="historyItem.title"
+                      bg="contain"
+                    >
+                    <div
+                      pos="absolute bottom-0 right-0"
+                      bg="black opacity-60"
+                      m="1"
+                      p="x-2 y-1"
+                      text="white xs"
+                      border="rounded-full"
+                    >
+                      <!--  When progress = -1 means that the user watched the full video -->
+                      {{
+                        `${
+                          historyItem.progress === -1
+                            ? calcCurrentTime(historyItem.duration)
+                            : calcCurrentTime(historyItem.progress)
+                        } /
+                    ${calcCurrentTime(historyItem.duration)}`
+                      }}
+                    </div>
+                  </div>
+                  <Progress
+                    :percentage="
+                      (historyItem.progress / historyItem.duration) * 100
+                    "
+                  />
+                </template>
 
-      <!-- loading -->
-      <loading v-if="isLoading && historys.length !== 0" m="-t-4" />
-    </div>
+                <!-- Live -->
+                <template v-else-if="activatedTab === 1">
+                  <div pos="relative">
+                    <img
+                      w="150px"
+                      class="aspect-video"
+                      :src="`${removeHttpFromUrl(
+                        historyItem.cover,
+                      )}@256w_144h_1c`"
+                      :alt="historyItem.title"
+                      bg="contain"
+                    >
+                    <div
+                      v-if="historyItem.live_status === 1"
+                      pos="absolute top-0 left-0"
+                      bg="$bew-error-color"
+                      text="xs white"
+                      p="x-2 y-1"
+                      m="1"
+                      rounded="$bew-radius-half"
+                      font="semibold"
+                    >
+                      LIVE
+                    </div>
+                    <div
+                      v-else
+                      pos="absolute top-0 left-0"
+                      bg="black opacity-60"
+                      text="xs white"
+                      p="x-2 y-1"
+                      m="1"
+                      rounded="$bew-radius-half"
+                    >
+                      Offline
+                    </div>
+                  </div>
+                </template>
+
+                <!-- Article -->
+                <div v-else-if="activatedTab === 2">
+                  <img
+                    w="150px"
+                    class="aspect-video"
+                    :src="`${
+                      Array.isArray(historyItem.covers)
+                        ? historyItem.covers[0]
+                        : ''
+                    }@256w_144h_1c`"
+                    object-cover
+                    :alt="historyItem.title"
+                    bg="contain"
+                  >
+                </div>
+              </div>
+
+              <!-- Description -->
+              <div>
+                <h3
+                  class="keep-two-lines"
+                  overflow="hidden"
+                  text="overflow-ellipsis"
+                >
+                  {{ historyItem.title }}
+                </h3>
+                <div text="$bew-text-2 sm" m="t-4" flex="~" align="items-center">
+                  {{ historyItem.author_name }}
+                  <span
+                    v-if="historyItem.live_status === 1"
+                    text="$bew-theme-color"
+                    flex
+                    items-center
+                    gap-1
+                    m="l-2"
+                  ><tabler:live-photo />
+                    Live
+                  </span>
+                </div>
+                <p text="$bew-text-2 sm">
+                  {{
+                    useDateFormat(
+                      historyItem.view_at * 1000,
+                      'YYYY-MM-DD HH:mm:ss',
+                    ).value
+                  }}
+                </p>
+              </div>
+            </section>
+          </a>
+        </transition-group>
+
+        <!-- loading -->
+        <loading v-if="isLoading && historys.length !== 0" m="-t-4" />
+      </div>
+    </main>
   </div>
 </template>
 

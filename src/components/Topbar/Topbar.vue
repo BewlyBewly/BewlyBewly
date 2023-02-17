@@ -261,7 +261,7 @@ function getNewMomentsCount() {
             class="avatar-shadow"
             pos="absolute top-0"
             bg="cover center"
-            filter="blur-sm"
+            blur-sm
             opacity="80"
             rounded-full
             z-0

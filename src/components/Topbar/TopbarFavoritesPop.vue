@@ -158,7 +158,7 @@ function scrollToTop(element: HTMLElement, duration: number) {
     style="box-shadow: var(--bew-shadow-2)"
   >
     <!-- top bar -->
-    <div
+    <header
       flex="~"
       justify="between"
       p="y-4 x-6"
@@ -176,9 +176,9 @@ function scrollToTop(element: HTMLElement, duration: number) {
       <a :href="favoritesPageUrl" target="_blank" flex="~" items="center">
         <span text="sm">{{ $t('common.view_all') }}</span>
       </a>
-    </div>
+    </header>
 
-    <main flex="~">
+    <main flex="~" overflow-hidden rounded="$bew-radius">
       <aside
         w="120px"
         h="430px"

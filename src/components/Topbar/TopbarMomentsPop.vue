@@ -272,12 +272,13 @@ function scrollToTop(element: HTMLElement, duration: number) {
     w="380px"
     rounded="$bew-radius"
     pos="relative"
-    style="box-shadow: var(--bew-shadow-2)"
+    shadow="$bew-shadow-2"
   >
     <!-- top bar -->
-    <div
+    <header
       flex="~"
       justify="between"
+      items-center
       p="y-4 x-6"
       pos="fixed top-0 left-0"
       w="full"
@@ -303,129 +304,131 @@ function scrollToTop(element: HTMLElement, duration: number) {
       <a href="https://t.bilibili.com/" target="_blank" flex="~" items="center">
         <span text="sm">{{ $t('common.view_all') }}</span>
       </a>
-    </div>
+    </header>
 
     <!-- moments wrapper -->
-    <div ref="momentsWrap" h="430px" overflow="y-scroll" p="x-4">
-      <!-- loading -->
-      <loading
-        v-if="isLoading && moments.length === 0"
-        h="full"
-        flex="~"
-        items="center"
-      />
-
-      <!-- empty -->
-      <empty
-        v-if="!isLoading && moments.length === 0"
-        pos="absolute left-0"
-        bg="$bew-content-1"
-        z="1"
-        w="full"
-        h="full"
-        flex="~"
-        items="center"
-        border="rounded-$bew-radius"
-      />
-
-      <!-- moments -->
-      <transition-group name="list">
-        <a
-          v-for="(moment, index) in moments"
-          :key="index"
-          :href="moment.url"
-          target="_blank"
+    <main overflow-hidden rounded="$bew-radius">
+      <div ref="momentsWrap" h="430px" overflow="y-scroll" p="x-4">
+        <!-- loading -->
+        <loading
+          v-if="isLoading && moments.length === 0"
+          h="full"
           flex="~"
-          justify="between"
-          m="b-4"
-          first:m="t-16"
-          p="2"
-          rounded="$bew-radius"
-          hover:bg="$bew-fill-2"
-          transition="all duration-300"
-          cursor="pointer"
-          pos="relative"
-        >
-          <!-- new moment dot -->
-          <div
-            v-if="moment.isNew"
-            rounded="full"
-            w="8px"
-            h="8px"
-            m="t-2 l-2"
-            bg="$bew-theme-color"
-            pos="absolute -top-10px -left-10px"
-            style="box-shadow: 0 0 4px var(--bew-theme-color)"
-          />
+          items="center"
+        />
 
+        <!-- empty -->
+        <empty
+          v-if="!isLoading && moments.length === 0"
+          pos="absolute left-0"
+          bg="$bew-content-1"
+          z="1"
+          w="full"
+          h="full"
+          flex="~"
+          items="center"
+          border="rounded-$bew-radius"
+        />
+
+        <!-- moments -->
+        <transition-group name="list">
           <a
-            :href="
-              moment.type === MomentType.Video
-                ? `https://space.bilibili.com/${moment.uid}`
-                : moment.url
-            "
+            v-for="(moment, index) in moments"
+            :key="index"
+            :href="moment.url"
             target="_blank"
+            flex="~"
+            justify="between"
+            m="b-4"
+            first:m="t-16"
+            p="2"
+            rounded="$bew-radius"
+            hover:bg="$bew-fill-2"
+            transition="all duration-300"
+            cursor="pointer"
+            pos="relative"
           >
-            <img
-              :src="`${moment.face}@60w_60h_1c`"
-              rounded="$bew-radius"
-              w="40px"
-              h="40px"
-              m="r-4"
-            >
-          </a>
+            <!-- new moment dot -->
+            <div
+              v-if="moment.isNew"
+              rounded="full"
+              w="8px"
+              h="8px"
+              m="-2"
+              bg="$bew-theme-color"
+              pos="absolute -top-12px -left-12px"
+              style="box-shadow: 0 0 4px var(--bew-theme-color)"
+            />
 
-          <div flex="~" justify="between" w="full">
-            <div>
-              <span>{{ `${moment.name} ${t('topbar.moments_dropdown.uploaded')}` }}</span>
-              <div overflow="hidden" text="overflow-ellipsis">
-                {{ moment.title }}
-              </div>
-              <div
-                v-if="moment.type !== MomentType.Bangumi"
-                text="$bew-text-2 sm"
-                m="y-2"
+            <a
+              :href="
+                moment.type === MomentType.Video
+                  ? `https://space.bilibili.com/${moment.uid}`
+                  : moment.url
+              "
+              target="_blank"
+            >
+              <img
+                :src="`${moment.face}@60w_60h_1c`"
+                rounded="$bew-radius"
+                w="40px"
+                h="40px"
+                m="r-4"
               >
-                <!-- Videos and articles -->
-                <div v-if="selectedTab === 0 || selectedTab === 2">
-                  {{
-                    moment.ctime
-                      ? calcTimeSince(new Date(moment.ctime * 1000))
-                      : moment.ctime
-                  }}{{
-                    language === LanguageType.English
-                      ? ` ${$t('common.ago')}`
-                      : $t('common.ago')
-                  }}
-                </div>
+            </a>
 
-                <!-- Live -->
+            <div flex="~" justify="between" w="full">
+              <div>
+                <span>{{ `${moment.name} ${t('topbar.moments_dropdown.uploaded')}` }}</span>
+                <div overflow="hidden" text="overflow-ellipsis">
+                  {{ moment.title }}
+                </div>
                 <div
-                  v-else-if="selectedTab === 1"
-                  text="$bew-theme-color"
-                  font="bold"
-                  flex="~"
-                  items="center"
+                  v-if="moment.type !== MomentType.Bangumi"
+                  text="$bew-text-2 sm"
+                  m="y-2"
                 >
-                  <fluent:live-24-filled m="r-2" />
-                  {{ $t('topbar.moments_dropdown.live_status') }}
+                  <!-- Videos and articles -->
+                  <div v-if="selectedTab === 0 || selectedTab === 2">
+                    {{
+                      moment.ctime
+                        ? calcTimeSince(new Date(moment.ctime * 1000))
+                        : moment.ctime
+                    }}{{
+                      language === LanguageType.English
+                        ? ` ${$t('common.ago')}`
+                        : $t('common.ago')
+                    }}
+                  </div>
+
+                  <!-- Live -->
+                  <div
+                    v-else-if="selectedTab === 1"
+                    text="$bew-theme-color"
+                    font="bold"
+                    flex="~"
+                    items="center"
+                  >
+                    <fluent:live-24-filled m="r-2" />
+                    {{ $t('topbar.moments_dropdown.live_status') }}
+                  </div>
                 </div>
               </div>
+              <img
+                :src="`${moment.cover}@128w_72h_1c`"
+                w="82px"
+                h="46px"
+                m="l-4"
+                rounded="$bew-radius-half"
+              >
             </div>
-            <img
-              :src="`${moment.cover}@128w_72h_1c`"
-              w="82px"
-              h="46px"
-              m="l-4"
-              rounded="$bew-radius-half"
-            >
-          </div>
-        </a>
-      </transition-group>
+          </a>
+        </transition-group>
 
-      <!-- loading -->
-      <loading v-if="isLoading && moments.length !== 0" m="-t-4" />
-    </div>
+        <!-- loading -->
+        <loading v-if="isLoading && moments.length !== 0" m="-t-4" />
+      </div>
+    </main>
   </div>
 </template>
 
