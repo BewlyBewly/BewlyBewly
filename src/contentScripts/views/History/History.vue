@@ -234,8 +234,8 @@ function handleTurnOnWatchHistory() {
 </script>
 
 <template>
-  <div flex gap-4>
-    <main w="80%" mb-6>
+  <div flex="~ col md:row lg:row" gap-4>
+    <main w="full md:75% lg:80%" order="2 md:1 lg:1" mb-6>
       <h3 text="3xl $bew-text-1" font-bold mb-6>
         Watch History
       </h3>
@@ -250,17 +250,19 @@ function handleTurnOnWatchHistory() {
           cursor-pointer
           @click="openLinkToNewTab(`${getHistoryUrl(historyItem)}`)"
         >
+          <!-- time -->
           <div
             mr-4
             px-4
             b-l="~ 2px dashed $bew-fill-2"
             group-hover:b-l="$bew-theme-color-40"
-            flex
+
             items-center
             justify-center
             shrink-0
             relative
             duration-300
+            display="none lg:flex"
           >
             <!-- Dot -->
             <i
@@ -288,6 +290,7 @@ function handleTurnOnWatchHistory() {
               }}
             </div>
           </div>
+
           <section
             rounded="$bew-radius"
             flex="~ gap-6"
@@ -381,7 +384,7 @@ function handleTurnOnWatchHistory() {
 
             <!-- Description -->
             <div flex justify-between w-full>
-              <div>
+              <div flex="~ col">
                 <h3
                   class="keep-two-lines"
                   overflow="hidden"
@@ -442,6 +445,12 @@ function handleTurnOnWatchHistory() {
                     Live
                   </span>
                 </div>
+                <p display="block lg:none" text="$bew-text-3 sm" mt-auto mb-2>
+                  {{
+                    useDateFormat(historyItem.view_at * 1000, 'YYYY-MM-DD HH:mm:ss')
+                      .value
+                  }}
+                </p>
               </div>
 
               <button
@@ -465,7 +474,7 @@ function handleTurnOnWatchHistory() {
       />
     </main>
 
-    <aside relative w="20%">
+    <aside relative w="full md:25% lg:20%" order="1 md:2 lg:2">
       <div pos="sticky top-120px" flex="~ col gap-4" justify-start my-10 w-full>
         <input
           v-model.lazy.trim="keyword"
