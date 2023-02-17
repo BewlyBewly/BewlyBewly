@@ -123,8 +123,8 @@ function getPopularAnimeList() {
             <article
               v-for="item in animeWatchList"
               :key="item.episode_id"
-              w="2xl:[calc(100%/6-1.5rem)] xl:[calc(100%/5-1.5rem)] lg:[calc(100%/4-1.5rem)] md:[calc(100%/3-1.5rem)] [calc(100%/2-1.5rem)]"
-              last:w="2xl:1/6 xl:1/5 lg:1/4 md:1/3 1/2"
+              w="2xl:[calc(100%/6-1.5rem)] xl:[calc(100%/5-1.5rem)] lg:[calc(100%/4-1.5rem)] md:[calc(100%/3-1.5rem)] sm:[calc(100%/2-1.5rem)] [calc(100%-1.5rem)]"
+              last:w="2xl:1/6 xl:1/5 lg:1/4 md:1/3 sm:1/2 full"
               shrink-0
               m="r-6"
               last:pr-6
@@ -196,8 +196,8 @@ function getPopularAnimeList() {
             <article
               v-for="item in popularAnimeList"
               :key="item.episode_id"
-              w="2xl:[calc(100%/6-1.5rem)] xl:[calc(100%/5-1.5rem)] lg:[calc(100%/4-1.5rem)] md:[calc(100%/3-1.5rem)] [calc(100%/2-1.5rem)]"
-              last:w="2xl:1/6 xl:1/5 lg:1/4 md:1/3 1/2"
+              w="2xl:[calc(100%/6-1.5rem)] xl:[calc(100%/5-1.5rem)] lg:[calc(100%/4-1.5rem)] md:[calc(100%/3-1.5rem)] sm:[calc(100%/2-1.5rem)] [calc(100%-1.5rem)]"
+              last:w="2xl:1/6 xl:1/5 lg:1/4 md:1/3 sm:1/2 full"
               shrink-0
               m="r-6"
               last:pr-6
@@ -278,7 +278,7 @@ function getPopularAnimeList() {
         <h3 text="3xl $bew-text-1" font="bold" mb-6>
           {{ $t('anime.recommended_for_you') }}
         </h3>
-        <div grid="~ 2xl:cols-6 xl:cols-5 lg:cols-4 md:cols-3 cols-2 gap-6">
+        <div grid="~ 2xl:cols-6 xl:cols-5 lg:cols-4 md:cols-3 sm:cols-2 cols-1 gap-6">
           <article
             v-for="item in recommendAnimeList"
             :key="item.episode_id"

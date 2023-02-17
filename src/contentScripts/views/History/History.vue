@@ -235,7 +235,7 @@ function handleTurnOnWatchHistory() {
 
 <template>
   <div flex="~ col md:row lg:row" gap-4>
-    <main w="full md:75% lg:80%" order="2 md:1 lg:1" mb-6>
+    <main w="full md:60% lg:70% xl:75%" order="2 md:1 lg:1" mb-6>
       <h3 text="3xl $bew-text-1" font-bold mb-6>
         Watch History
       </h3>
@@ -250,19 +250,18 @@ function handleTurnOnWatchHistory() {
           cursor-pointer
           @click="openLinkToNewTab(`${getHistoryUrl(historyItem)}`)"
         >
-          <!-- time -->
+          <!-- time slot -->
           <div
-            mr-4
+            mr-8
             px-4
             b-l="~ 2px dashed $bew-fill-2"
             group-hover:b-l="$bew-theme-color-40"
-
             items-center
             justify-center
             shrink-0
             relative
             duration-300
-            display="none lg:flex"
+            display="none xl:flex"
           >
             <!-- Dot -->
             <i
@@ -293,7 +292,7 @@ function handleTurnOnWatchHistory() {
 
           <section
             rounded="$bew-radius"
-            flex="~ gap-6"
+            flex="~ gap-6 col md:col lg:row"
             item-start
             relative
             group-hover:bg="$bew-fill-2"
@@ -306,14 +305,15 @@ function handleTurnOnWatchHistory() {
             <div
               pos="relative"
               bg="$bew-fill-5"
-              w="200px"
+              w="full md:full lg:250px"
               flex="shrink-0"
               rounded="$bew-radius"
               overflow-hidden
+              aspect-video
             >
               <img
-                w="300px"
-                class="aspect-video"
+                w="full"
+                aspect-video
                 :src="`${getHistoryItemCover(historyItem)}@480w_270h_1c`"
                 :alt="historyItem.title"
                 object-cover
@@ -398,7 +398,7 @@ function handleTurnOnWatchHistory() {
                 </h3>
                 <div
                   text="$bew-text-2 sm"
-                  m="t-4"
+                  m="t-4 b-2"
                   flex="~"
                   items-center
                   cursor-pointer
@@ -422,7 +422,7 @@ function handleTurnOnWatchHistory() {
                         ? historyItem.author_face
                         : historyItem.cover}@80w_80h_1c`
                     "
-                    w-8
+                    w-30px
                     aspect-square
                     object-cover
                     alt=""
@@ -445,7 +445,7 @@ function handleTurnOnWatchHistory() {
                     Live
                   </span>
                 </div>
-                <p display="block lg:none" text="$bew-text-3 sm" mt-auto mb-2>
+                <p display="block xl:none" text="$bew-text-3 sm" mt-auto mb-2>
                   {{
                     useDateFormat(historyItem.view_at * 1000, 'YYYY-MM-DD HH:mm:ss')
                       .value
@@ -457,7 +457,7 @@ function handleTurnOnWatchHistory() {
                 text="2xl $bew-text-3"
                 hover:color="$bew-theme-color"
                 opacity="0 group-hover:100"
-                p-4
+                p-2
                 duration-300
                 @click.stop="deleteHistoryItem(index, historyItem)"
               >
@@ -474,7 +474,7 @@ function handleTurnOnWatchHistory() {
       />
     </main>
 
-    <aside relative w="full md:25% lg:20%" order="1 md:2 lg:2">
+    <aside relative w="full md:40% lg:30% xl:25%" order="1 md:2 lg:2">
       <div pos="sticky top-120px" flex="~ col gap-4" justify-start my-10 w-full>
         <input
           v-model.lazy.trim="keyword"

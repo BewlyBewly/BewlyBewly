@@ -46,7 +46,7 @@ function getAnimeTimeTable() {
         <li
           v-for="item in animeTimeTable"
           :key="item.date_ts"
-          w="1/7"
+          w="1/1 sm:1/2 md:1/4 lg:1/5 xl:1/6 2xl:1/7"
           p="x-2 b-8"
           shrink-0
           :bg="item.is_today ? '!$bew-theme-color-10' : ''"
