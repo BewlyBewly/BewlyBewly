@@ -11,7 +11,6 @@ common:
   hour: hour | hours
   minute: minute | minutes
   second: second | seconds
-
 settings:
   title: Settings
   select_language: Language
@@ -22,9 +21,9 @@ settings:
     jyut: Cantonese
   authorize_app: Authorize BewlyBewly to use access key
   authorize_app_desc: >
-    You can get some videos you might like based on what you watch after authentication.
-    This access key will be valid for about one month,
-    after which if you notice you are not interested in these recommended videos,
+    You can get some videos you might like based on what you watch after
+    authentication. This access key will be valid for about one month, after
+    which if you notice you are not interested in these recommended videos,
     please try to re-authorize.
   topbar_visiable: Topbar visiable
   topbar_visiable_desc: Compatible with Bilibili Evolved customize topbar
@@ -34,13 +33,11 @@ settings:
   chk_box:
     show: Show
     hidden: Hidden
-
 auth:
   err_tip: Failed to grant Access Key
   plz_login_first: Please login to bilibili first
   receive_vertified_url_err: Unable to receive verified URL. Please go back and try againe.
   failed_to_get_accesskey: Failed to get Access Key
-
 topbar:
   sign_in: Sign in
   notifications: Notifications
@@ -116,17 +113,15 @@ topbar:
     sticker: Sticker
     video: Video
     manager: Manager
-
 home:
   not_interested_in: Not interested in...
   video_removed: Video removed
-
 anime:
   total_episodes: EP {ep}
   update_to_n_episodes: Update to {ep} Episodes
-  your_watch_list: Your Watchlist 
+  your_watch_list: Your Watchlist
   recommended_for_you: Recommended for you
-  havent_seen: Haven't seen 
+  havent_seen: Haven't seen
   popular_anime: Popular Anime
   follow: '{num} follow'
   anime_timetable:
@@ -139,3 +134,18 @@ anime:
       fri: FRI
       sat: SAT
       sun: SUN
+history:
+  title: Watch History
+  search_watch_history: Search watch history
+  clear_all_watch_history: Clear all watch history
+  clear_all_watch_history_confirm: >-
+    Clear all watch history? 
+
+    This operation cannot be reversed. Are you sure you want to clear all watch
+    history?
+  pause_watch_history: Pause watch history
+  pause_watch_history_confirm: |-
+    Pause watch history? 
+    Are you sure you want to pause watch history?
+  turn_on_watch_history: Turn on watch history
+  turn_on_watch_history_confirm: Turn on watch history? Are you sure you want to turn on watch history?

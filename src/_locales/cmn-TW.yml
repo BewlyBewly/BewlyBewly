@@ -126,3 +126,18 @@ anime:
       fri: 週五
       sat: 週六
       sun: 週日
+history:
+  title: 觀看記錄
+  turn_on_watch_history: 啟用觀看記錄
+  pause_watch_history: 暫停追蹤觀看記錄
+  clear_all_watch_history: 清除所有觀看記錄
+  clear_all_watch_history_confirm: |-
+    要清除觀看記錄嗎？
+    此操作無法撤消，你確定要清除所有觀看記錄嗎？
+  pause_watch_history_confirm: |-
+    要暫停追蹤觀看記錄嗎？
+    你確定要暫停追蹤觀看記錄嗎？
+  search_watch_history: 搜尋觀看記錄
+  turn_on_watch_history_confirm: |-
+    要啟用觀看記錄嗎？
+    你確定要啟用觀看記錄嗎？

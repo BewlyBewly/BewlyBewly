@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useDateFormat } from '@vueuse/core'
+import { useI18n } from 'vue-i18n'
 import { HistoryType } from './types'
 import type { HistoryItem } from './types'
 import {
@@ -8,6 +9,8 @@ import {
   openLinkToNewTab,
   removeHttpFromUrl,
 } from '~/utils'
+
+const { t } = useI18n()
 
 const isLoading = ref<boolean>()
 const noMoreContent = ref<boolean>()
@@ -208,7 +211,7 @@ function clearAllHistory() {
 function handleClearAllWatchHistory() {
   // eslint-disable-next-line no-alert
   const result = confirm(
-    'Clear all watch history?\nThis action cannot be undone. Are you sure you want to clear all watch history?',
+    t('history.clear_all_watch_history_confirm'),
   )
   if (result)
     clearAllHistory()
@@ -217,7 +220,7 @@ function handleClearAllWatchHistory() {
 function handlePauseWatchHistory() {
   // eslint-disable-next-line no-alert
   const result = confirm(
-    'Pause watch history?\nAre you sure you want to pause watch history?',
+    t('history.pause_watch_history_confirm'),
   )
   if (result)
     setHistoryPauseStatus(true)
@@ -226,7 +229,7 @@ function handlePauseWatchHistory() {
 function handleTurnOnWatchHistory() {
   // eslint-disable-next-line no-alert
   const result = confirm(
-    'Turn on watch history?\nAre you sure you want to turn on watch history?',
+    t('history.turn_on_watch_history_confirm'),
   )
   if (result)
     setHistoryPauseStatus(false)
@@ -237,7 +240,7 @@ function handleTurnOnWatchHistory() {
   <div flex="~ col md:row lg:row" gap-4>
     <main w="full md:60% lg:70% xl:75%" order="2 md:1 lg:1" mb-6>
       <h3 text="3xl $bew-text-1" font-bold mb-6>
-        Watch History
+        {{ $t('history.title') }}
       </h3>
       <!-- historyList -->
       <transition-group name="list">
@@ -479,7 +482,7 @@ function handleTurnOnWatchHistory() {
         <input
           v-model.lazy.trim="keyword"
           type="text"
-          placeholder="Search watch history"
+          :placeholder="t('history.search_watch_history')"
           p="x-14px y-10px"
           rounded="$bew-radius"
           bg="$bew-content-solid-1"
@@ -492,7 +495,7 @@ function handleTurnOnWatchHistory() {
           <template #left>
             <tabler:trash />
           </template>
-          Clear all watch history
+          {{ $t('history.clear_all_watch_history') }}
         </Button>
         <Button
           v-if="!historyStatus"
@@ -502,13 +505,13 @@ function handleTurnOnWatchHistory() {
           <template #left>
             <ph:pause-circle-bold />
           </template>
-          Pause watch history
+          {{ $t('history.pause_watch_history') }}
         </Button>
         <Button v-else shadow="$bew-shadow-1" @click="handleTurnOnWatchHistory">
           <template #left>
             <ph:play-circle-bold />
           </template>
-          Turn on watch history
+          {{ $t('history.turn_on_watch_history') }}
         </Button>
       </div>
     </aside>

@@ -131,3 +131,18 @@ anime:
       fri: 周五
       sat: 周六
       sun: 周日
+history:
+  clear_all_watch_history: 清除所有观看历史
+  clear_all_watch_history_confirm: |-
+    要清除所有观看历史吗？
+    该操作无法撤销，你确定要清除所有观看历史吗？
+  pause_watch_history: 暂停记录观看历史
+  pause_watch_history_confirm: |-
+    要暂停记录观看历史吗？
+    你确定要要暂停记录观看历史吗？
+  search_watch_history: 搜索观看历史
+  title: 观看历史
+  turn_on_watch_history: 开启观看历史
+  turn_on_watch_history_confirm: |-
+    要开启观看历史吗？
+    你确定要开启观看历史吗？

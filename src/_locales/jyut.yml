@@ -131,3 +131,18 @@ anime:
       fri: 週五
       sat: 週六
       sun: 週日
+history:
+  title: 收睇記錄
+  turn_on_watch_history: 開返收睇記錄
+  pause_watch_history: 暫停進行收睇記錄
+  clear_all_watch_history: 剷晒啲收睇記錄
+  clear_all_watch_history_confirm: |-
+    諗住剷晒啲收睇記錄？
+    噉做冇得返轉頭噃，你確定要剷晒啲收睇記錄？
+  pause_watch_history_confirm: |-
+    諗住暫停進行收睇記錄？
+    你確定要暫停暫停進行收睇記錄？
+  search_watch_history: 搵吓收睇記錄
+  turn_on_watch_history_confirm: |-
+    諗住開返收睇記錄？
+    你確定要開返收睇記錄？
