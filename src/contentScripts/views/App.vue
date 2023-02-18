@@ -7,6 +7,7 @@ import Home from './Home/Home.vue'
 import Search from './Search/Search.vue'
 import Anime from './Anime/Anime.vue'
 import History from './History/History.vue'
+import Favorites from './Favorites/Favorites.vue'
 import { activatedPage, isShowTopbar } from '~/logic/storage'
 import { language } from '~/logic'
 import '~/styles/index.ts'
@@ -16,7 +17,7 @@ const { locale } = useI18n()
 const [showSettings, toggle] = useToggle(false)
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
-const pages = { Home, Search, Anime, History }
+const pages = { Home, Search, Anime, History, Favorites }
 
 watch(() => activatedPage.value, (newValue, oldValue) => {
   window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -100,6 +101,14 @@ function changeActivatePage(pageName: AppPage) {
         >
           <tabler:clock />
         </button>
+
+        <!-- <button
+          class="tab-item"
+          :class="{ active: activatedPage === AppPage.Favorites }"
+          @click="changeActivatePage(AppPage.Favorites)"
+        >
+          <tabler:star />
+        </button> -->
 
         <!-- dividing line -->
         <div my-4 w-full h-2px bg="$bew-fill-2" />

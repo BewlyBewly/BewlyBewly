@@ -10,4 +10,5 @@ export enum AppPage {
   Search = 'Search',
   Anime = 'Anime',
   History = 'History',
+  Favorites = 'Favorites',
 }
