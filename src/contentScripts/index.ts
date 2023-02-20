@@ -3,16 +3,14 @@ import { createApp } from 'vue'
 import App from './views/App.vue'
 import { SVG_ICONS, getCookie, i18n, setCookie } from '~/utils'
 
-/* eslint-disable no-console */
-
 // Firefox `browser.tabs.executeScript()` requires scripts return a primitive value
 (() => {
-  console.info('[vitesse-webext] Hello world from content script')
+  // console.info('[vitesse-webext] Hello world from content script')
 
-  // communication example: send previous tab title from background page
-  onMessage('tab-prev', ({ data }) => {
-    console.log(`[vitesse-webext] Navigate from page "${data.title}"`)
-  })
+  // // communication example: send previous tab title from background page
+  // onMessage('tab-prev', ({ data }) => {
+  //   console.log(`[vitesse-webext] Navigate from page "${data.title}"`)
+  // })
 
   const currentUrl = document.URL
 
@@ -22,7 +20,7 @@ import { SVG_ICONS, getCookie, i18n, setCookie } from '~/utils'
     || /https?:\/\/www.bilibili.com\/index.html$/.test(currentUrl)
     || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(currentUrl)
     || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(currentUrl)
-    // || /https?:\/\/www.bilibili.com\/video\/.*/.test(currentUrl)
+    || /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(currentUrl)
     // || /https?:\/\/bilibili.com\/video\/.*/.test(currentUrl)
   ) {
     // if the current homepage is an old version, redirect to the new version
@@ -31,6 +29,10 @@ import { SVG_ICONS, getCookie, i18n, setCookie } from '~/utils'
     //   setCookie('i-wanna-go-back', '-1', 1)
     //   location.reload()
     // }
+
+    const originalPageContent = document.querySelector('#i_cecream')
+    if (originalPageContent)
+      originalPageContent.innerHTML = ''
 
     const container = document.createElement('div')
     const root = document.createElement('div')

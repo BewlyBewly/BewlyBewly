@@ -27,8 +27,10 @@ button {
 .login-tip {
   display: none;
 }
+
 body > #i_cecream,
-#i_cecream * {
+#i_cecream *,
+#app {
   position: absolute;
   top: 200vh;
   visibility: hidden !important;
@@ -36,4 +38,6 @@ body > #i_cecream,
   height: 0;
   overflow: hidden !important;
   pointer-events: none !important;
+  display: none;
 }
+

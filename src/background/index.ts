@@ -54,6 +54,7 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
     || /https?:\/\/www.bilibili.com\/?$/.test(`${tab.url}`)
     || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(`${tab.url}`)
     || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(`${tab.url}`)
+    || /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(`${tab.url}`)
   ) {
     if (changInfo.status === 'loading') {
       const css = `

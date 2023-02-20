@@ -8,6 +8,7 @@ import Search from './Search/Search.vue'
 import Anime from './Anime/Anime.vue'
 import History from './History/History.vue'
 import Favorites from './Favorites/Favorites.vue'
+import Video from './Video/Video.vue'
 import { activatedPage, isShowTopbar } from '~/logic/storage'
 import { language } from '~/logic'
 import '~/styles/index.ts'
@@ -17,13 +18,30 @@ const { locale } = useI18n()
 const [showSettings, toggle] = useToggle(false)
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
-const pages = { Home, Search, Anime, History, Favorites }
+const pages = { Home, Search, Anime, History, Favorites, Video }
+const isVideoPage = ref<boolean>(false)
 
-watch(() => activatedPage.value, (newValue, oldValue) => {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
+watch(
+  () => activatedPage.value,
+  (newValue, oldValue) => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  },
+)
+
+onUpdated(() => {
+  setAppLanguage()
 })
 
-onUpdated(async () => {
+onMounted(() => {
+  if (/https?:\/\/(www.)?bilibili.com\/video\/.*/.test(location.href))
+    isVideoPage.value = true
+})
+
+function changeActivatePage(pageName: AppPage) {
+  activatedPage.value = pageName
+}
+
+async function setAppLanguage() {
   // if there is first-time load extension, set the default language by browser display language
   if (!language.value) {
     if (browser.i18n.getUILanguage() === 'zh-CN') {
@@ -43,10 +61,6 @@ onUpdated(async () => {
   }
 
   locale.value = language.value
-})
-
-function changeActivatePage(pageName: AppPage) {
-  activatedPage.value = pageName
 }
 </script>
 
@@ -72,7 +86,7 @@ function changeActivatePage(pageName: AppPage) {
       >
         <button
           class="tab-item"
-          :class="{ active: activatedPage === AppPage.Search }"
+          :class="{ active: activatedPage === AppPage.Search && !isVideoPage }"
           @click="changeActivatePage(AppPage.Search)"
         >
           <tabler:search />
@@ -80,7 +94,7 @@ function changeActivatePage(pageName: AppPage) {
 
         <button
           class="tab-item"
-          :class="{ active: activatedPage === AppPage.Home }"
+          :class="{ active: activatedPage === AppPage.Home && !isVideoPage }"
           @click="changeActivatePage(AppPage.Home)"
         >
           <tabler:home />
@@ -88,7 +102,7 @@ function changeActivatePage(pageName: AppPage) {
 
         <button
           class="tab-item"
-          :class="{ active: activatedPage === AppPage.Anime }"
+          :class="{ active: activatedPage === AppPage.Anime && !isVideoPage }"
           @click="changeActivatePage(AppPage.Anime)"
         >
           <tabler:device-tv />
@@ -96,7 +110,7 @@ function changeActivatePage(pageName: AppPage) {
 
         <button
           class="tab-item"
-          :class="{ active: activatedPage === AppPage.History }"
+          :class="{ active: activatedPage === AppPage.History && !isVideoPage }"
           @click="changeActivatePage(AppPage.History)"
         >
           <tabler:clock />
@@ -110,8 +124,18 @@ function changeActivatePage(pageName: AppPage) {
           <tabler:star />
         </button> -->
 
+        <template v-if="isVideoPage">
+          <!-- dividing line -->
+          <div my-2 w-full h-2px bg="$bew-fill-2" />
+
+          <!-- video page -->
+          <button class="tab-item video active">
+            <tabler:player-play />
+          </button>
+        </template>
+
         <!-- dividing line -->
-        <div my-4 w-full h-2px bg="$bew-fill-2" />
+        <div my-2 w-full h-2px bg="$bew-fill-2" />
 
         <button class="tab-item" @click="toggleDark()">
           <tabler:moon-stars v-if="isDark" />
@@ -126,7 +150,8 @@ function changeActivatePage(pageName: AppPage) {
 
     <main p="t-80px lg:x-36 md:x-22 x-18" w-full>
       <Transition name="fade">
-        <Component :is="pages[activatedPage]" />
+        <Component :is="pages[activatedPage]" v-if="!isVideoPage" />
+        <Video v-else />
       </Transition>
     </main>
   </div>
@@ -178,6 +203,15 @@ function changeActivatePage(pageName: AppPage) {
       text-white dark-text-black
       shadow-$shadow dark:shadow-$shadow-dark
       active:shadow-$shadow-active dark-active:shadow-$shadow-dark-active;
+  }
+
+  &.active.video {
+    --shadow: 0 0 30px 4px var(--bew-warning-color-50);
+    --shadow-dark: var(--shadow);
+    --shadow-active: 0 0 20px var(--bew-warning-color-50);
+    --shadow-dark-active: var(--shadow-active);
+
+    --at-apply: bg-$bew-warning-color text-black;
   }
 }
 </style>

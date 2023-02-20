@@ -14,7 +14,7 @@ const props = defineProps<{
 }>()
 
 const videoUrl = computed(() => {
-  return `/video/${props.videoData.bvid}`
+  return `https://www.bilibili.com/video/${props.videoData.bvid}`
 })
 
 const isDislike = ref<boolean>(false)
