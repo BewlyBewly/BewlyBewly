@@ -1,6 +1,7 @@
 import { onMessage } from 'webext-bridge'
 import { createApp } from 'vue'
 import App from './views/App.vue'
+import { setupApp } from '~/logic/common-setup'
 import { SVG_ICONS, getCookie, i18n, setCookie } from '~/utils'
 
 // Firefox `browser.tabs.executeScript()` requires scripts return a primitive value
@@ -21,7 +22,6 @@ import { SVG_ICONS, getCookie, i18n, setCookie } from '~/utils'
     || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(currentUrl)
     || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(currentUrl)
     || /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(currentUrl)
-    // || /https?:\/\/bilibili.com\/video\/.*/.test(currentUrl)
   ) {
     // if the current homepage is an old version, redirect to the new version
     // because they had some style errors in the old version
@@ -44,7 +44,24 @@ import { SVG_ICONS, getCookie, i18n, setCookie } from '~/utils'
     container.appendChild(root)
     document.body.appendChild(container)
 
-    createApp(App).use(i18n).mount(root)
+    const app = createApp(App)
+    setupApp(app)
+    app.use(i18n).mount(root)
+
+    // // mount component to context window
+    // const container = document.createElement('div')
+    // container.id = 'bewly'
+    // const root = document.createElement('div')
+    // const styleEl = document.createElement('link')
+    // const shadowDOM = container.attachShadow?.({ mode: __DEV__ ? 'open' : 'closed' }) || container
+    // styleEl.setAttribute('rel', 'stylesheet')
+    // styleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
+    // shadowDOM.appendChild(styleEl)
+    // shadowDOM.appendChild(root)
+    // document.body.appendChild(container)
+    // const app = createApp(App)
+    // setupApp(app)
+    // app.use(i18n).mount(root)
 
     // inject svg icons
     const svgDiv = document.createElement('div')

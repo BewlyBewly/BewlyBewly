@@ -2,6 +2,16 @@
   * this stylesheet is used to reset the styles of the bilibili default style
   */
 
+:root {
+  --band_blud: var(--bew-theme-color);
+  --text1: var(--bew-text-1);
+  --text2: var(--bew-text-2);
+  --text3: var(--bew-text-3);
+  --bg1: var(--bew-content-1);
+  --bg2: var(--bew-content-1);
+  --bg3: var(--bew-content-1);
+}
+
 html,
 body {
   font-size: 14px;
