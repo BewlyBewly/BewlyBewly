@@ -1,17 +1,15 @@
 <script lang="ts" setup>
 import type { Ref, UnwrapNestedRefs } from 'vue'
-import type { VideoInfoModel } from './types'
-import { removeHttpFromUrl } from '~/utils'
+import type { VideoInfo } from './types'
+import { getCSRF, removeHttpFromUrl } from '~/utils'
 
 const videoContent = ref() as Ref<HTMLElement>
 const danmukuContent = ref() as Ref<HTMLElement>
-const videoInfo = reactive<VideoInfoModel | {}>({}) as UnwrapNestedRefs<VideoInfoModel>
+const videoInfo = reactive<VideoInfo | {}>({}) as UnwrapNestedRefs<VideoInfo>
 
 // document.body.removeChild(app)
 
-onMounted(() => {
-  getVideoInfo()
-
+onMounted(async () => {
   nextTick(() => {
     const videoPlayer = document.querySelector('#playerWrap') as HTMLElement
     if (videoContent.value)
@@ -24,19 +22,32 @@ onMounted(() => {
     const app = document.querySelector('#app') as HTMLElement
     app.innerHTML = ''
   })
+
+  await getVideoInfo()
+  getVideoComments()
 })
 
-function getVideoInfo() {
+async function getVideoInfo() {
   // e.g. https://www.bilibili.com/video/BV1vx4y1V7VD/
   const url = location.href
   // url.match(/video\/[0-9a-zA-Z]*/) = ['video/BV1vx4y1V7VD/', index: 25, input: 'https://www.bilibili.com/video/BV1vx4y1V7VD/', groups: undefined]
   // url.match(/video\/[0-9a-zA-Z]*/)[0] = 'video/BV1vx4y1V7VD/'
   const bvid = url.match(/video\/[0-9a-zA-Z]*\/?/)![0].split('/')[1]
-  browser.runtime.sendMessage({ contentScriptQuery: 'getVideoInfo', bvid })
-    .then((res) => {
-      if (res.code === 0)
-        Object.assign(videoInfo, res.data)
-    })
+  const res = await browser.runtime.sendMessage({ contentScriptQuery: 'getVideoInfo', bvid })
+  if (res.code === 0)
+    Object.assign(videoInfo, res.data)
+}
+
+function getVideoComments() {
+  browser.runtime.sendMessage({
+    contentScriptQuery: 'getVideoComments',
+    csrf: getCSRF(),
+    oid: videoInfo.aid,
+    pn: 1,
+  }).then((res) => {
+    if (res.code === 0)
+      console.log(res)
+  })
 }
 
 function changeUrl() {
@@ -74,8 +85,11 @@ function changeUrl() {
         </div>
       </section>
       <section style="white-space: pre-wrap" v-html="(videoInfo.desc_v2 ?? [''])[0].raw_text" />
-
-      <!-- <section v-html="videoInfo.desc_v2![0].raw_text" /> -->
+      <section>
+        <ul>
+          <li />
+        </ul>
+      </section>
     </main>
     <aside w="1/4">
       <div ref="danmukuContent" rounded="$bew-radius" shadow="$bew-shadow-1" />

@@ -1,5 +1,5 @@
 // https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/video/info.md#%E8%8E%B7%E5%8F%96%E8%A7%86%E9%A2%91%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AFweb%E7%AB%AF
-export interface VideoInfoModel {
+export interface VideoInfo {
   bvid: string
   aid: number
   videos: number
@@ -221,4 +221,82 @@ export interface VideoInfoModel {
   }
   like_icon: string
   need_jump_bv: boolean
+}
+
+export interface Comment {
+  'rpid': number
+  'oid': number
+  'type': number
+  'mid': number
+  'root': 0
+  'parent': 0
+  'dialog': 0
+  'count': 0
+  'rcount': 0
+  'state': 0
+  'fansgrade': 0
+  'attr': 0
+  'ctime': number
+  'like': 0
+  'action': 0
+  'member': {
+    'mid': number
+    'uname': string
+    'sex': string
+    'avatar': string
+    'rank': string
+    'level_info': {
+      'current_level': number
+      'current_min': number
+      'current_exp': number
+      'next_exp': number
+    }
+    // 'official_verify': {
+    //   'type': -1
+    //   'desc': ''
+    // }
+    // 'vip': {
+    //   'vipType': 1
+    //   'vipDueDate': number
+    //   'dueRemark': ''
+    //   'accessStatus': 0
+    //   'vipStatus': 0
+    //   'vipStatusWarn': ''
+    //   'themeType': 0
+    //   'label': {
+    //     'path': ''
+    //     'text': ''
+    //     'label_theme': ''
+    //     'text_color': ''
+    //     'bg_style': 0
+    //     'bg_color': ''
+    //     'border_color': ''
+    //     'use_img_label': true
+    //     'img_label_uri_hans': ''
+    //     'img_label_uri_hant': ''
+    //     'img_label_uri_hans_static': 'https://i0.hdslb.com/bfs/vip/d7b702ef65a976b20ed854cbd04cb9e27341bb79.png'
+    //     'img_label_uri_hant_static': 'https://i0.hdslb.com/bfs/activity-plat/static/20220614/e369244d0b14644f5e1a06431e22a4d5/KJunwh19T5.png'
+    //   }
+    //   'avatar_subscript': 0
+    //   'nickname_color': ''
+    // }
+  }
+  'content': {
+    'message': string
+    'members': []
+    'jump_url': {}
+    'max_line': 6
+  }
+  'replies': Array<Comment>
+  'up_action': {
+    'like': false
+    'reply': false
+  }
+  'invisible': false
+  'folder': {
+    'has_folded': false
+    'is_folded': false
+    'rule': ''
+  }
+  'dynamic_id_str': '0'
 }

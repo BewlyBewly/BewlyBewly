@@ -70,5 +70,13 @@ export const setupVideosAPIs = () => {
         .then(data => data)
         .catch(error => console.error(error))
     }
+    // https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/comment/list.md#%E8%8E%B7%E5%8F%96%E8%AF%84%E8%AE%BA%E5%8C%BA%E6%98%8E%E7%BB%86_%E7%BF%BB%E9%A1%B5%E5%8A%A0%E8%BD%BD
+    else if (message.contentScriptQuery === 'getVideoComments') {
+      const url = `https://api.bilibili.com/x/v2/reply?csrf=${message.csrf}&type=1&oid=${message.oid}&sort=${message.sort ?? 0}&nohot=${message.nohot ?? 0}&pn=${message.pn ?? 1}&ps=${message.ps ?? 20}`
+      return fetch(url)
+        .then(response => response.json())
+        .then(data => data)
+        .catch(error => console.error(error))
+    }
   })
 }
