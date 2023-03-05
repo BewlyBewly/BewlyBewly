@@ -70,7 +70,7 @@ async function setAppLanguage() {
       <Topbar
         v-show="isShowTopbar"
         :show-search-bar="activatedPage !== AppPage.Search"
-        class="fixed left-0 z-50"
+        class="fixed top-0 left-0 z-50"
       />
     </Transition>
 

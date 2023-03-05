@@ -4,27 +4,51 @@ import type { VideoInfo } from './types'
 import { getCSRF, removeHttpFromUrl } from '~/utils'
 
 const videoContent = ref() as Ref<HTMLElement>
+const commentContent = ref() as Ref<HTMLElement>
 const danmukuContent = ref() as Ref<HTMLElement>
+const recommendedContent = ref() as Ref<HTMLElement>
+const videoEpisodeList = ref() as Ref<HTMLElement>
 const videoInfo = reactive<VideoInfo | {}>({}) as UnwrapNestedRefs<VideoInfo>
-
-// document.body.removeChild(app)
+const videoPlayerPreviousPosition = reactive<{ right: string; bottom: string }>({ right: '0', bottom: '0' })
 
 onMounted(async () => {
-  nextTick(() => {
+  window.onload = () => {
     const videoPlayer = document.querySelector('#playerWrap') as HTMLElement
-    if (videoContent.value)
+    if (videoContent.value && videoPlayer)
       videoContent.value.appendChild(videoPlayer)
 
+    const comment = document.querySelector('#comment') as HTMLElement
+    if (commentContent.value && comment)
+      commentContent.value.appendChild(comment)
+
     const danmukuBox = document.querySelector('#danmukuBox') as HTMLElement
-    if (danmukuContent.value)
+    if (danmukuContent.value && danmukuBox)
       danmukuContent.value.appendChild(danmukuBox)
+
+    const recoList = document.querySelector('#reco_list') as HTMLElement
+    if (recommendedContent.value && recoList)
+      recommendedContent.value.appendChild(recoList)
+
+    const multiPage = document.querySelector('#multi_page') as HTMLElement
+    if (videoEpisodeList.value && multiPage)
+      videoEpisodeList.value.appendChild(multiPage)
+
+    // setupVideoSize()
+    const videoPlayerContainer = document.querySelector('#bilibili-player .bpx-player-container') as HTMLElement
+    videoPlayerContainer.dataset.screen = 'normal'
+    videoPlayerContainer.style.right = '0'
+    videoPlayerContainer.style.bottom = '0'
 
     const app = document.querySelector('#app') as HTMLElement
     app.innerHTML = ''
-  })
+  }
 
   await getVideoInfo()
-  getVideoComments()
+  // getVideoComments()
+})
+
+onUnmounted(() => {
+  window.onload = () => {}
 })
 
 async function getVideoInfo() {
@@ -38,6 +62,59 @@ async function getVideoInfo() {
     Object.assign(videoInfo, res.data)
 }
 
+// function setupVideoSize() {
+//   const videoPlayerContainer = document.querySelector('#bilibili-player .bpx-player-container') as HTMLElement
+//   const playerTopWrap = videoPlayerContainer.querySelector('.bpx-player-top-wrap') as HTMLElement
+//   const playerTopIssue = videoPlayerContainer.querySelector('.bpx-player-top-issue') as HTMLElement
+//   const playerStateWrap = videoPlayerContainer.querySelector('.bpx-player-state-wrap') as HTMLElement
+//   const playerStatePlay = videoPlayerContainer.querySelector('.bpx-player-state-play') as HTMLElement
+//   const playerToastWrap = videoPlayerContainer.querySelector('.bpx-player-toast-wrap') as HTMLElement
+//   const playerControlWrap = videoPlayerContainer.querySelector('.bpx-player-control-wrap') as HTMLElement
+//   const playerControlMask = videoPlayerContainer.querySelector('.bpx-player-control-mask') as HTMLElement
+
+//   videoPlayerPreviousPosition.right = videoPlayerContainer.style.right ?? '0'
+//   videoPlayerPreviousPosition.bottom = videoPlayerContainer.style.bottom ?? '0'
+
+//   videoPlayerContainer.dataset.screen = 'normal'
+
+//   window.onscroll = () => {
+//     if (window.scrollY > videoPlayerContainer.offsetHeight) {
+//       videoPlayerContainer.dataset.screen = 'mini'
+
+//       playerTopWrap.style.display = 'none'
+//       playerTopIssue.style.display = 'none'
+//       playerStateWrap.style.display = 'none'
+//       playerStatePlay.style.display = 'none'
+//       playerToastWrap.style.display = 'none'
+//       playerControlWrap.style.display = 'none'
+//       playerControlMask.style.display = 'none'
+
+//       if (videoPlayerPreviousPosition.right && videoPlayerPreviousPosition.bottom) {
+//         videoPlayerContainer.style.right = structuredClone(videoPlayerPreviousPosition.right)
+//         videoPlayerContainer.style.bottom = structuredClone(videoPlayerPreviousPosition.bottom)
+//       }
+//     }
+//     else {
+//       videoPlayerContainer.dataset.screen = 'normal'
+//       videoPlayerPreviousPosition.right = structuredClone(videoPlayerContainer.style.right)
+//       videoPlayerPreviousPosition.bottom = structuredClone(videoPlayerContainer.style.bottom)
+
+//       console.log(videoPlayerPreviousPosition)
+
+//       videoPlayerContainer.style.right = '0'
+//       videoPlayerContainer.style.bottom = '0'
+
+//       playerTopWrap.style.display = ''
+//       playerTopIssue.style.display = ''
+//       playerStateWrap.style.display = ''
+//       playerStatePlay.style.display = ''
+//       playerToastWrap.style.display = ''
+//       playerControlWrap.style.display = ''
+//       playerControlMask.style.display = ''
+//     }
+//   }
+// }
+
 function getVideoComments() {
   browser.runtime.sendMessage({
     contentScriptQuery: 'getVideoComments',
@@ -49,17 +126,12 @@ function getVideoComments() {
       console.log(res)
   })
 }
-
-function changeUrl() {
-  location.href = 'https://www.bilibili.com/video/BV1bT411D7aq/?spm_id_from=333.1007.0.0'
-  // history.pushState({}, document.title, 'https://www.bilibili.com/video/BV1bT411D7aq/?spm_id_from=333.1007.0.0')
-}
 </script>
 
 <template>
-  <div flex gap-6>
-    <main w="3/4" grid gap-6>
-      <div ref="videoContent" w-full bg="$bew-fill-1" />
+  <div class="video-page-wrapper" flex gap-6 m-auto>
+    <main w="3/4" min-w-640px flex="~ col gap-6">
+      <div ref="videoContent" bg="$bew-fill-1" />
       <section>
         <p text-2xl fw-600>
           {{ videoInfo.title }}
@@ -85,20 +157,44 @@ function changeUrl() {
         </div>
       </section>
       <section style="white-space: pre-wrap" v-html="(videoInfo.desc_v2 ?? [''])[0].raw_text" />
+      <!-- <section ref="commentContent" /> -->
       <section>
         <ul>
           <li />
         </ul>
       </section>
     </main>
-    <aside w="1/4">
-      <div ref="danmukuContent" rounded="$bew-radius" shadow="$bew-shadow-1" />
+    <aside w="1/4" min-w-400px>
+      <section ref="danmukuContent" rounded="$bew-radius" shadow="$bew-shadow-1" mb-3 />
+      <section ref="videoEpisodeList" rounded="$bew-radius" shadow="$bew-shadow-1" />
+      <section ref="recommendedContent" />
     </aside>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.video-page-wrapper {
+  width: 100%;
+  min-width: 1040px;
+}
 
+@media screen and (max-height: 800px) {
+  .video-page-wrapper {
+    width: 80%;
+  }
+}
+
+@media screen and (max-height: 600px) {
+  .video-page-wrapper {
+    width: 60%;
+  }
+}
+
+@media screen and (max-height: 500px) {
+  .video-page-wrapper {
+    width: 40%;
+  }
+}
 </style>
 
 <style lang="scss">
@@ -128,5 +224,9 @@ function changeUrl() {
   --bpx-aux-content-bg: var(--bew-content-solid-1);
   --bpx-aux-content-font1: var(--bew-text-2);
   --bpx-aux-content-font2: var(--bew-text-3);
+}
+
+.video-page-game-card-small {
+  display: none;
 }
 </style>
