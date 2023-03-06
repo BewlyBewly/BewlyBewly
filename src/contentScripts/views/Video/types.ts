@@ -287,7 +287,7 @@ export interface Comment {
     'jump_url': {}
     'max_line': 6
   }
-  'replies': Array<Comment>
+  'replies'?: Comment[]
   'up_action': {
     'like': false
     'reply': false

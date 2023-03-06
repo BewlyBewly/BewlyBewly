@@ -1,15 +1,16 @@
 <script lang="ts" setup>
 import type { Ref, UnwrapNestedRefs } from 'vue'
-import type { VideoInfo } from './types'
+import type { Comment, VideoInfo } from './types'
 import { getCSRF, removeHttpFromUrl } from '~/utils'
 
 const videoContent = ref() as Ref<HTMLElement>
-const commentContent = ref() as Ref<HTMLElement>
+// const commentContent = ref() as Ref<HTMLElement>
 const danmukuContent = ref() as Ref<HTMLElement>
 const recommendedContent = ref() as Ref<HTMLElement>
 const videoEpisodeList = ref() as Ref<HTMLElement>
 const videoInfo = reactive<VideoInfo | {}>({}) as UnwrapNestedRefs<VideoInfo>
 const videoPlayerPreviousPosition = reactive<{ right: string; bottom: string }>({ right: '0', bottom: '0' })
+const commentList = reactive<Comment[]>([])
 
 onMounted(async () => {
   window.onload = () => {
@@ -17,9 +18,9 @@ onMounted(async () => {
     if (videoContent.value && videoPlayer)
       videoContent.value.appendChild(videoPlayer)
 
-    const comment = document.querySelector('#comment') as HTMLElement
-    if (commentContent.value && comment)
-      commentContent.value.appendChild(comment)
+    // const comment = document.querySelector('#comment') as HTMLElement
+    // if (commentContent.value && comment)
+    //   commentContent.value.appendChild(comment)
 
     const danmukuBox = document.querySelector('#danmukuBox') as HTMLElement
     if (danmukuContent.value && danmukuBox)
@@ -39,12 +40,12 @@ onMounted(async () => {
     videoPlayerContainer.style.right = '0'
     videoPlayerContainer.style.bottom = '0'
 
-    const app = document.querySelector('#app') as HTMLElement
-    app.innerHTML = ''
+    // const app = document.querySelector('#app') as HTMLElement
+    // app.innerHTML = ''
   }
 
   await getVideoInfo()
-  // getVideoComments()
+  getVideoComments()
 })
 
 onUnmounted(() => {
@@ -123,7 +124,7 @@ function getVideoComments() {
     pn: 1,
   }).then((res) => {
     if (res.code === 0)
-      console.log(res)
+      Object.assign(commentList, res.data.replies)
   })
 }
 </script>
@@ -137,33 +138,67 @@ function getVideoComments() {
           {{ videoInfo.title }}
         </p>
       </section>
-      <section flex justify-between bg="$bew-content-solid-1" rounded="$bew-radius" p-4>
-        <div flex>
-          <img
-            v-if="videoInfo.owner?.face"
-            :src="`${videoInfo.owner?.face}@60w_60h_1c`"
-            :alt="videoInfo.owner.name" rounded="$bew-radius-half" aspect-square
-            w-40px mr-4 shrink-0
-          >
-          <div>
-            <p text-xl fw-500>
-              {{ videoInfo.owner?.name }}
-            </p>
-            <!-- <Button @click="changeUrl">
-              click me
-            </Button> -->
-            <!-- <p>{{ videoInfo.owner }}</p> -->
+      <section bg="$bew-content-solid-1" rounded="$bew-radius" p-4>
+        <section flex justify-between bg="$bew-fill-1" rounded="$bew-radius" p-2 mb-4>
+          <div flex>
+            <img
+              v-if="videoInfo.owner?.face"
+              :src="`${videoInfo.owner?.face}@60w_60h_1c`"
+              :alt="videoInfo.owner.name" rounded="$bew-radius" aspect-square
+              w-40px mr-4 shrink-0
+            >
+            <div>
+              <p text-xl fw-500>
+                {{ videoInfo.owner?.name }}
+              </p>
+              <!-- <Button @click="changeUrl">
+                click me
+              </Button> -->
+              <!-- <p>{{ videoInfo.owner }}</p> -->
+            </div>
           </div>
-        </div>
+        </section>
+        <section style="white-space: pre-wrap" v-html="(videoInfo.desc_v2 ?? [''])[0].raw_text" />
       </section>
-      <section style="white-space: pre-wrap" v-html="(videoInfo.desc_v2 ?? [''])[0].raw_text" />
-      <!-- <section ref="commentContent" /> -->
+
       <section>
         <ul>
-          <li />
+          <li v-for="comment in commentList" :key="comment.rpid" flex="~ gap-6" mb-6>
+            <div shrink-0>
+              <img
+                :src="`${removeHttpFromUrl(comment.member.avatar)}@60w_60h_1c`" alt=""
+                aspect-square w-40px
+                rounded="$bew-radius-half"
+              >
+            </div>
+            <div>
+              <h3 fw-600 lh-6>
+                {{ comment.member.uname }}
+              </h3>
+              <div>
+                {{ comment.content.message }}
+                <ul v-if="comment.replies" mt-6>
+                  <li v-for="reply in comment.replies" :key="reply.rpid" flex="~ gap-6" mb-6>
+                    <div shrink-0>
+                      <img
+                        :src="`${removeHttpFromUrl(reply.member.avatar)}@60w_60h_1c`" alt=""
+                        aspect-square w-40px
+                        rounded="$bew-radius-half"
+                      >
+                    </div>
+                    <h3 fw-600 lh-6>
+                      {{ reply.member.uname }}
+                    </h3>
+                    <p>{{ reply.content.message }}</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
         </ul>
       </section>
     </main>
+
     <aside w="1/4" min-w-400px>
       <section ref="danmukuContent" rounded="$bew-radius" shadow="$bew-shadow-1" mb-3 />
       <section ref="videoEpisodeList" rounded="$bew-radius" shadow="$bew-shadow-1" />
