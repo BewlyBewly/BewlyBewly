@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { Ref, UnwrapNestedRefs } from 'vue'
+import { useDateFormat } from '@vueuse/core'
 import type { Comment, VideoInfo } from './types'
 import { getCSRF, removeHttpFromUrl } from '~/utils'
 
@@ -11,6 +12,7 @@ const videoEpisodeList = ref() as Ref<HTMLElement>
 const videoInfo = reactive<VideoInfo | {}>({}) as UnwrapNestedRefs<VideoInfo>
 const videoPlayerPreviousPosition = reactive<{ right: string; bottom: string }>({ right: '0', bottom: '0' })
 const commentList = reactive<Comment[]>([])
+const commentPageInfo = reactive<any>({})
 
 onMounted(async () => {
   window.onload = () => {
@@ -123,8 +125,10 @@ function getVideoComments() {
     oid: videoInfo.aid,
     pn: 1,
   }).then((res) => {
-    if (res.code === 0)
+    if (res.code === 0) {
       Object.assign(commentList, res.data.replies)
+      Object.assign(commentPageInfo, res.data.page)
+    }
   })
 }
 </script>
@@ -162,6 +166,9 @@ function getVideoComments() {
       </section>
 
       <section>
+        <h2 text-2xl bold mb-6>
+          {{ commentPageInfo.acount }} Comments
+        </h2>
         <ul>
           <li v-for="comment in commentList" :key="comment.rpid" flex="~ gap-6" mb-6>
             <div shrink-0>
@@ -172,11 +179,12 @@ function getVideoComments() {
               >
             </div>
             <div>
-              <h3 fw-600 lh-6>
+              <h3 fw-600 lh-6 mb-2>
                 {{ comment.member.uname }}
               </h3>
               <div>
-                {{ comment.content.message }}
+                <p>{{ comment.content.message }}</p>
+                <p>{{ useDateFormat(comment.ctime * 1000, 'YYYY-MM-DD HH:mm:ss') }}</p>
                 <ul v-if="comment.replies" mt-6>
                   <li v-for="reply in comment.replies" :key="reply.rpid" flex="~ gap-6" mb-6>
                     <div shrink-0>
@@ -186,10 +194,12 @@ function getVideoComments() {
                         rounded="$bew-radius-half"
                       >
                     </div>
-                    <h3 fw-600 lh-6>
-                      {{ reply.member.uname }}
-                    </h3>
-                    <p>{{ reply.content.message }}</p>
+                    <div>
+                      <h3 fw-600 lh-6 mb-2>
+                        {{ reply.member.uname }}
+                      </h3>
+                      <p>{{ reply.content.message }}</p>
+                    </div>
                   </li>
                 </ul>
               </div>
