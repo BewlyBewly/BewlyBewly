@@ -2,7 +2,7 @@
 import type { Ref, UnwrapNestedRefs } from 'vue'
 import { useDateFormat } from '@vueuse/core'
 import type { Comment, VideoInfo } from './types'
-import { getCSRF, removeHttpFromUrl } from '~/utils'
+import { calcTimeSince, getCSRF, removeHttpFromUrl } from '~/utils'
 
 const videoContent = ref() as Ref<HTMLElement>
 // const commentContent = ref() as Ref<HTMLElement>
@@ -124,12 +124,38 @@ function getVideoComments() {
     csrf: getCSRF(),
     oid: videoInfo.aid,
     pn: 1,
+    sort: 1,
   }).then((res) => {
     if (res.code === 0) {
       Object.assign(commentList, res.data.replies)
       Object.assign(commentPageInfo, res.data.page)
     }
   })
+}
+
+function setupCommentEmote(content: string, emote: any) {
+  let result = `${content}`
+
+  if (!emote || Object.keys(emote).length === 0)
+    return content
+
+  Object.keys(emote).forEach((key) => {
+    if (emote[key].meta.size === 1) {
+      result = result.replaceAll(key, `
+      <img 
+        src="${removeHttpFromUrl(emote[key].url)}@40w_40h.webp" width="20" height="20" 
+        style="vertical-align: text-bottom; display: inline" 
+      />`)
+    }
+    else {
+      result = result.replaceAll(key, `
+      <img 
+        src="${removeHttpFromUrl(emote[key].url)}@112w_112h.webp" width="50" height="50" 
+        style="vertical-align: text-bottom; display: inline" 
+      />`)
+    }
+  })
+  return result
 }
 </script>
 
@@ -143,8 +169,19 @@ function getVideoComments() {
         </p>
       </section>
       <section bg="$bew-content-solid-1" rounded="$bew-radius" p-4>
-        <section flex justify-between bg="$bew-fill-1" rounded="$bew-radius" p-2 mb-4>
-          <div flex>
+        <section
+          flex justify-between bg="$bew-fill-1" rounded="$bew-radius" p-2 mb-4 relative z-1
+          overflow-hidden
+        >
+          <img
+            v-if="videoInfo.owner?.face"
+            :src="`${videoInfo.owner?.face}@60w_60h_1c`"
+            :alt="videoInfo.owner.name" object-cover
+            blur-lg pointer-events-none z--1
+            w-full h-full pos="absolute top-0 left-0"
+            opacity-30
+          >
+          <div flex relative z-1>
             <img
               v-if="videoInfo.owner?.face"
               :src="`${videoInfo.owner?.face}@60w_60h_1c`"
@@ -165,40 +202,72 @@ function getVideoComments() {
         <section style="white-space: pre-wrap" v-html="(videoInfo.desc_v2 ?? [''])[0].raw_text" />
       </section>
 
+      <!-- Comments -->
       <section>
         <h2 text-2xl bold mb-6>
           {{ commentPageInfo.acount }} Comments
         </h2>
         <ul>
-          <li v-for="comment in commentList" :key="comment.rpid" flex="~ gap-6" mb-6>
+          <li
+            v-for="comment in commentList" :key="comment.rpid" flex="~ gap-4" mb-6
+          >
             <div shrink-0>
               <img
                 :src="`${removeHttpFromUrl(comment.member.avatar)}@60w_60h_1c`" alt=""
                 aspect-square w-40px
-                rounded="$bew-radius-half"
+                rounded="$bew-radius"
               >
             </div>
-            <div>
-              <h3 fw-600 lh-6 mb-2>
-                {{ comment.member.uname }}
-              </h3>
+            <div w-full>
+              <!-- username & sending time -->
+              <div mb-2 lh-6 flex gap-2 items-center>
+                <h3 fw-600>
+                  {{ comment.member.uname }}
+                </h3>
+                <div class="group">
+                  <span text="$bew-text-2" cursor-pointer v-text="calcTimeSince(comment.ctime * 1000)" />
+                  <span
+                    bg="black dark:white" text="white dark:black sm"
+                    p="x-2 y-1" ml-2 rounded-8 pointer-events-none
+                    opacity="0 group-hover:100" duration-300
+                    v-text="useDateFormat(comment.ctime * 1000, 'YYYY-MM-DD HH:mm:ss').value"
+                  />
+                </div>
+              </div>
+
+              <span v-html="setupCommentEmote(comment.content.message, comment.content.emote)" />
+
               <div>
-                <p>{{ comment.content.message }}</p>
-                <p>{{ useDateFormat(comment.ctime * 1000, 'YYYY-MM-DD HH:mm:ss') }}</p>
                 <ul v-if="comment.replies" mt-6>
-                  <li v-for="reply in comment.replies" :key="reply.rpid" flex="~ gap-6" mb-6>
+                  <li
+                    v-for="reply in comment.replies" :key="reply.rpid" flex="~ gap-4" mb-6
+                  >
                     <div shrink-0>
                       <img
                         :src="`${removeHttpFromUrl(reply.member.avatar)}@60w_60h_1c`" alt=""
-                        aspect-square w-40px
-                        rounded="$bew-radius-half"
+                        aspect-square w-30px
+                        rounded="$bew-radius"
                       >
                     </div>
                     <div>
-                      <h3 fw-600 lh-6 mb-2>
-                        {{ reply.member.uname }}
-                      </h3>
-                      <p>{{ reply.content.message }}</p>
+                      <!-- username & sending time -->
+                      <div mb-2 lh-6 flex gap-2 items-center>
+                        <h3 fw-600>
+                          {{ reply.member.uname }}
+                        </h3>
+                        <div class="group">
+                          <span text="$bew-text-2" cursor-pointer v-text="calcTimeSince(reply.ctime * 1000)" />
+                          <span
+                            bg="black dark:white" text="white dark:black sm"
+                            p="x-2 y-1" ml-2 rounded-8 pointer-events-none
+                            opacity="0 group-hover:100"
+                            duration-300
+                            v-text="useDateFormat(reply.ctime * 1000, 'YYYY-MM-DD HH:mm:ss').value"
+                          />
+                        </div>
+                      </div>
+
+                      <span v-html="setupCommentEmote(reply.content.message, reply.content.emote)" />
                     </div>
                   </li>
                 </ul>

@@ -3,14 +3,13 @@ common:
   loading: 加载中...
   undo: 还原
   view: 次
-  ago: 前
-  year: 年
-  month: 个月
-  week: 个星期
-  day: 天
-  hour: 小时
-  minute: 分钟
-  second: 秒
+  year: 年前
+  month: 个月前
+  week: 个星期前
+  day: 天前
+  hour: 小时前
+  minute: 分钟前
+  second: 秒前
 settings:
   title: 设置
   select_language: 界面语文

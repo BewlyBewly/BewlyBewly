@@ -394,10 +394,6 @@ function scrollToTop(element: HTMLElement, duration: number) {
                       moment.ctime
                         ? calcTimeSince(new Date(moment.ctime * 1000))
                         : moment.ctime
-                    }}{{
-                      language === LanguageType.English
-                        ? ` ${$t('common.ago')}`
-                        : $t('common.ago')
                     }}
                   </div>
 

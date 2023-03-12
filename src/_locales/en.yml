@@ -3,14 +3,13 @@ common:
   loading: Loading...
   undo: UNDO
   view: no view | view | views
-  ago: ago
-  year: year | years
-  month: month | momths
-  week: week | weeks
-  day: day | days
-  hour: hour | hours
-  minute: minute | minutes
-  second: second | seconds
+  year: year ago | years ago
+  month: month ago | months ago
+  week: week ago | weeks ago
+  day: day ago | days ago
+  hour: hour ago | hours ago
+  minute: minute ago | minutes ago
+  second: second ago | seconds ago
 settings:
   title: Settings
   select_language: Language

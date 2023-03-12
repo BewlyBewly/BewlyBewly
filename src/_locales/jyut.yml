@@ -3,14 +3,13 @@ common:
   loading: 撈緊...
   undo: 整返
   view: 次
-  ago: 前
-  year: 年
-  month: 個月
-  week: 個禮拜
-  day: 日
-  hour: 個鐘頭
-  minute: 分鐘
-  second: 秒
+  year: 年前
+  month: 個月前
+  week: 個禮拜前
+  day: 日前
+  hour: 個鐘頭前
+  minute: 分鐘前
+  second: 秒前
 settings:
   title: 校做
   select_language: 介面語文

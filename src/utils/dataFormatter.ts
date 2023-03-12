@@ -36,7 +36,7 @@ export const numFormatter = (num: number) => {
   return item ? (num / item.value).toFixed(digits).replace(rx, '$1') + item.symbol : '0'
 }
 
-export const calcTimeSince = (date: number | string) => {
+export const calcTimeSince = (date: number | string | Date) => {
   const seconds = Math.floor(((Number(new Date())) - Number(date)) / 1000)
   let interval = seconds / 31536000
   if (interval > 1)

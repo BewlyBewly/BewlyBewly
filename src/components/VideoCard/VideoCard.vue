@@ -309,12 +309,7 @@ function gotoChannel(mid: number) {
                 : $t('common.view', videoData.stat.view)
             }}
             <span class="text-xs font-light">•</span>
-            {{ calcTimeSince(videoData.pubdate * 1000)
-            }}{{
-              language === LanguageType.English
-                ? ` ${$t('common.ago')}`
-                : $t('common.ago')
-            }}
+            {{ calcTimeSince(videoData.pubdate * 1000) }}
           </div>
         </div>
       </div>
