@@ -1,5 +1,5 @@
 import { language } from '~/logic'
-import { i18n } from '~/utils'
+import { i18n } from '~/utils/i18n'
 export const { t } = i18n.global
 
 export const numFormatter = (num: number) => {
