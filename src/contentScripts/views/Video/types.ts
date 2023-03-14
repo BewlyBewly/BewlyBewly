@@ -223,6 +223,12 @@ export interface VideoInfo {
   need_jump_bv: boolean
 }
 
+export interface UserCardInfo {
+  card: any
+  following: boolean
+  follower: number
+}
+
 export interface Comment {
   'rpid': number
   'oid': number

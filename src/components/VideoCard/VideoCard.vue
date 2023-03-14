@@ -302,11 +302,8 @@ function gotoChannel(mid: number) {
             {{ videoData.owner.name }}
           </div>
           <div class="video-info" text="base $bew-text-2">
-            {{ numFormatter(videoData.stat.view)
-            }}{{
-              language === LanguageType.English
-                ? ` ${$t('common.view', videoData.stat.view)}`
-                : $t('common.view', videoData.stat.view)
+            {{
+              $t('common.view', { count: numFormatter(videoData.stat.view) })
             }}
             <span class="text-xs font-light">•</span>
             {{ calcTimeSince(videoData.pubdate * 1000) }}

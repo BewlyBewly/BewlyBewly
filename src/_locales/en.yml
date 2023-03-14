@@ -2,7 +2,7 @@ common:
   view_all: View ALL
   loading: Loading...
   undo: UNDO
-  view: no view | view | views
+  view: no view | {count} view | {count} views
   year: year ago | years ago
   month: month ago | months ago
   week: week ago | weeks ago

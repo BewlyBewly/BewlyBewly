@@ -2,7 +2,7 @@ common:
   view_all: 查看更多
   loading: 加载中...
   undo: 还原
-  view: 次
+  view: '{count} 次'
   year: 年前
   month: 个月前
   week: 个星期前

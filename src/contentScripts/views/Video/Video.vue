@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import type { Ref, UnwrapNestedRefs } from 'vue'
 import { useDateFormat } from '@vueuse/core'
-import type { Comment, VideoInfo } from './types'
-import { calcTimeSince, getCSRF, removeHttpFromUrl } from '~/utils'
+import type { Comment, UserCardInfo, VideoInfo } from './types'
+import { calcTimeSince, getCSRF, numFormatter, removeHttpFromUrl } from '~/utils'
 
 const videoContent = ref() as Ref<HTMLElement>
 // const commentContent = ref() as Ref<HTMLElement>
@@ -10,7 +10,8 @@ const danmukuContent = ref() as Ref<HTMLElement>
 const recommendedContent = ref() as Ref<HTMLElement>
 const videoEpisodeList = ref() as Ref<HTMLElement>
 const videoInfo = reactive<VideoInfo | {}>({}) as UnwrapNestedRefs<VideoInfo>
-const videoPlayerPreviousPosition = reactive<{ right: string; bottom: string }>({ right: '0', bottom: '0' })
+const userCardInfo = reactive<UserCardInfo | {}>({}) as UnwrapNestedRefs<UserCardInfo>
+// const videoPlayerPreviousPosition = reactive<{ right: string; bottom: string }>({ right: '0', bottom: '0' })
 const commentList = reactive<Comment[]>([])
 const commentPageInfo = reactive<any>({})
 
@@ -50,6 +51,11 @@ onMounted(async () => {
   getVideoComments()
 })
 
+watch(() => 'location.href', async (newValue, oldValue) => {
+  await getVideoInfo()
+  getVideoComments()
+})
+
 onUnmounted(() => {
   window.onload = () => {}
 })
@@ -61,8 +67,10 @@ async function getVideoInfo() {
   // url.match(/video\/[0-9a-zA-Z]*/)[0] = 'video/BV1vx4y1V7VD/'
   const bvid = url.match(/video\/[0-9a-zA-Z]*\/?/)![0].split('/')[1]
   const res = await browser.runtime.sendMessage({ contentScriptQuery: 'getVideoInfo', bvid })
-  if (res.code === 0)
-    Object.assign(videoInfo, res.data)
+  if (res.code === 0) {
+    Object.assign(videoInfo, res.data.View)
+    Object.assign(userCardInfo, res.data.Card)
+  }
 }
 
 // function setupVideoSize() {
@@ -161,11 +169,15 @@ function setupCommentEmote(content: string, emote: any) {
 
 <template>
   <div class="video-page-wrapper" flex gap-6 m-auto>
-    <main w="3/4" min-w-640px flex="~ col gap-6">
+    <main w="3/4" min-w-640px flex="~ col gap-4">
       <div ref="videoContent" bg="$bew-fill-1" />
       <section>
         <p text-2xl fw-600>
           {{ videoInfo.title }}
+        </p>
+        <p text="$bew-text-2" flex gap-4 lh-6>
+          <span>{{ $t('common.view', { count: videoInfo.stat?.view }) }}</span>
+          <span>{{ videoInfo.stat?.danmaku }} danmaku</span>
         </p>
       </section>
       <section bg="$bew-content-solid-1" rounded="$bew-radius" p-4>
@@ -189,8 +201,11 @@ function setupCommentEmote(content: string, emote: any) {
               w-40px mr-4 shrink-0
             >
             <div>
-              <p text-xl fw-500>
+              <p text-base fw-500>
                 {{ videoInfo.owner?.name }}
+              </p>
+              <p text="sm $bew-text-2">
+                {{ numFormatter(userCardInfo.follower) }} subscribers
               </p>
               <!-- <Button @click="changeUrl">
                 click me
