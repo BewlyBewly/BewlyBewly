@@ -65,7 +65,7 @@ async function setAppLanguage() {
 </script>
 
 <template>
-  <div bg="$bew-bg" text="$bew-text-1">
+  <div bg="$bew-bg" text="$bew-text-1" min-h-100vh>
     <div m-auto max-w="$bew-page-max-width">
       <Transition name="topbar">
         <Topbar
