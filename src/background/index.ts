@@ -1,6 +1,7 @@
 import type { Tabs } from 'webextension-polyfill'
 import browser from 'webextension-polyfill'
 import { onMessage, sendMessage } from 'webext-bridge'
+import { resetCss } from './resetWebsiteStyle'
 import { setupAllAPIs } from './apis'
 
 browser.runtime.onInstalled.addListener((): void => {
@@ -56,6 +57,13 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
     || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(`${tab.url}`)
     || /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(`${tab.url}`)
   ) {
+    browser.scripting.insertCSS({
+      css: resetCss,
+      target: {
+        tabId,
+      },
+    })
+
     if (changInfo.status === 'loading') {
       const css = `
       body {

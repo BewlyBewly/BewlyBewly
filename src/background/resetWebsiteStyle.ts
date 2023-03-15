@@ -1,3 +1,4 @@
+export const resetCss = `
 /**
   * this stylesheet is used to reset the styles of the bilibili default style
   */
@@ -17,6 +18,7 @@
 
 html,
 body {
+  font-size: 14px;
   min-width: unset !important;
 }
 
@@ -25,17 +27,18 @@ a:hover {
   color: unset;
 }
 
-button {
-  border: unset;
-  background: unset;
+/*
+// button {
+//   border: unset;
+//   background: unset;
 
-  &:focus,
-  &:active {
-    background: currentColor;
-  }
-}
+//   &:focus,
+//   &:active {
+//     background: currentColor;
+//   }
+// }*/
 
-// hide the original home page
+/* hide the original home page */
 .login-tip {
   display: none;
 }
@@ -52,4 +55,4 @@ body > #i_cecream,
   pointer-events: none !important;
   display: none;
 }
-
+`

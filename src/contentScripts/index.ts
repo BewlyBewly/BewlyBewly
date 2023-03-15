@@ -34,34 +34,34 @@ import { SVG_ICONS, getCookie, i18n, setCookie } from '~/utils'
     if (originalPageContent)
       originalPageContent.innerHTML = ''
 
-    const container = document.createElement('div')
-    const root = document.createElement('div')
-    const styleEl = document.createElement('link')
-    styleEl.setAttribute('rel', 'stylesheet')
-    styleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
-    container.id = 'bewly'
-    container.appendChild(styleEl)
-    container.appendChild(root)
-    document.body.appendChild(container)
-
-    const app = createApp(App)
-    setupApp(app)
-    app.use(i18n).mount(root)
-
-    // // mount component to context window
     // const container = document.createElement('div')
-    // container.id = 'bewly'
     // const root = document.createElement('div')
     // const styleEl = document.createElement('link')
-    // const shadowDOM = container.attachShadow?.({ mode: __DEV__ ? 'open' : 'closed' }) || container
     // styleEl.setAttribute('rel', 'stylesheet')
     // styleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
-    // shadowDOM.appendChild(styleEl)
-    // shadowDOM.appendChild(root)
+    // container.id = 'bewly'
+    // container.appendChild(styleEl)
+    // container.appendChild(root)
     // document.body.appendChild(container)
+
     // const app = createApp(App)
     // setupApp(app)
     // app.use(i18n).mount(root)
+
+    // mount component to context window
+    const container = document.createElement('div')
+    container.id = 'bewly'
+    const root = document.createElement('div')
+    const styleEl = document.createElement('link')
+    const shadowDOM = container.attachShadow?.({ mode: __DEV__ ? 'open' : 'closed' }) || container
+    styleEl.setAttribute('rel', 'stylesheet')
+    styleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
+    shadowDOM.appendChild(styleEl)
+    shadowDOM.appendChild(root)
+    document.body.appendChild(container)
+    const app = createApp(App)
+    setupApp(app)
+    app.use(i18n).mount(root)
 
     // inject svg icons
     const svgDiv = document.createElement('div')

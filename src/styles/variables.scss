@@ -1,4 +1,4 @@
-:root {
+:host {
   --bew-radius: 12px;
   --bew-radius-half: calc(var(--bew-radius) / 2);
 
@@ -100,7 +100,7 @@
   --bew-page-max-width: 2000px;
 }
 
-:root.dark {
+:host(.dark) {
   // dark mode
   --bew-logo-color: var(--bew-text-1);
 
