@@ -87,18 +87,18 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
           tabId,
         },
       })
-      setTimeout(() => {
-        browser.scripting.insertCSS({
-          css: `
-          body {
-              opacity: 1;
-              overflow-y: auto;
-              pointer-events: auto;
-          }
-          `,
-          target: { tabId },
-        })
-      }, 1500)
+      // setTimeout(() => {
+      //   browser.scripting.insertCSS({
+      //     css: `
+      //     body {
+      //         opacity: 1;
+      //         overflow-y: auto;
+      //         pointer-events: auto;
+      //     }
+      //     `,
+      //     target: { tabId },
+      //   })
+      // }, 2000)
 
       // If it not a macOS, we will inject CSS to design the scrollbar
       if (!navigator.userAgent.includes('Mac OS X')) {
@@ -133,18 +133,18 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
       }
     }
     else if (changInfo.status === 'complete') {
-      // const css = `
-      // body {
-      //   opacity: 1;
-      //   overflow-y: auto;
-      //   pointer-events: auto;
-      // }
-      // `
+      const css = `
+      body {
+        opacity: 1;
+        overflow-y: auto;
+        pointer-events: auto;
+      }
+      `
 
-      // browser.scripting.insertCSS({
-      //   css,
-      //   target: { tabId },
-      // })
+      browser.scripting.insertCSS({
+        css,
+        target: { tabId },
+      })
     }
   }
 })

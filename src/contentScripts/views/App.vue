@@ -16,10 +16,23 @@ import { AppPage, LanguageType } from '~/enums/appEnums'
 
 const { locale } = useI18n()
 const [showSettings, toggle] = useToggle(false)
-const isDark = useDark({ selector: '#bewly' })
+const isDark = useDark({
+  // selector: '#bewly',
+  onChanged: (isDark: boolean) => {
+    if (isDark) {
+      document.querySelector('html')?.classList.add('dark')
+      document.querySelector('#bewly')?.classList.add('dark')
+    }
+    else {
+      document.querySelector('html')?.classList.remove('dark')
+      document.querySelector('#bewly')?.classList.remove('dark')
+    }
+  },
+})
 const toggleDark = useToggle(isDark)
 const pages = { Home, Search, Anime, History, Favorites, Video }
 const isVideoPage = ref<boolean>(false)
+const mainApp = ref<HTMLElement>()
 
 watch(
   () => activatedPage.value,
@@ -28,6 +41,12 @@ watch(
   },
 )
 
+// Watch for changes in the 'isDark' variable and add the 'dark' class to the 'mainApp' element
+// to prevent some Unocss dark-specific styles from failing to take effect
+watch(() => isDark.value, (newValue, oldValue) => {
+  setAppAppearance()
+})
+
 onUpdated(() => {
   setAppLanguage()
 })
@@ -35,6 +54,11 @@ onUpdated(() => {
 onMounted(() => {
   if (/https?:\/\/(www.)?bilibili.com\/video\/.*/.test(location.href))
     isVideoPage.value = true
+  setAppAppearance()
+  setAppLanguage()
+  // nextTick(() => {
+  //   setAppLanguage()
+  // })
 })
 
 function changeActivatePage(pageName: AppPage) {
@@ -59,13 +83,26 @@ async function setAppLanguage() {
       language.value = LanguageType.English
     }
   }
+  console.log('hey, im here', language.value)
 
   locale.value = language.value
+}
+
+/**
+ * Watch for changes in the 'isDark' variable and add the 'dark' class to the 'mainApp' element
+ * to prevent some Unocss dark-specific styles from failing to take effect
+ */
+function setAppAppearance() {
+  if (isDark.value)
+    mainApp.value?.classList.add('dark')
+
+  else
+    mainApp.value?.classList.remove('dark')
 }
 </script>
 
 <template>
-  <div bg="$bew-bg" text="$bew-text-1" min-h-100vh>
+  <div ref="mainApp" bg="$bew-bg" text="$bew-text-1" min-h-100vh>
     <div m-auto max-w="$bew-page-max-width">
       <Transition name="topbar">
         <Topbar

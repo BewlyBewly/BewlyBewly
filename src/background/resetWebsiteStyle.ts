@@ -4,22 +4,32 @@ export const resetCss = `
   */
 
 :root {
-  --band_blue: var(--bew-theme-color);
-  --text1: var(--bew-text-1);
-  --text2: var(--bew-text-2);
-  --text3: var(--bew-text-3);
-  --bg1: var(--bew-content-1);
-  --bg2: var(--bew-content-1);
-  --bg3: var(--bew-content-1);
-  --line-light: var(--bew-fill-2);
-  --line_regular: var(--bew-fill-3);
-  --line_bold: var(--bew-fill-4);
+  --bew-bg: hsl(220, 14%, 96%);
+
+  // --band_blue: var(--bew-theme-color);
+  // --text1: var(--bew-text-1);
+  // --text2: var(--bew-text-2);
+  // --text3: var(--bew-text-3);
+  // --bg1: var(--bew-content-1);
+  // --bg2: var(--bew-content-1);
+  // --bg3: var(--bew-content-1);
+  // --line-light: var(--bew-fill-2);
+  // --line_regular: var(--bew-fill-3);
+  // --line_bold: var(--bew-fill-4);
+}
+
+:root.dark {
+  --bew-bg: hsl(230 12% 6%);
 }
 
 html,
 body {
   font-size: 14px;
   min-width: unset !important;
+}
+
+html {
+  background-color: var(--bew-bg);
 }
 
 a,

@@ -29,9 +29,9 @@ onMounted(async () => {
     if (danmukuContent.value && danmukuBox)
       danmukuContent.value.appendChild(danmukuBox)
 
-    const recoList = document.querySelector('#reco_list') as HTMLElement
-    if (recommendedContent.value && recoList)
-      recommendedContent.value.appendChild(recoList)
+    // const recoList = document.querySelector('#reco_list') as HTMLElement
+    // if (recommendedContent.value && recoList)
+    //   recommendedContent.value.appendChild(recoList)
 
     const multiPage = document.querySelector('#multi_page') as HTMLElement
     if (videoEpisodeList.value && multiPage)
