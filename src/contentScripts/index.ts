@@ -21,44 +21,40 @@ import { SVG_ICONS, getCookie, i18n, setCookie } from '~/utils'
     || /https?:\/\/www.bilibili.com\/index.html$/.test(currentUrl)
     || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(currentUrl)
     || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(currentUrl)
-    || /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(currentUrl)
+    // || /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(currentUrl)
   ) {
     const originalPageContent = document.querySelector('#i_cecream')
     if (originalPageContent)
       originalPageContent.innerHTML = ''
 
-    if (/https?:\/\/(www.)?bilibili.com\/video\/.*/.test(currentUrl)) {
-      const container = document.createElement('div')
-      const root = document.createElement('div')
-      const styleEl = document.createElement('link')
-      styleEl.setAttribute('rel', 'stylesheet')
-      styleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
-      container.id = 'bewly'
-      container.appendChild(styleEl)
-      container.appendChild(root)
-      document.body.appendChild(container)
-  
-      const app = createApp(App)
-      setupApp(app)
-      app.use(i18n).mount(root)
-    }
-    else {
-      // mount component to context window
-      const container = document.createElement('div')
-      container.id = 'bewly'
-      const root = document.createElement('div')
-      const styleEl = document.createElement('link')
-      const shadowDOM = container.attachShadow?.({ mode: __DEV__ ? 'open' : 'closed' }) || container
-      styleEl.setAttribute('rel', 'stylesheet')
-      styleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
-      shadowDOM.appendChild(styleEl)
-      shadowDOM.appendChild(root)
-      document.body.appendChild(container)
-      const app = createApp(App)
-      setupApp(app)
-      app.use(i18n).mount(root)
-    }
+    // const container = document.createElement('div')
+    // const root = document.createElement('div')
+    // const styleEl = document.createElement('link')
+    // styleEl.setAttribute('rel', 'stylesheet')
+    // styleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
+    // container.id = 'bewly'
+    // container.appendChild(styleEl)
+    // container.appendChild(root)
+    // document.body.appendChild(container)
 
+    // const app = createApp(App)
+    // setupApp(app)
+    // app.use(i18n).mount(root)
+
+    // mount component to context window
+    const container = document.createElement('div')
+    container.id = 'bewly'
+    const root = document.createElement('div')
+    const styleEl = document.createElement('link')
+    const shadowDOM = container.attachShadow?.({ mode: __DEV__ ? 'open' : 'closed' }) || container
+    styleEl.setAttribute('rel', 'stylesheet')
+    styleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
+    shadowDOM.appendChild(styleEl)
+    shadowDOM.appendChild(root)
+    document.body.appendChild(container)
+    const app = createApp(App)
+    setupApp(app)
+    app.use(i18n).mount(root)
 
     // inject svg icons
     const svgDiv = document.createElement('div')
