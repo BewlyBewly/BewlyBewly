@@ -65,15 +65,6 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
     })
 
     if (changInfo.status === 'loading') {
-      // const css = `
-      // body {
-      //   opacity: 0;
-      //   transition: opacity 0.5s;
-      //   overflow-y: hidden;
-      //   pointer-events: none;
-      // }
-      // `
-
       browser.scripting.insertCSS({
         css: `
         body {
@@ -87,18 +78,6 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
           tabId,
         },
       })
-      // setTimeout(() => {
-      //   browser.scripting.insertCSS({
-      //     css: `
-      //     body {
-      //         opacity: 1;
-      //         overflow-y: auto;
-      //         pointer-events: auto;
-      //     }
-      //     `,
-      //     target: { tabId },
-      //   })
-      // }, 2000)
 
       // If it not a macOS, we will inject CSS to design the scrollbar
       if (!navigator.userAgent.includes('Mac OS X')) {
@@ -118,7 +97,7 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
             }
 
             ::-webkit-scrollbar-thumb {
-              background-color: var(--bew-fill-3);
+              background-color: rgba(120, 120, 122, .5);
               border-radius: 20px;
             }
 
@@ -126,9 +105,7 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
               background: var(--bew-bg)
             }
           `,
-          // runAt: 'document_start',
           target: { tabId },
-          // matchAboutBlank: true,
         })
       }
     }
