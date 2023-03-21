@@ -47,7 +47,7 @@ watch(() => isDark.value, (newValue, oldValue) => {
   setAppAppearance()
 })
 
-onUpdated(() => {
+watch(() => language.value, (newValue, oldValue) => {
   setAppLanguage()
 })
 
@@ -55,10 +55,6 @@ onMounted(() => {
   if (/https?:\/\/(www.)?bilibili.com\/video\/.*/.test(location.href))
     isVideoPage.value = true
   setAppAppearance()
-  setAppLanguage()
-  // nextTick(() => {
-  //   setAppLanguage()
-  // })
 })
 
 function changeActivatePage(pageName: AppPage) {
@@ -83,7 +79,6 @@ async function setAppLanguage() {
       language.value = LanguageType.English
     }
   }
-  console.log('hey, im here', language.value)
 
   locale.value = language.value
 }
