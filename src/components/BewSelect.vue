@@ -1,56 +1,51 @@
-<script lang="ts">
-// TODO: refactor to composition api
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 
-// import { useI18n } from 'vue-i18n'
-// const { locale } = useI18n()
+const props = defineProps<{
+  options: OptionType[]
+  modelValue: string
+}>()
+
+const emit = defineEmits(['update:modelValue'])
+
+const { locale } = useI18n()
 
 interface OptionType {
   value: string
   label: string
 }
 
-export default defineComponent({
-  props: {
-    modelValue: String,
-    options: Array as () => OptionType[],
-  },
-  emits: ['update:modelValue'],
-  data() {
-    return {
-      label: '' as string,
-      showOptions: false as boolean,
-    }
-  },
-  // watch: {
-  //   locale(newValue) {
-  //     console.log(newValue)
-  //     this.$forceUpdate()
-  //   },
-  // },
-  created() {
-    if (!this.options)
-      return
-    this.label = `${this.options.find((item: OptionType) => item.value === this.modelValue)?.label}`
-  },
-  methods: {
-    onClickOption(val: { value: string; label: string }) {
-      window.removeEventListener('click', () => {})
-      this.label = val.label
-      this.$emit('update:modelValue', val.value)
-      this.showOptions = false
-    },
-    closeOptions() {
-      this.showOptions = false
-    },
-    /** when you click on it outside, the selection option will be turned off  */
-    onMouseLeave() {
-      window.addEventListener('click', this.closeOptions)
-    },
-    onMouseEnter() {
-      window.removeEventListener('click', this.closeOptions)
-    },
-  },
+const label = ref<string>('')
+const showOptions = ref<boolean>(false)
+
+watch(() => locale.value, (newValue, oldValue) => {
+
 })
+
+onMounted(() => {
+  if (props.options)
+    label.value = `${props.options.find((item: OptionType) => item.value === props.modelValue)?.label}`
+})
+
+function onClickOption(val: { value: string; label: string }) {
+  window.removeEventListener('click', () => {})
+  label.value = val.label
+  emit('update:modelValue', val.value)
+  showOptions.value = false
+}
+
+function closeOptions() {
+  showOptions.value = false
+}
+
+/** when you click on it outside, the selection option will be turned off  */
+function onMouseLeave() {
+  window.addEventListener('click', closeOptions)
+}
+
+function onMouseEnter() {
+  window.removeEventListener('click', closeOptions)
+}
 </script>
 
 <template>
@@ -72,7 +67,7 @@ export default defineComponent({
       @click="showOptions = !showOptions"
     >
       <div
-        text="space-nowrap overflow-ellipsis"
+        truncate
         overflow="hidden"
         m="r-2"
       >

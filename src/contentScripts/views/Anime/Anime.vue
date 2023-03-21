@@ -334,6 +334,8 @@ function getPopularAnimeList() {
                   aspect="12/16"
                   transition="all duration-300"
                   bg="cover center"
+                  relative
+                  z-1
                   :style="{
                     backgroundImage: `url(${removeHttpFromUrl(
                       item.cover,
@@ -350,7 +352,6 @@ function getPopularAnimeList() {
                   transition="all duration-1000"
                   bg="cover center"
                   pos="absolute top-0 left-0"
-                  z--1
                   :style="{
                     backgroundImage: `url(${removeHttpFromUrl(
                       item.hover.img,

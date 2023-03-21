@@ -15,8 +15,8 @@ settings:
   select_language: Language
   select_language_opt:
     english: English
-    Mandarin_CN: Mandarin (Simplified Chinese)
-    Mandarin_TW: Mandarin (Traditional Chinese)
+    mandarin_cn: Mandarin - Simplified Chinese
+    mandarin_tw: Mandarin - Traditional Chinese
     jyut: Cantonese
   authorize_app: Authorize BewlyBewly to use access key
   authorize_app_desc: >

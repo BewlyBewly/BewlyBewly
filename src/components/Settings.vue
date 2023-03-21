@@ -19,11 +19,11 @@ const langs = computed(() => {
     },
     {
       value: 'cmn-CN',
-      label: t('settings.select_language_opt.Mandarin_CN'),
+      label: t('settings.select_language_opt.mandarin_cn'),
     },
     {
       value: 'cmn-TW',
-      label: t('settings.select_language_opt.Mandarin_TW'),
+      label: t('settings.select_language_opt.mandarin_tw'),
     },
     {
       value: 'jyut',

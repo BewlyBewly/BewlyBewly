@@ -37,7 +37,9 @@ const mainApp = ref<HTMLElement>()
 watch(
   () => activatedPage.value,
   (newValue, oldValue) => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    setTimeout(() => {
+      window.scrollTo(0, 0)
+    }, 500)
   },
 )
 

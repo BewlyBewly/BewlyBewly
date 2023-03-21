@@ -15,8 +15,8 @@ settings:
   select_language: 界面语文
   select_language_opt:
     english: 英文
-    Mandarin_CN: 官话
-    Mandarin_TW: 官話
+    mandarin_cn: 官话
+    mandarin_tw: 官話
     jyut: 廣東話
   authorize_app: 授权 BewlyBewly 使用 access key
   authorize_app_desc: |
