@@ -16,10 +16,23 @@ import { AppPage, LanguageType } from '~/enums/appEnums'
 
 const { locale } = useI18n()
 const [showSettings, toggle] = useToggle(false)
-const isDark = useDark()
+const isDark = useDark({
+  // selector: '#bewly',
+  onChanged: (isDark: boolean) => {
+    if (isDark) {
+      document.querySelector('html')?.classList.add('dark')
+      document.querySelector('#bewly')?.classList.add('dark')
+    }
+    else {
+      document.querySelector('html')?.classList.remove('dark')
+      document.querySelector('#bewly')?.classList.remove('dark')
+    }
+  },
+})
 const toggleDark = useToggle(isDark)
 const pages = { Home, Search, Anime, History, Favorites, Video }
 const isVideoPage = ref<boolean>(false)
+const mainApp = ref<HTMLElement>()
 
 watch(
   () => activatedPage.value,
@@ -28,13 +41,20 @@ watch(
   },
 )
 
-onUpdated(() => {
+// Watch for changes in the 'isDark' variable and add the 'dark' class to the 'mainApp' element
+// to prevent some Unocss dark-specific styles from failing to take effect
+watch(() => isDark.value, (newValue, oldValue) => {
+  setAppAppearance()
+})
+
+watch(() => language.value, (newValue, oldValue) => {
   setAppLanguage()
 })
 
 onMounted(() => {
   if (/https?:\/\/(www.)?bilibili.com\/video\/.*/.test(location.href))
     isVideoPage.value = true
+  setAppAppearance()
 })
 
 function changeActivatePage(pageName: AppPage) {
@@ -62,62 +82,75 @@ async function setAppLanguage() {
 
   locale.value = language.value
 }
+
+/**
+ * Watch for changes in the 'isDark' variable and add the 'dark' class to the 'mainApp' element
+ * to prevent some Unocss dark-specific styles from failing to take effect
+ */
+function setAppAppearance() {
+  if (isDark.value)
+    mainApp.value?.classList.add('dark')
+
+  else
+    mainApp.value?.classList.remove('dark')
+}
 </script>
 
 <template>
-  <div m-auto max-w="$bew-page-max-width">
-    <Transition name="topbar">
-      <Topbar
-        v-show="isShowTopbar"
-        :show-search-bar="activatedPage !== AppPage.Search"
-        class="fixed top-0 left-0 z-50"
-      />
-    </Transition>
+  <div ref="mainApp" bg="$bew-bg" text="$bew-text-1" min-h-100vh>
+    <div m-auto max-w="$bew-page-max-width">
+      <Transition name="topbar">
+        <Topbar
+          v-show="isShowTopbar"
+          :show-search-bar="activatedPage !== AppPage.Search"
+          class="fixed top-0 left-0 z-50"
+        />
+      </Transition>
 
-    <div flex="~" max-w="$bew-page-max-width">
-      <aside pos="fixed left-0 top-0" flex="~ col" h-100vh justify-center z-999>
-        <div
-          p-2
-          ml-2
-          bg="$bew-content-1"
-          flex="~ col gap-2 shrink-0"
-          rounded="$bew-radius"
-          shadow="$bew-shadow-2"
-          style="backdrop-filter: var(--bew-filter-glass)"
-        >
-          <button
-            class="tab-item"
-            :class="{ active: activatedPage === AppPage.Search && !isVideoPage }"
-            @click="changeActivatePage(AppPage.Search)"
+      <div flex="~" max-w="$bew-page-max-width">
+        <aside pos="fixed left-0 top-0" flex="~ col" h-100vh justify-center z-999>
+          <div
+            p-2
+            ml-2
+            bg="$bew-content-1"
+            flex="~ col gap-2 shrink-0"
+            rounded="$bew-radius"
+            shadow="$bew-shadow-2"
+            style="backdrop-filter: var(--bew-filter-glass)"
           >
-            <tabler:search />
-          </button>
+            <button
+              class="tab-item"
+              :class="{ active: activatedPage === AppPage.Search && !isVideoPage }"
+              @click="changeActivatePage(AppPage.Search)"
+            >
+              <tabler:search />
+            </button>
 
-          <button
-            class="tab-item"
-            :class="{ active: activatedPage === AppPage.Home && !isVideoPage }"
-            @click="changeActivatePage(AppPage.Home)"
-          >
-            <tabler:home />
-          </button>
+            <button
+              class="tab-item"
+              :class="{ active: activatedPage === AppPage.Home && !isVideoPage }"
+              @click="changeActivatePage(AppPage.Home)"
+            >
+              <tabler:home />
+            </button>
 
-          <button
-            class="tab-item"
-            :class="{ active: activatedPage === AppPage.Anime && !isVideoPage }"
-            @click="changeActivatePage(AppPage.Anime)"
-          >
-            <tabler:device-tv />
-          </button>
+            <button
+              class="tab-item"
+              :class="{ active: activatedPage === AppPage.Anime && !isVideoPage }"
+              @click="changeActivatePage(AppPage.Anime)"
+            >
+              <tabler:device-tv />
+            </button>
 
-          <button
-            class="tab-item"
-            :class="{ active: activatedPage === AppPage.History && !isVideoPage }"
-            @click="changeActivatePage(AppPage.History)"
-          >
-            <tabler:clock />
-          </button>
+            <button
+              class="tab-item"
+              :class="{ active: activatedPage === AppPage.History && !isVideoPage }"
+              @click="changeActivatePage(AppPage.History)"
+            >
+              <tabler:clock />
+            </button>
 
-          <!-- <button
+            <!-- <button
             class="tab-item"
             :class="{ active: activatedPage === AppPage.Favorites }"
             @click="changeActivatePage(AppPage.Favorites)"
@@ -125,42 +158,43 @@ async function setAppLanguage() {
             <tabler:star />
           </button> -->
 
-          <template v-if="isVideoPage">
+            <template v-if="isVideoPage">
+              <!-- dividing line -->
+              <div my-2 w-full h-2px bg="$bew-fill-2" />
+
+              <!-- video page -->
+              <button class="tab-item video active">
+                <tabler:player-play />
+              </button>
+            </template>
+
             <!-- dividing line -->
             <div my-2 w-full h-2px bg="$bew-fill-2" />
 
-            <!-- video page -->
-            <button class="tab-item video active">
-              <tabler:player-play />
+            <button class="tab-item" @click="toggleDark()">
+              <tabler:moon-stars v-if="isDark" />
+              <tabler:sun v-else />
             </button>
-          </template>
 
-          <!-- dividing line -->
-          <div my-2 w-full h-2px bg="$bew-fill-2" />
+            <button class="tab-item" @click="toggle()">
+              <tabler:settings />
+            </button>
+          </div>
+        </aside>
 
-          <button class="tab-item" @click="toggleDark()">
-            <tabler:moon-stars v-if="isDark" />
-            <tabler:sun v-else />
-          </button>
-
-          <button class="tab-item" @click="toggle()">
-            <tabler:settings />
-          </button>
-        </div>
-      </aside>
-
-      <main
-        p="t-80px" m-auto
-        :w="isVideoPage ? '[calc(100%-160px)]' : 'lg:85% md:[calc(90%-60px)] [calc(100%-120px)]'"
-      >
-        <Transition name="fade">
-          <Component :is="pages[activatedPage]" v-if="!isVideoPage" />
-          <Video v-else />
-        </Transition>
-      </main>
+        <main
+          p="t-80px" m-auto
+          :w="isVideoPage ? '[calc(100%-160px)]' : 'lg:85% md:[calc(90%-60px)] [calc(100%-120px)]'"
+        >
+          <Transition name="fade">
+            <Component :is="pages[activatedPage]" v-if="!isVideoPage" />
+            <Video v-else />
+          </Transition>
+        </main>
+      </div>
+      <!-- settings dialog -->
+      <Settings v-if="showSettings" @close="showSettings = false" />
     </div>
-    <!-- settings dialog -->
-    <Settings v-if="showSettings" @close="showSettings = false" />
   </div>
 </template>
 

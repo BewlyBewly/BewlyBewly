@@ -1,4 +1,4 @@
-:root {
+:host, :root {
   --bew-radius: 12px;
   --bew-radius-half: calc(var(--bew-radius) / 2);
 
@@ -100,7 +100,7 @@
   --bew-page-max-width: 2000px;
 }
 
-:root.dark {
+:host(.dark), :root.dark {
   // dark mode
   --bew-logo-color: var(--bew-text-1);
 
@@ -121,4 +121,17 @@
   --bew-fill-2: rgb(120 120 128 / 26%);
   --bew-fill-3: rgb(120 120 128 / 36%);
   --bew-fill-4: rgb(120 120 128 / 46%);
+}
+
+:root {
+  --band_blue: var(--bew-theme-color);
+  --text1: var(--bew-text-1);
+  --text2: var(--bew-text-2);
+  --text3: var(--bew-text-3);
+  --bg1: var(--bew-content-1);
+  --bg2: var(--bew-content-1);
+  --bg3: var(--bew-content-1);
+  --line-light: var(--bew-fill-2);
+  --line_regular: var(--bew-fill-3);
+  --line_bold: var(--bew-fill-4);
 }

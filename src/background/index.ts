@@ -1,6 +1,7 @@
 import type { Tabs } from 'webextension-polyfill'
 import browser from 'webextension-polyfill'
 import { onMessage, sendMessage } from 'webext-bridge'
+import { resetCss } from './resetWebsiteStyle'
 import { setupAllAPIs } from './apis'
 
 browser.runtime.onInstalled.addListener((): void => {
@@ -54,20 +55,25 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
     || /https?:\/\/www.bilibili.com\/?$/.test(`${tab.url}`)
     || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(`${tab.url}`)
     || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(`${tab.url}`)
-    || /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(`${tab.url}`)
+    // || /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(`${tab.url}`)
   ) {
-    if (changInfo.status === 'loading') {
-      const css = `
-      body {
-        opacity: 0;
-        transition: opacity 0.5s;
-        overflow-y: hidden;
-        pointer-events: none;
-      }
-      `
+    browser.scripting.insertCSS({
+      css: resetCss,
+      target: {
+        tabId,
+      },
+    })
 
+    if (changInfo.status === 'loading') {
       browser.scripting.insertCSS({
-        css,
+        css: `
+        body {
+            opacity: 0;
+            transition: opacity 0.5s;
+            overflow-y: hidden;
+            pointer-events: none;
+        }
+        `,
         target: {
           tabId,
         },
@@ -91,7 +97,7 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
             }
 
             ::-webkit-scrollbar-thumb {
-              background-color: var(--bew-fill-3);
+              background-color: rgba(120, 120, 122, .5);
               border-radius: 20px;
             }
 
@@ -99,9 +105,7 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
               background: var(--bew-bg)
             }
           `,
-          // runAt: 'document_start',
           target: { tabId },
-          // matchAboutBlank: true,
         })
       }
     }

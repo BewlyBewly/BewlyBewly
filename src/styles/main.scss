@@ -3,24 +3,24 @@
 }
 
 html, body {
-  font-size: 14px;
+  font-size: 14px!important;
 }
 
-html,
-body,
-#app {
-  margin: 0;
-  padding: 0;
-}
+// html,
+// body,
+// #app {
+//   margin: 0;
+//   padding: 0;
+// }
 
-html {
-  filter: none !important;
-}
+// html {
+//   filter: none !important;
+// }
 
-body {
-  background: var(--bew-bg) !important;
-  color: var(--bew-text-1);
-}
+// body {
+//   background: var(--bew-bg) !important;
+//   color: var(--bew-text-1);
+// }
 
 .keep-two-lines {
   overflow: hidden;
