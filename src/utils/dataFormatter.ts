@@ -1,11 +1,11 @@
-import { language } from '~/logic'
+import { settings } from '~/logic'
 import { i18n } from '~/utils/i18n'
 export const { t } = i18n.global
 
 export const numFormatter = (num: number) => {
   const digits = 1 // specify number of digits after decimal
   let lookup
-  if (language.value === 'en') {
+  if (settings.value.language === 'en') {
     lookup = [
       { value: 1, symbol: '' },
       { value: 1e3, symbol: 'K' },
@@ -13,7 +13,7 @@ export const numFormatter = (num: number) => {
       { value: 1e9, symbol: 'B' },
     ]
   }
-  else if (language.value === 'cmn-CN') {
+  else if (settings.value.language === 'cmn-CN') {
     lookup = [
       { value: 1, symbol: ' ' },
       { value: 1e4, symbol: ' 万' },

@@ -9,8 +9,7 @@ import Anime from './Anime/Anime.vue'
 import History from './History/History.vue'
 import Favorites from './Favorites/Favorites.vue'
 import Video from './Video/Video.vue'
-import { activatedPage, isShowTopbar } from '~/logic/storage'
-import { language } from '~/logic'
+import { activatedPage, settings } from '~/logic'
 import '~/styles/index.ts'
 import { AppPage, LanguageType } from '~/enums/appEnums'
 
@@ -49,7 +48,7 @@ watch(() => isDark.value, (newValue, oldValue) => {
   setAppAppearance()
 })
 
-watch(() => language.value, (newValue, oldValue) => {
+watch(() => settings.value.language, (newValue, oldValue) => {
   setAppLanguage()
 })
 
@@ -65,24 +64,24 @@ function changeActivatePage(pageName: AppPage) {
 
 async function setAppLanguage() {
   // if there is first-time load extension, set the default language by browser display language
-  if (!language.value) {
+  if (!settings.value.language) {
     if (browser.i18n.getUILanguage() === 'zh-CN') {
-      language.value = LanguageType.Mandarin_CN
+      settings.value.language = LanguageType.Mandarin_CN
     }
     else if (browser.i18n.getUILanguage() === 'zh-TW') {
       // Since getUILanguage() cannot get the zh-HK language code
       // use getAcceptLanguages() to get the language code
       const languages: string[] = await browser.i18n.getAcceptLanguages()
       if (languages.includes('zh-HK'))
-        language.value = LanguageType.Cantonese
-      else language.value = LanguageType.Mandarin_TW
+        settings.value.language = LanguageType.Cantonese
+      else settings.value.language = LanguageType.Mandarin_TW
     }
     else {
-      language.value = LanguageType.English
+      settings.value.language = LanguageType.English
     }
   }
 
-  locale.value = language.value
+  locale.value = settings.value.language
 }
 
 /**
@@ -103,17 +102,26 @@ function setAppAppearance() {
     <div m-auto max-w="$bew-page-max-width">
       <Transition name="topbar">
         <Topbar
-          v-show="isShowTopbar"
+          v-show="settings.isShowTopbar"
           :show-search-bar="activatedPage !== AppPage.Search"
           class="fixed top-0 left-0 z-50"
         />
       </Transition>
 
       <div flex="~" max-w="$bew-page-max-width">
-        <aside pos="fixed left-0 top-0" flex="~ col" h-100vh justify-center z-999>
+        <aside
+          class="dock-wrap"
+          :class="{
+            left: settings.dockPosition === 'left',
+            right: settings.dockPosition === 'right',
+            bottom: settings.dockPosition === 'bottom',
+          }"
+          pos="fixed top-0" flex="~ col" h-100vh justify-center z-999
+        >
           <div
+            class="dock-content"
             p-2
-            ml-2
+            m-2
             bg="$bew-content-1"
             flex="~ col gap-2 shrink-0"
             rounded="$bew-radius"
@@ -219,6 +227,24 @@ function setAppAppearance() {
 .fade-enter-from,
 .fade-leave-to {
   --at-apply: opacity-0;
+}
+
+.dock-wrap {
+  &.left {
+    --at-apply: left-0;
+  }
+
+  &.right {
+    --at-apply: right-0;
+  }
+
+  &.bottom{
+    --at-apply: top-unset bottom-0 items-center w-full h-[fit-content];
+
+    .dock-content {
+      --at-apply: flex-row;
+    }
+  }
 }
 
 .tab-item {

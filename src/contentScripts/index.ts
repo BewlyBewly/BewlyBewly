@@ -51,14 +51,15 @@ import { SVG_ICONS, getCookie, i18n, setCookie } from '~/utils'
     styleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
     shadowDOM.appendChild(styleEl)
     shadowDOM.appendChild(root)
-    document.body.appendChild(container)
-    const app = createApp(App)
-    setupApp(app)
-    app.use(i18n).mount(root)
 
     // inject svg icons
     const svgDiv = document.createElement('div')
     svgDiv.innerHTML = SVG_ICONS
-    document.body.appendChild(svgDiv)
+    shadowDOM.appendChild(svgDiv)
+
+    document.body.appendChild(container)
+    const app = createApp(App)
+    setupApp(app)
+    app.use(i18n).mount(root)
   }
 })()

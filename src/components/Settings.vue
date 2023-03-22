@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import type { Ref } from 'vue'
-import { grantAccessKey, revokeAccessKey } from '~/utils/index'
-import { accessKey, isShowTopbar, language } from '~/logic'
+// import { grantAccessKey, revokeAccessKey } from '~/utils/index'
+import { accessKey, settings } from '~/logic'
 
 const emit = defineEmits(['close'])
 
 const { t, locale } = useI18n()
 
-const authorizeBtn = ref<HTMLButtonElement>() as Ref<HTMLButtonElement>
+// const authorizeBtn = ref<HTMLButtonElement>() as Ref<HTMLButtonElement>
 const langsSelect = ref<HTMLElement>() as Ref<HTMLElement>
 
 const langs = computed(() => {
@@ -31,8 +31,24 @@ const langs = computed(() => {
     },
   ]
 })
+const dockPositions = computed(() => {
+  return [
+    {
+      value: 'left',
+      label: 'Left',
+    },
+    {
+      value: 'right',
+      label: 'Right',
+    },
+    {
+      value: 'bottom',
+      label: 'Bottom',
+    },
+  ]
+})
 
-watch(() => language.value, (newValue, oldValue) => {
+watch(() => settings.value.language, (newValue, oldValue) => {
   locale.value = newValue
 })
 
@@ -40,13 +56,13 @@ function close() {
   emit('close')
 }
 
-function onAuthorize() {
-  grantAccessKey(authorizeBtn.value)
-}
+// function onAuthorize() {
+//   grantAccessKey(authorizeBtn.value)
+// }
 
-function onRevoke() {
-  revokeAccessKey()
-}
+// function onRevoke() {
+//   revokeAccessKey()
+// }
 </script>
 
 <template>
@@ -77,9 +93,9 @@ function onRevoke() {
         {{ $t('settings.select_language') }}
       </div>
 
-      <bew-select
+      <Select
         ref="langsSelect"
-        v-model="language"
+        v-model="settings.language"
         :options="langs"
         w="full"
       />
@@ -112,10 +128,25 @@ function onRevoke() {
       </div>
       <div>
         <label for="topbarVisiable" class="chk-btn" cursor="pointer" pointer="auto">
-          <template v-if="isShowTopbar">{{ $t('settings.chk_box.show') }}</template>
+          <template v-if="settings.isShowTopbar">{{ $t('settings.chk_box.show') }}</template>
           <template v-else>{{ $t('settings.chk_box.hidden') }}</template>
-          <input id="topbarVisiable" v-model="isShowTopbar" type="checkbox">
+          <input id="topbarVisiable" v-model="settings.isShowTopbar" type="checkbox">
         </label>
+      </div>
+    </div>
+
+    <div class="settings-item">
+      <div>
+        Dock position
+        <br>
+        <span class="desc">Position on screen</span>
+      </div>
+      <div>
+        <Select
+          v-model="settings.dockPosition"
+          :options="dockPositions"
+          w="full"
+        />
       </div>
     </div>
   </div>

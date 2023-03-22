@@ -5,9 +5,7 @@ import { onMounted, reactive, ref, watch } from 'vue'
 import { isNewArticle, isNewVideo, setLastestOffsetID } from './notify'
 import { MomentType } from './types'
 import type { MomentItem } from './types'
-import { language } from '~/logic'
 import { calcTimeSince, getUserID } from '~/utils'
-import { LanguageType } from '~/enums/appEnums'
 const { t } = useI18n()
 
 const moments = reactive<Array<MomentItem>>([]) as UnwrapNestedRefs<
