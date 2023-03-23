@@ -21,18 +21,24 @@ settings:
   authorize_app: 授权 BewlyBewly 使用 access key
   authorize_app_desc: |
     授权使用后能在首页推送我可能有兴趣观看的视频 (授权 key 有效期约为一个月，之后如果你发现首页推荐的视频不是你所感兴趣的，请尝试重新授权)
-  topbar_visiable: 顶栏可见性
-  topbar_visiable_desc: 用于兼容 Bilibili Evolved 自定义顶栏
+  topbar_visible: 顶栏可见性
+  topbar_visible_desc: 用于兼容 Bilibili Evolved 自定义顶栏
   btn:
     authorize: 授权
     revoke: 取消授权
   chk_box:
     show: 显示
     hidden: 隐藏
+  dock_position: Dock 栏位置
+  dock_position_desc: 在屏幕中摆放位置
+  dock_position_opt:
+    left: 左侧
+    right: 右侧
+    bottom: 底部
 auth:
   err_tip: Failed to grant Access Key
   plz_login_first: Please login to bilibili first
-  receive_vertified_url_err: Unable to receive verified URL. Please go back and try againe.
+  receive_verified_url_err: Unable to receive verified URL. Please go back and try againe.
   failed_to_get_accesskey: Failed to get Access Key
 topbar:
   sign_in: 登录

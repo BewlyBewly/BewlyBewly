@@ -21,14 +21,20 @@ settings:
   authorize_app: 授權 BewlyBewly 使用 access key
   authorize_app_desc: |
     授權使用後能在首頁推送我可能有興趣觀看的影片 (授權 key 有效期約為一個月，之後如果你發現首頁推薦的影片不是你所感興趣的，請嘗試重新授權)
-  topbar_visiable: 頂欄可視性
-  topbar_visiable_desc: 用於相容 Bilibili Evolved 的客製化頂欄
+  topbar_visible: 頂欄可視性
+  topbar_visible_desc: 用於相容 Bilibili Evolved 的客製化頂欄
   btn:
     authorize: 授權
     revoke: 解除授權
   chk_box:
     show: 顯示
     hidden: 隱藏
+  dock_position: Dock 位置
+  dock_position_desc: 螢幕上的位置
+  dock_position_opt:
+    left: 左側
+    right: 右側
+    bottom: 底部
 topbar:
   sign_in: 登入
   notifications: 通知

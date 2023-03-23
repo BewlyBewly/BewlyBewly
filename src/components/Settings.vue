@@ -34,16 +34,16 @@ const langs = computed(() => {
 const dockPositions = computed(() => {
   return [
     {
+      label: t('settings.dock_position_opt.left'),
       value: 'left',
-      label: 'Left',
     },
     {
+      label: t('settings.dock_position_opt.right'),
       value: 'right',
-      label: 'Right',
     },
     {
+      label: t('settings.dock_position_opt.bottom'),
       value: 'bottom',
-      label: 'Bottom',
     },
   ]
 })
@@ -122,9 +122,9 @@ function close() {
 
     <div class="settings-item">
       <div>
-        {{ $t('settings.topbar_visiable') }}
+        {{ $t('settings.topbar_visible') }}
         <br>
-        <span class="desc">{{ $t('settings.topbar_visiable_desc') }}</span>
+        <span class="desc">{{ $t('settings.topbar_visible_desc') }}</span>
       </div>
       <div>
         <label for="topbarVisiable" class="chk-btn" cursor="pointer" pointer="auto">
@@ -137,9 +137,9 @@ function close() {
 
     <div class="settings-item">
       <div>
-        Dock position
+        {{ $t('settings.dock_position') }}
         <br>
-        <span class="desc">Position on screen</span>
+        <span class="desc">{{ $t('settings.dock_position_desc') }}</span>
       </div>
       <div>
         <Select

@@ -24,18 +24,24 @@ settings:
     authentication. This access key will be valid for about one month, after
     which if you notice you are not interested in these recommended videos,
     please try to re-authorize.
-  topbar_visiable: Topbar visiable
-  topbar_visiable_desc: Compatible with Bilibili Evolved customize topbar
+  topbar_visible: Topbar visible
+  topbar_visible_desc: Compatible with Bilibili Evolved customize topbar
   btn:
     authorize: Authorize
     revoke: Revoke
   chk_box:
     show: Show
     hidden: Hidden
+  dock_position: Dock position
+  dock_position_desc: Position on screen
+  dock_position_opt:
+    left: Left
+    right: Right
+    bottom: Bottom
 auth:
   err_tip: Failed to grant Access Key
   plz_login_first: Please login to bilibili first
-  receive_vertified_url_err: Unable to receive verified URL. Please go back and try againe.
+  receive_verified_url_err: Unable to receive verified URL. Please go back and try again.
   failed_to_get_accesskey: Failed to get Access Key
 topbar:
   sign_in: Sign in
