@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import { getCurrentInstance } from 'vue'
 
 const props = defineProps<{
   options: OptionType[]
@@ -19,7 +20,9 @@ const label = ref<string>('')
 const showOptions = ref<boolean>(false)
 
 watch(() => locale.value, (newValue, oldValue) => {
+  // console.log('locale change')
 
+  getCurrentInstance()?.proxy?.$forceUpdate()
 })
 
 onMounted(() => {
@@ -70,9 +73,8 @@ function onMouseEnter() {
         truncate
         overflow="hidden"
         m="r-2"
-      >
-        {{ label }}
-      </div>
+        v-text="label"
+      />
 
       <!-- arrow -->
       <div
@@ -80,7 +82,7 @@ function onMouseEnter() {
         p="3px"
         m="l-2"
         display="inline-block"
-        transform="~ rotate-45 -translate-y-1/4"
+        :transform="`~ ${!showOptions ? 'rotate-45 -translate-y-1/4' : 'rotate-225 translate-y-1/4'} `"
         transition="all duration-300"
       />
     </div>
