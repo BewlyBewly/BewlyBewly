@@ -54,7 +54,8 @@ const handleClick = (evt: MouseEvent) => {
 
   --at-apply: bg-$b-color hover:bg-$b-color-hover
     rounded-$b-radius p-$b-padding transform-gpu active:scale-95
-    duration-300 flex items-center gap-2 text-size-$b-font-size;
+    duration-300 flex items-center gap-2 text-size-$b-font-size
+    text-$b-text-color;
 
     & svg {
       --at-apply: text-size-$b-icon-size
@@ -67,6 +68,12 @@ const handleClick = (evt: MouseEvent) => {
     }
 
   &--type-default {
+  }
+
+  &--type-primary {
+    --b-color: var(--bew-theme-color);
+    --b-color-hover: var(--bew-theme-color);
+    --b-text-color: white;
   }
 
   &--size-small {

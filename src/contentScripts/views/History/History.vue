@@ -234,10 +234,14 @@ function handleTurnOnWatchHistory() {
   if (result)
     setHistoryPauseStatus(false)
 }
+
+function jumpToLoginPage() {
+  location.href = 'https://passport.bilibili.com/login'
+}
 </script>
 
 <template>
-  <div flex="~ col md:row lg:row" gap-4>
+  <div v-if="getCSRF()" flex="~ col md:row lg:row" gap-4>
     <main w="full md:60% lg:70% xl:75%" order="2 md:1 lg:1" mb-6>
       <h3 text="3xl $bew-text-1" font-bold mb-6>
         {{ $t('history.title') }}
@@ -516,6 +520,11 @@ function handleTurnOnWatchHistory() {
       </div>
     </aside>
   </div>
+  <Empty v-else mt-6 description="Please login first">
+    <Button type="primary" @click="jumpToLoginPage()">
+      Login
+    </Button>
+  </Empty>
 </template>
 
 <style lang="scss" scoped>

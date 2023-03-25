@@ -53,6 +53,7 @@ function getAnimeWatchList() {
       if (code === 0)
         Object.assign(animeWatchList, list as AnimeItem[])
     })
+    .catch(() => Object.assign(animeWatchList, []))
     .finally(() => {
       isLoading.value = false
     })
@@ -77,7 +78,7 @@ function getRecommendAnimeList() {
 
         coursor.value = coursor
       }
-    })
+    }).catch(() => coursor.value = 29)
     .finally(() => {
       isLoading.value = false
     })
@@ -107,7 +108,7 @@ function getPopularAnimeList() {
       </section> -->
 
       <!-- Your Watchlist -->
-      <section mb-8>
+      <section v-if="getUserID()" mb-8>
         <div flex justify-between items-end mb-6>
           <h3 text="3xl $bew-text-1" font="bold">
             {{ $t('anime.your_watch_list') }}

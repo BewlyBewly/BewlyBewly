@@ -153,6 +153,7 @@ function getNewMomentsCount() {
     .then((res) => {
       newMomentsCount.value = res.data.update_info.item.count
     })
+    .catch(() => newMomentsCount.value = 0)
 }
 </script>
 
