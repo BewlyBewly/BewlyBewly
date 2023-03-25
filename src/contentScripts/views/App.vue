@@ -128,67 +128,67 @@ function setAppAppearance() {
             shadow="$bew-shadow-2"
             style="backdrop-filter: var(--bew-filter-glass)"
           >
-            <button
-              class="tab-item"
+            <div
+              class="dock-item"
               :class="{ active: activatedPage === AppPage.Search && !isVideoPage }"
               @click="changeActivatePage(AppPage.Search)"
             >
               <tabler:search />
-            </button>
+            </div>
 
-            <button
-              class="tab-item"
+            <div
+              class="dock-item"
               :class="{ active: activatedPage === AppPage.Home && !isVideoPage }"
               @click="changeActivatePage(AppPage.Home)"
             >
               <tabler:home />
-            </button>
+            </div>
 
-            <button
-              class="tab-item"
+            <div
+              class="dock-item"
               :class="{ active: activatedPage === AppPage.Anime && !isVideoPage }"
               @click="changeActivatePage(AppPage.Anime)"
             >
               <tabler:device-tv />
-            </button>
+            </div>
 
-            <button
-              class="tab-item"
+            <div
+              class="dock-item"
               :class="{ active: activatedPage === AppPage.History && !isVideoPage }"
               @click="changeActivatePage(AppPage.History)"
             >
               <tabler:clock />
-            </button>
+            </div>
 
-            <!-- <button
-            class="tab-item"
+            <!-- <div
+            class="dock-item"
             :class="{ active: activatedPage === AppPage.Favorites }"
             @click="changeActivatePage(AppPage.Favorites)"
           >
             <tabler:star />
-          </button> -->
+          </div> -->
 
             <template v-if="isVideoPage">
               <!-- dividing line -->
-              <div my-2 w-full h-2px bg="$bew-fill-2" />
+              <div class="divider" />
 
               <!-- video page -->
-              <button class="tab-item video active">
+              <div class="dock-item video active">
                 <tabler:player-play />
-              </button>
+              </div>
             </template>
 
             <!-- dividing line -->
-            <div my-2 w-full h-2px bg="$bew-fill-2" />
+            <div class="divider" />
 
-            <button class="tab-item" @click="toggleDark()">
+            <div class="dock-item" @click="toggleDark()">
               <tabler:moon-stars v-if="isDark" />
               <tabler:sun v-else />
-            </button>
+            </div>
 
-            <button class="tab-item" @click="toggle()">
+            <div class="dock-item" @click="toggle()">
               <tabler:settings />
-            </button>
+            </div>
           </div>
         </aside>
 
@@ -238,47 +238,55 @@ function setAppAppearance() {
     --at-apply: right-0;
   }
 
-  &.bottom{
+  &.bottom {
     --at-apply: top-unset bottom-0 items-center w-full h-[fit-content];
 
     .dock-content {
       --at-apply: flex-row;
     }
   }
-}
 
-.tab-item {
-  --shadow: 0 0 30px 4px var(--bew-theme-color-50);
-  --shadow-dark: 0 0 30px 4px rgba(255, 255, 255, 0.6);
-  --shadow-active: 0 0 20px var(--bew-theme-color-50);
-  --shadow-dark-active: 0 0 20px rgba(255, 255, 255, 0.6);
-
-  --at-apply: transform active:scale-90
-    md:w-45px w-35px
-    md:p-3 p-2
-    md:text-2xl text-xl
-    aspect-square
-    text-$bew-text-1 leading-0 duration-300
-    rounded-$bew-radius
-    bg-$bew-fill-1
-    hover:bg-$bew-theme-color hover:text-white hover:shadow-$shadow
-    active:shadow-$shadow-active dark-active:shadow-$shadow-dark-active
-    dark-hover:bg-white dark-hover:text-black dark-hover:shadow-$shadow-dark;
-
-  &.active {
-    --at-apply: bg-$bew-theme-color dark-bg-white
-      text-white dark-text-black
-      shadow-$shadow dark:shadow-$shadow-dark
-      active:shadow-$shadow-active dark-active:shadow-$shadow-dark-active;
+  .divider {
+    --at-apply: my-2 w-full h-2px bg-$bew-fill-3;
   }
 
-  &.active.video {
-    --shadow: 0 0 30px 4px var(--bew-warning-color-50);
-    --shadow-dark: var(--shadow);
-    --shadow-active: 0 0 20px var(--bew-warning-color-50);
-    --shadow-dark-active: var(--shadow-active);
+  &.bottom .divider {
+    --at-apply: w-2px h-auto my-0 mx-2;
+  }
 
-    --at-apply: bg-$bew-warning-color text-black;
+  .dock-item {
+    --shadow: 0 0 30px 4px var(--bew-theme-color-50);
+    --shadow-dark: 0 0 30px 4px rgba(255, 255, 255, 0.6);
+    --shadow-active: 0 0 20px var(--bew-theme-color-50);
+    --shadow-dark-active: 0 0 20px rgba(255, 255, 255, 0.6);
+
+    --at-apply: transform active:scale-90
+      md:w-45px w-35px
+      md:p-3 p-2
+      md:text-2xl text-xl
+      aspect-square
+      text-$bew-text-1 leading-0 duration-300
+      rounded-$bew-radius
+      bg-$bew-fill-2 cursor-pointer
+      hover:bg-$bew-theme-color hover:text-white hover:shadow-$shadow
+      active:shadow-$shadow-active dark-active:shadow-$shadow-dark-active
+      dark-hover:bg-white dark-hover:text-black dark-hover:shadow-$shadow-dark;
+
+    &.active {
+      --at-apply: bg-$bew-theme-color dark-bg-white
+        text-white dark-text-black
+        shadow-$shadow dark:shadow-$shadow-dark
+        active:shadow-$shadow-active dark-active:shadow-$shadow-dark-active;
+    }
+
+    &.active.video {
+      --shadow: 0 0 30px 4px var(--bew-warning-color-50);
+      --shadow-dark: var(--shadow);
+      --shadow-active: 0 0 20px var(--bew-warning-color-50);
+      --shadow-dark-active: var(--shadow-active);
+
+      --at-apply: bg-$bew-warning-color text-black;
+    }
   }
 }
 </style>
