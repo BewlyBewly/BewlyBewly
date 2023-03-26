@@ -311,11 +311,16 @@ function gotoChannel(mid: number) {
             {{ videoData.owner.name }}
           </div>
           <div class="video-info" text="base $bew-text-2">
+            <!-- <uil:play-circle inline /> -->
             {{
               $t('common.view', { count: numFormatter(videoData.stat.view) })
             }}
             <span class="text-xs font-light">•</span>
-            {{ calcTimeSince(videoData.pubdate * 1000) }}
+            <!-- <uil:list-ui-alt inline /> -->
+            {{ $t('common.danmaku', { count: numFormatter(videoData.stat.danmaku) }) }}
+            <!-- <span class="text-xs font-light">•</span> -->
+            <br>
+            <span text="$bew-text-3 sm" inline-block mt-2 p="x-2 y-1" bg="$bew-fill-1" rounded-4>{{ calcTimeSince(videoData.pubdate * 1000) }}</span>
           </div>
         </div>
       </div>
