@@ -520,9 +520,9 @@ function jumpToLoginPage() {
       </div>
     </aside>
   </div>
-  <Empty v-else mt-6 description="Please login first">
+  <Empty v-else mt-6 :description="t('common.please_log_in_first')">
     <Button type="primary" @click="jumpToLoginPage()">
-      Login
+      {{ $t('common.login') }}
     </Button>
   </Empty>
 </template>

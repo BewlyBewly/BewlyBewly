@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import type { Ref } from 'vue'
-// import { grantAccessKey, revokeAccessKey } from '~/utils/index'
+import { grantAccessKey, revokeAccessKey } from '~/utils/index'
 import { accessKey, settings } from '~/logic'
 
 const emit = defineEmits(['close'])
 
 const { t, locale } = useI18n()
 
-// const authorizeBtn = ref<HTMLButtonElement>() as Ref<HTMLButtonElement>
+const authorizeBtn = ref<HTMLButtonElement>() as Ref<HTMLButtonElement>
 const langsSelect = ref<HTMLElement>() as Ref<HTMLElement>
 
 const langs = computed(() => {
@@ -56,13 +56,13 @@ function close() {
   emit('close')
 }
 
-// function onAuthorize() {
-//   grantAccessKey(authorizeBtn.value)
-// }
+function onAuthorize() {
+  grantAccessKey(authorizeBtn.value)
+}
 
-// function onRevoke() {
-//   revokeAccessKey()
-// }
+function onRevoke() {
+  revokeAccessKey()
+}
 </script>
 
 <template>
@@ -101,7 +101,7 @@ function close() {
       />
     </div>
 
-    <!-- <div class="settings-item">
+    <div class="settings-item" important-hidden>
       <div>
         {{ $t('settings.authorize_app') }}
         <br>
@@ -118,7 +118,7 @@ function close() {
       <button v-else class="line-btn" @click="onRevoke">
         <span>{{ $t('settings.btn.revoke') }}</span>
       </button>
-    </div> -->
+    </div>
 
     <div class="settings-item">
       <div>

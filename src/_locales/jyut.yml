@@ -10,6 +10,8 @@ common:
   hour: 個鐘頭前
   minute: 分鐘前
   second: 秒前
+  please_log_in_first: 唔該登入先
+  login: 登入
 settings:
   title: 校做
   select_language: 介面語文
@@ -38,7 +40,7 @@ settings:
 auth:
   err_tip: Failed to grant Access Key
   plz_login_first: Please login to bilibili first
-  receive_verified_url_err: Unable to receive verified URL. Please go back and try againe.
+  receive_verified_url_err: Unable to receive verified URL. Please go back and try again.
   failed_to_get_accesskey: Failed to get Access Key
 topbar:
   sign_in: 登入

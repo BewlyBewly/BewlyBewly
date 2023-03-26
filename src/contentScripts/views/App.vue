@@ -56,6 +56,7 @@ onMounted(() => {
   if (/https?:\/\/(www.)?bilibili.com\/video\/.*/.test(location.href))
     isVideoPage.value = true
   setAppAppearance()
+  setAppLanguage()
 })
 
 function changeActivatePage(pageName: AppPage) {
@@ -195,9 +196,10 @@ function setAppAppearance() {
         <main
           p="t-80px" m-auto
           :w="isVideoPage ? '[calc(100%-160px)]' : 'lg:85% md:[calc(90%-60px)] [calc(100%-120px)]'"
+          relative
         >
           <Transition name="fade">
-            <Component :is="pages[activatedPage]" v-if="!isVideoPage" />
+            <Component :is="pages[activatedPage]" v-if="!isVideoPage" absolute w-full />
             <Video v-else />
           </Transition>
         </main>

@@ -6,6 +6,7 @@ import type { Video } from '~/components/VideoCard/types'
 
 const videoList = reactive<Video[]>([])
 const isLoading = ref<boolean>(false)
+const needToLoginFirst = ref<boolean>(false)
 let refreshIdx = 1
 
 onMounted(() => {
@@ -50,6 +51,9 @@ async function getRecommendVideos() {
         Object.assign(videoList, videoList.concat(resData))
       }
     }
+    else if (response.code === 62011) {
+      needToLoginFirst.value = true
+    }
   }
   finally {
     isLoading.value = false
@@ -61,10 +65,20 @@ function onEnter(el: Element, done: () => void) {
   element.style.transitionDelay = '0.1s'
   done()
 }
+
+function jumpToLoginPage() {
+  location.href = 'https://passport.bilibili.com/login'
+}
 </script>
 
 <template>
+  <Empty v-if="needToLoginFirst" mt-6 :description="$t('common.please_log_in_first')">
+    <Button type="primary" @click="jumpToLoginPage()">
+      {{ $t('common.login') }}
+    </Button>
+  </Empty>
   <div
+    v-else
     m="b-0 t-0"
     grid="~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-4"
   >
@@ -77,7 +91,7 @@ function onEnter(el: Element, done: () => void) {
     </TransitionGroup>
   </div>
 
-  <loading v-if="isLoading" />
+  <Loading v-if="isLoading" />
 </template>
 
 <style lang="scss" scoped>

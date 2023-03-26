@@ -10,6 +10,8 @@ common:
   hour: hour ago | hours ago
   minute: minute ago | minutes ago
   second: second ago | seconds ago
+  please_log_in_first: Please log in first
+  login: Login
 settings:
   title: Settings
   select_language: Language

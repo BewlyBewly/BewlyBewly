@@ -1,16 +1,25 @@
 <script lang="ts" setup>
 import type { Video } from './types'
-import { accessKey, language } from '~/logic/index'
+// import { accessKey, language } from '~/logic/index'
 import {
   calcCurrentTime,
   calcTimeSince,
   numFormatter,
   removeHttpFromUrl,
 } from '~/utils'
-import { LanguageType } from '~/enums/appEnums'
+// import { LanguageType } from '~/enums/appEnums'
 
 const props = defineProps<{
   videoData: Video
+  // duration: number
+  // title: string
+  // cover: string
+  // author: string
+  // mid: number
+  // view: number
+  // danmaku: number
+  // publishedDate: number
+
 }>()
 
 const videoUrl = computed(() => {
@@ -18,7 +27,7 @@ const videoUrl = computed(() => {
 })
 
 const isDislike = ref<boolean>(false)
-const dislikeReasonId = ref<number | null>(null)
+// const dislikeReasonId = ref<number | null>(null)
 const showPopCtrl = ref<boolean>(false)
 
 function gotoChannel(mid: number) {

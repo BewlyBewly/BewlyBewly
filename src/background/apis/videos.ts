@@ -56,7 +56,8 @@ export const setupVideosAPIs = () => {
     // #endregion
 
     if (message.contentScriptQuery === 'getRecommendVideos') {
-      const url = `https://api.bilibili.com/x/web-interface/index/top/feed/rcmd?fresh_idx=${message.refreshIdx}&feed_version=V1&fresh_type=4&ps=30&plat=1`
+      // const url = `https://app.bilibili.com/x/v2/feed/index?build=72100100&idx=${message.idx}&appkey=27eb53fc9058f8c3&access_key=${message.accessKey}`
+      const url = `https://api.bilibili.com/x/web-interface/index/top/feed/rcmd?fresh_idx=${message.refreshIdx}&feed_version=V2&fresh_type=4&ps=30&plat=1`
       return fetch(url)
         .then(response => response.json())
         .then(data => data)

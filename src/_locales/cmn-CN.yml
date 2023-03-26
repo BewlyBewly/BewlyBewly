@@ -10,6 +10,8 @@ common:
   hour: 小时前
   minute: 分钟前
   second: 秒前
+  please_log_in_first: 请先登录
+  login: 登录
 settings:
   title: 设置
   select_language: 界面语文

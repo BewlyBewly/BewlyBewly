@@ -1,3 +1,4 @@
+import { LanguageType } from './../enums/appEnums'
 import { settings } from '~/logic'
 import { i18n } from '~/utils/i18n'
 export const { t } = i18n.global
@@ -5,15 +6,8 @@ export const { t } = i18n.global
 export const numFormatter = (num: number) => {
   const digits = 1 // specify number of digits after decimal
   let lookup
-  if (settings.value.language === 'en') {
-    lookup = [
-      { value: 1, symbol: '' },
-      { value: 1e3, symbol: 'K' },
-      { value: 1e6, symbol: 'M' },
-      { value: 1e9, symbol: 'B' },
-    ]
-  }
-  else if (settings.value.language === 'cmn-CN') {
+
+  if (settings.value.language === LanguageType.Mandarin_CN) {
     lookup = [
       { value: 1, symbol: ' ' },
       { value: 1e4, symbol: ' 万' },
@@ -21,12 +15,20 @@ export const numFormatter = (num: number) => {
       { value: 1e8, symbol: ' 亿' },
     ]
   }
-  else {
+  else if (settings.value.language === LanguageType.Cantonese || settings.value.language === LanguageType.Mandarin_TW) {
     lookup = [
       { value: 1, symbol: ' ' },
       { value: 1e4, symbol: ' 萬' },
       { value: 1e7, symbol: ' 千萬' },
       { value: 1e8, symbol: ' 億' },
+    ]
+  }
+  else {
+    lookup = [
+      { value: 1, symbol: '' },
+      { value: 1e3, symbol: 'K' },
+      { value: 1e6, symbol: 'M' },
+      { value: 1e9, symbol: 'B' },
     ]
   }
   const rx = /\.0+$|(\.[0-9]*[1-9])0+$/
