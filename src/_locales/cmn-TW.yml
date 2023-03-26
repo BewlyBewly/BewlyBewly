@@ -2,7 +2,7 @@ common:
   view_all: 檢視所有
   loading: 載入中...
   undo: 復原
-  view: '{count} 次'
+  view: '{count}次'
   year: 年前
   month: 個月前
   week: 個禮拜前
