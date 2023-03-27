@@ -137,6 +137,18 @@ function onRevoke() {
 
     <div class="settings-item">
       <div>
+        Accent color
+        <br>
+        <!-- <span class="desc">{{ $t('settings.topbar_visible_desc') }}</span> -->
+      </div>
+      <div>
+        <div w-20px h-20px rounded-8 bg="#00a1d6" />
+        <div w-20px h-20px rounded-8 bg="#fb7299" />
+      </div>
+    </div>
+
+    <div class="settings-item">
+      <div>
         {{ $t('settings.dock_position') }}
         <br>
         <span class="desc">{{ $t('settings.dock_position_desc') }}</span>
