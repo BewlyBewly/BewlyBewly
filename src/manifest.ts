@@ -35,6 +35,7 @@ export async function getManifest() {
       'storage',
       'activeTab',
       'scripting',
+      'declarativeNetRequest',
     ],
     host_permissions: ['*://*.bilibili.com/*', '*://www.mcbbs.net/*'],
     content_scripts: [
