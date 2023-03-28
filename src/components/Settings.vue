@@ -141,7 +141,7 @@ function onRevoke() {
         <br>
         <!-- <span class="desc">{{ $t('settings.topbar_visible_desc') }}</span> -->
       </div>
-      <div>
+      <div flex="~ gap-2">
         <div w-20px h-20px rounded-8 bg="#00a1d6" />
         <div w-20px h-20px rounded-8 bg="#fb7299" />
       </div>
