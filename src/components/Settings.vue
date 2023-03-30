@@ -10,6 +10,28 @@ const { t, locale } = useI18n()
 
 const authorizeBtn = ref<HTMLButtonElement>() as Ref<HTMLButtonElement>
 const langsSelect = ref<HTMLElement>() as Ref<HTMLElement>
+const themeColorOptions = reactive<Array<{ value: string; label: string }>>([
+  {
+    value: '#00a1d6',
+    label: '#00a1d6',
+  },
+  {
+    value: '#fb7299',
+    label: '#fb7299',
+  },
+  {
+    value: '#49e0ad',
+    label: '#49e0ad',
+  },
+  {
+    value: '#0d9488',
+    label: '#0d9488',
+  },
+  {
+    value: '#6366f1',
+    label: '#6366f1',
+  },
+])
 
 const langs = computed(() => {
   return [
@@ -56,12 +78,16 @@ function close() {
   emit('close')
 }
 
-function onAuthorize() {
+function handleAuthorize() {
   grantAccessKey(authorizeBtn.value)
 }
 
-function onRevoke() {
+function handleRevoke() {
   revokeAccessKey()
+}
+
+function changeThemeColor(color: string) {
+  settings.value.themeColor = color
 }
 </script>
 
@@ -111,11 +137,11 @@ function onRevoke() {
         v-if="`${accessKey}` === 'undefined' || `${accessKey}` === 'null' || accessKey === ''"
         ref="authorizeBtn"
         class="btn"
-        @click="onAuthorize"
+        @click="handleAuthorize"
       >
         {{ $t('settings.btn.authorize') }}
       </button>
-      <button v-else class="line-btn" @click="onRevoke">
+      <button v-else class="line-btn" @click="handleRevoke">
         <span>{{ $t('settings.btn.revoke') }}</span>
       </button>
     </div>
@@ -137,13 +163,21 @@ function onRevoke() {
 
     <div class="settings-item">
       <div>
-        Accent color
+        Theme color
         <br>
         <!-- <span class="desc">{{ $t('settings.topbar_visible_desc') }}</span> -->
       </div>
       <div flex="~ gap-2">
-        <div w-20px h-20px rounded-8 bg="#00a1d6" />
-        <div w-20px h-20px rounded-8 bg="#fb7299" />
+        <div
+          v-for="item in themeColorOptions" :key="item.value"
+          w-20px h-20px rounded-8 cursor-pointer transition duration-300
+          :bg="item.value"
+          :style="{
+            transform: item.value === settings.themeColor ? 'scale(1.2)' : 'scale(1)',
+            border: item.value === settings.themeColor ? '2px solid var(--bew-text-1)' : 'none',
+          }"
+          @click="changeThemeColor(item.value)"
+        />
       </div>
     </div>
 

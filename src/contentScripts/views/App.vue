@@ -12,6 +12,7 @@ import Video from './Video/Video.vue'
 import { activatedPage, settings } from '~/logic'
 import '~/styles/index.ts'
 import { AppPage, LanguageType } from '~/enums/appEnums'
+import { hexToRGBA } from '~/utils'
 
 const { locale } = useI18n()
 const [showSettings, toggle] = useToggle(false)
@@ -39,6 +40,17 @@ watch(
     setTimeout(() => {
       window.scrollTo(0, 0)
     }, 500)
+  },
+)
+watch(
+  () => settings.value.themeColor,
+  (newValue) => {
+    const bewlyElement = document.querySelector('#bewly') as HTMLElement
+    if (bewlyElement) {
+      bewlyElement.style.setProperty('--bew-theme-color', newValue)
+      for (let i = 0; i < 9; i++)
+        bewlyElement.style.setProperty(`--bew-theme-color-${i + 1}0`, hexToRGBA(newValue, i * 0.1 + 0.1))
+    }
   },
 )
 
