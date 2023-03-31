@@ -20,12 +20,8 @@ const themeColorOptions = reactive<Array<{ value: string; label: string }>>([
     label: '#fb7299',
   },
   {
-    value: '#49e0ad',
-    label: '#49e0ad',
-  },
-  {
-    value: '#10b981',
-    label: '#10b981',
+    value: '#34d399',
+    label: '#34d399',
   },
   {
     value: '#22c55e',
@@ -44,16 +40,44 @@ const themeColorOptions = reactive<Array<{ value: string; label: string }>>([
     label: '#6366f1',
   },
   {
-    value: '#f59e0b',
-    label: '#f59e0b',
+    value: '#818cf8',
+    label: '#818cf8',
+  },
+  {
+    value: '#a78bfa',
+    label: '#a78bfa',
+  },
+  {
+    value: '#3b82f6',
+    label: '#3b82f6',
+  },
+  {
+    value: '#60a5fa',
+    label: '#60a5fa',
   },
   {
     value: '#f46d43',
     label: '#f46d43',
   },
   {
+    value: '#fb923c',
+    label: '#fb923c',
+  },
+  {
+    value: '#f59e0b',
+    label: '#f59e0b',
+  },
+  {
+    value: '#eab308',
+    label: '#eab308',
+  },
+  {
     value: '#f43f5e',
     label: '#f43f5e',
+  },
+  {
+    value: '#fda4af',
+    label: '#fda4af',
   },
 ])
 
