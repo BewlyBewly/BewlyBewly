@@ -10,20 +10,21 @@ import {
 // import { LanguageType } from '~/enums/appEnums'
 
 const props = defineProps<{
-  videoData: Video
-  // duration: number
-  // title: string
-  // cover: string
-  // author: string
-  // mid: number
-  // view: number
-  // danmaku: number
-  // publishedDate: number
-
+  duration: number
+  title: string
+  cover: string
+  author: string
+  authorFace: string
+  mid: number
+  view: number
+  danmaku: number
+  publishedTimestamp: number
+  bvid?: string
+  aid?: number
 }>()
 
 const videoUrl = computed(() => {
-  return `https://www.bilibili.com/video/${props.videoData.bvid}`
+  return `https://www.bilibili.com/video/${props.bvid ?? `av${props.aid}`}`
 })
 
 const isDislike = ref<boolean>(false)
@@ -157,7 +158,7 @@ function gotoChannel(mid: number) {
             text="!white xs"
             bg="black opacity-60"
           >
-            {{ calcCurrentTime(videoData.duration) }}
+            {{ calcCurrentTime(duration) }}
           </div>
 
           <div
@@ -171,7 +172,7 @@ function gotoChannel(mid: number) {
           >
             <!-- Video cover -->
             <img
-              :src="`${removeHttpFromUrl(videoData.pic)}@672w_378h_1c`"
+              :src="`${removeHttpFromUrl(cover)}@672w_378h_1c`"
               loading="lazy"
               class="aspect-auto"
               w="full"
@@ -186,7 +187,7 @@ function gotoChannel(mid: number) {
 
           <!-- Shadow of the video cover -->
           <img
-            :src="`${removeHttpFromUrl(videoData.pic)}@672w_378h_1c`"
+            :src="`${removeHttpFromUrl(cover)}@672w_378h_1c`"
             loading="lazy"
             class="aspect-video"
             w="full"
@@ -213,10 +214,10 @@ function gotoChannel(mid: number) {
             object="center cover"
             bg="$bew-fill-3"
             cursor="pointer"
-            @click="gotoChannel(videoData.owner.mid)"
+            @click="gotoChannel(mid)"
           >
             <img
-              :src="`${removeHttpFromUrl(videoData.owner.face)}@60w_60h_1c`"
+              :src="`${removeHttpFromUrl(authorFace)}@60w_60h_1c`"
               width="48"
               height="48"
               loading="lazy"
@@ -232,8 +233,8 @@ function gotoChannel(mid: number) {
               h="max-13"
               overflow="hidden"
             >
-              <a :href="videoUrl" target="_blank" :title="videoData.title">
-                {{ videoData.title }}</a>
+              <a :href="videoUrl" target="_blank" :title="title">
+                {{ title }}</a>
             </h3>
 
             <!-- <div
@@ -306,21 +307,21 @@ function gotoChannel(mid: number) {
             class="channel-name"
             text="base $bew-text-2"
             m="t-2"
-            @click="gotoChannel(videoData.owner.mid)"
+            @click="gotoChannel(mid)"
           >
-            {{ videoData.owner.name }}
+            {{ author }}
           </div>
           <div class="video-info" text="base $bew-text-2">
             <!-- <uil:play-circle inline /> -->
             {{
-              $t('common.view', { count: numFormatter(videoData.stat.view) })
+              $t('common.view', { count: numFormatter(view) })
             }}
             <span class="text-xs font-light">•</span>
             <!-- <uil:list-ui-alt inline /> -->
-            {{ $t('common.danmaku', { count: numFormatter(videoData.stat.danmaku) }) }}
+            {{ $t('common.danmaku', { count: numFormatter(danmaku) }) }}
             <!-- <span class="text-xs font-light">•</span> -->
             <br>
-            <span text="$bew-text-3 sm" inline-block mt-2 p="x-2 y-1" bg="$bew-fill-1" rounded-4>{{ calcTimeSince(videoData.pubdate * 1000) }}</span>
+            <span text="$bew-text-3 sm" inline-block mt-2 p="x-2 y-1" bg="$bew-fill-1" rounded-4>{{ calcTimeSince(publishedTimestamp * 1000) }}</span>
           </div>
         </div>
       </div>

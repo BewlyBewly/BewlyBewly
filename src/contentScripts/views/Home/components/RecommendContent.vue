@@ -86,7 +86,16 @@ function jumpToLoginPage() {
       <VideoCard
         v-for="video in videoList"
         :key="video.id"
-        :video-data="video"
+        :duration="video.duration"
+        :title="video.title"
+        :cover="video.pic"
+        :author="video.owner.name"
+        :author-face="video.owner.face"
+        :mid="video.owner.mid"
+        :view="video.stat.view"
+        :danmaku="video.stat.danmaku"
+        :published-timestamp="video.pubdate"
+        :bvid="video.bvid"
       />
     </TransitionGroup>
   </div>
