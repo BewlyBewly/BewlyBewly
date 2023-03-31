@@ -171,8 +171,8 @@ function changeThemeColor(color: string) {
         <div
           v-for="item in themeColorOptions" :key="item.value"
           w-20px h-20px rounded-8 cursor-pointer transition duration-300
-          :bg="item.value"
           :style="{
+            background: item.value,
             transform: item.value === settings.themeColor ? 'scale(1.2)' : 'scale(1)',
             border: item.value === settings.themeColor ? '2px solid var(--bew-text-1)' : 'none',
           }"
