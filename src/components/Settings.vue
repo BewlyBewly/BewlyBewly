@@ -24,12 +24,36 @@ const themeColorOptions = reactive<Array<{ value: string; label: string }>>([
     label: '#49e0ad',
   },
   {
-    value: '#0d9488',
-    label: '#0d9488',
+    value: '#10b981',
+    label: '#10b981',
+  },
+  {
+    value: '#22c55e',
+    label: '#22c55e',
+  },
+  {
+    value: '#14b8a6',
+    label: '#14b8a6',
+  },
+  {
+    value: '#06b6d4',
+    label: '#06b6d4',
   },
   {
     value: '#6366f1',
     label: '#6366f1',
+  },
+  {
+    value: '#f59e0b',
+    label: '#f59e0b',
+  },
+  {
+    value: '#f46d43',
+    label: '#f46d43',
+  },
+  {
+    value: '#f43f5e',
+    label: '#f43f5e',
   },
 ])
 
@@ -167,7 +191,7 @@ function changeThemeColor(color: string) {
         <br>
         <!-- <span class="desc">{{ $t('settings.topbar_visible_desc') }}</span> -->
       </div>
-      <div flex="~ gap-2">
+      <div flex="~ gap-2 wrap">
         <div
           v-for="item in themeColorOptions" :key="item.value"
           w-20px h-20px rounded-8 cursor-pointer transition duration-300
