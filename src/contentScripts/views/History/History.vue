@@ -475,10 +475,12 @@ function jumpToLoginPage() {
         </a>
       </transition-group>
       <!-- loading -->
-      <loading
-        v-if="isLoading && historyList.length !== 0 && !noMoreContent"
-        m="-t-4"
-      />
+      <Transition name="fade">
+        <loading
+          v-if="isLoading && historyList.length !== 0 && !noMoreContent"
+          m="-t-4"
+        />
+      </Transition>
     </main>
 
     <aside relative w="full md:40% lg:30% xl:25%" order="1 md:2 lg:2">

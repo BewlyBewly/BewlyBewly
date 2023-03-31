@@ -159,11 +159,11 @@ function scrollToTop(element: HTMLElement, duration: number) {
   >
     <!-- top bar -->
     <header
-      flex="~"
-      justify="between"
-      p="y-4 x-6"
+      flex="~" items-center justify-between
+      p="x-6"
       pos="fixed top-0 left-0"
       w="full"
+      h-50px
       bg="$bew-content-1"
       z="2"
       un-border="!rounded-t-$bew-radius"
@@ -192,7 +192,7 @@ function scrollToTop(element: HTMLElement, duration: number) {
             :key="item.id"
             :class="activatedMediaId === item.id ? 'activated-category' : ''"
             p="y-2 x-6"
-            first:m="t-[45.5px]"
+            first:m="t-[50px]"
             cursor="pointer"
             transition="~ duration-300"
             @click="changeCategory(item)"
@@ -295,7 +295,9 @@ function scrollToTop(element: HTMLElement, duration: number) {
         </TransitionGroup>
 
         <!-- loading -->
-        <Loading v-if="isLoading && favoriteResources.length !== 0" m="-t-4" />
+        <Transition name="fade">
+          <Loading v-if="isLoading && favoriteResources.length !== 0" m="-t-4" />
+        </Transition>
       </div>
     </main>
   </div>

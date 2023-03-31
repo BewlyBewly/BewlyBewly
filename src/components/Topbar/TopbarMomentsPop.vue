@@ -420,7 +420,9 @@ function scrollToTop(element: HTMLElement, duration: number) {
         </transition-group>
 
         <!-- loading -->
-        <loading v-if="isLoading && moments.length !== 0" m="-t-4" />
+        <Transition name="fade">
+          <loading v-if="isLoading && moments.length !== 0" m="-t-4" />
+        </Transition>
       </div>
     </main>
   </div>

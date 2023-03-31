@@ -233,16 +233,6 @@ function setAppAppearance() {
   --at-apply: opacity-0 transform -translate-y-full;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 0.5s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  --at-apply: opacity-0;
-}
-
 .dock-wrap {
   &.left {
     --at-apply: left-0;
@@ -302,5 +292,17 @@ function setAppAppearance() {
       --at-apply: bg-$bew-warning-color text-black;
     }
   }
+}
+</style>
+
+<style lang="scss">
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  --at-apply: opacity-0;
 }
 </style>

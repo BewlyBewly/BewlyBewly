@@ -100,7 +100,9 @@ function jumpToLoginPage() {
     </TransitionGroup>
   </div>
 
-  <Loading v-if="isLoading" />
+  <Transition name="fade">
+    <Loading v-if="isLoading" />
+  </Transition>
 </template>
 
 <style lang="scss" scoped>
