@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Video } from './types'
+import type { Ref } from 'vue'
 // import { accessKey, language } from '~/logic/index'
 import {
   calcCurrentTime,
@@ -30,6 +30,22 @@ const videoUrl = computed(() => {
 const isDislike = ref<boolean>(false)
 // const dislikeReasonId = ref<number | null>(null)
 const showPopCtrl = ref<boolean>(false)
+const videoCard = ref<HTMLElement>() as Ref<HTMLElement>
+const isInViewport = ref<boolean>(false)
+
+onMounted(() => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting)
+        isInViewport.value = true
+
+      else
+        isInViewport.value = false
+    })
+  })
+
+  observer.observe(videoCard.value)
+})
 
 function gotoChannel(mid: number) {
   window.open(`//space.bilibili.com/${mid}`)
@@ -93,6 +109,7 @@ function gotoChannel(mid: number) {
 
 <template>
   <div
+    ref="videoCard"
     class="video-card group"
     :class="isDislike ? 'is-dislike' : ''"
     p="1"
@@ -141,6 +158,11 @@ function gotoChannel(mid: number) {
     <template v-else>
       <a :href="videoUrl" target="_blank">
         <div
+          v-if="!isInViewport" aspect-video radius="rounded-$bew-radius" bg="$bew-fill-3"
+          rounded="$bew-radius"
+        />
+        <div
+          v-else
           class="aspect-video"
           w="full"
           radius="rounded-$bew-radius"
@@ -167,6 +189,7 @@ function gotoChannel(mid: number) {
             pos="relative"
             border="rounded-$bew-radius"
             overflow="hidden"
+            bg="$bew-fill-3"
             z="1"
             transition="duration-300"
           >
@@ -177,7 +200,7 @@ function gotoChannel(mid: number) {
               class="aspect-auto"
               w="full"
               h="full"
-              bg="cover center $bew-fill-3"
+              bg="cover center"
               transition="duration-300"
               pos="absolute"
               transform="~ scale-110"
@@ -192,7 +215,7 @@ function gotoChannel(mid: number) {
             class="aspect-video"
             w="full"
             h="full"
-            bg="cover center $bew-fill-3"
+            bg="cover center"
             transition="duration-600"
             pos="absolute left-0 top-0"
             filter="~ blur-0"
@@ -205,7 +228,9 @@ function gotoChannel(mid: number) {
       </a>
       <div flex="~" m="t-4">
         <div class="flex">
+          <div v-if="!isInViewport" m="r-4" w="48px" h="48px" rounded="$bew-radius" bg="$bew-fill-3" />
           <a
+            v-else
             m="r-4"
             w="48px"
             h="48px"
@@ -314,11 +339,11 @@ function gotoChannel(mid: number) {
           <div class="video-info" text="base $bew-text-2">
             <!-- <uil:play-circle inline /> -->
             {{
-              $t('common.view', { count: numFormatter(view) })
+              $t('common.view', { count: numFormatter(view) }, view)
             }}
             <span class="text-xs font-light">•</span>
             <!-- <uil:list-ui-alt inline /> -->
-            {{ $t('common.danmaku', { count: numFormatter(danmaku) }) }}
+            {{ $t('common.danmaku', { count: numFormatter(danmaku) }, danmaku) }}
             <!-- <span class="text-xs font-light">•</span> -->
             <br>
             <span text="$bew-text-3 sm" inline-block mt-2 p="x-2 y-1" bg="$bew-fill-1" rounded-4>{{ calcTimeSince(publishedTimestamp * 1000) }}</span>
