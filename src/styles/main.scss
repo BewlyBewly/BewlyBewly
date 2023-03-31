@@ -6,6 +6,28 @@ html, body {
   font-size: 14px!important;
 }
 
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html > ::-webkit-scrollbar-track {
+  background: var(--bew-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(120, 120, 122, .5);
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--bew-bg)
+}
+
 // html,
 // body,
 // #app {
