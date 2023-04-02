@@ -11,21 +11,14 @@ const { t, locale } = useI18n()
 const authorizeBtn = ref<HTMLButtonElement>() as Ref<HTMLButtonElement>
 const langsSelect = ref<HTMLElement>() as Ref<HTMLElement>
 const themeColorOptions = reactive<Array<{ value: string; label: string }>>([
+
   {
-    value: '#00a1d6',
-    label: '#00a1d6',
-  },
-  {
-    value: '#fb7299',
-    label: '#fb7299',
+    value: '#22c55e',
+    label: '#22c55e',
   },
   {
     value: '#34d399',
     label: '#34d399',
-  },
-  {
-    value: '#22c55e',
-    label: '#22c55e',
   },
   {
     value: '#14b8a6',
@@ -34,6 +27,18 @@ const themeColorOptions = reactive<Array<{ value: string; label: string }>>([
   {
     value: '#06b6d4',
     label: '#06b6d4',
+  },
+  {
+    value: '#00a1d6',
+    label: '#00a1d6',
+  },
+  {
+    value: '#60a5fa',
+    label: '#60a5fa',
+  },
+  {
+    value: '#3b82f6',
+    label: '#3b82f6',
   },
   {
     value: '#6366f1',
@@ -46,14 +51,6 @@ const themeColorOptions = reactive<Array<{ value: string; label: string }>>([
   {
     value: '#a78bfa',
     label: '#a78bfa',
-  },
-  {
-    value: '#3b82f6',
-    label: '#3b82f6',
-  },
-  {
-    value: '#60a5fa',
-    label: '#60a5fa',
   },
   {
     value: '#f46d43',
@@ -76,10 +73,15 @@ const themeColorOptions = reactive<Array<{ value: string; label: string }>>([
     label: '#f43f5e',
   },
   {
+    value: '#fb7299',
+    label: '#fb7299',
+  },
+  {
     value: '#fda4af',
     label: '#fda4af',
   },
 ])
+const bilibiliEvolvedThemeColor = ref<string>('#00a1d6')
 
 const langs = computed(() => {
   return [
@@ -116,6 +118,12 @@ const dockPositions = computed(() => {
       value: 'bottom',
     },
   ]
+})
+
+onMounted(() => {
+  bilibiliEvolvedThemeColor.value
+    = getComputedStyle(document.querySelector('html') as HTMLElement).getPropertyValue('--theme-color').trim()
+      ?? '#00a1d6'
 })
 
 watch(() => settings.value.language, (newValue, oldValue) => {
@@ -211,9 +219,8 @@ function changeThemeColor(color: string) {
 
     <div class="settings-item">
       <div>
-        Theme color
+        {{ $t('settings.theme_color') }}
         <br>
-        <!-- <span class="desc">{{ $t('settings.topbar_visible_desc') }}</span> -->
       </div>
       <div flex="~ gap-2 wrap">
         <div
@@ -225,6 +232,27 @@ function changeThemeColor(color: string) {
             border: item.value === settings.themeColor ? '2px solid var(--bew-text-1)' : 'none',
           }"
           @click="changeThemeColor(item.value)"
+        />
+      </div>
+    </div>
+
+    <div class="settings-item">
+      <div>
+        {{ $t('settings.follow_bilibili_evolved_color') }}
+        <br>
+        <span class="desc">
+          {{ $t('settings.follow_bilibili_evolved_color_desc') }}
+        </span>
+      </div>
+      <div>
+        <div
+          w-20px h-20px rounded-8 cursor-pointer
+          :style="{
+            background: bilibiliEvolvedThemeColor,
+            transform: bilibiliEvolvedThemeColor === settings.themeColor ? 'scale(1.2)' : 'scale(1)',
+            border: bilibiliEvolvedThemeColor === settings.themeColor ? '2px solid var(--bew-text-1)' : 'none',
+          }"
+          @click="changeThemeColor(bilibiliEvolvedThemeColor)"
         />
       </div>
     </div>

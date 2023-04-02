@@ -38,6 +38,9 @@ settings:
     left: 左側
     right: 右側
     bottom: 底部
+  theme_color: 主題色
+  follow_bilibili_evolved_color: 使用 Bilibili Evolved 主題色
+  follow_bilibili_evolved_color_desc: 每次變更 Bilibili Evolved 主題色後，必須重新選取此選項以更新配置
 topbar:
   sign_in: 登入
   notifications: 通知

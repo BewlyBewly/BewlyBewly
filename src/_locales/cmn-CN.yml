@@ -38,6 +38,9 @@ settings:
     left: 左侧
     right: 右侧
     bottom: 底部
+  theme_color: 主题色
+  follow_bilibili_evolved_color: 使用 Bilibili Evolved 主题色
+  follow_bilibili_evolved_color_desc: 每次选完 Bilibili Evolved 主题色时，记得重新选中这一选项以更新配置
 auth:
   err_tip: Failed to grant Access Key
   plz_login_first: Please login to bilibili first
