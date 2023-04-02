@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { accessKey, language } from '~/logic/index'
-import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils'
-import { LanguageType } from '~/enums/appEnums'
+// import { accessKey, language } from '~/logic/index'
 import type { Video } from '~/components/VideoCard/types'
 
 const videoList = reactive<Video[]>([])
@@ -60,12 +58,6 @@ async function getRecommendVideos() {
   }
 }
 
-function onEnter(el: Element, done: () => void) {
-  const element = el as HTMLElement
-  element.style.transitionDelay = '0.1s'
-  done()
-}
-
 function jumpToLoginPage() {
   location.href = 'https://passport.bilibili.com/login'
 }
@@ -82,22 +74,46 @@ function jumpToLoginPage() {
     m="b-0 t-0"
     grid="~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-4"
   >
-    <TransitionGroup name="list" @enter="onEnter">
-      <VideoCard
-        v-for="video in videoList"
-        :key="video.id"
-        :duration="video.duration"
-        :title="video.title"
-        :cover="video.pic"
-        :author="video.owner.name"
-        :author-face="video.owner.face"
-        :mid="video.owner.mid"
-        :view="video.stat.view"
-        :danmaku="video.stat.danmaku"
-        :published-timestamp="video.pubdate"
-        :bvid="video.bvid"
-      />
-    </TransitionGroup>
+    <VideoCard
+      v-for="video in videoList"
+      :key="video.id"
+      :duration="video.duration"
+      :title="video.title"
+      :cover="video.pic"
+      :author="video.owner.name"
+      :author-face="video.owner.face"
+      :mid="video.owner.mid"
+      :view="video.stat.view"
+      :danmaku="video.stat.danmaku"
+      :published-timestamp="video.pubdate"
+      :bvid="video.bvid"
+    />
+
+    <!-- skeleton -->
+    <template v-for="item in 30" :key="item">
+      <div
+        v-if="isLoading"
+        mb-8 pointer-events-none select-none
+      >
+        <div aspect-video bg="$bew-fill-4" rounded="$bew-radius" />
+        <div flex mt-4>
+          <div m="r-4" w="48px" h="48px" rounded="$bew-radius" bg="$bew-fill-4" shrink-0 />
+          <div w-full>
+            <div grid gap-2>
+              <div w-full h-5 bg="$bew-fill-3" />
+              <div w="3/4" h-5 bg="$bew-fill-3" />
+            </div>
+            <div grid gap-2 mt-4>
+              <div w="50%" h-4 bg="$bew-fill-2" />
+              <div w="80%" h-4 bg="$bew-fill-2" />
+            </div>
+            <div text="transparent sm" inline-block mt-4 p="x-2 y-1" bg="$bew-fill-1" rounded-4>
+              hello world
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
   </div>
 
   <Transition name="fade">
