@@ -30,22 +30,6 @@ const videoUrl = computed(() => {
 const isDislike = ref<boolean>(false)
 // const dislikeReasonId = ref<number | null>(null)
 const showPopCtrl = ref<boolean>(false)
-const videoCard = ref<HTMLElement>() as Ref<HTMLElement>
-const isInViewport = ref<boolean>(false)
-
-onMounted(() => {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting)
-        isInViewport.value = true
-
-      else
-        isInViewport.value = false
-    })
-  })
-
-  observer.observe(videoCard.value)
-})
 
 function gotoChannel(mid: number) {
   window.open(`//space.bilibili.com/${mid}`)
@@ -109,18 +93,13 @@ function gotoChannel(mid: number) {
 
 <template>
   <div
-    ref="videoCard"
     class="video-card group"
     :class="isDislike ? 'is-dislike' : ''"
-    p="1"
     m="b-8"
-    border="rounded-$bew-radius"
-    transition="duration-300"
-    pos="relative"
-    active:bg="$bew-fill-2"
+    rounded="“$bew-radius"
   >
     <!-- Undo control -->
-    <template v-if="isDislike">
+    <div :style="{ visibility: isDislike ? 'visible' : 'hidden' }" pos="absolute">
       <div
         id="dislike-control"
         pos="absolute top-0 left-0"
@@ -153,92 +132,38 @@ function gotoChannel(mid: number) {
           {{ $t('common.undo') }}
         </button> -->
       </div>
-    </template>
+    </div>
 
-    <template v-else>
+    <div>
       <a :href="videoUrl" target="_blank">
-        <div
-          v-if="!isInViewport" aspect-video radius="rounded-$bew-radius" bg="$bew-fill-3"
-          rounded="$bew-radius"
-        />
-        <div
-          v-else
-          class="aspect-video"
-          w="full"
-          radius="rounded-$bew-radius"
-          pos="relative"
-          transition="duration-300"
-          group-hover:transform="~ scale-105"
-        >
+        <div w="full" relative bg="$bew-fill-4" rounded="$bew-radius" overflow-hidden>
           <!-- Video duration -->
           <div
             pos="absolute bottom-0 right-0"
             z="2"
             p="x-2 y-1"
             m="1"
-            border="rounded-$bew-radius"
+            rounded="$bew-radius"
             text="!white xs"
             bg="black opacity-60"
           >
             {{ calcCurrentTime(duration) }}
           </div>
 
-          <div
-            class="aspect-video"
-            w="full"
-            pos="relative"
-            border="rounded-$bew-radius"
-            overflow="hidden"
-            bg="$bew-fill-3"
-            z="1"
-            transition="duration-300"
-          >
-            <!-- Video cover -->
-            <img
-              :src="`${removeHttpFromUrl(cover)}@672w_378h_1c`"
-              loading="lazy"
-              class="aspect-auto"
-              w="full"
-              h="full"
-              bg="cover center"
-              transition="duration-300"
-              pos="absolute"
-              transform="~ scale-110"
-              group-hover:transform="~ scale-100"
-            >
-          </div>
-
-          <!-- Shadow of the video cover -->
+          <!-- Video cover -->
           <img
             :src="`${removeHttpFromUrl(cover)}@672w_378h_1c`"
             loading="lazy"
-            class="aspect-video"
-            w="full"
-            h="full"
+            w="full" aspect-video
             bg="cover center"
-            transition="duration-600"
-            pos="absolute left-0 top-0"
-            filter="~ blur-0"
-            z="-1"
-            opacity="90"
-            pointer="none"
-            group-hover:filter="~ blur-2xl"
           >
         </div>
       </a>
       <div flex="~" m="t-4">
         <div class="flex">
-          <div v-if="!isInViewport" m="r-4" w="48px" h="48px" rounded="$bew-radius" bg="$bew-fill-3" />
           <a
-            v-else
-            m="r-4"
-            w="48px"
-            h="48px"
-            border="rounded-$bew-radius"
-            overflow="hidden"
-            object="center cover"
-            bg="$bew-fill-3"
-            cursor="pointer"
+            m="r-4" w="48px" h="48px" rounded="$bew-radius" overflow="hidden" object="center cover"
+            bg="$bew-fill-4" cursor="pointer"
             @click="gotoChannel(mid)"
           >
             <img
@@ -253,10 +178,8 @@ function gotoChannel(mid: number) {
           <div flex="~" justify="between" w="full" pos="relative">
             <h3
               class="keep-two-lines"
-              cursor="pointer"
               text="lg overflow-ellipsis space-normal $bew-text-1"
-              h="max-13"
-              overflow="hidden"
+              cursor="pointer"
             >
               <a :href="videoUrl" target="_blank" :title="title">
                 {{ title }}</a>
@@ -350,7 +273,7 @@ function gotoChannel(mid: number) {
           </div>
         </div>
       </div>
-    </template>
+    </div>
   </div>
 </template>
 
