@@ -183,7 +183,30 @@ function changeThemeColor(color: string) {
       />
     </div>
 
-    <div class="settings-item" important-hidden>
+    <div class="settings-item">
+      <div>
+        Recommendation mode
+      </div>
+
+      <div flex>
+        <div
+          p-4 cursor-pointer
+          :style="{ background: settings.recommendationMode === 'web' ? 'var(--bew-theme-color)' : '' }"
+          @click="settings.recommendationMode = 'web'"
+        >
+          web
+        </div>
+        <div
+          p-4 cursor-pointer
+          :style="{ background: settings.recommendationMode === 'app' ? 'var(--bew-theme-color)' : '' }"
+          @click="settings.recommendationMode = 'app'"
+        >
+          app
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-item">
       <div>
         {{ $t('settings.authorize_app') }}
         <br>

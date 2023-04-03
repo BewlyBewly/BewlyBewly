@@ -11,4 +11,5 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   isShowTopbar: true,
   dockPosition: 'left',
   themeColor: '#00a1d6',
+  recommendationMode: 'web',
 }), { mergeDefaults: true })

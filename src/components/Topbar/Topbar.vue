@@ -318,7 +318,7 @@ function getNewMomentsCount() {
           <div
             class="right-side-item"
             :class="{ active: showMomentsPop }"
-            @mouseenter="showMomentsPop = true"
+            @mouseenter="showMomentsPop = true; newMomentsCount = 0"
             @mouseleave="showMomentsPop = false"
           >
             <div v-if="newMomentsCount !== 0" class="unread-message">

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // import { accessKey, language } from '~/logic/index'
 import type { Video } from '~/components/VideoCard/types'
+import { accessKey, settings } from '~/logic'
 
 const videoList = reactive<Video[]>([])
 const isLoading = ref<boolean>(false)
@@ -9,6 +10,11 @@ let refreshIdx = 1
 
 onMounted(() => {
   getRecommendVideos()
+  // if (settings.value.recommendationMode === 'web') { getRecommendVideos() }
+  // else {
+  //   for (let i = 0; i < 3; i++)
+  //     getAppRecommendVideos()
+  // }
 
   window.onscroll = () => {
     if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 20) {
@@ -16,6 +22,11 @@ onMounted(() => {
         return
 
       getRecommendVideos()
+      // if (settings.value.recommendationMode === 'web') { getRecommendVideos() }
+      // else {
+      //   for (let i = 0; i < 3; i++)
+      //     getAppRecommendVideos()
+      // }
     }
   }
 })
@@ -58,6 +69,40 @@ async function getRecommendVideos() {
   }
 }
 
+async function getAppRecommendVideos() {
+  isLoading.value = true
+  try {
+    const response = await browser.runtime.sendMessage({
+      contentScriptQuery: 'getAppRecommendVideos',
+      accessKey: accessKey.value,
+      idx: 1,
+    })
+
+    if (response.code === 0) {
+      const resData = [] as Video[]
+
+      response.data.forEach((item: Video) => {
+        resData.push(item)
+      })
+
+      // when videoList has length property, it means it is the first time to load
+      if (!videoList.length) {
+        Object.assign(videoList, resData)
+      }
+      else {
+        // else we concat the new data to the old data
+        Object.assign(videoList, videoList.concat(resData))
+      }
+    }
+    else if (response.code === 62011) {
+      needToLoginFirst.value = true
+    }
+  }
+  finally {
+    isLoading.value = false
+  }
+}
+
 function jumpToLoginPage() {
   location.href = 'https://passport.bilibili.com/login'
 }
@@ -74,6 +119,7 @@ function jumpToLoginPage() {
     m="b-0 t-0"
     grid="~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-4"
   >
+    <!-- <template v-if="settings.recommendationMode === 'web'"> -->
     <VideoCard
       v-for="video in videoList"
       :key="video.id"
@@ -88,6 +134,23 @@ function jumpToLoginPage() {
       :published-timestamp="video.pubdate"
       :bvid="video.bvid"
     />
+    <!-- </template> -->
+    <!-- <template v-else>
+      <VideoCard
+        v-for="(video, index) in videoList"
+        :key="index"
+        :duration="video.duration"
+        :title="video.title"
+        :cover="video.cover ?? ''"
+        :author="video.name"
+        :author-face="video.face"
+        :mid="video.mid"
+        :view="video.play"
+        :danmaku="video.danmaku"
+        :published-timestamp="video.ctime"
+        :aid="Number(video.param)"
+      />
+    </template> -->
 
     <!-- skeleton -->
     <template v-for="item in 30" :key="item">

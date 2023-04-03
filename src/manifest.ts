@@ -37,7 +37,7 @@ export async function getManifest() {
       'scripting',
       'declarativeNetRequest',
     ],
-    host_permissions: ['*://*.bilibili.com/*', '*://www.mcbbs.net/*'],
+    host_permissions: ['*://*.bilibili.com/*', '*://*.mcbbs.net/*'],
     content_scripts: [
       {
         matches: ['http://www.bilibili.com/*', 'https://www.bilibili.com/*'],

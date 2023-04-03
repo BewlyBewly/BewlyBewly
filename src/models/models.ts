@@ -3,4 +3,5 @@ export interface Settings {
   isShowTopbar: boolean
   dockPosition: 'left' | 'right' | 'bottom'
   themeColor: string
+  recommendationMode: 'web' | 'app'
 }
