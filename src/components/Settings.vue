@@ -10,76 +10,24 @@ const { t, locale } = useI18n()
 
 const authorizeBtn = ref<HTMLButtonElement>() as Ref<HTMLButtonElement>
 const langsSelect = ref<HTMLElement>() as Ref<HTMLElement>
-const themeColorOptions = reactive<Array<{ value: string; label: string }>>([
-
-  {
-    value: '#22c55e',
-    label: '#22c55e',
-  },
-  {
-    value: '#34d399',
-    label: '#34d399',
-  },
-  {
-    value: '#14b8a6',
-    label: '#14b8a6',
-  },
-  {
-    value: '#06b6d4',
-    label: '#06b6d4',
-  },
-  {
-    value: '#00a1d6',
-    label: '#00a1d6',
-  },
-  {
-    value: '#60a5fa',
-    label: '#60a5fa',
-  },
-  {
-    value: '#3b82f6',
-    label: '#3b82f6',
-  },
-  {
-    value: '#6366f1',
-    label: '#6366f1',
-  },
-  {
-    value: '#818cf8',
-    label: '#818cf8',
-  },
-  {
-    value: '#a78bfa',
-    label: '#a78bfa',
-  },
-  {
-    value: '#f46d43',
-    label: '#f46d43',
-  },
-  {
-    value: '#fb923c',
-    label: '#fb923c',
-  },
-  {
-    value: '#f59e0b',
-    label: '#f59e0b',
-  },
-  {
-    value: '#eab308',
-    label: '#eab308',
-  },
-  {
-    value: '#f43f5e',
-    label: '#f43f5e',
-  },
-  {
-    value: '#fb7299',
-    label: '#fb7299',
-  },
-  {
-    value: '#fda4af',
-    label: '#fda4af',
-  },
+const themeColorOptions = reactive<Array<string>>([
+  '#22c55e',
+  '#34d399',
+  '#14b8a6',
+  '#06b6d4',
+  '#00a1d6',
+  '#60a5fa',
+  '#3b82f6',
+  '#6366f1',
+  '#818cf8',
+  '#a78bfa',
+  '#f46d43',
+  '#fb923c',
+  '#f59e0b',
+  '#eab308',
+  '#f43f5e',
+  '#fb7299',
+  '#fda4af',
 ])
 const bilibiliEvolvedThemeColor = ref<string>('#00a1d6')
 
@@ -188,17 +136,23 @@ function changeThemeColor(color: string) {
         Recommendation mode
       </div>
 
-      <div flex>
+      <div flex rounded="$bew-radius" bg="$bew-fill-1" p-1>
         <div
-          p-4 cursor-pointer
-          :style="{ background: settings.recommendationMode === 'web' ? 'var(--bew-theme-color)' : '' }"
+          flex-1 py-1 cursor-pointer text-center rounded="$bew-radius"
+          :style="{
+            background: settings.recommendationMode === 'web' ? 'var(--bew-theme-color)' : '',
+            color: settings.recommendationMode === 'web' ? 'white' : '',
+          }"
           @click="settings.recommendationMode = 'web'"
         >
           web
         </div>
         <div
-          p-4 cursor-pointer
-          :style="{ background: settings.recommendationMode === 'app' ? 'var(--bew-theme-color)' : '' }"
+          flex-1 py-1 cursor-pointer text-center rounded="$bew-radius"
+          :style="{
+            background: settings.recommendationMode === 'app' ? 'var(--bew-theme-color)' : '',
+            color: settings.recommendationMode === 'app' ? 'white' : '',
+          }"
           @click="settings.recommendationMode = 'app'"
         >
           app
@@ -213,7 +167,7 @@ function changeThemeColor(color: string) {
         <span class="desc">{{ $t('settings.authorize_app_desc') }}</span>
       </div>
       <button
-        v-if="`${accessKey}` === 'undefined' || `${accessKey}` === 'null' || accessKey === ''"
+        v-if="!accessKey"
         ref="authorizeBtn"
         class="btn"
         @click="handleAuthorize"
@@ -232,10 +186,10 @@ function changeThemeColor(color: string) {
         <span class="desc">{{ $t('settings.topbar_visible_desc') }}</span>
       </div>
       <div>
-        <label for="topbarVisiable" class="chk-btn" cursor="pointer" pointer="auto">
+        <label for="topbarVisible" class="chk-btn" cursor="pointer" pointer="auto">
           <template v-if="settings.isShowTopbar">{{ $t('settings.chk_box.show') }}</template>
           <template v-else>{{ $t('settings.chk_box.hidden') }}</template>
-          <input id="topbarVisiable" v-model="settings.isShowTopbar" type="checkbox">
+          <input id="topbarVisible" v-model="settings.isShowTopbar" type="checkbox">
         </label>
       </div>
     </div>
@@ -247,14 +201,14 @@ function changeThemeColor(color: string) {
       </div>
       <div flex="~ gap-2 wrap">
         <div
-          v-for="item in themeColorOptions" :key="item.value"
+          v-for="color in themeColorOptions" :key="color"
           w-20px h-20px rounded-8 cursor-pointer transition duration-300
           :style="{
-            background: item.value,
-            transform: item.value === settings.themeColor ? 'scale(1.2)' : 'scale(1)',
-            border: item.value === settings.themeColor ? '2px solid var(--bew-text-1)' : 'none',
+            background: color,
+            transform: color === settings.themeColor ? 'scale(1.2)' : 'scale(1)',
+            border: color === settings.themeColor ? '2px solid var(--bew-text-1)' : 'none',
           }"
-          @click="changeThemeColor(item.value)"
+          @click="changeThemeColor(color)"
         />
       </div>
     </div>

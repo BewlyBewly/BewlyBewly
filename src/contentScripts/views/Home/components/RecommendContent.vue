@@ -8,27 +8,38 @@ const isLoading = ref<boolean>(false)
 const needToLoginFirst = ref<boolean>(false)
 let refreshIdx = 1
 
-onMounted(() => {
-  getRecommendVideos()
-  // if (settings.value.recommendationMode === 'web') { getRecommendVideos() }
-  // else {
-  //   for (let i = 0; i < 3; i++)
-  //     getAppRecommendVideos()
-  // }
-
-  window.onscroll = () => {
-    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 20) {
-      if (isLoading.value)
-        return
-
-      getRecommendVideos()
-      // if (settings.value.recommendationMode === 'web') { getRecommendVideos() }
-      // else {
-      //   for (let i = 0; i < 3; i++)
-      //     getAppRecommendVideos()
-      // }
-    }
+watch(() => settings.value.recommendationMode, (newValue, oldValue) => {
+  videoList.length = 0
+  if (newValue === 'web') { getRecommendVideos() }
+  else {
+    for (let i = 0; i < 3; i++)
+      getAppRecommendVideos()
   }
+})
+
+onMounted(async () => {
+  // getRecommendVideos()
+  setTimeout(() => {
+    if (settings.value.recommendationMode === 'web') { getRecommendVideos() }
+    else {
+      for (let i = 0; i < 3; i++)
+        getAppRecommendVideos()
+    }
+
+    window.onscroll = () => {
+      if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 20) {
+        if (isLoading.value)
+          return
+
+        // getRecommendVideos()
+        if (settings.value.recommendationMode === 'web') { getRecommendVideos() }
+        else {
+          for (let i = 0; i < 3; i++)
+            getAppRecommendVideos()
+        }
+      }
+    }
+  }, 200)
 })
 
 onUnmounted(() => {
@@ -119,23 +130,23 @@ function jumpToLoginPage() {
     m="b-0 t-0"
     grid="~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-4"
   >
-    <!-- <template v-if="settings.recommendationMode === 'web'"> -->
-    <VideoCard
-      v-for="video in videoList"
-      :key="video.id"
-      :duration="video.duration"
-      :title="video.title"
-      :cover="video.pic"
-      :author="video.owner.name"
-      :author-face="video.owner.face"
-      :mid="video.owner.mid"
-      :view="video.stat.view"
-      :danmaku="video.stat.danmaku"
-      :published-timestamp="video.pubdate"
-      :bvid="video.bvid"
-    />
-    <!-- </template> -->
-    <!-- <template v-else>
+    <template v-if="settings.recommendationMode === 'web'">
+      <VideoCard
+        v-for="video in videoList"
+        :key="video.id"
+        :duration="video.duration"
+        :title="video.title"
+        :cover="video.pic"
+        :author="video.owner.name"
+        :author-face="video.owner.face"
+        :mid="video.owner.mid"
+        :view="video.stat.view"
+        :danmaku="video.stat.danmaku"
+        :published-timestamp="video.pubdate"
+        :bvid="video.bvid"
+      />
+    </template>
+    <template v-else>
       <VideoCard
         v-for="(video, index) in videoList"
         :key="index"
@@ -143,17 +154,17 @@ function jumpToLoginPage() {
         :title="video.title"
         :cover="video.cover ?? ''"
         :author="video.name"
-        :author-face="video.face"
-        :mid="video.mid"
-        :view="video.play"
-        :danmaku="video.danmaku"
+        :author-face="video.face ?? ''"
+        :mid="video.mid ?? 0"
+        :view="video.play ?? 0"
+        :danmaku="video.danmaku ?? 0"
         :published-timestamp="video.ctime"
         :aid="Number(video.param)"
       />
-    </template> -->
+    </template>
 
     <!-- skeleton -->
-    <template v-for="item in 30" :key="item">
+    <template v-for="item in (settings.recommendationMode === 'web' ? 30 : 10)" :key="item">
       <div
         v-if="isLoading"
         mb-8 pointer-events-none select-none
