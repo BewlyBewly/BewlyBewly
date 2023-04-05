@@ -146,6 +146,16 @@ function setAppAppearance() {
               :class="{ active: activatedPage === AppPage.Search && !isVideoPage }"
               @click="changeActivatePage(AppPage.Search)"
             >
+              <div
+                class="tooltip"
+                :class="{
+                  left: settings.dockPosition === 'left',
+                  right: settings.dockPosition === 'right',
+                  bottom: settings.dockPosition === 'bottom',
+                }"
+              >
+                Search
+              </div>
               <tabler:search />
             </div>
 
@@ -154,6 +164,16 @@ function setAppAppearance() {
               :class="{ active: activatedPage === AppPage.Home && !isVideoPage }"
               @click="changeActivatePage(AppPage.Home)"
             >
+              <div
+                class="tooltip"
+                :class="{
+                  left: settings.dockPosition === 'left',
+                  right: settings.dockPosition === 'right',
+                  bottom: settings.dockPosition === 'bottom',
+                }"
+              >
+                Home
+              </div>
               <tabler:home />
             </div>
 
@@ -162,6 +182,16 @@ function setAppAppearance() {
               :class="{ active: activatedPage === AppPage.Anime && !isVideoPage }"
               @click="changeActivatePage(AppPage.Anime)"
             >
+              <div
+                class="tooltip"
+                :class="{
+                  left: settings.dockPosition === 'left',
+                  right: settings.dockPosition === 'right',
+                  bottom: settings.dockPosition === 'bottom',
+                }"
+              >
+                Anime
+              </div>
               <tabler:device-tv />
             </div>
 
@@ -170,6 +200,16 @@ function setAppAppearance() {
               :class="{ active: activatedPage === AppPage.History && !isVideoPage }"
               @click="changeActivatePage(AppPage.History)"
             >
+              <div
+                class="tooltip"
+                :class="{
+                  left: settings.dockPosition === 'left',
+                  right: settings.dockPosition === 'right',
+                  bottom: settings.dockPosition === 'bottom',
+                }"
+              >
+                History
+              </div>
               <tabler:clock />
             </div>
 
@@ -195,11 +235,32 @@ function setAppAppearance() {
             <div class="divider" />
 
             <div class="dock-item" @click="toggleDark()">
+              <div
+                class="tooltip"
+                :class="{
+                  left: settings.dockPosition === 'left',
+                  right: settings.dockPosition === 'right',
+                  bottom: settings.dockPosition === 'bottom',
+                }"
+              >
+                <span v-if="isDark">Light mode</span>
+                <span v-else>Dark mode</span>
+              </div>
               <tabler:moon-stars v-if="isDark" />
               <tabler:sun v-else />
             </div>
 
             <div class="dock-item" @click="toggle()">
+              <div
+                class="tooltip"
+                :class="{
+                  left: settings.dockPosition === 'left',
+                  right: settings.dockPosition === 'right',
+                  bottom: settings.dockPosition === 'bottom',
+                }"
+              >
+                Settings
+              </div>
               <tabler:settings />
             </div>
           </div>
@@ -268,7 +329,7 @@ function setAppAppearance() {
       md:w-45px w-35px
       md:p-3 p-2
       md:text-2xl text-xl
-      aspect-square
+      aspect-square relative
       text-$bew-text-1 leading-0 duration-300
       rounded-$bew-radius
       bg-$bew-fill-2 cursor-pointer
@@ -290,6 +351,32 @@ function setAppAppearance() {
       --shadow-dark-active: var(--shadow-active);
 
       --at-apply: bg-$bew-warning-color text-black;
+    }
+
+    .tooltip {
+      --at-apply: absolute px-2 py-1 rounded-8
+        bg-black dark:bg-white
+        pointer-events-none
+        text-sm text-white dark:text-black
+        opacity-0 duration-300;
+        white-space: nowrap;
+
+      &.left {
+        --at-apply: left-[calc(45px+1em)];
+      }
+
+      &.right{
+        --at-apply: right-[calc(45px+1em)];
+      }
+
+      &.bottom {
+        --at-apply: top--3em left-1/2;
+        transform: translateX(-50%);
+      }
+    }
+
+    &:hover .tooltip {
+      --at-apply: opacity-100;
     }
   }
 }
