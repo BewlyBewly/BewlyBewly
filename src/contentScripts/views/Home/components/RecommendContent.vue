@@ -1,15 +1,16 @@
 <script setup lang="ts">
-// import { accessKey, language } from '~/logic/index'
-import type { Video } from '~/components/VideoCard/types'
+import type { AppVideoModel, VideoModel } from './types'
 import { accessKey, settings } from '~/logic'
 
-const videoList = reactive<Video[]>([])
+const videoList = reactive<VideoModel[]>([])
+const appVideoList = reactive<AppVideoModel[]>([])
 const isLoading = ref<boolean>(false)
 const needToLoginFirst = ref<boolean>(false)
 let refreshIdx = 1
 
 watch(() => settings.value.recommendationMode, (newValue, oldValue) => {
   videoList.length = 0
+  appVideoList.length = 0
   if (newValue === 'web') { getRecommendVideos() }
   else {
     for (let i = 0; i < 3; i++)
@@ -18,28 +19,18 @@ watch(() => settings.value.recommendationMode, (newValue, oldValue) => {
 })
 
 onMounted(async () => {
-  // getRecommendVideos()
-  setTimeout(() => {
-    if (settings.value.recommendationMode === 'web') { getRecommendVideos() }
-    else {
-      for (let i = 0; i < 3; i++)
-        getAppRecommendVideos()
-    }
+  window.onscroll = () => {
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 20) {
+      if (isLoading.value)
+        return
 
-    window.onscroll = () => {
-      if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 20) {
-        if (isLoading.value)
-          return
-
-        // getRecommendVideos()
-        if (settings.value.recommendationMode === 'web') { getRecommendVideos() }
-        else {
-          for (let i = 0; i < 3; i++)
-            getAppRecommendVideos()
-        }
+      if (settings.value.recommendationMode === 'web') { getRecommendVideos() }
+      else {
+        for (let i = 0; i < 3; i++)
+          getAppRecommendVideos()
       }
     }
-  }, 200)
+  }
 })
 
 onUnmounted(() => {
@@ -56,9 +47,9 @@ async function getRecommendVideos() {
     })
 
     if (response.code === 0) {
-      const resData = [] as Video[]
+      const resData = [] as VideoModel[]
 
-      response.data.item.forEach((item: Video) => {
+      response.data.item.forEach((item: VideoModel) => {
         resData.push(item)
       })
 
@@ -90,19 +81,19 @@ async function getAppRecommendVideos() {
     })
 
     if (response.code === 0) {
-      const resData = [] as Video[]
+      const resData = [] as AppVideoModel[]
 
-      response.data.forEach((item: Video) => {
+      response.data.forEach((item: AppVideoModel) => {
         resData.push(item)
       })
 
       // when videoList has length property, it means it is the first time to load
-      if (!videoList.length) {
-        Object.assign(videoList, resData)
+      if (!appVideoList.length) {
+        Object.assign(appVideoList, resData)
       }
       else {
         // else we concat the new data to the old data
-        Object.assign(videoList, videoList.concat(resData))
+        Object.assign(appVideoList, appVideoList.concat(resData))
       }
     }
     else if (response.code === 62011) {
@@ -148,7 +139,7 @@ function jumpToLoginPage() {
     </template>
     <template v-else>
       <VideoCard
-        v-for="(video, index) in videoList"
+        v-for="(video, index) in appVideoList"
         :key="index"
         :duration="video.duration"
         :title="video.title"
