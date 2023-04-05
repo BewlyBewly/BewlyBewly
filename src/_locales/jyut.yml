@@ -23,7 +23,7 @@ settings:
     jyut: 廣東話
   authorize_app: 授權 BewlyBewly 使用 access key
   authorize_app_desc: |
-    授咗權嘅話首頁會畀啲可能啱我心水嘅片我 (授權 key 一個月左右有效，之後若然你撞正啲咩牛鬼蛇神唔開胃嘅嘢試下重新授權)
+    授咗權嘅話，你就會收到基於 bilibili 行動端程式推介演算法所推介嘅內容，兼且授權金鑰只有約一個月有效期，到期後記得要重新授權嚟取得存取金鑰 (access key)。
   topbar_visible: 頂欄可睇性
   topbar_visible_desc: 用於兼容 Bilibili Evolved 客製化頂欄
   btn:

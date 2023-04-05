@@ -29,7 +29,6 @@ const themeColorOptions = reactive<Array<string>>([
   '#fb7299',
   '#fda4af',
 ])
-const bilibiliEvolvedThemeColor = ref<string>('#00a1d6')
 
 const langs = computed(() => {
   return [
@@ -67,11 +66,11 @@ const dockPositions = computed(() => {
     },
   ]
 })
+const bilibiliEvolvedThemeColor = computed(() => {
+  return getComputedStyle(document.querySelector('html') as HTMLElement).getPropertyValue('--theme-color').trim() ?? '#00a1d6'
+})
 
 onMounted(() => {
-  bilibiliEvolvedThemeColor.value
-    = getComputedStyle(document.querySelector('html') as HTMLElement).getPropertyValue('--theme-color').trim()
-      ?? '#00a1d6'
 })
 
 watch(() => settings.value.language, (newValue, oldValue) => {
@@ -134,6 +133,11 @@ function changeThemeColor(color: string) {
     <div class="settings-item">
       <div>
         Recommendation mode
+        <br>
+        <span class="desc">
+          I strongly believe that the algorithm recommendation on the app will be better than that on the web.
+          If you want to use the recommendation algorithm on the app, please ensure that you authorize the BewlyBewly to use the access key first.
+        </span>
       </div>
 
       <div flex rounded="$bew-radius" bg="$bew-fill-1" p-1>
@@ -145,7 +149,7 @@ function changeThemeColor(color: string) {
           }"
           @click="settings.recommendationMode = 'web'"
         >
-          web
+          Web
         </div>
         <div
           flex-1 py-1 cursor-pointer text-center rounded="$bew-radius"
@@ -155,16 +159,24 @@ function changeThemeColor(color: string) {
           }"
           @click="settings.recommendationMode = 'app'"
         >
-          app
+          App
         </div>
       </div>
     </div>
 
-    <div class="settings-item">
+    <div
+      v-if="settings.recommendationMode === 'app'" class="settings-item"
+    >
       <div>
         {{ $t('settings.authorize_app') }}
         <br>
-        <span class="desc">{{ $t('settings.authorize_app_desc') }}</span>
+        <span class="desc">
+          {{ $t('settings.authorize_app_desc') }}
+          <br>
+          <a
+            href="https://github.com/indefined/UserScripts/tree/master/bilibiliHome#%E6%8E%88%E6%9D%83%E8%AF%B4%E6%98%8E" target="_blank" un-text="$bew-theme-color"
+          >More information about the access key</a>
+        </span>
       </div>
       <button
         v-if="!accessKey"

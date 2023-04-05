@@ -23,7 +23,7 @@ settings:
     jyut: 廣東話
   authorize_app: 授权 BewlyBewly 使用 access key
   authorize_app_desc: |
-    授权使用后能在首页推送我可能有兴趣观看的视频 (授权 key 有效期约为一个月，之后如果你发现首页推荐的视频不是你所感兴趣的，请尝试重新授权)
+    授权使用后能在首页推送 bilibili App 端算法的推荐视频，授权 key 有效期约为一个月，过后记得重新授权获取 access key。
   topbar_visible: 顶栏可见性
   topbar_visible_desc: 用于兼容 Bilibili Evolved 自定义顶栏
   btn:
