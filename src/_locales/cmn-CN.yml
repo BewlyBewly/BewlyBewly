@@ -21,9 +21,13 @@ settings:
     mandarin_cn: 官话
     mandarin_tw: 官話
     jyut: 廣東話
+  recommendation_mode: 推荐模式
+  recommendation_mode_desc: >
+    如果您想使用 app 端的推荐算法，请先授权 BewlyBewly 使用 access key。
   authorize_app: 授权 BewlyBewly 使用 access key
   authorize_app_desc: |
     授权使用后能在首页推送 bilibili App 端算法的推荐视频，授权 key 有效期约为一个月，过后记得重新授权获取 access key。
+  authorize_app_more_info_access_key: 关于 access key 
   topbar_visible: 顶栏可见性
   topbar_visible_desc: 用于兼容 Bilibili Evolved 自定义顶栏
   btn:

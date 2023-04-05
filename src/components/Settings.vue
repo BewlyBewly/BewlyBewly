@@ -132,11 +132,10 @@ function changeThemeColor(color: string) {
 
     <div class="settings-item">
       <div>
-        Recommendation mode
+        {{ $t('settings.recommendation_mode') }}
         <br>
         <span class="desc">
-          I strongly believe that the algorithm recommendation on the app will be better than that on the web.
-          If you want to use the recommendation algorithm on the app, please ensure that you authorize the BewlyBewly to use the access key first.
+          {{ $t('settings.recommendation_mode_desc') }}
         </span>
       </div>
 
@@ -175,7 +174,7 @@ function changeThemeColor(color: string) {
           <br>
           <a
             href="https://github.com/indefined/UserScripts/tree/master/bilibiliHome#%E6%8E%88%E6%9D%83%E8%AF%B4%E6%98%8E" target="_blank" un-text="$bew-theme-color"
-          >More information about the access key</a>
+          >{{ $t('settings.authorize_app_more_info_access_key') }}</a>
         </span>
       </div>
       <button
