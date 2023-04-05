@@ -19,6 +19,17 @@ watch(() => settings.value.recommendationMode, (newValue, oldValue) => {
 })
 
 onMounted(async () => {
+  // Delay by 0.2 seconds to obtain the `settings.value.recommendationMode` value
+  // otherwise the `settings.value.recommendationMode` value will be undefined
+  // i have no idea to fix that...
+  setTimeout(() => {
+    if (settings.value.recommendationMode === 'web') { getRecommendVideos() }
+    else {
+      for (let i = 0; i < 3; i++)
+        getAppRecommendVideos()
+    }
+  }, 200)
+
   window.onscroll = () => {
     if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 20) {
       if (isLoading.value)
