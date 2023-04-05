@@ -141,15 +141,15 @@ function jumpToLoginPage() {
       <VideoCard
         v-for="(video, index) in appVideoList"
         :key="index"
-        :duration="video.duration"
+        :duration="video.duration ?? 0"
         :title="video.title"
         :cover="video.cover ?? ''"
-        :author="video.name"
+        :author="video.name ?? ''"
         :author-face="video.face ?? ''"
         :mid="video.mid ?? 0"
         :view="video.play ?? 0"
         :danmaku="video.danmaku ?? 0"
-        :published-timestamp="video.ctime"
+        :published-timestamp="video.ctime ?? 0"
         :aid="Number(video.param)"
       />
     </template>
