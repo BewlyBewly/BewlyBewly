@@ -19,10 +19,10 @@ interface OptionType {
 const label = ref<string>('')
 const showOptions = ref<boolean>(false)
 
-watch(() => locale.value, (newValue, oldValue) => {
-  // console.log('locale change')
-
-  getCurrentInstance()?.proxy?.$forceUpdate()
+onUpdated(() => {
+  // fix the issue when the dropdown menu text doesn't update in real-time based on the updated page language
+  if (props.options)
+    label.value = `${props.options.find((item: OptionType) => item.value === props.modelValue)?.label}`
 })
 
 onMounted(() => {
