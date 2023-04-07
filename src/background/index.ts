@@ -52,6 +52,8 @@ onMessage('get-current-tab', async () => {
 browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChangeInfoType, tab: Tabs.Tab) => {
   if (
     /https?:\/\/bilibili.com\/?$/.test(`${tab.url}`)
+    || /https?:\/\/bilibili.com\/index.html\/?$/.test(`${tab.url}`)
+    || /https?:\/\/www.bilibili.com\/index.html\/?$/.test(`${tab.url}`)
     || /https?:\/\/www.bilibili.com\/?$/.test(`${tab.url}`)
     || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(`${tab.url}`)
     || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(`${tab.url}`)
