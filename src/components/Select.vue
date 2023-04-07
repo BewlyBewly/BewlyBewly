@@ -1,15 +1,10 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
-import { getCurrentInstance } from 'vue'
-
 const props = defineProps<{
   options: OptionType[]
   modelValue: string
 }>()
 
 const emit = defineEmits(['update:modelValue'])
-
-const { locale } = useI18n()
 
 interface OptionType {
   value: string

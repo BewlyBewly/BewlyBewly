@@ -126,6 +126,14 @@ topbar:
     sticker: Sticker
     video: Video
     manager: Manager
+dock:
+  search: Search
+  home: Home
+  anime: Anime
+  history: History
+  dark_mode: Dark Mode
+  light_mode: Light Mode
+  settings: Settings
 home:
   not_interested_in: Not interested in...
   video_removed: Video removed

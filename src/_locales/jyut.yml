@@ -39,8 +39,8 @@ settings:
   dock_position: Dock 放位
   dock_position_desc: 放喺螢幕邊度
   dock_position_opt:
-    left: 左側
-    right: 右側
+    left: 左邊
+    right: 右邊
     bottom: 下低
   theme_color: 佈景色
   follow_bilibili_evolved_color: 跟返 Bilibili Evolved 佈景色
@@ -125,6 +125,14 @@ topbar:
     sticker: 出貼圖
     video: Po 片
     manager: 內容管理
+dock:
+  search: 搵嘢
+  home: 主頁
+  anime: 動畫
+  history: 收睇記錄
+  dark_mode: 深色模式
+  light_mode: 淺色模式
+  settings: 校做
 home:
   not_interested_in: 對邊方面冇癮？
   video_removed: 經已鏟咗條片

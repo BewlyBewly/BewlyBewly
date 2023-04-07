@@ -120,6 +120,14 @@ topbar:
     sticker: 上傳貼圖
     video: 上傳影片
     manager: 內容管理
+dock:
+  search: 搜尋
+  home: 首頁
+  anime: 動畫
+  history: 觀看記錄
+  dark_mode: 深色模式
+  light_mode: 淺色模式
+  settings: 設定
 home:
   not_interested_in: 對哪方面不感興趣？
   video_removed: 影片已移除

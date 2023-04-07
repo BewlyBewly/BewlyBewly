@@ -34,6 +34,16 @@ const pages = { Home, Search, Anime, History, Favorites, Video }
 const isVideoPage = ref<boolean>(false)
 const mainApp = ref<HTMLElement>()
 
+const tooltipPlacement = computed(() => {
+  if (settings.value.dockPosition === 'left')
+    return 'right'
+  else if (settings.value.dockPosition === 'right')
+    return 'left'
+  else if (settings.value.dockPosition === 'bottom')
+    return 'top'
+  return 'right'
+})
+
 watch(
   () => activatedPage.value,
   (newValue, oldValue) => {
@@ -133,85 +143,50 @@ function setAppAppearance() {
         >
           <div
             class="dock-content"
-            p-2
-            m-2
-            bg="$bew-content-1"
-            flex="~ col gap-2 shrink-0"
+            p-2 m-2 bg="$bew-content-1" flex="~ col gap-2 shrink-0"
             rounded="$bew-radius"
             shadow="$bew-shadow-2"
             style="backdrop-filter: var(--bew-filter-glass)"
           >
-            <div
-              class="dock-item"
-              :class="{ active: activatedPage === AppPage.Search && !isVideoPage }"
-              @click="changeActivatePage(AppPage.Search)"
-            >
+            <Tooltip :content="$t('dock.search')" :placement="tooltipPlacement">
               <div
-                class="tooltip"
-                :class="{
-                  left: settings.dockPosition === 'left',
-                  right: settings.dockPosition === 'right',
-                  bottom: settings.dockPosition === 'bottom',
-                }"
+                class="dock-item"
+                :class="{ active: activatedPage === AppPage.Search && !isVideoPage }"
+                @click="changeActivatePage(AppPage.Search)"
               >
-                Search
+                <tabler:search />
               </div>
-              <tabler:search />
-            </div>
+            </Tooltip>
 
-            <div
-              class="dock-item"
-              :class="{ active: activatedPage === AppPage.Home && !isVideoPage }"
-              @click="changeActivatePage(AppPage.Home)"
-            >
+            <Tooltip :content="$t('dock.home')" :placement="tooltipPlacement">
               <div
-                class="tooltip"
-                :class="{
-                  left: settings.dockPosition === 'left',
-                  right: settings.dockPosition === 'right',
-                  bottom: settings.dockPosition === 'bottom',
-                }"
+                class="dock-item"
+                :class="{ active: activatedPage === AppPage.Home && !isVideoPage }"
+                @click="changeActivatePage(AppPage.Home)"
               >
-                Home
+                <tabler:home />
               </div>
-              <tabler:home />
-            </div>
+            </Tooltip>
 
-            <div
-              class="dock-item"
-              :class="{ active: activatedPage === AppPage.Anime && !isVideoPage }"
-              @click="changeActivatePage(AppPage.Anime)"
-            >
+            <Tooltip :content="$t('dock.anime')" :placement="tooltipPlacement">
               <div
-                class="tooltip"
-                :class="{
-                  left: settings.dockPosition === 'left',
-                  right: settings.dockPosition === 'right',
-                  bottom: settings.dockPosition === 'bottom',
-                }"
+                class="dock-item"
+                :class="{ active: activatedPage === AppPage.Anime && !isVideoPage }"
+                @click="changeActivatePage(AppPage.Anime)"
               >
-                Anime
+                <tabler:device-tv />
               </div>
-              <tabler:device-tv />
-            </div>
+            </Tooltip>
 
-            <div
-              class="dock-item"
-              :class="{ active: activatedPage === AppPage.History && !isVideoPage }"
-              @click="changeActivatePage(AppPage.History)"
-            >
+            <Tooltip :content="$t('dock.history')" :placement="tooltipPlacement">
               <div
-                class="tooltip"
-                :class="{
-                  left: settings.dockPosition === 'left',
-                  right: settings.dockPosition === 'right',
-                  bottom: settings.dockPosition === 'bottom',
-                }"
+                class="dock-item"
+                :class="{ active: activatedPage === AppPage.History && !isVideoPage }"
+                @click="changeActivatePage(AppPage.History)"
               >
-                History
+                <tabler:clock />
               </div>
-              <tabler:clock />
-            </div>
+            </Tooltip>
 
             <!-- <div
             class="dock-item"
@@ -234,35 +209,18 @@ function setAppAppearance() {
             <!-- dividing line -->
             <div class="divider" />
 
-            <div class="dock-item" @click="toggleDark()">
-              <div
-                class="tooltip"
-                :class="{
-                  left: settings.dockPosition === 'left',
-                  right: settings.dockPosition === 'right',
-                  bottom: settings.dockPosition === 'bottom',
-                }"
-              >
-                <span v-if="isDark">Light mode</span>
-                <span v-else>Dark mode</span>
+            <Tooltip :content="isDark ? $t('dock.dark_mode') : $t('dock.light_mode')" :placement="tooltipPlacement">
+              <div class="dock-item" @click="toggleDark()">
+                <tabler:moon-stars v-if="isDark" />
+                <tabler:sun v-else />
               </div>
-              <tabler:moon-stars v-if="isDark" />
-              <tabler:sun v-else />
-            </div>
+            </Tooltip>
 
-            <div class="dock-item" @click="toggle()">
-              <div
-                class="tooltip"
-                :class="{
-                  left: settings.dockPosition === 'left',
-                  right: settings.dockPosition === 'right',
-                  bottom: settings.dockPosition === 'bottom',
-                }"
-              >
-                Settings
+            <Tooltip :content="$t('dock.settings')" :placement="tooltipPlacement">
+              <div class="dock-item" @click="toggle()">
+                <tabler:settings />
               </div>
-              <tabler:settings />
-            </div>
+            </Tooltip>
           </div>
         </aside>
 
@@ -353,31 +311,6 @@ function setAppAppearance() {
       --at-apply: bg-$bew-warning-color text-black;
     }
 
-    .tooltip {
-      --at-apply: absolute px-2 py-1 rounded-8
-        bg-black dark:bg-white
-        pointer-events-none
-        text-sm text-white dark:text-black
-        opacity-0 duration-300;
-        white-space: nowrap;
-
-      &.left {
-        --at-apply: left-[calc(45px+1em)];
-      }
-
-      &.right{
-        --at-apply: right-[calc(45px+1em)];
-      }
-
-      &.bottom {
-        --at-apply: top--3em left-1/2;
-        transform: translateX(-50%);
-      }
-    }
-
-    &:hover .tooltip {
-      --at-apply: opacity-100;
-    }
   }
 }
 </style>

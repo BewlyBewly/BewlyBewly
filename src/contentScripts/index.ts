@@ -2,7 +2,7 @@ import { onMessage } from 'webext-bridge'
 import { createApp } from 'vue'
 import App from './views/App.vue'
 import { setupApp } from '~/logic/common-setup'
-import { SVG_ICONS, getCookie, i18n, setCookie } from '~/utils'
+import { SVG_ICONS, i18n } from '~/utils'
 
 // Firefox `browser.tabs.executeScript()` requires scripts return a primitive value
 (() => {

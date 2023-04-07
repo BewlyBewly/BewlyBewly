@@ -125,6 +125,14 @@ topbar:
     sticker: 贴纸
     video: 视频
     manager: 投稿
+dock:
+  search: 搜索
+  home: 首页
+  anime: 番剧
+  history: 观看历史
+  dark_mode: 暗色模式
+  light_mode: 亮色模式
+  settings: 设置
 home:
   not_interested_in: 对哪方面不感兴趣？
   video_removed: 视频已移除
