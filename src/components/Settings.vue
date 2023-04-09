@@ -97,7 +97,7 @@ function changeThemeColor(color: string) {
 <template>
   <div class="fixed w-full h-full top-0 left-0 bg-black bg-opacity-30" z="9998" @click="close" />
 
-  <div id="settings-window" z="9999">
+  <div id="settings-window" z="9999" overflow-hidden>
     <div relative overflow-y-scroll overflow-x-hidden h-full p-8>
       <header
         flex justify-between items-center w-full h-80px
