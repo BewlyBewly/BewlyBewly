@@ -1,16 +1,18 @@
 <script setup lang="ts">
 // import PopularAnimeCarousel from './components/PopularAnimeCarousel.vue'
 import AnimeTimeTable from './components/AnimeTimeTable.vue'
+import AnimeCard from './components/AnimeCard.vue'
+import AnimeCardSkeleton from './components/AnimeCardSkeleton.vue'
 import type { AnimeItem, PopularAnime } from './types'
 import { getUserID, numFormatter, removeHttpFromUrl } from '~/utils'
-import { LanguageType } from '~/enums/appEnums'
-import { language } from '~/logic'
 
 const animeWatchList = reactive<AnimeItem[]>([])
 const recommendAnimeList = reactive<AnimeItem[]>([])
 const popularAnimeList = reactive<AnimeItem[]>([])
-const coursor = ref<number>(29) // 遊標默認必須要非0，否則第一次會出現同樣的結果
-const isLoading = ref<boolean>()
+const coursor = ref<number>(0)
+const isLoadingAnimeWatchList = ref<boolean>()
+const isLoadingPopularAnime = ref<boolean>()
+const isLoadingRecommendAnime = ref<boolean>()
 const activatedSeasonId = ref<number>()
 
 onMounted(() => {
@@ -23,7 +25,7 @@ onMounted(() => {
       window.innerHeight + window.scrollY
       >= document.body.scrollHeight - 20
     ) {
-      if (isLoading.value)
+      if (isLoadingRecommendAnime.value)
         return
 
       getRecommendAnimeList()
@@ -37,7 +39,7 @@ onUnmounted(() => {
 })
 
 function getAnimeWatchList() {
-  isLoading.value = true
+  isLoadingAnimeWatchList.value = true
   browser.runtime
     .sendMessage({
       contentScriptQuery: 'getAnimeWatchList',
@@ -55,12 +57,12 @@ function getAnimeWatchList() {
     })
     .catch(() => Object.assign(animeWatchList, []))
     .finally(() => {
-      isLoading.value = false
+      isLoadingAnimeWatchList.value = false
     })
 }
 
 function getRecommendAnimeList() {
-  isLoading.value = true
+  isLoadingRecommendAnime.value = true
   browser.runtime
     .sendMessage({
       contentScriptQuery: 'getRecommendAnimeList',
@@ -78,13 +80,14 @@ function getRecommendAnimeList() {
 
         coursor.value = coursor
       }
-    }).catch(() => coursor.value = 29)
+    }).catch(() => coursor.value = 0)
     .finally(() => {
-      isLoading.value = false
+      isLoadingRecommendAnime.value = false
     })
 }
 
 function getPopularAnimeList() {
+  isLoadingPopularAnime.value = true
   browser.runtime
     .sendMessage({
       contentScriptQuery: 'getPopularAnimeList',
@@ -97,6 +100,8 @@ function getPopularAnimeList() {
       if (code === 0)
         Object.assign(popularAnimeList, list as PopularAnime[])
     })
+    .catch(() => {})
+    .finally(() => isLoadingPopularAnime.value = false)
 }
 </script>
 
@@ -121,60 +126,34 @@ function getPopularAnimeList() {
 
         <HorizontalScrollView w="[calc(100%+1.5rem)]">
           <div w-full flex>
-            <article
+            <template v-if="isLoadingAnimeWatchList">
+              <AnimeCardSkeleton
+                v-for="item in 6" :key="item"
+                w="2xl:[calc(100%/6-1.5rem)] xl:[calc(100%/5-1.5rem)] lg:[calc(100%/4-1.5rem)] md:[calc(100%/3-1.5rem)] sm:[calc(100%/2-1.5rem)] [calc(100%-1.5rem)]"
+                last:w="2xl:1/6 xl:1/5 lg:1/4 md:1/3 sm:1/2 full"
+                shrink-0
+                m="r-6"
+                last:pr-6
+              />
+            </template>
+            <AnimeCard
               v-for="item in animeWatchList"
               :key="item.episode_id"
+              :url="item.url"
+              :cover="item.cover"
+              :title="item.title"
+              :capsule-text="item.is_finish
+                ? $t('anime.total_episodes', { ep: item.total_count })
+                : $t('anime.update_to_n_episodes', {
+                  ep: item.total_count,
+                })"
+              :desc="item.progress !== '' ? item.progress : $t('anime.havent_seen')"
               w="2xl:[calc(100%/6-1.5rem)] xl:[calc(100%/5-1.5rem)] lg:[calc(100%/4-1.5rem)] md:[calc(100%/3-1.5rem)] sm:[calc(100%/2-1.5rem)] [calc(100%-1.5rem)]"
               last:w="2xl:1/6 xl:1/5 lg:1/4 md:1/3 sm:1/2 full"
               shrink-0
               m="r-6"
               last:pr-6
-            >
-              <a
-                rounded="$bew-radius"
-                aspect="12/16"
-                overflow-hidden
-                mb-4
-                bg="$bew-fill-3"
-                :href="item.url"
-                target="_blank"
-              >
-                <img
-                  :src="`${removeHttpFromUrl(item.cover)}@466w_622h.webp`"
-                  :alt="item.title"
-                  rounded="$bew-radius"
-                >
-              </a>
-              <p un-text="lg" my-4>
-                <a
-                  :href="item.url"
-                  target="_blank"
-                  class="keep-two-lines"
-                  :title="item.title"
-                >
-                  {{ item.title }}
-                </a>
-              </p>
-              <p text="$bew-text-2" mb-10>
-                <span
-                  text="$bew-theme-color"
-                  bg="$bew-theme-color-20"
-                  p="x-3 y-1"
-                  mr-2
-                  rounded-4
-                  lh-loose
-                >{{
-                  item.is_finish
-                    ? $t('anime.total_episodes', { ep: item.total_count })
-                    : $t('anime.update_to_n_episodes', {
-                      ep: item.total_count,
-                    })
-                }}</span>
-                {{
-                  item.progress !== '' ? item.progress : $t('anime.havent_seen')
-                }}
-              </p>
-            </article>
+            />
           </div>
         </HorizontalScrollView>
       </section>
@@ -194,7 +173,17 @@ function getPopularAnimeList() {
 
         <HorizontalScrollView w="[calc(100%+1.5rem)]">
           <div w-full flex>
-            <article
+            <template v-if="isLoadingPopularAnime">
+              <AnimeCardSkeleton
+                v-for="item in 6" :key="item"
+                w="2xl:[calc(100%/6-1.5rem)] xl:[calc(100%/5-1.5rem)] lg:[calc(100%/4-1.5rem)] md:[calc(100%/3-1.5rem)] sm:[calc(100%/2-1.5rem)] [calc(100%-1.5rem)]"
+                last:w="2xl:1/6 xl:1/5 lg:1/4 md:1/3 sm:1/2 full"
+                shrink-0
+                m="r-6"
+                last:pr-6
+              />
+            </template>
+            <AnimeCard
               v-for="item in popularAnimeList"
               :key="item.episode_id"
               w="2xl:[calc(100%/6-1.5rem)] xl:[calc(100%/5-1.5rem)] lg:[calc(100%/4-1.5rem)] md:[calc(100%/3-1.5rem)] sm:[calc(100%/2-1.5rem)] [calc(100%-1.5rem)]"
@@ -202,63 +191,13 @@ function getPopularAnimeList() {
               shrink-0
               m="r-6"
               last:pr-6
-            >
-              <a
-                rounded="$bew-radius"
-                aspect="12/16"
-                mb-4
-                bg="$bew-fill-3"
-                :href="item.url"
-                target="_blank"
-                relative
-              >
-                <div
-                  w-full
-                  pos="absolute bottom-0"
-                  text="white 7xl shadow-xl"
-                  px-2
-                  fw-bold
-                  h-150px
-                  flex
-                  items-end
-                  bg="gradient-to-b gradient-from-transparent gradient-to-[rgba(0,0,0,.6)]"
-                  rounded-b="$bew-radius"
-                >
-                  {{ item.rank }}
-                </div>
-                <img
-                  :src="`${removeHttpFromUrl(item.cover)}@466w_622h.webp`"
-                  :alt="item.title"
-                  rounded="$bew-radius"
-                >
-              </a>
-              <p un-text="lg" my-4>
-                <a
-                  :href="item.url"
-                  target="_blank"
-                  class="keep-two-lines"
-                  :title="item.title"
-                >
-                  {{ item.title }}
-                </a>
-              </p>
-              <p text="$bew-text-2" mb-10>
-                <span
-                  text="$bew-theme-color"
-                  bg="$bew-theme-color-20"
-                  p="x-3 y-1"
-                  mr-2
-                  rounded-4
-                  lh-loose
-                >{{ item.rating.replace('分', '') }}
-                </span>
-                {{
-                  $t('anime.follow', {
-                    num: numFormatter(item.stat.series_follow),
-                  })
-                }}
-              </p>
-            </article>
+              :url="item.url"
+              :cover="item.cover"
+              :title="item.title"
+              :desc="$t('anime.follow', { num: numFormatter(item.stat.series_follow) })"
+              :capsule-text="item.rating ? item.rating.replace('分', '') : '-:-'"
+              :rank="item.rank"
+            />
           </div>
         </HorizontalScrollView>
       </section>
@@ -386,11 +325,16 @@ function getPopularAnimeList() {
               {{ item.sub_title }}
             </p>
           </article>
+          <template v-if="isLoadingRecommendAnime">
+            <AnimeCardSkeleton
+              v-for="item in 30" :key="item"
+            />
+          </template>
         </div>
       </section>
     </div>
     <!-- loading -->
-    <loading v-if="isLoading && recommendAnimeList.length !== 0" m="-t-4" />
+    <loading v-if="isLoadingRecommendAnime && recommendAnimeList.length !== 0" m="-t-4" />
   </div>
 </template>
 

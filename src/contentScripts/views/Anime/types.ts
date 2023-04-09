@@ -47,6 +47,7 @@ export interface AnimeItem {
     danmaku: number
     duration: number
     view: number
+    series_follow: number
   }
   sub_title: string
   subtitle: string
@@ -59,6 +60,7 @@ export interface AnimeItem {
   is_finish: 1 | 0 // 是否已經完結
   total_count: number // 當前集數
   styles: string[] // 番劇風格
+  rank: number
 }
 
 // https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/bangumi/timeline.md#%E8%8E%B7%E5%8F%96%E7%95%AA%E5%89%A7%E6%88%96%E5%BD%B1%E8%A7%86%E6%97%B6%E9%97%B4%E7%BA%BF
