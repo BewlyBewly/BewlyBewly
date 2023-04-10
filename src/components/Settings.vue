@@ -179,12 +179,16 @@ function changeThemeColor(color: string) {
         <button
           v-if="!accessKey"
           ref="authorizeBtn"
-          class="btn"
+          bg="$bew-theme-color" text-white lh-35px rounded="$bew-radius"
           @click="handleAuthorize"
         >
           {{ $t('settings.btn.authorize') }}
         </button>
-        <button v-else class="line-btn" @click="handleRevoke">
+        <button
+          v-else
+          un-border="2px solid $bew-error-color" text="$bew-error-color" lh-35px rounded="$bew-radius"
+          @click="handleRevoke"
+        >
           <span>{{ $t('settings.btn.revoke') }}</span>
         </button>
       </div>

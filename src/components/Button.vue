@@ -72,6 +72,12 @@ const handleClick = (evt: MouseEvent) => {
     --b-text-color: white;
   }
 
+  &--type-error {
+    --b-color: var(--bew-error-color);
+    --b-color-hover: var(--bew-error-color)
+    --b-text-color: white;
+  }
+
   &--size-small {
     --b-padding: 6px 12px;
     --b-font-size: 14px;
