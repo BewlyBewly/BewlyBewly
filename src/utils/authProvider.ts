@@ -7,12 +7,14 @@ import { accessKey } from '~/logic/storage'
  * https://github.com/indefined/UserScripts/blob/42e20281d2e4d7bce16b5c8033b67ccb6ad312e9/bilibiliHome/bilibiliHome.user.js#L1149
  */
 
+// TODO: 解耦，避免直接操作DOM
+
 export const revokeAccessKey = () => {
   accessKey.value = null
 }
 
 export const grantAccessKey = (element: HTMLButtonElement): void => {
-  const orginalInnerHTML = element.innerHTML
+  const originalInnerHTML = element.innerHTML
   element.innerHTML = `
     <span class="animate-pulse">Loading...</span>
   `
@@ -36,7 +38,7 @@ export const grantAccessKey = (element: HTMLButtonElement): void => {
       else if (!data.data.has_login)
         throw { tip, msg: 'Please login to bilibili first', data }
       else if (!data.data.confirm_uri)
-        throw { tip, msg: 'Unable to receive verified URL. Please go back and try againe.', data }
+        throw { tip, msg: 'Unable to receive verified URL. Please go back and try again.', data }
       else return data.data.confirm_uri
     })
     .then(
@@ -56,7 +58,7 @@ export const grantAccessKey = (element: HTMLButtonElement): void => {
           }),
     )
     .catch((error) => {
-      element.innerHTML = orginalInnerHTML
+      element.innerHTML = originalInnerHTML
       element.style.pointerEvents = 'auto'
       element.disabled = false
 
