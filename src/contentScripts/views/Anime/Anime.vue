@@ -4,7 +4,7 @@ import AnimeTimeTable from './components/AnimeTimeTable.vue'
 import AnimeCard from './components/AnimeCard.vue'
 import AnimeCardSkeleton from './components/AnimeCardSkeleton.vue'
 import type { AnimeItem, PopularAnime } from './types'
-import { getUserID, numFormatter, removeHttpFromUrl } from '~/utils'
+import { getUserID, numFormatter, openLinkToNewTab, removeHttpFromUrl } from '~/utils'
 
 const animeWatchList = reactive<AnimeItem[]>([])
 const recommendAnimeList = reactive<AnimeItem[]>([])
@@ -113,15 +113,18 @@ function getPopularAnimeList() {
       </section> -->
 
       <!-- Your Watchlist -->
-      <section v-if="getUserID()" mb-8>
-        <div flex justify-between items-end mb-6>
+      <section v-if="getUserID()" mb-8 mt-4>
+        <div flex justify-between items-center mb-6>
           <h3 text="3xl $bew-text-1" font="bold">
             {{ $t('anime.your_watch_list') }}
           </h3>
-          <a
-            :href="`https://space.bilibili.com/${getUserID() ?? 0}/bangumi`"
-            target="_blank"
-          >{{ $t('common.view_all') }}</a>
+          <Button
+            size="small"
+            shadow="$bew-shadow-1"
+            @click="openLinkToNewTab(`https://space.bilibili.com/${getUserID() ?? 0}/bangumi`)"
+          >
+            {{ $t('common.view_all') }}
+          </Button>
         </div>
 
         <HorizontalScrollView w="[calc(100%+1.5rem)]">
@@ -160,15 +163,17 @@ function getPopularAnimeList() {
 
       <!-- Popular Anime -->
       <section mb-8>
-        <div flex justify-between items-end mb-6>
+        <div flex justify-between items-center mb-6>
           <h3 text="3xl $bew-text-1" font="bold">
             {{ $t('anime.popular_anime') }}
           </h3>
-          <a
-            href="https://www.bilibili.com/v/popular/rank/bangumi"
-            target="_blank"
-            un-text="$bew-theme-color"
-          >{{ $t('common.view_all') }}</a>
+          <Button
+            size="small"
+            shadow="$bew-shadow-1"
+            @click="openLinkToNewTab(`https://www.bilibili.com/v/popular/rank/bangumi`)"
+          >
+            {{ $t('common.view_all') }}
+          </Button>
         </div>
 
         <HorizontalScrollView w="[calc(100%+1.5rem)]">

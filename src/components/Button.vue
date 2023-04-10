@@ -1,17 +1,13 @@
 <script lang="ts" setup>
-type Type =
-  | 'default'
+interface Props {
+  type?: | 'default'
   | 'primary'
   | 'secondary'
   | 'info'
   | 'success'
   | 'warning'
   | 'error'
-type Size = 'small' | 'medium' | 'large'
-
-interface Props {
-  type?: Type
-  size?: Size
+  size?: 'small' | 'medium' | 'large'
   /** @description enable frosted glass effect */
   frosted?: boolean
 }

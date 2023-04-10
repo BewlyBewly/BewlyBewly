@@ -97,7 +97,7 @@ function changeThemeColor(color: string) {
 <template>
   <div class="fixed w-full h-full top-0 left-0 bg-black bg-opacity-30" z="9998" @click="close" />
 
-  <div id="settings-window" z="9999" overflow-hidden>
+  <div id="settings-window">
     <div relative overflow-y-scroll overflow-x-hidden h-full p-8>
       <header
         flex justify-between items-center w-full h-80px
@@ -264,9 +264,13 @@ function changeThemeColor(color: string) {
 
 <style lang="scss" scoped>
 #settings-window {
-  --at-apply: fixed top-1/5 left-1/2 w-1/2 h-1/2 max-w-800px
+  --at-apply: fixed md:top-1/5 top-0 left-1/2
+    lg:1/2 md:w-2/3 w-full
+    md:h-1/2 h-full
+
+    max-w-800px
     transform -translate-x-1/2
-    rounded-$bew-radius
+    rounded-$bew-radius z-9999 overflow-hidden
     bg-$bew-content-solid-1;
   box-shadow: var(--bew-shadow-3);
 
