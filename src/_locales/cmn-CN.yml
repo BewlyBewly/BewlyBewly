@@ -46,10 +46,10 @@ settings:
   follow_bilibili_evolved_color: 使用 Bilibili Evolved 主题色
   follow_bilibili_evolved_color_desc: 每次选完 Bilibili Evolved 主题色时，记得重新选中这一选项以更新配置
 auth:
-  err_tip: Failed to grant Access Key
-  plz_login_first: Please login to bilibili first
-  receive_verified_url_err: Unable to receive verified URL. Please go back and try againe.
-  failed_to_get_accesskey: Failed to get Access Key
+  err_tip: 授权 access key 失败
+  plz_login_first: 请先登录 bilibili
+  receive_verified_url_err: 未知错误，请刷新页面后重试
+  failed_to_get_accesskey: 获取 access key 失败
 topbar:
   sign_in: 登录
   notifications: 通知

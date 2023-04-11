@@ -46,10 +46,10 @@ settings:
   follow_bilibili_evolved_color: 跟返 Bilibili Evolved 佈景色
   follow_bilibili_evolved_color_desc: 每次換完 Bilibili Evolved 佈景色嗰陣，記得揀多一次呢個選項愛嚟更新佈置
 auth:
-  err_tip: Failed to grant Access Key
-  plz_login_first: Please login to bilibili first
-  receive_verified_url_err: Unable to receive verified URL. Please go back and try again.
-  failed_to_get_accesskey: Failed to get Access Key
+  err_tip: 無法授權 access key
+  plz_login_first: 唔該登入 bilibili 先
+  receive_verified_url_err: 好似神神哋，試吓 refresh 個 page 之後試多次 
+  failed_to_get_accesskey: 攞唔度 access key
 topbar:
   sign_in: 登入
   notifications: 通知

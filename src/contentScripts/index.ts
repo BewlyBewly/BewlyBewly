@@ -1,8 +1,11 @@
-import { onMessage } from 'webext-bridge'
+// import { onMessage } from 'webext-bridge'
 import { createApp } from 'vue'
+import type { App as AppType } from 'vue'
 import App from './views/App.vue'
 import { setupApp } from '~/logic/common-setup'
 import { SVG_ICONS, i18n } from '~/utils'
+
+let app: AppType | null = null;
 
 // Firefox `browser.tabs.executeScript()` requires scripts return a primitive value
 (() => {
@@ -58,8 +61,10 @@ import { SVG_ICONS, i18n } from '~/utils'
     shadowDOM.appendChild(svgDiv)
 
     document.body.appendChild(container)
-    const app = createApp(App)
+    app = createApp(App)
     setupApp(app)
     app.use(i18n).mount(root)
   }
 })()
+
+export default app as AppType

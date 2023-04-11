@@ -23,13 +23,13 @@ settings:
     jyut: 廣東話
   recommendation_mode: 推薦模式
   recommendation_mode_desc: >
-    如果您想要使用手機端的推薦演算法，請先授權 BewlyBewly 使用存取 access key。
+    如果您想要使用手機端的推薦演算法，請先授權 BewlyBewly 使用 access key。
   authorize_app: 授權 BewlyBewly 使用 access key
   authorize_app_desc: |
-    授權使用後能在首頁推送 bilibili 手機端推介演算法的影片，授權 key 的有效期約爲一個月，過了有效期後，請記得重新取得授權以取得存取 access key。
+    授權使用後能在首頁推送 bilibili 手機端推介演算法的影片，授權 key 的有效期約爲一個月，過了有效期後，請記得重新取得授權以取得 access key。
   authorize_app_more_info_access_key: 關於 access key
   topbar_visible: 頂欄可視性
-  topbar_visible_desc: 用於相容 Bilibili Evolved 的客製化頂欄
+  topbar_visible_desc: 用於相容 Bilibili Evolved 自訂頂欄
   btn:
     authorize: 授權
     revoke: 解除授權
@@ -44,7 +44,12 @@ settings:
     bottom: 底部
   theme_color: 主題色
   follow_bilibili_evolved_color: 使用 Bilibili Evolved 主題色
-  follow_bilibili_evolved_color_desc: 每次變更 Bilibili Evolved 主題色後，必須重新選取此選項以更新配置
+  follow_bilibili_evolved_color_desc: 每次變更 Bilibili Evolved 主題色後，記得重新選取此選項以更新配置
+auth:
+  err_tip: 無法授權 access key
+  plz_login_first: 請先登入 bilibili
+  receive_verified_url_err: 不明錯誤，請重新整理頁面後再試一次。
+  failed_to_get_accesskey: 無法取得 access key
 topbar:
   sign_in: 登入
   notifications: 通知

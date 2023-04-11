@@ -1,13 +1,19 @@
-/* eslint-disable no-throw-literal */
-import browser from 'webextension-polyfill'
-import { accessKey } from '~/logic/storage'
-
 /**
  * 感謝這份專案給出的獲取accessKey的方法
  * https://github.com/indefined/UserScripts/blob/42e20281d2e4d7bce16b5c8033b67ccb6ad312e9/bilibiliHome/bilibiliHome.user.js#L1149
+ * TODO: 解耦，避免直接操作DOM
  */
 
-// TODO: 解耦，避免直接操作DOM
+/* eslint-disable no-throw-literal */
+import browser from 'webextension-polyfill'
+import type { ComponentCustomProperties } from 'vue'
+import { accessKey } from '~/logic/storage'
+import app from '~/contentScripts/index'
+
+let vueGlobalProperties: ComponentCustomProperties & Record<string, any>
+nextTick(() => {
+  vueGlobalProperties = app.config.globalProperties
+})
 
 export const revokeAccessKey = () => {
   accessKey.value = null
@@ -21,8 +27,7 @@ export const grantAccessKey = (element: HTMLButtonElement): void => {
   element.style.pointerEvents = 'none'
   element.disabled = true
 
-  const tip = 'Failed to grant Access Key'
-
+  const tip = vueGlobalProperties.$t('auth.err_tip')
   fetch(
     'https://passport.bilibili.com/login/app/third?appkey=27eb53fc9058f8c3'
       + '&api=https%3A%2F%2Fwww.mcbbs.net%2Ftemplate%2Fmcbbs%2Fimage%2Fspecial_photo_bg.png&sign=04224646d1fea004e79606d3b038c84a',
@@ -36,9 +41,9 @@ export const grantAccessKey = (element: HTMLButtonElement): void => {
       if (data.code || !data.data)
         throw { tip, msg: data.msg || data.message || data.code, data }
       else if (!data.data.has_login)
-        throw { tip, msg: 'Please login to bilibili first', data }
+        throw { tip, msg: vueGlobalProperties.$t('auth.plz_login_first'), data }
       else if (!data.data.confirm_uri)
-        throw { tip, msg: 'Unable to receive verified URL. Please go back and try again.', data }
+        throw { tip, msg: vueGlobalProperties.$t('auth.receive_verified_url_err'), data }
       else return data.data.confirm_uri
     })
     .then(
@@ -54,7 +59,7 @@ export const grantAccessKey = (element: HTMLButtonElement): void => {
           })
           .catch((err: any) => {
             // eslint-disable-next-line prefer-promise-reject-errors
-            return Promise.reject({ tip, msg: 'Failed to get Access Key', data: err })
+            return Promise.reject({ tip, msg: vueGlobalProperties.$t('auth.failed_to_get_accesskey'), data: err })
           }),
     )
     .catch((error) => {
