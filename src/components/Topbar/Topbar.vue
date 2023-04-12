@@ -26,7 +26,7 @@ const showUploadPop = ref<boolean>(false)
 const showHistoryPop = ref<boolean>(false)
 const showMorePop = ref<boolean>(false)
 
-const isLogin = ref<boolean>(!!getUserID())
+const isLogin = ref<boolean>(false)
 const unReadMessage = reactive<UnReadMessage | {}>(
   {},
 ) as UnwrapNestedRefs<UnReadMessage>
@@ -62,8 +62,8 @@ onMounted(() => {
   })
 })
 
-function initUserPanel() {
-  getUserInfo()
+async function initUserPanel() {
+  await getUserInfo()
   getUnreadMessageCount()
   getNewMomentsCount()
 
@@ -96,18 +96,18 @@ function closeUserPanel() {
   avatarShadow.value.classList.remove('hover')
 }
 
-function getUserInfo() {
-  browser.runtime
+async function getUserInfo() {
+  const res = await browser.runtime
     .sendMessage({
       contentScriptQuery: 'getUserInfo',
     })
-    .then((res) => {
-      if (res.code === 0)
-        Object.assign(userInfo, res.data)
-      // Account not logged in
-      else if (res.code === -101)
-        isLogin.value = false
-    })
+
+  if (res.code === 0) {
+    isLogin.value = true
+    Object.assign(userInfo, res.data)
+  }
+  // Account not logged in
+  else if (res.code === -101) { isLogin.value = false }
 }
 
 async function getUnreadMessageCount() {
