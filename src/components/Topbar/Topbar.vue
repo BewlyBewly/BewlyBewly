@@ -3,7 +3,7 @@ import type { Ref, UnwrapNestedRefs } from 'vue'
 import { Transition, onMounted, watch } from 'vue'
 import type { UnReadDm, UnReadMessage, UserInfo } from './types'
 import { updateInterval } from './notify'
-import { getUserID } from '~/utils'
+import { getUserID } from '~/utils/main'
 
 interface Props {
   showSearchBar: boolean

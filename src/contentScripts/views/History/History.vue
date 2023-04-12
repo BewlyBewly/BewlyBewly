@@ -3,12 +3,8 @@ import { useDateFormat } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 import { HistoryType } from './types'
 import type { HistoryItem } from './types'
-import {
-  calcCurrentTime,
-  getCSRF,
-  openLinkToNewTab,
-  removeHttpFromUrl,
-} from '~/utils'
+import { getCSRF, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
+import { calcCurrentTime } from '~/utils/dataFormatter'
 
 const { t } = useI18n()
 

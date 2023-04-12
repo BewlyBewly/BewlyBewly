@@ -2,7 +2,8 @@
 import type { Ref } from 'vue'
 import { TransitionGroup, onMounted, reactive, ref, watch } from 'vue'
 import type { FavoriteCategory, FavoriteResource } from './types'
-import { calcCurrentTime, getUserID, removeHttpFromUrl } from '~/utils'
+import { getUserID, removeHttpFromUrl } from '~/utils/main'
+import { calcCurrentTime } from '~/utils/dataFormatter'
 
 const favoriteCategories = reactive<Array<FavoriteCategory>>([])
 const favoriteResources = reactive<Array<FavoriteResource>>([])

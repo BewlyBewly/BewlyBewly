@@ -2,7 +2,8 @@
 import type { Ref, UnwrapNestedRefs } from 'vue'
 import { useDateFormat } from '@vueuse/core'
 import type { Comment, UserCardInfo, VideoInfo } from './types'
-import { calcTimeSince, getCSRF, numFormatter, removeHttpFromUrl } from '~/utils'
+import { getCSRF, removeHttpFromUrl } from '~/utils/main'
+import { calcTimeSince, numFormatter } from '~/utils/dataFormatter'
 
 const videoContent = ref() as Ref<HTMLElement>
 // const commentContent = ref() as Ref<HTMLElement>

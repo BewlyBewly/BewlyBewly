@@ -4,7 +4,8 @@ import AnimeTimeTable from './components/AnimeTimeTable.vue'
 import AnimeCard from './components/AnimeCard.vue'
 import AnimeCardSkeleton from './components/AnimeCardSkeleton.vue'
 import type { AnimeItem, PopularAnime } from './types'
-import { getUserID, numFormatter, openLinkToNewTab, removeHttpFromUrl } from '~/utils'
+import { getUserID, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
+import { numFormatter } from '~/utils/dataFormatter'
 
 const animeWatchList = reactive<AnimeItem[]>([])
 const recommendAnimeList = reactive<AnimeItem[]>([])

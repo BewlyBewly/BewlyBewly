@@ -3,7 +3,8 @@ import { createApp } from 'vue'
 import type { App as AppType } from 'vue'
 import App from './views/App.vue'
 import { setupApp } from '~/logic/common-setup'
-import { SVG_ICONS, i18n } from '~/utils'
+import { i18n } from '~/utils/i18n'
+import { SVG_ICONS } from '~/utils/svgIcons'
 
 let app: AppType | null = null;
 

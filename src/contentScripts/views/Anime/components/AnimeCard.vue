@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { removeHttpFromUrl } from '~/utils'
+import { removeHttpFromUrl } from '~/utils/main'
 
 defineProps<{
   url: string

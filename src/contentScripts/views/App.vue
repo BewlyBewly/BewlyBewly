@@ -12,7 +12,7 @@ import Video from './Video/Video.vue'
 import { activatedPage, settings } from '~/logic'
 import '~/styles/index.ts'
 import { AppPage, LanguageType } from '~/enums/appEnums'
-import { hexToRGBA } from '~/utils'
+import { hexToRGBA } from '~/utils/main'
 
 const { locale } = useI18n()
 const [showSettings, toggle] = useToggle(false)

@@ -1,13 +1,6 @@
 <script lang="ts" setup>
-import type { Ref } from 'vue'
-// import { accessKey, language } from '~/logic/index'
-import {
-  calcCurrentTime,
-  calcTimeSince,
-  numFormatter,
-  removeHttpFromUrl,
-} from '~/utils'
-// import { LanguageType } from '~/enums/appEnums'
+import { removeHttpFromUrl } from '~/utils/main'
+import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils/dataFormatter'
 
 const props = defineProps<{
   duration: number

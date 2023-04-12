@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import { getUserID } from '~/utils'
+import { getUserID } from '~/utils/main'
 
 const { t } = useI18n()
 

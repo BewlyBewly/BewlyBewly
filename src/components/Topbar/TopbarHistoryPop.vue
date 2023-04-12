@@ -5,7 +5,8 @@ import { onMounted, reactive, ref, watch } from 'vue'
 import { useDateFormat } from '@vueuse/core'
 import type { HistoryItem } from './types'
 import { HistoryType } from './types'
-import { calcCurrentTime, removeHttpFromUrl } from '~/utils'
+import { removeHttpFromUrl } from '~/utils/main'
+import { calcCurrentTime } from '~/utils/dataFormatter'
 const { t } = useI18n()
 
 const historys = reactive<Array<HistoryItem>>([])

@@ -1,7 +1,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { revokeAccessKey } from '../../utils/index'
-import { getCSRF, getUserID, numFormatter } from '~/utils'
+import { revokeAccessKey } from '~/utils/authProvider'
+import { getCSRF, getUserID } from '~/utils/main'
+import { numFormatter } from '~/utils/dataFormatter'
 export default defineComponent({
   props: {
     userInfo: {

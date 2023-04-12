@@ -3,7 +3,7 @@ import type { Ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import browser from 'webextension-polyfill'
 import type { AnimeTimeTableItem } from '../types'
-import { removeHttpFromUrl } from '~/utils'
+import { removeHttpFromUrl } from '~/utils/main'
 
 const { t } = useI18n()
 

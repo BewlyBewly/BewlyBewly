@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import type { Ref } from 'vue'
-import { grantAccessKey, revokeAccessKey } from '~/utils/index'
+import { grantAccessKey, revokeAccessKey } from '~/utils/authProvider'
 import { accessKey, settings } from '~/logic'
 
 const emit = defineEmits(['close'])
