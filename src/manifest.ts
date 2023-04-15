@@ -64,7 +64,7 @@ export async function getManifest() {
       rule_resources: [{
         id: 'ruleset_1',
         enabled: true,
-        path: './assets/rules.json',
+        path: 'assets/rules.json',
       }],
     },
   }
