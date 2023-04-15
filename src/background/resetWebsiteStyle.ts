@@ -28,10 +28,9 @@ body {
   min-width: unset !important;
 }
 
-html {
+html, body {
   background-color: var(--bew-bg);
 }
-
 a,
 a:hover {
   color: unset;

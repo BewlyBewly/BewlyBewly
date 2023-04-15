@@ -44,14 +44,17 @@ defineProps<{
         {{ title }}
       </a>
     </p>
-    <div text="$bew-text-2" mb-10 flex items-center>
+    <div text="$bew-text-2" mb-10 flex flex-wrap gap-2 items-center>
       <div
         text="$bew-theme-color" bg="$bew-theme-color-20"
-        p="x-3" h-27px lh-27px mr-2 rounded-4
+        p="x-3" h-27px lh-27px rounded-4
       >
         {{ capsuleText }}
       </div>
-      {{ desc }}
+      <span>
+
+        {{ desc }}
+      </span>
     </div>
   </div>
 </template>

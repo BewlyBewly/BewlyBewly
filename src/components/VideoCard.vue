@@ -254,12 +254,12 @@ function gotoChannel(mid: number) {
           </div>
           <div class="video-info" text="base $bew-text-2">
             <!-- <uil:play-circle inline /> -->
-            {{
+            <span>{{
               $t('common.view', { count: numFormatter(view) }, view)
-            }}
-            <span class="text-xs font-light">•</span>
+            }}</span>
+            <span text-xs font-light mx-1>•</span>
             <!-- <uil:list-ui-alt inline /> -->
-            {{ $t('common.danmaku', { count: numFormatter(danmaku) }, danmaku) }}
+            <span>{{ $t('common.danmaku', { count: numFormatter(danmaku) }, danmaku) }}</span>
             <!-- <span class="text-xs font-light">•</span> -->
             <br>
             <span text="$bew-text-3 sm" inline-block mt-2 p="x-2 y-1" bg="$bew-fill-1" rounded-4>{{ calcTimeSince(publishedTimestamp * 1000) }}</span>
