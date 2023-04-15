@@ -17,7 +17,6 @@ import { hexToRGBA } from '~/utils/main'
 const { locale } = useI18n()
 const [showSettings, toggle] = useToggle(false)
 const isDark = useDark({
-  // selector: '#bewly',
   onChanged: (isDark: boolean) => {
     if (isDark) {
       document.querySelector('html')?.classList.add('dark')
@@ -117,11 +116,15 @@ function setAppAppearance() {
 
   else
     mainApp.value?.classList.remove('dark')
+
+  // Override Bilibili Evolved background color
+  document.body.style.setProperty('background-color', 'var(--bew-bg)', 'important')
+  document.documentElement.style.setProperty('background-color', 'var(--bew-bg)', 'important')
 }
 </script>
 
 <template>
-  <div ref="mainApp" bg="$bew-bg" text="$bew-text-1" min-h-100vh>
+  <div ref="mainApp" text="$bew-text-1">
     <div m-auto max-w="$bew-page-max-width">
       <Transition name="topbar">
         <Topbar
