@@ -14,7 +14,7 @@ defineProps<{
 <template>
   <div>
     <a
-      rounded="$bew-radius" aspect="12/16" overflow-hidden mb-4 bg="$bew-fill-3" relative
+      rounded="$bew-radius" w-full aspect="12/16" overflow-hidden mb-4 bg="$bew-fill-3" relative
       :href="url" target="_blank"
     >
       <div
@@ -22,11 +22,7 @@ defineProps<{
         w-full
         pos="absolute bottom-0"
         text="white 7xl shadow-xl"
-        px-2
-        fw-bold
-        h-150px
-        flex
-        items-end
+        px-2 fw-bold h-150px flex items-end
         bg="gradient-to-b gradient-from-transparent gradient-to-[rgba(0,0,0,.6)]"
         rounded-b="$bew-radius"
       >
