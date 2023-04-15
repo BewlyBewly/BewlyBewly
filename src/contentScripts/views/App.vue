@@ -9,10 +9,10 @@ import Anime from './Anime/Anime.vue'
 import History from './History/History.vue'
 import Favorites from './Favorites/Favorites.vue'
 import Video from './Video/Video.vue'
-import { activatedPage, settings } from '~/logic'
+import { accessKey, activatedPage, settings } from '~/logic'
 import '~/styles/index.ts'
 import { AppPage, LanguageType } from '~/enums/appEnums'
-import { hexToRGBA } from '~/utils/main'
+import { getUserID, hexToRGBA } from '~/utils/main'
 
 const { locale } = useI18n()
 const [showSettings, toggle] = useToggle(false)
@@ -51,6 +51,7 @@ watch(
     }, 500)
   },
 )
+
 watch(
   () => settings.value.themeColor,
   (newValue) => {
@@ -65,12 +66,18 @@ watch(
 
 // Watch for changes in the 'isDark' variable and add the 'dark' class to the 'mainApp' element
 // to prevent some Unocss dark-specific styles from failing to take effect
-watch(() => isDark.value, (newValue, oldValue) => {
+watch(() => isDark.value, () => {
   setAppAppearance()
 })
 
-watch(() => settings.value.language, (newValue, oldValue) => {
+watch(() => settings.value.language, () => {
   setAppLanguage()
+})
+
+watch(() => accessKey.value, () => {
+  // Clear accessKey if not logged in
+  if (!getUserID())
+    accessKey.value = ''
 })
 
 onMounted(() => {
