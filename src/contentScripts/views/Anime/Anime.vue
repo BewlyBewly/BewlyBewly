@@ -10,7 +10,7 @@ import { numFormatter } from '~/utils/dataFormatter'
 const animeWatchList = reactive<AnimeItem[]>([])
 const recommendAnimeList = reactive<AnimeItem[]>([])
 const popularAnimeList = reactive<AnimeItem[]>([])
-const coursor = ref<number>(0)
+const cursor = ref<number>(0)
 const isLoadingAnimeWatchList = ref<boolean>()
 const isLoadingPopularAnime = ref<boolean>()
 const isLoadingRecommendAnime = ref<boolean>()
@@ -67,7 +67,7 @@ function getRecommendAnimeList() {
   browser.runtime
     .sendMessage({
       contentScriptQuery: 'getRecommendAnimeList',
-      coursor: coursor.value,
+      coursor: cursor.value,
     })
     .then((response) => {
       const {
@@ -79,9 +79,9 @@ function getRecommendAnimeList() {
           Object.assign(recommendAnimeList, items[0].sub_items as AnimeItem[])
         else recommendAnimeList.push(...items[0].sub_items)
 
-        coursor.value = coursor
+        cursor.value = coursor
       }
-    }).catch(() => coursor.value = 0)
+    })
     .finally(() => {
       isLoadingRecommendAnime.value = false
     })
