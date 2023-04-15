@@ -9,9 +9,9 @@
 <details>
  <summary>開發中, 佛系更新 = =</summary>
 
-<p align="center">
-<img width="655" alt="image" src="https://user-images.githubusercontent.com/33394391/232247203-113a463a-a3b6-4544-a487-2eee7a23cdf6.png"><br/>
-</p>
+![Home page](https://user-images.githubusercontent.com/33394391/232247842-47aac96b-4826-4eea-b210-82a0900589fd.jpg)
+![Anime page](https://user-images.githubusercontent.com/33394391/232247840-c84f6165-15e0-4745-8173-0999bcd95b3e.jpg)
+![History page](https://user-images.githubusercontent.com/33394391/232247837-aee43969-7df0-406d-b6e0-555a67dd9d37.jpg)
 
 ## ⬇️ Installation
 
