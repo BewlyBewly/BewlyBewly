@@ -139,7 +139,7 @@ home:
   video_removed: Video removed
 anime:
   total_episodes: EP {ep}
-  update_to_n_episodes: Update to {ep} Episodes
+  update_to_n_episodes: Update to EP {ep}
   your_watch_list: Your Watchlist
   recommended_for_you: Recommended for you
   havent_seen: Haven't seen
