@@ -1,6 +1,6 @@
 import type { Tabs } from 'webextension-polyfill'
 import browser from 'webextension-polyfill'
-import { onMessage, sendMessage } from 'webext-bridge'
+// import { onMessage, sendMessage } from 'webext-bridge'
 import { resetCss } from './resetWebsiteStyle'
 import { setupAllAPIs } from './apis'
 
@@ -9,44 +9,44 @@ browser.runtime.onInstalled.addListener((): void => {
   console.log('Extension installed')
 })
 
-let previousTabId = 0
+// const previousTabId = 0
 
 // communication example: send previous tab title from background page
 // see shim.d.ts for type declaration
-browser.tabs.onActivated.addListener(async ({ tabId }) => {
-  if (!previousTabId) {
-    previousTabId = tabId
-    return
-  }
+// browser.tabs.onActivated.addListener(async ({ tabId }) => {
+//   if (!previousTabId) {
+//     previousTabId = tabId
+//     return
+//   }
 
-  let tab: Tabs.Tab
+//   let tab: Tabs.Tab
 
-  try {
-    tab = await browser.tabs.get(previousTabId)
-    previousTabId = tabId
-  }
-  catch {
-    return
-  }
+//   try {
+//     tab = await browser.tabs.get(previousTabId)
+//     previousTabId = tabId
+//   }
+//   catch {
+//     return
+//   }
 
-  // eslint-disable-next-line no-console
-  console.log('previous tab', tab)
-  sendMessage('tab-prev', { title: tab.title }, { context: 'content-script', tabId })
-})
+//   // eslint-disable-next-line no-console
+//   console.log('previous tab', tab)
+//   sendMessage('tab-prev', { title: tab.title }, { context: 'content-script', tabId })
+// })
 
-onMessage('get-current-tab', async () => {
-  try {
-    const tab = await browser.tabs.get(previousTabId)
-    return {
-      title: tab?.title,
-    }
-  }
-  catch {
-    return {
-      title: undefined,
-    }
-  }
-})
+// onMessage('get-current-tab', async () => {
+//   try {
+//     const tab = await browser.tabs.get(previousTabId)
+//     return {
+//       title: tab?.title,
+//     }
+//   }
+//   catch {
+//     return {
+//       title: undefined,
+//     }
+//   }
+// })
 
 // preinsert css
 browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChangeInfoType, tab: Tabs.Tab) => {
