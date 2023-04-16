@@ -7,7 +7,7 @@
 <p align="center">Just make a few small changes to your Bilibili homepage.</p>
 
 <details>
- <summary>開發中, 佛系更新 = =</summary>
+ <summary>開發中, 佛系更新 = =，祇是一個勉強用得了的玩具</summary>
 
 ![Home page](https://user-images.githubusercontent.com/33394391/232247842-47aac96b-4826-4eea-b210-82a0900589fd.jpg)
 ![Anime page](https://user-images.githubusercontent.com/33394391/232247840-c84f6165-15e0-4745-8173-0999bcd95b3e.jpg)
