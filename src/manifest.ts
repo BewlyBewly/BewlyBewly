@@ -33,7 +33,6 @@ export async function getManifest() {
     permissions: [
       'tabs',
       'storage',
-      'activeTab',
       'scripting',
       'declarativeNetRequest',
     ],
