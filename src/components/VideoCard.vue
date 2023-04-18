@@ -3,15 +3,15 @@ import { removeHttpFromUrl } from '~/utils/main'
 import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils/dataFormatter'
 
 const props = defineProps<{
-  duration: number
+  duration?: number
   title: string
   cover: string
-  author: string
-  authorFace: string
-  mid: number
-  view: number
-  danmaku: number
-  publishedTimestamp: number
+  author?: string
+  authorFace?: string
+  mid?: number
+  view?: number
+  danmaku?: number
+  publishedTimestamp?: number
   bvid?: string
   aid?: number
 }>()
@@ -132,6 +132,7 @@ function gotoChannel(mid: number) {
         <div w="full" relative bg="$bew-fill-4" rounded="$bew-radius" overflow-hidden>
           <!-- Video duration -->
           <div
+            v-if="duration"
             pos="absolute bottom-0 right-0"
             z="2"
             p="x-2 y-1"
@@ -155,9 +156,10 @@ function gotoChannel(mid: number) {
       <div flex="~" m="t-4">
         <div class="flex">
           <a
+            v-if="authorFace"
             m="r-4" w="48px" h="48px" rounded="$bew-radius" overflow="hidden" object="center cover"
             bg="$bew-fill-4" cursor="pointer"
-            @click="gotoChannel(mid)"
+            @click="gotoChannel(mid ?? 0)"
           >
             <img
               :src="`${removeHttpFromUrl(authorFace)}@60w_60h_1c`"
@@ -245,24 +247,24 @@ function gotoChannel(mid: number) {
             </template>
           </div>
           <div
+            v-if="author"
             class="channel-name"
             text="base $bew-text-2"
             m="t-2"
-            @click="gotoChannel(mid)"
+            @click="gotoChannel(mid ?? 0)"
           >
             {{ author }}
           </div>
           <div class="video-info" text="base $bew-text-2">
-            <!-- <uil:play-circle inline /> -->
-            <span>{{
+            <span v-if="view">{{
               $t('common.view', { count: numFormatter(view) }, view)
             }}</span>
-            <span text-xs font-light mx-1>•</span>
-            <!-- <uil:list-ui-alt inline /> -->
-            <span>{{ $t('common.danmaku', { count: numFormatter(danmaku) }, danmaku) }}</span>
-            <!-- <span class="text-xs font-light">•</span> -->
+            <template v-if="danmaku">
+              <span text-xs font-light mx-1>•</span>
+              <span>{{ $t('common.danmaku', { count: numFormatter(danmaku) }, danmaku) }}</span>
+            </template>
             <br>
-            <span text="$bew-text-3 sm" inline-block mt-2 p="x-2 y-1" bg="$bew-fill-1" rounded-4>{{ calcTimeSince(publishedTimestamp * 1000) }}</span>
+            <span v-if="publishedTimestamp" text="$bew-text-3 sm" inline-block mt-2 p="x-2 y-1" bg="$bew-fill-1" rounded-4>{{ calcTimeSince(publishedTimestamp * 1000) }}</span>
           </div>
         </div>
       </div>
