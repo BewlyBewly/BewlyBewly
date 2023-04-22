@@ -44,8 +44,8 @@ onMounted(async () => {
     videoPlayerContainer.style.right = '0'
     videoPlayerContainer.style.bottom = '0'
 
-    // const app = document.querySelector('#app') as HTMLElement
-    // app.innerHTML = ''
+    const app = document.querySelector('#app') as HTMLElement
+    app.innerHTML = ''
   }
 
   await getVideoInfo()

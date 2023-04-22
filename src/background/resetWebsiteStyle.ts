@@ -24,7 +24,7 @@ export const resetCss = `
 
 html,
 body {
-  font-size: 14px;
+  font-size: 14px !important;
   min-width: unset !important;
 }
 

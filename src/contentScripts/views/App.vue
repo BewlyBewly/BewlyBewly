@@ -81,6 +81,13 @@ watch(() => accessKey.value, () => {
 })
 
 onMounted(() => {
+  nextTick(() => {
+    setTimeout(() => {
+      if (mainApp.value)
+        mainApp.value.style.opacity = '1'
+    }, 800)
+  })
+
   if (/https?:\/\/(www.)?bilibili.com\/video\/.*/.test(location.href))
     isVideoPage.value = true
   setAppAppearance()
@@ -131,7 +138,7 @@ function setAppAppearance() {
 </script>
 
 <template>
-  <div ref="mainApp" text="$bew-text-1">
+  <div ref="mainApp" text="$bew-text-1" transition="opacity duration-300" style="opacity: 0;">
     <div m-auto max-w="$bew-page-max-width">
       <Transition name="topbar">
         <Topbar
