@@ -16,7 +16,7 @@
 ## ⬇️ Installation
 
 - Edge: https://microsoftedge.microsoft.com/addons/detail/bewlybewly/kceadhehfjdiakpiphpjgolbgehjdmja
-- Chrome: Comming soon
+- Chrome: https://chrome.google.com/webstore/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp/related?hl=en
 - Firefox: Comming soon
 
 ### Local Installation
