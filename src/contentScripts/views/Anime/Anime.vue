@@ -4,7 +4,7 @@ import AnimeTimeTable from './components/AnimeTimeTable.vue'
 import AnimeCard from './components/AnimeCard.vue'
 import AnimeCardSkeleton from './components/AnimeCardSkeleton.vue'
 import type { AnimeItem, PopularAnime } from './types'
-import { getUserID, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
+import { getUserID, openLinkToNewTab } from '~/utils/main'
 import { numFormatter } from '~/utils/dataFormatter'
 
 const animeWatchList = reactive<AnimeItem[]>([])
@@ -201,7 +201,7 @@ function getPopularAnimeList() {
               :cover="item.cover"
               :title="item.title"
               :desc="$t('anime.follow', { num: numFormatter(item.stat.series_follow) })"
-              :capsule-text="item.rating ? item.rating.replace('分', '') : '-:-'"
+              :capsule-text="item.rating.replace('分', '')"
               :rank="item.rank"
             />
           </div>
@@ -225,112 +225,20 @@ function getPopularAnimeList() {
           {{ $t('anime.recommended_for_you') }}
         </h3>
         <div grid="~ 2xl:cols-6 xl:cols-5 lg:cols-4 md:cols-3 sm:cols-2 cols-1 gap-6">
-          <article
+          <AnimeCard
             v-for="item in recommendAnimeList"
             :key="item.episode_id"
-            class="group"
+            :url="item.link"
+            :cover="item.cover"
+            :cover-hover="item.hover.img"
+            :tags="item.hover.text"
+            :title="item.title"
+            :desc="item.sub_title"
+            :capsule-text="item.rating"
             @mouseenter="activatedSeasonId = item.season_id"
             @mouseleave="activatedSeasonId = 0"
-          >
-            <div
-              overflow-hidden
-              rounded="$bew-radius"
-              aspect="12/16"
-              mb-4
-              pos="relative"
-              bg="$bew-fill-3"
-            >
-              <a :href="item.link" target="_blank">
-                <!-- anime genres -->
-                <div
-                  pos="absolute bottom-0"
-                  w-full
-                  h-180px
-                  flex
-                  items-end
-                  z-1
-                  opacity="0 group-hover:100"
-                  transform="~ translate-y-4 group-hover:translate-y-0"
-                  transition="all duration-300"
-                  style="
-                    background: linear-gradient(
-                      transparent,
-                      rgba(0, 0, 0, 0.6)
-                    );
-                  "
-                >
-                  <div flex="~ wrap" gap-2 p-2>
-                    <span
-                      v-for="styleName in item.hover.text"
-                      :key="styleName"
-                      bg="white opacity-30"
-                      text="white sm"
-                      leading-none
-                      p="x-2 y-1"
-                      rounded="$bew-radius-half"
-                      shrink-0
-                    >{{ styleName }}</span>
-                  </div>
-                </div>
+          />
 
-                <div
-                  group-hover:opacity-0
-                  w-full
-                  rounded="$bew-radius"
-                  aspect="12/16"
-                  transition="all duration-300"
-                  bg="cover center"
-                  relative
-                  z-1
-                  :style="{
-                    backgroundImage: `url(${removeHttpFromUrl(
-                      item.cover,
-                    )}@466w_622h.webp)`,
-                  }"
-                />
-
-                <!-- image after hovering -->
-                <div
-                  w-full
-                  rounded="$bew-radius"
-                  aspect="12/16"
-                  transform="~ scale-120 group-hover:scale-100"
-                  transition="all duration-1000"
-                  bg="cover center"
-                  pos="absolute top-0 left-0"
-                  :style="{
-                    backgroundImage: `url(${removeHttpFromUrl(
-                      item.hover.img,
-                    )}@672w_378h_1c.webp)`,
-                  }"
-                  style="
-                    transition-timing-function: cubic-bezier(
-                      0.22,
-                      0.61,
-                      0.36,
-                      1
-                    );
-                  "
-                />
-              </a>
-            </div>
-
-            <p un-text="lg" my-4>
-              <a :href="item.link" target="_blank" class="keep-two-lines">
-                {{ item.title }}
-              </a>
-            </p>
-            <p text="$bew-text-2" mb-10>
-              <span
-                text="$bew-theme-color"
-                bg="$bew-theme-color-20"
-                p="x-3 y-1"
-                mr-2
-                rounded-4
-              >{{ item.rating ?? '-.-' }}</span>
-              {{ item.sub_title }}
-            </p>
-          </article>
           <template v-if="isLoadingRecommendAnime">
             <AnimeCardSkeleton
               v-for="item in 30" :key="item"
