@@ -40,14 +40,14 @@ const avatarShadow = ref<HTMLImageElement>() as Ref<HTMLImageElement>
 
 watch(
   () => showNotificationsPop,
-  (newValue, oldValue) => {
+  () => {
     getUnreadMessageCount()
   },
 )
 
 watch(
   () => showMomentsPop,
-  (newValue, oldValue) => {
+  () => {
     getNewMomentsCount()
   },
 )
@@ -97,49 +97,59 @@ function closeUserPanel() {
 }
 
 async function getUserInfo() {
-  const res = await browser.runtime
-    .sendMessage({
-      contentScriptQuery: 'getUserInfo',
-    })
+  try {
+    const res = await browser.runtime
+      .sendMessage({
+        contentScriptQuery: 'getUserInfo',
+      })
 
-  if (res.code === 0) {
-    isLogin.value = true
-    Object.assign(userInfo, res.data)
+    if (res.code === 0) {
+      isLogin.value = true
+      Object.assign(userInfo, res.data)
+    }
+    // Account not logged in
+    else if (res.code === -101) { isLogin.value = false }
   }
-  // Account not logged in
-  else if (res.code === -101) { isLogin.value = false }
+  catch (error) {
+    isLogin.value = false
+    console.error(error)
+  }
 }
 
 async function getUnreadMessageCount() {
   if (!isLogin.value)
     return
 
-  await browser.runtime
-    .sendMessage({
+  try {
+    let res
+    res = await browser.runtime.sendMessage({
       contentScriptQuery: 'getUnreadMsg',
     })
-    .then((res) => {
-      Object.assign(unReadMessage, res.data)
-    })
 
-  await browser.runtime
-    .sendMessage({
+    Object.assign(unReadMessage, res.data)
+
+    res = await browser.runtime.sendMessage({
       contentScriptQuery: 'getUnreadDm',
     })
-    .then(res => Object.assign(unReadDm, res.data))
 
-  unReadMessageCount.value = 0
+    Object.assign(unReadDm, res.data)
 
-  Object.keys(unReadMessage).forEach((key) => {
-    if (key !== 'up') {
-      unReadMessageCount.value
+    unReadMessageCount.value = 0
+
+    Object.keys(unReadMessage).forEach((key) => {
+      if (key !== 'up') {
+        unReadMessageCount.value
         += unReadMessage[key as keyof typeof unReadMessage]
-    }
-  })
+      }
+    })
 
-  Object.keys(unReadDm).forEach((key) => {
-    unReadMessageCount.value += unReadDm[key as keyof typeof unReadDm]
-  })
+    Object.keys(unReadDm).forEach((key) => {
+      unReadMessageCount.value += unReadDm[key as keyof typeof unReadDm]
+    })
+  }
+  catch (error) {
+    console.error(error)
+  }
 }
 
 function getNewMomentsCount() {
