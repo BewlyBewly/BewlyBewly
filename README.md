@@ -15,19 +15,22 @@
 
 ## ⬇️ Installation
 
-- Edge: https://microsoftedge.microsoft.com/addons/detail/bewlybewly/kceadhehfjdiakpiphpjgolbgehjdmja
-- Chrome: https://chrome.google.com/webstore/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp/related?hl=en
+- Edge: <https://microsoftedge.microsoft.com/addons/detail/bewlybewly/kceadhehfjdiakpiphpjgolbgehjdmja>
+- Chrome: <https://chrome.google.com/webstore/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp/related?hl=en>
 - Firefox: Comming soon
 
 ### Local Installation
 
-#### Edge 
+#### Edge
+>
 > Ensure you installed [bewlybewly-extension.zip](https://github.com/hakadao/BewlyBewly/releases) and decompress this file.
 
 1. Type in `edge://extensions/` in the address bar and press Enter
 2. Turn on `Developer mode` then press `Load unpacked` <br/> <img width="655" alt="image" src="https://user-images.githubusercontent.com/33394391/232246901-e3544c16-bde2-480d-b770-ca5242793963.png">
 3. Load decompressed exetension folder in your browser
+
 #### Chrome
+>
 > Ensure you installed [bewlybewly-extension.zip](https://github.com/hakadao/BewlyBewly/releases) and decompress this file.
 
 1. Type in `chrome://extensions/` in the address bar and press Enter
@@ -42,7 +45,7 @@
 pnpm dev
 ```
 
-Then **load extension in browser with the `extension/` folder**. 
+Then **load extension in browser with the `extension/` folder**.
 After each modification, you need to click the [Extensions Reloader](https://chrome.google.com/webstore/detail/fimgfedafeadlieiabdeeaodndnlbhid) button and refresh the page to ensure the changes would be applied.
 
 ### Build
@@ -58,11 +61,8 @@ And then pack files under `extension`
 ## ❤️ Credits
 
 [vitesse-webext](https://github.com/antfu/vitesse-webext) - The template used for this project
-
 [UserScripts/bilibiliHome](https://github.com/indefined/UserScripts/tree/master/bilibiliHome) - Reference source for obtaining the access key
-
 [Bilibili-Evolved](https://github.com/the1812/Bilibili-Evolved) - Partial implementation of functionalities
-
 [bilibili-API-collect](https://github.com/SocialSisterYi/bilibili-API-collect)
 
 </details>
