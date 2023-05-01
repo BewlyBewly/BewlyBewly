@@ -52,25 +52,25 @@ let app: AppType | null = null;
     setupApp(app)
     app.use(i18n).mount(root)
   }
-  else if (/https?:\/\/(www.)?bilibili.com\/video\/.*/.test(currentUrl)) {
-    const originalPageContent = document.querySelector('#app')
-    if (originalPageContent)
-      originalPageContent.innerHTML = ''
+  // else if (/https?:\/\/(www.)?bilibili.com\/video\/.*/.test(currentUrl)) {
+  //   const originalPageContent = document.querySelector('#app')
+  //   if (originalPageContent)
+  //     originalPageContent.innerHTML = ''
 
-    const container = document.createElement('div')
-    const root = document.createElement('div')
-    const styleEl = document.createElement('link')
-    styleEl.setAttribute('rel', 'stylesheet')
-    styleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
-    container.id = 'bewly'
-    container.appendChild(styleEl)
-    container.appendChild(root)
-    document.body.appendChild(container)
+  //   const container = document.createElement('div')
+  //   const root = document.createElement('div')
+  //   const styleEl = document.createElement('link')
+  //   styleEl.setAttribute('rel', 'stylesheet')
+  //   styleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
+  //   container.id = 'bewly'
+  //   container.appendChild(styleEl)
+  //   container.appendChild(root)
+  //   document.body.appendChild(container)
 
-    const app = createApp(App)
-    setupApp(app)
-    app.use(i18n).mount(root)
-  }
+  //   const app = createApp(App)
+  //   setupApp(app)
+  //   app.use(i18n).mount(root)
+  // }
 })()
 
 export default app as AppType
