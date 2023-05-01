@@ -66,8 +66,14 @@ async function getVideoInfo() {
   const url = location.href
   // url.match(/video\/[0-9a-zA-Z]*/) = ['video/BV1vx4y1V7VD/', index: 25, input: 'https://www.bilibili.com/video/BV1vx4y1V7VD/', groups: undefined]
   // url.match(/video\/[0-9a-zA-Z]*/)[0] = 'video/BV1vx4y1V7VD/'
-  const bvid = url.match(/video\/[0-9a-zA-Z]*\/?/)![0].split('/')[1]
-  const res = await browser.runtime.sendMessage({ contentScriptQuery: 'getVideoInfo', bvid })
+  const videoId = url.match(/video\/[0-9a-zA-Z]*\/?/)![0].split('/')[1]
+  const isBV = videoId.startsWith('BV')
+
+  let res
+  if (isBV)
+    res = await browser.runtime.sendMessage({ contentScriptQuery: 'getVideoInfo', videoId })
+  else
+    res = await browser.runtime.sendMessage({ contentScriptQuery: 'getVideoInfo', aid: videoId.replace('av', '') })
   if (res.code === 0) {
     Object.assign(videoInfo, res.data.View)
     Object.assign(userCardInfo, res.data.Card)
