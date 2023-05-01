@@ -53,6 +53,10 @@ let app: AppType | null = null;
     app.use(i18n).mount(root)
   }
   else if (/https?:\/\/(www.)?bilibili.com\/video\/.*/.test(currentUrl)) {
+    const originalPageContent = document.querySelector('#app')
+    if (originalPageContent)
+      originalPageContent.innerHTML = ''
+
     const container = document.createElement('div')
     const root = document.createElement('div')
     const styleEl = document.createElement('link')

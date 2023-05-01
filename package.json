@@ -35,6 +35,7 @@
     "@iconify/json": "^2.1.119",
     "@intlify/unplugin-vue-i18n": "^0.8.1",
     "@rollup/plugin-replace": "^5.0.1",
+    "@types/dplayer": "^1.25.2",
     "@types/fs-extra": "^9.0.13",
     "@types/node": "^18.8.3",
     "@types/webextension-polyfill": "^0.9.1",
@@ -73,6 +74,7 @@
     "webextension-polyfill": "^0.10.0"
   },
   "dependencies": {
+    "dplayer": "^1.27.1",
     "vue-i18n": "^9.2.2"
   }
 }

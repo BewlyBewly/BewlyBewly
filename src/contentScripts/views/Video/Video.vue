@@ -18,44 +18,44 @@ const commentPageInfo = reactive<any>({})
 
 onMounted(async () => {
   window.onload = () => {
-    const videoPlayer = document.querySelector('#playerWrap') as HTMLElement
-    if (videoContent.value && videoPlayer)
-      videoContent.value.appendChild(videoPlayer)
+    nextTick(async () => {
+      const videoPlayer = document.querySelector('#playerWrap') as HTMLElement
+      if (videoContent.value && videoPlayer)
+        videoContent.value.appendChild(videoPlayer)
 
-    // const comment = document.querySelector('#comment') as HTMLElement
-    // if (commentContent.value && comment)
-    //   commentContent.value.appendChild(comment)
+      const danmukuBox = document.querySelector('#danmukuBox') as HTMLElement
+      if (danmukuContent.value && danmukuBox)
+        danmukuContent.value.appendChild(danmukuBox)
 
-    const danmukuBox = document.querySelector('#danmukuBox') as HTMLElement
-    if (danmukuContent.value && danmukuBox)
-      danmukuContent.value.appendChild(danmukuBox)
+      const recoList = document.querySelector('#reco_list') as HTMLElement
+      if (recommendedContent.value && recoList)
+        recommendedContent.value.appendChild(recoList)
 
-    // const recoList = document.querySelector('#reco_list') as HTMLElement
-    // if (recommendedContent.value && recoList)
-    //   recommendedContent.value.appendChild(recoList)
+      const multiPage = document.querySelector('#multi_page') as HTMLElement
+      if (videoEpisodeList.value && multiPage)
+        videoEpisodeList.value.appendChild(multiPage)
 
-    const multiPage = document.querySelector('#multi_page') as HTMLElement
-    if (videoEpisodeList.value && multiPage)
-      videoEpisodeList.value.appendChild(multiPage)
+      // setupVideoSize()
+      // const videoPlayerContainer = document.querySelector('#bilibili-player .bpx-player-container') as HTMLElement
+      // videoPlayerContainer.dataset.screen = 'normal'
+      // videoPlayerContainer.style.right = '0'
+      // videoPlayerContainer.style.bottom = '0'
 
-    // setupVideoSize()
-    const videoPlayerContainer = document.querySelector('#bilibili-player .bpx-player-container') as HTMLElement
-    videoPlayerContainer.dataset.screen = 'normal'
-    videoPlayerContainer.style.right = '0'
-    videoPlayerContainer.style.bottom = '0'
+      const app = document.querySelector('#app') as HTMLElement
+      app.innerHTML = ''
 
-    const app = document.querySelector('#app') as HTMLElement
-    app.innerHTML = ''
+      await getVideoInfo()
+      getVideoComments()
+    })
   }
-
-  await getVideoInfo()
-  getVideoComments()
 })
 
-watch(() => 'location.href', async (newValue, oldValue) => {
-  await getVideoInfo()
-  getVideoComments()
-})
+// watch(() => 'location.href', async (newValue, oldValue) => {
+//   console.log('location change')
+
+//   await getVideoInfo()
+//   getVideoComments()
+// }, { deep: true })
 
 onUnmounted(() => {
   window.onload = () => {}
@@ -178,6 +178,7 @@ function setupCommentEmote(content: string, emote: any) {
   <div class="video-page-wrapper" flex gap-6 m-auto>
     <main w="3/4" min-w-640px flex="~ col gap-4">
       <div ref="videoContent" bg="$bew-fill-1" />
+      <!-- <DPlayer /> -->
       <section>
         <p text-2xl fw-600>
           {{ videoInfo.title }}
