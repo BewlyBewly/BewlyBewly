@@ -54,7 +54,8 @@ a:hover {
 
 body > #i_cecream,
 #i_cecream *,
-#app {
+#app,
+.international-footer {
   position: absolute;
   top: 200vh;
   visibility: hidden !important;
