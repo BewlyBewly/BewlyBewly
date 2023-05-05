@@ -135,6 +135,7 @@ function jumpToLoginPage() {
     <template v-if="settings.recommendationMode === 'web'">
       <VideoCard
         v-for="video in videoList"
+        :id="video.id"
         :key="video.id"
         :duration="video.duration"
         :title="video.title"
@@ -151,6 +152,7 @@ function jumpToLoginPage() {
     <template v-else>
       <VideoCard
         v-for="(video, index) in appVideoList"
+        :id="Number(video.param)"
         :key="index"
         :duration="video.duration"
         :title="video.title"

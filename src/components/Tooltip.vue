@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 defineProps<{
   content: string
-  placement: 'left' | 'right' | 'top'
+  placement: 'left' | 'right' | 'top' | 'bottom'
 }>()
 </script>
 
@@ -26,8 +26,9 @@ defineProps<{
       bg-black dark:bg-white
       pointer-events-none
       text-sm text-white dark:text-black
-      opacity-0 duration-300;
-      white-space: nowrap;
+      opacity-0 duration-300
+      shadow-$bew-shadow-2;
+    white-space: nowrap;
 
     &.right {
       --at-apply: left-[calc(100%+1em)];
@@ -39,6 +40,11 @@ defineProps<{
 
     &.top {
       --at-apply: top--3em left-1/2;
+      transform: translateX(-50%);
+    }
+
+    &.bottom {
+      --at-apply: bottom--3em left-1/2;
       transform: translateX(-50%);
     }
   }
