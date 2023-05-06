@@ -1,6 +1,6 @@
 import browser from 'webextension-polyfill'
 
-export const setupHistoryAPIs = () => {
+export const setupHistoryMsgLstnr = () => {
   browser.runtime.onConnect.addListener(() => {
     browser.runtime.onMessage.addListener((message) => {
     // https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/history&toview/history.md#%E8%8E%B7%E5%8F%96%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95%E5%88%97%E8%A1%A8_web%E7%AB%AF

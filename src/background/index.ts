@@ -2,7 +2,7 @@ import type { Tabs } from 'webextension-polyfill'
 import browser from 'webextension-polyfill'
 // import { onMessage, sendMessage } from 'webext-bridge'
 import { resetCss } from './resetWebsiteStyle'
-import { setupAllAPIs } from './apis'
+import { setupAllMsgLstnrs } from './messageListeners'
 
 browser.runtime.onInstalled.addListener((): void => {
   // eslint-disable-next-line no-console
@@ -128,5 +128,5 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
   }
 })
 
-// Setup APIs
-setupAllAPIs()
+// Setup all message listeners
+setupAllMsgLstnrs()

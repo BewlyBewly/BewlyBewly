@@ -1,7 +1,7 @@
 import browser from 'webextension-polyfill'
 // import { getUserID } from '~/utils'
 
-export const setupAnimeAPIs = () => {
+export const setupAnimeMsgLstnr = () => {
   browser.runtime.onConnect.addListener(() => {
     browser.runtime.onMessage.addListener((message) => {
     // get popular anime list
