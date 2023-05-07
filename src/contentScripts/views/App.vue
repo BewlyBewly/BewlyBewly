@@ -7,6 +7,7 @@ import Home from './Home/Home.vue'
 import Search from './Search/Search.vue'
 import Anime from './Anime/Anime.vue'
 import History from './History/History.vue'
+import WatchLater from './WatchLater/WatchLater.vue'
 import Favorites from './Favorites/Favorites.vue'
 import Video from './Video/Video.vue'
 import { accessKey, activatedPage, settings } from '~/logic'
@@ -29,7 +30,7 @@ const isDark = useDark({
   },
 })
 const toggleDark = useToggle(isDark)
-const pages = { Home, Search, Anime, History, Favorites, Video }
+const pages = { Home, Search, Anime, History, WatchLater, Favorites, Video }
 const isVideoPage = ref<boolean>(false)
 const mainApp = ref<HTMLElement>()
 
@@ -202,6 +203,16 @@ function setAppAppearance() {
                 @click="changeActivatePage(AppPage.History)"
               >
                 <tabler:clock />
+              </div>
+            </Tooltip>
+
+            <Tooltip content="Watch later" :placement="tooltipPlacement">
+              <div
+                class="dock-item"
+                :class="{ active: activatedPage === AppPage.WatchLater && !isVideoPage }"
+                @click="changeActivatePage(AppPage.WatchLater)"
+              >
+                <iconoir:playlist-play />
               </div>
             </Tooltip>
 

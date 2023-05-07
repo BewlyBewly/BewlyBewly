@@ -11,4 +11,5 @@ export enum AppPage {
   Anime = 'Anime',
   History = 'History',
   Favorites = 'Favorites',
+  WatchLater = 'WatchLater',
 }
