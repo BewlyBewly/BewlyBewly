@@ -155,49 +155,48 @@ function toggleWatchLater() {
     </div>
 
     <div>
-      <a cursor-pointer :href="videoUrl" target="_blank" tabindex="-1" @click.stop="">
-        <div w="full" relative bg="$bew-fill-4" rounded="$bew-radius">
-          <!-- Video duration -->
-          <div
-            v-if="duration"
-            pos="absolute bottom-0 right-0"
-            z="2"
-            p="x-2 y-1"
-            m="1"
-            rounded="$bew-radius"
-            text="!white xs"
-            bg="black opacity-60"
-          >
-            {{ calcCurrentTime(duration) }}
-          </div>
-
-          <div
-            pos="absolute top-0 right-0" z="2"
-            p="x-2 y-1" m="1"
-            rounded="$bew-radius"
-            text="!white xl"
-            bg="black opacity-60"
-            opacity="0 group-hover:100"
-            @click.stop="toggleWatchLater"
-          >
-            <Tooltip v-if="!isInWatchLater" content="Save to Watch later" placement="bottom">
-              <tabler:playlist-add />
-            </Tooltip>
-            <Tooltip v-else content="Added" placement="bottom">
-              <tabler:check />
-            </Tooltip>
-          </div>
-
-          <!-- Video cover -->
-          <img
-            :src="`${removeHttpFromUrl(cover)}@672w_378h_1c`"
-            loading="lazy"
-            w="full" aspect-video
-            bg="cover center"
-            rounded="$bew-radius"
-          >
+      <div w="full" relative bg="$bew-fill-4" rounded="$bew-radius" cursor-pointer @click.stop="openLinkToNewTab(videoUrl)">
+        <!-- Video duration -->
+        <div
+          v-if="duration"
+          pos="absolute bottom-0 right-0"
+          z="2"
+          p="x-2 y-1"
+          m="1"
+          rounded="$bew-radius"
+          text="!white xs"
+          bg="black opacity-60"
+        >
+          {{ calcCurrentTime(duration) }}
         </div>
-      </a>
+
+        <button
+          pos="absolute top-0 right-0" z="2"
+          p="x-2 y-1" m="1"
+          rounded="$bew-radius"
+          text="!white xl"
+          bg="black opacity-60"
+          opacity="0 group-hover:100"
+          @click.stop="toggleWatchLater"
+        >
+          <Tooltip v-if="!isInWatchLater" content="Save to Watch later" placement="bottom">
+            <tabler:playlist-add />
+          </Tooltip>
+          <Tooltip v-else content="Added" placement="bottom">
+            <tabler:check />
+          </Tooltip>
+        </button>
+
+        <!-- Video cover -->
+        <img
+          :src="`${removeHttpFromUrl(cover)}@672w_378h_1c`"
+          loading="lazy"
+          w="full" aspect-video
+          bg="cover center"
+          rounded="$bew-radius"
+        >
+      </div>
+
       <div flex="~" m="t-4">
         <div class="flex">
           <a
