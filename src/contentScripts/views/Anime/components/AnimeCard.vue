@@ -18,7 +18,7 @@ defineProps<{
     <a
       rounded="$bew-radius" w-full aspect="12/16" overflow-hidden mb-4 bg="$bew-fill-3" relative
       class="group"
-      :href="url" target="_blank"
+      :href="url" target="_blank" tabindex="-1"
     >
       <div
         v-if="rank"

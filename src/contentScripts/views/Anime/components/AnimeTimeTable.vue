@@ -124,13 +124,13 @@ function getAnimeTimeTable() {
               <div flex gap-4>
                 <a
                   :href="`//www.bilibili.com/bangumi/play/ss${episode.season_id}`"
-                  target="_blank"
+                  target="_blank" tabindex="-1"
                   shrink-0
                 >
                   <img
                     :src="`${removeHttpFromUrl(
                       episode.square_cover,
-                    )}@300w_300h.webp`"
+                    )}@80w_80h.webp`"
                     :alt="episode.title"
                     w-18
                     aspect="square"

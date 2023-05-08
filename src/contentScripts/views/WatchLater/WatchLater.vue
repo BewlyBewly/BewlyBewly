@@ -172,15 +172,17 @@ function jumpToLoginPage() {
             <!-- Description -->
             <div flex justify-between w-full>
               <div flex="~ col">
-                <h3
+                <a
                   class="keep-two-lines"
                   overflow="hidden"
-                  text="lg overflow-ellipsis"
+                  un-text="lg overflow-ellipsis"
+                  :href="removeHttpFromUrl(`https://www.bilibili.com/list/watchlater?bvid=${item.bvid}`)" target="_blank"
+                  @click.stop=""
                 >
                   {{ item.title }}
-                </h3>
-                <div
-                  text="$bew-text-2 sm"
+                </a>
+                <a
+                  un-text="$bew-text-2 sm"
                   m="t-4 b-2"
                   flex="~"
                   items-center
@@ -191,7 +193,8 @@ function jumpToLoginPage() {
                   hover:bg="$bew-theme-color-10"
                   duration-300
                   pr-2
-                  @click.stop="openLinkToNewTab(`https://space.bilibili.com/${item.owner.mid}`)"
+                  :href="`//space.bilibili.com/${item.owner.mid}`" target="_blank"
+                  @click.stop=""
                 >
                   <img
                     :src="removeHttpFromUrl(`${item.owner.face}@80w_80h_1c`)"
@@ -203,7 +206,7 @@ function jumpToLoginPage() {
                     mr-2
                   >
                   {{ item.owner.name }}
-                </div>
+                </a>
                 <p display="block xl:none" text="$bew-text-3 sm" mt-auto mb-2>
                   {{
                     useDateFormat(item.pubdate * 1000, 'YYYY-MM-DD HH:mm:ss')

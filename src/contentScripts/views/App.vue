@@ -167,53 +167,53 @@ function setAppAppearance() {
             style="backdrop-filter: var(--bew-filter-glass)"
           >
             <Tooltip :content="$t('dock.search')" :placement="tooltipPlacement">
-              <div
+              <button
                 class="dock-item"
                 :class="{ active: activatedPage === AppPage.Search && !isVideoPage }"
                 @click="changeActivatePage(AppPage.Search)"
               >
                 <tabler:search />
-              </div>
+              </button>
             </Tooltip>
 
             <Tooltip :content="$t('dock.home')" :placement="tooltipPlacement">
-              <div
+              <button
                 class="dock-item"
                 :class="{ active: activatedPage === AppPage.Home && !isVideoPage }"
                 @click="changeActivatePage(AppPage.Home)"
               >
                 <tabler:home />
-              </div>
+              </button>
             </Tooltip>
 
             <Tooltip :content="$t('dock.anime')" :placement="tooltipPlacement">
-              <div
+              <button
                 class="dock-item"
                 :class="{ active: activatedPage === AppPage.Anime && !isVideoPage }"
                 @click="changeActivatePage(AppPage.Anime)"
               >
                 <tabler:device-tv />
-              </div>
+              </button>
             </Tooltip>
 
             <Tooltip :content="$t('dock.history')" :placement="tooltipPlacement">
-              <div
+              <button
                 class="dock-item"
                 :class="{ active: activatedPage === AppPage.History && !isVideoPage }"
                 @click="changeActivatePage(AppPage.History)"
               >
                 <tabler:clock />
-              </div>
+              </button>
             </Tooltip>
 
             <Tooltip content="Watch later" :placement="tooltipPlacement">
-              <div
+              <button
                 class="dock-item"
                 :class="{ active: activatedPage === AppPage.WatchLater && !isVideoPage }"
                 @click="changeActivatePage(AppPage.WatchLater)"
               >
                 <iconoir:playlist-play />
-              </div>
+              </button>
             </Tooltip>
 
             <!-- <div
@@ -229,25 +229,25 @@ function setAppAppearance() {
               <div class="divider" />
 
               <!-- video page -->
-              <div class="dock-item video active">
+              <button class="dock-item video active">
                 <tabler:player-play />
-              </div>
+              </button>
             </template>
 
             <!-- dividing line -->
             <div class="divider" />
 
             <Tooltip :content="isDark ? $t('dock.dark_mode') : $t('dock.light_mode')" :placement="tooltipPlacement">
-              <div class="dock-item" @click="toggleDark()">
+              <button class="dock-item" @click="toggleDark()">
                 <tabler:moon-stars v-if="isDark" />
                 <tabler:sun v-else />
-              </div>
+              </button>
             </Tooltip>
 
             <Tooltip :content="$t('dock.settings')" :placement="tooltipPlacement">
-              <div class="dock-item" @click="toggle()">
+              <button class="dock-item" @click="toggle()">
                 <tabler:settings />
-              </div>
+              </button>
             </Tooltip>
           </div>
         </aside>

@@ -155,7 +155,7 @@ function toggleWatchLater() {
     </div>
 
     <div>
-      <a cursor-pointer @click="openLinkToNewTab(videoUrl)">
+      <a cursor-pointer :href="videoUrl" target="_blank" tabindex="-1" @click.stop="">
         <div w="full" relative bg="$bew-fill-4" rounded="$bew-radius">
           <!-- Video duration -->
           <div
@@ -204,7 +204,8 @@ function toggleWatchLater() {
             v-if="authorFace"
             m="r-4" w="48px" h="48px" rounded="$bew-radius" overflow="hidden" object="center cover"
             bg="$bew-fill-4" cursor="pointer"
-            @click="gotoChannel(mid ?? 0)"
+            :href="`//space.bilibili.com/${mid}`" target="_blank"
+            @click.stop=""
           >
             <img
               :src="`${removeHttpFromUrl(authorFace)}@60w_60h_1c`"

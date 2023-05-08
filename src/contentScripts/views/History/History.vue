@@ -388,19 +388,21 @@ function jumpToLoginPage() {
             <!-- Description -->
             <div flex justify-between w-full>
               <div flex="~ col">
-                <h3
-                  class="keep-two-lines"
-                  overflow="hidden"
-                  text="lg overflow-ellipsis"
-                >
-                  {{
-                    historyItem.show_title
-                      ? historyItem.show_title
-                      : historyItem.title
-                  }}
-                </h3>
-                <div
-                  text="$bew-text-2 sm"
+                <a :href="`${getHistoryUrl(historyItem)}`" target="_blank" @click.stop="">
+                  <h3
+                    class="keep-two-lines"
+                    overflow="hidden"
+                    text="lg overflow-ellipsis"
+                  >
+                    {{
+                      historyItem.show_title
+                        ? historyItem.show_title
+                        : historyItem.title
+                    }}
+                  </h3>
+                </a>
+                <a
+                  un-text="$bew-text-2 sm"
                   m="t-4 b-2"
                   flex="~"
                   items-center
@@ -411,19 +413,19 @@ function jumpToLoginPage() {
                   hover:bg="$bew-theme-color-10"
                   duration-300
                   pr-2
-                  @click.stop="
-                    openLinkToNewTab(
-                      historyItem.author_mid
-                        ? `https://space.bilibili.com/${historyItem.author_mid}`
-                        : historyItem.uri,
-                    )
+                  :href="
+                    historyItem.author_mid
+                      ? `https://space.bilibili.com/${historyItem.author_mid}`
+                      : historyItem.uri
                   "
+                  target="_blank"
+                  @click.stop=""
                 >
                   <img
                     :src="
-                      `${historyItem.author_face
+                      removeHttpFromUrl(`${historyItem.author_face
                         ? historyItem.author_face
-                        : historyItem.cover}@80w_80h_1c`
+                        : historyItem.cover}@80w_80h_1c`)
                     "
                     w-30px
                     aspect-square
@@ -447,7 +449,7 @@ function jumpToLoginPage() {
                   ><tabler:live-photo />
                     Live
                   </span>
-                </div>
+                </a>
                 <p display="block xl:none" text="$bew-text-3 sm" mt-auto mb-2>
                   {{
                     useDateFormat(historyItem.view_at * 1000, 'YYYY-MM-DD HH:mm:ss')
