@@ -239,7 +239,37 @@ function jumpToLoginPage() {
     </main>
 
     <aside relative w="full md:40% lg:30% xl:25%" order="1 md:2 lg:2">
-      <div pos="sticky top-120px" flex="~ col gap-4" justify-start my-10 w-full>
+      <div
+        pos="sticky top-120px" flex="~ col gap-4" justify-start my-10 w-full h="[calc(100vh-160px)]" p-6
+        rounded="$bew-radius" overflow-hidden
+      >
+        <img
+          v-if="watchLaterList[0]" :src="removeHttpFromUrl(`${watchLaterList[0].pic}@480w_270h_1c`)"
+          rounded="$bew-radius"
+        >
+
+        <h3 text="3xl" fw-600>
+          Watch later ({{ watchLaterList.length }}/100)
+        </h3>
+        <p flex gap-4>
+          <Button flex-1>
+            Play all
+          </Button>
+          <Button flex-1>
+            Shuffle
+          </Button>
+        </p>
+        <div
+          v-if="watchLaterList[0]"
+          pos="absolute top-0 left-0" w-full h-full bg-cover bg-center z--1 opacity-60
+        >
+          <div absolute w-full h-full style="backdrop-filter: blur(60px) saturate(180%)" />
+          <img
+            v-if="watchLaterList[0]"
+            :src="removeHttpFromUrl(`${watchLaterList[0].pic}@480w_270h_1c`)"
+            w-full h-full object="cover center"
+          >
+        </div>
         <!-- <Button shadow="$bew-shadow-1" @click="handleClearAllWatchHistory">
           <template #left>
             <tabler:trash />
