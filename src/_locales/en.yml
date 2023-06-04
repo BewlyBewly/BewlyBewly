@@ -13,6 +13,7 @@ common:
   second: second ago | seconds ago
   please_log_in_first: Please log in first
   login: Login
+  save_to_watch_later: Save to Watch later
 settings:
   title: Settings
   select_language: Language
@@ -131,6 +132,7 @@ dock:
   home: Home
   anime: Anime
   history: History
+  watch_later: Watch later
   dark_mode: Dark Mode
   light_mode: Light Mode
   settings: Settings
@@ -159,14 +161,24 @@ history:
   title: Watch History
   search_watch_history: Search watch history
   clear_all_watch_history: Clear all watch history
-  clear_all_watch_history_confirm: >-
-    Clear all watch history? 
-
-    This operation cannot be reversed. Are you sure you want to clear all watch
-    history?
+  clear_all_watch_history_confirm: |-
+    Clear all watch history?
+    This operation cannot be reversed. Are you sure you want to clear all watch history?
   pause_watch_history: Pause watch history
   pause_watch_history_confirm: |-
-    Pause watch history? 
+    Pause watch history?
     Are you sure you want to pause watch history?
   turn_on_watch_history: Turn on watch history
   turn_on_watch_history_confirm: Turn on watch history? Are you sure you want to turn on watch history?
+watch_later:
+  title: Watch Later
+  play_all: Play all
+  clear_all: Clear all watch later
+  clear_all_confirm: |-
+    Clear all watch later?
+    This operation cannot be reversed. Are you sure you want to clear all watch later?
+  remove_watched_videos: Remove watched videos
+  remove_watched_videos_confirm: |-
+    Remove watched videos?
+    This operation cannot be reversed. Are you sure you want to remove watched videos?
+  

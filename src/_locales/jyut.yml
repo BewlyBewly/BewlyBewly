@@ -13,6 +13,7 @@ common:
   second: 秒前
   please_log_in_first: 唔該登入先
   login: 登入
+  save_to_watch_later: 陣間至睇
 settings:
   title: 校做
   select_language: 介面語文
@@ -130,6 +131,7 @@ dock:
   home: 主頁
   anime: 動畫
   history: 收睇記錄
+  watch_later: 陣間至睇
   dark_mode: 深色模式
   light_mode: 淺色模式
   settings: 校做
@@ -160,12 +162,23 @@ history:
   pause_watch_history: 暫停進行收睇記錄
   clear_all_watch_history: 剷晒啲收睇記錄
   clear_all_watch_history_confirm: |-
-    諗住剷晒啲收睇記錄？
+    係咪要剷晒啲收睇記錄呀？
     噉做冇得返轉頭噃，你確定要剷晒啲收睇記錄？
   pause_watch_history_confirm: |-
-    諗住暫停進行收睇記錄？
+    係咪要暫停進行收睇記錄呀？
     你確定要暫停暫停進行收睇記錄？
   search_watch_history: 搵吓收睇記錄
   turn_on_watch_history_confirm: |-
-    諗住開返收睇記錄？
+    係咪要開返收睇記錄呀？
     你確定要開返收睇記錄？
+watch_later:
+  title: 陣間至睇
+  play_all: 播晒佢哋
+  clear_all: 剷曬陣間至睇啲片
+  clear_all_confirm: |-
+    係咪要剷曬陣間至睇啲片呀？
+    噉做冇得返轉頭噃，你確定要剷曬陣間至睇啲片？
+  remove_watched_videos: 剷走睇過啲片
+  remove_watched_videos_confirm: |-
+    係咪要剷走你睇過啲片呀？
+    噉做冇得返轉頭噃，你確定要剷走你睇過啲片？

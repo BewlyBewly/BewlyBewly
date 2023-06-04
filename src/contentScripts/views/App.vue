@@ -206,7 +206,7 @@ function setAppAppearance() {
               </button>
             </Tooltip>
 
-            <Tooltip content="Watch later" :placement="tooltipPlacement">
+            <Tooltip :content="$t('dock.watch_later')" :placement="tooltipPlacement">
               <button
                 class="dock-item"
                 :class="{ active: activatedPage === AppPage.WatchLater && !isVideoPage }"

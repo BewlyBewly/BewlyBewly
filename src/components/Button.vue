@@ -10,6 +10,10 @@ interface Props {
   size?: 'small' | 'medium' | 'large'
   /** @description enable frosted glass effect */
   frosted?: boolean
+  secondary?: boolean
+  color?: string
+  textColor?: string
+  strong?: boolean
 }
 
 // const props = withDefaults(defineProps<Props>(), {})
@@ -26,10 +30,14 @@ const handleClick = (evt: MouseEvent) => {
   <button
     class="b-button"
     :class="`
-      b-button--type-${props.type ?? 'default'}
-      b-button--size-${props.size ?? 'medium'}
-      ${props.frosted ? 'frosted-glass' : ''}
+      b-button--type-${type ?? 'default'}
+      b-button--size-${size ?? 'medium'}
+      ${frosted ? 'frosted-glass' : ''}
+      ${secondary ? 'b-button--secondary' : ''}
+      ${strong ? 'b-button--strong' : ''}
+      ${color || textColor ? 'b-button--custom-color' : ''}
     `"
+    :style="{ backgroundColor: color, color: textColor }"
     @click="handleClick"
   >
     <slot name="left" />
@@ -89,5 +97,20 @@ const handleClick = (evt: MouseEvent) => {
     --b-font-size: 15px;
     --b-icon-size: 16px;
   }
+
+  &--custom-color {
+    --at-apply: hover:opacity-80;
+  }
+
+  &--secondary {
+    --b-color: var(--bew-fill-2);
+    --b-color-hover: var(--bew-fill-4);
+    --b-text-color: var(--bew-text-1);
+  }
+
+  &--strong {
+    --at-apply: fw-800;
+  }
+
 }
 </style>

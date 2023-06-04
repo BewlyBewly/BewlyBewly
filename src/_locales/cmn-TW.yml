@@ -13,6 +13,7 @@ common:
   second: 秒前
   please_log_in_first: 請先登入
   login: 登入
+  save_to_watch_later: 稍後觀看
 settings:
   title: 設定
   select_language: 介面語文
@@ -130,6 +131,7 @@ dock:
   home: 首頁
   anime: 動畫
   history: 觀看記錄
+  watch_later: 稍後觀看
   dark_mode: 深色模式
   light_mode: 淺色模式
   settings: 設定
@@ -169,3 +171,14 @@ history:
   turn_on_watch_history_confirm: |-
     要啟用觀看記錄嗎？
     你確定要啟用觀看記錄嗎？
+watch_later:
+  title: 稍後觀看
+  play_all: 全部播放
+  clear_all: 清空稍後觀看
+  clear_all_confirm: |-
+    要清空稍後觀看的影片嗎？
+    此操作無法撤消，你確定要清空稍後觀看的影片嗎？
+  remove_watched_videos: 移除看過的影片
+  remove_watched_videos_confirm: |-
+    要移除看過的影片嗎？
+    此操作無法撤消，你確定要移除看過的影片嗎？

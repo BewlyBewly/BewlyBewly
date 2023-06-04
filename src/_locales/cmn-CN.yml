@@ -13,6 +13,7 @@ common:
   second: 秒前
   please_log_in_first: 请先登录
   login: 登录
+  save_to_watch_later: 稍后再看
 settings:
   title: 设置
   select_language: 界面语文
@@ -132,10 +133,12 @@ dock:
   history: 观看历史
   dark_mode: 暗色模式
   light_mode: 亮色模式
+  watch_later: 稍后再看
   settings: 设置
 home:
   not_interested_in: 对哪方面不感兴趣？
   video_removed: 视频已移除
+  save_to_watch_later: 添加到稍后再看
 anime:
   total_episodes: 全 {ep} 话
   update_to_n_episodes: 更新至 {ep} 话
@@ -169,3 +172,14 @@ history:
   turn_on_watch_history_confirm: |-
     要开启观看历史吗？
     你确定要开启观看历史吗？
+watch_later:
+  title: 稍后再看
+  play_all: 播放全部
+  clear_all: 清空稍后再看
+  clear_all_confirm: |-
+    要清空稍后再看吗？
+    该操作无法撤销，你确定要清空稍后再看吗？
+  remove_watched_videos: 清除已观看的视频
+  remove_watched_videos_confirm: |-
+    要清除已观看的视频吗？
+    该操作无法撤销，你确定要清除已观看的视频吗？
