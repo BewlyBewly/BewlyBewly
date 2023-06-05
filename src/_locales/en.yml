@@ -14,6 +14,7 @@ common:
   please_log_in_first: Please log in first
   login: Login
   save_to_watch_later: Save to Watch later
+  added: Added
 settings:
   title: Settings
   select_language: Language

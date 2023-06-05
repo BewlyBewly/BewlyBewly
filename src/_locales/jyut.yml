@@ -14,6 +14,7 @@ common:
   please_log_in_first: 唔該登入先
   login: 登入
   save_to_watch_later: 陣間至睇
+  added: 已添加
 settings:
   title: 校做
   select_language: 介面語文

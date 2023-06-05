@@ -14,6 +14,7 @@ common:
   please_log_in_first: 請先登入
   login: 登入
   save_to_watch_later: 稍後觀看
+  added: 已添加
 settings:
   title: 設定
   select_language: 介面語文
