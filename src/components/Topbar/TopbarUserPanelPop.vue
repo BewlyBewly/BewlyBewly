@@ -1,43 +1,38 @@
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
+import type { UserInfo, UserStat } from './types'
 import { revokeAccessKey } from '~/utils/authProvider'
 import { getCSRF, getUserID } from '~/utils/main'
 import { numFormatter } from '~/utils/dataFormatter'
-export default defineComponent({
-  props: {
-    userInfo: {
-      type: Object,
-      required: true,
-    },
-  },
-  data() {
-    return {
-      mid: getUserID(),
-      userStat: {} as any,
-      numFormatter,
-    }
-  },
-  mounted() {
-    browser.runtime
-      .sendMessage({
-        contentScriptQuery: 'getUserStat',
-      })
-      .then((res) => {
-        if (res.code === 0)
-          this.userStat = res.data
-      })
-  },
-  methods: {
-    async logout() {
-      revokeAccessKey()
-      await browser.runtime.sendMessage({
-        contentScriptQuery: 'logout',
-        biliCSRF: getCSRF(),
-      })
-      location.reload()
-    },
-  },
+
+defineProps<{
+  userInfo: UserInfo
+}>()
+
+const mid = computed(() => {
+  return getUserID()
 })
+
+const userStat = reactive<UserStat>({} as UserStat)
+
+onMounted(() => {
+  browser.runtime
+    .sendMessage({
+      contentScriptQuery: 'getUserStat',
+    })
+    .then((res) => {
+      if (res.code === 0)
+        Object.assign(userStat, res.data)
+    })
+})
+
+async function logout() {
+  revokeAccessKey()
+  await browser.runtime.sendMessage({
+    contentScriptQuery: 'logout',
+    biliCSRF: getCSRF(),
+  })
+  location.reload()
+}
 </script>
 
 <template>
@@ -45,13 +40,11 @@ export default defineComponent({
     <div id="base-info">
       {{ userInfo.uname ? userInfo.uname : '-' }}
       <div
-        class="bg-$bew-theme-color px-3 py-1 ml-2 text-white rounded-$bew-radius text-base leading-none"
+        flex items-center bg="$bew-theme-color" p="x-3 y-1" ml-2 text="white base" rounded="$bew-radius"
+        leading-none
       >
-        {{
-          userInfo.level_info?.current_level
-            ? userInfo.level_info.current_level
-            : '0'
-        }}
+        <span>{{ userInfo.level_info?.current_level ? userInfo.level_info.current_level : '0' }}</span>
+        <tabler:bolt v-if="userInfo.is_senior_member" />
       </div>
     </div>
     <div
@@ -79,7 +72,7 @@ export default defineComponent({
         class="group"
         :href="`https://space.bilibili.com/${mid}/fans/follow`"
         target="_blank"
-        :title="userStat.following"
+        :title="`${userStat.following}`"
       >
         <div class="num">
           {{ userStat.following ? numFormatter(userStat.following) : '0' }}
@@ -89,7 +82,7 @@ export default defineComponent({
       <a
         :href="`https://space.bilibili.com/${mid}/fans/fans`"
         target="_blank"
-        :title="userStat.follower"
+        :title="`${userStat.follower}`"
       >
         <div class="num">
           {{ userStat.follower ? numFormatter(userStat.follower) : '0' }}
@@ -99,7 +92,7 @@ export default defineComponent({
       <a
         href="https://t.bilibili.com/"
         target="_blank"
-        :title="userStat.dynamic_count"
+        :title="`${userStat.dynamic_count}`"
       >
         <div class="num">
           {{
