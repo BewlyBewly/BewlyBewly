@@ -261,16 +261,16 @@ function jumpToLoginPage() {
 
     <aside relative w="full md:40% lg:30% xl:25%" order="1 md:2 lg:2">
       <div
-        pos="sticky top-120px" flex="~ col gap-4" justify-start my-10 w-full h="[calc(100vh-160px)]" p-6
-        rounded="$bew-radius" overflow-hidden bg="$bew-fill-1"
+        pos="sticky top-120px" flex="~ col gap-4" justify-start my-10 w-full h="auto md:[calc(100vh-160px)]" p-6
+        rounded="$bew-radius" overflow-hidden bg="$bew-fill-3"
       >
         <picture
-          rounded="$bew-radius" style="box-shadow: 0 16px 24px -12px rgba(0, 0, 0, .3)"
+          rounded="$bew-radius" style="box-shadow: 0 16px 24px -12px rgba(0, 0, 0, .36)"
           aspect-video mb-4 bg="$bew-fill-2"
         >
           <img
             v-if="watchLaterList[0]" :src="removeHttpFromUrl(`${watchLaterList[0].pic}@480w_270h_1c`)"
-            rounded="$bew-radius"
+            rounded="$bew-radius" aspect-video w-full
           >
         </picture>
 
