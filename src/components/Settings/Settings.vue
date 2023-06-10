@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import type { Ref } from 'vue'
+import SettingItem from './components/SettingItem.vue'
 import { grantAccessKey, revokeAccessKey } from '~/utils/authProvider'
 import { accessKey, settings } from '~/logic'
 
@@ -116,28 +117,16 @@ function changeThemeColor(color: string) {
         </div>
       </header>
 
-      <div class="settings-item" mt-60px>
-        <div>
-          {{ $t('settings.select_language') }}
-        </div>
-
+      <SettingItem :title="$t('settings.select_language')" mt-60px>
         <Select
           ref="langsSelect"
           v-model="settings.language"
           :options="langs"
           w="full"
         />
-      </div>
+      </SettingItem>
 
-      <div class="settings-item">
-        <div>
-          {{ $t('settings.recommendation_mode') }}
-          <br>
-          <span class="desc">
-            {{ $t('settings.recommendation_mode_desc') }}
-          </span>
-        </div>
-
+      <SettingItem :title="$t('settings.recommendation_mode')" :desc="$t('settings.recommendation_mode_desc')">
         <div flex rounded="$bew-radius" bg="$bew-fill-1" p-1>
           <div
             flex-1 py-1 cursor-pointer text-center rounded="$bew-radius"
@@ -160,59 +149,45 @@ function changeThemeColor(color: string) {
             App
           </div>
         </div>
-      </div>
+      </SettingItem>
 
-      <div
-        v-if="settings.recommendationMode === 'app'" class="settings-item"
-      >
-        <div>
-          {{ $t('settings.authorize_app') }}
+      <SettingItem v-if="settings.recommendationMode === 'app'" :title="$t('settings.authorize_app')">
+        <template #desc>
+          {{ $t('settings.authorize_app_desc') }}
           <br>
-          <span class="desc">
-            {{ $t('settings.authorize_app_desc') }}
-            <br>
-            <a
-              href="https://github.com/indefined/UserScripts/tree/master/bilibiliHome#%E6%8E%88%E6%9D%83%E8%AF%B4%E6%98%8E" target="_blank" un-text="$bew-theme-color"
-            >{{ $t('settings.authorize_app_more_info_access_key') }}</a>
-          </span>
-        </div>
-        <button
-          v-if="!accessKey"
-          ref="authorizeBtn"
-          bg="$bew-theme-color" text-white lh-35px rounded="$bew-radius"
-          @click="handleAuthorize"
-        >
-          {{ $t('settings.btn.authorize') }}
-        </button>
-        <button
-          v-else
-          un-border="2px solid $bew-error-color" text="$bew-error-color" lh-35px rounded="$bew-radius"
-          @click="handleRevoke"
-        >
-          <span>{{ $t('settings.btn.revoke') }}</span>
-        </button>
-      </div>
+          <a
+            href="https://github.com/indefined/UserScripts/tree/master/bilibiliHome#%E6%8E%88%E6%9D%83%E8%AF%B4%E6%98%8E" target="_blank" un-text="$bew-theme-color"
+          >{{ $t('settings.authorize_app_more_info_access_key') }}</a>
+        </template>
 
-      <div class="settings-item">
         <div>
-          {{ $t('settings.topbar_visible') }}
-          <br>
-          <span class="desc">{{ $t('settings.topbar_visible_desc') }}</span>
+          <button
+            v-if="!accessKey"
+            ref="authorizeBtn"
+            bg="$bew-theme-color" text-white lh-35px rounded="$bew-radius" w-full
+            @click="handleAuthorize"
+          >
+            {{ $t('settings.btn.authorize') }}
+          </button>
+          <button
+            v-else
+            un-border="2px solid $bew-error-color" text="$bew-error-color" lh-35px rounded="$bew-radius" w-full
+            @click="handleRevoke"
+          >
+            <span>{{ $t('settings.btn.revoke') }}</span>
+          </button>
         </div>
-        <div>
-          <label for="topbarVisible" class="chk-btn" cursor="pointer" pointer="auto">
-            <template v-if="settings.isShowTopbar">{{ $t('settings.chk_box.show') }}</template>
-            <template v-else>{{ $t('settings.chk_box.hidden') }}</template>
-            <input id="topbarVisible" v-model="settings.isShowTopbar" type="checkbox">
-          </label>
-        </div>
-      </div>
+      </SettingItem>
 
-      <div class="settings-item">
-        <div>
-          {{ $t('settings.theme_color') }}
-          <br>
-        </div>
+      <SettingItem :title="$t('settings.topbar_visible')" :desc="$t('settings.topbar_visible_desc')">
+        <label for="topbarVisible" class="chk-btn" cursor="pointer" pointer="auto">
+          <template v-if="settings.isShowTopbar">{{ $t('settings.chk_box.show') }}</template>
+          <template v-else>{{ $t('settings.chk_box.hidden') }}</template>
+          <input id="topbarVisible" v-model="settings.isShowTopbar" type="checkbox">
+        </label>
+      </SettingItem>
+
+      <SettingItem :title="$t('settings.theme_color')">
         <div flex="~ gap-2 wrap">
           <div
             v-for="color in themeColorOptions" :key="color"
@@ -225,43 +200,27 @@ function changeThemeColor(color: string) {
             @click="changeThemeColor(color)"
           />
         </div>
-      </div>
+      </SettingItem>
 
-      <div class="settings-item">
-        <div>
-          {{ $t('settings.follow_bilibili_evolved_color') }}
-          <br>
-          <span class="desc">
-            {{ $t('settings.follow_bilibili_evolved_color_desc') }}
-          </span>
-        </div>
-        <div>
-          <div
-            w-20px h-20px rounded-8 cursor-pointer
-            :style="{
-              background: bilibiliEvolvedThemeColor,
-              transform: bilibiliEvolvedThemeColor === settings.themeColor ? 'scale(1.2)' : 'scale(1)',
-              border: bilibiliEvolvedThemeColor === settings.themeColor ? '2px solid var(--bew-text-1)' : 'none',
-            }"
-            @click="changeThemeColor(bilibiliEvolvedThemeColor)"
-          />
-        </div>
-      </div>
+      <SettingItem :title="$t('settings.follow_bilibili_evolved_color')" :desc="$t('settings.follow_bilibili_evolved_color_desc')">
+        <div
+          w-20px h-20px rounded-8 cursor-pointer
+          :style="{
+            background: bilibiliEvolvedThemeColor,
+            transform: bilibiliEvolvedThemeColor === settings.themeColor ? 'scale(1.2)' : 'scale(1)',
+            border: bilibiliEvolvedThemeColor === settings.themeColor ? '2px solid var(--bew-text-1)' : 'none',
+          }"
+          @click="changeThemeColor(bilibiliEvolvedThemeColor)"
+        />
+      </SettingItem>
 
-      <div class="settings-item">
-        <div>
-          {{ $t('settings.dock_position') }}
-          <br>
-          <span class="desc">{{ $t('settings.dock_position_desc') }}</span>
-        </div>
-        <div>
-          <Select
-            v-model="settings.dockPosition"
-            :options="dockPositions"
-            w="full"
-          />
-        </div>
-      </div>
+      <SettingItem :title="$t('settings.dock_position')" :desc="$t('settings.dock_position_desc')">
+        <Select
+          v-model="settings.dockPosition"
+          :options="dockPositions"
+          w="full"
+        />
+      </SettingItem>
     </div>
   </div>
 </template>
@@ -278,23 +237,5 @@ function changeThemeColor(color: string) {
     bg-$bew-content-solid-1;
   box-shadow: var(--bew-shadow-3);
 
-  .settings-item {
-    --at-apply: flex justify-between gap-4 items-center py-2 text-base;
-    .desc {
-      --at-apply: text-sm text-$bew-text-3;
-    }
-
-    > *:first-child {
-      --at-apply: w-5/7;
-    }
-
-    > *:last-child {
-      --at-apply: w-2/7;
-    }
-  }
-}
-button,
-select {
-  --at-apply: w-120px
 }
 </style>
