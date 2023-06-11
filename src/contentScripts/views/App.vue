@@ -140,7 +140,7 @@ function setAppAppearance() {
 
 <template>
   <div ref="mainApp" text="$bew-text-1" transition="opacity duration-300" style="opacity: 0;">
-    <div m-auto max-w="$bew-page-max-width">
+    <div m-auto max-w="$bew-page-max-width" :style="{ opacity: showSettings ? 0.6 : 1 }">
       <Transition name="topbar">
         <Topbar
           v-show="settings.isShowTopbar"
@@ -263,9 +263,9 @@ function setAppAppearance() {
           </Transition>
         </main>
       </div>
-      <!-- settings dialog -->
-      <Settings v-if="showSettings" @close="showSettings = false" />
     </div>
+    <!-- settings dialog -->
+    <Settings v-if="showSettings" @close="showSettings = false" />
   </div>
 </template>
 

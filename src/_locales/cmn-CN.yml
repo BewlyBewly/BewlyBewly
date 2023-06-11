@@ -17,6 +17,12 @@ common:
   added: 已添加
 settings:
   title: 设置
+
+  # Settings menu
+  menu_general: 通用
+  menu_appearance: 外观
+  menu_home: 首页
+
   select_language: 界面语文
   select_language_opt:
     english: 英文

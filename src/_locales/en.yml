@@ -17,6 +17,12 @@ common:
   added: Added
 settings:
   title: Settings
+
+  # Settings menu
+  menu_general: General
+  menu_appearance: Appearance
+  menu_home: Home
+
   select_language: Language
   select_language_opt:
     english: English

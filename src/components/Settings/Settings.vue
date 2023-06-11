@@ -1,241 +1,111 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import type { Ref } from 'vue'
-import SettingItem from './components/SettingItem.vue'
-import { grantAccessKey, revokeAccessKey } from '~/utils/authProvider'
-import { accessKey, settings } from '~/logic'
+import General from './views/General.vue'
+import Appearance from './views/Appearance.vue'
+import Home from './views/Home.vue'
+import { MenuType } from './types'
 
 const emit = defineEmits(['close'])
 
-const { t, locale } = useI18n()
+const { t } = useI18n()
 
-const authorizeBtn = ref<HTMLButtonElement>() as Ref<HTMLButtonElement>
-const langsSelect = ref<HTMLElement>() as Ref<HTMLElement>
-const themeColorOptions = reactive<Array<string>>([
-  '#22c55e',
-  '#34d399',
-  '#14b8a6',
-  '#06b6d4',
-  '#00a1d6',
-  '#60a5fa',
-  '#3b82f6',
-  '#6366f1',
-  '#818cf8',
-  '#a78bfa',
-  '#f46d43',
-  '#fb923c',
-  '#f59e0b',
-  '#eab308',
-  '#f43f5e',
-  '#fb7299',
-  '#fda4af',
-])
+const settingsMenu = { General, Appearance, Home }
+const activatedMenuItem = ref<MenuType>(MenuType.General)
 
-const langs = computed(() => {
+const settingsMenuItems = computed(() => {
   return [
     {
-      value: 'en',
-      label: t('settings.select_language_opt.english'),
+      value: MenuType.General,
+      label: t('settings.menu_general'),
     },
     {
-      value: 'cmn-CN',
-      label: t('settings.select_language_opt.mandarin_cn'),
+      value: MenuType.Appearance,
+      label: t('settings.menu_appearance'),
     },
     {
-      value: 'cmn-TW',
-      label: t('settings.select_language_opt.mandarin_tw'),
-    },
-    {
-      value: 'jyut',
-      label: t('settings.select_language_opt.jyut'),
+      value: MenuType.Home,
+      label: t('settings.menu_home'),
     },
   ]
-})
-const dockPositions = computed(() => {
-  return [
-    {
-      label: t('settings.dock_position_opt.left'),
-      value: 'left',
-    },
-    {
-      label: t('settings.dock_position_opt.right'),
-      value: 'right',
-    },
-    {
-      label: t('settings.dock_position_opt.bottom'),
-      value: 'bottom',
-    },
-  ]
-})
-const bilibiliEvolvedThemeColor = computed(() => {
-  return getComputedStyle(document.querySelector('html') as HTMLElement).getPropertyValue('--theme-color').trim() ?? '#00a1d6'
 })
 
 onMounted(() => {
-})
-
-watch(() => settings.value.language, (newValue, oldValue) => {
-  locale.value = newValue
 })
 
 function close() {
   emit('close')
 }
 
-function handleAuthorize() {
-  grantAccessKey(authorizeBtn.value)
-}
-
-function handleRevoke() {
-  revokeAccessKey()
-}
-
-function changeThemeColor(color: string) {
-  settings.value.themeColor = color
+function changeMenuItem(menuItem: MenuType) {
+  activatedMenuItem.value = menuItem
 }
 </script>
 
 <template>
-  <div class="fixed w-full h-full top-0 left-0 bg-black bg-opacity-30" z="9998" @click="close" />
+  <div class="fixed w-full h-full top-0 left-0" z="9998" @click="close" />
 
-  <div id="settings-window">
-    <div relative overflow-y-scroll overflow-x-hidden h-full p-8>
-      <header
-        flex justify-between items-center w-full h-80px
-        pos="fixed left-0 top-0" p-8
-        bg="$bew-content-1" z-1 rounded="t-$bew-radius"
-        style="backdrop-filter: var(--bew-filter-glass)"
+  <div
+    id="settings-window" pos="fixed md:top-1/5 top-0 left-1/2" w="full lg:1/2 md:2/3" h="full md:1/2"
+    max-w-800px transform="~ translate-x--1/2"
+    z-9999 flex justify-between items-center
+  >
+    <aside shrink-0 px-4 pos="absolute left--82px" class="group" z-1>
+      <ul
+        flex="~ gap-4 col" rounded="30px hover:25px" bg="$bew-content-1" p-2 shadow="$bew-shadow-3"
+        group-hover:scale-105 duration-300
+        style="backdrop-filter: var(--bew-filter-glass);"
       >
-        <div text="3xl">
-          {{ $t('settings.title') }}
-        </div>
-        <div
-          text-2xl leading-0 bg="$bew-fill-1" w="32px" h="32px" p="1" rounded-8 shadow="md" cursor="pointer"
-          @click="close"
-        >
-          <ic-baseline-clear />
-        </div>
-      </header>
-
-      <SettingItem :title="$t('settings.select_language')" mt-60px>
-        <Select
-          ref="langsSelect"
-          v-model="settings.language"
-          :options="langs"
-          w="full"
-        />
-      </SettingItem>
-
-      <SettingItem :title="$t('settings.recommendation_mode')" :desc="$t('settings.recommendation_mode_desc')">
-        <div flex rounded="$bew-radius" bg="$bew-fill-1" p-1>
-          <div
-            flex-1 py-1 cursor-pointer text-center rounded="$bew-radius"
-            :style="{
-              background: settings.recommendationMode === 'web' ? 'var(--bew-theme-color)' : '',
-              color: settings.recommendationMode === 'web' ? 'white' : '',
-            }"
-            @click="settings.recommendationMode = 'web'"
-          >
-            Web
-          </div>
-          <div
-            flex-1 py-1 cursor-pointer text-center rounded="$bew-radius"
-            :style="{
-              background: settings.recommendationMode === 'app' ? 'var(--bew-theme-color)' : '',
-              color: settings.recommendationMode === 'app' ? 'white' : '',
-            }"
-            @click="settings.recommendationMode = 'app'"
-          >
-            App
-          </div>
-        </div>
-      </SettingItem>
-
-      <SettingItem v-if="settings.recommendationMode === 'app'" :title="$t('settings.authorize_app')">
-        <template #desc>
-          {{ $t('settings.authorize_app_desc') }}
-          <br>
+        <li v-for="item in settingsMenuItems" :key="item.value">
           <a
-            href="https://github.com/indefined/UserScripts/tree/master/bilibiliHome#%E6%8E%88%E6%9D%83%E8%AF%B4%E6%98%8E" target="_blank" un-text="$bew-theme-color"
-          >{{ $t('settings.authorize_app_more_info_access_key') }}</a>
-        </template>
-
-        <div>
-          <button
-            v-if="!accessKey"
-            ref="authorizeBtn"
-            bg="$bew-theme-color" text-white lh-35px rounded="$bew-radius" w-full
-            @click="handleAuthorize"
+            cursor-pointer w="40px group-hover:150px" h-40px
+            rounded-30px flex items-center overflow-x-hidden
+            duration-300 un-text="hover:white dark-hover:!black" bg="dark-hover:white hover:$bew-theme-color"
+            :class="{ 'menu-item-activated': item.value === activatedMenuItem }"
+            @click="changeMenuItem(item.value)"
           >
-            {{ $t('settings.btn.authorize') }}
-          </button>
-          <button
-            v-else
-            un-border="2px solid $bew-error-color" text="$bew-error-color" lh-35px rounded="$bew-radius" w-full
-            @click="handleRevoke"
-          >
-            <span>{{ $t('settings.btn.revoke') }}</span>
-          </button>
-        </div>
-      </SettingItem>
-
-      <SettingItem :title="$t('settings.topbar_visible')" :desc="$t('settings.topbar_visible_desc')">
-        <label for="topbarVisible" class="chk-btn" cursor="pointer" pointer="auto">
-          <template v-if="settings.isShowTopbar">{{ $t('settings.chk_box.show') }}</template>
-          <template v-else>{{ $t('settings.chk_box.hidden') }}</template>
-          <input id="topbarVisible" v-model="settings.isShowTopbar" type="checkbox">
-        </label>
-      </SettingItem>
-
-      <SettingItem :title="$t('settings.theme_color')">
-        <div flex="~ gap-2 wrap">
+            <i w-40px text="xl center" flex="~ shrink-0" justify-center>
+              <tabler:settings v-if="item.value === MenuType.General" />
+              <tabler:brush v-else-if="item.value === MenuType.Appearance" />
+              <tabler:home v-else-if="item.value === MenuType.Home" />
+            </i>
+            <span shrink-0>{{ item.label }}</span>
+          </a>
+        </li>
+      </ul>
+    </aside>
+    <div
+      relative overflow-y-scroll overflow-x-hidden w-full h-full p-8 bg="$bew-content-solid-1"
+      shadow="$bew-shadow-3" rounded="$bew-radius"
+    >
+      <main relative>
+        <header
+          flex justify-between items-center w-full h-80px
+          pos="fixed right-0 top-0" p-8
+          bg="$bew-content-1" z-1 rounded="t-$bew-radius"
+          style="backdrop-filter: var(--bew-filter-glass)"
+        >
+          <div text="3xl">
+            {{ $t('settings.title') }}
+          </div>
           <div
-            v-for="color in themeColorOptions" :key="color"
-            w-20px h-20px rounded-8 cursor-pointer transition duration-300
-            :style="{
-              background: color,
-              transform: color === settings.themeColor ? 'scale(1.2)' : 'scale(1)',
-              border: color === settings.themeColor ? '2px solid var(--bew-text-1)' : 'none',
-            }"
-            @click="changeThemeColor(color)"
-          />
-        </div>
-      </SettingItem>
+            text-2xl leading-0 bg="$bew-fill-1" w="32px" h="32px" p="1" rounded-8 shadow="md" cursor="pointer"
+            @click="close"
+          >
+            <ic-baseline-clear />
+          </div>
+        </header>
 
-      <SettingItem :title="$t('settings.follow_bilibili_evolved_color')" :desc="$t('settings.follow_bilibili_evolved_color_desc')">
-        <div
-          w-20px h-20px rounded-8 cursor-pointer
-          :style="{
-            background: bilibiliEvolvedThemeColor,
-            transform: bilibiliEvolvedThemeColor === settings.themeColor ? 'scale(1.2)' : 'scale(1)',
-            border: bilibiliEvolvedThemeColor === settings.themeColor ? '2px solid var(--bew-text-1)' : 'none',
-          }"
-          @click="changeThemeColor(bilibiliEvolvedThemeColor)"
-        />
-      </SettingItem>
+        <div h-60px />
 
-      <SettingItem :title="$t('settings.dock_position')" :desc="$t('settings.dock_position_desc')">
-        <Select
-          v-model="settings.dockPosition"
-          :options="dockPositions"
-          w="full"
-        />
-      </SettingItem>
+        <Component :is="settingsMenu[activatedMenuItem]" />
+      </main>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-#settings-window {
-  --at-apply: fixed md:top-1/5 top-0 left-1/2
-    lg:1/2 md:w-2/3 w-full
-    md:h-1/2 h-full
-
-    max-w-800px
-    transform -translate-x-1/2
-    rounded-$bew-radius z-9999 overflow-hidden
-    bg-$bew-content-solid-1;
-  box-shadow: var(--bew-shadow-3);
-
+.menu-item-activated {
+  --at-apply: text-white dark-text-black
+    dark-bg-white bg-$bew-theme-color
 }
 </style>
