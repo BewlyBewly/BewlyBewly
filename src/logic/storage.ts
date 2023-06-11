@@ -9,7 +9,7 @@ export const activatedPage = useStorageLocal('activatedPage', ref<AppPage>(AppPa
 export const settings = useStorageLocal('settings', ref<Settings>({
   language: '',
   isShowTopbar: true,
-  dockPosition: 'left',
+  dockPosition: 'right',
   themeColor: '#00a1d6',
   recommendationMode: 'web',
 }), { mergeDefaults: true })
