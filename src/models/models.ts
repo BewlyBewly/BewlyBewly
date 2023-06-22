@@ -4,4 +4,5 @@ export interface Settings {
   dockPosition: 'left' | 'right' | 'bottom'
   themeColor: string
   recommendationMode: 'web' | 'app'
+  wallpaper: string
 }

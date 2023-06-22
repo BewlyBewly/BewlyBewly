@@ -29,10 +29,7 @@ const settingsMenuItems = computed(() => {
   ]
 })
 
-onMounted(() => {
-})
-
-function close() {
+function handleClose() {
   emit('close')
 }
 
@@ -42,7 +39,7 @@ function changeMenuItem(menuItem: MenuType) {
 </script>
 
 <template>
-  <div class="fixed w-full h-full top-0 left-0" z="9998" @click="close" />
+  <div class="fixed w-full h-full top-0 left-0" z="9998" @click="handleClose" />
 
   <div
     id="settings-window" pos="fixed md:top-1/5 top-0 left-1/2" w="full lg:1/2 md:2/3" h="full md:1/2"

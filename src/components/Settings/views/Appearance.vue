@@ -23,9 +23,21 @@ const themeColorOptions = reactive<Array<string>>([
 const bilibiliEvolvedThemeColor = computed(() => {
   return getComputedStyle(document.querySelector('html') as HTMLElement).getPropertyValue('--theme-color').trim() ?? '#00a1d6'
 })
+const wallpapers = reactive<Array<string>>([
+  'https://source.unsplash.com/1920x1080/?nature',
+  'https://pic.imgdb.cn/item/638e1d63b1fccdcd36103811.jpg',
+  'https://pic.imgdb.cn/item/638e1d7ab1fccdcd36106346.jpg',
+  'https://pic.imgdb.cn/item/63830f1816f2c2beb1868554.jpg',
+])
 
 function changeThemeColor(color: string) {
   settings.value.themeColor = color
+}
+
+function changeWallpaper(url: string) {
+  document.body.style.backgroundImage = `url(${url})`
+  document.body.style.backgroundSize = 'cover'
+  document.body.style.backgroundAttachment = 'fixed'
 }
 </script>
 
@@ -40,7 +52,7 @@ function changeThemeColor(color: string) {
           transform: color === settings.themeColor ? 'scale(1.2)' : 'scale(1)',
           border: color === settings.themeColor ? '2px solid var(--bew-text-1)' : 'none',
         }"
-        @click="changeThemeColor(color)"
+        ¬@click="changeThemeColor(color)"
       />
     </div>
   </SettingItem>
@@ -54,6 +66,13 @@ function changeThemeColor(color: string) {
       }"
       @click="changeThemeColor(bilibiliEvolvedThemeColor)"
     />
+  </SettingItem>
+  <SettingItem title="Choose your wallpaper" next-line>
+    <div grid="~ xl:cols-4 lg:cols-3 md:cols-2 gap-4">
+      <picture v-for="item in wallpapers" :key="item" aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden @click="changeWallpaper(item)">
+        <img :src="item" alt="" w-full h-full object-cover>
+      </picture>
+    </div>
   </SettingItem>
 </template>
 

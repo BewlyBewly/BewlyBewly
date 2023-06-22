@@ -139,7 +139,7 @@ function setAppAppearance() {
 </script>
 
 <template>
-  <div ref="mainApp" text="$bew-text-1" transition="opacity duration-300" style="opacity: 0;">
+  <div ref="mainApp" text="$bew-text-1" transition="opacity duration-300">
     <div m-auto max-w="$bew-page-max-width" :style="{ opacity: showSettings ? 0.6 : 1 }">
       <Transition name="topbar">
         <Topbar
