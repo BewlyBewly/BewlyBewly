@@ -3,7 +3,7 @@ import RecommendContent from './components/RecommendContent.vue'
 </script>
 
 <template>
-  <div bg="$bew-bg">
+  <div>
     <RecommendContent />
   </div>
 </template>

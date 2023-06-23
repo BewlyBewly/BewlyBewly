@@ -2,27 +2,23 @@
 import type { Ref } from 'vue'
 
 const scrollListWrap = ref<HTMLElement>() as Ref<HTMLElement>
-const showLeftMask = ref<boolean>(false)
-const showRightMask = ref<boolean>(false)
+// const showLeftMask = ref<boolean>(false)
+// const showRightMask = ref<boolean>(false)
+const showScrollMask = ref<boolean>(false)
 
 onMounted(() => {
   scrollListWrap.value.addEventListener('scroll', () => {
-    if (scrollListWrap.value.scrollLeft > 0) {
-      showLeftMask.value = true
-      showRightMask.value = true
-    }
-    else {
-      showLeftMask.value = false
-      showRightMask.value = false
-    }
+    if (scrollListWrap.value.scrollLeft > 0)
+      showScrollMask.value = true
+
+    else
+      showScrollMask.value = false
 
     if (
       scrollListWrap.value.scrollLeft + scrollListWrap.value.clientWidth
       >= scrollListWrap.value.scrollWidth
-    ) {
-      showLeftMask.value = false
-      showRightMask.value = false
-    }
+    )
+      showScrollMask.value = false
   })
 
   scrollListWrap.value.addEventListener('wheel', (event: WheelEvent) => {
@@ -34,14 +30,14 @@ onMounted(() => {
 
 <template>
   <div relative>
-    <transition name="fade">
+    <!-- <transition name="fade">
       <div
         v-show="showLeftMask"
         h-full
         w-80px
         absolute
         z-1
-        style="background: linear-gradient(to left, transparent, var(--bew-bg))"
+        style="mask-image: linear-gradient(to left, transparent, black); mask-mode: alpha;"
       />
     </transition>
     <transition name="fade">
@@ -55,7 +51,7 @@ onMounted(() => {
           background: linear-gradient(to right, transparent, var(--bew-bg));
         "
       />
-    </transition>
+    </transition> -->
 
     <div
       ref="scrollListWrap"
@@ -63,6 +59,7 @@ onMounted(() => {
       overflow-x-scroll
       overflow-y-hidden
       relative
+      :class="{ 'scroll-mask': showScrollMask }"
     >
       <slot />
     </div>
@@ -70,13 +67,8 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 0.3s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  --at-apply: opacity-0;
+.scroll-mask {
+  mask-image: linear-gradient(to right, transparent 0%, black 80px calc(100% - 160px), transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 80px calc(100% - 160px), transparent 100%);
 }
 </style>

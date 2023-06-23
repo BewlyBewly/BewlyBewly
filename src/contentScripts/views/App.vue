@@ -81,6 +81,13 @@ watch(() => accessKey.value, () => {
     accessKey.value = ''
 })
 
+watch(() => settings.value.wallpaper, (newValue) => {
+  document.documentElement.style.backgroundImage = `url(${newValue})`
+  document.documentElement.style.backgroundSize = 'cover'
+  document.documentElement.style.backgroundAttachment = 'fixed'
+  document.documentElement.style.backgroundPosition = 'center'
+})
+
 onMounted(() => {
   nextTick(() => {
     setTimeout(() => {
@@ -133,12 +140,14 @@ function setAppAppearance() {
     mainApp.value?.classList.remove('dark')
 
   // Override Bilibili Evolved background color
-  document.body.style.setProperty('background-color', 'var(--bew-bg)', 'important')
+  document.body.style.setProperty('background-color', 'unset', 'important')
   document.documentElement.style.setProperty('background-color', 'var(--bew-bg)', 'important')
 }
 </script>
 
 <template>
+  <!-- background mask -->
+  <div pos="fixed top-0 left-0" w-full h-full bg="$bew-bg" pointer-events-none :style="{ opacity: settings.backgroundMaskOpacity / 100 }" />
   <div ref="mainApp" text="$bew-text-1" transition="opacity duration-300">
     <div m-auto max-w="$bew-page-max-width" :style="{ opacity: showSettings ? 0.6 : 1 }">
       <Transition name="topbar">

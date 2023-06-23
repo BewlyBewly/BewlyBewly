@@ -5,4 +5,5 @@ export interface Settings {
   themeColor: string
   recommendationMode: 'web' | 'app'
   wallpaper: string
+  backgroundMaskOpacity: number
 }

@@ -4,6 +4,7 @@ import { Transition, onMounted, watch } from 'vue'
 import type { UnReadDm, UnReadMessage, UserInfo } from './types'
 import { updateInterval } from './notify'
 import { getUserID } from '~/utils/main'
+import { settings } from '~/logic'
 
 interface Props {
   showSearchBar: boolean
@@ -184,7 +185,7 @@ function getNewMomentsCount() {
         h="160px"
         opacity="100"
         pointer-events-none
-        style="background: linear-gradient(var(--bew-bg), transparent)"
+        :style="{ background: settings.wallpaper ? 'linear-gradient(rgba(0,0,0,.4), transparent)' : `linear-gradient(var(--bew-bg), transparent)` }"
       />
     </Transition>
 
@@ -214,7 +215,8 @@ function getNewMomentsCount() {
           w="!4"
           h="!4"
           m="l-4"
-          icon="stroke-4 fill-$bew-text-1"
+          icon="stroke-4"
+          :style="{ color: settings.wallpaper && showTopbarMask ? 'white' : 'var(--bew-text-1)' }"
         />
       </div>
       <Transition name="slide-in">

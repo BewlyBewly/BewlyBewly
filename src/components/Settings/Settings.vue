@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import General from './views/General.vue'
-import Appearance from './views/Appearance.vue'
-import Home from './views/Home.vue'
+import General from './components/General.vue'
+import Appearance from './components/Appearance.vue'
+import Home from './components/Home.vue'
 import { MenuType } from './types'
 
 const emit = defineEmits(['close'])
@@ -86,7 +86,7 @@ function changeMenuItem(menuItem: MenuType) {
           </div>
           <div
             text-2xl leading-0 bg="$bew-fill-1" w="32px" h="32px" p="1" rounded-8 shadow="md" cursor="pointer"
-            @click="close"
+            @click="handleClose"
           >
             <ic-baseline-clear />
           </div>

@@ -35,9 +35,7 @@ function changeThemeColor(color: string) {
 }
 
 function changeWallpaper(url: string) {
-  document.body.style.backgroundImage = `url(${url})`
-  document.body.style.backgroundSize = 'cover'
-  document.body.style.backgroundAttachment = 'fixed'
+  settings.value.wallpaper = url
 }
 </script>
 
@@ -52,7 +50,7 @@ function changeWallpaper(url: string) {
           transform: color === settings.themeColor ? 'scale(1.2)' : 'scale(1)',
           border: color === settings.themeColor ? '2px solid var(--bew-text-1)' : 'none',
         }"
-        ¬@click="changeThemeColor(color)"
+        @click="changeThemeColor(color)"
       />
     </div>
   </SettingItem>
@@ -69,13 +67,37 @@ function changeWallpaper(url: string) {
   </SettingItem>
   <SettingItem title="Choose your wallpaper" next-line>
     <div grid="~ xl:cols-4 lg:cols-3 md:cols-2 gap-4">
-      <picture v-for="item in wallpapers" :key="item" aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden @click="changeWallpaper(item)">
+      <picture
+        aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
+        un-border="4 transparent"
+        grid place-items-center
+        :class="{ 'selected-wallpaper': settings.wallpaper === '' }"
+        @click="changeWallpaper('')"
+      >
+        <tabler:photo-off text="3xl $bew-text-3" />
+      </picture>
+      <picture
+        v-for="item in wallpapers" :key="item" aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
+        un-border="4 transparent"
+        :class="{ 'selected-wallpaper': settings.wallpaper === item }"
+        @click="changeWallpaper(item)"
+      >
         <img :src="item" alt="" w-full h-full object-cover>
       </picture>
     </div>
   </SettingItem>
+  <SettingItem title="Background mask opacity">
+    <input
+      v-model="settings.backgroundMaskOpacity"
+      type="range" min="0" max="100"
+      step="1"
+    >
+    {{ settings.backgroundMaskOpacity }}
+  </SettingItem>
 </template>
 
 <style lang="scss" scoped>
-
+.selected-wallpaper {
+  --at-apply: border-$bew-theme-color-60
+}
 </style>

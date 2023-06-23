@@ -13,4 +13,5 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   themeColor: '#00a1d6',
   recommendationMode: 'web',
   wallpaper: '',
+  backgroundMaskOpacity: 0,
 }), { mergeDefaults: true })
