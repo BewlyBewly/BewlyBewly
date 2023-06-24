@@ -65,11 +65,36 @@ function changeWallpaper(url: string) {
       @click="changeThemeColor(bilibiliEvolvedThemeColor)"
     />
   </SettingItem>
-  <SettingItem title="Choose your wallpaper" next-line>
+  <SettingItem title="Wallpaper mode" desc="By URL: Choose an image from the Internet and use its URL to set it as the background.">
+    <div flex rounded="$bew-radius" bg="$bew-fill-1" p-1>
+      <div
+        flex-1 py-1 cursor-pointer text-center rounded="$bew-radius"
+        :style="{
+          background: settings.wallpaperMode === 'buildIn' ? 'var(--bew-theme-color)' : '',
+          color: settings.wallpaperMode === 'buildIn' ? 'white' : '',
+        }"
+        @click="settings.wallpaperMode = 'buildIn'"
+      >
+        Build-in
+      </div>
+      <div
+        flex-1 py-1 cursor-pointer text-center rounded="$bew-radius"
+        :style="{
+          background: settings.wallpaperMode === 'byUrl' ? 'var(--bew-theme-color)' : '',
+          color: settings.wallpaperMode === 'byUrl' ? 'white' : '',
+        }"
+        @click="settings.wallpaperMode = 'byUrl'"
+      >
+        By URL
+      </div>
+    </div>
+  </SettingItem>
+
+  <SettingItem v-if="settings.wallpaperMode === 'buildIn'" title="Choose your wallpaper" next-line>
     <div grid="~ xl:cols-4 lg:cols-3 md:cols-2 gap-4">
       <picture
         aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
-        un-border="4 transparent"
+        un-border="4 transparent" pointer-cursor
         grid place-items-center
         :class="{ 'selected-wallpaper': settings.wallpaper === '' }"
         @click="changeWallpaper('')"
@@ -86,6 +111,20 @@ function changeWallpaper(url: string) {
       </picture>
     </div>
   </SettingItem>
+  <SettingItem v-else title="Image URL" next-line>
+    <div flex items-center gap-4>
+      <picture
+        aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
+        un-border="4 transparent" pointer-cursor
+        w="xl:1/4 lg:1/3 md:1/2"
+      >
+        <img :src="settings.wallpaper" alt="" w-full h-full object-cover>
+        <!-- <tabler:photo-off text="3xl $bew-text-3" /> -->
+      </picture>
+      <input v-model="settings.wallpaper" type="text" flex-1>
+    </div>
+  </SettingItem>
+
   <SettingItem title="Background mask opacity">
     <input
       v-model="settings.backgroundMaskOpacity"

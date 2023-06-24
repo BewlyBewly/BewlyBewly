@@ -12,6 +12,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   dockPosition: 'right',
   themeColor: '#00a1d6',
   recommendationMode: 'web',
+  wallpaperMode: 'buildIn',
   wallpaper: '',
   backgroundMaskOpacity: 0,
 }), { mergeDefaults: true })

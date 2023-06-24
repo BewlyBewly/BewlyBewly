@@ -6,4 +6,5 @@ export interface Settings {
   recommendationMode: 'web' | 'app'
   wallpaper: string
   backgroundMaskOpacity: number
+  wallpaperMode: 'buildIn' | 'byUrl'
 }
