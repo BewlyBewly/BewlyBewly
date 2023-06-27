@@ -125,13 +125,28 @@ function changeWallpaper(url: string) {
     </div>
   </SettingItem>
 
-  <SettingItem title="Background mask opacity">
+  <SettingItem title="Enable wallpaper masking">
+    <label for="enableWallpaperMasking" class="chk-btn" cursor="pointer" pointer="auto">
+      <template v-if="settings.enableWallpaperMasking">{{ $t('settings.chk_box.show') }}</template>
+      <template v-else>{{ $t('settings.chk_box.hidden') }}</template>
+      <input id="enableWallpaperMasking" v-model="settings.enableWallpaperMasking" type="checkbox">
+    </label>
+  </SettingItem>
+  <SettingItem v-if="settings.enableWallpaperMasking" title="Wallpaper mask opacity">
     <input
-      v-model="settings.backgroundMaskOpacity"
+      v-model="settings.wallpaperMaskOpacity"
       type="range" min="0" max="100"
       step="1"
     >
-    {{ settings.backgroundMaskOpacity }}
+    {{ settings.wallpaperMaskOpacity }}
+  </SettingItem>
+  <SettingItem v-if="settings.enableWallpaperMasking" title="Blur intensity">
+    <input
+      v-model="settings.wallpaperBlurIntensity"
+      type="range" min="0" max="60"
+      step="1"
+    >
+    {{ settings.wallpaperBlurIntensity }}
   </SettingItem>
 </template>
 

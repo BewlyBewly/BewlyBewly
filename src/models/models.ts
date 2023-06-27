@@ -4,7 +4,9 @@ export interface Settings {
   dockPosition: 'left' | 'right' | 'bottom'
   themeColor: string
   recommendationMode: 'web' | 'app'
-  wallpaper: string
-  backgroundMaskOpacity: number
   wallpaperMode: 'buildIn' | 'byUrl'
+  wallpaper: string
+  enableWallpaperMasking: boolean
+  wallpaperMaskOpacity: number
+  wallpaperBlurIntensity: number
 }

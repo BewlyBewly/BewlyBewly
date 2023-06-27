@@ -88,6 +88,13 @@ watch(() => settings.value.wallpaper, (newValue) => {
   document.documentElement.style.backgroundPosition = 'center'
 })
 
+watch(() => settings.value.wallpaperMaskOpacity, (newValue) => {
+  const bewlyElement = document.querySelector('#bewly') as HTMLElement
+
+  bewlyElement.style
+    .setProperty('--bew-bg-mask-opacity', `${newValue}%`)
+})
+
 onMounted(() => {
   nextTick(() => {
     setTimeout(() => {
@@ -147,7 +154,11 @@ function setAppAppearance() {
 
 <template>
   <!-- background mask -->
-  <div pos="fixed top-0 left-0" w-full h-full bg="$bew-bg" pointer-events-none :style="{ opacity: settings.backgroundMaskOpacity / 100 }" />
+  <div
+    v-if="settings.enableWallpaperMasking"
+    pos="fixed top-0 left-0" w-full h-full pointer-events-none will-change-contents bg="$bew-bg-mask"
+    :style="{ backdropFilter: `blur(${settings.wallpaperBlurIntensity}px)` }"
+  />
   <div ref="mainApp" text="$bew-text-1" transition="opacity duration-300">
     <div m-auto max-w="$bew-page-max-width" :style="{ opacity: showSettings ? 0.6 : 1 }">
       <Transition name="topbar">

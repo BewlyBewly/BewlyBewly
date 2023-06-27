@@ -14,5 +14,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   recommendationMode: 'web',
   wallpaperMode: 'buildIn',
   wallpaper: '',
-  backgroundMaskOpacity: 0,
+  enableWallpaperMasking: false,
+  wallpaperMaskOpacity: 0,
+  wallpaperBlurIntensity: 0,
 }), { mergeDefaults: true })

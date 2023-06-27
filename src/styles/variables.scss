@@ -1,4 +1,5 @@
-:host, :root {
+:host,
+:root {
   --bew-radius: 12px;
   --bew-radius-half: calc(var(--bew-radius) / 2);
 
@@ -80,7 +81,9 @@
   --bew-text-4: hsl(215 19% 72%);
   // #endregion
 
-  --bew-bg: hsl(220, 14%, 96%);
+  --bew-bg: hsl(220 14% 96%);
+  --bew-bg-mask-opacity: 0;
+  --bew-bg-mask: hsl(220 14% 96% / var(--bew-bg-mask-opacity));
 
   --bew-content-opacity: 0.6;
 
@@ -100,7 +103,8 @@
   --bew-page-max-width: 2000px;
 }
 
-:host(.dark), :root.dark {
+:host(.dark),
+:root.dark {
   // dark mode
   --bew-logo-color: var(--bew-text-1);
 
@@ -110,6 +114,7 @@
   --bew-text-4: hsl(215 19% 25%);
 
   --bew-bg: hsl(230 12% 6%);
+  --bew-bg-mask: hsl(230 12% 6% / var(--bew-bg-mask-opacity));
 
   --bew-content-1: hsl(230 12% 13% / var(--bew-content-opacity));
   --bew-content-1-hover: hsl(230 12% 25% / var(--bew-content-opacity));
