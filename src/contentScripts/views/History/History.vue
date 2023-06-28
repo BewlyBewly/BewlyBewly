@@ -408,7 +408,7 @@ function jumpToLoginPage() {
                   items-center
                   cursor-pointer
                   w-fit
-                  rounded="$bew-radius-half"
+                  rounded="$bew-radius"
                   hover:color="$bew-theme-color"
                   hover:bg="$bew-theme-color-10"
                   duration-300
@@ -425,13 +425,13 @@ function jumpToLoginPage() {
                     :src="
                       removeHttpFromUrl(`${historyItem.author_face
                         ? historyItem.author_face
-                        : historyItem.cover}@80w_80h_1c`)
+                        : historyItem.cover}@40w_40h_1c`)
                     "
                     w-30px
                     aspect-square
                     object-cover
                     alt=""
-                    rounded="$bew-radius-half"
+                    rounded="1/2"
                     mr-2
                   >
                   {{

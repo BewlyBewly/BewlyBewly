@@ -84,7 +84,7 @@ watch(() => accessKey.value, () => {
 watch(() => settings.value.wallpaper, (newValue) => {
   document.documentElement.style.backgroundImage = `url(${newValue})`
   document.documentElement.style.backgroundSize = 'cover'
-  document.documentElement.style.backgroundAttachment = 'fixed'
+  // document.documentElement.style.backgroundAttachment = 'fixed'
   document.documentElement.style.backgroundPosition = 'center'
 })
 

@@ -175,7 +175,7 @@ function jumpToLoginPage() {
       >
         <div aspect-video bg="$bew-fill-4" rounded="$bew-radius" />
         <div flex mt-4>
-          <div m="r-4" w="48px" h="48px" rounded="$bew-radius" bg="$bew-fill-4" shrink-0 />
+          <div m="r-4" w="40px" h="40px" rounded="1/2" bg="$bew-fill-4" shrink-0 />
           <div w-full>
             <div grid gap-2>
               <div w-full h-5 bg="$bew-fill-3" />

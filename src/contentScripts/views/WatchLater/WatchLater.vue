@@ -203,7 +203,7 @@ function jumpToLoginPage() {
                     items-center
                     cursor-pointer
                     w-fit
-                    rounded="$bew-radius-half"
+                    rounded="$bew-radius"
                     hover:color="$bew-theme-color"
                     hover:bg="$bew-theme-color-10"
                     duration-300
@@ -212,12 +212,12 @@ function jumpToLoginPage() {
                     @click.stop=""
                   >
                     <img
-                      :src="removeHttpFromUrl(`${item.owner.face}@80w_80h_1c`)"
+                      :src="removeHttpFromUrl(`${item.owner.face}@40w_40h_1c`)"
                       w-30px
                       aspect-square
                       object-cover
                       alt=""
-                      rounded="$bew-radius-half"
+                      rounded="1/2"
                       mr-2
                     >
                     {{ item.owner.name }}

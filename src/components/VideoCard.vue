@@ -201,15 +201,15 @@ function toggleWatchLater() {
         <div class="flex">
           <a
             v-if="authorFace"
-            m="r-4" w="48px" h="48px" rounded="$bew-radius" overflow="hidden" object="center cover"
+            m="r-4" w="40px" h="40px" rounded="1/2" overflow="hidden" object="center cover"
             bg="$bew-fill-4" cursor="pointer"
             :href="`//space.bilibili.com/${mid}`" target="_blank"
             @click.stop=""
           >
             <img
-              :src="`${removeHttpFromUrl(authorFace)}@60w_60h_1c`"
-              width="48"
-              height="48"
+              :src="`${removeHttpFromUrl(authorFace)}@50w_50h_1c`"
+              width="40"
+              height="40"
               loading="lazy"
             >
           </a>

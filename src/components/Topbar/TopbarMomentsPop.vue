@@ -368,8 +368,8 @@ function scrollToTop(element: HTMLElement, duration: number) {
               target="_blank"
             >
               <img
-                :src="`${moment.face}@60w_60h_1c`"
-                rounded="$bew-radius"
+                :src="`${moment.face}@50w_50h_1c`"
+                rounded="1/2"
                 w="40px"
                 h="40px"
                 m="r-4"
