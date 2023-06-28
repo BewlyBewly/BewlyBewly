@@ -156,16 +156,16 @@ function setAppAppearance() {
   <!-- background mask -->
   <div
     v-if="settings.enableWallpaperMasking"
-    pos="fixed top-0 left-0" w-full h-full pointer-events-none will-change-contents bg="$bew-bg-mask"
+    pos="absolute top-0 left-0" w-full h-full pointer-events-none will-change-contents bg="$bew-bg-mask" z--1
     :style="{ backdropFilter: `blur(${settings.wallpaperBlurIntensity}px)` }"
   />
-  <div ref="mainApp" text="$bew-text-1" transition="opacity duration-300">
+  <div ref="mainApp" text="$bew-text-1" transition="opacity duration-300" h-100vh overflow-y-scroll>
     <div m-auto max-w="$bew-page-max-width" :style="{ opacity: showSettings ? 0.6 : 1 }">
       <Transition name="topbar">
         <Topbar
           v-show="settings.isShowTopbar"
           :show-search-bar="activatedPage !== AppPage.Search"
-          class="fixed top-0 left-0 z-50"
+          class="absolute top-0 left-0 z-50"
         />
       </Transition>
 
@@ -177,7 +177,7 @@ function setAppAppearance() {
             right: settings.dockPosition === 'right',
             bottom: settings.dockPosition === 'bottom',
           }"
-          pos="fixed top-0" flex="~ col" h-100vh justify-center z-999
+          pos="absolute top-0" flex="~ col" h-100vh justify-center z-999
         >
           <div
             class="dock-content"
@@ -278,8 +278,8 @@ function setAppAppearance() {
           relative
         >
           <Transition name="fade">
-            <Component :is="pages[activatedPage]" v-if="!isVideoPage" absolute w-full />
-            <Video v-else />
+            <Component :is="pages[activatedPage]" absolute w-full />
+            <!-- <Video v-else /> -->
           </Transition>
         </main>
       </div>
