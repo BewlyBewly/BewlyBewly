@@ -27,6 +27,7 @@ specifiers:
   fs-extra: ^10.1.0
   jsdom: ^20.0.1
   kolorist: ^1.6.0
+  mitt: ^3.0.0
   npm-run-all: ^4.1.5
   rimraf: ^3.0.2
   sass: ^1.57.1
@@ -48,6 +49,7 @@ specifiers:
 
 dependencies:
   dplayer: 1.27.1
+  mitt: 3.0.0
   vue-i18n: 9.2.2_vue@3.2.45
 
 devDependencies:
@@ -414,8 +416,8 @@ packages:
       vue-i18n:
         optional: true
     dependencies:
-      '@intlify/message-compiler': 9.3.0-beta.17
-      '@intlify/shared': 9.3.0-beta.17
+      '@intlify/message-compiler': 9.3.0-beta.20
+      '@intlify/shared': 9.3.0-beta.20
       jsonc-eslint-parser: 1.4.1
       source-map: 0.6.1
       vue-i18n: 9.2.2_vue@3.2.45
@@ -447,12 +449,12 @@ packages:
       source-map: 0.6.1
     dev: false
 
-  /@intlify/message-compiler/9.3.0-beta.17:
-    resolution: {integrity: sha512-i7hvVIRk1Ax2uKa9xLRJCT57to08OhFMhFXXjWN07rmx5pWQYQ23MfX1xgggv9drnWTNhqEiD+u4EJeHoS5+Ww==}
-    engines: {node: '>= 14'}
+  /@intlify/message-compiler/9.3.0-beta.20:
+    resolution: {integrity: sha512-hwqQXyTnDzAVZ300SU31jO0+3OJbpOdfVU6iBkrmNpS7t2HRnVACo0EwcEXzJa++4EVDreqz5OeqJbt+PeSGGA==}
+    engines: {node: '>= 16'}
     dependencies:
-      '@intlify/shared': 9.3.0-beta.17
-      source-map: 0.6.1
+      '@intlify/shared': 9.3.0-beta.20
+      source-map-js: 1.0.2
     dev: true
 
   /@intlify/shared/9.2.2:
@@ -460,9 +462,9 @@ packages:
     engines: {node: '>= 14'}
     dev: false
 
-  /@intlify/shared/9.3.0-beta.17:
-    resolution: {integrity: sha512-mscf7RQsUTOil35jTij4KGW1RC9SWQjYScwLxP53Ns6g24iEd5HN7ksbt9O6FvTmlQuX77u+MXpBdfJsGqizLQ==}
-    engines: {node: '>= 14'}
+  /@intlify/shared/9.3.0-beta.20:
+    resolution: {integrity: sha512-RucSPqh8O9FFxlYUysQTerSw0b9HIRpyoN1Zjogpm0qLiHK+lBNSa5sh1nCJ4wSsNcjphzgpLQCyR60GZlRV8g==}
+    engines: {node: '>= 16'}
     dev: true
 
   /@intlify/unplugin-vue-i18n/0.8.1_vue-i18n@9.2.2:
@@ -481,7 +483,7 @@ packages:
         optional: true
     dependencies:
       '@intlify/bundle-utils': 3.4.0_vue-i18n@9.2.2
-      '@intlify/shared': 9.3.0-beta.17
+      '@intlify/shared': 9.3.0-beta.20
       '@rollup/pluginutils': 4.2.1
       '@vue/compiler-sfc': 3.2.45
       debug: 4.3.4
@@ -4801,6 +4803,10 @@ packages:
   /minimist/1.2.6:
     resolution: {integrity: sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==}
     dev: true
+
+  /mitt/3.0.0:
+    resolution: {integrity: sha512-7dX2/10ITVyqh4aOSVI9gdape+t9l2/8QxHrFmUXu4EEUpdlxl6RudZUPZoc+zuY2hk1j7XxVroIVIan/pD/SQ==}
+    dev: false
 
   /mkdirp/0.5.6:
     resolution: {integrity: sha512-FP+p8RB8OWpF3YZBCrP5gtADmtXApB5AMLn+vdyA+PyxCjrCs00mjyUozssO33cwDeT3wNGdLxJ5M//YqtHAJw==}

@@ -6,6 +6,8 @@ import AnimeCardSkeleton from './components/AnimeCardSkeleton.vue'
 import type { AnimeItem, PopularAnime } from './types'
 import { getUserID, openLinkToNewTab } from '~/utils/main'
 import { numFormatter } from '~/utils/dataFormatter'
+import { settings } from '~/logic'
+import emitter from '~/utils/mitt'
 
 const animeWatchList = reactive<AnimeItem[]>([])
 const recommendAnimeList = reactive<AnimeItem[]>([])
@@ -21,17 +23,10 @@ onMounted(() => {
   getPopularAnimeList()
   getRecommendAnimeList()
 
-  window.onscroll = () => {
-    if (
-      window.innerHeight + window.scrollY
-      >= document.body.scrollHeight - 20
-    ) {
-      if (isLoadingRecommendAnime.value)
-        return
-
+  emitter.on('reachBottom', () => {
+    if (!isLoadingRecommendAnime.value)
       getRecommendAnimeList()
-    }
-  }
+  })
 })
 
 onUnmounted(() => {

@@ -75,6 +75,7 @@
   },
   "dependencies": {
     "dplayer": "^1.27.1",
+    "mitt": "^3.0.0",
     "vue-i18n": "^9.2.2"
   }
 }

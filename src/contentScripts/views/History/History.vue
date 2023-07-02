@@ -5,6 +5,7 @@ import { HistoryType } from './types'
 import type { HistoryItem } from './types'
 import { getCSRF, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
 import { calcCurrentTime } from '~/utils/dataFormatter'
+import emitter from '~/utils/mitt'
 
 const { t } = useI18n()
 
@@ -18,33 +19,7 @@ const historyStatus = ref<boolean>()
 watch(
   () => keyword.value,
   (newValue, oldValue) => {
-    window.onscroll = () => {
-      if (
-        window.innerHeight + window.scrollY
-        >= document.body.scrollHeight - 20
-      ) {
-        if (isLoading.value)
-          return
-
-        if (!noMoreContent.value) {
-          if (keyword.value)
-            searchHistoryList()
-          else getHistoryList()
-        }
-      }
-    }
-  },
-)
-
-onMounted(() => {
-  getHistoryList()
-  getHistoryPauseStatus()
-
-  window.onscroll = () => {
-    if (
-      window.innerHeight + window.scrollY
-      >= document.body.scrollHeight - 20
-    ) {
+    emitter.on('reachBottom', () => {
       if (isLoading.value)
         return
 
@@ -53,13 +28,24 @@ onMounted(() => {
           searchHistoryList()
         else getHistoryList()
       }
-    }
-  }
-})
+    })
+  },
+)
 
-onUnmounted(() => {
-  // remove the global window.onscroll event
-  window.onscroll = () => {}
+onMounted(() => {
+  getHistoryList()
+  getHistoryPauseStatus()
+
+  emitter.on('reachBottom', () => {
+    if (isLoading.value)
+      return
+
+    if (!noMoreContent.value) {
+      if (keyword.value)
+        searchHistoryList()
+      else getHistoryList()
+    }
+  })
 })
 
 /**

@@ -3,6 +3,7 @@ import { useDark, useToggle } from '@vueuse/core'
 import 'uno.css'
 import { useI18n } from 'vue-i18n'
 import browser from 'webextension-polyfill'
+import type { Ref } from '@vue/runtime-dom'
 import Home from './Home/Home.vue'
 import Search from './Search/Search.vue'
 import Anime from './Anime/Anime.vue'
@@ -14,6 +15,7 @@ import { accessKey, activatedPage, settings } from '~/logic'
 import '~/styles/index.ts'
 import { AppPage, LanguageType } from '~/enums/appEnums'
 import { getUserID, hexToRGBA } from '~/utils/main'
+import emitter from '~/utils/mitt'
 
 const { locale } = useI18n()
 const [showSettings, toggle] = useToggle(false)
@@ -32,7 +34,7 @@ const isDark = useDark({
 const toggleDark = useToggle(isDark)
 const pages = { Home, Search, Anime, History, WatchLater, Favorites, Video }
 const isVideoPage = ref<boolean>(false)
-const mainApp = ref<HTMLElement>()
+const mainAppRef = ref<HTMLElement>() as Ref<HTMLElement>
 
 const tooltipPlacement = computed(() => {
   if (settings.value.dockPosition === 'left')
@@ -48,7 +50,7 @@ watch(
   () => activatedPage.value,
   (newValue, oldValue) => {
     setTimeout(() => {
-      window.scrollTo(0, 0)
+      mainAppRef.value.scrollTop = 0
     }, 500)
   },
 )
@@ -84,7 +86,6 @@ watch(() => accessKey.value, () => {
 watch(() => settings.value.wallpaper, (newValue) => {
   document.documentElement.style.backgroundImage = `url(${newValue})`
   document.documentElement.style.backgroundSize = 'cover'
-  // document.documentElement.style.backgroundAttachment = 'fixed'
   document.documentElement.style.backgroundPosition = 'center'
 })
 
@@ -98,10 +99,20 @@ watch(() => settings.value.wallpaperMaskOpacity, (newValue) => {
 onMounted(() => {
   nextTick(() => {
     setTimeout(() => {
-      if (mainApp.value)
-        mainApp.value.style.opacity = '1'
+      if (mainAppRef.value)
+        mainAppRef.value.style.opacity = '1'
     }, 800)
   })
+
+  if (mainAppRef.value) {
+    mainAppRef.value.addEventListener('scroll', () => {
+      if (
+        mainAppRef.value.clientHeight + mainAppRef.value.scrollTop
+          >= mainAppRef.value.scrollHeight - 20
+      )
+        emitter.emit('reachBottom')
+    })
+  }
 
   if (/https?:\/\/(www.)?bilibili.com\/video\/.*/.test(location.href))
     isVideoPage.value = true
@@ -141,10 +152,10 @@ async function setAppLanguage() {
  */
 function setAppAppearance() {
   if (isDark.value)
-    mainApp.value?.classList.add('dark')
+    mainAppRef.value?.classList.add('dark')
 
   else
-    mainApp.value?.classList.remove('dark')
+    mainAppRef.value?.classList.remove('dark')
 
   // Override Bilibili Evolved background color
   document.body.style.setProperty('background-color', 'unset', 'important')
@@ -159,7 +170,7 @@ function setAppAppearance() {
     pos="absolute top-0 left-0" w-full h-full pointer-events-none will-change-contents bg="$bew-bg-mask" z--1
     :style="{ backdropFilter: `blur(${settings.wallpaperBlurIntensity}px)` }"
   />
-  <div ref="mainApp" text="$bew-text-1" transition="opacity duration-300" h-100vh overflow-y-scroll>
+  <div ref="mainAppRef" text="$bew-text-1" transition="opacity duration-300" h-100vh overflow-y-scroll>
     <div m-auto max-w="$bew-page-max-width" :style="{ opacity: showSettings ? 0.6 : 1 }">
       <Transition name="topbar">
         <Topbar
@@ -273,6 +284,7 @@ function setAppAppearance() {
         </aside>
 
         <main
+          ref="main"
           p="t-80px" m-auto
           :w="isVideoPage ? '[calc(100%-160px)]' : 'lg:85% md:[calc(90%-60px)] [calc(100%-120px)]'"
           relative
@@ -302,11 +314,11 @@ function setAppAppearance() {
 
 .dock-wrap {
   &.left {
-    --at-apply: left-0;
+    --at-apply: left-2;
   }
 
   &.right {
-    --at-apply: right-0;
+    --at-apply: right-2;
   }
 
   &.bottom {

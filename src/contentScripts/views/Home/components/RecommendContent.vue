@@ -1,11 +1,14 @@
 <script setup lang="ts">
+import type { Ref } from 'vue'
 import type { AppVideoModel, VideoModel } from './types'
+import emitter from '~/utils/mitt'
 import { accessKey, settings } from '~/logic'
 
 const videoList = reactive<VideoModel[]>([])
 const appVideoList = reactive<AppVideoModel[]>([])
 const isLoading = ref<boolean>(false)
 const needToLoginFirst = ref<boolean>(false)
+const containerRef = ref<HTMLElement>() as Ref<HTMLElement>
 let refreshIdx = 1
 
 watch(() => settings.value.recommendationMode, (newValue, oldValue) => {
@@ -30,23 +33,17 @@ onMounted(async () => {
     }
   }, 200)
 
-  window.onscroll = () => {
-    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 20) {
-      if (isLoading.value)
-        return
-
-      if (settings.value.recommendationMode === 'web') { getRecommendVideos() }
+  emitter.on('reachBottom', () => {
+    if (!isLoading.value) {
+      if (settings.value.recommendationMode === 'web') {
+        getRecommendVideos()
+      }
       else {
         for (let i = 0; i < 3; i++)
           getAppRecommendVideos()
       }
     }
-  }
-})
-
-onUnmounted(() => {
-  // remove the global window.onscroll event
-  window.onscroll = () => {}
+  })
 })
 
 async function getRecommendVideos() {
@@ -129,6 +126,7 @@ function jumpToLoginPage() {
   </Empty>
   <div
     v-else
+    ref="containerRef"
     m="b-0 t-0"
     grid="~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-4"
   >
