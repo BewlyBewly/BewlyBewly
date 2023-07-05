@@ -16,7 +16,7 @@ common:
   save_to_watch_later: 陣間至睇
   added: 已添加
 settings:
-  title: 校做
+  title: 設定
 
   # Settings menu
   menu_general: 一般
