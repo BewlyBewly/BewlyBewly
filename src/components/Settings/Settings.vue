@@ -46,7 +46,7 @@ function changeMenuItem(menuItem: MenuType) {
     max-w-800px transform="~ translate-x--1/2"
     z-9999 flex justify-between items-center
   >
-    <aside shrink-0 px-4 pos="absolute left--82px" class="group" z-1>
+    <aside shrink-0 px-4 pos="absolute left--42px" class="group" z-1>
       <ul
         flex="~ gap-4 col" rounded="30px hover:25px" bg="$bew-content-1" p-2 shadow="$bew-shadow-3"
         group-hover:scale-105 duration-300
@@ -71,13 +71,13 @@ function changeMenuItem(menuItem: MenuType) {
       </ul>
     </aside>
     <div
-      relative overflow-y-scroll overflow-x-hidden w-full h-full p-8 bg="$bew-content-solid-1"
+      relative overflow-y-scroll overflow-x-hidden w-full h-full py-8 px-10 bg="$bew-content-solid-1"
       shadow="$bew-shadow-3" rounded="$bew-radius"
     >
       <main relative>
         <header
           flex justify-between items-center w-full h-80px
-          pos="fixed right-0 top-0" p-8
+          pos="fixed right-0 top-0" py-8 px-10
           bg="$bew-content-1" z-1 rounded="t-$bew-radius"
           style="backdrop-filter: var(--bew-filter-glass)"
         >
