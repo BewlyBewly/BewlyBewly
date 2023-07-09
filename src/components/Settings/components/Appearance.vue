@@ -118,10 +118,12 @@ function changeWallpaper(url: string) {
         un-border="4 transparent" pointer-cursor
         w="xl:1/4 lg:1/3 md:1/2"
       >
-        <img :src="settings.wallpaper" alt="" w-full h-full object-cover>
+        <img :src="settings.wallpaper" alt="" w-full h-full object-cover onerror="this.style.display='none'; this.onerror=null;">
         <!-- <tabler:photo-off text="3xl $bew-text-3" /> -->
       </picture>
-      <input v-model="settings.wallpaper" type="text" flex-1>
+      <Input v-model:value="settings.wallpaper" flex-1 />
+
+      <!-- <input v-model="settings.wallpaper" type="text" flex-1> -->
     </div>
   </SettingItem>
 
@@ -133,20 +135,26 @@ function changeWallpaper(url: string) {
     </label>
   </SettingItem>
   <SettingItem v-if="settings.enableWallpaperMasking" title="Wallpaper mask opacity">
-    <input
-      v-model="settings.wallpaperMaskOpacity"
-      type="range" min="0" max="100"
-      step="1"
-    >
-    {{ settings.wallpaperMaskOpacity }}
+    <div flex gap-4>
+      <input
+        v-model="settings.wallpaperMaskOpacity"
+        type="range" min="0" max="100"
+        step="1"
+        flex-1
+      >
+      <span w-30px>{{ settings.wallpaperMaskOpacity }}%</span>
+    </div>
   </SettingItem>
   <SettingItem v-if="settings.enableWallpaperMasking" title="Blur intensity">
-    <input
-      v-model="settings.wallpaperBlurIntensity"
-      type="range" min="0" max="60"
-      step="1"
-    >
-    {{ settings.wallpaperBlurIntensity }}
+    <div flex gap-4>
+      <input
+        v-model="settings.wallpaperBlurIntensity"
+        type="range" min="0" max="60"
+        step="1"
+        flex-1
+      >
+      <span w-30px>{{ settings.wallpaperBlurIntensity }}px</span>
+    </div>
   </SettingItem>
 </template>
 
