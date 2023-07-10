@@ -31,20 +31,20 @@ defineProps<{
     white-space: nowrap;
 
     &.right {
-      --at-apply: left-[calc(100%+1em)];
+      --at-apply: left-[calc(100%+0.5em)];
     }
 
     &.left{
-      --at-apply: right-[calc(100%+1em)];
+      --at-apply: right-[calc(100%+0.5em)];
     }
 
     &.top {
-      --at-apply: top--3em left-1/2;
+      --at-apply: top--2.5em left-1/2;
       transform: translateX(-50%);
     }
 
     &.bottom {
-      --at-apply: bottom--3em left-1/2;
+      --at-apply: bottom--2.5em left-1/2;
       transform: translateX(-50%);
     }
   }
