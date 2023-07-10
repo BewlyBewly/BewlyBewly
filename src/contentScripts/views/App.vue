@@ -193,7 +193,7 @@ function setAppAppearance() {
           <div
             class="dock-content"
             p-2 m-2 bg="$bew-content-1" flex="~ col gap-2 shrink-0"
-            rounded="$bew-radius"
+            rounded="$bew-radius" border="1px $bew-fill-1"
             shadow="$bew-shadow-2"
             style="backdrop-filter: var(--bew-filter-glass)"
           >
