@@ -23,11 +23,27 @@ const themeColorOptions = reactive<Array<string>>([
 const bilibiliEvolvedThemeColor = computed(() => {
   return getComputedStyle(document.querySelector('html') as HTMLElement).getPropertyValue('--theme-color').trim() ?? '#00a1d6'
 })
-const wallpapers = reactive<Array<string>>([
-  'https://source.unsplash.com/1920x1080/?nature',
-  'https://pic.imgdb.cn/item/638e1d63b1fccdcd36103811.jpg',
-  'https://pic.imgdb.cn/item/638e1d7ab1fccdcd36106346.jpg',
-  'https://pic.imgdb.cn/item/63830f1816f2c2beb1868554.jpg',
+const wallpapers = reactive<Array<{ name: string; url: string; thumbnail: string }>>([
+  {
+    name: 'Unsplash Random Nature Image',
+    url: 'https://source.unsplash.com/1920x1080/?nature',
+    thumbnail: 'https://source.unsplash.com/1920x1080/?nature',
+  },
+  {
+    name: 'BML2019 VR (pid: 74271400)',
+    url: 'https://pic.imgdb.cn/item/638e1d63b1fccdcd36103811.jpg',
+    thumbnail: 'https://pic.imgdb.cn/item/64ac5e341ddac507cc750ae8.jpg',
+  },
+  {
+    name: '2020 拜年祭活动',
+    url: 'https://pic.imgdb.cn/item/638e1d7ab1fccdcd36106346.jpg',
+    thumbnail: 'https://pic.imgdb.cn/item/64ac5f251ddac507cc7658af.jpg',
+  },
+  {
+    name: '2020 BDF',
+    url: 'https://pic.imgdb.cn/item/63830f1816f2c2beb1868554.jpg',
+    thumbnail: 'https://pic.imgdb.cn/item/64ac5fc01ddac507cc77224e.jpg',
+  },
 ])
 
 function changeThemeColor(color: string) {
@@ -65,7 +81,7 @@ function changeWallpaper(url: string) {
       @click="changeThemeColor(bilibiliEvolvedThemeColor)"
     />
   </SettingItem>
-  <SettingItem title="Wallpaper mode" desc="By URL: Choose an image from the Internet and use its URL to set it as the background.">
+  <SettingItem :title="$t('settings.wallpaper_mode')" :desc="$t('settings.wallpaper_mode_desc')">
     <div flex rounded="$bew-radius" bg="$bew-fill-1" p-1>
       <div
         flex-1 py-1 cursor-pointer text-center rounded="$bew-radius"
@@ -75,7 +91,7 @@ function changeWallpaper(url: string) {
         }"
         @click="settings.wallpaperMode = 'buildIn'"
       >
-        Build-in
+        {{ $t('settings.wallpaper_mode_opt.build_in') }}
       </div>
       <div
         flex-1 py-1 cursor-pointer text-center rounded="$bew-radius"
@@ -85,12 +101,12 @@ function changeWallpaper(url: string) {
         }"
         @click="settings.wallpaperMode = 'byUrl'"
       >
-        By URL
+        {{ $t('settings.wallpaper_mode_opt.by_url') }}
       </div>
     </div>
   </SettingItem>
 
-  <SettingItem v-if="settings.wallpaperMode === 'buildIn'" title="Choose your wallpaper" next-line>
+  <SettingItem v-if="settings.wallpaperMode === 'buildIn'" :title="$t('settings.choose_ur_wallpaper')" next-line>
     <div grid="~ xl:cols-4 lg:cols-3 md:cols-2 gap-4">
       <picture
         aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
@@ -101,40 +117,47 @@ function changeWallpaper(url: string) {
       >
         <tabler:photo-off text="3xl $bew-text-3" />
       </picture>
-      <picture
-        v-for="item in wallpapers" :key="item" aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
-        un-border="4 transparent"
-        :class="{ 'selected-wallpaper': settings.wallpaper === item }"
-        @click="changeWallpaper(item)"
-      >
-        <img :src="item" alt="" w-full h-full object-cover>
-      </picture>
+      <Tooltip v-for="item in wallpapers" :key="item.url" placement="top" :content="item.name" aspect-video>
+        <picture
+          aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
+          un-border="4 transparent" w-full
+          :class="{ 'selected-wallpaper': settings.wallpaper === item.url }"
+          @click="changeWallpaper(item.url)"
+        >
+          <img :src="item.thumbnail" alt="" w-full h-full object-cover>
+        </picture>
+      </Tooltip>
     </div>
   </SettingItem>
-  <SettingItem v-else title="Image URL" next-line>
+  <SettingItem v-else :title="$t('settings.image_url')" next-line>
     <div flex items-center gap-4>
       <picture
         aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
-        un-border="4 transparent" pointer-cursor
+        un-border="4 transparent" pointer-cursor shrink-0
         w="xl:1/4 lg:1/3 md:1/2"
       >
-        <img :src="settings.wallpaper" alt="" w-full h-full object-cover onerror="this.style.display='none'; this.onerror=null;">
-        <!-- <tabler:photo-off text="3xl $bew-text-3" /> -->
+        <img v-if="settings.wallpaper" :src="settings.wallpaper" alt="" w-full h-full object-cover onerror="this.style.display='none'; this.onerror=null;">
       </picture>
-      <Input v-model:value="settings.wallpaper" flex-1 />
-
-      <!-- <input v-model="settings.wallpaper" type="text" flex-1> -->
+      <div>
+        <Input v-model:value="settings.wallpaper" w-full />
+        <p color="sm $bew-text-3" mt-2>
+          {{ $t('settings.image_url_hint') }}
+        </p>
+      </div>
     </div>
   </SettingItem>
 
-  <SettingItem title="Enable wallpaper masking">
+  <SettingItem :title="$t('settings.enable_wallpaper_masking')">
+    <template #desc>
+      <span color="$bew-warning-color">{{ $t('common.performance_impact_warn') }}</span>
+    </template>
     <label for="enableWallpaperMasking" class="chk-btn" cursor="pointer" pointer="auto">
-      <template v-if="settings.enableWallpaperMasking">{{ $t('settings.chk_box.show') }}</template>
-      <template v-else>{{ $t('settings.chk_box.hidden') }}</template>
+      <template v-if="settings.enableWallpaperMasking">{{ $t('common.enable') }}</template>
+      <template v-else>{{ $t('common.disable') }}</template>
       <input id="enableWallpaperMasking" v-model="settings.enableWallpaperMasking" type="checkbox">
     </label>
   </SettingItem>
-  <SettingItem v-if="settings.enableWallpaperMasking" title="Wallpaper mask opacity">
+  <SettingItem v-if="settings.enableWallpaperMasking" :title="$t('settings.wallpaper_mask_opacity')">
     <div flex gap-4>
       <input
         v-model="settings.wallpaperMaskOpacity"
@@ -142,10 +165,13 @@ function changeWallpaper(url: string) {
         step="1"
         flex-1
       >
-      <span w-30px>{{ settings.wallpaperMaskOpacity }}%</span>
+      <span w-30px text-right>{{ settings.wallpaperMaskOpacity }}%</span>
     </div>
   </SettingItem>
-  <SettingItem v-if="settings.enableWallpaperMasking" title="Blur intensity">
+  <SettingItem v-if="settings.enableWallpaperMasking" :title="$t('settings.wallpaper_blur_intensity')">
+    <template #desc>
+      <span color="$bew-warning-color">{{ $t('common.performance_impact_warn') }}</span>
+    </template>
     <div flex gap-4>
       <input
         v-model="settings.wallpaperBlurIntensity"
@@ -153,7 +179,7 @@ function changeWallpaper(url: string) {
         step="1"
         flex-1
       >
-      <span w-30px>{{ settings.wallpaperBlurIntensity }}px</span>
+      <span w-30px text-right>{{ settings.wallpaperBlurIntensity }}px</span>
     </div>
   </SettingItem>
 </template>

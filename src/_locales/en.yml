@@ -15,6 +15,9 @@ common:
   login: Login
   save_to_watch_later: Save to Watch later
   added: Added
+  performance_impact_warn: This feature may cause performance *DECREASE*
+  enable: Enable
+  disable: Disable
 settings:
   title: Settings
 
@@ -54,6 +57,19 @@ settings:
   theme_color: Theme color
   follow_bilibili_evolved_color: Follow the Bilibili Evolved theme color
   follow_bilibili_evolved_color_desc: After changing the theme color in Bilibili Evolved, you will need to re-select this option in order to update the theme color.
+  wallpaper_mode: Wallpaper mode
+  wallpaper_mode_desc: 'By URL: Choose an image from the Internet and use its URL to set it as the wallpaper.'
+  wallpaper_mode_opt:
+    build_in: Built-in
+    by_url: By URL
+  choose_ur_wallpaper: Choose your wallpaper
+  image_url: Image URL
+  image_url_hint: |-
+   URL examples: https://pic.imgdb.cn/item/638e1d63b1fccdcd36103811.jpg
+   https://pic.imgdb.cn/item/638e1d7ab1fccdcd36106346.jpg
+  enable_wallpaper_masking: Enable wallpaper masking
+  wallpaper_mask_opacity: Wallpaper masking opacity
+  wallpaper_blur_intensity: Wallpaper blur intensity
 auth:
   err_tip: Failed to grant access key
   plz_login_first: Please login to bilibili first
