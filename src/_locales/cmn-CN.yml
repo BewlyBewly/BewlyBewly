@@ -15,6 +15,9 @@ common:
   login: 登录
   save_to_watch_later: 稍后再看
   added: 已添加
+  performance_impact_warn: 这个功能可能会影响性能
+  enable: 启用
+  disable: 禁用
 settings:
   title: 设置
 
@@ -53,6 +56,19 @@ settings:
   theme_color: 主题色
   follow_bilibili_evolved_color: 使用 Bilibili Evolved 主题色
   follow_bilibili_evolved_color_desc: 每次选完 Bilibili Evolved 主题色时，记得重新选中这一选项以更新配置
+  wallpaper_mode: 背景图片模式
+  wallpaper_mode_desc: '由 URL: 直接用网上图片的 URL 来设置背景图片。'
+  wallpaper_mode_opt:
+    build_in: 内置
+    by_url: 由 URL
+  choose_ur_wallpaper: 选择你的背景
+  image_url: 图片 URL
+  image_url_hint: |-
+   URL 示例: https://pic.imgdb.cn/item/638e1d63b1fccdcd36103811.jpg
+   https://pic.imgdb.cn/item/638e1d7ab1fccdcd36106346.jpg
+  enable_wallpaper_masking: 启用背景遮罩效果
+  wallpaper_mask_opacity: 背景遮罩透明度调整
+  wallpaper_blur_intensity: 背景模糊强度调整
 auth:
   err_tip: 授权 access key 失败
   plz_login_first: 请先登录 bilibili
