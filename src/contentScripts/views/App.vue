@@ -35,6 +35,7 @@ const toggleDark = useToggle(isDark)
 const pages = { Home, Search, Anime, History, WatchLater, Favorites, Video }
 const isVideoPage = ref<boolean>(false)
 const mainAppRef = ref<HTMLElement>() as Ref<HTMLElement>
+const mainAppOpacity = ref<number>(0)
 
 const tooltipPlacement = computed(() => {
   if (settings.value.dockPosition === 'left')
@@ -99,8 +100,7 @@ watch(() => settings.value.wallpaperMaskOpacity, (newValue) => {
 onMounted(() => {
   nextTick(() => {
     setTimeout(() => {
-      if (mainAppRef.value)
-        mainAppRef.value.style.opacity = '1'
+      mainAppOpacity.value = 1
     }, 800)
   })
 
@@ -170,7 +170,7 @@ function setAppAppearance() {
     pos="absolute top-0 left-0" w-full h-full pointer-events-none will-change-contents bg="$bew-bg-mask" z--1
     :style="{ backdropFilter: `blur(${settings.wallpaperBlurIntensity}px)` }"
   />
-  <div ref="mainAppRef" text="$bew-text-1" transition="opacity duration-300" h-100vh overflow-y-scroll>
+  <div ref="mainAppRef" text="$bew-text-1" transition="opacity duration-300" h-100vh overflow-y-scroll :style="{ opacity: mainAppOpacity }">
     <div m-auto max-w="$bew-page-max-width" :style="{ opacity: showSettings ? 0.2 : 1 }">
       <Transition name="topbar">
         <Topbar
