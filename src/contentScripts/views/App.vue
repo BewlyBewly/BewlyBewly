@@ -36,6 +36,7 @@ const pages = { Home, Search, Anime, History, WatchLater, Favorites, Video }
 const isVideoPage = ref<boolean>(false)
 const mainAppRef = ref<HTMLElement>() as Ref<HTMLElement>
 const mainAppOpacity = ref<number>(0)
+const showTopbarMask = ref<boolean>(false)
 
 const tooltipPlacement = computed(() => {
   if (settings.value.dockPosition === 'left')
@@ -111,6 +112,11 @@ onMounted(() => {
           >= mainAppRef.value.scrollHeight - 20
       )
         emitter.emit('reachBottom')
+
+      if (mainAppRef.value.scrollTop === 0)
+        showTopbarMask.value = false
+      else
+        showTopbarMask.value = true
     })
   }
 
@@ -176,6 +182,7 @@ function setAppAppearance() {
         <Topbar
           v-show="settings.isShowTopbar"
           :show-search-bar="activatedPage !== AppPage.Search"
+          :show-topbar-mask="showTopbarMask"
           class="absolute top-0 left-0 z-50"
         />
       </Transition>

@@ -8,6 +8,7 @@ import { settings } from '~/logic'
 
 interface Props {
   showSearchBar: boolean
+  showTopbarMask: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -19,7 +20,7 @@ const userInfo = reactive<UserInfo | {}>({}) as UnwrapNestedRefs<UserInfo>
 
 const showChannelsPop = ref<boolean>(false)
 const showUserPanelPop = ref<boolean>(false)
-const showTopbarMask = ref<boolean>(false)
+// const showTopbarMask = ref<boolean>(false)
 const showNotificationsPop = ref<boolean>(false)
 const showMomentsPop = ref<boolean>(false)
 const showFavoritesPop = ref<boolean>(false)
@@ -56,11 +57,11 @@ watch(
 onMounted(() => {
   initUserPanel()
 
-  document.addEventListener('scroll', () => {
-    if (window.scrollY > 0)
-      showTopbarMask.value = true
-    else showTopbarMask.value = false
-  })
+  // document.addEventListener('scroll', () => {
+  //   if (window.scrollY > 0)
+  //     showTopbarMask.value = true
+  //   else showTopbarMask.value = false
+  // })
 })
 
 async function initUserPanel() {
