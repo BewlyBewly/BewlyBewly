@@ -23,7 +23,7 @@
 
 #### Edge
 >
-> Ensure you installed [bewlybewly-extension.zip](https://github.com/hakadao/BewlyBewly/releases) and decompress this file.
+> Ensure you installed [extension.zip](https://github.com/hakadao/BewlyBewly/releases) and decompress this file.
 
 1. Type in `edge://extensions/` in the address bar and press Enter
 2. Turn on `Developer mode` then press `Load unpacked` <br/> <img width="655" alt="image" src="https://user-images.githubusercontent.com/33394391/232246901-e3544c16-bde2-480d-b770-ca5242793963.png">
@@ -39,7 +39,7 @@
 
 ## 🔧 Development & build
 
-### Development (Not Hot Module Replacement)
+### Development
 
 ```bash
 pnpm dev
