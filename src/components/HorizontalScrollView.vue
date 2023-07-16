@@ -21,10 +21,10 @@ onMounted(() => {
       showScrollMask.value = false
   })
 
-  scrollListWrap.value.addEventListener('wheel', (event: WheelEvent) => {
-    event.preventDefault()
-    scrollListWrap.value.scrollLeft += event.deltaY
-  })
+  // scrollListWrap.value.addEventListener('wheel', (event: WheelEvent) => {
+  //   event.preventDefault()
+  //   scrollListWrap.value.scrollLeft += event.deltaY
+  // })
 })
 </script>
 
