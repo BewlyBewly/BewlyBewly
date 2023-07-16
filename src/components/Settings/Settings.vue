@@ -48,9 +48,9 @@ function changeMenuItem(menuItem: MenuType) {
   >
     <aside class="group" shrink-0 px-4 pos="absolute left--42px" z-1>
       <ul
-        flex="~ gap-4 col" rounded="30px hover:25px" bg="$bew-content-1" p-2 shadow="$bew-shadow-3"
+        flex="~ gap-4 col" rounded="30px hover:25px" bg="$bew-elevated-2" p-2 shadow="$bew-shadow-3"
         group-hover:scale-105 duration-300 border="1px $bew-fill-1"
-        style="backdrop-filter: var(--bew-filter-glass);"
+        backdrop-glass
       >
         <li v-for="item in settingsMenuItems" :key="item.value">
           <a
@@ -72,15 +72,35 @@ function changeMenuItem(menuItem: MenuType) {
     </aside>
 
     <div
-      relative overflow-hidden w-full h-full bg="$bew-content-solid-1"
-      shadow="$bew-shadow-3" rounded="$bew-radius"
+      relative overflow-hidden w-full h-full bg="$bew-elevated-1" backdrop-glass
+      shadow="$bew-shadow-3" rounded="$bew-radius" border="1px $bew-fill-1"
     >
-      <main relative overflow-y-scroll h-full py-8 px-12>
-        <header
-          flex justify-between items-center w-full h-80px
-          pos="fixed right-0 top-0" py-8 px-10
+      <header
+        flex justify-between items-center w-full h-80px
+        pos="fixed top-0 left-0" px-12
+        z-1 rounded="t-$bew-radius"
+        style="
+          background: linear-gradient(var(--bew-elevated-solid-1), transparent);
+          text-shadow: 0 0 15px var(--bew-elevated-solid-1)
+        "
+      >
+        <div text="3xl">
+          {{ $t('settings.title') }}
+        </div>
+        <div
+          text-2xl leading-0 bg="$bew-fill-1" w="32px" h="32px" p="1" rounded-8 cursor="pointer" backdrop-glass
+          @click="handleClose"
+        >
+          <ic-baseline-clear />
+        </div>
+      </header>
+
+      <main relative h-full py-8 px-12 overflow-y-scroll>
+        <!-- <header
+          flex justify-between items-center w-full h-60px
+          pos="fixed top-0 left-0"
+          px-10
           bg="$bew-content-1" z-1 rounded="t-$bew-radius"
-          style="backdrop-filter: var(--bew-filter-glass)"
         >
           <div text="3xl">
             {{ $t('settings.title') }}
@@ -91,7 +111,7 @@ function changeMenuItem(menuItem: MenuType) {
           >
             <ic-baseline-clear />
           </div>
-        </header>
+        </header> -->
 
         <div h-60px />
 

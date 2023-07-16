@@ -93,6 +93,12 @@
 
   --bew-content-solid-1: hsl(0 0% 100%);
   --bew-content-solid-1-hover: hsl(0 0% 85%);
+
+  --bew-elevated-1: hsl(0 0% 100% / var(--bew-content-opacity));
+  --bew-elevated-2: hsl(0 0% 100% / var(--bew-content-opacity));
+
+  --bew-elevated-solid-1: hsl(0 0% 100%);
+  --bew-elevated-solid-2: hsl(0 0% 100%);
   // #endregion
 
   --bew-fill-1: rgb(120 120 128 / 12%);
@@ -121,6 +127,12 @@
 
   --bew-content-solid-1: hsl(230 12% 13%);
   --bew-content-solid-1-hover: hsl(230 12% 25%);
+
+  --bew-elevated-1: hsl(230 12% 15% / var(--bew-content-opacity));
+  --bew-elevated-2: hsl(230 12% 20% / var(--bew-content-opacity));
+
+  --bew-elevated-solid-1: hsl(230 12% 15%);
+  --bew-elevated-solid-2: hsl(230 12% 20%);
 
   --bew-fill-1: rgb(120 120 128 / 16%);
   --bew-fill-2: rgb(120 120 128 / 26%);
