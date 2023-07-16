@@ -85,8 +85,8 @@ function onMouseEnter() {
       <div
         v-if="showOptions"
         pos="absolute"
-        bg="$bew-content-1"
-        style="backdrop-filter: var(--bew-filter-glass); box-shadow: var(--bew-shadow-2);"
+        bg="$bew-elevated-2"
+        backdrop-glass shadow="$bew-shadow-2"
         p="2"
         m="t-2"
         rounded="$bew-radius"

@@ -202,7 +202,7 @@ function setAppAppearance() {
             p-2 m-2 bg="$bew-content-1" flex="~ col gap-2 shrink-0"
             rounded="$bew-radius" border="1px $bew-fill-1"
             shadow="$bew-shadow-2"
-            style="backdrop-filter: var(--bew-filter-glass)"
+            backdrop-glass
           >
             <Tooltip :content="$t('dock.search')" :placement="tooltipPlacement">
               <button

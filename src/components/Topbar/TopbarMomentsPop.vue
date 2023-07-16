@@ -284,7 +284,7 @@ function scrollToTop(element: HTMLElement, duration: number) {
       bg="$bew-content-1"
       z="1"
       border="!rounded-t-$bew-radius"
-      style="backdrop-filter: var(--bew-filter-glass)"
+      backdrop-glass
     >
       <div flex="~">
         <div
