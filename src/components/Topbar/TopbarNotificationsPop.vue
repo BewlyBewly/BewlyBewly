@@ -48,6 +48,11 @@ export default defineComponent({
             this.list[2].unreadCount = resData.like
             this.list[3].unreadCount = resData.sys_msg
           }
+        }).catch(() => {
+          this.list[0].unreadCount = 0
+          this.list[1].unreadCount = 0
+          this.list[2].unreadCount = 0
+          this.list[3].unreadCount = 0
         })
 
       browser.runtime
@@ -58,6 +63,8 @@ export default defineComponent({
             const resData = res.data
             this.list[4].unreadCount = parseInt(resData.unfollow_unread) + parseInt(resData.follow_unread)
           }
+        }).catch(() => {
+          this.list[4].unreadCount = 0
         })
     },
   },
