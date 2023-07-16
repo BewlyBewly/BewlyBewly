@@ -18,8 +18,11 @@ onMounted(() => {
 <template>
   <input
     v-model="modelValue" type="text" class="b-input"
-    p="x-4 y-2" border="2px $bew-fill-2 focus:$bew-theme-color" rounded="$bew-radius" outline-none
-    duration bg="$bew-content-solid-1"
+    p="x-4 y-2" border="1px transparent focus:$bew-theme-color"
+    rounded="$bew-radius" outline-none transition-all duration-300
+    bg="$bew-fill-1"
+    focus:shadow focus:ring="2px $bew-theme-color-60"
+
     @input="$emit('update:value', $event!.target!.value)"
   >
 </template>

@@ -73,7 +73,7 @@ function onMouseEnter() {
 
       <!-- arrow -->
       <div
-        border="~ solid $bew-text-1 t-0 l-0 r-2 b-2"
+        border="~ solid $bew-fill-4 t-0 l-0 r-2 b-2"
         p="3px"
         m="l-2"
         display="inline-block"

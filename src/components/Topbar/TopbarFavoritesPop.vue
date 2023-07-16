@@ -151,7 +151,7 @@ function scrollToTop(element: HTMLElement, duration: number) {
 
 <template>
   <div
-    bg="$bew-content-solid-1"
+    bg="$bew-elevated-solid-1"
     w="500px"
     h="430px"
     rounded="$bew-radius"

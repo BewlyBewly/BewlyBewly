@@ -195,14 +195,14 @@ function setAppAppearance() {
             right: settings.dockPosition === 'right',
             bottom: settings.dockPosition === 'bottom',
           }"
-          pos="absolute top-0" flex="~ col" h-100vh justify-center z-999
+          pos="absolute top-0" flex="~ col" h-100vh justify-center z-999 pointer-events-none
         >
           <div
             class="dock-content"
             p-2 m-2 bg="$bew-content-1" flex="~ col gap-2 shrink-0"
-            rounded="$bew-radius" border="1px $bew-fill-1"
+            rounded="$bew-radius" border="1px $bew-border-color"
             shadow="$bew-shadow-2"
-            backdrop-glass
+            backdrop-glass pointer-events-auto
           >
             <Tooltip :content="$t('dock.search')" :placement="tooltipPlacement">
               <button
@@ -337,7 +337,7 @@ function setAppAppearance() {
   }
 
   .divider {
-    --at-apply: my-2 w-full h-2px bg-$bew-fill-3;
+    --at-apply: my-2 w-full h-1px bg-$bew-fill-4;
   }
 
   &.bottom .divider {

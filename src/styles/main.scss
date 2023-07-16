@@ -26,7 +26,7 @@ html > ::-webkit-scrollbar-track {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(120, 120, 122, .5);
+  background-color: rgba(120, 120, 122, .6);
   border-radius: 20px;
 }
 
@@ -54,6 +54,7 @@ html > ::-webkit-scrollbar-track {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
+  line-break: anywhere;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }

@@ -45,7 +45,7 @@ const genres = [
     backdrop-glass shadow="$bew-shadow-3"
     flex="~"
     p="4"
-    bg="$bew-content-1"
+    bg="$bew-elevated-1"
     rounded="$bew-radius"
   >
     <ul

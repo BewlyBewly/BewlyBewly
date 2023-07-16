@@ -183,7 +183,7 @@ function scrollToTop(element: HTMLElement, duration: number) {
 
 <template>
   <div
-    bg="$bew-content-solid-1"
+    bg="$bew-elevated-solid-1"
     w="380px"
     rounded="$bew-radius"
     pos="relative"
@@ -196,7 +196,7 @@ function scrollToTop(element: HTMLElement, duration: number) {
       p="y-4 x-6"
       pos="fixed top-0 left-0"
       w="full"
-      bg="$bew-content-1"
+      bg="$bew-elevated-1"
       z="2"
       border="!rounded-t-$bew-radius"
       backdrop-glass

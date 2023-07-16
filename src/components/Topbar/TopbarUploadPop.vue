@@ -1,9 +1,9 @@
 <template>
   <div
     flex="~ col"
-    bg="$bew-content-solid-1"
+    bg="$bew-elevated-solid-1"
     rounded="$bew-radius"
-    style="box-shadow: var(--bew-shadow-3);"
+    shadow="$bew-shadow-3"
     p="4"
     w="150px"
   >

@@ -263,6 +263,7 @@ export default defineComponent({
   #search-history,
   #search-suggestion {
     @include search-content;
+    --at-apply: bg-$bew-elevated-1;
 
     .history-item,
     .suggestion-item {

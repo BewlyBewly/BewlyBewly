@@ -49,7 +49,7 @@ function changeMenuItem(menuItem: MenuType) {
     <aside class="group" shrink-0 px-4 pos="absolute left--42px" z-1>
       <ul
         flex="~ gap-4 col" rounded="30px hover:25px" bg="$bew-elevated-2" p-2 shadow="$bew-shadow-3"
-        group-hover:scale-105 duration-300 border="1px $bew-fill-1"
+        group-hover:scale-105 duration-300
         backdrop-glass
       >
         <li v-for="item in settingsMenuItems" :key="item.value">
@@ -72,8 +72,8 @@ function changeMenuItem(menuItem: MenuType) {
     </aside>
 
     <div
-      relative overflow-hidden w-full h-full bg="$bew-elevated-1" backdrop-glass
-      shadow="$bew-shadow-3" rounded="$bew-radius" border="1px $bew-fill-1"
+      relative overflow-hidden w-full h-full bg="$bew-elevated-solid-1"
+      shadow="$bew-shadow-3" rounded="$bew-radius"
     >
       <header
         flex justify-between items-center w-full h-80px

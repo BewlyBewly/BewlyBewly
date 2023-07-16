@@ -140,8 +140,7 @@ async function logout() {
 <style lang="scss" scoped>
 #user-info-panel {
   --at-apply: p-4 rounded-$bew-radius w-300px -z-1
-    bg-$bew-content-solid-1;
-  box-shadow: var(--bew-shadow-3);
+    bg-$bew-elevated-solid-1 shadow-$bew-shadow-3;
 }
 
 #base-info {
