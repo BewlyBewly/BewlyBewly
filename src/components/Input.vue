@@ -21,7 +21,7 @@ onMounted(() => {
     p="x-4 y-2" border="1px transparent focus:$bew-theme-color"
     rounded="$bew-radius" outline-none transition-all duration-300
     bg="$bew-fill-1"
-    focus:shadow focus:ring="2px $bew-theme-color-60"
+    focus:shadow focus:ring="2px $bew-theme-color"
 
     @input="$emit('update:value', $event!.target!.value)"
   >
