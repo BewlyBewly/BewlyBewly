@@ -15,11 +15,6 @@ onMounted(() => {
   getAllWatchLaterList()
 })
 
-onUnmounted(() => {
-  // remove the global window.onscroll event
-  window.onscroll = () => {}
-})
-
 /**
  * Get watch later list
  */

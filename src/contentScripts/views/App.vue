@@ -110,8 +110,11 @@ onMounted(() => {
       if (
         mainAppRef.value.clientHeight + mainAppRef.value.scrollTop
           >= mainAppRef.value.scrollHeight - 20
-      )
-        emitter.emit('reachBottom')
+      ) {
+        nextTick(() => {
+          emitter.emit('reachBottom')
+        })
+      }
 
       if (mainAppRef.value.scrollTop === 0)
         showTopbarMask.value = false

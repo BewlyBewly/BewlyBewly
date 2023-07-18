@@ -33,17 +33,22 @@ onMounted(async () => {
     }
   }, 200)
 
+  emitter.off('reachBottom')
   emitter.on('reachBottom', () => {
     if (!isLoading.value) {
       if (settings.value.recommendationMode === 'web') {
         getRecommendVideos()
       }
       else {
-        for (let i = 0; i < 3; i++)
-          getAppRecommendVideos()
+        // for (let i = 0; i < 3; i++)
+        getAppRecommendVideos()
       }
     }
   })
+})
+
+onUnmounted(() => {
+  emitter.off('reachBottom')
 })
 
 async function getRecommendVideos() {

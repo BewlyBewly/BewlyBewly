@@ -36,6 +36,7 @@ onMounted(() => {
   getHistoryList()
   getHistoryPauseStatus()
 
+  emitter.off('reachBottom')
   emitter.on('reachBottom', () => {
     if (isLoading.value)
       return
@@ -46,6 +47,10 @@ onMounted(() => {
       else getHistoryList()
     }
   })
+})
+
+onUnmounted(() => {
+  emitter.off('reachBottom')
 })
 
 /**
