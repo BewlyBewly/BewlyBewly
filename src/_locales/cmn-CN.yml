@@ -25,6 +25,7 @@ settings:
   menu_general: 通用
   menu_appearance: 外观
   menu_home: 首页
+  menu_about: 关于
 
   select_language: 界面语文
   select_language_opt:

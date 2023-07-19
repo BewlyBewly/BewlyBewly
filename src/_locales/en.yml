@@ -25,6 +25,7 @@ settings:
   menu_general: General
   menu_appearance: Appearance
   menu_home: Home
+  menu_about: About
 
   select_language: Language
   select_language_opt:

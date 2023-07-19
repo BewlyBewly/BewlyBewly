@@ -3,13 +3,14 @@ import { useI18n } from 'vue-i18n'
 import General from './components/General.vue'
 import Appearance from './components/Appearance.vue'
 import Home from './components/Home.vue'
+import About from './components/About.vue'
 import { MenuType } from './types'
 
 const emit = defineEmits(['close'])
 
 const { t } = useI18n()
 
-const settingsMenu = { General, Appearance, Home }
+const settingsMenu = { General, Appearance, Home, About }
 const activatedMenuItem = ref<MenuType>(MenuType.General)
 
 const settingsMenuItems = computed(() => {
@@ -25,6 +26,10 @@ const settingsMenuItems = computed(() => {
     {
       value: MenuType.Home,
       label: t('settings.menu_home'),
+    },
+    {
+      value: MenuType.About,
+      label: t('settings.menu_about'),
     },
   ]
 })
@@ -64,6 +69,7 @@ function changeMenuItem(menuItem: MenuType) {
               <tabler:settings v-if="item.value === MenuType.General" />
               <tabler:brush v-else-if="item.value === MenuType.Appearance" />
               <tabler:home v-else-if="item.value === MenuType.Home" />
+              <tabler:info-circle v-else-if="item.value === MenuType.About" />
             </i>
             <span shrink-0>{{ item.label }}</span>
           </a>
