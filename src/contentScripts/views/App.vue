@@ -340,7 +340,7 @@ function setAppAppearance() {
   }
 
   .divider {
-    --at-apply: my-2 w-full h-1px bg-$bew-fill-4;
+    --at-apply: my-2 w-full h-2px bg-$bew-fill-2;
   }
 
   &.bottom .divider {
