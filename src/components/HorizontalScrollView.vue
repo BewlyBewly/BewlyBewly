@@ -1,10 +1,18 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
+import { settings } from '~/logic'
 
 const scrollListWrap = ref<HTMLElement>() as Ref<HTMLElement>
 // const showLeftMask = ref<boolean>(false)
 // const showRightMask = ref<boolean>(false)
 const showScrollMask = ref<boolean>(false)
+
+watch(() => settings.value.enableHorizontalScrolling, (newValue) => {
+  if (newValue)
+    scrollListWrap.value.addEventListener('wheel', handleMouseScroll)
+  else
+    scrollListWrap.value.removeEventListener('wheel', handleMouseScroll)
+})
 
 onMounted(() => {
   scrollListWrap.value.addEventListener('scroll', () => {
@@ -16,16 +24,16 @@ onMounted(() => {
 
     if (
       scrollListWrap.value.scrollLeft + scrollListWrap.value.clientWidth
-      >= scrollListWrap.value.scrollWidth
+      >= scrollListWrap.value.scrollWidth - 20
     )
       showScrollMask.value = false
   })
-
-  // scrollListWrap.value.addEventListener('wheel', (event: WheelEvent) => {
-  //   event.preventDefault()
-  //   scrollListWrap.value.scrollLeft += event.deltaY
-  // })
 })
+
+function handleMouseScroll(event: WheelEvent) {
+  event.preventDefault()
+  scrollListWrap.value.scrollLeft += event.deltaY
+}
 </script>
 
 <template>

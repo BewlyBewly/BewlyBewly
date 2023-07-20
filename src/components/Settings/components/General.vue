@@ -71,6 +71,14 @@ watch(() => settings.value.language, (newValue, oldValue) => {
       w="full"
     />
   </SettingItem>
+
+  <SettingItem :title="$t('settings.enable_horizontal_scrolling')" :desc="$t('settings.enable_horizontal_scrolling_desc')">
+    <label for="enableHorizontalScrolling" class="chk-btn" cursor="pointer" pointer="auto">
+      <template v-if="settings.enableHorizontalScrolling">{{ $t('common.enable') }}</template>
+      <template v-else>{{ $t('common.disable') }}</template>
+      <input id="enableHorizontalScrolling" v-model="settings.enableHorizontalScrolling" type="checkbox">
+    </label>
+  </SettingItem>
 </template>
 
 <style lang="scss" scoped>

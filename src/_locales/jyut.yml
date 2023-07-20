@@ -70,6 +70,8 @@ settings:
   enable_wallpaper_masking: 使用背景遮蔽效果
   wallpaper_mask_opacity: 背景遮蔽透明度調節
   wallpaper_blur_intensity: 背景模糊強度調節
+  enable_horizontal_scrolling: 使用橫向捲動
+  enable_horizontal_scrolling_desc: 用咗之後，轆緊滑鼠就可以直接打橫掃水平捲軸列表
 auth:
   err_tip: 無法授權 access key
   plz_login_first: 唔該登入 bilibili 先

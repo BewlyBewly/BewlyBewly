@@ -70,6 +70,8 @@ settings:
   enable_wallpaper_masking: 启用背景遮罩效果
   wallpaper_mask_opacity: 背景遮罩透明度调整
   wallpaper_blur_intensity: 背景模糊强度调整
+  enable_horizontal_scrolling: 启用横向滚动
+  enable_horizontal_scrolling_desc: 启用后，鼠标滚动时将直接滚动横向滚动列表
 auth:
   err_tip: 授权 access key 失败
   plz_login_first: 请先登录 bilibili

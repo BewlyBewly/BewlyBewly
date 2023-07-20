@@ -10,6 +10,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   language: '',
   isShowTopbar: true,
   dockPosition: 'right',
+  enableHorizontalScrolling: false,
   themeColor: '#00a1d6',
   recommendationMode: 'web',
   wallpaperMode: 'buildIn',
