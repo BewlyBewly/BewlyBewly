@@ -11,7 +11,8 @@ import { accessKey } from '~/logic/storage'
 import app from '~/contentScripts/index'
 
 let vueGlobalProperties: ComponentCustomProperties & Record<string, any>
-nextTick(() => {
+
+document.addEventListener('load', () => {
   vueGlobalProperties = app.config.globalProperties
 })
 

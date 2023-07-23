@@ -41,7 +41,7 @@ export async function getManifest() {
       {
         matches: ['http://www.bilibili.com/*', 'https://www.bilibili.com/*'],
         js: ['./dist/contentScripts/index.global.js'],
-        // run_at: 'document_start',
+        run_at: 'document_start',
         match_about_blank: true,
       },
     ],

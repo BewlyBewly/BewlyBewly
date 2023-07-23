@@ -6,26 +6,39 @@ import { setupApp } from '~/logic/common-setup'
 import { i18n } from '~/utils/i18n'
 import { SVG_ICONS } from '~/utils/svgIcons'
 
-let app: AppType | null = null;
+let app: any
 
-// Firefox `browser.tabs.executeScript()` requires scripts return a primitive value
-(() => {
-  // console.info('[vitesse-webext] Hello world from content script')
+const isFirefox: boolean = /Firefox/i.test(navigator.userAgent)
 
-  // // communication example: send previous tab title from background page
-  // onMessage('tab-prev', ({ data }) => {
-  //   console.log(`[vitesse-webext] Navigate from page "${data.title}"`)
-  // })
+if (isFirefox) {
+  let isFirstScriptExecute = true
+  document.addEventListener('beforescriptexecute', () => {
+    if (!isFirstScriptExecute)
+      return
 
+    injectApp()
+
+    isFirstScriptExecute = false
+  })
+}
+else {
+  // Firefox `browser.tabs.executeScript()` requires scripts return a primitive value
+
+  document.addEventListener('DOMContentLoaded', () => {
+    injectApp()
+  })
+}
+
+function injectApp() {
   const currentUrl = document.URL
 
   if (
     /https?:\/\/bilibili.com\/?$/.test(currentUrl)
-    || /https?:\/\/www.bilibili.com\/?$/.test(currentUrl)
-    || /https?:\/\/www.bilibili.com\/index.html$/.test(currentUrl)
-    || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(currentUrl)
-    || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(currentUrl)
-    // || /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(currentUrl)
+  || /https?:\/\/www.bilibili.com\/?$/.test(currentUrl)
+  || /https?:\/\/www.bilibili.com\/index.html$/.test(currentUrl)
+  || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(currentUrl)
+  || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(currentUrl)
+  // || /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(currentUrl)
   ) {
     const originalPageContent = document.querySelector('#i_cecream')
     if (originalPageContent)
@@ -52,25 +65,6 @@ let app: AppType | null = null;
     setupApp(app)
     app.use(i18n).mount(root)
   }
-  // else if (/https?:\/\/(www.)?bilibili.com\/video\/.*/.test(currentUrl)) {
-  //   const originalPageContent = document.querySelector('#app')
-  //   if (originalPageContent)
-  //     originalPageContent.innerHTML = ''
-
-  //   const container = document.createElement('div')
-  //   const root = document.createElement('div')
-  //   const styleEl = document.createElement('link')
-  //   styleEl.setAttribute('rel', 'stylesheet')
-  //   styleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
-  //   container.id = 'bewly'
-  //   container.appendChild(styleEl)
-  //   container.appendChild(root)
-  //   document.body.appendChild(container)
-
-  //   const app = createApp(App)
-  //   setupApp(app)
-  //   app.use(i18n).mount(root)
-  // }
-})()
+}
 
 export default app as AppType
