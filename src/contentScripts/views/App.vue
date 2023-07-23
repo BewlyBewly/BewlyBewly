@@ -50,7 +50,7 @@ const tooltipPlacement = computed(() => {
 
 watch(
   () => activatedPage.value,
-  (newValue, oldValue) => {
+  () => {
     setTimeout(() => {
       mainAppRef.value.scrollTop = 0
     }, 500)
@@ -59,13 +59,8 @@ watch(
 
 watch(
   () => settings.value.themeColor,
-  (newValue) => {
-    const bewlyElement = document.querySelector('#bewly') as HTMLElement
-    if (bewlyElement) {
-      bewlyElement.style.setProperty('--bew-theme-color', newValue)
-      for (let i = 0; i < 9; i++)
-        bewlyElement.style.setProperty(`--bew-theme-color-${i + 1}0`, hexToRGBA(newValue, i * 0.1 + 0.1))
-    }
+  () => {
+    setAppThemeColor()
   },
 )
 
@@ -127,6 +122,7 @@ onMounted(() => {
     isVideoPage.value = true
   setAppAppearance()
   setAppLanguage()
+  setAppThemeColor()
 })
 
 function changeActivatePage(pageName: AppPage) {
@@ -169,6 +165,15 @@ function setAppAppearance() {
   // Override Bilibili Evolved background color
   document.body.style.setProperty('background-color', 'unset', 'important')
   document.documentElement.style.setProperty('background-color', 'var(--bew-bg)', 'important')
+}
+
+function setAppThemeColor() {
+  const bewlyElement = document.querySelector('#bewly') as HTMLElement
+  if (bewlyElement) {
+    bewlyElement.style.setProperty('--bew-theme-color', settings.value.themeColor)
+    for (let i = 0; i < 9; i++)
+      bewlyElement.style.setProperty(`--bew-theme-color-${i + 1}0`, hexToRGBA(settings.value.themeColor, i * 0.1 + 0.1))
+  }
 }
 </script>
 
