@@ -57,11 +57,7 @@ watch(() => settings.value.language, (newValue, oldValue) => {
   </SettingItem>
 
   <SettingItem :title="$t('settings.topbar_visible')" :desc="$t('settings.topbar_visible_desc')">
-    <label for="topbarVisible" class="chk-btn" cursor="pointer" pointer="auto">
-      <template v-if="settings.isShowTopbar">{{ $t('settings.chk_box.show') }}</template>
-      <template v-else>{{ $t('settings.chk_box.hidden') }}</template>
-      <input id="topbarVisible" v-model="settings.isShowTopbar" type="checkbox">
-    </label>
+    <Radio v-model:value="settings.isShowTopbar" :label="settings.isShowTopbar ? $t('settings.chk_box.show') : $t('settings.chk_box.hidden')" />
   </SettingItem>
 
   <SettingItem :title="$t('settings.dock_position')" :desc="$t('settings.dock_position_desc')">
@@ -73,11 +69,7 @@ watch(() => settings.value.language, (newValue, oldValue) => {
   </SettingItem>
 
   <SettingItem :title="$t('settings.enable_horizontal_scrolling')" :desc="$t('settings.enable_horizontal_scrolling_desc')">
-    <label for="enableHorizontalScrolling" class="chk-btn" cursor="pointer" pointer="auto">
-      <template v-if="settings.enableHorizontalScrolling">{{ $t('common.enable') }}</template>
-      <template v-else>{{ $t('common.disable') }}</template>
-      <input id="enableHorizontalScrolling" v-model="settings.enableHorizontalScrolling" type="checkbox">
-    </label>
+    <Radio v-model:value="settings.enableHorizontalScrolling" />
   </SettingItem>
 </template>
 

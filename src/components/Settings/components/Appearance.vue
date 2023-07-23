@@ -151,11 +151,8 @@ function changeWallpaper(url: string) {
     <template #desc>
       <span color="$bew-warning-color">{{ $t('common.performance_impact_warn') }}</span>
     </template>
-    <label for="enableWallpaperMasking" class="chk-btn" cursor="pointer" pointer="auto">
-      <template v-if="settings.enableWallpaperMasking">{{ $t('common.enable') }}</template>
-      <template v-else>{{ $t('common.disable') }}</template>
-      <input id="enableWallpaperMasking" v-model="settings.enableWallpaperMasking" type="checkbox">
-    </label>
+
+    <Radio v-model:value="settings.enableWallpaperMasking" />
   </SettingItem>
   <SettingItem v-if="settings.enableWallpaperMasking" :title="$t('settings.wallpaper_mask_opacity')">
     <div flex gap-4>
