@@ -1,12 +1,15 @@
 <script lang="ts" setup>
 import type { Ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { grantAccessKey, revokeAccessKey } from '~/utils/authProvider'
 import { accessKey, settings } from '~/logic'
+
+const { t } = useI18n()
 
 const authorizeBtn = ref<HTMLButtonElement>() as Ref<HTMLButtonElement>
 
 function handleAuthorize() {
-  grantAccessKey(authorizeBtn.value)
+  grantAccessKey(t, authorizeBtn.value)
 }
 
 function handleRevoke() {
