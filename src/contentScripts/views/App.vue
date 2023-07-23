@@ -181,7 +181,7 @@ function setAppThemeColor() {
   <!-- background mask -->
   <div
     v-if="settings.enableWallpaperMasking"
-    pos="absolute top-0 left-0" w-full h-full pointer-events-none will-change-contents bg="$bew-bg-mask" z--1
+    pos="absolute top-0 left-0" w-full h-full pointer-events-none bg="$bew-bg-mask" z--1
     :style="{ backdropFilter: `blur(${settings.wallpaperBlurIntensity}px)` }"
   />
   <div ref="mainAppRef" text="$bew-text-1" transition="opacity duration-300" h-100vh overflow-y-scroll :style="{ opacity: mainAppOpacity }">
@@ -301,8 +301,8 @@ function setAppThemeColor() {
         <main
           ref="main"
           p="t-80px" m-auto
-          :w="isVideoPage ? '[calc(100%-160px)]' : 'lg:85% md:[calc(90%-60px)] [calc(100%-120px)]'"
           relative
+          :w="isVideoPage ? '[calc(100%-160px)]' : 'lg:85% md:[calc(90%-60px)] [calc(100%-140px)]'"
         >
           <Transition name="fade">
             <Component :is="pages[activatedPage]" absolute w-full />

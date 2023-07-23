@@ -51,10 +51,10 @@ function changeMenuItem(menuItem: MenuType) {
     max-w-800px transform="~ translate-x--1/2"
     z-9999 flex justify-between items-center
   >
-    <aside class="group" shrink-0 px-4 pos="absolute left--42px" z-1>
+    <aside class="group" shrink-0 p="x-2 md:x-4" pos="absolute left-0 md:left--42px" z-2>
       <ul
         flex="~ gap-4 col" rounded="30px hover:25px" bg="$bew-elevated-2" p-2 shadow="$bew-shadow-3"
-        group-hover:scale-105 duration-300
+        scale="md:group-hover:105" duration-300
         backdrop-glass
       >
         <li v-for="item in settingsMenuItems" :key="item.value">
@@ -79,12 +79,12 @@ function changeMenuItem(menuItem: MenuType) {
 
     <div
       relative overflow-hidden w-full h-full bg="$bew-elevated-solid-1"
-      shadow="$bew-shadow-3" rounded="$bew-radius"
+      shadow="$bew-shadow-3" rounded="md:$bew-radius"
     >
       <header
         flex justify-between items-center w-full h-80px
-        pos="fixed top-0 left-0" px-12
-        z-1 rounded="t-$bew-radius"
+        pos="fixed top-0 left-0" p="l-70px r-4 md:x-12"
+        z-1 rounded="md:t-$bew-radius"
         style="
           background: linear-gradient(var(--bew-elevated-solid-1), transparent);
           text-shadow: 0 0 15px var(--bew-elevated-solid-1)
@@ -101,7 +101,7 @@ function changeMenuItem(menuItem: MenuType) {
         </div>
       </header>
 
-      <main relative h-full py-8 px-12 overflow-y-scroll>
+      <main relative h-full py-8 p="l-70px r-2 md:x-12" overflow-y-scroll>
         <!-- <header
           flex justify-between items-center w-full h-60px
           pos="fixed top-0 left-0"

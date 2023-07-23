@@ -107,7 +107,7 @@ function changeWallpaper(url: string) {
   </SettingItem>
 
   <SettingItem v-if="settings.wallpaperMode === 'buildIn'" :title="$t('settings.choose_ur_wallpaper')" next-line>
-    <div grid="~ xl:cols-4 lg:cols-3 md:cols-2 gap-4">
+    <div grid="~ xl:cols-4 lg:cols-3 cols-2  gap-4">
       <picture
         aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
         un-border="4 transparent" pointer-cursor
