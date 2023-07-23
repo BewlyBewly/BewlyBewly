@@ -45,22 +45,22 @@ onMounted(async () => {
     keyword.value,
   )
 
-  if (favoriteVideosWrap.value) {
-    favoriteVideosWrap.value.addEventListener('scroll', () => {
-      // When you scroll to the bottom, they will automatically
-      // add the next page of data to the history list
-      if (
-        favoriteVideosWrap.value.clientHeight
-          + favoriteVideosWrap.value.scrollTop
-          >= favoriteVideosWrap.value.scrollHeight - 20
-        && favoriteResources.length > 0
-        && !isLoading.value
-      ) {
-        if (activatedMediaId.value && !noMoreContent.value)
-          getFavoriteResources(activatedMediaId.value, currentPageNum.value++)
-      }
-    })
-  }
+  // if (favoriteVideosWrap.value) {
+  //   favoriteVideosWrap.value.addEventListener('scroll', () => {
+  //     // When you scroll to the bottom, they will automatically
+  //     // add the next page of data to the history list
+  //     if (
+  //       favoriteVideosWrap.value.clientHeight
+  //         + favoriteVideosWrap.value.scrollTop
+  //         >= favoriteVideosWrap.value.scrollHeight - 20
+  //       && favoriteResources.length > 0
+  //       && !isLoading.value
+  //     ) {
+  //       if (activatedMediaId.value && !noMoreContent.value)
+  //         getFavoriteResources(activatedMediaId.value, currentPageNum.value++)
+  //     }
+  //   })
+  // }
 })
 
 async function getFavoriteCategories() {

@@ -22,8 +22,6 @@ if (isFirefox) {
   })
 }
 else {
-  // Firefox `browser.tabs.executeScript()` requires scripts return a primitive value
-
   document.addEventListener('DOMContentLoaded', () => {
     injectApp()
   })
