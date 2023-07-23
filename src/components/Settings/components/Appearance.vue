@@ -164,6 +164,7 @@ function changeWallpaper(url: string) {
       >
       <span w-30px text-right>{{ settings.wallpaperMaskOpacity }}%</span>
     </div>
+    <Slider />
   </SettingItem>
   <SettingItem v-if="settings.enableWallpaperMasking" :title="$t('settings.wallpaper_blur_intensity')">
     <template #desc>
