@@ -22,11 +22,11 @@ onMounted(() => {
     <input v-model="modelValue" type="checkbox" hidden>
     <span
       inline-block w="$b-button-width" h="$b-button-height" bg="$bew-fill-1" rounded="[calc(var(--b-button-height)/2)]"
-      relative duration="~ 300 ease-in-out" border="size-$b-border-width color-$bew-fill-1"
+      relative border="size-$b-border-width color-$bew-border-color"
       after:content-none after:inline-block after:bg="white" after:rounded="[calc(var(--b-button-height)/2)]"
       after:w="[calc(var(--b-button-height)-var(--b-border-width))]" after:h="[calc(var(--b-button-height)-var(--b-border-width))]"
-      after:border="size-$b-border-width color-$bew-fill-1"
-      after:pos="absolute top-[calc(0px-var(--b-border-width)/2)]" after:duration="~ 300 ease-in-out"
+      after:border="size-$b-border-width color-$bew-border-color"
+      after:pos="absolute top-[calc(0px-var(--b-border-width)/2)]"
     />
     <span>{{ label }}</span>
   </label>
@@ -39,11 +39,32 @@ label {
   --b-border-width: 2px;
 }
 
-input[type="checkbox"]:checked + span {
-  --at-apply: bg-$bew-theme-color-70 border-$bew-theme-color;
-}
+input[type="checkbox"]{
 
-input[type="checkbox"]:checked + span::after {
-  --at-apply: border-$bew-theme-color translate-x-full;
+  &:hover + span {
+    --at-apply: bg-$bew-fill-2;
+  }
+
+  &:active + span::after {
+    --at-apply: scale-90;
+  }
+
+  &:checked + span {
+    --at-apply: bg-$bew-theme-color-60 border-$bew-theme-color;
+  }
+
+  &:checked:hover + span {
+    --at-apply: bg-$bew-theme-color-80 border-$bew-theme-color;
+    box-shadow: 0 0 6px 2px var(--bew-theme-color-40), inset 0 0 6px var(--bew-theme-color-30);
+  }
+
+  & + span,
+  & + span::after {
+    transition: .3s cubic-bezier(.25,.15,.29,1.51);
+  }
+
+  &:checked + span::after {
+    --at-apply: border-$bew-theme-color translate-x-full;
+  }
 }
 </style>
