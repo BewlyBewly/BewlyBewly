@@ -81,16 +81,11 @@ watch(() => accessKey.value, () => {
 })
 
 watch(() => settings.value.wallpaper, (newValue) => {
-  document.documentElement.style.backgroundImage = `url(${newValue})`
-  document.documentElement.style.backgroundSize = 'cover'
-  document.documentElement.style.backgroundPosition = 'center'
+  setAppWallpaper()
 })
 
 watch(() => settings.value.wallpaperMaskOpacity, (newValue) => {
-  const bewlyElement = document.querySelector('#bewly') as HTMLElement
-
-  bewlyElement.style
-    .setProperty('--bew-bg-mask-opacity', `${newValue}%`)
+  setAppWallpaperMaskingOpacity()
 })
 
 onMounted(() => {
@@ -123,6 +118,8 @@ onMounted(() => {
   setAppAppearance()
   setAppLanguage()
   setAppThemeColor()
+  setAppWallpaper()
+  setAppWallpaperMaskingOpacity()
 })
 
 function changeActivatePage(pageName: AppPage) {
@@ -174,6 +171,17 @@ function setAppThemeColor() {
     for (let i = 0; i < 9; i++)
       bewlyElement.style.setProperty(`--bew-theme-color-${i + 1}0`, hexToRGBA(settings.value.themeColor, i * 0.1 + 0.1))
   }
+}
+
+function setAppWallpaper() {
+  document.documentElement.style.backgroundImage = `url(${settings.value.wallpaper})`
+  document.documentElement.style.backgroundSize = 'cover'
+  document.documentElement.style.backgroundPosition = 'center'
+}
+
+function setAppWallpaperMaskingOpacity() {
+  const bewlyElement = document.querySelector('#bewly') as HTMLElement
+  bewlyElement.style.setProperty('--bew-bg-mask-opacity', `${settings.value.wallpaperMaskOpacity}%`)
 }
 </script>
 

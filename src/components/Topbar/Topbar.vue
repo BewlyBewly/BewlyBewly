@@ -155,6 +155,7 @@ async function getUnreadMessageCount() {
     }
   }
   catch (error) {
+    unReadMessageCount.value = 0
     console.error(error)
   }
 }

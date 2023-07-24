@@ -155,30 +155,13 @@ function changeWallpaper(url: string) {
     <Radio v-model:value="settings.enableWallpaperMasking" />
   </SettingItem>
   <SettingItem v-if="settings.enableWallpaperMasking" :title="$t('settings.wallpaper_mask_opacity')">
-    <div flex gap-4>
-      <input
-        v-model="settings.wallpaperMaskOpacity"
-        type="range" min="0" max="100"
-        step="1"
-        flex-1
-      >
-      <span w-30px text-right>{{ settings.wallpaperMaskOpacity }}%</span>
-    </div>
-    <Slider />
+    <Slider v-model:value="settings.wallpaperMaskOpacity" :label="`${settings.wallpaperMaskOpacity}%`" />
   </SettingItem>
   <SettingItem v-if="settings.enableWallpaperMasking" :title="$t('settings.wallpaper_blur_intensity')">
     <template #desc>
       <span color="$bew-warning-color">{{ $t('common.performance_impact_warn') }}</span>
     </template>
-    <div flex gap-4>
-      <input
-        v-model="settings.wallpaperBlurIntensity"
-        type="range" min="0" max="60"
-        step="1"
-        flex-1
-      >
-      <span w-30px text-right>{{ settings.wallpaperBlurIntensity }}px</span>
-    </div>
+    <Slider v-model:value="settings.wallpaperBlurIntensity" :min="0" :max="60" :label="`${settings.wallpaperBlurIntensity}px`" />
   </SettingItem>
 </template>
 
