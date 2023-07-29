@@ -127,32 +127,24 @@ async function getUnreadMessageCount() {
     res = await browser.runtime.sendMessage({
       contentScriptQuery: 'getUnreadMsg',
     })
-
     Object.assign(unReadMessage, res.data)
 
-    try {
-      res = await browser.runtime.sendMessage({
-        contentScriptQuery: 'getUnreadDm',
-      })
+    res = await browser.runtime.sendMessage({
+      contentScriptQuery: 'getUnreadDm',
+    })
+    Object.assign(unReadDm, res.data)
 
-      Object.assign(unReadDm, res.data)
+    unReadMessageCount.value = 0
 
-      unReadMessageCount.value = 0
-
-      Object.keys(unReadMessage).forEach((key) => {
-        if (key !== 'up') {
-          unReadMessageCount.value
-          += unReadMessage[key as keyof typeof unReadMessage]
-        }
-      })
-
-      Object.keys(unReadDm).forEach((key) => {
-        unReadMessageCount.value += unReadDm[key as keyof typeof unReadDm]
-      })
-    }
-    catch (error) {
-      unReadMessageCount.value = 0
-    }
+    Object.keys(unReadMessage).forEach((key) => {
+      if (key !== 'up') {
+        unReadMessageCount.value
+          += unReadMessage[key as keyof typeof unReadMessage] ?? 0
+      }
+    })
+    Object.keys(unReadDm).forEach((key) => {
+      unReadMessageCount.value += unReadDm[key as keyof typeof unReadDm] ?? 0
+    })
   }
   catch (error) {
     unReadMessageCount.value = 0
