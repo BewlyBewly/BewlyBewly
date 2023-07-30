@@ -139,11 +139,11 @@ async function getUnreadMessageCount() {
     Object.keys(unReadMessage).forEach((key) => {
       if (key !== 'up') {
         unReadMessageCount.value
-          += unReadMessage[key as keyof typeof unReadMessage] ?? 0
+          += typeof unReadMessage[key as keyof typeof unReadMessage] === 'number' ? unReadMessage[key as keyof typeof unReadMessage] : 0
       }
     })
     Object.keys(unReadDm).forEach((key) => {
-      unReadMessageCount.value += unReadDm[key as keyof typeof unReadDm] ?? 0
+      unReadMessageCount.value += typeof unReadDm[key as keyof typeof unReadDm] === 'number' ? unReadDm[key as keyof typeof unReadDm] : 0
     })
   }
   catch (error) {
