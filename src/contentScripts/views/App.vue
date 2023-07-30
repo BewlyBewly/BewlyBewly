@@ -80,12 +80,30 @@ watch(() => accessKey.value, () => {
     accessKey.value = ''
 })
 
-watch(() => settings.value.wallpaper, (newValue) => {
+watch(() => settings.value.wallpaper, () => {
   setAppWallpaper()
 })
 
-watch(() => settings.value.wallpaperMaskOpacity, (newValue) => {
+watch(() => settings.value.searchPageWallpaper, () => {
+  if (activatedPage.value === AppPage.Search)
+    setAppWallpaper()
+})
+
+watch(() => settings.value.wallpaperMaskOpacity, () => {
   setAppWallpaperMaskingOpacity()
+})
+
+watch(() => settings.value.searchPageWallpaperMaskOpacity, () => {
+  setAppWallpaperMaskingOpacity()
+})
+
+watch(() => activatedPage.value, (newValue, oldValue) => {
+  // If u have set the `individuallySetSearchPageWallpaper`, reapply the wallpaper when the new page is search page
+  // or when switching from a search page to another page, since search page has its own wallpaper.
+  if (settings.value.individuallySetSearchPageWallpaper && (newValue === AppPage.Search || oldValue === AppPage.Search)) {
+    setAppWallpaper()
+    setAppWallpaperMaskingOpacity()
+  }
 })
 
 onMounted(() => {
@@ -174,26 +192,46 @@ function setAppThemeColor() {
 }
 
 function setAppWallpaper() {
-  document.documentElement.style.backgroundImage = `url(${settings.value.wallpaper})`
-  document.documentElement.style.backgroundSize = 'cover'
-  document.documentElement.style.backgroundPosition = 'center'
+  nextTick(() => {
+    if (settings.value.individuallySetSearchPageWallpaper && activatedPage.value === AppPage.Search)
+      document.documentElement.style.backgroundImage = `url(${settings.value.searchPageWallpaper})`
+    else
+      document.documentElement.style.backgroundImage = `url(${settings.value.wallpaper})`
+
+    document.documentElement.style.backgroundSize = 'cover'
+    document.documentElement.style.backgroundPosition = 'center'
+    document.documentElement.style.transition = 'backgroundImage .5s ease-in-out'
+  })
 }
 
 function setAppWallpaperMaskingOpacity() {
   const bewlyElement = document.querySelector('#bewly') as HTMLElement
-  bewlyElement.style.setProperty('--bew-bg-mask-opacity', `${settings.value.wallpaperMaskOpacity}%`)
+  if (settings.value.individuallySetSearchPageWallpaper && activatedPage.value === AppPage.Search)
+    bewlyElement.style.setProperty('--bew-bg-mask-opacity', `${settings.value.searchPageWallpaperMaskOpacity}%`)
+  else
+    bewlyElement.style.setProperty('--bew-bg-mask-opacity', `${settings.value.wallpaperMaskOpacity}%`)
 }
 </script>
 
 <template>
   <!-- background mask -->
   <div
-    v-if="settings.enableWallpaperMasking"
+    v-if="(!settings.individuallySetSearchPageWallpaper && settings.enableWallpaperMasking) || (activatedPage !== AppPage.Search && settings.enableWallpaperMasking)"
     pos="absolute top-0 left-0" w-full h-full pointer-events-none bg="$bew-bg-mask" z--1
-    :style="{ backdropFilter: `blur(${settings.wallpaperBlurIntensity}px)` }"
+    :style="{
+      backdropFilter: `blur(${settings.wallpaperBlurIntensity}px)`,
+    }"
   />
+  <div
+    v-else-if="settings.individuallySetSearchPageWallpaper && activatedPage === AppPage.Search && settings.searchPageEnableWallpaperMasking"
+    pos="absolute top-0 left-0" w-full h-full pointer-events-none bg="$bew-bg-mask" z--1
+    :style="{
+      backdropFilter: `blur(${settings.searchPageWallpaperBlurIntensity}px)`,
+    }"
+  />
+
   <div ref="mainAppRef" text="$bew-text-1" transition="opacity duration-300" h-100vh overflow-y-scroll :style="{ opacity: mainAppOpacity }">
-    <div m-auto max-w="$bew-page-max-width" :style="{ opacity: showSettings ? 0.2 : 1 }">
+    <div m-auto max-w="$bew-page-max-width" :style="{ opacity: showSettings ? 0.4 : 1 }">
       <Transition name="topbar">
         <Topbar
           v-show="settings.isShowTopbar"

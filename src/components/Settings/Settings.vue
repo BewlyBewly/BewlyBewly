@@ -2,16 +2,19 @@
 import { useI18n } from 'vue-i18n'
 import General from './components/General.vue'
 import Appearance from './components/Appearance.vue'
+import SearchPage from './components/SearchPage.vue'
 import Home from './components/Home.vue'
 import About from './components/About.vue'
 import { MenuType } from './types'
+import { settings } from '~/logic'
 
 const emit = defineEmits(['close'])
 
 const { t } = useI18n()
 
-const settingsMenu = { General, Appearance, Home, About }
+const settingsMenu = { General, Appearance, SearchPage, Home, About }
 const activatedMenuItem = ref<MenuType>(MenuType.General)
+const title = ref<string>(t('settings.title'))
 
 const settingsMenuItems = computed(() => {
   return [
@@ -24,6 +27,10 @@ const settingsMenuItems = computed(() => {
       label: t('settings.menu_appearance'),
     },
     {
+      value: MenuType.SearchPage,
+      label: 'Search Page',
+    },
+    {
       value: MenuType.Home,
       label: t('settings.menu_home'),
     },
@@ -34,12 +41,31 @@ const settingsMenuItems = computed(() => {
   ]
 })
 
+/**
+ * When changing language, set current title again to ensure it switches to the corresponding language
+ */
+watch(() => settings.value.language, () => {
+  setCurrentTitle()
+})
+
+onMounted(() => {
+  setCurrentTitle()
+})
+
 function handleClose() {
   emit('close')
 }
 
 function changeMenuItem(menuItem: MenuType) {
   activatedMenuItem.value = menuItem
+  setCurrentTitle()
+}
+
+function setCurrentTitle() {
+  settingsMenuItems.value.forEach((item) => {
+    if (item.value === activatedMenuItem.value)
+      title.value = item.label
+  })
 }
 </script>
 
@@ -53,7 +79,7 @@ function changeMenuItem(menuItem: MenuType) {
   >
     <aside class="group" shrink-0 p="x-2 md:x-4" pos="absolute left-0 md:left--42px" z-2>
       <ul
-        flex="~ gap-4 col" rounded="30px hover:25px" bg="$bew-elevated-2" p-2 shadow="$bew-shadow-3"
+        flex="~ gap-2 col" rounded="30px hover:25px" bg="$bew-elevated-2" p-2 shadow="$bew-shadow-3"
         scale="md:group-hover:105" duration-300
         backdrop-glass
       >
@@ -68,6 +94,7 @@ function changeMenuItem(menuItem: MenuType) {
             <i w-40px text="xl center" flex="~ shrink-0" justify-center>
               <tabler:settings v-if="item.value === MenuType.General" />
               <tabler:brush v-else-if="item.value === MenuType.Appearance" />
+              <tabler:search v-else-if="item.value === MenuType.SearchPage" />
               <tabler:home v-else-if="item.value === MenuType.Home" />
               <tabler:info-circle v-else-if="item.value === MenuType.About" />
             </i>
@@ -91,7 +118,7 @@ function changeMenuItem(menuItem: MenuType) {
         "
       >
         <div text="3xl">
-          {{ $t('settings.title') }}
+          {{ title }}
         </div>
         <div
           text-2xl leading-0 bg="$bew-fill-1" w="32px" h="32px" p="1" rounded-8 cursor="pointer" backdrop-glass

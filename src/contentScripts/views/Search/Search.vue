@@ -1,4 +1,6 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { settings } from '~/logic'
+</script>
 
 <template>
   <div
@@ -8,7 +10,7 @@
     w-full
     m="t-20vh"
   >
-    <Logo :size="180" mb-12 />
+    <Logo v-if="settings.searchPageShowLogo" :size="180" mb-12 :color="settings.searchPageLogoColor === 'white' ? 'white' : 'var(--bew-theme-color)'" />
     <SearchBar />
   </div>
 </template>
