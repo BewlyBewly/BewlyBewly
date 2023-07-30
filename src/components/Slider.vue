@@ -18,7 +18,7 @@ const modelValue = ref<number>(props.value)
 const rangeRef = ref<HTMLElement>() as Ref<HTMLElement>
 
 onMounted(() => {
-  modelValue.value = props.value
+  modelValue.value = props.value ?? 0
   const progress = (modelValue.value / rangeRef.value!.max) * 100
 
   rangeRef.value.style.background = `linear-gradient(to right, var(--bew-theme-color) ${progress}%, var(--bew-fill-1) ${progress}%) no-repeat`
@@ -59,11 +59,20 @@ label {
 input[type="range"] {
   &::-webkit-slider-thumb {
     --at-apply: appearance-none w-$b-thumb-height h-$b-thumb-height bg-white rounded-$b-thumb-height
-      border-$bew-border-color;
+      border-2 border-$bew-border-color cursor-pointer duration-300;
   }
+
+  &::-webkit-slider-thumb:hover {
+    --at-apply: border-$bew-theme-color;
+  }
+
   &::-moz-range-thumb {
     --at-apply: appearance-none w-$b-thumb-height h-$b-thumb-height bg-white rounded-$b-thumb-height
-      border-$bew-border-color;
+      border-2 border-$bew-border-color cursor-pointer duration-300;
+  }
+
+  &::-moz-range-thumb:hover {
+    --at-apply: border-$bew-theme-color;
   }
 }
 </style>
