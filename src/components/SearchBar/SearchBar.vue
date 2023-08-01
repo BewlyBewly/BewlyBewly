@@ -132,7 +132,7 @@ function handleKeyDown() {
     /> -->
     <Transition name="mask">
       <div
-        v-if="isFocus" pos="fixed top-0 left-0" w-full h-full bg="black opacity-40"
+        v-if="isFocus" pos="fixed top-0 left-0" w-full h-full bg="black opacity-60"
         @click="isFocus = false"
       />
     </Transition>

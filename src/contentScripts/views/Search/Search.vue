@@ -7,10 +7,10 @@ import { settings } from '~/logic'
     flex="~ col"
     justify-center
     items-center
-    w-full
+    w-full z-10
     m="t-20vh"
   >
-    <Logo v-if="settings.searchPageShowLogo" :size="180" mb-12 :color="settings.searchPageLogoColor === 'white' ? 'white' : 'var(--bew-theme-color)'" />
+    <Logo v-if="settings.searchPageShowLogo" :size="180" :color="settings.searchPageLogoColor === 'white' ? 'white' : 'var(--bew-theme-color)'" mb-12 z-1 />
     <SearchBar />
   </div>
 </template>
