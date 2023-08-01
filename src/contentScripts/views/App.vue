@@ -249,7 +249,7 @@ function setAppWallpaperMaskingOpacity() {
             right: settings.dockPosition === 'right',
             bottom: settings.dockPosition === 'bottom',
           }"
-          pos="absolute top-0" flex="~ col" h-100vh justify-center z-999 pointer-events-none
+          pos="absolute top-0" flex="~ col" h-100vh justify-center z-10 pointer-events-none
         >
           <div
             class="dock-content"

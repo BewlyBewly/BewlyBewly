@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" setup>
 import type { HistoryItem, SuggestionItem } from './searchHistoryProvider'
 import {
   addSearchHistory,
@@ -6,123 +6,137 @@ import {
   removeSearchHistory,
 } from './searchHistoryProvider'
 
-export default defineComponent({
-  data() {
-    return {
-      isFocus: false,
-      keyword: '',
-      suggestions: [] as SuggestionItem[],
-      selectedIndex: -1,
-      searchHistory: [] as HistoryItem[],
-    }
-  },
-  mounted() {
-    this.searchHistory = getSearchHistory()
-  },
-  methods: {
-    onSearchChange() {
-      browser.runtime
-        .sendMessage({
-          contentScriptQuery: 'getSearchSuggestion',
-          term: this.keyword,
-        })
-        .then((res) => {
-          this.suggestions = res
-        })
-    },
-    goToSearchPage(keyword: string) {
-      if (keyword) {
-        window.open(`//search.bilibili.com/all?keyword=${keyword}`, '_blank')
-        const searchItem = {
-          value: keyword,
-          timestamp: Number(new Date()),
-        }
-        addSearchHistory(searchItem)
-        this.searchHistory = getSearchHistory()
-      }
-    },
-    onDelHistoryItem(value: string) {
-      removeSearchHistory(value)
-      this.searchHistory = getSearchHistory()
-    },
-    onUp() {
-      if (this.selectedIndex <= 0) {
-        this.selectedIndex = 0
-        return
-      }
+const isFocus = ref<boolean>(false)
+const keyword = ref<string>('')
+const suggestions = reactive<SuggestionItem[]>([])
+const selectedIndex = ref<number>(-1)
+const searchHistory = reactive<HistoryItem[]>([])
+const historyItemRef = ref<HTMLElement[]>([])
+const suggestionItemRef = ref<HTMLElement[]>([])
 
-      this.selectedIndex--
-
-      if (this.isFocus && Object.keys(this.suggestions).length !== 0)
-        this.keyword = this.suggestions[this.selectedIndex].value
-      else if (this.isFocus && this.searchHistory.length !== 0)
-        this.keyword = this.searchHistory[this.selectedIndex].value
-
-      document.querySelectorAll('.suggestion-item').forEach((item, index) => {
-        if (index === this.selectedIndex)
-          item.classList.add('active')
-        else item.classList.remove('active')
-      })
-
-      document.querySelectorAll('.history-item').forEach((item, index) => {
-        if (index === this.selectedIndex)
-          item.classList.add('active')
-        else item.classList.remove('active')
-      })
-    },
-    onDown() {
-      let isShowSuggestion = false
-      if (this.isFocus && Object.keys(this.suggestions).length !== 0)
-        isShowSuggestion = true
-      else if (this.isFocus && !this.keyword && this.searchHistory.length !== 0)
-        isShowSuggestion = false
-
-      if (
-        isShowSuggestion
-        && this.selectedIndex >= Object.keys(this.suggestions).length - 1
-      ) {
-        this.selectedIndex = Object.keys(this.suggestions).length - 1
-        return
-      }
-      if (
-        !isShowSuggestion
-        && this.selectedIndex >= this.searchHistory.length - 1
-      ) {
-        this.selectedIndex = this.searchHistory.length - 1
-        return
-      }
-
-      this.selectedIndex++
-      this.keyword = isShowSuggestion
-        ? this.suggestions[this.selectedIndex].value
-        : this.searchHistory[this.selectedIndex].value
-
-      document.querySelectorAll('.suggestion-item').forEach((item, index) => {
-        if (index === this.selectedIndex)
-          item.classList.add('active')
-        else item.classList.remove('active')
-      })
-
-      document.querySelectorAll('.history-item').forEach((item, index) => {
-        if (index === this.selectedIndex)
-          item.classList.add('active')
-        else item.classList.remove('active')
-      })
-    },
-  },
+onMounted(() => {
+  Object.assign(searchHistory, getSearchHistory())
 })
+
+function handleInput() {
+  selectedIndex.value = -1
+  if (keyword.value.length > 0) {
+    browser.runtime
+      .sendMessage({
+        contentScriptQuery: 'getSearchSuggestion',
+        term: keyword.value,
+      })
+      .then((res) => {
+        Object.assign(suggestions, res)
+      })
+  }
+  else {
+    suggestions.length = 0
+  }
+}
+
+function navigateToSearchResultPage(keyword: string) {
+  if (keyword) {
+    window.open(`//search.bilibili.com/all?keyword=${keyword}`, '_blank')
+    const searchItem = {
+      value: keyword,
+      timestamp: Number(new Date()),
+    }
+    addSearchHistory(searchItem)
+    Object.assign(searchHistory, getSearchHistory())
+  }
+}
+
+function handleDelete(value: string) {
+  removeSearchHistory(value)
+  searchHistory.length = 0
+  Object.assign(searchHistory, getSearchHistory())
+}
+
+function handleKeyUp() {
+  if (selectedIndex.value <= 0) {
+    selectedIndex.value = 0
+    return
+  }
+
+  selectedIndex.value--
+
+  if (isFocus.value && suggestions.length !== 0)
+    keyword.value = suggestions[selectedIndex.value].value
+  else if (isFocus.value && searchHistory.length !== 0)
+    keyword.value = searchHistory[selectedIndex.value].value
+
+  suggestionItemRef.value.forEach((item, index) => {
+    if (index === selectedIndex.value)
+      item.classList.add('active')
+    else item.classList.remove('active')
+  })
+
+  historyItemRef.value.forEach((item, index) => {
+    if (index === selectedIndex.value)
+      item.classList.add('active')
+    else item.classList.remove('active')
+  })
+}
+
+function handleKeyDown() {
+  let isShowSuggestion = false
+  if (isFocus.value && suggestions.length !== 0)
+    isShowSuggestion = true
+  else if (isFocus.value && !keyword.value && searchHistory.length !== 0)
+    isShowSuggestion = false
+
+  if (
+    isShowSuggestion
+        && selectedIndex.value >= suggestions.length - 1
+  ) {
+    selectedIndex.value = suggestions.length - 1
+    return
+  }
+  if (
+    !isShowSuggestion
+        && selectedIndex.value >= searchHistory.length - 1
+  ) {
+    selectedIndex.value = searchHistory.length - 1
+    return
+  }
+
+  selectedIndex.value++
+  keyword.value = isShowSuggestion
+    ? suggestions[selectedIndex.value].value
+    : searchHistory[selectedIndex.value].value
+
+  suggestionItemRef.value.forEach((item, index) => {
+    if (index === selectedIndex.value)
+      item.classList.add('active')
+    else item.classList.remove('active')
+  })
+
+  historyItemRef.value.forEach((item, index) => {
+    if (index === selectedIndex.value)
+      item.classList.add('active')
+    else item.classList.remove('active')
+  })
+}
 </script>
 
 <template>
   <div id="search-wrap" w="full" max-w="500px" m="x-8" pos="relative">
-    <div
+    <!-- <div
       v-if="isFocus"
       pos="fixed top-0 left-0"
       w="full"
       h="full"
       content="~"
       @click="isFocus = false"
-    />
+    /> -->
+    <Transition name="mask">
+      <div
+        v-if="isFocus" pos="fixed top-0 left-0" w-full h-full bg="black opacity-40"
+        @click="isFocus = false"
+      />
+    </Transition>
+
     <div class="search-bar group" flex="~" items-center pos="relative">
       <input
         v-model.trim="keyword"
@@ -133,10 +147,10 @@ export default defineComponent({
         transition="all duration-300"
         type="text"
         @focus="isFocus = true"
-        @input="onSearchChange()"
-        @keyup.enter="goToSearchPage(keyword)"
-        @keyup.up="onUp"
-        @keyup.down="onDown"
+        @input="handleInput()"
+        @keyup.enter="navigateToSearchResultPage(keyword)"
+        @keyup.up="handleKeyUp"
+        @keyup.down="handleKeyDown"
       >
       <button
         p-2
@@ -149,7 +163,7 @@ export default defineComponent({
         bg="hover:$bew-fill-2"
         filter="group-focus-within:~"
         style="--un-drop-shadow: drop-shadow(0 0 6px var(--bew-theme-color)) "
-        @click="goToSearchPage(keyword)"
+        @click="navigateToSearchResultPage(keyword)"
       >
         <tabler:search />
       </button>
@@ -160,18 +174,19 @@ export default defineComponent({
         v-if="
           isFocus
             && searchHistory.length !== 0
-            && Object.keys(suggestions).length === 0
+            && suggestions.length === 0
         "
         id="search-history"
       >
         <div
           v-for="item in searchHistory"
-          :key="item.value"
+          :key="item.timestamp"
+          ref="historyItemRef"
           class="history-item"
           flex
           justify-between
           items-center
-          @click="goToSearchPage(item.value)"
+          @click="navigateToSearchResultPage(item.value)"
         >
           {{ item.value }}
           <button
@@ -182,7 +197,7 @@ export default defineComponent({
             cursor-pointer
             text="base $bew-text-2"
             leading-0
-            @click.stop="onDelHistoryItem(item.value)"
+            @click.stop="handleDelete(item.value)"
           >
             <ic-baseline-clear />
           </button>
@@ -192,14 +207,15 @@ export default defineComponent({
 
     <Transition>
       <div
-        v-if="isFocus && Object.keys(suggestions).length !== 0"
+        v-if="isFocus && suggestions.length !== 0"
         id="search-suggestion"
       >
         <div
           v-for="(item, index) in suggestions"
           :key="index"
+          ref="suggestionItemRef"
           class="suggestion-item"
-          @click="goToSearchPage(item.value)"
+          @click="navigateToSearchResultPage(item.value)"
         >
           {{ item.value }}
         </div>
@@ -219,10 +235,19 @@ export default defineComponent({
   --at-apply: transform translate-y-4 opacity-0 scale-95;
 }
 
-.card-content {
-  --at-apply: text-base outline-none w-full
-    bg-$bew-content-1 shadow-$bew-shadow-2;
-  backdrop-filter: var(--bew-filter-glass);
+.mask-enter-active,
+.mask-leave-active {
+  --at-apply: transition-all duration-300 will-change-backdrop-filter;
+}
+
+.mask-enter-from,
+.mask-leave-to {
+  --at-apply: opacity-0;
+}
+
+.mask-enter-to,
+.mask-leave-from {
+  --at-apply: opacity-100;
 }
 
 #search-wrap {
@@ -255,9 +280,6 @@ export default defineComponent({
       not-first:mt-1
       hover:bg-$bew-fill-2;
 
-    &.active {
-      --at-apply: bg-$bew-fill-2;
-    }
   }
 
   #search-history,
@@ -268,6 +290,10 @@ export default defineComponent({
     .history-item,
     .suggestion-item {
       @include search-content-item;
+
+      &.active {
+        --at-apply: bg-$bew-fill-2;
+      }
     }
   }
 
