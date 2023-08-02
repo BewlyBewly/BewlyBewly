@@ -26,7 +26,7 @@ onMounted(() => {
   if (rangeRef.value) {
     rangeRef.value.addEventListener('input', (event: Event) => {
       const tempSliderValue = event.target!.value
-      emit('update:value', tempSliderValue)
+      emit('update:value', Number(tempSliderValue))
 
       const progress = (tempSliderValue / rangeRef.value!.max) * 100
 
