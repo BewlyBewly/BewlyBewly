@@ -2,8 +2,8 @@
 import type { Ref } from 'vue'
 
 interface Props {
-  min: number
-  max: number
+  min?: number
+  max?: number
   value: number
   label: string
 }
