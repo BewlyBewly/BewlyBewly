@@ -1,10 +1,14 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import type { HistoryItem, SuggestionItem } from './searchHistoryProvider'
 import {
   addSearchHistory,
   getSearchHistory,
   removeSearchHistory,
 } from './searchHistoryProvider'
+
+defineProps<{
+  darkenOnFocus?: boolean
+}>()
 
 const isFocus = ref<boolean>(false)
 const keyword = ref<string>('')
@@ -132,7 +136,7 @@ function handleKeyDown() {
     /> -->
     <Transition name="mask">
       <div
-        v-if="isFocus" pos="fixed top-0 left-0" w-full h-full bg="black opacity-60"
+        v-if="darkenOnFocus && isFocus" pos="fixed top-0 left-0" w-full h-full bg="black opacity-60"
         @click="isFocus = false"
       />
     </Transition>

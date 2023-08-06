@@ -25,8 +25,10 @@ settings:
   menu_general: 一般
   menu_appearance: 外觀
   menu_home: 首頁
+  menu_search_page: 搜尋頁
   menu_about: 關於
 
+  # General settings
   select_language: 介面語文
   select_language_opt:
     english: 英文
@@ -40,8 +42,8 @@ settings:
   authorize_app_desc: |
     授權使用後能在首頁推送 bilibili 手機端推介演算法的影片，授權 key 的有效期約爲一個月，過了有效期後，請記得重新取得授權以取得 access key。
   authorize_app_more_info_access_key: 關於 access key
-  topbar_visible: 頂欄可視性
-  topbar_visible_desc: 用於相容 Bilibili Evolved 自訂頂欄
+  topbar_visibility: 頂欄可視性
+  topbar_visibility_desc: 用於相容 Bilibili Evolved 自訂頂欄
   btn:
     authorize: 授權
     revoke: 解除授權
@@ -54,6 +56,10 @@ settings:
     left: 左側
     right: 右側
     bottom: 底部
+  enable_horizontal_scrolling: 啟用橫向捲動
+  enable_horizontal_scrolling_desc: 啟用後，滑鼠捲動時將直接捲動橫向捲軸列表
+
+  # Appearance settings
   theme_color: 主題色
   follow_bilibili_evolved_color: 使用 Bilibili Evolved 主題色
   follow_bilibili_evolved_color_desc: 每次變更 Bilibili Evolved 主題色後，記得重新選取此選項以更新配置
@@ -70,8 +76,16 @@ settings:
   enable_wallpaper_masking: 啓用背景遮蔽效果
   wallpaper_mask_opacity: 背景遮蔽透明度調節
   wallpaper_blur_intensity: 背景模糊強度調節
-  enable_horizontal_scrolling: 啟用橫向捲動
-  enable_horizontal_scrolling_desc: 啟用後，滑鼠捲動時將直接捲動橫向捲軸列表
+
+  # Search page settings
+  logo_color: Logo 顏色
+  logo_color_opt:
+    white: 白
+    theme_color: 主題色
+  logo_visibility: Logo 可視性
+  bg_darkens_when_the_search_bar_is_focused: 當搜尋欄聚焦時背景變暗
+  individually_set_search_page_wallpaper: 單獨設定搜尋頁背景 (試驗性)
+
 auth:
   err_tip: 無法授權 access key
   plz_login_first: 請先登入 bilibili

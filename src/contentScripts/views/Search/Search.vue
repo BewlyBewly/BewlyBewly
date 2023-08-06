@@ -11,6 +11,6 @@ import { settings } from '~/logic'
     m="t-20vh"
   >
     <Logo v-if="settings.searchPageShowLogo" :size="180" :color="settings.searchPageLogoColor === 'white' ? 'white' : 'var(--bew-theme-color)'" mb-12 z-1 />
-    <SearchBar />
+    <SearchBar :darken-on-focus="settings.searchPageDarkenOnSearchFocus" />
   </div>
 </template>

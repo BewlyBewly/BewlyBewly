@@ -11,6 +11,7 @@ export interface Settings {
   wallpaperMaskOpacity: number
   wallpaperBlurIntensity: number
 
+  searchPageDarkenOnSearchFocus: boolean
   searchPageLogoColor: 'white' | 'themeColor'
   searchPageShowLogo: boolean
   individuallySetSearchPageWallpaper: boolean

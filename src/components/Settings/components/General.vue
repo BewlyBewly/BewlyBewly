@@ -56,7 +56,7 @@ watch(() => settings.value.language, (newValue, oldValue) => {
     />
   </SettingItem>
 
-  <SettingItem :title="$t('settings.topbar_visible')" :desc="$t('settings.topbar_visible_desc')">
+  <SettingItem :title="$t('settings.topbar_visibility')" :desc="$t('settings.topbar_visibility_desc')">
     <Radio v-model:value="settings.isShowTopbar" :label="settings.isShowTopbar ? $t('settings.chk_box.show') : $t('settings.chk_box.hidden')" />
   </SettingItem>
 

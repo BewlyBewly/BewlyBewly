@@ -24,9 +24,11 @@ settings:
   # Settings menu
   menu_general: General
   menu_appearance: Appearance
+  menu_search_page: Search Page
   menu_home: Home
   menu_about: About
 
+  # General settings
   select_language: Language
   select_language_opt:
     english: English
@@ -41,8 +43,8 @@ settings:
     After authentication, you will receive the video recommendations based on the bilibili app recommendation algorithm.
     The access key is valid for about one month. After that, remember to re-authorize the BewlyBewly to use the access key.
   authorize_app_more_info_access_key: More information about the access key 
-  topbar_visible: Topbar visible
-  topbar_visible_desc: Compatible with Bilibili Evolved customize topbar
+  topbar_visibility: Topbar visibility
+  topbar_visibility_desc: Compatible with Bilibili Evolved customize topbar
   btn:
     authorize: Authorize
     revoke: Revoke
@@ -55,6 +57,10 @@ settings:
     left: Left
     right: Right
     bottom: Bottom
+  enable_horizontal_scrolling: Enable horizontal scrolling
+  enable_horizontal_scrolling_desc: After enabling, mouse scrolling will directly scroll the horizontal scroll list
+
+  # Appearance settings
   theme_color: Theme color
   follow_bilibili_evolved_color: Follow the Bilibili Evolved theme color
   follow_bilibili_evolved_color_desc: After changing the theme color in Bilibili Evolved, you will need to re-select this option in order to update the theme color.
@@ -71,8 +77,15 @@ settings:
   enable_wallpaper_masking: Enable wallpaper masking
   wallpaper_mask_opacity: Wallpaper masking opacity
   wallpaper_blur_intensity: Wallpaper blur intensity
-  enable_horizontal_scrolling: Enable horizontal scrolling
-  enable_horizontal_scrolling_desc: After enabling, mouse scrolling will directly scroll the horizontal scroll list
+
+  # Search page settings
+  logo_color: Logo color
+  logo_color_opt:
+    white: White
+    theme_color: Theme Color
+  logo_visibility: Logo visibility
+  bg_darkens_when_the_search_bar_is_focused: Background darkens when the search bar is focused
+  individually_set_search_page_wallpaper: Individually set search page wallpaper (EXPERIMENTAL)
 auth:
   err_tip: Failed to grant access key
   plz_login_first: Please login to bilibili first

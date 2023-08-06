@@ -28,7 +28,7 @@ const settingsMenuItems = computed(() => {
     },
     {
       value: MenuType.SearchPage,
-      label: 'Search Page',
+      label: t('settings.menu_search_page'),
     },
     {
       value: MenuType.Home,
@@ -73,8 +73,8 @@ function setCurrentTitle() {
   <div class="fixed w-full h-full top-0 left-0" z="9998" @click="handleClose" />
 
   <div
-    id="settings-window" pos="fixed md:top-1/5 top-0 left-1/2" w="full lg:1/2 md:2/3" h="full md:1/2"
-    max-w-800px transform="~ translate-x--1/2"
+    id="settings-window" pos="fixed md:top-1/5 top-0 left-1/2" w="full lg:2/3 md:2/3" h="full md:1/2"
+    max-w-850px transform="~ translate-x--1/2"
     z-9999 flex justify-between items-center
   >
     <aside class="group" shrink-0 p="x-2 md:x-4" pos="absolute left-0 md:left--42px" z-2>

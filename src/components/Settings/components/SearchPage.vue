@@ -37,7 +37,7 @@ function changeWallpaper(url: string) {
 </script>
 
 <template>
-  <SettingItem title="Logo color">
+  <SettingItem :title="$t('settings.logo_color')">
     <div flex rounded="$bew-radius" bg="$bew-fill-1" p-1>
       <div
         flex="1 ~" items-center justify-center py-1 cursor-pointer text-center rounded="$bew-radius"
@@ -46,8 +46,8 @@ function changeWallpaper(url: string) {
           color: settings.searchPageLogoColor === 'themeColor' || !settings.searchPageLogoColor ? 'white' : '',
         }"
         @click="settings.searchPageLogoColor = 'themeColor'"
-      >
-        {{ 'theme color' }}
+        >
+          {{ $t('settings.logo_color_opt.theme_color') }}
       </div>
       <div
         flex="1 ~" items-center justify-center py-1 cursor-pointer text-center rounded="$bew-radius"
@@ -57,16 +57,20 @@ function changeWallpaper(url: string) {
         }"
         @click="settings.searchPageLogoColor = 'white'"
       >
-        {{ 'white' }}
+        {{ $t('settings.logo_color_opt.white') }}
       </div>
     </div>
   </SettingItem>
 
-  <SettingItem title="Logo visible">
+  <SettingItem :title="$t('settings.logo_visibility')">
     <Radio v-model:value="settings.searchPageShowLogo" />
   </SettingItem>
 
-  <SettingItem title="Individually set search page wallpaper (EXPERIMENTAL)">
+  <SettingItem :title="$t('settings.bg_darkens_when_the_search_bar_is_focused')">
+    <Radio v-model:value="settings.searchPageDarkenOnSearchFocus" />
+  </SettingItem>
+
+  <SettingItem :title="$t('settings.individually_set_search_page_wallpaper')">
     <template #desc>
       <span color="$bew-warning-color">{{ $t('common.performance_impact_warn') }}</span>
     </template>
