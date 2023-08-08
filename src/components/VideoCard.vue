@@ -175,8 +175,7 @@ function toggleWatchLater() {
           p="x-2 y-1" m="1"
           rounded="$bew-radius"
           text="!white xl"
-          bg="black opacity-60"
-          opacity="0 group-hover:100"
+          bg="black opacity-60" opacity-0 group-hover:opacity-100
           @click.stop="toggleWatchLater"
         >
           <Tooltip v-if="!isInWatchLater" :content="$t('common.save_to_watch_later')" placement="bottom">
