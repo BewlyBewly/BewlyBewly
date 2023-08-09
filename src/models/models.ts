@@ -14,6 +14,7 @@ export interface Settings {
   searchPageDarkenOnSearchFocus: boolean
   searchPageLogoColor: 'white' | 'themeColor'
   searchPageShowLogo: boolean
+  searchPageSearchBarFocusCharacter: string
   individuallySetSearchPageWallpaper: boolean
   searchPageWallpaperMode: 'buildIn' | 'byUrl'
   searchPageWallpaper: string

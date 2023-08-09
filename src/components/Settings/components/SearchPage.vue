@@ -1,28 +1,36 @@
 <script lang="ts" setup>
 import { settings } from '~/logic'
 
-const wallpapers = reactive<Array<{ name: string; url: string; thumbnail: string }>>([
-  {
-    name: 'Unsplash Random Nature Image',
-    url: 'https://source.unsplash.com/1920x1080/?nature',
-    thumbnail: 'https://source.unsplash.com/1920x1080/?nature',
-  },
-  {
-    name: 'BML2019 VR (pid: 74271400)',
-    url: 'https://pic.imgdb.cn/item/638e1d63b1fccdcd36103811.jpg',
-    thumbnail: 'https://pic.imgdb.cn/item/64ac5e341ddac507cc750ae8.jpg',
-  },
-  {
-    name: '2020 拜年祭活动',
-    url: 'https://pic.imgdb.cn/item/638e1d7ab1fccdcd36106346.jpg',
-    thumbnail: 'https://pic.imgdb.cn/item/64ac5f251ddac507cc7658af.jpg',
-  },
-  {
-    name: '2020 BDF',
-    url: 'https://pic.imgdb.cn/item/63830f1816f2c2beb1868554.jpg',
-    thumbnail: 'https://pic.imgdb.cn/item/64ac5fc01ddac507cc77224e.jpg',
-  },
-])
+const searchBarFocusCharacters = computed<{ name: string; url: string }[]>(() => {
+  return [
+    { name: '33 娘', url: 'https://cdn.jsdelivr.net/gh/hakadao/bilibili-simple-home@master/img/searchBar_33_2.png' },
+    { name: '33 娘', url: 'https://cdn.jsdelivr.net/gh/hakadao/bilibili-simple-home@master/img/searchBar_33.png' },
+  ]
+})
+const wallpapers = computed<Array<{ name: string; url: string; thumbnail: string }>>(() => {
+  return [
+    {
+      name: 'Unsplash Random Nature Image',
+      url: 'https://source.unsplash.com/1920x1080/?nature',
+      thumbnail: 'https://source.unsplash.com/1920x1080/?nature',
+    },
+    {
+      name: 'BML2019 VR (pid: 74271400)',
+      url: 'https://pic.imgdb.cn/item/638e1d63b1fccdcd36103811.jpg',
+      thumbnail: 'https://pic.imgdb.cn/item/64ac5e341ddac507cc750ae8.jpg',
+    },
+    {
+      name: '2020 拜年祭活动',
+      url: 'https://pic.imgdb.cn/item/638e1d7ab1fccdcd36106346.jpg',
+      thumbnail: 'https://pic.imgdb.cn/item/64ac5f251ddac507cc7658af.jpg',
+    },
+    {
+      name: '2020 BDF',
+      url: 'https://pic.imgdb.cn/item/63830f1816f2c2beb1868554.jpg',
+      thumbnail: 'https://pic.imgdb.cn/item/64ac5fc01ddac507cc77224e.jpg',
+    },
+  ]
+})
 
 watch(() => settings.value.individuallySetSearchPageWallpaper, (newValue) => {
   if (newValue)
@@ -30,6 +38,10 @@ watch(() => settings.value.individuallySetSearchPageWallpaper, (newValue) => {
   else
     document.documentElement.style.backgroundImage = `url(${settings.value.wallpaper})`
 })
+
+function changeSearchBarFocusCharacter(url: string) {
+  settings.value.searchPageSearchBarFocusCharacter = url
+}
 
 function changeWallpaper(url: string) {
   settings.value.searchPageWallpaper = url
@@ -46,8 +58,8 @@ function changeWallpaper(url: string) {
           color: settings.searchPageLogoColor === 'themeColor' || !settings.searchPageLogoColor ? 'white' : '',
         }"
         @click="settings.searchPageLogoColor = 'themeColor'"
-        >
-          {{ $t('settings.logo_color_opt.theme_color') }}
+      >
+        {{ $t('settings.logo_color_opt.theme_color') }}
       </div>
       <div
         flex="1 ~" items-center justify-center py-1 cursor-pointer text-center rounded="$bew-radius"
@@ -68,6 +80,30 @@ function changeWallpaper(url: string) {
 
   <SettingItem :title="$t('settings.bg_darkens_when_the_search_bar_is_focused')">
     <Radio v-model:value="settings.searchPageDarkenOnSearchFocus" />
+  </SettingItem>
+
+  <SettingItem title="Choose the character displayed when the search bar is focused" next-line>
+    <div grid="~ xl:cols-8 lg:cols-6 cols-4 gap-4">
+      <picture
+        aspect-square bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
+        un-border="4 transparent" pointer-cursor
+        grid place-items-center
+        :class="{ 'selected-wallpaper': settings.searchPageSearchBarFocusCharacter === '' }"
+        @click="changeSearchBarFocusCharacter('')"
+      >
+        <tabler:photo-off text="3xl $bew-text-3" />
+      </picture>
+      <Tooltip v-for="item in searchBarFocusCharacters" :key="item.url" placement="top" :content="item.name" aspect-square>
+        <picture
+          aspect-square bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
+          un-border="4 transparent" w-full
+          :class="{ 'selected-wallpaper': settings.searchPageSearchBarFocusCharacter === item.url }"
+          @click="changeSearchBarFocusCharacter(item.url)"
+        >
+          <img :src="item.url" alt="" w-full h-full object-contain>
+        </picture>
+      </Tooltip>
+    </div>
   </SettingItem>
 
   <SettingItem :title="$t('settings.individually_set_search_page_wallpaper')">

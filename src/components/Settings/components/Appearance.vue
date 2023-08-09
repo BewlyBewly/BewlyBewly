@@ -1,50 +1,54 @@
 <script lang="ts" setup>
 import { settings } from '~/logic'
 
-const themeColorOptions = reactive<Array<string>>([
-  '#22c55e',
-  '#34d399',
-  '#14b8a6',
-  '#06b6d4',
-  '#00a1d6',
-  '#60a5fa',
-  '#3b82f6',
-  '#6366f1',
-  '#818cf8',
-  '#a78bfa',
-  '#f46d43',
-  '#fb923c',
-  '#f59e0b',
-  '#eab308',
-  '#f43f5e',
-  '#fb7299',
-  '#fda4af',
-])
+const themeColorOptions = computed<Array<string>>(() => {
+  return [
+    '#22c55e',
+    '#34d399',
+    '#14b8a6',
+    '#06b6d4',
+    '#00a1d6',
+    '#60a5fa',
+    '#3b82f6',
+    '#6366f1',
+    '#818cf8',
+    '#a78bfa',
+    '#f46d43',
+    '#fb923c',
+    '#f59e0b',
+    '#eab308',
+    '#f43f5e',
+    '#fb7299',
+    '#fda4af',
+  ]
+})
 const bilibiliEvolvedThemeColor = computed(() => {
   return getComputedStyle(document.querySelector('html') as HTMLElement).getPropertyValue('--theme-color').trim() ?? '#00a1d6'
 })
-const wallpapers = reactive<Array<{ name: string; url: string; thumbnail: string }>>([
-  {
-    name: 'Unsplash Random Nature Image',
-    url: 'https://source.unsplash.com/1920x1080/?nature',
-    thumbnail: 'https://source.unsplash.com/1920x1080/?nature',
-  },
-  {
-    name: 'BML2019 VR (pid: 74271400)',
-    url: 'https://pic.imgdb.cn/item/638e1d63b1fccdcd36103811.jpg',
-    thumbnail: 'https://pic.imgdb.cn/item/64ac5e341ddac507cc750ae8.jpg',
-  },
-  {
-    name: '2020 拜年祭活动',
-    url: 'https://pic.imgdb.cn/item/638e1d7ab1fccdcd36106346.jpg',
-    thumbnail: 'https://pic.imgdb.cn/item/64ac5f251ddac507cc7658af.jpg',
-  },
-  {
-    name: '2020 BDF',
-    url: 'https://pic.imgdb.cn/item/63830f1816f2c2beb1868554.jpg',
-    thumbnail: 'https://pic.imgdb.cn/item/64ac5fc01ddac507cc77224e.jpg',
-  },
-])
+const wallpapers = computed<Array<{ name: string; url: string; thumbnail: string }>>(() => {
+  return [
+    {
+      name: 'Unsplash Random Nature Image',
+      url: 'https://source.unsplash.com/1920x1080/?nature',
+      thumbnail: 'https://source.unsplash.com/1920x1080/?nature',
+    },
+    {
+      name: 'BML2019 VR (pid: 74271400)',
+      url: 'https://pic.imgdb.cn/item/638e1d63b1fccdcd36103811.jpg',
+      thumbnail: 'https://pic.imgdb.cn/item/64ac5e341ddac507cc750ae8.jpg',
+    },
+    {
+      name: '2020 拜年祭活动',
+      url: 'https://pic.imgdb.cn/item/638e1d7ab1fccdcd36106346.jpg',
+      thumbnail: 'https://pic.imgdb.cn/item/64ac5f251ddac507cc7658af.jpg',
+    },
+    {
+      name: '2020 BDF',
+      url: 'https://pic.imgdb.cn/item/63830f1816f2c2beb1868554.jpg',
+      thumbnail: 'https://pic.imgdb.cn/item/64ac5fc01ddac507cc77224e.jpg',
+    },
+  ]
+})
 
 function changeThemeColor(color: string) {
   settings.value.themeColor = color

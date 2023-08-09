@@ -8,6 +8,7 @@ import {
 
 defineProps<{
   darkenOnFocus?: boolean
+  focusedCharacter?: string
 }>()
 
 const isFocus = ref<boolean>(false)
@@ -142,6 +143,10 @@ function handleKeyDown() {
     </Transition>
 
     <div class="search-bar group" flex="~" items-center pos="relative">
+      <Transition name="focus-character">
+        <img v-show="focusedCharacter && isFocus" :src="focusedCharacter" width="100" object-contain pos="absolute right-0 bottom-30px">
+      </Transition>
+
       <input
         v-model.trim="keyword"
         rounded="60px focus:$bew-radius"
@@ -173,7 +178,7 @@ function handleKeyDown() {
       </button>
     </div>
 
-    <Transition>
+    <Transition name="result-list">
       <div
         v-if="
           isFocus
@@ -229,19 +234,29 @@ function handleKeyDown() {
 </template>
 
 <style lang="scss" scoped>
-.v-enter-active,
-.v-leave-active {
+.result-list-enter-active,
+.result-list-leave-active {
   --at-apply: transition-all duration-300
 }
 
-.v-enter-from,
-.v-leave-to {
+.result-list-enter-from,
+.result-list-leave-to {
   --at-apply: transform translate-y-4 opacity-0 scale-95;
+}
+
+.focus-character-enter-active,
+.focus-character-leave-active {
+  --at-apply: transition-all duration-300 ease-in-out;
+}
+
+.focus-character-enter-from,
+.focus-character-leave-to {
+  --at-apply: transform translate-y-6 opacity-0;
 }
 
 .mask-enter-active,
 .mask-leave-active {
-  --at-apply: transition-all duration-300 will-change-backdrop-filter;
+  --at-apply: transition-all duration-300;
 }
 
 .mask-enter-from,
