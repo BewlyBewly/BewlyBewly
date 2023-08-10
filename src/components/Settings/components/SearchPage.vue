@@ -76,6 +76,10 @@ function changeWallpaper(url: string) {
     </div>
   </SettingItem>
 
+  <SettingItem title="Enable glowing effect for the logo">
+    <Radio v-model:value="settings.searchPageLogoGlow" />
+  </SettingItem>
+
   <SettingItem :title="$t('settings.logo_visibility')">
     <Radio v-model:value="settings.searchPageShowLogo" />
   </SettingItem>

@@ -21,6 +21,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
 
   searchPageDarkenOnSearchFocus: true,
   searchPageLogoColor: 'themeColor',
+  searchPageLogoGlow: true,
   searchPageShowLogo: true,
   searchPageSearchBarFocusCharacter: '',
   individuallySetSearchPageWallpaper: false,

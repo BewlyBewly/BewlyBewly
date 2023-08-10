@@ -13,6 +13,7 @@ export interface Settings {
 
   searchPageDarkenOnSearchFocus: boolean
   searchPageLogoColor: 'white' | 'themeColor'
+  searchPageLogoGlow: boolean
   searchPageShowLogo: boolean
   searchPageSearchBarFocusCharacter: string
   individuallySetSearchPageWallpaper: boolean
