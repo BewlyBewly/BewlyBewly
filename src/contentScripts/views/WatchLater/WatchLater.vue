@@ -231,7 +231,7 @@ function jumpToLoginPage() {
                   <button
                     text="2xl $bew-text-3"
                     hover:color="$bew-theme-color"
-                    opacity="0 group-hover:100"
+                    opacity-0 group-hover:opacity-100
                     p-2
                     duration-300
                     @click.stop="deleteWatchLaterItem(index, item.aid)"

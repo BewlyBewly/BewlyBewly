@@ -7,6 +7,7 @@ import type { HistoryItem } from './types'
 import { HistoryType } from './types'
 import { removeHttpFromUrl } from '~/utils/main'
 import { calcCurrentTime } from '~/utils/dataFormatter'
+
 const { t } = useI18n()
 
 const historys = reactive<Array<HistoryItem>>([])
