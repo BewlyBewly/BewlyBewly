@@ -3,8 +3,10 @@ import { settings } from '~/logic'
 
 const searchBarFocusCharacters = computed<{ name: string; url: string }[]>(() => {
   return [
+    { name: '22 娘', url: 'https://pic.imgdb.cn/item/64d4f8891ddac507cc772ce5.png' },
     { name: '33 娘', url: 'https://cdn.jsdelivr.net/gh/hakadao/bilibili-simple-home@master/img/searchBar_33_2.png' },
-    { name: '33 娘', url: 'https://cdn.jsdelivr.net/gh/hakadao/bilibili-simple-home@master/img/searchBar_33.png' },
+    { name: '22 娘', url: 'https://pic.imgdb.cn/item/64d4fb391ddac507cc7ec5ae.png' },
+    { name: '33 娘', url: 'https://pic.imgdb.cn/item/64d4fd251ddac507cc8458fa.png' },
   ]
 })
 const wallpapers = computed<Array<{ name: string; url: string; thumbnail: string }>>(() => {
@@ -50,7 +52,7 @@ function changeWallpaper(url: string) {
 
 <template>
   <SettingItem :title="$t('settings.logo_color')">
-    <div flex rounded="$bew-radius" bg="$bew-fill-1" p-1>
+    <div w-full flex rounded="$bew-radius" bg="$bew-fill-1" p-1>
       <div
         flex="1 ~" items-center justify-center py-1 cursor-pointer text-center rounded="$bew-radius"
         :style="{
@@ -83,10 +85,10 @@ function changeWallpaper(url: string) {
   </SettingItem>
 
   <SettingItem title="Choose the character displayed when the search bar is focused" next-line>
-    <div grid="~ xl:cols-8 lg:cols-6 cols-4 gap-4">
+    <div grid="~ xl:cols-8 lg:cols-6 cols-5 gap-4">
       <picture
         aspect-square bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
-        un-border="4 transparent" pointer-cursor
+        un-border="4 transparent" cursor-pointer
         grid place-items-center
         :class="{ 'selected-wallpaper': settings.searchPageSearchBarFocusCharacter === '' }"
         @click="changeSearchBarFocusCharacter('')"
@@ -104,6 +106,26 @@ function changeWallpaper(url: string) {
         </picture>
       </Tooltip>
     </div>
+    <!-- <div flex items-center gap-4>
+      <div>
+        <picture
+          aspect-square bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
+          un-border="4 transparent" cursor-pointer shrink-0
+          w="xl:1/8 lg:1/6 md:1/5" p--4
+        >
+          <img
+            v-if="settings.searchPageSearchBarFocusCharacter" :src="settings.searchPageSearchBarFocusCharacter" alt="" w-full h-full object-contain
+            onerror="this.style.display='none'; this.onerror=null;"
+          >
+        </picture>
+      </div>
+      <div>
+        <Input v-model:value="settings.searchPageSearchBarFocusCharacter" w-full />
+        <p color="sm $bew-text-3" mt-2>
+          {{ $t('settings.image_url_hint') }}
+        </p>
+      </div>
+    </div> -->
   </SettingItem>
 
   <SettingItem :title="$t('settings.individually_set_search_page_wallpaper')">
@@ -115,7 +137,7 @@ function changeWallpaper(url: string) {
   </SettingItem>
   <template v-if="settings.individuallySetSearchPageWallpaper">
     <SettingItem :title="$t('settings.wallpaper_mode')" :desc="$t('settings.wallpaper_mode_desc')">
-      <div flex rounded="$bew-radius" bg="$bew-fill-1" p-1>
+      <div w-full flex rounded="$bew-radius" bg="$bew-fill-1" p-1>
         <div
           flex-1 py-1 cursor-pointer text-center rounded="$bew-radius"
           :style="{
@@ -143,7 +165,7 @@ function changeWallpaper(url: string) {
       <div grid="~ xl:cols-4 lg:cols-3 cols-2  gap-4">
         <picture
           aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
-          un-border="4 transparent" pointer-cursor
+          un-border="4 transparent" cursor-pointer
           grid place-items-center
           :class="{ 'selected-wallpaper': settings.searchPageWallpaper === '' }"
           @click="changeWallpaper('')"
@@ -166,7 +188,7 @@ function changeWallpaper(url: string) {
       <div flex items-center gap-4>
         <picture
           aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
-          un-border="4 transparent" pointer-cursor shrink-0
+          un-border="4 transparent" cursor-pointer shrink-0
           w="xl:1/4 lg:1/3 md:1/2"
         >
           <img v-if="settings.searchPageWallpaper" :src="settings.searchPageWallpaper" alt="" w-full h-full object-cover onerror="this.style.display='none'; this.onerror=null;">

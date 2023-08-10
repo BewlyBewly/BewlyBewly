@@ -86,7 +86,7 @@ function changeWallpaper(url: string) {
     />
   </SettingItem>
   <SettingItem :title="$t('settings.wallpaper_mode')" :desc="$t('settings.wallpaper_mode_desc')">
-    <div flex rounded="$bew-radius" bg="$bew-fill-1" p-1>
+    <div w-full flex rounded="$bew-radius" bg="$bew-fill-1" p-1>
       <div
         flex-1 py-1 cursor-pointer text-center rounded="$bew-radius"
         :style="{
@@ -114,7 +114,7 @@ function changeWallpaper(url: string) {
     <div grid="~ xl:cols-4 lg:cols-3 cols-2  gap-4">
       <picture
         aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
-        un-border="4 transparent" pointer-cursor
+        un-border="4 transparent" cursor-pointer
         grid place-items-center
         :class="{ 'selected-wallpaper': settings.wallpaper === '' }"
         @click="changeWallpaper('')"
@@ -137,7 +137,7 @@ function changeWallpaper(url: string) {
     <div flex items-center gap-4>
       <picture
         aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
-        un-border="4 transparent" pointer-cursor shrink-0
+        un-border="4 transparent" cursor-pointer shrink-0
         w="xl:1/4 lg:1/3 md:1/2"
       >
         <img v-if="settings.wallpaper" :src="settings.wallpaper" alt="" w-full h-full object-cover onerror="this.style.display='none'; this.onerror=null;">

@@ -19,6 +19,7 @@ onMounted(() => {
 
 <template>
   <label cursor="pointer" pointer="auto" flex items-center gap-3>
+    <span>{{ label }}</span>
     <input v-model="modelValue" type="checkbox" hidden>
     <span
       inline-block w="$b-button-width" h="$b-button-height" bg="$bew-fill-1" rounded="[calc(var(--b-button-height)/2)]"
@@ -28,7 +29,6 @@ onMounted(() => {
       after:border="size-$b-border-width color-$bew-border-color"
       after:pos="absolute top-[calc(0px-var(--b-border-width)/2)]"
     />
-    <span>{{ label }}</span>
   </label>
 </template>
 

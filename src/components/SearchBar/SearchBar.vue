@@ -236,7 +236,7 @@ function handleKeyDown() {
 <style lang="scss" scoped>
 .result-list-enter-active,
 .result-list-leave-active {
-  --at-apply: transition-all duration-300
+  --at-apply: transition-all duration-300 ease-in-out;
 }
 
 .result-list-enter-from,

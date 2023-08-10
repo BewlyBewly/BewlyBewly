@@ -19,7 +19,7 @@ function handleRevoke() {
 
 <template>
   <SettingItem :title="$t('settings.recommendation_mode')" :desc="$t('settings.recommendation_mode_desc')">
-    <div flex rounded="$bew-radius" bg="$bew-fill-1" p-1>
+    <div w-full flex rounded="$bew-radius" bg="$bew-fill-1" p-1>
       <div
         flex-1 py-1 cursor-pointer text-center rounded="$bew-radius"
         :style="{
@@ -52,7 +52,7 @@ function handleRevoke() {
       >{{ $t('settings.authorize_app_more_info_access_key') }}</a>
     </template>
 
-    <div>
+    <div w-full>
       <button
         v-if="!accessKey"
         ref="authorizeBtn"

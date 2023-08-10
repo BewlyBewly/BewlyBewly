@@ -9,7 +9,7 @@ defineProps<{
 <template>
   <div>
     <div flex="~ gap-4" justify-betwee items-center py-2 text-base>
-      <div w="5/7">
+      <div :w="nextLine ? 'full' : '5/7'">
         {{ title }}
         <br>
         <span text="sm $bew-text-3">
@@ -19,7 +19,7 @@ defineProps<{
         </span>
       </div>
 
-      <div v-if="!nextLine" w="2/7">
+      <div v-if="!nextLine" w="2/7" class="right-content">
         <slot />
       </div>
     </div>
@@ -28,4 +28,7 @@ defineProps<{
 </template>
 
 <style lang="scss" scoped>
+:deep(.right-content > *) {
+  --at-apply: float-right clear-both;
+}
 </style>

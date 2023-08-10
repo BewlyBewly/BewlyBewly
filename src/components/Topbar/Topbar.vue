@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Ref, UnwrapNestedRefs } from 'vue'
-import { Transition, onMounted, watch } from 'vue'
+import { onMounted, watch } from 'vue'
 import type { UnReadDm, UnReadMessage, UserInfo } from './types'
 import { updateInterval } from './notify'
 import { getUserID } from '~/utils/main'
@@ -127,24 +127,31 @@ async function getUnreadMessageCount() {
     res = await browser.runtime.sendMessage({
       contentScriptQuery: 'getUnreadMsg',
     })
-    Object.assign(unReadMessage, res.data)
+    if (res.code === 0)
+      Object.assign(unReadMessage, res.data)
 
     res = await browser.runtime.sendMessage({
       contentScriptQuery: 'getUnreadDm',
     })
-    Object.assign(unReadDm, res.data)
+    if (res.code === 0)
+      Object.assign(unReadDm, res.data)
 
     unReadMessageCount.value = 0
 
-    Object.keys(unReadMessage).forEach((key) => {
-      if (key !== 'up') {
-        unReadMessageCount.value
+    if (Object.keys(unReadMessage).length > 0) {
+      Object.keys(unReadMessage).forEach((key) => {
+        if (key !== 'up') {
+          unReadMessageCount.value
           += typeof unReadMessage[key as keyof typeof unReadMessage] === 'number' ? unReadMessage[key as keyof typeof unReadMessage] : 0
-      }
-    })
-    Object.keys(unReadDm).forEach((key) => {
-      unReadMessageCount.value += typeof unReadDm[key as keyof typeof unReadDm] === 'number' ? unReadDm[key as keyof typeof unReadDm] : 0
-    })
+        }
+      })
+    }
+
+    if (Object.keys(unReadDm).length > 0) {
+      Object.keys(unReadDm).forEach((key) => {
+        unReadMessageCount.value += typeof unReadDm[key as keyof typeof unReadDm] === 'number' ? unReadDm[key as keyof typeof unReadDm] : 0
+      })
+    }
   }
   catch (error) {
     unReadMessageCount.value = 0
