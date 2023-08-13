@@ -61,7 +61,7 @@ function changeWallpaper(url: string) {
 
 <template>
   <SettingItem :title="$t('settings.theme_color')">
-    <div flex="~ gap-2 wrap">
+    <div flex="~ gap-2 wrap" justify-end>
       <div
         v-for="color in themeColorOptions" :key="color"
         w-20px h-20px rounded-8 cursor-pointer transition duration-300

@@ -74,7 +74,7 @@ function setCurrentTitle() {
 
   <div
     id="settings-window" pos="fixed md:top-1/5 top-0 left-1/2" w="full lg:2/3 md:2/3" h="full md:1/2"
-    max-w-850px transform="~ translate-x--1/2"
+    max-w-820px transform="~ translate-x--1/2"
     z-9999 flex justify-between items-center
   >
     <aside class="group" shrink-0 p="x-2 md:x-4" pos="absolute left-0 md:left--42px" z-2>
