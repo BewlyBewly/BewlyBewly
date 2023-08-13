@@ -18,7 +18,7 @@ const modelValue = ref<number>(props.value)
 const rangeRef = ref<HTMLElement>() as Ref<HTMLElement>
 
 onMounted(() => {
-  modelValue.value = props.value ?? 0
+  modelValue.value = props.value
   const progress = (modelValue.value / rangeRef.value!.max) * 100
 
   rangeRef.value.style.background = `linear-gradient(to right, var(--bew-theme-color) ${progress}%, var(--bew-fill-1) ${progress}%) no-repeat`
@@ -26,7 +26,7 @@ onMounted(() => {
   if (rangeRef.value) {
     rangeRef.value.addEventListener('input', (event: Event) => {
       const tempSliderValue = event.target!.value
-      emit('update:value', Number(tempSliderValue))
+      emit('update:value', tempSliderValue)
 
       const progress = (tempSliderValue / rangeRef.value!.max) * 100
 
@@ -59,7 +59,7 @@ label {
 input[type="range"] {
   &::-webkit-slider-thumb {
     --at-apply: appearance-none w-$b-thumb-height h-$b-thumb-height bg-white rounded-$b-thumb-height
-      border-2 border-$bew-border-color cursor-pointer duration-300;
+      border-2 border-$bew-border-color cursor-pointer;
   }
 
   &::-webkit-slider-thumb:hover {
@@ -68,7 +68,7 @@ input[type="range"] {
 
   &::-moz-range-thumb {
     --at-apply: appearance-none w-$b-thumb-height h-$b-thumb-height bg-white rounded-$b-thumb-height
-      border-2 border-$bew-border-color cursor-pointer duration-300;
+      border-2 border-$bew-border-color cursor-pointer;
   }
 
   &::-moz-range-thumb:hover {

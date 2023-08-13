@@ -1,17 +1,17 @@
 <script lang="ts" setup>
 type Size = 'small' | 'medium' | 'large'
 interface Props {
-  value: string
+  modelValue: string
   size?: Size
 }
 const props = withDefaults(defineProps<Props>(), { size: 'medium' })
 
-defineEmits(['update:value'])
+defineEmits(['update:modelValue'])
 
 const modelValue = ref<string>('')
 
 onMounted(() => {
-  modelValue.value = props.value
+  modelValue.value = props.modelValue
 })
 </script>
 
@@ -22,8 +22,7 @@ onMounted(() => {
     rounded="$bew-radius" outline-none transition-all duration-300
     bg="$bew-fill-1"
     focus:shadow focus:ring="2px $bew-theme-color"
-
-    @input="$emit('update:value', $event!.target!.value)"
+    @input="$emit('update:modelValue', $event!.target!.value)"
   >
 </template>
 

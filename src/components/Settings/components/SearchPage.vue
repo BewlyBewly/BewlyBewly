@@ -77,15 +77,15 @@ function changeWallpaper(url: string) {
   </SettingItem>
 
   <SettingItem title="Enable glowing effect for the logo">
-    <Radio v-model:value="settings.searchPageLogoGlow" />
+    <Radio v-model="settings.searchPageLogoGlow" />
   </SettingItem>
 
   <SettingItem :title="$t('settings.logo_visibility')">
-    <Radio v-model:value="settings.searchPageShowLogo" />
+    <Radio v-model="settings.searchPageShowLogo" />
   </SettingItem>
 
   <SettingItem :title="$t('settings.bg_darkens_when_the_search_bar_is_focused')">
-    <Radio v-model:value="settings.searchPageDarkenOnSearchFocus" />
+    <Radio v-model="settings.searchPageDarkenOnSearchFocus" />
   </SettingItem>
 
   <SettingItem title="Choose the character displayed when the search bar is focused" next-line>
@@ -137,7 +137,7 @@ function changeWallpaper(url: string) {
       <span color="$bew-warning-color">{{ $t('common.performance_impact_warn') }}</span>
     </template>
 
-    <Radio v-model:value="settings.individuallySetSearchPageWallpaper" />
+    <Radio v-model="settings.individuallySetSearchPageWallpaper" />
   </SettingItem>
   <template v-if="settings.individuallySetSearchPageWallpaper">
     <SettingItem :title="$t('settings.wallpaper_mode')" :desc="$t('settings.wallpaper_mode_desc')">
@@ -211,7 +211,7 @@ function changeWallpaper(url: string) {
         <span color="$bew-warning-color">{{ $t('common.performance_impact_warn') }}</span>
       </template>
 
-      <Radio v-model:value="settings.searchPageEnableWallpaperMasking" />
+      <Radio v-model="settings.searchPageEnableWallpaperMasking" />
     </SettingItem>
     <SettingItem v-if="settings.searchPageEnableWallpaperMasking" :title="$t('settings.wallpaper_mask_opacity')">
       <Slider v-model:value="settings.searchPageWallpaperMaskOpacity" :label="`${settings.searchPageWallpaperMaskOpacity ?? 0}%`" />

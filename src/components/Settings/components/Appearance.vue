@@ -143,7 +143,7 @@ function changeWallpaper(url: string) {
         <img v-if="settings.wallpaper" :src="settings.wallpaper" alt="" w-full h-full object-cover onerror="this.style.display='none'; this.onerror=null;">
       </picture>
       <div>
-        <Input v-model:value="settings.wallpaper" w-full />
+        <Input v-model="settings.wallpaper" w-full />
         <p color="sm $bew-text-3" mt-2>
           {{ $t('settings.image_url_hint') }}
         </p>
@@ -156,7 +156,7 @@ function changeWallpaper(url: string) {
       <span color="$bew-warning-color">{{ $t('common.performance_impact_warn') }}</span>
     </template>
 
-    <Radio v-model:value="settings.enableWallpaperMasking" />
+    <Radio v-model="settings.enableWallpaperMasking" />
   </SettingItem>
   <SettingItem v-if="settings.enableWallpaperMasking" :title="$t('settings.wallpaper_mask_opacity')">
     <Slider v-model:value="settings.wallpaperMaskOpacity" :label="`${settings.wallpaperMaskOpacity}%`" />

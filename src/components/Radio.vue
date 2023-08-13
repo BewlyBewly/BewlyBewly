@@ -1,19 +1,19 @@
 <script lang="ts" setup>
 const props = defineProps<{
-  value: boolean
+  modelValue: boolean
   label?: string
 }>()
 
-const emit = defineEmits(['update:value'])
+const emit = defineEmits(['update:modelValue'])
 
 const modelValue = ref<boolean>()
 
 watch(() => modelValue.value, (newValue) => {
-  emit('update:value', newValue)
+  emit('update:modelValue', newValue)
 })
 
 onMounted(() => {
-  modelValue.value = props.value
+  modelValue.value = props.modelValue
 })
 </script>
 
