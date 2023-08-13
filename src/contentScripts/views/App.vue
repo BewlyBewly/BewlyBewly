@@ -308,13 +308,13 @@ function setAppWallpaperMaskingOpacity() {
               </button>
             </Tooltip>
 
-            <!-- <div
-            class="dock-item"
-            :class="{ active: activatedPage === AppPage.Favorites }"
-            @click="changeActivatePage(AppPage.Favorites)"
-          >
-            <tabler:star />
-          </div> -->
+            <div
+              class="dock-item"
+              :class="{ active: activatedPage === AppPage.Favorites }"
+              @click="changeActivatePage(AppPage.Favorites)"
+            >
+              <tabler:star />
+            </div>
 
             <template v-if="isVideoPage">
               <!-- dividing line -->

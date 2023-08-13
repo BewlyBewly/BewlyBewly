@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { Ref } from 'vue'
-import { TransitionGroup, onMounted, reactive, ref, watch } from 'vue'
-import type { FavoriteCategory, FavoriteResource } from './types'
-import { getUserID, removeHttpFromUrl } from '~/utils/main'
-import { calcCurrentTime } from '~/utils/dataFormatter'
+import { useI18n } from 'vue-i18n'
+import { getCSRF, getUserID, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
+import type { FavoriteCategory, FavoriteResource } from '~/components/Topbar/types'
+
+const { t } = useI18n()
 
 const favoriteCategories = reactive<Array<FavoriteCategory>>([])
 const favoriteResources = reactive<Array<FavoriteResource>>([])
@@ -13,24 +13,16 @@ const activatedFavoriteTitle = ref<string>()
 const currentPageNum = ref<number>(1)
 const keyword = ref<string>()
 
-const isLoading = ref<boolean>(false)
-// when noMoreContent is true, the user can't scroll down to load more content
-const noMoreContent = ref<boolean>(false)
-const favoriteVideosWrap = ref<HTMLElement>() as Ref<HTMLElement>
-
-const favoritesPageUrl = computed(() => {
-  return `//space.bilibili.com/${getUserID()}/favlist?fid=${
-    activatedMediaId.value
-  }`
-})
+const isLoading = ref<boolean>()
+const noMoreContent = ref<boolean>()
 
 watch(activatedMediaId, (newVal: number, oldVal: number) => {
   if (newVal === oldVal)
     return
 
   favoriteResources.length = 0
-  if (favoriteVideosWrap.value)
-    scrollToTop(favoriteVideosWrap.value, 300)
+  // if (favoriteVideosWrap.value)
+  //   scrollToTop(favoriteVideosWrap.value, 300)
 
   getFavoriteResources(newVal, 1)
 })
@@ -39,29 +31,26 @@ onMounted(async () => {
   await getFavoriteCategories()
   activatedMediaId.value = favoriteCategories[0].id
   activatedFavoriteTitle.value = favoriteCategories[0].title
-  getFavoriteResources(
-    activatedMediaId.value,
-    currentPageNum.value++,
-    keyword.value,
-  )
-
-  // if (favoriteVideosWrap.value) {
-  //   favoriteVideosWrap.value.addEventListener('scroll', () => {
-  //     // When you scroll to the bottom, they will automatically
-  //     // add the next page of data to the history list
-  //     if (
-  //       favoriteVideosWrap.value.clientHeight
-  //         + favoriteVideosWrap.value.scrollTop
-  //         >= favoriteVideosWrap.value.scrollHeight - 20
-  //       && favoriteResources.length > 0
-  //       && !isLoading.value
-  //     ) {
-  //       if (activatedMediaId.value && !noMoreContent.value)
-  //         getFavoriteResources(activatedMediaId.value, currentPageNum.value++)
-  //     }
-  //   })
-  // }
+  // getFavoriteResources()
 })
+
+/**
+ * Get watch later list
+ */
+// function getAllWatchLaterList() {
+//   isLoading.value = true
+//   watchLaterList.length = 0
+//   browser.runtime
+//     .sendMessage({
+//       contentScriptQuery: 'getAllWatchLaterList',
+//     })
+//     .then((res) => {
+//       if (res.code === 0)
+//         Object.assign(watchLaterList, res.data.list)
+
+//       isLoading.value = false
+//     })
+// }
 
 async function getFavoriteCategories() {
   await browser.runtime
@@ -117,189 +106,115 @@ function getFavoriteResources(
     })
 }
 
+function deleteWatchLaterItem(index: number, aid: number) {
+  // browser.runtime
+  //   .sendMessage({
+  //     contentScriptQuery: 'removeFromWatchLater',
+  //     aid,
+  //     csrf: getCSRF(),
+  //   })
+  //   .then((res) => {
+  //     if (res.code === 0)
+  //       watchLaterList.splice(index, 1)
+  //   })
+}
+
 function changeCategory(categoryItem: FavoriteCategory) {
   activatedMediaId.value = categoryItem.id
   activatedFavoriteTitle.value = categoryItem.title
 }
 
-/**
- * smooth scroll to the top of the html element
- */
-function scrollToTop(element: HTMLElement, duration: number) {
-  // cancel if already on top
-  if (element.scrollTop === 0)
-    return
+function handlePlayAll() {
+  openLinkToNewTab('https://www.bilibili.com/list/watchlater')
+}
 
-  const cosParameter = element.scrollTop / 2
-  let scrollCount = 0
-  let oldTimestamp = 0
-
-  function step(newTimestamp: number) {
-    if (oldTimestamp !== 0) {
-      // if duration is 0 scrollCount will be Infinity
-      scrollCount += (Math.PI * (newTimestamp - oldTimestamp)) / duration
-      if (scrollCount >= Math.PI)
-        return (element.scrollTop = 0)
-      element.scrollTop = cosParameter + cosParameter * Math.cos(scrollCount)
-    }
-    oldTimestamp = newTimestamp
-    window.requestAnimationFrame(step)
-  }
-  window.requestAnimationFrame(step)
+function jumpToLoginPage() {
+  location.href = 'https://passport.bilibili.com/login'
 }
 </script>
 
 <template>
-  <div
-    bg="$bew-content-solid-1"
-    w="500px"
-    h="430px"
-    rounded="$bew-radius"
-    pos="relative"
-    style="box-shadow: var(--bew-shadow-2)"
-  >
-    <!-- top bar -->
-    <header
-      flex="~"
-      justify="between"
-      p="y-4 x-6"
-      pos="fixed top-0 left-0"
-      w="full"
-      bg="$bew-content-1"
-      z="2"
-      un-border="!rounded-t-$bew-radius"
-      backdrop-glass
-    >
-      <h3 cursor="pointer" font-600 @click="scrollToTop(favoriteVideosWrap, 300)">
+  <div v-if="getCSRF()" flex="~ col md:row lg:row" gap-4>
+    <main w="full md:60% lg:70% xl:75%" order="2 md:1 lg:1" mb-6>
+      <h3 text="3xl $bew-text-1" font-bold mb-6>
         {{ activatedFavoriteTitle }}
       </h3>
-
-      <a :href="favoritesPageUrl" target="_blank" flex="~" items="center">
-        <span text="sm">{{ $t('common.view_all') }}</span>
-      </a>
-    </header>
-
-    <main flex="~" overflow-hidden rounded="$bew-radius">
-      <aside
-        w="120px"
-        h="430px"
-        overflow="y-scroll"
-        un-border="rounded-l-$bew-radius"
-        flex="shrink-0"
-      >
-        <ul grid="~ cols-1" bg="$bew-fill-2">
-          <li
-            v-for="item in favoriteCategories"
-            :key="item.id"
-            :class="activatedMediaId === item.id ? 'activated-category' : ''"
-            p="y-2 x-6"
-            first:m="t-[45.5px]"
-            cursor="pointer"
-            transition="~ duration-300"
-            @click="changeCategory(item)"
-          >
-            {{ item.title }}
-          </li>
-        </ul>
-      </aside>
-
-      <!-- Favorite videos wrapper -->
-      <div
-        ref="favoriteVideosWrap"
-        flex="~ col gap-4 1"
-        h="430px"
-        overflow="y-scroll"
-        p="x-4"
-        pos="relative"
-      >
-        <!-- loading -->
-        <Loading
-          v-if="isLoading && favoriteResources.length === 0"
-          pos="absolute left-0"
-          bg="$bew-content-1"
-          z="1"
-          w="full"
-          h="full"
-          flex="~"
-          items="center"
-          rounded="$bew-radius"
-        />
-
-        <!-- empty -->
-        <Empty
-          v-if="!isLoading && favoriteResources.length === 0"
-          w="full"
-          h="full"
-        />
-
-        <!-- historys -->
-        <TransitionGroup name="list">
-          <a
-            v-for="item in favoriteResources"
-            :key="item.id"
-            :href="`//www.bilibili.com/video/${item.bvid}`"
-            target="_blank"
-            hover:bg="$bew-fill-2"
-            rounded="$bew-radius"
-            p="2"
-            m="first:t-50px last:b-4"
-            class="group"
-            transition="~ duration-300"
-          >
-            <section flex="~ gap-4" item-start>
-              <div
-                bg="$bew-fill-1"
-                w="150px"
-                flex="shrink-0"
-                rounded="$bew-radius-half"
-                overflow="hidden"
-              >
-                <div pos="relative">
-                  <img
-                    w="150px"
-                    class="aspect-video"
-                    :src="`${removeHttpFromUrl(item.cover)}@256w_144h_1c`"
-                    :alt="item.title"
-                    bg="contain"
-                  >
-                  <div
-                    pos="absolute bottom-0 right-0"
-                    bg="black opacity-60"
-                    m="1"
-                    p="x-2 y-1"
-                    text="white xs"
-                    rounded-full
-                  >
-                    {{ calcCurrentTime(item.duration) }}
-                  </div>
-                </div>
-              </div>
-
-              <!-- Description -->
-              <div>
-                <h3
-                  class="keep-two-lines"
-                >
-                  {{ item.title }}
-                </h3>
-                <div
-                  text="$bew-text-2 sm"
-                  m="t-4"
-                  flex="~"
-                  items-center
-                >
-                  {{ item.upper.name }}
-                </div>
-              </div>
-            </section>
-          </a>
-        </TransitionGroup>
+      <Empty v-if="favoriteResources.length === 0 && !isLoading" />
+      <template v-else>
+        <!-- favorite list -->
+        <div grid="~ 2xl:cols-4 xl:cols-3 lg:cols-2 md:cols-2 gap-4">
+          <VideoCard
+            v-for="item in favoriteResources" :id="item.id" :key="item.id"
+            :item="item"
+            :duration="item.duration"
+            :title="item.title"
+            :cover="item.cover"
+            :author="item.upper.name"
+            :author-face="item.upper.face"
+            :mid="item.upper.mid"
+            :published-timestamp="item.pubtime"
+            :bvid="item.bvid"
+          />
+        </div>
 
         <!-- loading -->
-        <Loading v-if="isLoading && favoriteResources.length !== 0" m="-t-4" />
-      </div>
+        <Transition name="fade">
+          <loading
+            v-if="isLoading && favoriteResources.length !== 0 && !noMoreContent"
+            m="-t-4"
+          />
+        </Transition>
+      </template>
     </main>
+
+    <aside relative w="full md:40% lg:30% xl:25%" order="1 md:2 lg:2">
+      <div
+        pos="sticky top-120px" flex="~ col gap-4" justify-start my-10 w-full h="auto md:[calc(100vh-160px)]" p-6
+        rounded="$bew-radius" overflow-hidden bg="$bew-fill-3"
+      >
+        <picture
+          rounded="$bew-radius" style="box-shadow: 0 16px 24px -12px rgba(0, 0, 0, .36)"
+          aspect-video mb-4 bg="$bew-fill-2"
+        >
+          <img
+            v-if="favoriteResources[0]" :src="removeHttpFromUrl(`${favoriteResources[0].cover}@480w_270h_1c`)"
+            rounded="$bew-radius" aspect-video w-full
+          >
+        </picture>
+
+        <h3 text="3xl white" fw-600 style="text-shadow: 0 0 12px rgba(0,0,0,.3)">
+          {{ activatedFavoriteTitle }}
+        </h3>
+        <p v-if="favoriteResources.length > 0" flex="~ col" gap-4>
+          <Button
+            color="rgba(255,255,255,.35)" text-color="white" strong flex-1
+            @click="handlePlayAll"
+          >
+            <template #left>
+              <tabler:player-play />
+            </template>
+            {{ t('watch_later.play_all') }}
+          </Button>
+        </p>
+        <div
+          v-if="favoriteResources[0]"
+          pos="absolute top-0 left-0" w-full h-full bg-cover bg-center z--1
+        >
+          <div absolute w-full h-full style="backdrop-filter: blur(60px) saturate(180%)" bg="$bew-fill-1" />
+          <img
+            v-if="favoriteResources[0]"
+            :src="removeHttpFromUrl(`${favoriteResources[0].cover}@480w_270h_1c`)"
+            w-full h-full object="cover center"
+          >
+        </div>
+      </div>
+    </aside>
   </div>
+  <Empty v-else mt-6 :description="t('common.please_log_in_first')">
+    <Button type="primary" @click="jumpToLoginPage()">
+      {{ $t('common.login') }}
+    </Button>
+  </Empty>
 </template>
 
 <style lang="scss" scoped>
@@ -310,9 +225,5 @@ function scrollToTop(element: HTMLElement, duration: number) {
 .list-enter-from,
 .list-leave-to {
   --at-apply: opacity-0 transform translate-y-2 transform-gpu;
-}
-
-.activated-category {
-  --at-apply: bg-$bew-theme-color text-white;
 }
 </style>
