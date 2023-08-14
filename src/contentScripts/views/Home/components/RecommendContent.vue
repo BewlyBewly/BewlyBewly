@@ -14,7 +14,9 @@ let refreshIdx = 1
 watch(() => settings.value.recommendationMode, (newValue, oldValue) => {
   videoList.length = 0
   appVideoList.length = 0
-  if (newValue === 'web') { getRecommendVideos() }
+  if (newValue === 'web') {
+    getRecommendVideos()
+  }
   else {
     for (let i = 0; i < 3; i++)
       getAppRecommendVideos()
@@ -25,23 +27,25 @@ onMounted(async () => {
   // Delay by 0.2 seconds to obtain the `settings.value.recommendationMode` value
   // otherwise the `settings.value.recommendationMode` value will be undefined
   // i have no idea to fix that...
-  setTimeout(() => {
-    if (settings.value.recommendationMode === 'web') { getRecommendVideos() }
+  setTimeout(async () => {
+    if (settings.value.recommendationMode === 'web') {
+      getRecommendVideos()
+    }
     else {
       for (let i = 0; i < 3; i++)
-        getAppRecommendVideos()
+        await getAppRecommendVideos()
     }
   }, 200)
 
   emitter.off('reachBottom')
-  emitter.on('reachBottom', () => {
+  emitter.on('reachBottom', async () => {
     if (!isLoading.value) {
       if (settings.value.recommendationMode === 'web') {
         getRecommendVideos()
       }
       else {
-        // for (let i = 0; i < 3; i++)
-        getAppRecommendVideos()
+        for (let i = 0; i < 3; i++)
+          await getAppRecommendVideos()
       }
     }
   })
@@ -133,7 +137,7 @@ function jumpToLoginPage() {
     v-else
     ref="containerRef"
     m="b-0 t-0"
-    grid="~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-4"
+    grid="~ 3xl:cols-5 2xl:cols-4 xl:cols-3 lg:cols-2 md:cols-2 gap-4"
   >
     <template v-if="settings.recommendationMode === 'web'">
       <VideoCard
@@ -171,7 +175,7 @@ function jumpToLoginPage() {
     </template>
 
     <!-- skeleton -->
-    <template v-for="item in (settings.recommendationMode === 'web' ? 30 : 10)" :key="item">
+    <template v-for="item in (settings.recommendationMode === 'web' ? 30 : 30)" :key="item">
       <div
         v-if="isLoading"
         mb-8 pointer-events-none select-none
