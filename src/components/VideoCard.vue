@@ -155,7 +155,13 @@ function toggleWatchLater() {
     </div>
 
     <div>
-      <div w="full" relative bg="$bew-fill-4" rounded="$bew-radius" cursor-pointer @click.stop="openLinkToNewTab(videoUrl)">
+      <div
+        w="full" relative bg="$bew-fill-4" rounded="$bew-radius" cursor-pointer group-hover:shadow
+        group-hover:transform="translate--4px"
+        style="--un-shadow: 6px 6px 0 0 var(--bew-theme-color-60), 12px 12px 0 0 var(--bew-theme-color-40)"
+        transition="all ease-in-out 300" group-hover:z-2
+        @click.stop="openLinkToNewTab(videoUrl)"
+      >
         <!-- Video duration -->
         <div
           v-if="duration"
