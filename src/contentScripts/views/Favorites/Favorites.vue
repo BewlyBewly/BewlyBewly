@@ -8,7 +8,7 @@ const { t } = useI18n()
 const favoriteCategories = reactive<Array<FavoriteCategory>>([])
 const favoriteResources = reactive<Array<FavoriteResource>>([])
 
-const activatedMediaId = ref<number>(0)
+const activatedCategoryId = ref<number>(0)
 const activatedFavoriteTitle = ref<string>()
 const currentPageNum = ref<number>(1)
 const keyword = ref<string>()
@@ -16,7 +16,7 @@ const keyword = ref<string>()
 const isLoading = ref<boolean>()
 const noMoreContent = ref<boolean>()
 
-watch(activatedMediaId, (newVal: number, oldVal: number) => {
+watch(activatedCategoryId, (newVal: number, oldVal: number) => {
   if (newVal === oldVal)
     return
 
@@ -29,7 +29,7 @@ watch(activatedMediaId, (newVal: number, oldVal: number) => {
 
 onMounted(async () => {
   await getFavoriteCategories()
-  activatedMediaId.value = favoriteCategories[0].id
+  activatedCategoryId.value = favoriteCategories[0].id
   activatedFavoriteTitle.value = favoriteCategories[0].title
   // getFavoriteResources()
 })
@@ -120,7 +120,7 @@ function deleteWatchLaterItem(index: number, aid: number) {
 }
 
 function changeCategory(categoryItem: FavoriteCategory) {
-  activatedMediaId.value = categoryItem.id
+  activatedCategoryId.value = categoryItem.id
   activatedFavoriteTitle.value = categoryItem.title
 }
 
@@ -134,11 +134,21 @@ function jumpToLoginPage() {
 </script>
 
 <template>
-  <div v-if="getCSRF()" flex="~ col md:row lg:row" gap-4>
-    <main w="full md:60% lg:70% xl:75%" order="2 md:1 lg:1" mb-6>
+  <div v-if="getCSRF()" flex="~ col md:row lg:row" gap-6>
+    <main w="full md:60% lg:70% xl:75%" order="2 md:1 lg:1" mb-6 relative>
       <h3 text="3xl $bew-text-1" font-bold mb-6>
         {{ activatedFavoriteTitle }}
       </h3>
+      <!-- <div
+        fixed z-10 absolute h-60px px-4 flex items-center backdrop-glass
+        bg="$bew-content-1"
+      >
+        <h3
+          text="3xl $bew-text-1" font-bold
+        >
+          {{ activatedFavoriteTitle }}
+        </h3>
+      </div> -->
       <Empty v-if="favoriteResources.length === 0 && !isLoading" />
       <template v-else>
         <!-- favorite list -->
@@ -178,14 +188,17 @@ function jumpToLoginPage() {
         >
           <img
             v-if="favoriteResources[0]" :src="removeHttpFromUrl(`${favoriteResources[0].cover}@480w_270h_1c`)"
-            rounded="$bew-radius" aspect-video w-full
+            rounded="$bew-radius" aspect-video w-full object-cover
           >
+          <div v-else aspect-video w-full>
+            <!-- <Empty /> -->
+          </div>
         </picture>
 
         <h3 text="3xl white" fw-600 style="text-shadow: 0 0 12px rgba(0,0,0,.3)">
           {{ activatedFavoriteTitle }}
         </h3>
-        <p v-if="favoriteResources.length > 0" flex="~ col" gap-4>
+        <p flex="~ col" gap-4>
           <Button
             color="rgba(255,255,255,.35)" text-color="white" strong flex-1
             @click="handlePlayAll"
@@ -196,6 +209,22 @@ function jumpToLoginPage() {
             {{ t('watch_later.play_all') }}
           </Button>
         </p>
+        <ul h-full overflow-overlay border-t="1 color-[rgba(255,255,255,.2)]" border-b="1 color-[rgba(255,255,255,.2)]">
+          <li
+            v-for="item in favoriteCategories" :key="item.id"
+            flex items-center
+            border-b="1 color-[rgba(255,255,255,.2)]"
+            h-30px px-4 cursor-pointer hover:bg="[rgba(255,255,255,.35)]"
+            duration-300 color-white
+            :style="{ background: item.id === activatedCategoryId ? 'rgba(255,255,255,.35)' : '' }"
+            @click="() => {
+              activatedCategoryId = item.id
+              activatedFavoriteTitle = item.title
+            }"
+          >
+            {{ item.title }}
+          </li>
+        </ul>
         <div
           v-if="favoriteResources[0]"
           pos="absolute top-0 left-0" w-full h-full bg-cover bg-center z--1
