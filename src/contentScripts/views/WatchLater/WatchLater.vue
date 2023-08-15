@@ -305,7 +305,7 @@ function jumpToLoginPage() {
           v-if="watchLaterList[0]"
           pos="absolute top-0 left-0" w-full h-full bg-cover bg-center z--1
         >
-          <div absolute w-full h-full style="backdrop-filter: blur(60px) saturate(180%)" bg="$bew-fill-1" />
+          <div absolute w-full h-full style="backdrop-filter: blur(60px) saturate(180%)" bg="$bew-fill-4" />
           <img
             v-if="watchLaterList[0]"
             :src="removeHttpFromUrl(`${watchLaterList[0].pic}@480w_270h_1c`)"
