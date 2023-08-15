@@ -9,24 +9,13 @@ const { t } = useI18n()
 const favoriteCategories = reactive<Array<FavoriteCategory>>([])
 const favoriteResources = reactive<Array<FavoriteResource>>([])
 
-const activatedCategoryId = ref<number>(0)
-const activatedFavoriteTitle = ref<string>()
+const selectedCategory = ref<FavoriteCategory>()
+
 const currentPageNum = ref<number>(1)
-const keyword = ref<string>()
+const keyword = ref<string>('')
 
 const isLoading = ref<boolean>()
 const noMoreContent = ref<boolean>()
-
-watch(activatedCategoryId, (newVal: number, oldVal: number) => {
-  if (newVal === oldVal)
-    return
-
-  favoriteResources.length = 0
-  // if (favoriteVideosWrap.value)
-  //   scrollToTop(favoriteVideosWrap.value, 300)
-
-  getFavoriteResources(newVal, 1)
-})
 
 onMounted(async () => {
   await getFavoriteCategories()
@@ -38,7 +27,7 @@ onMounted(async () => {
       return
 
     if (!noMoreContent.value)
-      getFavoriteResources(activatedCategoryId.value, ++currentPageNum.value, keyword.value)
+      getFavoriteResources(selectedCategory.value!.id, ++currentPageNum.value, keyword.value)
   })
 })
 
@@ -118,27 +107,22 @@ function getFavoriteResources(
     })
 }
 
-function deleteWatchLaterItem(index: number, aid: number) {
-  // browser.runtime
-  //   .sendMessage({
-  //     contentScriptQuery: 'removeFromWatchLater',
-  //     aid,
-  //     csrf: getCSRF(),
-  //   })
-  //   .then((res) => {
-  //     if (res.code === 0)
-  //       watchLaterList.splice(index, 1)
-  //   })
-}
-
 function changeCategory(categoryItem: FavoriteCategory) {
   currentPageNum.value = 1
-  activatedCategoryId.value = categoryItem.id
-  activatedFavoriteTitle.value = categoryItem.title
+  selectedCategory.value = categoryItem
+
+  favoriteResources.length = 0
+  getFavoriteResources(categoryItem.id, 1)
+}
+
+function handleSearch() {
+  currentPageNum.value = 1
+  favoriteResources.length = 0
+  getFavoriteResources(selectedCategory.value!.id, currentPageNum.value, keyword.value)
 }
 
 function handlePlayAll() {
-  openLinkToNewTab('https://www.bilibili.com/list/watchlater')
+  openLinkToNewTab(`https://www.bilibili.com/list/ml${selectedCategory.value?.id}`)
 }
 
 function jumpToLoginPage() {
@@ -148,24 +132,30 @@ function jumpToLoginPage() {
 
 <template>
   <div v-if="getCSRF()" flex="~ col md:row lg:row" gap-6>
-    <main w="full md:60% lg:70% xl:75%" order="2 md:1 lg:1" mb-6 relative>
-      <h3 text="3xl $bew-text-1" font-bold mb-6>
-        {{ activatedFavoriteTitle }}
-      </h3>
-      <!-- <div
-        fixed z-10 absolute h-60px px-4 flex items-center backdrop-glass
-        bg="$bew-content-1"
+    <main w="full md:60% lg:70% xl:75%" order="2 md:1 lg:1" relative>
+      <!-- <h3 text="3xl $bew-text-1" font-bold mb-6>
+        {{ selectedCategory?.title }}
+      </h3> -->
+      <div
+        fixed z-10 absolute p-2 flex="~ gap-2" items-center backdrop-glass
+        bg="$bew-content-1" rounded="$bew-radius" shadow="$bew-shadow-2" mt--4
       >
-        <h3
-          text="3xl $bew-text-1" font-bold
+        <Input v-model="keyword" w-250px @enter="handleSearch" />
+        <Button type="primary" @click="handleSearch">
+          <template #left>
+            <tabler:search />
+          </template>
+        </Button>
+        <!-- <h3
+          text="2xl $bew-text-1" font-bold w-150px
         >
-          {{ activatedFavoriteTitle }}
-        </h3>
-      </div> -->
-      <Empty v-if="favoriteResources.length === 0 && !isLoading" />
+          {{ selectedCategory?.title }}
+        </h3> -->
+      </div>
+      <Empty v-if="favoriteResources.length === 0 && !isLoading" m="t-55px b-6" />
       <template v-else>
         <!-- favorite list -->
-        <div grid="~ 2xl:cols-4 xl:cols-3 lg:cols-2 md:cols-2 gap-4">
+        <div grid="~ 2xl:cols-4 xl:cols-3 lg:cols-2 md:cols-2 gap-4" m="t-55px b-6">
           <VideoCard
             v-for="item in favoriteResources" :id="item.id" :key="item.id"
             :item="item"
@@ -211,7 +201,7 @@ function jumpToLoginPage() {
         </picture>
 
         <h3 text="3xl white" fw-600 style="text-shadow: 0 0 12px rgba(0,0,0,.3)">
-          {{ activatedFavoriteTitle }}
+          {{ selectedCategory?.title }}
         </h3>
         <p flex="~ col" gap-4>
           <Button
@@ -230,7 +220,7 @@ function jumpToLoginPage() {
             border-b="1 color-[rgba(255,255,255,.2)]"
             lh-30px px-4 cursor-pointer hover:bg="[rgba(255,255,255,.35)]"
             duration-300 color-white flex justify-between
-            :style="{ background: item.id === activatedCategoryId ? 'rgba(255,255,255,.35)' : '' }"
+            :style="{ background: item.id === selectedCategory?.id ? 'rgba(255,255,255,.35)' : '' }"
             @click="changeCategory(item)"
           >
             <span>{{ item.title }}</span> <span ml-2 color-white color-opacity-60>{{ item.media_count }}</span>

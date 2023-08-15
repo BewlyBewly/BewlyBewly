@@ -127,14 +127,14 @@ function handleKeyDown() {
 
 <template>
   <div id="search-wrap" w="full" max-w="500px" m="x-8" pos="relative">
-    <!-- <div
-      v-if="isFocus"
+    <div
+      v-if="!darkenOnFocus && isFocus"
       pos="fixed top-0 left-0"
       w="full"
       h="full"
       content="~"
       @click="isFocus = false"
-    /> -->
+    />
     <Transition name="mask">
       <div
         v-if="darkenOnFocus && isFocus" pos="fixed top-0 left-0" w-full h-full bg="black opacity-60"
@@ -142,7 +142,7 @@ function handleKeyDown() {
       />
     </Transition>
 
-    <div class="search-bar group" flex="~" items-center pos="relative">
+    <div class="search-bar group" :class="isFocus ? 'focus' : ''" flex="~" items-center pos="relative">
       <Transition name="focus-character">
         <img v-show="focusedCharacter && isFocus" :src="focusedCharacter" width="100" object-contain pos="absolute right-0 bottom-30px">
       </Transition>
@@ -285,6 +285,11 @@ function handleKeyDown() {
       &:focus {
         box-shadow: 0 6px 16px var(--bew-theme-color-40), inset 0 0 6px var(--bew-theme-color-30)
       }
+    }
+
+    &.focus input {
+      --at-apply: border-$bew-theme-color rounded-$bew-radius;
+      box-shadow: 0 6px 16px var(--bew-theme-color-40), inset 0 0 6px var(--bew-theme-color-30)
     }
   }
 
