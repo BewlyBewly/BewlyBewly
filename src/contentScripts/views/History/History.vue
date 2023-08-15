@@ -69,15 +69,14 @@ function getHistoryList() {
     })
     .then((res) => {
       if (res.code === 0) {
+        if (Array.isArray(res.data.list) && res.data.list.length > 0)
+          historyList.push(...res.data.list)
+
         if (historyList.length !== 0 && res.data.list.length < 20) {
           isLoading.value = false
           noMoreContent.value = true
           return
         }
-
-        res.data.list.forEach((item: HistoryItem) => {
-          historyList.push(item)
-        })
 
         noMoreContent.value = false
       }

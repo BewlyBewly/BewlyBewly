@@ -2,6 +2,7 @@
 import { useI18n } from 'vue-i18n'
 import { getCSRF, getUserID, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
 import type { FavoriteCategory, FavoriteResource } from '~/components/Topbar/types'
+import emitter from '~/utils/mitt'
 
 const { t } = useI18n()
 
@@ -29,9 +30,20 @@ watch(activatedCategoryId, (newVal: number, oldVal: number) => {
 
 onMounted(async () => {
   await getFavoriteCategories()
-  activatedCategoryId.value = favoriteCategories[0].id
-  activatedFavoriteTitle.value = favoriteCategories[0].title
-  // getFavoriteResources()
+  changeCategory(favoriteCategories[0])
+
+  emitter.off('reachBottom')
+  emitter.on('reachBottom', () => {
+    if (isLoading.value)
+      return
+
+    if (!noMoreContent.value)
+      getFavoriteResources(activatedCategoryId.value, ++currentPageNum.value, keyword.value)
+  })
+})
+
+onUnmounted(() => {
+  emitter.off('reachBottom')
 })
 
 /**
@@ -88,6 +100,9 @@ function getFavoriteResources(
     })
     .then((res) => {
       if (res.code === 0) {
+        if (Array.isArray(res.data.medias) && res.data.medias.length > 0)
+          favoriteResources.push(...res.data.medias)
+
         if (
           res.data.medias === null
           || (res.data.medias.length < 20 && favoriteResources.length > 0)
@@ -97,9 +112,6 @@ function getFavoriteResources(
           return
         }
 
-        res.data.medias.forEach((item: FavoriteResource) => {
-          favoriteResources.push(item)
-        })
         noMoreContent.value = false
       }
       isLoading.value = false
@@ -120,6 +132,7 @@ function deleteWatchLaterItem(index: number, aid: number) {
 }
 
 function changeCategory(categoryItem: FavoriteCategory) {
+  currentPageNum.value = 1
   activatedCategoryId.value = categoryItem.id
   activatedFavoriteTitle.value = categoryItem.title
 }
@@ -162,6 +175,8 @@ function jumpToLoginPage() {
             :author="item.upper.name"
             :author-face="item.upper.face"
             :mid="item.upper.mid"
+            :view="item.cnt_info.play"
+            :danmaku="item.cnt_info.danmaku"
             :published-timestamp="item.pubtime"
             :bvid="item.bvid"
           />
@@ -209,27 +224,23 @@ function jumpToLoginPage() {
             {{ t('watch_later.play_all') }}
           </Button>
         </p>
-        <ul h-full overflow-overlay border-t="1 color-[rgba(255,255,255,.2)]" border-b="1 color-[rgba(255,255,255,.2)]">
+        <ul class="category-list" h-full overflow-overlay border-t="1 color-[rgba(255,255,255,.2)]" border-b="1 color-[rgba(255,255,255,.2)]">
           <li
             v-for="item in favoriteCategories" :key="item.id"
-            flex items-center
             border-b="1 color-[rgba(255,255,255,.2)]"
-            h-30px px-4 cursor-pointer hover:bg="[rgba(255,255,255,.35)]"
-            duration-300 color-white
+            lh-30px px-4 cursor-pointer hover:bg="[rgba(255,255,255,.35)]"
+            duration-300 color-white flex justify-between
             :style="{ background: item.id === activatedCategoryId ? 'rgba(255,255,255,.35)' : '' }"
-            @click="() => {
-              activatedCategoryId = item.id
-              activatedFavoriteTitle = item.title
-            }"
+            @click="changeCategory(item)"
           >
-            {{ item.title }}
+            <span>{{ item.title }}</span> <span ml-2 color-white color-opacity-60>{{ item.media_count }}</span>
           </li>
         </ul>
         <div
           v-if="favoriteResources[0]"
           pos="absolute top-0 left-0" w-full h-full bg-cover bg-center z--1
         >
-          <div absolute w-full h-full style="backdrop-filter: blur(60px) saturate(180%)" bg="$bew-fill-1" />
+          <div absolute w-full h-full style="backdrop-filter: blur(60px) saturate(180%)" bg="$bew-fill-4" />
           <img
             v-if="favoriteResources[0]"
             :src="removeHttpFromUrl(`${favoriteResources[0].cover}@480w_270h_1c`)"
@@ -254,5 +265,25 @@ function jumpToLoginPage() {
 .list-enter-from,
 .list-leave-to {
   --at-apply: opacity-0 transform translate-y-2 transform-gpu;
+}
+
+.category-list {
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, .35);
+    border-radius: 20px;
+  }
+
+  &::-webkit-scrollbar-corner {
+    background: transparent;
+  }
 }
 </style>

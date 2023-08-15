@@ -7,6 +7,7 @@ import { MomentType } from './types'
 import type { MomentItem } from './types'
 import { getUserID } from '~/utils/main'
 import { calcTimeSince } from '~/utils/dataFormatter'
+
 const { t } = useI18n()
 
 const moments = reactive<Array<MomentItem>>([]) as UnwrapNestedRefs<
@@ -98,15 +99,17 @@ function getNewMoments(typeList: number[]) {
     })
     .then((res) => {
       if (res.code === 0) {
+        if (Array.isArray(res.data.cards) && res.data.cards.length > 0) {
+          res.data.cards.forEach((item: any) => {
+            pushItemIntoMoments(item)
+          })
+        }
+
         if (moments.length !== 0 && res.data.cards.length < 20) {
           isLoading.value = false
           noMoreContent.value = true
           return
         }
-
-        res.data.cards.forEach((item: any) => {
-          pushItemIntoMoments(item)
-        })
 
         // set this lastest offset id, which will clear the new moment's marker point
         // after you watch these moments.

@@ -41,7 +41,7 @@ onMounted(async () => {
   activatedFavoriteTitle.value = favoriteCategories[0].title
   getFavoriteResources(
     activatedMediaId.value,
-    currentPageNum.value++,
+    ++currentPageNum.value,
     keyword.value,
   )
 
@@ -57,7 +57,7 @@ onMounted(async () => {
         && !isLoading.value
       ) {
         if (activatedMediaId.value && !noMoreContent.value)
-          getFavoriteResources(activatedMediaId.value, currentPageNum.value++)
+          getFavoriteResources(activatedMediaId.value, ++currentPageNum.value)
       }
     })
   }
@@ -99,6 +99,9 @@ function getFavoriteResources(
     })
     .then((res) => {
       if (res.code === 0) {
+        if (Array.isArray(res.data.medias) && res.data.medias.length > 0)
+          favoriteResources.push(...res.data.medias)
+
         if (
           res.data.medias === null
           || (res.data.medias.length < 20 && favoriteResources.length > 0)
@@ -108,9 +111,6 @@ function getFavoriteResources(
           return
         }
 
-        res.data.medias.forEach((item: FavoriteResource) => {
-          favoriteResources.push(item)
-        })
         noMoreContent.value = false
       }
       isLoading.value = false

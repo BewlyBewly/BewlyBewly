@@ -139,15 +139,14 @@ function getHistoryList(type: HistoryType, viewAt = 0 as number) {
     })
     .then((res) => {
       if (res.code === 0) {
+        if (Array.isArray(res.data.list) && res.data.list.length > 0)
+          historys.push(...res.data.list)
+
         if (historys.length !== 0 && res.data.list.length < 20) {
           isLoading.value = false
           noMoreContent.value = true
           return
         }
-
-        res.data.list.forEach((item: HistoryItem) => {
-          historys.push(item)
-        })
 
         noMoreContent.value = false
       }
