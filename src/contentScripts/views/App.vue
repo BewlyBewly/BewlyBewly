@@ -298,6 +298,14 @@ function setAppWallpaperMaskingOpacity() {
               </button>
             </Tooltip>
 
+            <div
+              class="dock-item"
+              :class="{ active: activatedPage === AppPage.Favorites }"
+              @click="changeActivatePage(AppPage.Favorites)"
+            >
+              <tabler:star />
+            </div>
+
             <Tooltip :content="$t('dock.watch_later')" :placement="tooltipPlacement">
               <button
                 class="dock-item"
@@ -307,14 +315,6 @@ function setAppWallpaperMaskingOpacity() {
                 <iconoir:playlist-play />
               </button>
             </Tooltip>
-
-            <div
-              class="dock-item"
-              :class="{ active: activatedPage === AppPage.Favorites }"
-              @click="changeActivatePage(AppPage.Favorites)"
-            >
-              <tabler:star />
-            </div>
 
             <template v-if="isVideoPage">
               <!-- dividing line -->
