@@ -175,7 +175,7 @@ function jumpToLoginPage() {
     </template>
 
     <!-- skeleton -->
-    <template v-for="item in (settings.recommendationMode === 'web' ? 30 : 30)" :key="item">
+    <template v-for="item in 30" :key="item">
       <div
         v-if="isLoading"
         mb-8 pointer-events-none select-none

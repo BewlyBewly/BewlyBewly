@@ -41,16 +41,18 @@ const avatarImg = ref<HTMLImageElement>() as Ref<HTMLImageElement>
 const avatarShadow = ref<HTMLImageElement>() as Ref<HTMLImageElement>
 
 watch(
-  () => showNotificationsPop,
-  () => {
-    getUnreadMessageCount()
+  showNotificationsPop,
+  (newVal) => {
+    if (!newVal)
+      getUnreadMessageCount()
   },
 )
 
 watch(
-  () => showMomentsPop,
-  () => {
-    getNewMomentsCount()
+  showMomentsPop,
+  (newVal) => {
+    if (!newVal)
+      getNewMomentsCount()
   },
 )
 
@@ -110,7 +112,9 @@ async function getUserInfo() {
       Object.assign(userInfo, res.data)
     }
     // Account not logged in
-    else if (res.code === -101) { isLogin.value = false }
+    else if (res.code === -101) {
+      isLogin.value = false
+    }
   }
   catch (error) {
     isLogin.value = false
