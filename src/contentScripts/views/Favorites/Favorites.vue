@@ -8,13 +8,14 @@ const { t } = useI18n()
 
 const favoriteCategories = reactive<Array<FavoriteCategory>>([])
 const favoriteResources = reactive<Array<FavoriteResource>>([])
+const categoryOptions = reactive<Array<{ value: any; label: string }>>([])
 
 const selectedCategory = ref<FavoriteCategory>()
 
 const currentPageNum = ref<number>(1)
 const keyword = ref<string>('')
 
-const isLoading = ref<boolean>()
+const isLoading = ref<boolean>(true)
 const noMoreContent = ref<boolean>()
 
 onMounted(async () => {
@@ -35,24 +36,6 @@ onUnmounted(() => {
   emitter.off('reachBottom')
 })
 
-/**
- * Get watch later list
- */
-// function getAllWatchLaterList() {
-//   isLoading.value = true
-//   watchLaterList.length = 0
-//   browser.runtime
-//     .sendMessage({
-//       contentScriptQuery: 'getAllWatchLaterList',
-//     })
-//     .then((res) => {
-//       if (res.code === 0)
-//         Object.assign(watchLaterList, res.data.list)
-
-//       isLoading.value = false
-//     })
-// }
-
 async function getFavoriteCategories() {
   await browser.runtime
     .sendMessage({
@@ -62,9 +45,15 @@ async function getFavoriteCategories() {
     .then((res) => {
       if (res.code === 0) {
         Object.assign(favoriteCategories, res.data.list)
-        noMoreContent.value = false
+
+        categoryOptions.length = 0
+        favoriteCategories.forEach((item) => {
+          categoryOptions.push({
+            label: item.title,
+            value: item,
+          })
+        })
       }
-      isLoading.value = false
     })
 }
 
@@ -137,9 +126,10 @@ function jumpToLoginPage() {
         {{ selectedCategory?.title }}
       </h3> -->
       <div
-        fixed z-10 absolute p-2 flex="~ gap-2" items-center backdrop-glass
-        bg="$bew-content-1" rounded="$bew-radius" shadow="$bew-shadow-2" mt--4
+        fixed z-10 absolute p-2 flex="~ gap-2" items-center
+        bg="$bew-elevated-solid-1" rounded="$bew-radius" shadow="$bew-shadow-2" mt--2
       >
+        <Select v-model="selectedCategory" w-150px :options="categoryOptions" @change="(val) => changeCategory(val.value)" />
         <Input v-model="keyword" w-250px @enter="handleSearch" />
         <Button type="primary" @click="handleSearch">
           <template #left>
@@ -155,7 +145,7 @@ function jumpToLoginPage() {
       <Empty v-if="favoriteResources.length === 0 && !isLoading" m="t-55px b-6" />
       <template v-else>
         <!-- favorite list -->
-        <div grid="~ 2xl:cols-4 xl:cols-3 lg:cols-2 md:cols-2 gap-4" m="t-55px b-6">
+        <div grid="~ 2xl:cols-4 xl:cols-3 lg:cols-2 md:cols-1 gap-4" m="t-55px b-6">
           <VideoCard
             v-for="item in favoriteResources" :id="item.id" :key="item.id"
             :item="item"
@@ -182,7 +172,7 @@ function jumpToLoginPage() {
       </template>
     </main>
 
-    <aside relative w="full md:40% lg:30% xl:25%" order="1 md:2 lg:2">
+    <aside relative w="full md:40% lg:30% xl:25%" display="md:block none" order="1 md:2 lg:2">
       <div
         pos="sticky top-120px" flex="~ col gap-4" justify-start my-10 w-full h="auto md:[calc(100vh-160px)]" p-6
         rounded="$bew-radius" overflow-hidden bg="$bew-fill-3"
