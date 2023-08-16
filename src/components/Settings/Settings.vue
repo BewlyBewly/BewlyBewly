@@ -73,14 +73,14 @@ function setCurrentTitle() {
   <div class="fixed w-full h-full top-0 left-0" z="9998" @click="handleClose" />
 
   <div
-    id="settings-window" pos="fixed md:top-1/5 top-0 left-1/2" w="full lg:2/3 md:2/3" h="full md:1/2"
-    max-w-820px transform="~ translate-x--1/2"
+    id="settings-window" pos="fixed top-1/2 left-1/2" w="80% lg:2/3 md:2/3" h="80% md:60%"
+    max-w-850px transform="~ translate-x--1/2 translate-y--1/2"
     z-9999 flex justify-between items-center
   >
-    <aside class="group" shrink-0 p="x-2 md:x-4" pos="absolute left-0 md:left--42px" z-2>
+    <aside class="group" shrink-0 p="x-4" pos="absolute left--42px" z-2>
       <ul
         flex="~ gap-2 col" rounded="30px hover:25px" bg="$bew-elevated-2" p-2 shadow="$bew-shadow-3"
-        scale="md:group-hover:105" duration-300
+        scale="group-hover:105" duration-300
         backdrop-glass
       >
         <li v-for="item in settingsMenuItems" :key="item.value">
@@ -106,12 +106,12 @@ function setCurrentTitle() {
 
     <div
       relative overflow-hidden w-full h-full bg="$bew-elevated-solid-1"
-      shadow="$bew-shadow-3" rounded="md:$bew-radius"
+      shadow="$bew-shadow-3" rounded="$bew-radius"
     >
       <header
         flex justify-between items-center w-full h-80px
-        pos="fixed top-0 left-0" p="l-70px r-4 md:x-12"
-        z-1 rounded="md:t-$bew-radius"
+        pos="fixed top-0 left-0" p="x-12"
+        z-1 rounded="t-$bew-radius"
         style="
           background: linear-gradient(var(--bew-elevated-solid-1), transparent);
           text-shadow: 0 0 15px var(--bew-elevated-solid-1)
@@ -121,14 +121,15 @@ function setCurrentTitle() {
           {{ title }}
         </div>
         <div
-          text-2xl leading-0 bg="$bew-fill-1" w="32px" h="32px" p="1" rounded-8 cursor="pointer" backdrop-glass
+          text-2xl leading-0 bg="$bew-fill-1 hover:$bew-theme-color-30" w="32px" h="32px" p="1" rounded-8 cursor="pointer" backdrop-glass
+          hover:ring="2 $bew-theme-color" hover:text="$bew-theme-color" duration-300
           @click="handleClose"
         >
           <ic-baseline-clear />
         </div>
       </header>
 
-      <main relative h-full py-8 p="l-70px r-2 md:x-12" overflow-y-scroll>
+      <main relative h-full py-8 p="x-12" overflow-y-scroll>
         <!-- <header
           flex justify-between items-center w-full h-60px
           pos="fixed top-0 left-0"

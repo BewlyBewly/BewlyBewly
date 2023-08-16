@@ -12,7 +12,7 @@ defineProps<{
       <div :w="nextLine ? 'full' : '5/7'">
         {{ title }}
         <br>
-        <span text="sm $bew-text-3">
+        <span text="sm $bew-text-2">
           <slot name="desc">
             {{ desc }}
           </slot>

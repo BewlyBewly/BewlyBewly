@@ -4,13 +4,13 @@ import { version } from '../../../../package.json'
 </script>
 
 <template>
-  <div flex items-center justify-center>
+  <div flex items-center justify-center h-full mt--80px>
     <div flex="~ col gap-1" items-center>
       <img :src="`${browser.runtime.getURL('/assets/icon-512.png')}`" alt="" width="80">
       <p text-xl>
-        BewlyBewly <a href="https://github.com/hakadao/BewlyBewly/releases" target="_blank" un-text="sm $bew-theme-color">v{{ version }}</a>
+        BewlyBewly <a href="https://github.com/hakadao/BewlyBewly/releases" target="_blank" un-text="sm $bew-text-2 hover:$bew-theme-color">v{{ version }}</a>
       </p>
-      <p text="sm $bew-text-3">
+      <p text="sm $bew-text-2">
         Made by Hakadao
       </p>
       <p mt-6 flex gap-2>
