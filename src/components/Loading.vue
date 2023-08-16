@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import browser from 'webextension-polyfill'
+
 const imgURL = browser.runtime.getURL('/assets/loading.gif')
 </script>
 
 <template>
   <div
     w="full"
-    h="46px"
+    min-h="46px"
     p="y-8"
     flex="~"
     justify="center"
