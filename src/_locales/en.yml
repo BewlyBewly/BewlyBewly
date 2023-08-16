@@ -83,9 +83,11 @@ settings:
   logo_color_opt:
     white: White
     theme_color: Theme Color
+  enable_logo_glowing_effect: Enable glowing effect for the logo
   logo_visibility: Logo visibility
   bg_darkens_when_the_search_bar_is_focused: Background darkens when the search bar is focused
-  individually_set_search_page_wallpaper: Individually set search page wallpaper (EXPERIMENTAL)
+  choose_search_bar_focused_character: Choose the character that appears when the search bar is focused
+  individually_set_search_page_wallpaper: Individually set search page wallpaper
 auth:
   err_tip: Failed to grant access key
   plz_login_first: Please login to bilibili first
@@ -171,6 +173,7 @@ dock:
   home: Home
   anime: Anime
   history: History
+  favorites: Favorites
   watch_later: Watch later
   dark_mode: Dark Mode
   light_mode: Light Mode

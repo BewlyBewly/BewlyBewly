@@ -83,8 +83,10 @@ settings:
     white: 白
     theme_color: 主题色
   logo_visibility: Logo 可见性
+  enable_logo_glowing_effect: 启用 Logo 发光效果
   bg_darkens_when_the_search_bar_is_focused: 当搜索栏聚焦时背景暗化
-  individually_set_search_page_wallpaper: 单独设置搜索页背景 (实验性)
+  choose_search_bar_focused_character: 选择搜索栏聚焦时出现的人物
+  individually_set_search_page_wallpaper: 单独设置搜索页背景
 auth:
   err_tip: 授权 access key 失败
   plz_login_first: 请先登录 bilibili
@@ -170,9 +172,10 @@ dock:
   home: 首页
   anime: 番剧
   history: 观看历史
+  favorites: 收藏
+  watch_later: 稍后再看
   dark_mode: 暗色模式
   light_mode: 亮色模式
-  watch_later: 稍后再看
   settings: 设置
 home:
   not_interested_in: 对哪方面不感兴趣？

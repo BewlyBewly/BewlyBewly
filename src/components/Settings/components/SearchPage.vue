@@ -76,7 +76,7 @@ function changeWallpaper(url: string) {
     </div>
   </SettingItem>
 
-  <SettingItem title="Enable glowing effect for the logo">
+  <SettingItem :title="$t('settings.enable_logo_glowing_effect')">
     <Radio v-model="settings.searchPageLogoGlow" />
   </SettingItem>
 
@@ -88,7 +88,7 @@ function changeWallpaper(url: string) {
     <Radio v-model="settings.searchPageDarkenOnSearchFocus" />
   </SettingItem>
 
-  <SettingItem title="Choose the character displayed when the search bar is focused" next-line>
+  <SettingItem :title="$t('settings.choose_search_bar_focused_character')" next-line>
     <div grid="~ xl:cols-8 lg:cols-6 cols-5 gap-4">
       <picture
         aspect-square bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden

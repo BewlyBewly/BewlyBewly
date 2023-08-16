@@ -82,9 +82,11 @@ settings:
   logo_color_opt:
     white: 白
     theme_color: 主題色
+  enable_logo_glowing_effect: 啓用 Logo 發光效果
   logo_visibility: Logo 可視性
   bg_darkens_when_the_search_bar_is_focused: 當搜尋欄聚焦時背景變暗
-  individually_set_search_page_wallpaper: 單獨設定搜尋頁背景 (試驗性)
+  choose_search_bar_focused_character: 選擇搜尋欄聚焦時出現的人物
+  individually_set_search_page_wallpaper: 單獨設定搜尋頁背景
 
 auth:
   err_tip: 無法授權 access key
@@ -172,6 +174,7 @@ dock:
   anime: 動畫
   history: 觀看記錄
   watch_later: 稍後觀看
+  favorites: 收藏
   dark_mode: 深色模式
   light_mode: 淺色模式
   settings: 設定

@@ -82,9 +82,11 @@ settings:
   logo_color_opt:
     white: 白
     theme_color: 主題色
+  enable_logo_glowing_effect: Logo 使用發光效果
   logo_visibility: Logo 可視性
   bg_darkens_when_the_search_bar_is_focused: 搜尋欄聚焦嗰陣校暗背景
-  individually_set_search_page_wallpaper: 單獨設定搵嘢頁背景 (試驗性)
+  choose_search_bar_focused_character: 揀個喺搜尋欄聚焦嗰陣出現嘅人物
+  individually_set_search_page_wallpaper: 單獨設定搵嘢頁背景
 auth:
   err_tip: 無法授權 access key
   plz_login_first: 唔該登入 bilibili 先
@@ -171,6 +173,7 @@ dock:
   anime: 動畫
   history: 收睇記錄
   watch_later: 陣間至睇
+  favorites: 我嘅至愛
   dark_mode: 深色模式
   light_mode: 淺色模式
   settings: 設定

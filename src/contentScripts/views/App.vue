@@ -298,13 +298,15 @@ function setAppWallpaperMaskingOpacity() {
               </button>
             </Tooltip>
 
-            <div
-              class="dock-item"
-              :class="{ active: activatedPage === AppPage.Favorites }"
-              @click="changeActivatePage(AppPage.Favorites)"
-            >
-              <tabler:star />
-            </div>
+            <Tooltip :content="$t('dock.favorites')" :placement="tooltipPlacement">
+              <div
+                class="dock-item"
+                :class="{ active: activatedPage === AppPage.Favorites }"
+                @click="changeActivatePage(AppPage.Favorites)"
+              >
+                <tabler:star />
+              </div>
+            </Tooltip>
 
             <Tooltip :content="$t('dock.watch_later')" :placement="tooltipPlacement">
               <button
