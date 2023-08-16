@@ -11,11 +11,13 @@ const favoriteResources = reactive<Array<FavoriteResource>>([])
 const categoryOptions = reactive<Array<{ value: any; label: string }>>([])
 
 const selectedCategory = ref<FavoriteCategory>()
+const activatedCategoryCover = ref<string>('')
 
 const currentPageNum = ref<number>(1)
 const keyword = ref<string>('')
 
 const isLoading = ref<boolean>(true)
+const isFullPageLoading = ref<boolean>(false)
 const noMoreContent = ref<boolean>()
 
 onMounted(async () => {
@@ -63,40 +65,44 @@ async function getFavoriteCategories() {
  * @param pageNum
  * @param keyword
  */
-function getFavoriteResources(
+async function getFavoriteResources(
   mediaId: number,
   pageNum: number,
   keyword = '' as string,
 ) {
+  if (pageNum === 1)
+    isFullPageLoading.value = true
   isLoading.value = true
-  browser.runtime
-    .sendMessage({
-      contentScriptQuery: 'getFavoriteResources',
-      mediaId,
-      pageNum,
-      keyword,
-    })
-    .then((res) => {
-      if (res.code === 0) {
-        if (Array.isArray(res.data.medias) && res.data.medias.length > 0)
-          favoriteResources.push(...res.data.medias)
+  try {
+    const res = await browser.runtime
+      .sendMessage({
+        contentScriptQuery: 'getFavoriteResources',
+        mediaId,
+        pageNum,
+        keyword,
+      })
 
-        if (
-          res.data.medias === null
-          || (res.data.medias.length < 20 && favoriteResources.length > 0)
-        ) {
-          isLoading.value = false
-          noMoreContent.value = true
-          return
-        }
+    if (res.code === 0) {
+      activatedCategoryCover.value = res.data.info.cover
 
-        noMoreContent.value = false
-      }
-      isLoading.value = false
-    })
+      if (Array.isArray(res.data.medias) && res.data.medias.length > 0)
+        favoriteResources.push(...res.data.medias)
+
+      if (
+        res.data.medias === null
+            || (res.data.medias.length < 20 && favoriteResources.length > 0)
+      )
+        noMoreContent.value = true
+    }
+  }
+  finally {
+    isLoading.value = false
+    isFullPageLoading.value = false
+    noMoreContent.value = false
+  }
 }
 
-function changeCategory(categoryItem: FavoriteCategory) {
+async function changeCategory(categoryItem: FavoriteCategory) {
   currentPageNum.value = 1
   selectedCategory.value = categoryItem
 
@@ -144,27 +150,32 @@ function jumpToLoginPage() {
       </div>
       <Empty v-if="favoriteResources.length === 0 && !isLoading" m="t-55px b-6" />
       <template v-else>
+        <Transition name="fade">
+          <Loading v-if="isFullPageLoading" w-full h-full pos="absolute top-0 left-0" mt--50px />
+        </Transition>
         <!-- favorite list -->
         <div grid="~ 2xl:cols-4 xl:cols-3 lg:cols-2 md:cols-1 gap-4" m="t-55px b-6">
-          <VideoCard
-            v-for="item in favoriteResources" :id="item.id" :key="item.id"
-            :item="item"
-            :duration="item.duration"
-            :title="item.title"
-            :cover="item.cover"
-            :author="item.upper.name"
-            :author-face="item.upper.face"
-            :mid="item.upper.mid"
-            :view="item.cnt_info.play"
-            :danmaku="item.cnt_info.danmaku"
-            :published-timestamp="item.pubtime"
-            :bvid="item.bvid"
-          />
+          <TransitionGroup name="list">
+            <VideoCard
+              v-for="item in favoriteResources" :id="item.id" :key="item.id"
+              :item="item"
+              :duration="item.duration"
+              :title="item.title"
+              :cover="item.cover"
+              :author="item.upper.name"
+              :author-face="item.upper.face"
+              :mid="item.upper.mid"
+              :view="item.cnt_info.play"
+              :danmaku="item.cnt_info.danmaku"
+              :published-timestamp="item.pubtime"
+              :bvid="item.bvid"
+            />
+          </TransitionGroup>
         </div>
 
         <!-- loading -->
         <Transition name="fade">
-          <loading
+          <Loading
             v-if="isLoading && favoriteResources.length !== 0 && !noMoreContent"
             m="-t-4"
           />
@@ -177,12 +188,23 @@ function jumpToLoginPage() {
         pos="sticky top-120px" flex="~ col gap-4" justify-start my-10 w-full h="auto md:[calc(100vh-160px)]" p-6
         rounded="$bew-radius" overflow-hidden bg="$bew-fill-3"
       >
+        <div
+          pos="absolute top-0 left-0" w-full h-full bg-cover bg-center z--1
+        >
+          <div absolute w-full h-full style="backdrop-filter: blur(60px) saturate(180%)" bg="$bew-fill-4" />
+          <img
+            v-if="activatedCategoryCover"
+            :src="removeHttpFromUrl(`${activatedCategoryCover}@480w_270h_1c`)"
+            w-full h-full object="cover center"
+          >
+        </div>
+
         <picture
           rounded="$bew-radius" style="box-shadow: 0 16px 24px -12px rgba(0, 0, 0, .36)"
           aspect-video mb-4 bg="$bew-fill-2"
         >
           <img
-            v-if="favoriteResources[0]" :src="removeHttpFromUrl(`${favoriteResources[0].cover}@480w_270h_1c`)"
+            v-if="activatedCategoryCover" :src="removeHttpFromUrl(`${activatedCategoryCover}@480w_270h_1c`)"
             rounded="$bew-radius" aspect-video w-full object-cover
           >
           <div v-else aspect-video w-full>
@@ -210,23 +232,12 @@ function jumpToLoginPage() {
             border-b="1 color-[rgba(255,255,255,.2)]"
             lh-30px px-4 cursor-pointer hover:bg="[rgba(255,255,255,.35)]"
             duration-300 color-white flex justify-between
-            :style="{ background: item.id === selectedCategory?.id ? 'rgba(255,255,255,.35)' : '' }"
+            :style="{ background: item.id === selectedCategory?.id ? 'rgba(255,255,255,.35)' : '', pointerEvents: isFullPageLoading ? 'none' : 'auto' }"
             @click="changeCategory(item)"
           >
             <span>{{ item.title }}</span> <span ml-2 color-white color-opacity-60>{{ item.media_count }}</span>
           </li>
         </ul>
-        <div
-          v-if="favoriteResources[0]"
-          pos="absolute top-0 left-0" w-full h-full bg-cover bg-center z--1
-        >
-          <div absolute w-full h-full style="backdrop-filter: blur(60px) saturate(180%)" bg="$bew-fill-4" />
-          <img
-            v-if="favoriteResources[0]"
-            :src="removeHttpFromUrl(`${favoriteResources[0].cover}@480w_270h_1c`)"
-            w-full h-full object="cover center"
-          >
-        </div>
       </div>
     </aside>
   </div>
@@ -238,15 +249,6 @@ function jumpToLoginPage() {
 </template>
 
 <style lang="scss" scoped>
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.3s ease;
-}
-.list-enter-from,
-.list-leave-to {
-  --at-apply: opacity-0 transform translate-y-2 transform-gpu;
-}
-
 .category-list {
   &::-webkit-scrollbar {
     width: 8px;
