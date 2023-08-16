@@ -207,17 +207,4 @@ function jumpToLoginPage() {
 </template>
 
 <style lang="scss" scoped>
-.list-move,
-.list-enter-active,
-.list-leave-active {
-  transition: opacity 0.5s ease;
-}
-.list-enter-from,
-.list-leave-to {
-  opacity: 0;
-}
-
-.list-leave-active {
-  display: none;
-}
 </style>

@@ -518,12 +518,4 @@ function jumpToLoginPage() {
 </template>
 
 <style lang="scss" scoped>
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.3s ease;
-}
-.list-enter-from,
-.list-leave-to {
-  --at-apply: opacity-0 transform translate-y-2 transform-gpu;
-}
 </style>

@@ -259,6 +259,17 @@ function jumpToLoginPage() {
         pos="sticky top-120px" flex="~ col gap-4" justify-start my-10 w-full h="auto md:[calc(100vh-160px)]" p-6
         rounded="$bew-radius" overflow-hidden bg="$bew-fill-3"
       >
+        <div
+          pos="absolute top-0 left-0" w-full h-full bg-cover bg-center z--1
+        >
+          <div absolute w-full h-full style="backdrop-filter: blur(60px) saturate(180%)" bg="$bew-fill-4" />
+          <img
+            v-if="watchLaterList[0]"
+            :src="removeHttpFromUrl(`${watchLaterList[0].pic}@480w_270h_1c`)"
+            w-full h-full object="cover center"
+          >
+        </div>
+
         <picture
           rounded="$bew-radius" style="box-shadow: 0 16px 24px -12px rgba(0, 0, 0, .36)"
           aspect-video mb-4 bg="$bew-fill-2"
@@ -301,17 +312,6 @@ function jumpToLoginPage() {
             {{ t('watch_later.remove_watched_videos') }}
           </Button>
         </p>
-        <div
-          v-if="watchLaterList[0]"
-          pos="absolute top-0 left-0" w-full h-full bg-cover bg-center z--1
-        >
-          <div absolute w-full h-full style="backdrop-filter: blur(60px) saturate(180%)" bg="$bew-fill-4" />
-          <img
-            v-if="watchLaterList[0]"
-            :src="removeHttpFromUrl(`${watchLaterList[0].pic}@480w_270h_1c`)"
-            w-full h-full object="cover center"
-          >
-        </div>
       </div>
     </aside>
   </div>
@@ -323,12 +323,4 @@ function jumpToLoginPage() {
 </template>
 
 <style lang="scss" scoped>
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.3s ease;
-}
-.list-enter-from,
-.list-leave-to {
-  --at-apply: opacity-0 transform translate-y-2 transform-gpu;
-}
 </style>
