@@ -192,7 +192,7 @@ function getNewMomentsCount() {
         v-show="showTopbarMask"
         class="fixed top-0 left-0"
         w="full"
-        h="160px"
+        h="100px"
         opacity="100"
         pointer-events-none
         z--1
