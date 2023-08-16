@@ -1,13 +1,13 @@
 <script setup lang="ts">
 const props = defineProps<{
   options: OptionType[]
-  modelValue: string
+  modelValue: any
 }>()
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'change'])
 
 interface OptionType {
-  value: string
+  value: any
   label: string
 }
 
@@ -25,10 +25,11 @@ onMounted(() => {
     label.value = `${props.options.find((item: OptionType) => item.value === props.modelValue)?.label}`
 })
 
-function onClickOption(val: { value: string; label: string }) {
+function onClickOption(val: OptionType) {
   window.removeEventListener('click', () => {})
   label.value = val.label
   emit('update:modelValue', val.value)
+  emit('change', val)
   showOptions.value = false
 }
 
@@ -49,7 +50,6 @@ function onMouseEnter() {
 <template>
   <div
     pos="relative"
-    w="full"
     @mouseleave="onMouseLeave"
     @mouseenter="onMouseEnter"
   >
@@ -61,7 +61,8 @@ function onMouseEnter() {
       cursor="pointer"
       flex="~"
       justify="between"
-      items="center"
+      items="center" w="full"
+      :ring="showOptions ? '2px $bew-theme-color' : ''" duration-300
       @click="showOptions = !showOptions"
     >
       <div
@@ -73,7 +74,8 @@ function onMouseEnter() {
 
       <!-- arrow -->
       <div
-        border="~ solid $bew-fill-4 t-0 l-0 r-2 b-2"
+        border="~ solid t-0 l-0 r-2 b-2"
+        :border-color="showOptions ? '$bew-theme-color' : '$bew-fill-4'"
         p="3px"
         m="l-2"
         display="inline-block"
@@ -84,20 +86,14 @@ function onMouseEnter() {
     <transition>
       <div
         v-if="showOptions"
-        pos="absolute"
-        bg="$bew-elevated-2"
-        backdrop-glass shadow="$bew-shadow-2"
-        p="2"
-        m="t-2"
-        rounded="$bew-radius"
-        z="1"
-        w="full"
+        pos="absolute" bg="$bew-elevated-2" backdrop-glass shadow="$bew-shadow-2" p="2" m="t-2"
+        rounded="$bew-radius" z="1" flex="~ col gap-1"
+        w="full" max-h-300px overflow-y-scroll will-change-transform
       >
         <div
           v-for="option in options"
           :key="option.value"
-          p="2"
-          m="not-last:b-1"
+          p="x-2 y-2"
           rounded="$bew-radius"
           w="full"
           bg="hover:$bew-fill-2"
