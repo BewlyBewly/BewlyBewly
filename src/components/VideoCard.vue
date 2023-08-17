@@ -190,10 +190,10 @@ function toggleWatchLater() {
           duration-300
           @click.stop="toggleWatchLater"
         >
-          <Tooltip v-if="!isInWatchLater" :content="$t('common.save_to_watch_later')" placement="bottom">
+          <Tooltip v-if="!isInWatchLater" :content="$t('common.save_to_watch_later')" placement="bottom" type="dark">
             <tabler:playlist-add />
           </Tooltip>
-          <Tooltip v-else :content="$t('common.added')" placement="bottom">
+          <Tooltip v-else :content="$t('common.added')" placement="bottom" type="dark">
             <tabler:check />
           </Tooltip>
         </button>

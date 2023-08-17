@@ -193,7 +193,7 @@ function handleUnfavorite(favoriteResource: FavoriteResource) {
                   duration-300
                   @click.stop="handleUnfavorite(item)"
                 >
-                  <Tooltip :content="$t('favorites.unfavorite')" placement="bottom">
+                  <Tooltip :content="$t('favorites.unfavorite')" placement="bottom" type="dark">
                     <ic-baseline-clear />
                   </Tooltip>
                 </button>
