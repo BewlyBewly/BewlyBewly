@@ -137,7 +137,7 @@ function jumpToLoginPage() {
     v-else
     ref="containerRef"
     m="b-0 t-0"
-    grid="~ 3xl:cols-5 2xl:cols-4 xl:cols-3 lg:cols-2 md:cols-2 gap-4"
+    grid="~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-4"
   >
     <template v-if="settings.recommendationMode === 'web'">
       <VideoCard
