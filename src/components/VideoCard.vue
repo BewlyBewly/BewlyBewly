@@ -186,6 +186,7 @@ function toggleWatchLater() {
           rounded="$bew-radius"
           text="!white xl"
           bg="black opacity-60" opacity-0 group-hover:opacity-100
+          transform="scale-70 group-hover:scale-100"
           duration-300
           @click.stop="toggleWatchLater"
         >
