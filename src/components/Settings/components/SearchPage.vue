@@ -124,7 +124,7 @@ function changeWallpaper(url: string) {
         </picture>
       </div>
       <div>
-        <Input v-model:value="settings.searchPageSearchBarFocusCharacter" w-full />
+        <Input v-model="settings.searchPageSearchBarFocusCharacter" w-full />
         <p color="sm $bew-text-3" mt-2>
           {{ $t('settings.image_url_hint') }}
         </p>
@@ -198,7 +198,7 @@ function changeWallpaper(url: string) {
           <img v-if="settings.searchPageWallpaper" :src="settings.searchPageWallpaper" alt="" w-full h-full object-cover onerror="this.style.display='none'; this.onerror=null;">
         </picture>
         <div>
-          <Input v-model:value="settings.searchPageWallpaper" w-full />
+          <Input v-model="settings.searchPageWallpaper" w-full />
           <p color="sm $bew-text-3" mt-2>
             {{ $t('settings.image_url_hint') }}
           </p>
