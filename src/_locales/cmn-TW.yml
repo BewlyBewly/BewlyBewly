@@ -214,6 +214,8 @@ history:
   turn_on_watch_history_confirm: |-
     要啟用觀看記錄嗎？
     你確定要啟用觀看記錄嗎？
+favorites:
+  unfavorite: 取消收藏
 watch_later:
   title: 稍後觀看
   play_all: 全部播放

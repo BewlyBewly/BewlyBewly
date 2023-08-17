@@ -176,12 +176,17 @@ function toggleWatchLater() {
           {{ calcCurrentTime(duration) }}
         </div>
 
+        <div pos="absolute top-0 left-0" z-2>
+          <slot name="coverTopLeft" />
+        </div>
+
         <button
           pos="absolute top-0 right-0" z="2"
           p="x-2 y-1" m="1"
           rounded="$bew-radius"
           text="!white xl"
           bg="black opacity-60" opacity-0 group-hover:opacity-100
+          duration-300
           @click.stop="toggleWatchLater"
         >
           <Tooltip v-if="!isInWatchLater" :content="$t('common.save_to_watch_later')" placement="bottom">

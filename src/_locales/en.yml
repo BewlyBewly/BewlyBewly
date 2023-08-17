@@ -212,6 +212,8 @@ history:
     Are you sure you want to pause watch history?
   turn_on_watch_history: Turn on watch history
   turn_on_watch_history_confirm: Turn on watch history? Are you sure you want to turn on watch history?
+favorites:
+  unfavorite: Unfavorite
 watch_later:
   title: Watch Later
   play_all: Play all

@@ -98,7 +98,6 @@ async function getFavoriteResources(
   finally {
     isLoading.value = false
     isFullPageLoading.value = false
-    noMoreContent.value = false
   }
 }
 
@@ -122,6 +121,18 @@ function handlePlayAll() {
 
 function jumpToLoginPage() {
   location.href = 'https://passport.bilibili.com/login'
+}
+
+function handleUnfavorite(favoriteResource: FavoriteResource) {
+  browser.runtime.sendMessage({
+    contentScriptQuery: 'patchDelFavoriteResources',
+    resources: `${favoriteResource.id}:${favoriteResource.type}`,
+    mediaId: selectedCategory.value?.id,
+    csrf: getCSRF(),
+  }).then((res) => {
+    if (res.code === 0)
+      favoriteResources.splice(favoriteResources.indexOf(favoriteResource), 1)
+  })
 }
 </script>
 
@@ -169,7 +180,24 @@ function jumpToLoginPage() {
               :danmaku="item.cnt_info.danmaku"
               :published-timestamp="item.pubtime"
               :bvid="item.bvid"
-            />
+              group
+            >
+              <template #coverTopLeft>
+                <button
+                  p="x-2 y-1" m="1"
+                  rounded="$bew-radius"
+                  text="!white xl"
+                  bg="black opacity-60"
+                  opacity-0 group-hover:opacity-100
+                  duration-300
+                  @click.stop="handleUnfavorite(item)"
+                >
+                  <Tooltip :content="$t('favorites.unfavorite')" placement="bottom">
+                    <ic-baseline-clear />
+                  </Tooltip>
+                </button>
+              </template>
+            </VideoCard>
           </TransitionGroup>
         </div>
 

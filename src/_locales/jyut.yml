@@ -213,6 +213,8 @@ history:
   turn_on_watch_history_confirm: |-
     係咪要開返收睇記錄呀？
     你確定要開返收睇記錄？
+favorites:
+  unfavorite: 唔再愛喇
 watch_later:
   title: 陣間至睇
   play_all: 播晒佢哋

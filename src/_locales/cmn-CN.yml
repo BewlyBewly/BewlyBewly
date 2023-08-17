@@ -214,6 +214,8 @@ history:
   turn_on_watch_history_confirm: |-
     要开启观看历史吗？
     你确定要开启观看历史吗？
+favorites:
+  unfavorite: 取消收藏
 watch_later:
   title: 稍后再看
   play_all: 播放全部
