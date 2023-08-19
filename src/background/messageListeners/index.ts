@@ -9,7 +9,7 @@ import { setupHistoryMsgLstnr } from './history'
 import { setupFavoriteMsgLstnr } from './favorite'
 import { setupWatchLaterMsgLstnr } from './watchLater'
 
-export const setupAllMsgLstnrs = () => {
+export function setupAllMsgLstnrs() {
   setupAuthMsgLstnr()
   setupVideoMsgLstnr()
   setupUserMsgLstnr()

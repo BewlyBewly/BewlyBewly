@@ -1,6 +1,6 @@
 import browser from 'webextension-polyfill'
 
-export const setupSearchMsgLstnr = () => {
+export function setupSearchMsgLstnr() {
   browser.runtime.onConnect.addListener(() => {
     browser.runtime.onMessage.addListener((message) => {
       if (message.contentScriptQuery === 'getSearchSuggestion') {

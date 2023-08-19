@@ -1,6 +1,6 @@
 import browser from 'webextension-polyfill'
 
-export const setupAuthMsgLstnr = () => {
+export function setupAuthMsgLstnr() {
   browser.runtime.onConnect.addListener(() => {
     browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       if (message.contentScriptQuery === 'getAccessKey') {
