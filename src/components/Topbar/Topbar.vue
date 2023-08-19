@@ -42,7 +42,9 @@ const avatarShadow = ref<HTMLImageElement>() as Ref<HTMLImageElement>
 
 watch(
   showNotificationsPop,
-  (newVal) => {
+  (newVal, oldVal) => {
+    if (newVal === oldVal)
+      return
     if (!newVal)
       getUnreadMessageCount()
   },
@@ -50,7 +52,9 @@ watch(
 
 watch(
   showMomentsPop,
-  (newVal) => {
+  (newVal, oldVal) => {
+    if (newVal === oldVal)
+      return
     if (!newVal)
       getNewMomentsCount()
   },
@@ -314,7 +318,7 @@ function getNewMomentsCount() {
           <div
             class="right-side-item"
             :class="{ active: showNotificationsPop }"
-            @mouseenter="showNotificationsPop = true"
+            @mouseenter="showNotificationsPop = true; unReadMessageCount = 0"
             @mouseleave="showNotificationsPop = false"
           >
             <div v-if="unReadMessageCount !== 0" class="unread-message">
