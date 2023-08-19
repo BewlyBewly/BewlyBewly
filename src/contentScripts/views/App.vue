@@ -455,6 +455,6 @@ function setAppWallpaperMaskingOpacity() {
 }
 .list-enter-from,
 .list-leave-to {
-  --at-apply: opacity-0 transform translate-y-2 transform-gpu;
+  --at-apply: opacity-0 transform translate-y-6 transform-gpu;
 }
 </style>
