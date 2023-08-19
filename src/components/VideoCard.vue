@@ -15,6 +15,7 @@ const props = defineProps<{
   publishedTimestamp?: number
   bvid?: string
   aid?: number
+  isFollowed?: boolean
 }>()
 
 const videoUrl = computed(() => {

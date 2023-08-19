@@ -6,6 +6,7 @@ export interface VideoModel {
     mid: number
     name: string
   }
+  is_followed: boolean
   pic: string
   pubdate: number
   stat: {
