@@ -382,7 +382,7 @@ function scrollToTop(element: HTMLElement, duration: number) {
             <div flex="~" justify="between" w="full">
               <div>
                 <span>{{ `${moment.name} ${t('topbar.moments_dropdown.uploaded')}` }}</span>
-                <div overflow="hidden" text="overflow-ellipsis">
+                <div overflow-hidden text-ellipsis break-anywhere>
                   {{ moment.title }}
                 </div>
                 <div

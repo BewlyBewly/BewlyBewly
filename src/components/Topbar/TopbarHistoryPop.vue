@@ -368,7 +368,8 @@ function scrollToTop(element: HTMLElement, duration: number) {
                 <h3
                   class="keep-two-lines"
                   overflow="hidden"
-                  text="overflow-ellipsis"
+                  text="ellipsis"
+                  break-anywhere
                 >
                   {{ historyItem.title }}
                 </h3>
