@@ -9,7 +9,7 @@ interface Props {
   | 'error'
   size?: 'small' | 'medium' | 'large'
   /** @description enable frosted glass effect */
-  frosted?: boolean
+  frostedGlass?: boolean
   secondary?: boolean
   color?: string
   textColor?: string
@@ -21,7 +21,7 @@ const props = defineProps<Props>()
 
 const emit = defineEmits(['click'])
 
-const handleClick = (evt: MouseEvent) => {
+function handleClick(evt: MouseEvent) {
   emit('click', evt)
 }
 </script>
@@ -32,7 +32,7 @@ const handleClick = (evt: MouseEvent) => {
     :class="`
       b-button--type-${type ?? 'default'}
       b-button--size-${size ?? 'medium'}
-      ${frosted ? 'frosted-glass' : ''}
+      ${frostedGlass ? 'frosted-glass' : ''}
       ${secondary ? 'b-button--secondary' : ''}
       ${strong ? 'b-button--strong' : ''}
       ${color || textColor ? 'b-button--custom-color' : ''}
