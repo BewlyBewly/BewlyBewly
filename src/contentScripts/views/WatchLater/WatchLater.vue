@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n'
 import type { WatchLaterModel } from './types'
 import { getCSRF, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
 import { calcCurrentTime } from '~/utils/dataFormatter'
+import emitter from '~/utils/mitt'
 
 const { t } = useI18n()
 
@@ -13,6 +14,16 @@ const watchLaterList = reactive<Array<WatchLaterModel>>([])
 
 onMounted(() => {
   getAllWatchLaterList()
+
+  emitter.off('pageRefresh')
+  emitter.on('pageRefresh', async () => {
+    watchLaterList.length = 0
+    getAllWatchLaterList()
+  })
+})
+
+onUnmounted(() => {
+  emitter.off('pageRefresh')
 })
 
 /**

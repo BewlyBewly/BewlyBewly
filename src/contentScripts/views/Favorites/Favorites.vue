@@ -32,10 +32,17 @@ onMounted(async () => {
     if (!noMoreContent.value)
       getFavoriteResources(selectedCategory.value!.id, ++currentPageNum.value, keyword.value)
   })
+
+  emitter.off('pageRefresh')
+  emitter.on('pageRefresh', async () => {
+    favoriteResources.length = 0
+    handleSearch()
+  })
 })
 
 onUnmounted(() => {
   emitter.off('reachBottom')
+  emitter.off('pageRefresh')
 })
 
 async function getFavoriteCategories() {

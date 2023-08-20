@@ -19,6 +19,8 @@ const historyStatus = ref<boolean>()
 watch(
   () => keyword.value,
   (newValue, oldValue) => {
+    if (newValue === oldValue)
+      return
     emitter.on('reachBottom', () => {
       if (isLoading.value)
         return
@@ -47,10 +49,17 @@ onMounted(() => {
       else getHistoryList()
     }
   })
+
+  emitter.off('pageRefresh')
+  emitter.on('pageRefresh', async () => {
+    historyList.length = 0
+    getHistoryList()
+  })
 })
 
 onUnmounted(() => {
   emitter.off('reachBottom')
+  emitter.off('pageRefresh')
 })
 
 /**

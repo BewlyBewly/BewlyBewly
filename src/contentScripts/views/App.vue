@@ -36,7 +36,7 @@ const pages = { Home, Search, Anime, History, WatchLater, Favorites, Video }
 const mainAppRef = ref<HTMLElement>() as Ref<HTMLElement>
 const mainAppOpacity = ref<number>(0)
 const showTopbarMask = ref<boolean>(false)
-const dynamicComponentKey = ref<number>(Number(new Date()))
+const dynamicComponentKey = ref<string>(`dynamicComponent${Number(new Date())}`)
 
 // const isVideoPage = ref<boolean>(false)
 // const isBilibiliHomePage = ref<boolean>(false)
@@ -165,6 +165,15 @@ onMounted(() => {
 })
 
 function changeActivatePage(pageName: AppPage) {
+  if (activatedPage.value === pageName) {
+    if (activatedPage.value !== AppPage.Search) {
+      if (mainAppRef.value.scrollTop === 0)
+        handleRefresh()
+      else
+        handleBackToTop()
+    }
+    return
+  }
   activatedPage.value = pageName
 }
 
@@ -237,7 +246,9 @@ function setAppWallpaperMaskingOpacity() {
 }
 
 function handleRefresh() {
-  dynamicComponentKey.value = Number(new Date())
+  emitter.emit('pageRefresh')
+  if (activatedPage.value === AppPage.Anime)
+    dynamicComponentKey.value = `dynamicComponent${Number(new Date())}`
 }
 
 function handleBackToTop() {
