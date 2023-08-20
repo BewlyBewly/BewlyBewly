@@ -37,7 +37,7 @@ const isVideoPage = ref<boolean>(false)
 const mainAppRef = ref<HTMLElement>() as Ref<HTMLElement>
 const mainAppOpacity = ref<number>(0)
 const showTopbarMask = ref<boolean>(false)
-const dynamicCompoentKey = ref<number>(Number(new Date()))
+const dynamicComponentKey = ref<number>(Number(new Date()))
 
 const tooltipPlacement = computed(() => {
   if (settings.value.dockPosition === 'left')
@@ -214,7 +214,7 @@ function setAppWallpaperMaskingOpacity() {
 }
 
 function handleRefresh() {
-  dynamicCompoentKey.value = Number(new Date())
+  dynamicComponentKey.value = Number(new Date())
 }
 
 function handleBackToTop() {
@@ -386,7 +386,7 @@ function handleBackToTop() {
           </div>
 
           <Transition name="fade">
-            <Component :is="pages[activatedPage]" :key="dynamicCompoentKey" absolute w-full />
+            <Component :is="pages[activatedPage]" :key="dynamicComponentKey" absolute w-full />
             <!-- <Video v-else /> -->
           </Transition>
         </main>
