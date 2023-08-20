@@ -63,6 +63,32 @@ function injectApp() {
     setupApp(app)
     app.use(i18n).mount(root)
   }
+  else {
+    // const originalPageContent = document.querySelector('#i_cecream')
+    // if (originalPageContent)
+    //   originalPageContent.innerHTML = ''
+
+    // mount component to context window
+    const container = document.createElement('div')
+    container.id = 'bewly'
+    const root = document.createElement('div')
+    const styleEl = document.createElement('link')
+    const shadowDOM = container.attachShadow?.({ mode: __DEV__ ? 'open' : 'closed' }) || container
+    styleEl.setAttribute('rel', 'stylesheet')
+    styleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
+    shadowDOM.appendChild(styleEl)
+    shadowDOM.appendChild(root)
+
+    // inject svg icons
+    const svgDiv = document.createElement('div')
+    svgDiv.innerHTML = SVG_ICONS
+    shadowDOM.appendChild(svgDiv)
+
+    document.body.appendChild(container)
+    app = createApp(App)
+    setupApp(app)
+    app.use(i18n).mount(root)
+  }
 }
 
 export default app as AppType

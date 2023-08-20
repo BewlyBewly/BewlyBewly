@@ -33,11 +33,13 @@ const isDark = useDark({
 })
 const toggleDark = useToggle(isDark)
 const pages = { Home, Search, Anime, History, WatchLater, Favorites, Video }
-const isVideoPage = ref<boolean>(false)
 const mainAppRef = ref<HTMLElement>() as Ref<HTMLElement>
 const mainAppOpacity = ref<number>(0)
 const showTopbarMask = ref<boolean>(false)
 const dynamicComponentKey = ref<number>(Number(new Date()))
+
+// const isVideoPage = ref<boolean>(false)
+// const isBilibiliHomePage = ref<boolean>(false)
 
 const tooltipPlacement = computed(() => {
   if (settings.value.dockPosition === 'left')
@@ -47,6 +49,24 @@ const tooltipPlacement = computed(() => {
   else if (settings.value.dockPosition === 'bottom')
     return 'top'
   return 'right'
+})
+
+const isVideoPage = computed(() => {
+  if (/https?:\/\/(www.)?bilibili.com\/video\/.*/.test(location.href))
+    return true
+  return false
+})
+
+const isBilibiliHomePage = computed(() => {
+  if (
+    /https?:\/\/bilibili.com\/?$/.test(location.href)
+  || /https?:\/\/www.bilibili.com\/?$/.test(location.href)
+  || /https?:\/\/www.bilibili.com\/index.html$/.test(location.href)
+  || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(location.href)
+  || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(location.href)
+  )
+    return true
+  return false
 })
 
 watch(
@@ -132,8 +152,11 @@ onMounted(() => {
     })
   }
 
-  if (/https?:\/\/(www.)?bilibili.com\/video\/.*/.test(location.href))
-    isVideoPage.value = true
+  if (!isBilibiliHomePage.value) {
+    const originalTopBar: HTMLElement = document.querySelector('#biliMainHeader') as HTMLElement
+    originalTopBar!.style.visibility = 'hidden'
+  }
+
   setAppAppearance()
   setAppLanguage()
   setAppThemeColor()
@@ -246,12 +269,13 @@ function handleBackToTop() {
           v-show="settings.isShowTopbar"
           :show-search-bar="activatedPage !== AppPage.Search"
           :show-topbar-mask="showTopbarMask"
-          class="absolute top-0 left-0 z-50"
+          :pos="`${!isBilibiliHomePage ? 'fixed' : 'absolute'} top-0 left-0`" z-50
         />
       </Transition>
 
       <div flex="~" max-w="$bew-page-max-width">
         <aside
+          v-if="isBilibiliHomePage"
           class="dock-wrap"
           :class="{
             left: settings.dockPosition === 'left',
@@ -362,7 +386,7 @@ function handleBackToTop() {
         >
           <!-- control button group -->
           <div
-            v-if="activatedPage !== AppPage.Search"
+            v-if="isBilibiliHomePage && activatedPage !== AppPage.Search"
             pos="fixed right-24 bottom-4" z-4
           >
             <!-- refresh button -->
@@ -385,7 +409,7 @@ function handleBackToTop() {
             </Button>
           </div>
 
-          <Transition name="fade">
+          <Transition v-if="isBilibiliHomePage" name="fade">
             <Component :is="pages[activatedPage]" :key="dynamicComponentKey" absolute w-full />
             <!-- <Video v-else /> -->
           </Transition>
