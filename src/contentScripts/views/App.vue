@@ -14,7 +14,7 @@ import Video from './Video/Video.vue'
 import { accessKey, activatedPage, settings } from '~/logic'
 import '~/styles/index.ts'
 import { AppPage, LanguageType } from '~/enums/appEnums'
-import { getUserID, hexToRGBA } from '~/utils/main'
+import { getUserID, hexToRGBA, smoothScrollToTop } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
 const { locale } = useI18n()
@@ -37,6 +37,7 @@ const isVideoPage = ref<boolean>(false)
 const mainAppRef = ref<HTMLElement>() as Ref<HTMLElement>
 const mainAppOpacity = ref<number>(0)
 const showTopbarMask = ref<boolean>(false)
+const dynamicCompoentKey = ref<number>(Number(new Date()))
 
 const tooltipPlacement = computed(() => {
   if (settings.value.dockPosition === 'left')
@@ -211,6 +212,14 @@ function setAppWallpaperMaskingOpacity() {
   else
     bewlyElement.style.setProperty('--bew-bg-mask-opacity', `${settings.value.wallpaperMaskOpacity}%`)
 }
+
+function handleRefresh() {
+  dynamicCompoentKey.value = Number(new Date())
+}
+
+function handleBackToTop() {
+  smoothScrollToTop(mainAppRef.value, 300)
+}
 </script>
 
 <template>
@@ -347,13 +356,37 @@ function setAppWallpaperMaskingOpacity() {
         </aside>
 
         <main
-          ref="main"
           p="t-80px" m-auto
           relative
           :w="isVideoPage ? '[calc(100%-160px)]' : 'lg:85% md:[calc(90%-60px)] [calc(100%-140px)]'"
         >
+          <!-- control button group -->
+          <div
+            v-if="activatedPage !== AppPage.Search"
+            pos="fixed right-24 bottom-4" z-4
+          >
+            <!-- refresh button -->
+            <Button
+              v-if="!showTopbarMask"
+              size="small"
+              frosted-glass shadow="$bew-shadow-1" w-45px h-45px
+              @click="handleRefresh"
+            >
+              <tabler:refresh text-lg shrink-0 />
+            </Button>
+            <!-- back to top button -->
+            <Button
+              v-else
+              size="small"
+              frosted-glass shadow="$bew-shadow-1" w-45px h-45px mt-2
+              @click="handleBackToTop"
+            >
+              <tabler:arrow-big-up text-lg shrink-0 />
+            </Button>
+          </div>
+
           <Transition name="fade">
-            <Component :is="pages[activatedPage]" absolute w-full />
+            <Component :is="pages[activatedPage]" :key="dynamicCompoentKey" absolute w-full />
             <!-- <Video v-else /> -->
           </Transition>
         </main>

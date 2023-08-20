@@ -3,7 +3,7 @@
  * @param name cookie name
  * @returns cookie value
  */
-export const getCookie = (name: string) => {
+export function getCookie(name: string) {
   const value = `; ${document.cookie}`
   const parts: Array<string> = value.split(`; ${name}=`)
   if (parts.length === 2)
@@ -15,7 +15,7 @@ export const getCookie = (name: string) => {
  * @param name cookie name
  * @param value cookie value
  */
-export const setCookie = (name: string, value: any, expDays: number) => {
+export function setCookie(name: string, value: any, expDays: number) {
   const date = new Date()
   date.setTime(date.getTime() + expDays * 24 * 60 * 60 * 1000)
   const expires = `expires=${date.toUTCString()}`
@@ -38,11 +38,11 @@ export const getCSRF = () => getCookie('bili_jct')
  * @param url
  * @returns
  */
-export const removeHttpFromUrl = (url: string) => {
+export function removeHttpFromUrl(url: string) {
   return url.replace(/^https?:/, '')
 }
 
-export const openLinkToNewTab = (url: string) => {
+export function openLinkToNewTab(url: string) {
   window.open(url, '_blank')
 }
 
@@ -52,14 +52,40 @@ export const openLinkToNewTab = (url: string) => {
  * @param alpha color opacity
  * @returns
  */
-export const hexToRGBA = (hex: string, alpha: number) => {
-  const r = parseInt(hex.slice(1, 3), 16)
-  const g = parseInt(hex.slice(3, 5), 16)
-  const b = parseInt(hex.slice(5, 7), 16)
+export function hexToRGBA(hex: string, alpha: number) {
+  const r = Number.parseInt(hex.slice(1, 3), 16)
+  const g = Number.parseInt(hex.slice(3, 5), 16)
+  const b = Number.parseInt(hex.slice(5, 7), 16)
 
   if (alpha)
     return `rgba(${r}, ${g}, ${b}, ${alpha})`
 
   else
     return `rgb(${r}, ${g}, ${b})`
+}
+
+/**
+ * smooth scroll to the top of the html element
+ */
+export function smoothScrollToTop(element: HTMLElement, duration: number) {
+  // cancel if already on top
+  if (element.scrollTop === 0)
+    return
+
+  const cosParameter = element.scrollTop / 2
+  let scrollCount = 0
+  let oldTimestamp = 0
+
+  function step(newTimestamp: number) {
+    if (oldTimestamp !== 0) {
+      // if duration is 0 scrollCount will be Infinity
+      scrollCount += (Math.PI * (newTimestamp - oldTimestamp)) / duration
+      if (scrollCount >= Math.PI)
+        return (element.scrollTop = 0)
+      element.scrollTop = cosParameter + cosParameter * Math.cos(scrollCount)
+    }
+    oldTimestamp = newTimestamp
+    window.requestAnimationFrame(step)
+  }
+  window.requestAnimationFrame(step)
 }
