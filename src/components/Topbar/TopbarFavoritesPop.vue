@@ -2,7 +2,7 @@
 import type { Ref } from 'vue'
 import { onMounted, reactive, ref, watch } from 'vue'
 import type { FavoriteCategory, FavoriteResource } from './types'
-import { getUserID, removeHttpFromUrl } from '~/utils/main'
+import { getUserID, removeHttpFromUrl, smoothScrollToTop } from '~/utils/main'
 import { calcCurrentTime } from '~/utils/dataFormatter'
 
 const favoriteCategories = reactive<Array<FavoriteCategory>>([])
@@ -30,7 +30,7 @@ watch(activatedMediaId, (newVal: number, oldVal: number) => {
 
   favoriteResources.length = 0
   if (favoriteVideosWrap.value)
-    scrollToTop(favoriteVideosWrap.value, 300)
+    smoothScrollToTop(favoriteVideosWrap.value, 300)
 
   getFavoriteResources(newVal, 1)
 })
@@ -121,32 +121,6 @@ function changeCategory(categoryItem: FavoriteCategory) {
   activatedMediaId.value = categoryItem.id
   activatedFavoriteTitle.value = categoryItem.title
 }
-
-/**
- * smooth scroll to the top of the html element
- */
-function scrollToTop(element: HTMLElement, duration: number) {
-  // cancel if already on top
-  if (element.scrollTop === 0)
-    return
-
-  const cosParameter = element.scrollTop / 2
-  let scrollCount = 0
-  let oldTimestamp = 0
-
-  function step(newTimestamp: number) {
-    if (oldTimestamp !== 0) {
-      // if duration is 0 scrollCount will be Infinity
-      scrollCount += (Math.PI * (newTimestamp - oldTimestamp)) / duration
-      if (scrollCount >= Math.PI)
-        return (element.scrollTop = 0)
-      element.scrollTop = cosParameter + cosParameter * Math.cos(scrollCount)
-    }
-    oldTimestamp = newTimestamp
-    window.requestAnimationFrame(step)
-  }
-  window.requestAnimationFrame(step)
-}
 </script>
 
 <template>
@@ -170,7 +144,7 @@ function scrollToTop(element: HTMLElement, duration: number) {
       un-border="!rounded-t-$bew-radius"
       backdrop-glass
     >
-      <h3 cursor="pointer" font-600 @click="scrollToTop(favoriteVideosWrap, 300)">
+      <h3 cursor="pointer" font-600 @click="smoothScrollToTop(favoriteVideosWrap, 300)">
         {{ activatedFavoriteTitle }}
       </h3>
 

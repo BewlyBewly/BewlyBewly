@@ -5,7 +5,7 @@ import { onMounted, reactive, ref, watch } from 'vue'
 import { isNewArticle, isNewVideo, setLastestOffsetID } from './notify'
 import { MomentType } from './types'
 import type { MomentItem } from './types'
-import { getUserID } from '~/utils/main'
+import { getUserID, smoothScrollToTop } from '~/utils/main'
 import { calcTimeSince } from '~/utils/dataFormatter'
 
 const { t } = useI18n()
@@ -42,7 +42,7 @@ watch(selectedTab, (newVal: number, oldVal: number) => {
     return
 
   if (momentsWrap.value)
-    scrollToTop(momentsWrap.value, 300)
+    smoothScrollToTop(momentsWrap.value, 300)
   moments.length = 0
   if (newVal === 0) {
     getNewMoments([MomentType.Video, MomentType.Bangumi])
@@ -239,32 +239,6 @@ function pushItemIntoMoments(item: any) {
       isNew: isNewArticle(item.desc.dynamic_id),
     } as MomentItem)
   }
-}
-
-/**
- * smooth scroll to the top of the html element
- */
-function scrollToTop(element: HTMLElement, duration: number) {
-  // cancel if already on top
-  if (element.scrollTop === 0)
-    return
-
-  const cosParameter = element.scrollTop / 2
-  let scrollCount = 0
-  let oldTimestamp = 0
-
-  function step(newTimestamp: number) {
-    if (oldTimestamp !== 0) {
-      // if duration is 0 scrollCount will be Infinity
-      scrollCount += (Math.PI * (newTimestamp - oldTimestamp)) / duration
-      if (scrollCount >= Math.PI)
-        return (element.scrollTop = 0)
-      element.scrollTop = cosParameter + cosParameter * Math.cos(scrollCount)
-    }
-    oldTimestamp = newTimestamp
-    window.requestAnimationFrame(step)
-  }
-  window.requestAnimationFrame(step)
 }
 </script>
 

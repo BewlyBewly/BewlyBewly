@@ -5,7 +5,7 @@ import { onMounted, reactive, ref, watch } from 'vue'
 import { useDateFormat } from '@vueuse/core'
 import type { HistoryItem } from './types'
 import { HistoryType } from './types'
-import { removeHttpFromUrl } from '~/utils/main'
+import { removeHttpFromUrl, smoothScrollToTop } from '~/utils/main'
 import { calcCurrentTime } from '~/utils/dataFormatter'
 
 const { t } = useI18n()
@@ -44,7 +44,7 @@ watch(activatedTab, (newVal: number, oldVal: number) => {
 
   historys.length = 0
   if (historysWrap.value)
-    scrollToTop(historysWrap.value, 300)
+    smoothScrollToTop(historysWrap.value, 300)
 
   if (newVal === 0) {
     getHistoryList(HistoryType.Archive)
@@ -152,32 +152,6 @@ function getHistoryList(type: HistoryType, viewAt = 0 as number) {
       }
       isLoading.value = false
     })
-}
-
-/**
- * smooth scroll to the top of the html element
- */
-function scrollToTop(element: HTMLElement, duration: number) {
-  // cancel if already on top
-  if (element.scrollTop === 0)
-    return
-
-  const cosParameter = element.scrollTop / 2
-  let scrollCount = 0
-  let oldTimestamp = 0
-
-  function step(newTimestamp: number) {
-    if (oldTimestamp !== 0) {
-      // if duration is 0 scrollCount will be Infinity
-      scrollCount += (Math.PI * (newTimestamp - oldTimestamp)) / duration
-      if (scrollCount >= Math.PI)
-        return (element.scrollTop = 0)
-      element.scrollTop = cosParameter + cosParameter * Math.cos(scrollCount)
-    }
-    oldTimestamp = newTimestamp
-    window.requestAnimationFrame(step)
-  }
-  window.requestAnimationFrame(step)
 }
 </script>
 
