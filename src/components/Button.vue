@@ -14,6 +14,7 @@ interface Props {
   color?: string
   textColor?: string
   strong?: boolean
+  round?: boolean
 }
 
 // const props = withDefaults(defineProps<Props>(), {})
@@ -37,7 +38,7 @@ function handleClick(evt: MouseEvent) {
       ${strong ? 'b-button--strong' : ''}
       ${color || textColor ? 'b-button--custom-color' : ''}
     `"
-    :style="{ backgroundColor: color, color: textColor }"
+    :style="{ 'backgroundColor': color, 'color': textColor, '--b-radius': round ? '50px' : '' }"
     @click="handleClick"
   >
     <slot name="left" />
@@ -59,7 +60,7 @@ function handleClick(evt: MouseEvent) {
   --at-apply: bg-$b-color hover:bg-$b-color-hover
     rounded-$b-radius p-$b-padding transform-gpu active:scale-95
     duration-300 flex items-center gap-2 text-size-$b-font-size
-    text-$b-text-color;
+    text-$b-text-color lh-1.5em;
 
     & svg {
       --at-apply: text-size-$b-icon-size

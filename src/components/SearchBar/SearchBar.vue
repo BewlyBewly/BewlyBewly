@@ -160,6 +160,7 @@ function handleKeyDown() {
         @keyup.enter="navigateToSearchResultPage(keyword)"
         @keyup.up="handleKeyUp"
         @keyup.down="handleKeyDown"
+        @keydown.stop="() => {}"
       >
       <button
         p-2
@@ -174,7 +175,7 @@ function handleKeyDown() {
         style="--un-drop-shadow: drop-shadow(0 0 6px var(--bew-theme-color)) "
         @click="navigateToSearchResultPage(keyword)"
       >
-        <tabler:search />
+        <tabler:search block align-middle />
       </button>
     </div>
 
@@ -205,7 +206,7 @@ function handleKeyDown() {
             pointer-events-auto
             cursor-pointer
             text="base $bew-text-2"
-            leading-0
+            leading-0 p-0
             @click.stop="handleDelete(item.value)"
           >
             <ic-baseline-clear />

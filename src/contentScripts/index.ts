@@ -1,6 +1,5 @@
 // import { onMessage } from 'webext-bridge'
 import { createApp } from 'vue'
-import type { App as AppType } from 'vue'
 import App from './views/App.vue'
 import { setupApp } from '~/logic/common-setup'
 import { i18n } from '~/utils/i18n'
@@ -63,7 +62,16 @@ function injectApp() {
     setupApp(app)
     app.use(i18n).mount(root)
   }
-  else {
+  else if (
+    // video page
+    /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(currentUrl)
+    // watch later playlist
+    || /https?:\/\/(www.)?bilibili.com\/list\/watchlater.*/.test(currentUrl)
+    // favorite playlist
+    || /https?:\/\/(www.)?bilibili.com\/list\/ml.*/.test(currentUrl)
+    // search page
+    || /https?:\/\/search.bilibili.com\.*/.test(currentUrl)
+  ) {
     // const originalPageContent = document.querySelector('#i_cecream')
     // if (originalPageContent)
     //   originalPageContent.innerHTML = ''
@@ -77,6 +85,12 @@ function injectApp() {
     styleEl.setAttribute('rel', 'stylesheet')
     styleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
     shadowDOM.appendChild(styleEl)
+
+    const newStyleEl = document.createElement('link')
+    newStyleEl.setAttribute('rel', 'stylesheet')
+    newStyleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
+    document.body.appendChild(newStyleEl)
+
     shadowDOM.appendChild(root)
 
     // inject svg icons
@@ -90,5 +104,3 @@ function injectApp() {
     app.use(i18n).mount(root)
   }
 }
-
-export default app as AppType

@@ -72,7 +72,7 @@ defineProps<{
         <img
           :src="`${removeHttpFromUrl(cover)}@466w_622h.webp`"
           :alt="title"
-          rounded="$bew-radius" aspect="12/16"
+          rounded="$bew-radius" aspect="12/16" max-w-full w-full
         >
 
         <!-- image after hovering -->

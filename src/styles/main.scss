@@ -8,8 +8,12 @@
   color-scheme: dark;
 }
 
-html, body {
-  font-size: 14px!important;
+html,
+body {
+  // font-size: 14px !important;
+  // min-width: unset !important;
+  // filter: none !important;
+  background-color: var(--bew-bg) !important;
 }
 
 ::-webkit-scrollbar {
@@ -26,29 +30,13 @@ html > ::-webkit-scrollbar-track {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(120, 120, 122, .6);
+  background-color: rgba(120, 120, 122, 0.6);
   border-radius: 20px;
 }
 
 ::-webkit-scrollbar-corner {
   background: transparent;
 }
-
-// html,
-// body,
-// #app {
-//   margin: 0;
-//   padding: 0;
-// }
-
-// html {
-//   filter: none !important;
-// }
-
-// body {
-//   background: var(--bew-bg) !important;
-//   color: var(--bew-text-1);
-// }
 
 .keep-two-lines {
   overflow: hidden;
@@ -59,6 +47,25 @@ html > ::-webkit-scrollbar-track {
   -webkit-line-clamp: 2;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   --at-apply: color-$bew-text-1;
+}
+
+// adjust watcher later playlist container
+.playlist-container {
+  padding: 0 70px;
+}
+
+// video page
+.video-container-v1 {
+  padding: 0 70px;
+}
+
+.card-loaded {
+  background-color: var(--bew-elevated-solid-1);
 }

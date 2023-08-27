@@ -200,7 +200,7 @@ function getNewMomentsCount() {
         opacity="100"
         pointer-events-none
         z--1
-        :style="{ background: settings.wallpaper ? 'linear-gradient(rgba(0,0,0,.8), transparent)' : `linear-gradient(var(--bew-bg), transparent)` }"
+        :style="{ background: settings.wallpaper ? 'linear-gradient(rgba(0,0,0,4), transparent)' : `linear-gradient(var(--bew-bg), transparent)` }"
       />
     </Transition>
 
@@ -209,7 +209,9 @@ function getNewMomentsCount() {
       @mouseenter.self="showLogoMenuDropdown()"
       @mouseleave.self="closeLogoMenuDropdown()"
     >
-      <div ref="logo" class="logo">
+      <a
+        ref="logo" class="logo" href="//www.bilibili.com"
+      >
         <svg
           t="1645466458357"
           class="icon"
@@ -226,14 +228,14 @@ function getNewMomentsCount() {
           />
         </svg>
 
-        <tabler:chevron-down
+        <!-- <tabler:chevron-down
           w="!4"
           h="!4"
           m="l-4"
           icon="stroke-4"
           :style="{ color: settings.wallpaper && showTopbarMask ? 'white' : 'var(--bew-text-1)' }"
-        />
-      </div>
+        /> -->
+      </a>
       <Transition name="slide-in">
         <TopbarChannelsPop
           v-if="showChannelsPop"

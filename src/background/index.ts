@@ -1,5 +1,6 @@
 import type { Tabs } from 'webextension-polyfill'
 import browser from 'webextension-polyfill'
+
 // import { onMessage, sendMessage } from 'webext-bridge'
 import { resetCss } from './resetWebsiteStyle'
 import { setupAllMsgLstnrs } from './messageListeners'
@@ -57,15 +58,9 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
     || /https?:\/\/www.bilibili.com\/?$/.test(`${tab.url}`)
     || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(`${tab.url}`)
     || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(`${tab.url}`)
+    || true
     // || /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(`${tab.url}`)
   ) {
-    browser.scripting.insertCSS({
-      css: resetCss,
-      target: {
-        tabId,
-      },
-    })
-
     if (changInfo.status === 'loading') {
       // browser.scripting.insertCSS({
       //   css: `
@@ -80,6 +75,13 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
       //     tabId,
       //   },
       // })
+
+      browser.scripting.insertCSS({
+        css: resetCss,
+        target: {
+          tabId,
+        },
+      })
 
       // If it not a macOS, we will inject CSS to design the scrollbar
       if (!navigator.userAgent.includes('Mac OS X')) {

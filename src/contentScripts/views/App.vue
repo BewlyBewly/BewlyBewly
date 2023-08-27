@@ -11,14 +11,15 @@ import History from './History/History.vue'
 import WatchLater from './WatchLater/WatchLater.vue'
 import Favorites from './Favorites/Favorites.vue'
 import Video from './Video/Video.vue'
-import { accessKey, activatedPage, settings } from '~/logic'
+import { accessKey, settings } from '~/logic'
 import '~/styles/index.ts'
 import { AppPage, LanguageType } from '~/enums/appEnums'
 import { getUserID, hexToRGBA, smoothScrollToTop } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
+const activatedPage = ref<AppPage>(AppPage.Home)
 const { locale } = useI18n()
-const [showSettings, toggle] = useToggle(false)
+const [showSettings, toggleSettings] = useToggle(false)
 const isDark = useDark({
   onChanged: (isDark: boolean) => {
     if (isDark) {
@@ -101,15 +102,6 @@ watch(() => accessKey.value, () => {
     accessKey.value = ''
 })
 
-watch(() => settings.value.wallpaper, () => {
-  setAppWallpaper()
-})
-
-watch(() => settings.value.searchPageWallpaper, () => {
-  if (activatedPage.value === AppPage.Search)
-    setAppWallpaper()
-})
-
 watch(() => settings.value.wallpaperMaskOpacity, () => {
   setAppWallpaperMaskingOpacity()
 })
@@ -121,10 +113,8 @@ watch(() => settings.value.searchPageWallpaperMaskOpacity, () => {
 watch(() => activatedPage.value, (newValue, oldValue) => {
   // If u have set the `individuallySetSearchPageWallpaper`, reapply the wallpaper when the new page is search page
   // or when switching from a search page to another page, since search page has its own wallpaper.
-  if (settings.value.individuallySetSearchPageWallpaper && (newValue === AppPage.Search || oldValue === AppPage.Search)) {
-    setAppWallpaper()
+  if (settings.value.individuallySetSearchPageWallpaper && (newValue === AppPage.Search || oldValue === AppPage.Search))
     setAppWallpaperMaskingOpacity()
-  }
 })
 
 onMounted(() => {
@@ -153,14 +143,14 @@ onMounted(() => {
   }
 
   if (!isBilibiliHomePage.value) {
-    const originalTopBar: HTMLElement = document.querySelector('#biliMainHeader') as HTMLElement
-    originalTopBar!.style.visibility = 'hidden'
+    const originalTopBar: HTMLElement = document.querySelector('#biliMainHeader, #bili-header-container') as HTMLElement
+    if (originalTopBar)
+      originalTopBar.style.visibility = 'hidden'
   }
 
   setAppAppearance()
   setAppLanguage()
   setAppThemeColor()
-  setAppWallpaper()
   setAppWallpaperMaskingOpacity()
 })
 
@@ -210,9 +200,9 @@ function setAppAppearance() {
   else
     mainAppRef.value?.classList.remove('dark')
 
-  // Override Bilibili Evolved background color
-  document.body.style.setProperty('background-color', 'unset', 'important')
-  document.documentElement.style.setProperty('background-color', 'var(--bew-bg)', 'important')
+  // // Override Bilibili Evolved background color
+  // document.body.style.setProperty('background-color', 'unset', 'important')
+  // document.documentElement.style.setProperty('background-color', 'var(--bew-bg)', 'important')
 }
 
 function setAppThemeColor() {
@@ -222,19 +212,10 @@ function setAppThemeColor() {
     for (let i = 0; i < 9; i++)
       bewlyElement.style.setProperty(`--bew-theme-color-${i + 1}0`, hexToRGBA(settings.value.themeColor, i * 0.1 + 0.1))
   }
-}
 
-function setAppWallpaper() {
-  nextTick(() => {
-    if (settings.value.individuallySetSearchPageWallpaper && activatedPage.value === AppPage.Search)
-      document.documentElement.style.backgroundImage = `url(${settings.value.searchPageWallpaper})`
-    else
-      document.documentElement.style.backgroundImage = `url(${settings.value.wallpaper})`
-
-    document.documentElement.style.backgroundSize = 'cover'
-    document.documentElement.style.backgroundPosition = 'center'
-    document.documentElement.style.transition = 'backgroundImage .5s ease-in-out'
-  })
+  document.body.style.setProperty('--bew-theme-color', settings.value.themeColor)
+  for (let i = 0; i < 9; i++)
+    document.body.style.setProperty(`--bew-theme-color-${i + 1}0`, hexToRGBA(settings.value.themeColor, i * 0.1 + 0.1))
 }
 
 function setAppWallpaperMaskingOpacity() {
@@ -257,23 +238,47 @@ function handleBackToTop() {
 </script>
 
 <template>
-  <!-- background mask -->
-  <div
-    v-if="(!settings.individuallySetSearchPageWallpaper && settings.enableWallpaperMasking) || (activatedPage !== AppPage.Search && settings.enableWallpaperMasking)"
-    pos="absolute top-0 left-0" w-full h-full pointer-events-none bg="$bew-bg-mask" z--1
-    :style="{
-      backdropFilter: `blur(${settings.wallpaperBlurIntensity}px)`,
-    }"
-  />
-  <div
-    v-else-if="settings.individuallySetSearchPageWallpaper && activatedPage === AppPage.Search && settings.searchPageEnableWallpaperMasking"
-    pos="absolute top-0 left-0" w-full h-full pointer-events-none bg="$bew-bg-mask" z--1
-    :style="{
-      backdropFilter: `blur(${settings.searchPageWallpaperBlurIntensity}px)`,
-    }"
-  />
+  <template v-if="isBilibiliHomePage">
+    <template v-if="activatedPage === AppPage.Search">
+      <!-- background -->
+      <div
+        pos="absolute top-0 left-0" w-full h-full duration-300 bg="cover center $bew-homepage-bg"
+        :style="{ backgroundImage: `url(${settings.individuallySetSearchPageWallpaper ? settings.searchPageWallpaper : settings.wallpaper})` }"
+      />
+      <!-- background mask -->
+      <transition name="fade">
+        <div
+          v-if="(!settings.individuallySetSearchPageWallpaper && settings.enableWallpaperMasking) || (settings.searchPageEnableWallpaperMasking)"
+          pos="absolute top-0 left-0" w-full h-full pointer-events-none bg="$bew-bg-mask"
+          :style="{
+            backdropFilter: `blur(${settings.individuallySetSearchPageWallpaper ? settings.searchPageWallpaperBlurIntensity : settings.wallpaperBlurIntensity}px)`,
+          }"
+        />
+      </transition>
+    </template>
+    <template v-else>
+      <!-- background -->
+      <div
+        pos="absolute top-0 left-0" w-full h-full duration-300 bg="cover center $bew-bg"
+        :style="{ backgroundImage: `url(${settings.wallpaper})` }"
+      />
+      <!-- background mask -->
+      <transition name="fade">
+        <div
+          v-if="settings.enableWallpaperMasking"
+          pos="absolute top-0 left-0" w-full h-full pointer-events-none bg="$bew-bg-mask"
+          :style="{
+            backdropFilter: `blur(${settings.wallpaperBlurIntensity}px)`,
+          }"
+        />
+      </transition>
+    </template>
+  </template>
 
-  <div ref="mainAppRef" text="$bew-text-1" transition="opacity duration-300" h-100vh overflow-y-scroll :style="{ opacity: mainAppOpacity }">
+  <div
+    ref="mainAppRef" class="bewly-wrapper" text="$bew-text-1" transition="opacity duration-300" overflow-y-scroll z-60
+    :style="{ opacity: mainAppOpacity, height: isBilibiliHomePage ? '100vh' : '0' }"
+  >
     <div m-auto max-w="$bew-page-max-width" :style="{ opacity: showSettings ? 0.4 : 1 }">
       <Transition name="topbar">
         <Topbar
@@ -305,7 +310,7 @@ function handleBackToTop() {
             <Tooltip :content="$t('dock.search')" :placement="tooltipPlacement">
               <button
                 class="dock-item"
-                :class="{ active: activatedPage === AppPage.Search && !isVideoPage }"
+                :class="{ active: activatedPage === AppPage.Search }"
                 @click="changeActivatePage(AppPage.Search)"
               >
                 <tabler:search />
@@ -315,7 +320,7 @@ function handleBackToTop() {
             <Tooltip :content="$t('dock.home')" :placement="tooltipPlacement">
               <button
                 class="dock-item"
-                :class="{ active: activatedPage === AppPage.Home && !isVideoPage }"
+                :class="{ active: activatedPage === AppPage.Home }"
                 @click="changeActivatePage(AppPage.Home)"
               >
                 <tabler:home />
@@ -325,7 +330,7 @@ function handleBackToTop() {
             <Tooltip :content="$t('dock.anime')" :placement="tooltipPlacement">
               <button
                 class="dock-item"
-                :class="{ active: activatedPage === AppPage.Anime && !isVideoPage }"
+                :class="{ active: activatedPage === AppPage.Anime }"
                 @click="changeActivatePage(AppPage.Anime)"
               >
                 <tabler:device-tv />
@@ -335,7 +340,7 @@ function handleBackToTop() {
             <Tooltip :content="$t('dock.history')" :placement="tooltipPlacement">
               <button
                 class="dock-item"
-                :class="{ active: activatedPage === AppPage.History && !isVideoPage }"
+                :class="{ active: activatedPage === AppPage.History }"
                 @click="changeActivatePage(AppPage.History)"
               >
                 <tabler:clock />
@@ -355,7 +360,7 @@ function handleBackToTop() {
             <Tooltip :content="$t('dock.watch_later')" :placement="tooltipPlacement">
               <button
                 class="dock-item"
-                :class="{ active: activatedPage === AppPage.WatchLater && !isVideoPage }"
+                :class="{ active: activatedPage === AppPage.WatchLater }"
                 @click="changeActivatePage(AppPage.WatchLater)"
               >
                 <iconoir:playlist-play />
@@ -383,21 +388,37 @@ function handleBackToTop() {
             </Tooltip>
 
             <Tooltip :content="$t('dock.settings')" :placement="tooltipPlacement">
-              <button class="dock-item" @click="toggle()">
+              <button class="dock-item" @click="toggleSettings()">
                 <tabler:settings />
               </button>
             </Tooltip>
           </div>
         </aside>
+        <aside v-else pos="fixed top-0 right-6px" h-full flex items-center z-10>
+          <div flex="~ gap-2 col">
+            <Tooltip :content="isDark ? $t('dock.dark_mode') : $t('dock.light_mode')" placement="left">
+              <Button size="small" round shadow="$bew-shadow-1" w-45px h-45px @click="toggleDark()">
+                <tabler:moon-stars v-if="isDark" text-xl shrink-0 lh-0 />
+                <tabler:sun v-else text-xl shrink-0 lh-0 />
+              </Button>
+            </Tooltip>
+            <Tooltip :content="$t('dock.settings')" placement="left">
+              <Button size="small" round shadow="$bew-shadow-1" w-45px h-45px @click="toggleSettings">
+                <tabler:settings text-xl shrink-0 lh-0 />
+              </Button>
+            </Tooltip>
+          </div>
+        </aside>
 
         <main
+          v-if="isBilibiliHomePage"
           p="t-80px" m-auto
           relative
           :w="isVideoPage ? '[calc(100%-160px)]' : 'lg:85% md:[calc(90%-60px)] [calc(100%-140px)]'"
         >
           <!-- control button group -->
           <div
-            v-if="isBilibiliHomePage && activatedPage !== AppPage.Search"
+            v-if="activatedPage !== AppPage.Search"
             pos="fixed right-24 bottom-4" z-4
           >
             <!-- refresh button -->
@@ -420,9 +441,8 @@ function handleBackToTop() {
             </Button>
           </div>
 
-          <Transition v-if="isBilibiliHomePage" name="fade">
+          <Transition name="fade">
             <Component :is="pages[activatedPage]" :key="dynamicComponentKey" absolute w-full />
-            <!-- <Video v-else /> -->
           </Transition>
         </main>
       </div>
@@ -444,6 +464,10 @@ function handleBackToTop() {
 }
 
 .dock-wrap {
+  svg {
+    --at-apply: block align-middle;
+  }
+
   &.left {
     --at-apply: left-2;
   }
