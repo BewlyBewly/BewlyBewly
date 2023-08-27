@@ -203,9 +203,9 @@ function toggleWatchLater() {
         <img
           :src="`${removeHttpFromUrl(cover)}@672w_378h_1c`"
           loading="lazy"
-          w="full" aspect-video
+          w="full" max-w-full align-middle aspect-video
           bg="cover center"
-          rounded="$bew-radius"
+          rounded="$bew-radius" content-visibility-auto
         >
       </div>
 
@@ -222,7 +222,7 @@ function toggleWatchLater() {
               :src="`${removeHttpFromUrl(authorFace)}@50w_50h_1c`"
               width="40"
               height="40"
-              loading="lazy"
+              loading="lazy" content-visibility-auto
             >
           </a>
         </div>
