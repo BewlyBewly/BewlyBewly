@@ -142,6 +142,12 @@ onMounted(() => {
     })
   }
 
+  document.addEventListener('scroll', () => {
+    if (window.scrollY > 0)
+      showTopbarMask.value = true
+    else showTopbarMask.value = false
+  })
+
   if (!isBilibiliHomePage.value) {
     const originalTopBar: HTMLElement = document.querySelector('#biliMainHeader, #bili-header-container') as HTMLElement
     if (originalTopBar)
