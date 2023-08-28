@@ -43,7 +43,7 @@ watch(selectedTab, (newVal: number, oldVal: number) => {
 
   if (momentsWrap.value)
     smoothScrollToTop(momentsWrap.value, 300)
-  moments.length = 0
+
   if (newVal === 0) {
     getNewMoments([MomentType.Video, MomentType.Bangumi])
   }
@@ -90,6 +90,7 @@ function onClickTab(tabId: number) {
 }
 
 function getNewMoments(typeList: number[]) {
+  moments.length = 0
   isLoading.value = true
   browser.runtime
     .sendMessage({
@@ -151,6 +152,7 @@ function getHistoryMoments(typeList: number[]) {
 }
 
 function getLiveMoments(page: number) {
+  moments.length = 0
   isLoading.value = true
   browser.runtime
     .sendMessage({

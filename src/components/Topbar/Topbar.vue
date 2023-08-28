@@ -45,6 +45,7 @@ watch(
   (newVal, oldVal) => {
     if (newVal === oldVal)
       return
+
     if (!newVal)
       getUnreadMessageCount()
   },
@@ -52,25 +53,20 @@ watch(
 
 watch(
   showMomentsPop,
-  (newVal, oldVal) => {
+  async (newVal, oldVal) => {
     if (newVal === oldVal)
       return
+
     if (!newVal)
-      getNewMomentsCount()
+      await getNewMomentsCount()
   },
 )
 
 onMounted(() => {
-  initUserPanel()
-
-  // document.addEventListener('scroll', () => {
-  //   if (window.scrollY > 0)
-  //     showTopbarMask.value = true
-  //   else showTopbarMask.value = false
-  // })
+  initData()
 })
 
-async function initUserPanel() {
+async function initData() {
   await getUserInfo()
   getUnreadMessageCount()
   getNewMomentsCount()
@@ -130,34 +126,28 @@ async function getUnreadMessageCount() {
   if (!isLogin.value)
     return
 
+  unReadMessageCount.value = 0
+
   try {
     let res
     res = await browser.runtime.sendMessage({
       contentScriptQuery: 'getUnreadMsg',
     })
-    if (res.code === 0)
+    if (res.code === 0) {
       Object.assign(unReadMessage, res.data)
+      Object.entries(unReadMessage).forEach(([key, value]) => {
+        if (key !== 'up')
+          unReadMessageCount.value += typeof value === 'number' ? value : 0
+      })
+    }
 
     res = await browser.runtime.sendMessage({
       contentScriptQuery: 'getUnreadDm',
     })
-    if (res.code === 0)
+    if (res.code === 0) {
       Object.assign(unReadDm, res.data)
-
-    unReadMessageCount.value = 0
-
-    if (Object.keys(unReadMessage).length > 0) {
-      Object.keys(unReadMessage).forEach((key) => {
-        if (key !== 'up') {
-          unReadMessageCount.value
-          += typeof unReadMessage[key as keyof typeof unReadMessage] === 'number' ? unReadMessage[key as keyof typeof unReadMessage] : 0
-        }
-      })
-    }
-
-    if (Object.keys(unReadDm).length > 0) {
-      Object.keys(unReadDm).forEach((key) => {
-        unReadMessageCount.value += typeof unReadDm[key as keyof typeof unReadDm] === 'number' ? unReadDm[key as keyof typeof unReadDm] : 0
+      Object.entries(unReadDm).forEach(([, value]) => {
+        unReadMessageCount.value += typeof value === 'number' ? value : 0
       })
     }
   }
@@ -167,18 +157,21 @@ async function getUnreadMessageCount() {
   }
 }
 
-function getNewMomentsCount() {
+async function getNewMomentsCount() {
   if (!isLogin)
     return
 
-  browser.runtime
-    .sendMessage({
+  newMomentsCount.value = 0
+
+  try {
+    const res = await browser.runtime.sendMessage({
       contentScriptQuery: 'getNewMomentsCount',
     })
-    .then((res) => {
-      newMomentsCount.value = res.data.update_info.item.count
-    })
-    .catch(() => newMomentsCount.value = 0)
+    newMomentsCount.value = res.data.update_info.item.count
+  }
+  catch {
+    newMomentsCount.value = 0
+  }
 }
 </script>
 
@@ -307,7 +300,6 @@ function getNewMomentsCount() {
           <Transition name="slide-in">
             <TopbarUserPanelPop
               v-if="showUserPanelPop"
-              ref="userPanelDropdown"
               :user-info="userInfo"
               after:h="!0"
               class="bew-popover"
@@ -320,7 +312,7 @@ function getNewMomentsCount() {
           <div
             class="right-side-item"
             :class="{ active: showNotificationsPop }"
-            @mouseenter="showNotificationsPop = true; unReadMessageCount = 0"
+            @mouseenter="showNotificationsPop = true"
             @mouseleave="showNotificationsPop = false"
           >
             <div v-if="unReadMessageCount !== 0" class="unread-message">
@@ -337,7 +329,6 @@ function getNewMomentsCount() {
             <Transition name="slide-in">
               <TopbarNotificationsPop
                 v-if="showNotificationsPop"
-                ref="notificationsDropdown"
                 class="bew-popover"
               />
             </Transition>
@@ -347,7 +338,7 @@ function getNewMomentsCount() {
           <div
             class="right-side-item"
             :class="{ active: showMomentsPop }"
-            @mouseenter="showMomentsPop = true; newMomentsCount = 0"
+            @mouseenter="showMomentsPop = true"
             @mouseleave="showMomentsPop = false"
           >
             <div v-if="newMomentsCount !== 0" class="unread-message">
@@ -362,7 +353,9 @@ function getNewMomentsCount() {
             </a>
 
             <Transition name="slide-in">
+              <!-- <KeepAlive> -->
               <TopbarMomentsPop v-if="showMomentsPop" class="bew-popover" />
+              <!-- </KeepAlive> -->
             </Transition>
           </div>
 
@@ -382,10 +375,12 @@ function getNewMomentsCount() {
             </a>
 
             <Transition name="slide-in">
-              <TopbarFavoritesPop
-                v-show="showFavoritesPop"
-                class="bew-popover"
-              />
+              <KeepAlive>
+                <TopbarFavoritesPop
+                  v-if="showFavoritesPop"
+                  class="bew-popover"
+                />
+              </KeepAlive>
             </Transition>
           </div>
 
