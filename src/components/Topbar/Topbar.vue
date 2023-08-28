@@ -200,7 +200,7 @@ function getNewMomentsCount() {
         opacity="100"
         pointer-events-none
         z--1
-        :style="{ background: settings.wallpaper ? 'linear-gradient(rgba(0,0,0,4), transparent)' : `linear-gradient(var(--bew-bg), transparent)` }"
+        :style="{ background: settings.wallpaper ? 'linear-gradient(rgba(0,0,0,0.5), transparent)' : `linear-gradient(var(--bew-bg), transparent)` }"
       />
     </Transition>
 

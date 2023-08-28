@@ -249,7 +249,7 @@ function handleBackToTop() {
       <transition name="fade">
         <div
           v-if="(!settings.individuallySetSearchPageWallpaper && settings.enableWallpaperMasking) || (settings.searchPageEnableWallpaperMasking)"
-          pos="absolute top-0 left-0" w-full h-full pointer-events-none bg="$bew-bg-mask"
+          pos="absolute top-0 left-0" w-full h-full pointer-events-none bg="$bew-bg-mask" duration-300
           :style="{
             backdropFilter: `blur(${settings.individuallySetSearchPageWallpaper ? settings.searchPageWallpaperBlurIntensity : settings.wallpaperBlurIntensity}px)`,
           }"
@@ -266,7 +266,7 @@ function handleBackToTop() {
       <transition name="fade">
         <div
           v-if="settings.enableWallpaperMasking"
-          pos="absolute top-0 left-0" w-full h-full pointer-events-none bg="$bew-bg-mask"
+          pos="absolute top-0 left-0" w-full h-full pointer-events-none bg="$bew-bg-mask" duration-300
           :style="{
             backdropFilter: `blur(${settings.wallpaperBlurIntensity}px)`,
           }"
