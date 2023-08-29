@@ -52,14 +52,22 @@ browser.runtime.onInstalled.addListener((): void => {
 // preinsert css
 browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChangeInfoType, tab: Tabs.Tab) => {
   if (
+    // homepage
     /https?:\/\/bilibili.com\/?$/.test(`${tab.url}`)
     || /https?:\/\/bilibili.com\/index.html\/?$/.test(`${tab.url}`)
     || /https?:\/\/www.bilibili.com\/index.html\/?$/.test(`${tab.url}`)
     || /https?:\/\/www.bilibili.com\/?$/.test(`${tab.url}`)
     || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(`${tab.url}`)
     || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(`${tab.url}`)
-    || true
-    // || /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(`${tab.url}`)
+
+    // video page
+    || /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(`${tab.url}`)
+    // watch later playlist
+    || /https?:\/\/(www.)?bilibili.com\/list\/watchlater.*/.test(`${tab.url}`)
+    // favorite playlist
+    || /https?:\/\/(www.)?bilibili.com\/list\/ml.*/.test(`${tab.url}`)
+    // search page
+    || /https?:\/\/search.bilibili.com\.*/.test(`${tab.url}`)
   ) {
     if (changInfo.status === 'loading') {
       // browser.scripting.insertCSS({

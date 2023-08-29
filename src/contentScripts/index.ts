@@ -35,7 +35,6 @@ function injectApp() {
   || /https?:\/\/www.bilibili.com\/index.html$/.test(currentUrl)
   || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(currentUrl)
   || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(currentUrl)
-  // || /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(currentUrl)
   ) {
     const originalPageContent = document.querySelector('#i_cecream')
     if (originalPageContent)
