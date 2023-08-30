@@ -99,22 +99,22 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
               width: 8px;
               height: 8px;
             }
-
+            
             ::-webkit-scrollbar-track {
               background: transparent;
             }
-
+            
             html > ::-webkit-scrollbar-track {
               background: var(--bew-bg);
             }
-
+            
             ::-webkit-scrollbar-thumb {
-              background-color: rgba(120, 120, 122, .5);
+              background-color: rgba(120, 120, 122, 0.6);
               border-radius: 20px;
             }
-
+            
             ::-webkit-scrollbar-corner {
-              background: var(--bew-bg)
+              background: transparent;
             }
           `,
           target: { tabId },

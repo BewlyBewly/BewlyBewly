@@ -18,6 +18,10 @@ body {
   filter: none !important;
 }
 
+html.dark {
+  color-scheme: dark;
+}
+
 // html, body {
 //   background-color: var(--bew-bg);
 // }

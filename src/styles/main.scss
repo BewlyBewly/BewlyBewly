@@ -16,28 +16,6 @@ body {
   background-color: var(--bew-bg) !important;
 }
 
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-html > ::-webkit-scrollbar-track {
-  background: var(--bew-bg);
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: rgba(120, 120, 122, 0.6);
-  border-radius: 20px;
-}
-
-::-webkit-scrollbar-corner {
-  background: transparent;
-}
-
 .keep-two-lines {
   overflow: hidden;
   text-overflow: ellipsis;
