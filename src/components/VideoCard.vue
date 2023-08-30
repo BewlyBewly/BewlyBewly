@@ -159,7 +159,10 @@ function toggleWatchLater() {
       <div
         w="full" relative bg="$bew-fill-4" rounded="$bew-radius" cursor-pointer group-hover:shadow
         group-hover:transform="translate--4px"
-        style="--un-shadow: 6px 6px 0 0 var(--bew-theme-color-60), 12px 12px 0 0 var(--bew-theme-color-40)"
+        style="--un-shadow:
+          0 0 0 4px var(--bew-theme-color),
+          8px 8px 0 2px var(--bew-theme-color-60),
+          14px 14px 0 2px var(--bew-theme-color-40)"
         transition="all ease-in-out 300" group-hover:z-2
         @click.stop="openLinkToNewTab(videoUrl)"
       >
@@ -215,6 +218,7 @@ function toggleWatchLater() {
             v-if="authorFace"
             m="r-4" w="40px" h="40px" rounded="1/2" overflow="hidden" object="center cover"
             bg="$bew-fill-4" cursor="pointer"
+            style="--un-shadow: 0 0 0 2px var(--bew-theme-color)"
             :href="`//space.bilibili.com/${mid}`" target="_blank"
             @click.stop=""
           >
