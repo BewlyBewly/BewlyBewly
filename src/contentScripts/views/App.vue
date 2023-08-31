@@ -23,11 +23,15 @@ const [showSettings, toggleSettings] = useToggle(false)
 const isDark = useDark({
   onChanged: (isDark: boolean) => {
     if (isDark) {
-      document.querySelector('html')?.classList.add('dark')
+      document.documentElement.classList.add('dark')
+      // Adjust Bilibili Evolved to dark mode when switching to dark mode
+      document.body.classList.add('dark')
       document.querySelector('#bewly')?.classList.add('dark')
     }
     else {
-      document.querySelector('html')?.classList.remove('dark')
+      document.documentElement.classList.remove('dark')
+      // Adjust Bilibili Evolved to light mode when switching to light mode
+      document.body.classList.remove('dark')
       document.querySelector('#bewly')?.classList.remove('dark')
     }
   },
