@@ -1,0 +1,38 @@
+.dark {
+  .user-card-m-exp .layout {
+    display: none;
+  }
+
+  .user-card-m-exp .user-info-wrapper .info .btn-box .like:hover {
+    background-color: var(--bew-theme-color-80);
+    border-color: var(--bew-theme-color-80);
+  }
+
+  // 投幣滑過&選中的邊框
+  .coin-operated-m-exp .mc-box:hover,
+  .coin-operated-m-exp .mc-box.on {
+    border-color: var(--bew-theme-color);
+  }
+
+  .video-share-popover {
+    // border-color: var(--bew-border-color);
+    border: none;
+  }
+
+  // 評論人用戶名
+  .reply-item .root-reply-container .content-warp .user-info .user-name {
+    // --520c991b: var(--bew-theme-color);
+    color: var(--bew-text-1);
+  }
+
+  // UP主觉得很赞
+  .reply-item
+    .root-reply-container
+    .content-warp
+    .root-reply
+    .reply-tag-list
+    .reply-tag-item {
+    color: var(--bew-text-2) !important;
+    background-color: var(--bew-fill-1) !important;
+  }
+}
