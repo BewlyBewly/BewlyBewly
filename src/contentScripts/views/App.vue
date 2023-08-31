@@ -129,9 +129,9 @@ onMounted(() => {
   })
 
   if (isBilibiliHomePage.value) {
-    // Force overwrite Bilibili Evolved body tag & html tag background color 
-    document.body.style.setProperty('background-color', 'unset', 'important');
-    document.documentElement.style.setProperty('background-color', 'unset', 'important');
+    // Force overwrite Bilibili Evolved body tag & html tag background color
+    document.body.style.setProperty('background-color', 'unset', 'important')
+    document.documentElement.style.setProperty('background-color', 'unset', 'important')
   }
 
   if (mainAppRef.value) {
@@ -255,40 +255,42 @@ function handleBackToTop() {
 
 <template>
   <template v-if="isBilibiliHomePage">
-    <template v-if="activatedPage === AppPage.Search">
-      <!-- background -->
-      <div
-        pos="absolute top-0 left-0" w-full h-full duration-300 bg="cover center $bew-homepage-bg" z--1
-        :style="{ backgroundImage: `url(${settings.individuallySetSearchPageWallpaper ? settings.searchPageWallpaper : settings.wallpaper})` }"
-      />
-      <!-- background mask -->
-      <transition name="fade">
+    <Transition name="fade">
+      <div v-if="activatedPage === AppPage.Search">
+        <!-- background -->
         <div
-          v-if="(!settings.individuallySetSearchPageWallpaper && settings.enableWallpaperMasking) || (settings.searchPageEnableWallpaperMasking)"
-          pos="absolute top-0 left-0" w-full h-full pointer-events-none bg="$bew-bg-mask" duration-300 z--1
-          :style="{
-            backdropFilter: `blur(${settings.individuallySetSearchPageWallpaper ? settings.searchPageWallpaperBlurIntensity : settings.wallpaperBlurIntensity}px)`,
-          }"
+          pos="absolute top-0 left-0" w-full h-full duration-300 bg="cover center $bew-homepage-bg" z--1
+          :style="{ backgroundImage: `url(${settings.individuallySetSearchPageWallpaper ? settings.searchPageWallpaper : settings.wallpaper})` }"
         />
-      </transition>
-    </template>
-    <template v-else>
-      <!-- background -->
-      <div
-        pos="absolute top-0 left-0" w-full h-full duration-300 bg="cover center $bew-bg" z--1
-        :style="{ backgroundImage: `url(${settings.wallpaper})` }"
-      />
-      <!-- background mask -->
-      <transition name="fade">
+        <!-- background mask -->
+        <transition name="fade">
+          <div
+            v-if="(!settings.individuallySetSearchPageWallpaper && settings.enableWallpaperMasking) || (settings.searchPageEnableWallpaperMasking)"
+            pos="absolute top-0 left-0" w-full h-full pointer-events-none bg="$bew-bg-mask" duration-300 z--1
+            :style="{
+              backdropFilter: `blur(${settings.individuallySetSearchPageWallpaper ? settings.searchPageWallpaperBlurIntensity : settings.wallpaperBlurIntensity}px)`,
+            }"
+          />
+        </transition>
+      </div>
+      <div v-else>
+        <!-- background -->
         <div
-          v-if="settings.enableWallpaperMasking"
-          pos="absolute top-0 left-0" w-full h-full pointer-events-none bg="$bew-bg-mask" duration-300 z--1
-          :style="{
-            backdropFilter: `blur(${settings.wallpaperBlurIntensity}px)`,
-          }"
+          pos="absolute top-0 left-0" w-full h-full duration-300 bg="cover center $bew-bg" z--1
+          :style="{ backgroundImage: `url(${settings.wallpaper})` }"
         />
-      </transition>
-    </template>
+        <!-- background mask -->
+        <transition name="fade">
+          <div
+            v-if="settings.enableWallpaperMasking"
+            pos="absolute top-0 left-0" w-full h-full pointer-events-none bg="$bew-bg-mask" duration-300 z--1
+            :style="{
+              backdropFilter: `blur(${settings.wallpaperBlurIntensity}px)`,
+            }"
+          />
+        </transition>
+      </div>
+    </Transition>
   </template>
 
   <div
