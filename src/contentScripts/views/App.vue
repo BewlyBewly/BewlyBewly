@@ -128,9 +128,11 @@ onMounted(() => {
     }, 1200)
   })
 
-  // Force overwrite Bilibili Evolved body tag & html tag background color 
-  document.body.style.setProperty('background-color', 'unset', 'important');
-  document.documentElement.style.setProperty('background-color', 'unset', 'important');
+  if (isBilibiliHomePage.value) {
+    // Force overwrite Bilibili Evolved body tag & html tag background color 
+    document.body.style.setProperty('background-color', 'unset', 'important');
+    document.documentElement.style.setProperty('background-color', 'unset', 'important');
+  }
 
   if (mainAppRef.value) {
     mainAppRef.value.addEventListener('scroll', () => {
