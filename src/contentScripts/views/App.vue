@@ -125,7 +125,7 @@ onMounted(() => {
   nextTick(() => {
     setTimeout(() => {
       mainAppOpacity.value = 1
-    }, 800)
+    }, 1200)
   })
 
   // Force overwrite Bilibili Evolved body tag & html tag background color 

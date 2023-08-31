@@ -9,6 +9,8 @@ let app: any
 
 const isFirefox: boolean = /Firefox/i.test(navigator.userAgent)
 
+document.documentElement.style.opacity = '0'
+// document.documentElement.style.transition = 'opacity .5s ease-in-out'
 if (isFirefox) {
   let isFirstScriptExecute = true
   document.addEventListener('beforescriptexecute', () => {
@@ -16,6 +18,10 @@ if (isFirefox) {
       return
 
     injectApp()
+    setTimeout(() => {
+      document.documentElement.style.opacity = '1'
+      // document.documentElement.style.transition = 'unset'
+    }, 800)
 
     isFirstScriptExecute = false
   })
@@ -23,6 +29,10 @@ if (isFirefox) {
 else {
   document.addEventListener('DOMContentLoaded', () => {
     injectApp()
+    setTimeout(() => {
+      document.documentElement.style.opacity = '1'
+      // document.documentElement.style.transition = 'unset'
+    }, 800)
   })
 }
 
