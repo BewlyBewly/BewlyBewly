@@ -28,6 +28,8 @@ const showUploadPop = ref<boolean>(false)
 const showHistoryPop = ref<boolean>(false)
 const showMorePop = ref<boolean>(false)
 
+const momentsPopKey = ref<string>(`momentsPop[${Number(new Date())}]`)
+
 const isLogin = ref<boolean>(false)
 const unReadMessage = reactive<UnReadMessage | {}>(
   {},
@@ -46,7 +48,7 @@ watch(
     if (newVal === oldVal)
       return
 
-    if (!newVal)
+    if (newVal)
       getUnreadMessageCount()
   },
 )
@@ -57,7 +59,7 @@ watch(
     if (newVal === oldVal)
       return
 
-    if (!newVal)
+    if (newVal)
       await getNewMomentsCount()
   },
 )
@@ -168,6 +170,9 @@ async function getNewMomentsCount() {
       contentScriptQuery: 'getNewMomentsCount',
     })
     newMomentsCount.value = res.data.update_info.item.count
+    // If moments count > 0 then refresh the key to get the new moments
+    if (newMomentsCount.value > 0)
+      momentsPopKey.value = `momentsPop[${Number(new Date())}]`
   }
   catch {
     newMomentsCount.value = 0
@@ -353,9 +358,9 @@ async function getNewMomentsCount() {
             </a>
 
             <Transition name="slide-in">
-              <!-- <KeepAlive> -->
-              <TopbarMomentsPop v-if="showMomentsPop" class="bew-popover" />
-              <!-- </KeepAlive> -->
+              <KeepAlive>
+                <TopbarMomentsPop v-if="showMomentsPop" :key="momentsPopKey" class="bew-popover" />
+              </KeepAlive>
             </Transition>
           </div>
 
