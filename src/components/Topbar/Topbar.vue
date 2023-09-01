@@ -48,7 +48,7 @@ watch(
     if (newVal === oldVal)
       return
 
-    if (newVal)
+    if (!newVal)
       getUnreadMessageCount()
   },
 )
@@ -59,7 +59,7 @@ watch(
     if (newVal === oldVal)
       return
 
-    if (newVal)
+    if (!newVal)
       await getNewMomentsCount()
   },
 )
