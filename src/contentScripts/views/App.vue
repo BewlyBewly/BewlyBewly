@@ -43,7 +43,7 @@ const showTopbarMask = ref<boolean>(false)
 const dynamicComponentKey = ref<string>(`dynamicComponent${Number(new Date())}`)
 
 // const isVideoPage = ref<boolean>(false)
-// const isBilibiliHomePage = ref<boolean>(false)
+// const isHomePage = ref<boolean>(false)
 
 const tooltipPlacement = computed(() => {
   if (settings.value.dockPosition === 'left')
@@ -55,19 +55,27 @@ const tooltipPlacement = computed(() => {
   return 'right'
 })
 
-const isVideoPage = computed(() => {
-  if (/https?:\/\/(www.)?bilibili.com\/video\/.*/.test(location.href))
-    return true
-  return false
-})
-
-const isBilibiliHomePage = computed(() => {
+const isHomePage = computed(() => {
   if (
     /https?:\/\/bilibili.com\/?$/.test(location.href)
   || /https?:\/\/www.bilibili.com\/?$/.test(location.href)
   || /https?:\/\/www.bilibili.com\/index.html$/.test(location.href)
   || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(location.href)
   || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(location.href)
+  )
+    return true
+  return false
+})
+
+const isVideoPage = computed(() => {
+  if (/https?:\/\/(www.)?bilibili.com\/video\/.*/.test(location.href))
+    return true
+  return false
+})
+
+const isSearchPage = computed(() => {
+  if (
+    /https?:\/\/search.bilibili.com\/.*$/.test(location.href)
   )
     return true
   return false
@@ -127,7 +135,7 @@ onMounted(() => {
     }, 1200)
   })
 
-  if (isBilibiliHomePage.value) {
+  if (isHomePage.value) {
     // Force overwrite Bilibili Evolved body tag & html tag background color
     document.body.style.setProperty('background-color', 'unset', 'important')
     document.documentElement.style.setProperty('background-color', 'unset', 'important')
@@ -157,7 +165,7 @@ onMounted(() => {
     else showTopbarMask.value = false
   })
 
-  if (!isBilibiliHomePage.value) {
+  if (!isHomePage.value) {
     const originalTopBar: HTMLElement = document.querySelector('#biliMainHeader, #bili-header-container') as HTMLElement
     if (originalTopBar)
       originalTopBar.style.visibility = 'hidden'
@@ -253,7 +261,7 @@ function handleBackToTop() {
 </script>
 
 <template>
-  <template v-if="isBilibiliHomePage">
+  <template v-if="isHomePage">
     <Transition name="fade">
       <div v-if="activatedPage === AppPage.Search">
         <!-- background -->
@@ -294,21 +302,29 @@ function handleBackToTop() {
 
   <div
     ref="mainAppRef" class="bewly-wrapper" text="$bew-text-1" transition="opacity duration-300" overflow-y-scroll z-60
-    :style="{ opacity: mainAppOpacity, height: isBilibiliHomePage ? '100vh' : '0' }"
+    :style="{ opacity: mainAppOpacity, height: isHomePage ? '100vh' : '0' }"
   >
     <div m-auto max-w="$bew-page-max-width" :style="{ opacity: showSettings ? 0.4 : 1 }">
       <Transition name="topbar">
         <Topbar
+          v-if="!isSearchPage"
           v-show="settings.isShowTopbar"
           :show-search-bar="activatedPage !== AppPage.Search"
           :show-topbar-mask="showTopbarMask"
-          :pos="`${!isBilibiliHomePage ? 'fixed' : 'absolute'} top-0 left-0`" z-50
+          :pos="`${!isHomePage ? 'fixed' : 'absolute'} top-0 left-0`" z-50
+        />
+        <Topbar
+          v-else
+          v-show="settings.isShowTopbar"
+          :show-search-bar="activatedPage !== AppPage.Search"
+          :show-topbar-mask="showTopbarMask"
+          pos="absolute top-0 left-0" z-50
         />
       </Transition>
 
       <div flex="~" max-w="$bew-page-max-width">
         <aside
-          v-if="isBilibiliHomePage"
+          v-if="isHomePage"
           class="dock-wrap"
           :class="{
             left: settings.dockPosition === 'left',
@@ -428,7 +444,7 @@ function handleBackToTop() {
         </aside>
 
         <main
-          v-if="isBilibiliHomePage"
+          v-if="isHomePage"
           p="t-80px" m-auto
           relative
           :w="isVideoPage ? '[calc(100%-160px)]' : 'lg:85% md:[calc(90%-60px)] [calc(100%-140px)]'"
