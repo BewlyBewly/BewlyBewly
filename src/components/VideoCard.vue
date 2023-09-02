@@ -117,7 +117,7 @@ function toggleWatchLater() {
     class="video-card group"
     :class="isDislike ? 'is-dislike' : ''"
     m="b-8"
-    rounded="“$bew-radius"
+    rounded="$bew-radius"
   >
     <!-- Undo control -->
     <div :style="{ visibility: isDislike ? 'visible' : 'hidden' }" pos="absolute">
@@ -136,22 +136,22 @@ function toggleWatchLater() {
       >
         {{ $t('home.video_removed') }}
         <!-- <button
-          text="$bew-theme-color base"
-          font="bold"
-          m="t-4"
-          @click="
-            undoDislike(
-              dislikeReasonId ? dislikeReasonId : 0,
-              goto,
-              param,
-              mid,
-              tid,
-              tag.tag_id,
-            )
-          "
-        >
-          {{ $t('common.undo') }}
-        </button> -->
+            text="$bew-theme-color base"
+            font="bold"
+            m="t-4"
+            @click="
+              undoDislike(
+                dislikeReasonId ? dislikeReasonId : 0,
+                goto,
+                param,
+                mid,
+                tid,
+                tag.tag_id,
+              )
+            "
+          >
+            {{ $t('common.undo') }}
+          </button> -->
       </div>
     </div>
 
@@ -160,9 +160,9 @@ function toggleWatchLater() {
         w="full" relative bg="$bew-fill-4" rounded="$bew-radius" cursor-pointer group-hover:shadow
         group-hover:transform="translate--4px"
         style="--un-shadow:
-          0 0 0 4px var(--bew-theme-color),
-          8px 8px 0 2px var(--bew-theme-color-60),
-          14px 14px 0 2px var(--bew-theme-color-40)"
+            0 0 0 4px var(--bew-theme-color),
+            8px 8px 0 2px var(--bew-theme-color-60),
+            14px 14px 0 2px var(--bew-theme-color-40)"
         transition="all ease-in-out 300" group-hover:z-2
         @click.stop="openLinkToNewTab(videoUrl)"
       >
@@ -208,7 +208,7 @@ function toggleWatchLater() {
           loading="lazy"
           w="full" max-w-full align-middle aspect-video
           bg="cover center"
-          rounded="$bew-radius" content-visibility-auto
+          rounded="$bew-radius"
         >
       </div>
 
@@ -226,7 +226,7 @@ function toggleWatchLater() {
               :src="`${removeHttpFromUrl(authorFace)}@50w_50h_1c`"
               width="40"
               height="40"
-              loading="lazy" content-visibility-auto
+              loading="lazy"
             >
           </a>
         </div>
@@ -234,7 +234,7 @@ function toggleWatchLater() {
           <div flex="~" justify="between" w="full" pos="relative">
             <h3
               class="keep-two-lines"
-              text="lg overflow-ellipsis space-normal $bew-text-1"
+              text="lg overflow-ellipsis $bew-text-1" h-3em
               cursor="pointer"
             >
               <a :href="videoUrl" target="_blank" :title="title">
@@ -242,16 +242,16 @@ function toggleWatchLater() {
             </h3>
 
             <!-- <div
-              id="dislike-control-btn"
-              class="icon-btn"
-              p="t-0.15rem x-2"
-              pointer="auto"
-              display="invisible"
-              group-hover:display="visible"
-              @click.stop="showPopCtrl = !showPopCtrl"
-            >
-              <tabler:dots-vertical text="lg" />
-            </div> -->
+                id="dislike-control-btn"
+                class="icon-btn"
+                p="t-0.15rem x-2"
+                pointer="auto"
+                display="invisible"
+                group-hover:display="visible"
+                @click.stop="showPopCtrl = !showPopCtrl"
+              >
+                <tabler:dots-vertical text="lg" />
+              </div> -->
 
             <!-- dislike control -->
             <template v-if="showPopCtrl">
@@ -266,52 +266,52 @@ function toggleWatchLater() {
 
               <!-- dislike reason popup -->
               <!-- <div
-                pos="absolute top-9 right-0"
-                p="2"
-                z="30"
-                w="180px"
-                bg="$bew-content-1"
-                rounded="$bew-radius"
-                style="
-                  box-shadow: var(--bew-shadow-2);
-                  backdrop-filter: var(--bew-filter-glass);
-                "
-              >
-                <p p="2" text="$bew-text-3">
-                  {{ $t('home.not_interested_in') }}
-                </p>
-                <ul>
-                  <li
-                    v-for="reason in dislikeReasons"
-                    :key="reason.reason_id"
-                    p="2"
-                    m="b-1"
-                    cursor="pointer"
-                    hover:bg="$bew-fill-2"
-                    transition="all duration-300"
-                    rounded="$bew-radius"
-                    @click.stop="
-                      submitDislike(
-                        reason.reason_id,
-                        goto,
-                        param,
-                        mid,
-                        tid,
-                        tag.tag_id,
-                      )
-                    "
-                  >
-                    {{ reason.reason_name }}
-                  </li>
-                </ul>
-              </div> -->
+                  pos="absolute top-9 right-0"
+                  p="2"
+                  z="30"
+                  w="180px"
+                  bg="$bew-content-1"
+                  rounded="$bew-radius"
+                  style="
+                    box-shadow: var(--bew-shadow-2);
+                    backdrop-filter: var(--bew-filter-glass);
+                  "
+                >
+                  <p p="2" text="$bew-text-3">
+                    {{ $t('home.not_interested_in') }}
+                  </p>
+                  <ul>
+                    <li
+                      v-for="reason in dislikeReasons"
+                      :key="reason.reason_id"
+                      p="2"
+                      m="b-1"
+                      cursor="pointer"
+                      hover:bg="$bew-fill-2"
+                      transition="all duration-300"
+                      rounded="$bew-radius"
+                      @click.stop="
+                        submitDislike(
+                          reason.reason_id,
+                          goto,
+                          param,
+                          mid,
+                          tid,
+                          tag.tag_id,
+                        )
+                      "
+                    >
+                      {{ reason.reason_name }}
+                    </li>
+                  </ul>
+                </div> -->
             </template>
           </div>
           <div
             v-if="author"
             class="channel-name"
             text="base $bew-text-2"
-            m="t-2"
+            m="t-2" cursor-pointer
             @click="gotoChannel(mid ?? 0)"
           >
             {{ author }}

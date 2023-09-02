@@ -1,18 +1,3 @@
-// // adjust watcher later playlist container
-// .playlist-container {
-//   padding: 0 70px;
-// }
-
-// // video page
-// .video-container-v1 {
-//   padding: 0 70px;
-// }
-
-.video-container-v1 .right-container,
-.playlist-container .playlist-container--right {
-  width: 350px !important;
-}
-
 .dark {
   .user-card-m-exp .layout {
     display: none;
@@ -39,9 +24,20 @@
   .upinfo-btn-panel .new-charge-btn .charge-btn-icon img,
   .bpx-player-viewpoint-menu-item-active,
   .cur-play-icon,
+  .playing-gif,
   .multi-page-v1 .cur-list .list-box li.on img,
-  .reply-content-container .reply-content .icon {
+  .reply-content-container .reply-content .icon,
+  .coin-operated-m-exp .like-checkbox input[type='checkbox']:checked + i {
     filter: saturate(0) brightness(2);
+  }
+
+  .upinfo-btn-panel .follow-btn.not-follow:hover {
+    background-color: var(--bew-theme-color-80);
+  }
+
+  .upinfo-btn-panel .not-follow-charge-btn:hover {
+    border-color: var(--bew-theme-color-80);
+    color: var(--bew-theme-color-80);
   }
 
   // Tick icon for  danmaku enable
@@ -62,6 +58,11 @@
   .coin-operated-m-exp .mc-box:hover,
   .coin-operated-m-exp .mc-box.on {
     border-color: var(--bew-theme-color);
+  }
+  // 投幣按鈕滑過效果
+  .coin-operated-m-exp .coin-bottom .bi-btn:hover {
+    background-color: var(--bew-theme-color-80);
+    border-color: var(--bew-theme-color-80);
   }
 
   .video-share-popover {
@@ -95,5 +96,32 @@
     .reply-tag-item {
     color: var(--bew-text-2) !important;
     background-color: var(--bew-fill-1) !important;
+  }
+
+  // Like & dislike icon
+  .like-icon,
+  .dislike-icon,
+  .sub-like-icon,
+  .sub-dislike-icon {
+    color: var(--bew-text-3) !important;
+  }
+
+  .like-icon:hover,
+  .like-icon.liked,
+  .dislike-icon:hover,
+  .dislike-icon.disliked,
+  .sub-like-icon:hover,
+  .sub-like-icon.liked,
+  .sub-dislike-icon:hover,
+  .sub-dislike-icon.disliked  {
+    color: var(--bew-theme-color) !important;
+  }
+
+  .reply-operation .operation-icon:hover {
+    color: var(--bew-theme-color);
+  }
+
+  .bili-comment.browser-pc * a:hover {
+    color: var(--bew-theme-color-80);
   }
 }

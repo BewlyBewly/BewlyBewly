@@ -228,9 +228,9 @@ function setAppThemeColor() {
       bewlyElement.style.setProperty(`--bew-theme-color-${i + 1}0`, hexToRGBA(settings.value.themeColor, i * 0.1 + 0.1))
   }
 
-  document.body.style.setProperty('--bew-theme-color', settings.value.themeColor)
+  document.documentElement.style.setProperty('--bew-theme-color', settings.value.themeColor)
   for (let i = 0; i < 9; i++)
-    document.body.style.setProperty(`--bew-theme-color-${i + 1}0`, hexToRGBA(settings.value.themeColor, i * 0.1 + 0.1))
+    document.documentElement.style.setProperty(`--bew-theme-color-${i + 1}0`, hexToRGBA(settings.value.themeColor, i * 0.1 + 0.1))
 }
 
 function setAppWallpaperMaskingOpacity() {
@@ -411,8 +411,8 @@ function handleBackToTop() {
             </Tooltip>
           </div>
         </aside>
-        <aside v-else pos="fixed top-0 right-6px" h-full flex items-center z-10>
-          <div flex="~ gap-2 col">
+        <aside v-else pos="fixed top-0 right-6px" h-full flex items-center z-10 pointer-events-none>
+          <div flex="~ gap-2 col" pointer-events-auto>
             <Tooltip :content="isDark ? $t('dock.dark_mode') : $t('dock.light_mode')" placement="left">
               <Button size="small" round shadow="$bew-shadow-1" w-45px h-45px @click="toggleDark()">
                 <tabler:moon-stars v-if="isDark" text-xl shrink-0 lh-0 />
