@@ -1,6 +1,56 @@
+// // adjust watcher later playlist container
+// .playlist-container {
+//   padding: 0 70px;
+// }
+
+// // video page
+// .video-container-v1 {
+//   padding: 0 70px;
+// }
+
+.video-container-v1 .right-container,
+.playlist-container .playlist-container--right {
+  width: 350px !important;
+}
+
 .dark {
   .user-card-m-exp .layout {
     display: none;
+  }
+
+  .user-card-m-exp .user-info-wrapper {
+    background-color: var(--bew-bg);
+    border-radius: 0 0 8px 8px;
+  }
+
+  .up-detail .up-detail-top .up-name,
+  .user-card-m-exp .user-info-wrapper .info .user .name {
+    color: var(--bew-text-1) !important;
+  }
+
+  .user-card-m-exp .user-info-wrapper .info .user .user-label {
+    background-color: var(--bew-theme-color) !important;
+  }
+
+  .membersinfo-upcard .staff-info .staff-name.is-vip {
+    color: var(--bew-theme-color) !important;
+  }
+
+  .upinfo-btn-panel .new-charge-btn .charge-btn-icon img,
+  .bpx-player-viewpoint-menu-item-active,
+  .cur-play-icon,
+  .multi-page-v1 .cur-list .list-box li.on img,
+  .reply-content-container .reply-content .icon {
+    filter: saturate(0) brightness(2);
+  }
+
+  // Tick icon for  danmaku enable
+  .bui-danmaku-switch
+    .bui-danmaku-switch-input:checked
+    + .bui-danmaku-switch-label
+    .bui-danmaku-switch-on
+    path:nth-child(2) {
+    fill: var(--bew-theme-color);
   }
 
   .user-card-m-exp .user-info-wrapper .info .btn-box .like:hover {
@@ -19,8 +69,19 @@
     border: none;
   }
 
+  .video-share-popover
+    .video-share-dropdown
+    .dropdown-top
+    .dropdown-top-left
+    .capture-bar
+    .bar-right
+    .copy-link:hover {
+    background-color: var(--bew-theme-color-80);
+  }
+
   // 評論人用戶名
-  .reply-item .root-reply-container .content-warp .user-info .user-name {
+  .reply-item .root-reply-container .content-warp .user-info .user-name,
+  .sub-reply-item .sub-user-info .sub-user-name {
     // --520c991b: var(--bew-theme-color);
     color: var(--bew-text-1);
   }

@@ -21,7 +21,7 @@ if (isFirefox) {
     setTimeout(() => {
       document.documentElement.style.opacity = '1'
       // document.documentElement.style.transition = 'unset'
-    }, 800)
+    }, 500)
 
     isFirstScriptExecute = false
   })
@@ -32,7 +32,7 @@ else {
     setTimeout(() => {
       document.documentElement.style.opacity = '1'
       // document.documentElement.style.transition = 'unset'
-    }, 800)
+    }, 500)
   })
 }
 

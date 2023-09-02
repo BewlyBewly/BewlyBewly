@@ -1,0 +1,14 @@
+// .search-input-container .search-fixed-header.search-sticky-header {
+//   display: none;;
+// }
+
+.dark {
+  .keyword,
+  .search-input-wrap .suggest_high_light {
+    color: var(--bew-theme-color);
+  }
+
+  .media-footer-badge {
+    background-color: var(--bew-theme-color) !important;
+  }
+}

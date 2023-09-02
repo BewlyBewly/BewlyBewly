@@ -10,7 +10,6 @@ import Anime from './Anime/Anime.vue'
 import History from './History/History.vue'
 import WatchLater from './WatchLater/WatchLater.vue'
 import Favorites from './Favorites/Favorites.vue'
-import Video from './Video/Video.vue'
 import { accessKey, settings } from '~/logic'
 import '~/styles/index.ts'
 import { AppPage, LanguageType } from '~/enums/appEnums'
@@ -37,7 +36,7 @@ const isDark = useDark({
   },
 })
 const toggleDark = useToggle(isDark)
-const pages = { Home, Search, Anime, History, WatchLater, Favorites, Video }
+const pages = { Home, Search, Anime, History, WatchLater, Favorites }
 const mainAppRef = ref<HTMLElement>() as Ref<HTMLElement>
 const mainAppOpacity = ref<number>(0)
 const showTopbarMask = ref<boolean>(false)
