@@ -318,7 +318,7 @@ function handleBackToTop() {
           v-show="settings.isShowTopbar"
           :show-search-bar="activatedPage !== AppPage.Search"
           :show-topbar-mask="showTopbarMask"
-          pos="absolute top-0 left-0" z-50
+          pos="absolute top-0 left-0" z-50 w="[calc(100%-8px)]"
         />
       </Transition>
 
