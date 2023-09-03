@@ -1,0 +1,57 @@
+.bili-dyn-home--member {
+  margin-top: 10px;
+}
+
+#app .bg {
+  z-index: unset;
+}
+
+.bili-dyn-home--member {
+  z-index: 1;
+  position: relative;
+}
+
+// #region Old moments page
+.international-header {
+  visibility: hidden;
+  margin-bottom: 10px;
+}
+
+aside section.sticky {
+  top: 80px;
+}
+// #endregion
+
+.dark {
+  .dyn-orig-author__following.following-icon:before {
+    filter: saturate(0) brightness(2);
+  }
+
+  #app .bg {
+    opacity: 0.2;
+  }
+
+  #app .bgc {
+    background-color: var(--bew-bg);
+  }
+
+  .bili-dyn-home--member {
+    // --bg1: var(--bew-content-solid-1);
+    // --bg2: var(--bew-bg);
+  }
+
+  .bili-dyn-topic__card {
+    color: var(--bew-theme-color);
+  }
+
+  // #region Old moments page
+  // .bili-rich-text__content {
+  //   color: var(--bew-text-1);
+  // }
+
+  // .bili-dyn-my-info,
+  // .bili-dyn-my-info--skeleton {
+  //   background-color: var(--bew-bg);
+  // }
+  // #endregion
+}

@@ -68,6 +68,8 @@ browser.tabs.onUpdated.addListener((tabId: number, changInfo: Tabs.OnUpdatedChan
     || /https?:\/\/(www.)?bilibili.com\/list\/ml.*/.test(`${tab.url}`)
     // search page
     || /https?:\/\/search.bilibili.com\.*/.test(`${tab.url}`)
+    // moments page
+    || /https?:\/\/t.bilibili.com\.*/.test(`${tab.url}`)
   ) {
     if (changInfo.status === 'loading') {
       // browser.scripting.insertCSS({

@@ -238,13 +238,15 @@
   // --bpx-primary-color: var(--bew-theme-color);
   // --bpx-fn-color: var(--bew-theme-color);
   // --bpx-fn-hover-color: var(--bew-theme-color);
-
+  
   --brand_pink_hover: var(--bew-theme-color-80);
   --brand_pink_active: var(--bew-theme-color);
   --brand_pink_disabled: var(--bew-theme-color-60);
   --brand_blue_hover: var(--bew-theme-color-80);
   --brand_blue_active: var(--bew-theme-color);
   --brand_blue_disabled: var(--bew-theme-color-60);
+
+  --graph_bg_thin_rgb: 13, 14, 17;
 }
 
 :root.dark {

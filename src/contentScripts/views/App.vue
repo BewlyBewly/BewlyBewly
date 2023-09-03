@@ -140,6 +140,7 @@ onMounted(() => {
     document.body.style.setProperty('background-color', 'unset', 'important')
     document.documentElement.style.setProperty('background-color', 'unset', 'important')
   }
+  document.documentElement.style.setProperty('font-size', '14px')
 
   if (mainAppRef.value) {
     mainAppRef.value.addEventListener('scroll', () => {

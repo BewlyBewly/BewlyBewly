@@ -79,49 +79,4 @@
     .copy-link:hover {
     background-color: var(--bew-theme-color-80);
   }
-
-  // 評論人用戶名
-  .reply-item .root-reply-container .content-warp .user-info .user-name,
-  .sub-reply-item .sub-user-info .sub-user-name {
-    // --520c991b: var(--bew-theme-color);
-    color: var(--bew-text-1);
-  }
-
-  // UP主觉得很赞
-  .reply-item
-    .root-reply-container
-    .content-warp
-    .root-reply
-    .reply-tag-list
-    .reply-tag-item {
-    color: var(--bew-text-2) !important;
-    background-color: var(--bew-fill-1) !important;
-  }
-
-  // Like & dislike icon
-  .like-icon,
-  .dislike-icon,
-  .sub-like-icon,
-  .sub-dislike-icon {
-    color: var(--bew-text-3) !important;
-  }
-
-  .like-icon:hover,
-  .like-icon.liked,
-  .dislike-icon:hover,
-  .dislike-icon.disliked,
-  .sub-like-icon:hover,
-  .sub-like-icon.liked,
-  .sub-dislike-icon:hover,
-  .sub-dislike-icon.disliked  {
-    color: var(--bew-theme-color) !important;
-  }
-
-  .reply-operation .operation-icon:hover {
-    color: var(--bew-theme-color);
-  }
-
-  .bili-comment.browser-pc * a:hover {
-    color: var(--bew-theme-color-80);
-  }
 }

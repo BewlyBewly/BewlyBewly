@@ -80,6 +80,8 @@ function injectApp() {
     || /https?:\/\/(www.)?bilibili.com\/list\/ml.*/.test(currentUrl)
     // search page
     || /https?:\/\/search.bilibili.com\.*/.test(currentUrl)
+    // moments
+    || /https?:\/\/t.bilibili.com\.*/.test(currentUrl)
   ) {
     // const originalPageContent = document.querySelector('#i_cecream')
     // if (originalPageContent)
