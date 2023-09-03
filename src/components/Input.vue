@@ -22,7 +22,7 @@ onMounted(() => {
     rounded="$bew-radius" outline-none transition-all duration-300
     bg="$bew-fill-1"
     focus:shadow focus:ring="2px $bew-theme-color"
-    @input="$emit('update:modelValue', $event!.target!.value)"
+    @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
     @keydown.enter="$emit('enter')"
   >
 </template>
