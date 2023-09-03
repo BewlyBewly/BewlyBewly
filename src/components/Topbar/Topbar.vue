@@ -42,6 +42,18 @@ const logo = ref<HTMLElement>() as Ref<HTMLElement>
 const avatarImg = ref<HTMLImageElement>() as Ref<HTMLImageElement>
 const avatarShadow = ref<HTMLImageElement>() as Ref<HTMLImageElement>
 
+const isHomePage = computed(() => {
+  if (
+    /https?:\/\/bilibili.com\/?$/.test(location.href)
+  || /https?:\/\/www.bilibili.com\/?$/.test(location.href)
+  || /https?:\/\/www.bilibili.com\/index.html$/.test(location.href)
+  || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(location.href)
+  || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(location.href)
+  )
+    return true
+  return false
+})
+
 watch(
   showNotificationsPop,
   (newVal, oldVal) => {
@@ -198,7 +210,7 @@ async function getNewMomentsCount() {
         opacity="100"
         pointer-events-none
         z--1
-        :style="{ background: settings.wallpaper ? 'linear-gradient(rgba(0,0,0,0.5), transparent)' : `linear-gradient(var(--bew-bg), transparent)` }"
+        :style="{ background: settings.wallpaper && isHomePage ? 'linear-gradient(rgba(0,0,0,0.5), transparent)' : `linear-gradient(var(--bew-homepage-bg), transparent)` }"
       />
     </Transition>
 

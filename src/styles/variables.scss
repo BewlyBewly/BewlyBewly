@@ -83,8 +83,8 @@
 
   --bew-bg: hsl(0 0% 100%);
   --bew-homepage-bg: hsl(220 14% 96%);
-  --bew-bg-mask-opacity: 0;
-  --bew-bg-mask: hsl(220 14% 96% / var(--bew-bg-mask-opacity));
+  --bew-homepage-bg-mask-opacity: 0;
+  --bew-homepage-bg-mask: hsl(220 14% 96% / var(--bew-homepage-bg-mask-opacity));
 
   --bew-content-opacity: 0.6;
 
@@ -124,7 +124,7 @@
 
   --bew-bg: hsl(230 12% 6%);
   --bew-homepage-bg: hsl(230 12% 6%);
-  --bew-bg-mask: hsl(230 12% 6% / var(--bew-bg-mask-opacity));
+  --bew-homepage-bg-mask: hsl(230 12% 6% / var(--bew-homepage-bg-mask-opacity));
 
   --bew-content-1: hsl(230 12% 13% / var(--bew-content-opacity));
   --bew-content-1-hover: hsl(230 12% 25% / var(--bew-content-opacity));

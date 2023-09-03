@@ -244,9 +244,9 @@ function setAppThemeColor() {
 function setAppWallpaperMaskingOpacity() {
   const bewlyElement = document.querySelector('#bewly') as HTMLElement
   if (settings.value.individuallySetSearchPageWallpaper && activatedPage.value === AppPage.Search)
-    bewlyElement.style.setProperty('--bew-bg-mask-opacity', `${settings.value.searchPageWallpaperMaskOpacity}%`)
+    bewlyElement.style.setProperty('--bew-homepage-bg-mask-opacity', `${settings.value.searchPageWallpaperMaskOpacity}%`)
   else
-    bewlyElement.style.setProperty('--bew-bg-mask-opacity', `${settings.value.wallpaperMaskOpacity}%`)
+    bewlyElement.style.setProperty('--bew-homepage-bg-mask-opacity', `${settings.value.wallpaperMaskOpacity}%`)
 }
 
 function handleRefresh() {
@@ -273,7 +273,7 @@ function handleBackToTop() {
         <transition name="fade">
           <div
             v-if="(!settings.individuallySetSearchPageWallpaper && settings.enableWallpaperMasking) || (settings.searchPageEnableWallpaperMasking)"
-            pos="absolute top-0 left-0" w-full h-full pointer-events-none bg="$bew-bg-mask" duration-300 z--1
+            pos="absolute top-0 left-0" w-full h-full pointer-events-none bg="$bew-homepage-bg-mask" duration-300 z--1
             :style="{
               backdropFilter: `blur(${settings.individuallySetSearchPageWallpaper ? settings.searchPageWallpaperBlurIntensity : settings.wallpaperBlurIntensity}px)`,
             }"
@@ -283,14 +283,14 @@ function handleBackToTop() {
       <div v-else>
         <!-- background -->
         <div
-          pos="absolute top-0 left-0" w-full h-full duration-300 bg="cover center $bew-bg" z--1
+          pos="absolute top-0 left-0" w-full h-full duration-300 bg="cover center $bew-homepage-bg" z--1
           :style="{ backgroundImage: `url(${settings.wallpaper})` }"
         />
         <!-- background mask -->
         <transition name="fade">
           <div
             v-if="settings.enableWallpaperMasking"
-            pos="absolute top-0 left-0" w-full h-full pointer-events-none bg="$bew-bg-mask" duration-300 z--1
+            pos="absolute top-0 left-0" w-full h-full pointer-events-none bg="$bew-homepage-bg-mask" duration-300 z--1
             :style="{
               backdropFilter: `blur(${settings.wallpaperBlurIntensity}px)`,
             }"
