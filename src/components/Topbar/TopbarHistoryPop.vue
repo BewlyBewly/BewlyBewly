@@ -248,13 +248,13 @@ function getHistoryList(type: HistoryType, viewAt = 0 as number) {
                 <template v-if="activatedTab === 0">
                   <div pos="relative">
                     <img
-                      w="150px"
+                      w="150px" h-full
                       class="aspect-video"
                       :src="`${removeHttpFromUrl(
                         historyItem.cover,
                       )}@256w_144h_1c`"
                       :alt="historyItem.title"
-                      bg="contain"
+                      object-cover
                     >
                     <div
                       pos="absolute bottom-0 right-0"
