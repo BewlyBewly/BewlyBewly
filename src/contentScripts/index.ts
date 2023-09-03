@@ -22,18 +22,23 @@ if (isFirefox) {
     isFirstScriptExecute = false
   })
   window.onload = () => {
-    document.documentElement.style.opacity = '1'
+    nextTick(() => {
+      setTimeout(() => {
+        document.documentElement.style.opacity = '1'
+      }, 1000)
+    })
   }
 }
 else {
   document.addEventListener('DOMContentLoaded', () => {
     injectApp()
-  })
 
-  window.onload = () => {
-    document.documentElement.style.opacity = '1'
-  }
-  // window.onload = () => {}
+    nextTick(() => {
+      setTimeout(() => {
+        document.documentElement.style.opacity = '1'
+      }, 1000)
+    })
+  })
 }
 
 function injectApp() {
