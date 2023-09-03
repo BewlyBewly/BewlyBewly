@@ -16,14 +16,14 @@ import { version } from '../../../../package.json'
       <p mt-6 flex gap-2>
         <a
           href="https://github.com/hakadao/BewlyBewly" target="_blank"
-          p="y-2 x-4" flex items-center bg="black dark:white" un-text="white dark:black" rounded-12
+          p="y-2 x-4" flex items-center bg="black dark:white" un-text="!white dark:!black" rounded-12
           w-95px
         >
           <tabler:brand-github mr-2 /> Github
         </a>
         <a
           href="https://space.bilibili.com/5011356/dynamic" target="_blank"
-          p="y-2 x-4" flex items-center bg="#fb7299 dark:#ffa7c0" un-text="white dark:black" rounded-12
+          p="y-2 x-4" flex items-center bg="#fb7299 dark:#ffa7c0" un-text="!white dark:!black" rounded-12
           w-95px
         >
           <tabler:brand-bilibili mr-2 /> Bilibili
