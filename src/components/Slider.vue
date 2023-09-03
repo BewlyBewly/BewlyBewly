@@ -4,7 +4,7 @@ import type { Ref } from 'vue'
 interface Props {
   min?: number
   max?: number
-  value: number
+  modelValue: number
   label: string
 }
 const props = withDefaults(defineProps<Props>(), {
@@ -12,23 +12,23 @@ const props = withDefaults(defineProps<Props>(), {
   max: 100,
 })
 
-const emit = defineEmits(['update:value'])
+const emit = defineEmits(['update:modelValue'])
 
-const modelValue = ref<number>(props.value)
-const rangeRef = ref<HTMLElement>() as Ref<HTMLElement>
+const modelValue = ref<number>(props.modelValue)
+const rangeRef = ref<HTMLInputElement>() as Ref<HTMLInputElement>
 
 onMounted(() => {
-  modelValue.value = props.value
-  const progress = (modelValue.value / rangeRef.value!.max) * 100
+  modelValue.value = props.modelValue
+  const progress = (modelValue.value / Number(rangeRef.value.max)) * 100
 
   rangeRef.value.style.background = `linear-gradient(to right, var(--bew-theme-color) ${progress}%, var(--bew-fill-1) ${progress}%) no-repeat`
 
   if (rangeRef.value) {
     rangeRef.value.addEventListener('input', (event: Event) => {
-      const tempSliderValue = event.target!.value
-      emit('update:value', tempSliderValue)
+      const tempSliderValue = Number((event.target as HTMLInputElement).value)
+      emit('update:modelValue', Number(tempSliderValue))
 
-      const progress = (tempSliderValue / rangeRef.value!.max) * 100
+      const progress = (tempSliderValue / Number(rangeRef.value.max)) * 100
 
       rangeRef.value.style.background = `linear-gradient(to right, var(--bew-theme-color) ${progress}%, var(--bew-fill-1) ${progress}%) no-repeat`
     })
@@ -40,7 +40,7 @@ onMounted(() => {
   <label cursor-pointer flex items-center gap-3 w="$b-slider-width">
     <input
       ref="rangeRef"
-      type="range" :min="min" :max="max" :value="value" class="slider" appearance-none outline-none bg="$bew-fill-1" rounded="$b-slider-height"
+      v-model="modelValue" type="range" :min="min" :max="max" class="slider" appearance-none outline-none bg="$bew-fill-1" rounded="$b-slider-height"
       border="size-$b-border-width color-$bew-border-color" w="$b-slider-width" h="$b-slider-height"
     >
     <span>{{ label }}</span>

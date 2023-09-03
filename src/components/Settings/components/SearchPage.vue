@@ -214,13 +214,13 @@ function changeWallpaper(url: string) {
       <Radio v-model="settings.searchPageEnableWallpaperMasking" />
     </SettingItem>
     <SettingItem v-if="settings.searchPageEnableWallpaperMasking" :title="$t('settings.wallpaper_mask_opacity')">
-      <Slider v-model:value="settings.searchPageWallpaperMaskOpacity" :label="`${settings.searchPageWallpaperMaskOpacity ?? 0}%`" />
+      <Slider v-model="settings.searchPageWallpaperMaskOpacity" :label="`${settings.searchPageWallpaperMaskOpacity ?? 0}%`" />
     </SettingItem>
     <SettingItem v-if="settings.searchPageEnableWallpaperMasking" :title="$t('settings.wallpaper_blur_intensity')">
       <template #desc>
         <span color="$bew-warning-color">{{ $t('common.performance_impact_warn') }}</span>
       </template>
-      <Slider v-model:value="settings.searchPageWallpaperBlurIntensity" :min="0" :max="60" :label="`${settings.searchPageWallpaperBlurIntensity ?? 0}px`" />
+      <Slider v-model="settings.searchPageWallpaperBlurIntensity" :min="0" :max="60" :label="`${settings.searchPageWallpaperBlurIntensity ?? 0}px`" />
     </SettingItem>
   </template>
 </template>
