@@ -11,6 +11,7 @@ const isFirefox: boolean = /Firefox/i.test(navigator.userAgent)
 
 document.documentElement.style.opacity = '0'
 // document.documentElement.style.transition = 'opacity .5s ease-in-out'
+// document.documentElement.style.background = 'var(--bew-bg)'
 if (isFirefox) {
   let isFirstScriptExecute = true
   document.addEventListener('beforescriptexecute', () => {
@@ -18,22 +19,21 @@ if (isFirefox) {
       return
 
     injectApp()
-    setTimeout(() => {
-      document.documentElement.style.opacity = '1'
-      // document.documentElement.style.transition = 'unset'
-    }, 500)
-
     isFirstScriptExecute = false
   })
+  window.onload = () => {
+    document.documentElement.style.opacity = '1'
+  }
 }
 else {
   document.addEventListener('DOMContentLoaded', () => {
     injectApp()
-    setTimeout(() => {
-      document.documentElement.style.opacity = '1'
-      // document.documentElement.style.transition = 'unset'
-    }, 500)
   })
+
+  window.onload = () => {
+    document.documentElement.style.opacity = '1'
+  }
+  // window.onload = () => {}
 }
 
 function injectApp() {
