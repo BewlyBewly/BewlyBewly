@@ -84,7 +84,9 @@
   --bew-bg: hsl(0 0% 100%);
   --bew-homepage-bg: hsl(220 14% 96%);
   --bew-homepage-bg-mask-opacity: 0;
-  --bew-homepage-bg-mask: hsl(220 14% 96% / var(--bew-homepage-bg-mask-opacity));
+  --bew-homepage-bg-mask: hsl(
+    220 14% 96% / var(--bew-homepage-bg-mask-opacity)
+  );
 
   --bew-content-opacity: 0.6;
 
@@ -198,11 +200,27 @@
 //   // --v_line_bolder_disabled: var(--line_bolder_disabled, #f1f2f3);
 // }
 
-:root.dark {
+:root {
   --brand_pink: var(--bew-theme-color);
   --brand_pink_thin: var(--bew-theme-color-20);
   --brand_blue: var(--bew-theme-color);
   --brand_blue_thin: var(--bew-theme-color-20);
+
+  --brand_pink_hover: var(--bew-theme-color-80);
+  --brand_pink_active: var(--bew-theme-color);
+  --brand_pink_disabled: var(--bew-theme-color-60);
+  --brand_blue_hover: var(--bew-theme-color-80);
+  --brand_blue_active: var(--bew-theme-color);
+  --brand_blue_disabled: var(--bew-theme-color-60);
+
+  --text_link: var(--bew-theme-color);
+}
+
+:root.dark {
+  // --brand_pink: var(--bew-theme-color);
+  // --brand_pink_thin: var(--bew-theme-color-20);
+  // --brand_blue: var(--bew-theme-color);
+  // --brand_blue_thin: var(--bew-theme-color-20);
   --stress_red: var(--Re5);
   --stress_red_thin: var(--Re1);
   --success_green: var(--Gr5);
@@ -221,7 +239,7 @@
   --text2: var(--bew-text-2);
   --text3: var(--bew-text-3);
   --text4: var(--bew-text-4);
-  --text_link: var(--bew-theme-color);
+  // --text_link: var(--bew-theme-color);
   --text_notice: var(--Ye6);
   --line_light: var(--bew-fill-1);
   --line_regular: var(--bew-fill-2);
@@ -238,13 +256,13 @@
   // --bpx-primary-color: var(--bew-theme-color);
   // --bpx-fn-color: var(--bew-theme-color);
   // --bpx-fn-hover-color: var(--bew-theme-color);
-  
-  --brand_pink_hover: var(--bew-theme-color-80);
-  --brand_pink_active: var(--bew-theme-color);
-  --brand_pink_disabled: var(--bew-theme-color-60);
-  --brand_blue_hover: var(--bew-theme-color-80);
-  --brand_blue_active: var(--bew-theme-color);
-  --brand_blue_disabled: var(--bew-theme-color-60);
+
+  // --brand_pink_hover: var(--bew-theme-color-80);
+  // --brand_pink_active: var(--bew-theme-color);
+  // --brand_pink_disabled: var(--bew-theme-color-60);
+  // --brand_blue_hover: var(--bew-theme-color-80);
+  // --brand_blue_active: var(--bew-theme-color);
+  // --brand_blue_disabled: var(--bew-theme-color-60);
 
   --graph_bg_thin_rgb: 13, 14, 17;
 }

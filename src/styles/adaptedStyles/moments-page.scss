@@ -22,26 +22,31 @@ aside section.sticky {
 }
 // #endregion
 
+.dyn-orig-author__following.following-icon:before {
+  filter: saturate(0) brightness(2) drop-shadow(0 0 1px var(--bew-theme-color));
+}
+
+#app .bg {
+  opacity: 0.4;
+  height: 100%;
+}
+
+#app .bgc {
+  background-color: var(--bew-homepage-bg);
+}
+
+.bili-dyn-topic__card {
+  color: var(--bew-theme-color);
+}
+
 .dark {
-  .dyn-orig-author__following.following-icon:before {
-    filter: saturate(0) brightness(2);
-  }
-
   #app .bg {
-    opacity: 0.2;
-  }
-
-  #app .bgc {
-    background-color: var(--bew-bg);
+    opacity: 0;
   }
 
   .bili-dyn-home--member {
-    // --bg1: var(--bew-content-solid-1);
-    // --bg2: var(--bew-bg);
-  }
-
-  .bili-dyn-topic__card {
-    color: var(--bew-theme-color);
+    --bg1: var(--bew-content-solid-1);
+    --bg2: var(--bew-bg);
   }
 
   // #region Old moments page

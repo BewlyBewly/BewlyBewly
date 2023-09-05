@@ -2,7 +2,8 @@
 //   display: none;;
 // }
 
-.dark {
+// .dark,
+.search-layout {
   .keyword,
   .search-input-wrap .suggest_high_light {
     color: var(--bew-theme-color);
@@ -10,5 +11,17 @@
 
   .media-footer-badge {
     background-color: var(--bew-theme-color) !important;
+  }
+
+  .bili-video-card .bili-video-card__image {
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+
+  .bili-video-card:hover .bili-video-card__image {
+    transform: translate(-4px, -4px);
+    box-shadow: 0 0 0 4px var(--bew-theme-color),
+      8px 8px 0 2px var(--bew-theme-color-60),
+      14px 14px 0 2px var(--bew-theme-color-40);
+      
   }
 }
