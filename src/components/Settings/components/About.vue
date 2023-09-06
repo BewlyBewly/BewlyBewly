@@ -8,7 +8,7 @@ import { version } from '../../../../package.json'
     <div flex="~ col gap-1" items-center>
       <img :src="`${browser.runtime.getURL('/assets/icon-512.png')}`" alt="" width="80">
       <p text-xl>
-        BewlyBewly <a href="https://github.com/hakadao/BewlyBewly/releases" target="_blank" un-text="sm $bew-text-2 hover:$bew-theme-color">v{{ version }}</a>
+        BewlyBewly <a href="https://github.com/hakadao/BewlyBewly/releases" target="_blank" un-text="sm color-$bew-text-2 hover:color-$bew-text-3">v{{ version }}</a>
       </p>
       <p text="sm $bew-text-2">
         Made by Hakadao
