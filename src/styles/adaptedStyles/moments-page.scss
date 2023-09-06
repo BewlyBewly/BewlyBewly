@@ -23,7 +23,8 @@ aside section.sticky {
 // #endregion
 
 .dyn-orig-author__following.following-icon:before {
-  filter: saturate(0) brightness(2) drop-shadow(0 0 1px var(--bew-theme-color));
+  filter: saturate(0) brightness(2) drop-shadow(0 0 1px var(--bew-theme-color))
+    drop-shadow(0 0 4px var(--bew-theme-color));
 }
 
 #app .bg {

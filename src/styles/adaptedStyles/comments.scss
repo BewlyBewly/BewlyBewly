@@ -44,4 +44,9 @@
 .bili-comment.browser-pc * a:hover {
   color: var(--bew-theme-color-80);
 }
+
+.reply-content-container .reply-content .icon {
+  filter: saturate(0) brightness(2) drop-shadow(0 0 1px var(--bew-theme-color))
+    drop-shadow(0 0 4px var(--bew-theme-color));
+}
 // }
