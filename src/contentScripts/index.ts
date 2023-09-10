@@ -9,9 +9,24 @@ let app: any
 
 const isFirefox: boolean = /Firefox/i.test(navigator.userAgent)
 
-document.documentElement.style.opacity = '0'
-// document.documentElement.style.transition = 'opacity .5s ease-in-out'
-// document.documentElement.style.background = 'var(--bew-bg)'
+function injectCSS(css: string): HTMLStyleElement {
+  const el = document.createElement('style')
+  el.setAttribute('rel', 'stylesheet')
+  el.innerText = css
+  document.documentElement.appendChild(el)
+  return el
+}
+
+const beforeLoadedStyleEl = injectCSS(`
+  html.dark {
+    background: hsl(230 12% 6%);
+  }
+
+  body {
+    opacity: 0;
+  }
+`)
+
 if (isFirefox) {
   let isFirstScriptExecute = true
   document.addEventListener('beforescriptexecute', () => {
@@ -22,22 +37,15 @@ if (isFirefox) {
     isFirstScriptExecute = false
   })
   window.onload = () => {
-    nextTick(() => {
-      setTimeout(() => {
-        document.documentElement.style.opacity = '1'
-      }, 1000)
-    })
+    document.documentElement.removeChild(beforeLoadedStyleEl)
   }
 }
 else {
   document.addEventListener('DOMContentLoaded', () => {
     injectApp()
-
-    nextTick(() => {
-      setTimeout(() => {
-        document.documentElement.style.opacity = '1'
-      }, 1000)
-    })
+    window.onload = () => {
+      document.documentElement.removeChild(beforeLoadedStyleEl)
+    }
   })
 }
 
