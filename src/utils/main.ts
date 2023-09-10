@@ -3,11 +3,11 @@
  * @param name cookie name
  * @returns cookie value
  */
-export function getCookie(name: string) {
+export function getCookie(name: string): string {
   const value = `; ${document.cookie}`
   const parts: Array<string> = value.split(`; ${name}=`)
   if (parts.length === 2)
-    return parts?.pop()?.split(';').shift()
+    return parts?.pop()?.split(';').shift() || ''
 }
 
 /**
@@ -26,19 +26,19 @@ export function setCookie(name: string, value: any, expDays: number) {
  * get current login user id
  * @returns userId
  */
-export const getUserID = () => getCookie('DedeUserID')
+export const getUserID = (): string => getCookie('DedeUserID')
 
 /**
  * get csrf token
  */
-export const getCSRF = () => getCookie('bili_jct')
+export const getCSRF = (): string => getCookie('bili_jct')
 
 /**
  * remove 'http://' or 'https://' from a URL
  * @param url
  * @returns
  */
-export function removeHttpFromUrl(url: string) {
+export function removeHttpFromUrl(url: string): string {
   return url.replace(/^https?:/, '')
 }
 
@@ -52,7 +52,7 @@ export function openLinkToNewTab(url: string) {
  * @param alpha color opacity
  * @returns
  */
-export function hexToRGBA(hex: string, alpha: number) {
+export function hexToRGBA(hex: string, alpha: number): string {
   const r = Number.parseInt(hex.slice(1, 3), 16)
   const g = Number.parseInt(hex.slice(3, 5), 16)
   const b = Number.parseInt(hex.slice(5, 7), 16)
@@ -88,4 +88,12 @@ export function smoothScrollToTop(element: HTMLElement, duration: number) {
     window.requestAnimationFrame(step)
   }
   window.requestAnimationFrame(step)
+}
+
+export function injectCSS(css: string): HTMLStyleElement {
+  const el = document.createElement('style')
+  el.setAttribute('rel', 'stylesheet')
+  el.innerText = css
+  document.documentElement.appendChild(el)
+  return el
 }

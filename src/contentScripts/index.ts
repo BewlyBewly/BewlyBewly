@@ -4,18 +4,11 @@ import App from './views/App.vue'
 import { setupApp } from '~/logic/common-setup'
 import { i18n } from '~/utils/i18n'
 import { SVG_ICONS } from '~/utils/svgIcons'
+import { injectCSS } from '~/utils/main'
 
 let app: any
 
 const isFirefox: boolean = /Firefox/i.test(navigator.userAgent)
-
-function injectCSS(css: string): HTMLStyleElement {
-  const el = document.createElement('style')
-  el.setAttribute('rel', 'stylesheet')
-  el.innerText = css
-  document.documentElement.appendChild(el)
-  return el
-}
 
 const beforeLoadedStyleEl = injectCSS(`
   html.dark {
@@ -70,6 +63,8 @@ function injectApp() {
     || /https?:\/\/search.bilibili.com\.*/.test(currentUrl)
     // moments
     || /https?:\/\/t.bilibili.com\.*/.test(currentUrl)
+    // history page
+    || /https?:\/\/(www.)?bilibili.com\/account\/history.*/.test(currentUrl)
   ) {
     if (
       /https?:\/\/bilibili.com\/?$/.test(currentUrl)

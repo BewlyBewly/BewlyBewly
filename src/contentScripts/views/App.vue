@@ -13,7 +13,7 @@ import Favorites from './Favorites/Favorites.vue'
 import { accessKey, settings } from '~/logic'
 import '~/styles/index.ts'
 import { AppPage, LanguageType } from '~/enums/appEnums'
-import { getUserID, hexToRGBA, smoothScrollToTop } from '~/utils/main'
+import { getUserID, hexToRGBA, injectCSS, smoothScrollToTop } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
 const activatedPage = ref<AppPage>(AppPage.Home)
@@ -166,9 +166,15 @@ onMounted(() => {
   })
 
   if (!isHomePage.value) {
-    const originalTopBar: HTMLElement = document.querySelector('#biliMainHeader, #bili-header-container') as HTMLElement
-    if (originalTopBar)
-      originalTopBar.style.visibility = 'hidden'
+    injectCSS(`
+    .bili-header .bili-header__bar, #bili-header-container {
+      visibility: hidden
+    }
+    `)
+
+    // const originalTopBar: HTMLElement = document.querySelector('.bili-header .bili-header__bar, #bili-header-container') as HTMLElement
+    // if (originalTopBar)
+    //   originalTopBar.style.visibility = 'hidden'
   }
 
   setAppAppearance()
@@ -445,7 +451,7 @@ function handleBackToTop() {
 
         <main
           v-if="isHomePage"
-          p="t-80px" m-auto
+          p="t-70px" m-auto
           relative
           :w="isVideoPage ? '[calc(100%-160px)]' : 'lg:85% md:[calc(90%-60px)] [calc(100%-140px)]'"
         >

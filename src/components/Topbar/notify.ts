@@ -4,10 +4,10 @@ import { getCookie, getUserID, setCookie } from '~/utils/main'
 /** Update the time interval of topbar notifications and moments counts */
 export const updateInterval = 1000 * 60 * 5 // Updated every 5 minutes
 
-const getVideoOffsetID = (): number => parseInt(`${getCookie(`bp_video_offset_${getUserID()}`)}`, 10) || 0
-const getArticleOffsetID = (): number => parseInt(`${getCookie(`bp_article_offset_${getUserID()}`)}`, 10) || 0
+const getVideoOffsetID = (): number => Number.parseInt(`${getCookie(`bp_video_offset_${getUserID()}`)}`, 10) || 0
+const getArticleOffsetID = (): number => Number.parseInt(`${getCookie(`bp_article_offset_${getUserID()}`)}`, 10) || 0
 
-const compareOffsetID = (currentOffsetID: number, lastestOffsetID: number): boolean => {
+function compareOffsetID(currentOffsetID: number, lastestOffsetID: number): boolean {
   if (currentOffsetID === lastestOffsetID)
     return false
   else if (currentOffsetID > lastestOffsetID)
@@ -16,7 +16,7 @@ const compareOffsetID = (currentOffsetID: number, lastestOffsetID: number): bool
     return false
 }
 
-export const setLastestOffsetID = (type: MomentType, offsetID: number) => {
+export function setLastestOffsetID(type: MomentType, offsetID: number) {
   if (offsetID === null || offsetID === undefined)
     return
 
