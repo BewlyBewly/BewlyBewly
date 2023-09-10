@@ -1,4 +1,4 @@
 import './comments.scss'
-import './search-page.scss'
-import './video-page.scss'
-import './moments-page.scss'
+import './searchPage.scss'
+import './videoPage.scss'
+import './momentsPage.scss'
