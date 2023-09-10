@@ -595,7 +595,7 @@ async function getNewMomentsCount() {
 
   .right-side-item .login {
     --un-drop-shadow: drop-shadow(0 0 6px var(--bew-theme-color));
-    --at-apply: rounded-full
+    --at-apply: rounded-full mx-1
       important:text-$bew-theme-color important:px-4
       hover:important-bg-$bew-theme-color hover:important-text-white
       flex items-center justify-center important:text-base w-120px
