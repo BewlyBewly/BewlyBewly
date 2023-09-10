@@ -12,6 +12,40 @@
   position: relative;
 }
 
+.dyn-orig-author__following.following-icon:before {
+  filter: var(--bew-filter-icon-glow);
+}
+
+#app .bg {
+  opacity: 0.4;
+  height: 100%;
+}
+
+#app .bgc {
+  background-color: var(--bew-homepage-bg);
+}
+
+.bili-dyn-topic__card {
+  color: var(--bew-theme-color);
+}
+
+.side-toolbar__action:not(.is-disabled):hover,
+.side-toolbar__action:not(.is-disabled):hover svg {
+  fill: vaar(--bew-theme-color);
+}
+
+.dark {
+  #app .bg {
+    opacity: 0;
+  }
+
+  .bili-dyn-home--member,
+  #opus-detail-app + #app {
+    --bg1: var(--bew-content-solid-1);
+    --bg2: var(--bew-bg);
+  }
+}
+
 // #region Old moments page
 .international-header {
   visibility: hidden;
@@ -30,11 +64,15 @@ aside section.sticky {
 .bili-dyn-item,
 .bili-dyn-banner,
 .topic-panel,
-.bili-rich-textarea__inner,
 .bili-dyn-live-users,
 .bili-dyn-live-users__title,
 .bili-dyn-list-loading {
   background-color: var(--bew-content-solid-1);
+  color: var(--bew-text-1);
+}
+
+.bili-rich-textarea__inner {
+  background-color: transparent;
   color: var(--bew-text-1);
 }
 
@@ -77,6 +115,10 @@ aside section.sticky {
 .bili-album__watch__control__option:hover,
 .bili-gallery__pagination__index {
   color: var(--bew-theme-color);
+}
+
+.bili-dyn-up-list__item__face span {
+  background-color: var(--bew-theme-color);
 }
 
 .bili-dyn-card-video__desc {
@@ -188,42 +230,3 @@ aside section.sticky {
 }
 
 // #endregion
-
-.dyn-orig-author__following.following-icon:before {
-  filter: var(--bew-filter-icon-glow);
-}
-
-#app .bg {
-  opacity: 0.4;
-  height: 100%;
-}
-
-#app .bgc {
-  background-color: var(--bew-homepage-bg);
-}
-
-.bili-dyn-topic__card {
-  color: var(--bew-theme-color);
-}
-
-.dark {
-  #app .bg {
-    opacity: 0;
-  }
-
-  .bili-dyn-home--member {
-    --bg1: var(--bew-content-solid-1);
-    --bg2: var(--bew-bg);
-  }
-
-  // #region Old moments page
-  // .bili-rich-text__content {
-  //   color: var(--bew-text-1);
-  // }
-
-  // .bili-dyn-my-info,
-  // .bili-dyn-my-info--skeleton {
-  //   background-color: var(--bew-bg);
-  // }
-  // #endregion
-}

@@ -61,15 +61,25 @@
 }
 
 .bb-comment,
-.comment-bilibili-fold {
-  background-color: transparent;
+.comment-bilibili-fold,
+.bb-comment .comment-send.comment-send-lite,
+.comment-bilibili-fold .comment-send.comment-send-lite,
+.bb-comment .comment-send-lite.comment-send-lite,
+.comment-bilibili-fold .comment-send-lite.comment-send-lite {
+  background-color: var(--bew-content-solid-1);
 }
 
-.bb-comment .comment-list .list-item .user .name,
+// .bb-comment .comment-list .list-item .user .name,
 .comment-bilibili-fold .comment-list .list-item .user .name,
 .bb-comment .comment-header .tabs-order li,
-.comment-bilibili-fold .comment-header .tabs-order li {
+.comment-bilibili-fold .comment-header .tabs-order li,
+.bili-dyn-forward-publishing__editor .bili-rich-textarea__inner {
   color: var(--bew-text-1);
+}
+
+.bili-dyn-forward-item__uname,
+.bb-comment .comment-list .list-item .user .name {
+  color: var(--bew-text-1) !important;
 }
 
 .bb-comment .comment-header .tabs-order li.on,
@@ -79,7 +89,12 @@
 }
 
 .bb-comment .comment-header .tabs-order li:hover,
-.comment-bilibili-fold .comment-header .tabs-order li:hover {
+.comment-bilibili-fold .comment-header .tabs-order li:hover,
+.bb-comment .comment-list .list-item .user .name:hover,
+.comment-bilibili-fold .comment-list .list-item .user .name:hover,
+.bb-comment a,
+.comment-bilibili-fold a,
+.bili-dyn-forward-item__action {
   color: var(--bew-theme-color);
 }
 
@@ -91,12 +106,82 @@
 .comment-bilibili-fold .comment-send .comment-emoji,
 .bb-comment .comment-send-lite .comment-emoji,
 .comment-bilibili-fold .comment-send-lite .comment-emoji,
-.bb-comment .bottom-page.center {
+.bb-comment .bottom-page.center,
+.bili-dyn-forward__item,
+.bili-dyn-forward__more {
   border-color: var(--bew-border-color);
 }
 
-.bb-comment .comment-list .list-item .info .like.liked i,
-.comment-bilibili-fold .comment-list .list-item .info .like.liked i {
+.bb-comment .comment-send .comment-emoji,
+.comment-bilibili-fold .comment-send .comment-emoji,
+.bb-comment .comment-send-lite .comment-emoji,
+.comment-bilibili-fold .comment-send-lite .comment-emoji {
+  box-shadow: unset;
+}
+
+.bb-comment .comment-list .list-item .info span.liked i,
+.comment-bilibili-fold .comment-list .list-item .info span.liked i,
+.bb-comment .comment-list .list-item .info span.hated i,
+.comment-bilibili-fold .comment-list .list-item .info span.hated i,
+.bb-comment .comment-list .list-item .info span:hover i,
+.comment-bilibili-fold .comment-list .list-item .info span:hover i,
+.bb-comment .operation .spot:hover,
+.comment-bilibili-fold .operation .spot:hover,
+.bili-dyn-more__btn.tp.active,
+.bili-dyn-more__btn.tp:hover {
   filter: var(--bew-filter-icon-glow);
+}
+
+.bb-comment .comment-send .textarea-container .ipt-txt,
+.comment-bilibili-fold .comment-send .textarea-container .ipt-txt,
+.bb-comment .comment-send-lite .textarea-container .ipt-txt,
+.comment-bilibili-fold .comment-send-lite .textarea-container .ipt-txt,
+.bili-dyn-forward-publishing__editor {
+  background-color: var(--bew-fill-1);
+  border-color: var(--bew-border-color);
+  color: var(--bew-text-1);
+}
+
+.bb-comment .comment-send .textarea-container:hover textarea,
+.comment-bilibili-fold .comment-send .textarea-container:hover textarea,
+.bb-comment .comment-send-lite .textarea-container:hover textarea,
+.comment-bilibili-fold .comment-send-lite .textarea-container:hover textarea,
+.bb-comment .comment-send .textarea-container.focus textarea,
+.comment-bilibili-fold .comment-send .textarea-container.focus textarea,
+.bb-comment .comment-send-lite .textarea-container.focus textarea,
+.comment-bilibili-fold .comment-send-lite .textarea-container.focus textarea,
+.bili-dyn-forward-publishing__editor:not(.disabled):focus,
+.bili-dyn-forward-publishing__editor:not(.disabled):hover {
+  background-color: var(--bew-content-solid-1);
+  border-color: var(--bew-theme-color);
+}
+
+.bb-comment .comment-list .list-item .info .btn-hover:hover,
+.comment-bilibili-fold .comment-list .list-item .info .btn-hover:hover,
+.bb-comment .comment-list .list-item .reply-box .view-more .btn-more:hover,
+.comment-bilibili-fold
+  .comment-list
+  .list-item
+  .reply-box
+  .view-more
+  .btn-more:hover {
+  color: var(--bew-theme-color);
+  background-color: var(--bew-fill-2);
+}
+
+.bb-comment .comment-header .tabs-order li.on:after,
+.comment-bilibili-fold .comment-header .tabs-order li.on:after {
+  display: none;
+}
+
+.bili-dyn-forward-publishing__action__btn {
+  background-color: var(--bew-theme-color);
+}
+
+// UP主觉得很赞
+.bb-comment .comment-list .list-item .info .reply-tags span,
+.comment-bilibili-fold .comment-list .list-item .info .reply-tags span {
+  background-color: var(--bew-fill-1) !important;
+  color: var(--bew-text-2) !important;
 }
 // #endregion

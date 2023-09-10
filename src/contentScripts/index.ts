@@ -63,6 +63,8 @@ function injectApp() {
     || /https?:\/\/search.bilibili.com\.*/.test(currentUrl)
     // moments
     || /https?:\/\/t.bilibili.com\.*/.test(currentUrl)
+    // moment detail
+    || /https?:\/\/www.bilibili.com\/opus\/.*/.test(currentUrl)
     // history page
     || /https?:\/\/(www.)?bilibili.com\/account\/history.*/.test(currentUrl)
     // user space page
