@@ -30,8 +30,7 @@
 .playing-gif,
 .multi-page-v1 .cur-list .list-box li.on img,
 .coin-operated-m-exp .like-checkbox input[type='checkbox']:checked + i {
-  filter: saturate(0) brightness(2) drop-shadow(0 0 1px var(--bew-theme-color))
-    drop-shadow(0 0 4px var(--bew-theme-color));
+  filter: var(--bew-filter-icon-glow);
 }
 
 .upinfo-btn-panel .follow-btn.not-follow:hover {

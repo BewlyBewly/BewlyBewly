@@ -109,9 +109,13 @@
   --bew-fill-3: rgb(120 120 128 / 33%);
   --bew-fill-4: rgb(120 120 128 / 43%);
 
-  --bew-border-color: var(--bew-fill-1);
+  --bew-border-color: rgb(120 120 128 / 15%);
 
   --bew-page-max-width: 2000px;
+
+  --bew-filter-icon-glow: saturate(0) brightness(2)
+    drop-shadow(0 0 1px var(--bew-theme-color))
+    drop-shadow(0 0 4px var(--bew-theme-color));
 }
 
 :host(.dark),
@@ -144,6 +148,8 @@
   --bew-fill-2: rgb(120 120 140 / 24%);
   --bew-fill-3: rgb(120 120 140 / 34%);
   --bew-fill-4: rgb(120 120 140 / 44%);
+
+  --bew-border-color: rgb(120 120 140 / 24%);
 }
 
 // :root.dark {

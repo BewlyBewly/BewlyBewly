@@ -35,7 +35,7 @@ body {
   font-size: 14px !important;
   min-width: unset !important;
   filter: none !important;
-  background-color: var(--bew-bg) !important;
+  background-color: var(--bew-bg);
 }
 
 .keep-two-lines {
@@ -54,6 +54,14 @@ h4,
 h5,
 h6 {
   --at-apply: color-$bew-text-1;
+}
+
+#bili-header-container {
+  background-color: var(--bew-bg) !important;
+}
+
+.bili-header .bili-header__bar{
+  visibility: hidden;
 }
 
 .card-loaded {

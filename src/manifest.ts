@@ -39,7 +39,7 @@ export async function getManifest() {
     host_permissions: ['*://*.bilibili.com/*', '*://*.mcbbs.net/*'],
     content_scripts: [
       {
-        matches: ['*://www.bilibili.com/*', '*://search.bilibili.com/*', '*://t.bilibili.com/*'],
+        matches: ['*://www.bilibili.com/*', '*://search.bilibili.com/*', '*://t.bilibili.com/*', '*://space.bilibili.com/*'],
         js: ['./dist/contentScripts/index.global.js'],
         run_at: 'document_start',
         match_about_blank: true,

@@ -4,6 +4,7 @@
 
 #app .bg {
   z-index: unset;
+  background-size: cover;
 }
 
 .bili-dyn-home--member {
@@ -20,11 +21,176 @@
 aside section.sticky {
   top: 80px;
 }
+
+.bili-dyn-my-info,
+.bili-dyn-my-info--skeleton,
+.bili-dyn-publishing,
+.bili-dyn-up-list,
+.bili-dyn-list-tabs,
+.bili-dyn-item,
+.bili-dyn-banner,
+.topic-panel,
+.bili-rich-textarea__inner,
+.bili-dyn-live-users,
+.bili-dyn-live-users__title,
+.bili-dyn-list-loading {
+  background-color: var(--bew-content-solid-1);
+  color: var(--bew-text-1);
+}
+
+.bili-dyn-my-info__stat__item__count,
+.bili-rich-text__content,
+.topic-panel__nav-title,
+.relevant-topic__title,
+.dyn-goods__one__detail__name,
+.dyn-ugc__detail__title,
+.dyn-reserve__title,
+.bili-dyn-live-users__item__uname,
+.dyn-additional-common__detail__title,
+.bili-dyn-interaction__item__desc .bili-rich-text-module,
+.bili-album__watch__control__option {
+  color: var(--bew-text-1);
+}
+
+.bili-dyn-up-list__item__name {
+  color: var(--bew-text-2);
+}
+
+.bili-dyn-my-info__stat__item:hover > div:first-child,
+.bili-dyn-up-list__item.active .bili-dyn-up-list__item__name,
+.bili-dyn-list-tabs__item.active,
+.bili-dyn-list-tabs__item:hover,
+.relevant-topic:hover .relevant-topic__title,
+.bili-rich-text-link,
+.bili-rich-text-module,
+.bili-rich-text-topic,
+.bili-dyn-card-video:hover .bili-dyn-card-video__title,
+.bili-dyn-topic__text,
+.bili-dyn-topic__icon,
+.bili-rich-text__action,
+.bili-dyn-action:not(.disabled).active,
+.bili-dyn-action:not(.disabled):hover,
+.dyn-goods__one__detail__price span,
+.dyn-orig-author__name,
+.dyn-reserve__desc__first.highlight,
+.dyn-reserve__lottery__text,
+.bili-album__watch__control__option:hover,
+.bili-gallery__pagination__index {
+  color: var(--bew-theme-color);
+}
+
+.bili-dyn-card-video__desc {
+  color: var(--bew-text-2);
+}
+
+.bili-dyn-action:not(.disabled).active i,
+.bili-dyn-action:not(.disabled):hover i,
+.relevant-topic:before,
+.bili-rich-text-module.lottery:before,
+.bili-rich-text-link:before,
+.bili-rich-text-module.goods.icon--taobao:before,
+.dyn-reserve__lottery__icon,
+.bili-album__watch__control__option:hover i {
+  filter: var(--bew-filter-icon-glow);
+}
+
+.bili-dyn-topic__card:hover,
+.bili-rich-text-link:hover,
+.bili-rich-text-module:hover,
+.bili-rich-text-topic:hover {
+  background-color: var(--bew-fill-2);
+}
+
+.bili-topic-search__popover {
+  background-color: var(--bew-fill-1);
+  border-color: var(--bew-border-color);
+}
+
+.dyn-goods__wrap,
+.dyn-reserve__card,
+.dyn-additional-common__wrap,
+.bili-dyn-content__orig.reference,
+.dyn-ugc__wrap {
+  background-color: var(--bew-fill-1);
+  color: var(--bew-text-1);
+}
+
+.reference .dyn-goods__wrap,
+.reference .dyn-reserve__card,
+.reference .dyn-additional-common__wrap,
+.reference .bili-dyn-content__orig.reference,
+.reference .dyn-ugc__wrap {
+  background-color: var(--bew-content-solid-1);
+  color: var(--bew-text-1);
+}
+
+.dyn-reserve__lottery__text:after,
+.bili-album__watch__track__activeitemborder {
+  border-color: var(--bew-theme-color);
+}
+
+.bili-topic-search__input__prefix,
+.bili-topic-search__input__text {
+  color: var(--bew-text-2);
+}
+
+.bili-dyn-publishing__hint:after {
+  color: var(--bew-border-color);
+}
+
+.bili-dyn-publishing__action,
+.dyn-goods__one__action button,
+.dyn-reserve__action button,
+.dyn-additional-common__action button {
+  background-color: var(--bew-theme-color);
+}
+
+.dyn-orig-author__following {
+  border-color: var(--bew-theme-color);
+  color: var(--bew-theme-color);
+}
+
+.bili-dyn-up-list__item.active .bili-dyn-up-list__item__face {
+  box-shadow: 0 0 0 2px var(--bew-theme-color);
+}
+
+.bili-dyn-up-list__item__face {
+  background-color: var(--bew-fill-1);
+}
+
+.bili-dyn-list-tabs__highlight {
+  background-color: var(--bew-theme-color);
+}
+
+.bili-dyn-title__text {
+  color: var(--bew-text-1) !important;
+}
+
+.bili-dyn-card-video {
+  border-color: var(--bew-border-color);
+}
+.bili-dyn-card-video__body {
+  background-color: var(--bew-content-solid-1);
+}
+
+.bili-dyn-card-video__title {
+  color: var(--bew-text-1);
+}
+
+.bili-album__watch__control {
+  background-color: var(--bew-fill-1);
+}
+
+.bili-dyn-version-control__btn {
+  background-color: var(--bew-content-solid-1);
+  border-color: var(--bew-border-color);
+  color: var(--bew-text-1);
+}
+
 // #endregion
 
 .dyn-orig-author__following.following-icon:before {
-  filter: saturate(0) brightness(2) drop-shadow(0 0 1px var(--bew-theme-color))
-    drop-shadow(0 0 4px var(--bew-theme-color));
+  filter: var(--bew-filter-icon-glow);
 }
 
 #app .bg {

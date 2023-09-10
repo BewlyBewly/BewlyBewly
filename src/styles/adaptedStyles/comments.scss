@@ -50,3 +50,53 @@
     drop-shadow(0 0 4px var(--bew-theme-color));
 }
 // }
+
+// #region Old comments components
+.bb-comment .comment-send .comment-submit,
+.comment-bilibili-fold .comment-send .comment-submit,
+.bb-comment .comment-send-lite .comment-submit,
+.comment-bilibili-fold .comment-send-lite .comment-submit {
+  background-color: var(--bew-theme-color);
+  border-color: var(--bew-theme-color);
+}
+
+.bb-comment,
+.comment-bilibili-fold {
+  background-color: transparent;
+}
+
+.bb-comment .comment-list .list-item .user .name,
+.comment-bilibili-fold .comment-list .list-item .user .name,
+.bb-comment .comment-header .tabs-order li,
+.comment-bilibili-fold .comment-header .tabs-order li {
+  color: var(--bew-text-1);
+}
+
+.bb-comment .comment-header .tabs-order li.on,
+.comment-bilibili-fold .comment-header .tabs-order li.on {
+  border-color: var(--bew-theme-color);
+  color: var(--bew-theme-color);
+}
+
+.bb-comment .comment-header .tabs-order li:hover,
+.comment-bilibili-fold .comment-header .tabs-order li:hover {
+  color: var(--bew-theme-color);
+}
+
+.bb-comment .comment-header,
+.comment-bilibili-fold .comment-header,
+.bb-comment .comment-list .list-item .con,
+.comment-bilibili-fold .comment-list .list-item .con,
+.bb-comment .comment-send .comment-emoji,
+.comment-bilibili-fold .comment-send .comment-emoji,
+.bb-comment .comment-send-lite .comment-emoji,
+.comment-bilibili-fold .comment-send-lite .comment-emoji,
+.bb-comment .bottom-page.center {
+  border-color: var(--bew-border-color);
+}
+
+.bb-comment .comment-list .list-item .info .like.liked i,
+.comment-bilibili-fold .comment-list .list-item .info .like.liked i {
+  filter: var(--bew-filter-icon-glow);
+}
+// #endregion

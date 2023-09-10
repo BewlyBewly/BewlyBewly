@@ -1,4 +1,7 @@
 import './comments.scss'
+import './footer.scss'
 import './searchPage.scss'
 import './videoPage.scss'
 import './momentsPage.scss'
+import './historyPage.scss'
+import './userSpacePage.scss'

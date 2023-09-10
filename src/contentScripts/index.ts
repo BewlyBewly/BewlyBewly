@@ -65,6 +65,8 @@ function injectApp() {
     || /https?:\/\/t.bilibili.com\.*/.test(currentUrl)
     // history page
     || /https?:\/\/(www.)?bilibili.com\/account\/history.*/.test(currentUrl)
+    // user space page
+    || /https?:\/\/space.bilibili.com\.*/.test(currentUrl)
   ) {
     if (
       /https?:\/\/bilibili.com\/?$/.test(currentUrl)

@@ -1,0 +1,18 @@
+#app {
+  &.owner,
+  &.fans,
+  &.visitor {
+    margin-top: 15px;
+  }
+}
+
+.n .n-inner,
+#page-index .col-1,
+#page-index .col-2 .section,
+#page-dynamic .col-2 .section {
+  background-color: var(--bew-content-solid-1);
+  // border-color: var(--bew-border-color);
+  border: none;
+  box-shadow: 0 0 0 1px var(--bew-border-color);
+  color: var(--bew-text-1);
+}
