@@ -138,7 +138,6 @@ onMounted(() => {
   if (isHomePage.value) {
     // Force overwrite Bilibili Evolved body tag & html tag background color
     document.body.style.setProperty('background-color', 'unset', 'important')
-    document.documentElement.style.setProperty('background-color', 'unset', 'important')
   }
   document.documentElement.style.setProperty('font-size', '14px')
 
