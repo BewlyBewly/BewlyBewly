@@ -151,6 +151,7 @@ function handleKeyDown() {
         v-model.trim="keyword"
         rounded="60px focus:$bew-radius"
         p="l-6 r-16 y-3"
+        h-50px
         text="$bew-text-1"
         un-border="3 solid transparent focus:$bew-theme-color"
         transition="all duration-300"

@@ -199,7 +199,7 @@ async function getNewMomentsCount() {
     items-center
     p="lg:x-20 md:x-16 x-14"
     w="screen"
-    h="80px"
+    h="70px"
   >
     <Transition name="fade">
       <div
@@ -556,7 +556,7 @@ async function getNewMomentsCount() {
 }
 
 .right-side {
-  --at-apply: flex h-60px items-center rounded-full p-2
+  --at-apply: flex h-55px items-center rounded-full p-2
     bg-$bew-content-1 text-$bew-text-1;
   backdrop-filter: var(--bew-filter-glass);
   box-shadow: var(--bew-shadow-2);
@@ -571,7 +571,7 @@ async function getNewMomentsCount() {
   }
 
   .right-side-item {
-    --at-apply: relative text-$bew-text-1 mx-2;
+    --at-apply: relative text-$bew-text-1;
 
     &:not(.avatar) {
       a {
@@ -582,7 +582,7 @@ async function getNewMomentsCount() {
 
     &:not(.avatar):not(.upload) a:not(.login) {
       --un-drop-shadow: drop-shadow(0 0 6px white);
-      --at-apply:dark:filter dark-hover:bg-white dark-hover:text-black
+      --at-apply: mx-1 dark:filter dark-hover:bg-white dark-hover:text-black
         hover:bg-$bew-fill-2;
     }
 
