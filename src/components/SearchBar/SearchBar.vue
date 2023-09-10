@@ -154,6 +154,7 @@ function handleKeyDown() {
         h-50px
         text="$bew-text-1"
         un-border="3 solid transparent focus:$bew-theme-color"
+        ring="1 $bew-border-color"
         transition="all duration-300"
         type="text"
         @focus="isFocus = true"

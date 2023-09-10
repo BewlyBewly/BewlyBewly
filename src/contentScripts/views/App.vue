@@ -13,7 +13,7 @@ import Favorites from './Favorites/Favorites.vue'
 import { accessKey, settings } from '~/logic'
 import '~/styles/index.ts'
 import { AppPage, LanguageType } from '~/enums/appEnums'
-import { getUserID, hexToRGBA, injectCSS, smoothScrollToTop } from '~/utils/main'
+import { getUserID, hexToRGBA, smoothScrollToTop } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
 const activatedPage = ref<AppPage>(AppPage.Home)
@@ -41,9 +41,6 @@ const mainAppRef = ref<HTMLElement>() as Ref<HTMLElement>
 const mainAppOpacity = ref<number>(0)
 const showTopbarMask = ref<boolean>(false)
 const dynamicComponentKey = ref<string>(`dynamicComponent${Number(new Date())}`)
-
-// const isVideoPage = ref<boolean>(false)
-// const isHomePage = ref<boolean>(false)
 
 const tooltipPlacement = computed(() => {
   if (settings.value.dockPosition === 'left')
@@ -73,13 +70,33 @@ const isVideoPage = computed(() => {
   return false
 })
 
-const isSearchPage = computed(() => {
+const isTopbarFixed = computed(() => {
   if (
-    /https?:\/\/search.bilibili.com\/.*$/.test(location.href)
+    // home page
+    /https?:\/\/bilibili.com\/?$/.test(location.href)
+    || /https?:\/\/www.bilibili.com\/?$/.test(location.href)
+    || /https?:\/\/www.bilibili.com\/index.html$/.test(location.href)
+    || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(location.href)
+    || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(location.href)
+
+    // // search page
+    // || /https?:\/\/search.bilibili.com\/.*$/.test(location.href)
+    // video page
+    || /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(location.href)
+    // moment page
+    || /https?:\/\/t.bilibili.com.*/.test(location.href)
   )
     return true
   return false
 })
+
+// const isSearchPage = computed(() => {
+//   if (
+//     /https?:\/\/search.bilibili.com\/.*$/.test(location.href)
+//   )
+//     return true
+//   return false
+// })
 
 watch(
   () => activatedPage.value,
@@ -164,18 +181,6 @@ onMounted(() => {
       showTopbarMask.value = true
     else showTopbarMask.value = false
   })
-
-  if (!isHomePage.value) {
-    injectCSS(`
-    .bili-header .bili-header__bar, #bili-header-container {
-      visibility: hidden
-    }
-    `)
-
-    // const originalTopBar: HTMLElement = document.querySelector('.bili-header .bili-header__bar, #bili-header-container') as HTMLElement
-    // if (originalTopBar)
-    //   originalTopBar.style.visibility = 'hidden'
-  }
 
   setAppAppearance()
   setAppLanguage()
@@ -312,19 +317,13 @@ function handleBackToTop() {
   >
     <div m-auto max-w="$bew-page-max-width" :style="{ opacity: showSettings ? 0.4 : 1 }">
       <Transition name="topbar">
+        <!-- v-if="!isSearchPage" -->
         <Topbar
-          v-if="!isSearchPage"
-          v-show="settings.isShowTopbar"
+          v-if="settings.isShowTopbar"
           :show-search-bar="activatedPage !== AppPage.Search"
-          :show-topbar-mask="showTopbarMask"
-          :pos="`${!isHomePage ? 'fixed' : 'absolute'} top-0 left-0`" z-50
-        />
-        <Topbar
-          v-else
-          v-show="settings.isShowTopbar"
-          :show-search-bar="activatedPage !== AppPage.Search"
-          :show-topbar-mask="showTopbarMask"
-          pos="absolute top-0 left-0" z-50 w="[calc(100%-8px)]"
+          :show-topbar-mask="showTopbarMask && isTopbarFixed"
+          pos="top-0 left-0" z-50 w="[calc(100%-8px)]"
+          :style="{ position: isTopbarFixed ? 'fixed' : 'absolute' }"
         />
       </Transition>
 

@@ -286,8 +286,8 @@ async function getNewMomentsCount() {
             class="avatar-img"
             rounded-full
             z-1
-            w-40px
-            h-40px
+            w-38px
+            h-38px
             bg="$bew-fill-3 cover center"
             :style="{
               backgroundImage: `url(${`${userInfo.face}`.replace(
@@ -302,11 +302,11 @@ async function getNewMomentsCount() {
             pos="absolute top-0"
             bg="cover center"
             blur-sm
-            opacity="80"
+            opacity="60"
             rounded-full
             z-0
-            w-40px
-            h-40px
+            w-38px
+            h-38px
             :style="{
               backgroundImage: `url(${`${userInfo.face}`.replace(
                 'http:',
@@ -556,9 +556,9 @@ async function getNewMomentsCount() {
 }
 
 .right-side {
-  --at-apply: flex h-55px items-center rounded-full p-2
-    bg-$bew-content-1 text-$bew-text-1;
-  backdrop-filter: var(--bew-filter-glass);
+  --at-apply: flex h-55px items-center rounded-full p-2 backdrop-glass
+    bg-$bew-content-1 text-$bew-text-1 border-1 border-$bew-border-color
+    box-border;
   box-shadow: var(--bew-shadow-2);
 
   .unread-message {
@@ -604,14 +604,14 @@ async function getNewMomentsCount() {
   }
 
   .avatar {
-    --at-apply: flex items-center ml-1 pr-2 relative z-1;
+    --at-apply: flex items-center ml-2px pr-2 relative z-1;
 
     .avatar-img,
     .avatar-shadow {
       --at-apply: duration-300;
 
       &.hover {
-        --at-apply: transform scale-230 important:translate-y-30px;
+        --at-apply: transform scale-230 important:translate-y-36px;
       }
     }
 
