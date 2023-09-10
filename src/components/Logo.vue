@@ -11,7 +11,7 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <div :style="{ filter: glow ? `drop-shadow(0 0 10px var(--bew-theme-color-60))` : `drop-shadow(0 4px 6px rgba(0,0,0,.15))` }">
+  <div :style="{ filter: glow ? `drop-shadow(0 0 2px var(--bew-theme-color-20)) drop-shadow(0 0 8px var(--bew-theme-color-60)) drop-shadow(0 0 34px var(--bew-theme-color-80))` : `drop-shadow(0 0 6px rgba(0,0,0,.15))` }">
     <svg
       t="1645466458357"
       class="icon"
