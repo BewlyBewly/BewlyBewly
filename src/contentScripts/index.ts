@@ -38,6 +38,8 @@ else {
     injectApp()
 
     const currentUrl = document.URL
+
+    // Handling for video page to prevent the issue of video being played but the page remaining empty
     if (
       // video page
       /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(currentUrl)
