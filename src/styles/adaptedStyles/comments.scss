@@ -1,5 +1,3 @@
-// .dark,
-// .bili-comment {
 // 評論人用戶名
 .reply-item .root-reply-container .content-warp .user-info .user-name,
 .sub-reply-item .sub-user-info .sub-user-name {
@@ -49,7 +47,14 @@
   filter: saturate(0) brightness(2) drop-shadow(0 0 1px var(--bew-theme-color))
     drop-shadow(0 0 4px var(--bew-theme-color));
 }
-// }
+
+.dark {
+  // Comment input box
+  .reply-box .box-normal .reply-box-warp .reply-box-textarea {
+    background-color: var(--bew-fill-1);
+    border-color: var(--bew-border-color);
+  }
+}
 
 // #region Old comments components
 .bb-comment .comment-send .comment-submit,
@@ -183,5 +188,12 @@
 .comment-bilibili-fold .comment-list .list-item .info .reply-tags span {
   background-color: var(--bew-fill-1) !important;
   color: var(--bew-text-2) !important;
+}
+
+// pin tag
+.bb-comment .stick,
+.comment-bilibili-fold .stick {
+  border-color: var(--bew-theme-color);
+  color: var(--bew-theme-color);
 }
 // #endregion
