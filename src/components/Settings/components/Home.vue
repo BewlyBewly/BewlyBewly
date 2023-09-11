@@ -48,7 +48,7 @@ function handleRevoke() {
       {{ $t('settings.authorize_app_desc') }}
       <br>
       <a
-        href="https://github.com/indefined/UserScripts/tree/master/bilibiliHome#%E6%8E%88%E6%9D%83%E8%AF%B4%E6%98%8E" target="_blank" un-text="$bew-theme-color"
+        href="https://github.com/indefined/UserScripts/tree/master/bilibiliHome#%E6%8E%88%E6%9D%83%E8%AF%B4%E6%98%8E" target="_blank" color="$bew-theme-color"
       >{{ $t('settings.authorize_app_more_info_access_key') }}</a>
     </template>
 

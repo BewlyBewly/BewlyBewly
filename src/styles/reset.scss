@@ -89,6 +89,15 @@ button {
   border: unset;
 }
 
+/*
+Reset links to optimize for opt-in styling instead of opt-out.
+*/
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
 :host {
   /*
   1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
@@ -165,15 +174,6 @@ button {
   //   font-size: inherit;
   //   font-weight: inherit;
   // }
-
-  /*
-  Reset links to optimize for opt-in styling instead of opt-out.
-  */
-
-  a {
-    color: inherit;
-    text-decoration: inherit;
-  }
 
   /*
   Add the correct font weight in Edge and Safari.
