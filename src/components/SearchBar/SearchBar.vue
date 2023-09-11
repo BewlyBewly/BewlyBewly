@@ -160,8 +160,8 @@ function handleKeyDown() {
         @focus="isFocus = true"
         @input="handleInput()"
         @keyup.enter="navigateToSearchResultPage(keyword)"
-        @keyup.up="handleKeyUp"
-        @keyup.down="handleKeyDown"
+        @keyup.up.stop="handleKeyUp"
+        @keyup.down.stop="handleKeyDown"
         @keydown.stop="() => {}"
       >
       <button
