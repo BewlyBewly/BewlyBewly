@@ -36,8 +36,24 @@ if (isFirefox) {
 else {
   document.addEventListener('DOMContentLoaded', () => {
     injectApp()
-    window.onload = () => {
-      document.documentElement.removeChild(beforeLoadedStyleEl)
+
+    const currentUrl = document.URL
+    if (
+      // video page
+      /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(currentUrl)
+      // watch later playlist
+      || /https?:\/\/(www.)?bilibili.com\/list\/watchlater.*/.test(currentUrl)
+      // favorite playlist
+      || /https?:\/\/(www.)?bilibili.com\/list\/ml.*/.test(currentUrl)
+    ) {
+      setTimeout(() => {
+        document.documentElement.removeChild(beforeLoadedStyleEl)
+      }, 800)
+    }
+    else {
+      window.onload = () => {
+        document.documentElement.removeChild(beforeLoadedStyleEl)
+      }
     }
   })
 }
