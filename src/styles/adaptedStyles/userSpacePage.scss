@@ -7,13 +7,23 @@
 }
 
 .n .n-btn.active,
-.be-tab-item.is-active {
+.be-tab-item.is-active,
+#navigator a:hover {
   color: var(--bew-theme-color);
+}
+
+.n .n-statistics .n-fs:hover p,
+.n .n-statistics .n-gz:hover p {
+  color: var(--bew-theme-color) !important;
 }
 
 .n .n-cursor,
 .be-tab-cursor {
   border-color: var(--bew-theme-color);
+}
+
+.g-search input:focus {
+  border-color: var(--bew-theme-color) !important;
 }
 
 .n .n-cursor {
@@ -24,8 +34,20 @@
   display: none;
 }
 
-.i-m-title .icon-i-title {
+.i-m-title .icon-i-title,
+.g-search .search-btn:hover {
   filter: var(--bew-filter-icon-glow);
+}
+
+.s-space {
+  #page-index #i-ann-content textarea:focus,
+  #page-index #i-ann-content textarea:hover {
+    border-color: var(--bew-theme-color);
+  }
+
+  a:hover {
+    color: var(--bew-theme-color);
+  }
 }
 
 .dark {
@@ -40,13 +62,27 @@
     color: var(--bew-text-1);
   }
 
+  .n .n-data .n-data-v {
+    color: var(--bew-text-1);
+  }
+
+  .g-search input,
+  #page-index #i-ann-content textarea {
+    background-color: var(--bew-fill-1);
+    border-color: var(--bew-border-color);
+    color: var(--bew-text-1);
+  }
+
   .s-space {
     .section,
     #page-index .fav-covers,
     #page-index .channel .channel-item,
     .i-pin-v .be-tab,
     .i-m-r2,
-    #page-index .col-2 .section-title {
+    #page-index .col-2 .section-title,
+    .user-info .user-info-title,
+    .article-content,
+    .s-content {
       border-color: var(--bew-border-color);
     }
 
@@ -54,9 +90,13 @@
       box-shadow: unset;
     }
 
-    .n .n-data .n-data-v,
     .section-title,
-    #page-index .col-2 .section .user-auth.no-auth .no-auth-title .goto-auth {
+    #page-index .col-2 .section .user-auth.no-auth .no-auth-title .goto-auth,
+    .user-info .user-info-title .info-title,
+    .article-title,
+    #page-index .channel.guest .channel-item .channel-title .channel-name,
+    #page-index .channel .channel-item .channel-name,
+    .large-item .title {
       color: var(--bew-text-1);
     }
 
@@ -66,6 +106,17 @@
     .section .operation {
       border-color: var(--bew-border-color);
       color: var(--bew-text-2);
+    }
+
+    .section .count {
+      background-color: var(--bew-fill-1);
+      border-color: var(--bew-fill-1);
+      color: var(--bew-text-2);
+    }
+
+    .section .count:before,
+    .section .more {
+      display: none;
     }
   }
 }
