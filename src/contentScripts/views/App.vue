@@ -571,7 +571,7 @@ function handleBackToTop() {
 <style lang="scss">
 .fade-enter-active,
 .fade-leave-active {
-  transition: all 0.5s ease;
+  transition: opacity 0.5s ease;
 }
 
 .fade-enter-from,
