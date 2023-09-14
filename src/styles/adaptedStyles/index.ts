@@ -1,5 +1,6 @@
 import './comments.scss'
 import './footer.scss'
+import './userCard.scss'
 import './searchPage.scss'
 import './videoPage.scss'
 import './momentsPage.scss'

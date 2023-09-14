@@ -23,21 +23,6 @@
   border-color: var(--bew-theme-color);
 }
 
-.g-search input:focus,
-#pin-wrapper #pin-layer-search:focus,
-#pin-wrapper .pin-layer-reason #pin-layer-reason-input input:focus {
-  border-color: var(--bew-theme-color) !important;
-}
-
-.g-search input,
-#page-index #i-ann-content textarea,
-#pin-wrapper #pin-layer-search,
-#pin-wrapper .pin-layer-reason #pin-layer-reason-input input {
-  background-color: var(--bew-fill-1);
-  border-color: var(--bew-border-color);
-  color: var(--bew-text-1);
-}
-
 .n .n-cursor,
 #pin-wrapper .pin-layer-vlist .small-item.selected,
 .be-switch-container.is-checked .be-switch {
@@ -53,6 +38,24 @@
   filter: var(--bew-filter-icon-glow);
 }
 
+// input box
+.g-search input:focus,
+#pin-wrapper #pin-layer-search:focus,
+#pin-wrapper .pin-layer-reason #pin-layer-reason-input input:focus,
+.search-component.search-component-focus,
+.search-component:hover {
+  border-color: var(--bew-theme-color) !important;
+}
+
+.g-search input,
+#page-index #i-ann-content textarea,
+#pin-wrapper #pin-layer-search,
+#pin-wrapper .pin-layer-reason #pin-layer-reason-input input {
+  background-color: var(--bew-fill-1);
+  border-color: var(--bew-border-color);
+  color: var(--bew-text-1);
+}
+
 .s-space {
   #page-index #i-ann-content textarea:focus,
   #page-index #i-ann-content textarea:hover {
@@ -64,12 +67,29 @@
     .channel
     .section-right-options
     .play-all-channel:hover
-    .video-commonplayer_play {
+    .video-commonplayer_play,
+  #page-follows .follow-tabs span.active,
+  #page-follows .follow-tabs span:hover {
     color: var(--bew-theme-color);
   }
 
-  .btn.primary {
+  #page-follows .follow-sidenav .follow-list-container .follow-item.cur,
+  #page-follows .follow-tabs span.active:after,
+  .contribution-sidenav .contribution-item.cur,
+  #page-setting .setting-index-module:hover,
+  .bangumi-pagelistbox .p:hover,
+  .bangumi-pagelistbox .p.active,
+  .btn.primary,
+  #page-fav .fav-sidenav .fav-item.cur,
+  .favInfo-box .favInfo-details .fav-options .fav-play,
+  .be-pager-item-active {
     background-color: var(--bew-theme-color);
+  }
+
+  .bangumi-pagelistbox .p:hover,
+  .bangumi-pagelistbox .p.active,
+  .btn.primary,
+  .be-pager-item-active {
     border-color: var(--bew-theme-color);
   }
 
@@ -111,6 +131,10 @@
   .ps {
     padding: 0;
   }
+
+  #page-follows .follow-tabs span.active:before {
+    display: none;
+  }
 }
 
 .dark {
@@ -132,7 +156,9 @@
   a,
   span,
   #page-video .page-head__left .video-title,
-  .pgc-space-follow-item .pgc-item-info .pgc-item-title {
+  .pgc-space-follow-item .pgc-item-info .pgc-item-title,
+  .search-component-input input,
+  #page-article .row .breadcrumb .item {
     color: var(--bew-text-1);
   }
 
@@ -150,8 +176,22 @@
     #pin-wrapper .pin-layer-header,
     #page-follows .follow-main .follow-header.follow-header-info,
     .list-item,
-    #page-follows .follow-sidenav {
+    #page-follows .follow-sidenav,
+    #page-follows .follow-sidenav .nav-container.follow-container,
+    #page-follows .follow-main,
+    #page-follows .list-item:last-child,
+    .contribution-sidenav ~ .main-content,
+    .contribution-sidenav,
+    #page-fav .fav-main .favList-info,
+    #page-fav .fav-main,
+    #page-fav .fav-sidenav,
+    #page-setting .setting-index-module,
+    #page-setting .setting-index-container {
       border-color: var(--bew-border-color);
+    }
+
+    .series-item .split-line {
+      background-color: var(--bew-border-color);
     }
 
     .i-pin-c {
@@ -203,8 +243,13 @@
       box-shadow: 0 0 0 1px var(--bew-border-color);
     }
 
-    #page-video #submit-video-type-filter {
+    #page-video #submit-video-type-filter,
+    .fans-action-follow {
       background-color: var(--bew-fill-1);
+    }
+    #page-follows .follow-sidenav .follow-list-container .follow-item:hover,
+    .contribution-sidenav .contribution-item:hover {
+      background-color: var(--bew-fill-2);
     }
   }
 }
