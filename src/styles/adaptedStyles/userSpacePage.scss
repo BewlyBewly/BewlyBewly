@@ -9,7 +9,9 @@
 .n .n-btn.active,
 .be-tab-item.is-active,
 #navigator a:hover,
-#page-video #submit-video-type-filter a.active {
+#page-video #submit-video-type-filter a.active,
+.n .n-data.router-link-active .n-data-k,
+.n .n-data.router-link-active .n-data-v {
   color: var(--bew-theme-color);
 }
 
@@ -29,7 +31,8 @@
   background-color: var(--bew-theme-color);
 }
 
-.be-tab-cursor:after {
+.be-tab-cursor:after,
+.sub-tabs a.active:before {
   display: none;
 }
 
@@ -69,7 +72,10 @@
     .play-all-channel:hover
     .video-commonplayer_play,
   #page-follows .follow-tabs span.active,
-  #page-follows .follow-tabs span:hover {
+  #page-follows .follow-tabs span:hover,
+  .favInfo-box .favInfo-details .fav-name:hover,
+  .sub-tabs a.active,
+  #page-subs .action .sub-action {
     color: var(--bew-theme-color);
   }
 
@@ -89,13 +95,17 @@
   .bangumi-pagelistbox .p:hover,
   .bangumi-pagelistbox .p.active,
   .btn.primary,
-  .be-pager-item-active {
+  .be-pager-item-active,
+  .sub-tabs a.active {
     border-color: var(--bew-theme-color);
   }
 
   .btn.primary:focus,
   .btn.primary:hover {
     background-color: var(--bew-theme-color-80);
+  }
+  .btn.primary:focus,
+  .btn.primary:hover {
     border-color: var(--bew-theme-color-80);
   }
 
@@ -158,7 +168,8 @@
   #page-video .page-head__left .video-title,
   .pgc-space-follow-item .pgc-item-info .pgc-item-title,
   .search-component-input input,
-  #page-article .row .breadcrumb .item {
+  #page-article .row .breadcrumb .item,
+  .album-list__title {
     color: var(--bew-text-1);
   }
 
@@ -186,8 +197,20 @@
     #page-fav .fav-main,
     #page-fav .fav-sidenav,
     #page-setting .setting-index-module,
-    #page-setting .setting-index-container {
+    #page-setting .setting-index-container,
+    #page-fav .fav-sidenav .nav-container,
+    #page-fav .fav-sidenav .playlist-group,
+    #page-fav .fav-sidenav .watch-later,
+    #page-subs .mini-item,
+    #page-follows .follow-main .follow-action-top,
+    .modal-wrapper .modal-title,
+    #page-fav .fav-main .filter-item.search,
+    #page-fav .fav-main .search-types {
       border-color: var(--bew-border-color);
+    }
+
+    #page-fav .fav-main .small-item {
+      border-color: transparent;
     }
 
     .series-item .split-line {
@@ -207,13 +230,19 @@
     .large-item .title,
     #pin-wrapper .pin-layer-vlist .small-item .title,
     #page-setting .setting-privacy-item .setting-privacy-name,
-    #page-setting .setting-index-module {
+    #page-setting .setting-index-module,
+    .favInfo-box .favInfo-details .fav-name,
+    #page-follows .follow-main .follow-action-bottom li,
+    .modal-wrapper .modal-title,
+    #page-fav .fav-sidenav .nav-title .text {
       color: var(--bew-text-1);
     }
 
     .i-m-btn,
     .elec .elec-total-count,
-    .pgc-space-follow-item .pgc-item-info .pgc-item-desc {
+    .pgc-space-follow-item .pgc-item-info .pgc-item-desc,
+    #page-follows .follow-main .follow-action-bottom .select-counter,
+    #page-follows .list-item .auth-description {
       color: var(--bew-text-2);
     }
 
@@ -223,12 +252,17 @@
       color: var(--bew-text-2);
     }
 
+    .album-list__tab--active .album-list__tab-name {
+      color: var(--bew-theme-color);
+    }
+
     .section .count:before {
       display: none;
     }
 
     #pin-wrapper #pin-layer,
-    .i-mp-action-menu {
+    .i-mp-action-menu,
+    .modal-wrapper {
       background-color: var(--bew-elevated-solid-1);
       border-color: var(--bew-elevated-solid-1);
     }
@@ -244,7 +278,9 @@
     }
 
     #page-video #submit-video-type-filter,
-    .fans-action-follow {
+    .fans-action-follow,
+    .album-list__tabs,
+    #page-follows .follow-main .follow-action-bottom .follow-action-fixtop {
       background-color: var(--bew-fill-1);
     }
     #page-follows .follow-sidenav .follow-list-container .follow-item:hover,
