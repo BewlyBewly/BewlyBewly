@@ -2,7 +2,6 @@
   "recommendations": [
     "vue.volar",
     "antfu.iconify",
-    "antfu.vite",
     "dbaeumer.vscode-eslint",
     "antfu.unocss",
     "csstools.postcss",

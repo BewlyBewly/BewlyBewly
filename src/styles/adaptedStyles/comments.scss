@@ -54,6 +54,10 @@
     background-color: var(--bew-fill-1);
     border-color: var(--bew-border-color);
   }
+
+  .bili-comment.browser-pc {
+    background-color: var(--bew-content-solid-1);
+  }
 }
 
 // #region Old comments components
@@ -131,9 +135,7 @@
 .bb-comment .comment-list .list-item .info span:hover i,
 .comment-bilibili-fold .comment-list .list-item .info span:hover i,
 .bb-comment .operation .spot:hover,
-.comment-bilibili-fold .operation .spot:hover,
-.bili-dyn-more__btn.tp.active,
-.bili-dyn-more__btn.tp:hover {
+.comment-bilibili-fold .operation .spot:hover {
   filter: var(--bew-filter-icon-glow);
 }
 

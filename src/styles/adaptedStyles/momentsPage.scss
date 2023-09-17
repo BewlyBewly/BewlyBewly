@@ -40,7 +40,7 @@
 }
 
 .dark {
-  #app .bg {
+  #app div.bg {
     opacity: 0;
   }
 
@@ -63,6 +63,12 @@
 
 aside section.sticky {
   top: 80px;
+}
+
+// pined moment
+.bili-dyn-item__tag {
+  box-shadow: inset 0 -1px 0 var(--bew-border-color);
+  color: var(--bew-text-2);
 }
 
 .bili-dyn-my-info,

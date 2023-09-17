@@ -1,0 +1,45 @@
+.btn.primary {
+  background-color: var(--bew-theme-color) !important;
+  border-color: var(--bew-theme-color) !important;
+
+  &:focus,
+  &:hover {
+    background-color: var(--bew-theme-color-80) !important;
+    border-color: var(--bew-theme-color-80) !important;
+  }
+}
+
+.btn.default {
+  background-color: var(--bew-fill-1) !important;
+  border-color: var(--bew-border-color) !important;
+  color: var(--bew-text-1) !important;
+
+  &:focus,
+  &:hover {
+    color: var(--bew-theme-color) !important;
+    background-color: transparent !important;
+    border-color: var(--bew-theme-color) !important;
+  }
+}
+
+// Pagination button
+.be-pager-item,
+.be-pager-next,
+.be-pager-prev {
+  background-color: var(--bew-fill-1);
+  border-color: var(--bew-border-color);
+
+  &:hover {
+    color: var(--bew-theme-color) !important;
+    border-color: var(--bew-theme-color);
+
+    a {
+      color: var(--bew-theme-color) !important;
+    }
+  }
+}
+
+.be-pager-item-active {
+  background-color: var(--bew-theme-color);
+  border-color: var(--bew-theme-color);
+}
