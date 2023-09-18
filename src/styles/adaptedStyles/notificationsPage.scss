@@ -18,6 +18,10 @@
       opacity: 0.3;
     }
   }
+
+  .dark & + .container::after {
+    display: none;
+  }
 }
 
 #link-message-container {
@@ -38,8 +42,16 @@
   .im-topic-link,
   .header .tab.active,
   .link,
-  .dynamic-link {
+  .dynamic-link,
+  .line-1 .like-item:hover,
+  .space-right .space-right-top .title a:hover,
+  .button-box .item > button.active,
+  .operate-btn {
     color: var(--bew-theme-color);
+  }
+
+  .send-btn.active {
+    color: white;
   }
 
   .at:hover {
@@ -51,8 +63,38 @@
     fill: var(--bew-theme-color);
   }
 
-  .header .tab.active {
+  .header .tab.active,
+  .medal-admin,
+  .medal-system,
+  .medal-master,
+  .send-btn.active,
+  .operate-btn {
     border-color: var(--bew-theme-color);
+  }
+
+  .medal-admin,
+  .medal-system,
+  .medal-master,
+  .send-btn.active,
+  .tab-list .tab-item.active::after,
+  .toggle.active {
+    background-color: var(--bew-theme-color);
+  }
+
+  .is-up > .message > .message-content {
+    background-color: var(--bew-theme-color) !important;
+  }
+
+  .send-btn.active:hover {
+    background-color: var(--bew-theme-color-80);
+  }
+
+  .emoji-container .emotion-btn-box:active,
+  .emoji-container .emotion-btn-box:hover,
+  .image-upload-btn.opened,
+  .image-upload-btn:hover,
+  .helper-btn.active::before {
+    filter: var(--bew-filter-icon-glow);
   }
 }
 
@@ -64,26 +106,9 @@
         color: var(--bew-text-1);
       }
 
-      .divided-line {
-        display: none;
-      }
-
       .side-bar .icon {
         filter: contrast(0) brightness(2);
       }
-    }
-
-    .space-left,
-    .space-right {
-      background-color: transparent;
-    }
-
-    .space-right-top .title,
-    .card,
-    .config,
-    .bili-im,
-    .bili-im .message-list {
-      background-color: var(--bew-content-solid-1);
     }
 
     .loading .progress {
@@ -108,7 +133,10 @@
       .modules
       .module
       .detail,
-    .bili-im .core-style {
+    .bili-im .core-style,
+    .detail .content,
+    .follow-btn.active,
+    .bp-emoji-box .emoji.kaomoji {
       color: var(--bew-text-1);
     }
 
@@ -116,7 +144,11 @@
     .text-box,
     .bottom,
     .tip,
-    .bili-im .msg-notify .content {
+    .bili-im .msg-notify .content,
+    .follow-btn.inactive,
+    .notify-wrapper .notify-text,
+    .msg-time .time,
+    .send-btn:not(.active) {
       color: var(--bew-text-2);
     }
 
@@ -139,7 +171,12 @@
     .bili-im .left,
     .bili-im .left .title,
     .bili-im .right .title,
-    .bili-im .send-box {
+    .bili-im .send-box,
+    .liked-user:not(:last-child)::after,
+    .follow-btn.active,
+    .divided-line,
+    .static-popup,
+    .send-btn:not(.active) {
       border-color: var(--bew-border-color);
     }
 
@@ -157,13 +194,42 @@
     .bili-im .left,
     .bili-im .msg-notify,
     .bili-im .message .message-content:not(.is-img),
-    .bili-im .send-box {
+    .bili-im .send-box,
+    .follow-btn.inactive,
+    .follow-btn.active,
+    .notify-wrapper .notify-text,
+    .bp-emoji-box .pagination,
+    .send-btn:not(.active) {
       background-color: var(--bew-fill-1);
     }
 
     .bili-im .list-item.active,
-    .bili-im .list-item:hover {
+    .bili-im .list-item:hover,
+    .bp-emoji-box .emoji-cover.selected,
+    .bp-emoji-box .emoji:hover {
       background-color: var(--bew-fill-2);
+    }
+
+    .space-left,
+    .space-right,
+    .emoji-list .emoji {
+      background-color: transparent;
+    }
+
+    .space-right-top .title,
+    .card,
+    .config,
+    .bili-im,
+    .bili-im .message-list {
+      background-color: var(--bew-content-solid-1);
+    }
+
+    .static-popup {
+      background-color: var(--bew-elevated-solid-1);
+    }
+
+    .follow-btn.inactive {
+      opacity: 0.6;
     }
   }
 }
