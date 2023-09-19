@@ -37,11 +37,11 @@ body {
   filter: none !important;
   color: var(--bew-text-1);
   line-height: unset;
+  background-image: none;
 }
 
 .dark body,
 html.dark {
-  background-image: none;
   background-color: var(--bew-bg);
 }
 
