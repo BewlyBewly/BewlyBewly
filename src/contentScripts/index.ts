@@ -42,7 +42,7 @@ if (isFirefox) {
     ) {
       setTimeout(() => {
         document.documentElement.removeChild(beforeLoadedStyleEl)
-      }, 800)
+      }, 400)
     }
     else {
       window.onload = () => {
@@ -68,7 +68,7 @@ else {
     ) {
       setTimeout(() => {
         document.documentElement.removeChild(beforeLoadedStyleEl)
-      }, 800)
+      }, 400)
     }
     else {
       window.onload = () => {
