@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useDark, useToggle } from '@vueuse/core'
+import { useToggle } from '@vueuse/core'
 import 'uno.css'
 import { useI18n } from 'vue-i18n'
 import browser from 'webextension-polyfill'
@@ -19,23 +19,23 @@ import emitter from '~/utils/mitt'
 const activatedPage = ref<AppPage>(AppPage.Home)
 const { locale } = useI18n()
 const [showSettings, toggleSettings] = useToggle(false)
-const isDark = useDark({
-  onChanged: (isDark: boolean) => {
-    if (isDark) {
-      document.documentElement.classList.add('dark')
-      // // Adjust Bilibili Evolved to dark mode when switching to dark mode
-      // document.body.classList.add('dark')
-      document.querySelector('#bewly')?.classList.add('dark')
-    }
-    else {
-      document.documentElement.classList.remove('dark')
-      // // Adjust Bilibili Evolved to light mode when switching to light mode
-      // document.body.classList.remove('dark')
-      document.querySelector('#bewly')?.classList.remove('dark')
-    }
-  },
-})
-const toggleDark = useToggle(isDark)
+// const isDark = useDark({
+//   onChanged: (isDark: boolean) => {
+//     if (isDark) {
+//       document.documentElement.classList.add('dark')
+//       // // Adjust Bilibili Evolved to dark mode when switching to dark mode
+//       // document.body.classList.add('dark')
+//       document.querySelector('#bewly')?.classList.add('dark')
+//     }
+//     else {
+//       document.documentElement.classList.remove('dark')
+//       // // Adjust Bilibili Evolved to light mode when switching to light mode
+//       // document.body.classList.remove('dark')
+//       document.querySelector('#bewly')?.classList.remove('dark')
+//     }
+//   },
+// })
+// const toggleDark = useToggle(isDark)
 const pages = { Home, Search, Anime, History, WatchLater, Favorites }
 const mainAppRef = ref<HTMLElement>() as Ref<HTMLElement>
 const mainAppOpacity = ref<number>(0)
@@ -89,6 +89,12 @@ const isTopbarFixed = computed(() => {
     return true
   return false
 })
+const currentAppColorScheme = computed((): 'dark' | 'light' => {
+  if (settings.value.theme !== 'auto')
+    return settings.value.theme
+  else
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+})
 
 // const isSearchPage = computed(() => {
 //   if (
@@ -114,9 +120,9 @@ watch(
   },
 )
 
-// Watch for changes in the 'isDark' variable and add the 'dark' class to the 'mainApp' element
+// Watch for changes in the 'settings.value.theme' variable and add the 'dark' class to the 'mainApp' element
 // to prevent some Unocss dark-specific styles from failing to take effect
-watch(() => isDark.value, () => {
+watch(() => settings.value.theme, () => {
   setAppAppearance()
 })
 
@@ -125,9 +131,7 @@ watch(() => settings.value.language, () => {
 })
 
 watch(() => accessKey.value, () => {
-  // Clear accessKey if not logged in
-  if (!getUserID())
-    accessKey.value = ''
+  handleChangeAccessKey()
 })
 
 watch(() => settings.value.wallpaperMaskOpacity, () => {
@@ -182,11 +186,20 @@ onMounted(() => {
     else showTopbarMask.value = false
   })
 
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setAppAppearance)
+
+  handleChangeAccessKey()
   setAppAppearance()
   setAppLanguage()
   setAppThemeColor()
   setAppWallpaperMaskingOpacity()
 })
+
+function handleChangeAccessKey() {
+  // Clear accessKey if not logged in
+  if (!getUserID())
+    accessKey.value = ''
+}
 
 function changeActivatePage(pageName: AppPage) {
   if (activatedPage.value === pageName) {
@@ -224,19 +237,41 @@ async function setAppLanguage() {
 }
 
 /**
- * Watch for changes in the 'isDark' variable and add the 'dark' class to the 'mainApp' element
+ * Watch for changes in the 'settings.value.theme' variable and add the 'dark' class to the 'mainApp' element
  * to prevent some Unocss dark-specific styles from failing to take effect
  */
 function setAppAppearance() {
-  if (isDark.value)
+  const currentColorScheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+
+  if (settings.value.theme === 'dark') {
     mainAppRef.value?.classList.add('dark')
-
-  else
+    document.querySelector('#bewly')?.classList.add('dark')
+    document.documentElement.classList.add('dark')
+  }
+  else if (settings.value.theme === 'light') {
     mainAppRef.value?.classList.remove('dark')
+    document.querySelector('#bewly')?.classList.remove('dark')
+    document.documentElement.classList.remove('dark')
+  }
+  else if (settings.value.theme === 'auto') {
+    if (currentColorScheme) {
+      mainAppRef.value?.classList.add('dark')
+      document.querySelector('#bewly')?.classList.add('dark')
+      document.documentElement.classList.add('dark')
+    }
+    else {
+      mainAppRef.value?.classList.remove('dark')
+      document.querySelector('#bewly')?.classList.remove('dark')
+      document.documentElement.classList.remove('dark')
+    }
+  }
+}
 
-  // // Override Bilibili Evolved background color
-  // document.body.style.setProperty('background-color', 'unset', 'important')
-  // document.documentElement.style.setProperty('background-color', 'var(--bew-bg)', 'important')
+function toggleDark() {
+  if (currentAppColorScheme.value === 'light')
+    settings.value.theme = 'dark'
+  else
+    settings.value.theme = 'light'
 }
 
 function setAppThemeColor() {
@@ -418,9 +453,9 @@ function handleBackToTop() {
             <!-- dividing line -->
             <div class="divider" />
 
-            <Tooltip :content="isDark ? $t('dock.dark_mode') : $t('dock.light_mode')" :placement="tooltipPlacement">
+            <Tooltip :content="currentAppColorScheme === 'dark' ? $t('dock.dark_mode') : $t('dock.light_mode')" :placement="tooltipPlacement">
               <button class="dock-item" @click="toggleDark()">
-                <tabler:moon-stars v-if="isDark" />
+                <tabler:moon-stars v-if="currentAppColorScheme === 'dark'" />
                 <tabler:sun v-else />
               </button>
             </Tooltip>
@@ -434,9 +469,9 @@ function handleBackToTop() {
         </aside>
         <aside v-else pos="fixed top-0 right-6px" h-full flex items-center z-10 pointer-events-none>
           <div flex="~ gap-2 col" pointer-events-auto>
-            <Tooltip :content="isDark ? $t('dock.dark_mode') : $t('dock.light_mode')" placement="left">
+            <Tooltip :content="currentAppColorScheme === 'dark' ? $t('dock.dark_mode') : $t('dock.light_mode')" placement="left">
               <Button size="small" round shadow="$bew-shadow-1" w-45px h-45px @click="toggleDark()">
-                <tabler:moon-stars v-if="isDark" text-xl shrink-0 lh-0 />
+                <tabler:moon-stars v-if="currentAppColorScheme === 'dark'" text-xl shrink-0 lh-0 />
                 <tabler:sun v-else text-xl shrink-0 lh-0 />
               </Button>
             </Tooltip>

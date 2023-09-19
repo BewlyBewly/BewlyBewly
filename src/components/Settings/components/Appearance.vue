@@ -49,6 +49,22 @@ const wallpapers = computed<Array<{ name: string; url: string; thumbnail: string
     },
   ]
 })
+const themeOptions = computed<Array<{ value: string; label: string }>>(() => {
+  return [
+    {
+      label: 'Light',
+      value: 'light',
+    },
+    {
+      label: 'Dark',
+      value: 'dark',
+    },
+    {
+      label: 'Auto',
+      value: 'auto',
+    },
+  ]
+})
 
 function changeThemeColor(color: string) {
   settings.value.themeColor = color
@@ -60,6 +76,9 @@ function changeWallpaper(url: string) {
 </script>
 
 <template>
+  <SettingItem title="Theme">
+    <Select v-model="settings.theme" :options="themeOptions" />
+  </SettingItem>
   <SettingItem :title="$t('settings.theme_color')">
     <div flex="~ gap-2 wrap" justify-end>
       <div

@@ -3,6 +3,7 @@ export interface Settings {
   isShowTopbar: boolean
   dockPosition: 'left' | 'right' | 'bottom'
   enableHorizontalScrolling: boolean
+  theme: 'light' | 'dark' | 'auto'
   themeColor: string
   recommendationMode: 'web' | 'app'
   wallpaperMode: 'buildIn' | 'byUrl'
