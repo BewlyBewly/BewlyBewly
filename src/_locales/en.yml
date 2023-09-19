@@ -61,6 +61,11 @@ settings:
   enable_horizontal_scrolling_desc: After enabling, mouse scrolling will directly scroll the horizontal scroll list
 
   # Appearance settings
+  theme: Theme
+  theme_opt:
+    light: Light
+    dark: Dark
+    auto: Auto
   theme_color: Theme color
   follow_bilibili_evolved_color: Follow the Bilibili Evolved theme color
   follow_bilibili_evolved_color_desc: After changing the theme color in Bilibili Evolved, you will need to re-select this option in order to update the theme color.
@@ -86,6 +91,7 @@ settings:
   enable_logo_glowing_effect: Enable glowing effect for the logo
   logo_visibility: Logo visibility
   bg_darkens_when_the_search_bar_is_focused: Background darkens when the search bar is focused
+  bg_blurs_when_the_search_bar_is_focused: Background blurs when the search bar is focused
   choose_search_bar_focused_character: Choose the character that appears when the search bar is focused
   individually_set_search_page_wallpaper: Individually set search page wallpaper
 auth:

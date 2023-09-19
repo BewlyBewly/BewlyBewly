@@ -88,6 +88,14 @@ function changeWallpaper(url: string) {
     <Radio v-model="settings.searchPageDarkenOnSearchFocus" />
   </SettingItem>
 
+  <SettingItem :title="$t('settings.bg_blurs_when_the_search_bar_is_focused')">
+    <template #desc>
+      <span color="$bew-warning-color">{{ $t('common.performance_impact_warn') }}</span>
+    </template>
+
+    <Radio v-model="settings.searchPageBlurredOnSearchFocus" />
+  </SettingItem>
+
   <SettingItem :title="$t('settings.choose_search_bar_focused_character')" next-line>
     <div grid="~ xl:cols-8 lg:cols-6 cols-5 gap-4">
       <picture

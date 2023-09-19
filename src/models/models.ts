@@ -13,6 +13,7 @@ export interface Settings {
   wallpaperBlurIntensity: number
 
   searchPageDarkenOnSearchFocus: boolean
+  searchPageBlurredOnSearchFocus: boolean
   searchPageLogoColor: 'white' | 'themeColor'
   searchPageLogoGlow: boolean
   searchPageShowLogo: boolean

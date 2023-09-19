@@ -12,7 +12,7 @@ const isFirefox: boolean = /Firefox/i.test(navigator.userAgent)
 
 const beforeLoadedStyleEl = injectCSS(`
   html.dark {
-    background: hsl(230 12% 6%);
+    background-color: hsl(230 12% 6%);
   }
 
   body {

@@ -60,6 +60,11 @@ settings:
   enable_horizontal_scrolling_desc: 启用后，鼠标滚动时将直接滚动横向滚动列表
 
   # Appearance settings
+  theme: 主题
+  theme_opt:
+    light: 亮色
+    dark: 暗色
+    auto: 自动
   theme_color: 主题色
   follow_bilibili_evolved_color: 使用 Bilibili Evolved 主题色
   follow_bilibili_evolved_color_desc: 每次选完 Bilibili Evolved 主题色时，记得重新选中这一选项以更新配置
@@ -85,6 +90,7 @@ settings:
   logo_visibility: Logo 可见性
   enable_logo_glowing_effect: 启用 Logo 发光效果
   bg_darkens_when_the_search_bar_is_focused: 当搜索栏聚焦时背景暗化
+  bg_blurs_when_the_search_bar_is_focused: 当搜索栏聚焦时背景模糊
   choose_search_bar_focused_character: 选择搜索栏聚焦时出现的人物
   individually_set_search_page_wallpaper: 单独设置搜索页背景
 auth:

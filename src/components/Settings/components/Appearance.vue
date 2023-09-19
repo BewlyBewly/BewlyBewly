@@ -1,5 +1,8 @@
 <script lang="ts" setup>
+import { useI18n } from 'vue-i18n'
 import { settings } from '~/logic'
+
+const { t } = useI18n()
 
 const themeColorOptions = computed<Array<string>>(() => {
   return [
@@ -52,15 +55,15 @@ const wallpapers = computed<Array<{ name: string; url: string; thumbnail: string
 const themeOptions = computed<Array<{ value: string; label: string }>>(() => {
   return [
     {
-      label: 'Light',
+      label: t('settings.theme_opt.light'),
       value: 'light',
     },
     {
-      label: 'Dark',
+      label: t('settings.theme_opt.dark'),
       value: 'dark',
     },
     {
-      label: 'Auto',
+      label: t('settings.theme_opt.auto'),
       value: 'auto',
     },
   ]
@@ -76,8 +79,8 @@ function changeWallpaper(url: string) {
 </script>
 
 <template>
-  <SettingItem title="Theme">
-    <Select v-model="settings.theme" :options="themeOptions" />
+  <SettingItem :title="$t('settings.theme')">
+    <Select v-model="settings.theme" w-full :options="themeOptions" />
   </SettingItem>
   <SettingItem :title="$t('settings.theme_color')">
     <div flex="~ gap-2 wrap" justify-end>

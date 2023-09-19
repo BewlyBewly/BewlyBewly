@@ -15,6 +15,10 @@ import { settings } from '~/logic'
       :glow="settings.searchPageLogoGlow"
       mb-12 z-1
     />
-    <SearchBar :darken-on-focus="settings.searchPageDarkenOnSearchFocus" :focused-character="settings.searchPageSearchBarFocusCharacter" />
+    <SearchBar
+      :darken-on-focus="settings.searchPageDarkenOnSearchFocus"
+      :blurred-on-focus="settings.searchPageBlurredOnSearchFocus"
+      :focused-character="settings.searchPageSearchBarFocusCharacter"
+    />
   </div>
 </template>

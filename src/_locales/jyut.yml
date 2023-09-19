@@ -60,6 +60,11 @@ settings:
   enable_horizontal_scrolling_desc: 用咗之後，轆緊滑鼠就可以直接打橫掃水平捲軸列表
 
   # Appearance settings
+  theme: 色系
+  theme_opt:
+    light: 淺色
+    dark: 深色
+    auto: 自動
   theme_color: 佈景色
   follow_bilibili_evolved_color: 跟返 Bilibili Evolved 佈景色
   follow_bilibili_evolved_color_desc: 每次換完 Bilibili Evolved 佈景色嗰陣，記得揀多一次呢個選項愛嚟更新佈置
@@ -85,6 +90,7 @@ settings:
   enable_logo_glowing_effect: Logo 使用發光效果
   logo_visibility: Logo 可視性
   bg_darkens_when_the_search_bar_is_focused: 搜尋欄聚焦嗰陣校暗背景
+  bg_blurs_when_the_search_bar_is_focused: 搜尋欄聚焦嗰陣校矇背景
   choose_search_bar_focused_character: 揀個喺搜尋欄聚焦嗰陣出現嘅人物
   individually_set_search_page_wallpaper: 單獨設定搵嘢頁背景
 auth:

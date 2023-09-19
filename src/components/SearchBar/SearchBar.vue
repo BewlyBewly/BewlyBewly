@@ -8,6 +8,7 @@ import {
 
 defineProps<{
   darkenOnFocus?: boolean
+  blurredOnFocus?: boolean
   focusedCharacter?: string
 }>()
 
@@ -142,6 +143,12 @@ function handleKeyDown() {
       />
     </Transition>
 
+    <div
+      v-if="blurredOnFocus"
+      pos="fixed top-0 left-0" w-full h-full duration-500 pointer-events-none ease-out
+      :style="{ backdropFilter: isFocus ? 'blur(15px)' : 'blur(0)' }"
+    />
+
     <div class="search-bar group" :class="isFocus ? 'focus' : ''" flex="~" items-center pos="relative">
       <Transition name="focus-character">
         <img v-show="focusedCharacter && isFocus" :src="focusedCharacter" width="100" object-contain pos="absolute right-0 bottom-30px">
@@ -259,7 +266,7 @@ function handleKeyDown() {
 
 .mask-enter-active,
 .mask-leave-active {
-  --at-apply: transition-all duration-300;
+  --at-apply: transition-all duration-300 ease-in-out;
 }
 
 .mask-enter-from,

@@ -19,6 +19,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   wallpaperBlurIntensity: 0,
 
   searchPageDarkenOnSearchFocus: true,
+  searchPageBlurredOnSearchFocus: false,
   searchPageLogoColor: 'themeColor',
   searchPageLogoGlow: true,
   searchPageShowLogo: true,
