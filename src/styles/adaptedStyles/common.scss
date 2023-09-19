@@ -1,5 +1,5 @@
 #bili-header-container {
-  background-color: var(--bew-bg) !important;
+  // background-color: var(--bew-bg) !important;
 }
 
 .bili-header .bili-header__bar {
@@ -12,4 +12,9 @@
 
 .brand_blue {
   color: var(--bew-theme-color) !important;
+}
+
+
+.van-popover {
+  background-color: var(--bew-elevated-solid-1);
 }
