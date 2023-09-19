@@ -40,6 +40,17 @@ const settingsMenuItems = computed(() => {
     },
   ]
 })
+const isHomePage = computed(() => {
+  if (
+    /https?:\/\/bilibili.com\/?$/.test(location.href)
+  || /https?:\/\/www.bilibili.com\/?$/.test(location.href)
+  || /https?:\/\/www.bilibili.com\/index.html$/.test(location.href)
+  || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(location.href)
+  || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(location.href)
+  )
+    return true
+  return false
+})
 
 /**
  * When changing language, set current title again to ensure it switches to the corresponding language
@@ -70,7 +81,7 @@ function setCurrentTitle() {
 </script>
 
 <template>
-  <div class="fixed w-full h-full top-0 left-0" z="9998" @click="handleClose" />
+  <div class="fixed w-full h-full top-0 left-0" z="9998" opacity-60 :style="{ backgroundColor: isHomePage ? '' : 'var(--bew-bg)' }" @click="handleClose" />
 
   <div
     id="settings-window" pos="fixed top-1/2 left-1/2" w="80% lg:2/3 md:2/3" h="80% md:60%"
