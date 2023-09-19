@@ -35,16 +35,15 @@ body {
   font-size: 14px !important;
   min-width: unset !important;
   filter: none !important;
-  background-color: var(--bew-bg);
-  background-image: none;
+  // background-color: var(--bew-bg);
   color: var(--bew-text-1);
   line-height: unset;
 }
 
-.dark {
-  body {
-    background-image: none;
-  }
+.dark body,
+html.dark {
+  background-image: none;
+  background-color: var(--bew-bg);
 }
 
 .keep-two-lines {
