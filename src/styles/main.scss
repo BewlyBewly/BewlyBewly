@@ -35,7 +35,6 @@ body {
   font-size: 14px !important;
   min-width: unset !important;
   filter: none !important;
-  // background-color: var(--bew-bg);
   color: var(--bew-text-1);
   line-height: unset;
 }
@@ -62,20 +61,4 @@ h4,
 h5,
 h6 {
   --at-apply: color-$bew-text-1;
-}
-
-#bili-header-container {
-  background-color: var(--bew-bg) !important;
-}
-
-.bili-header .bili-header__bar {
-  visibility: hidden;
-}
-
-.card-loaded {
-  background-color: var(--bew-elevated-solid-1);
-}
-
-.brand_blue {
-  color: var(--bew-theme-color) !important;
 }

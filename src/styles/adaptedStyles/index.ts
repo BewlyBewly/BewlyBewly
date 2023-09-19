@@ -1,3 +1,4 @@
+import './common.scss'
 import './comments.scss'
 import './footer.scss'
 import './modal.scss'
