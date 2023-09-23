@@ -65,7 +65,9 @@
   }
 
   .css-o1815x .border,
-  .css-o1815x .dot {
+  .css-o1815x .dot,
+  .action-button:hover .border,
+  .action-button > .action-icon.active .border {
     fill: var(--bew-theme-color);
   }
 
@@ -79,7 +81,8 @@
   }
 
   .content .input-section .row .emoji-btn:hover,
-  .content .input-section .row .emoji-btn.active {
+  .content .input-section .row .emoji-btn.active,
+  .reply-textarea:focus {
     border-color: var(--bew-theme-color) !important;
   }
 
@@ -88,7 +91,8 @@
   .medal-master,
   .send-btn.active,
   .tab-list .tab-item.active::after,
-  .content .btnrow .btn.save {
+  .content .btnrow .btn.save,
+  .send-button {
     background-color: var(--bew-theme-color);
   }
 
@@ -149,7 +153,8 @@
     .detail .content,
     .follow-btn.active,
     .bp-emoji-box .emoji.kaomoji,
-    .bp-emoji-box2 .emoji.kaomoji {
+    .bp-emoji-box2 .emoji.kaomoji,
+    .reply-textarea {
       color: var(--bew-text-1);
     }
 
@@ -197,7 +202,8 @@
     .send-btn:not(.active),
     .content .input-section,
     .content .input-section .row .emoji-btn,
-    .content .btnrow .btn.clear {
+    .content .btnrow .btn.clear,
+    .reply-textarea {
       border-color: var(--bew-border-color);
     }
 
@@ -227,7 +233,8 @@
     .bp-emoji-box2 .pagination,
     .send-btn:not(.active),
     .toggle,
-    .content .btnrow .btn.save.disabled {
+    .content .btnrow .btn.save.disabled,
+    .reply-textarea {
       background-color: var(--bew-fill-1);
     }
 
@@ -242,7 +249,7 @@
 
     .space-left,
     .space-right,
-    .emoji-list .emoji{
+    .emoji-list .emoji {
       background-color: transparent;
     }
 
@@ -267,8 +274,12 @@
       opacity: 0.6;
     }
 
+    .action-button > .action-icon .border {
+      fill: var(--bew-text-3);
+    }
+
     .link-progress-tv {
-      filter: invert(1) brightness(2)
+      filter: invert(1) brightness(2);
     }
   }
 }
