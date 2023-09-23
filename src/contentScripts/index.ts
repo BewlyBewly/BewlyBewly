@@ -91,6 +91,8 @@ function injectApp() {
 
     // video page
     || /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(currentUrl)
+    // anime video page
+    || /https?:\/\/(www.)?bilibili.com\/bangumi\/play\/ss.*/.test(currentUrl)
     // watch later playlist
     || /https?:\/\/(www.)?bilibili.com\/list\/watchlater.*/.test(currentUrl)
     // favorite playlist
