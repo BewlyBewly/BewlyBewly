@@ -80,10 +80,11 @@ onMounted(() => {
 
 function onClickTab(tabId: number) {
   // Prevent changing tab when loading, cuz it will cause a bug
-  if (isLoading.value)
+  if (isLoading.value || tabId === selectedTab.value)
     return
 
   selectedTab.value = tabId
+  moments.length = 0
   momentTabs.forEach((tab) => {
     tab.isSelected = tab.id === tabId
   })
@@ -152,7 +153,6 @@ function getHistoryMoments(typeList: number[]) {
 }
 
 function getLiveMoments(page: number) {
-  moments.length = 0
   isLoading.value = true
   browser.runtime
     .sendMessage({
@@ -166,6 +166,8 @@ function getLiveMoments(page: number) {
         if (moments.length !== 0 && res.data.list.length < 10) {
           isLoading.value = false
           noMoreContent.value = true
+          console.log('no more content')
+
           return
         }
 
@@ -298,9 +300,9 @@ function pushItemIntoMoments(item: any) {
         <!-- empty -->
         <empty
           v-if="!isLoading && moments.length === 0"
-          pos="absolute left-0"
+          pos="absolute top-0 left-0"
           bg="$bew-content-1"
-          z="1"
+          z="0"
           w="full"
           h="full"
           flex="~"
