@@ -548,8 +548,9 @@ async function getNewMomentsCount() {
     }
 
     svg {
-      --at-apply: w-60px h-auto filter drop-shadow-lg
-      fill-$bew-logo-color;
+      --drop-shadow: 0 4px 6px rgba(0,0,0,0.3);
+      --at-apply: w-60px h-auto filter drop-shadow-$drop-shadow
+        fill-$bew-logo-color;
 
       &:nth-child(2) {
         --at-apply: duration-300;
