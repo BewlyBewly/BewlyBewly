@@ -92,50 +92,6 @@ aside section.sticky {
   top: 70px !important;
 }
 
-// pined moment
-.bili-dyn-item__tag {
-  box-shadow: inset 0 -1px 0 var(--bew-border-color);
-  color: var(--bew-text-2);
-}
-
-.bili-dyn-my-info,
-.bili-dyn-my-info--skeleton,
-.bili-dyn-publishing,
-.bili-dyn-up-list,
-.bili-dyn-list-tabs,
-.bili-dyn-item,
-.bili-dyn-banner,
-.topic-panel,
-.bili-dyn-live-users,
-.bili-dyn-live-users__title,
-.bili-dyn-list-loading {
-  background-color: var(--bew-content-solid-1);
-  color: var(--bew-text-1);
-}
-
-.bili-rich-textarea__inner {
-  background-color: transparent;
-  color: var(--bew-text-1);
-}
-
-.bili-dyn-my-info__stat__item__count,
-.bili-rich-text__content,
-.topic-panel__nav-title,
-.relevant-topic__title,
-.dyn-goods__one__detail__name,
-.dyn-ugc__detail__title,
-.dyn-reserve__title,
-.bili-dyn-live-users__item__uname,
-.dyn-additional-common__detail__title,
-.bili-dyn-interaction__item__desc .bili-rich-text-module,
-.bili-album__watch__control__option {
-  color: var(--bew-text-1);
-}
-
-.bili-dyn-up-list__item__name {
-  color: var(--bew-text-2);
-}
-
 .bili-dyn-my-info__stat__item:hover > div:first-child,
 .bili-dyn-up-list__item.active .bili-dyn-up-list__item__name,
 .bili-dyn-list-tabs__item.active,
@@ -155,16 +111,17 @@ aside section.sticky {
 .dyn-reserve__desc__first.highlight,
 .dyn-reserve__lottery__text,
 .bili-album__watch__control__option:hover,
-.bili-gallery__pagination__index {
+.bili-gallery__pagination__index,
+.bili-dyn-card-medialist:hover .bili-dyn-card-medialist__title,
+.bili-dyn-card-pgc:hover .bili-dyn-card-pgc__title {
   color: var(--bew-theme-color);
 }
 
-.bili-dyn-up-list__item__face span {
+.bili-dyn-up-list__item__face span,
+.bili-dyn-card-video__badge,
+.bili-dyn-card-medialist__badge,
+.bili-dyn-title__label {
   background-color: var(--bew-theme-color);
-}
-
-.bili-dyn-card-video__desc {
-  color: var(--bew-text-2);
 }
 
 .bili-dyn-action:not(.disabled).active i,
@@ -178,48 +135,9 @@ aside section.sticky {
   filter: var(--bew-filter-icon-glow);
 }
 
-.bili-dyn-topic__card:hover,
-.bili-rich-text-link:hover,
-.bili-rich-text-module:hover,
-.bili-rich-text-topic:hover {
-  background-color: var(--bew-fill-2);
-}
-
-.bili-topic-search__popover {
-  background-color: var(--bew-fill-1);
-  border-color: var(--bew-border-color);
-}
-
-.dyn-goods__wrap,
-.dyn-reserve__card,
-.dyn-additional-common__wrap,
-.bili-dyn-content__orig.reference,
-.dyn-ugc__wrap {
-  background-color: var(--bew-fill-1);
-  color: var(--bew-text-1);
-}
-
-.reference .dyn-goods__wrap,
-.reference .dyn-reserve__card,
-.reference .dyn-additional-common__wrap,
-.reference .bili-dyn-content__orig.reference,
-.reference .dyn-ugc__wrap {
-  background-color: var(--bew-content-solid-1);
-  color: var(--bew-text-1);
-}
-
 .dyn-reserve__lottery__text:after,
 .bili-album__watch__track__activeitemborder {
   border-color: var(--bew-theme-color);
-}
-
-.bili-topic-search__input__prefix,
-.bili-topic-search__input__text {
-  color: var(--bew-text-2);
-}
-
-.bili-dyn-publishing__hint:after {
-  color: var(--bew-border-color);
 }
 
 .bili-dyn-publishing__action,
@@ -238,40 +156,148 @@ aside section.sticky {
   box-shadow: 0 0 0 2px var(--bew-theme-color);
 }
 
-.bili-dyn-up-list__item__face {
-  background-color: var(--bew-fill-1);
-}
-
 .bili-dyn-list-tabs__highlight {
   background-color: var(--bew-theme-color);
-}
-
-.bili-dyn-title__text {
-  color: var(--bew-text-1) !important;
-}
-
-.bili-dyn-card-video {
-  border-color: var(--bew-border-color);
-}
-.bili-dyn-card-video__body {
-  background-color: var(--bew-content-solid-1);
-}
-
-.bili-dyn-card-video__title {
-  color: var(--bew-text-1);
-}
-
-.bili-album__watch__control {
-  background-color: var(--bew-fill-1);
-}
-
-.bili-dyn-version-control__btn {
-  background-color: var(--bew-content-solid-1);
-  border-color: var(--bew-border-color);
-  color: var(--bew-text-1);
 }
 
 .bili-dyn-live-users__item__face-container {
   box-shadow: 0 0 0 1px var(--bew-theme-color);
 }
+
+.dark {
+  .bili-dyn-item__tag {
+    box-shadow: inset 0 -1px 0 var(--bew-border-color);
+    color: var(--bew-text-2);
+  }
+
+  .bili-dyn-up-list__item__name,
+  .bili-dyn-card-medialist__desc {
+    color: var(--bew-text-2);
+  }
+
+  .bili-dyn-my-info,
+  .bili-dyn-my-info--skeleton,
+  .bili-dyn-publishing,
+  .bili-dyn-up-list,
+  .bili-dyn-list-tabs,
+  .bili-dyn-item,
+  .bili-dyn-banner,
+  .topic-panel,
+  .bili-dyn-live-users,
+  .bili-dyn-live-users__title,
+  .bili-dyn-list-loading {
+    background-color: var(--bew-content-solid-1);
+  }
+
+  .bili-rich-textarea__inner {
+    background-color: transparent;
+    color: var(--bew-text-1);
+  }
+
+  .bili-dyn-my-info__stat__item__count,
+  .bili-rich-text__content,
+  .topic-panel__nav-title,
+  .relevant-topic__title,
+  .dyn-goods__one__detail__name,
+  .dyn-ugc__detail__title,
+  .dyn-reserve__title,
+  .bili-dyn-live-users__item__uname,
+  .dyn-additional-common__detail__title,
+  .bili-dyn-interaction__item__desc .bili-rich-text-module,
+  .bili-album__watch__control__option,
+  .bili-dyn-my-info,
+  .bili-dyn-my-info--skeleton,
+  .bili-dyn-publishing,
+  .bili-dyn-up-list,
+  .bili-dyn-list-tabs,
+  .bili-dyn-item,
+  .bili-dyn-banner,
+  .topic-panel,
+  .bili-dyn-live-users,
+  .bili-dyn-live-users__title,
+  .bili-dyn-list-loading,
+  .bili-dyn-card-pgc__title {
+    color: var(--bew-text-1);
+  }
+
+  .bili-dyn-card-video__desc {
+    color: var(--bew-text-2);
+  }
+
+  .bili-dyn-topic__card:hover,
+  .bili-rich-text-link:hover,
+  .bili-rich-text-module:hover,
+  .bili-rich-text-topic:hover {
+    background-color: var(--bew-fill-2);
+  }
+
+  .bili-topic-search__popover {
+    background-color: var(--bew-fill-1);
+    border-color: var(--bew-border-color);
+  }
+
+  .dyn-goods__wrap,
+  .dyn-reserve__card,
+  .dyn-additional-common__wrap,
+  .bili-dyn-content__orig.reference,
+  .dyn-ugc__wrap {
+    background-color: var(--bew-fill-1);
+    color: var(--bew-text-1);
+  }
+
+  .reference .dyn-goods__wrap,
+  .reference .dyn-reserve__card,
+  .reference .dyn-additional-common__wrap,
+  .reference .bili-dyn-content__orig.reference,
+  .reference .dyn-ugc__wrap,
+  .bili-dyn-card-medialist__body,
+  .bili-dyn-card-video__body,
+  .bili-dyn-card-pgc__body {
+    background-color: var(--bew-content-solid-1);
+  }
+
+  .reference .dyn-goods__wrap,
+  .reference .dyn-reserve__card,
+  .reference .dyn-additional-common__wrap,
+  .reference .bili-dyn-content__orig.reference,
+  .reference .dyn-ugc__wrap,
+  .bili-dyn-card-video__title,
+  .bili-dyn-card-medialist__title {
+    color: var(--bew-text-1);
+  }
+
+  .bili-topic-search__input__prefix,
+  .bili-topic-search__input__text {
+    color: var(--bew-text-2);
+  }
+
+  .bili-dyn-publishing__hint:after {
+    color: var(--bew-border-color);
+  }
+
+  .bili-dyn-up-list__item__face {
+    background-color: var(--bew-fill-1);
+  }
+
+  .bili-dyn-title__text {
+    color: var(--bew-text-1) !important;
+  }
+
+  .bili-dyn-card-video,
+  .bili-dyn-card-medialist,
+  .bili-dyn-card-pgc {
+    border-color: var(--bew-border-color);
+  }
+
+  .bili-album__watch__control {
+    background-color: var(--bew-fill-1);
+  }
+
+  .bili-dyn-version-control__btn {
+    background-color: var(--bew-content-solid-1);
+    border-color: var(--bew-border-color);
+    color: var(--bew-text-1);
+  }
+}
+
 // #endregion
