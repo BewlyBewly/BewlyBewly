@@ -2,6 +2,17 @@
   box-sizing: unset;
 }
 
+body .special-cover::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), transparent 10%);
+  pointer-events: none;
+}
+
 .numberListItem_number_list_item__wszA4.numberListItem_select__ar1X5,
 .follow_btnFollow__OFY3n,
 .squirtle-controller.squirtle-pgc .squirtle-progress-timeline,
@@ -38,6 +49,16 @@
   .squirtle-single-setting-chooses
   .squirtle-single-setting-choice.active {
   background-color: var(--bew-theme-color) !important;
+}
+
+.promptBar_remindActionWrap__ftBEp
+  .promptBar_btnItemWrap__SM_zQ
+  .positionBtn_btn__Cl153 {
+  background: var(--bew-theme-color) !important;
+}
+
+.follow_btnFollow__OFY3n:hover {
+  background-color: var(--bew-theme-color-80);
 }
 
 .mediainfo_mediaToolbar__uEabN .mediainfo_btnHome__ci38K {
@@ -101,11 +122,6 @@
   stroke: var(--bew-theme-color);
 }
 
-.mediainfo_mediaInfo__Cpow4,
-.recommend_wrap__pgu8c {
-  border-color: var(--bew-border-color);
-}
-
 .dark {
   .home-container .main-container,
   .mediainfo_mediaRight__jv5hq .mediainfo_media_desc__F5lLq i {
@@ -125,8 +141,25 @@
     background-color: var(--bew-fill-1);
   }
 
+  .follow_btnFollow__OFY3n.follow_followed__smKNK {
+    background-color: var(--bew-fill-2) !important;
+  }
+
+  .SectionSelector_SectionSelector__WS4H3 .SectionSelector_expand__Oh9Lt {
+    background: linear-gradient(
+      270deg,
+      var(--bew-content-solid-1) 46.21%,
+      transparent
+    );
+  }
+
   .numberListItem_number_list_item__wszA4 {
     --bg1: var(--bew-fill-1);
+  }
+
+  .mediainfo_mediaInfo__Cpow4,
+  .recommend_wrap__pgu8c {
+    border-color: var(--bew-border-color);
   }
 
   .mediainfo_mediaRight__jv5hq
@@ -157,3 +190,191 @@
     color: var(--bew-text-2);
   }
 }
+
+// #region Old anime playback & movie page
+.main-container .tool-bar .coin-info.active i,
+.main-container .tool-bar .coin-info:hover i,
+.main-container .tool-bar .like-info.active i,
+.main-container .tool-bar .like-info:hover i,
+.main-container .tool-bar .coin-info.active span,
+.main-container .tool-bar .coin-info:hover span,
+.main-container .tool-bar .like-info.active span,
+.main-container .tool-bar .like-info:hover span,
+.main-container
+  .tool-bar
+  .share-info
+  .share-more
+  .share-wrapper
+  .share-btn:hover
+  i,
+.main-container
+  .tool-bar
+  .share-info
+  .share-more
+  .share-wrapper
+  .share-btn:hover
+  span,
+.main-container .tool-bar .share-info:hover i,
+.main-container .tool-bar .share-info:hover span,
+.main-container .tool-bar .mobile-info:hover i,
+.main-container .tool-bar .mobile-info:hover span,
+.main-container .tool-bar .watch-info:hover span,
+.ep-list-wrapper .ep-item i,
+.section-ep-wrapper .ep-item i,
+.up-info .btn-follow-up,
+.main-container .media-info .media-right .media-desc i {
+  color: var(--bew-theme-color);
+}
+
+.main-container
+  .review-module
+  .review-list
+  .review-item
+  .review-header
+  #review-author-nick-name.review-author.is-vip,
+.up-info > a .up-name.vip,
+.main-container .review-module .review-list .review-item:hover .review-title,
+.main-container .review-module .module-title .more-link:hover {
+  color: var(--bew-theme-color) !important;
+}
+
+.main-container .ep-list-wrapper .list-wrapper.simple ul .ep-item.cursor,
+.main-container .pay-bar .vip .btn-pay,
+.main-container .media-info .media-right .media-tool-bar .btn-follow,
+.main-container .nav-tools .tool-item:hover {
+  background-color: var(--bew-theme-color);
+}
+
+.ep-list-wrapper .ep-item .badge.pink,
+.section-ep-wrapper .ep-item .badge.pink,
+.main-container .nav-tools .tool-item:hover {
+  background-color: var(--bew-theme-color) !important;
+}
+
+.main-container .pay-bar .vip .btn-pay:hover,
+.main-container .media-info .media-right .media-tool-bar .btn-follow:hover {
+  background-color: var(--bew-theme-color-80);
+}
+
+.main-container .ep-list-wrapper .list-wrapper.simple ul .ep-item.cursor {
+  border-color: var(--bew-theme-color);
+}
+
+.main-container .nav-tools .tool-item:hover {
+  border-color: var(--bew-theme-color) !important;
+}
+
+.main-container .tool-bar .watch-info:hover #watch-together-icon-1 path {
+  fill: var(--bew-theme-color) !important;
+}
+
+.dark {
+  .main-container .media-info .media-right .media-title,
+  .main-container .media-info .media-right .pub-wrapper,
+  .main-container .media-info .media-right .media-desc,
+  .main-container .season-list .series-title,
+  .main-container .season-list .ss-list-wrapper .ss-item .ss-info .ss-title,
+  .main-container
+    .recom-wrapper
+    .recom-list
+    .recom-item
+    .info-wrapper
+    .video-title,
+  .main-container .plp-l .comment-wrapper .b-head,
+  .main-container .media-info .media-right .pub-wrapper .home-link,
+  .main-container .ep-list-wrapper .list-title h4,
+  .ep-section-module .section-title,
+  .ep-list-wrapper .ep-item a,
+  .section-ep-wrapper .ep-item a,
+  .main-container .review-module .review-list .review-item .review-title,
+  .main-container .review-module .review-list .review-item .review-content,
+  .main-container .media-info .media-right .pub-wrapper .av-link,
+  .main-container .review-module .module-title .more-link,
+  .main-container .nav-tools .tool-item:hover {
+    color: var(--bew-text-1);
+  }
+
+  .main-container .tool-bar span,
+  .main-container .tool-bar i,
+  .main-container .season-list .ss-list-wrapper .ss-item .ss-info .pub-info,
+  .main-container
+    .recom-wrapper
+    .recom-list
+    .recom-item
+    .info-wrapper
+    .video-subtitle,
+  .main-container
+    .recom-wrapper
+    .recom-list
+    .recom-item
+    .info-wrapper
+    .video-count,
+  .main-container .media-info .media-right .media-count,
+  .main-container .review-module .review-list .review-item .pub-time,
+  .main-container
+    .review-module
+    .review-list
+    .review-item
+    .review-header
+    #review-author-nick-name.review-author,
+  .main-container .media-info .media-right .media-tool-bar .btn-rating,
+  .main-container .nav-tools .tool-item {
+    color: var(--bew-text-2);
+  }
+
+  .main-container .season-list .ss-list-wrapper .ss-item .ss-info .ss-count {
+    color: var(--bew-text-3);
+  }
+
+  .main-container .media-info .media-right .media-tool-bar .btn-follow.active {
+    color: var(--bew-fill-4);
+  }
+
+  .main-container .tool-bar path {
+    fill: var(--bew-text-2);
+  }
+
+  .main-container .media-info,
+  .main-container .review-module,
+  .main-container .plp-l .split-line,
+  .main-container .media-info .media-right .media-tool-bar .btn-rating,
+  .main-container .nav-tools .tool-item {
+    border-color: var(--bew-border-color);
+  }
+
+  .main-container
+    .media-info
+    .media-right
+    .pub-wrapper
+    .up-info-wrapper
+    .split-line {
+    background-color: var(--bew-border-color);
+  }
+
+  .main-container .ep-list-wrapper,
+  .ep-section-module,
+  .main-container .review-module .review-list .review-item .review-body,
+  .main-container .nav-tools .tool-item {
+    background-color: var(--bew-content-solid-1);
+  }
+
+  .ep-list-wrapper .ep-item.cursor,
+  .section-ep-wrapper .ep-item.cursor,
+  .main-container .media-info .media-right .media-tool-bar .btn-rating {
+    background-color: var(--bew-fill-1);
+  }
+
+  .main-container .media-info .media-right .media-tool-bar .btn-follow.active {
+    background-color: var(--bew-fill-2) !important;
+  }
+
+  .ep-list-wrapper .ep-item:hover,
+  .section-ep-wrapper .ep-item:hover {
+    background-color: var(--bew-fill-2);
+  }
+
+  .main-container .media-info .media-right .media-desc i {
+    background-color: var(--bew-bg);
+  }
+}
+// #endregion

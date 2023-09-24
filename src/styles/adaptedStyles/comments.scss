@@ -69,32 +69,12 @@
   border-color: var(--bew-theme-color);
 }
 
-.bb-comment,
-.comment-bilibili-fold,
-.bb-comment .comment-send.comment-send-lite,
-.comment-bilibili-fold .comment-send.comment-send-lite,
-.bb-comment .comment-send-lite.comment-send-lite,
-.comment-bilibili-fold .comment-send-lite.comment-send-lite {
-  background-color: var(--bew-content-solid-1);
-}
-
-// .bb-comment .comment-list .list-item .user .name,
-.comment-bilibili-fold .comment-list .list-item .user .name,
-.bb-comment .comment-header .tabs-order li,
-.comment-bilibili-fold .comment-header .tabs-order li,
-.bili-dyn-forward-publishing__editor .bili-rich-textarea__inner {
-  color: var(--bew-text-1);
-}
-
-.bili-dyn-forward-item__uname,
-.bb-comment .comment-list .list-item .user .name {
-  color: var(--bew-text-1) !important;
-}
-
-.bb-comment .comment-header .tabs-order li.on,
-.comment-bilibili-fold .comment-header .tabs-order li.on {
-  border-color: var(--bew-theme-color);
-  color: var(--bew-theme-color);
+.bb-comment .comment-send .comment-submit:hover,
+.comment-bilibili-fold .comment-send .comment-submit:hover,
+.bb-comment .comment-send-lite .comment-submit:hover,
+.comment-bilibili-fold .comment-send-lite .comment-submit:hover {
+  background-color: var(--bew-theme-color-80);
+  border-color: var(--bew-theme-color-80);
 }
 
 .bb-comment .comment-header .tabs-order li:hover,
@@ -107,27 +87,6 @@
   color: var(--bew-theme-color);
 }
 
-.bb-comment .comment-header,
-.comment-bilibili-fold .comment-header,
-.bb-comment .comment-list .list-item .con,
-.comment-bilibili-fold .comment-list .list-item .con,
-.bb-comment .comment-send .comment-emoji,
-.comment-bilibili-fold .comment-send .comment-emoji,
-.bb-comment .comment-send-lite .comment-emoji,
-.comment-bilibili-fold .comment-send-lite .comment-emoji,
-.bb-comment .bottom-page.center,
-.bili-dyn-forward__item,
-.bili-dyn-forward__more {
-  border-color: var(--bew-border-color);
-}
-
-.bb-comment .comment-send .comment-emoji,
-.comment-bilibili-fold .comment-send .comment-emoji,
-.bb-comment .comment-send-lite .comment-emoji,
-.comment-bilibili-fold .comment-send-lite .comment-emoji {
-  box-shadow: unset;
-}
-
 .bb-comment .comment-list .list-item .info span.liked i,
 .comment-bilibili-fold .comment-list .list-item .info span.liked i,
 .bb-comment .comment-list .list-item .info span.hated i,
@@ -137,16 +96,6 @@
 .bb-comment .operation .spot:hover,
 .comment-bilibili-fold .operation .spot:hover {
   filter: var(--bew-filter-icon-glow);
-}
-
-.bb-comment .comment-send .textarea-container .ipt-txt,
-.comment-bilibili-fold .comment-send .textarea-container .ipt-txt,
-.bb-comment .comment-send-lite .textarea-container .ipt-txt,
-.comment-bilibili-fold .comment-send-lite .textarea-container .ipt-txt,
-.bili-dyn-forward-publishing__editor {
-  background-color: var(--bew-fill-1);
-  border-color: var(--bew-border-color);
-  color: var(--bew-text-1);
 }
 
 .bb-comment .comment-send .textarea-container:hover textarea,
@@ -185,17 +134,79 @@
   background-color: var(--bew-theme-color);
 }
 
-// UP主觉得很赞
-.bb-comment .comment-list .list-item .info .reply-tags span,
-.comment-bilibili-fold .comment-list .list-item .info .reply-tags span {
-  background-color: var(--bew-fill-1) !important;
-  color: var(--bew-text-2) !important;
-}
-
 // pin tag
 .bb-comment .stick,
 .comment-bilibili-fold .stick {
   border-color: var(--bew-theme-color);
   color: var(--bew-theme-color);
+}
+
+.dark {
+  .bb-comment,
+  .comment-bilibili-fold,
+  .bb-comment .comment-send.comment-send-lite,
+  .comment-bilibili-fold .comment-send.comment-send-lite,
+  .bb-comment .comment-send-lite.comment-send-lite,
+  .comment-bilibili-fold .comment-send-lite.comment-send-lite {
+    // background-color: var(--bew-content-solid-1);
+    background-color: var(--bew-bg);
+  }
+
+  // .bb-comment .comment-list .list-item .user .name,
+  .comment-bilibili-fold .comment-list .list-item .user .name,
+  .bb-comment .comment-header .tabs-order li,
+  .comment-bilibili-fold .comment-header .tabs-order li,
+  .bili-dyn-forward-publishing__editor .bili-rich-textarea__inner {
+    color: var(--bew-text-1);
+  }
+
+  .bili-dyn-forward-item__uname,
+  .bb-comment .comment-list .list-item .user .name {
+    color: var(--bew-text-1) !important;
+  }
+
+  .bb-comment .comment-header .tabs-order li.on,
+  .comment-bilibili-fold .comment-header .tabs-order li.on {
+    border-color: var(--bew-theme-color);
+    color: var(--bew-theme-color);
+  }
+
+  .bb-comment .comment-header,
+  .comment-bilibili-fold .comment-header,
+  .bb-comment .comment-list .list-item .con,
+  .comment-bilibili-fold .comment-list .list-item .con,
+  .bb-comment .comment-send .comment-emoji,
+  .comment-bilibili-fold .comment-send .comment-emoji,
+  .bb-comment .comment-send-lite .comment-emoji,
+  .comment-bilibili-fold .comment-send-lite .comment-emoji,
+  .bb-comment .bottom-page.center,
+  .bili-dyn-forward__item,
+  .bili-dyn-forward__more {
+    border-color: var(--bew-border-color);
+  }
+
+  .bb-comment .comment-send .comment-emoji,
+  .comment-bilibili-fold .comment-send .comment-emoji,
+  .bb-comment .comment-send-lite .comment-emoji,
+  .comment-bilibili-fold .comment-send-lite .comment-emoji {
+    box-shadow: unset;
+  }
+
+  .bb-comment .comment-send .textarea-container .ipt-txt,
+  .comment-bilibili-fold .comment-send .textarea-container .ipt-txt,
+  .bb-comment .comment-send-lite .textarea-container .ipt-txt,
+  .comment-bilibili-fold .comment-send-lite .textarea-container .ipt-txt,
+  .bili-dyn-forward-publishing__editor {
+    background-color: var(--bew-fill-1);
+    border-color: var(--bew-border-color);
+    color: var(--bew-text-1);
+  }
+
+  // UP主觉得很赞
+  .bb-comment .comment-list .list-item .info .reply-tags span,
+  .comment-bilibili-fold .comment-list .list-item .info .reply-tags span {
+    background-color: var(--bew-fill-1) !important;
+    color: var(--bew-text-2) !important;
+  }
 }
 // #endregion

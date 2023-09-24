@@ -220,6 +220,28 @@
   --brand_blue_disabled: var(--bew-theme-color-60);
 
   --text_link: var(--bew-theme-color);
+
+  --bpx-dmsend-main-bg: var(--bew-content-solid-1);
+  --bpx-dmsend-input-bg: var(--bew-fill-1);
+  --bpx-dmsend-info-font: var(--bew-text-1);
+  --bpx-dmsend-switch-icon: var(--bew-text-2);
+  --bpx-dmsend-border: var(--bew-border-color);
+  --bpx-dmsend-input-font: var(--bew-text-1);
+  --bpx-fn-color: var(--bew-theme-color);
+  --bpx-primary-color: var(--bew-theme-color);
+  --bpx-fn-hover-color: var(--bew-theme-color-80);
+  --bpx-aux-header-bg: var(--bew-content-solid-1);
+  --bpx-aux-header-icon: var(--bew-text-2);
+  --bpx-aux-header-font: var(--bew-text-1);
+  --bpx-aux-content-bg: var(--bew-content-solid-1);
+  --bpx-aux-content-font1: var(--bew-text-1);
+  --bpx-aux-content-font2: var(--bew-text-2);
+  --bpx-aux-footer-bg: var(--bew-content-solid-1);
+  --bpx-aux-footer-font: var(--bew-text-3);
+  --bpx-aux-footer-font-hover: var(--bew-text-1);
+  --bpx-box-shadow: rgba(0, 0, 0, 0.2);
+  --bpx-toast-fn-color: var(--bew-theme-color);
+  --bpx-toast-fn-hover-color: var(--bew-theme-color-80);
 }
 
 :root.dark {

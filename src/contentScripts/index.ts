@@ -44,7 +44,7 @@ if (isFirefox) {
     ) {
       setTimeout(() => {
         document.documentElement.removeChild(beforeLoadedStyleEl)
-      }, 400)
+      }, 300)
     }
     else {
       window.onload = () => {
