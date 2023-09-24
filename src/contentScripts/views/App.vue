@@ -359,7 +359,7 @@ function handleBackToTop() {
           v-if="settings.isShowTopbar"
           :show-search-bar="activatedPage !== AppPage.Search"
           :show-topbar-mask="showTopbarMask && isTopbarFixed"
-          pos="top-0 left-0" z-9999 w="[calc(100%-8px)]"
+          pos="top-0 left-0" z-99 w="[calc(100%-8px)]"
           :style="{ position: isTopbarFixed ? 'fixed' : 'absolute' }"
         />
       </Transition>
