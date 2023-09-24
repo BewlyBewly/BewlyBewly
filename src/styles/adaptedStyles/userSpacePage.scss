@@ -18,6 +18,13 @@
   color: var(--bew-theme-color);
 }
 
+#navigator-fixed {
+  a:active,
+  a:hover {
+    color: var(--bew-theme-color) !important;
+  }
+}
+
 .n .n-statistics .n-fs:hover p,
 .n .n-statistics .n-gz:hover p,
 #navigator a:hover {
