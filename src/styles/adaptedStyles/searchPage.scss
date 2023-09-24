@@ -22,6 +22,10 @@
     box-shadow: 0 0 0 4px var(--bew-theme-color),
       8px 8px 0 2px var(--bew-theme-color-60),
       14px 14px 0 2px var(--bew-theme-color-40);
-      
+  }
+
+  .search-loading-container .loading-text .loading-gif,
+  .bili-live-card .bili-live-card__info--living img {
+    filter: var(--bew-filter-icon-glow);
   }
 }
