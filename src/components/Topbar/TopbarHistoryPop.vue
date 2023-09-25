@@ -189,7 +189,7 @@ function getHistoryList(type: HistoryType, viewAt = 0 as number) {
           {{ tab.name }}
         </div>
       </div>
-      <a href="https://t.bilibili.com/" target="_blank" flex="~" items="center">
+      <a href="https://www.bilibili.com/account/history" target="_blank" flex="~" items="center">
         <span text="sm">{{ $t('common.view_all') }}</span>
       </a>
     </header>
