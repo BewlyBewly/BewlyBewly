@@ -5,6 +5,13 @@
 #app .bg {
   z-index: unset;
   background-size: cover;
+  opacity: 0.4;
+  height: 100%;
+}
+
+// #region new moments page
+#app .bgc {
+  background-color: var(--bew-homepage-bg);
 }
 
 .bili-dyn-home--member {
@@ -18,14 +25,6 @@
   filter: var(--bew-filter-icon-glow);
 }
 
-#app .bg {
-  opacity: 0.4;
-  height: 100%;
-}
-
-#app .bgc {
-  background-color: var(--bew-homepage-bg);
-}
 
 .bili-dyn-topic__card,
 .bili-topic-new__default__create__text,
@@ -80,6 +79,7 @@
     background-color: var(--bew-theme-color-20);
   }
 }
+// #endregion
 
 // #region Old moments page
 .international-header {

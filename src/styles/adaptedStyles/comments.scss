@@ -1,3 +1,4 @@
+// #region new comments components
 // 評論人用戶名
 .reply-item .root-reply-container .content-warp .user-info .user-name,
 .sub-reply-item .sub-user-info .sub-user-name {
@@ -59,6 +60,7 @@
     // background-color: var(--bew-content-solid-1);
   }
 }
+// #endregion
 
 // #region Old comments components
 .bb-comment .comment-send .comment-submit,

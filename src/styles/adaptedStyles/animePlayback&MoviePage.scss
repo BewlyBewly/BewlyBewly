@@ -13,6 +13,7 @@ body .special-cover::after {
   pointer-events: none;
 }
 
+// #region new anime playback & movie page 
 .numberListItem_number_list_item__wszA4.numberListItem_select__ar1X5,
 .follow_btnFollow__OFY3n,
 .squirtle-controller.squirtle-pgc .squirtle-progress-timeline,
@@ -98,7 +99,10 @@ body .special-cover::after {
 .sponsor_sponsor_module__tD6ck
   .sponsor_sponsor_info__1xNCI
   .sponsor_btn_show_rank__FqWD_:hover,
-  .rankList_sponsor_rank_item__TkUX6.rankList_pos_rank_module__o8Y8G .rankList_sp_right__T4Ovf .rankList_sp_user__ZGFgT .rankList_sp_name__DlvSi[style*="color"] {
+.rankList_sponsor_rank_item__TkUX6.rankList_pos_rank_module__o8Y8G
+  .rankList_sp_right__T4Ovf
+  .rankList_sp_user__ZGFgT
+  .rankList_sp_name__DlvSi[style*='color'] {
   color: var(--bew-theme-color) !important;
 }
 
@@ -250,6 +254,7 @@ body .special-cover::after {
     fill: var(--bew-border-color);
   }
 }
+// #endregion
 
 // #region Old anime playback & movie page
 .main-container .tool-bar .coin-info.active i,
