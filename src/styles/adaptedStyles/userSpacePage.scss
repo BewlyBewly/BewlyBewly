@@ -117,13 +117,17 @@
   #page-follows .follow-tabs span.active:after,
   .contribution-sidenav .contribution-item.cur,
   #page-setting .setting-index-module:hover,
-  .bangumi-pagelistbox .p:hover,
-  .bangumi-pagelistbox .p.active,
   .btn.primary,
   #page-fav .fav-sidenav .fav-item.cur,
   .favInfo-box .favInfo-details .fav-options .fav-play,
   .be-pager-item-active {
     background-color: var(--bew-theme-color);
+  }
+
+  .bangumi-pagelistbox .p:hover,
+  .bangumi-pagelistbox .p.active {
+    background-color: var(--bew-theme-color) !important;
+    color: white !important;
   }
 
   .bangumi-pagelistbox .p:hover,
@@ -210,7 +214,8 @@
   .pgc-space-follow-item .pgc-item-info .pgc-item-title,
   .search-component-input input,
   #page-article .row .breadcrumb .item,
-  .album-list__title {
+  .album-list__title,
+  .bangumi-pagelistbox .p {
     color: var(--bew-text-1);
   }
 
@@ -289,7 +294,9 @@
     #page-fav .fav-main .fav-video-list.is-batch .small-item:hover,
     .i-live .i-live-unfo-btn,
     .i-live .i-live-fo-count,
-    #page-collection-detail .filter {
+    #page-collection-detail .filter,
+    .bangumi-pagelistbox .p,
+    .bangumi-pagelistbox .custom-right .custom-right-inner.custompage {
       border-color: var(--bew-border-color);
     }
 
@@ -348,7 +355,8 @@
     .elec .elec-count,
     #page-index .col-2 .section .user-auth .auth-description,
     #page-series-index .channel-item .channel-name,
-    #page-collection-detail .channel-detail .content .breadcrumb .item {
+    #page-collection-detail .channel-detail .content .breadcrumb .item,
+    .bangumi-pagelistbox .custom-right .custom-right-inner.custompage {
       color: var(--bew-text-1);
     }
 
@@ -397,7 +405,9 @@
     #page-follows .follow-main .follow-action-bottom .follow-action-fixtop,
     #page-fav .fav-sidenav .icon-cursor,
     #page-setting #setting-new-tag-btn,
-    #page-fav .fav-main .fav-action-bottom .fav-action-fixtop {
+    #page-fav .fav-main .fav-action-bottom .fav-action-fixtop,
+    .bangumi-pagelistbox .p,
+    .bangumi-pagelistbox .custom-right .custom-right-inner.custompage {
       background-color: var(--bew-fill-1);
     }
 

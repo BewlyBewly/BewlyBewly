@@ -52,7 +52,9 @@
   }
 
   .content .input-section .row .emoji-btn:hover,
-  .content .input-section .row .emoji-btn.active {
+  .content .input-section .row .emoji-btn.active,
+  .action-button:hover,
+  .action-button.active {
     color: var(--bew-theme-color) !important;
   }
 
@@ -68,7 +70,7 @@
   .css-o1815x .dot,
   .action-button:hover .border,
   .action-button > .action-icon.active .border {
-    fill: var(--bew-theme-color);
+    fill: var(--bew-theme-color) !important;
   }
 
   .header .tab.active,

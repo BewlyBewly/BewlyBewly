@@ -25,7 +25,6 @@
   filter: var(--bew-filter-icon-glow);
 }
 
-
 .bili-dyn-topic__card,
 .bili-topic-new__default__create__text,
 .opus-module-topic {
@@ -37,13 +36,23 @@
   color: var(--bew-theme-color) !important;
 }
 
-.bili-topic-new__default__create__icon {
-  background-color: var(--bew-theme-color-20);
-}
-
 .bili-topic-new__default__create__icon:after,
 .bili-topic-new__default__create__icon:before {
   background-color: var(--bew-theme-color);
+}
+
+.bili-dyn-publishing__action:not(.disabled):hover {
+  background-color: var(--bew-theme-color-80);
+}
+
+.bili-pics-uploader__add:hover {
+  border-color: var(--bew-theme-color-40);
+}
+
+.bili-topic-new__default__create__icon,
+.bili-pics-uploader__add:hover:after,
+.bili-pics-uploader__add:hover:before {
+  background-color: var(--bew-theme-color-20);
 }
 
 .dark {
@@ -68,15 +77,6 @@
 
   .bili-dyn-action.disabled {
     color: var(--bew-text-4);
-  }
-
-  .bili-pics-uploader__add:hover {
-    border-color: var(--bew-theme-color-40);
-  }
-
-  .bili-pics-uploader__add:hover:after,
-  .bili-pics-uploader__add:hover:before {
-    background-color: var(--bew-theme-color-20);
   }
 }
 // #endregion
