@@ -1,5 +1,8 @@
+import type { AppPage } from '~/enums/appEnums'
+
 export interface Settings {
   language: string
+  startupPage: AppPage
   isShowTopbar: boolean
   dockPosition: 'left' | 'right' | 'bottom'
   enableHorizontalScrolling: boolean

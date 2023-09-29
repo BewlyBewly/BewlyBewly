@@ -35,6 +35,7 @@ settings:
     mandarin_cn: Mandarin - Simplified Chinese
     mandarin_tw: Mandarin - Traditional Chinese
     jyut: Cantonese
+  startup_page: Startup page
   recommendation_mode: Recommendation mode
   recommendation_mode_desc: >
     If you want to use the recommendation algorithm on the app, please ensure that you authorize the BewlyBewly to use the access key first.

@@ -35,6 +35,7 @@ settings:
     mandarin_cn: 官话
     mandarin_tw: 官話
     jyut: 廣東話
+  startup_page: 開始頁面
   recommendation_mode: 推介模式
   recommendation_mode_desc: >
     若然你想用手機版嘅推介演算法，就要俾 BewlyBewly 批准使用存取 access key。

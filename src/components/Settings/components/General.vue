@@ -1,10 +1,11 @@
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
 import { settings } from '~/logic'
+import { AppPage } from '~/enums/appEnums'
 
 const { t, locale } = useI18n()
 
-const langs = computed(() => {
+const langOptions = computed(() => {
   return [
     {
       value: 'en',
@@ -41,6 +42,17 @@ const dockPositions = computed(() => {
   ]
 })
 
+const pageOptions = computed((): { label: string; value: string }[] => {
+  return [
+    { label: t('dock.search'), value: AppPage.Search },
+    { label: t('dock.home'), value: AppPage.Home },
+    { label: t('dock.anime'), value: AppPage.Anime },
+    { label: t('dock.history'), value: AppPage.History },
+    { label: t('dock.favorites'), value: AppPage.Favorites },
+    { label: t('dock.watch_later'), value: AppPage.WatchLater },
+  ]
+})
+
 watch(() => settings.value.language, (newValue, oldValue) => {
   locale.value = newValue
 })
@@ -49,9 +61,16 @@ watch(() => settings.value.language, (newValue, oldValue) => {
 <template>
   <SettingItem :title="$t('settings.select_language')">
     <Select
-      ref="langsSelect"
       v-model="settings.language"
-      :options="langs"
+      :options="langOptions"
+      w="full"
+    />
+  </SettingItem>
+
+  <SettingItem :title="$t('settings.startup_page')">
+    <Select
+      v-model="settings.startupPage"
+      :options="pageOptions"
       w="full"
     />
   </SettingItem>

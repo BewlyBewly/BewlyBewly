@@ -1,4 +1,5 @@
 import { useStorageLocal } from '~/composables/useStorageLocal'
+import { AppPage } from '~/enums/appEnums'
 import type { Settings } from '~/models/models'
 
 export const storageDemo = useStorageLocal('webext-demo', 'Storage Demo')
@@ -6,6 +7,7 @@ export const accessKey = useStorageLocal('accessKey', '')
 
 export const settings = useStorageLocal('settings', ref<Settings>({
   language: '',
+  startupPage: AppPage.Home,
   isShowTopbar: true,
   dockPosition: 'right',
   enableHorizontalScrolling: false,
