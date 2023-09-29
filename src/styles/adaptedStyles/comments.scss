@@ -68,7 +68,6 @@
 .bb-comment .comment-send-lite .comment-submit,
 .comment-bilibili-fold .comment-send-lite .comment-submit {
   background-color: var(--bew-theme-color);
-  border-color: var(--bew-theme-color);
 }
 
 .bb-comment .comment-send .comment-submit:hover,
@@ -76,7 +75,6 @@
 .bb-comment .comment-send-lite .comment-submit:hover,
 .comment-bilibili-fold .comment-send-lite .comment-submit:hover {
   background-color: var(--bew-theme-color-80);
-  border-color: var(--bew-theme-color-80);
 }
 
 .bb-comment .comment-header .tabs-order li:hover,
@@ -85,7 +83,20 @@
 .comment-bilibili-fold .comment-list .list-item .user .name:hover,
 .bb-comment a,
 .comment-bilibili-fold a,
-.bili-dyn-forward-item__action {
+.bili-dyn-forward-item__action,
+.bb-comment .comment-list .list-item .info .btn-hover:hover,
+.comment-bilibili-fold .comment-list .list-item .info .btn-hover:hover,
+.bb-comment .comment-list .list-item .reply-box .view-more .btn-more:hover,
+.comment-bilibili-fold
+  .comment-list
+  .list-item
+  .reply-box
+  .view-more
+  .btn-more:hover,
+.bb-comment .stick,
+.comment-bilibili-fold .stick,
+.bb-comment .comment-header .tabs-order li.on,
+.comment-bilibili-fold .comment-header .tabs-order li.on {
   color: var(--bew-theme-color);
 }
 
@@ -100,6 +111,22 @@
   filter: var(--bew-filter-icon-glow);
 }
 
+.bb-comment .comment-header .tabs-order li.on:after,
+.comment-bilibili-fold .comment-header .tabs-order li.on:after {
+  display: none;
+}
+
+.bili-dyn-forward-publishing__action__btn,
+.textarea-container .comm-tool .comm-submit {
+  background-color: var(--bew-theme-color) !important;
+}
+
+.textarea-container .comm-tool .comm-submit:hover {
+  background-color: var(--bew-theme-color-80) !important;
+}
+
+.textarea-container textarea:hover,
+.textarea-container textarea:focus,
 .bb-comment .comment-send .textarea-container:hover textarea,
 .comment-bilibili-fold .comment-send .textarea-container:hover textarea,
 .bb-comment .comment-send-lite .textarea-container:hover textarea,
@@ -109,38 +136,28 @@
 .bb-comment .comment-send-lite .textarea-container.focus textarea,
 .comment-bilibili-fold .comment-send-lite .textarea-container.focus textarea,
 .bili-dyn-forward-publishing__editor:not(.disabled):focus,
-.bili-dyn-forward-publishing__editor:not(.disabled):hover {
-  background-color: var(--bew-content-solid-1);
-  border-color: var(--bew-theme-color);
-}
-
-.bb-comment .comment-list .list-item .info .btn-hover:hover,
-.comment-bilibili-fold .comment-list .list-item .info .btn-hover:hover,
-.bb-comment .comment-list .list-item .reply-box .view-more .btn-more:hover,
-.comment-bilibili-fold
-  .comment-list
-  .list-item
-  .reply-box
-  .view-more
-  .btn-more:hover {
-  color: var(--bew-theme-color);
-  background-color: var(--bew-fill-2);
-}
-
-.bb-comment .comment-header .tabs-order li.on:after,
-.comment-bilibili-fold .comment-header .tabs-order li.on:after {
-  display: none;
-}
-
-.bili-dyn-forward-publishing__action__btn {
-  background-color: var(--bew-theme-color);
-}
-
-// pin tag
+.bili-dyn-forward-publishing__editor:not(.disabled):hover,
+.bb-comment .comment-send .comment-submit,
+.comment-bilibili-fold .comment-send .comment-submit,
+.bb-comment .comment-send-lite .comment-submit,
+.comment-bilibili-fold .comment-send-lite .comment-submit,
+.bb-comment .comment-header .tabs-order li.on,
+.comment-bilibili-fold .comment-header .tabs-order li.on,
 .bb-comment .stick,
 .comment-bilibili-fold .stick {
   border-color: var(--bew-theme-color);
-  color: var(--bew-theme-color);
+}
+
+.textarea-container textarea:hover,
+.textarea-container textarea:focus {
+  border-color: var(--bew-theme-color) !important;
+}
+
+.bb-comment .comment-send .comment-submit:hover,
+.comment-bilibili-fold .comment-send .comment-submit:hover,
+.bb-comment .comment-send-lite .comment-submit:hover,
+.comment-bilibili-fold .comment-send-lite .comment-submit:hover {
+  border-color: var(--bew-theme-color-80);
 }
 
 .dark {
@@ -152,6 +169,39 @@
   .comment-bilibili-fold .comment-send-lite.comment-send-lite {
     // background-color: var(--bew-content-solid-1);
     background-color: var(--bew-bg);
+  }
+
+  .bb-comment .comment-send .textarea-container:hover textarea,
+  .comment-bilibili-fold .comment-send .textarea-container:hover textarea,
+  .bb-comment .comment-send-lite .textarea-container:hover textarea,
+  .comment-bilibili-fold .comment-send-lite .textarea-container:hover textarea,
+  .bb-comment .comment-send .textarea-container.focus textarea,
+  .comment-bilibili-fold .comment-send .textarea-container.focus textarea,
+  .bb-comment .comment-send-lite .textarea-container.focus textarea,
+  .comment-bilibili-fold .comment-send-lite .textarea-container.focus textarea,
+  .bili-dyn-forward-publishing__editor:not(.disabled):focus,
+  .bili-dyn-forward-publishing__editor:not(.disabled):hover {
+    background-color: var(--bew-content-solid-1);
+  }
+
+  .forw-area {
+    background-color: transparent;
+  }
+
+  .textarea-container .comm-tool .comm-emoji {
+    background-color: var(--bew-fill-1);
+  }
+
+  .bb-comment .comment-list .list-item .info .btn-hover:hover,
+  .comment-bilibili-fold .comment-list .list-item .info .btn-hover:hover,
+  .bb-comment .comment-list .list-item .reply-box .view-more .btn-more:hover,
+  .comment-bilibili-fold
+    .comment-list
+    .list-item
+    .reply-box
+    .view-more
+    .btn-more:hover {
+    background-color: var(--bew-fill-2);
   }
 
   // .bb-comment .comment-list .list-item .user .name,
@@ -167,12 +217,6 @@
     color: var(--bew-text-1) !important;
   }
 
-  .bb-comment .comment-header .tabs-order li.on,
-  .comment-bilibili-fold .comment-header .tabs-order li.on {
-    border-color: var(--bew-theme-color);
-    color: var(--bew-theme-color);
-  }
-
   .bb-comment .comment-header,
   .comment-bilibili-fold .comment-header,
   .bb-comment .comment-list .list-item .con,
@@ -183,7 +227,9 @@
   .comment-bilibili-fold .comment-send-lite .comment-emoji,
   .bb-comment .bottom-page.center,
   .bili-dyn-forward__item,
-  .bili-dyn-forward__more {
+  .bili-dyn-forward__more,
+  .forw-area .forw-more,
+  .textarea-container .comm-tool .comm-emoji {
     border-color: var(--bew-border-color);
   }
 
@@ -198,7 +244,8 @@
   .comment-bilibili-fold .comment-send .textarea-container .ipt-txt,
   .bb-comment .comment-send-lite .textarea-container .ipt-txt,
   .comment-bilibili-fold .comment-send-lite .textarea-container .ipt-txt,
-  .bili-dyn-forward-publishing__editor {
+  .bili-dyn-forward-publishing__editor,
+  .textarea-container textarea {
     background-color: var(--bew-fill-1);
     border-color: var(--bew-border-color);
     color: var(--bew-text-1);
