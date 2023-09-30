@@ -6,6 +6,8 @@ export interface Settings {
   isShowTopbar: boolean
   dockPosition: 'left' | 'right' | 'bottom'
   enableHorizontalScrolling: boolean
+  openLinkInCurrentTab: boolean
+
   theme: 'light' | 'dark' | 'auto'
   themeColor: string
   adaptToOtherPageStyles: boolean

@@ -90,6 +90,10 @@ watch(() => settings.value.language, (newValue, oldValue) => {
   <SettingItem :title="$t('settings.enable_horizontal_scrolling')" :desc="$t('settings.enable_horizontal_scrolling_desc')">
     <Radio v-model="settings.enableHorizontalScrolling" />
   </SettingItem>
+
+  <!-- <SettingItem title="Open link in current tab">
+    <Radio v-model="settings.openLinkInCurrentTab" />
+  </SettingItem> -->
 </template>
 
 <style lang="scss" scoped>
