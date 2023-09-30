@@ -368,8 +368,16 @@ function handleAdaptToOtherPageStylesChange() {
       <Transition name="topbar">
         <!-- v-if="!isSearchPage" -->
         <Topbar
-          v-if="settings.isShowTopbar"
+          v-if="settings.isShowTopbar && activatedPage !== AppPage.Home"
           :show-search-bar="activatedPage !== AppPage.Search"
+          :show-topbar-mask="showTopbarMask && isTopbarFixed"
+          pos="top-0 left-0" z-9999 w="[calc(100%)]"
+          :style="{ position: isTopbarFixed ? 'fixed' : 'absolute' }"
+        />
+        <Topbar
+          v-else-if="settings.isShowTopbar && activatedPage === AppPage.Home"
+          :show-search-bar="showTopbarMask && settings.useSearchPageModeOnHomePage || (!settings.useSearchPageModeOnHomePage)"
+          :show-logo="showTopbarMask && settings.useSearchPageModeOnHomePage || (!settings.useSearchPageModeOnHomePage && showTopbarMask)"
           :show-topbar-mask="showTopbarMask && isTopbarFixed"
           pos="top-0 left-0" z-9999 w="[calc(100%)]"
           :style="{ position: isTopbarFixed ? 'fixed' : 'absolute' }"
@@ -535,7 +543,9 @@ function handleAdaptToOtherPageStylesChange() {
       </div>
     </div>
     <!-- settings dialog -->
-    <Settings v-if="showSettings" @close="showSettings = false" />
+    <KeepAlive>
+      <Settings v-if="showSettings" @close="showSettings = false" />
+    </KeepAlive>
   </div>
 </template>
 

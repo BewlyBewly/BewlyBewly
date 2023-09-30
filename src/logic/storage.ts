@@ -16,7 +16,6 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   theme: 'auto',
   themeColor: '#00a1d6',
   adaptToOtherPageStyles: true,
-  recommendationMode: 'web',
   wallpaperMode: 'buildIn',
   wallpaper: '',
   enableWallpaperMasking: false,
@@ -35,4 +34,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   searchPageEnableWallpaperMasking: false,
   searchPageWallpaperMaskOpacity: 0,
   searchPageWallpaperBlurIntensity: 0,
+
+  recommendationMode: 'web',
+  useSearchPageModeOnHomePage: false,
 }), { mergeDefaults: true })

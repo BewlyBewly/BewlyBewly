@@ -70,6 +70,10 @@ function handleRevoke() {
       </button>
     </div>
   </SettingItem>
+
+  <SettingItem title="Use search page mode on homepage">
+    <Radio v-model="settings.useSearchPageModeOnHomePage" />
+  </SettingItem>
 </template>
 
 <style lang="scss" scoped>

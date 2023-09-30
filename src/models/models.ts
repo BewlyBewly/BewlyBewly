@@ -11,7 +11,6 @@ export interface Settings {
   theme: 'light' | 'dark' | 'auto'
   themeColor: string
   adaptToOtherPageStyles: boolean
-  recommendationMode: 'web' | 'app'
   wallpaperMode: 'buildIn' | 'byUrl'
   wallpaper: string
   enableWallpaperMasking: boolean
@@ -30,4 +29,7 @@ export interface Settings {
   searchPageEnableWallpaperMasking: boolean
   searchPageWallpaperMaskOpacity: number
   searchPageWallpaperBlurIntensity: number
+
+  recommendationMode: 'web' | 'app'
+  useSearchPageModeOnHomePage: boolean
 }
