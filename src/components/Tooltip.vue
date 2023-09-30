@@ -23,7 +23,7 @@ defineProps<{
   --at-apply: flex items-center relative;
 
   .b-tooltip {
-    --at-apply: absolute px-2 lh-20px rounded-8
+    --at-apply: absolute px-2 lh-2em rounded-8
       pointer-events-none
       text-sm
       opacity-0 duration-300
