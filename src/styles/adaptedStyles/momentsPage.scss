@@ -1,332 +1,334 @@
-.bili-dyn-home--member {
-  // margin-top: 10px;
-}
-
-#app .bg {
-  z-index: unset;
-  background-size: cover;
-  opacity: 0.4;
-  height: 100%;
-}
-
-// #region new moments page
-#app .bgc {
-  background-color: var(--bew-homepage-bg);
-}
-
-.bili-dyn-home--member {
-  z-index: 1;
-  position: relative;
-}
-
-.dyn-orig-author__following.following-icon:before,
-.bili-dyn-live-users__more:hover:after,
-.bili-dyn-list-loading img {
-  filter: var(--bew-filter-icon-glow);
-}
-
-.bili-dyn-topic__card,
-.bili-topic-new__default__create__text,
-.opus-module-topic {
-  color: var(--bew-theme-color);
-}
-
-.side-toolbar__action:not(.is-disabled):hover,
-.side-toolbar__action:not(.is-disabled):hover svg {
-  color: var(--bew-theme-color) !important;
-}
-
-.bili-topic-new__default__create__icon:after,
-.bili-topic-new__default__create__icon:before {
-  background-color: var(--bew-theme-color);
-}
-
-.bili-dyn-publishing__action:not(.disabled):hover {
-  background-color: var(--bew-theme-color-80);
-}
-
-.bili-pics-uploader__add:hover {
-  border-color: var(--bew-theme-color-40);
-}
-
-.bili-topic-new__default__create__icon,
-.bili-pics-uploader__add:hover:after,
-.bili-pics-uploader__add:hover:before {
-  background-color: var(--bew-theme-color-20);
-}
-
-.dark {
-  #app div.bg {
-    opacity: 0;
+.bewly-design {
+  .bili-dyn-home--member {
+    // margin-top: 10px;
   }
 
-  .bili-dyn-home--member,
-  #opus-detail-app + #app {
-    --bg1: var(--bew-content-solid-1);
-    --bg2: var(--bew-bg);
+  #app .bg {
+    z-index: unset;
+    background-size: cover;
+    opacity: 0.4;
+    height: 100%;
   }
 
-  .fixed-author-header__author__name,
-  .dyn-blocked-mask.feed-item .dyn-blocked-mask__msg-title {
-    color: var(--bew-text-1);
+  // #region new moments page
+  #app .bgc {
+    background-color: var(--bew-homepage-bg);
   }
 
-  .dyn-blocked-mask.feed-item .dyn-blocked-mask__msg-desc {
-    color: var(--bew-text-2);
+  .bili-dyn-home--member {
+    z-index: 1;
+    position: relative;
   }
 
-  .bili-dyn-action.disabled {
-    color: var(--bew-text-4);
+  .dyn-orig-author__following.following-icon:before,
+  .bili-dyn-live-users__more:hover:after,
+  .bili-dyn-list-loading img {
+    filter: var(--bew-filter-icon-glow);
   }
+
+  .bili-dyn-topic__card,
+  .bili-topic-new__default__create__text,
+  .opus-module-topic {
+    color: var(--bew-theme-color);
+  }
+
+  .side-toolbar__action:not(.is-disabled):hover,
+  .side-toolbar__action:not(.is-disabled):hover svg {
+    color: var(--bew-theme-color) !important;
+  }
+
+  .bili-topic-new__default__create__icon:after,
+  .bili-topic-new__default__create__icon:before {
+    background-color: var(--bew-theme-color);
+  }
+
+  .bili-dyn-publishing__action:not(.disabled):hover {
+    background-color: var(--bew-theme-color-80);
+  }
+
+  .bili-pics-uploader__add:hover {
+    border-color: var(--bew-theme-color-40);
+  }
+
+  .bili-topic-new__default__create__icon,
+  .bili-pics-uploader__add:hover:after,
+  .bili-pics-uploader__add:hover:before {
+    background-color: var(--bew-theme-color-20);
+  }
+
+  &.dark {
+    #app div.bg {
+      opacity: 0;
+    }
+
+    .bili-dyn-home--member,
+    #opus-detail-app + #app {
+      --bg1: var(--bew-content-solid-1);
+      --bg2: var(--bew-bg);
+    }
+
+    .fixed-author-header__author__name,
+    .dyn-blocked-mask.feed-item .dyn-blocked-mask__msg-title {
+      color: var(--bew-text-1);
+    }
+
+    .dyn-blocked-mask.feed-item .dyn-blocked-mask__msg-desc {
+      color: var(--bew-text-2);
+    }
+
+    .bili-dyn-action.disabled {
+      color: var(--bew-text-4);
+    }
+  }
+  // #endregion
+
+  // #region Old moments page
+  .international-header {
+    visibility: hidden;
+    margin-bottom: 10px;
+  }
+
+  // .bili-dyn-home--member {
+  //   .bili-dyn-live-users,
+  //   aside section.sticky {
+  //     top: 70px !important;
+  //   }
+  // }
+
+  .bili-dyn-my-info__stat__item:hover > div:first-child,
+  .bili-dyn-up-list__item.active .bili-dyn-up-list__item__name,
+  .bili-dyn-list-tabs__item.active,
+  .bili-dyn-list-tabs__item:hover,
+  .relevant-topic:hover .relevant-topic__title,
+  .bili-rich-text-link,
+  .bili-rich-text-module,
+  .bili-rich-text-topic,
+  .bili-dyn-card-video:hover .bili-dyn-card-video__title,
+  .bili-dyn-topic__text,
+  .bili-dyn-topic__icon,
+  .bili-rich-text__action,
+  .bili-dyn-action:not(.disabled).active,
+  .bili-dyn-action:not(.disabled):hover,
+  .dyn-goods__one__detail__price span,
+  .dyn-orig-author__name,
+  .dyn-reserve__desc__first.highlight,
+  .dyn-reserve__lottery__text,
+  .bili-album__watch__control__option:hover,
+  .bili-gallery__pagination__index,
+  .bili-dyn-card-medialist:hover .bili-dyn-card-medialist__title,
+  .bili-dyn-card-pgc:hover .bili-dyn-card-pgc__title,
+  .dyn-topic__text {
+    color: var(--bew-theme-color);
+  }
+
+  .dynamic-link-hover-bg,
+  .expand-btn,
+  .up-info .up-info-name {
+    color: var(--bew-theme-color) !important;
+  }
+
+  .expand-btn:hover {
+    color: var(--bew-theme-color-80) !important;
+  }
+
+  .bili-dyn-up-list__item__face span,
+  .bili-dyn-card-video__badge,
+  .bili-dyn-card-medialist__badge,
+  .bili-dyn-title__label {
+    background-color: var(--bew-theme-color);
+  }
+
+  .bili-dyn-action:not(.disabled).active i,
+  .bili-dyn-action:not(.disabled):hover i,
+  .relevant-topic:before,
+  .bili-rich-text-module.lottery:before,
+  .bili-rich-text-link:before,
+  .bili-rich-text-module.goods.icon--taobao:before,
+  .dyn-reserve__lottery__icon,
+  .bili-album__watch__control__option:hover i,
+  .dyn-topic__icon,
+  .custom-like-icon.zan-hover {
+    filter: var(--bew-filter-icon-glow);
+  }
+
+  .dyn-reserve__lottery__text:after,
+  .bili-album__watch__track__activeitemborder {
+    border-color: var(--bew-theme-color);
+  }
+
+  .bili-dyn-publishing__action,
+  .dyn-goods__one__action button,
+  .dyn-reserve__action button,
+  .dyn-additional-common__action button {
+    background-color: var(--bew-theme-color);
+  }
+
+  .dyn-orig-author__following {
+    border-color: var(--bew-theme-color);
+    color: var(--bew-theme-color);
+  }
+
+  .bili-dyn-up-list__item.active .bili-dyn-up-list__item__face {
+    box-shadow: 0 0 0 2px var(--bew-theme-color);
+  }
+
+  .bili-dyn-list-tabs__highlight {
+    background-color: var(--bew-theme-color);
+  }
+
+  .bili-dyn-live-users__item__face-container {
+    box-shadow: 0 0 0 1px var(--bew-theme-color);
+  }
+
+  &.dark {
+    .bili-dyn-item__tag {
+      box-shadow: inset 0 -1px 0 var(--bew-border-color);
+      color: var(--bew-text-2);
+    }
+
+    .bili-dyn-up-list__item__name,
+    .bili-dyn-card-medialist__desc {
+      color: var(--bew-text-2);
+    }
+
+    .bili-dyn-my-info,
+    .bili-dyn-my-info--skeleton,
+    .bili-dyn-publishing,
+    .bili-dyn-up-list,
+    .bili-dyn-list-tabs,
+    .bili-dyn-item,
+    .bili-dyn-banner,
+    .topic-panel,
+    .bili-dyn-live-users,
+    .bili-dyn-live-users__title,
+    .bili-dyn-list-loading,
+    .video-container {
+      background-color: var(--bew-content-solid-1);
+    }
+
+    .bili-rich-textarea__inner {
+      background-color: transparent;
+      color: var(--bew-text-1);
+    }
+
+    .bili-dyn-my-info__stat__item__count,
+    .bili-rich-text__content,
+    .topic-panel__nav-title,
+    .relevant-topic__title,
+    .dyn-goods__one__detail__name,
+    .dyn-ugc__detail__title,
+    .dyn-reserve__title,
+    .bili-dyn-live-users__item__uname,
+    .dyn-additional-common__detail__title,
+    .bili-dyn-interaction__item__desc .bili-rich-text-module,
+    .bili-album__watch__control__option,
+    .bili-dyn-my-info,
+    .bili-dyn-my-info--skeleton,
+    .bili-dyn-publishing,
+    .bili-dyn-up-list,
+    .bili-dyn-list-tabs,
+    .bili-dyn-item,
+    .bili-dyn-banner,
+    .topic-panel,
+    .bili-dyn-live-users,
+    .bili-dyn-live-users__title,
+    .bili-dyn-list-loading,
+    .bili-dyn-card-pgc__title {
+      color: var(--bew-text-1);
+    }
+
+    .bili-dyn-card-video__desc {
+      color: var(--bew-text-2);
+    }
+
+    .bili-dyn-up-list__item__face {
+      background-color: var(--bew-fill-1);
+    }
+
+    .bili-dyn-topic__card:hover,
+    .bili-rich-text-link:hover,
+    .bili-rich-text-module:hover,
+    .bili-rich-text-topic:hover,
+    .dynamic-link-hover-bg:hover {
+      background-color: var(--bew-fill-2);
+    }
+
+    .bili-topic-search__popover {
+      background-color: var(--bew-fill-1);
+      border-color: var(--bew-border-color);
+    }
+
+    .dyn-goods__wrap,
+    .dyn-reserve__card,
+    .dyn-additional-common__wrap,
+    .bili-dyn-content__orig.reference,
+    .dyn-ugc__wrap,
+    .card-content .repost,
+    .card-content .not-support,
+    .card-content .deleted {
+      background-color: var(--bew-fill-1);
+      color: var(--bew-text-1);
+    }
+
+    .reference .dyn-goods__wrap,
+    .reference .dyn-reserve__card,
+    .reference .dyn-additional-common__wrap,
+    .reference .bili-dyn-content__orig.reference,
+    .reference .dyn-ugc__wrap,
+    .bili-dyn-card-medialist__body,
+    .bili-dyn-card-video__body,
+    .bili-dyn-card-pgc__body,
+    .feed-card .loading-content {
+      background-color: var(--bew-content-solid-1);
+    }
+
+    .bili-dyn-item__panel .bili-comment {
+      --bg1: var(--bew-content-solid-1);
+    }
+
+    .reference .dyn-goods__wrap,
+    .reference .dyn-reserve__card,
+    .reference .dyn-additional-common__wrap,
+    .reference .bili-dyn-content__orig.reference,
+    .reference .dyn-ugc__wrap,
+    .bili-dyn-card-video__title,
+    .bili-dyn-card-medialist__title,
+    .card .main-content .user-name a,
+    .video-container .text-area .title {
+      color: var(--bew-text-1);
+    }
+
+    .bili-topic-search__input__prefix,
+    .bili-topic-search__input__text,
+    .video-container .text-area .content {
+      color: var(--bew-text-2);
+    }
+
+    .bili-dyn-publishing__hint:after {
+      color: var(--bew-border-color);
+    }
+
+    .bili-dyn-title__text {
+      color: var(--bew-text-1) !important;
+    }
+
+    .bili-dyn-card-video,
+    .bili-dyn-card-medialist,
+    .bili-dyn-card-pgc,
+    .video-container {
+      border-color: var(--bew-border-color);
+    }
+
+    .bili-album__watch__control {
+      background-color: var(--bew-fill-1);
+    }
+
+    .bili-dyn-version-control__btn {
+      background-color: var(--bew-content-solid-1);
+      border-color: var(--bew-border-color);
+      color: var(--bew-text-1);
+    }
+  }
+
+  // #endregion
 }
-// #endregion
-
-// #region Old moments page
-.international-header {
-  visibility: hidden;
-  margin-bottom: 10px;
-}
-
-// .bili-dyn-home--member {
-//   .bili-dyn-live-users,
-//   aside section.sticky {
-//     top: 70px !important;
-//   }
-// }
-
-.bili-dyn-my-info__stat__item:hover > div:first-child,
-.bili-dyn-up-list__item.active .bili-dyn-up-list__item__name,
-.bili-dyn-list-tabs__item.active,
-.bili-dyn-list-tabs__item:hover,
-.relevant-topic:hover .relevant-topic__title,
-.bili-rich-text-link,
-.bili-rich-text-module,
-.bili-rich-text-topic,
-.bili-dyn-card-video:hover .bili-dyn-card-video__title,
-.bili-dyn-topic__text,
-.bili-dyn-topic__icon,
-.bili-rich-text__action,
-.bili-dyn-action:not(.disabled).active,
-.bili-dyn-action:not(.disabled):hover,
-.dyn-goods__one__detail__price span,
-.dyn-orig-author__name,
-.dyn-reserve__desc__first.highlight,
-.dyn-reserve__lottery__text,
-.bili-album__watch__control__option:hover,
-.bili-gallery__pagination__index,
-.bili-dyn-card-medialist:hover .bili-dyn-card-medialist__title,
-.bili-dyn-card-pgc:hover .bili-dyn-card-pgc__title,
-.dyn-topic__text {
-  color: var(--bew-theme-color);
-}
-
-.dynamic-link-hover-bg,
-.expand-btn,
-.up-info .up-info-name {
-  color: var(--bew-theme-color) !important;
-}
-
-.expand-btn:hover {
-  color: var(--bew-theme-color-80) !important;
-}
-
-.bili-dyn-up-list__item__face span,
-.bili-dyn-card-video__badge,
-.bili-dyn-card-medialist__badge,
-.bili-dyn-title__label {
-  background-color: var(--bew-theme-color);
-}
-
-.bili-dyn-action:not(.disabled).active i,
-.bili-dyn-action:not(.disabled):hover i,
-.relevant-topic:before,
-.bili-rich-text-module.lottery:before,
-.bili-rich-text-link:before,
-.bili-rich-text-module.goods.icon--taobao:before,
-.dyn-reserve__lottery__icon,
-.bili-album__watch__control__option:hover i,
-.dyn-topic__icon,
-.custom-like-icon.zan-hover {
-  filter: var(--bew-filter-icon-glow);
-}
-
-.dyn-reserve__lottery__text:after,
-.bili-album__watch__track__activeitemborder {
-  border-color: var(--bew-theme-color);
-}
-
-.bili-dyn-publishing__action,
-.dyn-goods__one__action button,
-.dyn-reserve__action button,
-.dyn-additional-common__action button {
-  background-color: var(--bew-theme-color);
-}
-
-.dyn-orig-author__following {
-  border-color: var(--bew-theme-color);
-  color: var(--bew-theme-color);
-}
-
-.bili-dyn-up-list__item.active .bili-dyn-up-list__item__face {
-  box-shadow: 0 0 0 2px var(--bew-theme-color);
-}
-
-.bili-dyn-list-tabs__highlight {
-  background-color: var(--bew-theme-color);
-}
-
-.bili-dyn-live-users__item__face-container {
-  box-shadow: 0 0 0 1px var(--bew-theme-color);
-}
-
-.dark {
-  .bili-dyn-item__tag {
-    box-shadow: inset 0 -1px 0 var(--bew-border-color);
-    color: var(--bew-text-2);
-  }
-
-  .bili-dyn-up-list__item__name,
-  .bili-dyn-card-medialist__desc {
-    color: var(--bew-text-2);
-  }
-
-  .bili-dyn-my-info,
-  .bili-dyn-my-info--skeleton,
-  .bili-dyn-publishing,
-  .bili-dyn-up-list,
-  .bili-dyn-list-tabs,
-  .bili-dyn-item,
-  .bili-dyn-banner,
-  .topic-panel,
-  .bili-dyn-live-users,
-  .bili-dyn-live-users__title,
-  .bili-dyn-list-loading,
-  .video-container {
-    background-color: var(--bew-content-solid-1);
-  }
-
-  .bili-rich-textarea__inner {
-    background-color: transparent;
-    color: var(--bew-text-1);
-  }
-
-  .bili-dyn-my-info__stat__item__count,
-  .bili-rich-text__content,
-  .topic-panel__nav-title,
-  .relevant-topic__title,
-  .dyn-goods__one__detail__name,
-  .dyn-ugc__detail__title,
-  .dyn-reserve__title,
-  .bili-dyn-live-users__item__uname,
-  .dyn-additional-common__detail__title,
-  .bili-dyn-interaction__item__desc .bili-rich-text-module,
-  .bili-album__watch__control__option,
-  .bili-dyn-my-info,
-  .bili-dyn-my-info--skeleton,
-  .bili-dyn-publishing,
-  .bili-dyn-up-list,
-  .bili-dyn-list-tabs,
-  .bili-dyn-item,
-  .bili-dyn-banner,
-  .topic-panel,
-  .bili-dyn-live-users,
-  .bili-dyn-live-users__title,
-  .bili-dyn-list-loading,
-  .bili-dyn-card-pgc__title {
-    color: var(--bew-text-1);
-  }
-
-  .bili-dyn-card-video__desc {
-    color: var(--bew-text-2);
-  }
-
-  .bili-dyn-up-list__item__face {
-    background-color: var(--bew-fill-1);
-  }
-
-  .bili-dyn-topic__card:hover,
-  .bili-rich-text-link:hover,
-  .bili-rich-text-module:hover,
-  .bili-rich-text-topic:hover,
-  .dynamic-link-hover-bg:hover {
-    background-color: var(--bew-fill-2);
-  }
-
-  .bili-topic-search__popover {
-    background-color: var(--bew-fill-1);
-    border-color: var(--bew-border-color);
-  }
-
-  .dyn-goods__wrap,
-  .dyn-reserve__card,
-  .dyn-additional-common__wrap,
-  .bili-dyn-content__orig.reference,
-  .dyn-ugc__wrap,
-  .card-content .repost,
-  .card-content .not-support,
-  .card-content .deleted {
-    background-color: var(--bew-fill-1);
-    color: var(--bew-text-1);
-  }
-
-  .reference .dyn-goods__wrap,
-  .reference .dyn-reserve__card,
-  .reference .dyn-additional-common__wrap,
-  .reference .bili-dyn-content__orig.reference,
-  .reference .dyn-ugc__wrap,
-  .bili-dyn-card-medialist__body,
-  .bili-dyn-card-video__body,
-  .bili-dyn-card-pgc__body,
-  .feed-card .loading-content {
-    background-color: var(--bew-content-solid-1);
-  }
-
-  .bili-dyn-item__panel .bili-comment {
-    --bg1: var(--bew-content-solid-1);
-  }
-
-  .reference .dyn-goods__wrap,
-  .reference .dyn-reserve__card,
-  .reference .dyn-additional-common__wrap,
-  .reference .bili-dyn-content__orig.reference,
-  .reference .dyn-ugc__wrap,
-  .bili-dyn-card-video__title,
-  .bili-dyn-card-medialist__title,
-  .card .main-content .user-name a,
-  .video-container .text-area .title {
-    color: var(--bew-text-1);
-  }
-
-  .bili-topic-search__input__prefix,
-  .bili-topic-search__input__text,
-  .video-container .text-area .content {
-    color: var(--bew-text-2);
-  }
-
-  .bili-dyn-publishing__hint:after {
-    color: var(--bew-border-color);
-  }
-
-  .bili-dyn-title__text {
-    color: var(--bew-text-1) !important;
-  }
-
-  .bili-dyn-card-video,
-  .bili-dyn-card-medialist,
-  .bili-dyn-card-pgc,
-  .video-container {
-    border-color: var(--bew-border-color);
-  }
-
-  .bili-album__watch__control {
-    background-color: var(--bew-fill-1);
-  }
-
-  .bili-dyn-version-control__btn {
-    background-color: var(--bew-content-solid-1);
-    border-color: var(--bew-border-color);
-    color: var(--bew-text-1);
-  }
-}
-
-// #endregion

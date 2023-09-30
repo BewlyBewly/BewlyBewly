@@ -69,6 +69,8 @@ settings:
   theme_color: 佈景色
   follow_bilibili_evolved_color: 跟返 Bilibili Evolved 佈景色
   follow_bilibili_evolved_color_desc: 每次換完 Bilibili Evolved 佈景色嗰陣，記得揀多一次呢個選項愛嚟更新佈置
+  adapt_to_other_page_styles: 適應其他版面風格
+  adapt_to_other_page_styles_desc: 執執啲常用嘅版面，襯返 BewlyBewly 主題風格
   wallpaper_mode: 背景圖片模式
   wallpaper_mode_desc: '由 URL: 直接用網上圖片嘅 URL 嚟到設定背景圖片。'
   wallpaper_mode_opt:

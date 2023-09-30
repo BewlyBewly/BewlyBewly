@@ -17,7 +17,7 @@
   background: transparent;
 }
 
-html > ::-webkit-scrollbar-track {
+html.bewly-design > ::-webkit-scrollbar-track {
   background: var(--bew-bg);
 }
 
@@ -30,8 +30,8 @@ html > ::-webkit-scrollbar-track {
   background: transparent;
 }
 
-html,
-body {
+html.bewly-design,
+.bewly-design body {
   font-size: 14px !important;
   min-width: unset !important;
   filter: none !important;
@@ -40,8 +40,8 @@ body {
   background-image: none;
 }
 
-.dark body,
-html.dark {
+.dark.bewly-design body,
+html.dark.bewly-design {
   background-color: var(--bew-bg);
 }
 
@@ -54,11 +54,13 @@ html.dark {
   -webkit-line-clamp: 2;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  --at-apply: color-$bew-text-1;
+.bewly-design {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    --at-apply: color-$bew-text-1;
+  }
 }

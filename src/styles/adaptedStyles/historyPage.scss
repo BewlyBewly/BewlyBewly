@@ -1,112 +1,114 @@
-.history-wrap .b-head .b-head-t {
-  color: var(--bew-text-1);
-}
-
-.b-head-search {
-  border-color: var(--bew-border-color) !important;
-  color: var(--bew-text-1);
-
-  &.input-active {
-    border-color: var(--bew-theme-color) !important;
+.bewly-design {
+  .history-wrap .b-head .b-head-t {
+    color: var(--bew-text-1);
   }
 
-  .b-head-search_input {
+  .b-head-search {
+    border-color: var(--bew-border-color) !important;
+    color: var(--bew-text-1);
+
+    &.input-active {
+      border-color: var(--bew-theme-color) !important;
+    }
+
+    .b-head-search_input {
+      background-color: unset;
+    }
+
+    .search-icon > img,
+    .search-cancel > img {
+      filter: var(--bew-filter-icon-glow);
+    }
+  }
+
+  .history-wrap a.btn {
+    color: var(--bew-theme-color);
+  }
+
+  .history-wrap .history-btn .btn:hover {
+    background-color: var(--bew-theme-color);
+    border-color: var(--bew-theme-color);
+  }
+
+  .history-wrap .active {
+    background-color: var(--bew-theme-color);
+  }
+
+  .history-wrap .active:before {
+    border-left-color: var(--bew-theme-color);
+  }
+
+  .history-list .l-info {
+    border-right-color: var(--bew-fill-2);
+  }
+
+  .history-list .l-info .lastplay-time .history-red-round {
+    border-left-color: var(--bew-fill-2);
+  }
+
+  .history-wrap .time-label {
+    border-color: var(--bew-theme-color) !important;
+    color: white;
+  }
+  .history-wrap .time-label:after {
+    border-left-color: var(--bew-theme-color);
+  }
+  .history-wrap .time-label:before {
+    border-left-color: var(--bew-bg);
+  }
+  .history-wrap .time-label.active:before {
+    border-left-color: var(--bew-theme-color);
+  }
+
+  .history-list .cover-contain .progress {
+    background-color: var(--bew-theme-color);
+  }
+
+  .history-list .r-info {
     background-color: unset;
   }
 
-  .search-icon > img,
-  .search-cancel > img {
-    filter: var(--bew-filter-icon-glow);
+  .history-list .r-info .r-txt {
+    border-color: var(--bew-border-color);
   }
-}
 
-.history-wrap a.btn {
-  color: var(--bew-theme-color);
-}
+  .history-list .r-info .title {
+    color: var(--bew-text-1);
+  }
 
-.history-wrap .history-btn .btn:hover {
-  background-color: var(--bew-theme-color);
-  border-color: var(--bew-theme-color);
-}
+  .history-list .r-info .title:hover {
+    color: var(--bew-theme-color);
+  }
 
-.history-wrap .active {
-  background-color: var(--bew-theme-color);
-}
+  .history-list .r-info .w-info .device,
+  .history-list .r-info .w-info .pro-txt,
+  .history-list .r-info .w-info .name {
+    color: var(--bew-text-3);
+  }
 
-.history-wrap .active:before {
-  border-left-color: var(--bew-theme-color);
-}
+  .history-list .r-info .w-info .name {
+    border-left-color: var(--bew-border-color);
+  }
 
-.history-list .l-info {
-  border-right-color: var(--bew-fill-2);
-}
+  .history-list .r-info .w-info .username {
+    color: var(--bew-text-2);
+  }
 
-.history-list .l-info .lastplay-time .history-red-round {
-  border-left-color: var(--bew-fill-2);
-}
+  .history-list .r-info .w-info .username:hover {
+    color: var(--bew-theme-color);
+  }
 
-.history-wrap .time-label {
-  border-color: var(--bew-theme-color) !important;
-  color: white;
-}
-.history-wrap .time-label:after {
-  border-left-color: var(--bew-theme-color);
-}
-.history-wrap .time-label:before {
-  border-left-color: var(--bew-bg);
-}
-.history-wrap .time-label.active:before {
-  border-left-color: var(--bew-theme-color);
-}
+  .history-list .r-info .history-mark {
+    border-color: var(--bew-border-color);
+  }
 
-.history-list .cover-contain .progress {
-  background-color: var(--bew-theme-color);
-}
+  .go-top-m .go-top {
+    background-color: var(--bew-content-solid-1) !important;
+    border-color: var(--bew-border-color) !important;
 
-.history-list .r-info {
-  background-color: unset;
-}
-
-.history-list .r-info .r-txt {
-  border-color: var(--bew-border-color);
-}
-
-.history-list .r-info .title {
-  color: var(--bew-text-1);
-}
-
-.history-list .r-info .title:hover {
-  color: var(--bew-theme-color);
-}
-
-.history-list .r-info .w-info .device,
-.history-list .r-info .w-info .pro-txt,
-.history-list .r-info .w-info .name {
-  color: var(--bew-text-3);
-}
-
-.history-list .r-info .w-info .name {
-  border-left-color: var(--bew-border-color);
-}
-
-.history-list .r-info .w-info .username {
-  color: var(--bew-text-2);
-}
-
-.history-list .r-info .w-info .username:hover {
-  color: var(--bew-theme-color);
-}
-
-.history-list .r-info .history-mark {
-  border-color: var(--bew-border-color);
-}
-
-.go-top-m .go-top {
-  background-color: var(--bew-content-solid-1) !important;
-  border-color: var(--bew-border-color) !important;
-
-  &:hover {
-    background-color: var(--bew-theme-color) !important;
-    border-color: var(--bew-theme-color) !important;
+    &:hover {
+      background-color: var(--bew-theme-color) !important;
+      border-color: var(--bew-theme-color) !important;
+    }
   }
 }

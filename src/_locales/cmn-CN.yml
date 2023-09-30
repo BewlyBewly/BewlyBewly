@@ -69,6 +69,8 @@ settings:
   theme_color: 主题色
   follow_bilibili_evolved_color: 使用 Bilibili Evolved 主题色
   follow_bilibili_evolved_color_desc: 每次选完 Bilibili Evolved 主题色时，记得重新选中这一选项以更新配置
+  adapt_to_other_page_styles: 适应其他页面样式
+  adapt_to_other_page_styles_desc: 适应一些常见页面，以与 BewlyBewly 主题相匹配
   wallpaper_mode: 背景图片模式
   wallpaper_mode_desc: '由 URL: 直接用网上图片的 URL 来设置背景图片。'
   wallpaper_mode_opt:

@@ -1,84 +1,81 @@
-// .dark
+.bewly-design {
+  .user-card-m-exp .layout {
+    display: none;
+  }
 
-// .video-container-v1,
-// .playlist-container {
-.user-card-m-exp .layout {
-  display: none;
-}
+  .user-card-m-exp .user-info-wrapper {
+    background-color: var(--bew-bg);
+    border-radius: 0 0 8px 8px;
+  }
 
-.user-card-m-exp .user-info-wrapper {
-  background-color: var(--bew-bg);
-  border-radius: 0 0 8px 8px;
-}
+  .up-detail .up-detail-top .up-name,
+  .user-card-m-exp .user-info-wrapper .info .user .name {
+    color: var(--bew-text-1) !important;
+  }
 
-.up-detail .up-detail-top .up-name,
-.user-card-m-exp .user-info-wrapper .info .user .name {
-  color: var(--bew-text-1) !important;
-}
+  .user-card-m-exp .user-info-wrapper .info .user .user-label {
+    background-color: var(--bew-theme-color) !important;
+  }
 
-.user-card-m-exp .user-info-wrapper .info .user .user-label {
-  background-color: var(--bew-theme-color) !important;
-}
+  .membersinfo-upcard .staff-info .staff-name.is-vip {
+    color: var(--bew-theme-color) !important;
+  }
 
-.membersinfo-upcard .staff-info .staff-name.is-vip {
-  color: var(--bew-theme-color) !important;
-}
+  .upinfo-btn-panel .new-charge-btn .charge-btn-icon img,
+  .bpx-player-viewpoint-menu-item-active,
+  .cur-play-icon,
+  .playing-gif,
+  .multi-page-v1 .cur-list .list-box li.on img,
+  .coin-operated-m-exp .like-checkbox input[type='checkbox']:checked + i {
+    filter: var(--bew-filter-icon-glow);
+  }
 
-.upinfo-btn-panel .new-charge-btn .charge-btn-icon img,
-.bpx-player-viewpoint-menu-item-active,
-.cur-play-icon,
-.playing-gif,
-.multi-page-v1 .cur-list .list-box li.on img,
-.coin-operated-m-exp .like-checkbox input[type='checkbox']:checked + i {
-  filter: var(--bew-filter-icon-glow);
-}
+  .upinfo-btn-panel .follow-btn.not-follow:hover {
+    background-color: var(--bew-theme-color-80) !important;
+  }
 
-.upinfo-btn-panel .follow-btn.not-follow:hover {
-  background-color: var(--bew-theme-color-80) !important;
-}
+  .upinfo-btn-panel .not-follow-charge-btn:hover {
+    border-color: var(--bew-theme-color-80);
+    color: var(--bew-theme-color-80);
+  }
 
-.upinfo-btn-panel .not-follow-charge-btn:hover {
-  border-color: var(--bew-theme-color-80);
-  color: var(--bew-theme-color-80);
-}
+  // Tick icon for  danmaku enable
+  .bui-danmaku-switch
+    .bui-danmaku-switch-input:checked
+    + .bui-danmaku-switch-label
+    .bui-danmaku-switch-on
+    path:nth-child(2) {
+    fill: var(--bew-theme-color);
+  }
 
-// Tick icon for  danmaku enable
-.bui-danmaku-switch
-  .bui-danmaku-switch-input:checked
-  + .bui-danmaku-switch-label
-  .bui-danmaku-switch-on
-  path:nth-child(2) {
-  fill: var(--bew-theme-color);
-}
+  .user-card-m-exp .user-info-wrapper .info .btn-box .like:hover {
+    background-color: var(--bew-theme-color-80);
+    border-color: var(--bew-theme-color-80);
+  }
 
-.user-card-m-exp .user-info-wrapper .info .btn-box .like:hover {
-  background-color: var(--bew-theme-color-80);
-  border-color: var(--bew-theme-color-80);
-}
+  // 投幣滑過&選中的邊框
+  .coin-operated-m-exp .mc-box:hover,
+  .coin-operated-m-exp .mc-box.on {
+    border-color: var(--bew-theme-color);
+  }
+  // 投幣按鈕滑過效果
+  .coin-operated-m-exp .coin-bottom .bi-btn:hover {
+    background-color: var(--bew-theme-color-80);
+    border-color: var(--bew-theme-color-80);
+  }
 
-// 投幣滑過&選中的邊框
-.coin-operated-m-exp .mc-box:hover,
-.coin-operated-m-exp .mc-box.on {
-  border-color: var(--bew-theme-color);
-}
-// 投幣按鈕滑過效果
-.coin-operated-m-exp .coin-bottom .bi-btn:hover {
-  background-color: var(--bew-theme-color-80);
-  border-color: var(--bew-theme-color-80);
-}
+  .video-share-popover {
+    // border-color: var(--bew-border-color);
+    border: none;
+  }
 
-.video-share-popover {
-  // border-color: var(--bew-border-color);
-  border: none;
+  .video-share-popover
+    .video-share-dropdown
+    .dropdown-top
+    .dropdown-top-left
+    .capture-bar
+    .bar-right
+    .copy-link:hover {
+    background-color: var(--bew-theme-color-80);
+  }
 }
-
-.video-share-popover
-  .video-share-dropdown
-  .dropdown-top
-  .dropdown-top-left
-  .capture-bar
-  .bar-right
-  .copy-link:hover {
-  background-color: var(--bew-theme-color-80);
-}
-// }

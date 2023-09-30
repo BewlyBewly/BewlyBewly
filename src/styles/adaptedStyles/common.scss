@@ -1,20 +1,20 @@
-#bili-header-container {
-  // background-color: var(--bew-bg) !important;
-}
-
 .bili-header .bili-header__bar {
   visibility: hidden;
 }
+.bewly-design {
+  #bili-header-container {
+    // background-color: var(--bew-bg) !important;
+  }
 
-.card-loaded {
-  background-color: var(--bew-elevated-solid-1);
-}
+  .card-loaded {
+    background-color: var(--bew-elevated-solid-1);
+  }
 
-.brand_blue {
-  color: var(--bew-theme-color) !important;
-}
+  .brand_blue {
+    color: var(--bew-theme-color) !important;
+  }
 
-
-.van-popover {
-  background-color: var(--bew-elevated-solid-1);
+  .van-popover {
+    background-color: var(--bew-elevated-solid-1);
+  }
 }

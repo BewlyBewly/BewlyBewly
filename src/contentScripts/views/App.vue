@@ -151,6 +151,10 @@ watch(() => activatedPage.value, (newValue, oldValue) => {
     setAppWallpaperMaskingOpacity()
 })
 
+watch(() => settings.value.adaptToOtherPageStyles, () => {
+  handleAdaptToOtherPageStylesChange()
+})
+
 onMounted(() => {
   nextTick(() => {
     setTimeout(() => {
@@ -195,6 +199,7 @@ onMounted(() => {
   setAppLanguage()
   setAppThemeColor()
   setAppWallpaperMaskingOpacity()
+  handleAdaptToOtherPageStylesChange()
 })
 
 function handleChangeAccessKey() {
@@ -305,6 +310,13 @@ function handleRefresh() {
 
 function handleBackToTop() {
   smoothScrollToTop(mainAppRef.value, 300)
+}
+
+function handleAdaptToOtherPageStylesChange() {
+  if (settings.value.adaptToOtherPageStyles)
+    document.documentElement.classList.add('bewly-design')
+  else
+    document.documentElement.classList.remove('bewly-design')
 }
 </script>
 

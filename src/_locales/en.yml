@@ -70,6 +70,8 @@ settings:
   theme_color: Theme color
   follow_bilibili_evolved_color: Follow the Bilibili Evolved theme color
   follow_bilibili_evolved_color_desc: After changing the theme color in Bilibili Evolved, you will need to re-select this option in order to update the theme color.
+  adapt_to_other_page_styles: Adapt to other page styles
+  adapt_to_other_page_styles_desc: Adapt to some common pages to match with the BewlyBewly theme
   wallpaper_mode: Wallpaper mode
   wallpaper_mode_desc: 'By URL: Choose an image from the Internet and use its URL to set it as the wallpaper.'
   wallpaper_mode_opt:

@@ -107,6 +107,9 @@ function changeWallpaper(url: string) {
       @click="changeThemeColor(bilibiliEvolvedThemeColor)"
     />
   </SettingItem>
+  <SettingItem :title="$t('settings.adapt_to_other_page_styles')" :desc="$t('settings.adapt_to_other_page_styles_desc')">
+    <Radio v-model="settings.adaptToOtherPageStyles" />
+  </SettingItem>
   <SettingItem :title="$t('settings.wallpaper_mode')" :desc="$t('settings.wallpaper_mode_desc')">
     <div w-full flex rounded="$bew-radius" bg="$bew-fill-1" p-1>
       <div

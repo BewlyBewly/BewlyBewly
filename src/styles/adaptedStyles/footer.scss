@@ -1,15 +1,17 @@
-.bili-footer {
-  color: var(--bew-text-2);
+.bewly-design {
+  .bili-footer {
+    color: var(--bew-text-2);
 
-  .footer-wrp {
-    background-color: var(--bew-content-solid-1);
-  }
+    .footer-wrp {
+      background-color: var(--bew-content-solid-1);
+    }
 
-  a {
-    color: var(--bew-text-1);
-  }
+    a {
+      color: var(--bew-text-1);
+    }
 
-  .boston-postcards li {
-    border-color: var(--bew-border-color);
+    .boston-postcards li {
+      border-color: var(--bew-border-color);
+    }
   }
 }

@@ -1,472 +1,482 @@
-.bpx-player-contextmenu > li {
-  box-sizing: unset;
-}
-
-body .special-cover::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), transparent 10%);
-  pointer-events: none;
-}
-
-// #region new anime playback & movie page
-.numberListItem_number_list_item__wszA4.numberListItem_select__ar1X5,
-.follow_btnFollow__OFY3n,
-.squirtle-controller.squirtle-pgc .squirtle-progress-timeline,
-.squirtle-controller.squirtle-pgc
-  .squirtle-video-volume
-  .squirtle-volume
-  .squirtle-volume-bar
-  .squirtle-volume-dot,
-.squirtle-controller.squirtle-pgc
-  .squirtle-video-volume
-  .squirtle-volume
-  .squirtle-volume-bar
-  .squirtle-volume-percent,
-.squirtle-controller.squirtle-pgc
-  label.bui-switch-label
-  input:checked
-  + .bui-switch,
-.squirtle-controller.squirtle-pgc
-  label.bui-switch-label.bui-switch-animbg
-  input:checked
-  + .bui-switch {
-  background-color: var(--bew-theme-color);
-}
-
-.numberListItem_badge__TV05g,
-.vipPaybar_textWrap__xXqVi,
-.imageListItem_wrap__HceXs
-  .imageListItem_coverWrap__bnWan
-  .imageListItem_badge__eCjIv,
-.squirtle-controller.squirtle-pgc
-  .squirtle-video-setting
-  .squirtle-side-setting
-  .squirtle-single-side-setting
-  .squirtle-single-setting-chooses
-  .squirtle-single-setting-choice.active {
-  background-color: var(--bew-theme-color) !important;
-}
-
-.promptBar_remindActionWrap__ftBEp
-  .promptBar_btnItemWrap__SM_zQ
-  .positionBtn_btn__Cl153 {
-  background: var(--bew-theme-color) !important;
-}
-
-.follow_btnFollow__OFY3n:hover {
-  background-color: var(--bew-theme-color-80);
-}
-
-.mediainfo_mediaToolbar__uEabN .mediainfo_btnHome__ci38K {
-  background-color: var(--bew-theme-color-10);
-}
-
-.mediainfo_mediaToolbar__uEabN .mediainfo_btnHome__ci38K,
-.mediainfo_mediaRight__jv5hq
-  .mediainfo_media_desc_section__bOFBw
-  .mediainfo_display_area__CEKfP
-  .mediainfo_ellipsis__xCKNd,
-.mediainfo_mediaRight__jv5hq .mediainfo_media_desc__F5lLq i,
-.upinfo_btn_follow_up__gmj7f,
-.squirtle-controller.squirtle-pgc
-  .squirtle-video-setting
-  .squirtle-setting-panel-wrap
-  .squirtle-single-select:hover,
-.squirtle-controller.squirtle-pgc
-  .squirtle-video-setting
-  .squirtle-side-setting
-  .squirtle-single-side-setting
-  .squirtle-single-setting-other-choice:hover {
-  color: var(--bew-theme-color);
-}
-
-.RecommendItem_wrap__pJmXL
-  .RecommendItem_right_wrap__rgzw_
-  .RecommendItem_title__zyQj0:hover,
-.upinfo_upLink__x4bbS .upinfo_upName__puAs1.upinfo_vip__nTBku,
-.squirtle-controller.squirtle-pgc
-  .squirtle-block-wrap
-  .squirtle-select-list
-  .squirtle-select-item.active,
-.rankTab_sponsor_rank_tab__hdP94
-  li.rankTab_tab_item__0bP4v.rankTab_active__l7he5,
-.rankTab_sponsor_rank_tab__hdP94 li.rankTab_tab_item__0bP4v:hover,
-.sponsor_sponsor_module__tD6ck
-  .sponsor_sponsor_info__1xNCI
-  .sponsor_btn_show_rank__FqWD_:hover,
-.rankList_sponsor_rank_item__TkUX6.rankList_pos_rank_module__o8Y8G
-  .rankList_sp_right__T4Ovf
-  .rankList_sp_user__ZGFgT
-  .rankList_sp_name__DlvSi[style*='color'] {
-  color: var(--bew-theme-color) !important;
-}
-
-.mediainfo_mediaToolbar__uEabN .mediainfo_btnHome__ci38K svg path,
-#bilibili_pbp svg rect[clip-path='url(#pbp-played-path)'],
-.squirtle-controller.squirtle-pgc
-  .squirtle-video-setting
-  .squirtle-side-setting
-  .squirtle-single-side-setting
-  .squirtle-single-setting-other-choice
-  .squirtle-svg-icon.active
-  path,
-.squirtle-controller.squirtle-pgc
-  .squirtle-video-setting
-  .squirtle-side-setting
-  .squirtle-single-side-setting
-  .squirtle-single-setting-other-choice.active
-  .squirtle-svg-icon.active
-  path {
-  fill: var(--bew-theme-color);
-}
-
-// #bilibili_pbp svg rect[clip-path='url(#pbp-played-path)'] {
-//   fill: var(--bew-theme-color) !important;
-// }
-
-.PlayingIcon_playIcon__Ob1X0 svg path {
-  stroke: var(--bew-theme-color);
-}
-
-.rankTab_sponsor_rank_tab__hdP94 .rankTab_indicator___z_KZ {
-  border-color: var(--bew-theme-color);
-}
-
-.rankTab_sponsor_rank_tab__hdP94 .rankTab_indicator___z_KZ:after {
-  display: none;
-}
-
-.dark {
-  .home-container .main-container,
-  .mediainfo_mediaRight__jv5hq .mediainfo_media_desc__F5lLq i {
-    background-color: var(--bew-bg);
+.bewly-design {
+  .bpx-player-contextmenu > li {
+    box-sizing: unset;
   }
 
-  .eplist_ep_list_wrapper__PzLHa,
-  .eplist_ep_list_wrapper__PzLHa,
-  .rankList_sponsor_rank_item__TkUX6.rankList_pos_rank_module__o8Y8G
-    .rankList_sp_right__T4Ovf
-    .rankList_sp_msg__55OlS {
-    background-color: var(--bew-content-solid-1);
+  body .special-cover::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), transparent 10%);
+    pointer-events: none;
   }
 
-  .special.wide .main-container {
-    background-color: unset;
+  // #region new anime playback & movie page
+  .numberListItem_number_list_item__wszA4.numberListItem_select__ar1X5,
+  .follow_btnFollow__OFY3n,
+  .squirtle-controller.squirtle-pgc .squirtle-progress-timeline,
+  .squirtle-controller.squirtle-pgc
+    .squirtle-video-volume
+    .squirtle-volume
+    .squirtle-volume-bar
+    .squirtle-volume-dot,
+  .squirtle-controller.squirtle-pgc
+    .squirtle-video-volume
+    .squirtle-volume
+    .squirtle-volume-bar
+    .squirtle-volume-percent,
+  .squirtle-controller.squirtle-pgc
+    label.bui-switch-label
+    input:checked
+    + .bui-switch,
+  .squirtle-controller.squirtle-pgc
+    label.bui-switch-label.bui-switch-animbg
+    input:checked
+    + .bui-switch {
+    background-color: var(--bew-theme-color);
   }
 
-  .upinfo_upInfoCard__roviy {
-    background-color: var(--bew-fill-1);
+  .numberListItem_badge__TV05g,
+  .vipPaybar_textWrap__xXqVi,
+  .imageListItem_wrap__HceXs
+    .imageListItem_coverWrap__bnWan
+    .imageListItem_badge__eCjIv,
+  .squirtle-controller.squirtle-pgc
+    .squirtle-video-setting
+    .squirtle-side-setting
+    .squirtle-single-side-setting
+    .squirtle-single-setting-chooses
+    .squirtle-single-setting-choice.active {
+    background-color: var(--bew-theme-color) !important;
   }
 
-  .follow_btnFollow__OFY3n.follow_followed__smKNK {
-    background-color: var(--bew-fill-2) !important;
+  .promptBar_remindActionWrap__ftBEp
+    .promptBar_btnItemWrap__SM_zQ
+    .positionBtn_btn__Cl153 {
+    background: var(--bew-theme-color) !important;
   }
 
-  .SectionSelector_SectionSelector__WS4H3 .SectionSelector_expand__Oh9Lt {
-    background: linear-gradient(
-      270deg,
-      var(--bew-content-solid-1) 46.21%,
-      transparent
-    );
+  .follow_btnFollow__OFY3n:hover {
+    background-color: var(--bew-theme-color-80);
   }
 
-  .numberListItem_number_list_item__wszA4 {
-    --bg1: var(--bew-fill-1);
+  .mediainfo_mediaToolbar__uEabN .mediainfo_btnHome__ci38K {
+    background-color: var(--bew-theme-color-10);
   }
 
-  .mediainfo_mediaInfo__Cpow4,
-  .recommend_wrap__pgu8c,
-  .rankList_sponsor_rank_item__TkUX6.rankList_pos_rank_module__o8Y8G
-    .rankList_sp_right__T4Ovf
-    .rankList_sp_msg__55OlS,
-  .sponsor_sponsor_module__tD6ck {
-    border-color: var(--bew-border-color);
-  }
-
+  .mediainfo_mediaToolbar__uEabN .mediainfo_btnHome__ci38K,
   .mediainfo_mediaRight__jv5hq
     .mediainfo_media_desc_section__bOFBw
     .mediainfo_display_area__CEKfP
-    .mediainfo_ellipsis__xCKNd {
-    background: linear-gradient(
-      90deg,
-      hsla(0, 0%, 100%, 0),
-      var(--bew-bg) 20%,
-      var(--bew-bg)
-    );
+    .mediainfo_ellipsis__xCKNd,
+  .mediainfo_mediaRight__jv5hq .mediainfo_media_desc__F5lLq i,
+  .upinfo_btn_follow_up__gmj7f,
+  .squirtle-controller.squirtle-pgc
+    .squirtle-video-setting
+    .squirtle-setting-panel-wrap
+    .squirtle-single-select:hover,
+  .squirtle-controller.squirtle-pgc
+    .squirtle-video-setting
+    .squirtle-side-setting
+    .squirtle-single-side-setting
+    .squirtle-single-setting-other-choice:hover {
+    color: var(--bew-theme-color);
   }
 
-  .numberListItem_title__ukPv0,
-  .recommend_wrap__pgu8c .recommend_title__miCR4,
   .RecommendItem_wrap__pJmXL
     .RecommendItem_right_wrap__rgzw_
-    .RecommendItem_title__zyQj0,
-  .rankView_sponsor_rank_module__Pn_P_
-    .rankView_sponsor_rank_header__1F_YB
-    .rankView_title__BXE4u,
-  .rankList_sponsor_rank_item__TkUX6.rankList_pos_rank_module__o8Y8G
-    .rankList_sp_right__T4Ovf
-    .rankList_sp_msg__55OlS,
-  .rankTab_sponsor_rank_tab__hdP94 li.rankTab_tab_item__0bP4v,
+    .RecommendItem_title__zyQj0:hover,
+  .upinfo_upLink__x4bbS .upinfo_upName__puAs1.upinfo_vip__nTBku,
+  .squirtle-controller.squirtle-pgc
+    .squirtle-block-wrap
+    .squirtle-select-list
+    .squirtle-select-item.active,
+  .rankTab_sponsor_rank_tab__hdP94
+    li.rankTab_tab_item__0bP4v.rankTab_active__l7he5,
+  .rankTab_sponsor_rank_tab__hdP94 li.rankTab_tab_item__0bP4v:hover,
   .sponsor_sponsor_module__tD6ck
     .sponsor_sponsor_info__1xNCI
-    .sponsor_sponsor_count__EIrUB
-    span,
-  .sponsor_sponsor_module__tD6ck
-    .sponsor_sponsor_info__1xNCI
-    .sponsor_btn_show_rank__FqWD_,
+    .sponsor_btn_show_rank__FqWD_:hover,
   .rankList_sponsor_rank_item__TkUX6.rankList_pos_rank_module__o8Y8G
     .rankList_sp_right__T4Ovf
     .rankList_sp_user__ZGFgT
-    .rankList_sp_name__DlvSi {
-    color: var(--bew-text-1);
+    .rankList_sp_name__DlvSi[style*='color'] {
+    color: var(--bew-theme-color) !important;
   }
 
-  .RecommendItem_wrap__pJmXL
-    .RecommendItem_right_wrap__rgzw_
-    .RecommendItem_sub_wrap__s1pfm
-    .RecommendItem_showindex__KMdzi,
-  .score_score__1MjLd,
-  .rankList_sponsor_rank_item__TkUX6.rankList_pos_rank_module__o8Y8G
-    .rankList_sp_left__jTV0X
-    .rankList_face_wrap__HCrnI
-    .rankList_sp_rank__RkpRy,
-  .sponsor_sponsor_module__tD6ck
-    .sponsor_sponsor_info__1xNCI
-    .sponsor_sponsor_count__EIrUB {
-    color: var(--bew-text-2);
+  .mediainfo_mediaToolbar__uEabN .mediainfo_btnHome__ci38K svg path,
+  #bilibili_pbp svg rect[clip-path='url(#pbp-played-path)'],
+  .squirtle-controller.squirtle-pgc
+    .squirtle-video-setting
+    .squirtle-side-setting
+    .squirtle-single-side-setting
+    .squirtle-single-setting-other-choice
+    .squirtle-svg-icon.active
+    path,
+  .squirtle-controller.squirtle-pgc
+    .squirtle-video-setting
+    .squirtle-side-setting
+    .squirtle-single-side-setting
+    .squirtle-single-setting-other-choice.active
+    .squirtle-svg-icon.active
+    path {
+    fill: var(--bew-theme-color);
   }
 
-  .rankList_sponsor_rank_item__TkUX6.rankList_pos_rank_module__o8Y8G
-    .rankList_sp_right__T4Ovf
-    .rankList_sp_msg__55OlS.rankList_empty__51U_S {
-    color: var(--bew-text-3);
+  // #bilibili_pbp svg rect[clip-path='url(#pbp-played-path)'] {
+  //   fill: var(--bew-theme-color) !important;
+  // }
+
+  .PlayingIcon_playIcon__Ob1X0 svg path {
+    stroke: var(--bew-theme-color);
   }
 
-  .rankList_sponsor_rank_item__TkUX6.rankList_pos_rank_module__o8Y8G
-    .rankList_sp_left__jTV0X
-    .rankList_face_wrap__HCrnI
-    .rankList_svg__FhiDT {
-    fill: var(--bew-border-color);
+  .rankTab_sponsor_rank_tab__hdP94 .rankTab_indicator___z_KZ {
+    border-color: var(--bew-theme-color);
   }
-}
-// #endregion
 
-// #region Old anime playback & movie page
-.main-container .tool-bar .coin-info.active i,
-.main-container .tool-bar .coin-info:hover i,
-.main-container .tool-bar .like-info.active i,
-.main-container .tool-bar .like-info:hover i,
-.main-container .tool-bar .coin-info.active span,
-.main-container .tool-bar .coin-info:hover span,
-.main-container .tool-bar .like-info.active span,
-.main-container .tool-bar .like-info:hover span,
-.main-container
-  .tool-bar
-  .share-info
-  .share-more
-  .share-wrapper
-  .share-btn:hover
-  i,
-.main-container
-  .tool-bar
-  .share-info
-  .share-more
-  .share-wrapper
-  .share-btn:hover
-  span,
-.main-container .tool-bar .share-info:hover i,
-.main-container .tool-bar .share-info:hover span,
-.main-container .tool-bar .mobile-info:hover i,
-.main-container .tool-bar .mobile-info:hover span,
-.main-container .tool-bar .watch-info:hover span,
-.ep-list-wrapper .ep-item i,
-.section-ep-wrapper .ep-item i,
-.up-info .btn-follow-up,
-.main-container .media-info .media-right .media-desc i {
-  color: var(--bew-theme-color);
-}
+  .rankTab_sponsor_rank_tab__hdP94 .rankTab_indicator___z_KZ:after {
+    display: none;
+  }
 
-.main-container
-  .review-module
-  .review-list
-  .review-item
-  .review-header
-  #review-author-nick-name.review-author.is-vip,
-.up-info > a .up-name.vip,
-.main-container .review-module .review-list .review-item:hover .review-title,
-.main-container .review-module .module-title .more-link:hover,
-.sponsor-rank-item.pos-rank-module .sp-right .sp-user.vip .sp-name,
-.main-container .sponsor-module .sponsor-info .btn-show-rank:hover {
-  color: var(--bew-theme-color) !important;
-}
+  &.dark {
+    .home-container .main-container,
+    .mediainfo_mediaRight__jv5hq .mediainfo_media_desc__F5lLq i {
+      background-color: var(--bew-bg);
+    }
 
-.main-container .pay-bar .vip .btn-pay,
-.main-container .media-info .media-right .media-tool-bar .btn-follow,
-.main-container .nav-tools .tool-item:hover {
-  background-color: var(--bew-theme-color);
-}
+    .eplist_ep_list_wrapper__PzLHa,
+    .eplist_ep_list_wrapper__PzLHa,
+    .rankList_sponsor_rank_item__TkUX6.rankList_pos_rank_module__o8Y8G
+      .rankList_sp_right__T4Ovf
+      .rankList_sp_msg__55OlS {
+      background-color: var(--bew-content-solid-1);
+    }
 
-.ep-list-wrapper .ep-item .badge.pink,
-.section-ep-wrapper .ep-item .badge.pink,
-.main-container .nav-tools .tool-item:hover,
-.main-container .ep-list-wrapper .list-wrapper.simple ul .ep-item.cursor,
-.main-container .ep-list-wrapper .list-wrapper.simple ul .ep-item:hover {
-  background-color: var(--bew-theme-color) !important;
-}
+    .special.wide .main-container {
+      background-color: unset;
+    }
 
-.main-container .pay-bar .vip .btn-pay:hover,
-.main-container .media-info .media-right .media-tool-bar .btn-follow:hover {
-  background-color: var(--bew-theme-color-80);
-}
+    .upinfo_upInfoCard__roviy {
+      background-color: var(--bew-fill-1);
+    }
 
-.main-container .ep-list-wrapper .list-wrapper.simple ul .ep-item.cursor,
-.sponsor-rank-tab .indicator {
-  border-color: var(--bew-theme-color);
-}
+    .follow_btnFollow__OFY3n.follow_followed__smKNK {
+      background-color: var(--bew-fill-2) !important;
+    }
 
-.main-container .nav-tools .tool-item:hover {
-  border-color: var(--bew-theme-color) !important;
-}
+    .SectionSelector_SectionSelector__WS4H3 .SectionSelector_expand__Oh9Lt {
+      background: linear-gradient(
+        270deg,
+        var(--bew-content-solid-1) 46.21%,
+        transparent
+      );
+    }
 
-.main-container .tool-bar .watch-info:hover #watch-together-icon-1 path {
-  fill: var(--bew-theme-color) !important;
-}
+    .numberListItem_number_list_item__wszA4 {
+      --bg1: var(--bew-fill-1);
+    }
 
-.sponsor-rank-tab .indicator:after {
-  display: none;
-}
+    .mediainfo_mediaInfo__Cpow4,
+    .recommend_wrap__pgu8c,
+    .rankList_sponsor_rank_item__TkUX6.rankList_pos_rank_module__o8Y8G
+      .rankList_sp_right__T4Ovf
+      .rankList_sp_msg__55OlS,
+    .sponsor_sponsor_module__tD6ck {
+      border-color: var(--bew-border-color);
+    }
 
-.dark {
-  .main-container .media-info .media-right .media-title,
-  .main-container .media-info .media-right .pub-wrapper,
-  .main-container .media-info .media-right .media-desc,
-  .main-container .season-list .series-title,
-  .main-container .season-list .ss-list-wrapper .ss-item .ss-info .ss-title,
+    .mediainfo_mediaRight__jv5hq
+      .mediainfo_media_desc_section__bOFBw
+      .mediainfo_display_area__CEKfP
+      .mediainfo_ellipsis__xCKNd {
+      background: linear-gradient(
+        90deg,
+        hsla(0, 0%, 100%, 0),
+        var(--bew-bg) 20%,
+        var(--bew-bg)
+      );
+    }
+
+    .numberListItem_title__ukPv0,
+    .recommend_wrap__pgu8c .recommend_title__miCR4,
+    .RecommendItem_wrap__pJmXL
+      .RecommendItem_right_wrap__rgzw_
+      .RecommendItem_title__zyQj0,
+    .rankView_sponsor_rank_module__Pn_P_
+      .rankView_sponsor_rank_header__1F_YB
+      .rankView_title__BXE4u,
+    .rankList_sponsor_rank_item__TkUX6.rankList_pos_rank_module__o8Y8G
+      .rankList_sp_right__T4Ovf
+      .rankList_sp_msg__55OlS,
+    .rankTab_sponsor_rank_tab__hdP94 li.rankTab_tab_item__0bP4v,
+    .sponsor_sponsor_module__tD6ck
+      .sponsor_sponsor_info__1xNCI
+      .sponsor_sponsor_count__EIrUB
+      span,
+    .sponsor_sponsor_module__tD6ck
+      .sponsor_sponsor_info__1xNCI
+      .sponsor_btn_show_rank__FqWD_,
+    .rankList_sponsor_rank_item__TkUX6.rankList_pos_rank_module__o8Y8G
+      .rankList_sp_right__T4Ovf
+      .rankList_sp_user__ZGFgT
+      .rankList_sp_name__DlvSi {
+      color: var(--bew-text-1);
+    }
+
+    .RecommendItem_wrap__pJmXL
+      .RecommendItem_right_wrap__rgzw_
+      .RecommendItem_sub_wrap__s1pfm
+      .RecommendItem_showindex__KMdzi,
+    .score_score__1MjLd,
+    .rankList_sponsor_rank_item__TkUX6.rankList_pos_rank_module__o8Y8G
+      .rankList_sp_left__jTV0X
+      .rankList_face_wrap__HCrnI
+      .rankList_sp_rank__RkpRy,
+    .sponsor_sponsor_module__tD6ck
+      .sponsor_sponsor_info__1xNCI
+      .sponsor_sponsor_count__EIrUB {
+      color: var(--bew-text-2);
+    }
+
+    .rankList_sponsor_rank_item__TkUX6.rankList_pos_rank_module__o8Y8G
+      .rankList_sp_right__T4Ovf
+      .rankList_sp_msg__55OlS.rankList_empty__51U_S {
+      color: var(--bew-text-3);
+    }
+
+    .rankList_sponsor_rank_item__TkUX6.rankList_pos_rank_module__o8Y8G
+      .rankList_sp_left__jTV0X
+      .rankList_face_wrap__HCrnI
+      .rankList_svg__FhiDT {
+      fill: var(--bew-border-color);
+    }
+  }
+  // #endregion
+
+  // #region Old anime playback & movie page
+  .main-container .tool-bar .coin-info.active i,
+  .main-container .tool-bar .coin-info:hover i,
+  .main-container .tool-bar .like-info.active i,
+  .main-container .tool-bar .like-info:hover i,
+  .main-container .tool-bar .coin-info.active span,
+  .main-container .tool-bar .coin-info:hover span,
+  .main-container .tool-bar .like-info.active span,
+  .main-container .tool-bar .like-info:hover span,
   .main-container
-    .recom-wrapper
-    .recom-list
-    .recom-item
-    .info-wrapper
-    .video-title,
-  .main-container .plp-l .comment-wrapper .b-head,
-  .main-container .media-info .media-right .pub-wrapper .home-link,
-  .main-container .ep-list-wrapper .list-title h4,
-  .ep-section-module .section-title,
-  .ep-list-wrapper .ep-item a,
-  .section-ep-wrapper .ep-item a,
-  .main-container .review-module .review-list .review-item .review-title,
-  .main-container .review-module .review-list .review-item .review-content,
-  .main-container .media-info .media-right .pub-wrapper .av-link,
-  .main-container .review-module .module-title .more-link,
-  .main-container .nav-tools .tool-item:hover,
-  .main-container .season-list .ss-list-wrapper .expand-more,
-  .sponsor-rank-module-v2 .sponsor-rank-header h3,
-  .sponsor-rank-tab li.tab-item,
-  .main-container .sponsor-module .sponsor-info .sponsor-count span,
-  .sponsor-rank-item.pos-rank-module .sp-right .sp-msg,
-  .main-container .recom-wrapper .recom-title,
-  .main-container .sponsor-module .sponsor-info .btn-show-rank {
-    color: var(--bew-text-1);
+    .tool-bar
+    .share-info
+    .share-more
+    .share-wrapper
+    .share-btn:hover
+    i,
+  .main-container
+    .tool-bar
+    .share-info
+    .share-more
+    .share-wrapper
+    .share-btn:hover
+    span,
+  .main-container .tool-bar .share-info:hover i,
+  .main-container .tool-bar .share-info:hover span,
+  .main-container .tool-bar .mobile-info:hover i,
+  .main-container .tool-bar .mobile-info:hover span,
+  .main-container .tool-bar .watch-info:hover span,
+  .ep-list-wrapper .ep-item i,
+  .section-ep-wrapper .ep-item i,
+  .up-info .btn-follow-up,
+  .main-container .media-info .media-right .media-desc i {
+    color: var(--bew-theme-color);
   }
 
-  .main-container .tool-bar span,
-  .main-container .tool-bar i,
-  .main-container .season-list .ss-list-wrapper .ss-item .ss-info .pub-info,
-  .main-container
-    .recom-wrapper
-    .recom-list
-    .recom-item
-    .info-wrapper
-    .video-subtitle,
-  .main-container
-    .recom-wrapper
-    .recom-list
-    .recom-item
-    .info-wrapper
-    .video-count,
-  .main-container .media-info .media-right .media-count,
-  .main-container .review-module .review-list .review-item .pub-time,
   .main-container
     .review-module
     .review-list
     .review-item
     .review-header
-    #review-author-nick-name.review-author,
-  .main-container .media-info .media-right .media-tool-bar .btn-rating,
-  .main-container .nav-tools .tool-item,
-  .main-container .sponsor-module .sponsor-info .sponsor-count,
-  .sponsor-rank-item.pos-rank-module .sp-left .face-wrap.iconfont .sp-rank {
-    color: var(--bew-text-2);
+    #review-author-nick-name.review-author.is-vip,
+  .up-info > a .up-name.vip,
+  .main-container .review-module .review-list .review-item:hover .review-title,
+  .main-container .review-module .module-title .more-link:hover,
+  .sponsor-rank-item.pos-rank-module .sp-right .sp-user.vip .sp-name,
+  .main-container .sponsor-module .sponsor-info .btn-show-rank:hover {
+    color: var(--bew-theme-color) !important;
   }
 
-  .main-container .season-list .ss-list-wrapper .ss-item .ss-info .ss-count {
-    color: var(--bew-text-3);
+  .main-container .pay-bar .vip .btn-pay,
+  .main-container .media-info .media-right .media-tool-bar .btn-follow,
+  .main-container .nav-tools .tool-item:hover {
+    background-color: var(--bew-theme-color);
   }
 
-  .main-container .media-info .media-right .media-tool-bar .btn-follow.active {
-    color: var(--bew-fill-4);
+  .ep-list-wrapper .ep-item .badge.pink,
+  .section-ep-wrapper .ep-item .badge.pink,
+  .main-container .nav-tools .tool-item:hover,
+  .main-container .ep-list-wrapper .list-wrapper.simple ul .ep-item.cursor,
+  .main-container .ep-list-wrapper .list-wrapper.simple ul .ep-item:hover {
+    background-color: var(--bew-theme-color) !important;
   }
 
-  .main-container .tool-bar path {
-    fill: var(--bew-text-2);
+  .main-container .pay-bar .vip .btn-pay:hover,
+  .main-container .media-info .media-right .media-tool-bar .btn-follow:hover {
+    background-color: var(--bew-theme-color-80);
   }
 
-  .main-container .media-info,
-  .main-container .review-module,
-  .main-container .plp-l .split-line,
-  .main-container .media-info .media-right .media-tool-bar .btn-rating,
-  .main-container .nav-tools .tool-item,
-  .main-container .sponsor-module,
-  .main-container .ep-list-wrapper .list-wrapper.simple ul .ep-item,
-  .sponsor-rank-item.pos-rank-module .sp-right .sp-msg {
-    border-color: var(--bew-border-color);
+  .main-container .ep-list-wrapper .list-wrapper.simple ul .ep-item.cursor,
+  .sponsor-rank-tab .indicator {
+    border-color: var(--bew-theme-color);
   }
 
-  .sponsor-rank-item.pos-rank-module .sp-left .face-wrap.iconfont:before {
-    color: var(--bew-border-color);
+  .main-container .nav-tools .tool-item:hover {
+    border-color: var(--bew-theme-color) !important;
   }
 
-  .main-container
-    .media-info
-    .media-right
-    .pub-wrapper
-    .up-info-wrapper
-    .split-line {
-    background-color: var(--bew-border-color);
+  .main-container .tool-bar .watch-info:hover #watch-together-icon-1 path {
+    fill: var(--bew-theme-color) !important;
   }
 
-  .main-container .ep-list-wrapper,
-  .ep-section-module,
-  .main-container .review-module .review-list .review-item .review-body,
-  .main-container .nav-tools .tool-item,
-  .main-container .season-list .ss-list-wrapper .expand-more {
-    background-color: var(--bew-content-solid-1);
+  .sponsor-rank-tab .indicator:after {
+    display: none;
   }
 
-  .ep-list-wrapper .ep-item.cursor,
-  .section-ep-wrapper .ep-item.cursor,
-  .main-container .media-info .media-right .media-tool-bar .btn-rating,
-  .main-container .ep-list-wrapper .list-wrapper.simple ul .ep-item,
-  .sponsor-rank-item.pos-rank-module .sp-right .sp-msg {
-    background-color: var(--bew-fill-1);
-  }
+  &.dark {
+    .main-container .media-info .media-right .media-title,
+    .main-container .media-info .media-right .pub-wrapper,
+    .main-container .media-info .media-right .media-desc,
+    .main-container .season-list .series-title,
+    .main-container .season-list .ss-list-wrapper .ss-item .ss-info .ss-title,
+    .main-container
+      .recom-wrapper
+      .recom-list
+      .recom-item
+      .info-wrapper
+      .video-title,
+    .main-container .plp-l .comment-wrapper .b-head,
+    .main-container .media-info .media-right .pub-wrapper .home-link,
+    .main-container .ep-list-wrapper .list-title h4,
+    .ep-section-module .section-title,
+    .ep-list-wrapper .ep-item a,
+    .section-ep-wrapper .ep-item a,
+    .main-container .review-module .review-list .review-item .review-title,
+    .main-container .review-module .review-list .review-item .review-content,
+    .main-container .media-info .media-right .pub-wrapper .av-link,
+    .main-container .review-module .module-title .more-link,
+    .main-container .nav-tools .tool-item:hover,
+    .main-container .season-list .ss-list-wrapper .expand-more,
+    .sponsor-rank-module-v2 .sponsor-rank-header h3,
+    .sponsor-rank-tab li.tab-item,
+    .main-container .sponsor-module .sponsor-info .sponsor-count span,
+    .sponsor-rank-item.pos-rank-module .sp-right .sp-msg,
+    .main-container .recom-wrapper .recom-title,
+    .main-container .sponsor-module .sponsor-info .btn-show-rank {
+      color: var(--bew-text-1);
+    }
 
-  .main-container .media-info .media-right .media-tool-bar .btn-follow.active {
-    background-color: var(--bew-fill-2) !important;
-  }
+    .main-container .tool-bar span,
+    .main-container .tool-bar i,
+    .main-container .season-list .ss-list-wrapper .ss-item .ss-info .pub-info,
+    .main-container
+      .recom-wrapper
+      .recom-list
+      .recom-item
+      .info-wrapper
+      .video-subtitle,
+    .main-container
+      .recom-wrapper
+      .recom-list
+      .recom-item
+      .info-wrapper
+      .video-count,
+    .main-container .media-info .media-right .media-count,
+    .main-container .review-module .review-list .review-item .pub-time,
+    .main-container
+      .review-module
+      .review-list
+      .review-item
+      .review-header
+      #review-author-nick-name.review-author,
+    .main-container .media-info .media-right .media-tool-bar .btn-rating,
+    .main-container .nav-tools .tool-item,
+    .main-container .sponsor-module .sponsor-info .sponsor-count,
+    .sponsor-rank-item.pos-rank-module .sp-left .face-wrap.iconfont .sp-rank {
+      color: var(--bew-text-2);
+    }
 
-  .ep-list-wrapper .ep-item:hover,
-  .section-ep-wrapper .ep-item:hover {
-    background-color: var(--bew-fill-2);
-  }
+    .main-container .season-list .ss-list-wrapper .ss-item .ss-info .ss-count {
+      color: var(--bew-text-3);
+    }
 
-  .main-container .media-info .media-right .media-desc i {
-    background-color: var(--bew-bg);
+    .main-container
+      .media-info
+      .media-right
+      .media-tool-bar
+      .btn-follow.active {
+      color: var(--bew-fill-4);
+    }
+
+    .main-container .tool-bar path {
+      fill: var(--bew-text-2);
+    }
+
+    .main-container .media-info,
+    .main-container .review-module,
+    .main-container .plp-l .split-line,
+    .main-container .media-info .media-right .media-tool-bar .btn-rating,
+    .main-container .nav-tools .tool-item,
+    .main-container .sponsor-module,
+    .main-container .ep-list-wrapper .list-wrapper.simple ul .ep-item,
+    .sponsor-rank-item.pos-rank-module .sp-right .sp-msg {
+      border-color: var(--bew-border-color);
+    }
+
+    .sponsor-rank-item.pos-rank-module .sp-left .face-wrap.iconfont:before {
+      color: var(--bew-border-color);
+    }
+
+    .main-container
+      .media-info
+      .media-right
+      .pub-wrapper
+      .up-info-wrapper
+      .split-line {
+      background-color: var(--bew-border-color);
+    }
+
+    .main-container .ep-list-wrapper,
+    .ep-section-module,
+    .main-container .review-module .review-list .review-item .review-body,
+    .main-container .nav-tools .tool-item,
+    .main-container .season-list .ss-list-wrapper .expand-more {
+      background-color: var(--bew-content-solid-1);
+    }
+
+    .ep-list-wrapper .ep-item.cursor,
+    .section-ep-wrapper .ep-item.cursor,
+    .main-container .media-info .media-right .media-tool-bar .btn-rating,
+    .main-container .ep-list-wrapper .list-wrapper.simple ul .ep-item,
+    .sponsor-rank-item.pos-rank-module .sp-right .sp-msg {
+      background-color: var(--bew-fill-1);
+    }
+
+    .main-container
+      .media-info
+      .media-right
+      .media-tool-bar
+      .btn-follow.active {
+      background-color: var(--bew-fill-2) !important;
+    }
+
+    .ep-list-wrapper .ep-item:hover,
+    .section-ep-wrapper .ep-item:hover {
+      background-color: var(--bew-fill-2);
+    }
+
+    .main-container .media-info .media-right .media-desc i {
+      background-color: var(--bew-bg);
+    }
   }
+  // #endregion
 }
-// #endregion

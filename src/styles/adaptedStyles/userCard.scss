@@ -1,45 +1,47 @@
-// old user card styles
-.dark {
-  #id-card {
-    background-color: var(--bew-elevated-solid-1);
+.bewly-design {
+  // old user card styles
+  &.dark {
+    #id-card {
+      background-color: var(--bew-elevated-solid-1);
 
-    .idc-uname[style*='color'],
-    .idc-uname:hover {
-      color: var(--bew-theme-color) !important;
-    }
-
-    .btn.ghost,
-    .btn.ghost:focus,
-    .btn.ghost:hover {
-      background-color: var(--bew-fill-3);
-      color: var(--bew-text-3);
-      border-color: var(--bew-fill-3);
-    }
-
-    .btn-content:hover {
-      background-color: unset;
-    }
-
-    .btn.default {
-      background-color: var(--bew-fill-1);
-      color: var(--bew-text-1);
-      border-color: var(--bew-fill-1);
-
-      &:hover {
-        background-color: unset;
-        color: var(--bew-theme-color);
-        border-color: var(--bew-theme-color);
+      .idc-uname[style*='color'],
+      .idc-uname:hover {
+        color: var(--bew-theme-color) !important;
       }
-    }
 
-    .btn.primary {
-      background-color: var(--bew-theme-color);
-      border-color: var(--bew-theme-color);
+      .btn.ghost,
+      .btn.ghost:focus,
+      .btn.ghost:hover {
+        background-color: var(--bew-fill-3);
+        color: var(--bew-text-3);
+        border-color: var(--bew-fill-3);
+      }
 
-      &:hover {
-        background-color: var(--bew-theme-color-80);
-        border-color: var(--bew-theme-color-80);
-        color: white;
+      .btn-content:hover {
+        background-color: unset;
+      }
+
+      .btn.default {
+        background-color: var(--bew-fill-1);
+        color: var(--bew-text-1);
+        border-color: var(--bew-fill-1);
+
+        &:hover {
+          background-color: unset;
+          color: var(--bew-theme-color);
+          border-color: var(--bew-theme-color);
+        }
+      }
+
+      .btn.primary {
+        background-color: var(--bew-theme-color);
+        border-color: var(--bew-theme-color);
+
+        &:hover {
+          background-color: var(--bew-theme-color-80);
+          border-color: var(--bew-theme-color-80);
+          color: white;
+        }
       }
     }
   }

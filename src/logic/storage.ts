@@ -13,6 +13,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   enableHorizontalScrolling: false,
   theme: 'auto',
   themeColor: '#00a1d6',
+  adaptToOtherPageStyles: true,
   recommendationMode: 'web',
   wallpaperMode: 'buildIn',
   wallpaper: '',

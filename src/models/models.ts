@@ -8,6 +8,7 @@ export interface Settings {
   enableHorizontalScrolling: boolean
   theme: 'light' | 'dark' | 'auto'
   themeColor: string
+  adaptToOtherPageStyles: boolean
   recommendationMode: 'web' | 'app'
   wallpaperMode: 'buildIn' | 'byUrl'
   wallpaper: string
