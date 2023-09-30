@@ -84,8 +84,8 @@ function setCurrentTitle() {
   <div class="fixed w-full h-full top-0 left-0" z="9998" opacity-60 :style="{ backgroundColor: isHomePage ? '' : 'var(--bew-bg)' }" @click="handleClose" />
 
   <div
-    id="settings-window" pos="fixed top-1/2 left-1/2" w="80% lg:2/3 md:2/3" h="80% md:60%"
-    max-w-850px transform="~ translate-x--1/2 translate-y--1/2"
+    id="settings-window" pos="fixed top-1/2 left-1/2" w="85%" h="80%"
+    max-w-900px max-h-800px transform="~ translate-x--1/2 translate-y--1/2"
     z-9999 flex justify-between items-center
   >
     <aside class="group" shrink-0 p="x-4" pos="absolute left--42px" z-2>
