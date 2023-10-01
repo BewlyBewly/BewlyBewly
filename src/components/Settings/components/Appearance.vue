@@ -79,10 +79,10 @@ function changeWallpaper(url: string) {
 </script>
 
 <template>
-  <SettingItem :title="$t('settings.theme')">
+  <SettingsItem :title="$t('settings.theme')">
     <Select v-model="settings.theme" w-full :options="themeOptions" />
-  </SettingItem>
-  <SettingItem :title="$t('settings.theme_color')">
+  </SettingsItem>
+  <SettingsItem :title="$t('settings.theme_color')">
     <div flex="~ gap-2 wrap" justify-end>
       <div
         v-for="color in themeColorOptions" :key="color"
@@ -95,8 +95,8 @@ function changeWallpaper(url: string) {
         @click="changeThemeColor(color)"
       />
     </div>
-  </SettingItem>
-  <SettingItem :title="$t('settings.follow_bilibili_evolved_color')" :desc="$t('settings.follow_bilibili_evolved_color_desc')">
+  </SettingsItem>
+  <SettingsItem :title="$t('settings.follow_bilibili_evolved_color')" :desc="$t('settings.follow_bilibili_evolved_color_desc')">
     <div
       w-20px h-20px rounded-8 cursor-pointer
       :style="{
@@ -106,11 +106,11 @@ function changeWallpaper(url: string) {
       }"
       @click="changeThemeColor(bilibiliEvolvedThemeColor)"
     />
-  </SettingItem>
-  <SettingItem :title="$t('settings.adapt_to_other_page_styles')" :desc="$t('settings.adapt_to_other_page_styles_desc')">
+  </SettingsItem>
+  <SettingsItem :title="$t('settings.adapt_to_other_page_styles')" :desc="$t('settings.adapt_to_other_page_styles_desc')">
     <Radio v-model="settings.adaptToOtherPageStyles" />
-  </SettingItem>
-  <SettingItem :title="$t('settings.wallpaper_mode')" :desc="$t('settings.wallpaper_mode_desc')">
+  </SettingsItem>
+  <SettingsItem :title="$t('settings.wallpaper_mode')" :desc="$t('settings.wallpaper_mode_desc')">
     <div w-full flex rounded="$bew-radius" bg="$bew-fill-1" p-1>
       <div
         flex-1 py-1 cursor-pointer text-center rounded="$bew-radius"
@@ -133,9 +133,9 @@ function changeWallpaper(url: string) {
         {{ $t('settings.wallpaper_mode_opt.by_url') }}
       </div>
     </div>
-  </SettingItem>
+  </SettingsItem>
 
-  <SettingItem v-if="settings.wallpaperMode === 'buildIn'" :title="$t('settings.choose_ur_wallpaper')" next-line>
+  <SettingsItem v-if="settings.wallpaperMode === 'buildIn'" :title="$t('settings.choose_ur_wallpaper')" next-line>
     <div grid="~ xl:cols-4 lg:cols-3 cols-2  gap-4">
       <picture
         aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
@@ -157,8 +157,8 @@ function changeWallpaper(url: string) {
         </picture>
       </Tooltip>
     </div>
-  </SettingItem>
-  <SettingItem v-else :title="$t('settings.image_url')" next-line>
+  </SettingsItem>
+  <SettingsItem v-else :title="$t('settings.image_url')" next-line>
     <div flex items-center gap-4>
       <picture
         aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
@@ -174,24 +174,24 @@ function changeWallpaper(url: string) {
         </p>
       </div>
     </div>
-  </SettingItem>
+  </SettingsItem>
 
-  <SettingItem :title="$t('settings.enable_wallpaper_masking')">
+  <SettingsItem :title="$t('settings.enable_wallpaper_masking')">
     <template #desc>
       <span color="$bew-warning-color">{{ $t('common.performance_impact_warn') }}</span>
     </template>
 
     <Radio v-model="settings.enableWallpaperMasking" />
-  </SettingItem>
-  <SettingItem v-if="settings.enableWallpaperMasking" :title="$t('settings.wallpaper_mask_opacity')">
+  </SettingsItem>
+  <SettingsItem v-if="settings.enableWallpaperMasking" :title="$t('settings.wallpaper_mask_opacity')">
     <Slider v-model="settings.wallpaperMaskOpacity" :label="`${settings.wallpaperMaskOpacity}%`" />
-  </SettingItem>
-  <SettingItem v-if="settings.enableWallpaperMasking" :title="$t('settings.wallpaper_blur_intensity')">
+  </SettingsItem>
+  <SettingsItem v-if="settings.enableWallpaperMasking" :title="$t('settings.wallpaper_blur_intensity')">
     <template #desc>
       <span color="$bew-warning-color">{{ $t('common.performance_impact_warn') }}</span>
     </template>
     <Slider v-model="settings.wallpaperBlurIntensity" :min="0" :max="60" :label="`${settings.wallpaperBlurIntensity}px`" />
-  </SettingItem>
+  </SettingsItem>
 </template>
 
 <style lang="scss" scoped>

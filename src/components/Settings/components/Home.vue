@@ -18,7 +18,7 @@ function handleRevoke() {
 </script>
 
 <template>
-  <SettingItem :title="$t('settings.recommendation_mode')" :desc="$t('settings.recommendation_mode_desc')">
+  <SettingsItem :title="$t('settings.recommendation_mode')" :desc="$t('settings.recommendation_mode_desc')">
     <div w-full flex rounded="$bew-radius" bg="$bew-fill-1" p-1>
       <div
         flex-1 py-1 cursor-pointer text-center rounded="$bew-radius"
@@ -41,9 +41,9 @@ function handleRevoke() {
         App
       </div>
     </div>
-  </SettingItem>
+  </SettingsItem>
 
-  <SettingItem v-if="settings.recommendationMode === 'app'" :title="$t('settings.authorize_app')">
+  <SettingsItem v-if="settings.recommendationMode === 'app'" :title="$t('settings.authorize_app')">
     <template #desc>
       {{ $t('settings.authorize_app_desc') }}
       <br>
@@ -69,11 +69,19 @@ function handleRevoke() {
         <span>{{ $t('settings.btn.revoke') }}</span>
       </button>
     </div>
-  </SettingItem>
+  </SettingsItem>
 
-  <SettingItem title="Use search page mode on homepage">
+  <SettingsItem title="Use search page mode on homepage">
     <Radio v-model="settings.useSearchPageModeOnHomePage" />
-  </SettingItem>
+  </SettingsItem>
+  <SettingsItem title="Settings shared with the search page">
+    <template #desc>
+      <span color="$bew-warning-color">Those settings are used in common with the search page</span>
+    </template>
+    <Button type="secondary" block center>
+      Open Settings...
+    </Button>
+  </SettingsItem>
 </template>
 
 <style lang="scss" scoped>

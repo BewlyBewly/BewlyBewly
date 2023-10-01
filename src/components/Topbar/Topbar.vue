@@ -7,9 +7,9 @@ import { getUserID } from '~/utils/main'
 import { settings } from '~/logic'
 
 interface Props {
-  showSearchBar: boolean
-  showTopbarMask: boolean
-  showLogo: boolean
+  showSearchBar?: boolean
+  showTopbarMask?: boolean
+  showLogo?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {

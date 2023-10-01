@@ -537,7 +537,7 @@ function handleAdaptToOtherPageStylesChange() {
           </div>
 
           <Transition name="fade">
-            <Component :is="pages[activatedPage]" :key="dynamicComponentKey" absolute w-full />
+            <Component :is="pages[activatedPage]" :key="dynamicComponentKey" :style="{ position: 'absolute', width: '100%' }" />
           </Transition>
         </main>
       </div>

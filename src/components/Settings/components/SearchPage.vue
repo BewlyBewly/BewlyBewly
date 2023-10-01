@@ -51,7 +51,7 @@ function changeWallpaper(url: string) {
 </script>
 
 <template>
-  <SettingItem :title="$t('settings.logo_color')">
+  <SettingsItem :title="$t('settings.logo_color')">
     <div w-full flex rounded="$bew-radius" bg="$bew-fill-1" p-1>
       <div
         flex="1 ~" items-center justify-center py-1 cursor-pointer text-center rounded="$bew-radius"
@@ -74,29 +74,29 @@ function changeWallpaper(url: string) {
         {{ $t('settings.logo_color_opt.white') }}
       </div>
     </div>
-  </SettingItem>
+  </SettingsItem>
 
-  <SettingItem :title="$t('settings.enable_logo_glowing_effect')">
+  <SettingsItem :title="$t('settings.enable_logo_glowing_effect')">
     <Radio v-model="settings.searchPageLogoGlow" />
-  </SettingItem>
+  </SettingsItem>
 
-  <SettingItem :title="$t('settings.logo_visibility')">
+  <SettingsItem :title="$t('settings.logo_visibility')">
     <Radio v-model="settings.searchPageShowLogo" />
-  </SettingItem>
+  </SettingsItem>
 
-  <SettingItem :title="$t('settings.bg_darkens_when_the_search_bar_is_focused')">
+  <SettingsItem :title="$t('settings.bg_darkens_when_the_search_bar_is_focused')">
     <Radio v-model="settings.searchPageDarkenOnSearchFocus" />
-  </SettingItem>
+  </SettingsItem>
 
-  <SettingItem :title="$t('settings.bg_blurs_when_the_search_bar_is_focused')">
+  <SettingsItem :title="$t('settings.bg_blurs_when_the_search_bar_is_focused')">
     <template #desc>
       <span color="$bew-warning-color">{{ $t('common.performance_impact_warn') }}</span>
     </template>
 
     <Radio v-model="settings.searchPageBlurredOnSearchFocus" />
-  </SettingItem>
+  </SettingsItem>
 
-  <SettingItem :title="$t('settings.choose_search_bar_focused_character')" next-line>
+  <SettingsItem :title="$t('settings.choose_search_bar_focused_character')" next-line>
     <div grid="~ xl:cols-8 lg:cols-6 cols-5 gap-4">
       <picture
         aspect-square bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
@@ -138,17 +138,17 @@ function changeWallpaper(url: string) {
         </p>
       </div>
     </div> -->
-  </SettingItem>
+  </SettingsItem>
 
-  <SettingItem :title="$t('settings.individually_set_search_page_wallpaper')">
+  <SettingsItem :title="$t('settings.individually_set_search_page_wallpaper')">
     <template #desc>
       <span color="$bew-warning-color">{{ $t('common.performance_impact_warn') }}</span>
     </template>
 
     <Radio v-model="settings.individuallySetSearchPageWallpaper" />
-  </SettingItem>
+  </SettingsItem>
   <template v-if="settings.individuallySetSearchPageWallpaper">
-    <SettingItem :title="$t('settings.wallpaper_mode')" :desc="$t('settings.wallpaper_mode_desc')">
+    <SettingsItem :title="$t('settings.wallpaper_mode')" :desc="$t('settings.wallpaper_mode_desc')">
       <div w-full flex rounded="$bew-radius" bg="$bew-fill-1" p-1>
         <div
           flex-1 py-1 cursor-pointer text-center rounded="$bew-radius"
@@ -171,9 +171,9 @@ function changeWallpaper(url: string) {
           {{ $t('settings.wallpaper_mode_opt.by_url') }}
         </div>
       </div>
-    </SettingItem>
+    </SettingsItem>
 
-    <SettingItem v-if="settings.searchPageWallpaperMode === 'buildIn'" :title="$t('settings.choose_ur_wallpaper')" next-line>
+    <SettingsItem v-if="settings.searchPageWallpaperMode === 'buildIn'" :title="$t('settings.choose_ur_wallpaper')" next-line>
       <div grid="~ xl:cols-4 lg:cols-3 cols-2  gap-4">
         <picture
           aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
@@ -195,8 +195,8 @@ function changeWallpaper(url: string) {
           </picture>
         </Tooltip>
       </div>
-    </SettingItem>
-    <SettingItem v-else :title="$t('settings.image_url')" next-line>
+    </SettingsItem>
+    <SettingsItem v-else :title="$t('settings.image_url')" next-line>
       <div flex items-center gap-4>
         <picture
           aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
@@ -212,24 +212,24 @@ function changeWallpaper(url: string) {
           </p>
         </div>
       </div>
-    </SettingItem>
+    </SettingsItem>
 
-    <SettingItem :title="$t('settings.enable_wallpaper_masking')">
+    <SettingsItem :title="$t('settings.enable_wallpaper_masking')">
       <template #desc>
         <span color="$bew-warning-color">{{ $t('common.performance_impact_warn') }}</span>
       </template>
 
       <Radio v-model="settings.searchPageEnableWallpaperMasking" />
-    </SettingItem>
-    <SettingItem v-if="settings.searchPageEnableWallpaperMasking" :title="$t('settings.wallpaper_mask_opacity')">
+    </SettingsItem>
+    <SettingsItem v-if="settings.searchPageEnableWallpaperMasking" :title="$t('settings.wallpaper_mask_opacity')">
       <Slider v-model="settings.searchPageWallpaperMaskOpacity" :label="`${settings.searchPageWallpaperMaskOpacity ?? 0}%`" />
-    </SettingItem>
-    <SettingItem v-if="settings.searchPageEnableWallpaperMasking" :title="$t('settings.wallpaper_blur_intensity')">
+    </SettingsItem>
+    <SettingsItem v-if="settings.searchPageEnableWallpaperMasking" :title="$t('settings.wallpaper_blur_intensity')">
       <template #desc>
         <span color="$bew-warning-color">{{ $t('common.performance_impact_warn') }}</span>
       </template>
       <Slider v-model="settings.searchPageWallpaperBlurIntensity" :min="0" :max="60" :label="`${settings.searchPageWallpaperBlurIntensity ?? 0}px`" />
-    </SettingItem>
+    </SettingsItem>
   </template>
 </template>
 
