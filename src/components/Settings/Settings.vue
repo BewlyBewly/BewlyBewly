@@ -125,7 +125,7 @@ function setCurrentTitle() {
         z-1 rounded="t-$bew-radius"
         style="
           background: linear-gradient(var(--bew-elevated-solid-1), transparent);
-          text-shadow: 0 0 15px var(--bew-elevated-solid-1)
+          text-shadow: 0 0 15px var(--bew-elevated-solid-1), 0 0 20px var(--bew-elevated-solid-1)
         "
       >
         <div text="3xl">
