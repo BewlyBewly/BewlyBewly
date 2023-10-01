@@ -29,10 +29,9 @@
         pointer-events: none;
       }
     }
-
-    &.dark & + .container::after {
-      display: none;
-    }
+  }
+  &.dark #message-navbar + .container::after {
+    display: none;
   }
 
   #link-message-container {
