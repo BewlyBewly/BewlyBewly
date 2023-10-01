@@ -3,7 +3,9 @@ common:
   loading: 加载中...
   undo: 还原
   view: '{count}次'
+  viewWithoutNum: 次
   danmaku: '{count} 弹幕'
+  danmakuWithoutNum: 弹幕
   year: 年前
   month: 个月前
   week: 个星期前

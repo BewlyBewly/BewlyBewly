@@ -1,7 +1,7 @@
 import browser from 'webextension-polyfill'
 
 function handleMessage(message: any) {
-// #region APP端api，遺棄
+  // #region APP端api，遺棄
   /** Recommend Videos */
   // if (message.contentScriptQuery === 'getRecommendVideos') {
   //   // https://github.com/indefined/UserScripts/blob/master/bilibiliHome/bilibiliHome.API.md#%E8%8E%B7%E5%8F%96%E9%A6%96%E9%A1%B5%E5%86%85%E5%AE%B9
@@ -62,8 +62,8 @@ function handleMessage(message: any) {
       .catch(error => console.error(error))
   }
   else if (message.contentScriptQuery === 'getAppRecommendVideos') {
-    const url = `https://app.bilibili.com/x/feed/index?build=1&idx=${message.idx}&appkey=27eb53fc9058f8c3&access_key=${message.accessKey}`
-    // const url = `https://app.bilibili.com/x/v2/feed/index?build=72100100&idx=${message.idx}&appkey=27eb53fc9058f8c3&access_key=${message.accessKey}`
+    // const url = `https://app.bilibili.com/x/feed/index?build=1&idx=${message.idx}&appkey=27eb53fc9058f8c3&access_key=${message.accessKey}`
+    const url = `https://app.bilibili.com/x/v2/feed/index?build=74800100&device=pad&mobi_app=iphone&c_locate=${message.cLocate}&s_locale=${message.sLocale}&idx=${message.idx}&appkey=27eb53fc9058f8c3&access_key=${message.accessKey}`
     return fetch(url)
       .then(response => response.json())
       .then(data => data)
@@ -71,7 +71,9 @@ function handleMessage(message: any) {
   }
   // https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/video/info.md#%E8%8E%B7%E5%8F%96%E8%A7%86%E9%A2%91%E8%B6%85%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AFweb%E7%AB%AF
   else if (message.contentScriptQuery === 'getVideoInfo') {
-    const url = `https://api.bilibili.com/x/web-interface/view/detail?${message.aid ? `aid=${message.aid}` : `bvid=${message.bvid}`}`
+    const url = `https://api.bilibili.com/x/web-interface/view/detail?${
+      message.aid ? `aid=${message.aid}` : `bvid=${message.bvid}`
+    }`
     return fetch(url)
       .then(response => response.json())
       .then(data => data)
@@ -79,7 +81,11 @@ function handleMessage(message: any) {
   }
   // https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/comment/list.md#%E8%8E%B7%E5%8F%96%E8%AF%84%E8%AE%BA%E5%8C%BA%E6%98%8E%E7%BB%86_%E7%BF%BB%E9%A1%B5%E5%8A%A0%E8%BD%BD
   else if (message.contentScriptQuery === 'getVideoComments') {
-    const url = `https://api.bilibili.com/x/v2/reply?csrf=${message.csrf}&type=1&oid=${message.oid}&sort=${message.sort ?? 0}&nohot=${message.nohot ?? 0}&pn=${message.pn ?? 1}&ps=${message.ps ?? 20}`
+    const url = `https://api.bilibili.com/x/v2/reply?csrf=${
+      message.csrf
+    }&type=1&oid=${message.oid}&sort=${message.sort ?? 0}&nohot=${
+      message.nohot ?? 0
+    }&pn=${message.pn ?? 1}&ps=${message.ps ?? 20}`
     return fetch(url)
       .then(response => response.json())
       .then(data => data)

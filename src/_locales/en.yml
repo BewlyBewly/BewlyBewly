@@ -3,7 +3,9 @@ common:
   loading: Loading...
   undo: UNDO
   view: no view | {count} view | {count} views
+  viewWithoutNum: views
   danmaku: no danmaku | {count} danmaku | {count} danmakus
+  danmakuWithoutNum: danmakus
   year: year ago | years ago
   month: month ago | months ago
   week: week ago | weeks ago

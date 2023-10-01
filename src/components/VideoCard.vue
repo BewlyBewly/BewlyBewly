@@ -5,14 +5,18 @@ import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils/dataFormat
 const props = defineProps<{
   id: number
   duration?: number
+  durationStr?: string
   title: string
   cover: string
   author?: string
   authorFace?: string
   mid?: number
   view?: number
+  viewStr?: string
   danmaku?: number
+  danmakuStr?: string
   publishedTimestamp?: number
+  capsuleText?: string
   bvid?: string
   aid?: number
   isFollowed?: boolean
@@ -185,7 +189,7 @@ function handelMouseLeave() {
         >
           <!-- Video duration -->
           <div
-            v-if="duration"
+            v-if="duration || durationStr"
             pos="absolute bottom-0 right-0"
             z="2"
             p="x-2 y-1"
@@ -194,7 +198,7 @@ function handelMouseLeave() {
             text="!white xs"
             bg="black opacity-60"
           >
-            {{ calcCurrentTime(duration) }}
+            {{ duration ? calcCurrentTime(duration) : durationStr }}
           </div>
 
           <div pos="absolute top-0 left-0" z-2>
@@ -334,15 +338,17 @@ function handelMouseLeave() {
               {{ author }}
             </div>
             <div class="video-info" text="base $bew-text-2">
-              <span v-if="view">{{
-                $t('common.view', { count: numFormatter(view) }, view)
+              <span v-if="view || viewStr">{{
+                view ? $t('common.view', { count: numFormatter(view) }, view) : `${viewStr}${$t('common.viewWithoutNum')}`
               }}</span>
-              <template v-if="danmaku">
+              <template v-if="danmaku || danmakuStr">
                 <span text-xs font-light mx-1>•</span>
-                <span>{{ $t('common.danmaku', { count: numFormatter(danmaku) }, danmaku) }}</span>
+                <span>{{ danmaku ? $t('common.danmaku', { count: numFormatter(danmaku) }, danmaku) : `${danmakuStr}${$t('common.danmakuWithoutNum')}` }}</span>
               </template>
               <br>
-              <span v-if="publishedTimestamp" text="$bew-text-3 sm" inline-block mt-2 p="x-2 y-1" bg="$bew-fill-1" rounded-4>{{ calcTimeSince(publishedTimestamp * 1000) }}</span>
+              <span v-if="publishedTimestamp || capsuleText" text="$bew-text-3 sm" inline-block mt-2 p="x-2 y-1" bg="$bew-fill-1" rounded-4>
+                {{ publishedTimestamp ? calcTimeSince(publishedTimestamp * 1000) : capsuleText }}
+              </span>
             </div>
           </div>
         </div>

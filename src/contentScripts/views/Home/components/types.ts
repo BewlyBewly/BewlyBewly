@@ -20,39 +20,87 @@ export interface VideoModel {
 }
 
 export interface AppVideoModel {
-  title: string
-  cover: string
-  uri: string
-  param: string
+  card_type: string
+  card_goto: string
   goto: string
-  desc: string
-  play: number
-  danmaku: number
-  reply: number
-  favorite: number
-  coin: number
-  share: number
-  like: number
-  duration: number
-  rcmd_reason: {
-    id: number
-    content: string
-    message: string
+  param: string
+  bvid: string
+  cover: string
+  title: string
+  uri: string
+  three_point: {
+    dislike_reasons: {
+      id: number
+      name: string
+      toast: string
+    }[]
+
+    feedbacks: {
+      id: number
+      name: string
+      toast: string
+    }[]
+
+    watch_later: number
+  }
+  args: {
+    up_id: number
+    up_name: string
+    rid: number
+    rname: string
+    aid: number
+  }
+  player_args: {
+    aid: number
+    cid: number
+    type: string
+    duration: number
   }
   idx: number
-  cid: number
-  tid: number
-  tname: string
-  tag: {
-    tag_id: number
-    tag_name: string
+  mask: {
+    avatar: {
+      cover: string
+      text: string
+      uri: string
+      event: string
+      event_v2: string
+      up_id: number
+    }
+    button: {
+      text: string
+      param: string
+      event: string
+      type: number
+      event_v2: string
+    }
   }
-  dislike_reasons: { reason_id: number; reason_name: string }[]
-  ctime: number
-  autoplay: number
-  mid: number
-  name: string
-  face: string
-  is_atten: number
-  autoplay_card: number
+  three_point_v2: {
+    title: string
+    icon?: string
+    subtitle: string
+    reasons: {
+      id: number
+      name: string
+      toast: string
+    }[]
+
+    type: string
+  }[]
+
+  track_id: string
+  report_flow_data: string
+  avatar: {
+    cover: string
+    uri: string
+    event: string
+    event_v2: string
+    up_id: number
+  }
+  cover_left_text_1: string
+  cover_left_text_2: string
+  desc: string
+  can_play: number
+  cover_right_text: string
+  cover_left_icon_1: number
+  cover_left_icon_2: number
 }

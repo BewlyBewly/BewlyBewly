@@ -3,6 +3,7 @@ import type { Ref } from 'vue'
 import type { AppVideoModel, VideoModel } from './types'
 import emitter from '~/utils/mitt'
 import { accessKey, settings } from '~/logic'
+import { LanguageType } from '~/enums/appEnums'
 
 const videoList = reactive<VideoModel[]>([])
 const appVideoList = reactive<AppVideoModel[]>([])
@@ -94,14 +95,18 @@ async function getAppRecommendVideos() {
     const response = await browser.runtime.sendMessage({
       contentScriptQuery: 'getAppRecommendVideos',
       accessKey: accessKey.value,
+      sLocale: settings.value.language !== LanguageType.Mandarin_CN ? 'zh-Hant_TW' : 'zh-Hans_CN',
+      cLocale: settings.value.language !== LanguageType.Mandarin_CN ? 'zh-Hant_TW' : 'zh-Hans_CN',
       idx: 1,
     })
 
     if (response.code === 0) {
       const resData = [] as AppVideoModel[]
 
-      response.data.forEach((item: AppVideoModel) => {
-        resData.push(item)
+      response.data.items.forEach((item: AppVideoModel) => {
+        // Remove banner & ad cards
+        if (!item.card_type.includes('banner') && item.card_type !== 'cm_v1')
+          resData.push(item)
       })
 
       // when videoList has length property, it means it is the first time to load
@@ -159,19 +164,19 @@ function jumpToLoginPage() {
       </template>
       <template v-else>
         <VideoCard
-          v-for="(video, index) in appVideoList"
-          :id="Number(video.param)"
-          :key="Number(video.param)"
-          :duration="video.duration"
+          v-for="video in appVideoList"
+          :id="video.args.aid"
+          :key="video.args.aid"
+          :duration-str="video.cover_right_text"
           :title="video.title"
           :cover="video.cover"
-          :author="video.name"
-          :author-face="video.face"
-          :mid="video.mid"
-          :view="video.play"
-          :danmaku="video.danmaku"
-          :published-timestamp="video.ctime"
-          :aid="Number(video.param)"
+          :author="video.mask.avatar.text"
+          :author-face="video.mask.avatar.cover"
+          :mid="video.mask.avatar.up_id"
+          :capsule-text="video.desc.split('·')[1]"
+          :bvid="video.bvid"
+          :view-str="video.cover_left_text_1"
+          :danmaku-str="video.cover_left_text_2"
         />
       </template>
 
