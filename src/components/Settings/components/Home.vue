@@ -1,12 +1,14 @@
 <script lang="ts" setup>
 import type { Ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import SearchPage from './SearchPage.vue'
 import { grantAccessKey, revokeAccessKey } from '~/utils/authProvider'
 import { accessKey, settings } from '~/logic'
 
 const { t } = useI18n()
 
 const authorizeBtn = ref<HTMLButtonElement>() as Ref<HTMLButtonElement>
+const showSearchPageModeSharedSettings = ref<boolean>(false)
 
 function handleAuthorize() {
   grantAccessKey(t, authorizeBtn.value)
@@ -81,9 +83,21 @@ function handleRevoke() {
       <template #desc>
         <span color="$bew-warning-color">Those settings are used in common with the search page</span>
       </template>
-      <Button type="secondary" block center>
+      <Button type="secondary" block center @click="showSearchPageModeSharedSettings = true">
         Open Settings...
       </Button>
+
+      <ChildSettingsDialog
+        v-if="showSearchPageModeSharedSettings"
+        title="Settings shared with the search page"
+        @close="showSearchPageModeSharedSettings = false"
+      >
+        <template #desc>
+          <span color="$bew-warning-color">Those settings are used in common with the search page</span>
+        </template>
+
+        <SearchPage />
+      </ChildSettingsDialog>
     </SettingsItem>
   </SettingsItemGroup>
 </template>
