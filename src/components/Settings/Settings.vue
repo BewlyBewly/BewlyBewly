@@ -84,7 +84,7 @@ function setCurrentTitle() {
   <div class="fixed w-full h-full top-0 left-0" z="9998" opacity-60 :style="{ backgroundColor: isHomePage ? '' : 'var(--bew-bg)' }" @click="handleClose" />
 
   <div
-    id="settings-window" pos="fixed top-1/2 left-1/2" w="85%" h="80%"
+    id="settings-window" pos="fixed top-1/2 left-1/2" w="90%" h="90%"
     max-w-900px max-h-800px transform="~ translate-x--1/2 translate-y--1/2"
     z-9999 flex justify-between items-center
   >
@@ -140,7 +140,7 @@ function setCurrentTitle() {
         </div>
       </header>
 
-      <main relative h-full py-8 p="x-12" overflow-y-scroll>
+      <main relative h-full py-8 p="x-12" overflow-y-overlay>
         <!-- <header
           flex justify-between items-center w-full h-60px
           pos="fixed top-0 left-0"
@@ -158,7 +158,7 @@ function setCurrentTitle() {
           </div>
         </header> -->
 
-        <div h-60px />
+        <div h-80px mt--8 />
 
         <Component :is="settingsMenu[activatedMenuItem]" />
       </main>

@@ -30,6 +30,15 @@ settings:
   menu_search_page: 搵嘢頁
   menu_about: 關於
 
+  # Settings group
+  group_common: 通用
+  group_color: 顏色
+  group_wallpaper: 背景圖片
+  group_logo: LOGO
+  group_search_bar: 搜尋欄
+  group_recommendation_mode: 推介模式
+  group_search_page_mode: 搵嘢頁模式
+
   # General settings
   select_language: 介面語文
   select_language_opt:
@@ -38,18 +47,8 @@ settings:
     mandarin_tw: 官話
     jyut: 廣東話
   startup_page: 開始頁面
-  recommendation_mode: 推介模式
-  recommendation_mode_desc: >
-    若然你想用手機版嘅推介演算法，就要俾 BewlyBewly 批准使用存取 access key。
-  authorize_app: 授權 BewlyBewly 使用 access key
-  authorize_app_desc: |
-    授咗權嘅話，你就會收到基於 bilibili 手機版推介演算法所推介嘅內容，兼且授權 key 只有約一個月有效期，到期後記得要重新授權嚟取得存取 access key。
-  authorize_app_more_info_access_key: 關於 access key
   topbar_visibility: 頂欄可視性
   topbar_visibility_desc: 用於兼容 Bilibili Evolved 客製化頂欄
-  btn:
-    authorize: 授權
-    revoke: 解除授權
   chk_box:
     show: 擺出嚟
     hidden: 收埋
@@ -81,8 +80,8 @@ settings:
   choose_ur_wallpaper: 揀張背景
   image_url: 圖片 URL
   image_url_hint: |-
-   URL 示例: https://pic.imgdb.cn/item/638e1d63b1fccdcd36103811.jpg
-   https://pic.imgdb.cn/item/638e1d7ab1fccdcd36106346.jpg
+    URL 示例: https://pic.imgdb.cn/item/638e1d63b1fccdcd36103811.jpg
+    https://pic.imgdb.cn/item/638e1d7ab1fccdcd36106346.jpg
   enable_wallpaper_masking: 使用背景遮蔽效果
   wallpaper_mask_opacity: 背景遮蔽透明度調節
   wallpaper_blur_intensity: 背景模糊強度調節
@@ -98,10 +97,23 @@ settings:
   bg_blurs_when_the_search_bar_is_focused: 搜尋欄聚焦嗰陣校矇背景
   choose_search_bar_focused_character: 揀個喺搜尋欄聚焦嗰陣出現嘅人物
   individually_set_search_page_wallpaper: 單獨設定搵嘢頁背景
+
+  # Home settings
+  recommendation_mode: 推介模式
+  recommendation_mode_desc: >
+    若然你想用手機版嘅推介演算法，就要俾 BewlyBewly 批准使用存取 access key。
+  authorize_app: 授權 BewlyBewly 使用 access key
+  authorize_app_desc: |
+    授咗權嘅話，你就會收到基於 bilibili 手機版推介演算法所推介嘅內容，兼且授權 key 只有約一個月有效期，到期後記得要重新授權嚟取得存取 access key。
+  authorize_app_more_info_access_key: 關於 access key
+  btn:
+    authorize: 授權
+    revoke: 解除授權
+
 auth:
   err_tip: 無法授權 access key
   plz_login_first: 唔該登入 bilibili 先
-  receive_verified_url_err: 好似神神哋，試吓 refresh 個 page 之後試多次 
+  receive_verified_url_err: 好似神神哋，試吓 refresh 個 page 之後試多次
   failed_to_get_accesskey: 攞唔度 access key
 topbar:
   sign_in: 登入

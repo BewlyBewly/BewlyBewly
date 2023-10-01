@@ -7,7 +7,7 @@ defineProps<{
 
 <template>
   <div class="b-settings-item-group" mb-6>
-    <p text="base $bew-text-1" font-semibold>
+    <p text="base $bew-text-1">
       {{ title }}
     </p>
     <p v-if="desc" text="sm $bew-text-2">

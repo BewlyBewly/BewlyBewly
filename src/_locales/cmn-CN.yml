@@ -30,6 +30,15 @@ settings:
   menu_home: 首页
   menu_about: 关于
 
+  # Settings group
+  group_common: 通用
+  group_color: 颜色
+  group_wallpaper: 背景图片
+  group_logo: LOGO
+  group_search_bar: 搜索栏
+  group_recommendation_mode: 推荐模式
+  group_search_page_mode: 搜索页模式
+
   # General settings
   select_language: 界面语文
   select_language_opt:
@@ -38,18 +47,8 @@ settings:
     mandarin_tw: 官話
     jyut: 廣東話
   startup_page: 启动页
-  recommendation_mode: 推荐模式
-  recommendation_mode_desc: >
-    如果您想使用 app 端的推荐算法，请先授权 BewlyBewly 使用 access key。
-  authorize_app: 授权 BewlyBewly 使用 access key
-  authorize_app_desc: |
-    授权使用后能在首页推送 bilibili App 端算法的推荐视频，授权 key 有效期约为一个月，过后记得重新授权获取 access key。
-  authorize_app_more_info_access_key: 关于 access key 
   topbar_visibility: 顶栏可见性
   topbar_visibility_desc: 用于兼容 Bilibili Evolved 自定义顶栏
-  btn:
-    authorize: 授权
-    revoke: 取消授权
   chk_box:
     show: 显示
     hidden: 隐藏
@@ -98,6 +97,19 @@ settings:
   bg_blurs_when_the_search_bar_is_focused: 当搜索栏聚焦时背景模糊
   choose_search_bar_focused_character: 选择搜索栏聚焦时出现的人物
   individually_set_search_page_wallpaper: 单独设置搜索页背景
+
+  # Home settings
+  recommendation_mode: 推荐模式
+  recommendation_mode_desc: >
+    如果您想使用 app 端的推荐算法，请先授权 BewlyBewly 使用 access key。
+  authorize_app: 授权 BewlyBewly 使用 access key
+  authorize_app_desc: |
+    授权使用后能在首页推送 bilibili App 端算法的推荐视频，授权 key 有效期约为一个月，过后记得重新授权获取 access key。
+  authorize_app_more_info_access_key: 关于 access key
+  btn:
+    authorize: 授权
+    revoke: 取消授权
+
 auth:
   err_tip: 授权 access key 失败
   plz_login_first: 请先登录 bilibili

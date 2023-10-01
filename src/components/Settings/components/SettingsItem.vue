@@ -7,8 +7,8 @@ defineProps<{
 </script>
 
 <template>
-  <div>
-    <div flex="~ gap-4" justify-betwee items-center py-2 text-base>
+  <div class="b-settings-item">
+    <div flex="~ gap-4" justify-betwee items-center text-base>
       <div :w="nextLine ? 'full' : '5/7'">
         {{ title }}
         <br>
@@ -23,12 +23,19 @@ defineProps<{
         <slot />
       </div>
     </div>
-    <slot v-if="nextLine" />
+
+    <div v-if="nextLine" mt-2>
+      <slot />
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 :deep(.right-content > *) {
   --at-apply: float-right clear-both;
+}
+
+.b-settings-item + .b-settings-item {
+  --at-apply: mt-4
 }
 </style>

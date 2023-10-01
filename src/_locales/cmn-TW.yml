@@ -30,6 +30,15 @@ settings:
   menu_search_page: 搜尋頁
   menu_about: 關於
 
+  # Settings group
+  group_common: 通用
+  group_color: 顏色
+  group_wallpaper: 背景圖片
+  group_logo: LOGO
+  group_search_bar: 搜尋欄
+  group_recommendation_mode: 推薦模式
+  group_search_page_mode: 搜尋頁模式
+
   # General settings
   select_language: 介面語文
   select_language_opt:
@@ -38,18 +47,8 @@ settings:
     mandarin_tw: 官話
     jyut: 廣東話
   startup_page: 起始頁面
-  recommendation_mode: 推薦模式
-  recommendation_mode_desc: >
-    如果您想要使用手機端的推薦演算法，請先授權 BewlyBewly 使用 access key。
-  authorize_app: 授權 BewlyBewly 使用 access key
-  authorize_app_desc: |
-    授權使用後能在首頁推送 bilibili 手機端推介演算法的影片，授權 key 的有效期約爲一個月，過了有效期後，請記得重新取得授權以取得 access key。
-  authorize_app_more_info_access_key: 關於 access key
   topbar_visibility: 頂欄可視性
   topbar_visibility_desc: 用於相容 Bilibili Evolved 自訂頂欄
-  btn:
-    authorize: 授權
-    revoke: 解除授權
   chk_box:
     show: 顯示
     hidden: 隱藏
@@ -98,6 +97,18 @@ settings:
   bg_blurs_when_the_search_bar_is_focused: 當搜尋欄聚焦時背景變模糊
   choose_search_bar_focused_character: 選擇搜尋欄聚焦時出現的人物
   individually_set_search_page_wallpaper: 單獨設定搜尋頁背景
+
+  # Home settings
+  recommendation_mode: 推薦模式
+  recommendation_mode_desc: >
+    如果您想要使用手機端的推薦演算法，請先授權 BewlyBewly 使用 access key。
+  authorize_app: 授權 BewlyBewly 使用 access key
+  authorize_app_desc: |
+    授權使用後能在首頁推送 bilibili 手機端推介演算法的影片，授權 key 的有效期約爲一個月，過了有效期後，請記得重新取得授權以取得 access key。
+  authorize_app_more_info_access_key: 關於 access key
+  btn:
+    authorize: 授權
+    revoke: 解除授權
 
 auth:
   err_tip: 無法授權 access key

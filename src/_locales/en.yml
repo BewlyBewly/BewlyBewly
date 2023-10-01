@@ -30,6 +30,15 @@ settings:
   menu_home: Home
   menu_about: About
 
+  # Settings group
+  group_common: Common
+  group_color: Color
+  group_wallpaper: Wallpaper
+  group_logo: LOGO
+  group_search_bar: Search Bar
+  group_recommendation_mode: Recommendation Mode
+  group_search_page_mode: Search Page Mode
+
   # General settings
   select_language: Language
   select_language_opt:
@@ -38,19 +47,8 @@ settings:
     mandarin_tw: Mandarin - Traditional Chinese
     jyut: Cantonese
   startup_page: Startup page
-  recommendation_mode: Recommendation mode
-  recommendation_mode_desc: >
-    If you want to use the recommendation algorithm on the app, please ensure that you authorize the BewlyBewly to use the access key first.
-  authorize_app: Authorize the BewlyBewly to use the access key
-  authorize_app_desc: >
-    After authentication, you will receive the video recommendations based on the bilibili app recommendation algorithm.
-    The access key is valid for about one month. After that, remember to re-authorize the BewlyBewly to use the access key.
-  authorize_app_more_info_access_key: More information about the access key 
   topbar_visibility: Topbar visibility
   topbar_visibility_desc: Compatible with Bilibili Evolved customize topbar
-  btn:
-    authorize: Authorize
-    revoke: Revoke
   chk_box:
     show: Show
     hidden: Hidden
@@ -82,8 +80,8 @@ settings:
   choose_ur_wallpaper: Choose your wallpaper
   image_url: Image URL
   image_url_hint: |-
-   URL examples: https://pic.imgdb.cn/item/638e1d63b1fccdcd36103811.jpg
-   https://pic.imgdb.cn/item/638e1d7ab1fccdcd36106346.jpg
+    URL examples: https://pic.imgdb.cn/item/638e1d63b1fccdcd36103811.jpg
+    https://pic.imgdb.cn/item/638e1d7ab1fccdcd36106346.jpg
   enable_wallpaper_masking: Enable wallpaper masking
   wallpaper_mask_opacity: Wallpaper masking opacity
   wallpaper_blur_intensity: Wallpaper blur intensity
@@ -99,6 +97,20 @@ settings:
   bg_blurs_when_the_search_bar_is_focused: Background blurs when the search bar is focused
   choose_search_bar_focused_character: Choose the character that appears when the search bar is focused
   individually_set_search_page_wallpaper: Individually set search page wallpaper
+
+  # Home settings
+  recommendation_mode: Recommendation mode
+  recommendation_mode_desc: >
+    If you want to use the recommendation algorithm on the app, please ensure that you authorize the BewlyBewly to use the access key first.
+  authorize_app: Authorize the BewlyBewly to use the access key
+  authorize_app_desc: >
+    After authentication, you will receive the video recommendations based on the bilibili app recommendation algorithm.
+    The access key is valid for about one month. After that, remember to re-authorize the BewlyBewly to use the access key.
+  authorize_app_more_info_access_key: More information about the access key
+  btn:
+    authorize: Authorize
+    revoke: Revoke
+
 auth:
   err_tip: Failed to grant access key
   plz_login_first: Please login to bilibili first
@@ -236,4 +248,3 @@ watch_later:
   remove_watched_videos_confirm: |-
     Remove watched videos?
     This operation cannot be reversed. Are you sure you want to remove watched videos?
-  
