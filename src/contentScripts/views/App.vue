@@ -502,13 +502,13 @@ function handleAdaptToOtherPageStylesChange() {
         <aside v-else pos="fixed top-0 right-6px" h-full flex items-center z-10 pointer-events-none>
           <div flex="~ gap-2 col" pointer-events-auto>
             <Tooltip :content="currentAppColorScheme === 'dark' ? $t('dock.dark_mode') : $t('dock.light_mode')" placement="left">
-              <Button size="small" round shadow="$bew-shadow-1" w-45px h-45px @click="toggleDark()">
+              <Button size="small" round shadow="$bew-shadow-1" w-45px important-h-45px @click="toggleDark()">
                 <tabler:moon-stars v-if="currentAppColorScheme === 'dark'" text-xl shrink-0 lh-0 />
                 <tabler:sun v-else text-xl shrink-0 lh-0 />
               </Button>
             </Tooltip>
             <Tooltip :content="$t('dock.settings')" placement="left">
-              <Button size="small" round shadow="$bew-shadow-1" w-45px h-45px @click="toggleSettings">
+              <Button size="small" round shadow="$bew-shadow-1" w-45px important-h-45px @click="toggleSettings">
                 <tabler:settings text-xl shrink-0 lh-0 />
               </Button>
             </Tooltip>
@@ -529,7 +529,7 @@ function handleAdaptToOtherPageStylesChange() {
             <Button
               v-if="!showTopbarMask"
               size="small"
-              frosted-glass shadow="$bew-shadow-1" w-45px h-45px
+              frosted-glass shadow="$bew-shadow-1" w-45px important-h-45px
               @click="handleRefresh"
             >
               <tabler:refresh text-lg shrink-0 />
@@ -538,7 +538,7 @@ function handleAdaptToOtherPageStylesChange() {
             <Button
               v-else
               size="small"
-              frosted-glass shadow="$bew-shadow-1" w-45px h-45px mt-2
+              frosted-glass shadow="$bew-shadow-1" w-45px important-h-45px mt-2
               @click="handleBackToTop"
             >
               <tabler:arrow-big-up text-lg shrink-0 />
