@@ -12,10 +12,10 @@ function handleClose() {
 </script>
 
 <template>
-  <div pos="absolute top-0 left-0" w-full h-full bg="black opacity-60" z-1 @click="handleClose" />
+  <div pos="fixed top-0 left-0" w-full h-full bg="black opacity-20 dark:opacity-40" rounded="$bew-radius" z-1 />
   <div
-    pos="absolute top-1/2 left-1/2" bg="$bew-elevated-1" backdrop-glass w="90%" h="85%" rounded="$bew-radius"
-    transform="translate--1/2" z-2 overflow-hidden shadow="$bew-shadow-3"
+    pos="absolute top-1/2 left-1/2" bg="$bew-elevated-solid-1" w="90%" h="85%" rounded="$bew-radius"
+    transform="translate--1/2" z-2 shadow="$bew-shadow-3" overflow-hidden
   >
     <header
       pos="fixed top-0 left-0" w-full h-80px px-8 flex items-center justify-between

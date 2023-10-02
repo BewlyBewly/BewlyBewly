@@ -15,6 +15,9 @@ const { t } = useI18n()
 const settingsMenu = { General, Appearance, SearchPage, Home, About }
 const activatedMenuItem = ref<MenuType>(MenuType.General)
 const title = ref<string>(t('settings.title'))
+const preventCloseSettings = ref<boolean>(false)
+
+provide('preventCloseSettings', preventCloseSettings)
 
 const settingsMenuItems = computed(() => {
   return [
@@ -64,6 +67,8 @@ onMounted(() => {
 })
 
 function handleClose() {
+  if (preventCloseSettings.value)
+    return
   emit('close')
 }
 
@@ -88,12 +93,20 @@ function setCurrentTitle() {
     max-w-900px max-h-800px transform="~ translate-x--1/2 translate-y--1/2"
     z-9999 flex justify-between items-center
   >
-    <aside class="group" shrink-0 p="x-4" pos="absolute left--42px" z-2>
+    <aside
+      class="group" shrink-0 p="x-4" pos="absolute left--42px" z-2
+      :style="{
+        pointerEvents: preventCloseSettings ? 'none' : ''
+      }"
+    >
       <ul
         flex="~ gap-2 col" rounded="30px hover:25px" bg="$bew-elevated-2" p-2 shadow="$bew-shadow-3"
-        scale="group-hover:105" duration-300
+        scale="group-hover:105" duration-300 overflow-hidden
         backdrop-glass
       >
+        <!-- mask -->
+        <div v-if="preventCloseSettings" pos="absolute top-0 left-0" w-full h-full bg="black opacity-20 dark:opacity-40" />
+
         <li v-for="item in settingsMenuItems" :key="item.value">
           <a
             cursor-pointer w="40px group-hover:150px" h-40px
