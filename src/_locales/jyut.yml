@@ -39,6 +39,12 @@ settings:
   group_recommendation_mode: 推介模式
   group_search_page_mode: 搵嘢頁模式
 
+  # Settings buttons
+  btn:
+    authorize: 授權
+    revoke: 解除授權
+    open_settings: 打開設定...
+
   # General settings
   select_language: 介面語文
   select_language_opt:
@@ -106,9 +112,9 @@ settings:
   authorize_app_desc: |
     授咗權嘅話，你就會收到基於 bilibili 手機版推介演算法所推介嘅內容，兼且授權 key 只有約一個月有效期，到期後記得要重新授權嚟取得存取 access key。
   authorize_app_more_info_access_key: 關於 access key
-  btn:
-    authorize: 授權
-    revoke: 解除授權
+  use_search_page_mode: 主頁使用搵嘢頁模式
+  settings_shared_with_the_search_page: 同搵嘢頁共用嘅設定
+  settings_shared_with_the_search_page_desc: 呢啲設定都同搵嘢頁共用
 
 auth:
   err_tip: 無法授權 access key

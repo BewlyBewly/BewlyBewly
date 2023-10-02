@@ -39,6 +39,12 @@ settings:
   group_recommendation_mode: 推薦模式
   group_search_page_mode: 搜尋頁模式
 
+  # Settings buttons
+  btn:
+    authorize: 授權
+    revoke: 解除授權
+    open_settings: 打開設定...
+
   # General settings
   select_language: 介面語文
   select_language_opt:
@@ -106,9 +112,9 @@ settings:
   authorize_app_desc: |
     授權使用後能在首頁推送 bilibili 手機端推介演算法的影片，授權 key 的有效期約爲一個月，過了有效期後，請記得重新取得授權以取得 access key。
   authorize_app_more_info_access_key: 關於 access key
-  btn:
-    authorize: 授權
-    revoke: 解除授權
+  use_search_page_mode: 首頁使用搜尋頁模式
+  settings_shared_with_the_search_page: 與搜尋頁共用的設定
+  settings_shared_with_the_search_page_desc: 這些設定都與搜尋頁共用
 
 auth:
   err_tip: 無法授權 access key

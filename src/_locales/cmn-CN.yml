@@ -39,6 +39,12 @@ settings:
   group_recommendation_mode: 推荐模式
   group_search_page_mode: 搜索页模式
 
+  # Settings buttons
+  btn:
+    authorize: 授权
+    revoke: 取消授权
+    open_settings: 打开设置...
+
   # General settings
   select_language: 界面语文
   select_language_opt:
@@ -106,9 +112,9 @@ settings:
   authorize_app_desc: |
     授权使用后能在首页推送 bilibili App 端算法的推荐视频，授权 key 有效期约为一个月，过后记得重新授权获取 access key。
   authorize_app_more_info_access_key: 关于 access key
-  btn:
-    authorize: 授权
-    revoke: 取消授权
+  use_search_page_mode: 首页使用搜索页模式
+  settings_shared_with_the_search_page: 与搜索页共用的配置
+  settings_shared_with_the_search_page_desc: 这些设置都与搜索页共用
 
 auth:
   err_tip: 授权 access key 失败
