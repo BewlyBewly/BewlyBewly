@@ -78,7 +78,7 @@ function handleCloseSearchPageModeSharedSettings() {
         </button>
         <button
           v-else
-          un-border="2px solid $bew-error-color" text="$bew-error-color" lh-35px rounded="$bew-radius" w-full
+          bg="$bew-fill-1" text="$bew-error-color" lh-35px rounded="$bew-radius" w-full
           @click="handleRevoke"
         >
           <span>{{ $t('settings.btn.revoke') }}</span>
@@ -88,24 +88,24 @@ function handleCloseSearchPageModeSharedSettings() {
   </SettingsItemGroup>
 
   <SettingsItemGroup :title="$t('settings.group_search_page_mode')">
-    <SettingsItem title="Use search page mode on homepage">
+    <SettingsItem :title="$t('settings.use_search_page_mode')">
       <Radio v-model="settings.useSearchPageModeOnHomePage" />
     </SettingsItem>
-    <SettingsItem title="Settings shared with the search page">
+    <SettingsItem :title="$t('settings.settings_shared_with_the_search_page')">
       <template #desc>
-        <span color="$bew-warning-color">Those settings are used in common with the search page</span>
+        <span color="$bew-warning-color">{{ $t('settings.settings_shared_with_the_search_page_desc') }}</span>
       </template>
       <Button type="secondary" block center @click="handleOpenSearchPageModeSharedSettings">
-        Open Settings...
+        {{ $t('settings.btn.open_settings') }}
       </Button>
 
       <ChildSettingsDialog
         v-if="showSearchPageModeSharedSettings"
-        title="Settings shared with the search page"
+        :title="$t('settings.settings_shared_with_the_search_page')"
         @close="handleCloseSearchPageModeSharedSettings"
       >
         <template #desc>
-          <span color="$bew-warning-color">Those settings are used in common with the search page</span>
+          <span color="$bew-warning-color">{{ $t('settings.settings_shared_with_the_search_page_desc') }}</span>
         </template>
 
         <SearchPage />
