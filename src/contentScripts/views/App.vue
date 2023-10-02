@@ -507,8 +507,7 @@ function handleAdaptToOtherPageStylesChange() {
 
         <main
           v-if="isHomePage"
-          p="t-70px" m-auto
-          relative
+          p="t-80px" m-auto
           :w="isVideoPage ? '[calc(100%-160px)]' : 'lg:85% md:[calc(90%-60px)] [calc(100%-140px)]'"
         >
           <!-- control button group -->
@@ -537,7 +536,7 @@ function handleAdaptToOtherPageStylesChange() {
           </div>
 
           <Transition name="fade">
-            <Component :is="pages[activatedPage]" :key="dynamicComponentKey" :style="{ position: 'absolute', width: '100%' }" />
+            <Component :is="pages[activatedPage]" :key="dynamicComponentKey" />
           </Transition>
         </main>
       </div>
@@ -632,10 +631,12 @@ function handleAdaptToOtherPageStylesChange() {
 .fade-leave-active {
   transition: opacity 0.5s ease;
 }
-
 .fade-enter-from,
 .fade-leave-to {
   --at-apply: opacity-0;
+}
+.fade-leave-to {
+  --at-apply: hidden
 }
 
 .list-enter-active,
@@ -645,5 +646,8 @@ function handleAdaptToOtherPageStylesChange() {
 .list-enter-from,
 .list-leave-to {
   --at-apply: opacity-0 transform translate-y-6 transform-gpu;
+}
+.list-leave-to {
+  --at-apply: hidden
 }
 </style>
