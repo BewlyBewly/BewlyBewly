@@ -151,7 +151,7 @@ function handleKeyDown() {
 
     <div class="search-bar group" :class="isFocus ? 'focus' : ''" flex="~" items-center pos="relative">
       <Transition name="focus-character">
-        <img v-show="focusedCharacter && isFocus" :src="focusedCharacter" width="100" object-contain pos="absolute right-0 bottom-30px">
+        <img v-show="focusedCharacter && isFocus" :src="focusedCharacter" width="100" object-contain pos="absolute right-0 bottom-40px">
       </Transition>
 
       <input
