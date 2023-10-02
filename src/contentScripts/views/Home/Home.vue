@@ -25,8 +25,9 @@ onUnmounted(() => {
       justify-center
       items-center relative
       w-full z-10
-      h-50vh max-h-550px
+      h-500px mb-8
     >
+      <!-- h-50vh max-h-550px -->
       <Logo
         v-if="settings.searchPageShowLogo" :size="180" :color="settings.searchPageLogoColor === 'white' ? 'white' : 'var(--bew-theme-color)'"
         :glow="settings.searchPageLogoGlow"

@@ -19,23 +19,6 @@ import emitter from '~/utils/mitt'
 const activatedPage = ref<AppPage>(settings.value.startupPage ?? AppPage.Home)
 const { locale } = useI18n()
 const [showSettings, toggleSettings] = useToggle(false)
-// const isDark = useDark({
-//   onChanged: (isDark: boolean) => {
-//     if (isDark) {
-//       document.documentElement.classList.add('dark')
-//       // // Adjust Bilibili Evolved to dark mode when switching to dark mode
-//       // document.body.classList.add('dark')
-//       document.querySelector('#bewly')?.classList.add('dark')
-//     }
-//     else {
-//       document.documentElement.classList.remove('dark')
-//       // // Adjust Bilibili Evolved to light mode when switching to light mode
-//       // document.body.classList.remove('dark')
-//       document.querySelector('#bewly')?.classList.remove('dark')
-//     }
-//   },
-// })
-// const toggleDark = useToggle(isDark)
 const pages = { Home, Search, Anime, History, WatchLater, Favorites }
 const mainAppRef = ref<HTMLElement>() as Ref<HTMLElement>
 const mainAppOpacity = ref<number>(0)
@@ -364,23 +347,50 @@ function handleAdaptToOtherPageStylesChange() {
     ref="mainAppRef" class="bewly-wrapper" text="$bew-text-1" transition="opacity duration-300" overflow-y-scroll z-60
     :style="{ opacity: mainAppOpacity, height: isHomePage ? '100vh' : '0' }"
   >
+    <!-- Home search page mode background -->
+    <div
+      v-if="activatedPage === AppPage.Home && settings.useSearchPageModeOnHomePage && settings.individuallySetSearchPageWallpaper"
+      :style="{ opacity: showSettings ? 0.4 : 1 }"
+    >
+      <div
+        pos="relative left-0 top-0" w-full h-580px mb--580px bg="cover center" z-1
+        :style="{
+          backgroundImage: `url(${settings.searchPageWallpaper})`,
+        }"
+      />
+      <!-- background mask -->
+      <transition name="fade">
+        <div
+          v-if="(!settings.individuallySetSearchPageWallpaper && settings.enableWallpaperMasking) || (settings.searchPageEnableWallpaperMasking)"
+          pos="relative left-0 top-0" w-full h-580px mb--580px pointer-events-none duration-300 z-1 bg="$bew-homepage-bg-mask"
+          :style="{
+            backdropFilter: `blur(${settings.individuallySetSearchPageWallpaper ? settings.searchPageWallpaperBlurIntensity : settings.wallpaperBlurIntensity}px)`,
+          }"
+        >
+          <div
+            bg="$bew-homepage-bg" pos="absolute top-0 left-0" w-full h-full
+            :style="{
+              opacity: `${settings.searchPageWallpaperMaskOpacity}%`,
+            }"
+          />
+        </div>
+      </transition>
+    </div>
+
     <div m-auto max-w="$bew-page-max-width" :style="{ opacity: showSettings ? 0.4 : 1 }">
       <Transition name="topbar">
-        <!-- v-if="!isSearchPage" -->
         <Topbar
-          v-if="settings.isShowTopbar && activatedPage !== AppPage.Home"
-          :show-search-bar="activatedPage !== AppPage.Search"
+          v-if="settings.isShowTopbar && !isHomePage"
           :show-topbar-mask="showTopbarMask && isTopbarFixed"
           pos="top-0 left-0" z-9999 w="[calc(100%)]"
           :style="{ position: isTopbarFixed ? 'fixed' : 'absolute' }"
         />
         <Topbar
-          v-else-if="settings.isShowTopbar && activatedPage === AppPage.Home"
-          :show-search-bar="showTopbarMask && settings.useSearchPageModeOnHomePage || (!settings.useSearchPageModeOnHomePage)"
-          :show-logo="showTopbarMask && settings.useSearchPageModeOnHomePage || (!settings.useSearchPageModeOnHomePage && showTopbarMask)"
+          v-else-if="settings.isShowTopbar && isHomePage"
+          :show-search-bar="showTopbarMask && settings.useSearchPageModeOnHomePage || (!settings.useSearchPageModeOnHomePage || activatedPage !== AppPage.Home && activatedPage !== AppPage.Search)"
+          :show-logo="showTopbarMask && settings.useSearchPageModeOnHomePage || (!settings.useSearchPageModeOnHomePage || activatedPage !== AppPage.Home)"
           :show-topbar-mask="showTopbarMask && isTopbarFixed"
-          pos="top-0 left-0" z-9999 w="[calc(100%)]"
-          :style="{ position: isTopbarFixed ? 'fixed' : 'absolute' }"
+          pos="fixed top-0 left-0" z-9999 w="[calc(100%)]"
         />
       </Transition>
 
@@ -535,7 +545,7 @@ function handleAdaptToOtherPageStylesChange() {
             </Button>
           </div>
 
-          <Transition name="fade">
+          <Transition name="page-fade">
             <Component :is="pages[activatedPage]" :key="dynamicComponentKey" />
           </Transition>
         </main>
@@ -627,6 +637,18 @@ function handleAdaptToOtherPageStylesChange() {
 </style>
 
 <style lang="scss">
+.page-fade-enter-active,
+.page-fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+.page-fade-enter-from,
+.page-fade-leave-to {
+  --at-apply: opacity-0;
+}
+.page-fade-leave-to {
+  --at-apply: hidden
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s ease;
@@ -634,9 +656,6 @@ function handleAdaptToOtherPageStylesChange() {
 .fade-enter-from,
 .fade-leave-to {
   --at-apply: opacity-0;
-}
-.fade-leave-to {
-  --at-apply: hidden
 }
 
 .list-enter-active,
