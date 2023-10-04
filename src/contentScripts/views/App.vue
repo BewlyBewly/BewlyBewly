@@ -387,7 +387,7 @@ function handleAdaptToOtherPageStylesChange() {
         />
         <Topbar
           v-else-if="settings.isShowTopbar && isHomePage"
-          :show-search-bar="showTopbarMask && settings.useSearchPageModeOnHomePage || (!settings.useSearchPageModeOnHomePage || activatedPage !== AppPage.Home && activatedPage !== AppPage.Search)"
+          :show-search-bar="showTopbarMask && settings.useSearchPageModeOnHomePage || (!settings.useSearchPageModeOnHomePage && activatedPage !== AppPage.Search || activatedPage !== AppPage.Home && activatedPage !== AppPage.Search)"
           :show-logo="showTopbarMask && settings.useSearchPageModeOnHomePage || (!settings.useSearchPageModeOnHomePage || activatedPage !== AppPage.Home)"
           :show-topbar-mask="showTopbarMask && isTopbarFixed"
           pos="fixed top-0 left-0" z-9999 w="[calc(100%)]"
