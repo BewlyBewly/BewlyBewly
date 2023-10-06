@@ -141,7 +141,7 @@ function setCurrentTitle() {
           text-shadow: 0 0 15px var(--bew-elevated-solid-1), 0 0 20px var(--bew-elevated-solid-1)
         "
       >
-        <div text="3xl">
+        <div text="3xl" fw-bold>
           {{ title }}
         </div>
         <div

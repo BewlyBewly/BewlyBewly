@@ -26,7 +26,7 @@ function handleClose() {
       "
     >
       <div>
-        <p text-xl>
+        <p text-xl fw-bold>
           {{ title }}
         </p>
         <p text="sm $bew-text-2">
