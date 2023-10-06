@@ -88,11 +88,12 @@ function changeWallpaper(url: string) {
         <div flex="~ gap-2 wrap" justify-end>
           <div
             v-for="color in themeColorOptions" :key="color"
-            w-20px h-20px rounded-8 cursor-pointer transition duration-300
+            w-20px h-20px rounded-8 cursor-pointer transition duration-300 box-border
             :style="{
               background: color,
-              transform: color === settings.themeColor ? 'scale(1.2)' : 'scale(1)',
-              border: color === settings.themeColor ? '2px solid var(--bew-text-1)' : 'none',
+              transform: color === settings.themeColor ? 'scale(1.3)' : 'scale(1)',
+              border: color === settings.themeColor ? '2px solid white' : '2px solid transparent',
+              boxShadow: color === settings.themeColor ? '0 0 0 1px var(--bew-border-color), var(--bew-shadow-1)' : 'none',
             }"
             @click="changeThemeColor(color)"
           />
@@ -100,11 +101,12 @@ function changeWallpaper(url: string) {
       </SettingsItem>
       <SettingsItem :title="$t('settings.follow_bilibili_evolved_color')" :desc="$t('settings.follow_bilibili_evolved_color_desc')">
         <div
-          w-20px h-20px rounded-8 cursor-pointer
+          w-20px h-20px rounded-8 cursor-pointer transition duration-300 box-border
           :style="{
             background: bilibiliEvolvedThemeColor,
-            transform: bilibiliEvolvedThemeColor === settings.themeColor ? 'scale(1.2)' : 'scale(1)',
-            border: bilibiliEvolvedThemeColor === settings.themeColor ? '2px solid var(--bew-text-1)' : 'none',
+            transform: bilibiliEvolvedThemeColor === settings.themeColor ? 'scale(1.3)' : 'scale(1)',
+            border: bilibiliEvolvedThemeColor === settings.themeColor ? '2px solid white' : '2px solid transparent',
+            boxShadow: bilibiliEvolvedThemeColor === settings.themeColor ? '0 0 0 1px var(--bew-border-color), var(--bew-shadow-1)' : 'none',
           }"
           @click="changeThemeColor(bilibiliEvolvedThemeColor)"
         />
