@@ -74,7 +74,7 @@ watch(
       return
 
     if (!newVal)
-      await getNewMomentsCount()
+      await getTopbarNewMomentsCount()
   },
 )
 
@@ -85,12 +85,12 @@ onMounted(() => {
 async function initData() {
   await getUserInfo()
   getUnreadMessageCount()
-  getNewMomentsCount()
+  getTopbarNewMomentsCount()
 
   // automatically update notifications and moments count
   setInterval(() => {
     getUnreadMessageCount()
-    getNewMomentsCount()
+    getTopbarNewMomentsCount()
   }, updateInterval)
 }
 
@@ -173,7 +173,7 @@ async function getUnreadMessageCount() {
   }
 }
 
-async function getNewMomentsCount() {
+async function getTopbarNewMomentsCount() {
   if (!isLogin)
     return
 
@@ -181,7 +181,7 @@ async function getNewMomentsCount() {
 
   try {
     const res = await browser.runtime.sendMessage({
-      contentScriptQuery: 'getNewMomentsCount',
+      contentScriptQuery: 'getTopbarNewMomentsCount',
     })
     newMomentsCount.value = res.data.update_info.item.count
     // If moments count > 0 then refresh the key to get the new moments

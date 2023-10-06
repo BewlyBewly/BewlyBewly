@@ -45,19 +45,19 @@ watch(selectedTab, (newVal: number, oldVal: number) => {
     smoothScrollToTop(momentsWrap.value, 300)
 
   if (newVal === 0) {
-    getNewMoments([MomentType.Video, MomentType.Bangumi])
+    getTopbarNewMoments([MomentType.Video, MomentType.Bangumi])
   }
   else if (newVal === 1) {
     livePage.value = 1
-    getLiveMoments(livePage.value)
+    getTopbarLiveMoments(livePage.value)
   }
   else if (newVal === 2) {
-    getNewMoments([MomentType.Article])
+    getTopbarNewMoments([MomentType.Article])
   }
 })
 
 onMounted(() => {
-  getNewMoments([MomentType.Video, MomentType.Bangumi])
+  getTopbarNewMoments([MomentType.Video, MomentType.Bangumi])
 
   if (momentsWrap.value) {
     momentsWrap.value.addEventListener('scroll', () => {
@@ -68,11 +68,11 @@ onMounted(() => {
         && !isLoading.value
       ) {
         if (selectedTab.value === 0 && !noMoreContent.value)
-          getHistoryMoments([MomentType.Video, MomentType.Bangumi])
+          getTopbarHistoryMoments([MomentType.Video, MomentType.Bangumi])
         else if (selectedTab.value === 1 && !noMoreContent.value)
-          getLiveMoments(livePage.value)
+          getTopbarLiveMoments(livePage.value)
         else if (selectedTab.value === 2 && !noMoreContent.value)
-          getHistoryMoments([MomentType.Article])
+          getTopbarHistoryMoments([MomentType.Article])
       }
     })
   }
@@ -90,12 +90,12 @@ function onClickTab(tabId: number) {
   })
 }
 
-function getNewMoments(typeList: number[]) {
+function getTopbarNewMoments(typeList: number[]) {
   moments.length = 0
   isLoading.value = true
   browser.runtime
     .sendMessage({
-      contentScriptQuery: 'getNewMoments',
+      contentScriptQuery: 'getTopbarNewMoments',
       uid: getUserID(),
       typeList,
     })
@@ -126,11 +126,11 @@ function getNewMoments(typeList: number[]) {
     })
 }
 
-function getHistoryMoments(typeList: number[]) {
+function getTopbarHistoryMoments(typeList: number[]) {
   isLoading.value = true
   browser.runtime
     .sendMessage({
-      contentScriptQuery: 'getHistoryMoments',
+      contentScriptQuery: 'getTopbarHistoryMoments',
       uid: getUserID(),
       typeList,
       offsetDynamicID: moments[moments.length - 1].dynamic_id_str,
@@ -152,11 +152,11 @@ function getHistoryMoments(typeList: number[]) {
     })
 }
 
-function getLiveMoments(page: number) {
+function getTopbarLiveMoments(page: number) {
   isLoading.value = true
   browser.runtime
     .sendMessage({
-      contentScriptQuery: 'getLiveMoments',
+      contentScriptQuery: 'getTopbarLiveMoments',
       page,
       pageSize: 10,
     })
