@@ -14,7 +14,7 @@ defineProps<{
       {{ desc }}
     </p>
 
-    <main border="1 solid $bew-border-color" mt-2 p-4 rounded="$bew-radius" bg="$bew-elevated-solid-2" shadow="$bew-shadow-1">
+    <main border="1 solid $bew-border-color" mt-2 px-4 mx--4 rounded="$bew-radius" bg="dark:$bew-fill-1">
       <slot />
     </main>
   </div>

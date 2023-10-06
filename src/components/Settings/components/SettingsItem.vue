@@ -7,7 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="b-settings-item">
+  <div class="b-settings-item" py-4>
     <div flex="~ gap-4" justify-betwee items-center text-base>
       <div :w="nextLine ? 'full' : '5/7'">
         {{ title }}
@@ -36,6 +36,6 @@ defineProps<{
 }
 
 .b-settings-item + .b-settings-item {
-  --at-apply: mt-4
+  --at-apply: border-t-1 border-$bew-border-color;
 }
 </style>

@@ -111,7 +111,7 @@ function setCurrentTitle() {
           <a
             cursor-pointer w="40px group-hover:150px" h-40px
             rounded-30px flex items-center overflow-x-hidden
-            duration-300 un-text="hover:white dark-hover:!black" bg="dark-hover:white hover:$bew-theme-color"
+            duration-300 bg="hover:$bew-fill-2"
             :class="{ 'menu-item-activated': item.value === activatedMenuItem }"
             @click="changeMenuItem(item.value)"
           >
@@ -130,7 +130,7 @@ function setCurrentTitle() {
 
     <div
       relative overflow-hidden w-full h-full bg="$bew-elevated-solid-1"
-      shadow="$bew-shadow-3" rounded="$bew-radius"
+      shadow="$bew-shadow-4" rounded="$bew-radius"
     >
       <header
         flex justify-between items-center w-full h-80px
@@ -153,7 +153,7 @@ function setCurrentTitle() {
         </div>
       </header>
 
-      <main relative h-full py-8 p="x-12" overflow-y-overlay>
+      <main relative h-full py-8 p="x-13" overflow-y-overlay>
         <!-- <header
           flex justify-between items-center w-full h-60px
           pos="fixed top-0 left-0"
@@ -173,7 +173,9 @@ function setCurrentTitle() {
 
         <div h-80px mt--8 />
 
-        <Component :is="settingsMenu[activatedMenuItem]" />
+        <Transition name="page-fade">
+          <Component :is="settingsMenu[activatedMenuItem]" />
+        </Transition>
       </main>
     </div>
   </div>
@@ -182,6 +184,6 @@ function setCurrentTitle() {
 <style lang="scss" scoped>
 .menu-item-activated {
   --at-apply: text-white dark-text-black
-    dark-bg-white bg-$bew-theme-color
+    important-dark-bg-white important-bg-$bew-theme-color;
 }
 </style>

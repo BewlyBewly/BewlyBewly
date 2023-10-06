@@ -32,86 +32,88 @@ function handleCloseSearchPageModeSharedSettings() {
 </script>
 
 <template>
-  <SettingsItemGroup :title="$t('settings.group_recommendation_mode')">
-    <SettingsItem :title="$t('settings.recommendation_mode')" :desc="$t('settings.recommendation_mode_desc')">
-      <div w-full flex rounded="$bew-radius" bg="$bew-fill-1" p-1>
-        <div
-          flex-1 py-1 cursor-pointer text-center rounded="$bew-radius"
-          :style="{
-            background: settings.recommendationMode === 'web' ? 'var(--bew-theme-color)' : '',
-            color: settings.recommendationMode === 'web' ? 'white' : '',
-          }"
-          @click="settings.recommendationMode = 'web'"
-        >
-          Web
+  <div>
+    <SettingsItemGroup :title="$t('settings.group_recommendation_mode')">
+      <SettingsItem :title="$t('settings.recommendation_mode')" :desc="$t('settings.recommendation_mode_desc')">
+        <div w-full flex rounded="$bew-radius" bg="$bew-fill-1" p-1>
+          <div
+            flex-1 py-1 cursor-pointer text-center rounded="$bew-radius"
+            :style="{
+              background: settings.recommendationMode === 'web' ? 'var(--bew-theme-color)' : '',
+              color: settings.recommendationMode === 'web' ? 'white' : '',
+            }"
+            @click="settings.recommendationMode = 'web'"
+          >
+            Web
+          </div>
+          <div
+            flex-1 py-1 cursor-pointer text-center rounded="$bew-radius"
+            :style="{
+              background: settings.recommendationMode === 'app' ? 'var(--bew-theme-color)' : '',
+              color: settings.recommendationMode === 'app' ? 'white' : '',
+            }"
+            @click="settings.recommendationMode = 'app'"
+          >
+            App
+          </div>
         </div>
-        <div
-          flex-1 py-1 cursor-pointer text-center rounded="$bew-radius"
-          :style="{
-            background: settings.recommendationMode === 'app' ? 'var(--bew-theme-color)' : '',
-            color: settings.recommendationMode === 'app' ? 'white' : '',
-          }"
-          @click="settings.recommendationMode = 'app'"
-        >
-          App
+      </SettingsItem>
+
+      <SettingsItem v-if="settings.recommendationMode === 'app'" :title="$t('settings.authorize_app')">
+        <template #desc>
+          {{ $t('settings.authorize_app_desc') }}
+          <br>
+          <a
+            href="https://github.com/indefined/UserScripts/tree/master/bilibiliHome#%E6%8E%88%E6%9D%83%E8%AF%B4%E6%98%8E" target="_blank" color="$bew-theme-color"
+          >{{ $t('settings.authorize_app_more_info_access_key') }}</a>
+        </template>
+
+        <div w-full>
+          <button
+            v-if="!accessKey"
+            ref="authorizeBtn"
+            bg="$bew-theme-color" text-white lh-35px rounded="$bew-radius" w-full
+            @click="handleAuthorize"
+          >
+            {{ $t('settings.btn.authorize') }}
+          </button>
+          <button
+            v-else
+            bg="$bew-fill-1" text="$bew-error-color" lh-35px rounded="$bew-radius" w-full
+            @click="handleRevoke"
+          >
+            <span>{{ $t('settings.btn.revoke') }}</span>
+          </button>
         </div>
-      </div>
-    </SettingsItem>
+      </SettingsItem>
+    </SettingsItemGroup>
 
-    <SettingsItem v-if="settings.recommendationMode === 'app'" :title="$t('settings.authorize_app')">
-      <template #desc>
-        {{ $t('settings.authorize_app_desc') }}
-        <br>
-        <a
-          href="https://github.com/indefined/UserScripts/tree/master/bilibiliHome#%E6%8E%88%E6%9D%83%E8%AF%B4%E6%98%8E" target="_blank" color="$bew-theme-color"
-        >{{ $t('settings.authorize_app_more_info_access_key') }}</a>
-      </template>
-
-      <div w-full>
-        <button
-          v-if="!accessKey"
-          ref="authorizeBtn"
-          bg="$bew-theme-color" text-white lh-35px rounded="$bew-radius" w-full
-          @click="handleAuthorize"
-        >
-          {{ $t('settings.btn.authorize') }}
-        </button>
-        <button
-          v-else
-          bg="$bew-fill-1" text="$bew-error-color" lh-35px rounded="$bew-radius" w-full
-          @click="handleRevoke"
-        >
-          <span>{{ $t('settings.btn.revoke') }}</span>
-        </button>
-      </div>
-    </SettingsItem>
-  </SettingsItemGroup>
-
-  <SettingsItemGroup :title="$t('settings.group_search_page_mode')">
-    <SettingsItem :title="$t('settings.use_search_page_mode')">
-      <Radio v-model="settings.useSearchPageModeOnHomePage" />
-    </SettingsItem>
-    <SettingsItem :title="$t('settings.settings_shared_with_the_search_page')">
-      <template #desc>
-        <span color="$bew-warning-color">{{ $t('settings.settings_shared_with_the_search_page_desc') }}</span>
-      </template>
-      <Button type="secondary" block center @click="handleOpenSearchPageModeSharedSettings">
-        {{ $t('settings.btn.open_settings') }}
-      </Button>
-
-      <ChildSettingsDialog
-        v-if="showSearchPageModeSharedSettings"
-        :title="$t('settings.settings_shared_with_the_search_page')"
-        @close="handleCloseSearchPageModeSharedSettings"
-      >
+    <SettingsItemGroup :title="$t('settings.group_search_page_mode')">
+      <SettingsItem :title="$t('settings.use_search_page_mode')">
+        <Radio v-model="settings.useSearchPageModeOnHomePage" />
+      </SettingsItem>
+      <SettingsItem :title="$t('settings.settings_shared_with_the_search_page')">
         <template #desc>
           <span color="$bew-warning-color">{{ $t('settings.settings_shared_with_the_search_page_desc') }}</span>
         </template>
+        <Button type="secondary" block center @click="handleOpenSearchPageModeSharedSettings">
+          {{ $t('settings.btn.open_settings') }}
+        </Button>
 
-        <SearchPage />
-      </ChildSettingsDialog>
-    </SettingsItem>
-  </SettingsItemGroup>
+        <ChildSettingsDialog
+          v-if="showSearchPageModeSharedSettings"
+          :title="$t('settings.settings_shared_with_the_search_page')"
+          @close="handleCloseSearchPageModeSharedSettings"
+        >
+          <template #desc>
+            <span color="$bew-warning-color">{{ $t('settings.settings_shared_with_the_search_page_desc') }}</span>
+          </template>
+
+          <SearchPage />
+        </ChildSettingsDialog>
+      </SettingsItem>
+    </SettingsItemGroup>
+  </div>
 </template>
 
 <style lang="scss" scoped>
