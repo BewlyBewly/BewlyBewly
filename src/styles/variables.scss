@@ -6,13 +6,15 @@
   --bew-filter-glass: blur(20px) saturate(180%);
 
   // #region shadow
-  --bew-shadow-1: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+  --bew-shadow-1: 0 4px 6px -1px rgb(0 0 0 / 0.15),
     0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --bew-shadow-2: 0 10px 15px -3px rgb(0 0 0 / 0.1),
-    0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --bew-shadow-3: 0 20px 25px -5px rgb(0 0 0 / 0.1),
-    0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --bew-shadow-4: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  --bew-shadow-2: 0 10px 15px -3px rgb(0 0 0 / 0.22),
+    0 4px 6px -4px rgb(0 0 0 / 0.16);
+  --bew-shadow-3: 0 20px 25px -5px rgb(0 0 0 / 0.22),
+    0 8px 10px -6px rgb(0 0 0 / 0.16);
+  --bew-shadow-4: 0 34px 60px -20px rgb(0 0 0 / 0.44),
+    0 25px 50px -12px rgb(0 0 0 / 0.3),
+    0 12px 14px -8px rgb(0 0 0 / 0.18);
   // #endregion
 
   --bew-logo-color: var(--bew-theme-color);
@@ -104,12 +106,12 @@
   --bew-elevated-solid-2: hsl(0 0% 100%);
   // #endregion
 
-  --bew-fill-1: rgb(120 120 128 / 13%);
-  --bew-fill-2: rgb(120 120 128 / 23%);
-  --bew-fill-3: rgb(120 120 128 / 33%);
-  --bew-fill-4: rgb(120 120 128 / 43%);
+  --bew-fill-1: rgba(131 131 145 / 13%);
+  --bew-fill-2: rgb(131 131 145 / 23%);
+  --bew-fill-3: rgb(131 131 145 / 33%);
+  --bew-fill-4: rgb(131 131 145 / 43%);
 
-  --bew-border-color: rgb(120 120 128 / 15%);
+  --bew-border-color: rgb(131 131 145 / 18%);
 
   --bew-page-max-width: 2000px;
 
@@ -144,12 +146,12 @@
   --bew-elevated-solid-1: hsl(230 12% 15%);
   --bew-elevated-solid-2: hsl(230 12% 20%);
 
-  --bew-fill-1: rgb(120 120 140 / 14%);
-  --bew-fill-2: rgb(120 120 140 / 24%);
-  --bew-fill-3: rgb(120 120 140 / 34%);
-  --bew-fill-4: rgb(120 120 140 / 44%);
+  --bew-fill-1: rgb(131 131 145 / 14%);
+  --bew-fill-2: rgb(131 131 145 / 24%);
+  --bew-fill-3: rgb(131 131 145 / 34%);
+  --bew-fill-4: rgb(131 131 145 / 44%);
 
-  --bew-border-color: rgb(120 120 140 / 24%);
+  --bew-border-color: rgb(131 131 145 / 26%);
 }
 
 :root.bewly-design {

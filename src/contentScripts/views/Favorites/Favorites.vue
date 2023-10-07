@@ -262,7 +262,7 @@ function handleUnfavorite(favoriteResource: FavoriteResource) {
             {{ t('watch_later.play_all') }}
           </Button>
         </p>
-        <ul class="category-list" h-full overflow-overlay border-t="1 color-[rgba(255,255,255,.2)]" border-b="1 color-[rgba(255,255,255,.2)]">
+        <ul class="category-list" h-full overflow-overlay border="1 color-[rgba(255,255,255,.2)]" rounded="$bew-radius">
           <li
             v-for="item in favoriteCategories" :key="item.id"
             border-b="1 color-[rgba(255,255,255,.2)]"
