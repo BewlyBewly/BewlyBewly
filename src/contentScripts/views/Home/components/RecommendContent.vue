@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import type { AppVideoModel, VideoModel } from './types'
+import type { AppVideoModel, VideoModel } from '../types'
 import emitter from '~/utils/mitt'
 import { accessKey, settings } from '~/logic'
 import { LanguageType } from '~/enums/appEnums'
@@ -215,3 +215,4 @@ function jumpToLoginPage() {
 
 <style lang="scss" scoped>
 </style>
+../types
