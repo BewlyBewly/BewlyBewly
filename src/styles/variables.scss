@@ -6,15 +6,14 @@
   --bew-filter-glass: blur(20px) saturate(180%);
 
   // #region shadow
-  --bew-shadow-1: 0 4px 6px -1px rgb(0 0 0 / 0.15),
-    0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --bew-shadow-2: 0 10px 15px -3px rgb(0 0 0 / 0.22),
-    0 4px 6px -4px rgb(0 0 0 / 0.16);
-  --bew-shadow-3: 0 20px 25px -5px rgb(0 0 0 / 0.22),
-    0 8px 10px -6px rgb(0 0 0 / 0.16);
-  --bew-shadow-4: 0 34px 60px -20px rgb(0 0 0 / 0.44),
-    0 25px 50px -12px rgb(0 0 0 / 0.3),
-    0 12px 14px -8px rgb(0 0 0 / 0.18);
+  --bew-shadow-1: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.05);
+  --bew-shadow-2: 0 10px 15px -3px rgb(0 0 0 / 0.12),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --bew-shadow-3: 0 20px 25px -5px rgb(0 0 0 / 0.14),
+    0 8px 10px -6px rgb(0 0 0 / 0.12);
+  --bew-shadow-4: 0 34px 60px -20px rgb(0 0 0 / 0.34),
+    0 25px 50px -12px rgb(0 0 0 / 0.2), 0 12px 14px -8px rgb(0 0 0 / 0.14);
   // #endregion
 
   --bew-logo-color: var(--bew-theme-color);
@@ -123,6 +122,18 @@
 :host(.dark),
 :root.dark {
   // dark mode
+
+  // #region shadow
+  --bew-shadow-1: 0 4px 6px -1px rgb(0 0 0 / 0.15),
+    0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --bew-shadow-2: 0 10px 15px -3px rgb(0 0 0 / 0.22),
+    0 4px 6px -4px rgb(0 0 0 / 0.16);
+  --bew-shadow-3: 0 20px 25px -5px rgb(0 0 0 / 0.22),
+    0 8px 10px -6px rgb(0 0 0 / 0.16);
+  --bew-shadow-4: 0 34px 60px -20px rgb(0 0 0 / 0.44),
+    0 25px 50px -12px rgb(0 0 0 / 0.3), 0 12px 14px -8px rgb(0 0 0 / 0.18);
+  // #endregion
+
   --bew-logo-color: var(--bew-text-1);
 
   --bew-text-1: hsl(215 19% 98%);
