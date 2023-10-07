@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useToggle } from '@vueuse/core'
 import 'uno.css'
+import 'overlayscrollbars/overlayscrollbars.css'
 import { useI18n } from 'vue-i18n'
 import browser from 'webextension-polyfill'
 import type { Ref } from '@vue/runtime-dom'

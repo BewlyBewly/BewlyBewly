@@ -5,7 +5,6 @@ import { setupApp } from '~/logic/common-setup'
 import { i18n } from '~/utils/i18n'
 import { SVG_ICONS } from '~/utils/svgIcons'
 import { injectCSS } from '~/utils/main'
-import 'overlayscrollbars/overlayscrollbars.css'
 
 let app: any
 
