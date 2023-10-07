@@ -27,6 +27,7 @@ specifiers:
   kolorist: ^1.8.0
   mitt: ^3.0.1
   npm-run-all: ^4.1.5
+  overlayscrollbars-vue: ^0.5.5
   rimraf: ^3.0.2
   sass: ^1.64.2
   terser: ^5.19.2
@@ -48,6 +49,7 @@ specifiers:
 dependencies:
   dplayer: 1.27.1
   mitt: 3.0.1
+  overlayscrollbars-vue: 0.5.5_wh5p2atbfvzzgf3mvohll5lz3a
   vue-i18n: 9.2.2_vue@3.3.4
 
 devDependencies:
@@ -676,8 +678,8 @@ packages:
       vue-i18n:
         optional: true
     dependencies:
-      '@intlify/message-compiler': 9.3.0-beta.27
-      '@intlify/shared': 9.3.0-beta.27
+      '@intlify/message-compiler': 9.4.1
+      '@intlify/shared': 9.4.1
       jsonc-eslint-parser: 1.4.1
       source-map: 0.6.1
       vue-i18n: 9.2.2_vue@3.3.4
@@ -706,11 +708,11 @@ packages:
       '@intlify/shared': 9.2.2
       source-map: 0.6.1
 
-  /@intlify/message-compiler/9.3.0-beta.27:
-    resolution: {integrity: sha512-GC8rSbd7V67Zu+a9Z0bpV4riBek11YCURJU50YaEhV4Ub2JHEPtoYxK5r2eIsq/kp+M2hJyGLiC4NJUrGa2VwQ==}
+  /@intlify/message-compiler/9.4.1:
+    resolution: {integrity: sha512-aN2N+dUx320108QhH51Ycd2LEpZ+NKbzyQ2kjjhqMcxhHdxtOnkgdx+MDBhOy/CObwBmhC3Nygzc6hNlfKvPNw==}
     engines: {node: '>= 16'}
     dependencies:
-      '@intlify/shared': 9.3.0-beta.27
+      '@intlify/shared': 9.4.1
       source-map-js: 1.0.2
     dev: true
 
@@ -718,8 +720,8 @@ packages:
     resolution: {integrity: sha512-wRwTpsslgZS5HNyM7uDQYZtxnbI12aGiBZURX3BTR9RFIKKRWpllTsgzHWvj3HKm3Y2Sh5LPC1r0PDCKEhVn9Q==}
     engines: {node: '>= 14'}
 
-  /@intlify/shared/9.3.0-beta.27:
-    resolution: {integrity: sha512-hPMsmVCs+ZUVHHU5VORG6LopzXZT7zmyVNqc9OQG80YpA/N4lT/pkJ4B6DTNIsv2C7mwfGM7RdK+0qPki43YgA==}
+  /@intlify/shared/9.4.1:
+    resolution: {integrity: sha512-A51elBmZWf1FS80inf/32diO9DeXoqg9GR9aUDHFcfHoNDuT46Q+fpPOdj8jiJnSHSBh8E1E+6qWRhAZXdK3Ng==}
     engines: {node: '>= 16'}
     dev: true
 
@@ -739,7 +741,7 @@ packages:
         optional: true
     dependencies:
       '@intlify/bundle-utils': 4.0.0_vue-i18n@9.2.2
-      '@intlify/shared': 9.3.0-beta.27
+      '@intlify/shared': 9.4.1
       '@rollup/pluginutils': 4.2.1
       '@vue/compiler-sfc': 3.3.4
       debug: 4.3.4
@@ -5408,6 +5410,20 @@ packages:
     resolution: {integrity: sha512-jd0cvB8qQ5uVt0lvCIexBaROw1KyKm5sbulg2fWOHjETisuCzWyt+eTZKEMs8v6HwzoGs8xik26jg7eCM6pS+A==}
     engines: {node: '>= 0.4.0'}
     dev: true
+
+  /overlayscrollbars-vue/0.5.5_wh5p2atbfvzzgf3mvohll5lz3a:
+    resolution: {integrity: sha512-WiB0SgWjhT+WYo0ldgZ9g1Sh703KUKpKCcCfYFvqlB0X9TjgRJbQRrgFEmyNnD9XO+ZWc1zJ6s4+ukyoIQN2VQ==}
+    peerDependencies:
+      overlayscrollbars: ^2.0.0
+      vue: ^3.2.25
+    dependencies:
+      overlayscrollbars: 2.3.2
+      vue: 3.3.4
+    dev: false
+
+  /overlayscrollbars/2.3.2:
+    resolution: {integrity: sha512-K3Sau7NpFruKfXBauvchAQshAW+un1qD8EYNcozrPAB2kbif8C2rqa+1EWvMMWPKl88wgf2rX2QDMLgAfR0hHA==}
+    dev: false
 
   /p-cancelable/3.0.0:
     resolution: {integrity: sha512-mlVgR3PGuzlo0MmTdk4cXqXWlwQDLnONTAg6sm62XkMJEiRxN3GL3SffkYvqwonbkJBcrI7Uvv5Zh9yjvn2iUw==}

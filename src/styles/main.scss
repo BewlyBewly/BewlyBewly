@@ -64,3 +64,10 @@ html.dark.bewly-design {
     --at-apply: color-$bew-text-1;
   }
 }
+
+// Change OverlayScrollbar color
+.os-scrollbar .os-scrollbar-handle {
+  --os-handle-bg: rgba(120, 120, 140, .44);
+  --os-handle-bg-hover: rgba(120, 120, 140, .55);
+  --os-handle-bg-active: rgba(120, 120, 140, .66);
+}

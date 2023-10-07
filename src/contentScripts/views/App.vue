@@ -4,6 +4,8 @@ import 'uno.css'
 import { useI18n } from 'vue-i18n'
 import browser from 'webextension-polyfill'
 import type { Ref } from '@vue/runtime-dom'
+import type { OverlayScrollbars } from 'overlayscrollbars-vue'
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue'
 import Home from './Home/Home.vue'
 import Search from './Search/Search.vue'
 import Anime from './Anime/Anime.vue'
@@ -21,6 +23,7 @@ const { locale } = useI18n()
 const [showSettings, toggleSettings] = useToggle(false)
 const pages = { Home, Search, Anime, History, WatchLater, Favorites }
 const mainAppRef = ref<HTMLElement>() as Ref<HTMLElement>
+const scrollbarRef = ref<OverlayScrollbars | null>()
 const mainAppOpacity = ref<number>(0)
 const showTopbarMask = ref<boolean>(false)
 const dynamicComponentKey = ref<string>(`dynamicComponent${Number(new Date())}`)
@@ -139,11 +142,11 @@ watch(() => settings.value.adaptToOtherPageStyles, () => {
 })
 
 onMounted(() => {
-  nextTick(() => {
-    setTimeout(() => {
-      mainAppOpacity.value = 1
-    }, 1200)
-  })
+  // nextTick(() => {
+  //   setTimeout(() => {
+  //     mainAppOpacity.value = 1
+  //   }, 1200)
+  // })
 
   if (isHomePage.value) {
     // Force overwrite Bilibili Evolved body tag & html tag background color
@@ -151,23 +154,23 @@ onMounted(() => {
   }
   document.documentElement.style.setProperty('font-size', '14px')
 
-  if (mainAppRef.value) {
-    mainAppRef.value.addEventListener('scroll', () => {
-      if (
-        mainAppRef.value.clientHeight + mainAppRef.value.scrollTop
-          >= mainAppRef.value.scrollHeight - 20
-      ) {
-        nextTick(() => {
-          emitter.emit('reachBottom')
-        })
-      }
+  // if (mainAppRef.value) {
+  //   mainAppRef.value.addEventListener('scroll', () => {
+  //     if (
+  //       mainAppRef.value.clientHeight + mainAppRef.value.scrollTop
+  //         >= mainAppRef.value.scrollHeight - 20
+  //     ) {
+  //       nextTick(() => {
+  //         emitter.emit('reachBottom')
+  //       })
+  //     }
 
-      if (mainAppRef.value.scrollTop === 0)
-        showTopbarMask.value = false
-      else
-        showTopbarMask.value = true
-    })
-  }
+  //     if (mainAppRef.value.scrollTop === 0)
+  //       showTopbarMask.value = false
+  //     else
+  //       showTopbarMask.value = true
+  //   })
+  // }
 
   document.addEventListener('scroll', () => {
     if (window.scrollY > 0)
@@ -292,7 +295,9 @@ function handleRefresh() {
 }
 
 function handleBackToTop() {
-  smoothScrollToTop(mainAppRef.value, 300)
+  const osInstance = scrollbarRef.value?.osInstance()
+
+  smoothScrollToTop(osInstance.elements().viewport, 300)
 }
 
 function handleAdaptToOtherPageStylesChange() {
@@ -300,6 +305,20 @@ function handleAdaptToOtherPageStylesChange() {
     document.documentElement.classList.add('bewly-design')
   else
     document.documentElement.classList.remove('bewly-design')
+}
+
+function handleOsScroll() {
+  const osInstance = scrollbarRef.value?.osInstance()
+  const { viewport } = osInstance.elements()
+  const { scrollTop, scrollHeight, clientHeight } = viewport // get scroll offset
+
+  if (scrollTop === 0)
+    showTopbarMask.value = false
+  else
+    showTopbarMask.value = true
+
+  if (clientHeight + scrollTop >= scrollHeight - 20)
+    emitter.emit('reachBottom')
 }
 </script>
 
@@ -344,39 +363,131 @@ function handleAdaptToOtherPageStylesChange() {
   </template>
 
   <div
-    ref="mainAppRef" class="bewly-wrapper" text="$bew-text-1" transition="opacity duration-300" overflow-y-scroll z-60
-    :style="{ opacity: mainAppOpacity, height: isHomePage ? '100vh' : '0' }"
+    ref="mainAppRef" class="bewly-wrapper" text="$bew-text-1" transition="opacity duration-300" overflow-y-hidden z-60
+    :style="{ opacity: 1, height: isHomePage ? '100vh' : '0' }"
   >
-    <!-- Home search page mode background -->
-    <div
-      v-if="activatedPage === AppPage.Home && settings.useSearchPageModeOnHomePage && settings.individuallySetSearchPageWallpaper"
-      :style="{ opacity: showSettings ? 0.4 : 1 }"
+    <!-- Dock -->
+    <aside
+      v-if="isHomePage"
+      class="dock-wrap"
+      :class="{
+        left: settings.dockPosition === 'left',
+        right: settings.dockPosition === 'right',
+        bottom: settings.dockPosition === 'bottom',
+      }"
+      pos="absolute top-0" flex="~ col" h-full justify-center z-1 pointer-events-none
     >
       <div
-        pos="relative left-0 top-0" w-full h-580px mb--580px bg="cover center" z-1
-        :style="{
-          backgroundImage: `url(${settings.searchPageWallpaper})`,
-        }"
-      />
-      <!-- background mask -->
-      <transition name="fade">
-        <div
-          v-if="(!settings.individuallySetSearchPageWallpaper && settings.enableWallpaperMasking) || (settings.searchPageEnableWallpaperMasking)"
-          pos="relative left-0 top-0" w-full h-580px mb--580px pointer-events-none duration-300 z-1 bg="$bew-homepage-bg-mask"
-          :style="{
-            backdropFilter: `blur(${settings.individuallySetSearchPageWallpaper ? settings.searchPageWallpaperBlurIntensity : settings.wallpaperBlurIntensity}px)`,
-          }"
-        >
-          <div
-            bg="$bew-homepage-bg" pos="absolute top-0 left-0" w-full h-full
-            :style="{
-              opacity: `${settings.searchPageWallpaperMaskOpacity}%`,
-            }"
-          />
-        </div>
-      </transition>
-    </div>
+        class="dock-content"
+        p-2 m-2 bg="$bew-content-1" flex="~ col gap-2 shrink-0"
+        rounded="$bew-radius" border="1px $bew-border-color"
+        shadow="$bew-shadow-2"
+        backdrop-glass pointer-events-auto
+      >
+        <Tooltip :content="$t('dock.search')" :placement="tooltipPlacement">
+          <button
+            class="dock-item"
+            :class="{ active: activatedPage === AppPage.Search }"
+            @click="changeActivatePage(AppPage.Search)"
+          >
+            <tabler:search />
+          </button>
+        </Tooltip>
 
+        <Tooltip :content="$t('dock.home')" :placement="tooltipPlacement">
+          <button
+            class="dock-item"
+            :class="{ active: activatedPage === AppPage.Home }"
+            @click="changeActivatePage(AppPage.Home)"
+          >
+            <tabler:home />
+          </button>
+        </Tooltip>
+
+        <Tooltip :content="$t('dock.anime')" :placement="tooltipPlacement">
+          <button
+            class="dock-item"
+            :class="{ active: activatedPage === AppPage.Anime }"
+            @click="changeActivatePage(AppPage.Anime)"
+          >
+            <tabler:device-tv />
+          </button>
+        </Tooltip>
+
+        <Tooltip :content="$t('dock.history')" :placement="tooltipPlacement">
+          <button
+            class="dock-item"
+            :class="{ active: activatedPage === AppPage.History }"
+            @click="changeActivatePage(AppPage.History)"
+          >
+            <tabler:clock />
+          </button>
+        </Tooltip>
+
+        <Tooltip :content="$t('dock.favorites')" :placement="tooltipPlacement">
+          <div
+            class="dock-item"
+            :class="{ active: activatedPage === AppPage.Favorites }"
+            @click="changeActivatePage(AppPage.Favorites)"
+          >
+            <tabler:star />
+          </div>
+        </Tooltip>
+
+        <Tooltip :content="$t('dock.watch_later')" :placement="tooltipPlacement">
+          <button
+            class="dock-item"
+            :class="{ active: activatedPage === AppPage.WatchLater }"
+            @click="changeActivatePage(AppPage.WatchLater)"
+          >
+            <iconoir:playlist-play />
+          </button>
+        </Tooltip>
+
+        <template v-if="isVideoPage">
+          <!-- dividing line -->
+          <div class="divider" />
+
+          <!-- video page -->
+          <button class="dock-item video active">
+            <tabler:player-play />
+          </button>
+        </template>
+
+        <!-- dividing line -->
+        <div class="divider" />
+
+        <Tooltip :content="currentAppColorScheme === 'dark' ? $t('dock.dark_mode') : $t('dock.light_mode')" :placement="tooltipPlacement">
+          <button class="dock-item" @click="toggleDark()">
+            <tabler:moon-stars v-if="currentAppColorScheme === 'dark'" />
+            <tabler:sun v-else />
+          </button>
+        </Tooltip>
+
+        <Tooltip :content="$t('dock.settings')" :placement="tooltipPlacement">
+          <button class="dock-item" @click="toggleSettings()">
+            <tabler:settings />
+          </button>
+        </Tooltip>
+      </div>
+    </aside>
+    <aside v-else pos="fixed top-0 right-6px" h-full flex items-center z-1 pointer-events-none>
+      <div flex="~ gap-2 col" pointer-events-auto>
+        <Tooltip :content="currentAppColorScheme === 'dark' ? $t('dock.dark_mode') : $t('dock.light_mode')" placement="left">
+          <Button size="small" round shadow="$bew-shadow-1" w-45px important-h-45px @click="toggleDark()">
+            <tabler:moon-stars v-if="currentAppColorScheme === 'dark'" text-xl shrink-0 lh-0 />
+            <tabler:sun v-else text-xl shrink-0 lh-0 />
+          </Button>
+        </Tooltip>
+        <Tooltip :content="$t('dock.settings')" placement="left">
+          <Button size="small" round shadow="$bew-shadow-1" w-45px important-h-45px @click="toggleSettings">
+            <tabler:settings text-xl shrink-0 lh-0 />
+          </Button>
+        </Tooltip>
+      </div>
+    </aside>
+
+    <!-- Topbar -->
     <div m-auto max-w="$bew-page-max-width" :style="{ opacity: showSettings ? 0.4 : 1 }">
       <Transition name="topbar">
         <Topbar
@@ -393,168 +504,82 @@ function handleAdaptToOtherPageStylesChange() {
           pos="fixed top-0 left-0" z-9999 w="[calc(100%)]"
         />
       </Transition>
-
-      <div flex="~" max-w="$bew-page-max-width">
-        <aside
-          v-if="isHomePage"
-          class="dock-wrap"
-          :class="{
-            left: settings.dockPosition === 'left',
-            right: settings.dockPosition === 'right',
-            bottom: settings.dockPosition === 'bottom',
-          }"
-          pos="absolute top-0" flex="~ col" h-100vh justify-center z-10 pointer-events-none
-        >
-          <div
-            class="dock-content"
-            p-2 m-2 bg="$bew-content-1" flex="~ col gap-2 shrink-0"
-            rounded="$bew-radius" border="1px $bew-border-color"
-            shadow="$bew-shadow-2"
-            backdrop-glass pointer-events-auto
-          >
-            <Tooltip :content="$t('dock.search')" :placement="tooltipPlacement">
-              <button
-                class="dock-item"
-                :class="{ active: activatedPage === AppPage.Search }"
-                @click="changeActivatePage(AppPage.Search)"
-              >
-                <tabler:search />
-              </button>
-            </Tooltip>
-
-            <Tooltip :content="$t('dock.home')" :placement="tooltipPlacement">
-              <button
-                class="dock-item"
-                :class="{ active: activatedPage === AppPage.Home }"
-                @click="changeActivatePage(AppPage.Home)"
-              >
-                <tabler:home />
-              </button>
-            </Tooltip>
-
-            <Tooltip :content="$t('dock.anime')" :placement="tooltipPlacement">
-              <button
-                class="dock-item"
-                :class="{ active: activatedPage === AppPage.Anime }"
-                @click="changeActivatePage(AppPage.Anime)"
-              >
-                <tabler:device-tv />
-              </button>
-            </Tooltip>
-
-            <Tooltip :content="$t('dock.history')" :placement="tooltipPlacement">
-              <button
-                class="dock-item"
-                :class="{ active: activatedPage === AppPage.History }"
-                @click="changeActivatePage(AppPage.History)"
-              >
-                <tabler:clock />
-              </button>
-            </Tooltip>
-
-            <Tooltip :content="$t('dock.favorites')" :placement="tooltipPlacement">
-              <div
-                class="dock-item"
-                :class="{ active: activatedPage === AppPage.Favorites }"
-                @click="changeActivatePage(AppPage.Favorites)"
-              >
-                <tabler:star />
-              </div>
-            </Tooltip>
-
-            <Tooltip :content="$t('dock.watch_later')" :placement="tooltipPlacement">
-              <button
-                class="dock-item"
-                :class="{ active: activatedPage === AppPage.WatchLater }"
-                @click="changeActivatePage(AppPage.WatchLater)"
-              >
-                <iconoir:playlist-play />
-              </button>
-            </Tooltip>
-
-            <template v-if="isVideoPage">
-              <!-- dividing line -->
-              <div class="divider" />
-
-              <!-- video page -->
-              <button class="dock-item video active">
-                <tabler:player-play />
-              </button>
-            </template>
-
-            <!-- dividing line -->
-            <div class="divider" />
-
-            <Tooltip :content="currentAppColorScheme === 'dark' ? $t('dock.dark_mode') : $t('dock.light_mode')" :placement="tooltipPlacement">
-              <button class="dock-item" @click="toggleDark()">
-                <tabler:moon-stars v-if="currentAppColorScheme === 'dark'" />
-                <tabler:sun v-else />
-              </button>
-            </Tooltip>
-
-            <Tooltip :content="$t('dock.settings')" :placement="tooltipPlacement">
-              <button class="dock-item" @click="toggleSettings()">
-                <tabler:settings />
-              </button>
-            </Tooltip>
-          </div>
-        </aside>
-        <aside v-else pos="fixed top-0 right-6px" h-full flex items-center z-10 pointer-events-none>
-          <div flex="~ gap-2 col" pointer-events-auto>
-            <Tooltip :content="currentAppColorScheme === 'dark' ? $t('dock.dark_mode') : $t('dock.light_mode')" placement="left">
-              <Button size="small" round shadow="$bew-shadow-1" w-45px important-h-45px @click="toggleDark()">
-                <tabler:moon-stars v-if="currentAppColorScheme === 'dark'" text-xl shrink-0 lh-0 />
-                <tabler:sun v-else text-xl shrink-0 lh-0 />
-              </Button>
-            </Tooltip>
-            <Tooltip :content="$t('dock.settings')" placement="left">
-              <Button size="small" round shadow="$bew-shadow-1" w-45px important-h-45px @click="toggleSettings">
-                <tabler:settings text-xl shrink-0 lh-0 />
-              </Button>
-            </Tooltip>
-          </div>
-        </aside>
-
-        <main
-          v-if="isHomePage"
-          p="t-80px" m-auto
-          :w="isVideoPage ? '[calc(100%-160px)]' : 'lg:85% md:[calc(90%-60px)] [calc(100%-140px)]'"
-        >
-          <!-- control button group -->
-          <div
-            v-if="activatedPage !== AppPage.Search"
-            pos="fixed right-24 bottom-4" z-4
-          >
-            <!-- refresh button -->
-            <Button
-              v-if="!showTopbarMask"
-              size="small"
-              frosted-glass shadow="$bew-shadow-1" w-45px important-h-45px
-              @click="handleRefresh"
-            >
-              <tabler:refresh text-lg shrink-0 />
-            </Button>
-            <!-- back to top button -->
-            <Button
-              v-else
-              size="small"
-              frosted-glass shadow="$bew-shadow-1" w-45px important-h-45px mt-2
-              @click="handleBackToTop"
-            >
-              <tabler:arrow-big-up text-lg shrink-0 />
-            </Button>
-          </div>
-
-          <Transition name="page-fade">
-            <Component :is="pages[activatedPage]" :key="dynamicComponentKey" />
-          </Transition>
-        </main>
-      </div>
     </div>
-    <!-- settings dialog -->
-    <KeepAlive>
-      <Settings v-if="showSettings" @close="showSettings = false" />
-    </KeepAlive>
+
+    <OverlayScrollbarsComponent ref="scrollbarRef" element="div" h-inherit defer @os-scroll="handleOsScroll">
+      <!-- Home search page mode background -->
+      <div
+        v-if="activatedPage === AppPage.Home && settings.useSearchPageModeOnHomePage && settings.individuallySetSearchPageWallpaper"
+        :style="{ opacity: showSettings ? 0.4 : 1 }"
+      >
+        <div
+          pos="relative left-0 top-0" w-full h-580px mb--580px bg="cover center" z-1
+          :style="{
+            backgroundImage: `url(${settings.searchPageWallpaper})`,
+          }"
+        />
+        <!-- background mask -->
+        <transition name="fade">
+          <div
+            v-if="(!settings.individuallySetSearchPageWallpaper && settings.enableWallpaperMasking) || (settings.searchPageEnableWallpaperMasking)"
+            pos="relative left-0 top-0" w-full h-580px mb--580px pointer-events-none duration-300 z-1 bg="$bew-homepage-bg-mask"
+            :style="{
+              backdropFilter: `blur(${settings.individuallySetSearchPageWallpaper ? settings.searchPageWallpaperBlurIntensity : settings.wallpaperBlurIntensity}px)`,
+            }"
+          >
+            <div
+              bg="$bew-homepage-bg" pos="absolute top-0 left-0" w-full h-full
+              :style="{
+                opacity: `${settings.searchPageWallpaperMaskOpacity}%`,
+              }"
+            />
+          </div>
+        </transition>
+      </div>
+
+      <div m-auto max-w="$bew-page-max-width" :style="{ opacity: showSettings ? 0.4 : 1 }">
+        <div flex="~" max-w="$bew-page-max-width">
+          <main
+            v-if="isHomePage"
+            p="t-80px" m-auto
+            :w="isVideoPage ? '[calc(100%-160px)]' : 'lg:85% md:[calc(90%-60px)] [calc(100%-140px)]'"
+          >
+            <!-- control button group -->
+            <div
+              v-if="activatedPage !== AppPage.Search"
+              pos="fixed right-24 bottom-4" z-4
+            >
+              <!-- refresh button -->
+              <Button
+                v-if="!showTopbarMask"
+                size="small"
+                frosted-glass shadow="$bew-shadow-1" w-45px important-h-45px
+                @click="handleRefresh"
+              >
+                <tabler:refresh text-lg shrink-0 />
+              </Button>
+              <!-- back to top button -->
+              <Button
+                v-else
+                size="small"
+                frosted-glass shadow="$bew-shadow-1" w-45px important-h-45px mt-2
+                @click="handleBackToTop"
+              >
+                <tabler:arrow-big-up text-lg shrink-0 />
+              </Button>
+            </div>
+
+            <Transition name="page-fade">
+              <Component :is="pages[activatedPage]" :key="dynamicComponentKey" />
+            </Transition>
+          </main>
+        </div>
+      </div>
+      <!-- settings dialog -->
+      <KeepAlive>
+        <Settings v-if="showSettings" @close="showSettings = false" />
+      </KeepAlive>
+    </OverlayScrollbarsComponent>
   </div>
 </template>
 
