@@ -40,6 +40,7 @@
     "@types/node": "^18.17.1",
     "@types/webextension-polyfill": "^0.9.2",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.0.0",
     "@unocss/reset": "^0.54.1",
     "@vitejs/plugin-vue": "^3.2.0",
     "@vue/compiler-sfc": "^3.3.4",
@@ -74,6 +75,7 @@
   "dependencies": {
     "dplayer": "^1.27.1",
     "mitt": "^3.0.1",
+    "overlayscrollbars": "^2.0.0",
     "overlayscrollbars-vue": "^0.5.5",
     "vue-i18n": "^9.2.2"
   }
