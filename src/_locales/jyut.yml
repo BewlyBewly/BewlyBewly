@@ -67,6 +67,10 @@ settings:
   enable_horizontal_scrolling: 使用橫向捲動
   enable_horizontal_scrolling_desc: 用咗之後，轆緊滑鼠就可以直接打橫掃水平捲軸列表
 
+  # Page visibility
+  page_visibility: 页面可见性
+  page_visibility_desc: 隐藏唔常用嘅页面入口
+
   # Appearance settings
   theme: 色系
   theme_opt:
