@@ -67,6 +67,10 @@ settings:
   enable_horizontal_scrolling: 启用横向滚动
   enable_horizontal_scrolling_desc: 启用后，鼠标滚动时将直接滚动横向滚动列表
 
+  # Page visibility
+  page_visibility: 页面可见性
+  page_visibility_desc: 隐藏不常用的页面入口
+
   # Appearance settings
   theme: 主题
   theme_opt:

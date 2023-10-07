@@ -67,6 +67,10 @@ settings:
   enable_horizontal_scrolling: Enable horizontal scrolling
   enable_horizontal_scrolling_desc: After enabling, mouse scrolling will directly scroll the horizontal scroll list
 
+  # Page visibility
+  page_visibility: Page visibility
+  page_visibility_desc: Hide Unused Page Entries
+
   # Appearance settings
   theme: Theme
   theme_opt:

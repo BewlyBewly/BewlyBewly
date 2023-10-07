@@ -1,5 +1,6 @@
 import { useStorageLocal } from '~/composables/useStorageLocal'
 import { AppPage } from '~/enums/appEnums'
+import { PageDockItem } from '~/models/dock'
 import type { Settings } from '~/models/models'
 
 export const storageDemo = useStorageLocal('webext-demo', 'Storage Demo')
@@ -38,3 +39,43 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   recommendationMode: 'web',
   useSearchPageModeOnHomePage: false,
 }), { mergeDefaults: true })
+
+
+export const pageDockItems = useStorageLocal('docks', ref<PageDockItem[]>([
+  {
+    i18nkey: 'dock.search',
+    page: AppPage.Search,
+    icon: 'tabler:search',
+    visible: true
+  },
+  {
+    i18nkey: 'dock.home',
+    page: AppPage.Home,
+    icon: 'tabler:home',
+    visible: true
+  },
+  {
+    i18nkey: 'dock.anime',
+    page: AppPage.Anime,
+    icon: 'tabler:device-tv',
+    visible: true
+  },
+  {
+    i18nkey: 'dock.history',
+    page: AppPage.History,
+    icon: 'tabler:clock',
+    visible: true
+  },
+  {
+    i18nkey: 'dock.favorites',
+    page: AppPage.Favorites,
+    icon: 'tabler:star',
+    visible: true
+  },
+  {
+    i18nkey: 'dock.watch_later',
+    page: AppPage.WatchLater,
+    icon: 'iconoir:playlist-play',
+    visible: true
+  }
+]))
