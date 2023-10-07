@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
 import { onMounted, reactive, ref, watch } from 'vue'
-import type { FavoriteCategory, FavoriteResource } from './types'
+import type { FavoriteCategory, FavoriteResource } from '../types'
 import { getUserID, removeHttpFromUrl, smoothScrollToTop } from '~/utils/main'
 import { calcCurrentTime } from '~/utils/dataFormatter'
 

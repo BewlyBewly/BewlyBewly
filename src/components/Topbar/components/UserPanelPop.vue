@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { UserInfo, UserStat } from './types'
+import type { UserInfo, UserStat } from '../types'
 import { revokeAccessKey } from '~/utils/authProvider'
 import { getCSRF, getUserID } from '~/utils/main'
 import { numFormatter } from '~/utils/dataFormatter'

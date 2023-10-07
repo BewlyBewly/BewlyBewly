@@ -2,9 +2,9 @@
 import { useI18n } from 'vue-i18n'
 import type { Ref, UnwrapNestedRefs } from 'vue'
 import { onMounted, reactive, ref, watch } from 'vue'
-import { isNewArticle, isNewVideo, setLastestOffsetID } from './notify'
-import { MomentType } from './types'
-import type { MomentItem } from './types'
+import { isNewArticle, isNewVideo, setLastestOffsetID } from '../notify'
+import { MomentType } from '../types'
+import type { MomentItem } from '../types'
 import { getUserID, smoothScrollToTop } from '~/utils/main'
 import { calcTimeSince } from '~/utils/dataFormatter'
 

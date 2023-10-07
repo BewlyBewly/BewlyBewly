@@ -247,7 +247,7 @@ async function getTopbarNewMomentsCount() {
         </Transition>
 
         <Transition name="slide-in">
-          <TopbarChannelsPop
+          <ChannelsPop
             v-if="showChannelsPop"
             class="bew-popover"
             pos="!left-0 !top-70px"
@@ -259,7 +259,7 @@ async function getTopbarNewMomentsCount() {
       <!-- search bar -->
       <div flex="~" w="full" justify="md:center <md:end" items-center>
         <Transition name="slide-out">
-          <SearchBar v-if="props.showSearchBar" ref="searchBar" />
+          <SearchBar v-if="props.showSearchBar" />
         </Transition>
       </div>
 
@@ -315,7 +315,7 @@ async function getTopbarNewMomentsCount() {
               }"
             />
             <Transition name="slide-in">
-              <TopbarUserPanelPop
+              <UserPanelPop
                 v-if="showUserPanelPop"
                 :user-info="userInfo"
                 after:h="!0"
@@ -344,7 +344,7 @@ async function getTopbarNewMomentsCount() {
               </a>
 
               <Transition name="slide-in">
-                <TopbarNotificationsPop
+                <NotificationsPop
                   v-if="showNotificationsPop"
                   class="bew-popover"
                 />
@@ -371,7 +371,7 @@ async function getTopbarNewMomentsCount() {
 
               <Transition name="slide-in">
                 <KeepAlive>
-                  <TopbarMomentsPop v-if="showMomentsPop" :key="momentsPopKey" class="bew-popover" />
+                  <MomentsPop v-if="showMomentsPop" :key="momentsPopKey" class="bew-popover" />
                 </KeepAlive>
               </Transition>
             </div>
@@ -393,7 +393,7 @@ async function getTopbarNewMomentsCount() {
 
               <Transition name="slide-in">
                 <KeepAlive>
-                  <TopbarFavoritesPop
+                  <FavoritesPop
                     v-if="showFavoritesPop"
                     class="bew-popover"
                   />
@@ -417,7 +417,7 @@ async function getTopbarNewMomentsCount() {
               </a>
 
               <Transition name="slide-in">
-                <TopbarHistoryPop v-if="showHistoryPop" class="bew-popover" />
+                <HistoryPop v-if="showHistoryPop" class="bew-popover" />
               </Transition>
             </div>
 
@@ -446,7 +446,7 @@ async function getTopbarNewMomentsCount() {
             </a>
 
             <Transition name="slide-in">
-              <TopbarMorePop v-show="showMorePop" class="bew-popover" />
+              <MorePop v-show="showMorePop" class="bew-popover" />
             </Transition>
           </div>
 
@@ -479,7 +479,7 @@ async function getTopbarNewMomentsCount() {
             </a>
 
             <Transition name="slide-in">
-              <TopbarUploadPop
+              <UploadPop
                 v-if="showUploadPop"
                 class="bew-popover"
                 pos="!left-auto !right-0"
