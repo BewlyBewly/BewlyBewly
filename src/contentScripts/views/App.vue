@@ -10,11 +10,13 @@ import Anime from './Anime/Anime.vue'
 import History from './History/History.vue'
 import WatchLater from './WatchLater/WatchLater.vue'
 import Favorites from './Favorites/Favorites.vue'
-import { accessKey, settings } from '~/logic'
+import { accessKey, settings, pageDockItems } from '~/logic'
 import '~/styles/index.ts'
 import { AppPage, LanguageType } from '~/enums/appEnums'
 import { getUserID, hexToRGBA, smoothScrollToTop } from '~/utils/main'
 import emitter from '~/utils/mitt'
+import {Icon} from '@iconify/vue'
+
 
 const activatedPage = ref<AppPage>(settings.value.startupPage ?? AppPage.Home)
 const { locale } = useI18n()
@@ -412,65 +414,17 @@ function handleAdaptToOtherPageStylesChange() {
             shadow="$bew-shadow-2"
             backdrop-glass pointer-events-auto
           >
-            <Tooltip :content="$t('dock.search')" :placement="tooltipPlacement">
-              <button
+            <template v-for="pageItem in pageDockItems">
+              <Tooltip v-if="pageItem.visible" :content="$t(pageItem.i18nkey)" :placement="tooltipPlacement">
+                <button
                 class="dock-item"
-                :class="{ active: activatedPage === AppPage.Search }"
-                @click="changeActivatePage(AppPage.Search)"
+                :class="{ active: activatedPage === pageItem.page }"
+                @click="changeActivatePage(pageItem.page)"
               >
-                <tabler:search />
-              </button>
-            </Tooltip>
-
-            <Tooltip :content="$t('dock.home')" :placement="tooltipPlacement">
-              <button
-                class="dock-item"
-                :class="{ active: activatedPage === AppPage.Home }"
-                @click="changeActivatePage(AppPage.Home)"
-              >
-                <tabler:home />
-              </button>
-            </Tooltip>
-
-            <Tooltip :content="$t('dock.anime')" :placement="tooltipPlacement">
-              <button
-                class="dock-item"
-                :class="{ active: activatedPage === AppPage.Anime }"
-                @click="changeActivatePage(AppPage.Anime)"
-              >
-                <tabler:device-tv />
-              </button>
-            </Tooltip>
-
-            <Tooltip :content="$t('dock.history')" :placement="tooltipPlacement">
-              <button
-                class="dock-item"
-                :class="{ active: activatedPage === AppPage.History }"
-                @click="changeActivatePage(AppPage.History)"
-              >
-                <tabler:clock />
-              </button>
-            </Tooltip>
-
-            <Tooltip :content="$t('dock.favorites')" :placement="tooltipPlacement">
-              <div
-                class="dock-item"
-                :class="{ active: activatedPage === AppPage.Favorites }"
-                @click="changeActivatePage(AppPage.Favorites)"
-              >
-                <tabler:star />
-              </div>
-            </Tooltip>
-
-            <Tooltip :content="$t('dock.watch_later')" :placement="tooltipPlacement">
-              <button
-                class="dock-item"
-                :class="{ active: activatedPage === AppPage.WatchLater }"
-                @click="changeActivatePage(AppPage.WatchLater)"
-              >
-                <iconoir:playlist-play />
-              </button>
-            </Tooltip>
+                  <Icon :icon="pageItem.icon"></Icon>
+                </button>
+              </Tooltip>
+            </template>
 
             <template v-if="isVideoPage">
               <!-- dividing line -->

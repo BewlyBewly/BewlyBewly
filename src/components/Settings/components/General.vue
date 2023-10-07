@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
-import { settings } from '~/logic'
-import { AppPage } from '~/enums/appEnums'
+import { settings, pageDockItems } from '~/logic'
+import {Icon} from '@iconify/vue'
 
 const { t, locale } = useI18n()
 
@@ -43,14 +43,14 @@ const dockPositions = computed(() => {
 })
 
 const pageOptions = computed((): { label: string; value: string }[] => {
-  return [
-    { label: t('dock.search'), value: AppPage.Search },
-    { label: t('dock.home'), value: AppPage.Home },
-    { label: t('dock.anime'), value: AppPage.Anime },
-    { label: t('dock.history'), value: AppPage.History },
-    { label: t('dock.favorites'), value: AppPage.Favorites },
-    { label: t('dock.watch_later'), value: AppPage.WatchLater },
-  ]
+  return pageDockItems.value
+    .filter(e => e.visible)
+    .map(e => {
+      return {
+        label: t(e.i18nkey),
+        value: e.page
+      }
+    })
 })
 
 watch(() => settings.value.language, (newValue, oldValue) => {
@@ -88,6 +88,20 @@ watch(() => settings.value.language, (newValue, oldValue) => {
       />
     </SettingsItem>
 
+    <SettingsItem :title="$t('settings.page_visibility')" :desc="$t('settings.page_visibility_desc')">
+      <div flex="~ row gap-2 shrink-0" p-2 m-2>
+        <Tooltip v-for="pageItem in pageDockItems" placement="top" :content="$t(pageItem.i18nkey)">
+            <button
+              class="page-item"
+              :class="{ active: pageItem.visible }"
+              @click="pageItem.visible = !pageItem.visible"
+            >
+                <Icon :icon="pageItem.icon"></Icon>
+            </button>
+        </Tooltip>
+      </div>
+    </SettingsItem>
+
     <SettingsItem :title="$t('settings.enable_horizontal_scrolling')" :desc="$t('settings.enable_horizontal_scrolling_desc')">
       <Radio v-model="settings.enableHorizontalScrolling" />
     </SettingsItem>
@@ -99,5 +113,29 @@ watch(() => settings.value.language, (newValue, oldValue) => {
 </template>
 
 <style lang="scss" scoped>
+.page-item {
+  --shadow: 0 0 30px 4px var(--bew-theme-color-50);
+  --shadow-dark: 0 0 30px 4px rgba(255, 255, 255, 0.6);
+  --shadow-active: 0 0 20px var(--bew-theme-color-50);
+  --shadow-dark-active: 0 0 20px rgba(255, 255, 255, 0.6);
 
+  --at-apply: transform active:scale-90
+    md:w-45px w-35px
+    md:p-3 p-2
+    md:text-2xl text-xl
+    aspect-square relative
+    text-$bew-text-1 leading-0 duration-300
+    rounded-$bew-radius
+    bg-$bew-fill-2 cursor-pointer
+    hover:bg-$bew-theme-color hover:text-white hover:shadow-$shadow
+    active:shadow-$shadow-active dark-active:shadow-$shadow-dark-active
+    dark-hover:bg-white dark-hover:text-black dark-hover:shadow-$shadow-dark;
+
+  &.active {
+    --at-apply: bg-$bew-theme-color dark-bg-white
+      text-white dark-text-black
+      shadow-$shadow dark:shadow-$shadow-dark
+      active:shadow-$shadow-active dark-active:shadow-$shadow-dark-active;
+  }
+}
 </style>
