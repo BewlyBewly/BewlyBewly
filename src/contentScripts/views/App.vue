@@ -282,36 +282,6 @@ function handleOsScroll() {
     </div>
 
     <OverlayScrollbarsComponent ref="scrollbarRef" element="div" h-inherit defer @os-scroll="handleOsScroll">
-      <!-- Home search page mode background -->
-      <div
-        v-if="activatedPage === AppPage.Home && settings.useSearchPageModeOnHomePage && settings.individuallySetSearchPageWallpaper"
-        :style="{ opacity: showSettings ? 0.4 : 1 }"
-      >
-        <div
-          pos="relative left-0 top-0" w-full h-580px mb--580px bg="cover center" z-1
-          :style="{
-            backgroundImage: `url(${settings.searchPageWallpaper})`,
-          }"
-        />
-        <!-- background mask -->
-        <transition name="fade">
-          <div
-            v-if="(!settings.individuallySetSearchPageWallpaper && settings.enableWallpaperMasking) || (settings.searchPageEnableWallpaperMasking)"
-            pos="relative left-0 top-0" w-full h-580px mb--580px pointer-events-none duration-300 z-1 bg="$bew-homepage-bg-mask"
-            :style="{
-              backdropFilter: `blur(${settings.individuallySetSearchPageWallpaper ? settings.searchPageWallpaperBlurIntensity : settings.wallpaperBlurIntensity}px)`,
-            }"
-          >
-            <div
-              bg="$bew-homepage-bg" pos="absolute top-0 left-0" w-full h-full
-              :style="{
-                opacity: `${settings.searchPageWallpaperMaskOpacity}%`,
-              }"
-            />
-          </div>
-        </transition>
-      </div>
-
       <div m-auto max-w="$bew-page-max-width" :style="{ opacity: showSettings ? 0.4 : 1 }">
         <div flex="~" max-w="$bew-page-max-width">
           <main

@@ -33,41 +33,72 @@ onUnmounted(() => {
 
 <template>
   <div>
+    <!-- Home search page mode background -->
     <div
-      v-if="settings.useSearchPageModeOnHomePage"
-      flex="~ col"
-      justify-center
-      items-center relative
-      w-full z-10
-      h-500px mb-8
+      v-if="settings.useSearchPageModeOnHomePage && settings.individuallySetSearchPageWallpaper"
     >
-      <!-- h-50vh max-h-550px -->
-      <Logo
-        v-if="settings.searchPageShowLogo" :size="180" :color="settings.searchPageLogoColor === 'white' ? 'white' : 'var(--bew-theme-color)'"
-        :glow="settings.searchPageLogoGlow"
-        m="t--70px b-12" z-1
+      <div
+        pos="absolute left-0 top-0" w-full h-580px mb--580px bg="cover center" z-1
+        :style="{
+          backgroundImage: `url(${settings.searchPageWallpaper})`,
+        }"
       />
-      <SearchBar
-        :darken-on-focus="settings.searchPageDarkenOnSearchFocus"
-        :blurred-on-focus="settings.searchPageBlurredOnSearchFocus"
-        :focused-character="settings.searchPageSearchBarFocusCharacter"
-      />
-    </div>
-    <header pos="sticky top-70px" z-10 mb-4>
-      <ul flex="~ items-center gap-2">
-        <li
-          v-for="tab in tabs" :key="tab.value"
-          px-4 lh-40px bg="$bew-elevated-2" backdrop-glass rounded="$bew-radius"
-          cursor-pointer shadow="$bew-shadow-2"
-          :style="{ backgroundColor: activatedPage === tab.value ? 'var(--bew-theme-color)' : null }"
-          @click="activatedPage = tab.value"
+      <!-- background mask -->
+      <transition name="fade">
+        <div
+          v-if="(!settings.individuallySetSearchPageWallpaper && settings.enableWallpaperMasking) || (settings.searchPageEnableWallpaperMasking)"
+          pos="relative left-0 top-0" w-full h-580px mb--580px pointer-events-none duration-300 z-1 bg="$bew-homepage-bg-mask"
+          :style="{
+            backdropFilter: `blur(${settings.individuallySetSearchPageWallpaper ? settings.searchPageWallpaperBlurIntensity : settings.wallpaperBlurIntensity}px)`,
+          }"
         >
-          {{ tab.label }}
-        </li>
-      </ul>
-    </header>
-    <Component :is="pages[activatedPage]" :key="recommendContentKey" />
-    <!-- <RecommendContent :key="recommendContentKey" /> -->
+          <div
+            bg="$bew-homepage-bg" pos="absolute top-0 left-0" w-full h-full
+            :style="{
+              opacity: `${settings.searchPageWallpaperMaskOpacity}%`,
+            }"
+          />
+        </div>
+      </transition>
+    </div>
+
+    <main>
+      <div
+        v-if="settings.useSearchPageModeOnHomePage"
+        flex="~ col"
+        justify-center
+        items-center relative
+        w-full z-10
+        h-500px mb-8
+      >
+        <!-- h-50vh max-h-550px -->
+        <Logo
+          v-if="settings.searchPageShowLogo" :size="180" :color="settings.searchPageLogoColor === 'white' ? 'white' : 'var(--bew-theme-color)'"
+          :glow="settings.searchPageLogoGlow"
+          m="t--70px b-12" z-1
+        />
+        <SearchBar
+          :darken-on-focus="settings.searchPageDarkenOnSearchFocus"
+          :blurred-on-focus="settings.searchPageBlurredOnSearchFocus"
+          :focused-character="settings.searchPageSearchBarFocusCharacter"
+        />
+      </div>
+      <header pos="sticky top-70px" z-10 mb-4>
+        <ul flex="~ items-center gap-2">
+          <li
+            v-for="tab in tabs" :key="tab.value"
+            px-4 lh-40px bg="$bew-elevated-2" backdrop-glass rounded="$bew-radius"
+            cursor-pointer shadow="$bew-shadow-2"
+            :style="{ backgroundColor: activatedPage === tab.value ? 'var(--bew-theme-color)' : null }"
+            @click="activatedPage = tab.value"
+          >
+            {{ tab.label }}
+          </li>
+        </ul>
+      </header>
+      <Component :is="pages[activatedPage]" :key="recommendContentKey" />
+      <!-- <RecommendContent :key="recommendContentKey" /> -->
+    </main>
   </div>
 </template>
 
