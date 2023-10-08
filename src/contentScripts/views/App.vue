@@ -29,16 +29,6 @@ const mainAppOpacity = ref<number>(0)
 const showTopbarMask = ref<boolean>(false)
 const dynamicComponentKey = ref<string>(`dynamicComponent${Number(new Date())}`)
 
-const tooltipPlacement = computed(() => {
-  if (settings.value.dockPosition === 'left')
-    return 'right'
-  else if (settings.value.dockPosition === 'right')
-    return 'left'
-  else if (settings.value.dockPosition === 'bottom')
-    return 'top'
-  return 'right'
-})
-
 const isHomePage = computed(() => {
   if (
     /https?:\/\/bilibili.com\/?$/.test(location.href)
@@ -78,20 +68,6 @@ const isTopbarFixed = computed(() => {
     return true
   return false
 })
-const currentAppColorScheme = computed((): 'dark' | 'light' => {
-  if (settings.value.theme !== 'auto')
-    return settings.value.theme
-  else
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-})
-
-// const isSearchPage = computed(() => {
-//   if (
-//     /https?:\/\/search.bilibili.com\/.*$/.test(location.href)
-//   )
-//     return true
-//   return false
-// })
 
 watch(
   () => activatedPage.value,
@@ -243,13 +219,6 @@ function setAppAppearance() {
   }
 }
 
-function toggleDark() {
-  if (currentAppColorScheme.value === 'light')
-    settings.value.theme = 'dark'
-  else
-    settings.value.theme = 'light'
-}
-
 function setAppThemeColor() {
   const bewlyElement = document.querySelector('#bewly') as HTMLElement
   if (bewlyElement) {
@@ -349,24 +318,8 @@ function handleOsScroll() {
     id="main-app" ref="mainAppRef" class="bewly-wrapper" text="$bew-text-1" transition="opacity duration-300" overflow-y-hidden z-60
     :style="{ opacity: 1, height: isHomePage ? '100vh' : '0' }"
   >
-    <!-- Dock -->
-    <Dock v-if="isHomePage" :activated-page="activatedPage" @change-page="pageName => changeActivatePage(pageName)" @settings-visibility-change="showSettings = !showSettings" />
-
-    <aside v-else pos="fixed top-0 right-6px" h-full flex items-center z-1 pointer-events-none>
-      <div flex="~ gap-2 col" pointer-events-auto>
-        <Tooltip :content="currentAppColorScheme === 'dark' ? $t('dock.dark_mode') : $t('dock.light_mode')" placement="left">
-          <Button size="small" round shadow="$bew-shadow-1" w-45px important-h-45px @click="toggleDark()">
-            <tabler:moon-stars v-if="currentAppColorScheme === 'dark'" text-xl shrink-0 lh-0 />
-            <tabler:sun v-else text-xl shrink-0 lh-0 />
-          </Button>
-        </Tooltip>
-        <Tooltip :content="$t('dock.settings')" placement="left">
-          <Button size="small" round shadow="$bew-shadow-1" w-45px important-h-45px @click="toggleSettings">
-            <tabler:settings text-xl shrink-0 lh-0 />
-          </Button>
-        </Tooltip>
-      </div>
-    </aside>
+    <Dock v-if="isHomePage" :activated-page="activatedPage" @change-page="pageName => changeActivatePage(pageName)" @settings-visibility-change="toggleSettings" />
+    <RightSideButtons v-else @settings-visibility-change="toggleSettings" />
 
     <!-- Topbar -->
     <div m-auto max-w="$bew-page-max-width" :style="{ opacity: showSettings ? 0.4 : 1 }">
