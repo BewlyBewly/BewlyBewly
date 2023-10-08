@@ -99,21 +99,6 @@ watch(() => accessKey.value, () => {
   handleChangeAccessKey()
 })
 
-watch(() => settings.value.wallpaperMaskOpacity, () => {
-  setAppWallpaperMaskingOpacity()
-})
-
-watch(() => settings.value.searchPageWallpaperMaskOpacity, () => {
-  setAppWallpaperMaskingOpacity()
-})
-
-watch(() => activatedPage.value, (newValue, oldValue) => {
-  // If u have set the `individuallySetSearchPageWallpaper`, reapply the wallpaper when the new page is search page
-  // or when switching from a search page to another page, since search page has its own wallpaper.
-  if (settings.value.individuallySetSearchPageWallpaper && (newValue === AppPage.Search || oldValue === AppPage.Search))
-    setAppWallpaperMaskingOpacity()
-})
-
 watch(() => settings.value.adaptToOtherPageStyles, () => {
   handleAdaptToOtherPageStylesChange()
 })
@@ -143,7 +128,6 @@ onMounted(() => {
   setAppAppearance()
   setAppLanguage()
   setAppThemeColor()
-  setAppWallpaperMaskingOpacity()
   handleAdaptToOtherPageStylesChange()
 })
 
@@ -232,14 +216,6 @@ function setAppThemeColor() {
     document.documentElement.style.setProperty(`--bew-theme-color-${i + 1}0`, hexToRGBA(settings.value.themeColor, i * 0.1 + 0.1))
 }
 
-function setAppWallpaperMaskingOpacity() {
-  const bewlyElement = document.querySelector('#bewly') as HTMLElement
-  if (settings.value.individuallySetSearchPageWallpaper && activatedPage.value === AppPage.Search)
-    bewlyElement.style.setProperty('--bew-homepage-bg-mask-opacity', `${settings.value.searchPageWallpaperMaskOpacity}%`)
-  else
-    bewlyElement.style.setProperty('--bew-homepage-bg-mask-opacity', `${settings.value.wallpaperMaskOpacity}%`)
-}
-
 function handleRefresh() {
   emitter.emit('pageRefresh')
   if (activatedPage.value === AppPage.Anime)
@@ -276,42 +252,7 @@ function handleOsScroll() {
 
 <template>
   <template v-if="isHomePage">
-    <Transition name="fade">
-      <div v-if="activatedPage === AppPage.Search">
-        <!-- background -->
-        <div
-          pos="absolute top-0 left-0" w-full h-full duration-300 bg="cover center $bew-homepage-bg" z--1
-          :style="{ backgroundImage: `url(${settings.individuallySetSearchPageWallpaper ? settings.searchPageWallpaper : settings.wallpaper})` }"
-        />
-        <!-- background mask -->
-        <transition name="fade">
-          <div
-            v-if="(!settings.individuallySetSearchPageWallpaper && settings.enableWallpaperMasking) || (settings.searchPageEnableWallpaperMasking)"
-            pos="absolute top-0 left-0" w-full h-full pointer-events-none bg="$bew-homepage-bg-mask" duration-300 z--1
-            :style="{
-              backdropFilter: `blur(${settings.individuallySetSearchPageWallpaper ? settings.searchPageWallpaperBlurIntensity : settings.wallpaperBlurIntensity}px)`,
-            }"
-          />
-        </transition>
-      </div>
-      <div v-else>
-        <!-- background -->
-        <div
-          pos="absolute top-0 left-0" w-full h-full duration-300 bg="cover center $bew-homepage-bg" z--1
-          :style="{ backgroundImage: `url(${settings.wallpaper})` }"
-        />
-        <!-- background mask -->
-        <transition name="fade">
-          <div
-            v-if="settings.enableWallpaperMasking"
-            pos="absolute top-0 left-0" w-full h-full pointer-events-none bg="$bew-homepage-bg-mask" duration-300 z--1
-            :style="{
-              backdropFilter: `blur(${settings.wallpaperBlurIntensity}px)`,
-            }"
-          />
-        </transition>
-      </div>
-    </Transition>
+    <AppBackground :activated-page="activatedPage" />
   </template>
 
   <div
