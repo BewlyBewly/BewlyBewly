@@ -290,29 +290,11 @@ function handleOsScroll() {
             :w="isVideoPage ? '[calc(100%-160px)]' : 'lg:85% md:[calc(90%-60px)] [calc(100%-140px)]'"
           >
             <!-- control button group -->
-            <div
-              v-if="activatedPage !== AppPage.Search"
-              pos="fixed right-24 bottom-4" z-4
-            >
-              <!-- refresh button -->
-              <Button
-                v-if="!showTopbarMask"
-                size="small"
-                frosted-glass shadow="$bew-shadow-1" w-45px important-h-45px
-                @click="handleRefresh"
-              >
-                <tabler:refresh text-lg shrink-0 />
-              </Button>
-              <!-- back to top button -->
-              <Button
-                v-else
-                size="small"
-                frosted-glass shadow="$bew-shadow-1" w-45px important-h-45px mt-2
-                @click="handleBackToTop"
-              >
-                <tabler:arrow-big-up text-lg shrink-0 />
-              </Button>
-            </div>
+            <BackToTopAndRefreshButtons
+              v-if="activatedPage !== AppPage.Search" :show-refresh-button="!showTopbarMask"
+              @refresh="handleRefresh"
+              @back-to-top="handleBackToTop"
+            />
 
             <Transition name="page-fade">
               <Component :is="pages[activatedPage]" :key="dynamicComponentKey" />
