@@ -350,18 +350,8 @@ function handleOsScroll() {
     :style="{ opacity: 1, height: isHomePage ? '100vh' : '0' }"
   >
     <!-- Dock -->
-    <aside
-      v-if="isHomePage"
-      class="dock-wrap"
-      :class="{
-        left: settings.dockPosition === 'left',
-        right: settings.dockPosition === 'right',
-        bottom: settings.dockPosition === 'bottom',
-      }"
-      pos="absolute top-0" flex="~ col" h-full justify-center z-1 pointer-events-none
-    >
-      <Dock :activated-page="activatedPage" @change-page="pageName => changeActivatePage(pageName)" @settings-visibility-change="showSettings = !showSettings" />
-    </aside>
+    <Dock v-if="isHomePage" :activated-page="activatedPage" @change-page="pageName => changeActivatePage(pageName)" @settings-visibility-change="showSettings = !showSettings" />
+
     <aside v-else pos="fixed top-0 right-6px" h-full flex items-center z-1 pointer-events-none>
       <div flex="~ gap-2 col" pointer-events-auto>
         <Tooltip :content="currentAppColorScheme === 'dark' ? $t('dock.dark_mode') : $t('dock.light_mode')" placement="left">
@@ -483,37 +473,6 @@ function handleOsScroll() {
 .topbar-enter-from,
 .topbar-leave-to {
   --at-apply: opacity-0 transform -translate-y-full;
-}
-
-.dock-wrap {
-  svg {
-    --at-apply: block align-middle;
-  }
-
-  &.left {
-    --at-apply: left-2;
-  }
-
-  &.right {
-    --at-apply: right-2;
-  }
-
-  &.bottom {
-    --at-apply: top-unset bottom-0 items-center w-full h-[fit-content];
-
-    .dock-content {
-      --at-apply: flex-row;
-    }
-  }
-
-  .divider {
-    --at-apply: my-2 w-full h-2px bg-$bew-fill-2;
-  }
-
-  &.bottom .divider {
-    --at-apply: w-2px h-auto my-0 mx-2;
-  }
-
 }
 </style>
 

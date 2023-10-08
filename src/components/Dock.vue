@@ -39,6 +39,7 @@ function toggleDark() {
       right: settings.dockPosition === 'right',
       bottom: settings.dockPosition === 'bottom',
     }"
+    pos="absolute top-0" flex="~ col" h-full justify-center z-1 pointer-events-none
   >
     <div
       class="dock-content"
