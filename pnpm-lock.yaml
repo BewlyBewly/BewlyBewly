@@ -4,6 +4,7 @@ specifiers:
   '@antfu/eslint-config': ^0.39.7
   '@ffflorian/jszip-cli': ^3.4.1
   '@iconify/json': ^2.2.97
+  '@iconify/vue': ^4.1.1
   '@intlify/unplugin-vue-i18n': ^0.8.2
   '@rollup/plugin-replace': ^5.0.2
   '@types/dplayer': ^1.25.2
@@ -59,6 +60,7 @@ devDependencies:
   '@antfu/eslint-config': 0.39.8_qzrgnijdkb26bxvpro4ocvcfk4
   '@ffflorian/jszip-cli': 3.4.1
   '@iconify/json': 2.2.97
+  '@iconify/vue': 4.1.1_vue@3.3.4
   '@intlify/unplugin-vue-i18n': 0.8.2_vue-i18n@9.2.2
   '@rollup/plugin-replace': 5.0.2
   '@types/dplayer': 1.25.2
@@ -668,6 +670,15 @@ packages:
       local-pkg: 0.4.3
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /@iconify/vue/4.1.1_vue@3.3.4:
+    resolution: {integrity: sha512-RL85Bm/DAe8y6rT6pux7D2FJSiUEM/TPfyK7GrbAOfTSwrhvwJW+S5yijdGcmtXouA8MtuH9C7l4hiSE4mLMjg==}
+    peerDependencies:
+      vue: '>=3'
+    dependencies:
+      '@iconify/types': 2.0.0
+      vue: 3.3.4
     dev: true
 
   /@intlify/bundle-utils/4.0.0_vue-i18n@9.2.2:

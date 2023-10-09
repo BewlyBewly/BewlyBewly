@@ -1,10 +1,15 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+import { Icon } from '@iconify/vue'
+import type { DockItem } from './types'
 import { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
 
 defineProps<{ activatedPage: AppPage }>()
 
 const emit = defineEmits(['change-page', 'settings-visibility-change'])
+
+const { t } = useI18n()
 
 const tooltipPlacement = computed(() => {
   if (settings.value.dockPosition === 'left')
@@ -21,6 +26,17 @@ const currentAppColorScheme = computed((): 'dark' | 'light' => {
     return settings.value.theme
   else
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+})
+
+const dockItems = computed((): DockItem[] => {
+  return [
+    { label: t('dock.search'), icon: 'tabler:search', page: AppPage.Search },
+    { label: t('dock.home'), icon: 'tabler:home', page: AppPage.Home },
+    { label: t('dock.anime'), icon: 'tabler:device-tv', page: AppPage.Anime },
+    { label: t('dock.history'), icon: 'tabler:clock', page: AppPage.History },
+    { label: t('dock.favorites'), icon: 'tabler:star', page: AppPage.Favorites },
+    { label: t('dock.watch_later'), icon: 'iconoir:playlist-play', page: AppPage.WatchLater },
+  ]
 })
 
 function toggleDark() {
@@ -48,65 +64,17 @@ function toggleDark() {
       shadow="$bew-shadow-2"
       backdrop-glass pointer-events-auto
     >
-      <Tooltip :content="$t('dock.search')" :placement="tooltipPlacement">
-        <button
-          class="dock-item"
-          :class="{ active: activatedPage === AppPage.Search }"
-          @click="emit('change-page', AppPage.Search)"
-        >
-          <tabler:search />
-        </button>
-      </Tooltip>
-
-      <Tooltip :content="$t('dock.home')" :placement="tooltipPlacement">
-        <button
-          class="dock-item"
-          :class="{ active: activatedPage === AppPage.Home }"
-          @click="emit('change-page', AppPage.Home)"
-        >
-          <tabler:home />
-        </button>
-      </Tooltip>
-
-      <Tooltip :content="$t('dock.anime')" :placement="tooltipPlacement">
-        <button
-          class="dock-item"
-          :class="{ active: activatedPage === AppPage.Anime }"
-          @click="emit('change-page', AppPage.Anime)"
-        >
-          <tabler:device-tv />
-        </button>
-      </Tooltip>
-
-      <Tooltip :content="$t('dock.history')" :placement="tooltipPlacement">
-        <button
-          class="dock-item"
-          :class="{ active: activatedPage === AppPage.History }"
-          @click="emit('change-page', AppPage.History)"
-        >
-          <tabler:clock />
-        </button>
-      </Tooltip>
-
-      <Tooltip :content="$t('dock.favorites')" :placement="tooltipPlacement">
-        <div
-          class="dock-item"
-          :class="{ active: activatedPage === AppPage.Favorites }"
-          @click="emit('change-page', AppPage.Favorites)"
-        >
-          <tabler:star />
-        </div>
-      </Tooltip>
-
-      <Tooltip :content="$t('dock.watch_later')" :placement="tooltipPlacement">
-        <button
-          class="dock-item"
-          :class="{ active: activatedPage === AppPage.WatchLater }"
-          @click="emit('change-page', AppPage.WatchLater)"
-        >
-          <iconoir:playlist-play />
-        </button>
-      </Tooltip>
+      <template v-for="dock in dockItems" :key="dock.page">
+        <Tooltip :content="dock.label" :placement="tooltipPlacement">
+          <button
+            class="dock-item"
+            :class="{ active: activatedPage === dock.page }"
+            @click="emit('change-page', dock.page)"
+          >
+            <Icon :icon="dock.icon" />
+          </button>
+        </Tooltip>
+      </template>
 
       <!-- dividing line -->
       <div class="divider" />
@@ -165,10 +133,11 @@ function toggleDark() {
 
     --at-apply: transform active:scale-90
       md:w-45px w-35px
-      md:p-3 p-2
+      md:lh-45px lh-35px
       md:text-2xl text-xl
+      p-0 flex items-center justify-center
       aspect-square relative
-      text-$bew-text-1 leading-0 duration-300
+      leading-0 duration-300
       rounded-$bew-radius
       bg-$bew-fill-2 cursor-pointer
       hover:bg-$bew-theme-color hover:text-white hover:shadow-$shadow
@@ -181,16 +150,6 @@ function toggleDark() {
         shadow-$shadow dark:shadow-$shadow-dark
         active:shadow-$shadow-active dark-active:shadow-$shadow-dark-active;
     }
-
-    &.active.video {
-      --shadow: 0 0 30px 4px var(--bew-warning-color-50);
-      --shadow-dark: var(--shadow);
-      --shadow-active: 0 0 20px var(--bew-warning-color-50);
-      --shadow-dark-active: var(--shadow-active);
-
-      --at-apply: bg-$bew-warning-color text-black;
-    }
-
   }
 }
 </style>
