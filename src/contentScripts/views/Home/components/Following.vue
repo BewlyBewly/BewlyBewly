@@ -1,36 +1,25 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import type { AppVideoModel, VideoModel } from '../types'
+import type { MomentModel } from '../types'
 import emitter from '~/utils/mitt'
-import { settings } from '~/logic'
 
-const videoList = reactive<VideoModel[]>([])
-const appVideoList = reactive<AppVideoModel[]>([])
+const videoList = reactive<MomentModel[]>([])
 const isLoading = ref<boolean>(false)
 const needToLoginFirst = ref<boolean>(false)
 const containerRef = ref<HTMLElement>() as Ref<HTMLElement>
-const offset = ref<string>()
-const updateBaseline = ref<string>()
-
-watch(() => settings.value.recommendationMode, (newValue, oldValue) => {
-  videoList.length = 0
-  appVideoList.length = 0
-  if (newValue === 'web')
-    getRecommendVideos()
-})
+const offset = ref<string>('')
+const updateBaseline = ref<string>('')
 
 onMounted(async () => {
-  // Delay by 0.2 seconds to obtain the `settings.value.recommendationMode` value
-  // otherwise the `settings.value.recommendationMode` value will be undefined
-  // i have no idea to fix that...
-  setTimeout(async () => {
-    getRecommendVideos()
-  }, 200)
+  for (let i = 0; i < 3; i++)
+    await getFollowingAuthorVideos()
 
   emitter.off('reachBottom')
   emitter.on('reachBottom', async () => {
-    if (!isLoading.value)
-      getRecommendVideos()
+    if (!isLoading.value) {
+      for (let i = 0; i < 3; i++)
+        await getFollowingAuthorVideos()
+    }
   })
 })
 
@@ -38,7 +27,7 @@ onUnmounted(() => {
   emitter.off('reachBottom')
 })
 
-async function getRecommendVideos() {
+async function getFollowingAuthorVideos() {
   isLoading.value = true
   try {
     const response = await browser.runtime.sendMessage({
@@ -49,9 +38,12 @@ async function getRecommendVideos() {
     })
 
     if (response.code === 0) {
-      const resData = [] as VideoModel[]
+      offset.value = response.data.offset
+      updateBaseline.value = response.data.update_baseline
 
-      response.data.item.forEach((item: VideoModel) => {
+      const resData = [] as MomentModel[]
+
+      response.data.items.forEach((item: MomentModel) => {
         resData.push(item)
       })
 
@@ -64,7 +56,7 @@ async function getRecommendVideos() {
         Object.assign(videoList, videoList.concat(resData))
       }
     }
-    else if (response.code === 62011) {
+    else if (response.code === -101) {
       needToLoginFirst.value = true
     }
   }
@@ -91,40 +83,21 @@ function jumpToLoginPage() {
       m="b-0 t-0" relative w-full h-full
       grid="~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-4"
     >
-      <template v-if="settings.recommendationMode === 'web'">
-        <VideoCard
-          v-for="video in videoList"
-          :id="video.id"
-          :key="video.id"
-          :duration="video.duration"
-          :title="video.title"
-          :cover="video.pic"
-          :author="video.owner.name"
-          :author-face="video.owner.face"
-          :mid="video.owner.mid"
-          :view="video.stat.view"
-          :danmaku="video.stat.danmaku"
-          :published-timestamp="video.pubdate"
-          :bvid="video.bvid"
-        />
-      </template>
-      <template v-else>
-        <VideoCard
-          v-for="video in appVideoList"
-          :id="video.args.aid"
-          :key="video.args.aid"
-          :duration-str="video.cover_right_text"
-          :title="video.title"
-          :cover="video.cover"
-          :author="'avatar' in video.mask ? video.mask.avatar.text : ''"
-          :author-face="'avatar' in video.mask ? video.mask.avatar.cover : ''"
-          :mid="video.mask.avatar.up_id"
-          :capsule-text="video.desc.split('·')[1]"
-          :bvid="video.bvid"
-          :view-str="video.cover_left_text_1"
-          :danmaku-str="video.cover_left_text_2"
-        />
-      </template>
+      <VideoCard
+        v-for="video in videoList"
+        :id="Number(video.modules.module_dynamic.major.archive.aid)"
+        :key="video.modules.module_dynamic.major.archive.aid"
+        :duration-str="video.modules.module_dynamic.major.archive.duration_text"
+        :title="video.modules.module_dynamic.major.archive.title"
+        :cover="video.modules.module_dynamic.major.archive.cover"
+        :author="video.modules.module_author.name"
+        :author-face="video.modules.module_author.face"
+        :mid="video.modules.module_author.mid"
+        :view-str="video.modules.module_dynamic.major.archive.stat.play"
+        :danmaku-str="video.modules.module_dynamic.major.archive.stat.danmaku"
+        :capsule-text="video.modules.module_author.pub_time"
+        :bvid="video.modules.module_dynamic.major.archive.bvid"
+      />
 
       <!-- skeleton -->
       <template v-for="item in 30" :key="item">
