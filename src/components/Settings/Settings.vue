@@ -88,97 +88,85 @@ function changeMenuItem(menuItem: MenuType) {
 function setCurrentTitle() {
   settingsMenuItems.value.forEach((item) => {
     if (item.value === activatedMenuItem.value)
-      title.value = item.label
+      title.value = item.title
   })
 }
 </script>
 
 <template>
-  <div class="fixed w-full h-full top-0 left-0" z="9998" opacity-60 :style="{ backgroundColor: isHomePage ? '' : 'var(--bew-bg)' }" @click="handleClose" />
-
-  <div
-    id="settings-window" pos="fixed top-1/2 left-1/2" w="90%" h="90%"
-    max-w-900px max-h-800px transform="~ translate-x--1/2 translate-y--1/2"
-    z-9999 flex justify-between items-center
-  >
-    <aside
-      class="group" shrink-0 p="x-4" pos="absolute left--42px" z-2
-      :style="{
-        pointerEvents: preventCloseSettings ? 'none' : ''
-      }"
-    >
-      <ul
-        flex="~ gap-2 col" rounded="30px hover:25px" bg="$bew-elevated-2" p-2 shadow="$bew-shadow-3"
-        scale="group-hover:105" duration-300 overflow-hidden
-        backdrop-glass
-      >
-        <!-- mask -->
-        <div v-if="preventCloseSettings" pos="absolute top-0 left-0" w-full h-full bg="black opacity-20 dark:opacity-40" />
-
-        <li v-for="menuItem in settingsMenuItems" :key="menuItem.value">
-          <a
-            cursor-pointer w="40px group-hover:150px" h-40px
-            rounded-30px flex items-center overflow-x-hidden
-            duration-300 bg="hover:$bew-fill-2"
-            :class="{ 'menu-item-activated': menuItem.value === activatedMenuItem }"
-            @click="changeMenuItem(menuItem.value)"
-          >
-            <Icon :icon="menuItem.icon" text="xl center" w-40px h-20px flex="~ shrink-0" justify-center />
-            <span shrink-0>{{ menuItem.title }}</span>
-          </a>
-        </li>
-      </ul>
-    </aside>
+  <div class="fixed w-full h-full top-0 left-0" z="9998">
+    <div
+      class="fixed w-full h-full top-0 left-0" opacity-60 :style="{ backgroundColor: isHomePage ? '' : 'var(--bew-bg)' }"
+      @click="handleClose"
+    />
 
     <div
-      relative overflow-hidden w-full h-full bg="$bew-elevated-solid-1"
-      shadow="$bew-shadow-4" rounded="$bew-radius"
+      id="settings-window" pos="fixed top-1/2 left-1/2" w="90%" h="90%"
+      max-w-900px max-h-800px transform="~ translate-x--1/2 translate-y--1/2"
+      z-9999 flex justify-between items-center
     >
-      <header
-        flex justify-between items-center w-full h-80px
-        pos="fixed top-0 left-0" p="x-12"
-        z-1 rounded="t-$bew-radius"
-        style="
-          background: linear-gradient(var(--bew-elevated-solid-1), transparent);
-          text-shadow: 0 0 15px var(--bew-elevated-solid-1), 0 0 20px var(--bew-elevated-solid-1)
-        "
+      <aside
+        class="group" shrink-0 p="x-4" pos="absolute left--42px" z-2
+        :style="{
+          pointerEvents: preventCloseSettings ? 'none' : 'unset'
+        }"
       >
-        <div text="3xl" fw-bold>
-          {{ title }}
-        </div>
-        <div
-          text-2xl leading-0 bg="$bew-fill-1 hover:$bew-theme-color-30" w="32px" h="32px" p="1" rounded-8 cursor="pointer" backdrop-glass
-          hover:ring="2 $bew-theme-color" hover:text="$bew-theme-color" duration-300
-          @click="handleClose"
+        <ul
+          flex="~ gap-2 col" rounded="30px hover:25px" bg="$bew-elevated-2" p-2 shadow="$bew-shadow-3"
+          scale="group-hover:105" duration-300 overflow-hidden
+          backdrop-glass
         >
-          <ic-baseline-clear />
-        </div>
-      </header>
+          <!-- mask -->
+          <div v-if="preventCloseSettings" pos="absolute top-0 left-0" w-full h-full bg="black opacity-20 dark:opacity-40" />
 
-      <main relative h-full py-8 p="x-13" overflow-y-overlay>
-        <!-- <header
-          flex justify-between items-center w-full h-60px
-          pos="fixed top-0 left-0"
-          px-10
-          bg="$bew-content-1" z-1 rounded="t-$bew-radius"
+          <li v-for="menuItem in settingsMenuItems" :key="menuItem.value">
+            <a
+              cursor-pointer w="40px group-hover:150px" h-40px
+              rounded-30px flex items-center overflow-x-hidden
+              duration-300 bg="hover:$bew-fill-2"
+              :class="{ 'menu-item-activated': menuItem.value === activatedMenuItem }"
+              @click="changeMenuItem(menuItem.value)"
+            >
+              <Icon :icon="menuItem.icon" text="xl center" w-40px h-20px flex="~ shrink-0" justify-center />
+              <span shrink-0>{{ menuItem.title }}</span>
+            </a>
+          </li>
+        </ul>
+      </aside>
+
+      <div
+        relative overflow-hidden w-full h-full bg="$bew-elevated-solid-1"
+        shadow="$bew-shadow-4" rounded="$bew-radius"
+      >
+        <header
+          flex justify-between items-center w-full h-80px
+          pos="fixed top-0 left-0" p="x-12"
+          z-1 rounded="t-$bew-radius"
+          style="
+            background: linear-gradient(var(--bew-elevated-solid-1), transparent);
+            text-shadow: 0 0 15px var(--bew-elevated-solid-1), 0 0 20px var(--bew-elevated-solid-1)
+          "
         >
-          <div text="3xl">
-            {{ $t('settings.title') }}
+          <div text="3xl" fw-bold>
+            {{ title }}
           </div>
           <div
-            text-2xl leading-0 bg="$bew-fill-1" w="32px" h="32px" p="1" rounded-8 shadow="md" cursor="pointer"
+            text-2xl leading-0 bg="$bew-fill-1 hover:$bew-theme-color-30" w="32px" h="32px" p="1" rounded-8 cursor="pointer" backdrop-glass
+            hover:ring="2 $bew-theme-color" hover:text="$bew-theme-color" duration-300
             @click="handleClose"
           >
             <ic-baseline-clear />
           </div>
-        </header> -->
+        </header>
 
-        <div h-80px mt--8 />
+        <main relative h-full py-8 p="x-13" overflow-y-overlay>
+          <div h-80px mt--8 />
 
-        <Transition name="page-fade">
-          <Component :is="settingsMenu[activatedMenuItem]" />
-        </Transition>
-      </main>
+          <Transition name="page-fade">
+            <Component :is="settingsMenu[activatedMenuItem]" />
+          </Transition>
+        </main>
+      </div>
     </div>
   </div>
 </template>
