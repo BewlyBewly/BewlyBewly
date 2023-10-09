@@ -256,11 +256,14 @@ function handleOsScroll() {
   </template>
 
   <div
-    id="main-app" ref="mainAppRef" class="bewly-wrapper" text="$bew-text-1" transition="opacity duration-300" overflow-y-hidden z-60
+    ref="mainAppRef" class="bewly-wrapper" text="$bew-text-1" transition="opacity duration-300" overflow-y-hidden z-60
     :style="{ opacity: 1, height: isHomePage ? '100vh' : '0' }"
   >
-    <Dock v-if="isHomePage" :activated-page="activatedPage" @change-page="pageName => changeActivatePage(pageName)" @settings-visibility-change="toggleSettings" />
-    <RightSideButtons v-else @settings-visibility-change="toggleSettings" />
+    <!-- Dock & RightSideButtons -->
+    <div :style="{ opacity: showSettings ? 0.4 : 1 }">
+      <Dock v-if="isHomePage" :activated-page="activatedPage" @change-page="pageName => changeActivatePage(pageName)" @settings-visibility-change="toggleSettings" />
+      <RightSideButtons v-else @settings-visibility-change="toggleSettings" />
+    </div>
 
     <!-- Topbar -->
     <div m-auto max-w="$bew-page-max-width" :style="{ opacity: showSettings ? 0.4 : 1 }">
@@ -268,7 +271,7 @@ function handleOsScroll() {
         <Topbar
           v-if="settings.isShowTopbar && !isHomePage"
           :show-topbar-mask="showTopbarMask && isTopbarFixed"
-          pos="top-0 left-0" z-9999 w="[calc(100%)]"
+          pos="top-0 left-0" z-9999 w-full
           :style="{ position: isTopbarFixed ? 'fixed' : 'absolute' }"
         />
         <Topbar
@@ -276,10 +279,15 @@ function handleOsScroll() {
           :show-search-bar="showTopbarMask && settings.useSearchPageModeOnHomePage || (!settings.useSearchPageModeOnHomePage && activatedPage !== AppPage.Search || activatedPage !== AppPage.Home && activatedPage !== AppPage.Search)"
           :show-logo="showTopbarMask && settings.useSearchPageModeOnHomePage || (!settings.useSearchPageModeOnHomePage || activatedPage !== AppPage.Home)"
           :show-topbar-mask="showTopbarMask && isTopbarFixed"
-          pos="fixed top-0 left-0" z-9999 w="[calc(100%)]"
+          pos="fixed top-0 left-0" z-9999 w-full
         />
       </Transition>
     </div>
+
+    <!-- Settings -->
+    <KeepAlive>
+      <Settings v-if="showSettings" @close="showSettings = false" />
+    </KeepAlive>
 
     <OverlayScrollbarsComponent ref="scrollbarRef" element="div" h-inherit defer @os-scroll="handleOsScroll">
       <div m-auto max-w="$bew-page-max-width" :style="{ opacity: showSettings ? 0.4 : 1 }">
@@ -303,10 +311,6 @@ function handleOsScroll() {
         </div>
       </div>
     </OverlayScrollbarsComponent>
-    <!-- settings dialog -->
-    <KeepAlive>
-      <Settings v-if="showSettings" @close="showSettings = false" />
-    </KeepAlive>
   </div>
 </template>
 
