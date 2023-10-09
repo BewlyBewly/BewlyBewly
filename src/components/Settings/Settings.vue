@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import { Icon } from '@iconify/vue'
 import General from './components/General.vue'
 import Appearance from './components/Appearance.vue'
 import SearchPage from './components/SearchPage.vue'
 import Home from './components/Home.vue'
 import About from './components/About.vue'
+import type { MenuItem } from './types'
 import { MenuType } from './types'
 import { settings } from '~/logic'
 
@@ -19,27 +21,33 @@ const preventCloseSettings = ref<boolean>(false)
 
 provide('preventCloseSettings', preventCloseSettings)
 
-const settingsMenuItems = computed(() => {
+const settingsMenuItems = computed((): MenuItem[] => {
   return [
     {
       value: MenuType.General,
-      label: t('settings.menu_general'),
+      icon: 'tabler:settings',
+      title: t('settings.menu_general'),
     },
     {
       value: MenuType.Appearance,
-      label: t('settings.menu_appearance'),
+      title: t('settings.menu_appearance'),
+      icon: 'tabler:brush',
+
     },
     {
       value: MenuType.SearchPage,
-      label: t('settings.menu_search_page'),
+      icon: 'tabler:search',
+      title: t('settings.menu_search_page'),
     },
     {
       value: MenuType.Home,
-      label: t('settings.menu_home'),
+      icon: 'tabler:home',
+      title: t('settings.menu_home'),
     },
     {
       value: MenuType.About,
-      label: t('settings.menu_about'),
+      icon: 'tabler:info-circle',
+      title: t('settings.menu_about'),
     },
   ]
 })
@@ -107,22 +115,16 @@ function setCurrentTitle() {
         <!-- mask -->
         <div v-if="preventCloseSettings" pos="absolute top-0 left-0" w-full h-full bg="black opacity-20 dark:opacity-40" />
 
-        <li v-for="item in settingsMenuItems" :key="item.value">
+        <li v-for="menuItem in settingsMenuItems" :key="menuItem.value">
           <a
             cursor-pointer w="40px group-hover:150px" h-40px
             rounded-30px flex items-center overflow-x-hidden
             duration-300 bg="hover:$bew-fill-2"
-            :class="{ 'menu-item-activated': item.value === activatedMenuItem }"
-            @click="changeMenuItem(item.value)"
+            :class="{ 'menu-item-activated': menuItem.value === activatedMenuItem }"
+            @click="changeMenuItem(menuItem.value)"
           >
-            <i w-40px text="xl center" flex="~ shrink-0" justify-center>
-              <tabler:settings v-if="item.value === MenuType.General" />
-              <tabler:brush v-else-if="item.value === MenuType.Appearance" />
-              <tabler:search v-else-if="item.value === MenuType.SearchPage" />
-              <tabler:home v-else-if="item.value === MenuType.Home" />
-              <tabler:info-circle v-else-if="item.value === MenuType.About" />
-            </i>
-            <span shrink-0>{{ item.label }}</span>
+            <Icon :icon="menuItem.icon" text="xl center" w-40px h-20px flex="~ shrink-0" justify-center />
+            <span shrink-0>{{ menuItem.title }}</span>
           </a>
         </li>
       </ul>

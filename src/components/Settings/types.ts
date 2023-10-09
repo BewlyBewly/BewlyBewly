@@ -5,3 +5,9 @@ export enum MenuType {
   Home = 'Home',
   About = 'About',
 }
+
+export interface MenuItem {
+  value: MenuType
+  title: string
+  icon: string
+}
