@@ -134,7 +134,6 @@ function toggleDark() {
     --at-apply: transform active:scale-90
       md:w-45px w-35px
       md:lh-45px lh-35px
-      md:text-2xl text-xl
       p-0 flex items-center justify-center
       aspect-square relative
       leading-0 duration-300
@@ -149,6 +148,10 @@ function toggleDark() {
         text-white dark-text-black
         shadow-$shadow dark:shadow-$shadow-dark
         active:shadow-$shadow-active dark-active:shadow-$shadow-dark-active;
+    }
+
+    svg {
+      --at-apply: md:w-22px w-18px md:h-22px h-18px;
     }
   }
 }
