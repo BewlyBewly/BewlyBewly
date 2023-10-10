@@ -4,6 +4,8 @@ import Following from './components/Following.vue'
 import emitter from '~/utils/mitt'
 import { settings } from '~/logic'
 
+const handleBackToTop = inject('handleBackToTop') as () => void
+
 const recommendContentKey = ref<string>(`recommendContent${Number(new Date())}`)
 const activatedPage = ref<'RecommendContent' | 'Following'>('RecommendContent')
 const pages = { RecommendContent, Following }
@@ -18,6 +20,10 @@ const tabs = reactive<{ label: string; value: 'RecommendContent' | 'Following' }
     value: 'Following',
   },
 ])
+
+watch(() => activatedPage.value, () => {
+  handleBackToTop()
+})
 
 onMounted(() => {
   emitter.off('pageRefresh')

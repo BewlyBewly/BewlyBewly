@@ -19,6 +19,8 @@ import { AppPage, LanguageType } from '~/enums/appEnums'
 import { getUserID, hexToRGBA, smoothScrollToTop } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
+provide('handleBackToTop', handleBackToTop)
+
 const activatedPage = ref<AppPage>(settings.value.startupPage ?? AppPage.Home)
 const { locale } = useI18n()
 const [showSettings, toggleSettings] = useToggle(false)
