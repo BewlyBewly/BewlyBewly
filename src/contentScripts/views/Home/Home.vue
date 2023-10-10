@@ -89,17 +89,24 @@ onUnmounted(() => {
             v-for="tab in tabs" :key="tab.value"
             px-4 lh-40px bg="$bew-elevated-2" backdrop-glass rounded="$bew-radius"
             cursor-pointer shadow="$bew-shadow-2"
-            :style="{ backgroundColor: activatedPage === tab.value ? 'var(--bew-theme-color)' : null }"
+            :class="{ 'tab-activated': activatedPage === tab.value }"
             @click="activatedPage = tab.value"
           >
             {{ tab.label }}
           </li>
         </ul>
       </header>
-      <Component :is="pages[activatedPage]" :key="recommendContentKey" />
+
+      <Transition name="page-fade">
+        <Component :is="pages[activatedPage]" :key="recommendContentKey" />
+      </Transition>
       <!-- <RecommendContent :key="recommendContentKey" /> -->
     </main>
   </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.tab-activated {
+  --at-apply: bg-$bew-theme-color dark:bg-white color-white dark:color-black
+}
+</style>

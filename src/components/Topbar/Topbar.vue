@@ -210,7 +210,7 @@ async function getTopbarNewMomentsCount() {
           v-show="showTopbarMask"
           class="fixed top-0 left-0"
           w="full"
-          h="100px"
+          h="80px"
           opacity="100"
           pointer-events-none
           z--1
