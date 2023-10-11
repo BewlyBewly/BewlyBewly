@@ -76,8 +76,10 @@ function toggleDark() {
             :class="{ active: activatedPage === dock.page }"
             @click="emit('change-page', dock.page)"
           >
-            <Icon v-if="activatedPage === dock.page" :icon="dock.iconActivated" />
-            <Icon v-else :icon="dock.icon" />
+            <Icon :icon="dock.icon" />
+
+            <!-- <Icon v-if="activatedPage === dock.page" :icon="dock.iconActivated" />
+            <Icon v-else :icon="dock.icon" /> -->
           </button>
         </Tooltip>
       </template>

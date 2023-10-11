@@ -132,6 +132,10 @@ function setCurrentTitle() {
               @click="changeMenuItem(menuItem.value)"
             >
               <Icon
+                text="xl center" w-40px h-20px flex="~ shrink-0" justify-center
+                :icon="menuItem.icon"
+              />
+              <!-- <Icon
                 v-if="menuItem.value === activatedMenuItem"
                 text="xl center" w-40px h-20px flex="~ shrink-0" justify-center
                 :icon="menuItem.iconActivated"
@@ -140,7 +144,7 @@ function setCurrentTitle() {
                 v-else
                 text="xl center" w-40px h-20px flex="~ shrink-0" justify-center
                 :icon="menuItem.icon"
-              />
+              /> -->
               <span shrink-0>{{ menuItem.title }}</span>
             </a>
           </li>
