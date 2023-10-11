@@ -23,13 +23,13 @@ function toggleDark() {
     <div flex="~ gap-2 col" pointer-events-auto>
       <Tooltip :content="currentAppColorScheme === 'dark' ? $t('dock.dark_mode') : $t('dock.light_mode')" placement="left">
         <Button size="small" round shadow="$bew-shadow-1" w-45px important-h-45px @click="toggleDark()">
-          <tabler:moon-stars v-if="currentAppColorScheme === 'dark'" text-xl shrink-0 lh-0 />
-          <tabler:sun v-else text-xl shrink-0 lh-0 />
+          <line-md:sunny-outline-to-moon-transition v-if="currentAppColorScheme === 'dark'" text-xl shrink-0 lh-0 />
+          <line-md:moon-to-sunny-outline-transition v-else text-xl shrink-0 lh-0 />
         </Button>
       </Tooltip>
       <Tooltip :content="$t('dock.settings')" placement="left">
         <Button size="small" round shadow="$bew-shadow-1" w-45px important-h-45px @click="emit('settings-visibility-change')">
-          <tabler:settings text-xl shrink-0 lh-0 />
+          <mingcute:settings-3-line text-xl shrink-0 lh-0 />
         </Button>
       </Tooltip>
     </div>

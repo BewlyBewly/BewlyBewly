@@ -388,7 +388,7 @@ async function getTopbarNewMomentsCount() {
                 target="_blank"
                 :title="$t('topbar.favorites')"
               >
-                <tabler:star />
+                <mingcute:star-line />
               </a>
 
               <Transition name="slide-in">
@@ -413,7 +413,7 @@ async function getTopbarNewMomentsCount() {
                 target="_blank"
                 :title="$t('topbar.history')"
               >
-                <tabler:clock />
+                <mingcute:time-line />
               </a>
 
               <Transition name="slide-in">
@@ -428,7 +428,7 @@ async function getTopbarNewMomentsCount() {
                 target="_blank"
                 :title="$t('topbar.creative_center')"
               >
-                <tabler:bulb />
+                <mingcute:bulb-line />
               </a>
             </div>
           </div>
@@ -442,7 +442,7 @@ async function getTopbarNewMomentsCount() {
             @mouseleave="showMorePop = false"
           >
             <a title="More">
-              <tabler:menu-2 />
+              <mingcute:menu-line />
             </a>
 
             <Transition name="slide-in">
@@ -472,7 +472,7 @@ async function getTopbarNewMomentsCount() {
               filter="hover:brightness-110"
               style="--un-shadow: 0 0 10px var(--bew-theme-color-60)"
             >
-              <tabler:upload flex-shrink-0 />
+              <mingcute:upload-2-line flex-shrink-0 />
               <span m="l-2" display="xl:block none">{{
                 $t('topbar.upload')
               }}</span>

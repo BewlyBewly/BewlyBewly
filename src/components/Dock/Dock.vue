@@ -30,12 +30,12 @@ const currentAppColorScheme = computed((): 'dark' | 'light' => {
 
 const dockItems = computed((): DockItem[] => {
   return [
-    { label: t('dock.search'), icon: 'tabler:search', page: AppPage.Search },
-    { label: t('dock.home'), icon: 'tabler:home', page: AppPage.Home },
-    { label: t('dock.anime'), icon: 'tabler:device-tv', page: AppPage.Anime },
-    { label: t('dock.history'), icon: 'tabler:clock', page: AppPage.History },
-    { label: t('dock.favorites'), icon: 'tabler:star', page: AppPage.Favorites },
-    { label: t('dock.watch_later'), icon: 'iconoir:playlist-play', page: AppPage.WatchLater },
+    { label: t('dock.search'), icon: 'mingcute:search-2-line', iconActivated: 'mingcute:search-2-fill', page: AppPage.Search },
+    { label: t('dock.home'), icon: 'mingcute:home-5-line', iconActivated: 'mingcute:home-5-fill', page: AppPage.Home },
+    { label: t('dock.anime'), icon: 'mingcute:tv-2-line', iconActivated: 'mingcute:tv-2-fill', page: AppPage.Anime },
+    { label: t('dock.history'), icon: 'mingcute:time-line', iconActivated: 'mingcute:time-fill', page: AppPage.History },
+    { label: t('dock.favorites'), icon: 'mingcute:star-line', iconActivated: 'mingcute:star-fill', page: AppPage.Favorites },
+    { label: t('dock.watch_later'), icon: 'mingcute:carplay-line', iconActivated: 'mingcute:carplay-fill', page: AppPage.WatchLater },
   ]
 })
 
@@ -71,7 +71,8 @@ function toggleDark() {
             :class="{ active: activatedPage === dock.page }"
             @click="emit('change-page', dock.page)"
           >
-            <Icon :icon="dock.icon" />
+            <Icon v-if="activatedPage === dock.page" :icon="dock.iconActivated" />
+            <Icon v-else :icon="dock.icon" />
           </button>
         </Tooltip>
       </template>
@@ -81,14 +82,14 @@ function toggleDark() {
 
       <Tooltip :content="currentAppColorScheme === 'dark' ? $t('dock.dark_mode') : $t('dock.light_mode')" :placement="tooltipPlacement">
         <button class="dock-item" @click="toggleDark()">
-          <tabler:moon-stars v-if="currentAppColorScheme === 'dark'" />
-          <tabler:sun v-else />
+          <line-md:sunny-outline-to-moon-transition v-if="currentAppColorScheme === 'dark'" />
+          <line-md:moon-to-sunny-outline-transition v-else />
         </button>
       </Tooltip>
 
       <Tooltip :content="$t('dock.settings')" :placement="tooltipPlacement">
         <button class="dock-item" @click="emit('settings-visibility-change')">
-          <tabler:settings />
+          <mingcute:settings-3-line />
         </button>
       </Tooltip>
     </div>

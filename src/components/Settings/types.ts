@@ -10,4 +10,5 @@ export interface MenuItem {
   value: MenuType
   title: string
   icon: string
+  iconActivated: string
 }

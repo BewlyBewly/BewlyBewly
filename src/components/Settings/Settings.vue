@@ -25,28 +25,32 @@ const settingsMenuItems = computed((): MenuItem[] => {
   return [
     {
       value: MenuType.General,
-      icon: 'tabler:settings',
+      icon: 'mingcute:settings-3-line',
+      iconActivated: 'mingcute:settings-3-fill',
       title: t('settings.menu_general'),
     },
     {
       value: MenuType.Appearance,
       title: t('settings.menu_appearance'),
-      icon: 'tabler:brush',
-
+      icon: 'mingcute:paint-brush-line',
+      iconActivated: 'mingcute:paint-brush-fill',
     },
     {
       value: MenuType.SearchPage,
-      icon: 'tabler:search',
+      icon: 'mingcute:search-2-line',
+      iconActivated: 'mingcute:search-2-fill',
       title: t('settings.menu_search_page'),
     },
     {
       value: MenuType.Home,
-      icon: 'tabler:home',
+      icon: 'mingcute:home-5-line',
+      iconActivated: 'mingcute:home-5-fill',
       title: t('settings.menu_home'),
     },
     {
       value: MenuType.About,
-      icon: 'tabler:info-circle',
+      icon: 'mingcute:information-line',
+      iconActivated: 'mingcute:information-fill',
       title: t('settings.menu_about'),
     },
   ]
@@ -127,7 +131,16 @@ function setCurrentTitle() {
               :class="{ 'menu-item-activated': menuItem.value === activatedMenuItem }"
               @click="changeMenuItem(menuItem.value)"
             >
-              <Icon :icon="menuItem.icon" text="xl center" w-40px h-20px flex="~ shrink-0" justify-center />
+              <Icon
+                v-if="menuItem.value === activatedMenuItem"
+                text="xl center" w-40px h-20px flex="~ shrink-0" justify-center
+                :icon="menuItem.iconActivated"
+              />
+              <Icon
+                v-else
+                text="xl center" w-40px h-20px flex="~ shrink-0" justify-center
+                :icon="menuItem.icon"
+              />
               <span shrink-0>{{ menuItem.title }}</span>
             </a>
           </li>

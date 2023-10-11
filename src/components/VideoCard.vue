@@ -216,10 +216,10 @@ function handelMouseLeave() {
             @click.stop="toggleWatchLater"
           >
             <Tooltip v-if="!isInWatchLater" :content="$t('common.save_to_watch_later')" placement="bottom" type="dark">
-              <tabler:playlist-add />
+              <mingcute:carplay-line />
             </Tooltip>
             <Tooltip v-else :content="$t('common.added')" placement="bottom" type="dark">
-              <tabler:check />
+              <line-md:confirm />
             </Tooltip>
           </button>
 
