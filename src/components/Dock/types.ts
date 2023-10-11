@@ -6,3 +6,8 @@ export interface DockItem {
   iconActivated: string
   page: AppPage
 }
+
+export interface HoveringDockItem {
+  themeMode: boolean
+  settings: boolean
+}

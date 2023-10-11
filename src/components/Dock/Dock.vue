@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { Icon } from '@iconify/vue'
-import type { DockItem } from './types'
+import type { DockItem, HoveringDockItem } from './types'
 import { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
 
@@ -10,6 +10,11 @@ defineProps<{ activatedPage: AppPage }>()
 const emit = defineEmits(['change-page', 'settings-visibility-change'])
 
 const { t } = useI18n()
+
+const hoveringDockItem = reactive<HoveringDockItem>({
+  themeMode: false,
+  settings: false,
+})
 
 const tooltipPlacement = computed(() => {
   if (settings.value.dockPosition === 'left')
@@ -81,9 +86,24 @@ function toggleDark() {
       <div class="divider" />
 
       <Tooltip :content="currentAppColorScheme === 'dark' ? $t('dock.dark_mode') : $t('dock.light_mode')" :placement="tooltipPlacement">
-        <button class="dock-item" @click="toggleDark()">
-          <line-md:sunny-outline-to-moon-transition v-if="currentAppColorScheme === 'dark'" />
-          <line-md:moon-to-sunny-outline-transition v-else />
+        <button
+          class="dock-item"
+          @click="toggleDark()"
+          @mouseenter="hoveringDockItem.themeMode = true"
+          @mouseleave="hoveringDockItem.themeMode = false"
+        >
+          <Transition name="fade">
+            <div v-show="hoveringDockItem.themeMode" absolute>
+              <line-md:sunny-outline-to-moon-loop-transition v-if="currentAppColorScheme === 'dark'" />
+              <line-md:moon-alt-to-sunny-outline-loop-transition v-else />
+            </div>
+          </Transition>
+          <Transition name="fade">
+            <div v-show="!hoveringDockItem.themeMode" absolute>
+              <line-md:sunny-outline-to-moon-transition v-if="currentAppColorScheme === 'dark'" />
+              <line-md:moon-to-sunny-outline-transition v-else />
+            </div>
+          </Transition>
         </button>
       </Tooltip>
 
