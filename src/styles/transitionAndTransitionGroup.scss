@@ -1,6 +1,5 @@
 .page-fade-enter-active,
 .page-fade-leave-active {
-  // transition: opacity 0.5s ease;
   --at-apply: transition-opacity duration-500;
 }
 .page-fade-enter-from,
@@ -14,8 +13,6 @@
 .fade-enter-active,
 .fade-leave-active {
   --at-apply: transition-opacity duration-500;
-
-  // transition: opacity 0.5s ease;
 }
 .fade-enter-from,
 .fade-leave-to {
@@ -24,7 +21,6 @@
 
 .list-enter-active,
 .list-leave-active {
-  // transition: all 0.5s ease;
   --at-apply: transition-all duration-500;
 }
 .list-enter-from,
