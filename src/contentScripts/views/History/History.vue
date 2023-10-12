@@ -486,7 +486,8 @@ function jumpToLoginPage() {
           v-model.lazy.trim="keyword"
           type="text"
           :placeholder="t('history.search_watch_history')"
-          p="x-14px y-10px"
+          p="x-14px"
+          lh-35px h-35px
           rounded="$bew-radius"
           bg="$bew-content-solid-1"
           shadow="$bew-shadow-1"
@@ -494,7 +495,7 @@ function jumpToLoginPage() {
           w-full
           @keyup.enter="handleSearch"
         >
-        <Button shadow="$bew-shadow-1" @click="handleClearAllWatchHistory">
+        <Button shadow="$bew-shadow-1" block @click="handleClearAllWatchHistory">
           <template #left>
             <tabler:trash />
           </template>
@@ -503,6 +504,7 @@ function jumpToLoginPage() {
         <Button
           v-if="!historyStatus"
           shadow="$bew-shadow-1"
+          block
           @click="handlePauseWatchHistory"
         >
           <template #left>
@@ -510,7 +512,7 @@ function jumpToLoginPage() {
           </template>
           {{ $t('history.pause_watch_history') }}
         </Button>
-        <Button v-else shadow="$bew-shadow-1" @click="handleTurnOnWatchHistory">
+        <Button v-else shadow="$bew-shadow-1" block @click="handleTurnOnWatchHistory">
           <template #left>
             <ph:play-circle-bold />
           </template>

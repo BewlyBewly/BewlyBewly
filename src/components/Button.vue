@@ -41,8 +41,8 @@ function handleClick(evt: MouseEvent) {
     :style="{
       'backgroundColor': color,
       'color': textColor,
-      '--b-radius': round ? '50px' : '',
-      'width': block ? '100%' : 'unset',
+      '--b-button-radius': round ? '50px' : '',
+      'width': block ? '100%' : 'var(--b-button-width)',
       'justifyContent': center ? 'center' : ''
     }"
     @click="handleClick"
@@ -55,27 +55,28 @@ function handleClick(evt: MouseEvent) {
 
 <style lang="scss" scoped>
 .b-button {
-  --b-color: var(--bew-content-solid-1);
-  --b-color-hover: var(--bew-content-solid-1-hover);
-  --b-text-color: var(--bew-text-1);
-  --b-radius: var(--bew-radius);
-  --b-padding: 0 14px;
-  --b-font-size: 14px;
-  --b-icon-size: 15px;
-  --b-line-height: 35px;
+  --b-button-color: var(--bew-content-solid-1);
+  --b-button-color-hover: var(--bew-content-solid-1-hover);
+  --b-button-text-color: var(--bew-text-1);
+  --b-button-radius: var(--bew-radius);
+  --b-button-padding: 14px;
+  --b-button-font-size: 14px;
+  --b-button-icon-size: 15px;
+  --b-button-height: 35px;
+  --b-button-width: fit-content;
 
-  --at-apply: bg-$b-color hover:bg-$b-color-hover
-    rounded-$b-radius p-$b-padding transform-gpu active:scale-95
-    duration-300 flex items-center gap-2 text-size-$b-font-size
-    text-$b-text-color lh-$b-line-height h-$b-line-height;
+  --at-apply: bg-$b-button-color hover:bg-$b-button-color-hover
+    rounded-$b-button-radius p-x-$b-button-padding transform-gpu active:scale-95
+    duration-300 flex items-center gap-2 text-size-$b-button-font-size
+    text-$b-button-text-color lh-$b-button-height h-$b-button-height;
 
     & svg {
-      --at-apply: text-size-$b-icon-size
+      --at-apply: text-size-$b-button-icon-size
     }
 
     &.frosted-glass {
-      --b-color: var(--bew-content-1);
-      --b-color-hover: var(--bew-content-1-hover);
+      --b-button-color: var(--bew-content-1);
+      --b-button-color-hover: var(--bew-content-1-hover);
       backdrop-filter: var(--bew-filter-glass);
     }
 
@@ -83,35 +84,35 @@ function handleClick(evt: MouseEvent) {
   }
 
   &--type-primary {
-    --b-color: var(--bew-theme-color);
-    --b-color-hover: var(--bew-theme-color);
-    --b-text-color: white;
+    --b-button-color: var(--bew-theme-color);
+    --b-button-color-hover: var(--bew-theme-color);
+    --b-button-text-color: white;
   }
 
   &--type-secondary {
-    --b-color: var(--bew-fill-1);
-    --b-color-hover: var(--bew-fill-2);
-    --b-text-color: var(--bew-text-1);
+    --b-button-color: var(--bew-fill-1);
+    --b-button-color-hover: var(--bew-fill-2);
+    --b-button-text-color: var(--bew-text-1);
   }
 
   &--type-error {
-    --b-color: var(--bew-error-color);
-    --b-color-hover: var(--bew-error-color)
-    --b-text-color: white;
+    --b-button-color: var(--bew-error-color);
+    --b-button-color-hover: var(--bew-error-color)
+    --b-button-text-color: white;
   }
 
   &--size-small {
-    --b-padding: 6px 12px;
-    --b-font-size: 14px;
-    --b-icon-size: 14px;
-    --b-line-height: 30px;
+    --b-button-padding: 6px;
+    --b-button-font-size: 14px;
+    --b-button-icon-size: 14px;
+    --b-button-height: 30px;
   }
 
   &--size-large {
-    --b-padding: 12px 16px;
-    --b-font-size: 15px;
-    --b-icon-size: 16px;
-    --b-line-height: 40px;
+    --b-button-padding: 12px;
+    --b-button-font-size: 15px;
+    --b-button-icon-size: 16px;
+    --b-button-height: 40px;
   }
 
   &--custom-color {

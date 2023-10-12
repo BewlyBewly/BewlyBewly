@@ -253,7 +253,7 @@ function handleUnfavorite(favoriteResource: FavoriteResource) {
         </h3>
         <p flex="~ col" gap-4>
           <Button
-            color="rgba(255,255,255,.35)" text-color="white" strong flex-1
+            color="rgba(255,255,255,.35)" block text-color="white" strong flex-1
             @click="handlePlayAll"
           >
             <template #left>

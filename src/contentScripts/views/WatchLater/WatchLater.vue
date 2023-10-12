@@ -296,7 +296,7 @@ function jumpToLoginPage() {
         </h3>
         <p v-if="watchLaterList.length > 0" flex="~ col" gap-4>
           <Button
-            color="rgba(255,255,255,.35)" text-color="white" strong flex-1
+            color="rgba(255,255,255,.35)" block text-color="white" strong flex-1
             @click="handlePlayAll"
           >
             <template #left>
@@ -305,7 +305,7 @@ function jumpToLoginPage() {
             {{ t('watch_later.play_all') }}
           </Button>
           <Button
-            color="rgba(255,255,255,.35)" text-color="white" strong flex-1
+            color="rgba(255,255,255,.35)" block text-color="white" strong flex-1
             @click="handleClearAllWatchLater"
           >
             <template #left>
@@ -314,7 +314,7 @@ function jumpToLoginPage() {
             {{ t('watch_later.clear_all') }}
           </Button>
           <Button
-            color="rgba(255,255,255,.35)" text-color="white" strong flex-1
+            color="rgba(255,255,255,.35)" block text-color="white" strong flex-1
             @click="handleRemoveWatchedVideos"
           >
             <template #left>
