@@ -495,7 +495,13 @@ function jumpToLoginPage() {
           w-full
           @keyup.enter="handleSearch"
         >
-        <Button shadow="$bew-shadow-1" block @click="handleClearAllWatchHistory">
+        <Button
+          block
+          style="
+            --b-button-shadow: var(--bew-shadow-1);
+          "
+          @click="handleClearAllWatchHistory"
+        >
           <template #left>
             <tabler:trash />
           </template>
@@ -503,8 +509,10 @@ function jumpToLoginPage() {
         </Button>
         <Button
           v-if="!historyStatus"
-          shadow="$bew-shadow-1"
           block
+          style="
+            --b-button-shadow: var(--bew-shadow-1);
+          "
           @click="handlePauseWatchHistory"
         >
           <template #left>
@@ -512,7 +520,14 @@ function jumpToLoginPage() {
           </template>
           {{ $t('history.pause_watch_history') }}
         </Button>
-        <Button v-else shadow="$bew-shadow-1" block @click="handleTurnOnWatchHistory">
+        <Button
+          v-else
+          block
+          style="
+            --b-button-shadow: var(--bew-shadow-1);
+          "
+          @click="handleTurnOnWatchHistory"
+        >
           <template #left>
             <ph:play-circle-bold />
           </template>

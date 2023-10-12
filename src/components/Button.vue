@@ -62,13 +62,20 @@ function handleClick(evt: MouseEvent) {
   --b-button-padding: 14px;
   --b-button-font-size: 14px;
   --b-button-icon-size: 15px;
-  --b-button-height: 35px;
   --b-button-width: fit-content;
+  --b-button-height: 35px;
+  --b-button-border-width: 0px;
+  --b-button-border-color: var(--bew-border-color);
+  --b-button-shadow: none;
+  --b-button-shadow-hover: var(--b-button-shadow);
+  --b-button-shadow-active: var(--b-button-shadow);
 
-  --at-apply: bg-$b-button-color hover:bg-$b-button-color-hover
+  --at-apply: bg-$b-button-color hover:bg-$b-button-color-hover box-border
     rounded-$b-button-radius p-x-$b-button-padding transform-gpu active:scale-95
     duration-300 flex items-center gap-2 text-size-$b-button-font-size
-    text-$b-button-text-color lh-$b-button-height h-$b-button-height;
+    text-$b-button-text-color lh-$b-button-height h-$b-button-height
+    border-solid border-width-$b-button-border-width border-$b-button-border-color
+    shadow-$b-button-shadow hover:shadow-$b-button-shadow-hover active:shadow-$b-button-shadow-active;
 
     & svg {
       --at-apply: text-size-$b-button-icon-size
@@ -102,9 +109,9 @@ function handleClick(evt: MouseEvent) {
   }
 
   &--size-small {
-    --b-button-padding: 6px;
-    --b-button-font-size: 14px;
-    --b-button-icon-size: 14px;
+    --b-button-padding: 12px;
+    --b-button-font-size: 12px;
+    --b-button-icon-size: 13px;
     --b-button-height: 30px;
   }
 

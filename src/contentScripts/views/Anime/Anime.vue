@@ -115,7 +115,9 @@ function getPopularAnimeList() {
           </h3>
           <Button
             size="small"
-            shadow="$bew-shadow-1"
+            style="
+              --b-button-shadow: var(--bew-shadow-1);
+            "
             @click="openLinkToNewTab(`https://space.bilibili.com/${getUserID() ?? 0}/bangumi`)"
           >
             {{ $t('common.view_all') }}
@@ -164,7 +166,9 @@ function getPopularAnimeList() {
           </h3>
           <Button
             size="small"
-            shadow="$bew-shadow-1"
+            style="
+              --b-button-shadow: var(--bew-shadow-1);
+            "
             @click="openLinkToNewTab(`https://www.bilibili.com/v/popular/rank/bangumi`)"
           >
             {{ $t('common.view_all') }}
