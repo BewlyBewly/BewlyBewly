@@ -19,8 +19,6 @@ import { AppPage, LanguageType } from '~/enums/appEnums'
 import { getUserID, hexToRGBA, smoothScrollToTop } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
-provide('handleBackToTop', handleBackToTop)
-
 const activatedPage = ref<AppPage>(settings.value.startupPage ?? AppPage.Home)
 const { locale } = useI18n()
 const [showSettings, toggleSettings] = useToggle(false)
@@ -75,7 +73,8 @@ watch(
   () => activatedPage.value,
   () => {
     setTimeout(() => {
-      mainAppRef.value.scrollTop = 0
+      const osInstance = scrollbarRef.value?.osInstance()
+      osInstance.elements().viewport.scrollTop = 0
     }, 500)
   },
 )
@@ -140,9 +139,12 @@ function handleChangeAccessKey() {
 }
 
 function changeActivatePage(pageName: AppPage) {
+  const osInstance = scrollbarRef.value?.osInstance()
+  const scrollTop: number = osInstance.elements().viewport.scrollTop
+
   if (activatedPage.value === pageName) {
     if (activatedPage.value !== AppPage.Search) {
-      if (mainAppRef.value.scrollTop === 0)
+      if (scrollTop === 0)
         handleRefresh()
       else
         handleBackToTop()
@@ -250,6 +252,10 @@ function handleOsScroll() {
   if (clientHeight + scrollTop >= scrollHeight - 20)
     emitter.emit('reachBottom')
 }
+
+provide('handleBackToTop', handleBackToTop)
+provide('handleRefresh', handleRefresh)
+provide('activatedPage', activatedPage)
 </script>
 
 <template>
