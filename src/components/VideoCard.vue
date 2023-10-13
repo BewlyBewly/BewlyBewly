@@ -7,6 +7,7 @@ const props = defineProps<{
   duration?: number
   durationStr?: string
   title: string
+  desc?: string
   cover: string
   author?: string
   authorFace?: string
@@ -20,6 +21,7 @@ const props = defineProps<{
   bvid?: string
   aid?: number
   isFollowed?: boolean
+  horizontal?: boolean
 }>()
 
 const videoUrl = computed(() => {
@@ -134,9 +136,8 @@ function handelMouseLeave() {
     <div
       class="video-card group"
       :class="isDislike ? 'is-dislike' : ''"
-      m="b-8" pos="absolute top-0 left-0" w-full h-full
-      rounded="$bew-radius"
-      :style="{ contentVisibility }"
+      p-20px m--20px w="[calc(100%+40px)]" pos="absolute top-0 left-0"
+      rounded="$bew-radius" content-visibility-auto
       @mousemove="handleMouseMove"
       @mouseleave="handelMouseLeave"
     >
@@ -176,9 +177,12 @@ function handelMouseLeave() {
         </div>
       </div>
 
-      <div>
+      <div :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }">
+        <!-- Cover -->
         <div
-          w="full" relative bg="$bew-fill-4" rounded="$bew-radius" cursor-pointer group-hover:shadow
+          :style="{ width: horizontal ? '250px' : '100%' }"
+          shrink-0
+          w="full" h-fit relative bg="$bew-fill-4" rounded="$bew-radius" cursor-pointer group-hover:shadow
           group-hover:transform="translate--4px"
           style="--un-shadow:
             0 0 0 4px var(--bew-theme-color),
@@ -233,8 +237,16 @@ function handelMouseLeave() {
           >
         </div>
 
-        <div flex="~" m="t-4">
-          <div class="flex">
+        <!-- Other Information -->
+        <div
+          :style="{
+            width: horizontal ? '100%' : 'unset',
+            marginTop: horizontal ? '0' : '1rem'
+          }"
+          flex="~"
+        >
+          <!-- Author Avatar -->
+          <div :style="{ display: horizontal ? 'none' : 'flex' }">
             <a
               v-if="authorFace"
               m="r-4" w="40px" h="40px" rounded="1/2" overflow="hidden" object="center cover"
@@ -328,24 +340,50 @@ function handelMouseLeave() {
                 </div> -->
               </template>
             </div>
-            <div
-              v-if="author"
-              class="channel-name"
-              text="base $bew-text-2"
-              m="t-2" cursor-pointer
-              @click="gotoChannel(mid ?? 0)"
-            >
-              {{ author }}
-            </div>
-            <div class="video-info" text="base $bew-text-2">
-              <span v-if="view || viewStr">{{
-                view ? $t('common.view', { count: numFormatter(view) }, view) : `${viewStr}${$t('common.viewWithoutNum')}`
-              }}</span>
-              <template v-if="danmaku || danmakuStr">
-                <span text-xs font-light mx-1>•</span>
-                <span>{{ danmaku ? $t('common.danmaku', { count: numFormatter(danmaku) }, danmaku) : `${danmakuStr}${$t('common.danmakuWithoutNum')}` }}</span>
+            <div text="base $bew-text-2" w-fit m="t-2">
+              <span
+                v-if="author"
+                class="channel-name"
+                text="hover:$bew-text-1"
+                cursor-pointer mr-4
+                @click="gotoChannel(mid ?? 0)"
+              >
+                {{ author }}
+              </span>
+              <template v-if="horizontal">
+                <span v-if="view || viewStr">{{
+                  view ? $t('common.view', { count: numFormatter(view) }, view) : `${viewStr}${$t('common.viewWithoutNum')}`
+                }}</span>
+                <template v-if="danmaku || danmakuStr">
+                  <span text-xs font-light mx-1>•</span>
+                  <span>{{ danmaku ? $t('common.danmaku', { count: numFormatter(danmaku) }, danmaku) : `${danmakuStr}${$t('common.danmakuWithoutNum')}` }}</span>
+                </template>
               </template>
-              <br>
+            </div>
+
+            <!-- Video Description -->
+            <div
+              v-if="desc"
+              mt-2 text="base $bew-text-2" w-full max-h-12 overflow-y-scroll
+              style="white-space: pre-line;"
+            >
+              {{ desc }}
+            </div>
+
+            <div text="base $bew-text-2">
+              <!-- View & Danmaku Count -->
+              <template v-if="!horizontal">
+                <span v-if="view || viewStr">{{
+                  view ? $t('common.view', { count: numFormatter(view) }, view) : `${viewStr}${$t('common.viewWithoutNum')}`
+                }}</span>
+                <template v-if="danmaku || danmakuStr">
+                  <span text-xs font-light mx-1>•</span>
+                  <span>{{ danmaku ? $t('common.danmaku', { count: numFormatter(danmaku) }, danmaku) : `${danmakuStr}${$t('common.danmakuWithoutNum')}` }}</span>
+                </template>
+                <br>
+              </template>
+
+              <!-- Capsule -->
               <span v-if="publishedTimestamp || capsuleText" text="$bew-text-3 sm" inline-block mt-2 p="x-2 y-1" bg="$bew-fill-1" rounded-4>
                 {{ publishedTimestamp ? calcTimeSince(publishedTimestamp * 1000) : capsuleText }}
               </span>
@@ -357,11 +395,20 @@ function handelMouseLeave() {
 
     <!-- skeleton -->
     <div
+      :style="{ display: horizontal ? 'flex' : 'block' }"
       mb-10 pointer-events-none select-none invisible
     >
-      <div aspect-video bg="$bew-fill-4" rounded="$bew-radius" />
+      <!-- Cover -->
+      <div :style="{ width: horizontal ? '250px' : '100%' }" aspect-video bg="$bew-fill-4" rounded="$bew-radius" />
+      <!-- Other Information -->
       <div flex mt-4>
-        <div m="r-4" w="40px" h="40px" rounded="1/2" bg="$bew-fill-4" shrink-0 />
+        <div
+          :style="{
+            width: horizontal ? '100%' : 'unset',
+            marginTop: horizontal ? '0' : '1rem'
+          }"
+          w="40px" h="40px" rounded="1/2" bg="$bew-fill-4" shrink-0
+        />
         <div w-full>
           <div grid gap-2>
             <div w-full h-5 bg="$bew-fill-3" />
