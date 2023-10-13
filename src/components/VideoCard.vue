@@ -64,17 +64,6 @@ function toggleWatchLater() {
   }
 }
 
-function handleMouseMove() {
-  contentVisibility.value = 'visible'
-}
-
-function handelMouseLeave() {
-  clearTimeout(mouseLeaveTimeOut.value)
-  mouseLeaveTimeOut.value = setTimeout(() => {
-    contentVisibility.value = 'auto'
-  }, 300)
-}
-
 // function submitDislike(
 //   reasonID: number,
 //   goto: string,
@@ -138,8 +127,6 @@ function handelMouseLeave() {
       :class="isDislike ? 'is-dislike' : ''"
       p-20px m--20px w="[calc(100%+40px)]" pos="absolute top-0 left-0"
       rounded="$bew-radius" content-visibility-auto
-      @mousemove="handleMouseMove"
-      @mouseleave="handelMouseLeave"
     >
       <!-- Undo control -->
       <div :style="{ visibility: isDislike ? 'visible' : 'hidden' }" pos="absolute">
