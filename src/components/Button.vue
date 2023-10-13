@@ -8,8 +8,6 @@ interface Props {
   | 'warning'
   | 'error'
   size?: 'small' | 'medium' | 'large'
-  /** @description enable frosted glass effect */
-  frostedGlass?: boolean
   color?: string
   textColor?: string
   strong?: boolean
@@ -18,8 +16,7 @@ interface Props {
   center?: boolean
 }
 
-// const props = withDefaults(defineProps<Props>(), {})
-const props = defineProps<Props>()
+defineProps<Props>()
 
 const emit = defineEmits(['click'])
 
@@ -31,13 +28,12 @@ function handleClick(evt: MouseEvent) {
 <template>
   <button
     class="b-button"
-    :class="`
-      b-button--type-${type ?? 'default'}
-      b-button--size-${size ?? 'medium'}
-      ${frostedGlass ? 'frosted-glass' : ''}
-      ${strong ? 'b-button--strong' : ''}
-      ${color || textColor ? 'b-button--custom-color' : ''}
-    `"
+    :class="[
+      `b-button--type-${type ?? 'default'}`,
+      `b-button--size-${size ?? 'medium'}`,
+      `${strong ? 'b-button--strong' : ''}`,
+      `${color || textColor ? 'b-button--custom-color' : ''}`,
+    ]"
     :style="{
       'backgroundColor': color,
       'color': textColor,
@@ -79,12 +75,6 @@ function handleClick(evt: MouseEvent) {
 
     & svg {
       --at-apply: text-size-$b-button-icon-size
-    }
-
-    &.frosted-glass {
-      --b-button-color: var(--bew-content-1);
-      --b-button-color-hover: var(--bew-content-1-hover);
-      backdrop-filter: var(--bew-filter-glass);
     }
 
   &--type-default {
@@ -129,6 +119,5 @@ function handleClick(evt: MouseEvent) {
   &--strong {
     --at-apply: fw-800;
   }
-
 }
 </style>

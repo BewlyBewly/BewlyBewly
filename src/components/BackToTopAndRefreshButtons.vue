@@ -9,7 +9,7 @@ const emit = defineEmits(['refresh', 'back-to-top'])
   >
     <Button
       size="small"
-      frosted-glass
+      backdrop-glass
       center
       style="
         --b-button-width: 45px;
