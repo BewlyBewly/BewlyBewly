@@ -12,13 +12,13 @@ const updateBaseline = ref<string>('')
 
 onMounted(async () => {
   for (let i = 0; i < 3; i++)
-    await getFollowingAuthorVideos()
+    await getFollowedUsersVideos()
 
   emitter.off('reachBottom')
   emitter.on('reachBottom', async () => {
     if (!isLoading.value) {
       for (let i = 0; i < 3; i++)
-        await getFollowingAuthorVideos()
+        await getFollowedUsersVideos()
     }
   })
 })
@@ -27,7 +27,7 @@ onUnmounted(() => {
   emitter.off('reachBottom')
 })
 
-async function getFollowingAuthorVideos() {
+async function getFollowedUsersVideos() {
   isLoading.value = true
   try {
     const response = await browser.runtime.sendMessage({
@@ -134,4 +134,3 @@ function jumpToLoginPage() {
 
 <style lang="scss" scoped>
 </style>
-../types
