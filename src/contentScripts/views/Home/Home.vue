@@ -1,23 +1,28 @@
 <script setup lang="ts">
-import RecommendContent from './components/RecommendContent.vue'
+import ForYou from './components/ForYou.vue'
 import Following from './components/Following.vue'
+import Trending from './components/Trending.vue'
 import emitter from '~/utils/mitt'
 import { settings } from '~/logic'
 
 const handleBackToTop = inject('handleBackToTop') as () => void
 
 const recommendContentKey = ref<string>(`recommendContent${Number(new Date())}`)
-const activatedPage = ref<'RecommendContent' | 'Following'>('RecommendContent')
-const pages = { RecommendContent, Following }
+const activatedPage = ref<'ForYou' | 'Following' | 'Trending'>('ForYou')
+const pages = { ForYou, Following, Trending }
 
-const tabs = reactive<{ label: string; value: 'RecommendContent' | 'Following' }[]>([
+const tabs = reactive<{ label: string; value: 'ForYou' | 'Following' | 'Trending' }[]>([
   {
     label: 'For you',
-    value: 'RecommendContent',
+    value: 'ForYou',
   },
   {
     label: 'Following',
     value: 'Following',
+  },
+  {
+    label: 'Trending',
+    value: 'Trending',
   },
 ])
 
