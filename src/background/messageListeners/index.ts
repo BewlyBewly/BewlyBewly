@@ -8,6 +8,7 @@ import { setupMomentMsgLstnr } from './moment'
 import { setupHistoryMsgLstnr } from './history'
 import { setupFavoriteMsgLstnr } from './favorite'
 import { setupWatchLaterMsgLstnr } from './watchLater'
+import { setupRankingMsgLstnr } from './ranking'
 
 export function setupAllMsgLstnrs() {
   setupAuthMsgLstnr()
@@ -20,4 +21,5 @@ export function setupAllMsgLstnrs() {
   setupFavoriteMsgLstnr()
   setupAnimeMsgLstnr()
   setupWatchLaterMsgLstnr()
+  setupRankingMsgLstnr()
 }

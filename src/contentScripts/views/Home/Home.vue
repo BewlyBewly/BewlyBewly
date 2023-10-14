@@ -2,6 +2,7 @@
 import ForYou from './components/ForYou.vue'
 import Following from './components/Following.vue'
 import Trending from './components/Trending.vue'
+import Ranking from './components/Ranking.vue'
 import emitter from '~/utils/mitt'
 import { settings } from '~/logic'
 
@@ -9,9 +10,9 @@ const handleBackToTop = inject('handleBackToTop') as () => void
 
 const recommendContentKey = ref<string>(`recommendContent${Number(new Date())}`)
 const activatedPage = ref<'ForYou' | 'Following' | 'Trending'>('ForYou')
-const pages = { ForYou, Following, Trending }
+const pages = { ForYou, Following, Trending, Ranking }
 
-const tabs = reactive<{ label: string; value: 'ForYou' | 'Following' | 'Trending' }[]>([
+const tabs = reactive<{ label: string; value: 'ForYou' | 'Following' | 'Trending' | 'Ranking' }[]>([
   {
     label: 'For you',
     value: 'ForYou',
@@ -23,6 +24,10 @@ const tabs = reactive<{ label: string; value: 'ForYou' | 'Following' | 'Trending
   {
     label: 'Trending',
     value: 'Trending',
+  },
+  {
+    label: 'Ranking',
+    value: 'Ranking',
   },
 ])
 
