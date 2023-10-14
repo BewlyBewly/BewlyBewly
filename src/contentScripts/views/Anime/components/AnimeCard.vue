@@ -23,7 +23,7 @@ defineProps<{
       <div
         v-if="rank"
         w-full
-        pos="absolute bottom-0"
+        pos="absolute bottom-0" z-1
         text="white 7xl shadow-xl"
         px-2 fw-bold h-150px flex items-end
         bg="gradient-to-b gradient-from-transparent gradient-to-[rgba(0,0,0,.6)]"
