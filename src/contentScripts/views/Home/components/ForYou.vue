@@ -181,29 +181,30 @@ function jumpToLoginPage() {
       </template>
 
       <!-- skeleton -->
-      <template v-for="item in 30" :key="item">
-        <div
-          v-if="isLoading"
-          mb-8 pointer-events-none select-none
-        >
-          <div aspect-video bg="$bew-fill-4" rounded="$bew-radius" />
-          <div flex mt-4>
-            <div m="r-4" w="40px" h="40px" rounded="1/2" bg="$bew-fill-4" shrink-0 />
-            <div w-full>
-              <div grid gap-2>
-                <div w-full h-5 bg="$bew-fill-3" />
-                <div w="3/4" h-5 bg="$bew-fill-3" />
-              </div>
-              <div grid gap-2 mt-4>
-                <div w="50%" h-4 bg="$bew-fill-2" />
-                <div w="80%" h-4 bg="$bew-fill-2" />
-              </div>
-              <div text="transparent sm" inline-block mt-4 p="x-2 y-1" bg="$bew-fill-1" rounded-4>
-                hello world
+      <template v-if="isLoading">
+        <template v-for="item in 30" :key="item">
+          <div
+            mb-8 pointer-events-none select-none
+          >
+            <div aspect-video bg="$bew-fill-4" rounded="$bew-radius" />
+            <div flex mt-4>
+              <div m="r-4" w="40px" h="40px" rounded="1/2" bg="$bew-fill-4" shrink-0 />
+              <div w-full>
+                <div grid gap-2>
+                  <div w-full h-5 bg="$bew-fill-3" />
+                  <div w="3/4" h-5 bg="$bew-fill-3" />
+                </div>
+                <div grid gap-2 mt-4>
+                  <div w="50%" h-4 bg="$bew-fill-2" />
+                  <div w="80%" h-4 bg="$bew-fill-2" />
+                </div>
+                <div text="transparent sm" inline-block mt-4 p="x-2 y-1" bg="$bew-fill-1" rounded-4>
+                  hello world
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </template>
       </template>
     </div>
 
@@ -215,4 +216,3 @@ function jumpToLoginPage() {
 
 <style lang="scss" scoped>
 </style>
-../types
