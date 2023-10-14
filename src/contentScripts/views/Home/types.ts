@@ -256,3 +256,57 @@ export interface MomentModel {
   visible: boolean
 
 }
+
+export interface PopularVideoModel {
+  aid: number
+  videos: number
+  tid: number
+  tname: string
+  copyright: number
+  pic: string
+  title: string
+  pubdate: number
+  ctime: number
+  desc: string
+  state: number
+  duration: number
+  mission_id: number
+  owner: {
+    mid: number
+    name: string
+    face: string
+  }
+  stat: {
+    aid: number
+    view: number
+    danmaku: number
+    reply: number
+    favorite: number
+    coin: number
+    share: number
+    now_rank: number
+    his_rank: number
+    like: number
+    dislike: number
+    vt: number
+    vv: number
+  }
+  dynamic: string
+  cid: number
+  dimension: {
+    width: number
+    height: number
+    rotate: number
+  }
+  short_link_v2: string
+  up_from_v2: number
+  first_frame: string
+  bvid: string
+  season_type: number
+  is_ogv: boolean
+  enable_vt: number
+  rcmd_reason: {
+    content: string
+    corner_mark: number
+  }
+}

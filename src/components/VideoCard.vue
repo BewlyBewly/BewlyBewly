@@ -22,6 +22,7 @@ const props = defineProps<{
   aid?: number
   isFollowed?: boolean
   horizontal?: boolean
+  tag?: string
 }>()
 
 const videoUrl = computed(() => {
@@ -62,6 +63,17 @@ function toggleWatchLater() {
           isInWatchLater.value = false
       })
   }
+}
+
+function handleMouseMove() {
+  contentVisibility.value = 'visible'
+}
+
+function handelMouseLeave() {
+  clearTimeout(mouseLeaveTimeOut.value)
+  mouseLeaveTimeOut.value = setTimeout(() => {
+    contentVisibility.value = 'auto'
+  }, 300)
 }
 
 // function submitDislike(
@@ -125,45 +137,12 @@ function toggleWatchLater() {
     <div
       class="video-card group"
       :class="isDislike ? 'is-dislike' : ''"
-      p-20px m--20px w="[calc(100%+40px)]" pos="absolute top-0 left-0"
-      rounded="$bew-radius" content-visibility-auto
+      w="full" pos="absolute top-0 left-0"
+      rounded="$bew-radius"
+      :style="{ contentVisibility }"
+      @mousemove="handleMouseMove"
+      @mouseleave="handelMouseLeave"
     >
-      <!-- Undo control -->
-      <div :style="{ visibility: isDislike ? 'visible' : 'hidden' }" pos="absolute">
-        <div
-          id="dislike-control"
-          pos="absolute top-0 left-0"
-          w="full"
-          h="auto"
-          flex="~ col"
-          justify="center"
-          align="content-center"
-          border="solid $bew-fill-1"
-          text="$bew-text-3 sm center"
-          rounded="$bew-radius"
-          class="aspect-video"
-        >
-          {{ $t('home.video_removed') }}
-          <!-- <button
-            text="$bew-theme-color base"
-            font="bold"
-            m="t-4"
-            @click="
-              undoDislike(
-                dislikeReasonId ? dislikeReasonId : 0,
-                goto,
-                param,
-                mid,
-                tid,
-                tag.tag_id,
-              )
-            "
-          >
-            {{ $t('common.undo') }}
-          </button> -->
-        </div>
-      </div>
-
       <div :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }">
         <!-- Cover -->
         <div
@@ -178,7 +157,7 @@ function toggleWatchLater() {
           transition="all ease-in-out 300" group-hover:z-2
           @click.stop="openLinkToNewTab(videoUrl)"
         >
-          <!-- Video duration -->
+          <!-- Video Duration -->
           <div
             v-if="duration || durationStr"
             pos="absolute bottom-0 right-0"
@@ -347,11 +326,10 @@ function toggleWatchLater() {
                 </template>
               </template>
             </div>
-
             <!-- Video Description -->
             <div
               v-if="desc"
-              mt-2 text="base $bew-text-2" w-full max-h-12 overflow-y-scroll
+              mt-2 text="base $bew-text-3" w-full max-h-12 overflow-y-scroll
               style="white-space: pre-line;"
             >
               {{ desc }}
@@ -370,6 +348,10 @@ function toggleWatchLater() {
                 <br>
               </template>
 
+              <!-- Tag -->
+              <span v-if="tag" text="sm $bew-theme-color" p="x-2 y-1" rounded="$bew-radius" bg="$bew-theme-color-20" w-fit m="t-2 r-2">
+                {{ tag }}
+              </span>
               <!-- Capsule -->
               <span v-if="publishedTimestamp || capsuleText" text="$bew-text-3 sm" inline-block mt-2 p="x-2 y-1" bg="$bew-fill-1" rounded-4>
                 {{ publishedTimestamp ? calcTimeSince(publishedTimestamp * 1000) : capsuleText }}
@@ -381,36 +363,69 @@ function toggleWatchLater() {
     </div>
 
     <!-- skeleton -->
-    <div
-      :style="{ display: horizontal ? 'flex' : 'block' }"
-      mb-10 pointer-events-none select-none invisible
-    >
-      <!-- Cover -->
-      <div :style="{ width: horizontal ? '250px' : '100%' }" aspect-video bg="$bew-fill-4" rounded="$bew-radius" />
-      <!-- Other Information -->
-      <div flex mt-4>
+    <template v-if="!horizontal">
+      <div
+        block
+        mb-10 pointer-events-none select-none invisible
+      >
+        <!-- Cover -->
+        <div w-full shrink-0 aspect-video h-fit rounded="$bew-radius" />
+        <!-- Other Information -->
         <div
-          :style="{
-            width: horizontal ? '100%' : 'unset',
-            marginTop: horizontal ? '0' : '1rem'
-          }"
-          w="40px" h="40px" rounded="1/2" bg="$bew-fill-4" shrink-0
-        />
-        <div w-full>
-          <div grid gap-2>
-            <div w-full h-5 bg="$bew-fill-3" />
-            <div w="3/4" h-5 bg="$bew-fill-3" />
-          </div>
-          <div grid gap-2 mt-4>
-            <div w="50%" h-4 bg="$bew-fill-2" />
-            <div w="80%" h-4 bg="$bew-fill-2" />
-          </div>
-          <div text="transparent sm" inline-block mt-4 p="x-2 y-1" bg="$bew-fill-1" rounded-4>
-            hello world
+          mt-4
+          flex="~ gap-4"
+        >
+          <div
+            block
+            w="40px" h="40px" rounded="1/2" shrink-0
+          />
+          <div w-full>
+            <div grid gap-2>
+              <div w-full h-5 />
+              <div w="3/4" h-5 />
+            </div>
+            <div grid gap-2 mt-4>
+              <div w="50%" h-4 />
+              <div w="80%" h-4 />
+            </div>
+            <div mt-4 flex>
+              <div text="transparent sm" inline-block p="x-2 y-1" rounded-4>
+                hello world
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </template>
+    <template v-else>
+      <div
+        flex="~ gap-6"
+        mb-10 pointer-events-none select-none invisible
+      >
+        <!-- Cover -->
+        <div w-250px shrink-0 aspect-video h-fit rounded="$bew-radius" />
+        <!-- Other Information -->
+        <div
+          w-full
+          flex="~ gap-4"
+        >
+          <div w-full>
+            <div grid gap-2>
+              <div w-full h-5 />
+              <div w="3/4" h-5 />
+            </div>
+            <div grid gap-2 mt-4>
+              <div w="70%" h-4 />
+            </div>
+            <div mt-4 flex>
+              <div text="transparent sm" inline-block p="x-2 y-1" rounded-4>
+                hello world
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
   </div>
 </template>
 

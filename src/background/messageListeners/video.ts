@@ -91,6 +91,14 @@ function handleMessage(message: any) {
       .then(data => data)
       .catch(error => console.error(error))
   }
+  // https://github.com/SocialSisterYi/bilibili-API-collect/blob/def57d7a70ed1f39080069ba0f40648ce6ce2b90/docs/video_ranking/popular.md#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E7%83%AD%E9%97%A8%E8%A7%86%E9%A2%91%E5%88%97%E8%A1%A8
+  else if (message.contentScriptQuery === 'getPopularVideos') {
+    const url = `https://api.bilibili.com/x/web-interface/popular?pn=${message.pn ?? 1}&ps=${message.ps ?? 20}`
+    return fetch(url)
+      .then(response => response.json())
+      .then(data => data)
+      .catch(error => console.error(error))
+  }
 }
 
 function handleConnect() {

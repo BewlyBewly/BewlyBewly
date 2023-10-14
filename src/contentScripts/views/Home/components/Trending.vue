@@ -1,25 +1,20 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import type { MomentModel } from '../types'
+import type { PopularVideoModel } from '../types'
 import emitter from '~/utils/mitt'
 
-const videoList = reactive<MomentModel[]>([])
+const videoList = reactive<PopularVideoModel[]>([])
 const isLoading = ref<boolean>(false)
-const needToLoginFirst = ref<boolean>(false)
 const containerRef = ref<HTMLElement>() as Ref<HTMLElement>
-const offset = ref<string>('')
-const updateBaseline = ref<string>('')
+const pn = ref<number>(1)
 
 onMounted(async () => {
-  for (let i = 0; i < 3; i++)
-    await getFollowingAuthorVideos()
+  await getFollowingAuthorVideos()
 
   emitter.off('reachBottom')
   emitter.on('reachBottom', async () => {
-    if (!isLoading.value) {
-      for (let i = 0; i < 3; i++)
-        await getFollowingAuthorVideos()
-    }
+    if (!isLoading.value)
+      await getFollowingAuthorVideos()
   })
 })
 
@@ -31,19 +26,15 @@ async function getFollowingAuthorVideos() {
   isLoading.value = true
   try {
     const response = await browser.runtime.sendMessage({
-      contentScriptQuery: 'getMoments',
-      type: 'video',
-      offset: offset.value,
-      updateBaseline: updateBaseline.value,
+      contentScriptQuery: 'getPopularVideos',
+      pn: pn.value++,
+      ps: 30,
     })
 
-    if (response.code === 0) {
-      offset.value = response.data.offset
-      updateBaseline.value = response.data.update_baseline
+    if (response.code === 0 && !response.data.no_more) {
+      const resData = [] as PopularVideoModel[]
 
-      const resData = [] as MomentModel[]
-
-      response.data.items.forEach((item: MomentModel) => {
+      response.data.list.forEach((item: PopularVideoModel) => {
         resData.push(item)
       })
 
@@ -55,9 +46,6 @@ async function getFollowingAuthorVideos() {
         // else we concat the new data to the old data
         Object.assign(videoList, videoList.concat(resData))
       }
-    }
-    else if (response.code === -101) {
-      needToLoginFirst.value = true
     }
   }
   finally {
@@ -71,49 +59,71 @@ async function getFollowingAuthorVideos() {
     <div
       ref="containerRef"
       m="b-0 t-0" relative w-full h-full
+      grid="~ cols-1 xl:cols-2 gap-4"
     >
       <VideoCard
         v-for="video in videoList"
-        :id="Number(video.modules.module_dynamic.major.archive.aid)"
-        :key="video.modules.module_dynamic.major.archive.aid"
-        :duration-str="video.modules.module_dynamic.major.archive.duration_text"
-        :title="video.modules.module_dynamic.major.archive.title"
-        :desc="video.modules.module_dynamic.major.archive.desc"
-        :cover="video.modules.module_dynamic.major.archive.cover"
-        :author="video.modules.module_author.name"
-        :author-face="video.modules.module_author.face"
-        :mid="video.modules.module_author.mid"
-        :view-str="video.modules.module_dynamic.major.archive.stat.play"
-        :danmaku-str="video.modules.module_dynamic.major.archive.stat.danmaku"
-        :capsule-text="video.modules.module_author.pub_time"
-        :bvid="video.modules.module_dynamic.major.archive.bvid"
+        :id="Number(video.aid)"
+        :key="video.aid"
+        :duration="video.duration"
+        :title="video.title"
+        :desc="video.desc"
+        :cover="video.pic"
+        :author="video.owner.name"
+        :author-face="video.owner.face"
+        :mid="video.owner.mid"
+        :view="video.stat.view"
+        :danmaku="video.stat.danmaku"
+        :published-timestamp="video.pubdate"
+        :bvid="video.bvid"
+        :tag="video.rcmd_reason.content"
         horizontal
+        w-full
       />
 
       <!-- skeleton -->
-      <template v-for="item in 30" :key="item">
-        <div
-          v-if="isLoading"
-          mb-8 pointer-events-none select-none
-        >
-          <div aspect-video bg="$bew-fill-4" rounded="$bew-radius" />
-          <div flex mt-4>
-            <div m="r-4" w="40px" h="40px" rounded="1/2" bg="$bew-fill-4" shrink-0 />
-            <div w-full>
-              <div grid gap-2>
-                <div w-full h-5 bg="$bew-fill-3" />
-                <div w="3/4" h-5 bg="$bew-fill-3" />
-              </div>
-              <div grid gap-2 mt-4>
-                <div w="50%" h-4 bg="$bew-fill-2" />
-                <div w="80%" h-4 bg="$bew-fill-2" />
-              </div>
-              <div text="transparent sm" inline-block mt-4 p="x-2 y-1" bg="$bew-fill-1" rounded-4>
-                hello world
+      <template v-if="isLoading">
+        <template v-for="item in 30" :key="item">
+          <div
+
+            :style="{
+              display: 'flex',
+              gap: '1.5rem',
+            }"
+            mb-10 pointer-events-none select-none
+          >
+            <!-- Cover -->
+            <div :style="{ width: '250px' }" shrink-0 aspect-video h-fit bg="$bew-fill-4" rounded="$bew-radius" />
+            <!-- Other Information -->
+            <div
+              :style="{
+                width: '100%',
+                marginTop: '0'
+              }"
+              flex="~ gap-4"
+            >
+              <div w-full>
+                <div grid gap-2>
+                  <div w-full h-5 bg="$bew-fill-3" />
+                  <div w="3/4" h-5 bg="$bew-fill-3" />
+                </div>
+                <div grid gap-2 mt-4>
+                  <div :style="{ width: '70%' }" h-4 bg="$bew-fill-2" />
+                  <div w="80%" h-4 bg="$bew-fill-2" />
+                </div>
+
+                <div mt-4 flex>
+                  <div v-if="item % 2 === 0" mr-2 text="transparent sm" inline-block p="x-2 y-1" bg="$bew-fill-1" rounded-4>
+                    hello world
+                  </div>
+                  <div text="transparent sm" inline-block p="x-2 y-1" bg="$bew-fill-1" rounded-4>
+                    hello world
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </template>
       </template>
     </div>
 
