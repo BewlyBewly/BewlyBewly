@@ -113,7 +113,7 @@ async function getFollowingAuthorVideos() {
                 </div>
 
                 <div mt-4 flex>
-                  <div v-if="item % 2 === 0" mr-2 text="transparent sm" inline-block p="x-2 y-1" bg="$bew-fill-1" rounded-4>
+                  <div v-if="item % 3 !== 0" mr-2 text="transparent sm" inline-block p="x-2 y-1" bg="$bew-fill-1" rounded-4>
                     hello world
                   </div>
                   <div text="transparent sm" inline-block p="x-2 y-1" bg="$bew-fill-1" rounded-4>
