@@ -133,10 +133,10 @@ topbar:
   logo_dropdown:
     anime: Anime
     movies: Movies
-    chinese_anime: Chinese anime
-    tv_shows: TV shows
-    variety_shows: Variety shows
-    documentary_films: Documentary films
+    chinese_anime: Chinese Anime
+    tv_shows: TV Shows
+    variety_shows: Variety Shows
+    documentary_films: Documentary Films
     animations: Animations
     gaming: Gaming
     kichiku: Kichiku
@@ -155,16 +155,16 @@ topbar:
     animals: Animals
     vlog: VLOG
     funny: Funny
-    standalone_gaming: Standalone gaming
+    standalone_gaming: Standalone Gaming
     vtubers: Vtubers & Vups
-    charitable_events: Charitable events
+    charitable_events: Charitable Events
     moocs: MOOCs
     articles: Articles
     live: Live
     activities: Activities
-    paid_courses: Paid courses
+    paid_courses: Paid Courses
     community: Community
-    music_plus: Music plus
+    music_plus: New Song Hotlist
   user_dropdown:
     money: 'Money: '
     b_coins: 'B-coins: '
