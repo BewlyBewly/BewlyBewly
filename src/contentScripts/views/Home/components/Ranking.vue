@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import type { RankingType } from '../types'
 
 const { t } = useI18n()
 
-const genres = computed(() => {
+const rankingTypes = computed((): RankingType[] => {
   return [
     { name: 'All', rid: 0 },
     { name: t('topbar.logo_dropdown.anime'), seasonType: 1 },
     { name: t('topbar.logo_dropdown.chinese_anime'), seasonType: 4 },
-    { name: t('topbar.logo_dropdown.chinese_anime'), rid: 168 },
+    { name: `${t('topbar.logo_dropdown.chinese_anime')} relative`, rid: 168 },
     { name: t('topbar.logo_dropdown.documentary_films'), seasonType: 3 },
     { name: t('topbar.logo_dropdown.animations'), rid: 1 },
     { name: t('topbar.logo_dropdown.music'), rid: 3 },
@@ -32,14 +33,31 @@ const genres = computed(() => {
     { name: 'Newest Uploader', rid: 0, type: 'rookie' },
   ]
 })
+
+const activatedRankingType = ref<RankingType>(rankingTypes.value[0])
 </script>
 
 <template>
   <div>
-    <ul>
-      <li>
-        <a href="">ALL</a>
-      </li>
-    </ul>
+    <aside h="[calc(100vh-140px)]" w-200px>
+      <OverlayScrollbarsComponent h-inherit defer>
+        <ul>
+          <li v-for="rankingType in rankingTypes" :key="rankingType.name">
+            <a
+              px-4 lh-30px h-30px hover:bg="$bew-fill-2"
+              block rounded="$bew-radius" cursor-pointer
+            >{{ rankingType.name }}</a>
+          </li>
+        </ul>
+      </OverlayScrollbarsComponent>
+    </aside>
+
+    <main />
   </div>
 </template>
+
+<style lang="scss" scoped>
+.active {
+
+}
+</style>

@@ -3,31 +3,33 @@ import ForYou from './components/ForYou.vue'
 import Following from './components/Following.vue'
 import Trending from './components/Trending.vue'
 import Ranking from './components/Ranking.vue'
+import type { HomeTab } from './types'
+import { HomeSubPage } from './types'
 import emitter from '~/utils/mitt'
 import { settings } from '~/logic'
 
 const handleBackToTop = inject('handleBackToTop') as () => void
 
 const recommendContentKey = ref<string>(`recommendContent${Number(new Date())}`)
-const activatedPage = ref<'ForYou' | 'Following' | 'Trending'>('ForYou')
+const activatedPage = ref<HomeSubPage>(HomeSubPage.ForYou)
 const pages = { ForYou, Following, Trending, Ranking }
 
-const tabs = reactive<{ label: string; value: 'ForYou' | 'Following' | 'Trending' | 'Ranking' }[]>([
+const tabs = reactive<HomeTab[]>([
   {
     label: 'For you',
-    value: 'ForYou',
+    value: HomeSubPage.ForYou,
   },
   {
     label: 'Following',
-    value: 'Following',
+    value: HomeSubPage.Following,
   },
   {
     label: 'Trending',
-    value: 'Trending',
+    value: HomeSubPage.Trending,
   },
   {
     label: 'Ranking',
-    value: 'Ranking',
+    value: HomeSubPage.Ranking,
   },
 ])
 

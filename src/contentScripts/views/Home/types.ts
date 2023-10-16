@@ -1,3 +1,15 @@
+export interface HomeTab {
+  label: string
+  value: HomeSubPage
+}
+
+export enum HomeSubPage {
+  ForYou = 'ForYou',
+  Following = 'Following',
+  Trending = 'Trending',
+  Ranking = 'Ranking',
+}
+
 export interface VideoModel {
   id: number
   bvid: string
@@ -309,4 +321,11 @@ export interface PopularVideoModel {
     content: string
     corner_mark: number
   }
+}
+
+export interface RankingType {
+  name: string
+  rid?: number
+  seasonType?: number
+  type?: string
 }
