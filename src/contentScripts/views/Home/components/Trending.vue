@@ -83,47 +83,7 @@ async function getFollowingAuthorVideos() {
 
       <!-- skeleton -->
       <template v-if="isLoading">
-        <template v-for="item in 30" :key="item">
-          <div
-
-            :style="{
-              display: 'flex',
-              gap: '1.5rem',
-            }"
-            mb-10 pointer-events-none select-none
-          >
-            <!-- Cover -->
-            <div :style="{ width: '250px' }" shrink-0 aspect-video h-fit bg="$bew-fill-4" rounded="$bew-radius" />
-            <!-- Other Information -->
-            <div
-              :style="{
-                width: '100%',
-                marginTop: '0'
-              }"
-              flex="~ gap-4"
-            >
-              <div w-full>
-                <div grid gap-2>
-                  <div w-full h-5 bg="$bew-fill-3" />
-                  <div w="3/4" h-5 bg="$bew-fill-3" />
-                </div>
-                <div grid gap-2 mt-4>
-                  <div :style="{ width: '70%' }" h-4 bg="$bew-fill-2" />
-                  <div w="80%" h-4 bg="$bew-fill-2" />
-                </div>
-
-                <div mt-4 flex>
-                  <div v-if="item % 3 !== 0" mr-2 text="transparent sm" inline-block p="x-2 y-1" bg="$bew-fill-1" rounded-4>
-                    hello world
-                  </div>
-                  <div text="transparent sm" inline-block p="x-2 y-1" bg="$bew-fill-1" rounded-4>
-                    hello world
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </template>
+        <VideoCardSkeleton v-for="item in 30" :key="item" horizontal />
       </template>
     </div>
 
