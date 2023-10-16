@@ -10,28 +10,44 @@ export enum HomeSubPage {
   Ranking = 'Ranking',
 }
 
-export interface VideoModel {
+export interface ForYouVideoModel {
   id: number
   bvid: string
+  cid: number
+  goto: string
+  uri: string
+  pic: string
+  pic_4_3: string
+  title: string
+  duration: number
+  pubdate: number
   owner: {
-    face: string
     mid: number
     name: string
+    face: string
   }
-  is_followed: boolean
-  pic: string
-  pubdate: number
   stat: {
-    danmaku: number
-    like: number
     view: number
+    like: number
+    danmaku: number
+    vt: number
   }
-  title: string
-  uri: string
-  duration: number
+  // av_feature: null
+  is_followed: number
+  rcmd_reason: {
+    reason_type: number
+  }
+  show_info: number
+  pos: number
+  // room_info: null
+  // ogv_info: null
+  // business_info: null
+  is_stock: number
+  enable_vt: number
+  vt_display: string
 }
 
-export interface AppVideoModel {
+export interface AppForYouVideoModel {
   card_type: string
   card_goto: string
   goto: string
@@ -118,7 +134,6 @@ export interface AppVideoModel {
 }
 
 export interface MomentModel {
-
   basic: {
     comment_id_str: string
     comment_type: number
@@ -246,7 +261,6 @@ export interface MomentModel {
         label: string
         type: string
       }[]
-
     }
     module_stat: {
       comment: {
@@ -266,7 +280,6 @@ export interface MomentModel {
   }
   type: string
   visible: boolean
-
 }
 
 export interface PopularVideoModel {

@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import type { AppVideoModel, VideoModel } from '../types'
+import type { AppForYouVideoModel, ForYouVideoModel } from '../types'
 import emitter from '~/utils/mitt'
 import { accessKey, settings } from '~/logic'
 import { LanguageType } from '~/enums/appEnums'
 
-const videoList = reactive<VideoModel[]>([])
-const appVideoList = reactive<AppVideoModel[]>([])
+const videoList = reactive<ForYouVideoModel[]>([])
+const appVideoList = reactive<AppForYouVideoModel[]>([])
 const isLoading = ref<boolean>(false)
 const needToLoginFirst = ref<boolean>(false)
 const containerRef = ref<HTMLElement>() as Ref<HTMLElement>
 const refreshIdx = ref<number>(1)
 
-watch(() => settings.value.recommendationMode, (newValue, oldValue) => {
+watch(() => settings.value.recommendationMode, (newValue) => {
   videoList.length = 0
   appVideoList.length = 0
   if (newValue === 'web') {
@@ -65,9 +65,9 @@ async function getRecommendVideos() {
     })
 
     if (response.code === 0) {
-      const resData = [] as VideoModel[]
+      const resData = [] as ForYouVideoModel[]
 
-      response.data.item.forEach((item: VideoModel) => {
+      response.data.item.forEach((item: ForYouVideoModel) => {
         resData.push(item)
       })
 
@@ -101,9 +101,9 @@ async function getAppRecommendVideos() {
     })
 
     if (response.code === 0) {
-      const resData = [] as AppVideoModel[]
+      const resData = [] as AppForYouVideoModel[]
 
-      response.data.items.forEach((item: AppVideoModel) => {
+      response.data.items.forEach((item: AppForYouVideoModel) => {
         // Remove banner & ad cards
         if (!item.card_type.includes('banner') && item.card_type !== 'cm_v1')
           resData.push(item)
