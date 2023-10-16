@@ -32,4 +32,5 @@ export interface Settings {
 
   recommendationMode: 'web' | 'app'
   useSearchPageModeOnHomePage: boolean
+  searchPageModeWallpaperFixed: boolean
 }

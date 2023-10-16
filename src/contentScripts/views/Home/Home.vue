@@ -59,6 +59,7 @@ onUnmounted(() => {
         pos="absolute left-0 top-0" w-full h-580px mb--580px bg="cover center" z-1
         :style="{
           backgroundImage: `url(${settings.searchPageWallpaper})`,
+          backgroundAttachment: settings.searchPageModeWallpaperFixed ? 'fixed' : 'unset'
         }"
       />
       <!-- background mask -->

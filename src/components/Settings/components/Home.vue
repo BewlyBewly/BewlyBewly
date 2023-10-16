@@ -106,11 +106,15 @@ function handleCloseSearchPageModeSharedSettings() {
           @close="handleCloseSearchPageModeSharedSettings"
         >
           <template #desc>
-            <span color="$bew-warning-color">{{ $t('settings.settings_shared_with_the_search_page_desc') }}</span>
+            <span color="$bew-warning-color">{{ $t('settings.search_page_mode_wallpaper_fixed') }}</span>
           </template>
 
           <SearchPage />
         </ChildSettingsDialog>
+      </SettingsItem>
+
+      <SettingsItem :title="$t('settings.settings_shared_with_the_search_page')">
+        <Radio v-model="settings.searchPageModeWallpaperFixed" />
       </SettingsItem>
     </SettingsItemGroup>
   </div>

@@ -115,6 +115,7 @@ settings:
   use_search_page_mode: 首頁使用搜尋頁模式
   settings_shared_with_the_search_page: 與搜尋頁共用的設定
   settings_shared_with_the_search_page_desc: 這些設定都與搜尋頁共用
+  search_page_mode_wallpaper_fixed: 將搜尋頁模式的背景固定
 
 auth:
   err_tip: 無法授權 access key

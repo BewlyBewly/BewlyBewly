@@ -115,6 +115,7 @@ settings:
   use_search_page_mode: 主頁使用搵嘢頁模式
   settings_shared_with_the_search_page: 同搵嘢頁共用嘅設定
   settings_shared_with_the_search_page_desc: 呢啲設定都同搵嘢頁共用
+  search_page_mode_wallpaper_fixed: 定住搵嘢頁模式嘅背景
 
 auth:
   err_tip: 無法授權 access key

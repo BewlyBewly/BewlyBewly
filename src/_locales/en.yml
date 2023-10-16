@@ -116,6 +116,7 @@ settings:
   use_search_page_mode: Use search page mode on homepage
   settings_shared_with_the_search_page: Settings shared with the search page
   settings_shared_with_the_search_page_desc: Those settings are used in common with the search page
+  search_page_mode_wallpaper_fixed: Make the wallpaper of the search page mode fixed
 
 auth:
   err_tip: Failed to grant access key

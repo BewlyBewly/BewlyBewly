@@ -37,4 +37,5 @@ export const settings = useStorageLocal('settings', ref<Settings>({
 
   recommendationMode: 'web',
   useSearchPageModeOnHomePage: false,
+  searchPageModeWallpaperFixed: true,
 }), { mergeDefaults: true })
