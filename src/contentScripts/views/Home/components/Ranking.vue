@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import type { RankingType } from '../types'
+import type { RankingType, RankingVideoModel } from '../types'
 
 const { t } = useI18n()
 
@@ -34,30 +34,73 @@ const rankingTypes = computed((): RankingType[] => {
   ]
 })
 
-const activatedRankingType = ref<RankingType>(rankingTypes.value[0])
+const activatedRankingType = reactive<RankingType>({ ...rankingTypes.value[0] })
+const videoList = reactive<RankingVideoModel[]>([])
+
+watch(() => activatedRankingType.name, () => {
+  getRankingVideos()
+})
+
+onMounted(() => {
+  getRankingVideos()
+})
+
+function getRankingVideos() {
+  browser.runtime.sendMessage({
+    contentScriptQuery: 'getRankingVideos',
+    rid: activatedRankingType.rid,
+  }).then((response) => {
+    if (response.code === 0) {
+      const { list } = response.data
+      Object.assign(videoList, list)
+    }
+  })
+}
 </script>
 
 <template>
-  <div>
-    <aside h="[calc(100vh-140px)]" w-200px>
-      <OverlayScrollbarsComponent h-inherit defer>
-        <ul>
+  <div flex="~ gap-40px">
+    <aside pos="fixed" h="[calc(100vh-120px)]" w-200px shrink-0>
+      <OverlayScrollbarsComponent h-inherit p-20px m--20px defer>
+        <ul flex="~ col gap-2">
           <li v-for="rankingType in rankingTypes" :key="rankingType.name">
             <a
-              px-4 lh-30px h-30px hover:bg="$bew-fill-2"
-              block rounded="$bew-radius" cursor-pointer
+              px-4 lh-30px h-30px hover:bg="$bew-fill-2" w-inherit
+              block rounded="$bew-radius" cursor-pointer transition="all 300 ease-out"
+              hover:scale-105 un-text="$bew-text-2 hover:$bew-text-1"
+              :class="{ active: activatedRankingType.name === rankingType.name }"
+              @click="Object.assign(activatedRankingType, rankingType)"
             >{{ rankingType.name }}</a>
           </li>
         </ul>
       </OverlayScrollbarsComponent>
     </aside>
 
-    <main />
+    <main ml-240px w-full>
+      <VideoCard
+        v-for="video in videoList"
+        :id="Number(video.aid)"
+        :key="video.aid"
+        :duration="video.duration"
+        :title="video.title"
+        :desc="video.desc"
+        :cover="video.pic"
+        :author="video.owner.name"
+        :author-face="video.owner.face"
+        :mid="video.owner.mid"
+        :view="video.stat.view"
+        :danmaku="video.stat.danmaku"
+        :published-timestamp="video.pubdate"
+        :bvid="video.bvid"
+        horizontal
+        w-full
+      />
+    </main>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .active {
-
+  --at-apply: scale-110 bg-white text-black shadow-$bew-shadow-2;
 }
 </style>

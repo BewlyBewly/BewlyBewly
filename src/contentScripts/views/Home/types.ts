@@ -329,3 +329,66 @@ export interface RankingType {
   seasonType?: number
   type?: string
 }
+
+export interface RankingVideoModel {
+  aid: number
+  videos: number
+  tid: number
+  tname: string
+  copyright: number
+  pic: string
+  title: string
+  pubdate: number
+  ctime: number
+  desc: string
+  state: number
+  duration: number
+  rights: {
+    bp: number
+    elec: number
+    download: number
+    movie: number
+    pay: number
+    hd5: number
+    no_reprint: number
+    autoplay: number
+    ugc_pay: number
+    is_cooperation: number
+    ugc_pay_preview: number
+    no_background: number
+    arc_pay: number
+    pay_free_watch: number
+  }
+  owner: {
+    mid: number
+    name: string
+    face: string
+  }
+  stat: {
+    aid: number
+    view: number
+    danmaku: number
+    reply: number
+    favorite: number
+    coin: number
+    share: number
+    now_rank: number
+    his_rank: number
+    like: number
+    dislike: number
+    vt: number
+    vv: number
+  }
+  dynamic: string
+  cid: number
+  dimension: {
+    width: number
+    height: number
+    rotate: number
+  }
+  short_link_v2: string
+  first_frame: string
+  bvid: string
+  score: number
+  enable_vt: number
+}
