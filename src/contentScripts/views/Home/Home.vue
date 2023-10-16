@@ -102,7 +102,7 @@ onUnmounted(() => {
           :focused-character="settings.searchPageSearchBarFocusCharacter"
         />
       </div>
-      <header pos="sticky top-70px" z-10 mb-4>
+      <header pos="sticky top-80px" z-10 mb-4>
         <ul flex="~ items-center gap-2">
           <li
             v-for="tab in tabs" :key="tab.value"

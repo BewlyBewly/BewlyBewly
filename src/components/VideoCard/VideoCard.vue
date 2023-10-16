@@ -23,6 +23,7 @@ const props = defineProps<{
   isFollowed?: boolean
   horizontal?: boolean
   tag?: string
+  rank?: number
 }>()
 
 const videoUrl = computed(() => {
@@ -144,6 +145,26 @@ function handelMouseLeave() {
       @mouseleave="handelMouseLeave"
     >
       <div :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }">
+        <div
+          v-if="rank" flex="~ justify-center" pos="absolute left-1 top-1" z-10
+          group-hover:transform="translate--4px" transition="all ease-in-out 300"
+        >
+          <div
+            v-if="rank <= 3"
+            bg="$bew-theme-color" text-center lh-30px h-30px w-30px text-white rounded="1/2" shadow="$bew-shadow-1"
+            border="1 $bew-theme-color"
+            text="2xl" fw-bold
+          >
+            {{ rank }}
+          </div>
+          <div
+            v-else
+            bg="$bew-elevated-solid-1" text-center lh-30px h-30px w-30px rounded="1/2" shadow="$bew-shadow-1"
+            border="1 $bew-border-color"
+          >
+            {{ rank }}
+          </div>
+        </div>
         <!-- Cover -->
         <div
           :style="{ width: horizontal ? '250px' : '100%' }"
@@ -263,8 +284,8 @@ function handelMouseLeave() {
                   @click="showPopCtrl = false"
                 />
 
-                <!-- dislike reason popup -->
-                <!-- <div
+              <!-- dislike reason popup -->
+              <!-- <div
                   pos="absolute top-9 right-0"
                   p="2"
                   z="30"

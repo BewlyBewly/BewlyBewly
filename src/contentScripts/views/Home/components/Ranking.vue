@@ -4,6 +4,8 @@ import type { RankingType, RankingVideoModel } from '../types'
 
 const { t } = useI18n()
 
+const handleBackToTop = inject('handleBackToTop') as () => void
+
 const rankingTypes = computed((): RankingType[] => {
   return [
     { name: 'All', rid: 0 },
@@ -34,10 +36,12 @@ const rankingTypes = computed((): RankingType[] => {
   ]
 })
 
+const isLoading = ref<boolean>(false)
 const activatedRankingType = reactive<RankingType>({ ...rankingTypes.value[0] })
 const videoList = reactive<RankingVideoModel[]>([])
 
 watch(() => activatedRankingType.name, () => {
+  handleBackToTop()
   getRankingVideos()
 })
 
@@ -46,6 +50,8 @@ onMounted(() => {
 })
 
 function getRankingVideos() {
+  videoList.length = 0
+  isLoading.value = true
   browser.runtime.sendMessage({
     contentScriptQuery: 'getRankingVideos',
     rid: activatedRankingType.rid,
@@ -54,13 +60,13 @@ function getRankingVideos() {
       const { list } = response.data
       Object.assign(videoList, list)
     }
-  })
+  }).finally(() => isLoading.value = false)
 }
 </script>
 
 <template>
   <div flex="~ gap-40px">
-    <aside pos="fixed" h="[calc(100vh-120px)]" w-200px shrink-0>
+    <aside pos="sticky top-140px" h="[calc(100vh-120px)]" w-200px shrink-0>
       <OverlayScrollbarsComponent h-inherit p-20px m--20px defer>
         <ul flex="~ col gap-2">
           <li v-for="rankingType in rankingTypes" :key="rankingType.name">
@@ -76,9 +82,9 @@ function getRankingVideos() {
       </OverlayScrollbarsComponent>
     </aside>
 
-    <main ml-240px w-full>
+    <main w-full>
       <VideoCard
-        v-for="video in videoList"
+        v-for="(video, index) in videoList"
         :id="Number(video.aid)"
         :key="video.aid"
         :duration="video.duration"
@@ -92,9 +98,15 @@ function getRankingVideos() {
         :danmaku="video.stat.danmaku"
         :published-timestamp="video.pubdate"
         :bvid="video.bvid"
+        :rank="index + 1"
         horizontal
         w-full
       />
+
+      <!-- skeleton -->
+      <template v-if="isLoading">
+        <VideoCardSkeleton v-for="item in 30" :key="item" horizontal />
+      </template>
     </main>
   </div>
 </template>
