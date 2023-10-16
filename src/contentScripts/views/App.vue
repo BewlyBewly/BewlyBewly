@@ -1,12 +1,9 @@
 <script setup lang="ts">
 import { useToggle } from '@vueuse/core'
-import 'uno.css'
-import 'overlayscrollbars/overlayscrollbars.css'
 import { useI18n } from 'vue-i18n'
 import browser from 'webextension-polyfill'
 import type { Ref } from '@vue/runtime-dom'
-import type { OverlayScrollbars } from 'overlayscrollbars-vue'
-import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue'
+
 import Home from './Home/Home.vue'
 import Search from './Search/Search.vue'
 import Anime from './Anime/Anime.vue'
@@ -14,7 +11,6 @@ import History from './History/History.vue'
 import WatchLater from './WatchLater/WatchLater.vue'
 import Favorites from './Favorites/Favorites.vue'
 import { accessKey, settings } from '~/logic'
-import '~/styles/index.ts'
 import { AppPage, LanguageType } from '~/enums/appEnums'
 import { getUserID, hexToRGBA, smoothScrollToTop } from '~/utils/main'
 import emitter from '~/utils/mitt'
@@ -24,7 +20,7 @@ const { locale } = useI18n()
 const [showSettings, toggleSettings] = useToggle(false)
 const pages = { Home, Search, Anime, History, WatchLater, Favorites }
 const mainAppRef = ref<HTMLElement>() as Ref<HTMLElement>
-const scrollbarRef = ref<OverlayScrollbars | null>()
+const scrollbarRef = ref()
 const mainAppOpacity = ref<number>(0)
 const showTopbarMask = ref<boolean>(false)
 const dynamicComponentKey = ref<string>(`dynamicComponent${Number(new Date())}`)
@@ -73,7 +69,7 @@ watch(
   () => activatedPage.value,
   () => {
     setTimeout(() => {
-      const osInstance = scrollbarRef.value?.osInstance()
+      const osInstance = scrollbarRef.value.osInstance()
       osInstance.elements().viewport.scrollTop = 0
     }, 500)
   },

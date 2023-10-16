@@ -1,5 +1,9 @@
 // import { onMessage } from 'webext-bridge'
 import { createApp } from 'vue'
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue'
+import 'overlayscrollbars/overlayscrollbars.css'
+import 'uno.css'
+import '~/styles/index.ts'
 import App from './views/App.vue'
 import { setupApp } from '~/logic/common-setup'
 import { i18n } from '~/utils/i18n'
@@ -147,6 +151,7 @@ function injectApp() {
 
     document.body.appendChild(container)
     app = createApp(App)
+    app.component('OverlayScrollbarsComponent', OverlayScrollbarsComponent)
     setupApp(app)
     app.use(i18n).mount(root)
   }
