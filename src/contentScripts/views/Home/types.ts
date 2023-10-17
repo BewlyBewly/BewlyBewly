@@ -337,6 +337,7 @@ export interface PopularVideoModel {
 }
 
 export interface RankingType {
+  id: number
   name: string
   rid?: number
   seasonType?: number
@@ -404,4 +405,37 @@ export interface RankingVideoModel {
   bvid: string
   score: number
   enable_vt: number
+}
+
+export interface PgcModel {
+  badge: string
+  badge_info: {
+    bg_color: string
+    bg_color_night: string
+    text: string
+  }
+  badge_type: number
+  copyright: string
+  cover: string
+  enable_vt: boolean
+  icon_font: {
+    name: string
+    text: string
+  }
+  new_ep: {
+    cover: string
+    index_show: string
+  }
+  rank: number
+  rating: string
+  season_id: number
+  ss_horizontal_cover: string
+  stat: {
+    danmaku: number
+    follow: number
+    series_follow: number
+    view: number
+  }
+  title: string
+  url: string
 }

@@ -10,15 +10,22 @@ defineProps<{
   desc: string
   capsuleText?: string
   rank?: number
+  horizontal?: boolean
 }>()
 </script>
 
 <template>
-  <div>
+  <div
+    :style="{
+      display: horizontal ? 'flex' : 'block',
+
+    }" gap-4
+  >
     <!-- Cover -->
     <a
+      :style="{ width: horizontal ? '250px' : '100%' }"
       rounded="$bew-radius" w-full aspect="12/16" overflow-hidden mb-4 bg="$bew-fill-4" relative
-      class="group"
+      class="group" shrink-0
       :href="url" target="_blank" tabindex="-1"
     >
       <div
@@ -114,25 +121,27 @@ defineProps<{
         </div>
       </div>
     </a>
-    <p un-text="lg" my-4>
-      <a
-        :href="url"
-        target="_blank"
-        class="keep-two-lines"
-        :title="title"
-      >
-        {{ title }}
-      </a>
-    </p>
-    <div text="$bew-text-2" flex flex-wrap gap-2 items-center>
-      <div
-        v-if="capsuleText"
-        text="$bew-theme-color" bg="$bew-theme-color-20"
-        p="x-3" h-27px lh-27px rounded-4
-      >
-        {{ capsuleText }}
+    <div flex-1>
+      <p un-text="lg" my-4>
+        <a
+          :href="url"
+          target="_blank"
+          class="keep-two-lines"
+          :title="title"
+        >
+          {{ title }}
+        </a>
+      </p>
+      <div text="$bew-text-2" flex flex-wrap gap-2 items-center>
+        <div
+          v-if="capsuleText"
+          text="$bew-theme-color" bg="$bew-theme-color-20"
+          p="x-3" h-27px lh-27px rounded-4
+        >
+          {{ capsuleText }}
+        </div>
+        <span> {{ desc }} </span>
       </div>
-      <span> {{ desc }} </span>
     </div>
   </div>
 </template>

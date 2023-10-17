@@ -9,7 +9,7 @@ function handleMessage(message: any) {
       .then(data => data)
       .catch(error => console.error(error))
   }
-  else if (message.contentScriptQuery === 'getRankingAnime') {
+  else if (message.contentScriptQuery === 'getRankingPgc') {
     const url = `https://api.bilibili.com/pgc/web/rank/list?day=3&season_type=${message.seasonType}`
     return fetch(url)
       .then(response => response.json())

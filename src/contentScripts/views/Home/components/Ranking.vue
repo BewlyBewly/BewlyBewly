@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import type { RankingType, RankingVideoModel } from '../types'
+import type { PgcModel, RankingType, RankingVideoModel } from '../types'
 import { settings } from '~/logic'
 
 const { t } = useI18n()
@@ -9,41 +9,45 @@ const handleBackToTop = inject('handleBackToTop') as (targetScrollTop: number) =
 
 const rankingTypes = computed((): RankingType[] => {
   return [
-    { name: 'All', rid: 0 },
-    { name: t('topbar.logo_dropdown.anime'), seasonType: 1 },
-    { name: t('topbar.logo_dropdown.chinese_anime'), seasonType: 4 },
-    { name: `${t('topbar.logo_dropdown.chinese_anime')} relative`, rid: 168 },
-    { name: t('topbar.logo_dropdown.documentary_films'), seasonType: 3 },
-    { name: t('topbar.logo_dropdown.animations'), rid: 1 },
-    { name: t('topbar.logo_dropdown.music'), rid: 3 },
-    { name: t('topbar.logo_dropdown.dance'), rid: 129 },
-    { name: t('topbar.logo_dropdown.gaming'), rid: 4 },
-    { name: t('topbar.logo_dropdown.knowledge'), rid: 36 },
-    { name: t('topbar.logo_dropdown.technology'), rid: 188 },
-    { name: t('topbar.logo_dropdown.sports'), rid: 234 },
-    { name: t('topbar.logo_dropdown.cars'), rid: 223 },
-    { name: t('topbar.logo_dropdown.life'), rid: 160 },
-    { name: t('topbar.logo_dropdown.foods'), rid: 211 },
-    { name: t('topbar.logo_dropdown.animals'), rid: 217 },
-    { name: t('topbar.logo_dropdown.kichiku'), rid: 119 },
-    { name: t('topbar.logo_dropdown.fashion'), rid: 155 },
-    { name: t('topbar.logo_dropdown.showbiz'), rid: 5 },
-    { name: t('topbar.logo_dropdown.cinephile'), rid: 181 },
-    { name: t('topbar.logo_dropdown.movies'), seasonType: 2 },
-    { name: t('topbar.logo_dropdown.tv_shows'), seasonType: 5 },
-    { name: t('topbar.logo_dropdown.variety_shows'), seasonType: 7 },
-    { name: 'Original', rid: 0, type: 'origin' },
-    { name: 'Newest Uploader', rid: 0, type: 'rookie' },
+    { id: 1, name: 'All', rid: 0 },
+    { id: 2, name: t('topbar.logo_dropdown.anime'), seasonType: 1 },
+    { id: 3, name: t('topbar.logo_dropdown.chinese_anime'), seasonType: 4 },
+    { id: 4, name: `${t('topbar.logo_dropdown.chinese_anime')} relative`, rid: 168 },
+    { id: 5, name: t('topbar.logo_dropdown.documentary_films'), seasonType: 3 },
+    { id: 6, name: t('topbar.logo_dropdown.animations'), rid: 1 },
+    { id: 7, name: t('topbar.logo_dropdown.music'), rid: 3 },
+    { id: 8, name: t('topbar.logo_dropdown.dance'), rid: 129 },
+    { id: 9, name: t('topbar.logo_dropdown.gaming'), rid: 4 },
+    { id: 10, name: t('topbar.logo_dropdown.knowledge'), rid: 36 },
+    { id: 11, name: t('topbar.logo_dropdown.technology'), rid: 188 },
+    { id: 12, name: t('topbar.logo_dropdown.sports'), rid: 234 },
+    { id: 13, name: t('topbar.logo_dropdown.cars'), rid: 223 },
+    { id: 14, name: t('topbar.logo_dropdown.life'), rid: 160 },
+    { id: 15, name: t('topbar.logo_dropdown.foods'), rid: 211 },
+    { id: 16, name: t('topbar.logo_dropdown.animals'), rid: 217 },
+    { id: 17, name: t('topbar.logo_dropdown.kichiku'), rid: 119 },
+    { id: 18, name: t('topbar.logo_dropdown.fashion'), rid: 155 },
+    { id: 19, name: t('topbar.logo_dropdown.showbiz'), rid: 5 },
+    { id: 20, name: t('topbar.logo_dropdown.cinephile'), rid: 181 },
+    { id: 21, name: t('topbar.logo_dropdown.movies'), seasonType: 2 },
+    { id: 22, name: t('topbar.logo_dropdown.tv_shows'), seasonType: 5 },
+    { id: 23, name: t('topbar.logo_dropdown.variety_shows'), seasonType: 7 },
+    { id: 24, name: 'Original', rid: 0, type: 'origin' },
+    { id: 25, name: 'Newest Uploader', rid: 0, type: 'rookie' },
   ]
 })
 
 const isLoading = ref<boolean>(false)
 const activatedRankingType = reactive<RankingType>({ ...rankingTypes.value[0] })
 const videoList = reactive<RankingVideoModel[]>([])
+const PgcList = reactive<PgcModel[]>([])
 
-watch(() => activatedRankingType.name, () => {
+watch(() => activatedRankingType.id, () => {
   handleBackToTop(settings.value.useSearchPageModeOnHomePage ? 510 : 0)
-  getRankingVideos()
+  if (activatedRankingType.seasonType)
+    getRankingPgc()
+  else
+    getRankingVideos()
 })
 
 onMounted(() => {
@@ -63,6 +67,18 @@ function getRankingVideos() {
     }
   }).finally(() => isLoading.value = false)
 }
+
+function getRankingPgc() {
+  PgcList.length = 0
+  isLoading.value = true
+  browser.runtime.sendMessage({
+    contentScriptQuery: 'getRankingPgc',
+    seasonType: activatedRankingType.seasonType,
+  }).then((response) => {
+    if (response.code === 0)
+      Object.assign(PgcList, response.result.list)
+  }).finally(() => isLoading.value = false)
+}
 </script>
 
 <template>
@@ -70,12 +86,12 @@ function getRankingVideos() {
     <aside pos="sticky top-140px" h="[calc(100vh-120px)]" w-200px shrink-0>
       <OverlayScrollbarsComponent h-inherit p-20px m--20px defer>
         <ul flex="~ col gap-2">
-          <li v-for="rankingType in rankingTypes" :key="rankingType.name">
+          <li v-for="rankingType in rankingTypes" :key="rankingType.id">
             <a
               px-4 lh-30px h-30px hover:bg="$bew-fill-2" w-inherit
               block rounded="$bew-radius" cursor-pointer transition="all 300 ease-out"
               hover:scale-105 un-text="$bew-text-2 hover:$bew-text-1"
-              :class="{ active: activatedRankingType.name === rankingType.name }"
+              :class="{ active: activatedRankingType.id === rankingType.id }"
               @click="Object.assign(activatedRankingType, rankingType)"
             >{{ rankingType.name }}</a>
           </li>
@@ -84,25 +100,40 @@ function getRankingVideos() {
     </aside>
 
     <main w-full>
-      <VideoCard
-        v-for="(video, index) in videoList"
-        :id="Number(video.aid)"
-        :key="video.aid"
-        :duration="video.duration"
-        :title="video.title"
-        :desc="video.desc"
-        :cover="video.pic"
-        :author="video.owner.name"
-        :author-face="video.owner.face"
-        :mid="video.owner.mid"
-        :view="video.stat.view"
-        :danmaku="video.stat.danmaku"
-        :published-timestamp="video.pubdate"
-        :bvid="video.bvid"
-        :rank="index + 1"
-        horizontal
-        w-full
-      />
+      <template v-if="!activatedRankingType.seasonType">
+        <VideoCard
+          v-for="(video, index) in videoList"
+          :id="Number(video.aid)"
+          :key="video.aid"
+          :duration="video.duration"
+          :title="video.title"
+          :desc="video.desc"
+          :cover="video.pic"
+          :author="video.owner.name"
+          :author-face="video.owner.face"
+          :mid="video.owner.mid"
+          :view="video.stat.view"
+          :danmaku="video.stat.danmaku"
+          :published-timestamp="video.pubdate"
+          :bvid="video.bvid"
+          :rank="index + 1"
+          horizontal
+          w-full
+        />
+      </template>
+      <template v-else>
+        <LongCoverCard
+          v-for="pgc in PgcList"
+          :key="pgc.url"
+          :url="pgc.url"
+          :cover="pgc.cover"
+          :title="pgc.title"
+          :desc="pgc.new_ep.index_show"
+          :rank="pgc.rank"
+          :capsule-text="pgc.rating.replace('分', '')"
+          horizontal
+        />
+      </template>
 
       <!-- skeleton -->
       <template v-if="isLoading">
