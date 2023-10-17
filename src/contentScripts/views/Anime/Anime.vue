@@ -1,8 +1,6 @@
 <script setup lang="ts">
 // import PopularAnimeCarousel from './components/PopularAnimeCarousel.vue'
 import AnimeTimeTable from './components/AnimeTimeTable.vue'
-import AnimeCard from './components/AnimeCard.vue'
-import AnimeCardSkeleton from './components/AnimeCardSkeleton.vue'
 import type { AnimeItem, PopularAnime } from './types'
 import { getUserID, openLinkToNewTab } from '~/utils/main'
 import { numFormatter } from '~/utils/dataFormatter'
@@ -127,7 +125,7 @@ function getPopularAnimeList() {
         <HorizontalScrollView w="[calc(100%+1.5rem)]">
           <div w-full flex>
             <template v-if="isLoadingAnimeWatchList">
-              <AnimeCardSkeleton
+              <LongCoverCardSkeleton
                 v-for="item in 6" :key="item"
                 w="2xl:[calc(100%/6-1.5rem)] xl:[calc(100%/5-1.5rem)] lg:[calc(100%/4-1.5rem)] md:[calc(100%/3-1.5rem)] sm:[calc(100%/2-1.5rem)] [calc(100%-1.5rem)]"
                 last:w="2xl:1/6 xl:1/5 lg:1/4 md:1/3 sm:1/2 full"
@@ -136,7 +134,7 @@ function getPopularAnimeList() {
                 last:pr-6
               />
             </template>
-            <AnimeCard
+            <LongCoverCard
               v-for="item in animeWatchList"
               :key="item.episode_id"
               :url="item.url"
@@ -178,7 +176,7 @@ function getPopularAnimeList() {
         <HorizontalScrollView w="[calc(100%+1.5rem)]">
           <div w-full flex>
             <template v-if="isLoadingPopularAnime">
-              <AnimeCardSkeleton
+              <LongCoverCardSkeleton
                 v-for="item in 6" :key="item"
                 w="2xl:[calc(100%/6-1.5rem)] xl:[calc(100%/5-1.5rem)] lg:[calc(100%/4-1.5rem)] md:[calc(100%/3-1.5rem)] sm:[calc(100%/2-1.5rem)] [calc(100%-1.5rem)]"
                 last:w="2xl:1/6 xl:1/5 lg:1/4 md:1/3 sm:1/2 full"
@@ -187,7 +185,7 @@ function getPopularAnimeList() {
                 last:pr-6
               />
             </template>
-            <AnimeCard
+            <LongCoverCard
               v-for="item in popularAnimeList"
               :key="item.episode_id"
               w="2xl:[calc(100%/6-1.5rem)] xl:[calc(100%/5-1.5rem)] lg:[calc(100%/4-1.5rem)] md:[calc(100%/3-1.5rem)] sm:[calc(100%/2-1.5rem)] [calc(100%-1.5rem)]"
@@ -223,7 +221,7 @@ function getPopularAnimeList() {
           {{ $t('anime.recommended_for_you') }}
         </h3>
         <div grid="~ 2xl:cols-6 xl:cols-5 lg:cols-4 md:cols-3 sm:cols-2 cols-1 gap-6">
-          <AnimeCard
+          <LongCoverCard
             v-for="item in recommendAnimeList"
             :key="item.episode_id"
             :url="item.link"
@@ -238,7 +236,7 @@ function getPopularAnimeList() {
           />
 
           <template v-if="isLoadingRecommendAnime">
-            <AnimeCardSkeleton
+            <LongCoverCardSkeleton
               v-for="item in 30" :key="item"
             />
           </template>

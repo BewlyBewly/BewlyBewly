@@ -15,34 +15,43 @@ defineProps<{
 
 <template>
   <div>
+    <!-- Cover -->
     <a
-      rounded="$bew-radius" w-full aspect="12/16" overflow-hidden mb-4 bg="$bew-fill-3" relative
+      rounded="$bew-radius" w-full aspect="12/16" overflow-hidden mb-4 bg="$bew-fill-4" relative
       class="group"
       :href="url" target="_blank" tabindex="-1"
     >
       <div
-        v-if="rank"
-        w-full
-        pos="absolute bottom-0" z-1
-        text="white 7xl shadow-xl"
-        px-2 fw-bold h-150px flex items-end
-        bg="gradient-to-b gradient-from-transparent gradient-to-[rgba(0,0,0,.6)]"
-        rounded-b="$bew-radius"
+        group-hover:shadow group-hover:transform="translate--4px"
+        transition="all ease-in-out 300" rounded="$bew-radius"
+        style="--un-shadow:
+        0 0 0 4px var(--bew-theme-color),
+        8px 8px 0 2px var(--bew-theme-color-60),
+        14px 14px 0 2px var(--bew-theme-color-40)"
       >
-        {{ rank }}
-      </div>
+        <div
+          v-if="rank"
+          w-full
+          pos="absolute bottom-0" z-1
+          text="white 7xl shadow-xl"
+          p-2 fw-bold h-150px flex items-end
+          bg="gradient-to-b gradient-from-transparent gradient-to-[rgba(0,0,0,.6)]"
+          rounded-b="$bew-radius"
+        >
+          {{ rank }}
+        </div>
 
-      <div
-        overflow-hidden
-        rounded="$bew-radius"
-        aspect="12/16"
-        mb-4
-        pos="relative"
-        bg="$bew-fill-3"
-      >
+        <div
+          overflow-hidden
+          rounded="$bew-radius"
+          aspect="12/16"
+          mb-4
+          pos="relative"
+          bg="$bew-fill-3"
+        >
 
-        <!-- anime genres -->
-        <!-- <div
+          <!-- anime genres -->
+          <!-- <div
           v-if="tags && tags?.length > 0"
           pos="absolute bottom-0" w-full h-180px flex items-end z-1
           opacity="0 group-hover:100"
@@ -69,11 +78,11 @@ defineProps<{
           </div>
         </div> -->
 
-        <img
-          :src="`${removeHttpFromUrl(cover)}@466w_622h.webp`"
-          :alt="title"
-          rounded="$bew-radius" aspect="12/16" max-w-full w-full
-        >
+          <img
+            :src="`${removeHttpFromUrl(cover)}@466w_622h.webp`"
+            :alt="title"
+            rounded="$bew-radius" aspect="12/16" max-w-full w-full
+          >
 
         <!-- image after hovering -->
         <!-- <div
@@ -99,6 +108,7 @@ defineProps<{
           );
         "
         /> -->
+        </div>
       </div>
     </a>
     <p un-text="lg" my-4>
