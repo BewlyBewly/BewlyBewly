@@ -211,10 +211,13 @@ async function getTopbarNewMomentsCount() {
           class="fixed top-0 left-0"
           w="full"
           h="80px"
-          opacity="60"
+          opacity="80"
           pointer-events-none
           z--1
-          :style="{ background: settings.wallpaper && isHomePage ? 'linear-gradient(rgba(0,0,0,0.5), transparent)' : `linear-gradient(var(--bew-homepage-bg), transparent)` }"
+          :style="{
+            background: (settings.wallpaper || settings.useSearchPageModeOnHomePage) && isHomePage
+              ? 'linear-gradient(rgba(0,0,0,0.6), transparent)' : `linear-gradient(var(--bew-homepage-bg), transparent)`
+          }"
         />
       </Transition>
 
@@ -227,6 +230,7 @@ async function getTopbarNewMomentsCount() {
           <a
             v-if="showLogo"
             ref="logo" class="logo" href="//www.bilibili.com"
+            :style="{ fill: (settings.wallpaper || settings.useSearchPageModeOnHomePage) && isHomePage ? 'white' : 'var(--bew-logo-color)' }"
           >
             <svg
               t="1645466458357"
@@ -546,9 +550,8 @@ async function getTopbarNewMomentsCount() {
     }
 
     svg {
-      --drop-shadow:  0 0 1px rgba(0,0,0,0.2), 0 4px 6px rgba(0,0,0,0.3);
-      --at-apply: w-60px h-auto filter fill-$bew-logo-color;
-      filter: drop-shadow(0 0 1px rgba(0,0,0,0.2)) drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+      --at-apply: w-60px h-auto filter;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
 
       &:nth-child(2) {
         --at-apply: duration-300;
