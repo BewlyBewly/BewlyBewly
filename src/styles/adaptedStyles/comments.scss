@@ -68,7 +68,11 @@
   .bb-comment .comment-send .comment-submit,
   .comment-bilibili-fold .comment-send .comment-submit,
   .bb-comment .comment-send-lite .comment-submit,
-  .comment-bilibili-fold .comment-send-lite .comment-submit {
+  .comment-bilibili-fold .comment-send-lite .comment-submit,
+  .bb-comment .stick.assist,
+  .comment-bilibili-fold .stick.assist,
+  .bb-comment .stick.up,
+  .comment-bilibili-fold .stick.up {
     background-color: var(--bew-theme-color);
   }
 
@@ -100,6 +104,13 @@
   .bb-comment .comment-header .tabs-order li.on,
   .comment-bilibili-fold .comment-header .tabs-order li.on {
     color: var(--bew-theme-color);
+  }
+
+  .bb-comment .stick.assist,
+  .comment-bilibili-fold .stick.assist,
+  .bb-comment .stick.up,
+  .comment-bilibili-fold .stick.up {
+    color: white !important;
   }
 
   .bb-comment .comment-list .list-item .info span.liked i,
