@@ -5,7 +5,7 @@ import { settings } from '~/logic'
 const scrollListWrap = ref<HTMLElement>() as Ref<HTMLElement>
 // const showLeftMask = ref<boolean>(false)
 // const showRightMask = ref<boolean>(false)
-const showScrollMask = ref<boolean>(false)
+const showScrollMask = ref<boolean>(true)
 
 watch(() => settings.value.enableHorizontalScrolling, (newValue) => {
   if (newValue)
@@ -15,19 +15,19 @@ watch(() => settings.value.enableHorizontalScrolling, (newValue) => {
 })
 
 onMounted(() => {
-  scrollListWrap.value.addEventListener('scroll', () => {
-    if (scrollListWrap.value.scrollLeft > 0)
-      showScrollMask.value = true
+  // scrollListWrap.value.addEventListener('scroll', () => {
+  //   if (scrollListWrap.value.scrollLeft > 0)
+  //     showScrollMask.value = true
 
-    else
-      showScrollMask.value = false
+  //   else
+  //     showScrollMask.value = false
 
-    if (
-      scrollListWrap.value.scrollLeft + scrollListWrap.value.clientWidth
-      >= scrollListWrap.value.scrollWidth - 20
-    )
-      showScrollMask.value = false
-  })
+  //   if (
+  //     scrollListWrap.value.scrollLeft + scrollListWrap.value.clientWidth
+  //     >= scrollListWrap.value.scrollWidth - 20
+  //   )
+  //     showScrollMask.value = false
+  // })
 })
 
 function handleMouseScroll(event: WheelEvent) {
@@ -63,8 +63,9 @@ function handleMouseScroll(event: WheelEvent) {
 
     <div
       ref="scrollListWrap"
-      w="[calc(100%+40px)]"
-      m--20px p-20px
+      w="[calc(100%+80px)]"
+      h="[calc(100%+40px)]"
+      m="x--40px y--20px" p="x-40px y-20px"
       overflow-x-scroll
       overflow-y-hidden
       relative
@@ -77,7 +78,7 @@ function handleMouseScroll(event: WheelEvent) {
 
 <style lang="scss" scoped>
 .scroll-mask {
-  mask-image: linear-gradient(to right, transparent 0%, black 80px calc(100% - 160px), transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 80px calc(100% - 160px), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 40px calc(100% - 40px), transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 40px calc(100% - 40px), transparent 100%);
 }
 </style>
