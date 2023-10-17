@@ -66,7 +66,7 @@ function toggleWatchLater() {
   }
 }
 
-function handleMouseMove() {
+function handleMouseEnter() {
   contentVisibility.value = 'visible'
 }
 
@@ -141,7 +141,7 @@ function handelMouseLeave() {
       w="full" pos="absolute top-0 left-0"
       rounded="$bew-radius"
       :style="{ contentVisibility }"
-      @mousemove="handleMouseMove"
+      @mouseenter="handleMouseEnter"
       @mouseleave="handelMouseLeave"
     >
       <div :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }">
