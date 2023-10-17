@@ -33,10 +33,13 @@ defineProps<{
           v-if="rank"
           w-full
           pos="absolute bottom-0" z-1
-          text="white 7xl shadow-xl"
+          text="white 7xl shadow"
           p-2 fw-bold h-150px flex items-end
           bg="gradient-to-b gradient-from-transparent gradient-to-[rgba(0,0,0,.6)]"
           rounded-b="$bew-radius"
+          :style="{
+            '--un-text-shadow': rank <= 3 ? '4px 4px 0 var(--bew-theme-color), 6px 6px 0 var(--bew-theme-color-60)' : '',
+          }"
         >
           {{ rank }}
         </div>
