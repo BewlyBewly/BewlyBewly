@@ -7,7 +7,7 @@ import { LanguageType } from '~/enums/appEnums'
 
 const videoList = reactive<ForYouVideoModel[]>([])
 const appVideoList = reactive<AppForYouVideoModel[]>([])
-const isLoading = ref<boolean>(false)
+const isLoading = ref<boolean>(true)
 const needToLoginFirst = ref<boolean>(false)
 const containerRef = ref<HTMLElement>() as Ref<HTMLElement>
 const refreshIdx = ref<number>(1)

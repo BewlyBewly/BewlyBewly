@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import type { RankingType, RankingVideoModel } from '../types'
+import { settings } from '~/logic'
 
 const { t } = useI18n()
 
-const handleBackToTop = inject('handleBackToTop') as () => void
+const handleBackToTop = inject('handleBackToTop') as (targetScrollTop: number) => void
 
 const rankingTypes = computed((): RankingType[] => {
   return [
@@ -41,7 +42,7 @@ const activatedRankingType = reactive<RankingType>({ ...rankingTypes.value[0] })
 const videoList = reactive<RankingVideoModel[]>([])
 
 watch(() => activatedRankingType.name, () => {
-  handleBackToTop()
+  handleBackToTop(settings.value.useSearchPageModeOnHomePage ? 510 : 0)
   getRankingVideos()
 })
 

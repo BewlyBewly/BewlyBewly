@@ -222,10 +222,10 @@ function handleRefresh() {
     dynamicComponentKey.value = `dynamicComponent${Number(new Date())}`
 }
 
-function handleBackToTop() {
+function handleBackToTop(targetScrollTop = 0 as number) {
   const osInstance = scrollbarRef.value?.osInstance()
 
-  smoothScrollToTop(osInstance.elements().viewport, 300)
+  smoothScrollToTop(osInstance.elements().viewport, 300, targetScrollTop)
 }
 
 function handleAdaptToOtherPageStylesChange() {

@@ -67,12 +67,12 @@ export function hexToRGBA(hex: string, alpha: number): string {
 /**
  * smooth scroll to the top of the html element
  */
-export function smoothScrollToTop(element: HTMLElement, duration: number) {
+export function smoothScrollToTop(element: HTMLElement, duration: number, targetScrollTop = 0 as number) {
   // cancel if already on top
-  if (element.scrollTop === 0)
+  if (element.scrollTop === targetScrollTop)
     return
 
-  const cosParameter = element.scrollTop / 2
+  const cosParameter = (element.scrollTop - targetScrollTop) / 2
   let scrollCount = 0
   let oldTimestamp = 0
 
@@ -81,8 +81,8 @@ export function smoothScrollToTop(element: HTMLElement, duration: number) {
       // if duration is 0 scrollCount will be Infinity
       scrollCount += (Math.PI * (newTimestamp - oldTimestamp)) / duration
       if (scrollCount >= Math.PI)
-        return (element.scrollTop = 0)
-      element.scrollTop = cosParameter + cosParameter * Math.cos(scrollCount)
+        return (element.scrollTop = targetScrollTop)
+      element.scrollTop = targetScrollTop + cosParameter + cosParameter * Math.cos(scrollCount)
     }
     oldTimestamp = newTimestamp
     window.requestAnimationFrame(step)

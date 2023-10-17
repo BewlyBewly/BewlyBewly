@@ -8,7 +8,7 @@ import { HomeSubPage } from './types'
 import emitter from '~/utils/mitt'
 import { settings } from '~/logic'
 
-const handleBackToTop = inject('handleBackToTop') as () => void
+const handleBackToTop = inject('handleBackToTop') as (targetScrollTop: number) => void
 
 const recommendContentKey = ref<string>(`recommendContent${Number(new Date())}`)
 const activatedPage = ref<HomeSubPage>(HomeSubPage.ForYou)
@@ -34,7 +34,7 @@ const tabs = reactive<HomeTab[]>([
 ])
 
 watch(() => activatedPage.value, () => {
-  handleBackToTop()
+  handleBackToTop(settings.value.useSearchPageModeOnHomePage ? 510 : 0)
 })
 
 onMounted(() => {
@@ -57,6 +57,7 @@ onUnmounted(() => {
     >
       <div
         pos="absolute left-0 top-0" w-full h-580px mb--580px bg="cover center" z-1
+        pointer-events-none
         :style="{
           backgroundImage: `url(${settings.searchPageWallpaper})`,
           backgroundAttachment: settings.searchPageModeWallpaperFixed ? 'fixed' : 'unset'
