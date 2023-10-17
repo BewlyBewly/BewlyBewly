@@ -350,7 +350,9 @@ function handelMouseLeave() {
             <!-- Video Description -->
             <div
               v-if="desc"
-              mt-2 text="base $bew-text-3" w-full max-h-12 overflow-y-scroll
+              :title="desc"
+              class="keep-two-lines"
+              mt-2 text="base $bew-text-3" w-full max-h-12
               style="white-space: pre-line;"
             >
               {{ desc }}
