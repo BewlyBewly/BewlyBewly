@@ -8,11 +8,6 @@
     border-radius: 0 0 8px 8px;
   }
 
-  .up-detail .up-detail-top .up-name,
-  .user-card-m-exp .user-info-wrapper .info .user .name {
-    color: var(--bew-text-1) !important;
-  }
-
   .user-card-m-exp .user-info-wrapper .info .user .user-label {
     background-color: var(--bew-theme-color) !important;
   }
@@ -77,5 +72,21 @@
     .bar-right
     .copy-link:hover {
     background-color: var(--bew-theme-color-80);
+  }
+
+  // AI视频总结
+  .video-ai-assistant .video-ai-assistant-info {
+    -webkit-text-fill-color: var(--bew-theme-color);
+  }
+
+  &.dark {
+    .video-ai-assistant .video-ai-assistant-bg::before {
+      background: var(--bew-fill-2);
+    }
+
+    .up-detail .up-detail-top .up-name,
+    .user-card-m-exp .user-info-wrapper .info .user .name {
+      color: var(--bew-text-1) !important;
+    }
   }
 }
