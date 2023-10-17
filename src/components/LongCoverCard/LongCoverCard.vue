@@ -25,9 +25,9 @@ defineProps<{
         group-hover:shadow group-hover:transform="translate--4px"
         transition="all ease-in-out 300" rounded="$bew-radius"
         style="--un-shadow:
-        0 0 0 4px var(--bew-theme-color),
-        8px 8px 0 2px var(--bew-theme-color-60),
-        14px 14px 0 2px var(--bew-theme-color-40)"
+          0 0 0 4px var(--bew-theme-color),
+          8px 8px 0 2px var(--bew-theme-color-60),
+          14px 14px 0 2px var(--bew-theme-color-40)"
       >
         <div
           v-if="rank"
