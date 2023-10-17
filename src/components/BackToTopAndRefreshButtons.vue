@@ -5,7 +5,7 @@ const emit = defineEmits(['refresh', 'back-to-top'])
 
 <template>
   <div
-    pos="fixed right-24 bottom-4" z-4
+    pos="fixed right-24 bottom-4" z-20
   >
     <Button
       size="small"
