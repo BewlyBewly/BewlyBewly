@@ -211,7 +211,7 @@ async function getTopbarNewMomentsCount() {
           class="fixed top-0 left-0"
           w="full"
           h="80px"
-          opacity="100"
+          opacity="60"
           pointer-events-none
           z--1
           :style="{ background: settings.wallpaper && isHomePage ? 'linear-gradient(rgba(0,0,0,0.5), transparent)' : `linear-gradient(var(--bew-homepage-bg), transparent)` }"
@@ -546,9 +546,9 @@ async function getTopbarNewMomentsCount() {
     }
 
     svg {
-      --drop-shadow: 0 4px 6px rgba(0,0,0,0.3);
-      --at-apply: w-60px h-auto filter drop-shadow-$drop-shadow
-        fill-$bew-logo-color;
+      --drop-shadow:  0 0 1px rgba(0,0,0,0.2), 0 4px 6px rgba(0,0,0,0.3);
+      --at-apply: w-60px h-auto filter fill-$bew-logo-color;
+      filter: drop-shadow(0 0 1px rgba(0,0,0,0.2)) drop-shadow(0 4px 6px rgba(0,0,0,0.3));
 
       &:nth-child(2) {
         --at-apply: duration-300;
