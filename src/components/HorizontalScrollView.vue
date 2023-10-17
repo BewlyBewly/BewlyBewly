@@ -63,7 +63,8 @@ function handleMouseScroll(event: WheelEvent) {
 
     <div
       ref="scrollListWrap"
-      w-full
+      w="[calc(100%+40px)]"
+      m--20px p-20px
       overflow-x-scroll
       overflow-y-hidden
       relative
