@@ -113,7 +113,7 @@ function handleCloseSearchPageModeSharedSettings() {
         </ChildSettingsDialog>
       </SettingsItem>
 
-      <SettingsItem :title="$t('settings.settings_shared_with_the_search_page')">
+      <SettingsItem :title="$t('settings.search_page_mode_wallpaper_fixed')">
         <Radio v-model="settings.searchPageModeWallpaperFixed" />
       </SettingsItem>
     </SettingsItemGroup>
