@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { getCSRF, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
+import { getCSRF, removeHttpFromUrl } from '~/utils/main'
 import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils/dataFormatter'
 
 const props = defineProps<{
@@ -145,26 +145,6 @@ function handelMouseLeave() {
       @mouseleave="handelMouseLeave"
     >
       <div :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }">
-        <div
-          v-if="rank" flex="~ justify-center" pos="absolute left-1 top-1" z-10
-          group-hover:transform="translate--4px" transition="all ease-in-out 300"
-        >
-          <div
-            v-if="rank <= 3"
-            bg="$bew-theme-color" text-center lh-30px h-30px w-30px text-white rounded="1/2" shadow="$bew-shadow-1"
-            border="1 $bew-theme-color"
-            text="2xl" fw-bold
-          >
-            {{ rank }}
-          </div>
-          <div
-            v-else
-            bg="$bew-elevated-solid-1" text-center lh-30px h-30px w-30px rounded="1/2" shadow="$bew-shadow-1"
-            border="1 $bew-border-color"
-          >
-            {{ rank }}
-          </div>
-        </div>
         <!-- Cover -->
         <div
           :style="{ width: horizontal ? '250px' : '100%' }"
@@ -176,8 +156,26 @@ function handelMouseLeave() {
             8px 8px 0 2px var(--bew-theme-color-60),
             14px 14px 0 2px var(--bew-theme-color-40)"
           transition="all ease-in-out 300" group-hover:z-2
-          @click.stop="openLinkToNewTab(videoUrl)"
         >
+          <!-- Ranking Number -->
+          <div v-if="rank" absolute p-2>
+            <div
+              v-if="Number(rank) <= 3"
+              bg="$bew-theme-color" text-center lh-30px h-30px w-30px text-white rounded="1/2" shadow="$bew-shadow-1"
+              border="1 $bew-theme-color"
+              text="2xl" fw-bold
+            >
+              {{ rank }}
+            </div>
+            <div
+              v-else
+              bg="$bew-elevated-solid-1" text-center lh-30px h-30px w-30px rounded="1/2" shadow="$bew-shadow-1"
+              border="1 $bew-border-color"
+            >
+              {{ rank }}
+            </div>
+          </div>
+
           <!-- Video Duration -->
           <div
             v-if="duration || durationStr"
@@ -215,13 +213,15 @@ function handelMouseLeave() {
           </button>
 
           <!-- Video cover -->
-          <img
-            :src="`${removeHttpFromUrl(cover)}@672w_378h_1c`"
-            loading="lazy"
-            w="full" max-w-full align-middle aspect-video
-            bg="cover center"
-            rounded="$bew-radius"
-          >
+          <a :href="videoUrl" target="_blank">
+            <img
+              :src="`${removeHttpFromUrl(cover)}@672w_378h_1c`"
+              loading="lazy"
+              w="full" max-w-full align-middle aspect-video
+              bg="cover center"
+              rounded="$bew-radius"
+            >
+          </a>
         </div>
 
         <!-- Other Information -->

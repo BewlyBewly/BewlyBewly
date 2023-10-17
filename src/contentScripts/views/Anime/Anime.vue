@@ -106,13 +106,13 @@ function getPopularAnimeList() {
       </section> -->
 
       <!-- Your Watchlist -->
-      <section v-if="getUserID()" mb-8 mt-4>
+      <section v-if="getUserID()" class="anime-section">
         <div flex justify-between items-center mb-6>
           <h3 text="3xl $bew-text-1" font="bold">
             {{ $t('anime.your_watch_list') }}
           </h3>
           <Button
-            size="small"
+            size="large"
             style="
               --b-button-shadow: var(--bew-shadow-1);
             "
@@ -157,13 +157,13 @@ function getPopularAnimeList() {
       </section>
 
       <!-- Popular Anime -->
-      <section mb-8>
+      <section class="anime-section">
         <div flex justify-between items-center mb-6>
           <h3 text="3xl $bew-text-1" font="bold">
             {{ $t('anime.popular_anime') }}
           </h3>
           <Button
-            size="small"
+            size="large"
             style="
               --b-button-shadow: var(--bew-shadow-1);
             "
@@ -205,18 +205,18 @@ function getPopularAnimeList() {
       </section>
 
       <!-- Anime Timetable -->
-      <section mb-8>
-        <div flex justify-between items-end mb-6>
+      <section class="anime-section">
+        <div flex justify-between items-end>
           <h3 text="3xl $bew-text-1" font="bold">
             {{ $t('anime.anime_timetable.title') }}
           </h3>
         </div>
 
-        <AnimeTimeTable />
+        <AnimeTimeTable w="[calc(100%+1.5rem)]" />
       </section>
 
       <!-- Recommended for you -->
-      <section>
+      <section class="anime-section">
         <h3 text="3xl $bew-text-1" font="bold" mb-6>
           {{ $t('anime.recommended_for_you') }}
         </h3>
@@ -231,6 +231,7 @@ function getPopularAnimeList() {
             :title="item.title"
             :desc="item.sub_title"
             :capsule-text="item.rating"
+            mb-10
             @mouseenter="activatedSeasonId = item.season_id"
             @mouseleave="activatedSeasonId = 0"
           />
@@ -238,6 +239,7 @@ function getPopularAnimeList() {
           <template v-if="isLoadingRecommendAnime">
             <LongCoverCardSkeleton
               v-for="item in 30" :key="item"
+              mb-10
             />
           </template>
         </div>
@@ -248,4 +250,8 @@ function getPopularAnimeList() {
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.anime-section {
+  --at-apply: mb-8 mt-14 first:mt-4;
+}
+</style>

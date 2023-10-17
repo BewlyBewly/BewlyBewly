@@ -124,7 +124,7 @@ defineProps<{
         {{ title }}
       </a>
     </p>
-    <div text="$bew-text-2" mb-10 flex flex-wrap gap-2 items-center>
+    <div text="$bew-text-2" flex flex-wrap gap-2 items-center>
       <div
         v-if="capsuleText"
         text="$bew-theme-color" bg="$bew-theme-color-20"
