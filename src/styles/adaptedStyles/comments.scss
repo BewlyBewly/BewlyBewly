@@ -173,6 +173,10 @@
       background-color: var(--bew-bg);
     }
 
+    .bili-dyn-item .bb-comment {
+      background-color: unset;
+    }
+
     .bb-comment .comment-send .textarea-container:hover textarea,
     .comment-bilibili-fold .comment-send .textarea-container:hover textarea,
     .bb-comment .comment-send-lite .textarea-container:hover textarea,
