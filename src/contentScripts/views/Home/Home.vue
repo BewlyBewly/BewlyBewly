@@ -13,6 +13,7 @@ const handleBackToTop = inject('handleBackToTop') as (targetScrollTop: number) =
 const recommendContentKey = ref<string>(`recommendContent${Number(new Date())}`)
 const activatedPage = ref<HomeSubPage>(HomeSubPage.ForYou)
 const pages = { ForYou, Following, Trending, Ranking }
+const showSearchPageMode = ref<boolean>(false)
 
 const tabs = reactive<HomeTab[]>([
   {
@@ -38,6 +39,7 @@ watch(() => activatedPage.value, () => {
 })
 
 onMounted(() => {
+  showSearchPageMode.value = true
   emitter.off('pageRefresh')
   emitter.on('pageRefresh', async () => {
     recommendContentKey.value = `recommendContent${Number(new Date())}`
@@ -52,57 +54,63 @@ onUnmounted(() => {
 <template>
   <div>
     <!-- Home search page mode background -->
-    <div
-      v-if="settings.useSearchPageModeOnHomePage && settings.individuallySetSearchPageWallpaper"
-    >
+    <Transition name="bg">
       <div
-        pos="absolute left-0 top-0" w-full h-580px mb--580px bg="cover center" z-1
-        pointer-events-none
-        :style="{
-          backgroundImage: `url(${settings.searchPageWallpaper})`,
-          backgroundAttachment: settings.searchPageModeWallpaperFixed ? 'fixed' : 'unset'
-        }"
-      />
-      <!-- background mask -->
-      <transition name="fade">
+        v-if="settings.useSearchPageModeOnHomePage && settings.individuallySetSearchPageWallpaper && showSearchPageMode"
+        pos="absolute left-0 top-0" w-full h-580px
+      >
         <div
-          v-if="(!settings.individuallySetSearchPageWallpaper && settings.enableWallpaperMasking) || (settings.searchPageEnableWallpaperMasking)"
-          pos="relative left-0 top-0" w-full h-580px mb--580px pointer-events-none duration-300 z-1 bg="$bew-homepage-bg-mask"
+          pos="absolute left-0 top-0" w-full h-inherit bg="cover center" z-1
+          pointer-events-none
           :style="{
-            backdropFilter: `blur(${settings.individuallySetSearchPageWallpaper ? settings.searchPageWallpaperBlurIntensity : settings.wallpaperBlurIntensity}px)`,
+            backgroundImage: `url(${settings.searchPageWallpaper})`,
+            backgroundAttachment: settings.searchPageModeWallpaperFixed ? 'fixed' : 'unset'
           }"
-        >
+        />
+        <!-- background mask -->
+        <transition name="fade">
           <div
-            bg="$bew-homepage-bg" pos="absolute top-0 left-0" w-full h-full
+            v-if="(!settings.individuallySetSearchPageWallpaper && settings.enableWallpaperMasking) || (settings.searchPageEnableWallpaperMasking)"
+            pos="relative left-0 top-0" w-full h-inherit pointer-events-none duration-300 z-1
             :style="{
-              opacity: `${settings.searchPageWallpaperMaskOpacity}%`,
+              backdropFilter: `blur(${settings.individuallySetSearchPageWallpaper ? settings.searchPageWallpaperBlurIntensity : settings.wallpaperBlurIntensity}px)`,
             }"
-          />
-        </div>
-      </transition>
-    </div>
+          >
+            <div
+              bg="$bew-homepage-bg" pos="absolute top-0 left-0" w-full h-full
+              :style="{
+                opacity: `${settings.searchPageWallpaperMaskOpacity}%`,
+              }"
+            />
+          </div>
+        </transition>
+      </div>
+    </Transition>
 
     <main>
-      <div
-        v-if="settings.useSearchPageModeOnHomePage"
-        flex="~ col"
-        justify-center
-        items-center relative
-        w-full z-10
-        h-500px mb-8
-      >
-        <!-- h-50vh max-h-550px -->
-        <Logo
-          v-if="settings.searchPageShowLogo" :size="180" :color="settings.searchPageLogoColor === 'white' ? 'white' : 'var(--bew-theme-color)'"
-          :glow="settings.searchPageLogoGlow"
-          m="t--70px b-12" z-1
-        />
-        <SearchBar
-          :darken-on-focus="settings.searchPageDarkenOnSearchFocus"
-          :blurred-on-focus="settings.searchPageBlurredOnSearchFocus"
-          :focused-character="settings.searchPageSearchBarFocusCharacter"
-        />
-      </div>
+      <!-- Home search page mode content -->
+      <Transition name="content">
+        <div
+          v-if="settings.useSearchPageModeOnHomePage && showSearchPageMode"
+          flex="~ col"
+          justify-center
+          items-center relative
+          w-full z-10
+          h-500px mb-8
+        >
+          <Logo
+            v-if="settings.searchPageShowLogo" :size="180" :color="settings.searchPageLogoColor === 'white' ? 'white' : 'var(--bew-theme-color)'"
+            :glow="settings.searchPageLogoGlow"
+            m="t--70px b-12" z-1
+          />
+          <SearchBar
+            :darken-on-focus="settings.searchPageDarkenOnSearchFocus"
+            :blurred-on-focus="settings.searchPageBlurredOnSearchFocus"
+            :focused-character="settings.searchPageSearchBarFocusCharacter"
+          />
+        </div>
+      </Transition>
+
       <header pos="sticky top-80px" z-10 mb-4>
         <ul flex="~ items-center gap-2">
           <li
@@ -126,6 +134,30 @@ onUnmounted(() => {
 </template>
 
 <style scoped lang="scss">
+.bg-enter-active,
+.bg-leave-active {
+  --at-apply: duration-1000 ease-in-out;
+}
+.bg-enter-from,
+.bg-leave-to {
+  --at-apply: h-100vh;
+}
+.bg-leave-to {
+  --at-apply: hidden
+}
+
+.content-enter-active,
+.content-leave-active {
+  --at-apply: duration-1000 ease-in-out;
+}
+.content-enter-from,
+.content-leave-to {
+  --at-apply: opacity-0 h-100vh;
+}
+.content-leave-to {
+  --at-apply: hidden
+}
+
 .tab-activated {
   --at-apply: bg-$bew-theme-color dark:bg-white color-white dark:color-black
     border-$bew-theme-color dark:border-white;
