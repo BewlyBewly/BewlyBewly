@@ -6,6 +6,7 @@ common:
   viewWithoutNum: ' views'
   danmaku: no danmaku | {count} danmaku | {count} danmakus
   danmakuWithoutNum: ' danmakus'
+  anime_follow_count: no follow | {count} follow | {count} follows
   year: year ago | years ago
   month: month ago | months ago
   week: week ago | weeks ago
@@ -211,6 +212,11 @@ dock:
 home:
   not_interested_in: Not interested in...
   video_removed: Video removed
+ranking:
+  all: All
+  chinese_anime_related: Chinese Anime-related
+  original_content: Original Content
+  debut_work: Debut Work
 anime:
   total_episodes: EP {ep}
   update_to_n_episodes: Update to EP {ep}

@@ -6,6 +6,7 @@ common:
   viewWithoutNum: 次
   danmaku: '{count} 彈幕'
   danmakuWithoutNum: 彈幕
+  anime_follow_count: '{count}人追緊'
   year: 年前
   month: 個月前
   week: 個禮拜前
@@ -210,6 +211,11 @@ dock:
 home:
   not_interested_in: 對邊方面冇癮？
   video_removed: 經已鏟咗條片
+ranking:
+  all: 全部
+  chinese_anime_related: 中國動畫相關
+  original_content: 原創內容
+  debut_work: 新人作品
 anime:
   total_episodes: 共 {ep} 集
   update_to_n_episodes: 更新到 {ep} 集

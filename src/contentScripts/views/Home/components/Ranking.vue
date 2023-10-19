@@ -9,10 +9,10 @@ const handleBackToTop = inject('handleBackToTop') as (targetScrollTop: number) =
 
 const rankingTypes = computed((): RankingType[] => {
   return [
-    { id: 1, name: 'All', rid: 0 },
+    { id: 1, name: t('ranking.all'), rid: 0 },
     { id: 2, name: t('topbar.logo_dropdown.anime'), seasonType: 1 },
     { id: 3, name: t('topbar.logo_dropdown.chinese_anime'), seasonType: 4 },
-    { id: 4, name: `${t('topbar.logo_dropdown.chinese_anime')} relative`, rid: 168 },
+    { id: 4, name: t('ranking.chinese_anime_related'), rid: 168 },
     { id: 5, name: t('topbar.logo_dropdown.documentary_films'), seasonType: 3 },
     { id: 6, name: t('topbar.logo_dropdown.animations'), rid: 1 },
     { id: 7, name: t('topbar.logo_dropdown.music'), rid: 3 },
@@ -32,19 +32,20 @@ const rankingTypes = computed((): RankingType[] => {
     { id: 21, name: t('topbar.logo_dropdown.movies'), seasonType: 2 },
     { id: 22, name: t('topbar.logo_dropdown.tv_shows'), seasonType: 5 },
     { id: 23, name: t('topbar.logo_dropdown.variety_shows'), seasonType: 7 },
-    { id: 24, name: 'Original', rid: 0, type: 'origin' },
-    { id: 25, name: 'Newest Uploader', rid: 0, type: 'rookie' },
+    { id: 24, name: t('ranking.original_content'), rid: 0, type: 'origin' },
+    { id: 25, name: t('ranking.debut_work'), rid: 0, type: 'rookie' },
   ]
 })
 
 const isLoading = ref<boolean>(false)
-const activatedRankingType = reactive<RankingType>({ ...rankingTypes.value[0] })
+const activatedRankingType = ref<RankingType>({ ...rankingTypes.value[0] })
 const videoList = reactive<RankingVideoModel[]>([])
 const PgcList = reactive<PgcModel[]>([])
 
-watch(() => activatedRankingType.id, () => {
+watch(() => activatedRankingType.value.id, () => {
   handleBackToTop(settings.value.useSearchPageModeOnHomePage ? 510 : 0)
-  if (activatedRankingType.seasonType)
+
+  if ('seasonType' in activatedRankingType.value)
     getRankingPgc()
   else
     getRankingVideos()
@@ -59,7 +60,8 @@ function getRankingVideos() {
   isLoading.value = true
   browser.runtime.sendMessage({
     contentScriptQuery: 'getRankingVideos',
-    rid: activatedRankingType.rid,
+    rid: activatedRankingType.value.rid,
+    type: 'type' in activatedRankingType.value ? activatedRankingType.value.type : 'all',
   }).then((response) => {
     if (response.code === 0) {
       const { list } = response.data
@@ -73,7 +75,7 @@ function getRankingPgc() {
   isLoading.value = true
   browser.runtime.sendMessage({
     contentScriptQuery: 'getRankingPgc',
-    seasonType: activatedRankingType.seasonType,
+    seasonType: activatedRankingType.value.seasonType,
   }).then((response) => {
     if (response.code === 0)
       Object.assign(PgcList, response.result.list)
@@ -92,7 +94,7 @@ function getRankingPgc() {
               block rounded="$bew-radius" cursor-pointer transition="all 300 ease-out"
               hover:scale-105 un-text="$bew-text-2 hover:$bew-text-1"
               :class="{ active: activatedRankingType.id === rankingType.id }"
-              @click="Object.assign(activatedRankingType, rankingType)"
+              @click="activatedRankingType = rankingType"
             >{{ rankingType.name }}</a>
           </li>
         </ul>
@@ -100,7 +102,7 @@ function getRankingPgc() {
     </aside>
 
     <main w-full>
-      <template v-if="!activatedRankingType.seasonType">
+      <template v-if="!('seasonType' in activatedRankingType)">
         <VideoCard
           v-for="(video, index) in videoList"
           :id="Number(video.aid)"
@@ -122,22 +124,34 @@ function getRankingPgc() {
         />
       </template>
       <template v-else>
-        <LongCoverCard
-          v-for="pgc in PgcList"
-          :key="pgc.url"
-          :url="pgc.url"
-          :cover="pgc.cover"
-          :title="pgc.title"
-          :desc="pgc.new_ep.index_show"
-          :rank="pgc.rank"
-          :capsule-text="pgc.rating.replace('分', '')"
-          horizontal
-        />
+        <div grid="~ cols-2 gap-4">
+          <LongCoverCard
+            v-for="pgc in PgcList"
+            :key="pgc.url"
+            :url="pgc.url"
+            :cover="pgc.cover"
+            :title="pgc.title"
+            :desc="pgc.new_ep.index_show"
+            :view="pgc.stat.view"
+            :follow="pgc.stat.follow"
+            :rank="pgc.rank"
+            :capsule-text="pgc.rating.replace('分', '')"
+            horizontal
+            mb-8
+          />
+        </div>
       </template>
 
       <!-- skeleton -->
       <template v-if="isLoading">
-        <VideoCardSkeleton v-for="item in 30" :key="item" horizontal />
+        <template v-if="!('seasonType' in activatedRankingType)">
+          <VideoCardSkeleton v-for="item in 30" :key="item" horizontal />
+        </template>
+        <template v-else>
+          <div grid="~ cols-2 gap-4">
+            <LongCoverCardSkeleton v-for="item in 30" :key="item" horizontal />
+          </div>
+        </template>
       </template>
     </main>
   </div>
@@ -145,6 +159,6 @@ function getRankingPgc() {
 
 <style lang="scss" scoped>
 .active {
-  --at-apply: scale-110 bg-white text-black shadow-$bew-shadow-2;
+  --at-apply: scale-110 bg-$bew-theme-color dark:bg-white text-white dark:text-black shadow-$bew-shadow-2;
 }
 </style>

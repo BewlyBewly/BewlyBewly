@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { removeHttpFromUrl } from '~/utils/main'
+import { numFormatter } from '~/utils/dataFormatter'
 
 defineProps<{
   url: string
@@ -10,6 +11,8 @@ defineProps<{
   desc: string
   capsuleText?: string
   rank?: number
+  view?: number
+  follow?: number
   horizontal?: boolean
 }>()
 </script>
@@ -18,24 +21,23 @@ defineProps<{
   <div
     :style="{
       display: horizontal ? 'flex' : 'block',
-
-    }" gap-4
+    }"
+    gap-4
+    class="group"
   >
     <!-- Cover -->
     <a
-      :style="{ width: horizontal ? '250px' : '100%' }"
-      rounded="$bew-radius" w-full aspect="12/16" overflow-hidden mb-4 bg="$bew-fill-4" relative
-      class="group" shrink-0
+      :style="{ width: horizontal ? '170px' : '100%' }"
       :href="url" target="_blank" tabindex="-1"
+      rounded="$bew-radius" w-full bg="$bew-fill-4" relative shrink-0
+      group-hover:shadow group-hover:transform="translate--4px"
+      transition="all ease-in-out 300"
+      style="--un-shadow:
+        0 0 0 4px var(--bew-theme-color),
+        8px 8px 0 2px var(--bew-theme-color-60),
+        14px 14px 0 2px var(--bew-theme-color-40)"
     >
-      <div
-        group-hover:shadow group-hover:transform="translate--4px"
-        transition="all ease-in-out 300" rounded="$bew-radius"
-        style="--un-shadow:
-          0 0 0 4px var(--bew-theme-color),
-          8px 8px 0 2px var(--bew-theme-color-60),
-          14px 14px 0 2px var(--bew-theme-color-40)"
-      >
+      <div aspect="12/16" overflow-hidden rounded="$bew-radius">
         <div
           v-if="rank"
           w-full
@@ -55,7 +57,6 @@ defineProps<{
           overflow-hidden
           rounded="$bew-radius"
           aspect="12/16"
-          mb-4
           pos="relative"
           bg="$bew-fill-3"
         >
@@ -121,8 +122,13 @@ defineProps<{
         </div>
       </div>
     </a>
-    <div flex-1>
-      <p un-text="lg" my-4>
+    <div
+      flex-1
+      :style="{
+        marginTop: horizontal ? '0' : '1rem',
+      }"
+    >
+      <p un-text="lg" mb-4>
         <a
           :href="url"
           target="_blank"
@@ -131,6 +137,10 @@ defineProps<{
         >
           {{ title }}
         </a>
+      </p>
+      <p v-if="view || follow" text="$bew-text-2" mb-2>
+        <span v-if="view" mr-4>{{ $t('common.view', { count: numFormatter(view) }, view) }}</span>
+        <span v-if="follow">{{ $t('common.anime_follow_count', { count: numFormatter(follow) }, follow) }}</span>
       </p>
       <div text="$bew-text-2" flex flex-wrap gap-2 items-center>
         <div

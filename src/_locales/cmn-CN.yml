@@ -6,6 +6,7 @@ common:
   viewWithoutNum: 次
   danmaku: '{count} 弹幕'
   danmakuWithoutNum: 弹幕
+  anime_follow_count: '{count}人关注'
   year: 年前
   month: 个月前
   week: 个星期前
@@ -133,7 +134,7 @@ topbar:
   logo_dropdown:
     anime: 番剧
     movies: 电影
-    chinese_anime: 国创
+    chinese_anime: 中国动画
     tv_shows: 电视剧
     variety_shows: 综艺
     documentary_films: 纪录片
@@ -211,6 +212,11 @@ home:
   not_interested_in: 对哪方面不感兴趣？
   video_removed: 视频已移除
   save_to_watch_later: 添加到稍后再看
+ranking:
+  all: 全部
+  chinese_anime_related: 中国动画相关
+  original_content: 原创内容
+  debut_work: 新人作品
 anime:
   total_episodes: 全 {ep} 话
   update_to_n_episodes: 更新至 {ep} 话
