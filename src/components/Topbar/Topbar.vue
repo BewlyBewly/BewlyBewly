@@ -222,7 +222,7 @@ async function getTopbarNewMomentsCount() {
       </Transition>
 
       <div
-        class="left-side" z-1
+        class="left-side" z-1 w="xl:280px" shrink-0
         @mouseenter.self="showLogoMenuDropdown()"
         @mouseleave.self="closeLogoMenuDropdown()"
       >
@@ -539,7 +539,7 @@ async function getTopbarNewMomentsCount() {
 }
 
 .left-side {
-  --at-apply: relative;
+  --at-apply: relative ;
   .logo {
     --at-apply: flex items-center;
 

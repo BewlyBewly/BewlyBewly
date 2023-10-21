@@ -127,7 +127,7 @@ function handleKeyDown() {
 </script>
 
 <template>
-  <div id="search-wrap" w="full" max-w="500px" m="x-8" pos="relative">
+  <div id="search-wrap" w="full" max-w="550px" m="x-8" pos="relative">
     <div
       v-if="!darkenOnFocus && isFocus"
       pos="fixed top-0 left-0"
