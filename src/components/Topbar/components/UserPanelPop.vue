@@ -27,11 +27,12 @@ onMounted(() => {
 
 async function logout() {
   revokeAccessKey()
-  await browser.runtime.sendMessage({
+  browser.runtime.sendMessage({
     contentScriptQuery: 'logout',
     biliCSRF: getCSRF(),
+  }).then(() => {
+    location.reload()
   })
-  location.reload()
 }
 </script>
 
