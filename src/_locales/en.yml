@@ -212,6 +212,10 @@ dock:
 home:
   not_interested_in: Not interested in...
   video_removed: Video removed
+  for_you: For you
+  following: Following
+  trending: Trending
+  ranking: Ranking
 ranking:
   all: All
   chinese_anime_related: Chinese Anime-related

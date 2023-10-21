@@ -212,6 +212,10 @@ home:
   not_interested_in: 对哪方面不感兴趣？
   video_removed: 视频已移除
   save_to_watch_later: 添加到稍后再看
+  for_you: 个性推荐
+  following: 正在关注
+  trending: 热门视频
+  ranking: 排行榜
 ranking:
   all: 全部
   chinese_anime_related: 中国动画相关

@@ -211,6 +211,10 @@ dock:
 home:
   not_interested_in: 對哪方面不感興趣？
   video_removed: 影片已移除
+  for_you: 爲你推薦
+  following: 正在跟隨
+  trending: 發燒影片
+  ranking: 排行
 ranking:
   all: 全部
   chinese_anime_related: 中國動畫相關

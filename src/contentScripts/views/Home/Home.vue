@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 import ForYou from './components/ForYou.vue'
 import Following from './components/Following.vue'
 import Trending from './components/Trending.vue'
@@ -8,6 +9,8 @@ import { HomeSubPage } from './types'
 import emitter from '~/utils/mitt'
 import { settings } from '~/logic'
 
+const { t } = useI18n()
+
 const handleBackToTop = inject('handleBackToTop') as (targetScrollTop: number) => void
 
 const recommendContentKey = ref<string>(`recommendContent${Number(new Date())}`)
@@ -15,24 +18,26 @@ const activatedPage = ref<HomeSubPage>(HomeSubPage.ForYou)
 const pages = { ForYou, Following, Trending, Ranking }
 const showSearchPageMode = ref<boolean>(false)
 
-const tabs = reactive<HomeTab[]>([
-  {
-    label: 'For you',
-    value: HomeSubPage.ForYou,
-  },
-  {
-    label: 'Following',
-    value: HomeSubPage.Following,
-  },
-  {
-    label: 'Trending',
-    value: HomeSubPage.Trending,
-  },
-  {
-    label: 'Ranking',
-    value: HomeSubPage.Ranking,
-  },
-])
+const tabs = computed((): HomeTab[] => {
+  return [
+    {
+      label: t('home.for_you'),
+      value: HomeSubPage.ForYou,
+    },
+    {
+      label: t('home.following'),
+      value: HomeSubPage.Following,
+    },
+    {
+      label: t('home.trending'),
+      value: HomeSubPage.Trending,
+    },
+    {
+      label: t('home.ranking'),
+      value: HomeSubPage.Ranking,
+    },
+  ]
+})
 
 watch(() => activatedPage.value, () => {
   handleBackToTop(settings.value.useSearchPageModeOnHomePage ? 510 : 0)

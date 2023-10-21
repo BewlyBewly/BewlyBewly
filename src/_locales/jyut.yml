@@ -211,6 +211,10 @@ dock:
 home:
   not_interested_in: 對邊方面冇癮？
   video_removed: 經已鏟咗條片
+  for_you: 估你心水
+  following: Follow 緊
+  trending: 時下至 Hit
+  ranking: 排行
 ranking:
   all: 全部
   chinese_anime_related: 中國動畫相關
