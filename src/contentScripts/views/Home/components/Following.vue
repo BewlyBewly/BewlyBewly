@@ -9,6 +9,7 @@ const needToLoginFirst = ref<boolean>(false)
 const containerRef = ref<HTMLElement>() as Ref<HTMLElement>
 const offset = ref<string>('')
 const updateBaseline = ref<string>('')
+const noMoreContent = ref<boolean>(false)
 
 onMounted(async () => {
   for (let i = 0; i < 3; i++)
@@ -28,6 +29,9 @@ onUnmounted(() => {
 })
 
 async function getFollowedUsersVideos() {
+  if (noMoreContent.value)
+    return
+
   isLoading.value = true
   try {
     const response = await browser.runtime.sendMessage({
@@ -36,6 +40,12 @@ async function getFollowedUsersVideos() {
       offset: offset.value,
       updateBaseline: updateBaseline.value,
     })
+
+    if (response.code === -101) {
+      noMoreContent.value = true
+      needToLoginFirst.value = true
+      return
+    }
 
     if (response.code === 0) {
       offset.value = response.data.offset

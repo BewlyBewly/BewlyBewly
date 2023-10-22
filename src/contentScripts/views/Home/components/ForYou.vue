@@ -11,6 +11,7 @@ const isLoading = ref<boolean>(true)
 const needToLoginFirst = ref<boolean>(false)
 const containerRef = ref<HTMLElement>() as Ref<HTMLElement>
 const refreshIdx = ref<number>(1)
+const noMoreContent = ref<boolean>(false)
 
 watch(() => settings.value.recommendationMode, (newValue) => {
   videoList.length = 0
@@ -57,12 +58,20 @@ onUnmounted(() => {
 })
 
 async function getRecommendVideos() {
+  if (noMoreContent.value)
+    return
+
   isLoading.value = true
   try {
     const response = await browser.runtime.sendMessage({
       contentScriptQuery: 'getRecommendVideos',
       refreshIdx: refreshIdx.value++,
     })
+
+    if (!response.data) {
+      noMoreContent.value = true
+      return
+    }
 
     if (response.code === 0) {
       const resData = [] as ForYouVideoModel[]
