@@ -59,7 +59,9 @@ if (isFirefox) {
     }
     else {
       window.onload = () => {
-        document.documentElement.removeChild(beforeLoadedStyleEl)
+        setTimeout(() => {
+          document.documentElement.removeChild(beforeLoadedStyleEl)
+        }, 300)
       }
     }
   })
