@@ -36,7 +36,7 @@ const isLogin = ref<boolean>(false)
 const unReadMessage = reactive<UnReadMessage | {}>(
   {},
 ) as UnwrapNestedRefs<UnReadMessage>
-const unReadDm = reactive<UnReadDm | {}>({} as UnwrapNestedRefs<UnReadDm>)
+const unReadDm = reactive<UnReadDm>({} as UnwrapNestedRefs<UnReadDm>)
 const unReadMessageCount = ref<number>(0)
 const newMomentsCount = ref<number>(0)
 
@@ -162,9 +162,7 @@ async function getUnreadMessageCount() {
     })
     if (res.code === 0) {
       Object.assign(unReadDm, res.data)
-      Object.entries(unReadDm).forEach(([, value]) => {
-        unReadMessageCount.value += typeof value === 'number' ? value : 0
-      })
+      unReadMessageCount.value += unReadDm.follow_unread
     }
   }
   catch (error) {

@@ -61,7 +61,7 @@ export default defineComponent({
         }).then((res) => {
           if (res.code === 0) {
             const resData = res.data
-            this.list[4].unreadCount = parseInt(resData.unfollow_unread) + parseInt(resData.follow_unread)
+            this.list[4].unreadCount = resData.follow_unread
           }
         }).catch(() => {
           this.list[4].unreadCount = 0
