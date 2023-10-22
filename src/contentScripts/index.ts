@@ -24,6 +24,13 @@ const beforeLoadedStyleEl = injectCSS(`
   }
 `)
 
+// Add opacity transition effect for page loaded
+injectCSS(`
+  body {
+    transition: opacity 0.5s;
+  }
+`)
+
 if (isFirefox) {
   let isFirstScriptExecute = true
   document.addEventListener('beforescriptexecute', () => {
@@ -48,7 +55,7 @@ if (isFirefox) {
     ) {
       setTimeout(() => {
         document.documentElement.removeChild(beforeLoadedStyleEl)
-      }, 300)
+      }, 400)
     }
     else {
       window.onload = () => {
@@ -78,7 +85,9 @@ else {
     }
     else {
       window.onload = () => {
-        document.documentElement.removeChild(beforeLoadedStyleEl)
+        setTimeout(() => {
+          document.documentElement.removeChild(beforeLoadedStyleEl)
+        }, 300)
       }
     }
   })
