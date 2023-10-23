@@ -28,7 +28,7 @@ defineProps<{
     <!-- Cover -->
     <a
       :style="{ width: horizontal ? '170px' : '100%' }"
-      :href="url" target="_blank" tabindex="-1"
+      :href="url" target="_blank" tabindex="-1" block
       rounded="$bew-radius" w-full bg="$bew-fill-4" relative shrink-0
       group-hover:shadow group-hover:transform="translate--4px"
       transition="all ease-in-out 300"
