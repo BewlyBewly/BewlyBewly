@@ -100,7 +100,7 @@ onUnmounted(() => {
           flex="~ col"
           justify-center
           items-center relative
-          w-full z-10
+          w-full z-10 mb-6
           h-500px
         >
           <Logo
