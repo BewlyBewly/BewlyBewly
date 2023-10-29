@@ -128,6 +128,8 @@ function injectApp() {
     || /https?:\/\/space.bilibili.com\.*/.test(currentUrl)
     // notifications page
     || /https?:\/\/message.bilibili.com\.*/.test(currentUrl)
+    // bilibili sections
+    || /https?:\/\/www.bilibili.com\/v\/.*/.test(currentUrl)
   ) {
     if (
       /https?:\/\/bilibili.com\/?$/.test(currentUrl)
