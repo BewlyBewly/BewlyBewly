@@ -119,6 +119,10 @@ settings:
   settings_shared_with_the_search_page_desc: Those settings are used in common with the search page
   search_page_mode_wallpaper_fixed: Make the wallpaper of the search page mode fixed
 
+  # About
+  import_settings: Import settings
+  export_settings: Export settings
+
 auth:
   err_tip: Failed to grant access key
   plz_login_first: Please login to bilibili first

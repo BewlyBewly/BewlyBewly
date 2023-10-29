@@ -118,6 +118,10 @@ settings:
   settings_shared_with_the_search_page_desc: 這些設定都與搜尋頁共用
   search_page_mode_wallpaper_fixed: 將搜尋頁模式的背景固定
 
+  # About
+  import_settings: 匯入設定
+  export_settings: 匯出設定
+
 auth:
   err_tip: 無法授權 access key
   plz_login_first: 請先登入 bilibili
