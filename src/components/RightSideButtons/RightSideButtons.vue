@@ -25,7 +25,7 @@ function toggleDark() {
 </script>
 
 <template>
-  <div pos="fixed top-0 right-6px" h-full flex items-center z-1 pointer-events-none>
+  <div pos="fixed top-0 right-6px" h-full flex items-center z-10 pointer-events-none>
     <div flex="~ gap-2 col" pointer-events-auto>
       <Tooltip :content="currentAppColorScheme === 'dark' ? $t('dock.dark_mode') : $t('dock.light_mode')" placement="left">
         <Button
@@ -59,8 +59,8 @@ function toggleDark() {
 
 <style lang="scss" scoped>
 .ctrl-btn {
-  --b-button-width: 45px;
-  --b-button-height: 45px;
+  --b-button-width: 40px;
+  --b-button-height: 40px;
   --b-button-border-width: 1px;
   --b-button-color: var(--bew-elevated-1);
   --b-button-color-hover: var(--bew-elevated-1-hover);
@@ -69,7 +69,7 @@ function toggleDark() {
   --b-button-shadow-active: var(--bew-shadow-1);
 
   svg {
-    --at-apply: w-22px h-22px;
+    --at-apply: w-20px h-20px shrink-0;
   }
 }
 </style>
