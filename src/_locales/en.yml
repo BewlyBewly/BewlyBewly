@@ -120,8 +120,8 @@ settings:
   search_page_mode_wallpaper_fixed: Make the wallpaper of the search page mode fixed
 
   # About
-  import_settings: Import settings
-  export_settings: Export settings
+  import_settings: Import Settings
+  export_settings: Export Settings
 
 auth:
   err_tip: Failed to grant access key
