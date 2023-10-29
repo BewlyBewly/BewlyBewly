@@ -101,7 +101,7 @@ onUnmounted(() => {
           justify-center
           items-center relative
           w-full z-10
-          h-500px mb-8
+          h-500px
         >
           <Logo
             v-if="settings.searchPageShowLogo" :size="180" :color="settings.searchPageLogoColor === 'white' ? 'white' : 'var(--bew-theme-color)'"
@@ -116,7 +116,7 @@ onUnmounted(() => {
         </div>
       </Transition>
 
-      <header pos="sticky top-80px" z-10 mb-4>
+      <header pos="sticky top-80px" z-10 mb-9>
         <ul flex="~ items-center gap-2">
           <li
             v-for="tab in tabs" :key="tab.value"

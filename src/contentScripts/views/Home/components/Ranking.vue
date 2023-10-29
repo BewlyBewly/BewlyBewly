@@ -85,7 +85,9 @@ function getRankingPgc() {
 
 <template>
   <div flex="~ gap-40px">
-    <aside pos="sticky top-140px" h="[calc(100vh-120px)]" w-200px shrink-0>
+    <aside
+      pos="sticky top-150px" h="[calc(100vh-140px)]" w-200px shrink-0
+    >
       <OverlayScrollbarsComponent h-inherit p-20px m--20px defer>
         <ul flex="~ col gap-2">
           <li v-for="rankingType in rankingTypes" :key="rankingType.id">

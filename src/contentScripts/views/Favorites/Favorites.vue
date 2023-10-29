@@ -172,7 +172,7 @@ function handleUnfavorite(favoriteResource: FavoriteResource) {
           <Loading v-if="isFullPageLoading" w-full h-full pos="absolute top-0 left-0" mt--50px />
         </Transition>
         <!-- favorite list -->
-        <div grid="~ 2xl:cols-4 xl:cols-3 lg:cols-2 md:cols-1 gap-4" m="t-55px b-6">
+        <div grid="~ 2xl:cols-4 xl:cols-3 lg:cols-2 md:cols-1 gap-5" m="t-55px b-6">
           <TransitionGroup name="list">
             <VideoCard
               v-for="item in favoriteResources" :id="item.id" :key="item.id"

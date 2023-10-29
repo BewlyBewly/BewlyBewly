@@ -252,6 +252,6 @@ function getPopularAnimeList() {
 
 <style lang="scss" scoped>
 .anime-section {
-  --at-apply: mb-8 mt-14 first:mt-4;
+  --at-apply: mb-8 mt-14 first:mt-0;
 }
 </style>
