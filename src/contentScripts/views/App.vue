@@ -42,6 +42,12 @@ const isVideoPage = computed(() => {
   return false
 })
 
+const isSearchPage = computed(() => {
+  if (/https?:\/\/search.bilibili.com\/.*$/.test(location.href))
+    return true
+  return false
+})
+
 const isTopbarFixed = computed(() => {
   if (
     // home page
@@ -275,6 +281,7 @@ provide('activatedPage', activatedPage)
           v-if="settings.isShowTopbar && !isHomePage"
           pos="top-0 left-0" z-9999 w-full
           :style="{ position: isTopbarFixed ? 'fixed' : 'absolute' }"
+          :show-search-bar="!isSearchPage"
         />
         <Topbar
           v-else-if="settings.isShowTopbar && isHomePage"
