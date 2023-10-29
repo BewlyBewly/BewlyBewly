@@ -106,7 +106,7 @@ function handleCloseSearchPageModeSharedSettings() {
           @close="handleCloseSearchPageModeSharedSettings"
         >
           <template #desc>
-            <span color="$bew-warning-color">{{ $t('settings.search_page_mode_wallpaper_fixed') }}</span>
+            <span color="$bew-warning-color">{{ $t('settings.settings_shared_with_the_search_page_desc') }}</span>
           </template>
 
           <SearchPage />
