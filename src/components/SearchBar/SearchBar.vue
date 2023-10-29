@@ -280,10 +280,13 @@ function handleKeyDown() {
 }
 
 #search-wrap {
+  --b-search-bar-color: var(--bew-content-1);
+  --b-search-bar-color-hover: var(--bew-content-1-hover);
+  --b-search-bar-color-focus: var(--b-search-bar-color);
 
   @mixin card-content {
     --at-apply: text-base outline-none w-full
-      bg-$bew-content-1 shadow-$bew-shadow-2;
+      bg-$b-search-bar-color shadow-$bew-shadow-2;
     backdrop-filter: var(--bew-filter-glass);
   }
 
@@ -292,7 +295,12 @@ function handleKeyDown() {
       @include card-content;
       --at-apply: shadow-$bew-shadow-2;
 
+      &:hover {
+        --at-apply: bg-$b-search-bar-color-hover;
+      }
+
       &:focus {
+        --at-apply: bg-$b-search-bar-color-focus;
         box-shadow: 0 6px 16px var(--bew-theme-color-40), inset 0 0 6px var(--bew-theme-color-30)
       }
     }
