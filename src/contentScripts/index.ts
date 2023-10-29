@@ -128,7 +128,7 @@ function injectApp() {
     || /https?:\/\/space.bilibili.com\.*/.test(currentUrl)
     // notifications page
     || /https?:\/\/message.bilibili.com\.*/.test(currentUrl)
-    // bilibili sections
+    // bilibili section page
     || /https?:\/\/www.bilibili.com\/v\/.*/.test(currentUrl)
   ) {
     if (
