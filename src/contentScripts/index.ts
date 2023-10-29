@@ -37,7 +37,9 @@ if (isFirefox) {
     if (!isFirstScriptExecute)
       return
 
-    injectApp()
+    setTimeout(() => {
+      injectApp()
+    }, 1000)
     isFirstScriptExecute = false
 
     const currentUrl = document.URL
