@@ -191,7 +191,7 @@ async function getTopbarNewMomentsCount() {
 
 <template>
   <header
-    w="screen"
+    w="full"
   >
     <main
       max-w="$bew-page-max-width" m-auto flex="~"
