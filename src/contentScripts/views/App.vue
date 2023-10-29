@@ -21,7 +21,6 @@ const [showSettings, toggleSettings] = useToggle(false)
 const pages = { Home, Search, Anime, History, WatchLater, Favorites }
 const mainAppRef = ref<HTMLElement>() as Ref<HTMLElement>
 const scrollbarRef = ref()
-const mainAppOpacity = ref<number>(0)
 const showTopbarMask = ref<boolean>(false)
 const dynamicComponentKey = ref<string>(`dynamicComponent${Number(new Date())}`)
 
@@ -274,7 +273,6 @@ provide('activatedPage', activatedPage)
       <Transition name="topbar">
         <Topbar
           v-if="settings.isShowTopbar && !isHomePage"
-          :show-topbar-mask="showTopbarMask && isTopbarFixed"
           pos="top-0 left-0" z-9999 w-full
           :style="{ position: isTopbarFixed ? 'fixed' : 'absolute' }"
         />
@@ -282,7 +280,6 @@ provide('activatedPage', activatedPage)
           v-else-if="settings.isShowTopbar && isHomePage"
           :show-search-bar="showTopbarMask && settings.useSearchPageModeOnHomePage || (!settings.useSearchPageModeOnHomePage && activatedPage !== AppPage.Search || activatedPage !== AppPage.Home && activatedPage !== AppPage.Search)"
           :show-logo="showTopbarMask && settings.useSearchPageModeOnHomePage || (!settings.useSearchPageModeOnHomePage || activatedPage !== AppPage.Home)"
-          :show-topbar-mask="showTopbarMask && isTopbarFixed"
           pos="fixed top-0 left-0" z-9999 w-full
         />
       </Transition>
