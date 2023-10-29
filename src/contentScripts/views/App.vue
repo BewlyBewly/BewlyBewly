@@ -279,7 +279,7 @@ provide('activatedPage', activatedPage)
       <Transition name="topbar">
         <Topbar
           v-if="settings.isShowTopbar && !isHomePage"
-          pos="top-0 left-0" z-9999 w-full
+          pos="top-0 left-0" z-99 w-full
           :style="{ position: isTopbarFixed ? 'fixed' : 'absolute' }"
           :show-search-bar="!isSearchPage"
         />
@@ -287,7 +287,7 @@ provide('activatedPage', activatedPage)
           v-else-if="settings.isShowTopbar && isHomePage"
           :show-search-bar="showTopbarMask && settings.useSearchPageModeOnHomePage || (!settings.useSearchPageModeOnHomePage && activatedPage !== AppPage.Search || activatedPage !== AppPage.Home && activatedPage !== AppPage.Search)"
           :show-logo="showTopbarMask && settings.useSearchPageModeOnHomePage || (!settings.useSearchPageModeOnHomePage || activatedPage !== AppPage.Home)"
-          pos="fixed top-0 left-0" z-9999 w-full
+          pos="fixed top-0 left-0" z-99 w-full
         />
       </Transition>
     </div>

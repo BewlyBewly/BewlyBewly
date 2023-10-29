@@ -71,3 +71,7 @@ html.dark.bewly-design {
   --os-handle-bg-hover: rgba(120, 120, 140, .55);
   --os-handle-bg-active: rgba(120, 120, 140, .66);
 }
+
+.link-navbar, #home_nav {
+  display: none;
+}
