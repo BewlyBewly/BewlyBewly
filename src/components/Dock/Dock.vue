@@ -38,8 +38,8 @@ const dockItems = computed((): DockItem[] => {
     { label: t('dock.search'), icon: 'mingcute:search-2-line', iconActivated: 'mingcute:search-2-fill', page: AppPage.Search },
     { label: t('dock.home'), icon: 'mingcute:home-5-line', iconActivated: 'mingcute:home-5-fill', page: AppPage.Home },
     { label: t('dock.anime'), icon: 'mingcute:tv-2-line', iconActivated: 'mingcute:tv-2-fill', page: AppPage.Anime },
-    { label: t('dock.history'), icon: 'mingcute:time-line', iconActivated: 'mingcute:time-fill', page: AppPage.History },
     { label: t('dock.favorites'), icon: 'mingcute:star-line', iconActivated: 'mingcute:star-fill', page: AppPage.Favorites },
+    { label: t('dock.history'), icon: 'mingcute:time-line', iconActivated: 'mingcute:time-fill', page: AppPage.History },
     { label: t('dock.watch_later'), icon: 'mingcute:carplay-line', iconActivated: 'mingcute:carplay-fill', page: AppPage.WatchLater },
   ]
 })
