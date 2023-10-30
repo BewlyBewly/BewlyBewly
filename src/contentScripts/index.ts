@@ -130,6 +130,8 @@ function injectApp() {
     || /https?:\/\/message.bilibili.com\.*/.test(currentUrl)
     // bilibili section page
     || /https?:\/\/www.bilibili.com\/v\/.*/.test(currentUrl)
+    // anime page
+    || /https?:\/\/www.bilibili.com\/anime.*/.test(currentUrl)
   ) {
     if (
       /https?:\/\/bilibili.com\/?$/.test(currentUrl)
