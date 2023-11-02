@@ -1,5 +1,5 @@
 .bewly-design {
-  .home-v3-app-container {
+  :not(fjjdsl) .home-v3-app-container {
     .home-banner-wrapper
       .banner-hover-group
       .banner-hover-group-title
@@ -65,7 +65,8 @@
         .title-left
         .week-day-wrapper
         .week-day-item.active,
-      .section-title-v2-wrapper .title-right {
+      .section-title-v2-wrapper .title-right,
+      .nav-tool-container .section {
         color: var(--bew-text-1);
       }
 
@@ -85,7 +86,8 @@
       }
 
       .section-title-v2-wrapper .title-left .week-day-wrapper,
-      .section-title-v2-wrapper .title-right {
+      .section-title-v2-wrapper .title-right,
+      .nav-tool-container .section {
         background-color: var(--bew-content-solid-1);
       }
 
@@ -104,7 +106,12 @@
         background: unset !important;
       }
 
-      .section-title-v2-wrapper .title-right {
+      .home-banner-wrapper .banner-hover-group {
+        background: linear-gradient(to bottom, transparent, var(--bew-bg));
+      }
+
+      .section-title-v2-wrapper .title-right,
+      .nav-tool-container a {
         border-color: var(--bew-border-color);
       }
 
