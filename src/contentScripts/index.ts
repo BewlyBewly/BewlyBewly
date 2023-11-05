@@ -128,7 +128,7 @@ function injectApp() {
     || /https?:\/\/space.bilibili.com\.*/.test(currentUrl)
     // notifications page
     || /https?:\/\/message.bilibili.com\.*/.test(currentUrl)
-    // bilibili section page
+    // bilibili channel page b站分区页面
     || /https?:\/\/www.bilibili.com\/v\/.*/.test(currentUrl)
     // anime page
     || /https?:\/\/www.bilibili.com\/anime.*/.test(currentUrl)
