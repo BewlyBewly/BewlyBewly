@@ -40,18 +40,7 @@ const newMomentsCount = ref<number>(0)
 const logo = ref<HTMLElement>() as Ref<HTMLElement>
 const avatarImg = ref<HTMLImageElement>() as Ref<HTMLImageElement>
 const avatarShadow = ref<HTMLImageElement>() as Ref<HTMLImageElement>
-
-const isHomePage = computed(() => {
-  if (
-    /https?:\/\/bilibili.com\/?$/.test(location.href)
-  || /https?:\/\/www.bilibili.com\/?$/.test(location.href)
-  || /https?:\/\/www.bilibili.com\/index.html$/.test(location.href)
-  || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(location.href)
-  || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(location.href)
-  )
-    return true
-  return false
-})
+const favoritesPopRef = ref<any>()
 
 watch(
   showNotificationsPop,
@@ -74,6 +63,13 @@ watch(
       await getTopbarNewMomentsCount()
   },
 )
+
+// watch(showFavoritesPop, (newVal, oldVal) => {
+//   if (newVal === oldVal)
+//     return
+//   if (newVal && favoritesPopRef.value)
+//     favoritesPopRef.value.refreshFavoriteResources()
+// })
 
 onMounted(() => {
   initData()
@@ -374,6 +370,7 @@ async function getTopbarNewMomentsCount() {
 
             <!-- Favorites -->
             <div
+              ref="favoritesPopRef"
               class="right-side-item"
               :class="{ active: showFavoritesPop }"
               @mouseenter="showFavoritesPop = true"

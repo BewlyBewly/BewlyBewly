@@ -11,7 +11,6 @@ const favoriteResources = reactive<Array<FavoriteResource>>([])
 const activatedMediaId = ref<number>(0)
 const activatedFavoriteTitle = ref<string>()
 const currentPageNum = ref<number>(1)
-const keyword = ref<string>()
 
 const isLoading = ref<boolean>(false)
 // when noMoreContent is true, the user can't scroll down to load more content
@@ -32,18 +31,14 @@ watch(activatedMediaId, (newVal: number, oldVal: number) => {
   if (favoriteVideosWrap.value)
     smoothScrollToTop(favoriteVideosWrap.value, 300)
 
-  getFavoriteResources(newVal, 1)
+  currentPageNum.value = 1
+  getFavoriteResources()
 })
 
 onMounted(async () => {
   await getFavoriteCategories()
   activatedMediaId.value = favoriteCategories[0].id
   activatedFavoriteTitle.value = favoriteCategories[0].title
-  getFavoriteResources(
-    activatedMediaId.value,
-    ++currentPageNum.value,
-    keyword.value,
-  )
 
   if (favoriteVideosWrap.value) {
     favoriteVideosWrap.value.addEventListener('scroll', () => {
@@ -56,8 +51,10 @@ onMounted(async () => {
         && favoriteResources.length > 0
         && !isLoading.value
       ) {
-        if (activatedMediaId.value && !noMoreContent.value)
-          getFavoriteResources(activatedMediaId.value, ++currentPageNum.value)
+        if (activatedMediaId.value && !noMoreContent.value) {
+          currentPageNum.value++
+          getFavoriteResources()
+        }
       }
     })
   }
@@ -80,22 +77,15 @@ async function getFavoriteCategories() {
 
 /**
  * Get favorite video resources
- * @param mediaId
- * @param pageNum
- * @param keyword
  */
-function getFavoriteResources(
-  mediaId: number,
-  pageNum: number,
-  keyword = '' as string,
-) {
+function getFavoriteResources() {
   isLoading.value = true
   browser.runtime
     .sendMessage({
       contentScriptQuery: 'getFavoriteResources',
-      mediaId,
-      pageNum,
-      keyword,
+      mediaId: activatedMediaId.value,
+      pageNum: currentPageNum.value,
+      keyword: '',
     })
     .then((res) => {
       if (res.code === 0) {
@@ -115,6 +105,12 @@ function getFavoriteResources(
       }
       isLoading.value = false
     })
+}
+
+function refreshFavoriteResources() {
+  favoriteResources.length = 0
+  currentPageNum.value = 1
+  getFavoriteResources()
 }
 
 function changeCategory(categoryItem: FavoriteCategory) {
