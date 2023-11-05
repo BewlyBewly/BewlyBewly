@@ -10,12 +10,12 @@ export interface SuggestionItem {
   timestamp: number
 }
 
-const historySort = (historyItems: HistoryItem[]) => {
+function historySort(historyItems: HistoryItem[]) {
   historyItems.sort((a, b) => b.timestamp - a.timestamp)
   return historyItems
 }
 
-export const getSearchHistory = (): HistoryItem[] => {
+export function getSearchHistory(): HistoryItem[] {
   const history = localStorage.getItem(SEARCH_HISTORY_KEY)
   if (!history) {
     localStorage.setItem(SEARCH_HISTORY_KEY, JSON.stringify([]))
@@ -24,7 +24,7 @@ export const getSearchHistory = (): HistoryItem[] => {
   return historySort(JSON.parse(history))
 }
 
-export const addSearchHistory = (historyItem: HistoryItem) => {
+export function addSearchHistory(historyItem: HistoryItem) {
   let history = getSearchHistory()
 
   let hasSameValue = false
@@ -47,7 +47,7 @@ export const addSearchHistory = (historyItem: HistoryItem) => {
   localStorage.setItem(SEARCH_HISTORY_KEY, JSON.stringify(history))
 }
 
-export const removeSearchHistory = (value: string) => {
+export function removeSearchHistory(value: string) {
   let history = getSearchHistory()
   history = history.filter(item => item.value !== value)
   localStorage.setItem(SEARCH_HISTORY_KEY, JSON.stringify(history))
