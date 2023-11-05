@@ -281,7 +281,7 @@ provide('activatedPage', activatedPage)
       <Transition name="topbar">
         <Topbar
           v-if="settings.isShowTopbar && !isHomePage"
-          pos="top-0 left-0" z-99 w-full
+          pos="top-0 left-0" z="99 hover:999" w-full
           :style="{ position: isTopbarFixed ? 'fixed' : 'absolute' }"
           :show-search-bar="!isSearchPage"
         />
