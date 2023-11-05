@@ -63,6 +63,8 @@ const isTopbarFixed = computed(() => {
     || /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(location.href)
     // anime playback & movie page
     || /https?:\/\/(www.)?bilibili.com\/bangumi\/play\/.*/.test(location.href)
+    // anime page
+    || /https?:\/\/(www.)?bilibili.com\/anime(\/)?.*/.test(location.href)
     // moment page
     || /https?:\/\/t.bilibili.com.*/.test(location.href)
   )

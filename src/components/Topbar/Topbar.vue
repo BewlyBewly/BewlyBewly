@@ -200,7 +200,7 @@ async function getTopbarNewMomentsCount() {
       p="lg:x-20 md:x-16 x-14"
       h="70px"
     >
-      <div w="xl:280px" shrink-0>
+      <div w="2xl:380px xl:280px" shrink-0>
         <div
           z-1 relative w-fit
           @mouseenter.self="showLogoMenuDropdown()"
