@@ -64,12 +64,16 @@ watch(
   },
 )
 
-// watch(showFavoritesPop, (newVal, oldVal) => {
-//   if (newVal === oldVal)
-//     return
-//   if (newVal && favoritesPopRef.value)
-//     favoritesPopRef.value.refreshFavoriteResources()
-// })
+watch(showFavoritesPop, (newVal, oldVal) => {
+  if (newVal === oldVal)
+    return
+  if (newVal) {
+    nextTick(() => {
+      if (favoritesPopRef.value)
+        favoritesPopRef.value.refreshFavoriteResources()
+    })
+  }
+})
 
 onMounted(() => {
   initData()
@@ -370,7 +374,6 @@ async function getTopbarNewMomentsCount() {
 
             <!-- Favorites -->
             <div
-              ref="favoritesPopRef"
               class="right-side-item"
               :class="{ active: showFavoritesPop }"
               @mouseenter="showFavoritesPop = true"
@@ -388,6 +391,7 @@ async function getTopbarNewMomentsCount() {
                 <KeepAlive>
                   <FavoritesPop
                     v-if="showFavoritesPop"
+                    ref="favoritesPopRef"
                     class="bew-popover"
                   />
                 </KeepAlive>

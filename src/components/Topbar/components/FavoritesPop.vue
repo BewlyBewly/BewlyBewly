@@ -117,6 +117,10 @@ function changeCategory(categoryItem: FavoriteCategory) {
   activatedMediaId.value = categoryItem.id
   activatedFavoriteTitle.value = categoryItem.title
 }
+
+defineExpose({
+  refreshFavoriteResources,
+})
 </script>
 
 <template>
