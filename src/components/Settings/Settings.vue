@@ -100,7 +100,7 @@ function setCurrentTitle() {
 <template>
   <div class="fixed w-full h-full top-0 left-0" z="9998">
     <div
-      class="fixed w-full h-full top-0 left-0" opacity-60 :style="{ backgroundColor: isHomePage ? '' : 'var(--bew-bg)' }"
+      class="fixed w-full h-full top-0 left-0" opacity-60 :style="{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }"
       @click="handleClose"
     />
 

@@ -271,13 +271,13 @@ provide('activatedPage', activatedPage)
     :style="{ opacity: 1, height: isHomePage ? '100vh' : '0' }"
   >
     <!-- Dock & RightSideButtons -->
-    <div :style="{ opacity: showSettings ? 0.4 : 1 }">
+    <div>
       <Dock v-if="isHomePage" :activated-page="activatedPage" @change-page="pageName => changeActivatePage(pageName)" @settings-visibility-change="toggleSettings" />
       <RightSideButtons v-else @settings-visibility-change="toggleSettings" />
     </div>
 
     <!-- Topbar -->
-    <div m-auto max-w="$bew-page-max-width" :style="{ opacity: showSettings ? 0.4 : 1 }">
+    <div m-auto max-w="$bew-page-max-width">
       <Transition name="topbar">
         <Topbar
           v-if="settings.isShowTopbar && !isHomePage"
@@ -302,7 +302,7 @@ provide('activatedPage', activatedPage)
     </KeepAlive>
 
     <OverlayScrollbarsComponent ref="scrollbarRef" element="div" h-inherit defer @os-scroll="handleOsScroll">
-      <div m-auto max-w="$bew-page-max-width" :style="{ opacity: showSettings ? 0.4 : 1 }">
+      <div m-auto max-w="$bew-page-max-width">
         <div flex="~" max-w="$bew-page-max-width">
           <main
             v-if="isHomePage"
