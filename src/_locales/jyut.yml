@@ -109,6 +109,8 @@ settings:
   recommendation_mode: 推介模式
   recommendation_mode_desc: >
     若然你想用手機版嘅推介演算法，就要俾 BewlyBewly 批准使用存取 access key。
+  recommendation_mode_desc2: >
+    事緣B站對之前嘅 API 做咗啲限制，之前取得 access key 嘅功能直接 short 咗。都係建議閣下用返 Web Mode 啦 🫠
   authorize_app: 授權 BewlyBewly 使用 access key
   authorize_app_desc: |
     授咗權嘅話，你就會收到基於 bilibili 手機版推介演算法所推介嘅內容，兼且授權 key 只有約一個月有效期，到期後記得要重新授權嚟取得存取 access key。

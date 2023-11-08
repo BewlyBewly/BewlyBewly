@@ -34,7 +34,13 @@ function handleCloseSearchPageModeSharedSettings() {
 <template>
   <div>
     <SettingsItemGroup :title="$t('settings.group_recommendation_mode')">
-      <SettingsItem :title="$t('settings.recommendation_mode')" :desc="$t('settings.recommendation_mode_desc')">
+      <SettingsItem :title="$t('settings.recommendation_mode')">
+        <template #desc>
+          <p>{{ $t('settings.recommendation_mode_desc') }}</p>
+          <p color="$bew-warning-color">
+            {{ $t('settings.recommendation_mode_desc2') }}
+          </p>
+        </template>
         <div w-full flex rounded="$bew-radius" bg="$bew-fill-1" p-1>
           <div
             flex-1 py-1 cursor-pointer text-center rounded="$bew-radius"

@@ -109,6 +109,9 @@ settings:
   recommendation_mode: Recommendation mode
   recommendation_mode_desc: >
     If you want to use the recommendation algorithm on the app, please ensure that you authorize the BewlyBewly to use the access key first.
+  recommendation_mode_desc2: >
+    The methods to request the access key is no longer functioning, since Bilibili has imposed restrictions on the previous API.
+    We recommend using the web-based mode 🫠
   authorize_app: Authorize the BewlyBewly to use the access key
   authorize_app_desc: >
     After authentication, you will receive the video recommendations based on the bilibili app recommendation algorithm.

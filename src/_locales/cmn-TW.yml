@@ -109,6 +109,8 @@ settings:
   recommendation_mode: 推薦模式
   recommendation_mode_desc: >
     如果您想要使用手機端的推薦演算法，請先授權 BewlyBewly 使用 access key。
+  recommendation_mode_desc2: >
+    由於B站對以前的API實施了限制，要請求 access key 的方法不再運作。我們建議使用 Web 模式 🫠
   authorize_app: 授權 BewlyBewly 使用 access key
   authorize_app_desc: |
     授權使用後能在首頁推送 bilibili 手機端推介演算法的影片，授權 key 的有效期約爲一個月，過了有效期後，請記得重新取得授權以取得 access key。
