@@ -116,7 +116,7 @@ onUnmounted(() => {
         </div>
       </Transition>
 
-      <header pos="sticky top-80px" z-10 mb-9>
+      <header pos="sticky top-80px" w-fit z-10 mb-9>
         <ul flex="~ items-center gap-2">
           <li
             v-for="tab in tabs" :key="tab.value"
