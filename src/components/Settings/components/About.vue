@@ -21,9 +21,13 @@ function handleImportSettings() {
         reader.onload = (event: Event) => {
           const fileReaderTarget = event.target as FileReader
           const fileContent = fileReaderTarget.result as string
-          const jsonObject = JSON.parse(fileContent)
+          const jsonObject = JSON.parse(fileContent) as any
 
-          settings.value = jsonObject
+          // Merge the new settings with the existing settings
+          Object.keys(jsonObject).forEach((key) => {
+            if (key in settings.value)
+              (settings.value as any)[key] = jsonObject[key]
+          })
 
           importSettingsRef.value?.removeEventListener('change', handleChange)
         }
