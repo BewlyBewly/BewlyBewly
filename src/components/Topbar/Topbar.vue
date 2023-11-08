@@ -205,7 +205,7 @@ async function getTopbarNewMomentsCount() {
       <!-- Top bar mask -->
       <div
         v-if="mask"
-        pos="absolute top-0 left-0" w-full h-70px backdrop="blur-10px" filter-blur-8px
+        pos="absolute top-0 left-0" w-full h-70px backdrop="blur-10px" filter-blur-4px
         pointer-events-none
         style="mask-image: linear-gradient(to bottom,  black 70%, transparent);"
       />
