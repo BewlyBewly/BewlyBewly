@@ -25,6 +25,13 @@ function handleClose() {
         text-shadow: 0 0 15px var(--bew-elevated-solid-1), 0 0 20px var(--bew-elevated-solid-1)
       "
     >
+      <!-- Mask -->
+      <div
+        pos="absolute top-0 left-0" w-inherit h-inherit backdrop="blur-6px" pointer-events-none
+        style="mask-image: linear-gradient(to bottom,  black 70%, transparent);"
+        z--1 rounded-inherit
+      />
+
       <div>
         <p text-xl fw-bold>
           {{ title }}
