@@ -4,10 +4,12 @@ import { onMounted, watch } from 'vue'
 import type { UnReadDm, UnReadMessage, UserInfo } from './types'
 import { updateInterval } from './notify'
 import { getUserID } from '~/utils/main'
+import { settings } from '~/logic'
 
 interface Props {
   showSearchBar?: boolean
   showLogo?: boolean
+  mask?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -200,6 +202,26 @@ async function getTopbarNewMomentsCount() {
       p="lg:x-20 md:x-16 x-14"
       h="70px"
     >
+      <!-- Top bar mask -->
+      <div
+        v-if="mask"
+        pos="absolute top-0 left-0" w-full h-70px backdrop="blur-10px" filter-blur-8px
+        pointer-events-none
+        style="mask-image: linear-gradient(to bottom,  black 70%, transparent);"
+      />
+      <Transition name="fade">
+        <div
+          v-if="mask"
+          pos="absolute top-0 left-0" w-full h-80px
+          pointer-events-none opacity-80
+          :style="{
+            background: `linear-gradient(to bottom, ${settings.wallpaper
+              || settings.useSearchPageModeOnHomePage && settings.searchPageWallpaper && settings.individuallySetSearchPageWallpaper
+              ? 'rgba(0,0,0,.6)' : 'var(--bew-bg)'}, transparent)`
+          }"
+        />
+      </Transition>
+
       <div w="2xl:380px xl:280px" shrink-0>
         <div
           z-1 relative w-fit
