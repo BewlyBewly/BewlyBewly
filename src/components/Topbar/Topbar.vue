@@ -213,7 +213,7 @@ async function getTopbarNewMomentsCount() {
         <div
           v-if="mask"
           pos="absolute top-0 left-0" w-full h-80px
-          pointer-events-none opacity-80
+          pointer-events-none opacity-70
           :style="{
             background: `linear-gradient(to bottom, ${settings.wallpaper
               || settings.useSearchPageModeOnHomePage && settings.searchPageWallpaper && settings.individuallySetSearchPageWallpaper
