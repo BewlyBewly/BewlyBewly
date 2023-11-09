@@ -20,6 +20,43 @@ function handleMessage(message: any, sender: any, sendResponse: any) {
       .then(data => sendResponse(data))
       .catch(error => console.error(error))
   }
+  else if (message.contentScriptQuery === 'getLoginQRCode') {
+    const url = 'https://passport.bilibili.com/x/passport-tv-login/qrcode/auth_code'
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      },
+      body: new URLSearchParams({
+        appkey: '4409e2ce8ffd12b8',
+        local_id: '0',
+        ts: '0',
+        sign: 'e134154ed6add881d28fbdf68653cd9c',
+      }),
+    })
+      .then(response => response.json())
+      .then(data => sendResponse(data))
+      .catch(error => console.error(error))
+  }
+  else if (message.contentScriptQuery === 'qrCodeLogin') {
+    const url = 'https://passport.bilibili.com/x/passport-tv-login/qrcode/auth_code'
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      },
+      body: new URLSearchParams({
+        appkey: '4409e2ce8ffd12b8',
+        auth_code: message.authCode,
+        local_id: '0',
+        ts: '0',
+        sign: 'e134154ed6add881d28fbdf68653cd9c',
+      }),
+    })
+      .then(response => response.json())
+      .then(data => sendResponse(data))
+      .catch(error => console.error(error))
+  }
 }
 
 function handleConnect() {

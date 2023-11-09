@@ -3,7 +3,7 @@ import type { Ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import SearchPage from './SearchPage.vue'
 import { grantAccessKey, revokeAccessKey } from '~/utils/authProvider'
-import { accessKey, settings } from '~/logic'
+import { settings } from '~/logic'
 
 const { t } = useI18n()
 
@@ -18,6 +18,14 @@ function handleAuthorize() {
 
 function handleRevoke() {
   revokeAccessKey()
+}
+
+function openQRCode() {
+  browser.runtime.sendMessage({
+    contentScriptQuery: 'getLoginQRCode',
+  }).then((res) => {
+    console.log(res)
+  })
 }
 
 function handleOpenSearchPageModeSharedSettings() {
@@ -75,7 +83,10 @@ function handleCloseSearchPageModeSharedSettings() {
         </template>
 
         <div w-full>
-          <button
+          <Button @click="openQRCode">
+            Open QRCode
+          </Button>
+          <!-- <button
             v-if="!accessKey"
             ref="authorizeBtn"
             bg="$bew-theme-color" text-white lh-35px rounded="$bew-radius" w-full
@@ -89,7 +100,7 @@ function handleCloseSearchPageModeSharedSettings() {
             @click="handleRevoke"
           >
             <span>{{ $t('settings.btn.revoke') }}</span>
-          </button>
+          </button> -->
         </div>
       </SettingsItem>
     </SettingsItemGroup>
