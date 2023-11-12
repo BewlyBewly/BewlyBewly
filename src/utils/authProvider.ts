@@ -72,14 +72,7 @@ export function grantAccessKey(t: any, element: HTMLButtonElement): void {
     })
 }
 
-// export async function getAccesskeyNew() {
-//   let res = await getLoginQRCode()
-//   if (res.code === 0) {
-//     res = await pollQRCode(res.data.auth_code)
-//     console.log(res)
-//   }
-// }
-
+// https://socialsisteryi.github.io/bilibili-API-collect/docs/misc/sign/APPKey.html#appkey
 const TVAppKey = {
   appkey: '4409e2ce8ffd12b8',
   appsec: '59b43e04ad6965f34319062b478f83dd',
