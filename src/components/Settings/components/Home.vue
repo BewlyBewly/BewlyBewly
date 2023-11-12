@@ -1,14 +1,16 @@
 <script lang="ts" setup>
 import type { Ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import QRCodeVue from 'qrcode.vue'
 import SearchPage from './SearchPage.vue'
-import { grantAccessKey, revokeAccessKey } from '~/utils/authProvider'
+import { getTVLoginQRCode, grantAccessKey, revokeAccessKey } from '~/utils/authProvider'
 import { settings } from '~/logic'
 
 const { t } = useI18n()
 
 const authorizeBtn = ref<HTMLButtonElement>() as Ref<HTMLButtonElement>
 const showSearchPageModeSharedSettings = ref<boolean>(false)
+const loginQRCodeUrl = ref<string>()
 
 const preventCloseSettings = inject('preventCloseSettings') as Ref<boolean>
 
@@ -20,11 +22,10 @@ function handleRevoke() {
   revokeAccessKey()
 }
 
-function openQRCode() {
-  browser.runtime.sendMessage({
-    contentScriptQuery: 'getLoginQRCode',
-  }).then((res) => {
-    console.log(res)
+function setLoginQRCode() {
+  getTVLoginQRCode().then((res) => {
+    if (res.code === 0)
+      loginQRCodeUrl.value = res.data.url
   })
 }
 
@@ -83,7 +84,7 @@ function handleCloseSearchPageModeSharedSettings() {
         </template>
 
         <div w-full>
-          <Button @click="openQRCode">
+          <Button @click="setLoginQRCode">
             Open QRCode
           </Button>
           <!-- <button
@@ -102,6 +103,10 @@ function handleCloseSearchPageModeSharedSettings() {
             <span>{{ $t('settings.btn.revoke') }}</span>
           </button> -->
         </div>
+      </SettingsItem>
+      <SettingsItem title="Login QR Code" next-line>
+        <QRCodeVue v-if="loginQRCodeUrl" :value="loginQRCodeUrl" width="200" />
+        <!-- <iframe v-if="loginQRCodeUrl" :src="loginQRCodeUrl" width="200" height="200" frameborder="0" /> -->
       </SettingsItem>
     </SettingsItemGroup>
 

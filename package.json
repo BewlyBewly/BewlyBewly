@@ -74,10 +74,13 @@
     "webextension-polyfill": "^0.10.0"
   },
   "dependencies": {
+    "@types/md5": "^2.3.5",
     "dplayer": "^1.27.1",
+    "md5": "^2.3.0",
     "mitt": "^3.0.1",
     "overlayscrollbars": "^2.0.0",
     "overlayscrollbars-vue": "^0.5.5",
+    "qrcode.vue": "^3.4.1",
     "vue-i18n": "^9.2.2"
   }
 }

@@ -6,12 +6,18 @@
 
 /* eslint-disable no-throw-literal */
 import browser from 'webextension-polyfill'
+import { appSign } from './appSign'
 import { accessKey } from '~/logic/storage'
 
 export function revokeAccessKey() {
   accessKey.value = null
 }
 
+/**
+ * @deprecated
+ * @param t
+ * @param element
+ */
 export function grantAccessKey(t: any, element: HTMLButtonElement): void {
   const originalInnerHTML = element.innerHTML
   element.innerHTML = `
@@ -64,4 +70,69 @@ export function grantAccessKey(t: any, element: HTMLButtonElement): void {
       alert(`${error.tip}: ${error.msg}`)
       console.error(`${error.msg}: `, error.data)
     })
+}
+
+// export async function getAccesskeyNew() {
+//   let res = await getLoginQRCode()
+//   if (res.code === 0) {
+//     res = await pollQRCode(res.data.auth_code)
+//     console.log(res)
+//   }
+// }
+
+const TVAppKey = {
+  appkey: '4409e2ce8ffd12b8',
+  appsec: '59b43e04ad6965f34319062b478f83dd',
+}
+
+// https://github.com/magicdawn/bilibili-app-recommend/blob/e91722cc076fe65b98116fb0248236851ae6e1dc/src/utility/access-key/tv-qrcode/api.ts#L8
+function tvSignSearchParams(params: Record<string, any>) {
+  const sign = appSign(params, TVAppKey.appkey, TVAppKey.appsec)
+  return new URLSearchParams({
+    ...params,
+    sign,
+  })
+}
+
+export function pollTVLoginQRCode(authCode: string): Promise<any> {
+  const url = 'https://passport.bilibili.com/x/passport-tv-login/qrcode/poll'
+
+  return new Promise<void>((resolve, reject) => {
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      },
+      body: tvSignSearchParams({
+        appkey: TVAppKey.appkey,
+        auth_code: authCode,
+        local_id: '0',
+        ts: '0',
+      }),
+    })
+      .then(response => response.json())
+      .then(data => resolve(data))
+      .catch(error => reject(error))
+  })
+}
+
+export function getTVLoginQRCode(): Promise<any> {
+  const url = 'https://passport.bilibili.com/x/passport-tv-login/qrcode/auth_code'
+
+  return new Promise<void>((resolve, reject) => {
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      },
+      body: tvSignSearchParams({
+        appkey: TVAppKey.appkey,
+        local_id: '0',
+        ts: '0',
+      }),
+    })
+      .then(response => response.json())
+      .then(data => resolve(data))
+      .catch(error => reject(error))
+  })
 }
