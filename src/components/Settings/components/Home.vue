@@ -5,7 +5,6 @@ import QRCodeVue from 'qrcode.vue'
 import SearchPage from './SearchPage.vue'
 import { getTVLoginQRCode, grantAccessKey, pollTVLoginQRCode, revokeAccessKey } from '~/utils/authProvider'
 import { accessKey, settings } from '~/logic'
-import { delay } from '~/utils/main'
 
 const { t } = useI18n()
 
@@ -29,11 +28,12 @@ async function setLoginQRCode() {
     loginQRCodeUrl.value = res.data.url
 
     let isSuccess = false
-    while (true) {
+    setInterval(interval, 5000)
+
+    async function interval() {
       if (isSuccess)
         return
 
-      delay(5000)
       const pollRes = await pollTVLoginQRCode(res.data.auth_code)
 
       // 0：成功
