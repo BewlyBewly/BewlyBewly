@@ -205,9 +205,9 @@ async function getTopbarNewMomentsCount() {
       <!-- Top bar mask -->
       <div
         v-if="mask"
-        pos="absolute top-0 left-0" w-full h-70px backdrop="blur-15px"
+        pos="absolute top-0 left-0" w-full h-80px backdrop="blur-15px"
         pointer-events-none
-        style="mask-image: linear-gradient(to bottom,  black 70%, transparent);"
+        style="mask-image: linear-gradient(to bottom,  black 40%, transparent);"
       />
       <Transition name="fade">
         <div
