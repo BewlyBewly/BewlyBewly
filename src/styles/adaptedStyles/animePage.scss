@@ -141,7 +141,12 @@
 
       .time-line-body .timeline-common-content .timeline-weekday-item,
       .time-line-wrapper .time-line-body .timeline-special-content-left,
-      .time-line-wrapper .time-line-body .timeline-special-content-right {
+      .time-line-wrapper .time-line-body .timeline-special-content-right,
+      .time-line-wrapper
+        .time-line-body
+        .timeline-common-content
+        .timeline-common-content-list-container
+        .timeline-common-content-list-blank {
         border-top-color: transparent !important;
       }
 
