@@ -97,3 +97,13 @@ export function injectCSS(css: string): HTMLStyleElement {
   document.documentElement.appendChild(el)
   return el
 }
+
+/**
+ * delay
+ * @param time delay time
+ */
+export function delay(time: number) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, time)
+  })
+}

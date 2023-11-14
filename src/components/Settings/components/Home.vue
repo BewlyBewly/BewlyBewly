@@ -3,8 +3,9 @@ import type { Ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import QRCodeVue from 'qrcode.vue'
 import SearchPage from './SearchPage.vue'
-import { getTVLoginQRCode, grantAccessKey, revokeAccessKey } from '~/utils/authProvider'
-import { settings } from '~/logic'
+import { getTVLoginQRCode, grantAccessKey, pollTVLoginQRCode, revokeAccessKey } from '~/utils/authProvider'
+import { accessKey, settings } from '~/logic'
+import { delay } from '~/utils/main'
 
 const { t } = useI18n()
 
@@ -22,11 +23,41 @@ function handleRevoke() {
   revokeAccessKey()
 }
 
-function setLoginQRCode() {
-  getTVLoginQRCode().then((res) => {
-    if (res.code === 0)
-      loginQRCodeUrl.value = res.data.url
-  })
+async function setLoginQRCode() {
+  const res = await getTVLoginQRCode()
+  if (res.code === 0) {
+    loginQRCodeUrl.value = res.data.url
+
+    let isSuccess = false
+    while (true) {
+      if (isSuccess)
+        return
+
+      delay(5000)
+      const pollRes = await pollTVLoginQRCode(res.data.auth_code)
+
+      // 0：成功
+      // -3：API校验密匙错误
+      // -400：请求错误
+      // -404：啥都木有
+      // 86038：二维码已失效
+      // 86039：二维码尚未确认
+      // 86090：二维码已扫码未确认
+
+      if (pollRes.code === 0) {
+        isSuccess = true
+        accessKey.value = pollRes.data.access_token
+        console.log(pollRes.data, accessKey.value)
+      }
+      else if (pollRes.code === 86038) {
+        await setLoginQRCode()
+      }
+      else if (pollRes.code === -3 || pollRes.code === -400 || pollRes.code === -404) {
+        // eslint-disable-next-line no-alert
+        alert(pollRes.message)
+      }
+    }
+  }
 }
 
 function handleOpenSearchPageModeSharedSettings() {
