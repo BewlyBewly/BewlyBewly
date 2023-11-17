@@ -10,9 +10,20 @@ const { t } = useI18n()
 
 const authorizeBtn = ref<HTMLButtonElement>() as Ref<HTMLButtonElement>
 const showSearchPageModeSharedSettings = ref<boolean>(false)
+const showQRCodeDialog = ref<boolean>(false)
 const loginQRCodeUrl = ref<string>()
+const pollLoginQRCodeInterval = ref<any>(null)
+const authCode = ref<string>('')
 
 const preventCloseSettings = inject('preventCloseSettings') as Ref<boolean>
+
+onDeactivated(() => {
+  clearInterval(pollLoginQRCodeInterval.value)
+})
+
+onBeforeUnmount(() => {
+  clearInterval(pollLoginQRCodeInterval.value)
+})
 
 function handleAuthorize() {
   grantAccessKey(t, authorizeBtn.value)
@@ -22,42 +33,50 @@ function handleRevoke() {
   revokeAccessKey()
 }
 
+async function handleOpenLoginQRCode() {
+  try {
+    await setLoginQRCode()
+    pollLoginQRCode()
+  }
+  catch (error) {
+    console.error(error)
+  }
+}
+
 async function setLoginQRCode() {
   const res = await getTVLoginQRCode()
   if (res.code === 0) {
     loginQRCodeUrl.value = res.data.url
-
-    let isSuccess = false
-    setInterval(interval, 5000)
-
-    async function interval() {
-      if (isSuccess)
-        return
-
-      const pollRes = await pollTVLoginQRCode(res.data.auth_code)
-
-      // 0：成功
-      // -3：API校验密匙错误
-      // -400：请求错误
-      // -404：啥都木有
-      // 86038：二维码已失效
-      // 86039：二维码尚未确认
-      // 86090：二维码已扫码未确认
-
-      if (pollRes.code === 0) {
-        isSuccess = true
-        accessKey.value = pollRes.data.access_token
-        console.log(pollRes.data, accessKey.value)
-      }
-      else if (pollRes.code === 86038) {
-        await setLoginQRCode()
-      }
-      else if (pollRes.code === -3 || pollRes.code === -400 || pollRes.code === -404) {
-        // eslint-disable-next-line no-alert
-        alert(pollRes.message)
-      }
-    }
+    authCode.value = res.data.auth_code
   }
+}
+
+function pollLoginQRCode() {
+  clearInterval(pollLoginQRCodeInterval.value)
+
+  pollLoginQRCodeInterval.value = setInterval(async () => {
+    const pollRes = await pollTVLoginQRCode(authCode.value)
+
+    // 0：成功
+    // -3：API校验密匙错误
+    // -400：请求错误
+    // -404：啥都木有
+    // 86038：二维码已失效
+    // 86039：二维码尚未确认
+    // 86090：二维码已扫码未确认
+
+    if (pollRes.code === 0) {
+      accessKey.value = pollRes.data.access_token
+      clearInterval(pollLoginQRCodeInterval.value)
+    }
+    else if (pollRes.code === 86038) {
+      await setLoginQRCode()
+    }
+    else if (pollRes.code === -3 || pollRes.code === -400 || pollRes.code === -404) {
+      // eslint-disable-next-line no-alert
+      alert(pollRes.message)
+    }
+  }, 5000)
 }
 
 function handleOpenSearchPageModeSharedSettings() {
@@ -115,7 +134,7 @@ function handleCloseSearchPageModeSharedSettings() {
         </template>
 
         <div w-full>
-          <Button @click="setLoginQRCode">
+          <Button @click="showQRCodeDialog = true">
             Open QRCode
           </Button>
           <!-- <button
@@ -135,10 +154,25 @@ function handleCloseSearchPageModeSharedSettings() {
           </button> -->
         </div>
       </SettingsItem>
-      <SettingsItem title="Login QR Code" next-line>
-        <QRCodeVue v-if="loginQRCodeUrl" :value="loginQRCodeUrl" width="200" />
-        <!-- <iframe v-if="loginQRCodeUrl" :src="loginQRCodeUrl" width="200" height="200" frameborder="0" /> -->
-      </SettingsItem>
+
+      <ChildSettingsDialog
+        v-if="showQRCodeDialog"
+        title="Login QR Code"
+        @close="showQRCodeDialog = false"
+      >
+        <SettingsItem title="Login QR Code" desc="Scan the QR code on the Bilibili mobile app to obtain the access key" next-line>
+          <div flex="~ gap-4">
+            <div bg="$bew-fill-1" w-150px h-150px>
+              <QRCodeVue v-if="loginQRCodeUrl" :value="loginQRCodeUrl" :size="150" />
+            </div>
+            <div>
+              <Button @click="setLoginQRCode">
+                Refresh QRCode
+              </Button>
+            </div>
+          </div>
+        </SettingsItem>
+      </ChildSettingsDialog>
     </SettingsItemGroup>
 
     <SettingsItemGroup :title="$t('settings.group_search_page_mode')">
