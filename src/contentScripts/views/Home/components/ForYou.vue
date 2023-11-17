@@ -4,6 +4,7 @@ import type { AppForYouVideoModel, ForYouVideoModel } from '../types'
 import emitter from '~/utils/mitt'
 import { accessKey, settings } from '~/logic'
 import { LanguageType } from '~/enums/appEnums'
+import { TVAppKey } from '~/utils/authProvider'
 
 const videoList = reactive<ForYouVideoModel[]>([])
 const appVideoList = reactive<AppForYouVideoModel[]>([])
@@ -106,7 +107,8 @@ async function getAppRecommendVideos() {
       accessKey: accessKey.value,
       sLocale: settings.value.language !== LanguageType.Mandarin_CN ? 'zh-Hant_TW' : 'zh-Hans_CN',
       cLocale: settings.value.language !== LanguageType.Mandarin_CN ? 'zh-Hant_TW' : 'zh-Hans_CN',
-      idx: 1,
+      appkey: TVAppKey.appkey,
+      idx: appVideoList.length > 0 ? appVideoList[appVideoList.length - 1].idx : 1,
     })
 
     if (response.code === 0) {
