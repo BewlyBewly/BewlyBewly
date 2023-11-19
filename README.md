@@ -61,7 +61,7 @@ And then pack files under `extension`
 ## ❤️ Credits
 
 - [vitesse-webext](https://github.com/antfu/vitesse-webext) - The template used for this project
-- [UserScripts/bilibiliHome](https://github.com/indefined/UserScripts/tree/master/bilibiliHome) - Reference source for obtaining the access key
+- [UserScripts/bilibiliHome](https://github.com/indefined/UserScripts/tree/master/bilibiliHome), [bilibili-app-recommend](https://github.com/magicdawn/bilibili-app-recommend) - Reference source for obtaining the access key
 - [Bilibili-Evolved](https://github.com/the1812/Bilibili-Evolved) - Partial implementation of functionalities
 - [bilibili-API-collect](https://github.com/SocialSisterYi/bilibili-API-collect)
 
