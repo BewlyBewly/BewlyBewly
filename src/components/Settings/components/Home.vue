@@ -85,6 +85,7 @@ function pollLoginQRCode() {
 function handleCloseQRCodeDialog() {
   clearInterval(pollLoginQRCodeInterval.value)
   showQRCodeDialog.value = false
+  preventCloseSettings.value = false
 }
 
 function handleOpenSearchPageModeSharedSettings() {
