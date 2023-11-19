@@ -21,6 +21,7 @@ common:
   performance_impact_warn: 這個功能可能會降低效能
   enable: 啓用
   disable: 停用
+  refresh: 重新整理
 settings:
   title: 設定
 
@@ -115,6 +116,7 @@ settings:
   authorize_app_desc: |
     授權使用後能在首頁推送 bilibili 手機端推介演算法的影片，授權 key 的有效期約爲一個月，過了有效期後，請記得重新取得授權以取得 access key。
   authorize_app_more_info_access_key: 關於 access key
+  scan_qrcode_desc: 使用 Bilibili 手機應用程式掃描這個QR碼，以授權訪問 access key。
   use_search_page_mode: 首頁使用搜尋頁模式
   settings_shared_with_the_search_page: 與搜尋頁共用的設定
   settings_shared_with_the_search_page_desc: 這些設定都與搜尋頁共用

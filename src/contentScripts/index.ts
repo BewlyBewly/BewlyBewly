@@ -4,13 +4,13 @@ import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue'
 import 'overlayscrollbars/overlayscrollbars.css'
 import 'uno.css'
 import '~/styles/index.ts'
+import Toast, { POSITION } from 'vue-toastification'
 import App from './views/App.vue'
 import { setupApp } from '~/logic/common-setup'
 import { i18n } from '~/utils/i18n'
 import { SVG_ICONS } from '~/utils/svgIcons'
 import { injectCSS } from '~/utils/main'
-
-let app: any
+import 'vue-toastification/dist/index.css'
 
 const isFirefox: boolean = /Firefox/i.test(navigator.userAgent)
 
@@ -167,9 +167,17 @@ function injectApp() {
     shadowDOM.appendChild(svgDiv)
 
     document.body.appendChild(container)
-    app = createApp(App)
+    const app = createApp(App)
     app.component('OverlayScrollbarsComponent', OverlayScrollbarsComponent)
     setupApp(app)
-    app.use(i18n).mount(root)
+    app
+      .use(i18n)
+      .use(Toast, {
+        transition: 'Vue-Toastification__fade',
+        maxToasts: 20,
+        newestOnTop: true,
+        position: POSITION.TOP_CENTER,
+      })
+      .mount(root)
   }
 }

@@ -21,6 +21,7 @@ common:
   performance_impact_warn: 这个功能可能会影响性能
   enable: 启用
   disable: 禁用
+  refresh: 刷新
 settings:
   title: 设置
 
@@ -115,6 +116,7 @@ settings:
   authorize_app_desc: |
     授权使用后能在首页推送 bilibili App 端算法的推荐视频，授权 key 有效期约为一个月，过后记得重新授权获取 access key。
   authorize_app_more_info_access_key: 关于 access key
+  scan_qrcode_desc: 使用 Bilibili 移动应用程序扫描此二维码，以授权访问 access key。
   use_search_page_mode: 首页使用搜索页模式
   settings_shared_with_the_search_page: 与搜索页共用的配置
   settings_shared_with_the_search_page_desc: 这些设置都与搜索页共用
@@ -221,7 +223,7 @@ home:
   for_you: 个性推荐
   following: 正在关注
   trending: 热门视频
-  ranking: 排行榜
+  ranking: 排行
 ranking:
   all: 全部
   chinese_anime_related: 中国动画相关

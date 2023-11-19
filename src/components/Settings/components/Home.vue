@@ -2,18 +2,20 @@
 import type { Ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import QRCodeVue from 'qrcode.vue'
+import { useToast } from 'vue-toastification'
 import SearchPage from './SearchPage.vue'
-import { getTVLoginQRCode, grantAccessKey, pollTVLoginQRCode, revokeAccessKey } from '~/utils/authProvider'
+import { getTVLoginQRCode, pollTVLoginQRCode, revokeAccessKey } from '~/utils/authProvider'
 import { accessKey, settings } from '~/logic'
 
 const { t } = useI18n()
+const toast = useToast()
 
-const authorizeBtn = ref<HTMLButtonElement>() as Ref<HTMLButtonElement>
 const showSearchPageModeSharedSettings = ref<boolean>(false)
 const showQRCodeDialog = ref<boolean>(false)
 const loginQRCodeUrl = ref<string>()
 const pollLoginQRCodeInterval = ref<any>(null)
 const authCode = ref<string>('')
+const qrcodeMsg = ref<string>('')
 
 const preventCloseSettings = inject('preventCloseSettings') as Ref<boolean>
 
@@ -25,15 +27,9 @@ onBeforeUnmount(() => {
   clearInterval(pollLoginQRCodeInterval.value)
 })
 
-function handleAuthorize() {
-  grantAccessKey(t, authorizeBtn.value)
-}
-
-function handleRevoke() {
-  revokeAccessKey()
-}
-
-async function handleOpenLoginQRCode() {
+async function handleAuthorize() {
+  showQRCodeDialog.value = true
+  preventCloseSettings.value = true
   try {
     await setLoginQRCode()
     pollLoginQRCode()
@@ -41,6 +37,10 @@ async function handleOpenLoginQRCode() {
   catch (error) {
     console.error(error)
   }
+}
+
+function handleRevoke() {
+  revokeAccessKey()
 }
 
 async function setLoginQRCode() {
@@ -64,19 +64,27 @@ function pollLoginQRCode() {
     // 86038：二维码已失效
     // 86039：二维码尚未确认
     // 86090：二维码已扫码未确认
-
+    if (pollRes.code !== 0)
+      qrcodeMsg.value = pollRes.message
     if (pollRes.code === 0) {
+      showQRCodeDialog.value = false
+      preventCloseSettings.value = false
       accessKey.value = pollRes.data.access_token
       clearInterval(pollLoginQRCodeInterval.value)
+      toast.success('授权成功')
     }
     else if (pollRes.code === 86038) {
       await setLoginQRCode()
     }
     else if (pollRes.code === -3 || pollRes.code === -400 || pollRes.code === -404) {
-      // eslint-disable-next-line no-alert
-      alert(pollRes.message)
+      toast.error(pollRes.message)
     }
-  }, 5000)
+  }, 3000)
+}
+
+function handleCloseQRCodeDialog() {
+  clearInterval(pollLoginQRCodeInterval.value)
+  showQRCodeDialog.value = false
 }
 
 function handleOpenSearchPageModeSharedSettings() {
@@ -96,9 +104,6 @@ function handleCloseSearchPageModeSharedSettings() {
       <SettingsItem :title="$t('settings.recommendation_mode')">
         <template #desc>
           <p>{{ $t('settings.recommendation_mode_desc') }}</p>
-          <p color="$bew-warning-color">
-            {{ $t('settings.recommendation_mode_desc2') }}
-          </p>
         </template>
         <div w-full flex rounded="$bew-radius" bg="$bew-fill-1" p-1>
           <div
@@ -134,44 +139,39 @@ function handleCloseSearchPageModeSharedSettings() {
         </template>
 
         <div w-full>
-          <Button @click="showQRCodeDialog = true">
-            Open QRCode
+          <Button v-if="!accessKey" type="primary" center block @click="handleAuthorize">
+            {{ $t('settings.btn.authorize') }}...
           </Button>
-          <!-- <button
-            v-if="!accessKey"
-            ref="authorizeBtn"
-            bg="$bew-theme-color" text-white lh-35px rounded="$bew-radius" w-full
-            @click="handleAuthorize"
-          >
-            {{ $t('settings.btn.authorize') }}
-          </button>
-          <button
-            v-else
-            bg="$bew-fill-1" text="$bew-error-color" lh-35px rounded="$bew-radius" w-full
-            @click="handleRevoke"
-          >
-            <span>{{ $t('settings.btn.revoke') }}</span>
-          </button> -->
+          <Button v-else type="secondary" center block style="--b-button-text-color: var(--bew-error-color)" @click="handleRevoke">
+            {{ $t('settings.btn.revoke') }}
+          </Button>
         </div>
       </SettingsItem>
 
       <ChildSettingsDialog
         v-if="showQRCodeDialog"
-        title="Login QR Code"
-        @close="showQRCodeDialog = false"
+        :title="$t('settings.authorize_app')" center
+        style="
+          --b-dialog-width: 60%;
+        "
+        @close="handleCloseQRCodeDialog"
       >
-        <SettingsItem title="Login QR Code" desc="Scan the QR code on the Bilibili mobile app to obtain the access key" next-line>
-          <div flex="~ gap-4">
-            <div bg="$bew-fill-1" w-150px h-150px>
-              <QRCodeVue v-if="loginQRCodeUrl" :value="loginQRCodeUrl" :size="150" />
-            </div>
-            <div>
-              <Button @click="setLoginQRCode">
-                Refresh QRCode
-              </Button>
-            </div>
+        <div flex="~ gap-4 col items-center">
+          <p>{{ $t('settings.scan_qrcode_desc') }}</p>
+
+          <div mt-4 bg="$bew-fill-1" w-150px h-150px>
+            <QRCodeVue v-if="loginQRCodeUrl" :value="loginQRCodeUrl" :size="150" />
           </div>
-        </SettingsItem>
+
+          <p>{{ qrcodeMsg }}</p>
+
+          <Button
+            type="secondary"
+            @click="setLoginQRCode"
+          >
+            {{ $t('common.refresh') }}
+          </Button>
+        </div>
       </ChildSettingsDialog>
     </SettingsItemGroup>
 
@@ -190,6 +190,7 @@ function handleCloseSearchPageModeSharedSettings() {
         <ChildSettingsDialog
           v-if="showSearchPageModeSharedSettings"
           :title="$t('settings.settings_shared_with_the_search_page')"
+          style="--b-dialog-height: 85%;"
           @close="handleCloseSearchPageModeSharedSettings"
         >
           <template #desc>

@@ -48,6 +48,7 @@ specifiers:
   vue: ^3.3.4
   vue-demi: ^0.13.11
   vue-i18n: ^9.2.2
+  vue-toastification: ^2.0.0-rc.5
   web-ext: ^7.6.2
   webext-bridge: ^5.0.5
   webextension-polyfill: ^0.10.0
@@ -61,6 +62,7 @@ dependencies:
   overlayscrollbars-vue: 0.5.5_b1fafd02612d7393176cab8eb5f579d8
   qrcode.vue: 3.4.1_vue@3.3.4
   vue-i18n: 9.2.2_vue@3.3.4
+  vue-toastification: 2.0.0-rc.5_vue@3.3.4
 
 devDependencies:
   '@antfu/eslint-config': 0.39.8_eslint@8.46.0+typescript@4.9.5
@@ -7261,6 +7263,14 @@ packages:
       '@intlify/shared': 9.2.2
       '@intlify/vue-devtools': 9.2.2
       '@vue/devtools-api': 6.4.5
+      vue: 3.3.4
+    dev: false
+
+  /vue-toastification/2.0.0-rc.5_vue@3.3.4:
+    resolution: {integrity: sha512-q73e5jy6gucEO/U+P48hqX+/qyXDozAGmaGgLFm5tXX4wJBcVsnGp4e/iJqlm9xzHETYOilUuwOUje2Qg1JdwA==}
+    peerDependencies:
+      vue: ^3.0.2
+    dependencies:
       vue: 3.3.4
     dev: false
 
