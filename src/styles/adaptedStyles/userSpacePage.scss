@@ -9,201 +9,210 @@
   // 淺色模式下主要對 theme color 調整配合 bewlybewly 配色
   // 深色模式下才對主要邊框和背景色調整
   // 淺色模式下顏色避免太大調整
-  .n .n-btn.active,
-  .be-tab-item.is-active,
-  #navigator a:hover,
-  #page-video #submit-video-type-filter a.active,
-  .n .n-data.router-link-active .n-data-k,
-  .n .n-data.router-link-active .n-data-v {
-    color: var(--bew-theme-color);
-  }
-
-  #navigator-fixed {
-    a:active,
-    a:hover {
-      color: var(--bew-theme-color) !important;
-    }
-  }
-
-  .n .n-statistics .n-fs:hover p,
-  .n .n-statistics .n-gz:hover p,
-  #navigator a:hover {
-    color: var(--bew-theme-color) !important;
-  }
-
-  .n .n-cursor,
-  .be-tab-cursor {
-    border-color: var(--bew-theme-color);
-  }
-
-  .n .n-cursor,
-  #pin-wrapper .pin-layer-vlist .small-item.selected,
-  .be-switch-container.is-checked .be-switch {
-    background-color: var(--bew-theme-color);
-  }
-
-  .create-wrapper .choose-action .confirm-btn,
-  .create-wrapper .choose-action .next-btn,
-  .create-wrapper .create-action .confirm-btn,
-  .create-wrapper .create-action .next-btn,
-  .edit-media-list .edit-mask .edit-board .edit-info .submit-btn {
-    background-color: var(--bew-theme-color) !important;
-  }
-
-  .be-tab-cursor:after,
-  .sub-tabs a.active:before {
-    display: none;
-  }
-
-  .i-m-title .icon-i-title,
-  .g-search .search-btn:hover {
-    filter: var(--bew-filter-icon-glow);
-  }
-
-  // input box
-  .g-search input:focus,
-  #pin-wrapper #pin-layer-search:focus,
-  #pin-wrapper .pin-layer-reason #pin-layer-reason-input input:focus,
-  .search-component.search-component-focus,
-  .search-component:hover {
-    border-color: var(--bew-theme-color) !important;
-  }
-
-  .g-search input,
-  #page-index #i-ann-content textarea,
-  #pin-wrapper #pin-layer-search,
-  #pin-wrapper .pin-layer-reason #pin-layer-reason-input input {
-    background-color: var(--bew-fill-1);
-    border-color: var(--bew-border-color);
-    color: var(--bew-text-1);
-  }
-
-  .s-space {
-    // #page-index #i-ann-content textarea:focus,
-    // #page-index #i-ann-content textarea:hover {
-    //   border-color: var(--bew-theme-color);
-    // }
-
-    a:hover,
-    #page-index
-      .channel
-      .section-right-options
-      .play-all-channel:hover
-      .video-commonplayer_play,
-    #page-follows .follow-tabs span.active,
-    #page-follows .follow-tabs span:hover,
-    .favInfo-box .favInfo-details .fav-name:hover,
-    .sub-tabs a.active,
-    #page-subs .action .sub-action,
-    .album-list__tab--active .album-list__tab-name,
-    #page-fav .fav-main .filter-item .text:hover,
-    .fans-action-btn:hover,
-    .search-keyword-highlight,
-    .v-search-count,
-    .feed-dynamic-header-search-count,
-    .card .main-content .button-bar .single-button .text-bar.selected {
+  :not(fjdsl) {
+    .n .n-btn.active,
+    .be-tab-item.is-active,
+    #navigator a:hover,
+    #page-video #submit-video-type-filter a.active,
+    .n .n-data.router-link-active .n-data-k,
+    .n .n-data.router-link-active .n-data-v {
       color: var(--bew-theme-color);
     }
 
-    a:hover,
-    .be-dropdown-item:hover,
-    #page-fav .fav-main .filter-item .filter-type .be-dropdown-item:hover i,
-    #page-fav .fav-main .filter-item .filter-type .be-dropdown-item:hover span,
-    #page-fav .fav-main .fav-action-bottom li:hover,
-    #page-fav .fav-main .fav-action-bottom .select-cancel,
-    #page-fav .fav-main .fav-action-top .back-to-info:hover,
-    .sub-tabs .filter-content .cur-filter:hover,
-    .fans-name[style*='color'],
-    .dynamic-keyword {
+    #navigator-fixed {
+      a:active,
+      a:hover {
+        color: var(--bew-theme-color) !important;
+      }
+    }
+
+    .n .n-statistics .n-fs:hover p,
+    .n .n-statistics .n-gz:hover p,
+    #navigator a:hover {
       color: var(--bew-theme-color) !important;
     }
 
-    .search-nav-item.search-nav-actived .num,
-    .search-nav-item.search-nav-actived .text {
-      color: white !important;
+    .n .n-cursor,
+    .be-tab-cursor {
+      border-color: var(--bew-theme-color);
     }
 
-    #page-follows .follow-sidenav .follow-list-container .follow-item.cur,
-    #page-follows .follow-tabs span.active:after,
-    .contribution-sidenav .contribution-item.cur,
-    #page-setting .setting-index-module:hover,
-    .btn.primary,
-    #page-fav .fav-sidenav .fav-item.cur,
-    .favInfo-box .favInfo-details .fav-options .fav-play,
-    .be-pager-item-active,
-    .search-nav-item.search-nav-actived {
+    .n .n-cursor,
+    #pin-wrapper .pin-layer-vlist .small-item.selected,
+    .be-switch-container.is-checked .be-switch,
+    .h .h-follow {
       background-color: var(--bew-theme-color);
     }
 
-    .bangumi-pagelistbox .p:hover,
-    .bangumi-pagelistbox .p.active {
+    .create-wrapper .choose-action .confirm-btn,
+    .create-wrapper .choose-action .next-btn,
+    .create-wrapper .create-action .confirm-btn,
+    .create-wrapper .create-action .next-btn,
+    .edit-media-list .edit-mask .edit-board .edit-info .submit-btn {
       background-color: var(--bew-theme-color) !important;
-      color: white !important;
     }
 
-    .bangumi-pagelistbox .p:hover,
-    .bangumi-pagelistbox .p.active,
-    .btn.primary,
-    .be-pager-item-active,
-    .sub-tabs a.active,
-    .be-input_inner:focus,
-    #page-index #i-ann-content textarea:focus,
-    #page-index #i-ann-content textarea:hover {
-      border-color: var(--bew-theme-color);
+    .be-tab-cursor:after,
+    .sub-tabs a.active:before {
+      display: none;
     }
 
-    #page-follows .follow-main .follow-action-top .back-to-info:hover,
-    #page-fav .fav-main .fav-action-top .back-to-info:hover {
-      border-color: var(--bew-theme-color) !important;
-    }
-
-    .btn.primary:focus,
-    .btn.primary:hover {
-      background-color: var(--bew-theme-color-80);
-    }
-    .btn.primary:focus,
-    .btn.primary:hover {
-      border-color: var(--bew-theme-color-80);
-    }
-
-    .btn.default {
-      color: var(--bew-text-1);
-      border-color: var(--bew-border-color);
-      background-color: transparent;
-    }
-
-    .section-title .play-all-channel,
-    #page-index .col-1 .section .more,
-    #page-index .channel .section-right-options .play-all-channel,
-    .section .operation {
-      border-color: var(--bew-border-color);
-      color: var(--bew-text-2);
-    }
-
-    .btn.default:hover,
-    .section-title .play-all-channel:hover,
-    #page-index .col-1 .section .more:hover,
-    #page-index .channel .section-right-options .play-all-channel:hover,
-    .section .operation:hover {
-      color: var(--bew-theme-color);
-      border-color: var(--bew-theme-color);
-    }
-
-    .i-m-btn:hover .icon,
-    .i-live .i-live-off-host:hover .i-live-icon,
-    .i-live .i-live-off-host:hover .r-arrow,
-    .bp-svg-icon.comment-hover,
-    .custom-like-icon.zan-a-hover,
-    .bp-svg-icon.transmit-hover {
+    .i-m-title .icon-i-title,
+    .g-search .search-btn:hover {
       filter: var(--bew-filter-icon-glow);
     }
 
-    .ps {
-      padding: 0;
+    // input box
+    .g-search input:focus,
+    #pin-wrapper #pin-layer-search:focus,
+    #pin-wrapper .pin-layer-reason #pin-layer-reason-input input:focus,
+    .search-component.search-component-focus,
+    .search-component:hover {
+      border-color: var(--bew-theme-color) !important;
     }
 
-    #page-follows .follow-tabs span.active:before {
-      display: none;
+    .g-search input,
+    #page-index #i-ann-content textarea,
+    #pin-wrapper #pin-layer-search,
+    #pin-wrapper .pin-layer-reason #pin-layer-reason-input input {
+      background-color: var(--bew-fill-1);
+      border-color: var(--bew-border-color);
+      color: var(--bew-text-1);
+    }
+
+    .s-space {
+      // #page-index #i-ann-content textarea:focus,
+      // #page-index #i-ann-content textarea:hover {
+      //   border-color: var(--bew-theme-color);
+      // }
+
+      a:hover,
+      #page-index
+        .channel
+        .section-right-options
+        .play-all-channel:hover
+        .video-commonplayer_play,
+      #page-follows .follow-tabs span.active,
+      #page-follows .follow-tabs span:hover,
+      .favInfo-box .favInfo-details .fav-name:hover,
+      .sub-tabs a.active,
+      #page-subs .action .sub-action,
+      .album-list__tab--active .album-list__tab-name,
+      #page-fav .fav-main .filter-item .text:hover,
+      .fans-action-btn:hover,
+      .search-keyword-highlight,
+      .v-search-count,
+      .feed-dynamic-header-search-count,
+      .card .main-content .button-bar .single-button .text-bar.selected {
+        color: var(--bew-theme-color);
+      }
+
+      a:hover,
+      .be-dropdown-item:hover,
+      #page-fav .fav-main .filter-item .filter-type .be-dropdown-item:hover i,
+      #page-fav
+        .fav-main
+        .filter-item
+        .filter-type
+        .be-dropdown-item:hover
+        span,
+      #page-fav .fav-main .fav-action-bottom li:hover,
+      #page-fav .fav-main .fav-action-bottom .select-cancel,
+      #page-fav .fav-main .fav-action-top .back-to-info:hover,
+      .sub-tabs .filter-content .cur-filter:hover,
+      .fans-name[style*='color'],
+      .dynamic-keyword {
+        color: var(--bew-theme-color) !important;
+      }
+
+      .search-nav-item.search-nav-actived .num,
+      .search-nav-item.search-nav-actived .text {
+        color: white !important;
+      }
+
+      #page-follows .follow-sidenav .follow-list-container .follow-item.cur,
+      #page-follows .follow-tabs span.active:after,
+      .contribution-sidenav .contribution-item.cur,
+      #page-setting .setting-index-module:hover,
+      .btn.primary,
+      #page-fav .fav-sidenav .fav-item.cur,
+      .favInfo-box .favInfo-details .fav-options .fav-play,
+      .be-pager-item-active,
+      .search-nav-item.search-nav-actived {
+        background-color: var(--bew-theme-color);
+      }
+
+      .bangumi-pagelistbox .p:hover,
+      .bangumi-pagelistbox .p.active {
+        background-color: var(--bew-theme-color) !important;
+        color: white !important;
+      }
+
+      .bangumi-pagelistbox .p:hover,
+      .bangumi-pagelistbox .p.active,
+      .btn.primary,
+      .be-pager-item-active,
+      .sub-tabs a.active,
+      .be-input_inner:focus,
+      #page-index #i-ann-content textarea:focus,
+      #page-index #i-ann-content textarea:hover {
+        border-color: var(--bew-theme-color);
+      }
+
+      #page-follows .follow-main .follow-action-top .back-to-info:hover,
+      #page-fav .fav-main .fav-action-top .back-to-info:hover,
+      .fans-action-btn:hover {
+        border-color: var(--bew-theme-color) !important;
+      }
+
+      .btn.primary:focus,
+      .btn.primary:hover {
+        background-color: var(--bew-theme-color-80);
+      }
+      .btn.primary:focus,
+      .btn.primary:hover {
+        border-color: var(--bew-theme-color-80);
+      }
+
+      .btn.default {
+        color: var(--bew-text-1);
+        border-color: var(--bew-border-color);
+        background-color: transparent;
+      }
+
+      .section-title .play-all-channel,
+      #page-index .col-1 .section .more,
+      #page-index .channel .section-right-options .play-all-channel,
+      .section .operation {
+        border-color: var(--bew-border-color);
+        color: var(--bew-text-2);
+      }
+
+      .btn.default:hover,
+      .section-title .play-all-channel:hover,
+      #page-index .col-1 .section .more:hover,
+      #page-index .channel .section-right-options .play-all-channel:hover,
+      .section .operation:hover {
+        color: var(--bew-theme-color);
+        border-color: var(--bew-theme-color);
+      }
+
+      .i-m-btn:hover .icon,
+      .i-live .i-live-off-host:hover .i-live-icon,
+      .i-live .i-live-off-host:hover .r-arrow,
+      .bp-svg-icon.comment-hover,
+      .custom-like-icon.zan-a-hover,
+      .bp-svg-icon.transmit-hover {
+        filter: var(--bew-filter-icon-glow);
+      }
+
+      .ps {
+        padding: 0;
+      }
+
+      #page-follows .follow-tabs span.active:before {
+        display: none;
+      }
     }
   }
 
@@ -316,7 +325,9 @@
       #page-collection-detail .filter,
       .bangumi-pagelistbox .p,
       .bangumi-pagelistbox .custom-right .custom-right-inner.custompage,
-      .feed-dynamic {
+      .feed-dynamic,
+      #page-dynamic .bili-dyn-item,
+      .fans-action-btn.follow {
         border-color: var(--bew-border-color);
       }
 
