@@ -62,7 +62,6 @@ const genres = [
       >
         <a
           :href="genre.href"
-          target="_blank"
           flex="~"
           items="center"
           w="170px"
