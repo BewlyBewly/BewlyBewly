@@ -2,6 +2,10 @@
   visibility: hidden;
 }
 .bewly-design {
+  body {
+    background-color: var(--bew-bg);
+  }
+
   #bili-header-container {
     // background-color: var(--bew-bg) !important;
   }

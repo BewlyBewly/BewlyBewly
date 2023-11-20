@@ -8,6 +8,15 @@
     background-color: var(--bew-theme-color-80);
   }
 
+  .promotion-c {
+    background-color: var(--bew-fill-1);
+  }
+
+  .hover-c .title,
+  :not(.index-module) > .inner-c .title {
+    color: var(--bew-text-1);
+  }
+
   .index-module .all-a:hover .all,
   .index-module .all-a:hover .arrow-all,
   .index-module .sub-m:hover,
