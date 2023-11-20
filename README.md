@@ -14,7 +14,7 @@
 Even in the Edge browser, we strongly recommend you install it in the Chrome web store. In terms of review speed, the Chrome web store is slightly faster than Edge Add-ons.
 - Chrome: <https://chrome.google.com/webstore/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp/related?hl=en>
 - Edge: <https://microsoftedge.microsoft.com/addons/detail/bewlybewly/kceadhehfjdiakpiphpjgolbgehjdmja>
-- Firefox: **I NEED SOME HELP!!!!!!!!!!!!!!!!!!**
+- Firefox: **I NEED SOME HELP!!!!!!!!!!!!!!!!!! ( ；∀；)**
 
 ### Local Installation
 
