@@ -30,5 +30,9 @@
     .channel-swiper .channel-carousel-tool .channel-nav-click li {
       background-color: var(--bew-fill-1);
     }
+
+    .channel-container .el-input__inner {
+      box-shadow: 0 0 0 1px var(--bew-border-color) inset;
+    }
   }
 }
