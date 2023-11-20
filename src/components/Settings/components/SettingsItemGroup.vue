@@ -6,7 +6,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="b-settings-item-group" mb-6>
+  <div class="b-settings-item-group">
     <p text="base $bew-text-1" fw-bold>
       {{ title }}
     </p>
@@ -21,7 +21,7 @@ defineProps<{
 </template>
 
 <style lang="scss" scoped>
-// .b-settings-item-group + .b-settings-item-group {
-//   --at-apply: mt-4
-// }
+.b-settings-item-group + .b-settings-item-group {
+  --at-apply: mt-6
+}
 </style>

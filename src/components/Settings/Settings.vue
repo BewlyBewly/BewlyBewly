@@ -152,12 +152,13 @@ function setCurrentTitle() {
       </aside>
 
       <div
+        class="settings-content"
         relative overflow-hidden w-full h-full bg="$bew-elevated-solid-1"
-        shadow="$bew-shadow-4" rounded="$bew-radius"
+        shadow="$bew-shadow-4" rounded="$bew-radius" overflow-y-overlay
       >
         <header
           flex justify-between items-center w-full h-80px
-          pos="fixed top-0 left-0" p="x-12"
+          pos="sticky top-0 left-0" p="x-12"
           z-1 rounded="t-$bew-radius"
           style="
             background: linear-gradient(var(--bew-elevated-solid-1), transparent);
@@ -182,8 +183,8 @@ function setCurrentTitle() {
           </div>
         </header>
 
-        <main relative h-full py-8 p="x-13" overflow-y-overlay>
-          <div h-80px mt--8 />
+        <main relative p="x-13 b-8">
+          <!-- <div h-80px mt--8 /> -->
 
           <Transition name="page-fade">
             <Component :is="settingsMenu[activatedMenuItem]" />
@@ -198,5 +199,10 @@ function setCurrentTitle() {
 .menu-item-activated {
   --at-apply: text-white dark-text-black
     important-dark-bg-white important-bg-$bew-theme-color;
+}
+.settings-content {
+  &::-webkit-scrollbar-track {
+    --at-apply: mt-80px mb-8;
+  }
 }
 </style>
