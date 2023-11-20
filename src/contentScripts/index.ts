@@ -132,6 +132,8 @@ function injectApp() {
     || /https?:\/\/www.bilibili.com\/v\/.*/.test(currentUrl)
     // anime page
     || /https?:\/\/www.bilibili.com\/anime.*/.test(currentUrl)
+    // tv shows, movie, variety shows page
+    || /https?:\/\/(www.)?bilibili.com\/(tv|movie|variety).*/.test(location.href)
   ) {
     if (
       /https?:\/\/bilibili.com\/?$/.test(currentUrl)

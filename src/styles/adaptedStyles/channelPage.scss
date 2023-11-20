@@ -3,7 +3,23 @@
     background-color: var(--bew-theme-color);
   }
 
-  .channel-swiper .channel-carousel-tool .channel-nav-click li {
-    background-color: var(--bew-fill-1);
+  .inner-c .play-icon.button,
+  .hover-c .play-icon.button {
+    background-color: var(--bew-theme-color-80);
+  }
+
+  .index-module .all-a:hover .all,
+  .index-module .all-a:hover .arrow-all,
+  .index-module .sub-m:hover,
+  .hot-module .hot-item:hover .title,
+  .promotion-c:hover .title,
+  .hover-c:hover .title {
+    color: var(--bew-theme-color);
+  }
+
+  &.dark {
+    .channel-swiper .channel-carousel-tool .channel-nav-click li {
+      background-color: var(--bew-fill-1);
+    }
   }
 }
