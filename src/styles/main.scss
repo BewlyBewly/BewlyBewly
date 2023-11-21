@@ -9,12 +9,13 @@
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
   background: transparent;
+  margin: 2px 4px 2px 0;
 }
 
 html.bewly-design > ::-webkit-scrollbar-track {
@@ -22,7 +23,7 @@ html.bewly-design > ::-webkit-scrollbar-track {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(120, 120, 122, 0.6);
+  background-color: rgba(120, 120, 140, 0.44);
   border-radius: 20px;
 }
 
@@ -67,11 +68,12 @@ html.dark.bewly-design {
 
 // Change OverlayScrollbar color
 .os-scrollbar .os-scrollbar-handle {
-  --os-handle-bg: rgba(120, 120, 140, .44);
-  --os-handle-bg-hover: rgba(120, 120, 140, .55);
-  --os-handle-bg-active: rgba(120, 120, 140, .66);
+  --os-handle-bg: rgba(120, 120, 140, 0.44);
+  --os-handle-bg-hover: rgba(120, 120, 140, 0.55);
+  --os-handle-bg-active: rgba(120, 120, 140, 0.66);
 }
 
-.link-navbar, #home_nav {
+.link-navbar,
+#home_nav {
   display: none;
 }
