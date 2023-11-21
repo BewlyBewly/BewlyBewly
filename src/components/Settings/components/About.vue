@@ -52,7 +52,7 @@ function handleExportSettings() {
 </script>
 
 <template>
-  <div flex items-center justify-center h-full mt--80px>
+  <div flex items-center justify-center pos="absolute top--80px left-0" w-full h-full>
     <div flex="~ col gap-1" items-center>
       <img :src="`${browser.runtime.getURL('/assets/icon-512.png')}`" alt="" width="80">
       <p text-xl>

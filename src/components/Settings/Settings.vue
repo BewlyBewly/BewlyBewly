@@ -18,6 +18,15 @@ const settingsMenu = { General, Appearance, SearchPage, Home, About }
 const activatedMenuItem = ref<MenuType>(MenuType.General)
 const title = ref<string>(t('settings.title'))
 const preventCloseSettings = ref<boolean>(false)
+const scrollbarRef = ref()
+
+watch(
+  () => activatedMenuItem.value,
+  () => {
+    const osInstance = scrollbarRef.value.osInstance()
+    osInstance.elements().viewport.scrollTop = 0
+  },
+)
 
 provide('preventCloseSettings', preventCloseSettings)
 
@@ -153,43 +162,45 @@ function setCurrentTitle() {
 
       <div
         class="settings-content"
-        relative overflow-hidden w-full h-full bg="$bew-elevated-solid-1"
-        shadow="$bew-shadow-4" rounded="$bew-radius" overflow-y-overlay
+        relative overflow="x-hidde" w-full h-full bg="$bew-elevated-solid-1"
+        shadow="$bew-shadow-4" rounded="$bew-radius"
       >
-        <header
-          flex justify-between items-center w-full h-80px
-          pos="sticky top-0 left-0" p="x-12"
-          z-1 rounded="t-$bew-radius"
-          style="
+        <OverlayScrollbarsComponent ref="scrollbarRef" element="div" h-inherit defer>
+          <header
+            flex justify-between items-center w-full h-80px
+            pos="sticky top-0 left-0" p="x-12"
+            z-1 rounded="t-$bew-radius"
+            style="
             background: linear-gradient(var(--bew-elevated-solid-1), transparent);
             text-shadow: 0 0 15px var(--bew-elevated-solid-1), 0 0 20px var(--bew-elevated-solid-1)
           "
-        >
-          <!-- Mask -->
-          <div
-            pos="absolute top-0 left-0" w-inherit h-inherit backdrop="blur-6px" pointer-events-none
-            style="mask-image: linear-gradient(to bottom,  black 70%, transparent);"
-            z--1 rounded-inherit
-          />
-          <div text="3xl" fw-bold>
-            {{ title }}
-          </div>
-          <div
-            text-2xl leading-0 bg="$bew-fill-1 hover:$bew-theme-color-30" w="32px" h="32px" p="1" rounded-8 cursor="pointer" backdrop-glass
-            hover:ring="2 $bew-theme-color" hover:text="$bew-theme-color" duration-300
-            @click="handleClose"
           >
-            <ic-baseline-clear />
-          </div>
-        </header>
+            <!-- Mask -->
+            <div
+              pos="absolute top-0 left-0" w-inherit h-inherit backdrop="blur-6px" pointer-events-none
+              style="mask-image: linear-gradient(to bottom,  black 70%, transparent);"
+              z--1 rounded-inherit
+            />
+            <div text="3xl" fw-bold>
+              {{ title }}
+            </div>
+            <div
+              text-2xl leading-0 bg="$bew-fill-1 hover:$bew-theme-color-30" w="32px" h="32px" p="1" rounded-8 cursor="pointer" backdrop-glass
+              hover:ring="2 $bew-theme-color" hover:text="$bew-theme-color" duration-300
+              @click="handleClose"
+            >
+              <ic-baseline-clear />
+            </div>
+          </header>
 
-        <main relative p="x-13 b-8">
-          <!-- <div h-80px mt--8 /> -->
+          <main pos="absolute top-80px left-0" w-full min-h="[calc(100%-80px)]" p="x-13 b-8">
+            <!-- <div h-80px mt--8 /> -->
 
-          <Transition name="page-fade">
-            <Component :is="settingsMenu[activatedMenuItem]" />
-          </Transition>
-        </main>
+            <Transition name="page-fade">
+              <Component :is="settingsMenu[activatedMenuItem]" />
+            </Transition>
+          </main>
+        </OverlayScrollbarsComponent>
       </div>
     </div>
   </div>
@@ -202,7 +213,7 @@ function setCurrentTitle() {
 }
 .settings-content {
   &::-webkit-scrollbar-track {
-    --at-apply: mt-80px mb-8;
+    --at-apply: mt-80px;
   }
 }
 </style>
