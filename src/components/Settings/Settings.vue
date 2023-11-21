@@ -211,9 +211,4 @@ function setCurrentTitle() {
   --at-apply: text-white dark-text-black
     important-dark-bg-white important-bg-$bew-theme-color;
 }
-.settings-content {
-  &::-webkit-scrollbar-track {
-    --at-apply: mt-80px;
-  }
-}
 </style>

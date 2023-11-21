@@ -17,10 +17,10 @@ function handleClose() {
     <div pos="fixed top-0 left-0" w-full h-full bg="black opacity-20 dark:opacity-40" rounded="$bew-radius" z-1 @click="handleClose" />
     <div
       pos="fixed top-1/2 left-1/2" bg="$bew-elevated-solid-1" rounded="$bew-radius"
-      transform="translate--1/2" z-2 shadow="$bew-shadow-3" overflow-hidden w="$b-dialog-width" h="$b-dialog-height"
+      transform="translate--1/2" z-2 shadow="$bew-shadow-3" overflow="x-hidden y-overlay" w="$b-dialog-width" h="$b-dialog-height"
     >
       <header
-        pos="fixed top-0 left-0" w-full h-80px px-8 flex items-center justify-between
+        pos="sticky top-0 left-0" w-full h-80px px-8 flex items-center justify-between
         rounded="t-$bew-radius" z-1
         style="
           background: linear-gradient(var(--bew-elevated-solid-1), transparent);
@@ -53,8 +53,8 @@ function handleClose() {
           <ic-baseline-clear />
         </div>
       </header>
-      <main p-8 relative h-full overflow-y-overlay>
-        <div h-80px mt--8 />
+      <main p="x-9 b-5" relative>
+        <!-- <div h-80px mt--8 /> -->
         <slot />
       </main>
     </div>

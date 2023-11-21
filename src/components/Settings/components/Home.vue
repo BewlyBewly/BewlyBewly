@@ -153,7 +153,7 @@ function handleCloseSearchPageModeSharedSettings() {
         v-if="showQRCodeDialog"
         :title="$t('settings.authorize_app')" center
         style="
-          --b-dialog-width: 60%;
+          --b-dialog-width: 65%;
         "
         @close="handleCloseQRCodeDialog"
       >
