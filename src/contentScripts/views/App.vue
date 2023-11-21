@@ -77,10 +77,8 @@ const isTopbarFixed = computed(() => {
 watch(
   () => activatedPage.value,
   () => {
-    setTimeout(() => {
-      const osInstance = scrollbarRef.value.osInstance()
-      osInstance.elements().viewport.scrollTop = 0
-    }, 500)
+    const osInstance = scrollbarRef.value.osInstance()
+    osInstance.elements().viewport.scrollTop = 0
   },
 )
 
