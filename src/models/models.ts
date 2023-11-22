@@ -8,6 +8,8 @@ export interface Settings {
   enableHorizontalScrolling: boolean
   openLinkInCurrentTab: boolean
 
+  autoHideTopbar: boolean
+
   theme: 'light' | 'dark' | 'auto'
   themeColor: string
   adaptToOtherPageStyles: boolean

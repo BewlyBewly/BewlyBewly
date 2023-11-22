@@ -3,6 +3,7 @@ import { useI18n } from 'vue-i18n'
 import { getCSRF, getUserID, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
 import type { FavoriteCategory, FavoriteResource } from '~/components/Topbar/types'
 import emitter from '~/utils/mitt'
+import { settings } from '~/logic'
 
 const { t } = useI18n()
 
@@ -13,6 +14,7 @@ const categoryOptions = reactive<Array<{ value: any; label: string }>>([])
 const selectedCategory = ref<FavoriteCategory>()
 const activatedCategoryCover = ref<string>('')
 
+const shouldMoveCtrlBarUp = ref<boolean>(false)
 const currentPageNum = ref<number>(1)
 const keyword = ref<string>('')
 
@@ -38,11 +40,27 @@ onMounted(async () => {
     favoriteResources.length = 0
     handleSearch()
   })
+  emitter.off('topbarVisibleChange')
+  emitter.on('topbarVisibleChange', (val) => {
+    shouldMoveCtrlBarUp.value = false
+
+    // Allow moving tabs up only when the top bar is not hidden & is set to auto-hide
+    // This feature is primarily designed to compatible with the Bilibili Evolved's top bar
+    // Even when the BewlyBewly top bar is hidden, the Bilibili Evolved top bar still exists, so not moving up
+    if (settings.value.autoHideTopbar && settings.value.isShowTopbar) {
+      if (val)
+        shouldMoveCtrlBarUp.value = false
+
+      else
+        shouldMoveCtrlBarUp.value = true
+    }
+  })
 })
 
 onUnmounted(() => {
   emitter.off('reachBottom')
   emitter.off('pageRefresh')
+  emitter.off('topbarVisibleChange')
 })
 
 async function getFavoriteCategories() {
@@ -151,7 +169,8 @@ function handleUnfavorite(favoriteResource: FavoriteResource) {
       </h3> -->
       <div
         fixed z-10 absolute p-2 flex="~ gap-2" items-center
-        bg="$bew-elevated-solid-1" rounded="$bew-radius" shadow="$bew-shadow-2" mt--2
+        bg="$bew-elevated-solid-1" rounded="$bew-radius" shadow="$bew-shadow-2" mt--2 transition="all 300 ease-in-out"
+        :class="{ hide: shouldMoveCtrlBarUp }"
       >
         <Select v-model="selectedCategory" w-150px :options="categoryOptions" @change="(val) => changeCategory(val.value)" />
         <Input v-model="keyword" w-250px @enter="handleSearch" />
@@ -285,6 +304,10 @@ function handleUnfavorite(favoriteResource: FavoriteResource) {
 </template>
 
 <style lang="scss" scoped>
+.hide {
+  transform: translateY(-70px);
+}
+
 .category-list {
   &::-webkit-scrollbar {
     width: 8px;

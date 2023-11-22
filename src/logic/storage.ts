@@ -13,6 +13,8 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   enableHorizontalScrolling: false,
   openLinkInCurrentTab: false,
 
+  autoHideTopbar: false,
+
   theme: 'auto',
   themeColor: '#00a1d6',
   adaptToOtherPageStyles: true,

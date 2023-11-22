@@ -17,6 +17,7 @@ const recommendContentKey = ref<string>(`recommendContent${Number(new Date())}`)
 const activatedPage = ref<HomeSubPage>(HomeSubPage.ForYou)
 const pages = { ForYou, Following, Trending, Ranking }
 const showSearchPageMode = ref<boolean>(false)
+const shouldMoveTabsUp = ref<boolean>(false)
 
 const tabs = computed((): HomeTab[] => {
   return [
@@ -49,10 +50,26 @@ onMounted(() => {
   emitter.on('pageRefresh', async () => {
     recommendContentKey.value = `recommendContent${Number(new Date())}`
   })
+  emitter.off('topbarVisibleChange')
+  emitter.on('topbarVisibleChange', (val) => {
+    shouldMoveTabsUp.value = false
+
+    // Allow moving tabs up only when the top bar is not hidden & is set to auto-hide
+    // This feature is primarily designed to compatible with the Bilibili Evolved's top bar
+    // Even when the BewlyBewly top bar is hidden, the Bilibili Evolved top bar still exists, so not moving up
+    if (settings.value.autoHideTopbar && settings.value.isShowTopbar) {
+      if (val)
+        shouldMoveTabsUp.value = false
+
+      else
+        shouldMoveTabsUp.value = true
+    }
+  })
 })
 
 onUnmounted(() => {
   emitter.off('pageRefresh')
+  emitter.off('topbarVisibleChange')
 })
 </script>
 
@@ -116,7 +133,10 @@ onUnmounted(() => {
         </div>
       </Transition>
 
-      <header pos="sticky top-80px" w-fit z-10 mb-9>
+      <header
+        pos="sticky top-80px" w-fit z-10 mb-9 transition="all 300 ease-in-out"
+        :class="{ hide: shouldMoveTabsUp }"
+      >
         <ul flex="~ items-center gap-2">
           <li
             v-for="tab in tabs" :key="tab.value"
@@ -161,6 +181,10 @@ onUnmounted(() => {
 }
 .content-leave-to {
   --at-apply: hidden
+}
+
+.hide {
+  transform: translateY(-70px);
 }
 
 .tab-activated {

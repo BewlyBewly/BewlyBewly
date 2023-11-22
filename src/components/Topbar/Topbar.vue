@@ -5,6 +5,8 @@ import type { UnReadDm, UnReadMessage, UserInfo } from './types'
 import { updateInterval } from './notify'
 import { getUserID } from '~/utils/main'
 import { settings } from '~/logic'
+import emitter from '~/utils/mitt'
+import type { AppPage } from '~/enums/appEnums'
 
 interface Props {
   showSearchBar?: boolean
@@ -17,8 +19,13 @@ const props = withDefaults(defineProps<Props>(), {
   showLogo: true,
 })
 
+const activatedPage = inject('activatedPage') as Ref<AppPage>
+
 const mid = getUserID() || ''
 const userInfo = reactive<UserInfo | {}>({}) as UnwrapNestedRefs<UserInfo>
+
+const hideTopbar = ref<boolean>(false)
+const hovingTopbar = ref<boolean>(false)
 
 const showChannelsPop = ref<boolean>(false)
 const showUserPanelPop = ref<boolean>(false)
@@ -77,8 +84,18 @@ watch(showFavoritesPop, (newVal, oldVal) => {
   }
 })
 
+watch(activatedPage, () => {
+  hideTopbar.value = false
+  emitter.emit('topbarVisibleChange', true)
+})
+
 onMounted(() => {
   initData()
+  window.addEventListener('wheel', handleScroll)
+})
+
+onBeforeMount(() => {
+  window.removeEventListener('wheel', handleScroll)
 })
 
 async function initData() {
@@ -91,6 +108,23 @@ async function initData() {
     getUnreadMessageCount()
     getTopbarNewMomentsCount()
   }, updateInterval)
+}
+
+// Function to handle the wheel event with type annotation for the event parameter
+function handleScroll(event: WheelEvent): void {
+  hideTopbar.value = false
+
+  if (settings.value.autoHideTopbar && !hovingTopbar.value) {
+    if (event.deltaY < 0) {
+      hideTopbar.value = false
+      emitter.emit('topbarVisibleChange', true)
+    }
+
+    else {
+      hideTopbar.value = true
+      emitter.emit('topbarVisibleChange', false)
+    }
+  }
 }
 
 function showLogoMenuDropdown() {
@@ -193,7 +227,10 @@ async function getTopbarNewMomentsCount() {
 
 <template>
   <header
-    w="full"
+    w="full" transition="all 300 ease-in-out"
+    :class="{ hide: hideTopbar }"
+    @mouseenter="hovingTopbar = true"
+    @mouseleave="hovingTopbar = false"
   >
     <main
       max-w="$bew-page-max-width" m-auto flex="~"
@@ -541,6 +578,10 @@ async function getTopbarNewMomentsCount() {
 .fade-leave-to,
 .fade-enter-from {
   --at-apply: opacity-0;
+}
+
+.hide {
+  transform: translateY(-100%);
 }
 
 .bew-popover {
