@@ -34,6 +34,8 @@ settings:
 
   # Settings group
   group_common: Common
+  group_topbar: Top Bar
+  group_dock: Dock
   group_color: Color
   group_wallpaper: Wallpaper
   group_logo: LOGO
@@ -55,19 +57,21 @@ settings:
     mandarin_tw: Mandarin - Traditional Chinese
     jyut: Cantonese
   startup_page: Startup page
-  topbar_visibility: Topbar visibility
-  topbar_visibility_desc: Compatible with Bilibili Evolved customize topbar
   chk_box:
     show: Show
     hidden: Hidden
+  enable_horizontal_scrolling: Enable horizontal scrolling
+  enable_horizontal_scrolling_desc: After enabling, mouse scrolling will directly scroll the horizontal scroll list
+  topbar_visibility: Top bar visibility
+  topbar_visibility_desc: Compatible with Bilibili Evolved customize top bar
+  auto_hide_topbar: Automatically hide the top bar
   dock_position: Dock position
   dock_position_desc: Position on screen
   dock_position_opt:
     left: Left
     right: Right
     bottom: Bottom
-  enable_horizontal_scrolling: Enable horizontal scrolling
-  enable_horizontal_scrolling_desc: After enabling, mouse scrolling will directly scroll the horizontal scroll list
+  auto_hide_dock: Automatically hide the dock
 
   # Appearance settings
   theme: Theme

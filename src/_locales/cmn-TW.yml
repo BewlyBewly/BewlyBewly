@@ -34,6 +34,8 @@ settings:
 
   # Settings group
   group_common: 通用
+  group_topbar: 頂欄
+  group_dock: Dock
   group_color: 顏色
   group_wallpaper: 背景圖片
   group_logo: LOGO
@@ -55,19 +57,21 @@ settings:
     mandarin_tw: 官話
     jyut: 廣東話
   startup_page: 起始頁面
-  topbar_visibility: 頂欄可視性
-  topbar_visibility_desc: 用於相容 Bilibili Evolved 自訂頂欄
   chk_box:
     show: 顯示
     hidden: 隱藏
+  enable_horizontal_scrolling: 啟用橫向捲動
+  enable_horizontal_scrolling_desc: 啟用後，滑鼠捲動時將直接捲動橫向捲軸列表
+  topbar_visibility: 頂欄可視性
+  topbar_visibility_desc: 用於相容 Bilibili Evolved 自訂頂欄
+  auto_hide_topbar: 自動隱藏頂欄
   dock_position: Dock 位置
   dock_position_desc: 螢幕上的位置
   dock_position_opt:
     left: 左側
     right: 右側
     bottom: 底部
-  enable_horizontal_scrolling: 啟用橫向捲動
-  enable_horizontal_scrolling_desc: 啟用後，滑鼠捲動時將直接捲動橫向捲軸列表
+  auto_hide_dock: 自動隱藏 Dock
 
   # Appearance settings
   theme: 主題

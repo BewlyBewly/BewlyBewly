@@ -86,16 +86,16 @@ watch(() => settings.value.language, (newValue, oldValue) => {
       </SettingsItem> -->
     </SettingsItemGroup>
 
-    <SettingsItemGroup title="Top Bar">
+    <SettingsItemGroup :title="$t('settings.group_topbar')">
       <SettingsItem :title="$t('settings.topbar_visibility')" :desc="$t('settings.topbar_visibility_desc')">
         <Radio v-model="settings.isShowTopbar" :label="settings.isShowTopbar ? $t('settings.chk_box.show') : $t('settings.chk_box.hidden')" />
       </SettingsItem>
-      <SettingsItem title="Automatically hide the top bar">
+      <SettingsItem :title="$t('settings.auto_hide_topbar')">
         <Radio v-model="settings.autoHideTopbar" />
       </SettingsItem>
     </SettingsItemGroup>
 
-    <SettingsItemGroup title="Dock">
+    <SettingsItemGroup :title="$t('settings.group_dock')">
       <SettingsItem :title="$t('settings.dock_position')" :desc="$t('settings.dock_position_desc')">
         <Select
           v-model="settings.dockPosition"
@@ -103,7 +103,7 @@ watch(() => settings.value.language, (newValue, oldValue) => {
           w="full"
         />
       </SettingsItem>
-      <SettingsItem title="Automatically hide the dock">
+      <SettingsItem :title="$t('settings.auto_hide_dock')">
         <Radio v-model="settings.autoHideDock" />
       </SettingsItem>
     </SettingsItemGroup>
