@@ -8,12 +8,12 @@ export const accessKey = useStorageLocal('accessKey', '')
 export const settings = useStorageLocal('settings', ref<Settings>({
   language: '',
   startupPage: AppPage.Home,
-  isShowTopbar: true,
-  dockPosition: 'right',
   enableHorizontalScrolling: false,
   openLinkInCurrentTab: false,
-
+  isShowTopbar: true,
   autoHideTopbar: false,
+  dockPosition: 'right',
+  autoHideDock: false,
 
   theme: 'auto',
   themeColor: '#00a1d6',

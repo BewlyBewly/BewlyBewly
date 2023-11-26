@@ -3,12 +3,12 @@ import type { AppPage } from '~/enums/appEnums'
 export interface Settings {
   language: string
   startupPage: AppPage
-  isShowTopbar: boolean
-  dockPosition: 'left' | 'right' | 'bottom'
   enableHorizontalScrolling: boolean
   openLinkInCurrentTab: boolean
-
+  isShowTopbar: boolean
   autoHideTopbar: boolean
+  dockPosition: 'left' | 'right' | 'bottom'
+  autoHideDock: boolean
 
   theme: 'light' | 'dark' | 'auto'
   themeColor: string

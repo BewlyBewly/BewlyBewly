@@ -253,6 +253,7 @@ provide('scrollbarRef', scrollbarRef)
 
   <div
     ref="mainAppRef" class="bewly-wrapper" text="$bew-text-1" transition="opacity duration-300" overflow-y-hidden z-60
+    pos="absolute top-0 left-0" w-full h-full overflow-hidden
     :style="{ opacity: 1, height: isHomePage() ? '100vh' : '0' }"
   >
     <!-- Dock & RightSideButtons -->

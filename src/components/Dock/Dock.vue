@@ -11,6 +11,8 @@ const emit = defineEmits(['change-page', 'settings-visibility-change'])
 
 const { t } = useI18n()
 
+const hideDock = ref<boolean>(false)
+
 const hoveringDockItem = reactive<HoveringDockItem>({
   themeMode: false,
   settings: false,
@@ -44,11 +46,23 @@ const dockItems = computed((): DockItem[] => {
   ]
 })
 
+onMounted(() => {
+  if (settings.value.autoHideDock)
+    hideDock.value = true
+})
+
 function toggleDark() {
   if (currentAppColorScheme.value === 'light')
     settings.value.theme = 'dark'
   else
     settings.value.theme = 'light'
+}
+
+function toggleDockHide(hide: boolean) {
+  if (settings.value.autoHideDock)
+    hideDock.value = hide
+  else
+    hideDock.value = false
 }
 </script>
 
@@ -59,8 +73,11 @@ function toggleDark() {
       left: settings.dockPosition === 'left',
       right: settings.dockPosition === 'right',
       bottom: settings.dockPosition === 'bottom',
+      hide: hideDock,
     }"
     pos="absolute top-0" flex="~ col" h-full justify-center z-1 pointer-events-none
+    @mouseenter="toggleDockHide(false)"
+    @mouseleave="toggleDockHide(true)"
   >
     <div
       class="dock-content"
@@ -120,24 +137,39 @@ function toggleDark() {
 
 <style lang="scss" scoped>
 .dock-wrap {
+  --at-apply: duration-300 ease-in-out
+    after:content-empty after:absolute
+    after:w-[calc(100%+14px)] after:h-[calc(100%+14px)] after:z--1
+    after:pointer-events-auto;
+
   svg {
     --at-apply: block align-middle;
   }
 
   &.left {
-    --at-apply: left-2;
+    --at-apply: left-2 after:right--4px;
+  }
+  &.left.hide {
+    --at-apply: opacity-0 translate-x--100%;
   }
 
   &.right {
-    --at-apply: right-2;
+    --at-apply: right-2 after:left--4px;
+  }
+  &.right.hide {
+    --at-apply: opacity-0 translate-x-100%;
   }
 
   &.bottom {
-    --at-apply: top-unset bottom-0 items-center w-full h-[fit-content];
+    --at-apply: top-unset bottom-0 items-center w-full h-[fit-content]
+      after:top--10px after:w-full;
 
     .dock-content {
       --at-apply: flex-row;
     }
+  }
+  &.bottom.hide {
+    --at-apply: opacity-0 translate-y-100%;
   }
 
   .divider {
