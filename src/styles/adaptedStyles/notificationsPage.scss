@@ -235,7 +235,8 @@
       }
 
       .config .config-item:not(:first-child)::before,
-      .bili-im .msg-notify hr {
+      .bili-im .msg-notify hr,
+      .divider-last::before, .divider-last::after {
         background-color: var(--bew-border-color);
       }
 
