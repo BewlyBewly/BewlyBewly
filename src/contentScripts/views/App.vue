@@ -12,7 +12,7 @@ import WatchLater from './WatchLater/WatchLater.vue'
 import Favorites from './Favorites/Favorites.vue'
 import { accessKey, settings } from '~/logic'
 import { AppPage, LanguageType } from '~/enums/appEnums'
-import { getUserID, hexToRGBA, smoothScrollToTop } from '~/utils/main'
+import { getUserID, hexToRGBA, isHomePage, smoothScrollToTop } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
 const activatedPage = ref<AppPage>(settings.value.startupPage ?? AppPage.Home)
@@ -23,18 +23,6 @@ const mainAppRef = ref<HTMLElement>() as Ref<HTMLElement>
 const scrollbarRef = ref()
 const showTopbarMask = ref<boolean>(false)
 const dynamicComponentKey = ref<string>(`dynamicComponent${Number(new Date())}`)
-
-const isHomePage = computed(() => {
-  if (
-    /https?:\/\/bilibili.com\/?$/.test(location.href)
-  || /https?:\/\/www.bilibili.com\/?$/.test(location.href)
-  || /https?:\/\/www.bilibili.com\/index.html$/.test(location.href)
-  || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(location.href)
-  || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(location.href)
-  )
-    return true
-  return false
-})
 
 const isVideoPage = computed(() => {
   if (/https?:\/\/(www.)?bilibili.com\/video\/.*/.test(location.href))
@@ -50,13 +38,7 @@ const isSearchPage = computed(() => {
 
 const isTopbarFixed = computed(() => {
   if (
-    // home page
-    /https?:\/\/bilibili.com\/?$/.test(location.href)
-    || /https?:\/\/www.bilibili.com\/?$/.test(location.href)
-    || /https?:\/\/www.bilibili.com\/index.html$/.test(location.href)
-    || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(location.href)
-    || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(location.href)
-
+    isHomePage()
     // // search page
     // || /https?:\/\/search.bilibili.com\/.*$/.test(location.href)
     // video page
@@ -114,7 +96,7 @@ onMounted(() => {
   //   }, 1200)
   // })
 
-  if (isHomePage.value) {
+  if (isHomePage()) {
     // Force overwrite Bilibili Evolved body tag & html tag background color
     document.body.style.setProperty('background-color', 'unset', 'important')
   }
@@ -259,20 +241,21 @@ function handleOsScroll() {
 provide('handleBackToTop', handleBackToTop)
 provide('handleRefresh', handleRefresh)
 provide('activatedPage', activatedPage)
+provide('scrollbarRef', scrollbarRef)
 </script>
 
 <template>
-  <template v-if="isHomePage">
+  <template v-if="isHomePage()">
     <AppBackground :activated-page="activatedPage" />
   </template>
 
   <div
     ref="mainAppRef" class="bewly-wrapper" text="$bew-text-1" transition="opacity duration-300" overflow-y-hidden z-60
-    :style="{ opacity: 1, height: isHomePage ? '100vh' : '0' }"
+    :style="{ opacity: 1, height: isHomePage() ? '100vh' : '0' }"
   >
     <!-- Dock & RightSideButtons -->
     <div>
-      <Dock v-if="isHomePage" :activated-page="activatedPage" @change-page="pageName => changeActivatePage(pageName)" @settings-visibility-change="toggleSettings" />
+      <Dock v-if="isHomePage()" :activated-page="activatedPage" @change-page="pageName => changeActivatePage(pageName)" @settings-visibility-change="toggleSettings" />
       <RightSideButtons v-else @settings-visibility-change="toggleSettings" />
     </div>
 
@@ -280,14 +263,14 @@ provide('activatedPage', activatedPage)
     <div m-auto max-w="$bew-page-max-width">
       <Transition name="topbar">
         <Topbar
-          v-if="settings.isShowTopbar && !isHomePage"
+          v-if="settings.isShowTopbar && !isHomePage()"
           pos="top-0 left-0" z="99 hover:999" w-full
           :style="{ position: isTopbarFixed ? 'fixed' : 'absolute' }"
           :show-search-bar="!isSearchPage"
           :mask="showTopbarMask"
         />
         <Topbar
-          v-else-if="settings.isShowTopbar && isHomePage"
+          v-else-if="settings.isShowTopbar && isHomePage()"
           :show-search-bar="showTopbarMask && settings.useSearchPageModeOnHomePage || (!settings.useSearchPageModeOnHomePage && activatedPage !== AppPage.Search || activatedPage !== AppPage.Home && activatedPage !== AppPage.Search)"
           :show-logo="showTopbarMask && settings.useSearchPageModeOnHomePage || (!settings.useSearchPageModeOnHomePage || activatedPage !== AppPage.Home)"
           :mask="showTopbarMask"
@@ -305,7 +288,7 @@ provide('activatedPage', activatedPage)
       <div m-auto max-w="$bew-page-max-width">
         <div flex="~" max-w="$bew-page-max-width">
           <main
-            v-if="isHomePage"
+            v-if="isHomePage()"
             p="t-80px" m-auto
             :w="isVideoPage ? '[calc(100%-160px)]' : 'lg:85% md:[calc(90%-60px)] [calc(100%-140px)]'"
           >

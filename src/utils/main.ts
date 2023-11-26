@@ -107,3 +107,19 @@ export function delay(time: number) {
     setTimeout(resolve, time)
   })
 }
+
+/**
+ * Check if the current page is the home page
+ * @returns true if the current page is the home page
+ */
+export function isHomePage(): boolean {
+  if (
+    /https?:\/\/bilibili.com\/?$/.test(location.href)
+  || /https?:\/\/www.bilibili.com\/?$/.test(location.href)
+  || /https?:\/\/www.bilibili.com\/index.html$/.test(location.href)
+  || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(location.href)
+  || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(location.href)
+  )
+    return true
+  return false
+}
