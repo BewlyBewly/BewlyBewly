@@ -142,10 +142,10 @@ function handelMouseLeave() {
       :class="isDislike ? 'is-dislike' : ''"
       w="full" pos="absolute top-0 left-0"
       rounded="$bew-radius" duration-300 ease-in-out
-      hover:bg="$bew-theme-color-20" hover:shadow
+      hover:bg="$bew-theme-color-10" hover:shadow
       :style="{ contentVisibility }"
-      style="--un-shadow: 0 0 0 8px var(--bew-theme-color-20);"
-      @mousemove="handleMouseEnter"
+      style="--un-shadow: 0 0 0 8px var(--bew-theme-color-10);"
+      @mouseenter="handleMouseEnter"
       @mouseleave="handelMouseLeave"
     >
       <div :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }">

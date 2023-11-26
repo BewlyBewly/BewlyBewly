@@ -35,7 +35,7 @@ defineProps<{
     mb-10 pointer-events-none select-none
   >
     <!-- Cover -->
-    <div :style="{ width: '250px' }" shrink-0 aspect-video h-fit bg="$bew-fill-4" rounded="$bew-radius" />
+    <div :style="{ width: '300px' }" shrink-0 aspect-video h-fit bg="$bew-fill-4" rounded="$bew-radius" />
     <!-- Other Information -->
     <div
       w-full mt-0
