@@ -252,12 +252,12 @@ provide('scrollbarRef', scrollbarRef)
   </template>
 
   <div
-    ref="mainAppRef" class="bewly-wrapper" text="$bew-text-1" transition="opacity duration-300" overflow-y-hidden z-60
-    pos="absolute top-0 left-0" w-full h-full overflow-hidden
+    ref="mainAppRef" class="bewly-wrapper" text="$bew-text-1" transition="opacity duration-300" z-60
+    pos="absolute top-0 left-0" w-full h-full
     :style="{ opacity: 1, height: isHomePage() ? '100vh' : '0' }"
   >
     <!-- Dock & RightSideButtons -->
-    <div>
+    <div pos="absolute top-0 left-0" w-inherit h-inherit overflow-hidden>
       <Dock v-if="isHomePage()" :activated-page="activatedPage" @change-page="pageName => changeActivatePage(pageName)" @settings-visibility-change="toggleSettings" />
       <RightSideButtons v-else @settings-visibility-change="toggleSettings" />
     </div>

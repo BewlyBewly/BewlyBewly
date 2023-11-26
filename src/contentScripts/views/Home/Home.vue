@@ -134,7 +134,7 @@ onUnmounted(() => {
       </Transition>
 
       <header
-        pos="sticky top-80px" w-fit z-10 mb-9 transition="all 300 ease-in-out"
+        pos="sticky top-80px" w-fit z-10 mb-9 duration-300 ease-in-out
         :class="{ hide: shouldMoveTabsUp }"
       >
         <ul flex="~ items-center gap-2">
@@ -184,7 +184,7 @@ onUnmounted(() => {
 }
 
 .hide {
-  transform: translateY(-70px);
+  --at-apply: important-translate-y--70px;
 }
 
 .tab-activated {

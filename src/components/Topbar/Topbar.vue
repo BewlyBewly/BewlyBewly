@@ -53,15 +53,21 @@ const avatarShadow = ref<HTMLImageElement>() as Ref<HTMLImageElement>
 const favoritesPopRef = ref<any>()
 
 const scrollTop = ref<number>(0)
-const preventShowTopbar = ref<boolean>(false)
+const preventAdjustTopbarVisible = ref<boolean>(false)
 
 watch(scrollTop, (newVal, oldVal) => {
-  if (newVal === oldVal)
+  if (newVal === oldVal) {
+    preventAdjustTopbarVisible.value = true
     return
-  if (newVal <= 0 || Math.abs(newVal - oldVal) < 5)
-    preventShowTopbar.value = true
+  }
+  // Set a certain offset in pixels to prevent minor scrolling from triggering adjustments
+  // in the top bar visibility
+  const offset = 5
+
+  if (newVal <= 0 || Math.abs(newVal - oldVal) < offset)
+    preventAdjustTopbarVisible.value = true
   else
-    preventShowTopbar.value = false
+    preventAdjustTopbarVisible.value = false
 })
 
 watch(
@@ -98,13 +104,13 @@ watch(showFavoritesPop, (newVal, oldVal) => {
 })
 
 watch(activatedPage, () => {
-  hideTopbar.value = false
-  emitter.emit('topbarVisibleChange', true)
+  toggleTopbarVisible(true)
 })
 
-onMounted(() => {
+onMounted(async () => {
   initData()
-
+  await nextTick()
+  toggleTopbarVisible(true)
   window.addEventListener('wheel', handleWheelScroll)
   window.addEventListener('scroll', handleScroll)
 })
@@ -136,7 +142,7 @@ function handleWheelScroll(event: WheelEvent): void {
     scrollTop.value = document.documentElement.scrollTop
   }
 
-  if (preventShowTopbar.value)
+  if (preventAdjustTopbarVisible.value)
     return
 
   toggleTopbarVisible(true)

@@ -2,6 +2,7 @@
 import { useI18n } from 'vue-i18n'
 import type { PgcModel, RankingType, RankingVideoModel } from '../types'
 import { settings } from '~/logic'
+import emitter from '~/utils/mitt'
 
 const { t } = useI18n()
 
@@ -41,6 +42,7 @@ const isLoading = ref<boolean>(false)
 const activatedRankingType = ref<RankingType>({ ...rankingTypes.value[0] })
 const videoList = reactive<RankingVideoModel[]>([])
 const PgcList = reactive<PgcModel[]>([])
+const shouldMoveAsideUp = ref<boolean>(false)
 
 watch(() => activatedRankingType.value.id, () => {
   handleBackToTop(settings.value.useSearchPageModeOnHomePage ? 510 : 0)
@@ -52,7 +54,26 @@ watch(() => activatedRankingType.value.id, () => {
 })
 
 onMounted(() => {
+  emitter.on('topbarVisibleChange', (val) => {
+    shouldMoveAsideUp.value = false
+
+    // Allow moving tabs up only when the top bar is not hidden & is set to auto-hide
+    // This feature is primarily designed to compatible with the Bilibili Evolved's top bar
+    // Even when the BewlyBewly top bar is hidden, the Bilibili Evolved top bar still exists, so not moving up
+    if (settings.value.autoHideTopbar && settings.value.isShowTopbar) {
+      if (val)
+        shouldMoveAsideUp.value = false
+
+      else
+        shouldMoveAsideUp.value = true
+    }
+  })
+
   getRankingVideos()
+})
+
+onBeforeUnmount(() => {
+  emitter.off('topbarVisibleChange')
 })
 
 function getRankingVideos() {
@@ -86,7 +107,8 @@ function getRankingPgc() {
 <template>
   <div flex="~ gap-40px">
     <aside
-      pos="sticky top-150px" h="[calc(100vh-140px)]" w-200px shrink-0
+      pos="sticky top-150px" h="[calc(100vh-140px)]" w-200px shrink-0 duration-300 ease-in-out
+      :class="{ hide: shouldMoveAsideUp }"
     >
       <OverlayScrollbarsComponent h-inherit p-20px m--20px defer>
         <ul flex="~ col gap-2">
@@ -162,5 +184,9 @@ function getRankingPgc() {
 <style lang="scss" scoped>
 .active {
   --at-apply: scale-110 bg-$bew-theme-color dark:bg-white text-white dark:text-black shadow-$bew-shadow-2;
+}
+
+.hide {
+  --at-apply: h-[calc(100vh-70)] translate-y--70px;
 }
 </style>
