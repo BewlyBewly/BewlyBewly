@@ -134,29 +134,31 @@ function handelMouseLeave() {
 </script>
 
 <template>
-  <div relative>
+  <div
+    relative
+  >
     <div
       class="video-card group"
       :class="isDislike ? 'is-dislike' : ''"
       w="full" pos="absolute top-0 left-0"
-      rounded="$bew-radius"
+      rounded="$bew-radius" duration-300 ease-in-out
+      hover:bg="$bew-theme-color-20" hover:shadow
       :style="{ contentVisibility }"
-      @mouseenter="handleMouseEnter"
+      style="--un-shadow: 0 0 0 8px var(--bew-theme-color-20);"
+      @mousemove="handleMouseEnter"
       @mouseleave="handelMouseLeave"
     >
       <div :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }">
         <!-- Cover -->
         <div
-          :style="{ width: horizontal ? '250px' : '100%' }"
+          :style="{ width: horizontal ? '300px' : '100%' }"
           shrink-0
-          w="full" h-fit relative bg="$bew-fill-4" rounded="$bew-radius" cursor-pointer group-hover:shadow
-          group-hover:transform="translate--4px"
-          style="--un-shadow:
-            0 0 0 4px var(--bew-theme-color),
-            8px 8px 0 2px var(--bew-theme-color-60),
-            14px 14px 0 2px var(--bew-theme-color-40)"
-          transition="all ease-in-out 300" group-hover:z-2
+          w="full" h-fit relative bg="$bew-fill-4" rounded="$bew-radius" cursor-pointer
+          duration-300 ease-in-out
+          group-hover:z-2
         >
+          <!-- style="--un-shadow: 0 0 0 4px var(--bew-theme-color)" -->
+          <!-- group-hover:transform="translate--4px" -->
           <!-- Ranking Number -->
           <div v-if="rank" absolute p-2>
             <div
@@ -254,7 +256,8 @@ function handelMouseLeave() {
             <div flex="~" justify="between" w="full" pos="relative">
               <h3
                 class="keep-two-lines"
-                text="lg overflow-ellipsis $bew-text-1" h-3em
+                text="lg overflow-ellipsis $bew-text-1" h-3em group-hover:text="$bew-theme-color"
+                transition="color 300 ease-in-out"
                 cursor="pointer"
               >
                 <a :href="videoUrl" target="_blank" :title="title">
@@ -426,7 +429,7 @@ function handelMouseLeave() {
         mb-10 pointer-events-none select-none invisible
       >
         <!-- Cover -->
-        <div w-250px shrink-0 aspect-video h-fit rounded="$bew-radius" />
+        <div w-300px shrink-0 aspect-video h-fit rounded="$bew-radius" />
         <!-- Other Information -->
         <div
           w-full
