@@ -3,7 +3,7 @@ import type { Ref, UnwrapNestedRefs } from 'vue'
 import { onMounted, watch } from 'vue'
 import type { UnReadDm, UnReadMessage, UserInfo } from './types'
 import { updateInterval } from './notify'
-import { getUserID } from '~/utils/main'
+import { getUserID, isHomePage } from '~/utils/main'
 import { settings } from '~/logic'
 import emitter from '~/utils/mitt'
 import type { AppPage } from '~/enums/appEnums'
@@ -20,6 +20,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const activatedPage = inject('activatedPage') as Ref<AppPage>
+const scrollbarRef = inject('scrollbarRef') as Ref
 
 const mid = getUserID() || ''
 const userInfo = reactive<UserInfo | {}>({}) as UnwrapNestedRefs<UserInfo>
@@ -110,8 +111,26 @@ async function initData() {
   }, updateInterval)
 }
 
+let oldScrollTop = 0
 // Function to handle the wheel event with type annotation for the event parameter
 function handleScroll(event: WheelEvent): void {
+  let scrollTop = 0
+  if (isHomePage()) {
+    const osInstance = scrollbarRef.value?.osInstance()
+    scrollTop = osInstance.elements().viewport.scrollTop
+  }
+  else {
+    scrollTop = document.documentElement.scrollTop
+  }
+
+  if (scrollTop <= 0)
+    return
+
+  if (scrollTop === oldScrollTop)
+    return
+
+  oldScrollTop = scrollTop
+
   hideTopbar.value = false
 
   if (settings.value.autoHideTopbar && !hovingTopbar.value) {
