@@ -52,6 +52,18 @@ const avatarImg = ref<HTMLImageElement>() as Ref<HTMLImageElement>
 const avatarShadow = ref<HTMLImageElement>() as Ref<HTMLImageElement>
 const favoritesPopRef = ref<any>()
 
+const scrollTop = ref<number>(0)
+const preventShowTopbar = ref<boolean>(false)
+
+watch(scrollTop, (newVal, oldVal) => {
+  if (newVal === oldVal)
+    return
+  if (newVal <= 0 || Math.abs(newVal - oldVal) < 5)
+    preventShowTopbar.value = true
+  else
+    preventShowTopbar.value = false
+})
+
 watch(
   showNotificationsPop,
   (newVal, oldVal) => {
@@ -92,11 +104,14 @@ watch(activatedPage, () => {
 
 onMounted(() => {
   initData()
-  window.addEventListener('wheel', handleScroll)
+
+  window.addEventListener('wheel', handleWheelScroll)
+  window.addEventListener('scroll', handleScroll)
 })
 
 onBeforeMount(() => {
-  window.removeEventListener('wheel', handleScroll)
+  window.removeEventListener('wheel', handleWheelScroll)
+  window.removeEventListener('scroll', handleScroll)
 })
 
 async function initData() {
@@ -111,38 +126,34 @@ async function initData() {
   }, updateInterval)
 }
 
-let oldScrollTop = 0
 // Function to handle the wheel event with type annotation for the event parameter
-function handleScroll(event: WheelEvent): void {
-  let scrollTop = 0
+function handleWheelScroll(event: WheelEvent): void {
   if (isHomePage()) {
     const osInstance = scrollbarRef.value?.osInstance()
-    scrollTop = osInstance.elements().viewport.scrollTop
+    scrollTop.value = osInstance.elements().viewport.scrollTop as number
   }
   else {
-    scrollTop = document.documentElement.scrollTop
+    scrollTop.value = document.documentElement.scrollTop
   }
 
-  if (scrollTop <= 0)
+  if (preventShowTopbar.value)
     return
 
-  if (scrollTop === oldScrollTop)
-    return
+  toggleTopbarVisible(true)
 
-  oldScrollTop = scrollTop
+  if (settings.value.autoHideTopbar && !hovingTopbar.value && scrollTop.value !== 0) {
+    if (event.deltaY < 0)
+      toggleTopbarVisible(true)
 
-  hideTopbar.value = false
+    else
+      toggleTopbarVisible(false)
+  }
+}
 
-  if (settings.value.autoHideTopbar && !hovingTopbar.value) {
-    if (event.deltaY < 0) {
-      hideTopbar.value = false
-      emitter.emit('topbarVisibleChange', true)
-    }
-
-    else {
-      hideTopbar.value = true
-      emitter.emit('topbarVisibleChange', false)
-    }
+function handleScroll() {
+  if (settings.value.autoHideTopbar && !isHomePage()) {
+    if (document.documentElement.scrollTop === 0)
+      toggleTopbarVisible(true)
   }
 }
 
@@ -242,6 +253,15 @@ async function getTopbarNewMomentsCount() {
     newMomentsCount.value = 0
   }
 }
+
+function toggleTopbarVisible(visible: boolean) {
+  hideTopbar.value = !visible
+  emitter.emit('topbarVisibleChange', visible)
+}
+
+defineExpose({
+  toggleTopbarVisible,
+})
 </script>
 
 <template>

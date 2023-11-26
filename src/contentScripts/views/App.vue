@@ -23,6 +23,7 @@ const mainAppRef = ref<HTMLElement>() as Ref<HTMLElement>
 const scrollbarRef = ref()
 const showTopbarMask = ref<boolean>(false)
 const dynamicComponentKey = ref<string>(`dynamicComponent${Number(new Date())}`)
+const topbarRef = ref()
 
 const isVideoPage = computed(() => {
   if (/https?:\/\/(www.)?bilibili.com\/video\/.*/.test(location.href))
@@ -215,6 +216,7 @@ function handleBackToTop(targetScrollTop = 0 as number) {
   const osInstance = scrollbarRef.value?.osInstance()
 
   smoothScrollToTop(osInstance.elements().viewport, 300, targetScrollTop)
+  topbarRef.value?.toggleTopbarVisible(true)
 }
 
 function handleAdaptToOtherPageStylesChange() {
@@ -271,6 +273,7 @@ provide('scrollbarRef', scrollbarRef)
         />
         <Topbar
           v-else-if="settings.isShowTopbar && isHomePage()"
+          ref="topbarRef"
           :show-search-bar="showTopbarMask && settings.useSearchPageModeOnHomePage || (!settings.useSearchPageModeOnHomePage && activatedPage !== AppPage.Search || activatedPage !== AppPage.Home && activatedPage !== AppPage.Search)"
           :show-logo="showTopbarMask && settings.useSearchPageModeOnHomePage || (!settings.useSearchPageModeOnHomePage || activatedPage !== AppPage.Home)"
           :mask="showTopbarMask"
