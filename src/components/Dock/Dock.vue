@@ -46,6 +46,10 @@ const dockItems = computed((): DockItem[] => {
   ]
 })
 
+watch(() => settings.value.autoHideDock, (newValue) => {
+  hideDock.value = newValue
+})
+
 onMounted(() => {
   if (settings.value.autoHideDock)
     hideDock.value = true
