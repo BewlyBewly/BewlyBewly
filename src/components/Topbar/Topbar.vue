@@ -53,21 +53,11 @@ const avatarShadow = ref<HTMLImageElement>() as Ref<HTMLImageElement>
 const favoritesPopRef = ref<any>()
 
 const scrollTop = ref<number>(0)
-const preventAdjustTopbarVisible = ref<boolean>(false)
+const oldScrollTop = ref<number>(0)
 
-watch(scrollTop, (newVal, oldVal) => {
-  if (newVal === oldVal) {
-    preventAdjustTopbarVisible.value = true
-    return
-  }
-  // Set a certain offset in pixels to prevent minor scrolling from triggering adjustments
-  // in the top bar visibility
-  const offset = 5
-
-  if (newVal <= 0 || Math.abs(newVal - oldVal) < offset)
-    preventAdjustTopbarVisible.value = true
-  else
-    preventAdjustTopbarVisible.value = false
+watch(() => settings.value.autoHideTopbar, (newVal) => {
+  if (!newVal)
+    toggleTopbarVisible(true)
 })
 
 watch(
@@ -111,12 +101,10 @@ onMounted(async () => {
   initData()
   await nextTick()
   toggleTopbarVisible(true)
-  window.addEventListener('wheel', handleWheelScroll)
   window.addEventListener('scroll', handleScroll)
 })
 
 onBeforeMount(() => {
-  window.removeEventListener('wheel', handleWheelScroll)
   window.removeEventListener('scroll', handleScroll)
 })
 
@@ -132,8 +120,7 @@ async function initData() {
   }, updateInterval)
 }
 
-// Function to handle the wheel event with type annotation for the event parameter
-function handleWheelScroll(event: WheelEvent): void {
+function handleScroll() {
   if (isHomePage()) {
     const osInstance = scrollbarRef.value?.osInstance()
     scrollTop.value = osInstance.elements().viewport.scrollTop as number
@@ -142,25 +129,20 @@ function handleWheelScroll(event: WheelEvent): void {
     scrollTop.value = document.documentElement.scrollTop
   }
 
-  if (preventAdjustTopbarVisible.value)
-    return
-
-  toggleTopbarVisible(true)
-
+  // Set a certain offset in pixels to prevent minor scrolling from triggering adjustments
+  // in the top bar visibility
+  const offset = 5
   if (settings.value.autoHideTopbar && !hovingTopbar.value && scrollTop.value !== 0) {
-    if (event.deltaY < 0)
-      toggleTopbarVisible(true)
+    if (Math.abs(scrollTop.value - oldScrollTop.value) < offset) {
+      if (scrollTop.value > oldScrollTop.value)
+        toggleTopbarVisible(false)
 
-    else
-      toggleTopbarVisible(false)
+      else
+        toggleTopbarVisible(true)
+    }
   }
-}
 
-function handleScroll() {
-  if (settings.value.autoHideTopbar && !isHomePage()) {
-    if (document.documentElement.scrollTop === 0)
-      toggleTopbarVisible(true)
-  }
+  oldScrollTop.value = scrollTop.value
 }
 
 function showLogoMenuDropdown() {
@@ -267,6 +249,7 @@ function toggleTopbarVisible(visible: boolean) {
 
 defineExpose({
   toggleTopbarVisible,
+  handleScroll,
 })
 </script>
 
