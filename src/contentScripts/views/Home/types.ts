@@ -6,6 +6,7 @@ export interface HomeTab {
 export enum HomeSubPage {
   ForYou = 'ForYou',
   Following = 'Following',
+  Pgc = 'Pgc',
   Trending = 'Trending',
   Ranking = 'Ranking',
 }

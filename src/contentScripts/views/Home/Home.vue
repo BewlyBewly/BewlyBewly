@@ -4,6 +4,7 @@ import ForYou from './components/ForYou.vue'
 import Following from './components/Following.vue'
 import Trending from './components/Trending.vue'
 import Ranking from './components/Ranking.vue'
+import Pgc from './components/Pgc.vue'
 import type { HomeTab } from './types'
 import { HomeSubPage } from './types'
 import emitter from '~/utils/mitt'
@@ -15,7 +16,7 @@ const handleBackToTop = inject('handleBackToTop') as (targetScrollTop: number) =
 
 const recommendContentKey = ref<string>(`recommendContent${Number(new Date())}`)
 const activatedPage = ref<HomeSubPage>(HomeSubPage.ForYou)
-const pages = { ForYou, Following, Trending, Ranking }
+const pages = { ForYou, Following, Pgc, Trending, Ranking }
 const showSearchPageMode = ref<boolean>(false)
 const shouldMoveTabsUp = ref<boolean>(false)
 
@@ -28,6 +29,10 @@ const tabs = computed((): HomeTab[] => {
     {
       label: t('home.following'),
       value: HomeSubPage.Following,
+    },
+    {
+      label: 'Following Anime, Shows & Movies',
+      value: HomeSubPage.Pgc,
     },
     {
       label: t('home.trending'),
