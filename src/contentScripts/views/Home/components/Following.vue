@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import type { MomentModel } from '../types'
+import type { DataItem as MomentItem, MomentResult } from '~/models/apiModels/moment/moment'
 import emitter from '~/utils/mitt'
 
-const videoList = reactive<MomentModel[]>([])
+const videoList = reactive<MomentItem[]>([])
 const isLoading = ref<boolean>(false)
 const needToLoginFirst = ref<boolean>(false)
 const containerRef = ref<HTMLElement>() as Ref<HTMLElement>
@@ -34,7 +34,7 @@ async function getFollowedUsersVideos() {
 
   isLoading.value = true
   try {
-    const response = await browser.runtime.sendMessage({
+    const response: MomentResult = await browser.runtime.sendMessage({
       contentScriptQuery: 'getMoments',
       type: 'video',
       offset: offset.value,
@@ -51,9 +51,9 @@ async function getFollowedUsersVideos() {
       offset.value = response.data.offset
       updateBaseline.value = response.data.update_baseline
 
-      const resData = [] as MomentModel[]
+      const resData = [] as MomentItem[]
 
-      response.data.items.forEach((item: MomentModel) => {
+      response.data.items.forEach((item: MomentItem) => {
         resData.push(item)
       })
 
@@ -95,18 +95,18 @@ function jumpToLoginPage() {
     >
       <VideoCard
         v-for="video in videoList"
-        :id="Number(video.modules.module_dynamic.major.archive.aid)"
-        :key="video.modules.module_dynamic.major.archive.aid"
-        :duration-str="video.modules.module_dynamic.major.archive.duration_text"
-        :title="video.modules.module_dynamic.major.archive.title"
-        :cover="video.modules.module_dynamic.major.archive.cover"
+        :id="Number(video.modules.module_dynamic.major.archive?.aid)"
+        :key="video.modules.module_dynamic.major.archive?.aid"
+        :duration-str="video.modules.module_dynamic.major.archive?.duration_text"
+        :title="video.modules.module_dynamic.major.archive?.title"
+        :cover="video.modules.module_dynamic.major.archive?.cover"
         :author="video.modules.module_author.name"
         :author-face="video.modules.module_author.face"
         :mid="video.modules.module_author.mid"
-        :view-str="video.modules.module_dynamic.major.archive.stat.play"
-        :danmaku-str="video.modules.module_dynamic.major.archive.stat.danmaku"
+        :view-str="video.modules.module_dynamic.major.archive?.stat.play"
+        :danmaku-str="video.modules.module_dynamic.major.archive?.stat.danmaku"
         :capsule-text="video.modules.module_author.pub_time"
-        :bvid="video.modules.module_dynamic.major.archive.bvid"
+        :bvid="video.modules.module_dynamic.major.archive?.bvid"
       />
 
       <!-- skeleton -->
@@ -123,3 +123,4 @@ function jumpToLoginPage() {
 
 <style lang="scss" scoped>
 </style>
+~/models/apiModels/moment/momentResult

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import type { DataItem as MomentItem, MomentResultModel } from '~/models/moment/momentResult'
+import type { DataItem as MomentItem, MomentResult } from '~/models/apiModels/moment/moment'
 import emitter from '~/utils/mitt'
 
 const momentList = reactive<MomentItem[]>([])
@@ -34,7 +34,7 @@ async function getFollowedUsersVideos() {
 
   isLoading.value = true
   try {
-    const response: MomentResultModel = await browser.runtime.sendMessage({
+    const response: MomentResult = await browser.runtime.sendMessage({
       contentScriptQuery: 'getMoments',
       type: 'pgc',
       offset: offset.value,
@@ -123,3 +123,4 @@ function jumpToLoginPage() {
 
 <style lang="scss" scoped>
 </style>
+~/models/apiModels/moment/momentResult

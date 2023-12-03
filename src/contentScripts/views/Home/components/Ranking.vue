@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import type { PgcModel, RankingType, RankingVideoModel } from '../types'
+import type { RankingType } from '../types'
+import type { RankingResult, List as RankingVideoItem } from '~/models/apiModels/video/ranking'
+import type { List as RankingPgcItem, RankingPgcResult } from '~/models/apiModels/video/rankingPgc'
 import { settings } from '~/logic'
 import emitter from '~/utils/mitt'
 
@@ -40,8 +42,8 @@ const rankingTypes = computed((): RankingType[] => {
 
 const isLoading = ref<boolean>(false)
 const activatedRankingType = ref<RankingType>({ ...rankingTypes.value[0] })
-const videoList = reactive<RankingVideoModel[]>([])
-const PgcList = reactive<PgcModel[]>([])
+const videoList = reactive<RankingVideoItem[]>([])
+const PgcList = reactive<RankingPgcItem[]>([])
 const shouldMoveAsideUp = ref<boolean>(false)
 
 watch(() => activatedRankingType.value.id, () => {
@@ -83,7 +85,7 @@ function getRankingVideos() {
     contentScriptQuery: 'getRankingVideos',
     rid: activatedRankingType.value.rid,
     type: 'type' in activatedRankingType.value ? activatedRankingType.value.type : 'all',
-  }).then((response) => {
+  }).then((response: RankingResult) => {
     if (response.code === 0) {
       const { list } = response.data
       Object.assign(videoList, list)
@@ -97,7 +99,7 @@ function getRankingPgc() {
   browser.runtime.sendMessage({
     contentScriptQuery: 'getRankingPgc',
     seasonType: activatedRankingType.value.seasonType,
-  }).then((response) => {
+  }).then((response: RankingPgcResult) => {
     if (response.code === 0)
       Object.assign(PgcList, response.result.list)
   }).finally(() => isLoading.value = false)
@@ -190,3 +192,4 @@ function getRankingPgc() {
   --at-apply: h-[calc(100vh-70)] translate-y--70px;
 }
 </style>
+~/models/apiModels/video/ranking

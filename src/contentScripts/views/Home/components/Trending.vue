@@ -1,20 +1,20 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import type { PopularVideoModel } from '../types'
+import type { TrendingResult, List as VideoItem } from '~/models/apiModels/video/trending'
 import emitter from '~/utils/mitt'
 
-const videoList = reactive<PopularVideoModel[]>([])
+const videoList = reactive<VideoItem[]>([])
 const isLoading = ref<boolean>(false)
 const containerRef = ref<HTMLElement>() as Ref<HTMLElement>
 const pn = ref<number>(1)
 
 onMounted(async () => {
-  await getFollowingAuthorVideos()
+  await getTrendingVideos()
 
   emitter.off('reachBottom')
   emitter.on('reachBottom', async () => {
     if (!isLoading.value)
-      await getFollowingAuthorVideos()
+      await getTrendingVideos()
   })
 })
 
@@ -22,19 +22,19 @@ onUnmounted(() => {
   emitter.off('reachBottom')
 })
 
-async function getFollowingAuthorVideos() {
+async function getTrendingVideos() {
   isLoading.value = true
   try {
-    const response = await browser.runtime.sendMessage({
+    const response: TrendingResult = await browser.runtime.sendMessage({
       contentScriptQuery: 'getPopularVideos',
       pn: pn.value++,
       ps: 30,
     })
 
     if (response.code === 0 && !response.data.no_more) {
-      const resData = [] as PopularVideoModel[]
+      const resData = [] as VideoItem[]
 
-      response.data.list.forEach((item: PopularVideoModel) => {
+      response.data.list.forEach((item: VideoItem) => {
         resData.push(item)
       })
 
@@ -95,3 +95,4 @@ async function getFollowingAuthorVideos() {
 
 <style lang="scss" scoped>
 </style>
+~/models/apiModels/video/trendingResult

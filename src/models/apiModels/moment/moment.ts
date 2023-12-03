@@ -1,6 +1,6 @@
 // https://app.quicktype.io/?l=ts
 
-export interface MomentResultModel {
+export interface MomentResult {
   code: number
   message: string
   ttl: number

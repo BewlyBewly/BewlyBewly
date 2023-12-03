@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import type { AppForYouVideoModel, ForYouVideoModel } from '../types'
+import type { AppForYouResult, Item as AppVideoItem } from '~/models/apiModels/video/appForYou'
+import type { Item as VideoItem, forYouResult } from '~/models/apiModels/video/forYou'
 import emitter from '~/utils/mitt'
 import { accessKey, settings } from '~/logic'
 import { LanguageType } from '~/enums/appEnums'
 import { TVAppKey } from '~/utils/authProvider'
 
-const videoList = reactive<ForYouVideoModel[]>([])
-const appVideoList = reactive<AppForYouVideoModel[]>([])
+const videoList = reactive<VideoItem[]>([])
+const appVideoList = reactive<AppVideoItem[]>([])
 const isLoading = ref<boolean>(true)
 const needToLoginFirst = ref<boolean>(false)
 const containerRef = ref<HTMLElement>() as Ref<HTMLElement>
@@ -64,7 +65,7 @@ async function getRecommendVideos() {
 
   isLoading.value = true
   try {
-    const response = await browser.runtime.sendMessage({
+    const response: forYouResult = await browser.runtime.sendMessage({
       contentScriptQuery: 'getRecommendVideos',
       refreshIdx: refreshIdx.value++,
     })
@@ -75,9 +76,9 @@ async function getRecommendVideos() {
     }
 
     if (response.code === 0) {
-      const resData = [] as ForYouVideoModel[]
+      const resData = [] as VideoItem[]
 
-      response.data.item.forEach((item: ForYouVideoModel) => {
+      response.data.item.forEach((item: VideoItem) => {
         resData.push(item)
       })
 
@@ -102,7 +103,7 @@ async function getRecommendVideos() {
 async function getAppRecommendVideos() {
   isLoading.value = true
   try {
-    const response = await browser.runtime.sendMessage({
+    const response: AppForYouResult = await browser.runtime.sendMessage({
       contentScriptQuery: 'getAppRecommendVideos',
       accessKey: accessKey.value,
       sLocale: settings.value.language !== LanguageType.Mandarin_CN ? 'zh-Hant_TW' : 'zh-Hans_CN',
@@ -112,9 +113,9 @@ async function getAppRecommendVideos() {
     })
 
     if (response.code === 0) {
-      const resData = [] as AppForYouVideoModel[]
+      const resData = [] as AppVideoItem[]
 
-      response.data.items.forEach((item: AppForYouVideoModel) => {
+      response.data.items.forEach((item: AppVideoItem) => {
         // Remove banner & ad cards
         if (!item.card_type.includes('banner') && item.card_type !== 'cm_v1')
           resData.push(item)
@@ -176,15 +177,15 @@ function jumpToLoginPage() {
       <template v-else>
         <VideoCard
           v-for="video in appVideoList"
-          :id="video.args.aid"
+          :id="video.args.aid ?? 0"
           :key="video.args.aid"
           :duration-str="video.cover_right_text"
-          :title="video.title"
-          :cover="video.cover"
-          :author="'avatar' in video.mask ? video.mask.avatar.text : ''"
-          :author-face="'avatar' in video.mask ? video.mask.avatar.cover : ''"
-          :mid="video.mask.avatar.up_id"
-          :capsule-text="video.desc.split('·')[1]"
+          :title="`${video.title}`"
+          :cover="`${video.cover}`"
+          :author="video.mask && 'avatar' in video.mask ? video.mask.avatar.text : ''"
+          :author-face="video.mask && 'avatar' in video.mask ? video.mask.avatar.cover : ''"
+          :mid="video.mask && video.mask.avatar ? video.mask.avatar.up_id : 0"
+          :capsule-text="video.desc ? video.desc.split('·')[1] : ''"
           :bvid="video.bvid"
           :view-str="video.cover_left_text_1"
           :danmaku-str="video.cover_left_text_2"
@@ -205,3 +206,5 @@ function jumpToLoginPage() {
 
 <style lang="scss" scoped>
 </style>
+~/models/video/forYou~/models/video/appForYouResult
+~/models/apiModels/video/appForYouResult~/models/apiModels/video/forYouResult

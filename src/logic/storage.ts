@@ -1,6 +1,6 @@
 import { useStorageLocal } from '~/composables/useStorageLocal'
 import { AppPage } from '~/enums/appEnums'
-import type { Settings } from '~/models/models'
+import type { Settings } from '~/models/settings'
 
 export const storageDemo = useStorageLocal('webext-demo', 'Storage Demo')
 export const accessKey = useStorageLocal('accessKey', '')
