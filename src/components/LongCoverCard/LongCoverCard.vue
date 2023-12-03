@@ -24,7 +24,7 @@ defineProps<{
     }"
     gap-4
     class="group"
-    hover:bg="$bew-theme-color-20" hover:ring="8 $bew-theme-color-20"
+    hover:bg="$bew-theme-color-10" hover:ring="8 $bew-theme-color-10"
     transition="all ease-in-out 300"
     rounded="$bew-radius"
   >
