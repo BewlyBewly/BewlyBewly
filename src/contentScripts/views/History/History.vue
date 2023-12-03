@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { useDateFormat } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
-import { HistoryType } from './types'
-import type { HistoryItem } from './types'
+
+// import type { HistoryItem } from './types'
 import { getCSRF, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
 import { calcCurrentTime } from '~/utils/dataFormatter'
 import emitter from '~/utils/mitt'
+import { Business } from '~/models/apiModels/video/history'
+import type { List as HistoryItem, HistoryResult } from '~/models/apiModels/video/history'
+import type { List as HistorySearchItem, HistorySearchResult } from '~/models/apiModels/video/historySearch'
 
 const { t } = useI18n()
 
@@ -15,6 +18,10 @@ const historyList = reactive<Array<HistoryItem>>([])
 const currentPageNum = ref<number>(1)
 const keyword = ref<string>()
 const historyStatus = ref<boolean>()
+
+const HistoryBusiness = computed(() => {
+  return Business
+})
 
 watch(
   () => keyword.value,
@@ -76,7 +83,7 @@ function getHistoryList() {
           ? historyList[historyList.length - 1].view_at
           : 0,
     })
-    .then((res) => {
+    .then((res: HistoryResult) => {
       if (res.code === 0) {
         if (Array.isArray(res.data.list) && res.data.list.length > 0)
           historyList.push(...res.data.list)
@@ -101,7 +108,7 @@ function searchHistoryList() {
       pn: currentPageNum.value++,
       keyword: keyword.value,
     })
-    .then((res) => {
+    .then((res: HistorySearchResult) => {
       if (res.code === 0) {
         if (historyList.length !== 0 && res.data.list.length < 20) {
           isLoading.value = false
@@ -109,8 +116,8 @@ function searchHistoryList() {
           return
         }
 
-        res.data.list.forEach((item: HistoryItem) => {
-          historyList.push(item)
+        res.data.list.forEach((item: HistorySearchItem) => {
+          historyList.push(item as HistoryItem)
         })
 
         noMoreContent.value = false
@@ -162,7 +169,7 @@ function getHistoryUrl(item: HistoryItem) {
 
 function getHistoryItemCover(item: HistoryItem) {
   if (item.history.business === 'article')
-    return removeHttpFromUrl(item.covers[0])
+    return removeHttpFromUrl(`${item.covers[0]}`)
 
   return removeHttpFromUrl(item.cover)
 }
@@ -322,7 +329,7 @@ function jumpToLoginPage() {
               >
 
               <span
-                v-if="historyItem.history.business !== HistoryType.Archive"
+                v-if="historyItem.history.business !== HistoryBusiness.ARCHIVE"
                 pos="absolute right-0 top-0"
                 bg="$bew-theme-color"
                 text="xs white"
@@ -331,19 +338,19 @@ function jumpToLoginPage() {
                 rounded="$bew-radius-half"
               >
                 <template
-                  v-if="historyItem.history.business === HistoryType.Live"
+                  v-if="historyItem.history.business === HistoryBusiness.LIVE"
                 >
                   Livestreaming
                 </template>
                 <template
                   v-else-if="
-                    historyItem.history.business === HistoryType.Article
+                    historyItem.history.business === HistoryBusiness.ARCHIVE
                   "
                 >
                   Article
                 </template>
                 <template
-                  v-else-if="historyItem.history.business === HistoryType.PGC"
+                  v-else-if="historyItem.history.business === HistoryBusiness.PGC"
                 >
                   Anime
                 </template>
@@ -351,8 +358,8 @@ function jumpToLoginPage() {
 
               <div
                 v-if="
-                  historyItem.history.business === HistoryType.Archive
-                    || historyItem.history.business === HistoryType.PGC
+                  historyItem.history.business === HistoryBusiness.ARCHIVE
+                    || historyItem.history.business === HistoryBusiness.PGC
                 "
                 pos="absolute bottom-0 right-0"
                 bg="black opacity-60"
@@ -374,8 +381,8 @@ function jumpToLoginPage() {
               <div w-full pos="absolute bottom-0" bg="white opacity-60">
                 <Progress
                   v-if="
-                    historyItem.history.business === HistoryType.Archive
-                      || historyItem.history.business === HistoryType.PGC
+                    historyItem.history.business === HistoryBusiness.ARCHIVE
+                      || historyItem.history.business === HistoryBusiness.PGC
                   "
                   :percentage="
                     (historyItem.progress / historyItem.duration) * 100

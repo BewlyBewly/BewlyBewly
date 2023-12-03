@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n'
 import browser from 'webextension-polyfill'
 import type { AnimeTimeTableItem } from '../types'
 import { removeHttpFromUrl } from '~/utils/main'
+import type { Result as TimetableItem, TimetableResult } from '~/models/apiModels/anime/timetable'
 
 const { t } = useI18n()
 
@@ -31,10 +32,10 @@ function getAnimeTimeTable() {
     .sendMessage({
       contentScriptQuery: 'getAnimeTimeTable',
     })
-    .then((res) => {
+    .then((res: TimetableResult) => {
       const { code, result } = res
       if (code === 0)
-        Object.assign(animeTimeTable, result as AnimeTimeTableItem[])
+        Object.assign(animeTimeTable, result as TimetableItem[])
     })
 }
 </script>

@@ -1,14 +1,15 @@
 <script setup lang="ts">
-// import PopularAnimeCarousel from './components/PopularAnimeCarousel.vue'
 import AnimeTimeTable from './components/AnimeTimeTable.vue'
-import type { AnimeItem, PopularAnime } from './types'
 import { getUserID, openLinkToNewTab } from '~/utils/main'
 import { numFormatter } from '~/utils/dataFormatter'
 import emitter from '~/utils/mitt'
+import type { List as WatchListItem, WatchListResult } from '~/models/apiModels/anime/watchList'
+import type { List as PopularAnimeItem, PopularAnimeResult } from '~/models/apiModels/anime/popular'
+import type { ItemSubItem as RecommendationItem, RecommendationResult } from '~/models/apiModels/anime/recommendation'
 
-const animeWatchList = reactive<AnimeItem[]>([])
-const recommendAnimeList = reactive<AnimeItem[]>([])
-const popularAnimeList = reactive<AnimeItem[]>([])
+const animeWatchList = reactive<WatchListItem[]>([])
+const recommendAnimeList = reactive<RecommendationItem[]>([])
+const popularAnimeList = reactive<PopularAnimeItem[]>([])
 const cursor = ref<number>(0)
 const isLoadingAnimeWatchList = ref<boolean>()
 const isLoadingPopularAnime = ref<boolean>()
@@ -40,13 +41,13 @@ function getAnimeWatchList() {
       pn: 1,
       ps: 30,
     })
-    .then((response) => {
+    .then((response: WatchListResult) => {
       const {
         code,
         data: { list },
       } = response
       if (code === 0)
-        Object.assign(animeWatchList, list as AnimeItem[])
+        Object.assign(animeWatchList, list as WatchListItem[])
     })
     .catch(() => Object.assign(animeWatchList, []))
     .finally(() => {
@@ -61,14 +62,14 @@ function getRecommendAnimeList() {
       contentScriptQuery: 'getRecommendAnimeList',
       coursor: cursor.value,
     })
-    .then((response) => {
+    .then((response: RecommendationResult) => {
       const {
         code,
         data: { items, coursor, has_next },
       } = response
       if (code === 0 && has_next) {
         if (recommendAnimeList.length === 0)
-          Object.assign(recommendAnimeList, items[0].sub_items as AnimeItem[])
+          Object.assign(recommendAnimeList, items[0].sub_items as RecommendationItem[])
         else recommendAnimeList.push(...items[0].sub_items)
 
         cursor.value = coursor
@@ -85,13 +86,13 @@ function getPopularAnimeList() {
     .sendMessage({
       contentScriptQuery: 'getPopularAnimeList',
     })
-    .then((response) => {
+    .then((response: PopularAnimeResult) => {
       const {
         code,
         result: { list },
       } = response
       if (code === 0)
-        Object.assign(popularAnimeList, list as PopularAnime[])
+        Object.assign(popularAnimeList, list as PopularAnimeItem[])
     })
     .catch(() => {})
     .finally(() => isLoadingPopularAnime.value = false)
@@ -255,3 +256,4 @@ function getPopularAnimeList() {
   --at-apply: mb-8 mt-14 first:mt-0;
 }
 </style>
+~/models/apiModels/anime/watchList

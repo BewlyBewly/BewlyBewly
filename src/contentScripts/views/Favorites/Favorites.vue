@@ -4,11 +4,13 @@ import { getCSRF, getUserID, openLinkToNewTab, removeHttpFromUrl } from '~/utils
 import type { FavoriteCategory, FavoriteResource } from '~/components/Topbar/types'
 import emitter from '~/utils/mitt'
 import { settings } from '~/logic'
+import type { Media as FavoriteItem, FavoritesResult } from '~/models/apiModels/video/favorite'
+import type { List as CategoryItem, FavoritesCategoryResult } from '~/models/apiModels/video/favoriteCategory'
 
 const { t } = useI18n()
 
-const favoriteCategories = reactive<Array<FavoriteCategory>>([])
-const favoriteResources = reactive<Array<FavoriteResource>>([])
+const favoriteCategories = reactive<CategoryItem[]>([])
+const favoriteResources = reactive<FavoriteItem[]>([])
 const categoryOptions = reactive<Array<{ value: any; label: string }>>([])
 
 const selectedCategory = ref<FavoriteCategory>()
@@ -69,7 +71,7 @@ async function getFavoriteCategories() {
       contentScriptQuery: 'getFavoriteCategories',
       mid: getUserID(),
     })
-    .then((res) => {
+    .then((res: FavoritesCategoryResult) => {
       if (res.code === 0) {
         Object.assign(favoriteCategories, res.data.list)
 
@@ -99,7 +101,7 @@ async function getFavoriteResources(
     isFullPageLoading.value = true
   isLoading.value = true
   try {
-    const res = await browser.runtime
+    const res: FavoritesResult = await browser.runtime
       .sendMessage({
         contentScriptQuery: 'getFavoriteResources',
         mediaId,

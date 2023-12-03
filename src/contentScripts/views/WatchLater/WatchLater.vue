@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { useDateFormat } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
-import type { WatchLaterModel } from './types'
 import { getCSRF, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
 import { calcCurrentTime } from '~/utils/dataFormatter'
 import emitter from '~/utils/mitt'
+import type { List as VideoItem, WatchLaterResult } from '~/models/apiModels/video/watchLater'
 
 const { t } = useI18n()
 
 const isLoading = ref<boolean>()
 const noMoreContent = ref<boolean>()
-const watchLaterList = reactive<Array<WatchLaterModel>>([])
+const watchLaterList = reactive<VideoItem[]>([])
 
 onMounted(() => {
   getAllWatchLaterList()
@@ -36,7 +36,7 @@ function getAllWatchLaterList() {
     .sendMessage({
       contentScriptQuery: 'getAllWatchLaterList',
     })
-    .then((res) => {
+    .then((res: WatchLaterResult) => {
       if (res.code === 0)
         Object.assign(watchLaterList, res.data.list)
 
