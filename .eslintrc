@@ -1,7 +1,3 @@
 {
-  "extends": "@antfu",
-  "rules": {
-    "vue/comma-dangle": "off",
-    "vue/dot-location": "off"
-  }
+  "extends": "@antfu"
 }
