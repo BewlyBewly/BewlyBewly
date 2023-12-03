@@ -80,14 +80,14 @@ function handleExportSettings() {
       <p pos="relative top-14">
         <Button class="btn" @click="handleImportSettings">
           <template #left>
-            <mingcute:arrow-right-down-line />
+            <uil:import />
           </template>
           <input ref="importSettingsRef" type="file" accept=".json" hidden>
           {{ $t('settings.import_settings') }}
         </Button>
         <Button class="btn" mt-2 @click="handleExportSettings">
           <template #left>
-            <mingcute:arrow-left-up-line />
+            <uil:export />
           </template>
           {{ $t('settings.export_settings') }}
         </Button>
