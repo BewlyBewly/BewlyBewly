@@ -270,7 +270,7 @@ function handelMouseLeave() {
             <div flex="~" justify="between" w="full" pos="relative">
               <h3
                 class="keep-two-lines"
-                text="lg overflow-ellipsis $bew-text-1" h-3em group-hover:text="$bew-theme-color"
+                text="lg overflow-ellipsis $bew-text-1" group-hover:text="$bew-theme-color"
                 transition="color 300 ease-in-out"
                 cursor="pointer"
               >
