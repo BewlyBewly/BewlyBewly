@@ -24,18 +24,15 @@ defineProps<{
     }"
     gap-4
     class="group"
+    hover:bg="$bew-theme-color-20" hover:ring="8 $bew-theme-color-20"
+    transition="all ease-in-out 300"
+    rounded="$bew-radius"
   >
     <!-- Cover -->
     <a
       :style="{ width: horizontal ? '170px' : '100%' }"
       :href="url" target="_blank" tabindex="-1" block
       rounded="$bew-radius" w-full bg="$bew-fill-4" relative shrink-0
-      group-hover:shadow group-hover:transform="translate--4px"
-      transition="all ease-in-out 300"
-      style="--un-shadow:
-        0 0 0 4px var(--bew-theme-color),
-        8px 8px 0 2px var(--bew-theme-color-60),
-        14px 14px 0 2px var(--bew-theme-color-40)"
     >
       <div aspect="12/16" overflow-hidden rounded="$bew-radius">
         <div
@@ -134,6 +131,8 @@ defineProps<{
           target="_blank"
           class="keep-two-lines"
           :title="title"
+          group-hover:color="$bew-theme-color"
+          transition="all ease-in-out 300"
         >
           {{ title }}
         </a>
