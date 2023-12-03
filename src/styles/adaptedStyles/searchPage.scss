@@ -14,15 +14,21 @@
       background-color: var(--bew-theme-color) !important;
     }
 
-    .bili-video-card .bili-video-card__image {
-      transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+    .bili-video-card .bili-video-card__wrap {
+      transition: box-shadow 0.3s ease-in-out, background 0.3s ease-in-out;
+      border-radius: var(--bew-radius-half);
     }
 
-    .bili-video-card:hover .bili-video-card__image {
-      transform: translate(-4px, -4px);
-      box-shadow: 0 0 0 4px var(--bew-theme-color),
-        8px 8px 0 2px var(--bew-theme-color-60),
-        14px 14px 0 2px var(--bew-theme-color-40);
+    .bili-video-card:hover .bili-video-card__wrap {
+      background-color: var(--bew-theme-color-20);
+      box-shadow: 0 0 0 8px var(--bew-theme-color-20);
+    }
+
+    .bili-video-card:hover .bili-video-card__info--tit {
+      transition: color 0.3s ease-in-out;
+    }
+    .bili-video-card:hover .bili-video-card__info--tit {
+      color: var(--bew-theme-color);
     }
 
     .search-loading-container .loading-text .loading-gif,
