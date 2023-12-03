@@ -91,7 +91,7 @@ onUnmounted(() => {
           pointer-events-none
           :style="{
             backgroundImage: `url(${settings.searchPageWallpaper})`,
-            backgroundAttachment: settings.searchPageModeWallpaperFixed ? 'fixed' : 'unset'
+            backgroundAttachment: settings.searchPageModeWallpaperFixed ? 'fixed' : 'unset',
           }"
         />
         <!-- background mask -->
@@ -142,7 +142,7 @@ onUnmounted(() => {
         pos="sticky top-80px" w-fit z-10 mb-9 duration-300 ease-in-out
         :class="{ hide: shouldMoveTabsUp }"
       >
-        <ul flex="~ items-center gap-2">
+        <ul flex="~ items-center gap-3">
           <li
             v-for="tab in tabs" :key="tab.value"
             px-4 lh-35px bg="$bew-elevated-1 hover:$bew-elevated-1-hover" backdrop-glass rounded="$bew-radius"
