@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import type { MomentModel } from '../types'
+import type { DataItem as MomentItem, MomentResultModel } from '~/models/moment/momentResult'
 import emitter from '~/utils/mitt'
 
-const videoList = reactive<MomentModel[]>([])
+const momentList = reactive<MomentItem[]>([])
 const isLoading = ref<boolean>(false)
 const needToLoginFirst = ref<boolean>(false)
 const containerRef = ref<HTMLElement>() as Ref<HTMLElement>
@@ -34,7 +34,7 @@ async function getFollowedUsersVideos() {
 
   isLoading.value = true
   try {
-    const response = await browser.runtime.sendMessage({
+    const response: MomentResultModel = await browser.runtime.sendMessage({
       contentScriptQuery: 'getMoments',
       type: 'pgc',
       offset: offset.value,
@@ -51,19 +51,19 @@ async function getFollowedUsersVideos() {
       offset.value = response.data.offset
       updateBaseline.value = response.data.update_baseline
 
-      const resData = [] as MomentModel[]
+      const resData = [] as MomentItem[]
 
-      response.data.items.forEach((item: MomentModel) => {
+      response.data.items.forEach((item: MomentItem) => {
         resData.push(item)
       })
 
       // when videoList has length property, it means it is the first time to load
-      if (!videoList.length) {
-        Object.assign(videoList, resData)
+      if (!momentList.length) {
+        Object.assign(momentList, resData)
       }
       else {
         // else we concat the new data to the old data
-        Object.assign(videoList, videoList.concat(resData))
+        Object.assign(momentList, momentList.concat(resData))
       }
     }
     else if (response.code === -101) {
@@ -94,19 +94,19 @@ function jumpToLoginPage() {
       grid="~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-5"
     >
       <VideoCard
-        v-for="video in videoList"
-        :id="Number(video.modules.module_dynamic.major.archive.aid)"
-        :key="video.modules.module_dynamic.major.archive.aid"
-        :duration-str="video.modules.module_dynamic.major.archive.duration_text"
-        :title="video.modules.module_dynamic.major.archive.title"
-        :cover="video.modules.module_dynamic.major.archive.cover"
-        :author="video.modules.module_author.name"
-        :author-face="video.modules.module_author.face"
-        :mid="video.modules.module_author.mid"
-        :view-str="video.modules.module_dynamic.major.archive.stat.play"
-        :danmaku-str="video.modules.module_dynamic.major.archive.stat.danmaku"
-        :capsule-text="video.modules.module_author.pub_time"
-        :bvid="video.modules.module_dynamic.major.archive.bvid"
+        v-for="moment in momentList"
+        :id="moment.modules.module_author.mid"
+        :key="moment.modules.module_author.mid"
+        :top-right-content="false"
+        :title="`${moment.modules.module_dynamic.major.pgc?.title}`"
+        :cover="`${moment.modules.module_dynamic.major.pgc?.cover}`"
+        :author="moment.modules.module_author.name"
+        :author-face="moment.modules.module_author.face"
+        :mid="moment.modules.module_author.mid"
+        :view-str="moment.modules.module_dynamic.major.pgc?.stat.play"
+        :danmaku-str="moment.modules.module_dynamic.major.pgc?.stat.danmaku"
+        :capsule-text="moment.modules.module_author.pub_time"
+        :epid="moment.modules.module_dynamic.major.pgc?.epid"
       />
 
       <!-- skeleton -->

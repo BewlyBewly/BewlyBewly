@@ -2,7 +2,7 @@
 import { getCSRF, removeHttpFromUrl } from '~/utils/main'
 import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils/dataFormatter'
 
-const props = defineProps<{
+interface Props {
   id: number
   duration?: number
   durationStr?: string
@@ -20,14 +20,27 @@ const props = defineProps<{
   capsuleText?: string
   bvid?: string
   aid?: number
+  epid?: number
   isFollowed?: boolean
   horizontal?: boolean
   tag?: string
   rank?: number
-}>()
+  topRightContent?: boolean
+}
+
+const props = withDefaults(defineProps<Props>(),
+  {
+    topRightContent: true,
+  },
+)
 
 const videoUrl = computed(() => {
-  return `https://www.bilibili.com/video/${props.bvid ?? `av${props.aid}`}`
+  if (props.bvid || props.aid)
+    return `https://www.bilibili.com/video/${props.bvid ?? `av${props.aid}`}`
+  else if (props.epid)
+    return `https://www.bilibili.com/bangumi/play/ep${props.epid}`
+  else
+    return ''
 })
 
 const isDislike = ref<boolean>(false)
@@ -197,6 +210,7 @@ function handelMouseLeave() {
           </div>
 
           <button
+            v-if="topRightContent"
             pos="absolute top-0 right-0" z="2"
             p="x-2 y-1" m="1"
             rounded="$bew-radius"
@@ -230,7 +244,7 @@ function handelMouseLeave() {
         <div
           :style="{
             width: horizontal ? '100%' : 'unset',
-            marginTop: horizontal ? '0' : '1rem'
+            marginTop: horizontal ? '0' : '1rem',
           }"
           flex="~"
         >
