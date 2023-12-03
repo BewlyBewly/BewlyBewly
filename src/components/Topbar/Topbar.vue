@@ -129,17 +129,12 @@ function handleScroll() {
     scrollTop.value = document.documentElement.scrollTop
   }
 
-  // Set a certain offset in pixels to prevent minor scrolling from triggering adjustments
-  // in the top bar visibility
-  const offset = 5
   if (settings.value.autoHideTopbar && !hovingTopbar.value && scrollTop.value !== 0) {
-    if (Math.abs(scrollTop.value - oldScrollTop.value) < offset) {
-      if (scrollTop.value > oldScrollTop.value)
-        toggleTopbarVisible(false)
+    if (scrollTop.value > oldScrollTop.value)
+      toggleTopbarVisible(false)
 
-      else
-        toggleTopbarVisible(true)
-    }
+    else
+      toggleTopbarVisible(true)
   }
 
   oldScrollTop.value = scrollTop.value
@@ -282,7 +277,7 @@ defineExpose({
           :style="{
             background: `linear-gradient(to bottom, ${settings.wallpaper
               || settings.useSearchPageModeOnHomePage && settings.searchPageWallpaper && settings.individuallySetSearchPageWallpaper
-              ? 'rgba(0,0,0,.6)' : 'var(--bew-bg)'}, transparent)`
+              ? 'rgba(0,0,0,.6)' : 'var(--bew-bg)'}, transparent)`,
           }"
         />
       </Transition>
