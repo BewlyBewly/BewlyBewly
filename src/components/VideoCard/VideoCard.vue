@@ -155,9 +155,8 @@ function handelMouseLeave() {
       :class="isDislike ? 'is-dislike' : ''"
       w="full" pos="absolute top-0 left-0"
       rounded="$bew-radius" duration-300 ease-in-out
-      hover:bg="$bew-theme-color-10" hover:shadow
+      hover:bg="$bew-fill-2" hover:ring="8 $bew-fill-2"
       :style="{ contentVisibility }"
-      style="--un-shadow: 0 0 0 8px var(--bew-theme-color-10);"
       @mouseenter="handleMouseEnter"
       @mouseleave="handelMouseLeave"
     >
@@ -270,8 +269,7 @@ function handelMouseLeave() {
             <div flex="~" justify="between" w="full" pos="relative">
               <h3
                 class="keep-two-lines"
-                text="lg overflow-ellipsis $bew-text-1" group-hover:text="$bew-theme-color"
-                transition="color 300 ease-in-out"
+                text="lg overflow-ellipsis $bew-text-1"
                 cursor="pointer"
               >
                 <a :href="videoUrl" target="_blank" :title="title">

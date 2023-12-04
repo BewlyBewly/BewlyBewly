@@ -24,9 +24,9 @@ defineProps<{
     }"
     gap-4
     class="group"
-    hover:bg="$bew-theme-color-10" hover:ring="8 $bew-theme-color-10"
+    hover:bg="$bew-fill-2" hover:ring="8 $bew-fill-2"
     transition="all ease-in-out 300"
-    rounded="$bew-radius"
+    rounded="$bew-radius" h-fit
   >
     <!-- Cover -->
     <a
@@ -131,8 +131,6 @@ defineProps<{
           target="_blank"
           class="keep-two-lines"
           :title="title"
-          group-hover:color="$bew-theme-color"
-          transition="all ease-in-out 300"
         >
           {{ title }}
         </a>
