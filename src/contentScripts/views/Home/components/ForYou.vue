@@ -172,6 +172,8 @@ function jumpToLoginPage() {
           :danmaku="video.stat.danmaku"
           :published-timestamp="video.pubdate"
           :bvid="video.bvid"
+          :cid="video.cid"
+          show-preview
         />
       </template>
       <template v-else>
@@ -189,6 +191,8 @@ function jumpToLoginPage() {
           :bvid="video.bvid"
           :view-str="video.cover_left_text_1"
           :danmaku-str="video.cover_left_text_2"
+          :cid="video.player_args ? video.player_args.cid : 0"
+          show-preview
         />
       </template>
 

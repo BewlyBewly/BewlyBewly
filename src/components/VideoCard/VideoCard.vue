@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { getCSRF, removeHttpFromUrl } from '~/utils/main'
 import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils/dataFormatter'
+import type { VideoPreviewResult } from '~/models/apiModels/video/videoPreview'
 
 interface Props {
   id: number
@@ -20,12 +21,14 @@ interface Props {
   capsuleText?: string
   bvid?: string
   aid?: number
+  cid?: number
   epid?: number
   isFollowed?: boolean
   horizontal?: boolean
   tag?: string
   rank?: number
   topRightContent?: boolean
+  showPreview?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(),
@@ -45,10 +48,27 @@ const videoUrl = computed(() => {
 
 const isDislike = ref<boolean>(false)
 const isInWatchLater = ref<boolean>(false)
+const isHover = ref<boolean>(false)
 // const dislikeReasonId = ref<number | null>(null)
 const showPopCtrl = ref<boolean>(false)
 const contentVisibility = ref<'auto' | 'visible'>('auto')
 const mouseLeaveTimeOut = ref()
+const previewVideoUrl = ref<string>('')
+
+watch(() => isHover.value, (newValue) => {
+  if (props.showPreview) {
+    if (newValue && !previewVideoUrl.value) {
+      browser.runtime.sendMessage({
+        contentScriptQuery: 'getVideoPreview',
+        bvid: props.bvid,
+        cid: props.cid,
+      }).then((res: VideoPreviewResult) => {
+        if (res.code === 0)
+          previewVideoUrl.value = res.data.durl[0].url
+      })
+    }
+  }
+})
 
 function gotoChannel(mid: number) {
   window.open(`//space.bilibili.com/${mid}`)
@@ -80,10 +100,12 @@ function toggleWatchLater() {
 }
 
 function handleMouseEnter() {
+  isHover.value = true
   contentVisibility.value = 'visible'
 }
 
 function handelMouseLeave() {
+  isHover.value = false
   clearTimeout(mouseLeaveTimeOut.value)
   mouseLeaveTimeOut.value = setTimeout(() => {
     contentVisibility.value = 'auto'
@@ -169,6 +191,17 @@ function handelMouseLeave() {
           duration-300 ease-in-out
           group-hover:z-2
         >
+          <Transition v-if="showPreview" name="fade">
+            <video
+              v-if="previewVideoUrl && isHover"
+              autoplay muted
+              pos="absolute top-0 left-0" w-full aspect-video rounded="$bew-radius"
+            >
+              <source :src="previewVideoUrl" type="video/mp4">
+
+            </video>
+          </Transition>
+          <!-- <video  /> -->
           <!-- style="--un-shadow: 0 0 0 4px var(--bew-theme-color)" -->
           <!-- group-hover:transform="translate--4px" -->
           <!-- Ranking Number -->

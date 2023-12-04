@@ -99,6 +99,15 @@ function handleMessage(message: any) {
       .then(data => data)
       .catch(error => console.error(error))
   }
+  // https://socialsisteryi.github.io/bilibili-API-collect/docs/video/videostream_url.html#%E8%8E%B7%E5%8F%96%E8%A7%86%E9%A2%91%E6%B5%81%E5%9C%B0%E5%9D%80-web%E7%AB%AF
+  else if (message.contentScriptQuery === 'getVideoPreview') {
+    const url = `https://api.bilibili.com/x/player/wbi/playurl?qn=${message.qn ?? 32}&fnver=${message.fnver ?? 0}&fnval=${message.fnval ?? 1}
+      &bvid=${message.bvid}&cid=${message.cid}&voice_balance=1&gaia_source=pre-load&web_location=1315873&from_client=BROWSER`
+    return fetch(url)
+      .then(response => response.json())
+      .then(data => data)
+      .catch(error => console.error(error))
+  }
 }
 
 function handleConnect() {
