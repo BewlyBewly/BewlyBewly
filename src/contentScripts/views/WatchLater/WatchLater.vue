@@ -108,7 +108,7 @@ function jumpToLoginPage() {
   <div v-if="getCSRF()" flex="~ col md:row lg:row" gap-4>
     <main w="full md:60% lg:70% xl:75%" order="2 md:1 lg:1" mb-6>
       <h3 text="3xl $bew-text-1" font-bold mb-6>
-        {{ t('watch_later.title') }} ({{ watchLaterList.length }}/100)
+        {{ t('watch_later.title') }} ({{ watchLaterList.length }})
       </h3>
       <Empty v-if="watchLaterList.length === 0 && !isLoading" />
       <template v-else>
@@ -292,7 +292,7 @@ function jumpToLoginPage() {
         </picture>
 
         <h3 text="3xl white" fw-600 style="text-shadow: 0 0 12px rgba(0,0,0,.3)">
-          {{ t('watch_later.title') }} ({{ watchLaterList.length }}/100)
+          {{ t('watch_later.title') }} ({{ watchLaterList.length }})
         </h3>
         <p v-if="watchLaterList.length > 0" flex="~ col" gap-4>
           <Button
