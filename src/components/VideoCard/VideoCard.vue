@@ -2,6 +2,7 @@
 import { getCSRF, removeHttpFromUrl } from '~/utils/main'
 import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils/dataFormatter'
 import type { VideoPreviewResult } from '~/models/apiModels/video/videoPreview'
+import { settings } from '~/logic'
 
 interface Props {
   id: number
@@ -196,7 +197,8 @@ function handelMouseLeave() {
           <Transition v-if="showPreview" name="fade">
             <video
               v-if="previewVideoUrl && isHover"
-              autoplay muted controls
+              autoplay muted
+              :controls="settings.enableVideoCtrlBarOnVideoCard"
               pos="absolute top-0 left-0" w-full aspect-video rounded="$bew-radius" bg-black
             >
               <source :src="previewVideoUrl" type="video/mp4">

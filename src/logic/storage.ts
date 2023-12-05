@@ -10,6 +10,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   startupPage: AppPage.Home,
   enableHorizontalScrolling: false,
   openLinkInCurrentTab: false,
+  enableVideoCtrlBarOnVideoCard: false,
   isShowTopbar: true,
   autoHideTopbar: false,
   dockPosition: 'right',

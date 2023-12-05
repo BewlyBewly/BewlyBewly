@@ -5,6 +5,7 @@ export interface Settings {
   startupPage: AppPage
   enableHorizontalScrolling: boolean
   openLinkInCurrentTab: boolean
+  enableVideoCtrlBarOnVideoCard: boolean
   isShowTopbar: boolean
   autoHideTopbar: boolean
   dockPosition: 'left' | 'right' | 'bottom'
