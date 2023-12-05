@@ -191,11 +191,12 @@ function handelMouseLeave() {
           duration-300 ease-in-out
           group-hover:z-2
         >
+          <!-- Video preview -->
           <Transition v-if="showPreview" name="fade">
             <video
               v-if="previewVideoUrl && isHover"
               autoplay muted
-              pos="absolute top-0 left-0" w-full aspect-video rounded="$bew-radius"
+              pos="absolute top-0 left-0" w-full aspect-video rounded="$bew-radius" bg-black
             >
               <source :src="previewVideoUrl" type="video/mp4">
 
