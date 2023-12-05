@@ -21,6 +21,7 @@ interface Props {
   capsuleText?: string
   bvid?: string
   aid?: number
+  /** If you want to show preview video, you should set the cid value */
   cid?: number
   epid?: number
   isFollowed?: boolean
@@ -195,7 +196,7 @@ function handelMouseLeave() {
           <Transition v-if="showPreview" name="fade">
             <video
               v-if="previewVideoUrl && isHover"
-              autoplay muted
+              autoplay muted controls
               pos="absolute top-0 left-0" w-full aspect-video rounded="$bew-radius" bg-black
             >
               <source :src="previewVideoUrl" type="video/mp4">

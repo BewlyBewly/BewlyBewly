@@ -77,6 +77,8 @@ async function getTrendingVideos() {
         :published-timestamp="video.pubdate"
         :bvid="video.bvid"
         :tag="video.rcmd_reason.content"
+        :cid="video.cid"
+        show-preview
         horizontal
         w-full
       />

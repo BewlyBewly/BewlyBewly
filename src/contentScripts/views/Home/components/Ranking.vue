@@ -145,6 +145,8 @@ function getRankingPgc() {
           :published-timestamp="video.pubdate"
           :bvid="video.bvid"
           :rank="index + 1"
+          :cid="video.cid"
+          show-preview
           horizontal
           w-full
         />
