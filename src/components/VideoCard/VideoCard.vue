@@ -189,6 +189,7 @@ function handelMouseLeave() {
         <!-- Cover -->
         <div
           :style="{ width: horizontal ? '300px' : '100%' }"
+          class="group/cover"
           shrink-0
           w="full" h-fit relative bg="$bew-fill-4" rounded="$bew-radius" cursor-pointer
           duration-300 ease-in-out
@@ -211,7 +212,7 @@ function handelMouseLeave() {
           <!-- style="--un-shadow: 0 0 0 4px var(--bew-theme-color)" -->
           <!-- group-hover:transform="translate--4px" -->
           <!-- Ranking Number -->
-          <div v-if="rank" absolute p-2>
+          <div v-if="rank" absolute p-2 group-hover:opacity-0 duration-300>
             <div
               v-if="Number(rank) <= 3"
               bg="$bew-theme-color" text-center lh-30px h-30px w-30px text-white rounded="1/2" shadow="$bew-shadow-1"
@@ -239,6 +240,8 @@ function handelMouseLeave() {
             rounded="$bew-radius"
             text="!white xs"
             bg="black opacity-60"
+            group-hover:opacity-0
+            duration-300
           >
             {{ duration ? calcCurrentTime(duration) : durationStr }}
           </div>
@@ -253,8 +256,9 @@ function handelMouseLeave() {
             p="x-2 y-1" m="1"
             rounded="$bew-radius"
             text="!white xl"
-            bg="black opacity-60" opacity-0 group-hover:opacity-100
-            transform="scale-70 group-hover:scale-100"
+            bg="black opacity-60"
+            class="opacity-0 group-hover/cover:opacity-100"
+            transform="scale-70 group-hover/cover:scale-100"
             duration-300
             @click.stop="toggleWatchLater"
           >
