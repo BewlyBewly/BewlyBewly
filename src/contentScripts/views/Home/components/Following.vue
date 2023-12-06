@@ -107,6 +107,7 @@ function jumpToLoginPage() {
         :danmaku-str="video.modules.module_dynamic.major.archive?.stat.danmaku"
         :capsule-text="video.modules.module_author.pub_time"
         :bvid="video.modules.module_dynamic.major.archive?.bvid"
+        show-preview
       />
 
       <!-- skeleton -->

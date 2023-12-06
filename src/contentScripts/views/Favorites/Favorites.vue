@@ -217,9 +217,6 @@ function handleUnfavorite(favoriteResource: FavoriteResource) {
                   rounded="$bew-radius"
                   text="!white xl"
                   bg="black opacity-60 hover:$bew-error-color-80"
-                  opacity-0 group-hover:opacity-100
-                  transform="scale-70 group-hover:scale-100"
-                  duration-300
                   @click.stop="handleUnfavorite(item)"
                 >
                   <Tooltip :content="$t('favorites.unfavorite')" placement="bottom" type="dark">
