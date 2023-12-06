@@ -104,7 +104,8 @@
     .send-btn.active,
     .tab-list .tab-item.active::after,
     .content .btnrow .btn.save,
-    .send-button {
+    .send-button,
+    .notify-number {
       background-color: var(--bew-theme-color);
     }
 
