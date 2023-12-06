@@ -59,7 +59,7 @@ const previewVideoUrl = ref<string>('')
 
 watch(() => isHover.value, (newValue) => {
   if (props.showPreview) {
-    if (newValue && !previewVideoUrl.value) {
+    if (newValue && !previewVideoUrl.value && props.cid) {
       browser.runtime.sendMessage({
         contentScriptQuery: 'getVideoPreview',
         bvid: props.bvid,
@@ -249,7 +249,12 @@ function handelMouseLeave() {
             {{ duration ? calcCurrentTime(duration) : durationStr }}
           </div>
 
-          <div pos="absolute top-0 left-0" z-2>
+          <div
+            class="opacity-0 group-hover/cover:opacity-100"
+            transform="scale-70 group-hover/cover:scale-100"
+            duration-300
+            pos="absolute top-0 left-0" z-2
+          >
             <slot name="coverTopLeft" />
           </div>
 

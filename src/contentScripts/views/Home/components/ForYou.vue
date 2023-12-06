@@ -184,9 +184,9 @@ function jumpToLoginPage() {
           :duration-str="video.cover_right_text"
           :title="`${video.title}`"
           :cover="`${video.cover}`"
-          :author="video.mask && 'avatar' in video.mask ? video.mask.avatar.text : ''"
-          :author-face="video.mask && 'avatar' in video.mask ? video.mask.avatar.cover : ''"
-          :mid="video.mask && video.mask.avatar ? video.mask.avatar.up_id : 0"
+          :author="'mask' in video && video.mask && 'avatar' in video.mask ? video.mask.avatar.text : ''"
+          :author-face="'mask' in video && video.mask && 'avatar' in video.mask ? video.mask.avatar.cover : ''"
+          :mid="'mask' in video && video.mask && 'avatar' in video.mask && video.mask.avatar ? video.mask.avatar.up_id : 0"
           :capsule-text="video.desc ? video.desc.split('·')[1] : ''"
           :bvid="video.bvid"
           :view-str="video.cover_left_text_1"
@@ -210,5 +210,3 @@ function jumpToLoginPage() {
 
 <style lang="scss" scoped>
 </style>
-~/models/video/forYou~/models/video/appForYouResult
-~/models/apiModels/video/appForYouResult~/models/apiModels/video/forYouResult
