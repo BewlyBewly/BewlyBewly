@@ -190,7 +190,8 @@ function setupCommentEmote(content: string, emote: any) {
       </section>
       <section bg="$bew-content-solid-1" rounded="$bew-radius" p-4>
         <section
-          flex justify-between bg="$bew-fill-1" rounded="$bew-radius" p-2 mb-4 relative z-1
+          flex justify-between bg="$bew-fill-1" rounded="$bew-radius" p-2
+          mb-4 relative z-1
           overflow-hidden
         >
           <img

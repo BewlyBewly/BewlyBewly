@@ -1,13 +1,11 @@
 <script lang="ts" setup>
 import type { Ref } from 'vue'
-import { useI18n } from 'vue-i18n'
 import QRCodeVue from 'qrcode.vue'
 import { useToast } from 'vue-toastification'
 import SearchPage from './SearchPage.vue'
 import { getTVLoginQRCode, pollTVLoginQRCode, revokeAccessKey } from '~/utils/authProvider'
 import { accessKey, settings } from '~/logic'
 
-const { t } = useI18n()
 const toast = useToast()
 
 const showSearchPageModeSharedSettings = ref<boolean>(false)
@@ -143,7 +141,10 @@ function handleCloseSearchPageModeSharedSettings() {
           <Button v-if="!accessKey" type="primary" center block @click="handleAuthorize">
             {{ $t('settings.btn.authorize') }}...
           </Button>
-          <Button v-else type="secondary" center block style="--b-button-text-color: var(--bew-error-color)" @click="handleRevoke">
+          <Button
+            v-else type="secondary" center block style="--b-button-text-color: var(--bew-error-color)"
+            @click="handleRevoke"
+          >
             {{ $t('settings.btn.revoke') }}
           </Button>
         </div>

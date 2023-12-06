@@ -123,4 +123,3 @@ function jumpToLoginPage() {
 
 <style lang="scss" scoped>
 </style>
-~/models/apiModels/moment/momentResult

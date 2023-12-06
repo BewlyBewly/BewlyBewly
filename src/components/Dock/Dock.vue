@@ -79,7 +79,8 @@ function toggleDockHide(hide: boolean) {
       bottom: settings.dockPosition === 'bottom',
       hide: hideDock,
     }"
-    pos="absolute top-0" flex="~ col" h-full justify-center z-1 pointer-events-none
+    pos="absolute top-0" flex="~ col" h-full justify-center z-1
+    pointer-events-none
     @mouseenter="toggleDockHide(false)"
     @mouseleave="toggleDockHide(true)"
   >

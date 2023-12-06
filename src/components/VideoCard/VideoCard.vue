@@ -191,7 +191,8 @@ function handelMouseLeave() {
           :style="{ width: horizontal ? '300px' : '100%' }"
           class="group/cover"
           shrink-0
-          w="full" h-fit relative bg="$bew-fill-4" rounded="$bew-radius" cursor-pointer
+          w="full" h-fit relative bg="$bew-fill-4" rounded="$bew-radius"
+          cursor-pointer
           duration-300 ease-in-out
           group-hover:z-2
         >
@@ -215,7 +216,8 @@ function handelMouseLeave() {
           <div v-if="rank" absolute p-2 group-hover:opacity-0 duration-300>
             <div
               v-if="Number(rank) <= 3"
-              bg="$bew-theme-color" text-center lh-30px h-30px w-30px text-white rounded="1/2" shadow="$bew-shadow-1"
+              bg="$bew-theme-color" text-center lh-30px h-30px w-30px
+              text-white rounded="1/2" shadow="$bew-shadow-1"
               border="1 $bew-theme-color"
               text="2xl" fw-bold
             >
@@ -223,7 +225,8 @@ function handelMouseLeave() {
             </div>
             <div
               v-else
-              bg="$bew-elevated-solid-1" text-center lh-30px h-30px w-30px rounded="1/2" shadow="$bew-shadow-1"
+              bg="$bew-elevated-solid-1" text-center lh-30px h-30px w-30px
+              rounded="1/2" shadow="$bew-shadow-1"
               border="1 $bew-border-color"
             >
               {{ rank }}
@@ -294,7 +297,8 @@ function handelMouseLeave() {
           <div :style="{ display: horizontal ? 'none' : 'flex' }">
             <a
               v-if="authorFace"
-              m="r-4" w="40px" h="40px" rounded="1/2" overflow="hidden" object="center cover"
+              m="r-4" w="40px" h="40px" rounded="1/2" overflow="hidden"
+              object="center cover"
               bg="$bew-fill-4" cursor="pointer"
               style="--un-shadow: 0 0 0 2px var(--bew-theme-color)"
               :href="`//space.bilibili.com/${mid}`" target="_blank"
@@ -430,11 +434,17 @@ function handelMouseLeave() {
               </template>
 
               <!-- Tag -->
-              <span v-if="tag" text="sm $bew-theme-color" p="x-2 y-1" rounded="$bew-radius" bg="$bew-theme-color-20" w-fit m="t-2 r-2">
+              <span
+                v-if="tag" text="sm $bew-theme-color" p="x-2 y-1" rounded="$bew-radius" bg="$bew-theme-color-20"
+                w-fit m="t-2 r-2"
+              >
                 {{ tag }}
               </span>
               <!-- Capsule -->
-              <span v-if="publishedTimestamp || capsuleText" text="$bew-text-3 sm" inline-block mt-2 p="x-2 y-1" bg="$bew-fill-1" rounded-4>
+              <span
+                v-if="publishedTimestamp || capsuleText" text="$bew-text-3 sm" inline-block mt-2 p="x-2 y-1"
+                bg="$bew-fill-1" rounded-4
+              >
                 {{ publishedTimestamp ? calcTimeSince(publishedTimestamp * 1000) : capsuleText }}
               </span>
             </div>
@@ -446,19 +456,16 @@ function handelMouseLeave() {
     <!-- skeleton -->
     <template v-if="!horizontal">
       <div
-        block
-        mb-10 pointer-events-none select-none invisible
+        block mb-10 pointer-events-none select-none invisible
       >
         <!-- Cover -->
         <div w-full shrink-0 aspect-video h-fit rounded="$bew-radius" />
         <!-- Other Information -->
         <div
-          mt-4
-          flex="~ gap-4"
+          mt-4 flex="~ gap-4"
         >
           <div
-            block
-            w="40px" h="40px" rounded="1/2" shrink-0
+            block w="40px" h="40px" rounded="1/2" shrink-0
           />
           <div w-full>
             <div grid gap-2>
@@ -487,8 +494,7 @@ function handelMouseLeave() {
         <div w-300px shrink-0 aspect-video h-fit rounded="$bew-radius" />
         <!-- Other Information -->
         <div
-          w-full
-          flex="~ gap-4"
+          w-full flex="~ gap-4"
         >
           <div w-full>
             <div grid gap-2>

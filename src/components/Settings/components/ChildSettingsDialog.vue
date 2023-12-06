@@ -14,13 +14,18 @@ function handleClose() {
 
 <template>
   <div class="child-settings-dialog">
-    <div pos="fixed top-0 left-0" w-full h-full bg="black opacity-20 dark:opacity-40" rounded="$bew-radius" z-1 @click="handleClose" />
+    <div
+      pos="fixed top-0 left-0" w-full h-full bg="black opacity-20 dark:opacity-40" rounded="$bew-radius"
+      z-1 @click="handleClose"
+    />
     <div
       pos="fixed top-1/2 left-1/2" bg="$bew-elevated-solid-1" rounded="$bew-radius"
-      transform="translate--1/2" z-2 shadow="$bew-shadow-3" overflow="x-hidden y-overlay" w="$b-dialog-width" h="$b-dialog-height"
+      transform="translate--1/2" z-2 shadow="$bew-shadow-3" overflow="x-hidden y-overlay" w="$b-dialog-width"
+      h="$b-dialog-height"
     >
       <header
-        pos="sticky top-0 left-0" w-full h-80px px-8 flex items-center justify-between
+        pos="sticky top-0 left-0" w-full h-80px px-8 flex
+        items-center justify-between
         rounded="t-$bew-radius" z-1
         style="
           background: linear-gradient(var(--bew-elevated-solid-1), transparent);
@@ -46,7 +51,8 @@ function handleClose() {
         </div>
 
         <div
-          text-2xl leading-0 bg="$bew-fill-1 hover:$bew-theme-color-30" w="32px" h="32px" ml-auto p="1" rounded-8 cursor="pointer" backdrop-glass
+          text-2xl leading-0 bg="$bew-fill-1 hover:$bew-theme-color-30" w="32px" h="32px"
+          ml-auto p="1" rounded-8 cursor="pointer" backdrop-glass
           hover:ring="2 $bew-theme-color" hover:text="$bew-theme-color" duration-300
           @click="handleClose"
         >

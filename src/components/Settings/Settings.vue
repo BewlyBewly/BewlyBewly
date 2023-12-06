@@ -110,7 +110,7 @@ function setCurrentTitle() {
       <aside
         class="group" shrink-0 p="x-4" pos="absolute left--42px" z-2
         :style="{
-          pointerEvents: preventCloseSettings ? 'none' : 'unset'
+          pointerEvents: preventCloseSettings ? 'none' : 'unset',
         }"
       >
         <ul
@@ -174,7 +174,8 @@ function setCurrentTitle() {
               {{ title }}
             </div>
             <div
-              text-2xl leading-0 bg="$bew-fill-1 hover:$bew-theme-color-30" w="32px" h="32px" p="1" rounded-8 cursor="pointer" backdrop-glass
+              text-2xl leading-0 bg="$bew-fill-1 hover:$bew-theme-color-30" w="32px" h="32px"
+              p="1" rounded-8 cursor="pointer" backdrop-glass
               hover:ring="2 $bew-theme-color" hover:text="$bew-theme-color" duration-300
               @click="handleClose"
             >

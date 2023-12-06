@@ -25,7 +25,10 @@ function toggleDark() {
 </script>
 
 <template>
-  <div pos="fixed top-0 right-6px" h-full flex items-center z-10 pointer-events-none>
+  <div
+    pos="fixed top-0 right-6px" h-full flex items-center z-10
+    pointer-events-none
+  >
     <div flex="~ gap-2 col" pointer-events-auto>
       <Tooltip :content="currentAppColorScheme === 'dark' ? $t('dock.dark_mode') : $t('dock.light_mode')" placement="left">
         <Button
@@ -49,7 +52,10 @@ function toggleDark() {
         </Button>
       </Tooltip>
       <Tooltip :content="$t('dock.settings')" placement="left">
-        <Button class="ctrl-btn" center size="small" round backdrop-glass @click="emit('settings-visibility-change')">
+        <Button
+          class="ctrl-btn" center size="small" round backdrop-glass
+          @click="emit('settings-visibility-change')"
+        >
           <mingcute:settings-3-line />
         </Button>
       </Tooltip>

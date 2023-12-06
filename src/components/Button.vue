@@ -39,7 +39,7 @@ function handleClick(evt: MouseEvent) {
       'color': textColor,
       '--b-button-radius': round ? '50px' : '',
       'width': block ? '100%' : 'var(--b-button-width)',
-      'justifyContent': center ? 'center' : ''
+      'justifyContent': center ? 'center' : '',
     }"
     @click="handleClick"
   >

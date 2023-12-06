@@ -170,7 +170,8 @@ function handleUnfavorite(favoriteResource: FavoriteResource) {
         {{ selectedCategory?.title }}
       </h3> -->
       <div
-        fixed z-10 absolute p-2 flex="~ gap-2" items-center
+        fixed z-10 absolute p-2 flex="~ gap-2"
+        items-center
         bg="$bew-elevated-solid-1" rounded="$bew-radius" shadow="$bew-shadow-2" mt--2 transition="all 300 ease-in-out"
         :class="{ hide: shouldMoveCtrlBarUp }"
       >
@@ -242,11 +243,13 @@ function handleUnfavorite(favoriteResource: FavoriteResource) {
 
     <aside relative w="full md:40% lg:30% xl:25%" display="md:block none" order="1 md:2 lg:2">
       <div
-        pos="sticky top-120px" flex="~ col gap-4" justify-start my-10 w-full h="auto md:[calc(100vh-160px)]" p-6
+        pos="sticky top-120px" flex="~ col gap-4" justify-start my-10 w-full
+        h="auto md:[calc(100vh-160px)]" p-6
         rounded="$bew-radius" overflow-hidden bg="$bew-fill-3"
       >
         <div
-          pos="absolute top-0 left-0" w-full h-full bg-cover bg-center z--1
+          pos="absolute top-0 left-0" w-full h-full bg-cover bg-center
+          z--1
         >
           <div absolute w-full h-full style="backdrop-filter: blur(60px) saturate(180%)" bg="$bew-fill-4" />
           <img

@@ -109,7 +109,8 @@ function getRankingPgc() {
 <template>
   <div flex="~ gap-40px">
     <aside
-      pos="sticky top-150px" h="[calc(100vh-140px)]" w-200px shrink-0 duration-300 ease-in-out
+      pos="sticky top-150px" h="[calc(100vh-140px)]" w-200px shrink-0 duration-300
+      ease-in-out
       :class="{ hide: shouldMoveAsideUp }"
     >
       <OverlayScrollbarsComponent h-inherit p-20px m--20px defer>

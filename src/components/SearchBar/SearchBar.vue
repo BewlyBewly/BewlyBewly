@@ -145,7 +145,8 @@ function handleKeyDown() {
 
     <div
       v-if="blurredOnFocus"
-      pos="fixed top-0 left-0" w-full h-full duration-500 pointer-events-none ease-out
+      pos="fixed top-0 left-0" w-full h-full duration-500 pointer-events-none
+      ease-out
       :style="{ backdropFilter: isFocus ? 'blur(15px)' : 'blur(0)' }"
     />
 

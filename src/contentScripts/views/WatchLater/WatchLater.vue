@@ -267,11 +267,13 @@ function jumpToLoginPage() {
 
     <aside relative w="full md:40% lg:30% xl:25%" order="1 md:2 lg:2">
       <div
-        pos="sticky top-120px" flex="~ col gap-4" justify-start my-10 w-full h="auto md:[calc(100vh-160px)]" p-6
+        pos="sticky top-120px" flex="~ col gap-4" justify-start my-10 w-full
+        h="auto md:[calc(100vh-160px)]" p-6
         rounded="$bew-radius" overflow-hidden bg="$bew-fill-3"
       >
         <div
-          pos="absolute top-0 left-0" w-full h-full bg-cover bg-center z--1
+          pos="absolute top-0 left-0" w-full h-full bg-cover bg-center
+          z--1
         >
           <div absolute w-full h-full style="backdrop-filter: blur(60px) saturate(180%)" bg="$bew-fill-4" />
           <img

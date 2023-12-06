@@ -40,7 +40,8 @@ onMounted(() => {
   <label cursor-pointer flex items-center gap-3 w="$b-slider-width">
     <input
       ref="rangeRef"
-      v-model="modelValue" type="range" :min="min" :max="max" class="slider" appearance-none outline-none bg="$bew-fill-1" rounded="$b-slider-height"
+      v-model="modelValue" type="range" :min="min" :max="max" class="slider"
+      appearance-none outline-none bg="$bew-fill-1" rounded="$b-slider-height"
       border="size-$b-border-width color-$bew-border-color" w="$b-slider-width" h="$b-slider-height"
     >
     <span>{{ label }}</span>

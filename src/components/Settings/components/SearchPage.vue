@@ -56,7 +56,8 @@ function changeWallpaper(url: string) {
       <SettingsItem :title="$t('settings.logo_color')">
         <div w-full flex rounded="$bew-radius" bg="$bew-fill-1" p-1>
           <div
-            flex="1 ~" items-center justify-center py-1 cursor-pointer text-center rounded="$bew-radius"
+            flex="1 ~" items-center justify-center py-1 cursor-pointer
+            text-center rounded="$bew-radius"
             :style="{
               background: settings.searchPageLogoColor === 'themeColor' || !settings.searchPageLogoColor ? 'var(--bew-theme-color)' : '',
               color: settings.searchPageLogoColor === 'themeColor' || !settings.searchPageLogoColor ? 'white' : '',
@@ -66,7 +67,8 @@ function changeWallpaper(url: string) {
             {{ $t('settings.logo_color_opt.theme_color') }}
           </div>
           <div
-            flex="1 ~" items-center justify-center py-1 cursor-pointer text-center rounded="$bew-radius"
+            flex="1 ~" items-center justify-center py-1 cursor-pointer
+            text-center rounded="$bew-radius"
             :style="{
               background: settings.searchPageLogoColor === 'white' ? 'var(--bew-theme-color)' : '',
               color: settings.searchPageLogoColor === 'white' ? 'white' : '',
@@ -209,7 +211,10 @@ function changeWallpaper(url: string) {
               un-border="4 transparent" cursor-pointer shrink-0
               w="xl:1/4 lg:1/3 md:1/2"
             >
-              <img v-if="settings.searchPageWallpaper" :src="settings.searchPageWallpaper" alt="" w-full h-full object-cover onerror="this.style.display='none'; this.onerror=null;">
+              <img
+                v-if="settings.searchPageWallpaper" :src="settings.searchPageWallpaper" alt="" w-full h-full
+                object-cover onerror="this.style.display='none'; this.onerror=null;"
+              >
             </picture>
             <div>
               <Input v-model="settings.searchPageWallpaper" w-full />

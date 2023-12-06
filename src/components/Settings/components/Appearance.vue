@@ -88,7 +88,8 @@ function changeWallpaper(url: string) {
         <div flex="~ gap-2 wrap" justify-end>
           <div
             v-for="color in themeColorOptions" :key="color"
-            w-20px h-20px rounded-8 cursor-pointer transition duration-300 box-border
+            w-20px h-20px rounded-8 cursor-pointer transition
+            duration-300 box-border
             :style="{
               background: color,
               transform: color === settings.themeColor ? 'scale(1.3)' : 'scale(1)',
@@ -101,7 +102,8 @@ function changeWallpaper(url: string) {
       </SettingsItem>
       <SettingsItem :title="$t('settings.follow_bilibili_evolved_color')" :desc="$t('settings.follow_bilibili_evolved_color_desc')">
         <div
-          w-20px h-20px rounded-8 cursor-pointer transition duration-300 box-border
+          w-20px h-20px rounded-8 cursor-pointer transition
+          duration-300 box-border
           :style="{
             background: bilibiliEvolvedThemeColor,
             transform: bilibiliEvolvedThemeColor === settings.themeColor ? 'scale(1.3)' : 'scale(1)',
@@ -172,7 +174,10 @@ function changeWallpaper(url: string) {
             un-border="4 transparent" cursor-pointer shrink-0
             w="xl:1/4 lg:1/3 md:1/2"
           >
-            <img v-if="settings.wallpaper" :src="settings.wallpaper" alt="" w-full h-full object-cover onerror="this.style.display='none'; this.onerror=null;">
+            <img
+              v-if="settings.wallpaper" :src="settings.wallpaper" alt="" w-full h-full
+              object-cover onerror="this.style.display='none'; this.onerror=null;"
+            >
           </picture>
           <div>
             <Input v-model="settings.wallpaper" w-full />

@@ -41,7 +41,8 @@ async function logout() {
     <div id="base-info">
       {{ userInfo.uname ? userInfo.uname : '-' }}
       <div
-        flex items-center bg="$bew-theme-color" p="x-3 y-1" ml-2 text="white base" rounded="$bew-radius"
+        flex items-center bg="$bew-theme-color" p="x-3 y-1" ml-2
+        text="white base" rounded="$bew-radius"
         leading-none
       >
         <span>{{ userInfo.level_info?.current_level ? userInfo.level_info.current_level : '0' }}</span>

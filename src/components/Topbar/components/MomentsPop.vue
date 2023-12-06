@@ -166,7 +166,6 @@ function getTopbarLiveMoments(page: number) {
         if (moments.length !== 0 && res.data.list.length < 10) {
           isLoading.value = false
           noMoreContent.value = true
-          console.log('no more content')
 
           return
         }

@@ -98,7 +98,8 @@ onUnmounted(() => {
         <transition name="fade">
           <div
             v-if="(!settings.individuallySetSearchPageWallpaper && settings.enableWallpaperMasking) || (settings.searchPageEnableWallpaperMasking)"
-            pos="relative left-0 top-0" w-full h-inherit pointer-events-none duration-300 z-1
+            pos="relative left-0 top-0" w-full h-inherit pointer-events-none duration-300
+            z-1
             :style="{
               backdropFilter: `blur(${settings.individuallySetSearchPageWallpaper ? settings.searchPageWallpaperBlurIntensity : settings.wallpaperBlurIntensity}px)`,
             }"
@@ -139,7 +140,8 @@ onUnmounted(() => {
       </Transition>
 
       <header
-        pos="sticky top-80px" w-fit z-10 mb-9 duration-300 ease-in-out
+        pos="sticky top-80px" w-fit z-10 mb-9 duration-300
+        ease-in-out
         :class="{ hide: shouldMoveTabsUp }"
       >
         <ul flex="~ items-center gap-3">
