@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 import type { UserInfo, UserStat } from '../types'
 import { revokeAccessKey } from '~/utils/authProvider'
 import { getCSRF, getUserID } from '~/utils/main'
@@ -8,8 +9,21 @@ defineProps<{
   userInfo: UserInfo
 }>()
 
+const { t } = useI18n()
+
 const mid = computed(() => {
   return getUserID()
+})
+
+const otherLinks = computed((): { name: string; url: string }[] => {
+  return [
+    { name: t('topbar.user_dropdown.accout_settings'), url: 'https://account.bilibili.com/account/home' },
+    { name: t('topbar.user_dropdown.uploads_manager'), url: 'https://member.bilibili.com/v2#/upload-manager/article' },
+    { name: t('topbar.user_dropdown.b_coins_wallet'), url: 'https://pay.bilibili.com/' },
+    { name: t('topbar.user_dropdown.orders'), url: 'https://show.bilibili.com/orderlist' },
+    { name: t('topbar.user_dropdown.my_stream_info'), url: 'https://link.bilibili.com/p/center/index' },
+    { name: t('topbar.user_dropdown.my_courses'), url: 'https://www.bilibili.com/cheese/mine/list' },
+  ]
 })
 
 const userStat = reactive<UserStat>({} as UserStat)
@@ -105,31 +119,8 @@ async function logout() {
       </a>
     </div>
     <div id="other-link">
-      <a href="https://account.bilibili.com/account/home" target="_blank">
-        {{ $t('topbar.user_dropdown.accout_settings') }}
-        <tabler:arrow-right />
-      </a>
-      <a
-        href="https://member.bilibili.com/v2#/upload-manager/article"
-        target="_blank"
-      >
-        {{ $t('topbar.user_dropdown.uploads_manager') }}
-        <tabler:arrow-right />
-      </a>
-      <a href="https://pay.bilibili.com/" target="_blank">
-        {{ $t('topbar.user_dropdown.b_coins_wallet') }}
-        <tabler:arrow-right />
-      </a>
-      <a href="https://show.bilibili.com/orderlist" target="_blank">
-        {{ $t('topbar.user_dropdown.orders') }}
-        <tabler:arrow-right />
-      </a>
-      <a href="https://link.bilibili.com/p/center/index" target="_blank">
-        {{ $t('topbar.user_dropdown.my_stream_info') }}
-        <tabler:arrow-right />
-      </a>
-      <a href="https://www.bilibili.com/cheese/mine/list" target="_blank">
-        {{ $t('topbar.user_dropdown.my_courses') }}
+      <a v-for="item in otherLinks" :key="item.url" :href="item.url" target="_blank">
+        {{ item.name }}
         <tabler:arrow-right />
       </a>
       <div id="logout" @click="logout()">
