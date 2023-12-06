@@ -1,74 +1,72 @@
-<script lang="ts">
-export default defineComponent({
-  data() {
-    return {
-      list: [
-        {
-          name: this.$t('topbar.noti_dropdown.replys'),
-          url: 'https://message.bilibili.com/#/reply',
-          unreadCount: 0,
-        },
-        {
-          name: this.$t('topbar.noti_dropdown.mentions'),
-          url: 'https://message.bilibili.com/#/at',
-          unreadCount: 0,
-        },
-        {
-          name: this.$t('topbar.noti_dropdown.likes'),
-          url: 'https://message.bilibili.com/#/love',
-          unreadCount: 0,
-        },
-        {
-          name: this.$t('topbar.noti_dropdown.messages'),
-          url: 'https://message.bilibili.com/#/system',
-          unreadCount: 0,
-        },
-        {
-          name: this.$t('topbar.noti_dropdown.chats'),
-          url: 'https://message.bilibili.com/#/whisper',
-          unreadCount: 0,
-        },
-      ],
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 
-    }
-  },
-  mounted() {
-    this.getUnreadMessageCount()
-  },
-  methods: {
-    getUnreadMessageCount() {
-      browser.runtime
-        .sendMessage({
-          contentScriptQuery: 'getUnreadMsg',
-        }).then((res) => {
-          if (res.code === 0) {
-            const resData = res.data
-            this.list[0].unreadCount = resData.reply
-            this.list[1].unreadCount = resData.at
-            this.list[2].unreadCount = resData.like
-            this.list[3].unreadCount = resData.sys_msg
-          }
-        }).catch(() => {
-          this.list[0].unreadCount = 0
-          this.list[1].unreadCount = 0
-          this.list[2].unreadCount = 0
-          this.list[3].unreadCount = 0
-        })
+const { t } = useI18n()
 
-      browser.runtime
-        .sendMessage({
-          contentScriptQuery: 'getUnreadDm',
-        }).then((res) => {
-          if (res.code === 0) {
-            const resData = res.data
-            this.list[4].unreadCount = resData.follow_unread
-          }
-        }).catch(() => {
-          this.list[4].unreadCount = 0
-        })
-    },
+const list = reactive([
+  {
+    name: t('topbar.noti_dropdown.replys'),
+    url: 'https://message.bilibili.com/#/reply',
+    unreadCount: 0,
   },
+  {
+    name: t('topbar.noti_dropdown.mentions'),
+    url: 'https://message.bilibili.com/#/at',
+    unreadCount: 0,
+  },
+  {
+    name: t('topbar.noti_dropdown.likes'),
+    url: 'https://message.bilibili.com/#/love',
+    unreadCount: 0,
+  },
+  {
+    name: t('topbar.noti_dropdown.messages'),
+    url: 'https://message.bilibili.com/#/system',
+    unreadCount: 0,
+  },
+  {
+    name: t('topbar.noti_dropdown.chats'),
+    url: 'https://message.bilibili.com/#/whisper',
+    unreadCount: 0,
+  },
+],
+)
+
+onMounted(() => {
+  getUnreadMessageCount()
 })
+
+function getUnreadMessageCount() {
+  browser.runtime
+    .sendMessage({
+      contentScriptQuery: 'getUnreadMsg',
+    }).then((res) => {
+      if (res.code === 0) {
+        const resData = res.data
+        list[0].unreadCount = resData.reply
+        list[1].unreadCount = resData.at
+        list[2].unreadCount = resData.like
+        list[3].unreadCount = resData.sys_msg
+      }
+    }).catch(() => {
+      list[0].unreadCount = 0
+      list[1].unreadCount = 0
+      list[2].unreadCount = 0
+      list[3].unreadCount = 0
+    })
+
+  browser.runtime
+    .sendMessage({
+      contentScriptQuery: 'getUnreadDm',
+    }).then((res) => {
+      if (res.code === 0) {
+        const resData = res.data
+        list[4].unreadCount = resData.follow_unread
+      }
+    }).catch(() => {
+      list[4].unreadCount = 0
+    })
+}
 </script>
 
 <template>
