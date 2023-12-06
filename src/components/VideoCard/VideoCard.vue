@@ -103,6 +103,7 @@ function toggleWatchLater() {
 
 function handleMouseEnter() {
   isHover.value = true
+  clearTimeout(mouseLeaveTimeOut.value)
   contentVisibility.value = 'visible'
 }
 
@@ -199,6 +200,7 @@ function handelMouseLeave() {
               v-if="previewVideoUrl && isHover"
               autoplay muted
               :controls="settings.enableVideoCtrlBarOnVideoCard"
+              :style="{ pointerEvents: settings.enableVideoCtrlBarOnVideoCard ? 'auto' : 'none' }"
               pos="absolute top-0 left-0" w-full aspect-video rounded="$bew-radius" bg-black
             >
               <source :src="previewVideoUrl" type="video/mp4">
