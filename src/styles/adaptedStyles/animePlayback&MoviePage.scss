@@ -15,8 +15,8 @@
   }
 
   // #region new anime playback & movie page
-  .numberListItem_number_list_item__wszA4.numberListItem_select__ar1X5,
-  .follow_btnFollow__OFY3n,
+  [class*='numberListItem_number_list_item'][class*='numberListItem_select'],
+  [class*='follow_btnFollow'],
   .squirtle-controller.squirtle-pgc .squirtle-progress-timeline,
   .squirtle-controller.squirtle-pgc
     .squirtle-video-volume
@@ -39,11 +39,11 @@
     background-color: var(--bew-theme-color);
   }
 
-  .numberListItem_badge__TV05g,
-  .vipPaybar_textWrap__xXqVi,
-  .imageListItem_wrap__HceXs
-    .imageListItem_coverWrap__bnWan
-    .imageListItem_badge__eCjIv,
+  [class*='numberListItem_badge'],
+  [class*='vipPaybar_textWrap'],
+  [class*='imageListItem_wrap']
+    [class*='imageListItem_coverWrap']
+    [class*='imageListItem_badge'],
   .squirtle-controller.squirtle-pgc
     .squirtle-video-setting
     .squirtle-side-setting
@@ -53,27 +53,27 @@
     background-color: var(--bew-theme-color) !important;
   }
 
-  .promptBar_remindActionWrap__ftBEp
-    .promptBar_btnItemWrap__SM_zQ
-    .positionBtn_btn__Cl153 {
+  [class*='promptBar_remindActionWrap']
+    [class*='promptBar_btnItemWrap']
+    [class*='positionBtn_btn'] {
     background: var(--bew-theme-color) !important;
   }
 
-  .follow_btnFollow__OFY3n:hover {
+  [class*='follow_btnFollow']:hover {
     background-color: var(--bew-theme-color-80);
   }
 
-  .mediainfo_mediaToolbar__uEabN .mediainfo_btnHome__ci38K {
+  [class*='mediainfo_mediaToolbar'] [class*='mediainfo_btnHome'] {
     background-color: var(--bew-theme-color-10);
   }
 
-  .mediainfo_mediaToolbar__uEabN .mediainfo_btnHome__ci38K,
-  .mediainfo_mediaRight__jv5hq
-    .mediainfo_media_desc_section__bOFBw
-    .mediainfo_display_area__CEKfP
-    .mediainfo_ellipsis__xCKNd,
-  .mediainfo_mediaRight__jv5hq .mediainfo_media_desc__F5lLq i,
-  .upinfo_btn_follow_up__gmj7f,
+  [class*='mediainfo_mediaToolbar'] [class*='mediainfo_btnHome'],
+  [class*='mediainfo_mediaRight']
+    [class*='mediainfo_media_desc_section']
+    [class*='mediainfo_display_area']
+    [class*='mediainfo_ellipsis'],
+  [class*='mediainfo_mediaRight'] [class*='mediainfo_media_desc'] i,
+  [class*='upinfo_btn_follow_up'],
   .squirtle-controller.squirtle-pgc
     .squirtle-video-setting
     .squirtle-setting-panel-wrap
@@ -86,28 +86,28 @@
     color: var(--bew-theme-color);
   }
 
-  .RecommendItem_wrap__pJmXL
-    .RecommendItem_right_wrap__rgzw_
-    .RecommendItem_title__zyQj0:hover,
-  .upinfo_upLink__x4bbS .upinfo_upName__puAs1.upinfo_vip__nTBku,
+  [class*='RecommendItem_wrap']
+    [class*='RecommendItem_right_wrap']
+    [class*='RecommendItem_title']:hover,
+  [class*='upinfo_upLink'] [class*='upinfo_upName'][class*='upinfo_vip'],
   .squirtle-controller.squirtle-pgc
     .squirtle-block-wrap
     .squirtle-select-list
     .squirtle-select-item.active,
-  .rankTab_sponsor_rank_tab__hdP94
-    li.rankTab_tab_item__0bP4v.rankTab_active__l7he5,
-  .rankTab_sponsor_rank_tab__hdP94 li.rankTab_tab_item__0bP4v:hover,
-  .sponsor_sponsor_module__tD6ck
-    .sponsor_sponsor_info__1xNCI
-    .sponsor_btn_show_rank__FqWD_:hover,
-  .rankList_sponsor_rank_item__TkUX6.rankList_pos_rank_module__o8Y8G
-    .rankList_sp_right__T4Ovf
-    .rankList_sp_user__ZGFgT
-    .rankList_sp_name__DlvSi[style*='color'] {
+  [class*='rankTab_sponsor_rank_tab']
+    li[class*='rankTab_tab_item'][class*='rankTab_active'],
+  [class*='rankTab_sponsor_rank_tab'] li[class*='rankTab_tab_item']:hover,
+  [class*='sponsor_sponsor_module']
+    [class*='sponsor_sponsor_info']
+    [class*='sponsor_btn_show_rank']:hover,
+  [class*='rankList_sponsor_rank_item'][class*='rankList_pos_rank_module']
+    [class*='rankList_sp_right']
+    [class*='rankList_sp_user']
+    [class*='rankList_sp_name'][style*='color'] {
     color: var(--bew-theme-color) !important;
   }
 
-  .mediainfo_mediaToolbar__uEabN .mediainfo_btnHome__ci38K svg path,
+  [class*='mediainfo_mediaToolbar'] [class*='mediainfo_btnHome'] svg path,
   #bilibili_pbp svg rect[clip-path='url(#pbp-played-path)'],
   .squirtle-controller.squirtle-pgc
     .squirtle-video-setting
@@ -130,29 +130,29 @@
   //   fill: var(--bew-theme-color) !important;
   // }
 
-  .PlayingIcon_playIcon__Ob1X0 svg path {
+  [class*='PlayingIcon_playIcon'] svg path {
     stroke: var(--bew-theme-color);
   }
 
-  .rankTab_sponsor_rank_tab__hdP94 .rankTab_indicator___z_KZ {
+  [class*='rankTab_sponsor_rank_tab'] [class*='rankTab_indicator'] {
     border-color: var(--bew-theme-color);
   }
 
-  .rankTab_sponsor_rank_tab__hdP94 .rankTab_indicator___z_KZ:after {
+  [class*='rankTab_sponsor_rank_tab'] [class*='rankTab_indicator']:after {
     display: none;
   }
 
   &.dark {
     .home-container .main-container,
-    .mediainfo_mediaRight__jv5hq .mediainfo_media_desc__F5lLq i {
+    [class*='mediainfo_mediaRight'] [class*='mediainfo_media_desc'] i {
       background-color: var(--bew-bg);
     }
 
-    .eplist_ep_list_wrapper__PzLHa,
-    .eplist_ep_list_wrapper__PzLHa,
-    .rankList_sponsor_rank_item__TkUX6.rankList_pos_rank_module__o8Y8G
-      .rankList_sp_right__T4Ovf
-      .rankList_sp_msg__55OlS {
+    [class*='eplist_ep_list_wrapper'],
+    [class*='eplist_ep_list_wrapper'],
+    [class*='rankList_sponsor_rank_item'][class*='rankList_pos_rank_module']
+      [class*='rankList_sp_right']
+      [class*='rankList_sp_msg'] {
       background-color: var(--bew-content-solid-1);
     }
 
@@ -160,15 +160,16 @@
       background-color: unset;
     }
 
-    .upinfo_upInfoCard__roviy {
+    [class*='upinfo_upInfoCard'] {
       background-color: var(--bew-fill-1);
     }
 
-    .follow_btnFollow__OFY3n.follow_followed__smKNK {
+    [class*='follow_btnFollow'][class*='follow_followed'] {
       background-color: var(--bew-fill-2) !important;
     }
 
-    .SectionSelector_SectionSelector__WS4H3 .SectionSelector_expand__Oh9Lt {
+    [class*='SectionSelector_SectionSelector']
+      [class*='SectionSelector_expand'] {
       background: linear-gradient(
         270deg,
         var(--bew-content-solid-1) 46.21%,
@@ -176,23 +177,23 @@
       );
     }
 
-    .numberListItem_number_list_item__wszA4 {
+    [class*='numberListItem_number_list_item'] {
       --bg1: var(--bew-fill-1);
     }
 
-    .mediainfo_mediaInfo__Cpow4,
-    .recommend_wrap__pgu8c,
-    .rankList_sponsor_rank_item__TkUX6.rankList_pos_rank_module__o8Y8G
-      .rankList_sp_right__T4Ovf
-      .rankList_sp_msg__55OlS,
-    .sponsor_sponsor_module__tD6ck {
+    [class*='mediainfo_mediaInfo'],
+    [class*='recommend_wrap'],
+    [class*='rankList_sponsor_rank_item'][class*='rankList_pos_rank_module']
+      [class*='rankList_sp_right']
+      [class*='rankList_sp_msg'],
+    [class*='sponsor_sponsor_module'] {
       border-color: var(--bew-border-color);
     }
 
-    .mediainfo_mediaRight__jv5hq
-      .mediainfo_media_desc_section__bOFBw
-      .mediainfo_display_area__CEKfP
-      .mediainfo_ellipsis__xCKNd {
+    [class*='mediainfo_mediaRight']
+      [class*='mediainfo_media_desc_section']
+      [class*='mediainfo_display_area']
+      [class*='mediainfo_ellipsis'] {
       background: linear-gradient(
         90deg,
         hsla(0, 0%, 100%, 0),
@@ -201,57 +202,57 @@
       );
     }
 
-    .numberListItem_title__ukPv0,
-    .recommend_wrap__pgu8c .recommend_title__miCR4,
-    .RecommendItem_wrap__pJmXL
-      .RecommendItem_right_wrap__rgzw_
-      .RecommendItem_title__zyQj0,
-    .rankView_sponsor_rank_module__Pn_P_
-      .rankView_sponsor_rank_header__1F_YB
-      .rankView_title__BXE4u,
-    .rankList_sponsor_rank_item__TkUX6.rankList_pos_rank_module__o8Y8G
-      .rankList_sp_right__T4Ovf
-      .rankList_sp_msg__55OlS,
-    .rankTab_sponsor_rank_tab__hdP94 li.rankTab_tab_item__0bP4v,
-    .sponsor_sponsor_module__tD6ck
-      .sponsor_sponsor_info__1xNCI
-      .sponsor_sponsor_count__EIrUB
+    [class*='numberListItem_title'],
+    [class*='recommend_wrap'] [class*='recommend_title'],
+    [class*='RecommendItem_wrap']
+      [class*='RecommendItem_right_wrap']
+      [class*='RecommendItem_title'],
+    [class*='rankView_sponsor_rank_module']
+      [class*='rankView_sponsor_rank_header']
+      [class*='rankView_title'],
+    [class*='rankList_sponsor_rank_item'][class*='rankList_pos_rank_module']
+      [class*='rankList_sp_right']
+      [class*='rankList_sp_msg'],
+    [class*='rankTab_sponsor_rank_tab'] li[class*='rankTab_tab_item'],
+    [class*='sponsor_sponsor_module']
+      [class*='sponsor_sponsor_info']
+      [class*='sponsor_sponsor_count']
       span,
-    .sponsor_sponsor_module__tD6ck
-      .sponsor_sponsor_info__1xNCI
-      .sponsor_btn_show_rank__FqWD_,
-    .rankList_sponsor_rank_item__TkUX6.rankList_pos_rank_module__o8Y8G
-      .rankList_sp_right__T4Ovf
-      .rankList_sp_user__ZGFgT
-      .rankList_sp_name__DlvSi {
+    [class*='sponsor_sponsor_module']
+      [class*='sponsor_sponsor_info']
+      [class*='sponsor_btn_show_rank'],
+    [class*='rankList_sponsor_rank_item'][class*='rankList_pos_rank_module']
+      [class*='rankList_sp_right']
+      [class*='rankList_sp_user']
+      [class*='rankList_sp_name'] {
       color: var(--bew-text-1);
     }
 
-    .RecommendItem_wrap__pJmXL
-      .RecommendItem_right_wrap__rgzw_
-      .RecommendItem_sub_wrap__s1pfm
-      .RecommendItem_showindex__KMdzi,
-    .score_score__1MjLd,
-    .rankList_sponsor_rank_item__TkUX6.rankList_pos_rank_module__o8Y8G
-      .rankList_sp_left__jTV0X
-      .rankList_face_wrap__HCrnI
-      .rankList_sp_rank__RkpRy,
-    .sponsor_sponsor_module__tD6ck
-      .sponsor_sponsor_info__1xNCI
-      .sponsor_sponsor_count__EIrUB {
+    [class*='RecommendItem_wrap']
+      [class*='RecommendItem_right_wrap']
+      [class*='RecommendItem_sub_wrap']
+      [class*='RecommendItem_showindex'],
+    [class*='score_score'],
+    [class*='rankList_sponsor_rank_item'][class*='rankList_pos_rank_module']
+      [class*='rankList_sp_left']
+      [class*='rankList_face_wrap']
+      [class*='rankList_sp_rank'],
+    [class*='sponsor_sponsor_module']
+      [class*='sponsor_sponsor_info']
+      [class*='sponsor_sponsor_count'] {
       color: var(--bew-text-2);
     }
 
-    .rankList_sponsor_rank_item__TkUX6.rankList_pos_rank_module__o8Y8G
-      .rankList_sp_right__T4Ovf
-      .rankList_sp_msg__55OlS.rankList_empty__51U_S {
+    [class*='rankList_sponsor_rank_item'][class*='rankList_pos_rank_module']
+      [class*='rankList_sp_right']
+      [class*='rankList_sp_msg'][class*='rankList_empty'] {
       color: var(--bew-text-3);
     }
 
-    .rankList_sponsor_rank_item__TkUX6.rankList_pos_rank_module__o8Y8G
-      .rankList_sp_left__jTV0X
-      .rankList_face_wrap__HCrnI
-      .rankList_svg__FhiDT {
+    [class*='rankList_sponsor_rank_item'][class*='rankList_pos_rank_module']
+      [class*='rankList_sp_left']
+      [class*='rankList_face_wrap']
+      [class*='rankList_svg'] {
       fill: var(--bew-border-color);
     }
   }
