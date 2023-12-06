@@ -62,6 +62,7 @@ settings:
     hidden: Hidden
   enable_horizontal_scrolling: Enable horizontal scrolling
   enable_horizontal_scrolling_desc: After enabling, mouse scrolling will directly scroll the horizontal scroll list
+  enable_video_ctrl_bar_on_video_card: Display the video control bar on the video card
   topbar_visibility: Top bar visibility
   topbar_visibility_desc: Compatible with Bilibili Evolved customize top bar
   auto_hide_topbar: Automatically hide the top bar
@@ -229,6 +230,7 @@ home:
   following: Following
   trending: Trending
   ranking: Ranking
+  subscribed_series: Subscribed Series
 ranking:
   all: All
   chinese_anime_related: Chinese Anime-related

@@ -84,7 +84,7 @@ watch(() => settings.value.language, (newValue, oldValue) => {
       <!-- <SettingsItem title="Open link in current tab">
         <Radio v-model="settings.openLinkInCurrentTab" />
       </SettingsItem> -->
-      <SettingsItem title="Display the video control bar on the video card">
+      <SettingsItem :title="$t('settings.enable_video_ctrl_bar_on_video_card')">
         <Radio v-model="settings.enableVideoCtrlBarOnVideoCard" />
       </SettingsItem>
     </SettingsItemGroup>

@@ -24,15 +24,11 @@ common:
   refresh: 重新整理
 settings:
   title: 設定
-
-  # Settings menu
   menu_general: 一般
   menu_appearance: 版面
   menu_home: 主頁
   menu_search_page: 搵嘢頁
   menu_about: 關於
-
-  # Settings group
   group_common: 通用
   group_topbar: 頂欄
   group_dock: Dock
@@ -42,14 +38,10 @@ settings:
   group_search_bar: 搜尋欄
   group_recommendation_mode: 推介模式
   group_search_page_mode: 搵嘢頁模式
-
-  # Settings buttons
   btn:
     authorize: 授權
     revoke: 解除授權
     open_settings: 打開設定...
-
-  # General settings
   select_language: 介面語文
   select_language_opt:
     english: 英文
@@ -62,6 +54,7 @@ settings:
     hidden: 收埋
   enable_horizontal_scrolling: 使用橫向捲動
   enable_horizontal_scrolling_desc: 用咗之後，轆緊滑鼠就可以直接打橫掃水平捲軸列表
+  enable_video_ctrl_bar_on_video_card: 喺影片卡片上顯示影片控制欄
   topbar_visibility: 頂欄可視性
   topbar_visibility_desc: 用於兼容 Bilibili Evolved 客製化頂欄
   auto_hide_topbar: 自動收埋頂欄
@@ -72,8 +65,6 @@ settings:
     right: 右邊
     bottom: 下低
   auto_hide_dock: 自動收埋 Dock
-
-  # Appearance settings
   theme: 色系
   theme_opt:
     light: 淺色
@@ -97,8 +88,6 @@ settings:
   enable_wallpaper_masking: 使用背景遮蔽效果
   wallpaper_mask_opacity: 背景遮蔽透明度調節
   wallpaper_blur_intensity: 背景模糊強度調節
-
-  # Search page settings
   logo_color: Logo 顏色
   logo_color_opt:
     white: 白
@@ -109,27 +98,23 @@ settings:
   bg_blurs_when_the_search_bar_is_focused: 搜尋欄聚焦嗰陣校矇背景
   choose_search_bar_focused_character: 揀個喺搜尋欄聚焦嗰陣出現嘅人物
   individually_set_search_page_wallpaper: 單獨設定搵嘢頁背景
-
-  # Home settings
   recommendation_mode: 推介模式
-  recommendation_mode_desc: >
+  recommendation_mode_desc: |
     若然你想用手機版嘅推介演算法，就要俾 BewlyBewly 批准使用存取 access key。
-  recommendation_mode_desc2: >
+  recommendation_mode_desc2: |
     事緣B站對之前嘅 API 做咗啲限制，之前取得 access key 嘅功能直接 short 咗。都係建議閣下用返 Web Mode 啦 🫠
   authorize_app: 授權 BewlyBewly 使用 access key
-  authorize_app_desc: |
-    授咗權嘅話，你就會收到基於 bilibili 手機版推介演算法所推介嘅內容，兼且授權 key 只有約一個月有效期，到期後記得要重新授權嚟取得存取 access key。
+  authorize_app_desc: >
+    授咗權嘅話，你就會收到基於 bilibili 手機版推介演算法所推介嘅內容，兼且授權 key 只有約一個月有效期，到期後記得要重新授權嚟取得存取
+    access key。
   authorize_app_more_info_access_key: 關於 access key
   scan_qrcode_desc: 用 Bilibili 流動應用程式去 scan 呢個 QR code 愛嚟授權訪問 access key。
   use_search_page_mode: 主頁使用搵嘢頁模式
   settings_shared_with_the_search_page: 同搵嘢頁共用嘅設定
   settings_shared_with_the_search_page_desc: 呢啲設定都同搵嘢頁共用
   search_page_mode_wallpaper_fixed: 定住搵嘢頁模式嘅背景
-
-  # About
   import_settings: 匯入設定
   export_settings: 匯出設定
-
 auth:
   err_tip: 無法授權 access key
   plz_login_first: 唔該登入 bilibili 先
@@ -227,6 +212,7 @@ home:
   following: Follow 緊
   trending: 時下至 Hit
   ranking: 排行
+  subscribed_series: 訂閱劇集
 ranking:
   all: 全部
   chinese_anime_related: 中國動畫相關

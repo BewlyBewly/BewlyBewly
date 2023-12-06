@@ -24,15 +24,11 @@ common:
   refresh: 刷新
 settings:
   title: 设置
-
-  # Settings menu
   menu_general: 通用
   menu_appearance: 外观
   menu_search_page: 搜索页
   menu_home: 首页
   menu_about: 关于
-
-  # Settings group
   group_common: 通用
   group_topbar: 顶栏
   group_dock: Dock 栏
@@ -42,14 +38,10 @@ settings:
   group_search_bar: 搜索栏
   group_recommendation_mode: 推荐模式
   group_search_page_mode: 搜索页模式
-
-  # Settings buttons
   btn:
     authorize: 授权
     revoke: 取消授权
     open_settings: 打开设置...
-
-  # General settings
   select_language: 界面语文
   select_language_opt:
     english: 英文
@@ -62,6 +54,7 @@ settings:
     hidden: 隐藏
   enable_horizontal_scrolling: 启用横向滚动
   enable_horizontal_scrolling_desc: 启用后，鼠标滚动时将直接滚动横向滚动列表
+  enable_video_ctrl_bar_on_video_card: 在视频卡片上显示视频控制栏
   topbar_visibility: 顶栏可见性
   topbar_visibility_desc: 用于兼容 Bilibili Evolved 自定义顶栏
   auto_hide_topbar: 自动隐藏顶栏
@@ -72,8 +65,6 @@ settings:
     right: 右侧
     bottom: 底部
   auto_hide_dock: 自动隐藏 Dock 栏
-
-  # Appearance settings
   theme: 主题
   theme_opt:
     light: 亮色
@@ -92,13 +83,11 @@ settings:
   choose_ur_wallpaper: 选择你的背景
   image_url: 图片 URL
   image_url_hint: |-
-   URL 示例: https://pic.imgdb.cn/item/638e1d63b1fccdcd36103811.jpg
-   https://pic.imgdb.cn/item/638e1d7ab1fccdcd36106346.jpg
+    URL 示例: https://pic.imgdb.cn/item/638e1d63b1fccdcd36103811.jpg
+    https://pic.imgdb.cn/item/638e1d7ab1fccdcd36106346.jpg
   enable_wallpaper_masking: 启用背景遮罩效果
   wallpaper_mask_opacity: 背景遮罩透明度调整
   wallpaper_blur_intensity: 背景模糊强度调整
-
-  # Search page settings
   logo_color: Logo 颜色
   logo_color_opt:
     white: 白
@@ -109,12 +98,10 @@ settings:
   bg_blurs_when_the_search_bar_is_focused: 当搜索栏聚焦时背景模糊
   choose_search_bar_focused_character: 选择搜索栏聚焦时出现的人物
   individually_set_search_page_wallpaper: 单独设置搜索页背景
-
-  # Home settings
   recommendation_mode: 推荐模式
-  recommendation_mode_desc: >
+  recommendation_mode_desc: |
     如果您想使用 app 端的推荐算法，请先授权 BewlyBewly 使用 access key。
-  recommendation_mode_desc2: >
+  recommendation_mode_desc2: |
     因为B站对以前的API施加了限制，请求 access key 的方法不再适用。我们建议使用 Web 模式 🫠
   authorize_app: 授权 BewlyBewly 使用 access key
   authorize_app_desc: |
@@ -125,11 +112,8 @@ settings:
   settings_shared_with_the_search_page: 与搜索页共用的配置
   settings_shared_with_the_search_page_desc: 这些设置都与搜索页共用
   search_page_mode_wallpaper_fixed: 将搜索页模式的壁纸固定
-
-  # About
   import_settings: 导入设置
   export_settings: 导出设置
-
 auth:
   err_tip: 授权 access key 失败
   plz_login_first: 请先登录 bilibili
@@ -223,11 +207,11 @@ dock:
 home:
   not_interested_in: 对哪方面不感兴趣？
   video_removed: 视频已移除
-  save_to_watch_later: 添加到稍后再看
   for_you: 个性推荐
   following: 正在关注
   trending: 热门视频
   ranking: 排行
+  subscribed_series: 订阅剧集
 ranking:
   all: 全部
   chinese_anime_related: 中国动画相关

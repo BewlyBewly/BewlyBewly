@@ -31,7 +31,7 @@ const tabs = computed((): HomeTab[] => {
       value: HomeSubPage.Following,
     },
     {
-      label: 'Subscribed Series',
+      label: t('home.subscribed_series'),
       value: HomeSubPage.SubscribedSeries,
     },
     {

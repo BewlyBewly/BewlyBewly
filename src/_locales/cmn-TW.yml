@@ -24,15 +24,11 @@ common:
   refresh: 重新整理
 settings:
   title: 設定
-
-  # Settings menu
   menu_general: 一般
   menu_appearance: 外觀
   menu_home: 首頁
   menu_search_page: 搜尋頁
   menu_about: 關於
-
-  # Settings group
   group_common: 通用
   group_topbar: 頂欄
   group_dock: Dock
@@ -42,14 +38,10 @@ settings:
   group_search_bar: 搜尋欄
   group_recommendation_mode: 推薦模式
   group_search_page_mode: 搜尋頁模式
-
-  # Settings buttons
   btn:
     authorize: 授權
     revoke: 解除授權
     open_settings: 打開設定...
-
-  # General settings
   select_language: 介面語文
   select_language_opt:
     english: 英文
@@ -62,6 +54,7 @@ settings:
     hidden: 隱藏
   enable_horizontal_scrolling: 啟用橫向捲動
   enable_horizontal_scrolling_desc: 啟用後，滑鼠捲動時將直接捲動橫向捲軸列表
+  enable_video_ctrl_bar_on_video_card: 在影片卡片上顯示影片控制欄
   topbar_visibility: 頂欄可視性
   topbar_visibility_desc: 用於相容 Bilibili Evolved 自訂頂欄
   auto_hide_topbar: 自動隱藏頂欄
@@ -72,8 +65,6 @@ settings:
     right: 右側
     bottom: 底部
   auto_hide_dock: 自動隱藏 Dock
-
-  # Appearance settings
   theme: 主題
   theme_opt:
     light: 淺色
@@ -92,13 +83,11 @@ settings:
   choose_ur_wallpaper: 選擇你的背景
   image_url: 圖片 URL
   image_url_hint: |-
-   URL 示例: https://pic.imgdb.cn/item/638e1d63b1fccdcd36103811.jpg
-   https://pic.imgdb.cn/item/638e1d7ab1fccdcd36106346.jpg
+    URL 示例: https://pic.imgdb.cn/item/638e1d63b1fccdcd36103811.jpg
+    https://pic.imgdb.cn/item/638e1d7ab1fccdcd36106346.jpg
   enable_wallpaper_masking: 啓用背景遮蔽效果
   wallpaper_mask_opacity: 背景遮蔽透明度調節
   wallpaper_blur_intensity: 背景模糊強度調節
-
-  # Search page settings
   logo_color: Logo 顏色
   logo_color_opt:
     white: 白
@@ -109,27 +98,23 @@ settings:
   bg_blurs_when_the_search_bar_is_focused: 當搜尋欄聚焦時背景變模糊
   choose_search_bar_focused_character: 選擇搜尋欄聚焦時出現的人物
   individually_set_search_page_wallpaper: 單獨設定搜尋頁背景
-
-  # Home settings
   recommendation_mode: 推薦模式
-  recommendation_mode_desc: >
+  recommendation_mode_desc: |
     如果您想要使用手機端的推薦演算法，請先授權 BewlyBewly 使用 access key。
-  recommendation_mode_desc2: >
+  recommendation_mode_desc2: |
     由於B站對以前的API實施了限制，要請求 access key 的方法不再運作。我們建議使用 Web 模式 🫠
   authorize_app: 授權 BewlyBewly 使用 access key
-  authorize_app_desc: |
-    授權使用後能在首頁推送 bilibili 手機端推介演算法的影片，授權 key 的有效期約爲一個月，過了有效期後，請記得重新取得授權以取得 access key。
+  authorize_app_desc: >
+    授權使用後能在首頁推送 bilibili 手機端推介演算法的影片，授權 key 的有效期約爲一個月，過了有效期後，請記得重新取得授權以取得 access
+    key。
   authorize_app_more_info_access_key: 關於 access key
   scan_qrcode_desc: 使用 Bilibili 手機應用程式掃描這個QR碼，以授權訪問 access key。
   use_search_page_mode: 首頁使用搜尋頁模式
   settings_shared_with_the_search_page: 與搜尋頁共用的設定
   settings_shared_with_the_search_page_desc: 這些設定都與搜尋頁共用
   search_page_mode_wallpaper_fixed: 將搜尋頁模式的背景固定
-
-  # About
   import_settings: 匯入設定
   export_settings: 匯出設定
-
 auth:
   err_tip: 無法授權 access key
   plz_login_first: 請先登入 bilibili
@@ -227,6 +212,7 @@ home:
   following: 正在跟隨
   trending: 發燒影片
   ranking: 排行
+  subscribed_series: 訂閱劇集
 ranking:
   all: 全部
   chinese_anime_related: 中國動畫相關
