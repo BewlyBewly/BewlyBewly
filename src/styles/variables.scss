@@ -76,10 +76,10 @@
   // #endregion
 
   // #region text colors
-  --bew-text-1: hsl(217 33% 17%);
-  --bew-text-2: hsl(215 19% 35%);
-  --bew-text-3: hsl(215 19% 58%);
-  --bew-text-4: hsl(215 19% 72%);
+  --bew-text-1: hsl(217 19% 10%);
+  --bew-text-2: hsl(215 19% 24% / 80%);
+  --bew-text-3: hsl(215 19% 28% / 60%);
+  --bew-text-4: hsl(215 19% 36% / 40%);
   // #endregion
 
   --bew-bg: hsl(0 0% 100%);
@@ -142,9 +142,9 @@
   --bew-logo-color: var(--bew-text-1);
 
   --bew-text-1: hsl(215 19% 98%);
-  --bew-text-2: hsl(215 19% 70%);
-  --bew-text-3: hsl(215 19% 48%);
-  --bew-text-4: hsl(215 19% 25%);
+  --bew-text-2: hsl(215 19% 90% / 80%);
+  --bew-text-3: hsl(215 19% 82% / 60%);
+  --bew-text-4: hsl(215 19% 74% / 40%);
 
   --bew-bg: hsl(230 12% 6%);
   --bew-homepage-bg: hsl(230 12% 6%);
