@@ -78,6 +78,8 @@ else {
     if (
       // video page
       /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(currentUrl)
+      // anime playback & movie page
+      || /https?:\/\/(www.)?bilibili.com\/bangumi\/play\/.*/.test(currentUrl)
       // watch later playlist
       || /https?:\/\/(www.)?bilibili.com\/list\/watchlater.*/.test(currentUrl)
       // favorite playlist
@@ -170,7 +172,6 @@ function injectApp() {
 
     document.body.appendChild(container)
     const app = createApp(App)
-    app.component('OverlayScrollbarsComponent', OverlayScrollbarsComponent)
     setupApp(app)
     app
       .use(i18n)
@@ -180,6 +181,7 @@ function injectApp() {
         newestOnTop: true,
         position: POSITION.TOP_CENTER,
       })
+      .component('OverlayScrollbarsComponent', OverlayScrollbarsComponent)
       .mount(root)
   }
 }
