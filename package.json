@@ -78,7 +78,7 @@
     "dplayer": "^1.27.1",
     "md5": "^2.3.0",
     "mitt": "^3.0.1",
-    "overlayscrollbars": "^2.4.4",
+    "overlayscrollbars": "^2.4.5",
     "overlayscrollbars-vue": "^0.5.6",
     "qrcode.vue": "^3.4.1",
     "vue-i18n": "^9.7.0",
