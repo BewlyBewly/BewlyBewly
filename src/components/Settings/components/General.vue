@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
+import draggable from 'vuedraggable'
 import { settings } from '~/logic'
 import { AppPage } from '~/enums/appEnums'
 
@@ -41,6 +42,15 @@ const dockPositions = computed(() => {
     },
   ]
 })
+
+const dockItems = reactive< { label: string; value: string }[]>([
+  { label: t('dock.search'), value: AppPage.Search },
+  { label: t('dock.home'), value: AppPage.Home },
+  { label: t('dock.anime'), value: AppPage.Anime },
+  { label: t('dock.history'), value: AppPage.History },
+  { label: t('dock.favorites'), value: AppPage.Favorites },
+  { label: t('dock.watch_later'), value: AppPage.WatchLater },
+])
 
 const pageOptions = computed((): { label: string; value: string }[] => {
   return [
@@ -108,6 +118,32 @@ watch(() => settings.value.language, (newValue, oldValue) => {
       </SettingsItem>
       <SettingsItem :title="$t('settings.auto_hide_dock')">
         <Radio v-model="settings.autoHideDock" />
+      </SettingsItem>
+      <SettingsItem title="Dock item visibility adjustment" next-line>
+        <draggable
+          :list="dockItems"
+          item-key="value"
+          :component-data="{ style: 'display: flex; gap: 0.5rem;' }"
+        >
+          <template #item="{ element }">
+            <div
+              flex="~ gap-2 items-center" p="x-4 y-2" bg="$bew-fill-1" rounded="$bew-radius" cursor-all-scroll
+            >
+              <line-md:watch cursor-pointer />
+              {{ element.label }}
+            </div>
+          </template>
+        </draggable>
+
+        <!-- <ul flex="~ gap-2">
+          <li
+            v-for="page in pageOptions" :key="page.value"
+            flex="~ gap-2 items-center" p="x-4 y-2" bg="$bew-fill-1" rounded="$bew-radius"
+          >
+            <line-md:watch />
+            {{ page.label }}
+          </li>
+        </ul> -->
       </SettingsItem>
     </SettingsItemGroup>
   </div>

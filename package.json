@@ -82,6 +82,7 @@
     "overlayscrollbars-vue": "^0.5.6",
     "qrcode.vue": "^3.4.1",
     "vue-i18n": "^9.7.0",
-    "vue-toastification": "2.0.0-rc.5"
+    "vue-toastification": "2.0.0-rc.5",
+    "vuedraggable": "^4.1.0"
   }
 }
