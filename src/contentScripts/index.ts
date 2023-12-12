@@ -14,7 +14,9 @@ import 'vue-toastification/dist/index.css'
 
 const isFirefox: boolean = /Firefox/i.test(navigator.userAgent)
 
-const beforeLoadedStyleEl = injectCSS(`
+let beforeLoadedStyleEl: HTMLStyleElement
+if (localStorage.getItem('darkMode')?.toLowerCase() === 'true') {
+  beforeLoadedStyleEl = injectCSS(`
   html.dark {
     background-color: hsl(230 12% 6%);
   }
@@ -23,6 +25,14 @@ const beforeLoadedStyleEl = injectCSS(`
     opacity: 0;
   }
 `)
+}
+else {
+  beforeLoadedStyleEl = injectCSS(`
+    body {
+      opacity: 0;
+    }
+  `)
+}
 
 // Add opacity transition effect for page loaded
 injectCSS(`
@@ -34,6 +44,7 @@ injectCSS(`
 if (isFirefox) {
   let isFirstScriptExecute = true
   document.addEventListener('beforescriptexecute', () => {
+    document.documentElement.removeChild(beforeLoadedStyleEl)
     if (!isFirstScriptExecute)
       return
 
@@ -41,61 +52,18 @@ if (isFirefox) {
       injectApp()
     }, 1000)
     isFirstScriptExecute = false
-
-    const currentUrl = document.URL
-
-    // Handling for video page to prevent the issue of video being played but the page remaining empty
-    if (
-      // video page
-      /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(currentUrl)
-      // anime playback & movie page
-      || /https?:\/\/(www.)?bilibili.com\/bangumi\/play\/.*/.test(currentUrl)
-      // watch later playlist
-      || /https?:\/\/(www.)?bilibili.com\/list\/watchlater.*/.test(currentUrl)
-      // favorite playlist
-      || /https?:\/\/(www.)?bilibili.com\/list\/ml.*/.test(currentUrl)
-    ) {
-      setTimeout(() => {
-        document.documentElement.removeChild(beforeLoadedStyleEl)
-      }, 400)
-    }
-    else {
-      window.onload = () => {
-        setTimeout(() => {
-          document.documentElement.removeChild(beforeLoadedStyleEl)
-        }, 300)
-      }
-    }
   })
 }
 else {
   document.addEventListener('DOMContentLoaded', () => {
+    // nextTick(() => {
+    //   setTimeout(() => {
+    //     document.body.style.opacity = '1'
+    //     document.documentElement.removeChild(beforeLoadedStyleEl)
+    //   }, 300)
+    // })
+
     injectApp()
-
-    const currentUrl = document.URL
-
-    // Handling for video page to prevent the issue of video being played but the page remaining empty
-    if (
-      // video page
-      /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(currentUrl)
-      // anime playback & movie page
-      || /https?:\/\/(www.)?bilibili.com\/bangumi\/play\/.*/.test(currentUrl)
-      // watch later playlist
-      || /https?:\/\/(www.)?bilibili.com\/list\/watchlater.*/.test(currentUrl)
-      // favorite playlist
-      || /https?:\/\/(www.)?bilibili.com\/list\/ml.*/.test(currentUrl)
-    ) {
-      setTimeout(() => {
-        document.documentElement.removeChild(beforeLoadedStyleEl)
-      }, 400)
-    }
-    else {
-      window.onload = () => {
-        setTimeout(() => {
-          document.documentElement.removeChild(beforeLoadedStyleEl)
-        }, 300)
-      }
-    }
   })
 }
 
@@ -163,7 +131,10 @@ function injectApp() {
     const newStyleEl = document.createElement('link')
     newStyleEl.setAttribute('rel', 'stylesheet')
     newStyleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
-    document.body.appendChild(newStyleEl)
+    document.documentElement.appendChild(newStyleEl)
+    newStyleEl.onload = () => {
+      document.body.style.opacity = '1'
+    }
 
     // inject svg icons
     const svgDiv = document.createElement('div')
@@ -171,6 +142,7 @@ function injectApp() {
     shadowDOM.appendChild(svgDiv)
 
     document.body.appendChild(container)
+
     const app = createApp(App)
     setupApp(app)
     app

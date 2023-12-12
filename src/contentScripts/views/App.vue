@@ -24,6 +24,7 @@ const scrollbarRef = ref()
 const showTopbarMask = ref<boolean>(false)
 const dynamicComponentKey = ref<string>(`dynamicComponent${Number(new Date())}`)
 const topbarRef = ref()
+const mainAppOpacity = ref<number>(0)
 
 const isVideoPage = computed(() => {
   if (/https?:\/\/(www.)?bilibili.com\/video\/.*/.test(location.href))
@@ -89,11 +90,11 @@ watch(() => settings.value.adaptToOtherPageStyles, () => {
 })
 
 onMounted(() => {
-  // nextTick(() => {
-  //   setTimeout(() => {
-  //     mainAppOpacity.value = 1
-  //   }, 1200)
-  // })
+  nextTick(() => {
+    setTimeout(() => {
+      mainAppOpacity.value = 1
+    }, 1000)
+  })
 
   if (isHomePage()) {
     // Force overwrite Bilibili Evolved body tag & html tag background color
@@ -171,22 +172,26 @@ function setAppAppearance() {
     mainAppRef.value?.classList.add('dark')
     document.querySelector('#bewly')?.classList.add('dark')
     document.documentElement.classList.add('dark')
+    localStorage.setItem('darkMode', 'true')
   }
   else if (settings.value.theme === 'light') {
     mainAppRef.value?.classList.remove('dark')
     document.querySelector('#bewly')?.classList.remove('dark')
     document.documentElement.classList.remove('dark')
+    localStorage.setItem('darkMode', 'false')
   }
   else if (settings.value.theme === 'auto') {
     if (currentColorScheme) {
       mainAppRef.value?.classList.add('dark')
       document.querySelector('#bewly')?.classList.add('dark')
       document.documentElement.classList.add('dark')
+      localStorage.setItem('darkMode', 'true')
     }
     else {
       mainAppRef.value?.classList.remove('dark')
       document.querySelector('#bewly')?.classList.remove('dark')
       document.documentElement.classList.remove('dark')
+      localStorage.setItem('darkMode', 'false')
     }
   }
 }
@@ -253,9 +258,10 @@ provide('scrollbarRef', scrollbarRef)
   </template>
 
   <div
-    ref="mainAppRef" class="bewly-wrapper" text="$bew-text-1" transition="opacity duration-300" z-60
+    ref="mainAppRef" class="bewly-wrapper" text="$bew-text-1" transition="opacity duration-300"
+    z-60
     pos="absolute top-0 left-0" w-full h-full
-    :style="{ opacity: 1, height: isHomePage() ? '100vh' : '0' }"
+    :style="{ opacity: mainAppOpacity, height: isHomePage() ? '100dvh' : '0' }"
   >
     <!-- Dock & RightSideButtons -->
     <div pos="absolute top-0 left-0" w-inherit h-inherit overflow-hidden>
