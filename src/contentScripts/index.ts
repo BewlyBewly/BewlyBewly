@@ -11,13 +11,15 @@ import { i18n } from '~/utils/i18n'
 import { SVG_ICONS } from '~/utils/svgIcons'
 import { injectCSS } from '~/utils/main'
 import 'vue-toastification/dist/index.css'
+import { settings } from '~/logic'
 
 const isFirefox: boolean = /Firefox/i.test(navigator.userAgent)
 
 let beforeLoadedStyleEl: HTMLStyleElement
-if (localStorage.getItem('darkMode')?.toLowerCase() === 'true') {
+
+if (settings.value.theme === 'dark' || (settings.value.theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
   beforeLoadedStyleEl = injectCSS(`
-  html.dark {
+  html {
     background-color: hsl(230 12% 6%);
   }
 
@@ -127,13 +129,22 @@ function injectApp() {
     styleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
     shadowDOM.appendChild(styleEl)
     shadowDOM.appendChild(root)
+    container.style.opacity = '0'
+    container.style.transition = 'opacity 0.5s'
+    styleEl.onload = () => {
+      setTimeout(() => {
+        container.style.opacity = '1'
+      }, 500)
+    }
 
     const newStyleEl = document.createElement('link')
     newStyleEl.setAttribute('rel', 'stylesheet')
     newStyleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
     document.documentElement.appendChild(newStyleEl)
     newStyleEl.onload = () => {
-      document.body.style.opacity = '1'
+      setTimeout(() => {
+        document.body.style.opacity = '1'
+      }, 500)
     }
 
     // inject svg icons
