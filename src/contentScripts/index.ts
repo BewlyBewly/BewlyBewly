@@ -1,16 +1,12 @@
 // import { onMessage } from 'webext-bridge'
 import { createApp } from 'vue'
-import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue'
-import 'overlayscrollbars/overlayscrollbars.css'
+
 import 'uno.css'
 import '~/styles/index.ts'
-import Toast, { POSITION } from 'vue-toastification'
 import App from './views/App.vue'
 import { setupApp } from '~/logic/common-setup'
-import { i18n } from '~/utils/i18n'
 import { SVG_ICONS } from '~/utils/svgIcons'
 import { injectCSS } from '~/utils/main'
-import 'vue-toastification/dist/index.css'
 import { settings } from '~/logic'
 
 const isFirefox: boolean = /Firefox/i.test(navigator.userAgent)
@@ -156,15 +152,6 @@ function injectApp() {
 
     const app = createApp(App)
     setupApp(app)
-    app
-      .use(i18n)
-      .use(Toast, {
-        transition: 'Vue-Toastification__fade',
-        maxToasts: 20,
-        newestOnTop: true,
-        position: POSITION.TOP_CENTER,
-      })
-      .component('OverlayScrollbarsComponent', OverlayScrollbarsComponent)
-      .mount(root)
+    app.mount(root)
   }
 }

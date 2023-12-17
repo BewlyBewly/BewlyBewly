@@ -1,5 +1,13 @@
 import type { App } from 'vue'
 import { getCurrentContext } from 'webext-bridge'
+import Toast, { POSITION } from 'vue-toastification'
+import { createPinia } from 'pinia'
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue'
+import { i18n } from '~/utils/i18n'
+import 'vue-toastification/dist/index.css'
+import 'overlayscrollbars/overlayscrollbars.css'
+
+const pinia = createPinia()
 
 export function setupApp(app: App) {
   const context = getCurrentContext()
@@ -13,4 +21,14 @@ export function setupApp(app: App) {
   // Here you can install additional plugins for all contexts: popup, options page and content-script.
   // example: app.use(i18n)
   // example excluding content-script context: if (context !== 'content-script') app.use(i18n)
+  app.use(i18n)
+  app
+    .use(Toast, {
+      transition: 'Vue-Toastification__fade',
+      maxToasts: 20,
+      newestOnTop: true,
+      position: POSITION.TOP_CENTER,
+    })
+  app.use(pinia)
+  app.component('OverlayScrollbarsComponent', OverlayScrollbarsComponent)
 }

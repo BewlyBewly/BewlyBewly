@@ -42,3 +42,5 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   useSearchPageModeOnHomePage: false,
   searchPageModeWallpaperFixed: false,
 }), { mergeDefaults: true })
+
+// export const dockItems = useStorageLocal('dockItems', reactive<{order}>)

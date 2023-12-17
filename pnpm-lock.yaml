@@ -33,6 +33,7 @@ specifiers:
   npm-run-all: ^4.1.5
   overlayscrollbars: ^2.4.5
   overlayscrollbars-vue: ^0.5.6
+  pinia: ^2.1.7
   qrcode.vue: ^3.4.1
   rimraf: ^3.0.2
   sass: ^1.69.5
@@ -61,6 +62,7 @@ dependencies:
   mitt: 3.0.1
   overlayscrollbars: 2.4.5
   overlayscrollbars-vue: 0.5.6_f436029b4f07853148f09db59670b476
+  pinia: 2.1.7_typescript@4.9.5+vue@3.3.8
   qrcode.vue: 3.4.1_vue@3.3.8
   vue-i18n: 9.7.0_vue@3.3.8
   vue-toastification: 2.0.0-rc.5_vue@3.3.8
@@ -5634,6 +5636,24 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
+  /pinia/2.1.7_typescript@4.9.5+vue@3.3.8:
+    resolution: {integrity: sha512-+C2AHFtcFqjPih0zpYuvof37SFxMQ7OEG2zV9jRI12i9BOy3YQVAHwdKtyyc8pDcDyIc33WCIsZaCFWU7WWxGQ==}
+    peerDependencies:
+      '@vue/composition-api': ^1.4.0
+      typescript: '>=4.4.4'
+      vue: ^2.6.14 || ^3.3.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+      typescript:
+        optional: true
+    dependencies:
+      '@vue/devtools-api': 6.5.1
+      typescript: 4.9.5
+      vue: 3.3.8_typescript@4.9.5
+      vue-demi: 0.14.6_vue@3.3.8
+    dev: false
+
   /pino-abstract-transport/1.0.0:
     resolution: {integrity: sha512-c7vo5OpW4wIS42hUVcT5REsL8ZljsUfBjqV/e2sFxmFEFZiq1XLUp5EYLtuDH6PEHq9W1egWqRbnLUP5FuZmOA==}
     dependencies:
@@ -7227,7 +7247,6 @@ packages:
         optional: true
     dependencies:
       vue: 3.3.8_typescript@4.9.5
-    dev: true
 
   /vue-eslint-parser/9.3.1_eslint@8.54.0:
     resolution: {integrity: sha512-Clr85iD2XFZ3lJ52/ppmUDG/spxQu6+MAeHXjjyI4I1NUYZ9xmenQp4N0oaHJhrA8OOxltCVxMRfANGa70vU0g==}
