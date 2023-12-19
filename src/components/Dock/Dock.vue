@@ -3,7 +3,7 @@ import { useI18n } from 'vue-i18n'
 import { Icon } from '@iconify/vue'
 import type { DockItem, HoveringDockItem } from './types'
 import { AppPage } from '~/enums/appEnums'
-import { settings } from '~/logic'
+import { dockItemVisibilityList, settings } from '~/logic'
 
 defineProps<{ activatedPage: AppPage }>()
 
@@ -91,19 +91,18 @@ function toggleDockHide(hide: boolean) {
       shadow="$bew-shadow-2"
       backdrop-glass pointer-events-auto
     >
-      <template v-for="dock in dockItems" :key="dock.page">
-        <Tooltip :content="dock.label" :placement="tooltipPlacement">
-          <button
-            class="dock-item"
-            :class="{ active: activatedPage === dock.page }"
-            @click="emit('change-page', dock.page)"
-          >
-            <Icon :icon="dock.icon" />
-
-            <!-- <Icon v-if="activatedPage === dock.page" :icon="dock.iconActivated" />
-            <Icon v-else :icon="dock.icon" /> -->
-          </button>
-        </Tooltip>
+      <template v-for="dockItemVisibility in dockItemVisibilityList" :key="dockItemVisibility.page">
+        <template v-if="dockItemVisibility.visible">
+          <Tooltip :content="dockItems.find((item) => item.page === dockItemVisibility.page)!.label" :placement="tooltipPlacement">
+            <button
+              class="dock-item"
+              :class="{ active: activatedPage === dockItemVisibility.page }"
+              @click="emit('change-page', dockItemVisibility.page)"
+            >
+              <Icon :icon="dockItems.find((item) => item.page === dockItemVisibility.page)!.icon" />
+            </button>
+          </Tooltip>
+        </template>
       </template>
 
       <!-- dividing line -->

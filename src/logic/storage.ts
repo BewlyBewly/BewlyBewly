@@ -43,4 +43,11 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   searchPageModeWallpaperFixed: false,
 }), { mergeDefaults: true })
 
-// export const dockItems = useStorageLocal('dockItems', reactive<{order}>)
+export const dockItemVisibilityList = useStorageLocal('dockItems', reactive<{ page: AppPage; visible: boolean }[]>([
+  // { page: AppPage.Search, visible: true },
+  // { page: AppPage.Home, visible: true },
+  // { page: AppPage.Anime, visible: true },
+  // { page: AppPage.Favorites, visible: true },
+  // { page: AppPage.History, visible: true },
+  // { page: AppPage.WatchLater, visible: true },
+]))
