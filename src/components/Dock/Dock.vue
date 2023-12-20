@@ -53,6 +53,31 @@ watch(() => settings.value.autoHideDock, (newValue) => {
 onMounted(() => {
   if (settings.value.autoHideDock)
     hideDock.value = true
+
+  if (dockItemVisibilityList.value.length < dockItems.value.length || dockItemVisibilityList.value.length > dockItems.value.length) {
+    const newDockItemVisibilityList = ref<{ page: AppPage; visible: boolean }[]>([])
+    dockItems.value.forEach((item) => {
+      newDockItemVisibilityList.value.push({ page: item.page, visible: true })
+    })
+
+    // Compare two arrays, get the differing elements, and delete or add them to the dockItemVisibilityList
+    const notInNewDockItemVisibilityList = dockItemVisibilityList.value.filter(obj1 =>
+      !newDockItemVisibilityList.value.some(obj2 => obj1.page === obj2.page),
+    )
+    const notInDockItemVisibilityList = newDockItemVisibilityList.value.filter(obj1 =>
+      !dockItemVisibilityList.value.some(obj2 => obj1.page === obj2.page),
+    )
+    const allDifferences = [...notInDockItemVisibilityList, ...notInNewDockItemVisibilityList]
+
+    if (dockItemVisibilityList.value.length < dockItems.value.length) {
+      dockItemVisibilityList.value.push(...allDifferences)
+    }
+    else {
+      allDifferences.forEach((obj1) => {
+        dockItemVisibilityList.value = dockItemVisibilityList.value.filter(obj2 => obj2.page !== obj1.page)
+      })
+    }
+  }
 })
 
 function toggleDark() {
@@ -93,13 +118,13 @@ function toggleDockHide(hide: boolean) {
     >
       <template v-for="dockItemVisibility in dockItemVisibilityList" :key="dockItemVisibility.page">
         <template v-if="dockItemVisibility.visible">
-          <Tooltip :content="dockItems.find((item) => item.page === dockItemVisibility.page)!.label" :placement="tooltipPlacement">
+          <Tooltip :content="dockItems.find((item) => item.page === dockItemVisibility.page)?.label ?? ''" :placement="tooltipPlacement">
             <button
               class="dock-item"
               :class="{ active: activatedPage === dockItemVisibility.page }"
               @click="emit('change-page', dockItemVisibility.page)"
             >
-              <Icon :icon="dockItems.find((item) => item.page === dockItemVisibility.page)!.icon" />
+              <Icon :icon="dockItems.find((item) => item.page === dockItemVisibility.page)?.icon ?? ''" />
             </button>
           </Tooltip>
         </template>

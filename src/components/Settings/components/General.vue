@@ -126,20 +126,10 @@ watch(() => settings.value.language, (newValue) => {
                 <line-md:watch v-if="element.visible" cursor-pointer />
                 <line-md:watch-off v-else cursor-pointer />
               </div>
-              {{ pageOptions.find(option => option.value === element.page)!.label }}
+              {{ pageOptions.find(option => option.value === element.page)?.label }}
             </div>
           </template>
         </draggable>
-
-        <!-- <ul flex="~ gap-2">
-          <li
-            v-for="page in pageOptions" :key="page.value"
-            flex="~ gap-2 items-center" p="x-4 y-2" bg="$bew-fill-1" rounded="$bew-radius"
-          >
-            <line-md:watch />
-            {{ page.label }}
-          </li>
-        </ul> -->
       </SettingsItem>
     </SettingsItemGroup>
   </div>
