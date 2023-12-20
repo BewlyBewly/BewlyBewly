@@ -184,14 +184,14 @@ function jumpToLoginPage() {
           :duration-str="video.cover_right_text"
           :title="`${video.title}`"
           :cover="`${video.cover}`"
-          :author="'mask' in video && video.mask && 'avatar' in video.mask ? video.mask.avatar.text : ''"
-          :author-face="'mask' in video && video.mask && 'avatar' in video.mask ? video.mask.avatar.cover : ''"
-          :mid="'mask' in video && video.mask && 'avatar' in video.mask && video.mask.avatar ? video.mask.avatar.up_id : 0"
-          :capsule-text="video.desc ? video.desc.split('·')[1] : ''"
+          :author="video?.mask?.avatar.text"
+          :author-face="video?.mask?.avatar.cover"
+          :mid="video?.mask?.avatar.up_id "
+          :capsule-text="video?.desc?.split('·')[1]"
           :bvid="video.bvid"
           :view-str="video.cover_left_text_1"
           :danmaku-str="video.cover_left_text_2"
-          :cid="video.player_args ? video.player_args.cid : 0"
+          :cid="video?.player_args?.cid "
           show-preview
         />
       </template>
