@@ -15,7 +15,7 @@ let beforeLoadedStyleEl: HTMLStyleElement
 
 if (settings.value.theme === 'dark' || (settings.value.theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
   beforeLoadedStyleEl = injectCSS(`
-  html {
+  html.dark {
     background-color: hsl(230 12% 6%);
   }
 
