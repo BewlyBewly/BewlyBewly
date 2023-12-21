@@ -46,9 +46,13 @@
     border-left-color: var(--bew-fill-2);
   }
 
-  .history-wrap .time-label {
+  .history-wrap .time-label.active {
     border-color: var(--bew-theme-color) !important;
     color: white;
+  }
+  .history-wrap .time-label {
+    border-color: var(--bew-theme-color) !important;
+    color: var(--bew-theme-color);
   }
   .history-wrap .time-label:after {
     border-left-color: var(--bew-theme-color);
