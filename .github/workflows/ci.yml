@@ -1,0 +1,52 @@
+name: Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      # The branch where the project source code resides
+      # 项目源代码所在的分支
+      - main
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+        os: [ubuntu-latest]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: https://registry.npmjs.org/
+          cache: pnpm
+
+      - name: Install Dependencies
+        run: pnpm i
+
+      - name: Build
+        run: pnpm build
+
+      - name: Build Extension
+        run: pnpm pack:crx && pnpm pack:zip
+
+      - name: Upload Zip
+        uses: actions/upload-artifact@v3
+        with: 
+          name: BewlyBewly zip
+          path: extension.zip
+      
+      - name: Upload Crx
+        uses: actions/upload-artifact@v3
+        with: 
+          name: BewlyBewly Crx
+          path: extension.crx
