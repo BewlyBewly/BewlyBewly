@@ -110,7 +110,7 @@ watch(() => settings.value.language, (newValue) => {
       <SettingsItem :title="$t('settings.auto_hide_dock')">
         <Radio v-model="settings.autoHideDock" />
       </SettingsItem>
-      <SettingsItem title="Dock item visibility adjustment" next-line>
+      <SettingsItem :title="$t('settings.dock_item_visibility_list')" next-line>
         <draggable
           v-model="dockItemVisibilityList"
           item-key="page"
