@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [18.17.0]
         os: [ubuntu-latest]
 
     steps:
@@ -31,7 +31,7 @@ jobs:
           cache: pnpm
 
       - name: Install Dependencies
-        run: pnpm i
+        run: pnpm install
 
       - name: Build
         run: pnpm build
@@ -42,7 +42,7 @@ jobs:
       - name: Upload Zip
         uses: actions/upload-artifact@v3
         with: 
-          name: BewlyBewly zip
+          name: BewlyBewly Zip
           path: extension.zip
       
       - name: Upload Crx
