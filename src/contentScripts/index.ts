@@ -7,30 +7,19 @@ import App from './views/App.vue'
 import { setupApp } from '~/logic/common-setup'
 import { SVG_ICONS } from '~/utils/svgIcons'
 import { injectCSS } from '~/utils/main'
-import { settings } from '~/logic'
 
 const isFirefox: boolean = /Firefox/i.test(navigator.userAgent)
 
-let beforeLoadedStyleEl: HTMLStyleElement
-
-if (settings.value.theme === 'dark' || (settings.value.theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-  beforeLoadedStyleEl = injectCSS(`
-  html.dark {
+const beforeLoadedStyleEl: HTMLStyleElement = injectCSS(`
+  html.dark.bewly-design {
     background-color: hsl(230 12% 6%);
   }
 
   body {
     opacity: 0;
+    background: none;
   }
 `)
-}
-else {
-  beforeLoadedStyleEl = injectCSS(`
-    body {
-      opacity: 0;
-    }
-  `)
-}
 
 // Add opacity transition effect for page loaded
 injectCSS(`
@@ -139,7 +128,7 @@ function injectApp() {
     document.documentElement.appendChild(newStyleEl)
     newStyleEl.onload = () => {
       setTimeout(() => {
-        document.body.style.opacity = '1'
+        document.documentElement.removeChild(beforeLoadedStyleEl)
       }, 500)
     }
 
