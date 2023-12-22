@@ -65,6 +65,7 @@ settings:
     right: 右侧
     bottom: 底部
   auto_hide_dock: 自动隐藏 Dock 栏
+  dock_content_adjustment: Dock 内容调整
   theme: 主题
   theme_opt:
     light: 亮色
