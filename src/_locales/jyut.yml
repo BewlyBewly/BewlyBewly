@@ -65,7 +65,7 @@ settings:
     right: 右邊
     bottom: 下低
   auto_hide_dock: 自動收埋 Dock
-  dock_item_visibility_list: 調整 Dock 欄項目順序
+  dock_content_adjustment: Dock 內容調整
   theme: 色系
   theme_opt:
     light: 淺色

@@ -73,7 +73,7 @@ settings:
     right: Right
     bottom: Bottom
   auto_hide_dock: Automatically hide the dock
-  dock_item_visibility_list: Dock item visibility adjustment
+  dock_content_adjustment: Dock content adjustment
 
   # Appearance settings
   theme: Theme
