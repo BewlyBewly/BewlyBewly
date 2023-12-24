@@ -42,7 +42,7 @@ settings:
     authorize: 授权
     revoke: 取消授权
     open_settings: 打开设置...
-  select_language: 界面语文
+  select_language: 界面语言
   select_language_opt:
     english: 英文
     mandarin_cn: 官话
@@ -77,10 +77,10 @@ settings:
   adapt_to_other_page_styles: 适应其他页面样式
   adapt_to_other_page_styles_desc: 适应一些常见页面，以与 BewlyBewly 主题相匹配
   wallpaper_mode: 背景图片模式
-  wallpaper_mode_desc: '由 URL: 直接用网上图片的 URL 来设置背景图片。'
+  wallpaper_mode_desc: '使用 URL: 直接用网上图片的 URL 来设置背景图片。'
   wallpaper_mode_opt:
     build_in: 内置
-    by_url: 由 URL
+    by_url: 使用 URL
   choose_ur_wallpaper: 选择你的背景
   image_url: 图片 URL
   image_url_hint: |-
@@ -108,7 +108,7 @@ settings:
   authorize_app_desc: |
     授权使用后能在首页推送 bilibili App 端算法的推荐视频，授权 key 有效期约为一个月，过后记得重新授权获取 access key。
   authorize_app_more_info_access_key: 关于 access key
-  scan_qrcode_desc: 使用 Bilibili 移动应用程序扫描此二维码，以授权访问 access key。
+  scan_qrcode_desc: 使用 Bilibili 移动应用程序扫描此二维码，以授权获取 access key。
   use_search_page_mode: 首页使用搜索页模式
   settings_shared_with_the_search_page: 与搜索页共用的配置
   settings_shared_with_the_search_page_desc: 这些设置都与搜索页共用
@@ -167,7 +167,7 @@ topbar:
     money: 硬币：
     b_coins: B币：
     following: 关注
-    followers: 观众
+    followers: 粉丝
     posts: 动态
     accout_settings: 个人中心
     uploads_manager: 投稿管理
