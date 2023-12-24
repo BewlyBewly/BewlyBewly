@@ -168,8 +168,8 @@ topbar:
   user_dropdown:
     money: 硬幣：
     b_coins: B幣：
-    following: 追蹤
-    followers: 訂閱者
+    following: 追蹤中
+    followers: 粉絲
     posts: 動向
     accout_settings: 帳戶資訊
     uploads_manager: 內容管理
