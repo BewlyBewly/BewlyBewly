@@ -127,9 +127,7 @@ function injectApp() {
     newStyleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
     document.documentElement.appendChild(newStyleEl)
     newStyleEl.onload = () => {
-      setTimeout(() => {
-        document.documentElement.removeChild(beforeLoadedStyleEl)
-      }, 500)
+      document.documentElement.removeChild(beforeLoadedStyleEl)
     }
 
     // inject svg icons
