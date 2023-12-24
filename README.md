@@ -1,3 +1,5 @@
+**| English | [简体中文](README_cn.md) |**
+
 <p align="center" style="margin-bottom: 0px !important;">
 <img width="150" src="https://user-images.githubusercontent.com/33394391/160250512-410b71fc-7f25-4caf-b850-429227ff082a.png"><br/>
 </p>
@@ -17,23 +19,32 @@
 ![Snipaste_2023-11-21_00-32-51](https://github.com/hakadao/BewlyBewly/assets/33394391/a439ea59-cc80-48aa-9c6a-ec5d4da98441)
 
 ## ⬇️ Installation
+
+### Online Installation
+
 Even in the Edge browser, we strongly recommend you install it in the Chrome web store. In terms of review speed, the Chrome web store is slightly faster than Edge Add-ons.
+
 - Chrome: <https://chrome.google.com/webstore/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp/related?hl=en>
 - Edge: <https://microsoftedge.microsoft.com/addons/detail/bewlybewly/kceadhehfjdiakpiphpjgolbgehjdmja>
 - Firefox: **I NEED SOME HELP!!!!!!!!!!!!!!!!!! ( ；∀；)**
 
 ### Local Installation
 
-#### Edge & Chrome (RECOMMENDED)
-> Ensure you installed [extension.zip](https://github.com/hakadao/BewlyBewly/releases) and decompress this file.
+[ci](https://github.com/hakadao/BewlyBewly/actions)：automatically build with the latest code
 
-Opening the `chrome://extensions` page in the browser, simply drag and drop the downloaded `extension.zip` file into the browser to complete the installation.
+[releases](https://github.com/hakadao/BewlyBewly/releases)：stable version
+
+#### Edge & Chrome (RECOMMENDED)
+
+> Ensure you installed [extension.zip](https://github.com/hakadao/BewlyBewly/releases) .
+
+Opening the `edge://extensions`  page in the Edge or `chrome://extensions` page in the Chrome, simply drag and drop the downloaded `extension.zip` file into the browser to complete the installation.
 
 <details>
  <summary> Another installation method for Edge & Chrome </summary>
- 
+
 #### Edge
->
+
 > Ensure you installed [extension.zip](https://github.com/hakadao/BewlyBewly/releases) and decompress this file.
 
 1. Type in `edge://extensions/` in the address bar and press Enter
