@@ -38,7 +38,7 @@
 
 > 确保您下载了 [extension.zip](https://github.com/hakadao/BewlyBewly/releases)。
 
-在浏览器中打开 `edge://extensions` 或者 `chrome://extensions` 界面，只需将下载的 `extension.zip` 文件拖放到浏览器中即可完成安装。
+在 Edge 浏览器中打开 `edge://extensions` 或者在 Chrome 浏览器中打开 `chrome://extensions` 界面，只需将下载的 `extension.zip` 文件拖放到浏览器中即可完成安装。
 
 <details>
  <summary> Edge & Chrome 的另一种安装方法 </summary>

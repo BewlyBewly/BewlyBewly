@@ -42,7 +42,7 @@ settings:
     authorize: 授權
     revoke: 解除授權
     open_settings: 打開設定...
-  select_language: 界面語言
+  select_language: 介面語言
   select_language_opt:
     english: 英文
     mandarin_cn: 官话
@@ -109,7 +109,7 @@ settings:
     授權使用後能在首頁推送 bilibili 手機端推介演算法的影片，授權 key 的有效期約爲一個月，過了有效期後，請記得重新取得授權以取得 access
     key。
   authorize_app_more_info_access_key: 關於 access key
-  scan_qrcode_desc: 使用 Bilibili 手機應用程式掃描這個QR碼，以授權獲取 access key。
+  scan_qrcode_desc: 使用 Bilibili 手機應用程式掃描這個QR碼，以授權取得 access key。
   use_search_page_mode: 首頁使用搜尋頁模式
   settings_shared_with_the_search_page: 與搜尋頁共用的設定
   settings_shared_with_the_search_page_desc: 這些設定都與搜尋頁共用

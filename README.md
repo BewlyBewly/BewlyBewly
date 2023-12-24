@@ -38,7 +38,7 @@ Even in the Edge browser, we strongly recommend you install it in the Chrome web
 
 > Ensure you installed [extension.zip](https://github.com/hakadao/BewlyBewly/releases) .
 
-Opening the `edge://extensions` or `chrome://extensions` page in the browser, simply drag and drop the downloaded `extension.zip` file into the browser to complete the installation.
+Opening the `edge://extensions`  page in the Edge or `chrome://extensions` page in the Chrome, simply drag and drop the downloaded `extension.zip` file into the browser to complete the installation.
 
 <details>
  <summary> Another installation method for Edge & Chrome </summary>
