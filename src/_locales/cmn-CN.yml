@@ -25,11 +25,15 @@ common:
   reset: 重置
 settings:
   title: 设置
+
+  # Settings menu
   menu_general: 通用
   menu_appearance: 外观
   menu_search_page: 搜索页
   menu_home: 首页
   menu_about: 关于
+
+  # Settings group
   group_common: 通用
   group_topbar: 顶栏
   group_dock: Dock 栏
@@ -39,17 +43,20 @@ settings:
   group_search_bar: 搜索栏
   group_recommendation_mode: 推荐模式
   group_search_page_mode: 搜索页模式
+
+  # Settings buttons
   btn:
     authorize: 授权
     revoke: 取消授权
     open_settings: 打开设置...
+
+  # General settings
   select_language: 界面语言
   select_language_opt:
     english: 英文
     mandarin_cn: 官话
     mandarin_tw: 官話
     jyut: 廣東話
-  startup_page: 启动页
   chk_box:
     show: 显示
     hidden: 隐藏
@@ -67,6 +74,8 @@ settings:
     bottom: 底部
   auto_hide_dock: 自动隐藏 Dock 栏
   dock_content_adjustment: Dock 内容调整
+
+  # Appearance settings
   theme: 主题
   theme_opt:
     light: 亮色
@@ -90,6 +99,8 @@ settings:
   enable_wallpaper_masking: 启用背景遮罩效果
   wallpaper_mask_opacity: 背景遮罩透明度调整
   wallpaper_blur_intensity: 背景模糊强度调整
+
+  # Search page settings
   logo_color: Logo 颜色
   logo_color_opt:
     white: 白
@@ -100,6 +111,8 @@ settings:
   bg_blurs_when_the_search_bar_is_focused: 当搜索栏聚焦时背景模糊
   choose_search_bar_focused_character: 选择搜索栏聚焦时出现的人物
   individually_set_search_page_wallpaper: 单独设置搜索页背景
+
+  # Home settings
   recommendation_mode: 推荐模式
   recommendation_mode_desc: |
     如果您想使用 app 端的推荐算法，请先授权 BewlyBewly 使用 access key。
@@ -114,8 +127,11 @@ settings:
   settings_shared_with_the_search_page: 与搜索页共用的配置
   settings_shared_with_the_search_page_desc: 这些设置都与搜索页共用
   search_page_mode_wallpaper_fixed: 将搜索页模式的壁纸固定
+
+  # About
   import_settings: 导入设置
   export_settings: 导出设置
+
 auth:
   err_tip: 授权 access key 失败
   plz_login_first: 请先登录 bilibili
