@@ -42,7 +42,7 @@ settings:
     authorize: 授權
     revoke: 解除授權
     open_settings: 打開設定...
-  select_language: 介面語文
+  select_language: 介面語言
   select_language_opt:
     english: 英文
     mandarin_cn: 官话
@@ -77,10 +77,10 @@ settings:
   adapt_to_other_page_styles: 適應其他版面風格
   adapt_to_other_page_styles_desc: 執執啲常用嘅版面，襯返 BewlyBewly 主題風格
   wallpaper_mode: 背景圖片模式
-  wallpaper_mode_desc: '由 URL: 直接用網上圖片嘅 URL 嚟到設定背景圖片。'
+  wallpaper_mode_desc: '使用 URL: 直接用網上圖片嘅 URL 嚟到設定背景圖片。'
   wallpaper_mode_opt:
     build_in: 內建
-    by_url: 由 URL
+    by_url: 使用 URL
   choose_ur_wallpaper: 揀張背景
   image_url: 圖片 URL
   image_url_hint: |-
@@ -109,7 +109,7 @@ settings:
     授咗權嘅話，你就會收到基於 bilibili 手機版推介演算法所推介嘅內容，兼且授權 key 只有約一個月有效期，到期後記得要重新授權嚟取得存取
     access key。
   authorize_app_more_info_access_key: 關於 access key
-  scan_qrcode_desc: 用 Bilibili 流動應用程式去 scan 呢個 QR code 愛嚟授權訪問 access key。
+  scan_qrcode_desc: 用 Bilibili 流動應用程式去 scan 呢個 QR code 愛嚟授權獲取 access key。
   use_search_page_mode: 主頁使用搵嘢頁模式
   settings_shared_with_the_search_page: 同搵嘢頁共用嘅設定
   settings_shared_with_the_search_page_desc: 呢啲設定都同搵嘢頁共用
