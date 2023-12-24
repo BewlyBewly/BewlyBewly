@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineProps<{
-  title: string
+  title?: string
   desc?: string
   nextLine?: boolean
 }>()
@@ -10,13 +10,17 @@ defineProps<{
   <div class="b-settings-item" py-4>
     <div flex="~ gap-4" justify-betwee items-center text-base>
       <div :w="nextLine ? 'full' : '5/7'">
-        {{ title }}
-        <br>
-        <span text="sm $bew-text-2">
+        <div mb-2>
+          <slot name="title">
+            {{ title }}
+          </slot>
+        </div>
+
+        <div text="sm $bew-text-2">
           <slot name="desc">
             {{ desc }}
           </slot>
-        </span>
+        </div>
       </div>
 
       <div v-if="!nextLine" w="2/7" class="right-content">

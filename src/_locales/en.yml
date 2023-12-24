@@ -22,6 +22,7 @@ common:
   enable: Enable
   disable: Disable
   refresh: Refresh
+  reset: Reset
 settings:
   title: Settings
 

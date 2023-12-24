@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { Icon } from '@iconify/vue'
-import type { DockItem, HoveringDockItem } from './types'
-import { AppPage } from '~/enums/appEnums'
-import { dockItemVisibilityList, settings } from '~/logic'
+import type { CurrentDockItem, HoveringDockItem } from './types'
+import type { AppPage } from '~/enums/appEnums'
+import { settings } from '~/logic'
+import type { DockItem } from '~/stores/mainStore'
+import { useMainStore } from '~/stores/mainStore'
 
 defineProps<{ activatedPage: AppPage }>()
 
 const emit = defineEmits(['change-page', 'settings-visibility-change'])
+
+const mainStore = useMainStore() as any
 
 const { t } = useI18n()
 
@@ -35,15 +39,15 @@ const currentAppColorScheme = computed((): 'dark' | 'light' => {
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 })
 
-const dockItems = computed((): DockItem[] => {
-  return [
-    { label: t('dock.search'), icon: 'mingcute:search-2-line', iconActivated: 'mingcute:search-2-fill', page: AppPage.Search },
-    { label: t('dock.home'), icon: 'mingcute:home-5-line', iconActivated: 'mingcute:home-5-fill', page: AppPage.Home },
-    { label: t('dock.anime'), icon: 'mingcute:tv-2-line', iconActivated: 'mingcute:tv-2-fill', page: AppPage.Anime },
-    { label: t('dock.favorites'), icon: 'mingcute:star-line', iconActivated: 'mingcute:star-fill', page: AppPage.Favorites },
-    { label: t('dock.history'), icon: 'mingcute:time-line', iconActivated: 'mingcute:time-fill', page: AppPage.History },
-    { label: t('dock.watch_later'), icon: 'mingcute:carplay-line', iconActivated: 'mingcute:carplay-fill', page: AppPage.WatchLater },
-  ]
+const currentDockItems = computed((): CurrentDockItem[] => {
+  return mainStore.dockItems.map((e: DockItem) => {
+    return {
+      label: t(e.i18nKey),
+      icon: e.icon,
+      iconActivated: e.iconActivated,
+      page: e.page,
+    }
+  })
 })
 
 watch(() => settings.value.autoHideDock, (newValue) => {
@@ -54,27 +58,27 @@ onMounted(() => {
   if (settings.value.autoHideDock)
     hideDock.value = true
 
-  if (dockItemVisibilityList.value.length < dockItems.value.length || dockItemVisibilityList.value.length > dockItems.value.length) {
+  if (settings.value.dockItemVisibilityList.length < currentDockItems.value.length || settings.value.dockItemVisibilityList.length > currentDockItems.value.length) {
     const newDockItemVisibilityList = ref<{ page: AppPage; visible: boolean }[]>([])
-    dockItems.value.forEach((item) => {
+    currentDockItems.value.forEach((item) => {
       newDockItemVisibilityList.value.push({ page: item.page, visible: true })
     })
 
     // Compare two arrays, get the differing elements, and delete or add them to the dockItemVisibilityList
-    const notInNewDockItemVisibilityList = dockItemVisibilityList.value.filter(obj1 =>
+    const notInNewDockItemVisibilityList = settings.value.dockItemVisibilityList.filter(obj1 =>
       !newDockItemVisibilityList.value.some(obj2 => obj1.page === obj2.page),
     )
     const notInDockItemVisibilityList = newDockItemVisibilityList.value.filter(obj1 =>
-      !dockItemVisibilityList.value.some(obj2 => obj1.page === obj2.page),
+      !settings.value.dockItemVisibilityList.some(obj2 => obj1.page === obj2.page),
     )
     const allDifferences = [...notInDockItemVisibilityList, ...notInNewDockItemVisibilityList]
 
-    if (dockItemVisibilityList.value.length < dockItems.value.length) {
-      dockItemVisibilityList.value.push(...allDifferences)
+    if (settings.value.dockItemVisibilityList.length < currentDockItems.value.length) {
+      settings.value.dockItemVisibilityList.push(...allDifferences)
     }
     else {
       allDifferences.forEach((obj1) => {
-        dockItemVisibilityList.value = dockItemVisibilityList.value.filter(obj2 => obj2.page !== obj1.page)
+        settings.value.dockItemVisibilityList = settings.value.dockItemVisibilityList.filter(obj2 => obj2.page !== obj1.page)
       })
     }
   }
@@ -116,15 +120,15 @@ function toggleDockHide(hide: boolean) {
       shadow="$bew-shadow-2"
       backdrop-glass pointer-events-auto
     >
-      <template v-for="dockItemVisibility in dockItemVisibilityList" :key="dockItemVisibility.page">
+      <template v-for="dockItemVisibility in settings.dockItemVisibilityList" :key="dockItemVisibility.page">
         <template v-if="dockItemVisibility.visible">
-          <Tooltip :content="dockItems.find((item) => item.page === dockItemVisibility.page)?.label ?? ''" :placement="tooltipPlacement">
+          <Tooltip :content="currentDockItems.find((item) => item.page === dockItemVisibility.page)?.label as string" :placement="tooltipPlacement">
             <button
               class="dock-item"
               :class="{ active: activatedPage === dockItemVisibility.page }"
               @click="emit('change-page', dockItemVisibility.page)"
             >
-              <Icon :icon="dockItems.find((item) => item.page === dockItemVisibility.page)?.icon ?? ''" />
+              <Icon :icon="currentDockItems.find((item) => item.page === dockItemVisibility.page)?.icon as string" />
             </button>
           </Tooltip>
         </template>

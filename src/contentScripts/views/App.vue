@@ -15,7 +15,7 @@ import { AppPage, LanguageType } from '~/enums/appEnums'
 import { getUserID, hexToRGBA, isHomePage, smoothScrollToTop } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
-const activatedPage = ref<AppPage>(settings.value.startupPage ?? AppPage.Home)
+const activatedPage = ref<AppPage>(settings.value.dockItemVisibilityList[0].page ?? AppPage.Home)
 const { locale } = useI18n()
 const [showSettings, toggleSettings] = useToggle(false)
 const pages = { Home, Search, Anime, History, WatchLater, Favorites }

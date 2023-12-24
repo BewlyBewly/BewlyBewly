@@ -22,6 +22,7 @@ common:
   enable: 啓用
   disable: 停用
   refresh: 重新整理
+  reset: 重置
 settings:
   title: 設定
   menu_general: 一般

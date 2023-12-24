@@ -1,10 +1,48 @@
 import { useStorageLocal } from '~/composables/useStorageLocal'
 import { AppPage } from '~/enums/appEnums'
-import type { Settings } from '~/models/settings'
+
+// TODO: refactor: implement storage functionality using pinia + useStorageLocal()
 
 export const storageDemo = useStorageLocal('webext-demo', 'Storage Demo')
 export const accessKey = useStorageLocal('accessKey', '')
 
+export interface Settings {
+  language: string
+  enableHorizontalScrolling: boolean
+  openLinkInCurrentTab: boolean
+  enableVideoCtrlBarOnVideoCard: boolean
+  isShowTopbar: boolean
+  autoHideTopbar: boolean
+  dockPosition: 'left' | 'right' | 'bottom'
+  autoHideDock: boolean
+  dockItemVisibilityList: { page: AppPage; visible: boolean }[]
+
+  theme: 'light' | 'dark' | 'auto'
+  themeColor: string
+  adaptToOtherPageStyles: boolean
+  wallpaperMode: 'buildIn' | 'byUrl'
+  wallpaper: string
+  enableWallpaperMasking: boolean
+  wallpaperMaskOpacity: number
+  wallpaperBlurIntensity: number
+
+  searchPageDarkenOnSearchFocus: boolean
+  searchPageBlurredOnSearchFocus: boolean
+  searchPageLogoColor: 'white' | 'themeColor'
+  searchPageLogoGlow: boolean
+  searchPageShowLogo: boolean
+  searchPageSearchBarFocusCharacter: string
+  individuallySetSearchPageWallpaper: boolean
+  searchPageWallpaperMode: 'buildIn' | 'byUrl'
+  searchPageWallpaper: string
+  searchPageEnableWallpaperMasking: boolean
+  searchPageWallpaperMaskOpacity: number
+  searchPageWallpaperBlurIntensity: number
+
+  recommendationMode: 'web' | 'app'
+  useSearchPageModeOnHomePage: boolean
+  searchPageModeWallpaperFixed: boolean
+}
 export const settings = useStorageLocal('settings', ref<Settings>({
   language: '',
   startupPage: AppPage.Home,
@@ -15,6 +53,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   autoHideTopbar: false,
   dockPosition: 'right',
   autoHideDock: false,
+  dockItemVisibilityList: [],
 
   theme: 'auto',
   themeColor: '#00a1d6',
@@ -42,12 +81,3 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   useSearchPageModeOnHomePage: false,
   searchPageModeWallpaperFixed: false,
 }), { mergeDefaults: true })
-
-export const dockItemVisibilityList = useStorageLocal('dockItems', reactive<{ page: AppPage; visible: boolean }[]>([
-  // { page: AppPage.Search, visible: true },
-  // { page: AppPage.Home, visible: true },
-  // { page: AppPage.Anime, visible: true },
-  // { page: AppPage.Favorites, visible: true },
-  // { page: AppPage.History, visible: true },
-  // { page: AppPage.WatchLater, visible: true },
-]))

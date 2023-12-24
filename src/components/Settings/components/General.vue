@@ -1,9 +1,11 @@
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
 import draggable from 'vuedraggable'
-import { dockItemVisibilityList, settings } from '~/logic'
-import { AppPage } from '~/enums/appEnums'
+import { Icon } from '@iconify/vue'
+import { settings } from '~/logic'
+import { useMainStore } from '~/stores/mainStore'
 
+const mainStore = useMainStore() as any
 const { t, locale } = useI18n()
 
 const langOptions = computed(() => {
@@ -43,20 +45,28 @@ const dockPositions = computed(() => {
   ]
 })
 
-const pageOptions = computed((): { label: string; value: string }[] => {
-  return [
-    { label: t('dock.search'), value: AppPage.Search },
-    { label: t('dock.home'), value: AppPage.Home },
-    { label: t('dock.anime'), value: AppPage.Anime },
-    { label: t('dock.history'), value: AppPage.History },
-    { label: t('dock.favorites'), value: AppPage.Favorites },
-    { label: t('dock.watch_later'), value: AppPage.WatchLater },
-  ]
+const pageOptions = computed((): { label: string;icon: string; value: string }[] => {
+  return mainStore.dockItems.map((e: any) => {
+    return {
+      label: t(e.i18nKey),
+      icon: e.icon,
+      value: e.page,
+    }
+  })
 })
 
 watch(() => settings.value.language, (newValue) => {
   locale.value = newValue
 })
+
+function resetDockContent() {
+  settings.value.dockItemVisibilityList = mainStore.dockItems.map((e: any) => {
+    return {
+      page: e.page,
+      visible: true,
+    }
+  })
+}
 </script>
 
 <template>
@@ -110,9 +120,20 @@ watch(() => settings.value.language, (newValue) => {
       <SettingsItem :title="$t('settings.auto_hide_dock')">
         <Radio v-model="settings.autoHideDock" />
       </SettingsItem>
-      <SettingsItem :title="$t('settings.dock_content_adjustment')" next-line>
+      <SettingsItem next-line>
+        <template #title>
+          <div flex="~ gap-4 items-center">
+            {{ $t('settings.dock_content_adjustment') }}
+            <Button size="small" type="secondary" @click="resetDockContent">
+              <template #left>
+                <mingcute:back-line />
+              </template>
+              {{ $t('common.reset') }}
+            </Button>
+          </div>
+        </template>
         <draggable
-          v-model="dockItemVisibilityList"
+          v-model="settings.dockItemVisibilityList"
           item-key="page"
           :component-data="{ style: 'display: flex; gap: 0.5rem;' }"
         >
@@ -120,12 +141,13 @@ watch(() => settings.value.language, (newValue) => {
             <div
               flex="~ gap-2 items-center" p="x-4 y-2" bg="$bew-fill-1" rounded="$bew-radius" cursor-all-scroll
               duration-300
-              :style="{ opacity: element.visible ? 1 : 0.6 }"
+              :style="{
+                background: element.visible ? 'var(--bew-theme-color)' : 'var(--bew-fill-1)',
+                color: element.visible ? 'white' : 'var(--bew-text-1)',
+              }"
+              @click="element.visible = !element.visible"
             >
-              <div @click="element.visible = !element.visible">
-                <line-md:watch v-if="element.visible" cursor-pointer />
-                <line-md:watch-off v-else cursor-pointer />
-              </div>
+              <Icon :icon="pageOptions.find((page:any) => (page.value === element.page))?.icon as string" />
               {{ pageOptions.find(option => option.value === element.page)?.label }}
             </div>
           </template>

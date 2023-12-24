@@ -1,6 +1,6 @@
 import type { AppPage } from '~/enums/appEnums'
 
-export interface DockItem {
+export interface CurrentDockItem {
   label: string
   icon: string
   iconActivated: string
