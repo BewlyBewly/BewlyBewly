@@ -1,4 +1,6 @@
-**| English | [简体中文](README_cn.md) |**
+# BewlyBewly
+
+English | [简体中文](README_cn.md)
 
 <p align="center" style="margin-bottom: 0px !important;">
 <img width="150" src="https://user-images.githubusercontent.com/33394391/160250512-410b71fc-7f25-4caf-b850-429227ff082a.png"><br/>
@@ -30,9 +32,9 @@ Even in the Edge browser, we strongly recommend you install it in the Chrome web
 
 ### Local Installation
 
-[ci](https://github.com/hakadao/BewlyBewly/actions)：automatically build with the latest code
+[CI](https://github.com/hakadao/BewlyBewly/actions)：Automatically build with the latest code
 
-[releases](https://github.com/hakadao/BewlyBewly/releases)：stable version
+[Releases](https://github.com/hakadao/BewlyBewly/releases)：Stable version
 
 #### Edge & Chrome (RECOMMENDED)
 
@@ -81,6 +83,14 @@ pnpm build
 ```
 
 And then pack files under `extension`
+
+### 🤝 Contribution
+
+#### i18n
+
+- When doing translations, if you have a language you are not familiar with, you can use another language that you have translated and point out what language you cannot translate in the pull request.
+
+- **Please MANUALLY MAINTAIN the i18n files!!!** Do not use `i18n Ally` or other extensions to maintain them. I know you might be confused or might not like this, but using `i18n Ally` for the maintenance will be uncertain where to place the translations afterward or delete the code comments.
 
 ## ❤️ Credits
 

@@ -1,4 +1,6 @@
-**| [English](README.md) | 简体中文 |**
+# BewlyBewly
+
+[English](README.md) | 简体中文
 
 <p align="center" style="margin-bottom: 0px !important;">
 <img width="150" src="https://user-images.githubusercontent.com/33394391/160250512-410b71fc-7f25-4caf-b850-429227ff082a.png"><br/>
@@ -81,6 +83,14 @@ pnpm build
 ```
 
 然后打包到 `extension` 文件夹
+
+### 🤝 Contribution
+
+#### i18n
+
+- 在进行翻译时，如果你遇到一种你不熟悉的语言，可以使用另一种你已经翻译过的语言，并在 Pull requests 中指出你无法翻译的语言。
+
+- 请**手动维护** i18n 国际化文件！！！不要使用 `i18n Ally` 或其他扩展来维护它们。我知道你可能会感到困惑或不喜欢这样做，但使用 `i18n Ally` 进行维护会不确定如何放置翻译或删除代码注释。
 
 ## ❤️ 鸣谢
 
