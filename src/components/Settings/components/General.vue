@@ -80,14 +80,6 @@ function resetDockContent() {
         />
       </SettingsItem>
 
-      <SettingsItem :title="$t('settings.startup_page')">
-        <Select
-          v-model="settings.startupPage"
-          :options="pageOptions"
-          w="full"
-        />
-      </SettingsItem>
-
       <SettingsItem :title="$t('settings.enable_horizontal_scrolling')" :desc="$t('settings.enable_horizontal_scrolling_desc')">
         <Radio v-model="settings.enableHorizontalScrolling" />
       </SettingsItem>
@@ -120,7 +112,7 @@ function resetDockContent() {
       <SettingsItem :title="$t('settings.auto_hide_dock')">
         <Radio v-model="settings.autoHideDock" />
       </SettingsItem>
-      <SettingsItem next-line>
+      <SettingsItem next-line :desc="$t('settings.dock_content_adjustment_desc')">
         <template #title>
           <div flex="~ gap-4 items-center">
             {{ $t('settings.dock_content_adjustment') }}

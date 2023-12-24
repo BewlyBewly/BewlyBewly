@@ -57,7 +57,6 @@ settings:
     mandarin_cn: Mandarin - Simplified Chinese
     mandarin_tw: Mandarin - Traditional Chinese
     jyut: Cantonese
-  startup_page: Startup page
   chk_box:
     show: Show
     hidden: Hidden
@@ -75,6 +74,7 @@ settings:
     bottom: Bottom
   auto_hide_dock: Automatically hide the dock
   dock_content_adjustment: Dock content adjustment
+  dock_content_adjustment_desc: The page of the first activated dock item will be the startup page
 
   # Appearance settings
   theme: Theme
