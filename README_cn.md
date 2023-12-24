@@ -32,9 +32,9 @@
 
 ### 本地安装
 
-[ci](https://github.com/hakadao/BewlyBewly/actions)：使用最新代码自动构建
+[CI](https://github.com/hakadao/BewlyBewly/actions)：使用最新代码自动构建
 
-[releases](https://github.com/hakadao/BewlyBewly/releases)：稳定版
+[Releases](https://github.com/hakadao/BewlyBewly/releases)：稳定版
 
 #### Edge 和 Chrome（推荐）
 
@@ -84,7 +84,7 @@ pnpm build
 
 然后打包到 `extension` 文件夹
 
-### 🤝 Contribution
+### 🤝 协助开发
 
 #### i18n
 
