@@ -10,13 +10,13 @@ defineProps<{
   <div class="b-settings-item" py-4>
     <div flex="~ gap-4" justify-betwee items-center text-base>
       <div :w="nextLine ? 'full' : '5/7'">
-        <div mb-2>
+        <div>
           <slot name="title">
             {{ title }}
           </slot>
         </div>
 
-        <div text="sm $bew-text-2">
+        <div v-if="desc" text="sm $bew-text-2" mt-1>
           <slot name="desc">
             {{ desc }}
           </slot>
@@ -28,7 +28,7 @@ defineProps<{
       </div>
     </div>
 
-    <div v-if="nextLine" mt-2>
+    <div v-if="nextLine" mt-4>
       <slot />
     </div>
   </div>
