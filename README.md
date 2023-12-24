@@ -1,6 +1,6 @@
 # BewlyBewly
 
-English | [简体中文](README_cn.md)
+English | [官话 - 简体中文](README-cmn_CN.md) | [官話 - 正體中文](README-cmn_TW.md) | [廣東話](README-jyut.md)
 
 <p align="center" style="margin-bottom: 0px !important;">
 <img width="150" src="https://user-images.githubusercontent.com/33394391/160250512-410b71fc-7f25-4caf-b850-429227ff082a.png"><br/>
@@ -40,7 +40,7 @@ Even in the Edge browser, we strongly recommend you install it in the Chrome web
 
 > Ensure you installed [extension.zip](https://github.com/hakadao/BewlyBewly/releases) .
 
-Opening the `edge://extensions`  page in the Edge or `chrome://extensions` page in the Chrome, simply drag and drop the downloaded `extension.zip` file into the browser to complete the installation.
+Opening the `edge://extensions` page in the Edge or `chrome://extensions` page in the Chrome, simply drag and drop the downloaded `extension.zip` file into the browser to complete the installation.
 
 <details>
  <summary> Another installation method for Edge & Chrome </summary>
