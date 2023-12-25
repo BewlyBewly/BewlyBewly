@@ -1,6 +1,6 @@
 # BewlyBewly
 
-English | [官话 - 简体中文](README-cmn_CN.md) | [官話 - 正體中文](README-cmn_TW.md) | [廣東話](README-jyut.md)
+English | [简体中文](README-cmn_CN.md) | [正體中文](README-cmn_TW.md) | [廣東話](README-jyut.md)
 
 <p align="center" style="margin-bottom: 0px !important;">
 <img width="150" src="https://user-images.githubusercontent.com/33394391/160250512-410b71fc-7f25-4caf-b850-429227ff082a.png"><br/>
