@@ -1,18 +1,17 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import type { Ref, UnwrapNestedRefs } from 'vue'
+import type { Ref } from 'vue'
 import { onMounted, reactive, ref, watch } from 'vue'
 import { isNewArticle, isNewVideo, setLastestOffsetID } from '../notify'
 import { MomentType } from '../types'
 import type { MomentItem } from '../types'
-import { getUserID, smoothScrollToTop } from '~/utils/main'
+import { getCSRF, getUserID, smoothScrollToTop } from '~/utils/main'
 import { calcTimeSince } from '~/utils/dataFormatter'
 
 const { t } = useI18n()
 
-const moments = reactive<Array<MomentItem>>([]) as UnwrapNestedRefs<
-  Array<MomentItem>
->
+const moments = reactive<MomentItem[]>([])
+const addedWatchLaterList = reactive<number[]>([])
 const momentTabs = reactive([
   {
     id: 0,
@@ -243,6 +242,40 @@ function pushItemIntoMoments(item: any) {
     } as MomentItem)
   }
 }
+
+function toggleWatchLater(aid: number) {
+  const isInWatchLater = addedWatchLaterList.includes(aid)
+  console.log(isInWatchLater)
+
+  // if (isInWatchLater)
+  //   Object.assign(addedWatchLaterList, addedWatchLaterList.filter(item => item !== aid))
+
+  // else
+  //   addedWatchLaterList.push(aid)
+
+  if (!isInWatchLater) {
+    browser.runtime.sendMessage({
+      contentScriptQuery: 'saveToWatchLater',
+      aid,
+      csrf: getCSRF(),
+    })
+      .then((res) => {
+        if (res.code === 0)
+          addedWatchLaterList.push(aid)
+      })
+  }
+  else {
+    browser.runtime.sendMessage({
+      contentScriptQuery: 'removeFromWatchLater',
+      aid,
+      csrf: getCSRF(),
+    })
+      .then((res) => {
+        if (res.code === 0)
+          Object.assign(addedWatchLaterList, addedWatchLaterList.filter(item => item !== aid))
+      })
+  }
+}
 </script>
 
 <template>
@@ -287,7 +320,7 @@ function pushItemIntoMoments(item: any) {
 
     <!-- moments wrapper -->
     <main overflow-hidden rounded="$bew-radius">
-      <div ref="momentsWrap" h="430px" overflow="y-scroll" p="x-4">
+      <div ref="momentsWrap" h="430px" overflow="y-scroll x-hidden" p="x-4">
         <!-- loading -->
         <loading
           v-if="isLoading && moments.length === 0"
@@ -389,13 +422,33 @@ function pushItemIntoMoments(item: any) {
                   </div>
                 </div>
               </div>
-              <img
-                :src="`${moment.cover}@128w_72h_1c`"
-                w="82px"
-                h="46px"
-                m="l-4"
-                rounded="$bew-radius-half"
+              <div
+                flex="~ items-center justify-center" w="82px"
+                h="46px" m="l-4"
+                class="group"
               >
+                <img
+                  :src="`${moment.cover}@128w_72h_1c`"
+                  w="82px"
+                  h="46px"
+                  rounded="$bew-radius-half"
+                >
+                <div
+                  v-if="moment.type === MomentType.Video"
+                  opacity-0 group-hover:opacity-100
+                  pos="absolute" duration-300 bg="black opacity-60"
+                  rounded="$bew-radius-half" p-1
+                  z-1
+                  @click.prevent="toggleWatchLater(addedWatchLaterList.includes(moment.aid ?? 0), moment.aid ?? 0)"
+                >
+                  <Tooltip v-if="!addedWatchLaterList.includes(moment.aid ?? 0)" :content="$t('common.save_to_watch_later')" placement="bottom" type="dark">
+                    <mingcute:carplay-line />
+                  </Tooltip>
+                  <Tooltip v-else :content="$t('common.added')" placement="bottom" type="dark">
+                    <line-md:confirm />
+                  </Tooltip>
+                </div>
+              </div>
             </div>
           </a>
         </transition-group>
