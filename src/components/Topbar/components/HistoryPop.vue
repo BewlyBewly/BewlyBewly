@@ -112,16 +112,20 @@ function onClickTab(tabId: number) {
  */
 function getHistoryUrl(item: HistoryItem) {
   // Video
-  if (activatedTab.value === 0)
+  if (activatedTab.value === 0) {
     return `https://www.bilibili.com/video/${item.history.bvid}`
+  }
   // Live
-  else if (activatedTab.value === 1)
+  else if (activatedTab.value === 1) {
     return `//live.bilibili.com/${item.history.oid}`
+  }
   // Article
-  else if (activatedTab.value === 2)
-    if (item.history.cid == 0)
+  else if (activatedTab.value === 2) {
+    if (item.history.cid === 0)
       return `/read/cv${item.history.oid}`
-    else return `/read/cv${item.history.cid}`
+    else
+      return `/read/cv${item.history.cid}`
+  }
 
   return ''
 }
