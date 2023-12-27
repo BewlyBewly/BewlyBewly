@@ -134,6 +134,8 @@ settings:
   # About
   import_settings: Import Settings
   export_settings: Export Settings
+  export_settings_desc: Some sensitive content, such as access key, will not be exported and may need to be reacquired again.
+  contributors: Contributors
 
 auth:
   err_tip: Failed to grant access key

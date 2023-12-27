@@ -133,6 +133,9 @@ settings:
   # About
   import_settings: 匯入設定
   export_settings: 匯出設定
+  export_settings_desc: 一啲敏感性資訊，例如 access key，可能要你重新攞過
+  contributors: 貢獻者
+
 auth:
   err_tip: 無法授權 access key
   plz_login_first: 唔該登入 bilibili 先

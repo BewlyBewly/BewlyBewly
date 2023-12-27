@@ -132,6 +132,8 @@ settings:
   # About
   import_settings: 导入设置
   export_settings: 导出设置
+  export_settings_desc: 一些敏感的数据，例如 access key，可能需要重新获取
+  contributors: 贡献者
 
 auth:
   err_tip: 授权 access key 失败

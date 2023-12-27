@@ -53,18 +53,14 @@ function handleExportSettings() {
 
 <template>
   <div
-    flex items-center justify-center pos="absolute top--80px left-0" w-full
-    h-full
+    flex items-center justify-center w-full
   >
-    <div flex="~ col gap-1" items-center>
+    <div flex="~ col gap-4" items-center mt-8>
       <img :src="`${browser.runtime.getURL('/assets/icon-512.png')}`" alt="" width="80">
-      <p text-xl>
+      <section text-xl>
         BewlyBewly <a href="https://github.com/hakadao/BewlyBewly/releases" target="_blank" un-text="sm color-$bew-text-2 hover:color-$bew-text-3">v{{ version }}</a>
-      </p>
-      <p text="sm $bew-text-2">
-        Made by Hakadao
-      </p>
-      <p mt-6 flex gap-2>
+      </section>
+      <section mt-4 flex gap-2>
         <a
           href="https://github.com/hakadao/BewlyBewly" target="_blank"
           p="y-2 x-4" flex items-center bg="black dark:white" un-text="!white dark:!black"
@@ -81,8 +77,8 @@ function handleExportSettings() {
         >
           <tabler:brand-bilibili mr-2 /> Bilibili
         </a>
-      </p>
-      <p pos="relative top-14">
+      </section>
+      <section mt-4 flex="~ col gap-2 items-center">
         <Button class="btn" @click="handleImportSettings">
           <template #left>
             <uil:import />
@@ -90,13 +86,23 @@ function handleExportSettings() {
           <input ref="importSettingsRef" type="file" accept=".json" hidden>
           {{ $t('settings.import_settings') }}
         </Button>
-        <Button class="btn" mt-2 @click="handleExportSettings">
-          <template #left>
-            <uil:export />
-          </template>
-          {{ $t('settings.export_settings') }}
-        </Button>
-      </p>
+        <Tooltip placement="bottom" :content="$t('settings.export_settings_desc')">
+          <Button class="btn" @click="handleExportSettings">
+            <template #left>
+              <uil:export />
+            </template>
+            {{ $t('settings.export_settings') }}
+          </Button>
+        </Tooltip>
+      </section>
+      <section mt-8>
+        <h3 text="xl center" mb-2>
+          {{ $t('settings.contributors') }}
+        </h3>
+        <a href="https://github.com/hakadao/BewlyBewly/graphs/contributors" target="_blank">
+          <img src="https://contrib.rocks/image?repo=hakadao/BewlyBewly">
+        </a>
+      </section>
     </div>
   </div>
 </template>
