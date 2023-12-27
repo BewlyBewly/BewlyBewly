@@ -137,7 +137,7 @@ function getPopularAnimeList() {
             </template>
             <LongCoverCard
               v-for="item in animeWatchList"
-              :key="item.episode_id"
+              :key="item.short_url"
               :url="item.url"
               :cover="item.cover"
               :title="item.title"
@@ -188,7 +188,7 @@ function getPopularAnimeList() {
             </template>
             <LongCoverCard
               v-for="item in popularAnimeList"
-              :key="item.episode_id"
+              :key="item.url"
               w="2xl:[calc(100%/6-1.5rem)] xl:[calc(100%/5-1.5rem)] lg:[calc(100%/4-1.5rem)] md:[calc(100%/3-1.5rem)] sm:[calc(100%/2-1.5rem)] [calc(100%-1.5rem)]"
               last:w="2xl:1/6 xl:1/5 lg:1/4 md:1/3 sm:1/2 full"
               shrink-0
@@ -225,10 +225,10 @@ function getPopularAnimeList() {
           <LongCoverCard
             v-for="item in recommendAnimeList"
             :key="item.episode_id"
-            :url="item.link"
+            :url="item.link ?? ''"
             :cover="item.cover"
-            :cover-hover="item.hover.img"
-            :tags="item.hover.text"
+            :cover-hover="item?.hover?.img"
+            :tags="item?.hover?.text"
             :title="item.title"
             :desc="item.sub_title"
             :capsule-text="item.rating"
