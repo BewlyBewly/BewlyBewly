@@ -6,9 +6,9 @@ import { useI18n } from 'vue-i18n'
 import { getCSRF, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
 import { calcCurrentTime } from '~/utils/dataFormatter'
 import emitter from '~/utils/mitt'
-import { Business } from '~/models/apiModels/video/history'
-import type { List as HistoryItem, HistoryResult } from '~/models/apiModels/video/history'
-import type { List as HistorySearchItem, HistorySearchResult } from '~/models/apiModels/video/historySearch'
+import { Business } from '~/models/video/history'
+import type { List as HistoryItem, HistoryResult } from '~/models/video/history'
+import type { List as HistorySearchItem, HistorySearchResult } from '~/models/video/historySearch'
 
 const { t } = useI18n()
 
@@ -349,13 +349,6 @@ function jumpToLoginPage() {
                   v-if="historyItem.history.business === HistoryBusiness.LIVE"
                 >
                   Livestreaming
-                </template>
-                <template
-                  v-else-if="
-                    historyItem.history.business === HistoryBusiness.ARCHIVE
-                  "
-                >
-                  Article
                 </template>
                 <template
                   v-else-if="historyItem.history.business === HistoryBusiness.PGC"

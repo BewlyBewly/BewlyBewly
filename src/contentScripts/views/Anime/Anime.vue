@@ -3,9 +3,9 @@ import AnimeTimeTable from './components/AnimeTimeTable.vue'
 import { getUserID, openLinkToNewTab } from '~/utils/main'
 import { numFormatter } from '~/utils/dataFormatter'
 import emitter from '~/utils/mitt'
-import type { List as WatchListItem, WatchListResult } from '~/models/apiModels/anime/watchList'
-import type { List as PopularAnimeItem, PopularAnimeResult } from '~/models/apiModels/anime/popular'
-import type { ItemSubItem as RecommendationItem, RecommendationResult } from '~/models/apiModels/anime/recommendation'
+import type { List as WatchListItem, WatchListResult } from '~/models/anime/watchList'
+import type { List as PopularAnimeItem, PopularAnimeResult } from '~/models/anime/popular'
+import type { ItemSubItem as RecommendationItem, RecommendationResult } from '~/models/anime/recommendation'
 
 const animeWatchList = reactive<WatchListItem[]>([])
 const recommendAnimeList = reactive<RecommendationItem[]>([])
@@ -256,4 +256,3 @@ function getPopularAnimeList() {
   --at-apply: mb-8 mt-14 first:mt-0;
 }
 </style>
-~/models/apiModels/anime/watchList

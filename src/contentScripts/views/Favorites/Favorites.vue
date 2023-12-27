@@ -4,8 +4,8 @@ import { getCSRF, getUserID, openLinkToNewTab, removeHttpFromUrl } from '~/utils
 import type { FavoriteCategory, FavoriteResource } from '~/components/Topbar/types'
 import emitter from '~/utils/mitt'
 import { settings } from '~/logic'
-import type { Media as FavoriteItem, FavoritesResult } from '~/models/apiModels/video/favorite'
-import type { List as CategoryItem, FavoritesCategoryResult } from '~/models/apiModels/video/favoriteCategory'
+import type { Media as FavoriteItem, FavoritesResult } from '~/models/video/favorite'
+import type { List as CategoryItem, FavoritesCategoryResult } from '~/models/video/favoriteCategory'
 
 const { t } = useI18n()
 

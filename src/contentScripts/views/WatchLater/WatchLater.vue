@@ -4,7 +4,7 @@ import { useI18n } from 'vue-i18n'
 import { getCSRF, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
 import { calcCurrentTime } from '~/utils/dataFormatter'
 import emitter from '~/utils/mitt'
-import type { List as VideoItem, WatchLaterResult } from '~/models/apiModels/video/watchLater'
+import type { List as VideoItem, WatchLaterResult } from '~/models/video/watchLater'
 
 const { t } = useI18n()
 

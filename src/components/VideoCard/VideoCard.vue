@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { getCSRF, removeHttpFromUrl } from '~/utils/main'
 import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils/dataFormatter'
-import type { VideoPreviewResult } from '~/models/apiModels/video/videoPreview'
+import type { VideoPreviewResult } from '~/models/video/videoPreview'
 import { settings } from '~/logic'
 
 interface Props {

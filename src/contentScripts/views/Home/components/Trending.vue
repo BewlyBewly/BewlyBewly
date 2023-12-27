@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import type { TrendingResult, List as VideoItem } from '~/models/apiModels/video/trending'
+import type { TrendingResult, List as VideoItem } from '~/models/video/trending'
 import emitter from '~/utils/mitt'
 
 const videoList = reactive<VideoItem[]>([])
@@ -97,4 +97,3 @@ async function getTrendingVideos() {
 
 <style lang="scss" scoped>
 </style>
-~/models/apiModels/video/trendingResult

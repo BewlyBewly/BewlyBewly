@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import type { DataItem as MomentItem, MomentResult } from '~/models/apiModels/moment/moment'
+import type { DataItem as MomentItem, MomentResult } from '~/models/moment/moment'
 import emitter from '~/utils/mitt'
 
 const momentList = reactive<MomentItem[]>([])

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import type { RankingType } from '../types'
-import type { RankingResult, List as RankingVideoItem } from '~/models/apiModels/video/ranking'
-import type { List as RankingPgcItem, RankingPgcResult } from '~/models/apiModels/video/rankingPgc'
+import type { RankingResult, List as RankingVideoItem } from '~/models/video/ranking'
+import type { List as RankingPgcItem, RankingPgcResult } from '~/models/video/rankingPgc'
 import { settings } from '~/logic'
 import emitter from '~/utils/mitt'
 
@@ -195,4 +195,3 @@ function getRankingPgc() {
   --at-apply: h-[calc(100vh-70)] translate-y--70px;
 }
 </style>
-~/models/apiModels/video/ranking

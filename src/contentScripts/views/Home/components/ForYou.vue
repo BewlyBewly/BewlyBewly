@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import type { AppForYouResult, Item as AppVideoItem } from '~/models/apiModels/video/appForYou'
-import type { Item as VideoItem, forYouResult } from '~/models/apiModels/video/forYou'
+import type { AppForYouResult, Item as AppVideoItem } from '~/models/video/appForYou'
+import type { Item as VideoItem, forYouResult } from '~/models/video/forYou'
 import emitter from '~/utils/mitt'
 import { accessKey, settings } from '~/logic'
 import { LanguageType } from '~/enums/appEnums'
