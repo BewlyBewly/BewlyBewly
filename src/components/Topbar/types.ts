@@ -94,6 +94,7 @@ export interface HistoryItem {
     bvid?: string
     part?: string
     oid: number
+    cid: number
   }
   author_name: string
   author_face: string
