@@ -75,7 +75,7 @@ export interface MomentItem {
   isNew: boolean
 }
 
-// https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/history&toview/history.md#%E8%8E%B7%E5%8F%96%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95%E5%88%97%E8%A1%A8_web%E7%AB%AF
+// https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/history&toview/history.md#%E8%8E%B7%E5%8F%96%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95%E5%88%97%E8%A1%A8_web%E7%AB%AF
 export enum HistoryType {
   Archive = 'archive', // archive：稿件
   PGC = 'pgc', // pgc：剧集 (番剧 / 影视)
@@ -116,7 +116,7 @@ export interface FavoriteCategory {
   media_count: number
 }
 
-// https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/fav/list.md#%E8%8E%B7%E5%8F%96%E6%94%B6%E8%97%8F%E5%A4%B9%E5%86%85%E5%AE%B9%E6%98%8E%E7%BB%86%E5%88%97%E8%A1%A8
+// https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/fav/list.md#%E8%8E%B7%E5%8F%96%E6%94%B6%E8%97%8F%E5%A4%B9%E5%86%85%E5%AE%B9%E6%98%8E%E7%BB%86%E5%88%97%E8%A1%A8
 export interface FavoriteResource {
   id: number
   type: number // 2：视频稿件 12：音频 21：视频合集

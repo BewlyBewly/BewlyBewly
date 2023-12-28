@@ -27,7 +27,7 @@ function handleMessage(message: any) {
       .then(data => data)
       .catch(error => console.error(error))
   }
-  // https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/bangumi/timeline.md#%E7%95%AA%E5%89%A7%E6%88%96%E5%BD%B1%E8%A7%86%E6%97%B6%E9%97%B4%E7%BA%BF
+  // https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/bangumi/timeline.md#%E7%95%AA%E5%89%A7%E6%88%96%E5%BD%B1%E8%A7%86%E6%97%B6%E9%97%B4%E7%BA%BF
   else if (message.contentScriptQuery === 'getAnimeTimeTable') {
     const url
       = 'https://api.bilibili.com/pgc/web/timeline?types=1&before=6&after=6'
