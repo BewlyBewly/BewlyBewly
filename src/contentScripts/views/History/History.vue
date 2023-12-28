@@ -174,7 +174,7 @@ function getHistoryUrl(item: HistoryItem) {
 }
 
 function getHistoryItemCover(item: HistoryItem) {
-  if (item.history.business === 'article') {
+  if (item.history.business === 'article' || item.history.business === 'article-list') {
     if (item.covers)
       return removeHttpFromUrl(`${item.covers[0]}`)
   }
