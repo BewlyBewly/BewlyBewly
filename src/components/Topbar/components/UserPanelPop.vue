@@ -106,7 +106,7 @@ async function logout() {
         <div>{{ $t('topbar.user_dropdown.followers') }}</div>
       </a>
       <a
-        href="https://t.bilibili.com/"
+        :href="`https://space.bilibili.com/${mid}/dynamic`"
         target="_blank"
         :title="`${userStat.dynamic_count}`"
       >
