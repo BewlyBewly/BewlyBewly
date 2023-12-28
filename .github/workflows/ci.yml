@@ -1,12 +1,12 @@
 name: Build
 
 on:
-  workflow_dispatch:
   push:
     branches:
       # The branch where the project source code resides
       # 项目源代码所在的分支
       - main
+      - dev
 
 jobs:
   build:
@@ -41,12 +41,12 @@ jobs:
 
       - name: Upload Zip
         uses: actions/upload-artifact@v3
-        with: 
+        with:
           name: BewlyBewly Zip
           path: extension.zip
-      
+
       - name: Upload Crx
         uses: actions/upload-artifact@v3
-        with: 
+        with:
           name: BewlyBewly Crx
           path: extension.crx

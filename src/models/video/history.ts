@@ -23,6 +23,7 @@ export enum Business {
   PGC = 'pgc',
   LIVE = 'live',
   ARTICLE = 'article',
+  ARTICLE_LIST = 'article-list',
 }
 
 export interface List {

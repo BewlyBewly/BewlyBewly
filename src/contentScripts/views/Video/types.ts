@@ -290,7 +290,7 @@ export interface Comment {
   'content': {
     'message': string
     'members': []
-    'jump_url': {}
+    'jump_url': NonNullable<unknown>
     'max_line': 6
   }
   'replies'?: Comment[]

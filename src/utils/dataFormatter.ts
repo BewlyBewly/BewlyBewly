@@ -1,9 +1,10 @@
 import { LanguageType } from './../enums/appEnums'
 import { settings } from '~/logic'
 import { i18n } from '~/utils/i18n'
+
 export const { t } = i18n.global
 
-export const numFormatter = (num: number) => {
+export function numFormatter(num: number) {
   const digits = 1 // specify number of digits after decimal
   let lookup
 
@@ -38,7 +39,7 @@ export const numFormatter = (num: number) => {
   return item ? (num / item.value).toFixed(digits).replace(rx, '$1') + item.symbol : '0'
 }
 
-export const calcTimeSince = (date: number | string | Date) => {
+export function calcTimeSince(date: number | string | Date) {
   const seconds = Math.floor(((Number(new Date())) - Number(date)) / 1000)
   let interval = seconds / 31536000
   if (interval > 1)
@@ -61,7 +62,7 @@ export const calcTimeSince = (date: number | string | Date) => {
   return `${Math.floor(interval)} ${t('common.second', Math.floor(interval))}`
 }
 
-export const calcCurrentTime = (totalSeconds: number) => {
+export function calcCurrentTime(totalSeconds: number) {
   const hours = Math.floor(totalSeconds / 3600)
   totalSeconds %= 3600
   const minutes = Math.floor(totalSeconds / 60)

@@ -1,11 +1,11 @@
-import { dirname, join } from 'path'
+import { dirname, join } from 'node:path'
 import type { HMRPayload, PluginOption } from 'vite'
 import fs from 'fs-extra'
 import { isWin, r } from './scripts/utils'
 
 const targetDir = r('extension')
 
-export const MV3Hmr = (): PluginOption => {
+export function MV3Hmr(): PluginOption {
   return {
     name: 'vite-mv3-hmr',
     apply: 'serve',
