@@ -164,7 +164,7 @@ function getHistoryUrl(item: HistoryItem) {
   else if (item.history.business === 'live') {
     return `//live.bilibili.com/${item.history.oid}`
   }
-  else if (item.history.business === 'article') {
+  else if (item.history.business === 'article' || item.history.business === 'article-list') {
     if (item.history.cid === 0)
       return `//www.bilibili.com/read/cv${item.history.oid}`
     else
