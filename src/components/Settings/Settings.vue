@@ -5,6 +5,7 @@ import General from './components/General.vue'
 import Appearance from './components/Appearance.vue'
 import SearchPage from './components/SearchPage.vue'
 import Home from './components/Home.vue'
+import Compatibility from './components/Compatibility.vue'
 import About from './components/About.vue'
 import type { MenuItem } from './types'
 import { MenuType } from './types'
@@ -14,7 +15,7 @@ const emit = defineEmits(['close'])
 
 const { t } = useI18n()
 
-const settingsMenu = { General, Appearance, SearchPage, Home, About }
+const settingsMenu = { General, Appearance, SearchPage, Home, Compatibility, About }
 const activatedMenuItem = ref<MenuType>(MenuType.General)
 const title = ref<string>(t('settings.title'))
 const preventCloseSettings = ref<boolean>(false)
@@ -55,6 +56,12 @@ const settingsMenuItems = computed((): MenuItem[] => {
       icon: 'mingcute:home-5-line',
       iconActivated: 'mingcute:home-5-fill',
       title: t('settings.menu_home'),
+    },
+    {
+      value: MenuType.Compatibility,
+      icon: 'mingcute:polygon-line',
+      iconActivated: 'mingcute:polygon-fill',
+      title: 'Compatibility',
     },
     {
       value: MenuType.About,
