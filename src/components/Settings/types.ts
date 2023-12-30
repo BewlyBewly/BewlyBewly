@@ -3,6 +3,7 @@ export enum MenuType {
   Appearance = 'Appearance',
   SearchPage = 'SearchPage',
   Home = 'Home',
+  Compatibility = 'Compatibility',
   About = 'About',
 }
 
