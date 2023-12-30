@@ -245,13 +245,6 @@ function pushItemIntoMoments(item: any) {
 
 function toggleWatchLater(aid: number) {
   const isInWatchLater = addedWatchLaterList.includes(aid)
-  console.log(isInWatchLater)
-
-  // if (isInWatchLater)
-  //   Object.assign(addedWatchLaterList, addedWatchLaterList.filter(item => item !== aid))
-
-  // else
-  //   addedWatchLaterList.push(aid)
 
   if (!isInWatchLater) {
     browser.runtime.sendMessage({
@@ -271,8 +264,10 @@ function toggleWatchLater(aid: number) {
       csrf: getCSRF(),
     })
       .then((res) => {
-        if (res.code === 0)
+        if (res.code === 0) {
+          addedWatchLaterList.length = 0
           Object.assign(addedWatchLaterList, addedWatchLaterList.filter(item => item !== aid))
+        }
       })
   }
 }
@@ -439,7 +434,7 @@ function toggleWatchLater(aid: number) {
                   pos="absolute" duration-300 bg="black opacity-60"
                   rounded="$bew-radius-half" p-1
                   z-1
-                  @click.prevent="toggleWatchLater(addedWatchLaterList.includes(moment.aid ?? 0), moment.aid ?? 0)"
+                  @click.prevent="toggleWatchLater(moment.aid ?? 0)"
                 >
                   <Tooltip v-if="!addedWatchLaterList.includes(moment.aid ?? 0)" :content="$t('common.save_to_watch_later')" placement="bottom" type="dark">
                     <mingcute:carplay-line />
