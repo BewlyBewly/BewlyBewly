@@ -1,5 +1,5 @@
 import { useStorageLocal } from '~/composables/useStorageLocal'
-import { AppPage } from '~/enums/appEnums'
+import type { AppPage } from '~/enums/appEnums'
 
 // TODO: refactor: implement storage functionality using pinia + useStorageLocal()
 
@@ -11,7 +11,6 @@ export interface Settings {
   enableHorizontalScrolling: boolean
   openLinkInCurrentTab: boolean
   enableVideoCtrlBarOnVideoCard: boolean
-  isShowTopbar: boolean
   autoHideTopbar: boolean
   dockPosition: 'left' | 'right' | 'bottom'
   autoHideDock: boolean
@@ -19,7 +18,6 @@ export interface Settings {
 
   theme: 'light' | 'dark' | 'auto'
   themeColor: string
-  adaptToOtherPageStyles: boolean
   wallpaperMode: 'buildIn' | 'byUrl'
   wallpaper: string
   enableWallpaperMasking: boolean
@@ -42,14 +40,15 @@ export interface Settings {
   recommendationMode: 'web' | 'app'
   useSearchPageModeOnHomePage: boolean
   searchPageModeWallpaperFixed: boolean
+
+  adaptToOtherPageStyles: boolean
+  isShowTopbar: boolean
 }
 export const settings = useStorageLocal('settings', ref<Settings>({
   language: '',
-  startupPage: AppPage.Home,
   enableHorizontalScrolling: false,
   openLinkInCurrentTab: false,
   enableVideoCtrlBarOnVideoCard: false,
-  isShowTopbar: true,
   autoHideTopbar: false,
   dockPosition: 'right',
   autoHideDock: false,
@@ -57,7 +56,6 @@ export const settings = useStorageLocal('settings', ref<Settings>({
 
   theme: 'auto',
   themeColor: '#00a1d6',
-  adaptToOtherPageStyles: true,
   wallpaperMode: 'buildIn',
   wallpaper: '',
   enableWallpaperMasking: false,
@@ -80,4 +78,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   recommendationMode: 'web',
   useSearchPageModeOnHomePage: false,
   searchPageModeWallpaperFixed: false,
+
+  adaptToOtherPageStyles: true,
+  isShowTopbar: true,
 }), { mergeDefaults: true })
