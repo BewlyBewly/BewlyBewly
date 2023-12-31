@@ -2,9 +2,9 @@
 import type { HistoryItem, SuggestionItem } from './searchHistoryProvider'
 import {
   addSearchHistory,
+  clearSearchHistory,
   getSearchHistory,
   removeSearchHistory,
-  clearSearchHistory,
 } from './searchHistoryProvider'
 
 defineProps<{
@@ -56,7 +56,7 @@ function navigateToSearchResultPage(keyword: string) {
 
 function handleDelete(value: string) {
   removeSearchHistory(value)
-  searchHistory.length = 0
+  searchHistory.value.length = 0
   Object.assign(searchHistory, getSearchHistory())
 }
 
@@ -70,8 +70,8 @@ function handleKeyUp() {
 
   if (isFocus.value && suggestions.length !== 0)
     keyword.value = suggestions[selectedIndex.value].value
-  else if (isFocus.value && searchHistory.length !== 0)
-    keyword.value = searchHistory[selectedIndex.value].value
+  else if (isFocus.value && searchHistory.value.length !== 0)
+    keyword.value = searchHistory.value[selectedIndex.value].value
 
   suggestionItemRef.value.forEach((item, index) => {
     if (index === selectedIndex.value)
@@ -90,7 +90,7 @@ function handleKeyDown() {
   let isShowSuggestion = false
   if (isFocus.value && suggestions.length !== 0)
     isShowSuggestion = true
-  else if (isFocus.value && !keyword.value && searchHistory.length !== 0)
+  else if (isFocus.value && !keyword.value && searchHistory.value.length !== 0)
     isShowSuggestion = false
 
   if (
@@ -102,16 +102,16 @@ function handleKeyDown() {
   }
   if (
     !isShowSuggestion
-    && selectedIndex.value >= searchHistory.length - 1
+    && selectedIndex.value >= searchHistory.value.length - 1
   ) {
-    selectedIndex.value = searchHistory.length - 1
+    selectedIndex.value = searchHistory.value.length - 1
     return
   }
 
   selectedIndex.value++
   keyword.value = isShowSuggestion
     ? suggestions[selectedIndex.value].value
-    : searchHistory[selectedIndex.value].value
+    : searchHistory.value[selectedIndex.value].value
 
   suggestionItemRef.value.forEach((item, index) => {
     if (index === selectedIndex.value)
@@ -134,53 +134,73 @@ function handleClearSearchHistory() {
 
 <template>
   <div id="search-wrap" w="full" max-w="550px" m="x-8" pos="relative">
-    <div v-if="!darkenOnFocus && isFocus" pos="fixed top-0 left-0" w="full" h="full" content="~"
-      @click="isFocus = false" />
+    <div
+      v-if="!darkenOnFocus && isFocus" pos="fixed top-0 left-0" w="full" h="full" content="~"
+      @click="isFocus = false"
+    />
     <Transition name="mask">
-      <div v-if="darkenOnFocus && isFocus" pos="fixed top-0 left-0" w-full h-full bg="black opacity-60"
-        @click="isFocus = false" />
+      <div
+        v-if="darkenOnFocus && isFocus" pos="fixed top-0 left-0" w-full h-full bg="black opacity-60"
+        @click="isFocus = false"
+      />
     </Transition>
 
-    <div v-if="blurredOnFocus" pos="fixed top-0 left-0" w-full h-full duration-500 pointer-events-none ease-out
-      :style="{ backdropFilter: isFocus ? 'blur(15px)' : 'blur(0)' }" />
+    <div
+      v-if="blurredOnFocus" pos="fixed top-0 left-0" w-full h-full duration-500
+      pointer-events-none ease-out
+      :style="{ backdropFilter: isFocus ? 'blur(15px)' : 'blur(0)' }"
+    />
 
     <div class="search-bar group" :class="isFocus ? 'focus' : ''" flex="~" items-center pos="relative">
       <Transition name="focus-character">
-        <img v-show="focusedCharacter && isFocus" :src="focusedCharacter" width="100" object-contain
-          pos="absolute right-0 bottom-40px">
+        <img
+          v-show="focusedCharacter && isFocus" :src="focusedCharacter" width="100" object-contain
+          pos="absolute right-0 bottom-40px"
+        >
       </Transition>
 
-      <input v-model.trim="keyword" rounded="60px focus:$bew-radius" p="l-6 r-16 y-3" h-50px text="$bew-text-1"
+      <input
+        v-model.trim="keyword" rounded="60px focus:$bew-radius" p="l-6 r-16 y-3" h-50px text="$bew-text-1"
         un-border="3 solid transparent focus:$bew-theme-color" ring="1 $bew-border-color" transition="all duration-300"
         type="text" @focus="isFocus = true" @input="handleInput()" @keyup.enter="navigateToSearchResultPage(keyword)"
-        @keyup.up.stop="handleKeyUp" @keyup.down.stop="handleKeyDown" @keydown.stop="() => { }">
-      <button p-2 rounded-full text="lg leading-0 $bew-text-1 group-focus-within:$bew-theme-color"
+        @keyup.up.stop="handleKeyUp" @keyup.down.stop="handleKeyDown" @keydown.stop="() => { }"
+      >
+      <button
+        p-2 rounded-full text="lg leading-0 $bew-text-1 group-focus-within:$bew-theme-color"
         transition="all duration-300" border-none outline-none pos="absolute right-2" bg="hover:$bew-fill-2"
         filter="group-focus-within:~" style="--un-drop-shadow: drop-shadow(0 0 6px var(--bew-theme-color)) "
-        @click="navigateToSearchResultPage(keyword)">
+        @click="navigateToSearchResultPage(keyword)"
+      >
         <tabler:search block align-middle />
       </button>
     </div>
 
     <Transition name="result-list">
-      <div v-if="isFocus
-        && searchHistory.length !== 0
-        && suggestions.length === 0
-        " id="search-history">
+      <div
+        v-if="isFocus
+          && searchHistory.length !== 0
+          && suggestions.length === 0
+        " id="search-history"
+      >
         <div class="history-list flex flex-col gap-y-2">
           <div class="title p-2 pb-0 flex justify-between">
             <span>搜索历史</span>
-            <button @click="handleClearSearchHistory" class="rounded-2 duration-300 pointer-events-auto cursor-pointer" hover="text-blue" text="base $bew-text-2">
+            <button class="rounded-2 duration-300 pointer-events-auto cursor-pointer" hover="text-blue" text="base $bew-text-2" @click="handleClearSearchHistory">
               清空
             </button>
           </div>
 
           <div class="history-item-container p2 flex flex-wrap gap-x-4 gap-y-2">
-            <div v-for="item in searchHistory" :key="item.timestamp" ref="historyItemRef"
-              class="history-item flex justify-between items-center" @click="navigateToSearchResultPage(item.value)">
+            <div
+              v-for="item in searchHistory" :key="item.timestamp" ref="historyItemRef"
+              class="history-item flex justify-between items-center" @click="navigateToSearchResultPage(item.value)"
+            >
               <span> {{ item.value }}</span>
-              <button class="delete" rounded-full duration-300 pointer-events-auto cursor-pointer text="base $bew-text-2"
-                leading-0 p-0 @click.stop="handleDelete(item.value)">
+              <button
+                class="delete" rounded-full duration-300 pointer-events-auto cursor-pointer
+                text="base $bew-text-2"
+                leading-0 p-0 @click.stop="handleDelete(item.value)"
+              >
                 <ic-baseline-clear />
               </button>
             </div>
@@ -191,8 +211,10 @@ function handleClearSearchHistory() {
 
     <Transition>
       <div v-if="isFocus && suggestions.length !== 0" id="search-suggestion">
-        <div v-for="(item, index) in suggestions" :key="index" ref="suggestionItemRef" class="suggestion-item"
-          @click="navigateToSearchResultPage(item.value)">
+        <div
+          v-for="(item, index) in suggestions" :key="index" ref="suggestionItemRef" class="suggestion-item"
+          @click="navigateToSearchResultPage(item.value)"
+        >
           {{ item.value }}
         </div>
       </div>
