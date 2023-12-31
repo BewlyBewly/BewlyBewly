@@ -1,6 +1,8 @@
+/* eslint-disable unused-imports/no-unused-vars */
 import type { ErrorPayload, HMRPayload, Update } from 'vite'
 import type { ViteHotContext } from 'vite/types/hot'
 import type { InferCustomEventPayload } from 'vite/types/customEvent'
+
 // Vite v3 doesn't export overlay
 // import { ErrorOverlay, overlayId } from 'vite/src/client/overlay'
 

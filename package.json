@@ -29,6 +29,19 @@
     "lint": "eslint .",
     "test": "vitest test"
   },
+  "dependencies": {
+    "@types/md5": "^2.3.5",
+    "dplayer": "^1.27.1",
+    "md5": "^2.3.0",
+    "mitt": "^3.0.1",
+    "overlayscrollbars": "^2.4.5",
+    "overlayscrollbars-vue": "^0.5.6",
+    "pinia": "^2.1.7",
+    "qrcode.vue": "^3.4.1",
+    "vue-i18n": "^9.7.0",
+    "vue-toastification": "2.0.0-rc.5",
+    "vuedraggable": "^4.1.0"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.8",
     "@ffflorian/jszip-cli": "^3.5.1",
@@ -72,18 +85,5 @@
     "web-ext": "^7.8.0",
     "webext-bridge": "^5.0.5",
     "webextension-polyfill": "^0.10.0"
-  },
-  "dependencies": {
-    "@types/md5": "^2.3.5",
-    "dplayer": "^1.27.1",
-    "md5": "^2.3.0",
-    "mitt": "^3.0.1",
-    "overlayscrollbars": "^2.4.5",
-    "overlayscrollbars-vue": "^0.5.6",
-    "pinia": "^2.1.7",
-    "qrcode.vue": "^3.4.1",
-    "vue-i18n": "^9.7.0",
-    "vue-toastification": "2.0.0-rc.5",
-    "vuedraggable": "^4.1.0"
   }
 }

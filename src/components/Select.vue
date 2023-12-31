@@ -69,7 +69,7 @@ function onMouseEnter() {
         truncate
         overflow="hidden"
         m="r-2"
-        v-text="label === 'undefined' ? '　' : label"
+        v-text="label === 'undefined' ? '' : label"
       />
 
       <!-- arrow -->

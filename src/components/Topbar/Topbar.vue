@@ -23,7 +23,7 @@ const activatedPage = inject('activatedPage') as Ref<AppPage>
 const scrollbarRef = inject('scrollbarRef') as Ref
 
 const mid = getUserID() || ''
-const userInfo = reactive<UserInfo | {}>({}) as UnwrapNestedRefs<UserInfo>
+const userInfo = reactive<UserInfo | NonNullable<unknown>>({}) as UnwrapNestedRefs<UserInfo>
 
 const hideTopbar = ref<boolean>(false)
 const hovingTopbar = ref<boolean>(false)
@@ -40,7 +40,7 @@ const showMorePop = ref<boolean>(false)
 const momentsPopKey = ref<string>(`momentsPop[${Number(new Date())}]`)
 
 const isLogin = ref<boolean>(false)
-const unReadMessage = reactive<UnReadMessage | {}>(
+const unReadMessage = reactive<UnReadMessage | NonNullable<unknown>>(
   {},
 ) as UnwrapNestedRefs<UnReadMessage>
 const unReadDm = reactive<UnReadDm>({} as UnwrapNestedRefs<UnReadDm>)
