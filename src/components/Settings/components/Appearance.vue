@@ -25,9 +25,9 @@ const themeColorOptions = computed<Array<string>>(() => {
     '#fda4af',
   ]
 })
-const bilibiliEvolvedThemeColor = computed(() => {
-  return getComputedStyle(document.querySelector('html') as HTMLElement).getPropertyValue('--theme-color').trim() ?? '#00a1d6'
-})
+// const bilibiliEvolvedThemeColor = computed(() => {
+//   return getComputedStyle(document.querySelector('html') as HTMLElement).getPropertyValue('--theme-color').trim() ?? '#00a1d6'
+// })
 const wallpapers = computed<Array<{ name: string; url: string; thumbnail: string }>>(() => {
   return [
     {
@@ -100,7 +100,7 @@ function changeWallpaper(url: string) {
           />
         </div>
       </SettingsItem>
-      <SettingsItem :title="$t('settings.follow_bilibili_evolved_color')" :desc="$t('settings.follow_bilibili_evolved_color_desc')">
+      <!-- <SettingsItem :title="$t('settings.follow_bilibili_evolved_color')" :desc="$t('settings.follow_bilibili_evolved_color_desc')">
         <div
           w-20px h-20px rounded-8 cursor-pointer transition
           duration-300 box-border
@@ -112,10 +112,10 @@ function changeWallpaper(url: string) {
           }"
           @click="changeThemeColor(bilibiliEvolvedThemeColor)"
         />
-      </SettingsItem>
-      <SettingsItem :title="$t('settings.adapt_to_other_page_styles')" :desc="$t('settings.adapt_to_other_page_styles_desc')">
+      </SettingsItem> -->
+      <!-- <SettingsItem :title="$t('settings.adapt_to_other_page_styles')" :desc="$t('settings.adapt_to_other_page_styles_desc')">
         <Radio v-model="settings.adaptToOtherPageStyles" />
-      </SettingsItem>
+      </SettingsItem> -->
     </SettingsItemGroup>
 
     <SettingsItemGroup :title="$t('settings.group_wallpaper')">

@@ -16,7 +16,10 @@ defineProps<{
           </slot>
         </div>
 
-        <div v-if="desc" text="sm $bew-text-2" mt-1>
+        <div
+          text="sm $bew-text-2"
+          :style="{ marginTop: $slots.desc || desc ? '0.25rem' : '0' }"
+        >
           <slot name="desc">
             {{ desc }}
           </slot>

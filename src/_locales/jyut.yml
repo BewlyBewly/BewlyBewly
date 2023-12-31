@@ -31,6 +31,7 @@ settings:
   menu_appearance: 版面
   menu_home: 主頁
   menu_search_page: 搵嘢頁
+  menu_compatibility: 相容性
   menu_about: 關於
 
   # Settings group
@@ -50,7 +51,7 @@ settings:
     revoke: 解除授權
     open_settings: 打開設定...
 
-  # General settings
+  # General
   select_language: 介面語言
   select_language_opt:
     english: 英文
@@ -63,8 +64,6 @@ settings:
   enable_horizontal_scrolling: 使用橫向捲動
   enable_horizontal_scrolling_desc: 用咗之後，轆緊滑鼠就可以直接打橫掃水平捲軸列表
   enable_video_ctrl_bar_on_video_card: 喺影片卡片上顯示影片控制欄
-  topbar_visibility: 頂欄可視性
-  topbar_visibility_desc: 用於兼容 Bilibili Evolved 客製化頂欄
   auto_hide_topbar: 自動收埋頂欄
   dock_position: Dock 放位
   dock_position_desc: 放喺螢幕邊度
@@ -76,17 +75,13 @@ settings:
   dock_content_adjustment: Dock 內容調整
   dock_content_adjustment_desc: 第一個啓用嘅 Dock 項個頁面會係開始頁面
 
-  # Appearance settings
+  # Appearance
   theme: 色系
   theme_opt:
     light: 淺色
     dark: 深色
     auto: 自動
   theme_color: 佈景色
-  follow_bilibili_evolved_color: 跟返 Bilibili Evolved 佈景色
-  follow_bilibili_evolved_color_desc: 每次換完 Bilibili Evolved 佈景色嗰陣，記得揀多一次呢個選項愛嚟更新佈置
-  adapt_to_other_page_styles: 適應其他版面風格
-  adapt_to_other_page_styles_desc: 執執啲常用嘅版面，襯返 BewlyBewly 主題風格
   wallpaper_mode: 背景圖片模式
   wallpaper_mode_desc: '使用 URL: 直接用網上圖片嘅 URL 嚟到設定背景圖片。'
   wallpaper_mode_opt:
@@ -101,7 +96,7 @@ settings:
   wallpaper_mask_opacity: 背景遮蔽透明度調節
   wallpaper_blur_intensity: 背景模糊強度調節
 
-  # Search page settings
+  # Search page
   logo_color: Logo 顏色
   logo_color_opt:
     white: 白
@@ -113,7 +108,7 @@ settings:
   choose_search_bar_focused_character: 揀個喺搜尋欄聚焦嗰陣出現嘅人物
   individually_set_search_page_wallpaper: 單獨設定搵嘢頁背景
 
-  # Home settings
+  # Home
   recommendation_mode: 推介模式
   recommendation_mode_desc: |
     若然你想用手機版嘅推介演算法，就要俾 BewlyBewly 批准使用存取 access key。
@@ -129,6 +124,18 @@ settings:
   settings_shared_with_the_search_page: 同搵嘢頁共用嘅設定
   settings_shared_with_the_search_page_desc: 呢啲設定都同搵嘢頁共用
   search_page_mode_wallpaper_fixed: 定住搵嘢頁模式嘅背景
+
+  # Compatibility
+  # Common
+  use_original_bilibili_homepage: 用返原本嘅 Bilibili 主頁
+  use_original_bilibili_homepage_desc: 改咗嘅話要你重新整理頁面先至得
+  adapt_to_other_page_styles: 適應其他版面風格
+  adapt_to_other_page_styles_desc: 執執啲常用嘅版面，襯返 BewlyBewly 主題風格
+  # Bilibili Evolved
+  follow_bilibili_evolved_color: 跟返 Bilibili Evolved 佈景色
+  follow_bilibili_evolved_color_desc: 每次換完 Bilibili Evolved 佈景色嗰陣，記得揀多一次呢個選項愛嚟更新佈置
+  topbar_visibility: 頂欄可視性
+  topbar_visibility_desc: 用於兼容 Bilibili Evolved 客製化頂欄
 
   # About
   import_settings: 匯入設定
