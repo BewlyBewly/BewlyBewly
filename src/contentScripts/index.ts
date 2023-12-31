@@ -7,6 +7,7 @@ import App from './views/App.vue'
 import { setupApp } from '~/logic/common-setup'
 import { SVG_ICONS } from '~/utils/svgIcons'
 import { delay, injectCSS } from '~/utils/main'
+import { settings } from '~/logic'
 
 const currentUrl = document.URL
 
@@ -96,11 +97,14 @@ function injectApp() {
 
   if (isSupportedPage()) {
     if (
-      /https?:\/\/bilibili.com\/?$/.test(currentUrl)
-      || /https?:\/\/www.bilibili.com\/?$/.test(currentUrl)
-      || /https?:\/\/www.bilibili.com\/index.html$/.test(currentUrl)
-      || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(currentUrl)
-      || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(currentUrl)
+      !settings.value.useOriginalBilibiliHomepage
+      && (
+        /https?:\/\/bilibili.com\/?$/.test(currentUrl)
+        || /https?:\/\/www.bilibili.com\/?$/.test(currentUrl)
+        || /https?:\/\/www.bilibili.com\/index.html$/.test(currentUrl)
+        || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(currentUrl)
+        || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(currentUrl)
+      )
     ) {
       const originalPageContent = document.querySelector('#i_cecream')
       if (originalPageContent)

@@ -124,6 +124,8 @@ settings:
 
   # Compatibility
   # Common
+  use_original_bilibili_homepage: 使用原版 Bilibili 首页
+  use_original_bilibili_homepage_desc: 修改后需要刷新页面才能生效
   adapt_to_other_page_styles: 适应其他页面样式
   adapt_to_other_page_styles_desc: 适应一些常见页面，以与 BewlyBewly 主题相匹配
   # Bilibili Evolved

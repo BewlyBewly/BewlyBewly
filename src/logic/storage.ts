@@ -43,6 +43,7 @@ export interface Settings {
 
   adaptToOtherPageStyles: boolean
   isShowTopbar: boolean
+  useOriginalBilibiliHomepage: boolean
 }
 export const settings = useStorageLocal('settings', ref<Settings>({
   language: '',
@@ -81,4 +82,5 @@ export const settings = useStorageLocal('settings', ref<Settings>({
 
   adaptToOtherPageStyles: true,
   isShowTopbar: true,
+  useOriginalBilibiliHomepage: false,
 }), { mergeDefaults: true })

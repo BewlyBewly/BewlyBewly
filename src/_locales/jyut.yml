@@ -127,6 +127,8 @@ settings:
 
   # Compatibility
   # Common
+  use_original_bilibili_homepage: 用返原本嘅 Bilibili 主頁
+  use_original_bilibili_homepage_desc: 改咗嘅話要你重新整理頁面先至得
   adapt_to_other_page_styles: 適應其他版面風格
   adapt_to_other_page_styles_desc: 執執啲常用嘅版面，襯返 BewlyBewly 主題風格
   # Bilibili Evolved

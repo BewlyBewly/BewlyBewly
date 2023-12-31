@@ -103,7 +103,7 @@ function setCurrentTitle() {
 </script>
 
 <template>
-  <div class="fixed w-full h-full top-0 left-0" z="9998">
+  <div class="fixed w-full h-full top-0 left-0">
     <div
       class="fixed w-full h-full top-0 left-0"
       @click="handleClose"
@@ -112,7 +112,7 @@ function setCurrentTitle() {
     <div
       id="settings-window" pos="fixed top-1/2 left-1/2" w="90%" h="90%"
       max-w-1000px max-h-900px transform="~ translate-x--1/2 translate-y--1/2"
-      z-9999 flex justify-between items-center
+      flex justify-between items-center
     >
       <aside
         class="group" shrink-0 p="x-4" pos="absolute left--42px" z-2

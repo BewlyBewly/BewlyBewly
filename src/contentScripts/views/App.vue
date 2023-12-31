@@ -242,20 +242,28 @@ provide('scrollbarRef', scrollbarRef)
 </script>
 
 <template>
-  <template v-if="isHomePage()">
-    <AppBackground :activated-page="activatedPage" />
-  </template>
+  <div ref="mainAppRef" class="bewly-wrapper" text="$bew-text-1">
+    <!-- Background -->
+    <template v-if="isHomePage() && !settings.useOriginalBilibiliHomepage">
+      <AppBackground :activated-page="activatedPage" />
+    </template>
 
-  <div
-    ref="mainAppRef" class="bewly-wrapper" text="$bew-text-1" transition="opacity duration-300"
-    z-60
-    pos="absolute top-0 left-0" w-full h-full
-    :style="{ height: isHomePage() ? '100dvh' : '0' }"
-  >
+    <!-- Settings -->
+    <KeepAlive>
+      <Settings v-if="showSettings" z-10002 @close="showSettings = false" />
+    </KeepAlive>
+
     <!-- Dock & RightSideButtons -->
-    <div pos="absolute top-0 left-0" w-inherit h-inherit overflow-hidden>
-      <Dock v-if="isHomePage()" :activated-page="activatedPage" @change-page="pageName => changeActivatePage(pageName)" @settings-visibility-change="toggleSettings" />
-      <RightSideButtons v-else @settings-visibility-change="toggleSettings" />
+    <div pos="absolute top-0 left-0" w-full h-full overflow-hidden>
+      <Dock
+        v-if="isHomePage() && !settings.useOriginalBilibiliHomepage"
+        :activated-page="activatedPage" @change-page="pageName => changeActivatePage(pageName)"
+        @settings-visibility-change="toggleSettings"
+      />
+      <RightSideButtons
+        v-else
+        @settings-visibility-change="toggleSettings"
+      />
     </div>
 
     <!-- Topbar -->
@@ -263,7 +271,7 @@ provide('scrollbarRef', scrollbarRef)
       <Transition name="topbar">
         <Topbar
           v-if="settings.isShowTopbar && !isHomePage()"
-          pos="top-0 left-0" z="99 hover:999" w-full
+          pos="top-0 left-0" z="99 hover:1001" w-full
           :style="{ position: isTopbarFixed ? 'fixed' : 'absolute' }"
           :show-search-bar="!isSearchPage"
           :mask="showTopbarMask"
@@ -274,38 +282,37 @@ provide('scrollbarRef', scrollbarRef)
           :show-search-bar="showTopbarMask && settings.useSearchPageModeOnHomePage || (!settings.useSearchPageModeOnHomePage && activatedPage !== AppPage.Search || activatedPage !== AppPage.Home && activatedPage !== AppPage.Search)"
           :show-logo="showTopbarMask && settings.useSearchPageModeOnHomePage || (!settings.useSearchPageModeOnHomePage || activatedPage !== AppPage.Home)"
           :mask="showTopbarMask"
-          pos="fixed top-0 left-0" z="99 hover:999" w-full
+          pos="fixed top-0 left-0" z="99 hover:1001" w-full
         />
       </Transition>
     </div>
 
-    <!-- Settings -->
-    <KeepAlive>
-      <Settings v-if="showSettings" @close="showSettings = false" />
-    </KeepAlive>
+    <div
+      pos="absolute top-0 left-0" w-full h-full
+      :style="{ height: isHomePage() && !settings.useOriginalBilibiliHomepage ? '100dvh' : '0' }"
+    >
+      <template v-if="isHomePage() && !settings.useOriginalBilibiliHomepage">
+        <OverlayScrollbarsComponent ref="scrollbarRef" element="div" h-inherit defer @os-scroll="handleOsScroll">
+          <main m-auto max-w="$bew-page-max-width">
+            <div
+              p="t-80px" m-auto
+              :w="isVideoPage ? '[calc(100%-160px)]' : 'lg:85% md:[calc(90%-60px)] [calc(100%-140px)]'"
+            >
+              <!-- control button group -->
+              <BackToTopAndRefreshButtons
+                v-if="activatedPage !== AppPage.Search" :show-refresh-button="!showTopbarMask"
+                @refresh="handleRefresh"
+                @back-to-top="handleBackToTop"
+              />
 
-    <OverlayScrollbarsComponent ref="scrollbarRef" element="div" h-inherit defer @os-scroll="handleOsScroll">
-      <div m-auto max-w="$bew-page-max-width">
-        <div flex="~" max-w="$bew-page-max-width">
-          <main
-            v-if="isHomePage()"
-            p="t-80px" m-auto
-            :w="isVideoPage ? '[calc(100%-160px)]' : 'lg:85% md:[calc(90%-60px)] [calc(100%-140px)]'"
-          >
-            <!-- control button group -->
-            <BackToTopAndRefreshButtons
-              v-if="activatedPage !== AppPage.Search" :show-refresh-button="!showTopbarMask"
-              @refresh="handleRefresh"
-              @back-to-top="handleBackToTop"
-            />
-
-            <Transition name="page-fade">
-              <Component :is="pages[activatedPage]" :key="dynamicComponentKey" />
-            </Transition>
+              <Transition name="page-fade">
+                <Component :is="pages[activatedPage]" :key="dynamicComponentKey" />
+              </Transition>
+            </div>
           </main>
-        </div>
-      </div>
-    </OverlayScrollbarsComponent>
+        </OverlayScrollbarsComponent>
+      </template>
+    </div>
   </div>
 </template>
 

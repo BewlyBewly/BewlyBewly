@@ -13,6 +13,12 @@ function changeThemeColor(color: string) {
 <template>
   <div>
     <SettingsItemGroup :title="$t('settings.group_common')">
+      <SettingsItem :title="$t('settings.use_original_bilibili_homepage')">
+        <template #desc>
+          <span color="$bew-warning-color" v-text="$t('settings.use_original_bilibili_homepage_desc')" />
+        </template>
+        <Radio v-model="settings.useOriginalBilibiliHomepage" />
+      </SettingsItem>
       <SettingsItem :title="$t('settings.adapt_to_other_page_styles')" :desc="$t('settings.adapt_to_other_page_styles_desc')">
         <Radio v-model="settings.adaptToOtherPageStyles" />
       </SettingsItem>
