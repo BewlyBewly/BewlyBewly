@@ -4,6 +4,7 @@ import {
   addSearchHistory,
   getSearchHistory,
   removeSearchHistory,
+  clearSearchHistory,
 } from './searchHistoryProvider'
 
 defineProps<{
@@ -16,12 +17,12 @@ const isFocus = ref<boolean>(false)
 const keyword = ref<string>('')
 const suggestions = reactive<SuggestionItem[]>([])
 const selectedIndex = ref<number>(-1)
-const searchHistory = reactive<HistoryItem[]>([])
+const searchHistory = ref<HistoryItem[]>([])
 const historyItemRef = ref<HTMLElement[]>([])
 const suggestionItemRef = ref<HTMLElement[]>([])
 
 onMounted(() => {
-  Object.assign(searchHistory, getSearchHistory())
+  searchHistory.value = getSearchHistory()
 })
 
 function handleInput() {
@@ -49,7 +50,7 @@ function navigateToSearchResultPage(keyword: string) {
       timestamp: Number(new Date()),
     }
     addSearchHistory(searchItem)
-    Object.assign(searchHistory, getSearchHistory())
+    searchHistory.value = getSearchHistory()
   }
 }
 
@@ -94,14 +95,14 @@ function handleKeyDown() {
 
   if (
     isShowSuggestion
-        && selectedIndex.value >= suggestions.length - 1
+    && selectedIndex.value >= suggestions.length - 1
   ) {
     selectedIndex.value = suggestions.length - 1
     return
   }
   if (
     !isShowSuggestion
-        && selectedIndex.value >= searchHistory.length - 1
+    && selectedIndex.value >= searchHistory.length - 1
   ) {
     selectedIndex.value = searchHistory.length - 1
     return
@@ -124,119 +125,74 @@ function handleKeyDown() {
     else item.classList.remove('active')
   })
 }
+
+function handleClearSearchHistory() {
+  clearSearchHistory()
+  searchHistory.value = getSearchHistory()
+}
 </script>
 
 <template>
   <div id="search-wrap" w="full" max-w="550px" m="x-8" pos="relative">
-    <div
-      v-if="!darkenOnFocus && isFocus"
-      pos="fixed top-0 left-0"
-      w="full"
-      h="full"
-      content="~"
-      @click="isFocus = false"
-    />
+    <div v-if="!darkenOnFocus && isFocus" pos="fixed top-0 left-0" w="full" h="full" content="~"
+      @click="isFocus = false" />
     <Transition name="mask">
-      <div
-        v-if="darkenOnFocus && isFocus" pos="fixed top-0 left-0" w-full h-full bg="black opacity-60"
-        @click="isFocus = false"
-      />
+      <div v-if="darkenOnFocus && isFocus" pos="fixed top-0 left-0" w-full h-full bg="black opacity-60"
+        @click="isFocus = false" />
     </Transition>
 
-    <div
-      v-if="blurredOnFocus"
-      pos="fixed top-0 left-0" w-full h-full duration-500 pointer-events-none
-      ease-out
-      :style="{ backdropFilter: isFocus ? 'blur(15px)' : 'blur(0)' }"
-    />
+    <div v-if="blurredOnFocus" pos="fixed top-0 left-0" w-full h-full duration-500 pointer-events-none ease-out
+      :style="{ backdropFilter: isFocus ? 'blur(15px)' : 'blur(0)' }" />
 
     <div class="search-bar group" :class="isFocus ? 'focus' : ''" flex="~" items-center pos="relative">
       <Transition name="focus-character">
-        <img v-show="focusedCharacter && isFocus" :src="focusedCharacter" width="100" object-contain pos="absolute right-0 bottom-40px">
+        <img v-show="focusedCharacter && isFocus" :src="focusedCharacter" width="100" object-contain
+          pos="absolute right-0 bottom-40px">
       </Transition>
 
-      <input
-        v-model.trim="keyword"
-        rounded="60px focus:$bew-radius"
-        p="l-6 r-16 y-3"
-        h-50px
-        text="$bew-text-1"
-        un-border="3 solid transparent focus:$bew-theme-color"
-        ring="1 $bew-border-color"
-        transition="all duration-300"
-        type="text"
-        @focus="isFocus = true"
-        @input="handleInput()"
-        @keyup.enter="navigateToSearchResultPage(keyword)"
-        @keyup.up.stop="handleKeyUp"
-        @keyup.down.stop="handleKeyDown"
-        @keydown.stop="() => {}"
-      >
-      <button
-        p-2
-        rounded-full
-        text="lg leading-0 $bew-text-1 group-focus-within:$bew-theme-color"
-        transition="all duration-300"
-        border-none
-        outline-none
-        pos="absolute right-2"
-        bg="hover:$bew-fill-2"
-        filter="group-focus-within:~"
-        style="--un-drop-shadow: drop-shadow(0 0 6px var(--bew-theme-color)) "
-        @click="navigateToSearchResultPage(keyword)"
-      >
+      <input v-model.trim="keyword" rounded="60px focus:$bew-radius" p="l-6 r-16 y-3" h-50px text="$bew-text-1"
+        un-border="3 solid transparent focus:$bew-theme-color" ring="1 $bew-border-color" transition="all duration-300"
+        type="text" @focus="isFocus = true" @input="handleInput()" @keyup.enter="navigateToSearchResultPage(keyword)"
+        @keyup.up.stop="handleKeyUp" @keyup.down.stop="handleKeyDown" @keydown.stop="() => { }">
+      <button p-2 rounded-full text="lg leading-0 $bew-text-1 group-focus-within:$bew-theme-color"
+        transition="all duration-300" border-none outline-none pos="absolute right-2" bg="hover:$bew-fill-2"
+        filter="group-focus-within:~" style="--un-drop-shadow: drop-shadow(0 0 6px var(--bew-theme-color)) "
+        @click="navigateToSearchResultPage(keyword)">
         <tabler:search block align-middle />
       </button>
     </div>
 
     <Transition name="result-list">
-      <div
-        v-if="
-          isFocus
-            && searchHistory.length !== 0
-            && suggestions.length === 0
-        "
-        id="search-history"
-      >
-        <div
-          v-for="item in searchHistory"
-          :key="item.timestamp"
-          ref="historyItemRef"
-          class="history-item"
-          flex
-          justify-between
-          items-center
-          @click="navigateToSearchResultPage(item.value)"
-        >
-          {{ item.value }}
-          <button
-            class="delete"
-            rounded-full
-            duration-300
-            pointer-events-auto
-            cursor-pointer
-            text="base $bew-text-2"
-            leading-0 p-0
-            @click.stop="handleDelete(item.value)"
-          >
-            <ic-baseline-clear />
-          </button>
+      <div v-if="isFocus
+        && searchHistory.length !== 0
+        && suggestions.length === 0
+        " id="search-history">
+        <div class="history-list flex flex-col gap-y-2">
+          <div class="title p-2 pb-0 flex justify-between">
+            <span>搜索历史</span>
+            <button @click="handleClearSearchHistory" class="rounded-2 duration-300 pointer-events-auto cursor-pointer" hover="text-blue" text="base $bew-text-2">
+              清空
+            </button>
+          </div>
+
+          <div class="history-item-container p2 flex flex-wrap gap-x-4 gap-y-2">
+            <div v-for="item in searchHistory" :key="item.timestamp" ref="historyItemRef"
+              class="history-item flex justify-between items-center" @click="navigateToSearchResultPage(item.value)">
+              <span> {{ item.value }}</span>
+              <button class="delete" rounded-full duration-300 pointer-events-auto cursor-pointer text="base $bew-text-2"
+                leading-0 p-0 @click.stop="handleDelete(item.value)">
+                <ic-baseline-clear />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </Transition>
 
     <Transition>
-      <div
-        v-if="isFocus && suggestions.length !== 0"
-        id="search-suggestion"
-      >
-        <div
-          v-for="(item, index) in suggestions"
-          :key="index"
-          ref="suggestionItemRef"
-          class="suggestion-item"
-          @click="navigateToSearchResultPage(item.value)"
-        >
+      <div v-if="isFocus && suggestions.length !== 0" id="search-suggestion">
+        <div v-for="(item, index) in suggestions" :key="index" ref="suggestionItemRef" class="suggestion-item"
+          @click="navigateToSearchResultPage(item.value)">
           {{ item.value }}
         </div>
       </div>
@@ -286,8 +242,7 @@ function handleKeyDown() {
   --b-search-bar-color-focus: var(--b-search-bar-color);
 
   @mixin card-content {
-    --at-apply: text-base outline-none w-full
-      bg-$b-search-bar-color shadow-$bew-shadow-2;
+    --at-apply: text-base outline-none w-full bg-$b-search-bar-color shadow-$bew-shadow-2;
     backdrop-filter: var(--bew-filter-glass);
   }
 
@@ -314,15 +269,37 @@ function handleKeyDown() {
 
   @mixin search-content {
     @include card-content;
-    --at-apply: p-2 mt-2 absolute rounded-$bew-radius
-      hover:block;
+    --at-apply: p-2 mt-2 absolute rounded-$bew-radius hover:block;
   }
 
   @mixin search-content-item {
-    --at-apply: px-4 py-2 w-full rounded-$bew-radius duration-300 cursor-pointer
-      not-first:mt-1
-      hover:bg-$bew-fill-2;
+    --at-apply: px-4 py-2 w-full rounded-$bew-radius duration-300 cursor-pointer not-first:mt-1 hover:bg-$bew-fill-2;
+  }
 
+  #search-history {
+    .history-list {
+      .title {
+        --at-apply: text-lg font-500;
+      }
+
+      .history-item-container {
+        .history-item {
+          --at-apply: relative cursor-pointer hover:text-blue;
+          --at-apply: py-2 px-4 bg-$bew-fill-2 rounded-2;
+
+          .delete {
+            --at-apply: absolute rounded-full hover:text-$bew-text-1;
+            padding: 0.15em;
+            right: calc( -1em / 2 );
+            top: calc( -1em / 2 );
+          }
+
+          &.active {
+            --at-apply: text-$bew-text-5;
+          }
+        }
+      }
+    }
   }
 
   #search-history,
@@ -330,7 +307,6 @@ function handleKeyDown() {
     @include search-content;
     --at-apply: bg-$bew-elevated-1;
 
-    .history-item,
     .suggestion-item {
       @include search-content-item;
 
