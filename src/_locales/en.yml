@@ -31,6 +31,7 @@ settings:
   menu_appearance: Appearance
   menu_search_page: Search Page
   menu_home: Home
+  menu_compatibility: Compatibility
   menu_about: About
 
   # Settings group
@@ -50,7 +51,7 @@ settings:
     revoke: Revoke
     open_settings: Open Settings...
 
-  # General settings
+  # General
   select_language: Language
   select_language_opt:
     english: English
@@ -63,8 +64,6 @@ settings:
   enable_horizontal_scrolling: Enable horizontal scrolling
   enable_horizontal_scrolling_desc: After enabling, mouse scrolling will directly scroll the horizontal scroll list
   enable_video_ctrl_bar_on_video_card: Display the video control bar on the video card
-  topbar_visibility: Top bar visibility
-  topbar_visibility_desc: Compatible with Bilibili Evolved customize top bar
   auto_hide_topbar: Automatically hide the top bar
   dock_position: Dock position
   dock_position_desc: Position on screen
@@ -76,17 +75,13 @@ settings:
   dock_content_adjustment: Dock content adjustment
   dock_content_adjustment_desc: The page of the first activated dock item will be the startup page
 
-  # Appearance settings
+  # Appearance
   theme: Theme
   theme_opt:
     light: Light
     dark: Dark
     auto: Auto
   theme_color: Theme color
-  follow_bilibili_evolved_color: Follow the Bilibili Evolved theme color
-  follow_bilibili_evolved_color_desc: After changing the theme color in Bilibili Evolved, you will need to re-select this option in order to update the theme color.
-  adapt_to_other_page_styles: Adapt to other page styles
-  adapt_to_other_page_styles_desc: Adapt to some common pages to match with the BewlyBewly theme
   wallpaper_mode: Wallpaper mode
   wallpaper_mode_desc: 'By URL: Choose an image from the Internet and use its URL to set it as the wallpaper.'
   wallpaper_mode_opt:
@@ -101,7 +96,7 @@ settings:
   wallpaper_mask_opacity: Wallpaper masking opacity
   wallpaper_blur_intensity: Wallpaper blur intensity
 
-  # Search page settings
+  # Search page
   logo_color: Logo color
   logo_color_opt:
     white: White
@@ -113,13 +108,10 @@ settings:
   choose_search_bar_focused_character: Choose the character that appears when the search bar is focused
   individually_set_search_page_wallpaper: Individually set search page wallpaper
 
-  # Home settings
+  # Home
   recommendation_mode: Recommendation mode
   recommendation_mode_desc: >
     If you want to use the recommendation algorithm on the app, please ensure that you authorize the BewlyBewly to use the access key first.
-  recommendation_mode_desc2: >
-    The methods to request the access key is no longer functioning, since Bilibili has imposed restrictions on the previous API.
-    We recommend using the web-based mode 🫠
   authorize_app: Authorize the BewlyBewly to use the access key
   authorize_app_desc: >
     After authentication, you will receive the video recommendations based on the bilibili app recommendation algorithm.
@@ -130,6 +122,16 @@ settings:
   settings_shared_with_the_search_page: Settings shared with the search page
   settings_shared_with_the_search_page_desc: Those settings are used in common with the search page
   search_page_mode_wallpaper_fixed: Make the wallpaper of the search page mode fixed
+
+  # Compatibility
+  # Common
+  adapt_to_other_page_styles: Adapt to other page styles
+  adapt_to_other_page_styles_desc: Adapt to some common pages to match with the BewlyBewly theme
+  # Bilibili Evolved
+  follow_bilibili_evolved_color: Follow the Bilibili Evolved theme color
+  follow_bilibili_evolved_color_desc: After changing the theme color in Bilibili Evolved, you will need to re-select this option in order to update the theme color.
+  topbar_visibility: Top bar visibility
+  topbar_visibility_desc: Compatible with Bilibili Evolved customize top bar
 
   # About
   import_settings: Import Settings

@@ -31,6 +31,7 @@ settings:
   menu_appearance: 外观
   menu_search_page: 搜索页
   menu_home: 首页
+  menu_compatibility: 兼容性
   menu_about: 关于
 
   # Settings group
@@ -50,7 +51,7 @@ settings:
     revoke: 取消授权
     open_settings: 打开设置...
 
-  # General settings
+  # General
   select_language: 界面语言
   select_language_opt:
     english: 英文
@@ -63,8 +64,6 @@ settings:
   enable_horizontal_scrolling: 启用横向滚动
   enable_horizontal_scrolling_desc: 启用后，鼠标滚动时将直接滚动横向滚动列表
   enable_video_ctrl_bar_on_video_card: 在视频卡片上显示视频控制栏
-  topbar_visibility: 顶栏可见性
-  topbar_visibility_desc: 用于兼容 Bilibili Evolved 自定义顶栏
   auto_hide_topbar: 自动隐藏顶栏
   dock_position: Dock 栏位置
   dock_position_desc: 在屏幕中摆放位置
@@ -76,17 +75,13 @@ settings:
   dock_content_adjustment: Dock 内容调整
   dock_content_adjustment_desc: 第一个激活的 Dock 项的页面将会是启动页面
 
-  # Appearance settings
+  # Appearance
   theme: 主题
   theme_opt:
     light: 亮色
     dark: 暗色
     auto: 自动
   theme_color: 主题色
-  follow_bilibili_evolved_color: 使用 Bilibili Evolved 主题色
-  follow_bilibili_evolved_color_desc: 每次选完 Bilibili Evolved 主题色时，记得重新选中这一选项以更新配置
-  adapt_to_other_page_styles: 适应其他页面样式
-  adapt_to_other_page_styles_desc: 适应一些常见页面，以与 BewlyBewly 主题相匹配
   wallpaper_mode: 背景图片模式
   wallpaper_mode_desc: '使用 URL: 直接用网上图片的 URL 来设置背景图片。'
   wallpaper_mode_opt:
@@ -101,7 +96,7 @@ settings:
   wallpaper_mask_opacity: 背景遮罩透明度调整
   wallpaper_blur_intensity: 背景模糊强度调整
 
-  # Search page settings
+  # Search page
   logo_color: Logo 颜色
   logo_color_opt:
     white: 白
@@ -113,12 +108,10 @@ settings:
   choose_search_bar_focused_character: 选择搜索栏聚焦时出现的人物
   individually_set_search_page_wallpaper: 单独设置搜索页背景
 
-  # Home settings
+  # Home
   recommendation_mode: 推荐模式
   recommendation_mode_desc: |
     如果您想使用 app 端的推荐算法，请先授权 BewlyBewly 使用 access key。
-  recommendation_mode_desc2: |
-    因为B站对以前的API施加了限制，请求 access key 的方法不再适用。我们建议使用 Web 模式 🫠
   authorize_app: 授权 BewlyBewly 使用 access key
   authorize_app_desc: |
     授权使用后能在首页推送 bilibili App 端算法的推荐视频，授权 key 有效期约为一个月，过后记得重新授权获取 access key。
@@ -128,6 +121,16 @@ settings:
   settings_shared_with_the_search_page: 与搜索页共用的配置
   settings_shared_with_the_search_page_desc: 这些设置都与搜索页共用
   search_page_mode_wallpaper_fixed: 将搜索页模式的壁纸固定
+
+  # Compatibility
+  # Common
+  adapt_to_other_page_styles: 适应其他页面样式
+  adapt_to_other_page_styles_desc: 适应一些常见页面，以与 BewlyBewly 主题相匹配
+  # Bilibili Evolved
+  follow_bilibili_evolved_color: 使用 Bilibili Evolved 主题色
+  follow_bilibili_evolved_color_desc: 每次选完 Bilibili Evolved 主题色时，记得重新选中这一选项以更新配置
+  topbar_visibility: 顶栏可见性
+  topbar_visibility_desc: 用于兼容 Bilibili Evolved 自定义顶栏
 
   # About
   import_settings: 导入设置

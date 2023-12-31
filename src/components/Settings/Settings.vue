@@ -61,7 +61,7 @@ const settingsMenuItems = computed((): MenuItem[] => {
       value: MenuType.Compatibility,
       icon: 'mingcute:polygon-line',
       iconActivated: 'mingcute:polygon-fill',
-      title: 'Compatibility',
+      title: t('settings.menu_compatibility'),
     },
     {
       value: MenuType.About,
@@ -105,13 +105,13 @@ function setCurrentTitle() {
 <template>
   <div class="fixed w-full h-full top-0 left-0" z="9998">
     <div
-      class="fixed w-full h-full top-0 left-0" opacity-60 :style="{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }"
+      class="fixed w-full h-full top-0 left-0"
       @click="handleClose"
     />
 
     <div
       id="settings-window" pos="fixed top-1/2 left-1/2" w="90%" h="90%"
-      max-w-900px max-h-800px transform="~ translate-x--1/2 translate-y--1/2"
+      max-w-1000px max-h-900px transform="~ translate-x--1/2 translate-y--1/2"
       z-9999 flex justify-between items-center
     >
       <aside
