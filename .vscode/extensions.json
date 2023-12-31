@@ -6,6 +6,7 @@
     "antfu.unocss",
     "csstools.postcss",
     "lokalise.i18n-ally",
-    "streetsidesoftware.code-spell-checker"
+    "streetsidesoftware.code-spell-checker",
+    "dbaeumer.vscode-eslint"
   ]
 }
