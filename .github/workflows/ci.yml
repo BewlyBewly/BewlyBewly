@@ -38,6 +38,8 @@ jobs:
 
       - name: Install pnpm
         uses: pnpm/action-setup@v2
+        with:
+          run_install: true
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
@@ -45,9 +47,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
           registry-url: https://registry.npmjs.org/
           cache: pnpm
-
-      - name: Install Dependencies
-        run: pnpm install
 
       - name: Build
         run: pnpm build
