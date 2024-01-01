@@ -122,7 +122,7 @@ function setCurrentTitle() {
       >
         <ul
           flex="~ gap-2 col" rounded="30px hover:25px" bg="$bew-elevated-2" p-2 shadow="$bew-shadow-3"
-          scale="group-hover:105" duration-300 overflow-hidden
+          scale="group-hover:105" duration-300 overflow-hidden antialiased
           backdrop-glass
         >
           <!-- mask -->

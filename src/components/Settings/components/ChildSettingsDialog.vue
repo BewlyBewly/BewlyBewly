@@ -16,12 +16,13 @@ function handleClose() {
   <div class="child-settings-dialog">
     <div
       pos="fixed top-0 left-0" w-full h-full bg="black opacity-20 dark:opacity-40" rounded="$bew-radius"
-      z-1 @click="handleClose"
+      z-1
+      @click="handleClose"
     />
     <div
       pos="fixed top-1/2 left-1/2" bg="$bew-elevated-solid-1" rounded="$bew-radius"
       transform="translate--1/2" z-2 shadow="$bew-shadow-3" overflow="x-hidden y-overlay" w="$b-dialog-width"
-      h="$b-dialog-height"
+      h="$b-dialog-height" antialiased
     >
       <header
         pos="sticky top-0 left-0" w-full h-80px px-8 flex

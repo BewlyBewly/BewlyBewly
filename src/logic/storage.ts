@@ -11,7 +11,7 @@ export interface Settings {
   enableHorizontalScrolling: boolean
   openLinkInCurrentTab: boolean
   enableVideoCtrlBarOnVideoCard: boolean
-  autoHideTopbar: boolean
+  autoHideTopBar: boolean
   dockPosition: 'left' | 'right' | 'bottom'
   autoHideDock: boolean
   dockItemVisibilityList: { page: AppPage; visible: boolean }[]
@@ -42,7 +42,7 @@ export interface Settings {
   searchPageModeWallpaperFixed: boolean
 
   adaptToOtherPageStyles: boolean
-  isShowTopbar: boolean
+  showTopBar: boolean
   useOriginalBilibiliHomepage: boolean
 }
 export const settings = useStorageLocal('settings', ref<Settings>({
@@ -50,7 +50,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   enableHorizontalScrolling: false,
   openLinkInCurrentTab: false,
   enableVideoCtrlBarOnVideoCard: false,
-  autoHideTopbar: false,
+  autoHideTopBar: false,
   dockPosition: 'right',
   autoHideDock: false,
   dockItemVisibilityList: [],
@@ -81,6 +81,6 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   searchPageModeWallpaperFixed: false,
 
   adaptToOtherPageStyles: true,
-  isShowTopbar: true,
+  showTopBar: true,
   useOriginalBilibiliHomepage: false,
 }), { mergeDefaults: true })

@@ -126,7 +126,7 @@ settings:
   # Compatibility
   # Common
   use_original_bilibili_homepage: Use the original Bilibili homepage
-  use_original_bilibili_homepage_desc: You need to refresh the page after changing it
+  use_original_bilibili_homepage_desc: After you change it, the page will automatically refresh if you are on the homepage!
   adapt_to_other_page_styles: Adapt to other page styles
   adapt_to_other_page_styles_desc: Adapt to some common pages to match with the BewlyBewly theme
   # Bilibili Evolved

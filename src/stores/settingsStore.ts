@@ -7,8 +7,8 @@ interface Settings {
   enableHorizontalScrolling: boolean
   openLinkInCurrentTab: boolean
   enableVideoCtrlBarOnVideoCard: boolean
-  isShowTopbar: boolean
-  autoHideTopbar: boolean
+  showTopBar: boolean
+  autoHideTopBar: boolean
   dockPosition: 'left' | 'right' | 'bottom'
   autoHideDock: boolean
   dockItemVisibilityList: { page: AppPage; visible: boolean }[]
@@ -47,8 +47,8 @@ export const useSettingsStore = defineStore('settings', () => {
     enableHorizontalScrolling: false,
     openLinkInCurrentTab: false,
     enableVideoCtrlBarOnVideoCard: false,
-    isShowTopbar: true,
-    autoHideTopbar: false,
+    showTopBar: true,
+    autoHideTopBar: false,
     dockPosition: 'right',
     autoHideDock: false,
     dockItemVisibilityList: [],

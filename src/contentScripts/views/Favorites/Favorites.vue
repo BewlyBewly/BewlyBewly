@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { getCSRF, getUserID, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
-import type { FavoriteCategory, FavoriteResource } from '~/components/Topbar/types'
+import type { FavoriteCategory, FavoriteResource } from '~/components/TopBar/types'
 import emitter from '~/utils/mitt'
 import { settings } from '~/logic'
 import type { Media as FavoriteItem, FavoritesResult } from '~/models/video/favorite'
@@ -42,14 +42,14 @@ onMounted(async () => {
     favoriteResources.length = 0
     handleSearch()
   })
-  emitter.off('topbarVisibleChange')
-  emitter.on('topbarVisibleChange', (val) => {
+  emitter.off('topBarVisibleChange')
+  emitter.on('topBarVisibleChange', (val) => {
     shouldMoveCtrlBarUp.value = false
 
     // Allow moving tabs up only when the top bar is not hidden & is set to auto-hide
     // This feature is primarily designed to compatible with the Bilibili Evolved's top bar
     // Even when the BewlyBewly top bar is hidden, the Bilibili Evolved top bar still exists, so not moving up
-    if (settings.value.autoHideTopbar && settings.value.isShowTopbar) {
+    if (settings.value.autoHideTopBar && settings.value.showTopBar) {
       if (val)
         shouldMoveCtrlBarUp.value = false
 
@@ -62,7 +62,7 @@ onMounted(async () => {
 onUnmounted(() => {
   emitter.off('reachBottom')
   emitter.off('pageRefresh')
-  emitter.off('topbarVisibleChange')
+  emitter.off('topBarVisibleChange')
 })
 
 async function getFavoriteCategories() {
@@ -330,3 +330,4 @@ function handleUnfavorite(favoriteResource: FavoriteResource) {
   }
 }
 </style>
+~/components/TopBar/types

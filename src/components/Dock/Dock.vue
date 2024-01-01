@@ -11,7 +11,7 @@ defineProps<{ activatedPage: AppPage }>()
 
 const emit = defineEmits(['change-page', 'settings-visibility-change'])
 
-const mainStore = useMainStore() as any
+const mainStore = useMainStore()
 
 const { t } = useI18n()
 

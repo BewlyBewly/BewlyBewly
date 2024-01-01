@@ -3,10 +3,25 @@ import type { Ref, UnwrapNestedRefs } from 'vue'
 import { onMounted, watch } from 'vue'
 import type { UnReadDm, UnReadMessage, UserInfo } from './types'
 import { updateInterval } from './notify'
+import NotificationsPop from './components/NotificationsPop.vue'
+import MomentsPop from './components/MomentsPop.vue'
+import FavoritesPop from './components/FavoritesPop.vue'
+import HistoryPop from './components/HistoryPop.vue'
 import { getUserID, isHomePage } from '~/utils/main'
 import { settings } from '~/logic'
 import emitter from '~/utils/mitt'
 import type { AppPage } from '~/enums/appEnums'
+
+// import { useTopBarStore } from '~/stores/topBarStore'
+
+const props = withDefaults(defineProps<Props>(), {
+  showSearchBar: true,
+  showLogo: true,
+})
+
+// const popups = { NotificationsPop, MomentsPop, FavoritesPop, HistoryPop }
+
+// const topBarStore = useTopBarStore()
 
 interface Props {
   showSearchBar?: boolean
@@ -14,10 +29,9 @@ interface Props {
   mask?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  showSearchBar: true,
-  showLogo: true,
-})
+// const topBarItems = computed(() => {
+//   return topBarStore.topBarItems
+// })
 
 const activatedPage = inject('activatedPage') as Ref<AppPage>
 const scrollbarRef = inject('scrollbarRef') as Ref
@@ -25,8 +39,8 @@ const scrollbarRef = inject('scrollbarRef') as Ref
 const mid = getUserID() || ''
 const userInfo = reactive<UserInfo | NonNullable<unknown>>({}) as UnwrapNestedRefs<UserInfo>
 
-const hideTopbar = ref<boolean>(false)
-const hovingTopbar = ref<boolean>(false)
+const hideTopBar = ref<boolean>(false)
+const hoveringTopBar = ref<boolean>(false)
 
 const showChannelsPop = ref<boolean>(false)
 const showUserPanelPop = ref<boolean>(false)
@@ -55,9 +69,9 @@ const favoritesPopRef = ref<any>()
 const scrollTop = ref<number>(0)
 const oldScrollTop = ref<number>(0)
 
-watch(() => settings.value.autoHideTopbar, (newVal) => {
+watch(() => settings.value.autoHideTopBar, (newVal) => {
   if (!newVal)
-    toggleTopbarVisible(true)
+    toggleTopBarVisible(true)
 })
 
 watch(
@@ -78,7 +92,7 @@ watch(
       return
 
     if (!newVal)
-      await getTopbarNewMomentsCount()
+      await getTopBarNewMomentsCount()
   },
 )
 
@@ -94,13 +108,13 @@ watch(showFavoritesPop, (newVal, oldVal) => {
 })
 
 watch(activatedPage, () => {
-  toggleTopbarVisible(true)
+  toggleTopBarVisible(true)
 })
 
 onMounted(async () => {
   initData()
   await nextTick()
-  toggleTopbarVisible(true)
+  toggleTopBarVisible(true)
   window.addEventListener('scroll', handleScroll)
 })
 
@@ -111,12 +125,12 @@ onBeforeMount(() => {
 async function initData() {
   await getUserInfo()
   getUnreadMessageCount()
-  getTopbarNewMomentsCount()
+  getTopBarNewMomentsCount()
 
   // automatically update notifications and moments count
   setInterval(() => {
     getUnreadMessageCount()
-    getTopbarNewMomentsCount()
+    getTopBarNewMomentsCount()
   }, updateInterval)
 }
 
@@ -129,12 +143,12 @@ function handleScroll() {
     scrollTop.value = document.documentElement.scrollTop
   }
 
-  if (settings.value.autoHideTopbar && !hovingTopbar.value && scrollTop.value !== 0) {
+  if (settings.value.autoHideTopBar && !hoveringTopBar.value && scrollTop.value !== 0) {
     if (scrollTop.value > oldScrollTop.value)
-      toggleTopbarVisible(false)
+      toggleTopBarVisible(false)
 
     else
-      toggleTopbarVisible(true)
+      toggleTopBarVisible(true)
   }
 
   oldScrollTop.value = scrollTop.value
@@ -217,7 +231,7 @@ async function getUnreadMessageCount() {
   }
 }
 
-async function getTopbarNewMomentsCount() {
+async function getTopBarNewMomentsCount() {
   if (!isLogin)
     return
 
@@ -225,7 +239,7 @@ async function getTopbarNewMomentsCount() {
 
   try {
     const res = await browser.runtime.sendMessage({
-      contentScriptQuery: 'getTopbarNewMomentsCount',
+      contentScriptQuery: 'getTopBarNewMomentsCount',
     })
     newMomentsCount.value = res.data.update_info.item.count
     // If moments count > 0 then refresh the key to get the new moments
@@ -237,13 +251,13 @@ async function getTopbarNewMomentsCount() {
   }
 }
 
-function toggleTopbarVisible(visible: boolean) {
-  hideTopbar.value = !visible
-  emitter.emit('topbarVisibleChange', visible)
+function toggleTopBarVisible(visible: boolean) {
+  hideTopBar.value = !visible
+  emitter.emit('topBarVisibleChange', visible)
 }
 
 defineExpose({
-  toggleTopbarVisible,
+  toggleTopBarVisible,
   handleScroll,
 })
 </script>
@@ -251,9 +265,9 @@ defineExpose({
 <template>
   <header
     w="full" transition="all 300 ease-in-out"
-    :class="{ hide: hideTopbar }"
-    @mouseenter="hovingTopbar = true"
-    @mouseleave="hovingTopbar = false"
+    :class="{ hide: hideTopBar }"
+    @mouseenter="hoveringTopBar = true"
+    @mouseleave="hoveringTopBar = false"
   >
     <main
       max-w="$bew-page-max-width" m-auto flex="~"
@@ -402,6 +416,22 @@ defineExpose({
             </Transition>
           </div>
 
+          <!-- TODO: need to refactor to this -->
+          <!-- <div display="lg:flex none">
+            <div v-for="item in topBarItems" :key="item.i18nKey" class="right-side-item">
+              <a :href="item.url" target="_blank" :title="$t(item.i18nKey)">
+                <Icon :icon="item.icon" />
+              </a>
+
+              <Component
+                :is="popups[item.popup] ?? 'div'"
+                v-if="item.popup"
+                class="bew-popover"
+              />
+            </div>
+          </div> -->
+
+          <!-- TODO: need to refactor to above code -->
           <div display="lg:flex none">
             <!-- Notifications -->
             <div

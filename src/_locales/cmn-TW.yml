@@ -128,7 +128,7 @@ settings:
   # Compatibility
   # Common
   use_original_bilibili_homepage: 使用原版 Bilibili 首頁
-  use_original_bilibili_homepage_desc: 修改後需要重新整理頁面才能生效
+  use_original_bilibili_homepage_desc: 當您變更此設定後，如果在首頁上，頁面將自動重新整理！
   adapt_to_other_page_styles: 適應其他頁面風格
   adapt_to_other_page_styles_desc: 適應一些常見頁面，以配合 BewlyBewly 主題
   # Bilibili Evolved

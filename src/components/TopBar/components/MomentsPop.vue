@@ -44,19 +44,19 @@ watch(selectedTab, (newVal: number, oldVal: number) => {
     smoothScrollToTop(momentsWrap.value, 300)
 
   if (newVal === 0) {
-    getTopbarNewMoments([MomentType.Video, MomentType.Bangumi])
+    getTopBarNewMoments([MomentType.Video, MomentType.Bangumi])
   }
   else if (newVal === 1) {
     livePage.value = 1
     getTopbarLiveMoments(livePage.value)
   }
   else if (newVal === 2) {
-    getTopbarNewMoments([MomentType.Article])
+    getTopBarNewMoments([MomentType.Article])
   }
 })
 
 onMounted(() => {
-  getTopbarNewMoments([MomentType.Video, MomentType.Bangumi])
+  getTopBarNewMoments([MomentType.Video, MomentType.Bangumi])
 
   if (momentsWrap.value) {
     momentsWrap.value.addEventListener('scroll', () => {
@@ -89,12 +89,12 @@ function onClickTab(tabId: number) {
   })
 }
 
-function getTopbarNewMoments(typeList: number[]) {
+function getTopBarNewMoments(typeList: number[]) {
   moments.length = 0
   isLoading.value = true
   browser.runtime
     .sendMessage({
-      contentScriptQuery: 'getTopbarNewMoments',
+      contentScriptQuery: 'getTopBarNewMoments',
       uid: getUserID(),
       typeList,
     })
