@@ -3,10 +3,24 @@ import type { Ref, UnwrapNestedRefs } from 'vue'
 import { onMounted, watch } from 'vue'
 import type { UnReadDm, UnReadMessage, UserInfo } from './types'
 import { updateInterval } from './notify'
+import NotificationsPop from './components/NotificationsPop.vue'
+import MomentsPop from './components/MomentsPop.vue'
+import FavoritesPop from './components/FavoritesPop.vue'
+import HistoryPop from './components/HistoryPop.vue'
 import { getUserID, isHomePage } from '~/utils/main'
 import { settings } from '~/logic'
 import emitter from '~/utils/mitt'
 import type { AppPage } from '~/enums/appEnums'
+import { useTopBarStore } from '~/stores/topBarStore'
+
+const props = withDefaults(defineProps<Props>(), {
+  showSearchBar: true,
+  showLogo: true,
+})
+
+const popups = { NotificationsPop, MomentsPop, FavoritesPop, HistoryPop }
+
+const topBarStore = useTopBarStore()
 
 interface Props {
   showSearchBar?: boolean
@@ -14,9 +28,8 @@ interface Props {
   mask?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  showSearchBar: true,
-  showLogo: true,
+const topBarItems = computed(() => {
+  return topBarStore.topBarItems
 })
 
 const activatedPage = inject('activatedPage') as Ref<AppPage>
@@ -102,6 +115,8 @@ onMounted(async () => {
   await nextTick()
   toggleTopBarVisible(true)
   window.addEventListener('scroll', handleScroll)
+
+  console.log('topBarStore topBarItems', topBarStore.topBarItems)
 })
 
 onBeforeMount(() => {
@@ -402,6 +417,22 @@ defineExpose({
             </Transition>
           </div>
 
+          <!-- TODO: need to refactor to this -->
+          <!-- <div display="lg:flex none">
+            <div v-for="item in topBarItems" :key="item.i18nKey" class="right-side-item">
+              <a :href="item.url" target="_blank" :title="$t(item.i18nKey)">
+                <Icon :icon="item.icon" />
+              </a>
+
+              <Component
+                :is="popups[item.popup] ?? 'div'"
+                v-if="item.popup"
+                class="bew-popover"
+              />
+            </div>
+          </div> -->
+
+          <!-- TODO: need to refactor to above code -->
           <div display="lg:flex none">
             <!-- Notifications -->
             <div
