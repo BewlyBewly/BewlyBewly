@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { getCSRF, getUserID, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
-import type { FavoriteCategory, FavoriteResource } from '~/components/Topbar/types'
+import type { FavoriteCategory, FavoriteResource } from '~/components/TopBar/types'
 import emitter from '~/utils/mitt'
 import { settings } from '~/logic'
 import type { Media as FavoriteItem, FavoritesResult } from '~/models/video/favorite'
@@ -330,3 +330,4 @@ function handleUnfavorite(favoriteResource: FavoriteResource) {
   }
 }
 </style>
+~/components/TopBar/types
