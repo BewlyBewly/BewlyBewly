@@ -11,16 +11,17 @@ import { getUserID, isHomePage } from '~/utils/main'
 import { settings } from '~/logic'
 import emitter from '~/utils/mitt'
 import type { AppPage } from '~/enums/appEnums'
-import { useTopBarStore } from '~/stores/topBarStore'
+
+// import { useTopBarStore } from '~/stores/topBarStore'
 
 const props = withDefaults(defineProps<Props>(), {
   showSearchBar: true,
   showLogo: true,
 })
 
-const popups = { NotificationsPop, MomentsPop, FavoritesPop, HistoryPop }
+// const popups = { NotificationsPop, MomentsPop, FavoritesPop, HistoryPop }
 
-const topBarStore = useTopBarStore()
+// const topBarStore = useTopBarStore()
 
 interface Props {
   showSearchBar?: boolean
@@ -28,9 +29,9 @@ interface Props {
   mask?: boolean
 }
 
-const topBarItems = computed(() => {
-  return topBarStore.topBarItems
-})
+// const topBarItems = computed(() => {
+//   return topBarStore.topBarItems
+// })
 
 const activatedPage = inject('activatedPage') as Ref<AppPage>
 const scrollbarRef = inject('scrollbarRef') as Ref
@@ -115,8 +116,6 @@ onMounted(async () => {
   await nextTick()
   toggleTopBarVisible(true)
   window.addEventListener('scroll', handleScroll)
-
-  console.log('topBarStore topBarItems', topBarStore.topBarItems)
 })
 
 onBeforeMount(() => {
