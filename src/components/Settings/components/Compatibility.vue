@@ -1,5 +1,11 @@
 <script lang="ts" setup>
 import { settings } from '~/logic'
+import { isHomePage } from '~/utils/main'
+
+watch(() => settings.value.useOriginalBilibiliHomepage, () => {
+  if (isHomePage())
+    location.reload()
+})
 
 const bilibiliEvolvedThemeColor = computed(() => {
   return getComputedStyle(document.querySelector('html') as HTMLElement).getPropertyValue('--theme-color').trim() ?? '#00a1d6'
@@ -15,7 +21,7 @@ function changeThemeColor(color: string) {
     <SettingsItemGroup :title="$t('settings.group_common')">
       <SettingsItem :title="$t('settings.use_original_bilibili_homepage')">
         <template #desc>
-          <span color="$bew-warning-color" v-text="$t('settings.use_original_bilibili_homepage_desc')" />
+          <span color="$bew-error-color" v-text="$t('settings.use_original_bilibili_homepage_desc')" />
         </template>
         <Radio v-model="settings.useOriginalBilibiliHomepage" />
       </SettingsItem>
