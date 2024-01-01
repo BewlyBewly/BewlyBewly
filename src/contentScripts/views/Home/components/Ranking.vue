@@ -56,7 +56,7 @@ watch(() => activatedRankingType.value.id, () => {
 })
 
 onMounted(() => {
-  emitter.on('topbarVisibleChange', (val) => {
+  emitter.on('topBarVisibleChange', (val) => {
     shouldMoveAsideUp.value = false
 
     // Allow moving tabs up only when the top bar is not hidden & is set to auto-hide
@@ -75,7 +75,7 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
-  emitter.off('topbarVisibleChange')
+  emitter.off('topBarVisibleChange')
 })
 
 function getRankingVideos() {

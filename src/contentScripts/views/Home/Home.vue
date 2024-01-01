@@ -55,8 +55,8 @@ onMounted(() => {
   emitter.on('pageRefresh', async () => {
     recommendContentKey.value = `recommendContent${Number(new Date())}`
   })
-  emitter.off('topbarVisibleChange')
-  emitter.on('topbarVisibleChange', (val) => {
+  emitter.off('topBarVisibleChange')
+  emitter.on('topBarVisibleChange', (val) => {
     shouldMoveTabsUp.value = false
 
     // Allow moving tabs up only when the top bar is not hidden & is set to auto-hide
@@ -74,7 +74,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   emitter.off('pageRefresh')
-  emitter.off('topbarVisibleChange')
+  emitter.off('topBarVisibleChange')
 })
 </script>
 

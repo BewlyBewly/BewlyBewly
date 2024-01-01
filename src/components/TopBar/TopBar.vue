@@ -92,7 +92,7 @@ watch(
       return
 
     if (!newVal)
-      await getTopbarNewMomentsCount()
+      await getTopBarNewMomentsCount()
   },
 )
 
@@ -125,12 +125,12 @@ onBeforeMount(() => {
 async function initData() {
   await getUserInfo()
   getUnreadMessageCount()
-  getTopbarNewMomentsCount()
+  getTopBarNewMomentsCount()
 
   // automatically update notifications and moments count
   setInterval(() => {
     getUnreadMessageCount()
-    getTopbarNewMomentsCount()
+    getTopBarNewMomentsCount()
   }, updateInterval)
 }
 
@@ -231,7 +231,7 @@ async function getUnreadMessageCount() {
   }
 }
 
-async function getTopbarNewMomentsCount() {
+async function getTopBarNewMomentsCount() {
   if (!isLogin)
     return
 
@@ -239,7 +239,7 @@ async function getTopbarNewMomentsCount() {
 
   try {
     const res = await browser.runtime.sendMessage({
-      contentScriptQuery: 'getTopbarNewMomentsCount',
+      contentScriptQuery: 'getTopBarNewMomentsCount',
     })
     newMomentsCount.value = res.data.update_info.item.count
     // If moments count > 0 then refresh the key to get the new moments
@@ -253,7 +253,7 @@ async function getTopbarNewMomentsCount() {
 
 function toggleTopBarVisible(visible: boolean) {
   hideTopBar.value = !visible
-  emitter.emit('topbarVisibleChange', visible)
+  emitter.emit('topBarVisibleChange', visible)
 }
 
 defineExpose({

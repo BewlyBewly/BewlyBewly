@@ -1,7 +1,7 @@
 import browser from 'webextension-polyfill'
 
 function handleMessage(message: any) {
-  if (message.contentScriptQuery === 'getTopbarNewMomentsCount') {
+  if (message.contentScriptQuery === 'getTopBarNewMomentsCount') {
     const url = 'https://api.bilibili.com/x/web-interface/dynamic/entrance'
     return fetch(url)
       .then(response => response.json())
@@ -10,7 +10,7 @@ function handleMessage(message: any) {
   }
 
   // v2 get moment list
-  // else if (message.contentScriptQuery === 'getTopbarNewMoments') {
+  // else if (message.contentScriptQuery === 'getTopBarNewMoments') {
   //   // type: video | article
   //   const url = `https://api.bilibili.com/x/polymer/web-dynamic/v1/feed/nav?type=${message.type}&update_baseline=${message.updateBaseline}`
   //   return fetch(url)
@@ -26,7 +26,7 @@ function handleMessage(message: any) {
   //     .catch(error => console.error(error))
   // }
 
-  else if (message.contentScriptQuery === 'getTopbarNewMoments') {
+  else if (message.contentScriptQuery === 'getTopBarNewMoments') {
     const url = `https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_new?uid=${message.uid}
     &type_list=${message.typeList}`
     return fetch(url)

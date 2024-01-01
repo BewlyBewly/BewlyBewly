@@ -42,8 +42,8 @@ onMounted(async () => {
     favoriteResources.length = 0
     handleSearch()
   })
-  emitter.off('topbarVisibleChange')
-  emitter.on('topbarVisibleChange', (val) => {
+  emitter.off('topBarVisibleChange')
+  emitter.on('topBarVisibleChange', (val) => {
     shouldMoveCtrlBarUp.value = false
 
     // Allow moving tabs up only when the top bar is not hidden & is set to auto-hide
@@ -62,7 +62,7 @@ onMounted(async () => {
 onUnmounted(() => {
   emitter.off('reachBottom')
   emitter.off('pageRefresh')
-  emitter.off('topbarVisibleChange')
+  emitter.off('topBarVisibleChange')
 })
 
 async function getFavoriteCategories() {

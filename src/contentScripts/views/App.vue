@@ -266,7 +266,7 @@ provide('scrollbarRef', scrollbarRef)
       />
     </div>
 
-    <!-- Topbar -->
+    <!-- TopBar -->
     <div m-auto max-w="$bew-page-max-width">
       <Transition name="top-bar">
         <TopBar
