@@ -279,8 +279,15 @@ provide('scrollbarRef', scrollbarRef)
         <TopBar
           v-else-if="settings.showTopBar && isHomePage()"
           ref="topBarRef"
-          :show-search-bar="showTopBarMask && settings.useSearchPageModeOnHomePage || (!settings.useSearchPageModeOnHomePage && activatedPage !== AppPage.Search || activatedPage !== AppPage.Home && activatedPage !== AppPage.Search)"
-          :show-logo="showTopBarMask && settings.useSearchPageModeOnHomePage || (!settings.useSearchPageModeOnHomePage || activatedPage !== AppPage.Home)"
+          :show-search-bar="showTopBarMask && settings.useSearchPageModeOnHomePage
+            || (
+              !settings.useSearchPageModeOnHomePage && activatedPage !== AppPage.Search
+              || activatedPage !== AppPage.Home && activatedPage !== AppPage.Search
+            )
+            || settings.useOriginalBilibiliHomepage"
+          :show-logo="showTopBarMask && settings.useSearchPageModeOnHomePage
+            || (!settings.useSearchPageModeOnHomePage || activatedPage !== AppPage.Home)
+            || settings.useOriginalBilibiliHomepage"
           :mask="showTopBarMask"
           pos="fixed top-0 left-0" z="99 hover:1001" w-full
         />
