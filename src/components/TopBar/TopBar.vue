@@ -25,8 +25,8 @@ const scrollbarRef = inject('scrollbarRef') as Ref
 const mid = getUserID() || ''
 const userInfo = reactive<UserInfo | NonNullable<unknown>>({}) as UnwrapNestedRefs<UserInfo>
 
-const hideTopbar = ref<boolean>(false)
-const hovingTopbar = ref<boolean>(false)
+const hideTopBar = ref<boolean>(false)
+const hoveringTopBar = ref<boolean>(false)
 
 const showChannelsPop = ref<boolean>(false)
 const showUserPanelPop = ref<boolean>(false)
@@ -57,7 +57,7 @@ const oldScrollTop = ref<number>(0)
 
 watch(() => settings.value.autoHideTopbar, (newVal) => {
   if (!newVal)
-    toggleTopbarVisible(true)
+    toggleTopBarVisible(true)
 })
 
 watch(
@@ -94,13 +94,13 @@ watch(showFavoritesPop, (newVal, oldVal) => {
 })
 
 watch(activatedPage, () => {
-  toggleTopbarVisible(true)
+  toggleTopBarVisible(true)
 })
 
 onMounted(async () => {
   initData()
   await nextTick()
-  toggleTopbarVisible(true)
+  toggleTopBarVisible(true)
   window.addEventListener('scroll', handleScroll)
 })
 
@@ -129,12 +129,12 @@ function handleScroll() {
     scrollTop.value = document.documentElement.scrollTop
   }
 
-  if (settings.value.autoHideTopbar && !hovingTopbar.value && scrollTop.value !== 0) {
+  if (settings.value.autoHideTopbar && !hoveringTopBar.value && scrollTop.value !== 0) {
     if (scrollTop.value > oldScrollTop.value)
-      toggleTopbarVisible(false)
+      toggleTopBarVisible(false)
 
     else
-      toggleTopbarVisible(true)
+      toggleTopBarVisible(true)
   }
 
   oldScrollTop.value = scrollTop.value
@@ -237,13 +237,13 @@ async function getTopbarNewMomentsCount() {
   }
 }
 
-function toggleTopbarVisible(visible: boolean) {
-  hideTopbar.value = !visible
+function toggleTopBarVisible(visible: boolean) {
+  hideTopBar.value = !visible
   emitter.emit('topbarVisibleChange', visible)
 }
 
 defineExpose({
-  toggleTopbarVisible,
+  toggleTopBarVisible,
   handleScroll,
 })
 </script>
@@ -251,9 +251,9 @@ defineExpose({
 <template>
   <header
     w="full" transition="all 300 ease-in-out"
-    :class="{ hide: hideTopbar }"
-    @mouseenter="hovingTopbar = true"
-    @mouseleave="hovingTopbar = false"
+    :class="{ hide: hideTopBar }"
+    @mouseenter="hoveringTopBar = true"
+    @mouseleave="hoveringTopBar = false"
   >
     <main
       max-w="$bew-page-max-width" m-auto flex="~"

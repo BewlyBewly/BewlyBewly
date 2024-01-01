@@ -21,9 +21,9 @@ const [showSettings, toggleSettings] = useToggle(false)
 const pages = { Home, Search, Anime, History, WatchLater, Favorites }
 const mainAppRef = ref<HTMLElement>() as Ref<HTMLElement>
 const scrollbarRef = ref()
-const showTopbarMask = ref<boolean>(false)
+const showTopBarMask = ref<boolean>(false)
 const dynamicComponentKey = ref<string>(`dynamicComponent${Number(new Date())}`)
-const topbarRef = ref()
+const topBarRef = ref()
 
 const isVideoPage = computed(() => {
   if (/https?:\/\/(www.)?bilibili.com\/video\/.*/.test(location.href))
@@ -37,7 +37,7 @@ const isSearchPage = computed(() => {
   return false
 })
 
-const isTopbarFixed = computed(() => {
+const isTopBarFixed = computed(() => {
   if (
     isHomePage()
     // // search page
@@ -97,8 +97,8 @@ onMounted(() => {
 
   document.addEventListener('scroll', () => {
     if (window.scrollY > 0)
-      showTopbarMask.value = true
-    else showTopbarMask.value = false
+      showTopBarMask.value = true
+    else showTopBarMask.value = false
   })
 
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setAppAppearance)
@@ -208,7 +208,7 @@ function handleBackToTop(targetScrollTop = 0 as number) {
   const osInstance = scrollbarRef.value?.osInstance()
 
   smoothScrollToTop(osInstance.elements().viewport, 300, targetScrollTop)
-  topbarRef.value?.toggleTopbarVisible(true)
+  topBarRef.value?.toggleTopBarVisible(true)
 }
 
 function handleAdaptToOtherPageStylesChange() {
@@ -224,15 +224,15 @@ function handleOsScroll() {
   const { scrollTop, scrollHeight, clientHeight } = viewport // get scroll offset
 
   if (scrollTop === 0)
-    showTopbarMask.value = false
+    showTopBarMask.value = false
   else
-    showTopbarMask.value = true
+    showTopBarMask.value = true
 
   if (clientHeight + scrollTop >= scrollHeight - 20)
     emitter.emit('reachBottom')
 
   if (isHomePage())
-    topbarRef.value?.handleScroll()
+    topBarRef.value?.handleScroll()
 }
 
 provide('handleBackToTop', handleBackToTop)
@@ -268,20 +268,20 @@ provide('scrollbarRef', scrollbarRef)
 
     <!-- Topbar -->
     <div m-auto max-w="$bew-page-max-width">
-      <Transition name="topbar">
-        <TopBar2
+      <Transition name="top-bar">
+        <TopBar
           v-if="settings.isShowTopbar && !isHomePage()"
           pos="top-0 left-0" z="99 hover:1001" w-full
-          :style="{ position: isTopbarFixed ? 'fixed' : 'absolute' }"
+          :style="{ position: isTopBarFixed ? 'fixed' : 'absolute' }"
           :show-search-bar="!isSearchPage"
-          :mask="showTopbarMask"
+          :mask="showTopBarMask"
         />
-        <TopBar2
+        <TopBar
           v-else-if="settings.isShowTopbar && isHomePage()"
-          ref="topbarRef"
-          :show-search-bar="showTopbarMask && settings.useSearchPageModeOnHomePage || (!settings.useSearchPageModeOnHomePage && activatedPage !== AppPage.Search || activatedPage !== AppPage.Home && activatedPage !== AppPage.Search)"
-          :show-logo="showTopbarMask && settings.useSearchPageModeOnHomePage || (!settings.useSearchPageModeOnHomePage || activatedPage !== AppPage.Home)"
-          :mask="showTopbarMask"
+          ref="topBarRef"
+          :show-search-bar="showTopBarMask && settings.useSearchPageModeOnHomePage || (!settings.useSearchPageModeOnHomePage && activatedPage !== AppPage.Search || activatedPage !== AppPage.Home && activatedPage !== AppPage.Search)"
+          :show-logo="showTopBarMask && settings.useSearchPageModeOnHomePage || (!settings.useSearchPageModeOnHomePage || activatedPage !== AppPage.Home)"
+          :mask="showTopBarMask"
           pos="fixed top-0 left-0" z="99 hover:1001" w-full
         />
       </Transition>
@@ -300,7 +300,7 @@ provide('scrollbarRef', scrollbarRef)
             >
               <!-- control button group -->
               <BackToTopAndRefreshButtons
-                v-if="activatedPage !== AppPage.Search" :show-refresh-button="!showTopbarMask"
+                v-if="activatedPage !== AppPage.Search" :show-refresh-button="!showTopBarMask"
                 @refresh="handleRefresh"
                 @back-to-top="handleBackToTop"
               />
@@ -317,13 +317,13 @@ provide('scrollbarRef', scrollbarRef)
 </template>
 
 <style lang="scss" scoped>
-.topbar-enter-active,
-.topbar-leave-active {
+.top-bar-enter-active,
+.top-bar-leave-active {
   transition: all 0.5s ease;
 }
 
-.topbar-enter-from,
-.topbar-leave-to {
+.top-bar-enter-from,
+.top-bar-leave-to {
   --at-apply: opacity-0 transform -translate-y-full;
 }
 </style>
