@@ -55,7 +55,7 @@ const favoritesPopRef = ref<any>()
 const scrollTop = ref<number>(0)
 const oldScrollTop = ref<number>(0)
 
-watch(() => settings.value.autoHideTopbar, (newVal) => {
+watch(() => settings.value.autoHideTopBar, (newVal) => {
   if (!newVal)
     toggleTopBarVisible(true)
 })
@@ -129,7 +129,7 @@ function handleScroll() {
     scrollTop.value = document.documentElement.scrollTop
   }
 
-  if (settings.value.autoHideTopbar && !hoveringTopBar.value && scrollTop.value !== 0) {
+  if (settings.value.autoHideTopBar && !hoveringTopBar.value && scrollTop.value !== 0) {
     if (scrollTop.value > oldScrollTop.value)
       toggleTopBarVisible(false)
 

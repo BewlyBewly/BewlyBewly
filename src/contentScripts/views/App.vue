@@ -270,14 +270,14 @@ provide('scrollbarRef', scrollbarRef)
     <div m-auto max-w="$bew-page-max-width">
       <Transition name="top-bar">
         <TopBar
-          v-if="settings.isShowTopbar && !isHomePage()"
+          v-if="settings.showTopBar && !isHomePage()"
           pos="top-0 left-0" z="99 hover:1001" w-full
           :style="{ position: isTopBarFixed ? 'fixed' : 'absolute' }"
           :show-search-bar="!isSearchPage"
           :mask="showTopBarMask"
         />
         <TopBar
-          v-else-if="settings.isShowTopbar && isHomePage()"
+          v-else-if="settings.showTopBar && isHomePage()"
           ref="topBarRef"
           :show-search-bar="showTopBarMask && settings.useSearchPageModeOnHomePage || (!settings.useSearchPageModeOnHomePage && activatedPage !== AppPage.Search || activatedPage !== AppPage.Home && activatedPage !== AppPage.Search)"
           :show-logo="showTopBarMask && settings.useSearchPageModeOnHomePage || (!settings.useSearchPageModeOnHomePage || activatedPage !== AppPage.Home)"

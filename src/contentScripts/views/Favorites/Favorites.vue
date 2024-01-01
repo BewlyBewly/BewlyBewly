@@ -49,7 +49,7 @@ onMounted(async () => {
     // Allow moving tabs up only when the top bar is not hidden & is set to auto-hide
     // This feature is primarily designed to compatible with the Bilibili Evolved's top bar
     // Even when the BewlyBewly top bar is hidden, the Bilibili Evolved top bar still exists, so not moving up
-    if (settings.value.autoHideTopbar && settings.value.isShowTopbar) {
+    if (settings.value.autoHideTopBar && settings.value.showTopBar) {
       if (val)
         shouldMoveCtrlBarUp.value = false
 
