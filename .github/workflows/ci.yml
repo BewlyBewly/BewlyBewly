@@ -26,27 +26,17 @@ jobs:
         run: pnpm run lint
 
   build:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        node-version: [18.17.0]
-        os: [ubuntu-latest]
-
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v2
+      - uses: actions/setup-node@v3
         with:
-          run_install: true
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-          registry-url: https://registry.npmjs.org/
+          node-version: 18.17.0
           cache: pnpm
+
+      - name: Install
+        run: pnpm install
 
       - name: Build
         run: pnpm build
