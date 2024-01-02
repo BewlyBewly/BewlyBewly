@@ -7,6 +7,7 @@ import App from './views/App.vue'
 import { setupApp } from '~/logic/common-setup'
 import { SVG_ICONS } from '~/utils/svgIcons'
 import { delay, injectCSS } from '~/utils/main'
+import { runWhenIdle } from '~/utils/lazy'
 import { settings } from '~/logic'
 
 const currentUrl = document.URL
@@ -80,15 +81,17 @@ if (isFirefox) {
     if (!isFirstScriptExecute)
       return
 
-    setTimeout(() => {
+    runWhenIdle(() => {
       injectApp()
-    }, 1000)
+    })
     isFirstScriptExecute = false
   })
 }
 else {
   document.addEventListener('DOMContentLoaded', () => {
-    injectApp()
+    runWhenIdle(() => {
+      injectApp()
+    })
   })
 }
 
