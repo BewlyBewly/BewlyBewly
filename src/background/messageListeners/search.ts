@@ -2,7 +2,7 @@ import browser from 'webextension-polyfill'
 
 function handleMessage(message: any) {
   if (message.contentScriptQuery === 'getSearchSuggestion') {
-    const url = `https://s.search.bilibili.com/main/suggest?term=${message.term}&main_ver=v1&highlight=`
+    const url = `https://s.search.bilibili.com/main/suggest?term=${message.term}`
     return fetch(url)
       .then(response => response.json())
       .then(data => (data))
