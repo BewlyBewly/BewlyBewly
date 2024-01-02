@@ -1,0 +1,63 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install
+
+      - name: Lint
+        run: pnpm run lint
+
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.17.0
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build
+
+      - name: Build Extension
+        run: pnpm pack:zip
+
+      - uses: GoogleCloudPlatform/release-please-action@v3
+        id: release
+        with:
+          token: ${{ secrets.RELEASE_TOKEN }}
+          release-type: node
+          package-name: release-please-action
+          release-as: 0.13.0
+          signoff: 'github-actions <41898282+github-actions[bot]@users.noreply.github.com>'
+          changelog-types: '[{"type":"types","section":"Types","hidden":false},{"type":"revert","section":"Reverts","hidden":false},{"type":"feat","section":"Features","hidden":false},{"type":"fix","section":"Bug Fixes","hidden":false},{"type":"improvement","section":"Feature Improvements","hidden":false},{"type":"docs","section":"Docs","hidden":false},{"type":"ci","section":"CI","hidden":false},{"type":"chore","section":"Miscellaneous","hidden":false},{"type":"contributor","section":"New Contributors","hidden":false},{"type":"notice","section":"Notices","hidden":false}]'
+
+      - name: Upload assets to a Release
+        uses: meeDamian/github-release@v2.0.3
+        with:
+          files: extension.zip
+          token: ${{ secrets.RELEASE_TOKEN }}
+          allow_override: true
+          gzip: false
