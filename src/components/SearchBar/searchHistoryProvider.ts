@@ -8,7 +8,20 @@ export interface HistoryItem {
 }
 export interface SuggestionItem {
   value: string
+  term: string
+  name: string
+  type: string
+  ref: number
+  spid: number
   timestamp: number
+}
+export interface SuggestionResponse {
+  code: number
+  exp_str: string
+  result: {
+    tag: SuggestionItem[]
+  }
+  stoken: string
 }
 export interface StorageEvent {
   type: 'COLS_RES'

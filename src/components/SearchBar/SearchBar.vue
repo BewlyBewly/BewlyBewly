@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { watchOnce } from '@vueuse/core'
-import type { HistoryItem, SuggestionItem } from './searchHistoryProvider'
+import type { HistoryItem, SuggestionItem, SuggestionResponse } from './searchHistoryProvider'
 import {
   addSearchHistory,
   clearSearchHistory,
@@ -30,8 +29,10 @@ function handleInput() {
         contentScriptQuery: 'getSearchSuggestion',
         term: keyword.value,
       })
-      .then((res) => {
-        Object.assign(suggestions, res)
+      .then((res: SuggestionResponse) => {
+        if (!res || (res && res.code !== 0))
+          return
+        Object.assign(suggestions, res.result.tag)
       })
   }
   else {
@@ -128,9 +129,9 @@ function handleClearSearchHistory() {
   searchHistory.value = []
 }
 
-watchOnce(isFocus, async (focus) => {
+watch(isFocus, async (focus) => {
   // 延后加载搜索历史
-  if (focus && searchHistory.value.length === 0)
+  if (focus)
     searchHistory.value = await getSearchHistory()
 })
 </script>
@@ -175,7 +176,7 @@ watchOnce(isFocus, async (focus) => {
         transition="all duration-300"
         type="text"
         @focus="isFocus = true"
-        @input="handleInput()"
+        @input="handleInput"
         @keyup.enter="navigateToSearchResultPage(keyword)"
         @keyup.up.stop="handleKeyUp"
         @keyup.down.stop="handleKeyDown"
