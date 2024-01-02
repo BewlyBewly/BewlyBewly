@@ -209,9 +209,9 @@ watchOnce(isFocus, async (focus) => {
       >
         <div class="history-list flex flex-col gap-y-2">
           <div class="title p-2 pb-0 flex justify-between">
-            <span>搜索历史</span>
+            <span>{{ $t('search_bar.history_title') }}</span>
             <button class="rounded-2 duration-300 pointer-events-auto cursor-pointer" hover="text-$bew-theme-color" text="base $bew-text-2" @click="handleClearSearchHistory">
-              清空
+              {{ $t('search_bar.clear_history') }}
             </button>
           </div>
 

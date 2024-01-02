@@ -284,3 +284,6 @@ watch_later:
   remove_watched_videos_confirm: |-
     Remove watched videos?
     This operation cannot be reversed. Are you sure you want to remove watched videos?
+search_bar:
+  history_title: Search History
+  clear_history: Clear search history
