@@ -122,9 +122,9 @@ function getHistoryUrl(item: HistoryItem) {
   // Article
   else if (activatedTab.value === 2) {
     if (item.history.cid === 0)
-      return `/read/cv${item.history.oid}`
+      return `//www.bilibili.com/read/cv${item.history.oid}`
     else
-      return `/read/cv${item.history.cid}`
+      return `//www.bilibili.com/read/cv${item.history.cid}`
   }
 
   return ''
