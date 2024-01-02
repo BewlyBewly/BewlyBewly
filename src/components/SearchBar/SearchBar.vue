@@ -40,7 +40,7 @@ function handleInput() {
   }
 }
 
-async function navigateToSearchResultPage(keyword: string) {
+function navigateToSearchResultPage(keyword: string) {
   if (keyword) {
     window.open(`//search.bilibili.com/all?keyword=${keyword}`, '_blank')
     const searchItem = {
@@ -48,14 +48,13 @@ async function navigateToSearchResultPage(keyword: string) {
       timestamp: Number(new Date()),
     }
     addSearchHistory(searchItem)
-    searchHistory.value = await getSearchHistory()
+    searchHistory.value = getSearchHistory()
   }
 }
 
-async function handleDelete(value: string) {
+function handleDelete(value: string) {
   removeSearchHistory(value)
-  searchHistory.value.length = 0
-  searchHistory.value = await getSearchHistory()
+  searchHistory.value = getSearchHistory()
 }
 
 function handleKeyUp() {
@@ -132,7 +131,7 @@ function handleClearSearchHistory() {
 watch(isFocus, async (focus) => {
   // 延后加载搜索历史
   if (focus)
-    searchHistory.value = await getSearchHistory()
+    searchHistory.value = getSearchHistory()
 })
 </script>
 
