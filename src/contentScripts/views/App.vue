@@ -254,14 +254,17 @@ provide('scrollbarRef', scrollbarRef)
     </KeepAlive>
 
     <!-- Dock & RightSideButtons -->
-    <div pos="absolute top-0 left-0" w-full h-full overflow-hidden>
+    <div pos="absolute top-0 left-0" w-full h-full overflow-hidden pointer-events-none>
       <Dock
         v-if="isHomePage() && !settings.useOriginalBilibiliHomepage"
-        :activated-page="activatedPage" @change-page="pageName => changeActivatePage(pageName)"
+        pointer-events-auto
+        :activated-page="activatedPage"
+        @change-page="pageName => changeActivatePage(pageName)"
         @settings-visibility-change="toggleSettings"
       />
       <RightSideButtons
         v-else
+        pointer-events-auto
         @settings-visibility-change="toggleSettings"
       />
     </div>
