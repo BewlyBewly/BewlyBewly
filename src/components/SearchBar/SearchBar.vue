@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { watchOnce } from '@vueuse/core'
 import type { HistoryItem, SuggestionItem } from './searchHistoryProvider'
 import {
   addSearchHistory,
@@ -21,10 +22,6 @@ const searchHistory = shallowRef<HistoryItem[]>([])
 const historyItemRef = ref<HTMLElement[]>([])
 const suggestionItemRef = ref<HTMLElement[]>([])
 
-onMounted(() => {
-  searchHistory.value = getSearchHistory()
-})
-
 function handleInput() {
   selectedIndex.value = -1
   if (keyword.value.length > 0) {
@@ -42,7 +39,7 @@ function handleInput() {
   }
 }
 
-function navigateToSearchResultPage(keyword: string) {
+async function navigateToSearchResultPage(keyword: string) {
   if (keyword) {
     window.open(`//search.bilibili.com/all?keyword=${keyword}`, '_blank')
     const searchItem = {
@@ -50,14 +47,14 @@ function navigateToSearchResultPage(keyword: string) {
       timestamp: Number(new Date()),
     }
     addSearchHistory(searchItem)
-    searchHistory.value = getSearchHistory()
+    searchHistory.value = await getSearchHistory()
   }
 }
 
-function handleDelete(value: string) {
+async function handleDelete(value: string) {
   removeSearchHistory(value)
   searchHistory.value.length = 0
-  searchHistory.value = getSearchHistory()
+  searchHistory.value = await getSearchHistory()
 }
 
 function handleKeyUp() {
@@ -130,6 +127,12 @@ function handleClearSearchHistory() {
   clearSearchHistory()
   searchHistory.value = []
 }
+
+watchOnce(isFocus, async (focus) => {
+  // 延后加载搜索历史
+  if (focus && searchHistory.value.length === 0)
+    searchHistory.value = await getSearchHistory()
+})
 </script>
 
 <template>
