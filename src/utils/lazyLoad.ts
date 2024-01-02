@@ -28,6 +28,7 @@ interface IDisposable {
  * [setTimeout]: https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout
  */
 
+// eslint-disable-next-line import/no-mutable-exports
 export let runWhenIdle: (callback: (idle: IdleDeadline) => void, timeout?: number) => IDisposable
 
 declare function requestIdleCallback(callback: (args: IdleDeadline) => void, options?: { timeout: number }): number

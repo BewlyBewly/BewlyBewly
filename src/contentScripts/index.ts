@@ -7,7 +7,7 @@ import App from './views/App.vue'
 import { setupApp } from '~/logic/common-setup'
 import { SVG_ICONS } from '~/utils/svgIcons'
 import { delay, injectCSS } from '~/utils/main'
-import { runWhenIdle } from '~/utils/lazy'
+import { runWhenIdle } from '~/utils/lazyLoad'
 import { settings } from '~/logic'
 
 const currentUrl = document.URL
