@@ -433,7 +433,7 @@ function toggleWatchLater(aid: number) {
                   opacity-0 group-hover:opacity-100
                   pos="absolute" duration-300 bg="black opacity-60"
                   rounded="$bew-radius-half" p-1
-                  z-1
+                  z-1 color-white
                   @click.prevent="toggleWatchLater(moment.aid ?? 0)"
                 >
                   <Tooltip v-if="!addedWatchLaterList.includes(moment.aid ?? 0)" :content="$t('common.save_to_watch_later')" placement="bottom" type="dark">
