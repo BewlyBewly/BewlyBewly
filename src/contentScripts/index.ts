@@ -60,6 +60,10 @@ if (isSupportedPage()) {
     html.dark.bewly-design {
       background-color: hsl(230 12% 6%);
     }
+
+    #i_cecream {
+      opacity: 0;
+    }
   `)
 }
 
@@ -113,15 +117,10 @@ function injectApp() {
     shadowDOM.appendChild(styleEl)
     shadowDOM.appendChild(root)
     container.style.opacity = '0'
-    container.style.transition = 'opacity .3s ease-in'
-    container.addEventListener('transitionend', () => {
-      runWhenIdle(() => {
-        beforeLoadedStyleEl.remove()
-      })
-    })
-    styleEl.onload = () => {
+    window.addEventListener('load', () => {
+      beforeLoadedStyleEl.remove()
       container.style.opacity = '1'
-    }
+    })
 
     const newStyleEl = document.createElement('link')
     newStyleEl.setAttribute('rel', 'stylesheet')
