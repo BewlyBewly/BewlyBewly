@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import ForYou from './components/ForYou.vue'
-import Following from './components/Following.vue'
-import Trending from './components/Trending.vue'
-import Ranking from './components/Ranking.vue'
-import SubscribedSeries from './components/SubscribedSeries.vue'
+
 import type { HomeTab } from './types'
 import { HomeSubPage } from './types'
 import emitter from '~/utils/mitt'
@@ -16,7 +12,13 @@ const handleBackToTop = inject('handleBackToTop') as (targetScrollTop: number) =
 
 const recommendContentKey = ref<string>(`recommendContent${Number(new Date())}`)
 const activatedPage = ref<HomeSubPage>(HomeSubPage.ForYou)
-const pages = { ForYou, Following, SubscribedSeries, Trending, Ranking }
+const pages = {
+  ForYou: defineAsyncComponent(() => import('./components/ForYou.vue')),
+  Following: defineAsyncComponent(() => import('./components/Following.vue')),
+  SubscribedSeries: defineAsyncComponent(() => import('./components/SubscribedSeries.vue')),
+  Trending: defineAsyncComponent(() => import('./components/Trending.vue')),
+  Ranking: defineAsyncComponent(() => import('./components/Ranking.vue')),
+}
 const showSearchPageMode = ref<boolean>(false)
 const shouldMoveTabsUp = ref<boolean>(false)
 

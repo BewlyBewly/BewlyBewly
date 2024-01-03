@@ -6,9 +6,9 @@ import '~/styles/index.ts'
 import App from './views/App.vue'
 import { setupApp } from '~/logic/common-setup'
 import { SVG_ICONS } from '~/utils/svgIcons'
-import { delay, injectCSS } from '~/utils/main'
-import { runWhenIdle } from '~/utils/lazyLoad'
+import { injectCSS, isHomePage } from '~/utils/main'
 import { settings } from '~/logic'
+import { runWhenIdle } from '~/utils/lazyLoad'
 
 const currentUrl = document.URL
 
@@ -62,15 +62,24 @@ if (isSupportedPage()) {
     }
 
     body {
-      opacity: 0;
-      background: none;
+      pointer-events: none;
+      z-index: 0;
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #d3e9c8;
+      width: 100%;
+      height: 100vh;
+      top: 0;
     }
-  `)
 
-  // Add opacity transition effect for page loaded
-  injectCSS(`
-    body {
-      transition: opacity 0.5s;
+    #i_cecream {
+      opacity: 1;
+      pointer-events: none;
+    }
+
+    #app {
+      opacity: 0 !important;
     }
   `)
 }
@@ -81,17 +90,17 @@ if (isFirefox) {
     if (!isFirstScriptExecute)
       return
 
-    runWhenIdle(() => {
-      injectApp()
-    })
+    injectApp()
     isFirstScriptExecute = false
   })
 }
 else {
   document.addEventListener('DOMContentLoaded', () => {
-    runWhenIdle(() => {
+    if(isHomePage()) {
       injectApp()
-    })
+    } else {
+      runWhenIdle(injectApp)
+    }
   })
 }
 
@@ -109,15 +118,17 @@ function injectApp() {
         || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(currentUrl)
       )
     ) {
-      const originalPageContent = document.querySelector('#i_cecream')
-      if (originalPageContent)
-        originalPageContent.innerHTML = ''
+      const originalPageContent = document.querySelector<HTMLDivElement>('#i_cecream')
+      if (originalPageContent) {
+        originalPageContent.remove()
+      }
     }
 
     // mount component to context window
     const container = document.createElement('div')
-    container.id = 'bewly'
+    container.id = 'i_cecream'
     const root = document.createElement('div')
+    root.id = 'bewly'
     const styleEl = document.createElement('link')
     const shadowDOM = container.attachShadow?.({ mode: __DEV__ ? 'open' : 'closed' }) || container
     styleEl.setAttribute('rel', 'stylesheet')
@@ -125,22 +136,20 @@ function injectApp() {
     shadowDOM.appendChild(styleEl)
     shadowDOM.appendChild(root)
     container.style.opacity = '0'
-    container.style.transition = 'opacity 0.5s'
+    container.style.transition = 'opacity .3s ease-in'
+    container.addEventListener('transitionend', () => {
+      runWhenIdle(() => {
+        beforeLoadedStyleEl.remove()
+      })
+    })
     styleEl.onload = () => {
-      setTimeout(() => {
-        container.style.opacity = '1'
-      }, 500)
+      container.style.opacity = '1'
     }
 
     const newStyleEl = document.createElement('link')
     newStyleEl.setAttribute('rel', 'stylesheet')
     newStyleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
     document.documentElement.appendChild(newStyleEl)
-    newStyleEl.onload = async () => {
-      // To prevent abrupt style transitions caused by sudden style changes
-      await delay(500)
-      document.documentElement.removeChild(beforeLoadedStyleEl)
-    }
 
     // inject svg icons
     const svgDiv = document.createElement('div')

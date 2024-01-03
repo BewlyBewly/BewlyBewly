@@ -4,12 +4,6 @@ import { useI18n } from 'vue-i18n'
 import browser from 'webextension-polyfill'
 import type { Ref } from '@vue/runtime-dom'
 
-import Home from './Home/Home.vue'
-import Search from './Search/Search.vue'
-import Anime from './Anime/Anime.vue'
-import History from './History/History.vue'
-import WatchLater from './WatchLater/WatchLater.vue'
-import Favorites from './Favorites/Favorites.vue'
 import { accessKey, settings } from '~/logic'
 import { AppPage, LanguageType } from '~/enums/appEnums'
 import { getUserID, hexToRGBA, isHomePage, smoothScrollToTop } from '~/utils/main'
@@ -18,7 +12,14 @@ import emitter from '~/utils/mitt'
 const activatedPage = ref<AppPage>(settings.value.dockItemVisibilityList.find(e => e.visible === true)?.page ?? AppPage.Home)
 const { locale } = useI18n()
 const [showSettings, toggleSettings] = useToggle(false)
-const pages = { Home, Search, Anime, History, WatchLater, Favorites }
+const pages = {
+  Home: defineAsyncComponent(() => import('./Home/Home.vue')),
+  Search: defineAsyncComponent(() => import('./Search/Search.vue')),
+  Anime: defineAsyncComponent(() => import('./Anime/Anime.vue')),
+  History: defineAsyncComponent(() => import('./History/History.vue')),
+  WatchLater: defineAsyncComponent(() => import('./WatchLater/WatchLater.vue')),
+  Favorites: defineAsyncComponent(() => import('./Favorites/Favorites.vue')),
+}
 const mainAppRef = ref<HTMLElement>() as Ref<HTMLElement>
 const scrollbarRef = ref()
 const showTopBarMask = ref<boolean>(false)
@@ -163,30 +164,30 @@ function setAppAppearance() {
 
   if (settings.value.theme === 'dark') {
     mainAppRef.value?.classList.add('dark')
-    document.querySelector('#bewly')?.classList.add('dark')
+    document.querySelector('#i_cecream')?.classList.add('dark')
     document.documentElement.classList.add('dark')
   }
   else if (settings.value.theme === 'light') {
     mainAppRef.value?.classList.remove('dark')
-    document.querySelector('#bewly')?.classList.remove('dark')
+    document.querySelector('#i_cecream')?.classList.remove('dark')
     document.documentElement.classList.remove('dark')
   }
   else if (settings.value.theme === 'auto') {
     if (currentColorScheme) {
       mainAppRef.value?.classList.add('dark')
-      document.querySelector('#bewly')?.classList.add('dark')
+      document.querySelector('#i_cecream')?.classList.add('dark')
       document.documentElement.classList.add('dark')
     }
     else {
       mainAppRef.value?.classList.remove('dark')
-      document.querySelector('#bewly')?.classList.remove('dark')
+      document.querySelector('#i_cecream')?.classList.remove('dark')
       document.documentElement.classList.remove('dark')
     }
   }
 }
 
 function setAppThemeColor() {
-  const bewlyElement = document.querySelector('#bewly') as HTMLElement
+  const bewlyElement = document.querySelector('#i_cecream') as HTMLElement
   if (bewlyElement) {
     bewlyElement.style.setProperty('--bew-theme-color', settings.value.themeColor)
     for (let i = 0; i < 9; i++)

@@ -24,7 +24,7 @@ onMounted(() => {
 })
 
 function setAppWallpaperMaskingOpacity() {
-  const bewlyElement = document.querySelector('#bewly') as HTMLElement
+  const bewlyElement = document.querySelector('#i_cecream') as HTMLElement
   if (settings.value.individuallySetSearchPageWallpaper && props.activatedPage === AppPage.Search)
     bewlyElement.style.setProperty('--bew-homepage-bg-mask-opacity', `${settings.value.searchPageWallpaperMaskOpacity}%`)
   else
