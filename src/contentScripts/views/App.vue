@@ -164,30 +164,30 @@ function setAppAppearance() {
 
   if (settings.value.theme === 'dark') {
     mainAppRef.value?.classList.add('dark')
-    document.querySelector('#i_cecream')?.classList.add('dark')
+    document.querySelector('#bewly')?.classList.add('dark')
     document.documentElement.classList.add('dark')
   }
   else if (settings.value.theme === 'light') {
     mainAppRef.value?.classList.remove('dark')
-    document.querySelector('#i_cecream')?.classList.remove('dark')
+    document.querySelector('#bewly')?.classList.remove('dark')
     document.documentElement.classList.remove('dark')
   }
   else if (settings.value.theme === 'auto') {
     if (currentColorScheme) {
       mainAppRef.value?.classList.add('dark')
-      document.querySelector('#i_cecream')?.classList.add('dark')
+      document.querySelector('#bewly')?.classList.add('dark')
       document.documentElement.classList.add('dark')
     }
     else {
       mainAppRef.value?.classList.remove('dark')
-      document.querySelector('#i_cecream')?.classList.remove('dark')
+      document.querySelector('#bewly')?.classList.remove('dark')
       document.documentElement.classList.remove('dark')
     }
   }
 }
 
 function setAppThemeColor() {
-  const bewlyElement = document.querySelector('#i_cecream') as HTMLElement
+  const bewlyElement = document.querySelector('#bewly') as HTMLElement
   if (bewlyElement) {
     bewlyElement.style.setProperty('--bew-theme-color', settings.value.themeColor)
     for (let i = 0; i < 9; i++)

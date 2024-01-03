@@ -69,12 +69,9 @@ if (settings.value.adaptToOtherPageStyles && isSupportedPage()) {
       background-color: hsl(230 12% 6%);
     }
 
-    #i_cecream {
+    body {
       opacity: 0;
-    }
-
-    #app .bg {
-      opacity: 0;
+      background: none;
     }
   `)
 }
@@ -85,17 +82,13 @@ if (isFirefox) {
     if (!isFirstScriptExecute)
       return
 
-    // runWhenIdle(() => {
     injectApp()
-    // })
     isFirstScriptExecute = false
   })
 }
 else {
   document.addEventListener('DOMContentLoaded', () => {
-    // runWhenIdle(() => {
     injectApp()
-    // })
   })
 }
 
