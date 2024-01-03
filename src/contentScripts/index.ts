@@ -89,17 +89,13 @@ if (isFirefox) {
     if (!isFirstScriptExecute)
       return
 
-    // runWhenIdle(() => {
     injectApp()
-    // })
     isFirstScriptExecute = false
   })
 }
 else {
   document.addEventListener('DOMContentLoaded', () => {
-    // runWhenIdle(() => {
     injectApp()
-    // })
   })
 }
 
