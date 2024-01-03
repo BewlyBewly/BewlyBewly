@@ -73,11 +73,6 @@ if (isSupportedPage()) {
       top: 0;
     }
 
-    #i_cecream {
-      opacity: 1;
-      pointer-events: none;
-    }
-
     #app {
       opacity: 0 !important;
     }
@@ -96,11 +91,10 @@ if (isFirefox) {
 }
 else {
   document.addEventListener('DOMContentLoaded', () => {
-    if(isHomePage()) {
+    if (isHomePage())
       injectApp()
-    } else {
+    else
       runWhenIdle(injectApp)
-    }
   })
 }
 
@@ -119,9 +113,8 @@ function injectApp() {
       )
     ) {
       const originalPageContent = document.querySelector<HTMLDivElement>('#i_cecream')
-      if (originalPageContent) {
+      if (originalPageContent)
         originalPageContent.remove()
-      }
     }
 
     // mount component to context window
