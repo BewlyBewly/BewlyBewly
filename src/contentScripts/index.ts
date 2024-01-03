@@ -6,8 +6,7 @@ import '~/styles/index.ts'
 import App from './views/App.vue'
 import { setupApp } from '~/logic/common-setup'
 import { SVG_ICONS } from '~/utils/svgIcons'
-import { delay, injectCSS } from '~/utils/main'
-import { runWhenIdle } from '~/utils/lazyLoad'
+import { injectCSS } from '~/utils/main'
 import { settings } from '~/logic'
 
 const currentUrl = document.URL
@@ -55,7 +54,16 @@ function isSupportedPage() {
 const isFirefox: boolean = /Firefox/i.test(navigator.userAgent)
 
 let beforeLoadedStyleEl: HTMLStyleElement
-if (isSupportedPage()) {
+
+// Since using runWhenIdle does not instantly inject the app to the page, a style class cannot be injected immediately to the <html> tag
+// We have to manually add a class to the <html> app to ensure that the transition effect is applied
+if (
+  (settings.value.adaptToOtherPageStyles && settings.value.theme === 'dark')
+    || (settings.value.adaptToOtherPageStyles && settings.value.theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)
+)
+  document.documentElement.classList.add('bewly-design', 'dark')
+
+if (settings.value.adaptToOtherPageStyles && isSupportedPage()) {
   beforeLoadedStyleEl = injectCSS(`
     html.dark.bewly-design {
       background-color: hsl(230 12% 6%);
@@ -81,17 +89,17 @@ if (isFirefox) {
     if (!isFirstScriptExecute)
       return
 
-    runWhenIdle(() => {
-      injectApp()
-    })
+    // runWhenIdle(() => {
+    injectApp()
+    // })
     isFirstScriptExecute = false
   })
 }
 else {
   document.addEventListener('DOMContentLoaded', () => {
-    runWhenIdle(() => {
-      injectApp()
-    })
+    // runWhenIdle(() => {
+    injectApp()
+    // })
   })
 }
 
@@ -127,9 +135,9 @@ function injectApp() {
     container.style.opacity = '0'
     container.style.transition = 'opacity 0.5s'
     styleEl.onload = () => {
-      setTimeout(() => {
-        container.style.opacity = '1'
-      }, 500)
+      // setTimeout(() => {
+      container.style.opacity = '1'
+      // }, 500)
     }
 
     const newStyleEl = document.createElement('link')
@@ -138,8 +146,9 @@ function injectApp() {
     document.documentElement.appendChild(newStyleEl)
     newStyleEl.onload = async () => {
       // To prevent abrupt style transitions caused by sudden style changes
-      await delay(500)
-      document.documentElement.removeChild(beforeLoadedStyleEl)
+      setTimeout(() => {
+        document.documentElement.removeChild(beforeLoadedStyleEl)
+      }, 500)
     }
 
     // inject svg icons
