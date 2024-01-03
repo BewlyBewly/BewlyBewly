@@ -64,6 +64,10 @@ if (isSupportedPage()) {
     #i_cecream {
       opacity: 0;
     }
+
+    #app .bg {
+      opacity: 0;
+    }
   `)
 }
 
@@ -82,7 +86,7 @@ else {
     if (isHomePage())
       injectApp()
     else
-      runWhenIdle(injectApp)
+      runWhenIdle(injectApp, 20)
   })
 }
 
