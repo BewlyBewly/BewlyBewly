@@ -114,7 +114,7 @@ async function injectApp() {
     // Inject style first
     const newStyleEl = document.createElement('link')
     newStyleEl.setAttribute('rel', 'stylesheet')
-    newStyleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
+    newStyleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/frame.css'))
     document.documentElement.appendChild(newStyleEl)
     newStyleEl.onload = async () => {
       // To prevent abrupt style transitions caused by sudden style changes

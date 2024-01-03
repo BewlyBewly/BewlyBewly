@@ -1,5 +1,6 @@
 /// <reference types="vitest" />
 
+import { execSync } from 'node:child_process'
 import { dirname, relative } from 'node:path'
 import type { UserConfig } from 'vite'
 import { defineConfig } from 'vite'
@@ -77,6 +78,19 @@ export const sharedConfig: UserConfig = {
       apply: 'build',
       transformIndexHtml(html, { path }) {
         return html.replace(/"\/assets\//g, `"${relative(dirname(path), '/assets')}/`)
+      },
+    },
+
+    // generate frame.css
+    {
+      name: 'generate-frame',
+      enforce: 'post',
+      buildEnd() {
+        execSync('sass ./src/styles/frame.scss ./extension/dist/contentScripts/frame.css --no-source-map', { stdio: 'inherit' })
+      },
+      handleHotUpdate(ctx) {
+        if (ctx.file.endsWith('frame.scss'))
+          execSync('sass ./src/styles/frame.scss ./extension/dist/contentScripts/frame.css --no-source-map', { stdio: 'inherit' })
       },
     },
   ],
