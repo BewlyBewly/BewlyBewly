@@ -60,22 +60,6 @@ if (isSupportedPage()) {
     html.dark.bewly-design {
       background-color: hsl(230 12% 6%);
     }
-
-    body {
-      pointer-events: none;
-      z-index: 0;
-      position: fixed;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #d3e9c8;
-      width: 100%;
-      height: 100vh;
-      top: 0;
-    }
-
-    #app {
-      opacity: 0 !important;
-    }
   `)
 }
 
