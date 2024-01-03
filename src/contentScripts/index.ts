@@ -1,4 +1,3 @@
-// import { onMessage } from 'webext-bridge'
 import { createApp } from 'vue'
 
 import 'uno.css'
@@ -8,6 +7,7 @@ import { setupApp } from '~/logic/common-setup'
 import { SVG_ICONS } from '~/utils/svgIcons'
 import { injectCSS } from '~/utils/main'
 import { settings } from '~/logic'
+import { runWhenIdle } from '~/utils/lazyLoad'
 
 const currentUrl = document.URL
 
@@ -103,7 +103,7 @@ else {
   })
 }
 
-function injectApp() {
+async function injectApp() {
   const currentUrl = document.URL
 
   if (isSupportedPage()) {
@@ -122,24 +122,7 @@ function injectApp() {
         originalPageContent.innerHTML = ''
     }
 
-    // mount component to context window
-    const container = document.createElement('div')
-    container.id = 'bewly'
-    const root = document.createElement('div')
-    const styleEl = document.createElement('link')
-    const shadowDOM = container.attachShadow?.({ mode: __DEV__ ? 'open' : 'closed' }) || container
-    styleEl.setAttribute('rel', 'stylesheet')
-    styleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
-    shadowDOM.appendChild(styleEl)
-    shadowDOM.appendChild(root)
-    container.style.opacity = '0'
-    container.style.transition = 'opacity 0.5s'
-    styleEl.onload = () => {
-      // setTimeout(() => {
-      container.style.opacity = '1'
-      // }, 500)
-    }
-
+    // Inject style first
     const newStyleEl = document.createElement('link')
     newStyleEl.setAttribute('rel', 'stylesheet')
     newStyleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
@@ -151,15 +134,36 @@ function injectApp() {
       }, 500)
     }
 
-    // inject svg icons
-    const svgDiv = document.createElement('div')
-    svgDiv.innerHTML = SVG_ICONS
-    shadowDOM.appendChild(svgDiv)
+    // Inject app when idle
+    runWhenIdle(() => {
+      // mount component to context window
+      const container = document.createElement('div')
+      container.id = 'bewly'
+      const root = document.createElement('div')
+      const styleEl = document.createElement('link')
+      const shadowDOM = container.attachShadow?.({ mode: __DEV__ ? 'open' : 'closed' }) || container
+      styleEl.setAttribute('rel', 'stylesheet')
+      styleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
+      shadowDOM.appendChild(styleEl)
+      shadowDOM.appendChild(root)
+      container.style.opacity = '0'
+      container.style.transition = 'opacity 0.5s'
+      styleEl.onload = () => {
+        setTimeout(() => {
+          container.style.opacity = '1'
+        }, 500)
+      }
 
-    document.body.appendChild(container)
+      // inject svg icons
+      const svgDiv = document.createElement('div')
+      svgDiv.innerHTML = SVG_ICONS
+      shadowDOM.appendChild(svgDiv)
 
-    const app = createApp(App)
-    setupApp(app)
-    app.mount(root)
+      document.body.appendChild(container)
+
+      const app = createApp(App)
+      setupApp(app)
+      app.mount(root)
+    })
   }
 }
