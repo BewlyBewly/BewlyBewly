@@ -27,7 +27,8 @@
     "start:firefox": "web-ext run --source-dir ./extension --target=firefox-desktop",
     "clear": "rimraf extension extension.*",
     "lint": "eslint .",
-    "test": "vitest test"
+    "test": "vitest test",
+    "postinstall": "npx simple-git-hooks"
   },
   "dependencies": {
     "@types/md5": "^2.3.5",
@@ -68,9 +69,11 @@
     "fs-extra": "^10.1.0",
     "jsdom": "^20.0.3",
     "kolorist": "^1.8.0",
+    "lint-staged": "^15.2.0",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
     "sass": "^1.69.5",
+    "simple-git-hooks": "^2.9.0",
     "terser": "^5.24.0",
     "tsup": "^6.7.0",
     "typescript": "^4.9.5",
@@ -85,5 +88,11 @@
     "web-ext": "^7.8.0",
     "webext-bridge": "^5.0.5",
     "webextension-polyfill": "^0.10.0"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
   }
 }
