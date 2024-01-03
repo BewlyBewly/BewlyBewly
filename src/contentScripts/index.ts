@@ -1,4 +1,3 @@
-// import { onMessage } from 'webext-bridge'
 import { createApp } from 'vue'
 
 import 'uno.css'
@@ -6,7 +5,7 @@ import '~/styles/index.ts'
 import App from './views/App.vue'
 import { setupApp } from '~/logic/common-setup'
 import { SVG_ICONS } from '~/utils/svgIcons'
-import { injectCSS, isHomePage } from '~/utils/main'
+import { injectCSS } from '~/utils/main'
 import { settings } from '~/logic'
 import { runWhenIdle } from '~/utils/lazyLoad'
 
@@ -55,7 +54,16 @@ function isSupportedPage() {
 const isFirefox: boolean = /Firefox/i.test(navigator.userAgent)
 
 let beforeLoadedStyleEl: HTMLStyleElement
-if (isSupportedPage()) {
+
+// Since using runWhenIdle does not instantly inject the app to the page, a style class cannot be injected immediately to the <html> tag
+// We have to manually add a class to the <html> app to ensure that the transition effect is applied
+if (
+  (settings.value.adaptToOtherPageStyles && settings.value.theme === 'dark')
+    || (settings.value.adaptToOtherPageStyles && settings.value.theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)
+)
+  document.documentElement.classList.add('bewly-design', 'dark')
+
+if (settings.value.adaptToOtherPageStyles && isSupportedPage()) {
   beforeLoadedStyleEl = injectCSS(`
     html.dark.bewly-design {
       background-color: hsl(230 12% 6%);
@@ -77,20 +85,21 @@ if (isFirefox) {
     if (!isFirstScriptExecute)
       return
 
+    // runWhenIdle(() => {
     injectApp()
+    // })
     isFirstScriptExecute = false
   })
 }
 else {
   document.addEventListener('DOMContentLoaded', () => {
-    if (isHomePage())
-      injectApp()
-    else
-      runWhenIdle(injectApp, 20)
+    // runWhenIdle(() => {
+    injectApp()
+    // })
   })
 }
 
-function injectApp() {
+async function injectApp() {
   const currentUrl = document.URL
 
   if (isSupportedPage()) {
@@ -109,37 +118,48 @@ function injectApp() {
         originalPageContent.remove()
     }
 
-    // mount component to context window
-    const container = document.createElement('div')
-    container.id = 'i_cecream'
-    const root = document.createElement('div')
-    root.id = 'bewly'
-    const styleEl = document.createElement('link')
-    const shadowDOM = container.attachShadow?.({ mode: __DEV__ ? 'open' : 'closed' }) || container
-    styleEl.setAttribute('rel', 'stylesheet')
-    styleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
-    shadowDOM.appendChild(styleEl)
-    shadowDOM.appendChild(root)
-    container.style.opacity = '0'
-    window.addEventListener('load', () => {
-      beforeLoadedStyleEl.remove()
-      container.style.opacity = '1'
-    })
-
+    // Inject style first
     const newStyleEl = document.createElement('link')
     newStyleEl.setAttribute('rel', 'stylesheet')
     newStyleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
     document.documentElement.appendChild(newStyleEl)
+    newStyleEl.onload = async () => {
+      // To prevent abrupt style transitions caused by sudden style changes
+      setTimeout(() => {
+        document.documentElement.removeChild(beforeLoadedStyleEl)
+      }, 500)
+    }
 
-    // inject svg icons
-    const svgDiv = document.createElement('div')
-    svgDiv.innerHTML = SVG_ICONS
-    shadowDOM.appendChild(svgDiv)
+    // Inject app when idle
+    runWhenIdle(() => {
+      // mount component to context window
+      const container = document.createElement('div')
+      container.id = 'bewly'
+      const root = document.createElement('div')
+      const styleEl = document.createElement('link')
+      const shadowDOM = container.attachShadow?.({ mode: __DEV__ ? 'open' : 'closed' }) || container
+      styleEl.setAttribute('rel', 'stylesheet')
+      styleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
+      shadowDOM.appendChild(styleEl)
+      shadowDOM.appendChild(root)
+      container.style.opacity = '0'
+      container.style.transition = 'opacity 0.5s'
+      styleEl.onload = () => {
+        setTimeout(() => {
+          container.style.opacity = '1'
+        }, 500)
+      }
 
-    document.body.appendChild(container)
+      // inject svg icons
+      const svgDiv = document.createElement('div')
+      svgDiv.innerHTML = SVG_ICONS
+      shadowDOM.appendChild(svgDiv)
 
-    const app = createApp(App)
-    setupApp(app)
-    app.mount(root)
+      document.body.appendChild(container)
+
+      const app = createApp(App)
+      setupApp(app)
+      app.mount(root)
+    })
   }
 }
