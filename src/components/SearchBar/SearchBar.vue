@@ -246,7 +246,7 @@ watch(isFocus, async (focus) => {
           class="suggestion-item"
           @click="navigateToSearchResultPage(item.value)"
         >
-          {{ item.value }}
+          <span v-html="item.name" />
         </div>
       </div>
     </Transition>
@@ -254,6 +254,10 @@ watch(isFocus, async (focus) => {
 </template>
 
 <style lang="scss" scoped>
+:global(.suggest_high_light) {
+  --at-apply: text-$bew-theme-color mx-[0.05em] not-italic;
+}
+
 .result-list-enter-active,
 .result-list-leave-active {
   --at-apply: transition-all duration-300 ease-in-out;
@@ -329,9 +333,8 @@ watch(isFocus, async (focus) => {
 
   @mixin search-content-item {
     --at-apply: px-4 py-2 w-full rounded-$bew-radius duration-300 cursor-pointer
-      not-first:mt-1
+      not-first:mt-1 tracking-wider
       hover:bg-$bew-fill-2;
-
   }
 
   #search-history {
@@ -375,6 +378,5 @@ watch(isFocus, async (focus) => {
       }
     }
   }
-
 }
 </style>
