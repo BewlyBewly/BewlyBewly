@@ -66,6 +66,6 @@ export function removeSearchHistory(value: string) {
   localStorage.setItem(SEARCH_HISTORY_KEY, JSON.stringify(history))
 }
 
-export function clearSearchHistory() {
+export function clearAllSearchHistory() {
   localStorage.setItem(SEARCH_HISTORY_KEY, JSON.stringify([]))
 }

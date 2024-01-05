@@ -2,7 +2,7 @@
 import type { HistoryItem, SuggestionItem, SuggestionResponse } from './searchHistoryProvider'
 import {
   addSearchHistory,
-  clearSearchHistory,
+  clearAllSearchHistory,
   getSearchHistory,
   removeSearchHistory,
 } from './searchHistoryProvider'
@@ -20,6 +20,12 @@ const selectedIndex = ref<number>(-1)
 const searchHistory = shallowRef<HistoryItem[]>([])
 const historyItemRef = ref<HTMLElement[]>([])
 const suggestionItemRef = ref<HTMLElement[]>([])
+
+watch(isFocus, async (focus) => {
+  // 延后加载搜索历史
+  if (focus)
+    searchHistory.value = getSearchHistory()
+})
 
 function handleInput() {
   selectedIndex.value = -1
@@ -124,15 +130,9 @@ function handleKeyDown() {
 }
 
 function handleClearSearchHistory() {
-  clearSearchHistory()
+  clearAllSearchHistory()
   searchHistory.value = []
 }
-
-watch(isFocus, async (focus) => {
-  // 延后加载搜索历史
-  if (focus)
-    searchHistory.value = getSearchHistory()
-})
 </script>
 
 <template>
