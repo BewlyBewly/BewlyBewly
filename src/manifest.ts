@@ -40,7 +40,6 @@ export async function getManifest() {
       '*://*.bilibili.com/*',
       '*://*.mcbbs.net/*',
       '*://*.hdslb.com/*',
-      '*://*.bilivideo.com/*',
     ],
     content_scripts: [
       {
