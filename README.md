@@ -86,7 +86,13 @@ And then pack files under `extension`
 
 ### 🤝 Contribution
 
-#### i18n
+#### About branches
+
+- **Main**: This branch is designed for changes that are restricted to documentation files like READMEs, without altering the code or its functionality.
+- **Dev**: Use this brach for new features, performance improvements or modifications to i18n files.
+- **Bugfixes**: This branch should be used exclusively for fixing bugs that appear in the main branch.
+
+#### I18n
 
 - When doing translations, if you have a language you are not familiar with, you can use another language that you have translated and point out what language you cannot translate in the pull request.
 
