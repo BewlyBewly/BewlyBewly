@@ -94,9 +94,6 @@ if (settings.value.adaptToOtherPageStyles && isSupportedPage()) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  if (isFirefox)
-    document.querySelector('meta[name="referrer"]')?.setAttribute('content', 'no-referrer')
-
   if (isSupportedPage()) {
     if (
       !settings.value.useOriginalBilibiliHomepage
