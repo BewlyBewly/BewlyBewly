@@ -8,7 +8,8 @@ import { SVG_ICONS } from '~/utils/svgIcons'
 import { injectCSS } from '~/utils/main'
 import { settings } from '~/logic'
 import { runWhenIdle } from '~/utils/lazyLoad'
-import { isFirefox } from '~/utils/env'
+
+const isFirefox: boolean = /Firefox/i.test(navigator.userAgent)
 
 // Fix `OverlayScrollbars` not working in Firefox
 if (isFirefox) {
