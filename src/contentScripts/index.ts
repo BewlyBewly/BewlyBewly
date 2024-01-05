@@ -12,6 +12,7 @@ import { runWhenIdle } from '~/utils/lazyLoad'
 const isFirefox: boolean = /Firefox/i.test(navigator.userAgent)
 
 // Fix `OverlayScrollbars` not working in Firefox
+// https://github.com/fingerprintjs/fingerprintjs/issues/683#issuecomment-881210244
 if (isFirefox) {
   window.requestIdleCallback = window.requestIdleCallback.bind(window)
   window.cancelIdleCallback = window.cancelIdleCallback.bind(window)
@@ -112,21 +113,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 })
 
-if (isFirefox) {
-  let isFirstScriptExecute = true
-  document.addEventListener('beforescriptexecute', () => {
-    if (!isFirstScriptExecute)
-      return
+// if (isFirefox) {
+//   let isFirstScriptExecute = true
+//   document.addEventListener('beforescriptexecute', () => {
+//     if (!isFirstScriptExecute)
+//       return
 
-    injectApp()
-    isFirstScriptExecute = false
-  })
-}
-else {
-  document.addEventListener('DOMContentLoaded', () => {
-    injectApp()
-  })
-}
+//     injectApp()
+//     isFirstScriptExecute = false
+//   })
+// }
+// else {
+document.addEventListener('DOMContentLoaded', () => {
+  injectApp()
+})
+// }
 
 function injectApp() {
   // Inject style first
@@ -156,6 +157,7 @@ function injectApp() {
     container.style.opacity = '0'
     container.style.transition = 'opacity 0.5s'
     styleEl.onload = () => {
+      // To prevent abrupt style transitions caused by sudden style changes
       setTimeout(() => {
         container.style.opacity = '1'
       }, 500)
