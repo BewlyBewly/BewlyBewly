@@ -9,6 +9,18 @@ import { injectCSS } from '~/utils/main'
 import { settings } from '~/logic'
 import { runWhenIdle } from '~/utils/lazyLoad'
 
+const isFirefox: boolean = /Firefox/i.test(navigator.userAgent)
+
+// Fix `OverlayScrollbars` not working in Firefox
+if (isFirefox) {
+  window.requestIdleCallback = window.requestIdleCallback.bind(window)
+  window.cancelIdleCallback = window.cancelIdleCallback.bind(window)
+  window.requestAnimationFrame = window.requestAnimationFrame.bind(window)
+  window.cancelAnimationFrame = window.cancelAnimationFrame.bind(window)
+  window.setTimeout = window.setTimeout.bind(window)
+  window.clearTimeout = window.clearTimeout.bind(window)
+}
+
 const currentUrl = document.URL
 
 function isSupportedPage() {
@@ -51,8 +63,6 @@ function isSupportedPage() {
     return false
 }
 
-const isFirefox: boolean = /Firefox/i.test(navigator.userAgent)
-
 let beforeLoadedStyleEl: HTMLStyleElement
 
 // Since using runWhenIdle does not instantly inject the app to the page, a style class cannot be injected immediately to the <html> tag
@@ -83,24 +93,9 @@ if (settings.value.adaptToOtherPageStyles && isSupportedPage()) {
   `)
 }
 
-if (isFirefox) {
-  let isFirstScriptExecute = true
-  document.addEventListener('beforescriptexecute', () => {
-    if (!isFirstScriptExecute)
-      return
-
-    injectApp()
-    isFirstScriptExecute = false
-  })
-}
-else {
-  document.addEventListener('DOMContentLoaded', () => {
-    injectApp()
-  })
-}
-
-async function injectApp() {
-  const currentUrl = document.URL
+document.addEventListener('DOMContentLoaded', () => {
+  if (isFirefox)
+    document.querySelector('meta[name="referrer"]')?.setAttribute('content', 'no-referrer')
 
   if (isSupportedPage()) {
     if (
@@ -117,49 +112,67 @@ async function injectApp() {
       if (originalPageContent)
         originalPageContent.innerHTML = ''
     }
+  }
+})
 
-    // Inject style first
-    const newStyleEl = document.createElement('link')
-    newStyleEl.setAttribute('rel', 'stylesheet')
-    newStyleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
-    document.documentElement.appendChild(newStyleEl)
-    newStyleEl.onload = async () => {
-      // To prevent abrupt style transitions caused by sudden style changes
+if (isFirefox) {
+  let isFirstScriptExecute = true
+  document.addEventListener('beforescriptexecute', () => {
+    if (!isFirstScriptExecute)
+      return
+
+    injectApp()
+    isFirstScriptExecute = false
+  })
+}
+else {
+  document.addEventListener('DOMContentLoaded', () => {
+    injectApp()
+  })
+}
+
+function injectApp() {
+  // Inject style first
+  const newStyleEl = document.createElement('link')
+  newStyleEl.setAttribute('rel', 'stylesheet')
+  newStyleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
+  document.documentElement.appendChild(newStyleEl)
+  newStyleEl.onload = () => {
+    // To prevent abrupt style transitions caused by sudden style changes
+    setTimeout(() => {
+      document.documentElement.removeChild(beforeLoadedStyleEl)
+    }, 500)
+  }
+
+  // Inject app when idle
+  runWhenIdle(async () => {
+    // mount component to context window
+    const container = document.createElement('div')
+    container.id = 'bewly'
+    const root = document.createElement('div')
+    const styleEl = document.createElement('link')
+    const shadowDOM = container.attachShadow?.({ mode: __DEV__ ? 'open' : 'closed' }) || container
+    styleEl.setAttribute('rel', 'stylesheet')
+    styleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
+    shadowDOM.appendChild(styleEl)
+    shadowDOM.appendChild(root)
+    container.style.opacity = '0'
+    container.style.transition = 'opacity 0.5s'
+    styleEl.onload = () => {
       setTimeout(() => {
-        document.documentElement.removeChild(beforeLoadedStyleEl)
+        container.style.opacity = '1'
       }, 500)
     }
 
-    // Inject app when idle
-    runWhenIdle(() => {
-      // mount component to context window
-      const container = document.createElement('div')
-      container.id = 'bewly'
-      const root = document.createElement('div')
-      const styleEl = document.createElement('link')
-      const shadowDOM = container.attachShadow?.({ mode: __DEV__ ? 'open' : 'closed' }) || container
-      styleEl.setAttribute('rel', 'stylesheet')
-      styleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
-      shadowDOM.appendChild(styleEl)
-      shadowDOM.appendChild(root)
-      container.style.opacity = '0'
-      container.style.transition = 'opacity 0.5s'
-      styleEl.onload = () => {
-        setTimeout(() => {
-          container.style.opacity = '1'
-        }, 500)
-      }
+    // inject svg icons
+    const svgDiv = document.createElement('div')
+    svgDiv.innerHTML = SVG_ICONS
+    shadowDOM.appendChild(svgDiv)
 
-      // inject svg icons
-      const svgDiv = document.createElement('div')
-      svgDiv.innerHTML = SVG_ICONS
-      shadowDOM.appendChild(svgDiv)
+    document.body.appendChild(container)
 
-      document.body.appendChild(container)
-
-      const app = createApp(App)
-      setupApp(app)
-      app.mount(root)
-    })
-  }
+    const app = createApp(App)
+    await setupApp(app)
+    app.mount(root)
+  })
 }
