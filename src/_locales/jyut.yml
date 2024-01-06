@@ -292,3 +292,6 @@ watch_later:
   remove_watched_videos_confirm: |-
     係咪要剷走你睇過啲片呀？
     噉做冇得返轉頭噃，你確定要剷走你睇過啲片？
+search_bar:
+  history_title: 搜尋記錄
+  clear_history: 剷晒你嘅搜尋紀錄

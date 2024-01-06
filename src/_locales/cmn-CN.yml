@@ -289,3 +289,6 @@ watch_later:
   remove_watched_videos_confirm: |-
     要清除已观看的视频吗？
     该操作无法撤销，你确定要清除已观看的视频吗？
+search_bar:
+  history_title: 搜索历史
+  clear_history: 清空搜索历史

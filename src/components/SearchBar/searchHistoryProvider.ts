@@ -1,5 +1,5 @@
 const SEARCH_HISTORY_KEY = 'bew_search_history'
-const SEARCH_HISTORY_LIMIT = 10
+const SEARCH_HISTORY_LIMIT = 20
 
 export interface HistoryItem {
   value: string
@@ -7,7 +7,20 @@ export interface HistoryItem {
 }
 export interface SuggestionItem {
   value: string
+  term: string
+  name: string
+  type: string
+  ref: number
+  spid: number
   timestamp: number
+}
+export interface SuggestionResponse {
+  code: number
+  exp_str: string
+  result: {
+    tag: SuggestionItem[]
+  }
+  stoken: string
 }
 
 function historySort(historyItems: HistoryItem[]) {
@@ -51,4 +64,8 @@ export function removeSearchHistory(value: string) {
   let history = getSearchHistory()
   history = history.filter(item => item.value !== value)
   localStorage.setItem(SEARCH_HISTORY_KEY, JSON.stringify(history))
+}
+
+export function clearAllSearchHistory() {
+  localStorage.setItem(SEARCH_HISTORY_KEY, JSON.stringify([]))
 }
