@@ -67,6 +67,19 @@ export async function getManifest() {
             ? `script-src 'self' http://localhost:${port}; object-src 'self' http://localhost:${port}`
             : 'script-src \'self\'; object-src \'self\'',
         },
+    ...(isFirefox
+      ? {}
+      : {
+          declarative_net_request: {
+            rule_resources: [
+              {
+                id: 'ruleset_1',
+                enabled: true,
+                path: 'assets/rules.json',
+              },
+            ],
+          },
+        }),
   }
 
   if (isDev)
