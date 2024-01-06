@@ -88,6 +88,10 @@ watch(() => settings.value.adaptToOtherPageStyles, () => {
   handleAdaptToOtherPageStylesChange()
 })
 
+onBeforeMount(() => {
+  document.querySelector('style[data-ext-bewly]')?.remove()
+})
+
 onMounted(() => {
   if (isHomePage()) {
     // Force overwrite Bilibili Evolved body tag & html tag background color

@@ -86,6 +86,8 @@ if (settings.value.adaptToOtherPageStyles && isSupportedPage()) {
     }
   `)
 
+  beforeLoadedStyleEl.setAttribute('data-ext-bewly', 'true')
+
   // Add opacity transition effect for page loaded
   injectCSS(`
     body {
@@ -113,35 +115,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 })
 
-// if (isFirefox) {
-//   let isFirstScriptExecute = true
-//   document.addEventListener('beforescriptexecute', () => {
-//     if (!isFirstScriptExecute)
-//       return
-
-//     injectApp()
-//     isFirstScriptExecute = false
-//   })
-// }
-// else {
 document.addEventListener('DOMContentLoaded', () => {
   injectApp()
 })
-// }
 
 function injectApp() {
-  // Inject style first
-  const newStyleEl = document.createElement('link')
-  newStyleEl.setAttribute('rel', 'stylesheet')
-  newStyleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
-  document.documentElement.appendChild(newStyleEl)
-  newStyleEl.onload = () => {
-    // To prevent abrupt style transitions caused by sudden style changes
-    setTimeout(() => {
-      document.documentElement.removeChild(beforeLoadedStyleEl)
-    }, 500)
-  }
-
   // Inject app when idle
   runWhenIdle(async () => {
     // mount component to context window
@@ -155,7 +133,7 @@ function injectApp() {
     shadowDOM.appendChild(styleEl)
     shadowDOM.appendChild(root)
     container.style.opacity = '0'
-    container.style.transition = 'opacity 0.5s'
+    container.style.transition = 'opacity 0.5s ease-in'
     styleEl.onload = () => {
       // To prevent abrupt style transitions caused by sudden style changes
       setTimeout(() => {
