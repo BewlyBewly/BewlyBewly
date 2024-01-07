@@ -93,7 +93,7 @@ export function smoothScrollToTop(element: HTMLElement, duration: number, target
 export function injectCSS(css: string): HTMLStyleElement {
   const el = document.createElement('style')
   el.setAttribute('rel', 'stylesheet')
-  el.innerText = css
+  el.textContent = css
   document.documentElement.appendChild(el)
   return el
 }
@@ -115,10 +115,10 @@ export function delay(time: number) {
 export function isHomePage(): boolean {
   if (
     /https?:\/\/bilibili.com\/?$/.test(location.href)
-  || /https?:\/\/www.bilibili.com\/?$/.test(location.href)
-  || /https?:\/\/www.bilibili.com\/index.html$/.test(location.href)
-  || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(location.href)
-  || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(location.href)
+    || /https?:\/\/www.bilibili.com\/?$/.test(location.href)
+    || /https?:\/\/www.bilibili.com\/index.html$/.test(location.href)
+    || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(location.href)
+    || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(location.href)
   )
     return true
   return false

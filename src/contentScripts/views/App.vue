@@ -2,7 +2,7 @@
 import { useToggle } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 import browser from 'webextension-polyfill'
-import type { Ref } from '@vue/runtime-dom'
+import type { Ref } from 'vue'
 
 import Home from './Home/Home.vue'
 import Search from './Search/Search.vue'

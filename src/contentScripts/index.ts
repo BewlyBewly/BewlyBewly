@@ -28,37 +28,37 @@ function isSupportedPage() {
   if (
   // homepage
     /https?:\/\/bilibili.com\/?$/.test(currentUrl)
-   || /https?:\/\/www.bilibili.com\/?$/.test(currentUrl)
-   || /https?:\/\/www.bilibili.com\/index.html$/.test(currentUrl)
-   || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(currentUrl)
-   || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(currentUrl)
+    || /https?:\/\/www.bilibili.com\/?$/.test(currentUrl)
+    || /https?:\/\/www.bilibili.com\/index.html$/.test(currentUrl)
+    || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(currentUrl)
+    || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(currentUrl)
 
-   // video page
-   || /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(currentUrl)
-   // anime playback & movie page
-   || /https?:\/\/(www.)?bilibili.com\/bangumi\/play\/.*/.test(currentUrl)
-   // watch later playlist
-   || /https?:\/\/(www.)?bilibili.com\/list\/watchlater.*/.test(currentUrl)
-   // favorite playlist
-   || /https?:\/\/(www.)?bilibili.com\/list\/ml.*/.test(currentUrl)
-   // search page
-   || /https?:\/\/search.bilibili.com\.*/.test(currentUrl)
-   // moments
-   || /https?:\/\/t.bilibili.com\.*/.test(currentUrl)
-   // moment detail
-   || /https?:\/\/www.bilibili.com\/opus\/.*/.test(currentUrl)
-   // history page
-   || /https?:\/\/(www.)?bilibili.com\/account\/history.*/.test(currentUrl)
-   // user space page
-   || /https?:\/\/space.bilibili.com\.*/.test(currentUrl)
-   // notifications page
-   || /https?:\/\/message.bilibili.com\.*/.test(currentUrl)
-   // bilibili channel page b站分区页面
-   || /https?:\/\/www.bilibili.com\/v\/.*/.test(currentUrl)
-   // anime page
-   || /https?:\/\/www.bilibili.com\/anime.*/.test(currentUrl)
-   // tv shows, movie, variety shows, mooc page
-   || /https?:\/\/(www.)?bilibili.com\/(tv|movie|variety|mooc).*/.test(currentUrl))
+    // video page
+    || /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(currentUrl)
+    // anime playback & movie page
+    || /https?:\/\/(www.)?bilibili.com\/bangumi\/play\/.*/.test(currentUrl)
+    // watch later playlist
+    || /https?:\/\/(www.)?bilibili.com\/list\/watchlater.*/.test(currentUrl)
+    // favorite playlist
+    || /https?:\/\/(www.)?bilibili.com\/list\/ml.*/.test(currentUrl)
+    // search page
+    || /https?:\/\/search.bilibili.com\.*/.test(currentUrl)
+    // moments
+    || /https?:\/\/t.bilibili.com\.*/.test(currentUrl)
+    // moment detail
+    || /https?:\/\/www.bilibili.com\/opus\/.*/.test(currentUrl)
+    // history page
+    || /https?:\/\/(www.)?bilibili.com\/account\/history.*/.test(currentUrl)
+    // user space page
+    || /https?:\/\/space.bilibili.com\.*/.test(currentUrl)
+    // notifications page
+    || /https?:\/\/message.bilibili.com\.*/.test(currentUrl)
+    // bilibili channel page b站分区页面
+    || /https?:\/\/www.bilibili.com\/v\/.*/.test(currentUrl)
+    // anime page
+    || /https?:\/\/www.bilibili.com\/anime.*/.test(currentUrl)
+    // tv shows, movie, variety shows, mooc page
+    || /https?:\/\/(www.)?bilibili.com\/(tv|movie|variety|mooc).*/.test(currentUrl))
     return true
   else
     return false
@@ -70,7 +70,7 @@ let beforeLoadedStyleEl: HTMLStyleElement
 // We have to manually add a class to the <html> app to ensure that the transition effect is applied
 if (
   (settings.value.adaptToOtherPageStyles && settings.value.theme === 'dark')
-    || (settings.value.adaptToOtherPageStyles && settings.value.theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)
+  || (settings.value.adaptToOtherPageStyles && settings.value.theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)
 )
   document.documentElement.classList.add('bewly-design', 'dark')
 

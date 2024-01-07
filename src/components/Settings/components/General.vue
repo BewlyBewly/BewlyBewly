@@ -45,7 +45,7 @@ const dockPositions = computed(() => {
   ]
 })
 
-const pageOptions = computed((): { label: string;icon: string; value: string }[] => {
+const pageOptions = computed((): { label: string, icon: string, value: string }[] => {
   return mainStore.dockItems.map((e: any) => {
     return {
       label: t(e.i18nKey),

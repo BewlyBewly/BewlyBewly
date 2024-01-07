@@ -59,7 +59,7 @@ onMounted(() => {
     hideDock.value = true
 
   if (settings.value.dockItemVisibilityList.length < currentDockItems.value.length || settings.value.dockItemVisibilityList.length > currentDockItems.value.length) {
-    const newDockItemVisibilityList = ref<{ page: AppPage; visible: boolean }[]>([])
+    const newDockItemVisibilityList = ref<{ page: AppPage, visible: boolean }[]>([])
     currentDockItems.value.forEach((item) => {
       newDockItemVisibilityList.value.push({ page: item.page, visible: true })
     })
