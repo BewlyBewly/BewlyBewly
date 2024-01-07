@@ -203,7 +203,7 @@ function handleClearSearchHistory() {
         v-if="
           isFocus
             && searchHistory.length !== 0
-            && suggestions.length === 0
+            && keyword.length === 0
         "
         id="search-history"
       >
@@ -218,13 +218,16 @@ function handleClearSearchHistory() {
           <div class="history-item-container p2 flex flex-wrap gap-x-4 gap-y-2">
             <div
               v-for="item in searchHistory" :key="item.timestamp" ref="historyItemRef"
-              class="history-item flex justify-between items-center" @click="navigateToSearchResultPage(item.value)"
+              class="history-item group"
+              flex justify-between items-center
+              @click="navigateToSearchResultPage(item.value)"
             >
               <span> {{ item.value }}</span>
               <button
-                class="delete" rounded-full duration-300 pointer-events-auto cursor-pointer
-                text="base $bew-text-2"
-                leading-0 p-0 @click.stop="handleDelete(item.value)"
+                rounded-full duration-300 pointer-events-auto cursor-pointer p-1
+                text="xs $bew-text-2 hover:white" leading-0 bg="$bew-fill-2 hover:$bew-error-color"
+                pos="absolute top-0 right-0" scale-80 opacity-0 group-hover:opacity-100
+                @click.stop="handleDelete(item.value)"
               >
                 <ic-baseline-clear />
               </button>
@@ -234,9 +237,9 @@ function handleClearSearchHistory() {
       </div>
     </Transition>
 
-    <Transition>
+    <Transition name="result-list">
       <div
-        v-if="isFocus && suggestions.length !== 0"
+        v-if="isFocus && suggestions.length !== 0 && keyword.length > 0"
         id="search-suggestion"
       >
         <div
@@ -254,8 +257,8 @@ function handleClearSearchHistory() {
 </template>
 
 <style lang="scss" scoped>
-:global(.suggest_high_light) {
-  --at-apply: text-$bew-theme-color mx-[0.05em] not-italic;
+::v-deep(.suggest_high_light) {
+  --at-apply: text-$bew-theme-color not-italic;
 }
 
 .result-list-enter-active,
@@ -348,19 +351,8 @@ function handleClearSearchHistory() {
 
       .history-item-container {
         .history-item {
-          --at-apply: relative cursor-pointer hover:hover:text-$bew-theme-color;
-          --at-apply: py-2 px-6 bg-$bew-fill-2 rounded-2;
-
-          .delete {
-            --at-apply: absolute rounded-full hover:text-$bew-theme-color;
-            padding: 0.15em;
-            right: calc( -1em / 2 );
-            top: calc( -1em / 2 );
-          }
-
-          &.active {
-            --at-apply: text-$bew-text-5;
-          }
+          --at-apply: relative cursor-pointer hover:bg-$bew-fill-2 duration-300;
+          --at-apply: py-2 px-6 bg-$bew-fill-1 rounded-$bew-radius-half;
         }
       }
     }
