@@ -24,41 +24,41 @@ if (isFirefox) {
 
 const currentUrl = document.URL
 
-function isSupportedPage() {
+function isSupportedPages() {
   if (
-  // homepage
+    // homepage
     /https?:\/\/bilibili.com\/?$/.test(currentUrl)
-   || /https?:\/\/www.bilibili.com\/?$/.test(currentUrl)
-   || /https?:\/\/www.bilibili.com\/index.html$/.test(currentUrl)
-   || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(currentUrl)
-   || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(currentUrl)
+    || /https?:\/\/www.bilibili.com\/?$/.test(currentUrl)
+    || /https?:\/\/www.bilibili.com\/index.html$/.test(currentUrl)
+    || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(currentUrl)
+    || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(currentUrl)
 
-   // video page
-   || /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(currentUrl)
-   // anime playback & movie page
-   || /https?:\/\/(www.)?bilibili.com\/bangumi\/play\/.*/.test(currentUrl)
-   // watch later playlist
-   || /https?:\/\/(www.)?bilibili.com\/list\/watchlater.*/.test(currentUrl)
-   // favorite playlist
-   || /https?:\/\/(www.)?bilibili.com\/list\/ml.*/.test(currentUrl)
-   // search page
-   || /https?:\/\/search.bilibili.com\.*/.test(currentUrl)
-   // moments
-   || /https?:\/\/t.bilibili.com\.*/.test(currentUrl)
-   // moment detail
-   || /https?:\/\/www.bilibili.com\/opus\/.*/.test(currentUrl)
-   // history page
-   || /https?:\/\/(www.)?bilibili.com\/account\/history.*/.test(currentUrl)
-   // user space page
-   || /https?:\/\/space.bilibili.com\.*/.test(currentUrl)
-   // notifications page
-   || /https?:\/\/message.bilibili.com\.*/.test(currentUrl)
-   // bilibili channel page b站分区页面
-   || /https?:\/\/www.bilibili.com\/v\/.*/.test(currentUrl)
-   // anime page
-   || /https?:\/\/www.bilibili.com\/anime.*/.test(currentUrl)
-   // tv shows, movie, variety shows, mooc page
-   || /https?:\/\/(www.)?bilibili.com\/(tv|movie|variety|mooc).*/.test(currentUrl))
+    // video page
+    || /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(currentUrl)
+    // anime playback & movie page
+    || /https?:\/\/(www.)?bilibili.com\/bangumi\/play\/.*/.test(currentUrl)
+    // watch later playlist
+    || /https?:\/\/(www.)?bilibili.com\/list\/watchlater.*/.test(currentUrl)
+    // favorite playlist
+    || /https?:\/\/(www.)?bilibili.com\/list\/ml.*/.test(currentUrl)
+    // search page
+    || /https?:\/\/search.bilibili.com\.*/.test(currentUrl)
+    // moments
+    || /https?:\/\/t.bilibili.com\.*/.test(currentUrl)
+    // moment detail
+    || /https?:\/\/www.bilibili.com\/opus\/.*/.test(currentUrl)
+    // history page
+    || /https?:\/\/(www.)?bilibili.com\/account\/history.*/.test(currentUrl)
+    // user space page
+    || /https?:\/\/space.bilibili.com\.*/.test(currentUrl)
+    // notifications page
+    || /https?:\/\/message.bilibili.com\.*/.test(currentUrl)
+    // bilibili channel page b站分区页面
+    || /https?:\/\/www.bilibili.com\/v\/.*/.test(currentUrl)
+    // anime page
+    || /https?:\/\/www.bilibili.com\/anime.*/.test(currentUrl)
+    // tv shows, movie, variety shows, mooc page
+    || /https?:\/\/(www.)?bilibili.com\/(tv|movie|variety|mooc).*/.test(currentUrl))
     return true
   else
     return false
@@ -74,7 +74,7 @@ if (
 )
   document.documentElement.classList.add('bewly-design', 'dark')
 
-if (settings.value.adaptToOtherPageStyles && isSupportedPage()) {
+if (settings.value.adaptToOtherPageStyles && isSupportedPages()) {
   beforeLoadedStyleEl = injectCSS(`
     html.dark.bewly-design {
       background-color: hsl(230 12% 6%);
@@ -95,7 +95,8 @@ if (settings.value.adaptToOtherPageStyles && isSupportedPage()) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  if (isSupportedPage()) {
+  if (isSupportedPages()) {
+    // Remove the original Bilibili homepage if in Bilibili homepage & useOriginalBilibiliHomepage is enabled
     if (
       !settings.value.useOriginalBilibiliHomepage
       && (
@@ -110,24 +111,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (originalPageContent)
         originalPageContent.innerHTML = ''
     }
+
+    // Then inject the app
+    injectApp()
   }
 })
-
-// if (isFirefox) {
-//   let isFirstScriptExecute = true
-//   document.addEventListener('beforescriptexecute', () => {
-//     if (!isFirstScriptExecute)
-//       return
-
-//     injectApp()
-//     isFirstScriptExecute = false
-//   })
-// }
-// else {
-document.addEventListener('DOMContentLoaded', () => {
-  injectApp()
-})
-// }
 
 function injectApp() {
   // Inject style first
