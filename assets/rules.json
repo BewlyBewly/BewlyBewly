@@ -298,5 +298,30 @@
       "resourceTypes": ["xmlhttprequest"],
       "initiatorDomains": ["message.bilibili.com"]
     }
+  },
+  {
+    "id": 13,
+    "priority": 2,
+    "action": {
+      "type": "modifyHeaders",
+      "requestHeaders": [
+        {
+          "header": "origin",
+          "operation": "set",
+          "value": "https://show.bilibili.com"
+        },
+        {
+          "header": "referer",
+          "operation": "set",
+          "value": "https://show.bilibili.com"
+        }
+      ]
+    },
+    "condition": {
+      "domainType": "thirdParty",
+      "urlFilter": "||api.bilibili.com",
+      "resourceTypes": ["xmlhttprequest"],
+      "initiatorDomains": ["show.bilibili.com"]
+    }
   }
 ]
