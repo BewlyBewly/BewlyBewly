@@ -273,5 +273,30 @@
       "resourceTypes": ["xmlhttprequest"],
       "initiatorDomains": ["live.bilibili.com"]
     }
+  },
+  {
+    "id": 12,
+    "priority": 2,
+    "action": {
+      "type": "modifyHeaders",
+      "requestHeaders": [
+        {
+          "header": "origin",
+          "operation": "set",
+          "value": "https://message.bilibili.com"
+        },
+        {
+          "header": "referer",
+          "operation": "set",
+          "value": "https://message.bilibili.com"
+        }
+      ]
+    },
+    "condition": {
+      "domainType": "thirdParty",
+      "urlFilter": "||api.bilibili.com",
+      "resourceTypes": ["xmlhttprequest"],
+      "initiatorDomains": ["message.bilibili.com"]
+    }
   }
 ]
