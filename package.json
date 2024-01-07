@@ -93,6 +93,6 @@
     "pre-commit": "pnpm lint-staged"
   },
   "lint-staged": {
-    "*": "pnpm lint"
+    "*": "eslint --fix"
   }
 }
