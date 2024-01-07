@@ -1,9 +1,9 @@
 import { dirname, join } from 'node:path'
 import type { HMRPayload, PluginOption } from 'vite'
 import fs from 'fs-extra'
-import { isWin, r } from './scripts/utils'
+import { isFirefox, isWin, r } from './scripts/utils'
 
-const targetDir = r('extension')
+const targetDir = r(isFirefox ? 'extension-firefox' : 'extension')
 
 export function MV3Hmr(): PluginOption {
   return {
