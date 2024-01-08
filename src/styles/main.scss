@@ -88,6 +88,8 @@ html.dark.bewly-design {
 }
 ::view-transition-old(*),
 ::view-transition-new(*),
+::view-transition-old(*::after),
+::view-transition-new(*::before),
 ::view-transition-old(#bewly *),
 ::view-transition-new(#bewly *),
 ::view-transition-old(#bewly *::after),

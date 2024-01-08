@@ -128,7 +128,7 @@ function toggleDark(e: MouseEvent) {
             : clipPath,
         },
         {
-          duration: 300,
+          duration: 600,
           easing: 'ease-in',
           pseudoElement: currentAppColorScheme.value === 'dark'
             ? '::view-transition-old(root)'
