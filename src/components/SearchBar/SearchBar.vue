@@ -24,7 +24,7 @@ const suggestionItemRef = ref<HTMLElement[]>([])
 watch(isFocus, async (focus) => {
   // 延后加载搜索历史
   if (focus)
-    searchHistory.value = getSearchHistory()
+    searchHistory.value = await getSearchHistory()
 })
 
 function handleInput() {
@@ -46,21 +46,19 @@ function handleInput() {
   }
 }
 
-function navigateToSearchResultPage(keyword: string) {
+async function navigateToSearchResultPage(keyword: string) {
   if (keyword) {
     window.open(`//search.bilibili.com/all?keyword=${keyword}`, '_blank')
     const searchItem = {
       value: keyword,
       timestamp: Number(new Date()),
     }
-    addSearchHistory(searchItem)
-    searchHistory.value = getSearchHistory()
+    searchHistory.value = await addSearchHistory(searchItem)
   }
 }
 
-function handleDelete(value: string) {
-  removeSearchHistory(value)
-  searchHistory.value = getSearchHistory()
+async function handleDelete(value: string) {
+  searchHistory.value = await removeSearchHistory(value)
 }
 
 function handleKeyUp() {
@@ -129,8 +127,8 @@ function handleKeyDown() {
   })
 }
 
-function handleClearSearchHistory() {
-  clearAllSearchHistory()
+async function handleClearSearchHistory() {
+  await clearAllSearchHistory()
   searchHistory.value = []
 }
 </script>
