@@ -84,11 +84,62 @@ onMounted(() => {
   }
 })
 
-function toggleDark() {
+// eslint-disable-next-line unused-imports/no-unused-vars
+function toggleDark(e: MouseEvent) {
   if (currentAppColorScheme.value === 'light')
     settings.value.theme = 'dark'
   else
     settings.value.theme = 'light'
+
+  // const isAppearanceTransition = typeof document !== 'undefined'
+  //   // @ts-expect-error: Transition API
+  //   && document.startViewTransition
+  //   && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  // if (!isAppearanceTransition) {
+  //   if (currentAppColorScheme.value === 'light')
+  //     settings.value.theme = 'dark'
+  //   else
+  //     settings.value.theme = 'light'
+  // }
+  // else {
+  //   const x = e.clientX
+  //   const y = e.clientY
+  //   const endRadius = Math.hypot(
+  //     Math.max(x, innerWidth - x),
+  //     Math.max(y, innerHeight - y),
+  //   )
+  //   const isDark = currentAppColorScheme.value === 'dark'
+  //   // @ts-expect-error: Transition API
+  //   const transition = document.startViewTransition(async () => {
+  //     if (currentAppColorScheme.value === 'light')
+  //       settings.value.theme = 'dark'
+  //     else
+  //       settings.value.theme = 'light'
+  //     await nextTick()
+  //   })
+
+  //   transition.ready.then(() => {
+  //     const clipPath = [
+  //     `circle(0px at ${x}px ${y}px)`,
+  //     `circle(${endRadius}px at ${x}px ${y}px)`,
+  //     ]
+  //     document.documentElement.animate(
+  //       {
+  //         clipPath: isDark
+  //           ? [...clipPath].reverse()
+  //           : clipPath,
+  //       },
+  //       {
+  //         duration: 400,
+  //         easing: 'ease-in',
+  //         pseudoElement: isDark
+  //           ? '::view-transition-old(root)'
+  //           : '::view-transition-new(root)',
+  //       },
+  //     )
+  //   })
+  // }
 }
 
 function toggleDockHide(hide: boolean) {
@@ -150,7 +201,7 @@ function toggleDockHide(hide: boolean) {
       <Tooltip :content="currentAppColorScheme === 'dark' ? $t('dock.dark_mode') : $t('dock.light_mode')" :placement="tooltipPlacement">
         <button
           class="dock-item"
-          @click="toggleDark()"
+          @click="toggleDark"
           @mouseenter="hoveringDockItem.themeMode = true"
           @mouseleave="hoveringDockItem.themeMode = false"
         >
