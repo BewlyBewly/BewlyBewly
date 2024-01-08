@@ -102,7 +102,11 @@ function toggleDark(e: MouseEvent) {
       Math.max(x, innerWidth - x),
       Math.max(y, innerHeight - y),
     )
-    const isDark = currentAppColorScheme.value === 'dark'
+    // https://github.com/vueuse/vueuse/pull/3129
+    const style = window!.document.createElement('style')
+    const styleString = '*,*::before,*::after{-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important}'
+    style.appendChild(document.createTextNode(styleString))
+    window!.document.head.appendChild(style)
     // @ts-expect-error: Transition API
     const transition = document.startViewTransition(async () => {
       if (currentAppColorScheme.value === 'light')
@@ -117,20 +121,26 @@ function toggleDark(e: MouseEvent) {
       `circle(0px at ${x}px ${y}px)`,
       `circle(${endRadius}px at ${x}px ${y}px)`,
       ]
-      document.documentElement.animate(
+      const animation = document.documentElement.animate(
         {
-          clipPath: isDark
+          clipPath: currentAppColorScheme.value === 'dark'
             ? [...clipPath].reverse()
             : clipPath,
         },
         {
-          duration: 400,
+          duration: 300,
           easing: 'ease-in',
-          pseudoElement: isDark
+          pseudoElement: currentAppColorScheme.value === 'dark'
             ? '::view-transition-old(root)'
             : '::view-transition-new(root)',
         },
       )
+      animation.addEventListener('finish', () => {
+        // Calling getComputedStyle forces the browser to redraw
+        // @ts-expect-error unused variable
+        const _ = window!.getComputedStyle(style!).opacity
+        document.head.removeChild(style!)
+      }, { once: true })
     })
   }
 }
