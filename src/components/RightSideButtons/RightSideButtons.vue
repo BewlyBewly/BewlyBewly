@@ -68,9 +68,6 @@ function toggleDark(e: MouseEvent) {
         },
       )
       animation.addEventListener('finish', () => {
-        // Calling getComputedStyle forces the browser to redraw
-        // @ts-expect-error unused variable
-        const _ = window!.getComputedStyle(style!).opacity
         document.head.removeChild(style!)
       }, { once: true })
     })
