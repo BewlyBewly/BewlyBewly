@@ -239,6 +239,7 @@ provide('handleBackToTop', handleBackToTop)
 provide('handleRefresh', handleRefresh)
 provide('activatedPage', activatedPage)
 provide('scrollbarRef', scrollbarRef)
+provide('mainAppRef', mainAppRef)
 </script>
 
 <template>

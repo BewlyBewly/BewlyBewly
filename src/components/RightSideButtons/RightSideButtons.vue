@@ -1,8 +1,11 @@
 <script setup lang="ts">
+import type { Ref } from 'vue'
 import type { HoveringDockItem } from './types'
 import { settings } from '~/logic'
 
 const emit = defineEmits(['settings-visibility-change'])
+
+const mainAppRef = inject('mainAppRef') as Ref<HTMLDivElement>
 
 const hoveringDockItem = reactive<HoveringDockItem>({
   themeMode: false,
@@ -35,10 +38,22 @@ function toggleDark(e: MouseEvent) {
       Math.max(y, innerHeight - y),
     )
     // https://github.com/vueuse/vueuse/pull/3129
-    const style = window!.document.createElement('style')
-    const styleString = '*,*::before,*::after{-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important}'
+    const style = document.createElement('style')
+    const styleString = `
+    *, *::before, *::after
+    {-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important}`
     style.appendChild(document.createTextNode(styleString))
-    window!.document.head.appendChild(style)
+    document.head.appendChild(style)
+
+    // Since normal dom style cannot be applied in shadow dom style
+    // We need to add this style again to the shadow dom
+    const shadowDomStyle = document.createElement('style')
+    const shadowDomStyleString = `
+    *, *::before, *::after
+    {-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important}`
+    shadowDomStyle.appendChild(document.createTextNode(shadowDomStyleString))
+    mainAppRef.value.appendChild(shadowDomStyle)
+
     // @ts-expect-error: Transition API
     const transition = document.startViewTransition(async () => {
       if (currentAppColorScheme.value === 'light')
@@ -60,8 +75,8 @@ function toggleDark(e: MouseEvent) {
             : clipPath,
         },
         {
-          duration: 600,
-          easing: 'ease-in',
+          duration: 300,
+          easing: 'ease-in-out',
           pseudoElement: currentAppColorScheme.value === 'dark'
             ? '::view-transition-old(root)'
             : '::view-transition-new(root)',
@@ -69,6 +84,7 @@ function toggleDark(e: MouseEvent) {
       )
       animation.addEventListener('finish', () => {
         document.head.removeChild(style!)
+        mainAppRef.value.removeChild(shadowDomStyle!)
       }, { once: true })
     })
   }
