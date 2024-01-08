@@ -473,5 +473,80 @@
       "resourceTypes": ["xmlhttprequest"],
       "initiatorDomains": ["creator.bilibili.com"]
     }
+  },
+  {
+    "id": 20,
+    "priority": 2,
+    "action": {
+      "type": "modifyHeaders",
+      "requestHeaders": [
+        {
+          "header": "origin",
+          "operation": "set",
+          "value": "https://love.bilibili.com"
+        },
+        {
+          "header": "referer",
+          "operation": "set",
+          "value": "https://love.bilibili.com"
+        }
+      ]
+    },
+    "condition": {
+      "domainType": "thirdParty",
+      "urlFilter": "||api.bilibili.com",
+      "resourceTypes": ["xmlhttprequest"],
+      "initiatorDomains": ["love.bilibili.com"]
+    }
+  },
+  {
+    "id": 21,
+    "priority": 2,
+    "action": {
+      "type": "modifyHeaders",
+      "requestHeaders": [
+        {
+          "header": "origin",
+          "operation": "set",
+          "value": "https://manga.bilibili.com"
+        },
+        {
+          "header": "referer",
+          "operation": "set",
+          "value": "https://manga.bilibili.com"
+        }
+      ]
+    },
+    "condition": {
+      "domainType": "thirdParty",
+      "urlFilter": "||api.bilibili.com",
+      "resourceTypes": ["xmlhttprequest"],
+      "initiatorDomains": ["manga.bilibili.com"]
+    }
+  },
+  {
+    "id": 22,
+    "priority": 2,
+    "action": {
+      "type": "modifyHeaders",
+      "requestHeaders": [
+        {
+          "header": "origin",
+          "operation": "set",
+          "value": "https://app.bilibili.com"
+        },
+        {
+          "header": "referer",
+          "operation": "set",
+          "value": "https://app.bilibili.com"
+        }
+      ]
+    },
+    "condition": {
+      "domainType": "thirdParty",
+      "urlFilter": "||api.bilibili.com",
+      "resourceTypes": ["xmlhttprequest"],
+      "initiatorDomains": ["app.bilibili.com"]
+    }
   }
 ]
