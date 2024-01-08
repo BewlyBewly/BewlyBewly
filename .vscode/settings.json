@@ -5,7 +5,7 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
-  "eslint.experimental.useFlatConfig": false,
+  "eslint.experimental.useFlatConfig": true,
   "files.associations": {
     "*.css": "postcss"
   },
