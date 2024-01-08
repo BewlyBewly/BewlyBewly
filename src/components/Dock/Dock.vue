@@ -153,23 +153,33 @@ function toggleDockHide(hide: boolean) {
 <template>
   <aside
     class="dock-wrap"
-    :class="{
-      left: settings.dockPosition === 'left',
-      right: settings.dockPosition === 'right',
-      bottom: settings.dockPosition === 'bottom',
-      hide: hideDock,
-    }"
-    pos="absolute top-0" flex="~ col" h-full justify-center z-1
-    pointer-events-none
-    @mouseenter="toggleDockHide(false)"
-    @mouseleave="toggleDockHide(true)"
+    pos="absolute top-0" flex="~ col justify-center items-center" w-full h-full
+    z-1 pointer-events-none
   >
+    <!-- Edge div -->
+    <div
+      v-if="settings.autoHideDock"
+      class="dock-edge"
+      :class="`dock-edge-${settings.dockPosition}`"
+      @mouseenter="toggleDockHide(false)"
+      @mouseleave="toggleDockHide(true)"
+    />
+
     <div
       class="dock-content"
+      :class="{
+        left: settings.dockPosition === 'left',
+        right: settings.dockPosition === 'right',
+        bottom: settings.dockPosition === 'bottom',
+        hide: hideDock,
+      }"
+      absolute duration-300 ease-in-out
       p-2 m-2 bg="$bew-content-1" flex="~ col gap-2 shrink-0"
       rounded="$bew-radius" border="1px $bew-border-color"
       shadow="$bew-shadow-2"
-      backdrop-glass pointer-events-auto
+      backdrop-glass
+      @mouseenter="toggleDockHide(false)"
+      @mouseleave="toggleDockHide(true)"
     >
       <template v-for="dockItemVisibility in settings.dockItemVisibilityList" :key="dockItemVisibility.page">
         <template v-if="dockItemVisibility.visible">
@@ -221,15 +231,30 @@ function toggleDockHide(hide: boolean) {
 
 <style lang="scss" scoped>
 .dock-wrap {
-  --at-apply: duration-300 ease-in-out
-    after:content-empty after:absolute
-    after:w-[calc(100%+14px)] after:h-[calc(100%+14px)] after:z--1
-    after:pointer-events-auto;
+  > * {
+    --at-apply: pointer-events-auto;
+  }
+}
 
-  svg {
-    --at-apply: block align-middle;
+.dock-edge {
+  &-left, &-right, &-bottom {
+    --at-apply: absolute z--1;
   }
 
+  &-left {
+    --at-apply: left-0 top-0 w-14px h-full hover:w-60px;
+  }
+
+  &-right {
+    --at-apply: right-0 top-0 w-14px h-full hover:w-60px;
+  }
+
+  &-bottom {
+    --at-apply: left-0 bottom-0 w-full h-14px hover-h-60px;
+  }
+}
+
+.dock-content {
   &.left {
     --at-apply: left-2 after:right--4px;
   }
@@ -245,12 +270,7 @@ function toggleDockHide(hide: boolean) {
   }
 
   &.bottom {
-    --at-apply: top-unset bottom-0 items-center w-full h-[fit-content]
-      after:top--10px after:w-full;
-
-    .dock-content {
-      --at-apply: flex-row;
-    }
+    --at-apply: top-unset bottom-0 flex-row;
   }
   &.bottom.hide {
     --at-apply: opacity-0 translate-y-100%;
@@ -263,35 +283,35 @@ function toggleDockHide(hide: boolean) {
   &.bottom .divider {
     --at-apply: w-2px h-auto my-0 mx-2;
   }
+}
 
-  .dock-item {
-    --shadow: 0 0 30px 4px var(--bew-theme-color-50);
-    --shadow-dark: 0 0 30px 4px rgba(255, 255, 255, 0.6);
-    --shadow-active: 0 0 20px var(--bew-theme-color-50);
-    --shadow-dark-active: 0 0 20px rgba(255, 255, 255, 0.6);
+.dock-item {
+  --shadow: 0 0 30px 4px var(--bew-theme-color-50);
+  --shadow-dark: 0 0 30px 4px rgba(255, 255, 255, 0.6);
+  --shadow-active: 0 0 20px var(--bew-theme-color-50);
+  --shadow-dark-active: 0 0 20px rgba(255, 255, 255, 0.6);
 
-    --at-apply: transform active:scale-90
-      md:w-45px w-35px
-      md:lh-45px lh-35px
-      p-0 flex items-center justify-center
-      aspect-square relative
-      leading-0 duration-300
-      rounded-$bew-radius
-      bg-$bew-fill-2 cursor-pointer
-      hover:bg-$bew-theme-color hover:text-white hover:shadow-$shadow
-      active:shadow-$shadow-active dark-active:shadow-$shadow-dark-active
-      dark-hover:bg-white dark-hover:text-black dark-hover:shadow-$shadow-dark;
+  --at-apply: transform active:scale-90
+    md:w-45px w-35px
+    md:lh-45px lh-35px
+    p-0 flex items-center justify-center
+    aspect-square relative
+    leading-0 duration-300
+    rounded-$bew-radius
+    bg-$bew-fill-2 cursor-pointer
+    hover:bg-$bew-theme-color hover:text-white hover:shadow-$shadow
+    active:shadow-$shadow-active dark-active:shadow-$shadow-dark-active
+    dark-hover:bg-white dark-hover:text-black dark-hover:shadow-$shadow-dark;
 
-    &.active {
-      --at-apply: bg-$bew-theme-color dark-bg-white
-        text-white dark-text-black
-        shadow-$shadow dark:shadow-$shadow-dark
-        active:shadow-$shadow-active dark-active:shadow-$shadow-dark-active;
-    }
+  &.active {
+    --at-apply: bg-$bew-theme-color dark-bg-white
+      text-white dark-text-black
+      shadow-$shadow dark:shadow-$shadow-dark
+      active:shadow-$shadow-active dark-active:shadow-$shadow-dark-active;
+  }
 
-    svg {
-      --at-apply: md:w-22px w-18px md:h-22px h-18px;
-    }
+  svg {
+    --at-apply: md:w-22px w-18px md:h-22px h-18px block align-middle;
   }
 }
 </style>
