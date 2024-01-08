@@ -67,7 +67,7 @@ onMounted(() => {
       // add the next page of data to the history list
       if (
         historysWrap.value.clientHeight + historysWrap.value.scrollTop
-          >= historysWrap.value.scrollHeight - 20
+        >= historysWrap.value.scrollHeight - 20
         && historys.length > 0
         && !isLoading.value
       ) {

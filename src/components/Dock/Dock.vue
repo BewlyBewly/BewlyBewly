@@ -61,7 +61,7 @@ onMounted(() => {
     hideDock.value = true
 
   if (settings.value.dockItemVisibilityList.length < currentDockItems.value.length || settings.value.dockItemVisibilityList.length > currentDockItems.value.length) {
-    const newDockItemVisibilityList = ref<{ page: AppPage; visible: boolean }[]>([])
+    const newDockItemVisibilityList = ref<{ page: AppPage, visible: boolean }[]>([])
     currentDockItems.value.forEach((item) => {
       newDockItemVisibilityList.value.push({ page: item.page, visible: true })
     })
@@ -89,8 +89,8 @@ onMounted(() => {
 function toggleDark(e: MouseEvent) {
   const isAppearanceTransition = typeof document !== 'undefined'
   // @ts-expect-error: Transition API
-  && document.startViewTransition
-  && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    && document.startViewTransition
+    && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
   if (!isAppearanceTransition) {
     if (currentAppColorScheme.value === 'light')
       settings.value.theme = 'dark'

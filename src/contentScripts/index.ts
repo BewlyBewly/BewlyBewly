@@ -70,7 +70,7 @@ let beforeLoadedStyleEl: HTMLStyleElement
 // We have to manually add a class to the <html> app to ensure that the transition effect is applied
 if (
   (settings.value.adaptToOtherPageStyles && settings.value.theme === 'dark')
-    || (settings.value.adaptToOtherPageStyles && settings.value.theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)
+  || (settings.value.adaptToOtherPageStyles && settings.value.theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)
 )
   document.documentElement.classList.add('bewly-design', 'dark')
 

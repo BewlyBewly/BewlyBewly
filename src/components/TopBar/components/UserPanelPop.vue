@@ -15,7 +15,7 @@ const mid = computed(() => {
   return getUserID()
 })
 
-const otherLinks = computed((): { name: string; url: string }[] => {
+const otherLinks = computed((): { name: string, url: string }[] => {
   return [
     { name: t('topbar.user_dropdown.accout_settings'), url: 'https://account.bilibili.com/account/home' },
     { name: t('topbar.user_dropdown.uploads_manager'), url: 'https://member.bilibili.com/v2#/upload-manager/article' },

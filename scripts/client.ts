@@ -1,4 +1,3 @@
-/* eslint-disable unused-imports/no-unused-vars */
 import type { ErrorPayload, HMRPayload, Update } from 'vite'
 import type { ViteHotContext } from 'vite/types/hot'
 import type { InferCustomEventPayload } from 'vite/types/customEvent'

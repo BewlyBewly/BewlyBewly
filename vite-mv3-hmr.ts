@@ -50,8 +50,7 @@ export function MV3Hmr(): PluginOption {
           for (const mod of importedModules) {
             code = code.replace(mod.url, normalizeViteUrl(isWin
               ? mod.url.replace(/[A-Z]:\//, '').replace(/:/, '.')
-              : mod.url,
-            mod.type)) // fix invalid colon in /@fs/C:, /@id/plugin-vue:export-helper
+              : mod.url, mod.type)) // fix invalid colon in /@fs/C:, /@id/plugin-vue:export-helper
             writeToDisk(mod.url)
           }
         }
@@ -70,8 +69,7 @@ export function MV3Hmr(): PluginOption {
 
           const targetFile = normalizeFsUrl(isWin
             ? urlModule.url.replace(/[A-Z]:\//, '').replace(/:/, '.')
-            : urlModule.url,
-          urlModule.type) // fix invalid colon in /@fs/C:, /@id/plugin-vue:export-helper
+            : urlModule.url, urlModule.type) // fix invalid colon in /@fs/C:, /@id/plugin-vue:export-helper
           await fs.ensureDir(dirname(targetFile))
           await fs.writeFile(targetFile, code)
         }
