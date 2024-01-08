@@ -78,3 +78,33 @@ html.dark.bewly-design {
 #home_nav {
   display: none;
 }
+
+/* Color Mode transition */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none !important;
+  mix-blend-mode: normal;
+  transition: none !important;
+}
+::view-transition-old(*),
+::view-transition-new(*),
+::view-transition-old(*::after),
+::view-transition-new(*::before),
+::view-transition-old(#bewly *),
+::view-transition-new(#bewly *),
+::view-transition-old(#bewly *::after),
+::view-transition-new(#bewly *::before) {
+  transition: none !important;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 2147483646;
+}
+.dark::view-transition-old(root) {
+  z-index: 2147483646;
+}
+.dark::view-transition-new(root) {
+  z-index: 1;
+}

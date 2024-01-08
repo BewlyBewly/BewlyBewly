@@ -1,15 +1,15 @@
 import { defineConfig } from 'tsup'
-import { isDev } from './scripts/utils'
+import { isDev, isFirefox } from './scripts/utils'
 
 export default defineConfig(() => ({
   entry: {
     'background/index': './src/background/index.ts',
     ...(isDev ? { mv3client: './scripts/client.ts' } : {}),
   },
-  outDir: 'extension/dist',
+  outDir: isFirefox ? 'extension-firefox/dist' : 'extension/dist',
   format: ['esm'],
   target: 'esnext',
-  ignoreWatch: ['**/extension/**'],
+  ignoreWatch: ['**/extension/**', '**/extension-firefox/**'],
   splitting: false,
   sourcemap: isDev ? 'inline' : false,
   define: {
