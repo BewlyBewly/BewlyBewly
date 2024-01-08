@@ -93,7 +93,6 @@ export async function getSearchHistory(): Promise<HistoryItem[]> {
     return historySort(history)
   }
   catch (error) {
-    console.error(error)
     return []
   }
 }
