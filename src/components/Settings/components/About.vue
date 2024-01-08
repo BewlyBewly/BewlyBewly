@@ -67,7 +67,7 @@ function handleExportSettings() {
           rounded-12
           w-95px
         >
-          <tabler:brand-github mr-2 /> Github
+          <tabler:brand-github mr-2 /> GitHub
         </a>
         <a
           href="https://space.bilibili.com/5011356/dynamic" target="_blank"
