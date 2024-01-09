@@ -33,11 +33,9 @@ interface Props {
   showPreview?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(),
-  {
-    topRightContent: true,
-  },
-)
+const props = withDefaults(defineProps<Props>(), {
+  topRightContent: true,
+})
 
 const videoUrl = computed(() => {
   if (props.bvid || props.aid)

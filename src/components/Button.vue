@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 interface Props {
   type?: | 'default'
-  | 'primary'
-  | 'secondary'
-  | 'info'
-  | 'success'
-  | 'warning'
-  | 'error'
+    | 'primary'
+    | 'secondary'
+    | 'info'
+    | 'success'
+    | 'warning'
+    | 'error'
   size?: 'small' | 'medium' | 'large'
   color?: string
   textColor?: string
