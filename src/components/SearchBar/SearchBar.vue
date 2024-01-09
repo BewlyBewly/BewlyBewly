@@ -1,3 +1,4 @@
+<!-- TODO: refactor all that shit -->
 <script setup lang="ts">
 import type { HistoryItem, SuggestionItem, SuggestionResponse } from './searchHistoryProvider'
 import {
@@ -189,7 +190,7 @@ async function handleClearSearchHistory() {
         pos="absolute right-2"
         bg="hover:$bew-fill-2"
         filter="group-focus-within:~"
-        style="--un-drop-shadow: drop-shadow(0 0 6px var(--bew-theme-color)) "
+        style="--un-drop-shadow: drop-shadow(0 0 6px var(--bew-theme-color))"
         @click="navigateToSearchResultPage(keyword)"
       >
         <tabler:search block align-middle />
@@ -213,7 +214,7 @@ async function handleClearSearchHistory() {
             </button>
           </div>
 
-          <div class="history-item-container p2 flex flex-wrap gap-x-4 gap-y-2">
+          <div class="history-item-container p2 flex flex-wrap gap-x-3 gap-y-3">
             <div
               v-for="item in searchHistory" :key="item.timestamp" ref="historyItemRef"
               class="history-item group"
@@ -223,7 +224,7 @@ async function handleClearSearchHistory() {
               <span> {{ item.value }}</span>
               <button
                 rounded-full duration-300 pointer-events-auto cursor-pointer p-1
-                text="xs $bew-text-2 hover:white" leading-0 bg="$bew-fill-2 hover:$bew-error-color"
+                text="xs $bew-text-2 hover:white" leading-0 bg="$bew-fill-2 hover:$bew-theme-color"
                 pos="absolute top-0 right-0" scale-80 opacity-0 group-hover:opacity-100
                 @click.stop="handleDelete(item.value)"
               >
@@ -349,8 +350,8 @@ async function handleClearSearchHistory() {
 
       .history-item-container {
         .history-item {
-          --at-apply: relative cursor-pointer hover:bg-$bew-fill-2 duration-300;
-          --at-apply: py-2 px-6 bg-$bew-fill-1 rounded-$bew-radius-half;
+          --at-apply: relative cursor-pointer duration-300;
+          --at-apply: py-2 px-6 bg-$bew-fill-1 hover:bg-$bew-theme-color-20 hover:text-$bew-theme-color rounded-$bew-radius-half;
         }
       }
     }
