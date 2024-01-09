@@ -11,7 +11,7 @@ const { t } = useI18n()
 
 const favoriteCategories = reactive<CategoryItem[]>([])
 const favoriteResources = reactive<FavoriteItem[]>([])
-const categoryOptions = reactive<Array<{ value: any; label: string }>>([])
+const categoryOptions = reactive<Array<{ value: any, label: string }>>([])
 
 const selectedCategory = ref<FavoriteCategory>()
 const activatedCategoryCover = ref<string>('')
@@ -117,7 +117,7 @@ async function getFavoriteResources(
 
       if (
         res.data.medias === null
-            || (res.data.medias.length < 20 && favoriteResources.length > 0)
+        || (res.data.medias.length < 20 && favoriteResources.length > 0)
       )
         noMoreContent.value = true
     }

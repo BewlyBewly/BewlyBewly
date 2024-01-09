@@ -96,14 +96,14 @@ function handleKeyDown() {
 
   if (
     isShowSuggestion
-        && selectedIndex.value >= suggestions.length - 1
+    && selectedIndex.value >= suggestions.length - 1
   ) {
     selectedIndex.value = suggestions.length - 1
     return
   }
   if (
     !isShowSuggestion
-        && selectedIndex.value >= searchHistory.value.length - 1
+    && selectedIndex.value >= searchHistory.value.length - 1
   ) {
     selectedIndex.value = searchHistory.value.length - 1
     return

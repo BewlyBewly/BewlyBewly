@@ -29,7 +29,7 @@ export function grantAccessKey(t: any, element: HTMLButtonElement): void {
   const tip = t('auth.err_tip')
   fetch(
     'https://passport.bilibili.com/login/app/third?appkey=5fd5a7d8bfd9b0e6'
-      + '&api=https%3A%2F%2Fwww.mcbbs.net%2Ftemplate%2Fmcbbs%2Fimage%2Fspecial_photo_bg.png&sign=04224646d1fea004e79606d3b038c84a',
+    + '&api=https%3A%2F%2Fwww.mcbbs.net%2Ftemplate%2Fmcbbs%2Fimage%2Fspecial_photo_bg.png&sign=04224646d1fea004e79606d3b038c84a',
     {
       method: 'GET',
       credentials: 'include',

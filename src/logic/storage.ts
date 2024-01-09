@@ -14,7 +14,7 @@ export interface Settings {
   autoHideTopBar: boolean
   dockPosition: 'left' | 'right' | 'bottom'
   autoHideDock: boolean
-  dockItemVisibilityList: { page: AppPage; visible: boolean }[]
+  dockItemVisibilityList: { page: AppPage, visible: boolean }[]
 
   theme: 'light' | 'dark' | 'auto'
   themeColor: string
