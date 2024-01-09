@@ -1,5 +1,5 @@
 /**
- * get cookie by name
+ * Get cookie by name
  * @param name cookie name
  * @returns cookie value
  */
@@ -11,7 +11,7 @@ export function getCookie(name: string): string {
 }
 
 /**
- * set cookie
+ * Set cookie
  * @param name cookie name
  * @param value cookie value
  */
@@ -23,20 +23,20 @@ export function setCookie(name: string, value: any, expDays: number) {
 }
 
 /**
- * get current login user id
+ * Get current login user id
  * @returns userId
  */
 export const getUserID = (): string => getCookie('DedeUserID')
 
 /**
- * get csrf token
+ * Get csrf token
  */
 export const getCSRF = (): string => getCookie('bili_jct')
 
 /**
- * remove 'http://' or 'https://' from a URL
+ * Remove the 'http:' or 'https:' prefix from a URL
  * @param url
- * @returns
+ * @returns The result of removing the 'http:' or 'https:' prefix from a url
  */
 export function removeHttpFromUrl(url: string): string {
   return url.replace(/^https?:/, '')
@@ -47,10 +47,10 @@ export function openLinkToNewTab(url: string) {
 }
 
 /**
- * convert a hex color value to RGBA, thanks ChatGPT 🫡
+ * Convert a hex color value to RGBA, thanks ChatGPT 🫡
  * @param hex hex color value
  * @param alpha color opacity
- * @returns
+ * @returns RGBA or RGB color string
  */
 export function hexToRGBA(hex: string, alpha: number): string {
   const r = Number.parseInt(hex.slice(1, 3), 16)
@@ -65,7 +65,7 @@ export function hexToRGBA(hex: string, alpha: number): string {
 }
 
 /**
- * smooth scroll to the top of the html element
+ * Smooth scroll to the top of the html element
  */
 export function smoothScrollToTop(element: HTMLElement, duration: number, targetScrollTop = 0 as number) {
   // cancel if already on top
