@@ -127,7 +127,7 @@ function resetDockContent() {
         <draggable
           v-model="settings.dockItemVisibilityList"
           item-key="page"
-          :component-data="{ style: 'display: flex; gap: 0.5rem;' }"
+          :component-data="{ style: 'display: flex; gap: 0.5rem; flex-wrap: wrap;' }"
         >
           <template #item="{ element }">
             <div
