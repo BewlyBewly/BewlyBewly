@@ -55,8 +55,8 @@ function isSupportedPages() {
     || /https?:\/\/message.bilibili.com\.*/.test(currentUrl)
     // bilibili channel page b站分区页面
     || /https?:\/\/www.bilibili.com\/v\/.*/.test(currentUrl)
-    // anime page
-    || /https?:\/\/www.bilibili.com\/anime.*/.test(currentUrl)
+    // anime page & chinese anime page
+    || /https?:\/\/www.bilibili.com\/(anime|guochuang).*/.test(currentUrl)
     // tv shows, movie, variety shows, mooc page
     || /https?:\/\/(www.)?bilibili.com\/(tv|movie|variety|mooc).*/.test(currentUrl))
     return true
@@ -112,13 +112,25 @@ document.addEventListener('DOMContentLoaded', () => {
         originalPageContent.innerHTML = ''
     }
 
-    document.documentElement.removeChild(beforeLoadedStyleEl)
+    // document.documentElement.removeChild(beforeLoadedStyleEl)
     // Then inject the app
     injectApp()
   }
 })
 
 function injectApp() {
+  // Inject style first
+  const newStyleEl = document.createElement('link')
+  newStyleEl.setAttribute('rel', 'stylesheet')
+  newStyleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
+  document.documentElement.appendChild(newStyleEl)
+  newStyleEl.onload = async () => {
+    // To prevent abrupt style transitions caused by sudden style changes
+    setTimeout(() => {
+      document.documentElement.removeChild(beforeLoadedStyleEl)
+    }, 500)
+  }
+
   // Inject app when idle
   runWhenIdle(async () => {
     // mount component to context window

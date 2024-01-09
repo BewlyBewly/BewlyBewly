@@ -374,7 +374,7 @@ defineExpose({
             <a
               ref="avatarImg"
               :href="`https://space.bilibili.com/${mid}`"
-              target="_blank"
+              :target="isHomePage() ? '_blank' : '_self'"
               class="avatar-img"
               rounded-full
               z-1
@@ -445,7 +445,7 @@ defineExpose({
               </div>
               <a
                 href="https://message.bilibili.com"
-                target="_blank"
+                :target="isHomePage() ? '_blank' : '_self'"
                 :title="$t('topbar.notifications')"
               >
                 <tabler:bell />
@@ -471,7 +471,7 @@ defineExpose({
               </div>
               <a
                 href="https://t.bilibili.com"
-                target="_blank"
+                :target="isHomePage() ? '_blank' : '_self'"
                 :title="$t('topbar.moments')"
               >
                 <tabler:windmill />
@@ -493,7 +493,7 @@ defineExpose({
             >
               <a
                 :href="`https://space.bilibili.com/${mid}/favlist`"
-                target="_blank"
+                :target="isHomePage() ? '_blank' : '_self'"
                 :title="$t('topbar.favorites')"
               >
                 <mingcute:star-line />
@@ -519,7 +519,7 @@ defineExpose({
             >
               <a
                 href="https://www.bilibili.com/account/history"
-                target="_blank"
+                :target="isHomePage() ? '_blank' : '_self'"
                 :title="$t('topbar.history')"
               >
                 <mingcute:time-line />
