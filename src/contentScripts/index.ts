@@ -112,24 +112,13 @@ document.addEventListener('DOMContentLoaded', () => {
         originalPageContent.innerHTML = ''
     }
 
+    document.documentElement.removeChild(beforeLoadedStyleEl)
     // Then inject the app
     injectApp()
   }
 })
 
 function injectApp() {
-  // Inject style first
-  const newStyleEl = document.createElement('link')
-  newStyleEl.setAttribute('rel', 'stylesheet')
-  newStyleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
-  document.documentElement.appendChild(newStyleEl)
-  newStyleEl.onload = () => {
-    // To prevent abrupt style transitions caused by sudden style changes
-    setTimeout(() => {
-      document.documentElement.removeChild(beforeLoadedStyleEl)
-    }, 500)
-  }
-
   // Inject app when idle
   runWhenIdle(async () => {
     // mount component to context window
