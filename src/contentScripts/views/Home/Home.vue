@@ -144,7 +144,7 @@ onUnmounted(() => {
         ease-in-out
         :class="{ hide: shouldMoveTabsUp }"
       >
-        <ul flex="~ items-center gap-3">
+        <ul flex="~ items-center gap-3 wrap">
           <li
             v-for="tab in tabs" :key="tab.value"
             px-4 lh-35px bg="$bew-elevated-1 hover:$bew-elevated-1-hover" backdrop-glass rounded="$bew-radius"
@@ -152,7 +152,7 @@ onUnmounted(() => {
             :class="{ 'tab-activated': activatedPage === tab.value }"
             @click="activatedPage = tab.value"
           >
-            {{ tab.label }}
+            <span class="text-center">{{ tab.label }}</span>
           </li>
         </ul>
       </header>
