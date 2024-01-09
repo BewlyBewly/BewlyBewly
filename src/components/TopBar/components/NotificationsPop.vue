@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import { isHomePage } from '~/utils/main'
 
 const { t } = useI18n()
 
@@ -82,7 +83,7 @@ function getUnreadMessageCount() {
       v-for="item in list"
       :key="item.name"
       :href="item.url"
-      target="_blank"
+      :target="isHomePage() ? '_blank' : '_self'"
       pos="relative"
       p="x-4 y-2"
       bg="hover:$bew-fill-2"

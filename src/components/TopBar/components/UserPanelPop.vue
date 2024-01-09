@@ -2,7 +2,7 @@
 import { useI18n } from 'vue-i18n'
 import type { UserInfo, UserStat } from '../types'
 import { revokeAccessKey } from '~/utils/authProvider'
-import { getCSRF, getUserID } from '~/utils/main'
+import { getCSRF, getUserID, isHomePage } from '~/utils/main'
 import { numFormatter } from '~/utils/dataFormatter'
 
 defineProps<{
@@ -73,12 +73,12 @@ async function logout() {
       <a
         class="group mr-4"
         href="https://account.bilibili.com/account/coin"
-        target="_blank"
+        :target="isHomePage() ? '_blank' : '_self'"
       >{{ $t('topbar.user_dropdown.money') + userInfo.money }}</a>
       <a
         class="group"
         href="https://pay.bilibili.com/pay-v2-web/bcoin_index"
-        target="_blank"
+        :target="isHomePage() ? '_blank' : '_self'"
       >{{
         $t('topbar.user_dropdown.b_coins') + userInfo.wallet?.bcoin_balance
       }}</a>
@@ -87,7 +87,7 @@ async function logout() {
       <a
         class="group"
         :href="`https://space.bilibili.com/${mid}/fans/follow`"
-        target="_blank"
+        :target="isHomePage() ? '_blank' : '_self'"
         :title="`${userStat.following}`"
       >
         <div class="num">
@@ -97,7 +97,7 @@ async function logout() {
       </a>
       <a
         :href="`https://space.bilibili.com/${mid}/fans/fans`"
-        target="_blank"
+        :target="isHomePage() ? '_blank' : '_self'"
         :title="`${userStat.follower}`"
       >
         <div class="num">
@@ -107,7 +107,7 @@ async function logout() {
       </a>
       <a
         :href="`https://space.bilibili.com/${mid}/dynamic`"
-        target="_blank"
+        :target="isHomePage() ? '_blank' : '_self'"
         :title="`${userStat.dynamic_count}`"
       >
         <div class="num">

@@ -55,8 +55,8 @@ function isSupportedPages() {
     || /https?:\/\/message.bilibili.com\.*/.test(currentUrl)
     // bilibili channel page b站分区页面
     || /https?:\/\/www.bilibili.com\/v\/.*/.test(currentUrl)
-    // anime page
-    || /https?:\/\/www.bilibili.com\/anime.*/.test(currentUrl)
+    // anime page & chinese anime page
+    || /https?:\/\/www.bilibili.com\/(anime|guochuang).*/.test(currentUrl)
     // tv shows, movie, variety shows, mooc page
     || /https?:\/\/(www.)?bilibili.com\/(tv|movie|variety|mooc).*/.test(currentUrl))
     return true
