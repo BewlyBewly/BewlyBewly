@@ -52,6 +52,7 @@ const isHover = ref<boolean>(false)
 // const dislikeReasonId = ref<number | null>(null)
 const showPopCtrl = ref<boolean>(false)
 const contentVisibility = ref<'auto' | 'visible'>('auto')
+const mouseEnterTimeOut = ref()
 const mouseLeaveTimeOut = ref()
 const previewVideoUrl = ref<string>('')
 
@@ -100,13 +101,23 @@ function toggleWatchLater() {
 }
 
 function handleMouseEnter() {
-  isHover.value = true
-  clearTimeout(mouseLeaveTimeOut.value)
-  contentVisibility.value = 'visible'
+  if (settings.value.hoverVideoCardDelayed) {
+    mouseEnterTimeOut.value = setTimeout(() => {
+      isHover.value = true
+      clearTimeout(mouseLeaveTimeOut.value)
+      contentVisibility.value = 'visible'
+    }, 1200)
+  }
+  else {
+    isHover.value = true
+    clearTimeout(mouseLeaveTimeOut.value)
+    contentVisibility.value = 'visible'
+  }
 }
 
 function handelMouseLeave() {
   isHover.value = false
+  clearTimeout(mouseEnterTimeOut.value)
   clearTimeout(mouseLeaveTimeOut.value)
   mouseLeaveTimeOut.value = setTimeout(() => {
     contentVisibility.value = 'auto'
@@ -180,8 +191,6 @@ function handelMouseLeave() {
       rounded="$bew-radius" duration-300 ease-in-out
       hover:bg="$bew-fill-2" hover:ring="8 $bew-fill-2"
       :style="{ contentVisibility }"
-      @mouseenter="handleMouseEnter"
-      @mouseleave="handelMouseLeave"
     >
       <div :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }">
         <!-- Cover -->
@@ -193,6 +202,8 @@ function handelMouseLeave() {
           cursor-pointer
           duration-300 ease-in-out
           group-hover:z-2
+          @mouseenter="handleMouseEnter"
+          @mouseleave="handelMouseLeave"
         >
           <!-- Video preview -->
           <Transition v-if="showPreview" name="fade">
@@ -204,7 +215,6 @@ function handelMouseLeave() {
               pos="absolute top-0 left-0" w-full aspect-video rounded="$bew-radius" bg-black
             >
               <source :src="previewVideoUrl" type="video/mp4">
-
             </video>
           </Transition>
           <!-- <video  /> -->
@@ -241,7 +251,7 @@ function handelMouseLeave() {
             rounded="$bew-radius"
             text="!white xs"
             bg="black opacity-60"
-            group-hover:opacity-0
+            class="group-hover/cover:opacity-0"
             duration-300
           >
             {{ duration ? calcCurrentTime(duration) : durationStr }}
