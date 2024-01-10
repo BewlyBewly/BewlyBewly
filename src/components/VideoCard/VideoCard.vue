@@ -52,6 +52,7 @@ const isHover = ref<boolean>(false)
 // const dislikeReasonId = ref<number | null>(null)
 const showPopCtrl = ref<boolean>(false)
 const contentVisibility = ref<'auto' | 'visible'>('auto')
+const mouseEnterTimeOut = ref()
 const mouseLeaveTimeOut = ref()
 const previewVideoUrl = ref<string>('')
 
@@ -100,13 +101,17 @@ function toggleWatchLater() {
 }
 
 function handleMouseEnter() {
-  isHover.value = true
-  clearTimeout(mouseLeaveTimeOut.value)
-  contentVisibility.value = 'visible'
+  mouseEnterTimeOut.value = setTimeout(() => {
+    mouseLeaveTimeOut.value = undefined
+    isHover.value = true
+    clearTimeout(mouseLeaveTimeOut.value)
+    contentVisibility.value = 'visible'
+  }, 1200)
 }
 
 function handelMouseLeave() {
   isHover.value = false
+  clearTimeout(mouseEnterTimeOut.value)
   clearTimeout(mouseLeaveTimeOut.value)
   mouseLeaveTimeOut.value = setTimeout(() => {
     contentVisibility.value = 'auto'
