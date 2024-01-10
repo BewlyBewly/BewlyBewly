@@ -90,6 +90,9 @@ function resetDockContent() {
       <SettingsItem :title="$t('settings.enable_video_ctrl_bar_on_video_card')">
         <Radio v-model="settings.enableVideoCtrlBarOnVideoCard" />
       </SettingsItem>
+      <SettingsItem title="Delayed video preview on hover over the video card">
+        <Radio v-model="settings.hoverVideoCardDelayed" />
+      </SettingsItem>
     </SettingsItemGroup>
 
     <SettingsItemGroup :title="$t('settings.group_topbar')">
