@@ -29,6 +29,4 @@ export async function setupApp(app: App) {
       position: POSITION.TOP_CENTER,
     })
   app.use(pinia)
-  const { OverlayScrollbarsComponent } = await import('overlayscrollbars-vue')
-  app.component('OverlayScrollbarsComponent', OverlayScrollbarsComponent)
 }

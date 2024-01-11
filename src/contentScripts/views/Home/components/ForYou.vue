@@ -2,7 +2,6 @@
 import type { Ref } from 'vue'
 import type { AppForYouResult, Item as AppVideoItem } from '~/models/video/appForYou'
 import type { Item as VideoItem, forYouResult } from '~/models/video/forYou'
-import emitter from '~/utils/mitt'
 import { accessKey, settings } from '~/logic'
 import { LanguageType } from '~/enums/appEnums'
 import { TVAppKey } from '~/utils/authProvider'
@@ -14,6 +13,33 @@ const needToLoginFirst = ref<boolean>(false)
 const containerRef = ref<HTMLElement>() as Ref<HTMLElement>
 const refreshIdx = ref<number>(1)
 const noMoreContent = ref<boolean>(false)
+const { handleReachBottom, handlePageRefresh } = useBewlyApp()
+
+function initPageAction() {
+  handleReachBottom.value = async () => {
+    if (!isLoading.value) {
+      if (settings.value.recommendationMode === 'web') {
+        getRecommendVideos()
+      }
+      else {
+        for (let i = 0; i < 3; i++)
+          await getAppRecommendVideos()
+      }
+    }
+  }
+
+  handlePageRefresh.value = async () => {
+    videoList.length = 0
+    appVideoList.length = 0
+    if (settings.value.recommendationMode === 'web') {
+      await getRecommendVideos()
+    }
+    else {
+      for (let i = 0; i < 3; i++)
+        await getAppRecommendVideos()
+    }
+  }
+}
 
 watch(() => settings.value.recommendationMode, (newValue) => {
   videoList.length = 0
@@ -41,22 +67,11 @@ onMounted(async () => {
     }
   }, 200)
 
-  emitter.off('reachBottom')
-  emitter.on('reachBottom', async () => {
-    if (!isLoading.value) {
-      if (settings.value.recommendationMode === 'web') {
-        getRecommendVideos()
-      }
-      else {
-        for (let i = 0; i < 3; i++)
-          await getAppRecommendVideos()
-      }
-    }
-  })
+  initPageAction()
 })
 
-onUnmounted(() => {
-  emitter.off('reachBottom')
+onActivated(() => {
+  initPageAction()
 })
 
 async function getRecommendVideos() {

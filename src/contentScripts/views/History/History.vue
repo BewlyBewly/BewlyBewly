@@ -3,6 +3,7 @@ import { useDateFormat } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 
 // import type { HistoryItem } from './types'
+import type { Ref } from 'vue'
 import { getCSRF, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
 import { calcCurrentTime } from '~/utils/dataFormatter'
 import emitter from '~/utils/mitt'
@@ -18,6 +19,7 @@ const historyList = reactive<Array<HistoryItem>>([])
 const currentPageNum = ref<number>(1)
 const keyword = ref<string>()
 const historyStatus = ref<boolean>()
+const handlePageRefresh = inject('handlePageRefresh') as Ref<() => void | Promise<void>>
 
 const HistoryBusiness = computed(() => {
   return Business
@@ -56,17 +58,17 @@ onMounted(() => {
       else getHistoryList()
     }
   })
-
-  emitter.off('pageRefresh')
-  emitter.on('pageRefresh', async () => {
-    historyList.length = 0
-    getHistoryList()
-  })
 })
 
 onUnmounted(() => {
   emitter.off('reachBottom')
-  emitter.off('pageRefresh')
+})
+
+onActivated(() => {
+  handlePageRefresh.value = () => {
+    historyList.length = 0
+    getHistoryList()
+  }
 })
 
 /**

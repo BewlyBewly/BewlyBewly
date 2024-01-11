@@ -23,6 +23,7 @@ common:
   disable: 禁用
   refresh: 刷新
   reset: 重置
+  no_more_content: 没有更多内容了
 settings:
   title: 设置
 

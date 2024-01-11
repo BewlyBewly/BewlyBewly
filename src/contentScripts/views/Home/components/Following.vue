@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
 import type { DataItem as MomentItem, MomentResult } from '~/models/moment/moment'
-import emitter from '~/utils/mitt'
 
 const videoList = reactive<MomentItem[]>([])
 const isLoading = ref<boolean>(false)
@@ -10,27 +9,48 @@ const containerRef = ref<HTMLElement>() as Ref<HTMLElement>
 const offset = ref<string>('')
 const updateBaseline = ref<string>('')
 const noMoreContent = ref<boolean>(false)
+const noMoreContentWarning = ref<boolean>(false)
+const { handleReachBottom, handlePageRefresh } = useBewlyApp()
+
+function initPageAction() {
+  handleReachBottom.value = async () => {
+    if (isLoading.value)
+      return
+    if (noMoreContent.value) {
+      noMoreContentWarning.value = true
+      return
+    }
+    for (let i = 0; i < 3; i++)
+      await getFollowedUsersVideos()
+  }
+  handlePageRefresh.value = async () => {
+    videoList.length = 0
+    offset.value = ''
+    noMoreContent.value = false
+    noMoreContentWarning.value = false
+    for (let i = 0; i < 3; i++)
+      await getFollowedUsersVideos()
+  }
+}
 
 onMounted(async () => {
   for (let i = 0; i < 3; i++)
     await getFollowedUsersVideos()
-
-  emitter.off('reachBottom')
-  emitter.on('reachBottom', async () => {
-    if (!isLoading.value) {
-      for (let i = 0; i < 3; i++)
-        await getFollowedUsersVideos()
-    }
-  })
+  initPageAction()
 })
 
-onUnmounted(() => {
-  emitter.off('reachBottom')
+onActivated(() => {
+  initPageAction()
 })
 
 async function getFollowedUsersVideos() {
   if (noMoreContent.value)
     return
+
+  if (offset.value === '0') {
+    noMoreContent.value = true
+    return
+  }
 
   isLoading.value = true
   try {
@@ -115,6 +135,9 @@ function jumpToLoginPage() {
         <VideoCardSkeleton v-for="item in 30" :key="item" />
       </template>
     </div>
+
+    <!-- no more content -->
+    <Empty v-if="noMoreContentWarning" class="pb-4" :description="$t('common.no_more_content')" />
 
     <Transition name="fade">
       <Loading v-if="isLoading" />

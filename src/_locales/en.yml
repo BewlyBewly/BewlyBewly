@@ -23,6 +23,7 @@ common:
   disable: Disable
   refresh: Refresh
   reset: Reset
+  no_more_content: No more content
 settings:
   title: Settings
 

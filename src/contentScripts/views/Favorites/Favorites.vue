@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import type { Ref } from 'vue'
 import { getCSRF, getUserID, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
 import type { FavoriteCategory, FavoriteResource } from '~/components/TopBar/types'
 import emitter from '~/utils/mitt'
@@ -19,7 +20,7 @@ const activatedCategoryCover = ref<string>('')
 const shouldMoveCtrlBarUp = ref<boolean>(false)
 const currentPageNum = ref<number>(1)
 const keyword = ref<string>('')
-
+const handlePageRefresh = inject('handlePageRefresh') as Ref<() => void | Promise<void>>
 const isLoading = ref<boolean>(true)
 const isFullPageLoading = ref<boolean>(false)
 const noMoreContent = ref<boolean>()
@@ -37,11 +38,6 @@ onMounted(async () => {
       getFavoriteResources(selectedCategory.value!.id, ++currentPageNum.value, keyword.value)
   })
 
-  emitter.off('pageRefresh')
-  emitter.on('pageRefresh', async () => {
-    favoriteResources.length = 0
-    handleSearch()
-  })
   emitter.off('topBarVisibleChange')
   emitter.on('topBarVisibleChange', (val) => {
     shouldMoveCtrlBarUp.value = false
@@ -61,8 +57,14 @@ onMounted(async () => {
 
 onUnmounted(() => {
   emitter.off('reachBottom')
-  emitter.off('pageRefresh')
   emitter.off('topBarVisibleChange')
+})
+
+onActivated(() => {
+  handlePageRefresh.value = () => {
+    favoriteResources.length = 0
+    handleSearch()
+  }
 })
 
 async function getFavoriteCategories() {

@@ -3,7 +3,6 @@ import { useDateFormat } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 import { getCSRF, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
 import { calcCurrentTime } from '~/utils/dataFormatter'
-import emitter from '~/utils/mitt'
 import type { List as VideoItem, WatchLaterResult } from '~/models/video/watchLater'
 
 const { t } = useI18n()
@@ -11,19 +10,17 @@ const { t } = useI18n()
 const isLoading = ref<boolean>()
 const noMoreContent = ref<boolean>()
 const watchLaterList = reactive<VideoItem[]>([])
+const { handlePageRefresh } = useBewlyApp()
 
 onMounted(() => {
   getAllWatchLaterList()
-
-  emitter.off('pageRefresh')
-  emitter.on('pageRefresh', async () => {
-    watchLaterList.length = 0
-    getAllWatchLaterList()
-  })
 })
 
-onUnmounted(() => {
-  emitter.off('pageRefresh')
+onActivated(() => {
+  handlePageRefresh.value = () => {
+    watchLaterList.length = 0
+    getAllWatchLaterList()
+  }
 })
 
 /**

@@ -10,7 +10,6 @@ import HistoryPop from './components/HistoryPop.vue'
 import { getUserID, isHomePage } from '~/utils/main'
 import { settings } from '~/logic'
 import emitter from '~/utils/mitt'
-import type { AppPage } from '~/enums/appEnums'
 
 // import { useTopBarStore } from '~/stores/topBarStore'
 
@@ -33,8 +32,7 @@ interface Props {
 //   return topBarStore.topBarItems
 // })
 
-const activatedPage = inject('activatedPage') as Ref<AppPage>
-const scrollbarRef = inject('scrollbarRef') as Ref
+const { activatedPage, scrollbarRef } = useBewlyApp()
 
 const mid = getUserID() || ''
 const userInfo = reactive<UserInfo | NonNullable<unknown>>({}) as UnwrapNestedRefs<UserInfo>

@@ -7,8 +7,7 @@ import { settings } from '~/logic'
 import emitter from '~/utils/mitt'
 
 const { t } = useI18n()
-
-const handleBackToTop = inject('handleBackToTop') as (targetScrollTop: number) => void
+const { handleBackToTop, handlePageRefresh } = useBewlyApp()
 
 const rankingTypes = computed((): RankingType[] => {
   return [
@@ -46,6 +45,16 @@ const videoList = reactive<RankingVideoItem[]>([])
 const PgcList = reactive<RankingPgcItem[]>([])
 const shouldMoveAsideUp = ref<boolean>(false)
 
+function initPageAction() {
+  handlePageRefresh.value = async () => {
+    videoList.length = 0
+    PgcList.length = 0
+    if (isLoading.value)
+      return
+    getRankingVideos()
+  }
+}
+
 watch(() => activatedRankingType.value.id, () => {
   handleBackToTop(settings.value.useSearchPageModeOnHomePage ? 510 : 0)
 
@@ -72,6 +81,11 @@ onMounted(() => {
   })
 
   getRankingVideos()
+  initPageAction()
+})
+
+onActivated(() => {
+  initPageAction()
 })
 
 onBeforeUnmount(() => {
