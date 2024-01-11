@@ -259,11 +259,14 @@ function openVideoPageIfBvidExists() {
     window.open(`https://www.bilibili.com/video/${bvid}`, '_self')
 }
 
-provide('handleBackToTop', handleBackToTop)
-provide('handleRefresh', handleRefresh)
-provide('activatedPage', activatedPage)
-provide('scrollbarRef', scrollbarRef)
-provide('mainAppRef', mainAppRef)
+provide<BewlyAppProvider>('BEWLY_APP', {
+  activatedPage,
+  mainAppRef,
+  scrollbarRef,
+  handleBackToTop,
+  handlePageRefresh,
+  handleReachBottom,
+})
 </script>
 
 <template>
