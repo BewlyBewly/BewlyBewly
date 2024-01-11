@@ -2,7 +2,6 @@
 import AnimeTimeTable from './components/AnimeTimeTable.vue'
 import { getUserID, openLinkToNewTab } from '~/utils/main'
 import { numFormatter } from '~/utils/dataFormatter'
-import emitter from '~/utils/mitt'
 import type { List as WatchListItem, WatchListResult } from '~/models/anime/watchList'
 import type { List as PopularAnimeItem, PopularAnimeResult } from '~/models/anime/popular'
 import type { ItemSubItem as RecommendationItem, RecommendationResult } from '~/models/anime/recommendation'
@@ -15,21 +14,48 @@ const isLoadingAnimeWatchList = ref<boolean>()
 const isLoadingPopularAnime = ref<boolean>()
 const isLoadingRecommendAnime = ref<boolean>()
 const activatedSeasonId = ref<number>()
+const noMoreContent = ref<boolean>()
+const noMoreContentWarning = ref<boolean>()
+const { handleReachBottom, handlePageRefresh } = useBewlyApp()
+
+const isLoading = computed(() => {
+  return isLoadingAnimeWatchList.value || isLoadingPopularAnime.value || isLoadingRecommendAnime.value
+})
+
+function initPageAction() {
+  handleReachBottom.value = () => {
+    if (isLoadingRecommendAnime.value)
+      return
+    if (noMoreContent.value) {
+      noMoreContentWarning.value = true
+      return
+    }
+    getRecommendAnimeList()
+  }
+  handlePageRefresh.value = () => {
+    if (isLoading.value)
+      return
+
+    animeWatchList.length = 0
+    recommendAnimeList.length = 0
+    popularAnimeList.length = 0
+    cursor.value = 0
+    getAnimeWatchList()
+    getPopularAnimeList()
+    getRecommendAnimeList()
+  }
+}
 
 onMounted(() => {
   getAnimeWatchList()
   getPopularAnimeList()
   getRecommendAnimeList()
 
-  emitter.off('reachBottom')
-  emitter.on('reachBottom', () => {
-    if (!isLoadingRecommendAnime.value)
-      getRecommendAnimeList()
-  })
+  initPageAction()
 })
 
-onUnmounted(() => {
-  emitter.off('reachBottom')
+onActivated(() => {
+  initPageAction()
 })
 
 function getAnimeWatchList() {
@@ -70,10 +96,13 @@ function getRecommendAnimeList() {
       if (code === 0 && has_next) {
         if (recommendAnimeList.length === 0)
           Object.assign(recommendAnimeList, items[0].sub_items as RecommendationItem[])
-        else recommendAnimeList.push(...items[0].sub_items)
+        else
+          recommendAnimeList.push(...items[0].sub_items)
 
         cursor.value = coursor
       }
+      if (code === 0 && !has_next)
+        noMoreContent.value = true
     })
     .finally(() => {
       isLoadingRecommendAnime.value = false
@@ -246,6 +275,10 @@ function getPopularAnimeList() {
         </div>
       </section>
     </div>
+
+    <!-- no more content -->
+    <Empty v-if="noMoreContentWarning" class="pb-4" :description="$t('common.no_more_content')" />
+
     <!-- loading -->
     <loading v-if="isLoadingRecommendAnime && recommendAnimeList.length !== 0" m="-t-4" />
   </div>

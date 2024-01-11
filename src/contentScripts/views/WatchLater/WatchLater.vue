@@ -12,15 +12,23 @@ const noMoreContent = ref<boolean>()
 const watchLaterList = reactive<VideoItem[]>([])
 const { handlePageRefresh } = useBewlyApp()
 
-onMounted(() => {
-  getAllWatchLaterList()
-})
-
-onActivated(() => {
+function initPageAction() {
   handlePageRefresh.value = () => {
+    if (isLoading.value)
+      return
+
     watchLaterList.length = 0
     getAllWatchLaterList()
   }
+}
+
+onMounted(() => {
+  getAllWatchLaterList()
+  initPageAction()
+})
+
+onActivated(() => {
+  initPageAction()
 })
 
 /**

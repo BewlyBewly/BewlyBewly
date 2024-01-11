@@ -20,23 +20,33 @@ const activatedCategoryCover = ref<string>('')
 const shouldMoveCtrlBarUp = ref<boolean>(false)
 const currentPageNum = ref<number>(1)
 const keyword = ref<string>('')
-const handlePageRefresh = inject('handlePageRefresh') as Ref<() => void | Promise<void>>
+const { handlePageRefresh, handleReachBottom } = useBewlyApp()
 const isLoading = ref<boolean>(true)
 const isFullPageLoading = ref<boolean>(false)
 const noMoreContent = ref<boolean>()
+
+function initPageAction() {
+  handleReachBottom.value = async () => {
+    if (isLoading.value)
+      return
+    if (noMoreContent.value)
+      return
+    await getFavoriteResources(selectedCategory.value!.id, ++currentPageNum.value, keyword.value)
+  }
+
+  handlePageRefresh.value = () => {
+    if (isLoading.value)
+      return
+    favoriteResources.length = 0
+    handleSearch()
+  }
+}
 
 onMounted(async () => {
   await getFavoriteCategories()
   changeCategory(favoriteCategories[0])
 
-  emitter.off('reachBottom')
-  emitter.on('reachBottom', () => {
-    if (isLoading.value)
-      return
-
-    if (!noMoreContent.value)
-      getFavoriteResources(selectedCategory.value!.id, ++currentPageNum.value, keyword.value)
-  })
+  initPageAction()
 
   emitter.off('topBarVisibleChange')
   emitter.on('topBarVisibleChange', (val) => {
@@ -56,15 +66,11 @@ onMounted(async () => {
 })
 
 onUnmounted(() => {
-  emitter.off('reachBottom')
   emitter.off('topBarVisibleChange')
 })
 
 onActivated(() => {
-  handlePageRefresh.value = () => {
-    favoriteResources.length = 0
-    handleSearch()
-  }
+  initPageAction()
 })
 
 async function getFavoriteCategories() {
