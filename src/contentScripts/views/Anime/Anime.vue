@@ -40,6 +40,8 @@ function initPageAction() {
     recommendAnimeList.length = 0
     popularAnimeList.length = 0
     cursor.value = 0
+    noMoreContent.value = false
+    noMoreContentWarning.value = false
     getAnimeWatchList()
     getPopularAnimeList()
     getRecommendAnimeList()

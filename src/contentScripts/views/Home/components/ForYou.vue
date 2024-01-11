@@ -13,24 +13,34 @@ const needToLoginFirst = ref<boolean>(false)
 const containerRef = ref<HTMLElement>() as Ref<HTMLElement>
 const refreshIdx = ref<number>(1)
 const noMoreContent = ref<boolean>(false)
+const noMoreContentWarning = ref<boolean>(false)
 const { handleReachBottom, handlePageRefresh } = useBewlyApp()
 
 function initPageAction() {
   handleReachBottom.value = async () => {
-    if (!isLoading.value) {
-      if (settings.value.recommendationMode === 'web') {
-        getRecommendVideos()
-      }
-      else {
-        for (let i = 0; i < 3; i++)
-          await getAppRecommendVideos()
-      }
+    if (isLoading.value)
+      return
+    if (noMoreContent.value) {
+      noMoreContentWarning.value = true
+      return
+    }
+    if (settings.value.recommendationMode === 'web') {
+      getRecommendVideos()
+    }
+    else {
+      for (let i = 0; i < 3; i++)
+        await getAppRecommendVideos()
     }
   }
 
   handlePageRefresh.value = async () => {
+    if (isLoading.value)
+      return
+
     videoList.length = 0
     appVideoList.length = 0
+    noMoreContent.value = false
+    noMoreContentWarning.value = false
     if (settings.value.recommendationMode === 'web') {
       await getRecommendVideos()
     }
@@ -75,9 +85,6 @@ onActivated(() => {
 })
 
 async function getRecommendVideos() {
-  if (noMoreContent.value)
-    return
-
   isLoading.value = true
   try {
     const response: forYouResult = await browser.runtime.sendMessage({
@@ -216,6 +223,9 @@ function jumpToLoginPage() {
         <VideoCardSkeleton v-for="item in 30" :key="item" />
       </template>
     </div>
+
+    <!-- no more content -->
+    <Empty v-if="noMoreContentWarning" class="py-4" :description="$t('common.no_more_content')" />
 
     <Transition name="fade">
       <Loading v-if="isLoading" />

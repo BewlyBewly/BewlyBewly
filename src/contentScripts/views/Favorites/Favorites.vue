@@ -42,6 +42,8 @@ function initPageAction() {
       return
     favoriteResources.length = 0
     currentPageNum.value = 1
+    noMoreContent.value = false
+    noMoreContentWarning.value = false
     handleSearch()
   }
 }

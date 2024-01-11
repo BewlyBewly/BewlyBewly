@@ -42,6 +42,8 @@ function initPageAction() {
   handlePageRefresh.value = () => {
     historyList.length = 0
     currentPageNum.value = 1
+    noMoreContent.value = false
+    noMoreContentWarning.value = false
     getHistoryList()
   }
 }
