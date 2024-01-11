@@ -24,13 +24,16 @@ const { handlePageRefresh, handleReachBottom } = useBewlyApp()
 const isLoading = ref<boolean>(true)
 const isFullPageLoading = ref<boolean>(false)
 const noMoreContent = ref<boolean>()
+const noMoreContentWarning = ref<boolean>(false)
 
 function initPageAction() {
   handleReachBottom.value = async () => {
     if (isLoading.value)
       return
-    if (noMoreContent.value)
+    if (noMoreContent.value) {
+      noMoreContentWarning.value = true
       return
+    }
     await getFavoriteResources(selectedCategory.value!.id, ++currentPageNum.value, keyword.value)
   }
 
@@ -38,6 +41,7 @@ function initPageAction() {
     if (isLoading.value)
       return
     favoriteResources.length = 0
+    currentPageNum.value = 1
     handleSearch()
   }
 }
@@ -235,6 +239,9 @@ function handleUnfavorite(favoriteResource: FavoriteResource) {
             </VideoCard>
           </TransitionGroup>
         </div>
+
+        <!-- no more content -->
+        <Empty v-if="noMoreContentWarning" class="py-4" :description="$t('common.no_more_content')" />
 
         <!-- loading -->
         <Transition name="fade">
