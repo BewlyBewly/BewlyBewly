@@ -179,7 +179,8 @@
     .bb-comment .comment-send.comment-send-lite,
     .comment-bilibili-fold .comment-send.comment-send-lite,
     .bb-comment .comment-send-lite.comment-send-lite,
-    .comment-bilibili-fold .comment-send-lite.comment-send-lite {
+    .comment-bilibili-fold .comment-send-lite.comment-send-lite,
+    .comment-wrapper .comment-m {
       // background-color: var(--bew-content-solid-1);
       background-color: var(--bew-bg);
     }
@@ -231,7 +232,8 @@
     .comment-bilibili-fold .comment-list .list-item .user .name,
     .bb-comment .comment-header .tabs-order li,
     .comment-bilibili-fold .comment-header .tabs-order li,
-    .bili-dyn-forward-publishing__editor .bili-rich-textarea__inner {
+    .bili-dyn-forward-publishing__editor .bili-rich-textarea__inner,
+    .comment-wrapper .comment-m .b-head {
       color: var(--bew-text-1);
     }
 

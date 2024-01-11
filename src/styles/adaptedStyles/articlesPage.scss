@@ -1,0 +1,131 @@
+.bewly-design {
+  .right-side-bar .catalog .catalog-text {
+    line-height: unset;
+  }
+
+  // #region theme color adaption part
+  // Increase the priority of the style inside by writing a non-existent selector in :not()
+  :not(fdjslfds) {
+    .page-content .right-side .rank-module .rank-list .item a:hover {
+      color: var(--bew-theme-color);
+    }
+
+    .page-content
+      .right-side
+      .rank-module
+      .rank-list
+      .item:nth-child(-n + 3)
+      .rank-index {
+      background-color: var(--bew-theme-color);
+    }
+  }
+  // #endregion
+
+  // #region dark mode adaption part
+  &.dark {
+    .nav-tab-bar .tab-item,
+    .page-content .left-side .partitio-name,
+    .page-content .right-side .rank-module .rank-tabs-bar label,
+    .page-content
+      .left-side
+      .article-list
+      .article-list-holder
+      .article-item
+      .item-holder
+      .article-title-holder,
+    .page-content .right-side .rank-module .rank-list .item a,
+    .page-content .right-side .up-list .title,
+    .page-content .right-side .up-list .up-item .info-holder .head .nick-name,
+    .page-content .right-side .more .top-bar,
+    .page-content .right-side .more .help .title,
+    .page-content .right-side .more .link .title,
+    .article-container .title-container .title,
+    .normal-article-holder,
+    .article-up-info .up-name,
+    .right-side-bar .catalog-panel__title,
+    .right-side-bar .catalog-panel .catalog-item,
+    .fixed-top-header .inner > p,
+    .fixed-top-header .inner .up-info {
+      color: var(--bew-text-1);
+    }
+
+    .page-content
+      .left-side
+      .article-list
+      .article-list-holder
+      .article-item
+      .item-holder
+      .article-desc,
+    .page-content .right-side .up-list .up-item .info-holder .dynamic,
+    .page-content .right-side .more .help .info,
+    .page-content .right-side .more .link .info,
+    .article-read-info .publish-text,
+    .article-up-info .avatar-info-pannel,
+    .article-read-info *,
+    .right-side-bar .catalog,
+    .right-side-bar .side-toolbar .toolbar-item .iconfont,
+    .right-side-bar .side-toolbar .toolbar-item,
+    .right-side-bar .to-top .iconfont,
+    .right-side-bar .catalog-panel__info {
+      color: var(--bew-text-2);
+    }
+
+    .page-content
+      .left-side
+      .article-list
+      .article-list-holder
+      .article-item
+      .item-holder
+      .article-info-bar
+      *,
+    .page-content
+      .right-side
+      .up-list
+      .up-item
+      .info-holder
+      .dynamic
+      .arc-title {
+      color: var(--bew-text-3);
+    }
+
+    .page-content .left-side .article-list .article-list-holder .article-item,
+    .page-content .right-side .rank-module .rank-list .item,
+    .page-content .right-side .up-list,
+    .article-up-info {
+      background-color: transparent;
+    }
+
+    .article-container {
+      background-color: var(--bew-content-1);
+    }
+
+    .right-side-bar .to-top,
+    .right-side-bar .side-toolbar,
+    .right-side-bar .catalog,
+    .right-side-bar .catalog:after,
+    .right-side-bar .catalog-panel {
+      background-color: var(--bew-elevated-solid-1);
+    }
+
+    .fixed-top-header {
+      background-color: var(--bew-elevated-solid-2);
+    }
+
+    .page-content .right-side .rank-module .rank-list .item .rank-index {
+      background-color: var(--bew-fill-1);
+    }
+
+    .right-side-bar .catalog-panel .catalog-item:hover {
+      background-color: var(--bew-fill-2);
+    }
+
+    .page-content .left-side .article-list .article-list-holder .article-item,
+    .page-content .right-side .up-list .title,
+    .page-content .right-side .rank-module .rank-tabs-bar,
+    .page-content .right-side .more .top-bar,
+    .article-container__content {
+      border-color: var(--bew-border-color);
+    }
+  }
+  // #endregion
+}
