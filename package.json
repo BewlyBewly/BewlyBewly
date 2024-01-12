@@ -3,7 +3,7 @@
   "displayName": "BewlyBewly",
   "version": "0.13.3",
   "private": true,
-  "packageManager": "pnpm@7.8.0",
+  "packageManager": "pnpm@8.14.1",
   "description": "Just make a few small changes to your Bilibili homepage.",
   "homepage": "https://github.com/hakadao/BewlyBewly",
   "scripts": {
