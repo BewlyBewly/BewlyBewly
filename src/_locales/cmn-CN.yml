@@ -294,3 +294,4 @@ watch_later:
 search_bar:
   history_title: 搜索历史
   clear_history: 清空搜索历史
+  placeholder: 输入关键字搜索

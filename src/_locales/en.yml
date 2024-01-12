@@ -293,3 +293,4 @@ watch_later:
 search_bar:
   history_title: Search History
   clear_history: Clear search history
+  placeholder: Enter keywords to search
