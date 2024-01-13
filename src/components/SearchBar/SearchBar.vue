@@ -1,6 +1,6 @@
 <!-- TODO: refactor all that shit -->
 <script setup lang="ts">
-import { onClickOutside, useFocus, useWindowFocus, watchThrottled } from '@vueuse/core'
+import { useWindowFocus, watchThrottled } from '@vueuse/core'
 import type { HistoryItem, SuggestionItem, SuggestionResponse } from './searchHistoryProvider'
 import {
   addSearchHistory,
@@ -16,7 +16,7 @@ defineProps<{
 }>()
 
 const inputRef = ref<HTMLInputElement | null>(null)
-const { focused: isFocus } = useFocus(inputRef)
+const isFocus = ref(false)
 const isWindowFocus = useWindowFocus()
 const keyword = ref<string>('')
 const suggestions = reactive<SuggestionItem[]>([])
@@ -25,15 +25,16 @@ const searchHistory = shallowRef<HistoryItem[]>([])
 const historyItemRef = ref<HTMLElement[]>([])
 const suggestionItemRef = ref<HTMLElement[]>([])
 
-watch([isFocus, isWindowFocus], async ([focus, windowFocus]) => {
+watch(isFocus, async (focus) => {
   // 延后加载搜索历史
-  if (focus && windowFocus)
+  if (focus && searchHistory.value.length === 0)
     searchHistory.value = await getSearchHistory()
-  if (!windowFocus) {
-    selectedIndex.value = -1
-    inputRef.value?.blur()
-  }
-}, { flush: 'sync' })
+})
+
+watch(isWindowFocus, (windowFocus) => {
+  if (!windowFocus)
+    isFocus.value = false
+}, { flush: 'post' })
 
 watchThrottled(keyword, (keyword) => {
   selectedIndex.value = -1
@@ -145,17 +146,23 @@ async function handleClearSearchHistory() {
 </script>
 
 <template>
-  <div id="search-wrap" w="full" max-w="550px" m="x-8" pos="relative">
+  <div
+    id="search-wrap" w="full" max-w="550px" m="x-8"
+    pos="relative"
+  >
     <div
       v-if="!darkenOnFocus && isFocus"
       pos="fixed top-0 left-0"
       w="full"
       h="full"
       content="~"
+      z="2"
+      @click="isFocus = false"
     />
     <Transition name="mask">
       <div
-        v-if="darkenOnFocus && isFocus" pos="fixed top-0 left-0" w-full h-full bg="black opacity-60"
+        v-if="darkenOnFocus && isFocus"
+        pos="fixed top-0 left-0" w-full h-full bg="black opacity-60"
       />
     </Transition>
 
@@ -166,7 +173,11 @@ async function handleClearSearchHistory() {
       :style="{ backdropFilter: isFocus ? 'blur(15px)' : 'blur(0)' }"
     />
 
-    <div class="search-bar group" :class="isFocus ? 'focus' : ''" flex="~" items-center pos="relative">
+    <div
+      class="search-bar group" :class="isFocus ? 'focus' : ''" flex="~" items-center
+      pos="relative"
+      z="3"
+    >
       <Transition name="focus-character">
         <img v-show="focusedCharacter && isFocus" :src="focusedCharacter" width="100" object-contain pos="absolute right-0 bottom-40px">
       </Transition>
@@ -183,6 +194,7 @@ async function handleClearSearchHistory() {
         type="text"
         autocomplete="off"
         :placeholder="$t('search_bar.placeholder')"
+        @focus="isFocus = true"
         @keyup.up="handleKeyUp"
         @keyup.down="handleKeyDown"
         @keyup.enter="navigateToSearchResultPage(keyword)"
@@ -206,11 +218,11 @@ async function handleClearSearchHistory() {
 
     <Transition name="result-list">
       <div
-        v-if="isFocus"
-        class="search-suggestion search-history min-h-60px"
+        v-if="isFocus && (suggestions.length !== 0 || searchHistory.length !== 0)"
+        class="search-suggestion search-history min-h-60px z-3"
       >
         <div
-          v-show="keyword.length === 0 && searchHistory.length !== 0"
+          v-show="keyword.length === 0"
           class="history-list flex flex-col gap-y-2"
         >
           <div class="title p-2 pb-0 flex justify-between">
