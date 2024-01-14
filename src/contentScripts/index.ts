@@ -32,6 +32,8 @@ function isSupportedPages() {
     || /https?:\/\/www.bilibili.com\/index.html$/.test(currentUrl)
     || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(currentUrl)
     || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(currentUrl)
+    // fix #166 https://github.com/hakadao/BewlyBewly/issues/166
+    || /https?:\/\/www.bilibili.com\/\?bvid=.*$/.test(currentUrl)
 
     // video page
     || /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(currentUrl)
@@ -57,8 +59,11 @@ function isSupportedPages() {
     || /https?:\/\/www.bilibili.com\/v\/.*/.test(currentUrl)
     // anime page & chinese anime page
     || /https?:\/\/www.bilibili.com\/(anime|guochuang).*/.test(currentUrl)
-    // tv shows, movie, variety shows, mooc page
-    || /https?:\/\/(www.)?bilibili.com\/(tv|movie|variety|mooc).*/.test(currentUrl))
+    // channel page e.g. tv shows, movie, variety shows, mooc page
+    || /https?:\/\/(www.)?bilibili.com\/(tv|movie|variety|mooc|documentary).*/.test(currentUrl)
+    // article page
+    || /https?:\/\/(www.)?bilibili.com\/(read).*/.test(currentUrl)
+  )
     return true
   else
     return false

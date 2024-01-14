@@ -1,4 +1,4 @@
-<!-- TODO: refactor all that shit -->
+<!-- TODO: refactor all that code -->
 <script setup lang="ts">
 import type { HistoryItem, SuggestionItem, SuggestionResponse } from './searchHistoryProvider'
 import {
@@ -175,9 +175,9 @@ async function handleClearSearchHistory() {
         type="text"
         @focus="isFocus = true"
         @input="handleInput"
-        @keyup.enter="navigateToSearchResultPage(keyword)"
-        @keyup.up.stop="handleKeyUp"
-        @keyup.down.stop="handleKeyDown"
+        @keyup.enter.stop.passive="navigateToSearchResultPage(keyword)"
+        @keyup.up.stop.passive="handleKeyUp"
+        @keyup.down.stop.passive="handleKeyDown"
         @keydown.stop="() => {}"
       >
       <button
