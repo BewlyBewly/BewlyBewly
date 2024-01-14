@@ -3,11 +3,60 @@
     line-height: unset;
   }
 
+  body {
+    background-color: unset;
+  }
+
   // #region theme color adaption part
   // Increase the priority of the style inside by writing a non-existent selector in :not()
   :not(fdjslfds) {
-    .page-content .right-side .rank-module .rank-list .item a:hover {
+    .page-content .right-side .rank-module .rank-list .item a:hover,
+    .page-content
+      .left-side
+      .article-list
+      .article-list-holder
+      .article-item:hover
+      .item-holder
+      .article-title,
+    .page-content .right-side .rank-module .rank-tabs-bar .rank-tabs-list li.on,
+    .page-content .right-side .up-list .up-item .info-holder .head .follow,
+    .page-content
+      .right-side
+      .up-list
+      .up-item
+      .info-holder
+      .head
+      .nick-name:hover,
+    .page-content
+      .right-side
+      .up-list
+      .up-item
+      .info-holder
+      .dynamic
+      .arc-title:hover,
+    .categories-bar .tag-item.on,
+    .nav-tab-bar .tab-item.on,
+    .nav-tab-bar .tab-item.on a,
+    .page-content
+      .left-side
+      .partitio-name
+      .filter
+      .filter-btn-lst
+      .filter-btn:hover,
+    .page-content .right-side .rank-module .complete-rank:hover,
+    .article-detail .topic-info,
+    .right-side-bar .side-toolbar .toolbar-item:hover .iconfont,
+    .right-side-bar .side-toolbar .toolbar-item:hover > .toolbar-item__num,
+    .right-side-bar .catalog:hover .catalog-text,
+    .right-side-bar .catalog:hover .icon-catalog,
+    .right-side-bar .catalog-panel .catalog-item:hover,
+    .right-side-bar .catalog-panel .catalog-item--on .icon-bilibili-tv,
+    .nav-tab-bar .tab-item:hover {
       color: var(--bew-theme-color);
+    }
+
+    .right-side-bar .catalog-panel .catalog-item--on {
+      color: var(--bew-theme-color) !important;
     }
 
     .page-content
@@ -15,8 +64,40 @@
       .rank-module
       .rank-list
       .item:nth-child(-n + 3)
-      .rank-index {
+      .rank-index,
+    .article-detail .unfollow,
+    .modal-box-holder .modal-box .modal-footer .modal-btn-primary {
       background-color: var(--bew-theme-color);
+    }
+
+    .page-content .right-side .rank-module .rank-tabs-bar .rank-tabs-list li.on,
+    .page-content .right-side .up-list .up-item .info-holder .head .follow,
+    .categories-bar .tag-item.on,
+    .modal-box-holder .modal-box .modal-footer .modal-btn-primary {
+      border-color: var(--bew-theme-color);
+    }
+
+    .nav-tab-bar .logo,
+    .article-detail .topic-info:before {
+      filter: var(--bew-filter-icon-glow);
+    }
+
+    .nav-tab-bar .tab-item.on {
+      // width: 28px;
+      height: 28px;
+      overflow: hidden;
+
+      &::before {
+        transform: translateY(-28px);
+        filter: drop-shadow(0 28px 0 var(--bew-theme-color));
+      }
+    }
+
+    .page-content .left-side .article-list .tips-holder .no-more {
+      position: relative;
+      overflow: hidden;
+      transform: translateX(-450px);
+      filter: drop-shadow(450px 0 0 var(--bew-theme-color));
     }
   }
   // #endregion
@@ -45,7 +126,19 @@
     .right-side-bar .catalog-panel__title,
     .right-side-bar .catalog-panel .catalog-item,
     .fixed-top-header .inner > p,
-    .fixed-top-header .inner .up-info {
+    .fixed-top-header .inner .up-info,
+    .page-content
+      .right-side
+      .search-module
+      .search-block
+      .search-word-panel
+      .history-item
+      a,
+    .categories-bar .tag-item,
+    .page-content .right-side .rank-module .complete-rank,
+    .article-detail .bangumi-rate-panel .info .title,
+    .page-content .right-side .up-list .fresh-btn,
+    .ql-container {
       color: var(--bew-text-1);
     }
 
@@ -66,7 +159,13 @@
     .right-side-bar .side-toolbar .toolbar-item .iconfont,
     .right-side-bar .side-toolbar .toolbar-item,
     .right-side-bar .to-top .iconfont,
-    .right-side-bar .catalog-panel__info {
+    .right-side-bar .catalog-panel__info,
+    .page-content .right-side .search-module .search-block .search-word-panel,
+    .article-breadcrumb .breadcrumb-title,
+    .article-breadcrumb .breadcrumb-name,
+    .article-breadcrumb .slash,
+    .article-detail .bangumi-rate-panel .info .desc,
+    .modal-box-holder .modal-box .modal-footer .modal-btn-default {
       color: var(--bew-text-2);
     }
 
@@ -84,38 +183,87 @@
       .up-item
       .info-holder
       .dynamic
-      .arc-title {
+      .arc-title,
+    .page-content
+      .left-side
+      .article-list
+      .article-list-holder
+      .article-item
+      .item-holder
+      .article-title-holder
+      .list-mark {
       color: var(--bew-text-3);
     }
 
     .page-content .left-side .article-list .article-list-holder .article-item,
     .page-content .right-side .rank-module .rank-list .item,
     .page-content .right-side .up-list,
-    .article-up-info {
+    .article-up-info,
+    .page-content
+      .right-side
+      .up-list
+      .up-item
+      .info-holder
+      .head
+      .follow.followed,
+    .modal-box-holder .modal-box .modal-footer .modal-btn-default,
+    .ql-container {
       background-color: transparent;
     }
 
-    .article-container {
-      background-color: var(--bew-content-1);
+    .article-container,
+    .page-content .right-side .rank-module .complete-rank,
+    .comment-wrapper .comment-m {
+      background-color: var(--bew-content-solid-1);
+    }
+
+    .comment-wrapper .comment-m {
+      --bew-bg: var(--bew-content-solid-1);
     }
 
     .right-side-bar .to-top,
     .right-side-bar .side-toolbar,
     .right-side-bar .catalog,
     .right-side-bar .catalog:after,
-    .right-side-bar .catalog-panel {
+    .right-side-bar .catalog-panel,
+    .page-content .right-side .search-module .search-block .search-word-panel,
+    .page-content
+      .right-side
+      .search-module
+      .search-block
+      .search-word-panel
+      .panel-title
+      p
+      span,
+    .page-content .left-side .partitio-name .filter .filter-btn-lst,
+    .to-top {
       background-color: var(--bew-elevated-solid-1);
     }
 
-    .fixed-top-header {
+    .fixed-top-header,
+    .modal-box-holder .modal-box {
       background-color: var(--bew-elevated-solid-2);
     }
 
-    .page-content .right-side .rank-module .rank-list .item .rank-index {
+    .page-content .right-side .rank-module .rank-list .item .rank-index,
+    .article-read-info .spoiler,
+    .page-content .right-side .up-list .fresh-btn {
       background-color: var(--bew-fill-1);
     }
 
-    .right-side-bar .catalog-panel .catalog-item:hover {
+    .right-side-bar .catalog-panel .catalog-item:hover,
+    .page-content
+      .right-side
+      .search-module
+      .search-block
+      .search-word-panel
+      .history-item:hover,
+    .page-content
+      .right-side
+      .search-module
+      .search-block
+      .search-word-panel
+      .suggest-item:hover {
       background-color: var(--bew-fill-2);
     }
 
@@ -123,8 +271,42 @@
     .page-content .right-side .up-list .title,
     .page-content .right-side .rank-module .rank-tabs-bar,
     .page-content .right-side .more .top-bar,
-    .article-container__content {
+    .article-container__content,
+    .page-content
+      .left-side
+      .article-list
+      .article-list-holder
+      .article-item
+      .item-holder
+      .article-title-holder
+      .list-mark,
+    .page-content .right-side .search-module .search-block,
+    .page-content .right-side .search-module .search-block .search-word-panel,
+    .categories-bar,
+    .modal-box-holder .modal-box .modal-head .modal-title,
+    .modal-box-holder .modal-box .modal-footer .modal-btn-default,
+    .modal-box-holder .modal-box .modal-footer .modal-btn-primary,
+    .page-content .right-side .up-list .fresh-btn,
+    .page-content
+      .right-side
+      .search-module
+      .search-block
+      .search-word-panel
+      .panel-title
+      .split-line {
       border-color: var(--bew-border-color);
+    }
+
+    .to-top {
+      border-color: var(--bew-elevated-solid-1);
+    }
+
+    .nav-tab-bar .tab-item:before {
+      filter: invert(1) hue-rotate(180deg);
+    }
+
+    .page-content .right-side .up-list .fresh-btn:before {
+      filter: brightness(2) contrast(0);
     }
   }
   // #endregion
