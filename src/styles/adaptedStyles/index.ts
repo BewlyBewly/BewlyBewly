@@ -6,22 +6,6 @@ import './btn.scss'
 import './userCard.scss'
 import './videoPlayer.scss'
 
-// import './homePage.scss'
-
-// import './searchPage.scss'
-// import './videoPage.scss'
-// import './animePlayback&MoviePage.scss'
-// import './momentsPage.scss'
-// import './historyPage.scss'
-// import './userSpacePage.scss'
-
-// import './notificationsPage.scss'
-
-// import './animePage.scss'
-// import './channelPage.scss'
-
-// import './articlesPage.scss'
-
 async function setupStyles() {
   const currentUrl = document.URL
 
