@@ -12,7 +12,7 @@ import WatchLater from './WatchLater/WatchLater.vue'
 import Favorites from './Favorites/Favorites.vue'
 import { accessKey, settings } from '~/logic'
 import { AppPage, LanguageType } from '~/enums/appEnums'
-import { getUserID, hexToRGBA, isHomePage, openLinkToNewTab, smoothScrollToTop } from '~/utils/main'
+import { getUserID, hexToRGBA, isHomePage, smoothScrollToTop } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
 const activatedPage = ref<AppPage>(settings.value.dockItemVisibilityList.find(e => e.visible === true)?.page ?? AppPage.Home)
