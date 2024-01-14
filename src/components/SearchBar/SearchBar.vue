@@ -1,7 +1,9 @@
+<!-- TODO: refactor all that code -->
 <script setup lang="ts">
-import type { HistoryItem, SuggestionItem } from './searchHistoryProvider'
+import type { HistoryItem, SuggestionItem, SuggestionResponse } from './searchHistoryProvider'
 import {
   addSearchHistory,
+  clearAllSearchHistory,
   getSearchHistory,
   removeSearchHistory,
 } from './searchHistoryProvider'
@@ -16,12 +18,14 @@ const isFocus = ref<boolean>(false)
 const keyword = ref<string>('')
 const suggestions = reactive<SuggestionItem[]>([])
 const selectedIndex = ref<number>(-1)
-const searchHistory = reactive<HistoryItem[]>([])
+const searchHistory = shallowRef<HistoryItem[]>([])
 const historyItemRef = ref<HTMLElement[]>([])
 const suggestionItemRef = ref<HTMLElement[]>([])
 
-onMounted(() => {
-  Object.assign(searchHistory, getSearchHistory())
+watch(isFocus, async (focus) => {
+  // 延后加载搜索历史
+  if (focus)
+    searchHistory.value = await getSearchHistory()
 })
 
 function handleInput() {
@@ -32,8 +36,10 @@ function handleInput() {
         contentScriptQuery: 'getSearchSuggestion',
         term: keyword.value,
       })
-      .then((res) => {
-        Object.assign(suggestions, res)
+      .then((res: SuggestionResponse) => {
+        if (!res || (res && res.code !== 0))
+          return
+        Object.assign(suggestions, res.result.tag)
       })
   }
   else {
@@ -41,22 +47,19 @@ function handleInput() {
   }
 }
 
-function navigateToSearchResultPage(keyword: string) {
+async function navigateToSearchResultPage(keyword: string) {
   if (keyword) {
     window.open(`//search.bilibili.com/all?keyword=${keyword}`, '_blank')
     const searchItem = {
       value: keyword,
       timestamp: Number(new Date()),
     }
-    addSearchHistory(searchItem)
-    Object.assign(searchHistory, getSearchHistory())
+    searchHistory.value = await addSearchHistory(searchItem)
   }
 }
 
-function handleDelete(value: string) {
-  removeSearchHistory(value)
-  searchHistory.length = 0
-  Object.assign(searchHistory, getSearchHistory())
+async function handleDelete(value: string) {
+  searchHistory.value = await removeSearchHistory(value)
 }
 
 function handleKeyUp() {
@@ -69,8 +72,8 @@ function handleKeyUp() {
 
   if (isFocus.value && suggestions.length !== 0)
     keyword.value = suggestions[selectedIndex.value].value
-  else if (isFocus.value && searchHistory.length !== 0)
-    keyword.value = searchHistory[selectedIndex.value].value
+  else if (isFocus.value && searchHistory.value.length !== 0)
+    keyword.value = searchHistory.value[selectedIndex.value].value
 
   suggestionItemRef.value.forEach((item, index) => {
     if (index === selectedIndex.value)
@@ -89,28 +92,28 @@ function handleKeyDown() {
   let isShowSuggestion = false
   if (isFocus.value && suggestions.length !== 0)
     isShowSuggestion = true
-  else if (isFocus.value && !keyword.value && searchHistory.length !== 0)
+  else if (isFocus.value && !keyword.value && searchHistory.value.length !== 0)
     isShowSuggestion = false
 
   if (
     isShowSuggestion
-        && selectedIndex.value >= suggestions.length - 1
+    && selectedIndex.value >= suggestions.length - 1
   ) {
     selectedIndex.value = suggestions.length - 1
     return
   }
   if (
     !isShowSuggestion
-        && selectedIndex.value >= searchHistory.length - 1
+    && selectedIndex.value >= searchHistory.value.length - 1
   ) {
-    selectedIndex.value = searchHistory.length - 1
+    selectedIndex.value = searchHistory.value.length - 1
     return
   }
 
   selectedIndex.value++
   keyword.value = isShowSuggestion
     ? suggestions[selectedIndex.value].value
-    : searchHistory[selectedIndex.value].value
+    : searchHistory.value[selectedIndex.value].value
 
   suggestionItemRef.value.forEach((item, index) => {
     if (index === selectedIndex.value)
@@ -123,6 +126,11 @@ function handleKeyDown() {
       item.classList.add('active')
     else item.classList.remove('active')
   })
+}
+
+async function handleClearSearchHistory() {
+  await clearAllSearchHistory()
+  searchHistory.value = []
 }
 </script>
 
@@ -166,10 +174,10 @@ function handleKeyDown() {
         transition="all duration-300"
         type="text"
         @focus="isFocus = true"
-        @input="handleInput()"
-        @keyup.enter="navigateToSearchResultPage(keyword)"
-        @keyup.up.stop="handleKeyUp"
-        @keyup.down.stop="handleKeyDown"
+        @input="handleInput"
+        @keyup.enter.stop.passive="navigateToSearchResultPage(keyword)"
+        @keyup.up.stop.passive="handleKeyUp"
+        @keyup.down.stop.passive="handleKeyDown"
         @keydown.stop="() => {}"
       >
       <button
@@ -182,7 +190,7 @@ function handleKeyDown() {
         pos="absolute right-2"
         bg="hover:$bew-fill-2"
         filter="group-focus-within:~"
-        style="--un-drop-shadow: drop-shadow(0 0 6px var(--bew-theme-color)) "
+        style="--un-drop-shadow: drop-shadow(0 0 6px var(--bew-theme-color))"
         @click="navigateToSearchResultPage(keyword)"
       >
         <tabler:search block align-middle />
@@ -194,40 +202,43 @@ function handleKeyDown() {
         v-if="
           isFocus
             && searchHistory.length !== 0
-            && suggestions.length === 0
+            && keyword.length === 0
         "
         id="search-history"
       >
-        <div
-          v-for="item in searchHistory"
-          :key="item.timestamp"
-          ref="historyItemRef"
-          class="history-item"
-          flex
-          justify-between
-          items-center
-          @click="navigateToSearchResultPage(item.value)"
-        >
-          {{ item.value }}
-          <button
-            class="delete"
-            rounded-full
-            duration-300
-            pointer-events-auto
-            cursor-pointer
-            text="base $bew-text-2"
-            leading-0 p-0
-            @click.stop="handleDelete(item.value)"
-          >
-            <ic-baseline-clear />
-          </button>
+        <div class="history-list flex flex-col gap-y-2">
+          <div class="title p-2 pb-0 flex justify-between">
+            <span>{{ $t('search_bar.history_title') }}</span>
+            <button class="rounded-2 duration-300 pointer-events-auto cursor-pointer" hover="text-$bew-theme-color" text="base $bew-text-2" @click="handleClearSearchHistory">
+              {{ $t('search_bar.clear_history') }}
+            </button>
+          </div>
+
+          <div class="history-item-container p2 flex flex-wrap gap-x-3 gap-y-3">
+            <div
+              v-for="item in searchHistory" :key="item.timestamp" ref="historyItemRef"
+              class="history-item group"
+              flex justify-between items-center
+              @click="navigateToSearchResultPage(item.value)"
+            >
+              <span> {{ item.value }}</span>
+              <button
+                rounded-full duration-300 pointer-events-auto cursor-pointer p-1
+                text="xs $bew-text-2 hover:white" leading-0 bg="$bew-fill-2 hover:$bew-theme-color"
+                pos="absolute top-0 right-0" scale-80 opacity-0 group-hover:opacity-100
+                @click.stop="handleDelete(item.value)"
+              >
+                <ic-baseline-clear />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </Transition>
 
-    <Transition>
+    <Transition name="result-list">
       <div
-        v-if="isFocus && suggestions.length !== 0"
+        v-if="isFocus && suggestions.length !== 0 && keyword.length > 0"
         id="search-suggestion"
       >
         <div
@@ -237,7 +248,7 @@ function handleKeyDown() {
           class="suggestion-item"
           @click="navigateToSearchResultPage(item.value)"
         >
-          {{ item.value }}
+          <span v-html="item.name" />
         </div>
       </div>
     </Transition>
@@ -245,6 +256,10 @@ function handleKeyDown() {
 </template>
 
 <style lang="scss" scoped>
+::v-deep(.suggest_high_light) {
+  --at-apply: text-$bew-theme-color not-italic;
+}
+
 .result-list-enter-active,
 .result-list-leave-active {
   --at-apply: transition-all duration-300 ease-in-out;
@@ -320,17 +335,32 @@ function handleKeyDown() {
 
   @mixin search-content-item {
     --at-apply: px-4 py-2 w-full rounded-$bew-radius duration-300 cursor-pointer
-      not-first:mt-1
+      not-first:mt-1 tracking-wider
       hover:bg-$bew-fill-2;
-
   }
 
-  #search-history,
+  #search-history {
+    @include search-content;
+    --at-apply: bg-$bew-elevated-1;
+
+    .history-list {
+      .title {
+        --at-apply: text-lg font-500;
+      }
+
+      .history-item-container {
+        .history-item {
+          --at-apply: relative cursor-pointer duration-300;
+          --at-apply: py-2 px-6 bg-$bew-fill-1 hover:bg-$bew-theme-color-20 hover:text-$bew-theme-color rounded-$bew-radius-half;
+        }
+      }
+    }
+  }
+
   #search-suggestion {
     @include search-content;
     --at-apply: bg-$bew-elevated-1;
 
-    .history-item,
     .suggestion-item {
       @include search-content-item;
 
@@ -339,6 +369,5 @@ function handleKeyDown() {
       }
     }
   }
-
 }
 </style>

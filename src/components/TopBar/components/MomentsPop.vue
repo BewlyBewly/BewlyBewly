@@ -62,7 +62,7 @@ onMounted(() => {
     momentsWrap.value.addEventListener('scroll', () => {
       if (
         momentsWrap.value.clientHeight + momentsWrap.value.scrollTop
-          >= momentsWrap.value.scrollHeight - 20
+        >= momentsWrap.value.scrollHeight - 20
         && moments.length > 0
         && !isLoading.value
       ) {

@@ -45,7 +45,7 @@ const dockPositions = computed(() => {
   ]
 })
 
-const pageOptions = computed((): { label: string;icon: string; value: string }[] => {
+const pageOptions = computed((): { label: string, icon: string, value: string }[] => {
   return mainStore.dockItems.map((e: any) => {
     return {
       label: t(e.i18nKey),
@@ -90,6 +90,9 @@ function resetDockContent() {
       <SettingsItem :title="$t('settings.enable_video_ctrl_bar_on_video_card')">
         <Radio v-model="settings.enableVideoCtrlBarOnVideoCard" />
       </SettingsItem>
+      <SettingsItem :title="$t('settings.hover_video_card_delayed')">
+        <Radio v-model="settings.hoverVideoCardDelayed" />
+      </SettingsItem>
     </SettingsItemGroup>
 
     <SettingsItemGroup :title="$t('settings.group_topbar')">
@@ -127,7 +130,7 @@ function resetDockContent() {
         <draggable
           v-model="settings.dockItemVisibilityList"
           item-key="page"
-          :component-data="{ style: 'display: flex; gap: 0.5rem;' }"
+          :component-data="{ style: 'display: flex; gap: 0.5rem; flex-wrap: wrap;' }"
         >
           <template #item="{ element }">
             <div

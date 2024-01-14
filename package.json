@@ -1,33 +1,36 @@
 {
   "name": "bewly-bewly",
   "displayName": "BewlyBewly",
-  "version": "0.13.3",
+  "version": "0.14.0",
   "private": true,
-  "packageManager": "pnpm@7.8.0",
+  "packageManager": "pnpm@8.14.1",
   "description": "Just make a few small changes to your Bilibili homepage.",
   "homepage": "https://github.com/hakadao/BewlyBewly",
   "scripts": {
     "dev": "npm run clear && cross-env NODE_ENV=development run-p dev:*",
-    "dev-firefox": "npm run clear && cross-env NODE_ENV=development FIREFOX=true run-p dev:*",
+    "dev-firefox": "npm run clear-firefox && cross-env NODE_ENV=development FIREFOX=true run-p dev:*",
     "dev:prepare": "esno scripts/prepare.ts",
     "dev:web": "vite",
     "dev:js": "npm run build:js -- --mode development",
     "dev:bg": "tsup --watch ./src",
     "build": "cross-env NODE_ENV=production run-s clear build:web build:prepare build:js build:bg",
-    "build-firefox": "cross-env NODE_ENV=production FIREFOX=true run-s clear build:web build:prepare build:js build:bg",
+    "build-firefox": "cross-env NODE_ENV=production FIREFOX=true run-s clear-firefox build:web build:prepare build:js build:bg",
     "build:prepare": "esno scripts/prepare.ts",
     "build:web": "vite build",
     "build:js": "vite build --config vite.config.content.ts",
     "build:bg": "tsup",
     "pack": "cross-env NODE_ENV=production run-p pack:*",
     "pack:zip": "rimraf extension.zip && jszip-cli add extension/* -o ./extension.zip",
+    "pack:zip-firefox": "rimraf extension-firefox.zip && jszip-cli add extension-firefox/* -o ./extension-firefox.zip",
     "pack:crx": "crx pack extension -o ./extension.crx",
-    "pack:xpi": "cross-env WEB_EXT_ARTIFACTS_DIR=./ FIREFOX=true web-ext build --source-dir ./extension --filename extension.xpi --overwrite-dest",
+    "pack:xpi": "cross-env WEB_EXT_ARTIFACTS_DIR=./ FIREFOX=true web-ext build --source-dir ./extension-firefox --filename extension.xpi --overwrite-dest",
     "start:chromium": "web-ext run --source-dir ./extension --target=chromium",
-    "start:firefox": "web-ext run --source-dir ./extension --target=firefox-desktop",
+    "start:firefox": "web-ext run --source-dir ./extension-firefox --target=firefox-desktop",
     "clear": "rimraf extension extension.*",
+    "clear-firefox": "rimraf extension-firefox extension-firefox.*",
     "lint": "eslint .",
-    "test": "vitest test"
+    "test": "vitest test",
+    "postinstall": "npx simple-git-hooks"
   },
   "dependencies": {
     "@types/md5": "^2.3.5",
@@ -43,7 +46,7 @@
     "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.39.8",
+    "@antfu/eslint-config": "^2.6.1",
     "@ffflorian/jszip-cli": "^3.5.1",
     "@iconify/json": "^2.2.143",
     "@iconify/vue": "^4.1.1",
@@ -64,13 +67,15 @@
     "cross-env": "^7.0.3",
     "crx": "^5.0.1",
     "eslint": "^8.54.0",
-    "esno": "^0.16.3",
+    "esno": "^4.0.0",
     "fs-extra": "^10.1.0",
     "jsdom": "^20.0.3",
     "kolorist": "^1.8.0",
+    "lint-staged": "^15.2.0",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
     "sass": "^1.69.5",
+    "simple-git-hooks": "^2.9.0",
     "terser": "^5.24.0",
     "tsup": "^6.7.0",
     "typescript": "^4.9.5",
@@ -85,5 +90,11 @@
     "web-ext": "^7.8.0",
     "webext-bridge": "^5.0.5",
     "webextension-polyfill": "^0.10.0"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
   }
 }

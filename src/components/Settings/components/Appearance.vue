@@ -28,7 +28,7 @@ const themeColorOptions = computed<Array<string>>(() => {
 // const bilibiliEvolvedThemeColor = computed(() => {
 //   return getComputedStyle(document.querySelector('html') as HTMLElement).getPropertyValue('--theme-color').trim() ?? '#00a1d6'
 // })
-const wallpapers = computed<Array<{ name: string; url: string; thumbnail: string }>>(() => {
+const wallpapers = computed<Array<{ name: string, url: string, thumbnail: string }>>(() => {
   return [
     {
       name: 'Unsplash Random Nature Image',
@@ -52,7 +52,7 @@ const wallpapers = computed<Array<{ name: string; url: string; thumbnail: string
     },
   ]
 })
-const themeOptions = computed<Array<{ value: string; label: string }>>(() => {
+const themeOptions = computed<Array<{ value: string, label: string }>>(() => {
   return [
     {
       label: t('settings.theme_opt.light'),

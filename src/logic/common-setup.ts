@@ -2,14 +2,13 @@ import type { App } from 'vue'
 import { getCurrentContext } from 'webext-bridge'
 import Toast, { POSITION } from 'vue-toastification'
 import { createPinia } from 'pinia'
-import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue'
 import { i18n } from '~/utils/i18n'
 import 'vue-toastification/dist/index.css'
 import 'overlayscrollbars/overlayscrollbars.css'
 
 const pinia = createPinia()
 
-export function setupApp(app: App) {
+export async function setupApp(app: App) {
   const context = getCurrentContext()
 
   // Inject a globally available `$app` object in template
@@ -30,5 +29,6 @@ export function setupApp(app: App) {
       position: POSITION.TOP_CENTER,
     })
   app.use(pinia)
+  const { OverlayScrollbarsComponent } = await import('overlayscrollbars-vue')
   app.component('OverlayScrollbarsComponent', OverlayScrollbarsComponent)
 }

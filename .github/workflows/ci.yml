@@ -32,26 +32,17 @@ jobs:
       - uses: pnpm/action-setup@v2
       - uses: actions/setup-node@v3
         with:
-          node-version: 18.17.0
+          node-version: 18.x
           cache: pnpm
 
       - name: Install
         run: pnpm install
 
-      - name: Build
-        run: pnpm build
-
       - name: Build Extension
-        run: pnpm pack:crx && pnpm pack:zip
+        run: pnpm build
 
       - name: Upload Zip
         uses: actions/upload-artifact@v3
         with:
           name: BewlyBewly Zip
-          path: extension.zip
-
-      - name: Upload Crx
-        uses: actions/upload-artifact@v3
-        with:
-          name: BewlyBewly Crx
-          path: extension.crx
+          path: extension
