@@ -282,6 +282,12 @@
       background-color: var(--bew-fill-1) !important;
       color: var(--bew-text-2) !important;
     }
+
+    .bb-comment .reply-notice .notice-item, .comment-bilibili-fold .reply-notice .notice-item{
+      background-color: var(--Ye1);
+      border-color: var(--Ye1);
+      color: var(--Or7);
+    }
   }
   // #endregion
 }

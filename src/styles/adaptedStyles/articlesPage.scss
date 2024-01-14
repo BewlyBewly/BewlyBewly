@@ -51,7 +51,10 @@
     .right-side-bar .catalog:hover .icon-catalog,
     .right-side-bar .catalog-panel .catalog-item:hover,
     .right-side-bar .catalog-panel .catalog-item--on .icon-bilibili-tv,
-    .nav-tab-bar .tab-item:hover {
+    .nav-tab-bar .tab-item:hover,
+    .video-link__to,
+    .interaction-info .hover-item:hover,
+    .interaction-info .hover-item:hover i {
       color: var(--bew-theme-color);
     }
 
@@ -66,7 +69,8 @@
       .item:nth-child(-n + 3)
       .rank-index,
     .article-detail .unfollow,
-    .modal-box-holder .modal-box .modal-footer .modal-btn-primary {
+    .modal-box-holder .modal-box .modal-footer .modal-btn-primary,
+    .bili-dialog-bomb .appeal-box .submit .confirm {
       background-color: var(--bew-theme-color);
     }
 
@@ -93,11 +97,14 @@
       }
     }
 
-    .page-content .left-side .article-list .tips-holder .no-more {
+    .page-content .left-side .article-list .tips-holder {
       position: relative;
       overflow: hidden;
-      transform: translateX(-450px);
-      filter: drop-shadow(450px 0 0 var(--bew-theme-color));
+    }
+
+    .page-content .left-side .article-list .tips-holder .no-more {
+      transform: translateX(-680px);
+      filter: drop-shadow(680px 0 0 var(--bew-theme-color));
     }
   }
   // #endregion
@@ -138,7 +145,11 @@
     .page-content .right-side .rank-module .complete-rank,
     .article-detail .bangumi-rate-panel .info .title,
     .page-content .right-side .up-list .fresh-btn,
-    .ql-container {
+    .ql-container,
+    .view-note .note-content .ql-container .ql-editor,
+    .bili-dialog-bomb .appeal-box .wrap .container .question,
+    .van-popover.van-followed,
+    .van-popover.van-followed .follow_dropdown li:hover {
       color: var(--bew-text-1);
     }
 
@@ -165,7 +176,8 @@
     .article-breadcrumb .breadcrumb-name,
     .article-breadcrumb .slash,
     .article-detail .bangumi-rate-panel .info .desc,
-    .modal-box-holder .modal-box .modal-footer .modal-btn-default {
+    .modal-box-holder .modal-box .modal-footer .modal-btn-default,
+    .bili-dialog-bomb .appeal-box .submit .cancel {
       color: var(--bew-text-2);
     }
 
@@ -191,7 +203,10 @@
       .article-item
       .item-holder
       .article-title-holder
-      .list-mark {
+      .list-mark,
+    .interaction-info .toolbar .share-box,
+    .interaction-info,
+    .followed {
       color: var(--bew-text-3);
     }
 
@@ -207,7 +222,11 @@
       .head
       .follow.followed,
     .modal-box-holder .modal-box .modal-footer .modal-btn-default,
-    .ql-container {
+    .ql-container,
+    .view-note .note-content .ql-container .ql-editor,
+    .bili-dialog-bomb .appeal-box .header,
+    .bili-dialog-bomb .appeal-box .submit,
+    .bili-dialog-bomb .appeal-box .submit .cancel {
       background-color: transparent;
     }
 
@@ -236,7 +255,8 @@
       p
       span,
     .page-content .left-side .partitio-name .filter .filter-btn-lst,
-    .to-top {
+    .to-top,
+    .bili-dialog-bomb .appeal-box {
       background-color: var(--bew-elevated-solid-1);
     }
 
@@ -263,7 +283,9 @@
       .search-module
       .search-block
       .search-word-panel
-      .suggest-item:hover {
+      .suggest-item:hover,
+    .followed,
+    .van-popover.van-followed .follow_dropdown li:hover {
       background-color: var(--bew-fill-2);
     }
 
@@ -293,7 +315,19 @@
       .search-block
       .search-word-panel
       .panel-title
-      .split-line {
+      .split-line,
+    .bili-dialog-bomb .appeal-box .header,
+    .bili-dialog-bomb
+      .appeal-box
+      .wrap
+      .container
+      .textarea
+      .textarea-wrap
+      textarea,
+    .bili-dialog-bomb .appeal-box .submit .cancel,
+    .bili-dialog-bomb .appeal-box .submit,
+    .van-popover.van-followed,
+    .followed {
       border-color: var(--bew-border-color);
     }
 
