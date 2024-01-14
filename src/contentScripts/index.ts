@@ -57,8 +57,11 @@ function isSupportedPages() {
     || /https?:\/\/www.bilibili.com\/v\/.*/.test(currentUrl)
     // anime page & chinese anime page
     || /https?:\/\/www.bilibili.com\/(anime|guochuang).*/.test(currentUrl)
-    // tv shows, movie, variety shows, mooc, article page
-    || /https?:\/\/(www.)?bilibili.com\/(tv|movie|variety|mooc|read).*/.test(currentUrl))
+    // channel page e.g. tv shows, movie, variety shows, mooc page
+    || /https?:\/\/(www.)?bilibili.com\/(tv|movie|variety|mooc|documentary).*/.test(currentUrl)
+    // article page
+    || /https?:\/\/(www.)?bilibili.com\/(read).*/.test(currentUrl)
+  )
     return true
   else
     return false
