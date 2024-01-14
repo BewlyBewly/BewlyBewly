@@ -32,6 +32,8 @@ function isSupportedPages() {
     || /https?:\/\/www.bilibili.com\/index.html$/.test(currentUrl)
     || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(currentUrl)
     || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(currentUrl)
+    // fix #166 https://github.com/hakadao/BewlyBewly/issues/166
+    || /https?:\/\/www.bilibili.com\/\?bvid=.*$/.test(currentUrl)
 
     // video page
     || /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(currentUrl)

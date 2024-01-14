@@ -12,7 +12,7 @@ import WatchLater from './WatchLater/WatchLater.vue'
 import Favorites from './Favorites/Favorites.vue'
 import { accessKey, settings } from '~/logic'
 import { AppPage, LanguageType } from '~/enums/appEnums'
-import { getUserID, hexToRGBA, isHomePage, smoothScrollToTop } from '~/utils/main'
+import { getUserID, hexToRGBA, isHomePage, openLinkToNewTab, smoothScrollToTop } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
 const activatedPage = ref<AppPage>(settings.value.dockItemVisibilityList.find(e => e.visible === true)?.page ?? AppPage.Home)
@@ -91,6 +91,8 @@ watch(() => settings.value.adaptToOtherPageStyles, () => {
 })
 
 onMounted(() => {
+  openVideoPageIfBvidExists()
+
   if (isHomePage()) {
     // Force overwrite Bilibili Evolved body tag & html tag background color
     document.body.style.setProperty('background-color', 'unset', 'important')
@@ -235,6 +237,20 @@ function handleOsScroll() {
 
   if (isHomePage())
     topBarRef.value?.handleScroll()
+}
+
+// fix #166 https://github.com/hakadao/BewlyBewly/issues/166
+function openVideoPageIfBvidExists() {
+  // Assume the URL is https://www.bilibili.com/?bvid=BV1be41127ft&spm_id_from=333.788.seo.out
+
+  // Get the current URL's query string
+  const queryString = window.location.search
+  // Create a URLSearchParams instance
+  const urlParams = new URLSearchParams(queryString)
+  const bvid = urlParams.get('bvid')
+
+  if (bvid)
+    window.open(`https://www.bilibili.com/video/${bvid}`, '_self')
 }
 
 provide('handleBackToTop', handleBackToTop)
