@@ -74,3 +74,21 @@ declare function cancelIdleCallback(handle: number): void;
     }
   }
 })()
+
+// TODO: handle error
+export class LazyValue<T> {
+  private _value: T | undefined
+  private _didRun = false
+
+  constructor(
+    private executor: () => T,
+  ) {}
+
+  get value(): T {
+    if (!this._didRun) {
+      this._value = this.executor()
+      this._didRun = true
+    }
+    return this._value!
+  }
+}

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import { isHomePage } from '~/utils/main'
 
 const { t } = useI18n()
 
@@ -62,6 +63,7 @@ const genres = [
       >
         <a
           :href="genre.href"
+          :target="isHomePage() ? '_blank' : '_self'"
           flex="~"
           items="center"
           w="170px"

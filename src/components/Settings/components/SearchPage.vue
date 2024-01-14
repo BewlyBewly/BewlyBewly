@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { settings } from '~/logic'
 
-const searchBarFocusCharacters = computed<{ name: string; url: string }[]>(() => {
+const searchBarFocusCharacters = computed<{ name: string, url: string }[]>(() => {
   return [
     { name: '22 娘', url: 'https://pic.imgdb.cn/item/64d4f8891ddac507cc772ce5.png' },
     { name: '33 娘', url: 'https://cdn.jsdelivr.net/gh/hakadao/bilibili-simple-home@master/img/searchBar_33_2.png' },
@@ -9,7 +9,7 @@ const searchBarFocusCharacters = computed<{ name: string; url: string }[]>(() =>
     { name: '33 娘', url: 'https://pic.imgdb.cn/item/64d4fd251ddac507cc8458fa.png' },
   ]
 })
-const wallpapers = computed<Array<{ name: string; url: string; thumbnail: string }>>(() => {
+const wallpapers = computed<Array<{ name: string, url: string, thumbnail: string }>>(() => {
   return [
     {
       name: 'Unsplash Random Nature Image',

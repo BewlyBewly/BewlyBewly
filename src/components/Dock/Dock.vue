@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { Icon } from '@iconify/vue'
+import type { Ref } from 'vue'
 import type { CurrentDockItem, HoveringDockItem } from './types'
 import type { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
@@ -11,8 +12,9 @@ defineProps<{ activatedPage: AppPage }>()
 
 const emit = defineEmits(['change-page', 'settings-visibility-change'])
 
-const mainStore = useMainStore()
+const mainAppRef = inject('mainAppRef') as Ref<HTMLDivElement>
 
+const mainStore = useMainStore()
 const { t } = useI18n()
 
 const hideDock = ref<boolean>(false)
@@ -59,7 +61,7 @@ onMounted(() => {
     hideDock.value = true
 
   if (settings.value.dockItemVisibilityList.length < currentDockItems.value.length || settings.value.dockItemVisibilityList.length > currentDockItems.value.length) {
-    const newDockItemVisibilityList = ref<{ page: AppPage; visible: boolean }[]>([])
+    const newDockItemVisibilityList = ref<{ page: AppPage, visible: boolean }[]>([])
     currentDockItems.value.forEach((item) => {
       newDockItemVisibilityList.value.push({ page: item.page, visible: true })
     })
@@ -84,11 +86,75 @@ onMounted(() => {
   }
 })
 
-function toggleDark() {
-  if (currentAppColorScheme.value === 'light')
-    settings.value.theme = 'dark'
-  else
-    settings.value.theme = 'light'
+function toggleDark(e: MouseEvent) {
+  const isAppearanceTransition = typeof document !== 'undefined'
+  // @ts-expect-error: Transition API
+    && document.startViewTransition
+    && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  if (!isAppearanceTransition) {
+    if (currentAppColorScheme.value === 'light')
+      settings.value.theme = 'dark'
+    else
+      settings.value.theme = 'light'
+  }
+  else {
+    const x = e.clientX
+    const y = e.clientY
+    const endRadius = Math.hypot(
+      Math.max(x, innerWidth - x),
+      Math.max(y, innerHeight - y),
+    )
+    // https://github.com/vueuse/vueuse/pull/3129
+    const style = document.createElement('style')
+    const styleString = `
+    *, *::before, *::after
+    {-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important}`
+    style.appendChild(document.createTextNode(styleString))
+    document.head.appendChild(style)
+
+    // Since the above normal dom style cannot be applied in shadow dom style
+    // We need to add this style again to the shadow dom
+    const shadowDomStyle = document.createElement('style')
+    const shadowDomStyleString = `
+    *, *::before, *::after
+    {-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important; will-change: background}`
+    shadowDomStyle.appendChild(document.createTextNode(shadowDomStyleString))
+    mainAppRef.value.appendChild(shadowDomStyle)
+
+    // @ts-expect-error: Transition API
+    const transition = document.startViewTransition(async () => {
+      if (currentAppColorScheme.value === 'light')
+        settings.value.theme = 'dark'
+      else
+        settings.value.theme = 'light'
+      await nextTick()
+    })
+
+    transition.ready.then(() => {
+      const clipPath = [
+      `circle(0px at ${x}px ${y}px)`,
+      `circle(${endRadius}px at ${x}px ${y}px)`,
+      ]
+      const animation = document.documentElement.animate(
+        {
+          clipPath: currentAppColorScheme.value === 'dark'
+            ? [...clipPath].reverse()
+            : clipPath,
+        },
+        {
+          duration: 300,
+          easing: 'ease-in-out',
+          pseudoElement: currentAppColorScheme.value === 'dark'
+            ? '::view-transition-old(root)'
+            : '::view-transition-new(root)',
+        },
+      )
+      animation.addEventListener('finish', () => {
+        document.head.removeChild(style!)
+        mainAppRef.value.removeChild(shadowDomStyle!)
+      }, { once: true })
+    })
+  }
 }
 
 function toggleDockHide(hide: boolean) {
@@ -150,7 +216,7 @@ function toggleDockHide(hide: boolean) {
       <Tooltip :content="currentAppColorScheme === 'dark' ? $t('dock.dark_mode') : $t('dock.light_mode')" :placement="tooltipPlacement">
         <button
           class="dock-item"
-          @click="toggleDark()"
+          @click="toggleDark"
           @mouseenter="hoveringDockItem.themeMode = true"
           @mouseleave="hoveringDockItem.themeMode = false"
         >

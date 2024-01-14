@@ -46,8 +46,8 @@ onMounted(async () => {
       // add the next page of data to the history list
       if (
         favoriteVideosWrap.value.clientHeight
-          + favoriteVideosWrap.value.scrollTop
-          >= favoriteVideosWrap.value.scrollHeight - 20
+        + favoriteVideosWrap.value.scrollTop
+        >= favoriteVideosWrap.value.scrollHeight - 20
         && favoriteResources.length > 0
         && !isLoading.value
       ) {

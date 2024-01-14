@@ -64,6 +64,7 @@ settings:
   enable_horizontal_scrolling: 使用橫向捲動
   enable_horizontal_scrolling_desc: 用咗之後，轆緊滑鼠就可以直接打橫掃水平捲軸列表
   enable_video_ctrl_bar_on_video_card: 喺影片卡片上顯示影片控制欄
+  hover_video_card_delayed: 滑鼠停留喺影片卡片嗰陣遲啲進行影片預覽
   auto_hide_topbar: 自動收埋頂欄
   dock_position: Dock 放位
   dock_position_desc: 放喺螢幕邊度
@@ -194,7 +195,7 @@ topbar:
   user_dropdown:
     money: 銀仔：
     b_coins: B銀：
-    following: 追蹤緊
+    following: 追緊
     followers: 擁躉
     posts: 動向
     accout_settings: 帳戶資料
@@ -292,3 +293,6 @@ watch_later:
   remove_watched_videos_confirm: |-
     係咪要剷走你睇過啲片呀？
     噉做冇得返轉頭噃，你確定要剷走你睇過啲片？
+search_bar:
+  history_title: 搜尋記錄
+  clear_history: 剷晒你啲搜尋記錄

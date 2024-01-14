@@ -79,6 +79,18 @@
     .bili-dyn-action.disabled {
       color: var(--bew-text-4);
     }
+
+    .bili-tabs__content .reaction-item {
+      box-shadow: inset 0 -0.5px 0 0 var(--bew-border-color);
+
+      .bili-button.primary.plain {
+        background-color: transparent;
+      }
+    }
+
+    .side-toolbar__btn.backtop span:before {
+      filter: invert(1);
+    }
   }
   // #endregion
 
