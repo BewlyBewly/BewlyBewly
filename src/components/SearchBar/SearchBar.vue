@@ -1,4 +1,4 @@
-<!-- TODO: refactor all that shit -->
+<!-- TODO: refactor all that code -->
 <script setup lang="ts">
 import type { HistoryItem, SuggestionItem, SuggestionResponse } from './searchHistoryProvider'
 import {
