@@ -136,7 +136,7 @@ onUnmounted(() => {
       </Transition>
 
       <header
-        pos="sticky top-80px" w-fit z-10 mb-9 duration-300
+        pos="sticky top-80px" w-fit z-9 mb-9 duration-300
         ease-in-out
         :class="{ hide: shouldMoveTabsUp }"
       >

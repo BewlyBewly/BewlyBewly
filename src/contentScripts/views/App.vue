@@ -52,8 +52,10 @@ const isTopBarFixed = computed(() => {
     || /https?:\/\/(www.)?bilibili.com\/bangumi\/play\/.*/.test(location.href)
     // moment page
     || /https?:\/\/t.bilibili.com.*/.test(location.href)
-    // channel, anime, chinese anime, tv shows, movie, variety shows, mooc page
+    // channel, anime, chinese anime, tv shows, movie, variety shows, mooc
     || /https?:\/\/(www.)?bilibili.com\/(v|anime|guochuang|tv|movie|variety|mooc).*/.test(location.href)
+    // articles page
+    || /https?:\/\/(www.)?bilibili.com\/read\/home.*/.test(location.href)
   )
     return true
   return false
@@ -93,6 +95,8 @@ watch(() => settings.value.adaptToOtherPageStyles, () => {
 })
 
 onMounted(() => {
+  openVideoPageIfBvidExists()
+
   if (isHomePage()) {
     // Force overwrite Bilibili Evolved body tag & html tag background color
     document.body.style.setProperty('background-color', 'unset', 'important')
@@ -241,6 +245,19 @@ provide<BewlyAppProvider>('BEWLY_APP', {
   handlePageRefresh,
   handleReachBottom,
 })
+// fix #166 https://github.com/hakadao/BewlyBewly/issues/166
+function openVideoPageIfBvidExists() {
+  // Assume the URL is https://www.bilibili.com/?bvid=BV1be41127ft&spm_id_from=333.788.seo.out
+
+  // Get the current URL's query string
+  const queryString = window.location.search
+  // Create a URLSearchParams instance
+  const urlParams = new URLSearchParams(queryString)
+  const bvid = urlParams.get('bvid')
+
+  if (bvid)
+    window.open(`https://www.bilibili.com/video/${bvid}`, '_self')
+}
 </script>
 
 <template>
