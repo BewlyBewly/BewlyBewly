@@ -296,3 +296,4 @@ watch_later:
 search_bar:
   history_title: 搜尋記錄
   clear_history: 清除所有搜尋記錄
+  placeholder: 輸入關鍵字搜尋

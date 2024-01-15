@@ -1,5 +1,6 @@
 <!-- TODO: refactor all that code -->
 <script setup lang="ts">
+import { useWindowFocus, watchThrottled } from '@vueuse/core'
 import type { HistoryItem, SuggestionItem, SuggestionResponse } from './searchHistoryProvider'
 import {
   addSearchHistory,
@@ -14,7 +15,9 @@ defineProps<{
   focusedCharacter?: string
 }>()
 
-const isFocus = ref<boolean>(false)
+const inputRef = ref<HTMLInputElement | null>(null)
+const isFocus = ref(false)
+const isWindowFocus = useWindowFocus()
 const keyword = ref<string>('')
 const suggestions = reactive<SuggestionItem[]>([])
 const selectedIndex = ref<number>(-1)
@@ -24,28 +27,34 @@ const suggestionItemRef = ref<HTMLElement[]>([])
 
 watch(isFocus, async (focus) => {
   // 延后加载搜索历史
-  if (focus)
+  if (focus && searchHistory.value.length === 0)
     searchHistory.value = await getSearchHistory()
 })
 
-function handleInput() {
+watch(isWindowFocus, (windowFocus) => {
+  if (!windowFocus)
+    isFocus.value = false
+}, { flush: 'post' })
+
+watchThrottled(keyword, (keyword) => {
   selectedIndex.value = -1
-  if (keyword.value.length > 0) {
-    browser.runtime
-      .sendMessage({
-        contentScriptQuery: 'getSearchSuggestion',
-        term: keyword.value,
-      })
-      .then((res: SuggestionResponse) => {
-        if (!res || (res && res.code !== 0))
-          return
-        Object.assign(suggestions, res.result.tag)
-      })
-  }
-  else {
+
+  if (keyword.length <= 0) {
     suggestions.length = 0
+    return
   }
-}
+
+  browser.runtime
+    .sendMessage({
+      contentScriptQuery: 'getSearchSuggestion',
+      term: keyword,
+    })
+    .then((res: SuggestionResponse) => {
+      if (!res || (res && res.code !== 0))
+        return
+      Object.assign(suggestions, res.result.tag)
+    })
+}, { throttle: 100 })
 
 async function navigateToSearchResultPage(keyword: string) {
   if (keyword) {
@@ -78,13 +87,15 @@ function handleKeyUp() {
   suggestionItemRef.value.forEach((item, index) => {
     if (index === selectedIndex.value)
       item.classList.add('active')
-    else item.classList.remove('active')
+    else
+      item.classList.remove('active')
   })
 
   historyItemRef.value.forEach((item, index) => {
     if (index === selectedIndex.value)
       item.classList.add('active')
-    else item.classList.remove('active')
+    else
+      item.classList.remove('active')
   })
 }
 
@@ -135,19 +146,23 @@ async function handleClearSearchHistory() {
 </script>
 
 <template>
-  <div id="search-wrap" w="full" max-w="550px" m="x-8" pos="relative">
+  <div
+    id="search-wrap" w="full" max-w="550px" m="x-8"
+    pos="relative"
+  >
     <div
       v-if="!darkenOnFocus && isFocus"
       pos="fixed top-0 left-0"
       w="full"
       h="full"
       content="~"
+      z="2"
       @click="isFocus = false"
     />
     <Transition name="mask">
       <div
-        v-if="darkenOnFocus && isFocus" pos="fixed top-0 left-0" w-full h-full bg="black opacity-60"
-        @click="isFocus = false"
+        v-if="darkenOnFocus && isFocus"
+        pos="fixed top-0 left-0" w-full h-full bg="black opacity-60"
       />
     </Transition>
 
@@ -158,12 +173,16 @@ async function handleClearSearchHistory() {
       :style="{ backdropFilter: isFocus ? 'blur(15px)' : 'blur(0)' }"
     />
 
-    <div class="search-bar group" :class="isFocus ? 'focus' : ''" flex="~" items-center pos="relative">
+    <div
+      class="search-bar group" :class="isFocus ? 'focus' : ''" flex="~" items-center
+      pos="relative"
+      z="3"
+    >
       <Transition name="focus-character">
         <img v-show="focusedCharacter && isFocus" :src="focusedCharacter" width="100" object-contain pos="absolute right-0 bottom-40px">
       </Transition>
-
       <input
+        ref="inputRef"
         v-model.trim="keyword"
         rounded="60px focus:$bew-radius"
         p="l-6 r-16 y-3"
@@ -173,12 +192,12 @@ async function handleClearSearchHistory() {
         ring="1 $bew-border-color"
         transition="all duration-300"
         type="text"
+        autocomplete="off"
+        :placeholder="$t('search_bar.placeholder')"
         @focus="isFocus = true"
-        @input="handleInput"
-        @keyup.enter.stop.passive="navigateToSearchResultPage(keyword)"
-        @keyup.up.stop.passive="handleKeyUp"
-        @keyup.down.stop.passive="handleKeyDown"
-        @keydown.stop="() => {}"
+        @keyup.up="handleKeyUp"
+        @keyup.down="handleKeyDown"
+        @keyup.enter="navigateToSearchResultPage(keyword)"
       >
       <button
         p-2
@@ -199,14 +218,13 @@ async function handleClearSearchHistory() {
 
     <Transition name="result-list">
       <div
-        v-if="
-          isFocus
-            && searchHistory.length !== 0
-            && keyword.length === 0
-        "
-        id="search-history"
+        v-if="isFocus && (suggestions.length !== 0 || searchHistory.length !== 0)"
+        class="search-suggestion search-history min-h-60px z-3"
       >
-        <div class="history-list flex flex-col gap-y-2">
+        <div
+          v-show="keyword.length === 0"
+          class="history-list flex flex-col gap-y-2"
+        >
           <div class="title p-2 pb-0 flex justify-between">
             <span>{{ $t('search_bar.history_title') }}</span>
             <button class="rounded-2 duration-300 pointer-events-auto cursor-pointer" hover="text-$bew-theme-color" text="base $bew-text-2" @click="handleClearSearchHistory">
@@ -233,16 +251,10 @@ async function handleClearSearchHistory() {
             </div>
           </div>
         </div>
-      </div>
-    </Transition>
 
-    <Transition name="result-list">
-      <div
-        v-if="isFocus && suggestions.length !== 0 && keyword.length > 0"
-        id="search-suggestion"
-      >
         <div
           v-for="(item, index) in suggestions"
+          v-show="keyword.length > 0"
           :key="index"
           ref="suggestionItemRef"
           class="suggestion-item"
@@ -339,7 +351,7 @@ async function handleClearSearchHistory() {
       hover:bg-$bew-fill-2;
   }
 
-  #search-history {
+  .search-history {
     @include search-content;
     --at-apply: bg-$bew-elevated-1;
 
@@ -357,7 +369,7 @@ async function handleClearSearchHistory() {
     }
   }
 
-  #search-suggestion {
+  .search-suggestion {
     @include search-content;
     --at-apply: bg-$bew-elevated-1;
 
