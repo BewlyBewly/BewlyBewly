@@ -143,7 +143,9 @@ function injectApp() {
     container.id = 'bewly'
     const root = document.createElement('div')
     const styleEl = document.createElement('link')
-    const shadowDOM = container.attachShadow?.({ mode: __DEV__ ? 'open' : 'closed' }) || container
+    // Fix #69 https://github.com/hakadao/BewlyBewly/issues/69
+    // https://medium.com/@emilio_martinez/shadow-dom-open-vs-closed-1a8cf286088a - open shadow dom
+    const shadowDOM = container.attachShadow?.({ mode: 'open' }) || container
     styleEl.setAttribute('rel', 'stylesheet')
     styleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
     shadowDOM.appendChild(styleEl)
