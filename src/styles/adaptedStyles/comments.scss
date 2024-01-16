@@ -53,13 +53,24 @@
 
   &.dark {
     // Comment input box
-    .reply-box .box-normal .reply-box-warp .reply-box-textarea {
-      background-color: var(--bew-fill-1);
-      border-color: var(--bew-border-color);
-    }
+    // .reply-box .box-normal .reply-box-warp .reply-box-textarea {
+    //   background-color: var(--bew-fill-1);
+    //   border-color: var(--bew-border-color);
+    // }
 
     .bili-comment.browser-pc {
       // background-color: var(--bew-content-solid-1);
+    }
+
+    .reply-box .box-normal .reply-box-warp,
+    .reply-box .box-expand .reply-box-emoji .emoji-btn,
+    .reply-box .box-expand .at-btn,
+    .reply-box .box-expand .image-btn {
+      border-color: var(--bew-border-color);
+    }
+
+    .reply-box .box-expand .svg-icon svg path {
+      filter: invert(1) hue-rotate(180deg);
     }
   }
   // #endregion
@@ -283,7 +294,8 @@
       color: var(--bew-text-2) !important;
     }
 
-    .bb-comment .reply-notice .notice-item, .comment-bilibili-fold .reply-notice .notice-item{
+    .bb-comment .reply-notice .notice-item,
+    .comment-bilibili-fold .reply-notice .notice-item {
       background-color: var(--Ye1);
       border-color: var(--Ye1);
       color: var(--Or7);
