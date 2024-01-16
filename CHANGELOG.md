@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.14.1](https://github.com/hakadao/BewlyBewly/compare/v0.14.0...v0.14.1) (2024-01-16)
+
+
+### Reverts
+
+* revert search bar code to previous version to undo recent changes ([272ed02](https://github.com/hakadao/BewlyBewly/commit/272ed0233abc1f0f5fb3f9be812f95fd9c371a06))
+
+
+### Bug Fixes
+
+* 专栏页面侧边栏目录按钮垂直居中 ([e2f4427](https://github.com/hakadao/BewlyBewly/commit/e2f44275e3d77faedf5b00df8b8443fb06f48c9e))
+* 从稍后再看打开视频时自动跳转 [#180](https://github.com/hakadao/BewlyBewly/issues/180) ([1edf382](https://github.com/hakadao/BewlyBewly/commit/1edf3822770c172a371ea7183e9d8582ffc9ffc2))
+
+
+### Miscellaneous
+
+* adjust regex ([781b2c0](https://github.com/hakadao/BewlyBewly/commit/781b2c07d781dddb02662b875e46c58eb8984f20))
+* update version number ([d459603](https://github.com/hakadao/BewlyBewly/commit/d459603a5b27874883263a19b0b654fc872dd206))
+
 ## [0.14.0](https://github.com/hakadao/BewlyBewly/compare/v0.13.3...v0.14.0) (2024-01-14)
 
 
