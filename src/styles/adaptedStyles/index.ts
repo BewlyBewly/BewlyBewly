@@ -59,7 +59,7 @@ async function setupStyles() {
 
   // anime page & chinese anime page
   else if (
-    /https?:\/\/www.bilibili.com\/(anime|guochuang).*/.test(currentUrl))
+    /https?:\/\/(www.)?bilibili.com\/(anime|guochuang).*/.test(currentUrl))
     await import('./animePage.scss')
 
   // channel page e.g. tv shows, movie, variety shows, mooc page

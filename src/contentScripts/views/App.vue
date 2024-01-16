@@ -91,7 +91,7 @@ watch(() => settings.value.adaptToOtherPageStyles, () => {
 })
 
 onMounted(() => {
-  openVideoPageIfBvidExists()
+  // openVideoPageIfBvidExists()
 
   if (isHomePage()) {
     // Force overwrite Bilibili Evolved body tag & html tag background color
@@ -239,19 +239,19 @@ function handleOsScroll() {
     topBarRef.value?.handleScroll()
 }
 
-// fix #166 https://github.com/hakadao/BewlyBewly/issues/166
-function openVideoPageIfBvidExists() {
-  // Assume the URL is https://www.bilibili.com/?bvid=BV1be41127ft&spm_id_from=333.788.seo.out
+// // fix #166 https://github.com/hakadao/BewlyBewly/issues/166
+// function openVideoPageIfBvidExists() {
+//   // Assume the URL is https://www.bilibili.com/?bvid=BV1be41127ft&spm_id_from=333.788.seo.out
 
-  // Get the current URL's query string
-  const queryString = window.location.search
-  // Create a URLSearchParams instance
-  const urlParams = new URLSearchParams(queryString)
-  const bvid = urlParams.get('bvid')
+//   // Get the current URL's query string
+//   const queryString = window.location.search
+//   // Create a URLSearchParams instance
+//   const urlParams = new URLSearchParams(queryString)
+//   const bvid = urlParams.get('bvid')
 
-  if (bvid)
-    window.open(`https://www.bilibili.com/video/${bvid}`, '_self')
-}
+//   if (bvid)
+//     window.open(`https://www.bilibili.com/video/${bvid}`, '_self')
+// }
 
 provide('handleBackToTop', handleBackToTop)
 provide('handleRefresh', handleRefresh)
