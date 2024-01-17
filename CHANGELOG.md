@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.1](https://github.com/hakadao/BewlyBewly/compare/v0.14.1...v0.14.1) (2024-01-17)
+
+
+### Miscellaneous
+
+* changelog work add style changes type ([0d98064](https://github.com/hakadao/BewlyBewly/commit/0d980646018d01ae89a1e9c6ce36d9eeeabac59f))
+
 ## [0.14.1](https://github.com/hakadao/BewlyBewly/compare/v0.14.0...v0.14.1) (2024-01-16)
 
 
