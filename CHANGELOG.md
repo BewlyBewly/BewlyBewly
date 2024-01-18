@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.14.2](https://github.com/hakadao/BewlyBewly/compare/v0.14.1...v0.14.2) (2024-01-18)
+
+
+### Bug Fixes
+
+* 顶栏的历史记录，跳转视频时仅up主制作视频可以跳转成功，其余皆跳转主页 [#193](https://github.com/hakadao/BewlyBewly/issues/193) ([6711291](https://github.com/hakadao/BewlyBewly/commit/67112911460d5dbf7d87d3cf64c00288c1462c3f))
+
+
+### Miscellaneous
+
+* changelog work add style changes type ([0d98064](https://github.com/hakadao/BewlyBewly/commit/0d980646018d01ae89a1e9c6ce36d9eeeabac59f))
+* update version number ([8cd6112](https://github.com/hakadao/BewlyBewly/commit/8cd6112d2e1d618e0f69a25c88179aae990ea8a8))
+
 ## [0.14.1](https://github.com/hakadao/BewlyBewly/compare/v0.14.0...v0.14.1) (2024-01-16)
 
 
