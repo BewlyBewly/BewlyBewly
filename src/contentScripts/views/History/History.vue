@@ -353,7 +353,7 @@ function jumpToLoginPage() {
                 <template
                   v-else-if="historyItem.history.business === HistoryBusiness.PGC"
                 >
-                  Anime
+                  PGC
                 </template>
               </span>
 
