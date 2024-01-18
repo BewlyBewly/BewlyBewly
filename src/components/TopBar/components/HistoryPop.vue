@@ -113,7 +113,9 @@ function onClickTab(tabId: number) {
 function getHistoryUrl(item: HistoryItem) {
   // Video
   if (activatedTab.value === 0) {
-    return `https://www.bilibili.com/video/${item.history.bvid}`
+    if (item.history.business === HistoryType.PGC)
+      return item.uri
+    return `//www.bilibili.com/video/${item.history.bvid}`
   }
   // Live
   else if (activatedTab.value === 1) {
