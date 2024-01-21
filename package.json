@@ -83,7 +83,7 @@
     "unplugin-auto-import": "^0.11.5",
     "unplugin-icons": "^0.14.15",
     "unplugin-vue-components": "^0.22.12",
-    "vite": "^3.2.7",
+    "vite": "^3.2.8",
     "vitest": "^0.24.5",
     "vue": "^3.3.8",
     "vue-demi": "^0.13.11",
