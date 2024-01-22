@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.2](https://github.com/hakadao/BewlyBewly/compare/v0.14.2...v0.14.2) (2024-01-22)
+
+
+### Miscellaneous
+
+* **deps-dev:** bump vite from 3.2.7 to 3.2.8 ([93a41fa](https://github.com/hakadao/BewlyBewly/commit/93a41fae8e370f9108c76c1e76f94b1e1c080ccc))
+
 ## [0.14.2](https://github.com/hakadao/BewlyBewly/compare/v0.14.1...v0.14.2) (2024-01-18)
 
 
