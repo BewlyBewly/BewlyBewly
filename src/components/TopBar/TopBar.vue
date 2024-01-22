@@ -143,6 +143,9 @@ function handleScroll() {
     scrollTop.value = document.documentElement.scrollTop
   }
 
+  if (scrollTop.value === 0)
+    toggleTopBarVisible(true)
+
   if (settings.value.autoHideTopBar && !hoveringTopBar.value && scrollTop.value !== 0) {
     if (scrollTop.value > oldScrollTop.value)
       toggleTopBarVisible(false)
