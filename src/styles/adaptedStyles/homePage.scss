@@ -9,7 +9,7 @@
   //   box-shadow: none;
   //   z-index: 60;
   // }
-  
+
   // .header-channel-fixed {
   //   background-color: var(--bew-elevated-2);
   //   backdrop-filter: var(--bew-filter-glass);
@@ -33,6 +33,11 @@
   // .single-card.floor-card .living>img {
   //   filter: var(--bew-filter-icon-glow);
   // }
+
+  .bili-live-card .bili-live-card__info--living img,
+  .single-card.floor-card .living > img {
+    filter: var(--bew-filter-icon-glow);
+  }
 
   &.dark {
     .floor-card .floor-title {
