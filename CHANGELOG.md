@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.14.3](https://github.com/hakadao/BewlyBewly/compare/v0.14.2...v0.14.3) (2024-01-22)
+
+
+### Bug Fixes
+
+* exclude the unsupported page ([#206](https://github.com/hakadao/BewlyBewly/issues/206)) ([fda3469](https://github.com/hakadao/BewlyBewly/commit/fda3469425c93e7cc9157d017164d308966e474d))
+* resolve issue with displaying full favorites video list ([#207](https://github.com/hakadao/BewlyBewly/issues/207)) ([778382e](https://github.com/hakadao/BewlyBewly/commit/778382eb11028fc02fd491b77bca19badce380e1))
+* top bar not showing when reaching the top of the moments page ([#205](https://github.com/hakadao/BewlyBewly/issues/205)) ([ec38faf](https://github.com/hakadao/BewlyBewly/commit/ec38fafeab6c80dd45bc0e8f29598eeaed43f202))
+
+
+### Style Changes
+
+* adjust homepage styles ([b2c142d](https://github.com/hakadao/BewlyBewly/commit/b2c142d5380e98e82640eee3f31abaf519736f45))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump vite from 3.2.7 to 3.2.8 ([93a41fa](https://github.com/hakadao/BewlyBewly/commit/93a41fae8e370f9108c76c1e76f94b1e1c080ccc))
+* update version number ([4b4808c](https://github.com/hakadao/BewlyBewly/commit/4b4808cbfe6adc3cf8ce38b0dd7208cfd81d80c5))
+
 ## [0.14.2](https://github.com/hakadao/BewlyBewly/compare/v0.14.1...v0.14.2) (2024-01-18)
 
 
