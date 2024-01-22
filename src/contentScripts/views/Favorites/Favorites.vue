@@ -115,10 +115,7 @@ async function getFavoriteResources(
       if (Array.isArray(res.data.medias) && res.data.medias.length > 0)
         favoriteResources.push(...res.data.medias)
 
-      if (
-        res.data.medias === null
-        || (res.data.medias.length < 20 && favoriteResources.length > 0)
-      )
+      if (!res.data.medias)
         noMoreContent.value = true
     }
   }
@@ -158,7 +155,7 @@ function handleUnfavorite(favoriteResource: FavoriteResource) {
     csrf: getCSRF(),
   }).then((res) => {
     if (res.code === 0)
-      favoriteResources.splice(favoriteResources.indexOf(favoriteResource), 1)
+      favoriteResources.splice(favoriteResources.indexOf(favoriteResource as FavoriteItem), 1)
   })
 }
 </script>
