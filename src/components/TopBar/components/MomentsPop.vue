@@ -325,7 +325,7 @@ function toggleWatchLater(aid: number) {
         />
 
         <!-- empty -->
-        <empty
+        <Empty
           v-if="!isLoading && moments.length === 0"
           pos="absolute top-0 left-0"
           bg="$bew-content-1"
@@ -338,7 +338,7 @@ function toggleWatchLater(aid: number) {
         />
 
         <!-- moments -->
-        <transition-group name="list">
+        <TransitionGroup name="list">
           <a
             v-for="(moment, index) in moments"
             :key="index"
@@ -386,7 +386,8 @@ function toggleWatchLater(aid: number) {
 
             <div flex="~" justify="between" w="full">
               <div>
-                <span>{{ `${moment.name} ${t('topbar.moments_dropdown.uploaded')}` }}</span>
+                <span v-if="selectedTab !== 1">{{ `${moment.name} ${t('topbar.moments_dropdown.uploaded')}` }}</span>
+                <span v-else>{{ `${moment.name} ${t('topbar.moments_dropdown.now_streaming')}` }}</span>
                 <div overflow-hidden text-ellipsis break-anywhere>
                   {{ moment.title }}
                 </div>
@@ -446,7 +447,7 @@ function toggleWatchLater(aid: number) {
               </div>
             </div>
           </a>
-        </transition-group>
+        </TransitionGroup>
 
         <!-- loading -->
         <Transition name="fade">

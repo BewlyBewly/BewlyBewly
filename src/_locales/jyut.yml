@@ -218,7 +218,8 @@ topbar:
       live: 直播
       articles: 文章
     uploaded: po 咗：
-    live_status: 直播緊
+    now_streaming: 開緊 live：
+    live_status: Live 緊
   upload_dropdown:
     article: 寫文
     music: 擺音樂
