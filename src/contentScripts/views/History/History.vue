@@ -2,7 +2,6 @@
 import { useDateFormat } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 
-// import type { HistoryItem } from './types'
 import { getCSRF, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
 import { calcCurrentTime } from '~/utils/dataFormatter'
 import emitter from '~/utils/mitt'
@@ -158,8 +157,10 @@ function getHistoryUrl(item: HistoryItem) {
     return removeHttpFromUrl(item.uri)
   }
   // video
-  else if (item.history.business === 'archive') {
-    return removeHttpFromUrl(item.history.bvid)
+  else if (item.history.business === Business.ARCHIVE) {
+    if (item?.videos && item.videos > 0)
+      return `//www.bilibili.com/video/${item.history.bvid}?p=${item.history.page}`
+    return item.history.bvid
   }
   else if (item.history.business === 'live') {
     return `//live.bilibili.com/${item.history.oid}`

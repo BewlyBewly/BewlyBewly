@@ -114,7 +114,7 @@ function getHistoryUrl(item: HistoryItem) {
   // Video
   if (activatedTab.value === 0) {
     if (item.history.business === HistoryType.PGC)
-      return item.uri
+      return removeHttpFromUrl(item.uri)
     if (item.history.business === HistoryType.Archive && item?.videos && item.videos > 0)
       return `//www.bilibili.com/video/${item.history.bvid}?p=${item.history.page}`
     return `//www.bilibili.com/video/${item.history.bvid}`
