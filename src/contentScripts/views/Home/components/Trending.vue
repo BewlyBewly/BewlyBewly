@@ -1,25 +1,34 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
 import type { TrendingResult, List as VideoItem } from '~/models/video/trending'
-import emitter from '~/utils/mitt'
 
 const videoList = reactive<VideoItem[]>([])
 const isLoading = ref<boolean>(false)
 const containerRef = ref<HTMLElement>() as Ref<HTMLElement>
 const pn = ref<number>(1)
+const { handleReachBottom, handlePageRefresh } = useBewlyApp()
+
+function initPageAction() {
+  handleReachBottom.value = async () => {
+    if (!isLoading.value)
+      await getTrendingVideos()
+  }
+
+  handlePageRefresh.value = async () => {
+    videoList.length = 0
+    pn.value = 1
+    await getTrendingVideos()
+  }
+}
 
 onMounted(async () => {
   await getTrendingVideos()
 
-  emitter.off('reachBottom')
-  emitter.on('reachBottom', async () => {
-    if (!isLoading.value)
-      await getTrendingVideos()
-  })
+  initPageAction()
 })
 
-onUnmounted(() => {
-  emitter.off('reachBottom')
+onActivated(() => {
+  initPageAction()
 })
 
 async function getTrendingVideos() {

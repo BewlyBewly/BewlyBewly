@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import type { Ref } from 'vue'
 import { getCSRF, getUserID, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
 import type { FavoriteCategory, FavoriteResource } from '~/components/TopBar/types'
 import emitter from '~/utils/mitt'
@@ -19,29 +20,40 @@ const activatedCategoryCover = ref<string>('')
 const shouldMoveCtrlBarUp = ref<boolean>(false)
 const currentPageNum = ref<number>(1)
 const keyword = ref<string>('')
-
+const { handlePageRefresh, handleReachBottom } = useBewlyApp()
 const isLoading = ref<boolean>(true)
 const isFullPageLoading = ref<boolean>(false)
 const noMoreContent = ref<boolean>()
+const noMoreContentWarning = ref<boolean>(false)
+
+function initPageAction() {
+  handleReachBottom.value = async () => {
+    if (isLoading.value)
+      return
+    if (noMoreContent.value) {
+      noMoreContentWarning.value = true
+      return
+    }
+    await getFavoriteResources(selectedCategory.value!.id, ++currentPageNum.value, keyword.value)
+  }
+
+  handlePageRefresh.value = () => {
+    if (isLoading.value)
+      return
+    favoriteResources.length = 0
+    currentPageNum.value = 1
+    noMoreContent.value = false
+    noMoreContentWarning.value = false
+    handleSearch()
+  }
+}
 
 onMounted(async () => {
   await getFavoriteCategories()
   changeCategory(favoriteCategories[0])
 
-  emitter.off('reachBottom')
-  emitter.on('reachBottom', () => {
-    if (isLoading.value)
-      return
+  initPageAction()
 
-    if (!noMoreContent.value)
-      getFavoriteResources(selectedCategory.value!.id, ++currentPageNum.value, keyword.value)
-  })
-
-  emitter.off('pageRefresh')
-  emitter.on('pageRefresh', async () => {
-    favoriteResources.length = 0
-    handleSearch()
-  })
   emitter.off('topBarVisibleChange')
   emitter.on('topBarVisibleChange', (val) => {
     shouldMoveCtrlBarUp.value = false
@@ -60,9 +72,11 @@ onMounted(async () => {
 })
 
 onUnmounted(() => {
-  emitter.off('reachBottom')
-  emitter.off('pageRefresh')
   emitter.off('topBarVisibleChange')
+})
+
+onActivated(() => {
+  initPageAction()
 })
 
 async function getFavoriteCategories() {
@@ -224,6 +238,9 @@ function handleUnfavorite(favoriteResource: FavoriteResource) {
             </VideoCard>
           </TransitionGroup>
         </div>
+
+        <!-- no more content -->
+        <Empty v-if="noMoreContentWarning" class="py-4" :description="$t('common.no_more_content')" />
 
         <!-- loading -->
         <Transition name="fade">

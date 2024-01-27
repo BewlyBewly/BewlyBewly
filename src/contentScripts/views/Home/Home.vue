@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import ForYou from './components/ForYou.vue'
-import Following from './components/Following.vue'
-import Trending from './components/Trending.vue'
-import Ranking from './components/Ranking.vue'
-import SubscribedSeries from './components/SubscribedSeries.vue'
+
 import type { HomeTab } from './types'
 import { HomeSubPage } from './types'
 import emitter from '~/utils/mitt'
@@ -12,11 +8,16 @@ import { settings } from '~/logic'
 
 const { t } = useI18n()
 
-const handleBackToTop = inject('handleBackToTop') as (targetScrollTop: number) => void
+const { handleBackToTop } = useBewlyApp()
 
-const recommendContentKey = ref<string>(`recommendContent${Number(new Date())}`)
 const activatedPage = ref<HomeSubPage>(HomeSubPage.ForYou)
-const pages = { ForYou, Following, SubscribedSeries, Trending, Ranking }
+const pages = {
+  [HomeSubPage.ForYou]: defineAsyncComponent(() => import('./components/ForYou.vue')),
+  [HomeSubPage.Following]: defineAsyncComponent(() => import('./components/Following.vue')),
+  [HomeSubPage.SubscribedSeries]: defineAsyncComponent(() => import('./components/SubscribedSeries.vue')),
+  [HomeSubPage.Trending]: defineAsyncComponent(() => import('./components/Trending.vue')),
+  [HomeSubPage.Ranking]: defineAsyncComponent(() => import('./components/Ranking.vue')),
+}
 const showSearchPageMode = ref<boolean>(false)
 const shouldMoveTabsUp = ref<boolean>(false)
 
@@ -51,10 +52,6 @@ watch(() => activatedPage.value, () => {
 
 onMounted(() => {
   showSearchPageMode.value = true
-  emitter.off('pageRefresh')
-  emitter.on('pageRefresh', async () => {
-    recommendContentKey.value = `recommendContent${Number(new Date())}`
-  })
   emitter.off('topBarVisibleChange')
   emitter.on('topBarVisibleChange', (val) => {
     shouldMoveTabsUp.value = false
@@ -73,7 +70,6 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  emitter.off('pageRefresh')
   emitter.off('topBarVisibleChange')
 })
 </script>
@@ -158,7 +154,9 @@ onUnmounted(() => {
       </header>
 
       <Transition name="page-fade">
-        <Component :is="pages[activatedPage]" :key="recommendContentKey" />
+        <KeepAlive>
+          <Component :is="pages[activatedPage]" :key="activatedPage" />
+        </KeepAlive>
       </Transition>
       <!-- <RecommendContent :key="recommendContentKey" /> -->
     </main>

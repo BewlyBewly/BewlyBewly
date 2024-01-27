@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { Icon } from '@iconify/vue'
-import type { Ref } from 'vue'
 import type { CurrentDockItem, HoveringDockItem } from './types'
 import type { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
@@ -11,8 +10,7 @@ import { useMainStore } from '~/stores/mainStore'
 defineProps<{ activatedPage: AppPage }>()
 
 const emit = defineEmits(['change-page', 'settings-visibility-change'])
-
-const mainAppRef = inject('mainAppRef') as Ref<HTMLDivElement>
+const { mainAppRef } = useBewlyApp()
 
 const mainStore = useMainStore()
 const { t } = useI18n()

@@ -3,9 +3,9 @@ import { useDateFormat } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 
 // import type { HistoryItem } from './types'
+import type { Ref } from 'vue'
 import { getCSRF, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
 import { calcCurrentTime } from '~/utils/dataFormatter'
-import emitter from '~/utils/mitt'
 import { Business } from '~/models/video/history'
 import type { List as HistoryItem, HistoryResult } from '~/models/video/history'
 import type { List as HistorySearchItem, HistorySearchResult } from '~/models/video/historySearch'
@@ -13,31 +13,48 @@ import type { List as HistorySearchItem, HistorySearchResult } from '~/models/vi
 const { t } = useI18n()
 
 const isLoading = ref<boolean>()
-const noMoreContent = ref<boolean>()
+const noMoreContent = ref<boolean>(false)
+const noMoreContentWarning = ref<boolean>(false)
 const historyList = reactive<Array<HistoryItem>>([])
 const currentPageNum = ref<number>(1)
 const keyword = ref<string>()
 const historyStatus = ref<boolean>()
+const { handlePageRefresh, handleReachBottom } = useBewlyApp()
 
 const HistoryBusiness = computed(() => {
   return Business
 })
+
+function initPageAction() {
+  handleReachBottom.value = () => {
+    if (isLoading.value)
+      return
+    if (noMoreContent.value) {
+      noMoreContentWarning.value = true
+      return
+    }
+
+    if (keyword.value)
+      searchHistoryList()
+    else
+      getHistoryList()
+  }
+
+  handlePageRefresh.value = () => {
+    historyList.length = 0
+    currentPageNum.value = 1
+    noMoreContent.value = false
+    noMoreContentWarning.value = false
+    getHistoryList()
+  }
+}
 
 watch(
   () => keyword.value,
   (newValue, oldValue) => {
     if (newValue === oldValue)
       return
-    emitter.on('reachBottom', () => {
-      if (isLoading.value)
-        return
-
-      if (!noMoreContent.value) {
-        if (keyword.value)
-          searchHistoryList()
-        else getHistoryList()
-      }
-    })
+    initPageAction()
   },
 )
 
@@ -45,28 +62,11 @@ onMounted(() => {
   getHistoryList()
   getHistoryPauseStatus()
 
-  emitter.off('reachBottom')
-  emitter.on('reachBottom', () => {
-    if (isLoading.value)
-      return
-
-    if (!noMoreContent.value) {
-      if (keyword.value)
-        searchHistoryList()
-      else getHistoryList()
-    }
-  })
-
-  emitter.off('pageRefresh')
-  emitter.on('pageRefresh', async () => {
-    historyList.length = 0
-    getHistoryList()
-  })
+  initPageAction()
 })
 
-onUnmounted(() => {
-  emitter.off('reachBottom')
-  emitter.off('pageRefresh')
+onActivated(() => {
+  initPageAction()
 })
 
 /**
@@ -152,7 +152,7 @@ function deleteHistoryItem(index: number, historyItem: HistoryItem) {
  * @param item history item
  * @return {string} url
  */
-function getHistoryUrl(item: HistoryItem) {
+function getHistoryUrl(item: HistoryItem): string {
   // anime
   if (item.history.business === 'pgc') {
     return removeHttpFromUrl(item.uri)
@@ -479,6 +479,10 @@ function jumpToLoginPage() {
           </section>
         </a>
       </transition-group>
+
+      <!-- no more content -->
+      <Empty v-if="noMoreContentWarning" class="py-4" :description="$t('common.no_more_content')" />
+
       <!-- loading -->
       <Transition name="fade">
         <loading
