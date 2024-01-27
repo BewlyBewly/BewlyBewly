@@ -215,6 +215,7 @@ topbar:
       live: Live
       articles: Articles
     uploaded: 'uploaded: '
+    now_streaming: 'now streaming: '
     live_status: LIVE
   upload_dropdown:
     article: Article
