@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.14.3](https://github.com/hakadao/BewlyBewly/compare/v0.14.3...v0.14.3) (2024-01-27)
+
+
+### Bug Fixes
+
+* adjust text in `MomentsPop` [建议] 增加动态状态差分 [#226](https://github.com/hakadao/BewlyBewly/issues/226) ([c62f2c6](https://github.com/hakadao/BewlyBewly/commit/c62f2c604c7043b22d03bbab0498d16ad20121b5))
+* handle top bar video part ([b5e7465](https://github.com/hakadao/BewlyBewly/commit/b5e74659697c463d0221b21c6d19652a90308e7e))
+
 ## [0.14.3](https://github.com/hakadao/BewlyBewly/compare/v0.14.2...v0.14.3) (2024-01-22)
 
 
