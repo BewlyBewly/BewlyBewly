@@ -214,6 +214,7 @@ topbar:
       live: 直播
       articles: 专栏
     uploaded: 上传了：
+    now_streaming: 正在直播：
     live_status: 直播中
   upload_dropdown:
     article: 专栏

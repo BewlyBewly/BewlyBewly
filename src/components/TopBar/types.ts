@@ -93,9 +93,11 @@ export interface HistoryItem {
     epid?: number
     bvid?: string
     part?: string
+    page?: number
     oid: number
     cid: number
   }
+  videos?: number
   author_name: string
   author_face: string
   author_mid: string
