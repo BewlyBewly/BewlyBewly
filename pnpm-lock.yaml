@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@types/md5':
+    specifier: ^2.3.5
+    version: 2.3.5
   dplayer:
     specifier: ^1.27.1
     version: 1.27.1
@@ -61,9 +64,6 @@ devDependencies:
   '@types/fs-extra':
     specifier: ^9.0.13
     version: 9.0.13
-  '@types/md5':
-    specifier: ^2.3.5
-    version: 2.3.5
   '@types/node':
     specifier: ^18.18.10
     version: 18.19.6
@@ -1258,7 +1258,7 @@ packages:
 
   /@types/md5@2.3.5:
     resolution: {integrity: sha512-/i42wjYNgE6wf0j2bcTX6kuowmdL/6PE4IVitMpm2eYKBUuYCprdcWVK+xEF0gcV6ufMCRhtxmReGfc6hIK7Jw==}
-    dev: true
+    dev: false
 
   /@types/mdast@3.0.15:
     resolution: {integrity: sha512-LnwD+mUEfxWMa1QpDraczIn6k0Ee3SMicuYSSzS6ZYl2gKS09EClnJYGd8Du6rfc5r/GZEk5o1mRb8TaTj03sQ==}

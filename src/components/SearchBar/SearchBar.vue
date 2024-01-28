@@ -173,7 +173,6 @@ async function handleClearSearchHistory() {
         ring="1 $bew-border-color"
         transition="all duration-300"
         type="text"
-        @blur="isFocus = false"
         @focus="isFocus = true"
         @input="handleInput"
         @keyup.enter.stop.passive="navigateToSearchResultPage(keyword)"
