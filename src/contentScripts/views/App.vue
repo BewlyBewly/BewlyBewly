@@ -336,9 +336,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
               />
 
               <Transition name="page-fade">
-                <KeepAlive>
-                  <Component :is="pages[activatedPage]" :key="activatedPage" />
-                </KeepAlive>
+                <Component :is="pages[activatedPage]" />
               </Transition>
             </div>
           </main>
