@@ -15,21 +15,28 @@ const isLoadingPopularAnime = ref<boolean>()
 const isLoadingRecommendAnime = ref<boolean>()
 const activatedSeasonId = ref<number>()
 const noMoreContent = ref<boolean>()
-const noMoreContentWarning = ref<boolean>()
+const animeTimeTableRef = ref()
 const { handleReachBottom, handlePageRefresh } = useBewlyApp()
 
 const isLoading = computed(() => {
   return isLoadingAnimeWatchList.value || isLoadingPopularAnime.value || isLoadingRecommendAnime.value
 })
 
+onMounted(() => {
+  getAnimeWatchList()
+  getPopularAnimeList()
+  getRecommendAnimeList()
+
+  initPageAction()
+})
+
 function initPageAction() {
   handleReachBottom.value = () => {
     if (isLoadingRecommendAnime.value)
       return
-    if (noMoreContent.value) {
-      noMoreContentWarning.value = true
+    if (noMoreContent.value)
       return
-    }
+
     getRecommendAnimeList()
   }
   handlePageRefresh.value = () => {
@@ -41,24 +48,13 @@ function initPageAction() {
     popularAnimeList.length = 0
     cursor.value = 0
     noMoreContent.value = false
-    noMoreContentWarning.value = false
+
     getAnimeWatchList()
     getPopularAnimeList()
     getRecommendAnimeList()
+    animeTimeTableRef.value?.refreshAnimeTimeTable()
   }
 }
-
-onMounted(() => {
-  getAnimeWatchList()
-  getPopularAnimeList()
-  getRecommendAnimeList()
-
-  initPageAction()
-})
-
-onActivated(() => {
-  initPageAction()
-})
 
 function getAnimeWatchList() {
   isLoadingAnimeWatchList.value = true
@@ -244,7 +240,7 @@ function getPopularAnimeList() {
           </h3>
         </div>
 
-        <AnimeTimeTable w="[calc(100%+1.5rem)]" />
+        <AnimeTimeTable ref="animeTimeTableRef" w="[calc(100%+1.5rem)]" />
       </section>
 
       <!-- Recommended for you -->
@@ -279,7 +275,7 @@ function getPopularAnimeList() {
     </div>
 
     <!-- no more content -->
-    <Empty v-if="noMoreContentWarning" class="pb-4" :description="$t('common.no_more_content')" />
+    <Empty v-if="noMoreContent" class="pb-4" :description="$t('common.no_more_content')" />
 
     <!-- loading -->
     <loading v-if="isLoadingRecommendAnime && recommendAnimeList.length !== 0" m="-t-4" />
