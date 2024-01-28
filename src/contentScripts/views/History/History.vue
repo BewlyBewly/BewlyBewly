@@ -12,7 +12,6 @@ const { t } = useI18n()
 
 const isLoading = ref<boolean>()
 const noMoreContent = ref<boolean>(false)
-const noMoreContentWarning = ref<boolean>(false)
 const historyList = reactive<Array<HistoryItem>>([])
 const currentPageNum = ref<number>(1)
 const keyword = ref<string>()
@@ -23,14 +22,19 @@ const HistoryBusiness = computed(() => {
   return Business
 })
 
+onMounted(() => {
+  getHistoryList()
+  getHistoryPauseStatus()
+
+  initPageAction()
+})
+
 function initPageAction() {
   handleReachBottom.value = () => {
     if (isLoading.value)
       return
-    if (noMoreContent.value) {
-      noMoreContentWarning.value = true
+    if (noMoreContent.value)
       return
-    }
 
     if (keyword.value)
       searchHistoryList()
@@ -42,30 +46,9 @@ function initPageAction() {
     historyList.length = 0
     currentPageNum.value = 1
     noMoreContent.value = false
-    noMoreContentWarning.value = false
     getHistoryList()
   }
 }
-
-watch(
-  () => keyword.value,
-  (newValue, oldValue) => {
-    if (newValue === oldValue)
-      return
-    initPageAction()
-  },
-)
-
-onMounted(() => {
-  getHistoryList()
-  getHistoryPauseStatus()
-
-  initPageAction()
-})
-
-onActivated(() => {
-  initPageAction()
-})
 
 /**
  * Get history list
@@ -127,6 +110,7 @@ function searchHistoryList() {
 function handleSearch() {
   historyList.length = 0
   currentPageNum.value = 1
+  noMoreContent.value = false
   if (keyword.value)
     searchHistoryList()
   else getHistoryList()
@@ -219,7 +203,6 @@ function clearAllHistory() {
 }
 
 function handleClearAllWatchHistory() {
-  // eslint-disable-next-line no-alert
   const result = confirm(
     t('history.clear_all_watch_history_confirm'),
   )
@@ -228,7 +211,6 @@ function handleClearAllWatchHistory() {
 }
 
 function handlePauseWatchHistory() {
-  // eslint-disable-next-line no-alert
   const result = confirm(
     t('history.pause_watch_history_confirm'),
   )
@@ -237,7 +219,6 @@ function handlePauseWatchHistory() {
 }
 
 function handleTurnOnWatchHistory() {
-  // eslint-disable-next-line no-alert
   const result = confirm(
     t('history.turn_on_watch_history_confirm'),
   )
@@ -257,7 +238,7 @@ function jumpToLoginPage() {
         {{ $t('history.title') }}
       </h3>
       <!-- historyList -->
-      <transition-group name="list">
+      <TransitionGroup name="list">
         <a
           v-for="(historyItem, index) in historyList"
           :key="historyItem.kid"
@@ -478,10 +459,10 @@ function jumpToLoginPage() {
             </div>
           </section>
         </a>
-      </transition-group>
+      </TransitionGroup>
 
       <!-- no more content -->
-      <Empty v-if="noMoreContentWarning" class="py-4" :description="$t('common.no_more_content')" />
+      <Empty v-if="noMoreContent" class="py-4" :description="$t('common.no_more_content')" />
 
       <!-- loading -->
       <Transition name="fade">
