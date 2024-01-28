@@ -196,9 +196,7 @@ function setCurrentTitle() {
             <!-- <div h-80px mt--8 /> -->
 
             <Transition name="page-fade">
-              <KeepAlive>
-                <Component :is="settingsMenu[activatedMenuItem]" :key="activatedMenuItem" />
-              </KeepAlive>
+              <Component :is="settingsMenu[activatedMenuItem]" />
             </Transition>
           </main>
         </OverlayScrollbarsComponent>
