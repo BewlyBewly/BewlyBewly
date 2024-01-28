@@ -45,16 +45,6 @@ const videoList = reactive<RankingVideoItem[]>([])
 const PgcList = reactive<RankingPgcItem[]>([])
 const shouldMoveAsideUp = ref<boolean>(false)
 
-function initPageAction() {
-  handlePageRefresh.value = async () => {
-    videoList.length = 0
-    PgcList.length = 0
-    if (isLoading.value)
-      return
-    getRankingVideos()
-  }
-}
-
 watch(() => activatedRankingType.value.id, () => {
   handleBackToTop(settings.value.useSearchPageModeOnHomePage ? 510 : 0)
 
@@ -87,6 +77,16 @@ onMounted(() => {
 onActivated(() => {
   initPageAction()
 })
+
+function initPageAction() {
+  handlePageRefresh.value = async () => {
+    videoList.length = 0
+    PgcList.length = 0
+    if (isLoading.value)
+      return
+    getRankingVideos()
+  }
+}
 
 onBeforeUnmount(() => {
   emitter.off('topBarVisibleChange')

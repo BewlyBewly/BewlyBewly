@@ -12,6 +12,11 @@ const noMoreContent = ref<boolean>()
 const watchLaterList = reactive<VideoItem[]>([])
 const { handlePageRefresh } = useBewlyApp()
 
+onMounted(() => {
+  getAllWatchLaterList()
+  initPageAction()
+})
+
 function initPageAction() {
   handlePageRefresh.value = () => {
     if (isLoading.value)
@@ -21,15 +26,6 @@ function initPageAction() {
     getAllWatchLaterList()
   }
 }
-
-onMounted(() => {
-  getAllWatchLaterList()
-  initPageAction()
-})
-
-onActivated(() => {
-  initPageAction()
-})
 
 /**
  * Get watch later list
@@ -63,7 +59,6 @@ function deleteWatchLaterItem(index: number, aid: number) {
 }
 
 function handleClearAllWatchLater() {
-  // eslint-disable-next-line no-alert
   const result = confirm(
     t('watch_later.clear_all_confirm'),
   )
@@ -82,7 +77,6 @@ function handleClearAllWatchLater() {
 }
 
 function handleRemoveWatchedVideos() {
-  // eslint-disable-next-line no-alert
   const result = confirm(
     t('watch_later.remove_watched_videos_confirm'),
   )

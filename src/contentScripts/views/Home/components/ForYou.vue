@@ -13,43 +13,7 @@ const needToLoginFirst = ref<boolean>(false)
 const containerRef = ref<HTMLElement>() as Ref<HTMLElement>
 const refreshIdx = ref<number>(1)
 const noMoreContent = ref<boolean>(false)
-const noMoreContentWarning = ref<boolean>(false)
 const { handleReachBottom, handlePageRefresh } = useBewlyApp()
-
-function initPageAction() {
-  handleReachBottom.value = async () => {
-    if (isLoading.value)
-      return
-    if (noMoreContent.value) {
-      noMoreContentWarning.value = true
-      return
-    }
-    if (settings.value.recommendationMode === 'web') {
-      getRecommendVideos()
-    }
-    else {
-      for (let i = 0; i < 3; i++)
-        await getAppRecommendVideos()
-    }
-  }
-
-  handlePageRefresh.value = async () => {
-    if (isLoading.value)
-      return
-
-    videoList.length = 0
-    appVideoList.length = 0
-    noMoreContent.value = false
-    noMoreContentWarning.value = false
-    if (settings.value.recommendationMode === 'web') {
-      await getRecommendVideos()
-    }
-    else {
-      for (let i = 0; i < 3; i++)
-        await getAppRecommendVideos()
-    }
-  }
-}
 
 watch(() => settings.value.recommendationMode, (newValue) => {
   videoList.length = 0
@@ -83,6 +47,39 @@ onMounted(async () => {
 onActivated(() => {
   initPageAction()
 })
+
+function initPageAction() {
+  handleReachBottom.value = async () => {
+    if (isLoading.value)
+      return
+    if (noMoreContent.value)
+      return
+
+    if (settings.value.recommendationMode === 'web') {
+      getRecommendVideos()
+    }
+    else {
+      for (let i = 0; i < 3; i++)
+        await getAppRecommendVideos()
+    }
+  }
+
+  handlePageRefresh.value = async () => {
+    if (isLoading.value)
+      return
+
+    videoList.length = 0
+    appVideoList.length = 0
+    noMoreContent.value = false
+    if (settings.value.recommendationMode === 'web') {
+      await getRecommendVideos()
+    }
+    else {
+      for (let i = 0; i < 3; i++)
+        await getAppRecommendVideos()
+    }
+  }
+}
 
 async function getRecommendVideos() {
   isLoading.value = true
@@ -225,7 +222,7 @@ function jumpToLoginPage() {
     </div>
 
     <!-- no more content -->
-    <Empty v-if="noMoreContentWarning" class="py-4" :description="$t('common.no_more_content')" />
+    <Empty v-if="noMoreContent" class="pb-4" :description="$t('common.no_more_content')" />
 
     <Transition name="fade">
       <Loading v-if="isLoading" />

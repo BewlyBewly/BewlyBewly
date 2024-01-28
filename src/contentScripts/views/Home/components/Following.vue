@@ -9,29 +9,7 @@ const containerRef = ref<HTMLElement>() as Ref<HTMLElement>
 const offset = ref<string>('')
 const updateBaseline = ref<string>('')
 const noMoreContent = ref<boolean>(false)
-const noMoreContentWarning = ref<boolean>(false)
 const { handleReachBottom, handlePageRefresh } = useBewlyApp()
-
-function initPageAction() {
-  handleReachBottom.value = async () => {
-    if (isLoading.value)
-      return
-    if (noMoreContent.value) {
-      noMoreContentWarning.value = true
-      return
-    }
-    for (let i = 0; i < 3; i++)
-      await getFollowedUsersVideos()
-  }
-  handlePageRefresh.value = async () => {
-    videoList.length = 0
-    offset.value = ''
-    noMoreContent.value = false
-    noMoreContentWarning.value = false
-    for (let i = 0; i < 3; i++)
-      await getFollowedUsersVideos()
-  }
-}
 
 onMounted(async () => {
   for (let i = 0; i < 3; i++)
@@ -42,6 +20,26 @@ onMounted(async () => {
 onActivated(() => {
   initPageAction()
 })
+
+function initPageAction() {
+  handleReachBottom.value = async () => {
+    if (isLoading.value)
+      return
+    if (noMoreContent.value)
+      return
+
+    for (let i = 0; i < 3; i++)
+      await getFollowedUsersVideos()
+  }
+  handlePageRefresh.value = async () => {
+    videoList.length = 0
+    offset.value = ''
+    noMoreContent.value = false
+
+    for (let i = 0; i < 3; i++)
+      await getFollowedUsersVideos()
+  }
+}
 
 async function getFollowedUsersVideos() {
   if (noMoreContent.value)
@@ -137,7 +135,7 @@ function jumpToLoginPage() {
     </div>
 
     <!-- no more content -->
-    <Empty v-if="noMoreContentWarning" class="pb-4" :description="$t('common.no_more_content')" />
+    <Empty v-if="noMoreContent" class="pb-4" :description="$t('common.no_more_content')" />
 
     <Transition name="fade">
       <Loading v-if="isLoading" />

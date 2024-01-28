@@ -8,6 +8,16 @@ const containerRef = ref<HTMLElement>() as Ref<HTMLElement>
 const pn = ref<number>(1)
 const { handleReachBottom, handlePageRefresh } = useBewlyApp()
 
+onMounted(async () => {
+  await getTrendingVideos()
+
+  initPageAction()
+})
+
+onActivated(() => {
+  initPageAction()
+})
+
 function initPageAction() {
   handleReachBottom.value = async () => {
     if (!isLoading.value)
@@ -20,16 +30,6 @@ function initPageAction() {
     await getTrendingVideos()
   }
 }
-
-onMounted(async () => {
-  await getTrendingVideos()
-
-  initPageAction()
-})
-
-onActivated(() => {
-  initPageAction()
-})
 
 async function getTrendingVideos() {
   isLoading.value = true
