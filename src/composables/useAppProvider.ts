@@ -4,7 +4,7 @@ import type { AppPage } from '~/enums/appEnums'
 export interface BewlyAppProvider {
   activatedPage: Ref<AppPage>
   scrollbarRef: Ref<any>
-  mainAppRef: Ref<any>
+  mainAppRef: Ref<HTMLElement>
   handleReachBottom: Ref<(() => void) | undefined>
   handlePageRefresh: Ref<(() => void) | undefined>
   handleBackToTop: (targetScrollTop: number) => void
