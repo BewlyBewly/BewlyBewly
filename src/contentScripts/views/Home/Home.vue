@@ -154,7 +154,7 @@ onUnmounted(() => {
       </header>
 
       <Transition name="page-fade">
-        <KeepAlive>
+        <KeepAlive include="ForYou">
           <Component :is="pages[activatedPage]" :key="activatedPage" />
         </KeepAlive>
       </Transition>
