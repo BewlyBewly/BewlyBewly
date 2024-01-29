@@ -24,7 +24,11 @@ function initPageAction() {
       await getFollowedUsersVideos()
   }
   handlePageRefresh.value = async () => {
+    if (isLoading.value)
+      return
+
     offset.value = ''
+    updateBaseline.value = ''
     momentList.length = 0
     noMoreContent.value = false
     noMoreContentWarning.value = false

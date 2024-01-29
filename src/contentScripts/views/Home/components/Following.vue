@@ -32,8 +32,12 @@ function initPageAction() {
       await getFollowedUsersVideos()
   }
   handlePageRefresh.value = async () => {
-    videoList.length = 0
+    if (isLoading.value)
+      return
+
     offset.value = ''
+    updateBaseline.value = ''
+    videoList.length = 0
     noMoreContent.value = false
 
     for (let i = 0; i < 3; i++)
