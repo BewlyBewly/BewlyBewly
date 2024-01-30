@@ -199,59 +199,49 @@ async function handleClearSearchHistory() {
     </div>
 
     <Transition name="result-list">
-      <div
-        v-if="
-          isFocus
-            && searchHistory.length !== 0
-            && keyword.length === 0
-        "
-        id="search-history"
-      >
-        <div class="history-list flex flex-col gap-y-2">
-          <div class="title p-2 pb-0 flex justify-between">
-            <span>{{ $t('search_bar.history_title') }}</span>
-            <button class="rounded-2 duration-300 pointer-events-auto cursor-pointer" hover="text-$bew-theme-color" text="base $bew-text-2" @click="handleClearSearchHistory">
-              {{ $t('search_bar.clear_history') }}
-            </button>
-          </div>
-
-          <div class="history-item-container p2 flex flex-wrap gap-x-3 gap-y-3">
-            <div
-              v-for="item in searchHistory" :key="item.timestamp" ref="historyItemRef"
-              class="history-item group"
-              flex justify-between items-center
-              @click="navigateToSearchResultPage(item.value)"
-            >
-              <span> {{ item.value }}</span>
-              <button
-                rounded-full duration-300 pointer-events-auto cursor-pointer p-1
-                text="xs $bew-text-2 hover:white" leading-0 bg="$bew-fill-2 hover:$bew-theme-color"
-                pos="absolute top-0 right-0" scale-80 opacity-0 group-hover:opacity-100
-                @click.stop="handleDelete(item.value)"
-              >
-                <ic-baseline-clear />
+      <template v-if="isFocus && searchHistory.length !== 0">
+        <div v-if="keyword.length === 0" id="search-history">
+          <div class="history-list flex flex-col gap-y-2">
+            <div class="title p-2 pb-0 flex justify-between">
+              <span>{{ $t('search_bar.history_title') }}</span>
+              <button class="rounded-2 duration-300 pointer-events-auto cursor-pointer" hover="text-$bew-theme-color" text="base $bew-text-2" @click="handleClearSearchHistory">
+                {{ $t('search_bar.clear_history') }}
               </button>
+            </div>
+
+            <div class="history-item-container p2 flex flex-wrap gap-x-3 gap-y-3">
+              <div
+                v-for="item in searchHistory" :key="item.timestamp" ref="historyItemRef"
+                class="history-item group"
+                flex justify-between items-center
+                @click="navigateToSearchResultPage(item.value)"
+              >
+                <span> {{ item.value }}</span>
+                <button
+                  rounded-full duration-300 pointer-events-auto cursor-pointer p-1
+                  text="xs $bew-text-2 hover:white" leading-0 bg="$bew-fill-2 hover:$bew-theme-color"
+                  pos="absolute top-0 right-0" scale-80 opacity-0 group-hover:opacity-100
+                  @click.stop="handleDelete(item.value)"
+                >
+                  <ic-baseline-clear />
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </Transition>
 
-    <Transition name="result-list">
-      <div
-        v-if="isFocus && suggestions.length !== 0 && keyword.length > 0"
-        id="search-suggestion"
-      >
-        <div
-          v-for="(item, index) in suggestions"
-          :key="index"
-          ref="suggestionItemRef"
-          class="suggestion-item"
-          @click="navigateToSearchResultPage(item.value)"
-        >
-          <span v-html="item.name" />
+        <div v-else id="search-suggestion">
+          <div
+            v-for="(item, index) in suggestions"
+            :key="index"
+            ref="suggestionItemRef"
+            class="suggestion-item"
+            @click="navigateToSearchResultPage(item.value)"
+          >
+            <span v-html="item.name" />
+          </div>
         </div>
-      </div>
+      </template>
     </Transition>
   </div>
 </template>
