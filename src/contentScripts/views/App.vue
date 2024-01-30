@@ -1,28 +1,32 @@
 <script setup lang="ts">
-import { useToggle } from '@vueuse/core'
+import { useThrottleFn, useToggle } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 import browser from 'webextension-polyfill'
 import type { Ref } from 'vue'
 
-import Home from './Home/Home.vue'
-import Search from './Search/Search.vue'
-import Anime from './Anime/Anime.vue'
-import History from './History/History.vue'
-import WatchLater from './WatchLater/WatchLater.vue'
-import Favorites from './Favorites/Favorites.vue'
 import { accessKey, settings } from '~/logic'
 import { AppPage, LanguageType } from '~/enums/appEnums'
 import { getUserID, hexToRGBA, isHomePage, smoothScrollToTop } from '~/utils/main'
-import emitter from '~/utils/mitt'
+import type { BewlyAppProvider } from '~/composables/useAppProvider'
 
 const activatedPage = ref<AppPage>(settings.value.dockItemVisibilityList.find(e => e.visible === true)?.page ?? AppPage.Home)
 const { locale } = useI18n()
 const [showSettings, toggleSettings] = useToggle(false)
-const pages = { Home, Search, Anime, History, WatchLater, Favorites }
+const pages = {
+  [AppPage.Home]: defineAsyncComponent(() => import('./Home/Home.vue')),
+  [AppPage.Search]: defineAsyncComponent(() => import('./Search/Search.vue')),
+  [AppPage.Anime]: defineAsyncComponent(() => import('./Anime/Anime.vue')),
+  [AppPage.History]: defineAsyncComponent(() => import('./History/History.vue')),
+  [AppPage.WatchLater]: defineAsyncComponent(() => import('./WatchLater/WatchLater.vue')),
+  [AppPage.Favorites]: defineAsyncComponent(() => import('./Favorites/Favorites.vue')),
+}
 const mainAppRef = ref<HTMLElement>() as Ref<HTMLElement>
 const scrollbarRef = ref()
 const showTopBarMask = ref<boolean>(false)
-const dynamicComponentKey = ref<string>(`dynamicComponent${Number(new Date())}`)
+const handlePageRefresh = ref<() => void>()
+const handleReachBottom = ref<() => void>()
+const handleThrottledPageRefresh = useThrottleFn(() => handlePageRefresh.value?.(), 500)
+const handleThrottledReachBottom = useThrottleFn(() => handleReachBottom.value?.(), 500)
 const topBarRef = ref()
 
 const isVideoPage = computed(() => {
@@ -127,7 +131,7 @@ function changeActivatePage(pageName: AppPage) {
   if (activatedPage.value === pageName) {
     if (activatedPage.value !== AppPage.Search) {
       if (scrollTop === 0)
-        handleRefresh()
+        handleThrottledPageRefresh()
       else
         handleBackToTop()
     }
@@ -202,12 +206,6 @@ function setAppThemeColor() {
     document.documentElement.style.setProperty(`--bew-theme-color-${i + 1}0`, hexToRGBA(settings.value.themeColor, i * 0.1 + 0.1))
 }
 
-function handleRefresh() {
-  emitter.emit('pageRefresh')
-  if (activatedPage.value === AppPage.Anime)
-    dynamicComponentKey.value = `dynamicComponent${Number(new Date())}`
-}
-
 function handleBackToTop(targetScrollTop = 0 as number) {
   const osInstance = scrollbarRef.value?.osInstance()
 
@@ -233,15 +231,15 @@ function handleOsScroll() {
     showTopBarMask.value = true
 
   if (clientHeight + scrollTop >= scrollHeight - 20)
-    emitter.emit('reachBottom')
+    handleThrottledReachBottom()
 
   if (isHomePage())
     topBarRef.value?.handleScroll()
 }
 
-// // fix #166 https://github.com/hakadao/BewlyBewly/issues/166
+// fix #166 https://github.com/hakadao/BewlyBewly/issues/166
 // function openVideoPageIfBvidExists() {
-//   // Assume the URL is https://www.bilibili.com/?bvid=BV1be41127ft&spm_id_from=333.788.seo.out
+// Assume the URL is https://www.bilibili.com/?bvid=BV1be41127ft&spm_id_from=333.788.seo.out
 
 //   // Get the current URL's query string
 //   const queryString = window.location.search
@@ -253,11 +251,14 @@ function handleOsScroll() {
 //     window.open(`https://www.bilibili.com/video/${bvid}`, '_self')
 // }
 
-provide('handleBackToTop', handleBackToTop)
-provide('handleRefresh', handleRefresh)
-provide('activatedPage', activatedPage)
-provide('scrollbarRef', scrollbarRef)
-provide('mainAppRef', mainAppRef)
+provide<BewlyAppProvider>('BEWLY_APP', {
+  activatedPage,
+  mainAppRef,
+  scrollbarRef,
+  handleBackToTop,
+  handlePageRefresh,
+  handleReachBottom,
+})
 </script>
 
 <template>
@@ -330,12 +331,12 @@ provide('mainAppRef', mainAppRef)
               <!-- control button group -->
               <BackToTopAndRefreshButtons
                 v-if="activatedPage !== AppPage.Search" :show-refresh-button="!showTopBarMask"
-                @refresh="handleRefresh"
+                @refresh="handleThrottledPageRefresh"
                 @back-to-top="handleBackToTop"
               />
 
               <Transition name="page-fade">
-                <Component :is="pages[activatedPage]" :key="dynamicComponentKey" />
+                <Component :is="pages[activatedPage]" />
               </Transition>
             </div>
           </main>

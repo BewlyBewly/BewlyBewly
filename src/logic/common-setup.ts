@@ -4,7 +4,6 @@ import Toast, { POSITION } from 'vue-toastification'
 import { createPinia } from 'pinia'
 import { i18n } from '~/utils/i18n'
 import 'vue-toastification/dist/index.css'
-import 'overlayscrollbars/overlayscrollbars.css'
 
 const pinia = createPinia()
 
@@ -29,6 +28,4 @@ export async function setupApp(app: App) {
       position: POSITION.TOP_CENTER,
     })
   app.use(pinia)
-  const { OverlayScrollbarsComponent } = await import('overlayscrollbars-vue')
-  app.component('OverlayScrollbarsComponent', OverlayScrollbarsComponent)
 }

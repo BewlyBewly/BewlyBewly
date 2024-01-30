@@ -1,10 +1,5 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import ForYou from './components/ForYou.vue'
-import Following from './components/Following.vue'
-import Trending from './components/Trending.vue'
-import Ranking from './components/Ranking.vue'
-import SubscribedSeries from './components/SubscribedSeries.vue'
 import type { HomeTab } from './types'
 import { HomeSubPage } from './types'
 import emitter from '~/utils/mitt'
@@ -12,13 +7,19 @@ import { settings } from '~/logic'
 
 const { t } = useI18n()
 
-const handleBackToTop = inject('handleBackToTop') as (targetScrollTop: number) => void
+const { handleBackToTop } = useBewlyApp()
 
-const recommendContentKey = ref<string>(`recommendContent${Number(new Date())}`)
 const activatedPage = ref<HomeSubPage>(HomeSubPage.ForYou)
-const pages = { ForYou, Following, SubscribedSeries, Trending, Ranking }
+const pages = {
+  [HomeSubPage.ForYou]: defineAsyncComponent(() => import('./components/ForYou.vue')),
+  [HomeSubPage.Following]: defineAsyncComponent(() => import('./components/Following.vue')),
+  [HomeSubPage.SubscribedSeries]: defineAsyncComponent(() => import('./components/SubscribedSeries.vue')),
+  [HomeSubPage.Trending]: defineAsyncComponent(() => import('./components/Trending.vue')),
+  [HomeSubPage.Ranking]: defineAsyncComponent(() => import('./components/Ranking.vue')),
+}
 const showSearchPageMode = ref<boolean>(false)
 const shouldMoveTabsUp = ref<boolean>(false)
+const tabContentLoading = ref<boolean>(false)
 
 const tabs = computed((): HomeTab[] => {
   return [
@@ -51,10 +52,6 @@ watch(() => activatedPage.value, () => {
 
 onMounted(() => {
   showSearchPageMode.value = true
-  emitter.off('pageRefresh')
-  emitter.on('pageRefresh', async () => {
-    recommendContentKey.value = `recommendContent${Number(new Date())}`
-  })
   emitter.off('topBarVisibleChange')
   emitter.on('topBarVisibleChange', (val) => {
     shouldMoveTabsUp.value = false
@@ -73,9 +70,18 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  emitter.off('pageRefresh')
   emitter.off('topBarVisibleChange')
 })
+
+function handleChangeTab(tab: HomeTab) {
+  // When the content of a tab is loading, prevent switching to another tab.
+  // Since `initPageAction()` within the tab replaces the `handleReachBottom` and `handlePageRefresh` functions.
+  // Therefore, this will lead to a failure in refreshing the data of the current tab
+  // because `handlePageRefresh` and `handleReachBottom` has been replaced
+  // now they are set to refresh the data of the tab you switched to
+  if (!tabContentLoading.value)
+    activatedPage.value = tab.value
+}
 </script>
 
 <template>
@@ -150,7 +156,8 @@ onUnmounted(() => {
             px-4 lh-35px bg="$bew-elevated-1 hover:$bew-elevated-1-hover" backdrop-glass rounded="$bew-radius"
             cursor-pointer shadow="$bew-shadow-1" box-border border="1 $bew-border-color" duration-300
             :class="{ 'tab-activated': activatedPage === tab.value }"
-            @click="activatedPage = tab.value"
+            :style="{ opacity: activatedPage !== tab.value && tabContentLoading ? 0.4 : 1 }"
+            @click="handleChangeTab(tab)"
           >
             <span class="text-center">{{ tab.label }}</span>
           </li>
@@ -158,7 +165,13 @@ onUnmounted(() => {
       </header>
 
       <Transition name="page-fade">
-        <Component :is="pages[activatedPage]" :key="recommendContentKey" />
+        <KeepAlive include="ForYou">
+          <Component
+            :is="pages[activatedPage]" :key="activatedPage"
+            @before-loading="tabContentLoading = true"
+            @after-loading="tabContentLoading = false"
+          />
+        </KeepAlive>
       </Transition>
       <!-- <RecommendContent :key="recommendContentKey" /> -->
     </main>
