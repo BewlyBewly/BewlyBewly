@@ -2,6 +2,11 @@
 import type { Ref } from 'vue'
 import type { DataItem as MomentItem, MomentResult } from '~/models/moment/moment'
 
+const emit = defineEmits<{
+  (e: 'beforeLoading'): void
+  (e: 'afterLoading'): void
+}>()
+
 const momentList = reactive<MomentItem[]>([])
 const isLoading = ref<boolean>(false)
 const needToLoginFirst = ref<boolean>(false)
@@ -59,6 +64,7 @@ async function getFollowedUsersVideos() {
     return
   }
 
+  emit('beforeLoading')
   isLoading.value = true
   try {
     const response: MomentResult = await browser.runtime.sendMessage({
@@ -99,6 +105,7 @@ async function getFollowedUsersVideos() {
   }
   finally {
     isLoading.value = false
+    emit('afterLoading')
   }
 }
 

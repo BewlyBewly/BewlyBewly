@@ -6,6 +6,11 @@ import type { List as RankingPgcItem, RankingPgcResult } from '~/models/video/ra
 import { settings } from '~/logic'
 import emitter from '~/utils/mitt'
 
+const emit = defineEmits<{
+  (e: 'beforeLoading'): void
+  (e: 'afterLoading'): void
+}>()
+
 const { t } = useI18n()
 const { handleBackToTop, handlePageRefresh } = useBewlyApp()
 
@@ -94,6 +99,7 @@ onBeforeUnmount(() => {
 
 function getRankingVideos() {
   videoList.length = 0
+  emit('beforeLoading')
   isLoading.value = true
   browser.runtime.sendMessage({
     contentScriptQuery: 'getRankingVideos',
@@ -104,7 +110,10 @@ function getRankingVideos() {
       const { list } = response.data
       Object.assign(videoList, list)
     }
-  }).finally(() => isLoading.value = false)
+  }).finally(() => {
+    isLoading.value = false
+    emit('afterLoading')
+  })
 }
 
 function getRankingPgc() {

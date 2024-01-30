@@ -6,6 +6,11 @@ import { accessKey, settings } from '~/logic'
 import { LanguageType } from '~/enums/appEnums'
 import { TVAppKey } from '~/utils/authProvider'
 
+const emit = defineEmits<{
+  (e: 'beforeLoading'): void
+  (e: 'afterLoading'): void
+}>()
+
 const videoList = reactive<VideoItem[]>([])
 const appVideoList = reactive<AppVideoItem[]>([])
 const isLoading = ref<boolean>(true)
@@ -82,6 +87,7 @@ function initPageAction() {
 }
 
 async function getRecommendVideos() {
+  emit('beforeLoading')
   isLoading.value = true
   try {
     const response: forYouResult = await browser.runtime.sendMessage({
@@ -116,10 +122,12 @@ async function getRecommendVideos() {
   }
   finally {
     isLoading.value = false
+    emit('afterLoading')
   }
 }
 
 async function getAppRecommendVideos() {
+  emit('beforeLoading')
   isLoading.value = true
   try {
     const response: AppForYouResult = await browser.runtime.sendMessage({
@@ -155,6 +163,7 @@ async function getAppRecommendVideos() {
   }
   finally {
     isLoading.value = false
+    emit('afterLoading')
   }
 }
 

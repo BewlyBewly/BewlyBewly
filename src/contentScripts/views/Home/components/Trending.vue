@@ -2,6 +2,11 @@
 import type { Ref } from 'vue'
 import type { TrendingResult, List as VideoItem } from '~/models/video/trending'
 
+const emit = defineEmits<{
+  (e: 'beforeLoading'): void
+  (e: 'afterLoading'): void
+}>()
+
 const videoList = reactive<VideoItem[]>([])
 const isLoading = ref<boolean>(false)
 const containerRef = ref<HTMLElement>() as Ref<HTMLElement>
@@ -32,6 +37,7 @@ function initPageAction() {
 }
 
 async function getTrendingVideos() {
+  emit('beforeLoading')
   isLoading.value = true
   try {
     const response: TrendingResult = await browser.runtime.sendMessage({
@@ -59,6 +65,7 @@ async function getTrendingVideos() {
   }
   finally {
     isLoading.value = false
+    emit('afterLoading')
   }
 }
 </script>
