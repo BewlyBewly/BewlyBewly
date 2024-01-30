@@ -3,7 +3,6 @@ import { useDateFormat } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 import { getCSRF, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
 import { calcCurrentTime } from '~/utils/dataFormatter'
-import emitter from '~/utils/mitt'
 import type { List as VideoItem, WatchLaterResult } from '~/models/video/watchLater'
 
 const { t } = useI18n()
@@ -11,20 +10,22 @@ const { t } = useI18n()
 const isLoading = ref<boolean>()
 const noMoreContent = ref<boolean>()
 const watchLaterList = reactive<VideoItem[]>([])
+const { handlePageRefresh } = useBewlyApp()
 
 onMounted(() => {
   getAllWatchLaterList()
+  initPageAction()
+})
 
-  emitter.off('pageRefresh')
-  emitter.on('pageRefresh', async () => {
+function initPageAction() {
+  handlePageRefresh.value = () => {
+    if (isLoading.value)
+      return
+
     watchLaterList.length = 0
     getAllWatchLaterList()
-  })
-})
-
-onUnmounted(() => {
-  emitter.off('pageRefresh')
-})
+  }
+}
 
 /**
  * Get watch later list
@@ -58,7 +59,6 @@ function deleteWatchLaterItem(index: number, aid: number) {
 }
 
 function handleClearAllWatchLater() {
-  // eslint-disable-next-line no-alert
   const result = confirm(
     t('watch_later.clear_all_confirm'),
   )
@@ -77,7 +77,6 @@ function handleClearAllWatchLater() {
 }
 
 function handleRemoveWatchedVideos() {
-  // eslint-disable-next-line no-alert
   const result = confirm(
     t('watch_later.remove_watched_videos_confirm'),
   )

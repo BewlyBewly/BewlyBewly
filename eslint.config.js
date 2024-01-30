@@ -14,6 +14,7 @@ module.exports = antfu({
         },
       },
     ],
+    'no-alert': 'off',
   },
   eslint: {
     ignorePatterns: [
