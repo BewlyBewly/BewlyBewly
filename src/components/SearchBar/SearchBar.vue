@@ -21,6 +21,8 @@ const selectedIndex = ref<number>(-1)
 const searchHistory = shallowRef<HistoryItem[]>([])
 const historyItemRef = ref<HTMLElement[]>([])
 const suggestionItemRef = ref<HTMLElement[]>([])
+const resultListRef = ref<HTMLElement>()
+const searchInputRef = ref<HTMLElement>()
 
 watch(isFocus, async (focus) => {
   // 延后加载搜索历史
@@ -132,6 +134,14 @@ async function handleClearSearchHistory() {
   await clearAllSearchHistory()
   searchHistory.value = []
 }
+
+function onSearchInputBlur(e: FocusEvent) {
+  if (e.relatedTarget && e.relatedTarget === resultListRef.value) {
+    searchInputRef.value?.focus()
+    return
+  }
+  isFocus.value = false
+}
 </script>
 
 <template>
@@ -164,6 +174,7 @@ async function handleClearSearchHistory() {
       </Transition>
 
       <input
+        ref="searchInputRef"
         v-model.trim="keyword"
         rounded="60px focus:$bew-radius"
         p="l-6 r-16 y-3"
@@ -173,7 +184,7 @@ async function handleClearSearchHistory() {
         ring="1 $bew-border-color"
         transition="all duration-300"
         type="text"
-        @blur="isFocus = false"
+        @blur="onSearchInputBlur"
         @focus="isFocus = true"
         @input="handleInput"
         @keyup.enter.stop.passive="navigateToSearchResultPage(keyword)"
@@ -199,7 +210,7 @@ async function handleClearSearchHistory() {
     </div>
 
     <Transition name="result-list">
-      <template v-if="isFocus && searchHistory.length !== 0">
+      <div v-if="isFocus && searchHistory.length !== 0" ref="resultListRef" tabindex="-1">
         <div v-if="keyword.length === 0" id="search-history">
           <div class="history-list flex flex-col gap-y-2">
             <div class="title p-2 pb-0 flex justify-between">
@@ -217,14 +228,14 @@ async function handleClearSearchHistory() {
                 @click="navigateToSearchResultPage(item.value)"
               >
                 <span> {{ item.value }}</span>
-                <button
+                <div
                   rounded-full duration-300 pointer-events-auto cursor-pointer p-1
                   text="xs $bew-text-2 hover:white" leading-0 bg="$bew-fill-2 hover:$bew-theme-color"
                   pos="absolute top-0 right-0" scale-80 opacity-0 group-hover:opacity-100
                   @click.stop="handleDelete(item.value)"
                 >
                   <ic-baseline-clear />
-                </button>
+                </div>
               </div>
             </div>
           </div>
@@ -241,7 +252,7 @@ async function handleClearSearchHistory() {
             <span v-html="item.name" />
           </div>
         </div>
-      </template>
+      </div>
     </Transition>
   </div>
 </template>
