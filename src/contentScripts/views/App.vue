@@ -47,7 +47,7 @@ const isTopBarFixed = computed(() => {
     // // search page
     // || /https?:\/\/search.bilibili.com\/.*$/.test(location.href)
     // video page
-    || /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(location.href)
+    || /https?:\/\/(www.)?bilibili.com\/(video|list)\/.*/.test(location.href)
     // anime playback & movie page
     || /https?:\/\/(www.)?bilibili.com\/bangumi\/play\/.*/.test(location.href)
     // moment page

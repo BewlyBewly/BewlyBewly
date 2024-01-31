@@ -36,7 +36,7 @@ function isSupportedPages() {
     || /https?:\/\/www.bilibili.com\/\?bvid=.*$/.test(currentUrl)
 
     // video page
-    || /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(currentUrl)
+    || /https?:\/\/(www.)?bilibili.com\/(video|list)\/.*/.test(currentUrl)
     // anime playback & movie page
     || /https?:\/\/(www.)?bilibili.com\/bangumi\/play\/.*/.test(currentUrl)
     // watch later playlist
