@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.3](https://github.com/hakadao/BewlyBewly/compare/v0.14.4...v0.14.3) (2024-01-31)
+
+
+### Miscellaneous
+
+* update version number ([39361e1](https://github.com/hakadao/BewlyBewly/commit/39361e1f6f2cf0ccab27f12d27f8b7b980ed8049))
+
 ## [0.14.4](https://github.com/hakadao/BewlyBewly/compare/v0.14.3...v0.14.4) (2024-01-31)
 
 ### Bug Fixes
