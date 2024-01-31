@@ -125,6 +125,12 @@
         color: var(--bew-theme-color) !important;
       }
 
+      #page-fav .modal-container.edit-video-modal {
+        .target-favlist {
+          padding: 12px 36px;
+        }
+      }
+
       .search-nav-item.search-nav-actived .num,
       .search-nav-item.search-nav-actived .text {
         color: white !important;
@@ -140,6 +146,7 @@
       .be-pager-item-active,
       .search-nav-item.search-nav-actived {
         background-color: var(--bew-theme-color);
+        color: white !important;
       }
 
       .bangumi-pagelistbox .p:hover,
@@ -394,6 +401,62 @@
       .bangumi-pagelistbox .custom-right .custom-right-inner.custompage,
       .feed-dynamic-header-title {
         color: var(--bew-text-1);
+      }
+
+      #page-fav .modal-container.edit-video-modal {
+        .modal-header .modal-title {
+          .edit-video-title {
+            color: var(--bew-text-1);
+          }
+          .edit-video-subtitle {
+            color: var(--bew-text-2);
+          }
+        }
+
+        .target-favlist {
+          padding: 12px 36px;
+        }
+
+        .target-favlist-container {
+          .target-favitem {
+           .fav-meta .fav-name {
+              color: var(--bew-text-1);
+            }
+            .target-fav-count {
+              color: var(--bew-text-2);
+            }
+          }
+          .target-favitem:hover {
+            .fav-meta .fav-name {
+              color: var(--bew-theme-color);
+            }
+          }
+          .collection-mask {
+            background-color: var(--bew-theme-color-10);
+          }
+        }
+
+        .btn-container {
+          .btn {
+            background-color: var(--bew-fill-1);
+            color: var(--bew-text-1);
+          }
+
+          .btn:hover {
+            background-color: var(--bew-theme-color-10);
+          }
+        }
+
+        .addfav-container {
+          .fav-container {
+            .fav-add-btn {
+              background-color: var(--bew-fill-1);
+            }
+            .fav-add-btn:hover {
+              background-color: var(--bew-theme-color-10);
+            }
+          }
+        }
       }
 
       .i-m-btn,
