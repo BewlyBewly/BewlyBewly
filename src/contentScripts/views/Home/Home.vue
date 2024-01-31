@@ -173,7 +173,7 @@ function toggleTabContentLoading(loading: boolean) {
             <Icon
               :style="{
                 opacity: activatedPage === tab.value && tabContentLoading ? 1 : 0,
-                margin: activatedPage === tab.value && tabContentLoading ? '0' : '-11px',
+                margin: activatedPage === tab.value && tabContentLoading ? '0' : '-12px',
               }"
               icon="svg-spinners:ring-resize"
               duration-300 ease-in-out mb--2px text-16px
