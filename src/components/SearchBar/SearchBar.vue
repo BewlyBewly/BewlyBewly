@@ -179,7 +179,7 @@ async function handleClearSearchHistory() {
         ref="keywordRef"
         v-model.trim="keyword"
         rounded="60px focus:$bew-radius"
-        p="l-6 r-16 y-3"
+        p="l-6 r-18 y-3"
         h-50px
         text="$bew-text-1"
         un-border="3 solid transparent focus:$bew-theme-color"
@@ -193,6 +193,16 @@ async function handleClearSearchHistory() {
         @keyup.down.stop.passive="handleKeyDown"
         @keydown.stop="() => {}"
       >
+      <button
+        v-if="isFocus && keyword"
+        pos="absolute right-12" bg="$bew-fill-1 hover:$bew-fill-2" text="xs" rounded-10
+        p-1
+        flex="~ items-center justify-between"
+        @click="keyword = ''"
+      >
+        <ic-baseline-clear shrink-0 />
+      </button>
+
       <button
         p-2
         rounded-full
