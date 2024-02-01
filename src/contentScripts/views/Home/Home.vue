@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import { Icon } from '@iconify/vue'
 import type { HomeTab } from './types'
 import { HomeSubPage } from './types'
 import emitter from '~/utils/mitt'
 import { settings } from '~/logic'
+import { delay } from '~/utils/main'
 
 const { t } = useI18n()
 
@@ -82,6 +84,14 @@ function handleChangeTab(tab: HomeTab) {
   if (!tabContentLoading.value)
     activatedPage.value = tab.value
 }
+
+function toggleTabContentLoading(loading: boolean) {
+  nextTick(async () => {
+    if (!loading)
+      await delay(500)
+    tabContentLoading.value = loading
+  })
+}
 </script>
 
 <template>
@@ -101,7 +111,7 @@ function handleChangeTab(tab: HomeTab) {
           }"
         />
         <!-- background mask -->
-        <transition name="fade">
+        <Transition name="fade">
           <div
             v-if="(!settings.individuallySetSearchPageWallpaper && settings.enableWallpaperMasking) || (settings.searchPageEnableWallpaperMasking)"
             pos="relative left-0 top-0" w-full h-inherit pointer-events-none duration-300
@@ -117,7 +127,7 @@ function handleChangeTab(tab: HomeTab) {
               }"
             />
           </div>
-        </transition>
+        </Transition>
       </div>
     </Transition>
 
@@ -155,11 +165,19 @@ function handleChangeTab(tab: HomeTab) {
             v-for="tab in tabs" :key="tab.value"
             px-4 lh-35px bg="$bew-elevated-1 hover:$bew-elevated-1-hover" backdrop-glass rounded="$bew-radius"
             cursor-pointer shadow="$bew-shadow-1" box-border border="1 $bew-border-color" duration-300
+            flex="~ gap-2 items-center"
             :class="{ 'tab-activated': activatedPage === tab.value }"
-            :style="{ opacity: activatedPage !== tab.value && tabContentLoading ? 0.4 : 1 }"
             @click="handleChangeTab(tab)"
           >
             <span class="text-center">{{ tab.label }}</span>
+            <Icon
+              :style="{
+                opacity: activatedPage === tab.value && tabContentLoading ? 1 : 0,
+                margin: activatedPage === tab.value && tabContentLoading ? '0' : '-12px',
+              }"
+              icon="svg-spinners:ring-resize"
+              duration-300 ease-in-out mb--2px text-16px
+            />
           </li>
         </ul>
       </header>
@@ -168,8 +186,8 @@ function handleChangeTab(tab: HomeTab) {
         <KeepAlive include="ForYou">
           <Component
             :is="pages[activatedPage]" :key="activatedPage"
-            @before-loading="tabContentLoading = true"
-            @after-loading="tabContentLoading = false"
+            @before-loading="toggleTabContentLoading(true)"
+            @after-loading="toggleTabContentLoading(false)"
           />
         </KeepAlive>
       </Transition>
