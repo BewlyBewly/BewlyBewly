@@ -1,6 +1,5 @@
 <!-- TODO: refactor all that code -->
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
 import type { HistoryItem, SuggestionItem, SuggestionResponse } from './searchHistoryProvider'
 import {
   addSearchHistory,
