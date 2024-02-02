@@ -23,6 +23,7 @@ common:
   disable: 閂埋
   refresh: 重新整理
   reset: 重置
+  no_more_content: 唔使睇喇，冇嘢喇
 settings:
   title: 設定
 

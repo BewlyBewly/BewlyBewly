@@ -5,8 +5,7 @@ import type { HoveringDockItem } from './types'
 import { settings } from '~/logic'
 
 const emit = defineEmits(['settings-visibility-change'])
-
-const mainAppRef = inject('mainAppRef') as Ref<HTMLDivElement>
+const { mainAppRef } = useBewlyApp()
 
 const hoveringDockItem = reactive<HoveringDockItem>({
   themeMode: false,
