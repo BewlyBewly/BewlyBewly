@@ -202,7 +202,14 @@ function toggleDockHide(hide: boolean) {
               :class="{ active: activatedPage === dockItemVisibility.page }"
               @click="emit('change-page', dockItemVisibility.page)"
             >
-              <Icon :icon="currentDockItems.find((item) => item.page === dockItemVisibility.page)?.icon as string" />
+              <Icon
+                v-show="activatedPage !== dockItemVisibility.page"
+                :icon="currentDockItems.find((item) => item.page === dockItemVisibility.page)?.icon as string"
+              />
+              <Icon
+                v-show="activatedPage === dockItemVisibility.page"
+                :icon="currentDockItems.find((item) => item.page === dockItemVisibility.page)?.iconActivated as string"
+              />
             </button>
           </Tooltip>
         </template>
