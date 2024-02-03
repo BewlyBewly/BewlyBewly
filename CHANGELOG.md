@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.14.5](https://github.com/hakadao/BewlyBewly/compare/v0.14.4...v0.14.5) (2024-02-03)
+
+
+### Bug Fixes
+
+* adapt unadapted parts for user space page ([dd0d615](https://github.com/hakadao/BewlyBewly/commit/dd0d615bcecd7f4412c595876d218b5a99305ff6))
+* **style:** adapt unadapted parts of the user space page in dark mode [#259](https://github.com/hakadao/BewlyBewly/issues/259) ([b391487](https://github.com/hakadao/BewlyBewly/commit/b39148738fa0d1b97b5fc768da73c93ab4bbf5be))
+* support dark mode for note popup [#262](https://github.com/hakadao/BewlyBewly/issues/262) ([ce5e210](https://github.com/hakadao/BewlyBewly/commit/ce5e21028242041fd141b1d44eac11671e96ec7c))
+
+
+### Style Changes
+
+* adapt unadapted styles for video page ([e88d0cb](https://github.com/hakadao/BewlyBewly/commit/e88d0cb482c56e2dee61271af12afd5ff69c5662))
+
+
+### Miscellaneous
+
+* update version number ([09a5a55](https://github.com/hakadao/BewlyBewly/commit/09a5a55fbfa655ec79d9121af86bb585ea287d85))
+* update version number ([39361e1](https://github.com/hakadao/BewlyBewly/commit/39361e1f6f2cf0ccab27f12d27f8b7b980ed8049))
+
 ## [0.14.4](https://github.com/hakadao/BewlyBewly/compare/v0.14.3...v0.14.4) (2024-01-31)
 
 ### Bug Fixes
