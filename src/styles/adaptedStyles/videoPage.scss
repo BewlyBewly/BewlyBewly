@@ -8,30 +8,72 @@
     border-radius: 0 0 8px 8px;
   }
 
+  // #region theme color adaption part
+  .note-list .list-note-operation,
+  .note-pc .note-container .note-header .note-operation,
+  .note-up .up-desc-container .desc-top .attention-btn-container {
+    background-color: var(--bew-theme-color);
+  }
+
   .user-card-m-exp .user-info-wrapper .info .user .user-label {
     background-color: var(--bew-theme-color) !important;
   }
 
-  .membersinfo-upcard .staff-info .staff-name.is-vip {
-    color: var(--bew-theme-color) !important;
-  }
-
-  .upinfo-btn-panel .new-charge-btn .charge-btn-icon img,
-  .bpx-player-viewpoint-menu-item-active,
-  .cur-play-icon,
-  .playing-gif,
-  .multi-page-v1 .cur-list .list-box li.on img,
-  .coin-operated-m-exp .like-checkbox input[type='checkbox']:checked + i {
-    filter: var(--bew-filter-icon-glow);
+  .note-list .list-note-operation:hover,
+  .note-pc .note-container .note-header .note-operation:hover,
+  .user-card-m-exp .user-info-wrapper .info .btn-box .like:hover,
+  .coin-operated-m-exp .coin-bottom .bi-btn:hover,
+  .video-share-popover
+    .video-share-dropdown
+    .dropdown-top
+    .dropdown-top-left
+    .capture-bar
+    .bar-right
+    .copy-link:hover,
+  .note-up .up-desc-container .desc-top .attention-btn-container:hover {
+    background-color: var(--bew-theme-color-80);
   }
 
   .upinfo-btn-panel .follow-btn.not-follow:hover {
     background-color: var(--bew-theme-color-80) !important;
   }
 
+  .note-detail .note-operation .tab-action-item.is-active .tab-icon {
+    color: var(--bew-theme-color);
+  }
+
+  .membersinfo-upcard .staff-info .staff-name.is-vip,
+  .ql-snow.ql-toolbar .ql-picker-item.ql-selected,
+  .ql-snow .ql-toolbar .ql-picker-item.ql-selected,
+  .ql-snow.ql-toolbar .ql-picker-item:hover,
+  .ql-snow .ql-toolbar .ql-picker-item:hover,
+  .ql-snow.ql-toolbar .ql-picker-label.ql-active,
+  .ql-snow .ql-toolbar .ql-picker-label.ql-active,
+  .ql-snow.ql-toolbar .ql-picker-label:hover,
+  .ql-snow .ql-toolbar .ql-picker-label:hover,
+  .ql-snow.ql-toolbar button.ql-active,
+  .ql-snow .ql-toolbar button.ql-active,
+  .ql-snow.ql-toolbar button:focus,
+  .ql-snow .ql-toolbar button:focus,
+  .ql-snow.ql-toolbar button:hover,
+  .ql-snow .ql-toolbar button:hover {
+    color: var(--bew-theme-color) !important;
+  }
+
   .upinfo-btn-panel .not-follow-charge-btn:hover {
-    border-color: var(--bew-theme-color-80);
     color: var(--bew-theme-color-80);
+  }
+
+  .coin-operated-m-exp .mc-box:hover,
+  .coin-operated-m-exp .mc-box.on,
+  .note-pc .note-container .note-header .note-operation {
+    border-color: var(--bew-theme-color);
+  }
+
+  .upinfo-btn-panel .not-follow-charge-btn:hover,
+  .user-card-m-exp .user-info-wrapper .info .btn-box .like:hover,
+  .coin-operated-m-exp .coin-bottom .bi-btn:hover {
+    border-color: var(--bew-theme-color-80);
   }
 
   // Tick icon for  danmaku enable
@@ -39,54 +81,159 @@
     .bui-danmaku-switch-input:checked
     + .bui-danmaku-switch-label
     .bui-danmaku-switch-on
-    path:nth-child(2) {
+    path:nth-child(2),
+  .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-fill,
+  .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-fill,
+  .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill,
+  .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill,
+  .ql-snow.ql-toolbar .ql-picker-item:hover .ql-fill,
+  .ql-snow .ql-toolbar .ql-picker-item:hover .ql-fill,
+  .ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke.ql-fill,
+  .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke.ql-fill,
+  .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-fill,
+  .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-fill,
+  .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke.ql-fill,
+  .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke.ql-fill,
+  .ql-snow.ql-toolbar .ql-picker-label:hover .ql-fill,
+  .ql-snow .ql-toolbar .ql-picker-label:hover .ql-fill,
+  .ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke.ql-fill,
+  .ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke.ql-fill,
+  .ql-snow.ql-toolbar button.ql-active .ql-fill,
+  .ql-snow .ql-toolbar button.ql-active .ql-fill,
+  .ql-snow.ql-toolbar button.ql-active .ql-stroke.ql-fill,
+  .ql-snow .ql-toolbar button.ql-active .ql-stroke.ql-fill,
+  .ql-snow.ql-toolbar button:focus .ql-fill,
+  .ql-snow .ql-toolbar button:focus .ql-fill,
+  .ql-snow.ql-toolbar button:focus .ql-stroke.ql-fill,
+  .ql-snow .ql-toolbar button:focus .ql-stroke.ql-fill,
+  .ql-snow.ql-toolbar button:hover .ql-fill,
+  .ql-snow .ql-toolbar button:hover .ql-fill,
+  .ql-snow.ql-toolbar button:hover .ql-stroke.ql-fill,
+  .ql-snow .ql-toolbar button:hover .ql-stroke.ql-fill {
     fill: var(--bew-theme-color);
   }
 
-  .user-card-m-exp .user-info-wrapper .info .btn-box .like:hover {
-    background-color: var(--bew-theme-color-80);
-    border-color: var(--bew-theme-color-80);
-  }
-
-  // 投幣滑過&選中的邊框
-  .coin-operated-m-exp .mc-box:hover,
-  .coin-operated-m-exp .mc-box.on {
-    border-color: var(--bew-theme-color);
-  }
-  // 投幣按鈕滑過效果
-  .coin-operated-m-exp .coin-bottom .bi-btn:hover {
-    background-color: var(--bew-theme-color-80);
-    border-color: var(--bew-theme-color-80);
-  }
-
-  .video-share-popover {
-    // border-color: var(--bew-border-color);
-    border: none;
-  }
-
-  .video-share-popover
-    .video-share-dropdown
-    .dropdown-top
-    .dropdown-top-left
-    .capture-bar
-    .bar-right
-    .copy-link:hover {
-    background-color: var(--bew-theme-color-80);
+  .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke,
+  .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke,
+  .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter,
+  .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter,
+  .ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke,
+  .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke,
+  .ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke-miter,
+  .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke-miter,
+  .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke,
+  .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke,
+  .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke-miter,
+  .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke-miter,
+  .ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke,
+  .ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke,
+  .ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke-miter,
+  .ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke-miter,
+  .ql-snow.ql-toolbar button.ql-active .ql-stroke,
+  .ql-snow .ql-toolbar button.ql-active .ql-stroke,
+  .ql-snow.ql-toolbar button.ql-active .ql-stroke-miter,
+  .ql-snow .ql-toolbar button.ql-active .ql-stroke-miter,
+  .ql-snow.ql-toolbar button:focus .ql-stroke,
+  .ql-snow .ql-toolbar button:focus .ql-stroke,
+  .ql-snow.ql-toolbar button:focus .ql-stroke-miter,
+  .ql-snow .ql-toolbar button:focus .ql-stroke-miter,
+  .ql-snow.ql-toolbar button:hover .ql-stroke,
+  .ql-snow .ql-toolbar button:hover .ql-stroke,
+  .ql-snow.ql-toolbar button:hover .ql-stroke-miter,
+  .ql-snow .ql-toolbar button:hover .ql-stroke-miter {
+    stroke: var(--bew-theme-color);
   }
 
   // AI视频总结
   .video-ai-assistant .video-ai-assistant-info {
     -webkit-text-fill-color: var(--bew-theme-color);
   }
+  // #endregion
 
+  // #region dark mode adaption part
   &.dark {
-    .video-ai-assistant .video-ai-assistant-bg::before {
+    .note-list .note-card-container .note-card,
+    .resizable-component .ql-tag-blot .time-tag-item,
+    .ql-toolbar {
+      background-color: var(--bew-fill-1);
+    }
+
+    .video-ai-assistant .video-ai-assistant-bg::before,
+    .note-pc .note-container .note-header .back-note-list:hover,
+    .note-pc .note-container .note-header .jump-note-package:hover,
+    .note-pc .note-container .note-header .close-note:hover {
       background: var(--bew-fill-2);
+    }
+
+    .note-pc .note-container,
+    .note-detail {
+      background-color: var(--bew-elevated-solid-1);
+    }
+
+    .note-pc .note-container .note-header {
+      background-color: var(--bew-elevated-solid-1) !important;
+    }
+
+    .note-detail .note-operation .sanlian-box,
+    .ql-snow .ql-picker-options {
+      background-color: var(--bew-elevated-solid-2);
+    }
+
+    .note-pc .note-container .note-header *,
+    .note-list .note-card-container .note-card .note-content,
+    .note-up .up-desc-container .desc-top .up-name,
+    .resizable-component .ql-tag-blot .time-tag-item__text,
+    .ql-snow.ql-toolbar button,
+    .ql-snow .ql-toolbar button,
+    .ql-snow .ql-picker,
+    .video-owner-state .video-owner-state-item {
+      color: var(--bew-text-1);
     }
 
     .up-detail .up-detail-top .up-name,
     .user-card-m-exp .user-info-wrapper .info .user .name {
       color: var(--bew-text-1) !important;
     }
+
+    .note-list .note-card-container .note-card .user-info .user-name,
+    .note-up .up-desc-container .desc-bottom,
+    .note-detail .note-operation .tab-action-item .tab-action-icon .tab-num {
+      color: var(--bew-text-2);
+    }
+
+    .note-list .note-card-container .note-card .note-info {
+      color: var(--bew-text-3);
+    }
+
+    .note-pc .note-container .note-header path {
+      fill: var(--bew-text-1);
+    }
+
+    .ql-snow .ql-fill, .ql-snow .ql-stroke.ql-fill {
+      fill: var(--bew-text-2);
+    }
+
+    .ql-snow .ql-stroke,
+    .ql-snow .ql-picker.ql-expanded .ql-picker-label .ql-stroke {
+      stroke: var(--bew-text-1);
+    }
+
+    .video-share-popover,
+    .note-list .part-line,
+    .note-pc .note-container,
+    .note-list .note-card-container .note-card:hover,
+    .note-detail .note-operation .sanlian-box {
+      border-color: var(--bew-border-color);
+    }
+
+    .upinfo-btn-panel .new-charge-btn .charge-btn-icon img,
+    .bpx-player-viewpoint-menu-item-active,
+    .cur-play-icon,
+    .playing-gif,
+    .multi-page-v1 .cur-list .list-box li.on img,
+    .coin-operated-m-exp .like-checkbox input[type='checkbox']:checked + i {
+      filter: var(--bew-filter-icon-glow);
+    }
   }
+  //  #endregion
 }
