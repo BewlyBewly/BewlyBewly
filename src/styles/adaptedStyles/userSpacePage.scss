@@ -48,7 +48,9 @@
     .v-search-count,
     .feed-dynamic-header-search-count,
     .card .main-content .button-bar .single-button .text-bar.selected,
-    .wrapper .edit-video-modal .edit-video-subtitle {
+    .wrapper .edit-video-modal .edit-video-subtitle,
+    .list-style .iconfont.active,
+    .list-style .iconfont:hover {
       color: var(--bew-theme-color);
     }
 
@@ -101,7 +103,8 @@
     #page-fav .fav-sidenav .fav-item.cur,
     .favInfo-box .favInfo-details .fav-options .fav-play,
     .be-pager-item-active,
-    .search-nav-item.search-nav-actived {
+    .search-nav-item.search-nav-actived,
+    #page-series-detail .channel-option .modify-channel {
       background-color: var(--bew-theme-color);
     }
 
@@ -245,13 +248,23 @@
       .target-fav-title
       .fav-meta
       .fav-name,
-    .wrapper .edit-video-modal .edit-video-title {
+    .wrapper .edit-video-modal .edit-video-title,
+    #page-series-detail .channel-detail .content .breadcrumb .item {
       color: var(--bew-text-1);
     }
 
     .btn.ghost,
     .btn.ghost:focus,
-    .btn.ghost:hover {
+    .btn.ghost:hover,
+    #pin-wrapper .pin-layer-header-counter,
+    .channel-add-video .text,
+    .series-item .item-title .qipapnum,
+    .series-item .header .btn-row .btn,
+    #page-series-index
+      .channel-index
+      .breadcrumb
+      .item.cur
+      .create-series-icon {
       color: var(--bew-text-2);
     }
 
@@ -337,7 +350,12 @@
     .fans-action-btn.follow,
     .btn.ghost,
     .btn.ghost:focus,
-    .btn.ghost:hover {
+    .btn.ghost:hover,
+    .series-item .item-title .qipapnum:before,
+    .series-item .item-title .qipapnum,
+    .series-item .header .btn-row .btn,
+    #page-series-index .channel-index .breadcrumb .item.cur .create-series-icon,
+    #page-series-detail .filter {
       border-color: var(--bew-border-color);
     }
 
@@ -347,11 +365,6 @@
 
     #page-fav .fav-main .small-item {
       border-color: transparent;
-    }
-
-    .series-item .split-line,
-    .wrapper .edit-video-modal .favlist-body:after {
-      background-color: var(--bew-border-color);
     }
 
     .i-pin-c {
@@ -429,7 +442,8 @@
     //   color: var(--bew-theme-color);
     // }
 
-    .section .count:before {
+    .section .count:before,
+    .series-item .item-title .qipapnum:before {
       display: none;
     }
 
@@ -441,6 +455,11 @@
     .edit-media-list .edit-mask .edit-board,
     .pgc-space-follow-item .bangumi-options .opt-list {
       background-color: var(--bew-elevated-solid-1);
+    }
+
+    .series-item .split-line,
+    .wrapper .edit-video-modal .favlist-body:after {
+      background-color: var(--bew-border-color);
     }
 
     .col-full {
@@ -459,7 +478,11 @@
     .bangumi-pagelistbox .custom-right .custom-right-inner.custompage,
     .btn.ghost,
     .btn.ghost:focus,
-    .btn.ghost:hover {
+    .btn.ghost:hover,
+    .channel-add-video,
+    .series-item .item-title .qipapnum,
+    .list-create,
+    #page-series-detail .channel-add-video {
       background-color: var(--bew-fill-1);
     }
 
