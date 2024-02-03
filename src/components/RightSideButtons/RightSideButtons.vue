@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { Ref } from 'vue'
 import { usePreferredDark } from '@vueuse/core'
 import type { HoveringDockItem } from './types'
 import { settings } from '~/logic'
