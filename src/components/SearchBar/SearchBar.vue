@@ -1,5 +1,6 @@
 <!-- TODO: refactor all that code -->
 <script setup lang="ts">
+import { onKeyStroke } from '@vueuse/core'
 import type { HistoryItem, SuggestionItem, SuggestionResponse } from './searchHistoryProvider'
 import {
   addSearchHistory,
@@ -14,6 +15,7 @@ defineProps<{
   focusedCharacter?: string
 }>()
 
+const keywordRef = ref<HTMLInputElement>()
 const isFocus = ref<boolean>(false)
 const keyword = ref<string>('')
 const suggestions = reactive<SuggestionItem[]>([])
@@ -27,6 +29,16 @@ watch(isFocus, async (focus) => {
   if (focus)
     searchHistory.value = await getSearchHistory()
 })
+
+onKeyStroke('/', (e) => {
+  e.preventDefault()
+  keywordRef.value?.focus()
+})
+onKeyStroke('Escape', (e) => {
+  e.preventDefault()
+  keywordRef.value?.blur()
+  isFocus.value = false
+}, { target: keywordRef })
 
 function handleInput() {
   selectedIndex.value = -1
@@ -164,6 +176,7 @@ async function handleClearSearchHistory() {
       </Transition>
 
       <input
+        ref="keywordRef"
         v-model.trim="keyword"
         rounded="60px focus:$bew-radius"
         p="l-6 r-18 y-3"
