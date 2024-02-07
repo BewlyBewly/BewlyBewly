@@ -64,6 +64,42 @@ export function hexToRGBA(hex: string, alpha: number): string {
     return `rgb(${r}, ${g}, ${b})`
 }
 
+export function hls2RGBA(color: string, alpha: number): string {
+  // hls to rgb
+  // https://stackoverflow.com/questions/2353211/hsl-to-rgb-color-conversion
+  const [_, hs, ss, ls] = /hsl\((\d+) (\d+)% (\d+)%\)/i.exec(color)!
+  const h = Number.parseInt(hs)
+  const s = Number.parseFloat(ss) / 100
+  const l = Number.parseFloat(ls) / 100
+  let r: number, g: number, b: number
+
+  if (s === 0) {
+    r = g = b = l // achromatic
+  }
+  else {
+    const q = l < 0.5 ? l * (1 + s) : l + s - l * s
+    const p = 2 * l - q
+    r = hueToRgb(p, q, h + 1 / 3)
+    g = hueToRgb(p, q, h)
+    b = hueToRgb(p, q, h - 1 / 3)
+  }
+  return `rgba(${Math.round(r * 255)}, ${Math.round(g * 255)}, ${Math.round(b * 255)}, ${alpha})`
+}
+
+export function hueToRgb(p: number, q: number, t: number) {
+  if (t < 0)
+    t += 1
+  if (t > 1)
+    t -= 1
+  if (t < 1 / 6)
+    return p + (q - p) * 6 * t
+  if (t < 1 / 2)
+    return q
+  if (t < 2 / 3)
+    return p + (q - p) * (2 / 3 - t) * 6
+  return p
+}
+
 /**
  * Smooth scroll to the top of the html element
  */

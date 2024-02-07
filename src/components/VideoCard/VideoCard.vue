@@ -188,8 +188,11 @@ function handelMouseLeave() {
       class="video-card group"
       :class="isDislike ? 'is-dislike' : ''"
       w="full" pos="absolute top-0 left-0"
-      rounded="$bew-radius" duration-300 ease-in-out
-      hover:bg="$bew-fill-2" hover:ring="8 $bew-fill-2"
+      rounded="$bew-radius"
+      transition="all ease-in-out 300"
+      hover:bg="$bew-fill-3"
+      backdrop-blur-md
+      p="x-6 y-4"
       :style="{ contentVisibility }"
     >
       <div :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }">
@@ -307,7 +310,7 @@ function handelMouseLeave() {
           flex="~"
         >
           <!-- Author Avatar -->
-          <div :style="{ display: horizontal ? 'none' : 'flex' }">
+          <div :style="{ display: horizontal ? 'none' : 'flex', justifyContent: 'center' }">
             <a
               v-if="authorFace"
               m="r-4" w="40px" h="40px" rounded="1/2" overflow="hidden"
@@ -333,7 +336,8 @@ function handelMouseLeave() {
                 cursor="pointer"
               >
                 <a :href="videoUrl" target="_blank" :title="title">
-                  {{ title }}</a>
+                  {{ title }}
+                </a>
               </h3>
 
               <!-- <div
@@ -405,9 +409,9 @@ function handelMouseLeave() {
             <div text="base $bew-text-2" w-fit m="t-2">
               <span
                 v-if="author"
-                class="channel-name"
-                text="hover:$bew-text-1"
-                cursor-pointer mr-4
+                class="channel-name keep-one-lines cursor-pointer pr-2 mr-4"
+                hover="text-$bew-text-1 font-500"
+                :title="author"
                 @click="gotoChannel(mid ?? 0)"
               >
                 {{ author }}
@@ -426,8 +430,8 @@ function handelMouseLeave() {
             <div
               v-if="desc"
               :title="desc"
-              class="keep-two-lines"
-              mt-2 text="base $bew-text-3" w-full max-h-12
+              class="keep-two-lines w-full max-h-12 mt-2"
+              text="base $bew-text-3"
               style="white-space: pre-line;"
             >
               {{ desc }}

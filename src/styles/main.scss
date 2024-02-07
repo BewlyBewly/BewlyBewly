@@ -15,8 +15,6 @@
 
 ::-webkit-scrollbar-track {
   background: transparent;
-
-
 }
 
 html.bewly-design > ::-webkit-scrollbar-track {
@@ -54,6 +52,17 @@ html.dark.bewly-design {
   line-break: anywhere;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+  min-height: calc(1em * 1.4 * 2);
+}
+
+.keep-one-lines {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-break: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  min-height: calc(1em * 1.4);
 }
 
 .bewly-design {

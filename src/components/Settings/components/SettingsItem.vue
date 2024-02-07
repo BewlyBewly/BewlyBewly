@@ -17,7 +17,7 @@ defineProps<{
         </div>
 
         <div
-          text="sm $bew-text-2"
+          text="xs $bew-text-2"
           :style="{ marginTop: $slots.desc || desc ? '0.25rem' : '0' }"
         >
           <slot name="desc">

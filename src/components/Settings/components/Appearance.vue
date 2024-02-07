@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
+import { fontColorOptions } from '../types'
 import { settings } from '~/logic'
 
 const { t } = useI18n()
@@ -24,6 +25,20 @@ const themeColorOptions = computed<Array<string>>(() => {
     '#fb7299',
     '#fda4af',
   ]
+})
+const filteredFontColorOption = computed(() => {
+  if (settings.value.theme === 'auto') {
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+      return fontColorOptions[0]
+    else
+      return fontColorOptions[1]
+  }
+  else if (settings.value.theme === 'light') {
+    return fontColorOptions[1]
+  }
+  else {
+    return fontColorOptions[0]
+  }
 })
 // const bilibiliEvolvedThemeColor = computed(() => {
 //   return getComputedStyle(document.querySelector('html') as HTMLElement).getPropertyValue('--theme-color').trim() ?? '#00a1d6'
@@ -73,9 +88,31 @@ function changeThemeColor(color: string) {
   settings.value.themeColor = color
 }
 
+function changeFontColor(color: string) {
+  settings.value.fontColor = color
+}
+
 function changeWallpaper(url: string) {
   settings.value.wallpaper = url
 }
+
+watch(() => settings.value.theme, (theme) => {
+  if (theme === 'auto') {
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches && settings.value.fontColor === fontColorOptions[1]) {
+      settings.value.fontColor = fontColorOptions[0]
+    }
+    else {
+      if (settings.value.fontColor === fontColorOptions[0])
+        settings.value.fontColor = fontColorOptions[1]
+    }
+  }
+  else if (theme === 'light' && settings.value.fontColor === fontColorOptions[0]) {
+    settings.value.fontColor = fontColorOptions[1]
+  }
+  else if (theme === 'dark' && settings.value.fontColor === fontColorOptions[1]) {
+    settings.value.fontColor = fontColorOptions[0]
+  }
+}, { immediate: true })
 </script>
 
 <template>
@@ -84,7 +121,23 @@ function changeWallpaper(url: string) {
       <SettingsItem :title="$t('settings.theme')">
         <Select v-model="settings.theme" w-full :options="themeOptions" />
       </SettingsItem>
-      <SettingsItem :title="$t('settings.theme_color')">
+      <SettingsItem title="字体颜色" desc="自定义字体颜色">
+        <div flex="~ gap-2 wrap" justify-end>
+          <div
+            v-for="color in [filteredFontColorOption, ...themeColorOptions]" :key="color"
+            w-20px h-20px rounded-8 cursor-pointer transition
+            duration-300 box-border
+            :style="{
+              background: color,
+              transform: color === settings.fontColor ? 'scale(1.3)' : 'scale(1)',
+              border: color === settings.fontColor ? '2px solid white' : '2px solid transparent',
+              boxShadow: color === settings.fontColor ? '0 0 0 1px var(--bew-border-color), var(--bew-shadow-1)' : 'none',
+            }"
+            @click="changeFontColor(color)"
+          />
+        </div>
+      </SettingsItem>
+      <SettingsItem :title="$t('settings.theme_color')" desc="自定义主题色">
         <div flex="~ gap-2 wrap" justify-end>
           <div
             v-for="color in themeColorOptions" :key="color"

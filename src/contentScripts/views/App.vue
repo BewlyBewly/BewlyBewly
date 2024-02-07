@@ -6,8 +6,9 @@ import type { Ref } from 'vue'
 
 import { accessKey, settings } from '~/logic'
 import { AppPage, LanguageType } from '~/enums/appEnums'
-import { getUserID, hexToRGBA, isHomePage, smoothScrollToTop } from '~/utils/main'
+import { getUserID, hexToRGBA, hls2RGBA, isHomePage, smoothScrollToTop } from '~/utils/main'
 import type { BewlyAppProvider } from '~/composables/useAppProvider'
+import { fontColorOptions } from '~/components/Settings/types'
 
 const activatedPage = ref<AppPage>(settings.value.dockItemVisibilityList.find(e => e.visible === true)?.page ?? AppPage.Home)
 const { locale } = useI18n()
@@ -76,6 +77,13 @@ watch(
   },
 )
 
+watch(
+  () => settings.value.fontColor,
+  () => {
+    setAppFontColor()
+  },
+)
+
 // Watch for changes in the 'settings.value.theme' variable and add the 'dark' class to the 'mainApp' element
 // to prevent some Unocss dark-specific styles from failing to take effect
 watch(() => settings.value.theme, () => {
@@ -93,6 +101,24 @@ watch(() => accessKey.value, () => {
 watch(() => settings.value.adaptToOtherPageStyles, () => {
   handleAdaptToOtherPageStylesChange()
 })
+
+watch(() => settings.value.theme, (theme) => {
+  if (theme === 'auto') {
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches && settings.value.fontColor === fontColorOptions[1]) {
+      settings.value.fontColor = fontColorOptions[0]
+    }
+    else {
+      if (settings.value.fontColor === fontColorOptions[0])
+        settings.value.fontColor = fontColorOptions[1]
+    }
+  }
+  else if (theme === 'light' && settings.value.fontColor === fontColorOptions[0]) {
+    settings.value.fontColor = fontColorOptions[1]
+  }
+  else if (theme === 'dark' && settings.value.fontColor === fontColorOptions[1]) {
+    settings.value.fontColor = fontColorOptions[0]
+  }
+}, { immediate: true })
 
 onMounted(() => {
   // openVideoPageIfBvidExists()
@@ -115,6 +141,7 @@ onMounted(() => {
   setAppAppearance()
   setAppLanguage()
   setAppThemeColor()
+  setAppFontColor()
   handleAdaptToOtherPageStylesChange()
 })
 
@@ -204,6 +231,22 @@ function setAppThemeColor() {
   document.documentElement.style.setProperty('--bew-theme-color', settings.value.themeColor)
   for (let i = 0; i < 9; i++)
     document.documentElement.style.setProperty(`--bew-theme-color-${i + 1}0`, hexToRGBA(settings.value.themeColor, i * 0.1 + 0.1))
+}
+
+function setAppFontColor() {
+  const bewlyElement = document.querySelector('#bewly') as HTMLElement
+  function fontColor(i: number) {
+    return settings.value.fontColor.startsWith('#') ? hexToRGBA(settings.value.fontColor, 0.95 - i * 0.15) : hls2RGBA(settings.value.fontColor, 1 - i * 0.1)
+  }
+  if (bewlyElement) {
+    bewlyElement.style.setProperty('--bew-text', settings.value.fontColor)
+    for (let i = 0; i < 4; i++)
+      bewlyElement.style.setProperty(`--bew-text-${i + 1}`, fontColor(i))
+  }
+
+  document.documentElement.style.setProperty('--bew-text', settings.value.fontColor)
+  for (let i = 0; i < 4; i++)
+    document.documentElement.style.setProperty(`--bew-text-${i + 1}`, fontColor(i))
 }
 
 function handleBackToTop(targetScrollTop = 0 as number) {

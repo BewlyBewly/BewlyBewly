@@ -19,6 +19,7 @@ export interface Settings {
 
   theme: 'light' | 'dark' | 'auto'
   themeColor: string
+  fontColor: string
   wallpaperMode: 'buildIn' | 'byUrl'
   wallpaper: string
   enableWallpaperMasking: boolean
@@ -59,6 +60,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
 
   theme: 'auto',
   themeColor: '#00a1d6',
+  fontColor: 'hsl(215 19% 98%)',
   wallpaperMode: 'buildIn',
   wallpaper: '',
   enableWallpaperMasking: false,

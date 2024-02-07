@@ -120,7 +120,7 @@ function jumpToLoginPage() {
       v-else
       ref="containerRef"
       m="b-0 t-0" relative w-full h-full
-      grid="~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-5"
+      grid="~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-4"
     >
       <VideoCard
         v-for="video in videoList"

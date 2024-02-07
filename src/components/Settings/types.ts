@@ -13,3 +13,8 @@ export interface MenuItem {
   icon: string
   iconActivated: string
 }
+
+export const fontColorOptions = [
+  'hsl(215 19% 98%)',
+  'hsl(217 19% 10%)',
+]
