@@ -95,24 +95,6 @@ function changeFontColor(color: string) {
 function changeWallpaper(url: string) {
   settings.value.wallpaper = url
 }
-
-watch(() => settings.value.theme, (theme) => {
-  if (theme === 'auto') {
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches && settings.value.fontColor === fontColorOptions[1]) {
-      settings.value.fontColor = fontColorOptions[0]
-    }
-    else {
-      if (settings.value.fontColor === fontColorOptions[0])
-        settings.value.fontColor = fontColorOptions[1]
-    }
-  }
-  else if (theme === 'light' && settings.value.fontColor === fontColorOptions[0]) {
-    settings.value.fontColor = fontColorOptions[1]
-  }
-  else if (theme === 'dark' && settings.value.fontColor === fontColorOptions[1]) {
-    settings.value.fontColor = fontColorOptions[0]
-  }
-}, { immediate: true })
 </script>
 
 <template>
