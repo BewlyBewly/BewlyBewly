@@ -490,7 +490,10 @@
       background: var(--bew-content-solid-1);
     }
 
-    .search-page,
+    .s-space .search-page {
+      background-color: var(--bew-content-solid-1);
+    }
+
     .card,
     .feed-dynamic-content .bb-comment {
       background-color: var(--bew-content-solid-1);
