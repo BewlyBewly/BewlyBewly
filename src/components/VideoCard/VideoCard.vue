@@ -185,11 +185,12 @@ function handelMouseLeave() {
     relative
   >
     <div
-      class="video-card group"
+      class="video-card group w-full px-6 py-4"
       :class="isDislike ? 'is-dislike' : ''"
-      w="full" pos="absolute top-0 left-0"
-      rounded="$bew-radius" duration-300 ease-in-out
-      hover:bg="$bew-fill-2" hover:ring="8 $bew-fill-2"
+      pos="absolute top-0 left-0"
+      rounded="$bew-radius"
+      transition="all duration-200 ease-in-out"
+      hover:bg="$bew-fill-3"
       :style="{ contentVisibility }"
     >
       <div :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }">
@@ -307,7 +308,7 @@ function handelMouseLeave() {
           flex="~"
         >
           <!-- Author Avatar -->
-          <div :style="{ display: horizontal ? 'none' : 'flex' }">
+          <div :style="{ display: horizontal ? 'none' : 'flex', justifyContent: 'center' }">
             <a
               v-if="authorFace"
               m="r-4" w="40px" h="40px" rounded="1/2" overflow="hidden"
@@ -405,9 +406,10 @@ function handelMouseLeave() {
             <div text="base $bew-text-2" w-fit m="t-2">
               <span
                 v-if="author"
-                class="channel-name"
+                class="channel-name keep-one-lines cursor-pointer pr-2 mr-4"
+                hover="text-$bew-text-1 font-500"
                 text="hover:$bew-text-1"
-                cursor-pointer mr-4
+                :title="author"
                 @click="gotoChannel(mid ?? 0)"
               >
                 {{ author }}
@@ -426,9 +428,8 @@ function handelMouseLeave() {
             <div
               v-if="desc"
               :title="desc"
-              class="keep-two-lines"
-              mt-2 text="base $bew-text-3" w-full max-h-12
-              style="white-space: pre-line;"
+              class="keep-two-lines w-full max-h-12 mt-2 whitespace-pre-line"
+              text="base $bew-text-3"
             >
               {{ desc }}
             </div>
@@ -469,7 +470,7 @@ function handelMouseLeave() {
     <!-- skeleton -->
     <template v-if="!horizontal">
       <div
-        block mb-10 pointer-events-none select-none invisible
+        block pointer-events-none select-none invisible
       >
         <!-- Cover -->
         <div w-full shrink-0 aspect-video h-fit rounded="$bew-radius" />

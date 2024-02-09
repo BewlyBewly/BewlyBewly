@@ -54,6 +54,17 @@ html.dark.bewly-design {
   line-break: anywhere;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+  height: calc(1em * 1.5 * 2);
+}
+
+.keep-one-lines {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-break: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  height: calc(1em * 1.5 * 1);
 }
 
 .bewly-design {

@@ -151,7 +151,7 @@ function getRankingPgc() {
       </OverlayScrollbarsComponent>
     </aside>
 
-    <main w-full>
+    <main w-full flex="~ col gap-4">
       <template v-if="!('seasonType' in activatedRankingType)">
         <VideoCard
           v-for="(video, index) in videoList"
