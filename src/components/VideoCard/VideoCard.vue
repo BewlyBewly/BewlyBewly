@@ -185,7 +185,7 @@ function handelMouseLeave() {
     relative
   >
     <div
-      class="video-card group w-full px-6 py-4"
+      class="video-card group w-full p4"
       :class="isDislike ? 'is-dislike' : ''"
       pos="absolute top-0 left-0"
       rounded="$bew-radius"

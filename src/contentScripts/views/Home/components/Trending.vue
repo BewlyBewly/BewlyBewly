@@ -75,7 +75,7 @@ async function getTrendingVideos() {
     <div
       ref="containerRef"
       m="b-0 t-0" relative w-full h-full
-      grid="~ cols-1 xl:cols-2 gap-4"
+      grid="~ cols-1 xl:cols-2 gap-y-4 gap-x-2"
     >
       <VideoCard
         v-for="video in videoList"
