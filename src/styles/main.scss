@@ -15,8 +15,6 @@
 
 ::-webkit-scrollbar-track {
   background: transparent;
-
-
 }
 
 html.bewly-design > ::-webkit-scrollbar-track {
@@ -30,6 +28,11 @@ html.bewly-design > ::-webkit-scrollbar-track {
 
 ::-webkit-scrollbar-corner {
   background: transparent;
+}
+
+::selection {
+  color: white;
+  background: var(--bew-theme-color-80);
 }
 
 html.bewly-design,

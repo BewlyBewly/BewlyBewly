@@ -1,14 +1,10 @@
-.bewly-design {
-  .right-side-bar .catalog .catalog-text {
-    line-height: unset;
-  }
-
-  .right-side-bar .catalog{
-    justify-content: center;
-  }
-
+.bewly-design.articlesPage {
   body {
     background-color: unset;
+  }
+
+  .right-side-bar .catalog {
+    line-height: 3em;
   }
 
   // #region theme color adaption part
@@ -58,7 +54,9 @@
     .nav-tab-bar .tab-item:hover,
     .video-link__to,
     .interaction-info .hover-item:hover,
-    .interaction-info .hover-item:hover i {
+    .interaction-info .hover-item:hover i,
+    .normal-article-holder a,
+    .read-article-holder .card-text-label {
       color: var(--bew-theme-color);
     }
 
@@ -81,7 +79,8 @@
     .page-content .right-side .rank-module .rank-tabs-bar .rank-tabs-list li.on,
     .page-content .right-side .up-list .up-item .info-holder .head .follow,
     .categories-bar .tag-item.on,
-    .modal-box-holder .modal-box .modal-footer .modal-btn-primary {
+    .modal-box-holder .modal-box .modal-footer .modal-btn-primary,
+    .read-article-holder .card-text-label {
       border-color: var(--bew-theme-color);
     }
 
@@ -157,6 +156,10 @@
       color: var(--bew-text-1);
     }
 
+    span[style*='color:#000000'] {
+      color: var(--bew-text-1) !important;
+    }
+
     .page-content
       .left-side
       .article-list
@@ -183,6 +186,10 @@
     .modal-box-holder .modal-box .modal-footer .modal-btn-default,
     .bili-dialog-bomb .appeal-box .submit .cancel {
       color: var(--bew-text-2);
+    }
+
+    .normal-article-holder blockquote * {
+      color: var(--bew-text-2) !important;
     }
 
     .page-content
@@ -230,7 +237,8 @@
     .view-note .note-content .ql-container .ql-editor,
     .bili-dialog-bomb .appeal-box .header,
     .bili-dialog-bomb .appeal-box .submit,
-    .bili-dialog-bomb .appeal-box .submit .cancel {
+    .bili-dialog-bomb .appeal-box .submit .cancel,
+    .bili-button.primary.plain {
       background-color: transparent;
     }
 
@@ -331,7 +339,8 @@
     .bili-dialog-bomb .appeal-box .submit .cancel,
     .bili-dialog-bomb .appeal-box .submit,
     .van-popover.van-followed,
-    .followed {
+    .followed,
+    .read-article-holder .row-video-holder {
       border-color: var(--bew-border-color);
     }
 

@@ -1,4 +1,4 @@
-.bewly-design {
+.bewly-design.momentsPage {
   .bili-dyn-home--member {
     // margin-top: 10px;
   }
@@ -28,7 +28,8 @@
 
   .bili-dyn-topic__card,
   .bili-topic-new__default__create__text,
-  .opus-module-topic {
+  .opus-module-topic,
+  .side-toolbar__action.is-active {
     color: var(--bew-theme-color);
   }
 
@@ -56,13 +57,18 @@
     background-color: var(--bew-theme-color-20);
   }
 
+  .side-toolbar__action.is-active svg path,
+  .opus-collection__action svg path:last-child {
+    fill: var(--bew-theme-color);
+  }
+
   &.dark {
     #app div.bg {
       opacity: 0;
     }
 
     .bili-dyn-home--member,
-    #opus-detail-app + #app {
+    #app {
       --bg1: var(--bew-content-solid-1);
       --bg2: var(--bew-bg);
     }
@@ -70,6 +76,10 @@
     .fixed-author-header__author__name,
     .dyn-blocked-mask.feed-item .dyn-blocked-mask__msg-title {
       color: var(--bew-text-1);
+    }
+
+    span[style*='color:#000000'] {
+      color: var(--bew-text-1) !important;
     }
 
     .dyn-blocked-mask.feed-item .dyn-blocked-mask__msg-desc {
@@ -80,16 +90,17 @@
       color: var(--bew-text-4);
     }
 
-    .bili-tabs__content .reaction-item {
+    .bili-tabs__content .reaction-item,
+    .opus-collection__header {
       box-shadow: inset 0 -0.5px 0 0 var(--bew-border-color);
-
-      .bili-button.primary.plain {
-        background-color: transparent;
-      }
     }
 
     .side-toolbar__btn.backtop span:before {
       filter: invert(1);
+    }
+
+    .bili-button.primary.plain {
+      background-color: transparent;
     }
   }
   // #endregion
