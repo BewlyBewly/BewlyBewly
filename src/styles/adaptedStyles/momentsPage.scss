@@ -56,6 +56,10 @@
     background-color: var(--bew-theme-color-20);
   }
 
+  .side-toolbar__action.is-active svg path {
+    fill: var(--bew-theme-color);
+  }
+
   &.dark {
     #app div.bg {
       opacity: 0;
@@ -72,6 +76,10 @@
       color: var(--bew-text-1);
     }
 
+    span[style*='color:#000000'] {
+      color: var(--bew-text-1) !important;
+    }
+
     .dyn-blocked-mask.feed-item .dyn-blocked-mask__msg-desc {
       color: var(--bew-text-2);
     }
@@ -80,16 +88,17 @@
       color: var(--bew-text-4);
     }
 
-    .bili-tabs__content .reaction-item {
+    .bili-tabs__content .reaction-item,
+    .opus-collection__header {
       box-shadow: inset 0 -0.5px 0 0 var(--bew-border-color);
-
-      .bili-button.primary.plain {
-        background-color: transparent;
-      }
     }
 
     .side-toolbar__btn.backtop span:before {
       filter: invert(1);
+    }
+
+    .bili-button.primary.plain {
+      background-color: transparent;
     }
   }
   // #endregion
