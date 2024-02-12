@@ -50,7 +50,8 @@
     .card .main-content .button-bar .single-button .text-bar.selected,
     .wrapper .edit-video-modal .edit-video-subtitle,
     .list-style .iconfont.active,
-    .list-style .iconfont:hover {
+    .list-style .iconfont:hover,
+    .bili-dyn-interaction__item__desc .bili-rich-text-module:hover {
       color: var(--bew-theme-color);
     }
 
@@ -220,6 +221,11 @@
   // #region dark mode adaption part
   // 深色模式下對主題顏色調整
   &.dark {
+    .bili-dyn-item {
+      --bg1: var(--bew-content-solid-1);
+      --bg2: var(--bew-bg);
+    }
+
     .n .n-inner,
     #page-index .col-1,
     #page-index .col-2 .section,
@@ -249,7 +255,10 @@
       .fav-meta
       .fav-name,
     .wrapper .edit-video-modal .edit-video-title,
-    #page-series-detail .channel-detail .content .breadcrumb .item {
+    #page-series-detail .channel-detail .content .breadcrumb .item,
+    .user-info .info-content .info-value,
+    .opus-list .opus-item-title,
+    .elec .elec-setting, .elec .elec-total-c-num {
       color: var(--bew-text-1);
     }
 
@@ -260,12 +269,17 @@
     .channel-add-video .text,
     .series-item .item-title .qipapnum,
     .series-item .header .btn-row .btn,
-    #page-series-index
-      .channel-index
-      .breadcrumb
-      .item.cur
-      .create-series-icon {
+    #page-series-index .channel-index .breadcrumb .item.cur .create-series-icon,
+    .bili-dyn-interaction__item__desc .bili-rich-text-module,
+    .user-info .user-info-title .change-info-btn,
+    .user-info .info-content .info-command,
+    .opus-list .opus-item-content {
       color: var(--bew-text-2);
+    }
+
+    .bili-dyn-interaction__item__desc .bili-rich-text__content,
+    .opus-list .opus-item-time {
+      color: var(--bew-text-3);
     }
 
     .section,
@@ -355,7 +369,11 @@
     .series-item .item-title .qipapnum,
     .series-item .header .btn-row .btn,
     #page-series-index .channel-index .breadcrumb .item.cur .create-series-icon,
-    #page-series-detail .filter {
+    #page-series-detail .filter,
+    .user-info .user-info-title .change-info-btn,
+    .fav-header,
+    .opus-list .opus-item,
+    .elec .elec-avatar {
       border-color: var(--bew-border-color);
     }
 
@@ -492,7 +510,8 @@
 
     .search-page,
     .card,
-    .feed-dynamic-content .bb-comment {
+    .feed-dynamic-content .bb-comment,
+    #page-dynamic .bili-dyn-item {
       background-color: var(--bew-content-solid-1);
     }
 

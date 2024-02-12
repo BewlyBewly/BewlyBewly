@@ -28,7 +28,8 @@
 
   .bili-dyn-topic__card,
   .bili-topic-new__default__create__text,
-  .opus-module-topic {
+  .opus-module-topic,
+  .side-toolbar__action.is-active {
     color: var(--bew-theme-color);
   }
 
@@ -56,7 +57,8 @@
     background-color: var(--bew-theme-color-20);
   }
 
-  .side-toolbar__action.is-active svg path {
+  .side-toolbar__action.is-active svg path,
+  .opus-collection__action svg path:last-child {
     fill: var(--bew-theme-color);
   }
 
@@ -66,7 +68,7 @@
     }
 
     .bili-dyn-home--member,
-    #opus-detail-app + #app {
+    #app {
       --bg1: var(--bew-content-solid-1);
       --bg2: var(--bew-bg);
     }
