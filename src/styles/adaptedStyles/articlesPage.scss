@@ -1,4 +1,4 @@
-.bewly-design {
+.bewly-design.articlePage {
   .right-side-bar .catalog .catalog-text {
     line-height: unset;
   }
@@ -157,6 +157,10 @@
       color: var(--bew-text-1);
     }
 
+    span[style*="color:#000000"] {
+      color: var(--bew-text-1) !important;
+    }
+
     .page-content
       .left-side
       .article-list
@@ -230,7 +234,8 @@
     .view-note .note-content .ql-container .ql-editor,
     .bili-dialog-bomb .appeal-box .header,
     .bili-dialog-bomb .appeal-box .submit,
-    .bili-dialog-bomb .appeal-box .submit .cancel {
+    .bili-dialog-bomb .appeal-box .submit .cancel,
+    .bili-button.primary.plain {
       background-color: transparent;
     }
 
