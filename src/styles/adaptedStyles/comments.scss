@@ -37,7 +37,19 @@
     color: var(--bew-theme-color) !important;
   }
 
-  .reply-operation .operation-icon:hover {
+  .reply-operation .operation-icon:hover,
+  .bb-comment .comment-list .list-item .text .vote-link,
+  .comment-bilibili-fold .comment-list .list-item .text .vote-link,
+  .bb-comment .comment-list .list-item .text-con .vote-link,
+  .comment-bilibili-fold .comment-list .list-item .text-con .vote-link,
+  .bb-comment .comment-list .list-item .text .lottery-link,
+  .comment-bilibili-fold .comment-list .list-item .text .lottery-link,
+  .bb-comment .comment-list .list-item .text-con .lottery-link,
+  .comment-bilibili-fold .comment-list .list-item .text-con .lottery-link,
+  .bb-comment .comment-list .list-item .text .comment-jump-url,
+  .comment-bilibili-fold .comment-list .list-item .text .comment-jump-url,
+  .bb-comment .comment-list .list-item .text-con .comment-jump-url,
+  .comment-bilibili-fold .comment-list .list-item .text-con .comment-jump-url {
     color: var(--bew-theme-color);
   }
 
@@ -49,6 +61,13 @@
     filter: saturate(0) brightness(2)
       drop-shadow(0 0 1px var(--bew-theme-color))
       drop-shadow(0 0 4px var(--bew-theme-color));
+  }
+
+  .bb-comment .comment-list .list-item .text .jump-img,
+  .comment-bilibili-fold .comment-list .list-item .text .jump-img,
+  .bb-comment .comment-list .list-item .text-con .jump-img,
+  .comment-bilibili-fold .comment-list .list-item .text-con .jump-img {
+    filter: var(--bew-filter-icon-glow);
   }
 
   &.dark {
