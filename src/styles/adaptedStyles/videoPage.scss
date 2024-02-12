@@ -148,6 +148,15 @@
   .video-ai-assistant .video-ai-assistant-info {
     -webkit-text-fill-color: var(--bew-theme-color);
   }
+
+  .upinfo-btn-panel .new-charge-btn .charge-btn-icon img,
+  .bpx-player-viewpoint-menu-item-active,
+  .cur-play-icon,
+  .playing-gif,
+  .multi-page-v1 .cur-list .list-box li.on img,
+  .coin-operated-m-exp .like-checkbox input[type='checkbox']:checked + i {
+    filter: var(--bew-filter-icon-glow);
+  }
   // #endregion
 
   // #region dark mode adaption part
@@ -211,7 +220,8 @@
       fill: var(--bew-text-1);
     }
 
-    .ql-snow .ql-fill, .ql-snow .ql-stroke.ql-fill {
+    .ql-snow .ql-fill,
+    .ql-snow .ql-stroke.ql-fill {
       fill: var(--bew-text-2);
     }
 
@@ -226,15 +236,6 @@
     .note-list .note-card-container .note-card:hover,
     .note-detail .note-operation .sanlian-box {
       border-color: var(--bew-border-color);
-    }
-
-    .upinfo-btn-panel .new-charge-btn .charge-btn-icon img,
-    .bpx-player-viewpoint-menu-item-active,
-    .cur-play-icon,
-    .playing-gif,
-    .multi-page-v1 .cur-list .list-box li.on img,
-    .coin-operated-m-exp .like-checkbox input[type='checkbox']:checked + i {
-      filter: var(--bew-filter-icon-glow);
     }
   }
   //  #endregion
