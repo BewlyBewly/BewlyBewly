@@ -22,6 +22,7 @@ interface Props {
   capsuleText?: string
   bvid?: string
   aid?: number
+  uri?: string
   /** If you want to show preview video, you should set the cid value */
   cid?: number
   epid?: number
@@ -42,6 +43,8 @@ const videoUrl = computed(() => {
     return `https://www.bilibili.com/video/${props.bvid ?? `av${props.aid}`}`
   else if (props.epid)
     return `https://www.bilibili.com/bangumi/play/ep${props.epid}`
+  else if (props.uri)
+    return props.uri
   else
     return ''
 })
