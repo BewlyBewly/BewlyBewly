@@ -5,7 +5,7 @@ import { onMounted, reactive, ref, watch } from 'vue'
 import { useDateFormat } from '@vueuse/core'
 import type { HistoryItem } from '../types'
 import { HistoryType } from '../types'
-import { removeHttpFromUrl, smoothScrollToTop } from '~/utils/main'
+import { isHomePage, removeHttpFromUrl, smoothScrollToTop } from '~/utils/main'
 import { calcCurrentTime } from '~/utils/dataFormatter'
 
 const { t } = useI18n()
@@ -199,7 +199,10 @@ function getHistoryList(type: HistoryType, viewAt = 0 as number) {
           {{ tab.name }}
         </div>
       </div>
-      <a href="https://www.bilibili.com/account/history" target="_blank" flex="~" items="center">
+      <a
+        href="https://www.bilibili.com/account/history" :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
+        flex="~ items-center"
+      >
         <span text="sm">{{ $t('common.view_all') }}</span>
       </a>
     </header>
@@ -208,7 +211,7 @@ function getHistoryList(type: HistoryType, viewAt = 0 as number) {
     <main overflow-hidden rounded="$bew-radius">
       <div
         ref="historysWrap"
-        flex="~ col gap-4"
+        flex="~ col gap-2"
         h="430px"
         overflow="y-scroll"
         p="x-4"
@@ -216,36 +219,32 @@ function getHistoryList(type: HistoryType, viewAt = 0 as number) {
         <!-- loading -->
         <Loading
           v-if="isLoading && historys.length === 0"
-          pos="absolute left-0"
-          bg="$bew-content-1"
-          z="1"
-          w="full"
           h="full"
           flex="~"
           items="center"
-          border="rounded-$bew-radius"
         />
 
         <!-- empty -->
-        <Empty v-if="!isLoading && historys.length === 0" w="full" h="full" />
+        <Empty
+          v-if="!isLoading && historys.length === 0"
+          pos="absolute top-0 left-0"
+          bg="$bew-content-1"
+          z="0" w="full" h="full"
+          flex="~ items-center"
+        />
 
         <!-- historys -->
-        <transition-group name="list">
+        <TransitionGroup name="list">
           <a
             v-for="historyItem in historys"
             :key="historyItem.kid"
-            :href="getHistoryUrl(historyItem)"
-            target="_blank"
-            hover:bg="$bew-fill-2"
+            :href="getHistoryUrl(historyItem)" :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
+            m="last:b-4 first:t-50px" p="2"
             rounded="$bew-radius"
-            p="2"
-            m="first:t-50px last:b-4"
-            class="group"
-            transition="duration"
+            hover:bg="$bew-fill-2"
             duration-300
-            block
           >
-            <section flex="~ gap-4" item-start>
+            <section flex="~ gap-4 item-start">
               <!-- Video cover, live cover, ariticle cover -->
               <div
                 bg="$bew-fill-1"
@@ -381,7 +380,7 @@ function getHistoryList(type: HistoryType, viewAt = 0 as number) {
               </div>
             </section>
           </a>
-        </transition-group>
+        </TransitionGroup>
 
         <!-- loading -->
         <Transition name="fade">

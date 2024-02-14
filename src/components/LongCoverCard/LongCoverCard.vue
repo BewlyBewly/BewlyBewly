@@ -18,20 +18,20 @@ defineProps<{
 </script>
 
 <template>
-  <div
+  <a
+    class="group"
     :style="{
       display: horizontal ? 'flex' : 'block',
     }"
-    gap-4
-    class="group"
-    hover:bg="$bew-fill-2" hover:ring="8 $bew-fill-2"
+    :href="url" target="_blank" rel="noopener noreferrer"
+    gap-4 hover:bg="$bew-fill-2" hover:ring="8 $bew-fill-2"
     transition="all ease-in-out 300"
     rounded="$bew-radius" h-fit
   >
     <!-- Cover -->
-    <a
+    <div
       :style="{ width: horizontal ? '170px' : '100%' }"
-      :href="url" target="_blank" tabindex="-1" block
+      tabindex="-1" block
       rounded="$bew-radius" w-full bg="$bew-fill-4" relative shrink-0
     >
       <div aspect="12/16" overflow-hidden rounded="$bew-radius">
@@ -118,7 +118,7 @@ defineProps<{
         /> -->
         </div>
       </div>
-    </a>
+    </div>
     <div
       flex-1
       :style="{
@@ -127,8 +127,7 @@ defineProps<{
     >
       <p un-text="lg" mb-4>
         <a
-          :href="url"
-          target="_blank"
+          :href="url" target="_blank" rel="noopener noreferrer"
           class="keep-two-lines"
           :title="title"
         >
@@ -150,5 +149,5 @@ defineProps<{
         <span> {{ desc }} </span>
       </div>
     </div>
-  </div>
+  </a>
 </template>

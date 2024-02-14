@@ -2,7 +2,7 @@
 import { useDateFormat } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 
-import { getCSRF, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
+import { getCSRF, removeHttpFromUrl } from '~/utils/main'
 import { calcCurrentTime } from '~/utils/dataFormatter'
 import { Business } from '~/models/video/history'
 import type { List as HistoryItem, HistoryResult } from '~/models/video/history'
@@ -241,12 +241,12 @@ function jumpToLoginPage() {
       <TransitionGroup name="list">
         <a
           v-for="(historyItem, index) in historyList"
-          :key="historyItem.kid"
+          :key="historyItem.kid" :href="getHistoryUrl(historyItem)"
+          target="_blank"
           block
           class="group"
           flex
           cursor-pointer
-          @click="openLinkToNewTab(`${getHistoryUrl(historyItem)}`)"
         >
           <!-- time slot -->
           <div
@@ -376,24 +376,22 @@ function jumpToLoginPage() {
             <!-- Description -->
             <div flex justify-between w-full>
               <div flex="~ col">
-                <a :href="`${getHistoryUrl(historyItem)}`" target="_blank" @click.stop="">
+                <a
+                  :href="`${getHistoryUrl(historyItem)}`" target="_blank" rel="noopener noreferrer"
+                  :title="historyItem.show_title ? historyItem.show_title : historyItem.title"
+                >
                   <h3
                     class="keep-two-lines"
                     overflow="hidden"
                     text="lg overflow-ellipsis"
                   >
-                    {{
-                      historyItem.show_title
-                        ? historyItem.show_title
-                        : historyItem.title
-                    }}
+                    {{ historyItem.show_title ? historyItem.show_title : historyItem.title }}
                   </h3>
                 </a>
                 <a
                   un-text="$bew-text-2 sm"
                   m="t-4 b-2"
-                  flex="~"
-                  items-center
+                  flex="~ items-center"
                   cursor-pointer
                   w-fit
                   rounded="$bew-radius"
@@ -401,13 +399,7 @@ function jumpToLoginPage() {
                   hover:bg="$bew-theme-color-10"
                   duration-300
                   pr-2
-                  :href="
-                    historyItem.author_mid
-                      ? `https://space.bilibili.com/${historyItem.author_mid}`
-                      : historyItem.uri
-                  "
-                  target="_blank"
-                  @click.stop=""
+                  :href="historyItem.author_mid ? `https://space.bilibili.com/${historyItem.author_mid}` : historyItem.uri" target="_blank" rel="noopener noreferrer"
                 >
                   <img
                     :src="
@@ -452,7 +444,7 @@ function jumpToLoginPage() {
                 opacity-0 group-hover:opacity-100
                 p-2
                 duration-300
-                @click.stop="deleteHistoryItem(index, historyItem)"
+                @click.prevent="deleteHistoryItem(index, historyItem)"
               >
                 <tabler:trash />
               </button>
