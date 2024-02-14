@@ -8,6 +8,7 @@ export function getCookie(name: string): string {
   const parts: Array<string> = value.split(`; ${name}=`)
   if (parts.length === 2)
     return parts?.pop()?.split(';').shift() || ''
+  return ''
 }
 
 /**
@@ -43,7 +44,7 @@ export function removeHttpFromUrl(url: string): string {
 }
 
 export function openLinkToNewTab(url: string) {
-  window.open(url, '_blank')
+  window.open(url, '_blank', 'noopener noreferrer')
 }
 
 /**

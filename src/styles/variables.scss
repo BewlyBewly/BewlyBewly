@@ -5,8 +5,11 @@
 
   --bew-filter-glass: blur(20px) saturate(180%);
   --bew-filter-icon-glow: saturate(0) brightness(2)
-    drop-shadow(0 0 2px var(--bew-theme-color))
-    drop-shadow(0 0 4px var(--bew-theme-color));
+    drop-shadow(0 0 0.2px white)
+    drop-shadow(0 0 0.5px var(--bew-theme-color))
+    drop-shadow(0 0 0.5px var(--bew-theme-color))
+    drop-shadow(0 0 0.5px var(--bew-theme-color))
+    drop-shadow(0 0 2px var(--bew-theme-color-80));
 
   // #region shadow
   --bew-shadow-1: 0 4px 6px -1px rgb(0 0 0 / 0.1),

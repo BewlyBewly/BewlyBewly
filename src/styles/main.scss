@@ -31,8 +31,12 @@ html.bewly-design > ::-webkit-scrollbar-track {
 }
 
 ::selection {
-  color: white;
-  background: var(--bew-theme-color-80);
+  color: var(--bew-text-1);
+  background: var(--bew-fill-2);
+}
+
+.dark ::selection {
+  background: var(--bew-fill-3);
 }
 
 html.bewly-design,

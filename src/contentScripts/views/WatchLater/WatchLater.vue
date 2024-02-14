@@ -116,11 +116,9 @@ function jumpToLoginPage() {
           <a
             v-for="(item, index) in watchLaterList"
             :key="item.aid"
-            block
+            :href="`https://www.bilibili.com/video/${item.bvid}`" target="_blank" rel="noopener noreferrer"
             class="group"
-            flex
-            cursor-pointer
-            @click="openLinkToNewTab(`https://www.bilibili.com/list/watchlater?bvid=${item.bvid}`)"
+            block flex cursor-pointer
           >
             <section
               rounded="$bew-radius"
@@ -196,8 +194,7 @@ function jumpToLoginPage() {
                     class="keep-two-lines"
                     overflow="hidden"
                     un-text="lg overflow-ellipsis"
-                    :href="removeHttpFromUrl(`https://www.bilibili.com/list/watchlater?bvid=${item.bvid}`)" target="_blank"
-                    @click.stop=""
+                    :href="removeHttpFromUrl(`https://www.bilibili.com/list/watchlater?bvid=${item.bvid}`)" target="_blank" rel="noopener noreferrer"
                   >
                     {{ item.title }}
                   </a>
@@ -213,8 +210,7 @@ function jumpToLoginPage() {
                     hover:bg="$bew-theme-color-10"
                     duration-300
                     pr-2
-                    :href="`//space.bilibili.com/${item.owner.mid}`" target="_blank"
-                    @click.stop=""
+                    :href="`//space.bilibili.com/${item.owner.mid}`" target="_blank" rel="noopener noreferrer"
                   >
                     <img
                       :src="removeHttpFromUrl(`${item.owner.face}@40w_40h_1c`)"
@@ -244,7 +240,7 @@ function jumpToLoginPage() {
                     opacity-0 group-hover:opacity-100
                     p-2
                     duration-300
-                    @click.stop="deleteWatchLaterItem(index, item.aid)"
+                    @click.prevent="deleteWatchLaterItem(index, item.aid)"
                   >
                     <tabler:trash />
                   </button>

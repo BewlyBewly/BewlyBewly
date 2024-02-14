@@ -201,6 +201,7 @@ function jumpToLoginPage() {
           :published-timestamp="video.pubdate"
           :bvid="video.bvid"
           :cid="video.cid"
+          :uri="video.uri"
           show-preview
         />
       </template>
@@ -219,7 +220,8 @@ function jumpToLoginPage() {
           :bvid="video.bvid"
           :view-str="video.cover_left_text_1"
           :danmaku-str="video.cover_left_text_2"
-          :cid="video?.player_args?.cid "
+          :cid="video?.player_args?.cid"
+          :uri="video.uri"
           show-preview
         />
       </template>
