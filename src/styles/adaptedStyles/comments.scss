@@ -57,12 +57,7 @@
     color: var(--bew-theme-color-80);
   }
 
-  .reply-content-container .reply-content .icon {
-    filter: saturate(0) brightness(2)
-      drop-shadow(0 0 1px var(--bew-theme-color))
-      drop-shadow(0 0 4px var(--bew-theme-color));
-  }
-
+  .reply-content-container .reply-content .icon,
   .bb-comment .comment-list .list-item .text .jump-img,
   .comment-bilibili-fold .comment-list .list-item .text .jump-img,
   .bb-comment .comment-list .list-item .text-con .jump-img,
