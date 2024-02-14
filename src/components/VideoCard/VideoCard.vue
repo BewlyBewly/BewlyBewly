@@ -195,7 +195,10 @@ function handelMouseLeave() {
       hover:bg="$bew-fill-2" hover:ring="8 $bew-fill-2"
       :style="{ contentVisibility }"
     >
-      <div :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }">
+      <a
+        :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }"
+        :href="videoUrl" target="_blank" rel="noopener noreferrer"
+      >
         <!-- Cover -->
         <div
           :style="{ width: horizontal ? '300px' : '100%' }"
@@ -279,7 +282,7 @@ function handelMouseLeave() {
             class="opacity-0 group-hover/cover:opacity-100"
             transform="scale-70 group-hover/cover:scale-100"
             duration-300
-            @click.stop="toggleWatchLater"
+            @click.prevent="toggleWatchLater"
           >
             <Tooltip v-if="!isInWatchLater" :content="$t('common.save_to_watch_later')" placement="bottom" type="dark">
               <mingcute:carplay-line />
@@ -290,15 +293,13 @@ function handelMouseLeave() {
           </button>
 
           <!-- Video cover -->
-          <a :href="videoUrl" target="_blank">
-            <img
-              :src="`${removeHttpFromUrl(cover)}@672w_378h_1c`"
-              loading="lazy"
-              w="full" max-w-full align-middle aspect-video
-              bg="cover center"
-              rounded="$bew-radius"
-            >
-          </a>
+          <img
+            :src="`${removeHttpFromUrl(cover)}@672w_378h_1c`"
+            loading="lazy"
+            w="full" max-w-full align-middle aspect-video
+            bg="cover center"
+            rounded="$bew-radius"
+          >
         </div>
 
         <!-- Other Information -->
@@ -314,10 +315,8 @@ function handelMouseLeave() {
             <a
               v-if="authorFace"
               m="r-4" w="40px" h="40px" rounded="1/2" overflow="hidden"
-              object="center cover"
-              bg="$bew-fill-4" cursor="pointer"
-              style="--un-shadow: 0 0 0 2px var(--bew-theme-color)"
-              :href="`//space.bilibili.com/${mid}`" target="_blank"
+              object="center cover" bg="$bew-fill-4" cursor="pointer"
+              :href="`//space.bilibili.com/${mid}`" target="_blank" rel="noopener noreferrer"
               @click.stop=""
             >
               <img
@@ -335,8 +334,9 @@ function handelMouseLeave() {
                 text="lg overflow-ellipsis $bew-text-1"
                 cursor="pointer"
               >
-                <a :href="videoUrl" target="_blank" :title="title">
-                  {{ title }}</a>
+                <a :href="videoUrl" target="_blank" :title="title" rel="noopener noreferrer">
+                  {{ title }}
+                </a>
               </h3>
 
               <!-- <div
@@ -466,7 +466,7 @@ function handelMouseLeave() {
             </div>
           </div>
         </div>
-      </div>
+      </a>
     </div>
 
     <!-- skeleton -->

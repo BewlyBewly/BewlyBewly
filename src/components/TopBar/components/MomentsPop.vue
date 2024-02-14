@@ -5,7 +5,7 @@ import { onMounted, reactive, ref, watch } from 'vue'
 import { isNewArticle, isNewVideo, setLastestOffsetID } from '../notify'
 import { MomentType } from '../types'
 import type { MomentItem } from '../types'
-import { getCSRF, getUserID, smoothScrollToTop } from '~/utils/main'
+import { getCSRF, getUserID, isHomePage, smoothScrollToTop } from '~/utils/main'
 import { calcTimeSince } from '~/utils/dataFormatter'
 
 const { t } = useI18n()
@@ -308,7 +308,10 @@ function toggleWatchLater(aid: number) {
           {{ tab.name }}
         </div>
       </div>
-      <a href="https://t.bilibili.com/" target="_blank" flex="~" items="center">
+      <a
+        href="https://t.bilibili.com/" :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
+        flex="~ items-center"
+      >
         <span text="sm">{{ $t('common.view_all') }}</span>
       </a>
     </header>
@@ -317,7 +320,7 @@ function toggleWatchLater(aid: number) {
     <main overflow-hidden rounded="$bew-radius">
       <div ref="momentsWrap" h="430px" overflow="y-scroll x-hidden" p="x-4">
         <!-- loading -->
-        <loading
+        <Loading
           v-if="isLoading && moments.length === 0"
           h="full"
           flex="~"
@@ -329,12 +332,8 @@ function toggleWatchLater(aid: number) {
           v-if="!isLoading && moments.length === 0"
           pos="absolute top-0 left-0"
           bg="$bew-content-1"
-          z="0"
-          w="full"
-          h="full"
-          flex="~"
-          items="center"
-          border="rounded-$bew-radius"
+          z="0" w="full" h="full"
+          flex="~ items-center"
         />
 
         <!-- moments -->
@@ -342,17 +341,12 @@ function toggleWatchLater(aid: number) {
           <a
             v-for="(moment, index) in moments"
             :key="index"
-            :href="moment.url"
-            target="_blank"
-            flex="~"
-            justify="between"
-            m="b-4"
-            first:m="t-16"
-            p="2"
+            :href="moment.url" :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
+            flex="~ justify-between"
+            m="b-2 first:t-50px" p="2"
             rounded="$bew-radius"
             hover:bg="$bew-fill-2"
-            transition="all duration-300"
-            cursor="pointer"
+            duration-300
             pos="relative"
           >
             <!-- new moment dot -->
@@ -373,7 +367,7 @@ function toggleWatchLater(aid: number) {
                   ? `https://space.bilibili.com/${moment.uid}`
                   : moment.url
               "
-              target="_blank"
+              :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
             >
               <img
                 :src="`${moment.face}@50w_50h_1c`"
