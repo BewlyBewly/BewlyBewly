@@ -69,8 +69,6 @@ const favoritesPopRef = ref<any>()
 const scrollTop = ref<number>(0)
 const oldScrollTop = ref<number>(0)
 
-const rightSideRef = ref<HTMLDivElement>()
-
 watch(() => settings.value.autoHideTopBar, (newVal) => {
   if (!newVal)
     toggleTopBarVisible(true)
@@ -275,11 +273,8 @@ defineExpose({
     @mouseleave="hoveringTopBar = false"
   >
     <main
-      max-w="$bew-page-max-width" m-auto flex="~"
-      justify="between"
-      items-center
-      p="lg:x-20 md:x-16 x-14"
-      h="70px"
+      max-w="$bew-page-max-width" m-auto flex="~ justify-between items-center gap-4"
+      p="lg:x-20 md:x-16 x-14" h="70px"
     >
       <!-- Top bar mask -->
       <div
@@ -301,7 +296,7 @@ defineExpose({
         />
       </Transition>
 
-      <div :w="`2xl:${rightSideRef?.offsetWidth}px`" shrink-0>
+      <div shrink-0>
         <div
           z-1 relative w-fit
           @mouseenter.self="showLogoMenuDropdown()"
@@ -361,7 +356,7 @@ defineExpose({
       </div>
 
       <!-- right content -->
-      <div ref="rightSideRef" class="right-side">
+      <div class="right-side">
         <div v-if="!isLogin" class="right-side-item">
           <a href="https://passport.bilibili.com/login" class="login">
             <ic:outline-account-circle class="text-xl mr-2" />{{
