@@ -1,5 +1,34 @@
 # Changelog
 
+## [0.14.6](https://github.com/hakadao/BewlyBewly/compare/v0.14.5...v0.14.6) (2024-02-16)
+
+
+### Bug Fixes
+
+* icons in light mode to use theme color on video page ([81ec6a4](https://github.com/hakadao/BewlyBewly/commit/81ec6a4d6641127c51b7a032eab33a235dc0c4b6))
+* resolve [#247](https://github.com/hakadao/BewlyBewly/issues/247) ([bcdd870](https://github.com/hakadao/BewlyBewly/commit/bcdd87092f91ad8f1bffa72156b9adeeacc3279e))
+* resolve [#285](https://github.com/hakadao/BewlyBewly/issues/285) ([5dbfcaa](https://github.com/hakadao/BewlyBewly/commit/5dbfcaa97ede15424df1d68b67467315444c2c40))
+* resolve [#285](https://github.com/hakadao/BewlyBewly/issues/285) && [#283](https://github.com/hakadao/BewlyBewly/issues/283) ([d38732a](https://github.com/hakadao/BewlyBewly/commit/d38732a5afdacf7d963b59c4893bff26bc103f13))
+* resolve style conflicts issue ([26b60b7](https://github.com/hakadao/BewlyBewly/commit/26b60b79eb7c8cc1e1a577fb22fbddb293d464ac))
+* search bar cannot be centered when account is not logged in ([92e468b](https://github.com/hakadao/BewlyBewly/commit/92e468b6e5b9bcd43eac2f77823a7183ce4305bc))
+* ts error ([0452187](https://github.com/hakadao/BewlyBewly/commit/0452187d5cae4b4f886d7be096bbb3959072c46a))
+
+
+### Style Changes
+
+* adjust --bew-filter-icon-glow effect ([2adad91](https://github.com/hakadao/BewlyBewly/commit/2adad911f1d2fa32b0774493b66b9f8208fe4471))
+* adjust --bew-filter-icon-glow effect ([ba9aad5](https://github.com/hakadao/BewlyBewly/commit/ba9aad596d97d8244742a0fb3dd6a7bd1eb65f46))
+* adjust styles ([4f9250d](https://github.com/hakadao/BewlyBewly/commit/4f9250d22a20463764ac0f3bb7279c93e04ddd3d))
+* adjust text selection styles ([2105df7](https://github.com/hakadao/BewlyBewly/commit/2105df786dc8a556334fe729ccc0bd445b3c845f))
+* adjust text selection styles ([b2ac3b3](https://github.com/hakadao/BewlyBewly/commit/b2ac3b3844a1d203f4becc467a9ea74357dd061e))
+* adjust the background color of text selection ([c3be373](https://github.com/hakadao/BewlyBewly/commit/c3be373b1f9b2ae58679876ccbeb7f6cb3026e17))
+
+
+### Miscellaneous
+
+* screw it, it's so hard to center a search bar in a flex box... ([74021ce](https://github.com/hakadao/BewlyBewly/commit/74021ce7f7a009829d99a11a6c3f48c1aa7a07ee))
+* update version number ([32a2e87](https://github.com/hakadao/BewlyBewly/commit/32a2e879fa61576baa3bd9bb85cfaed707bfb87e))
+
 ## [0.14.5](https://github.com/hakadao/BewlyBewly/compare/v0.14.4...v0.14.5) (2024-02-03)
 
 
