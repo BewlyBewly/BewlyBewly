@@ -230,32 +230,32 @@ export interface UserCardInfo {
 }
 
 export interface Comment {
-  'rpid': number
-  'oid': number
-  'type': number
-  'mid': number
-  'root': 0
-  'parent': 0
-  'dialog': 0
-  'count': 0
-  'rcount': 0
-  'state': 0
-  'fansgrade': 0
-  'attr': 0
-  'ctime': number
-  'like': 0
-  'action': 0
-  'member': {
-    'mid': number
-    'uname': string
-    'sex': string
-    'avatar': string
-    'rank': string
-    'level_info': {
-      'current_level': number
-      'current_min': number
-      'current_exp': number
-      'next_exp': number
+  rpid: number
+  oid: number
+  type: number
+  mid: number
+  root: 0
+  parent: 0
+  dialog: 0
+  count: 0
+  rcount: 0
+  state: 0
+  fansgrade: 0
+  attr: 0
+  ctime: number
+  like: 0
+  action: 0
+  member: {
+    mid: number
+    uname: string
+    sex: string
+    avatar: string
+    rank: string
+    level_info: {
+      current_level: number
+      current_min: number
+      current_exp: number
+      next_exp: number
     }
     // 'official_verify': {
     //   'type': -1
@@ -287,22 +287,22 @@ export interface Comment {
     //   'nickname_color': ''
     // }
   }
-  'content': {
-    'message': string
-    'members': []
-    'jump_url': NonNullable<unknown>
-    'max_line': 6
+  content: {
+    message: string
+    members: []
+    jump_url: NonNullable<unknown>
+    max_line: 6
   }
-  'replies'?: Comment[]
-  'up_action': {
-    'like': false
-    'reply': false
+  replies?: Comment[]
+  up_action: {
+    like: false
+    reply: false
   }
-  'invisible': false
-  'folder': {
-    'has_folded': false
-    'is_folded': false
-    'rule': ''
+  invisible: false
+  folder: {
+    has_folded: false
+    is_folded: false
+    rule: string
   }
-  'dynamic_id_str': '0'
+  dynamic_id_str: string
 }
