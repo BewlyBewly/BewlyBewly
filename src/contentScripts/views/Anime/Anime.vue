@@ -171,7 +171,7 @@ function getPopularAnimeList() {
               :capsule-text="item.is_finish
                 ? $t('anime.total_episodes', { ep: item.total_count })
                 : $t('anime.update_to_n_episodes', {
-                  ep: item.total_count,
+                  ep: item.formal_ep_count,
                 })"
               :desc="item.progress !== '' ? item.progress : $t('anime.havent_seen')"
               w="2xl:[calc(100%/6-1.5rem)] xl:[calc(100%/5-1.5rem)] lg:[calc(100%/4-1.5rem)] md:[calc(100%/3-1.5rem)] sm:[calc(100%/2-1.5rem)] [calc(100%-1.5rem)]"

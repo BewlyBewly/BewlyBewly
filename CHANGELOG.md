@@ -1,5 +1,29 @@
 # Changelog
 
+## [0.14.7](https://github.com/hakadao/BewlyBewly/compare/v0.14.6...v0.14.7) (2024-02-18)
+
+
+### Bug Fixes
+
+* the article title remain black in dark mode ([#302](https://github.com/hakadao/BewlyBewly/issues/302)) ([b27a33c](https://github.com/hakadao/BewlyBewly/commit/b27a33c44d745509befa71ae68487ba4be1403a6))
+* the text color of the selection becomes white in some cases ([8210ff7](https://github.com/hakadao/BewlyBewly/commit/8210ff70a1e9d89226727b999304394b5cd136e9))
+* 正在追內容更新劇集不一致 ([#303](https://github.com/hakadao/BewlyBewly/issues/303)) ([3bc136a](https://github.com/hakadao/BewlyBewly/commit/3bc136a338769584b6852f523517f3b64417afa9))
+
+
+### Docs
+
+* add Firefox development section && correct the grammar ([d1d1fd0](https://github.com/hakadao/BewlyBewly/commit/d1d1fd0b2b3e66ea87377e10085c32d26db9467e))
+
+
+### Style Changes
+
+* adjust styles ([f40f1d9](https://github.com/hakadao/BewlyBewly/commit/f40f1d9ac0acc899df3e2bb3b8327d3c74a35c66))
+
+
+### Miscellaneous
+
+* update version number ([d472249](https://github.com/hakadao/BewlyBewly/commit/d472249084e292ea251d068297864ac369246e9b))
+
 ## [0.14.6](https://github.com/hakadao/BewlyBewly/compare/v0.14.5...v0.14.6) (2024-02-16)
 
 
