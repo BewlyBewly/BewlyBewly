@@ -65,7 +65,12 @@
 
 ## 🔧 开发 & 构建
 
-### 开发
+### Chrome or Edge browser
+
+<details>
+  <summary>Chrome or Edge browser</summary>
+
+#### 开发 (Chrome or Edge)
 
 ```bash
 pnpm dev
@@ -74,7 +79,7 @@ pnpm dev
 然后**在浏览器中使用 `加载已解压的拓展程序` 加载 `extension` 文件夹**。
 每次修改后，您需要单击 [重新加载](https://chrome.google.com/webstore/detail/fimgfedafeadlieiabdeeaodndnlbhid) 按钮并刷新页面以确保应用更改。
 
-### 构建
+#### 构建 (Chrome or Edge)
 
 要构建拓展程序，运行
 
@@ -84,15 +89,45 @@ pnpm build
 
 然后打包到 `extension` 文件夹
 
-### 🤝 贡献
+</details>
 
-#### 关于分支
+### Firefox browser
+
+在此之前，请使用 `dev-firefox` 分支来执行以下操作。它可能包含一些错误或不清晰的代码，欢迎您帮助解决这些问题！:D
+
+<details>
+  <summary>Firefox</summary>
+
+#### 开发 (Firefox)
+
+```bash
+pnpm dev-firefox
+```
+
+然后**在浏览器中使用 `加载已解压的拓展程序` 加载 `extension-firefox/` 文件夹**。
+每次修改后，您需要单击 [Extensions Reloader](https://chrome.google.com/webstore/detail/fimgfedafeadlieiabdeeaodndnlbhid) 按钮并刷新页面以确保应用更改。
+
+#### 构建 (Firefox)
+
+要构建拓展程序，运行
+
+```bash
+pnpm build-firefox
+```
+
+然后打包到 `extension-firefox` 文件夹
+
+</details>
+
+## 🤝 贡献
+
+### 关于分支
 
 - **Main**: 此分支用于只涉及文档文件（如 README 文件）的更改，不改变代码或其功能。
 - **Dev**: 用此分支进行新功能的开发、性能改进或对国际化（i18n）文件的修改。
 - **Bugfixes**: 此分支专门用于修复 main 分支中出现的错误。
 
-#### I18n
+### I18n
 
 - 在进行翻译时，如果你遇到一种你不熟悉的语言，可以使用另一种你已经翻译过的语言，并在 PR 中指出你无法翻译的语言。
 
