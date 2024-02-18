@@ -2,11 +2,11 @@
 
 interface IdleDeadline {
   readonly didTimeout: boolean
-  timeRemaining(): number
+  timeRemaining: () => number
 }
 
 interface IDisposable {
-  dispose(): void
+  dispose: () => void
 }
 
 /**
