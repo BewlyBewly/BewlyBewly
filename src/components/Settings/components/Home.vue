@@ -2,9 +2,15 @@
 import type { Ref } from 'vue'
 import QRCodeVue from 'qrcode.vue'
 import { useToast } from 'vue-toastification'
+import { useI18n } from 'vue-i18n'
+import draggable from 'vuedraggable'
 import SearchPage from './SearchPage.vue'
+import type { HomeTab } from '~/contentScripts/views/Home/types.ts'
+import { HomeSubPage } from '~/contentScripts/views/Home/types'
 import { getTVLoginQRCode, pollTVLoginQRCode, revokeAccessKey } from '~/utils/authProvider'
 import { accessKey, settings } from '~/logic'
+
+const { t } = useI18n()
 
 const toast = useToast()
 
@@ -95,6 +101,31 @@ function handleCloseSearchPageModeSharedSettings() {
   showSearchPageModeSharedSettings.value = false
   preventCloseSettings.value = false
 }
+
+const homeTabs = computed((): HomeTab[] => {
+  return [
+    {
+      label: t('home.for_you'),
+      value: HomeSubPage.ForYou,
+    },
+    {
+      label: t('home.following'),
+      value: HomeSubPage.Following,
+    },
+    {
+      label: t('home.subscribed_series'),
+      value: HomeSubPage.SubscribedSeries,
+    },
+    {
+      label: t('home.trending'),
+      value: HomeSubPage.Trending,
+    },
+    {
+      label: t('home.ranking'),
+      value: HomeSubPage.Ranking,
+    },
+  ]
+})
 </script>
 
 <template>
@@ -175,6 +206,38 @@ function handleCloseSearchPageModeSharedSettings() {
           </Button>
         </div>
       </ChildSettingsDialog>
+    </SettingsItemGroup>
+    <SettingsItemGroup
+      :title="$t('settings.group_home_tab')"
+    >
+      <SettingsItem :title="$t('settings.home_default_active_page')">
+        <Select
+          v-model="settings.homePageDefaultTab"
+          :options="homeTabs"
+          w="full"
+        />
+      </SettingsItem>
+      <SettingsItem :title="$t('settings.home_tab_order')" next-line>
+        <draggable
+          v-model="settings.homePageTabVisibilityList"
+          item-key="page"
+          :component-data="{ style: 'display: flex; gap: 0.5rem; flex-wrap: wrap;' }"
+        >
+          <template #item="{ element }">
+            <div
+              flex="~ gap-2 items-center" p="x-4 y-2" bg="$bew-fill-1" rounded="$bew-radius" cursor-all-scroll
+              duration-300
+              :style="{
+                background: element.visible ? 'var(--bew-theme-color)' : 'var(--bew-fill-1)',
+                color: element.visible ? 'white' : 'var(--bew-text-1)',
+              }"
+              @click="element.visible = !element.visible"
+            >
+              {{ homeTabs.find(tab => tab.value === element.page)?.label }}
+            </div>
+          </template>
+        </draggable>
+      </SettingsItem>
     </SettingsItemGroup>
 
     <SettingsItemGroup :title="$t('settings.group_search_page_mode')">

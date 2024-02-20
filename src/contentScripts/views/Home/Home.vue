@@ -11,7 +11,7 @@ const { t } = useI18n()
 
 const { handleBackToTop } = useBewlyApp()
 
-const activatedPage = ref<HomeSubPage>(HomeSubPage.ForYou)
+const activatedPage = ref<HomeSubPage>(settings.value.homePageDefaultTab || HomeSubPage.ForYou)
 const pages = {
   [HomeSubPage.ForYou]: defineAsyncComponent(() => import('./components/ForYou.vue')),
   [HomeSubPage.Following]: defineAsyncComponent(() => import('./components/Following.vue')),
@@ -23,34 +23,52 @@ const showSearchPageMode = ref<boolean>(false)
 const shouldMoveTabsUp = ref<boolean>(false)
 const tabContentLoading = ref<boolean>(false)
 
-const tabs = computed((): HomeTab[] => {
-  return [
-    {
-      label: t('home.for_you'),
-      value: HomeSubPage.ForYou,
-    },
-    {
-      label: t('home.following'),
-      value: HomeSubPage.Following,
-    },
-    {
-      label: t('home.subscribed_series'),
-      value: HomeSubPage.SubscribedSeries,
-    },
-    {
-      label: t('home.trending'),
-      value: HomeSubPage.Trending,
-    },
-    {
-      label: t('home.ranking'),
-      value: HomeSubPage.Ranking,
-    },
-  ]
-})
+const tabs = ref<HomeTab[]>([])
+
+const defaultTabs = [
+  {
+    label: t('home.for_you'),
+    value: HomeSubPage.ForYou,
+  },
+  {
+    label: t('home.following'),
+    value: HomeSubPage.Following,
+  },
+  {
+    label: t('home.subscribed_series'),
+    value: HomeSubPage.SubscribedSeries,
+  },
+  {
+    label: t('home.trending'),
+    value: HomeSubPage.Trending,
+  },
+  {
+    label: t('home.ranking'),
+    value: HomeSubPage.Ranking,
+  },
+]
 
 watch(() => activatedPage.value, () => {
   handleBackToTop(settings.value.useSearchPageModeOnHomePage ? 510 : 0)
 })
+
+// use Json stringify to watch the changes of the array item properties
+watch(() => JSON.stringify(settings.value.homePageTabVisibilityList), () => {
+  tabs.value = computeTabs()
+})
+
+function computeTabs() {
+  const targetTabs: HomeTab[] = []
+
+  for (const tab of settings.value.homePageTabVisibilityList) {
+    tab.visible && targetTabs.push({
+      label: (defaultTabs.find(defaultTab => defaultTab.value === tab.page) || {})?.label || tab.page,
+      value: tab.page,
+    })
+  }
+
+  return targetTabs
+}
 
 onMounted(() => {
   showSearchPageMode.value = true
@@ -69,6 +87,8 @@ onMounted(() => {
         shouldMoveTabsUp.value = true
     }
   })
+
+  tabs.value = computeTabs()
 })
 
 onUnmounted(() => {

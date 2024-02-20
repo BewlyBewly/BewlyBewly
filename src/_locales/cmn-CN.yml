@@ -45,6 +45,7 @@ settings:
   group_search_bar: 搜索栏
   group_recommendation_mode: 推荐模式
   group_search_page_mode: 搜索页模式
+  group_home_tab: 首页tab栏配置
 
   # Settings buttons
   btn:
@@ -123,6 +124,8 @@ settings:
   settings_shared_with_the_search_page: 与搜索页共用的配置
   settings_shared_with_the_search_page_desc: 这些设置都与搜索页共用
   search_page_mode_wallpaper_fixed: 将搜索页模式的壁纸固定
+  home_default_active_page: 首页默认的tab
+  home_tab_order: Tab展示顺序
 
   # Compatibility
   # Common
