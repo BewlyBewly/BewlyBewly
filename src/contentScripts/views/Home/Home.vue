@@ -11,7 +11,7 @@ const { t } = useI18n()
 
 const { handleBackToTop } = useBewlyApp()
 
-const activatedPage = ref<HomeSubPage>(settings.value.homePageDefaultTab || HomeSubPage.ForYou)
+const activatedPage = ref<HomeSubPage>(HomeSubPage.ForYou)
 const pages = {
   [HomeSubPage.ForYou]: defineAsyncComponent(() => import('./components/ForYou.vue')),
   [HomeSubPage.Following]: defineAsyncComponent(() => import('./components/Following.vue')),
@@ -58,6 +58,10 @@ watch(() => JSON.stringify(settings.value.homePageTabVisibilityList), () => {
 })
 
 function computeTabs() {
+  // if homePageTabVisibilityList not fresh , set it to default
+  if (!settings.value.homePageTabVisibilityList.length || settings.value.homePageTabVisibilityList.length !== defaultTabs.length)
+    settings.value.homePageTabVisibilityList = defaultTabs.map(tab => ({ page: tab.value, visible: true }))
+
   const targetTabs: HomeTab[] = []
 
   for (const tab of settings.value.homePageTabVisibilityList) {
@@ -65,11 +69,6 @@ function computeTabs() {
       label: (defaultTabs.find(defaultTab => defaultTab.value === tab.page) || {})?.label || tab.page,
       value: tab.page,
     })
-  }
-
-  if (!settings.value.homePageTabVisibilityList.length || settings.value.homePageTabVisibilityList.length !== defaultTabs.length) {
-    settings.value.homePageTabVisibilityList = defaultTabs.map(tab => ({ page: tab.value, visible: true }))
-    return defaultTabs
   }
 
   return targetTabs
@@ -94,6 +93,7 @@ onMounted(() => {
   })
 
   tabs.value = computeTabs()
+  activatedPage.value = tabs.value[0].value
 })
 
 onUnmounted(() => {

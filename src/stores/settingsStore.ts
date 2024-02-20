@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { useStorageLocal } from '~/composables/useStorageLocal'
 import { AppPage } from '~/enums/appEnums'
-import { HomeSubPage } from '~/contentScripts/views/Home/types'
+import type { HomeSubPage } from '~/contentScripts/views/Home/types'
 
 interface Settings {
   language: string
@@ -39,7 +39,6 @@ interface Settings {
   recommendationMode: 'web' | 'app'
   useSearchPageModeOnHomePage: boolean
   searchPageModeWallpaperFixed: boolean
-  homePageDefaultTab: HomeSubPage
   homePageTabVisibilityList: { page: HomeSubPage, visible: boolean }[]
 }
 
@@ -81,7 +80,6 @@ export const useSettingsStore = defineStore('settings', () => {
     recommendationMode: 'web',
     useSearchPageModeOnHomePage: false,
     searchPageModeWallpaperFixed: false,
-    homePageDefaultTab: HomeSubPage.ForYou,
     homePageTabVisibilityList: [],
   }), { mergeDefaults: true })
 

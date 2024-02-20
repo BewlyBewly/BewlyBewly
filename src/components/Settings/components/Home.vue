@@ -210,14 +210,7 @@ const homeTabs = computed((): HomeTab[] => {
     <SettingsItemGroup
       :title="$t('settings.group_home_tab')"
     >
-      <SettingsItem :title="$t('settings.home_default_active_page')">
-        <Select
-          v-model="settings.homePageDefaultTab"
-          :options="homeTabs"
-          w="full"
-        />
-      </SettingsItem>
-      <SettingsItem :title="$t('settings.home_tab_order')" next-line>
+      <SettingsItem :title="$t('settings.home_tab_order')" next-line :desc="$t('settings.home_tab_order_desc')">
         <draggable
           v-model="settings.homePageTabVisibilityList"
           item-key="page"
