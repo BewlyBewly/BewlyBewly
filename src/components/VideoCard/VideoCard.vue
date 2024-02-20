@@ -13,6 +13,8 @@ interface Props {
   cover: string
   author?: string
   authorFace?: string
+  /** If you set the `authorUrl`, clicking the author's name or avatar will navigate to this url  */
+  authorUrl?: string
   mid?: number
   view?: number
   viewStr?: string
@@ -49,6 +51,15 @@ const videoUrl = computed(() => {
     return ''
 })
 
+const authorJumpUrl = computed(() => {
+  if (props.authorUrl)
+    return props.authorUrl
+  else if (props.mid)
+    return `//space.bilibili.com/${props.mid}`
+  else
+    return ''
+})
+
 const isDislike = ref<boolean>(false)
 const isInWatchLater = ref<boolean>(false)
 const isHover = ref<boolean>(false)
@@ -73,10 +84,6 @@ watch(() => isHover.value, (newValue) => {
     }
   }
 })
-
-function gotoChannel(mid: number) {
-  window.open(`//space.bilibili.com/${mid}`)
-}
 
 function toggleWatchLater() {
   if (!isInWatchLater.value) {
@@ -316,7 +323,7 @@ function handelMouseLeave() {
               v-if="authorFace"
               m="r-4" w="40px" h="40px" rounded="1/2" overflow="hidden"
               object="center cover" bg="$bew-fill-4" cursor="pointer"
-              :href="`//space.bilibili.com/${mid}`" target="_blank" rel="noopener noreferrer"
+              :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
               @click.stop=""
             >
               <img
@@ -406,15 +413,16 @@ function handelMouseLeave() {
               </template>
             </div>
             <div text="base $bew-text-2" w-fit m="t-2">
-              <span
+              <a
                 v-if="author"
                 class="channel-name"
-                text="hover:$bew-text-1"
+                un-text="hover:$bew-text-1"
                 cursor-pointer mr-4
-                @click.stop.prevent="gotoChannel(mid ?? 0)"
+                :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
+                @click.stop=""
               >
                 {{ author }}
-              </span>
+              </a>
               <template v-if="horizontal">
                 <span v-if="view || viewStr">{{
                   view ? $t('common.view', { count: numFormatter(view) }, view) : `${viewStr}${$t('common.viewWithoutNum')}`
