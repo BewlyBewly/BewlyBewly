@@ -411,7 +411,7 @@ function handelMouseLeave() {
                 class="channel-name"
                 text="hover:$bew-text-1"
                 cursor-pointer mr-4
-                @click="gotoChannel(mid ?? 0)"
+                @click.stop.prevent="gotoChannel(mid ?? 0)"
               >
                 {{ author }}
               </span>
