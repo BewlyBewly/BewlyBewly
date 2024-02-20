@@ -67,8 +67,10 @@ function computeTabs() {
     })
   }
 
-  if (!settings.value.homePageTabVisibilityList.length || settings.value.homePageTabVisibilityList.length !== defaultTabs.length)
+  if (!settings.value.homePageTabVisibilityList.length || settings.value.homePageTabVisibilityList.length !== defaultTabs.length) {
+    settings.value.homePageTabVisibilityList = defaultTabs.map(tab => ({ page: tab.value, visible: true }))
     return defaultTabs
+  }
 
   return targetTabs
 }
