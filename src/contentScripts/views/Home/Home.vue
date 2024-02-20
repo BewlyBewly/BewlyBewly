@@ -67,6 +67,9 @@ function computeTabs() {
     })
   }
 
+  if (!settings.value.homePageTabVisibilityList.length || settings.value.homePageTabVisibilityList.length !== defaultTabs.length)
+    return defaultTabs
+
   return targetTabs
 }
 
