@@ -126,6 +126,15 @@ const homeTabs = computed((): HomeTab[] => {
     },
   ]
 })
+
+function resetHomeTabs() {
+  settings.value.homePageTabVisibilityList = homeTabs.value.map((tab) => {
+    return {
+      page: tab.value,
+      visible: true,
+    }
+  })
+}
 </script>
 
 <template>
@@ -208,9 +217,20 @@ const homeTabs = computed((): HomeTab[] => {
       </ChildSettingsDialog>
     </SettingsItemGroup>
     <SettingsItemGroup
-      :title="$t('settings.group_home_tab')"
+      :title="$t('settings.group_home_tabs')"
     >
-      <SettingsItem :title="$t('settings.home_tab_order')" next-line :desc="$t('settings.home_tab_order_desc')">
+      <SettingsItem next-line :desc="$t('settings.home_tabs_adjustment_desc')">
+        <template #title>
+          <div flex="~ gap-4 items-center">
+            {{ $t('settings.home_tabs_adjustment') }}
+            <Button size="small" type="secondary" @click="resetHomeTabs">
+              <template #left>
+                <mingcute:back-line />
+              </template>
+              {{ $t('common.reset') }}
+            </Button>
+          </div>
+        </template>
         <draggable
           v-model="settings.homePageTabVisibilityList"
           item-key="page"

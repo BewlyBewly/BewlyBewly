@@ -45,7 +45,7 @@ settings:
   group_search_bar: Search Bar
   group_recommendation_mode: Recommendation Mode
   group_search_page_mode: Search Page Mode
-  group_home_tab: Tab config
+  group_home_tabs: Home Tabs
 
   # Settings buttons
   btn:
@@ -125,8 +125,8 @@ settings:
   settings_shared_with_the_search_page: Settings shared with the search page
   settings_shared_with_the_search_page_desc: Those settings are used in common with the search page
   search_page_mode_wallpaper_fixed: Make the wallpaper of the search page mode fixed
-  home_tab_order: Tab Order
-  home_tab_order_desc: The first activated tab is the default page
+  home_tabs_adjustment: Tabs adjustment
+  home_tabs_adjustment_desc: The first activated tab is the default page
 
   # Compatibility
   # Common
