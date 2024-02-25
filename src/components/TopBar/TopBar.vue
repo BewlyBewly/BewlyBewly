@@ -3,10 +3,11 @@ import type { Ref, UnwrapNestedRefs } from 'vue'
 import { onMounted, watch } from 'vue'
 import type { UnReadDm, UnReadMessage, UserInfo } from './types'
 import { updateInterval } from './notify'
-import NotificationsPop from './components/NotificationsPop.vue'
-import MomentsPop from './components/MomentsPop.vue'
-import FavoritesPop from './components/FavoritesPop.vue'
-import HistoryPop from './components/HistoryPop.vue'
+
+// import NotificationsPop from './components/NotificationsPop.vue'
+// import MomentsPop from './components/MomentsPop.vue'
+// import FavoritesPop from './components/FavoritesPop.vue'
+// import HistoryPop from './components/HistoryPop.vue'
 import { getUserID, isHomePage } from '~/utils/main'
 import { settings } from '~/logic'
 import emitter from '~/utils/mitt'
@@ -47,6 +48,7 @@ const showMomentsPop = ref<boolean>(false)
 const showFavoritesPop = ref<boolean>(false)
 const showUploadPop = ref<boolean>(false)
 const showHistoryPop = ref<boolean>(false)
+const showWatchLaterPop = ref<boolean>(false)
 const showMorePop = ref<boolean>(false)
 
 const momentsPopKey = ref<string>(`momentsPop[${Number(new Date())}]`)
@@ -525,6 +527,26 @@ defineExpose({
 
               <Transition name="slide-in">
                 <HistoryPop v-if="showHistoryPop" class="bew-popover" />
+              </Transition>
+            </div>
+
+            <!-- Watch later -->
+            <div
+              class="right-side-item"
+              :class="{ active: showWatchLaterPop }"
+              @mouseenter="showWatchLaterPop = true"
+              @mouseleave="showWatchLaterPop = false"
+            >
+              <a
+                href="https://www.bilibili.com/watchlater/#/list"
+                :target="isHomePage() ? '_blank' : '_self'"
+                :title="$t('topbar.watchlater')"
+              >
+                <mingcute:carplay-line />
+              </a>
+
+              <Transition name="slide-in">
+                <WatchLaterPop v-if="showWatchLaterPop" class="bew-popover" />
               </Transition>
             </div>
 
