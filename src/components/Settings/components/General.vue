@@ -67,6 +67,14 @@ function resetDockContent() {
     }
   })
 }
+
+function handleToggleDockItem(dockItem: any) {
+  // Prevent disabling all dock items if there is only one
+  if (settings.value.dockItemVisibilityList.filter(dockItem => dockItem.visible === true).length > 1)
+    dockItem.visible = !dockItem.visible
+  else
+    dockItem.visible = true
+}
 </script>
 
 <template>
@@ -140,7 +148,7 @@ function resetDockContent() {
                 background: element.visible ? 'var(--bew-theme-color)' : 'var(--bew-fill-1)',
                 color: element.visible ? 'white' : 'var(--bew-text-1)',
               }"
-              @click="element.visible = !element.visible"
+              @click="handleToggleDockItem(element)"
             >
               <Icon :icon="pageOptions.find((page:any) => (page.value === element.page))?.icon as string" />
               {{ pageOptions.find(option => option.value === element.page)?.label }}

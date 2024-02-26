@@ -135,6 +135,14 @@ function resetHomeTabs() {
     }
   })
 }
+
+function handleToggleHomeTab(tab: any) {
+  // Prevent disabling all tabs if there is only one
+  if (settings.value.homePageTabVisibilityList.filter(tab => tab.visible === true).length > 1)
+    tab.visible = !tab.visible
+  else
+    tab.visible = true
+}
 </script>
 
 <template>
@@ -244,7 +252,7 @@ function resetHomeTabs() {
                 background: element.visible ? 'var(--bew-theme-color)' : 'var(--bew-fill-1)',
                 color: element.visible ? 'white' : 'var(--bew-text-1)',
               }"
-              @click="element.visible = !element.visible"
+              @click="handleToggleHomeTab(element)"
             >
               {{ homeTabs.find(tab => tab.value === element.page)?.label }}
             </div>
