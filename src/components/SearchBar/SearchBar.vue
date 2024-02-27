@@ -49,7 +49,7 @@ function handleInput() {
 
 async function navigateToSearchResultPage(keyword: string) {
   if (keyword) {
-    window.open(`//search.bilibili.com/all?keyword=${keyword}`, '_blank')
+    window.open(`//search.bilibili.com/all?keyword=${encodeURIComponent(keyword)}`, '_blank')
     const searchItem = {
       value: keyword,
       timestamp: Number(new Date()),
