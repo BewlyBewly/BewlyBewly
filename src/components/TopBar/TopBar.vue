@@ -363,7 +363,7 @@ defineExpose({
         <div
           style="backdrop-filter: var(--bew-filter-glass)"
           ml-auto flex h-55px p-2 bg="$bew-elevated-1"
-          text="$bew-text-1" border="1 $bew-border-color" rounded-full
+          text="$bew-text-1" border="1 $bew-border-color" rounded-full shadow="$bew-shadow-2"
         >
           <div v-if="!isLogin" class="right-side-item">
             <a href="https://passport.bilibili.com/login" class="login">
