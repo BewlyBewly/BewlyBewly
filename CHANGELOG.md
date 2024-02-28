@@ -1,5 +1,36 @@
 # Changelog
 
+## [0.14.8](https://github.com/hakadao/BewlyBewly/compare/v0.14.7...v0.14.8) (2024-02-28)
+
+
+### Features
+
+* custom home tab ([#314](https://github.com/hakadao/BewlyBewly/issues/314)) ([1a5c7ce](https://github.com/hakadao/BewlyBewly/commit/1a5c7cecea90f0e0b853dfafba01080701c8f6a2))
+* watch later popup ([#328](https://github.com/hakadao/BewlyBewly/issues/328)) ([4cc4fff](https://github.com/hakadao/BewlyBewly/commit/4cc4fffb62124648ddd38c5b5889e57e0e8c86e4))
+
+
+### Bug Fixes
+
+* prevent disabling all dock items / home tabs if there is only one ([2ab4387](https://github.com/hakadao/BewlyBewly/commit/2ab438707ba7f505edda9ba7105737895513520c))
+* **SearchBar:** search bar doesn't recognize the hashtag character ([#321](https://github.com/hakadao/BewlyBewly/issues/321)) ([d543942](https://github.com/hakadao/BewlyBewly/commit/d543942d3569767c1cbb08b6124bbc09b3e17539))
+* **TopBar:** search bar cannot be centered in the top bar ([becdcc4](https://github.com/hakadao/BewlyBewly/commit/becdcc4cd4797b23e21f0db3221a530f12e0c6a8))
+* ts error ([e3de0b0](https://github.com/hakadao/BewlyBewly/commit/e3de0b028363ce675d5e1329005984ee4ffc5073))
+* **VideoCard:** bug fixes ([#316](https://github.com/hakadao/BewlyBewly/issues/316)) ([1790d3a](https://github.com/hakadao/BewlyBewly/commit/1790d3a921fe9598634ca3e540246be76041af6f))
+* **VideoCard:** bug fixes ([#316](https://github.com/hakadao/BewlyBewly/issues/316)) ([#318](https://github.com/hakadao/BewlyBewly/issues/318)) ([562c766](https://github.com/hakadao/BewlyBewly/commit/562c766f097352fbce4bb37d43d323b473638903))
+* **VideoCard:** bug fixes ([#316](https://github.com/hakadao/BewlyBewly/issues/316)) ([#319](https://github.com/hakadao/BewlyBewly/issues/319)) ([641f87e](https://github.com/hakadao/BewlyBewly/commit/641f87e0ec38514568fd5cd27fc4d52a57b35ef1))
+* **VideoCard:** ensure clicking on bangumi name or avatar goes to the right page ([7adb17c](https://github.com/hakadao/BewlyBewly/commit/7adb17cc29fa27d8a9e8adf583349495f8b1dd80))
+* **VideoCard:** fix double page open on author's name click ([#315](https://github.com/hakadao/BewlyBewly/issues/315)) ([e185098](https://github.com/hakadao/BewlyBewly/commit/e1850980bbfd4f089a302a59d984b6a6ba3047fc))
+
+
+### Style Changes
+
+* **TopBar:** adjust style ([5af83fa](https://github.com/hakadao/BewlyBewly/commit/5af83faefacb5bd66ef0302248dd6f50e09744ed))
+
+
+### Miscellaneous
+
+* fix ts error ([090d12e](https://github.com/hakadao/BewlyBewly/commit/090d12ee0da0738184640f7ecdda0b610cbb8a94))
+
 ## [0.14.7](https://github.com/hakadao/BewlyBewly/compare/v0.14.6...v0.14.7) (2024-02-18)
 
 
