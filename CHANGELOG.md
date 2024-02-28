@@ -1,5 +1,43 @@
 # Changelog
 
+## [0.14.8](https://github.com/hakadao/BewlyBewly/compare/v0.14.7...v0.14.8) (2024-02-28)
+
+
+### Bug Fixes
+
+* **SearchBar:** search bar doesn't recognize the hashtag character ([#321](https://github.com/hakadao/BewlyBewly/issues/321)) ([d543942](https://github.com/hakadao/BewlyBewly/commit/d543942d3569767c1cbb08b6124bbc09b3e17539))
+* **TopBar:** center the right side items ([f654392](https://github.com/hakadao/BewlyBewly/commit/f65439254b7e9ef7ae8a96c0d0b5f8887cc137c8))
+* **TopBar:** search bar cannot be centered in the top bar ([becdcc4](https://github.com/hakadao/BewlyBewly/commit/becdcc4cd4797b23e21f0db3221a530f12e0c6a8))
+* ts error ([e3de0b0](https://github.com/hakadao/BewlyBewly/commit/e3de0b028363ce675d5e1329005984ee4ffc5073))
+* **VideoCard:** bug fixes ([#316](https://github.com/hakadao/BewlyBewly/issues/316)) ([1790d3a](https://github.com/hakadao/BewlyBewly/commit/1790d3a921fe9598634ca3e540246be76041af6f))
+* **VideoCard:** bug fixes ([#316](https://github.com/hakadao/BewlyBewly/issues/316)) ([#318](https://github.com/hakadao/BewlyBewly/issues/318)) ([562c766](https://github.com/hakadao/BewlyBewly/commit/562c766f097352fbce4bb37d43d323b473638903))
+* **VideoCard:** ensure clicking on bangumi name or avatar goes to the right page ([7adb17c](https://github.com/hakadao/BewlyBewly/commit/7adb17cc29fa27d8a9e8adf583349495f8b1dd80))
+* **VideoCard:** fix double page open on author's name click ([#315](https://github.com/hakadao/BewlyBewly/issues/315)) ([e185098](https://github.com/hakadao/BewlyBewly/commit/e1850980bbfd4f089a302a59d984b6a6ba3047fc))
+* 搜索框用中文输入法输入单词回车不应该直接触发搜索 [#334](https://github.com/hakadao/BewlyBewly/issues/334) ([18e6689](https://github.com/hakadao/BewlyBewly/commit/18e66892083f33604603f8ed7ad6824d026fa3e3))
+
+
+### Style Changes
+
+* **TopBar:** adjust style ([5af83fa](https://github.com/hakadao/BewlyBewly/commit/5af83faefacb5bd66ef0302248dd6f50e09744ed))
+
+
+### CI
+
+* **changelog:** update ci ([f8f2776](https://github.com/hakadao/BewlyBewly/commit/f8f2776df11022cc3d1cbaea3d75e5c6171a2a50))
+* **release:** trigger workflow only on push to main branch ([8d6d179](https://github.com/hakadao/BewlyBewly/commit/8d6d179aade74abf26f73c1cdf1a8a75dcb171c0))
+* **release:** update ci ([edd243c](https://github.com/hakadao/BewlyBewly/commit/edd243c99c1d5d5336d2431cf3f276dd583450b3))
+* **release:** update ci ([28bd6a1](https://github.com/hakadao/BewlyBewly/commit/28bd6a181776155a911b410026495f5d8910ae9e))
+* **release:** update ci ([e847901](https://github.com/hakadao/BewlyBewly/commit/e847901156672e26aa6e3547754ba9a881a105ce))
+
+
+### Miscellaneous
+
+* chore:  ([a50e617](https://github.com/hakadao/BewlyBewly/commit/a50e6176014c0dadd00fa9f7161a58596978905c))
+* chore:  ([0700b27](https://github.com/hakadao/BewlyBewly/commit/0700b27dceee51cb376aa5f437f8f1658d5cb628))
+* chore:  ([88d879d](https://github.com/hakadao/BewlyBewly/commit/88d879d1431063c74f38a2dd80c6eba1626c0e11))
+* update ci ([cdf5889](https://github.com/hakadao/BewlyBewly/commit/cdf5889d5f3f504697cc007c3ab77bf459bfc501))
+* update version number ([f9499be](https://github.com/hakadao/BewlyBewly/commit/f9499beec7c8705f29d583c3cb31164f26b525fd))
+
 ## [0.14.7](https://github.com/hakadao/BewlyBewly/compare/v0.14.6...v0.14.7) (2024-02-18)
 
 
