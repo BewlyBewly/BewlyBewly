@@ -128,6 +128,13 @@ function handleKeyDown() {
   })
 }
 
+function handleKeyEnter(e: KeyboardEvent) {
+  if (!e.shiftKey && e.key === 'Enter' && !e.isComposing) {
+    e.preventDefault()
+    navigateToSearchResultPage(keyword.value)
+  }
+}
+
 async function handleClearSearchHistory() {
   await clearAllSearchHistory()
   searchHistory.value = []
@@ -175,7 +182,7 @@ async function handleClearSearchHistory() {
         type="text"
         @focus="isFocus = true"
         @input="handleInput"
-        @keyup.enter.stop.passive="navigateToSearchResultPage(keyword)"
+        @keydown.enter.stop.passive="handleKeyEnter"
         @keyup.up.stop.passive="handleKeyUp"
         @keyup.down.stop.passive="handleKeyDown"
         @keydown.stop="() => {}"
