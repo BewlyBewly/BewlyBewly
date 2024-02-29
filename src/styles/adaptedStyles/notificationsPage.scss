@@ -172,7 +172,8 @@
       .follow-btn.active,
       .bp-emoji-box .emoji.kaomoji,
       .bp-emoji-box2 .emoji.kaomoji,
-      .reply-textarea {
+      .reply-textarea,
+      .ar-recommend-item__info--title {
         color: var(--bew-text-1);
       }
 
@@ -243,6 +244,7 @@
 
       .bili-im .left,
       .bili-im .msg-notify,
+      .bili-im .msg-push-new,
       .bili-im .message .message-content:not(.is-img),
       .bili-im .send-box,
       .follow-btn.inactive,
