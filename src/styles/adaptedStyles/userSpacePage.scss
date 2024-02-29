@@ -542,6 +542,10 @@
     .pgc-space-follow-item .bangumi-options .opt-list li.disabled {
       opacity: 0.6;
     }
+
+    #page-series-index .channel-option.no-channel[data-v-493154f0] {
+      background-color: var(--bew-content-solid-1);
+    }
   }
   // #endregion
 }
