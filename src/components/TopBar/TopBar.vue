@@ -3,14 +3,14 @@ import type { Ref, UnwrapNestedRefs } from 'vue'
 import { onMounted, watch } from 'vue'
 import type { UnReadDm, UnReadMessage, UserInfo } from './types'
 import { updateInterval } from './notify'
-import NotificationsPop from './components/NotificationsPop.vue'
-import MomentsPop from './components/MomentsPop.vue'
-import FavoritesPop from './components/FavoritesPop.vue'
-import HistoryPop from './components/HistoryPop.vue'
+
+// import NotificationsPop from './components/NotificationsPop.vue'
+// import MomentsPop from './components/MomentsPop.vue'
+// import FavoritesPop from './components/FavoritesPop.vue'
+// import HistoryPop from './components/HistoryPop.vue'
 import { getUserID, isHomePage } from '~/utils/main'
 import { settings } from '~/logic'
 import emitter from '~/utils/mitt'
-import type { AppPage } from '~/enums/appEnums'
 
 // import { useTopBarStore } from '~/stores/topBarStore'
 
@@ -33,8 +33,7 @@ interface Props {
 //   return topBarStore.topBarItems
 // })
 
-const activatedPage = inject('activatedPage') as Ref<AppPage>
-const scrollbarRef = inject('scrollbarRef') as Ref
+const { activatedPage, scrollbarRef } = useBewlyApp()
 
 const mid = getUserID() || ''
 const userInfo = reactive<UserInfo | NonNullable<unknown>>({}) as UnwrapNestedRefs<UserInfo>
@@ -49,6 +48,7 @@ const showMomentsPop = ref<boolean>(false)
 const showFavoritesPop = ref<boolean>(false)
 const showUploadPop = ref<boolean>(false)
 const showHistoryPop = ref<boolean>(false)
+const showWatchLaterPop = ref<boolean>(false)
 const showMorePop = ref<boolean>(false)
 
 const momentsPopKey = ref<string>(`momentsPop[${Number(new Date())}]`)
@@ -538,6 +538,26 @@ defineExpose({
                 </Transition>
               </div>
 
+              <!-- Watch later -->
+              <div
+                class="right-side-item"
+                :class="{ active: showWatchLaterPop }"
+                @mouseenter="showWatchLaterPop = true"
+                @mouseleave="showWatchLaterPop = false"
+              >
+                <a
+                  href="https://www.bilibili.com/watchlater/#/list"
+                  :target="isHomePage() ? '_blank' : '_self'"
+                  :title="$t('topbar.watchlater')"
+                >
+                  <mingcute:carplay-line />
+                </a>
+
+                <Transition name="slide-in">
+                  <WatchLaterPop v-if="showWatchLaterPop" class="bew-popover" />
+                </Transition>
+              </div>
+
               <!-- Creative center -->
               <div class="right-side-item">
                 <a
@@ -554,7 +574,7 @@ defineExpose({
             <div
               class="right-side-item"
               :class="{ active: showMorePop }"
-              display="lg:!none block"
+              display="lg:!none flex"
               @mouseenter="showMorePop = true"
               @mouseleave="showMorePop = false"
             >
@@ -678,23 +698,14 @@ defineExpose({
   .right-side-item {
     --at-apply: relative text-$bew-text-1 flex items-center;
 
-    &:not(.avatar) {
-      a {
-        --at-apply:text-xl flex items-center p-2 rounded-40px
-          duration-300;
-      }
+    &:not(.avatar) a {
+      --at-apply:text-xl flex items-center p-2 rounded-40px
+        duration-300;
     }
 
-    &:not(.avatar):not(.upload) a:not(.login) {
+    &.active a, &:not(.upload) a:hover {
       --un-drop-shadow: drop-shadow(0 0 6px white);
-      --at-apply: mx-1 dark:filter dark-hover:bg-white dark-hover:text-black
-        hover:bg-$bew-fill-2;
-    }
-
-    &.active a {
-      --un-drop-shadow: drop-shadow(0 0 6px white);
-      --at-apply:dark:filter dark:bg-white dark:text-black
-        bg-$bew-fill-2;
+      --at-apply: bg-$bew-fill-2;
     }
   }
 

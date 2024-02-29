@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { Icon } from '@iconify/vue'
-import type { Ref } from 'vue'
+import { usePreferredDark } from '@vueuse/core'
 import type { CurrentDockItem, HoveringDockItem } from './types'
 import type { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
@@ -11,8 +11,7 @@ import { useMainStore } from '~/stores/mainStore'
 defineProps<{ activatedPage: AppPage }>()
 
 const emit = defineEmits(['change-page', 'settings-visibility-change'])
-
-const mainAppRef = inject('mainAppRef') as Ref<HTMLDivElement>
+const { mainAppRef } = useBewlyApp()
 
 const mainStore = useMainStore()
 const { t } = useI18n()
@@ -34,11 +33,14 @@ const tooltipPlacement = computed(() => {
   return 'right'
 })
 
+const isPreferredDark = usePreferredDark()
+const currentSystemColorScheme = computed(() => isPreferredDark.value ? 'dark' : 'light')
+
 const currentAppColorScheme = computed((): 'dark' | 'light' => {
   if (settings.value.theme !== 'auto')
     return settings.value.theme
   else
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    return currentSystemColorScheme.value
 })
 
 const currentDockItems = computed((): CurrentDockItem[] => {
@@ -87,15 +89,19 @@ onMounted(() => {
 })
 
 function toggleDark(e: MouseEvent) {
+  const updateThemeSettings = () => {
+    if (currentAppColorScheme.value !== currentSystemColorScheme.value)
+      settings.value.theme = 'auto'
+    else
+      settings.value.theme = isPreferredDark.value ? 'light' : 'dark'
+  }
+
   const isAppearanceTransition = typeof document !== 'undefined'
   // @ts-expect-error: Transition API
     && document.startViewTransition
     && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
   if (!isAppearanceTransition) {
-    if (currentAppColorScheme.value === 'light')
-      settings.value.theme = 'dark'
-    else
-      settings.value.theme = 'light'
+    updateThemeSettings()
   }
   else {
     const x = e.clientX
@@ -123,10 +129,7 @@ function toggleDark(e: MouseEvent) {
 
     // @ts-expect-error: Transition API
     const transition = document.startViewTransition(async () => {
-      if (currentAppColorScheme.value === 'light')
-        settings.value.theme = 'dark'
-      else
-        settings.value.theme = 'light'
+      updateThemeSettings()
       await nextTick()
     })
 
@@ -204,7 +207,14 @@ function toggleDockHide(hide: boolean) {
               :class="{ active: activatedPage === dockItemVisibility.page }"
               @click="emit('change-page', dockItemVisibility.page)"
             >
-              <Icon :icon="currentDockItems.find((item) => item.page === dockItemVisibility.page)?.icon as string" />
+              <Icon
+                v-show="activatedPage !== dockItemVisibility.page"
+                :icon="currentDockItems.find((item) => item.page === dockItemVisibility.page)?.icon as string"
+              />
+              <Icon
+                v-show="activatedPage === dockItemVisibility.page"
+                :icon="currentDockItems.find((item) => item.page === dockItemVisibility.page)?.iconActivated as string"
+              />
             </button>
           </Tooltip>
         </template>

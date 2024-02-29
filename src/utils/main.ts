@@ -101,11 +101,11 @@ export function injectCSS(css: string): HTMLStyleElement {
 
 /**
  * delay
- * @param time delay time
+ * @param ms milliseconds delay time
  */
-export function delay(time: number) {
+export function delay(ms: number) {
   return new Promise((resolve) => {
-    setTimeout(resolve, time)
+    setTimeout(resolve, ms)
   })
 }
 

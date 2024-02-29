@@ -6,9 +6,13 @@ import type { List as RankingPgcItem, RankingPgcResult } from '~/models/video/ra
 import { settings } from '~/logic'
 import emitter from '~/utils/mitt'
 
-const { t } = useI18n()
+const emit = defineEmits<{
+  (e: 'beforeLoading'): void
+  (e: 'afterLoading'): void
+}>()
 
-const handleBackToTop = inject('handleBackToTop') as (targetScrollTop: number) => void
+const { t } = useI18n()
+const { handleBackToTop, handlePageRefresh } = useBewlyApp()
 
 const rankingTypes = computed((): RankingType[] => {
   return [
@@ -72,7 +76,22 @@ onMounted(() => {
   })
 
   getRankingVideos()
+  initPageAction()
 })
+
+onActivated(() => {
+  initPageAction()
+})
+
+function initPageAction() {
+  handlePageRefresh.value = async () => {
+    videoList.length = 0
+    PgcList.length = 0
+    if (isLoading.value)
+      return
+    getRankingVideos()
+  }
+}
 
 onBeforeUnmount(() => {
   emitter.off('topBarVisibleChange')
@@ -80,6 +99,7 @@ onBeforeUnmount(() => {
 
 function getRankingVideos() {
   videoList.length = 0
+  emit('beforeLoading')
   isLoading.value = true
   browser.runtime.sendMessage({
     contentScriptQuery: 'getRankingVideos',
@@ -90,7 +110,10 @@ function getRankingVideos() {
       const { list } = response.data
       Object.assign(videoList, list)
     }
-  }).finally(() => isLoading.value = false)
+  }).finally(() => {
+    isLoading.value = false
+    emit('afterLoading')
+  })
 }
 
 function getRankingPgc() {
