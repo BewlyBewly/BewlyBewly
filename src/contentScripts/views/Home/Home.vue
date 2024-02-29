@@ -1,60 +1,81 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import ForYou from './components/ForYou.vue'
-import Following from './components/Following.vue'
-import Trending from './components/Trending.vue'
-import Ranking from './components/Ranking.vue'
-import SubscribedSeries from './components/SubscribedSeries.vue'
+import { Icon } from '@iconify/vue'
 import type { HomeTab } from './types'
 import { HomeSubPage } from './types'
 import emitter from '~/utils/mitt'
 import { settings } from '~/logic'
+import { delay } from '~/utils/main'
 
 const { t } = useI18n()
 
-const handleBackToTop = inject('handleBackToTop') as (targetScrollTop: number) => void
+const { handleBackToTop } = useBewlyApp()
 
-const recommendContentKey = ref<string>(`recommendContent${Number(new Date())}`)
 const activatedPage = ref<HomeSubPage>(HomeSubPage.ForYou)
-const pages = { ForYou, Following, SubscribedSeries, Trending, Ranking }
+const pages = {
+  [HomeSubPage.ForYou]: defineAsyncComponent(() => import('./components/ForYou.vue')),
+  [HomeSubPage.Following]: defineAsyncComponent(() => import('./components/Following.vue')),
+  [HomeSubPage.SubscribedSeries]: defineAsyncComponent(() => import('./components/SubscribedSeries.vue')),
+  [HomeSubPage.Trending]: defineAsyncComponent(() => import('./components/Trending.vue')),
+  [HomeSubPage.Ranking]: defineAsyncComponent(() => import('./components/Ranking.vue')),
+}
 const showSearchPageMode = ref<boolean>(false)
 const shouldMoveTabsUp = ref<boolean>(false)
+const tabContentLoading = ref<boolean>(false)
 
-const tabs = computed((): HomeTab[] => {
-  return [
-    {
-      label: t('home.for_you'),
-      value: HomeSubPage.ForYou,
-    },
-    {
-      label: t('home.following'),
-      value: HomeSubPage.Following,
-    },
-    {
-      label: t('home.subscribed_series'),
-      value: HomeSubPage.SubscribedSeries,
-    },
-    {
-      label: t('home.trending'),
-      value: HomeSubPage.Trending,
-    },
-    {
-      label: t('home.ranking'),
-      value: HomeSubPage.Ranking,
-    },
-  ]
-})
+const tabs = ref<HomeTab[]>([])
+
+const defaultTabs = [
+  {
+    label: t('home.for_you'),
+    value: HomeSubPage.ForYou,
+  },
+  {
+    label: t('home.following'),
+    value: HomeSubPage.Following,
+  },
+  {
+    label: t('home.subscribed_series'),
+    value: HomeSubPage.SubscribedSeries,
+  },
+  {
+    label: t('home.trending'),
+    value: HomeSubPage.Trending,
+  },
+  {
+    label: t('home.ranking'),
+    value: HomeSubPage.Ranking,
+  },
+]
 
 watch(() => activatedPage.value, () => {
   handleBackToTop(settings.value.useSearchPageModeOnHomePage ? 510 : 0)
 })
 
+// use Json stringify to watch the changes of the array item properties
+watch(() => JSON.stringify(settings.value.homePageTabVisibilityList), () => {
+  tabs.value = computeTabs()
+})
+
+function computeTabs() {
+  // if homePageTabVisibilityList not fresh , set it to default
+  if (!settings.value.homePageTabVisibilityList.length || settings.value.homePageTabVisibilityList.length !== defaultTabs.length)
+    settings.value.homePageTabVisibilityList = defaultTabs.map(tab => ({ page: tab.value, visible: true }))
+
+  const targetTabs: HomeTab[] = []
+
+  for (const tab of settings.value.homePageTabVisibilityList) {
+    tab.visible && targetTabs.push({
+      label: (defaultTabs.find(defaultTab => defaultTab.value === tab.page) || {})?.label || tab.page,
+      value: tab.page,
+    })
+  }
+
+  return targetTabs
+}
+
 onMounted(() => {
   showSearchPageMode.value = true
-  emitter.off('pageRefresh')
-  emitter.on('pageRefresh', async () => {
-    recommendContentKey.value = `recommendContent${Number(new Date())}`
-  })
   emitter.off('topBarVisibleChange')
   emitter.on('topBarVisibleChange', (val) => {
     shouldMoveTabsUp.value = false
@@ -70,12 +91,32 @@ onMounted(() => {
         shouldMoveTabsUp.value = true
     }
   })
+
+  tabs.value = computeTabs()
+  activatedPage.value = tabs.value[0].value
 })
 
 onUnmounted(() => {
-  emitter.off('pageRefresh')
   emitter.off('topBarVisibleChange')
 })
+
+function handleChangeTab(tab: HomeTab) {
+  // When the content of a tab is loading, prevent switching to another tab.
+  // Since `initPageAction()` within the tab replaces the `handleReachBottom` and `handlePageRefresh` functions.
+  // Therefore, this will lead to a failure in refreshing the data of the current tab
+  // because `handlePageRefresh` and `handleReachBottom` has been replaced
+  // now they are set to refresh the data of the tab you switched to
+  if (!tabContentLoading.value)
+    activatedPage.value = tab.value
+}
+
+function toggleTabContentLoading(loading: boolean) {
+  nextTick(async () => {
+    if (!loading)
+      await delay(500)
+    tabContentLoading.value = loading
+  })
+}
 </script>
 
 <template>
@@ -95,7 +136,7 @@ onUnmounted(() => {
           }"
         />
         <!-- background mask -->
-        <transition name="fade">
+        <Transition name="fade">
           <div
             v-if="(!settings.individuallySetSearchPageWallpaper && settings.enableWallpaperMasking) || (settings.searchPageEnableWallpaperMasking)"
             pos="relative left-0 top-0" w-full h-inherit pointer-events-none duration-300
@@ -111,7 +152,7 @@ onUnmounted(() => {
               }"
             />
           </div>
-        </transition>
+        </Transition>
       </div>
     </Transition>
 
@@ -149,16 +190,31 @@ onUnmounted(() => {
             v-for="tab in tabs" :key="tab.value"
             px-4 lh-35px bg="$bew-elevated-1 hover:$bew-elevated-1-hover" backdrop-glass rounded="$bew-radius"
             cursor-pointer shadow="$bew-shadow-1" box-border border="1 $bew-border-color" duration-300
+            flex="~ gap-2 items-center"
             :class="{ 'tab-activated': activatedPage === tab.value }"
-            @click="activatedPage = tab.value"
+            @click="handleChangeTab(tab)"
           >
             <span class="text-center">{{ tab.label }}</span>
+            <Icon
+              :style="{
+                opacity: activatedPage === tab.value && tabContentLoading ? 1 : 0,
+                margin: activatedPage === tab.value && tabContentLoading ? '0' : '-12px',
+              }"
+              icon="svg-spinners:ring-resize"
+              duration-300 ease-in-out mb--2px text-16px
+            />
           </li>
         </ul>
       </header>
 
       <Transition name="page-fade">
-        <Component :is="pages[activatedPage]" :key="recommendContentKey" />
+        <KeepAlive include="ForYou">
+          <Component
+            :is="pages[activatedPage]" :key="activatedPage"
+            @before-loading="toggleTabContentLoading(true)"
+            @after-loading="toggleTabContentLoading(false)"
+          />
+        </KeepAlive>
       </Transition>
       <!-- <RecommendContent :key="recommendContentKey" /> -->
     </main>

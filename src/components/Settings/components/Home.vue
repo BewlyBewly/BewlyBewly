@@ -2,9 +2,15 @@
 import type { Ref } from 'vue'
 import QRCodeVue from 'qrcode.vue'
 import { useToast } from 'vue-toastification'
+import { useI18n } from 'vue-i18n'
+import draggable from 'vuedraggable'
 import SearchPage from './SearchPage.vue'
+import type { HomeTab } from '~/contentScripts/views/Home/types.ts'
+import { HomeSubPage } from '~/contentScripts/views/Home/types'
 import { getTVLoginQRCode, pollTVLoginQRCode, revokeAccessKey } from '~/utils/authProvider'
 import { accessKey, settings } from '~/logic'
+
+const { t } = useI18n()
 
 const toast = useToast()
 
@@ -95,6 +101,48 @@ function handleCloseSearchPageModeSharedSettings() {
   showSearchPageModeSharedSettings.value = false
   preventCloseSettings.value = false
 }
+
+const homeTabs = computed((): HomeTab[] => {
+  return [
+    {
+      label: t('home.for_you'),
+      value: HomeSubPage.ForYou,
+    },
+    {
+      label: t('home.following'),
+      value: HomeSubPage.Following,
+    },
+    {
+      label: t('home.subscribed_series'),
+      value: HomeSubPage.SubscribedSeries,
+    },
+    {
+      label: t('home.trending'),
+      value: HomeSubPage.Trending,
+    },
+    {
+      label: t('home.ranking'),
+      value: HomeSubPage.Ranking,
+    },
+  ]
+})
+
+function resetHomeTabs() {
+  settings.value.homePageTabVisibilityList = homeTabs.value.map((tab) => {
+    return {
+      page: tab.value,
+      visible: true,
+    }
+  })
+}
+
+function handleToggleHomeTab(tab: any) {
+  // Prevent disabling all tabs if there is only one
+  if (settings.value.homePageTabVisibilityList.filter(tab => tab.visible === true).length > 1)
+    tab.visible = !tab.visible
+  else
+    tab.visible = true
+}
 </script>
 
 <template>
@@ -175,6 +223,42 @@ function handleCloseSearchPageModeSharedSettings() {
           </Button>
         </div>
       </ChildSettingsDialog>
+    </SettingsItemGroup>
+    <SettingsItemGroup
+      :title="$t('settings.group_home_tabs')"
+    >
+      <SettingsItem next-line :desc="$t('settings.home_tabs_adjustment_desc')">
+        <template #title>
+          <div flex="~ gap-4 items-center">
+            {{ $t('settings.home_tabs_adjustment') }}
+            <Button size="small" type="secondary" @click="resetHomeTabs">
+              <template #left>
+                <mingcute:back-line />
+              </template>
+              {{ $t('common.reset') }}
+            </Button>
+          </div>
+        </template>
+        <draggable
+          v-model="settings.homePageTabVisibilityList"
+          item-key="page"
+          :component-data="{ style: 'display: flex; gap: 0.5rem; flex-wrap: wrap;' }"
+        >
+          <template #item="{ element }">
+            <div
+              flex="~ gap-2 items-center" p="x-4 y-2" bg="$bew-fill-1" rounded="$bew-radius" cursor-all-scroll
+              duration-300
+              :style="{
+                background: element.visible ? 'var(--bew-theme-color)' : 'var(--bew-fill-1)',
+                color: element.visible ? 'white' : 'var(--bew-text-1)',
+              }"
+              @click="handleToggleHomeTab(element)"
+            >
+              {{ homeTabs.find(tab => tab.value === element.page)?.label }}
+            </div>
+          </template>
+        </draggable>
+      </SettingsItem>
     </SettingsItemGroup>
 
     <SettingsItemGroup :title="$t('settings.group_search_page_mode')">

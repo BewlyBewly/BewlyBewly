@@ -23,6 +23,7 @@ common:
   disable: 禁用
   refresh: 刷新
   reset: 重置
+  no_more_content: 没有更多内容了
 settings:
   title: 设置
 
@@ -44,6 +45,7 @@ settings:
   group_search_bar: 搜索栏
   group_recommendation_mode: 推荐模式
   group_search_page_mode: 搜索页模式
+  group_home_tabs: 首页标签栏
 
   # Settings buttons
   btn:
@@ -122,6 +124,8 @@ settings:
   settings_shared_with_the_search_page: 与搜索页共用的配置
   settings_shared_with_the_search_page_desc: 这些设置都与搜索页共用
   search_page_mode_wallpaper_fixed: 将搜索页模式的壁纸固定
+  home_tabs_adjustment: 标签栏调整
+  home_tabs_adjustment_desc: 第一个激活的 Tab 项是默认界面
 
   # Compatibility
   # Common

@@ -1,5 +1,6 @@
 <!-- TODO: refactor all that code -->
 <script setup lang="ts">
+import { onKeyStroke } from '@vueuse/core'
 import type { HistoryItem, SuggestionItem, SuggestionResponse } from './searchHistoryProvider'
 import {
   addSearchHistory,
@@ -14,6 +15,7 @@ defineProps<{
   focusedCharacter?: string
 }>()
 
+const keywordRef = ref<HTMLInputElement>()
 const isFocus = ref<boolean>(false)
 const keyword = ref<string>('')
 const suggestions = reactive<SuggestionItem[]>([])
@@ -27,6 +29,16 @@ watch(isFocus, async (focus) => {
   if (focus)
     searchHistory.value = await getSearchHistory()
 })
+
+onKeyStroke('/', (e) => {
+  e.preventDefault()
+  keywordRef.value?.focus()
+})
+onKeyStroke('Escape', (e) => {
+  e.preventDefault()
+  keywordRef.value?.blur()
+  isFocus.value = false
+}, { target: keywordRef })
 
 function handleInput() {
   selectedIndex.value = -1
@@ -171,9 +183,10 @@ async function handleClearSearchHistory() {
       </Transition>
 
       <input
+        ref="keywordRef"
         v-model.trim="keyword"
         rounded="60px focus:$bew-radius"
-        p="l-6 r-16 y-3"
+        p="l-6 r-18 y-3"
         h-50px
         text="$bew-text-1"
         un-border="3 solid transparent focus:$bew-theme-color"
@@ -187,6 +200,16 @@ async function handleClearSearchHistory() {
         @keyup.down.stop.passive="handleKeyDown"
         @keydown.stop="() => {}"
       >
+      <button
+        v-if="isFocus && keyword"
+        pos="absolute right-12" bg="$bew-fill-1 hover:$bew-fill-2" text="xs" rounded-10
+        p-1
+        flex="~ items-center justify-between"
+        @click="keyword = ''"
+      >
+        <ic-baseline-clear shrink-0 />
+      </button>
+
       <button
         p-2
         rounded-full

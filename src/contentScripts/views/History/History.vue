@@ -4,7 +4,6 @@ import { useI18n } from 'vue-i18n'
 
 import { getCSRF, removeHttpFromUrl } from '~/utils/main'
 import { calcCurrentTime } from '~/utils/dataFormatter'
-import emitter from '~/utils/mitt'
 import { Business } from '~/models/video/history'
 import type { List as HistoryItem, HistoryResult } from '~/models/video/history'
 import type { List as HistorySearchItem, HistorySearchResult } from '~/models/video/historySearch'
@@ -12,61 +11,44 @@ import type { List as HistorySearchItem, HistorySearchResult } from '~/models/vi
 const { t } = useI18n()
 
 const isLoading = ref<boolean>()
-const noMoreContent = ref<boolean>()
+const noMoreContent = ref<boolean>(false)
 const historyList = reactive<Array<HistoryItem>>([])
 const currentPageNum = ref<number>(1)
 const keyword = ref<string>()
 const historyStatus = ref<boolean>()
+const { handlePageRefresh, handleReachBottom } = useBewlyApp()
 
 const HistoryBusiness = computed(() => {
   return Business
 })
 
-watch(
-  () => keyword.value,
-  (newValue, oldValue) => {
-    if (newValue === oldValue)
-      return
-    emitter.on('reachBottom', () => {
-      if (isLoading.value)
-        return
-
-      if (!noMoreContent.value) {
-        if (keyword.value)
-          searchHistoryList()
-        else getHistoryList()
-      }
-    })
-  },
-)
-
 onMounted(() => {
   getHistoryList()
   getHistoryPauseStatus()
 
-  emitter.off('reachBottom')
-  emitter.on('reachBottom', () => {
+  initPageAction()
+})
+
+function initPageAction() {
+  handleReachBottom.value = () => {
     if (isLoading.value)
       return
+    if (noMoreContent.value)
+      return
 
-    if (!noMoreContent.value) {
-      if (keyword.value)
-        searchHistoryList()
-      else getHistoryList()
-    }
-  })
+    if (keyword.value)
+      searchHistoryList()
+    else
+      getHistoryList()
+  }
 
-  emitter.off('pageRefresh')
-  emitter.on('pageRefresh', async () => {
+  handlePageRefresh.value = () => {
     historyList.length = 0
+    currentPageNum.value = 1
+    noMoreContent.value = false
     getHistoryList()
-  })
-})
-
-onUnmounted(() => {
-  emitter.off('reachBottom')
-  emitter.off('pageRefresh')
-})
+  }
+}
 
 /**
  * Get history list
@@ -128,6 +110,7 @@ function searchHistoryList() {
 function handleSearch() {
   historyList.length = 0
   currentPageNum.value = 1
+  noMoreContent.value = false
   if (keyword.value)
     searchHistoryList()
   else getHistoryList()
@@ -151,7 +134,7 @@ function deleteHistoryItem(index: number, historyItem: HistoryItem) {
  * @param item history item
  * @return {string} url
  */
-function getHistoryUrl(item: HistoryItem) {
+function getHistoryUrl(item: HistoryItem): string {
   // anime
   if (item.history.business === 'pgc') {
     return removeHttpFromUrl(item.uri)
@@ -220,7 +203,6 @@ function clearAllHistory() {
 }
 
 function handleClearAllWatchHistory() {
-  // eslint-disable-next-line no-alert
   const result = confirm(
     t('history.clear_all_watch_history_confirm'),
   )
@@ -229,7 +211,6 @@ function handleClearAllWatchHistory() {
 }
 
 function handlePauseWatchHistory() {
-  // eslint-disable-next-line no-alert
   const result = confirm(
     t('history.pause_watch_history_confirm'),
   )
@@ -238,7 +219,6 @@ function handlePauseWatchHistory() {
 }
 
 function handleTurnOnWatchHistory() {
-  // eslint-disable-next-line no-alert
   const result = confirm(
     t('history.turn_on_watch_history_confirm'),
   )
@@ -258,7 +238,7 @@ function jumpToLoginPage() {
         {{ $t('history.title') }}
       </h3>
       <!-- historyList -->
-      <transition-group name="list">
+      <TransitionGroup name="list">
         <a
           v-for="(historyItem, index) in historyList"
           :key="historyItem.kid" :href="getHistoryUrl(historyItem)"
@@ -471,7 +451,11 @@ function jumpToLoginPage() {
             </div>
           </section>
         </a>
-      </transition-group>
+      </TransitionGroup>
+
+      <!-- no more content -->
+      <Empty v-if="noMoreContent" class="py-4" :description="$t('common.no_more_content')" />
+
       <!-- loading -->
       <Transition name="fade">
         <loading

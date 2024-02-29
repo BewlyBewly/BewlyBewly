@@ -2,13 +2,12 @@
 import type { Ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import browser from 'webextension-polyfill'
-import type { AnimeTimeTableItem } from '../types'
 import { removeHttpFromUrl } from '~/utils/main'
-import type { Result as TimetableItem, TimetableResult } from '~/models/apiModels/anime/timetable'
+import type { Result as TimetableItem, TimetableResult } from '~/models/anime/timeTable'
 
 const { t } = useI18n()
 
-const animeTimeTable = reactive<AnimeTimeTableItem[]>([])
+const animeTimeTable = reactive<TimetableItem[]>([])
 const animeTimeTableWrap = ref<HTMLElement>() as Ref<HTMLElement>
 
 const daysOfTheWeekList = computed(() => {
@@ -27,6 +26,11 @@ onMounted(() => {
   getAnimeTimeTable()
 })
 
+function refreshAnimeTimeTable() {
+  animeTimeTable.length = 0
+  getAnimeTimeTable()
+}
+
 function getAnimeTimeTable() {
   browser.runtime
     .sendMessage({
@@ -38,6 +42,8 @@ function getAnimeTimeTable() {
         Object.assign(animeTimeTable, result as TimetableItem[])
     })
 }
+
+defineExpose({ refreshAnimeTimeTable })
 </script>
 
 <template>

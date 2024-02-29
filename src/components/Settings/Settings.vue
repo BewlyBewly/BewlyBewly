@@ -1,12 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { Icon } from '@iconify/vue'
-import General from './components/General.vue'
-import Appearance from './components/Appearance.vue'
-import SearchPage from './components/SearchPage.vue'
-import Home from './components/Home.vue'
-import Compatibility from './components/Compatibility.vue'
-import About from './components/About.vue'
+
 import type { MenuItem } from './types'
 import { MenuType } from './types'
 import { settings } from '~/logic'
@@ -15,7 +10,14 @@ const emit = defineEmits(['close'])
 
 const { t } = useI18n()
 
-const settingsMenu = { General, Appearance, SearchPage, Home, Compatibility, About }
+const settingsMenu = {
+  [MenuType.General]: defineAsyncComponent(() => import('./components/General.vue')),
+  [MenuType.Appearance]: defineAsyncComponent(() => import('./components/Appearance.vue')),
+  [MenuType.SearchPage]: defineAsyncComponent(() => import('./components/SearchPage.vue')),
+  [MenuType.Home]: defineAsyncComponent(() => import('./components/Home.vue')),
+  [MenuType.Compatibility]: defineAsyncComponent(() => import('./components/Compatibility.vue')),
+  [MenuType.About]: defineAsyncComponent(() => import('./components/About.vue')),
+}
 const activatedMenuItem = ref<MenuType>(MenuType.General)
 const title = ref<string>(t('settings.title'))
 const preventCloseSettings = ref<boolean>(false)
@@ -137,19 +139,15 @@ function setCurrentTitle() {
               @click="changeMenuItem(menuItem.value)"
             >
               <Icon
+                v-show="menuItem.value !== activatedMenuItem"
                 text="xl center" w-40px h-20px flex="~ shrink-0" justify-center
                 :icon="menuItem.icon"
               />
-              <!-- <Icon
-                v-if="menuItem.value === activatedMenuItem"
+              <Icon
+                v-show="menuItem.value === activatedMenuItem"
                 text="xl center" w-40px h-20px flex="~ shrink-0" justify-center
                 :icon="menuItem.iconActivated"
               />
-              <Icon
-                v-else
-                text="xl center" w-40px h-20px flex="~ shrink-0" justify-center
-                :icon="menuItem.icon"
-              /> -->
               <span shrink-0>{{ menuItem.title }}</span>
             </a>
           </li>

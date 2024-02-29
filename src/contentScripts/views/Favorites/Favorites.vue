@@ -19,7 +19,7 @@ const activatedCategoryCover = ref<string>('')
 const shouldMoveCtrlBarUp = ref<boolean>(false)
 const currentPageNum = ref<number>(1)
 const keyword = ref<string>('')
-
+const { handlePageRefresh, handleReachBottom } = useBewlyApp()
 const isLoading = ref<boolean>(true)
 const isFullPageLoading = ref<boolean>(false)
 const noMoreContent = ref<boolean>()
@@ -28,20 +28,8 @@ onMounted(async () => {
   await getFavoriteCategories()
   changeCategory(favoriteCategories[0])
 
-  emitter.off('reachBottom')
-  emitter.on('reachBottom', () => {
-    if (isLoading.value)
-      return
+  initPageAction()
 
-    if (!noMoreContent.value)
-      getFavoriteResources(selectedCategory.value!.id, ++currentPageNum.value, keyword.value)
-  })
-
-  emitter.off('pageRefresh')
-  emitter.on('pageRefresh', async () => {
-    favoriteResources.length = 0
-    handleSearch()
-  })
   emitter.off('topBarVisibleChange')
   emitter.on('topBarVisibleChange', (val) => {
     shouldMoveCtrlBarUp.value = false
@@ -60,10 +48,28 @@ onMounted(async () => {
 })
 
 onUnmounted(() => {
-  emitter.off('reachBottom')
-  emitter.off('pageRefresh')
   emitter.off('topBarVisibleChange')
 })
+
+function initPageAction() {
+  handleReachBottom.value = async () => {
+    if (isLoading.value)
+      return
+    if (noMoreContent.value)
+      return
+
+    await getFavoriteResources(selectedCategory.value!.id, ++currentPageNum.value, keyword.value)
+  }
+
+  handlePageRefresh.value = () => {
+    if (isLoading.value)
+      return
+    favoriteResources.length = 0
+    currentPageNum.value = 1
+    noMoreContent.value = false
+    handleSearch()
+  }
+}
 
 async function getFavoriteCategories() {
   await browser.runtime
@@ -128,14 +134,17 @@ async function getFavoriteResources(
 async function changeCategory(categoryItem: FavoriteCategory) {
   currentPageNum.value = 1
   selectedCategory.value = categoryItem
-
+  noMoreContent.value = false
   favoriteResources.length = 0
+
   getFavoriteResources(categoryItem.id, 1)
 }
 
 function handleSearch() {
   currentPageNum.value = 1
   favoriteResources.length = 0
+  noMoreContent.value = false
+
   getFavoriteResources(selectedCategory.value!.id, currentPageNum.value, keyword.value)
 }
 
@@ -223,6 +232,9 @@ function handleUnfavorite(favoriteResource: FavoriteResource) {
             </VideoCard>
           </TransitionGroup>
         </div>
+
+        <!-- no more content -->
+        <Empty v-if="noMoreContent" class="py-4" :description="$t('common.no_more_content')" />
 
         <!-- loading -->
         <Transition name="fade">

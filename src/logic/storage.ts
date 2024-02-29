@@ -1,5 +1,6 @@
 import { useStorageLocal } from '~/composables/useStorageLocal'
 import type { AppPage } from '~/enums/appEnums'
+import type { HomeSubPage } from '~/contentScripts/views/Home/types'
 
 // TODO: refactor: implement storage functionality using pinia + useStorageLocal()
 
@@ -41,6 +42,7 @@ export interface Settings {
   recommendationMode: 'web' | 'app'
   useSearchPageModeOnHomePage: boolean
   searchPageModeWallpaperFixed: boolean
+  homePageTabVisibilityList: { page: HomeSubPage, visible: boolean }[]
 
   adaptToOtherPageStyles: boolean
   showTopBar: boolean
@@ -81,6 +83,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   recommendationMode: 'web',
   useSearchPageModeOnHomePage: false,
   searchPageModeWallpaperFixed: false,
+  homePageTabVisibilityList: [],
 
   adaptToOtherPageStyles: true,
   showTopBar: true,
