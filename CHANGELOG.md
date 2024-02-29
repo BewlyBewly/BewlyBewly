@@ -1,5 +1,130 @@
 # Changelog
 
+## [0.14.8](https://github.com/hakadao/BewlyBewly/compare/v0.14.7...v0.14.8) (2024-02-28)
+
+
+### Bug Fixes
+
+* **SearchBar:** search bar doesn't recognize the hashtag character ([#321](https://github.com/hakadao/BewlyBewly/issues/321)) ([d543942](https://github.com/hakadao/BewlyBewly/commit/d543942d3569767c1cbb08b6124bbc09b3e17539))
+* **TopBar:** center the right side items ([f654392](https://github.com/hakadao/BewlyBewly/commit/f65439254b7e9ef7ae8a96c0d0b5f8887cc137c8))
+* **TopBar:** search bar cannot be centered in the top bar ([becdcc4](https://github.com/hakadao/BewlyBewly/commit/becdcc4cd4797b23e21f0db3221a530f12e0c6a8))
+* ts error ([e3de0b0](https://github.com/hakadao/BewlyBewly/commit/e3de0b028363ce675d5e1329005984ee4ffc5073))
+* **VideoCard:** bug fixes ([#316](https://github.com/hakadao/BewlyBewly/issues/316)) ([1790d3a](https://github.com/hakadao/BewlyBewly/commit/1790d3a921fe9598634ca3e540246be76041af6f))
+* **VideoCard:** bug fixes ([#316](https://github.com/hakadao/BewlyBewly/issues/316)) ([#318](https://github.com/hakadao/BewlyBewly/issues/318)) ([562c766](https://github.com/hakadao/BewlyBewly/commit/562c766f097352fbce4bb37d43d323b473638903))
+* **VideoCard:** ensure clicking on bangumi name or avatar goes to the right page ([7adb17c](https://github.com/hakadao/BewlyBewly/commit/7adb17cc29fa27d8a9e8adf583349495f8b1dd80))
+* **VideoCard:** fix double page open on author's name click ([#315](https://github.com/hakadao/BewlyBewly/issues/315)) ([e185098](https://github.com/hakadao/BewlyBewly/commit/e1850980bbfd4f089a302a59d984b6a6ba3047fc))
+* 搜索框用中文输入法输入单词回车不应该直接触发搜索 [#334](https://github.com/hakadao/BewlyBewly/issues/334) ([18e6689](https://github.com/hakadao/BewlyBewly/commit/18e66892083f33604603f8ed7ad6824d026fa3e3))
+
+
+### Style Changes
+
+* **TopBar:** adjust style ([5af83fa](https://github.com/hakadao/BewlyBewly/commit/5af83faefacb5bd66ef0302248dd6f50e09744ed))
+
+
+### CI
+
+* **changelog:** update ci ([f8f2776](https://github.com/hakadao/BewlyBewly/commit/f8f2776df11022cc3d1cbaea3d75e5c6171a2a50))
+* **release:** trigger workflow only on push to main branch ([8d6d179](https://github.com/hakadao/BewlyBewly/commit/8d6d179aade74abf26f73c1cdf1a8a75dcb171c0))
+* **release:** update ci ([edd243c](https://github.com/hakadao/BewlyBewly/commit/edd243c99c1d5d5336d2431cf3f276dd583450b3))
+* **release:** update ci ([28bd6a1](https://github.com/hakadao/BewlyBewly/commit/28bd6a181776155a911b410026495f5d8910ae9e))
+* **release:** update ci ([e847901](https://github.com/hakadao/BewlyBewly/commit/e847901156672e26aa6e3547754ba9a881a105ce))
+
+
+### Miscellaneous
+
+* chore:  ([a50e617](https://github.com/hakadao/BewlyBewly/commit/a50e6176014c0dadd00fa9f7161a58596978905c))
+* chore:  ([0700b27](https://github.com/hakadao/BewlyBewly/commit/0700b27dceee51cb376aa5f437f8f1658d5cb628))
+* chore:  ([88d879d](https://github.com/hakadao/BewlyBewly/commit/88d879d1431063c74f38a2dd80c6eba1626c0e11))
+* update ci ([cdf5889](https://github.com/hakadao/BewlyBewly/commit/cdf5889d5f3f504697cc007c3ab77bf459bfc501))
+* update version number ([f9499be](https://github.com/hakadao/BewlyBewly/commit/f9499beec7c8705f29d583c3cb31164f26b525fd))
+
+## [0.14.7](https://github.com/hakadao/BewlyBewly/compare/v0.14.6...v0.14.7) (2024-02-18)
+
+
+### Bug Fixes
+
+* the article title remain black in dark mode ([#302](https://github.com/hakadao/BewlyBewly/issues/302)) ([b27a33c](https://github.com/hakadao/BewlyBewly/commit/b27a33c44d745509befa71ae68487ba4be1403a6))
+* the text color of the selection becomes white in some cases ([8210ff7](https://github.com/hakadao/BewlyBewly/commit/8210ff70a1e9d89226727b999304394b5cd136e9))
+* 正在追內容更新劇集不一致 ([#303](https://github.com/hakadao/BewlyBewly/issues/303)) ([3bc136a](https://github.com/hakadao/BewlyBewly/commit/3bc136a338769584b6852f523517f3b64417afa9))
+
+
+### Docs
+
+* add Firefox development section && correct the grammar ([d1d1fd0](https://github.com/hakadao/BewlyBewly/commit/d1d1fd0b2b3e66ea87377e10085c32d26db9467e))
+
+
+### Style Changes
+
+* adjust styles ([f40f1d9](https://github.com/hakadao/BewlyBewly/commit/f40f1d9ac0acc899df3e2bb3b8327d3c74a35c66))
+
+
+### Miscellaneous
+
+* update version number ([d472249](https://github.com/hakadao/BewlyBewly/commit/d472249084e292ea251d068297864ac369246e9b))
+
+## [0.14.6](https://github.com/hakadao/BewlyBewly/compare/v0.14.5...v0.14.6) (2024-02-16)
+
+
+### Bug Fixes
+
+* icons in light mode to use theme color on video page ([81ec6a4](https://github.com/hakadao/BewlyBewly/commit/81ec6a4d6641127c51b7a032eab33a235dc0c4b6))
+* resolve [#247](https://github.com/hakadao/BewlyBewly/issues/247) ([bcdd870](https://github.com/hakadao/BewlyBewly/commit/bcdd87092f91ad8f1bffa72156b9adeeacc3279e))
+* resolve [#285](https://github.com/hakadao/BewlyBewly/issues/285) ([5dbfcaa](https://github.com/hakadao/BewlyBewly/commit/5dbfcaa97ede15424df1d68b67467315444c2c40))
+* resolve [#285](https://github.com/hakadao/BewlyBewly/issues/285) && [#283](https://github.com/hakadao/BewlyBewly/issues/283) ([d38732a](https://github.com/hakadao/BewlyBewly/commit/d38732a5afdacf7d963b59c4893bff26bc103f13))
+* resolve style conflicts issue ([26b60b7](https://github.com/hakadao/BewlyBewly/commit/26b60b79eb7c8cc1e1a577fb22fbddb293d464ac))
+* search bar cannot be centered when account is not logged in ([92e468b](https://github.com/hakadao/BewlyBewly/commit/92e468b6e5b9bcd43eac2f77823a7183ce4305bc))
+* ts error ([0452187](https://github.com/hakadao/BewlyBewly/commit/0452187d5cae4b4f886d7be096bbb3959072c46a))
+
+
+### Style Changes
+
+* adjust --bew-filter-icon-glow effect ([2adad91](https://github.com/hakadao/BewlyBewly/commit/2adad911f1d2fa32b0774493b66b9f8208fe4471))
+* adjust --bew-filter-icon-glow effect ([ba9aad5](https://github.com/hakadao/BewlyBewly/commit/ba9aad596d97d8244742a0fb3dd6a7bd1eb65f46))
+* adjust styles ([4f9250d](https://github.com/hakadao/BewlyBewly/commit/4f9250d22a20463764ac0f3bb7279c93e04ddd3d))
+* adjust text selection styles ([2105df7](https://github.com/hakadao/BewlyBewly/commit/2105df786dc8a556334fe729ccc0bd445b3c845f))
+* adjust text selection styles ([b2ac3b3](https://github.com/hakadao/BewlyBewly/commit/b2ac3b3844a1d203f4becc467a9ea74357dd061e))
+* adjust the background color of text selection ([c3be373](https://github.com/hakadao/BewlyBewly/commit/c3be373b1f9b2ae58679876ccbeb7f6cb3026e17))
+
+
+### Miscellaneous
+
+* screw it, it's so hard to center a search bar in a flex box... ([74021ce](https://github.com/hakadao/BewlyBewly/commit/74021ce7f7a009829d99a11a6c3f48c1aa7a07ee))
+* update version number ([32a2e87](https://github.com/hakadao/BewlyBewly/commit/32a2e879fa61576baa3bd9bb85cfaed707bfb87e))
+
+## [0.14.5](https://github.com/hakadao/BewlyBewly/compare/v0.14.4...v0.14.5) (2024-02-03)
+
+
+### Bug Fixes
+
+* adapt unadapted parts for user space page ([dd0d615](https://github.com/hakadao/BewlyBewly/commit/dd0d615bcecd7f4412c595876d218b5a99305ff6))
+* **style:** adapt unadapted parts of the user space page in dark mode [#259](https://github.com/hakadao/BewlyBewly/issues/259) ([b391487](https://github.com/hakadao/BewlyBewly/commit/b39148738fa0d1b97b5fc768da73c93ab4bbf5be))
+* support dark mode for note popup [#262](https://github.com/hakadao/BewlyBewly/issues/262) ([ce5e210](https://github.com/hakadao/BewlyBewly/commit/ce5e21028242041fd141b1d44eac11671e96ec7c))
+
+
+### Style Changes
+
+* adapt unadapted styles for video page ([e88d0cb](https://github.com/hakadao/BewlyBewly/commit/e88d0cb482c56e2dee61271af12afd5ff69c5662))
+
+
+### Miscellaneous
+
+* update version number ([09a5a55](https://github.com/hakadao/BewlyBewly/commit/09a5a55fbfa655ec79d9121af86bb585ea287d85))
+* update version number ([39361e1](https://github.com/hakadao/BewlyBewly/commit/39361e1f6f2cf0ccab27f12d27f8b7b980ed8049))
+
+## [0.14.4](https://github.com/hakadao/BewlyBewly/compare/v0.14.3...v0.14.4) (2024-01-31)
+
+### Bug Fixes
+
+* adjust text in `MomentsPop` [建议] 增加动态状态差分 [#226](https://github.com/hakadao/BewlyBewly/issues/226) ([c62f2c6](https://github.com/hakadao/BewlyBewly/commit/c62f2c604c7043b22d03bbab0498d16ad20121b5))
+* handle `History` video url location part [#223](https://github.com/hakadao/BewlyBewly/issues/223) ([e73ae0e](https://github.com/hakadao/BewlyBewly/commit/e73ae0e3a6deb26f847952e804c8f6514881fa80))
+* handle top bar video part ([b5e7465](https://github.com/hakadao/BewlyBewly/commit/b5e74659697c463d0221b21c6d19652a90308e7e))
+* 播放全部up视频时失效 [#243](https://github.com/hakadao/BewlyBewly/issues/243) ([5d4538b](https://github.com/hakadao/BewlyBewly/commit/5d4538b49a67c9b19ffa0c97ca7fcc6be8346057))
+
+
+### Miscellaneous
+
+* update version number ([eac1c57](https://github.com/hakadao/BewlyBewly/commit/eac1c576d52c80cc2a1b59cca63e44ff3aba18b7))
+
 ## [0.14.3](https://github.com/hakadao/BewlyBewly/compare/v0.14.2...v0.14.3) (2024-01-22)
 
 

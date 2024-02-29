@@ -103,6 +103,7 @@ function jumpToLoginPage() {
         :author="moment.modules.module_author.name"
         :author-face="moment.modules.module_author.face"
         :mid="moment.modules.module_author.mid"
+        :author-url="moment.modules.module_author.jump_url"
         :view-str="moment.modules.module_dynamic.major.pgc?.stat.play"
         :danmaku-str="moment.modules.module_dynamic.major.pgc?.stat.danmaku"
         :capsule-text="moment.modules.module_author.pub_time"

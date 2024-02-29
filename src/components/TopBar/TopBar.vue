@@ -273,11 +273,8 @@ defineExpose({
     @mouseleave="hoveringTopBar = false"
   >
     <main
-      max-w="$bew-page-max-width" m-auto flex="~"
-      justify="between"
-      items-center
-      p="lg:x-20 md:x-16 x-14"
-      h="70px"
+      max-w="$bew-page-max-width" m-auto flex="~ justify-between items-center gap-4"
+      p="lg:x-20 md:x-16 x-14" h="70px"
     >
       <!-- Top bar mask -->
       <div
@@ -299,9 +296,9 @@ defineExpose({
         />
       </Transition>
 
-      <div w="2xl:380px xl:280px" shrink-0>
+      <div shrink-0 flex="inline xl:1 justify-center">
         <div
-          z-1 relative w-fit
+          z-1 relative w-fit mr-auto
           @mouseenter.self="showLogoMenuDropdown()"
           @mouseleave.self="closeLogoMenuDropdown()"
         >
@@ -346,7 +343,7 @@ defineExpose({
       </div>
 
       <!-- search bar -->
-      <div flex="~" w="full" justify="md:center <md:end" items-center>
+      <div flex="inline 1 md:justify-center <md:justify-end items-center" w="full">
         <Transition name="slide-out">
           <SearchBar
             v-if="props.showSearchBar"
@@ -359,247 +356,256 @@ defineExpose({
       </div>
 
       <!-- right content -->
-      <div class="right-side">
-        <div v-if="!isLogin" class="right-side-item">
-          <a href="https://passport.bilibili.com/login" class="login">
-            <ic:outline-account-circle class="text-xl mr-2" />{{
-              $t('topbar.sign_in')
-            }}
-          </a>
-        </div>
-        <template v-if="isLogin">
-          <!-- Avatar -->
-          <div
-            class="avatar right-side-item"
-            @mouseenter="openUserPanel"
-            @mouseleave="closeUserPanel"
-          >
-            <a
-              ref="avatarImg"
-              :href="`https://space.bilibili.com/${mid}`"
-              :target="isHomePage() ? '_blank' : '_self'"
-              class="avatar-img"
-              rounded-full
-              z-1
-              w-38px
-              h-38px
-              bg="$bew-fill-3 cover center"
-              :style="{
-                backgroundImage: `url(${`${userInfo.face}`.replace(
-                  'http:',
-                  '',
-                )})`,
-              }"
-            />
-            <div
-              ref="avatarShadow"
-              class="avatar-shadow"
-              pos="absolute top-0"
-              bg="cover center"
-              blur-sm
-              opacity="60"
-              rounded-full
-              z-0
-              w-38px
-              h-38px
-              :style="{
-                backgroundImage: `url(${`${userInfo.face}`.replace(
-                  'http:',
-                  '',
-                )})`,
-              }"
-            />
-            <Transition name="slide-in">
-              <UserPanelPop
-                v-if="showUserPanelPop"
-                :user-info="userInfo"
-                after:h="!0"
-                class="bew-popover"
-              />
-            </Transition>
+      <div
+        class="right-side"
+        flex="inline xl:1 justify-center items-center"
+      >
+        <div
+          style="backdrop-filter: var(--bew-filter-glass)"
+          ml-auto flex h-55px p-2 bg="$bew-elevated-1"
+          text="$bew-text-1" border="1 $bew-border-color" rounded-full shadow="$bew-shadow-2"
+        >
+          <div v-if="!isLogin" class="right-side-item">
+            <a href="https://passport.bilibili.com/login" class="login">
+              <ic:outline-account-circle class="text-xl mr-2" />{{
+                $t('topbar.sign_in')
+              }}
+            </a>
           </div>
-
-          <!-- TODO: need to refactor to this -->
-          <!-- <div display="lg:flex none">
-            <div v-for="item in topBarItems" :key="item.i18nKey" class="right-side-item">
-              <a :href="item.url" target="_blank" :title="$t(item.i18nKey)">
-                <Icon :icon="item.icon" />
-              </a>
-
-              <Component
-                :is="popups[item.popup] ?? 'div'"
-                v-if="item.popup"
-                class="bew-popover"
-              />
-            </div>
-          </div> -->
-
-          <!-- TODO: need to refactor to above code -->
-          <div display="lg:flex none">
-            <!-- Notifications -->
+          <template v-if="isLogin">
+            <!-- Avatar -->
             <div
-              class="right-side-item"
-              :class="{ active: showNotificationsPop }"
-              @mouseenter="showNotificationsPop = true"
-              @mouseleave="showNotificationsPop = false"
+              class="avatar right-side-item"
+              @mouseenter="openUserPanel"
+              @mouseleave="closeUserPanel"
             >
-              <div v-if="unReadMessageCount !== 0" class="unread-message">
-                {{ unReadMessageCount > 999 ? '999+' : unReadMessageCount }}
-              </div>
               <a
-                href="https://message.bilibili.com"
+                ref="avatarImg"
+                :href="`https://space.bilibili.com/${mid}`"
                 :target="isHomePage() ? '_blank' : '_self'"
-                :title="$t('topbar.notifications')"
-              >
-                <tabler:bell />
-              </a>
-
+                class="avatar-img"
+                rounded-full
+                z-1
+                w-38px
+                h-38px
+                bg="$bew-fill-3 cover center"
+                :style="{
+                  backgroundImage: `url(${`${userInfo.face}`.replace(
+                    'http:',
+                    '',
+                  )})`,
+                }"
+              />
+              <div
+                ref="avatarShadow"
+                class="avatar-shadow"
+                pos="absolute top-0"
+                bg="cover center"
+                blur-sm
+                opacity="60"
+                rounded-full
+                z-0
+                w-38px
+                h-38px
+                :style="{
+                  backgroundImage: `url(${`${userInfo.face}`.replace(
+                    'http:',
+                    '',
+                  )})`,
+                }"
+              />
               <Transition name="slide-in">
-                <NotificationsPop
-                  v-if="showNotificationsPop"
+                <UserPanelPop
+                  v-if="showUserPanelPop"
+                  :user-info="userInfo"
+                  after:h="!0"
                   class="bew-popover"
                 />
               </Transition>
             </div>
 
-            <!-- Moments -->
-            <div
-              class="right-side-item"
-              :class="{ active: showMomentsPop }"
-              @mouseenter="showMomentsPop = true"
-              @mouseleave="showMomentsPop = false"
-            >
-              <div v-if="newMomentsCount !== 0" class="unread-message">
-                {{ newMomentsCount > 999 ? '999+' : newMomentsCount }}
+            <!-- TODO: need to refactor to this -->
+            <!-- <div display="lg:flex none">
+              <div v-for="item in topBarItems" :key="item.i18nKey" class="right-side-item">
+                <a :href="item.url" target="_blank" :title="$t(item.i18nKey)">
+                  <Icon :icon="item.icon" />
+                </a>
+
+                <Component
+                  :is="popups[item.popup] ?? 'div'"
+                  v-if="item.popup"
+                  class="bew-popover"
+                />
               </div>
-              <a
-                href="https://t.bilibili.com"
-                :target="isHomePage() ? '_blank' : '_self'"
-                :title="$t('topbar.moments')"
+            </div> -->
+
+            <!-- TODO: need to refactor to above code -->
+            <div display="lg:flex none">
+              <!-- Notifications -->
+              <div
+                class="right-side-item"
+                :class="{ active: showNotificationsPop }"
+                @mouseenter="showNotificationsPop = true"
+                @mouseleave="showNotificationsPop = false"
               >
-                <tabler:windmill />
-              </a>
+                <div v-if="unReadMessageCount !== 0" class="unread-message">
+                  {{ unReadMessageCount > 999 ? '999+' : unReadMessageCount }}
+                </div>
+                <a
+                  href="https://message.bilibili.com"
+                  :target="isHomePage() ? '_blank' : '_self'"
+                  :title="$t('topbar.notifications')"
+                >
+                  <tabler:bell />
+                </a>
 
-              <Transition name="slide-in">
-                <KeepAlive>
-                  <MomentsPop v-if="showMomentsPop" :key="momentsPopKey" class="bew-popover" />
-                </KeepAlive>
-              </Transition>
-            </div>
-
-            <!-- Favorites -->
-            <div
-              class="right-side-item"
-              :class="{ active: showFavoritesPop }"
-              @mouseenter="showFavoritesPop = true"
-              @mouseleave="showFavoritesPop = false"
-            >
-              <a
-                :href="`https://space.bilibili.com/${mid}/favlist`"
-                :target="isHomePage() ? '_blank' : '_self'"
-                :title="$t('topbar.favorites')"
-              >
-                <mingcute:star-line />
-              </a>
-
-              <Transition name="slide-in">
-                <KeepAlive>
-                  <FavoritesPop
-                    v-if="showFavoritesPop"
-                    ref="favoritesPopRef"
+                <Transition name="slide-in">
+                  <NotificationsPop
+                    v-if="showNotificationsPop"
                     class="bew-popover"
                   />
-                </KeepAlive>
-              </Transition>
+                </Transition>
+              </div>
+
+              <!-- Moments -->
+              <div
+                class="right-side-item"
+                :class="{ active: showMomentsPop }"
+                @mouseenter="showMomentsPop = true"
+                @mouseleave="showMomentsPop = false"
+              >
+                <div v-if="newMomentsCount !== 0" class="unread-message">
+                  {{ newMomentsCount > 999 ? '999+' : newMomentsCount }}
+                </div>
+                <a
+                  href="https://t.bilibili.com"
+                  :target="isHomePage() ? '_blank' : '_self'"
+                  :title="$t('topbar.moments')"
+                >
+                  <tabler:windmill />
+                </a>
+
+                <Transition name="slide-in">
+                  <KeepAlive>
+                    <MomentsPop v-if="showMomentsPop" :key="momentsPopKey" class="bew-popover" />
+                  </KeepAlive>
+                </Transition>
+              </div>
+
+              <!-- Favorites -->
+              <div
+                class="right-side-item"
+                :class="{ active: showFavoritesPop }"
+                @mouseenter="showFavoritesPop = true"
+                @mouseleave="showFavoritesPop = false"
+              >
+                <a
+                  :href="`https://space.bilibili.com/${mid}/favlist`"
+                  :target="isHomePage() ? '_blank' : '_self'"
+                  :title="$t('topbar.favorites')"
+                >
+                  <mingcute:star-line />
+                </a>
+
+                <Transition name="slide-in">
+                  <KeepAlive>
+                    <FavoritesPop
+                      v-if="showFavoritesPop"
+                      ref="favoritesPopRef"
+                      class="bew-popover"
+                    />
+                  </KeepAlive>
+                </Transition>
+              </div>
+
+              <!-- History -->
+              <div
+                class="right-side-item"
+                :class="{ active: showHistoryPop }"
+                @mouseenter="showHistoryPop = true"
+                @mouseleave="showHistoryPop = false"
+              >
+                <a
+                  href="https://www.bilibili.com/account/history"
+                  :target="isHomePage() ? '_blank' : '_self'"
+                  :title="$t('topbar.history')"
+                >
+                  <mingcute:time-line />
+                </a>
+
+                <Transition name="slide-in">
+                  <HistoryPop v-if="showHistoryPop" class="bew-popover" />
+                </Transition>
+              </div>
+
+              <!-- Creative center -->
+              <div class="right-side-item">
+                <a
+                  href="https://member.bilibili.com/platform/home"
+                  target="_blank"
+                  :title="$t('topbar.creative_center')"
+                >
+                  <mingcute:bulb-line />
+                </a>
+              </div>
             </div>
 
-            <!-- History -->
+            <!-- More -->
             <div
               class="right-side-item"
-              :class="{ active: showHistoryPop }"
-              @mouseenter="showHistoryPop = true"
-              @mouseleave="showHistoryPop = false"
+              :class="{ active: showMorePop }"
+              display="lg:!none block"
+              @mouseenter="showMorePop = true"
+              @mouseleave="showMorePop = false"
             >
-              <a
-                href="https://www.bilibili.com/account/history"
-                :target="isHomePage() ? '_blank' : '_self'"
-                :title="$t('topbar.history')"
-              >
-                <mingcute:time-line />
+              <a title="More">
+                <mingcute:menu-line />
               </a>
 
               <Transition name="slide-in">
-                <HistoryPop v-if="showHistoryPop" class="bew-popover" />
+                <MorePop v-show="showMorePop" class="bew-popover" />
               </Transition>
             </div>
 
-            <!-- Creative center -->
-            <div class="right-side-item">
-              <a
-                href="https://member.bilibili.com/platform/home"
-                target="_blank"
-                :title="$t('topbar.creative_center')"
-              >
-                <mingcute:bulb-line />
-              </a>
-            </div>
-          </div>
-
-          <!-- More -->
-          <div
-            class="right-side-item"
-            :class="{ active: showMorePop }"
-            display="lg:none block"
-            @mouseenter="showMorePop = true"
-            @mouseleave="showMorePop = false"
-          >
-            <a title="More">
-              <mingcute:menu-line />
-            </a>
-
-            <Transition name="slide-in">
-              <MorePop v-show="showMorePop" class="bew-popover" />
-            </Transition>
-          </div>
-
-          <!-- Upload -->
-          <div
-            class="upload right-side-item"
-            @mouseenter="showUploadPop = true"
-            @mouseleave="showUploadPop = false"
-          >
-            <a
-              href="https://member.bilibili.com/platform/upload/video/frame"
-              target="_blank"
-              bg="$bew-theme-color"
-              rounded-40px
-              un-text="!white !base"
-              m="x-1"
-              flex="~"
-              justify="center"
-              w="xl:100px 42px"
-              h="xl:auto 42px"
-              p="xl:auto x-4"
-              shadow
-              filter="hover:brightness-110"
-              style="--un-shadow: 0 0 10px var(--bew-theme-color-60)"
+            <!-- Upload -->
+            <div
+              class="upload right-side-item"
+              @mouseenter="showUploadPop = true"
+              @mouseleave="showUploadPop = false"
             >
-              <mingcute:upload-2-line flex-shrink-0 />
-              <span m="l-2" display="xl:block none">{{
-                $t('topbar.upload')
-              }}</span>
-            </a>
+              <a
+                href="https://member.bilibili.com/platform/upload/video/frame"
+                target="_blank"
+                bg="$bew-theme-color"
+                rounded-40px
+                un-text="!white !base"
+                m="x-1"
+                flex="~"
+                justify="center"
+                w="xl:100px 42px"
+                h="xl:auto 42px"
+                p="xl:auto x-4"
+                shadow
+                filter="hover:brightness-110"
+                style="--un-shadow: 0 0 10px var(--bew-theme-color-60)"
+              >
+                <mingcute:upload-2-line flex-shrink-0 />
+                <span m="l-2" display="xl:block none">{{
+                  $t('topbar.upload')
+                }}</span>
+              </a>
 
-            <Transition name="slide-in">
-              <UploadPop
-                v-if="showUploadPop"
-                class="bew-popover"
-                pos="!left-auto !right-0"
-                transform="!translate-x-0"
-              />
-            </Transition>
-          </div>
-        </template>
+              <Transition name="slide-in">
+                <UploadPop
+                  v-if="showUploadPop"
+                  class="bew-popover"
+                  pos="!left-auto !right-0"
+                  transform="!translate-x-0"
+                />
+              </Transition>
+            </div>
+          </template>
+        </div>
       </div>
     </main>
   </header>
@@ -659,10 +665,6 @@ defineExpose({
 }
 
 .right-side {
-  --at-apply: flex h-55px items-center rounded-full p-2 backdrop-glass
-    bg-$bew-elevated-1 text-$bew-text-1 border-1 border-$bew-border-color
-    box-border;
-  box-shadow: var(--bew-shadow-2);
 
   .unread-message {
     --at-apply: absolute -top-1 right-0
@@ -674,7 +676,7 @@ defineExpose({
   }
 
   .right-side-item {
-    --at-apply: relative text-$bew-text-1;
+    --at-apply: relative text-$bew-text-1 flex items-center;
 
     &:not(.avatar) {
       a {

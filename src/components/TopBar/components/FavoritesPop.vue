@@ -2,7 +2,7 @@
 import type { Ref } from 'vue'
 import { onMounted, reactive, ref, watch } from 'vue'
 import type { FavoriteCategory, FavoriteResource } from '../types'
-import { getUserID, removeHttpFromUrl, smoothScrollToTop } from '~/utils/main'
+import { getUserID, isHomePage, removeHttpFromUrl, smoothScrollToTop } from '~/utils/main'
 import { calcCurrentTime } from '~/utils/dataFormatter'
 
 const favoriteCategories = reactive<Array<FavoriteCategory>>([])
@@ -148,20 +148,20 @@ defineExpose({
         {{ activatedFavoriteTitle }}
       </h3>
 
-      <a :href="favoritesPageUrl" target="_blank" flex="~" items="center">
+      <a
+        :href="favoritesPageUrl" :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
+        flex="~" items="center"
+      >
         <span text="sm">{{ $t('common.view_all') }}</span>
       </a>
     </header>
 
     <main flex="~" overflow-hidden rounded="$bew-radius">
       <aside
-        w="120px"
-        h="430px"
-        overflow="y-scroll"
-        un-border="rounded-l-$bew-radius"
-        flex="shrink-0"
+        w="120px" h="430px" overflow="y-scroll" rounded="l-$bew-radius"
+        flex="shrink-0" bg="$bew-fill-1"
       >
-        <ul grid="~ cols-1" bg="$bew-fill-2">
+        <ul grid="~ cols-1">
           <li
             v-for="item in favoriteCategories"
             :key="item.id"
@@ -180,7 +180,7 @@ defineExpose({
       <!-- Favorite videos wrapper -->
       <div
         ref="favoriteVideosWrap"
-        flex="~ col gap-4 1"
+        flex="~ col gap-2 1"
         h="430px"
         overflow="y-scroll"
         p="x-4"
@@ -211,12 +211,10 @@ defineExpose({
           <a
             v-for="item in favoriteResources"
             :key="item.id"
-            :href="`//www.bilibili.com/video/${item.bvid}`"
-            target="_blank"
+            :href="`//www.bilibili.com/video/${item.bvid}`" :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
             hover:bg="$bew-fill-2"
             rounded="$bew-radius"
-            p="2"
-            m="first:t-50px last:b-4"
+            m="first:t-50px last:b-4" p="2"
             class="group"
             transition="~ duration-300"
           >

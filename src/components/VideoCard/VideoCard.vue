@@ -13,6 +13,8 @@ interface Props {
   cover: string
   author?: string
   authorFace?: string
+  /** If you set the `authorUrl`, clicking the author's name or avatar will navigate to this url  */
+  authorUrl?: string
   mid?: number
   view?: number
   viewStr?: string
@@ -22,6 +24,7 @@ interface Props {
   capsuleText?: string
   bvid?: string
   aid?: number
+  uri?: string
   /** If you want to show preview video, you should set the cid value */
   cid?: number
   epid?: number
@@ -42,6 +45,17 @@ const videoUrl = computed(() => {
     return `https://www.bilibili.com/video/${props.bvid ?? `av${props.aid}`}`
   else if (props.epid)
     return `https://www.bilibili.com/bangumi/play/ep${props.epid}`
+  else if (props.uri)
+    return props.uri
+  else
+    return ''
+})
+
+const authorJumpUrl = computed(() => {
+  if (props.authorUrl)
+    return props.authorUrl
+  else if (props.mid)
+    return `//space.bilibili.com/${props.mid}`
   else
     return ''
 })
@@ -70,10 +84,6 @@ watch(() => isHover.value, (newValue) => {
     }
   }
 })
-
-function gotoChannel(mid: number) {
-  window.open(`//space.bilibili.com/${mid}`)
-}
 
 function toggleWatchLater() {
   if (!isInWatchLater.value) {
@@ -192,7 +202,10 @@ function handelMouseLeave() {
       hover:bg="$bew-fill-2" hover:ring="8 $bew-fill-2"
       :style="{ contentVisibility }"
     >
-      <div :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }">
+      <a
+        :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }"
+        :href="videoUrl" target="_blank" rel="noopener noreferrer"
+      >
         <!-- Cover -->
         <div
           :style="{ width: horizontal ? '300px' : '100%' }"
@@ -276,7 +289,7 @@ function handelMouseLeave() {
             class="opacity-0 group-hover/cover:opacity-100"
             transform="scale-70 group-hover/cover:scale-100"
             duration-300
-            @click.stop="toggleWatchLater"
+            @click.prevent="toggleWatchLater"
           >
             <Tooltip v-if="!isInWatchLater" :content="$t('common.save_to_watch_later')" placement="bottom" type="dark">
               <mingcute:carplay-line />
@@ -287,15 +300,13 @@ function handelMouseLeave() {
           </button>
 
           <!-- Video cover -->
-          <a :href="videoUrl" target="_blank">
-            <img
-              :src="`${removeHttpFromUrl(cover)}@672w_378h_1c`"
-              loading="lazy"
-              w="full" max-w-full align-middle aspect-video
-              bg="cover center"
-              rounded="$bew-radius"
-            >
-          </a>
+          <img
+            :src="`${removeHttpFromUrl(cover)}@672w_378h_1c`"
+            loading="lazy"
+            w="full" max-w-full align-middle aspect-video
+            bg="cover center"
+            rounded="$bew-radius"
+          >
         </div>
 
         <!-- Other Information -->
@@ -311,10 +322,8 @@ function handelMouseLeave() {
             <a
               v-if="authorFace"
               m="r-4" w="40px" h="40px" rounded="1/2" overflow="hidden"
-              object="center cover"
-              bg="$bew-fill-4" cursor="pointer"
-              style="--un-shadow: 0 0 0 2px var(--bew-theme-color)"
-              :href="`//space.bilibili.com/${mid}`" target="_blank"
+              object="center cover" bg="$bew-fill-4" cursor="pointer"
+              :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
               @click.stop=""
             >
               <img
@@ -332,8 +341,9 @@ function handelMouseLeave() {
                 text="lg overflow-ellipsis $bew-text-1"
                 cursor="pointer"
               >
-                <a :href="videoUrl" target="_blank" :title="title">
-                  {{ title }}</a>
+                <a :href="videoUrl" target="_blank" :title="title" rel="noopener noreferrer">
+                  {{ title }}
+                </a>
               </h3>
 
               <!-- <div
@@ -403,15 +413,16 @@ function handelMouseLeave() {
               </template>
             </div>
             <div text="base $bew-text-2" w-fit m="t-2">
-              <span
+              <a
                 v-if="author"
                 class="channel-name"
-                text="hover:$bew-text-1"
+                un-text="hover:$bew-text-1"
                 cursor-pointer mr-4
-                @click="gotoChannel(mid ?? 0)"
+                :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
+                @click.stop=""
               >
                 {{ author }}
-              </span>
+              </a>
               <template v-if="horizontal">
                 <span v-if="view || viewStr">{{
                   view ? $t('common.view', { count: numFormatter(view) }, view) : `${viewStr}${$t('common.viewWithoutNum')}`
@@ -463,7 +474,7 @@ function handelMouseLeave() {
             </div>
           </div>
         </div>
-      </div>
+      </a>
     </div>
 
     <!-- skeleton -->

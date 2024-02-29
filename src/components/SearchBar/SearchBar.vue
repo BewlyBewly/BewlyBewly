@@ -49,7 +49,7 @@ function handleInput() {
 
 async function navigateToSearchResultPage(keyword: string) {
   if (keyword) {
-    window.open(`//search.bilibili.com/all?keyword=${keyword}`, '_blank')
+    window.open(`//search.bilibili.com/all?keyword=${encodeURIComponent(keyword)}`, '_blank')
     const searchItem = {
       value: keyword,
       timestamp: Number(new Date()),
@@ -128,6 +128,13 @@ function handleKeyDown() {
   })
 }
 
+function handleKeyEnter(e: KeyboardEvent) {
+  if (!e.shiftKey && e.key === 'Enter' && !e.isComposing) {
+    e.preventDefault()
+    navigateToSearchResultPage(keyword.value)
+  }
+}
+
 async function handleClearSearchHistory() {
   await clearAllSearchHistory()
   searchHistory.value = []
@@ -135,7 +142,7 @@ async function handleClearSearchHistory() {
 </script>
 
 <template>
-  <div id="search-wrap" w="full" max-w="550px" m="x-8" pos="relative">
+  <div id="search-wrap" w="full" max-w="550px" pos="relative">
     <div
       v-if="!darkenOnFocus && isFocus"
       pos="fixed top-0 left-0"
@@ -175,7 +182,7 @@ async function handleClearSearchHistory() {
         type="text"
         @focus="isFocus = true"
         @input="handleInput"
-        @keyup.enter.stop.passive="navigateToSearchResultPage(keyword)"
+        @keydown.enter.stop.passive="handleKeyEnter"
         @keyup.up.stop.passive="handleKeyUp"
         @keyup.down.stop.passive="handleKeyDown"
         @keydown.stop="() => {}"

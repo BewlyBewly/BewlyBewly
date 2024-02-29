@@ -40,7 +40,7 @@ Even in the Edge browser, we strongly recommend you install it in the Chrome web
 
 > Ensure you installed [extension.zip](https://github.com/hakadao/BewlyBewly/releases) .
 
-Opening the `edge://extensions` page in the Edge or `chrome://extensions` page in the Chrome, simply drag and drop the downloaded `extension.zip` file into the browser to complete the installation.
+Opening the `edge://extensions` page in the Edge or `chrome://extensions` page in Chrome, simply drag and drop the downloaded `extension.zip` file into the browser to complete the installation.
 
 <details>
  <summary> Another installation method for Edge & Chrome </summary>
@@ -59,22 +59,27 @@ Opening the `edge://extensions` page in the Edge or `chrome://extensions` page i
 
 1. Type in `chrome://extensions/` in the address bar and press Enter
 2. Turn on `Developer mode` then press `Load unpacked` <br/> <img width="655" alt="Snipaste_2022-03-27_18-17-04" src="https://user-images.githubusercontent.com/33394391/160276882-13da0484-92c1-47dd-add8-7655c5c2bf1c.png">
-3. Load decompressed exetension folder in your browser
+3. Load the decompressed extension folder in your browser
 
 </details>
 
-## 🔧 Development & build
+## 🔧 Development & Build
 
-### Development
+### Chrome or Edge browser
+
+<details>
+  <summary>Chrome or Edge browser</summary>
+
+#### Development (Chrome or Edge)
 
 ```bash
 pnpm dev
 ```
 
-Then **load extension in browser with the `extension/` folder**.
-After each modification, you need to click the [Extensions Reloader](https://chrome.google.com/webstore/detail/fimgfedafeadlieiabdeeaodndnlbhid) button and refresh the page to ensure the changes would be applied.
+Then **load the extension in the browser with the `extension/` folder**.
+After each modification, you need to click the [Extensions Reloader](https://chrome.google.com/webstore/detail/fimgfedafeadlieiabdeeaodndnlbhid) button and refresh the page to ensure the changes will be applied.
 
-### Build
+##### Build (Chrome or Edge)
 
 To build the extension, run
 
@@ -82,21 +87,51 @@ To build the extension, run
 pnpm build
 ```
 
-And then pack files under `extension`
+And then pack files under the `extension`
 
-### 🤝 Contribution
+</details>
 
-#### About branches
+### Firefox browser
+
+Before that, please use the `dev-firefox` branch to perform the operations below. It may contain some bugs or unclear code, and your help in addressing these issues is welcome! :D
+
+<details>
+  <summary>Firefox browser</summary>
+
+#### Development (Firefox)
+
+```bash
+pnpm dev-firefox
+```
+
+Then **load the extension in the browser with the `extension-firefox/` folder**.
+After each modification, you need to click the [Extensions Reloader](https://chrome.google.com/webstore/detail/fimgfedafeadlieiabdeeaodndnlbhid) button and refresh the page to ensure the changes will be applied.
+
+#### Build (Firefox)
+
+To build the extension, run
+
+```bash
+pnpm build-firefox
+```
+
+And then pack files under the `extension-firefox`
+
+</details>
+
+## 🤝 Contribution
+
+### About Branches
 
 - **Main**: This branch is designed for changes that are restricted to documentation files like READMEs, without altering the code or its functionality.
-- **Dev**: Use this brach for new features, performance improvements or modifications to i18n files.
+- **Dev**: Use this branch for new features, performance improvements or modifications to i18n files.
 - **Bugfixes**: This branch should be used exclusively for fixing bugs that appear in the main branch.
 
-#### I18n
+### I18n
 
 - When doing translations, if you have a language you are not familiar with, you can use another language that you have translated and point out what language you cannot translate in the pull request.
 
-- **Please MANUALLY MAINTAIN the i18n files!!!** Do not use `i18n Ally` or other extensions to maintain them. I know you might be confused or might not like this, but using `i18n Ally` for the maintenance will be uncertain where to place the translations afterward or delete the code comments.
+- **Please MANUALLY MAINTAIN the i18n files!!!** Do not use `i18n Ally` or other extensions to maintain them. I know you might be confused or might not like this, but using `i18n Ally` for the maintenance will make it uncertain where to place the translations afterward or delete the code comments.
 
 ## ❤️ Credits
 

@@ -65,7 +65,12 @@
 
 ## 🔧 開發同建置
 
-### 開發
+### Chrome or Edge browser
+
+<details>
+  <summary>Chrome or Edge browser</summary>
+
+#### 開發 (Chrome or Edge)
 
 ```bash
 pnpm dev
@@ -74,7 +79,7 @@ pnpm dev
 然之後喺瀏覽器度用 `extension/` 資料夾愛嚟載入此擴充功能。
 每一次執過 code 之後，你都要撳 [Extensions Reloader](https://chrome.google.com/webstore/detail/fimgfedafeadlieiabdeeaodndnlbhid) 粒掣，然之後 refresh 個 page，確保係有效果。
 
-### 建置
+#### 建置 (Chrome or Edge)
 
 建置擴充功能，要執行下底嘅指令
 
@@ -84,15 +89,45 @@ pnpm build
 
 然之後打包 `extension` 下嘅檔案
 
-### 🤝 貢獻
+</details>
 
-#### 關於分支
+### Firefox browser
+
+整之前呢，請用 dev-firefox 分支去做下低嘅操作。佢可能會有啲 bugs 抑或亂晒籠嘅程式碼，歡迎閣下幫手解決呢啲問題！:D
+
+<details>
+  <summary>Firefox</summary>
+
+#### 開發 (Firefox)
+
+```bash
+pnpm dev-firefox
+```
+
+然之後喺瀏覽器度用 `extension-firefox/` 資料夾愛嚟載入此擴充功能。
+每一次執過 code 之後，你都要撳 [Extensions Reloader](https://chrome.google.com/webstore/detail/fimgfedafeadlieiabdeeaodndnlbhid) 粒掣，然之後 refresh 個 page，確保係有效果。
+
+#### 建置 (Firefox)
+
+建置擴充功能，要執行下底嘅指令
+
+```bash
+pnpm build-firefox
+```
+
+然之後打包 `extension-firefox` 下嘅檔案
+
+</details>
+
+## 🤝 貢獻
+
+### 關於分支
 
 - **Main**: 呢個分支係專門愛嚟執吓文件檔案（例如如 README 檔案），唔執程式碼抑或佢啲功能。
 - **Dev**: 用呢個分支進行新功能嘅開發、改進效能抑或執語系檔（i18n）。
 - **Bugfixes**: 呢個分支專門愛嚟執啲喺 main 分支中出現嘅錯誤。
 
-#### i18n
+### i18n
 
 - 喺翻譯嗰陣，若然你遇到一種你唔熟嘅語言，你可以用第種識翻譯嘅語言來翻譯，兼且喺 PR 講明你唔識譯邊種語言。
 - **請手動維護 i18n 國際化語系檔！！！** 請勿使用 `i18n Ally` 抑或其他擴充套件維護。 我知你可能唔係幾明，抑或可能唔鍾意咁樣，但係用 `i18n Ally` 進行維護之後，你唔之你翻譯咗嘅內容擺喺邊處，或剷咗程式碼註解。

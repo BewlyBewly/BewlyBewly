@@ -195,7 +195,6 @@ function handleUnfavorite(favoriteResource: FavoriteResource) {
           <TransitionGroup name="list">
             <VideoCard
               v-for="item in favoriteResources" :id="item.id" :key="item.id"
-              :item="item"
               :duration="item.duration"
               :title="item.title"
               :cover="item.cover"
@@ -214,7 +213,7 @@ function handleUnfavorite(favoriteResource: FavoriteResource) {
                   rounded="$bew-radius"
                   text="!white xl"
                   bg="black opacity-60 hover:$bew-error-color-80"
-                  @click.stop="handleUnfavorite(item)"
+                  @click.prevent="handleUnfavorite(item)"
                 >
                   <Tooltip :content="$t('favorites.unfavorite')" placement="bottom" type="dark">
                     <ic-baseline-clear />
