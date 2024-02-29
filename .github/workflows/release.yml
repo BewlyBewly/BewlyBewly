@@ -50,3 +50,4 @@ jobs:
           token: ${{ secrets.RELEASE_TOKEN }}
           allow_override: true
           gzip: false
+          tag: ${{ github.ref_name }}
