@@ -554,7 +554,7 @@ defineExpose({
             <div
               class="right-side-item"
               :class="{ active: showMorePop }"
-              display="lg:none block"
+              display="lg:!none block"
               @mouseenter="showMorePop = true"
               @mouseleave="showMorePop = false"
             >
@@ -676,7 +676,7 @@ defineExpose({
   }
 
   .right-side-item {
-    --at-apply: relative text-$bew-text-1;
+    --at-apply: relative text-$bew-text-1 flex items-center;
 
     &:not(.avatar) {
       a {
