@@ -26,7 +26,7 @@
 
 即使在 Edge 浏览器中，我们也强烈建议您使用 Chrome 应用商店进行安装。在审核速度上，Chrome 应用商店的审核速度比 Edge 应用商店快得多。
 
-- Chrome: <https://chrome.google.com/webstore/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp/related?hl=cn>
+- Chrome: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>
 - Edge: <https://microsoftedge.microsoft.com/addons/detail/bewlybewly/kceadhehfjdiakpiphpjgolbgehjdmja>
 - Firefox: **我需要一些帮助!!!!!!!!!!!!!!!!!! ( ；∀；)**
 
@@ -77,7 +77,7 @@ pnpm dev
 ```
 
 然后**在浏览器中使用 `加载已解压的拓展程序` 加载 `extension` 文件夹**。
-每次修改后，您需要单击 [重新加载](https://chrome.google.com/webstore/detail/fimgfedafeadlieiabdeeaodndnlbhid) 按钮并刷新页面以确保应用更改。
+每次修改后，您需要单击 [重新加载](https://chromewebstore.google.com/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) 按钮并刷新页面以确保应用更改。
 
 #### 构建 (Chrome or Edge)
 
@@ -105,7 +105,7 @@ pnpm dev-firefox
 ```
 
 然后**在浏览器中使用 `加载已解压的拓展程序` 加载 `extension-firefox/` 文件夹**。
-每次修改后，您需要单击 [Extensions Reloader](https://chrome.google.com/webstore/detail/fimgfedafeadlieiabdeeaodndnlbhid) 按钮并刷新页面以确保应用更改。
+每次修改后，您需要单击 [Extensions Reloader](https://chromewebstore.google.com/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) 按钮并刷新页面以确保应用更改。
 
 #### 构建 (Firefox)
 

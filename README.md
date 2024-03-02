@@ -26,7 +26,7 @@ English | [简体中文](README-cmn_CN.md) | [正體中文](README-cmn_TW.md) | 
 
 Even in the Edge browser, we strongly recommend you install it in the Chrome web store. In terms of review speed, the Chrome web store is slightly faster than Edge Add-ons.
 
-- Chrome: <https://chrome.google.com/webstore/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp/related?hl=en>
+- Chrome: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>
 - Edge: <https://microsoftedge.microsoft.com/addons/detail/bewlybewly/kceadhehfjdiakpiphpjgolbgehjdmja>
 - Firefox: **I NEED SOME HELP!!!!!!!!!!!!!!!!!! ( ；∀；)**
 
@@ -77,7 +77,7 @@ pnpm dev
 ```
 
 Then **load the extension in the browser with the `extension/` folder**.
-After each modification, you need to click the [Extensions Reloader](https://chrome.google.com/webstore/detail/fimgfedafeadlieiabdeeaodndnlbhid) button and refresh the page to ensure the changes will be applied.
+After each modification, you need to click the [Extensions Reloader](https://chromewebstore.google.com/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) button and refresh the page to ensure the changes will be applied.
 
 ##### Build (Chrome or Edge)
 
@@ -105,7 +105,7 @@ pnpm dev-firefox
 ```
 
 Then **load the extension in the browser with the `extension-firefox/` folder**.
-After each modification, you need to click the [Extensions Reloader](https://chrome.google.com/webstore/detail/fimgfedafeadlieiabdeeaodndnlbhid) button and refresh the page to ensure the changes will be applied.
+After each modification, you need to click the [Extensions Reloader](https://chromewebstore.google.com/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) button and refresh the page to ensure the changes will be applied.
 
 #### Build (Firefox)
 
