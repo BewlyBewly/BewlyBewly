@@ -1,5 +1,33 @@
 # Changelog
 
+## [0.14.9](https://github.com/hakadao/BewlyBewly/compare/v0.14.8...v0.14.9) (2024-03-03)
+
+
+### Bug Fixes
+
+* **Favorites:** ensure full display of favorites content ([#323](https://github.com/hakadao/BewlyBewly/issues/323)) ([38bab5e](https://github.com/hakadao/BewlyBewly/commit/38bab5ed959dd880938c24e5f9dbca8cc477a1a8))
+* **Home:** resolve home tabs drifting issue([#349](https://github.com/hakadao/BewlyBewly/issues/349)) ([e63ead9](https://github.com/hakadao/BewlyBewly/commit/e63ead93b1f21b2f60335171c8e33f4ad4786d7e))
+* **TopBar:** center the right side items ([858e381](https://github.com/hakadao/BewlyBewly/commit/858e3813ef6916d69bf2709fec54fdc18ebcd696))
+* **WatchLater:** correct watch later jump url ([f303a29](https://github.com/hakadao/BewlyBewly/commit/f303a29e6b246f50628f0812948c8f31e9a2cca4))
+* 搜索框用中文输入法输入单词回车不应该直接触发搜索 [#334](https://github.com/hakadao/BewlyBewly/issues/334) ([6adfe9c](https://github.com/hakadao/BewlyBewly/commit/6adfe9c6e9268bf9da8c00915b909e97a6acccdd))
+* 深色模式适配 ([#341](https://github.com/hakadao/BewlyBewly/issues/341)) ([9a6eceb](https://github.com/hakadao/BewlyBewly/commit/9a6ecebde5d8a36e75282fd272b286e2d7a5bd89))
+
+
+### Docs
+
+* update chrome web store link ([#352](https://github.com/hakadao/BewlyBewly/issues/352)) ([6fca372](https://github.com/hakadao/BewlyBewly/commit/6fca37245bc2f4138a1aab467021ad35ea0dc5e3))
+
+
+### CI
+
+* only sync branch in source repo ([#353](https://github.com/hakadao/BewlyBewly/issues/353)) ([61d3354](https://github.com/hakadao/BewlyBewly/commit/61d3354fcf7f017d41966b60d42d8688bad4208b))
+
+
+### Miscellaneous
+
+* update version number ([c14fd95](https://github.com/hakadao/BewlyBewly/commit/c14fd952931f9c1e1b69752ed6ef9280205c8523))
+* 为 adaptedStyles 中的正则匹配页面添加中文对应描述 ([288ba26](https://github.com/hakadao/BewlyBewly/commit/288ba26e77620fa3599c3591fe051d4823562211))
+
 ## [0.14.8](https://github.com/hakadao/BewlyBewly/compare/v0.14.7...v0.14.8) (2024-02-28)
 
 
