@@ -26,7 +26,7 @@
 
 即使你用嘅係 Edge browser，我哋都係建議你喺返 Chrome 線上應用程式商店單撈。事關喺審核速度上，Chrome 線上應用程式商店照計係快過 Edge 的附加元件一啲嘅。
 
-- Chrome: <https://chrome.google.com/webstore/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp/related?hl=en>
+- Chrome: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>
 - Edge: <https://microsoftedge.microsoft.com/addons/detail/bewlybewly/kceadhehfjdiakpiphpjgolbgehjdmja>
 - Firefox: **我要人幫手!!!!!!!!!!!!!!!!!! ( ；∀；)**
 
@@ -77,7 +77,7 @@ pnpm dev
 ```
 
 然之後喺瀏覽器度用 `extension/` 資料夾愛嚟載入此擴充功能。
-每一次執過 code 之後，你都要撳 [Extensions Reloader](https://chrome.google.com/webstore/detail/fimgfedafeadlieiabdeeaodndnlbhid) 粒掣，然之後 refresh 個 page，確保係有效果。
+每一次執過 code 之後，你都要撳 [Extensions Reloader](https://chromewebstore.google.com/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) 粒掣，然之後 refresh 個 page，確保係有效果。
 
 #### 建置 (Chrome or Edge)
 
@@ -105,7 +105,7 @@ pnpm dev-firefox
 ```
 
 然之後喺瀏覽器度用 `extension-firefox/` 資料夾愛嚟載入此擴充功能。
-每一次執過 code 之後，你都要撳 [Extensions Reloader](https://chrome.google.com/webstore/detail/fimgfedafeadlieiabdeeaodndnlbhid) 粒掣，然之後 refresh 個 page，確保係有效果。
+每一次執過 code 之後，你都要撳 [Extensions Reloader](https://chromewebstore.google.com/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) 粒掣，然之後 refresh 個 page，確保係有效果。
 
 #### 建置 (Firefox)
 
