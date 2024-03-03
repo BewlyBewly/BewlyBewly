@@ -128,14 +128,17 @@ async function getFavoriteResources(
 async function changeCategory(categoryItem: FavoriteCategory) {
   currentPageNum.value = 1
   selectedCategory.value = categoryItem
-
   favoriteResources.length = 0
+  noMoreContent.value = false
+
   getFavoriteResources(categoryItem.id, 1)
 }
 
 function handleSearch() {
   currentPageNum.value = 1
   favoriteResources.length = 0
+  noMoreContent.value = false
+
   getFavoriteResources(selectedCategory.value!.id, currentPageNum.value, keyword.value)
 }
 
