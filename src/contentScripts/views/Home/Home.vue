@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import type { Ref } from 'vue'
 import ForYou from './components/ForYou.vue'
 import Following from './components/Following.vue'
 import Trending from './components/Trending.vue'
@@ -13,6 +14,7 @@ import { settings } from '~/logic'
 const { t } = useI18n()
 
 const handleBackToTop = inject('handleBackToTop') as (targetScrollTop: number) => void
+const scrollbarRef = inject('scrollbarRef') as Ref
 
 const recommendContentKey = ref<string>(`recommendContent${Number(new Date())}`)
 const activatedPage = ref<HomeSubPage>(HomeSubPage.ForYou)
@@ -63,11 +65,24 @@ onMounted(() => {
     // This feature is primarily designed to compatible with the Bilibili Evolved's top bar
     // Even when the BewlyBewly top bar is hidden, the Bilibili Evolved top bar still exists, so not moving up
     if (settings.value.autoHideTopBar && settings.value.showTopBar) {
-      if (val)
-        shouldMoveTabsUp.value = false
+      if (!settings.value.useSearchPageModeOnHomePage) {
+        if (val)
+          shouldMoveTabsUp.value = false
 
-      else
-        shouldMoveTabsUp.value = true
+        else
+          shouldMoveTabsUp.value = true
+      }
+      else {
+        // fix #349
+        const osInstance = scrollbarRef.value?.osInstance()
+        const scrollTop = osInstance.elements().viewport.scrollTop as number
+
+        if (val)
+          shouldMoveTabsUp.value = false
+
+        else if (scrollTop > 510 + 40)
+          shouldMoveTabsUp.value = true
+      }
     }
   })
 })
