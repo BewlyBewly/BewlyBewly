@@ -77,7 +77,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   searchPageWallpaperMode: 'buildIn',
   searchPageWallpaper: '',
   searchPageEnableWallpaperMasking: false,
-  searchPageWallpaperMaskOpacity: 0,
+  searchPageWallpaperMaskOpacity: 0.6,
   searchPageWallpaperBlurIntensity: 0,
 
   recommendationMode: 'web',
