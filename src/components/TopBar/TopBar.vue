@@ -548,7 +548,7 @@ defineExpose({
                 <a
                   href="https://www.bilibili.com/watchlater/#/list"
                   :target="isHomePage() ? '_blank' : '_self'"
-                  :title="$t('topbar.watchlater')"
+                  :title="$t('topbar.watch_later')"
                 >
                   <mingcute:carplay-line />
                 </a>

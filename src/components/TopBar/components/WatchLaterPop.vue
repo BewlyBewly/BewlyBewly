@@ -62,7 +62,7 @@ function getAllWatchLaterList() {
     >
       <div flex="~">
         <div>
-          稍后再看
+          {{ $t('topbar.watch_later') }}
         </div>
       </div>
       <a
