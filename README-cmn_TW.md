@@ -26,7 +26,7 @@
 
 即使您使用的是 Edge 瀏覽器，我們仍然強烈建議您從 Chrome 線上應用程式商店安裝。在審核速度上，Chrome 線上應用程式商店通常比 Edge 的附加元件來得快一些。
 
-- Chrome: <https://chrome.google.com/webstore/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp/related?hl=en>
+- Chrome: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>
 - Edge: <https://microsoftedge.microsoft.com/addons/detail/bewlybewly/kceadhehfjdiakpiphpjgolbgehjdmja>
 - Firefox: **我需要幫助!!!!!!!!!!!!!!!!!! ( ；∀；)**
 
@@ -77,7 +77,7 @@ pnpm dev
 ```
 
 然後在瀏覽器中使用 `extension/` 資料夾載入此擴充功能。
-每次修改後，您需要點選 [Extensions Reloader](https://chrome.google.com/webstore/detail/fimgfedafeadlieiabdeeaodndnlbhid) 按鈕，然後重新整理頁面，以確保更改生效。
+每次修改後，您需要點選 [Extensions Reloader](https://chromewebstore.google.com/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) 按鈕，然後重新整理頁面，以確保更改生效。
 
 #### 建置 (Chrome or Edge)
 
@@ -105,7 +105,7 @@ pnpm dev-firefox
 ```
 
 然後在瀏覽器中使用 `extension-firefox/` 資料夾載入此擴充功能。
-每次修改後，您需要點選 [Extensions Reloader](https://chrome.google.com/webstore/detail/fimgfedafeadlieiabdeeaodndnlbhid) 按鈕，然後重新整理頁面，以確保更改生效。
+每次修改後，您需要點選 [Extensions Reloader](https://chromewebstore.google.com/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) 按鈕，然後重新整理頁面，以確保更改生效。
 
 #### 建置 (Firefox)
 

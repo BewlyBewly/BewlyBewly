@@ -9,7 +9,7 @@ import { delay } from '~/utils/main'
 
 const { t } = useI18n()
 
-const { handleBackToTop } = useBewlyApp()
+const { handleBackToTop, scrollbarRef } = useBewlyApp()
 
 const activatedPage = ref<HomeSubPage>(HomeSubPage.ForYou)
 const pages = {
@@ -84,11 +84,24 @@ onMounted(() => {
     // This feature is primarily designed to compatible with the Bilibili Evolved's top bar
     // Even when the BewlyBewly top bar is hidden, the Bilibili Evolved top bar still exists, so not moving up
     if (settings.value.autoHideTopBar && settings.value.showTopBar) {
-      if (val)
-        shouldMoveTabsUp.value = false
+      if (!settings.value.useSearchPageModeOnHomePage) {
+        if (val)
+          shouldMoveTabsUp.value = false
 
-      else
-        shouldMoveTabsUp.value = true
+        else
+          shouldMoveTabsUp.value = true
+      }
+      else {
+        // fix #349
+        const osInstance = scrollbarRef.value?.osInstance()
+        const scrollTop = osInstance.elements().viewport.scrollTop as number
+
+        if (val)
+          shouldMoveTabsUp.value = false
+
+        else if (scrollTop > 510 + 40)
+          shouldMoveTabsUp.value = true
+      }
     }
   })
 

@@ -134,8 +134,8 @@ async function getFavoriteResources(
 async function changeCategory(categoryItem: FavoriteCategory) {
   currentPageNum.value = 1
   selectedCategory.value = categoryItem
-  noMoreContent.value = false
   favoriteResources.length = 0
+  noMoreContent.value = false
 
   getFavoriteResources(categoryItem.id, 1)
 }

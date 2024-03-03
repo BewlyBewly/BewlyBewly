@@ -6,6 +6,7 @@ on:
 
 jobs:
   sync-branches:
+    if: github.repository == 'hakadao/BewlyBewly'
     runs-on: ubuntu-latest
     name: Syncing branches
     steps:
