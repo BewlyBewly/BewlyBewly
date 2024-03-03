@@ -117,7 +117,7 @@ function jumpToLoginPage() {
           <a
             v-for="(item, index) in watchLaterList"
             :key="item.aid"
-            :href="`https://www.bilibili.com/video/${item.bvid}`" target="_blank" rel="noopener noreferrer"
+            :href="`https://www.bilibili.com/list/watchlater?bvid=${item.bvid}`" target="_blank" rel="noopener noreferrer"
             class="group"
             block flex cursor-pointer
           >
