@@ -511,7 +511,8 @@
     .search-page,
     .card,
     .feed-dynamic-content .bb-comment,
-    #page-dynamic .bili-dyn-item {
+    #page-dynamic .bili-dyn-item,
+    #page-series-index .channel-option.no-channel {
       background-color: var(--bew-content-solid-1);
     }
 
