@@ -9,7 +9,7 @@ import './videoPlayer.scss'
 async function setupStyles() {
   const currentUrl = document.URL
 
-  // homepage
+  // homepage 首页
   if (/https?:\/\/bilibili.com\/?$/.test(currentUrl)
     || /https?:\/\/www.bilibili.com\/?$/.test(currentUrl)
     || /https?:\/\/www.bilibili.com\/index.html$/.test(currentUrl)
@@ -19,13 +19,13 @@ async function setupStyles() {
     document.documentElement.classList.add('homePage')
   }
 
-  // notifications page
+  // notifications page 消息页
   else if (/https?:\/\/message.bilibili.com\.*/.test(currentUrl)) {
     await import('./notificationsPage.scss')
     document.documentElement.classList.add('notificationsPage')
   }
 
-  // moments page
+  // moments page 动态页
   else if (
     // moments
     /https?:\/\/t.bilibili.com\.*/.test(currentUrl)
@@ -35,30 +35,30 @@ async function setupStyles() {
     document.documentElement.classList.add('momentsPage')
   }
 
-  // history page
+  // history page 历史记录页
   else if (/https?:\/\/(www.)?bilibili.com\/account\/history.*/.test(currentUrl)) {
     await import('./historyPage.scss')
     document.documentElement.classList.add('historyPage')
   }
 
-  // user space page
+  // user space page 空间页
   else if (/https?:\/\/space.bilibili.com\.*/.test(currentUrl)) {
     await import('./userSpacePage.scss')
     document.documentElement.classList.add('userSpacePage')
   }
 
-  // search page
+  // search page 搜索结果页
   else if (/https?:\/\/search.bilibili.com\.*/.test(currentUrl)) {
     await import('./searchPage.scss')
     document.documentElement.classList.add('searchPage')
   }
 
-  // video page
+  // video page 视频页
   else if (
     /https?:\/\/(www.)?bilibili.com\/video\/.*/.test(currentUrl)
-    // watch later playlist
+    // watch later playlist 稍候再看播放页
     || /https?:\/\/(www.)?bilibili.com\/list\/watchlater.*/.test(currentUrl)
-    // favorite playlist
+    // favorite playlist 收藏播放页
     || /https?:\/\/(www.)?bilibili.com\/list\/ml.*/.test(currentUrl)
   ) {
     await import('./videoPage.scss')
@@ -66,28 +66,28 @@ async function setupStyles() {
   }
 
   else if (
-    // anime playback & movie page
+    // anime playback & movie page 番剧播放页与电影播放页
     /https?:\/\/(www.)?bilibili.com\/bangumi\/play\/.*/.test(currentUrl)
   ) {
     await import('./animePlayback&MoviePage.scss')
     document.documentElement.classList.add('animePlaybackAndMoviePage')
   }
 
-  // anime page & chinese anime page
+  // anime page & chinese anime page 番剧页 与 国创动漫
   else if (
     /https?:\/\/(www.)?bilibili.com\/(anime|guochuang).*/.test(currentUrl)) {
     await import('./animePage.scss')
     document.documentElement.classList.add('animePage')
   }
 
-  // channel page e.g. tv shows, movie, variety shows, mooc page
+  // channel page e.g. tv shows, movie, variety shows, mooc page 分区页
   else if (
     /https?:\/\/(www.)?bilibili.com\/(tv|movie|variety|mooc|documentary).*/.test(currentUrl)) {
     await import('./channelPage.scss')
     document.documentElement.classList.add('channelPage')
   }
 
-  // articles page
+  // articles page 专栏页
   else if (/https?:\/\/(www.)?bilibili.com\/read.*/.test(currentUrl)) {
     await import('./articlesPage.scss')
     document.documentElement.classList.add('articlesPage')
