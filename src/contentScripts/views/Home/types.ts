@@ -1,8 +1,3 @@
-export interface HomeTab {
-  label: string
-  value: HomeSubPage
-}
-
 export enum HomeSubPage {
   ForYou = 'ForYou',
   Following = 'Following',

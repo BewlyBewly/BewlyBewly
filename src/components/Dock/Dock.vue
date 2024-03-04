@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
 import { Icon } from '@iconify/vue'
 import { usePreferredDark } from '@vueuse/core'
-import type { CurrentDockItem, HoveringDockItem } from './types'
-import type { AppPage } from '~/enums/appEnums'
+import type { HoveringDockItem } from './types'
+import { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
 import type { DockItem } from '~/stores/mainStore'
 import { useMainStore } from '~/stores/mainStore'
@@ -14,14 +13,13 @@ const emit = defineEmits(['change-page', 'settings-visibility-change'])
 const { mainAppRef } = useBewlyApp()
 
 const mainStore = useMainStore()
-const { t } = useI18n()
 
 const hideDock = ref<boolean>(false)
-
 const hoveringDockItem = reactive<HoveringDockItem>({
   themeMode: false,
   settings: false,
 })
+const currentDockItems = ref<DockItem[]>([])
 
 const tooltipPlacement = computed(() => {
   if (settings.value.dockPosition === 'left')
@@ -43,49 +41,39 @@ const currentAppColorScheme = computed((): 'dark' | 'light' => {
     return currentSystemColorScheme.value
 })
 
-const currentDockItems = computed((): CurrentDockItem[] => {
-  return mainStore.dockItems.map((e: DockItem) => {
-    return {
-      label: t(e.i18nKey),
-      icon: e.icon,
-      iconActivated: e.iconActivated,
-      page: e.page,
-    }
-  })
-})
-
 watch(() => settings.value.autoHideDock, (newValue) => {
   hideDock.value = newValue
 })
+
+// use Json stringify to watch the changes of the array item properties
+watch(() => JSON.stringify(settings.value.dockItemVisibilityList), () => {
+  currentDockItems.value = computeDockItem()
+})
+
+function computeDockItem(): DockItem[] {
+  // if dockItemVisibilityList not fresh , set it to default
+  if (!settings.value.dockItemVisibilityList.length || settings.value.dockItemVisibilityList.length !== mainStore.dockItems.length)
+    settings.value.dockItemVisibilityList = mainStore.dockItems.map(dock => ({ page: dock.page, visible: true }))
+
+  const targetDockItems: DockItem[] = []
+
+  settings.value.dockItemVisibilityList.forEach((item) => {
+    const foundItem = mainStore.dockItems.find(defaultItem => defaultItem.page === item.page)
+    item.visible && targetDockItems.push({
+      i18nKey: foundItem?.i18nKey || '',
+      icon: foundItem?.icon || '',
+      iconActivated: foundItem?.iconActivated || '',
+      page: foundItem?.page || AppPage.Home,
+    })
+  })
+  return targetDockItems
+}
 
 onMounted(() => {
   if (settings.value.autoHideDock)
     hideDock.value = true
 
-  if (settings.value.dockItemVisibilityList.length < currentDockItems.value.length || settings.value.dockItemVisibilityList.length > currentDockItems.value.length) {
-    const newDockItemVisibilityList = ref<{ page: AppPage, visible: boolean }[]>([])
-    currentDockItems.value.forEach((item) => {
-      newDockItemVisibilityList.value.push({ page: item.page, visible: true })
-    })
-
-    // Compare two arrays, get the differing elements, and delete or add them to the dockItemVisibilityList
-    const notInNewDockItemVisibilityList = settings.value.dockItemVisibilityList.filter(obj1 =>
-      !newDockItemVisibilityList.value.some(obj2 => obj1.page === obj2.page),
-    )
-    const notInDockItemVisibilityList = newDockItemVisibilityList.value.filter(obj1 =>
-      !settings.value.dockItemVisibilityList.some(obj2 => obj1.page === obj2.page),
-    )
-    const allDifferences = [...notInDockItemVisibilityList, ...notInNewDockItemVisibilityList]
-
-    if (settings.value.dockItemVisibilityList.length < currentDockItems.value.length) {
-      settings.value.dockItemVisibilityList.push(...allDifferences)
-    }
-    else {
-      allDifferences.forEach((obj1) => {
-        settings.value.dockItemVisibilityList = settings.value.dockItemVisibilityList.filter(obj2 => obj2.page !== obj1.page)
-      })
-    }
-  }
+  currentDockItems.value = computeDockItem()
 })
 
 function toggleDark(e: MouseEvent) {
@@ -199,25 +187,23 @@ function toggleDockHide(hide: boolean) {
       @mouseenter="toggleDockHide(false)"
       @mouseleave="toggleDockHide(true)"
     >
-      <template v-for="dockItemVisibility in settings.dockItemVisibilityList" :key="dockItemVisibility.page">
-        <template v-if="dockItemVisibility.visible">
-          <Tooltip :content="currentDockItems.find((item) => item.page === dockItemVisibility.page)?.label as string" :placement="tooltipPlacement">
-            <button
-              class="dock-item"
-              :class="{ active: activatedPage === dockItemVisibility.page }"
-              @click="emit('change-page', dockItemVisibility.page)"
-            >
-              <Icon
-                v-show="activatedPage !== dockItemVisibility.page"
-                :icon="currentDockItems.find((item) => item.page === dockItemVisibility.page)?.icon as string"
-              />
-              <Icon
-                v-show="activatedPage === dockItemVisibility.page"
-                :icon="currentDockItems.find((item) => item.page === dockItemVisibility.page)?.iconActivated as string"
-              />
-            </button>
-          </Tooltip>
-        </template>
+      <template v-for="dockItem in currentDockItems" :key="dockItem.page">
+        <Tooltip :content="$t(dockItem.i18nKey)" :placement="tooltipPlacement">
+          <button
+            class="dock-item"
+            :class="{ active: activatedPage === dockItem.page }"
+            @click="emit('change-page', dockItem.page)"
+          >
+            <Icon
+              v-show="activatedPage !== dockItem.page"
+              :icon="dockItem.icon"
+            />
+            <Icon
+              v-show="activatedPage === dockItem.page"
+              :icon="dockItem.iconActivated"
+            />
+          </button>
+        </Tooltip>
       </template>
 
       <!-- dividing line -->
