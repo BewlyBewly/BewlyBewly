@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
 import { Icon } from '@iconify/vue'
-import type { HomeTab } from './types'
 import { HomeSubPage } from './types'
 import emitter from '~/utils/mitt'
 import { settings } from '~/logic'
 import { delay } from '~/utils/main'
+import type { HomeTab } from '~/stores/mainStore'
+import { useMainStore } from '~/stores/mainStore'
 
-const { t } = useI18n()
-
+const mainStore = useMainStore()
 const { handleBackToTop, scrollbarRef } = useBewlyApp()
 
 const activatedPage = ref<HomeSubPage>(HomeSubPage.ForYou)
@@ -23,30 +22,7 @@ const showSearchPageMode = ref<boolean>(false)
 const shouldMoveTabsUp = ref<boolean>(false)
 const tabContentLoading = ref<boolean>(false)
 
-const tabs = ref<HomeTab[]>([])
-
-const defaultTabs = [
-  {
-    label: t('home.for_you'),
-    value: HomeSubPage.ForYou,
-  },
-  {
-    label: t('home.following'),
-    value: HomeSubPage.Following,
-  },
-  {
-    label: t('home.subscribed_series'),
-    value: HomeSubPage.SubscribedSeries,
-  },
-  {
-    label: t('home.trending'),
-    value: HomeSubPage.Trending,
-  },
-  {
-    label: t('home.ranking'),
-    value: HomeSubPage.Ranking,
-  },
-]
+const currentTabs = ref<HomeTab[]>([])
 
 watch(() => activatedPage.value, () => {
   handleBackToTop(settings.value.useSearchPageModeOnHomePage ? 510 : 0)
@@ -54,20 +30,20 @@ watch(() => activatedPage.value, () => {
 
 // use Json stringify to watch the changes of the array item properties
 watch(() => JSON.stringify(settings.value.homePageTabVisibilityList), () => {
-  tabs.value = computeTabs()
+  currentTabs.value = computeTabs()
 })
 
-function computeTabs() {
+function computeTabs(): HomeTab[] {
   // if homePageTabVisibilityList not fresh , set it to default
-  if (!settings.value.homePageTabVisibilityList.length || settings.value.homePageTabVisibilityList.length !== defaultTabs.length)
-    settings.value.homePageTabVisibilityList = defaultTabs.map(tab => ({ page: tab.value, visible: true }))
+  if (!settings.value.homePageTabVisibilityList.length || settings.value.homePageTabVisibilityList.length !== mainStore.homeTabs.length)
+    settings.value.homePageTabVisibilityList = mainStore.homeTabs.map(tab => ({ page: tab.page, visible: true }))
 
   const targetTabs: HomeTab[] = []
 
   for (const tab of settings.value.homePageTabVisibilityList) {
     tab.visible && targetTabs.push({
-      label: (defaultTabs.find(defaultTab => defaultTab.value === tab.page) || {})?.label || tab.page,
-      value: tab.page,
+      i18nKey: (mainStore.homeTabs.find(defaultTab => defaultTab.page === tab.page) || {})?.i18nKey || tab.page,
+      page: tab.page,
     })
   }
 
@@ -105,8 +81,8 @@ onMounted(() => {
     }
   })
 
-  tabs.value = computeTabs()
-  activatedPage.value = tabs.value[0].value
+  currentTabs.value = computeTabs()
+  activatedPage.value = currentTabs.value[0].page
 })
 
 onUnmounted(() => {
@@ -120,11 +96,12 @@ function handleChangeTab(tab: HomeTab) {
   // because `handlePageRefresh` and `handleReachBottom` has been replaced
   // now they are set to refresh the data of the tab you switched to
   if (!tabContentLoading.value)
-    activatedPage.value = tab.value
+    activatedPage.value = tab.page
 }
 
 function toggleTabContentLoading(loading: boolean) {
   nextTick(async () => {
+    // Delay the closing effect to prevent the transition effect from being too stiff
     if (!loading)
       await delay(500)
     tabContentLoading.value = loading
@@ -200,18 +177,18 @@ function toggleTabContentLoading(loading: boolean) {
       >
         <ul flex="~ items-center gap-3 wrap">
           <li
-            v-for="tab in tabs" :key="tab.value"
+            v-for="tab in currentTabs" :key="tab.page"
             px-4 lh-35px bg="$bew-elevated-1 hover:$bew-elevated-1-hover" backdrop-glass rounded="$bew-radius"
             cursor-pointer shadow="$bew-shadow-1" box-border border="1 $bew-border-color" duration-300
             flex="~ gap-2 items-center"
-            :class="{ 'tab-activated': activatedPage === tab.value }"
+            :class="{ 'tab-activated': activatedPage === tab.page }"
             @click="handleChangeTab(tab)"
           >
-            <span class="text-center">{{ tab.label }}</span>
+            <span class="text-center">{{ $t(tab.i18nKey) }}</span>
             <Icon
               :style="{
-                opacity: activatedPage === tab.value && tabContentLoading ? 1 : 0,
-                margin: activatedPage === tab.value && tabContentLoading ? '0' : '-12px',
+                opacity: activatedPage === tab.page && tabContentLoading ? 1 : 0,
+                margin: activatedPage === tab.page && tabContentLoading ? '0' : '-12px',
               }"
               icon="svg-spinners:ring-resize"
               duration-300 ease-in-out mb--2px text-16px

@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { HomeSubPage } from '~/contentScripts/views/Home/types'
 import { AppPage } from '~/enums/appEnums'
 
 export interface DockItem {
@@ -6,6 +7,11 @@ export interface DockItem {
   icon: string
   iconActivated: string
   page: AppPage
+}
+
+export interface HomeTab {
+  i18nKey: string
+  page: HomeSubPage
 }
 
 export const useMainStore = defineStore('main', () => {
@@ -20,5 +26,30 @@ export const useMainStore = defineStore('main', () => {
     ]
   })
 
-  return { dockItems }
+  const homeTabs = computed((): HomeTab[] => {
+    return [
+      {
+        i18nKey: 'home.for_you',
+        page: HomeSubPage.ForYou,
+      },
+      {
+        i18nKey: 'home.following',
+        page: HomeSubPage.Following,
+      },
+      {
+        i18nKey: 'home.subscribed_series',
+        page: HomeSubPage.SubscribedSeries,
+      },
+      {
+        i18nKey: 'home.trending',
+        page: HomeSubPage.Trending,
+      },
+      {
+        i18nKey: 'home.ranking',
+        page: HomeSubPage.Ranking,
+      },
+    ]
+  })
+
+  return { dockItems, homeTabs }
 })

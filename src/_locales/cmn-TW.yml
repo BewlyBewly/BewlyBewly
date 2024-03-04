@@ -45,6 +45,7 @@ settings:
   group_search_bar: 搜尋欄
   group_recommendation_mode: 推薦模式
   group_search_page_mode: 搜尋頁模式
+  group_home_tabs: 首頁索引標籤
 
   # Settings buttons
   btn:
@@ -126,6 +127,8 @@ settings:
   settings_shared_with_the_search_page: 與搜尋頁共用的設定
   settings_shared_with_the_search_page_desc: 這些設定都與搜尋頁共用
   search_page_mode_wallpaper_fixed: 將搜尋頁模式的背景固定
+  home_tabs_adjustment: 索引標籤調整
+  home_tabs_adjustment_desc: 第一個啓用的索引標籤調整頁面將是起始頁面
 
   # Compatibility
   # Common
@@ -156,6 +159,7 @@ topbar:
   moments: 動向
   favorites: 收藏
   history: 記錄
+  watch_later: 稍後觀看
   creative_center: 創作中心
   upload: 上傳
   logo_dropdown:

@@ -2,16 +2,13 @@
 import type { Ref } from 'vue'
 import QRCodeVue from 'qrcode.vue'
 import { useToast } from 'vue-toastification'
-import { useI18n } from 'vue-i18n'
 import draggable from 'vuedraggable'
 import SearchPage from './SearchPage.vue'
-import type { HomeTab } from '~/contentScripts/views/Home/types.ts'
-import { HomeSubPage } from '~/contentScripts/views/Home/types'
 import { getTVLoginQRCode, pollTVLoginQRCode, revokeAccessKey } from '~/utils/authProvider'
 import { accessKey, settings } from '~/logic'
+import { useMainStore } from '~/stores/mainStore'
 
-const { t } = useI18n()
-
+const mainStore = useMainStore()
 const toast = useToast()
 
 const showSearchPageModeSharedSettings = ref<boolean>(false)
@@ -102,35 +99,10 @@ function handleCloseSearchPageModeSharedSettings() {
   preventCloseSettings.value = false
 }
 
-const homeTabs = computed((): HomeTab[] => {
-  return [
-    {
-      label: t('home.for_you'),
-      value: HomeSubPage.ForYou,
-    },
-    {
-      label: t('home.following'),
-      value: HomeSubPage.Following,
-    },
-    {
-      label: t('home.subscribed_series'),
-      value: HomeSubPage.SubscribedSeries,
-    },
-    {
-      label: t('home.trending'),
-      value: HomeSubPage.Trending,
-    },
-    {
-      label: t('home.ranking'),
-      value: HomeSubPage.Ranking,
-    },
-  ]
-})
-
 function resetHomeTabs() {
-  settings.value.homePageTabVisibilityList = homeTabs.value.map((tab) => {
+  settings.value.homePageTabVisibilityList = mainStore.homeTabs.map((tab) => {
     return {
-      page: tab.value,
+      page: tab.page,
       visible: true,
     }
   })
@@ -254,7 +226,7 @@ function handleToggleHomeTab(tab: any) {
               }"
               @click="handleToggleHomeTab(element)"
             >
-              {{ homeTabs.find(tab => tab.value === element.page)?.label }}
+              {{ $t(mainStore.homeTabs.find(tab => tab.page === element.page)?.i18nKey ?? '') }}
             </div>
           </template>
         </draggable>

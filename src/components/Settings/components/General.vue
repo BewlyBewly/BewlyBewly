@@ -5,7 +5,7 @@ import { Icon } from '@iconify/vue'
 import { settings } from '~/logic'
 import { useMainStore } from '~/stores/mainStore'
 
-const mainStore = useMainStore() as any
+const mainStore = useMainStore()
 const { t, locale } = useI18n()
 
 const langOptions = computed(() => {
