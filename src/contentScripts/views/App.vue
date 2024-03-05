@@ -94,6 +94,16 @@ watch(() => settings.value.adaptToOtherPageStyles, () => {
   handleAdaptToOtherPageStylesChange()
 })
 
+watch(() => settings.value.blockAds, () => {
+  handleBlockAds()
+})
+
+onBeforeMount(() => {
+  handleBlockAds()
+  setAppThemeColor()
+  handleAdaptToOtherPageStylesChange()
+})
+
 onMounted(() => {
   // openVideoPageIfBvidExists()
 
@@ -114,8 +124,6 @@ onMounted(() => {
   handleChangeAccessKey()
   setAppAppearance()
   setAppLanguage()
-  setAppThemeColor()
-  handleAdaptToOtherPageStylesChange()
 })
 
 function handleChangeAccessKey() {
@@ -235,6 +243,13 @@ function handleOsScroll() {
 
   if (isHomePage())
     topBarRef.value?.handleScroll()
+}
+
+function handleBlockAds() {
+  if (settings.value.blockAds)
+    document.documentElement.classList.add('block-ads')
+  else
+    document.documentElement.classList.remove('block-ads')
 }
 
 // fix #166 https://github.com/hakadao/BewlyBewly/issues/166

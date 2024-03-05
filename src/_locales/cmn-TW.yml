@@ -67,6 +67,7 @@ settings:
   enable_horizontal_scrolling_desc: 啟用後，滑鼠捲動時將直接捲動橫向捲軸列表
   enable_video_ctrl_bar_on_video_card: 在影片卡片上顯示影片控制欄
   hover_video_card_delayed: 將滑鼠懸停在影片卡片上時延遲影片預覽
+  block_ads: 封鎖廣告
   auto_hide_topbar: 自動隱藏頂欄
   dock_position: Dock 位置
   dock_position_desc: 螢幕上的位置

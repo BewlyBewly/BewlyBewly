@@ -67,6 +67,7 @@ settings:
   enable_horizontal_scrolling_desc: After enabling, mouse scrolling will directly scroll the horizontal scroll list
   enable_video_ctrl_bar_on_video_card: Display the video control bar on the video card
   hover_video_card_delayed: Delayed video preview on hover over the video card
+  block_ads: Block ads
   auto_hide_topbar: Automatically hide the top bar
   dock_position: Dock position
   dock_position_desc: Position on screen
