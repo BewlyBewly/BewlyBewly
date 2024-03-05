@@ -440,7 +440,7 @@ defineExpose({
             </div> -->
 
             <!-- TODO: need to refactor to above code -->
-            <div display="lg:flex none">
+            <div display="lg:flex none" gap-1>
               <!-- Notifications -->
               <div
                 class="right-side-item"
