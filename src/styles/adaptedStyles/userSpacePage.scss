@@ -11,6 +11,25 @@
     padding: 12px 36px;
   }
 
+  .ps {
+    padding: 0;
+  }
+
+  .be-tab-cursor:after,
+  .sub-tabs a.active:before,
+  #page-follows .follow-tabs span.active:before {
+    display: none;
+  }
+
+  .btn-content:hover,
+  .btn.default {
+    background-color: unset;
+  }
+
+  .favInfo-box .favInfo-details .fav-options .fav-play:hover {
+    color: white !important;
+  }
+
   // #region theme color adaption part
   // Increase the priority of the style inside by writing a non-existent selector in :not()
   // 淺色模式下主要對 theme color 調整配合 bewlybewly 配色
@@ -51,7 +70,12 @@
     .wrapper .edit-video-modal .edit-video-subtitle,
     .list-style .iconfont.active,
     .list-style .iconfont:hover,
-    .bili-dyn-interaction__item__desc .bili-rich-text-module:hover {
+    .bili-dyn-interaction__item__desc .bili-rich-text-module:hover,
+    .btn.default:hover,
+    .section-title .play-all-channel:hover,
+    #page-index .col-1 .section .more:hover,
+    #page-index .channel .section-right-options .play-all-channel:hover,
+    .section .operation:hover {
       color: var(--bew-theme-color);
     }
 
@@ -60,7 +84,7 @@
     .n .n-statistics .n-fs:hover p,
     .n .n-statistics .n-gz:hover p,
     #navigator a:hover,
-    a:hover,
+    a:not(.btn):hover,
     .be-dropdown-item:hover,
     #page-fav .fav-main .filter-item .filter-type .be-dropdown-item:hover i,
     #page-fav .fav-main .filter-item .filter-type .be-dropdown-item:hover span,
@@ -82,13 +106,21 @@
     .sub-tabs a.active,
     .be-input_inner:focus,
     #page-index #i-ann-content textarea:focus,
-    #page-index #i-ann-content textarea:hover {
+    #page-index #i-ann-content textarea:hover,
+    .btn.default {
       border-color: var(--bew-theme-color);
     }
 
     #page-follows .follow-main .follow-action-top .back-to-info:hover,
     #page-fav .fav-main .fav-action-top .back-to-info:hover,
-    .fans-action-btn:hover {
+    .fans-action-btn:hover,
+    .g-search input:focus,
+    #pin-wrapper #pin-layer-search:focus,
+    #pin-wrapper .pin-layer-reason #pin-layer-reason-input input:focus,
+    .search-component.search-component-focus,
+    .search-component:hover,
+    .btn.primary:focus,
+    .btn.primary:hover {
       border-color: var(--bew-theme-color) !important;
     }
 
@@ -109,17 +141,19 @@
       background-color: var(--bew-theme-color);
     }
 
+    .btn.primary:focus,
+    .btn.primary:hover {
+      background-color: var(--bew-theme-color-80);
+    }
+
     .create-wrapper .choose-action .confirm-btn,
     .create-wrapper .choose-action .next-btn,
     .create-wrapper .create-action .confirm-btn,
     .create-wrapper .create-action .next-btn,
-    .edit-media-list .edit-mask .edit-board .edit-info .submit-btn {
+    .edit-media-list .edit-mask .edit-board .edit-info .submit-btn,
+    .bangumi-pagelistbox .p:hover,
+    .bangumi-pagelistbox .p.active {
       background-color: var(--bew-theme-color) !important;
-    }
-
-    .be-tab-cursor:after,
-    .sub-tabs a.active:before {
-      display: none;
     }
 
     .i-m-title .icon-i-title,
@@ -141,79 +175,17 @@
       .fav-action-bottom
       .fav-action-fixtop
       .clearfix:not(.filter-disable)
-      .icon {
+      .icon,
+    .page-head .v-filter-line .style .icon.active,
+    .page-head .v-filter-line .style .icon:hover {
       filter: var(--bew-filter-icon-glow);
     }
 
-    // input box
-    .g-search input:focus,
-    #pin-wrapper #pin-layer-search:focus,
-    #pin-wrapper .pin-layer-reason #pin-layer-reason-input input:focus,
-    .search-component.search-component-focus,
-    .search-component:hover {
-      border-color: var(--bew-theme-color) !important;
-    }
-
-    .g-search input,
-    #page-index #i-ann-content textarea,
-    #pin-wrapper #pin-layer-search,
-    #pin-wrapper .pin-layer-reason #pin-layer-reason-input input {
-      background-color: var(--bew-fill-1);
-      border-color: var(--bew-border-color);
-      color: var(--bew-text-1);
-    }
-
-    .s-space {
-      .search-nav-item.search-nav-actived .num,
-      .search-nav-item.search-nav-actived .text {
-        color: white !important;
-      }
-
-      .bangumi-pagelistbox .p:hover,
-      .bangumi-pagelistbox .p.active {
-        background-color: var(--bew-theme-color) !important;
-        color: white !important;
-      }
-
-      .btn.primary:focus,
-      .btn.primary:hover {
-        background-color: var(--bew-theme-color-80);
-      }
-      .btn.primary:focus,
-      .btn.primary:hover {
-        border-color: var(--bew-theme-color-80);
-      }
-
-      .btn.default {
-        color: var(--bew-text-1);
-        border-color: var(--bew-border-color);
-        background-color: transparent;
-      }
-
-      .section-title .play-all-channel,
-      #page-index .col-1 .section .more,
-      #page-index .channel .section-right-options .play-all-channel,
-      .section .operation {
-        border-color: var(--bew-border-color);
-        color: var(--bew-text-2);
-      }
-
-      .btn.default:hover,
-      .section-title .play-all-channel:hover,
-      #page-index .col-1 .section .more:hover,
-      #page-index .channel .section-right-options .play-all-channel:hover,
-      .section .operation:hover {
-        color: var(--bew-theme-color);
-        border-color: var(--bew-theme-color);
-      }
-
-      .ps {
-        padding: 0;
-      }
-
-      #page-follows .follow-tabs span.active:before {
-        display: none;
-      }
+    .search-nav-item.search-nav-actived .num,
+    .search-nav-item.search-nav-actived .text,
+    .bangumi-pagelistbox .p:hover,
+    .bangumi-pagelistbox .p.active {
+      color: white !important;
     }
   }
   // #endregion
@@ -230,11 +202,8 @@
     #page-index .col-1,
     #page-index .col-2 .section,
     #page-dynamic .col-2 .section {
-      background-color: var(--bew-content-solid-1);
-      // border-color: var(--bew-border-color);
       border: none;
       box-shadow: 0 0 0 1px var(--bew-border-color);
-      color: var(--bew-text-1);
     }
 
     .n .n-data .n-data-v,
@@ -258,7 +227,17 @@
     #page-series-detail .channel-detail .content .breadcrumb .item,
     .user-info .info-content .info-value,
     .opus-list .opus-item-title,
-    .elec .elec-setting, .elec .elec-total-c-num {
+    .elec .elec-setting,
+    .elec .elec-total-c-num,
+    .g-search input,
+    #page-index #i-ann-content textarea,
+    #pin-wrapper #pin-layer-search,
+    #pin-wrapper .pin-layer-reason #pin-layer-reason-input input,
+    .btn.default,
+    .n .n-inner,
+    #page-index .col-1,
+    #page-index .col-2 .section,
+    #page-dynamic .col-2 .section {
       color: var(--bew-text-1);
     }
 
@@ -273,12 +252,18 @@
     .bili-dyn-interaction__item__desc .bili-rich-text-module,
     .user-info .user-info-title .change-info-btn,
     .user-info .info-content .info-command,
-    .opus-list .opus-item-content {
+    .opus-list .opus-item-content,
+    .section-title .play-all-channel,
+    #page-index .col-1 .section .more,
+    #page-index .channel .section-right-options .play-all-channel,
+    .section .operation,
+    .list-item .desc {
       color: var(--bew-text-2);
     }
 
     .bili-dyn-interaction__item__desc .bili-rich-text__content,
-    .opus-list .opus-item-time {
+    .opus-list .opus-item-time,
+    .list-item .meta {
       color: var(--bew-text-3);
     }
 
@@ -373,7 +358,21 @@
     .user-info .user-info-title .change-info-btn,
     .fav-header,
     .opus-list .opus-item,
-    .elec .elec-avatar {
+    .elec .elec-avatar,
+    .btn.default:hover,
+    .section-title .play-all-channel:hover,
+    #page-index .col-1 .section .more:hover,
+    #page-index .channel .section-right-options .play-all-channel:hover,
+    .section .operation:hover,
+    .g-search input,
+    #page-index #i-ann-content textarea,
+    #pin-wrapper #pin-layer-search,
+    #pin-wrapper .pin-layer-reason #pin-layer-reason-input input,
+    .section-title .play-all-channel,
+    #page-index .col-1 .section .more,
+    #page-index .channel .section-right-options .play-all-channel,
+    .section .operation,
+    .section .count {
       border-color: var(--bew-border-color);
     }
 
@@ -446,19 +445,11 @@
     .edit-media-list .edit-mask .edit-board .edit-info .media-list-type,
     #page-fav .fav-main .fav-action-top .back-to-info,
     .v-search-result,
-    .feed-dynamic-header-search {
+    .feed-dynamic-header-search,
+    .section .count,
+    .list-create .text {
       color: var(--bew-text-2);
     }
-
-    .section .count {
-      background-color: var(--bew-fill-1);
-      border-color: var(--bew-fill-1);
-      color: var(--bew-text-2);
-    }
-
-    // .album-list__tab--active .album-list__tab-name {
-    //   color: var(--bew-theme-color);
-    // }
 
     .section .count:before,
     .series-item .item-title .qipapnum:before {
@@ -500,27 +491,13 @@
     .channel-add-video,
     .series-item .item-title .qipapnum,
     .list-create,
-    #page-series-detail .channel-add-video {
+    #page-series-detail .channel-add-video,
+    .g-search input,
+    #page-index #i-ann-content textarea,
+    #pin-wrapper #pin-layer-search,
+    #pin-wrapper .pin-layer-reason #pin-layer-reason-input input,
+    .section .count {
       background-color: var(--bew-fill-1);
-    }
-
-    #page-setting #setting-new-tag-btn {
-      background: var(--bew-content-solid-1);
-    }
-
-    .search-page,
-    .card,
-    .feed-dynamic-content .bb-comment,
-    #page-dynamic .bili-dyn-item,
-    #page-series-index .channel-option.no-channel {
-      background-color: var(--bew-content-solid-1);
-    }
-
-    .be-dropdown-item:hover,
-    .elec .elec-status,
-    .elec .elec-status-bg,
-    .elec .elec-status-bg-grey {
-      background: unset !important;
     }
 
     #pin-wrapper .pin-layer-vlist .small-item:hover,
@@ -538,6 +515,29 @@
     #page-fav .fav-main .fav-video-list.is-batch .small-item:hover,
     .search-nav-item:hover {
       background-color: var(--bew-fill-2);
+    }
+
+    #page-setting #setting-new-tag-btn {
+      background: var(--bew-content-solid-1);
+    }
+
+    .search-page,
+    .card,
+    .feed-dynamic-content .bb-comment,
+    #page-dynamic .bili-dyn-item,
+    #page-series-index .channel-option.no-channel,
+    .n .n-inner,
+    #page-index .col-1,
+    #page-index .col-2 .section,
+    #page-dynamic .col-2 .section {
+      background-color: var(--bew-content-solid-1);
+    }
+
+    .be-dropdown-item:hover,
+    .elec .elec-status,
+    .elec .elec-status-bg,
+    .elec .elec-status-bg-grey {
+      background: unset !important;
     }
 
     .pgc-space-follow-item .bangumi-options .opt-list li.disabled {
