@@ -181,8 +181,11 @@ function handleToggleHomeTab(tab: any) {
         <div flex="~ gap-4 col items-center">
           <p>{{ $t('settings.scan_qrcode_desc') }}</p>
 
-          <div mt-4 bg="$bew-fill-1" w-150px h-150px>
+          <div mt-4 bg-white border="white 4">
             <QRCodeVue v-if="loginQRCodeUrl" :value="loginQRCodeUrl" :size="150" />
+            <div v-else w-150px h-150px grid="~ place-items-center">
+              <svg-spinners:ring-resize />
+            </div>
           </div>
 
           <p>{{ qrcodeMsg }}</p>

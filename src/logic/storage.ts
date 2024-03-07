@@ -14,6 +14,7 @@ export interface Settings {
   enableVideoCtrlBarOnVideoCard: boolean
   hoverVideoCardDelayed: boolean
   autoHideTopBar: boolean
+  blockAds: boolean
   dockPosition: 'left' | 'right' | 'bottom'
   autoHideDock: boolean
   dockItemVisibilityList: { page: AppPage, visible: boolean }[]
@@ -57,6 +58,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   autoHideTopBar: false,
   dockPosition: 'right',
   autoHideDock: false,
+  blockAds: false,
   dockItemVisibilityList: [],
 
   theme: 'auto',

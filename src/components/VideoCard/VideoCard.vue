@@ -318,7 +318,7 @@ function handelMouseLeave() {
           flex="~"
         >
           <!-- Author Avatar -->
-          <div :style="{ display: horizontal ? 'none' : 'flex' }">
+          <div v-if="!horizontal" flex>
             <a
               v-if="authorFace"
               m="r-4" w="40px" h="40px" rounded="1/2" overflow="hidden"
@@ -338,7 +338,7 @@ function handelMouseLeave() {
             <div flex="~" justify="between" w="full" pos="relative">
               <h3
                 class="keep-two-lines"
-                text="lg overflow-ellipsis $bew-text-1"
+                text="lg overflow-ellipsis $bew-text-1" h-14 overflow-hidden
                 cursor="pointer"
               >
                 <a :href="videoUrl" target="_blank" :title="title" rel="noopener noreferrer">
@@ -412,18 +412,38 @@ function handelMouseLeave() {
                 </div> -->
               </template>
             </div>
-            <div text="base $bew-text-2" w-fit m="t-2">
-              <a
-                v-if="author"
-                class="channel-name"
-                un-text="hover:$bew-text-1"
-                cursor-pointer mr-4
-                :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
-                @click.stop=""
-              >
-                {{ author }}
-              </a>
-              <template v-if="horizontal">
+            <div text="base $bew-text-2" w-fit m="t-2" flex="~ items-center wrap">
+              <!-- Author Avatar -->
+              <span flex="inline items-center">
+                <div v-if="horizontal" flex>
+                  <a
+                    v-if="authorFace"
+                    m="r-2" w="30px" h="30px" rounded="1/2" overflow="hidden"
+                    object="center cover" bg="$bew-fill-4" cursor="pointer"
+                    :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
+                    @click.stop=""
+                  >
+                    <img
+                      :src="`${removeHttpFromUrl(authorFace)}@50w_50h_1c`"
+                      width="40"
+                      height="40"
+                      loading="lazy"
+                    >
+                  </a>
+                </div>
+
+                <a
+                  v-if="author"
+                  class="channel-name"
+                  un-text="hover:$bew-text-1"
+                  cursor-pointer mr-4
+                  :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
+                  @click.stop=""
+                >
+                  {{ author }}
+                </a>
+              </span>
+              <span v-if="horizontal">
                 <span v-if="view || viewStr">{{
                   view ? $t('common.view', { count: numFormatter(view) }, view) : `${viewStr}${$t('common.viewWithoutNum')}`
                 }}</span>
@@ -431,10 +451,10 @@ function handelMouseLeave() {
                   <span text-xs font-light mx-1>•</span>
                   <span>{{ danmaku ? $t('common.danmaku', { count: numFormatter(danmaku) }, danmaku) : `${danmakuStr}${$t('common.danmakuWithoutNum')}` }}</span>
                 </template>
-              </template>
+              </span>
             </div>
             <!-- Video Description -->
-            <div
+            <!-- <div
               v-if="desc"
               :title="desc"
               class="keep-two-lines"
@@ -442,7 +462,7 @@ function handelMouseLeave() {
               style="white-space: pre-line;"
             >
               {{ desc }}
-            </div>
+            </div> -->
 
             <div text="base $bew-text-2">
               <!-- View & Danmaku Count -->

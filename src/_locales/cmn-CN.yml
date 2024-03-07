@@ -67,6 +67,7 @@ settings:
   enable_horizontal_scrolling_desc: 启用后，鼠标滚动时将直接滚动横向滚动列表
   enable_video_ctrl_bar_on_video_card: 在视频卡片上显示视频控制栏
   hover_video_card_delayed: 将鼠标悬停在视频卡片上时延迟视频预览
+  block_ads: 屏蔽广告
   auto_hide_topbar: 自动隐藏顶栏
   dock_position: Dock 栏位置
   dock_position_desc: 在屏幕中摆放位置
@@ -125,7 +126,7 @@ settings:
   settings_shared_with_the_search_page_desc: 这些设置都与搜索页共用
   search_page_mode_wallpaper_fixed: 将搜索页模式的壁纸固定
   home_tabs_adjustment: 标签栏调整
-  home_tabs_adjustment_desc: 第一个激活的 Tab 项是默认界面
+  home_tabs_adjustment_desc: 第一个激活的标签项是默认界面
 
   # Compatibility
   # Common

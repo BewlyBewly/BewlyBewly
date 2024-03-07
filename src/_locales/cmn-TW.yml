@@ -45,7 +45,7 @@ settings:
   group_search_bar: 搜尋欄
   group_recommendation_mode: 推薦模式
   group_search_page_mode: 搜尋頁模式
-  group_home_tabs: 首頁索引標籤
+  group_home_tabs: 首頁標籤欄
 
   # Settings buttons
   btn:
@@ -67,6 +67,7 @@ settings:
   enable_horizontal_scrolling_desc: 啟用後，滑鼠捲動時將直接捲動橫向捲軸列表
   enable_video_ctrl_bar_on_video_card: 在影片卡片上顯示影片控制欄
   hover_video_card_delayed: 將滑鼠懸停在影片卡片上時延遲影片預覽
+  block_ads: 封鎖廣告
   auto_hide_topbar: 自動隱藏頂欄
   dock_position: Dock 位置
   dock_position_desc: 螢幕上的位置
@@ -127,8 +128,8 @@ settings:
   settings_shared_with_the_search_page: 與搜尋頁共用的設定
   settings_shared_with_the_search_page_desc: 這些設定都與搜尋頁共用
   search_page_mode_wallpaper_fixed: 將搜尋頁模式的背景固定
-  home_tabs_adjustment: 索引標籤調整
-  home_tabs_adjustment_desc: 第一個啓用的索引標籤調整頁面將是起始頁面
+  home_tabs_adjustment: 標籤欄調整
+  home_tabs_adjustment_desc: 第一個啓用的標籤項目調整頁面將是起始頁面
 
   # Compatibility
   # Common
