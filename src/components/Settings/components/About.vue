@@ -108,6 +108,9 @@ function handleExportSettings() {
           Credits
         </h3>
         <section mt-4 flex="~ gap-4 wrap justify-center">
+          <a href="https://chat.openai.com" target="_blank">
+            ChatGPT
+          </a>
           <a href="https://github.com/antfu/vitesse-webext" target="_blank">
             vitesse-webext
           </a>
