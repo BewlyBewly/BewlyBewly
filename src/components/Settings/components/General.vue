@@ -101,6 +101,9 @@ function handleToggleDockItem(dockItem: any) {
       <SettingsItem :title="$t('settings.hover_video_card_delayed')">
         <Radio v-model="settings.hoverVideoCardDelayed" />
       </SettingsItem>
+    </SettingsItemGroup>
+
+    <SettingsItemGroup>
       <SettingsItem :title="$t('settings.block_ads')">
         <Radio v-model="settings.blockAds" />
       </SettingsItem>
