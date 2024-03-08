@@ -156,7 +156,8 @@ function setCurrentTitle() {
 
       <div
         class="settings-content"
-        relative overflow="x-hidde" w-full h-full bg="$bew-elevated-solid-1"
+        style="backdrop-filter: blur(60px) saturate(180%);"
+        relative overflow="x-hidde" w-full h-full bg="$bew-elevated-1"
         shadow="$bew-shadow-4" rounded="$bew-radius"
       >
         <OverlayScrollbarsComponent ref="scrollbarRef" element="div" h-inherit defer>
@@ -165,13 +166,12 @@ function setCurrentTitle() {
             pos="sticky top-0 left-0" p="x-12"
             z-1 rounded="t-$bew-radius"
             style="
-            background: linear-gradient(var(--bew-elevated-solid-1), transparent);
-            text-shadow: 0 0 15px var(--bew-elevated-solid-1), 0 0 20px var(--bew-elevated-solid-1)
-          "
+              text-shadow: 0 0 15px var(--bew-elevated-solid-1), 0 0 20px var(--bew-elevated-solid-1)
+            "
           >
             <!-- Mask -->
             <div
-              pos="absolute top-0 left-0" w-inherit h-inherit backdrop="blur-6px" pointer-events-none
+              pos="absolute top-0 left-0" w-inherit h-inherit pointer-events-none
               style="mask-image: linear-gradient(to bottom,  black 70%, transparent);"
               z--1 rounded-inherit
             />
