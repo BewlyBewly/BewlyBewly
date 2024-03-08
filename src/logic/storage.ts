@@ -41,9 +41,10 @@ export interface Settings {
   searchPageWallpaperBlurIntensity: number
 
   recommendationMode: 'web' | 'app'
+  homePageTabVisibilityList: { page: HomeSubPage, visible: boolean }[]
   useSearchPageModeOnHomePage: boolean
   searchPageModeWallpaperFixed: boolean
-  homePageTabVisibilityList: { page: HomeSubPage, visible: boolean }[]
+  alwaysShowTheTopBarLogoOnSearchPageMode: boolean
 
   adaptToOtherPageStyles: boolean
   showTopBar: boolean
@@ -83,9 +84,10 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   searchPageWallpaperBlurIntensity: 0,
 
   recommendationMode: 'web',
+  homePageTabVisibilityList: [],
   useSearchPageModeOnHomePage: false,
   searchPageModeWallpaperFixed: false,
-  homePageTabVisibilityList: [],
+  alwaysShowTheTopBarLogoOnSearchPageMode: false,
 
   adaptToOtherPageStyles: true,
   showTopBar: true,

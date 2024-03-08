@@ -240,31 +240,37 @@ function handleToggleHomeTab(tab: any) {
       <SettingsItem :title="$t('settings.use_search_page_mode')">
         <Radio v-model="settings.useSearchPageModeOnHomePage" />
       </SettingsItem>
-      <SettingsItem :title="$t('settings.settings_shared_with_the_search_page')">
-        <template #desc>
-          <span color="$bew-warning-color">{{ $t('settings.settings_shared_with_the_search_page_desc') }}</span>
-        </template>
-        <Button type="secondary" block center @click="handleOpenSearchPageModeSharedSettings">
-          {{ $t('settings.btn.open_settings') }}
-        </Button>
-
-        <ChildSettingsDialog
-          v-if="showSearchPageModeSharedSettings"
-          :title="$t('settings.settings_shared_with_the_search_page')"
-          style="--b-dialog-height: 85%;"
-          @close="handleCloseSearchPageModeSharedSettings"
-        >
+      <template v-if="settings.useSearchPageModeOnHomePage">
+        <SettingsItem :title="$t('settings.settings_shared_with_the_search_page')">
           <template #desc>
             <span color="$bew-warning-color">{{ $t('settings.settings_shared_with_the_search_page_desc') }}</span>
           </template>
+          <Button type="secondary" block center @click="handleOpenSearchPageModeSharedSettings">
+            {{ $t('settings.btn.open_settings') }}
+          </Button>
 
-          <SearchPage />
-        </ChildSettingsDialog>
-      </SettingsItem>
+          <ChildSettingsDialog
+            v-if="showSearchPageModeSharedSettings"
+            :title="$t('settings.settings_shared_with_the_search_page')"
+            style="--b-dialog-height: 85%;"
+            @close="handleCloseSearchPageModeSharedSettings"
+          >
+            <template #desc>
+              <span color="$bew-warning-color">{{ $t('settings.settings_shared_with_the_search_page_desc') }}</span>
+            </template>
 
-      <SettingsItem :title="$t('settings.search_page_mode_wallpaper_fixed')">
-        <Radio v-model="settings.searchPageModeWallpaperFixed" />
-      </SettingsItem>
+            <SearchPage />
+          </ChildSettingsDialog>
+        </SettingsItem>
+
+        <SettingsItem :title="$t('settings.search_page_mode_wallpaper_fixed')">
+          <Radio v-model="settings.searchPageModeWallpaperFixed" />
+        </SettingsItem>
+
+        <SettingsItem :title="$t('settings.always_show_the_top_bar_logo')">
+          <Radio v-model="settings.alwaysShowTheTopBarLogoOnSearchPageMode" />
+        </SettingsItem>
+      </template>
     </SettingsItemGroup>
   </div>
 </template>
