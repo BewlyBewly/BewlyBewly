@@ -323,9 +323,12 @@ provide<BewlyAppProvider>('BEWLY_APP', {
               || activatedPage !== AppPage.Home && activatedPage !== AppPage.Search
             )
             || settings.useOriginalBilibiliHomepage"
-          :show-logo="showTopBarMask && settings.useSearchPageModeOnHomePage
-            || (!settings.useSearchPageModeOnHomePage || activatedPage !== AppPage.Home)
-            || settings.useOriginalBilibiliHomepage"
+          :show-logo="settings.alwaysShowTheTopBarLogoOnSearchPageMode
+            || (
+              showTopBarMask && settings.useSearchPageModeOnHomePage
+              || (!settings.useSearchPageModeOnHomePage || activatedPage !== AppPage.Home)
+              || settings.useOriginalBilibiliHomepage
+            )"
           :mask="showTopBarMask"
           pos="fixed top-0 left-0" z="99 hover:1001" w-full
         />
