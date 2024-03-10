@@ -72,6 +72,11 @@ settings:
   disable_frosted_glass: 禁用毛玻璃效果
   reduce_frosted_glass_blur: 降低毛玻璃模糊强度
   auto_hide_topbar: 自动隐藏顶栏
+  topbar_icon_badges: 图标角标
+  topbar_icon_badges_opt:
+    number: 数字
+    dot: 圆点
+    none: 不显示
   dock_position: Dock 栏位置
   dock_position_desc: 在屏幕中摆放位置
   dock_position_opt:

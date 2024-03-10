@@ -452,9 +452,18 @@ defineExpose({
                 @mouseenter="showNotificationsPop = true"
                 @mouseleave="showNotificationsPop = false"
               >
-                <div v-if="unReadMessageCount !== 0" class="unread-message">
-                  {{ unReadMessageCount > 999 ? '999+' : unReadMessageCount }}
-                </div>
+                <template v-if="unReadMessageCount !== 0">
+                  <div
+                    v-if="settings.topBarIconBadges === 'number'"
+                    class="unread-message"
+                  >
+                    {{ unReadMessageCount > 999 ? '999+' : unReadMessageCount }}
+                  </div>
+                  <div
+                    v-else-if="settings.topBarIconBadges === 'dot'"
+                    w-8px h-8px bg="$bew-theme-color" rounded-8px pos="absolute right-0 top-0"
+                  />
+                </template>
                 <a
                   href="https://message.bilibili.com"
                   :target="isHomePage() ? '_blank' : '_self'"
@@ -478,9 +487,18 @@ defineExpose({
                 @mouseenter="showMomentsPop = true"
                 @mouseleave="showMomentsPop = false"
               >
-                <div v-if="newMomentsCount !== 0" class="unread-message">
-                  {{ newMomentsCount > 999 ? '999+' : newMomentsCount }}
-                </div>
+                <template v-if="unReadMessageCount !== 0">
+                  <div
+                    v-if="settings.topBarIconBadges === 'number'"
+                    class="unread-message"
+                  >
+                    {{ newMomentsCount > 999 ? '999+' : newMomentsCount }}
+                  </div>
+                  <div
+                    v-else-if="settings.topBarIconBadges === 'dot'"
+                    w-8px h-8px bg="$bew-theme-color" rounded-8px pos="absolute right-0 top-0"
+                  />
+                </template>
                 <a
                   href="https://t.bilibili.com"
                   :target="isHomePage() ? '_blank' : '_self'"
