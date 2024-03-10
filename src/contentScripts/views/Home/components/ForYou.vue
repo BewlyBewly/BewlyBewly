@@ -2,14 +2,27 @@
 import type { Ref } from 'vue'
 import type { AppForYouResult, Item as AppVideoItem } from '~/models/video/appForYou'
 import type { Item as VideoItem, forYouResult } from '~/models/video/forYou'
+import type { GridLayout } from '~/logic'
 import { accessKey, settings } from '~/logic'
 import { LanguageType } from '~/enums/appEnums'
 import { TVAppKey } from '~/utils/authProvider'
+
+const props = defineProps<{
+  gridLayout: GridLayout
+}>()
 
 const emit = defineEmits<{
   (e: 'beforeLoading'): void
   (e: 'afterLoading'): void
 }>()
+
+const gridValue = computed((): string => {
+  if (props.gridLayout === 'adaptive')
+    return '~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-5'
+  if (props.gridLayout === 'twoColumns')
+    return '~ cols-1 xl:cols-2 gap-4'
+  return '~ cols-1 gap-4'
+})
 
 const videoList = reactive<VideoItem[]>([])
 const appVideoList = reactive<AppVideoItem[]>([])
@@ -174,16 +187,22 @@ function jumpToLoginPage() {
 
 <template>
   <div>
+    <!-- By directly using predefined unocss grid properties, it is possible to dynamically set the grid attribute -->
+    <div hidden grid="~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-5" />
+    <div hidden grid="~ cols-1 xl:cols-2 gap-4" />
+    <div hidden grid="~ cols-1 gap-4" />
+
     <Empty v-if="needToLoginFirst" mt-6 :description="$t('common.please_log_in_first')">
       <Button type="primary" @click="jumpToLoginPage()">
         {{ $t('common.login') }}
       </Button>
     </Empty>
+
     <div
       v-else
       ref="containerRef"
       m="b-0 t-0" relative w-full h-full
-      grid="~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-5"
+      :grid="gridValue"
     >
       <template v-if="settings.recommendationMode === 'web'">
         <VideoCard
@@ -203,6 +222,7 @@ function jumpToLoginPage() {
           :cid="video.cid"
           :uri="video.uri"
           show-preview
+          :horizontal="gridLayout !== 'adaptive'"
         />
       </template>
       <template v-else>
@@ -223,12 +243,16 @@ function jumpToLoginPage() {
           :cid="video?.player_args?.cid"
           :uri="video.uri"
           show-preview
+          :horizontal="gridLayout !== 'adaptive'"
         />
       </template>
 
       <!-- skeleton -->
       <template v-if="isLoading">
-        <VideoCardSkeleton v-for="item in 30" :key="item" />
+        <VideoCardSkeleton
+          v-for="item in 30" :key="item"
+          :horizontal="gridLayout !== 'adaptive'"
+        />
       </template>
     </div>
 
