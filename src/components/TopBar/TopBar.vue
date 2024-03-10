@@ -279,9 +279,12 @@ defineExpose({
       <!-- Top bar mask -->
       <div
         v-if="mask"
-        pos="absolute top-0 left-0" w-full h-80px backdrop="blur-15px"
+        style="
+          mask-image: linear-gradient(to bottom,  black 40%, transparent);
+          backdrop-filter:var(--bew-filter-glass-1)
+        "
+        pos="absolute top-0 left-0" w-full h-80px
         pointer-events-none
-        style="mask-image: linear-gradient(to bottom,  black 40%, transparent);"
       />
       <Transition name="fade">
         <div

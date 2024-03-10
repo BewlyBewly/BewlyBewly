@@ -158,7 +158,7 @@ function setCurrentTitle() {
 
       <div
         class="settings-content"
-        style="backdrop-filter: blur(40px) saturate(180%);"
+        style="backdrop-filter: var(--bew-filter-glass-2);"
         relative overflow="x-hidde" w-full h-full bg="$bew-elevated-1"
         shadow="$bew-shadow-4" rounded="$bew-radius"
       >

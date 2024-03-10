@@ -5,8 +5,7 @@
 
   --bew-filter-glass-1: blur(20px) saturate(180%);
   --bew-filter-glass-2: blur(40px) saturate(180%);
-  --bew-filter-icon-glow: saturate(0) brightness(2)
-    drop-shadow(0 0 0.2px white)
+  --bew-filter-icon-glow: saturate(0) brightness(2) drop-shadow(0 0 0.2px white)
     drop-shadow(0 0 0.5px var(--bew-theme-color))
     drop-shadow(0 0 0.5px var(--bew-theme-color))
     drop-shadow(0 0 0.5px var(--bew-theme-color))
@@ -59,16 +58,16 @@
   --bew-success-color-80: rgba(110 231 183 / 0.8);
   --bew-success-color-90: rgba(110 231 183 / 0.9);
 
-  --bew-warning-color: rgb(250 204 21);
-  --bew-warning-color-10: rgba(250 204 21 / 0.1);
-  --bew-warning-color-20: rgba(250 204 21 / 0.2);
-  --bew-warning-color-30: rgba(250 204 21 / 0.3);
-  --bew-warning-color-40: rgba(250 204 21 / 0.4);
-  --bew-warning-color-50: rgba(250 204 21 / 0.5);
-  --bew-warning-color-60: rgba(250 204 21 / 0.6);
-  --bew-warning-color-70: rgba(250 204 21 / 0.7);
-  --bew-warning-color-80: rgba(250 204 21 / 0.8);
-  --bew-warning-color-90: rgba(250 204 21 / 0.9);
+  --bew-warning-color: rgb(217 178 22);
+  --bew-warning-color-10: rgba(217 178 22 / 0.1);
+  --bew-warning-color-20: rgba(217 178 22 / 0.2);
+  --bew-warning-color-30: rgba(217 178 22 / 0.3);
+  --bew-warning-color-40: rgba(217 178 22 / 0.4);
+  --bew-warning-color-50: rgba(217 178 22 / 0.5);
+  --bew-warning-color-60: rgba(217 178 22 / 0.6);
+  --bew-warning-color-70: rgba(217 178 22 / 0.7);
+  --bew-warning-color-80: rgba(217 178 22 / 0.8);
+  --bew-warning-color-90: rgba(217 178 22 / 0.9);
 
   --bew-error-color: rgb(219 65 108);
   --bew-error-color-10: rgba(219 65 108 / 0.1);
@@ -126,6 +125,19 @@
   --bew-border-color: rgb(131 131 145 / 18%);
 
   --bew-page-max-width: 2280px;
+}
+
+:host(.disable-frosted-glass),
+:root.disable-frosted-glass {
+  --bew-content-opacity: 1;
+  --bew-filter-glass-1: none;
+  --bew-filter-glass-2: none;
+}
+
+:host(.reduce-frosted-glass-blur),
+:root.reduce-frosted-glass-blur {
+  --bew-filter-glass-1: blur(10px) saturate(180%);
+  --bew-filter-glass-2: blur(20px) saturate(180%);
 }
 
 :host(.dark),
