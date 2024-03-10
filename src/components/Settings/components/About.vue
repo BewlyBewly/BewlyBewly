@@ -105,31 +105,6 @@ function handleExportSettings() {
       </section>
       <section mt-8>
         <h3 text="xl center" mb-2>
-          Credits
-        </h3>
-        <section mt-4 flex="~ gap-4 wrap justify-center">
-          <a href="https://chat.openai.com" target="_blank">
-            ChatGPT
-          </a>
-          <a href="https://github.com/antfu/vitesse-webext" target="_blank">
-            vitesse-webext
-          </a>
-          <a href="https://github.com/indefined/UserScripts/tree/master/bilibiliHome" target="_blank">
-            UserScripts/bilibiliHome
-          </a>
-          <a href="https://github.com/magicdawn/bilibili-app-recommend" target="_blank">
-            bilibili-app-recommend
-          </a>
-          <a href="https://github.com/the1812/Bilibili-Evolved" target="_blank">
-            Bilibili-Evolved
-          </a>
-          <a href="https://github.com/SocialSisterYi/bilibili-API-collect" target="_blank">
-            bilibili-API-collect
-          </a>
-        </section>
-      </section>
-      <section mt-8>
-        <h3 text="xl center" mb-2>
           {{ $t('settings.contributors') }}
         </h3>
         <a href="https://github.com/hakadao/BewlyBewly/graphs/contributors" target="_blank">
