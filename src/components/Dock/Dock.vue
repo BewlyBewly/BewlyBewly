@@ -182,7 +182,7 @@ function toggleDockHide(hide: boolean) {
       style="backdrop-filter: var(--bew-filter-glass-1);"
       absolute duration-300 ease-in-out
       p-2 m-2 bg="$bew-content-1" flex="~ col gap-2 shrink-0"
-      rounded="$bew-radius" border="1px $bew-border-color"
+      rounded="60px" border="1px $bew-border-color"
       shadow="$bew-shadow-2"
       @mouseenter="toggleDockHide(false)"
       @mouseleave="toggleDockHide(true)"
@@ -297,7 +297,6 @@ function toggleDockHide(hide: boolean) {
 }
 
 .dock-item {
-  --shadow: 0 0 30px 4px var(--bew-theme-color-50);
   --shadow-dark: 0 0 30px 4px rgba(255, 255, 255, 0.6);
   --shadow-active: 0 0 20px var(--bew-theme-color-50);
   --shadow-dark-active: 0 0 20px rgba(255, 255, 255, 0.6);
@@ -308,21 +307,25 @@ function toggleDockHide(hide: boolean) {
     p-0 flex items-center justify-center
     aspect-square relative
     leading-0 duration-300
-    rounded-$bew-radius
-    bg-$bew-fill-2 cursor-pointer
-    hover:bg-$bew-theme-color hover:text-white hover:shadow-$shadow
-    active:shadow-$shadow-active dark-active:shadow-$shadow-dark-active
-    dark-hover:bg-white dark-hover:text-black dark-hover:shadow-$shadow-dark;
+    rounded-60px
+    bg-$bew-fill-1 cursor-pointer
+    hover:bg-$bew-fill-3 hover:scale-110
+    active:important-scale-100;
+
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.05);
 
   &.active {
-    --at-apply: bg-$bew-theme-color dark-bg-white
-      text-white dark-text-black
-      shadow-$shadow dark:shadow-$shadow-dark
+    --at-apply: bg-$bew-theme-color-auto text-$bew-text-auto
+      shadow-$shadow-active  dark:shadow-$shadow-dark
       active:shadow-$shadow-active dark-active:shadow-$shadow-dark-active;
   }
 
   svg {
     --at-apply: md:w-22px w-18px md:h-22px h-18px block align-middle;
   }
+}
+
+.dark .dock-item {
+  box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.08);
 }
 </style>
