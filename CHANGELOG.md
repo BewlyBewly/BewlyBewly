@@ -1,5 +1,47 @@
 # Changelog
 
+## [0.15.0](https://github.com/hakadao/BewlyBewly/compare/v0.14.9...v0.15.0) (2024-03-10)
+
+
+### Features
+
+* add performance settings ([e70f62d](https://github.com/hakadao/BewlyBewly/commit/e70f62d83a886e1a82a92738b5bc5b01f4ea4e25))
+* block ads ([02788dd](https://github.com/hakadao/BewlyBewly/commit/02788ddb900910309981379f90107768dec4a873))
+* **Dock:** redesign dock ([f988e9e](https://github.com/hakadao/BewlyBewly/commit/f988e9edc8d2f56f8de8bb4994e1c108535b1f2d))
+* **Home:** implement grid layout switcher ([fede875](https://github.com/hakadao/BewlyBewly/commit/fede8758ffeba7905d6838fd4b5af229e24667ba))
+* **Settings:** add an "always show top bar logo" setting ([#219](https://github.com/hakadao/BewlyBewly/issues/219)) ([09f5c6e](https://github.com/hakadao/BewlyBewly/commit/09f5c6ea6f22ac365370f2195b70449f22b77472))
+* **Settings:** add credits section on about page ([682e749](https://github.com/hakadao/BewlyBewly/commit/682e7497f4e8adffc9635f3111a4ee3c0a8025da))
+* **Settings:** add discord link to about page ([aa8c461](https://github.com/hakadao/BewlyBewly/commit/aa8c4614399be025580e3766826be9f0cce8861f))
+* **Settings:** redesign settings panel ([b81fbbd](https://github.com/hakadao/BewlyBewly/commit/b81fbbd25d46fc73acaab0c260a1e5122c821c4f))
+* **Settings:** redesign settings panel ([ffcf94b](https://github.com/hakadao/BewlyBewly/commit/ffcf94bd2ed296b2e6ba3724b2b4ceb949e2af29))
+* **TopBar:** add top bar icon badges config ([ffc9fed](https://github.com/hakadao/BewlyBewly/commit/ffc9fed7d72dd1026fed503b6d39da083795eaa3))
+* **VideoCard:** implement adaptive width in horizontal mode ([2b25373](https://github.com/hakadao/BewlyBewly/commit/2b253731614307339b1d4ef3ceb298b6b8bd4232))
+
+
+### Bug Fixes
+
+* **Dock:** active color incorrect when hovering dock item in dark mode ([96caf82](https://github.com/hakadao/BewlyBewly/commit/96caf826697433f97c33492d98c09f62e078b34e))
+* **Favorites:** ensure full display of favorites content ([#323](https://github.com/hakadao/BewlyBewly/issues/323)) ([00a84a6](https://github.com/hakadao/BewlyBewly/commit/00a84a6449ef553fe1ab980e9588de10c037b115))
+* **Home:** resolve home tabs drifting issue([#349](https://github.com/hakadao/BewlyBewly/issues/349)) ([50ef6f7](https://github.com/hakadao/BewlyBewly/commit/50ef6f7b04d486258255876b535b08fd084bab25))
+* qr code cannot be scanned in some cases ([5308896](https://github.com/hakadao/BewlyBewly/commit/5308896a8e66aaaa7b807f1df8da2e4883795a9c))
+* some style bugs ([#362](https://github.com/hakadao/BewlyBewly/issues/362)) ([f23b66b](https://github.com/hakadao/BewlyBewly/commit/f23b66bb0fd045552e1fc0e3d0768f4f7d65b698))
+* **WatchLater:** correct watch later jump url ([fb9de97](https://github.com/hakadao/BewlyBewly/commit/fb9de97aa511df588e4520cc01813bf88db5d058))
+
+
+### Style Changes
+
+* add edge glow effect in some dialogs ([747c0a1](https://github.com/hakadao/BewlyBewly/commit/747c0a1bc8d6767f59d2426f248ffe5bcc3ec0e6))
+* adjust dock styles ([24c5c18](https://github.com/hakadao/BewlyBewly/commit/24c5c18c3acebebc61abd577f1107a61acc906e2))
+* decrease the content opacity in light mode ([bbf5daf](https://github.com/hakadao/BewlyBewly/commit/bbf5daf5e2cf8f8733a1ca0a636d12525d2a94bf))
+* **Settings:** adjust the block ads position ([f4c3227](https://github.com/hakadao/BewlyBewly/commit/f4c3227ffc337b90e22a8959de4ccb55e6ebdc47))
+* **TopBar:** adjust style ([e6b8a7c](https://github.com/hakadao/BewlyBewly/commit/e6b8a7c7082950497dff80271228f75905d9e5e5))
+* **VideoCard:** adjust horizontal style ([e3a3992](https://github.com/hakadao/BewlyBewly/commit/e3a3992ef669808244734fe9bce51185f31a00f3))
+
+
+### CI
+
+* adjust changelog ([a76cae1](https://github.com/hakadao/BewlyBewly/commit/a76cae13c26bb5c19a18547eb922528ec7df641a))
+
 ## [0.14.9](https://github.com/hakadao/BewlyBewly/compare/v0.14.8...v0.14.9) (2024-03-03)
 
 
