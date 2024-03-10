@@ -15,7 +15,7 @@ defineProps<{
     </p>
 
     <main
-      border="1 solid $bew-border-color" mt-2 px-4 mx--4 rounded="$bew-radius"
+      mt-2 px-4 mx--4 rounded="$bew-radius"
       bg="$bew-fill-1"
     >
       <slot />

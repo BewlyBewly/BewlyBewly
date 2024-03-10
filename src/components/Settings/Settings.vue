@@ -117,14 +117,16 @@ function setCurrentTitle() {
       flex justify-between items-center
     >
       <aside
-        class="group" shrink-0 p="x-4" pos="absolute left--42px" z-2
+        class="group"
         :style="{
           pointerEvents: preventCloseSettings ? 'none' : 'unset',
         }"
+        shrink-0 p="x-4" pos="absolute left--84px" z-2
       >
         <ul
-          flex="~ gap-2 col" rounded="30px hover:25px" bg="$bew-elevated-2" p-2 shadow="$bew-shadow-3"
+          flex="~ gap-2 col" rounded="30px hover:25px" bg="$bew-elevated-1 hover:$bew-elevated-2" p-2 shadow="$bew-shadow-3"
           scale="group-hover:105" duration-300 overflow-hidden antialiased
+          border="1 $bew-border-color"
           backdrop-glass
         >
           <!-- mask -->
@@ -156,14 +158,14 @@ function setCurrentTitle() {
 
       <div
         class="settings-content"
-        style="backdrop-filter: blur(60px) saturate(180%);"
+        style="backdrop-filter: blur(40px) saturate(180%);"
         relative overflow="x-hidde" w-full h-full bg="$bew-elevated-1"
         shadow="$bew-shadow-4" rounded="$bew-radius"
       >
         <OverlayScrollbarsComponent ref="scrollbarRef" element="div" h-inherit defer>
           <header
             flex justify-between items-center w-full h-80px
-            pos="sticky top-0 left-0" p="x-12"
+            pos="sticky top-0 left-0" p="x-11"
             z-1 rounded="t-$bew-radius"
             style="
               text-shadow: 0 0 15px var(--bew-elevated-solid-1), 0 0 20px var(--bew-elevated-solid-1)
@@ -188,7 +190,7 @@ function setCurrentTitle() {
             </div>
           </header>
 
-          <main pos="absolute top-80px left-0" w-full min-h="[calc(100%-80px)]" p="x-13 b-8">
+          <main pos="absolute top-80px left-0" w-full min-h="[calc(100%-80px)]" p="x-12 b-8">
             <!-- <div h-80px mt--8 /> -->
 
             <Transition name="page-fade">
