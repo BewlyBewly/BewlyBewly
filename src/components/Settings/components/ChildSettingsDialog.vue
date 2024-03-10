@@ -52,8 +52,9 @@ function handleClose() {
         </div>
 
         <div
+          style="backdrop-filter: var(--bew-filter-glass)"
           text-2xl leading-0 bg="$bew-fill-1 hover:$bew-theme-color-30" w="32px" h="32px"
-          ml-auto p="1" rounded-8 cursor="pointer" backdrop-glass
+          ml-auto p="1" rounded-8 cursor="pointer"
           hover:ring="2 $bew-theme-color" hover:text="$bew-theme-color" duration-300
           @click="handleClose"
         >

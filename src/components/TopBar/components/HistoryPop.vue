@@ -175,6 +175,7 @@ function getHistoryList(type: HistoryType, viewAt = 0 as number) {
   >
     <!-- top bar -->
     <header
+      style="backdrop-filter: var(--bew-filter-glass);"
       flex="~"
       justify="between"
       p="y-4 x-6"
@@ -183,7 +184,6 @@ function getHistoryList(type: HistoryType, viewAt = 0 as number) {
       bg="$bew-elevated-1"
       z="2"
       border="!rounded-t-$bew-radius"
-      backdrop-glass
     >
       <div flex="~">
         <div

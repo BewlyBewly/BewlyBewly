@@ -134,6 +134,7 @@ defineExpose({
   >
     <!-- top bar -->
     <header
+      style="backdrop-filter: var(--bew-filter-glass)"
       flex="~" items-center justify-between
       p="x-6"
       pos="fixed top-0 left-0"
@@ -142,7 +143,6 @@ defineExpose({
       bg="$bew-content-1"
       z="2"
       un-border="!rounded-t-$bew-radius"
-      backdrop-glass
     >
       <h3 cursor="pointer" font-600 @click="smoothScrollToTop(favoriteVideosWrap, 300)">
         {{ activatedFavoriteTitle }}

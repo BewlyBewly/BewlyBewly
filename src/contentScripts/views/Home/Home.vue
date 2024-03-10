@@ -178,10 +178,11 @@ function toggleTabContentLoading(loading: boolean) {
         <ul flex="~ items-center gap-3 wrap">
           <li
             v-for="tab in currentTabs" :key="tab.page"
-            px-4 lh-35px bg="$bew-elevated-1 hover:$bew-elevated-1-hover" backdrop-glass rounded="$bew-radius"
+            :class="{ 'tab-activated': activatedPage === tab.page }"
+            style="backdrop-filter: var(--bew-filter-glass)"
+            px-4 lh-35px bg="$bew-elevated-1 hover:$bew-elevated-1-hover" rounded="$bew-radius"
             cursor-pointer shadow="$bew-shadow-1" box-border border="1 $bew-border-color" duration-300
             flex="~ gap-2 items-center"
-            :class="{ 'tab-activated': activatedPage === tab.page }"
             @click="handleChangeTab(tab)"
           >
             <span class="text-center">{{ $t(tab.i18nKey) }}</span>

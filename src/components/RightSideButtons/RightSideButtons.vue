@@ -102,7 +102,9 @@ function toggleDark(e: MouseEvent) {
     <div flex="~ gap-2 col" pointer-events-auto>
       <Tooltip :content="currentAppColorScheme === 'dark' ? $t('dock.dark_mode') : $t('dock.light_mode')" placement="left">
         <Button
-          class="ctrl-btn" center size="small" round backdrop-glass
+          class="ctrl-btn"
+          style="backdrop-filter: var(--bew-filter-glass);"
+          center size="small" round
           @click="toggleDark"
           @mouseenter="hoveringDockItem.themeMode = true"
           @mouseleave="hoveringDockItem.themeMode = false"
@@ -123,7 +125,9 @@ function toggleDark(e: MouseEvent) {
       </Tooltip>
       <Tooltip :content="$t('dock.settings')" placement="left">
         <Button
-          class="ctrl-btn" center size="small" round backdrop-glass
+          class="ctrl-btn"
+          style="backdrop-filter: var(--bew-filter-glass);"
+          center size="small" round
           @click="emit('settings-visibility-change')"
         >
           <mingcute:settings-3-line />
