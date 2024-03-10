@@ -103,7 +103,7 @@ function toggleDark(e: MouseEvent) {
       <Tooltip :content="currentAppColorScheme === 'dark' ? $t('dock.dark_mode') : $t('dock.light_mode')" placement="left">
         <Button
           class="ctrl-btn"
-          style="backdrop-filter: var(--bew-filter-glass);"
+          style="backdrop-filter: var(--bew-filter-glass-1);"
           center size="small" round
           @click="toggleDark"
           @mouseenter="hoveringDockItem.themeMode = true"
@@ -126,7 +126,7 @@ function toggleDark(e: MouseEvent) {
       <Tooltip :content="$t('dock.settings')" placement="left">
         <Button
           class="ctrl-btn"
-          style="backdrop-filter: var(--bew-filter-glass);"
+          style="backdrop-filter: var(--bew-filter-glass-1);"
           center size="small" round
           @click="emit('settings-visibility-change')"
         >

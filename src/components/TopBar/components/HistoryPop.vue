@@ -175,7 +175,7 @@ function getHistoryList(type: HistoryType, viewAt = 0 as number) {
   >
     <!-- top bar -->
     <header
-      style="backdrop-filter: var(--bew-filter-glass);"
+      style="backdrop-filter: var(--bew-filter-glass-1);"
       flex="~"
       justify="between"
       p="y-4 x-6"

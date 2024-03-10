@@ -86,7 +86,7 @@ function onMouseEnter() {
     <transition>
       <div
         v-if="showOptions"
-        style="backdrop-filter: var(--bew-filter-glass)"
+        style="backdrop-filter: var(--bew-filter-glass-1)"
         pos="absolute" bg="$bew-elevated-2" shadow="$bew-shadow-2" p="2"
         m="t-2"
         rounded="$bew-radius" z="1" flex="~ col gap-1"

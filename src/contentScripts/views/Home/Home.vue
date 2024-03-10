@@ -179,7 +179,7 @@ function toggleTabContentLoading(loading: boolean) {
           <li
             v-for="tab in currentTabs" :key="tab.page"
             :class="{ 'tab-activated': activatedPage === tab.page }"
-            style="backdrop-filter: var(--bew-filter-glass)"
+            style="backdrop-filter: var(--bew-filter-glass-1)"
             px-4 lh-35px bg="$bew-elevated-1 hover:$bew-elevated-1-hover" rounded="$bew-radius"
             cursor-pointer shadow="$bew-shadow-1" box-border border="1 $bew-border-color" duration-300
             flex="~ gap-2 items-center"
