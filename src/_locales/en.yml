@@ -72,6 +72,11 @@ settings:
   disable_frosted_glass: Disable frosted glass effect
   reduce_frosted_glass_blur: Reduce the intensity of the frosted glass blur
   auto_hide_topbar: Automatically hide the top bar
+  topbar_icon_badges: Icon badges
+  topbar_icon_badges_opt:
+    number: Number
+    dot: Dot
+    none: Do not show
   dock_position: Dock position
   dock_position_desc: Position on screen
   dock_position_opt:

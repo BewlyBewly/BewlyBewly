@@ -72,6 +72,11 @@ settings:
   disable_frosted_glass: 閂咗毛玻璃效果
   reduce_frosted_glass_blur: 降低毛玻璃模糊強度
   auto_hide_topbar: 自動收埋頂欄
+  topbar_icon_badges: 圖示邊位標記
+  topbar_icon_badges_opt:
+    number: 數字
+    dot: 圓點
+    none: 唔顯示
   dock_position: Dock 放位
   dock_position_desc: 放喺螢幕邊度
   dock_position_opt:

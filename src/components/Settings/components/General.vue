@@ -44,6 +44,22 @@ const dockPositions = computed(() => {
     },
   ]
 })
+const topBarIconBadgesOptions = computed(() => {
+  return [
+    {
+      label: t('settings.topbar_icon_badges_opt.number'),
+      value: 'number',
+    },
+    {
+      label: t('settings.topbar_icon_badges_opt.dot'),
+      value: 'dot',
+    },
+    {
+      label: t('settings.topbar_icon_badges_opt.none'),
+      value: 'none',
+    },
+  ]
+})
 
 const pageOptions = computed((): { label: string, icon: string, value: string }[] => {
   return mainStore.dockItems.map((e: any) => {
@@ -124,6 +140,9 @@ function handleToggleDockItem(dockItem: any) {
     <SettingsItemGroup :title="$t('settings.group_topbar')">
       <SettingsItem :title="$t('settings.auto_hide_topbar')">
         <Radio v-model="settings.autoHideTopBar" />
+      </SettingsItem>
+      <SettingsItem :title="$t('settings.topbar_icon_badges')">
+        <Select v-model="settings.topBarIconBadges" :options="topBarIconBadgesOptions" w="full" />
       </SettingsItem>
     </SettingsItemGroup>
 
