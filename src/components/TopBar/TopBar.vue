@@ -307,7 +307,7 @@ defineExpose({
               v-if="showLogo"
               ref="logo" href="//www.bilibili.com"
               class="group logo"
-              style="backdrop-filter: var(--bew-filter-glass)"
+              style="backdrop-filter: var(--bew-filter-glass-1)"
               flex items-center border="1 $bew-border-color"
               rounded="50px" p="x-4" shadow="$bew-shadow-2" duration-300
               bg="$bew-elevated-1 hover:$bew-theme-color dark-hover:white"
@@ -362,7 +362,7 @@ defineExpose({
         flex="inline xl:1 justify-center items-center"
       >
         <div
-          style="backdrop-filter: var(--bew-filter-glass)"
+          style="backdrop-filter: var(--bew-filter-glass-1)"
           ml-auto flex h-55px p-2 bg="$bew-elevated-1"
           text="$bew-text-1" border="1 $bew-border-color" rounded-full shadow="$bew-shadow-2"
         >

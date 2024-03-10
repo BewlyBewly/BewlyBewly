@@ -379,7 +379,7 @@ function handelMouseLeave() {
                   rounded="$bew-radius"
                   style="
                     box-shadow: var(--bew-shadow-2);
-                    backdrop-filter: var(--bew-filter-glass);
+                    backdrop-filter: var(--bew-filter-glass-1);
                   "
                 >
                   <p p="2" text="$bew-text-3">

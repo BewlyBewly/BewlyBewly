@@ -134,7 +134,7 @@ defineExpose({
   >
     <!-- top bar -->
     <header
-      style="backdrop-filter: var(--bew-filter-glass)"
+      style="backdrop-filter: var(--bew-filter-glass-1)"
       flex="~" items-center justify-between
       p="x-6"
       pos="fixed top-0 left-0"
