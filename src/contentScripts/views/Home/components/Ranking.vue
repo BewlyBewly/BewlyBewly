@@ -3,8 +3,13 @@ import { useI18n } from 'vue-i18n'
 import type { RankingType } from '../types'
 import type { RankingResult, List as RankingVideoItem } from '~/models/video/ranking'
 import type { List as RankingPgcItem, RankingPgcResult } from '~/models/video/rankingPgc'
+import type { GridLayout } from '~/logic'
 import { settings } from '~/logic'
 import emitter from '~/utils/mitt'
+
+const props = defineProps<{
+  gridLayout: GridLayout
+}>()
 
 const emit = defineEmits<{
   (e: 'beforeLoading'): void
@@ -13,6 +18,20 @@ const emit = defineEmits<{
 
 const { t } = useI18n()
 const { handleBackToTop, handlePageRefresh } = useBewlyApp()
+
+const gridValue = computed((): string => {
+  if (props.gridLayout === 'adaptive') {
+    // eslint-disable-next-line ts/no-use-before-define
+    if (!activatedRankingType.value.seasonType)
+      return '~ 2xl:cols-4 xl:cols-3 lg:cols-2 md:cols-1 gap-5'
+    else
+      return '~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-5'
+  }
+
+  if (props.gridLayout === 'twoColumns')
+    return '~ cols-1 xl:cols-2 gap-4'
+  return '~ cols-1 gap-4'
+})
 
 const rankingTypes = computed((): RankingType[] => {
   return [
@@ -140,10 +159,10 @@ function getRankingPgc() {
         <ul flex="~ col gap-2">
           <li v-for="rankingType in rankingTypes" :key="rankingType.id">
             <a
+              :class="{ active: activatedRankingType.id === rankingType.id }"
               px-4 lh-30px h-30px hover:bg="$bew-fill-2" w-inherit
               block rounded="$bew-radius" cursor-pointer transition="all 300 ease-out"
-              hover:scale-105 un-text="$bew-text-2 hover:$bew-text-1"
-              :class="{ active: activatedRankingType.id === rankingType.id }"
+              hover:scale-105 un-text="$bew-text-1"
               @click="activatedRankingType = rankingType"
             >{{ rankingType.name }}</a>
           </li>
@@ -151,7 +170,13 @@ function getRankingPgc() {
       </OverlayScrollbarsComponent>
     </aside>
 
-    <main w-full>
+    <!-- By directly using predefined unocss grid properties, it is possible to dynamically set the grid attribute -->
+    <div hidden grid="~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-5" />
+    <div hidden grid="~ 2xl:cols-4 xl:cols-3 lg:cols-2 md:cols-1 gap-5" />
+    <div hidden grid="~ cols-1 xl:cols-2 gap-4" />
+    <div hidden grid="~ cols-1 gap-4" />
+
+    <main w-full :grid="gridValue">
       <template v-if="!('seasonType' in activatedRankingType)">
         <VideoCard
           v-for="(video, index) in videoList"
@@ -171,38 +196,41 @@ function getRankingPgc() {
           :rank="index + 1"
           :cid="video.cid"
           show-preview
-          horizontal
+          :horizontal="gridLayout !== 'adaptive'"
+
           w-full
         />
       </template>
       <template v-else>
-        <div grid="~ cols-2 gap-4">
-          <LongCoverCard
-            v-for="pgc in PgcList"
-            :key="pgc.url"
-            :url="pgc.url"
-            :cover="pgc.cover"
-            :title="pgc.title"
-            :desc="pgc.new_ep.index_show"
-            :view="pgc.stat.view"
-            :follow="pgc.stat.follow"
-            :rank="pgc.rank"
-            :capsule-text="pgc.rating.replace('分', '')"
-            horizontal
-            mb-8
-          />
-        </div>
+        <LongCoverCard
+          v-for="pgc in PgcList"
+          :key="pgc.url"
+          :url="pgc.url"
+          :cover="pgc.cover"
+          :title="pgc.title"
+          :desc="pgc.new_ep.index_show"
+          :view="pgc.stat.view"
+          :follow="pgc.stat.follow"
+          :rank="pgc.rank"
+          :capsule-text="pgc.rating.replace('分', '')"
+          :horizontal="gridLayout !== 'adaptive'"
+          mb-8
+        />
       </template>
 
       <!-- skeleton -->
       <template v-if="isLoading">
         <template v-if="!('seasonType' in activatedRankingType)">
-          <VideoCardSkeleton v-for="item in 30" :key="item" horizontal />
+          <VideoCardSkeleton
+            v-for="item in 30" :key="item"
+            :horizontal="gridLayout !== 'adaptive'"
+          />
         </template>
         <template v-else>
-          <div grid="~ cols-2 gap-4">
-            <LongCoverCardSkeleton v-for="item in 30" :key="item" horizontal />
-          </div>
+          <LongCoverCardSkeleton
+            v-for="item in 30" :key="item"
+            :horizontal="gridLayout !== 'adaptive'"
+          />
         </template>
       </template>
     </main>
@@ -211,7 +239,7 @@ function getRankingPgc() {
 
 <style lang="scss" scoped>
 .active {
-  --at-apply: scale-110 bg-$bew-theme-color dark:bg-white text-white dark:text-black shadow-$bew-shadow-2;
+  --at-apply: scale-110 bg-$bew-theme-color-auto text-$bew-text-auto shadow-$bew-shadow-2;
 }
 
 .hide {

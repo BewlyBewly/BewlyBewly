@@ -99,3 +99,6 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   showTopBar: true,
   useOriginalBilibiliHomepage: false,
 }), { mergeDefaults: true })
+
+export type GridLayout = 'adaptive' | 'twoColumns' | 'oneColumn'
+export const homePageGridLayout = useStorageLocal('homePageGridLayout', ref<GridLayout>('adaptive'), { mergeDefaults: true })

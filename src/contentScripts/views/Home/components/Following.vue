@@ -1,11 +1,24 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
+import type { GridLayout } from '~/logic'
 import type { DataItem as MomentItem, MomentResult } from '~/models/moment/moment'
+
+const props = defineProps<{
+  gridLayout: GridLayout
+}>()
 
 const emit = defineEmits<{
   (e: 'beforeLoading'): void
   (e: 'afterLoading'): void
 }>()
+
+const gridValue = computed((): string => {
+  if (props.gridLayout === 'adaptive')
+    return '~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-5'
+  if (props.gridLayout === 'twoColumns')
+    return '~ cols-1 xl:cols-2 gap-4'
+  return '~ cols-1 gap-4'
+})
 
 const videoList = reactive<MomentItem[]>([])
 const isLoading = ref<boolean>(false)
@@ -111,6 +124,11 @@ function jumpToLoginPage() {
 
 <template>
   <div>
+    <!-- By directly using predefined unocss grid properties, it is possible to dynamically set the grid attribute -->
+    <div hidden grid="~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-5" />
+    <div hidden grid="~ cols-1 xl:cols-2 gap-4" />
+    <div hidden grid="~ cols-1 gap-4" />
+
     <Empty v-if="needToLoginFirst" mt-6 :description="$t('common.please_log_in_first')">
       <Button type="primary" @click="jumpToLoginPage()">
         {{ $t('common.login') }}
@@ -120,7 +138,7 @@ function jumpToLoginPage() {
       v-else
       ref="containerRef"
       m="b-0 t-0" relative w-full h-full
-      grid="~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-5"
+      :grid="gridValue"
     >
       <VideoCard
         v-for="video in videoList"
@@ -137,11 +155,15 @@ function jumpToLoginPage() {
         :capsule-text="video.modules.module_author.pub_time"
         :bvid="video.modules.module_dynamic.major.archive?.bvid"
         show-preview
+        :horizontal="gridLayout !== 'adaptive'"
       />
 
       <!-- skeleton -->
       <template v-if="isLoading">
-        <VideoCardSkeleton v-for="item in 30" :key="item" />
+        <VideoCardSkeleton
+          v-for="item in 30" :key="item"
+          :horizontal="gridLayout !== 'adaptive'"
+        />
       </template>
     </div>
 

@@ -25,6 +25,8 @@
   --bew-logo-color: var(--bew-theme-color);
 
   // #region colors
+  --bew-theme-color-auto: var(--bew-theme-color);
+
   --bew-theme-color: rgb(0 161 214);
   --bew-theme-color-10: rgba(0 161 214 / 0.1);
   --bew-theme-color-20: rgba(0 161 214 / 0.2);
@@ -82,6 +84,8 @@
   // #endregion
 
   // #region text colors
+  --bew-text-auto: white;
+
   --bew-text-1: hsl(217 19% 10%);
   --bew-text-2: hsl(215 19% 24% / 80%);
   --bew-text-3: hsl(215 19% 28% / 60%);
@@ -157,6 +161,9 @@
 
   --bew-logo-color: var(--bew-text-1);
 
+  --bew-theme-color-auto: white;
+
+  --bew-text-auto: black;
   --bew-text-1: hsl(215 19% 98%);
   --bew-text-2: hsl(215 19% 90% / 80%);
   --bew-text-3: hsl(215 19% 82% / 60%);
