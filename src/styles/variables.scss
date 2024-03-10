@@ -95,7 +95,8 @@
     220 14% 96% / var(--bew-homepage-bg-mask-opacity)
   );
 
-  --bew-content-opacity: 0.6;
+  // Decrease the opacity in light mode to ensure the text can be seen clearly
+  --bew-content-opacity: 0.8;
 
   // #region content colors, used to buttons, cards, popover and so on
   --bew-content-1: hsl(0 0% 100% / var(--bew-content-opacity));
@@ -151,6 +152,8 @@
   --bew-bg: hsl(230 12% 6%);
   --bew-homepage-bg: hsl(230 12% 6%);
   --bew-homepage-bg-mask: hsl(230 12% 6% / var(--bew-homepage-bg-mask-opacity));
+
+  --bew-content-opacity: 0.6;
 
   --bew-content-1: hsl(230 12% 12% / var(--bew-content-opacity));
   --bew-content-1-hover: hsl(230 12% 28% / var(--bew-content-opacity));
