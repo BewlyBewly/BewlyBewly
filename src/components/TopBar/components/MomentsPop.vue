@@ -283,6 +283,7 @@ function toggleWatchLater(aid: number) {
   >
     <!-- top bar -->
     <header
+      style="backdrop-filter: var(--bew-filter-glass)"
       flex="~"
       justify="between"
       items-center
@@ -292,7 +293,6 @@ function toggleWatchLater(aid: number) {
       bg="$bew-elevated-1"
       z="1"
       border="!rounded-t-$bew-radius"
-      backdrop-glass
     >
       <div flex="~">
         <div

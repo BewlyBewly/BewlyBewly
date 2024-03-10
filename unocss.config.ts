@@ -11,7 +11,4 @@ export default defineConfig({
   transformers: [
     transformerDirectives(),
   ],
-  shortcuts: {
-    'backdrop-glass': 'backdrop-blur-20px backdrop-saturate-180%',
-  },
 })

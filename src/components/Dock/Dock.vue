@@ -179,11 +179,11 @@ function toggleDockHide(hide: boolean) {
         bottom: settings.dockPosition === 'bottom',
         hide: hideDock,
       }"
+      style="backdrop-filter: var(--bew-filter-glass);"
       absolute duration-300 ease-in-out
       p-2 m-2 bg="$bew-content-1" flex="~ col gap-2 shrink-0"
       rounded="$bew-radius" border="1px $bew-border-color"
       shadow="$bew-shadow-2"
-      backdrop-glass
       @mouseenter="toggleDockHide(false)"
       @mouseleave="toggleDockHide(true)"
     >

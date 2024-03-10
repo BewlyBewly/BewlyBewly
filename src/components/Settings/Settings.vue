@@ -124,10 +124,10 @@ function setCurrentTitle() {
         shrink-0 p="x-4" pos="absolute left--84px" z-2
       >
         <ul
+          style="backdrop-filter: var(--bew-filter-glass)"
           flex="~ gap-2 col" rounded="30px hover:25px" bg="$bew-elevated-1 hover:$bew-elevated-2" p-2 shadow="$bew-shadow-3"
           scale="group-hover:105" duration-300 overflow-hidden antialiased
           border="1 $bew-border-color"
-          backdrop-glass
         >
           <!-- mask -->
           <div v-if="preventCloseSettings" pos="absolute top-0 left-0" w-full h-full bg="black opacity-20 dark:opacity-40" />
@@ -181,8 +181,9 @@ function setCurrentTitle() {
               {{ title }}
             </div>
             <div
+              style="backdrop-filter: var(--bew-filter-glass)"
               text-2xl leading-0 bg="$bew-fill-1 hover:$bew-theme-color-30" w="32px" h="32px"
-              p="1" rounded-8 cursor="pointer" backdrop-glass
+              p="1" rounded-8 cursor="pointer"
               hover:ring="2 $bew-theme-color" hover:text="$bew-theme-color" duration-300
               @click="handleClose"
             >
