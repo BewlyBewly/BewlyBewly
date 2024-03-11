@@ -312,7 +312,7 @@ function toggleDockHide(hide: boolean) {
     hover:bg-$bew-fill-3 dark-hover:bg-$bew-fill-3 hover:scale-110
     active:important-scale-100;
 
-  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--bew-shadow-edge-glow-1), 0 4px 12px rgba(0, 0, 0, 0.08);
 
   &.active {
     --at-apply: bg-$bew-theme-color-auto text-$bew-text-auto
@@ -326,6 +326,6 @@ function toggleDockHide(hide: boolean) {
 }
 
 .dark .dock-item {
-  box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.06), 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--bew-shadow-edge-glow-1), 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 </style>
