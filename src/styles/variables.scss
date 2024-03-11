@@ -105,9 +105,13 @@
   // #region content colors, used to buttons, cards, popover and so on
   --bew-content-1: hsl(0 0% 100% / var(--bew-content-opacity));
   --bew-content-1-hover: hsl(0 0% 85% / var(--bew-content-opacity));
+  --bew-content-2: hsl(0 0% 93% / var(--bew-content-opacity));
+  --bew-content-2-hover: hsl(0 0% 78% / var(--bew-content-opacity));
 
   --bew-content-solid-1: hsl(0 0% 100%);
   --bew-content-solid-1-hover: hsl(0 0% 85%);
+  --bew-content-solid-2: hsl(0 0% 93%);
+  --bew-content-solid-2-hover: hsl(0 0% 78%);
 
   --bew-elevated-1: hsl(0 0% 100% / var(--bew-content-opacity));
   --bew-elevated-1-hover: hsl(0 0% 85% / var(--bew-content-opacity));
@@ -177,9 +181,13 @@
 
   --bew-content-1: hsl(230 12% 12% / var(--bew-content-opacity));
   --bew-content-1-hover: hsl(230 12% 28% / var(--bew-content-opacity));
+  --bew-content-2: hsl(230 12% 20% / var(--bew-content-opacity));
+  --bew-content-2-hover: hsl(230 12% 36% / var(--bew-content-opacity));
 
   --bew-content-solid-1: hsl(230 12% 12%);
   --bew-content-solid-1-hover: hsl(230 12% 28%);
+  --bew-content-solid-2: hsl(230 12% 20%);
+  --bew-content-solid-2-hover: hsl(230 12% 36%);
 
   --bew-elevated-1: hsl(230 12% 15% / var(--bew-content-opacity));
   --bew-elevated-1-hover: hsl(230 12% 31% / var(--bew-content-opacity));
@@ -238,8 +246,8 @@
   --pay_yellow: var(--Ye5);
   --pay_yellow_thin: var(--Ye1);
   --bg1: var(--bew-bg);
-  --bg2: var(--bew-content-solid-1);
-  --bg3: var(--bew-content-solid-1);
+  --bg2: var(--bew-content-solid-2);
+  --bg3: var(--bew-content-solid-2);
   --bg1_float: var(--bew-elevated-solid-1);
   --bg2_float: var(--bew-elevated-solid-2);
   --text_white: var(--Wh0_u);
@@ -254,7 +262,7 @@
   --line_bold: var(--bew-fill-3);
   --graph_white: var(--bew-content-solid-1);
   --graph_bg_thin: var(--bew-content-solid-1);
-  --graph_bg_regular: var(--bew-elevated-solid-1);
+  --graph_bg_regular: var(--bew-content-solid-1);
   --graph_bg_thick: var(--bew-elevated-solid-2);
   --graph_weak: var(--Ga3);
   --graph_medium: var(--Ga5);

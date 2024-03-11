@@ -181,7 +181,7 @@ function toggleDockHide(hide: boolean) {
       }"
       style="backdrop-filter: var(--bew-filter-glass-1);"
       absolute duration-300 ease-in-out
-      p-2 m-2 bg="$bew-content-1" flex="~ col gap-2 shrink-0"
+      p-2 m-2 bg="$bew-content-2" flex="~ col gap-2 shrink-0"
       rounded="60px" border="1px $bew-border-color"
       shadow="$bew-shadow-2"
       @mouseenter="toggleDockHide(false)"
@@ -308,11 +308,11 @@ function toggleDockHide(hide: boolean) {
     aspect-square relative
     leading-0 duration-300
     rounded-60px
-    bg-$bew-fill-1 cursor-pointer
-    hover:bg-$bew-fill-3 hover:scale-110
+    bg-$bew-content-1 dark:bg-$bew-fill-1 cursor-pointer
+    hover:bg-$bew-fill-3 dark-hover:bg-$bew-fill-3 hover:scale-110
     active:important-scale-100;
 
-  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.08);
 
   &.active {
     --at-apply: bg-$bew-theme-color-auto text-$bew-text-auto
@@ -326,6 +326,6 @@ function toggleDockHide(hide: boolean) {
 }
 
 .dark .dock-item {
-  box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.06), 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 </style>
