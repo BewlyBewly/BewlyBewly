@@ -315,7 +315,7 @@ function toggleDockHide(hide: boolean) {
   box-shadow: var(--bew-shadow-edge-glow-1), 0 4px 12px rgba(0, 0, 0, 0.08);
 
   &.active {
-    --at-apply: bg-$bew-theme-color-auto text-$bew-text-auto
+    --at-apply: important-bg-$bew-theme-color-auto text-$bew-text-auto
       shadow-$shadow-active  dark:shadow-$shadow-dark
       active:shadow-$shadow-active dark-active:shadow-$shadow-dark-active;
   }
