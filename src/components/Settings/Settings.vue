@@ -124,8 +124,11 @@ function setCurrentTitle() {
         shrink-0 p="x-4" pos="absolute left--84px" z-2
       >
         <ul
-          style="backdrop-filter: var(--bew-filter-glass-2)"
-          flex="~ gap-2 col" rounded="30px hover:25px" bg="$bew-elevated-1 hover:$bew-elevated-2" p-2 shadow="$bew-shadow-3"
+          style="
+            --un-shadow: var(--bew-shadow-4), var(--bew-shadow-edge-glow-2);
+            backdrop-filter: var(--bew-filter-glass-2);
+          "
+          flex="~ gap-2 col" rounded="30px hover:25px" bg="$bew-elevated-1 hover:$bew-elevated-2" p-2 shadow
           scale="group-hover:105" duration-300 overflow-hidden antialiased
           border="1 $bew-border-color"
         >
@@ -158,9 +161,12 @@ function setCurrentTitle() {
 
       <div
         class="settings-content"
-        style="backdrop-filter: var(--bew-filter-glass-2);"
+        style="
+          --un-shadow: var(--bew-shadow-4), var(--bew-shadow-edge-glow-2);
+          backdrop-filter: var(--bew-filter-glass-2);
+        "
         relative overflow="x-hidde" w-full h-full bg="$bew-elevated-1"
-        shadow="$bew-shadow-4" rounded="$bew-radius"
+        shadow rounded="$bew-radius"
       >
         <OverlayScrollbarsComponent ref="scrollbarRef" element="div" h-inherit defer>
           <header

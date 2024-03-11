@@ -20,6 +20,9 @@
     0 8px 10px -6px rgb(0 0 0 / 0.12);
   --bew-shadow-4: 0 34px 50px -20px rgb(0 0 0 / 0.16),
     0 32px 45px -12px rgb(0 0 0 / 0.14), 0 30px 40px -8px rgb(0 0 0 / 0.12);
+
+  --bew-shadow-edge-glow-1: inset 0 0 4px rgba(0, 0, 0, 0.04);
+  --bew-shadow-edge-glow-2: inset 0 0 8px rgba(0, 0, 0, 0.06);
   // #endregion
 
   --bew-logo-color: var(--bew-theme-color);
@@ -161,6 +164,9 @@
     0 8px 10px -6px rgb(0 0 0 / 0.16);
   --bew-shadow-4: 0 34px 50px -20px rgb(0 0 0 / 0.44),
     0 32px 45px -12px rgb(0 0 0 / 0.3), 0 30px 40px -8px rgb(0 0 0 / 0.18);
+
+  --bew-shadow-edge-glow-1: inset 0 0 4px rgba(255, 255, 255, 0.06);
+  --bew-shadow-edge-glow-2: inset 0 0 8px rgba(255, 255, 255, 0.1);
   // #endregion
 
   --bew-logo-color: var(--bew-text-1);
