@@ -65,17 +65,25 @@ function handleExportSettings() {
           href="https://github.com/hakadao/BewlyBewly" target="_blank"
           p="y-2 x-4" flex items-center bg="black dark:white" un-text="!white dark:!black"
           rounded-12
-          w-95px
+          w-100px
         >
-          <tabler:brand-github mr-2 /> GitHub
+          <tabler:brand-github mr-2 shrink-0 /> GitHub
         </a>
         <a
           href="https://space.bilibili.com/5011356/dynamic" target="_blank"
           p="y-2 x-4" flex items-center bg="#fb7299 dark:#ffa7c0" un-text="!white dark:!black"
           rounded-12
-          w-95px
+          w-100px
         >
-          <tabler:brand-bilibili mr-2 /> Bilibili
+          <tabler:brand-bilibili mr-2 shrink-0 /> Bilibili
+        </a>
+        <a
+          href="https://discord.gg/TS6vgBmZVp" target="_blank"
+          p="y-2 x-4" flex items-center bg="#5866F2 dark:#a0a7f8" un-text="!white dark:!black"
+          rounded-12
+          w-100px
+        >
+          <tabler:brand-discord mr-2 shrink-0 /> Discord
         </a>
       </section>
       <section mt-4 flex="~ col gap-2 items-center">

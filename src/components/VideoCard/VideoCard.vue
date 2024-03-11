@@ -60,6 +60,13 @@ const authorJumpUrl = computed(() => {
     return ''
 })
 
+const wValue = computed((): string => {
+  if (props.horizontal)
+    return 'xl:280px lg:250px md:200px 200px'
+  else
+    return 'w-full'
+})
+
 const isDislike = ref<boolean>(false)
 const isInWatchLater = ref<boolean>(false)
 const isHover = ref<boolean>(false)
@@ -194,6 +201,10 @@ function handelMouseLeave() {
   <div
     relative
   >
+    <!-- By directly using predefined unocss width properties, it is possible to dynamically set the width attribute -->
+    <div hidden w="xl:280px lg:250px md:200px 200px" />
+    <div hidden w="full" />
+
     <div
       class="video-card group"
       :class="isDislike ? 'is-dislike' : ''"
@@ -208,10 +219,9 @@ function handelMouseLeave() {
       >
         <!-- Cover -->
         <div
-          :style="{ width: horizontal ? '300px' : '100%' }"
           class="group/cover"
           shrink-0
-          w="full" h-fit relative bg="$bew-fill-4" rounded="$bew-radius"
+          :w="wValue" h-fit relative bg="$bew-fill-4" rounded="$bew-radius"
           cursor-pointer
           duration-300 ease-in-out
           group-hover:z-2
@@ -379,7 +389,7 @@ function handelMouseLeave() {
                   rounded="$bew-radius"
                   style="
                     box-shadow: var(--bew-shadow-2);
-                    backdrop-filter: var(--bew-filter-glass);
+                    backdrop-filter: var(--bew-filter-glass-1);
                   "
                 >
                   <p p="2" text="$bew-text-3">
@@ -535,7 +545,10 @@ function handelMouseLeave() {
         mb-10 pointer-events-none select-none invisible
       >
         <!-- Cover -->
-        <div w-300px shrink-0 aspect-video h-fit rounded="$bew-radius" />
+        <div
+          :w="wValue"
+          shrink-0 aspect-video h-fit rounded="$bew-radius"
+        />
         <!-- Other Information -->
         <div
           w-full flex="~ gap-4"

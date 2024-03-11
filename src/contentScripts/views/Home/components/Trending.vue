@@ -1,11 +1,24 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
+import type { GridLayout } from '~/logic'
 import type { TrendingResult, List as VideoItem } from '~/models/video/trending'
+
+const props = defineProps<{
+  gridLayout: GridLayout
+}>()
 
 const emit = defineEmits<{
   (e: 'beforeLoading'): void
   (e: 'afterLoading'): void
 }>()
+
+const gridValue = computed((): string => {
+  if (props.gridLayout === 'adaptive')
+    return '~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-5'
+  if (props.gridLayout === 'twoColumns')
+    return '~ cols-1 xl:cols-2 gap-4'
+  return '~ cols-1 gap-4'
+})
 
 const videoList = reactive<VideoItem[]>([])
 const isLoading = ref<boolean>(false)
@@ -72,10 +85,15 @@ async function getTrendingVideos() {
 
 <template>
   <div>
+    <!-- By directly using predefined unocss grid properties, it is possible to dynamically set the grid attribute -->
+    <div hidden grid="~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-5" />
+    <div hidden grid="~ cols-1 xl:cols-2 gap-4" />
+    <div hidden grid="~ cols-1 gap-4" />
+
     <div
       ref="containerRef"
       m="b-0 t-0" relative w-full h-full
-      grid="~ cols-1 xl:cols-2 gap-4"
+      :grid="gridValue"
     >
       <VideoCard
         v-for="video in videoList"
@@ -95,13 +113,15 @@ async function getTrendingVideos() {
         :tag="video.rcmd_reason.content"
         :cid="video.cid"
         show-preview
-        horizontal
-        w-full
+        :horizontal="gridLayout !== 'adaptive'"
       />
 
       <!-- skeleton -->
       <template v-if="isLoading">
-        <VideoCardSkeleton v-for="item in 30" :key="item" horizontal />
+        <VideoCardSkeleton
+          v-for="item in 30" :key="item"
+          :horizontal="gridLayout !== 'adaptive'"
+        />
       </template>
     </div>
 

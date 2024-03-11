@@ -3,9 +3,9 @@
   --bew-radius: 12px;
   --bew-radius-half: calc(var(--bew-radius) / 2);
 
-  --bew-filter-glass: blur(20px) saturate(180%);
-  --bew-filter-icon-glow: saturate(0) brightness(2)
-    drop-shadow(0 0 0.2px white)
+  --bew-filter-glass-1: blur(20px) saturate(180%);
+  --bew-filter-glass-2: blur(40px) saturate(180%);
+  --bew-filter-icon-glow: saturate(0) brightness(2) drop-shadow(0 0 0.2px white)
     drop-shadow(0 0 0.5px var(--bew-theme-color))
     drop-shadow(0 0 0.5px var(--bew-theme-color))
     drop-shadow(0 0 0.5px var(--bew-theme-color))
@@ -20,11 +20,16 @@
     0 8px 10px -6px rgb(0 0 0 / 0.12);
   --bew-shadow-4: 0 34px 50px -20px rgb(0 0 0 / 0.16),
     0 32px 45px -12px rgb(0 0 0 / 0.14), 0 30px 40px -8px rgb(0 0 0 / 0.12);
+
+  --bew-shadow-edge-glow-1: inset 0 0 4px rgba(0, 0, 0, 0.04);
+  --bew-shadow-edge-glow-2: inset 0 0 8px rgba(0, 0, 0, 0.06);
   // #endregion
 
   --bew-logo-color: var(--bew-theme-color);
 
   // #region colors
+  --bew-theme-color-auto: var(--bew-theme-color);
+
   --bew-theme-color: rgb(0 161 214);
   --bew-theme-color-10: rgba(0 161 214 / 0.1);
   --bew-theme-color-20: rgba(0 161 214 / 0.2);
@@ -58,16 +63,16 @@
   --bew-success-color-80: rgba(110 231 183 / 0.8);
   --bew-success-color-90: rgba(110 231 183 / 0.9);
 
-  --bew-warning-color: rgb(250 204 21);
-  --bew-warning-color-10: rgba(250 204 21 / 0.1);
-  --bew-warning-color-20: rgba(250 204 21 / 0.2);
-  --bew-warning-color-30: rgba(250 204 21 / 0.3);
-  --bew-warning-color-40: rgba(250 204 21 / 0.4);
-  --bew-warning-color-50: rgba(250 204 21 / 0.5);
-  --bew-warning-color-60: rgba(250 204 21 / 0.6);
-  --bew-warning-color-70: rgba(250 204 21 / 0.7);
-  --bew-warning-color-80: rgba(250 204 21 / 0.8);
-  --bew-warning-color-90: rgba(250 204 21 / 0.9);
+  --bew-warning-color: rgb(217 178 22);
+  --bew-warning-color-10: rgba(217 178 22 / 0.1);
+  --bew-warning-color-20: rgba(217 178 22 / 0.2);
+  --bew-warning-color-30: rgba(217 178 22 / 0.3);
+  --bew-warning-color-40: rgba(217 178 22 / 0.4);
+  --bew-warning-color-50: rgba(217 178 22 / 0.5);
+  --bew-warning-color-60: rgba(217 178 22 / 0.6);
+  --bew-warning-color-70: rgba(217 178 22 / 0.7);
+  --bew-warning-color-80: rgba(217 178 22 / 0.8);
+  --bew-warning-color-90: rgba(217 178 22 / 0.9);
 
   --bew-error-color: rgb(219 65 108);
   --bew-error-color-10: rgba(219 65 108 / 0.1);
@@ -82,6 +87,8 @@
   // #endregion
 
   // #region text colors
+  --bew-text-auto: white;
+
   --bew-text-1: hsl(217 19% 10%);
   --bew-text-2: hsl(215 19% 24% / 80%);
   --bew-text-3: hsl(215 19% 28% / 60%);
@@ -95,14 +102,19 @@
     220 14% 96% / var(--bew-homepage-bg-mask-opacity)
   );
 
-  --bew-content-opacity: 0.6;
+  // Decrease the opacity in light mode to ensure the text can be seen clearly
+  --bew-content-opacity: 0.8;
 
   // #region content colors, used to buttons, cards, popover and so on
   --bew-content-1: hsl(0 0% 100% / var(--bew-content-opacity));
   --bew-content-1-hover: hsl(0 0% 85% / var(--bew-content-opacity));
+  --bew-content-2: hsl(0 0% 93% / var(--bew-content-opacity));
+  --bew-content-2-hover: hsl(0 0% 78% / var(--bew-content-opacity));
 
   --bew-content-solid-1: hsl(0 0% 100%);
   --bew-content-solid-1-hover: hsl(0 0% 85%);
+  --bew-content-solid-2: hsl(0 0% 93%);
+  --bew-content-solid-2-hover: hsl(0 0% 78%);
 
   --bew-elevated-1: hsl(0 0% 100% / var(--bew-content-opacity));
   --bew-elevated-1-hover: hsl(0 0% 85% / var(--bew-content-opacity));
@@ -126,6 +138,19 @@
   --bew-page-max-width: 2280px;
 }
 
+:host(.disable-frosted-glass),
+:root.disable-frosted-glass {
+  --bew-content-opacity: 1;
+  --bew-filter-glass-1: none;
+  --bew-filter-glass-2: none;
+}
+
+:host(.reduce-frosted-glass-blur),
+:root.reduce-frosted-glass-blur {
+  --bew-filter-glass-1: blur(10px) saturate(180%);
+  --bew-filter-glass-2: blur(20px) saturate(180%);
+}
+
 :host(.dark),
 :root.dark {
   // dark mode
@@ -139,10 +164,16 @@
     0 8px 10px -6px rgb(0 0 0 / 0.16);
   --bew-shadow-4: 0 34px 50px -20px rgb(0 0 0 / 0.44),
     0 32px 45px -12px rgb(0 0 0 / 0.3), 0 30px 40px -8px rgb(0 0 0 / 0.18);
+
+  --bew-shadow-edge-glow-1: inset 0 0 4px rgba(255, 255, 255, 0.06);
+  --bew-shadow-edge-glow-2: inset 0 0 8px rgba(255, 255, 255, 0.1);
   // #endregion
 
   --bew-logo-color: var(--bew-text-1);
 
+  --bew-theme-color-auto: white;
+
+  --bew-text-auto: black;
   --bew-text-1: hsl(215 19% 98%);
   --bew-text-2: hsl(215 19% 90% / 80%);
   --bew-text-3: hsl(215 19% 82% / 60%);
@@ -152,11 +183,17 @@
   --bew-homepage-bg: hsl(230 12% 6%);
   --bew-homepage-bg-mask: hsl(230 12% 6% / var(--bew-homepage-bg-mask-opacity));
 
+  --bew-content-opacity: 0.6;
+
   --bew-content-1: hsl(230 12% 12% / var(--bew-content-opacity));
   --bew-content-1-hover: hsl(230 12% 28% / var(--bew-content-opacity));
+  --bew-content-2: hsl(230 12% 20% / var(--bew-content-opacity));
+  --bew-content-2-hover: hsl(230 12% 36% / var(--bew-content-opacity));
 
   --bew-content-solid-1: hsl(230 12% 12%);
   --bew-content-solid-1-hover: hsl(230 12% 28%);
+  --bew-content-solid-2: hsl(230 12% 20%);
+  --bew-content-solid-2-hover: hsl(230 12% 36%);
 
   --bew-elevated-1: hsl(230 12% 15% / var(--bew-content-opacity));
   --bew-elevated-1-hover: hsl(230 12% 31% / var(--bew-content-opacity));
@@ -215,8 +252,8 @@
   --pay_yellow: var(--Ye5);
   --pay_yellow_thin: var(--Ye1);
   --bg1: var(--bew-bg);
-  --bg2: var(--bew-content-solid-1);
-  --bg3: var(--bew-content-solid-1);
+  --bg2: var(--bew-content-solid-2);
+  --bg3: var(--bew-content-solid-2);
   --bg1_float: var(--bew-elevated-solid-1);
   --bg2_float: var(--bew-elevated-solid-2);
   --text_white: var(--Wh0_u);
@@ -231,7 +268,7 @@
   --line_bold: var(--bew-fill-3);
   --graph_white: var(--bew-content-solid-1);
   --graph_bg_thin: var(--bew-content-solid-1);
-  --graph_bg_regular: var(--bew-elevated-solid-1);
+  --graph_bg_regular: var(--bew-content-solid-1);
   --graph_bg_thick: var(--bew-elevated-solid-2);
   --graph_weak: var(--Ga3);
   --graph_medium: var(--Ga5);

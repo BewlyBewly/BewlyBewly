@@ -44,8 +44,6 @@ const isSearchPage = computed(() => {
 const isTopBarFixed = computed(() => {
   if (
     isHomePage()
-    // // search page
-    // || /https?:\/\/search.bilibili.com\/.*$/.test(location.href)
     // video page
     || /https?:\/\/(www.)?bilibili.com\/(video|list)\/.*/.test(location.href)
     // anime playback & movie page
@@ -98,10 +96,20 @@ watch(() => settings.value.blockAds, () => {
   handleBlockAds()
 })
 
+watch(() => settings.value.disableFrostedGlass, () => {
+  handleDisableFrostedGlass()
+})
+
+watch(() => settings.value.reduceFrostedGlassBlur, () => {
+  handleReduceFrostedGlassBlur()
+})
+
 onBeforeMount(() => {
-  handleBlockAds()
   setAppThemeColor()
   handleAdaptToOtherPageStylesChange()
+  handleBlockAds()
+  handleDisableFrostedGlass()
+  handleReduceFrostedGlassBlur()
 })
 
 onMounted(() => {
@@ -252,6 +260,38 @@ function handleBlockAds() {
     document.documentElement.classList.remove('block-ads')
 }
 
+function handleDisableFrostedGlass() {
+  const bewlyElement = document.querySelector('#bewly') as HTMLElement
+  if (settings.value.disableFrostedGlass) {
+    if (bewlyElement)
+      bewlyElement.classList.add('disable-frosted-glass')
+
+    document.documentElement.classList.add('disable-frosted-glass')
+  }
+  else {
+    if (bewlyElement)
+      bewlyElement.classList.remove('disable-frosted-glass')
+
+    document.documentElement.classList.remove('disable-frosted-glass')
+  }
+}
+
+function handleReduceFrostedGlassBlur() {
+  const bewlyElement = document.querySelector('#bewly') as HTMLElement
+  if (settings.value.reduceFrostedGlassBlur) {
+    if (bewlyElement)
+      bewlyElement.classList.add('reduce-frosted-glass-blur')
+
+    document.documentElement.classList.add('reduce-frosted-glass-blur')
+  }
+  else {
+    if (bewlyElement)
+      bewlyElement.classList.remove('reduce-frosted-glass-blur')
+
+    document.documentElement.classList.remove('reduce-frosted-glass-blur')
+  }
+}
+
 // fix #166 https://github.com/hakadao/BewlyBewly/issues/166
 // function openVideoPageIfBvidExists() {
 // Assume the URL is https://www.bilibili.com/?bvid=BV1be41127ft&spm_id_from=333.788.seo.out
@@ -323,9 +363,12 @@ provide<BewlyAppProvider>('BEWLY_APP', {
               || activatedPage !== AppPage.Home && activatedPage !== AppPage.Search
             )
             || settings.useOriginalBilibiliHomepage"
-          :show-logo="showTopBarMask && settings.useSearchPageModeOnHomePage
-            || (!settings.useSearchPageModeOnHomePage || activatedPage !== AppPage.Home)
-            || settings.useOriginalBilibiliHomepage"
+          :show-logo="settings.alwaysShowTheTopBarLogoOnSearchPageMode
+            || (
+              showTopBarMask && settings.useSearchPageModeOnHomePage
+              || (!settings.useSearchPageModeOnHomePage || activatedPage !== AppPage.Home)
+              || settings.useOriginalBilibiliHomepage
+            )"
           :mask="showTopBarMask"
           pos="fixed top-0 left-0" z="99 hover:1001" w-full
         />

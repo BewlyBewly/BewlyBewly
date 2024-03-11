@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
+import type { GridLayoutIcon } from './types'
 import { HomeSubPage } from './types'
 import emitter from '~/utils/mitt'
-import { settings } from '~/logic'
+import { homePageGridLayout, settings } from '~/logic'
 import { delay } from '~/utils/main'
 import type { HomeTab } from '~/stores/mainStore'
 import { useMainStore } from '~/stores/mainStore'
@@ -21,8 +22,15 @@ const pages = {
 const showSearchPageMode = ref<boolean>(false)
 const shouldMoveTabsUp = ref<boolean>(false)
 const tabContentLoading = ref<boolean>(false)
-
 const currentTabs = ref<HomeTab[]>([])
+
+const gridLayoutIcons = computed((): GridLayoutIcon[] => {
+  return [
+    { icon: 'f7:square-grid-3x2', iconActivated: 'f7:square-grid-3x2-fill', value: 'adaptive' },
+    { icon: 'f7:rectangle-grid-2x2', iconActivated: 'f7:rectangle-grid-2x2-fill', value: 'twoColumns' },
+    { icon: 'f7:rectangle-grid-1x2', iconActivated: 'f7:rectangle-grid-1x2-fill', value: 'oneColumn' },
+  ]
+})
 
 watch(() => activatedPage.value, () => {
   handleBackToTop(settings.value.useSearchPageModeOnHomePage ? 510 : 0)
@@ -171,17 +179,18 @@ function toggleTabContentLoading(loading: boolean) {
       </Transition>
 
       <header
-        pos="sticky top-80px" w-fit z-9 mb-9 duration-300
-        ease-in-out
+        pos="sticky top-80px" w-full z-9 mb-9 duration-300
+        ease-in-out flex="~ justify-between items-center gap-4"
         :class="{ hide: shouldMoveTabsUp }"
       >
         <ul flex="~ items-center gap-3 wrap">
           <li
             v-for="tab in currentTabs" :key="tab.page"
-            px-4 lh-35px bg="$bew-elevated-1 hover:$bew-elevated-1-hover" backdrop-glass rounded="$bew-radius"
+            :class="{ 'tab-activated': activatedPage === tab.page }"
+            style="backdrop-filter: var(--bew-filter-glass-1)"
+            px-4 lh-35px bg="$bew-elevated-1 hover:$bew-elevated-1-hover" rounded="$bew-radius"
             cursor-pointer shadow="$bew-shadow-1" box-border border="1 $bew-border-color" duration-300
             flex="~ gap-2 items-center"
-            :class="{ 'tab-activated': activatedPage === tab.page }"
             @click="handleChangeTab(tab)"
           >
             <span class="text-center">{{ $t(tab.i18nKey) }}</span>
@@ -195,12 +204,31 @@ function toggleTabContentLoading(loading: boolean) {
             />
           </li>
         </ul>
+
+        <div
+          style="backdrop-filter: var(--bew-filter-glass-1)"
+          flex="~ gap-1" p-1 h-35px bg="$bew-elevated-1"
+          rounded="$bew-radius" shadow="$bew-shadow-1" box-border border="1 $bew-border-color"
+        >
+          <Icon
+            v-for="icon in gridLayoutIcons" :key="icon.value"
+            :icon="homePageGridLayout === icon.value ? icon.iconActivated : icon.icon"
+            :style="{
+              backgroundColor: homePageGridLayout === icon.value ? 'var(--bew-theme-color-auto)' : '',
+              color: homePageGridLayout === icon.value ? 'var(--bew-text-auto)' : 'unset',
+            }"
+            w-full
+            h-full p="x-2 y-1" rounded="$bew-radius-half" bg="hover:$bew-fill-2" duration-300
+            cursor-pointer @click="homePageGridLayout = icon.value"
+          />
+        </div>
       </header>
 
       <Transition name="page-fade">
         <KeepAlive include="ForYou">
           <Component
             :is="pages[activatedPage]" :key="activatedPage"
+            :grid-layout="homePageGridLayout"
             @before-loading="toggleTabContentLoading(true)"
             @after-loading="toggleTabContentLoading(false)"
           />
@@ -241,7 +269,7 @@ function toggleTabContentLoading(loading: boolean) {
 }
 
 .tab-activated {
-  --at-apply: bg-$bew-theme-color dark:bg-white color-white dark:color-black
+  --at-apply: bg-$bew-theme-color-auto text-$bew-text-auto
     border-$bew-theme-color dark:border-white;
 }
 </style>

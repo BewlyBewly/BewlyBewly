@@ -37,6 +37,7 @@ settings:
 
   # Settings group
   group_common: 通用
+  group_performance: 效能
   group_topbar: 頂欄
   group_dock: Dock
   group_color: 顏色
@@ -68,7 +69,14 @@ settings:
   enable_video_ctrl_bar_on_video_card: 在影片卡片上顯示影片控制欄
   hover_video_card_delayed: 將滑鼠懸停在影片卡片上時延遲影片預覽
   block_ads: 封鎖廣告
+  disable_frosted_glass: 停用毛玻璃效果
+  reduce_frosted_glass_blur: 降低毛玻璃模糊強度
   auto_hide_topbar: 自動隱藏頂欄
+  topbar_icon_badges: 圖示標記樣式
+  topbar_icon_badges_opt:
+    number: 數字
+    dot: 圓點
+    none: 不顯示
   dock_position: Dock 位置
   dock_position_desc: 螢幕上的位置
   dock_position_opt:
@@ -78,6 +86,7 @@ settings:
   auto_hide_dock: 自動隱藏 Dock
   dock_content_adjustment: Dock 內容調整
   dock_content_adjustment_desc: 第一個啓用的 Dock 項目的頁面將是起始頁面
+  always_show_the_top_bar_logo: 永遠顯示頂欄 Logo
 
   # Appearance
   theme: 主題

@@ -37,6 +37,7 @@ settings:
 
   # Settings group
   group_common: 通用
+  group_performance: 性能
   group_topbar: 顶栏
   group_dock: Dock 栏
   group_color: 颜色
@@ -68,7 +69,14 @@ settings:
   enable_video_ctrl_bar_on_video_card: 在视频卡片上显示视频控制栏
   hover_video_card_delayed: 将鼠标悬停在视频卡片上时延迟视频预览
   block_ads: 屏蔽广告
+  disable_frosted_glass: 禁用毛玻璃效果
+  reduce_frosted_glass_blur: 降低毛玻璃模糊强度
   auto_hide_topbar: 自动隐藏顶栏
+  topbar_icon_badges: 图标角标
+  topbar_icon_badges_opt:
+    number: 数字
+    dot: 圆点
+    none: 不显示
   dock_position: Dock 栏位置
   dock_position_desc: 在屏幕中摆放位置
   dock_position_opt:
@@ -127,6 +135,7 @@ settings:
   search_page_mode_wallpaper_fixed: 将搜索页模式的壁纸固定
   home_tabs_adjustment: 标签栏调整
   home_tabs_adjustment_desc: 第一个激活的标签项是默认界面
+  always_show_the_top_bar_logo: 总是显示顶栏 Logo
 
   # Compatibility
   # Common

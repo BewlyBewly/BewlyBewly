@@ -333,7 +333,7 @@ async function handleClearSearchHistory() {
   @mixin card-content {
     --at-apply: text-base outline-none w-full
       bg-$b-search-bar-color shadow-$bew-shadow-2;
-    backdrop-filter: var(--bew-filter-glass);
+    backdrop-filter: var(--bew-filter-glass-1);
   }
 
   .search-bar {

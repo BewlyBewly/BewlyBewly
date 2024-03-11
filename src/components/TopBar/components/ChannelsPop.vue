@@ -44,7 +44,8 @@ const genres = [
 
 <template>
   <div
-    backdrop-glass shadow="$bew-shadow-3"
+    style="backdrop-filter: var(--bew-filter-glass-1);"
+    shadow="$bew-shadow-3"
     flex="~"
     p="4"
     bg="$bew-elevated-1"

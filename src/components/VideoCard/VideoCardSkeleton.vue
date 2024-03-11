@@ -1,8 +1,15 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   horizontal?: boolean
   hasTag?: boolean
 }>()
+
+const wValue = computed((): string => {
+  if (props.horizontal)
+    return 'xl:280px lg:250px md:200px 200px'
+  else
+    return 'w-full'
+})
 </script>
 
 <template>
@@ -40,9 +47,13 @@ defineProps<{
     flex="~ gap-6"
     mb-10 pointer-events-none select-none
   >
+    <!-- By directly using predefined unocss width properties, it is possible to dynamically set the width attribute -->
+    <div hidden w="xl:280px lg:250px md:200px 200px" />
+    <div hidden w="full" />
+
     <!-- Cover -->
     <div
-      :style="{ width: '300px' }" shrink-0 aspect-video h-fit bg="$bew-fill-4"
+      :w="wValue" shrink-0 aspect-video h-fit bg="$bew-fill-4"
       rounded="$bew-radius"
     />
     <!-- Other Information -->

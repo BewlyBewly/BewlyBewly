@@ -117,15 +117,20 @@ function setCurrentTitle() {
       flex justify-between items-center
     >
       <aside
-        class="group" shrink-0 p="x-4" pos="absolute left--42px" z-2
+        class="group"
         :style="{
           pointerEvents: preventCloseSettings ? 'none' : 'unset',
         }"
+        shrink-0 p="x-4" pos="absolute left--84px" z-2
       >
         <ul
-          flex="~ gap-2 col" rounded="30px hover:25px" bg="$bew-elevated-2" p-2 shadow="$bew-shadow-3"
+          style="
+            --un-shadow: var(--bew-shadow-4), var(--bew-shadow-edge-glow-2);
+            backdrop-filter: var(--bew-filter-glass-2);
+          "
+          flex="~ gap-2 col" rounded="30px hover:25px" bg="$bew-elevated-1 hover:$bew-elevated-2" p-2 shadow
           scale="group-hover:105" duration-300 overflow-hidden antialiased
-          backdrop-glass
+          border="1 $bew-border-color"
         >
           <!-- mask -->
           <div v-if="preventCloseSettings" pos="absolute top-0 left-0" w-full h-full bg="black opacity-20 dark:opacity-40" />
@@ -156,22 +161,25 @@ function setCurrentTitle() {
 
       <div
         class="settings-content"
-        relative overflow="x-hidde" w-full h-full bg="$bew-elevated-solid-1"
-        shadow="$bew-shadow-4" rounded="$bew-radius"
+        style="
+          --un-shadow: var(--bew-shadow-4), var(--bew-shadow-edge-glow-2);
+          backdrop-filter: var(--bew-filter-glass-2);
+        "
+        relative overflow="x-hidde" w-full h-full bg="$bew-elevated-1"
+        shadow rounded="$bew-radius"
       >
         <OverlayScrollbarsComponent ref="scrollbarRef" element="div" h-inherit defer>
           <header
             flex justify-between items-center w-full h-80px
-            pos="sticky top-0 left-0" p="x-12"
+            pos="sticky top-0 left-0" p="x-11"
             z-1 rounded="t-$bew-radius"
             style="
-            background: linear-gradient(var(--bew-elevated-solid-1), transparent);
-            text-shadow: 0 0 15px var(--bew-elevated-solid-1), 0 0 20px var(--bew-elevated-solid-1)
-          "
+              text-shadow: 0 0 15px var(--bew-elevated-solid-1), 0 0 20px var(--bew-elevated-solid-1)
+            "
           >
             <!-- Mask -->
             <div
-              pos="absolute top-0 left-0" w-inherit h-inherit backdrop="blur-6px" pointer-events-none
+              pos="absolute top-0 left-0" w-inherit h-inherit pointer-events-none
               style="mask-image: linear-gradient(to bottom,  black 70%, transparent);"
               z--1 rounded-inherit
             />
@@ -179,8 +187,9 @@ function setCurrentTitle() {
               {{ title }}
             </div>
             <div
+              style="backdrop-filter: var(--bew-filter-glass-1)"
               text-2xl leading-0 bg="$bew-fill-1 hover:$bew-theme-color-30" w="32px" h="32px"
-              p="1" rounded-8 cursor="pointer" backdrop-glass
+              p="1" rounded-8 cursor="pointer"
               hover:ring="2 $bew-theme-color" hover:text="$bew-theme-color" duration-300
               @click="handleClose"
             >
@@ -188,7 +197,7 @@ function setCurrentTitle() {
             </div>
           </header>
 
-          <main pos="absolute top-80px left-0" w-full min-h="[calc(100%-80px)]" p="x-13 b-8">
+          <main pos="absolute top-80px left-0" w-full min-h="[calc(100%-80px)]" p="x-12 b-8">
             <!-- <div h-80px mt--8 /> -->
 
             <Transition name="page-fade">

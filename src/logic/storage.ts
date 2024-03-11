@@ -14,7 +14,10 @@ export interface Settings {
   enableVideoCtrlBarOnVideoCard: boolean
   hoverVideoCardDelayed: boolean
   autoHideTopBar: boolean
+  topBarIconBadges: 'number' | 'dot' | 'none'
   blockAds: boolean
+  disableFrostedGlass: boolean
+  reduceFrostedGlassBlur: boolean
   dockPosition: 'left' | 'right' | 'bottom'
   autoHideDock: boolean
   dockItemVisibilityList: { page: AppPage, visible: boolean }[]
@@ -41,9 +44,10 @@ export interface Settings {
   searchPageWallpaperBlurIntensity: number
 
   recommendationMode: 'web' | 'app'
+  homePageTabVisibilityList: { page: HomeSubPage, visible: boolean }[]
   useSearchPageModeOnHomePage: boolean
   searchPageModeWallpaperFixed: boolean
-  homePageTabVisibilityList: { page: HomeSubPage, visible: boolean }[]
+  alwaysShowTheTopBarLogoOnSearchPageMode: boolean
 
   adaptToOtherPageStyles: boolean
   showTopBar: boolean
@@ -56,9 +60,12 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   enableVideoCtrlBarOnVideoCard: false,
   hoverVideoCardDelayed: false,
   autoHideTopBar: false,
+  topBarIconBadges: 'number',
   dockPosition: 'right',
   autoHideDock: false,
   blockAds: false,
+  disableFrostedGlass: false,
+  reduceFrostedGlassBlur: false,
   dockItemVisibilityList: [],
 
   theme: 'auto',
@@ -83,11 +90,15 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   searchPageWallpaperBlurIntensity: 0,
 
   recommendationMode: 'web',
+  homePageTabVisibilityList: [],
   useSearchPageModeOnHomePage: false,
   searchPageModeWallpaperFixed: false,
-  homePageTabVisibilityList: [],
+  alwaysShowTheTopBarLogoOnSearchPageMode: false,
 
   adaptToOtherPageStyles: true,
   showTopBar: true,
   useOriginalBilibiliHomepage: false,
 }), { mergeDefaults: true })
+
+export type GridLayout = 'adaptive' | 'twoColumns' | 'oneColumn'
+export const homePageGridLayout = useStorageLocal('homePageGridLayout', ref<GridLayout>('adaptive'), { mergeDefaults: true })

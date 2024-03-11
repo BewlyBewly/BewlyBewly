@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineProps<{
-  title: string
+  title?: string
   desc?: string
 }>()
 </script>
@@ -15,8 +15,8 @@ defineProps<{
     </p>
 
     <main
-      border="1 solid $bew-border-color" mt-2 px-4 mx--4 rounded="$bew-radius"
-      bg="dark:$bew-fill-1"
+      mt-2 px-4 mx--4 rounded="$bew-radius"
+      bg="$bew-fill-1"
     >
       <slot />
     </main>

@@ -9,7 +9,6 @@ const emit = defineEmits(['refresh', 'back-to-top'])
   >
     <Button
       size="small"
-      backdrop-glass
       center
       style="
         --b-button-width: 45px;
@@ -20,6 +19,7 @@ const emit = defineEmits(['refresh', 'back-to-top'])
         --b-button-shadow: var(--bew-shadow-1);
         --b-button-shadow-hover: var(--bew-shadow-2);
         --b-button-shadow-active: var(--bew-shadow-1);
+        backdrop-filter: var(--bew-filter-glass-1);
       "
       @click="showRefreshButton ? emit('refresh') : emit('back-to-top')"
     >

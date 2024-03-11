@@ -279,9 +279,12 @@ defineExpose({
       <!-- Top bar mask -->
       <div
         v-if="mask"
-        pos="absolute top-0 left-0" w-full h-80px backdrop="blur-15px"
+        style="
+          mask-image: linear-gradient(to bottom,  black 40%, transparent);
+          backdrop-filter:var(--bew-filter-glass-1)
+        "
+        pos="absolute top-0 left-0" w-full h-80px
         pointer-events-none
-        style="mask-image: linear-gradient(to bottom,  black 40%, transparent);"
       />
       <Transition name="fade">
         <div
@@ -307,7 +310,8 @@ defineExpose({
               v-if="showLogo"
               ref="logo" href="//www.bilibili.com"
               class="group logo"
-              flex items-center backdrop-glass border="1 $bew-border-color"
+              style="backdrop-filter: var(--bew-filter-glass-1)"
+              flex items-center border="1 $bew-border-color"
               rounded="50px" p="x-4" shadow="$bew-shadow-2" duration-300
               bg="$bew-elevated-1 hover:$bew-theme-color dark-hover:white"
               w-auto h-50px
@@ -361,7 +365,7 @@ defineExpose({
         flex="inline xl:1 justify-center items-center"
       >
         <div
-          style="backdrop-filter: var(--bew-filter-glass)"
+          style="backdrop-filter: var(--bew-filter-glass-1)"
           ml-auto flex h-55px p-2 bg="$bew-elevated-1"
           text="$bew-text-1" border="1 $bew-border-color" rounded-full shadow="$bew-shadow-2"
         >
@@ -448,9 +452,18 @@ defineExpose({
                 @mouseenter="showNotificationsPop = true"
                 @mouseleave="showNotificationsPop = false"
               >
-                <div v-if="unReadMessageCount !== 0" class="unread-message">
-                  {{ unReadMessageCount > 999 ? '999+' : unReadMessageCount }}
-                </div>
+                <template v-if="unReadMessageCount !== 0">
+                  <div
+                    v-if="settings.topBarIconBadges === 'number'"
+                    class="unread-message"
+                  >
+                    {{ unReadMessageCount > 999 ? '999+' : unReadMessageCount }}
+                  </div>
+                  <div
+                    v-else-if="settings.topBarIconBadges === 'dot'"
+                    w-8px h-8px bg="$bew-theme-color" rounded-8px pos="absolute right-0 top-0"
+                  />
+                </template>
                 <a
                   href="https://message.bilibili.com"
                   :target="isHomePage() ? '_blank' : '_self'"
@@ -474,9 +487,18 @@ defineExpose({
                 @mouseenter="showMomentsPop = true"
                 @mouseleave="showMomentsPop = false"
               >
-                <div v-if="newMomentsCount !== 0" class="unread-message">
-                  {{ newMomentsCount > 999 ? '999+' : newMomentsCount }}
-                </div>
+                <template v-if="unReadMessageCount !== 0">
+                  <div
+                    v-if="settings.topBarIconBadges === 'number'"
+                    class="unread-message"
+                  >
+                    {{ newMomentsCount > 999 ? '999+' : newMomentsCount }}
+                  </div>
+                  <div
+                    v-else-if="settings.topBarIconBadges === 'dot'"
+                    w-8px h-8px bg="$bew-theme-color" rounded-8px pos="absolute right-0 top-0"
+                  />
+                </template>
                 <a
                   href="https://t.bilibili.com"
                   :target="isHomePage() ? '_blank' : '_self'"
