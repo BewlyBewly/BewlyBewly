@@ -452,7 +452,7 @@ defineExpose({
                 @mouseenter="showNotificationsPop = true"
                 @mouseleave="showNotificationsPop = false"
               >
-                <template v-if="unReadMessageCount !== 0">
+                <template v-if="unReadMessageCount > 0">
                   <div
                     v-if="settings.topBarIconBadges === 'number'"
                     class="unread-message"
@@ -487,7 +487,7 @@ defineExpose({
                 @mouseenter="showMomentsPop = true"
                 @mouseleave="showMomentsPop = false"
               >
-                <template v-if="unReadMessageCount !== 0">
+                <template v-if="newMomentsCount > 0">
                   <div
                     v-if="settings.topBarIconBadges === 'number'"
                     class="unread-message"

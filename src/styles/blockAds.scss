@@ -1,4 +1,6 @@
-.block-ads {
+// Do not use the "ads" keyword. AdGuard, AdBlock, and some ad-blocking extensions will
+// detect and remove it when the class name contains "ads"
+.block-useless-contents {
   // 原版首頁最右則推介內容
   .floor-single-card,
   // 首頁不能使用不感興趣的影片都當廣告殺了
@@ -16,7 +18,7 @@
   }
 
   // 首頁推介頂部卡片間距調整
-  .recommended-container_floor-aside .container>*:nth-of-type(n + 8) {
+  .recommended-container_floor-aside .container > *:nth-of-type(n + 8) {
     margin-top: 0px !important;
     margin-bottom: 24px;
   }

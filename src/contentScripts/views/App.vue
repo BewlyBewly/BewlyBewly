@@ -254,10 +254,12 @@ function handleOsScroll() {
 }
 
 function handleBlockAds() {
+  // Do not use the "ads" keyword. AdGuard, AdBlock, and some ad-blocking extensions will
+  // detect and remove it when the class name contains "ads"
   if (settings.value.blockAds)
-    document.documentElement.classList.add('block-ads')
+    document.documentElement.classList.add('block-useless-contents')
   else
-    document.documentElement.classList.remove('block-ads')
+    document.documentElement.classList.remove('block-useless-contents')
 }
 
 function handleDisableFrostedGlass() {

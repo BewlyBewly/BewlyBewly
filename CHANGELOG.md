@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.15.1](https://github.com/hakadao/BewlyBewly/compare/v0.15.0...v0.15.1) (2024-03-11)
+
+
+### Bug Fixes
+
+* resolve issue when using ad-blocking extensions blocks entire page ([#375](https://github.com/hakadao/BewlyBewly/issues/375)) ([30ec6ab](https://github.com/hakadao/BewlyBewly/commit/30ec6abba04e1a1b489d39326f4e6300f9fec599))
+* **TopBar:** moments icon badges show the 0 ([#376](https://github.com/hakadao/BewlyBewly/issues/376)) ([bf7309d](https://github.com/hakadao/BewlyBewly/commit/bf7309d320c855aaab516e26086b76dd5492c5e1))
+
 ## [0.15.0](https://github.com/hakadao/BewlyBewly/compare/v0.14.9...v0.15.0) (2024-03-10)
 
 
