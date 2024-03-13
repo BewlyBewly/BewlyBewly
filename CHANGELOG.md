@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.15.2](https://github.com/hakadao/BewlyBewly/compare/v0.15.1...v0.15.2) (2024-03-13)
+
+
+### Bug Fixes
+
+* correct frosted glass disablement not working in several cases and adjust opacity ([6562da5](https://github.com/hakadao/BewlyBewly/commit/6562da51e06f0df970a50b2a555b960933203f06))
+* resolve issue when using ad-blocking extensions blocks entire page ([#375](https://github.com/hakadao/BewlyBewly/issues/375)) ([5f60bc4](https://github.com/hakadao/BewlyBewly/commit/5f60bc4b4725617376e810fb6a35fe96a3315310))
+* **TopBar:** moments icon badges show the 0 ([#376](https://github.com/hakadao/BewlyBewly/issues/376)) ([a234881](https://github.com/hakadao/BewlyBewly/commit/a23488114e8dd134cf8df4ae434fff02d2b3d21d))
+
+
+### Style Changes
+
+* **Dock:** adjust dock styles ([cac5c98](https://github.com/hakadao/BewlyBewly/commit/cac5c987b9c821c7894da73144e60d9f5054c7b2))
+
 ## [0.15.1](https://github.com/hakadao/BewlyBewly/compare/v0.15.0...v0.15.1) (2024-03-11)
 
 
