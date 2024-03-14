@@ -269,6 +269,8 @@ function handleDisableFrostedGlass() {
       bewlyElement.classList.add('disable-frosted-glass')
 
     document.documentElement.classList.add('disable-frosted-glass')
+
+    settings.value.reduceFrostedGlassBlur = false
   }
   else {
     if (bewlyElement)
