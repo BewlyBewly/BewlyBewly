@@ -63,16 +63,16 @@
   --bew-success-color-80: rgba(110 231 183 / 0.8);
   --bew-success-color-90: rgba(110 231 183 / 0.9);
 
-  --bew-warning-color: rgb(217 178 22);
-  --bew-warning-color-10: rgba(217 178 22 / 0.1);
-  --bew-warning-color-20: rgba(217 178 22 / 0.2);
-  --bew-warning-color-30: rgba(217 178 22 / 0.3);
-  --bew-warning-color-40: rgba(217 178 22 / 0.4);
-  --bew-warning-color-50: rgba(217 178 22 / 0.5);
-  --bew-warning-color-60: rgba(217 178 22 / 0.6);
-  --bew-warning-color-70: rgba(217 178 22 / 0.7);
-  --bew-warning-color-80: rgba(217 178 22 / 0.8);
-  --bew-warning-color-90: rgba(217 178 22 / 0.9);
+  --bew-warning-color: rgb(243 199 27);
+  --bew-warning-color-10: rgba(243 199 27 / 0.1);
+  --bew-warning-color-20: rgba(243 199 27 / 0.2);
+  --bew-warning-color-30: rgba(243 199 27 / 0.3);
+  --bew-warning-color-40: rgba(243 199 27 / 0.4);
+  --bew-warning-color-50: rgba(243 199 27 / 0.5);
+  --bew-warning-color-60: rgba(243 199 27 / 0.6);
+  --bew-warning-color-70: rgba(243 199 27 / 0.7);
+  --bew-warning-color-80: rgba(243 199 27 / 0.8);
+  --bew-warning-color-90: rgba(243 199 27 / 0.9);
 
   --bew-error-color: rgb(219 65 108);
   --bew-error-color-10: rgba(219 65 108 / 0.1);
@@ -102,7 +102,6 @@
     220 14% 96% / var(--bew-homepage-bg-mask-opacity)
   );
 
-  // Decrease the opacity in light mode to ensure the text can be seen clearly
   --bew-content-opacity: 0.8;
 
   // #region content colors, used to buttons, cards, popover and so on
@@ -138,19 +137,6 @@
   --bew-page-max-width: 2280px;
 }
 
-:host(.disable-frosted-glass),
-:root.disable-frosted-glass {
-  --bew-content-opacity: 1;
-  --bew-filter-glass-1: none;
-  --bew-filter-glass-2: none;
-}
-
-:host(.reduce-frosted-glass-blur),
-:root.reduce-frosted-glass-blur {
-  --bew-filter-glass-1: blur(10px) saturate(180%);
-  --bew-filter-glass-2: blur(20px) saturate(180%);
-}
-
 :host(.dark),
 :root.dark {
   // dark mode
@@ -183,8 +169,6 @@
   --bew-homepage-bg: hsl(230 12% 6%);
   --bew-homepage-bg-mask: hsl(230 12% 6% / var(--bew-homepage-bg-mask-opacity));
 
-  --bew-content-opacity: 0.6;
-
   --bew-content-1: hsl(230 12% 12% / var(--bew-content-opacity));
   --bew-content-1-hover: hsl(230 12% 28% / var(--bew-content-opacity));
   --bew-content-2: hsl(230 12% 20% / var(--bew-content-opacity));
@@ -211,6 +195,19 @@
   --bew-fill-4: rgb(131 131 145 / 44%);
 
   --bew-border-color: rgb(131 131 145 / 26%);
+}
+
+:host(.disable-frosted-glass),
+:root.disable-frosted-glass {
+  --bew-content-opacity: 1;
+  --bew-filter-glass-1: none;
+  --bew-filter-glass-2: none;
+}
+
+:host(.reduce-frosted-glass-blur),
+:root.reduce-frosted-glass-blur {
+  --bew-filter-glass-1: blur(10px) saturate(180%);
+  --bew-filter-glass-2: blur(20px) saturate(180%);
 }
 
 :root.bewly-design {
