@@ -190,7 +190,7 @@ function toggleDockHide(hide: boolean) {
       <template v-for="dockItem in currentDockItems" :key="dockItem.page">
         <Tooltip :content="$t(dockItem.i18nKey)" :placement="tooltipPlacement">
           <button
-            class="dock-item"
+            class="dock-item group"
             :class="{ active: activatedPage === dockItem.page }"
             @click="emit('change-page', dockItem.page)"
           >
@@ -297,9 +297,10 @@ function toggleDockHide(hide: boolean) {
 }
 
 .dock-item {
-  --shadow-dark: 0 0 30px 4px rgba(255, 255, 255, 0.6);
-  --shadow-active: 0 0 20px var(--bew-theme-color-50);
-  --shadow-dark-active: 0 0 20px rgba(255, 255, 255, 0.6);
+  --shadow-dark: 0 4px 30px 4px rgba(255, 255, 255, 0.6);
+  --shadow-active: 0 4px 30px var(--bew-theme-color-70);
+  --shadow-dark-active: 0 4px 20px rgba(255, 255, 255, 0.6);
+  --shadow-active-active: 0 4px 20px var(--bew-theme-color-70);
 
   --at-apply: transform active:scale-90
     md:w-45px w-35px
@@ -307,25 +308,25 @@ function toggleDockHide(hide: boolean) {
     p-0 flex items-center justify-center
     aspect-square relative
     leading-0 duration-300
-    rounded-60px
-    bg-$bew-content-1 dark:bg-$bew-fill-1 cursor-pointer
-    hover:bg-$bew-fill-3 dark-hover:bg-$bew-fill-3 hover:scale-110
+    rounded-60px antialiased
+    bg-$bew-content-1 hover:bg-$bew-fill-2 cursor-pointer
+    dark:bg-$bew-fill-1 dark-hover:bg-$bew-fill-4 hover:scale-110
     active:important-scale-100;
 
-  box-shadow: var(--bew-shadow-edge-glow-1), 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-1);
+
+  &:hover {
+    box-shadow: var(--bew-shadow-edge-glow-1), 0 0 0 2px var(--bew-fill-2), var(--bew-shadow-2);
+  }
 
   &.active {
     --at-apply: important-bg-$bew-theme-color-auto text-$bew-text-auto
       shadow-$shadow-active  dark:shadow-$shadow-dark
-      active:shadow-$shadow-active dark-active:shadow-$shadow-dark-active;
+      active:shadow-$shadow-active-active dark-active:shadow-$shadow-dark-active;
   }
 
   svg {
     --at-apply: md:w-22px w-18px md:h-22px h-18px block align-middle;
   }
-}
-
-.dark .dock-item {
-  box-shadow: var(--bew-shadow-edge-glow-1), 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 </style>
