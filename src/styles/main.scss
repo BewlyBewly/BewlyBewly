@@ -1,10 +1,10 @@
-* {
+.bewly-design * {
   outline-color: var(--bew-theme-color-80);
   outline-width: 2px;
   outline-offset: -2px;
 }
 
-.dark * {
+.bewly-design.dark * {
   color-scheme: dark;
 }
 
@@ -30,7 +30,7 @@ html.bewly-design > ::-webkit-scrollbar-track {
   background: transparent;
 }
 
-::selection {
+.bewly-design *::selection {
   background: var(--bew-fill-3);
   color: revert;
 }
@@ -75,11 +75,6 @@ html.dark.bewly-design {
   --os-handle-bg: rgba(120, 120, 140, 0.44);
   --os-handle-bg-hover: rgba(120, 120, 140, 0.55);
   --os-handle-bg-active: rgba(120, 120, 140, 0.66);
-}
-
-.link-navbar,
-#home_nav {
-  display: none;
 }
 
 /* Color Mode transition */
