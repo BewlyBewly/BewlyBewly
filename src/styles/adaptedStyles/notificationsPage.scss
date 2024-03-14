@@ -189,7 +189,8 @@
       .orginal-reply,
       .content .input-section .row .emoji-btn,
       .content .btnrow .btn.save.disabled,
-      .content .btnrow .btn.clear {
+      .content .btnrow .btn.clear,
+      .msg-push-new__leave-message--text {
         color: var(--bew-text-2);
       }
 
@@ -238,7 +239,9 @@
 
       .config .config-item:not(:first-child)::before,
       .bili-im .msg-notify hr,
-      .divider-last::before, .divider-last::after {
+      .divider-last::before, .divider-last::after,
+      .header::after,
+      .split-line {
         background-color: var(--bew-border-color);
       }
 
@@ -255,7 +258,8 @@
       .send-btn:not(.active),
       .toggle,
       .content .btnrow .btn.save.disabled,
-      .reply-textarea {
+      .reply-textarea,
+      .list-item.top {
         background-color: var(--bew-fill-1);
       }
 
@@ -264,7 +268,8 @@
       .bp-emoji-box .emoji-cover.selected,
       .bp-emoji-box .emoji:hover,
       .bp-emoji-box2 .emoji-cover.selected,
-      .bp-emoji-box2 .emoji:hover {
+      .bp-emoji-box2 .emoji:hover,
+      .msg-push-new__leave-message {
         background-color: var(--bew-fill-2);
       }
 
