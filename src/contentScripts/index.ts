@@ -5,8 +5,9 @@ import '~/styles/index.ts'
 import App from './views/App.vue'
 import { setupApp } from '~/logic/common-setup'
 import { SVG_ICONS } from '~/utils/svgIcons'
-import { injectCSS } from '~/utils/main'
+import { injectCSS, isHomePage } from '~/utils/main'
 import { settings } from '~/logic'
+
 import { runWhenIdle } from '~/utils/lazyLoad'
 
 const isFirefox: boolean = /Firefox/i.test(navigator.userAgent)
@@ -27,11 +28,7 @@ const currentUrl = document.URL
 function isSupportedPages() {
   if (
     // homepage
-    /https?:\/\/bilibili.com\/?$/.test(currentUrl)
-    || /https?:\/\/www.bilibili.com\/?$/.test(currentUrl)
-    || /https?:\/\/www.bilibili.com\/index.html$/.test(currentUrl)
-    || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(currentUrl)
-    || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(currentUrl)
+    isHomePage()
     // fix #166 https://github.com/hakadao/BewlyBewly/issues/166
     || /https?:\/\/www.bilibili.com\/\?bvid=.*$/.test(currentUrl)
 
@@ -69,17 +66,24 @@ function isSupportedPages() {
     return false
 }
 
-let beforeLoadedStyleEl: HTMLStyleElement
+let beforeLoadedStyleEl: HTMLStyleElement | undefined
 
 // Since using runWhenIdle does not instantly inject the app to the page, a style class cannot be injected immediately to the <html> tag
 // We have to manually add a class to the <html> app to ensure that the transition effect is applied
 if (
-  (settings.value.adaptToOtherPageStyles && settings.value.theme === 'dark')
-  || (settings.value.adaptToOtherPageStyles && settings.value.theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)
+  isSupportedPages() && (
+    (settings.value.adaptToOtherPageStyles && settings.value.theme === 'dark')
+    || (settings.value.adaptToOtherPageStyles && window.matchMedia('(prefers-color-scheme: dark)').matches)
+  )
 )
-  document.documentElement.classList.add('bewly-design', 'dark')
+  document.documentElement.classList.add('dark')
 
-if (settings.value.adaptToOtherPageStyles && isSupportedPages()) {
+if (settings.value.adaptToOtherPageStyles)
+  document.documentElement.classList.add('bewly-design')
+else
+  document.documentElement.classList.remove('bewly-design')
+
+if (settings.value.adaptToOtherPageStyles && isHomePage()) {
   beforeLoadedStyleEl = injectCSS(`
     html.dark.bewly-design {
       background-color: hsl(230 12% 6%);
@@ -99,46 +103,38 @@ if (settings.value.adaptToOtherPageStyles && isSupportedPages()) {
   `)
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  if (isSupportedPages()) {
-    // Remove the original Bilibili homepage if in Bilibili homepage & useOriginalBilibiliHomepage is enabled
-    if (
-      !settings.value.useOriginalBilibiliHomepage
-      && (
-        /https?:\/\/bilibili.com\/?$/.test(currentUrl)
-        || /https?:\/\/www.bilibili.com\/?$/.test(currentUrl)
-        || /https?:\/\/www.bilibili.com\/index.html$/.test(currentUrl)
-        || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(currentUrl)
-        || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(currentUrl)
-      )
-    ) {
-      const originalPageContent = document.querySelector('#i_cecream')
-      if (originalPageContent)
-        originalPageContent.innerHTML = ''
+if (isSupportedPages()) {
+  // remove the original top bar
+  injectCSS(`
+    .bili-header .bili-header__bar,
+    #internationalHeader,
+    .link-navbar,
+    #home_nav {
+      visibility: hidden;
     }
+  `)
+}
 
-    // document.documentElement.removeChild(beforeLoadedStyleEl)
+document.addEventListener('DOMContentLoaded', () => {
+  // Remove the original Bilibili homepage if in Bilibili homepage & useOriginalBilibiliHomepage is enabled
+  if (!settings.value.useOriginalBilibiliHomepage && isHomePage()) {
+    const originalPageContent = document.querySelector('#i_cecream')
+    if (originalPageContent)
+      originalPageContent.innerHTML = ''
+  }
+  if (beforeLoadedStyleEl)
+    document.documentElement.removeChild(beforeLoadedStyleEl)
+
+  if (isSupportedPages()) {
     // Then inject the app
     injectApp()
   }
 })
 
 function injectApp() {
-  // Inject style first
-  const newStyleEl = document.createElement('link')
-  newStyleEl.setAttribute('rel', 'stylesheet')
-  newStyleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
-  document.documentElement.appendChild(newStyleEl)
-  newStyleEl.onload = async () => {
-    // To prevent abrupt style transitions caused by sudden style changes
-    setTimeout(() => {
-      document.documentElement.removeChild(beforeLoadedStyleEl)
-    }, 500)
-  }
-
   // Inject app when idle
   runWhenIdle(async () => {
-    // mount component to context window
+  // mount component to context window
     const container = document.createElement('div')
     container.id = 'bewly'
     const root = document.createElement('div')
@@ -153,7 +149,7 @@ function injectApp() {
     container.style.opacity = '0'
     container.style.transition = 'opacity 0.5s'
     styleEl.onload = () => {
-      // To prevent abrupt style transitions caused by sudden style changes
+    // To prevent abrupt style transitions caused by sudden style changes
       setTimeout(() => {
         container.style.opacity = '1'
       }, 500)
@@ -167,7 +163,7 @@ function injectApp() {
     document.body.appendChild(container)
 
     const app = createApp(App)
-    await setupApp(app)
+    setupApp(app)
     app.mount(root)
   })
 }
