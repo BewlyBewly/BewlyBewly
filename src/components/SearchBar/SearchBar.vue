@@ -30,11 +30,19 @@ watch(isFocus, async (focus) => {
     searchHistory.value = await getSearchHistory()
 })
 
-onKeyStroke('/', (e) => {
-  e.preventDefault()
-  keywordRef.value?.focus()
+onKeyStroke('/', (e: KeyboardEvent) => {
+  if (e.target) {
+    if ((e.target as HTMLElement).tagName !== 'INPUT'
+      && (e.target as HTMLElement).tagName !== 'TEXTAREA'
+      && !(e.target as HTMLElement).className.includes('textarea')
+      && !(e.target as HTMLElement).className.includes('input')
+    ) {
+      e.preventDefault()
+      keywordRef.value?.focus()
+    }
+  }
 })
-onKeyStroke('Escape', (e) => {
+onKeyStroke('Escape', (e: KeyboardEvent) => {
   e.preventDefault()
   keywordRef.value?.blur()
   isFocus.value = false
