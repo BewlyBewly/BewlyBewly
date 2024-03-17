@@ -118,9 +118,10 @@ if (isSupportedPages()) {
 document.addEventListener('DOMContentLoaded', () => {
   // Remove the original Bilibili homepage if in Bilibili homepage & useOriginalBilibiliHomepage is enabled
   if (!settings.value.useOriginalBilibiliHomepage && isHomePage()) {
-    const originalPageContent = document.querySelector('#i_cecream')
-    if (originalPageContent)
-      originalPageContent.innerHTML = ''
+    // const originalPageContent = document.querySelector('#i_cecream')
+    // if (originalPageContent)
+    //   originalPageContent.innerHTML = ''
+    document.body.innerHTML = ''
   }
   if (beforeLoadedStyleEl)
     document.documentElement.removeChild(beforeLoadedStyleEl)

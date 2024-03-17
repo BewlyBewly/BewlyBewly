@@ -115,11 +115,9 @@ export function delay(ms: number) {
  */
 export function isHomePage(): boolean {
   if (
-    /https?:\/\/bilibili.com\/?$/.test(location.href)
-    || /https?:\/\/www.bilibili.com\/?$/.test(location.href)
-    || /https?:\/\/www.bilibili.com\/index.html$/.test(location.href)
-    || /https?:\/\/bilibili.com\/\?spm_id_from=.*/.test(location.href)
-    || /https?:\/\/www.bilibili.com\/\?spm_id_from=(.)*/.test(location.href)
+    /https?:\/\/(www\.)bilibili.com\/?$/.test(location.href)
+    || /https?:\/\/(www\.)bilibili.com\/index\.html$/.test(location.href)
+    || /https?:\/\/(www\.)?bilibili.com\/\?spm_id_from=(.)*/.test(location.href)
   )
     return true
   return false
