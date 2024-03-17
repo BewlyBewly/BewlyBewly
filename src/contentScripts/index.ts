@@ -68,20 +68,20 @@ function isSupportedPages() {
 
 let beforeLoadedStyleEl: HTMLStyleElement | undefined
 
-// Since using runWhenIdle does not instantly inject the app to the page, a style class cannot be injected immediately to the <html> tag
-// We have to manually add a class to the <html> app to ensure that the transition effect is applied
-if (
-  isSupportedPages() && (
+if (isSupportedPages()) {
+  // Since using runWhenIdle does not instantly inject the app to the page, a style class cannot be injected immediately to the <html> tag
+  // We have to manually add a class to the <html> app to ensure that the transition effect is applied
+  if (
     (settings.value.adaptToOtherPageStyles && settings.value.theme === 'dark')
     || (settings.value.adaptToOtherPageStyles && window.matchMedia('(prefers-color-scheme: dark)').matches)
   )
-)
-  document.documentElement.classList.add('dark')
+    document.documentElement.classList.add('dark')
 
-if (settings.value.adaptToOtherPageStyles)
-  document.documentElement.classList.add('bewly-design')
-else
-  document.documentElement.classList.remove('bewly-design')
+  if (settings.value.adaptToOtherPageStyles)
+    document.documentElement.classList.add('bewly-design')
+  else
+    document.documentElement.classList.remove('bewly-design')
+}
 
 if (settings.value.adaptToOtherPageStyles && isHomePage()) {
   beforeLoadedStyleEl = injectCSS(`
