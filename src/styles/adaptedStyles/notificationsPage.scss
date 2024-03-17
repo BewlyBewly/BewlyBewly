@@ -268,9 +268,12 @@
       .bp-emoji-box .emoji-cover.selected,
       .bp-emoji-box .emoji:hover,
       .bp-emoji-box2 .emoji-cover.selected,
-      .bp-emoji-box2 .emoji:hover,
-      .msg-push-new__leave-message {
+      .bp-emoji-box2 .emoji:hover {
         background-color: var(--bew-fill-2);
+      }
+
+      .msg-push-new__leave-message {
+        background-color: var(--bew-fill-3);
       }
 
       .space-left,
