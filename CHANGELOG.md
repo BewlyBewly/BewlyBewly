@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.15.3](https://github.com/hakadao/BewlyBewly/compare/v0.15.2...v0.15.3) (2024-03-17)
+
+
+### Bug Fixes
+
+* **blockAds:** remove the adblock-tips on homepage top ([e4403c9](https://github.com/hakadao/BewlyBewly/commit/e4403c939c4ff500b7a1ed595fb90a99936688bd))
+* correct frosted glass disablement not working in several cases and adjust opacity ([6562da5](https://github.com/hakadao/BewlyBewly/commit/6562da51e06f0df970a50b2a555b960933203f06))
+* **SearchBar:** resolved the issue where typing `/` in a comment focuses on the search bar ([#396](https://github.com/hakadao/BewlyBewly/issues/396)) ([c470680](https://github.com/hakadao/BewlyBewly/commit/c470680508ff6aa3cff47f8f9a103296aa769ac4))
+* 消息中心页深色模式适配 ([#394](https://github.com/hakadao/BewlyBewly/issues/394)) ([8ef181d](https://github.com/hakadao/BewlyBewly/commit/8ef181d61fc7225d276ba65433606bea83788f0c))
+
+
+### Style Changes
+
+* adjust styles ([e558ab8](https://github.com/hakadao/BewlyBewly/commit/e558ab8e98ec26472cf0d862287f6f07f32dcb1e))
+* **Dock:** adjust dock styles ([cac5c98](https://github.com/hakadao/BewlyBewly/commit/cac5c987b9c821c7894da73144e60d9f5054c7b2))
+
 ## [0.15.2](https://github.com/hakadao/BewlyBewly/compare/v0.15.1...v0.15.2) (2024-03-13)
 
 
