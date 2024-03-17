@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import type { AppForYouResult, Item as AppVideoItem } from '~/models/video/appForYou'
+import { onClickOutside } from '@vueuse/core'
+import type { AppForYouResult, Item as AppVideoItem, ThreePointV2 } from '~/models/video/appForYou'
 import type { Item as VideoItem, forYouResult } from '~/models/video/forYou'
 import type { GridLayout } from '~/logic'
 import { accessKey, settings } from '~/logic'
@@ -31,7 +32,12 @@ const needToLoginFirst = ref<boolean>(false)
 const containerRef = ref<HTMLElement>() as Ref<HTMLElement>
 const refreshIdx = ref<number>(1)
 const noMoreContent = ref<boolean>(false)
-const { handleReachBottom, handlePageRefresh } = useBewlyApp()
+const { handleReachBottom, handlePageRefresh, scrollbarRef } = useBewlyApp()
+const showVideoOptions = ref<boolean>(false)
+const videoOptions = ref<ThreePointV2[] | undefined>([])
+const videoOptionsPosition = reactive<{ top: string, left: string }>({ top: '0', left: '0' })
+const activatedVideoId = ref<number>(0)
+const videoCardRef = ref(null)
 
 watch(() => settings.value.recommendationMode, (newValue) => {
   videoList.length = 0
@@ -43,6 +49,10 @@ watch(() => settings.value.recommendationMode, (newValue) => {
     for (let i = 0; i < 3; i++)
       getAppRecommendVideos()
   }
+})
+
+onClickOutside(videoCardRef, () => {
+  closeVideoOptions()
 })
 
 onMounted(async () => {
@@ -180,6 +190,30 @@ async function getAppRecommendVideos() {
   }
 }
 
+function handleMoreClick(e: MouseEvent, data: AppVideoItem) {
+  if (activatedVideoId.value === data.idx) {
+    closeVideoOptions()
+    return
+  }
+  showVideoOptions.value = true
+  activatedVideoId.value = data.idx
+  const osInstance = scrollbarRef.value?.osInstance()
+  const scrollTop = osInstance.elements().viewport.scrollTop || 0
+  videoOptions.value = data.three_point_v2
+  videoOptionsPosition.top = `${e.clientY + scrollTop}px`
+  videoOptionsPosition.left = `${e.clientX}px`
+}
+
+function closeVideoOptions() {
+  showVideoOptions.value = false
+  activatedVideoId.value = 0
+}
+
+// function handleVideoOptionsCommand(command: string) {
+//   if (command === 'close')
+//     closeVideoOptions()
+// }
+
 function jumpToLoginPage() {
   location.href = 'https://passport.bilibili.com/login'
 }
@@ -191,6 +225,26 @@ function jumpToLoginPage() {
     <div hidden grid="~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-5" />
     <div hidden grid="~ cols-1 xl:cols-2 gap-4" />
     <div hidden grid="~ cols-1 gap-4" />
+
+    <!-- dislike popup -->
+    <div v-show="showVideoOptions">
+      <div
+        style="backdrop-filter: var(--bew-filter-glass-1);"
+        :style="{ transform: `translate(${videoOptionsPosition.left}, ${videoOptionsPosition.top})` }"
+        p-2 bg="$bew-elevated-1" rounded="$bew-radius" pos="absolute top-0 left-0"
+        w-150px m="t-4 l-[calc(-150px+1rem)]"
+        shadow="$bew-shadow-1" z-10
+      >
+        <ul flex="~ col gap-1">
+          <li
+            v-for="option in videoOptions" :key="option.type"
+            bg="hover:$bew-fill-2" p="x-4 y-2" rounded="$bew-radius-half" cursor-pointer
+          >
+            {{ option.title }}
+          </li>
+        </ul>
+      </div>
+    </div>
 
     <Empty v-if="needToLoginFirst" mt-6 :description="$t('common.please_log_in_first')">
       <Button type="primary" @click="jumpToLoginPage()">
@@ -229,6 +283,7 @@ function jumpToLoginPage() {
         <VideoCard
           v-for="video in appVideoList"
           :id="video.args.aid ?? 0"
+          ref="videoCardRef"
           :key="video.args.aid"
           :duration-str="video.cover_right_text"
           :title="`${video.title}`"
@@ -244,6 +299,9 @@ function jumpToLoginPage() {
           :uri="video.uri"
           show-preview
           :horizontal="gridLayout !== 'adaptive'"
+          more-btn
+          :more-btn-active="video.idx === activatedVideoId"
+          @more-click="(e) => handleMoreClick(e, video)"
         />
       </template>
 
