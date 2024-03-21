@@ -36,8 +36,10 @@ const { handleReachBottom, handlePageRefresh, scrollbarRef } = useBewlyApp()
 const showVideoOptions = ref<boolean>(false)
 const videoOptions = ref<ThreePointV2[] | undefined>([])
 const videoOptionsPosition = reactive<{ top: string, left: string }>({ top: '0', left: '0' })
-const activatedVideoId = ref<number>(0)
+// const activatedVideoId = ref<number>(0)
+const activatedVideo = ref<AppVideoItem | null>()
 const videoCardRef = ref(null)
+const dislikedVideoIds = ref<number[]>([])
 
 watch(() => settings.value.recommendationMode, (newValue) => {
   videoList.length = 0
@@ -191,12 +193,13 @@ async function getAppRecommendVideos() {
 }
 
 function handleMoreClick(e: MouseEvent, data: AppVideoItem) {
-  if (activatedVideoId.value === data.idx) {
+  if (activatedVideo.value && activatedVideo.value.idx === data.idx) {
     closeVideoOptions()
     return
   }
   showVideoOptions.value = true
-  activatedVideoId.value = data.idx
+  // activatedVideo.value.idx = data.idx
+  activatedVideo.value = data
   const osInstance = scrollbarRef.value?.osInstance()
   const scrollTop = osInstance.elements().viewport.scrollTop || 0
   videoOptions.value = data.three_point_v2
@@ -204,9 +207,20 @@ function handleMoreClick(e: MouseEvent, data: AppVideoItem) {
   videoOptionsPosition.left = `${e.clientX}px`
 }
 
+function handleMoreCommand(command: string) {
+  if (activatedVideo.value)
+    dislikedVideoIds.value.push(activatedVideo.value.idx)
+
+  // eslint-disable-next-line no-empty
+  switch (command) {}
+
+  // if (command === 'close')
+  //   closeVideoOptions()
+}
+
 function closeVideoOptions() {
   showVideoOptions.value = false
-  activatedVideoId.value = 0
+  activatedVideo.value = null
 }
 
 // function handleVideoOptionsCommand(command: string) {
@@ -239,6 +253,7 @@ function jumpToLoginPage() {
           <li
             v-for="option in videoOptions" :key="option.type"
             bg="hover:$bew-fill-2" p="x-4 y-2" rounded="$bew-radius-half" cursor-pointer
+            @click="handleMoreCommand('')"
           >
             {{ option.title }}
           </li>
@@ -300,7 +315,8 @@ function jumpToLoginPage() {
           show-preview
           :horizontal="gridLayout !== 'adaptive'"
           more-btn
-          :more-btn-active="video.idx === activatedVideoId"
+          :more-btn-active="video.idx === activatedVideo?.idx"
+          :show-dislike-options="dislikedVideoIds.includes(video.idx)"
           @more-click="(e) => handleMoreClick(e, video)"
         />
       </template>
