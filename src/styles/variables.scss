@@ -96,10 +96,10 @@
   // #endregion
 
   --bew-bg: hsl(0 0% 100%);
-  --bew-homepage-bg: hsl(220 14% 96%);
+  --bew-homepage-bg: hsl(240 31% 96%);
   --bew-homepage-bg-mask-opacity: 0;
   --bew-homepage-bg-mask: hsl(
-    220 14% 96% / var(--bew-homepage-bg-mask-opacity)
+    240 31% 96% / var(--bew-homepage-bg-mask-opacity)
   );
 
   --bew-content-opacity: 0.8;
@@ -107,13 +107,13 @@
   // #region content colors, used to buttons, cards, popover and so on
   --bew-content-1: hsl(0 0% 100% / var(--bew-content-opacity));
   --bew-content-1-hover: hsl(0 0% 85% / var(--bew-content-opacity));
-  --bew-content-2: hsl(0 0% 93% / var(--bew-content-opacity));
-  --bew-content-2-hover: hsl(0 0% 78% / var(--bew-content-opacity));
+  --bew-content-2: hsl(240 31% 95% / var(--bew-content-opacity));
+  --bew-content-2-hover: hsl(240 31% 80% / var(--bew-content-opacity));
 
   --bew-content-solid-1: hsl(0 0% 100%);
   --bew-content-solid-1-hover: hsl(0 0% 85%);
-  --bew-content-solid-2: hsl(0 0% 93%);
-  --bew-content-solid-2-hover: hsl(0 0% 78%);
+  --bew-content-solid-2: hsl(240 31% 95%);
+  --bew-content-solid-2-hover: hsl(240 31% 85%);
 
   --bew-elevated-1: hsl(0 0% 100% / var(--bew-content-opacity));
   --bew-elevated-1-hover: hsl(0 0% 85% / var(--bew-content-opacity));
@@ -171,13 +171,13 @@
 
   --bew-content-1: hsl(230 12% 12% / var(--bew-content-opacity));
   --bew-content-1-hover: hsl(230 12% 28% / var(--bew-content-opacity));
-  --bew-content-2: hsl(230 12% 20% / var(--bew-content-opacity));
-  --bew-content-2-hover: hsl(230 12% 36% / var(--bew-content-opacity));
+  --bew-content-2: hsl(240 14% 15% / var(--bew-content-opacity));
+  --bew-content-2-hover: hsl(240 14% 31% / var(--bew-content-opacity));
 
   --bew-content-solid-1: hsl(230 12% 12%);
   --bew-content-solid-1-hover: hsl(230 12% 28%);
-  --bew-content-solid-2: hsl(230 12% 20%);
-  --bew-content-solid-2-hover: hsl(230 12% 36%);
+  --bew-content-solid-2: hsl(240 14% 15%);
+  --bew-content-solid-2-hover: hsl(240 14% 31%);
 
   --bew-elevated-1: hsl(230 12% 15% / var(--bew-content-opacity));
   --bew-elevated-1-hover: hsl(230 12% 31% / var(--bew-content-opacity));
