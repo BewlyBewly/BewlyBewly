@@ -69,6 +69,13 @@ function handleMessage(message: any) {
       .then(data => data)
       .catch(error => console.error(error))
   }
+  else if (message.contentScriptQuery === 'dislikeVideo') {
+    const url = `https://api.bilibili.com/x/feed/dislike?access_key=${message.accessKey}&appkey=${message.appkey}&feedback_id=${message.feedbackId}&reason_id=${message.reasonId}`
+    return fetch(url)
+      .then(response => response.json())
+      .then(data => data)
+      .catch(error => console.error(error))
+  }
   // https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/video/info.md#%E8%8E%B7%E5%8F%96%E8%A7%86%E9%A2%91%E8%B6%85%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AFweb%E7%AB%AF
   else if (message.contentScriptQuery === 'getVideoInfo') {
     const url = `https://api.bilibili.com/x/web-interface/view/detail?${

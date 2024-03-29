@@ -36,6 +36,10 @@ interface Props {
   showPreview?: boolean
   moreBtn?: boolean
   moreBtnActive?: boolean
+  removed?: boolean
+  showDislikeOptions?: boolean
+  feedbackReason?: { id: number, name: string }
+  dislikeReason?: { id: number, name: string }
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -166,7 +170,11 @@ function handleMoreBtnClick(event: MouseEvent) {
       bg="hover:$bew-fill-2 active:$bew-fill-3" hover:ring="8 $bew-fill-2" active:ring="8 $bew-fill-3"
       :style="{ contentVisibility }"
     >
+      <template v-if="showDislikeOptions">
+        fdsflsd
+      </template>
       <a
+        v-else
         :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }"
         :href="videoUrl" target="_blank" rel="noopener noreferrer"
       >
@@ -298,7 +306,7 @@ function handleMoreBtnClick(event: MouseEvent) {
             </a>
           </div>
           <div class="group/desc" flex="~ col" w="full" align="items-start">
-            <div flex="~ gap-2 justify-between items-start" w="full" pos="relative">
+            <div flex="~ gap-1 justify-between items-start" w="full" pos="relative">
               <h3
                 class="keep-two-lines"
                 text="lg overflow-ellipsis $bew-text-1" h-14 overflow-hidden
@@ -313,7 +321,8 @@ function handleMoreBtnClick(event: MouseEvent) {
                 v-if="moreBtn"
                 class="opacity-0 group-hover/desc:opacity-100"
                 :class="{ 'more-active': moreBtnActive }"
-                shrink-0 w-24px h-24px grid place-items-center
+                shrink-0 w-30px h-30px m="t--3px r--8px" translate-x--8px
+                grid place-items-center
                 pointer="auto" rounded="50%" duration-300
                 @click.prevent="handleMoreBtnClick"
               >
