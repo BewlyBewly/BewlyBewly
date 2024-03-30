@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.15.5](https://github.com/hakadao/BewlyBewly/compare/v0.15.4...v0.15.5) (2024-03-30)
+
+
+### Features
+
+* support dark mode for watch later, 404 page && adjust the regex rules ([96a8504](https://github.com/hakadao/BewlyBewly/commit/96a85047daab0a66d88af4cfe28e6fb115316320))
+
+
+### Bug Fixes
+
+* `#` suffix bilibili home uri ([f5cfd2f](https://github.com/hakadao/BewlyBewly/commit/f5cfd2f46e159f3a4536f242393cd58f64bd75d4))
+* adapt previously unadapted comments section ([43878d6](https://github.com/hakadao/BewlyBewly/commit/43878d691b0a10ea1c8179bb1259b8fa25412b3b))
+* extension not working when accessing www.bilibili.com/#/ ([d66e961](https://github.com/hakadao/BewlyBewly/commit/d66e9610ac176a04a762bf56421b22acbceebb50))
+
 ## [0.15.3](https://github.com/hakadao/BewlyBewly/compare/v0.15.2...v0.15.3) (2024-03-17)
 
 
