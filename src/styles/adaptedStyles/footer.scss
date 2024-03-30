@@ -1,17 +1,43 @@
 .bewly-design {
-  .bili-footer {
-    color: var(--bew-text-2);
-
-    .footer-wrp {
-      background-color: var(--bew-content-solid-1);
+  // #region theme color adaption part
+  // Increase the priority of the style inside by writing a non-existent selector in :not()
+  :not(fdjslfds) {
+    .bili-footer a:hover,
+    .international-footer a:hover,
+    .international-footer .partner a:hover,
+    .international-footer .link-box .link-item.link-c a:hover p {
+      color: var(--bew-theme-color);
     }
+  }
+  // #endregion
 
-    a {
+  // #region dark mode adaption part
+  &.dark {
+    .bili-footer a,
+    .international-footer a,
+    .international-footer .link-box .link-item.link-c p {
       color: var(--bew-text-1);
     }
 
-    .boston-postcards li {
+    .bili-footer,
+    .international-footer .link-box .link-item .bt {
+      color: var(--bew-text-2);
+    }
+
+    .international-footer .partner,
+    .international-footer .partner a {
+      color: var(--bew-text-3);
+    }
+
+    .bili-footer .footer-wrp,
+    .international-footer {
+      background-color: var(--bew-content-solid-1);
+    }
+
+    .bili-footer .boston-postcards li,
+    .international-footer .link-box .link-item {
       border-color: var(--bew-border-color);
     }
   }
+  // #endregion
 }
