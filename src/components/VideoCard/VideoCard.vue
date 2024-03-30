@@ -34,11 +34,21 @@ interface Props {
   rank?: number
   topRightContent?: boolean
   showPreview?: boolean
+  moreBtn?: boolean
+  moreBtnActive?: boolean
+  removed?: boolean
+  showDislikeOptions?: boolean
+  feedbackReason?: { id: number, name: string }
+  dislikeReason?: { id: number, name: string }
 }
 
 const props = withDefaults(defineProps<Props>(), {
   topRightContent: true,
 })
+
+const emit = defineEmits<{
+  (e: 'moreClick', event: MouseEvent): MouseEvent
+}>()
 
 const videoUrl = computed(() => {
   if (props.bvid || props.aid)
@@ -70,8 +80,6 @@ const wValue = computed((): string => {
 const isDislike = ref<boolean>(false)
 const isInWatchLater = ref<boolean>(false)
 const isHover = ref<boolean>(false)
-// const dislikeReasonId = ref<number | null>(null)
-const showPopCtrl = ref<boolean>(false)
 const contentVisibility = ref<'auto' | 'visible'>('auto')
 const mouseEnterTimeOut = ref()
 const mouseLeaveTimeOut = ref()
@@ -141,60 +149,9 @@ function handelMouseLeave() {
   }, 300)
 }
 
-// function submitDislike(
-//   reasonID: number,
-//   goto: string,
-//   id: string,
-//   mid: number,
-//   rid: number,
-//   tagID: number,
-// ) {
-//   browser.runtime
-//     .sendMessage({
-//       contentScriptQuery: 'submitDislike',
-//       accessKey: accessKey.value,
-//       reasonID,
-//       goto,
-//       id,
-//       mid,
-//       rid,
-//       tagID,
-//     })
-//     .then((res) => {
-//       if (res.code === 0) {
-//         isDislike.value = true
-//         dislikeReasonId.value = reasonID
-//       }
-//     })
-// }
-
-// function undoDislike(
-//   reasonID: number,
-//   goto: string,
-//   id: string,
-//   mid: number,
-//   rid: number,
-//   tagID: number,
-// ) {
-//   browser.runtime
-//     .sendMessage({
-//       contentScriptQuery: 'undoDislike',
-//       accessKey,
-//       reasonID,
-//       goto,
-//       id,
-//       mid,
-//       rid,
-//       tagID,
-//     })
-//     .then((res) => {
-//       if (res.code === 0) {
-//         isDislike.value = false
-//         dislikeReasonId.value = null
-//         showPopCtrl.value = false
-//       }
-//     })
-// }
+function handleMoreBtnClick(event: MouseEvent) {
+  emit('moreClick', event)
+}
 </script>
 
 <template>
@@ -210,10 +167,14 @@ function handelMouseLeave() {
       :class="isDislike ? 'is-dislike' : ''"
       w="full" pos="absolute top-0 left-0"
       rounded="$bew-radius" duration-300 ease-in-out
-      hover:bg="$bew-fill-2" hover:ring="8 $bew-fill-2"
+      bg="hover:$bew-fill-2 active:$bew-fill-3" hover:ring="8 $bew-fill-2" active:ring="8 $bew-fill-3"
       :style="{ contentVisibility }"
     >
+      <template v-if="showDislikeOptions">
+        fdsflsd
+      </template>
       <a
+        v-else
         :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }"
         :href="videoUrl" target="_blank" rel="noopener noreferrer"
       >
@@ -301,10 +262,10 @@ function handelMouseLeave() {
             duration-300
             @click.prevent="toggleWatchLater"
           >
-            <Tooltip v-if="!isInWatchLater" :content="$t('common.save_to_watch_later')" placement="bottom" type="dark">
+            <Tooltip v-show="!isInWatchLater" :content="$t('common.save_to_watch_later')" placement="bottom" type="dark">
               <mingcute:carplay-line />
             </Tooltip>
-            <Tooltip v-else :content="$t('common.added')" placement="bottom" type="dark">
+            <Tooltip v-show="isInWatchLater" :content="$t('common.added')" placement="bottom" type="dark">
               <line-md:confirm />
             </Tooltip>
           </button>
@@ -344,8 +305,8 @@ function handelMouseLeave() {
               >
             </a>
           </div>
-          <div class="meta" flex="~ col" w="full" align="items-start">
-            <div flex="~" justify="between" w="full" pos="relative">
+          <div class="group/desc" flex="~ col" w="full" align="items-start">
+            <div flex="~ gap-1 justify-between items-start" w="full" pos="relative">
               <h3
                 class="keep-two-lines"
                 text="lg overflow-ellipsis $bew-text-1" h-14 overflow-hidden
@@ -356,71 +317,17 @@ function handelMouseLeave() {
                 </a>
               </h3>
 
-              <!-- <div
-                id="dislike-control-btn"
-                class="icon-btn"
-                p="t-0.15rem x-2"
-                pointer="auto"
-                display="invisible"
-                group-hover:display="visible"
-                @click.stop="showPopCtrl = !showPopCtrl"
+              <div
+                v-if="moreBtn"
+                class="opacity-0 group-hover/desc:opacity-100"
+                :class="{ 'more-active': moreBtnActive }"
+                shrink-0 w-30px h-30px m="t--3px r--8px" translate-x--8px
+                grid place-items-center
+                pointer="auto" rounded="50%" duration-300
+                @click.prevent="handleMoreBtnClick"
               >
-                <tabler:dots-vertical text="lg" />
-              </div> -->
-
-              <!-- dislike control -->
-              <template v-if="showPopCtrl">
-                <!-- cover mask -->
-                <div
-                  pos="fixed top-0 left-0"
-                  w="full"
-                  h="full"
-                  z="30"
-                  @click="showPopCtrl = false"
-                />
-
-              <!-- dislike reason popup -->
-              <!-- <div
-                  pos="absolute top-9 right-0"
-                  p="2"
-                  z="30"
-                  w="180px"
-                  bg="$bew-content-1"
-                  rounded="$bew-radius"
-                  style="
-                    box-shadow: var(--bew-shadow-2);
-                    backdrop-filter: var(--bew-filter-glass-1);
-                  "
-                >
-                  <p p="2" text="$bew-text-3">
-                    {{ $t('home.not_interested_in') }}
-                  </p>
-                  <ul>
-                    <li
-                      v-for="reason in dislikeReasons"
-                      :key="reason.reason_id"
-                      p="2"
-                      m="b-1"
-                      cursor="pointer"
-                      hover:bg="$bew-fill-2"
-                      transition="all duration-300"
-                      rounded="$bew-radius"
-                      @click.stop="
-                        submitDislike(
-                          reason.reason_id,
-                          goto,
-                          param,
-                          mid,
-                          tid,
-                          tag.tag_id,
-                        )
-                      "
-                    >
-                      {{ reason.reason_name }}
-                    </li>
-                  </ul>
-                </div> -->
-              </template>
+                <mingcute:more-2-line text="lg" />
+              </div>
             </div>
             <div text="base $bew-text-2" w-fit m="t-2" flex="~ items-center wrap">
               <!-- Author Avatar -->
@@ -578,5 +485,9 @@ function handelMouseLeave() {
   > *:not(#dislike-control) {
     --at-apply: invisible pointer-events-none duration-0 transition-none;
   }
+}
+
+.more-active {
+  --at-apply: opacity-100 bg-$bew-fill-3;
 }
 </style>

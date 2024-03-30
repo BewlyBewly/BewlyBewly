@@ -24,7 +24,7 @@ function handleClose() {
         --un-shadow: var(--bew-shadow-3) var(--bew-shadow-edge-glow-2);
         backdrop-filter: var(--bew-filter-glass-2);
       "
-      pos="fixed top-1/2 left-1/2" bg="$bew-elevated-1" rounded="$bew-radius"
+      pos="fixed top-1/2 left-1/2" bg="$bew-content-2 dark:$bew-elevated-1" rounded="$bew-radius"
       transform="translate--1/2" z-2 shadow overflow="x-hidden y-overlay" w="$b-dialog-width"
       h="$b-dialog-height" antialiased
     >
