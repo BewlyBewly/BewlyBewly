@@ -128,7 +128,8 @@ function setCurrentTitle() {
             --un-shadow: var(--bew-shadow-4), var(--bew-shadow-edge-glow-2);
             backdrop-filter: var(--bew-filter-glass-2);
           "
-          flex="~ gap-2 col" rounded="30px hover:25px" bg="$bew-elevated-1 hover:$bew-elevated-2" p-2 shadow
+          flex="~ gap-2 col" rounded="30px hover:25px" p-2 shadow
+          bg="$bew-content-2 hover:$bew-elevated-1 dark:$bew-elevated-1 dark-hover:$bew-elevated-2"
           scale="group-hover:105" duration-300 overflow-hidden antialiased
           border="1 $bew-border-color"
         >
@@ -165,39 +166,52 @@ function setCurrentTitle() {
           --un-shadow: var(--bew-shadow-4), var(--bew-shadow-edge-glow-2);
           backdrop-filter: var(--bew-filter-glass-2);
         "
-        relative overflow="x-hidde" w-full h-full bg="$bew-elevated-1"
-        shadow rounded="$bew-radius"
+        relative overflow="x-hidde" w-full h-full bg="$bew-content-2 dark:$bew-elevated-1"
+        shadow rounded="$bew-radius" border="1 $bew-border-color"
       >
-        <OverlayScrollbarsComponent ref="scrollbarRef" element="div" h-inherit defer>
-          <header
-            flex justify-between items-center w-full h-80px
-            pos="sticky top-0 left-0" p="x-11"
-            z-1 rounded="t-$bew-radius"
+        <header
+          flex justify-between items-center w-full h-80px
+          pos="fixed top-0 left-0" p="x-11"
+          z-1 rounded="t-$bew-radius"
+          style="
+            text-shadow: 0 0 10px var(--bew-elevated-solid-1), 0 0 15px var(--bew-elevated-solid-1)
+          "
+        >
+          <!-- Mask -->
+          <div
+            pos="absolute top-0 left-0" w-inherit h-inherit pointer-events-none
             style="
-              text-shadow: 0 0 15px var(--bew-elevated-solid-1), 0 0 20px var(--bew-elevated-solid-1)
+              mask-image: linear-gradient(to bottom,  black 0, transparent 100%);
+              -webkit-mask-image: linear-gradient(to bottom, black 0, transparent 100%);
+              backdrop-filter: blur(6px);
             "
+            z--1 rounded-inherit
+          />
+          <div text="3xl" fw-bold>
+            {{ title }}
+          </div>
+          <div
+            style="backdrop-filter: var(--bew-filter-glass-1)"
+            text-2xl leading-0 bg="$bew-fill-1 hover:$bew-theme-color-30" w="32px" h="32px"
+            p="1" rounded-8 cursor="pointer"
+            hover:ring="2 $bew-theme-color" hover:text="$bew-theme-color" duration-300
+            @click="handleClose"
           >
-            <!-- Mask -->
-            <div
-              pos="absolute top-0 left-0" w-inherit h-inherit pointer-events-none
-              style="mask-image: linear-gradient(to bottom,  black 70%, transparent);"
-              z--1 rounded-inherit
-            />
-            <div text="3xl" fw-bold>
-              {{ title }}
-            </div>
-            <div
-              style="backdrop-filter: var(--bew-filter-glass-1)"
-              text-2xl leading-0 bg="$bew-fill-1 hover:$bew-theme-color-30" w="32px" h="32px"
-              p="1" rounded-8 cursor="pointer"
-              hover:ring="2 $bew-theme-color" hover:text="$bew-theme-color" duration-300
-              @click="handleClose"
-            >
-              <ic-baseline-clear />
-            </div>
-          </header>
-
-          <main pos="absolute top-80px left-0" w-full min-h="[calc(100%-80px)]" p="x-12 b-8">
+            <ic-baseline-clear />
+          </div>
+        </header>
+        <OverlayScrollbarsComponent
+          ref="scrollbarRef"
+          style="
+            mask-image: linear-gradient(to bottom, transparent 0%, black 80px 30%);
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 80px 30%);
+          "
+          element="div" defer
+          h-inherit
+        >
+          <main
+            pos="absolute top-80px left-0" w-full min-h="[calc(100%-80px)]" p="x-12 b-8"
+          >
             <!-- <div h-80px mt--8 /> -->
 
             <Transition name="page-fade">

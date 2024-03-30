@@ -181,7 +181,7 @@ function toggleDockHide(hide: boolean) {
       }"
       style="backdrop-filter: var(--bew-filter-glass-1);"
       absolute duration-300 ease-in-out
-      p-2 m-2 bg="$bew-content-2" flex="~ col gap-2 shrink-0"
+      p-2 m-2 bg="$bew-content-2 dark:$bew-elevated-1" flex="~ col gap-2 shrink-0"
       rounded="60px" border="1px $bew-border-color"
       shadow="$bew-shadow-2"
       @mouseenter="toggleDockHide(false)"

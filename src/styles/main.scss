@@ -30,7 +30,7 @@ html.bewly-design > ::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.bewly-design *::selection {
+::selection {
   background: var(--bew-fill-3);
   color: revert;
 }
