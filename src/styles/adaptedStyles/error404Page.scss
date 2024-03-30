@@ -1,0 +1,35 @@
+.bewly-design.error404Page {
+  .error-manga img {
+    background-color: white;
+    border-top: 20px solid white;
+    border-bottom: 20px solid white;
+    border-radius: 4px;
+  }
+
+  body {
+    background-color: var(--bew-homepage-bg);
+  }
+
+  // #region theme color adaption part
+  // Increase the priority of the style inside by writing a non-existent selector in :not()
+  :not(fdjslfds) {
+    .error-panel .rollback-btn,
+    .error-manga .change-img-btn {
+      background-color: var(--bew-theme-color);
+    }
+
+    .error-panel .rollback-btn:hover,
+    .error-manga .change-img-btn:hover {
+      background-color: var(--bew-theme-color-80);
+    }
+  }
+  // #endregion
+
+  // #region dark mode adaption part
+  &.dark {
+    .error-container {
+      background-color: var(--bew-content-solid-1);
+    }
+  }
+  // #endregion
+}

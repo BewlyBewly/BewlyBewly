@@ -83,6 +83,11 @@
       border-color: var(--bew-border-color);
     }
 
+    .reply-box .box-normal .reply-box-warp.focus-within,
+    .reply-box .box-normal .reply-box-warp:hover {
+      border-color: var(--bew-theme-color);
+    }
+
     .reply-box .box-expand .svg-icon svg path {
       filter: invert(1) hue-rotate(180deg);
     }
