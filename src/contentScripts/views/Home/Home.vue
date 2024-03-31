@@ -100,11 +100,17 @@ onUnmounted(() => {
 
 function handleChangeTab(tab: HomeTab) {
   if (activatedPage.value === tab.page) {
-    handleBackToTop(settings.value.useSearchPageModeOnHomePage ? 510 : 0)
+    const osInstance = scrollbarRef.value?.osInstance()
+    const scrollTop = osInstance.elements().viewport.scrollTop as number
 
-    if (tabContentLoading.value)
-      return
-    tabPageRef.value && tabPageRef.value.initData()
+    if ((!settings.value.useSearchPageModeOnHomePage && scrollTop > 0) || (settings.value.useSearchPageModeOnHomePage && scrollTop > 510)) {
+      handleBackToTop(settings.value.useSearchPageModeOnHomePage ? 510 : 0)
+    }
+    else {
+      if (tabContentLoading.value)
+        return
+      tabPageRef.value && tabPageRef.value.initData()
+    }
     return
   }
 
