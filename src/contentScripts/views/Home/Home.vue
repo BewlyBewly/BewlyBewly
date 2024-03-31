@@ -23,6 +23,7 @@ const showSearchPageMode = ref<boolean>(false)
 const shouldMoveTabsUp = ref<boolean>(false)
 const tabContentLoading = ref<boolean>(false)
 const currentTabs = ref<HomeTab[]>([])
+const tabPageRef = ref()
 
 const gridLayoutIcons = computed((): GridLayoutIcon[] => {
   return [
@@ -98,6 +99,15 @@ onUnmounted(() => {
 })
 
 function handleChangeTab(tab: HomeTab) {
+  if (activatedPage.value === tab.page) {
+    handleBackToTop(settings.value.useSearchPageModeOnHomePage ? 510 : 0)
+
+    if (tabContentLoading.value)
+      return
+    tabPageRef.value && tabPageRef.value.initData()
+    return
+  }
+
   // When the content of a tab is loading, prevent switching to another tab.
   // Since `initPageAction()` within the tab replaces the `handleReachBottom` and `handlePageRefresh` functions.
   // Therefore, this will lead to a failure in refreshing the data of the current tab
@@ -228,6 +238,7 @@ function toggleTabContentLoading(loading: boolean) {
         <KeepAlive include="ForYou">
           <Component
             :is="pages[activatedPage]" :key="activatedPage"
+            ref="tabPageRef"
             :grid-layout="homePageGridLayout"
             @before-loading="toggleTabContentLoading(true)"
             @after-loading="toggleTabContentLoading(false)"

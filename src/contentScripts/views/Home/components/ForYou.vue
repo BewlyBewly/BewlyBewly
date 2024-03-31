@@ -41,16 +41,8 @@ const activatedVideo = ref<AppVideoItem | null>()
 const videoCardRef = ref(null)
 const dislikedVideoIds = ref<number[]>([])
 
-watch(() => settings.value.recommendationMode, (newValue) => {
-  videoList.length = 0
-  appVideoList.length = 0
-  if (newValue === 'web') {
-    getRecommendVideos()
-  }
-  else {
-    for (let i = 0; i < 3; i++)
-      getAppRecommendVideos()
-  }
+watch(() => settings.value.recommendationMode, () => {
+  initData()
 })
 
 onClickOutside(videoCardRef, () => {
@@ -62,13 +54,7 @@ onMounted(async () => {
   // otherwise the `settings.value.recommendationMode` value will be undefined
   // i have no idea to fix that...
   setTimeout(async () => {
-    if (settings.value.recommendationMode === 'web') {
-      getRecommendVideos()
-    }
-    else {
-      for (let i = 0; i < 3; i++)
-        await getAppRecommendVideos()
-    }
+    initData()
   }, 200)
 
   initPageAction()
@@ -78,6 +64,22 @@ onActivated(() => {
   initPageAction()
 })
 
+async function initData() {
+  videoList.length = 0
+  appVideoList.length = 0
+  await getData()
+}
+
+async function getData() {
+  if (settings.value.recommendationMode === 'web') {
+    getRecommendVideos()
+  }
+  else {
+    for (let i = 0; i < 3; i++)
+      await getAppRecommendVideos()
+  }
+}
+
 function initPageAction() {
   handleReachBottom.value = async () => {
     if (isLoading.value)
@@ -85,29 +87,14 @@ function initPageAction() {
     if (noMoreContent.value)
       return
 
-    if (settings.value.recommendationMode === 'web') {
-      getRecommendVideos()
-    }
-    else {
-      for (let i = 0; i < 3; i++)
-        await getAppRecommendVideos()
-    }
+    getData()
   }
 
   handlePageRefresh.value = async () => {
     if (isLoading.value)
       return
 
-    videoList.length = 0
-    appVideoList.length = 0
-    noMoreContent.value = false
-    if (settings.value.recommendationMode === 'web') {
-      await getRecommendVideos()
-    }
-    else {
-      for (let i = 0; i < 3; i++)
-        await getAppRecommendVideos()
-    }
+    initData()
   }
 }
 
@@ -231,6 +218,8 @@ function closeVideoOptions() {
 function jumpToLoginPage() {
   location.href = 'https://passport.bilibili.com/login'
 }
+
+defineExpose({ initData })
 </script>
 
 <template>
