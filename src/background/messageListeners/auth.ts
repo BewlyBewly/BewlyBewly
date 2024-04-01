@@ -1,5 +1,6 @@
 // 由于 sendResponse 复杂, 所以使用自定义的函数
 import type { APIMAP } from '../utils'
+import { AHS } from '../utils'
 
 const API_AUTH: APIMAP = {
   getAccessKey: {
@@ -10,11 +11,12 @@ const API_AUTH: APIMAP = {
     params: {
       confirmUri: '',
     },
-    afterHandle: [(data: any) => {
-      const accessKey = `${data.url}`.match(/access_key=([0-9a-z]{32})/)![1]
-      return new Response(JSON.stringify({ accessKey }))
-    }],
+    afterHandle: [(responce) => {
+      const accessKey = `${responce.url}`.match(/access_key=([0-9a-z]{32})/)![1]
+      return new Response(accessKey)
+    }, ...AHS.S],
   },
+  // biliJct 似乎没有使用
   logout: {
     url: '',
     _fetch: {
@@ -24,9 +26,7 @@ const API_AUTH: APIMAP = {
       biliCSRF: '',
       biliJct: '',
     },
-    afterHandle: [(data: any) => {
-      return data
-    }],
+    afterHandle: AHS.J_S,
   },
   getLoginQRCode: {
     url: '',
@@ -39,9 +39,7 @@ const API_AUTH: APIMAP = {
       ts: '0',
       sign: 'e134154ed6add881d28fbdf68653cd9c',
     },
-    afterHandle: [(data: any) => {
-      return data
-    }],
+    afterHandle: AHS.J_S,
   },
   qrCodeLogin: {
     url: '',
@@ -55,9 +53,7 @@ const API_AUTH: APIMAP = {
       ts: '0',
       sign: 'e134154ed6add881d28fbdf68653cd9c',
     },
-    afterHandle: [(data: any) => {
-      return data
-    }],
+    afterHandle: AHS.J_S,
   },
 }
 

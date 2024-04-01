@@ -21,9 +21,11 @@ function sendResponseHandler(sendResponse: Function) {
 const AHS: {
   J_D: FetchAfterHandler[]
   J_S: FetchAfterHandler[]
+  S: FetchAfterHandler[]
 } = {
   J_D: [toJsonHandler, toData],
   J_S: [toJsonHandler, sendResponseHandler],
+  S: [sendResponseHandler],
 }
 
 interface Message {
