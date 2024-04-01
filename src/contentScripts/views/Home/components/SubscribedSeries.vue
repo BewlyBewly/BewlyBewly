@@ -30,6 +30,30 @@ const noMoreContent = ref<boolean>(false)
 const noMoreContentWarning = ref<boolean>(false)
 const { handleReachBottom, handlePageRefresh } = useBewlyApp()
 
+onMounted(async () => {
+  initData()
+  initPageAction()
+})
+
+onActivated(() => {
+  initPageAction()
+})
+
+async function initData() {
+  offset.value = ''
+  updateBaseline.value = ''
+  momentList.length = 0
+  noMoreContent.value = false
+  noMoreContentWarning.value = false
+
+  await getData()
+}
+
+async function getData() {
+  for (let i = 0; i < 3; i++)
+    await getFollowedUsersVideos()
+}
+
 function initPageAction() {
   handleReachBottom.value = async () => {
     if (isLoading.value)
@@ -38,35 +62,16 @@ function initPageAction() {
       noMoreContentWarning.value = true
       return
     }
-    for (let i = 0; i < 3; i++)
-      await getFollowedUsersVideos()
+    getData()
   }
   handlePageRefresh.value = async () => {
     if (isLoading.value)
       return
-
-    offset.value = ''
-    updateBaseline.value = ''
-    momentList.length = 0
-    noMoreContent.value = false
-    noMoreContentWarning.value = false
     if (isLoading.value)
       return
-    for (let i = 0; i < 3; i++)
-      await getFollowedUsersVideos()
+    initData()
   }
 }
-
-onMounted(async () => {
-  for (let i = 0; i < 3; i++)
-    await getFollowedUsersVideos()
-
-  initPageAction()
-})
-
-onActivated(() => {
-  initPageAction()
-})
 
 async function getFollowedUsersVideos() {
   if (noMoreContent.value)
@@ -125,6 +130,8 @@ async function getFollowedUsersVideos() {
 function jumpToLoginPage() {
   location.href = 'https://passport.bilibili.com/login'
 }
+
+defineExpose({ initData })
 </script>
 
 <template>

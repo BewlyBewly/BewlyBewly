@@ -27,8 +27,7 @@ const pn = ref<number>(1)
 const { handleReachBottom, handlePageRefresh } = useBewlyApp()
 
 onMounted(async () => {
-  await getTrendingVideos()
-
+  await initData()
   initPageAction()
 })
 
@@ -36,16 +35,24 @@ onActivated(() => {
   initPageAction()
 })
 
+async function initData() {
+  videoList.length = 0
+  pn.value = 1
+  await getData()
+}
+
+async function getData() {
+  await getTrendingVideos()
+}
+
 function initPageAction() {
   handleReachBottom.value = async () => {
     if (!isLoading.value)
-      await getTrendingVideos()
+      await getData()
   }
 
   handlePageRefresh.value = async () => {
-    videoList.length = 0
-    pn.value = 1
-    await getTrendingVideos()
+    initData()
   }
 }
 
@@ -81,6 +88,8 @@ async function getTrendingVideos() {
     emit('afterLoading')
   }
 }
+
+defineExpose({ initData })
 </script>
 
 <template>
