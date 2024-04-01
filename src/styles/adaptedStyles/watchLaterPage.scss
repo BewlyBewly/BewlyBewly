@@ -1,0 +1,45 @@
+.bewly-design.watchLaterPage {
+  // #region theme color adaption part
+  // Increase the priority of the style inside by writing a non-existent selector in :not()
+  :not(fdjslfds) {
+    .watch-later-list header .s-btn {
+      border-color: var(--bew-theme-color);
+    }
+
+    .watch-later-list header .s-btn,
+    .watch-later-list .list-box .av-item .av-about .t:hover,
+    .watch-later-list .list-box .av-item .av-about .info .user:hover {
+      color: var(--bew-theme-color);
+    }
+
+    .watch-later-list header .s-btn:hover {
+      color: white;
+    }
+
+    .watch-later-list header .s-btn:hover {
+      background-color: var(--bew-theme-color);
+    }
+  }
+  // #endregion
+
+  // #region dark mode adaption part
+  &.dark {
+    .watch-later-list .list-box .av-item .key,
+    .watch-later-list .list-box .av-item .av-about .t {
+      color: var(--bew-text-1);
+    }
+
+    .watch-later-list .list-box .av-item .av-about .info .user {
+      color: var(--bew-text-2);
+    }
+
+    .watch-later-list .list-box .av-item .av-about {
+      border-color: var(--bew-border-color);
+    }
+
+    .watch-later-list header .s-btn {
+      background-color: transparent;
+    }
+  }
+  // #endregion
+}
