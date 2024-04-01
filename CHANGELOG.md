@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.15.5](https://github.com/hakadao/BewlyBewly/compare/v0.15.5...v0.15.5) (2024-04-01)
+
+
+### Features
+
+* add some details for dock ([0cb2142](https://github.com/hakadao/BewlyBewly/commit/0cb21427c519bbe85552cba492c8c3c1ac4b8da7))
+* **Home:** clicking the tab will back to top and refresh data on homepage ([#419](https://github.com/hakadao/BewlyBewly/issues/419)) ([aae391d](https://github.com/hakadao/BewlyBewly/commit/aae391d9f49eef3a8e3df98874207baedb0af0b8))
+
+
+### Bug Fixes
+
+* **Following:** resolve the "no more content" & "need to login first" occurring together ([69b6d86](https://github.com/hakadao/BewlyBewly/commit/69b6d865ad2548c82d8d7a233ce26ff9334d71cf))
+* **Trending:** resolve the infinite data retrieval issus ([#445](https://github.com/hakadao/BewlyBewly/issues/445)) ([80b72c4](https://github.com/hakadao/BewlyBewly/commit/80b72c43b615d6b7a7f12246eb677fa3b7fa148b))
+
 ## [0.15.5](https://github.com/hakadao/BewlyBewly/compare/v0.15.4...v0.15.5) (2024-03-30)
 
 
