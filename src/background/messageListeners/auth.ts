@@ -3,13 +3,6 @@ import type { APIMAP } from '../utils'
 import { AHS } from '../utils'
 
 const API_AUTH: APIMAP = {
-  getAccessKey: (message, send, sendResponse) => {
-    const url = message.confirmUri
-    fetch(url)
-      .then(response => sendResponse && sendResponse({ accessKey: `${response.url}`.match(/access_key=([0-9a-z]{32})/)![1] }))
-      .catch(error => console.error(error))
-    return true
-  },
   // biliJct 似乎没有使用
   logout: {
     url: 'https://passport.bilibili.com/login/exit/v2',
@@ -28,7 +21,6 @@ const API_AUTH: APIMAP = {
     },
     afterHandle: AHS.J_S,
   },
-
   getLoginQRCode: {
     url: 'https://passport.bilibili.com/x/passport-tv-login/qrcode/auth_code',
     _fetch: {
