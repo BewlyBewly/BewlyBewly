@@ -139,13 +139,13 @@ function getHistoryUrl(item: HistoryItem) {
  * @param {HistoryType} type
  * @param {number} viewAt Last viewed timestamp
  */
-function getHistoryList(type: HistoryType, viewAt = 0 as number) {
+function getHistoryList(type: HistoryType, view_at = 0 as number) {
   isLoading.value = true
   browser.runtime
     .sendMessage({
       contentScriptQuery: 'getHistoryList',
       type,
-      viewAt,
+      view_at,
     })
     .then((res) => {
       if (res.code === 0) {

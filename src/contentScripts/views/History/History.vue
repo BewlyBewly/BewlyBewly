@@ -59,7 +59,7 @@ function getHistoryList() {
     .sendMessage({
       contentScriptQuery: 'getHistoryList',
       type: 'all',
-      viewAt:
+      view_at:
         historyList.length > 0
           ? historyList[historyList.length - 1].view_at
           : 0,
