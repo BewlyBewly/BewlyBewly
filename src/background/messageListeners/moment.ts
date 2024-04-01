@@ -17,7 +17,7 @@ const API_MOMENT: APIMAP = {
     },
     params: {
       uid: '',
-      typeList: '268435455',
+      type_list: '268435455',
     },
     afterHandle: AHS.J_D,
   },
@@ -28,8 +28,8 @@ const API_MOMENT: APIMAP = {
     },
     params: {
       uid: '',
-      typeList: '268435455',
-      offsetDynamicID: '',
+      type_list: '268435455',
+      offset_dynamic_id: '',
     },
     afterHandle: AHS.J_D,
   },
@@ -40,7 +40,7 @@ const API_MOMENT: APIMAP = {
     },
     params: {
       page: 1,
-      pageSize: 10,
+      pagesize: 10,
     },
     afterHandle: AHS.J_D,
   },
@@ -52,7 +52,7 @@ const API_MOMENT: APIMAP = {
     params: {
       type: 268435455,
       offset: 0,
-      updateBaseline: 0,
+      update_baseline: 0,
     },
     afterHandle: AHS.J_D,
   },

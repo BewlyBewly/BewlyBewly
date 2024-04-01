@@ -117,7 +117,7 @@ async function getRecommendVideos() {
   try {
     const response: forYouResult = await browser.runtime.sendMessage({
       contentScriptQuery: 'getRecommendVideos',
-      refreshIdx: refreshIdx.value++,
+      fresh_idx: refreshIdx.value++,
     })
 
     if (!response.data) {
@@ -157,9 +157,9 @@ async function getAppRecommendVideos() {
   try {
     const response: AppForYouResult = await browser.runtime.sendMessage({
       contentScriptQuery: 'getAppRecommendVideos',
-      accessKey: accessKey.value,
-      sLocale: settings.value.language !== LanguageType.Mandarin_CN ? 'zh-Hant_TW' : 'zh-Hans_CN',
-      cLocale: settings.value.language !== LanguageType.Mandarin_CN ? 'zh-Hant_TW' : 'zh-Hans_CN',
+      access_key: accessKey.value,
+      s_locale: settings.value.language !== LanguageType.Mandarin_CN ? 'zh-Hant_TW' : 'zh-Hans_CN',
+      c_locale: settings.value.language !== LanguageType.Mandarin_CN ? 'zh-Hant_TW' : 'zh-Hans_CN',
       appkey: TVAppKey.appkey,
       idx: appVideoList.length > 0 ? appVideoList[appVideoList.length - 1].idx : 1,
     })

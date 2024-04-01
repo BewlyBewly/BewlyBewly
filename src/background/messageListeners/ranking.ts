@@ -19,7 +19,7 @@ const API_RANKING: APIMAP = {
       method: 'get',
     },
     params: {
-      seasonType: 1,
+      season_type: 1,
     },
     afterHandle: AHS.J_D,
   },
