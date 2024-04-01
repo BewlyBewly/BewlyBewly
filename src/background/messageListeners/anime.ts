@@ -1,4 +1,4 @@
-import type { APIMAP, _FETCH } from '../utils'
+import type { APIMAP } from '../utils'
 import { AHS } from '../utils'
 
 const API_ANIME: APIMAP = {

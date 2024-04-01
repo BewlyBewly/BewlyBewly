@@ -12,7 +12,8 @@ function toData(data: Promise<any>): Promise<any> {
 }
 
 // if need sendResponse, use this
-function sendResponseHandler(sendResponse: any) {
+// return a FetchAfterHandler function
+function sendResponseHandler(sendResponse: Function) {
   return (data: any) => sendResponse(data)
 }
 
@@ -41,7 +42,7 @@ interface _FETCH {
 interface API {
   url: string
   _fetch: _FETCH
-  params: {
+  params?: {
     [key: string]: any
   }
   afterHandle: ((response: Response) => Response | Promise<Response>)[]
@@ -51,7 +52,7 @@ interface APIMAP {
 }
 // 工厂函数API_LISTENER_FACTORY
 function apiListenerFactory(API_MAP: APIMAP) {
-  return (message: Message) => {
+  return (message: Message, sender?: any, sendResponse?: Function) => {
     if (API_MAP[message?.contentScriptQuery]) {
       try {
         let { contentScriptQuery, ...rest } = message
@@ -74,7 +75,13 @@ function apiListenerFactory(API_MAP: APIMAP) {
         // get cant take body
         const fetchOpt = method === 'get' ? { method, headers } : { method, headers, body: targetBody }
         let baseFunc = fetch(targetUrl, fetchOpt)
-        afterHandle.forEach(func => baseFunc = baseFunc.then(func))
+        afterHandle.forEach((func) => {
+          if (func.name === sendResponseHandler.name && sendResponse)
+            // sendResponseHandler 是一个特殊的后处理函数，需要传入sendResponse
+            baseFunc = baseFunc.then(sendResponseHandler(sendResponse))
+          else
+            baseFunc = baseFunc.then(func)
+        })
         baseFunc.catch(console.error)
 
         return baseFunc
