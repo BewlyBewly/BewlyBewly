@@ -35,10 +35,10 @@ const API_HISTORY: APIMAP = {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
       },
-    },
-    params: {
-      kid: '',
-      csrf: '',
+      body: {
+        aid: '',
+        csrf: '',
+      },
     },
     afterHandle: AHS.J_D,
   },
@@ -47,9 +47,12 @@ const API_HISTORY: APIMAP = {
     url: 'https://api.bilibili.com/x/v2/history/clear',
     _fetch: {
       method: 'post',
-    },
-    params: {
-      csrf: '',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      },
+      body: {
+        csrf: '',
+      },
     },
     afterHandle: AHS.J_D,
   },
@@ -67,10 +70,13 @@ const API_HISTORY: APIMAP = {
     url: 'https://api.bilibili.com/x/v2/history/shadow/set',
     _fetch: {
       method: 'post',
-    },
-    params: {
-      switch: '',
-      csrf: '',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      },
+      body: {
+        switch: '',
+        csrf: '',
+      },
     },
     afterHandle: AHS.J_D,
   },

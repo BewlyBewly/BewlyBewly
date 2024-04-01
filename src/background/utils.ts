@@ -67,30 +67,39 @@ function apiListenerFactory(API_MAP: APIMAP) {
 
     try {
       let { contentScriptQuery, ...rest } = message
+      // rest above two part body or params
       rest = rest || {}
-      const { _fetch, url, params, afterHandle } = API_MAP[contentScriptQuery] as API
-      const { method, headers, body } = _fetch as _FETCH
-      const targetParams = Object.assign({}, params, rest)
-      let targetUrl = url
-      let targetBody = Object.assign({}, body)
 
+      let { _fetch, url, params = {}, afterHandle } = API_MAP[contentScriptQuery] as API
+      const { method, headers, body } = _fetch as _FETCH
+      // merge params and body
+      const targetParams = Object.assign({}, params)
+      let targetBody = Object.assign({}, body)
+      Object.keys(rest).forEach((key) => {
+        if (body && body[key] !== undefined)
+          targetBody[key] = rest[key]
+        else
+          targetParams[key] = rest[key]
+      })
+
+      // generate body or params
       if (method === 'get') {
         const urlParams = new URLSearchParams()
         for (const key in targetParams)
-          urlParams.append(key, targetParams[key])
-        targetUrl += `?${urlParams.toString()}`
+          targetParams[key] && urlParams.append(key, targetParams[key])
+        url += `?${urlParams.toString()}`
       }
       else {
-        targetBody = JSON.stringify(targetParams)
+        // post
+        targetBody = (headers && headers['Content-Type'] && headers['Content-Type'].includes('application/x-www-form-urlencoded'))
+          ? new URLSearchParams(targetBody)
+          : JSON.stringify(targetBody)
       }
       // get cant take body
       const fetchOpt = method === 'get' ? { method, headers } : { method, headers, body: targetBody }
-      if (method === 'post') {
-        // 检测是不是formData
-        if (headers && headers['Content-Type'].startWith('application/x-www-form-urlencoded'))
-          fetchOpt.body = new URLSearchParams(targetBody)
-      }
-      let baseFunc = fetch(targetUrl, fetchOpt)
+
+      // fetch and after handle
+      let baseFunc = fetch(url, fetchOpt)
       afterHandle.forEach((func) => {
         if (func.name === sendResponseHandler.name && sendResponse)
           // sendResponseHandler 是一个特殊的后处理函数，需要传入sendResponse
@@ -99,7 +108,6 @@ function apiListenerFactory(API_MAP: APIMAP) {
           baseFunc = baseFunc.then(func)
       })
       baseFunc.catch(console.error)
-
       return baseFunc
     }
     catch (e) {

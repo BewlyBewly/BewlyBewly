@@ -11,18 +11,24 @@ const API_AUTH: APIMAP = {
     return true
   },
   // biliJct 似乎没有使用
-  logout: (message, send, sendResponse) => {
-    const url = `https://passport.bilibili.com/login/exit/v2?biliCSRF=${message.biliCSRF}`
-    fetch(url, {
+  logout: {
+    url: 'https://passport.bilibili.com/login/exit/v2',
+    _fetch: {
       method: 'POST',
-      body: JSON.stringify({
-        biliCSRF: message.biliJct,
-      }),
-    })
-      .then(response => response.json())
-      .then(data => sendResponse && sendResponse(data))
-      .catch(error => console.error(error))
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      },
+      body: {
+        biliCSRF: '',
+        // biliJct: '',
+      },
+    },
+    params: {
+      biliCSRF: '',
+    },
+    afterHandle: AHS.J_S,
   },
+
   getLoginQRCode: {
     url: 'https://passport.bilibili.com/x/passport-tv-login/qrcode/auth_code',
     _fetch: {
