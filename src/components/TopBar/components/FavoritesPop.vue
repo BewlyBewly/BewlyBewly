@@ -64,7 +64,7 @@ async function getFavoriteCategories() {
   await browser.runtime
     .sendMessage({
       contentScriptQuery: 'getFavoriteCategories',
-      mid: getUserID(),
+      up_mid: getUserID(),
     })
     .then((res) => {
       if (res.code === 0) {
@@ -83,8 +83,8 @@ function getFavoriteResources() {
   browser.runtime
     .sendMessage({
       contentScriptQuery: 'getFavoriteResources',
-      mediaId: activatedMediaId.value,
-      pageNum: currentPageNum.value,
+      media_id: activatedMediaId.value,
+      pn: currentPageNum.value,
       keyword: '',
     })
     .then((res) => {

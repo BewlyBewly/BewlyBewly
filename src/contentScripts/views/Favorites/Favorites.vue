@@ -75,7 +75,7 @@ async function getFavoriteCategories() {
   await browser.runtime
     .sendMessage({
       contentScriptQuery: 'getFavoriteCategories',
-      mid: getUserID(),
+      up_mid: getUserID(),
     })
     .then((res: FavoritesCategoryResult) => {
       if (res.code === 0) {
@@ -99,19 +99,19 @@ async function getFavoriteCategories() {
  * @param keyword
  */
 async function getFavoriteResources(
-  mediaId: number,
-  pageNum: number,
+  media_id: number,
+  pn: number,
   keyword = '' as string,
 ) {
-  if (pageNum === 1)
+  if (pn === 1)
     isFullPageLoading.value = true
   isLoading.value = true
   try {
     const res: FavoritesResult = await browser.runtime
       .sendMessage({
         contentScriptQuery: 'getFavoriteResources',
-        mediaId,
-        pageNum,
+        media_id,
+        pn,
         keyword,
       })
 
@@ -160,7 +160,7 @@ function handleUnfavorite(favoriteResource: FavoriteResource) {
   browser.runtime.sendMessage({
     contentScriptQuery: 'patchDelFavoriteResources',
     resources: `${favoriteResource.id}:${favoriteResource.type}`,
-    mediaId: selectedCategory.value?.id,
+    media_id: selectedCategory.value?.id,
     csrf: getCSRF(),
   }).then((res) => {
     if (res.code === 0)
