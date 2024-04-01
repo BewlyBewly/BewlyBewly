@@ -24,6 +24,7 @@ const videoList = reactive<VideoItem[]>([])
 const isLoading = ref<boolean>(false)
 const containerRef = ref<HTMLElement>() as Ref<HTMLElement>
 const pn = ref<number>(1)
+const noMoreContent = ref<boolean>(false)
 const { handleReachBottom, handlePageRefresh } = useBewlyApp()
 
 onMounted(async () => {
@@ -36,6 +37,7 @@ onActivated(() => {
 })
 
 async function initData() {
+  noMoreContent.value = false
   videoList.length = 0
   pn.value = 1
   await getData()
@@ -57,6 +59,9 @@ function initPageAction() {
 }
 
 async function getTrendingVideos() {
+  if (noMoreContent.value)
+    return
+
   emit('beforeLoading')
   isLoading.value = true
   try {
@@ -66,7 +71,9 @@ async function getTrendingVideos() {
       ps: 30,
     })
 
-    if (response.code === 0 && !response.data.no_more) {
+    if (response.code === 0) {
+      noMoreContent.value = response.data.no_more
+
       const resData = [] as VideoItem[]
 
       response.data.list.forEach((item: VideoItem) => {
