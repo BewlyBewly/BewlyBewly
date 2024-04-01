@@ -79,7 +79,7 @@ async function getFollowedUsersVideos() {
       contentScriptQuery: 'getMoments',
       type: 'video',
       offset: offset.value,
-      updateBaseline: updateBaseline.value,
+      update_baseline: updateBaseline.value,
     })
 
     if (response.code === -101) {

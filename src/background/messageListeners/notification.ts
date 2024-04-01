@@ -1,29 +1,30 @@
-import browser from 'webextension-polyfill'
+import type { APIMAP } from '../utils'
+import { AHS } from '../utils'
 
-function handleMessage(message: any) {
-  if (message.contentScriptQuery === 'getUnreadMsg') {
-    const url = 'https://api.bilibili.com/x/msgfeed/unread?build=0&mobi_app=web'
-    return fetch(url)
-      .then(response => response.json())
-      .then(data => (data))
-      .catch(error => console.error(error))
-  }
-
-  else if (message.contentScriptQuery === 'getUnreadDm') {
-    const url = 'https://api.vc.bilibili.com/session_svr/v1/session_svr/single_unread?build=0&mobi_app=web&unread_type=0'
-    return fetch(url)
-      .then(response => response.json())
-      .then(data => (data))
-      .catch(error => console.error(error))
-  }
+const API_NOTIFICATION: APIMAP = {
+  getUnreadMsg: {
+    url: 'https://api.bilibili.com/x/msgfeed/unread',
+    _fetch: {
+      method: 'get',
+    },
+    params: {
+      build: 0,
+      mobi_app: 'web',
+    },
+    afterHandle: AHS.J_D,
+  },
+  getUnreadDm: {
+    url: 'https://api.vc.bilibili.com/session_svr/v1/session_svr/single_unread',
+    _fetch: {
+      method: 'get',
+    },
+    params: {
+      build: 0,
+      mobi_app: 'web',
+      unread_type: 0,
+    },
+    afterHandle: AHS.J_D,
+  },
 }
 
-function handleConnect() {
-  browser.runtime.onMessage.removeListener(handleMessage)
-  browser.runtime.onMessage.addListener(handleMessage)
-}
-
-export function setupNotificationMsgLstnr() {
-  browser.runtime.onConnect.removeListener(handleConnect)
-  browser.runtime.onConnect.addListener(handleConnect)
-}
+export default API_NOTIFICATION

@@ -140,7 +140,7 @@ function getRankingPgc() {
   isLoading.value = true
   browser.runtime.sendMessage({
     contentScriptQuery: 'getRankingPgc',
-    seasonType: activatedRankingType.value.seasonType,
+    season_type: activatedRankingType.value.seasonType,
   }).then((response: RankingPgcResult) => {
     if (response.code === 0)
       Object.assign(PgcList, response.result.list)

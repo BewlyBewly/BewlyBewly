@@ -89,14 +89,14 @@ function onClickTab(tabId: number) {
   })
 }
 
-function getTopBarNewMoments(typeList: number[]) {
+function getTopBarNewMoments(type_list: number[]) {
   moments.length = 0
   isLoading.value = true
   browser.runtime
     .sendMessage({
       contentScriptQuery: 'getTopBarNewMoments',
       uid: getUserID(),
-      typeList,
+      type_list,
     })
     .then((res) => {
       if (res.code === 0) {
@@ -125,14 +125,14 @@ function getTopBarNewMoments(typeList: number[]) {
     })
 }
 
-function getTopbarHistoryMoments(typeList: number[]) {
+function getTopbarHistoryMoments(type_list: number[]) {
   isLoading.value = true
   browser.runtime
     .sendMessage({
       contentScriptQuery: 'getTopbarHistoryMoments',
       uid: getUserID(),
-      typeList,
-      offsetDynamicID: moments[moments.length - 1].dynamic_id_str,
+      type_list,
+      offset_dynamic_id: moments[moments.length - 1].dynamic_id_str,
     })
     .then((res) => {
       if (res.code === 0) {
@@ -157,7 +157,7 @@ function getTopbarLiveMoments(page: number) {
     .sendMessage({
       contentScriptQuery: 'getTopbarLiveMoments',
       page,
-      pageSize: 10,
+      pagesize: 10,
     })
     .then((res) => {
       if (res.code === 0) {
