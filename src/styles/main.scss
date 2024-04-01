@@ -102,3 +102,20 @@ html.dark.bewly-design {
 .dark::view-transition-new(root) {
   z-index: 1;
 }
+
+// Adapt the colors of the two Bilibili Evolved's buttons on the left side to BewlyBewly theme
+.bewly-design {
+  .be-settings > .sidebar > * {
+    background-color: var(--bew-elevated-solid-1) !important;
+    opacity: 0.4;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .be-settings > .sidebar > * .be-icon {
+    color: var(--bew-text-1) !important;
+    fill: var(--bew-text-1) !important;
+  }
+}
