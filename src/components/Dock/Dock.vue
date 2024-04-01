@@ -299,21 +299,21 @@ function toggleDockHide(hide: boolean) {
 .dock-item {
   --shadow-dark: 0 4px 30px 4px rgba(255, 255, 255, 0.6);
   --shadow-active: 0 4px 30px var(--bew-theme-color-70);
-  --shadow-dark-active: 0 4px 20px rgba(255, 255, 255, 0.6);
-  --shadow-active-active: 0 4px 20px var(--bew-theme-color-70);
+  --shadow-dark-active: 0 4px 20px rgba(255, 255, 255, 0.8);
+  --shadow-active-active: 0 4px 20px var(--bew-theme-color-90);
 
-  --at-apply: transform active:scale-90
+  --at-apply: transform active:important-scale-90 hover:scale-110
     md:w-45px w-35px
     md:lh-45px lh-35px
     p-0 flex items-center justify-center
     aspect-square relative
-    leading-0 duration-300
+    leading-0
     rounded-60px antialiased
     bg-$bew-content-1 hover:bg-$bew-fill-2 cursor-pointer
-    dark:bg-$bew-fill-1 dark-hover:bg-$bew-fill-4 hover:scale-110
-    active:important-scale-100;
+    dark:bg-$bew-fill-1 dark-hover:bg-$bew-fill-4;
 
   box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-1);
+  transition: transform 300ms cubic-bezier(0.34, 2, 0.6, 1), background 300ms ease, color 300ms ease, box-shadow 600ms ease;
 
   &:hover {
     box-shadow: var(--bew-shadow-edge-glow-1), 0 0 0 2px var(--bew-fill-2), var(--bew-shadow-2);

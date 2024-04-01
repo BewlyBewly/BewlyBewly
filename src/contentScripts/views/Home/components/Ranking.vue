@@ -72,10 +72,7 @@ const shouldMoveAsideUp = ref<boolean>(false)
 watch(() => activatedRankingType.value.id, () => {
   handleBackToTop(settings.value.useSearchPageModeOnHomePage ? 510 : 0)
 
-  if ('seasonType' in activatedRankingType.value)
-    getRankingPgc()
-  else
-    getRankingVideos()
+  initData()
 })
 
 onMounted(() => {
@@ -94,7 +91,7 @@ onMounted(() => {
     }
   })
 
-  getRankingVideos()
+  initData()
   initPageAction()
 })
 
@@ -104,12 +101,23 @@ onActivated(() => {
 
 function initPageAction() {
   handlePageRefresh.value = async () => {
-    videoList.length = 0
-    PgcList.length = 0
     if (isLoading.value)
       return
-    getRankingVideos()
+    initData()
   }
+}
+
+function initData() {
+  videoList.length = 0
+  PgcList.length = 0
+  getData()
+}
+
+function getData() {
+  if ('seasonType' in activatedRankingType.value)
+    getRankingPgc()
+  else
+    getRankingVideos()
 }
 
 onBeforeUnmount(() => {
@@ -146,6 +154,8 @@ function getRankingPgc() {
       Object.assign(PgcList, response.result.list)
   }).finally(() => isLoading.value = false)
 }
+
+defineExpose({ initData })
 </script>
 
 <template>
