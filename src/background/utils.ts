@@ -49,48 +49,61 @@ interface API {
   }
   afterHandle: ((response: Response) => Response | Promise<Response>)[]
 }
+// 重载API 可以为函数
+type APIFunction = (message: Message, sender?: any, sendResponse?: Function) => any
+type APIType = API | APIFunction
 interface APIMAP {
-  [key: string]: API
+  [key: string]: APIType
 }
 // 工厂函数API_LISTENER_FACTORY
 function apiListenerFactory(API_MAP: APIMAP) {
   return (message: Message, sender?: any, sendResponse?: Function) => {
-    if (API_MAP[message?.contentScriptQuery]) {
-      try {
-        let { contentScriptQuery, ...rest } = message
-        rest = rest || {}
-        const { _fetch, url, params, afterHandle } = API_MAP[contentScriptQuery] as API
-        const { method, headers, body } = _fetch as _FETCH
-        const targetParams = Object.assign({}, params, rest)
-        let targetUrl = url
-        let targetBody = Object.assign({}, body)
+    const contentScriptQuery = message.contentScriptQuery
+    // 检测是否有contentScriptQuery
+    if (!contentScriptQuery || !API_MAP[contentScriptQuery])
+      return console.error('no contentScriptQuery')
+    if (API_MAP[contentScriptQuery] instanceof Function)
+      return (API_MAP[contentScriptQuery] as APIFunction)(message, sender, sendResponse)
 
-        if (method === 'get') {
-          const urlParams = new URLSearchParams()
-          for (const key in targetParams)
-            urlParams.append(key, targetParams[key])
-          targetUrl += `?${urlParams.toString()}`
-        }
-        else {
-          targetBody = JSON.stringify(targetParams)
-        }
-        // get cant take body
-        const fetchOpt = method === 'get' ? { method, headers } : { method, headers, body: targetBody }
-        let baseFunc = fetch(targetUrl, fetchOpt)
-        afterHandle.forEach((func) => {
-          if (func.name === sendResponseHandler.name && sendResponse)
-            // sendResponseHandler 是一个特殊的后处理函数，需要传入sendResponse
-            baseFunc = baseFunc.then(sendResponseHandler(sendResponse))
-          else
-            baseFunc = baseFunc.then(func)
-        })
-        baseFunc.catch(console.error)
+    try {
+      let { contentScriptQuery, ...rest } = message
+      rest = rest || {}
+      const { _fetch, url, params, afterHandle } = API_MAP[contentScriptQuery] as API
+      const { method, headers, body } = _fetch as _FETCH
+      const targetParams = Object.assign({}, params, rest)
+      let targetUrl = url
+      let targetBody = Object.assign({}, body)
 
-        return baseFunc
+      if (method === 'get') {
+        const urlParams = new URLSearchParams()
+        for (const key in targetParams)
+          urlParams.append(key, targetParams[key])
+        targetUrl += `?${urlParams.toString()}`
       }
-      catch (e) {
-        console.error(e)
+      else {
+        targetBody = JSON.stringify(targetParams)
       }
+      // get cant take body
+      const fetchOpt = method === 'get' ? { method, headers } : { method, headers, body: targetBody }
+      if (method === 'post') {
+        // 检测是不是formData
+        if (headers && headers['Content-Type'].startWith('application/x-www-form-urlencoded'))
+          fetchOpt.body = new URLSearchParams(targetBody)
+      }
+      let baseFunc = fetch(targetUrl, fetchOpt)
+      afterHandle.forEach((func) => {
+        if (func.name === sendResponseHandler.name && sendResponse)
+          // sendResponseHandler 是一个特殊的后处理函数，需要传入sendResponse
+          baseFunc = baseFunc.then(sendResponseHandler(sendResponse))
+        else
+          baseFunc = baseFunc.then(func)
+      })
+      baseFunc.catch(console.error)
+
+      return baseFunc
+    }
+    catch (e) {
+      console.error(e)
     }
   }
 }
