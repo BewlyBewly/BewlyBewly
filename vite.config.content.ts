@@ -8,7 +8,7 @@ export default defineConfig({
   ...sharedConfig,
   build: {
     watch: isDev
-      ? { include: './' }
+      ? { include: ['./**/*'] }
       : undefined,
     outDir: r(isFirefox ? 'extension-firefox/dist/contentScripts' : 'extension/dist/contentScripts'),
     cssCodeSplit: false,
