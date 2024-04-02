@@ -342,9 +342,10 @@ function handleMoreBtnClick(event: MouseEvent) {
                   >
                     <img
                       :src="`${removeHttpFromUrl(authorFace)}@50w_50h_1c`"
-                      width="40"
-                      height="40"
+                      width="30"
+                      height="30"
                       loading="lazy"
+                      object-cover
                     >
                   </a>
                 </div>
