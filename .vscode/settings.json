@@ -1,5 +1,8 @@
 {
-  "cSpell.words": ["Vitesse"],
+  "cSpell.words": [
+    "Vitesse",
+    "WATCHLATER"
+  ],
   "typescript.tsdk": "node_modules/typescript/lib",
   "vite.autoStart": false,
   "editor.codeActionsOnSave": {

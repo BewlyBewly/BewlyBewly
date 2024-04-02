@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n'
 import { getCSRF, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
 import { calcCurrentTime } from '~/utils/dataFormatter'
 import type { List as VideoItem, WatchLaterResult } from '~/models/video/watchLater'
+import API from '~/background/msg.define'
 
 const { t } = useI18n()
 
@@ -35,7 +36,7 @@ function getAllWatchLaterList() {
   watchLaterList.length = 0
   browser.runtime
     .sendMessage({
-      contentScriptQuery: 'getAllWatchLaterList',
+      contentScriptQuery: API.WATCHLATER.GET_ALL_WATCHLATER_LIST,
     })
     .then((res: WatchLaterResult) => {
       if (res.code === 0)
@@ -48,7 +49,7 @@ function getAllWatchLaterList() {
 function deleteWatchLaterItem(index: number, aid: number) {
   browser.runtime
     .sendMessage({
-      contentScriptQuery: 'removeFromWatchLater',
+      contentScriptQuery: API.WATCHLATER.REMOVE_FROM_WATCHLATER,
       aid,
       csrf: getCSRF(),
     })
@@ -65,7 +66,7 @@ function handleClearAllWatchLater() {
   if (result) {
     isLoading.value = true
     browser.runtime.sendMessage({
-      contentScriptQuery: 'clearAllWatchLater',
+      contentScriptQuery: API.WATCHLATER.CLEAR_ALL_WATCHLATER,
       csrf: getCSRF(),
     }).then((res) => {
       if (res.code === 0)
@@ -83,7 +84,7 @@ function handleRemoveWatchedVideos() {
   if (result) {
     browser.runtime
       .sendMessage({
-        contentScriptQuery: 'removeFromWatchLater',
+        contentScriptQuery: API.WATCHLATER.REMOVE_FROM_WATCHLATER,
         viewed: true,
         csrf: getCSRF(),
       })

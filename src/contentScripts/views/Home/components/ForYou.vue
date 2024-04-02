@@ -7,6 +7,7 @@ import type { GridLayout } from '~/logic'
 import { accessKey, settings } from '~/logic'
 import { LanguageType } from '~/enums/appEnums'
 import { TVAppKey } from '~/utils/authProvider'
+import API from '~/background/msg.define'
 
 const props = defineProps<{
   gridLayout: GridLayout
@@ -103,7 +104,7 @@ async function getRecommendVideos() {
   isLoading.value = true
   try {
     const response: forYouResult = await browser.runtime.sendMessage({
-      contentScriptQuery: 'getRecommendVideos',
+      contentScriptQuery: API.VIDEO.GET_RECOMMEND_VIDEOS,
       fresh_idx: refreshIdx.value++,
     })
 
@@ -143,7 +144,7 @@ async function getAppRecommendVideos() {
   isLoading.value = true
   try {
     const response: AppForYouResult = await browser.runtime.sendMessage({
-      contentScriptQuery: 'getAppRecommendVideos',
+      contentScriptQuery: API.VIDEO.GET_APP_RECOMMEND_VIDEOS,
       access_key: accessKey.value,
       s_locale: settings.value.language !== LanguageType.Mandarin_CN ? 'zh-Hant_TW' : 'zh-Hans_CN',
       c_locale: settings.value.language !== LanguageType.Mandarin_CN ? 'zh-Hant_TW' : 'zh-Hans_CN',

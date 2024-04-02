@@ -2,6 +2,7 @@
 import type { Ref } from 'vue'
 import type { GridLayout } from '~/logic'
 import type { TrendingResult, List as VideoItem } from '~/models/video/trending'
+import API from '~/background/msg.define'
 
 const props = defineProps<{
   gridLayout: GridLayout
@@ -66,7 +67,7 @@ async function getTrendingVideos() {
   isLoading.value = true
   try {
     const response: TrendingResult = await browser.runtime.sendMessage({
-      contentScriptQuery: 'getPopularVideos',
+      contentScriptQuery: API.VIDEO.GET_POPULAR_VIDEOS,
       pn: pn.value++,
       ps: 30,
     })

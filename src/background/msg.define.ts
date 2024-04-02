@@ -61,7 +61,7 @@ enum WATCHLATER {
   SAVE_TO_WATCHLATER = 'saveToWatchLater',
   REMOVE_FROM_WATCHLATER = 'removeFromWatchLater',
   GET_ALL_WATCHLATER_LIST = 'getAllWatchLaterList',
-  CLEAR_ALL_HISTORY = 'clearAllWatchLater',
+  CLEAR_ALL_WATCHLATER = 'clearAllWatchLater',
 }
 
 const API = {
