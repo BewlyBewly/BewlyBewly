@@ -7,6 +7,14 @@ on:
       # 项目源代码所在的分支
       - main
       - dev
+    paths-ignore:
+      # Changes involving the following path files will not trigger the workflow
+      # 涉及以下路径文件的更改不会触发工作流
+      - LICENSE
+      - README-cmn_CN.md
+      - README-cmn_TW.md
+      - README-jyut.md
+      - '.github/**'
 
 jobs:
   lint:
