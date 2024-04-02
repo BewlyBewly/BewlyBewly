@@ -20,6 +20,12 @@ English | [简体中文](README-cmn_CN.md) | [正體中文](README-cmn_TW.md) | 
 ![Snipaste_2023-11-21_00-32-22](https://github.com/hakadao/BewlyBewly/assets/33394391/2533a1f9-3cb1-402e-96bb-3755404ddf02)
 ![Snipaste_2023-11-21_00-32-51](https://github.com/hakadao/BewlyBewly/assets/33394391/a439ea59-cc80-48aa-9c6a-ec5d4da98441)
 
+## 👋 Introduction
+
+BewlyBewly is a browser extension for BiliBili that aims to enhance the user experience by redesigning the BiliBili UI. The design is inspired by YouTube, Vision OS, and iOS, resulting in a more visually appealing and user-friendly interface.
+
+This project uses the [vitesse-webext](https://github.com/antfu/vitesse-webext) template for development. Without this template, it may not be possible to develop this project.
+
 ## ⬇️ Installation
 
 ### Online Installation
@@ -32,9 +38,9 @@ Even in the Edge browser, we strongly recommend you install it in the Chrome web
 
 ### Local Installation
 
-[CI](https://github.com/hakadao/BewlyBewly/actions)：Automatically build with the latest code
+[CI](https://github.com/hakadao/BewlyBewly/actions): Automatically build with the latest code
 
-[Releases](https://github.com/hakadao/BewlyBewly/releases)：Stable version
+[Releases](https://github.com/hakadao/BewlyBewly/releases): Stable version
 
 #### Edge & Chrome (RECOMMENDED)
 
@@ -50,7 +56,7 @@ Opening the `edge://extensions` page in the Edge or `chrome://extensions` page i
 > Ensure you installed [extension.zip](https://github.com/hakadao/BewlyBewly/releases) and decompress this file.
 
 1. Type in `edge://extensions/` in the address bar and press Enter
-2. Turn on `Developer mode` then press `Load unpacked` <br/> <img width="655" alt="image" src="https://user-images.githubusercontent.com/33394391/232246901-e3544c16-bde2-480d-b770-ca5242793963.png">
+2. Turn on `Developer mode` then press `Load Unpacked` <br/> <img width="655" alt="image" src="https://user-images.githubusercontent.com/33394391/232246901-e3544c16-bde2-480d-b770-ca5242793963.png">
 3. Load the decompressed extension folder in your browser
 
 #### Chrome
@@ -58,7 +64,7 @@ Opening the `edge://extensions` page in the Edge or `chrome://extensions` page i
 > Ensure you installed [extension.zip](https://github.com/hakadao/BewlyBewly/releases) and decompress this file.
 
 1. Type in `chrome://extensions/` in the address bar and press Enter
-2. Turn on `Developer mode` then press `Load unpacked` <br/> <img width="655" alt="Snipaste_2022-03-27_18-17-04" src="https://user-images.githubusercontent.com/33394391/160276882-13da0484-92c1-47dd-add8-7655c5c2bf1c.png">
+2. Turn on `Developer mode` then press `Load Unpacked` <br/> <img width="655" alt="Snipaste_2022-03-27_18-17-04" src="https://user-images.githubusercontent.com/33394391/160276882-13da0484-92c1-47dd-add8-7655c5c2bf1c.png">
 3. Load the decompressed extension folder in your browser
 
 </details>
