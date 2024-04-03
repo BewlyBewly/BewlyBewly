@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
 import { onClickOutside } from '@vueuse/core'
+import { Type as ThreePointV2Type } from '~/models/video/appForYou'
 import type { AppForYouResult, Item as AppVideoItem, ThreePointV2 } from '~/models/video/appForYou'
 import type { Item as VideoItem, forYouResult } from '~/models/video/forYou'
 import type { GridLayout } from '~/logic'
@@ -43,10 +44,6 @@ const dislikedVideoIds = ref<number[]>([])
 
 watch(() => settings.value.recommendationMode, () => {
   initData()
-})
-
-onClickOutside(videoCardRef, () => {
-  closeVideoOptions()
 })
 
 onMounted(async () => {
@@ -180,12 +177,12 @@ async function getAppRecommendVideos() {
 }
 
 function handleMoreClick(e: MouseEvent, data: AppVideoItem) {
-  if (activatedVideo.value && activatedVideo.value.idx === data.idx) {
+  if (activatedVideo.value && activatedVideo.value?.idx === data.idx) {
     closeVideoOptions()
     return
   }
+
   showVideoOptions.value = true
-  // activatedVideo.value.idx = data.idx
   activatedVideo.value = data
   const osInstance = scrollbarRef.value?.osInstance()
   const scrollTop = osInstance.elements().viewport.scrollTop || 0
@@ -194,12 +191,18 @@ function handleMoreClick(e: MouseEvent, data: AppVideoItem) {
   videoOptionsPosition.left = `${e.clientX}px`
 }
 
-function handleMoreCommand(command: string) {
+function handleMoreCommand(command: ThreePointV2Type) {
   if (activatedVideo.value)
     dislikedVideoIds.value.push(activatedVideo.value.idx)
 
-  // eslint-disable-next-line no-empty
-  switch (command) {}
+  switch (command) {
+    case ThreePointV2Type.Feedback:
+      break
+    case ThreePointV2Type.Dislike:
+      dislikedVideoIds.value.push(activatedVideo.value!.idx)
+      closeVideoOptions()
+      break
+  }
 
   // if (command === 'close')
   //   closeVideoOptions()
@@ -209,11 +212,6 @@ function closeVideoOptions() {
   showVideoOptions.value = false
   activatedVideo.value = null
 }
-
-// function handleVideoOptionsCommand(command: string) {
-//   if (command === 'close')
-//     closeVideoOptions()
-// }
 
 function jumpToLoginPage() {
   location.href = 'https://passport.bilibili.com/login'
@@ -232,6 +230,10 @@ defineExpose({ initData })
     <!-- dislike popup -->
     <div v-show="showVideoOptions">
       <div
+        pos="fixed top-0 left-0" w-full h-full z-1
+        @click="closeVideoOptions"
+      />
+      <div
         style="backdrop-filter: var(--bew-filter-glass-1);"
         :style="{ transform: `translate(${videoOptionsPosition.left}, ${videoOptionsPosition.top})` }"
         p-2 bg="$bew-elevated-1" rounded="$bew-radius" pos="absolute top-0 left-0"
@@ -239,13 +241,15 @@ defineExpose({ initData })
         shadow="$bew-shadow-1" z-10
       >
         <ul flex="~ col gap-1">
-          <li
-            v-for="option in videoOptions" :key="option.type"
-            bg="hover:$bew-fill-2" p="x-4 y-2" rounded="$bew-radius-half" cursor-pointer
-            @click="handleMoreCommand('')"
-          >
-            {{ option.title }}
-          </li>
+          <template v-for="option in videoOptions" :key="option.type">
+            <li
+              v-if="option.type !== ThreePointV2Type.WatchLater"
+              bg="hover:$bew-fill-2" p="x-4 y-2" rounded="$bew-radius-half" cursor-pointer
+              @click="handleMoreCommand(option.type)"
+            >
+              {{ option.title }}
+            </li>
+          </template>
         </ul>
       </div>
     </div>
@@ -306,8 +310,10 @@ defineExpose({ initData })
           more-btn
           :more-btn-active="video.idx === activatedVideo?.idx"
           :show-dislike-options="dislikedVideoIds.includes(video.idx)"
+          :dislike-reasons="video.three_point_v2?.find(option => option.type === ThreePointV2Type.Dislike)?.reasons || []"
           @more-click="(e) => handleMoreClick(e, video)"
         />
+        <!-- :more-options="video.three_point_v2" -->
       </template>
 
       <!-- skeleton -->

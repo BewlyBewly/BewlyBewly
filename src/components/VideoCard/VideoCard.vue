@@ -38,8 +38,7 @@ interface Props {
   moreBtnActive?: boolean
   removed?: boolean
   showDislikeOptions?: boolean
-  feedbackReason?: { id: number, name: string }
-  dislikeReason?: { id: number, name: string }
+  dislikeReasons?: { id: number, name: string }[]
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -162,7 +161,19 @@ function handleMoreBtnClick(event: MouseEvent) {
     <div hidden w="xl:280px lg:250px md:200px 200px" />
     <div hidden w="full" />
 
+    <template v-if="showDislikeOptions">
+      <div flex="~ gap-2 wrap">
+        <button
+          v-for="reason in dislikeReasons" :key="reason.id"
+          p="x-4 y-2" bg="$bew-fill-1 hover:$bew-fill-3" rounded="$bew-radius"
+          cursor-pointer
+        >
+          {{ reason.name }}
+        </button>
+      </div>
+    </template>
     <div
+      v-else
       class="video-card group"
       :class="isDislike ? 'is-dislike' : ''"
       w="full" pos="absolute top-0 left-0"
@@ -170,11 +181,7 @@ function handleMoreBtnClick(event: MouseEvent) {
       bg="hover:$bew-fill-2 active:$bew-fill-3" hover:ring="8 $bew-fill-2" active:ring="8 $bew-fill-3"
       :style="{ contentVisibility }"
     >
-      <template v-if="showDislikeOptions">
-        fdsflsd
-      </template>
       <a
-        v-else
         :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }"
         :href="videoUrl" target="_blank" rel="noopener noreferrer"
       >
