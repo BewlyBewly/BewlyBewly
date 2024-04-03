@@ -21,6 +21,7 @@ const API_RANKING: APIMAP = {
     },
     params: {
       season_type: 1,
+      day: 3,
     },
     afterHandle: AHS.J_D,
   },
