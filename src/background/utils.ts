@@ -72,6 +72,7 @@ function apiListenerFactory(API_MAP: APIMAP) {
 
       let { _fetch, url, params = {}, afterHandle } = API_MAP[contentScriptQuery] as API
       const { method, headers, body } = _fetch as _FETCH
+      const isGET = method.toLocaleLowerCase() === 'get'
       // merge params and body
       const targetParams = Object.assign({}, params)
       let targetBody = Object.assign({}, body)
@@ -82,21 +83,22 @@ function apiListenerFactory(API_MAP: APIMAP) {
           targetParams[key] = rest[key]
       })
 
-      // generate body or params
-      if (method === 'get') {
+      // generate params
+      if (Object.keys(targetParams).length) {
         const urlParams = new URLSearchParams()
         for (const key in targetParams)
           targetParams[key] && urlParams.append(key, targetParams[key])
         url += `?${urlParams.toString()}`
       }
-      else {
-        // post
+      // generate body
+      if (!isGET) {
         targetBody = (headers && headers['Content-Type'] && headers['Content-Type'].includes('application/x-www-form-urlencoded'))
           ? new URLSearchParams(targetBody)
           : JSON.stringify(targetBody)
       }
       // get cant take body
-      const fetchOpt = method === 'get' ? { method, headers } : { method, headers, body: targetBody }
+      const fetchOpt = { method, headers }
+      !isGET && Object.assign(fetchOpt, { body: targetBody })
 
       // fetch and after handle
       let baseFunc = fetch(url, fetchOpt)

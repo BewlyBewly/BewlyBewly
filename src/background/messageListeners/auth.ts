@@ -7,7 +7,7 @@ const API_AUTH: APIMAP = {
   logout: {
     url: 'https://passport.bilibili.com/login/exit/v2',
     _fetch: {
-      method: 'POST',
+      method: 'post',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
       },
