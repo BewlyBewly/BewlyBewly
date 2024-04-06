@@ -113,7 +113,7 @@ function handleClick(evt: MouseEvent) {
   }
 
   &--custom-color {
-    --at-apply: hover:opacity-80;
+    --at-apply: hover:opacity-70;
   }
 
   &--strong {

@@ -30,3 +30,12 @@
 .list-leave-to {
   --at-apply: hidden
 }
+
+.modal-enter-active,
+.modal-leave-active {
+  --at-apply: transition-all duration-500;
+}
+.modal-enter-from,
+.modal-leave-to {
+  --at-apply: opacity-0 blur-14px scale-110;
+}

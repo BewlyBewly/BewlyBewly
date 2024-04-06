@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { Icon } from '@iconify/vue'
 import { getCSRF, removeHttpFromUrl } from '~/utils/main'
 import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils/dataFormatter'
 import type { VideoPreviewResult } from '~/models/video/videoPreview'
@@ -37,8 +38,6 @@ interface Props {
   moreBtn?: boolean
   moreBtnActive?: boolean
   removed?: boolean
-  showDislikeOptions?: boolean
-  dislikeReasons?: { id: number, name: string }[]
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -47,6 +46,8 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits<{
   (e: 'moreClick', event: MouseEvent): MouseEvent
+  (e: 'undo'): void
+  (e: 'tellUsWhy'): void
 }>()
 
 const videoUrl = computed(() => {
@@ -76,7 +77,6 @@ const wValue = computed((): string => {
     return 'w-full'
 })
 
-const isDislike = ref<boolean>(false)
 const isInWatchLater = ref<boolean>(false)
 const isHover = ref<boolean>(false)
 const contentVisibility = ref<'auto' | 'visible'>('auto')
@@ -151,6 +151,10 @@ function handelMouseLeave() {
 function handleMoreBtnClick(event: MouseEvent) {
   emit('moreClick', event)
 }
+
+function handleUndo() {
+  emit('undo')
+}
 </script>
 
 <template>
@@ -161,21 +165,41 @@ function handleMoreBtnClick(event: MouseEvent) {
     <div hidden w="xl:280px lg:250px md:200px 200px" />
     <div hidden w="full" />
 
-    <template v-if="showDislikeOptions">
-      <div flex="~ gap-2 wrap">
-        <button
-          v-for="reason in dislikeReasons" :key="reason.id"
-          p="x-4 y-2" bg="$bew-fill-1 hover:$bew-fill-3" rounded="$bew-radius"
-          cursor-pointer
+    <template v-if="removed">
+      <div
+        :style="{ contentVisibility }"
+        pos="absolute top-0 left-0" w-full aspect-video
+        rounded="$bew-radius"
+      >
+        <img
+          :src="`${removeHttpFromUrl(cover)}@672w_378h_1c`" alt=""
+          w-full h-full object-cover pos="absolute top-0 left-0" aspect-video
+          z--1
         >
-          {{ reason.name }}
-        </button>
+
+        <div
+          style="backdrop-filter: var(--bew-filter-glass-1);"
+          pos="absolute top-0 left-0" w-full h-full flex="~ col gap-2 items-center justify-center"
+          bg="$bew-fill-4"
+        >
+          <p mb-2 color-white text-lg>
+            {{ $t('home.video_removed') }}
+          </p>
+          <Button
+            color="rgba(255,255,255,.35)" text-color="white" size="small"
+            @click="handleUndo"
+          >
+            <template #left>
+              <Icon icon="mingcute:back-line" text-lg />
+            </template>
+            {{ $t('common.undo') }}
+          </Button>
+        </div>
       </div>
     </template>
     <div
       v-else
       class="video-card group"
-      :class="isDislike ? 'is-dislike' : ''"
       w="full" pos="absolute top-0 left-0"
       rounded="$bew-radius" duration-300 ease-in-out
       bg="hover:$bew-fill-2 active:$bew-fill-3" hover:ring="8 $bew-fill-2" active:ring="8 $bew-fill-3"
@@ -425,7 +449,7 @@ function handleMoreBtnClick(event: MouseEvent) {
     <!-- skeleton -->
     <template v-if="!horizontal">
       <div
-        block mb-10 pointer-events-none select-none invisible
+        block mb-6 pointer-events-none select-none invisible
       >
         <!-- Cover -->
         <div w-full shrink-0 aspect-video h-fit rounded="$bew-radius" />
@@ -457,7 +481,7 @@ function handleMoreBtnClick(event: MouseEvent) {
     <template v-else>
       <div
         flex="~ gap-6"
-        mb-10 pointer-events-none select-none invisible
+        mb-6 pointer-events-none select-none invisible
       >
         <!-- Cover -->
         <div
@@ -489,11 +513,11 @@ function handleMoreBtnClick(event: MouseEvent) {
 </template>
 
 <style lang="scss" scoped>
-.video-card.is-dislike {
-  > *:not(#dislike-control) {
-    --at-apply: invisible pointer-events-none duration-0 transition-none;
-  }
-}
+// .video-card.is-dislike {
+//   > *:not(#dislike-control) {
+//     --at-apply: invisible pointer-events-none duration-0 transition-none;
+//   }
+// }
 
 .more-active {
   --at-apply: opacity-100 bg-$bew-fill-3;

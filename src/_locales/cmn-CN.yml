@@ -24,6 +24,8 @@ common:
   refresh: 刷新
   reset: 重置
   no_more_content: 没有更多内容了
+  confirm: 确定
+  cancel: 取消
 settings:
   title: 设置
 
@@ -248,7 +250,8 @@ dock:
   light_mode: 亮色模式
   settings: 设置
 home:
-  not_interested_in: 对哪方面不感兴趣？
+  not_interested: 不感兴趣
+  tell_us_why: 为什么这么做...
   video_removed: 视频已移除
   for_you: 个性推荐
   following: 正在关注
