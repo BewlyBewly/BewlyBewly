@@ -19,18 +19,18 @@ export function useDelayedHover({ delay = 200, enter, leave }: { delay?: number,
     }
   }
 
-  watch(el, (el) => {
+  watch(el, (el, _, onCleanup) => {
     if (el) {
       el.addEventListener('mouseenter', handleMouseEnter)
       el.addEventListener('mouseleave', handleMouseLeave)
     }
 
-    return () => {
+    onCleanup(() => {
       if (el) {
         el.removeEventListener('mouseenter', handleMouseEnter)
         el.removeEventListener('mouseleave', handleMouseLeave)
       }
-    }
+    })
   }, { flush: 'post' })
 
   return el
