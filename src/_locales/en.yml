@@ -24,6 +24,8 @@ common:
   refresh: Refresh
   reset: Reset
   no_more_content: No more content now, owari da
+  confirm: Confirm
+  cancel: Cancel
 settings:
   title: Settings
 
@@ -249,7 +251,8 @@ dock:
   light_mode: Light Mode
   settings: Settings
 home:
-  not_interested_in: Not interested in...
+  not_interested: Not interested
+  tell_us_why: Choose a reason why
   video_removed: Video removed
   for_you: For you
   following: Following

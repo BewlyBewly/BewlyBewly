@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import { onClickOutside } from '@vueuse/core'
+import { onKeyStroke } from '@vueuse/core'
+import { Type as ThreePointV2Type } from '~/models/video/appForYou'
 import type { AppForYouResult, Item as AppVideoItem, ThreePointV2 } from '~/models/video/appForYou'
 import type { Item as VideoItem, forYouResult } from '~/models/video/forYou'
 import type { GridLayout } from '~/logic'
 import { accessKey, settings } from '~/logic'
 import { LanguageType } from '~/enums/appEnums'
-import { TVAppKey } from '~/utils/authProvider'
+import { TVAppKey, getTvSign } from '~/utils/authProvider'
 
 const props = defineProps<{
   gridLayout: GridLayout
@@ -36,17 +37,42 @@ const { handleReachBottom, handlePageRefresh, scrollbarRef } = useBewlyApp()
 const showVideoOptions = ref<boolean>(false)
 const videoOptions = ref<ThreePointV2[] | undefined>([])
 const videoOptionsPosition = reactive<{ top: string, left: string }>({ top: '0', left: '0' })
-// const activatedVideoId = ref<number>(0)
+const activatedVideoIdx = ref<number>(0)
 const activatedVideo = ref<AppVideoItem | null>()
 const videoCardRef = ref(null)
 const dislikedVideoIds = ref<number[]>([])
+const showDislikeDialog = ref<boolean>(false)
+const selectedDislikeReason = ref<number>(1)
+const loadingDislikeDialog = ref<boolean>(false)
+
+onKeyStroke((e: KeyboardEvent) => {
+  if (showDislikeDialog.value) {
+    const dislikeReasons = activatedVideo.value?.three_point_v2?.find(option => option.type === ThreePointV2Type.Dislike)?.reasons || []
+
+    if (e.key >= '0' && e.key <= '9') {
+      e.preventDefault()
+      dislikeReasons.forEach((reason) => {
+        if (dislikeReasons[Number(e.key) - 1] && reason.id === dislikeReasons[Number(e.key) - 1].id)
+          selectedDislikeReason.value = reason.id
+      })
+    }
+    else if (e.key === 'ArrowUp') {
+      e.preventDefault()
+      const currentIndex = dislikeReasons.findIndex(reason => selectedDislikeReason.value === reason.id)
+      if (currentIndex > 0)
+        selectedDislikeReason.value = dislikeReasons[currentIndex - 1].id
+    }
+    else if (e.key === 'ArrowDown') {
+      e.preventDefault()
+      const currentIndex = dislikeReasons.findIndex(reason => selectedDislikeReason.value === reason.id)
+      if (currentIndex < dislikeReasons.length - 1)
+        selectedDislikeReason.value = dislikeReasons[currentIndex + 1].id
+    }
+  }
+})
 
 watch(() => settings.value.recommendationMode, () => {
   initData()
-})
-
-onClickOutside(videoCardRef, () => {
-  closeVideoOptions()
 })
 
 onMounted(async () => {
@@ -180,12 +206,13 @@ async function getAppRecommendVideos() {
 }
 
 function handleMoreClick(e: MouseEvent, data: AppVideoItem) {
-  if (activatedVideo.value && activatedVideo.value.idx === data.idx) {
+  if (activatedVideo.value && activatedVideoIdx.value === data.idx) {
     closeVideoOptions()
     return
   }
+
   showVideoOptions.value = true
-  // activatedVideo.value.idx = data.idx
+  activatedVideoIdx.value = data.idx
   activatedVideo.value = data
   const osInstance = scrollbarRef.value?.osInstance()
   const scrollTop = osInstance.elements().viewport.scrollTop || 0
@@ -194,26 +221,82 @@ function handleMoreClick(e: MouseEvent, data: AppVideoItem) {
   videoOptionsPosition.left = `${e.clientX}px`
 }
 
-function handleMoreCommand(command: string) {
-  if (activatedVideo.value)
-    dislikedVideoIds.value.push(activatedVideo.value.idx)
+function handleMoreCommand(command: ThreePointV2Type) {
+  closeVideoOptions()
 
-  // eslint-disable-next-line no-empty
-  switch (command) {}
-
-  // if (command === 'close')
-  //   closeVideoOptions()
+  switch (command) {
+    case ThreePointV2Type.Feedback:
+      break
+    case ThreePointV2Type.Dislike:
+      openDislikeDialog()
+      break
+  }
 }
 
 function closeVideoOptions() {
   showVideoOptions.value = false
-  activatedVideo.value = null
+  activatedVideoIdx.value = 0
 }
 
-// function handleVideoOptionsCommand(command: string) {
-//   if (command === 'close')
-//     closeVideoOptions()
-// }
+function openDislikeDialog() {
+  showDislikeDialog.value = true
+}
+
+function closeDislikeDialog() {
+  showDislikeDialog.value = false
+  selectedDislikeReason.value = 1
+}
+
+function handleDislike() {
+  loadingDislikeDialog.value = true
+  const params = {
+    access_key: accessKey.value,
+    goto: activatedVideo.value?.goto,
+    id: activatedVideo.value?.param,
+    // https://github.com/magicdawn/bilibili-app-recommend/blob/cb51f75f415f48235ce048537f2013122c16b56b/src/components/VideoCard/card.service.ts#L115
+    idx: (Date.now() / 1000).toFixed(0),
+    reason_id: selectedDislikeReason.value,
+    build: 74800100,
+    device: 'pad',
+    mobi_app: 'iphone',
+    appkey: TVAppKey.appkey,
+  }
+
+  browser.runtime.sendMessage({
+    contentScriptQuery: 'dislikeVideo',
+    ...params,
+    sign: getTvSign(params),
+  }).then((res) => {
+    if (res.code === 0)
+      dislikedVideoIds.value.push(activatedVideo.value!.idx)
+  }).finally(() => {
+    loadingDislikeDialog.value = false
+  })
+}
+
+function handleUndoDislike(video: AppVideoItem) {
+  const params = {
+    access_key: accessKey.value,
+    goto: video.goto,
+    id: video.param,
+    // https://github.com/magicdawn/bilibili-app-recommend/blob/cb51f75f415f48235ce048537f2013122c16b56b/src/components/VideoCard/card.service.ts#L115
+    idx: (Date.now() / 1000).toFixed(0),
+    reason_id: 1, // 1 means dislike, e.g. {"id": 1, "name": "不感兴趣","toast": "将减少相似内容推荐"}
+    build: 74800100,
+    device: 'pad',
+    mobi_app: 'iphone',
+    appkey: TVAppKey.appkey,
+  }
+
+  browser.runtime.sendMessage({
+    contentScriptQuery: 'undoDislikeVideo',
+    ...params,
+    sign: getTvSign(params),
+  }).then((res) => {
+    if (res.code === 0)
+      dislikedVideoIds.value = dislikedVideoIds.value.filter(currentIdx => currentIdx !== video.idx)
+  })
+}
 
 function jumpToLoginPage() {
   location.href = 'https://passport.bilibili.com/login'
@@ -229,8 +312,12 @@ defineExpose({ initData })
     <div hidden grid="~ cols-1 xl:cols-2 gap-4" />
     <div hidden grid="~ cols-1 gap-4" />
 
-    <!-- dislike popup -->
+    <!-- more popup -->
     <div v-show="showVideoOptions">
+      <div
+        pos="fixed top-0 left-0" w-full h-full z-1
+        @click="closeVideoOptions"
+      />
       <div
         style="backdrop-filter: var(--bew-filter-glass-1);"
         :style="{ transform: `translate(${videoOptionsPosition.left}, ${videoOptionsPosition.top})` }"
@@ -239,16 +326,53 @@ defineExpose({ initData })
         shadow="$bew-shadow-1" z-10
       >
         <ul flex="~ col gap-1">
-          <li
-            v-for="option in videoOptions" :key="option.type"
-            bg="hover:$bew-fill-2" p="x-4 y-2" rounded="$bew-radius-half" cursor-pointer
-            @click="handleMoreCommand('')"
-          >
-            {{ option.title }}
-          </li>
+          <template v-for="option in videoOptions" :key="option.type">
+            <li
+              v-if="option.type !== ThreePointV2Type.WatchLater && option.type !== ThreePointV2Type.Feedback"
+              bg="hover:$bew-fill-2" p="x-4 y-2" rounded="$bew-radius-half" cursor-pointer
+              @click="handleMoreCommand(option.type)"
+            >
+              <span v-if="option.type === ThreePointV2Type.Dislike">{{ $t('home.not_interested') }}</span>
+              <span v-else>{{ option.title }}</span>
+            </li>
+          </template>
         </ul>
       </div>
     </div>
+
+    <!-- dislike dialog -->
+    <Dialog
+      v-if="showDislikeDialog"
+      :title="$t('home.tell_us_why')"
+      width="400px"
+      append-to-bewly-body
+      center-footer
+      :loading="loadingDislikeDialog"
+      @close="closeDislikeDialog"
+      @confirm="handleDislike"
+    >
+      <ul flex="~ col gap-2">
+        <li
+          v-for="(reason, index) in activatedVideo?.three_point_v2?.find(option => option.type === ThreePointV2Type.Dislike)?.reasons"
+          :key="reason.id"
+          :class="{ 'activated-dislike-reason': selectedDislikeReason === reason.id }"
+          p="x-6 y-4" rounded="$bew-radius" cursor-pointer bg="$bew-fill-1 hover:$bew-fill-2"
+          flex="~ gap-2 items-center justify-between"
+          @click="selectedDislikeReason = reason.id"
+        >
+          <div flex="~ gap-2">
+            <div
+              bg="$bew-theme-color" color-white w-20px h-20px rounded-10
+              flex="~ justify-center items-center"
+            >
+              {{ index + 1 }}
+            </div>
+            {{ reason.name }}
+          </div>
+          <line-md:confirm v-if="selectedDislikeReason === reason.id" />
+        </li>
+      </ul>
+    </Dialog>
 
     <Empty v-if="needToLoginFirst" mt-6 :description="$t('common.please_log_in_first')">
       <Button type="primary" @click="jumpToLoginPage()">
@@ -304,10 +428,13 @@ defineExpose({ initData })
           show-preview
           :horizontal="gridLayout !== 'adaptive'"
           more-btn
-          :more-btn-active="video.idx === activatedVideo?.idx"
-          :show-dislike-options="dislikedVideoIds.includes(video.idx)"
+          :more-btn-active="video.idx === activatedVideoIdx"
+          :removed="dislikedVideoIds.includes(video.idx)"
+          :dislike-reasons="video.three_point_v2?.find(option => option.type === ThreePointV2Type.Dislike)?.reasons || []"
           @more-click="(e) => handleMoreClick(e, video)"
+          @undo="handleUndoDislike(video)"
         />
+        <!-- :more-options="video.three_point_v2" -->
       </template>
 
       <!-- skeleton -->
@@ -329,4 +456,7 @@ defineExpose({ initData })
 </template>
 
 <style lang="scss" scoped>
+.activated-dislike-reason {
+  --at-apply: bg-$bew-theme-color-20 color-$bew-theme-color;
+}
 </style>
