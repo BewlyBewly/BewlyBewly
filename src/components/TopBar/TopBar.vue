@@ -69,6 +69,47 @@ const favoritesPopRef = ref<any>()
 const scrollTop = ref<number>(0)
 const oldScrollTop = ref<number>(0)
 
+// Avatar
+const avatar = useDelayedHover({
+  enter: () => openUserPanel(),
+  leave: () => closeUserPanel(),
+})
+// Notifications
+const notifications = useDelayedHover({
+  enter: () => showNotificationsPop.value = true,
+  leave: () => showNotificationsPop.value = false,
+})
+// Moments
+const moments = useDelayedHover({
+  enter: () => showMomentsPop.value = true,
+  leave: () => showMomentsPop.value = false,
+})
+// Favorites
+const favorites = useDelayedHover({
+  enter: () => showFavoritesPop.value = true,
+  leave: () => showFavoritesPop.value = false,
+})
+// Upload
+const upload = useDelayedHover({
+  enter: () => showUploadPop.value = true,
+  leave: () => showUploadPop.value = false,
+})
+// History
+const history = useDelayedHover({
+  enter: () => showHistoryPop.value = true,
+  leave: () => showHistoryPop.value = false,
+})
+// Watch Later
+const watchLater = useDelayedHover({
+  enter: () => showWatchLaterPop.value = true,
+  leave: () => showWatchLaterPop.value = false,
+})
+// More
+const more = useDelayedHover({
+  enter: () => showMorePop.value = true,
+  leave: () => showMorePop.value = false,
+})
+
 watch(() => settings.value.autoHideTopBar, (newVal) => {
   if (!newVal)
     toggleTopBarVisible(true)
@@ -379,9 +420,8 @@ defineExpose({
           <template v-if="isLogin">
             <!-- Avatar -->
             <div
+              ref="avatar"
               class="avatar right-side-item"
-              @mouseenter="openUserPanel"
-              @mouseleave="closeUserPanel"
             >
               <a
                 ref="avatarImg"
@@ -447,10 +487,9 @@ defineExpose({
             <div display="lg:flex none" gap-1>
               <!-- Notifications -->
               <div
+                ref="notifications"
                 class="right-side-item"
                 :class="{ active: showNotificationsPop }"
-                @mouseenter="showNotificationsPop = true"
-                @mouseleave="showNotificationsPop = false"
               >
                 <template v-if="unReadMessageCount > 0">
                   <div
@@ -482,10 +521,9 @@ defineExpose({
 
               <!-- Moments -->
               <div
+                ref="moments"
                 class="right-side-item"
                 :class="{ active: showMomentsPop }"
-                @mouseenter="showMomentsPop = true"
-                @mouseleave="showMomentsPop = false"
               >
                 <template v-if="newMomentsCount > 0">
                   <div
@@ -516,10 +554,9 @@ defineExpose({
 
               <!-- Favorites -->
               <div
+                ref="favorites"
                 class="right-side-item"
                 :class="{ active: showFavoritesPop }"
-                @mouseenter="showFavoritesPop = true"
-                @mouseleave="showFavoritesPop = false"
               >
                 <a
                   :href="`https://space.bilibili.com/${mid}/favlist`"
@@ -542,10 +579,9 @@ defineExpose({
 
               <!-- History -->
               <div
+                ref="history"
                 class="right-side-item"
                 :class="{ active: showHistoryPop }"
-                @mouseenter="showHistoryPop = true"
-                @mouseleave="showHistoryPop = false"
               >
                 <a
                   href="https://www.bilibili.com/account/history"
@@ -562,10 +598,9 @@ defineExpose({
 
               <!-- Watch later -->
               <div
+                ref="watchLater"
                 class="right-side-item"
                 :class="{ active: showWatchLaterPop }"
-                @mouseenter="showWatchLaterPop = true"
-                @mouseleave="showWatchLaterPop = false"
               >
                 <a
                   href="https://www.bilibili.com/watchlater/#/list"
@@ -594,11 +629,10 @@ defineExpose({
 
             <!-- More -->
             <div
+              ref="more"
               class="right-side-item"
               :class="{ active: showMorePop }"
               display="lg:!none flex"
-              @mouseenter="showMorePop = true"
-              @mouseleave="showMorePop = false"
             >
               <a title="More">
                 <mingcute:menu-line />
@@ -611,9 +645,8 @@ defineExpose({
 
             <!-- Upload -->
             <div
+              ref="upload"
               class="upload right-side-item"
-              @mouseenter="showUploadPop = true"
-              @mouseleave="showUploadPop = false"
             >
               <a
                 href="https://member.bilibili.com/platform/upload/video/frame"
