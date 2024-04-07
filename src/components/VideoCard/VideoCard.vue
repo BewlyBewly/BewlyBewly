@@ -178,9 +178,8 @@ function handleUndo() {
         >
 
         <div
-          style="backdrop-filter: var(--bew-filter-glass-1);"
           pos="absolute top-0 left-0" w-full h-full flex="~ col gap-2 items-center justify-center"
-          bg="$bew-fill-4"
+          bg="$bew-fill-4" backdrop-blur-20px mix-blend-overlay
         >
           <p mb-2 color-white text-lg>
             {{ $t('home.video_removed') }}
