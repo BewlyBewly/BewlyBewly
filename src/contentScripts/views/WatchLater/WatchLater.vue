@@ -302,7 +302,7 @@ function jumpToLoginPage() {
             <template #left>
               <tabler:player-play />
             </template>
-            {{ t('watch_later.play_all') }}
+            {{ t('common.play_all') }}
           </Button>
           <Button
             color="rgba(255,255,255,.35)" block text-color="white" strong flex-1

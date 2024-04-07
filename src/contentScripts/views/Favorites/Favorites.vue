@@ -291,7 +291,7 @@ function handleUnfavorite(favoriteResource: FavoriteResource) {
             <template #left>
               <tabler:player-play />
             </template>
-            {{ t('watch_later.play_all') }}
+            {{ t('common.play_all') }}
           </Button>
         </p>
         <ul class="category-list" h-full overflow-overlay border="1 color-[rgba(255,255,255,.2)]" rounded="$bew-radius">
