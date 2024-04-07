@@ -7,7 +7,7 @@
   --at-apply: opacity-0;
 }
 .page-fade-leave-to {
-  --at-apply: hidden
+  --at-apply: hidden;
 }
 
 .fade-enter-active,
@@ -28,7 +28,7 @@
   --at-apply: opacity-0 transform translate-y-6 transform-gpu;
 }
 .list-leave-to {
-  --at-apply: hidden
+  --at-apply: hidden;
 }
 
 .modal-enter-active,
@@ -37,5 +37,5 @@
 }
 .modal-enter-from,
 .modal-leave-to {
-  --at-apply: opacity-0 blur-14px scale-110;
+  --at-apply: opacity-0 scale-105 transform-gpu;
 }

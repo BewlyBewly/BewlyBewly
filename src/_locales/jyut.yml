@@ -1,5 +1,6 @@
 common:
   view_all: 睇晒佢哋
+  play_all: 播晒佢哋
   loading: 撈緊...
   undo: 整返返去
   view: '{count}次'
@@ -303,7 +304,6 @@ favorites:
   unfavorite: 唔再愛喇
 watch_later:
   title: 陣間至睇
-  play_all: 播晒佢哋
   clear_all: 剷曬陣間至睇啲片
   clear_all_confirm: |-
     係咪要剷曬陣間至睇啲片呀？

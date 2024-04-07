@@ -1,5 +1,6 @@
 common:
   view_all: 查看更多
+  play_all: 播放全部
   loading: 加载中...
   undo: 还原
   view: '{count}次'
@@ -300,7 +301,6 @@ favorites:
   unfavorite: 取消收藏
 watch_later:
   title: 稍后再看
-  play_all: 播放全部
   clear_all: 清空稍后再看
   clear_all_confirm: |-
     要清空稍后再看吗？

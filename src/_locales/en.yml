@@ -1,5 +1,6 @@
 common:
   view_all: View ALL
+  play_all: Play ALL
   loading: Loading...
   undo: UNDO
   view: no view | {count} view | {count} views
@@ -299,7 +300,6 @@ favorites:
   unfavorite: Unfavorite
 watch_later:
   title: Watch Later
-  play_all: Play all
   clear_all: Clear all watch later
   clear_all_confirm: |-
     Clear all watch later?

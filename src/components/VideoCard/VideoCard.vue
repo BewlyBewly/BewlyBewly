@@ -174,13 +174,12 @@ function handleUndo() {
         <img
           :src="`${removeHttpFromUrl(cover)}@672w_378h_1c`" alt=""
           w-full h-full object-cover pos="absolute top-0 left-0" aspect-video
-          z--1
+          z--1 rounded-inherit
         >
 
         <div
-          style="backdrop-filter: var(--bew-filter-glass-1);"
           pos="absolute top-0 left-0" w-full h-full flex="~ col gap-2 items-center justify-center"
-          bg="$bew-fill-4"
+          bg="$bew-fill-4" backdrop-blur-20px mix-blend-luminosity
         >
           <p mb-2 color-white text-lg>
             {{ $t('home.video_removed') }}
