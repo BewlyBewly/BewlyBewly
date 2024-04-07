@@ -380,8 +380,9 @@ function toggleWatchLater(aid: number) {
 
             <div flex="~" justify="between" w="full">
               <div>
-                <span v-if="selectedTab !== 1">{{ `${moment.name} ${t('topbar.moments_dropdown.uploaded')}` }}</span>
-                <span v-else>{{ `${moment.name} ${t('topbar.moments_dropdown.now_streaming')}` }}</span>
+                <!-- <span v-if="selectedTab !== 1">{{ `${moment.name} ${t('topbar.moments_dropdown.uploaded')}` }}</span> -->
+                <!-- <span v-else>{{ `${moment.name} ${t('topbar.moments_dropdown.now_streaming')}` }}</span> -->
+                <span font-bold>{{ moment.name }}</span>
                 <div overflow-hidden text-ellipsis break-anywhere>
                   {{ moment.title }}
                 </div>
