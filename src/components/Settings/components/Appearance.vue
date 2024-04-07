@@ -66,6 +66,10 @@ const themeOptions = computed<Array<{ value: string, label: string }>>(() => {
   ]
 })
 
+watch(() => settings.value.wallpaper, (newValue) => {
+  changeWallpaper(newValue)
+})
+
 function changeThemeColor(color: string) {
   settings.value.themeColor = color
 }
