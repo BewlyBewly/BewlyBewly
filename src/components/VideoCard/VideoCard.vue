@@ -168,31 +168,33 @@ function handleUndo() {
     <template v-if="removed">
       <div
         :style="{ contentVisibility }"
-        pos="absolute top-0 left-0" w-full aspect-video
-        rounded="$bew-radius"
+        w-full
+        pos="absolute top-0 left-0" aspect-video
       >
-        <img
-          :src="`${removeHttpFromUrl(cover)}@672w_378h_1c`" alt=""
-          w-full h-full object-cover pos="absolute top-0 left-0" aspect-video
-          z--1 rounded-inherit
-        >
-
-        <div
-          pos="absolute top-0 left-0" w-full h-full flex="~ col gap-2 items-center justify-center"
-          bg="$bew-fill-4" backdrop-blur-20px mix-blend-luminosity
-        >
-          <p mb-2 color-white text-lg>
-            {{ $t('home.video_removed') }}
-          </p>
-          <Button
-            color="rgba(255,255,255,.35)" text-color="white" size="small"
-            @click="handleUndo"
+        <div :w="wValue" h-fit relative>
+          <img
+            :src="`${removeHttpFromUrl(cover)}@672w_378h_1c`" alt=""
+            w-full h-fit object-cover pos="absolute top-0 left-0" aspect-video
+            z--1 rounded="$bew-radius"
           >
-            <template #left>
-              <Icon icon="mingcute:back-line" text-lg />
-            </template>
-            {{ $t('common.undo') }}
-          </Button>
+
+          <div
+            pos="absolute top-0 left-0" w-full h-fit aspect-video flex="~ col gap-2 items-center justify-center"
+            bg="$bew-fill-4" backdrop-blur-20px mix-blend-luminosity rounded="$bew-radius"
+          >
+            <p mb-2 color-white text-lg>
+              {{ $t('home.video_removed') }}
+            </p>
+            <Button
+              color="rgba(255,255,255,.35)" text-color="white" size="small"
+              @click="handleUndo"
+            >
+              <template #left>
+                <Icon icon="mingcute:back-line" text-lg />
+              </template>
+              {{ $t('common.undo') }}
+            </Button>
+          </div>
         </div>
       </div>
     </template>
