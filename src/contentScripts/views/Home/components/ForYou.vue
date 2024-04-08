@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
 import { onKeyStroke } from '@vueuse/core'
+import { useToast } from 'vue-toastification'
 import { Type as ThreePointV2Type } from '~/models/video/appForYou'
 import type { AppForYouResult, Item as AppVideoItem, ThreePointV2 } from '~/models/video/appForYou'
 import type { Item as VideoItem, forYouResult } from '~/models/video/forYou'
@@ -26,6 +27,8 @@ const gridValue = computed((): string => {
   return '~ cols-1 gap-4'
 })
 
+const toast = useToast()
+
 const videoList = reactive<VideoItem[]>([])
 const appVideoList = reactive<AppVideoItem[]>([])
 const isLoading = ref<boolean>(true)
@@ -40,7 +43,7 @@ const videoOptionsPosition = reactive<{ top: string, left: string }>({ top: '0',
 const activatedVideoIdx = ref<number>(0)
 const activatedVideo = ref<AppVideoItem | null>()
 const videoCardRef = ref(null)
-const dislikedVideoIds = ref<number[]>([])
+const dislikedVideoUniqueKeys = ref<string[]>([])
 const showDislikeDialog = ref<boolean>(false)
 const selectedDislikeReason = ref<number>(1)
 const loadingDislikeDialog = ref<boolean>(false)
@@ -239,12 +242,12 @@ function closeVideoOptions() {
 }
 
 function openDislikeDialog() {
+  selectedDislikeReason.value = 1
   showDislikeDialog.value = true
 }
 
 function closeDislikeDialog() {
   showDislikeDialog.value = false
-  selectedDislikeReason.value = 1
 }
 
 function handleDislike() {
@@ -266,12 +269,16 @@ function handleDislike() {
     contentScriptQuery: 'dislikeVideo',
     ...params,
     sign: getTvSign(params),
-  }).then((res) => {
-    if (res.code === 0)
-      dislikedVideoIds.value.push(activatedVideo.value!.idx)
-  }).finally(() => {
-    loadingDislikeDialog.value = false
   })
+    .then((res) => {
+      if (res.code === 0)
+        activatedVideo.value && dislikedVideoUniqueKeys.value.push(getVideoUniqueKey(activatedVideo.value))
+      else
+        toast.error(res.message)
+    })
+    .finally(() => {
+      loadingDislikeDialog.value = false
+    })
 }
 
 function handleUndoDislike(video: AppVideoItem) {
@@ -281,7 +288,7 @@ function handleUndoDislike(video: AppVideoItem) {
     id: video.param,
     // https://github.com/magicdawn/bilibili-app-recommend/blob/cb51f75f415f48235ce048537f2013122c16b56b/src/components/VideoCard/card.service.ts#L115
     idx: (Date.now() / 1000).toFixed(0),
-    reason_id: 1, // 1 means dislike, e.g. {"id": 1, "name": "不感兴趣","toast": "将减少相似内容推荐"}
+    reason_id: selectedDislikeReason.value, // 1 means dislike, e.g. {"id": 1, "name": "不感兴趣","toast": "将减少相似内容推荐"}
     build: 74800100,
     device: 'pad',
     mobi_app: 'iphone',
@@ -293,9 +300,19 @@ function handleUndoDislike(video: AppVideoItem) {
     ...params,
     sign: getTvSign(params),
   }).then((res) => {
-    if (res.code === 0)
-      dislikedVideoIds.value = dislikedVideoIds.value.filter(currentIdx => currentIdx !== video.idx)
+    if (res.code === 0) {
+      dislikedVideoUniqueKeys.value = dislikedVideoUniqueKeys.value.filter(currentKey =>
+        currentKey !== (activatedVideo.value ? getVideoUniqueKey(activatedVideo.value) : ''),
+      )
+    }
+    else {
+      toast.error(res.message)
+    }
   })
+}
+
+function getVideoUniqueKey(video: AppVideoItem) {
+  return video.idx + (video.bvid || video.uri || '')
 }
 
 function jumpToLoginPage() {
@@ -346,7 +363,6 @@ defineExpose({ initData })
       :title="$t('home.tell_us_why')"
       width="400px"
       append-to-bewly-body
-      center-footer
       :loading="loadingDislikeDialog"
       @close="closeDislikeDialog"
       @confirm="handleDislike"
@@ -429,7 +445,7 @@ defineExpose({ initData })
           :horizontal="gridLayout !== 'adaptive'"
           more-btn
           :more-btn-active="video.idx === activatedVideoIdx"
-          :removed="dislikedVideoIds.includes(video.idx)"
+          :removed="dislikedVideoUniqueKeys.includes(getVideoUniqueKey(video))"
           :dislike-reasons="video.three_point_v2?.find(option => option.type === ThreePointV2Type.Dislike)?.reasons || []"
           @more-click="(e) => handleMoreClick(e, video)"
           @undo="handleUndoDislike(video)"

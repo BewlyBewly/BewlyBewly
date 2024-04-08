@@ -25,7 +25,7 @@ export async function setupApp(app: App) {
       transition: 'Vue-Toastification__fade',
       maxToasts: 20,
       newestOnTop: true,
-      position: POSITION.TOP_CENTER,
+      position: POSITION.TOP_RIGHT,
     })
   app.use(pinia)
 }
