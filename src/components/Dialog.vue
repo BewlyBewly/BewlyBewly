@@ -90,12 +90,12 @@ function handleConfirm() {
         />
         <div
           style="
-            --un-shadow: var(--bew-shadow-3) var(--bew-shadow-edge-glow-2);
+            box-shadow: var(--bew-shadow-3) var(--bew-shadow-edge-glow-2);
             backdrop-filter: var(--bew-filter-glass-2);
           "
           :style="{ width: dialogWidth, height: dialogHeight }"
-          pos="absolute top-1/2 left-1/2" bg="$bew-content-2 dark:$bew-elevated-1" rounded="$bew-radius"
-          transform="translate--1/2" z-2 shadow overflow="x-hidden y-overlay"
+          pos="absolute top-1/2 left-1/2" bg="$bew-elevated-1" rounded="$bew-radius"
+          transform="translate--1/2" z-2 overflow="x-hidden y-overlay"
           antialiased
         >
           <!-- loading masking -->
@@ -113,7 +113,7 @@ function handleConfirm() {
             style="
               text-shadow: 0 0 15px var(--bew-elevated-solid-1), 0 0 20px var(--bew-elevated-solid-1)
             "
-            pos="sticky top-0 left-0" w-full h-80px px-8 flex
+            pos="sticky top-0 left-0" w-full h-70px px-8 flex
             items-center justify-between
             rounded="t-$bew-radius" z-1
           >
@@ -141,21 +141,21 @@ function handleConfirm() {
               <ic-baseline-clear />
             </div>
           </header>
-          <main p="x-8 t-0 b-4" relative>
+          <main p="x-8 y-2" relative>
             <!-- <div h-80px mt--8 /> -->
             <slot />
           </main>
           <footer
-            :style="{ justifyContent: centerFooter ? 'center' : 'flex-end' }"
-            flex="~ gap-2" p="8 t-0"
+            :style="{ justifyContent: centerFooter || center ? 'center' : 'flex-end' }"
+            flex="~ gap-2" p="x-8 t-6 b-6"
           >
-            <Button type="secondary" size="large" @click="handleClose">
+            <Button type="tertiary" @click="handleClose">
               <div>
                 {{ $t('common.cancel') }}
                 <span v-show="showShortcut" text="xs $bew-text-2">(Esc)</span>
               </div>
             </Button>
-            <Button type="primary" size="large" @click="handleConfirm">
+            <Button type="primary" @click="handleConfirm">
               <div>
                 {{ $t('common.confirm') }}
                 <span v-show="showShortcut" text="xs">(Enter)</span>

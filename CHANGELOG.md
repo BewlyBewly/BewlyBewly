@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.16.1](https://github.com/hakadao/BewlyBewly/compare/v0.16.0...v0.16.1) (2024-04-08)
+
+
+### Features
+
+* adjust dialog styles && add tertiary type to button ([020889f](https://github.com/hakadao/BewlyBewly/commit/020889f8474c812392194210684a8603066b6a6d))
+
+
+### Bug Fixes
+
+* **ForYou:** Fix issue with dislike functionality in ForYou.vue component ([1074834](https://github.com/hakadao/BewlyBewly/commit/10748340672dc12cc18e646410fbac2cd27e031b))
+* **MorePop:** add missing watch later entry ([b657fed](https://github.com/hakadao/BewlyBewly/commit/b657fedc74f571c4bfc2a6b07eb0fdb3ae4bdc1f))
+* **VideoCard:** correct styling distortion when in horizontal mode ([f9be380](https://github.com/hakadao/BewlyBewly/commit/f9be38047194b91f7d2c1be8565cf6f987adef44))
+
+
+### Style Changes
+
+* **Dialog:** adjust dialog styles ([b39e876](https://github.com/hakadao/BewlyBewly/commit/b39e876148cfd8d8eba7e4bfaf64b9e5ae5d1af6))
+
 ## [0.16.0](https://github.com/hakadao/BewlyBewly/compare/v0.15.5...v0.16.0) (2024-04-07)
 
 
