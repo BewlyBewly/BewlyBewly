@@ -3,6 +3,7 @@ interface Props {
   type?: | 'default'
     | 'primary'
     | 'secondary'
+    | 'tertiary'
     | 'info'
     | 'success'
     | 'warning'
@@ -88,6 +89,12 @@ function handleClick(evt: MouseEvent) {
 
   &--type-secondary {
     --b-button-color: var(--bew-fill-1);
+    --b-button-color-hover: var(--bew-fill-2);
+    --b-button-text-color: var(--bew-text-1);
+  }
+
+  &--type-tertiary {
+    --b-button-color: transparent;
     --b-button-color-hover: var(--bew-fill-2);
     --b-button-text-color: var(--bew-text-1);
   }
