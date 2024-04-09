@@ -16,7 +16,7 @@ const settingsMenu = {
   [MenuType.SearchPage]: defineAsyncComponent(() => import('./components/SearchPage.vue')),
   [MenuType.Home]: defineAsyncComponent(() => import('./components/Home.vue')),
   [MenuType.Compatibility]: defineAsyncComponent(() => import('./components/Compatibility.vue')),
-  [MenuType.BilibiliSettings]: defineAsyncComponent(() => import('./components/BilibiliSettings.vue')),
+  // [MenuType.BilibiliSettings]: defineAsyncComponent(() => import('./components/BilibiliSettings.vue')),
   [MenuType.About]: defineAsyncComponent(() => import('./components/About.vue')),
 }
 const activatedMenuItem = ref<MenuType>(MenuType.General)
@@ -66,12 +66,12 @@ const settingsMenuItems = computed((): MenuItem[] => {
       iconActivated: 'mingcute:polygon-fill',
       title: t('settings.menu_compatibility'),
     },
-    {
-      value: MenuType.BilibiliSettings,
-      icon: 'ant-design:bilibili-outlined',
-      iconActivated: 'ant-design:bilibili-outlined',
-      title: 'Bilibili',
-    },
+    // {
+    //   value: MenuType.BilibiliSettings,
+    //   icon: 'ant-design:bilibili-outlined',
+    //   iconActivated: 'ant-design:bilibili-outlined',
+    //   title: 'Bilibili',
+    // },
     {
       value: MenuType.About,
       icon: 'mingcute:information-line',
