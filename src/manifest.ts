@@ -1,7 +1,7 @@
 import fs from 'fs-extra'
 import type { Manifest } from 'webextension-polyfill'
 import type PkgType from '../package.json'
-import { isDev, isFirefox, port, r } from '../scripts/utils'
+import { isDev, isFirefox, isSafari, port, r } from '../scripts/utils'
 
 export async function getManifest() {
   const pkg = await fs.readJSON(r('package.json')) as typeof PkgType
@@ -22,7 +22,7 @@ export async function getManifest() {
     //   page: './dist/options/index.html',
     //   open_in_tab: true,
     // },
-    background: isFirefox
+    background: (isFirefox || isSafari)
       ? { scripts: ['./dist/background/index.mjs'] }
       : { service_worker: './dist/background/index.mjs' },
     icons: {
