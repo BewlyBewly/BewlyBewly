@@ -171,8 +171,6 @@ function injectApp() {
     shadowDOM.appendChild(svgDiv)
 
     document.body.appendChild(container)
-    // Fixed a bug in Safari that when the extension was installed, the page would turn into a white screen
-    document.body.style.opacity = '1'
 
     const app = createApp(App)
     setupApp(app)

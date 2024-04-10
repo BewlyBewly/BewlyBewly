@@ -12,6 +12,7 @@ dist
 dist-ssr
 extension/
 extension-firefox/
+extension-safari/
 node_modules
 src/auto-imports.d.ts
 src/components.d.ts
