@@ -23,7 +23,7 @@ export async function getManifest() {
     //   open_in_tab: true,
     // },
     background: (isFirefox || isSafari)
-      ? { scripts: ['./dist/background/index.mjs'] }
+      ? { scripts: ['./dist/background/index.mjs'], persistent: false }
       : { service_worker: './dist/background/index.mjs' },
     icons: {
       16: './assets/icon-512.png',
