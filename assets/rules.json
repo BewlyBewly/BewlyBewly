@@ -20,7 +20,8 @@
     "condition": {
       "domainType": "thirdParty",
       "urlFilter": "||api.bilibili.com",
-      "resourceTypes": ["xmlhttprequest"]
+      "resourceTypes": ["xmlhttprequest"],
+      "requestMethods": ["post"]
     }
   },
   {
@@ -44,7 +45,8 @@
     "condition": {
       "domainType": "thirdParty",
       "urlFilter": "||passport.bilibili.com",
-      "resourceTypes": ["xmlhttprequest"]
+      "resourceTypes": ["xmlhttprequest"],
+      "requestMethods": ["post"]
     }
   }
 ]
