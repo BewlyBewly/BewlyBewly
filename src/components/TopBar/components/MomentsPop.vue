@@ -203,7 +203,7 @@ function pushItemIntoMoments(item: any) {
       face: item.desc.user_profile.info.face,
       aid: card.aid,
       bvid: item.desc.bvid,
-      url: card.short_link_v2,
+      url: card.short_link_v2 || `https://www.bilibili.com/video/${item.desc.bvid}`,
       ctime: card.ctime,
       title: card.title,
       cover: card.pic,
