@@ -1,21 +1,18 @@
-import browser from 'webextension-polyfill'
+import type { APIMAP } from '../utils'
+import { AHS } from '../utils'
 
-function handleMessage(message: any) {
-  if (message.contentScriptQuery === 'getSearchSuggestion') {
-    const url = `https://s.search.bilibili.com/main/suggest?term=${message.term}&highlight=`
-    return fetch(url)
-      .then(response => response.json())
-      .then(data => (data))
-      .catch(error => console.error(error))
-  }
+const API_SEARCH: APIMAP = {
+  getSearchSuggestion: {
+    url: 'https://s.search.bilibili.com/main/suggest',
+    _fetch: {
+      method: 'get',
+    },
+    params: {
+      term: '',
+      highlight: '',
+    },
+    afterHandle: AHS.J_D,
+  },
 }
 
-function handleConnect() {
-  browser.runtime.onMessage.removeListener(handleMessage)
-  browser.runtime.onMessage.addListener(handleMessage)
-}
-
-export function setupSearchMsgLstnr() {
-  browser.runtime.onConnect.removeListener(handleConnect)
-  browser.runtime.onConnect.addListener(handleConnect)
-}
+export default API_SEARCH
