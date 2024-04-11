@@ -48,7 +48,14 @@ function getAllWatchLaterList() {
 </script>
 
 <template>
-  <div class="w-[380px] shadow-[var(--bew-shadow-2)] bg-$bew-elevated-solid-1 rounded-$bew-radius relative of-hidden">
+  <div
+    w="380px"
+    shadow="$bew-shadow-2"
+    bg="$bew-elevated-solid-1"
+    rounded="$bew-radius"
+    pos="relative"
+    of="hidden"
+  >
     <!-- top bar -->
     <header
       style="backdrop-filter: var(--bew-filter-glass-1);"
