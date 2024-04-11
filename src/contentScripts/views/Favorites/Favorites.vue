@@ -257,7 +257,10 @@ function handleUnfavorite(favoriteResource: FavoriteResource) {
           pos="absolute top-0 left-0" w-full h-full bg-cover bg-center
           z--1
         >
-          <div absolute w-full h-full style="backdrop-filter: blur(60px) saturate(180%)" bg="$bew-fill-4" />
+          <div
+            absolute w-full h-full backdrop-blur-40px
+            bg="$bew-fill-4" mix-blend-luminosity
+          />
           <img
             v-if="activatedCategoryCover"
             :src="removeHttpFromUrl(`${activatedCategoryCover}@480w_270h_1c`)"
@@ -289,7 +292,7 @@ function handleUnfavorite(favoriteResource: FavoriteResource) {
             <template #left>
               <tabler:player-play />
             </template>
-            {{ t('watch_later.play_all') }}
+            {{ t('common.play_all') }}
           </Button>
         </p>
         <ul class="category-list" h-full overflow-overlay border="1 color-[rgba(255,255,255,.2)]" rounded="$bew-radius">

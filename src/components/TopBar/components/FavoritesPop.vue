@@ -17,10 +17,14 @@ const isLoading = ref<boolean>(false)
 const noMoreContent = ref<boolean>(false)
 const favoriteVideosWrap = ref<HTMLElement>() as Ref<HTMLElement>
 
-const favoritesPageUrl = computed(() => {
+const viewAllUrl = computed((): string => {
   return `//space.bilibili.com/${getUserID()}/favlist?fid=${
     activatedMediaId.value
   }`
+})
+
+const playAllUrl = computed((): string => {
+  return `https://www.bilibili.com/list/ml${activatedMediaId.value}`
 })
 
 watch(activatedMediaId, (newVal: number, oldVal: number) => {
@@ -148,12 +152,20 @@ defineExpose({
         {{ activatedFavoriteTitle }}
       </h3>
 
-      <a
-        :href="favoritesPageUrl" :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
-        flex="~" items="center"
-      >
-        <span text="sm">{{ $t('common.view_all') }}</span>
-      </a>
+      <div flex="~ gap-4">
+        <a
+          :href="playAllUrl" :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
+          flex="~" items="center"
+        >
+          <span text="sm">{{ $t('common.play_all') }}</span>
+        </a>
+        <a
+          :href="viewAllUrl" :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
+          flex="~" items="center"
+        >
+          <span text="sm">{{ $t('common.view_all') }}</span>
+        </a>
+      </div>
     </header>
 
     <main flex="~" overflow-hidden rounded="$bew-radius">

@@ -1,5 +1,59 @@
 # Changelog
 
+## [0.16.1](https://github.com/hakadao/BewlyBewly/compare/v0.16.0...v0.16.1) (2024-04-08)
+
+
+### Features
+
+* adjust dialog styles && add tertiary type to button ([020889f](https://github.com/hakadao/BewlyBewly/commit/020889f8474c812392194210684a8603066b6a6d))
+
+
+### Bug Fixes
+
+* **ForYou:** Fix issue with dislike functionality in ForYou.vue component ([1074834](https://github.com/hakadao/BewlyBewly/commit/10748340672dc12cc18e646410fbac2cd27e031b))
+* **MorePop:** add missing watch later entry ([b657fed](https://github.com/hakadao/BewlyBewly/commit/b657fedc74f571c4bfc2a6b07eb0fdb3ae4bdc1f))
+* **VideoCard:** correct styling distortion when in horizontal mode ([f9be380](https://github.com/hakadao/BewlyBewly/commit/f9be38047194b91f7d2c1be8565cf6f987adef44))
+
+
+### Style Changes
+
+* **Dialog:** adjust dialog styles ([b39e876](https://github.com/hakadao/BewlyBewly/commit/b39e876148cfd8d8eba7e4bfaf64b9e5ae5d1af6))
+
+## [0.16.0](https://github.com/hakadao/BewlyBewly/compare/v0.15.5...v0.16.0) (2024-04-07)
+
+
+### Features
+
+* add delay hover for topbar ([4a1f0a2](https://github.com/hakadao/BewlyBewly/commit/4a1f0a278ce413eeb54a7d50d49618afd7bc841e))
+* add play all button to FavoritesPop & WatchLaterPop ([dd75b9d](https://github.com/hakadao/BewlyBewly/commit/dd75b9d038eae2468286df62fc56f2ea2f3e57f3))
+* add some details for dock ([0cb2142](https://github.com/hakadao/BewlyBewly/commit/0cb21427c519bbe85552cba492c8c3c1ac4b8da7))
+* adjust two bilibili evolved's buttons to match the BewlyBewly theme ([#423](https://github.com/hakadao/BewlyBewly/issues/423)) ([c55e86f](https://github.com/hakadao/BewlyBewly/commit/c55e86fdc32cd1520cae88f54d3ed3dfce2bc2ca))
+* **Appearance:** add wallpaper change watcher ([ec7ffaa](https://github.com/hakadao/BewlyBewly/commit/ec7ffaa9c467e77e8c508bf0c79ea72d5878e359))
+* **Home:** clicking the tab will back to top and refresh data on homepage ([#419](https://github.com/hakadao/BewlyBewly/issues/419)) ([aae391d](https://github.com/hakadao/BewlyBewly/commit/aae391d9f49eef3a8e3df98874207baedb0af0b8))
+* **VideoCard:** improve not interested feature ([ba783ff](https://github.com/hakadao/BewlyBewly/commit/ba783ff0763ae758aa8d2ff7fc49873ca83a89bb))
+
+
+### Bug Fixes
+
+* attempt to resolve "EBUSY error from 'C:\DumpStack.log.tmp'" ([8009d8b](https://github.com/hakadao/BewlyBewly/commit/8009d8b93a7e62faefc85a55c3855876eed8ca6c))
+* attempt to resolve "EBUSY error from 'C:\DumpStack.log.tmp'" ([60c2740](https://github.com/hakadao/BewlyBewly/commit/60c274076f49ee22006d29086ae9c12fa59cde83))
+* cleanup fn ([#482](https://github.com/hakadao/BewlyBewly/issues/482)) ([b00d9b2](https://github.com/hakadao/BewlyBewly/commit/b00d9b271015a10798b5475ee9451234a8656f61))
+* **Following:** resolve the "no more content" & "need to login first" occurring together ([69b6d86](https://github.com/hakadao/BewlyBewly/commit/69b6d865ad2548c82d8d7a233ce26ff9334d71cf))
+* **Trending:** resolve the infinite data retrieval issus ([#445](https://github.com/hakadao/BewlyBewly/issues/445)) ([80b72c4](https://github.com/hakadao/BewlyBewly/commit/80b72c43b615d6b7a7f12246eb677fa3b7fa148b))
+* **VideoCard:** author avatar display issue in horizontal mode ([efacf5b](https://github.com/hakadao/BewlyBewly/commit/efacf5bd281afbcf63c72e6652a6160128f64e81))
+
+
+### Docs
+
+* add introduction section to readme ([2ce9926](https://github.com/hakadao/BewlyBewly/commit/2ce9926cec0625783687aee9f7c2871abfa8057b))
+
+
+### Style Changes
+
+* adjust style of frosted glasses ([b6b7ed7](https://github.com/hakadao/BewlyBewly/commit/b6b7ed7c5abbc098f081b845982048ff5ba17ae9))
+* **MomentsPop:** adjust styles ([#483](https://github.com/hakadao/BewlyBewly/issues/483)) ([f99086d](https://github.com/hakadao/BewlyBewly/commit/f99086dde9561f5f463672f74ccea9744f3bf4b3))
+* **VideoCard:** adjust removed status style ([cfe6fd5](https://github.com/hakadao/BewlyBewly/commit/cfe6fd5601ab4ea33890bbbc28ae43a692184ff0))
+
 ## [0.15.5](https://github.com/hakadao/BewlyBewly/compare/v0.15.4...v0.15.5) (2024-03-30)
 
 

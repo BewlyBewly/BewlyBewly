@@ -7,6 +7,13 @@ import { isHomePage, removeHttpFromUrl } from '~/utils/main'
 const watchLaterList = reactive<VideoItem[]>([])
 const isLoading = ref<boolean>()
 
+const viewAllUrl = computed((): string => {
+  return 'https://www.bilibili.com/watchlater/#/list'
+})
+const playAllUrl = computed((): string => {
+  return 'https://www.bilibili.com/list/watchlater'
+})
+
 onMounted(() => {
   getAllWatchLaterList()
 })
@@ -42,11 +49,12 @@ function getAllWatchLaterList() {
 
 <template>
   <div
-    bg="$bew-elevated-solid-1"
     w="380px"
+    shadow="$bew-shadow-2"
+    bg="$bew-elevated-solid-1"
     rounded="$bew-radius"
     pos="relative"
-    style="box-shadow: var(--bew-shadow-2)"
+    of="hidden"
   >
     <!-- top bar -->
     <header
@@ -65,12 +73,21 @@ function getAllWatchLaterList() {
           {{ $t('topbar.watch_later') }}
         </div>
       </div>
-      <a
-        href="https://www.bilibili.com/watchlater/#/list" :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
-        flex="~ items-center"
-      >
-        <span text="sm">{{ $t('common.view_all') }}</span>
-      </a>
+
+      <div flex="~ gap-4">
+        <a
+          :href="playAllUrl" :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
+          flex="~" items="center"
+        >
+          <span text="sm">{{ $t('common.play_all') }}</span>
+        </a>
+        <a
+          :href="viewAllUrl" :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
+          flex="~" items="center"
+        >
+          <span text="sm">{{ $t('common.view_all') }}</span>
+        </a>
+      </div>
     </header>
 
     <!-- watchLater wrapper -->

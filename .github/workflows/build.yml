@@ -7,6 +7,14 @@ on:
       # 项目源代码所在的分支
       - main
       - dev
+    paths-ignore:
+      # Changes involving the following path files will not trigger the workflow
+      # 涉及以下路径文件的更改不会触发工作流
+      - LICENSE
+      - README-cmn_CN.md
+      - README-cmn_TW.md
+      - README-jyut.md
+      - '.github/**'
 
 jobs:
   lint:
@@ -46,3 +54,12 @@ jobs:
         with:
           name: BewlyBewly Zip
           path: extension
+
+      - name: Build Extension
+        run: pnpm build-firefox
+
+      - name: Upload Zip
+        uses: actions/upload-artifact@v3
+        with:
+          name: BewlyBewly Zip
+          path: extension-firefox

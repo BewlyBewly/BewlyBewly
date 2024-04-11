@@ -1,7 +1,11 @@
 {
   "cSpell.words": [
+    "WATCHLATER",
+    "bewly",
+    "bilibili",
+    "unocss",
     "Vitesse",
-    "WATCHLATER"
+    "webext"
   ],
   "typescript.tsdk": "node_modules/typescript/lib",
   "vite.autoStart": false,

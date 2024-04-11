@@ -33,16 +33,43 @@ const API_VIDEO: APIMAP = {
     },
     afterHandle: AHS.J_D,
   },
+  // https://github.com/indefined/UserScripts/blob/master/bilibiliHome/bilibiliHome.API.md#%E6%8F%90%E4%BA%A4%E4%B8%8D%E5%96%9C%E6%AC%A2
   dislikeVideo: {
-    url: 'https://api.bilibili.com/x/feed/dislike',
+    url: 'https://app.bilibili.com/x/feed/dislike',
     _fetch: {
-      method: 'post',
+      method: 'get',
     },
     params: {
       access_key: '',
-      appkey: '27eb53fc9058f8c3',
-      feedback_id: '',
+      goto: '',
+      id: 0,
+      idx: 0,
       reason_id: 1,
+      device: '',
+      mobi_app: '',
+      build: 0,
+      appkey: '',
+      sign: '',
+    },
+    afterHandle: AHS.J_D,
+  },
+  // https://github.com/indefined/UserScripts/blob/master/bilibiliHome/bilibiliHome.API.md#%E6%92%A4%E9%94%80%E4%B8%8D%E5%96%9C%E6%AC%A2
+  undoDislikeVideo: {
+    url: 'https://app.bilibili.com/x/feed/dislike/cancel',
+    _fetch: {
+      method: 'get',
+    },
+    params: {
+      access_key: '',
+      goto: '',
+      id: 0,
+      idx: 0,
+      reason_id: 1,
+      device: '',
+      mobi_app: '',
+      build: 0,
+      sign: '',
+      appkey: '',
     },
     afterHandle: AHS.J_D,
   },

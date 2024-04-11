@@ -52,6 +52,7 @@ enum VIDEO {
   GET_RECOMMEND_VIDEOS = 'getRecommendVideos',
   GET_APP_RECOMMEND_VIDEOS = 'getAppRecommendVideos',
   DISLIKE_VIDEO = 'dislikeVideo',
+  UNDO_DISLIKE_VIDEO = 'undoDislikeVideo',
   GET_VIDEO_INFO = 'getVideoInfo',
   GET_VIDEO_COMMENTS = 'getVideoComments',
   GET_POPULAR_VIDEOS = 'getPopularVideos',

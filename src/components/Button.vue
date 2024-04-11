@@ -3,6 +3,7 @@ interface Props {
   type?: | 'default'
     | 'primary'
     | 'secondary'
+    | 'tertiary'
     | 'info'
     | 'success'
     | 'warning'
@@ -92,6 +93,12 @@ function handleClick(evt: MouseEvent) {
     --b-button-text-color: var(--bew-text-1);
   }
 
+  &--type-tertiary {
+    --b-button-color: transparent;
+    --b-button-color-hover: var(--bew-fill-2);
+    --b-button-text-color: var(--bew-text-1);
+  }
+
   &--type-error {
     --b-button-color: var(--bew-error-color);
     --b-button-color-hover: var(--bew-error-color)
@@ -113,7 +120,7 @@ function handleClick(evt: MouseEvent) {
   }
 
   &--custom-color {
-    --at-apply: hover:opacity-80;
+    --at-apply: hover:opacity-70;
   }
 
   &--strong {

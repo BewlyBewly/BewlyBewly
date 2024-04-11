@@ -271,7 +271,10 @@ function jumpToLoginPage() {
           pos="absolute top-0 left-0" w-full h-full bg-cover bg-center
           z--1
         >
-          <div absolute w-full h-full style="backdrop-filter: blur(60px) saturate(180%)" bg="$bew-fill-4" />
+          <div
+            absolute w-full h-full backdrop-blur-40px
+            bg="$bew-fill-4" mix-blend-luminosity
+          />
           <img
             v-if="watchLaterList[0]"
             :src="removeHttpFromUrl(`${watchLaterList[0].pic}@480w_270h_1c`)"
@@ -300,7 +303,7 @@ function jumpToLoginPage() {
             <template #left>
               <tabler:player-play />
             </template>
-            {{ t('watch_later.play_all') }}
+            {{ t('common.play_all') }}
           </Button>
           <Button
             color="rgba(255,255,255,.35)" block text-color="white" strong flex-1
