@@ -6,6 +6,7 @@
 ### Bug Fixes
 
 * watch later pop invalid rounded corners ([#505](https://github.com/hakadao/BewlyBewly/issues/505)) ([36960da](https://github.com/hakadao/BewlyBewly/commit/36960da9f8e8176d95bd64700b58c42b95a37d80))
+* moment card url not linking the video page
 
 ## [0.16.1](https://github.com/hakadao/BewlyBewly/compare/v0.16.0...v0.16.1) (2024-04-08)
 
