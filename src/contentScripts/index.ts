@@ -119,7 +119,7 @@ if (isSupportedPages()) {
   `)
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+function onDOMLoaded() {
   // Remove the original Bilibili homepage if in Bilibili homepage & useOriginalBilibiliHomepage is enabled
   if (!settings.value.useOriginalBilibiliHomepage && isHomePage()) {
     // const originalPageContent = document.querySelector('#i_cecream')
@@ -134,7 +134,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Then inject the app
     injectApp()
   }
-})
+}
+
+if (document.readyState !== 'loading')
+  onDOMLoaded()
+else
+  document.addEventListener('DOMContentLoaded', () => onDOMLoaded())
 
 function injectApp() {
   // Inject app when idle
