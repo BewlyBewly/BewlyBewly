@@ -36,15 +36,21 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: pnpm build
+        run: |
+          pnpm build
+          pnpm build-firefox
 
       - name: Build Extension
-        run: pnpm pack:zip
+        run: |
+          pnpm pack:zip
+          pnpm pack:zip-firefox
 
       - name: Upload assets to a Release
         uses: meeDamian/github-release@v2.0.3
         with:
-          files: extension.zip
+          files: |
+            extension.zip
+            extension-firefox.zip
           token: ${{ secrets.RELEASE_TOKEN }}
           allow_override: true
           gzip: false
