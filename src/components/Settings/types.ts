@@ -4,6 +4,7 @@ export enum MenuType {
   SearchPage = 'SearchPage',
   Home = 'Home',
   Compatibility = 'Compatibility',
+  BilibiliSettings = 'BilibiliSettings',
   About = 'About',
 }
 

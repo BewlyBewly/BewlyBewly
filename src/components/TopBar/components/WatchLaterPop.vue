@@ -49,11 +49,12 @@ function getAllWatchLaterList() {
 
 <template>
   <div
-    bg="$bew-elevated-solid-1"
     w="380px"
+    shadow="$bew-shadow-2"
+    bg="$bew-elevated-solid-1"
     rounded="$bew-radius"
     pos="relative"
-    style="box-shadow: var(--bew-shadow-2)"
+    of="hidden"
   >
     <!-- top bar -->
     <header
