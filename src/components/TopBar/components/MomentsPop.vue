@@ -7,6 +7,7 @@ import { MomentType } from '../types'
 import type { MomentItem } from '../types'
 import { getCSRF, getUserID, isHomePage, smoothScrollToTop } from '~/utils/main'
 import { calcTimeSince } from '~/utils/dataFormatter'
+import API from '~/background/msg.define'
 
 const { t } = useI18n()
 
@@ -94,7 +95,7 @@ function getTopBarNewMoments(type_list: number[]) {
   isLoading.value = true
   browser.runtime
     .sendMessage({
-      contentScriptQuery: 'getTopBarNewMoments',
+      contentScriptQuery: API.MOMENT.GET_TOP_BAR_NEW_MOMENTS,
       uid: getUserID(),
       type_list,
     })
@@ -129,7 +130,7 @@ function getTopbarHistoryMoments(type_list: number[]) {
   isLoading.value = true
   browser.runtime
     .sendMessage({
-      contentScriptQuery: 'getTopbarHistoryMoments',
+      contentScriptQuery: API.MOMENT.GET_TOP_BAR_HISTORY_MOMENTS,
       uid: getUserID(),
       type_list,
       offset_dynamic_id: moments[moments.length - 1].dynamic_id_str,
@@ -155,7 +156,7 @@ function getTopbarLiveMoments(page: number) {
   isLoading.value = true
   browser.runtime
     .sendMessage({
-      contentScriptQuery: 'getTopbarLiveMoments',
+      contentScriptQuery: API.MOMENT.GET_TOP_BAR_LIVE_MOMENTS,
       page,
       pagesize: 10,
     })
@@ -248,7 +249,7 @@ function toggleWatchLater(aid: number) {
 
   if (!isInWatchLater) {
     browser.runtime.sendMessage({
-      contentScriptQuery: 'saveToWatchLater',
+      contentScriptQuery: API.WATCHLATER.SAVE_TO_WATCHLATER,
       aid,
       csrf: getCSRF(),
     })
@@ -259,7 +260,7 @@ function toggleWatchLater(aid: number) {
   }
   else {
     browser.runtime.sendMessage({
-      contentScriptQuery: 'removeFromWatchLater',
+      contentScriptQuery: API.WATCHLATER.REMOVE_FROM_WATCHLATER,
       aid,
       csrf: getCSRF(),
     })

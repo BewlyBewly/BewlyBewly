@@ -4,6 +4,7 @@ import { onMounted, reactive, ref, watch } from 'vue'
 import type { FavoriteCategory, FavoriteResource } from '../types'
 import { getUserID, isHomePage, removeHttpFromUrl, smoothScrollToTop } from '~/utils/main'
 import { calcCurrentTime } from '~/utils/dataFormatter'
+import API from '~/background/msg.define'
 
 const favoriteCategories = reactive<Array<FavoriteCategory>>([])
 const favoriteResources = reactive<Array<FavoriteResource>>([])
@@ -67,7 +68,7 @@ onMounted(async () => {
 async function getFavoriteCategories() {
   await browser.runtime
     .sendMessage({
-      contentScriptQuery: 'getFavoriteCategories',
+      contentScriptQuery: API.FAVORITE.GET_FAVORITE_CATEGORIES,
       up_mid: getUserID(),
     })
     .then((res) => {
@@ -86,7 +87,7 @@ function getFavoriteResources() {
   isLoading.value = true
   browser.runtime
     .sendMessage({
-      contentScriptQuery: 'getFavoriteResources',
+      contentScriptQuery: API.FAVORITE.GET_FAVORITE_RESOURCES,
       media_id: activatedMediaId.value,
       pn: currentPageNum.value,
       keyword: '',

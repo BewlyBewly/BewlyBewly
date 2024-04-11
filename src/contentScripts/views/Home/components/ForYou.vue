@@ -267,7 +267,7 @@ function handleDislike() {
   }
 
   browser.runtime.sendMessage({
-    contentScriptQuery: 'dislikeVideo',
+    contentScriptQuery: API.VIDEO.DISLIKE_VIDEO,
     ...params,
     sign: getTvSign(params),
   })
@@ -297,7 +297,7 @@ function handleUndoDislike(video: AppVideoItem) {
   }
 
   browser.runtime.sendMessage({
-    contentScriptQuery: 'undoDislikeVideo',
+    contentScriptQuery: API.VIDEO.UNDO_DISLIKE_VIDEO,
     ...params,
     sign: getTvSign(params),
   }).then((res) => {

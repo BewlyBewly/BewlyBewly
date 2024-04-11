@@ -7,6 +7,7 @@ import type { HistoryItem } from '../types'
 import { HistoryType } from '../types'
 import { isHomePage, removeHttpFromUrl, smoothScrollToTop } from '~/utils/main'
 import { calcCurrentTime } from '~/utils/dataFormatter'
+import API from '~/background/msg.define'
 
 const { t } = useI18n()
 
@@ -137,13 +138,13 @@ function getHistoryUrl(item: HistoryItem) {
 /**
  * Get history list
  * @param {HistoryType} type
- * @param {number} viewAt Last viewed timestamp
+ * @param {number} view_at Last viewed timestamp
  */
 function getHistoryList(type: HistoryType, view_at = 0 as number) {
   isLoading.value = true
   browser.runtime
     .sendMessage({
-      contentScriptQuery: 'getHistoryList',
+      contentScriptQuery: API.HISTORY.GET_HISTORY_LIST,
       type,
       view_at,
     })
