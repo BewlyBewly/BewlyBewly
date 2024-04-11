@@ -11,6 +11,7 @@ import { updateInterval } from './notify'
 import { getUserID, isHomePage } from '~/utils/main'
 import { settings } from '~/logic'
 import emitter from '~/utils/mitt'
+import API from '~/background/msg.define'
 
 // import { useTopBarStore } from '~/stores/topBarStore'
 
@@ -224,7 +225,7 @@ async function getUserInfo() {
   try {
     const res = await browser.runtime
       .sendMessage({
-        contentScriptQuery: 'getUserInfo',
+        contentScriptQuery: API.USER.GET_USER_INFO,
       })
 
     if (res.code === 0) {

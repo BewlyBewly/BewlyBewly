@@ -1,30 +1,22 @@
-import browser from 'webextension-polyfill'
+import type { APIMAP } from '../utils'
+import { AHS } from '../utils'
 
-function handleMessage(message: any) {
+const API_USER: APIMAP = {
   // https://github.com/SocialSisterYi/bilibili-API-collect/blob/e379d904c2753fa30e9083f59016f07e89d19467/docs/login/login_info.md#%E5%AF%BC%E8%88%AA%E6%A0%8F%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF
-  if (message.contentScriptQuery === 'getUserInfo') {
-    const url = 'https://api.bilibili.com/x/web-interface/nav'
-    return fetch(url)
-      .then(response => response.json())
-      .then(data => (data))
-      .catch(error => console.error(error))
-  }
-
-  else if (message.contentScriptQuery === 'getUserStat') {
-    const url = 'https://api.bilibili.com/x/web-interface/nav/stat'
-    return fetch(url)
-      .then(response => response.json())
-      .then(data => (data))
-      .catch(error => console.error(error))
-  }
+  getUserInfo: {
+    url: 'https://api.bilibili.com/x/web-interface/nav',
+    _fetch: {
+      method: 'get',
+    },
+    afterHandle: AHS.J_D,
+  },
+  getUserStat: {
+    url: 'https://api.bilibili.com/x/web-interface/nav/stat',
+    _fetch: {
+      method: 'get',
+    },
+    afterHandle: AHS.J_D,
+  },
 }
 
-function handleConnect() {
-  browser.runtime.onMessage.removeListener(handleMessage)
-  browser.runtime.onMessage.addListener(handleMessage)
-}
-
-export function setupUserMsgLstnr() {
-  browser.runtime.onConnect.removeListener(handleConnect)
-  browser.runtime.onConnect.addListener(handleConnect)
-}
+export default API_USER
