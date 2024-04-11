@@ -2,6 +2,7 @@
 import type { Ref } from 'vue'
 import type { GridLayout } from '~/logic'
 import type { DataItem as MomentItem, MomentResult } from '~/models/moment/moment'
+import API from '~/background/msg.define'
 
 const props = defineProps<{
   gridLayout: GridLayout
@@ -86,10 +87,10 @@ async function getFollowedUsersVideos() {
   isLoading.value = true
   try {
     const response: MomentResult = await browser.runtime.sendMessage({
-      contentScriptQuery: 'getMoments',
+      contentScriptQuery: API.MOMENT.GET_MOMENTS,
       type: 'pgc',
       offset: offset.value,
-      updateBaseline: updateBaseline.value,
+      update_baseline: updateBaseline.value,
     })
 
     if (response.code === -101) {

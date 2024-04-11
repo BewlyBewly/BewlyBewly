@@ -4,6 +4,7 @@ import type { UserInfo, UserStat } from '../types'
 import { revokeAccessKey } from '~/utils/authProvider'
 import { getCSRF, getUserID, isHomePage } from '~/utils/main'
 import { numFormatter } from '~/utils/dataFormatter'
+import API from '~/background/msg.define'
 
 defineProps<{
   userInfo: UserInfo
@@ -31,7 +32,7 @@ const userStat = reactive<UserStat>({} as UserStat)
 onMounted(() => {
   browser.runtime
     .sendMessage({
-      contentScriptQuery: 'getUserStat',
+      contentScriptQuery: API.USER.GET_USER_STAT,
     })
     .then((res) => {
       if (res.code === 0)
@@ -42,7 +43,7 @@ onMounted(() => {
 async function logout() {
   revokeAccessKey()
   browser.runtime.sendMessage({
-    contentScriptQuery: 'logout',
+    contentScriptQuery: API.AUTH.LOGOUT,
     biliCSRF: getCSRF(),
   }).then(() => {
     location.reload()

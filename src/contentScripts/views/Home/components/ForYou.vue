@@ -8,6 +8,7 @@ import type { Item as VideoItem, forYouResult } from '~/models/video/forYou'
 import type { GridLayout } from '~/logic'
 import { accessKey, settings } from '~/logic'
 import { LanguageType } from '~/enums/appEnums'
+import API from '~/background/msg.define'
 import { TVAppKey, getTvSign } from '~/utils/authProvider'
 
 const props = defineProps<{
@@ -132,8 +133,8 @@ async function getRecommendVideos() {
   isLoading.value = true
   try {
     const response: forYouResult = await browser.runtime.sendMessage({
-      contentScriptQuery: 'getRecommendVideos',
-      refreshIdx: refreshIdx.value++,
+      contentScriptQuery: API.VIDEO.GET_RECOMMEND_VIDEOS,
+      fresh_idx: refreshIdx.value++,
     })
 
     if (!response.data) {
@@ -172,10 +173,10 @@ async function getAppRecommendVideos() {
   isLoading.value = true
   try {
     const response: AppForYouResult = await browser.runtime.sendMessage({
-      contentScriptQuery: 'getAppRecommendVideos',
-      accessKey: accessKey.value,
-      sLocale: settings.value.language !== LanguageType.Mandarin_CN ? 'zh-Hant_TW' : 'zh-Hans_CN',
-      cLocale: settings.value.language !== LanguageType.Mandarin_CN ? 'zh-Hant_TW' : 'zh-Hans_CN',
+      contentScriptQuery: API.VIDEO.GET_APP_RECOMMEND_VIDEOS,
+      access_key: accessKey.value,
+      s_locale: settings.value.language !== LanguageType.Mandarin_CN ? 'zh-Hant_TW' : 'zh-Hans_CN',
+      c_locale: settings.value.language !== LanguageType.Mandarin_CN ? 'zh-Hant_TW' : 'zh-Hans_CN',
       appkey: TVAppKey.appkey,
       idx: appVideoList.length > 0 ? appVideoList[appVideoList.length - 1].idx : 1,
     })
@@ -266,7 +267,7 @@ function handleDislike() {
   }
 
   browser.runtime.sendMessage({
-    contentScriptQuery: 'dislikeVideo',
+    contentScriptQuery: API.VIDEO.DISLIKE_VIDEO,
     ...params,
     sign: getTvSign(params),
   })
@@ -296,7 +297,7 @@ function handleUndoDislike(video: AppVideoItem) {
   }
 
   browser.runtime.sendMessage({
-    contentScriptQuery: 'undoDislikeVideo',
+    contentScriptQuery: API.VIDEO.UNDO_DISLIKE_VIDEO,
     ...params,
     sign: getTvSign(params),
   }).then((res) => {
