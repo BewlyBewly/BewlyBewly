@@ -3,6 +3,7 @@ import { onMounted, reactive, ref } from 'vue'
 import { calcCurrentTime } from '~/utils/dataFormatter'
 import type { List as VideoItem, WatchLaterResult } from '~/models/video/watchLater'
 import { isHomePage, removeHttpFromUrl } from '~/utils/main'
+import API from '~/background/msg.define'
 
 const watchLaterList = reactive<VideoItem[]>([])
 const isLoading = ref<boolean>()
@@ -36,7 +37,7 @@ function getAllWatchLaterList() {
 
   browser.runtime
     .sendMessage({
-      contentScriptQuery: 'getAllWatchLaterList',
+      contentScriptQuery: API.WATCHLATER.GET_ALL_WATCHLATER_LIST,
     })
     .then((res: WatchLaterResult) => {
       if (res.code === 0)
@@ -49,11 +50,12 @@ function getAllWatchLaterList() {
 
 <template>
   <div
-    bg="$bew-elevated-solid-1"
     w="380px"
+    shadow="$bew-shadow-2"
+    bg="$bew-elevated-solid-1"
     rounded="$bew-radius"
     pos="relative"
-    style="box-shadow: var(--bew-shadow-2)"
+    of="hidden"
   >
     <!-- top bar -->
     <header

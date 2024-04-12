@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { isHomePage } from '~/utils/main'
+import API from '~/background/msg.define'
 
 const { t } = useI18n()
 
@@ -40,7 +41,7 @@ onMounted(() => {
 function getUnreadMessageCount() {
   browser.runtime
     .sendMessage({
-      contentScriptQuery: 'getUnreadMsg',
+      contentScriptQuery: API.NOTIFICATION.GET_UNREAD_MSG,
     }).then((res) => {
       if (res.code === 0) {
         const resData = res.data
@@ -58,7 +59,7 @@ function getUnreadMessageCount() {
 
   browser.runtime
     .sendMessage({
-      contentScriptQuery: 'getUnreadDm',
+      contentScriptQuery: API.NOTIFICATION.GET_UNREAD_DM,
     }).then((res) => {
       if (res.code === 0) {
         const resData = res.data

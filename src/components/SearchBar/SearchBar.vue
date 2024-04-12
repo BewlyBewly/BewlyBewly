@@ -8,6 +8,7 @@ import {
   getSearchHistory,
   removeSearchHistory,
 } from './searchHistoryProvider'
+import API from '~/background/msg.define'
 
 defineProps<{
   darkenOnFocus?: boolean
@@ -53,7 +54,7 @@ function handleInput() {
   if (keyword.value.length > 0) {
     browser.runtime
       .sendMessage({
-        contentScriptQuery: 'getSearchSuggestion',
+        contentScriptQuery: API.SEARCH.GET_SEARCH_SUGGESTION,
         term: keyword.value,
       })
       .then((res: SuggestionResponse) => {

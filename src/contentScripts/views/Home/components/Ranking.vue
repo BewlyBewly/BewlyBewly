@@ -6,6 +6,7 @@ import type { List as RankingPgcItem, RankingPgcResult } from '~/models/video/ra
 import type { GridLayout } from '~/logic'
 import { settings } from '~/logic'
 import emitter from '~/utils/mitt'
+import API from '~/background/msg.define'
 
 const props = defineProps<{
   gridLayout: GridLayout
@@ -129,7 +130,7 @@ function getRankingVideos() {
   emit('beforeLoading')
   isLoading.value = true
   browser.runtime.sendMessage({
-    contentScriptQuery: 'getRankingVideos',
+    contentScriptQuery: API.RANKING.GET_RANKING_VIDEOS,
     rid: activatedRankingType.value.rid,
     type: 'type' in activatedRankingType.value ? activatedRankingType.value.type : 'all',
   }).then((response: RankingResult) => {
@@ -147,8 +148,8 @@ function getRankingPgc() {
   PgcList.length = 0
   isLoading.value = true
   browser.runtime.sendMessage({
-    contentScriptQuery: 'getRankingPgc',
-    seasonType: activatedRankingType.value.seasonType,
+    contentScriptQuery: API.RANKING.GET_RANKING_PGC,
+    season_type: activatedRankingType.value.seasonType,
   }).then((response: RankingPgcResult) => {
     if (response.code === 0)
       Object.assign(PgcList, response.result.list)
