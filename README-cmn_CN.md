@@ -34,7 +34,7 @@ BewlyBewly 是一个用于 BiliBili 的浏览器扩展，旨在通过重新设�
 
 - Chrome: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>
 - Edge: <https://microsoftedge.microsoft.com/addons/detail/bewlybewly/kceadhehfjdiakpiphpjgolbgehjdmja>
-- Firefox: **我需要一些帮助!!!!!!!!!!!!!!!!!! ( ；∀；)**
+- Firefox: <https://addons.mozilla.org/lt/firefox/addon/bewlybewly/>
 
 ### 本地安装
 
@@ -69,7 +69,9 @@ BewlyBewly 是一个用于 BiliBili 的浏览器扩展，旨在通过重新设�
 
 </details>
 
-## 🔧 开发 & 构建
+## 🔧 开发和构建项目
+
+请使用 dev 分支进行开发
 
 ### Chrome or Edge browser
 
@@ -83,7 +85,7 @@ pnpm dev
 ```
 
 然后**在浏览器中使用 `加载已解压的拓展程序` 加载 `extension` 文件夹**。
-每次修改后，您需要单击 [重新加载](https://chromewebstore.google.com/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) 按钮并刷新页面以确保应用更改。
+每次修改后，您需要单击 [Reload Extensions](https://chromewebstore.google.com/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) 按钮并刷新页面以确保应用更改。
 
 #### 构建 (Chrome or Edge)
 
@@ -98,8 +100,6 @@ pnpm build
 </details>
 
 ### Firefox browser
-
-在此之前，请使用 `dev-firefox` 分支来执行以下操作。它可能包含一些错误或不清晰的代码，欢迎您帮助解决这些问题！:D
 
 <details>
   <summary>Firefox</summary>

@@ -1,6 +1,6 @@
 # BewlyBewly
 
-English | [简体中文](README-cmn_CN.md) | [正體中文](README-cmn_TW.md) | [廣東話](README-jyut.md)
+English | [官话 - 简体中文](README-cmn_CN.md) | [官話 - 正體中文](README-cmn_TW.md) | [廣東話](README-jyut.md)
 
 <p align="center" style="margin-bottom: 0px !important;">
 <img width="150" src="https://user-images.githubusercontent.com/33394391/160250512-410b71fc-7f25-4caf-b850-429227ff082a.png"><br/>
@@ -34,7 +34,7 @@ Even in the Edge browser, we strongly recommend you install it in the Chrome web
 
 - Chrome: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>
 - Edge: <https://microsoftedge.microsoft.com/addons/detail/bewlybewly/kceadhehfjdiakpiphpjgolbgehjdmja>
-- Firefox: **I NEED SOME HELP!!!!!!!!!!!!!!!!!! ( ；∀；)**
+- Firefox: <https://addons.mozilla.org/lt/firefox/addon/bewlybewly/>
 
 ### Local Installation
 
@@ -71,6 +71,8 @@ Opening the `edge://extensions` page in the Edge or `chrome://extensions` page i
 
 ## 🔧 Development & Build
 
+Please use the dev branch for development
+
 ### Chrome or Edge browser
 
 <details>
@@ -98,8 +100,6 @@ And then pack files under the `extension`
 </details>
 
 ### Firefox browser
-
-Before that, please use the `dev-firefox` branch to perform the operations below. It may contain some bugs or unclear code, and your help in addressing these issues is welcome! :D
 
 <details>
   <summary>Firefox browser</summary>

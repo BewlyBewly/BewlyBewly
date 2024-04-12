@@ -34,7 +34,7 @@ BewlyBewly 是一個針對 BiliBili 的瀏覽器擴充功能，旨在透過重�
 
 - Chrome: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>
 - Edge: <https://microsoftedge.microsoft.com/addons/detail/bewlybewly/kceadhehfjdiakpiphpjgolbgehjdmja>
-- Firefox: **我需要幫助!!!!!!!!!!!!!!!!!! ( ；∀；)**
+- Firefox: <https://addons.mozilla.org/lt/firefox/addon/bewlybewly/>
 
 ### 離線安裝
 
@@ -69,7 +69,9 @@ BewlyBewly 是一個針對 BiliBili 的瀏覽器擴充功能，旨在透過重�
 
 </details>
 
-## 🔧 開發與建置
+## 🔧 開發與建置專案
+
+請使用 dev 分支進行開發
 
 ### Chrome or Edge browser
 
@@ -98,8 +100,6 @@ pnpm build
 </details>
 
 ### Firefox browser
-
-在那之前，請使用 `dev-firefox` 分支來進行以下操作。它可能包含一些錯誤或不清楚的代碼，歡迎您幫忙解決這些問題！:D
 
 <details>
   <summary>Firefox browser</summary>

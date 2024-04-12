@@ -34,7 +34,7 @@ BewlyBewly 係一個用於 BiliBili 嘅瀏覽器延伸功能，目的係透過�
 
 - Chrome: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>
 - Edge: <https://microsoftedge.microsoft.com/addons/detail/bewlybewly/kceadhehfjdiakpiphpjgolbgehjdmja>
-- Firefox: **我要人幫手!!!!!!!!!!!!!!!!!! ( ；∀；)**
+- Firefox: <https://addons.mozilla.org/lt/firefox/addon/bewlybewly/>
 
 ### 離線單嘢
 
@@ -69,7 +69,9 @@ BewlyBewly 係一個用於 BiliBili 嘅瀏覽器延伸功能，目的係透過�
 
 </details>
 
-## 🔧 開發同建置
+## 🔧 開發同建置專案
+
+請使用 dev 分支進行開發
 
 ### Chrome or Edge browser
 
@@ -98,8 +100,6 @@ pnpm build
 </details>
 
 ### Firefox browser
-
-整之前呢，請用 dev-firefox 分支去做下低嘅操作。佢可能會有啲 bugs 抑或亂晒籠嘅程式碼，歡迎閣下幫手解決呢啲問題！:D
 
 <details>
   <summary>Firefox</summary>
