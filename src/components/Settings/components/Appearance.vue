@@ -105,6 +105,21 @@ function changeWallpaper(url: string) {
             }"
             @click="changeThemeColor(color)"
           />
+          <div
+            w-20px h-20px rounded-8 cursor-pointer transition
+            overflow-hidden
+            flex items-center justify-center
+          >
+            <input
+              :value="settings.themeColor"
+              min-w-30px
+              h-30px
+              padding-0
+              block
+              type="color"
+              @input="(e) => changeThemeColor((e.target as HTMLInputElement)?.value)"
+            >
+          </div>
         </div>
       </SettingsItem>
     </SettingsItemGroup>
