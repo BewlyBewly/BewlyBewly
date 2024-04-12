@@ -20,7 +20,7 @@
     "build:web": "vite build",
     "build:js": "vite build --config vite.config.content.ts",
     "build:bg": "tsup",
-    "convert-safari": "xcrun safari-web-extension-converter ./extension-safari --project-location ./extension-safari-mscos --macos-only",
+    "convert-safari": "xcrun safari-web-extension-converter ./extension-safari --project-location ./extension-safari-macos --macos-only",
     "pack": "cross-env NODE_ENV=production run-p pack:*",
     "pack:zip": "rimraf extension.zip && jszip-cli add extension/* -o ./extension.zip",
     "pack:zip-firefox": "rimraf extension-firefox.zip && jszip-cli add extension-firefox/* -o ./extension-firefox.zip",
