@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.16.4](https://github.com/hakadao/BewlyBewly/compare/v0.16.4...v0.16.4) (2024-04-12)
+
+
+### Docs
+
+* update firefox extension download link && adjust some description ([b8f1b04](https://github.com/hakadao/BewlyBewly/commit/b8f1b04ca450e755834c32f266c06d0c19577ae3))
+* update preview images ([99b8f0e](https://github.com/hakadao/BewlyBewly/commit/99b8f0edc17902f63ed57b51ffb15a03538306aa))
+
 ## [0.16.4](https://github.com/hakadao/BewlyBewly/compare/v0.16.2...v0.16.4) (2024-04-12)
 
 
