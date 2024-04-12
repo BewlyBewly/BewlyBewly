@@ -1,0 +1,41 @@
+name: Bug Report
+description: 报告问题
+title: '[BUG]:'
+labels: [bug]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## BUG 表单
+
+  - type: textarea
+    attributes:
+      label: 环境
+      description: 插件版本和浏览器版本
+      placeholder: |
+        浏览器: (如 Chrome)
+        浏览器版本: (如 123.0.6312.107)
+        BewlyBewly 版本: (如 0.16.2)
+      value: |
+        浏览器: (如 Chrome)
+        浏览器版本: (如 123.0.6312.107)
+        BewlyBewly 版本: (如 0.16.2)
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 问题描述
+      description: 如何重现
+      placeholder: |
+        请预先搜索是否有提到的 issue 否则重复的 issue 会被关闭不作解释
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 预期结果
+      description: 预期结果
+    validations:
+      required: false
