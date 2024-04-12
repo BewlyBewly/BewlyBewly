@@ -77,7 +77,8 @@ if (isSupportedPages()) {
   // We have to manually add a class to the <html> app to ensure that the transition effect is applied
   if (
     (settings.value.adaptToOtherPageStyles && settings.value.theme === 'dark')
-    || (settings.value.adaptToOtherPageStyles && window.matchMedia('(prefers-color-scheme: dark)').matches)
+    // Fix: flash dark mode when using the light theme
+    // || (settings.value.adaptToOtherPageStyles && window.matchMedia('(prefers-color-scheme: dark)').matches)
   )
     document.documentElement.classList.add('dark')
 
