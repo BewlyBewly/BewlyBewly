@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.16.4](https://github.com/hakadao/BewlyBewly/compare/v0.16.2...v0.16.4) (2024-04-12)
+
+
+### Bug Fixes
+
+* Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist. ([#518](https://github.com/hakadao/BewlyBewly/issues/518)) ([650d7f0](https://github.com/hakadao/BewlyBewly/commit/650d7f0c6b8389d2cfd1814b1be1003cb8af1370))
+
 ## [0.16.2](https://github.com/hakadao/BewlyBewly/compare/v0.16.1...v0.16.2) (2024-04-11)
 
 
