@@ -139,4 +139,5 @@ browser.runtime.onInstalled.addListener((): void => {
 // })
 
 // Setup all message listeners
-setupAllMsgLstnrs()
+browser.runtime.onConnect.removeListener(setupAllMsgLstnrs)
+browser.runtime.onConnect.addListener(setupAllMsgLstnrs)
