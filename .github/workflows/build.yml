@@ -55,11 +55,11 @@ jobs:
           name: BewlyBewly Zip
           path: extension
 
-      - name: Build Extension
+      - name: Build Extension-Firefox
         run: pnpm build-firefox
 
       - name: Upload Zip
         uses: actions/upload-artifact@v3
         with:
-          name: BewlyBewly Zip
+          name: BewlyBewly-Firefox Zip
           path: extension-firefox
