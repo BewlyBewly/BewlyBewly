@@ -47,6 +47,24 @@ jobs:
       - name: Install
         run: pnpm install
 
+      - name: Build Extension
+        run: pnpm build
+
+      - name: Upload Zip
+        uses: actions/upload-artifact@v3
+        with:
+          name: BewlyBewly Zip
+          path: extension
+
+      - name: Build Extension-Firefox
+        run: pnpm build-firefox
+
+      - name: Upload Zip
+        uses: actions/upload-artifact@v3
+        with:
+          name: BewlyBewly-Firefox Zip
+          path: extension-firefox
+
       - name: Build Extension-Safari
         run: pnpm build-safari
 
