@@ -4,6 +4,7 @@ import { getCSRF, removeHttpFromUrl } from '~/utils/main'
 import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils/dataFormatter'
 import type { VideoPreviewResult } from '~/models/video/videoPreview'
 import { settings } from '~/logic'
+import API from '~/background/msg.define'
 
 interface Props {
   id: number
@@ -88,7 +89,7 @@ watch(() => isHover.value, (newValue) => {
   if (props.showPreview) {
     if (newValue && !previewVideoUrl.value && props.cid) {
       browser.runtime.sendMessage({
-        contentScriptQuery: 'getVideoPreview',
+        contentScriptQuery: API.VIDEO.GET_VIDEO_PREVIEW,
         bvid: props.bvid,
         cid: props.cid,
       }).then((res: VideoPreviewResult) => {
@@ -102,7 +103,7 @@ watch(() => isHover.value, (newValue) => {
 function toggleWatchLater() {
   if (!isInWatchLater.value) {
     browser.runtime.sendMessage({
-      contentScriptQuery: 'saveToWatchLater',
+      contentScriptQuery: API.WATCHLATER.SAVE_TO_WATCHLATER,
       aid: props.id,
       csrf: getCSRF(),
     })
@@ -113,7 +114,7 @@ function toggleWatchLater() {
   }
   else {
     browser.runtime.sendMessage({
-      contentScriptQuery: 'removeFromWatchLater',
+      contentScriptQuery: API.WATCHLATER.REMOVE_FROM_WATCHLATER,
       aid: props.id,
       csrf: getCSRF(),
     })

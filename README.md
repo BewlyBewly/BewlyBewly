@@ -1,6 +1,6 @@
 # BewlyBewly
 
-English | [简体中文](README-cmn_CN.md) | [正體中文](README-cmn_TW.md) | [廣東話](README-jyut.md)
+English | [官话 - 简体中文](README-cmn_CN.md) | [官話 - 正體中文](README-cmn_TW.md) | [廣東話](README-jyut.md)
 
 <p align="center" style="margin-bottom: 0px !important;">
 <img width="150" src="https://user-images.githubusercontent.com/33394391/160250512-410b71fc-7f25-4caf-b850-429227ff082a.png"><br/>
@@ -10,15 +10,8 @@ English | [简体中文](README-cmn_CN.md) | [正體中文](README-cmn_TW.md) | 
 
 <p align="center">Just make a few small changes to your Bilibili homepage.</p>
 
-![Image 3840x2400](https://github.com/hakadao/BewlyBewly/assets/33394391/ad726480-e6ef-4823-82e0-e3c3735a3909)
-![Snipaste_2023-11-21_00-26-26](https://github.com/hakadao/BewlyBewly/assets/33394391/b1c1c25a-482a-438f-8e61-4d67cb32aea1)
-![Snipaste_2023-11-21_00-30-03](https://github.com/hakadao/BewlyBewly/assets/33394391/1a9f0c56-5053-40d9-bec8-72665f85962d)
-![Snipaste_2023-11-21_00-30-30](https://github.com/hakadao/BewlyBewly/assets/33394391/4cb44949-8352-4607-9dd4-74a8d1e00a74)
-![Snipaste_2023-11-21_00-31-33](https://github.com/hakadao/BewlyBewly/assets/33394391/9ebebfd9-d8a8-411d-8c10-cf7cdb60abd4)
-![Snipaste_2023-11-21_00-31-54](https://github.com/hakadao/BewlyBewly/assets/33394391/86ad5303-56b2-4d68-985d-300f2825ee49)
-![Snipaste_2023-11-21_00-32-06](https://github.com/hakadao/BewlyBewly/assets/33394391/64b6eac1-d9ee-4157-a850-b940700a565b)
-![Snipaste_2023-11-21_00-32-22](https://github.com/hakadao/BewlyBewly/assets/33394391/2533a1f9-3cb1-402e-96bb-3755404ddf02)
-![Snipaste_2023-11-21_00-32-51](https://github.com/hakadao/BewlyBewly/assets/33394391/a439ea59-cc80-48aa-9c6a-ec5d4da98441)
+![min1](https://github.com/hakadao/BewlyBewly/assets/33394391/951f9e2a-d0e1-452c-83a9-dc6d85c4d441)
+![min2](https://github.com/hakadao/BewlyBewly/assets/33394391/3e75dd20-f60b-4645-b434-23a24c72959c)
 
 ## 👋 Introduction
 
@@ -34,7 +27,7 @@ Even in the Edge browser, we strongly recommend you install it in the Chrome web
 
 - Chrome: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>
 - Edge: <https://microsoftedge.microsoft.com/addons/detail/bewlybewly/kceadhehfjdiakpiphpjgolbgehjdmja>
-- Firefox: **I NEED SOME HELP!!!!!!!!!!!!!!!!!! ( ；∀；)**
+- Firefox: <https://addons.mozilla.org/lt/firefox/addon/bewlybewly/>
 
 ### Local Installation
 
@@ -71,6 +64,8 @@ Opening the `edge://extensions` page in the Edge or `chrome://extensions` page i
 
 ## 🔧 Development & Build
 
+Please use the dev branch for development
+
 ### Chrome or Edge browser
 
 <details>
@@ -98,8 +93,6 @@ And then pack files under the `extension`
 </details>
 
 ### Firefox browser
-
-Before that, please use the `dev-firefox` branch to perform the operations below. It may contain some bugs or unclear code, and your help in addressing these issues is welcome! :D
 
 <details>
   <summary>Firefox browser</summary>

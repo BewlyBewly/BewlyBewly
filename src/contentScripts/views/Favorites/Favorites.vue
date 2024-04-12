@@ -6,6 +6,7 @@ import emitter from '~/utils/mitt'
 import { settings } from '~/logic'
 import type { Media as FavoriteItem, FavoritesResult } from '~/models/video/favorite'
 import type { List as CategoryItem, FavoritesCategoryResult } from '~/models/video/favoriteCategory'
+import API from '~/background/msg.define'
 
 const { t } = useI18n()
 
@@ -74,8 +75,8 @@ function initPageAction() {
 async function getFavoriteCategories() {
   await browser.runtime
     .sendMessage({
-      contentScriptQuery: 'getFavoriteCategories',
-      mid: getUserID(),
+      contentScriptQuery: API.FAVORITE.GET_FAVORITE_CATEGORIES,
+      up_mid: getUserID(),
     })
     .then((res: FavoritesCategoryResult) => {
       if (res.code === 0) {
@@ -99,19 +100,19 @@ async function getFavoriteCategories() {
  * @param keyword
  */
 async function getFavoriteResources(
-  mediaId: number,
-  pageNum: number,
+  media_id: number,
+  pn: number,
   keyword = '' as string,
 ) {
-  if (pageNum === 1)
+  if (pn === 1)
     isFullPageLoading.value = true
   isLoading.value = true
   try {
     const res: FavoritesResult = await browser.runtime
       .sendMessage({
-        contentScriptQuery: 'getFavoriteResources',
-        mediaId,
-        pageNum,
+        contentScriptQuery: API.FAVORITE.GET_FAVORITE_RESOURCES,
+        media_id,
+        pn,
         keyword,
       })
 
@@ -158,9 +159,9 @@ function jumpToLoginPage() {
 
 function handleUnfavorite(favoriteResource: FavoriteResource) {
   browser.runtime.sendMessage({
-    contentScriptQuery: 'patchDelFavoriteResources',
+    contentScriptQuery: API.FAVORITE.PATCH_DEL_FAVORITE_RESOURCES,
     resources: `${favoriteResource.id}:${favoriteResource.type}`,
-    mediaId: selectedCategory.value?.id,
+    media_id: selectedCategory.value?.id,
     csrf: getCSRF(),
   }).then((res) => {
     if (res.code === 0)

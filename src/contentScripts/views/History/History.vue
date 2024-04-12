@@ -7,6 +7,7 @@ import { calcCurrentTime } from '~/utils/dataFormatter'
 import { Business } from '~/models/video/history'
 import type { List as HistoryItem, HistoryResult } from '~/models/video/history'
 import type { List as HistorySearchItem, HistorySearchResult } from '~/models/video/historySearch'
+import API from '~/background/msg.define'
 
 const { t } = useI18n()
 
@@ -57,9 +58,9 @@ function getHistoryList() {
   isLoading.value = true
   browser.runtime
     .sendMessage({
-      contentScriptQuery: 'getHistoryList',
+      contentScriptQuery: API.HISTORY.GET_HISTORY_LIST,
       type: 'all',
-      viewAt:
+      view_at:
         historyList.length > 0
           ? historyList[historyList.length - 1].view_at
           : 0,
@@ -85,7 +86,7 @@ function searchHistoryList() {
   isLoading.value = true
   browser.runtime
     .sendMessage({
-      contentScriptQuery: 'searchHistoryList',
+      contentScriptQuery: API.HISTORY.SEARCH_HISTORY_LIST,
       pn: currentPageNum.value++,
       keyword: keyword.value,
     })
@@ -119,7 +120,7 @@ function handleSearch() {
 function deleteHistoryItem(index: number, historyItem: HistoryItem) {
   browser.runtime
     .sendMessage({
-      contentScriptQuery: 'deleteHistoryItem',
+      contentScriptQuery: API.HISTORY.DELETE_HISTORY_ITEM,
       kid: `${historyItem.history.business}_${historyItem.history.oid}`,
       csrf: getCSRF(),
     })
@@ -169,7 +170,7 @@ function getHistoryItemCover(item: HistoryItem) {
 function getHistoryPauseStatus() {
   browser.runtime
     .sendMessage({
-      contentScriptQuery: 'getHistoryPauseStatus',
+      contentScriptQuery: API.HISTORY.GET_HISTORY_PAUSE_STATUS,
     })
     .then((res) => {
       if (res.code === 0)
@@ -180,7 +181,7 @@ function getHistoryPauseStatus() {
 function setHistoryPauseStatus(isPause: boolean) {
   browser.runtime
     .sendMessage({
-      contentScriptQuery: 'setHistoryPauseStatus',
+      contentScriptQuery: API.HISTORY.SET_HISTORY_PAUSE_STATUS,
       csrf: getCSRF(),
       switch: isPause,
     })
@@ -193,7 +194,7 @@ function setHistoryPauseStatus(isPause: boolean) {
 function clearAllHistory() {
   browser.runtime
     .sendMessage({
-      contentScriptQuery: 'clearAllHistory',
+      contentScriptQuery: API.HISTORY.CLEAR_ALL_HISTORY,
       csrf: getCSRF(),
     })
     .then((res) => {

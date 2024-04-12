@@ -10,15 +10,8 @@
 
 <p align="center">只需对您的 Bilibili 主页进行一些小更改即可。</p>
 
-![Image 3840x2400](https://github.com/hakadao/BewlyBewly/assets/33394391/ad726480-e6ef-4823-82e0-e3c3735a3909)
-![Snipaste_2023-11-21_00-26-26](https://github.com/hakadao/BewlyBewly/assets/33394391/b1c1c25a-482a-438f-8e61-4d67cb32aea1)
-![Snipaste_2023-11-21_00-30-03](https://github.com/hakadao/BewlyBewly/assets/33394391/1a9f0c56-5053-40d9-bec8-72665f85962d)
-![Snipaste_2023-11-21_00-30-30](https://github.com/hakadao/BewlyBewly/assets/33394391/4cb44949-8352-4607-9dd4-74a8d1e00a74)
-![Snipaste_2023-11-21_00-31-33](https://github.com/hakadao/BewlyBewly/assets/33394391/9ebebfd9-d8a8-411d-8c10-cf7cdb60abd4)
-![Snipaste_2023-11-21_00-31-54](https://github.com/hakadao/BewlyBewly/assets/33394391/86ad5303-56b2-4d68-985d-300f2825ee49)
-![Snipaste_2023-11-21_00-32-06](https://github.com/hakadao/BewlyBewly/assets/33394391/64b6eac1-d9ee-4157-a850-b940700a565b)
-![Snipaste_2023-11-21_00-32-22](https://github.com/hakadao/BewlyBewly/assets/33394391/2533a1f9-3cb1-402e-96bb-3755404ddf02)
-![Snipaste_2023-11-21_00-32-51](https://github.com/hakadao/BewlyBewly/assets/33394391/a439ea59-cc80-48aa-9c6a-ec5d4da98441)
+![min1](https://github.com/hakadao/BewlyBewly/assets/33394391/951f9e2a-d0e1-452c-83a9-dc6d85c4d441)
+![min2](https://github.com/hakadao/BewlyBewly/assets/33394391/3e75dd20-f60b-4645-b434-23a24c72959c)
 
 ## 👋 介绍
 
@@ -34,7 +27,7 @@ BewlyBewly 是一个用于 BiliBili 的浏览器扩展，旨在通过重新设�
 
 - Chrome: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>
 - Edge: <https://microsoftedge.microsoft.com/addons/detail/bewlybewly/kceadhehfjdiakpiphpjgolbgehjdmja>
-- Firefox: **我需要一些帮助!!!!!!!!!!!!!!!!!! ( ；∀；)**
+- Firefox: <https://addons.mozilla.org/lt/firefox/addon/bewlybewly/>
 
 ### 本地安装
 
@@ -69,7 +62,9 @@ BewlyBewly 是一个用于 BiliBili 的浏览器扩展，旨在通过重新设�
 
 </details>
 
-## 🔧 开发 & 构建
+## 🔧 开发和构建项目
+
+请使用 dev 分支进行开发
 
 ### Chrome or Edge browser
 
@@ -83,7 +78,7 @@ pnpm dev
 ```
 
 然后**在浏览器中使用 `加载已解压的拓展程序` 加载 `extension` 文件夹**。
-每次修改后，您需要单击 [重新加载](https://chromewebstore.google.com/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) 按钮并刷新页面以确保应用更改。
+每次修改后，您需要单击 [Reload Extensions](https://chromewebstore.google.com/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) 按钮并刷新页面以确保应用更改。
 
 #### 构建 (Chrome or Edge)
 
@@ -98,8 +93,6 @@ pnpm build
 </details>
 
 ### Firefox browser
-
-在此之前，请使用 `dev-firefox` 分支来执行以下操作。它可能包含一些错误或不清晰的代码，欢迎您帮助解决这些问题！:D
 
 <details>
   <summary>Firefox</summary>
