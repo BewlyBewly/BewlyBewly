@@ -1,7 +1,7 @@
 {
   "name": "bewly-bewly",
   "displayName": "BewlyBewly",
-  "version": "0.16.2",
+  "version": "0.16.4",
   "private": true,
   "packageManager": "pnpm@8.15.3",
   "description": "Just make a few small changes to your Bilibili homepage.",
