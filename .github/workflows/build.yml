@@ -46,11 +46,11 @@ jobs:
       - name: Install
         run: pnpm install
 
-      - name: Build Extension
-        run: pnpm build
+      - name: Build Extension-Safari
+        run: pnpm build-safari
 
       - name: Upload Zip
         uses: actions/upload-artifact@v3
         with:
-          name: BewlyBewly Zip
-          path: extension
+          name: BewlyBewly-Safari Zip
+          path: extension-safari
