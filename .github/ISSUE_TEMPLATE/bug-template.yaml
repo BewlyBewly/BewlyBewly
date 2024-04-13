@@ -1,13 +1,14 @@
 name: Bug Report
 description: 报告问题
-title: '[BUG]:'
+title: '[BUG]'
 labels: [bug]
 
 body:
   - type: markdown
     attributes:
       value: |
-        ## BUG 表单
+        ## BUG 提出
+        如果你是 Edge 浏览器，提出问题时不妨看一下[这里](https://github.com/hakadao/BewlyBewly/issues/552)
 
   - type: textarea
     attributes:
