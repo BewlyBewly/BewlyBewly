@@ -30,7 +30,7 @@ body:
       label: 问题描述
       description: 如何重现, 最好带有截图或视频以便排查
       placeholder: |
-        请预先搜索是否有提到的 issue 否则重复的 issue 会被关闭不作解释
+        请预先搜索是否有提到的 issue 否则重复的 issue 会被关闭
     validations:
       required: true
 
