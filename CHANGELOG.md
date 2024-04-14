@@ -2,25 +2,14 @@
 
 ## [0.16.5](https://github.com/hakadao/BewlyBewly/compare/v0.16.4...v0.16.5) (2024-04-14)
 
-
-### Features
-
-* **ci:** update dep ([#546](https://github.com/hakadao/BewlyBewly/issues/546)) ([c940c4e](https://github.com/hakadao/BewlyBewly/commit/c940c4e95dd83c078a9e567ef00b86059a9f023a))
-* **ci:** update dep ([#546](https://github.com/hakadao/BewlyBewly/issues/546)) ([e4db157](https://github.com/hakadao/BewlyBewly/commit/e4db15748b92e8517b59d6851b1ad1b888333449))
-* **ci:** upload file rename ([#537](https://github.com/hakadao/BewlyBewly/issues/537)) ([f32d9a1](https://github.com/hakadao/BewlyBewly/commit/f32d9a1634baa3d27cc7f86b09dde85a85b6b18c))
-
-
 ### Bug Fixes
 
 * adjust dark mode ([#539](https://github.com/hakadao/BewlyBewly/issues/539)) ([e92bacc](https://github.com/hakadao/BewlyBewly/commit/e92bacc10b6e64505b6c97d2f1b10bc40e5792c6))
 * bewly not working on certain homepage urls ([#525](https://github.com/hakadao/BewlyBewly/issues/525)) ([f0f8b07](https://github.com/hakadao/BewlyBewly/commit/f0f8b078289781020303c5aca555a7d2774342be))
 * flash dark theme ([#565](https://github.com/hakadao/BewlyBewly/issues/565)) ([86c8b74](https://github.com/hakadao/BewlyBewly/commit/86c8b74015a49359736ac4c684fae193fcf15ef9))
-* flash dark theme ([#565](https://github.com/hakadao/BewlyBewly/issues/565)) ([225188b](https://github.com/hakadao/BewlyBewly/commit/225188bba0027e6fe9e7cf6c8acc7b0aeeb66833))
 * game card title color ([#562](https://github.com/hakadao/BewlyBewly/issues/562)) ([d0cd138](https://github.com/hakadao/BewlyBewly/commit/d0cd138b7ac181f65fd83cea2aa37ff01e77c444))
-* game card title color ([#562](https://github.com/hakadao/BewlyBewly/issues/562)) ([033605d](https://github.com/hakadao/BewlyBewly/commit/033605de24170f83f6353a35b8f288b82225cc9e))
 * **Home:** correct deformation of video layout switcher on small screen computers ([f75e010](https://github.com/hakadao/BewlyBewly/commit/f75e01015051866ea919d8c3c8117d8f77a94e9f))
 * input element focus shortcut key ([#564](https://github.com/hakadao/BewlyBewly/issues/564)) ([2e87cac](https://github.com/hakadao/BewlyBewly/commit/2e87cac7194febe4c07482e1b769f7caea574518))
-* input element focus shortcut key ([#564](https://github.com/hakadao/BewlyBewly/issues/564)) ([6cacb9f](https://github.com/hakadao/BewlyBewly/commit/6cacb9f04bd196d001c7a84253f42b83cc6fd497))
 * misplaced of switch button ([#543](https://github.com/hakadao/BewlyBewly/issues/543)) ([111fac7](https://github.com/hakadao/BewlyBewly/commit/111fac75867388919cb5d59df108c9b0f035cb3a))
 * more pop fav url ([#570](https://github.com/hakadao/BewlyBewly/issues/570)) ([9bf86c7](https://github.com/hakadao/BewlyBewly/commit/9bf86c7fad409b0582578950203e87488542d76e))
 
