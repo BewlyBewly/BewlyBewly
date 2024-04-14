@@ -544,5 +544,11 @@
       opacity: 0.6;
     }
   }
+
+  .game-card {
+    .game-card__info-title {
+      color: unset;
+    }
+  }
   // #endregion
 }
