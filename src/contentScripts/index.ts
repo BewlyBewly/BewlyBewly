@@ -73,12 +73,13 @@ function isSupportedPages() {
 let beforeLoadedStyleEl: HTMLStyleElement | undefined
 
 if (isSupportedPages()) {
+  const isDarkSystemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
   // Since using runWhenIdle does not instantly inject the app to the page, a style class cannot be injected immediately to the <html> tag
   // We have to manually add a class to the <html> app to ensure that the transition effect is applied
   if (
     (settings.value.adaptToOtherPageStyles && settings.value.theme === 'dark')
     // Fix: flash dark mode when using the light theme
-    // || (settings.value.adaptToOtherPageStyles && window.matchMedia('(prefers-color-scheme: dark)').matches)
+    || (settings.value.adaptToOtherPageStyles && (isDarkSystemTheme && settings.value.theme !== 'light'))
   )
     document.documentElement.classList.add('dark')
 
@@ -90,13 +91,13 @@ if (isSupportedPages()) {
 
 if (settings.value.adaptToOtherPageStyles && isHomePage()) {
   beforeLoadedStyleEl = injectCSS(`
-    html.dark.bewly-design {
-      background-color: hsl(230 12% 6%);
+    html.bewly-design {
+      background-color: var(--bew-bg);
+      transition: background-color 0.2s ease-in;
     }
 
     body {
-      opacity: 0;
-      background: none;
+      display: none;
     }
   `)
 
