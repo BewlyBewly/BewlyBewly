@@ -9,6 +9,7 @@ import {
   removeSearchHistory,
 } from './searchHistoryProvider'
 import API from '~/background/msg.define'
+import { findLeafActiveElement } from '~/utils/element'
 
 defineProps<{
   darkenOnFocus?: boolean
@@ -32,16 +33,19 @@ watch(isFocus, async (focus) => {
 })
 
 onKeyStroke('/', (e: KeyboardEvent) => {
-  if (e.target) {
-    if ((e.target as HTMLElement).tagName !== 'INPUT'
-      && (e.target as HTMLElement).tagName !== 'TEXTAREA'
-      && !(e.target as HTMLElement).className.includes('textarea')
-      && !(e.target as HTMLElement).className.includes('input')
-    ) {
-      e.preventDefault()
-      keywordRef.value?.focus()
-    }
+  const target = e.target as HTMLElement
+  const ignoreTagNames = ['INPUT', 'TEXTAREA']
+  if (target && (ignoreTagNames.includes(target.tagName) || target.isContentEditable))
+    return
+
+  const activeElement = findLeafActiveElement(document) as HTMLElement | undefined
+  if (activeElement && target !== activeElement) {
+    if (ignoreTagNames.includes(activeElement.tagName) || activeElement.isContentEditable)
+      return
   }
+
+  e.preventDefault()
+  keywordRef.value?.focus()
 })
 onKeyStroke('Escape', (e: KeyboardEvent) => {
   e.preventDefault()
