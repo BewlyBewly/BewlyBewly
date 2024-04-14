@@ -29,6 +29,13 @@ const handleThrottledPageRefresh = useThrottleFn(() => handlePageRefresh.value?.
 const handleThrottledReachBottom = useThrottleFn(() => handleReachBottom.value?.(), 500)
 const topBarRef = ref()
 
+const isDark = computed(() => {
+  if (settings.value.theme === 'auto')
+    return window.matchMedia('(prefers-color-scheme: dark)').matches
+
+  return settings.value.theme === 'dark'
+})
+
 const isVideoPage = computed(() => {
   if (/https?:\/\/(www.)?bilibili.com\/video\/.*/.test(location.href))
     return true
@@ -72,13 +79,14 @@ watch(
   () => {
     setAppThemeColor()
   },
+  { immediate: true },
 )
 
 // Watch for changes in the 'settings.value.theme' variable and add the 'dark' class to the 'mainApp' element
 // to prevent some Unocss dark-specific styles from failing to take effect
 watch(() => settings.value.theme, () => {
   setAppAppearance()
-})
+}, { immediate: true })
 
 watch(() => settings.value.language, () => {
   setAppLanguage()
@@ -90,7 +98,7 @@ watch(() => accessKey.value, () => {
 
 watch(() => settings.value.adaptToOtherPageStyles, () => {
   handleAdaptToOtherPageStylesChange()
-})
+}, { immediate: true })
 
 watch(() => settings.value.blockAds, () => {
   handleBlockAds()
@@ -105,8 +113,6 @@ watch(() => settings.value.reduceFrostedGlassBlur, () => {
 })
 
 onBeforeMount(() => {
-  setAppThemeColor()
-  handleAdaptToOtherPageStylesChange()
   handleBlockAds()
   handleDisableFrostedGlass()
   handleReduceFrostedGlassBlur()
@@ -183,29 +189,13 @@ async function setAppLanguage() {
  * to prevent some Unocss dark-specific styles from failing to take effect
  */
 function setAppAppearance() {
-  const currentColorScheme = window.matchMedia('(prefers-color-scheme: dark)').matches
-
-  if (settings.value.theme === 'dark') {
-    mainAppRef.value?.classList.add('dark')
+  if (isDark.value) {
     document.querySelector('#bewly')?.classList.add('dark')
     document.documentElement.classList.add('dark')
   }
-  else if (settings.value.theme === 'light') {
-    mainAppRef.value?.classList.remove('dark')
+  else {
     document.querySelector('#bewly')?.classList.remove('dark')
     document.documentElement.classList.remove('dark')
-  }
-  else if (settings.value.theme === 'auto') {
-    if (currentColorScheme) {
-      mainAppRef.value?.classList.add('dark')
-      document.querySelector('#bewly')?.classList.add('dark')
-      document.documentElement.classList.add('dark')
-    }
-    else {
-      mainAppRef.value?.classList.remove('dark')
-      document.querySelector('#bewly')?.classList.remove('dark')
-      document.documentElement.classList.remove('dark')
-    }
   }
 }
 
@@ -321,7 +311,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
 </script>
 
 <template>
-  <div ref="mainAppRef" class="bewly-wrapper" text="$bew-text-1">
+  <div ref="mainAppRef" class="bewly-wrapper" :class="{ dark: isDark }" text="$bew-text-1">
     <!-- Background -->
     <template v-if="isHomePage() && !settings.useOriginalBilibiliHomepage">
       <AppBackground :activated-page="activatedPage" />
