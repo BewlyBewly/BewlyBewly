@@ -237,7 +237,8 @@
     .n .n-inner,
     #page-index .col-1,
     #page-index .col-2 .section,
-    #page-dynamic .col-2 .section {
+    #page-dynamic .col-2 .section,
+    .game-card .game-card__info-title {
       color: var(--bew-text-1);
     }
 
@@ -542,12 +543,6 @@
 
     .pgc-space-follow-item .bangumi-options .opt-list li.disabled {
       opacity: 0.6;
-    }
-  }
-
-  .game-card {
-    .game-card__info-title {
-      color: unset;
     }
   }
   // #endregion
