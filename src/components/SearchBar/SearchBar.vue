@@ -33,6 +33,7 @@ watch(isFocus, async (focus) => {
 })
 
 onKeyStroke('/', (e: KeyboardEvent) => {
+  // Reference: https://github.com/polywock/globalSpeed/blob/3705ac836402b324550caf92aa65075b2f2347c6/src/contentScript/ConfigSync.ts#L94
   const target = e.target as HTMLElement
   const ignoreTagNames = ['INPUT', 'TEXTAREA']
   if (target && (ignoreTagNames.includes(target.tagName) || target.isContentEditable))
