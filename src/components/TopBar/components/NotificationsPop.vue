@@ -10,26 +10,31 @@ const list = reactive([
     name: t('topbar.noti_dropdown.replys'),
     url: 'https://message.bilibili.com/#/reply',
     unreadCount: 0,
+    icon: 'i-majesticons:reply-line',
   },
   {
     name: t('topbar.noti_dropdown.mentions'),
     url: 'https://message.bilibili.com/#/at',
     unreadCount: 0,
+    icon: 'i-mingcute:at-line',
   },
   {
     name: t('topbar.noti_dropdown.likes'),
     url: 'https://message.bilibili.com/#/love',
     unreadCount: 0,
+    icon: 'i-mingcute:thumb-up-2-line',
   },
   {
     name: t('topbar.noti_dropdown.messages'),
     url: 'https://message.bilibili.com/#/system',
     unreadCount: 0,
+    icon: 'i-ri:bilibili-line',
   },
   {
     name: t('topbar.noti_dropdown.chats'),
     url: 'https://message.bilibili.com/#/whisper',
     unreadCount: 0,
+    icon: 'i-mingcute:message-1-line',
   },
 ],
 )
@@ -92,14 +97,12 @@ function getUnreadMessageCount() {
       transition="all duration-300"
       m="b-1 last:b-0"
       flex="~"
-      justify="between"
       items="center"
       h="35px"
     >
-      {{ item.name }}
-      <template
-        v-if="item.unreadCount > 0"
-      >
+      <i :class="item.icon" />
+      <span class="flex-1 ml-2 mr-1">{{ item.name }}</span>
+      <template v-if="item.unreadCount > 0">
         <div
           bg="$bew-theme-color"
           rounded="full"
@@ -108,7 +111,7 @@ function getUnreadMessageCount() {
           min-w="21px"
           min-h="21px"
         >
-          {{ item.unreadCount > 999 ? '999+' : item.unreadCount }}
+          {{ item.unreadCount > 99 ? '99+' : item.unreadCount }}
         </div>
       </template>
     </a>
