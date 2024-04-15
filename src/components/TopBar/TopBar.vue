@@ -548,7 +548,7 @@ defineExpose({
 
                 <Transition name="slide-in">
                   <KeepAlive>
-                    <MomentsPop v-show="showMomentsPop" :key="momentsPopKey" class="bew-popover" />
+                    <MomentsPop v-if="showMomentsPop" :key="momentsPopKey" class="bew-popover" />
                   </KeepAlive>
                 </Transition>
               </div>
