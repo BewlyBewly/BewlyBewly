@@ -10,7 +10,7 @@ const list = reactive([
     name: t('topbar.noti_dropdown.replys'),
     url: 'https://message.bilibili.com/#/reply',
     unreadCount: 0,
-    icon: 'i-majesticons:reply-line',
+    icon: 'i-mingcute:share-forward-line',
   },
   {
     name: t('topbar.noti_dropdown.mentions'),
@@ -28,13 +28,13 @@ const list = reactive([
     name: t('topbar.noti_dropdown.messages'),
     url: 'https://message.bilibili.com/#/system',
     unreadCount: 0,
-    icon: 'i-ri:bilibili-line',
+    icon: 'i-mingcute:mail-line',
   },
   {
     name: t('topbar.noti_dropdown.chats'),
     url: 'https://message.bilibili.com/#/whisper',
     unreadCount: 0,
-    icon: 'i-mingcute:message-1-line',
+    icon: 'i-mingcute:message-3-line',
   },
 ],
 )

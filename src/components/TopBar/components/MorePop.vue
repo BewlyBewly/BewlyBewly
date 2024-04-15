@@ -5,7 +5,7 @@ import { getUserID, isHomePage } from '~/utils/main'
 const { t } = useI18n()
 
 const list = [
-  { name: t('topbar.notifications'), url: '//message.bilibili.com', icon: 'i-tabler:bell' },
+  { name: t('topbar.notifications'), url: '//message.bilibili.com', icon: 'i-mingcute:notification-line' },
   { name: t('topbar.moments'), url: '//t.bilibili.com/', icon: 'i-tabler:windmill' },
   { name: t('topbar.favorites'), url: `//space.bilibili.com/${getUserID() ?? ''}/favlist`, icon: 'i-mingcute:star-line' },
   { name: t('topbar.history'), url: '//www.bilibili.com/account/history', icon: 'i-mingcute:time-line' },
@@ -16,12 +16,12 @@ const list = [
 
 <template>
   <div
+    style="box-shadow: var(--bew-shadow-3)"
     bg="$bew-elevated-solid-1"
-    w="170px"
+    w="180px"
     p="4"
     rounded="$bew-radius"
     flex="~ col"
-    style="box-shadow: var(--bew-shadow-3)"
   >
     <a
       v-for="item in list"
@@ -36,7 +36,6 @@ const list = [
       m="b-1 last:b-0"
       flex="~"
       items="center"
-      h="35px"
     >
       <i :class="item.icon" class="mr-4" />
       <span class="flex-1">{{ item.name }}</span>
