@@ -81,4 +81,6 @@ See [CONTRIBUTION.md](docs/CONTRIBUTING.md)
 
 If you like this project, you can consider donating to support me. I'm not in financial difficulty, so support as you see fit.
 
-![image](https://github.com/hakadao/BewlyBewly/assets/33394391/41711f39-8c6c-4dea-964e-5ae7f0d5b8ad)
+<a href="https://afdian.net/a/Hakadao" target="_blank">
+  <img alt="afdian" src="https://github.com/hakadao/BewlyBewly/assets/33394391/41711f39-8c6c-4dea-964e-5ae7f0d5b8ad" width="350">
+</a>
