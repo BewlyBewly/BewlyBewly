@@ -5,12 +5,12 @@ import { getUserID, isHomePage } from '~/utils/main'
 const { t } = useI18n()
 
 const list = [
-  { name: t('topbar.notifications'), url: '//message.bilibili.com' },
-  { name: t('topbar.moments'), url: '//t.bilibili.com/' },
-  { name: t('topbar.favorites'), url: `//space.bilibili.com/${getUserID() ?? ''}/favlist` },
-  { name: t('topbar.history'), url: '//www.bilibili.com/account/history' },
-  { name: t('topbar.watch_later'), url: '//www.bilibili.com/watchlater/#/list' },
-  { name: t('topbar.creative_center'), url: '//member.bilibili.com/platform/home' },
+  { name: t('topbar.notifications'), url: '//message.bilibili.com', icon: 'i-tabler:bell' },
+  { name: t('topbar.moments'), url: '//t.bilibili.com/', icon: 'i-tabler:windmill' },
+  { name: t('topbar.favorites'), url: `//space.bilibili.com/${getUserID() ?? ''}/favlist`, icon: 'i-mingcute:star-line' },
+  { name: t('topbar.history'), url: '//www.bilibili.com/account/history', icon: 'i-mingcute:time-line' },
+  { name: t('topbar.watch_later'), url: '//www.bilibili.com/watchlater/#/list', icon: 'i-mingcute:carplay-line' },
+  { name: t('topbar.creative_center'), url: '//member.bilibili.com/platform/home', icon: 'i-mingcute:bulb-line' },
 ]
 </script>
 
@@ -35,11 +35,11 @@ const list = [
       transition="all duration-300"
       m="b-1 last:b-0"
       flex="~"
-      justify="between"
       items="center"
       h="35px"
     >
-      {{ item.name }}
+      <i :class="item.icon" class="mr-4 inline-block" />
+      <span class="flex-1">{{ item.name }}</span>
     </a>
   </div>
 </template>
