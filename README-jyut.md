@@ -81,4 +81,6 @@ See [CONTRIBUTION.md](docs/CONTRIBUTING.md)
 
 若然你鐘意呢份專案，你可以考慮捐贈嚟支持我。我而家唔係財務困境，捐幾多睇你啦。
 
-![image](https://github.com/hakadao/BewlyBewly/assets/33394391/41711f39-8c6c-4dea-964e-5ae7f0d5b8ad)
+<a href="https://afdian.net/a/Hakadao" target="_blank">
+  <img alt="afdian" src="https://github.com/hakadao/BewlyBewly/assets/33394391/41711f39-8c6c-4dea-964e-5ae7f0d5b8ad" width="350">
+</a>

@@ -81,4 +81,6 @@ BewlyBewly 是一个用于 BiliBili 的浏览器扩展，旨在通过重新设�
 
 如果您喜欢这个项目，您可以考虑捐赠以支持我。我并不处于财务困境，所以请根据您的意愿提供支持即可。
 
-![image](https://github.com/hakadao/BewlyBewly/assets/33394391/41711f39-8c6c-4dea-964e-5ae7f0d5b8ad)
+<a href="https://afdian.net/a/Hakadao" target="_blank">
+  <img alt="afdian" src="https://github.com/hakadao/BewlyBewly/assets/33394391/41711f39-8c6c-4dea-964e-5ae7f0d5b8ad" width="350">
+</a>
