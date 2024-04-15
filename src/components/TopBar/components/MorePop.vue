@@ -38,7 +38,7 @@ const list = [
       items="center"
       h="35px"
     >
-      <i :class="item.icon" class="mr-4 inline-block" />
+      <i :class="item.icon" class="mr-4" />
       <span class="flex-1">{{ item.name }}</span>
     </a>
   </div>
