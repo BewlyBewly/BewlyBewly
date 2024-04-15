@@ -116,6 +116,8 @@ export function delay(ms: number) {
 export function isHomePage(): boolean {
   if (
     /https?:\/\/(www\.)bilibili.com\/?(#\/?)?$/.test(location.href)
+    // https://github.com/hakadao/BewlyBewly/issues/525 #525
+    || /https?:\/\/(www\.)bilibili.com(\/)?(\?.*)?$/.test(location.href)
     || /https?:\/\/(www\.)bilibili.com\/index\.html$/.test(location.href)
     || /https?:\/\/(www\.)?bilibili.com\/\?spm_id_from=(.)*/.test(location.href)
   )
