@@ -47,8 +47,8 @@ devDependencies:
     specifier: ^3.6.2
     version: 3.6.2(typescript@4.9.5)
   '@iconify/json':
-    specifier: ^2.2.183
-    version: 2.2.183
+    specifier: ^2.2.201
+    version: 2.2.201
   '@iconify/vue':
     specifier: ^4.1.1
     version: 4.1.1(vue@3.4.19)
@@ -135,13 +135,13 @@ devDependencies:
     version: 5.27.1
   tsup:
     specifier: ^6.7.0
-    version: 6.7.0(postcss@8.4.33)(typescript@4.9.5)
+    version: 6.7.0(postcss@8.4.38)(typescript@4.9.5)
   typescript:
     specifier: ^4.9.5
     version: 4.9.5
   unocss:
     specifier: ^0.54.3
-    version: 0.54.3(postcss@8.4.33)(vite@3.2.8)
+    version: 0.54.3(postcss@8.4.38)(vite@3.2.8)
   unplugin-auto-import:
     specifier: ^0.11.5
     version: 0.11.5(@vueuse/core@10.7.2)
@@ -881,8 +881,8 @@ packages:
     resolution: {integrity: sha512-6EwiSjwWYP7pTckG6I5eyFANjPhmPjUX9JRLUSfNPC7FX7zK9gyZAfUEaECL6ALTpGX5AjnBq3C9XmVWPitNpw==}
     dev: true
 
-  /@iconify/json@2.2.183:
-    resolution: {integrity: sha512-LvlU0SWHlDGEmX9XZpK5lVVANRQNdToF2Vd0CgV+q6ntEYtza2QEvKHY318m+9sCEMm5CH6RkaSOtWTguAENjQ==}
+  /@iconify/json@2.2.201:
+    resolution: {integrity: sha512-5jM9TAa55YSEfx2WX1/GsHL9FSSH1PsA38V3p26SDmnOSmfb3V7r5yBgO8oIFkXdFQFk59MgESEOziapNtTGkw==}
     dependencies:
       '@iconify/types': 2.0.0
       pathe: 1.1.2
@@ -946,7 +946,7 @@ packages:
     engines: {node: '>= 16'}
     dependencies:
       '@intlify/shared': 9.4.1
-      source-map-js: 1.0.2
+      source-map-js: 1.2.0
     dev: true
 
   /@intlify/message-compiler@9.9.1:
@@ -1705,7 +1705,7 @@ packages:
       sirv: 2.0.4
     dev: true
 
-  /@unocss/postcss@0.54.3(postcss@8.4.33):
+  /@unocss/postcss@0.54.3(postcss@8.4.38):
     resolution: {integrity: sha512-LPVSa+euzeh9Nzsb/IJI2ZeW0SUeifn0dRmPtB3bTOHkVeVba8IFWPzU3grC+m2tU9ysiTLs/9U2tLObljfC3g==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -1716,7 +1716,7 @@ packages:
       css-tree: 2.3.1
       fast-glob: 3.3.2
       magic-string: 0.30.5
-      postcss: 8.4.33
+      postcss: 8.4.38
     dev: true
 
   /@unocss/preset-attributify@0.54.3:
@@ -6392,7 +6392,7 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /postcss-load-config@3.1.4(postcss@8.4.33):
+  /postcss-load-config@3.1.4(postcss@8.4.38):
     resolution: {integrity: sha512-6DiM4E7v4coTE4uzA8U//WhtPwyhiim3eyjEMFCnUpzbrkK9wJHgKDT2mR+HbtSrd/NubVaYTOpSpjUl8NQeRg==}
     engines: {node: '>= 10'}
     peerDependencies:
@@ -6405,7 +6405,7 @@ packages:
         optional: true
     dependencies:
       lilconfig: 2.1.0
-      postcss: 8.4.33
+      postcss: 8.4.38
       yaml: 1.10.2
     dev: true
 
@@ -6424,6 +6424,15 @@ packages:
       nanoid: 3.3.7
       picocolors: 1.0.0
       source-map-js: 1.0.2
+
+  /postcss@8.4.38:
+    resolution: {integrity: sha512-Wglpdk03BSfXkHoQa3b/oulrotAkwrlLDRSOb9D0bN86FdRyE9lppSp33aHNPgBa0JKCoB+drFLZkQoRRYae5A==}
+    engines: {node: ^10 || ^12 || >=14}
+    dependencies:
+      nanoid: 3.3.7
+      picocolors: 1.0.0
+      source-map-js: 1.2.0
+    dev: true
 
   /prelude-ls@1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
@@ -7065,6 +7074,11 @@ packages:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}
     engines: {node: '>=0.10.0'}
 
+  /source-map-js@1.2.0:
+    resolution: {integrity: sha512-itJW8lvSA0TXEphiRoawsCksnlf8SyvmFzIhltqAHluXd88pkCd+cXJVHTDwdCr0IzwptSm035IHQktUu1QUMg==}
+    engines: {node: '>=0.10.0'}
+    dev: true
+
   /source-map-support@0.5.21:
     resolution: {integrity: sha512-uBHU3L3czsIyYXKX88fdrGovxdSCoTGDRZ6SYXtSRxLZUzHg5P/66Ht6uoUlHu9EZod+inXhKo3qQgwXUT/y1w==}
     dependencies:
@@ -7532,7 +7546,7 @@ packages:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
     dev: true
 
-  /tsup@6.7.0(postcss@8.4.33)(typescript@4.9.5):
+  /tsup@6.7.0(postcss@8.4.38)(typescript@4.9.5):
     resolution: {integrity: sha512-L3o8hGkaHnu5TdJns+mCqFsDBo83bJ44rlK7e6VdanIvpea4ArPcU3swWGsLVbXak1PqQx/V+SSmFPujBK+zEQ==}
     engines: {node: '>=14.18'}
     hasBin: true
@@ -7556,8 +7570,8 @@ packages:
       execa: 5.1.1
       globby: 11.1.0
       joycon: 3.1.1
-      postcss: 8.4.33
-      postcss-load-config: 3.1.4(postcss@8.4.33)
+      postcss: 8.4.38
+      postcss-load-config: 3.1.4(postcss@8.4.38)
       resolve-from: 5.0.0
       rollup: 3.29.4
       source-map: 0.8.0-beta.0
@@ -7767,7 +7781,7 @@ packages:
     engines: {node: '>= 10.0.0'}
     dev: true
 
-  /unocss@0.54.3(postcss@8.4.33)(vite@3.2.8):
+  /unocss@0.54.3(postcss@8.4.38)(vite@3.2.8):
     resolution: {integrity: sha512-uaoCKFigRkqceLmBrtWhLqQR6D6NyBAtSFVUnM1m57BSqA0EwAFmBsgoynzAmZRTQQFsPrBzKQjEmaCUTyUd9Q==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -7780,7 +7794,7 @@ packages:
       '@unocss/cli': 0.54.3
       '@unocss/core': 0.54.3
       '@unocss/extractor-arbitrary-variants': 0.54.3
-      '@unocss/postcss': 0.54.3(postcss@8.4.33)
+      '@unocss/postcss': 0.54.3(postcss@8.4.38)
       '@unocss/preset-attributify': 0.54.3
       '@unocss/preset-icons': 0.54.3
       '@unocss/preset-mini': 0.54.3
