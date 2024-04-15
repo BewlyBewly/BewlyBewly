@@ -1,6 +1,6 @@
 # Contribution Guide
 
-[English](README.md) | [官话 - 简体中文](README-cmn_CN.md) | 官話 - 正體中文 | [廣東話](README-jyut.md)
+[English](CONTRIBUTING.md) | [官话 - 简体中文](CONTRIBUTING-cmn_CN.md) | [官話 - 正體中文](CONTRIBUTING-cmn_TW.md) | [廣東話](CONTRIBUTING-jyut.md)
 
 ## 💻 Setting up the Development Environment
 
