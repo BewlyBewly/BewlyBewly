@@ -7,7 +7,7 @@ const { t } = useI18n()
 const list = [
   { name: t('topbar.notifications'), url: '//message.bilibili.com' },
   { name: t('topbar.moments'), url: '//t.bilibili.com/' },
-  { name: t('topbar.favorites'), url: `//space.bilibili.com/${getUserID ?? ''}/favlist` },
+  { name: t('topbar.favorites'), url: `//space.bilibili.com/${getUserID() ?? ''}/favlist` },
   { name: t('topbar.history'), url: '//www.bilibili.com/account/history' },
   { name: t('topbar.watch_later'), url: '//www.bilibili.com/watchlater/#/list' },
   { name: t('topbar.creative_center'), url: '//member.bilibili.com/platform/home' },
