@@ -66,6 +66,7 @@ const logo = ref<HTMLElement>() as Ref<HTMLElement>
 const avatarImg = ref<HTMLImageElement>() as Ref<HTMLImageElement>
 const avatarShadow = ref<HTMLImageElement>() as Ref<HTMLImageElement>
 const favoritesPopRef = ref<any>()
+const momentsPopRef = ref()
 
 const scrollTop = ref<number>(0)
 const oldScrollTop = ref<number>(0)
@@ -82,7 +83,10 @@ const notifications = useDelayedHover({
 })
 // Moments
 const moments = useDelayedHover({
-  enter: () => showMomentsPop.value = true,
+  enter: () => {
+    showMomentsPop.value = true
+    momentsPopRef.value && momentsPopRef.value.initData()
+  },
   leave: () => showMomentsPop.value = false,
 })
 // Favorites
@@ -497,7 +501,7 @@ defineExpose({
                     v-if="settings.topBarIconBadges === 'number'"
                     class="unread-message"
                   >
-                    {{ unReadMessageCount > 999 ? '999+' : unReadMessageCount }}
+                    {{ unReadMessageCount > 99 ? '99+' : unReadMessageCount }}
                   </div>
                   <div
                     v-else-if="settings.topBarIconBadges === 'dot'"
@@ -531,7 +535,7 @@ defineExpose({
                     v-if="settings.topBarIconBadges === 'number'"
                     class="unread-message"
                   >
-                    {{ newMomentsCount > 999 ? '999+' : newMomentsCount }}
+                    {{ newMomentsCount > 99 ? '99+' : newMomentsCount }}
                   </div>
                   <div
                     v-else-if="settings.topBarIconBadges === 'dot'"
@@ -547,9 +551,7 @@ defineExpose({
                 </a>
 
                 <Transition name="slide-in">
-                  <KeepAlive>
-                    <MomentsPop v-if="showMomentsPop" :key="momentsPopKey" class="bew-popover" />
-                  </KeepAlive>
+                  <MomentsPop v-show="showMomentsPop" :key="momentsPopKey" ref="momentsPopRef" class="bew-popover" />
                 </Transition>
               </div>
 
