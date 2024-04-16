@@ -37,28 +37,17 @@ const noMoreContent = ref<boolean>(false)
 const livePage = ref<number>(1)
 const momentsWrap = ref<HTMLElement>() as Ref<HTMLElement>
 
-watch(selectedTab, (newVal: number, oldVal: number) => {
+watch(selectedTab, (newVal, oldVal) => {
   if (newVal === oldVal)
     return
 
   if (momentsWrap.value)
     smoothScrollToTop(momentsWrap.value, 300)
 
-  if (newVal === 0) {
-    getTopBarNewMoments([MomentType.Video, MomentType.Bangumi])
-  }
-  else if (newVal === 1) {
-    livePage.value = 1
-    getTopbarLiveMoments(livePage.value)
-  }
-  else if (newVal === 2) {
-    getTopBarNewMoments([MomentType.Article])
-  }
-})
+  initData()
+}, { immediate: true })
 
 onMounted(() => {
-  getTopBarNewMoments([MomentType.Video, MomentType.Bangumi])
-
   if (momentsWrap.value) {
     momentsWrap.value.addEventListener('scroll', () => {
       if (
@@ -90,40 +79,63 @@ function onClickTab(tabId: number) {
   })
 }
 
-function getTopBarNewMoments(type_list: number[]) {
-  moments.length = 0
+async function initData() {
+  if (selectedTab.value === 0) {
+    await getTopBarNewMoments([MomentType.Video, MomentType.Bangumi])
+  }
+  else if (selectedTab.value === 1) {
+    livePage.value = 1
+    getTopbarLiveMoments(livePage.value)
+  }
+  else if (selectedTab.value === 2) {
+    await getTopBarNewMoments([MomentType.Article])
+  }
+}
+
+async function getTopBarNewMoments(type_list: number[]) {
   isLoading.value = true
-  browser.runtime
-    .sendMessage({
-      contentScriptQuery: API.MOMENT.GET_TOP_BAR_NEW_MOMENTS,
-      uid: getUserID(),
-      type_list,
-    })
-    .then((res) => {
-      if (res.code === 0) {
-        if (Array.isArray(res.data.cards) && res.data.cards.length > 0) {
-          res.data.cards.forEach((item: any) => {
-            pushItemIntoMoments(item)
-          })
-        }
+  try {
+    const res = await browser.runtime
+      .sendMessage({
+        contentScriptQuery: API.MOMENT.GET_TOP_BAR_NEW_MOMENTS,
+        uid: getUserID(),
+        type_list,
+      })
 
-        if (moments.length !== 0 && res.data.cards.length < 20) {
-          isLoading.value = false
-          noMoreContent.value = true
+    if (res.code === 0) {
+      // If there are no new moments, do not change the data to record the scroll position
+      if (moments.length !== 0) {
+        if (res.data.new_num === 0)
           return
-        }
-
-        // set this lastest offset id, which will clear the new moment's marker point
-        // after you watch these moments.
-        if (selectedTab.value === 0)
-          setLastestOffsetID(MomentType.Video, moments[0].id)
-        else if (selectedTab.value === 2)
-          setLastestOffsetID(MomentType.Article, moments[0].id)
-
-        noMoreContent.value = false
       }
-      isLoading.value = false
-    })
+
+      moments.length = 0
+
+      if (Array.isArray(res.data.cards) && res.data.cards.length > 0) {
+        res.data.cards.forEach((item: any) => {
+          pushItemIntoMoments(item)
+        })
+      }
+
+      if (moments.length !== 0 && res.data.cards.length < 20) {
+        isLoading.value = false
+        noMoreContent.value = true
+        return
+      }
+
+      // set this lastest offset id, which will clear the new moment's marker point
+      // after you watch these moments.
+      if (selectedTab.value === 0)
+        setLastestOffsetID(MomentType.Video, moments[0].id)
+      else if (selectedTab.value === 2)
+        setLastestOffsetID(MomentType.Article, moments[0].id)
+
+      noMoreContent.value = false
+    }
+  }
+  finally {
+    isLoading.value = false
+  }
 }
 
 function getTopbarHistoryMoments(type_list: number[]) {
@@ -272,6 +284,10 @@ function toggleWatchLater(aid: number) {
       })
   }
 }
+
+defineExpose({
+  initData,
+})
 </script>
 
 <template>
