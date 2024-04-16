@@ -62,75 +62,13 @@ Opening the `edge://extensions` page in the Edge or `chrome://extensions` page i
 
 </details>
 
-## 🔧 Development & Build
-
-Please use the dev branch for development
-
-### Chrome or Edge browser
-
-<details>
-  <summary>Chrome or Edge browser</summary>
-
-#### Development (Chrome or Edge)
-
-```bash
-pnpm dev
-```
-
-Then **load the extension in the browser with the `extension/` folder**.
-After each modification, you need to click the [Extensions Reloader](https://chromewebstore.google.com/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) button and refresh the page to ensure the changes will be applied.
-
-##### Build (Chrome or Edge)
-
-To build the extension, run
-
-```bash
-pnpm build
-```
-
-And then pack files under the `extension`
-
-</details>
-
-### Firefox browser
-
-<details>
-  <summary>Firefox browser</summary>
-
-#### Development (Firefox)
-
-```bash
-pnpm dev-firefox
-```
-
-Then **load the extension in the browser with the `extension-firefox/` folder**.
-After each modification, you need to click the [Extensions Reloader](https://chromewebstore.google.com/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) button and refresh the page to ensure the changes will be applied.
-
-#### Build (Firefox)
-
-To build the extension, run
-
-```bash
-pnpm build-firefox
-```
-
-And then pack files under the `extension-firefox`
-
-</details>
-
 ## 🤝 Contribution
 
-### About Branches
+See [CONTRIBUTION.md](docs/CONTRIBUTING.md)
 
-- **Main**: This branch is designed for changes that are restricted to documentation files like READMEs, without altering the code or its functionality.
-- **Dev**: Use this branch for new features, performance improvements or modifications to i18n files.
-- **Bugfixes**: This branch should be used exclusively for fixing bugs that appear in the main branch.
+### Contributors
 
-### I18n
-
-- When doing translations, if you have a language you are not familiar with, you can use another language that you have translated and point out what language you cannot translate in the pull request.
-
-- **Please MANUALLY MAINTAIN the i18n files!!!** Do not use `i18n Ally` or other extensions to maintain them. I know you might be confused or might not like this, but using `i18n Ally` for the maintenance will make it uncertain where to place the translations afterward or delete the code comments.
+![Contributors](https://contrib.rocks/image?repo=hakadao/BewlyBewly)
 
 ## ❤️ Credits
 
@@ -138,3 +76,11 @@ And then pack files under the `extension-firefox`
 - [UserScripts/bilibiliHome](https://github.com/indefined/UserScripts/tree/master/bilibiliHome), [bilibili-app-recommend](https://github.com/magicdawn/bilibili-app-recommend) - Reference source for obtaining the access key
 - [Bilibili-Evolved](https://github.com/the1812/Bilibili-Evolved) - Partial implementation of functionalities
 - [bilibili-API-collect](https://github.com/SocialSisterYi/bilibili-API-collect)
+
+## Donate
+
+If you like this project, you can consider donating to support me. I'm not in financial difficulty, so support as you see fit.
+
+<a href="https://afdian.net/a/Hakadao" target="_blank">
+  <img alt="afdian" src="https://github.com/hakadao/BewlyBewly/assets/33394391/41711f39-8c6c-4dea-964e-5ae7f0d5b8ad" width="350">
+</a>
