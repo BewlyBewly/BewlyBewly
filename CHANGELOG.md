@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.16.5](https://github.com/hakadao/BewlyBewly/compare/v0.16.4...v0.16.5) (2024-04-14)
+
+### Bug Fixes
+
+* adjust dark mode ([#539](https://github.com/hakadao/BewlyBewly/issues/539)) ([e92bacc](https://github.com/hakadao/BewlyBewly/commit/e92bacc10b6e64505b6c97d2f1b10bc40e5792c6))
+* bewly not working on certain homepage urls ([#525](https://github.com/hakadao/BewlyBewly/issues/525)) ([f0f8b07](https://github.com/hakadao/BewlyBewly/commit/f0f8b078289781020303c5aca555a7d2774342be))
+* flash dark theme ([#565](https://github.com/hakadao/BewlyBewly/issues/565)) ([86c8b74](https://github.com/hakadao/BewlyBewly/commit/86c8b74015a49359736ac4c684fae193fcf15ef9))
+* game card title color ([#562](https://github.com/hakadao/BewlyBewly/issues/562)) ([d0cd138](https://github.com/hakadao/BewlyBewly/commit/d0cd138b7ac181f65fd83cea2aa37ff01e77c444))
+* **Home:** correct deformation of video layout switcher on small screen computers ([f75e010](https://github.com/hakadao/BewlyBewly/commit/f75e01015051866ea919d8c3c8117d8f77a94e9f))
+* input element focus shortcut key ([#564](https://github.com/hakadao/BewlyBewly/issues/564)) ([2e87cac](https://github.com/hakadao/BewlyBewly/commit/2e87cac7194febe4c07482e1b769f7caea574518))
+* misplaced of switch button ([#543](https://github.com/hakadao/BewlyBewly/issues/543)) ([111fac7](https://github.com/hakadao/BewlyBewly/commit/111fac75867388919cb5d59df108c9b0f035cb3a))
+* more pop fav url ([#570](https://github.com/hakadao/BewlyBewly/issues/570)) ([9bf86c7](https://github.com/hakadao/BewlyBewly/commit/9bf86c7fad409b0582578950203e87488542d76e))
+
+
+### Docs
+
+* update firefox extension download link && adjust some description ([b8f1b04](https://github.com/hakadao/BewlyBewly/commit/b8f1b04ca450e755834c32f266c06d0c19577ae3))
+* update preview images ([99b8f0e](https://github.com/hakadao/BewlyBewly/commit/99b8f0edc17902f63ed57b51ffb15a03538306aa))
+
 ## [0.16.4](https://github.com/hakadao/BewlyBewly/compare/v0.16.2...v0.16.4) (2024-04-12)
 
 

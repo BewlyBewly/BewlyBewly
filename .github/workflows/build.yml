@@ -14,17 +14,17 @@ on:
       - README-cmn_CN.md
       - README-cmn_TW.md
       - README-jyut.md
-      - '.github/**'
+      - docs/**
 
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2.4.0
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v4.1.2
+      - uses: pnpm/action-setup@v3.0.0
+      - uses: actions/setup-node@v4.0.2
         with:
-          node-version: 16.x
+          node-version: lts/*
           cache: pnpm
 
       - name: Install
@@ -36,11 +36,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2.4.0
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v4.1.2
+      - uses: pnpm/action-setup@v3.0.0
+      - uses: actions/setup-node@v4.0.2
         with:
-          node-version: 18.x
+          node-version: lts/*
           cache: pnpm
 
       - name: Install
@@ -50,16 +50,16 @@ jobs:
         run: pnpm build
 
       - name: Upload Zip
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4.3.1
         with:
           name: BewlyBewly Zip
           path: extension
 
-      - name: Build Extension
+      - name: Build Extension-Firefox
         run: pnpm build-firefox
 
       - name: Upload Zip
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4.3.1
         with:
-          name: BewlyBewly Zip
+          name: BewlyBewly-Firefox Zip
           path: extension-firefox

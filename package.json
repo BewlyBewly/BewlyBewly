@@ -1,7 +1,7 @@
 {
   "name": "bewly-bewly",
   "displayName": "BewlyBewly",
-  "version": "0.16.4",
+  "version": "0.16.5",
   "private": true,
   "packageManager": "pnpm@8.15.3",
   "description": "Just make a few small changes to your Bilibili homepage.",
@@ -48,7 +48,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^2.6.4",
     "@ffflorian/jszip-cli": "^3.6.2",
-    "@iconify/json": "^2.2.183",
+    "@iconify/json": "^2.2.201",
     "@iconify/vue": "^4.1.1",
     "@intlify/unplugin-vue-i18n": "^0.8.2",
     "@rollup/plugin-replace": "^5.0.5",

@@ -75,7 +75,9 @@
     .section-title .play-all-channel:hover,
     #page-index .col-1 .section .more:hover,
     #page-index .channel .section-right-options .play-all-channel:hover,
-    .section .operation:hover {
+    .section .operation:hover,
+    #page-video .play-all-btn:hover .video-commonplayer_play,
+    .i-live .i-live-fo-btn {
       color: var(--bew-theme-color);
     }
 
@@ -97,6 +99,10 @@
       color: var(--bew-theme-color) !important;
     }
 
+    .i-live .i-live-fo-btn:hover {
+      color: var(--bew-theme-color-80);
+    }
+
     .n .n-cursor,
     .be-tab-cursor,
     .bangumi-pagelistbox .p:hover,
@@ -107,7 +113,8 @@
     .be-input_inner:focus,
     #page-index #i-ann-content textarea:focus,
     #page-index #i-ann-content textarea:hover,
-    .btn.default {
+    .btn.default,
+    .i-live .i-live-fo-btn {
       border-color: var(--bew-theme-color);
     }
 
@@ -124,6 +131,10 @@
       border-color: var(--bew-theme-color) !important;
     }
 
+    .i-live .i-live-fo-btn:hover {
+      border-color: var(--bew-theme-color-80);
+    }
+
     .n .n-cursor,
     #pin-wrapper .pin-layer-vlist .small-item.selected,
     .be-switch-container.is-checked .be-switch,
@@ -137,12 +148,17 @@
     .favInfo-box .favInfo-details .fav-options .fav-play,
     .be-pager-item-active,
     .search-nav-item.search-nav-actived,
-    #page-series-detail .channel-option .modify-channel {
+    #page-series-detail .channel-option .modify-channel,
+    .game-card__btn,
+    .be-tags-container .tag.new-tag {
       background-color: var(--bew-theme-color);
     }
 
     .btn.primary:focus,
-    .btn.primary:hover {
+    .btn.primary:hover,
+    .h .h-follow:hover,
+    .game-card__btn:hover,
+    .favInfo-box .favInfo-details .fav-options .fav-play:hover {
       background-color: var(--bew-theme-color-80);
     }
 
@@ -177,7 +193,8 @@
       .clearfix:not(.filter-disable)
       .icon,
     .page-head .v-filter-line .style .icon.active,
-    .page-head .v-filter-line .style .icon:hover {
+    .page-head .v-filter-line .style .icon:hover,
+    .i-live .i-live-off-guest a .i-live-arrow {
       filter: var(--bew-filter-icon-glow);
     }
 
@@ -237,7 +254,8 @@
     .n .n-inner,
     #page-index .col-1,
     #page-index .col-2 .section,
-    #page-dynamic .col-2 .section {
+    #page-dynamic .col-2 .section,
+    .game-card .game-card__info-title {
       color: var(--bew-text-1);
     }
 

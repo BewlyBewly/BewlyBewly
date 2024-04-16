@@ -1,13 +1,14 @@
 name: Bug Report
 description: 报告问题
-title: '[BUG]:'
+title: '[BUG]'
 labels: [bug]
 
 body:
   - type: markdown
     attributes:
       value: |
-        ## BUG 表单
+        ## BUG 提出
+        如果你是 Edge 浏览器，提出问题时不妨看一下[这里](https://github.com/hakadao/BewlyBewly/issues/552)
 
   - type: textarea
     attributes:
@@ -29,7 +30,7 @@ body:
       label: 问题描述
       description: 如何重现, 最好带有截图或视频以便排查
       placeholder: |
-        请预先搜索是否有提到的 issue 否则重复的 issue 会被关闭不作解释
+        请预先搜索是否有提到的 issue 否则重复的 issue 会被关闭
     validations:
       required: true
 
