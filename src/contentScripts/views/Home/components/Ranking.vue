@@ -152,7 +152,7 @@ function getRankingPgc() {
     season_type: activatedRankingType.value.seasonType,
   }).then((response: RankingPgcResult) => {
     if (response.code === 0)
-      Object.assign(PgcList, response.result.list)
+      Object.assign(PgcList, response.data.list)
   }).finally(() => isLoading.value = false)
 }
 
