@@ -5,7 +5,8 @@
     "bilibili",
     "unocss",
     "Vitesse",
-    "webext"
+    "webext",
+    "vitesse-webext",
   ],
   "typescript.tsdk": "node_modules/typescript/lib",
   "vite.autoStart": false,
