@@ -3,7 +3,7 @@
 English | [官话 - 简体中文](README-cmn_CN.md) | [官話 - 正體中文](README-cmn_TW.md) | [廣東話](README-jyut.md)
 
 <p align="center" style="margin-bottom: 0px !important;">
-<img width="150" src="https://user-images.githubusercontent.com/33394391/160250512-410b71fc-7f25-4caf-b850-429227ff082a.png"><br/>
+<img width="150" alt="bewlybewly icon" src="https://user-images.githubusercontent.com/33394391/160250512-410b71fc-7f25-4caf-b850-429227ff082a.png"><br/>
 </p>
 
 <h1 align="center" style="margin-top: 0px;">BewlyBewly</h1>
@@ -15,19 +15,31 @@ English | [官话 - 简体中文](README-cmn_CN.md) | [官話 - 正體中文](RE
 
 ## 👋 Introduction
 
-BewlyBewly is a browser extension for BiliBili that aims to enhance the user experience by redesigning the BiliBili UI. The design is inspired by YouTube, Vision OS, and iOS, resulting in a more visually appealing and user-friendly interface.
-
-This project uses the [vitesse-webext](https://github.com/antfu/vitesse-webext) template for development. Without this template, it may not be possible to develop this project.
+BewlyBewly is a browser extension for BiliBili that aims to enhance the user experience by redesigning the BiliBili UI.
+The design is inspired by YouTube, Vision OS, and iOS, resulting in a more visually appealing and user-friendly interface.
+This project uses the [vitesse-webext](https://github.com/antfu/vitesse-webext) template for development.
+Without this template, it may not be possible to develop this project.
 
 ## ⬇️ Installation
 
 ### Online Installation
 
-Even in the Edge browser, we strongly recommend you install it in the Chrome web store. In terms of review speed, the Chrome web store is slightly faster than Edge Add-ons.
+> [!Caution]
+> Even in the Edge browser, we strongly recommend you install it in the Chrome web store.
+> In terms of review speed, the Chrome web store is faster than Edge Add-ons.
+>
+> Additionally, the Chrome Web Store version of BewlyBewly will address and fix critical bugs more quickly.
 
 - Chrome: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>
-- Edge: <https://microsoftedge.microsoft.com/addons/detail/bewlybewly/kceadhehfjdiakpiphpjgolbgehjdmja>
+- Edge (NOT RECOMMENDED): <https://microsoftedge.microsoft.com/addons/detail/bewlybewly/kceadhehfjdiakpiphpjgolbgehjdmja>
 - Firefox: <https://addons.mozilla.org/lt/firefox/addon/bewlybewly/>
+
+#### To Firefox users
+
+> [!WARNING]
+> When using the Firefox browser, remember to enable all permissions shown in the picture below for normal use of BewlyBewly
+
+<br/> <img width="655" alt="enable all bewlybewly permissions on firefox" src="https://github.com/hakadao/BewlyBewly/assets/33394391/9566aed8-040a-4435-a2ec-c61117f8e429">
 
 ### Local Installation
 
@@ -39,7 +51,8 @@ Even in the Edge browser, we strongly recommend you install it in the Chrome web
 
 > Ensure you installed [extension.zip](https://github.com/hakadao/BewlyBewly/releases) .
 
-Opening the `edge://extensions` page in the Edge or `chrome://extensions` page in Chrome, simply drag and drop the downloaded `extension.zip` file into the browser to complete the installation.
+Opening the `edge://extensions` page in the Edge or `chrome://extensions` page in Chrome,
+simply drag and drop the downloaded `extension.zip` file into the browser to complete the installation.
 
 <details>
  <summary> Another installation method for Edge & Chrome </summary>
@@ -73,13 +86,15 @@ See [CONTRIBUTION.md](docs/CONTRIBUTING.md)
 ## ❤️ Credits
 
 - [vitesse-webext](https://github.com/antfu/vitesse-webext) - The template used for this project
-- [UserScripts/bilibiliHome](https://github.com/indefined/UserScripts/tree/master/bilibiliHome), [bilibili-app-recommend](https://github.com/magicdawn/bilibili-app-recommend) - Reference source for obtaining the access key
+- [UserScripts/bilibiliHome](https://github.com/indefined/UserScripts/tree/master/bilibiliHome),
+[bilibili-app-recommend](https://github.com/magicdawn/bilibili-app-recommend) - Reference source for obtaining the access key
 - [Bilibili-Evolved](https://github.com/the1812/Bilibili-Evolved) - Partial implementation of functionalities
 - [bilibili-API-collect](https://github.com/SocialSisterYi/bilibili-API-collect)
 
 ## Donate
 
-If you like this project, you can consider donating to support me. I'm not in financial difficulty, so support as you see fit.
+If you like this project, you can consider donating to support me.
+I'm not in financial difficulty, so support as you see fit.
 
 <a href="https://afdian.net/a/Hakadao" target="_blank">
   <img alt="afdian" src="https://github.com/hakadao/BewlyBewly/assets/33394391/41711f39-8c6c-4dea-964e-5ae7f0d5b8ad" width="350">
