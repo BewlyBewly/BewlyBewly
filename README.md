@@ -22,12 +22,20 @@ This project uses the [vitesse-webext](https://github.com/antfu/vitesse-webext) 
 ## ⬇️ Installation
 
 ### Online Installation
-
-Even in the Edge browser, we strongly recommend you install it in the Chrome web store. In terms of review speed, the Chrome web store is slightly faster than Edge Add-ons.
+> [!Caution]
+> Even in the Edge browser, we strongly recommend you install it in the Chrome web store. In terms of review speed, the Chrome web store is faster than Edge Add-ons.
+> Additionally, the Chrome Web Store version of BewlyBewly will address and fix critical bugs more quickly.
 
 - Chrome: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>
-- Edge: <https://microsoftedge.microsoft.com/addons/detail/bewlybewly/kceadhehfjdiakpiphpjgolbgehjdmja>
+- Edge (NOT RECOMMENDED): <https://microsoftedge.microsoft.com/addons/detail/bewlybewly/kceadhehfjdiakpiphpjgolbgehjdmja>
 - Firefox: <https://addons.mozilla.org/lt/firefox/addon/bewlybewly/>
+
+#### To Firefox users...
+> [!WARNING]
+> When using the Firefox browser, remember to enable all permissions shown in the picture below for normal use of BewlyBewly
+
+<br/> <img width="655" alt="enable all bewlybewly permissions on firefox" src="https://github.com/hakadao/BewlyBewly/assets/33394391/9566aed8-040a-4435-a2ec-c61117f8e429">
+
 
 ### Local Installation
 
