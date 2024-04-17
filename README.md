@@ -24,6 +24,7 @@ This project uses the [vitesse-webext](https://github.com/antfu/vitesse-webext) 
 ### Online Installation
 > [!Caution]
 > Even in the Edge browser, we strongly recommend you install it in the Chrome web store. In terms of review speed, the Chrome web store is faster than Edge Add-ons.
+>
 > Additionally, the Chrome Web Store version of BewlyBewly will address and fix critical bugs more quickly.
 
 - Chrome: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>
