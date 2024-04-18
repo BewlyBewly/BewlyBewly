@@ -13,16 +13,17 @@ import API_USER from './user'
 import API_VIDEO from './video'
 import API_WATCHLATER from './watchLater'
 
+// Merge all API objects into one
+const FullAPI = Object.assign({}, API_AUTH, API_ANIME, API_HISTORY, API_FAVORITE, API_MOMENT, API_NOTIFICATION, API_RANKING, API_SEARCH, API_USER, API_VIDEO, API_WATCHLATER)
+// Create a message listener for each API
+const handleMessage = apiListenerFactory(FullAPI)
+
 export function setupAllMsgLstnrs() {
   browser.runtime.onConnect.removeListener(handleConnect)
   browser.runtime.onConnect.addListener(handleConnect)
+}
 
-  function handleConnect() {
-    // Merge all API objects into one
-    const FullAPI = Object.assign({}, API_AUTH, API_ANIME, API_HISTORY, API_FAVORITE, API_MOMENT, API_NOTIFICATION, API_RANKING, API_SEARCH, API_USER, API_VIDEO, API_WATCHLATER)
-    // Create a message listener for each API
-    const handleMessage = apiListenerFactory(FullAPI)
-    browser.runtime.onMessage.removeListener(handleMessage)
-    browser.runtime.onMessage.addListener(handleMessage)
-  }
+function handleConnect() {
+  browser.runtime.onMessage.removeListener(handleMessage)
+  browser.runtime.onMessage.addListener(handleMessage)
 }
