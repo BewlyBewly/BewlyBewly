@@ -10,30 +10,19 @@ const API_MOMENT: APIMAP = {
     params: {},
     afterHandle: AHS.J_D,
   },
-  getTopBarNewMoments: {
-    url: 'https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_new',
+  getTopBarMoments: {
+    url: 'https://api.bilibili.com/x/polymer/web-dynamic/v1/feed/nav',
     _fetch: {
       method: 'get',
     },
     params: {
-      uid: '',
-      type_list: '268435455',
+      type: 'video',
+      update_baseline: '',
+      offset: '',
     },
     afterHandle: AHS.J_D,
   },
-  getTopbarHistoryMoments: {
-    url: 'https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_history',
-    _fetch: {
-      method: 'get',
-    },
-    params: {
-      uid: '',
-      type_list: '268435455',
-      offset_dynamic_id: '',
-    },
-    afterHandle: AHS.J_D,
-  },
-  getTopbarLiveMoments: {
+  getTopBarLiveMoments: {
     url: 'https://api.live.bilibili.com/xlive/web-ucenter/v1/xfetter/FeedList',
     _fetch: {
       method: 'get',

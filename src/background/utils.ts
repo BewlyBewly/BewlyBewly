@@ -61,7 +61,7 @@ function apiListenerFactory(API_MAP: APIMAP) {
     const contentScriptQuery = message.contentScriptQuery
     // 检测是否有contentScriptQuery
     if (!contentScriptQuery || !API_MAP[contentScriptQuery])
-      return console.error('no contentScriptQuery')
+      return console.error(`Cannot find this contentScriptQuery: ${contentScriptQuery}`)
     if (API_MAP[contentScriptQuery] instanceof Function)
       return (API_MAP[contentScriptQuery] as APIFunction)(message, sender, sendResponse)
 
