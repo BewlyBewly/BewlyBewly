@@ -4,9 +4,9 @@ import { useI18n } from 'vue-i18n'
 
 import { getCSRF, removeHttpFromUrl } from '~/utils/main'
 import { calcCurrentTime } from '~/utils/dataFormatter'
-import { Business } from '~/models/video/history'
-import type { List as HistoryItem, HistoryResult } from '~/models/video/history'
-import type { List as HistorySearchItem, HistorySearchResult } from '~/models/video/historySearch'
+import { Business } from '~/models/history/history'
+import type { List as HistoryItem, HistoryResult } from '~/models/history/history'
+import type { List as HistorySearchItem, HistorySearchResult } from '~/models/history/historySearch'
 import API from '~/background/msg.define'
 
 const { t } = useI18n()
