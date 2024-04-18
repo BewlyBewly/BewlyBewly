@@ -1,5 +1,36 @@
 # Changelog
 
+## [0.16.5](https://github.com/hakadao/BewlyBewly/compare/v0.16.5...v0.16.5) (2024-04-18)
+
+
+### Features
+
+* add icons to `NotificationsPop` &&  `MorePop` ([#580](https://github.com/hakadao/BewlyBewly/issues/580)) ([4396548](https://github.com/hakadao/BewlyBewly/commit/43965481ec602db7bc3f8c71200a495a966a79e1))
+* **Settings:** color picker ([#55](https://github.com/hakadao/BewlyBewly/issues/55)) ([#595](https://github.com/hakadao/BewlyBewly/issues/595)) ([8cfcd65](https://github.com/hakadao/BewlyBewly/commit/8cfcd65704237cddbb27ec65b4daa03c2609ebea))
+
+
+### Bug Fixes
+
+* cannot open certain links on History page and HistoryPop ([#602](https://github.com/hakadao/BewlyBewly/issues/602)) ([9703920](https://github.com/hakadao/BewlyBewly/commit/9703920e7c72949c98b4c897e86c8198dc133e8f))
+* **MomentsPop:** cannot record the scroll position ([#451](https://github.com/hakadao/BewlyBewly/issues/451)) ([7d6e2f6](https://github.com/hakadao/BewlyBewly/commit/7d6e2f64c0842d2055064ac656354c92db65864f))
+* **Ranking:** cannot show the variety show ranking list ([#576](https://github.com/hakadao/BewlyBewly/issues/576)) ([c5c1a16](https://github.com/hakadao/BewlyBewly/commit/c5c1a1614584ef5b2eff6bb9d6b641c367c7b868))
+* resolve duplicate request issue ([3b58fbf](https://github.com/hakadao/BewlyBewly/commit/3b58fbf33aa347942def7c9c614c938c5f0f536b))
+
+
+### Docs
+
+* add CONTRIBUTING.md ([#586](https://github.com/hakadao/BewlyBewly/issues/586)) ([19e8a20](https://github.com/hakadao/BewlyBewly/commit/19e8a20caa1565eacae557ecdcf78f9dc45fd6e1))
+* add important messages for firefox users and edge users ([b7aedfc](https://github.com/hakadao/BewlyBewly/commit/b7aedfcf441ad82c477b0399f1694ad6f7b89e68))
+* Update donation links in README files ([c2d489c](https://github.com/hakadao/BewlyBewly/commit/c2d489c3dd9a0054eb7d7c5efacadd146ffbbaca))
+
+
+### CI
+
+* **build:** ignore `docs/**` path to trigger workflow ([402812c](https://github.com/hakadao/BewlyBewly/commit/402812c1370f27cdc111e389e7099de6d79a743c))
+* remove sync-bugfixes ([16e9308](https://github.com/hakadao/BewlyBewly/commit/16e930839e5ced63a2ec567c4c82c52fca5ec49b))
+* Update .github/workflows/changelog.yml ([8fa41a9](https://github.com/hakadao/BewlyBewly/commit/8fa41a9fe5982a69a3757d4b2f349677f31aa920))
+* update build.yml ([83adbfb](https://github.com/hakadao/BewlyBewly/commit/83adbfbee440e01cd25e075b4e869e7d3111c121))
+
 ## [0.16.5](https://github.com/hakadao/BewlyBewly/compare/v0.16.4...v0.16.5) (2024-04-14)
 
 ### Bug Fixes
