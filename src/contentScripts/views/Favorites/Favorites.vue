@@ -95,8 +95,8 @@ async function getFavoriteCategories() {
 
 /**
  * Get favorite video resources
- * @param mediaId
- * @param pageNum
+ * @param media_id
+ * @param pn
  * @param keyword
  */
 async function getFavoriteResources(
@@ -168,6 +168,10 @@ function handleUnfavorite(favoriteResource: FavoriteResource) {
       favoriteResources.splice(favoriteResources.indexOf(favoriteResource as FavoriteItem), 1)
   })
 }
+
+function isMusic(item: FavoriteResource) {
+  return item.link.includes('bilibili://music')
+}
 </script>
 
 <template>
@@ -214,7 +218,8 @@ function handleUnfavorite(favoriteResource: FavoriteResource) {
               :view="item.cnt_info.play"
               :danmaku="item.cnt_info.danmaku"
               :published-timestamp="item.pubtime"
-              :bvid="item.bvid"
+              :bvid="isMusic(item) ? undefined : item.bvid"
+              :uri="isMusic(item) ? `https://www.bilibili.com/audio/au${item.id}` : undefined"
               group
             >
               <template #coverTopLeft>
