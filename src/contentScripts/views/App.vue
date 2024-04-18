@@ -236,7 +236,7 @@ function handleOsScroll() {
   else
     showTopBarMask.value = true
 
-  if (clientHeight + scrollTop >= scrollHeight - 20)
+  if (clientHeight + scrollTop >= scrollHeight - 150)
     handleThrottledReachBottom()
 
   if (isHomePage())
