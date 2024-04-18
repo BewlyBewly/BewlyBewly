@@ -85,7 +85,7 @@ const notifications = useDelayedHover({
 const moments = useDelayedHover({
   enter: () => {
     showMomentsPop.value = true
-    momentsPopRef.value && momentsPopRef.value.initData()
+    momentsPopRef.value && momentsPopRef.value.checkIfHasNewMomentsThenUpdateMoments()
   },
   leave: () => showMomentsPop.value = false,
 })
@@ -383,7 +383,7 @@ defineExpose({
 
           <Transition name="slide-in">
             <ChannelsPop
-              v-if="showChannelsPop"
+              v-show="showChannelsPop"
               class="bew-popover"
               pos="!left-0 !top-70px"
               transform="!translate-x-0"
