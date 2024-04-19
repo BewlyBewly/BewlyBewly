@@ -103,6 +103,17 @@ function handleExportSettings() {
           </Button>
         </Tooltip>
       </section>
+      <section mt-4>
+        <!-- <h3 text="xl center" mb-2>
+          {{ $t('settings.contributors') }}
+        </h3> -->
+        <Button type="tertiary">
+          <template #left>
+            <i class="i-solar:expressionless-circle-bold-duotone" text-xl />
+          </template>
+          我只想要一份好一點的工作...
+        </Button>
+      </section>
       <section mt-8>
         <h3 text="xl center" mb-2>
           {{ $t('settings.contributors') }}
