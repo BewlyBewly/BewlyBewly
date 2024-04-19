@@ -261,8 +261,10 @@ async function getUnreadMessageCount() {
     if (res.code === 0) {
       Object.assign(unReadMessage, res.data)
       Object.entries(unReadMessage).forEach(([key, value]) => {
-        if (key !== 'up')
-          unReadMessageCount.value += typeof value === 'number' ? value : 0
+        if (key !== 'up') {
+          if (typeof value === 'number')
+            unReadMessageCount.value += value
+        }
       })
     }
 
@@ -271,7 +273,8 @@ async function getUnreadMessageCount() {
     })
     if (res.code === 0) {
       Object.assign(unReadDm, res.data)
-      unReadMessageCount.value += unReadDm.follow_unread
+      if (typeof unReadDm.follow_unread === 'number')
+        unReadMessageCount.value += unReadDm.follow_unread
     }
   }
   catch (error) {
