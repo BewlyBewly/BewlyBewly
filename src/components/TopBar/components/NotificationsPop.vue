@@ -10,7 +10,7 @@ const list = reactive([
     name: t('topbar.noti_dropdown.replys'),
     url: 'https://message.bilibili.com/#/reply',
     unreadCount: 0,
-    icon: 'i-mingcute:share-forward-line',
+    icon: 'i-mingcute:chat-3-line',
   },
   {
     name: t('topbar.noti_dropdown.mentions'),
