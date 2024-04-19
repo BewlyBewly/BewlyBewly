@@ -126,7 +126,7 @@ watch(
     if (newVal === oldVal)
       return
 
-    if (!newVal)
+    if (newVal)
       getUnreadMessageCount()
   },
 )
@@ -137,7 +137,7 @@ watch(
     if (newVal === oldVal)
       return
 
-    if (!newVal)
+    if (newVal)
       await getTopBarNewMomentsCount()
   },
 )
@@ -261,8 +261,10 @@ async function getUnreadMessageCount() {
     if (res.code === 0) {
       Object.assign(unReadMessage, res.data)
       Object.entries(unReadMessage).forEach(([key, value]) => {
-        if (key !== 'up')
-          unReadMessageCount.value += typeof value === 'number' ? value : 0
+        if (key !== 'up') {
+          if (typeof value === 'number')
+            unReadMessageCount.value += value
+        }
       })
     }
 
@@ -271,7 +273,8 @@ async function getUnreadMessageCount() {
     })
     if (res.code === 0) {
       Object.assign(unReadDm, res.data)
-      unReadMessageCount.value += unReadDm.follow_unread
+      if (typeof unReadDm.follow_unread === 'number')
+        unReadMessageCount.value += unReadDm.follow_unread
     }
   }
   catch (error) {
@@ -290,10 +293,9 @@ async function getTopBarNewMomentsCount() {
     const res = await browser.runtime.sendMessage({
       contentScriptQuery: 'getTopBarNewMomentsCount',
     })
-    newMomentsCount.value = res.data.update_info.item.count
-    // If moments count > 0 then refresh the key to get the new moments
-    if (newMomentsCount.value > 0)
-      momentsPopKey.value = `momentsPop[${Number(new Date())}]`
+
+    if (typeof res.data.update_info.item.count === 'number')
+      newMomentsCount.value = res.data.update_info.item.count
   }
   catch {
     newMomentsCount.value = 0
