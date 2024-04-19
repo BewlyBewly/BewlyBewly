@@ -2,13 +2,20 @@
   // #region theme color adaption part
   // Increase the priority of the style inside by writing a non-existent selector in :not()
   :not(fdjslfds) {
-    .watch-later-list header .s-btn {
+    .watch-later-list header .s-btn,
+    .bili-dialog .con .btn-box .btn-submit,
+    .bili-dialog .con .btn-box .btn-cancel:hover {
       border-color: var(--bew-theme-color);
+    }
+
+    .bili-dialog .con .btn-box .btn-submit:hover {
+      border-color: var(--bew-theme-color-80);
     }
 
     .watch-later-list header .s-btn,
     .watch-later-list .list-box .av-item .av-about .t:hover,
-    .watch-later-list .list-box .av-item .av-about .info .user:hover {
+    .watch-later-list .list-box .av-item .av-about .info .user:hover,
+    .bili-dialog .con .btn-box .btn-cancel:hover {
       color: var(--bew-theme-color);
     }
 
@@ -16,8 +23,17 @@
       color: white;
     }
 
-    .watch-later-list header .s-btn:hover {
+    .watch-later-list header .s-btn:hover,
+    .bili-dialog .con .btn-box .btn-submit {
       background-color: var(--bew-theme-color);
+    }
+
+    .bili-dialog .con .btn-box .btn-submit:hover {
+      background-color: var(--bew-theme-color-80);
+    }
+
+    .bili-dialog .con .btn-box .btn-cancel {
+      background-color: transparent;
     }
   }
   // #endregion
@@ -25,20 +41,29 @@
   // #region dark mode adaption part
   &.dark {
     .watch-later-list .list-box .av-item .key,
-    .watch-later-list .list-box .av-item .av-about .t {
+    .watch-later-list .list-box .av-item .av-about .t,
+    .bili-dialog .con header,
+    .bili-dialog .con .txt {
       color: var(--bew-text-1);
     }
 
-    .watch-later-list .list-box .av-item .av-about .info .user {
+    .watch-later-list .list-box .av-item .av-about .info .user,
+    .bili-dialog .con .btn-box .btn-cancel {
       color: var(--bew-text-2);
     }
 
-    .watch-later-list .list-box .av-item .av-about {
+    .watch-later-list .list-box .av-item .av-about,
+    .bili-dialog .con header,
+    .bili-dialog .con .btn-box .btn-cancel {
       border-color: var(--bew-border-color);
     }
 
     .watch-later-list header .s-btn {
       background-color: transparent;
+    }
+
+    .bili-dialog .con {
+      background-color: var(--bew-elevated-solid-1);
     }
   }
   // #endregion

@@ -42,17 +42,27 @@ const userInfo = reactive<UserInfo | NonNullable<unknown>>({}) as UnwrapNestedRe
 const hideTopBar = ref<boolean>(false)
 const hoveringTopBar = ref<boolean>(false)
 
-const showChannelsPop = ref<boolean>(false)
-const showUserPanelPop = ref<boolean>(false)
-const showNotificationsPop = ref<boolean>(false)
-const showMomentsPop = ref<boolean>(false)
-const showFavoritesPop = ref<boolean>(false)
-const showUploadPop = ref<boolean>(false)
-const showHistoryPop = ref<boolean>(false)
-const showWatchLaterPop = ref<boolean>(false)
-const showMorePop = ref<boolean>(false)
+// const showChannelsPop = ref<boolean>(false)
+// const showUserPanelPop = ref<boolean>(false)
+// const showNotificationsPop = ref<boolean>(false)
+// const showMomentsPop = ref<boolean>(false)
+// const showFavoritesPop = ref<boolean>(false)
+// const showHistoryPop = ref<boolean>(false)
+// const showWatchLaterPop = ref<boolean>(false)
+// const showUploadPop = ref<boolean>(false)
+// const showMorePop = ref<boolean>(false)
 
-const momentsPopKey = ref<string>(`momentsPop[${Number(new Date())}]`)
+const popupVisible = reactive({
+  channels: false,
+  userPanel: false,
+  notifications: false,
+  moments: false,
+  favorites: false,
+  history: false,
+  watchLater: false,
+  upload: false,
+  more: false,
+})
 
 const isLogin = ref<boolean>(false)
 const unReadMessage = reactive<UnReadMessage | NonNullable<unknown>>(
@@ -71,48 +81,114 @@ const momentsPopRef = ref()
 const scrollTop = ref<number>(0)
 const oldScrollTop = ref<number>(0)
 
+function closeAllTopBarPopup(exceptionKey?: keyof typeof popupVisible) {
+  Object.keys(popupVisible).forEach((key) => {
+    if (key !== exceptionKey)
+      popupVisible[key as keyof typeof popupVisible] = false
+  })
+}
+
+// Channels
+const channels = useDelayedHover({
+  beforeEnter: () => closeAllTopBarPopup('channels'),
+  enter: () => {
+    logo.value.classList.add('activated')
+    popupVisible.channels = true
+  },
+  leave: () => {
+    logo.value.classList.remove('activated')
+    popupVisible.channels = false
+  },
+})
+
 // Avatar
 const avatar = useDelayedHover({
-  enter: () => openUserPanel(),
-  leave: () => closeUserPanel(),
+  beforeEnter: () => closeAllTopBarPopup('userPanel'),
+  enter: () => {
+    popupVisible.userPanel = true
+    avatarImg.value.classList.add('hover')
+    avatarShadow.value.classList.add('hover')
+  },
+  beforeLeave: () => {
+    popupVisible.userPanel = false
+    avatarImg.value.classList.remove('hover')
+    avatarShadow.value.classList.remove('hover')
+  },
+  leave: () => {
+    popupVisible.userPanel = false
+    avatarImg.value.classList.remove('hover')
+    avatarShadow.value.classList.remove('hover')
+  },
 })
+
 // Notifications
 const notifications = useDelayedHover({
-  enter: () => showNotificationsPop.value = true,
-  leave: () => showNotificationsPop.value = false,
+  beforeEnter: () => closeAllTopBarPopup('notifications'),
+  enter: () => {
+    popupVisible.notifications = true
+  },
+  leave: () => {
+    popupVisible.notifications = false
+  },
 })
 // Moments
 const moments = useDelayedHover({
+  beforeEnter: () => closeAllTopBarPopup('moments'),
   enter: () => {
-    showMomentsPop.value = true
+    popupVisible.moments = true
     momentsPopRef.value && momentsPopRef.value.checkIfHasNewMomentsThenUpdateMoments()
   },
-  leave: () => showMomentsPop.value = false,
+  leave: () => {
+    popupVisible.moments = false
+  },
 })
 // Favorites
 const favorites = useDelayedHover({
-  enter: () => showFavoritesPop.value = true,
-  leave: () => showFavoritesPop.value = false,
-})
-// Upload
-const upload = useDelayedHover({
-  enter: () => showUploadPop.value = true,
-  leave: () => showUploadPop.value = false,
+  beforeEnter: () => closeAllTopBarPopup('favorites'),
+  enter: () => {
+    popupVisible.favorites = true
+  },
+  leave: () => {
+    popupVisible.favorites = false
+  },
 })
 // History
 const history = useDelayedHover({
-  enter: () => showHistoryPop.value = true,
-  leave: () => showHistoryPop.value = false,
+  beforeEnter: () => closeAllTopBarPopup('history'),
+  enter: () => {
+    popupVisible.history = true
+  },
+  leave: () => {
+    popupVisible.history = false
+  },
 })
 // Watch Later
 const watchLater = useDelayedHover({
-  enter: () => showWatchLaterPop.value = true,
-  leave: () => showWatchLaterPop.value = false,
+  beforeEnter: () => closeAllTopBarPopup('watchLater'),
+  enter: () => {
+    popupVisible.watchLater = true
+  },
+  leave: () => {
+    popupVisible.watchLater = false
+  },
+})
+// Upload
+const upload = useDelayedHover({
+  beforeEnter: () => closeAllTopBarPopup('upload'),
+  enter: () => {
+    popupVisible.upload = true
+  },
+  leave: () => {
+    popupVisible.upload = false
+  },
 })
 // More
 const more = useDelayedHover({
-  enter: () => showMorePop.value = true,
-  leave: () => showMorePop.value = false,
+  beforeEnter: () => closeAllTopBarPopup(),
+  enter: () => {
+    popupVisible.more = true
+  },
+  leave: () => popupVisible.more = false,
 })
 
 watch(() => settings.value.autoHideTopBar, (newVal) => {
@@ -121,7 +197,7 @@ watch(() => settings.value.autoHideTopBar, (newVal) => {
 })
 
 watch(
-  showNotificationsPop,
+  () => popupVisible.notifications,
   (newVal, oldVal) => {
     if (newVal === oldVal)
       return
@@ -132,7 +208,7 @@ watch(
 )
 
 watch(
-  showMomentsPop,
+  () => popupVisible.moments,
   async (newVal, oldVal) => {
     if (newVal === oldVal)
       return
@@ -142,7 +218,7 @@ watch(
   },
 )
 
-watch(showFavoritesPop, (newVal, oldVal) => {
+watch(() => popupVisible.favorites, (newVal, oldVal) => {
   if (newVal === oldVal)
     return
   if (newVal) {
@@ -203,28 +279,6 @@ function handleScroll() {
   oldScrollTop.value = scrollTop.value
 }
 
-function showLogoMenuDropdown() {
-  logo.value.classList.add('activated')
-  showChannelsPop.value = true
-}
-
-function closeLogoMenuDropdown() {
-  logo.value.classList.remove('activated')
-  showChannelsPop.value = false
-}
-
-function openUserPanel() {
-  showUserPanelPop.value = true
-  avatarImg.value.classList.add('hover')
-  avatarShadow.value.classList.add('hover')
-}
-
-function closeUserPanel() {
-  showUserPanelPop.value = false
-  avatarImg.value.classList.remove('hover')
-  avatarShadow.value.classList.remove('hover')
-}
-
 async function getUserInfo() {
   try {
     const res = await browser.runtime
@@ -251,7 +305,7 @@ async function getUnreadMessageCount() {
   if (!isLogin.value)
     return
 
-  unReadMessageCount.value = 0
+  let result = 0
 
   try {
     let res
@@ -263,7 +317,7 @@ async function getUnreadMessageCount() {
       Object.entries(unReadMessage).forEach(([key, value]) => {
         if (key !== 'up') {
           if (typeof value === 'number')
-            unReadMessageCount.value += value
+            result += value
         }
       })
     }
@@ -274,12 +328,14 @@ async function getUnreadMessageCount() {
     if (res.code === 0) {
       Object.assign(unReadDm, res.data)
       if (typeof unReadDm.follow_unread === 'number')
-        unReadMessageCount.value += unReadDm.follow_unread
+        result += unReadDm.follow_unread
     }
   }
   catch (error) {
-    unReadMessageCount.value = 0
     console.error(error)
+  }
+  finally {
+    unReadMessageCount.value = result
   }
 }
 
@@ -287,18 +343,19 @@ async function getTopBarNewMomentsCount() {
   if (!isLogin)
     return
 
-  newMomentsCount.value = 0
+  let result = 0
 
   try {
     const res = await browser.runtime.sendMessage({
       contentScriptQuery: 'getTopBarNewMomentsCount',
     })
-
-    if (typeof res.data.update_info.item.count === 'number')
-      newMomentsCount.value = res.data.update_info.item.count
+    if (res.code === 0) {
+      if (typeof res.data.update_info.item.count === 'number')
+        result = res.data.update_info.item.count
+    }
   }
-  catch {
-    newMomentsCount.value = 0
+  finally {
+    newMomentsCount.value = result
   }
 }
 
@@ -349,13 +406,12 @@ defineExpose({
 
       <div shrink-0 flex="inline xl:1 justify-center">
         <div
+          ref="channels"
           z-1 relative w-fit mr-auto
-          @mouseenter.self="showLogoMenuDropdown()"
-          @mouseleave.self="closeLogoMenuDropdown()"
         >
           <Transition name="slide-out">
             <a
-              v-if="showLogo"
+              v-show="showLogo"
               ref="logo" href="//www.bilibili.com"
               class="group logo"
               style="backdrop-filter: var(--bew-filter-glass-1)"
@@ -385,7 +441,7 @@ defineExpose({
 
           <Transition name="slide-in">
             <ChannelsPop
-              v-show="showChannelsPop"
+              v-show="popupVisible.channels"
               class="bew-popover"
               pos="!left-0 !top-70px"
               transform="!translate-x-0"
@@ -467,7 +523,7 @@ defineExpose({
               />
               <Transition name="slide-in">
                 <UserPanelPop
-                  v-if="showUserPanelPop"
+                  v-if="popupVisible.userPanel"
                   :user-info="userInfo"
                   after:h="!0"
                   class="bew-popover"
@@ -496,7 +552,7 @@ defineExpose({
               <div
                 ref="notifications"
                 class="right-side-item"
-                :class="{ active: showNotificationsPop }"
+                :class="{ active: popupVisible.notifications }"
               >
                 <template v-if="unReadMessageCount > 0">
                   <div
@@ -520,7 +576,7 @@ defineExpose({
 
                 <Transition name="slide-in">
                   <NotificationsPop
-                    v-if="showNotificationsPop"
+                    v-if="popupVisible.notifications"
                     class="bew-popover"
                   />
                 </Transition>
@@ -530,7 +586,7 @@ defineExpose({
               <div
                 ref="moments"
                 class="right-side-item"
-                :class="{ active: showMomentsPop }"
+                :class="{ active: popupVisible.moments }"
               >
                 <template v-if="newMomentsCount > 0">
                   <div
@@ -553,7 +609,7 @@ defineExpose({
                 </a>
 
                 <Transition name="slide-in">
-                  <MomentsPop v-show="showMomentsPop" :key="momentsPopKey" ref="momentsPopRef" class="bew-popover" />
+                  <MomentsPop v-show="popupVisible.moments" ref="momentsPopRef" class="bew-popover" />
                 </Transition>
               </div>
 
@@ -561,7 +617,7 @@ defineExpose({
               <div
                 ref="favorites"
                 class="right-side-item"
-                :class="{ active: showFavoritesPop }"
+                :class="{ active: popupVisible.favorites }"
               >
                 <a
                   :href="`https://space.bilibili.com/${mid}/favlist`"
@@ -574,7 +630,7 @@ defineExpose({
                 <Transition name="slide-in">
                   <KeepAlive>
                     <FavoritesPop
-                      v-if="showFavoritesPop"
+                      v-if="popupVisible.favorites"
                       ref="favoritesPopRef"
                       class="bew-popover"
                     />
@@ -586,7 +642,7 @@ defineExpose({
               <div
                 ref="history"
                 class="right-side-item"
-                :class="{ active: showHistoryPop }"
+                :class="{ active: popupVisible.history }"
               >
                 <a
                   href="https://www.bilibili.com/account/history"
@@ -597,7 +653,7 @@ defineExpose({
                 </a>
 
                 <Transition name="slide-in">
-                  <HistoryPop v-if="showHistoryPop" class="bew-popover" />
+                  <HistoryPop v-if="popupVisible.history" class="bew-popover" />
                 </Transition>
               </div>
 
@@ -605,7 +661,7 @@ defineExpose({
               <div
                 ref="watchLater"
                 class="right-side-item"
-                :class="{ active: showWatchLaterPop }"
+                :class="{ active: popupVisible.watchLater }"
               >
                 <a
                   href="https://www.bilibili.com/watchlater/#/list"
@@ -616,7 +672,7 @@ defineExpose({
                 </a>
 
                 <Transition name="slide-in">
-                  <WatchLaterPop v-if="showWatchLaterPop" class="bew-popover" />
+                  <WatchLaterPop v-if="popupVisible.watchLater" class="bew-popover" />
                 </Transition>
               </div>
 
@@ -636,7 +692,7 @@ defineExpose({
             <div
               ref="more"
               class="right-side-item"
-              :class="{ active: showMorePop }"
+              :class="{ active: popupVisible.more }"
               display="lg:!none flex"
             >
               <a title="More">
@@ -644,7 +700,7 @@ defineExpose({
               </a>
 
               <Transition name="slide-in">
-                <MorePop v-show="showMorePop" class="bew-popover" />
+                <MorePop v-show="popupVisible.more" class="bew-popover" />
               </Transition>
             </div>
 
@@ -677,7 +733,7 @@ defineExpose({
 
               <Transition name="slide-in">
                 <UploadPop
-                  v-if="showUploadPop"
+                  v-if="popupVisible.upload"
                   class="bew-popover"
                   pos="!left-auto !right-0"
                   transform="!translate-x-0"
@@ -732,7 +788,7 @@ defineExpose({
     overflow-visible
     after:content-empty
     after:opacity-100 after:w-full after:h-100px
-    after:absolute after:-top-30px after:left-1/2 after:-z-1
+    after:absolute after:top--30px after:left-1/2 after:-z-1
     after:transform after:-translate-x-1/2;
 }
 
@@ -759,8 +815,8 @@ defineExpose({
     --at-apply: relative text-$bew-text-1 flex items-center;
 
     &:not(.avatar) a {
-      --at-apply:text-xl flex items-center p-2 rounded-40px
-        duration-300;
+      --at-apply: text-xl flex items-center p-2 rounded-40px duration-300 relative z-5;
+      // --at-apply: after:content-empty after:absolute after:w-120% after:h-120% after:z-0 after:bg-yellow;
     }
 
     &.active a, &:not(.upload) a:hover {
