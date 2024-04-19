@@ -126,7 +126,7 @@ watch(
     if (newVal === oldVal)
       return
 
-    if (!newVal)
+    if (newVal)
       getUnreadMessageCount()
   },
 )
@@ -137,7 +137,7 @@ watch(
     if (newVal === oldVal)
       return
 
-    if (!newVal)
+    if (newVal)
       await getTopBarNewMomentsCount()
   },
 )
@@ -293,10 +293,9 @@ async function getTopBarNewMomentsCount() {
     const res = await browser.runtime.sendMessage({
       contentScriptQuery: 'getTopBarNewMomentsCount',
     })
-    newMomentsCount.value = res.data.update_info.item.count
-    // If moments count > 0 then refresh the key to get the new moments
-    if (newMomentsCount.value > 0)
-      momentsPopKey.value = `momentsPop[${Number(new Date())}]`
+
+    if (typeof res.data.update_info.item.count === 'number')
+      newMomentsCount.value = res.data.update_info.item.count
   }
   catch {
     newMomentsCount.value = 0
