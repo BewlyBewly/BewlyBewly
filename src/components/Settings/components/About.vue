@@ -114,7 +114,7 @@ function handleExportSettings() {
           <template #left>
             <i class="i-solar:expressionless-circle-bold-duotone" text-xl />
           </template>
-          我只想要一份好一點的工作...
+          {{ $t('settings.just_wanna_change_the_job') }}
         </Button>
         <Dialog
           v-if="dialogVisible.justWannaChangeTheJob"
