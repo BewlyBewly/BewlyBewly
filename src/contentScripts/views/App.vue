@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useThrottleFn, useToggle } from '@vueuse/core'
+import { usePreferredDark, useThrottleFn, useToggle } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 import browser from 'webextension-polyfill'
 import type { Ref } from 'vue'
@@ -29,10 +29,10 @@ const handleThrottledPageRefresh = useThrottleFn(() => handlePageRefresh.value?.
 const handleThrottledReachBottom = useThrottleFn(() => handleReachBottom.value?.(), 500)
 const topBarRef = ref()
 
+const isPreferredDark = usePreferredDark()
 const isDark = computed(() => {
   if (settings.value.theme === 'auto')
-    return window.matchMedia('(prefers-color-scheme: dark)').matches
-
+    return isPreferredDark.value
   return settings.value.theme === 'dark'
 })
 
