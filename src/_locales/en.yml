@@ -40,6 +40,7 @@ settings:
 
   # Settings group
   group_common: Common
+  group_video_card: Video Card
   group_performance: Performance
   group_topbar: Top Bar
   group_dock: Dock
@@ -69,6 +70,7 @@ settings:
     hidden: Hidden
   enable_horizontal_scrolling: Enable horizontal scrolling
   enable_horizontal_scrolling_desc: After enabling, mouse scrolling will directly scroll the horizontal scroll list
+  enable_video_preview: Enable video preview feature
   enable_video_ctrl_bar_on_video_card: Display the video control bar on the video card
   hover_video_card_delayed: Delayed video preview on hover over the video card
   block_ads: Block ads

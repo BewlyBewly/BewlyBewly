@@ -31,7 +31,7 @@ settings:
   title: 设置
 
   # Settings menu
-  menu_general: 通用
+  menu_general: 常规
   menu_appearance: 外观
   menu_search_page: 搜索页
   menu_home: 首页
@@ -40,6 +40,7 @@ settings:
 
   # Settings group
   group_common: 通用
+  group_video_card: 视频卡片
   group_performance: 性能
   group_topbar: 顶栏
   group_dock: Dock 栏
@@ -69,6 +70,7 @@ settings:
     hidden: 隐藏
   enable_horizontal_scrolling: 启用横向滚动
   enable_horizontal_scrolling_desc: 启用后，鼠标滚动时将直接滚动横向滚动列表
+  enable_video_preview: 启用视频预览功能
   enable_video_ctrl_bar_on_video_card: 在视频卡片上显示视频控制栏
   hover_video_card_delayed: 将鼠标悬停在视频卡片上时延迟视频预览
   block_ads: 屏蔽广告

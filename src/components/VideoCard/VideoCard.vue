@@ -86,7 +86,7 @@ const mouseLeaveTimeOut = ref()
 const previewVideoUrl = ref<string>('')
 
 watch(() => isHover.value, (newValue) => {
-  if (props.showPreview) {
+  if (props.showPreview && settings.value.enableVideoPreview) {
     if (newValue && !previewVideoUrl.value && props.cid) {
       browser.runtime.sendMessage({
         contentScriptQuery: API.VIDEO.GET_VIDEO_PREVIEW,
@@ -223,7 +223,7 @@ function handleUndo() {
           group-hover:z-2
         >
           <!-- Video preview -->
-          <Transition v-if="showPreview" name="fade">
+          <Transition v-if="showPreview && settings.enableVideoPreview" name="fade">
             <video
               v-if="previewVideoUrl && isHover"
               autoplay muted
@@ -268,7 +268,7 @@ function handleUndo() {
             rounded="$bew-radius"
             text="!white xs"
             bg="black opacity-60"
-            class="group-hover/cover:opacity-0"
+            class="group-hover:opacity-0"
             duration-300
           >
             {{ duration ? calcCurrentTime(duration) : durationStr }}

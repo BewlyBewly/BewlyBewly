@@ -40,6 +40,7 @@ settings:
 
   # Settings group
   group_common: 通用
+  group_video_card: 影片卡片
   group_performance: 效能
   group_topbar: 頂欄
   group_dock: Dock
@@ -69,6 +70,7 @@ settings:
     hidden: 收埋
   enable_horizontal_scrolling: 使用橫向捲動
   enable_horizontal_scrolling_desc: 用咗之後，轆緊滑鼠就可以直接打橫掃水平捲軸列表
+  enable_video_preview: 使用影片預覽功能
   enable_video_ctrl_bar_on_video_card: 喺影片卡片上顯示影片控制欄
   hover_video_card_delayed: 滑鼠停留喺影片卡片嗰陣遲啲進行影片預覽
   block_ads: 封鎖廣告
