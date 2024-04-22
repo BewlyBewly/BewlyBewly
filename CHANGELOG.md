@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.16.7](https://github.com/hakadao/BewlyBewly/compare/v0.16.6...v0.16.7) (2024-04-22)
+
+
+### Bug Fixes
+
+* follow system theme change ([e61a27b](https://github.com/hakadao/BewlyBewly/commit/e61a27ba8b97ed0868c71ccaf4b3460e7c4484cf))
+* i18n for channel ([3bc80f1](https://github.com/hakadao/BewlyBewly/commit/3bc80f1a7e829d1fae0f7f07739ce87ca5d6fbbf))
+* improve share card dark mode ([#629](https://github.com/hakadao/BewlyBewly/issues/629)) ([78bbc95](https://github.com/hakadao/BewlyBewly/commit/78bbc9546a60018e16ff922cd7e3a45a7d7c2268))
+* improve share card dark mode ([#629](https://github.com/hakadao/BewlyBewly/issues/629)) ([fdb3d30](https://github.com/hakadao/BewlyBewly/commit/fdb3d304e35d4ad36814d2cfd24c89adad2af77e))
+
 ## [0.16.6](https://github.com/hakadao/BewlyBewly/compare/v0.16.5...v0.16.6) (2024-04-21)
 
 
