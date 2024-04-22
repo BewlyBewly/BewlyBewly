@@ -182,8 +182,8 @@ async function getAppRecommendVideos() {
     const response: AppForYouResult = await browser.runtime.sendMessage({
       contentScriptQuery: API.VIDEO.GET_APP_RECOMMEND_VIDEOS,
       access_key: accessKey.value,
-      s_locale: settings.value.language !== LanguageType.Mandarin_CN ? 'zh-Hant_TW' : 'zh-Hans_CN',
-      c_locale: settings.value.language !== LanguageType.Mandarin_CN ? 'zh-Hant_TW' : 'zh-Hans_CN',
+      s_locale: settings.value.language === LanguageType.Mandarin_TW || settings.value.language === LanguageType.Cantonese ? 'zh-Hant_TW' : 'zh-Hans_CN',
+      c_locale: settings.value.language === LanguageType.Mandarin_TW || settings.value.language === LanguageType.Cantonese ? 'zh-Hant_TW' : 'zh-Hans_CN',
       appkey: TVAppKey.appkey,
       idx: appVideoList.length > 0 ? appVideoList[appVideoList.length - 1].idx : 1,
     })
