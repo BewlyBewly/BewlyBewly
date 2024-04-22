@@ -62,8 +62,8 @@ settings:
   select_language: 界面语言
   select_language_opt:
     english: 英文
-    mandarin_cn: 官话
-    mandarin_tw: 官話
+    mandarin_cn: 官话 - 简体中文
+    mandarin_tw: 官話 - 正體中文
     jyut: 廣東話
   chk_box:
     show: 显示
