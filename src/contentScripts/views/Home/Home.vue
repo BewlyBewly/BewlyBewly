@@ -33,10 +33,6 @@ const gridLayoutIcons = computed((): GridLayoutIcon[] => {
   ]
 })
 
-watch(() => activatedPage.value, () => {
-  handleBackToTop(settings.value.useSearchPageModeOnHomePage ? 510 : 0)
-})
-
 // use Json stringify to watch the changes of the array item properties
 watch(() => JSON.stringify(settings.value.homePageTabVisibilityList), () => {
   currentTabs.value = computeTabs()
@@ -112,6 +108,9 @@ function handleChangeTab(tab: HomeTab) {
       tabPageRef.value && tabPageRef.value.initData()
     }
     return
+  }
+  else {
+    handleBackToTop(settings.value.useSearchPageModeOnHomePage ? 510 : 0)
   }
 
   // When the content of a tab is loading, prevent switching to another tab.
