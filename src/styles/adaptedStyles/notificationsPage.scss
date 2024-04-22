@@ -199,7 +199,8 @@
     .action-menu .menu-list a,
     .bp-popup-panel .content-text,
     .tab-list,
-    .group-helper-msg-list .name {
+    .group-helper-msg-list .name,
+    .share-card.video-type .content {
       color: var(--bew-text-1);
     }
 
@@ -257,6 +258,10 @@
 
     .action-menu .menu-list:before {
       border-right-color: var(--bew-border-color);
+      border-top-color: var(--bew-border-color);
+    }
+
+    .share-card .footer {
       border-top-color: var(--bew-border-color);
     }
 
@@ -350,6 +355,14 @@
 
     .link-progress-tv {
       filter: invert(1) brightness(2);
+    }
+
+    .share-card.video-type .content {
+      color: var(--bew-text-1);
+    }
+
+    .share-card .footer {
+      border-top: 1px solid var(--bew-border-color);
     }
   }
   // #endregion
