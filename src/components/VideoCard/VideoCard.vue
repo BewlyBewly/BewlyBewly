@@ -210,6 +210,8 @@ function handleUndo() {
       <a
         :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }"
         :href="videoUrl" target="_blank" rel="noopener noreferrer"
+        @mouseenter="handleMouseEnter"
+        @mouseleave="handelMouseLeave"
       >
         <!-- Cover -->
         <div
@@ -219,8 +221,6 @@ function handleUndo() {
           cursor-pointer
           duration-300 ease-in-out
           group-hover:z-2
-          @mouseenter="handleMouseEnter"
-          @mouseleave="handelMouseLeave"
         >
           <!-- Video preview -->
           <Transition v-if="showPreview" name="fade">
