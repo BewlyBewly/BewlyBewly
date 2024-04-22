@@ -356,6 +356,14 @@
     .link-progress-tv {
       filter: invert(1) brightness(2);
     }
+
+    .share-card.video-type .content {
+      color: var(--bew-text-1);
+    }
+
+    .share-card .footer {
+      border-top: 1px solid var(--bew-border-color);
+    }
   }
   // #endregion
 }
