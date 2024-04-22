@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.17.0](https://github.com/hakadao/BewlyBewly/compare/v0.16.7...v0.17.0) (2024-04-22)
+
+
+### Features
+
+* implement a fake not interested feature in web recommend video card ([37c63b3](https://github.com/hakadao/BewlyBewly/commit/37c63b3b7c594904c1aca4e1d63e5840e9c3f7af))
+
+
+### Bug Fixes
+
+* only cantonese & mandarin tw use traditional chinese ([#623](https://github.com/hakadao/BewlyBewly/issues/623)) ([18e77fd](https://github.com/hakadao/BewlyBewly/commit/18e77fdd6eab586049ca5ac2350aa06d00549b36))
+* tab missing after costuming order ([#634](https://github.com/hakadao/BewlyBewly/issues/634)) ([e51f486](https://github.com/hakadao/BewlyBewly/commit/e51f48617669da77f5be0b7eb8eb423b8d9700e4))
+* 右侧dock自动隐藏和滚动条的冲突 ([#632](https://github.com/hakadao/BewlyBewly/issues/632)) ([2bed50f](https://github.com/hakadao/BewlyBewly/commit/2bed50f2cbac89b2b4c72154dc2e56d373f17b4e))
+
 ## [0.16.7](https://github.com/hakadao/BewlyBewly/compare/v0.16.6...v0.16.7) (2024-04-22)
 
 
