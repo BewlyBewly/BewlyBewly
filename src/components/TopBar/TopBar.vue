@@ -340,7 +340,7 @@ async function getUnreadMessageCount() {
 }
 
 async function getTopBarNewMomentsCount() {
-  if (!isLogin)
+  if (!isLogin.value)
     return
 
   let result = 0

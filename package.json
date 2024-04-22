@@ -28,7 +28,8 @@
     "start:firefox": "web-ext run --source-dir ./extension-firefox --target=firefox-desktop",
     "clear": "rimraf extension extension.*",
     "clear-firefox": "rimraf extension-firefox extension-firefox.*",
-    "lint": "eslint .",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
     "test": "vitest test",
     "postinstall": "npx simple-git-hooks"
   },
@@ -46,7 +47,7 @@
     "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.6.4",
+    "@antfu/eslint-config": "^2.15.0",
     "@ffflorian/jszip-cli": "^3.6.2",
     "@iconify/json": "^2.2.201",
     "@iconify/vue": "^4.1.1",
@@ -66,7 +67,7 @@
     "chokidar": "^3.6.0",
     "cross-env": "^7.0.3",
     "crx": "^5.0.1",
-    "eslint": "^8.56.0",
+    "eslint": "^9.1.0",
     "esno": "^4.0.0",
     "fs-extra": "^10.1.0",
     "jsdom": "^20.0.3",
