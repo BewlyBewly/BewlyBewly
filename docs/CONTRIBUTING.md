@@ -73,15 +73,14 @@ Then package it to the `extension-firefox` folder
 
 #### Permanent Branches
 
-- **Main**: Main branch, represents the stable and publishable version, hotfixes for released versions are developed on this branch.
-- **Dev**: Use this branch for developing new features, performance improvements, or modifications to internationalization (i18n) files.
+- **Dev**: Use this branch for bug fixes, developing new features, performance improvements, or modifications to internationalization (i18n) files.
+- **Main**: Main branch, represents the stable and publishable version.
 
 #### Other Temporary Branches
 
 - **feat/**: This branch is used to submit new features
 - **doc/**: This branch is specifically used for fixing documentation, no functional changes.
-- **bugfix/**: This branch is specifically used for fixing errors in the dev branch.
-- **hotfix/**: Cut from the main branch, used to fix online issues.
+- **fix/**: This branch is specifically used for fixing errors in the dev branch.
 
 ### Commit Convention
 
