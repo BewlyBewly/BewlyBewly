@@ -10,6 +10,7 @@ import { accessKey, settings } from '~/logic'
 import { LanguageType } from '~/enums/appEnums'
 import API from '~/background/msg.define'
 import { TVAppKey, getTvSign } from '~/utils/authProvider'
+import { isVerticalVideo } from '~/utils/uriParse'
 
 const props = defineProps<{
   gridLayout: GridLayout
@@ -501,6 +502,7 @@ defineExpose({ initData })
           :danmaku-str="video.cover_left_text_2"
           :cid="video?.player_args?.cid"
           :uri="video.uri"
+          :type="video.card_goto === 'bangumi' ? 'bangumi' : isVerticalVideo(video.uri!) ? 'vertical' : 'horizontal'"
           show-preview
           :horizontal="gridLayout !== 'adaptive'"
           more-btn
