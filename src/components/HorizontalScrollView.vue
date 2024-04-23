@@ -7,11 +7,14 @@ const scrollListWrap = ref<HTMLElement>() as Ref<HTMLElement>
 // const showRightMask = ref<boolean>(false)
 const showScrollMask = ref<boolean>(true)
 
-watch(() => settings.value.enableHorizontalScrolling, (newValue) => {
-  if (newValue)
-    scrollListWrap.value.addEventListener('wheel', handleMouseScroll)
+watch([() => settings.value.enableHorizontalScrolling, scrollListWrap], ([enableHorizontalScrolling, scrollListWrap]) => {
+  if (!scrollListWrap)
+    return
+
+  if (enableHorizontalScrolling)
+    scrollListWrap.addEventListener('wheel', handleMouseScroll)
   else
-    scrollListWrap.value.removeEventListener('wheel', handleMouseScroll)
+    scrollListWrap.removeEventListener('wheel', handleMouseScroll)
 })
 
 onMounted(() => {

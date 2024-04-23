@@ -10,6 +10,7 @@ import { accessKey, settings } from '~/logic'
 import { LanguageType } from '~/enums/appEnums'
 import API from '~/background/msg.define'
 import { TVAppKey, getTvSign } from '~/utils/authProvider'
+import { isVerticalVideo } from '~/utils/uriParse'
 
 const props = defineProps<{
   gridLayout: GridLayout
@@ -39,19 +40,26 @@ const refreshIdx = ref<number>(1)
 const noMoreContent = ref<boolean>(false)
 const { handleReachBottom, handlePageRefresh, scrollbarRef } = useBewlyApp()
 const showVideoOptions = ref<boolean>(false)
-const videoOptions = ref<ThreePointV2[] | undefined>([])
+const appVideoOptions = ref<ThreePointV2[] | undefined>([])
+const videoOptions = reactive<{ id: number, name: string }[]>([
+  { id: 1, name: '不感兴趣' },
+  { id: 2, name: '不想看此UP主' },
+])
 const videoOptionsPosition = reactive<{ top: string, left: string }>({ top: '0', left: '0' })
-const activatedVideoIdx = ref<number>(0)
-const activatedVideo = ref<AppVideoItem | null>()
+const activatedAppVideoIdx = ref<number>(0)
+const activatedAppVideo = ref<AppVideoItem | null>()
+const activatedVideoId = ref<number>(0)
+const activatedVideo = ref<VideoItem | null>()
 const videoCardRef = ref(null)
 const dislikedVideoUniqueKeys = ref<string[]>([])
+const dislikedAppVideoUniqueKeys = ref<string[]>([])
 const showDislikeDialog = ref<boolean>(false)
 const selectedDislikeReason = ref<number>(1)
 const loadingDislikeDialog = ref<boolean>(false)
 
 onKeyStroke((e: KeyboardEvent) => {
   if (showDislikeDialog.value) {
-    const dislikeReasons = activatedVideo.value?.three_point_v2?.find(option => option.type === ThreePointV2Type.Dislike)?.reasons || []
+    const dislikeReasons = activatedAppVideo.value?.three_point_v2?.find(option => option.type === ThreePointV2Type.Dislike)?.reasons || []
 
     if (e.key >= '0' && e.key <= '9') {
       e.preventDefault()
@@ -175,8 +183,8 @@ async function getAppRecommendVideos() {
     const response: AppForYouResult = await browser.runtime.sendMessage({
       contentScriptQuery: API.VIDEO.GET_APP_RECOMMEND_VIDEOS,
       access_key: accessKey.value,
-      s_locale: settings.value.language !== LanguageType.Mandarin_CN ? 'zh-Hant_TW' : 'zh-Hans_CN',
-      c_locale: settings.value.language !== LanguageType.Mandarin_CN ? 'zh-Hant_TW' : 'zh-Hans_CN',
+      s_locale: settings.value.language === LanguageType.Mandarin_TW || settings.value.language === LanguageType.Cantonese ? 'zh-Hant_TW' : 'zh-Hans_CN',
+      c_locale: settings.value.language === LanguageType.Mandarin_TW || settings.value.language === LanguageType.Cantonese ? 'zh-Hant_TW' : 'zh-Hans_CN',
       appkey: TVAppKey.appkey,
       idx: appVideoList.length > 0 ? appVideoList[appVideoList.length - 1].idx : 1,
     })
@@ -209,40 +217,66 @@ async function getAppRecommendVideos() {
   }
 }
 
-function handleMoreClick(e: MouseEvent, data: AppVideoItem) {
-  if (activatedVideo.value && activatedVideoIdx.value === data.idx) {
+function handleMoreClick(e: MouseEvent, data: VideoItem) {
+  if (activatedVideo.value && activatedVideoId.value === data.id) {
     closeVideoOptions()
     return
   }
 
   showVideoOptions.value = true
-  activatedVideoIdx.value = data.idx
+  activatedVideoId.value = data.id
   activatedVideo.value = data
   const osInstance = scrollbarRef.value?.osInstance()
   const scrollTop = osInstance.elements().viewport.scrollTop || 0
-  videoOptions.value = data.three_point_v2
+  // videoOptions.value = data.three_point_v2
   videoOptionsPosition.top = `${e.clientY + scrollTop}px`
   videoOptionsPosition.left = `${e.clientX}px`
 }
 
-function handleMoreCommand(command: ThreePointV2Type) {
+function handleAppMoreClick(e: MouseEvent, data: AppVideoItem) {
+  if (activatedAppVideo.value && activatedAppVideoIdx.value === data.idx) {
+    closeAppVideoOptions()
+    return
+  }
+
+  showVideoOptions.value = true
+  activatedAppVideoIdx.value = data.idx
+  activatedAppVideo.value = data
+  const osInstance = scrollbarRef.value?.osInstance()
+  const scrollTop = osInstance.elements().viewport.scrollTop || 0
+  appVideoOptions.value = data.three_point_v2
+  videoOptionsPosition.top = `${e.clientY + scrollTop}px`
+  videoOptionsPosition.left = `${e.clientX}px`
+}
+
+function handleMoreCommand(_command: number) {
   closeVideoOptions()
+  activatedVideo.value && dislikedVideoUniqueKeys.value.push(getVideoUniqueKey(activatedVideo.value))
+}
+
+function handleAppMoreCommand(command: ThreePointV2Type) {
+  closeAppVideoOptions()
 
   switch (command) {
     case ThreePointV2Type.Feedback:
       break
     case ThreePointV2Type.Dislike:
-      openDislikeDialog()
+      openAppDislikeDialog()
       break
   }
 }
 
 function closeVideoOptions() {
   showVideoOptions.value = false
-  activatedVideoIdx.value = 0
+  activatedVideoId.value = 0
 }
 
-function openDislikeDialog() {
+function closeAppVideoOptions() {
+  showVideoOptions.value = false
+  activatedAppVideoIdx.value = 0
+}
+
+function openAppDislikeDialog() {
   selectedDislikeReason.value = 1
   showDislikeDialog.value = true
 }
@@ -251,12 +285,12 @@ function closeDislikeDialog() {
   showDislikeDialog.value = false
 }
 
-function handleDislike() {
+function handleAppDislike() {
   loadingDislikeDialog.value = true
   const params = {
     access_key: accessKey.value,
-    goto: activatedVideo.value?.goto,
-    id: activatedVideo.value?.param,
+    goto: activatedAppVideo.value?.goto,
+    id: activatedAppVideo.value?.param,
     // https://github.com/magicdawn/bilibili-app-recommend/blob/cb51f75f415f48235ce048537f2013122c16b56b/src/components/VideoCard/card.service.ts#L115
     idx: (Date.now() / 1000).toFixed(0),
     reason_id: selectedDislikeReason.value,
@@ -273,7 +307,7 @@ function handleDislike() {
   })
     .then((res) => {
       if (res.code === 0)
-        activatedVideo.value && dislikedVideoUniqueKeys.value.push(getVideoUniqueKey(activatedVideo.value))
+        activatedAppVideo.value && dislikedAppVideoUniqueKeys.value.push(getAppVideoUniqueKey(activatedAppVideo.value))
       else
         toast.error(res.message)
     })
@@ -282,7 +316,13 @@ function handleDislike() {
     })
 }
 
-function handleUndoDislike(video: AppVideoItem) {
+function handleUndoDislike(_video: VideoItem) {
+  dislikedVideoUniqueKeys.value = dislikedVideoUniqueKeys.value.filter(currentKey =>
+    currentKey !== (activatedVideo.value ? getVideoUniqueKey(activatedVideo.value) : ''),
+  )
+}
+
+function handleAppUndoDislike(video: AppVideoItem) {
   const params = {
     access_key: accessKey.value,
     goto: video.goto,
@@ -302,8 +342,8 @@ function handleUndoDislike(video: AppVideoItem) {
     sign: getTvSign(params),
   }).then((res) => {
     if (res.code === 0) {
-      dislikedVideoUniqueKeys.value = dislikedVideoUniqueKeys.value.filter(currentKey =>
-        currentKey !== (activatedVideo.value ? getVideoUniqueKey(activatedVideo.value) : ''),
+      dislikedAppVideoUniqueKeys.value = dislikedAppVideoUniqueKeys.value.filter(currentKey =>
+        currentKey !== (activatedAppVideo.value ? getAppVideoUniqueKey(activatedAppVideo.value) : ''),
       )
     }
     else {
@@ -312,7 +352,11 @@ function handleUndoDislike(video: AppVideoItem) {
   })
 }
 
-function getVideoUniqueKey(video: AppVideoItem) {
+function getVideoUniqueKey(video: VideoItem) {
+  return video.id + (video.bvid || video.uri || '')
+}
+
+function getAppVideoUniqueKey(video: AppVideoItem) {
   return video.idx + (video.bvid || video.uri || '')
 }
 
@@ -334,7 +378,7 @@ defineExpose({ initData })
     <div v-show="showVideoOptions">
       <div
         pos="fixed top-0 left-0" w-full h-full z-1
-        @click="closeVideoOptions"
+        @click="closeAppVideoOptions"
       />
       <div
         style="backdrop-filter: var(--bew-filter-glass-1);"
@@ -344,14 +388,25 @@ defineExpose({ initData })
         shadow="$bew-shadow-1" z-10
       >
         <ul flex="~ col gap-1">
-          <template v-for="option in videoOptions" :key="option.type">
+          <template v-if="settings.recommendationMode === 'app'">
+            <template v-for="option in appVideoOptions" :key="option.type">
+              <li
+                v-if="option.type !== ThreePointV2Type.WatchLater && option.type !== ThreePointV2Type.Feedback"
+                bg="hover:$bew-fill-2" p="x-4 y-2" rounded="$bew-radius-half" cursor-pointer
+                @click="handleAppMoreCommand(option.type)"
+              >
+                <span v-if="option.type === ThreePointV2Type.Dislike">{{ $t('home.not_interested') }}</span>
+                <span v-else>{{ option.title }}</span>
+              </li>
+            </template>
+          </template>
+          <template v-else>
             <li
-              v-if="option.type !== ThreePointV2Type.WatchLater && option.type !== ThreePointV2Type.Feedback"
+              v-for="option in videoOptions" :key="option.id"
               bg="hover:$bew-fill-2" p="x-4 y-2" rounded="$bew-radius-half" cursor-pointer
-              @click="handleMoreCommand(option.type)"
+              @click="handleMoreCommand(option.id)"
             >
-              <span v-if="option.type === ThreePointV2Type.Dislike">{{ $t('home.not_interested') }}</span>
-              <span v-else>{{ option.title }}</span>
+              {{ option.name }}
             </li>
           </template>
         </ul>
@@ -366,11 +421,11 @@ defineExpose({ initData })
       append-to-bewly-body
       :loading="loadingDislikeDialog"
       @close="closeDislikeDialog"
-      @confirm="handleDislike"
+      @confirm="handleAppDislike"
     >
       <ul flex="~ col gap-2">
         <li
-          v-for="(reason, index) in activatedVideo?.three_point_v2?.find(option => option.type === ThreePointV2Type.Dislike)?.reasons"
+          v-for="(reason, index) in activatedAppVideo?.three_point_v2?.find(option => option.type === ThreePointV2Type.Dislike)?.reasons"
           :key="reason.id"
           :class="{ 'activated-dislike-reason': selectedDislikeReason === reason.id }"
           p="x-6 y-4" rounded="$bew-radius" cursor-pointer bg="$bew-fill-1 hover:$bew-fill-2"
@@ -422,6 +477,11 @@ defineExpose({ initData })
           :uri="video.uri"
           show-preview
           :horizontal="gridLayout !== 'adaptive'"
+          more-btn
+          :more-btn-active="video.id === activatedVideoId"
+          :removed="dislikedVideoUniqueKeys.includes(getVideoUniqueKey(video))"
+          @more-click="(e) => handleMoreClick(e, video)"
+          @undo="handleUndoDislike(video)"
         />
       </template>
       <template v-else>
@@ -442,14 +502,14 @@ defineExpose({ initData })
           :danmaku-str="video.cover_left_text_2"
           :cid="video?.player_args?.cid"
           :uri="video.uri"
+          :type="video.card_goto === 'bangumi' ? 'bangumi' : isVerticalVideo(video.uri!) ? 'vertical' : 'horizontal'"
           show-preview
           :horizontal="gridLayout !== 'adaptive'"
           more-btn
-          :more-btn-active="video.idx === activatedVideoIdx"
-          :removed="dislikedVideoUniqueKeys.includes(getVideoUniqueKey(video))"
-          :dislike-reasons="video.three_point_v2?.find(option => option.type === ThreePointV2Type.Dislike)?.reasons || []"
-          @more-click="(e) => handleMoreClick(e, video)"
-          @undo="handleUndoDislike(video)"
+          :more-btn-active="video.idx === activatedAppVideoIdx"
+          :removed="dislikedAppVideoUniqueKeys.includes(getAppVideoUniqueKey(video))"
+          @more-click="(e) => handleAppMoreClick(e, video)"
+          @undo="handleAppUndoDislike(video)"
         />
         <!-- :more-options="video.three_point_v2" -->
       </template>

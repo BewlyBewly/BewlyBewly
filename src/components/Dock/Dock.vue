@@ -164,7 +164,7 @@ function toggleDockHide(hide: boolean) {
   >
     <!-- Edge div -->
     <div
-      v-if="settings.autoHideDock"
+      v-if="settings.autoHideDock && hideDock"
       class="dock-edge"
       :class="`dock-edge-${settings.dockPosition}`"
       @mouseenter="toggleDockHide(false)"

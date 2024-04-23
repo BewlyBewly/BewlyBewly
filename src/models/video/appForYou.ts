@@ -58,6 +58,7 @@ export interface Item {
   three_point_v2?: ThreePointV2[]
   report_flow_data?: string
   avatar?: Avatar
+  cover_badge?: string
   cover_left_text_1?: string
   cover_left_text_2?: string
   desc?: string
@@ -337,6 +338,7 @@ export enum CardGoto {
   AV = 'av',
   AdWebS = 'ad_web_s',
   Banner = 'banner',
+  Bangumi = 'bangumi',
 }
 
 export enum CardType {

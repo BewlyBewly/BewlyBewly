@@ -28,13 +28,12 @@ const wValue = computed((): string => {
           <div w-full h-5 bg="$bew-fill-3" />
           <div w="3/4" h-5 bg="$bew-fill-3" />
         </div>
-        <div grid gap-2 mt-4>
-          <div w="50%" h-4 bg="$bew-fill-2" />
+        <div grid gap-2 mt-2>
           <div w="80%" h-4 bg="$bew-fill-2" />
         </div>
         <div
-          text="transparent sm" inline-block mt-4 p="x-2 y-1" bg="$bew-fill-1"
-          rounded-4
+          text="transparent sm" inline-block mt-4 p="x-2" h-7
+          bg="$bew-fill-1" rounded-4
         >
           hello world
         </div>
@@ -66,13 +65,12 @@ const wValue = computed((): string => {
           <div w-full h-5 bg="$bew-fill-3" />
           <div w="3/4" h-5 bg="$bew-fill-3" />
         </div>
-        <div grid gap-2 mt-4>
-          <div :style="{ width: '70%' }" h-4 bg="$bew-fill-2" />
-          <div w="80%" h-4 bg="$bew-fill-2" />
-        </div>
 
         <div mt-4 flex>
-          <div text="transparent sm" inline-block p="x-2 y-1" bg="$bew-fill-1" rounded-4>
+          <div
+            text="transparent sm" inline-block p="x-2" h-7 bg="$bew-fill-1"
+            rounded-4
+          >
             hello world
           </div>
         </div>
