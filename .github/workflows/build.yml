@@ -7,6 +7,7 @@ on:
       # 项目源代码所在的分支
       - main
       - dev
+      - feat/support-safari
     paths-ignore:
       # Changes involving the following path files will not trigger the workflow
       # 涉及以下路径文件的更改不会触发工作流
@@ -58,8 +59,41 @@ jobs:
       - name: Build Extension-Firefox
         run: pnpm build-firefox
 
-      - name: Upload Zip
+      - name: Upload Firefox Zip
         uses: actions/upload-artifact@v4.3.1
         with:
           name: BewlyBewly-Firefox Zip
           path: extension-firefox
+
+      - name: Build Extension-Safari
+        run: pnpm build-safari
+
+      - name: Upload Safari Zip
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: BewlyBewly-Safari Zip
+          path: extension-safari
+
+  build-safari:
+    runs-on: macos-latest
+    needs: build
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: BewlyBewly-Safari Zip
+          path: extension-safari
+
+      - name: Convert Safari Web Extension to Xcode Project
+        run: xcrun safari-web-extension-converter ./extension-safari --project-location ./extension-safari-macos --macos-only --no-open --no-prompt
+
+      - name: Build Xcode Project
+        run: xcodebuild -project extension-safari-macos/BewlyBewly/BewlyBewly.xcodeproj ONLY_ACTIVE_ARCH=NO -scheme BewlyBewly -configuration Release -derivedDataPath ./build build
+
+      - name: Archive macOS App
+        run: tar -czf BewlyBewly.app.tar.gz -C build/Build/Products/Release BewlyBewly.app
+
+      - name: Upload macOS App
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: BewlyBewly Safari Extension macOS App
+          path: BewlyBewly.app.tar.gz
