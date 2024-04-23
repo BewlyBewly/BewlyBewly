@@ -28,8 +28,7 @@ const wValue = computed((): string => {
           <div w-full h-5 bg="$bew-fill-3" />
           <div w="3/4" h-5 bg="$bew-fill-3" />
         </div>
-        <div grid gap-2 mt-4>
-          <div w="50%" h-4 bg="$bew-fill-2" />
+        <div grid gap-2 mt-2>
           <div w="80%" h-4 bg="$bew-fill-2" />
         </div>
         <div
@@ -65,10 +64,6 @@ const wValue = computed((): string => {
         <div grid gap-2>
           <div w-full h-5 bg="$bew-fill-3" />
           <div w="3/4" h-5 bg="$bew-fill-3" />
-        </div>
-        <div grid gap-2 mt-4>
-          <div :style="{ width: '70%' }" h-4 bg="$bew-fill-2" />
-          <div w="80%" h-4 bg="$bew-fill-2" />
         </div>
 
         <div mt-4 flex>
