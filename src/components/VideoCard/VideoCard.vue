@@ -39,6 +39,7 @@ interface Props {
   moreBtn?: boolean
   moreBtnActive?: boolean
   removed?: boolean
+  type?: 'horizontal' | 'vertical' | 'bangumi'
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -435,13 +436,18 @@ function handleUndo() {
               >
                 {{ tag }}
               </span>
-              <!-- Capsule -->
-              <span
-                v-if="publishedTimestamp || capsuleText" text="$bew-text-3 sm" inline-block mt-2 p="x-2 y-1"
-                bg="$bew-fill-1" rounded-4
-              >
-                {{ publishedTimestamp ? calcTimeSince(publishedTimestamp * 1000) : capsuleText }}
-              </span>
+              <div mt-2 flex="~ items-center" gap-2>
+                <!-- Capsule -->
+                <span
+                  v-if="publishedTimestamp || capsuleText" text="$bew-text-3 sm" inline-block p="x-2 y-1"
+                  bg="$bew-fill-1" rounded-4
+                >
+                  {{ publishedTimestamp ? calcTimeSince(publishedTimestamp * 1000) : capsuleText }}
+                </span>
+                <!-- Video type -->
+                <mingcute:cellphone-2-line v-if="type === 'vertical'" />
+                <mingcute:movie-line v-if="type === 'bangumi'" />
+              </div>
             </div>
           </div>
         </div>
