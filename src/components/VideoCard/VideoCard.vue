@@ -44,6 +44,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   topRightContent: true,
+  type: 'vertical',
 })
 
 const emit = defineEmits<{
@@ -436,17 +437,25 @@ function handleUndo() {
               >
                 {{ tag }}
               </span>
-              <div mt-2 flex="~ items-center" gap-2>
+              <div mt-2 flex="~ items-center gap-1">
                 <!-- Capsule -->
                 <span
-                  v-if="publishedTimestamp || capsuleText" text="$bew-text-3 sm" inline-block p="x-2 y-1"
+                  v-if="publishedTimestamp || capsuleText"
+                  text="$bew-text-3 sm" inline-block p="x-2" h-7 flex="~ items-center"
                   bg="$bew-fill-1" rounded-4
                 >
                   {{ publishedTimestamp ? calcTimeSince(publishedTimestamp * 1000) : capsuleText }}
                 </span>
                 <!-- Video type -->
-                <mingcute:cellphone-2-line v-if="type === 'vertical'" />
-                <mingcute:movie-line v-if="type === 'bangumi'" />
+                <span
+                  v-if="type !== 'horizontal'"
+                  text="$bew-text-3 sm" inline-block w-7 h-7 bg="$bew-fill-1"
+                  flex="~ items-center justify-center"
+                  rounded-4
+                >
+                  <mingcute:cellphone-2-line v-if="type === 'vertical'" />
+                  <mingcute:movie-line v-else-if="type === 'bangumi'" />
+                </span>
               </div>
             </div>
           </div>
@@ -478,7 +487,7 @@ function handleUndo() {
               <div w="80%" h-4 />
             </div>
             <div mt-4 flex>
-              <div text="transparent sm" inline-block p="x-2 y-1" rounded-4>
+              <div text="transparent sm" inline-block p="x-2" h-7 rounded-4>
                 hello world
               </div>
             </div>
@@ -509,7 +518,7 @@ function handleUndo() {
               <div w="70%" h-4 />
             </div>
             <div mt-4 flex>
-              <div text="transparent sm" inline-block p="x-2 y-1" rounded-4>
+              <div text="transparent sm" inline-block p="x-2" h-7 rounded-4>
                 hello world
               </div>
             </div>

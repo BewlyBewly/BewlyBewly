@@ -33,8 +33,8 @@ const wValue = computed((): string => {
           <div w="80%" h-4 bg="$bew-fill-2" />
         </div>
         <div
-          text="transparent sm" inline-block mt-4 p="x-2 y-1" bg="$bew-fill-1"
-          rounded-4
+          text="transparent sm" inline-block mt-4 p="x-2" h-7
+          bg="$bew-fill-1" rounded-4
         >
           hello world
         </div>
@@ -72,7 +72,10 @@ const wValue = computed((): string => {
         </div>
 
         <div mt-4 flex>
-          <div text="transparent sm" inline-block p="x-2 y-1" bg="$bew-fill-1" rounded-4>
+          <div
+            text="transparent sm" inline-block p="x-2" h-7 bg="$bew-fill-1"
+            rounded-4
+          >
             hello world
           </div>
         </div>
