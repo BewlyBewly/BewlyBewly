@@ -328,7 +328,7 @@ function handleUndo() {
             <a
               v-if="authorFace"
               :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
-              m="r-2" w="40px" h="40px" rounded="1/2" overflow="hidden"
+              m="r-4" w="36px" h="36px" rounded="1/2" overflow="hidden"
               object="center cover" bg="$bew-fill-4" cursor="pointer"
               @click.stop=""
             >
@@ -423,14 +423,9 @@ function handleUndo() {
                 </template>
                 <br>
               </div>
-              <div flex="inline items-center gap-1">
+              <div flex="inline items-center" ml-1>
                 <!-- Video type -->
-                <span
-                  v-if="type !== 'horizontal'"
-                  text="$bew-text-3 sm" inline-block w-7 h-7 bg="$bew-fill-1"
-                  flex="~ items-center justify-center"
-                  rounded-4
-                >
+                <span text="$bew-text-2" inline-block>
                   <mingcute:cellphone-2-line v-if="type === 'vertical'" />
                   <mingcute:movie-line v-else-if="type === 'bangumi'" />
                 </span>
@@ -453,7 +448,7 @@ function handleUndo() {
           mt-4 flex="~ gap-4"
         >
           <div
-            block w="40px" h="40px" rounded="1/2" shrink-0
+            block w="36px" h="36px" rounded="1/2" shrink-0
           />
           <div w-full>
             <div grid gap-2>

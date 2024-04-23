@@ -20,7 +20,7 @@ const wValue = computed((): string => {
     <div aspect-video bg="$bew-fill-4" rounded="$bew-radius" />
     <div flex mt-4>
       <div
-        m="r-4" w="40px" h="40px" rounded="1/2" bg="$bew-fill-4"
+        m="r-4" w="36px" h="36px" rounded="1/2" bg="$bew-fill-4"
         shrink-0
       />
       <div w-full>
