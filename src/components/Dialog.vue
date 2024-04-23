@@ -3,17 +3,21 @@ import { Icon } from '@iconify/vue'
 import { onKeyStroke } from '@vueuse/core'
 
 const props = withDefaults(defineProps<{
-  title: string
+  title?: string
   desc?: string
   center?: boolean
+  frostedGlass?: boolean
   appendToBewlyBody?: boolean
   width?: string | number
-  height?: string | number
+  maxWidth?: string | number
+  contentHeight?: string | number
+  contentMaxHeight?: string | number
   centerFooter?: boolean
   loading?: boolean
   preventCloseWhenLoading?: boolean
 }>(), {
   preventCloseWhenLoading: true,
+  frostedGlass: true,
 })
 
 const emit = defineEmits(['close', 'confirm'])
@@ -37,8 +41,14 @@ const showDialog = ref<boolean>(false)
 const dialogWidth = computed(() => {
   return typeof props.width === 'number' ? `${props.width}px` : props.width || '400px'
 })
-const dialogHeight = computed(() => {
-  return typeof props.height === 'number' ? `${props.height}px` : props.height || 'auto'
+const dialogMaxWidth = computed(() => {
+  return typeof props.maxWidth === 'number' ? `${props.maxWidth}px` : props.maxWidth || '400px'
+})
+const dialogContentHeight = computed(() => {
+  return typeof props.contentHeight === 'number' ? `${props.contentHeight}px` : props.contentHeight || 'auto'
+})
+const dialogContentMaxHeight = computed(() => {
+  return typeof props.contentMaxHeight === 'number' ? `${props.contentMaxHeight}px` : props.contentMaxHeight || 'auto'
 })
 
 onKeyStroke('Alt', (e: KeyboardEvent) => {
@@ -81,7 +91,7 @@ function handleConfirm() {
       <div
         v-if="showDialog"
         class="dialog"
-        pos="fixed top-0 left-0" w-full h-full z-100
+        pos="fixed top-0 left-0" w-full h-full z-100 z-10002
       >
         <div
           bg="black opacity-40 dark:opacity-40"
@@ -91,10 +101,14 @@ function handleConfirm() {
         <div
           style="
             box-shadow: var(--bew-shadow-3) var(--bew-shadow-edge-glow-2);
-            backdrop-filter: var(--bew-filter-glass-2);
           "
-          :style="{ width: dialogWidth, height: dialogHeight }"
-          pos="absolute top-1/2 left-1/2" bg="$bew-elevated-1" rounded="$bew-radius"
+          :style="{
+            width: dialogWidth,
+            maxWidth: dialogMaxWidth,
+            backdropFilter: frostedGlass ? 'var(--bew-filter-glass-2)' : 'none',
+            backgroundColor: frostedGlass ? 'var(--bew-elevated-1)' : 'var(--bew-elevated-solid-1)',
+          }"
+          pos="absolute top-1/2 left-1/2" rounded="$bew-radius"
           transform="translate--1/2" z-2 overflow="x-hidden y-overlay"
           antialiased
         >
@@ -121,9 +135,11 @@ function handleConfirm() {
               :style="{ textAlign: center ? 'center' : 'left' }"
               w-full
             >
-              <p text-xl fw-bold>
-                {{ title }}
-              </p>
+              <slot name="title">
+                <p text-xl fw-bold>
+                  {{ title }}
+                </p>
+              </slot>
               <p text="sm $bew-text-2">
                 <slot name="desc">
                   {{ desc }}
@@ -141,7 +157,11 @@ function handleConfirm() {
               <ic-baseline-clear />
             </div>
           </header>
-          <main p="x-8 y-2" relative>
+
+          <main
+            :style="{ height: dialogContentHeight, maxHeight: dialogContentMaxHeight }"
+            p="x-8 y-2" relative overflow-scroll
+          >
             <!-- <div h-80px mt--8 /> -->
             <slot />
           </main>

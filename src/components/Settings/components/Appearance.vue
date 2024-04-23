@@ -25,6 +25,9 @@ const themeColorOptions = computed<Array<string>>(() => {
     '#fda4af',
   ]
 })
+const isCustomColor = computed<boolean>(() => {
+  return !themeColorOptions.value.includes(settings.value.themeColor)
+})
 const wallpapers = computed<Array<{ name: string, url: string, thumbnail: string }>>(() => {
   return [
     {
@@ -105,6 +108,25 @@ function changeWallpaper(url: string) {
             }"
             @click="changeThemeColor(color)"
           />
+          <div
+            w-20px h-20px rounded-8 overflow-hidden
+            cursor-pointer transition duration-300
+            flex="~ items-center justify-center"
+            :style="{
+              transform: isCustomColor ? 'scale(1.3)' : 'scale(1)',
+              border: isCustomColor ? '2px solid white' : `2px solid ${settings.themeColor}`,
+              boxShadow: isCustomColor ? '0 0 0 1px var(--bew-border-color), var(--bew-shadow-1)' : 'none',
+            }"
+          >
+            <mingcute:color-picker-line pos="absolute" text-white w-12px h-12px pointer-events-none />
+            <input
+              :value="settings.themeColor"
+              type="color"
+              w-30px h-30px p-0 m-0 block
+              shrink-0 rounded-8 border-none cursor-pointer
+              @input="(e) => changeThemeColor((e.target as HTMLInputElement)?.value)"
+            >
+          </div>
         </div>
       </SettingsItem>
     </SettingsItemGroup>

@@ -4,8 +4,8 @@ import { useI18n } from 'vue-i18n'
 
 import { getCSRF, removeHttpFromUrl } from '~/utils/main'
 import { calcCurrentTime } from '~/utils/dataFormatter'
-import { Business } from '~/models/video/history'
-import type { List as HistoryItem, HistoryResult } from '~/models/video/history'
+import { Business } from '~/models/history/history'
+import type { List as HistoryItem, HistoryResult } from '~/models/history/history'
 import type { List as HistorySearchItem, HistorySearchResult } from '~/models/video/historySearch'
 import API from '~/background/msg.define'
 
@@ -136,20 +136,21 @@ function deleteHistoryItem(index: number, historyItem: HistoryItem) {
  * @return {string} url
  */
 function getHistoryUrl(item: HistoryItem): string {
-  // anime
-  if (item.history.business === 'pgc') {
-    return removeHttpFromUrl(item.uri)
-  }
-  // video
-  else if (item.history.business === Business.ARCHIVE) {
+  if (item.uri)
+    return item.uri
+
+  // Video
+  if (item.history.business === Business.ARCHIVE) {
     if (item?.videos && item.videos > 0)
       return `//www.bilibili.com/video/${item.history.bvid}?p=${item.history.page}`
-    return item.history.bvid
+    return `//www.bilibili.com/video/${item.history.bvid}`
   }
-  else if (item.history.business === 'live') {
+  // Live
+  else if (item.history.business === Business.LIVE) {
     return `//live.bilibili.com/${item.history.oid}`
   }
-  else if (item.history.business === 'article' || item.history.business === 'article-list') {
+  // Article
+  else if (item.history.business === Business.ARTICLE || item.history.business === Business.ARTICLE_LIST) {
     if (item.history.cid === 0)
       return `//www.bilibili.com/read/cv${item.history.oid}`
     else

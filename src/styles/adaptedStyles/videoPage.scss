@@ -8,6 +8,10 @@
     border-radius: 0 0 8px 8px;
   }
 
+  .collection-m-exp {
+    position: relative;
+  }
+
   // #region theme color adaption part
   .note-list .list-note-operation,
   .note-pc .note-container .note-header .note-operation,
@@ -30,12 +34,28 @@
     .capture-bar
     .bar-right
     .copy-link:hover,
-  .note-up .up-desc-container .desc-top .attention-btn-container:hover {
+  .note-up .up-desc-container .desc-top .attention-btn-container:hover,
+  .report-dialog
+    .vui_dialog--footer
+    .report-dialog-footer
+    .button-wrap
+    .comfirm-report:hover,
+  .collection-m-exp .bottom .btn:hover {
     background-color: var(--bew-theme-color-80);
   }
 
   .upinfo-btn-panel .follow-btn.not-follow:hover {
     background-color: var(--bew-theme-color-80) !important;
+  }
+
+  .follow-dialog-wrap-exp
+    .follow-dialog-window
+    .content
+    .group-list
+    .add-group
+    .input-group
+    .submitGroup {
+    background-color: var(--bew-theme-color-10);
   }
 
   .note-detail .note-operation .tab-action-item.is-active .tab-icon {

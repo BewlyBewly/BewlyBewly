@@ -3,7 +3,7 @@
 [English](README.md) | [官话 - 简体中文](README-cmn_CN.md) | [官話 - 正體中文](README-cmn_TW.md) | 廣東話
 
 <p align="center" style="margin-bottom: 0px !important;">
-<img width="150" src="https://user-images.githubusercontent.com/33394391/160250512-410b71fc-7f25-4caf-b850-429227ff082a.png"><br/>
+<img width="150" alt="bewlybewly icon" src="https://user-images.githubusercontent.com/33394391/160250512-410b71fc-7f25-4caf-b850-429227ff082a.png"><br/>
 </p>
 
 <h1 align="center" style="margin-top: 0px;">BewlyBewly</h1>
@@ -23,11 +23,21 @@ BewlyBewly 係一個用於 BiliBili 嘅瀏覽器延伸功能，目的係透過�
 
 ### 線上單嘢
 
-即使你用嘅係 Edge browser，我哋都係建議你喺返 Chrome 線上應用程式商店單撈。事關喺審核速度上，Chrome 線上應用程式商店照計係快過 Edge 的附加元件一啲嘅。
+> [!Caution]
+> 即使你用嘅係 Edge browser，我哋都係建議你喺返 Chrome 線上應用程式商店單撈。事關喺審核速度上，Chrome 線上應用程式商店照計係快過 Edge 的附加元件好鬼死多。~~Edge Add-ons 收皮啦屌~~
+>
+> 仲有，BewlyBewly 喺 Chrome 線上應用程式商店嘅版本執啲嚴重性嘅 bug 速度係會快趣過 Edge 附加元件好多嘅 ~~Edge Add-ons 你幾時死~~
 
 - Chrome: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>
-- Edge: <https://microsoftedge.microsoft.com/addons/detail/bewlybewly/kceadhehfjdiakpiphpjgolbgehjdmja>
+- Edge (唔推介): <https://microsoftedge.microsoft.com/addons/detail/bewlybewly/kceadhehfjdiakpiphpjgolbgehjdmja>
 - Firefox: <https://addons.mozilla.org/lt/firefox/addon/bewlybewly/>
+
+#### Firefox 用家留意吓
+
+> [!WARNING]
+> 用 Firefox 瀏覽器嗰陣，爲咗你正常使用 BewlyBewly，記得開晒下邊圖片展示嘅權限
+
+<br/> <img width="655" alt="enable all bewlybewly permissions on firefox" src="https://github.com/hakadao/BewlyBewly/assets/33394391/9566aed8-040a-4435-a2ec-c61117f8e429">
 
 ### 離線單嘢
 
@@ -62,74 +72,13 @@ BewlyBewly 係一個用於 BiliBili 嘅瀏覽器延伸功能，目的係透過�
 
 </details>
 
-## 🔧 開發同建置專案
-
-請使用 dev 分支進行開發
-
-### Chrome or Edge browser
-
-<details>
-  <summary>Chrome or Edge browser</summary>
-
-#### 開發 (Chrome or Edge)
-
-```bash
-pnpm dev
-```
-
-然之後喺瀏覽器度用 `extension/` 資料夾愛嚟載入此擴充功能。
-每一次執過 code 之後，你都要撳 [Extensions Reloader](https://chromewebstore.google.com/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) 粒掣，然之後 refresh 個 page，確保係有效果。
-
-#### 建置 (Chrome or Edge)
-
-建置擴充功能，要執行下底嘅指令
-
-```bash
-pnpm build
-```
-
-然之後打包 `extension` 下嘅檔案
-
-</details>
-
-### Firefox browser
-
-<details>
-  <summary>Firefox</summary>
-
-#### 開發 (Firefox)
-
-```bash
-pnpm dev-firefox
-```
-
-然之後喺瀏覽器度用 `extension-firefox/` 資料夾愛嚟載入此擴充功能。
-每一次執過 code 之後，你都要撳 [Extensions Reloader](https://chromewebstore.google.com/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) 粒掣，然之後 refresh 個 page，確保係有效果。
-
-#### 建置 (Firefox)
-
-建置擴充功能，要執行下底嘅指令
-
-```bash
-pnpm build-firefox
-```
-
-然之後打包 `extension-firefox` 下嘅檔案
-
-</details>
-
 ## 🤝 貢獻
 
-### 關於分支
+See [CONTRIBUTION.md](docs/CONTRIBUTING.md)
 
-- **Main**: 呢個分支係專門愛嚟執吓文件檔案（例如如 README 檔案），唔執程式碼抑或佢啲功能。
-- **Dev**: 用呢個分支進行新功能嘅開發、改進效能抑或執語系檔（i18n）。
-- **Bugfixes**: 呢個分支專門愛嚟執啲喺 main 分支中出現嘅錯誤。
+### 貢獻者
 
-### i18n
-
-- 喺翻譯嗰陣，若然你遇到一種你唔熟嘅語言，你可以用第種識翻譯嘅語言來翻譯，兼且喺 PR 講明你唔識譯邊種語言。
-- **請手動維護 i18n 國際化語系檔！！！** 請勿使用 `i18n Ally` 抑或其他擴充套件維護。 我知你可能唔係幾明，抑或可能唔鍾意咁樣，但係用 `i18n Ally` 進行維護之後，你唔之你翻譯咗嘅內容擺喺邊處，或剷咗程式碼註解。
+![Contributors](https://contrib.rocks/image?repo=hakadao/BewlyBewly)
 
 ## ❤️ 鳴謝
 
@@ -137,3 +86,11 @@ pnpm build-firefox
 - [UserScripts/bilibiliHome](https://github.com/indefined/UserScripts/tree/master/bilibiliHome), [bilibili-app-recommend](https://github.com/magicdawn/bilibili-app-recommend) - 參考取得 access key 之方法
 - [Bilibili-Evolved](https://github.com/the1812/Bilibili-Evolved) - 部分功能嘅實現
 - [bilibili-API-collect](https://github.com/SocialSisterYi/bilibili-API-collect)
+
+## 捐贈
+
+若然你鐘意呢份專案，你可以考慮捐贈嚟支持我。我而家唔係財務困境，捐幾多睇你啦。
+
+<a href="https://afdian.net/a/Hakadao" target="_blank">
+  <img alt="afdian" src="https://github.com/hakadao/BewlyBewly/assets/33394391/41711f39-8c6c-4dea-964e-5ae7f0d5b8ad" width="350">
+</a>
