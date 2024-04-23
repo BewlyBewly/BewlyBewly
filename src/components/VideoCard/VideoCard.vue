@@ -39,10 +39,12 @@ interface Props {
   moreBtn?: boolean
   moreBtnActive?: boolean
   removed?: boolean
+  type?: 'horizontal' | 'vertical' | 'bangumi'
 }
 
 const props = withDefaults(defineProps<Props>(), {
   topRightContent: true,
+  type: 'horizontal',
 })
 
 const emit = defineEmits<{
@@ -86,7 +88,7 @@ const mouseLeaveTimeOut = ref()
 const previewVideoUrl = ref<string>('')
 
 watch(() => isHover.value, (newValue) => {
-  if (props.showPreview) {
+  if (props.showPreview && settings.value.enableVideoPreview) {
     if (newValue && !previewVideoUrl.value && props.cid) {
       browser.runtime.sendMessage({
         contentScriptQuery: API.VIDEO.GET_VIDEO_PREVIEW,
@@ -210,6 +212,8 @@ function handleUndo() {
       <a
         :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }"
         :href="videoUrl" target="_blank" rel="noopener noreferrer"
+        @mouseenter="handleMouseEnter"
+        @mouseleave="handelMouseLeave"
       >
         <!-- Cover -->
         <div
@@ -219,11 +223,9 @@ function handleUndo() {
           cursor-pointer
           duration-300 ease-in-out
           group-hover:z-2
-          @mouseenter="handleMouseEnter"
-          @mouseleave="handelMouseLeave"
         >
           <!-- Video preview -->
-          <Transition v-if="showPreview" name="fade">
+          <Transition v-if="showPreview && settings.enableVideoPreview" name="fade">
             <video
               v-if="previewVideoUrl && isHover"
               autoplay muted
@@ -268,7 +270,7 @@ function handleUndo() {
             rounded="$bew-radius"
             text="!white xs"
             bg="black opacity-60"
-            class="group-hover/cover:opacity-0"
+            class="group-hover:opacity-0"
             duration-300
           >
             {{ duration ? calcCurrentTime(duration) : durationStr }}
@@ -325,9 +327,9 @@ function handleUndo() {
           <div v-if="!horizontal" flex>
             <a
               v-if="authorFace"
-              m="r-4" w="40px" h="40px" rounded="1/2" overflow="hidden"
-              object="center cover" bg="$bew-fill-4" cursor="pointer"
               :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
+              m="r-2" w="40px" h="40px" rounded="1/2" overflow="hidden"
+              object="center cover" bg="$bew-fill-4" cursor="pointer"
               @click.stop=""
             >
               <img
@@ -342,7 +344,7 @@ function handleUndo() {
             <div flex="~ gap-1 justify-between items-start" w="full" pos="relative">
               <h3
                 class="keep-two-lines"
-                text="lg overflow-ellipsis $bew-text-1" h-14 overflow-hidden
+                text="lg overflow-ellipsis $bew-text-1"
                 cursor="pointer"
               >
                 <a :href="videoUrl" target="_blank" :title="title" rel="noopener noreferrer">
@@ -391,57 +393,48 @@ function handleUndo() {
                   :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
                   @click.stop=""
                 >
-                  {{ author }}
+                  <span>{{ author }}</span>
+                  <template v-if="publishedTimestamp || capsuleText">
+                    <span text-xs font-light mx-1>•</span>
+                    <span>{{ publishedTimestamp ? calcTimeSince(publishedTimestamp * 1000) : capsuleText?.trim() }}</span>
+                  </template>
                 </a>
               </span>
-              <span v-if="horizontal">
-                <span v-if="view || viewStr">{{
-                  view ? $t('common.view', { count: numFormatter(view) }, view) : `${viewStr}${$t('common.viewWithoutNum')}`
-                }}</span>
-                <template v-if="danmaku || danmakuStr">
-                  <span text-xs font-light mx-1>•</span>
-                  <span>{{ danmaku ? $t('common.danmaku', { count: numFormatter(danmaku) }, danmaku) : `${danmakuStr}${$t('common.danmakuWithoutNum')}` }}</span>
-                </template>
-              </span>
             </div>
-            <!-- Video Description -->
-            <!-- <div
-              v-if="desc"
-              :title="desc"
-              class="keep-two-lines"
-              mt-2 text="base $bew-text-3" w-full max-h-12
-              style="white-space: pre-line;"
-            >
-              {{ desc }}
-            </div> -->
 
-            <div text="base $bew-text-2">
-              <!-- View & Danmaku Count -->
-              <template v-if="!horizontal">
-                <span v-if="view || viewStr">{{
-                  view ? $t('common.view', { count: numFormatter(view) }, view) : `${viewStr}${$t('common.viewWithoutNum')}`
-                }}</span>
-                <template v-if="danmaku || danmakuStr">
-                  <span text-xs font-light mx-1>•</span>
-                  <span>{{ danmaku ? $t('common.danmaku', { count: numFormatter(danmaku) }, danmaku) : `${danmakuStr}${$t('common.danmakuWithoutNum')}` }}</span>
-                </template>
-                <br>
-              </template>
-
+            <div flex="~ items-center gap-1 wrap" mt-2>
               <!-- Tag -->
               <span
-                v-if="tag" text="sm $bew-theme-color" p="x-2 y-1" rounded="$bew-radius" bg="$bew-theme-color-20"
-                w-fit m="t-2 r-2"
+                v-if="tag"
+                text="sm $bew-theme-color" p="x-2 y-1" rounded="$bew-radius" bg="$bew-theme-color-20"
               >
                 {{ tag }}
               </span>
-              <!-- Capsule -->
-              <span
-                v-if="publishedTimestamp || capsuleText" text="$bew-text-3 sm" inline-block mt-2 p="x-2 y-1"
-                bg="$bew-fill-1" rounded-4
+              <!-- View & Danmaku Count -->
+              <div
+                text="sm $bew-text-3" p="x-2 y-1" rounded="$bew-radius" bg="$bew-fill-1"
+                inline-block
               >
-                {{ publishedTimestamp ? calcTimeSince(publishedTimestamp * 1000) : capsuleText }}
-              </span>
+                <span v-if="view || viewStr">
+                  {{ view ? $t('common.view', { count: numFormatter(view) }, view) : `${viewStr}${$t('common.viewWithoutNum')}` }}
+                </span>
+                <template v-if="danmaku || danmakuStr">
+                  <span ml-2>{{ danmaku ? $t('common.danmaku', { count: numFormatter(danmaku) }, danmaku) : `${danmakuStr}${$t('common.danmakuWithoutNum')}` }}</span>
+                </template>
+                <br>
+              </div>
+              <div flex="inline items-center gap-1">
+                <!-- Video type -->
+                <span
+                  v-if="type !== 'horizontal'"
+                  text="$bew-text-3 sm" inline-block w-7 h-7 bg="$bew-fill-1"
+                  flex="~ items-center justify-center"
+                  rounded-4
+                >
+                  <mingcute:cellphone-2-line v-if="type === 'vertical'" />
+                  <mingcute:movie-line v-else-if="type === 'bangumi'" />
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -468,11 +461,10 @@ function handleUndo() {
               <div w="3/4" h-5 />
             </div>
             <div grid gap-2 mt-4>
-              <div w="50%" h-4 />
               <div w="80%" h-4 />
             </div>
-            <div mt-4 flex>
-              <div text="transparent sm" inline-block p="x-2 y-1" rounded-4>
+            <div mt-2 flex>
+              <div text="transparent sm" inline-block p="x-2" h-7 rounded-4>
                 hello world
               </div>
             </div>
@@ -503,7 +495,7 @@ function handleUndo() {
               <div w="70%" h-4 />
             </div>
             <div mt-4 flex>
-              <div text="transparent sm" inline-block p="x-2 y-1" rounded-4>
+              <div text="transparent sm" inline-block p="x-2" h-7 rounded-4>
                 hello world
               </div>
             </div>

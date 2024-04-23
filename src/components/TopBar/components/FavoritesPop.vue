@@ -123,6 +123,10 @@ function changeCategory(categoryItem: FavoriteCategory) {
   activatedFavoriteTitle.value = categoryItem.title
 }
 
+function isMusic(item: FavoriteResource) {
+  return item.link.includes('bilibili://music')
+}
+
 defineExpose({
   refreshFavoriteResources,
 })
@@ -224,7 +228,8 @@ defineExpose({
           <a
             v-for="item in favoriteResources"
             :key="item.id"
-            :href="`//www.bilibili.com/video/${item.bvid}`" :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
+            :href="isMusic(item) ? `https://www.bilibili.com/audio/au${item.id}` : `//www.bilibili.com/video/${item.bvid}`"
+            :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
             hover:bg="$bew-fill-2"
             rounded="$bew-radius"
             m="first:t-50px last:b-4" p="2"

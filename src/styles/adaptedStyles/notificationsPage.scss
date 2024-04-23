@@ -33,7 +33,11 @@
 
   #link-message-container {
     z-index: 1;
+  }
 
+  // #region theme color adaption part
+  // Increase the priority of the style inside by writing a non-existent selector in `:not()`
+  :not(fdjslfds) {
     .space-left {
       .item:hover a,
       .item.active a,
@@ -53,7 +57,18 @@
     .line-1 .like-item:hover,
     .space-right .space-right-top .title a:hover,
     .button-box .item > button.active,
-    .operate-btn {
+    .operate-btn,
+    .action-menu .menu-list a:hover,
+    .bp-popup-panel .title-ctnr .popup-title,
+    .bl-button--ghost,
+    .action-button.del-button:hover svg *,
+    .love-card .action-button:hover > svg *,
+    .content .input-section .row .emoji-btn:hover svg *,
+    .content .input-section .row .emoji-btn.active svg *,
+    .reply-card .action-button:not(.del-button):hover > svg *,
+    .at-card .action-button:not(.del-button):hover > svg *,
+    .action-button.active svg *,
+    .bili-im .left .title .back-link:hover {
       color: var(--bew-theme-color);
     }
 
@@ -64,7 +79,8 @@
       color: var(--bew-theme-color) !important;
     }
 
-    .send-btn.active {
+    .send-btn.active,
+    .bl-button--ghost:hover {
       color: white;
     }
 
@@ -75,11 +91,7 @@
     .css-o1815x .border,
     .css-o1815x .dot,
     .action-button:hover .border,
-    .action-button > .action-icon.active .border,
-    .content .input-section .row .emoji-btn:hover svg,
-    .content .input-section .row .emoji-btn.active svg,
-    .action-button:hover svg,
-    .action-button.active svg {
+    .action-button > .action-icon.active .border {
       fill: var(--bew-theme-color) !important;
     }
 
@@ -88,7 +100,9 @@
     .medal-system,
     .medal-master,
     .send-btn.active,
-    .operate-btn {
+    .operate-btn,
+    .bl-button--ghost,
+    .bl-button--ghost:hover {
       border-color: var(--bew-theme-color);
     }
 
@@ -98,6 +112,10 @@
       border-color: var(--bew-theme-color) !important;
     }
 
+    .tab-list .tab-item.active::before {
+      border-top-color: var(--bew-theme-color);
+    }
+
     .medal-admin,
     .medal-system,
     .medal-master,
@@ -105,7 +123,9 @@
     .tab-list .tab-item.active::after,
     .content .btnrow .btn.save,
     .send-button,
-    .notify-number {
+    .notify-number,
+    .bl-button--primary,
+    .bl-button--ghost:hover {
       background-color: var(--bew-theme-color);
     }
 
@@ -114,7 +134,8 @@
       background-color: var(--bew-theme-color) !important;
     }
 
-    .send-btn.active:hover {
+    .send-btn.active:hover,
+    .bl-button--primary:hover {
       background-color: var(--bew-theme-color-80);
     }
 
@@ -126,190 +147,223 @@
       filter: var(--bew-filter-icon-glow);
     }
   }
+  // #endregion
 
+  // #region dark mode adaption part
   &.dark {
     // remove background in dark mode
     #message-navbar + .container::after {
       display: none;
     }
 
-    #link-message-container {
-      .space-left {
-        .title,
-        .item a {
-          color: var(--bew-text-1);
-        }
-
-        .side-bar .icon {
-          filter: contrast(0) brightness(2);
-        }
-      }
-
-      .loading .progress {
-        background-color: transparent;
-        filter: contrast(0) brightness(2);
-      }
-
-      .space-right .space-right-top .title,
-      .space-right .line-2,
-      .line-1 .name-field,
+    .space-left {
       .title,
-      .config,
-      .radio-selector,
-      .header .tab,
-      .bili-im .list-item .name,
-      .bili-im .list-item .last-word,
-      .bili-im .message .message-content:not(.is-img),
-      .bili-im
-        .msg-notify
-        .cover-container
-        .table-container
-        .modules
-        .module
-        .detail,
-      .bili-im .core-style,
-      .detail .content,
-      .follow-btn.active,
-      .bp-emoji-box .emoji.kaomoji,
-      .bp-emoji-box2 .emoji.kaomoji,
-      .reply-textarea,
-      .ar-recommend-item__info--title {
+      .item a {
         color: var(--bew-text-1);
       }
 
-      .line-1,
-      .text-box,
-      .bottom,
-      .tip,
-      .bili-im .msg-notify .content,
-      .follow-btn.inactive,
-      .notify-wrapper .notify-text,
-      .msg-time .time,
-      .send-btn:not(.active),
-      .orginal-reply,
-      .content .input-section .row .emoji-btn,
-      .content .btnrow .btn.save.disabled,
-      .content .btnrow .btn.clear,
-      .msg-push-new__leave-message--text {
-        color: var(--bew-text-2);
-      }
-
-      .line-3,
-      .line-3 *,
-      .bili-im
-        .msg-notify
-        .cover-container
-        .table-container
-        .modules
-        .module
-        .mtitle,
-      .content .btnrow .btn.clear:hover {
-        color: var(--bew-text-3);
-      }
-
-      .divider,
-      .at-item:not(:last-child)::after,
-      .love-item:not(:last-child)::after,
-      .header,
-      .bili-im .left,
-      .bili-im .left .title,
-      .bili-im .right .title,
-      .bili-im .send-box,
-      .liked-user:not(:last-child)::after,
-      .follow-btn.active,
-      .divided-line,
-      .static-popup,
-      .send-btn:not(.active),
-      .content .input-section,
-      .content .input-section .row .emoji-btn,
-      .content .btnrow .btn.clear,
-      .reply-textarea {
-        border-color: var(--bew-border-color);
-      }
-
-      .orginal-reply {
-        border-color: var(--bew-text-2);
-      }
-
-      .space-right .space-right-top .title,
-      .card,
-      .config {
-        box-shadow: unset;
-      }
-
-      .config .config-item:not(:first-child)::before,
-      .bili-im .msg-notify hr,
-      .divider-last::before, .divider-last::after,
-      .header::after,
-      .split-line {
-        background-color: var(--bew-border-color);
-      }
-
-      .bili-im .left,
-      .bili-im .msg-notify,
-      .bili-im .msg-push-new,
-      .bili-im .message .message-content:not(.is-img),
-      .bili-im .send-box,
-      .follow-btn.inactive,
-      .follow-btn.active,
-      .notify-wrapper .notify-text,
-      .bp-emoji-box .pagination,
-      .bp-emoji-box2 .pagination,
-      .send-btn:not(.active),
-      .toggle,
-      .content .btnrow .btn.save.disabled,
-      .reply-textarea,
-      .list-item.top {
-        background-color: var(--bew-fill-1);
-      }
-
-      .bili-im .list-item.active,
-      .bili-im .list-item:hover,
-      .bp-emoji-box .emoji-cover.selected,
-      .bp-emoji-box .emoji:hover,
-      .bp-emoji-box2 .emoji-cover.selected,
-      .bp-emoji-box2 .emoji:hover {
-        background-color: var(--bew-fill-2);
-      }
-
-      .msg-push-new__leave-message {
-        background-color: var(--bew-fill-3);
-      }
-
-      .space-left,
-      .space-right,
-      .emoji-list .emoji {
-        background-color: transparent;
-      }
-
-      .link-progress-tv {
-        background-color: transparent !important;
-      }
-
-      .space-right-top .title,
-      .card,
-      .config,
-      .bili-im,
-      .bili-im .message-list {
-        background-color: var(--bew-content-solid-1);
-      }
-
-      .static-popup {
-        background-color: var(--bew-elevated-solid-1);
-      }
-
-      .follow-btn.inactive,
-      .content .btnrow .btn.save.disabled {
-        opacity: 0.6;
-      }
-
-      .action-button > .action-icon .border {
-        fill: var(--bew-text-3);
-      }
-
-      .link-progress-tv {
-        filter: invert(1) brightness(2);
+      .side-bar .icon {
+        filter: contrast(0) brightness(2);
       }
     }
+
+    .loading .progress {
+      background-color: transparent;
+      filter: contrast(0) brightness(2);
+    }
+
+    .space-right .space-right-top .title,
+    .space-right .line-2,
+    .line-1 .name-field,
+    .title,
+    .config,
+    .radio-selector,
+    .header .tab,
+    .bili-im .list-item .name,
+    .bili-im .list-item .last-word,
+    .bili-im .message .message-content:not(.is-img),
+    .bili-im
+      .msg-notify
+      .cover-container
+      .table-container
+      .modules
+      .module
+      .detail,
+    .bili-im .core-style,
+    .detail .content,
+    .follow-btn.active,
+    .bp-emoji-box .emoji.kaomoji,
+    .bp-emoji-box2 .emoji.kaomoji,
+    .reply-textarea,
+    .ar-recommend-item__info--title,
+    .action-menu .menu-list a,
+    .bp-popup-panel .content-text,
+    .tab-list,
+    .group-helper-msg-list .name,
+    .share-card.video-type .content {
+      color: var(--bew-text-1);
+    }
+
+    .line-1,
+    .text-box,
+    .bottom,
+    .tip,
+    .bili-im .msg-notify .content,
+    .follow-btn.inactive,
+    .notify-wrapper .notify-text,
+    .msg-time .time,
+    .send-btn:not(.active),
+    .orginal-reply,
+    .content .input-section .row .emoji-btn,
+    .content .btnrow .btn.save.disabled,
+    .content .btnrow .btn.clear,
+    .msg-push-new__leave-message--text,
+    .bp-icon-font.icon-close:before {
+      color: var(--bew-text-2);
+    }
+
+    .line-3,
+    .line-3 *,
+    .bili-im
+      .msg-notify
+      .cover-container
+      .table-container
+      .modules
+      .module
+      .mtitle,
+    .content .btnrow .btn.clear:hover {
+      color: var(--bew-text-3);
+    }
+
+    .divider,
+    .at-item:not(:last-child)::after,
+    .love-item:not(:last-child)::after,
+    .header,
+    .bili-im .left,
+    .bili-im .left .title,
+    .bili-im .right .title,
+    .bili-im .send-box,
+    .liked-user:not(:last-child)::after,
+    .follow-btn.active,
+    .divided-line,
+    .static-popup,
+    .send-btn:not(.active),
+    .content .input-section,
+    .content .input-section .row .emoji-btn,
+    .content .btnrow .btn.clear,
+    .reply-textarea,
+    .action-menu .menu-list {
+      border-color: var(--bew-border-color);
+    }
+
+    .action-menu .menu-list:before {
+      border-right-color: var(--bew-border-color);
+      border-top-color: var(--bew-border-color);
+    }
+
+    .share-card .footer {
+      border-top-color: var(--bew-border-color);
+    }
+
+    .orginal-reply {
+      border-color: var(--bew-text-2);
+    }
+
+    .space-right .space-right-top .title,
+    .card,
+    .config {
+      box-shadow: unset;
+    }
+
+    .config .config-item:not(:first-child)::before,
+    .bili-im .msg-notify hr,
+    .divider-last::before,
+    .divider-last::after,
+    .header::after,
+    .split-line {
+      background-color: var(--bew-border-color);
+    }
+
+    .bili-im .left,
+    .bili-im .msg-notify,
+    .bili-im .msg-push-new,
+    .bili-im .message .message-content:not(.is-img),
+    .bili-im .send-box,
+    .follow-btn.inactive,
+    .follow-btn.active,
+    .notify-wrapper .notify-text,
+    .bp-emoji-box .pagination,
+    .bp-emoji-box2 .pagination,
+    .send-btn:not(.active),
+    .toggle,
+    .content .btnrow .btn.save.disabled,
+    .reply-textarea,
+    .list-item.top {
+      background-color: var(--bew-fill-1);
+    }
+
+    .bili-im .list-item.active,
+    .bili-im .list-item:hover,
+    .bp-emoji-box .emoji-cover.selected,
+    .bp-emoji-box .emoji:hover,
+    .bp-emoji-box2 .emoji-cover.selected,
+    .bp-emoji-box2 .emoji:hover,
+    .action-menu .menu-list a:hover {
+      background-color: var(--bew-fill-2);
+    }
+
+    .msg-push-new__leave-message {
+      background-color: var(--bew-fill-3);
+    }
+
+    .space-left,
+    .space-right,
+    .emoji-list .emoji {
+      background-color: transparent;
+    }
+
+    .link-progress-tv {
+      background-color: transparent !important;
+    }
+
+    .space-right-top .title,
+    .card,
+    .config,
+    .bili-im,
+    .bili-im .message-list {
+      background-color: var(--bew-content-solid-1);
+    }
+
+    .static-popup,
+    .action-menu .menu-list,
+    .action-menu .menu-list:before,
+    .bp-popup-panel,
+    .group-helper-msg-list,
+    .tab-list .tab-item.active::before,
+    .group-helper-msg-list::after {
+      background-color: var(--bew-elevated-solid-1);
+    }
+
+    .follow-btn.inactive,
+    .content .btnrow .btn.save.disabled {
+      opacity: 0.6;
+    }
+
+    .action-button > .action-icon .border {
+      fill: var(--bew-text-3);
+    }
+
+    .link-progress-tv {
+      filter: invert(1) brightness(2);
+    }
+
+    .share-card.video-type .content {
+      color: var(--bew-text-1);
+    }
+
+    .share-card .footer {
+      border-top: 1px solid var(--bew-border-color);
+    }
   }
+  // #endregion
 }

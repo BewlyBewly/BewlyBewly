@@ -3,10 +3,11 @@ import { useI18n } from 'vue-i18n'
 import type { Ref } from 'vue'
 import { onMounted, reactive, ref, watch } from 'vue'
 import { useDateFormat } from '@vueuse/core'
-import type { HistoryItem } from '../types'
-import { HistoryType } from '../types'
 import { isHomePage, removeHttpFromUrl, smoothScrollToTop } from '~/utils/main'
 import { calcCurrentTime } from '~/utils/dataFormatter'
+import { Business } from '~/models/history/history'
+import type { List as HistoryItem, HistoryResult } from '~/models/history/history'
+
 import API from '~/background/msg.define'
 
 const { t } = useI18n()
@@ -39,7 +40,7 @@ const noMoreContent = ref<boolean>(false)
 const livePage = ref<number>(1)
 const historysWrap = ref<HTMLElement>() as Ref<HTMLElement>
 
-watch(activatedTab, (newVal: number, oldVal: number) => {
+watch(activatedTab, (newVal: number | undefined, oldVal: number | undefined) => {
   if (newVal === oldVal)
     return
 
@@ -48,20 +49,18 @@ watch(activatedTab, (newVal: number, oldVal: number) => {
     smoothScrollToTop(historysWrap.value, 300)
 
   if (newVal === 0) {
-    getHistoryList(HistoryType.Archive)
+    getHistoryList(Business.ARCHIVE)
   }
   else if (newVal === 1) {
     livePage.value = 1
-    getHistoryList(HistoryType.Live)
+    getHistoryList(Business.LIVE)
   }
   else if (newVal === 2) {
-    getHistoryList(HistoryType.Article)
+    getHistoryList(Business.ARTICLE)
   }
-})
+}, { immediate: true })
 
 onMounted(() => {
-  getHistoryList(HistoryType.Archive)
-
   if (historysWrap.value) {
     historysWrap.value.addEventListener('scroll', () => {
       // When you scroll to the bottom, they will automatically
@@ -74,19 +73,19 @@ onMounted(() => {
       ) {
         if (activatedTab.value === 0 && !noMoreContent.value) {
           getHistoryList(
-            HistoryType.Archive,
+            Business.ARCHIVE,
             historys[historys.length - 1].view_at,
           )
         }
         else if (activatedTab.value === 1 && !noMoreContent.value) {
           getHistoryList(
-            HistoryType.Live,
+            Business.LIVE,
             historys[historys.length - 1].view_at,
           )
         }
         else if (activatedTab.value === 2 && !noMoreContent.value) {
           getHistoryList(
-            HistoryType.Article,
+            Business.ARTICLE,
             historys[historys.length - 1].view_at,
           )
         }
@@ -112,35 +111,35 @@ function onClickTab(tabId: number) {
  * @return {string} url
  */
 function getHistoryUrl(item: HistoryItem) {
+  if (item.uri)
+    return item.uri
+
   // Video
-  if (activatedTab.value === 0) {
-    if (item.history.business === HistoryType.PGC)
-      return removeHttpFromUrl(item.uri)
-    if (item.history.business === HistoryType.Archive && item?.videos && item.videos > 0)
+  if (item.history.business === Business.ARCHIVE) {
+    if (item?.videos && item.videos > 0)
       return `//www.bilibili.com/video/${item.history.bvid}?p=${item.history.page}`
     return `//www.bilibili.com/video/${item.history.bvid}`
   }
   // Live
-  else if (activatedTab.value === 1) {
+  else if (item.history.business === Business.LIVE) {
     return `//live.bilibili.com/${item.history.oid}`
   }
   // Article
-  else if (activatedTab.value === 2) {
+  else if (item.history.business === Business.ARTICLE || item.history.business === Business.ARTICLE_LIST) {
     if (item.history.cid === 0)
       return `//www.bilibili.com/read/cv${item.history.oid}`
     else
       return `//www.bilibili.com/read/cv${item.history.cid}`
   }
-
   return ''
 }
 
 /**
  * Get history list
- * @param {HistoryType} type
- * @param {number} view_at Last viewed timestamp
+ * @param type
+ * @param view_at Last viewed timestamp
  */
-function getHistoryList(type: HistoryType, view_at = 0 as number) {
+function getHistoryList(type: Business, view_at = 0 as number) {
   isLoading.value = true
   browser.runtime
     .sendMessage({
@@ -148,7 +147,7 @@ function getHistoryList(type: HistoryType, view_at = 0 as number) {
       type,
       view_at,
     })
-    .then((res) => {
+    .then((res: HistoryResult) => {
       if (res.code === 0) {
         if (Array.isArray(res.data.list) && res.data.list.length > 0)
           historys.push(...res.data.list)
@@ -325,7 +324,7 @@ function getHistoryList(type: HistoryType, view_at = 0 as number) {
                       m="1"
                       rounded="$bew-radius-half"
                     >
-                      Offline
+                      OFFLINE
                     </div>
                   </div>
                 </template>
@@ -367,7 +366,7 @@ function getHistoryList(type: HistoryType, view_at = 0 as number) {
                     gap-1
                     m="l-2"
                   ><tabler:live-photo />
-                    Live
+                    LIVE
                   </span>
                 </div>
                 <p text="$bew-text-2 sm">

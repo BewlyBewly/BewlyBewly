@@ -3,7 +3,7 @@
 English | [官话 - 简体中文](README-cmn_CN.md) | [官話 - 正體中文](README-cmn_TW.md) | [廣東話](README-jyut.md)
 
 <p align="center" style="margin-bottom: 0px !important;">
-<img width="150" src="https://user-images.githubusercontent.com/33394391/160250512-410b71fc-7f25-4caf-b850-429227ff082a.png"><br/>
+<img width="150" alt="bewlybewly icon" src="https://user-images.githubusercontent.com/33394391/160250512-410b71fc-7f25-4caf-b850-429227ff082a.png"><br/>
 </p>
 
 <h1 align="center" style="margin-top: 0px;">BewlyBewly</h1>
@@ -15,19 +15,31 @@ English | [官话 - 简体中文](README-cmn_CN.md) | [官話 - 正體中文](RE
 
 ## 👋 Introduction
 
-BewlyBewly is a browser extension for BiliBili that aims to enhance the user experience by redesigning the BiliBili UI. The design is inspired by YouTube, Vision OS, and iOS, resulting in a more visually appealing and user-friendly interface.
-
-This project uses the [vitesse-webext](https://github.com/antfu/vitesse-webext) template for development. Without this template, it may not be possible to develop this project.
+BewlyBewly is a browser extension for BiliBili that aims to enhance the user experience by redesigning the BiliBili UI.
+The design is inspired by YouTube, Vision OS, and iOS, resulting in a more visually appealing and user-friendly interface.
+This project uses the [vitesse-webext](https://github.com/antfu/vitesse-webext) template for development.
+Without this template, it may not be possible to develop this project.
 
 ## ⬇️ Installation
 
 ### Online Installation
 
-Even in the Edge browser, we strongly recommend you install it in the Chrome web store. In terms of review speed, the Chrome web store is slightly faster than Edge Add-ons.
+> [!Caution]
+> Even in the Edge browser, we strongly recommend you install it in the Chrome web store.
+> In terms of review speed, the Chrome web store is faster than Edge Add-ons.
+>
+> Additionally, the Chrome Web Store version of BewlyBewly will address and fix critical bugs more quickly.
 
 - Chrome: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>
-- Edge: <https://microsoftedge.microsoft.com/addons/detail/bewlybewly/kceadhehfjdiakpiphpjgolbgehjdmja>
+- Edge (NOT RECOMMENDED): <https://microsoftedge.microsoft.com/addons/detail/bewlybewly/kceadhehfjdiakpiphpjgolbgehjdmja>
 - Firefox: <https://addons.mozilla.org/lt/firefox/addon/bewlybewly/>
+
+#### To Firefox users
+
+> [!WARNING]
+> When using the Firefox browser, remember to enable all permissions shown in the picture below for normal use of BewlyBewly
+
+<br/> <img width="655" alt="enable all bewlybewly permissions on firefox" src="https://github.com/hakadao/BewlyBewly/assets/33394391/9566aed8-040a-4435-a2ec-c61117f8e429">
 
 ### Local Installation
 
@@ -39,7 +51,8 @@ Even in the Edge browser, we strongly recommend you install it in the Chrome web
 
 > Ensure you installed [extension.zip](https://github.com/hakadao/BewlyBewly/releases) .
 
-Opening the `edge://extensions` page in the Edge or `chrome://extensions` page in Chrome, simply drag and drop the downloaded `extension.zip` file into the browser to complete the installation.
+Opening the `edge://extensions` page in the Edge or `chrome://extensions` page in Chrome,
+simply drag and drop the downloaded `extension.zip` file into the browser to complete the installation.
 
 <details>
  <summary> Another installation method for Edge & Chrome </summary>
@@ -62,79 +75,27 @@ Opening the `edge://extensions` page in the Edge or `chrome://extensions` page i
 
 </details>
 
-## 🔧 Development & Build
-
-Please use the dev branch for development
-
-### Chrome or Edge browser
-
-<details>
-  <summary>Chrome or Edge browser</summary>
-
-#### Development (Chrome or Edge)
-
-```bash
-pnpm dev
-```
-
-Then **load the extension in the browser with the `extension/` folder**.
-After each modification, you need to click the [Extensions Reloader](https://chromewebstore.google.com/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) button and refresh the page to ensure the changes will be applied.
-
-##### Build (Chrome or Edge)
-
-To build the extension, run
-
-```bash
-pnpm build
-```
-
-And then pack files under the `extension`
-
-</details>
-
-### Firefox browser
-
-<details>
-  <summary>Firefox browser</summary>
-
-#### Development (Firefox)
-
-```bash
-pnpm dev-firefox
-```
-
-Then **load the extension in the browser with the `extension-firefox/` folder**.
-After each modification, you need to click the [Extensions Reloader](https://chromewebstore.google.com/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) button and refresh the page to ensure the changes will be applied.
-
-#### Build (Firefox)
-
-To build the extension, run
-
-```bash
-pnpm build-firefox
-```
-
-And then pack files under the `extension-firefox`
-
-</details>
-
 ## 🤝 Contribution
 
-### About Branches
+See [CONTRIBUTION.md](docs/CONTRIBUTING.md)
 
-- **Main**: This branch is designed for changes that are restricted to documentation files like READMEs, without altering the code or its functionality.
-- **Dev**: Use this branch for new features, performance improvements or modifications to i18n files.
-- **Bugfixes**: This branch should be used exclusively for fixing bugs that appear in the main branch.
+### Contributors
 
-### I18n
-
-- When doing translations, if you have a language you are not familiar with, you can use another language that you have translated and point out what language you cannot translate in the pull request.
-
-- **Please MANUALLY MAINTAIN the i18n files!!!** Do not use `i18n Ally` or other extensions to maintain them. I know you might be confused or might not like this, but using `i18n Ally` for the maintenance will make it uncertain where to place the translations afterward or delete the code comments.
+![Contributors](https://contrib.rocks/image?repo=hakadao/BewlyBewly)
 
 ## ❤️ Credits
 
 - [vitesse-webext](https://github.com/antfu/vitesse-webext) - The template used for this project
-- [UserScripts/bilibiliHome](https://github.com/indefined/UserScripts/tree/master/bilibiliHome), [bilibili-app-recommend](https://github.com/magicdawn/bilibili-app-recommend) - Reference source for obtaining the access key
+- [UserScripts/bilibiliHome](https://github.com/indefined/UserScripts/tree/master/bilibiliHome),
+[bilibili-app-recommend](https://github.com/magicdawn/bilibili-app-recommend) - Reference source for obtaining the access key
 - [Bilibili-Evolved](https://github.com/the1812/Bilibili-Evolved) - Partial implementation of functionalities
 - [bilibili-API-collect](https://github.com/SocialSisterYi/bilibili-API-collect)
+
+## Donate
+
+If you like this project, you can consider donating to support me.
+I'm not in financial difficulty, so support as you see fit.
+
+<a href="https://afdian.net/a/Hakadao" target="_blank">
+  <img alt="afdian" src="https://github.com/hakadao/BewlyBewly/assets/33394391/41711f39-8c6c-4dea-964e-5ae7f0d5b8ad" width="350">
+</a>

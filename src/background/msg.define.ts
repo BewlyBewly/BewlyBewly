@@ -28,9 +28,8 @@ enum HISTORY {
 }
 enum MOMENT {
   GET_TOP_BAR_NEW_MOMENTS_COUNT = 'getTopBarNewMomentsCount',
-  GET_TOP_BAR_NEW_MOMENTS = 'getTopBarNewMoments',
-  GET_TOP_BAR_HISTORY_MOMENTS = 'getTopbarHistoryMoments',
-  GET_TOP_BAR_LIVE_MOMENTS = 'getTopbarLiveMoments',
+  GET_TOP_BAR_MOMENTS = 'getTopBarMoments',
+  GET_TOP_BAR_LIVE_MOMENTS = 'getTopBarLiveMoments',
   GET_MOMENTS = 'getMoments',
 }
 enum NOTIFICATION {

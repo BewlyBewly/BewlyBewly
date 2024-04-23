@@ -11,6 +11,7 @@ export interface Settings {
   language: string
   enableHorizontalScrolling: boolean
   openLinkInCurrentTab: boolean
+  enableVideoPreview: boolean
   enableVideoCtrlBarOnVideoCard: boolean
   hoverVideoCardDelayed: boolean
   autoHideTopBar: boolean
@@ -57,6 +58,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   language: '',
   enableHorizontalScrolling: false,
   openLinkInCurrentTab: false,
+  enableVideoPreview: true,
   enableVideoCtrlBarOnVideoCard: false,
   hoverVideoCardDelayed: false,
   autoHideTopBar: false,

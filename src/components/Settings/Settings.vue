@@ -222,7 +222,7 @@ function setCurrentTitle() {
             <!-- <div h-80px mt--8 /> -->
 
             <Transition name="page-fade">
-              <Component :is="settingsMenu[activatedMenuItem]" />
+              <Component :is="settingsMenu[activatedMenuItem as keyof typeof settingsMenu]" />
             </Transition>
           </main>
         </OverlayScrollbarsComponent>

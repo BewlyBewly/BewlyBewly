@@ -1,5 +1,70 @@
 # Changelog
 
+## [0.17.0](https://github.com/hakadao/BewlyBewly/compare/v0.16.7...v0.17.0) (2024-04-22)
+
+
+### Features
+
+* implement a fake not interested feature in web recommend video card ([37c63b3](https://github.com/hakadao/BewlyBewly/commit/37c63b3b7c594904c1aca4e1d63e5840e9c3f7af))
+
+
+### Bug Fixes
+
+* only cantonese & mandarin tw use traditional chinese ([#623](https://github.com/hakadao/BewlyBewly/issues/623)) ([18e77fd](https://github.com/hakadao/BewlyBewly/commit/18e77fdd6eab586049ca5ac2350aa06d00549b36))
+* tab missing after costuming order ([#634](https://github.com/hakadao/BewlyBewly/issues/634)) ([e51f486](https://github.com/hakadao/BewlyBewly/commit/e51f48617669da77f5be0b7eb8eb423b8d9700e4))
+* 右侧dock自动隐藏和滚动条的冲突 ([#632](https://github.com/hakadao/BewlyBewly/issues/632)) ([2bed50f](https://github.com/hakadao/BewlyBewly/commit/2bed50f2cbac89b2b4c72154dc2e56d373f17b4e))
+
+## [0.16.7](https://github.com/hakadao/BewlyBewly/compare/v0.16.6...v0.16.7) (2024-04-22)
+
+
+### Bug Fixes
+
+* follow system theme change ([e61a27b](https://github.com/hakadao/BewlyBewly/commit/e61a27ba8b97ed0868c71ccaf4b3460e7c4484cf))
+* i18n for channel ([3bc80f1](https://github.com/hakadao/BewlyBewly/commit/3bc80f1a7e829d1fae0f7f07739ce87ca5d6fbbf))
+* improve share card dark mode ([#629](https://github.com/hakadao/BewlyBewly/issues/629)) ([78bbc95](https://github.com/hakadao/BewlyBewly/commit/78bbc9546a60018e16ff922cd7e3a45a7d7c2268))
+* improve share card dark mode ([#629](https://github.com/hakadao/BewlyBewly/issues/629)) ([fdb3d30](https://github.com/hakadao/BewlyBewly/commit/fdb3d304e35d4ad36814d2cfd24c89adad2af77e))
+
+## [0.16.6](https://github.com/hakadao/BewlyBewly/compare/v0.16.5...v0.16.6) (2024-04-21)
+
+
+### Features
+
+* adjust reach bottom distance ([8ada692](https://github.com/hakadao/BewlyBewly/commit/8ada69274b424f06f79cd3bd9fe809c04c343993))
+* **NotificationsPop:** change the replys icon ([e246720](https://github.com/hakadao/BewlyBewly/commit/e246720bad80f88c20a081b4f92448c8becf21a7))
+
+
+### Bug Fixes
+
+* cannot jump to music page on Favorites page and FavoritesPop ([#606](https://github.com/hakadao/BewlyBewly/issues/606)) ([6d4db4e](https://github.com/hakadao/BewlyBewly/commit/6d4db4e658e8dab44952f4ce4b6da6bf125cff07))
+* cannot open certain links on History page and HistoryPop ([#602](https://github.com/hakadao/BewlyBewly/issues/602)) ([9703920](https://github.com/hakadao/BewlyBewly/commit/9703920e7c72949c98b4c897e86c8198dc133e8f))
+* **MomentsPop:** cannot record the scroll position ([#451](https://github.com/hakadao/BewlyBewly/issues/451)) ([7d6e2f6](https://github.com/hakadao/BewlyBewly/commit/7d6e2f64c0842d2055064ac656354c92db65864f))
+* **notificationsPage:** update missing styles for better adaptation ([#605](https://github.com/hakadao/BewlyBewly/issues/605)) ([0441acd](https://github.com/hakadao/BewlyBewly/commit/0441acd840b3c5b89a39ca902a7bb0ad892eb030))
+* **Ranking:** cannot show the variety show ranking list ([#576](https://github.com/hakadao/BewlyBewly/issues/576)) ([c5c1a16](https://github.com/hakadao/BewlyBewly/commit/c5c1a1614584ef5b2eff6bb9d6b641c367c7b868))
+* resolve duplicate request issue ([3b58fbf](https://github.com/hakadao/BewlyBewly/commit/3b58fbf33aa347942def7c9c614c938c5f0f536b))
+* **TopBar:** adjust mouse sensitivity on top bar ([#507](https://github.com/hakadao/BewlyBewly/issues/507)) ([32b6d11](https://github.com/hakadao/BewlyBewly/commit/32b6d1169b7ae91aa62e54aee3a28c2e5d601066))
+* **TopBar:** cannot remove the new moments count immediately ([#425](https://github.com/hakadao/BewlyBewly/issues/425)) ([591ea2e](https://github.com/hakadao/BewlyBewly/commit/591ea2ef77fd44a3f98a1fcf71574891389d3085))
+* **TopBar:** notification count error displaying 999+ issue ([1a8b54a](https://github.com/hakadao/BewlyBewly/commit/1a8b54a9aedaeaddfba1f015605f4d2a128fefc1))
+* **videoPage.scss:** update missing styles for better adaptation ([#609](https://github.com/hakadao/BewlyBewly/issues/609)) ([f796a38](https://github.com/hakadao/BewlyBewly/commit/f796a389850645a3c8cddede3194465ac862a2a4))
+* **watchLaterPage.scss:** update missing styles for better adaptation ([45e391c](https://github.com/hakadao/BewlyBewly/commit/45e391ca90ac2753947039212e357b24c382d5c4))
+
+
+### Docs
+
+* add CONTRIBUTING.md ([#586](https://github.com/hakadao/BewlyBewly/issues/586)) ([19e8a20](https://github.com/hakadao/BewlyBewly/commit/19e8a20caa1565eacae557ecdcf78f9dc45fd6e1))
+* add important messages for firefox users and edge users ([b7aedfc](https://github.com/hakadao/BewlyBewly/commit/b7aedfcf441ad82c477b0399f1694ad6f7b89e68))
+* Update donation links in README files ([c2d489c](https://github.com/hakadao/BewlyBewly/commit/c2d489c3dd9a0054eb7d7c5efacadd146ffbbaca))
+
+
+### CI
+
+* **build:** ignore `docs/**` path to trigger workflow ([402812c](https://github.com/hakadao/BewlyBewly/commit/402812c1370f27cdc111e389e7099de6d79a743c))
+* **changelog:** set the default branch ([914b69e](https://github.com/hakadao/BewlyBewly/commit/914b69e08e262738d9de46033f616273c1474a7f))
+* remove sync-bugfixes ([16e9308](https://github.com/hakadao/BewlyBewly/commit/16e930839e5ced63a2ec567c4c82c52fca5ec49b))
+* remove sync-dev.yml ([078a136](https://github.com/hakadao/BewlyBewly/commit/078a1360a60efb14d94c1609461a624f57d06bf4))
+* Update .github/workflows/changelog.yml ([8fa41a9](https://github.com/hakadao/BewlyBewly/commit/8fa41a9fe5982a69a3757d4b2f349677f31aa920))
+* update build ([bc95c48](https://github.com/hakadao/BewlyBewly/commit/bc95c48f917979cb88e8e13aad4726c3d7eb59b3))
+* update build.yml ([83adbfb](https://github.com/hakadao/BewlyBewly/commit/83adbfbee440e01cd25e075b4e869e7d3111c121))
+
 ## [0.16.5](https://github.com/hakadao/BewlyBewly/compare/v0.16.4...v0.16.5) (2024-04-14)
 
 ### Bug Fixes
