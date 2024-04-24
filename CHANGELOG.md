@@ -1,5 +1,31 @@
 # Changelog
 
+## [0.18.0](https://github.com/BewlyBewly/BewlyBewly/compare/v0.17.0...v0.18.0) (2024-04-24)
+
+
+### Features
+
+* redesign video card ([9e277cf](https://github.com/BewlyBewly/BewlyBewly/commit/9e277cf468eb4749a13ec76068152dda2a6e066b))
+* show video type ([#645](https://github.com/BewlyBewly/BewlyBewly/issues/645)) ([022482e](https://github.com/BewlyBewly/BewlyBewly/commit/022482e82785fac340a7f3833f6a8c7f36176c1c))
+* **VideoCard:** adjust video card style ([12eaabb](https://github.com/BewlyBewly/BewlyBewly/commit/12eaabb14ed6405d28d918beee0c4608c1510580))
+
+
+### Bug Fixes
+
+* adjust `setHistoryPauseStatus` api name ([#654](https://github.com/BewlyBewly/BewlyBewly/issues/654)) ([5f455ca](https://github.com/BewlyBewly/BewlyBewly/commit/5f455cae95761bf54176e0c96d4b438ffbf25ace))
+* adjust rule for `t.bilibili.com` page ([#653](https://github.com/BewlyBewly/BewlyBewly/issues/653)) ([3ad5f73](https://github.com/BewlyBewly/BewlyBewly/commit/3ad5f735994ae16666ff232c4ac0e680e5440bc8)), closes [#644](https://github.com/BewlyBewly/BewlyBewly/issues/644)
+* horizontal scrolling invalid when reload component ([#642](https://github.com/BewlyBewly/BewlyBewly/issues/642)) ([fffcf3a](https://github.com/BewlyBewly/BewlyBewly/commit/fffcf3a9122ea3e3fc56b21e19abae79a93e8d97))
+
+
+### Docs
+
+* update description for about branches ([8925a8d](https://github.com/BewlyBewly/BewlyBewly/commit/8925a8d6271cc37cf03bc3eaab07265434aa7597))
+
+
+### CI
+
+* use lts ([#646](https://github.com/BewlyBewly/BewlyBewly/issues/646)) ([c145ec1](https://github.com/BewlyBewly/BewlyBewly/commit/c145ec10ace750b4c9d5eb3eb3619b9fbe79e86a))
+
 ## [0.17.0](https://github.com/hakadao/BewlyBewly/compare/v0.16.7...v0.17.0) (2024-04-22)
 
 
