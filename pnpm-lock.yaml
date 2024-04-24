@@ -11,6 +11,9 @@ dependencies:
   dplayer:
     specifier: ^1.27.1
     version: 1.27.1
+  ky:
+    specifier: ^1.2.4
+    version: 1.2.4
   md5:
     specifier: ^2.3.0
     version: 2.3.0
@@ -987,8 +990,8 @@ packages:
       vue-i18n:
         optional: true
     dependencies:
-      '@intlify/message-compiler': 10.0.0-alpha.1
-      '@intlify/shared': 10.0.0-alpha.1
+      '@intlify/message-compiler': 10.0.0-alpha.2
+      '@intlify/shared': 10.0.0-alpha.2
       jsonc-eslint-parser: 1.4.1
       source-map: 0.6.1
       vue-i18n: 9.9.1(vue@3.4.19)
@@ -1002,11 +1005,11 @@ packages:
       '@intlify/message-compiler': 9.9.1
       '@intlify/shared': 9.9.1
 
-  /@intlify/message-compiler@10.0.0-alpha.1:
-    resolution: {integrity: sha512-6tq6eESzjk3PXeO+ZFnWXDBENPmOnvSbgkiFRHblbmzdWLBFcadIgMtuStUibucmlGvAfrXMCmx8k16sH+qMIg==}
+  /@intlify/message-compiler@10.0.0-alpha.2:
+    resolution: {integrity: sha512-OGwttsMwB2BUzhZLraoAfAqcza5UyLMEU013ort3LbmdE6ke/pFONFyxjNQdmFWzW2K868AIVgwx4zo8lbmhjg==}
     engines: {node: '>= 16'}
     dependencies:
-      '@intlify/shared': 10.0.0-alpha.1
+      '@intlify/shared': 10.0.0-alpha.2
       source-map-js: 1.2.0
     dev: true
 
@@ -1017,8 +1020,8 @@ packages:
       '@intlify/shared': 9.9.1
       source-map-js: 1.0.2
 
-  /@intlify/shared@10.0.0-alpha.1:
-    resolution: {integrity: sha512-FxFh2AnuOpIwyzfQoBKmaMNVaVOQkUoLJ4EyXYwCBa4O1VUhIxGRcRd23jF+w47qngzMLf6xuwmSIXd2YX+3tQ==}
+  /@intlify/shared@10.0.0-alpha.2:
+    resolution: {integrity: sha512-pWlpsC3IqkDuIH/5bNlyyiUbAXYymeNXkznORzPWT3qpAe8MazPOm14wMHGn/wESCdB5b9txQson4+CH0ym1hQ==}
     engines: {node: '>= 16'}
     dev: true
 
@@ -1042,7 +1045,7 @@ packages:
         optional: true
     dependencies:
       '@intlify/bundle-utils': 4.0.0(vue-i18n@9.9.1)
-      '@intlify/shared': 10.0.0-alpha.1
+      '@intlify/shared': 10.0.0-alpha.2
       '@rollup/pluginutils': 4.2.1
       '@vue/compiler-sfc': 3.4.19
       debug: 4.3.4
@@ -5516,6 +5519,11 @@ packages:
   /kolorist@1.8.0:
     resolution: {integrity: sha512-Y+60/zizpJ3HRH8DCss+q95yr6145JXZo46OTpFvDZWLfRCE4qChOyk1b26nMaNpfHHgxagk9dXT5OP0Tfe+dQ==}
     dev: true
+
+  /ky@1.2.4:
+    resolution: {integrity: sha512-CfSrf4a0yj1n6WgPT6kQNQOopIGLkQzqSAXo05oKByaH7G3SiqW4a8jGox0p9whMXqO49H7ljgigivrMyycAVA==}
+    engines: {node: '>=18'}
+    dev: false
 
   /latest-version@7.0.0:
     resolution: {integrity: sha512-KvNT4XqAMzdcL6ka6Tl3i2lYeFDgXNCuIX+xNx6ZMVR1dFq+idXd9FLKNMOIx0t9mJ9/HudyX4oZWXZQ0UJHeg==}

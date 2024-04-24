@@ -1,3 +1,6 @@
+import type { Options, ResponsePromise } from 'ky'
+import ky from 'ky'
+
 // 对于fetch的常见后处理
 // 1. 直接返回data
 // 2. json化后返回data
@@ -97,11 +100,11 @@ function apiListenerFactory(API_MAP: APIMAP) {
           : JSON.stringify(targetBody)
       }
       // get cant take body
-      const fetchOpt = { method, headers }
+      const fetchOpt: Options = { method, headers }
       !isGET && Object.assign(fetchOpt, { body: targetBody })
 
       // fetch and after handle
-      let baseFunc = fetch(url, fetchOpt)
+      let baseFunc: ResponsePromise | Promise<any> = ky(url, fetchOpt)
       afterHandle.forEach((func) => {
         if (func.name === sendResponseHandler.name && sendResponse)
           // sendResponseHandler 是一个特殊的后处理函数，需要传入sendResponse

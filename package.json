@@ -36,6 +36,7 @@
   "dependencies": {
     "@types/md5": "^2.3.5",
     "dplayer": "^1.27.1",
+    "ky": "^1.2.4",
     "md5": "^2.3.0",
     "mitt": "^3.0.1",
     "overlayscrollbars": "^2.5.0",

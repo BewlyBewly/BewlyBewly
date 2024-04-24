@@ -23,8 +23,8 @@ export async function getManifest() {
     //   open_in_tab: true,
     // },
     background: isFirefox
-      ? { scripts: ['./dist/background/index.mjs'] }
-      : { service_worker: './dist/background/index.mjs' },
+      ? { scripts: ['./dist/background/index.global.js'] }
+      : { service_worker: './dist/background/index.global.js' },
     icons: {
       16: './assets/icon-512.png',
       48: './assets/icon-512.png',

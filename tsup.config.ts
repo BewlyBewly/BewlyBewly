@@ -7,7 +7,7 @@ export default defineConfig(() => ({
     ...(isDev ? { mv3client: './scripts/client.ts' } : {}),
   },
   outDir: isFirefox ? 'extension-firefox/dist' : 'extension/dist',
-  format: ['esm'],
+  format: ['iife'],
   target: 'esnext',
   ignoreWatch: ['**/extension/**', '**/extension-firefox/**'],
   splitting: false,
