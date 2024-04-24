@@ -24,7 +24,7 @@ enum HISTORY {
   DELETE_HISTORY_ITEM = 'deleteHistoryItem',
   CLEAR_ALL_HISTORY = 'clearAllHistory',
   GET_HISTORY_PAUSE_STATUS = 'getHistoryPauseStatus',
-  SET_HISTORY_PAUSE_STATUS = 'setHistory',
+  SET_HISTORY_PAUSE_STATUS = 'setHistoryPauseStatus',
 }
 enum MOMENT {
   GET_TOP_BAR_NEW_MOMENTS_COUNT = 'getTopBarNewMomentsCount',
