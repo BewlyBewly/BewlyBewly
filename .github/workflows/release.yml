@@ -9,15 +9,14 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2.4.0
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v4.1.3
+      - uses: actions/setup-node@v4.0.2
         with:
           node-version: lts/*
-          cache: pnpm
-
-      - name: Install
-        run: pnpm install
+      - uses: pnpm/action-setup@v3.0.0
+        with:
+          version: 9
+          run_install: true
 
       - name: Lint
         run: pnpm run lint
@@ -25,15 +24,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2.4.0
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v4.1.3
+      - uses: actions/setup-node@v4.0.2
         with:
           node-version: lts/*
-          cache: pnpm
-
-      - name: Install
-        run: pnpm install
+      - uses: pnpm/action-setup@v3.0.0
+        with:
+          version: 9
+          run_install: true
 
       - name: Build
         run: |
