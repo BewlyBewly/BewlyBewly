@@ -3,10 +3,10 @@ import { settings } from '~/logic'
 
 const searchBarFocusCharacters = computed<{ name: string, url: string }[]>(() => {
   return [
-    { name: '22 娘', url: 'https://pic.imgdb.cn/item/64d4f8891ddac507cc772ce5.png' },
-    { name: '33 娘', url: 'https://cdn.jsdelivr.net/gh/hakadao/bilibili-simple-home@master/img/searchBar_33_2.png' },
-    { name: '22 娘', url: 'https://pic.imgdb.cn/item/64d4fb391ddac507cc7ec5ae.png' },
-    { name: '33 娘', url: 'https://pic.imgdb.cn/item/64d4fd251ddac507cc8458fa.png' },
+    { name: '22 娘', url: browser.runtime.getURL('/assets/search-bar-characters/22chan_1.png') },
+    { name: '33 娘', url: browser.runtime.getURL('/assets/search-bar-characters/33chan_1.png') },
+    { name: '22 娘', url: browser.runtime.getURL('/assets/search-bar-characters/22chan_2.png') },
+    { name: '33 娘', url: browser.runtime.getURL('/assets/search-bar-characters/33chan_2.png') },
   ]
 })
 const wallpapers = computed<Array<{ name: string, url: string, thumbnail: string }>>(() => {
@@ -17,19 +17,24 @@ const wallpapers = computed<Array<{ name: string, url: string, thumbnail: string
       thumbnail: 'https://source.unsplash.com/1920x1080/?nature',
     },
     {
+      name: 'Colin Watts - Night Sky Stars',
+      url: browser.runtime.getURL('/assets/wallpapers/Night Sky Stars.jpg'),
+      thumbnail: browser.runtime.getURL('/assets/wallpapers/Night Sky Stars.jpg'),
+    },
+    {
       name: 'BML2019 VR (pid: 74271400)',
-      url: 'https://pic.imgdb.cn/item/638e1d63b1fccdcd36103811.jpg',
-      thumbnail: 'https://pic.imgdb.cn/item/64ac5e341ddac507cc750ae8.jpg',
+      url: browser.runtime.getURL('/assets/wallpapers/BML2019 VR.jpg'),
+      thumbnail: browser.runtime.getURL('/assets/wallpapers/BML2019 VR.jpg'),
     },
     {
       name: '2020 拜年祭活动',
-      url: 'https://pic.imgdb.cn/item/638e1d7ab1fccdcd36106346.jpg',
-      thumbnail: 'https://pic.imgdb.cn/item/64ac5f251ddac507cc7658af.jpg',
+      url: browser.runtime.getURL('/assets/wallpapers/2020 拜年祭活动.jpg'),
+      thumbnail: browser.runtime.getURL('/assets/wallpapers/2020 拜年祭活动.jpg'),
     },
     {
       name: '2020 BDF',
-      url: 'https://pic.imgdb.cn/item/63830f1816f2c2beb1868554.jpg',
-      thumbnail: 'https://pic.imgdb.cn/item/64ac5fc01ddac507cc77224e.jpg',
+      url: browser.runtime.getURL('/assets/wallpapers/2020 BDF.jpg'),
+      thumbnail: browser.runtime.getURL('/assets/wallpapers/2020 BDF.jpg'),
     },
   ]
 })
