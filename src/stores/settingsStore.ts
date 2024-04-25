@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { useStorageLocal } from '~/composables/useStorageLocal'
-import { AppPage } from '~/enums/appEnums'
+import type { AppPage } from '~/enums/appEnums'
 import type { HomeSubPage } from '~/contentScripts/views/Home/types'
 
 interface Settings {
