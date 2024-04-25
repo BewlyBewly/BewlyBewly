@@ -23,8 +23,8 @@ export async function getManifest() {
     //   open_in_tab: true,
     // },
     background: isFirefox
-      ? { scripts: ['./dist/background/index.mjs'] }
-      : { service_worker: './dist/background/index.mjs' },
+      ? { scripts: ['./dist/background/index.js'] }
+      : { service_worker: './dist/background/index.js' },
     icons: {
       16: './assets/icon-512.png',
       48: './assets/icon-512.png',
@@ -67,7 +67,6 @@ export async function getManifest() {
             ? `script-src 'self' http://localhost:${port}; object-src 'self' http://localhost:${port}`
             : 'script-src \'self\'; object-src \'self\'',
         },
-    // @ts-expect-error Manifest.WebExtensionManifest type doesn't not support declarative_net_request check
     declarative_net_request: {
       rule_resources: [{
         id: 'ruleset_1',

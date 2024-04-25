@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { useStorageLocal } from '~/composables/useStorageLocal'
-import { AppPage } from '~/enums/appEnums'
+import type { AppPage } from '~/enums/appEnums'
 import type { HomeSubPage } from '~/contentScripts/views/Home/types'
 
 interface Settings {
@@ -45,7 +45,6 @@ interface Settings {
 export const useSettingsStore = defineStore('settings', () => {
   const settings = useStorageLocal('settings', ref<Settings>({
     language: '',
-    startupPage: AppPage.Home,
     enableHorizontalScrolling: false,
     openLinkInCurrentTab: false,
     enableVideoCtrlBarOnVideoCard: false,
