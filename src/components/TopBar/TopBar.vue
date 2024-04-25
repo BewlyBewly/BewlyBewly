@@ -11,7 +11,6 @@ import { updateInterval } from './notify'
 import { getUserID, isHomePage } from '~/utils/main'
 import { settings } from '~/logic'
 import emitter from '~/utils/mitt'
-import API from '~/background/msg.define'
 
 // import { useTopBarStore } from '~/stores/topBarStore'
 
@@ -63,7 +62,7 @@ const popupVisible = reactive({
   upload: false,
   more: false,
 })
-
+const api = useApiClient()
 const isLogin = ref<boolean>(false)
 const unReadMessage = reactive<UnReadMessage | NonNullable<unknown>>(
   {},
@@ -281,10 +280,7 @@ function handleScroll() {
 
 async function getUserInfo() {
   try {
-    const res = await browser.runtime
-      .sendMessage({
-        contentScriptQuery: API.USER.GET_USER_INFO,
-      })
+    const res = await api.user.getUserInfo()
 
     if (res.code === 0) {
       isLogin.value = true
@@ -309,9 +305,7 @@ async function getUnreadMessageCount() {
 
   try {
     let res
-    res = await browser.runtime.sendMessage({
-      contentScriptQuery: 'getUnreadMsg',
-    })
+    res = await useApiClient().NOTIFICATION.getUnreadMsg()
     if (res.code === 0) {
       Object.assign(unReadMessage, res.data)
       Object.entries(unReadMessage).forEach(([key, value]) => {
@@ -322,9 +316,7 @@ async function getUnreadMessageCount() {
       })
     }
 
-    res = await browser.runtime.sendMessage({
-      contentScriptQuery: 'getUnreadDm',
-    })
+    res = await useApiClient().NOTIFICATION.getUnreadDm()
     if (res.code === 0) {
       Object.assign(unReadDm, res.data)
       if (typeof unReadDm.follow_unread === 'number')
@@ -346,9 +338,7 @@ async function getTopBarNewMomentsCount() {
   let result = 0
 
   try {
-    const res = await browser.runtime.sendMessage({
-      contentScriptQuery: 'getTopBarNewMomentsCount',
-    })
+    const res = await useApiClient().MOMENT.getTopBarNewMomentsCount()
     if (res.code === 0) {
       if (typeof res.data.update_info.item.count === 'number')
         result = res.data.update_info.item.count

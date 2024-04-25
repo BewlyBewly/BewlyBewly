@@ -7,10 +7,9 @@ import { calcCurrentTime } from '~/utils/dataFormatter'
 import { Business } from '~/models/history/history'
 import type { List as HistoryItem, HistoryResult } from '~/models/history/history'
 import type { List as HistorySearchItem, HistorySearchResult } from '~/models/video/historySearch'
-import API from '~/background/msg.define'
 
 const { t } = useI18n()
-
+const api = useApiClient()
 const isLoading = ref<boolean>()
 const noMoreContent = ref<boolean>(false)
 const historyList = reactive<Array<HistoryItem>>([])
@@ -56,15 +55,13 @@ function initPageAction() {
  */
 function getHistoryList() {
   isLoading.value = true
-  browser.runtime
-    .sendMessage({
-      contentScriptQuery: API.HISTORY.GET_HISTORY_LIST,
-      type: 'all',
-      view_at:
+  api.history.getHistoryList({
+    type: 'all',
+    view_at:
         historyList.length > 0
           ? historyList[historyList.length - 1].view_at
           : 0,
-    })
+  })
     .then((res: HistoryResult) => {
       if (res.code === 0) {
         if (Array.isArray(res.data.list) && res.data.list.length > 0)
@@ -84,12 +81,10 @@ function getHistoryList() {
 
 function searchHistoryList() {
   isLoading.value = true
-  browser.runtime
-    .sendMessage({
-      contentScriptQuery: API.HISTORY.SEARCH_HISTORY_LIST,
-      pn: currentPageNum.value++,
-      keyword: keyword.value,
-    })
+  api.history.searchHistoryList({
+    pn: currentPageNum.value++,
+    keyword: keyword.value,
+  })
     .then((res: HistorySearchResult) => {
       if (res.code === 0) {
         if (historyList.length !== 0 && res.data.list.length < 20) {
@@ -118,12 +113,10 @@ function handleSearch() {
 }
 
 function deleteHistoryItem(index: number, historyItem: HistoryItem) {
-  browser.runtime
-    .sendMessage({
-      contentScriptQuery: API.HISTORY.DELETE_HISTORY_ITEM,
-      kid: `${historyItem.history.business}_${historyItem.history.oid}`,
-      csrf: getCSRF(),
-    })
+  api.history.deleteHistoryItem({
+    kid: `${historyItem.history.business}_${historyItem.history.oid}`,
+    csrf: getCSRF(),
+  })
     .then((res) => {
       if (res.code === 0)
         historyList.splice(index, 1)
@@ -169,10 +162,7 @@ function getHistoryItemCover(item: HistoryItem) {
 }
 
 function getHistoryPauseStatus() {
-  browser.runtime
-    .sendMessage({
-      contentScriptQuery: API.HISTORY.GET_HISTORY_PAUSE_STATUS,
-    })
+  api.history.getHistoryPauseStatus()
     .then((res) => {
       if (res.code === 0)
         historyStatus.value = res.data
@@ -180,12 +170,10 @@ function getHistoryPauseStatus() {
 }
 
 function setHistoryPauseStatus(isPause: boolean) {
-  browser.runtime
-    .sendMessage({
-      contentScriptQuery: API.HISTORY.SET_HISTORY_PAUSE_STATUS,
-      csrf: getCSRF(),
-      switch: isPause,
-    })
+  api.history.setHistoryPauseStatus({
+    csrf: getCSRF(),
+    switch: isPause,
+  })
     .then((res) => {
       if (res.code === 0)
         getHistoryPauseStatus()
@@ -193,11 +181,9 @@ function setHistoryPauseStatus(isPause: boolean) {
 }
 
 function clearAllHistory() {
-  browser.runtime
-    .sendMessage({
-      contentScriptQuery: API.HISTORY.CLEAR_ALL_HISTORY,
-      csrf: getCSRF(),
-    })
+  api.history.clearAllHistory({
+    csrf: getCSRF(),
+  })
     .then((res) => {
       if (res.code === 0)
         historyList.length = 0

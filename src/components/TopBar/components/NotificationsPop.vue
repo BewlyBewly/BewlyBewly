@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { isHomePage } from '~/utils/main'
-import API from '~/background/msg.define'
 
 const { t } = useI18n()
-
+const api = useApiClient()
 const list = reactive([
   {
     name: t('topbar.noti_dropdown.replys'),
@@ -44,35 +43,29 @@ onMounted(() => {
 })
 
 function getUnreadMessageCount() {
-  browser.runtime
-    .sendMessage({
-      contentScriptQuery: API.NOTIFICATION.GET_UNREAD_MSG,
-    }).then((res) => {
-      if (res.code === 0) {
-        const resData = res.data
-        list[0].unreadCount = resData.reply
-        list[1].unreadCount = resData.at
-        list[2].unreadCount = resData.like
-        list[3].unreadCount = resData.sys_msg
-      }
-    }).catch(() => {
-      list[0].unreadCount = 0
-      list[1].unreadCount = 0
-      list[2].unreadCount = 0
-      list[3].unreadCount = 0
-    })
+  api.notification.getUnreadMsg().then((res) => {
+    if (res.code === 0) {
+      const resData = res.data
+      list[0].unreadCount = resData.reply
+      list[1].unreadCount = resData.at
+      list[2].unreadCount = resData.like
+      list[3].unreadCount = resData.sys_msg
+    }
+  }).catch(() => {
+    list[0].unreadCount = 0
+    list[1].unreadCount = 0
+    list[2].unreadCount = 0
+    list[3].unreadCount = 0
+  })
 
-  browser.runtime
-    .sendMessage({
-      contentScriptQuery: API.NOTIFICATION.GET_UNREAD_DM,
-    }).then((res) => {
-      if (res.code === 0) {
-        const resData = res.data
-        list[4].unreadCount = resData.follow_unread
-      }
-    }).catch(() => {
-      list[4].unreadCount = 0
-    })
+  api.notification.getUnreadDm().then((res) => {
+    if (res.code === 0) {
+      const resData = res.data
+      list[4].unreadCount = resData.follow_unread
+    }
+  }).catch(() => {
+    list[4].unreadCount = 0
+  })
 }
 </script>
 
