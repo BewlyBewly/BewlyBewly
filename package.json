@@ -30,6 +30,7 @@
     "start:firefox": "web-ext run --source-dir ./extension-firefox --target=firefox-desktop",
     "clear": "rimraf extension extension.*",
     "clear-firefox": "rimraf extension-firefox extension-firefox.*",
+    "clear-safari": "rimraf extension-safari extension-safari.*",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "test": "vitest test",
