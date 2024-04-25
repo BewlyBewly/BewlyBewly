@@ -1,49 +1,13 @@
 <script lang="ts" setup>
 import { settings } from '~/logic'
 
-const searchBarFocusCharacters = computed<{ name: string, url: string }[]>(() => {
-  return [
-    { name: '22 娘', url: browser.runtime.getURL('/assets/search-bar-characters/22chan_1.png') },
-    { name: '33 娘', url: browser.runtime.getURL('/assets/search-bar-characters/33chan_1.png') },
-    { name: '22 娘', url: browser.runtime.getURL('/assets/search-bar-characters/22chan_2.png') },
-    { name: '33 娘', url: browser.runtime.getURL('/assets/search-bar-characters/33chan_2.png') },
-  ]
-})
-const wallpapers = computed<Array<{ name: string, url: string, thumbnail: string }>>(() => {
-  return [
-    {
-      name: 'Unsplash Random Nature Image',
-      url: 'https://source.unsplash.com/1920x1080/?nature',
-      thumbnail: 'https://source.unsplash.com/1920x1080/?nature',
-    },
-    {
-      name: 'Colin Watts - Night Sky Stars',
-      url: browser.runtime.getURL('/assets/wallpapers/Night Sky Stars.jpg'),
-      thumbnail: browser.runtime.getURL('/assets/wallpapers/Night Sky Stars.jpg'),
-    },
-    {
-      name: 'BML2019 VR (pid: 74271400)',
-      url: browser.runtime.getURL('/assets/wallpapers/BML2019 VR.jpg'),
-      thumbnail: browser.runtime.getURL('/assets/wallpapers/BML2019 VR.jpg'),
-    },
-    {
-      name: '2020 拜年祭活动',
-      url: browser.runtime.getURL('/assets/wallpapers/2020 拜年祭活动.jpg'),
-      thumbnail: browser.runtime.getURL('/assets/wallpapers/2020 拜年祭活动.jpg'),
-    },
-    {
-      name: '2020 BDF',
-      url: browser.runtime.getURL('/assets/wallpapers/2020 BDF.jpg'),
-      thumbnail: browser.runtime.getURL('/assets/wallpapers/2020 BDF.jpg'),
-    },
-  ]
-})
+const { searchBarCharacters, wallpapers, getBewlyImage } = useBewlyImage()
 
 watch(() => settings.value.individuallySetSearchPageWallpaper, (newValue) => {
   if (newValue)
-    document.documentElement.style.backgroundImage = `url(${settings.value.searchPageWallpaper})`
+    document.documentElement.style.backgroundImage = `url(${getBewlyImage(settings.value.searchPageWallpaper)})`
   else
-    document.documentElement.style.backgroundImage = `url(${settings.value.wallpaper})`
+    document.documentElement.style.backgroundImage = `url(${getBewlyImage(settings.value.wallpaper)})`
 })
 
 function changeSearchBarFocusCharacter(url: string) {
@@ -118,14 +82,14 @@ function changeWallpaper(url: string) {
           >
             <tabler:photo-off text="3xl $bew-text-3" />
           </picture>
-          <Tooltip v-for="item in searchBarFocusCharacters" :key="item.url" placement="top" :content="item.name" aspect-square>
+          <Tooltip v-for="item in searchBarCharacters" :key="item.url" placement="top" :content="item.name" aspect-square>
             <picture
               aspect-square bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
               un-border="4 transparent" w-full
               :class="{ 'selected-wallpaper': settings.searchPageSearchBarFocusCharacter === item.url }"
               @click="changeSearchBarFocusCharacter(item.url)"
             >
-              <img :src="item.url" alt="" w-full h-full object-contain>
+              <img :src="getBewlyImage(item.url)" alt="" w-full h-full object-contain>
             </picture>
           </Tooltip>
         </div>
@@ -204,7 +168,7 @@ function changeWallpaper(url: string) {
                 :class="{ 'selected-wallpaper': settings.searchPageWallpaper === item.url }"
                 @click="changeWallpaper(item.url)"
               >
-                <img :src="item.thumbnail" alt="" w-full h-full object-cover>
+                <img :src="getBewlyImage(item.thumbnail)" alt="" w-full h-full object-cover>
               </picture>
             </Tooltip>
           </div>
@@ -217,7 +181,7 @@ function changeWallpaper(url: string) {
               w="xl:1/4 lg:1/3 md:1/2"
             >
               <img
-                v-if="settings.searchPageWallpaper" :src="settings.searchPageWallpaper" alt="" w-full h-full
+                v-if="settings.searchPageWallpaper" :src="getBewlyImage(settings.searchPageWallpaper)" alt="" w-full h-full
                 object-cover onerror="this.style.display='none'; this.onerror=null;"
               >
             </picture>
