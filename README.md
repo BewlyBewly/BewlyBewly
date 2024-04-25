@@ -90,12 +90,3 @@ See [CONTRIBUTION.md](docs/CONTRIBUTING.md)
 [bilibili-app-recommend](https://github.com/magicdawn/bilibili-app-recommend) - Reference source for obtaining the access key
 - [Bilibili-Evolved](https://github.com/the1812/Bilibili-Evolved) - Partial implementation of functionalities
 - [bilibili-API-collect](https://github.com/SocialSisterYi/bilibili-API-collect)
-
-## Donate
-
-If you like this project, you can consider donating to support me.
-I'm not in financial difficulty, so support as you see fit.
-
-<a href="https://afdian.net/a/Hakadao" target="_blank">
-  <img alt="afdian" src="https://github.com/hakadao/BewlyBewly/assets/33394391/41711f39-8c6c-4dea-964e-5ae7f0d5b8ad" width="350">
-</a>
