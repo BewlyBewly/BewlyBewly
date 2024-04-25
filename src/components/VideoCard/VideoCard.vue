@@ -166,7 +166,7 @@ function handleUndo() {
     <div hidden w="xl:280px lg:250px md:200px 200px" />
     <div hidden w="full" />
 
-    <template v-if="removed">
+    <div v-show="removed">
       <div
         :style="{ contentVisibility }"
         w-full
@@ -198,9 +198,9 @@ function handleUndo() {
           </div>
         </div>
       </div>
-    </template>
+    </div>
     <div
-      v-else
+      v-show="!removed"
       class="video-card group"
       w="full" pos="absolute top-0 left-0"
       rounded="$bew-radius" duration-300 ease-in-out
@@ -332,8 +332,8 @@ function handleUndo() {
             >
               <img
                 :src="`${removeHttpFromUrl(authorFace)}@50w_50h_1c`"
-                width="40"
-                height="40"
+                width="36"
+                height="36"
                 loading="lazy"
               >
             </a>
@@ -351,7 +351,7 @@ function handleUndo() {
               </h3>
 
               <div
-                v-if="moreBtn"
+                v-show="moreBtn"
                 class="opacity-0 group-hover/desc:opacity-100"
                 :class="{ 'more-active': moreBtnActive }"
                 shrink-0 w-30px h-30px m="t--3px r--8px" translate-x--8px
@@ -437,7 +437,7 @@ function handleUndo() {
     <!-- skeleton -->
     <template v-if="!horizontal">
       <div
-        block mb-6 pointer-events-none select-none invisible
+        block mb-8 pointer-events-none select-none invisible
       >
         <!-- Cover -->
         <div w-full shrink-0 aspect-video h-fit rounded="$bew-radius" />
@@ -468,7 +468,7 @@ function handleUndo() {
     <template v-else>
       <div
         flex="~ gap-6"
-        mb-6 pointer-events-none select-none invisible
+        mb-8 pointer-events-none select-none invisible
       >
         <!-- Cover -->
         <div

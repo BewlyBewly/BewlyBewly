@@ -681,9 +681,8 @@ defineExpose({
             <!-- More -->
             <div
               ref="more"
-              class="right-side-item"
+              class="right-side-item lg:!hidden flex"
               :class="{ active: popupVisible.more }"
-              display="lg:!none flex"
             >
               <a title="More">
                 <mingcute:menu-line />
