@@ -4,7 +4,8 @@ import { onMounted, reactive, ref, watch } from 'vue'
 import type { FavoriteCategory, FavoriteResource } from '../types'
 import { getUserID, isHomePage, removeHttpFromUrl, smoothScrollToTop } from '~/utils/main'
 import { calcCurrentTime } from '~/utils/dataFormatter'
-import API from '~/background/msg.define'
+
+const api = useApiClient()
 
 const favoriteCategories = reactive<Array<FavoriteCategory>>([])
 const favoriteResources = reactive<Array<FavoriteResource>>([])
@@ -66,11 +67,9 @@ onMounted(async () => {
 })
 
 async function getFavoriteCategories() {
-  await browser.runtime
-    .sendMessage({
-      contentScriptQuery: API.FAVORITE.GET_FAVORITE_CATEGORIES,
-      up_mid: getUserID(),
-    })
+  await api.favorite.getFavoriteCategories({
+    up_mid: getUserID(),
+  })
     .then((res) => {
       if (res.code === 0) {
         Object.assign(favoriteCategories, res.data.list)
@@ -85,13 +84,11 @@ async function getFavoriteCategories() {
  */
 function getFavoriteResources() {
   isLoading.value = true
-  browser.runtime
-    .sendMessage({
-      contentScriptQuery: API.FAVORITE.GET_FAVORITE_RESOURCES,
-      media_id: activatedMediaId.value,
-      pn: currentPageNum.value,
-      keyword: '',
-    })
+  api.favorite.getFavoriteResources({
+    media_id: activatedMediaId.value,
+    pn: currentPageNum.value,
+    keyword: '',
+  })
     .then((res) => {
       if (res.code === 0) {
         if (Array.isArray(res.data.medias) && res.data.medias.length > 0)

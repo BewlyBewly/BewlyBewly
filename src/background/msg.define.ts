@@ -7,11 +7,12 @@ enum AUTH {
   QR_CODE_LOGIN = 'qrCodeLogin',
 }
 enum ANIME {
-  GET = 'getAnime',
-  GET_WATCH_LIST = 'getAnimeWatchList',
-  GET_RECOMMEND_LIST = 'getRecommendAnimeList',
-  GET_TIME_TABLE = 'getAnimeTimeTable',
-  GET_DETAIL = 'getAnimeDetail',
+  GET_ANIME = 'getAnime',
+  GET_ANIME_WATCH_LIST = 'getAnimeWatchList',
+  GET_RECOMMEND_ANIME_LIST = 'getRecommendAnimeList',
+  GET_ANIME_TIME_TABLE = 'getAnimeTimeTable',
+  GET_ANIME_DETAIL = 'getAnimeDetail',
+  GET_POPULAR_ANIME_LIST = 'getPopularAnimeList',
 }
 enum FAVORITE {
   GET_FAVORITE_CATEGORIES = 'getFavoriteCategories',
@@ -58,10 +59,10 @@ enum VIDEO {
   GET_VIDEO_PREVIEW = 'getVideoPreview',
 }
 enum WATCHLATER {
-  SAVE_TO_WATCHLATER = 'saveToWatchLater',
-  REMOVE_FROM_WATCHLATER = 'removeFromWatchLater',
+  SAVE_TO_WATCH_LATER = 'saveToWatchLater',
+  REMOVE_FROM_WATCH_LATER = 'removeFromWatchLater',
   GET_ALL_WATCHLATER_LIST = 'getAllWatchLaterList',
-  CLEAR_ALL_WATCHLATER = 'clearAllWatchLater',
+  CLEAR_ALL_WATCH_LATER = 'clearAllWatchLater',
 }
 
 const API = {

@@ -4,13 +4,13 @@ import type { UserInfo, UserStat } from '../types'
 import { revokeAccessKey } from '~/utils/authProvider'
 import { getCSRF, getUserID, isHomePage } from '~/utils/main'
 import { numFormatter } from '~/utils/dataFormatter'
-import API from '~/background/msg.define'
 
 defineProps<{
   userInfo: UserInfo
 }>()
 
 const { t } = useI18n()
+const api = useApiClient()
 
 const mid = computed(() => {
   return getUserID()
@@ -30,10 +30,7 @@ const otherLinks = computed((): { name: string, url: string }[] => {
 const userStat = reactive<UserStat>({} as UserStat)
 
 onMounted(() => {
-  browser.runtime
-    .sendMessage({
-      contentScriptQuery: API.USER.GET_USER_STAT,
-    })
+  api.user.getUserStat()
     .then((res) => {
       if (res.code === 0)
         Object.assign(userStat, res.data)
@@ -42,8 +39,7 @@ onMounted(() => {
 
 async function logout() {
   revokeAccessKey()
-  browser.runtime.sendMessage({
-    contentScriptQuery: API.AUTH.LOGOUT,
+  api.auth.logout({
     biliCSRF: getCSRF(),
   }).then(() => {
     location.reload()

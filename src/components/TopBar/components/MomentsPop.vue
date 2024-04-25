@@ -7,7 +7,6 @@ import { onMounted, reactive, ref, watch } from 'vue'
 import type { TopBarMomentResult } from '~/models/moment/topBarMoment'
 import type { TopBarLiveMomentResult } from '~/models/moment/topBarLiveMoment'
 import { getCSRF, isHomePage, smoothScrollToTop } from '~/utils/main'
-import API from '~/background/msg.define'
 
 type MomentType = 'video' | 'live' | 'article'
 interface MomentTab { type: MomentType, name: any }
@@ -23,6 +22,7 @@ interface MomentCard {
 }
 
 const { t } = useI18n()
+const api = useApiClient()
 
 const moments = reactive<MomentCard[]>([])
 const addedWatchLaterList = reactive<number[]>([])
@@ -103,8 +103,7 @@ function checkIfHasNewMomentsThenUpdateMoments() {
   if (selectedMomentTab.value.type === 'live')
     return
 
-  browser.runtime.sendMessage({
-    contentScriptQuery: API.MOMENT.GET_TOP_BAR_MOMENTS,
+  api.MOMENT.getTopBarMoments({
     type: selectedMomentTab.value.type,
     update_baseline: momentUpdateBaseline.value || undefined,
   })
@@ -145,8 +144,7 @@ function getTopBarMoments() {
   if (isLoading.value)
     return
   isLoading.value = true
-  browser.runtime.sendMessage({
-    contentScriptQuery: API.MOMENT.GET_TOP_BAR_MOMENTS,
+  api.moment.getTopBarMoments({
     type: selectedMomentTab.value.type,
     update_baseline: momentUpdateBaseline.value || undefined,
     offset: momentOffset.value || undefined,
@@ -193,12 +191,10 @@ function isNewMoment(index: number) {
 
 function getTopBarLiveMoments() {
   isLoading.value = true
-  browser.runtime
-    .sendMessage({
-      contentScriptQuery: API.MOMENT.GET_TOP_BAR_LIVE_MOMENTS,
-      page: livePage.value,
-      pagesize: 10,
-    })
+  api.moment.getTopBarLiveMoments({
+    page: livePage.value,
+    pagesize: 10,
+  })
     .then((res: TopBarLiveMomentResult) => {
       if (res.code === 0) {
         const { list, pagesize } = res.data
@@ -235,8 +231,7 @@ function toggleWatchLater(aid: number) {
   const isInWatchLater = addedWatchLaterList.includes(aid)
 
   if (!isInWatchLater) {
-    browser.runtime.sendMessage({
-      contentScriptQuery: API.WATCHLATER.SAVE_TO_WATCHLATER,
+    api.watchlater.saveToWatchLater({
       aid,
       csrf: getCSRF(),
     })
@@ -246,8 +241,7 @@ function toggleWatchLater(aid: number) {
       })
   }
   else {
-    browser.runtime.sendMessage({
-      contentScriptQuery: API.WATCHLATER.REMOVE_FROM_WATCHLATER,
+    api.watchlater.removeFromWatchLater({
       aid,
       csrf: getCSRF(),
     })
