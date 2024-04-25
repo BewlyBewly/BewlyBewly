@@ -75,7 +75,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   wallpaperMode: 'buildIn',
   wallpaper: '',
   enableWallpaperMasking: false,
-  wallpaperMaskOpacity: 0,
+  wallpaperMaskOpacity: 80,
   wallpaperBlurIntensity: 0,
 
   searchPageDarkenOnSearchFocus: true,
@@ -88,7 +88,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   searchPageWallpaperMode: 'buildIn',
   searchPageWallpaper: '',
   searchPageEnableWallpaperMasking: false,
-  searchPageWallpaperMaskOpacity: 0.6,
+  searchPageWallpaperMaskOpacity: 0,
   searchPageWallpaperBlurIntensity: 0,
 
   recommendationMode: 'web',

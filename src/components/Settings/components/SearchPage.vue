@@ -89,7 +89,10 @@ function changeWallpaper(url: string) {
               :class="{ 'selected-wallpaper': settings.searchPageSearchBarFocusCharacter === item.url }"
               @click="changeSearchBarFocusCharacter(item.url)"
             >
-              <img :src="getBewlyImage(item.url)" alt="" w-full h-full object-contain>
+              <img
+                :src="getBewlyImage(item.url)" alt="" loading="lazy"
+                w-full h-full object-contain
+              >
             </picture>
           </Tooltip>
         </div>

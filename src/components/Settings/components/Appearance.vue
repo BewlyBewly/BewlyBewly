@@ -166,8 +166,9 @@ function changeWallpaper(url: string) {
             w="xl:1/4 lg:1/3 md:1/2"
           >
             <img
-              v-if="settings.wallpaper" :src="settings.wallpaper" alt="" w-full h-full
-              object-cover onerror="this.style.display='none'; this.onerror=null;"
+              v-if="settings.wallpaper" :src="getBewlyImage(settings.wallpaper)" alt="" loading="lazy"
+              w-full h-full object-cover
+              onerror="this.style.display='none'; this.onerror=null;"
             >
           </picture>
           <div>
