@@ -32,6 +32,7 @@
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "test": "vitest test",
+    "typecheck": "tsc",
     "postinstall": "npx simple-git-hooks"
   },
   "dependencies": {
