@@ -5,6 +5,7 @@ import type { HomeSubPage } from '~/contentScripts/views/Home/types'
 
 interface Settings {
   language: string
+  startupPage: AppPage
   enableHorizontalScrolling: boolean
   openLinkInCurrentTab: boolean
   enableVideoCtrlBarOnVideoCard: boolean
