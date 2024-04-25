@@ -8,10 +8,8 @@ import { calcCurrentTime } from '~/utils/dataFormatter'
 import { Business } from '~/models/history/history'
 import type { List as HistoryItem, HistoryResult } from '~/models/history/history'
 
-import API from '~/background/msg.define'
-
 const { t } = useI18n()
-
+const api = useApiClient()
 const historys = reactive<Array<HistoryItem>>([])
 const historyTabs = reactive([
   {
@@ -141,12 +139,10 @@ function getHistoryUrl(item: HistoryItem) {
  */
 function getHistoryList(type: Business, view_at = 0 as number) {
   isLoading.value = true
-  browser.runtime
-    .sendMessage({
-      contentScriptQuery: API.HISTORY.GET_HISTORY_LIST,
-      type,
-      view_at,
-    })
+  api.history.getHistoryList({
+    type,
+    view_at,
+  })
     .then((res: HistoryResult) => {
       if (res.code === 0) {
         if (Array.isArray(res.data.list) && res.data.list.length > 0)

@@ -4,7 +4,6 @@ import { getCSRF, removeHttpFromUrl } from '~/utils/main'
 import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils/dataFormatter'
 import type { VideoPreviewResult } from '~/models/video/videoPreview'
 import { settings } from '~/logic'
-import API from '~/background/msg.define'
 
 interface Props {
   id: number
@@ -53,6 +52,8 @@ const emit = defineEmits<{
   (e: 'tellUsWhy'): void
 }>()
 
+const api = useApiClient()
+
 const videoUrl = computed(() => {
   if (props.bvid || props.aid)
     return `https://www.bilibili.com/video/${props.bvid ?? `av${props.aid}`}`
@@ -90,8 +91,7 @@ const previewVideoUrl = ref<string>('')
 watch(() => isHover.value, (newValue) => {
   if (props.showPreview && settings.value.enableVideoPreview) {
     if (newValue && !previewVideoUrl.value && props.cid) {
-      browser.runtime.sendMessage({
-        contentScriptQuery: API.VIDEO.GET_VIDEO_PREVIEW,
+      api.video.getVideoPreview({
         bvid: props.bvid,
         cid: props.cid,
       }).then((res: VideoPreviewResult) => {
@@ -104,8 +104,7 @@ watch(() => isHover.value, (newValue) => {
 
 function toggleWatchLater() {
   if (!isInWatchLater.value) {
-    browser.runtime.sendMessage({
-      contentScriptQuery: API.WATCHLATER.SAVE_TO_WATCHLATER,
+    api.watchlater.saveToWatchLater({
       aid: props.id,
       csrf: getCSRF(),
     })
@@ -115,8 +114,7 @@ function toggleWatchLater() {
       })
   }
   else {
-    browser.runtime.sendMessage({
-      contentScriptQuery: API.WATCHLATER.REMOVE_FROM_WATCHLATER,
+    api.watchlater.removeFromWatchLater({
       aid: props.id,
       csrf: getCSRF(),
     })
