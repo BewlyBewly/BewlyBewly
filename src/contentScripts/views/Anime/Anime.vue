@@ -59,7 +59,7 @@ function initPageAction() {
 
 function getAnimeWatchList() {
   isLoadingAnimeWatchList.value = true
-  api.anime.getWatchList({
+  api.anime.getAnimeWatchList({
     vmid: getUserID() ?? 0,
     pn: 1,
     ps: 30,
