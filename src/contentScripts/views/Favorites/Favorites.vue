@@ -247,7 +247,7 @@ function isMusic(item: FavoriteResource) {
       </template>
     </main>
 
-    <aside relative w="full md:40% lg:30% xl:25%" display="md:block none" order="1 md:2 lg:2">
+    <aside relative w="full md:40% lg:30% xl:25%" class="hidden md:block" order="1 md:2 lg:2">
       <div
         pos="sticky top-120px" flex="~ col gap-4" justify-start my-10 w-full
         h="auto md:[calc(100vh-160px)]" p-6

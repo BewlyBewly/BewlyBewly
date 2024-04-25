@@ -537,7 +537,7 @@ defineExpose({
             </div> -->
 
             <!-- TODO: need to refactor to above code -->
-            <div display="lg:flex none" gap-1>
+            <div class="hidden lg:flex" gap-1>
               <!-- Notifications -->
               <div
                 ref="notifications"
@@ -716,7 +716,7 @@ defineExpose({
                 style="--un-shadow: 0 0 10px var(--bew-theme-color-60)"
               >
                 <mingcute:upload-2-line flex-shrink-0 />
-                <span m="l-2" display="xl:block none">{{
+                <span m="l-2" class="hidden xl:block">{{
                   $t('topbar.upload')
                 }}</span>
               </a>
