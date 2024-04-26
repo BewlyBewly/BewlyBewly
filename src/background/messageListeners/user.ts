@@ -18,6 +18,7 @@ const API_USER: APIMAP = {
     },
     afterHandle: AHS.J_D,
   },
+  // https://github.com/SocialSisterYi/bilibili-API-collect/blob/ed9ac01b6769430aa3f12ad02c2ed337a96924eb/docs/user/relation.md#操作用户关系
   [API.USER.RELATION_MODIFY]: {
     url: 'https://api.bilibili.com/x/relation/modify',
     _fetch: {
