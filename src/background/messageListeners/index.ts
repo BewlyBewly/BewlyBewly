@@ -25,10 +25,14 @@ export const API_COLLECTION = {
   USER: API_USER,
   VIDEO: API_VIDEO,
   WATCHLATER: API_WATCHLATER,
+
+  [Symbol.iterator]() {
+    return Object.values(this).values()
+  },
 }
 
 // Merge all API objects into one
-const FullAPI = Object.assign({}, API_AUTH, API_ANIME, API_HISTORY, API_FAVORITE, API_MOMENT, API_NOTIFICATION, API_RANKING, API_SEARCH, API_USER, API_VIDEO, API_WATCHLATER)
+const FullAPI = Object.assign({}, ...API_COLLECTION)
 // Create a message listener for each API
 const handleMessage = apiListenerFactory(FullAPI)
 
