@@ -166,7 +166,7 @@ function handleUndo() {
     <div hidden w="xl:280px lg:250px md:200px 200px" />
     <div hidden w="full" />
 
-    <div v-show="removed">
+    <template v-if="removed">
       <div
         :style="{ contentVisibility }"
         w-full
@@ -198,9 +198,9 @@ function handleUndo() {
           </div>
         </div>
       </div>
-    </div>
+    </template>
     <div
-      v-show="!removed"
+      v-else
       class="video-card group"
       w="full" pos="absolute top-0 left-0"
       rounded="$bew-radius" duration-300 ease-in-out
@@ -351,7 +351,7 @@ function handleUndo() {
               </h3>
 
               <div
-                v-show="moreBtn"
+                v-if="moreBtn"
                 class="opacity-0 group-hover/desc:opacity-100"
                 :class="{ 'more-active': moreBtnActive }"
                 shrink-0 w-30px h-30px m="t--3px r--8px" translate-x--8px
