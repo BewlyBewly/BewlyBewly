@@ -491,6 +491,7 @@ defineExpose({ initData })
           :cover="`${video.cover}`"
           :author="video?.mask?.avatar.text"
           :author-face="video?.mask?.avatar.cover"
+          :followed="video?.bottom_rcmd_reason === '已关注' || video?.bottom_rcmd_reason === '已關注'"
           :mid="video?.mask?.avatar.up_id "
           :capsule-text="video?.desc?.split('·')[1]"
           :bvid="video.bvid"
