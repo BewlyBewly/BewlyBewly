@@ -326,16 +326,28 @@ function handleUndo() {
             <a
               v-if="authorFace"
               :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
-              m="r-4" w="36px" h="36px" rounded="1/2" overflow="hidden"
+              m="r-4" w="36px" h="36px" rounded="1/2"
               object="center cover" bg="$bew-fill-4" cursor="pointer"
+              position-relative
               @click.stop=""
             >
               <img
+                rounded="1/2"
                 :src="`${removeHttpFromUrl(authorFace)}@50w_50h_1c`"
                 width="36"
                 height="36"
                 loading="lazy"
               >
+              <div
+                v-if="isFollowed"
+                pos="absolute bottom--1 right--1"
+                w-4 h-4
+                bg="$bew-theme-color"
+                rounded="1/2"
+                grid place-items-center
+              >
+                <div color-white text-sm class="i-mingcute:check-fill w-1em h-1em" />
+              </div>
             </a>
           </div>
           <div class="group/desc" flex="~ col" w="full" align="items-start">

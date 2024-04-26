@@ -463,6 +463,7 @@ defineExpose({ initData })
           :cover="video.pic"
           :author="video.owner.name"
           :author-face="video.owner.face"
+          :is-followed="!!video.is_followed"
           :mid="video.owner.mid"
           :view="video.stat.view"
           :danmaku="video.stat.danmaku"
