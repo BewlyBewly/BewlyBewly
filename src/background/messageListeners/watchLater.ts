@@ -1,7 +1,7 @@
 import type { APIMAP } from '../utils'
 import { AHS } from '../utils'
 
-const API_WATCHLATER: APIMAP = {
+const API_WATCHLATER = {
   // https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/history&toview/toview.md#%E8%A7%86%E9%A2%91%E6%B7%BB%E5%8A%A0%E7%A8%8D%E5%90%8E%E5%86%8D%E7%9C%8B
   saveToWatchLater: {
     url: 'https://api.bilibili.com/x/v2/history/toview/add',
@@ -11,7 +11,7 @@ const API_WATCHLATER: APIMAP = {
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
       },
       body: {
-        aid: '',
+        aid: 0,
         csrf: '',
       },
     },
@@ -26,12 +26,12 @@ const API_WATCHLATER: APIMAP = {
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
       },
       body: {
-        viewed: '',
+        viewed: false,
         csrf: '',
       },
     },
     params: {
-      aid: '',
+      aid: 0,
     },
     afterHandle: AHS.J_D,
   },
@@ -57,6 +57,6 @@ const API_WATCHLATER: APIMAP = {
     },
     afterHandle: AHS.J_D,
   },
-}
+} satisfies APIMAP
 
 export default API_WATCHLATER

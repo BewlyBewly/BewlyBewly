@@ -1,7 +1,7 @@
 import type { APIMAP } from '../utils'
 import { AHS } from '../utils'
 
-const API_SEARCH: APIMAP = {
+const API_SEARCH = {
   getSearchSuggestion: {
     url: 'https://s.search.bilibili.com/main/suggest',
     _fetch: {
@@ -13,6 +13,6 @@ const API_SEARCH: APIMAP = {
     },
     afterHandle: AHS.J_D,
   },
-}
+} satisfies APIMAP
 
 export default API_SEARCH
