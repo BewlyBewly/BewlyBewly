@@ -17,6 +17,20 @@ const API_USER = {
     },
     afterHandle: AHS.J_D,
   },
+  // https://github.com/SocialSisterYi/bilibili-API-collect/blob/ed9ac01b6769430aa3f12ad02c2ed337a96924eb/docs/user/relation.md#操作用户关系
+  relationModify: {
+    url: 'https://api.bilibili.com/x/relation/modify',
+    _fetch: {
+      method: 'post',
+    },
+    params: {
+      // access_key: '', // app only
+      fid: '',
+      act: 1,
+      re_src: 11,
+    },
+    afterHandle: AHS.J_D,
+  },
 } satisfies APIMAP
 
 export default API_USER
