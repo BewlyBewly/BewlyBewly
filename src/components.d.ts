@@ -59,7 +59,6 @@ declare module 'vue' {
     OverlayScrollbarsComponent: typeof import('./components/OverlayScrollbarsComponent.ts')['default']
     'Ph:pauseCircleBold': typeof import('~icons/ph/pause-circle-bold')['default']
     'Ph:playCircleBold': typeof import('~icons/ph/play-circle-bold')['default']
-    PixelarticonsZap: typeof import('~icons/pixelarticons/zap')['default']
     Progress: typeof import('./components/Progress.vue')['default']
     Radio: typeof import('./components/Radio.vue')['default']
     RightSideButtons: typeof import('./components/RightSideButtons/RightSideButtons.vue')['default']
