@@ -32,7 +32,7 @@
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "test": "vitest test",
-    "typecheck": "tsc",
+    "typecheck": "vue-tsc",
     "postinstall": "npx simple-git-hooks"
   },
   "dependencies": {
@@ -88,6 +88,7 @@
     "vitest": "^1.5.1",
     "vue": "^3.4.25",
     "vue-demi": "^0.14.7",
+    "vue-tsc": "^2.0.14",
     "web-ext": "^7.11.0",
     "webext-bridge": "5.0.5",
     "webextension-polyfill": "^0.11.0"
