@@ -340,13 +340,13 @@ function handleUndo() {
               >
               <div
                 v-if="followed"
-                pos="absolute bottom--1 right--1"
-                w-4 h-4
+                pos="absolute bottom--2px right--2px"
+                w-14px h-14px
                 bg="$bew-theme-color"
                 rounded="1/2"
                 grid place-items-center
               >
-                <div color-white text-sm class="i-mingcute:check-fill w-1em h-1em" />
+                <div color-white text-sm class="i-mingcute:check-fill w-10px h-10px" />
               </div>
             </a>
           </div>
