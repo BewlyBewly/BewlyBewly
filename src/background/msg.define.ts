@@ -61,7 +61,7 @@ enum VIDEO {
 enum WATCHLATER {
   SAVE_TO_WATCH_LATER = 'saveToWatchLater',
   REMOVE_FROM_WATCH_LATER = 'removeFromWatchLater',
-  GET_ALL_WATCHLATER_LIST = 'getAllWatchLaterList',
+  GET_ALL_WATCH_LATER_LIST = 'getAllWatchLaterList',
   CLEAR_ALL_WATCH_LATER = 'clearAllWatchLater',
 }
 
