@@ -166,7 +166,7 @@ function handleUndo() {
     <div hidden w="xl:280px lg:250px md:200px 200px" />
     <div hidden w="full" />
 
-    <div v-show="removed">
+    <template v-if="removed">
       <div
         :style="{ contentVisibility }"
         w-full
@@ -198,9 +198,9 @@ function handleUndo() {
           </div>
         </div>
       </div>
-    </div>
+    </template>
     <div
-      v-show="!removed"
+      v-else
       class="video-card group"
       w="full" pos="absolute top-0 left-0"
       rounded="$bew-radius" duration-300 ease-in-out
@@ -295,10 +295,10 @@ function handleUndo() {
             duration-300
             @click.prevent="toggleWatchLater"
           >
-            <Tooltip v-show="!isInWatchLater" :content="$t('common.save_to_watch_later')" placement="bottom" type="dark">
+            <Tooltip v-if="!isInWatchLater" :content="$t('common.save_to_watch_later')" placement="bottom" type="dark">
               <mingcute:carplay-line />
             </Tooltip>
-            <Tooltip v-show="isInWatchLater" :content="$t('common.added')" placement="bottom" type="dark">
+            <Tooltip v-else :content="$t('common.added')" placement="bottom" type="dark">
               <line-md:confirm />
             </Tooltip>
           </button>
@@ -351,7 +351,7 @@ function handleUndo() {
               </h3>
 
               <div
-                v-show="moreBtn"
+                v-if="moreBtn"
                 class="opacity-0 group-hover/desc:opacity-100"
                 :class="{ 'more-active': moreBtnActive }"
                 shrink-0 w-30px h-30px m="t--3px r--8px" translate-x--8px
