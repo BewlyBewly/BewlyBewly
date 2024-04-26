@@ -103,7 +103,7 @@ function checkIfHasNewMomentsThenUpdateMoments() {
   if (selectedMomentTab.value.type === 'live')
     return
 
-  api.MOMENT.getTopBarMoments({
+  api.moment.getTopBarMoments({
     type: selectedMomentTab.value.type,
     update_baseline: momentUpdateBaseline.value || undefined,
   })
