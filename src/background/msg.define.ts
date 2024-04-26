@@ -47,6 +47,7 @@ enum SEARCH {
 enum USER {
   GET_USER_INFO = 'getUserInfo',
   GET_USER_STAT = 'getUserStat',
+  RELATION_MODIFY = 'relationModify',
 }
 enum VIDEO {
   GET_RECOMMEND_VIDEOS = 'getRecommendVideos',

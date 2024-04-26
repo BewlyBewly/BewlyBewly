@@ -29,7 +29,7 @@ interface Props {
   /** If you want to show preview video, you should set the cid value */
   cid?: number
   epid?: number
-  isFollowed?: boolean
+  followed?: boolean
   horizontal?: boolean
   tag?: string
   rank?: number
@@ -326,16 +326,28 @@ function handleUndo() {
             <a
               v-if="authorFace"
               :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
-              m="r-4" w="36px" h="36px" rounded="1/2" overflow="hidden"
+              m="r-4" w="36px" h="36px" rounded="1/2"
               object="center cover" bg="$bew-fill-4" cursor="pointer"
+              position-relative
               @click.stop=""
             >
               <img
+                rounded="1/2"
                 :src="`${removeHttpFromUrl(authorFace)}@50w_50h_1c`"
                 width="36"
                 height="36"
                 loading="lazy"
               >
+              <div
+                v-if="followed"
+                pos="absolute bottom--2px right--2px"
+                w-14px h-14px
+                bg="$bew-theme-color"
+                rounded="1/2"
+                grid place-items-center
+              >
+                <div color-white text-sm class="i-mingcute:check-fill w-10px h-10px" />
+              </div>
             </a>
           </div>
           <div class="group/desc" flex="~ col" w="full" align="items-start">
