@@ -29,7 +29,7 @@ interface Props {
   /** If you want to show preview video, you should set the cid value */
   cid?: number
   epid?: number
-  isFollowed?: boolean
+  followed?: boolean
   horizontal?: boolean
   tag?: string
   rank?: number
@@ -339,7 +339,7 @@ function handleUndo() {
                 loading="lazy"
               >
               <div
-                v-if="isFollowed"
+                v-if="followed"
                 pos="absolute bottom--1 right--1"
                 w-4 h-4
                 bg="$bew-theme-color"
