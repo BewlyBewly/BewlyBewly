@@ -241,6 +241,7 @@ topbar:
     uploads_manager: Uploads manager
     b_coins_wallet: B-coins Wallet
     orders: Orders
+    workshop: My workshop
     my_stream_info: My stream info
     my_courses: My courses
     log_out: Log out

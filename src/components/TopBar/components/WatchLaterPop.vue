@@ -34,7 +34,7 @@ function getAllWatchLaterList() {
   isLoading.value = true
   watchLaterList.length = 0
 
-  api.watchlater.getAllWatchlaterList()
+  api.watchlater.getAllWatchLaterList()
     .then((res: WatchLaterResult) => {
       if (res.code === 0)
         Object.assign(watchLaterList, res.data.list)

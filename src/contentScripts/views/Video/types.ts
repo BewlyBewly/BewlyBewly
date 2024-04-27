@@ -292,6 +292,7 @@ export interface Comment {
     members: []
     jump_url: NonNullable<unknown>
     max_line: 6
+    emote: any
   }
   replies?: Comment[]
   up_action: {

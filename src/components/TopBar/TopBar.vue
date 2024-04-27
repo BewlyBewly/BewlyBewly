@@ -305,7 +305,7 @@ async function getUnreadMessageCount() {
 
   try {
     let res
-    res = await useApiClient().NOTIFICATION.getUnreadMsg()
+    res = await useApiClient().notification.getUnreadMsg()
     if (res.code === 0) {
       Object.assign(unReadMessage, res.data)
       Object.entries(unReadMessage).forEach(([key, value]) => {
@@ -316,7 +316,7 @@ async function getUnreadMessageCount() {
       })
     }
 
-    res = await useApiClient().NOTIFICATION.getUnreadDm()
+    res = await useApiClient().notification.getUnreadDm()
     if (res.code === 0) {
       Object.assign(unReadDm, res.data)
       if (typeof unReadDm.follow_unread === 'number')
@@ -338,7 +338,7 @@ async function getTopBarNewMomentsCount() {
   let result = 0
 
   try {
-    const res = await useApiClient().MOMENT.getTopBarNewMomentsCount()
+    const res = await useApiClient().moment.getTopBarNewMomentsCount()
     if (res.code === 0) {
       if (typeof res.data.update_info.item.count === 'number')
         result = res.data.update_info.item.count

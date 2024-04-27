@@ -47,6 +47,7 @@ enum SEARCH {
 enum USER {
   GET_USER_INFO = 'getUserInfo',
   GET_USER_STAT = 'getUserStat',
+  RELATION_MODIFY = 'relationModify',
 }
 enum VIDEO {
   GET_RECOMMEND_VIDEOS = 'getRecommendVideos',
@@ -61,7 +62,7 @@ enum VIDEO {
 enum WATCHLATER {
   SAVE_TO_WATCH_LATER = 'saveToWatchLater',
   REMOVE_FROM_WATCH_LATER = 'removeFromWatchLater',
-  GET_ALL_WATCHLATER_LIST = 'getAllWatchLaterList',
+  GET_ALL_WATCH_LATER_LIST = 'getAllWatchLaterList',
   CLEAR_ALL_WATCH_LATER = 'clearAllWatchLater',
 }
 
