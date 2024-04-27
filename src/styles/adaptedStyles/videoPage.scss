@@ -13,174 +13,161 @@
   }
 
   // #region theme color adaption part
-  .note-list .list-note-operation,
-  .note-pc .note-container .note-header .note-operation,
-  .note-up .up-desc-container .desc-top .attention-btn-container {
-    background-color: var(--bew-theme-color);
+  // Increase the priority of the style inside by writing a non-existent selector in `:not()`
+  :not(fdjslfds) {
+
+    .note-list .list-note-operation,
+    .note-pc .note-container .note-header .note-operation,
+    .note-up .up-desc-container .desc-top .attention-btn-container {
+      background-color: var(--bew-theme-color);
+    }
+
+    .user-card-m-exp .user-info-wrapper .info .user .user-label {
+      background-color: var(--bew-theme-color) !important;
+    }
+
+    .note-list .list-note-operation:hover,
+    .note-pc .note-container .note-header .note-operation:hover,
+    .user-card-m-exp .user-info-wrapper .info .btn-box .like:hover,
+    .coin-operated-m-exp .coin-bottom .bi-btn:hover,
+    .video-share-popover .video-share-dropdown .dropdown-top .dropdown-top-left .capture-bar .bar-right .copy-link:hover,
+    .note-up .up-desc-container .desc-top .attention-btn-container:hover,
+    .report-dialog .vui_dialog--footer .report-dialog-footer .button-wrap .comfirm-report:hover,
+    .collection-m-exp .bottom .btn:hover {
+      background-color: var(--bew-theme-color-80);
+    }
+
+    .upinfo-btn-panel .follow-btn.not-follow:hover {
+      background-color: var(--bew-theme-color-80) !important;
+    }
+
+    .follow-dialog-wrap-exp .follow-dialog-window .content .group-list .add-group .input-group .submitGroup {
+      background-color: var(--bew-theme-color-10);
+    }
+
+    .note-detail .note-operation .tab-action-item.is-active .tab-icon {
+      color: var(--bew-theme-color);
+    }
+
+    .membersinfo-upcard .staff-info .staff-name.is-vip,
+    .ql-snow.ql-toolbar .ql-picker-item.ql-selected,
+    .ql-snow .ql-toolbar .ql-picker-item.ql-selected,
+    .ql-snow.ql-toolbar .ql-picker-item:hover,
+    .ql-snow .ql-toolbar .ql-picker-item:hover,
+    .ql-snow.ql-toolbar .ql-picker-label.ql-active,
+    .ql-snow .ql-toolbar .ql-picker-label.ql-active,
+    .ql-snow.ql-toolbar .ql-picker-label:hover,
+    .ql-snow .ql-toolbar .ql-picker-label:hover,
+    .ql-snow.ql-toolbar button.ql-active,
+    .ql-snow .ql-toolbar button.ql-active,
+    .ql-snow.ql-toolbar button:focus,
+    .ql-snow .ql-toolbar button:focus,
+    .ql-snow.ql-toolbar button:hover,
+    .ql-snow .ql-toolbar button:hover,
+    .up-name.is_vip {
+      color: var(--bew-theme-color) !important;
+    }
+
+    .upinfo-btn-panel .not-follow-charge-btn:hover {
+      color: var(--bew-theme-color-80);
+    }
+
+    .coin-operated-m-exp .mc-box:hover,
+    .coin-operated-m-exp .mc-box.on,
+    .note-pc .note-container .note-header .note-operation {
+      border-color: var(--bew-theme-color);
+    }
+
+    .upinfo-btn-panel .not-follow-charge-btn:hover,
+    .user-card-m-exp .user-info-wrapper .info .btn-box .like:hover,
+    .coin-operated-m-exp .coin-bottom .bi-btn:hover {
+      border-color: var(--bew-theme-color-80);
+    }
+
+    // Tick icon for  danmaku enable
+    .bui-danmaku-switch .bui-danmaku-switch-input:checked+.bui-danmaku-switch-label .bui-danmaku-switch-on path:nth-child(2),
+    .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-fill,
+    .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-fill,
+    .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill,
+    .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill,
+    .ql-snow.ql-toolbar .ql-picker-item:hover .ql-fill,
+    .ql-snow .ql-toolbar .ql-picker-item:hover .ql-fill,
+    .ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke.ql-fill,
+    .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke.ql-fill,
+    .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-fill,
+    .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-fill,
+    .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke.ql-fill,
+    .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke.ql-fill,
+    .ql-snow.ql-toolbar .ql-picker-label:hover .ql-fill,
+    .ql-snow .ql-toolbar .ql-picker-label:hover .ql-fill,
+    .ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke.ql-fill,
+    .ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke.ql-fill,
+    .ql-snow.ql-toolbar button.ql-active .ql-fill,
+    .ql-snow .ql-toolbar button.ql-active .ql-fill,
+    .ql-snow.ql-toolbar button.ql-active .ql-stroke.ql-fill,
+    .ql-snow .ql-toolbar button.ql-active .ql-stroke.ql-fill,
+    .ql-snow.ql-toolbar button:focus .ql-fill,
+    .ql-snow .ql-toolbar button:focus .ql-fill,
+    .ql-snow.ql-toolbar button:focus .ql-stroke.ql-fill,
+    .ql-snow .ql-toolbar button:focus .ql-stroke.ql-fill,
+    .ql-snow.ql-toolbar button:hover .ql-fill,
+    .ql-snow .ql-toolbar button:hover .ql-fill,
+    .ql-snow.ql-toolbar button:hover .ql-stroke.ql-fill,
+    .ql-snow .ql-toolbar button:hover .ql-stroke.ql-fill {
+      fill: var(--bew-theme-color);
+    }
+
+    .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke,
+    .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke,
+    .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter,
+    .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter,
+    .ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke,
+    .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke,
+    .ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke-miter,
+    .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke-miter,
+    .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke,
+    .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke,
+    .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke-miter,
+    .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke-miter,
+    .ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke,
+    .ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke,
+    .ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke-miter,
+    .ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke-miter,
+    .ql-snow.ql-toolbar button.ql-active .ql-stroke,
+    .ql-snow .ql-toolbar button.ql-active .ql-stroke,
+    .ql-snow.ql-toolbar button.ql-active .ql-stroke-miter,
+    .ql-snow .ql-toolbar button.ql-active .ql-stroke-miter,
+    .ql-snow.ql-toolbar button:focus .ql-stroke,
+    .ql-snow .ql-toolbar button:focus .ql-stroke,
+    .ql-snow.ql-toolbar button:focus .ql-stroke-miter,
+    .ql-snow .ql-toolbar button:focus .ql-stroke-miter,
+    .ql-snow.ql-toolbar button:hover .ql-stroke,
+    .ql-snow .ql-toolbar button:hover .ql-stroke,
+    .ql-snow.ql-toolbar button:hover .ql-stroke-miter,
+    .ql-snow .ql-toolbar button:hover .ql-stroke-miter {
+      stroke: var(--bew-theme-color);
+    }
+
+    // AI视频总结
+    .video-ai-assistant .video-ai-assistant-info {
+      -webkit-text-fill-color: var(--bew-theme-color);
+    }
+
+    .upinfo-btn-panel .new-charge-btn .charge-btn-icon img,
+    .bpx-player-viewpoint-menu-item-active,
+    .cur-play-icon,
+    .playing-gif,
+    .multi-page-v1 .cur-list .list-box li.on img,
+    .coin-operated-m-exp .like-checkbox input[type='checkbox']:checked+i {
+      filter: var(--bew-filter-icon-glow);
+    }
   }
 
-  .user-card-m-exp .user-info-wrapper .info .user .user-label {
-    background-color: var(--bew-theme-color) !important;
-  }
-
-  .note-list .list-note-operation:hover,
-  .note-pc .note-container .note-header .note-operation:hover,
-  .user-card-m-exp .user-info-wrapper .info .btn-box .like:hover,
-  .coin-operated-m-exp .coin-bottom .bi-btn:hover,
-  .video-share-popover
-    .video-share-dropdown
-    .dropdown-top
-    .dropdown-top-left
-    .capture-bar
-    .bar-right
-    .copy-link:hover,
-  .note-up .up-desc-container .desc-top .attention-btn-container:hover,
-  .report-dialog
-    .vui_dialog--footer
-    .report-dialog-footer
-    .button-wrap
-    .comfirm-report:hover,
-  .collection-m-exp .bottom .btn:hover {
-    background-color: var(--bew-theme-color-80);
-  }
-
-  .upinfo-btn-panel .follow-btn.not-follow:hover {
-    background-color: var(--bew-theme-color-80) !important;
-  }
-
-  .follow-dialog-wrap-exp
-    .follow-dialog-window
-    .content
-    .group-list
-    .add-group
-    .input-group
-    .submitGroup {
-    background-color: var(--bew-theme-color-10);
-  }
-
-  .note-detail .note-operation .tab-action-item.is-active .tab-icon {
-    color: var(--bew-theme-color);
-  }
-
-  .membersinfo-upcard .staff-info .staff-name.is-vip,
-  .ql-snow.ql-toolbar .ql-picker-item.ql-selected,
-  .ql-snow .ql-toolbar .ql-picker-item.ql-selected,
-  .ql-snow.ql-toolbar .ql-picker-item:hover,
-  .ql-snow .ql-toolbar .ql-picker-item:hover,
-  .ql-snow.ql-toolbar .ql-picker-label.ql-active,
-  .ql-snow .ql-toolbar .ql-picker-label.ql-active,
-  .ql-snow.ql-toolbar .ql-picker-label:hover,
-  .ql-snow .ql-toolbar .ql-picker-label:hover,
-  .ql-snow.ql-toolbar button.ql-active,
-  .ql-snow .ql-toolbar button.ql-active,
-  .ql-snow.ql-toolbar button:focus,
-  .ql-snow .ql-toolbar button:focus,
-  .ql-snow.ql-toolbar button:hover,
-  .ql-snow .ql-toolbar button:hover {
-    color: var(--bew-theme-color) !important;
-  }
-
-  .upinfo-btn-panel .not-follow-charge-btn:hover {
-    color: var(--bew-theme-color-80);
-  }
-
-  .coin-operated-m-exp .mc-box:hover,
-  .coin-operated-m-exp .mc-box.on,
-  .note-pc .note-container .note-header .note-operation {
-    border-color: var(--bew-theme-color);
-  }
-
-  .upinfo-btn-panel .not-follow-charge-btn:hover,
-  .user-card-m-exp .user-info-wrapper .info .btn-box .like:hover,
-  .coin-operated-m-exp .coin-bottom .bi-btn:hover {
-    border-color: var(--bew-theme-color-80);
-  }
-
-  // Tick icon for  danmaku enable
-  .bui-danmaku-switch
-    .bui-danmaku-switch-input:checked
-    + .bui-danmaku-switch-label
-    .bui-danmaku-switch-on
-    path:nth-child(2),
-  .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-fill,
-  .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-fill,
-  .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill,
-  .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill,
-  .ql-snow.ql-toolbar .ql-picker-item:hover .ql-fill,
-  .ql-snow .ql-toolbar .ql-picker-item:hover .ql-fill,
-  .ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke.ql-fill,
-  .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke.ql-fill,
-  .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-fill,
-  .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-fill,
-  .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke.ql-fill,
-  .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke.ql-fill,
-  .ql-snow.ql-toolbar .ql-picker-label:hover .ql-fill,
-  .ql-snow .ql-toolbar .ql-picker-label:hover .ql-fill,
-  .ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke.ql-fill,
-  .ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke.ql-fill,
-  .ql-snow.ql-toolbar button.ql-active .ql-fill,
-  .ql-snow .ql-toolbar button.ql-active .ql-fill,
-  .ql-snow.ql-toolbar button.ql-active .ql-stroke.ql-fill,
-  .ql-snow .ql-toolbar button.ql-active .ql-stroke.ql-fill,
-  .ql-snow.ql-toolbar button:focus .ql-fill,
-  .ql-snow .ql-toolbar button:focus .ql-fill,
-  .ql-snow.ql-toolbar button:focus .ql-stroke.ql-fill,
-  .ql-snow .ql-toolbar button:focus .ql-stroke.ql-fill,
-  .ql-snow.ql-toolbar button:hover .ql-fill,
-  .ql-snow .ql-toolbar button:hover .ql-fill,
-  .ql-snow.ql-toolbar button:hover .ql-stroke.ql-fill,
-  .ql-snow .ql-toolbar button:hover .ql-stroke.ql-fill {
-    fill: var(--bew-theme-color);
-  }
-
-  .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke,
-  .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke,
-  .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter,
-  .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter,
-  .ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke,
-  .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke,
-  .ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke-miter,
-  .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke-miter,
-  .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke,
-  .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke,
-  .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke-miter,
-  .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke-miter,
-  .ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke,
-  .ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke,
-  .ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke-miter,
-  .ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke-miter,
-  .ql-snow.ql-toolbar button.ql-active .ql-stroke,
-  .ql-snow .ql-toolbar button.ql-active .ql-stroke,
-  .ql-snow.ql-toolbar button.ql-active .ql-stroke-miter,
-  .ql-snow .ql-toolbar button.ql-active .ql-stroke-miter,
-  .ql-snow.ql-toolbar button:focus .ql-stroke,
-  .ql-snow .ql-toolbar button:focus .ql-stroke,
-  .ql-snow.ql-toolbar button:focus .ql-stroke-miter,
-  .ql-snow .ql-toolbar button:focus .ql-stroke-miter,
-  .ql-snow.ql-toolbar button:hover .ql-stroke,
-  .ql-snow .ql-toolbar button:hover .ql-stroke,
-  .ql-snow.ql-toolbar button:hover .ql-stroke-miter,
-  .ql-snow .ql-toolbar button:hover .ql-stroke-miter {
-    stroke: var(--bew-theme-color);
-  }
-
-  // AI视频总结
-  .video-ai-assistant .video-ai-assistant-info {
-    -webkit-text-fill-color: var(--bew-theme-color);
-  }
-
-  .upinfo-btn-panel .new-charge-btn .charge-btn-icon img,
-  .bpx-player-viewpoint-menu-item-active,
-  .cur-play-icon,
-  .playing-gif,
-  .multi-page-v1 .cur-list .list-box li.on img,
-  .coin-operated-m-exp .like-checkbox input[type='checkbox']:checked + i {
-    filter: var(--bew-filter-icon-glow);
-  }
   // #endregion
 
   // #region dark mode adaption part
   &.dark {
+
     .note-list .note-card-container .note-card,
     .resizable-component .ql-tag-blot .time-tag-item,
     .ql-toolbar {
@@ -208,6 +195,10 @@
       background-color: var(--bew-elevated-solid-2);
     }
 
+    .resizable-component .editor-innter {
+      background-color: unset;
+    }
+
     .note-pc .note-container .note-header *,
     .note-list .note-card-container .note-card .note-content,
     .note-up .up-desc-container .desc-top .up-name,
@@ -217,11 +208,11 @@
     .ql-snow .ql-picker,
     .video-owner-state .video-owner-state-item,
     .ql-editor .ql-color-\#000000,
-    .ql-editor {
+    .ql-editor,
+    .up-detail .up-detail-top .up-name {
       color: var(--bew-text-1);
     }
 
-    .up-detail .up-detail-top .up-name,
     .user-card-m-exp .user-info-wrapper .info .user .name {
       color: var(--bew-text-1) !important;
     }
@@ -258,5 +249,6 @@
       border-color: var(--bew-border-color);
     }
   }
+
   //  #endregion
 }
