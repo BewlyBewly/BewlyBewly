@@ -136,7 +136,7 @@ function changeWallpaper(url: string) {
       </SettingsItem>
 
       <SettingsItem v-if="settings.wallpaperMode === 'buildIn'" :title="$t('settings.choose_ur_wallpaper')" next-line>
-        <div grid="~ xl:cols-4 lg:cols-3 cols-2  gap-4">
+        <div grid="~ xl:cols-5 lg:cols-4 cols-3 gap-4">
           <picture
             aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
             un-border="4 transparent" cursor-pointer
@@ -163,7 +163,7 @@ function changeWallpaper(url: string) {
           <picture
             aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
             un-border="4 transparent" cursor-pointer shrink-0
-            w="xl:1/4 lg:1/3 md:1/2"
+            w="xl:1/5 lg:1/4 md:1/3"
           >
             <img
               v-if="settings.wallpaper" :src="getBewlyImage(settings.wallpaper)" alt="" loading="lazy"

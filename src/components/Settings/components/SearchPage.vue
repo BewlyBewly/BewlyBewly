@@ -96,26 +96,6 @@ function changeWallpaper(url: string) {
             </picture>
           </Tooltip>
         </div>
-        <!-- <div flex items-center gap-4>
-          <div>
-            <picture
-              aspect-square bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
-              un-border="4 transparent" cursor-pointer shrink-0
-              w="xl:1/8 lg:1/6 md:1/5" p--4
-            >
-              <img
-                v-if="settings.searchPageSearchBarFocusCharacter" :src="settings.searchPageSearchBarFocusCharacter" alt="" w-full h-full object-contain
-                onerror="this.style.display='none'; this.onerror=null;"
-              >
-            </picture>
-          </div>
-          <div>
-            <Input v-model="settings.searchPageSearchBarFocusCharacter" w-full />
-            <p color="sm $bew-text-3" mt-2>
-              {{ $t('settings.image_url_hint') }}
-            </p>
-          </div>
-        </div> -->
       </SettingsItem>
     </SettingsItemGroup>
 
@@ -154,7 +134,7 @@ function changeWallpaper(url: string) {
         </SettingsItem>
 
         <SettingsItem v-if="settings.searchPageWallpaperMode === 'buildIn'" :title="$t('settings.choose_ur_wallpaper')" next-line>
-          <div grid="~ xl:cols-4 lg:cols-3 cols-2  gap-4">
+          <div grid="~ xl:cols-5 lg:cols-4 cols-3 gap-4">
             <picture
               aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
               un-border="4 transparent" cursor-pointer
@@ -181,7 +161,7 @@ function changeWallpaper(url: string) {
             <picture
               aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
               un-border="4 transparent" cursor-pointer shrink-0
-              w="xl:1/4 lg:1/3 md:1/2"
+              w="xl:1/5 lg:1/4 md:1/3"
             >
               <img
                 v-if="settings.searchPageWallpaper" :src="getBewlyImage(settings.searchPageWallpaper)" alt="" w-full h-full

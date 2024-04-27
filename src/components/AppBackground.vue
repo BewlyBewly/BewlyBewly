@@ -56,9 +56,9 @@ function setAppWallpaperMaskingOpacity() {
     <div v-else>
       <!-- background -->
       <div
+        :style="{ backgroundImage: `url('${getBewlyImage(settings.wallpaper)}')` }"
         pos="absolute top-0 left-0" w-full h-full duration-300 bg="cover center $bew-homepage-bg"
         z--1
-        :style="{ backgroundImage: `url(${settings.wallpaper})` }"
       />
       <!-- background mask -->
       <transition name="fade">
