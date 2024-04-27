@@ -1,5 +1,32 @@
 # Changelog
 
+## [0.18.1](https://github.com/BewlyBewly/BewlyBewly/compare/v0.18.0...v0.18.1) (2024-04-27)
+
+
+### Features
+
+* local wallpapers ([#668](https://github.com/BewlyBewly/BewlyBewly/issues/668)) ([5672d9d](https://github.com/BewlyBewly/BewlyBewly/commit/5672d9dd156d94f61969c88b29bcb2bd01a3ac15))
+* **UserPanel:** Add "My workshop" link to UserPanelPop.vue ([#680](https://github.com/BewlyBewly/BewlyBewly/issues/680)) ([825794f](https://github.com/BewlyBewly/BewlyBewly/commit/825794fb2619194669c67cb1eb2a2b3eb7a34df7))
+* **VideoCard:** add tick icon for followed uploader ([#672](https://github.com/BewlyBewly/BewlyBewly/issues/672)) ([39d6d9a](https://github.com/BewlyBewly/BewlyBewly/commit/39d6d9a91dcf32a220fd15121993d170ed84cf6f))
+
+
+### Bug Fixes
+
+* **Anime:** fix cannot show the anime watch list ([02c3673](https://github.com/BewlyBewly/BewlyBewly/commit/02c36735713550e9dcc724845125848266d6f6c8))
+* can not load watch later list ([ff8056e](https://github.com/BewlyBewly/BewlyBewly/commit/ff8056e01c83fc4890c794f4b45576add6ef10c2))
+* **MomentsPop:** resolve [#649](https://github.com/BewlyBewly/BewlyBewly/issues/649) ([24310d3](https://github.com/BewlyBewly/BewlyBewly/commit/24310d382f92484435bd001b4f8d784a5e92ef49))
+* selection background and color don't change on certain pages ([8fe0f06](https://github.com/BewlyBewly/BewlyBewly/commit/8fe0f062866aa77e6e5d7de5cee53bc0bfbfbef1))
+* **TopBar:** hide more icon in top bar when not needed ([dbdb721](https://github.com/BewlyBewly/BewlyBewly/commit/dbdb72149b632fe6ccd87eba7e8cae954df6575a))
+* unadapted content on video page ([#663](https://github.com/BewlyBewly/BewlyBewly/issues/663)) ([3a4d431](https://github.com/BewlyBewly/BewlyBewly/commit/3a4d431f8abe0bc508fd94be85d4c6514d9095ae))
+* **userSpacePage:** adapt unadapted content ([185fd61](https://github.com/BewlyBewly/BewlyBewly/commit/185fd61572035323527efac49e1916fcdbda619f))
+* **VideoCard:** adjust usage between v-if and v-show ([a4e96c8](https://github.com/BewlyBewly/BewlyBewly/commit/a4e96c825f1a2e33feb68a32cb506d0009ff2ea4))
+* **VideoCard:** resolve checked animation not working ([dd15200](https://github.com/BewlyBewly/BewlyBewly/commit/dd15200f4f2c497ed277ec08a462a732e2d8cd14))
+
+
+### Docs
+
+* **README:** remove the donate section ([339219a](https://github.com/BewlyBewly/BewlyBewly/commit/339219ad4a6fc82bf5988f636539c8d41747b7d3))
+
 ## [0.18.0](https://github.com/BewlyBewly/BewlyBewly/compare/v0.17.0...v0.18.0) (2024-04-24)
 
 
