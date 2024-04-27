@@ -3,7 +3,7 @@ import { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
 
 const props = defineProps<{ activatedPage: AppPage }>()
-
+const { getBewlyImage } = useBewlyImage()
 watch(() => settings.value.wallpaperMaskOpacity, () => {
   setAppWallpaperMaskingOpacity()
 })
@@ -39,7 +39,7 @@ function setAppWallpaperMaskingOpacity() {
       <div
         pos="absolute top-0 left-0" w-full h-full duration-300 bg="cover center $bew-homepage-bg"
         z--1
-        :style="{ backgroundImage: `url(${settings.individuallySetSearchPageWallpaper ? settings.searchPageWallpaper : settings.wallpaper})` }"
+        :style="{ backgroundImage: `url('${settings.individuallySetSearchPageWallpaper ? getBewlyImage(settings.searchPageWallpaper) : getBewlyImage(settings.wallpaper)}')` }"
       />
       <!-- background mask -->
       <transition name="fade">
@@ -56,9 +56,9 @@ function setAppWallpaperMaskingOpacity() {
     <div v-else>
       <!-- background -->
       <div
+        :style="{ backgroundImage: `url('${getBewlyImage(settings.wallpaper)}')` }"
         pos="absolute top-0 left-0" w-full h-full duration-300 bg="cover center $bew-homepage-bg"
         z--1
-        :style="{ backgroundImage: `url(${settings.wallpaper})` }"
       />
       <!-- background mask -->
       <transition name="fade">

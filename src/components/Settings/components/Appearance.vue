@@ -2,6 +2,8 @@
 import { useI18n } from 'vue-i18n'
 import { settings } from '~/logic'
 
+const { wallpapers, getBewlyImage } = useBewlyImage()
+
 const { t } = useI18n()
 
 const themeColorOptions = computed<Array<string>>(() => {
@@ -27,30 +29,6 @@ const themeColorOptions = computed<Array<string>>(() => {
 })
 const isCustomColor = computed<boolean>(() => {
   return !themeColorOptions.value.includes(settings.value.themeColor)
-})
-const wallpapers = computed<Array<{ name: string, url: string, thumbnail: string }>>(() => {
-  return [
-    {
-      name: 'Unsplash Random Nature Image',
-      url: 'https://source.unsplash.com/1920x1080/?nature',
-      thumbnail: 'https://source.unsplash.com/1920x1080/?nature',
-    },
-    {
-      name: 'BML2019 VR (pid: 74271400)',
-      url: 'https://pic.imgdb.cn/item/638e1d63b1fccdcd36103811.jpg',
-      thumbnail: 'https://pic.imgdb.cn/item/64ac5e341ddac507cc750ae8.jpg',
-    },
-    {
-      name: '2020 拜年祭活动',
-      url: 'https://pic.imgdb.cn/item/638e1d7ab1fccdcd36106346.jpg',
-      thumbnail: 'https://pic.imgdb.cn/item/64ac5f251ddac507cc7658af.jpg',
-    },
-    {
-      name: '2020 BDF',
-      url: 'https://pic.imgdb.cn/item/63830f1816f2c2beb1868554.jpg',
-      thumbnail: 'https://pic.imgdb.cn/item/64ac5fc01ddac507cc77224e.jpg',
-    },
-  ]
 })
 const themeOptions = computed<Array<{ value: string, label: string }>>(() => {
   return [
@@ -158,7 +136,7 @@ function changeWallpaper(url: string) {
       </SettingsItem>
 
       <SettingsItem v-if="settings.wallpaperMode === 'buildIn'" :title="$t('settings.choose_ur_wallpaper')" next-line>
-        <div grid="~ xl:cols-4 lg:cols-3 cols-2  gap-4">
+        <div grid="~ xl:cols-5 lg:cols-4 cols-3 gap-4">
           <picture
             aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
             un-border="4 transparent" cursor-pointer
@@ -175,7 +153,7 @@ function changeWallpaper(url: string) {
               :class="{ 'selected-wallpaper': settings.wallpaper === item.url }"
               @click="changeWallpaper(item.url)"
             >
-              <img :src="item.thumbnail" alt="" w-full h-full object-cover>
+              <img :src="getBewlyImage(item.thumbnail)" alt="" w-full h-full object-cover>
             </picture>
           </Tooltip>
         </div>
@@ -185,11 +163,12 @@ function changeWallpaper(url: string) {
           <picture
             aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
             un-border="4 transparent" cursor-pointer shrink-0
-            w="xl:1/4 lg:1/3 md:1/2"
+            w="xl:1/5 lg:1/4 md:1/3"
           >
             <img
-              v-if="settings.wallpaper" :src="settings.wallpaper" alt="" w-full h-full
-              object-cover onerror="this.style.display='none'; this.onerror=null;"
+              v-if="settings.wallpaper" :src="getBewlyImage(settings.wallpaper)" alt="" loading="lazy"
+              w-full h-full object-cover
+              onerror="this.style.display='none'; this.onerror=null;"
             >
           </picture>
           <div>
