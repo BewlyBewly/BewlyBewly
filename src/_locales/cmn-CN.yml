@@ -240,6 +240,7 @@ topbar:
     uploads_manager: 投稿管理
     b_coins_wallet: B币钱包
     orders: 订单中心
+    workshop: 我的工房
     my_stream_info: 直播中心
     my_courses: 我的课程
     log_out: 退出登录

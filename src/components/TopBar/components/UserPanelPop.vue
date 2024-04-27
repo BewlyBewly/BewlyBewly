@@ -22,6 +22,7 @@ const otherLinks = computed((): { name: string, url: string }[] => {
     { name: t('topbar.user_dropdown.uploads_manager'), url: 'https://member.bilibili.com/v2#/upload-manager/article' },
     { name: t('topbar.user_dropdown.b_coins_wallet'), url: 'https://pay.bilibili.com/' },
     { name: t('topbar.user_dropdown.orders'), url: 'https://show.bilibili.com/orderlist' },
+    { name: t('topbar.user_dropdown.workshop'), url: 'https://gf.bilibili.com?msource=main_station' },
     { name: t('topbar.user_dropdown.my_stream_info'), url: 'https://link.bilibili.com/p/center/index' },
     { name: t('topbar.user_dropdown.my_courses'), url: 'https://www.bilibili.com/cheese/mine/list' },
   ]
