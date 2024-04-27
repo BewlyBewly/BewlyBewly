@@ -150,7 +150,8 @@
     .search-nav-item.search-nav-actived,
     #page-series-detail .channel-option .modify-channel,
     .game-card__btn,
-    .be-tags-container .tag.new-tag {
+    .be-tags-container .tag.new-tag,
+    #page-fav .fav-sidenav .fav-item.cur:hover .icon-cursor {
       background-color: var(--bew-theme-color);
     }
 
