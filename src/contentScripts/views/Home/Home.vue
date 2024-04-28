@@ -145,7 +145,7 @@ function toggleTabContentLoading(loading: boolean) {
           pos="absolute left-0 top-0" w-full h-inherit bg="cover center" z-1
           pointer-events-none
           :style="{
-            backgroundImage: `url(${getBewlyImage(settings.searchPageWallpaper)})`,
+            backgroundImage: `url('${getBewlyImage(settings.searchPageWallpaper)}')`,
             backgroundAttachment: settings.searchPageModeWallpaperFixed ? 'fixed' : 'unset',
           }"
         />
