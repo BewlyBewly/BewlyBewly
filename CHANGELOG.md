@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.18.2](https://github.com/BewlyBewly/BewlyBewly/compare/v0.18.1...v0.18.2) (2024-04-28)
+
+
+### Bug Fixes
+
+* can't get local image background for home search view ([6d6d7c7](https://github.com/BewlyBewly/BewlyBewly/commit/6d6d7c7a3fd2543ddb186a88b870afd3b3b80eca)), closes [#687](https://github.com/BewlyBewly/BewlyBewly/issues/687)
+* firefox rule ([#690](https://github.com/BewlyBewly/BewlyBewly/issues/690)) ([beff7d0](https://github.com/BewlyBewly/BewlyBewly/commit/beff7d04ee2a223c65919e1e038a721e0ce62957))
+* firefox rule ([#691](https://github.com/BewlyBewly/BewlyBewly/issues/691)) ([e13af11](https://github.com/BewlyBewly/BewlyBewly/commit/e13af11121dcc786b73f46487db63c7392e27d45))
+* frosted glass effect not working in firefox ([2c4e44f](https://github.com/BewlyBewly/BewlyBewly/commit/2c4e44f21328e5a896c496c8c23664865443ad92))
+
+
+### Style Changes
+
+* **userSpacePage:** adapt unadapted sections ([df429ba](https://github.com/BewlyBewly/BewlyBewly/commit/df429bad8561afb0bafb065849c4af307e1cceb4))
+
 ## [0.18.1](https://github.com/BewlyBewly/BewlyBewly/compare/v0.18.0...v0.18.1) (2024-04-27)
 
 
