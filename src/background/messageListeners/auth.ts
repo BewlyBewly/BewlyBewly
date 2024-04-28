@@ -2,7 +2,7 @@
 import type { APIMAP } from '../utils'
 import { AHS } from '../utils'
 
-const API_AUTH: APIMAP = {
+const API_AUTH = {
   // biliJct 似乎没有使用
   logout: {
     url: 'https://passport.bilibili.com/login/exit/v2',
@@ -54,6 +54,6 @@ const API_AUTH: APIMAP = {
     },
     afterHandle: AHS.J_S,
   },
-}
+} satisfies APIMAP
 
 export default API_AUTH

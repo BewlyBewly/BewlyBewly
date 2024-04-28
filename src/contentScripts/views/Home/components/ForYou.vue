@@ -181,7 +181,7 @@ async function getAppRecommendVideos() {
     const response: AppForYouResult = await api.video.getAppRecommendVideos({
       access_key: accessKey.value,
       s_locale: settings.value.language === LanguageType.Mandarin_TW || settings.value.language === LanguageType.Cantonese ? 'zh-Hant_TW' : 'zh-Hans_CN',
-      c_locale: settings.value.language === LanguageType.Mandarin_TW || settings.value.language === LanguageType.Cantonese ? 'zh-Hant_TW' : 'zh-Hans_CN',
+      c_locate: settings.value.language === LanguageType.Mandarin_TW || settings.value.language === LanguageType.Cantonese ? 'zh-Hant_TW' : 'zh-Hans_CN',
       appkey: TVAppKey.appkey,
       idx: appVideoList.length > 0 ? appVideoList[appVideoList.length - 1].idx : 1,
     })
@@ -287,7 +287,7 @@ function handleAppDislike() {
   const params = {
     access_key: accessKey.value,
     goto: activatedAppVideo.value?.goto,
-    id: activatedAppVideo.value?.param,
+    id: Number(activatedAppVideo.value?.param),
     // https://github.com/magicdawn/bilibili-app-recommend/blob/cb51f75f415f48235ce048537f2013122c16b56b/src/components/VideoCard/card.service.ts#L115
     idx: (Date.now() / 1000).toFixed(0),
     reason_id: selectedDislikeReason.value,
@@ -322,9 +322,9 @@ function handleAppUndoDislike(video: AppVideoItem) {
   const params = {
     access_key: accessKey.value,
     goto: video.goto,
-    id: video.param,
+    id: Number(video.param),
     // https://github.com/magicdawn/bilibili-app-recommend/blob/cb51f75f415f48235ce048537f2013122c16b56b/src/components/VideoCard/card.service.ts#L115
-    idx: (Date.now() / 1000).toFixed(0),
+    idx: Number((Date.now() / 1000).toFixed(0)),
     reason_id: selectedDislikeReason.value, // 1 means dislike, e.g. {"id": 1, "name": "不感兴趣","toast": "将减少相似内容推荐"}
     build: 74800100,
     device: 'pad',

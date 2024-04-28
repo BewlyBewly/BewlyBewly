@@ -1,7 +1,7 @@
 import type { APIMAP } from '../utils'
 import { AHS } from '../utils'
 
-const API_MOMENT: APIMAP = {
+const API_MOMENT = {
   getTopBarNewMomentsCount: {
     url: 'https://api.bilibili.com/x/web-interface/dynamic/entrance',
     _fetch: {
@@ -39,13 +39,12 @@ const API_MOMENT: APIMAP = {
       method: 'get',
     },
     params: {
-      type: 268435455,
+      type: 'all',
       offset: 0,
-      update_baseline: 0,
+      update_baseline: '',
     },
     afterHandle: AHS.J_D,
   },
-
-}
+} satisfies APIMAP
 
 export default API_MOMENT

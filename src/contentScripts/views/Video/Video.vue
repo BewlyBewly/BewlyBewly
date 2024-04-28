@@ -72,7 +72,7 @@ async function getVideoInfo() {
 
   let res
   if (isBV)
-    res = await api.video.getVideoInfo({ videoId })
+    res = await api.video.getVideoInfo({ bvid: videoId })
   else
     res = await api.video.getVideoInfo({ aid: videoId.replace('av', '') })
   if (res.code === 0) {
