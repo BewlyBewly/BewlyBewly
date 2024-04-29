@@ -1,97 +1,13 @@
 <script setup lang="ts">
-import { usePreferredDark } from '@vueuse/core'
 import type { HoveringDockItem } from './types'
-import { settings } from '~/logic'
 
 const emit = defineEmits(['settings-visibility-change'])
-const { mainAppRef } = useBewlyApp()
+const { isDark, toggleDark } = useDark()
 
 const hoveringDockItem = reactive<HoveringDockItem>({
   themeMode: false,
   settings: false,
 })
-
-const isPreferredDark = usePreferredDark()
-const currentSystemColorScheme = computed(() => isPreferredDark.value ? 'dark' : 'light')
-
-const currentAppColorScheme = computed((): 'dark' | 'light' => {
-  if (settings.value.theme !== 'auto')
-    return settings.value.theme
-  else
-    return currentSystemColorScheme.value
-})
-
-function toggleDark(e: MouseEvent) {
-  const updateThemeSettings = () => {
-    if (currentAppColorScheme.value !== currentSystemColorScheme.value)
-      settings.value.theme = 'auto'
-    else
-      settings.value.theme = isPreferredDark.value ? 'light' : 'dark'
-  }
-
-  const isAppearanceTransition = typeof document !== 'undefined'
-  // @ts-expect-error: Transition API
-    && document.startViewTransition
-    && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  if (!isAppearanceTransition) {
-    updateThemeSettings()
-  }
-  else {
-    const x = e.clientX
-    const y = e.clientY
-    const endRadius = Math.hypot(
-      Math.max(x, innerWidth - x),
-      Math.max(y, innerHeight - y),
-    )
-    // https://github.com/vueuse/vueuse/pull/3129
-    const style = document.createElement('style')
-    const styleString = `
-    *, *::before, *::after
-    {-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important}`
-    style.appendChild(document.createTextNode(styleString))
-    document.head.appendChild(style)
-
-    // Since normal dom style cannot be applied in shadow dom style
-    // We need to add this style again to the shadow dom
-    const shadowDomStyle = document.createElement('style')
-    const shadowDomStyleString = `
-    *, *::before, *::after
-    {-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important}`
-    shadowDomStyle.appendChild(document.createTextNode(shadowDomStyleString))
-    mainAppRef.value.appendChild(shadowDomStyle)
-
-    // @ts-expect-error: Transition API
-    const transition = document.startViewTransition(async () => {
-      updateThemeSettings()
-      await nextTick()
-    })
-
-    transition.ready.then(() => {
-      const clipPath = [
-      `circle(0px at ${x}px ${y}px)`,
-      `circle(${endRadius}px at ${x}px ${y}px)`,
-      ]
-      const animation = document.documentElement.animate(
-        {
-          clipPath: currentAppColorScheme.value === 'dark'
-            ? [...clipPath].reverse()
-            : clipPath,
-        },
-        {
-          duration: 300,
-          easing: 'ease-in-out',
-          pseudoElement: currentAppColorScheme.value === 'dark'
-            ? '::view-transition-old(root)'
-            : '::view-transition-new(root)',
-        },
-      )
-      animation.addEventListener('finish', () => {
-        document.head.removeChild(style!)
-        mainAppRef.value.removeChild(shadowDomStyle!)
-      }, { once: true })
-    })
-  }
-}
 </script>
 
 <template>
@@ -100,7 +16,7 @@ function toggleDark(e: MouseEvent) {
     pointer-events-none
   >
     <div flex="~ gap-2 col" pointer-events-auto>
-      <Tooltip :content="currentAppColorScheme === 'dark' ? $t('dock.dark_mode') : $t('dock.light_mode')" placement="left">
+      <Tooltip :content="isDark ? $t('dock.dark_mode') : $t('dock.light_mode')" placement="left">
         <Button
           class="ctrl-btn"
           style="backdrop-filter: var(--bew-filter-glass-1);"
@@ -111,13 +27,13 @@ function toggleDark(e: MouseEvent) {
         >
           <Transition name="fade">
             <div v-show="hoveringDockItem.themeMode" absolute>
-              <line-md:sunny-outline-to-moon-loop-transition v-if="currentAppColorScheme === 'dark'" />
+              <line-md:sunny-outline-to-moon-loop-transition v-if="isDark" />
               <line-md:moon-alt-to-sunny-outline-loop-transition v-else />
             </div>
           </Transition>
           <Transition name="fade">
             <div v-show="!hoveringDockItem.themeMode" absolute>
-              <line-md:sunny-outline-to-moon-transition v-if="currentAppColorScheme === 'dark'" />
+              <line-md:sunny-outline-to-moon-transition v-if="isDark" />
               <line-md:moon-to-sunny-outline-transition v-else />
             </div>
           </Transition>
