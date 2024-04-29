@@ -21,11 +21,13 @@ pnpm dev
 ```
 
 2. 在地址欄輸入 `chrome://extensions/`（Chrome），`edge://extensions/`（Edge）並按 Enter 鍵
+
 3. 啟用 `開發者模式` 並點擊 `載入解壓縮`
-<br/>
+
 <img width="655" alt="Snipaste_2022-03-27_18-17-04" src="https://user-images.githubusercontent.com/33394391/160276882-13da0484-92c1-47dd-add8-7655c5c2bf1c.png">
 <br/>
 <img width="655" alt="image" src="https://user-images.githubusercontent.com/33394391/232246901-e3544c16-bde2-480d-b770-ca5242793963.png">
+
 4. 在瀏覽器中載入生成的 `extension/` 資料夾
 
 每次修改後，您需要點選 [Extensions Reloader](https://chromewebstore.google.com/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) 按鈕，然後重新整理頁面，以確保更改生效。
@@ -53,8 +55,9 @@ pnpm dev
 ```
 
 2. 在瀏覽器中輸入 `about:addons`，點擊 `Extensions` 然後 `Debug Add-ons`
-<br/>
+
 <img width="655" alt="image" src="https://github.com/hakadao/BewlyBewly/assets/33394391/7c49e4ca-2a87-4c56-bc00-3259d6eba128">
+
 3. 然後在瀏覽器中使用 `extension-firefox/` 資料夾載入此擴充功能。
 
 #### 構建（Firefox）
