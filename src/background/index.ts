@@ -13,7 +13,7 @@ function isExtensionUri(url: string) {
 // eslint-disable-next-line node/prefer-global/process
 if (process.env.FIREFOX) {
   browser.webRequest.onBeforeSendHeaders.addListener(
-    (details) => {
+    (details: browser.WebRequest.WebRequestHeadersDetails) => {
       const requestHeaders: browser.WebRequest.HttpHeaders = []
       if (details.documentUrl) {
         const url = new URL(details.documentUrl)
