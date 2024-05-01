@@ -15,12 +15,12 @@ const wValue = computed((): string => {
 <template>
   <div
     v-if="!horizontal"
-    mb-6 pointer-events-none select-none
+    mb-8 pointer-events-none select-none
   >
     <div aspect-video bg="$bew-fill-4" rounded="$bew-radius" />
     <div flex mt-4>
       <div
-        m="r-4" w="40px" h="40px" rounded="1/2" bg="$bew-fill-4"
+        m="r-4" w="36px" h="36px" rounded="1/2" bg="$bew-fill-4"
         shrink-0
       />
       <div w-full>
@@ -44,7 +44,7 @@ const wValue = computed((): string => {
   <div
     v-else
     flex="~ gap-6"
-    mb-6 pointer-events-none select-none
+    mb-8 pointer-events-none select-none
   >
     <!-- By directly using predefined unocss width properties, it is possible to dynamically set the width attribute -->
     <div hidden w="xl:280px lg:250px md:200px 200px" />

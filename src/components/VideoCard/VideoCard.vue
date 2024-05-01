@@ -4,7 +4,6 @@ import { getCSRF, removeHttpFromUrl } from '~/utils/main'
 import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils/dataFormatter'
 import type { VideoPreviewResult } from '~/models/video/videoPreview'
 import { settings } from '~/logic'
-import API from '~/background/msg.define'
 
 interface Props {
   id: number
@@ -30,7 +29,7 @@ interface Props {
   /** If you want to show preview video, you should set the cid value */
   cid?: number
   epid?: number
-  isFollowed?: boolean
+  followed?: boolean
   horizontal?: boolean
   tag?: string
   rank?: number
@@ -52,6 +51,8 @@ const emit = defineEmits<{
   (e: 'undo'): void
   (e: 'tellUsWhy'): void
 }>()
+
+const api = useApiClient()
 
 const videoUrl = computed(() => {
   if (props.bvid || props.aid)
@@ -90,8 +91,7 @@ const previewVideoUrl = ref<string>('')
 watch(() => isHover.value, (newValue) => {
   if (props.showPreview && settings.value.enableVideoPreview) {
     if (newValue && !previewVideoUrl.value && props.cid) {
-      browser.runtime.sendMessage({
-        contentScriptQuery: API.VIDEO.GET_VIDEO_PREVIEW,
+      api.video.getVideoPreview({
         bvid: props.bvid,
         cid: props.cid,
       }).then((res: VideoPreviewResult) => {
@@ -104,8 +104,7 @@ watch(() => isHover.value, (newValue) => {
 
 function toggleWatchLater() {
   if (!isInWatchLater.value) {
-    browser.runtime.sendMessage({
-      contentScriptQuery: API.WATCHLATER.SAVE_TO_WATCHLATER,
+    api.watchlater.saveToWatchLater({
       aid: props.id,
       csrf: getCSRF(),
     })
@@ -115,8 +114,7 @@ function toggleWatchLater() {
       })
   }
   else {
-    browser.runtime.sendMessage({
-      contentScriptQuery: API.WATCHLATER.REMOVE_FROM_WATCHLATER,
+    api.watchlater.removeFromWatchLater({
       aid: props.id,
       csrf: getCSRF(),
     })
@@ -297,10 +295,10 @@ function handleUndo() {
             duration-300
             @click.prevent="toggleWatchLater"
           >
-            <Tooltip v-show="!isInWatchLater" :content="$t('common.save_to_watch_later')" placement="bottom" type="dark">
+            <Tooltip v-if="!isInWatchLater" :content="$t('common.save_to_watch_later')" placement="bottom" type="dark">
               <mingcute:carplay-line />
             </Tooltip>
-            <Tooltip v-show="isInWatchLater" :content="$t('common.added')" placement="bottom" type="dark">
+            <Tooltip v-else :content="$t('common.added')" placement="bottom" type="dark">
               <line-md:confirm />
             </Tooltip>
           </button>
@@ -328,16 +326,28 @@ function handleUndo() {
             <a
               v-if="authorFace"
               :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
-              m="r-2" w="40px" h="40px" rounded="1/2" overflow="hidden"
+              m="r-4" w="36px" h="36px" rounded="1/2"
               object="center cover" bg="$bew-fill-4" cursor="pointer"
+              position-relative
               @click.stop=""
             >
               <img
+                rounded="1/2"
                 :src="`${removeHttpFromUrl(authorFace)}@50w_50h_1c`"
-                width="40"
-                height="40"
+                width="36"
+                height="36"
                 loading="lazy"
               >
+              <div
+                v-if="followed"
+                pos="absolute bottom--2px right--2px"
+                w-14px h-14px
+                bg="$bew-theme-color"
+                rounded="1/2"
+                grid place-items-center
+              >
+                <div color-white text-sm class="i-mingcute:check-fill w-10px h-10px" />
+              </div>
             </a>
           </div>
           <div class="group/desc" flex="~ col" w="full" align="items-start">
@@ -423,14 +433,9 @@ function handleUndo() {
                 </template>
                 <br>
               </div>
-              <div flex="inline items-center gap-1">
+              <div flex="inline items-center" ml-1>
                 <!-- Video type -->
-                <span
-                  v-if="type !== 'horizontal'"
-                  text="$bew-text-3 sm" inline-block w-7 h-7 bg="$bew-fill-1"
-                  flex="~ items-center justify-center"
-                  rounded-4
-                >
+                <span text="$bew-text-2" inline-block>
                   <mingcute:cellphone-2-line v-if="type === 'vertical'" />
                   <mingcute:movie-line v-else-if="type === 'bangumi'" />
                 </span>
@@ -444,7 +449,7 @@ function handleUndo() {
     <!-- skeleton -->
     <template v-if="!horizontal">
       <div
-        block mb-6 pointer-events-none select-none invisible
+        block mb-8 pointer-events-none select-none invisible
       >
         <!-- Cover -->
         <div w-full shrink-0 aspect-video h-fit rounded="$bew-radius" />
@@ -453,7 +458,7 @@ function handleUndo() {
           mt-4 flex="~ gap-4"
         >
           <div
-            block w="40px" h="40px" rounded="1/2" shrink-0
+            block w="36px" h="36px" rounded="1/2" shrink-0
           />
           <div w-full>
             <div grid gap-2>
@@ -475,7 +480,7 @@ function handleUndo() {
     <template v-else>
       <div
         flex="~ gap-6"
-        mb-6 pointer-events-none select-none invisible
+        mb-8 pointer-events-none select-none invisible
       >
         <!-- Cover -->
         <div

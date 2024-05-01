@@ -6,9 +6,9 @@ import emitter from '~/utils/mitt'
 import { settings } from '~/logic'
 import type { Media as FavoriteItem, FavoritesResult } from '~/models/video/favorite'
 import type { List as CategoryItem, FavoritesCategoryResult } from '~/models/video/favoriteCategory'
-import API from '~/background/msg.define'
 
 const { t } = useI18n()
+const api = useApiClient()
 
 const favoriteCategories = reactive<CategoryItem[]>([])
 const favoriteResources = reactive<FavoriteItem[]>([])
@@ -73,11 +73,9 @@ function initPageAction() {
 }
 
 async function getFavoriteCategories() {
-  await browser.runtime
-    .sendMessage({
-      contentScriptQuery: API.FAVORITE.GET_FAVORITE_CATEGORIES,
-      up_mid: getUserID(),
-    })
+  await api.favorite.getFavoriteCategories({
+    up_mid: getUserID(),
+  })
     .then((res: FavoritesCategoryResult) => {
       if (res.code === 0) {
         Object.assign(favoriteCategories, res.data.list)
@@ -108,13 +106,11 @@ async function getFavoriteResources(
     isFullPageLoading.value = true
   isLoading.value = true
   try {
-    const res: FavoritesResult = await browser.runtime
-      .sendMessage({
-        contentScriptQuery: API.FAVORITE.GET_FAVORITE_RESOURCES,
-        media_id,
-        pn,
-        keyword,
-      })
+    const res: FavoritesResult = await api.favorite.getFavoriteResources({
+      media_id,
+      pn,
+      keyword,
+    })
 
     if (res.code === 0) {
       activatedCategoryCover.value = res.data.info.cover
@@ -158,8 +154,7 @@ function jumpToLoginPage() {
 }
 
 function handleUnfavorite(favoriteResource: FavoriteResource) {
-  browser.runtime.sendMessage({
-    contentScriptQuery: API.FAVORITE.PATCH_DEL_FAVORITE_RESOURCES,
+  api.favorite.patchDelFavoriteResources({
     resources: `${favoriteResource.id}:${favoriteResource.type}`,
     media_id: selectedCategory.value?.id,
     csrf: getCSRF(),
@@ -252,7 +247,7 @@ function isMusic(item: FavoriteResource) {
       </template>
     </main>
 
-    <aside relative w="full md:40% lg:30% xl:25%" display="md:block none" order="1 md:2 lg:2">
+    <aside relative w="full md:40% lg:30% xl:25%" class="hidden md:block" order="1 md:2 lg:2">
       <div
         pos="sticky top-120px" flex="~ col gap-4" justify-start my-10 w-full
         h="auto md:[calc(100vh-160px)]" p-6
@@ -264,7 +259,7 @@ function isMusic(item: FavoriteResource) {
         >
           <div
             absolute w-full h-full backdrop-blur-40px
-            bg="$bew-fill-4" mix-blend-luminosity
+            bg="$bew-fill-4"
           />
           <img
             v-if="activatedCategoryCover"

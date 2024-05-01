@@ -5,6 +5,7 @@ import type { Comment, UserCardInfo, VideoInfo } from './types'
 import { getCSRF, removeHttpFromUrl } from '~/utils/main'
 import { calcTimeSince, numFormatter } from '~/utils/dataFormatter'
 
+const api = useApiClient()
 const videoContent = ref() as Ref<HTMLElement>
 // const commentContent = ref() as Ref<HTMLElement>
 const danmukuContent = ref() as Ref<HTMLElement>
@@ -71,9 +72,9 @@ async function getVideoInfo() {
 
   let res
   if (isBV)
-    res = await browser.runtime.sendMessage({ contentScriptQuery: 'getVideoInfo', videoId })
+    res = await api.video.getVideoInfo({ videoId })
   else
-    res = await browser.runtime.sendMessage({ contentScriptQuery: 'getVideoInfo', aid: videoId.replace('av', '') })
+    res = await api.video.getVideoInfo({ aid: videoId.replace('av', '') })
   if (res.code === 0) {
     Object.assign(videoInfo, res.data.View)
     Object.assign(userCardInfo, res.data.Card)
@@ -134,8 +135,7 @@ async function getVideoInfo() {
 // }
 
 function getVideoComments() {
-  browser.runtime.sendMessage({
-    contentScriptQuery: 'getVideoComments',
+  api.video.getVideoComments({
     csrf: getCSRF(),
     oid: videoInfo.aid,
     pn: 1,

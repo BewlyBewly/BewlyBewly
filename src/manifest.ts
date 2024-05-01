@@ -23,8 +23,8 @@ export async function getManifest() {
     //   open_in_tab: true,
     // },
     background: (isFirefox || isSafari)
-      ? { scripts: ['./dist/background/index.mjs'], persistent: false }
-      : { service_worker: './dist/background/index.mjs' },
+      ? { scripts: ['./dist/background/index.js'], persistent: false }
+      : { service_worker: './dist/background/index.js' },
     icons: {
       16: './assets/icon-512.png',
       48: './assets/icon-512.png',
@@ -35,6 +35,9 @@ export async function getManifest() {
       'storage',
       'scripting',
       'declarativeNetRequest',
+      ...isFirefox
+        ? ['webRequest', 'webRequestBlocking']
+        : [],
     ],
     host_permissions: [
       '*://*.bilibili.com/*',
@@ -67,14 +70,19 @@ export async function getManifest() {
             ? `script-src 'self' http://localhost:${port}; object-src 'self' http://localhost:${port}`
             : 'script-src \'self\'; object-src \'self\'',
         },
-    // @ts-expect-error Manifest.WebExtensionManifest type doesn't not support declarative_net_request check
-    declarative_net_request: {
-      rule_resources: [{
-        id: 'ruleset_1',
-        enabled: true,
-        path: 'assets/rules.json',
-      }],
-    },
+    ...isFirefox
+      ? {}
+      : {
+          declarative_net_request: {
+            rule_resources: [
+              {
+                id: 'ruleset_1',
+                enabled: true,
+                path: 'assets/rules.json',
+              },
+            ],
+          },
+        },
   }
 
   if (isDev)

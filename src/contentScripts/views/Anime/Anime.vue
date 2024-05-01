@@ -6,6 +6,7 @@ import type { List as WatchListItem, WatchListResult } from '~/models/anime/watc
 import type { List as PopularAnimeItem, PopularAnimeResult } from '~/models/anime/popular'
 import type { ItemSubItem as RecommendationItem, RecommendationResult } from '~/models/anime/recommendation'
 
+const api = useApiClient()
 const animeWatchList = reactive<WatchListItem[]>([])
 const recommendAnimeList = reactive<RecommendationItem[]>([])
 const popularAnimeList = reactive<PopularAnimeItem[]>([])
@@ -58,13 +59,11 @@ function initPageAction() {
 
 function getAnimeWatchList() {
   isLoadingAnimeWatchList.value = true
-  browser.runtime
-    .sendMessage({
-      contentScriptQuery: 'getAnimeWatchList',
-      vmid: getUserID() ?? 0,
-      pn: 1,
-      ps: 30,
-    })
+  api.anime.getAnimeWatchList({
+    vmid: getUserID() ?? 0,
+    pn: 1,
+    ps: 30,
+  })
     .then((response: WatchListResult) => {
       const {
         code,
@@ -81,11 +80,9 @@ function getAnimeWatchList() {
 
 function getRecommendAnimeList() {
   isLoadingRecommendAnime.value = true
-  browser.runtime
-    .sendMessage({
-      contentScriptQuery: 'getRecommendAnimeList',
-      coursor: cursor.value,
-    })
+  api.anime.getRecommendAnimeList({
+    coursor: cursor.value,
+  })
     .then((response: RecommendationResult) => {
       const {
         code,
@@ -109,10 +106,7 @@ function getRecommendAnimeList() {
 
 function getPopularAnimeList() {
   isLoadingPopularAnime.value = true
-  browser.runtime
-    .sendMessage({
-      contentScriptQuery: 'getPopularAnimeList',
-    })
+  api.anime.getPopularAnimeList()
     .then((response: PopularAnimeResult) => {
       const {
         code,

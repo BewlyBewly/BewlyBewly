@@ -18,7 +18,7 @@ jobs:
           token: ${{ secrets.RELEASE_TOKEN }}
           release-type: node
           package-name: release-please-action
-          release-as: 0.17.0
+          release-as: 0.18.2
           signoff: 'github-actions <41898282+github-actions[bot]@users.noreply.github.com>'
           changelog-types: '[{"type":"types","section":"Types","hidden":false},{"type":"revert","section":"Reverts","hidden":false},{"type":"feat","section":"Features","hidden":false},{"type":"fix","section":"Bug Fixes","hidden":false},{"type":"improvement","section":"Feature Improvements","hidden":false},{"type":"docs","section":"Docs","hidden":false},{"type":"i18n","section":"I18n","hidden":true},{"type":"style","section":"Style Changes","hidden":false},{"type":"ci","section":"CI","hidden":false},{"type":"chore","section":"Miscellaneous","hidden":true},{"type":"contributor","section":"New Contributors","hidden":false},{"type":"notice","section":"Notices","hidden":false}]'
           default-branch: main

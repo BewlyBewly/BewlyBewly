@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - dev
+      - main
+
+  pull_request:
+    branches:
+      - dev
+      - main
+
+jobs:
+  test:
+    name: Test
+    strategy:
+      matrix:
+        node: [lts/*, lts/-1]
+        os: [ubuntu-latest, windows-latest]
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set node ${{ matrix.node }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          run_install: |
+            - args: [--frozen-lockfile]
+
+      - name: Lint
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        run: pnpm run lint
+
+      - name: Type check
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        run: pnpm run typecheck
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Test
+        run: pnpm run test

@@ -7,7 +7,6 @@ import { onMounted, reactive, ref, watch } from 'vue'
 import type { TopBarMomentResult } from '~/models/moment/topBarMoment'
 import type { TopBarLiveMomentResult } from '~/models/moment/topBarLiveMoment'
 import { getCSRF, isHomePage, smoothScrollToTop } from '~/utils/main'
-import API from '~/background/msg.define'
 
 type MomentType = 'video' | 'live' | 'article'
 interface MomentTab { type: MomentType, name: any }
@@ -23,6 +22,7 @@ interface MomentCard {
 }
 
 const { t } = useI18n()
+const api = useApiClient()
 
 const moments = reactive<MomentCard[]>([])
 const addedWatchLaterList = reactive<number[]>([])
@@ -88,6 +88,7 @@ async function initData() {
   momentOffset.value = ''
   newMomentsCount.value = 0
   livePage.value = 1
+  noMoreContent.value = false
 
   getData()
 }
@@ -103,8 +104,7 @@ function checkIfHasNewMomentsThenUpdateMoments() {
   if (selectedMomentTab.value.type === 'live')
     return
 
-  browser.runtime.sendMessage({
-    contentScriptQuery: API.MOMENT.GET_TOP_BAR_MOMENTS,
+  api.moment.getTopBarMoments({
     type: selectedMomentTab.value.type,
     update_baseline: momentUpdateBaseline.value || undefined,
   })
@@ -144,9 +144,11 @@ function checkIfHasNewMomentsThenUpdateMoments() {
 function getTopBarMoments() {
   if (isLoading.value)
     return
+  if (noMoreContent.value)
+    return
+
   isLoading.value = true
-  browser.runtime.sendMessage({
-    contentScriptQuery: API.MOMENT.GET_TOP_BAR_MOMENTS,
+  api.moment.getTopBarMoments({
     type: selectedMomentTab.value.type,
     update_baseline: momentUpdateBaseline.value || undefined,
     offset: momentOffset.value || undefined,
@@ -192,25 +194,29 @@ function isNewMoment(index: number) {
 }
 
 function getTopBarLiveMoments() {
+  if (isLoading.value)
+    return
+  if (noMoreContent.value)
+    return
+
   isLoading.value = true
-  browser.runtime
-    .sendMessage({
-      contentScriptQuery: API.MOMENT.GET_TOP_BAR_LIVE_MOMENTS,
-      page: livePage.value,
-      pagesize: 10,
-    })
+  const pageSize = 10
+  api.moment.getTopBarLiveMoments({
+    page: livePage.value,
+    pagesize: pageSize,
+  })
     .then((res: TopBarLiveMomentResult) => {
       if (res.code === 0) {
-        const { list, pagesize } = res.data
+        const { list } = res.data
 
         // if the length of this list is less then the pageSize, it means that it have no more contents
-        if (moments.length !== 0 && list.length < Number(pagesize)) {
+        if (moments.length !== 0 && list.length < pageSize) {
           noMoreContent.value = true
           return
         }
 
         // if the length of this list is equal to the pageSize, this means that it may have the next page.
-        if (list.length === Number(pagesize))
+        if (list.length === pageSize)
           livePage.value++
 
         moments.push(
@@ -224,8 +230,6 @@ function getTopBarLiveMoments() {
           }),
           ),
         )
-
-        noMoreContent.value = false
       }
     })
     .finally(() => isLoading.value = false)
@@ -235,8 +239,7 @@ function toggleWatchLater(aid: number) {
   const isInWatchLater = addedWatchLaterList.includes(aid)
 
   if (!isInWatchLater) {
-    browser.runtime.sendMessage({
-      contentScriptQuery: API.WATCHLATER.SAVE_TO_WATCHLATER,
+    api.watchlater.saveToWatchLater({
       aid,
       csrf: getCSRF(),
     })
@@ -246,8 +249,7 @@ function toggleWatchLater(aid: number) {
       })
   }
   else {
-    browser.runtime.sendMessage({
-      contentScriptQuery: API.WATCHLATER.REMOVE_FROM_WATCHLATER,
+    api.watchlater.removeFromWatchLater({
       aid,
       csrf: getCSRF(),
     })

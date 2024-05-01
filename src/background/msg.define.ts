@@ -7,11 +7,12 @@ enum AUTH {
   QR_CODE_LOGIN = 'qrCodeLogin',
 }
 enum ANIME {
-  GET = 'getAnime',
-  GET_WATCH_LIST = 'getAnimeWatchList',
-  GET_RECOMMEND_LIST = 'getRecommendAnimeList',
-  GET_TIME_TABLE = 'getAnimeTimeTable',
-  GET_DETAIL = 'getAnimeDetail',
+  GET_ANIME = 'getAnime',
+  GET_ANIME_WATCH_LIST = 'getAnimeWatchList',
+  GET_RECOMMEND_ANIME_LIST = 'getRecommendAnimeList',
+  GET_ANIME_TIME_TABLE = 'getAnimeTimeTable',
+  GET_ANIME_DETAIL = 'getAnimeDetail',
+  GET_POPULAR_ANIME_LIST = 'getPopularAnimeList',
 }
 enum FAVORITE {
   GET_FAVORITE_CATEGORIES = 'getFavoriteCategories',
@@ -24,7 +25,7 @@ enum HISTORY {
   DELETE_HISTORY_ITEM = 'deleteHistoryItem',
   CLEAR_ALL_HISTORY = 'clearAllHistory',
   GET_HISTORY_PAUSE_STATUS = 'getHistoryPauseStatus',
-  SET_HISTORY_PAUSE_STATUS = 'setHistory',
+  SET_HISTORY_PAUSE_STATUS = 'setHistoryPauseStatus',
 }
 enum MOMENT {
   GET_TOP_BAR_NEW_MOMENTS_COUNT = 'getTopBarNewMomentsCount',
@@ -46,6 +47,7 @@ enum SEARCH {
 enum USER {
   GET_USER_INFO = 'getUserInfo',
   GET_USER_STAT = 'getUserStat',
+  RELATION_MODIFY = 'relationModify',
 }
 enum VIDEO {
   GET_RECOMMEND_VIDEOS = 'getRecommendVideos',
@@ -58,10 +60,10 @@ enum VIDEO {
   GET_VIDEO_PREVIEW = 'getVideoPreview',
 }
 enum WATCHLATER {
-  SAVE_TO_WATCHLATER = 'saveToWatchLater',
-  REMOVE_FROM_WATCHLATER = 'removeFromWatchLater',
-  GET_ALL_WATCHLATER_LIST = 'getAllWatchLaterList',
-  CLEAR_ALL_WATCHLATER = 'clearAllWatchLater',
+  SAVE_TO_WATCH_LATER = 'saveToWatchLater',
+  REMOVE_FROM_WATCH_LATER = 'removeFromWatchLater',
+  GET_ALL_WATCH_LATER_LIST = 'getAllWatchLaterList',
+  CLEAR_ALL_WATCH_LATER = 'clearAllWatchLater',
 }
 
 const API = {

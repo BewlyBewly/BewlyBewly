@@ -8,7 +8,6 @@ import type { Item as VideoItem, forYouResult } from '~/models/video/forYou'
 import type { GridLayout } from '~/logic'
 import { accessKey, settings } from '~/logic'
 import { LanguageType } from '~/enums/appEnums'
-import API from '~/background/msg.define'
 import { TVAppKey, getTvSign } from '~/utils/authProvider'
 import { isVerticalVideo } from '~/utils/uriParse'
 
@@ -30,7 +29,7 @@ const gridValue = computed((): string => {
 })
 
 const toast = useToast()
-
+const api = useApiClient()
 const videoList = reactive<VideoItem[]>([])
 const appVideoList = reactive<AppVideoItem[]>([])
 const isLoading = ref<boolean>(true)
@@ -140,8 +139,7 @@ async function getRecommendVideos() {
   emit('beforeLoading')
   isLoading.value = true
   try {
-    const response: forYouResult = await browser.runtime.sendMessage({
-      contentScriptQuery: API.VIDEO.GET_RECOMMEND_VIDEOS,
+    const response: forYouResult = await api.video.getRecommendVideos({
       fresh_idx: refreshIdx.value++,
     })
 
@@ -180,8 +178,7 @@ async function getAppRecommendVideos() {
   emit('beforeLoading')
   isLoading.value = true
   try {
-    const response: AppForYouResult = await browser.runtime.sendMessage({
-      contentScriptQuery: API.VIDEO.GET_APP_RECOMMEND_VIDEOS,
+    const response: AppForYouResult = await api.video.getAppRecommendVideos({
       access_key: accessKey.value,
       s_locale: settings.value.language === LanguageType.Mandarin_TW || settings.value.language === LanguageType.Cantonese ? 'zh-Hant_TW' : 'zh-Hans_CN',
       c_locale: settings.value.language === LanguageType.Mandarin_TW || settings.value.language === LanguageType.Cantonese ? 'zh-Hant_TW' : 'zh-Hans_CN',
@@ -300,8 +297,7 @@ function handleAppDislike() {
     appkey: TVAppKey.appkey,
   }
 
-  browser.runtime.sendMessage({
-    contentScriptQuery: API.VIDEO.DISLIKE_VIDEO,
+  api.video.dislikeVideo({
     ...params,
     sign: getTvSign(params),
   })
@@ -336,8 +332,7 @@ function handleAppUndoDislike(video: AppVideoItem) {
     appkey: TVAppKey.appkey,
   }
 
-  browser.runtime.sendMessage({
-    contentScriptQuery: API.VIDEO.UNDO_DISLIKE_VIDEO,
+  api.video.undoDislikeVideo({
     ...params,
     sign: getTvSign(params),
   }).then((res) => {
@@ -468,6 +463,7 @@ defineExpose({ initData })
           :cover="video.pic"
           :author="video.owner.name"
           :author-face="video.owner.face"
+          :followed="!!video.is_followed"
           :mid="video.owner.mid"
           :view="video.stat.view"
           :danmaku="video.stat.danmaku"
@@ -495,6 +491,7 @@ defineExpose({ initData })
           :cover="`${video.cover}`"
           :author="video?.mask?.avatar.text"
           :author-face="video?.mask?.avatar.cover"
+          :followed="video?.bottom_rcmd_reason === '已关注' || video?.bottom_rcmd_reason === '已關注'"
           :mid="video?.mask?.avatar.up_id "
           :capsule-text="video?.desc?.split('·')[1]"
           :bvid="video.bvid"

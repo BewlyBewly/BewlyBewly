@@ -3,11 +3,10 @@ import { onMounted, reactive, ref } from 'vue'
 import { calcCurrentTime } from '~/utils/dataFormatter'
 import type { List as VideoItem, WatchLaterResult } from '~/models/video/watchLater'
 import { isHomePage, removeHttpFromUrl } from '~/utils/main'
-import API from '~/background/msg.define'
 
+const api = useApiClient()
 const watchLaterList = reactive<VideoItem[]>([])
 const isLoading = ref<boolean>()
-
 const viewAllUrl = computed((): string => {
   return 'https://www.bilibili.com/watchlater/#/list'
 })
@@ -35,10 +34,7 @@ function getAllWatchLaterList() {
   isLoading.value = true
   watchLaterList.length = 0
 
-  browser.runtime
-    .sendMessage({
-      contentScriptQuery: API.WATCHLATER.GET_ALL_WATCHLATER_LIST,
-    })
+  api.watchlater.getAllWatchLaterList()
     .then((res: WatchLaterResult) => {
       if (res.code === 0)
         Object.assign(watchLaterList, res.data.list)

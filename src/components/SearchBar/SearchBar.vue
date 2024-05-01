@@ -8,7 +8,6 @@ import {
   getSearchHistory,
   removeSearchHistory,
 } from './searchHistoryProvider'
-import API from '~/background/msg.define'
 import { findLeafActiveElement } from '~/utils/element'
 
 defineProps<{
@@ -17,6 +16,7 @@ defineProps<{
   focusedCharacter?: string
 }>()
 
+const api = useApiClient()
 const keywordRef = ref<HTMLInputElement>()
 const isFocus = ref<boolean>(false)
 const keyword = ref<string>('')
@@ -57,11 +57,9 @@ onKeyStroke('Escape', (e: KeyboardEvent) => {
 function handleInput() {
   selectedIndex.value = -1
   if (keyword.value.length > 0) {
-    browser.runtime
-      .sendMessage({
-        contentScriptQuery: API.SEARCH.GET_SEARCH_SUGGESTION,
-        term: keyword.value,
-      })
+    api.search.getSearchSuggestion({
+      term: keyword.value,
+    })
       .then((res: SuggestionResponse) => {
         if (!res || (res && res.code !== 0))
           return

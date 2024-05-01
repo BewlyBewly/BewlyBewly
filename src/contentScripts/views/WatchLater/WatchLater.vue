@@ -4,10 +4,9 @@ import { useI18n } from 'vue-i18n'
 import { getCSRF, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
 import { calcCurrentTime } from '~/utils/dataFormatter'
 import type { List as VideoItem, WatchLaterResult } from '~/models/video/watchLater'
-import API from '~/background/msg.define'
 
 const { t } = useI18n()
-
+const api = useApiClient()
 const isLoading = ref<boolean>()
 const noMoreContent = ref<boolean>()
 const watchLaterList = reactive<VideoItem[]>([])
@@ -34,10 +33,7 @@ function initPageAction() {
 function getAllWatchLaterList() {
   isLoading.value = true
   watchLaterList.length = 0
-  browser.runtime
-    .sendMessage({
-      contentScriptQuery: API.WATCHLATER.GET_ALL_WATCHLATER_LIST,
-    })
+  api.watchlater.getAllWatchLaterList()
     .then((res: WatchLaterResult) => {
       if (res.code === 0)
         Object.assign(watchLaterList, res.data.list)
@@ -47,12 +43,10 @@ function getAllWatchLaterList() {
 }
 
 function deleteWatchLaterItem(index: number, aid: number) {
-  browser.runtime
-    .sendMessage({
-      contentScriptQuery: API.WATCHLATER.REMOVE_FROM_WATCHLATER,
-      aid,
-      csrf: getCSRF(),
-    })
+  api.watchlater.removeFromWatchLater({
+    aid,
+    csrf: getCSRF(),
+  })
     .then((res) => {
       if (res.code === 0)
         watchLaterList.splice(index, 1)
@@ -65,8 +59,7 @@ function handleClearAllWatchLater() {
   )
   if (result) {
     isLoading.value = true
-    browser.runtime.sendMessage({
-      contentScriptQuery: API.WATCHLATER.CLEAR_ALL_WATCHLATER,
+    api.watchlater.clearAllWatchLater({
       csrf: getCSRF(),
     }).then((res) => {
       if (res.code === 0)
@@ -82,12 +75,10 @@ function handleRemoveWatchedVideos() {
     t('watch_later.remove_watched_videos_confirm'),
   )
   if (result) {
-    browser.runtime
-      .sendMessage({
-        contentScriptQuery: API.WATCHLATER.REMOVE_FROM_WATCHLATER,
-        viewed: true,
-        csrf: getCSRF(),
-      })
+    api.watchlater.removeFromWatchLater({
+      viewed: true,
+      csrf: getCSRF(),
+    })
       .then((res) => {
         if (res.code === 0)
           getAllWatchLaterList()
@@ -273,7 +264,7 @@ function jumpToLoginPage() {
         >
           <div
             absolute w-full h-full backdrop-blur-40px
-            bg="$bew-fill-4" mix-blend-luminosity
+            bg="$bew-fill-4"
           />
           <img
             v-if="watchLaterList[0]"

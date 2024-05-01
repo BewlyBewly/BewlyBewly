@@ -1,6 +1,6 @@
-MD013:
-  # Number of characters
-  line_length: 120
+MD013: false
+
+MD029: false
 
 MD033:
   allowed_elements: [a, br, img, p, h1, details, summary]
