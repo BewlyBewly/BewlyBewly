@@ -21,11 +21,13 @@ pnpm dev
 ```
 
 2. 喺 Chrome 入邊打開 `chrome://extensions` 頁面抑或喺 Edge 度打開 `edge://extensions` 頁面
+
 3. 打開`開發者模式`，撳`載入解壓縮`
-<br/>
+
 <img width="655" alt="Snipaste_2022-03-27_18-17-04" src="https://user-images.githubusercontent.com/33394391/160276882-13da0484-92c1-47dd-add8-7655c5c2bf1c.png">
 <br/>
 <img width="655" alt="image" src="https://user-images.githubusercontent.com/33394391/232246901-e3544c16-bde2-480d-b770-ca5242793963.png">
+
 4. 喺瀏覽器度載入產生嘅 `extension/` 資料夾
 
 每一次執過 code 之後，你都要撳 [Extensions Reloader](https://chromewebstore.google.com/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) 粒掣，然之後 refresh 個 page，確保係有效果。
@@ -53,7 +55,9 @@ pnpm dev
 ```
 
 2. 喺瀏覽器度輸入 `about:addons`，撳 `Extensions` 然之後 `Debug Add-ons`
+
 <img width="655" alt="image" src="https://github.com/hakadao/BewlyBewly/assets/33394391/7c49e4ca-2a87-4c56-bc00-3259d6eba128">
+
 3. 喺瀏覽器度載入產生嘅 `extension-firefox/` 資料夾
 
 #### 建立（Firefox）

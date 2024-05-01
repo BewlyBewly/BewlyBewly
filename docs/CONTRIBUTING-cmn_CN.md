@@ -22,11 +22,13 @@
   ```
 
 2. 在地址栏输入 `chrome://extensions/` (Chrome), `edge://extensions/` (Edge) 并按回车
+
 3. 打开 `开发者模式` 并点击 `加载已解压的拓展程序`
-<br/>
+
 <img width="655" alt="Snipaste_2022-03-27_18-17-04" src="https://user-images.githubusercontent.com/33394391/160276882-13da0484-92c1-47dd-add8-7655c5c2bf1c.png">
 <br/>
 <img width="655" alt="image" src="https://user-images.githubusercontent.com/33394391/232246901-e3544c16-bde2-480d-b770-ca5242793963.png">
+
 4. 在浏览器中加载生成的 `extension/` 文件夹
 
 每次修改后，您需要单击 [Reload Extensions](https://chromewebstore.google.com/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) 按钮并刷新页面以确保应用更改。
@@ -54,7 +56,9 @@ pnpm dev
 ```
 
 2. 在浏览器输入 `about:addons` 之后点击 `Extensions` 然后 `Debug Add-ons`
+
 <img width="655" alt="image" src="https://github.com/hakadao/BewlyBewly/assets/33394391/7c49e4ca-2a87-4c56-bc00-3259d6eba128">
+
 3. 在浏览器中加载生成的 `extension-firefox/` 文件夹
 
 #### 构建 (Firefox)
