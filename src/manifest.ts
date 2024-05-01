@@ -1,7 +1,7 @@
 import fs from 'fs-extra'
 import type { Manifest } from 'webextension-polyfill'
 import type PkgType from '../package.json'
-import { isDev, isFirefox, port, r } from '../scripts/utils'
+import { isDev, isFirefox, isSafari, port, r } from '../scripts/utils'
 
 export async function getManifest() {
   const pkg = await fs.readJSON(r('package.json')) as typeof PkgType
@@ -22,8 +22,8 @@ export async function getManifest() {
     //   page: './dist/options/index.html',
     //   open_in_tab: true,
     // },
-    background: isFirefox
-      ? { scripts: ['./dist/background/index.js'] }
+    background: (isFirefox || isSafari)
+      ? { scripts: ['./dist/background/index.js'], persistent: false }
       : { service_worker: './dist/background/index.js' },
     icons: {
       16: './assets/icon-512.png',
@@ -35,7 +35,7 @@ export async function getManifest() {
       'storage',
       'scripting',
       'declarativeNetRequest',
-      ...isFirefox
+      ...(isFirefox || isSafari)
         ? ['webRequest', 'webRequestBlocking']
         : [],
     ],
@@ -60,7 +60,7 @@ export async function getManifest() {
         // matches: ['./assets/*'],
       },
     ],
-    content_security_policy: isFirefox
+    content_security_policy: (isFirefox || isSafari)
       ? {
           extension_pages: 'script-src \'self\'; object-src \'self\'',
         }
@@ -70,7 +70,7 @@ export async function getManifest() {
             ? `script-src 'self' http://localhost:${port}; object-src 'self' http://localhost:${port}`
             : 'script-src \'self\'; object-src \'self\'',
         },
-    ...isFirefox
+    ...(isFirefox || isSafari)
       ? {}
       : {
           declarative_net_request: {
@@ -88,7 +88,7 @@ export async function getManifest() {
   if (isDev)
     manifest.permissions?.push('webNavigation')
 
-  if (isFirefox) {
+  if (isFirefox || isSafari) {
     manifest.browser_specific_settings = {
       gecko: {
         id: 'addon@bewlybewly.com',

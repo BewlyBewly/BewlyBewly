@@ -9,9 +9,9 @@ import { injectCSS, isHomePage } from '~/utils/main'
 import { settings } from '~/logic'
 
 import { runWhenIdle } from '~/utils/lazyLoad'
+import { isSafari } from '~/utils/metaThemeColor'
 
 const isFirefox: boolean = /Firefox/i.test(navigator.userAgent)
-
 // Fix `OverlayScrollbars` not working in Firefox
 // https://github.com/fingerprintjs/fingerprintjs/issues/683#issuecomment-881210244
 if (isFirefox) {
@@ -23,6 +23,28 @@ if (isFirefox) {
   window.clearTimeout = window.clearTimeout.bind(window)
 }
 
+if (isSafari) {
+  window.requestIdleCallback
+    = window.requestIdleCallback
+    || function (cb) {
+      const start = Date.now()
+
+      return setTimeout(() => {
+        cb({
+          didTimeout: false,
+          timeRemaining() {
+            return Math.max(0, 50 - (Date.now() - start))
+          },
+        })
+      }, 1)
+    }
+
+  window.cancelIdleCallback
+    = window.cancelIdleCallback
+    || function (id) {
+      clearTimeout(id)
+    }
+}
 const currentUrl = document.URL
 
 function isSupportedPages() {
@@ -121,7 +143,7 @@ if (isSupportedPages()) {
   `)
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+function onDOMLoaded() {
   // Remove the original Bilibili homepage if in Bilibili homepage & useOriginalBilibiliHomepage is enabled
   if (!settings.value.useOriginalBilibiliHomepage && isHomePage()) {
     // const originalPageContent = document.querySelector('#i_cecream')
@@ -136,7 +158,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Then inject the app
     injectApp()
   }
-})
+}
+
+if (document.readyState !== 'loading')
+  onDOMLoaded()
+else
+  document.addEventListener('DOMContentLoaded', () => onDOMLoaded())
 
 function injectApp() {
   // Inject app when idle
@@ -168,7 +195,6 @@ function injectApp() {
     shadowDOM.appendChild(svgDiv)
 
     document.body.appendChild(container)
-
     const app = createApp(App)
     setupApp(app)
     app.mount(root)

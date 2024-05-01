@@ -8,6 +8,7 @@ import { accessKey, settings } from '~/logic'
 import { AppPage, LanguageType } from '~/enums/appEnums'
 import { getUserID, hexToRGBA, isHomePage, smoothScrollToTop } from '~/utils/main'
 import type { BewlyAppProvider } from '~/composables/useAppProvider'
+import { updateMetaThemeColor } from '~/utils/metaThemeColor'
 
 const activatedPage = ref<AppPage>(settings.value.dockItemVisibilityList.find(e => e.visible === true)?.page ?? AppPage.Home)
 const { locale } = useI18n()
@@ -36,6 +37,9 @@ const isDark = computed(() => {
   return settings.value.theme === 'dark'
 })
 
+watch(() => JSON.stringify(settings.value.theme), () => {
+  updateMetaThemeColor(isDark.value)
+})
 const isVideoPage = computed(() => {
   if (/https?:\/\/(www.)?bilibili.com\/video\/.*/.test(location.href))
     return true
@@ -138,6 +142,7 @@ onMounted(() => {
   handleChangeAccessKey()
   setAppAppearance()
   setAppLanguage()
+  updateMetaThemeColor(isDark.value)
 })
 
 function handleChangeAccessKey() {
