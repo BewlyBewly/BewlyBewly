@@ -75,11 +75,12 @@ export function useDark() {
             {-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important; will-change: background}`
       shadowDomStyle.appendChild(document.createTextNode(shadowDomStyleString))
 
-      const mainAppRef = document.getElementById('bewly')
-      if (!mainAppRef)
+      const bewlyShadowRoot = document.getElementById('bewly')?.shadowRoot
+      const bewlyWrapper = bewlyShadowRoot?.getElementById('bewly-wrapper')
+      if (!bewlyWrapper)
         throw new Error('mainAppRef is not found')
 
-      mainAppRef.appendChild(shadowDomStyle)
+      bewlyWrapper.appendChild(shadowDomStyle)
 
       // @ts-expect-error: Transition API
       const transition = document.startViewTransition(async () => {
@@ -108,7 +109,7 @@ export function useDark() {
         )
         animation.addEventListener('finish', () => {
           document.head.removeChild(style!)
-          mainAppRef.removeChild(shadowDomStyle!)
+          bewlyWrapper.removeChild(shadowDomStyle!)
         }, { once: true })
       })
     }
