@@ -12,4 +12,5 @@ dist
 dist-ssr
 extension/
 extension-firefox/
+extension-safari*
 node_modules

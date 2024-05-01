@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import { sharedConfig } from './vite.config'
-import { isDev, isFirefox, r } from './scripts/utils'
+import { isDev, isFirefox, isSafari, r } from './scripts/utils'
 import packageJson from './package.json'
 
 // bundling the content script using Vite
@@ -10,7 +10,7 @@ export default defineConfig({
     watch: isDev
       ? { include: ['./**/*'] }
       : undefined,
-    outDir: r(isFirefox ? 'extension-firefox/dist/contentScripts' : 'extension/dist/contentScripts'),
+    outDir: r(isFirefox ? 'extension-firefox/dist/contentScripts' : isSafari ? 'extension-safari/dist/contentScripts' : 'extension/dist/contentScripts'),
     cssCodeSplit: false,
     emptyOutDir: false,
     sourcemap: isDev ? 'inline' : false,
