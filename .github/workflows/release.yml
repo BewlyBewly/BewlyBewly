@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2.4.0
+      - uses: pnpm/action-setup@v3
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2.4.0
+      - uses: pnpm/action-setup@v3
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
@@ -61,11 +61,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v3
-        with:
-          version: latest
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: lts/*
           cache: pnpm
       - name: Install dependencies
         run: pnpm install
@@ -78,7 +76,7 @@ jobs:
           pnpm wxt submit --chrome-zip ./extension.zip \
           pnpm build-firefox \
           pnpm pack:zip-firefox \
-          pnpm wxt submit --chrome-zip ./extension-firefox.zip
+          pnpm wxt submit --firefox-zip ./extension-firefox.zip
         env:
           CHROME_EXTENSION_ID: ${{ secrets.CHROME_EXTENSION_ID }}
           CHROME_CLIENT_ID: ${{ secrets.CHROME_CLIENT_ID }}
