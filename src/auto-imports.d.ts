@@ -59,6 +59,7 @@ declare global {
   const useBewlyImage: typeof import('./composables/useImage')['useBewlyImage']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
+  const useDark: typeof import('./composables/useDark')['useDark']
   const useDelayedHover: typeof import('./composables/useDelayedHover')['useDelayedHover']
   const useSlots: typeof import('vue')['useSlots']
   const useStorageLocal: typeof import('./composables/useStorageLocal')['useStorageLocal']
