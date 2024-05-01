@@ -1,17 +1,18 @@
-import type API from '~/background/msg.define'
+import type { API_COLLECTION } from '~/background/messageListeners'
 
 type CamelCase<S extends string> = S extends `${infer P1}_${infer P2}${infer P3}`
   ? `${Lowercase<P1>}${Uppercase<P2>}${CamelCase<P3>}`
   : Lowercase<S>
 
-type APIFunction<T = typeof API> = {
+type APIFunction<T = typeof API_COLLECTION> = {
   [K in keyof T as CamelCase<string & K>]: {
-    [P in keyof T[K] as CamelCase<string & P>]: (options?: object) => Promise<any>
+    // @ts-expect-error allow params
+    [P in keyof T[K]]: T[K][P] extends Function ? T[K][P] : Lowercase<T[K][P]['_fetch']['method']> extends 'get' ? (options?: Partial<T[K][P]['params']>) => Promise<any> : (options?: Partial<T[K][P]['params'] & T[K][P]['_fetch']['body']>) => Promise<any>
   }
 }
 
 // eslint-disable-next-line ts/no-unsafe-declaration-merging
-export interface APIClient extends APIFunction {
+export interface APIClient extends APIFunction<typeof API_COLLECTION> {
 
 }
 

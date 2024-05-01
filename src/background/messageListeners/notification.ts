@@ -1,7 +1,7 @@
 import type { APIMAP } from '../utils'
 import { AHS } from '../utils'
 
-const API_NOTIFICATION: APIMAP = {
+const API_NOTIFICATION = {
   getUnreadMsg: {
     url: 'https://api.bilibili.com/x/msgfeed/unread',
     _fetch: {
@@ -25,6 +25,6 @@ const API_NOTIFICATION: APIMAP = {
     },
     afterHandle: AHS.J_D,
   },
-}
+} satisfies APIMAP
 
 export default API_NOTIFICATION

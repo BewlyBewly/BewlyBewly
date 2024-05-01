@@ -1,7 +1,7 @@
 import type { APIMAP } from '../utils'
 import { AHS } from '../utils'
 
-const API_VIDEO: APIMAP = {
+const API_VIDEO = {
   getRecommendVideos: {
     url: 'https://api.bilibili.com/x/web-interface/index/top/feed/rcmd',
     _fetch: {
@@ -43,7 +43,7 @@ const API_VIDEO: APIMAP = {
       access_key: '',
       goto: '',
       id: 0,
-      idx: 0,
+      idx: '',
       reason_id: 1,
       device: '',
       mobi_app: '',
@@ -94,7 +94,7 @@ const API_VIDEO: APIMAP = {
     params: {
       csrf: '',
       type: 1,
-      oid: '',
+      oid: 0,
       sort: 0,
       nohot: 0,
       pn: 1,
@@ -125,10 +125,10 @@ const API_VIDEO: APIMAP = {
       fnver: 0,
       fnval: 1,
       bvid: '',
-      cid: '',
+      cid: 0,
     },
     afterHandle: AHS.J_D,
   },
-}
+} satisfies APIMAP
 
 export default API_VIDEO

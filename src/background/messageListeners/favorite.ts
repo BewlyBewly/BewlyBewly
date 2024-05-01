@@ -1,7 +1,7 @@
 import type { APIMAP } from '../utils'
 import { AHS } from '../utils'
 
-const API_FAVORITE: APIMAP = {
+const API_FAVORITE = {
   // https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/fav/info.md#%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E7%94%A8%E6%88%B7%E5%88%9B%E5%BB%BA%E7%9A%84%E6%89%80%E6%9C%89%E6%94%B6%E8%97%8F%E5%A4%B9%E4%BF%A1%E6%81%AF
   getFavoriteCategories: {
     url: 'https://api.bilibili.com/x/v3/fav/folder/created/list-all',
@@ -20,7 +20,7 @@ const API_FAVORITE: APIMAP = {
       method: 'get',
     },
     params: {
-      media_id: '',
+      media_id: -1,
       pn: 1,
       ps: 20,
       keyword: '',
@@ -39,11 +39,11 @@ const API_FAVORITE: APIMAP = {
     },
     params: {
       resources: '',
-      media_id: '',
+      media_id: 0,
       csrf: '',
     },
     afterHandle: AHS.J_D,
   },
-}
+} satisfies APIMAP
 
 export default API_FAVORITE
