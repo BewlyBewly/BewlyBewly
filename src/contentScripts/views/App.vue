@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { usePreferredDark, useThrottleFn, useToggle } from '@vueuse/core'
+import { useThrottleFn, useToggle } from '@vueuse/core'
+import type { Ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import browser from 'webextension-polyfill'
-import type { Ref } from 'vue'
 
-import { accessKey, settings } from '~/logic'
-import { AppPage, LanguageType } from '~/enums/appEnums'
-import { getUserID, hexToRGBA, isHomePage, smoothScrollToTop } from '~/utils/main'
 import type { BewlyAppProvider } from '~/composables/useAppProvider'
+import { AppPage, LanguageType } from '~/enums/appEnums'
+import { accessKey, settings } from '~/logic'
+import { getUserID, hexToRGBA, isHomePage, smoothScrollToTop } from '~/utils/main'
 
+const { isDark } = useDark()
 const activatedPage = ref<AppPage>(settings.value.dockItemVisibilityList.find(e => e.visible === true)?.page ?? AppPage.Home)
 const { locale } = useI18n()
 const [showSettings, toggleSettings] = useToggle(false)
@@ -28,13 +29,6 @@ const handleReachBottom = ref<() => void>()
 const handleThrottledPageRefresh = useThrottleFn(() => handlePageRefresh.value?.(), 500)
 const handleThrottledReachBottom = useThrottleFn(() => handleReachBottom.value?.(), 500)
 const topBarRef = ref()
-
-const isPreferredDark = usePreferredDark()
-const isDark = computed(() => {
-  if (settings.value.theme === 'auto')
-    return isPreferredDark.value
-  return settings.value.theme === 'dark'
-})
 
 const isVideoPage = computed(() => {
   if (/https?:\/\/(www.)?bilibili.com\/video\/.*/.test(location.href))
@@ -82,12 +76,6 @@ watch(
   { immediate: true },
 )
 
-// Watch for changes in the 'settings.value.theme' variable and add the 'dark' class to the 'mainApp' element
-// to prevent some Unocss dark-specific styles from failing to take effect
-watch(() => settings.value.theme, () => {
-  setAppAppearance()
-}, { immediate: true })
-
 watch(() => settings.value.language, () => {
   setAppLanguage()
 })
@@ -133,10 +121,7 @@ onMounted(() => {
     else showTopBarMask.value = false
   })
 
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setAppAppearance)
-
   handleChangeAccessKey()
-  setAppAppearance()
   setAppLanguage()
 })
 
@@ -182,21 +167,6 @@ async function setAppLanguage() {
   }
 
   locale.value = settings.value.language
-}
-
-/**
- * Watch for changes in the 'settings.value.theme' variable and add the 'dark' class to the 'mainApp' element
- * to prevent some Unocss dark-specific styles from failing to take effect
- */
-function setAppAppearance() {
-  if (isDark.value) {
-    document.querySelector('#bewly')?.classList.add('dark')
-    document.documentElement.classList.add('dark')
-  }
-  else {
-    document.querySelector('#bewly')?.classList.remove('dark')
-    document.documentElement.classList.remove('dark')
-  }
 }
 
 function setAppThemeColor() {
@@ -311,7 +281,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
 </script>
 
 <template>
-  <div ref="mainAppRef" class="bewly-wrapper" :class="{ dark: isDark }" text="$bew-text-1">
+  <div id="bewly-wrapper" ref="mainAppRef" class="bewly-wrapper" :class="{ dark: isDark }" text="$bew-text-1">
     <!-- Background -->
     <template v-if="isHomePage() && !settings.useOriginalBilibiliHomepage">
       <AppBackground :activated-page="activatedPage" />
