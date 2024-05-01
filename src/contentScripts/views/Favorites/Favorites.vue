@@ -259,7 +259,7 @@ function isMusic(item: FavoriteResource) {
         >
           <div
             absolute w-full h-full backdrop-blur-40px
-            bg="$bew-fill-4" mix-blend-luminosity
+            bg="$bew-fill-4"
           />
           <img
             v-if="activatedCategoryCover"

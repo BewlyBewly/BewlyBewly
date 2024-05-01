@@ -35,6 +35,9 @@ export async function getManifest() {
       'storage',
       'scripting',
       'declarativeNetRequest',
+      ...isFirefox
+        ? ['webRequest', 'webRequestBlocking']
+        : [],
     ],
     host_permissions: [
       '*://*.bilibili.com/*',
@@ -67,13 +70,19 @@ export async function getManifest() {
             ? `script-src 'self' http://localhost:${port}; object-src 'self' http://localhost:${port}`
             : 'script-src \'self\'; object-src \'self\'',
         },
-    declarative_net_request: {
-      rule_resources: [{
-        id: 'ruleset_1',
-        enabled: true,
-        path: 'assets/rules.json',
-      }],
-    },
+    ...isFirefox
+      ? {}
+      : {
+          declarative_net_request: {
+            rule_resources: [
+              {
+                id: 'ruleset_1',
+                enabled: true,
+                path: 'assets/rules.json',
+              },
+            ],
+          },
+        },
   }
 
   if (isDev)

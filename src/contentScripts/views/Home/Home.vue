@@ -10,6 +10,7 @@ import { useMainStore } from '~/stores/mainStore'
 
 const mainStore = useMainStore()
 const { handleBackToTop, scrollbarRef } = useBewlyApp()
+const { getBewlyImage } = useBewlyImage()
 
 const activatedPage = ref<HomeSubPage>(HomeSubPage.ForYou)
 const pages = {
@@ -144,7 +145,7 @@ function toggleTabContentLoading(loading: boolean) {
           pos="absolute left-0 top-0" w-full h-inherit bg="cover center" z-1
           pointer-events-none
           :style="{
-            backgroundImage: `url(${settings.searchPageWallpaper})`,
+            backgroundImage: `url('${getBewlyImage(settings.searchPageWallpaper)}')`,
             backgroundAttachment: settings.searchPageModeWallpaperFixed ? 'fixed' : 'unset',
           }"
         />

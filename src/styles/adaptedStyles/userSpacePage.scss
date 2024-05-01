@@ -26,7 +26,8 @@
     background-color: unset;
   }
 
-  .favInfo-box .favInfo-details .fav-options .fav-play:hover {
+  .favInfo-box .favInfo-details .fav-options .fav-play:hover,
+  .favInfo-box .collection-details .collection-btn:hover {
     color: white !important;
   }
 
@@ -151,7 +152,8 @@
     #page-series-detail .channel-option .modify-channel,
     .game-card__btn,
     .be-tags-container .tag.new-tag,
-    #page-fav .fav-sidenav .fav-item.cur:hover .icon-cursor {
+    #page-fav .fav-sidenav .fav-item.cur:hover .icon-cursor,
+    .favInfo-box .collection-details .collection-btn {
       background-color: var(--bew-theme-color);
     }
 
@@ -159,7 +161,8 @@
     .btn.primary:hover,
     .h .h-follow:hover,
     .game-card__btn:hover,
-    .favInfo-box .favInfo-details .fav-options .fav-play:hover {
+    .favInfo-box .favInfo-details .fav-options .fav-play:hover,
+    .favInfo-box .collection-details .collection-btn:hover {
       background-color: var(--bew-theme-color-80);
     }
 
@@ -256,7 +259,9 @@
     #page-index .col-1,
     #page-index .col-2 .section,
     #page-dynamic .col-2 .section,
-    .game-card .game-card__info-title {
+    .game-card .game-card__info-title,
+    .favInfo-box .collection-details .title .icon-heji,
+    .favInfo-box .collection-details .title .title-name {
       color: var(--bew-text-1);
     }
 
@@ -391,7 +396,8 @@
     #page-index .col-1 .section .more,
     #page-index .channel .section-right-options .play-all-channel,
     .section .operation,
-    .section .count {
+    .section .count,
+    .large-item .cover img {
       border-color: var(--bew-border-color);
     }
 
