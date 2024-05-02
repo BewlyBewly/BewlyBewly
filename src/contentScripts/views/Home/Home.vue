@@ -199,8 +199,8 @@ function toggleTabContentLoading(loading: boolean) {
         ease-in-out flex="~ justify-between items-start gap-4"
         :class="{ hide: shouldMoveTabsUp }"
       >
-        <ul flex="~ items-center gap-3 wrap">
-          <li
+        <section flex="~ items-center gap-3 wrap">
+          <button
             v-for="tab in currentTabs" :key="tab.page"
             :class="{ 'tab-activated': activatedPage === tab.page }"
             style="backdrop-filter: var(--bew-filter-glass-1)"
@@ -218,8 +218,8 @@ function toggleTabContentLoading(loading: boolean) {
               icon="svg-spinners:ring-resize"
               duration-300 ease-in-out mb--2px text-16px
             />
-          </li>
-        </ul>
+          </button>
+        </section>
 
         <div
           style="backdrop-filter: var(--bew-filter-glass-1)"
