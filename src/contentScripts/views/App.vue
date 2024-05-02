@@ -113,7 +113,7 @@ onMounted(() => {
     // Force overwrite Bilibili Evolved body tag & html tag background color
     document.body.style.setProperty('background-color', 'unset', 'important')
   }
-  document.documentElement.style.setProperty('font-size', '14px')
+  // document.documentElement.style.setProperty('font-size', '14px')
 
   document.addEventListener('scroll', () => {
     if (window.scrollY > 0)
