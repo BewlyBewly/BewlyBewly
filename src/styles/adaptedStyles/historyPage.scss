@@ -1,5 +1,7 @@
 .bewly-design.historyPage {
-  .history-wrap .b-head .b-head-t {
+  .history-wrap .b-head .b-head-t,
+  .history-wrap .warn .txt,
+  .history-wrap a.btn {
     color: var(--bew-text-1);
   }
 
@@ -21,17 +23,15 @@
     }
   }
 
-  .history-wrap a.btn {
-    color: var(--bew-theme-color);
+  .history-wrap a.btn,
+  .history-wrap .active {
+    background-color: var(--bew-theme-color);
   }
 
+  .history-wrap .history-btn .btn,
   .history-wrap .history-btn .btn:hover {
     background-color: var(--bew-theme-color);
     border-color: var(--bew-theme-color);
-  }
-
-  .history-wrap .active {
-    background-color: var(--bew-theme-color);
   }
 
   .history-wrap .active:before {
