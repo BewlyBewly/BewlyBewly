@@ -1,7 +1,6 @@
 .bewly-design.historyPage {
   .history-wrap .b-head .b-head-t,
-  .history-wrap .warn .txt,
-  .history-wrap a.btn {
+  .history-wrap .warn .txt {
     color: var(--bew-text-1);
   }
 
@@ -23,12 +22,16 @@
     }
   }
 
-  .history-wrap a.btn,
+  .history-wrap a.btn:hover,
   .history-wrap .active {
     background-color: var(--bew-theme-color);
   }
 
-  .history-wrap .history-btn .btn,
+  .history-wrap .warn .btn {
+    background-color: var(--bew-theme-color);
+    color: white;
+  }
+
   .history-wrap .history-btn .btn:hover {
     background-color: var(--bew-theme-color);
     border-color: var(--bew-theme-color);
@@ -46,10 +49,13 @@
     border-left-color: var(--bew-fill-2);
   }
 
-  .history-wrap .time-label.active {
+  .history-wrap .time-label.active,
+  .history-wrap a.btn:hover {
     border-color: var(--bew-theme-color) !important;
     color: white;
   }
+
+  .history-wrap a.btn,
   .history-wrap .time-label {
     border-color: var(--bew-theme-color) !important;
     color: var(--bew-theme-color);
