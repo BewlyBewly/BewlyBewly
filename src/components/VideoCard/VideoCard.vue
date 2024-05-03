@@ -181,7 +181,7 @@ function handleUndo() {
 
           <div
             pos="absolute top-0 left-0" w-full h-fit aspect-video flex="~ col gap-2 items-center justify-center"
-            bg="$bew-fill-4" backdrop-blur-20px mix-blend-luminosity rounded="$bew-radius"
+            bg="$bew-fill-4" backdrop-blur-20px mix-blend-luminosity transform-gpu rounded="$bew-radius"
           >
             <p mb-2 color-white text-lg>
               {{ $t('home.video_removed') }}
@@ -230,6 +230,7 @@ function handleUndo() {
               :controls="settings.enableVideoCtrlBarOnVideoCard"
               :style="{ pointerEvents: settings.enableVideoCtrlBarOnVideoCard ? 'auto' : 'none' }"
               pos="absolute top-0 left-0" w-full aspect-video rounded="$bew-radius" bg-black
+              @mouseenter="handleMouseEnter"
             >
               <source :src="previewVideoUrl" type="video/mp4">
             </video>
@@ -380,9 +381,9 @@ function handleUndo() {
                 <div v-if="horizontal" flex>
                   <a
                     v-if="authorFace"
-                    m="r-2" w="30px" h="30px" rounded="1/2" overflow="hidden"
-                    object="center cover" bg="$bew-fill-4" cursor="pointer"
                     :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
+                    m="r-2" w="30px" h="30px" rounded="1/2" overflow="hidden"
+                    object="center cover" bg="$bew-fill-4" cursor="pointer" relative
                     @click.stop=""
                   >
                     <img
@@ -392,6 +393,16 @@ function handleUndo() {
                       loading="lazy"
                       object-cover
                     >
+                    <div
+                      v-if="followed"
+                      pos="absolute bottom--2px right--2px"
+                      w-14px h-14px
+                      bg="$bew-theme-color"
+                      rounded="1/2"
+                      grid place-items-center
+                    >
+                      <div color-white text-sm class="i-mingcute:check-fill w-10px h-10px" />
+                    </div>
                   </a>
                 </div>
 
