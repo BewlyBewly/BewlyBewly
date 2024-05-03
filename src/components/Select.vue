@@ -83,14 +83,14 @@ function onMouseEnter() {
         transition="all duration-300"
       />
     </div>
-    <transition>
+    <Transition>
       <div
         v-if="showOptions"
         style="backdrop-filter: var(--bew-filter-glass-1)"
         pos="absolute" bg="$bew-elevated-2" shadow="$bew-shadow-2" p="2"
         m="t-2"
         rounded="$bew-radius" z="1" flex="~ col gap-1"
-        w="full" max-h-300px overflow-y-scroll will-change-transform
+        w="full" max-h-300px overflow-y-scroll will-change-transform transform-gpu
       >
         <div
           v-for="option in options"
@@ -106,14 +106,14 @@ function onMouseEnter() {
           <span v-text="option.label" />
         </div>
       </div>
-    </transition>
+    </Transition>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .v-enter-active,
 .v-leave-active {
-  --at-apply: transition-all duration-500;
+  --at-apply: transition-all duration-500 transform-gpu;
 }
 
 .v-enter-from,
