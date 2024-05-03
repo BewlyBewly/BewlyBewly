@@ -16,6 +16,7 @@ defineProps<{
   focusedCharacter?: string
 }>()
 
+const { getBewlyImage } = useBewlyImage()
 const api = useApiClient()
 const keywordRef = ref<HTMLInputElement>()
 const isFocus = ref<boolean>(false)
@@ -191,7 +192,10 @@ async function handleClearSearchHistory() {
 
     <div class="search-bar group" :class="isFocus ? 'focus' : ''" flex="~" items-center pos="relative">
       <Transition name="focus-character">
-        <img v-show="focusedCharacter && isFocus" :src="focusedCharacter" width="100" object-contain pos="absolute right-0 bottom-40px">
+        <img
+          v-show="focusedCharacter && isFocus" :src="getBewlyImage(focusedCharacter || '')"
+          width="100" object-contain pos="absolute right-0 bottom-40px"
+        >
       </Transition>
 
       <input
