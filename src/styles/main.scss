@@ -57,6 +57,13 @@ html.dark.bewly-design {
   line-break: anywhere;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+  min-height: 3em;
+
+  &:after {
+    content: "";
+    display: block;
+    visibility: hidden;
+  }
 }
 
 .bewly-design {
