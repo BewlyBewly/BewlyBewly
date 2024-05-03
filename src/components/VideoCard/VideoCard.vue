@@ -382,7 +382,7 @@ function handleUndo() {
                   <a
                     v-if="authorFace"
                     :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
-                    m="r-2" w="30px" h="30px" rounded="1/2" overflow="hidden"
+                    m="r-2" w="30px" h="30px" rounded="1/2"
                     object="center cover" bg="$bew-fill-4" cursor="pointer" relative
                     @click.stop=""
                   >
@@ -391,7 +391,7 @@ function handleUndo() {
                       width="30"
                       height="30"
                       loading="lazy"
-                      object-cover
+                      object-cover rounded="1/2"
                     >
                     <div
                       v-if="followed"
