@@ -71,11 +71,11 @@ jobs:
         run: pnpm install wxt
       - name: Submit Extension
         run: |
-          pnpm build \
-          pnpm pack:zip \
-          pnpm wxt submit --chrome-zip ./extension.zip \
-          pnpm build-firefox \
-          pnpm pack:zip-firefox \
+          pnpm build
+          pnpm pack:zip
+          pnpm wxt submit --chrome-zip ./extension.zip
+          pnpm build-firefox
+          pnpm pack:zip-firefox
           pnpm wxt submit --firefox-zip ./extension-firefox.zip
         env:
           CHROME_EXTENSION_ID: ${{ secrets.CHROME_EXTENSION_ID }}
