@@ -379,7 +379,7 @@ defineExpose({
           backdrop-filter:var(--bew-filter-glass-1)
         "
         pos="absolute top-0 left-0" w-full h-80px
-        pointer-events-none
+        pointer-events-none transform-gpu
       />
       <Transition name="fade">
         <div
@@ -408,7 +408,7 @@ defineExpose({
               flex items-center border="1 $bew-border-color"
               rounded="50px" p="x-4" shadow="$bew-shadow-2" duration-300
               bg="$bew-elevated-1 hover:$bew-theme-color dark-hover:white"
-              w-auto h-50px
+              w-auto h-50px transform-gpu
             >
               <svg
                 t="1645466458357"
@@ -462,6 +462,7 @@ defineExpose({
           style="backdrop-filter: var(--bew-filter-glass-1)"
           ml-auto flex h-55px p-2 bg="$bew-elevated-1"
           text="$bew-text-1" border="1 $bew-border-color" rounded-full shadow="$bew-shadow-2"
+          transform-gpu
         >
           <div v-if="!isLogin" class="right-side-item">
             <a href="https://passport.bilibili.com/login" class="login">

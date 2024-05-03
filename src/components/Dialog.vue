@@ -92,6 +92,7 @@ function handleConfirm() {
         v-if="showDialog"
         class="dialog"
         pos="fixed top-0 left-0" w-full h-full z-100 z-10002
+        transform-gpu
       >
         <div
           bg="black opacity-40 dark:opacity-40"

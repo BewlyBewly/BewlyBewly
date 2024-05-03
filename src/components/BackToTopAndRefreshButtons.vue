@@ -21,6 +21,7 @@ const emit = defineEmits(['refresh', 'back-to-top'])
         --b-button-shadow-active: var(--bew-shadow-1);
         backdrop-filter: var(--bew-filter-glass-1);
       "
+      transform-gpu
       @click="showRefreshButton ? emit('refresh') : emit('back-to-top')"
     >
       <Transition name="fade">

@@ -12,7 +12,7 @@
 
 .fade-enter-active,
 .fade-leave-active {
-  --at-apply: transition-opacity duration-500;
+  --at-apply: transition-opacity duration-500 transform-gpu;
 }
 .fade-enter-from,
 .fade-leave-to {
@@ -33,9 +33,9 @@
 
 .modal-enter-active,
 .modal-leave-active {
-  --at-apply: transition-all duration-500;
+  --at-apply: transition-all duration-500 transform-gpu;
 }
 .modal-enter-from,
 .modal-leave-to {
-  --at-apply: opacity-0 scale-105 transform-gpu;
+  --at-apply: opacity-0 scale-105;
 }

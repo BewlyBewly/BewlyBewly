@@ -258,7 +258,7 @@ function isMusic(item: FavoriteResource) {
           z--1
         >
           <div
-            absolute w-full h-full backdrop-blur-40px
+            absolute w-full h-full backdrop-blur-40px transform-gpu
             bg="$bew-fill-4"
           />
           <img

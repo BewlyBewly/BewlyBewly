@@ -185,7 +185,7 @@ async function handleClearSearchHistory() {
     <div
       v-if="blurredOnFocus"
       pos="fixed top-0 left-0" w-full h-full duration-500 pointer-events-none
-      ease-out
+      ease-out transform-gpu
       :style="{ backdropFilter: isFocus ? 'blur(15px)' : 'blur(0)' }"
     />
 
@@ -344,7 +344,7 @@ async function handleClearSearchHistory() {
 
   @mixin card-content {
     --at-apply: text-base outline-none w-full
-      bg-$b-search-bar-color shadow-$bew-shadow-2;
+      bg-$b-search-bar-color shadow-$bew-shadow-2 transform-gpu;
     backdrop-filter: var(--bew-filter-glass-1);
   }
 

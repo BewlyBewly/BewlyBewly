@@ -97,7 +97,7 @@ function toggleDockHide(hide: boolean) {
         hide: hideDock,
       }"
       style="backdrop-filter: var(--bew-filter-glass-1);"
-      absolute duration-300 ease-in-out
+      absolute duration-300 ease-in-out transform-gpu
       p-2 m-2 bg="$bew-content-2 dark:$bew-elevated-1" flex="~ col gap-2 shrink-0"
       rounded="60px" border="1px $bew-border-color"
       shadow="$bew-shadow-2"

@@ -120,7 +120,7 @@ function setCurrentTitle() {
 
     <div
       id="settings-window" pos="fixed top-1/2 left-1/2" w="90%" h="90%"
-      max-w-1000px max-h-900px transform="~ translate-x--1/2 translate-y--1/2"
+      max-w-1000px max-h-900px transform="~ translate-x--1/2 translate-y--1/2 gpu"
       flex justify-between items-center
     >
       <aside
@@ -137,7 +137,7 @@ function setCurrentTitle() {
           "
           flex="~ gap-2 col" rounded="30px hover:25px" p-2 shadow
           bg="$bew-content-2 hover:$bew-elevated-1 dark:$bew-elevated-1 dark-hover:$bew-elevated-2"
-          scale="group-hover:105" duration-300 overflow-hidden antialiased
+          scale="group-hover:105" duration-300 overflow-hidden antialiased transform-gpu
           border="1 $bew-border-color"
         >
           <!-- mask -->
@@ -174,7 +174,7 @@ function setCurrentTitle() {
           backdrop-filter: var(--bew-filter-glass-2);
         "
         relative overflow="x-hidde" w-full h-full bg="$bew-content-2 dark:$bew-elevated-1"
-        shadow rounded="$bew-radius" border="1 $bew-border-color"
+        shadow rounded="$bew-radius" border="1 $bew-border-color" transform-gpu
       >
         <header
           flex justify-between items-center w-full h-80px
@@ -192,7 +192,7 @@ function setCurrentTitle() {
               -webkit-mask-image: linear-gradient(to bottom, black 0, transparent 100%);
               backdrop-filter: blur(6px);
             "
-            z--1 rounded-inherit
+            z--1 rounded-inherit transform-gpu
           />
           <div text="3xl" fw-bold>
             {{ title }}

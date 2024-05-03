@@ -206,7 +206,7 @@ function toggleTabContentLoading(loading: boolean) {
             style="backdrop-filter: var(--bew-filter-glass-1)"
             px-4 lh-35px h-35px bg="$bew-elevated-1 hover:$bew-elevated-1-hover" rounded="$bew-radius"
             cursor-pointer shadow="$bew-shadow-1" box-border border="1 $bew-border-color" duration-300
-            flex="~ gap-2 items-center"
+            flex="~ gap-2 items-center" transform-gpu
             @click="handleChangeTab(tab)"
           >
             <span class="text-center">{{ $t(tab.i18nKey) }}</span>
@@ -223,7 +223,7 @@ function toggleTabContentLoading(loading: boolean) {
 
         <div
           style="backdrop-filter: var(--bew-filter-glass-1)"
-          flex="~ gap-1 shrink-0" p-1 h-35px bg="$bew-elevated-1"
+          flex="~ gap-1 shrink-0" p-1 h-35px bg="$bew-elevated-1" transform-gpu
           rounded="$bew-radius" shadow="$bew-shadow-1" box-border border="1 $bew-border-color"
         >
           <Icon
