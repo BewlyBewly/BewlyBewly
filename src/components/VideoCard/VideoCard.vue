@@ -156,6 +156,10 @@ function handleMoreBtnClick(event: MouseEvent) {
 function handleUndo() {
   emit('undo')
 }
+
+function handleVideoClick() {
+  window.open(videoUrl.value, '_blank', 'noopener,noreferrer')
+}
 </script>
 
 <template>
@@ -207,9 +211,9 @@ function handleUndo() {
       bg="hover:$bew-fill-2 active:$bew-fill-3" hover:ring="8 $bew-fill-2" active:ring="8 $bew-fill-3"
       :style="{ contentVisibility }"
     >
-      <a
+      <div
         :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }"
-        :href="videoUrl" target="_blank" rel="noopener noreferrer"
+        @click="handleVideoClick"
         @mouseenter="handleMouseEnter"
         @mouseleave="handelMouseLeave"
       >
@@ -458,7 +462,7 @@ function handleUndo() {
             </div>
           </div>
         </div>
-      </a>
+      </div>
     </div>
 
     <!-- skeleton -->
