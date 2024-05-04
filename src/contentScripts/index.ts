@@ -7,7 +7,6 @@ import { setupApp } from '~/logic/common-setup'
 import { SVG_ICONS } from '~/utils/svgIcons'
 import { injectCSS, isHomePage } from '~/utils/main'
 import { settings } from '~/logic'
-
 import { runWhenIdle } from '~/utils/lazyLoad'
 
 const isFirefox: boolean = /Firefox/i.test(navigator.userAgent)

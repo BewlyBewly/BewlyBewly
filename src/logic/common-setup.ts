@@ -1,9 +1,11 @@
 import type { App } from 'vue'
 import { getCurrentContext } from 'webext-bridge'
 import Toast, { POSITION } from 'vue-toastification'
-import { createPinia } from 'pinia'
-import { i18n } from '~/utils/i18n'
 import 'vue-toastification/dist/index.css'
+import { createPinia } from 'pinia'
+import { RecycleScroller } from 'vue-virtual-scroller'
+import { i18n } from '~/utils/i18n'
+import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 
 const pinia = createPinia()
 
@@ -15,6 +17,8 @@ export async function setupApp(app: App) {
 
   // Provide access to `app` in script setup with `const app = inject('app')`
   app.provide('app', app.config.globalProperties.$app)
+
+  app.component('RecycleScroller', RecycleScroller)
 
   // Here you can install additional plugins for all contexts: popup, options page and content-script.
   // example: app.use(i18n)
