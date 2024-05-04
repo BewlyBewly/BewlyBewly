@@ -378,7 +378,7 @@ function handleUndo() {
             <div text="base $bew-text-2" w-fit m="t-2" flex="~ items-center wrap">
               <!-- Author Avatar -->
               <span flex="inline items-center">
-                <div v-if="horizontal" flex>
+                <div v-if="horizontal" flex mb-2>
                   <a
                     v-if="authorFace"
                     :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
@@ -415,42 +415,46 @@ function handleUndo() {
                   @click.stop=""
                 >
                   <span>{{ author }}</span>
-                  <template v-if="publishedTimestamp || capsuleText">
-                    <span text-xs font-light mx-1>•</span>
-                    <span>{{ publishedTimestamp ? calcTimeSince(publishedTimestamp * 1000) : capsuleText?.trim() }}</span>
-                  </template>
                 </a>
               </span>
             </div>
 
-            <div flex="~ items-center gap-1 wrap" mt-2>
-              <!-- Tag -->
-              <span
-                v-if="tag"
-                text="sm $bew-theme-color" p="x-2 y-1" rounded="$bew-radius" bg="$bew-theme-color-20"
-              >
-                {{ tag }}
-              </span>
+            <div flex="~ items-center gap-1 wrap">
               <!-- View & Danmaku Count -->
               <div
-                text="sm $bew-text-3" p="x-2 y-1" rounded="$bew-radius" bg="$bew-fill-1"
+                text="$bew-text-2" rounded="$bew-radius"
                 inline-block
               >
                 <span v-if="view || viewStr">
                   {{ view ? $t('common.view', { count: numFormatter(view) }, view) : `${viewStr}${$t('common.viewWithoutNum')}` }}
                 </span>
                 <template v-if="danmaku || danmakuStr">
-                  <span ml-2>{{ danmaku ? $t('common.danmaku', { count: numFormatter(danmaku) }, danmaku) : `${danmakuStr}${$t('common.danmakuWithoutNum')}` }}</span>
+                  <span text-xs font-light mx-4px>•</span>
+                  <span>{{ danmaku ? $t('common.danmaku', { count: numFormatter(danmaku) }, danmaku) : `${danmakuStr}${$t('common.danmakuWithoutNum')}` }}</span>
                 </template>
                 <br>
               </div>
-              <div flex="inline items-center" ml-1>
-                <!-- Video type -->
-                <span text="$bew-text-2" inline-block>
-                  <mingcute:cellphone-2-line v-if="type === 'vertical'" />
-                  <mingcute:movie-line v-else-if="type === 'bangumi'" />
-                </span>
-              </div>
+            </div>
+            <div mt-2 flex="~ gap-1">
+              <!-- Tag -->
+              <span
+                v-if="tag"
+                text="$bew-theme-color sm" lh-6 p="x-2" rounded="$bew-radius" bg="$bew-theme-color-20"
+              >
+                {{ tag }}
+              </span>
+              <span
+                v-if="publishedTimestamp || capsuleText"
+                bg="$bew-fill-1" p="x-2" rounded="$bew-radius" text="sm $bew-text-3" lh-6
+                mr-1
+              >
+                {{ publishedTimestamp ? calcTimeSince(publishedTimestamp * 1000) : capsuleText?.trim() }}
+              </span>
+              <!-- Video type -->
+              <span text="$bew-text-2" grid="~ place-items-center">
+                <mingcute:cellphone-2-line v-if="type === 'vertical'" />
+                <mingcute:movie-line v-else-if="type === 'bangumi'" />
+              </span>
             </div>
           </div>
         </div>
@@ -460,7 +464,7 @@ function handleUndo() {
     <!-- skeleton -->
     <template v-if="!horizontal">
       <div
-        block mb-8 pointer-events-none select-none invisible
+        block mb-4 pointer-events-none select-none invisible
       >
         <!-- Cover -->
         <div w-full shrink-0 aspect-video h-fit rounded="$bew-radius" />
@@ -477,6 +481,7 @@ function handleUndo() {
               <div w="3/4" h-5 />
             </div>
             <div grid gap-2 mt-4>
+              <div w="40%" h-4 />
               <div w="80%" h-4 />
             </div>
             <div mt-2 flex>
@@ -491,7 +496,7 @@ function handleUndo() {
     <template v-else>
       <div
         flex="~ gap-6"
-        mb-8 pointer-events-none select-none invisible
+        mb-4 pointer-events-none select-none invisible
       >
         <!-- Cover -->
         <div
