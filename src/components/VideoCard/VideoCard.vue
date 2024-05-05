@@ -174,6 +174,7 @@ function handleUndo() {
       <a
         :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }"
         :href="videoUrl" target="_blank" rel="noopener noreferrer"
+        :draggable="!settings.enableVideoCtrlBarOnVideoCard"
         @mouseenter="handleMouseEnter"
         @mouseleave="handelMouseLeave"
       >
@@ -193,7 +194,9 @@ function handleUndo() {
               autoplay muted
               :controls="settings.enableVideoCtrlBarOnVideoCard"
               :style="{ pointerEvents: settings.enableVideoCtrlBarOnVideoCard ? 'auto' : 'none' }"
-              pos="absolute top-0 left-0" w-full aspect-video rounded="$bew-radius" bg-black
+              w-full aspect-video rounded="$bew-radius" bg-black
+              draggable="false"
+              @dragstart="(e) => settings.enableVideoCtrlBarOnVideoCard && isHover && e.stopPropagation()"
               @mouseenter="handleMouseEnter"
             >
               <source :src="previewVideoUrl" type="video/mp4">
@@ -270,11 +273,13 @@ function handleUndo() {
 
           <!-- Video cover -->
           <img
+            v-show="!isHover"
             :src="`${removeHttpFromUrl(cover)}@672w_378h_1c`"
             loading="lazy"
             w="full" max-w-full align-middle aspect-video
             bg="cover center"
             rounded="$bew-radius"
+            draggable="false"
           >
         </div>
 
