@@ -54,7 +54,12 @@ const emit = defineEmits<{
 
 const api = useApiClient()
 
+// 用于点击控制href属性
+const isClick = ref(false)
+
 const videoUrl = computed(() => {
+  if (!isClick.value)
+    return undefined
   if (props.bvid || props.aid)
     return `https://www.bilibili.com/video/${props.bvid ?? `av${props.aid}`}`
   else if (props.epid)
@@ -149,6 +154,17 @@ function handelMouseLeave() {
   }, 300)
 }
 
+function switchClickState(flag: boolean) {
+  if (flag) {
+    isClick.value = flag
+  }
+  else {
+    setTimeout(() => {
+      isClick.value = flag
+    })
+  }
+}
+
 function handleMoreBtnClick(event: MouseEvent) {
   emit('moreClick', event)
 }
@@ -212,6 +228,9 @@ function handleUndo() {
         :href="videoUrl" target="_blank" rel="noopener noreferrer"
         @mouseenter="handleMouseEnter"
         @mouseleave="handelMouseLeave"
+        @mousedown="switchClickState(true)"
+        @mouseup="switchClickState(false)"
+        @dragend="switchClickState(false)"
       >
         <!-- Cover -->
         <div
