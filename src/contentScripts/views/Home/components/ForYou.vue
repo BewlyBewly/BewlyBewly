@@ -110,7 +110,7 @@ function getAppVideoProps(item?: AppVideoItem | '<slot />'): VideoCardProps {
     showPreview: true,
     moreBtn: true,
     horizontal: props.gridLayout !== 'adaptive',
-    removed: dislikedAppVideoUniqueKeys.value.includes(getVideoUniqueKey(item)),
+    removed: dislikedAppVideoUniqueKeys.value.includes(getAppVideoUniqueKey(item)),
   }
 }
 
@@ -252,8 +252,7 @@ async function getAppRecommendVideos() {
         s_locale: settings.value.language === LanguageType.Mandarin_TW || settings.value.language === LanguageType.Cantonese ? 'zh-Hant_TW' : 'zh-Hans_CN',
         c_locate: settings.value.language === LanguageType.Mandarin_TW || settings.value.language === LanguageType.Cantonese ? 'zh-Hant_TW' : 'zh-Hans_CN',
         appkey: TVAppKey.appkey,
-        // @ts-expect-error Array<AppVideoItem>
-        idx: videoList.value.length > 0 ? getLastElement<AppVideoItem>(videoList.value).idx : 1,
+        idx: videoList.value.length > 0 ? getLastElement(videoList.value.map<AppVideoItem>(el => el.item as AppVideoItem)).idx : 1,
       })
 
       if (response.code === 0) {
@@ -410,8 +409,8 @@ function handleAppUndoDislike(video: AppVideoItem) {
   })
 }
 
-function getVideoUniqueKey(video: WebVideoItem | AppVideoItem) {
-  return (video.bvid || video.uri || '')
+function getVideoUniqueKey(video: WebVideoItem) {
+  return video.id + (video.bvid || video.uri || '')
 }
 
 function getAppVideoUniqueKey(video: AppVideoItem) {
