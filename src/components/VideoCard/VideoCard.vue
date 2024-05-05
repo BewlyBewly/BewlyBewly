@@ -54,8 +54,8 @@ const emit = defineEmits<{
 
 const api = useApiClient()
 
-// 用于点击控制href属性
-const isClick = ref(false)
+// Used to click and control herf attribute
+const isClick = ref<boolean>(false)
 
 const videoUrl = computed(() => {
   if (!isClick.value)
