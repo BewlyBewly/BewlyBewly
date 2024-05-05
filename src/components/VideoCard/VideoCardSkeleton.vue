@@ -16,6 +16,7 @@ const wValue = computed((): string => {
   <div
     v-if="!horizontal"
     mb-4 pointer-events-none select-none
+    class="motion-safe:animate-[pulse_1.5s_ease-in-out_infinite]"
   >
     <div aspect-video bg="$bew-fill-4" rounded="$bew-radius" />
     <div flex mt-4>

@@ -4,12 +4,19 @@ import { onKeyStroke } from '@vueuse/core'
 import { useToast } from 'vue-toastification'
 import { Type as ThreePointV2Type } from '~/models/video/appForYou'
 import type { AppForYouResult, Item as AppVideoItem, ThreePointV2 } from '~/models/video/appForYou'
-import type { Item as VideoItem, forYouResult } from '~/models/video/forYou'
+import type { Item as WebVideoItem, forYouResult } from '~/models/video/forYou'
 import type { GridLayout } from '~/logic'
 import { accessKey, settings } from '~/logic'
 import { LanguageType } from '~/enums/appEnums'
 import { TVAppKey, getTvSign } from '~/utils/authProvider'
 import { isVerticalVideo } from '~/utils/uriParse'
+import { getLastElement } from '~/utils/array'
+import type { VideoCardProps } from '~/components/VideoCard/types'
+
+interface VideoElement {
+  id: string
+  item: AppVideoItem | WebVideoItem | '<slot />'
+}
 
 const props = defineProps<{
   gridLayout: GridLayout
@@ -20,18 +27,10 @@ const emit = defineEmits<{
   (e: 'afterLoading'): void
 }>()
 
-const gridValue = computed((): string => {
-  if (props.gridLayout === 'adaptive')
-    return '~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-5'
-  if (props.gridLayout === 'twoColumns')
-    return '~ cols-1 xl:cols-2 gap-4'
-  return '~ cols-1 gap-4'
-})
-
 const toast = useToast()
 const api = useApiClient()
-const videoList = reactive<VideoItem[]>([])
-const appVideoList = reactive<AppVideoItem[]>([])
+const ps = ref<number>(30)
+const videoList = ref<Array<VideoElement>>([])
 const isLoading = ref<boolean>(true)
 const needToLoginFirst = ref<boolean>(false)
 const containerRef = ref<HTMLElement>() as Ref<HTMLElement>
@@ -48,52 +47,114 @@ const videoOptionsPosition = reactive<{ top: string, left: string }>({ top: '0',
 const activatedAppVideoIdx = ref<number>(0)
 const activatedAppVideo = ref<AppVideoItem | null>()
 const activatedVideoId = ref<number>(0)
-const activatedVideo = ref<VideoItem | null>()
-const videoCardRef = ref(null)
+const activatedVideo = ref<WebVideoItem | null>()
 const dislikedVideoUniqueKeys = ref<string[]>([])
 const dislikedAppVideoUniqueKeys = ref<string[]>([])
 const showDislikeDialog = ref<boolean>(false)
 const selectedDislikeReason = ref<number>(1)
 const loadingDislikeDialog = ref<boolean>(false)
 
-onKeyStroke((e: KeyboardEvent) => {
-  if (showDislikeDialog.value) {
-    const dislikeReasons = activatedAppVideo.value?.three_point_v2?.find(option => option.type === ThreePointV2Type.Dislike)?.reasons || []
-
-    if (e.key >= '0' && e.key <= '9') {
-      e.preventDefault()
-      dislikeReasons.forEach((reason) => {
-        if (dislikeReasons[Number(e.key) - 1] && reason.id === dislikeReasons[Number(e.key) - 1].id)
-          selectedDislikeReason.value = reason.id
-      })
-    }
-    else if (e.key === 'ArrowUp') {
-      e.preventDefault()
-      const currentIndex = dislikeReasons.findIndex(reason => selectedDislikeReason.value === reason.id)
-      if (currentIndex > 0)
-        selectedDislikeReason.value = dislikeReasons[currentIndex - 1].id
-    }
-    else if (e.key === 'ArrowDown') {
-      e.preventDefault()
-      const currentIndex = dislikeReasons.findIndex(reason => selectedDislikeReason.value === reason.id)
-      if (currentIndex < dislikeReasons.length - 1)
-        selectedDislikeReason.value = dislikeReasons[currentIndex + 1].id
-    }
+function getWebVideoProps(item?: WebVideoItem | '<slot />'): VideoCardProps {
+  if (!item || item === '<slot />') {
+    return {
+      horizontal: props.gridLayout !== 'adaptive',
+    } as VideoCardProps
   }
+
+  return {
+    id: item.id,
+    duration: item.duration,
+    title: item.title,
+    cover: item.pic,
+    author: item.owner.name,
+    authorFace: item.owner.face,
+    followed: !!item.is_followed,
+    mid: item.owner.mid,
+    view: item.stat.view,
+    danmaku: item.stat.danmaku,
+    publishedTimestamp: item.pubdate,
+    bvid: item.bvid,
+    cid: item.cid,
+    uri: item.uri,
+    showPreview: true,
+    moreBtn: true,
+    horizontal: props.gridLayout !== 'adaptive',
+    moreBtnActive: item.id === activatedVideoId.value,
+    removed: dislikedVideoUniqueKeys.value.includes(getVideoUniqueKey(item)),
+  }
+}
+
+function getAppVideoProps(item?: AppVideoItem | '<slot />'): VideoCardProps {
+  if (!item || item === '<slot />') {
+    return {
+      horizontal: props.gridLayout !== 'adaptive',
+    } as VideoCardProps
+  }
+
+  return {
+    id: item.args.aid!,
+    durationStr: item.cover_right_text,
+    title: item.title!,
+    cover: item.cover!,
+    author: item.mask?.avatar.text,
+    authorFace: item.mask?.avatar.cover,
+    followed: item.bottom_rcmd_reason === '已关注' || item.bottom_rcmd_reason === '已關注',
+    mid: item.mask?.avatar.up_id,
+    capsuleText: item.desc,
+    bvid: item.bvid,
+    viewStr: item.cover_left_text_1,
+    danmakuStr: item.cover_left_text_2,
+    cid: item.player_args?.cid,
+    uri: item.uri,
+    type: item.card_goto === 'bangumi' ? 'bangumi' : isVerticalVideo(item.uri!) ? 'vertical' : 'horizontal',
+    showPreview: true,
+    moreBtn: true,
+    horizontal: props.gridLayout !== 'adaptive',
+    removed: dislikedAppVideoUniqueKeys.value.includes(getVideoUniqueKey(item)),
+  }
+}
+
+const videos = computed(() => {
+  if (settings.value.recommendationMode === 'web') {
+    return videoList.value.map((video) => {
+      const skeleton = video.item === '<slot />'
+      const item = video.item as WebVideoItem
+      return {
+        key: video.id,
+        moreClick: (e: MouseEvent) => handleMoreClick(e, item),
+        undo: () => handleUndoDislike(item),
+        props: {
+          skeleton,
+          ...getWebVideoProps(item),
+        } satisfies VideoCardProps,
+      }
+    })
+  }
+
+  return videoList.value.map((video) => {
+    const skeleton = video.item === '<slot />'
+    const item = video.item as AppVideoItem
+    return {
+      key: video.id,
+      moreClick: (e: MouseEvent) => handleAppMoreClick(e, item),
+      undo: () => handleAppUndoDislike(item),
+      props: {
+        skeleton,
+        ...getAppVideoProps(item),
+      } satisfies VideoCardProps,
+    }
+  })
 })
 
-watch(() => settings.value.recommendationMode, () => {
-  initData()
+const gridValue = computed((): string => {
+  if (props.gridLayout === 'adaptive')
+    return '~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-5'
+  if (props.gridLayout === 'twoColumns')
+    return '~ cols-1 xl:cols-2 gap-4'
+  return '~ cols-1 gap-4'
 })
 
-onMounted(async () => {
-  // Delay by 0.2 seconds to obtain the `settings.value.recommendationMode` value
-  // otherwise the `settings.value.recommendationMode` value will be undefined
-  // i have no idea to fix that...
-  setTimeout(async () => {
-    initData()
-  }, 200)
-
+onBeforeMount(async () => {
   initPageAction()
 })
 
@@ -102,18 +163,24 @@ onActivated(() => {
 })
 
 async function initData() {
-  videoList.length = 0
-  appVideoList.length = 0
+  isLoading.value = true
   await getData()
+  isLoading.value = false
 }
 
 async function getData() {
-  if (settings.value.recommendationMode === 'web') {
-    getRecommendVideos()
-  }
-  else {
-    for (let i = 0; i < 3; i++)
-      await getAppRecommendVideos()
+  emit('beforeLoading')
+  switch (settings.value.recommendationMode) {
+    case 'web':
+      return getWebRecommendVideos()
+        .finally(() => {
+          emit('afterLoading')
+        })
+    case 'app':
+      return getAppRecommendVideos()
+        .finally(() => {
+          emit('afterLoading')
+        })
   }
 }
 
@@ -135,12 +202,19 @@ function initPageAction() {
   }
 }
 
-async function getRecommendVideos() {
-  emit('beforeLoading')
-  isLoading.value = true
+async function getWebRecommendVideos() {
   try {
+    const pendingVideos: VideoElement[] = Array.from({ length: ps.value }, () => ({
+      id: String(useId()),
+      item: '<slot />',
+    } satisfies VideoElement))
+    let idx = videoList.value.length
+    videoList.value.push(...pendingVideos)
+
     const response: forYouResult = await api.video.getRecommendVideos({
       fresh_idx: refreshIdx.value++,
+      ps: ps.value,
+      version: 1,
     })
 
     if (!response.data) {
@@ -149,72 +223,61 @@ async function getRecommendVideos() {
     }
 
     if (response.code === 0) {
-      const resData = [] as VideoItem[]
-
-      response.data.item.forEach((item: VideoItem) => {
-        resData.push(item)
+      response.data.item.forEach((item: WebVideoItem) => {
+        videoList.value[idx++].item = item
       })
-
-      // when videoList has length property, it means it is the first time to load
-      if (!videoList.length) {
-        Object.assign(videoList, resData)
-      }
-      else {
-        // else we concat the new data to the old data
-        Object.assign(videoList, videoList.concat(resData))
-      }
     }
     else if (response.code === 62011) {
       needToLoginFirst.value = true
     }
   }
   finally {
-    isLoading.value = false
-    emit('afterLoading')
+    // remove pending videos
+    videoList.value = videoList.value.filter(video => video.item !== '<slot />')
   }
 }
 
 async function getAppRecommendVideos() {
-  emit('beforeLoading')
-  isLoading.value = true
+  const pendingVideos: VideoElement[] = Array.from({ length: ps.value }, () => ({
+    id: String(useId()),
+    item: '<slot />',
+  } satisfies VideoElement))
+  let idx = videoList.value.length
+  videoList.value.push(...pendingVideos)
+  let count = 0
   try {
-    const response: AppForYouResult = await api.video.getAppRecommendVideos({
-      access_key: accessKey.value,
-      s_locale: settings.value.language === LanguageType.Mandarin_TW || settings.value.language === LanguageType.Cantonese ? 'zh-Hant_TW' : 'zh-Hans_CN',
-      c_locate: settings.value.language === LanguageType.Mandarin_TW || settings.value.language === LanguageType.Cantonese ? 'zh-Hant_TW' : 'zh-Hans_CN',
-      appkey: TVAppKey.appkey,
-      idx: appVideoList.length > 0 ? appVideoList[appVideoList.length - 1].idx : 1,
-    })
-
-    if (response.code === 0) {
-      const resData = [] as AppVideoItem[]
-
-      response.data.items.forEach((item: AppVideoItem) => {
-        // Remove banner & ad cards
-        if (!item.card_type.includes('banner') && item.card_type !== 'cm_v1')
-          resData.push(item)
+    while (count < ps.value) {
+      const response: AppForYouResult = await api.video.getAppRecommendVideos({
+        access_key: accessKey.value,
+        s_locale: settings.value.language === LanguageType.Mandarin_TW || settings.value.language === LanguageType.Cantonese ? 'zh-Hant_TW' : 'zh-Hans_CN',
+        c_locate: settings.value.language === LanguageType.Mandarin_TW || settings.value.language === LanguageType.Cantonese ? 'zh-Hant_TW' : 'zh-Hans_CN',
+        appkey: TVAppKey.appkey,
+        // @ts-expect-error Array<AppVideoItem>
+        idx: videoList.value.length > 0 ? getLastElement<AppVideoItem>(videoList.value).idx : 1,
       })
 
-      // when videoList has length property, it means it is the first time to load
-      if (!appVideoList.length) {
-        Object.assign(appVideoList, resData)
+      if (response.code === 0) {
+        response.data.items.forEach((item: AppVideoItem) => {
+        // Remove banner & ad cards
+          if (!item.card_type.includes('banner') && item.card_type !== 'cm_v1') {
+            videoList.value[idx++].item = item
+            count++
+          }
+        })
       }
-      else {
-        // else we concat the new data to the old data
-        Object.assign(appVideoList, appVideoList.concat(resData))
+      else if (response.code === 62011) {
+        needToLoginFirst.value = true
+        break
       }
-    }
-    else if (response.code === 62011) {
-      needToLoginFirst.value = true
     }
   }
   finally {
-    isLoading.value = false
-    emit('afterLoading')
+    // remove pending videos
+    videoList.value = videoList.value.filter(video => video.item !== '<slot />')
   }
 }
 
-function handleMoreClick(e: MouseEvent, data: VideoItem) {
+function handleMoreClick(e: MouseEvent, data: WebVideoItem) {
   if (activatedVideo.value && activatedVideoId.value === data.id) {
     closeVideoOptions()
     return
@@ -312,7 +375,7 @@ function handleAppDislike() {
     })
 }
 
-function handleUndoDislike(_video: VideoItem) {
+function handleUndoDislike(_video: WebVideoItem) {
   dislikedVideoUniqueKeys.value = dislikedVideoUniqueKeys.value.filter(currentKey =>
     currentKey !== (activatedVideo.value ? getVideoUniqueKey(activatedVideo.value) : ''),
   )
@@ -347,8 +410,8 @@ function handleAppUndoDislike(video: AppVideoItem) {
   })
 }
 
-function getVideoUniqueKey(video: VideoItem) {
-  return video.id + (video.bvid || video.uri || '')
+function getVideoUniqueKey(video: WebVideoItem | AppVideoItem) {
+  return (video.bvid || video.uri || '')
 }
 
 function getAppVideoUniqueKey(video: AppVideoItem) {
@@ -360,6 +423,41 @@ function jumpToLoginPage() {
 }
 
 defineExpose({ initData })
+
+onKeyStroke((e: KeyboardEvent) => {
+  if (showDislikeDialog.value) {
+    const dislikeReasons = activatedAppVideo.value?.three_point_v2?.find(option => option.type === ThreePointV2Type.Dislike)?.reasons || []
+
+    if (e.key >= '0' && e.key <= '9') {
+      e.preventDefault()
+      dislikeReasons.forEach((reason) => {
+        if (dislikeReasons[Number(e.key) - 1] && reason.id === dislikeReasons[Number(e.key) - 1].id)
+          selectedDislikeReason.value = reason.id
+      })
+    }
+    else if (e.key === 'ArrowUp') {
+      e.preventDefault()
+      const currentIndex = dislikeReasons.findIndex(reason => selectedDislikeReason.value === reason.id)
+      if (currentIndex > 0)
+        selectedDislikeReason.value = dislikeReasons[currentIndex - 1].id
+    }
+    else if (e.key === 'ArrowDown') {
+      e.preventDefault()
+      const currentIndex = dislikeReasons.findIndex(reason => selectedDislikeReason.value === reason.id)
+      if (currentIndex < dislikeReasons.length - 1)
+        selectedDislikeReason.value = dislikeReasons[currentIndex + 1].id
+    }
+  }
+})
+
+watch(() => settings.value.recommendationMode, (mode, oldMode) => {
+  if (mode !== oldMode) {
+    videoList.value = []
+    refreshIdx.value = 1
+    noMoreContent.value = false
+  }
+  initData()
+}, { immediate: true })
 </script>
 
 <template>
@@ -451,73 +549,10 @@ defineExpose({ initData })
       v-else
       ref="containerRef"
       m="b-0 t-0" relative w-full h-full
+      pb-4 gap-4
       :grid="gridValue"
     >
-      <template v-if="settings.recommendationMode === 'web'">
-        <VideoCard
-          v-for="video in videoList"
-          :id="video.id"
-          :key="video.id"
-          :duration="video.duration"
-          :title="video.title"
-          :cover="video.pic"
-          :author="video.owner.name"
-          :author-face="video.owner.face"
-          :followed="!!video.is_followed"
-          :mid="video.owner.mid"
-          :view="video.stat.view"
-          :danmaku="video.stat.danmaku"
-          :published-timestamp="video.pubdate"
-          :bvid="video.bvid"
-          :cid="video.cid"
-          :uri="video.uri"
-          show-preview
-          :horizontal="gridLayout !== 'adaptive'"
-          more-btn
-          :more-btn-active="video.id === activatedVideoId"
-          :removed="dislikedVideoUniqueKeys.includes(getVideoUniqueKey(video))"
-          @more-click="(e) => handleMoreClick(e, video)"
-          @undo="handleUndoDislike(video)"
-        />
-      </template>
-      <template v-else>
-        <VideoCard
-          v-for="video in appVideoList"
-          :id="video.args.aid ?? 0"
-          ref="videoCardRef"
-          :key="video.args.aid"
-          :duration-str="video.cover_right_text"
-          :title="`${video.title}`"
-          :cover="`${video.cover}`"
-          :author="video?.mask?.avatar.text"
-          :author-face="video?.mask?.avatar.cover"
-          :followed="video?.bottom_rcmd_reason === '已关注' || video?.bottom_rcmd_reason === '已關注'"
-          :mid="video?.mask?.avatar.up_id "
-          :capsule-text="video?.desc?.split('·')[1]"
-          :bvid="video.bvid"
-          :view-str="video.cover_left_text_1"
-          :danmaku-str="video.cover_left_text_2"
-          :cid="video?.player_args?.cid"
-          :uri="video.uri"
-          :type="video.card_goto === 'bangumi' ? 'bangumi' : isVerticalVideo(video.uri!) ? 'vertical' : 'horizontal'"
-          show-preview
-          :horizontal="gridLayout !== 'adaptive'"
-          more-btn
-          :more-btn-active="video.idx === activatedAppVideoIdx"
-          :removed="dislikedAppVideoUniqueKeys.includes(getAppVideoUniqueKey(video))"
-          @more-click="(e) => handleAppMoreClick(e, video)"
-          @undo="handleAppUndoDislike(video)"
-        />
-        <!-- :more-options="video.three_point_v2" -->
-      </template>
-
-      <!-- skeleton -->
-      <template v-if="isLoading">
-        <VideoCardSkeleton
-          v-for="item in 30" :key="item"
-          :horizontal="gridLayout !== 'adaptive'"
-        />
-      </template>
+      <VideoCard v-for="video in videos" v-bind="video.props" :key="video.key" @more-click="video.moreClick" @undo="video.undo" />
     </div>
 
     <!-- no more content -->

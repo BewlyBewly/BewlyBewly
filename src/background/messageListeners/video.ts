@@ -13,6 +13,7 @@ const API_VIDEO = {
       fresh_type: 4,
       ps: 30,
       plat: 1,
+      version: 1,
     },
     afterHandle: AHS.J_D,
   },
