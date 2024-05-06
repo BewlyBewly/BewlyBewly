@@ -1,26 +1,16 @@
 <script lang="ts" setup>
-const props = defineProps<{
+defineProps<{
   modelValue: boolean
   label?: string
 }>()
 
-const emit = defineEmits(['update:modelValue'])
-
-const modelValue = ref<boolean>()
-
-watch(() => modelValue.value, (newValue) => {
-  emit('update:modelValue', newValue)
-})
-
-onMounted(() => {
-  modelValue.value = props.modelValue
-})
+const model = defineModel()
 </script>
 
 <template>
   <label cursor="pointer" pointer="auto" flex items-center gap-3>
     <span>{{ label }}</span>
-    <input v-model="modelValue" type="checkbox" hidden>
+    <input v-model="model" type="checkbox" hidden>
     <span
       inline-block w="$b-button-width" h="$b-button-height" bg="$bew-fill-1" rounded="[calc(var(--b-button-height)/2)]"
       relative border="size-$b-border-width color-$bew-border-color"
