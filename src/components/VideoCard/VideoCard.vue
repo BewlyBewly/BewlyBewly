@@ -124,7 +124,7 @@ function handleUndo() {
 </script>
 
 <template>
-  <div class="relative">
+  <div>
     <!-- By directly using predefined unocss width properties, it is possible to dynamically set the width attribute -->
     <div hidden w="xl:280px lg:250px md:200px 200px" />
     <div hidden w="full" />
@@ -165,8 +165,7 @@ function handleUndo() {
 
     <div
       v-if="!removed && !skeleton"
-      class="video-card group"
-      w="full"
+      class="video-card group w-full h-full"
       rounded="$bew-radius" duration-300 ease-in-out
       bg="hover:$bew-fill-2 active:$bew-fill-3" hover:ring="8 $bew-fill-2" active:ring="8 $bew-fill-3"
       :style="{ contentVisibility }"
