@@ -271,15 +271,11 @@ function handleUndo() {
           </button>
 
           <!-- Video cover -->
-          <img
-            v-show="!isHover"
-            :src="`${removeHttpFromUrl(cover)}@672w_378h_1c`"
-            loading="lazy"
-            w="full" max-w-full align-middle aspect-video
-            bg="cover center"
-            rounded="$bew-radius"
-            draggable="false"
-          >
+          <picture v-show="!isHover || !settings.enableVideoPreview" draggable="false">
+            <source :srcset="`${removeHttpFromUrl(cover)}` + '@672w_378h_1c_!web-home-common-cover.avif'" type="image/avif">
+            <source :srcset="`${removeHttpFromUrl(cover)}` + '@672w_378h_1c_!web-home-common-cover.webp'" type="image/webp">
+            <img :src="`${removeHttpFromUrl(cover)}` + '@672w_378h_1c_!web-home-common-cover'" loading="eager" class="w-full max-w-full min-h-196px align-middle aspect-video" bg="cover center" rounded="$bew-radius">
+          </picture>
         </div>
 
         <!-- Other Information -->
@@ -322,7 +318,7 @@ function handleUndo() {
           <div class="group/desc" flex="~ col" w="full" align="items-start">
             <div flex="~ gap-1 justify-between items-start" w="full" pos="relative">
               <h3
-                class="keep-two-lines"
+                class="keep-two-lines transform-translate-z-0"
                 text="lg overflow-ellipsis $bew-text-1"
                 cursor="pointer"
               >
