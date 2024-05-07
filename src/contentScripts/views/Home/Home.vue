@@ -206,18 +206,18 @@ function toggleTabContentLoading(loading: boolean) {
             style="backdrop-filter: var(--bew-filter-glass-1)"
             px-4 lh-35px h-35px bg="$bew-elevated-1 hover:$bew-elevated-1-hover" rounded="$bew-radius"
             cursor-pointer shadow="$bew-shadow-1" box-border border="1 $bew-border-color" duration-300
-            flex="~ gap-2 items-center"
+            flex="~ gap-2 items-center" relative
             @click="handleChangeTab(tab)"
           >
             <span class="text-center">{{ $t(tab.i18nKey) }}</span>
 
-            <i
-              :style="{
-                opacity: activatedPage === tab.page && tabContentLoading ? 1 : 0,
-                margin: activatedPage === tab.page && tabContentLoading ? '0' : '-12px',
-              }"
-              class="i-svg-spinners:ring-resize mb--2px text-16px"
-            />
+            <Transition name="fade">
+              <svg-spinners:ring-resize
+                v-show="activatedPage === tab.page && tabContentLoading"
+                pos="absolute right-4px top-4px" duration-300
+                text="8px $bew-text-auto"
+              />
+            </Transition>
           </button>
         </section>
 
