@@ -1,5 +1,44 @@
 # Changelog
 
+## [0.18.4](https://github.com/BewlyBewly/BewlyBewly/compare/v0.18.2...v0.18.4) (2024-05-06)
+
+
+### Features
+
+* redesign video card ([6cd2e4e](https://github.com/BewlyBewly/BewlyBewly/commit/6cd2e4e4e5996899bb3da30cf36056ea665c756e))
+* submit store github action workflow ([#499](https://github.com/BewlyBewly/BewlyBewly/issues/499)) ([98164c3](https://github.com/BewlyBewly/BewlyBewly/commit/98164c3db196ab3a449c0c0089a91607fa95fd24))
+
+
+### Bug Fixes
+
+* basic `font-size` ([#701](https://github.com/BewlyBewly/BewlyBewly/issues/701)) ([1e6973a](https://github.com/BewlyBewly/BewlyBewly/commit/1e6973a34349c56751dd41e98e78cd6f5ff85fc0))
+* Extension-Firefox submit ([#698](https://github.com/BewlyBewly/BewlyBewly/issues/698)) ([9a15d17](https://github.com/BewlyBewly/BewlyBewly/commit/9a15d17f2d9772a1039737d2eeca265880497d9d))
+* font size doesn't match the `--bew-base-font-size` ([64a7fce](https://github.com/BewlyBewly/BewlyBewly/commit/64a7fce64b19877474c7c1312864940d4e3198a8))
+* improve dark mode ([42ed108](https://github.com/BewlyBewly/BewlyBewly/commit/42ed108ad7517346de3db1467276dc10960caf3c))
+* improve dark mode ([0eb4267](https://github.com/BewlyBewly/BewlyBewly/commit/0eb4267cf574f3f5348fe14b82305a6fc75349b3)), closes [#695](https://github.com/BewlyBewly/BewlyBewly/issues/695)
+* radio value is not updated, close [#717](https://github.com/BewlyBewly/BewlyBewly/issues/717) ([5adaf14](https://github.com/BewlyBewly/BewlyBewly/commit/5adaf14edf486c061d94e511185b8172b41d23e0))
+* **SearchBar:** cannot show the focused character ([7eb86ed](https://github.com/BewlyBewly/BewlyBewly/commit/7eb86ed13da42789b4adb9123a857270a2ca3a3c))
+* **VideoCard:** cannot open full-screen preview ([bfc5e51](https://github.com/BewlyBewly/BewlyBewly/commit/bfc5e51f38fd02b54194031bf3696e0360ed955b))
+* **VideoCard:** preview control cannot be dragged while pressing ([#714](https://github.com/BewlyBewly/BewlyBewly/issues/714)) ([e37caa7](https://github.com/BewlyBewly/BewlyBewly/commit/e37caa7f7910906fd71691455a73ffe20cd723b5))
+
+
+### Docs
+
+* adjust docs formatting ([b0e31d0](https://github.com/BewlyBewly/BewlyBewly/commit/b0e31d00ac0d335f54b555ed508f3afe75b2b5b6))
+
+
+### Style Changes
+
+* **TopBar:** adjust styles ([9e13f02](https://github.com/BewlyBewly/BewlyBewly/commit/9e13f02751ecc0a81aea3ecbde21133dae2759bd))
+* **VideoCard:** adjust styles ([77b5e90](https://github.com/BewlyBewly/BewlyBewly/commit/77b5e90799cc453e6a3d4afc0fbfa039dd5c59da))
+
+
+### CI
+
+* add build step before type check ([9aa95b9](https://github.com/BewlyBewly/BewlyBewly/commit/9aa95b915ce0462e1b46ddd199d2bf72dbed44a2))
+* remove the `\` ([f3de2c5](https://github.com/BewlyBewly/BewlyBewly/commit/f3de2c5b1f8e9762d546580ad3c4699ce4fadfd6))
+* update release workflow to include firefox sources zip ([c3d2bda](https://github.com/BewlyBewly/BewlyBewly/commit/c3d2bda27a436280dec2ee2b7cc980ddb3de9681))
+
 ## [0.18.2](https://github.com/BewlyBewly/BewlyBewly/compare/v0.18.1...v0.18.2) (2024-04-28)
 
 
