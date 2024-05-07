@@ -7,7 +7,7 @@ import browser from 'webextension-polyfill'
 import type { BewlyAppProvider } from '~/composables/useAppProvider'
 import { AppPage, LanguageType } from '~/enums/appEnums'
 import { accessKey, settings } from '~/logic'
-import { getUserID, hexToRGBA, isHomePage, smoothScrollToTop } from '~/utils/main'
+import { debounced, getUserID, hexToRGBA, isHomePage, smoothScrollToTop } from '~/utils/main'
 
 const { isDark } = useDark()
 const activatedPage = ref<AppPage>(settings.value.dockItemVisibilityList.find(e => e.visible === true)?.page ?? AppPage.Home)
@@ -344,7 +344,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
       :style="{ height: isHomePage() && !settings.useOriginalBilibiliHomepage ? '100dvh' : '0' }"
     >
       <template v-if="isHomePage() && !settings.useOriginalBilibiliHomepage">
-        <OverlayScrollbarsComponent ref="scrollbarRef" element="div" h-inherit defer @os-scroll="handleOsScroll">
+        <OverlayScrollbarsComponent ref="scrollbarRef" element="div" h-inherit defer @os-scroll="debounced(handleOsScroll)">
           <main m-auto max-w="$bew-page-max-width">
             <div
               p="t-80px" m-auto
