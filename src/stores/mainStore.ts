@@ -26,8 +26,8 @@ export const useMainStore = defineStore('main', () => {
     ]
   })
 
-  const homeTabs = computed((): HomeTab[] => {
-    return [
+  const homeTabs = shallowReadonly<HomeTab[]>(
+    [
       {
         i18nKey: 'home.for_you',
         page: HomeSubPage.ForYou,
@@ -48,8 +48,8 @@ export const useMainStore = defineStore('main', () => {
         i18nKey: 'home.ranking',
         page: HomeSubPage.Ranking,
       },
-    ]
-  })
+    ],
+  )
 
   return { dockItems, homeTabs }
 })
