@@ -196,7 +196,7 @@ function handleAdaptToOtherPageStylesChange() {
     document.documentElement.classList.remove('bewly-design')
 }
 
-function handleOsScroll() {
+const handleOsScroll = debounced(() => {
   const osInstance = scrollbarRef.value?.osInstance()
   const { viewport } = osInstance.elements()
   const { scrollTop, scrollHeight, clientHeight } = viewport // get scroll offset
@@ -211,7 +211,7 @@ function handleOsScroll() {
 
   if (isHomePage())
     topBarRef.value?.handleScroll()
-}
+}, 50)
 
 function handleBlockAds() {
   // Do not use the "ads" keyword. AdGuard, AdBlock, and some ad-blocking extensions will
@@ -344,7 +344,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
       :style="{ height: isHomePage() && !settings.useOriginalBilibiliHomepage ? '100dvh' : '0' }"
     >
       <template v-if="isHomePage() && !settings.useOriginalBilibiliHomepage">
-        <OverlayScrollbarsComponent ref="scrollbarRef" element="div" h-inherit defer @os-scroll="debounced(handleOsScroll)">
+        <OverlayScrollbarsComponent ref="scrollbarRef" element="div" h-inherit defer @os-scroll="handleOsScroll">
           <main m-auto max-w="$bew-page-max-width">
             <div
               p="t-80px" m-auto
