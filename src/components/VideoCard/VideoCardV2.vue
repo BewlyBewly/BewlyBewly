@@ -131,7 +131,7 @@ watch(isHover, (isHover) => {
       </a>
 
       <!-- video card infomation -->
-      <div v-if="!removed" flex="~ gap-x-4" class="p2 pt-0 group/desc">
+      <div v-if="!removed" flex="~ gap-x-4" class="p2 pt-0 group">
         <!-- avatar -->
         <a
           :href="authorUrl" target="_blank" rel="noopener noreferrer"
@@ -169,17 +169,17 @@ watch(isHover, (isHover) => {
             </h3>
 
             <!-- more btn -->
-            <div
+            <button
               v-if="moreBtn"
+              role="button"
               flex="~ justify-center items-center"
-              class="transition-opacity op-0 group-hover/desc:op-100 size-30px rounded-full cursor-pointer"
+              class="transition-opacity op-0 focus:op-100! focus:ring-2 size-30px rounded-full cursor-pointer"
               ring="1 $bew-border-color"
-              focus="ring-2"
-              hover="bg-$bew-theme-color-10"
-              @click.prevent="emit('moreClick', $event)"
+              group-hover="op-100 hover:bg-slate-200 hover:dark:bg-slate-800"
+              @click="emit('moreClick', $event)"
             >
               <i class="i-mingcute:more-2-line text-lg" />
-            </div>
+            </button>
           </div>
 
           <div flex="~ items-center gap-1 wrap">
@@ -228,8 +228,8 @@ watch(isHover, (isHover) => {
 
 <style>
 .bewly-video-card {
-  --at-apply: of-hidden rounded-$bew-radius;
-  /* box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.15); */
+  --at-apply: of-hidden rounded-$bew-radius transition-shadow duration-500;
+  --at-apply: shadow-[0_5px_10px_0_rgba(0,0,0,0.15)];
 }
 
 .video-tag {
