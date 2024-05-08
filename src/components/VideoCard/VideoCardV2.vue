@@ -82,7 +82,7 @@ watch(isHover, (isHover) => {
 <template>
   <div ref="warperEl" class="video-card-wrapper" :style="{ visibility: isVisible ? 'visible' : 'hidden' }">
     <!-- bewly video card -->
-    <div v-if="!skeleton" flex="~ col gap-y-2">
+    <div v-if="!skeleton" flex="~ col gap-y-2" class="bewly-video-card">
       <!-- video card cover -->
       <a :href="videoUrl" target="_blank" rel="noopener noreferrer" :class="{ 'pointer-events-none': isDragProgress }">
         <div ref="previewEl" class="relative of-hidden rounded-$bew-radius" flex="~ justify-center items-center">
@@ -123,7 +123,7 @@ watch(isHover, (isHover) => {
       </a>
 
       <!-- video card infomation -->
-      <div flex="~ gap-x-4">
+      <div flex="~ gap-x-4" class="p2 pt-0">
         <!-- avatar -->
         <a
           :href="authorUrl" target="_blank" rel="noopener noreferrer"
@@ -146,18 +146,34 @@ watch(isHover, (isHover) => {
           </div>
         </a>
 
-        <div flex="~ col gap-y-2">
-          <!-- title -->
-          <h3
-            :title="title"
-            class="min-h-[calc(((1rem*1.75)-1em)*2+1em*2)] keep-two-lines transform-translate-z-0 cursor-pointer"
-            text="lg overflow-ellipsis $bew-text-1"
-            hover="text-$bew-theme-color"
-          >
-            <a :href="videoUrl" target="_blank" rel="noopener noreferrer">
-              {{ title }}
-            </a>
-          </h3>
+        <div flex="~ col gap-y-2" class="w-full">
+          <!-- header -->
+          <div class="w-full flex gap-x-2 group">
+            <!-- title -->
+            <h3
+              :title="title"
+              class="flex-1 min-h-[calc(((1rem*1.75)-1em)*2+1em*2)] keep-two-lines transform-translate-z-0 cursor-pointer"
+              text="lg overflow-ellipsis $bew-text-1"
+              hover="text-$bew-theme-color"
+            >
+              <a :href="videoUrl" target="_blank" rel="noopener noreferrer">
+                {{ title }}
+              </a>
+            </h3>
+
+            <!-- more btn -->
+            <div
+              v-if="moreBtn"
+              flex="~ justify-center items-center"
+              class="transition-opacity op-0 group-hover:op-100 size-30px rounded-full cursor-pointer"
+              ring="1 $bew-border-color"
+              focus="ring-2"
+              hover="bg-$bew-theme-color-10"
+              @click.prevent="$emit('moreClick', $event)"
+            >
+              <i class="i-mingcute:more-2-line text-lg" />
+            </div>
+          </div>
 
           <div flex="~ items-center gap-1 wrap">
             <!-- View & Danmaku Count -->
@@ -204,6 +220,11 @@ watch(isHover, (isHover) => {
 </template>
 
 <style>
+.bewly-video-card {
+  --at-apply: of-hidden rounded-$bew-radius;
+  /* box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.15); */
+}
+
 .video-tag {
   --at-apply: bg-$bew-theme-color-20;
   --at-apply: text-sm text-$bew-text-2 lh-6;
