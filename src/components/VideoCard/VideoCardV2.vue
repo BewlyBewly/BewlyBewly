@@ -107,6 +107,18 @@ watch(isHover, (isHover) => {
               </video>
             </div>
           </Transition>
+
+          <!-- rank -->
+          <div v-if="rank" pos="absolute top-1 left-1 p-2" flex="~ justify-center items-center">
+            <div
+              class="size-30px rounded-full shadow-$bew-shadow-1"
+              bg="$bew-theme-color"
+              border="1 $bew-theme-color"
+              text="white center 2xl fw-bold"
+            >
+              {{ rank }}
+            </div>
+          </div>
         </div>
       </a>
 
