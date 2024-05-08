@@ -14,18 +14,17 @@ const props = withDefaults(defineProps<VideoCardProps>(), {
   id: 0,
 })
 
-// const emit = defineEmits<{
-//   (e: 'moreClick', event: MouseEvent): MouseEvent
-//   (e: 'undo'): void
-//   (e: 'tellUsWhy'): void
-// }>()
+const emit = defineEmits<{
+  (e: 'moreClick', event: MouseEvent): MouseEvent
+  (e: 'undo'): void
+  (e: 'tellUsWhy'): void
+}>()
 
 const api = useApiClient()
 
 const warperEl = ref<HTMLElement>()
 const previewEl = ref<HTMLElement>()
 const isVisible = ref<boolean>(true)
-const isDragProgress = ref<boolean>(false)
 const previewVideoUrl = ref<string>()
 
 const videoUrl = computed(() => {
@@ -51,20 +50,11 @@ const { resume } = useIntersectionObserver(warperEl, ([{ isIntersecting }]) => {
 }, { immediate: false })
 
 const isHover = useElementHover(previewEl)
+const showPreviewVideo = computed(() => props.showPreview && settings.value.enableVideoPreview && previewVideoUrl && isHover.value)
 
 onMounted(async () => {
   setTimeout(() => resume(), 30 * 1000) // 30s
 })
-
-function handleVideoDragStart(e: DragEvent) {
-  e.stopPropagation()
-  e.preventDefault()
-  isDragProgress.value = true
-}
-
-function handleVideoDragEnd() {
-  isDragProgress.value = false
-}
 
 watch(isHover, (isHover) => {
   if (props.showPreview && settings.value.enableVideoPreview && isHover && !previewVideoUrl.value) {
@@ -84,7 +74,7 @@ watch(isHover, (isHover) => {
     <!-- bewly video card -->
     <div v-if="!skeleton" flex="~ col gap-y-2" class="bewly-video-card">
       <!-- video card cover -->
-      <a :href="videoUrl" target="_blank" rel="noopener noreferrer" :class="{ 'pointer-events-none': isDragProgress }">
+      <a :href="videoUrl" target="_blank" rel="noopener noreferrer" :draggable="!showPreviewVideo">
         <div ref="previewEl" class="relative of-hidden rounded-$bew-radius" flex="~ justify-center items-center">
           <picture draggable="false">
             <source :srcset="`${removeHttpFromUrl(cover)}` + '@672w_378h_1c_!web-home-common-cover.avif'" type="image/avif">
@@ -94,14 +84,11 @@ watch(isHover, (isHover) => {
 
           <!-- preview video -->
           <Transition name="fade">
-            <div v-if="showPreview && settings.enableVideoPreview && previewVideoUrl && isHover" pos="absolute top-0 left-0 bottom-0 right-0">
+            <div v-if="showPreviewVideo" pos="absolute top-0 left-0 bottom-0 right-0">
               <video
                 autoplay muted
                 :controls="settings.enableVideoCtrlBarOnVideoCard"
                 class="size-full aspect-video bg-black"
-                draggable="false"
-                @dragstart="handleVideoDragStart"
-                @dragend="handleVideoDragEnd"
               >
                 <source :src="previewVideoUrl" type="video/mp4">
               </video>
@@ -119,11 +106,32 @@ watch(isHover, (isHover) => {
               {{ rank }}
             </div>
           </div>
+
+          <div
+            v-if="removed"
+            flex="~ col items-center justify-center gap-2"
+            pos="absolute top-0 left-0 bottom-0 right-0 z-2000"
+            bg="$bew-fill-4"
+            class="backdrop-blur-20px mix-blend-luminosity"
+          >
+            <p class="text-white text-lg">
+              {{ $t('home.video_removed') }}
+            </p>
+            <Button
+              color="rgba(255,255,255,.35)" text-color="white" size="small"
+              @click.prevent="emit('undo')"
+            >
+              <template #left>
+                <i class="i-mingcute:back-line text-lg" />
+              </template>
+              {{ $t('common.undo') }}
+            </Button>
+          </div>
         </div>
       </a>
 
       <!-- video card infomation -->
-      <div flex="~ gap-x-4" class="p2 pt-0 group/desc">
+      <div v-if="!removed" flex="~ gap-x-4" class="p2 pt-0 group/desc">
         <!-- avatar -->
         <a
           :href="authorUrl" target="_blank" rel="noopener noreferrer"
@@ -169,7 +177,7 @@ watch(isHover, (isHover) => {
               ring="1 $bew-border-color"
               focus="ring-2"
               hover="bg-$bew-theme-color-10"
-              @click.prevent="$emit('moreClick', $event)"
+              @click.prevent="emit('moreClick', $event)"
             >
               <i class="i-mingcute:more-2-line text-lg" />
             </div>
