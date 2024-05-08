@@ -85,11 +85,11 @@ watch(isHover, (isHover) => {
     <div v-if="!skeleton" flex="~ col gap-y-2">
       <!-- video card cover -->
       <a :href="videoUrl" target="_blank" rel="noopener noreferrer" :class="{ 'pointer-events-none': isDragProgress }">
-        <div ref="previewEl" class="relative of-hidden" flex="~ justify-center items-center">
+        <div ref="previewEl" class="relative of-hidden rounded-$bew-radius" flex="~ justify-center items-center">
           <picture draggable="false">
             <source :srcset="`${removeHttpFromUrl(cover)}` + '@672w_378h_1c_!web-home-common-cover.avif'" type="image/avif">
             <source :srcset="`${removeHttpFromUrl(cover)}` + '@672w_378h_1c_!web-home-common-cover.webp'" type="image/webp">
-            <img :src="`${removeHttpFromUrl(cover)}` + '@672w_378h_1c_!web-home-common-cover'" loading="lazy" class="w-full max-w-full min-h-196px align-middle aspect-video" bg="cover center" rounded="$bew-radius">
+            <img :src="`${removeHttpFromUrl(cover)}` + '@672w_378h_1c_!web-home-common-cover'" loading="lazy" class="w-full max-w-full min-h-196px align-middle aspect-video" bg="cover center">
           </picture>
 
           <!-- preview video -->
@@ -98,7 +98,7 @@ watch(isHover, (isHover) => {
               <video
                 autoplay muted
                 :controls="settings.enableVideoCtrlBarOnVideoCard"
-                class="size-full aspect-video rounded-$bew-radius bg-black"
+                class="size-full aspect-video bg-black"
                 draggable="false"
                 @dragstart="handleVideoDragStart"
                 @dragend="handleVideoDragEnd"
