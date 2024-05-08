@@ -57,7 +57,7 @@ const loadingDislikeDialog = ref<boolean>(false)
 function getWebVideoProps(item?: WebVideoItem | '<slot />'): VideoCardProps {
   if (!item || item === '<slot />') {
     return {
-      horizontal: props.gridLayout !== 'adaptive',
+      horizontal: props.gridLayout === 'oneColumn',
     } as VideoCardProps
   }
 
@@ -78,7 +78,7 @@ function getWebVideoProps(item?: WebVideoItem | '<slot />'): VideoCardProps {
     uri: item.uri,
     showPreview: true,
     moreBtn: true,
-    horizontal: props.gridLayout !== 'adaptive',
+    horizontal: props.gridLayout === 'oneColumn',
     moreBtnActive: item.id === activatedVideoId.value,
     removed: dislikedVideoUniqueKeys.value.includes(getVideoUniqueKey(item)),
   }
@@ -87,7 +87,7 @@ function getWebVideoProps(item?: WebVideoItem | '<slot />'): VideoCardProps {
 function getAppVideoProps(item?: AppVideoItem | '<slot />'): VideoCardProps {
   if (!item || item === '<slot />') {
     return {
-      horizontal: props.gridLayout !== 'adaptive',
+      horizontal: props.gridLayout === 'oneColumn',
     } as VideoCardProps
   }
 
@@ -109,7 +109,7 @@ function getAppVideoProps(item?: AppVideoItem | '<slot />'): VideoCardProps {
     type: item.card_goto === 'bangumi' ? 'bangumi' : isVerticalVideo(item.uri!) ? 'vertical' : 'horizontal',
     showPreview: true,
     moreBtn: true,
-    horizontal: props.gridLayout !== 'adaptive',
+    horizontal: props.gridLayout === 'oneColumn',
     removed: dislikedAppVideoUniqueKeys.value.includes(getAppVideoUniqueKey(item)),
   }
 }
@@ -150,7 +150,7 @@ const gridValue = computed((): string => {
   if (props.gridLayout === 'adaptive')
     return '~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-6'
   if (props.gridLayout === 'twoColumns')
-    return '~ cols-1 xl:cols-2 gap-4'
+    return '~ cols-1 sm:cols-2 lg:cols-3 xl:cols-4 gap-4'
   return '~ cols-1 gap-4'
 })
 
@@ -464,6 +464,7 @@ watch(() => settings.value.recommendationMode, (mode, oldMode) => {
     <!-- By directly using predefined unocss grid properties, it is possible to dynamically set the grid attribute -->
     <div hidden grid="~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-5" />
     <div hidden grid="~ cols-1 xl:cols-2 gap-4" />
+    <div hidden grid="~ cols-1 sm:cols-2 lg:cols-3 xl:cols-4 gap-4" />
     <div hidden grid="~ cols-1 gap-4" />
 
     <!-- more popup -->
@@ -545,13 +546,13 @@ watch(() => settings.value.recommendationMode, (mode, oldMode) => {
     </Empty>
 
     <div
-      v-else
       ref="containerRef"
+      if="!needToLoginFirst"
       m="b-0 t-0" relative w-full h-full
       pb-4 gap-4
       :grid="gridValue"
     >
-      <VideoCard v-for="video in videos" v-bind="video.props" :key="video.key" @more-click="video.moreClick" @undo="video.undo" />
+      <VideoCardV2 v-for="video in videos" v-bind="video.props" :key="video.key" @more-click="video.moreClick" @undo="video.undo" />
     </div>
 
     <!-- no more content -->
