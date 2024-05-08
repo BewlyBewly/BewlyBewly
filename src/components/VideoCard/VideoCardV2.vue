@@ -136,7 +136,6 @@ watch(isHover, (isHover) => {
         <a
           :href="authorUrl" target="_blank" rel="noopener noreferrer"
           class="size-36px position-relative rounded-full object-cover cursor-pointer"
-          @click.stop=""
         >
           <img
             :src="`${removeHttpFromUrl(authorFace!)}@50w_50h_1c`"
