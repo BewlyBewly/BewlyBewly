@@ -123,7 +123,7 @@ watch(isHover, (isHover) => {
       </a>
 
       <!-- video card infomation -->
-      <div flex="~ gap-x-4" class="p2 pt-0">
+      <div flex="~ gap-x-4" class="p2 pt-0 group/desc">
         <!-- avatar -->
         <a
           :href="authorUrl" target="_blank" rel="noopener noreferrer"
@@ -148,7 +148,7 @@ watch(isHover, (isHover) => {
 
         <div flex="~ col gap-y-2" class="w-full">
           <!-- header -->
-          <div class="w-full flex gap-x-2 group">
+          <div class="w-full flex gap-x-2">
             <!-- title -->
             <h3
               :title="title"
@@ -165,7 +165,7 @@ watch(isHover, (isHover) => {
             <div
               v-if="moreBtn"
               flex="~ justify-center items-center"
-              class="transition-opacity op-0 group-hover:op-100 size-30px rounded-full cursor-pointer"
+              class="transition-opacity op-0 group-hover/desc:op-100 size-30px rounded-full cursor-pointer"
               ring="1 $bew-border-color"
               focus="ring-2"
               hover="bg-$bew-theme-color-10"
