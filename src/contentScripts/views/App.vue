@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useThrottleFn, useToggle } from '@vueuse/core'
+import { useDebounceFn, useThrottleFn, useToggle } from '@vueuse/core'
 import type { Ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import browser from 'webextension-polyfill'
@@ -7,7 +7,7 @@ import browser from 'webextension-polyfill'
 import type { BewlyAppProvider } from '~/composables/useAppProvider'
 import { AppPage, LanguageType } from '~/enums/appEnums'
 import { accessKey, settings } from '~/logic'
-import { debounced, getUserID, hexToRGBA, isHomePage, smoothScrollToTop } from '~/utils/main'
+import { getUserID, hexToRGBA, isHomePage, smoothScrollToTop } from '~/utils/main'
 
 const { isDark } = useDark()
 const activatedPage = ref<AppPage>(settings.value.dockItemVisibilityList.find(e => e.visible === true)?.page ?? AppPage.Home)
@@ -196,7 +196,7 @@ function handleAdaptToOtherPageStylesChange() {
     document.documentElement.classList.remove('bewly-design')
 }
 
-const handleOsScroll = debounced(() => {
+const handleOsScroll = useDebounceFn(() => {
   const osInstance = scrollbarRef.value?.osInstance()
   const { viewport } = osInstance.elements()
   const { scrollTop, scrollHeight, clientHeight } = viewport // get scroll offset

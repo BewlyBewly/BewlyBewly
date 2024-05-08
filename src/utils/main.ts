@@ -124,13 +124,3 @@ export function isHomePage(): boolean {
     return true
   return false
 }
-
-export function debounced(fn: Function, delay = 100) {
-  let timer: NodeJS.Timeout | null = null
-  return function () {
-    timer && clearTimeout(timer)
-    timer = setTimeout(() => {
-      fn()
-    }, delay)
-  }
-}
