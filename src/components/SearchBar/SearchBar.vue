@@ -1,4 +1,3 @@
-<!-- TODO: refactor all that code -->
 <script setup lang="ts">
 import { onKeyStroke } from '@vueuse/core'
 import type { HistoryItem, SuggestionItem, SuggestionResponse } from './searchHistoryProvider'
@@ -57,7 +56,7 @@ onKeyStroke('Escape', (e: KeyboardEvent) => {
 
 function handleInput() {
   selectedIndex.value = -1
-  if (keyword.value.length > 0) {
+  if (keyword.value.trim().length > 0) {
     api.search.getSearchSuggestion({
       term: keyword.value,
     })
@@ -200,7 +199,7 @@ async function handleClearSearchHistory() {
 
       <input
         ref="keywordRef"
-        v-model.trim="keyword"
+        v-model="keyword"
         rounded="60px focus:$bew-radius"
         p="l-6 r-18 y-3"
         h-50px

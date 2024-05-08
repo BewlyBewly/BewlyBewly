@@ -76,7 +76,7 @@ jobs:
           pnpm wxt submit --chrome-zip ./extension.zip
           pnpm build-firefox
           pnpm pack:zip-firefox
-          pnpm wxt submit --firefox-zip ./extension-firefox.zip
+          pnpm wxt submit --firefox-zip ./extension-firefox.zip --firefox-sources-zip ./extension-firefox-sources.zip
         env:
           CHROME_EXTENSION_ID: ${{ secrets.CHROME_EXTENSION_ID }}
           CHROME_CLIENT_ID: ${{ secrets.CHROME_CLIENT_ID }}

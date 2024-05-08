@@ -19,7 +19,12 @@ const emit = defineEmits<{
 
 const api = useApiClient()
 
+// Used to click and control herf attribute
+const isClick = ref<boolean>(false)
+
 const videoUrl = computed(() => {
+  if (!isClick.value)
+    return undefined
   if (props.bvid || props.aid)
     return `https://www.bilibili.com/video/${props.bvid ?? `av${props.aid}`}`
   else if (props.epid)
@@ -114,6 +119,17 @@ function handelMouseLeave() {
   }, 300)
 }
 
+function switchClickState(flag: boolean) {
+  if (flag) {
+    isClick.value = flag
+  }
+  else {
+    setTimeout(() => {
+      isClick.value = flag
+    })
+  }
+}
+
 function handleMoreBtnClick(event: MouseEvent) {
   emit('moreClick', event)
 }
@@ -176,6 +192,9 @@ function handleUndo() {
         :draggable="!settings.enableVideoCtrlBarOnVideoCard"
         @mouseenter="handleMouseEnter"
         @mouseleave="handelMouseLeave"
+        @mousedown="switchClickState(true)"
+        @mouseup="switchClickState(false)"
+        @dragend="switchClickState(false)"
       >
         <!-- Cover -->
         <div
