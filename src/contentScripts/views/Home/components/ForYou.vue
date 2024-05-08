@@ -154,7 +154,7 @@ const gridValue = computed((): string => {
   return '~ cols-1 gap-4'
 })
 
-onBeforeMount(async () => {
+onMounted(async () => {
   initPageAction()
 })
 
@@ -164,6 +164,7 @@ onActivated(() => {
 
 async function initData() {
   isLoading.value = true
+  videoList.value.length = 0
   await getData()
   isLoading.value = false
 }

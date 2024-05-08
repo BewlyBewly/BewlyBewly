@@ -187,7 +187,7 @@ defineExpose({ initData })
 
     <main w-full :grid="gridValue">
       <template v-if="!('seasonType' in activatedRankingType)">
-        <VideoCard
+        <VideoCardV2
           v-for="(video, index) in videoList"
           :id="Number(video.aid)"
           :key="video.aid"

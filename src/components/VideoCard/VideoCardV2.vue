@@ -138,7 +138,7 @@ watch(isHover, (isHover) => {
           <!-- title -->
           <h3
             :title="title"
-            class="keep-two-lines transform-translate-z-0 cursor-pointer"
+            class="min-h-[calc(((1rem*1.75)-1em)*2+1em*2)] keep-two-lines transform-translate-z-0 cursor-pointer"
             text="lg overflow-ellipsis $bew-text-1"
             hover="text-$bew-theme-color"
           >

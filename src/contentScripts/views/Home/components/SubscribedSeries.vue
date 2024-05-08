@@ -14,9 +14,9 @@ const emit = defineEmits<{
 
 const gridValue = computed((): string => {
   if (props.gridLayout === 'adaptive')
-    return '~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-5'
+    return '~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-6'
   if (props.gridLayout === 'twoColumns')
-    return '~ cols-1 xl:cols-2 gap-4'
+    return '~ cols-1 sm:cols-2 lg:cols-3 xl:cols-4 gap-4'
   return '~ cols-1 gap-4'
 })
 const api = useApiClient()
@@ -151,7 +151,7 @@ defineExpose({ initData })
       m="b-0 t-0" relative w-full h-full
       :grid="gridValue"
     >
-      <VideoCard
+      <VideoCardV2
         v-for="moment in momentList"
         :id="moment.modules.module_author.mid"
         :key="moment.modules.module_author.mid"

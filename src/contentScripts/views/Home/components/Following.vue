@@ -14,12 +14,11 @@ const emit = defineEmits<{
 
 const gridValue = computed((): string => {
   if (props.gridLayout === 'adaptive')
-    return '~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-5'
+    return '~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-6'
   if (props.gridLayout === 'twoColumns')
-    return '~ cols-1 xl:cols-2 gap-4'
+    return '~ cols-1 sm:cols-2 lg:cols-3 xl:cols-4 gap-4'
   return '~ cols-1 gap-4'
 })
-
 const api = useApiClient()
 
 const videoList = reactive<MomentItem[]>([])
@@ -32,8 +31,8 @@ const noMoreContent = ref<boolean>(false)
 const { handleReachBottom, handlePageRefresh } = useBewlyApp()
 
 onMounted(async () => {
-  initData()
   initPageAction()
+  initData()
 })
 
 onActivated(() => {
@@ -149,7 +148,7 @@ defineExpose({ initData })
       m="b-0 t-0" relative w-full h-full
       :grid="gridValue"
     >
-      <VideoCard
+      <VideoCardV2
         v-for="video in videoList"
         :id="Number(video.modules.module_dynamic.major.archive?.aid)"
         :key="video.modules.module_dynamic.major.archive?.aid"
@@ -163,7 +162,6 @@ defineExpose({ initData })
         :danmaku-str="video.modules.module_dynamic.major.archive?.stat.danmaku"
         :capsule-text="video.modules.module_author.pub_time"
         :bvid="video.modules.module_dynamic.major.archive?.bvid"
-        show-preview
         :horizontal="gridLayout !== 'adaptive'"
       />
 
