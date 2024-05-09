@@ -9,9 +9,6 @@ import type { VideoPreviewResult } from '~/models/video/videoPreview'
 const props = withDefaults(defineProps<VideoCardProps>(), {
   topRightContent: true,
   type: 'horizontal',
-  title: '',
-  cover: '',
-  id: 0,
 })
 
 const emit = defineEmits<{
@@ -21,9 +18,20 @@ const emit = defineEmits<{
 }>()
 
 const api = useApiClient()
-
+const p = useProfileCard()
 const warperEl = ref<HTMLElement>()
 const previewEl = ref<HTMLElement>()
+const avatarEl = useDelayedHover({
+  enter: (e) => {
+    if (props.mid)
+      p.openUserProfile(props.mid, e)
+  },
+  leave: () => {
+    if (props.mid)
+      p.closeUserProfile(props.mid)
+  },
+  leaveDelay: 1200,
+})
 const previewVideoUrl = ref<string>()
 
 const videoUrl = computed(() => {
@@ -44,10 +52,10 @@ const authorUrl = computed(() => {
     return ''
 })
 
-const isHover = useElementHover(previewEl)
-const showPreviewVideo = computed(() => props.showPreview && settings.value.enableVideoPreview && previewVideoUrl && isHover.value)
+const isHoverPreviewEl = useElementHover(previewEl)
+const showPreviewVideo = computed(() => props.showPreview && settings.value.enableVideoPreview && previewVideoUrl && isHoverPreviewEl.value)
 
-watch(isHover, (isHover) => {
+watch(isHoverPreviewEl, (isHover) => {
   if (props.showPreview && settings.value.enableVideoPreview && isHover && !previewVideoUrl.value) {
     api.video.getVideoPreview({
       bvid: props.bvid,
@@ -63,7 +71,7 @@ watch(isHover, (isHover) => {
 <template>
   <div ref="warperEl" class="video-card-wrapper of-hidden rounded-$bew-radius" style="content-visibility: auto;">
     <!-- bewly video card -->
-    <div v-if="!skeleton" flex="~ col gap-y-2 of-hidden" class="bewly-video-card">
+    <div v-if="!skeleton" flex="~ col gap-y-2" class="bewly-video-card">
       <!-- video card cover -->
       <a :href="videoUrl" target="_blank" rel="noopener noreferrer" :draggable="!showPreviewVideo">
         <div ref="previewEl" class="relative of-hidden rounded-$bew-radius" flex="~ justify-center items-center">
@@ -126,9 +134,10 @@ watch(isHover, (isHover) => {
         <!-- avatar -->
         <a
           :href="authorUrl" target="_blank" rel="noopener noreferrer"
-          class="size-36px position-relative rounded-full object-cover cursor-pointer"
+          class="size-36px relative rounded-full object-cover cursor-pointer"
         >
           <img
+            ref="avatarEl"
             :src="`${removeHttpFromUrl(authorFace!)}@50w_50h_1c`"
             class="rounded-full object-cover size-36px"
             loading="lazy"

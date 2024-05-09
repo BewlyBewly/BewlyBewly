@@ -1,13 +1,17 @@
+interface Event {
+  (e: MouseEvent): void
+}
+
 export function useDelayedHover({ enterDelay = 250, leaveDelay = 310, beforeEnter, enter, beforeLeave, leave }:
-{ enterDelay?: number, leaveDelay?: number, beforeEnter?: Function, enter: Function, beforeLeave?: Function, leave: Function }) {
+{ enterDelay?: number, leaveDelay?: number, beforeEnter?: Event, enter: Event, beforeLeave?: Event, leave: Event }) {
   const el = ref<HTMLElement>()
 
   let enterTimer: any | undefined
   let leaveTimer: any | undefined
 
-  function handleMouseEnter() {
+  function handleMouseEnter(e: MouseEvent) {
     if (beforeEnter)
-      beforeEnter()
+      beforeEnter(e)
 
     if (enterTimer) {
       clearTimeout(enterTimer)
@@ -18,12 +22,12 @@ export function useDelayedHover({ enterDelay = 250, leaveDelay = 310, beforeEnte
       leaveTimer = undefined
     }
     enterTimer = setTimeout(() => {
-      enter()
+      enter(e)
     }, enterDelay)
   }
-  function handleMouseLeave() {
+  function handleMouseLeave(e: MouseEvent) {
     if (beforeLeave)
-      beforeLeave()
+      beforeLeave(e)
 
     if (enterTimer) {
       clearTimeout(enterTimer)
@@ -34,7 +38,7 @@ export function useDelayedHover({ enterDelay = 250, leaveDelay = 310, beforeEnte
       leaveTimer = undefined
     }
     leaveTimer = setTimeout(() => {
-      leave()
+      leave(e)
     }, leaveDelay)
   }
 

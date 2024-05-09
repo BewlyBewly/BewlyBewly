@@ -240,17 +240,19 @@ function toggleTabContentLoading(loading: boolean) {
         </div>
       </header>
 
-      <Transition name="page-fade">
-        <KeepAlive include="ForYou">
-          <Component
-            :is="pages[activatedPage]" :key="activatedPage"
-            ref="tabPageRef"
-            :grid-layout="homePageGridLayout"
-            @before-loading="toggleTabContentLoading(true)"
-            @after-loading="toggleTabContentLoading(false)"
-          />
-        </KeepAlive>
-      </Transition>
+      <ProfileCardProvider>
+        <Transition name="page-fade">
+          <KeepAlive include="ForYou">
+            <Component
+              :is="pages[activatedPage]" :key="activatedPage"
+              ref="tabPageRef"
+              :grid-layout="homePageGridLayout"
+              @before-loading="toggleTabContentLoading(true)"
+              @after-loading="toggleTabContentLoading(false)"
+            />
+          </KeepAlive>
+        </Transition>
+      </ProfileCardProvider>
     </main>
   </div>
 </template>
