@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useElementHover, useIntersectionObserver } from '@vueuse/core'
+import { useElementHover } from '@vueuse/core'
 import type { VideoCardProps } from './types'
 import { calcTimeSince, numFormatter } from '~/utils/dataFormatter'
 import { removeHttpFromUrl } from '~/utils/main'
@@ -24,7 +24,6 @@ const api = useApiClient()
 
 const warperEl = ref<HTMLElement>()
 const previewEl = ref<HTMLElement>()
-const isVisible = ref<boolean>(true)
 const previewVideoUrl = ref<string>()
 
 const videoUrl = computed(() => {
@@ -45,16 +44,8 @@ const authorUrl = computed(() => {
     return ''
 })
 
-const { resume } = useIntersectionObserver(warperEl, ([{ isIntersecting }]) => {
-  isVisible.value = isIntersecting
-}, { immediate: false })
-
 const isHover = useElementHover(previewEl)
 const showPreviewVideo = computed(() => props.showPreview && settings.value.enableVideoPreview && previewVideoUrl && isHover.value)
-
-onMounted(async () => {
-  setTimeout(() => resume(), 30 * 1000) // 30s
-})
 
 watch(isHover, (isHover) => {
   if (props.showPreview && settings.value.enableVideoPreview && isHover && !previewVideoUrl.value) {
@@ -70,9 +61,9 @@ watch(isHover, (isHover) => {
 </script>
 
 <template>
-  <div ref="warperEl" class="video-card-wrapper" :style="{ visibility: isVisible ? 'visible' : 'hidden' }">
+  <div ref="warperEl" class="video-card-wrapper of-hidden rounded-$bew-radius" style="content-visibility: auto;">
     <!-- bewly video card -->
-    <div v-if="!skeleton" flex="~ col gap-y-2" class="bewly-video-card">
+    <div v-if="!skeleton" flex="~ col gap-y-2 of-hidden" class="bewly-video-card">
       <!-- video card cover -->
       <a :href="videoUrl" target="_blank" rel="noopener noreferrer" :draggable="!showPreviewVideo">
         <div ref="previewEl" class="relative of-hidden rounded-$bew-radius" flex="~ justify-center items-center">
@@ -159,7 +150,7 @@ watch(isHover, (isHover) => {
             <!-- title -->
             <h3
               :title="title"
-              class="flex-1 min-h-[calc(((1rem*1.75)-1em)*2+1em*2)] keep-two-lines transform-translate-z-0 cursor-pointer"
+              class="flex-1 min-h-[calc(((1rem*1.75)-1em)*2+1em*2)] keep-two-lines cursor-pointer"
               text="lg overflow-ellipsis $bew-text-1"
               hover="text-$bew-theme-color"
             >
@@ -228,7 +219,7 @@ watch(isHover, (isHover) => {
 
 <style>
 .bewly-video-card {
-  --at-apply: of-hidden rounded-$bew-radius transition-shadow duration-500;
+  --at-apply: transition-shadow duration-500;
   --at-apply: shadow-[0_5px_10px_0_rgba(0,0,0,0.15)];
 }
 
