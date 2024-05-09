@@ -2,7 +2,7 @@
 import { useElementHover } from '@vueuse/core'
 import type { VideoCardProps } from './types'
 import { calcTimeSince, numFormatter } from '~/utils/dataFormatter'
-import { removeHttpFromUrl } from '~/utils/main'
+import { getCSRF, removeHttpFromUrl } from '~/utils/main'
 import { settings } from '~/logic'
 import type { VideoPreviewResult } from '~/models/video/videoPreview'
 
@@ -14,7 +14,6 @@ const props = withDefaults(defineProps<VideoCardProps>(), {
 const emit = defineEmits<{
   (e: 'moreClick', event: MouseEvent): MouseEvent
   (e: 'undo'): void
-  (e: 'tellUsWhy'): void
 }>()
 
 const api = useApiClient()
@@ -33,6 +32,7 @@ const avatarEl = useDelayedHover({
   leaveDelay: 1200,
 })
 const previewVideoUrl = ref<string>()
+const isInWatchLater = ref(false)
 
 const videoUrl = computed(() => {
   if (props.bvid || props.aid)
@@ -55,6 +55,31 @@ const authorUrl = computed(() => {
 const isHoverPreviewEl = useElementHover(previewEl)
 const showPreviewVideo = computed(() => props.showPreview && settings.value.enableVideoPreview && previewVideoUrl && isHoverPreviewEl.value)
 
+function toggleWatchLater() {
+  const id = props.id
+  const csrf = getCSRF()
+  if (!isInWatchLater.value) {
+    api.watchlater.saveToWatchLater({
+      aid: id,
+      csrf,
+    })
+      .then((res) => {
+        if (res.code === 0)
+          isInWatchLater.value = true
+      })
+  }
+  else {
+    api.watchlater.removeFromWatchLater({
+      aid: id,
+      csrf,
+    })
+      .then((res) => {
+        if (res.code === 0)
+          isInWatchLater.value = false
+      })
+  }
+}
+
 watch(isHoverPreviewEl, (isHover) => {
   if (props.showPreview && settings.value.enableVideoPreview && isHover && !previewVideoUrl.value) {
     api.video.getVideoPreview({
@@ -74,7 +99,7 @@ watch(isHoverPreviewEl, (isHover) => {
     <div v-if="!skeleton" flex="~ col gap-y-2" class="bewly-video-card">
       <!-- video card cover -->
       <a :href="videoUrl" target="_blank" rel="noopener noreferrer" :draggable="!showPreviewVideo">
-        <div ref="previewEl" class="relative of-hidden rounded-$bew-radius" flex="~ justify-center items-center">
+        <div ref="previewEl" class="group relative of-hidden rounded-$bew-radius" flex="~ justify-center items-center">
           <picture draggable="false">
             <source :srcset="`${removeHttpFromUrl(cover)}` + '@672w_378h_1c_!web-home-common-cover.avif'" type="image/avif">
             <source :srcset="`${removeHttpFromUrl(cover)}` + '@672w_378h_1c_!web-home-common-cover.webp'" type="image/webp">
@@ -106,6 +131,15 @@ watch(isHoverPreviewEl, (isHover) => {
             </div>
           </div>
 
+          <!-- watch later -->
+          <div pos="absolute top-3 right-3" class="op-0 group-hover:op-100 z-1000">
+            <Button circle size="small" class="flex justify-center items-center" @click.prevent="toggleWatchLater">
+              <i v-if="isInWatchLater" class="i-line-md:confirm" />
+              <i v-else class="i-mingcute:carplay-line" />
+            </Button>
+          </div>
+
+          <!-- removed -->
           <div
             v-if="removed"
             flex="~ col items-center justify-center gap-2"
@@ -184,10 +218,7 @@ watch(isHoverPreviewEl, (isHover) => {
 
           <div flex="~ items-center gap-1 wrap">
             <!-- View & Danmaku Count -->
-            <div
-              text="$bew-text-2" rounded="$bew-radius"
-              inline-block
-            >
+            <div class="text-$bew-text-3 rounded-$bew-radius inline-block">
               <span v-if="view || viewStr">
                 {{ view ? $t('common.view', { count: numFormatter(view) }, view) : `${viewStr}${$t('common.viewWithoutNum')}` }}
               </span>
@@ -199,7 +230,7 @@ watch(isHoverPreviewEl, (isHover) => {
             </div>
           </div>
 
-          <div>
+          <div flex="~ items-center gap-x-2">
             <!-- Tag -->
             <span v-if="tag" class="video-tag">{{ tag }}</span>
             <span
@@ -229,7 +260,7 @@ watch(isHoverPreviewEl, (isHover) => {
 <style>
 .bewly-video-card {
   --at-apply: transition-shadow duration-500;
-  --at-apply: shadow-[0_5px_10px_0_rgba(0,0,0,0.15)];
+  /* --at-apply: shadow-[0_5px_10px_0_rgba(0,0,0,0.15)]; */
 }
 
 .video-tag {

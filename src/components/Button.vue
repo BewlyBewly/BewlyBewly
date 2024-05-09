@@ -15,6 +15,7 @@ interface Props {
   round?: boolean
   block?: boolean
   center?: boolean
+  circle?: boolean
 }
 
 defineProps<Props>()
@@ -34,6 +35,7 @@ function handleClick(evt: MouseEvent) {
       `b-button--size-${size ?? 'medium'}`,
       `${strong ? 'b-button--strong' : ''}`,
       `${color || textColor ? 'b-button--custom-color' : ''}`,
+      `${circle ? 'b-button--circle' : ''}`,
     ]"
     :style="{
       'backgroundColor': color,
@@ -125,6 +127,12 @@ function handleClick(evt: MouseEvent) {
 
   &--strong {
     --at-apply: fw-800;
+  }
+
+  &--circle {
+    --b-button-padding: 4px;
+    --b-button-radius: 9999px;
+    --b-button-width: var(--b-button-height);
   }
 }
 </style>
