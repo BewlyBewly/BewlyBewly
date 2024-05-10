@@ -9,6 +9,8 @@ import type { HomeTab } from '~/stores/mainStore'
 import { useMainStore } from '~/stores/mainStore'
 import Logo from '~/components/Logo.vue'
 import SearchBar from '~/components/SearchBar/SearchBar.vue'
+import { useBewlyImage } from '~/composables/useImage'
+import { useBewlyApp } from '~/composables/useAppProvider'
 
 const mainStore = useMainStore()
 const { handleBackToTop, scrollbarRef } = useBewlyApp()

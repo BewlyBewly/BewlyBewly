@@ -6,6 +6,7 @@ import { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
 import type { DockItem } from '~/stores/mainStore'
 import { useMainStore } from '~/stores/mainStore'
+import { useDark } from '~/composables/useDark'
 
 defineProps<{ activatedPage: AppPage }>()
 

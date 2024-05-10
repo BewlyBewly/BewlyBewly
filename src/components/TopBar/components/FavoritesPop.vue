@@ -6,6 +6,7 @@ import { getUserID, isHomePage, removeHttpFromUrl, smoothScrollToTop } from '~/u
 import { calcCurrentTime } from '~/utils/dataFormatter'
 import Empty from '~/components/Empty.vue'
 import Loading from '~/components/Loading.vue'
+import { useApiClient } from '~/composables/api'
 
 const api = useApiClient()
 

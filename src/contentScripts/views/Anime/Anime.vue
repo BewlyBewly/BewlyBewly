@@ -10,6 +10,8 @@ import Empty from '~/components/Empty.vue'
 import HorizontalScrollView from '~/components/HorizontalScrollView.vue'
 import LongCoverCard from '~/components/LongCoverCard/LongCoverCard.vue'
 import LongCoverCardSkeleton from '~/components/LongCoverCard/LongCoverCardSkeleton.vue'
+import { useApiClient } from '~/composables/api'
+import { useBewlyApp } from '~/composables/useAppProvider'
 
 const api = useApiClient()
 const animeWatchList = reactive<WatchListItem[]>([])

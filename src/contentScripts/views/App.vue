@@ -11,6 +11,7 @@ import RightSideButtons from '~/components/RightSideButtons/RightSideButtons.vue
 import Settings from '~/components/Settings/Settings.vue'
 import TopBar from '~/components/TopBar/TopBar.vue'
 import type { BewlyAppProvider } from '~/composables/useAppProvider'
+import { useDark } from '~/composables/useDark'
 import { AppPage, LanguageType } from '~/enums/appEnums'
 import { accessKey, settings } from '~/logic'
 import { getUserID, hexToRGBA, isHomePage, smoothScrollToTop } from '~/utils/main'

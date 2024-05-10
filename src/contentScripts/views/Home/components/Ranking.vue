@@ -11,6 +11,8 @@ import LongCoverCardSkeleton from '~/components/LongCoverCard/LongCoverCardSkele
 import OverlayScrollbarsComponent from '~/components/OverlayScrollbarsComponent'
 import VideoCard from '~/components/VideoCard/VideoCard.vue'
 import VideoCardSkeleton from '~/components/VideoCard/VideoCardSkeleton.vue'
+import { useBewlyApp } from '~/composables/useAppProvider'
+import { useApiClient } from '~/composables/api'
 
 const props = defineProps<{
   gridLayout: GridLayout

@@ -6,6 +6,7 @@ import Input from '~/components/Input.vue'
 import Radio from '~/components/Radio.vue'
 import Slider from '~/components/Slider.vue'
 import Tooltip from '~/components/Tooltip.vue'
+import { useBewlyImage } from '~/composables/useImage'
 
 const { searchBarCharacters, wallpapers, getBewlyImage } = useBewlyImage()
 

@@ -7,6 +7,7 @@ import type { TopBarMomentResult } from '~/models/moment/topBarMoment'
 import type { TopBarLiveMomentResult } from '~/models/moment/topBarLiveMoment'
 import { getCSRF, isHomePage, smoothScrollToTop } from '~/utils/main'
 import Tooltip from '~/components/Tooltip.vue'
+import { useApiClient } from '~/composables/api'
 
 type MomentType = 'video' | 'live' | 'article'
 interface MomentTab { type: MomentType, name: any }

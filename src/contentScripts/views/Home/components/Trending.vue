@@ -5,6 +5,8 @@ import type { TrendingResult, List as VideoItem } from '~/models/video/trending'
 import Loading from '~/components/Loading.vue'
 import VideoCard from '~/components/VideoCard/VideoCard.vue'
 import VideoCardSkeleton from '~/components/VideoCard/VideoCardSkeleton.vue'
+import { useApiClient } from '~/composables/api'
+import { useBewlyApp } from '~/composables/useAppProvider'
 
 const props = defineProps<{
   gridLayout: GridLayout

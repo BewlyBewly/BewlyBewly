@@ -7,7 +7,9 @@ import {
   getSearchHistory,
   removeSearchHistory,
 } from './searchHistoryProvider'
+import { useApiClient } from '~/composables/api'
 import { findLeafActiveElement } from '~/utils/element'
+import { useBewlyImage } from '~/composables/useImage'
 
 defineProps<{
   darkenOnFocus?: boolean

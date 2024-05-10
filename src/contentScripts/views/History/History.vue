@@ -9,6 +9,8 @@ import type { List as HistoryItem, HistoryResult } from '~/models/history/histor
 import type { List as HistorySearchItem, HistorySearchResult } from '~/models/video/historySearch'
 import Empty from '~/components/Empty.vue'
 import Progress from '~/components/Progress.vue'
+import { useApiClient } from '~/composables/api'
+import { useBewlyApp } from '~/composables/useAppProvider'
 
 const { t } = useI18n()
 const api = useApiClient()
