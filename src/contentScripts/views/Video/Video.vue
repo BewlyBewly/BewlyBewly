@@ -4,6 +4,7 @@ import { useDateFormat } from '@vueuse/core'
 import type { Comment, UserCardInfo, VideoInfo } from './types'
 import { getCSRF, removeHttpFromUrl } from '~/utils/main'
 import { calcTimeSince, numFormatter } from '~/utils/dataFormatter'
+import { useApiClient } from '~/composables/api'
 
 const api = useApiClient()
 const videoContent = ref() as Ref<HTMLElement>

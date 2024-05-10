@@ -8,6 +8,7 @@ import Radio from '~/components/Radio.vue'
 import Select from '~/components/Select.vue'
 import Slider from '~/components/Slider.vue'
 import Tooltip from '~/components/Tooltip.vue'
+import { useBewlyImage } from '~/composables/useImage'
 
 const { wallpapers, getBewlyImage } = useBewlyImage()
 

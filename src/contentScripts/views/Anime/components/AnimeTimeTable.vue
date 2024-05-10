@@ -5,6 +5,7 @@ import browser from 'webextension-polyfill'
 import { removeHttpFromUrl } from '~/utils/main'
 import type { Result as TimetableItem, TimetableResult } from '~/models/anime/timeTable'
 import HorizontalScrollView from '~/components/HorizontalScrollView.vue'
+import { useApiClient } from '~/composables/api'
 
 const { t } = useI18n()
 const api = useApiClient()

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useBewlyImage } from '~/composables/useImage'
 import { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
 

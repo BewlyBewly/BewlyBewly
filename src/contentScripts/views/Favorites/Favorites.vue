@@ -13,6 +13,8 @@ import Loading from '~/components/Loading.vue'
 import Select from '~/components/Select.vue'
 import Tooltip from '~/components/Tooltip.vue'
 import VideoCard from '~/components/VideoCard/VideoCard.vue'
+import { useApiClient } from '~/composables/api'
+import { useBewlyApp } from '~/composables/useAppProvider'
 
 const { t } = useI18n()
 const api = useApiClient()

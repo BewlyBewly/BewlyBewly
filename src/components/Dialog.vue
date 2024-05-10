@@ -2,6 +2,7 @@
 import { Icon } from '@iconify/vue'
 import { onKeyStroke } from '@vueuse/core'
 import Button from '~/components/Button.vue'
+import { useBewlyApp } from '~/composables/useAppProvider'
 
 const props = withDefaults(defineProps<{
   title?: string

@@ -17,6 +17,9 @@ import WatchLaterPop from './components/WatchLaterPop.vue'
 import { getUserID, isHomePage } from '~/utils/main'
 import { settings } from '~/logic'
 import emitter from '~/utils/mitt'
+import { useBewlyApp } from '~/composables/useAppProvider'
+import { useApiClient } from '~/composables/api'
+import { useDelayedHover } from '~/composables/useDelayedHover'
 
 // import { useTopBarStore } from '~/stores/topBarStore'
 

@@ -6,6 +6,7 @@ import { isHomePage, removeHttpFromUrl } from '~/utils/main'
 import Empty from '~/components/Empty.vue'
 import Loading from '~/components/Loading.vue'
 import Progress from '~/components/Progress.vue'
+import { useApiClient } from '~/composables/api'
 
 const api = useApiClient()
 const watchLaterList = reactive<VideoItem[]>([])

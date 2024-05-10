@@ -6,6 +6,7 @@ import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils/dataFormat
 import type { VideoPreviewResult } from '~/models/video/videoPreview'
 import { settings } from '~/logic'
 import Button from '~/components/Button.vue'
+import { useApiClient } from '~/composables/api'
 
 interface Props {
   id: number

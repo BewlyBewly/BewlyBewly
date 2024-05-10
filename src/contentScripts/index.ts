@@ -9,6 +9,7 @@ import { injectCSS, isHomePage } from '~/utils/main'
 import { settings } from '~/logic'
 
 import { runWhenIdle } from '~/utils/lazyLoad'
+import { useDark } from '~/composables/useDark'
 
 const isFirefox: boolean = /Firefox/i.test(navigator.userAgent)
 

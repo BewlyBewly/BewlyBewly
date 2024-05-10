@@ -10,6 +10,7 @@ import type { List as HistoryItem, HistoryResult } from '~/models/history/histor
 import Empty from '~/components/Empty.vue'
 import Loading from '~/components/Loading.vue'
 import Progress from '~/components/Progress.vue'
+import { useApiClient } from '~/composables/api'
 
 const { t } = useI18n()
 const api = useApiClient()

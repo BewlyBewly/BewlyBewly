@@ -4,6 +4,7 @@ import type { UserInfo, UserStat } from '../types'
 import { revokeAccessKey } from '~/utils/authProvider'
 import { getCSRF, getUserID, isHomePage } from '~/utils/main'
 import { numFormatter } from '~/utils/dataFormatter'
+import { useApiClient } from '~/composables/api'
 
 defineProps<{
   userInfo: UserInfo
