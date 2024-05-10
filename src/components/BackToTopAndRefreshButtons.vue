@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import Button from '~/components/Button.vue'
+
 defineProps<{ showRefreshButton: boolean }>()
 const emit = defineEmits(['refresh', 'back-to-top'])
 </script>

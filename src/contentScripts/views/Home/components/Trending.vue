@@ -2,6 +2,9 @@
 import type { Ref } from 'vue'
 import type { GridLayout } from '~/logic'
 import type { TrendingResult, List as VideoItem } from '~/models/video/trending'
+import Loading from '~/components/Loading.vue'
+import VideoCard from '~/components/VideoCard/VideoCard.vue'
+import VideoCardSkeleton from '~/components/VideoCard/VideoCardSkeleton.vue'
 
 const props = defineProps<{
   gridLayout: GridLayout

@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { onMounted, reactive, ref, watch } from 'vue'
-
-// import { isNewArticle, setLastOffsetID, setLastestOffsetID } from '../notify'
-
+import Empty from '~/components/Empty.vue'
+import Loading from '~/components/Loading.vue'
 import type { TopBarMomentResult } from '~/models/moment/topBarMoment'
 import type { TopBarLiveMomentResult } from '~/models/moment/topBarLiveMoment'
 import { getCSRF, isHomePage, smoothScrollToTop } from '~/utils/main'
+import Tooltip from '~/components/Tooltip.vue'
 
 type MomentType = 'video' | 'live' | 'article'
 interface MomentTab { type: MomentType, name: any }
@@ -431,7 +431,7 @@ defineExpose({
 
         <!-- loading -->
         <Transition name="fade">
-          <loading v-if="isLoading && moments.length !== 0" m="-t-4" />
+          <Loading v-if="isLoading && moments.length !== 0" m="-t-4" />
         </Transition>
       </div>
     </main>

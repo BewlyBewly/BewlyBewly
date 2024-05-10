@@ -5,6 +5,11 @@ import { numFormatter } from '~/utils/dataFormatter'
 import type { List as WatchListItem, WatchListResult } from '~/models/anime/watchList'
 import type { List as PopularAnimeItem, PopularAnimeResult } from '~/models/anime/popular'
 import type { ItemSubItem as RecommendationItem, RecommendationResult } from '~/models/anime/recommendation'
+import Button from '~/components/Button.vue'
+import Empty from '~/components/Empty.vue'
+import HorizontalScrollView from '~/components/HorizontalScrollView.vue'
+import LongCoverCard from '~/components/LongCoverCard/LongCoverCard.vue'
+import LongCoverCardSkeleton from '~/components/LongCoverCard/LongCoverCardSkeleton.vue'
 
 const api = useApiClient()
 const animeWatchList = reactive<WatchListItem[]>([])

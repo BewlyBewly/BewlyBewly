@@ -1,6 +1,13 @@
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
+import SettingsItem from './SettingsItem.vue'
+import SettingsItemGroup from './SettingsItemGroup.vue'
 import { settings } from '~/logic'
+import Input from '~/components/Input.vue'
+import Radio from '~/components/Radio.vue'
+import Select from '~/components/Select.vue'
+import Slider from '~/components/Slider.vue'
+import Tooltip from '~/components/Tooltip.vue'
 
 const { wallpapers, getBewlyImage } = useBewlyImage()
 

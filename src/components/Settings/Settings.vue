@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { Icon } from '@iconify/vue'
+import OverlayScrollbarsComponent from '../OverlayScrollbarsComponent'
 
 import type { MenuItem } from './types'
 import { MenuType } from './types'

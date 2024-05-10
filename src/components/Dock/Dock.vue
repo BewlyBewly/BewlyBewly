@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
+import Tooltip from '../Tooltip.vue'
 import type { HoveringDockItem } from './types'
 import { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'

@@ -1,5 +1,7 @@
 <script lang="ts" setup>
 import { settings } from '~/logic'
+import Logo from '~/components/Logo.vue'
+import SearchBar from '~/components/SearchBar/SearchBar.vue'
 </script>
 
 <template>

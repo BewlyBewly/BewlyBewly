@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
 import { onKeyStroke } from '@vueuse/core'
+import Button from '~/components/Button.vue'
 
 const props = withDefaults(defineProps<{
   title?: string

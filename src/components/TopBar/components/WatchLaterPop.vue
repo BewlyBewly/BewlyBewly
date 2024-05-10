@@ -3,6 +3,9 @@ import { onMounted, reactive, ref } from 'vue'
 import { calcCurrentTime } from '~/utils/dataFormatter'
 import type { List as VideoItem, WatchLaterResult } from '~/models/video/watchLater'
 import { isHomePage, removeHttpFromUrl } from '~/utils/main'
+import Empty from '~/components/Empty.vue'
+import Loading from '~/components/Loading.vue'
+import Progress from '~/components/Progress.vue'
 
 const api = useApiClient()
 const watchLaterList = reactive<VideoItem[]>([])
@@ -191,7 +194,7 @@ function getAllWatchLaterList() {
 
         <!-- loading -->
         <Transition name="fade">
-          <loading v-if="isLoading && watchLaterList.length !== 0" m="-t-4" />
+          <Loading v-if="isLoading && watchLaterList.length !== 0" m="-t-4" />
         </Transition>
       </div>
     </main>

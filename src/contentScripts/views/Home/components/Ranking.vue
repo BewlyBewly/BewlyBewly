@@ -6,6 +6,11 @@ import type { List as RankingPgcItem, RankingPgcResult } from '~/models/video/ra
 import type { GridLayout } from '~/logic'
 import { settings } from '~/logic'
 import emitter from '~/utils/mitt'
+import LongCoverCard from '~/components/LongCoverCard/LongCoverCard.vue'
+import LongCoverCardSkeleton from '~/components/LongCoverCard/LongCoverCardSkeleton.vue'
+import OverlayScrollbarsComponent from '~/components/OverlayScrollbarsComponent'
+import VideoCard from '~/components/VideoCard/VideoCard.vue'
+import VideoCardSkeleton from '~/components/VideoCard/VideoCardSkeleton.vue'
 
 const props = defineProps<{
   gridLayout: GridLayout

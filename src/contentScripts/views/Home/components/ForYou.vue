@@ -10,6 +10,12 @@ import { accessKey, settings } from '~/logic'
 import { LanguageType } from '~/enums/appEnums'
 import { TVAppKey, getTvSign } from '~/utils/authProvider'
 import { isVerticalVideo } from '~/utils/uriParse'
+import Button from '~/components/Button.vue'
+import Dialog from '~/components/Dialog.vue'
+import Empty from '~/components/Empty.vue'
+import Loading from '~/components/Loading.vue'
+import VideoCard from '~/components/VideoCard/VideoCard.vue'
+import VideoCardSkeleton from '~/components/VideoCard/VideoCardSkeleton.vue'
 
 const props = defineProps<{
   gridLayout: GridLayout

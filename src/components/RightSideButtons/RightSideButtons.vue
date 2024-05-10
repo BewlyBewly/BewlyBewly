@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import Tooltip from '../Tooltip.vue'
 import type { HoveringDockItem } from './types'
+import Button from '~/components/Button.vue'
 
 const emit = defineEmits(['settings-visibility-change'])
 const { isDark, toggleDark } = useDark()

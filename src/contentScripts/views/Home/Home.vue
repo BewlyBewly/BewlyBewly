@@ -7,6 +7,8 @@ import { homePageGridLayout, settings } from '~/logic'
 import { delay } from '~/utils/main'
 import type { HomeTab } from '~/stores/mainStore'
 import { useMainStore } from '~/stores/mainStore'
+import Logo from '~/components/Logo.vue'
+import SearchBar from '~/components/SearchBar/SearchBar.vue'
 
 const mainStore = useMainStore()
 const { handleBackToTop, scrollbarRef } = useBewlyApp()

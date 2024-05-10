@@ -1,9 +1,11 @@
 <script lang="ts" setup>
 import { Icon } from '@iconify/vue'
+import Tooltip from '../Tooltip.vue'
 import { getCSRF, removeHttpFromUrl } from '~/utils/main'
 import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils/dataFormatter'
 import type { VideoPreviewResult } from '~/models/video/videoPreview'
 import { settings } from '~/logic'
+import Button from '~/components/Button.vue'
 
 interface Props {
   id: number
