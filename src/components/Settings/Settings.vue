@@ -74,8 +74,8 @@ const settingsMenuItems = computed((): MenuItem[] => {
     // },
     {
       value: MenuType.About,
-      icon: 'mingcute:information-line',
-      iconActivated: 'mingcute:information-fill',
+      icon: 'i-mingcute:information-line',
+      iconActivated: 'i-mingcute:information-fill',
       title: t('settings.menu_about'),
     },
   ]

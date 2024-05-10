@@ -115,10 +115,12 @@ function toggleDockHide(hide: boolean) {
             <div
               v-show="activatedPage !== dockItem.page"
               :class="dockItem.icon"
+              text-xl
             />
             <div
               v-show="activatedPage === dockItem.page"
               :class="dockItem.iconActivated"
+              text-xl
             />
           </button>
         </Tooltip>

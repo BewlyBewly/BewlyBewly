@@ -232,15 +232,17 @@ function toggleTabContentLoading(loading: boolean) {
         >
           <div
             v-for="icon in gridLayoutIcons" :key="icon.value"
-            :class="homePageGridLayout === icon.value ? icon.iconActivated : icon.icon"
             :style="{
               backgroundColor: homePageGridLayout === icon.value ? 'var(--bew-theme-color-auto)' : '',
               color: homePageGridLayout === icon.value ? 'var(--bew-text-auto)' : 'unset',
             }"
+            flex="~ justify-center items-center"
             w-full
             h-full p="x-2 y-1" rounded="$bew-radius-half" bg="hover:$bew-fill-2" duration-300
             cursor-pointer @click="homePageGridLayout = icon.value"
-          />
+          >
+            <div :class="homePageGridLayout === icon.value ? icon.iconActivated : icon.icon" text-xl />
+          </div>
         </div>
       </header>
 
