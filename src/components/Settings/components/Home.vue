@@ -189,7 +189,7 @@ function handleToggleHomeTab(tab: any) {
           <div mt-4 bg-white border="white 4">
             <QRCodeVue v-if="loginQRCodeUrl" :value="loginQRCodeUrl" :size="150" />
             <div v-else w-150px h-150px grid="~ place-items-center">
-              <svg-spinners:ring-resize />
+              <div i-svg-spinners:ring-resize />
             </div>
           </div>
 
@@ -213,7 +213,7 @@ function handleToggleHomeTab(tab: any) {
             {{ $t('settings.home_tabs_adjustment') }}
             <Button size="small" type="secondary" @click="resetHomeTabs">
               <template #left>
-                <mingcute:back-line />
+                <div i-mingcute:back-line />
               </template>
               {{ $t('common.reset') }}
             </Button>

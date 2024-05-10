@@ -365,7 +365,7 @@ function getHistoryList(type: Business, view_at = 0 as number) {
                     items-center
                     gap-1
                     m="l-2"
-                  ><tabler:live-photo />
+                  ><div i-tabler:live-photo />
                     LIVE
                   </span>
                 </div>

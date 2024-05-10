@@ -394,7 +394,7 @@ defineExpose({
                     flex="~"
                     items="center"
                   >
-                    <fluent:live-24-filled m="r-2" />
+                    <div i-fluent:live-24-filled m="r-2" />
                     {{ $t('topbar.moments_dropdown.live_status') }}
                   </div>
                 </div>
@@ -419,10 +419,10 @@ defineExpose({
                   @click.prevent="toggleWatchLater(moment.rid || 0)"
                 >
                   <Tooltip v-if="!addedWatchLaterList.includes(moment.rid || 0)" :content="$t('common.save_to_watch_later')" placement="bottom" type="dark">
-                    <mingcute:carplay-line />
+                    <div i-mingcute:carplay-line />
                   </Tooltip>
                   <Tooltip v-else :content="$t('common.added')" placement="bottom" type="dark">
-                    <line-md:confirm />
+                    <div i-line-md:confirm />
                   </Tooltip>
                 </div>
               </div>

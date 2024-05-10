@@ -1,12 +1,11 @@
 <script lang="ts" setup>
-import { Icon } from '@iconify/vue'
 import Tooltip from '../Tooltip.vue'
-import { getCSRF, removeHttpFromUrl } from '~/utils/main'
-import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils/dataFormatter'
-import type { VideoPreviewResult } from '~/models/video/videoPreview'
-import { settings } from '~/logic'
 import Button from '~/components/Button.vue'
 import { useApiClient } from '~/composables/api'
+import { settings } from '~/logic'
+import type { VideoPreviewResult } from '~/models/video/videoPreview'
+import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils/dataFormatter'
+import { getCSRF, removeHttpFromUrl } from '~/utils/main'
 
 interface Props {
   id: number
@@ -210,7 +209,7 @@ function handleUndo() {
               @click="handleUndo"
             >
               <template #left>
-                <Icon icon="mingcute:back-line" text-lg />
+                <div i-mingcute-back-line text-lg />
               </template>
               {{ $t('common.undo') }}
             </Button>
@@ -319,10 +318,10 @@ function handleUndo() {
             @click.prevent="toggleWatchLater"
           >
             <Tooltip v-if="!isInWatchLater" :content="$t('common.save_to_watch_later')" placement="bottom" type="dark">
-              <mingcute:carplay-line />
+              <div i-mingcute:carplay-line />
             </Tooltip>
             <Tooltip v-else :content="$t('common.added')" placement="bottom" type="dark">
-              <line-md:confirm />
+              <div i-line-md:confirm />
             </Tooltip>
           </button>
 
@@ -394,7 +393,7 @@ function handleUndo() {
                 pointer="auto" rounded="50%" duration-300
                 @click.prevent="handleMoreBtnClick"
               >
-                <mingcute:more-2-line text="lg" />
+                <div i-mingcute:more-2-line text="lg" />
               </div>
             </div>
             <div text="base $bew-text-2" w-fit m="t-2" flex="~ items-center wrap">
@@ -474,8 +473,8 @@ function handleUndo() {
               </span>
               <!-- Video type -->
               <span text="$bew-text-2" grid="~ place-items-center">
-                <mingcute:cellphone-2-line v-if="type === 'vertical'" />
-                <mingcute:movie-line v-else-if="type === 'bangumi'" />
+                <div v-if="type === 'vertical'" i-mingcute:cellphone-2-line />
+                <div v-else-if="type === 'bangumi'" i-mingcute:movie-line />
               </span>
             </div>
           </div>

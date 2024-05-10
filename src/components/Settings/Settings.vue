@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import { Icon } from '@iconify/vue'
 import OverlayScrollbarsComponent from '../OverlayScrollbarsComponent'
 
 import type { MenuItem } from './types'
@@ -39,32 +38,32 @@ const settingsMenuItems = computed((): MenuItem[] => {
   return [
     {
       value: MenuType.General,
-      icon: 'mingcute:settings-3-line',
-      iconActivated: 'mingcute:settings-3-fill',
+      icon: 'i-mingcute:settings-3-line',
+      iconActivated: 'i-mingcute:settings-3-fill',
       title: t('settings.menu_general'),
     },
     {
       value: MenuType.Appearance,
       title: t('settings.menu_appearance'),
-      icon: 'mingcute:paint-brush-line',
-      iconActivated: 'mingcute:paint-brush-fill',
+      icon: 'i-mingcute:paint-brush-line',
+      iconActivated: 'i-mingcute:paint-brush-fill',
     },
     {
       value: MenuType.SearchPage,
-      icon: 'mingcute:search-2-line',
-      iconActivated: 'mingcute:search-2-fill',
+      icon: 'i-mingcute:search-2-line',
+      iconActivated: 'i-mingcute:search-2-fill',
       title: t('settings.menu_search_page'),
     },
     {
       value: MenuType.Home,
-      icon: 'mingcute:home-5-line',
-      iconActivated: 'mingcute:home-5-fill',
+      icon: 'i-mingcute:home-5-line',
+      iconActivated: 'i-mingcute:home-5-fill',
       title: t('settings.menu_home'),
     },
     {
       value: MenuType.Compatibility,
-      icon: 'mingcute:polygon-line',
-      iconActivated: 'mingcute:polygon-fill',
+      icon: 'i-mingcute:polygon-line',
+      iconActivated: 'i-mingcute:polygon-fill',
       title: t('settings.menu_compatibility'),
     },
     // {
@@ -75,8 +74,8 @@ const settingsMenuItems = computed((): MenuItem[] => {
     // },
     {
       value: MenuType.About,
-      icon: 'mingcute:information-line',
-      iconActivated: 'mingcute:information-fill',
+      icon: 'i-mingcute:information-line',
+      iconActivated: 'i-mingcute:information-fill',
       title: t('settings.menu_about'),
     },
   ]
@@ -152,15 +151,15 @@ function setCurrentTitle() {
               :class="{ 'menu-item-activated': menuItem.value === activatedMenuItem }"
               @click="changeMenuItem(menuItem.value)"
             >
-              <Icon
+              <div
                 v-show="menuItem.value !== activatedMenuItem"
                 text="xl center" w-40px h-20px flex="~ shrink-0" justify-center
-                :icon="menuItem.icon"
+                :class="menuItem.icon"
               />
-              <Icon
+              <div
                 v-show="menuItem.value === activatedMenuItem"
                 text="xl center" w-40px h-20px flex="~ shrink-0" justify-center
-                :icon="menuItem.iconActivated"
+                :class="menuItem.iconActivated"
               />
               <span shrink-0>{{ menuItem.title }}</span>
             </a>
@@ -205,7 +204,7 @@ function setCurrentTitle() {
             hover:ring="2 $bew-theme-color" hover:text="$bew-theme-color" duration-300
             @click="handleClose"
           >
-            <ic-baseline-clear />
+            <div i-ic-baseline-clear />
           </div>
         </header>
         <OverlayScrollbarsComponent
