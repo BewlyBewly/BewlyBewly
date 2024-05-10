@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 
 import 'uno.css'
-import '~/styles/index.ts'
+import '~/styles'
 import App from './views/App.vue'
 import { setupApp } from '~/logic/common-setup'
 import { SVG_ICONS } from '~/utils/svgIcons'
@@ -73,15 +73,8 @@ function isSupportedPages() {
 let beforeLoadedStyleEl: HTMLStyleElement | undefined
 
 if (isSupportedPages()) {
-  const isDarkSystemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
-  // Since using runWhenIdle does not instantly inject the app to the page, a style class cannot be injected immediately to the <html> tag
-  // We have to manually add a class to the <html> app to ensure that the transition effect is applied
-  if (
-    (settings.value.adaptToOtherPageStyles && settings.value.theme === 'dark')
-    // Fix: flash dark mode when using the light theme
-    || (settings.value.adaptToOtherPageStyles && (isDarkSystemTheme && settings.value.theme !== 'light'))
-  )
-    document.documentElement.classList.add('dark')
+  if (settings.value.adaptToOtherPageStyles)
+    useDark()
 
   if (settings.value.adaptToOtherPageStyles)
     document.documentElement.classList.add('bewly-design')
