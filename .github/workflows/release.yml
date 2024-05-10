@@ -67,8 +67,6 @@ jobs:
           cache: pnpm
       - name: Install dependencies
         run: pnpm install
-      - name: Install WXT
-        run: pnpm install wxt
       - name: Submit Extension
         run: |
           pnpm build
