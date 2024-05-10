@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
 import Tooltip from '../Tooltip.vue'
 import type { HoveringDockItem } from './types'
 import { AppPage } from '~/enums/appEnums'
@@ -113,13 +112,13 @@ function toggleDockHide(hide: boolean) {
             :class="{ active: activatedPage === dockItem.page }"
             @click="emit('change-page', dockItem.page)"
           >
-            <Icon
+            <div
               v-show="activatedPage !== dockItem.page"
-              :icon="dockItem.icon"
+              :class="dockItem.icon"
             />
-            <Icon
+            <div
               v-show="activatedPage === dockItem.page"
-              :icon="dockItem.iconActivated"
+              :class="dockItem.iconActivated"
             />
           </button>
         </Tooltip>

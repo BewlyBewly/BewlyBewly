@@ -1,12 +1,11 @@
 <script lang="ts" setup>
-import { Icon } from '@iconify/vue'
 import Tooltip from '../Tooltip.vue'
-import { getCSRF, removeHttpFromUrl } from '~/utils/main'
-import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils/dataFormatter'
-import type { VideoPreviewResult } from '~/models/video/videoPreview'
-import { settings } from '~/logic'
 import Button from '~/components/Button.vue'
 import { useApiClient } from '~/composables/api'
+import { settings } from '~/logic'
+import type { VideoPreviewResult } from '~/models/video/videoPreview'
+import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils/dataFormatter'
+import { getCSRF, removeHttpFromUrl } from '~/utils/main'
 
 interface Props {
   id: number
@@ -210,7 +209,7 @@ function handleUndo() {
               @click="handleUndo"
             >
               <template #left>
-                <Icon icon="mingcute:back-line" text-lg />
+                <div i-mingcute-back-line text-lg />
               </template>
               {{ $t('common.undo') }}
             </Button>

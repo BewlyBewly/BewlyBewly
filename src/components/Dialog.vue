@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
 import { onKeyStroke } from '@vueuse/core'
 import Button from '~/components/Button.vue'
 import { useBewlyApp } from '~/composables/useAppProvider'
@@ -122,7 +121,7 @@ function handleConfirm() {
               pos="absolute top-0 left-0" w-full h-full bg="white dark:black opacity-60 dark:opacity-60" flex="~ justify-center items-center"
               z-2
             >
-              <Icon icon="svg-spinners:ring-resize" text="4xl" />
+              <div i-svg-spinners-ring-resize text="4xl" />
             </div>
           </Transition>
 

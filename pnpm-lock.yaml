@@ -51,9 +51,6 @@ importers:
       '@iconify/json':
         specifier: ^2.2.208
         version: 2.2.208
-      '@iconify/vue':
-        specifier: ^4.1.2
-        version: 4.1.2(vue@3.4.27(typescript@5.4.5))
       '@intlify/unplugin-vue-i18n':
         specifier: ^4.0.0
         version: 4.0.0(rollup@4.16.4)(vue-i18n@9.13.1(vue@3.4.27(typescript@5.4.5)))
@@ -770,11 +767,6 @@ packages:
 
   '@iconify/utils@2.1.23':
     resolution: {integrity: sha512-YGNbHKM5tyDvdWZ92y2mIkrfvm5Fvhe6WJSkWu7vvOFhMtYDP0casZpoRz0XEHZCrYsR4stdGT3cZ52yp5qZdQ==}
-
-  '@iconify/vue@4.1.2':
-    resolution: {integrity: sha512-CQnYqLiQD5LOAaXhBrmj1mdL2/NCJvwcC4jtW2Z8ukhThiFkLDkutarTOV2trfc9EXqUqRs0KqXOL9pZ/IyysA==}
-    peerDependencies:
-      vue: '>=3'
 
   '@intlify/bundle-utils@8.0.0':
     resolution: {integrity: sha512-1B++zykRnMwQ+20SpsZI1JCnV/YJt9Oq7AGlEurzkWJOFtFAVqaGc/oV36PBRYeiKnTbY9VYfjBimr2Vt42wLQ==}
@@ -5706,11 +5698,6 @@ snapshots:
       mlly: 1.6.1
     transitivePeerDependencies:
       - supports-color
-
-  '@iconify/vue@4.1.2(vue@3.4.27(typescript@5.4.5))':
-    dependencies:
-      '@iconify/types': 2.0.0
-      vue: 3.4.27(typescript@5.4.5)
 
   '@intlify/bundle-utils@8.0.0(vue-i18n@9.13.1(vue@3.4.27(typescript@5.4.5)))':
     dependencies:

@@ -1,16 +1,15 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
 import type { GridLayoutIcon } from './types'
 import { HomeSubPage } from './types'
-import emitter from '~/utils/mitt'
-import { homePageGridLayout, settings } from '~/logic'
-import { delay } from '~/utils/main'
-import type { HomeTab } from '~/stores/mainStore'
-import { useMainStore } from '~/stores/mainStore'
 import Logo from '~/components/Logo.vue'
 import SearchBar from '~/components/SearchBar/SearchBar.vue'
-import { useBewlyImage } from '~/composables/useImage'
 import { useBewlyApp } from '~/composables/useAppProvider'
+import { useBewlyImage } from '~/composables/useImage'
+import { homePageGridLayout, settings } from '~/logic'
+import type { HomeTab } from '~/stores/mainStore'
+import { useMainStore } from '~/stores/mainStore'
+import { delay } from '~/utils/main'
+import emitter from '~/utils/mitt'
 
 const mainStore = useMainStore()
 const { handleBackToTop, scrollbarRef } = useBewlyApp()
@@ -32,9 +31,9 @@ const tabPageRef = ref()
 
 const gridLayoutIcons = computed((): GridLayoutIcon[] => {
   return [
-    { icon: 'f7:square-grid-3x2', iconActivated: 'f7:square-grid-3x2-fill', value: 'adaptive' },
-    { icon: 'f7:rectangle-grid-2x2', iconActivated: 'f7:rectangle-grid-2x2-fill', value: 'twoColumns' },
-    { icon: 'f7:rectangle-grid-1x2', iconActivated: 'f7:rectangle-grid-1x2-fill', value: 'oneColumn' },
+    { icon: 'i-f7:square-grid-3x2', iconActivated: 'i-f7:square-grid-3x2-fill', value: 'adaptive' },
+    { icon: 'i-f7:rectangle-grid-2x2', iconActivated: 'i-f7:rectangle-grid-2x2-fill', value: 'twoColumns' },
+    { icon: 'i-f7:rectangle-grid-1x2', iconActivated: 'i-f7:rectangle-grid-1x2-fill', value: 'oneColumn' },
   ]
 })
 
@@ -231,9 +230,9 @@ function toggleTabContentLoading(loading: boolean) {
           flex="~ gap-1 shrink-0" p-1 h-35px bg="$bew-elevated-1" transform-gpu
           rounded="$bew-radius" shadow="$bew-shadow-1" box-border border="1 $bew-border-color"
         >
-          <Icon
+          <div
             v-for="icon in gridLayoutIcons" :key="icon.value"
-            :icon="homePageGridLayout === icon.value ? icon.iconActivated : icon.icon"
+            :class="homePageGridLayout === icon.value ? icon.iconActivated : icon.icon"
             :style="{
               backgroundColor: homePageGridLayout === icon.value ? 'var(--bew-theme-color-auto)' : '',
               color: homePageGridLayout === icon.value ? 'var(--bew-text-auto)' : 'unset',
