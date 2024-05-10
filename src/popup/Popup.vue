@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { storageDemo } from '~/logic/storage'
+import Logo from '~/components/Logo.vue'
 
 function openOptionsPage() {
   browser.runtime.openOptionsPage()

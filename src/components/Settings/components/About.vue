@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import browser from 'webextension-polyfill'
 import { version } from '../../../../package.json'
+import Button from '~/components/Button.vue'
+import Dialog from '~/components/Dialog.vue'
 import { settings } from '~/logic'
+import Tooltip from '~/components/Tooltip.vue'
 
 const importSettingsRef = ref<HTMLElement>()
 const dialogVisible = reactive({

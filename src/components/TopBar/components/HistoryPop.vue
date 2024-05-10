@@ -7,6 +7,9 @@ import { isHomePage, removeHttpFromUrl, smoothScrollToTop } from '~/utils/main'
 import { calcCurrentTime } from '~/utils/dataFormatter'
 import { Business } from '~/models/history/history'
 import type { List as HistoryItem, HistoryResult } from '~/models/history/history'
+import Empty from '~/components/Empty.vue'
+import Loading from '~/components/Loading.vue'
+import Progress from '~/components/Progress.vue'
 
 const { t } = useI18n()
 const api = useApiClient()
@@ -380,7 +383,7 @@ function getHistoryList(type: Business, view_at = 0 as number) {
 
         <!-- loading -->
         <Transition name="fade">
-          <loading v-if="isLoading && historys.length !== 0" m="-t-4" />
+          <Loading v-if="isLoading && historys.length !== 0" m="-t-4" />
         </Transition>
       </div>
     </main>

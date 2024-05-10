@@ -1,6 +1,9 @@
 <script lang="ts" setup>
+import SettingsItem from './SettingsItem.vue'
+import SettingsItemGroup from './SettingsItemGroup.vue'
 import { settings } from '~/logic'
 import { isHomePage } from '~/utils/main'
+import Radio from '~/components/Radio.vue'
 
 watch(() => settings.value.useOriginalBilibiliHomepage, () => {
   if (isHomePage())

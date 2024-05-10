@@ -1,5 +1,11 @@
 <script lang="ts" setup>
+import SettingsItem from './SettingsItem.vue'
+import SettingsItemGroup from './SettingsItemGroup.vue'
 import { settings } from '~/logic'
+import Input from '~/components/Input.vue'
+import Radio from '~/components/Radio.vue'
+import Slider from '~/components/Slider.vue'
+import Tooltip from '~/components/Tooltip.vue'
 
 const { searchBarCharacters, wallpapers, getBewlyImage } = useBewlyImage()
 

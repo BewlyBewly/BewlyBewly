@@ -6,6 +6,13 @@ import emitter from '~/utils/mitt'
 import { settings } from '~/logic'
 import type { Media as FavoriteItem, FavoritesResult } from '~/models/video/favorite'
 import type { List as CategoryItem, FavoritesCategoryResult } from '~/models/video/favoriteCategory'
+import Button from '~/components/Button.vue'
+import Empty from '~/components/Empty.vue'
+import Input from '~/components/Input.vue'
+import Loading from '~/components/Loading.vue'
+import Select from '~/components/Select.vue'
+import Tooltip from '~/components/Tooltip.vue'
+import VideoCard from '~/components/VideoCard/VideoCard.vue'
 
 const { t } = useI18n()
 const api = useApiClient()

@@ -4,9 +4,14 @@ import QRCodeVue from 'qrcode.vue'
 import { useToast } from 'vue-toastification'
 import draggable from 'vuedraggable'
 import SearchPage from './SearchPage.vue'
+import ChildSettingsDialog from './ChildSettingsDialog.vue'
+import SettingsItem from './SettingsItem.vue'
+import SettingsItemGroup from './SettingsItemGroup.vue'
 import { getTVLoginQRCode, pollTVLoginQRCode, revokeAccessKey } from '~/utils/authProvider'
 import { accessKey, settings } from '~/logic'
 import { useMainStore } from '~/stores/mainStore'
+import Button from '~/components/Button.vue'
+import Radio from '~/components/Radio.vue'
 
 const mainStore = useMainStore()
 const toast = useToast()

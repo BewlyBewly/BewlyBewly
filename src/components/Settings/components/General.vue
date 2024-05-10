@@ -2,8 +2,13 @@
 import { useI18n } from 'vue-i18n'
 import draggable from 'vuedraggable'
 import { Icon } from '@iconify/vue'
+import SettingsItem from './SettingsItem.vue'
+import SettingsItemGroup from './SettingsItemGroup.vue'
 import { settings } from '~/logic'
 import { useMainStore } from '~/stores/mainStore'
+import Button from '~/components/Button.vue'
+import Radio from '~/components/Radio.vue'
+import Select from '~/components/Select.vue'
 
 const mainStore = useMainStore()
 const { t, locale } = useI18n()
