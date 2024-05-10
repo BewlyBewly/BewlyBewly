@@ -444,7 +444,7 @@ defineExpose({ initData })
             </div>
             {{ reason.name }}
           </div>
-          <line-md:confirm v-if="selectedDislikeReason === reason.id" />
+          <div v-if="selectedDislikeReason === reason.id" i-line-md:confirm />
         </li>
       </ul>
     </Dialog>

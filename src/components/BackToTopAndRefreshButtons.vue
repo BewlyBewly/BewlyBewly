@@ -27,8 +27,11 @@ const emit = defineEmits(['refresh', 'back-to-top'])
       @click="showRefreshButton ? emit('refresh') : emit('back-to-top')"
     >
       <Transition name="fade">
-        <line-md:rotate-270 v-if="showRefreshButton" text-lg shrink-0 rotate-90 absolute />
-        <line-md:arrow-small-up v-else text-lg shrink-0 absolute />
+        <div
+          v-if="showRefreshButton" i-line-md:rotate-270 text-lg shrink-0 rotate-90
+          absolute
+        />
+        <div v-else i-line-md:arrow-small-up text-lg shrink-0 absolute />
       </Transition>
     </Button>
   </div>

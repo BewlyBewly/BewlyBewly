@@ -176,7 +176,7 @@ function handleToggleDockItem(dockItem: any) {
             {{ $t('settings.dock_content_adjustment') }}
             <Button size="small" type="secondary" @click="resetDockContent">
               <template #left>
-                <mingcute:back-line />
+                <div i-mingcute:back-line />
               </template>
               {{ $t('common.reset') }}
             </Button>

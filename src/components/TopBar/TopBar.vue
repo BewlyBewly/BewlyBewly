@@ -479,7 +479,7 @@ defineExpose({
         >
           <div v-if="!isLogin" class="right-side-item">
             <a href="https://passport.bilibili.com/login" class="login">
-              <ic:outline-account-circle class="text-xl mr-2" />{{
+              <div i-ic:outline-account-circle class="text-xl mr-2" />{{
                 $t('topbar.sign_in')
               }}
             </a>
@@ -575,7 +575,7 @@ defineExpose({
                   :target="isHomePage() ? '_blank' : '_self'"
                   :title="$t('topbar.notifications')"
                 >
-                  <tabler:bell />
+                  <div i-tabler:bell />
                 </a>
 
                 <Transition name="slide-in">
@@ -609,7 +609,7 @@ defineExpose({
                   :target="isHomePage() ? '_blank' : '_self'"
                   :title="$t('topbar.moments')"
                 >
-                  <tabler:windmill />
+                  <div i-tabler:windmill />
                 </a>
 
                 <Transition name="slide-in">
@@ -628,7 +628,7 @@ defineExpose({
                   :target="isHomePage() ? '_blank' : '_self'"
                   :title="$t('topbar.favorites')"
                 >
-                  <mingcute:star-line />
+                  <div i-mingcute:star-line />
                 </a>
 
                 <Transition name="slide-in">
@@ -653,7 +653,7 @@ defineExpose({
                   :target="isHomePage() ? '_blank' : '_self'"
                   :title="$t('topbar.history')"
                 >
-                  <mingcute:time-line />
+                  <div i-mingcute:time-line />
                 </a>
 
                 <Transition name="slide-in">
@@ -672,7 +672,7 @@ defineExpose({
                   :target="isHomePage() ? '_blank' : '_self'"
                   :title="$t('topbar.watch_later')"
                 >
-                  <mingcute:carplay-line />
+                  <div i-mingcute:carplay-line />
                 </a>
 
                 <Transition name="slide-in">
@@ -687,7 +687,7 @@ defineExpose({
                   target="_blank"
                   :title="$t('topbar.creative_center')"
                 >
-                  <mingcute:bulb-line />
+                  <div i-mingcute:bulb-line />
                 </a>
               </div>
             </div>
@@ -699,7 +699,7 @@ defineExpose({
               :class="{ active: popupVisible.more }"
             >
               <a title="More">
-                <mingcute:menu-line />
+                <div i-mingcute:menu-line />
               </a>
 
               <Transition name="slide-in">
@@ -728,7 +728,7 @@ defineExpose({
                 filter="hover:brightness-110"
                 style="--un-shadow: 0 0 10px var(--bew-theme-color-60)"
               >
-                <mingcute:upload-2-line flex-shrink-0 />
+                <div i-mingcute:upload-2-line flex-shrink-0 />
                 <span m="l-2" class="hidden xl:block">{{
                   $t('topbar.upload')
                 }}</span>

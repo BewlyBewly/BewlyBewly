@@ -157,7 +157,7 @@ function handleConfirm() {
               hover:ring="2 $bew-theme-color" hover:text="$bew-theme-color" duration-300
               @click="handleClose"
             >
-              <ic-baseline-clear />
+              <div i-ic-baseline-clear />
             </div>
           </header>
 

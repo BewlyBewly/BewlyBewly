@@ -73,7 +73,7 @@ function handleExportSettings() {
           rounded-12
           w-100px
         >
-          <tabler:brand-github mr-2 shrink-0 /> GitHub
+          <div i-tabler:brand-github mr-2 shrink-0 /> GitHub
         </a>
         <a
           href="https://space.bilibili.com/5011356/dynamic" target="_blank"
@@ -81,7 +81,7 @@ function handleExportSettings() {
           rounded-12
           w-100px
         >
-          <tabler:brand-bilibili mr-2 shrink-0 /> Bilibili
+          <div i-tabler:brand-bilibili mr-2 shrink-0 /> Bilibili
         </a>
         <a
           href="https://discord.gg/TS6vgBmZVp" target="_blank"
@@ -89,13 +89,13 @@ function handleExportSettings() {
           rounded-12
           w-100px
         >
-          <tabler:brand-discord mr-2 shrink-0 /> Discord
+          <div i-tabler:brand-discord mr-2 shrink-0 /> Discord
         </a>
       </section>
       <section mt-4 flex="~ col gap-2 items-center">
         <Button class="btn" @click="handleImportSettings">
           <template #left>
-            <uil:import />
+            <div i-uil:import />
           </template>
           <input ref="importSettingsRef" type="file" accept=".json" hidden>
           {{ $t('settings.import_settings') }}
@@ -103,7 +103,7 @@ function handleExportSettings() {
         <Tooltip placement="bottom" :content="$t('settings.export_settings_desc')">
           <Button class="btn" @click="handleExportSettings">
             <template #left>
-              <uil:export />
+              <div i-uil:export />
             </template>
             {{ $t('settings.export_settings') }}
           </Button>

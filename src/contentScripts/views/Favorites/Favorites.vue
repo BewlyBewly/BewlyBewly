@@ -194,7 +194,7 @@ function isMusic(item: FavoriteResource) {
         <Input v-model="keyword" w-250px @enter="handleSearch" />
         <Button type="primary" @click="handleSearch">
           <template #left>
-            <tabler:search />
+            <div i-tabler:search />
           </template>
         </Button>
         <!-- <h3
@@ -235,7 +235,7 @@ function isMusic(item: FavoriteResource) {
                   @click.prevent="handleUnfavorite(item)"
                 >
                   <Tooltip :content="$t('favorites.unfavorite')" placement="bottom" type="dark">
-                    <ic-baseline-clear />
+                    <div i-ic-baseline-clear />
                   </Tooltip>
                 </button>
               </template>
@@ -299,7 +299,7 @@ function isMusic(item: FavoriteResource) {
             @click="handlePlayAll"
           >
             <template #left>
-              <tabler:player-play />
+              <div i-tabler:player-play />
             </template>
             {{ t('common.play_all') }}
           </Button>

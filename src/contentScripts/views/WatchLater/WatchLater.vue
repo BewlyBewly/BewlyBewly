@@ -239,7 +239,7 @@ function jumpToLoginPage() {
                     duration-300
                     @click.prevent="deleteWatchLaterItem(index, item.aid)"
                   >
-                    <tabler:trash />
+                    <div i-tabler:trash />
                   </button>
                 </div>
 
@@ -297,7 +297,7 @@ function jumpToLoginPage() {
             @click="handlePlayAll"
           >
             <template #left>
-              <tabler:player-play />
+              <div i-tabler:player-play />
             </template>
             {{ t('common.play_all') }}
           </Button>
@@ -306,7 +306,7 @@ function jumpToLoginPage() {
             @click="handleClearAllWatchLater"
           >
             <template #left>
-              <tabler:trash />
+              <div i-tabler:trash />
             </template>
             {{ t('watch_later.clear_all') }}
           </Button>
@@ -315,7 +315,7 @@ function jumpToLoginPage() {
             @click="handleRemoveWatchedVideos"
           >
             <template #left>
-              <tabler:circle-minus />
+              <div i-tabler:circle-minus />
             </template>
             {{ t('watch_later.remove_watched_videos') }}
           </Button>

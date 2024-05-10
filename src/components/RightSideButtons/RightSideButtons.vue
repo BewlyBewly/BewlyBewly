@@ -30,14 +30,14 @@ const hoveringDockItem = reactive<HoveringDockItem>({
         >
           <Transition name="fade">
             <div v-show="hoveringDockItem.themeMode" absolute>
-              <line-md:sunny-outline-to-moon-loop-transition v-if="isDark" />
-              <line-md:moon-alt-to-sunny-outline-loop-transition v-else />
+              <div v-if="isDark" i-line-md:sunny-outline-to-moon-loop-transition />
+              <div v-else i-line-md:moon-alt-to-sunny-outline-loop-transition />
             </div>
           </Transition>
           <Transition name="fade">
             <div v-show="!hoveringDockItem.themeMode" absolute>
-              <line-md:sunny-outline-to-moon-transition v-if="isDark" />
-              <line-md:moon-to-sunny-outline-transition v-else />
+              <div v-if="isDark" i-line-md:sunny-outline-to-moon-transition />
+              <div v-else i-line-md:moon-to-sunny-outline-transition />
             </div>
           </Transition>
         </Button>
@@ -49,7 +49,7 @@ const hoveringDockItem = reactive<HoveringDockItem>({
           center size="small" round
           @click="emit('settings-visibility-change')"
         >
-          <mingcute:settings-3-line />
+          <div i-mingcute:settings-3-line />
         </Button>
       </Tooltip>
     </div>

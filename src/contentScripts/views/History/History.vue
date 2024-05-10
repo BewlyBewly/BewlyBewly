@@ -418,7 +418,7 @@ function jumpToLoginPage() {
                     items-center
                     gap-1
                     m="l-2"
-                  ><tabler:live-photo />
+                  ><div i-tabler:live-photo />
                     Live
                   </span>
                 </a>
@@ -438,7 +438,7 @@ function jumpToLoginPage() {
                 duration-300
                 @click.prevent="deleteHistoryItem(index, historyItem)"
               >
-                <tabler:trash />
+                <div i-tabler:trash />
               </button>
             </div>
           </section>
@@ -480,7 +480,7 @@ function jumpToLoginPage() {
           @click="handleClearAllWatchHistory"
         >
           <template #left>
-            <tabler:trash />
+            <div i-tabler:trash />
           </template>
           {{ $t('history.clear_all_watch_history') }}
         </Button>
@@ -493,7 +493,7 @@ function jumpToLoginPage() {
           @click="handlePauseWatchHistory"
         >
           <template #left>
-            <ph:pause-circle-bold />
+            <div i-ph:pause-circle-bold />
           </template>
           {{ $t('history.pause_watch_history') }}
         </Button>
@@ -506,7 +506,7 @@ function jumpToLoginPage() {
           @click="handleTurnOnWatchHistory"
         >
           <template #left>
-            <ph:play-circle-bold />
+            <div i-ph:play-circle-bold />
           </template>
           {{ $t('history.turn_on_watch_history') }}
         </Button>
