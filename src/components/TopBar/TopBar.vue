@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Ref, UnwrapNestedRefs } from 'vue'
 import { onMounted, watch } from 'vue'
+import { useMouseInElement } from '@vueuse/core'
 import type { UnReadDm, UnReadMessage, UserInfo } from './types'
 import { updateInterval } from './notify'
 
@@ -39,7 +40,8 @@ const mid = getUserID() || ''
 const userInfo = reactive<UserInfo | NonNullable<unknown>>({}) as UnwrapNestedRefs<UserInfo>
 
 const hideTopBar = ref<boolean>(false)
-const hoveringTopBar = ref<boolean>(false)
+const headerTarget = ref(null)
+const { isOutside: isOutsideTopBar } = useMouseInElement(headerTarget)
 
 // const showChannelsPop = ref<boolean>(false)
 // const showUserPanelPop = ref<boolean>(false)
@@ -267,7 +269,7 @@ function handleScroll() {
   if (scrollTop.value === 0)
     toggleTopBarVisible(true)
 
-  if (settings.value.autoHideTopBar && !hoveringTopBar.value && scrollTop.value !== 0) {
+  if (settings.value.autoHideTopBar && isOutsideTopBar && scrollTop.value !== 0) {
     if (scrollTop.value > oldScrollTop.value)
       toggleTopBarVisible(false)
 
@@ -362,10 +364,9 @@ defineExpose({
 
 <template>
   <header
+    ref="headerTarget"
     w="full" transition="all 300 ease-in-out"
     :class="{ hide: hideTopBar }"
-    @mouseenter="hoveringTopBar = true"
-    @mouseleave="hoveringTopBar = false"
   >
     <main
       max-w="$bew-page-max-width" m-auto flex="~ justify-between items-center gap-4"
