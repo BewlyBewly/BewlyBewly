@@ -49,7 +49,9 @@ const hoveringDockItem = reactive<HoveringDockItem>({
           center size="small" round
           @click="emit('settings-visibility-change')"
         >
-          <div i-mingcute:settings-3-line text-xl />
+          <div>
+            <div i-mingcute:settings-3-line text-xl />
+          </div>
         </Button>
       </Tooltip>
     </div>
