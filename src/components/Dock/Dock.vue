@@ -138,14 +138,14 @@ function toggleDockHide(hide: boolean) {
         >
           <Transition name="fade">
             <div v-show="hoveringDockItem.themeMode" absolute>
-              <div v-if="isDark" i-line-md:sunny-outline-to-moon-loop-transition />
-              <div v-else i-line-md:moon-alt-to-sunny-outline-loop-transition />
+              <div v-if="isDark" i-line-md:sunny-outline-to-moon-loop-transition text-xl />
+              <div v-else i-line-md:moon-alt-to-sunny-outline-loop-transition text-xl />
             </div>
           </Transition>
           <Transition name="fade">
             <div v-show="!hoveringDockItem.themeMode" absolute>
-              <div v-if="isDark" i-line-md:sunny-outline-to-moon-transition />
-              <div v-else i-line-md:moon-to-sunny-outline-transition />
+              <div v-if="isDark" i-line-md:sunny-outline-to-moon-transition text-xl />
+              <div v-else i-line-md:moon-to-sunny-outline-transition text-xl />
             </div>
           </Transition>
         </button>
@@ -153,7 +153,7 @@ function toggleDockHide(hide: boolean) {
 
       <Tooltip :content="$t('dock.settings')" :placement="tooltipPlacement">
         <button class="dock-item" @click="emit('settings-visibility-change')">
-          <div i-mingcute:settings-3-line />
+          <div i-mingcute:settings-3-line text-xl />
         </button>
       </Tooltip>
     </div>
