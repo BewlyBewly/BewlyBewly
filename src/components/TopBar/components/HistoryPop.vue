@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
+import { useDateFormat } from '@vueuse/core'
 import type { Ref } from 'vue'
 import { onMounted, reactive, ref, watch } from 'vue'
-import { useDateFormat } from '@vueuse/core'
-import { isHomePage, removeHttpFromUrl, smoothScrollToTop } from '~/utils/main'
-import { calcCurrentTime } from '~/utils/dataFormatter'
-import { Business } from '~/models/history/history'
-import type { List as HistoryItem, HistoryResult } from '~/models/history/history'
+import { useI18n } from 'vue-i18n'
+
 import Empty from '~/components/Empty.vue'
 import Loading from '~/components/Loading.vue'
 import Progress from '~/components/Progress.vue'
 import { useApiClient } from '~/composables/api'
+import type { HistoryResult, List as HistoryItem } from '~/models/history/history'
+import { Business } from '~/models/history/history'
+import { calcCurrentTime } from '~/utils/dataFormatter'
+import { isHomePage, removeHttpFromUrl, smoothScrollToTop } from '~/utils/main'
 
 const { t } = useI18n()
 const api = useApiClient()

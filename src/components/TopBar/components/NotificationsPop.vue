@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import { isHomePage } from '~/utils/main'
+
 import { useApiClient } from '~/composables/api'
+import { isHomePage } from '~/utils/main'
 
 const { t } = useI18n()
 const api = useApiClient()

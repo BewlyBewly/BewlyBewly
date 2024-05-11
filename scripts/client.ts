@@ -1,6 +1,6 @@
 import type { ErrorPayload, HMRPayload, Update } from 'vite'
-import type { ViteHotContext } from 'vite/types/hot'
 import type { InferCustomEventPayload } from 'vite/types/customEvent'
+import type { ViteHotContext } from 'vite/types/hot'
 
 // Vite v3 doesn't export overlay
 // import { ErrorOverlay, overlayId } from 'vite/src/client/overlay'

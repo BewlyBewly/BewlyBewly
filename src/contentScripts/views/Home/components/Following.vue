@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import type { GridLayout } from '~/logic'
-import type { DataItem as MomentItem, MomentResult } from '~/models/moment/moment'
+
 import Button from '~/components/Button.vue'
 import Empty from '~/components/Empty.vue'
 import Loading from '~/components/Loading.vue'
@@ -9,6 +8,8 @@ import VideoCard from '~/components/VideoCard/VideoCard.vue'
 import VideoCardSkeleton from '~/components/VideoCard/VideoCardSkeleton.vue'
 import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
+import type { GridLayout } from '~/logic'
+import type { DataItem as MomentItem, MomentResult } from '~/models/moment/moment'
 
 const props = defineProps<{
   gridLayout: GridLayout

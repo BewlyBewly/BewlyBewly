@@ -1,6 +1,6 @@
 import { useStorageLocal } from '~/composables/useStorageLocal'
-import type { AppPage } from '~/enums/appEnums'
 import type { HomeSubPage } from '~/contentScripts/views/Home/types'
+import type { AppPage } from '~/enums/appEnums'
 
 // TODO: refactor: implement storage functionality using pinia + useStorageLocal()
 

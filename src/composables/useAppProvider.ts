@@ -1,4 +1,5 @@
 import type { Ref } from 'vue'
+
 import type { AppPage } from '~/enums/appEnums'
 
 export interface BewlyAppProvider {

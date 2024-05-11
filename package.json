@@ -63,6 +63,7 @@
     "cross-env": "^7.0.3",
     "crx": "^5.0.1",
     "eslint": "^9.2.0",
+    "eslint-plugin-simple-import-sort": "^12.1.0",
     "esno": "^4.7.0",
     "fs-extra": "^11.2.0",
     "jsdom": "^24.0.0",

@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import OverlayScrollbarsComponent from '../OverlayScrollbarsComponent'
 
+import { settings } from '~/logic'
+
+import OverlayScrollbarsComponent from '../OverlayScrollbarsComponent'
 import type { MenuItem } from './types'
 import { MenuType } from './types'
-import { settings } from '~/logic'
 
 const emit = defineEmits(['close'])
 

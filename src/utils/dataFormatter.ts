@@ -1,6 +1,7 @@
-import { LanguageType } from './../enums/appEnums'
 import { settings } from '~/logic'
 import { i18n } from '~/utils/i18n'
+
+import { LanguageType } from './../enums/appEnums'
 
 export const { t } = i18n.global
 

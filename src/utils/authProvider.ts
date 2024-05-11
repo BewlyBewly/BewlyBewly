@@ -1,6 +1,7 @@
 // import browser from 'webextension-polyfill'
-import { appSign } from './appSign'
 import { accessKey } from '~/logic/storage'
+
+import { appSign } from './appSign'
 
 export function revokeAccessKey() {
   accessKey.value = null

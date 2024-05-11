@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import { onKeyStroke } from '@vueuse/core'
+
+import { useApiClient } from '~/composables/api'
+import { useBewlyImage } from '~/composables/useImage'
+import { findLeafActiveElement } from '~/utils/element'
+
 import type { HistoryItem, SuggestionItem, SuggestionResponse } from './searchHistoryProvider'
 import {
   addSearchHistory,
@@ -7,9 +12,6 @@ import {
   getSearchHistory,
   removeSearchHistory,
 } from './searchHistoryProvider'
-import { useApiClient } from '~/composables/api'
-import { findLeafActiveElement } from '~/utils/element'
-import { useBewlyImage } from '~/composables/useImage'
 
 defineProps<{
   darkenOnFocus?: boolean

@@ -3,6 +3,7 @@ import { useDebounceFn, useThrottleFn, useToggle } from '@vueuse/core'
 import type { Ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import browser from 'webextension-polyfill'
+
 import AppBackground from '~/components/AppBackground.vue'
 import BackToTopAndRefreshButtons from '~/components/BackToTopAndRefreshButtons.vue'
 import Dock from '~/components/Dock/Dock.vue'

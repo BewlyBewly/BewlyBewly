@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import type { UserInfo, UserStat } from '../types'
-import { revokeAccessKey } from '~/utils/authProvider'
-import { getCSRF, getUserID, isHomePage } from '~/utils/main'
-import { numFormatter } from '~/utils/dataFormatter'
+
 import { useApiClient } from '~/composables/api'
+import { revokeAccessKey } from '~/utils/authProvider'
+import { numFormatter } from '~/utils/dataFormatter'
+import { getCSRF, getUserID, isHomePage } from '~/utils/main'
+
+import type { UserInfo, UserStat } from '../types'
 
 defineProps<{
   userInfo: UserInfo

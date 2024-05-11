@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { GridLayoutIcon } from './types'
-import { HomeSubPage } from './types'
 import Logo from '~/components/Logo.vue'
 import SearchBar from '~/components/SearchBar/SearchBar.vue'
 import { useBewlyApp } from '~/composables/useAppProvider'
@@ -10,6 +8,9 @@ import type { HomeTab } from '~/stores/mainStore'
 import { useMainStore } from '~/stores/mainStore'
 import { delay } from '~/utils/main'
 import emitter from '~/utils/mitt'
+
+import type { GridLayoutIcon } from './types'
+import { HomeSubPage } from './types'
 
 const mainStore = useMainStore()
 const { handleBackToTop, scrollbarRef } = useBewlyApp()

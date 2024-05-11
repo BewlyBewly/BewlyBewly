@@ -1,6 +1,7 @@
 import { dirname, resolve } from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
+
 import { bgCyan, black } from 'kolorist'
 
 export const port = Number.parseInt(process.env.PORT || '') || 3303

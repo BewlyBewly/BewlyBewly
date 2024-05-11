@@ -1,11 +1,12 @@
 <script lang="ts" setup>
-import Tooltip from '../Tooltip.vue'
 import Button from '~/components/Button.vue'
 import { useApiClient } from '~/composables/api'
 import { settings } from '~/logic'
 import type { VideoPreviewResult } from '~/models/video/videoPreview'
 import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils/dataFormatter'
 import { getCSRF, removeHttpFromUrl } from '~/utils/main'
+
+import Tooltip from '../Tooltip.vue'
 
 interface Props {
   id: number
