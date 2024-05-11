@@ -126,9 +126,6 @@ importers:
       unocss:
         specifier: 0.59.4
         version: 0.59.4(postcss@8.4.38)(rollup@4.16.4)(vite@5.2.11(@types/node@20.12.11)(sass@1.77.0)(terser@5.31.0))
-      unplugin-auto-import:
-        specifier: ^0.17.5
-        version: 0.17.5(@vueuse/core@10.9.0(vue@3.4.27(typescript@5.4.5)))(rollup@4.16.4)
       vite:
         specifier: ^5.2.11
         version: 5.2.11(@types/node@20.12.11)(sass@1.77.0)(terser@5.31.0)
@@ -5005,18 +5002,6 @@ packages:
       '@unocss/webpack':
         optional: true
       vite:
-        optional: true
-
-  unplugin-auto-import@0.17.5:
-    resolution: {integrity: sha512-fHNDkDSxv3PGagX1wmKBYBkgaM4AKAgZmdJw/bxjhNljx9KSXSgHpGfX0MwUrq9qw6q1bhHIZVWyOwoY2koo4w==}
-    engines: {node: '>=14'}
-    peerDependencies:
-      '@nuxt/kit': ^3.2.2
-      '@vueuse/core': '*'
-    peerDependenciesMeta:
-      '@nuxt/kit':
-        optional: true
-      '@vueuse/core':
         optional: true
 
   unplugin@1.6.0:
@@ -10783,21 +10768,6 @@ snapshots:
       - postcss
       - rollup
       - supports-color
-
-  unplugin-auto-import@0.17.5(@vueuse/core@10.9.0(vue@3.4.27(typescript@5.4.5)))(rollup@4.16.4):
-    dependencies:
-      '@antfu/utils': 0.7.8
-      '@rollup/pluginutils': 5.1.0(rollup@4.16.4)
-      fast-glob: 3.3.2
-      local-pkg: 0.5.0
-      magic-string: 0.30.10
-      minimatch: 9.0.4
-      unimport: 3.7.1(rollup@4.16.4)
-      unplugin: 1.6.0
-    optionalDependencies:
-      '@vueuse/core': 10.9.0(vue@3.4.27(typescript@5.4.5))
-    transitivePeerDependencies:
-      - rollup
 
   unplugin@1.6.0:
     dependencies:
