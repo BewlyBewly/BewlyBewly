@@ -13,5 +13,3 @@ dist-ssr
 extension/
 extension-firefox/
 node_modules
-auto-imports.d.ts
-components.d.ts
