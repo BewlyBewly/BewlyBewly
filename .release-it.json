@@ -2,7 +2,7 @@
   "plugins": {
     "release-it-pnpm": {
       "inFile": "CHANGELOG.md",
-      "publishCommand": "pnpm submit"
+      "publishCommand": "pnpm run submit"
     }
   },
   "git": {
