@@ -11,6 +11,9 @@
   "ignoreDependencies": [
     "@iconify/json", "uno.css", "lint-staged"
   ],
+  "ignoreBinaries": [
+    "release-it"
+  ],
   "rules": {
     "types": "off",
     "enumMembers": "off",

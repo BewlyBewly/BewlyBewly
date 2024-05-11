@@ -1,0 +1,23 @@
+{
+  "plugins": {
+    "release-it-pnpm": {
+      "inFile": "CHANGELOG.md",
+      "publishCommand": "pnpm run submit"
+    }
+  },
+  "git": {
+    "commitMessage": "chore: release v${version}",
+    "tagName": "v${version}"
+  },
+  "hooks": {
+    "before:init": [
+      "pnpm run build",
+      "pnpm run build-firefox",
+      "pnpm run pack:zip",
+      "pnpm run pack:zip-firefox",
+      "pnpm run lint",
+      "pnpm run typecheck",
+      "pnpm run test --run"
+    ]
+  }
+}
