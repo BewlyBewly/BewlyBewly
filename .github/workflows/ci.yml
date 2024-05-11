@@ -73,7 +73,7 @@ jobs:
         run: pnpm build
 
       - name: Upload Zip
-        if: ${{ matrix.os == 'ubuntu-latest' }} && ${{ matrix.node == 'lts/*' }} && ${{ github.ref_name == 'main' }}
+        if: ${{ matrix.os == 'ubuntu-latest' && matrix.node == 'lts/*' && github.ref_name == 'main' }}
         uses: actions/upload-artifact@v4.3.1
         with:
           name: BewlyBewly Zip
@@ -83,7 +83,7 @@ jobs:
         run: pnpm build-firefox
 
       - name: Upload Zip
-        if: ${{ matrix.os == 'ubuntu-latest' }} && ${{ matrix.node == 'lts/*' }} && ${{ github.ref_name == 'main' }}
+        if: ${{ matrix.os == 'ubuntu-latest' && matrix.node == 'lts/*' && github.ref_name == 'main' }}
         uses: actions/upload-artifact@v4.3.1
         with:
           name: BewlyBewly-Firefox Zip
