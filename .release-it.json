@@ -2,7 +2,7 @@
   "plugins": {
     "release-it-pnpm": {
       "inFile": "CHANGELOG.md",
-      "publishCommand": "pnpm wxt submit --chrome-zip ./extension.zip && pnpm wxt submit --firefox-zip ./extension-firefox.zip --firefox-sources-zip ./extension-firefox-sources.zip"
+      "publishCommand": "pnpm submit"
     }
   },
   "git": {

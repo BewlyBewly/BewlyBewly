@@ -34,7 +34,10 @@
     "test": "vitest test",
     "typecheck": "vue-tsc",
     "postinstall": "npx simple-git-hooks",
-    "knip": "knip"
+    "knip": "knip",
+    "submit": "run-p submit:*",
+    "submit:chrome": "pnpm wxt submit --chrome-zip ./extension.zip",
+    "submit:firefox": "pnpm wxt submit --firefox-zip ./extension-firefox.zip --firefox-sources-zip ./extension-firefox-sources.zip"
   },
   "dependencies": {
     "@types/md5": "^2.3.5",
