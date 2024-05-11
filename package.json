@@ -1,12 +1,12 @@
 {
   "name": "bewly-bewly",
   "displayName": "BewlyBewly",
+  "type": "module",
   "version": "0.18.4",
   "private": true,
   "packageManager": "pnpm@9.1.0",
   "description": "Just make a few small changes to your Bilibili homepage.",
   "homepage": "https://github.com/hakadao/BewlyBewly",
-  "type": "module",
   "scripts": {
     "dev": "npm run clear && cross-env NODE_ENV=development run-p dev:*",
     "dev-firefox": "npm run clear-firefox && cross-env NODE_ENV=development FIREFOX=true run-p dev:*",
@@ -33,11 +33,11 @@
     "lint:fix": "eslint --fix",
     "test": "vitest test",
     "typecheck": "vue-tsc",
-    "postinstall": "npx simple-git-hooks"
+    "postinstall": "npx simple-git-hooks",
+    "knip": "knip"
   },
   "dependencies": {
     "@types/md5": "^2.3.5",
-    "dplayer": "^1.27.1",
     "md5": "^2.3.0",
     "mitt": "^3.0.1",
     "overlayscrollbars": "^2.8.0",
@@ -54,14 +54,10 @@
     "@iconify/json": "^2.2.208",
     "@intlify/unplugin-vue-i18n": "^4.0.0",
     "@rollup/plugin-replace": "^5.0.5",
-    "@types/dplayer": "^1.25.5",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^20.12.11",
     "@types/webextension-polyfill": "^0.10.7",
-    "@unocss/reset": "0.59.4",
     "@vitejs/plugin-vue": "^5.0.4",
-    "@vue/compiler-sfc": "^3.4.27",
-    "@vue/test-utils": "^2.4.6",
     "@vueuse/core": "^10.9.0",
     "chokidar": "^3.6.0",
     "cross-env": "^7.0.3",
@@ -70,6 +66,7 @@
     "esno": "^4.7.0",
     "fs-extra": "^11.2.0",
     "jsdom": "^24.0.0",
+    "knip": "^5.14.0",
     "kolorist": "^1.8.0",
     "lint-staged": "^15.2.2",
     "npm-run-all": "^4.1.5",
@@ -84,11 +81,11 @@
     "vite": "^5.2.11",
     "vitest": "^1.6.0",
     "vue": "^3.4.27",
-    "vue-demi": "^0.14.7",
     "vue-tsc": "^2.0.16",
     "web-ext": "^7.11.0",
     "webext-bridge": "5.0.5",
-    "webextension-polyfill": "^0.11.0"
+    "webextension-polyfill": "^0.11.0",
+    "wxt": "^0.18.2"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"

@@ -1,7 +1,6 @@
 import antfu from '@antfu/eslint-config'
 
 export default antfu({
-  jsonc: false,
   rules: {
     'vue/max-attributes-per-line': [
       'error',
