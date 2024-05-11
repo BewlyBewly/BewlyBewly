@@ -1,13 +1,15 @@
 /// <reference types="vitest" />
 
 import { dirname, relative } from 'node:path'
+
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
+import replace from '@rollup/plugin-replace'
+import Vue from '@vitejs/plugin-vue'
+import UnoCSS from 'unocss/vite'
+import AutoImport from 'unplugin-auto-import/vite'
 import type { UserConfig } from 'vite'
 import { defineConfig } from 'vite'
-import Vue from '@vitejs/plugin-vue'
-import replace from '@rollup/plugin-replace'
-import AutoImport from 'unplugin-auto-import/vite'
-import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
-import UnoCSS from 'unocss/vite'
+
 import { isDev, isFirefox, port, r } from './scripts/utils'
 import { MV3Hmr } from './vite-mv3-hmr'
 

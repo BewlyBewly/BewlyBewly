@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import type { GridLayout } from '~/logic'
-import type { TrendingResult, List as VideoItem } from '~/models/video/trending'
+
 import Loading from '~/components/Loading.vue'
 import VideoCard from '~/components/VideoCard/VideoCard.vue'
 import VideoCardSkeleton from '~/components/VideoCard/VideoCardSkeleton.vue'
 import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
+import type { GridLayout } from '~/logic'
+import type { List as VideoItem, TrendingResult } from '~/models/video/trending'
 
 const props = defineProps<{
   gridLayout: GridLayout

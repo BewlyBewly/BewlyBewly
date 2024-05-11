@@ -1,15 +1,16 @@
-import { createApp } from 'vue'
-
 import 'uno.css'
 import '~/styles'
-import App from './views/App.vue'
-import { setupApp } from '~/logic/common-setup'
-import { SVG_ICONS } from '~/utils/svgIcons'
-import { injectCSS, isHomePage } from '~/utils/main'
-import { settings } from '~/logic'
 
-import { runWhenIdle } from '~/utils/lazyLoad'
+import { createApp } from 'vue'
+
 import { useDark } from '~/composables/useDark'
+import { settings } from '~/logic'
+import { setupApp } from '~/logic/common-setup'
+import { runWhenIdle } from '~/utils/lazyLoad'
+import { injectCSS, isHomePage } from '~/utils/main'
+import { SVG_ICONS } from '~/utils/svgIcons'
+
+import App from './views/App.vue'
 
 const isFirefox: boolean = /Firefox/i.test(navigator.userAgent)
 

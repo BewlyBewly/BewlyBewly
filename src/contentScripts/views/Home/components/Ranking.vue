@@ -1,18 +1,20 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import type { RankingType } from '../types'
-import type { RankingResult, List as RankingVideoItem } from '~/models/video/ranking'
-import type { List as RankingPgcItem, RankingPgcResult } from '~/models/video/rankingPgc'
-import type { GridLayout } from '~/logic'
-import { settings } from '~/logic'
-import emitter from '~/utils/mitt'
+
 import LongCoverCard from '~/components/LongCoverCard/LongCoverCard.vue'
 import LongCoverCardSkeleton from '~/components/LongCoverCard/LongCoverCardSkeleton.vue'
 import OverlayScrollbarsComponent from '~/components/OverlayScrollbarsComponent'
 import VideoCard from '~/components/VideoCard/VideoCard.vue'
 import VideoCardSkeleton from '~/components/VideoCard/VideoCardSkeleton.vue'
-import { useBewlyApp } from '~/composables/useAppProvider'
 import { useApiClient } from '~/composables/api'
+import { useBewlyApp } from '~/composables/useAppProvider'
+import type { GridLayout } from '~/logic'
+import { settings } from '~/logic'
+import type { List as RankingVideoItem, RankingResult } from '~/models/video/ranking'
+import type { List as RankingPgcItem, RankingPgcResult } from '~/models/video/rankingPgc'
+import emitter from '~/utils/mitt'
+
+import type { RankingType } from '../types'
 
 const props = defineProps<{
   gridLayout: GridLayout

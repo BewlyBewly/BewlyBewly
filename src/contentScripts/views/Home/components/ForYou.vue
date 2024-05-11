@@ -1,15 +1,8 @@
 <script setup lang="ts">
-import type { Ref } from 'vue'
 import { onKeyStroke } from '@vueuse/core'
+import type { Ref } from 'vue'
 import { useToast } from 'vue-toastification'
-import { Type as ThreePointV2Type } from '~/models/video/appForYou'
-import type { AppForYouResult, Item as AppVideoItem, ThreePointV2 } from '~/models/video/appForYou'
-import type { Item as VideoItem, forYouResult } from '~/models/video/forYou'
-import type { GridLayout } from '~/logic'
-import { accessKey, settings } from '~/logic'
-import { LanguageType } from '~/enums/appEnums'
-import { TVAppKey, getTvSign } from '~/utils/authProvider'
-import { isVerticalVideo } from '~/utils/uriParse'
+
 import Button from '~/components/Button.vue'
 import Dialog from '~/components/Dialog.vue'
 import Empty from '~/components/Empty.vue'
@@ -18,6 +11,14 @@ import VideoCard from '~/components/VideoCard/VideoCard.vue'
 import VideoCardSkeleton from '~/components/VideoCard/VideoCardSkeleton.vue'
 import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
+import { LanguageType } from '~/enums/appEnums'
+import type { GridLayout } from '~/logic'
+import { accessKey, settings } from '~/logic'
+import type { AppForYouResult, Item as AppVideoItem, ThreePointV2 } from '~/models/video/appForYou'
+import { Type as ThreePointV2Type } from '~/models/video/appForYou'
+import type { forYouResult, Item as VideoItem } from '~/models/video/forYou'
+import { getTvSign, TVAppKey } from '~/utils/authProvider'
+import { isVerticalVideo } from '~/utils/uriParse'
 
 const props = defineProps<{
   gridLayout: GridLayout

@@ -1,5 +1,5 @@
-import { defineConfig } from 'unocss/vite'
 import { presetAttributify, presetIcons, presetTypography, presetUno, transformerDirectives } from 'unocss'
+import { defineConfig } from 'unocss/vite'
 
 const remRE = /(-?[\.\d]+)rem/g
 

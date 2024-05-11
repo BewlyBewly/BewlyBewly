@@ -5,6 +5,7 @@ import './modal.scss'
 import './btn.scss'
 import './userCard.scss'
 import './videoPlayer.scss'
+
 import { isHomePage } from '~/utils/main'
 
 async function setupStyles() {

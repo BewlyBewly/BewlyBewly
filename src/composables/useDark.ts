@@ -1,4 +1,5 @@
 import { usePreferredDark } from '@vueuse/core'
+
 import { settings } from '~/logic'
 
 export function useDark() {

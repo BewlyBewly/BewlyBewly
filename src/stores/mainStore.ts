@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+
 import { HomeSubPage } from '~/contentScripts/views/Home/types'
 import { AppPage } from '~/enums/appEnums'
 

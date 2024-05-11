@@ -1,6 +1,8 @@
 import { dirname, join } from 'node:path'
-import type { HMRPayload, PluginOption } from 'vite'
+
 import fs from 'fs-extra'
+import type { HMRPayload, PluginOption } from 'vite'
+
 import { isFirefox, isWin, r } from './scripts/utils'
 
 const targetDir = r(isFirefox ? 'extension-firefox' : 'extension')

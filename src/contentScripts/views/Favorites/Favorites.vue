@@ -1,20 +1,21 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import { getCSRF, getUserID, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
-import type { FavoriteCategory, FavoriteResource } from '~/components/TopBar/types'
-import emitter from '~/utils/mitt'
-import { settings } from '~/logic'
-import type { Media as FavoriteItem, FavoritesResult } from '~/models/video/favorite'
-import type { List as CategoryItem, FavoritesCategoryResult } from '~/models/video/favoriteCategory'
+
 import Button from '~/components/Button.vue'
 import Empty from '~/components/Empty.vue'
 import Input from '~/components/Input.vue'
 import Loading from '~/components/Loading.vue'
 import Select from '~/components/Select.vue'
 import Tooltip from '~/components/Tooltip.vue'
+import type { FavoriteCategory, FavoriteResource } from '~/components/TopBar/types'
 import VideoCard from '~/components/VideoCard/VideoCard.vue'
 import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
+import { settings } from '~/logic'
+import type { FavoritesResult, Media as FavoriteItem } from '~/models/video/favorite'
+import type { FavoritesCategoryResult, List as CategoryItem } from '~/models/video/favoriteCategory'
+import { getCSRF, getUserID, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
+import emitter from '~/utils/mitt'
 
 const { t } = useI18n()
 const api = useApiClient()

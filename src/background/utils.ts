@@ -119,14 +119,14 @@ function apiListenerFactory(API_MAP: APIMAP) {
 }
 
 export {
-  type FetchAfterHandler,
-  toJsonHandler,
-  toData,
-  sendResponseHandler,
-  AHS,
-  type Message,
   type _FETCH,
+  AHS,
   type API,
-  type APIMAP,
   apiListenerFactory,
+  type APIMAP,
+  type FetchAfterHandler,
+  type Message,
+  sendResponseHandler,
+  toData,
+  toJsonHandler,
 }

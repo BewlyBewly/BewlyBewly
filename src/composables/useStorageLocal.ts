@@ -1,4 +1,3 @@
-import { storage } from 'webextension-polyfill'
 import type {
   MaybeRef,
   RemovableRef,
@@ -8,6 +7,7 @@ import type {
 import {
   useStorageAsync,
 } from '@vueuse/core'
+import { storage } from 'webextension-polyfill'
 
 const storageLocal: StorageLikeAsync = {
   removeItem(key: string) {

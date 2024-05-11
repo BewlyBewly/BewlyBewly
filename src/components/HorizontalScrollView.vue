@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
+
 import { settings } from '~/logic'
 
 const scrollListWrap = ref<HTMLElement>() as Ref<HTMLElement>

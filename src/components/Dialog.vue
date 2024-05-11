@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onKeyStroke } from '@vueuse/core'
+
 import Button from '~/components/Button.vue'
 import { useBewlyApp } from '~/composables/useAppProvider'
 

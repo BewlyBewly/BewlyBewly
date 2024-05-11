@@ -1,4 +1,5 @@
 import browser from 'webextension-polyfill'
+
 import { setupAllMsgLstnrs } from './messageListeners'
 
 browser.runtime.onInstalled.addListener((): void => {

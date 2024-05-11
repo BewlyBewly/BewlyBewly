@@ -81,6 +81,9 @@ importers:
       eslint:
         specifier: ^9.2.0
         version: 9.2.0
+      eslint-plugin-simple-import-sort:
+        specifier: ^12.1.0
+        version: 12.1.0(eslint@9.2.0)
       esno:
         specifier: ^4.7.0
         version: 4.7.0
@@ -2366,6 +2369,11 @@ packages:
         optional: true
       vue-eslint-parser:
         optional: true
+
+  eslint-plugin-simple-import-sort@12.1.0:
+    resolution: {integrity: sha512-Y2fqAfC11TcG/WP3TrI1Gi3p3nc8XJyEOJYHyEPEGI/UAgNx6akxxlX74p7SbAQdLcgASKhj8M0GKvH3vq/+ig==}
+    peerDependencies:
+      eslint: '>=5.0.0'
 
   eslint-plugin-toml@0.11.0:
     resolution: {integrity: sha512-sau+YvPU4fWTjB+qtBt3n8WS87aoDCs+BVbSUAemGaIsRNbvR9uEk+Tt892iLHTGvp/DPWYoCX4/8DoyAbB+sQ==}
@@ -7933,6 +7941,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
       - typescript
+
+  eslint-plugin-simple-import-sort@12.1.0(eslint@9.2.0):
+    dependencies:
+      eslint: 9.2.0
 
   eslint-plugin-toml@0.11.0(eslint@9.2.0):
     dependencies:
