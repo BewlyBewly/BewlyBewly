@@ -75,8 +75,17 @@ export const wallpapers = computed<Array<{ name: string, url: string, thumbnail:
 })
 
 function getBewlyImage(filePath: string) {
-  if (filePath.includes('bewly://'))
-    return browser.runtime.getURL(filePath.replace('bewly://', '/'))
+  // https://stackoverflow.com/a/59818851
+  const isEdge = window.navigator.userAgent.includes('Edg/') // for new edge chromium
+  // https://stackoverflow.com/a/20227975
+  const isDev = !('update_url' in browser.runtime.getManifest())
+
+  if (filePath.includes('bewly://')) {
+    if (isEdge && !isDev)
+      return browser.runtime.getURL(filePath.replace('bewly://', '/')).replace('chrome-extension://', 'extension://')
+    else
+      return browser.runtime.getURL(filePath.replace('bewly://', '/'))
+  }
   return filePath
 }
 
