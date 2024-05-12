@@ -19,6 +19,7 @@
       "pnpm run lint",
       "pnpm run typecheck",
       "pnpm run test --run"
-    ]
+    ],
+    "after:release": "gh release upload v${version} extension.zip extension-firefox.zip"
   }
 }
