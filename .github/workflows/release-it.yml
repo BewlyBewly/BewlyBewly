@@ -44,14 +44,3 @@ jobs:
           FIREFOX_EXTENSION_ID: ${{ secrets.FIREFOX_EXTENSION_ID }}
           FIREFOX_JWT_ISSUER: ${{ secrets.FIREFOX_JWT_ISSUER }}
           FIREFOX_JWT_SECRET: ${{ secrets.FIREFOX_JWT_SECRET }}
-
-      - name: Upload assets to a Release
-        uses: meeDamian/github-release@v2.0.3
-        with:
-          tag: v0.18.5
-          files: |
-            extension.zip
-            extension-firefox.zip
-          token: ${{ secrets.RELEASE_TOKEN }}
-          allow_override: true
-          gzip: false
