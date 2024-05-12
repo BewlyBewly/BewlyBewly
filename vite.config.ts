@@ -6,6 +6,7 @@ import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
 import replace from '@rollup/plugin-replace'
 import Vue from '@vitejs/plugin-vue'
 import UnoCSS from 'unocss/vite'
+import AutoImport from 'unplugin-auto-import/vite'
 import type { UserConfig } from 'vite'
 import { defineConfig } from 'vite'
 
@@ -21,6 +22,17 @@ export const sharedConfig: UserConfig = {
   },
   plugins: [
     Vue(),
+
+    AutoImport({
+      imports: [
+        'vue',
+        {
+          'webextension-polyfill': [
+            ['*', 'browser'],
+          ],
+        },
+      ],
+    }),
 
     // https://github.com/intlify/bundle-tools/tree/main/packages/unplugin-vue-i18n
     VueI18nPlugin({
