@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.18.5
+
+### &nbsp;&nbsp;&nbsp;Bug Fixes
+
+- Sync theme when loading page, close #736 &nbsp;-&nbsp; by **Stephen Zhou** in https://github.com/BewlyBewly/BewlyBewly/issues/736 [<samp>(6f19b)</samp>](https://github.com/BewlyBewly/BewlyBewly/commit/6f19b29)
+- Detect mouse in app bar, close #718 &nbsp;-&nbsp; by **Stephen Zhou** in https://github.com/BewlyBewly/BewlyBewly/issues/718 [<samp>(40b68)</samp>](https://github.com/BewlyBewly/BewlyBewly/commit/40b6817)
+- Attempt to fix edge extension corrupted &nbsp;-&nbsp; by **hakadao** in https://github.com/BewlyBewly/BewlyBewly/issues/705 [<samp>(70932)</samp>](https://github.com/BewlyBewly/BewlyBewly/commit/709329c)
+
+### &nbsp;&nbsp;&nbsp;Performance
+
+- Debounce `handleOsScroll` &nbsp;-&nbsp; by **hakadao** and **pengyunfei** in https://github.com/BewlyBewly/BewlyBewly/issues/735 [<samp>(a7488)</samp>](https://github.com/BewlyBewly/BewlyBewly/commit/a7488c1)
+- **Home**: Improve home page performance &nbsp;-&nbsp; by **hakadao** in https://github.com/BewlyBewly/BewlyBewly/issues/733 [<samp>(26d4c)</samp>](https://github.com/BewlyBewly/BewlyBewly/commit/26d4cb1)
+
+##### &nbsp;&nbsp;&nbsp;&nbsp;[View changes on GitHub](https://github.com/BewlyBewly/BewlyBewly/compare/v0.18.4...dev)
+
 ## [0.18.4](https://github.com/BewlyBewly/BewlyBewly/compare/v0.18.2...v0.18.4) (2024-05-06)
 
 
