@@ -15,6 +15,7 @@
       "pnpm run build-firefox",
       "pnpm run pack:zip",
       "pnpm run pack:zip-firefox",
+      "pnpm run pack:zip-firefox-sources",
       "pnpm run lint",
       "pnpm run typecheck",
       "pnpm run test --run"

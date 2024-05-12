@@ -23,6 +23,7 @@
     "pack": "cross-env NODE_ENV=production run-p pack:*",
     "pack:zip": "rimraf extension.zip && jszip-cli add extension/* -o ./extension.zip",
     "pack:zip-firefox": "rimraf extension-firefox.zip && jszip-cli add extension-firefox/* -o ./extension-firefox.zip",
+    "pack:zip-firefox-sources": "rimraf extension-firefox-sources.zip && git archive HEAD -o extension-firefox-sources.zip",
     "pack:crx": "crx pack extension -o ./extension.crx",
     "pack:xpi": "cross-env WEB_EXT_ARTIFACTS_DIR=./ FIREFOX=true web-ext build --source-dir ./extension-firefox --filename extension.xpi --overwrite-dest",
     "start:chromium": "web-ext run --source-dir ./extension --target=chromium",
