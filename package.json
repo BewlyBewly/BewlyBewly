@@ -74,6 +74,8 @@
     "kolorist": "^1.8.0",
     "lint-staged": "^15.2.2",
     "npm-run-all": "^4.1.5",
+    "release-it": "^17.2.1",
+    "release-it-pnpm": "^4.5.1",
     "rimraf": "^5.0.5",
     "sass": "^1.77.0",
     "simple-git-hooks": "^2.11.1",
