@@ -79,8 +79,7 @@ pnpm build-firefox
 
 #### 常驻分支
 
-- **Dev**: 用此分支进行错误修复、新功能的开发、性能改进或对国际化（i18n）文件的修改。
-- **Main**: 主分支，代表稳定可发布的版本。
+- **Main**: 用此分支进行错误修复、新功能的开发、性能改进或对国际化（i18n）文件的修改。
 
 #### 其他临时分支
 
@@ -88,12 +87,14 @@ pnpm build-firefox
 - **doc/**: 此分支专门用于修复文档, 不涉及功能改动。
 - **fix/**: 此分支专门用于修复 dev 分支中出现的错误。
 
-### commit 规范
+### Commit 规范
+
+你也可以参照 [Angular commit message guidelines](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines)
 
 - `feat`：新功能
 - `fix`：修复 Bug
 - `docs`：文档更新
-- `style`：样式调整
+- `style`：不影响代码含义的更改（空格、格式、缺少分号等）
 - `refactor`：重构代码
 - `test`：添加或更新测试
 - `chore`：构建过程或工具链的变更

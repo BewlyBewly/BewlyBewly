@@ -76,8 +76,7 @@ Then package it to the `extension-firefox` folder
 
 #### Permanent Branches
 
-- **Dev**: Use this branch for bug fixes, developing new features, performance improvements, or modifications to internationalization (i18n) files.
-- **Main**: Main branch, represents the stable and publishable version.
+- **Main**: Use this branch for bug fixes, developing new features, performance improvements, or modifications to internationalization (i18n) files.
 
 #### Other Temporary Branches
 
@@ -87,10 +86,12 @@ Then package it to the `extension-firefox` folder
 
 ### Commit Convention
 
+You can also refer to the [Angular commit message guidelines](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines)
+
 - `feat`: New feature
 - `fix`: Bug fix
 - `docs`: Documentation update
-- `style`: Adjust styles
+- `style`: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
 - `refactor`: Code refactoring
 - `test`: Add or update tests
 - `chore`: Changes to the build process or toolchain
