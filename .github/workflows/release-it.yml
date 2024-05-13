@@ -6,6 +6,15 @@ permissions:
 
 on:
   workflow_dispatch:
+    inputs:
+      increment:
+        required: true
+        default: patch
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
 
 jobs:
   release:
@@ -34,7 +43,7 @@ jobs:
             - args: [--frozen-lockfile]
 
       - name: Release
-        run: npx release-it --verbose
+        run: npx release-it ${{ inputs.increment }}
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           CHROME_EXTENSION_ID: ${{ secrets.CHROME_EXTENSION_ID }}
