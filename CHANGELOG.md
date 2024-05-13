@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.18.6
+
+*No significant changes*
+
+##### &nbsp;&nbsp;&nbsp;&nbsp;[View changes on GitHub](https://github.com/BewlyBewly/BewlyBewly/compare/v0.18.5...main)
+
 ## 0.18.5
 
 ### &nbsp;&nbsp;&nbsp;Bug Fixes
