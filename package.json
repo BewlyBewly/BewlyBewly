@@ -38,6 +38,7 @@
     "knip": "knip",
     "submit": "run-p submit:*",
     "submit:chrome": "pnpm wxt submit --chrome-zip ./extension.zip",
+    "submit:edge": "pnpm wxt submit --edge-zip ./extension.zip",
     "submit:firefox": "pnpm wxt submit --firefox-zip ./extension-firefox.zip --firefox-sources-zip ./extension-firefox-sources.zip"
   },
   "dependencies": {
