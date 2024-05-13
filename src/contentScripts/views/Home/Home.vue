@@ -242,7 +242,7 @@ function toggleTabContentLoading(loading: boolean) {
             h-full p="x-2 y-1" rounded="$bew-radius-half" bg="hover:$bew-fill-2" duration-300
             cursor-pointer @click="homePageGridLayout = icon.value"
           >
-            <div :class="homePageGridLayout === icon.value ? icon.iconActivated : icon.icon" text-xl />
+            <div :class="homePageGridLayout === icon.value ? icon.iconActivated : icon.icon" text-base />
           </div>
         </div>
       </header>
