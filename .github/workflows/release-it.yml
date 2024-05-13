@@ -43,7 +43,7 @@ jobs:
             - args: [--frozen-lockfile]
 
       - name: Release
-        run: npx release-it ${{ inputs.increment }}
+        run: npx release-it ${{ inputs.increment }} --verbose
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           CHROME_EXTENSION_ID: ${{ secrets.CHROME_EXTENSION_ID }}

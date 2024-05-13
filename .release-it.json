@@ -1,7 +1,6 @@
 {
   "plugins": {
     "release-it-pnpm": {
-      "inFile": "CHANGELOG.md",
       "publishCommand": "pnpm run submit"
     }
   },
