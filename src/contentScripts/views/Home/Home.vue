@@ -2,7 +2,6 @@
 import Logo from '~/components/Logo.vue'
 import SearchBar from '~/components/SearchBar/SearchBar.vue'
 import { useBewlyApp } from '~/composables/useAppProvider'
-import { useBewlyImage } from '~/composables/useImage'
 import { homePageGridLayout, settings } from '~/logic'
 import type { HomeTab } from '~/stores/mainStore'
 import { useMainStore } from '~/stores/mainStore'
@@ -14,7 +13,6 @@ import { HomeSubPage } from './types'
 
 const mainStore = useMainStore()
 const { handleBackToTop, scrollbarRef } = useBewlyApp()
-const { getBewlyImage } = useBewlyImage()
 
 const activatedPage = ref<HomeSubPage>(HomeSubPage.ForYou)
 const pages = {
@@ -149,7 +147,7 @@ function toggleTabContentLoading(loading: boolean) {
           pos="absolute left-0 top-0" w-full h-inherit bg="cover center" z-1
           pointer-events-none
           :style="{
-            backgroundImage: `url('${getBewlyImage(settings.searchPageWallpaper)}')`,
+            backgroundImage: `url('${settings.searchPageWallpaper}')`,
             backgroundAttachment: settings.searchPageModeWallpaperFixed ? 'fixed' : 'unset',
           }"
         />

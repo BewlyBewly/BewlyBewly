@@ -6,13 +6,11 @@ import Radio from '~/components/Radio.vue'
 import Select from '~/components/Select.vue'
 import Slider from '~/components/Slider.vue'
 import Tooltip from '~/components/Tooltip.vue'
-import { useBewlyImage } from '~/composables/useImage'
+import { WALLPAPERS } from '~/constants/imgs'
 import { settings } from '~/logic'
 
 import SettingsItem from './SettingsItem.vue'
 import SettingsItemGroup from './SettingsItemGroup.vue'
-
-const { wallpapers, getBewlyImage } = useBewlyImage()
 
 const { t } = useI18n()
 
@@ -159,14 +157,14 @@ function changeWallpaper(url: string) {
           >
             <div i-tabler:photo-off text="3xl $bew-text-3" />
           </picture>
-          <Tooltip v-for="item in wallpapers" :key="item.url" placement="top" :content="item.name" aspect-video>
+          <Tooltip v-for="item in WALLPAPERS" :key="item.url" placement="top" :content="item.name" aspect-video>
             <picture
               aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
               un-border="4 transparent" w-full
               :class="{ 'selected-wallpaper': settings.wallpaper === item.url }"
               @click="changeWallpaper(item.url)"
             >
-              <img :src="getBewlyImage(item.thumbnail)" alt="" w-full h-full object-cover>
+              <img :src="item.thumbnail" alt="" w-full h-full object-cover>
             </picture>
           </Tooltip>
         </div>
@@ -179,7 +177,7 @@ function changeWallpaper(url: string) {
             w="xl:1/5 lg:1/4 md:1/3"
           >
             <img
-              v-if="settings.wallpaper" :src="getBewlyImage(settings.wallpaper)" alt="" loading="lazy"
+              v-if="settings.wallpaper" :src="settings.wallpaper" alt="" loading="lazy"
               w-full h-full object-cover
               onerror="this.style.display='none'; this.onerror=null;"
             >

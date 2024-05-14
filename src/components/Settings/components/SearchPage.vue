@@ -3,19 +3,17 @@ import Input from '~/components/Input.vue'
 import Radio from '~/components/Radio.vue'
 import Slider from '~/components/Slider.vue'
 import Tooltip from '~/components/Tooltip.vue'
-import { useBewlyImage } from '~/composables/useImage'
+import { SEARCH_BAR_CHARACTERS, WALLPAPERS } from '~/constants/imgs'
 import { settings } from '~/logic'
 
 import SettingsItem from './SettingsItem.vue'
 import SettingsItemGroup from './SettingsItemGroup.vue'
 
-const { searchBarCharacters, wallpapers, getBewlyImage } = useBewlyImage()
-
 watch(() => settings.value.individuallySetSearchPageWallpaper, (newValue) => {
   if (newValue)
-    document.documentElement.style.backgroundImage = `url(${getBewlyImage(settings.value.searchPageWallpaper)})`
+    document.documentElement.style.backgroundImage = `url(${settings.value.searchPageWallpaper})`
   else
-    document.documentElement.style.backgroundImage = `url(${getBewlyImage(settings.value.wallpaper)})`
+    document.documentElement.style.backgroundImage = `url(${settings.value.wallpaper})`
 })
 
 function changeSearchBarFocusCharacter(url: string) {
@@ -90,7 +88,7 @@ function changeWallpaper(url: string) {
           >
             <div i-tabler:photo-off text="3xl $bew-text-3" />
           </picture>
-          <Tooltip v-for="item in searchBarCharacters" :key="item.url" placement="top" :content="item.name" aspect-square>
+          <Tooltip v-for="item in SEARCH_BAR_CHARACTERS" :key="item.url" placement="top" :content="item.name" aspect-square>
             <picture
               aspect-square bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
               un-border="4 transparent" w-full
@@ -98,7 +96,7 @@ function changeWallpaper(url: string) {
               @click="changeSearchBarFocusCharacter(item.url)"
             >
               <img
-                :src="getBewlyImage(item.url)" alt="" loading="lazy"
+                :src="item.url" alt="" loading="lazy"
                 w-full h-full object-contain
               >
             </picture>
@@ -152,14 +150,14 @@ function changeWallpaper(url: string) {
             >
               <div i-tabler:photo-off text="3xl $bew-text-3" />
             </picture>
-            <Tooltip v-for="item in wallpapers" :key="item.url" placement="top" :content="item.name" aspect-video>
+            <Tooltip v-for="item in WALLPAPERS" :key="item.url" placement="top" :content="item.name" aspect-video>
               <picture
                 aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
                 un-border="4 transparent" w-full
                 :class="{ 'selected-wallpaper': settings.searchPageWallpaper === item.url }"
                 @click="changeWallpaper(item.url)"
               >
-                <img :src="getBewlyImage(item.thumbnail)" alt="" w-full h-full object-cover>
+                <img :src="item.thumbnail" alt="" w-full h-full object-cover>
               </picture>
             </Tooltip>
           </div>
@@ -172,7 +170,7 @@ function changeWallpaper(url: string) {
               w="xl:1/5 lg:1/4 md:1/3"
             >
               <img
-                v-if="settings.searchPageWallpaper" :src="getBewlyImage(settings.searchPageWallpaper)" alt="" w-full h-full
+                v-if="settings.searchPageWallpaper" :src="settings.searchPageWallpaper" alt="" w-full h-full
                 object-cover onerror="this.style.display='none'; this.onerror=null;"
               >
             </picture>
