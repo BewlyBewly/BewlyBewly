@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { useThrottleFn } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 
 import Input from '~/components/Input.vue'
@@ -64,6 +65,7 @@ watch(() => settings.value.wallpaper, (newValue) => {
 function changeThemeColor(color: string) {
   settings.value.themeColor = color
 }
+const changeThemeColorThrottle = useThrottleFn((color: string) => changeThemeColor(color), 100)
 
 function changeWallpaper(url: string) {
   // If you had already set the wallpaper, it enables the wallpaper masking to prevent text hard to see
@@ -115,7 +117,7 @@ function changeWallpaper(url: string) {
               type="color"
               w-30px h-30px p-0 m-0 block
               shrink-0 rounded-8 border-none cursor-pointer
-              @input="(e) => changeThemeColor((e.target as HTMLInputElement)?.value)"
+              @input="(e) => changeThemeColorThrottle((e.target as HTMLInputElement)?.value)"
             >
           </div>
         </div>
