@@ -64,7 +64,9 @@
     .ql-snow .ql-toolbar button:focus,
     .ql-snow.ql-toolbar button:hover,
     .ql-snow .ql-toolbar button:hover,
-    .up-name.is_vip {
+    .up-name.is_vip,
+    .up-detail .up-detail-top .up-name[style*='color: rgb(251, 114, 153)'],
+    .up-detail .up-detail-top .up-name[style*='color:#FB7299;'] {
       color: var(--bew-theme-color) !important;
     }
 
