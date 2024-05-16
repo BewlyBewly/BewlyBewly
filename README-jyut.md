@@ -3,21 +3,38 @@
 [English](README.md) | [官话 - 简体中文](README-cmn_CN.md) | [官話 - 正體中文](README-cmn_TW.md) | 廣東話
 
 <p align="center" style="margin-bottom: 0px !important;">
-<img width="150" alt="bewlybewly icon" src="https://user-images.githubusercontent.com/33394391/160250512-410b71fc-7f25-4caf-b850-429227ff082a.png"><br/>
+<img width="100" alt="bewlybewly icon" src="https://user-images.githubusercontent.com/33394391/160250512-410b71fc-7f25-4caf-b850-429227ff082a.png"><br/>
 </p>
 
 <h1 align="center" style="margin-top: 0px;">BewlyBewly</h1>
 
 <p align="center">係咁以執吓你嘅 Bilibili 主頁。</p>
 
-![min1](https://github.com/hakadao/BewlyBewly/assets/33394391/951f9e2a-d0e1-452c-83a9-dc6d85c4d441)
-![min2](https://github.com/hakadao/BewlyBewly/assets/33394391/3e75dd20-f60b-4645-b434-23a24c72959c)
+<!-- ![min1](https://github.com/hakadao/BewlyBewly/assets/33394391/951f9e2a-d0e1-452c-83a9-dc6d85c4d441)
+![min2](https://github.com/hakadao/BewlyBewly/assets/33394391/3e75dd20-f60b-4645-b434-23a24c72959c) -->
 
 ## 👋 介紹
 
 BewlyBewly 係一個用於 BiliBili 嘅瀏覽器延伸功能，目的係透過重新設計 BiliBili 嘅 UI 令到用戶體驗提升。設計靈感源於 YouTube、Vision OS 同 iOS，從而實現更具視覺吸引力同用戶友好嘅介面。
 
 呢個專案係用咗 [vitesse-webext](https://github.com/antfu/vitesse-webext) 範例進行開發。若果冇咗呢個範例，BewlyBewly 得個吉。
+
+## 🔨 Build (Firefox)
+
+Please make sure you have [Node.js](https://nodejs.org/) and [pnpm](https://pnpm.io/) installed locally, and it is recommended to use [Visual Studio Code](https://code.visualstudio.com/) for development.
+
+1. To build the extension, run
+
+```bash
+# Install dependencies
+pnpm install
+
+pnpm build-firefox
+```
+
+2. Load the generated `extension-firefox/` folder in the browser, The extension will then take effect on [www.bilibili.com](https://www.bilibili.com).
+
+[Chrome & Edge](/docs/CONTRIBUTING.md#building-chrome-or-edge)
 
 ## ⬇️ 單撈
 
