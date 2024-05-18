@@ -213,7 +213,7 @@ watch(
     if (newVal === oldVal)
       return
 
-    if (newVal)
+    if (!newVal)
       getUnreadMessageCount()
   },
 )
@@ -224,7 +224,7 @@ watch(
     if (newVal === oldVal)
       return
 
-    if (newVal)
+    if (!newVal)
       await getTopBarNewMomentsCount()
   },
 )
@@ -321,7 +321,7 @@ async function getUnreadMessageCount() {
     if (res.code === 0) {
       Object.assign(unReadMessage, res.data)
       Object.entries(unReadMessage).forEach(([key, value]) => {
-        if (key !== 'up') {
+        if (key !== 'up' && key !== 'recv_reply' && key !== 'recv_like') {
           if (typeof value === 'number')
             result += value
         }
@@ -720,11 +720,11 @@ defineExpose({
                 bg="$bew-theme-color"
                 rounded-40px
                 un-text="!white !base"
-                m="x-1"
+                mx-1
                 flex="~"
                 justify="center"
-                w="xl:100px 42px"
-                h="xl:auto 42px"
+                w="xl:100px 38px"
+                h="xl:auto 38px"
                 p="xl:auto x-4"
                 shadow
                 filter="hover:brightness-110"
