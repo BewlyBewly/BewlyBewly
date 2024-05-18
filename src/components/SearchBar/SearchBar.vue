@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onKeyStroke } from '@vueuse/core'
+import DOMPurify from 'dompurify'
 
 import { useApiClient } from '~/composables/api'
 import { findLeafActiveElement } from '~/utils/element'
@@ -295,7 +296,7 @@ async function handleClearSearchHistory() {
           class="suggestion-item"
           @click="navigateToSearchResultPage(item.value)"
         >
-          <span v-html="item.name" />
+          <span v-html="DOMPurify.sanitize(item.name)" />
         </div>
       </div>
     </Transition>

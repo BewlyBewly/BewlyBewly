@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import DOMPurify from 'dompurify'
 import browser from 'webextension-polyfill'
 
 import Button from '~/components/Button.vue'
@@ -149,7 +150,7 @@ function handleExportSettings() {
           <div
             whitespace-pre-wrap lh-8 text-16.5px
             :frosted-glass="false"
-            v-html="$t('settings.just_wanna_change_the_job_desc')"
+            v-html="DOMPurify.sanitize($t('settings.just_wanna_change_the_job_desc'))"
           />
 
           <a href="mailto:hakadao2000@gmail.com" mt-2 text-16.5px color="$bew-theme-color">Gmail: hakadao2000@gmail.com</a>
