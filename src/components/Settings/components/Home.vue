@@ -148,7 +148,10 @@ function handleToggleHomeTab(tab: any) {
               background: settings.recommendationMode === 'app' ? 'var(--bew-theme-color)' : '',
               color: settings.recommendationMode === 'app' ? 'white' : '',
             }"
-            @click="settings.recommendationMode = 'app'"
+            @click="() => {
+              settings.recommendationMode = 'app'
+              handleAuthorize()
+            }"
           >
             App
           </div>
