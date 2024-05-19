@@ -10,8 +10,14 @@ import { settings } from '~/logic'
 import { version } from '../../../../package.json'
 
 const importSettingsRef = ref<HTMLElement>()
+const hasNewVersion = ref<boolean>(false)
+const flatVersionLogo = ref<boolean>(false)
 const dialogVisible = reactive({
   justWannaChangeTheJob: false,
+})
+
+onMounted(() => {
+  checkGitHubRelease()
 })
 
 function handleImportSettings() {
@@ -58,6 +64,27 @@ function handleExportSettings() {
   a.click()
   URL.revokeObjectURL(url)
 }
+
+async function checkGitHubRelease() {
+  const apiUrl = `https://api.github.com/repos/BewlyBewly/BewlyBewly/releases/latest`
+
+  try {
+    const response = await fetch(apiUrl)
+    if (!response.ok)
+      throw new Error('Network response was not ok')
+
+    const data = await response.json()
+    const latestVersion = data.tag_name
+
+    // Here you can compare `latestVersion` with your current version
+    const currentVersion = `v${version}` // Replace with your actual current version
+
+    if (latestVersion !== currentVersion)
+      hasNewVersion.value = true
+  }
+  catch {
+  }
+}
 </script>
 
 <template>
@@ -65,7 +92,28 @@ function handleExportSettings() {
     flex items-center justify-center w-full
   >
     <div flex="~ col gap-4" items-center mt-8>
-      <img :src="`${browser.runtime.getURL('/assets/icon-512.png')}`" alt="" width="80">
+      <div relative>
+        <img
+          v-show="flatVersionLogo"
+          :src="`${browser.runtime.getURL('/assets/icon-512-flat.png')}`" alt="" width="80"
+          @click="flatVersionLogo = !flatVersionLogo"
+        >
+        <img
+          v-show="!flatVersionLogo"
+          :src="`${browser.runtime.getURL('/assets/icon-512.png')}`" alt="" width="80"
+          drop-shadow-md
+          @click="flatVersionLogo = !flatVersionLogo"
+        >
+        <a
+          v-if="hasNewVersion"
+          href="https://github.com/hakadao/BewlyBewly/releases" target="_blank"
+          style="backdrop-filter: var(--bew-filter-glass);"
+          pos="absolute bottom-0 right-0" transform="translate-x-50%" un-text="xs white" p="y-1 x-2" bg="$bew-theme-color"
+          rounded-12
+        >
+          NEW
+        </a>
+      </div>
       <section text-xl>
         BewlyBewly <a href="https://github.com/hakadao/BewlyBewly/releases" target="_blank" un-text="sm color-$bew-text-2 hover:color-$bew-text-3">v{{ version }}</a>
       </section>
