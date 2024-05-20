@@ -558,10 +558,6 @@ defineExpose({ initData })
 
     <!-- no more content -->
     <Empty v-if="noMoreContent" class="pb-4" :description="$t('common.no_more_content')" />
-
-    <Transition name="fade">
-      <Loading v-if="isLoading" />
-    </Transition>
   </div>
 </template>
 
