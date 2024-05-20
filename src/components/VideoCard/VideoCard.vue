@@ -40,7 +40,7 @@ interface Video {
   capsuleText?: string
   bvid?: string
   aid?: number
-  /** After set the `url`, clicking the video will navigate to this url. it won't be affected by aid, bvid or epid */
+  /** After set the `url`, clicking the video will navigate to this url. It won't be affected by aid, bvid or epid */
   url?: string
   /** If you want to show preview video, you should set the cid value */
   cid?: number
