@@ -67,7 +67,7 @@ const api = useApiClient()
 const isClick = ref<boolean>(false)
 
 const videoUrl = computed(() => {
-  if (!isClick.value || !props.video)
+  if (props.removed || !isClick.value || !props.video)
     return undefined
 
   if (props.video.url)
@@ -246,7 +246,7 @@ function handleUndo() {
               </p>
               <Button
                 color="rgba(255,255,255,.35)" text-color="white" size="small"
-                @click="handleUndo"
+                @click.prevent="handleUndo"
               >
                 <template #left>
                   <div i-mingcute-back-line text-lg />
