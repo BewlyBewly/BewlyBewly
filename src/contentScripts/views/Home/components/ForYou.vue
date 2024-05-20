@@ -510,7 +510,6 @@ defineExpose({ initData })
             publishedTimestamp: video.item.pubdate,
             bvid: video.item.bvid,
             cid: video.item.cid,
-            url: video.item.uri,
           } : undefined"
           show-preview
           :horizontal="gridLayout !== 'adaptive'"
@@ -541,7 +540,6 @@ defineExpose({ initData })
             viewStr: video.item.cover_left_text_1,
             danmakuStr: video.item.cover_left_text_2,
             cid: video.item?.player_args?.cid,
-            url: video.item.uri,
             type: video.item.card_goto === 'bangumi' ? 'bangumi' : isVerticalVideo(video.item.uri!) ? 'vertical' : 'horizontal',
           } : undefined"
           show-preview
