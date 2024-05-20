@@ -203,44 +203,7 @@ function handleUndo() {
     <div hidden w="full" />
 
     <div v-if="!skeleton && video" mb-4>
-      <template v-if="removed">
-        <!-- pos="absolute top-0 left-0" -->
-        <!-- :style="{ contentVisibility }" -->
-        <div
-          w-full
-          aspect-video
-        >
-          <div :w="wValue" h-fit relative>
-            <img
-              :src="`${removeHttpFromUrl(video.cover)}@672w_378h_1c`" alt=""
-              w-full h-fit object-cover pos="absolute top-0 left-0" aspect-video
-              z--1 rounded="$bew-radius"
-            >
-
-            <div
-              pos="absolute top-0 left-0" w-full h-fit aspect-video flex="~ col gap-2 items-center justify-center"
-              bg="$bew-fill-4" backdrop-blur-20px mix-blend-luminosity transform-gpu rounded="$bew-radius"
-            >
-              <p mb-2 color-white text-lg>
-                {{ $t('home.video_removed') }}
-              </p>
-              <Button
-                color="rgba(255,255,255,.35)" text-color="white" size="small"
-                @click="handleUndo"
-              >
-                <template #left>
-                  <div i-mingcute-back-line text-lg />
-                </template>
-                {{ $t('common.undo') }}
-              </Button>
-            </div>
-          </div>
-        </div>
-      </template>
-      <!-- pos="absolute top-0 left-0" -->
-      <!-- :style="{ contentVisibility }" -->
       <div
-        v-else
         class="video-card group"
         w="full"
         rounded="$bew-radius" duration-300 ease-in-out
@@ -264,8 +227,36 @@ function handleUndo() {
             duration-300 ease-in-out
             group-hover:z-2
           >
+            <!-- Video cover -->
+            <img
+              :src="`${removeHttpFromUrl(video.cover)}@672w_378h_1c`"
+              loading="eager"
+              w="full" max-w-full align-middle aspect-video
+              bg="cover center"
+              rounded="$bew-radius"
+            >
+
+            <div
+              v-if="removed"
+              pos="absolute top-0 left-0" w-full h-fit aspect-video flex="~ col gap-2 items-center justify-center"
+              bg="$bew-fill-4" backdrop-blur-20px mix-blend-luminosity rounded="$bew-radius" z-2
+            >
+              <p mb-2 color-white text-lg>
+                {{ $t('home.video_removed') }}
+              </p>
+              <Button
+                color="rgba(255,255,255,.35)" text-color="white" size="small"
+                @click="handleUndo"
+              >
+                <template #left>
+                  <div i-mingcute-back-line text-lg />
+                </template>
+                {{ $t('common.undo') }}
+              </Button>
+            </div>
+
             <!-- Video preview -->
-            <Transition v-if="showPreview && settings.enableVideoPreview" name="fade">
+            <Transition v-if="!removed && showPreview && settings.enableVideoPreview" name="fade">
               <video
                 v-if="previewVideoUrl && isHover"
                 autoplay muted
@@ -277,9 +268,7 @@ function handleUndo() {
                 <source :src="previewVideoUrl" type="video/mp4">
               </video>
             </Transition>
-            <!-- <video  /> -->
-            <!-- style="--un-shadow: 0 0 0 4px var(--bew-theme-color)" -->
-            <!-- group-hover:transform="translate--4px" -->
+
             <!-- Ranking Number -->
             <div v-if="video.rank" absolute p-2 group-hover:opacity-0 duration-300>
               <div
@@ -301,63 +290,58 @@ function handleUndo() {
               </div>
             </div>
 
-            <!-- Video Duration -->
-            <div
-              v-if="video.duration || video.durationStr"
-              pos="absolute bottom-0 right-0"
-              z="2"
-              p="x-2 y-1"
-              m="1"
-              rounded="$bew-radius"
-              text="!white xs"
-              bg="black opacity-60"
-              class="group-hover:opacity-0"
-              duration-300
-            >
-              {{ video.duration ? calcCurrentTime(video.duration) : video.durationStr }}
-            </div>
+            <template v-if="!removed">
+              <!-- Video Duration -->
+              <div
+                v-if="video.duration || video.durationStr"
+                pos="absolute bottom-0 right-0"
+                z="2"
+                p="x-2 y-1"
+                m="1"
+                rounded="$bew-radius"
+                text="!white xs"
+                bg="black opacity-60"
+                class="group-hover:opacity-0"
+                duration-300
+              >
+                {{ video.duration ? calcCurrentTime(video.duration) : video.durationStr }}
+              </div>
 
-            <div
-              class="opacity-0 group-hover/cover:opacity-100"
-              transform="scale-70 group-hover/cover:scale-100"
-              duration-300
-              pos="absolute top-0 left-0" z-2
-            >
-              <slot name="coverTopLeft" />
-            </div>
+              <div
+                class="opacity-0 group-hover/cover:opacity-100"
+                transform="scale-70 group-hover/cover:scale-100"
+                duration-300
+                pos="absolute top-0 left-0" z-2
+              >
+                <slot name="coverTopLeft" />
+              </div>
 
-            <button
-              v-if="showWatcherLater"
-              pos="absolute top-0 right-0" z="2"
-              p="x-2 y-1" m="1"
-              rounded="$bew-radius"
-              text="!white xl"
-              bg="black opacity-60"
-              class="opacity-0 group-hover/cover:opacity-100"
-              transform="scale-70 group-hover/cover:scale-100"
-              duration-300
-              @click.prevent="toggleWatchLater"
-            >
-              <Tooltip v-if="!isInWatchLater" :content="$t('common.save_to_watch_later')" placement="bottom" type="dark">
-                <div i-mingcute:carplay-line />
-              </Tooltip>
-              <Tooltip v-else :content="$t('common.added')" placement="bottom" type="dark">
-                <div i-line-md:confirm />
-              </Tooltip>
-            </button>
-
-            <!-- Video cover -->
-            <img
-              :src="`${removeHttpFromUrl(video.cover)}@672w_378h_1c`"
-              loading="eager"
-              w="full" max-w-full align-middle aspect-video
-              bg="cover center"
-              rounded="$bew-radius"
-            >
+              <!-- Watcher later button -->
+              <button
+                v-if="showWatcherLater"
+                pos="absolute top-0 right-0" z="2"
+                p="x-2 y-1" m="1"
+                rounded="$bew-radius"
+                text="!white xl"
+                bg="black opacity-60"
+                class="opacity-0 group-hover/cover:opacity-100"
+                transform="scale-70 group-hover/cover:scale-100"
+                duration-300
+                @click.prevent="toggleWatchLater"
+              >
+                <Tooltip v-if="!isInWatchLater" :content="$t('common.save_to_watch_later')" placement="bottom" type="dark">
+                  <div i-mingcute:carplay-line />
+                </Tooltip>
+                <Tooltip v-else :content="$t('common.added')" placement="bottom" type="dark">
+                  <div i-line-md:confirm />
+                </Tooltip>
+              </button>
+            </template>
           </div>
 
           <!-- Other Information -->
           <div
+            v-if="!removed"
             :style="{
               width: horizontal ? '100%' : 'unset',
               marginTop: horizontal ? '0' : '1rem',
