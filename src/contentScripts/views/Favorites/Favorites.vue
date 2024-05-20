@@ -213,18 +213,22 @@ function isMusic(item: FavoriteResource) {
         <div grid="~ 2xl:cols-4 xl:cols-3 lg:cols-2 md:cols-1 gap-5" m="t-55px b-6">
           <TransitionGroup name="list">
             <VideoCard
-              v-for="item in favoriteResources" :id="item.id" :key="item.id"
-              :duration="item.duration"
-              :title="item.title"
-              :cover="item.cover"
-              :author="item.upper.name"
-              :author-face="item.upper.face"
-              :mid="item.upper.mid"
-              :view="item.cnt_info.play"
-              :danmaku="item.cnt_info.danmaku"
-              :published-timestamp="item.pubtime"
-              :bvid="isMusic(item) ? undefined : item.bvid"
-              :uri="isMusic(item) ? `https://www.bilibili.com/audio/au${item.id}` : undefined"
+              v-for="item in favoriteResources"
+              :key="item.id"
+              :video="{
+                id: item.id,
+                duration: item.duration,
+                title: item.title,
+                cover: item.cover,
+                author: item.upper.name,
+                authorFace: item.upper.face,
+                mid: item.upper.mid,
+                view: item.cnt_info.play,
+                danmaku: item.cnt_info.danmaku,
+                publishedTimestamp: item.pubtime,
+                bvid: isMusic(item) ? undefined : item.bvid,
+                url: isMusic(item) ? `https://www.bilibili.com/audio/au${item.id}` : undefined,
+              }"
               group
             >
               <template #coverTopLeft>

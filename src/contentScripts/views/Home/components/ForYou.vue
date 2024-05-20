@@ -64,6 +64,7 @@ const dislikedAppVideoUniqueKeys = ref<string[]>([])
 const showDislikeDialog = ref<boolean>(false)
 const selectedDislikeReason = ref<number>(1)
 const loadingDislikeDialog = ref<boolean>(false)
+const pageSize = 30
 
 onKeyStroke((e: KeyboardEvent) => {
   if (showDislikeDialog.value) {
@@ -150,6 +151,7 @@ async function getRecommendVideos() {
   try {
     const response: forYouResult = await api.video.getRecommendVideos({
       fresh_idx: refreshIdx.value++,
+      ps: pageSize,
     })
 
     if (!response.data) {
@@ -465,21 +467,24 @@ defineExpose({ initData })
       <template v-if="settings.recommendationMode === 'web'">
         <VideoCard
           v-for="video in videoList"
-          :id="video.id"
           :key="video.id"
-          :duration="video.duration"
-          :title="video.title"
-          :cover="video.pic"
-          :author="video.owner.name"
-          :author-face="video.owner.face"
-          :followed="!!video.is_followed"
-          :mid="video.owner.mid"
-          :view="video.stat.view"
-          :danmaku="video.stat.danmaku"
-          :published-timestamp="video.pubdate"
-          :bvid="video.bvid"
-          :cid="video.cid"
-          :uri="video.uri"
+          :skeleton="!video.title"
+          :video="{
+            id: video.id,
+            duration: video.duration,
+            title: video.title,
+            cover: video.pic,
+            author: video.owner.name,
+            authorFace: video.owner.face,
+            followed: !!video.is_followed,
+            mid: video.owner.mid,
+            view: video.stat.view,
+            danmaku: video.stat.danmaku,
+            publishedTimestamp: video.pubdate,
+            bvid: video.bvid,
+            cid: video.cid,
+            url: video.uri,
+          }"
           show-preview
           :horizontal="gridLayout !== 'adaptive'"
           more-btn
@@ -492,23 +497,26 @@ defineExpose({ initData })
       <template v-else>
         <VideoCard
           v-for="video in appVideoList"
-          :id="video.args.aid ?? 0"
-          ref="videoCardRef"
           :key="video.args.aid"
-          :duration-str="video.cover_right_text"
-          :title="`${video.title}`"
-          :cover="`${video.cover}`"
-          :author="video?.mask?.avatar.text"
-          :author-face="video?.mask?.avatar.cover"
-          :followed="video?.bottom_rcmd_reason === '已关注' || video?.bottom_rcmd_reason === '已關注'"
-          :mid="video?.mask?.avatar.up_id "
-          :capsule-text="video?.desc?.split('·')[1]"
-          :bvid="video.bvid"
-          :view-str="video.cover_left_text_1"
-          :danmaku-str="video.cover_left_text_2"
-          :cid="video?.player_args?.cid"
-          :uri="video.uri"
-          :type="video.card_goto === 'bangumi' ? 'bangumi' : isVerticalVideo(video.uri!) ? 'vertical' : 'horizontal'"
+          ref="videoCardRef"
+          :skeleton="!video"
+          :video="{
+            id: video.args.aid ?? 0,
+            durationStr: video.cover_right_text,
+            title: `${video.title}`,
+            cover: `${video.cover}`,
+            author: video?.mask?.avatar.text,
+            authorFace: video?.mask?.avatar.cover,
+            followed: video?.bottom_rcmd_reason === '已关注' || video?.bottom_rcmd_reason === '已關注',
+            mid: video?.mask?.avatar.up_id,
+            capsuleText: video?.desc?.split('·')[1],
+            bvid: video.bvid,
+            viewStr: video.cover_left_text_1,
+            danmakuStr: video.cover_left_text_2,
+            cid: video?.player_args?.cid,
+            url: video.uri,
+            type: video.card_goto === 'bangumi' ? 'bangumi' : isVerticalVideo(video.uri!) ? 'vertical' : 'horizontal',
+          }"
           show-preview
           :horizontal="gridLayout !== 'adaptive'"
           more-btn

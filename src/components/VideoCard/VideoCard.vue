@@ -7,8 +7,20 @@ import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils/dataFormat
 import { getCSRF, removeHttpFromUrl } from '~/utils/main'
 
 import Tooltip from '../Tooltip.vue'
+import VideoCardSkeleton from './VideoCardSkeleton.vue'
 
 interface Props {
+  skeleton?: boolean
+  video?: Video
+  showWatcherLater?: boolean
+  horizontal?: boolean
+  showPreview?: boolean
+  moreBtn?: boolean
+  moreBtnActive?: boolean
+  removed?: boolean
+}
+
+interface Video {
   id: number
   duration?: number
   durationStr?: string
@@ -17,7 +29,7 @@ interface Props {
   cover: string
   author?: string
   authorFace?: string
-  /** If you set the `authorUrl`, clicking the author's name or avatar will navigate to this url  */
+  /** After set the `authorUrl`, clicking the author's name or avatar will navigate to this url. It won't be affected by mid */
   authorUrl?: string
   mid?: number
   view?: number
@@ -28,25 +40,19 @@ interface Props {
   capsuleText?: string
   bvid?: string
   aid?: number
-  uri?: string
+  /** After set the `url`, clicking the video will navigate to this url. It won't be affected by aid, bvid or epid */
+  url?: string
   /** If you want to show preview video, you should set the cid value */
   cid?: number
   epid?: number
   followed?: boolean
-  horizontal?: boolean
   tag?: string
   rank?: number
-  topRightContent?: boolean
-  showPreview?: boolean
-  moreBtn?: boolean
-  moreBtnActive?: boolean
-  removed?: boolean
   type?: 'horizontal' | 'vertical' | 'bangumi'
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  topRightContent: true,
-  type: 'horizontal',
+  showWatcherLater: true,
 })
 
 const emit = defineEmits<{
@@ -61,23 +67,27 @@ const api = useApiClient()
 const isClick = ref<boolean>(false)
 
 const videoUrl = computed(() => {
-  if (!isClick.value)
+  if (!isClick.value || !props.video)
     return undefined
-  if (props.bvid || props.aid)
-    return `https://www.bilibili.com/video/${props.bvid ?? `av${props.aid}`}`
-  else if (props.epid)
-    return `https://www.bilibili.com/bangumi/play/ep${props.epid}`
-  else if (props.uri)
-    return props.uri
+
+  if (props.video.url)
+    return props.video.url
+  else if (props.video.bvid || props.video.aid)
+    return `https://www.bilibili.com/video/${props.video.bvid ?? `av${props.video.aid}`}`
+  else if (props.video.epid)
+    return `https://www.bilibili.com/bangumi/play/ep${props.video.epid}`
   else
     return ''
 })
 
 const authorJumpUrl = computed(() => {
-  if (props.authorUrl)
-    return props.authorUrl
-  else if (props.mid)
-    return `//space.bilibili.com/${props.mid}`
+  if (!props.video)
+    return
+
+  if (props.video.authorUrl)
+    return props.video.authorUrl
+  else if (props.video.mid)
+    return `//space.bilibili.com/${props.video.mid}`
   else
     return ''
 })
@@ -97,11 +107,14 @@ const mouseLeaveTimeOut = ref()
 const previewVideoUrl = ref<string>('')
 
 watch(() => isHover.value, (newValue) => {
+  if (!props.video)
+    return
+
   if (props.showPreview && settings.value.enableVideoPreview) {
-    if (newValue && !previewVideoUrl.value && props.cid) {
+    if (newValue && !previewVideoUrl.value && props.video.cid) {
       api.video.getVideoPreview({
-        bvid: props.bvid,
-        cid: props.cid,
+        bvid: props.video.bvid,
+        cid: props.video.cid,
       }).then((res: VideoPreviewResult) => {
         if (res.code === 0)
           previewVideoUrl.value = res.data.durl[0].url
@@ -111,9 +124,12 @@ watch(() => isHover.value, (newValue) => {
 })
 
 function toggleWatchLater() {
+  if (!props.video)
+    return
+
   if (!isInWatchLater.value) {
     api.watchlater.saveToWatchLater({
-      aid: props.id,
+      aid: props.video.id,
       csrf: getCSRF(),
     })
       .then((res) => {
@@ -123,7 +139,7 @@ function toggleWatchLater() {
   }
   else {
     api.watchlater.removeFromWatchLater({
-      aid: props.id,
+      aid: props.video.id,
       csrf: getCSRF(),
     })
       .then((res) => {
@@ -185,7 +201,7 @@ function handleUndo() {
     <div hidden w="xl:280px lg:250px md:200px 200px" />
     <div hidden w="full" />
 
-    <template v-if="removed">
+    <template v-if="video && removed">
       <div
         :style="{ contentVisibility }"
         w-full
@@ -193,7 +209,7 @@ function handleUndo() {
       >
         <div :w="wValue" h-fit relative>
           <img
-            :src="`${removeHttpFromUrl(cover)}@672w_378h_1c`" alt=""
+            :src="`${removeHttpFromUrl(video.cover)}@672w_378h_1c`" alt=""
             w-full h-fit object-cover pos="absolute top-0 left-0" aspect-video
             z--1 rounded="$bew-radius"
           >
@@ -219,7 +235,7 @@ function handleUndo() {
       </div>
     </template>
     <div
-      v-else
+      v-else-if="video"
       class="video-card group"
       w="full" pos="absolute top-0 left-0"
       rounded="$bew-radius" duration-300 ease-in-out
@@ -261,15 +277,15 @@ function handleUndo() {
           <!-- style="--un-shadow: 0 0 0 4px var(--bew-theme-color)" -->
           <!-- group-hover:transform="translate--4px" -->
           <!-- Ranking Number -->
-          <div v-if="rank" absolute p-2 group-hover:opacity-0 duration-300>
+          <div v-if="video.rank" absolute p-2 group-hover:opacity-0 duration-300>
             <div
-              v-if="Number(rank) <= 3"
+              v-if="Number(video.rank) <= 3"
               bg="$bew-theme-color" text-center lh-30px h-30px w-30px
               text-white rounded="1/2" shadow="$bew-shadow-1"
               border="1 $bew-theme-color"
               text="2xl" fw-bold
             >
-              {{ rank }}
+              {{ video.rank }}
             </div>
             <div
               v-else
@@ -277,13 +293,13 @@ function handleUndo() {
               rounded="1/2" shadow="$bew-shadow-1"
               border="1 $bew-border-color"
             >
-              {{ rank }}
+              {{ video.rank }}
             </div>
           </div>
 
           <!-- Video Duration -->
           <div
-            v-if="duration || durationStr"
+            v-if="video.duration || video.durationStr"
             pos="absolute bottom-0 right-0"
             z="2"
             p="x-2 y-1"
@@ -294,7 +310,7 @@ function handleUndo() {
             class="group-hover:opacity-0"
             duration-300
           >
-            {{ duration ? calcCurrentTime(duration) : durationStr }}
+            {{ video.duration ? calcCurrentTime(video.duration) : video.durationStr }}
           </div>
 
           <div
@@ -307,7 +323,7 @@ function handleUndo() {
           </div>
 
           <button
-            v-if="topRightContent"
+            v-if="showWatcherLater"
             pos="absolute top-0 right-0" z="2"
             p="x-2 y-1" m="1"
             rounded="$bew-radius"
@@ -328,7 +344,7 @@ function handleUndo() {
 
           <!-- Video cover -->
           <img
-            :src="`${removeHttpFromUrl(cover)}@672w_378h_1c`"
+            :src="`${removeHttpFromUrl(video.cover)}@672w_378h_1c`"
             loading="lazy"
             w="full" max-w-full align-middle aspect-video
             bg="cover center"
@@ -347,7 +363,7 @@ function handleUndo() {
           <!-- Author Avatar -->
           <div v-if="!horizontal" flex>
             <a
-              v-if="authorFace"
+              v-if="video.authorFace"
               :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
               m="r-4" w="36px" h="36px" rounded="1/2"
               object="center cover" bg="$bew-fill-4" cursor="pointer"
@@ -356,13 +372,13 @@ function handleUndo() {
             >
               <img
                 rounded="1/2"
-                :src="`${removeHttpFromUrl(authorFace)}@50w_50h_1c`"
+                :src="`${removeHttpFromUrl(video.authorFace)}@50w_50h_1c`"
                 width="36"
                 height="36"
                 loading="lazy"
               >
               <div
-                v-if="followed"
+                v-if="video.followed"
                 pos="absolute bottom--2px right--2px"
                 w-14px h-14px
                 bg="$bew-theme-color"
@@ -380,8 +396,8 @@ function handleUndo() {
                 text="lg overflow-ellipsis $bew-text-1"
                 cursor="pointer"
               >
-                <a :href="videoUrl" target="_blank" :title="title" rel="noopener noreferrer">
-                  {{ title }}
+                <a :href="videoUrl" target="_blank" :title="video.title" rel="noopener noreferrer">
+                  {{ video.title }}
                 </a>
               </h3>
 
@@ -402,21 +418,21 @@ function handleUndo() {
               <span flex="inline items-center">
                 <div v-if="horizontal" flex mb-2>
                   <a
-                    v-if="authorFace"
+                    v-if="video.authorFace"
                     :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
                     m="r-2" w="30px" h="30px" rounded="1/2"
                     object="center cover" bg="$bew-fill-4" cursor="pointer" relative
                     @click.stop=""
                   >
                     <img
-                      :src="`${removeHttpFromUrl(authorFace)}@50w_50h_1c`"
+                      :src="`${removeHttpFromUrl(video.authorFace)}@50w_50h_1c`"
                       width="30"
                       height="30"
                       loading="lazy"
                       object-cover rounded="1/2"
                     >
                     <div
-                      v-if="followed"
+                      v-if="video.followed"
                       pos="absolute bottom--2px right--2px"
                       w-14px h-14px
                       bg="$bew-theme-color"
@@ -429,14 +445,14 @@ function handleUndo() {
                 </div>
 
                 <a
-                  v-if="author"
+                  v-if="video.author"
                   class="channel-name"
                   un-text="hover:$bew-text-1"
                   cursor-pointer mr-4
                   :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
                   @click.stop=""
                 >
-                  <span>{{ author }}</span>
+                  <span>{{ video.author }}</span>
                 </a>
               </span>
             </div>
@@ -447,12 +463,12 @@ function handleUndo() {
                 text="$bew-text-2" rounded="$bew-radius"
                 inline-block
               >
-                <span v-if="view || viewStr">
-                  {{ view ? $t('common.view', { count: numFormatter(view) }, view) : `${viewStr}${$t('common.viewWithoutNum')}` }}
+                <span v-if="video.view || video.viewStr">
+                  {{ video.view ? $t('common.view', { count: numFormatter(video.view) }, video.view) : `${video.viewStr}${$t('common.viewWithoutNum')}` }}
                 </span>
-                <template v-if="danmaku || danmakuStr">
+                <template v-if="video.danmaku || video.danmakuStr">
                   <span text-xs font-light mx-4px>•</span>
-                  <span>{{ danmaku ? $t('common.danmaku', { count: numFormatter(danmaku) }, danmaku) : `${danmakuStr}${$t('common.danmakuWithoutNum')}` }}</span>
+                  <span>{{ video.danmaku ? $t('common.danmaku', { count: numFormatter(video.danmaku) }, video.danmaku) : `${video.danmakuStr}${$t('common.danmakuWithoutNum')}` }}</span>
                 </template>
                 <br>
               </div>
@@ -460,22 +476,22 @@ function handleUndo() {
             <div mt-2 flex="~ gap-1">
               <!-- Tag -->
               <span
-                v-if="tag"
+                v-if="video.tag"
                 text="$bew-theme-color sm" lh-6 p="x-2" rounded="$bew-radius" bg="$bew-theme-color-20"
               >
-                {{ tag }}
+                {{ video.tag }}
               </span>
               <span
-                v-if="publishedTimestamp || capsuleText"
+                v-if="video.publishedTimestamp || video.capsuleText"
                 bg="$bew-fill-1" p="x-2" rounded="$bew-radius" text="sm $bew-text-3" lh-6
                 mr-1
               >
-                {{ publishedTimestamp ? calcTimeSince(publishedTimestamp * 1000) : capsuleText?.trim() }}
+                {{ video.publishedTimestamp ? calcTimeSince(video.publishedTimestamp * 1000) : video.capsuleText?.trim() }}
               </span>
               <!-- Video type -->
               <span text="$bew-text-2" grid="~ place-items-center">
-                <div v-if="type === 'vertical'" i-mingcute:cellphone-2-line />
-                <div v-else-if="type === 'bangumi'" i-mingcute:movie-line />
+                <div v-if="video.type === 'vertical'" i-mingcute:cellphone-2-line />
+                <div v-else-if="video.type === 'bangumi'" i-mingcute:movie-line />
               </span>
             </div>
           </div>
@@ -484,68 +500,12 @@ function handleUndo() {
     </div>
 
     <!-- skeleton -->
-    <template v-if="!horizontal">
-      <div
-        block mb-4 pointer-events-none select-none invisible
-      >
-        <!-- Cover -->
-        <div w-full shrink-0 aspect-video h-fit rounded="$bew-radius" />
-        <!-- Other Information -->
-        <div
-          mt-4 flex="~ gap-4"
-        >
-          <div
-            block w="36px" h="36px" rounded="1/2" shrink-0
-          />
-          <div w-full>
-            <div grid gap-2>
-              <div w-full h-5 />
-              <div w="3/4" h-5 />
-            </div>
-            <div grid gap-2 mt-4>
-              <div w="40%" h-4 />
-              <div w="80%" h-4 />
-            </div>
-            <div mt-2 flex>
-              <div text="transparent sm" inline-block p="x-2" h-7 rounded-4>
-                hello world
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </template>
-    <template v-else>
-      <div
-        flex="~ gap-6"
-        mb-4 pointer-events-none select-none invisible
-      >
-        <!-- Cover -->
-        <div
-          :w="wValue"
-          shrink-0 aspect-video h-fit rounded="$bew-radius"
-        />
-        <!-- Other Information -->
-        <div
-          w-full flex="~ gap-4"
-        >
-          <div w-full>
-            <div grid gap-2>
-              <div w-full h-5 />
-              <div w="3/4" h-5 />
-            </div>
-            <div grid gap-2 mt-4>
-              <div w="70%" h-4 />
-            </div>
-            <div mt-4 flex>
-              <div text="transparent sm" inline-block p="x-2" h-7 rounded-4>
-                hello world
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </template>
+    <VideoCardSkeleton
+      :style="{
+        opacity: skeleton ? 1 : 0,
+      }"
+      :horizontal="horizontal"
+    />
   </div>
 </template>
 
