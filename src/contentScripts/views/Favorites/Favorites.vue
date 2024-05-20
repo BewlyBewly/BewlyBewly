@@ -227,7 +227,7 @@ function isMusic(item: FavoriteResource) {
                 danmaku: item.cnt_info.danmaku,
                 publishedTimestamp: item.pubtime,
                 bvid: isMusic(item) ? undefined : item.bvid,
-                uri: isMusic(item) ? `https://www.bilibili.com/audio/au${item.id}` : undefined,
+                url: isMusic(item) ? `https://www.bilibili.com/audio/au${item.id}` : undefined,
               }"
               group
             >

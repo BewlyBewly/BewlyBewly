@@ -483,7 +483,7 @@ defineExpose({ initData })
             publishedTimestamp: video.pubdate,
             bvid: video.bvid,
             cid: video.cid,
-            uri: video.uri,
+            url: video.uri,
           }"
           show-preview
           :horizontal="gridLayout !== 'adaptive'"
@@ -514,7 +514,7 @@ defineExpose({ initData })
             viewStr: video.cover_left_text_1,
             danmakuStr: video.cover_left_text_2,
             cid: video?.player_args?.cid,
-            uri: video.uri,
+            url: video.uri,
             type: video.card_goto === 'bangumi' ? 'bangumi' : isVerticalVideo(video.uri!) ? 'vertical' : 'horizontal',
           }"
           show-preview

@@ -29,7 +29,7 @@ interface Video {
   cover: string
   author?: string
   authorFace?: string
-  /** If you set the `authorUrl`, clicking the author's name or avatar will navigate to this url  */
+  /** After set the `authorUrl`, clicking the author's name or avatar will navigate to this url. It won't be affected by mid */
   authorUrl?: string
   mid?: number
   view?: number
@@ -40,7 +40,8 @@ interface Video {
   capsuleText?: string
   bvid?: string
   aid?: number
-  uri?: string
+  /** After set the `url`, clicking the video will navigate to this url. it won't be affected by aid, bvid or epid */
+  url?: string
   /** If you want to show preview video, you should set the cid value */
   cid?: number
   epid?: number
@@ -68,12 +69,13 @@ const isClick = ref<boolean>(false)
 const videoUrl = computed(() => {
   if (!isClick.value || !props.video)
     return undefined
-  if (props.video.bvid || props.video.aid)
+
+  if (props.video.url)
+    return props.video.url
+  else if (props.video.bvid || props.video.aid)
     return `https://www.bilibili.com/video/${props.video.bvid ?? `av${props.video.aid}`}`
   else if (props.video.epid)
     return `https://www.bilibili.com/bangumi/play/ep${props.video.epid}`
-  else if (props.video.uri)
-    return props.video.uri
   else
     return ''
 })
