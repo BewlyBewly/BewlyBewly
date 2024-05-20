@@ -159,18 +159,20 @@ defineExpose({ initData })
     >
       <VideoCard
         v-for="video in videoList"
-        :id="Number(video.modules.module_dynamic.major.archive?.aid)"
         :key="video.modules.module_dynamic.major.archive?.aid"
-        :duration-str="video.modules.module_dynamic.major.archive?.duration_text"
-        :title="`${video.modules.module_dynamic.major.archive?.title}`"
-        :cover="`${video.modules.module_dynamic.major.archive?.cover}`"
-        :author="video.modules.module_author.name"
-        :author-face="video.modules.module_author.face"
-        :mid="video.modules.module_author.mid"
-        :view-str="video.modules.module_dynamic.major.archive?.stat.play"
-        :danmaku-str="video.modules.module_dynamic.major.archive?.stat.danmaku"
-        :capsule-text="video.modules.module_author.pub_time"
-        :bvid="video.modules.module_dynamic.major.archive?.bvid"
+        :video="{
+          id: Number(video.modules.module_dynamic.major.archive?.aid),
+          durationStr: video.modules.module_dynamic.major.archive?.duration_text,
+          title: `${video.modules.module_dynamic.major.archive?.title}`,
+          cover: `${video.modules.module_dynamic.major.archive?.cover}`,
+          author: video.modules.module_author.name,
+          authorFace: video.modules.module_author.face,
+          mid: video.modules.module_author.mid,
+          viewStr: video.modules.module_dynamic.major.archive?.stat.play,
+          danmakuStr: video.modules.module_dynamic.major.archive?.stat.danmaku,
+          capsuleText: video.modules.module_author.pub_time,
+          bvid: video.modules.module_dynamic.major.archive?.bvid,
+        }"
         show-preview
         :horizontal="gridLayout !== 'adaptive'"
       />

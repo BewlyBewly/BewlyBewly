@@ -161,19 +161,21 @@ defineExpose({ initData })
     >
       <VideoCard
         v-for="moment in momentList"
-        :id="moment.modules.module_author.mid"
         :key="moment.modules.module_author.mid"
-        :top-right-content="false"
-        :title="`${moment.modules.module_dynamic.major.pgc?.title}`"
-        :cover="`${moment.modules.module_dynamic.major.pgc?.cover}`"
-        :author="moment.modules.module_author.name"
-        :author-face="moment.modules.module_author.face"
-        :mid="moment.modules.module_author.mid"
-        :author-url="moment.modules.module_author.jump_url"
-        :view-str="moment.modules.module_dynamic.major.pgc?.stat.play"
-        :danmaku-str="moment.modules.module_dynamic.major.pgc?.stat.danmaku"
-        :capsule-text="moment.modules.module_author.pub_time"
-        :epid="moment.modules.module_dynamic.major.pgc?.epid"
+        :video="{
+          id: moment.modules.module_author.mid,
+          title: `${moment.modules.module_dynamic.major.pgc?.title}`,
+          cover: `${moment.modules.module_dynamic.major.pgc?.cover}`,
+          author: moment.modules.module_author.name,
+          authorFace: moment.modules.module_author.face,
+          mid: moment.modules.module_author.mid,
+          authorUrl: moment.modules.module_author.jump_url,
+          viewStr: moment.modules.module_dynamic.major.pgc?.stat.play,
+          danmakuStr: moment.modules.module_dynamic.major.pgc?.stat.danmaku,
+          capsuleText: moment.modules.module_author.pub_time,
+          epid: moment.modules.module_dynamic.major.pgc?.epid,
+        }"
+        :show-watcher-later="false"
         :horizontal="gridLayout !== 'adaptive'"
       />
 
