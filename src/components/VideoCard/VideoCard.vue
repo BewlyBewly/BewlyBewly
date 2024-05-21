@@ -155,8 +155,10 @@ function handleMouseEnter() {
     }, 1200)
   }
   else {
-    isHover.value = true
-    clearTimeout(mouseLeaveTimeOut.value)
+    mouseEnterTimeOut.value = setTimeout(() => {
+      isHover.value = true
+      clearTimeout(mouseLeaveTimeOut.value)
+    }, 500)
   }
 }
 
