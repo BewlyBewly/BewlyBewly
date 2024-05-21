@@ -189,6 +189,10 @@ function handleUndo() {
 <template>
   <div
     content-visibility-auto intrinsic-size-320px
+    duration-300 ease-in-out
+    rounded="$bew-radius"
+    ring="hover:6 hover:$bew-fill-2 active:6 active:$bew-fill-3"
+    bg="hover:$bew-fill-2 active:$bew-fill-3"
   >
     <!-- By directly using predefined unocss width properties, it is possible to dynamically set the width attribute -->
     <div hidden w="xl:280px lg:250px md:200px 200px" />
