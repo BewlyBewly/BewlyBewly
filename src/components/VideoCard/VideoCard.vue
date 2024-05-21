@@ -106,19 +106,18 @@ const mouseLeaveTimeOut = ref()
 const previewVideoUrl = ref<string>('')
 
 watch(() => isHover.value, (newValue) => {
-  if (!props.video)
+  if (!props.video || !newValue)
     return
 
-  if (props.showPreview && settings.value.enableVideoPreview) {
-    if (newValue && !previewVideoUrl.value && props.video.cid) {
-      api.video.getVideoPreview({
-        bvid: props.video.bvid,
-        cid: props.video.cid,
-      }).then((res: VideoPreviewResult) => {
-        if (res.code === 0)
-          previewVideoUrl.value = res.data.durl[0].url
-      })
-    }
+  if (props.showPreview && settings.value.enableVideoPreview
+    && !previewVideoUrl.value && props.video.cid) {
+    api.video.getVideoPreview({
+      bvid: props.video.bvid,
+      cid: props.video.cid,
+    }).then((res: VideoPreviewResult) => {
+      if (res.code === 0)
+        previewVideoUrl.value = res.data.durl[0].url
+    })
   }
 })
 
@@ -189,8 +188,7 @@ function handleUndo() {
 
 <template>
   <div
-    relative
-    content-visibility-auto intrinsic-size-300px
+    content-visibility-auto intrinsic-size-320px
   >
     <!-- By directly using predefined unocss width properties, it is possible to dynamically set the width attribute -->
     <div hidden w="xl:280px lg:250px md:200px 200px" />
@@ -218,7 +216,6 @@ function handleUndo() {
             shrink-0
             :w="wValue" h-fit relative bg="$bew-fill-4" rounded="$bew-radius"
             cursor-pointer
-            duration-300 ease-in-out
             group-hover:z-2
           >
             <!-- Video cover -->
