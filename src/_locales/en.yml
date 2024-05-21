@@ -322,6 +322,9 @@ history:
   turn_on_watch_history_confirm: Turn on watch history? Are you sure you want to turn on watch history?
 favorites:
   unfavorite: Unfavorite
+  unfavorite_confirm: |-
+    Remove selected video(s)?
+    This operation cannot be reversed. Are you sure you want to remove the selected video(s) from your favorites?
 watch_later:
   title: Watch Later
   clear_all: Clear all watch later

@@ -164,14 +164,19 @@ function jumpToLoginPage() {
 }
 
 function handleUnfavorite(favoriteResource: FavoriteResource) {
-  api.favorite.patchDelFavoriteResources({
-    resources: `${favoriteResource.id}:${favoriteResource.type}`,
-    media_id: selectedCategory.value?.id,
-    csrf: getCSRF(),
-  }).then((res) => {
-    if (res.code === 0)
-      favoriteResources.splice(favoriteResources.indexOf(favoriteResource as FavoriteItem), 1)
-  })
+  const result = confirm(
+    t('favorites.unfavorite_confirm'),
+  )
+  if (result) {
+    api.favorite.patchDelFavoriteResources({
+      resources: `${favoriteResource.id}:${favoriteResource.type}`,
+      media_id: selectedCategory.value?.id,
+      csrf: getCSRF(),
+    }).then((res) => {
+      if (res.code === 0)
+        favoriteResources.splice(favoriteResources.indexOf(favoriteResource as FavoriteItem), 1)
+    })
+  }
 }
 
 function isMusic(item: FavoriteResource) {

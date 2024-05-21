@@ -323,6 +323,9 @@ history:
     你确定要开启观看历史吗？
 favorites:
   unfavorite: 取消收藏
+  unfavorite_confirm: |-
+    要取消收藏选中的视频吗？
+    该操作无法撤销，你确定要取消收藏选中的视频吗？
 watch_later:
   title: 稍后再看
   clear_all: 清空稍后再看

@@ -326,6 +326,9 @@ history:
     你確定要啟用觀看記錄嗎？
 favorites:
   unfavorite: 取消收藏
+  unfavorite_confirm: |-
+    要取消收藏選中的影片嗎？
+    此操作無法撤消，你確定要取消收藏選中的影片嗎？
 watch_later:
   title: 稍後觀看
   clear_all: 清空稍後觀看

@@ -325,7 +325,10 @@ history:
     係咪要開返收睇記錄呀？
     你確定要開返收睇記錄？
 favorites:
-  unfavorite: 唔再愛喇
+  unfavorite: 唔愛喇
+  unfavorite_confirm: |-
+    係咪要剷走你揀過啲片呀？
+    噉做冇得返轉頭噃，你確定要剷走你揀過啲片？
 watch_later:
   title: 陣間至睇
   clear_all: 剷曬陣間至睇啲片
