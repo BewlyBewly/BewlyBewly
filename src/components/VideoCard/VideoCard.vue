@@ -225,7 +225,7 @@ function handleUndo() {
             <!-- Video cover -->
             <img
               :src="`${removeHttpFromUrl(video.cover)}@672w_378h_1c`"
-              loading="lazy"
+              loading="eager"
               w="full" max-w-full align-middle aspect-video
               bg="cover center"
               rounded="$bew-radius"
@@ -358,7 +358,7 @@ function handleUndo() {
                   :src="`${removeHttpFromUrl(video.authorFace)}@50w_50h_1c`"
                   width="36"
                   height="36"
-                  loading="lazy"
+                  loading="eager"
                 >
                 <div
                   v-if="video.followed"
@@ -411,7 +411,7 @@ function handleUndo() {
                         :src="`${removeHttpFromUrl(video.authorFace)}@50w_50h_1c`"
                         width="30"
                         height="30"
-                        loading="lazy"
+                        loading="eager"
                         object-cover rounded="1/2"
                       >
                       <div
