@@ -198,8 +198,7 @@ function handleUndo() {
       <div
         class="video-card group"
         w="full"
-        rounded="$bew-radius" duration-300 ease-in-out
-        bg="hover:$bew-fill-2 active:$bew-fill-3"
+        rounded="$bew-radius"
       >
         <a
           :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }"
