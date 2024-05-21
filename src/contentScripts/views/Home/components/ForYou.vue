@@ -160,7 +160,9 @@ async function getRecommendVideos() {
   try {
     let i = 0
     // https://github.com/starknt/BewlyBewly/blob/fad999c2e482095dc3840bb291af53d15ff44130/src/contentScripts/views/Home/components/ForYou.vue#L208
-    const pendingVideos: VideoElement[] = Array.from({ length: pageSize }, () => ({
+    // When video list is not empty, addthe number of pending videos is half of the page size
+    // is set to prevent user scrolling the page too fast and causing the page too laggy
+    const pendingVideos: VideoElement[] = Array.from({ length: videoList.value.length ? pageSize / 2 : pageSize }, () => ({
       uniqueId: `unique-id-${(videoList.value.length || 0) + i++})}`,
     } satisfies VideoElement))
     let lastVideoListLength = videoList.value.length
@@ -215,9 +217,10 @@ async function getAppRecommendVideos() {
   try {
     let i = 0
     // https://github.com/starknt/BewlyBewly/blob/fad999c2e482095dc3840bb291af53d15ff44130/src/contentScripts/views/Home/components/ForYou.vue#L208
-    // Since the video list in app recommendation mode will filter the ad cards,
-    // the length is uncertain. Therefore, set the length to 15 to ensure an approximate number.
-    const pendingVideos: AppVideoElement[] = Array.from({ length: 15 }, () => ({
+    // When video list is not empty, there will be approximately 10 pending videos
+    // due to the app recommendation filtering ad cards.
+    // To prevent user scrolling the page too fast and causing the page too laggy
+    const pendingVideos: AppVideoElement[] = Array.from({ length: appVideoList.value.length ? 10 : pageSize }, () => ({
       uniqueId: `unique-id-${(appVideoList.value.length || 0) + i++})}`,
     } satisfies AppVideoElement))
     let lastVideoListLength = appVideoList.value.length
@@ -257,10 +260,10 @@ async function getAppRecommendVideos() {
       needToLoginFirst.value = true
     }
   }
-  catch {
-    appVideoList.value = appVideoList.value.filter(video => video.item)
-  }
   finally {
+    // Since the video list in app recommendation mode will filter the ad cards,
+    // after loading, the video list will be filtered again to remove the empty cards
+    appVideoList.value = appVideoList.value.filter(video => video.item)
     isLoading.value = false
     emit('afterLoading')
   }
@@ -570,6 +573,10 @@ defineExpose({ initData })
 
     <!-- no more content -->
     <Empty v-if="noMoreContent" class="pb-4" :description="$t('common.no_more_content')" />
+
+    <!-- <Transition name="fade">
+      <Loading v-show="isLoading" />
+    </Transition> -->
   </div>
 </template>
 
