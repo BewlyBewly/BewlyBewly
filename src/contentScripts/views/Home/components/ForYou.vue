@@ -161,8 +161,8 @@ async function getRecommendVideos() {
     // https://github.com/starknt/BewlyBewly/blob/fad999c2e482095dc3840bb291af53d15ff44130/src/contentScripts/views/Home/components/ForYou.vue#L208
     const pendingVideos: VideoElement[] = Array.from({ length: pageSize }, () => ({
       uniqueId: `unique-id-${Number(Date.now())})}`,
-      // item: null,
     } satisfies VideoElement))
+    let lastVideoListLength = videoList.value.length
     videoList.value.push(...pendingVideos)
 
     const response: forYouResult = await api.video.getRecommendVideos({
@@ -188,16 +188,22 @@ async function getRecommendVideos() {
       }
       else {
         // else we concat the new data to the old data
-        videoList.value.push(...resData.map(item => ({ uniqueId: `${item.id}`, item })))
+        resData.forEach((item) => {
+          videoList.value[lastVideoListLength++] = {
+            uniqueId: `${item.id}`,
+            item,
+          }
+        })
       }
     }
     else if (response.code === 62011) {
       needToLoginFirst.value = true
     }
   }
-  finally {
-    // Only remain the video items that have a value
+  catch {
     videoList.value = videoList.value.filter(video => video.item)
+  }
+  finally {
     isLoading.value = false
     emit('afterLoading')
   }
@@ -208,9 +214,12 @@ async function getAppRecommendVideos() {
   isLoading.value = true
   try {
     // https://github.com/starknt/BewlyBewly/blob/fad999c2e482095dc3840bb291af53d15ff44130/src/contentScripts/views/Home/components/ForYou.vue#L208
-    const pendingVideos: AppVideoElement[] = Array.from({ length: pageSize }, () => ({
+    // Since the video list in app recommendation mode will filter the ad cards,
+    // the length is uncertain. Therefore, set the length to 10 to ensure an approximate number.
+    const pendingVideos: AppVideoElement[] = Array.from({ length: 10 }, () => ({
       uniqueId: `unique-id-${Number(Date.now())}`,
     } satisfies AppVideoElement))
+    let lastVideoListLength = appVideoList.value.length
     appVideoList.value.push(...pendingVideos)
 
     const response: AppForYouResult = await api.video.getAppRecommendVideos({
@@ -236,16 +245,22 @@ async function getAppRecommendVideos() {
       }
       else {
         // else we concat the new data to the old data
-        appVideoList.value.push(...resData.map(item => ({ uniqueId: `${item.idx}`, item })))
+        resData.forEach((item) => {
+          appVideoList.value[lastVideoListLength++] = {
+            uniqueId: `${item.idx}`,
+            item,
+          }
+        })
       }
     }
     else if (response.code === 62011) {
       needToLoginFirst.value = true
     }
   }
-  finally {
-    // Only remain the video items that have a value
+  catch {
     appVideoList.value = appVideoList.value.filter(video => video.item)
+  }
+  finally {
     isLoading.value = false
     emit('afterLoading')
   }
