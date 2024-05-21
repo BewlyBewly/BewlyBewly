@@ -101,7 +101,6 @@ const wValue = computed((): string => {
 
 const isInWatchLater = ref<boolean>(false)
 const isHover = ref<boolean>(false)
-const contentVisibility = ref<'auto' | 'visible'>('auto')
 const mouseEnterTimeOut = ref()
 const mouseLeaveTimeOut = ref()
 const previewVideoUrl = ref<string>('')
@@ -154,13 +153,11 @@ function handleMouseEnter() {
     mouseEnterTimeOut.value = setTimeout(() => {
       isHover.value = true
       clearTimeout(mouseLeaveTimeOut.value)
-      contentVisibility.value = 'visible'
     }, 1200)
   }
   else {
     isHover.value = true
     clearTimeout(mouseLeaveTimeOut.value)
-    contentVisibility.value = 'visible'
   }
 }
 
@@ -168,9 +165,6 @@ function handelMouseLeave() {
   isHover.value = false
   clearTimeout(mouseEnterTimeOut.value)
   clearTimeout(mouseLeaveTimeOut.value)
-  mouseLeaveTimeOut.value = setTimeout(() => {
-    contentVisibility.value = 'auto'
-  }, 300)
 }
 
 function switchClickState(flag: boolean) {
@@ -196,7 +190,7 @@ function handleUndo() {
 <template>
   <div
     relative
-    :style="{ contentVisibility }"
+    content-visibility-auto intrinsic-size-300px
   >
     <!-- By directly using predefined unocss width properties, it is possible to dynamically set the width attribute -->
     <div hidden w="xl:280px lg:250px md:200px 200px" />
@@ -207,7 +201,7 @@ function handleUndo() {
         class="video-card group"
         w="full"
         rounded="$bew-radius" duration-300 ease-in-out
-        bg="hover:$bew-fill-2 active:$bew-fill-3" hover:ring="8 $bew-fill-2" active:ring="8 $bew-fill-3"
+        bg="hover:$bew-fill-2 active:$bew-fill-3"
       >
         <a
           :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }"
@@ -230,7 +224,7 @@ function handleUndo() {
             <!-- Video cover -->
             <img
               :src="`${removeHttpFromUrl(video.cover)}@672w_378h_1c`"
-              loading="eager"
+              loading="lazy"
               w="full" max-w-full align-middle aspect-video
               bg="cover center"
               rounded="$bew-radius"
@@ -363,7 +357,7 @@ function handleUndo() {
                   :src="`${removeHttpFromUrl(video.authorFace)}@50w_50h_1c`"
                   width="36"
                   height="36"
-                  loading="eager"
+                  loading="lazy"
                 >
                 <div
                   v-if="video.followed"
@@ -416,7 +410,7 @@ function handleUndo() {
                         :src="`${removeHttpFromUrl(video.authorFace)}@50w_50h_1c`"
                         width="30"
                         height="30"
-                        loading="eager"
+                        loading="lazy"
                         object-cover rounded="1/2"
                       >
                       <div
