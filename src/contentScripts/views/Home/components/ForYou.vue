@@ -158,9 +158,10 @@ async function getRecommendVideos() {
   emit('beforeLoading')
   isLoading.value = true
   try {
+    let i = 0
     // https://github.com/starknt/BewlyBewly/blob/fad999c2e482095dc3840bb291af53d15ff44130/src/contentScripts/views/Home/components/ForYou.vue#L208
     const pendingVideos: VideoElement[] = Array.from({ length: pageSize }, () => ({
-      uniqueId: `unique-id-${Number(Date.now())})}`,
+      uniqueId: `unique-id-${(videoList.value.length || 0) + i++})}`,
     } satisfies VideoElement))
     let lastVideoListLength = videoList.value.length
     videoList.value.push(...pendingVideos)
@@ -187,7 +188,6 @@ async function getRecommendVideos() {
         videoList.value = resData.map(item => ({ uniqueId: `${item.id}`, item }))
       }
       else {
-        // else we concat the new data to the old data
         resData.forEach((item) => {
           videoList.value[lastVideoListLength++] = {
             uniqueId: `${item.id}`,
@@ -213,11 +213,12 @@ async function getAppRecommendVideos() {
   emit('beforeLoading')
   isLoading.value = true
   try {
+    let i = 0
     // https://github.com/starknt/BewlyBewly/blob/fad999c2e482095dc3840bb291af53d15ff44130/src/contentScripts/views/Home/components/ForYou.vue#L208
     // Since the video list in app recommendation mode will filter the ad cards,
-    // the length is uncertain. Therefore, set the length to 10 to ensure an approximate number.
-    const pendingVideos: AppVideoElement[] = Array.from({ length: 10 }, () => ({
-      uniqueId: `unique-id-${Number(Date.now())}`,
+    // the length is uncertain. Therefore, set the length to 15 to ensure an approximate number.
+    const pendingVideos: AppVideoElement[] = Array.from({ length: 15 }, () => ({
+      uniqueId: `unique-id-${(appVideoList.value.length || 0) + i++})}`,
     } satisfies AppVideoElement))
     let lastVideoListLength = appVideoList.value.length
     appVideoList.value.push(...pendingVideos)
@@ -244,7 +245,6 @@ async function getAppRecommendVideos() {
         appVideoList.value = resData.map(item => ({ uniqueId: `${item.idx}`, item }))
       }
       else {
-        // else we concat the new data to the old data
         resData.forEach((item) => {
           appVideoList.value[lastVideoListLength++] = {
             uniqueId: `${item.idx}`,
