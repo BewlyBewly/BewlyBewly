@@ -191,14 +191,15 @@ function handleUndo() {
     content-visibility-auto intrinsic-size-320px
     duration-300 ease-in-out
     rounded="$bew-radius"
-    ring="hover:6 hover:$bew-fill-2 active:6 active:$bew-fill-3"
+    ring="hover:8 hover:$bew-fill-2 active:8 active:$bew-fill-3"
     bg="hover:$bew-fill-2 active:$bew-fill-3"
+    mb-4
   >
     <!-- By directly using predefined unocss width properties, it is possible to dynamically set the width attribute -->
     <div hidden w="xl:280px lg:250px md:200px 200px" />
     <div hidden w="full" />
 
-    <div v-if="!skeleton && video" mb-4>
+    <div v-if="!skeleton && video">
       <div
         class="video-card group"
         w="full"
@@ -489,6 +490,7 @@ function handleUndo() {
         opacity: skeleton ? 1 : 0,
       }"
       :horizontal="horizontal"
+      mb-0
     />
   </div>
 </template>
