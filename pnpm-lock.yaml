@@ -69,6 +69,9 @@ importers:
       '@types/webextension-polyfill':
         specifier: ^0.10.7
         version: 0.10.7
+      '@unocss/preset-attributify':
+        specifier: ^0.60.3
+        version: 0.60.3
       '@vitejs/plugin-vue':
         specifier: ^5.0.4
         version: 5.0.4(vite@5.2.11(@types/node@20.12.11)(sass@1.77.0)(terser@5.31.0))(vue@3.4.27(typescript@5.4.5))
@@ -1254,6 +1257,9 @@ packages:
   '@unocss/core@0.59.4':
     resolution: {integrity: sha512-bBZ1sgcAtezQVZ1BST9IS3jqcsTLyqKNjiIf7FTnX3DHpfpYuMDFzSOtmkZDzBleOLO/CtcRWjT0HwTSQAmV0A==}
 
+  '@unocss/core@0.60.3':
+    resolution: {integrity: sha512-4bBX1pavDl2DSCozEII7bxYGT0IkyO7kKlUuCtooTePWyLjf2F7essdzHkJ00EpNR64kkebR9V0lqBMBo07VPw==}
+
   '@unocss/extractor-arbitrary-variants@0.59.4':
     resolution: {integrity: sha512-RDe4FgMGJQ+tp9GLvhPHni7Cc2O0lHBRMElVlN8LoXJAdODMICdbrEPGJlEfrc+7x/QgVFoR895KpYJh3hIgGA==}
 
@@ -1268,6 +1274,9 @@ packages:
 
   '@unocss/preset-attributify@0.59.4':
     resolution: {integrity: sha512-BeogWuYaIakC1gmOZFFCjFVWmu/m3AqEX8UYQS6tY6lAaK2L4Qf4AstYBlT2zAMxy9LNxPDxFQrvfSfFk5Klsg==}
+
+  '@unocss/preset-attributify@0.60.3':
+    resolution: {integrity: sha512-G/Lx9xq/tVKvjp/CcACyLU+p3mcrpgkMvy+Z3NSHfBAZAmbieBMFhwROxt5R8Bny66q3fYDtxxx+likpokpOAQ==}
 
   '@unocss/preset-icons@0.59.4':
     resolution: {integrity: sha512-Afjwh5oC4KRE8TNZDUkRK6hvvV1wKLrS1e5trniE0B0AM9HK3PBolQaIU7QmzPv6WQrog+MZgIwafg1eqsPUCA==}
@@ -7301,6 +7310,8 @@ snapshots:
 
   '@unocss/core@0.59.4': {}
 
+  '@unocss/core@0.60.3': {}
+
   '@unocss/extractor-arbitrary-variants@0.59.4':
     dependencies:
       '@unocss/core': 0.59.4
@@ -7325,6 +7336,10 @@ snapshots:
   '@unocss/preset-attributify@0.59.4':
     dependencies:
       '@unocss/core': 0.59.4
+
+  '@unocss/preset-attributify@0.60.3':
+    dependencies:
+      '@unocss/core': 0.60.3
 
   '@unocss/preset-icons@0.59.4':
     dependencies:
