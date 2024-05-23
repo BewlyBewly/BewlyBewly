@@ -152,14 +152,12 @@ function jumpToLoginPage() {
           >
             <section
               rounded="$bew-radius"
-              flex="~ gap-6 col md:col lg:row"
-              item-start
+              flex="~ gap-6 col md:col lg:row items-start"
               relative
               group-hover:bg="$bew-fill-2"
-              duration-300
-              w-full
-              p-2
-              m-1
+              duration-300 w-full
+              p-2 m-1
+              content-visibility-auto
             >
               <!-- Cover -->
               <div

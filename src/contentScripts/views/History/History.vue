@@ -243,17 +243,16 @@ function jumpToLoginPage() {
         >
           <!-- time slot -->
           <div
-            mr-8
-            px-4
+            mr-8 px-4
             b-l="~ 2px dashed $bew-fill-2"
             group-hover:b-l="$bew-theme-color-40"
-            items-center
-            justify-center
             shrink-0
             relative
             duration-300
-            display="none xl:flex"
+            flex="important-xl:~ items-center justify-center"
+            hidden
           >
+            <!-- hidden lg:flex -->
             <!-- Dot -->
             <i
               pos="absolute left--1px"
@@ -283,14 +282,12 @@ function jumpToLoginPage() {
 
           <section
             rounded="$bew-radius"
-            flex="~ gap-6 col md:col lg:row"
-            item-start
+            flex="~ gap-6 col md:col lg:row items-start"
             relative
             group-hover:bg="$bew-fill-2"
-            duration-300
-            w-full
-            p-2
-            m-1
+            duration-300 w-full
+            p-2 m-1
+            content-visibility-auto
           >
             <!-- Cover -->
             <div
