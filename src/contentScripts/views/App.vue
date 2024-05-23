@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useDebounceFn, useThrottleFn, useToggle } from '@vueuse/core'
+import { useThrottleFn, useToggle } from '@vueuse/core'
 import type { Ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import browser from 'webextension-polyfill'
@@ -204,7 +204,7 @@ function handleAdaptToOtherPageStylesChange() {
     document.documentElement.classList.remove('bewly-design')
 }
 
-const handleOsScroll = useDebounceFn(() => {
+function handleOsScroll() {
   const osInstance = scrollbarRef.value?.osInstance()
   const { viewport } = osInstance.elements()
   const { scrollTop, scrollHeight, clientHeight } = viewport // get scroll offset
@@ -219,7 +219,7 @@ const handleOsScroll = useDebounceFn(() => {
 
   if (isHomePage())
     topBarRef.value?.handleScroll()
-}, 50)
+}
 
 function handleBlockAds() {
   // Do not use the "ads" keyword. AdGuard, AdBlock, and some ad-blocking extensions will
