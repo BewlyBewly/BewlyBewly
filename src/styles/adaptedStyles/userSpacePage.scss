@@ -553,6 +553,7 @@
     #page-series-index .channel-option.no-channel,
     .n .n-inner,
     #page-index .col-1,
+    #page-index .col-1::after,
     #page-index .col-2 .section,
     #page-dynamic .col-2 .section {
       background-color: var(--bew-content-solid-1);
