@@ -5,7 +5,7 @@ import { useI18n } from 'vue-i18n'
 import browser from 'webextension-polyfill'
 
 import AppBackground from '~/components/AppBackground.vue'
-import BackToTopAndRefreshButtons from '~/components/BackToTopAndRefreshButtons.vue'
+import BackToTopOrRefreshButton from '~/components/BackToTopOrRefreshButton.vue'
 import Dock from '~/components/Dock/Dock.vue'
 import OverlayScrollbarsComponent from '~/components/OverlayScrollbarsComponent'
 import RightSideButtons from '~/components/RightSideButtons/RightSideButtons.vue'
@@ -365,7 +365,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
               :w="isVideoPage ? '[calc(100%-160px)]' : 'lg:85% md:[calc(90%-60px)] [calc(100%-140px)]'"
             >
               <!-- control button group -->
-              <BackToTopAndRefreshButtons
+              <BackToTopOrRefreshButton
                 v-if="activatedPage !== AppPage.Search && !settings.moveBackToTopOrRefreshButtonToDock"
                 @refresh="handleThrottledPageRefresh"
                 @back-to-top="handleBackToTop"
