@@ -64,8 +64,20 @@ async function initData() {
 }
 
 async function getData() {
-  for (let i = 0; i < 3; i++)
-    await getFollowedUsersVideos()
+  if (isLoading.value)
+    return
+
+  emit('beforeLoading')
+  isLoading.value = true
+
+  try {
+    for (let i = 0; i < 3; i++)
+      await getFollowedUsersVideos()
+  }
+  finally {
+    isLoading.value = false
+    emit('afterLoading')
+  }
 }
 
 function initPageAction() {
@@ -96,8 +108,6 @@ async function getFollowedUsersVideos() {
     return
   }
 
-  emit('beforeLoading')
-  isLoading.value = true
   try {
     let i = 0
     // https://github.com/starknt/BewlyBewly/blob/fad999c2e482095dc3840bb291af53d15ff44130/src/contentScripts/views/Home/components/ForYou.vue#L208
@@ -150,8 +160,6 @@ async function getFollowedUsersVideos() {
   }
   finally {
     videoList.value = videoList.value.filter(video => video.item)
-    isLoading.value = false
-    emit('afterLoading')
   }
 }
 
