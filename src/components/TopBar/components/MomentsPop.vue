@@ -8,7 +8,7 @@ import Tooltip from '~/components/Tooltip.vue'
 import { useApiClient } from '~/composables/api'
 import type { TopBarLiveMomentResult } from '~/models/moment/topBarLiveMoment'
 import type { TopBarMomentResult } from '~/models/moment/topBarMoment'
-import { getCSRF, isHomePage, smoothScrollToTop } from '~/utils/main'
+import { getCSRF, isHomePage, scrollToTop } from '~/utils/main'
 
 type MomentType = 'video' | 'live' | 'article'
 interface MomentTab { type: MomentType, name: any }
@@ -56,7 +56,7 @@ watch(() => selectedMomentTab.value.type, (newVal, oldVal) => {
     return
 
   if (momentsWrap.value)
-    smoothScrollToTop(momentsWrap.value, 300)
+    scrollToTop(momentsWrap.value)
 
   initData()
 }, { immediate: true })

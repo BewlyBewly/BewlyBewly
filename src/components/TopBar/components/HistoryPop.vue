@@ -11,7 +11,7 @@ import { useApiClient } from '~/composables/api'
 import type { HistoryResult, List as HistoryItem } from '~/models/history/history'
 import { Business } from '~/models/history/history'
 import { calcCurrentTime } from '~/utils/dataFormatter'
-import { isHomePage, removeHttpFromUrl, smoothScrollToTop } from '~/utils/main'
+import { isHomePage, removeHttpFromUrl, scrollToTop } from '~/utils/main'
 
 const { t } = useI18n()
 const api = useApiClient()
@@ -49,7 +49,7 @@ watch(activatedTab, (newVal: number | undefined, oldVal: number | undefined) => 
 
   historys.length = 0
   if (historysWrap.value)
-    smoothScrollToTop(historysWrap.value, 300)
+    scrollToTop(historysWrap.value)
 
   if (newVal === 0) {
     getHistoryList(Business.ARCHIVE)

@@ -15,7 +15,7 @@ import type { BewlyAppProvider } from '~/composables/useAppProvider'
 import { useDark } from '~/composables/useDark'
 import { AppPage, LanguageType } from '~/enums/appEnums'
 import { accessKey, settings } from '~/logic'
-import { getUserID, hexToRGBA, isHomePage, smoothScrollToTop } from '~/utils/main'
+import { getUserID, hexToRGBA, isHomePage, scrollToTop } from '~/utils/main'
 
 const { isDark } = useDark()
 const activatedPage = ref<AppPage>(settings.value.dockItemVisibilityList.find(e => e.visible === true)?.page ?? AppPage.Home)
@@ -194,7 +194,7 @@ function setAppThemeColor() {
 function handleBackToTop(targetScrollTop = 0 as number) {
   const osInstance = scrollbarRef.value?.osInstance()
 
-  smoothScrollToTop(osInstance.elements().viewport, 300, targetScrollTop)
+  scrollToTop(osInstance.elements().viewport, targetScrollTop)
   topBarRef.value?.toggleTopBarVisible(true)
 }
 
