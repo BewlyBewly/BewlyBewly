@@ -2,7 +2,7 @@
 import Button from '~/components/Button.vue'
 import { useBewlyApp } from '~/composables/useAppProvider'
 
-const emit = defineEmits(['refresh', 'back-to-top'])
+const emit = defineEmits(['refresh', 'backToTop'])
 
 const { reachTop } = useBewlyApp()
 </script>
@@ -26,7 +26,7 @@ const { reachTop } = useBewlyApp()
         backdrop-filter: var(--bew-filter-glass-1);
       "
       transform-gpu
-      @click="reachTop ? emit('refresh') : emit('back-to-top')"
+      @click="reachTop ? emit('refresh') : emit('backToTop')"
     >
       <Transition name="fade">
         <div
