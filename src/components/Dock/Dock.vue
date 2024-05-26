@@ -130,7 +130,10 @@ function toggleDockHide(hide: boolean) {
       <!-- dividing line -->
       <div class="divider" />
 
-      <Tooltip :content="isDark ? $t('dock.dark_mode') : $t('dock.light_mode')" :placement="tooltipPlacement">
+      <Tooltip
+        v-if="!settings.disableLightDarkModeSwitcherOnDock"
+        :content="isDark ? $t('dock.dark_mode') : $t('dock.light_mode')" :placement="tooltipPlacement"
+      >
         <button
           class="dock-item"
           @click="toggleDark"
@@ -209,11 +212,11 @@ function toggleDockHide(hide: boolean) {
   }
 
   .divider {
-    --at-apply: my-2 w-full h-2px bg-$bew-fill-2;
+    --at-apply: my-1 mx-3 h-4px bg-$bew-fill-1 rounded-4;
   }
 
   &.bottom .divider {
-    --at-apply: w-2px h-auto my-0 mx-2;
+    --at-apply: w-4px h-auto my-3 mx-1;
   }
 }
 

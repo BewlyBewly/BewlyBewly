@@ -91,6 +91,7 @@ settings:
   auto_hide_dock: Automatically hide the dock
   dock_content_adjustment: Dock content adjustment
   dock_content_adjustment_desc: The page of the first activated dock item will be the startup page
+  disable_light_dark_mode_switcher: Disable light/dark mode switcher
 
   # Appearance
   theme: Theme
