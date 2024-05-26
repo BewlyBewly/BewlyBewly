@@ -203,8 +203,8 @@
   --bew-content-opacity: 1;
   --bew-filter-glass-1: none;
   --bew-filter-glass-2: none;
-  --bew-shadow-edge-glow-1: none;
-  --bew-shadow-edge-glow-2: none;
+  --bew-shadow-edge-glow-1: 0 0 0 transparent;
+  --bew-shadow-edge-glow-2: 0 0 0 transparent;
 }
 
 :host(.reduce-frosted-glass-blur),
