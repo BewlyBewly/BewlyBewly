@@ -37,6 +37,7 @@ const handleReachBottom = ref<() => void>()
 const handleThrottledPageRefresh = useThrottleFn(() => handlePageRefresh.value?.(), 500)
 const handleThrottledReachBottom = useThrottleFn(() => handleReachBottom.value?.(), 500)
 const topBarRef = ref()
+const reachTop = ref<boolean>(false)
 
 const isVideoPage = computed(() => {
   if (/https?:\/\/(www.)?bilibili.com\/video\/.*/.test(location.href))
@@ -209,10 +210,14 @@ function handleOsScroll() {
   const { viewport } = osInstance.elements()
   const { scrollTop, scrollHeight, clientHeight } = viewport // get scroll offset
 
-  if (scrollTop === 0)
+  if (scrollTop === 0) {
     showTopBarMask.value = false
-  else
+    reachTop.value = true
+  }
+  else {
     showTopBarMask.value = true
+    reachTop.value = false
+  }
 
   if (clientHeight + scrollTop >= scrollHeight - 150)
     handleThrottledReachBottom()
@@ -282,6 +287,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
   activatedPage,
   mainAppRef,
   scrollbarRef,
+  reachTop,
   handleBackToTop,
   handlePageRefresh,
   handleReachBottom,
@@ -360,7 +366,8 @@ provide<BewlyAppProvider>('BEWLY_APP', {
             >
               <!-- control button group -->
               <BackToTopAndRefreshButtons
-                v-if="activatedPage !== AppPage.Search" :show-refresh-button="!showTopBarMask"
+                v-if="activatedPage !== AppPage.Search && !settings.moveBackToTopOrRefreshButtonToDock"
+                :show-refresh-button="!showTopBarMask"
                 @refresh="handleThrottledPageRefresh"
                 @back-to-top="handleBackToTop"
               />

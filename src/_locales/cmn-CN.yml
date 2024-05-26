@@ -92,6 +92,7 @@ settings:
   dock_content_adjustment: Dock 内容调整
   dock_content_adjustment_desc: 第一个激活的 Dock 项的页面将会是启动页面
   disable_light_dark_mode_switcher: 禁用亮/暗色模式切换按钮
+  move_back_to_top_and_refresh_to_dock: 将返回顶部和刷新按钮移动到 Dock 栏
 
   # Appearance
   theme: 主题
