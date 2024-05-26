@@ -13,11 +13,11 @@ defineProps<{
   activatedPage: AppPage
 }>()
 
-const emit = defineEmits(['change-page', 'settings-visibility-change'])
+const emit = defineEmits(['changePage', 'settingsVisibilityChange', 'refresh', 'backToTop'])
 
 const mainStore = useMainStore()
 const { isDark, toggleDark } = useDark()
-const { reachTop, handleBackToTop, handlePageRefresh } = useBewlyApp()
+const { reachTop } = useBewlyApp()
 
 const tooltipPlacement = computed(() => {
   if (settings.value.dockPosition === 'left')
@@ -80,9 +80,9 @@ function toggleDockHide(hide: boolean) {
 
 function handleBackToTopOrRefresh() {
   if (reachTop.value)
-    handlePageRefresh.value?.()
+    emit('refresh')
   else
-    handleBackToTop()
+    emit('backToTop')
 }
 </script>
 
@@ -120,7 +120,7 @@ function handleBackToTopOrRefresh() {
             <button
               class="dock-item group"
               :class="{ active: activatedPage === dockItem.page }"
-              @click="emit('change-page', dockItem.page)"
+              @click="emit('changePage', dockItem.page)"
             >
               <div
                 v-show="activatedPage !== dockItem.page"
@@ -165,7 +165,7 @@ function handleBackToTopOrRefresh() {
         </Tooltip>
 
         <Tooltip :content="$t('dock.settings')" :placement="tooltipPlacement">
-          <button class="dock-item" @click="emit('settings-visibility-change')">
+          <button class="dock-item" @click="emit('settingsVisibilityChange')">
             <div i-mingcute:settings-3-line text-xl />
           </button>
         </Tooltip>

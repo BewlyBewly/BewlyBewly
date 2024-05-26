@@ -314,6 +314,8 @@ provide<BewlyAppProvider>('BEWLY_APP', {
         :activated-page="activatedPage"
         @change-page="pageName => changeActivatePage(pageName)"
         @settings-visibility-change="toggleSettings"
+        @refresh="handleThrottledPageRefresh"
+        @back-to-top="handleBackToTop"
       />
       <RightSideButtons
         v-else
