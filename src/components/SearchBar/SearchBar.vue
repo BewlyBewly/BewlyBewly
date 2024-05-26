@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onKeyStroke } from '@vueuse/core'
+import { onKeyStroke, useDebounceFn } from '@vueuse/core'
 import DOMPurify from 'dompurify'
 
 import { useApiClient } from '~/composables/api'
@@ -57,7 +57,7 @@ onKeyStroke('Escape', (e: KeyboardEvent) => {
   isFocus.value = false
 }, { target: keywordRef })
 
-function handleInput() {
+const handleInput = useDebounceFn(() => {
   selectedIndex.value = -1
   if (keyword.value.trim().length > 0) {
     api.search.getSearchSuggestion({
@@ -72,7 +72,7 @@ function handleInput() {
   else {
     suggestions.length = 0
   }
-}
+}, 200)
 
 async function navigateToSearchResultPage(keyword: string) {
   if (keyword) {
