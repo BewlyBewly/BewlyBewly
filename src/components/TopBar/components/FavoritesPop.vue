@@ -155,7 +155,7 @@ defineExpose({
       z="2"
       un-border="!rounded-t-$bew-radius"
     >
-      <h3 cursor="pointer" font-600 @click="smoothScrollToTop(favoriteVideosWrap, 300)">
+      <h3 cursor="pointer" font-600 @click="scrollToTop(favoriteVideosWrap)">
         {{ activatedFavoriteTitle }}
       </h3>
 
