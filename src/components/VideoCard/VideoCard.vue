@@ -104,6 +104,7 @@ const isHover = ref<boolean>(false)
 const mouseEnterTimeOut = ref()
 const mouseLeaveTimeOut = ref()
 const previewVideoUrl = ref<string>('')
+const contentVisibility = ref<'auto' | 'visible'>('auto')
 
 watch(() => isHover.value, (newValue) => {
   if (!props.video || !newValue)
@@ -148,6 +149,8 @@ function toggleWatchLater() {
 }
 
 function handleMouseEnter() {
+  // fix #789
+  contentVisibility.value = 'visible'
   if (settings.value.hoverVideoCardDelayed) {
     mouseEnterTimeOut.value = setTimeout(() => {
       isHover.value = true
@@ -163,6 +166,7 @@ function handleMouseEnter() {
 }
 
 function handelMouseLeave() {
+  contentVisibility.value = 'auto'
   isHover.value = false
   clearTimeout(mouseEnterTimeOut.value)
   clearTimeout(mouseLeaveTimeOut.value)
@@ -190,7 +194,8 @@ function handleUndo() {
 
 <template>
   <div
-    content-visibility-auto intrinsic-size-300px
+    :style="{ contentVisibility }"
+    intrinsic-size-300px
     duration-300 ease-in-out
     rounded="$bew-radius"
     ring="active:8 active:$bew-fill-3"
