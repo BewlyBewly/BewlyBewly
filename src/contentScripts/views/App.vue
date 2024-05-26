@@ -36,6 +36,7 @@ const handlePageRefresh = ref<() => void>()
 const handleReachBottom = ref<() => void>()
 const handleThrottledPageRefresh = useThrottleFn(() => handlePageRefresh.value?.(), 500)
 const handleThrottledReachBottom = useThrottleFn(() => handleReachBottom.value?.(), 500)
+const handleThrottledBackToTop = useThrottleFn(() => handleBackToTop(), 1000)
 const topBarRef = ref()
 const reachTop = ref<boolean>(false)
 
@@ -149,7 +150,7 @@ function changeActivatePage(pageName: AppPage) {
       if (scrollTop === 0)
         handleThrottledPageRefresh()
       else
-        handleBackToTop()
+        handleThrottledBackToTop()
     }
     return
   }
@@ -315,7 +316,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
         @change-page="pageName => changeActivatePage(pageName)"
         @settings-visibility-change="toggleSettings"
         @refresh="handleThrottledPageRefresh"
-        @back-to-top="handleBackToTop"
+        @back-to-top="handleThrottledBackToTop"
       />
       <RightSideButtons
         v-else
@@ -370,7 +371,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
               <BackToTopOrRefreshButton
                 v-if="activatedPage !== AppPage.Search && !settings.moveBackToTopOrRefreshButtonToDock"
                 @refresh="handleThrottledPageRefresh"
-                @back-to-top="handleBackToTop"
+                @back-to-top="handleThrottledBackToTop"
               />
 
               <Transition name="page-fade">

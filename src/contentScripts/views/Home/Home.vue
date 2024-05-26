@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useThrottleFn } from '@vueuse/core'
+
 import Logo from '~/components/Logo.vue'
 import SearchBar from '~/components/SearchBar/SearchBar.vue'
 import { useBewlyApp } from '~/composables/useAppProvider'
@@ -13,6 +15,7 @@ import { HomeSubPage } from './types'
 
 const mainStore = useMainStore()
 const { handleBackToTop, scrollbarRef } = useBewlyApp()
+const handleThrottledBackToTop = useThrottleFn((targetScrollTop: number = 0) => handleBackToTop(targetScrollTop), 1000)
 
 const activatedPage = ref<HomeSubPage>(HomeSubPage.ForYou)
 const pages = {
@@ -103,7 +106,7 @@ function handleChangeTab(tab: HomeTab) {
     const scrollTop = osInstance.elements().viewport.scrollTop as number
 
     if ((!settings.value.useSearchPageModeOnHomePage && scrollTop > 0) || (settings.value.useSearchPageModeOnHomePage && scrollTop > 510)) {
-      handleBackToTop(settings.value.useSearchPageModeOnHomePage ? 510 : 0)
+      handleThrottledBackToTop(settings.value.useSearchPageModeOnHomePage ? 510 : 0)
     }
     else {
       if (tabContentLoading.value)
@@ -113,7 +116,7 @@ function handleChangeTab(tab: HomeTab) {
     return
   }
   else {
-    handleBackToTop(settings.value.useSearchPageModeOnHomePage ? 510 : 0)
+    handleThrottledBackToTop(settings.value.useSearchPageModeOnHomePage ? 510 : 0)
   }
 
   // When the content of a tab is loading, prevent switching to another tab.
