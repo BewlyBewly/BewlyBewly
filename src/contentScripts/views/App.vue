@@ -367,7 +367,6 @@ provide<BewlyAppProvider>('BEWLY_APP', {
               <!-- control button group -->
               <BackToTopAndRefreshButtons
                 v-if="activatedPage !== AppPage.Search && !settings.moveBackToTopOrRefreshButtonToDock"
-                :show-refresh-button="!showTopBarMask"
                 @refresh="handleThrottledPageRefresh"
                 @back-to-top="handleBackToTop"
               />
