@@ -79,9 +79,6 @@ async function initData() {
 }
 
 async function getData() {
-  if (isLoading.value)
-    return
-
   emit('beforeLoading')
   isLoading.value = true
 

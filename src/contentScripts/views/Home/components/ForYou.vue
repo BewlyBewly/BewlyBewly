@@ -127,9 +127,6 @@ async function initData() {
 }
 
 async function getData() {
-  if (isLoading.value)
-    return
-
   emit('beforeLoading')
   isLoading.value = true
   try {
@@ -567,10 +564,6 @@ defineExpose({ initData })
 
     <!-- no more content -->
     <Empty v-if="noMoreContent" class="pb-4" :description="$t('common.no_more_content')" />
-
-    <!-- <Transition name="fade">
-      <Loading v-show="isLoading" />
-    </Transition> -->
   </div>
 </template>
 

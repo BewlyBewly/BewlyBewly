@@ -7,7 +7,6 @@ import { useBewlyApp } from '~/composables/useAppProvider'
 import { homePageGridLayout, settings } from '~/logic'
 import type { HomeTab } from '~/stores/mainStore'
 import { useMainStore } from '~/stores/mainStore'
-import { delay } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
 import type { GridLayoutIcon } from './types'
@@ -119,22 +118,11 @@ function handleChangeTab(tab: HomeTab) {
     handleThrottledBackToTop(settings.value.useSearchPageModeOnHomePage ? 510 : 0)
   }
 
-  // When the content of a tab is loading, prevent switching to another tab.
-  // Since `initPageAction()` within the tab replaces the `handleReachBottom` and `handlePageRefresh` functions.
-  // Therefore, this will lead to a failure in refreshing the data of the current tab
-  // because `handlePageRefresh` and `handleReachBottom` has been replaced
-  // now they are set to refresh the data of the tab you switched to
-  if (!tabContentLoading.value)
-    activatedPage.value = tab.page
+  activatedPage.value = tab.page
 }
 
 function toggleTabContentLoading(loading: boolean) {
-  nextTick(async () => {
-    // Delay the closing effect to prevent the transition effect from being too stiff
-    if (!loading)
-      await delay(500)
-    tabContentLoading.value = loading
-  })
+  tabContentLoading.value = loading
 }
 </script>
 
