@@ -77,9 +77,7 @@ async function getTrendingVideos() {
   try {
     let i = 0
     // https://github.com/starknt/BewlyBewly/blob/fad999c2e482095dc3840bb291af53d15ff44130/src/contentScripts/views/Home/components/ForYou.vue#L208
-    // When video list is not empty, addthe number of pending videos is half of the page size
-    // is set to prevent user scrolling the page too fast and causing the page too laggy
-    const pendingVideos: VideoElement[] = Array.from({ length: videoList.value.length ? 10 : 30 }, () => ({
+    const pendingVideos: VideoElement[] = Array.from({ length: 30 }, () => ({
       uniqueId: `unique-id-${(videoList.value.length || 0) + i++})}`,
     } satisfies VideoElement))
     let lastVideoListLength = videoList.value.length
