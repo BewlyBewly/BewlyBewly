@@ -35,6 +35,7 @@ const showTopBarMask = ref<boolean>(false)
 const handlePageRefresh = ref<() => void>()
 const handleReachBottom = ref<() => void>()
 const handleThrottledPageRefresh = useThrottleFn(() => handlePageRefresh.value?.(), 500)
+const handleThrottledReachBottom = useThrottleFn(() => handleReachBottom.value?.(), 500)
 const handleThrottledBackToTop = useThrottleFn(() => handleBackToTop(), 1000)
 const topBarRef = ref()
 const reachTop = ref<boolean>(false)
@@ -220,7 +221,7 @@ function handleOsScroll() {
   }
 
   if (clientHeight + scrollTop >= scrollHeight - 150)
-    handleReachBottom.value?.()
+    handleThrottledReachBottom()
 
   if (isHomePage())
     topBarRef.value?.handleScroll()
