@@ -50,7 +50,7 @@ const toast = useToast()
 const api = useApiClient()
 const videoList = ref<VideoElement[]>([])
 const appVideoList = ref<AppVideoElement[]>([])
-const isLoading = ref<boolean>(true)
+const isLoading = ref<boolean>(false)
 const needToLoginFirst = ref<boolean>(false)
 const containerRef = ref<HTMLElement>() as Ref<HTMLElement>
 const refreshIdx = ref<number>(1)
@@ -127,12 +127,23 @@ async function initData() {
 }
 
 async function getData() {
-  if (settings.value.recommendationMode === 'web') {
-    getRecommendVideos()
+  if (isLoading.value)
+    return
+
+  emit('beforeLoading')
+  isLoading.value = true
+  try {
+    if (settings.value.recommendationMode === 'web') {
+      await getRecommendVideos()
+    }
+    else {
+      for (let i = 0; i < 3; i++)
+        await getAppRecommendVideos()
+    }
   }
-  else {
-    for (let i = 0; i < 3; i++)
-      await getAppRecommendVideos()
+  finally {
+    isLoading.value = false
+    emit('afterLoading')
   }
 }
 
@@ -155,14 +166,9 @@ function initPageAction() {
 }
 
 async function getRecommendVideos() {
-  emit('beforeLoading')
-  isLoading.value = true
   try {
     let i = 0
-    // https://github.com/starknt/BewlyBewly/blob/fad999c2e482095dc3840bb291af53d15ff44130/src/contentScripts/views/Home/components/ForYou.vue#L208
-    // When video list is not empty, addthe number of pending videos is half of the page size
-    // is set to prevent user scrolling the page too fast and causing the page too laggy
-    const pendingVideos: VideoElement[] = Array.from({ length: videoList.value.length ? pageSize / 2 : pageSize }, () => ({
+    const pendingVideos: VideoElement[] = Array.from({ length: pageSize }, () => ({
       uniqueId: `unique-id-${(videoList.value.length || 0) + i++})}`,
     } satisfies VideoElement))
     let lastVideoListLength = videoList.value.length
@@ -205,22 +211,12 @@ async function getRecommendVideos() {
   catch {
     videoList.value = videoList.value.filter(video => video.item)
   }
-  finally {
-    isLoading.value = false
-    emit('afterLoading')
-  }
 }
 
 async function getAppRecommendVideos() {
-  emit('beforeLoading')
-  isLoading.value = true
   try {
     let i = 0
-    // https://github.com/starknt/BewlyBewly/blob/fad999c2e482095dc3840bb291af53d15ff44130/src/contentScripts/views/Home/components/ForYou.vue#L208
-    // When video list is not empty, there will be approximately 10 pending videos
-    // due to the app recommendation filtering ad cards.
-    // To prevent user scrolling the page too fast and causing the page too laggy
-    const pendingVideos: AppVideoElement[] = Array.from({ length: appVideoList.value.length ? 10 : pageSize }, () => ({
+    const pendingVideos: AppVideoElement[] = Array.from({ length: pageSize }, () => ({
       uniqueId: `unique-id-${(appVideoList.value.length || 0) + i++})}`,
     } satisfies AppVideoElement))
     let lastVideoListLength = appVideoList.value.length
@@ -264,8 +260,6 @@ async function getAppRecommendVideos() {
     // Since the video list in app recommendation mode will filter the ad cards,
     // after loading, the video list will be filtered again to remove the empty cards
     appVideoList.value = appVideoList.value.filter(video => video.item)
-    isLoading.value = false
-    emit('afterLoading')
   }
 }
 
