@@ -4,7 +4,7 @@
   "type": "module",
   "version": "0.18.11",
   "private": true,
-  "packageManager": "pnpm@9.1.2",
+  "packageManager": "pnpm@9.1.3",
   "description": "Just make a few small changes to your Bilibili homepage.",
   "homepage": "https://github.com/hakadao/BewlyBewly",
   "scripts": {
