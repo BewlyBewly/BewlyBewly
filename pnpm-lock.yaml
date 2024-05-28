@@ -21,11 +21,11 @@ importers:
         specifier: ^3.0.1
         version: 3.0.1
       overlayscrollbars:
-        specifier: ^2.8.0
-        version: 2.8.0
+        specifier: 2.7.3
+        version: 2.7.3
       overlayscrollbars-vue:
         specifier: ^0.5.9
-        version: 0.5.9(overlayscrollbars@2.8.0)(vue@3.4.27(typescript@5.4.5))
+        version: 0.5.9(overlayscrollbars@2.7.3)(vue@3.4.27(typescript@5.4.5))
       pinia:
         specifier: ^2.1.7
         version: 2.1.7(typescript@5.4.5)(vue@3.4.27(typescript@5.4.5))
@@ -4410,8 +4410,8 @@ packages:
       overlayscrollbars: ^2.0.0
       vue: ^3.2.25
 
-  overlayscrollbars@2.8.0:
-    resolution: {integrity: sha512-Ja1I2hHym0Oo3hBBj6CvalY3XEYqgrIhTvQoEGJggmeh7OruHY5GTvkOmLjRFDD22FGd4Yu8fpxkdg3fY+IILA==}
+  overlayscrollbars@2.7.3:
+    resolution: {integrity: sha512-HmNo8RPtuGUjBhUbVpZBHH7SHci5iSAdg5zSekCZVsjzaM6z8MIr3F9RXrzf4y7m+fOY0nx0+y0emr1fqQmfoA==}
 
   p-cancelable@3.0.0:
     resolution: {integrity: sha512-mlVgR3PGuzlo0MmTdk4cXqXWlwQDLnONTAg6sm62XkMJEiRxN3GL3SffkYvqwonbkJBcrI7Uvv5Zh9yjvn2iUw==}
@@ -11022,12 +11022,12 @@ snapshots:
 
   os-tmpdir@1.0.2: {}
 
-  overlayscrollbars-vue@0.5.9(overlayscrollbars@2.8.0)(vue@3.4.27(typescript@5.4.5)):
+  overlayscrollbars-vue@0.5.9(overlayscrollbars@2.7.3)(vue@3.4.27(typescript@5.4.5)):
     dependencies:
-      overlayscrollbars: 2.8.0
+      overlayscrollbars: 2.7.3
       vue: 3.4.27(typescript@5.4.5)
 
-  overlayscrollbars@2.8.0: {}
+  overlayscrollbars@2.7.3: {}
 
   p-cancelable@3.0.0: {}
 
