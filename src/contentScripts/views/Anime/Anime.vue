@@ -2,6 +2,7 @@
 import Button from '~/components/Button.vue'
 import Empty from '~/components/Empty.vue'
 import HorizontalScrollView from '~/components/HorizontalScrollView.vue'
+import Loading from '~/components/Loading.vue'
 import LongCoverCard from '~/components/LongCoverCard/LongCoverCard.vue'
 import LongCoverCardSkeleton from '~/components/LongCoverCard/LongCoverCardSkeleton.vue'
 import { useApiClient } from '~/composables/api'
@@ -280,7 +281,7 @@ function getPopularAnimeList() {
     <Empty v-if="noMoreContent" class="pb-4" :description="$t('common.no_more_content')" />
 
     <!-- loading -->
-    <loading v-if="isLoadingRecommendAnime && recommendAnimeList.length !== 0" m="-t-4" />
+    <Loading v-if="isLoadingRecommendAnime && recommendAnimeList.length !== 0" m="-t-4" />
   </div>
 </template>
 
