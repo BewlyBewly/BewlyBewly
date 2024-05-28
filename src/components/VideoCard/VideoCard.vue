@@ -105,6 +105,7 @@ const mouseEnterTimeOut = ref()
 const mouseLeaveTimeOut = ref()
 const previewVideoUrl = ref<string>('')
 const contentVisibility = ref<'auto' | 'visible'>('auto')
+const videoRef = ref<HTMLVideoElement | null>(null)
 
 watch(() => isHover.value, (newValue) => {
   if (!props.video || !newValue)
@@ -151,6 +152,8 @@ function toggleWatchLater() {
 function handleMouseEnter() {
   // fix #789
   contentVisibility.value = 'visible'
+  if (videoRef.value)
+    videoRef.value.play()
   if (settings.value.hoverVideoCardDelayed) {
     mouseEnterTimeOut.value = setTimeout(() => {
       isHover.value = true
@@ -163,6 +166,11 @@ function handleMouseEnter() {
       clearTimeout(mouseLeaveTimeOut.value)
     }, 500)
   }
+}
+
+function handelMouseLeaveVideo() {
+  if (videoRef.value)
+    videoRef.value.pause()
 }
 
 function handelMouseLeave() {
@@ -215,7 +223,6 @@ function handleUndo() {
         <a
           :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }"
           :href="videoUrl" target="_blank" rel="noopener noreferrer"
-          @mouseenter="handleMouseEnter"
           @mouseleave="handelMouseLeave"
           @mousedown="switchClickState(true)"
           @mouseup="switchClickState(false)"
@@ -236,6 +243,7 @@ function handleUndo() {
               w="full" max-w-full align-middle aspect-video
               bg="cover center"
               rounded="$bew-radius"
+              @mouseenter="handleMouseEnter"
             >
 
             <div
@@ -261,11 +269,13 @@ function handleUndo() {
             <Transition v-if="!removed && showPreview && settings.enableVideoPreview" name="fade">
               <video
                 v-if="previewVideoUrl && isHover"
+                ref="videoRef"
                 autoplay muted
                 :controls="settings.enableVideoCtrlBarOnVideoCard"
                 :style="{ pointerEvents: settings.enableVideoCtrlBarOnVideoCard ? 'auto' : 'none' }"
                 pos="absolute top-0 left-0" w-full aspect-video rounded="$bew-radius" bg-black
                 @mouseenter="handleMouseEnter"
+                @mouseleave="handelMouseLeaveVideo"
               >
                 <source :src="previewVideoUrl" type="video/mp4">
               </video>
