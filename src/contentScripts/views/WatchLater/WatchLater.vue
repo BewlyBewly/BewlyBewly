@@ -15,37 +15,69 @@ const { t } = useI18n()
 const api = useApiClient()
 const isLoading = ref<boolean>()
 const noMoreContent = ref<boolean>()
-const watchLaterList = reactive<VideoItem[]>([])
-const { handlePageRefresh } = useBewlyApp()
+const allWatchLaterList = ref<VideoItem[]>([])
+const currentWatchLaterList = ref<VideoItem[]>([])
+const { handlePageRefresh, handleReachBottom } = useBewlyApp()
+const pageNum = ref<number>(1)
 
 onMounted(() => {
-  getAllWatchLaterList()
   initPageAction()
+  initData()
 })
 
+async function initData() {
+  isLoading.value = false
+  noMoreContent.value = false
+  allWatchLaterList.value.length = 0
+  currentWatchLaterList.value.length = 0
+  pageNum.value = 1
+  await getAllWatchLaterList()
+  getData()
+}
+
+function getData() {
+  getCurrentWatchLaterList()
+}
+
 function initPageAction() {
-  handlePageRefresh.value = () => {
+  handlePageRefresh.value = async () => {
     if (isLoading.value)
       return
 
-    watchLaterList.length = 0
-    getAllWatchLaterList()
+    initData()
+  }
+
+  handleReachBottom.value = async () => {
+    getData()
   }
 }
 
 /**
  * Get watch later list
  */
-function getAllWatchLaterList() {
+async function getAllWatchLaterList() {
   isLoading.value = true
-  watchLaterList.length = 0
-  api.watchlater.getAllWatchLaterList()
-    .then((res: WatchLaterResult) => {
-      if (res.code === 0)
-        Object.assign(watchLaterList, res.data.list)
+  currentWatchLaterList.value.length = 0
+  try {
+    const res: WatchLaterResult = await api.watchlater.getAllWatchLaterList()
+    if (res.code === 0)
+      allWatchLaterList.value = res.data.list
+  }
+  finally {
+    isLoading.value = false
+  }
+}
 
-      isLoading.value = false
-    })
+function getCurrentWatchLaterList() {
+  const allWatchLaterListCopy = JSON.parse(JSON.stringify(allWatchLaterList.value))
+  const currentList = allWatchLaterListCopy.slice((pageNum.value - 1) * 10, pageNum.value * 10)
+
+  if (currentList.length === 0) {
+    noMoreContent.value = true
+    return
+  }
+  pageNum.value++
+  currentWatchLaterList.value.push(...currentList)
 }
 
 function deleteWatchLaterItem(index: number, aid: number) {
@@ -55,7 +87,7 @@ function deleteWatchLaterItem(index: number, aid: number) {
   })
     .then((res) => {
       if (res.code === 0)
-        watchLaterList.splice(index, 1)
+        currentWatchLaterList.value.splice(index, 1)
     })
 }
 
@@ -105,29 +137,27 @@ function jumpToLoginPage() {
   <div v-if="getCSRF()" flex="~ col md:row lg:row" gap-4>
     <main w="full md:60% lg:70% xl:75%" order="2 md:1 lg:1" mb-6>
       <h3 text="3xl $bew-text-1" font-bold mb-6>
-        {{ t('watch_later.title') }} ({{ watchLaterList.length }})
+        {{ t('watch_later.title') }} ({{ allWatchLaterList.length }})
       </h3>
-      <Empty v-if="watchLaterList.length === 0 && !isLoading" />
+      <Empty v-if="allWatchLaterList.length === 0 && !isLoading" />
       <template v-else>
         <!-- watcher later list -->
-        <transition-group name="list">
+        <TransitionGroup name="list">
           <a
-            v-for="(item, index) in watchLaterList"
+            v-for="(item, index) in currentWatchLaterList"
             :key="item.aid"
             :href="`https://www.bilibili.com/list/watchlater?bvid=${item.bvid}`" target="_blank" rel="noopener noreferrer"
             class="group"
-            block flex cursor-pointer
+            flex cursor-pointer
           >
             <section
               rounded="$bew-radius"
-              flex="~ gap-6 col md:col lg:row"
-              item-start
+              flex="~ gap-6 col md:col lg:row items-start"
               relative
               group-hover:bg="$bew-fill-2"
-              duration-300
-              w-full
-              p-2
-              m-1
+              duration-300 w-full
+              p-2 m-1
+              content-visibility-auto
             >
               <!-- Cover -->
               <div
@@ -247,11 +277,11 @@ function jumpToLoginPage() {
               </div>
             </section>
           </a>
-        </transition-group>
+        </TransitionGroup>
         <!-- loading -->
         <Transition name="fade">
           <loading
-            v-if="isLoading && watchLaterList.length !== 0 && !noMoreContent"
+            v-if="isLoading && currentWatchLaterList.length !== 0 && !noMoreContent"
             m="-t-4"
           />
         </Transition>
@@ -273,8 +303,8 @@ function jumpToLoginPage() {
             bg="$bew-fill-4"
           />
           <img
-            v-if="watchLaterList[0]"
-            :src="removeHttpFromUrl(`${watchLaterList[0].pic}@480w_270h_1c`)"
+            v-if="currentWatchLaterList[0]"
+            :src="removeHttpFromUrl(`${currentWatchLaterList[0].pic}@480w_270h_1c`)"
             w-full h-full object="cover center"
           >
         </div>
@@ -284,15 +314,15 @@ function jumpToLoginPage() {
           aspect-video mb-4 bg="$bew-fill-2"
         >
           <img
-            v-if="watchLaterList[0]" :src="removeHttpFromUrl(`${watchLaterList[0].pic}@480w_270h_1c`)"
+            v-if="currentWatchLaterList[0]" :src="removeHttpFromUrl(`${currentWatchLaterList[0].pic}@480w_270h_1c`)"
             rounded="$bew-radius" aspect-video w-full
           >
         </picture>
 
         <h3 text="3xl white" fw-600 style="text-shadow: 0 0 12px rgba(0,0,0,.3)">
-          {{ t('watch_later.title') }} ({{ watchLaterList.length }})
+          {{ t('watch_later.title') }} ({{ allWatchLaterList.length }})
         </h3>
-        <p v-if="watchLaterList.length > 0" flex="~ col" gap-4>
+        <p v-if="allWatchLaterList.length > 0" flex="~ col" gap-4>
           <Button
             color="rgba(255,255,255,.35)" block text-color="white" strong flex-1
             @click="handlePlayAll"

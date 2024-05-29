@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useBewlyApp } from '~/composables/useAppProvider'
 import { useDark } from '~/composables/useDark'
 import { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
@@ -8,19 +9,15 @@ import { useMainStore } from '~/stores/mainStore'
 import Tooltip from '../Tooltip.vue'
 import type { HoveringDockItem } from './types'
 
-defineProps<{ activatedPage: AppPage }>()
+defineProps<{
+  activatedPage: AppPage
+}>()
 
-const emit = defineEmits(['change-page', 'settings-visibility-change'])
+const emit = defineEmits(['changePage', 'settingsVisibilityChange', 'refresh', 'backToTop'])
 
 const mainStore = useMainStore()
 const { isDark, toggleDark } = useDark()
-
-const hideDock = ref<boolean>(false)
-const hoveringDockItem = reactive<HoveringDockItem>({
-  themeMode: false,
-  settings: false,
-})
-const currentDockItems = ref<DockItem[]>([])
+const { reachTop } = useBewlyApp()
 
 const tooltipPlacement = computed(() => {
   if (settings.value.dockPosition === 'left')
@@ -31,6 +28,13 @@ const tooltipPlacement = computed(() => {
     return 'top'
   return 'right'
 })
+
+const hideDock = ref<boolean>(false)
+const hoveringDockItem = reactive<HoveringDockItem>({
+  themeMode: false,
+  settings: false,
+})
+const currentDockItems = ref<DockItem[]>([])
 
 watch(() => settings.value.autoHideDock, (newValue) => {
   hideDock.value = newValue
@@ -73,6 +77,13 @@ function toggleDockHide(hide: boolean) {
   else
     hideDock.value = false
 }
+
+function handleBackToTopOrRefresh() {
+  if (reachTop.value)
+    emit('refresh')
+  else
+    emit('backToTop')
+}
 </script>
 
 <template>
@@ -98,65 +109,84 @@ function toggleDockHide(hide: boolean) {
         bottom: settings.dockPosition === 'bottom',
         hide: hideDock,
       }"
-      style="backdrop-filter: var(--bew-filter-glass-1);"
-      absolute duration-300 ease-in-out transform-gpu
-      p-2 m-2 bg="$bew-content-2 dark:$bew-elevated-1" flex="~ col gap-2 shrink-0"
-      rounded="60px" border="1px $bew-border-color"
-      shadow="$bew-shadow-2"
       @mouseenter="toggleDockHide(false)"
       @mouseleave="toggleDockHide(true)"
     >
-      <template v-for="dockItem in currentDockItems" :key="dockItem.page">
-        <Tooltip :content="$t(dockItem.i18nKey)" :placement="tooltipPlacement">
+      <div
+        class="dock-content-inner"
+      >
+        <template v-for="dockItem in currentDockItems" :key="dockItem.page">
+          <Tooltip :content="$t(dockItem.i18nKey)" :placement="tooltipPlacement">
+            <button
+              class="dock-item group"
+              :class="{ active: activatedPage === dockItem.page }"
+              @click="emit('changePage', dockItem.page)"
+            >
+              <div
+                v-show="activatedPage !== dockItem.page"
+                :class="dockItem.icon"
+                text-xl
+              />
+              <div
+                v-show="activatedPage === dockItem.page"
+                :class="dockItem.iconActivated"
+                text-xl
+              />
+            </button>
+          </Tooltip>
+        </template>
+
+        <!-- dividing line -->
+        <div class="divider" />
+
+        <Tooltip
+          v-if="!settings.disableLightDarkModeSwitcherOnDock"
+          :content="isDark ? $t('dock.dark_mode') : $t('dock.light_mode')" :placement="tooltipPlacement"
+        >
           <button
-            class="dock-item group"
-            :class="{ active: activatedPage === dockItem.page }"
-            @click="emit('change-page', dockItem.page)"
+            class="dock-item"
+            @click="toggleDark"
+            @mouseenter="hoveringDockItem.themeMode = true"
+            @mouseleave="hoveringDockItem.themeMode = false"
           >
-            <div
-              v-show="activatedPage !== dockItem.page"
-              :class="dockItem.icon"
-              text-xl
-            />
-            <div
-              v-show="activatedPage === dockItem.page"
-              :class="dockItem.iconActivated"
-              text-xl
-            />
+            <Transition name="fade">
+              <div v-show="hoveringDockItem.themeMode" absolute>
+                <div v-if="isDark" i-line-md:sunny-outline-to-moon-loop-transition text-xl />
+                <div v-else i-line-md:moon-alt-to-sunny-outline-loop-transition text-xl />
+              </div>
+            </Transition>
+            <Transition name="fade">
+              <div v-show="!hoveringDockItem.themeMode" absolute>
+                <div v-if="isDark" i-line-md:sunny-outline-to-moon-transition text-xl />
+                <div v-else i-line-md:moon-to-sunny-outline-transition text-xl />
+              </div>
+            </Transition>
           </button>
         </Tooltip>
-      </template>
 
-      <!-- dividing line -->
-      <div class="divider" />
+        <Tooltip :content="$t('dock.settings')" :placement="tooltipPlacement">
+          <button class="dock-item" @click="emit('settingsVisibilityChange')">
+            <div i-mingcute:settings-3-line text-xl />
+          </button>
+        </Tooltip>
+      </div>
 
-      <Tooltip :content="isDark ? $t('dock.dark_mode') : $t('dock.light_mode')" :placement="tooltipPlacement">
-        <button
-          class="dock-item"
-          @click="toggleDark"
-          @mouseenter="hoveringDockItem.themeMode = true"
-          @mouseleave="hoveringDockItem.themeMode = false"
-        >
-          <Transition name="fade">
-            <div v-show="hoveringDockItem.themeMode" absolute>
-              <div v-if="isDark" i-line-md:sunny-outline-to-moon-loop-transition text-xl />
-              <div v-else i-line-md:moon-alt-to-sunny-outline-loop-transition text-xl />
-            </div>
-          </Transition>
-          <Transition name="fade">
-            <div v-show="!hoveringDockItem.themeMode" absolute>
-              <div v-if="isDark" i-line-md:sunny-outline-to-moon-transition text-xl />
-              <div v-else i-line-md:moon-to-sunny-outline-transition text-xl />
-            </div>
-          </Transition>
-        </button>
-      </Tooltip>
-
-      <Tooltip :content="$t('dock.settings')" :placement="tooltipPlacement">
-        <button class="dock-item" @click="emit('settings-visibility-change')">
-          <div i-mingcute:settings-3-line text-xl />
-        </button>
-      </Tooltip>
+      <button
+        v-if="settings.moveBackToTopOrRefreshButtonToDock && activatedPage !== AppPage.Search"
+        class="back-to-top-or-refresh-btn"
+        @click="handleBackToTopOrRefresh"
+      >
+        <Transition name="fade">
+          <div
+            v-if="reachTop" i-line-md:rotate-270
+            absolute text-xl rotate-90
+          />
+          <div
+            v-else i-line-md:arrow-small-up
+            absolute text-xl
+          />
+        </Transition>
+      </button>
     </div>
   </aside>
 </template>
@@ -187,6 +217,8 @@ function toggleDockHide(hide: boolean) {
 }
 
 .dock-content {
+  --at-apply: absolute flex justify-center items-center;
+
   &.left {
     --at-apply: left-2 after:right--4px;
   }
@@ -202,18 +234,45 @@ function toggleDockHide(hide: boolean) {
   }
 
   &.bottom {
-    --at-apply: top-unset bottom-0 flex-row;
+    --at-apply: top-unset bottom-0;
   }
   &.bottom.hide {
     --at-apply: opacity-0 translate-y-100%;
   }
 
   .divider {
-    --at-apply: my-2 w-full h-2px bg-$bew-fill-2;
+    --at-apply: my-1 mx-3 h-4px bg-$bew-fill-1 rounded-4;
   }
 
   &.bottom .divider {
-    --at-apply: w-2px h-auto my-0 mx-2;
+    --at-apply: w-4px h-auto my-3 mx-1;
+  }
+
+  .dock-content-inner {
+    --at-apply: duration-300 ease-in-out transform-gpu;
+    --at-apply: p-2 m-2 bg-$bew-content-2 dark:bg-$bew-elevated-1;
+    --at-apply: flex flex-col gap-2 shrink-0;
+    --at-apply: rounded-full border-$bew-border-color;
+    --at-apply: shadow-$bew-shadow-2;
+    backdrop-filter: var(--bew-filter-glass-1);
+  }
+
+  &.bottom .dock-content-inner {
+    --at-apply: flex-row;
+  }
+
+  .back-to-top-or-refresh-btn {
+    --at-apply: absolute md:bottom--45px bottom--35px;
+    --at-apply: md:w-45px w-35px md:h-45px h-35px;
+    --at-apply: grid place-items-center;
+    --at-apply: filter-$bew-filter-glass-1;
+    --at-apply: bg-$bew-elevated-1 hover:bg-$bew-content-1-hover dark-hover:bg-$bew-elevated-2;
+    --at-apply: rounded-full shadow-$bew-shadow-2;
+    backdrop-filter: var(--bew-filter-glass-1);
+  }
+
+  &.bottom .back-to-top-or-refresh-btn {
+    --at-apply: bottom-unset md:right--45px right--35px;
   }
 }
 

@@ -91,6 +91,8 @@ settings:
   auto_hide_dock: 自動收埋 Dock
   dock_content_adjustment: Dock 內容調整
   dock_content_adjustment_desc: 第一個啓用嘅 Dock 項個頁面會係開始頁面
+  disable_light_dark_mode_switcher: 閂咗淺/深色主題切換粒掣
+  move_back_to_top_and_refresh_to_dock: 將返去頂部同重新整理粒掣擺到落 Dock 度
 
   # Appearance
   theme: 色系
@@ -325,7 +327,10 @@ history:
     係咪要開返收睇記錄呀？
     你確定要開返收睇記錄？
 favorites:
-  unfavorite: 唔再愛喇
+  unfavorite: 唔愛喇
+  unfavorite_confirm: |-
+    係咪要剷走你揀過啲片呀？
+    噉做冇得返轉頭噃，你確定要剷走你揀過啲片？
 watch_later:
   title: 陣間至睇
   clear_all: 剷曬陣間至睇啲片

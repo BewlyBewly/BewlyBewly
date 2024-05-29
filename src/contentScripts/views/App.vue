@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { useDebounceFn, useThrottleFn, useToggle } from '@vueuse/core'
+import { useThrottleFn, useToggle } from '@vueuse/core'
 import type { Ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import browser from 'webextension-polyfill'
 
 import AppBackground from '~/components/AppBackground.vue'
-import BackToTopAndRefreshButtons from '~/components/BackToTopAndRefreshButtons.vue'
+import BackToTopOrRefreshButton from '~/components/BackToTopOrRefreshButton.vue'
 import Dock from '~/components/Dock/Dock.vue'
 import OverlayScrollbarsComponent from '~/components/OverlayScrollbarsComponent'
 import RightSideButtons from '~/components/RightSideButtons/RightSideButtons.vue'
@@ -15,7 +15,7 @@ import type { BewlyAppProvider } from '~/composables/useAppProvider'
 import { useDark } from '~/composables/useDark'
 import { AppPage, LanguageType } from '~/enums/appEnums'
 import { accessKey, settings } from '~/logic'
-import { getUserID, hexToRGBA, isHomePage, smoothScrollToTop } from '~/utils/main'
+import { getUserID, hexToRGBA, isHomePage, scrollToTop } from '~/utils/main'
 
 const { isDark } = useDark()
 const activatedPage = ref<AppPage>(settings.value.dockItemVisibilityList.find(e => e.visible === true)?.page ?? AppPage.Home)
@@ -36,7 +36,9 @@ const handlePageRefresh = ref<() => void>()
 const handleReachBottom = ref<() => void>()
 const handleThrottledPageRefresh = useThrottleFn(() => handlePageRefresh.value?.(), 500)
 const handleThrottledReachBottom = useThrottleFn(() => handleReachBottom.value?.(), 500)
+const handleThrottledBackToTop = useThrottleFn(() => handleBackToTop(), 1000)
 const topBarRef = ref()
+const reachTop = ref<boolean>(false)
 
 const isVideoPage = computed(() => {
   if (/https?:\/\/(www.)?bilibili.com\/video\/.*/.test(location.href))
@@ -148,7 +150,7 @@ function changeActivatePage(pageName: AppPage) {
       if (scrollTop === 0)
         handleThrottledPageRefresh()
       else
-        handleBackToTop()
+        handleThrottledBackToTop()
     }
     return
   }
@@ -193,7 +195,7 @@ function setAppThemeColor() {
 function handleBackToTop(targetScrollTop = 0 as number) {
   const osInstance = scrollbarRef.value?.osInstance()
 
-  smoothScrollToTop(osInstance.elements().viewport, 300, targetScrollTop)
+  scrollToTop(osInstance.elements().viewport, targetScrollTop)
   topBarRef.value?.toggleTopBarVisible(true)
 }
 
@@ -204,22 +206,26 @@ function handleAdaptToOtherPageStylesChange() {
     document.documentElement.classList.remove('bewly-design')
 }
 
-const handleOsScroll = useDebounceFn(() => {
+function handleOsScroll() {
   const osInstance = scrollbarRef.value?.osInstance()
   const { viewport } = osInstance.elements()
   const { scrollTop, scrollHeight, clientHeight } = viewport // get scroll offset
 
-  if (scrollTop === 0)
+  if (scrollTop === 0) {
     showTopBarMask.value = false
-  else
+    reachTop.value = true
+  }
+  else {
     showTopBarMask.value = true
+    reachTop.value = false
+  }
 
   if (clientHeight + scrollTop >= scrollHeight - 150)
     handleThrottledReachBottom()
 
   if (isHomePage())
     topBarRef.value?.handleScroll()
-}, 50)
+}
 
 function handleBlockAds() {
   // Do not use the "ads" keyword. AdGuard, AdBlock, and some ad-blocking extensions will
@@ -282,6 +288,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
   activatedPage,
   mainAppRef,
   scrollbarRef,
+  reachTop,
   handleBackToTop,
   handlePageRefresh,
   handleReachBottom,
@@ -308,6 +315,8 @@ provide<BewlyAppProvider>('BEWLY_APP', {
         :activated-page="activatedPage"
         @change-page="pageName => changeActivatePage(pageName)"
         @settings-visibility-change="toggleSettings"
+        @refresh="handleThrottledPageRefresh"
+        @back-to-top="handleThrottledBackToTop"
       />
       <RightSideButtons
         v-else
@@ -359,10 +368,10 @@ provide<BewlyAppProvider>('BEWLY_APP', {
               :w="isVideoPage ? '[calc(100%-160px)]' : 'lg:85% md:[calc(90%-60px)] [calc(100%-140px)]'"
             >
               <!-- control button group -->
-              <BackToTopAndRefreshButtons
-                v-if="activatedPage !== AppPage.Search" :show-refresh-button="!showTopBarMask"
+              <BackToTopOrRefreshButton
+                v-if="activatedPage !== AppPage.Search && !settings.moveBackToTopOrRefreshButtonToDock"
                 @refresh="handleThrottledPageRefresh"
-                @back-to-top="handleBackToTop"
+                @back-to-top="handleThrottledBackToTop"
               />
 
               <Transition name="page-fade">

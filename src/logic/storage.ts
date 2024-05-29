@@ -22,6 +22,8 @@ export interface Settings {
   dockPosition: 'left' | 'right' | 'bottom'
   autoHideDock: boolean
   dockItemVisibilityList: { page: AppPage, visible: boolean }[]
+  disableLightDarkModeSwitcherOnDock: boolean
+  moveBackToTopOrRefreshButtonToDock: boolean
 
   theme: 'light' | 'dark' | 'auto'
   themeColor: string
@@ -69,6 +71,8 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   disableFrostedGlass: false,
   reduceFrostedGlassBlur: false,
   dockItemVisibilityList: [],
+  disableLightDarkModeSwitcherOnDock: false,
+  moveBackToTopOrRefreshButtonToDock: false,
 
   theme: 'auto',
   themeColor: '#00a1d6',

@@ -198,24 +198,25 @@ defineExpose({ initData })
       <template v-if="!('seasonType' in activatedRankingType)">
         <VideoCard
           v-for="(video, index) in videoList"
-          :id="Number(video.aid)"
           :key="video.aid"
-          :duration="video.duration"
-          :title="video.title"
-          :desc="video.desc"
-          :cover="video.pic"
-          :author="video.owner.name"
-          :author-face="video.owner.face"
-          :mid="video.owner.mid"
-          :view="video.stat.view"
-          :danmaku="video.stat.danmaku"
-          :published-timestamp="video.pubdate"
-          :bvid="video.bvid"
-          :rank="index + 1"
-          :cid="video.cid"
+          :video="{
+            id: Number(video.aid),
+            duration: video.duration,
+            title: video.title,
+            desc: video.desc,
+            cover: video.pic,
+            author: video.owner.name,
+            authorFace: video.owner.face,
+            mid: video.owner.mid,
+            view: video.stat.view,
+            danmaku: video.stat.danmaku,
+            publishedTimestamp: video.pubdate,
+            bvid: video.bvid,
+            rank: index + 1,
+            cid: video.cid,
+          }"
           show-preview
           :horizontal="gridLayout !== 'adaptive'"
-
           w-full
         />
       </template>

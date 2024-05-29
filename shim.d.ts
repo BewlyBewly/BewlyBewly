@@ -1,3 +1,4 @@
+import type { AttributifyAttributes } from '@unocss/preset-attributify'
 import type { ProtocolWithReturn } from 'webext-bridge'
 
 declare module 'webext-bridge' {
@@ -7,4 +8,8 @@ declare module 'webext-bridge' {
     'tab-prev': { title: string | undefined }
     'get-current-tab': ProtocolWithReturn<{ tabId: number }, { title?: string }>
   }
+}
+
+declare module '@vue/runtime-dom' {
+  interface HTMLAttributes extends AttributifyAttributes {}
 }

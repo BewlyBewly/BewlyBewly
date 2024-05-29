@@ -91,7 +91,8 @@ settings:
   auto_hide_dock: 自動隱藏 Dock
   dock_content_adjustment: Dock 內容調整
   dock_content_adjustment_desc: 第一個啓用的 Dock 項目的頁面將是起始頁面
-  always_show_the_top_bar_logo: 永遠顯示頂欄 Logo
+  disable_light_dark_mode_switcher: 停用淺/深色模式切換按鈕
+  move_back_to_top_and_refresh_to_dock: 將返回頂部和重新整理按鈕移動到 Dock
 
   # Appearance
   theme: 主題
@@ -144,6 +145,7 @@ settings:
   search_page_mode_wallpaper_fixed: 將搜尋頁模式的背景固定
   home_tabs_adjustment: 標籤欄調整
   home_tabs_adjustment_desc: 第一個啓用的標籤項目調整頁面將是起始頁面
+  always_show_the_top_bar_logo: 永遠顯示頂欄 Logo
 
   # Compatibility
   # Common
@@ -326,6 +328,9 @@ history:
     你確定要啟用觀看記錄嗎？
 favorites:
   unfavorite: 取消收藏
+  unfavorite_confirm: |-
+    要取消收藏選中的影片嗎？
+    此操作無法撤消，你確定要取消收藏選中的影片嗎？
 watch_later:
   title: 稍後觀看
   clear_all: 清空稍後觀看

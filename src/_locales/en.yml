@@ -91,6 +91,8 @@ settings:
   auto_hide_dock: Automatically hide the dock
   dock_content_adjustment: Dock content adjustment
   dock_content_adjustment_desc: The page of the first activated dock item will be the startup page
+  disable_light_dark_mode_switcher: Disable light/dark mode switcher
+  move_back_to_top_and_refresh_to_dock: Move the back-to-top and refresh buttons to the dock
 
   # Appearance
   theme: Theme
@@ -322,6 +324,9 @@ history:
   turn_on_watch_history_confirm: Turn on watch history? Are you sure you want to turn on watch history?
 favorites:
   unfavorite: Unfavorite
+  unfavorite_confirm: |-
+    Remove selected video(s)?
+    This operation cannot be reversed. Are you sure you want to remove the selected video(s) from your favorites?
 watch_later:
   title: Watch Later
   clear_all: Clear all watch later

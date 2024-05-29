@@ -1,11 +1,12 @@
 <script setup lang="ts">
+import { useThrottleFn } from '@vueuse/core'
+
 import Logo from '~/components/Logo.vue'
 import SearchBar from '~/components/SearchBar/SearchBar.vue'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { homePageGridLayout, settings } from '~/logic'
 import type { HomeTab } from '~/stores/mainStore'
 import { useMainStore } from '~/stores/mainStore'
-import { delay } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
 import type { GridLayoutIcon } from './types'
@@ -13,6 +14,7 @@ import { HomeSubPage } from './types'
 
 const mainStore = useMainStore()
 const { handleBackToTop, scrollbarRef } = useBewlyApp()
+const handleThrottledBackToTop = useThrottleFn((targetScrollTop: number = 0) => handleBackToTop(targetScrollTop), 1000)
 
 const activatedPage = ref<HomeSubPage>(HomeSubPage.ForYou)
 const pages = {
@@ -103,7 +105,7 @@ function handleChangeTab(tab: HomeTab) {
     const scrollTop = osInstance.elements().viewport.scrollTop as number
 
     if ((!settings.value.useSearchPageModeOnHomePage && scrollTop > 0) || (settings.value.useSearchPageModeOnHomePage && scrollTop > 510)) {
-      handleBackToTop(settings.value.useSearchPageModeOnHomePage ? 510 : 0)
+      handleThrottledBackToTop(settings.value.useSearchPageModeOnHomePage ? 510 : 0)
     }
     else {
       if (tabContentLoading.value)
@@ -113,25 +115,14 @@ function handleChangeTab(tab: HomeTab) {
     return
   }
   else {
-    handleBackToTop(settings.value.useSearchPageModeOnHomePage ? 510 : 0)
+    handleThrottledBackToTop(settings.value.useSearchPageModeOnHomePage ? 510 : 0)
   }
 
-  // When the content of a tab is loading, prevent switching to another tab.
-  // Since `initPageAction()` within the tab replaces the `handleReachBottom` and `handlePageRefresh` functions.
-  // Therefore, this will lead to a failure in refreshing the data of the current tab
-  // because `handlePageRefresh` and `handleReachBottom` has been replaced
-  // now they are set to refresh the data of the tab you switched to
-  if (!tabContentLoading.value)
-    activatedPage.value = tab.page
+  activatedPage.value = tab.page
 }
 
 function toggleTabContentLoading(loading: boolean) {
-  nextTick(async () => {
-    // Delay the closing effect to prevent the transition effect from being too stiff
-    if (!loading)
-      await delay(500)
-    tabContentLoading.value = loading
-  })
+  tabContentLoading.value = loading
 }
 </script>
 

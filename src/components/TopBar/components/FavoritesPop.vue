@@ -6,7 +6,7 @@ import Empty from '~/components/Empty.vue'
 import Loading from '~/components/Loading.vue'
 import { useApiClient } from '~/composables/api'
 import { calcCurrentTime } from '~/utils/dataFormatter'
-import { getUserID, isHomePage, removeHttpFromUrl, smoothScrollToTop } from '~/utils/main'
+import { getUserID, isHomePage, removeHttpFromUrl, scrollToTop } from '~/utils/main'
 
 import type { FavoriteCategory, FavoriteResource } from '../types'
 
@@ -40,7 +40,7 @@ watch(activatedMediaId, (newVal: number, oldVal: number) => {
 
   favoriteResources.length = 0
   if (favoriteVideosWrap.value)
-    smoothScrollToTop(favoriteVideosWrap.value, 300)
+    scrollToTop(favoriteVideosWrap.value)
 
   currentPageNum.value = 1
   getFavoriteResources()
@@ -155,7 +155,7 @@ defineExpose({
       z="2"
       un-border="!rounded-t-$bew-radius"
     >
-      <h3 cursor="pointer" font-600 @click="smoothScrollToTop(favoriteVideosWrap, 300)">
+      <h3 cursor="pointer" font-600 @click="scrollToTop(favoriteVideosWrap)">
         {{ activatedFavoriteTitle }}
       </h3>
 

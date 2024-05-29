@@ -35,6 +35,12 @@ onBeforeUnmount(() => {
   clearInterval(pollLoginQRCodeInterval.value)
 })
 
+function changeAppRecommendationMode() {
+  settings.value.recommendationMode = 'app'
+  if (!accessKey.value)
+    handleAuthorize()
+}
+
 async function handleAuthorize() {
   showQRCodeDialog.value = true
   preventCloseSettings.value = true
@@ -148,10 +154,7 @@ function handleToggleHomeTab(tab: any) {
               background: settings.recommendationMode === 'app' ? 'var(--bew-theme-color)' : '',
               color: settings.recommendationMode === 'app' ? 'white' : '',
             }"
-            @click="() => {
-              settings.recommendationMode = 'app'
-              handleAuthorize()
-            }"
+            @click="changeAppRecommendationMode"
           >
             App
           </div>
@@ -188,10 +191,17 @@ function handleToggleHomeTab(tab: any) {
         "
         @close="handleCloseQRCodeDialog"
       >
-        <div flex="~ gap-4 col items-center">
-          <p>{{ $t('settings.scan_qrcode_desc') }}</p>
+        <div flex="~ col gap-4 items-center">
+          <div>
+            <p mb-2 text-center>
+              {{ $t('settings.scan_qrcode_desc') }}
+            </p>
+            <p text="$bew-text-2 sm">
+              {{ $t('settings.authorize_app_desc') }}
+            </p>
+          </div>
 
-          <div mt-4 bg-white border="white 4">
+          <div bg-white border="white 4">
             <QRCodeVue v-if="loginQRCodeUrl" :value="loginQRCodeUrl" :size="150" />
             <div v-else w-150px h-150px grid="~ place-items-center">
               <div i-svg-spinners:ring-resize />

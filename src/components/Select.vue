@@ -90,7 +90,7 @@ function onMouseEnter() {
         pos="absolute" bg="$bew-elevated-2" shadow="$bew-shadow-2" p="2"
         m="t-2"
         rounded="$bew-radius" z="1" flex="~ col gap-1"
-        w="full" max-h-300px overflow-y-scroll will-change-transform transform-gpu
+        w="full" max-h-300px overflow-y-overlay will-change-transform transform-gpu
       >
         <div
           v-for="option in options"
@@ -113,7 +113,7 @@ function onMouseEnter() {
 <style lang="scss" scoped>
 .v-enter-active,
 .v-leave-active {
-  --at-apply: transition-all duration-500 transform-gpu;
+  --at-apply: transition-all duration-340 transform-gpu;
 }
 
 .v-enter-from,

@@ -9,6 +9,9 @@ body:
       value: |
         ## BUG 提出
         如果你是 Edge 浏览器，提出问题时不妨看一下[这里](https://github.com/hakadao/BewlyBewly/issues/552)
+        Edge 受遥遥领先的 Edge Addons 审核导致版本更新永远落后于 Chrome，且审核问题不是我们控制的
+        Edge 浏览器也可以通过 [Chrome Web Store 下载](https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp)，不要因为 **Edge 浏览器** 在 [Chrome Web Store](https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp) 上弹出大提示而又下回 Edge 版本
+        如果是旧版本的问题或是已经有人提问过的问题将会关闭
 
   - type: textarea
     attributes:
@@ -17,11 +20,11 @@ body:
       placeholder: |
         浏览器: (如 Chrome)
         浏览器版本: (如 123.0.6312.107)
-        BewlyBewly 版本: (如 0.16.2)
+        BewlyBewly 版本: (如 0.18.9)
       value: |
         浏览器: (如 Chrome)
         浏览器版本: (如 123.0.6312.107)
-        BewlyBewly 版本: (如 0.16.2)
+        BewlyBewly 版本: (如 0.18.9)
     validations:
       required: true
 
