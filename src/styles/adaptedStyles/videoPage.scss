@@ -250,6 +250,10 @@
     .note-detail .note-operation .sanlian-box {
       border-color: var(--bew-border-color);
     }
+
+    .rcmd-tab-switcher .rcmd-tab-move .rcmd-tab-move-inner {
+      background: linear-gradient(270deg, var(--graph_bg_thin) 61.53%, rgba(255, 255, 255, 0) 100%);
+    }
   }
 
   //  #endregion
