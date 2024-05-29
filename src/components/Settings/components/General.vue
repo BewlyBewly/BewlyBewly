@@ -110,6 +110,10 @@ function handleToggleDockItem(dockItem: any) {
         />
       </SettingsItem>
 
+      <SettingsItem :title="$t('settings.enable_grid_layout_switcher')">
+        <Radio v-model="settings.enableGridLayoutSwitcher" />
+      </SettingsItem>
+
       <SettingsItem :title="$t('settings.enable_horizontal_scrolling')" :desc="$t('settings.enable_horizontal_scrolling_desc')">
         <Radio v-model="settings.enableHorizontalScrolling" />
       </SettingsItem>

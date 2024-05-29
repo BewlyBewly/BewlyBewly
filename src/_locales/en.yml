@@ -68,6 +68,7 @@ settings:
   chk_box:
     show: Show
     hidden: Hidden
+  enable_grid_layout_switcher: Enable grid layout switcher
   enable_horizontal_scrolling: Enable horizontal scrolling
   enable_horizontal_scrolling_desc: After enabling, mouse scrolling will directly scroll the horizontal scroll list
   enable_video_preview: Enable video preview feature

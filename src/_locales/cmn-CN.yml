@@ -68,6 +68,7 @@ settings:
   chk_box:
     show: 显示
     hidden: 隐藏
+  enable_grid_layout_switcher: 启用页面网格布局切换器
   enable_horizontal_scrolling: 启用横向滚动
   enable_horizontal_scrolling_desc: 启用后，鼠标滚动时将直接滚动横向滚动列表
   enable_video_preview: 启用视频预览功能

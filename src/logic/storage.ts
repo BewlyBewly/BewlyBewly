@@ -9,6 +9,7 @@ export const accessKey = useStorageLocal('accessKey', '')
 
 export interface Settings {
   language: string
+  enableGridLayoutSwitcher: boolean
   enableHorizontalScrolling: boolean
   openLinkInCurrentTab: boolean
   enableVideoPreview: boolean
@@ -58,6 +59,7 @@ export interface Settings {
 }
 export const settings = useStorageLocal('settings', ref<Settings>({
   language: '',
+  enableGridLayoutSwitcher: true,
   enableHorizontalScrolling: false,
   openLinkInCurrentTab: false,
   enableVideoPreview: true,

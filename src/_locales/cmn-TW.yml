@@ -68,6 +68,7 @@ settings:
   chk_box:
     show: 顯示
     hidden: 隱藏
+  enable_grid_layout_switcher: 啟用版面格線佈局切換器
   enable_horizontal_scrolling: 啟用橫向捲動
   enable_horizontal_scrolling_desc: 啟用後，滑鼠捲動時將直接捲動橫向捲軸列表
   enable_video_preview: 啟用影片預覽功能
