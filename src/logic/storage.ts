@@ -49,6 +49,7 @@ export interface Settings {
 
   recommendationMode: 'web' | 'app'
   homePageTabVisibilityList: { page: HomeSubPage, visible: boolean }[]
+  alwaysShowTabsOnHomePage: boolean
   useSearchPageModeOnHomePage: boolean
   searchPageModeWallpaperFixed: boolean
   alwaysShowTheTopBarLogoOnSearchPageMode: boolean
@@ -99,6 +100,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
 
   recommendationMode: 'web',
   homePageTabVisibilityList: [],
+  alwaysShowTabsOnHomePage: false,
   useSearchPageModeOnHomePage: false,
   searchPageModeWallpaperFixed: false,
   alwaysShowTheTopBarLogoOnSearchPageMode: false,

@@ -192,7 +192,7 @@ function toggleTabContentLoading(loading: boolean) {
         ease-in-out flex="~ justify-between items-start gap-4"
         :class="{ hide: shouldMoveTabsUp }"
       >
-        <section flex="~ items-center gap-3 wrap">
+        <section v-if="!(!settings.alwaysShowTabsOnHomePage && currentTabs.length === 1)" flex="~ items-center gap-3 wrap">
           <button
             v-for="tab in currentTabs" :key="tab.page"
             :class="{ 'tab-activated': activatedPage === tab.page }"
@@ -219,7 +219,7 @@ function toggleTabContentLoading(loading: boolean) {
           v-if="settings.enableGridLayoutSwitcher"
           style="backdrop-filter: var(--bew-filter-glass-1)"
           flex="~ gap-1 shrink-0" p-1 h-35px bg="$bew-elevated-1" transform-gpu
-          rounded="$bew-radius" shadow="$bew-shadow-1" box-border border="1 $bew-border-color"
+          ml-auto rounded="$bew-radius" shadow="$bew-shadow-1" box-border border="1 $bew-border-color"
         >
           <div
             v-for="icon in gridLayoutIcons" :key="icon.value"

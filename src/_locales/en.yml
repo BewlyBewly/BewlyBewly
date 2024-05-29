@@ -144,6 +144,7 @@ settings:
   search_page_mode_wallpaper_fixed: Make the wallpaper of the search page mode fixed
   home_tabs_adjustment: Tabs adjustment
   home_tabs_adjustment_desc: The first activated tab is the default page
+  always_show_tabs_on_home_page: Always show tabs on the home page
   always_show_the_top_bar_logo: Always show the top bar logo
 
   # Compatibility

@@ -146,6 +146,7 @@ settings:
   search_page_mode_wallpaper_fixed: 將搜尋頁模式的背景固定
   home_tabs_adjustment: 標籤欄調整
   home_tabs_adjustment_desc: 第一個啓用的標籤項目調整頁面將是起始頁面
+  always_show_tabs_on_home_page: 總是顯示首頁標籤欄
   always_show_the_top_bar_logo: 永遠顯示頂欄 Logo
 
   # Compatibility

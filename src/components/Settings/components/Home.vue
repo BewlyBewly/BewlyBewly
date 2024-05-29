@@ -254,6 +254,9 @@ function handleToggleHomeTab(tab: any) {
           </template>
         </draggable>
       </SettingsItem>
+      <SettingsItem :title="$t('settings.always_show_tabs_on_home_page')">
+        <Radio v-model="settings.alwaysShowTabsOnHomePage" />
+      </SettingsItem>
     </SettingsItemGroup>
 
     <SettingsItemGroup :title="$t('settings.group_search_page_mode')">
