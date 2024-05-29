@@ -540,7 +540,7 @@ defineExpose({ initData })
             title: `${video.item.title}`,
             cover: `${video.item.cover}`,
             author: video.item?.mask?.avatar.text,
-            authorFace: video.item?.mask?.avatar.cover,
+            authorFace: video.item?.mask?.avatar.cover || video.item?.avatar?.cover,
             followed: video.item?.bottom_rcmd_reason === '已关注' || video.item?.bottom_rcmd_reason === '已關注',
             mid: video.item?.mask?.avatar.up_id,
             capsuleText: video.item?.desc?.split('·')[1],
@@ -548,6 +548,7 @@ defineExpose({ initData })
             viewStr: video.item.cover_left_text_1,
             danmakuStr: video.item.cover_left_text_2,
             cid: video.item?.player_args?.cid,
+            url: video.item?.goto === 'bangumi' ? video.item.uri : '',
             type: video.item.card_goto === 'bangumi' ? 'bangumi' : isVerticalVideo(video.item.uri!) ? 'vertical' : 'horizontal',
           } : undefined"
           show-preview
