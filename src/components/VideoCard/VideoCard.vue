@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { Icon } from '@iconify/vue'
+
 import Button from '~/components/Button.vue'
 import { useApiClient } from '~/composables/api'
 import { settings } from '~/logic'
@@ -335,7 +337,7 @@ function handleUndo() {
                   <div i-mingcute:carplay-line />
                 </Tooltip>
                 <Tooltip v-else :content="$t('common.added')" placement="bottom" type="dark">
-                  <div i-line-md:confirm />
+                  <Icon icon="line-md:confirm" />
                 </Tooltip>
               </button>
             </template>

@@ -58,6 +58,7 @@
     "@antfu/eslint-config": "^2.17.0",
     "@ffflorian/jszip-cli": "^3.6.3",
     "@iconify/json": "^2.2.208",
+    "@iconify/vue": "^4.1.2",
     "@intlify/unplugin-vue-i18n": "^4.0.0",
     "@rollup/plugin-replace": "^5.0.5",
     "@types/dompurify": "^3.0.5",

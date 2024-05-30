@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
 import { onMounted, reactive, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -412,7 +413,6 @@ defineExpose({
                   rounded="$bew-radius-half"
                 >
                 <div
-
                   opacity-0 group-hover:opacity-100
                   pos="absolute" duration-300 bg="black opacity-60"
                   rounded="$bew-radius-half" p-1
@@ -423,7 +423,7 @@ defineExpose({
                     <div i-mingcute:carplay-line />
                   </Tooltip>
                   <Tooltip v-else :content="$t('common.added')" placement="bottom" type="dark">
-                    <div i-line-md:confirm />
+                    <Icon icon="line-md:confirm" />
                   </Tooltip>
                 </div>
               </div>

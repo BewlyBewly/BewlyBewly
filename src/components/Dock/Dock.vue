@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
+
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { useDark } from '~/composables/useDark'
 import { AppPage } from '~/enums/appEnums'
@@ -151,14 +153,14 @@ function handleBackToTopOrRefresh() {
           >
             <Transition name="fade">
               <div v-show="hoveringDockItem.themeMode" absolute>
-                <div v-if="isDark" i-line-md:sunny-outline-to-moon-loop-transition text-xl />
-                <div v-else i-line-md:moon-alt-to-sunny-outline-loop-transition text-xl />
+                <Icon v-if="isDark" icon="line-md:sunny-outline-to-moon-loop-transition" />
+                <Icon v-else icon="line-md:moon-alt-to-sunny-outline-loop-transition" />
               </div>
             </Transition>
             <Transition name="fade">
               <div v-show="!hoveringDockItem.themeMode" absolute>
-                <div v-if="isDark" i-line-md:sunny-outline-to-moon-transition text-xl />
-                <div v-else i-line-md:moon-to-sunny-outline-transition text-xl />
+                <Icon v-if="isDark" icon="line-md:sunny-outline-to-moon-transition" />
+                <Icon v-else icon="line-md:moon-to-sunny-outline-transition" />
               </div>
             </Transition>
           </button>
@@ -177,13 +179,15 @@ function handleBackToTopOrRefresh() {
         @click="handleBackToTopOrRefresh"
       >
         <Transition name="fade">
-          <div
-            v-if="reachTop" i-line-md:rotate-270
-            absolute text-xl rotate-90
+          <Icon
+            v-if="reachTop"
+            icon="line-md:rotate-270"
+            shrink-0 rotate-90 absolute text-2xl
           />
-          <div
-            v-else i-line-md:arrow-small-up
-            absolute text-xl
+          <Icon
+            v-else
+            icon="line-md:arrow-small-up"
+            shrink-0 absolute text-2xl
           />
         </Transition>
       </button>
