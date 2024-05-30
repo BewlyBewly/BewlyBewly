@@ -38,7 +38,7 @@ const handleThrottledPageRefresh = useThrottleFn(() => handlePageRefresh.value?.
 const handleThrottledReachBottom = useThrottleFn(() => handleReachBottom.value?.(), 500)
 const handleThrottledBackToTop = useThrottleFn(() => handleBackToTop(), 1000)
 const topBarRef = ref()
-const reachTop = ref<boolean>(false)
+const reachTop = ref<boolean>(true)
 
 const isVideoPage = computed(() => {
   if (/https?:\/\/(www.)?bilibili.com\/video\/.*/.test(location.href))
