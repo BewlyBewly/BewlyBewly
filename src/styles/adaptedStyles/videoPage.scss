@@ -169,18 +169,21 @@
 
   // #region dark mode adaption part
   &.dark {
-
-    .note-list .note-card-container .note-card,
-    .resizable-component .ql-tag-blot .time-tag-item,
-    .ql-toolbar {
-      background-color: var(--bew-fill-1);
-    }
-
     .video-ai-assistant .video-ai-assistant-bg::before,
     .note-pc .note-container .note-header .back-note-list:hover,
     .note-pc .note-container .note-header .jump-note-package:hover,
     .note-pc .note-container .note-header .close-note:hover {
       background: var(--bew-fill-2);
+    }
+
+    .rcmd-tab-switcher .rcmd-tab-move .rcmd-tab-move-inner {
+      background: linear-gradient(270deg, var(--bew-bg) 61.53%, transparent 100%);
+    }
+
+    .note-list .note-card-container .note-card,
+    .resizable-component .ql-tag-blot .time-tag-item,
+    .ql-toolbar {
+      background-color: var(--bew-fill-1);
     }
 
     .note-pc .note-container,
@@ -249,10 +252,6 @@
     .note-list .note-card-container .note-card:hover,
     .note-detail .note-operation .sanlian-box {
       border-color: var(--bew-border-color);
-    }
-
-    .rcmd-tab-switcher .rcmd-tab-move .rcmd-tab-move-inner {
-      background: linear-gradient(270deg, var(--graph_bg_thin) 61.53%, rgba(255, 255, 255, 0) 100%);
     }
   }
 
