@@ -276,13 +276,19 @@ function handleUndo() {
             </Transition>
 
             <!-- Ranking Number -->
-            <div v-if="video.rank" absolute p-2 group-hover:opacity-0 duration-300>
+            <div
+              v-if="video.rank"
+              pos="absolute top-0"
+              p-2 group-hover:opacity-0
+              duration-300
+            >
               <div
                 v-if="Number(video.rank) <= 3"
-                bg="$bew-theme-color" text-center lh-30px h-30px w-30px
+                bg="$bew-theme-color" text-center lh-0 h-30px w-30px
                 text-white rounded="1/2" shadow="$bew-shadow-1"
                 border="1 $bew-theme-color"
-                text="2xl" fw-bold
+                grid="~ place-content-center"
+                text="xl" fw-bold
               >
                 {{ video.rank }}
               </div>
