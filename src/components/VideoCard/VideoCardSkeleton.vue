@@ -69,7 +69,7 @@ const wValue = computed((): string => {
 
         <div mt-4 flex>
           <div
-            text="transparent sm" inline-block p="x-2" h-7 bg="$bew-fill-1"
+            text="transparent sm" inline-block p="x-2" h-5 bg="$bew-fill-1"
             rounded-4
           >
             hello world

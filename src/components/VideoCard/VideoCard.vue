@@ -202,6 +202,7 @@ function handleUndo() {
     rounded="$bew-radius"
     ring="active:8 active:$bew-fill-3"
     bg="active:$bew-fill-3"
+    transform="~ translate-z-0"
     mb-4
   >
     <!-- By directly using predefined unocss width properties, it is possible to dynamically set the width attribute -->
@@ -230,6 +231,7 @@ function handleUndo() {
             :w="wValue" h-fit relative bg="$bew-fill-4" rounded="$bew-radius"
             cursor-pointer
             group-hover:z-2
+            transform="~ translate-z-0"
           >
             <!-- Video cover -->
             <img
@@ -496,18 +498,12 @@ function handleUndo() {
     <VideoCardSkeleton
       v-if="skeleton"
       :horizontal="horizontal"
-      mb-0
+      important-mb-1
     />
   </div>
 </template>
 
 <style lang="scss" scoped>
-// .video-card.is-dislike {
-//   > *:not(#dislike-control) {
-//     --at-apply: invisible pointer-events-none duration-0 transition-none;
-//   }
-// }
-
 .more-active {
   --at-apply: opacity-100 bg-$bew-fill-3;
 }
