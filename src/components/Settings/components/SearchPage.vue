@@ -206,6 +206,6 @@ function changeWallpaper(url: string) {
 
 <style scoped lang="scss">
 .selected-wallpaper {
-  --at-apply: border-$bew-theme-color-60
+  --at-apply: border-$bew-theme-color-60;
 }
 </style>

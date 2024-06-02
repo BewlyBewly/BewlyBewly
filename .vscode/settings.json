@@ -39,8 +39,15 @@
     "jsonc",
     "yaml",
     "toml",
+    "xml",
     "gql",
-    "graphql"
+    "graphql",
+    "astro",
+    "css",
+    "less",
+    "scss",
+    "pcss",
+    "postcss"
   ],
 
   "cSpell.words": [

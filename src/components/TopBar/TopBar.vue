@@ -760,7 +760,7 @@ defineExpose({
 
 .slide-in-leave-to,
 .slide-in-enter-from {
-  --at-apply: transform important:translate-y-4 opacity-0;
+  --at-apply: transform important: translate-y-4 opacity-0;
 }
 
 .slide-out-enter-active,
@@ -770,7 +770,7 @@ defineExpose({
 
 .slide-out-leave-to,
 .slide-out-enter-from {
-  --at-apply: transform important:-translate-y-4 opacity-0;
+  --at-apply: transform important: -translate-y-4 opacity-0;
 }
 
 .fade-enter-active,
@@ -788,31 +788,24 @@ defineExpose({
 }
 
 .bew-popover {
-  --at-apply: absolute top-60px left-1/2
-    transform -translate-x-1/2
-    overflow-visible
-    after:content-empty
-    after:opacity-100 after:w-full after:h-100px
-    after:absolute after:top--30px after:left-1/2 after:-z-1
-    after:transform after:-translate-x-1/2;
+  --at-apply: absolute top-60px left-1/2 transform -translate-x-1/2 overflow-visible
+    after: content-empty after: opacity-100 after: w-full after: h-100px after: absolute
+    after: top--30px after: left-1/2 after: -z-1 after: transform after: -translate-x-1/2;
 }
 
 .logo.activated {
-  --at-apply: bg-$bew-theme-color dark:bg-white;
+  --at-apply: bg-$bew-theme-color dark: bg-white;
 
   svg {
-    --at-apply: fill-white dark:fill-$bew-theme-color;
+    --at-apply: fill-white dark: fill-$bew-theme-color;
   }
 }
 
 .right-side {
-
   .unread-message {
-    --at-apply: absolute -top-1 right-0
-      important:px-1 important:py-2 rounded-full
-      text-xs leading-0 z-1 min-w-16px h-16px
-      flex justify-center items-center
-      bg-$bew-theme-color  text-white;
+    --at-apply: absolute -top-1 right-0 important: px-1 important: py-2 rounded-full
+      text-xs leading-0 z-1 min-w-16px h-16px flex justify-center items-center bg-$bew-theme-color
+      text-white;
     box-shadow: 0 2px 4px rgba(var(--tw-shadow-color), 0.4);
   }
 
@@ -820,11 +813,13 @@ defineExpose({
     --at-apply: relative text-$bew-text-1 flex items-center;
 
     &:not(.avatar) a {
-      --at-apply: text-xl flex items-center p-2 rounded-40px duration-300 relative z-5;
+      --at-apply: text-xl flex items-center p-2 rounded-40px duration-300
+        relative z-5;
       // --at-apply: after:content-empty after:absolute after:w-120% after:h-120% after:z-0 after:bg-yellow;
     }
 
-    &.active a, &:not(.upload) a:hover {
+    &.active a,
+    &:not(.upload) a:hover {
       --un-drop-shadow: drop-shadow(0 0 6px white);
       --at-apply: bg-$bew-fill-2;
     }
@@ -832,12 +827,10 @@ defineExpose({
 
   .right-side-item .login {
     --un-drop-shadow: drop-shadow(0 0 6px var(--bew-theme-color));
-    --at-apply: rounded-full mx-1
-      important:text-$bew-theme-color important:px-4
-      hover:important-bg-$bew-theme-color hover:important-text-white
-      flex items-center justify-center important:text-base w-120px
-      border-solid border-$bew-theme-color border-2
-      important:dark:filter;
+    --at-apply: rounded-full mx-1 important: text-$bew-theme-color important:
+      px-4 hover: important-bg-$bew-theme-color hover: important-text-white flex
+      items-center justify-center important: text-base w-120px border-solid
+      border-$bew-theme-color border-2 important: dark: filter;
   }
 
   .avatar {
@@ -848,7 +841,7 @@ defineExpose({
       --at-apply: duration-300;
 
       &.hover {
-        --at-apply: transform scale-230 important:translate-y-36px;
+        --at-apply: transform scale-230 important: translate-y-36px;
       }
     }
 

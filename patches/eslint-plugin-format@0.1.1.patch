@@ -1,0 +1,29 @@
+diff --git a/dist/index.mjs b/dist/index.mjs
+index 12b3a7684cf7c12692c6e3980d05315f0522d9a3..fcefdb49b3066d2619ab72de3908ab185393e21f 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -35,11 +35,13 @@ const prettier = {
+     return {
+       Program() {
+         const sourceCode = context.sourceCode.text;
++        try {
+         const formatted = format$1(sourceCode, {
+           filepath: context.filename,
+           ...context.options[0] || {}
+         });
+         reportDifferences(context, sourceCode, formatted);
++        } catch (error) {}
+       }
+     };
+   }
+@@ -77,8 +79,10 @@ const dprint = {
+     return {
+       Program() {
+         const sourceCode = context.sourceCode.text;
++        try {
+         const formatted = format(sourceCode, context.filename, context.options[0] || {});
+         reportDifferences(context, sourceCode, formatted);
++        } catch (error) {}
+       }
+     };
+   }

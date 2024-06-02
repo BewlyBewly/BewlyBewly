@@ -299,7 +299,10 @@
     #page-index .channel .section-right-options .play-all-channel,
     .section .operation,
     .list-item .desc,
-    #page-follows .modal-container.edit-video-modal .target-follow-name .target-follow-notice,
+    #page-follows
+      .modal-container.edit-video-modal
+      .target-follow-name
+      .target-follow-notice,
     #page-fav .search-empty-hint p,
     .small-item .meta,
     #page-fav .fav-main .fav-meta {
@@ -420,7 +423,10 @@
     .section .operation,
     .section .count,
     .large-item .cover img,
-    #page-follows .modal-container.edit-video-modal .modal-body .target-followlist {
+    #page-follows
+      .modal-container.edit-video-modal
+      .modal-body
+      .target-followlist {
       border-color: var(--bew-border-color);
     }
 

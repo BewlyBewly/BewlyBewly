@@ -133,8 +133,7 @@ async function logout() {
 
 <style lang="scss" scoped>
 #user-info-panel {
-  --at-apply: p-4 rounded-$bew-radius w-300px -z-1
-    bg-$bew-elevated-solid-1 shadow-$bew-shadow-3;
+  --at-apply: p-4 rounded-$bew-radius w-300px -z-1 bg-$bew-elevated-solid-1 shadow-$bew-shadow-3;
 }
 
 #base-info {
@@ -145,17 +144,15 @@ async function logout() {
   --at-apply: grid grid-cols-3 gap-x-2 mb-2;
 
   a {
-    --at-apply: p-2 m-0 rounded-$bew-radius text-sm
-      flex flex-col items-center transition-all duration-300
-      bg-$bew-fill-1
-      // hover:bg-$bew-theme-color
-      hover:text-white;
+    --at-apply: p-2 m-0 rounded-$bew-radius text-sm flex flex-col items-center
+      transition-all duration-300 bg-$bew-fill-1 // hover:bg-$bew-theme-color
+      hover: text-white;
 
     > * {
       // --at-apply: transition-all duration-300;
     }
 
-    &:hover .num + div{
+    &:hover .num + div {
       --at-apply: text-white;
     }
 
@@ -174,8 +171,7 @@ async function logout() {
 
   a {
     --at-apply: px-4 py-2 mb-1 flex justify-between items-center
-      rounded-$bew-radius transition-all duration-300
-      hover:bg-$bew-fill-2;
+      rounded-$bew-radius transition-all duration-300 hover: bg-$bew-fill-2;
 
     span {
       --at-apply: text-$bew-text-2;
@@ -184,8 +180,7 @@ async function logout() {
 }
 
 #logout {
-  --at-apply: text-red-400 important:block px-4 py-2 rounded-$bew-radius
-    duration-300 cursor-pointer
-    hover:bg-$bew-fill-2;
+  --at-apply: text-red-400 important: block px-4 py-2 rounded-$bew-radius
+    duration-300 cursor-pointer hover: bg-$bew-fill-2;
 }
 </style>

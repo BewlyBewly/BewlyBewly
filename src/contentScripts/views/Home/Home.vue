@@ -262,7 +262,7 @@ function toggleTabContentLoading(loading: boolean) {
   --at-apply: h-100vh;
 }
 .bg-leave-to {
-  --at-apply: hidden
+  --at-apply: hidden;
 }
 
 .content-enter-active,
@@ -274,7 +274,7 @@ function toggleTabContentLoading(loading: boolean) {
   --at-apply: opacity-0 h-100vh;
 }
 .content-leave-to {
-  --at-apply: hidden
+  --at-apply: hidden;
 }
 
 .hide {
@@ -283,6 +283,6 @@ function toggleTabContentLoading(loading: boolean) {
 
 .tab-activated {
   --at-apply: bg-$bew-theme-color-auto text-$bew-text-auto
-    border-$bew-theme-color dark:border-white;
+    border-$bew-theme-color dark: border-white;
 }
 </style>

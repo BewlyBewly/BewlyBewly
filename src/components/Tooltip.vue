@@ -23,18 +23,15 @@ defineProps<{
   --at-apply: flex items-center relative;
 
   .b-tooltip {
-    --at-apply: absolute px-2 lh-2em rounded-8
-      pointer-events-none
-      text-sm
-      opacity-0 duration-300
-      shadow-$bew-shadow-2;
+    --at-apply: absolute px-2 lh-2em rounded-8 pointer-events-none text-sm
+      opacity-0 duration-300 shadow-$bew-shadow-2;
     white-space: nowrap;
 
     &--placement-right {
       --at-apply: left-[calc(100%+0.5em)];
     }
 
-    &--placement-left{
+    &--placement-left {
       --at-apply: right-[calc(100%+0.5em)];
     }
 
@@ -49,7 +46,7 @@ defineProps<{
     }
 
     &--type-default {
-      --at-apply: text-white dark:text-black bg-black dark:bg-white;
+      --at-apply: text-white dark: text-black bg-black dark: bg-white;
     }
 
     &--type-dark {

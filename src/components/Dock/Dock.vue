@@ -203,16 +203,18 @@ function handleBackToTopOrRefresh() {
 }
 
 .dock-edge {
-  &-left, &-right, &-bottom {
+  &-left,
+  &-right,
+  &-bottom {
     --at-apply: absolute z--1;
   }
 
   &-left {
-    --at-apply: left-0 top-0 w-14px h-full hover:w-60px;
+    --at-apply: left-0 top-0 w-14px h-full hover: w-60px;
   }
 
   &-right {
-    --at-apply: right-0 top-0 w-14px h-full hover:w-60px;
+    --at-apply: right-0 top-0 w-14px h-full hover: w-60px;
   }
 
   &-bottom {
@@ -224,14 +226,14 @@ function handleBackToTopOrRefresh() {
   --at-apply: absolute flex justify-center items-center;
 
   &.left {
-    --at-apply: left-2 after:right--4px;
+    --at-apply: left-2 after: right--4px;
   }
   &.left.hide {
     --at-apply: opacity-0 translate-x--100%;
   }
 
   &.right {
-    --at-apply: right-2 after:left--4px;
+    --at-apply: right-2 after: left--4px;
   }
   &.right.hide {
     --at-apply: opacity-0 translate-x-100%;
@@ -254,7 +256,7 @@ function handleBackToTopOrRefresh() {
 
   .dock-content-inner {
     --at-apply: duration-300 ease-in-out transform-gpu;
-    --at-apply: p-2 m-2 bg-$bew-content-2 dark:bg-$bew-elevated-1;
+    --at-apply: p-2 m-2 bg-$bew-content-2 dark: bg-$bew-elevated-1;
     --at-apply: flex flex-col gap-2 shrink-0;
     --at-apply: rounded-full border-$bew-border-color;
     --at-apply: shadow-$bew-shadow-2;
@@ -266,27 +268,32 @@ function handleBackToTopOrRefresh() {
   }
 
   .back-to-top-or-refresh-btn {
-    --at-apply: absolute md:bottom--45px bottom--35px;
-    --at-apply: transform active:important-scale-90 hover:scale-110;
-    --at-apply: md:w-45px w-35px md:h-45px h-35px;
+    --at-apply: absolute md: bottom--45px bottom--35px;
+    --at-apply: transform active: important-scale-90 hover: scale-110;
+    --at-apply: md: w-45px w-35px md: h-45px h-35px;
     --at-apply: grid place-items-center;
     --at-apply: filter-$bew-filter-glass-1;
-    --at-apply: bg-$bew-elevated-1 hover:bg-$bew-content-1-hover;
+    --at-apply: bg-$bew-elevated-1 hover: bg-$bew-content-1-hover;
     --at-apply: rounded-full shadow-$bew-shadow-2;
 
     backdrop-filter: var(--bew-filter-glass-1);
-    transition: transform 300ms cubic-bezier(0.34, 2, 0.6, 1), background 300ms ease, color 300ms ease, box-shadow 600ms ease;
+    transition:
+      transform 300ms cubic-bezier(0.34, 2, 0.6, 1),
+      background 300ms ease,
+      color 300ms ease,
+      box-shadow 600ms ease;
     box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
 
     &.active {
       --at-apply: important-bg-$bew-theme-color-auto text-$bew-text-auto;
-      --at-apply: shadow-$shadow-active  dark:shadow-$shadow-dark;
-      --at-apply: active:shadow-$shadow-active-active dark-active:shadow-$shadow-dark-active;
+      --at-apply: shadow-$shadow-active dark: shadow-$shadow-dark;
+      --at-apply: active: shadow-$shadow-active-active dark-active:
+        shadow-$shadow-dark-active;
     }
   }
 
   &.bottom .back-to-top-or-refresh-btn {
-    --at-apply: bottom-unset md:right--45px right--35px;
+    --at-apply: bottom-unset md: right--45px right--35px;
   }
 }
 
@@ -296,31 +303,39 @@ function handleBackToTopOrRefresh() {
   --shadow-dark-active: 0 4px 20px rgba(255, 255, 255, 0.8);
   --shadow-active-active: 0 4px 20px var(--bew-theme-color-90);
 
-  --at-apply: transform active:important-scale-90 hover:scale-110;
-  --at-apply: md:w-45px w-35px;
-  --at-apply: md:lh-45px lh-35px;
+  --at-apply: transform active: important-scale-90 hover: scale-110;
+  --at-apply: md: w-45px w-35px;
+  --at-apply: md: lh-45px lh-35px;
   --at-apply: p-0 flex items-center justify-center;
   --at-apply: aspect-square relative;
   --at-apply: leading-0;
   --at-apply: rounded-60px antialiased;
-  --at-apply: bg-$bew-content-1 hover:bg-$bew-fill-2 cursor-pointer;
-  --at-apply: dark:bg-$bew-fill-1 dark-hover:bg-$bew-fill-4;;
+  --at-apply: bg-$bew-content-1 hover: bg-$bew-fill-2 cursor-pointer;
+  --at-apply: dark: bg-$bew-fill-1 dark-hover: bg-$bew-fill-4;
 
   box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-1);
-  transition: transform 300ms cubic-bezier(0.34, 2, 0.6, 1), background 300ms ease, color 300ms ease, box-shadow 600ms ease;
+  transition:
+    transform 300ms cubic-bezier(0.34, 2, 0.6, 1),
+    background 300ms ease,
+    color 300ms ease,
+    box-shadow 600ms ease;
 
   &:hover {
-    box-shadow: var(--bew-shadow-edge-glow-1), 0 0 0 2px var(--bew-fill-2), var(--bew-shadow-2);
+    box-shadow:
+      var(--bew-shadow-edge-glow-1),
+      0 0 0 2px var(--bew-fill-2),
+      var(--bew-shadow-2);
   }
 
   &.active {
     --at-apply: important-bg-$bew-theme-color-auto text-$bew-text-auto;
-    --at-apply: shadow-$shadow-active  dark:shadow-$shadow-dark;
-    --at-apply: active:shadow-$shadow-active-active dark-active:shadow-$shadow-dark-active;
+    --at-apply: shadow-$shadow-active dark: shadow-$shadow-dark;
+    --at-apply: active: shadow-$shadow-active-active dark-active:
+      shadow-$shadow-dark-active;
   }
 
   svg {
-    --at-apply: md:w-22px w-18px md:h-22px h-18px block align-middle;
+    --at-apply: md: w-22px w-18px md: h-22px h-18px block align-middle;
   }
 }
 </style>

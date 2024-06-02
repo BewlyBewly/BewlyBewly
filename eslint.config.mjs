@@ -3,6 +3,9 @@ import simpleImportSort from 'eslint-plugin-simple-import-sort'
 
 export default antfu(
   {
+    formatters: {
+      css: 'prettier',
+    },
     rules: {
       'vue/max-attributes-per-line': [
         'error',

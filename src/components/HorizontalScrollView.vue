@@ -82,7 +82,17 @@ function handleMouseScroll(event: WheelEvent) {
 
 <style lang="scss" scoped>
 .scroll-mask {
-  mask-image: linear-gradient(to right, transparent 0%, black 40px calc(100% - 40px), transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 40px calc(100% - 40px), transparent 100%);
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 40px calc(100% - 40px),
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 40px calc(100% - 40px),
+    transparent 100%
+  );
 }
 </style>

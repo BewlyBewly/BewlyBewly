@@ -29,12 +29,11 @@ label {
   --b-border-width: 2px;
 }
 
-input[type="checkbox"] + span::after {
+input[type='checkbox'] + span::after {
   box-sizing: border-box;
 }
 
-input[type="checkbox"]{
-
+input[type='checkbox'] {
   &:hover + span {
     --at-apply: bg-$bew-fill-2;
   }
@@ -49,12 +48,14 @@ input[type="checkbox"]{
 
   &:checked:hover + span {
     --at-apply: bg-$bew-theme-color-80 border-$bew-theme-color;
-    box-shadow: 0 0 6px 2px var(--bew-theme-color-40), inset 0 0 6px var(--bew-theme-color-30);
+    box-shadow:
+      0 0 6px 2px var(--bew-theme-color-40),
+      inset 0 0 6px var(--bew-theme-color-30);
   }
 
   & + span,
   & + span::after {
-    transition: .3s cubic-bezier(.25,.15,.29,1.51);
+    transition: 0.3s cubic-bezier(0.25, 0.15, 0.29, 1.51);
   }
 
   &:checked + span::after {

@@ -1,9 +1,7 @@
 .bewly-design.historyPage {
-
   // #region theme color adaption part
   // Increase the priority of the style inside by writing a non-existent selector in `:not()`
   :not(fdjslfds) {
-
     .history-list .r-info .w-info .username:hover,
     .history-wrap a.btn {
       color: var(--bew-theme-color);
@@ -53,8 +51,8 @@
       border-color: var(--bew-theme-color) !important;
     }
 
-    .b-head-search .search-icon>img,
-    .b-head-search .search-cancel>img {
+    .b-head-search .search-icon > img,
+    .b-head-search .search-cancel > img {
       filter: var(--bew-filter-icon-glow);
     }
   }
@@ -63,7 +61,6 @@
 
   // #region dark mode adaption part
   &.dark {
-
     .history-wrap .warn .txt,
     .history-wrap .b-head .b-head-t,
     .b-head-search,
