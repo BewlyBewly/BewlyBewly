@@ -17,6 +17,7 @@ const isLoading = ref<boolean>()
 const noMoreContent = ref<boolean>()
 const allWatchLaterList = ref<VideoItem[]>([])
 const currentWatchLaterList = ref<VideoItem[]>([])
+const watchLaterCount = ref<number>(0)
 const { handlePageRefresh, handleReachBottom } = useBewlyApp()
 const pageNum = ref<number>(1)
 
@@ -60,8 +61,10 @@ async function getAllWatchLaterList() {
   currentWatchLaterList.value.length = 0
   try {
     const res: WatchLaterResult = await api.watchlater.getAllWatchLaterList()
-    if (res.code === 0)
+    if (res.code === 0) {
       allWatchLaterList.value = res.data.list
+      watchLaterCount.value = allWatchLaterList.value.length
+    }
   }
   finally {
     isLoading.value = false
@@ -86,8 +89,10 @@ function deleteWatchLaterItem(index: number, aid: number) {
     csrf: getCSRF(),
   })
     .then((res) => {
-      if (res.code === 0)
+      if (res.code === 0) {
         currentWatchLaterList.value.splice(index, 1)
+        watchLaterCount.value--
+      }
     })
 }
 
@@ -137,9 +142,9 @@ function jumpToLoginPage() {
   <div v-if="getCSRF()" flex="~ col md:row lg:row" gap-4>
     <main w="full md:60% lg:70% xl:75%" order="2 md:1 lg:1" mb-6>
       <h3 text="3xl $bew-text-1" font-bold mb-6>
-        {{ t('watch_later.title') }} ({{ allWatchLaterList.length }})
+        {{ t('watch_later.title') }} ({{ watchLaterCount }})
       </h3>
-      <Empty v-if="allWatchLaterList.length === 0 && !isLoading" />
+      <Empty v-if="watchLaterCount === 0 && !isLoading" />
       <template v-else>
         <!-- watcher later list -->
         <TransitionGroup name="list">
@@ -162,7 +167,7 @@ function jumpToLoginPage() {
               <!-- Cover -->
               <div
                 pos="relative"
-                bg="$bew-fill-5"
+                bg="$bew-fill-4"
                 w="full md:full lg:250px"
                 flex="shrink-0"
                 rounded="$bew-radius"
@@ -216,7 +221,7 @@ function jumpToLoginPage() {
               </div>
 
               <!-- Description -->
-              <div flex justify-between w-full>
+              <div flex justify-between w-full h-full>
                 <div flex="~ col">
                   <a
                     class="keep-two-lines"
@@ -320,9 +325,9 @@ function jumpToLoginPage() {
         </picture>
 
         <h3 text="3xl white" fw-600 style="text-shadow: 0 0 12px rgba(0,0,0,.3)">
-          {{ t('watch_later.title') }} ({{ allWatchLaterList.length }})
+          {{ t('watch_later.title') }} ({{ watchLaterCount }})
         </h3>
-        <p v-if="allWatchLaterList.length > 0" flex="~ col" gap-4>
+        <p v-if="watchLaterCount > 0" flex="~ col" gap-4>
           <Button
             color="rgba(255,255,255,.35)" block text-color="white" strong flex-1
             @click="handlePlayAll"
