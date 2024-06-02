@@ -46,7 +46,7 @@ defineProps<{
     }
 
     &--type-default {
-      --at-apply: text-white dark: text-black bg-black dark: bg-white;
+      --at-apply: 'text-white dark:text-black bg-black dark:bg-white';
     }
 
     &--type-dark {

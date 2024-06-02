@@ -210,11 +210,11 @@ function handleBackToTopOrRefresh() {
   }
 
   &-left {
-    --at-apply: left-0 top-0 w-14px h-full hover: w-60px;
+    --at-apply: 'left-0 top-0 w-14px h-full hover:w-60px';
   }
 
   &-right {
-    --at-apply: right-0 top-0 w-14px h-full hover: w-60px;
+    --at-apply: 'right-0 top-0 w-14px h-full hover:w-60px';
   }
 
   &-bottom {
@@ -226,14 +226,14 @@ function handleBackToTopOrRefresh() {
   --at-apply: absolute flex justify-center items-center;
 
   &.left {
-    --at-apply: left-2 after: right--4px;
+    --at-apply: 'left-2 after:right--4px';
   }
   &.left.hide {
     --at-apply: opacity-0 translate-x--100%;
   }
 
   &.right {
-    --at-apply: right-2 after: left--4px;
+    --at-apply: 'right-2 after:left--4px';
   }
   &.right.hide {
     --at-apply: opacity-0 translate-x-100%;
@@ -256,7 +256,7 @@ function handleBackToTopOrRefresh() {
 
   .dock-content-inner {
     --at-apply: duration-300 ease-in-out transform-gpu;
-    --at-apply: p-2 m-2 bg-$bew-content-2 dark: bg-$bew-elevated-1;
+    --at-apply: 'p-2 m-2 bg-$bew-content-2 dark:bg-$bew-elevated-1';
     --at-apply: flex flex-col gap-2 shrink-0;
     --at-apply: rounded-full border-$bew-border-color;
     --at-apply: shadow-$bew-shadow-2;
@@ -286,7 +286,7 @@ function handleBackToTopOrRefresh() {
 
     &.active {
       --at-apply: important-bg-$bew-theme-color-auto text-$bew-text-auto;
-      --at-apply: shadow-$shadow-active dark: shadow-$shadow-dark;
+      --at-apply: 'shadow-$shadow-active dark:shadow-$shadow-dark';
       --at-apply: active: shadow-$shadow-active-active dark-active:
         shadow-$shadow-dark-active;
     }
@@ -311,7 +311,7 @@ function handleBackToTopOrRefresh() {
   --at-apply: leading-0;
   --at-apply: rounded-60px antialiased;
   --at-apply: bg-$bew-content-1 hover: bg-$bew-fill-2 cursor-pointer;
-  --at-apply: dark: bg-$bew-fill-1 dark-hover: bg-$bew-fill-4;
+  --at-apply: 'dark:bg-$bew-fill-1 dark-hover:bg-$bew-fill-4';
 
   box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-1);
   transition:
@@ -329,7 +329,7 @@ function handleBackToTopOrRefresh() {
 
   &.active {
     --at-apply: important-bg-$bew-theme-color-auto text-$bew-text-auto;
-    --at-apply: shadow-$shadow-active dark: shadow-$shadow-dark;
+    --at-apply: 'shadow-$shadow-active dark:shadow-$shadow-dark';
     --at-apply: active: shadow-$shadow-active-active dark-active:
       shadow-$shadow-dark-active;
   }

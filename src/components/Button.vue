@@ -67,13 +67,7 @@ function handleClick(evt: MouseEvent) {
   --b-button-shadow-hover: var(--b-button-shadow);
   --b-button-shadow-active: var(--b-button-shadow);
 
-  --at-apply: bg-$b-button-color hover: bg-$b-button-color-hover box-border
-    rounded-$b-button-radius p-x-$b-button-padding transform-gpu active:
-    scale-95 duration-300 flex items-center gap-2 text-size-$b-button-font-size
-    text-$b-button-text-color lh-$b-button-height h-$b-button-height
-    border-solid border-width-$b-button-border-width
-    border-$b-button-border-color shadow-$b-button-shadow hover:
-    shadow-$b-button-shadow-hover active: shadow-$b-button-shadow-active;
+  --at-apply: 'bg-$b-button-color hover:bg-$b-button-color-hover box-border rounded-$b-button-radius p-x-$b-button-padding transform-gpu active:scale-95 duration-300 flex items-center gap-2 text-size-$b-button-font-size text-$b-button-text-color lh-$b-button-height h-$b-button-height border-solid border-width-$b-button-border-width border-$b-button-border-color shadow-$b-button-shadow hover:shadow-$b-button-shadow-hover active:shadow-$b-button-shadow-active';
 
   & svg {
     --at-apply: text-size-$b-button-icon-size;
@@ -102,7 +96,8 @@ function handleClick(evt: MouseEvent) {
 
   &--type-error {
     --b-button-color: var(--bew-error-color);
-    --b-button-color-hover: var(--bew-error-color) --b-button-text-color: white;
+    --b-button-color-hover: var(--bew-error-color);
+    --b-button-text-color: white;
   }
 
   &--size-small {
@@ -120,7 +115,7 @@ function handleClick(evt: MouseEvent) {
   }
 
   &--custom-color {
-    --at-apply: hover: opacity-70;
+    --at-apply: 'hover:opacity-70';
   }
 
   &--strong {

@@ -788,16 +788,14 @@ defineExpose({
 }
 
 .bew-popover {
-  --at-apply: absolute top-60px left-1/2 transform -translate-x-1/2 overflow-visible
-    after: content-empty after: opacity-100 after: w-full after: h-100px after: absolute
-    after: top--30px after: left-1/2 after: -z-1 after: transform after: -translate-x-1/2;
+  --at-apply: 'absolute top-60px left-1/2 transform -translate-x-1/2 overflow-visible after:content-empty after:opacity-100 after:w-full after:h-100px after:absolute after:top--30px after:left-1/2 after:-z-1 after:transform after:-translate-x-1/2';
 }
 
 .logo.activated {
-  --at-apply: bg-$bew-theme-color dark: bg-white;
+  --at-apply: 'bg-$bew-theme-color dark:bg-white';
 
   svg {
-    --at-apply: fill-white dark: fill-$bew-theme-color;
+    --at-apply: 'fill-white dark:fill-$bew-theme-color';
   }
 }
 
@@ -827,10 +825,7 @@ defineExpose({
 
   .right-side-item .login {
     --un-drop-shadow: drop-shadow(0 0 6px var(--bew-theme-color));
-    --at-apply: rounded-full mx-1 important: text-$bew-theme-color important:
-      px-4 hover: important-bg-$bew-theme-color hover: important-text-white flex
-      items-center justify-center important: text-base w-120px border-solid
-      border-$bew-theme-color border-2 important: dark: filter;
+    --at-apply: 'rounded-full mx-1 important:text-$bew-theme-color important:px-4 hover:important-bg-$bew-theme-color hover:important-text-white flex items-center justify-center important:text-base w-120px border-solid border-$bew-theme-color border-2 important:dark:filter';
   }
 
   .avatar {
