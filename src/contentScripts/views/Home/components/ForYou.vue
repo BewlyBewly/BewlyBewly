@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onKeyStroke } from '@vueuse/core'
 import type { Ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useToast } from 'vue-toastification'
 
 import Button from '~/components/Button.vue'
@@ -18,6 +19,17 @@ import type { forYouResult, Item as VideoItem } from '~/models/video/forYou'
 import { getTvSign, TVAppKey } from '~/utils/authProvider'
 import { isVerticalVideo } from '~/utils/uriParse'
 
+const props = defineProps<{
+  gridLayout: GridLayout
+}>()
+
+const emit = defineEmits<{
+  (e: 'beforeLoading'): void
+  (e: 'afterLoading'): void
+}>()
+
+const { t } = useI18n()
+
 // https://github.com/starknt/BewlyBewly/blob/fad999c2e482095dc3840bb291af53d15ff44130/src/contentScripts/views/Home/components/ForYou.vue#L16
 interface VideoElement {
   uniqueId: string
@@ -28,15 +40,6 @@ interface AppVideoElement {
   uniqueId: string
   item?: AppVideoItem
 }
-
-const props = defineProps<{
-  gridLayout: GridLayout
-}>()
-
-const emit = defineEmits<{
-  (e: 'beforeLoading'): void
-  (e: 'afterLoading'): void
-}>()
 
 const gridValue = computed((): string => {
   if (props.gridLayout === 'adaptive')
@@ -329,6 +332,11 @@ function closeDislikeDialog() {
 }
 
 function handleAppDislike() {
+  if (!accessKey.value) {
+    toast.warning(t('auth.auth_access_key_first'))
+    return
+  }
+
   loadingDislikeDialog.value = true
   const params = {
     access_key: accessKey.value,

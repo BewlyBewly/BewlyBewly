@@ -187,10 +187,7 @@ settings:
     坐标广州，我不是希望进去一定要做出什么成就出来，在做开源过程中也对项目负责人和开发者不同的想法观念略有感受。我只想进去了解一下正确的前端规范和能与其他志同道合的人一起工作。如果有合适的前端工作机会请联系我，谢谢！
   contact_me: 联系我
 auth:
-  err_tip: Failed to grant access key
-  plz_login_first: Please login to bilibili first
-  receive_verified_url_err: Unknown error, please refresh the page and try again.
-  failed_to_get_accesskey: Failed to get access key
+  auth_access_key_first: Before doing this, authorize BewlyBewly to use the access key.
 topbar:
   sign_in: Sign in
   notifications: Notifications
