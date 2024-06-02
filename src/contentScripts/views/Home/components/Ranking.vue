@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 
-import LongCoverCard from '~/components/LongCoverCard/LongCoverCard.vue'
-import LongCoverCardSkeleton from '~/components/LongCoverCard/LongCoverCardSkeleton.vue'
+import BangumiCard from '~/components/BangumiCard/BangumiCard.vue'
+import BangumiCardSkeleton from '~/components/BangumiCard/BangumiCardSkeleton.vue'
 import OverlayScrollbarsComponent from '~/components/OverlayScrollbarsComponent'
 import VideoCard from '~/components/VideoCard/VideoCard.vue'
 import VideoCardSkeleton from '~/components/VideoCard/VideoCardSkeleton.vue'
@@ -221,7 +221,7 @@ defineExpose({ initData })
         />
       </template>
       <template v-else>
-        <LongCoverCard
+        <BangumiCard
           v-for="pgc in PgcList"
           :key="pgc.url"
           :bangumi="{
@@ -252,7 +252,7 @@ defineExpose({ initData })
           />
         </template>
         <template v-else>
-          <LongCoverCardSkeleton
+          <BangumiCardSkeleton
             v-for="item in 30" :key="item"
             :horizontal="gridLayout !== 'adaptive'"
           />

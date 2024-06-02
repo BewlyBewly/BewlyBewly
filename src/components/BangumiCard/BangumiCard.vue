@@ -3,7 +3,7 @@ import { useDark } from '~/composables/useDark'
 import { numFormatter } from '~/utils/dataFormatter'
 import { removeHttpFromUrl } from '~/utils/main'
 
-import LongCoverCardSkeleton from './LongCoverCardSkeleton.vue'
+import BangumiCardSkeleton from './BangumiCardSkeleton.vue'
 
 defineProps<{
   skeleton?: boolean
@@ -183,7 +183,7 @@ const { isDark } = useDark()
         </div>
       </div>
     </a>
-    <LongCoverCardSkeleton
+    <BangumiCardSkeleton
       v-else-if="skeleton"
       :horizontal="horizontal"
       important-mb-0
