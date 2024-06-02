@@ -31,6 +31,10 @@
     color: white !important;
   }
 
+  .large-item .cover {
+    border-radius: 4px;
+  }
+
   // #region theme color adaption part
   // Increase the priority of the style inside by writing a non-existent selector in :not()
   // 淺色模式下主要對 theme color 調整配合 bewlybewly 配色
@@ -78,7 +82,11 @@
     #page-index .channel .section-right-options .play-all-channel:hover,
     .section .operation:hover,
     #page-video .play-all-btn:hover .video-commonplayer_play,
-    .i-live .i-live-fo-btn {
+    .i-live .i-live-fo-btn,
+    .favInfo-box .favInfo-details .fav-options .meta.selected,
+    #page-follows .follow-main .follow-action-bottom .select-cancel,
+    #page-follows .modal-container.edit-video-modal .target-followitem:hover,
+    #page-follows .follow-main .follow-action-bottom li:hover {
       color: var(--bew-theme-color);
     }
 
@@ -115,7 +123,8 @@
     #page-index #i-ann-content textarea:focus,
     #page-index #i-ann-content textarea:hover,
     .btn.default,
-    .i-live .i-live-fo-btn {
+    .i-live .i-live-fo-btn,
+    .be-pager-options-elevator input:focus {
       border-color: var(--bew-theme-color);
     }
 
@@ -198,7 +207,9 @@
       .icon,
     .page-head .v-filter-line .style .icon.active,
     .page-head .v-filter-line .style .icon:hover,
-    .i-live .i-live-off-guest a .i-live-arrow {
+    .i-live .i-live-off-guest a .i-live-arrow,
+    #page-follows .follow-main .follow-action-bottom .icon-copy,
+    .search-component .icon-follow-search:hover {
       filter: var(--bew-filter-icon-glow);
     }
 
@@ -261,7 +272,8 @@
     #page-dynamic .col-2 .section,
     .game-card .game-card__info-title,
     .favInfo-box .collection-details .title .icon-heji,
-    .favInfo-box .collection-details .title .title-name {
+    .favInfo-box .collection-details .title .title-name,
+    #page-follows .modal-container.edit-video-modal .target-followitem {
       color: var(--bew-text-1);
     }
 
@@ -281,13 +293,15 @@
     #page-index .col-1 .section .more,
     #page-index .channel .section-right-options .play-all-channel,
     .section .operation,
-    .list-item .desc {
+    .list-item .desc,
+    #page-follows .modal-container.edit-video-modal .target-follow-name .target-follow-notice {
       color: var(--bew-text-2);
     }
 
     .bili-dyn-interaction__item__desc .bili-rich-text__content,
     .opus-list .opus-item-time,
-    .list-item .meta {
+    .list-item .meta,
+    .favInfo-box .favInfo-details .fav-options .meta {
       color: var(--bew-text-3);
     }
 
@@ -397,7 +411,8 @@
     #page-index .channel .section-right-options .play-all-channel,
     .section .operation,
     .section .count,
-    .large-item .cover img {
+    .large-item .cover img,
+    #page-follows .modal-container.edit-video-modal .modal-body .target-followlist {
       border-color: var(--bew-border-color);
     }
 
@@ -411,6 +426,10 @@
 
     .i-pin-c {
       box-shadow: unset;
+    }
+
+    .large-item .cover img {
+      box-shadow: 0 0 0 1px var(--bew-border-color);
     }
 
     .section-title,
