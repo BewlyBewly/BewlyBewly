@@ -224,16 +224,22 @@ defineExpose({ initData })
         <LongCoverCard
           v-for="pgc in PgcList"
           :key="pgc.url"
-          :url="pgc.url"
-          :cover="pgc.cover"
-          :title="pgc.title"
-          :desc="pgc.new_ep.index_show"
-          :view="pgc.stat.view"
-          :follow="pgc.stat.follow"
-          :rank="pgc.rank"
-          :capsule-text="pgc.rating.replace('分', '')"
+          :bangumi="{
+            url: pgc.url,
+            cover: pgc.cover,
+            title: pgc.title,
+            desc: pgc.new_ep.index_show,
+            view: pgc.stat.view,
+            follow: pgc.stat.follow,
+            rank: pgc.rank,
+            capsuleText: pgc.rating.replace('分', ''),
+            badge: {
+              text: pgc.badge_info.text || '',
+              bgColor: pgc.badge_info.bg_color || '',
+              bgColorDark: pgc.badge_info.bg_color_night || '',
+            },
+          }"
           :horizontal="gridLayout !== 'adaptive'"
-          mb-8
         />
       </template>
 
