@@ -86,7 +86,9 @@
     .favInfo-box .favInfo-details .fav-options .meta.selected,
     #page-follows .follow-main .follow-action-bottom .select-cancel,
     #page-follows .modal-container.edit-video-modal .target-followitem:hover,
-    #page-follows .follow-main .follow-action-bottom li:hover {
+    #page-follows .follow-main .follow-action-bottom li:hover,
+    #page-fav .fav-main .search-types:hover,
+    #page-fav .fav-main .fav-action-bottom .search-results-num i {
       color: var(--bew-theme-color);
     }
 
@@ -209,7 +211,8 @@
     .page-head .v-filter-line .style .icon:hover,
     .i-live .i-live-off-guest a .i-live-arrow,
     #page-follows .follow-main .follow-action-bottom .icon-copy,
-    .search-component .icon-follow-search:hover {
+    .search-component .icon-follow-search:hover,
+    #page-fav .fav-main .search-input .icon-search:hover {
       filter: var(--bew-filter-icon-glow);
     }
 
@@ -273,7 +276,9 @@
     .game-card .game-card__info-title,
     .favInfo-box .collection-details .title .icon-heji,
     .favInfo-box .collection-details .title .title-name,
-    #page-follows .modal-container.edit-video-modal .target-followitem {
+    #page-follows .modal-container.edit-video-modal .target-followitem,
+    #page-fav .fav-main .search-input input,
+    #page-fav .fav-main .fav-action-bottom .search-results-num {
       color: var(--bew-text-1);
     }
 
@@ -294,7 +299,10 @@
     #page-index .channel .section-right-options .play-all-channel,
     .section .operation,
     .list-item .desc,
-    #page-follows .modal-container.edit-video-modal .target-follow-name .target-follow-notice {
+    #page-follows .modal-container.edit-video-modal .target-follow-name .target-follow-notice,
+    #page-fav .search-empty-hint p,
+    .small-item .meta,
+    #page-fav .fav-main .fav-meta {
       color: var(--bew-text-2);
     }
 
