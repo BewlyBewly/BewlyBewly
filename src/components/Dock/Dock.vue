@@ -268,12 +268,12 @@ function handleBackToTopOrRefresh() {
   }
 
   .back-to-top-or-refresh-btn {
-    --at-apply: absolute md: bottom--45px bottom--35px;
-    --at-apply: transform active: important-scale-90 hover: scale-110;
-    --at-apply: md: w-45px w-35px md: h-45px h-35px;
+    --at-apply: 'absolute md:bottom--45px bottom--35px';
+    --at-apply: 'transform active:important-scale-90 hover:scale-110';
+    --at-apply: 'md:w-45px w-35px md:h-45px h-35px';
     --at-apply: grid place-items-center;
     --at-apply: filter-$bew-filter-glass-1;
-    --at-apply: bg-$bew-elevated-1 hover: bg-$bew-content-1-hover;
+    --at-apply: 'bg-$bew-elevated-1 hover:bg-$bew-content-1-hover';
     --at-apply: rounded-full shadow-$bew-shadow-2;
 
     backdrop-filter: var(--bew-filter-glass-1);
@@ -303,14 +303,14 @@ function handleBackToTopOrRefresh() {
   --shadow-dark-active: 0 4px 20px rgba(255, 255, 255, 0.8);
   --shadow-active-active: 0 4px 20px var(--bew-theme-color-90);
 
-  --at-apply: transform active: important-scale-90 hover: scale-110;
-  --at-apply: md: w-45px w-35px;
-  --at-apply: md: lh-45px lh-35px;
+  --at-apply: 'transform active:important-scale-90 hover:scale-110';
+  --at-apply: 'md:w-45px w-35px';
+  --at-apply: 'md:lh-45px lh-35px';
   --at-apply: p-0 flex items-center justify-center;
   --at-apply: aspect-square relative;
   --at-apply: leading-0;
   --at-apply: rounded-60px antialiased;
-  --at-apply: bg-$bew-content-1 hover: bg-$bew-fill-2 cursor-pointer;
+  --at-apply: 'bg-$bew-content-1 hover:bg-$bew-fill-2 cursor-pointer';
   --at-apply: 'dark:bg-$bew-fill-1 dark-hover:bg-$bew-fill-4';
 
   box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-1);

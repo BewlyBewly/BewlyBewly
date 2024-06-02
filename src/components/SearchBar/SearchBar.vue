@@ -381,12 +381,11 @@ async function handleClearSearchHistory() {
 
   @mixin search-content {
     @include card-content;
-    --at-apply: p-2 mt-2 absolute rounded-$bew-radius hover: block;
+    --at-apply: 'p-2 mt-2 absolute rounded-$bew-radius hover:block';
   }
 
   @mixin search-content-item {
-    --at-apply: px-4 py-2 w-full rounded-$bew-radius duration-300 cursor-pointer
-      not-first: mt-1 tracking-wider hover: bg-$bew-fill-2;
+    --at-apply: 'px-4 py-2 w-full rounded-$bew-radius duration-300 cursor-pointer not-first:mt-1 tracking-wider hover:bg-$bew-fill-2';
   }
 
   #search-history {
@@ -401,8 +400,7 @@ async function handleClearSearchHistory() {
       .history-item-container {
         .history-item {
           --at-apply: relative cursor-pointer duration-300;
-          --at-apply: py-2 px-6 bg-$bew-fill-1 hover: bg-$bew-theme-color-20
-            hover: text-$bew-theme-color rounded-$bew-radius-half;
+          --at-apply: 'py-2 px-6 bg-$bew-fill-1 hover:bg-$bew-theme-color-20 hover:text-$bew-theme-color rounded-$bew-radius-half';
         }
       }
     }
