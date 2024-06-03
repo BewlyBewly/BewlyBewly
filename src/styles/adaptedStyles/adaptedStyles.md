@@ -6,6 +6,7 @@ In `index.ts`, we will write some regex rules to match the style used on a speci
 
 ## Style File Writing Style
 
+<!-- eslint-skip -->
 ``` scss
 .bewly-design.pageName {
   // Implement specific modifications to the page, like tweaking the layout, and place those styles here

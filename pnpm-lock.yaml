@@ -6,7 +6,7 @@ settings:
 
 patchedDependencies:
   eslint-plugin-format@0.1.1:
-    hash: ef7hhroz5erbexvgs7eacoikya
+    hash: mfx7mexmog33ykld5nlb6ktu7m
     path: patches/eslint-plugin-format@0.1.1.patch
 
 importers:
@@ -49,7 +49,7 @@ importers:
     devDependencies:
       '@antfu/eslint-config':
         specifier: ^2.17.0
-        version: 2.17.0(@vue/compiler-sfc@3.4.27)(eslint-plugin-format@0.1.1(patch_hash=ef7hhroz5erbexvgs7eacoikya)(eslint@9.2.0))(eslint@9.2.0)(typescript@5.4.5)(vitest@1.6.0(@types/node@20.12.11)(jsdom@24.0.0)(sass@1.77.0)(terser@5.31.0))
+        version: 2.17.0(@vue/compiler-sfc@3.4.27)(eslint-plugin-format@0.1.1(patch_hash=mfx7mexmog33ykld5nlb6ktu7m)(eslint@9.2.0))(eslint@9.2.0)(typescript@5.4.5)(vitest@1.6.0(@types/node@20.12.11)(jsdom@24.0.0)(sass@1.77.0)(terser@5.31.0))
       '@ffflorian/jszip-cli':
         specifier: ^3.6.3
         version: 3.6.3(typescript@5.4.5)
@@ -100,7 +100,7 @@ importers:
         version: 9.2.0
       eslint-plugin-format:
         specifier: ^0.1.1
-        version: 0.1.1(patch_hash=ef7hhroz5erbexvgs7eacoikya)(eslint@9.2.0)
+        version: 0.1.1(patch_hash=mfx7mexmog33ykld5nlb6ktu7m)(eslint@9.2.0)
       eslint-plugin-simple-import-sort:
         specifier: ^12.1.0
         version: 12.1.0(eslint@9.2.0)
@@ -6281,7 +6281,7 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@antfu/eslint-config@2.17.0(@vue/compiler-sfc@3.4.27)(eslint-plugin-format@0.1.1(patch_hash=ef7hhroz5erbexvgs7eacoikya)(eslint@9.2.0))(eslint@9.2.0)(typescript@5.4.5)(vitest@1.6.0(@types/node@20.12.11)(jsdom@24.0.0)(sass@1.77.0)(terser@5.31.0))':
+  '@antfu/eslint-config@2.17.0(@vue/compiler-sfc@3.4.27)(eslint-plugin-format@0.1.1(patch_hash=mfx7mexmog33ykld5nlb6ktu7m)(eslint@9.2.0))(eslint@9.2.0)(typescript@5.4.5)(vitest@1.6.0(@types/node@20.12.11)(jsdom@24.0.0)(sass@1.77.0)(terser@5.31.0))':
     dependencies:
       '@antfu/install-pkg': 0.3.3
       '@clack/prompts': 0.7.0
@@ -6319,7 +6319,7 @@ snapshots:
       yaml-eslint-parser: 1.2.2
       yargs: 17.7.2
     optionalDependencies:
-      eslint-plugin-format: 0.1.1(patch_hash=ef7hhroz5erbexvgs7eacoikya)(eslint@9.2.0)
+      eslint-plugin-format: 0.1.1(patch_hash=mfx7mexmog33ykld5nlb6ktu7m)(eslint@9.2.0)
     transitivePeerDependencies:
       - '@vue/compiler-sfc'
       - supports-color
@@ -9117,7 +9117,7 @@ snapshots:
       eslint: 9.2.0
       ignore: 5.3.1
 
-  eslint-plugin-format@0.1.1(patch_hash=ef7hhroz5erbexvgs7eacoikya)(eslint@9.2.0):
+  eslint-plugin-format@0.1.1(patch_hash=mfx7mexmog33ykld5nlb6ktu7m)(eslint@9.2.0):
     dependencies:
       '@dprint/formatter': 0.2.1
       '@dprint/markdown': 0.16.4
