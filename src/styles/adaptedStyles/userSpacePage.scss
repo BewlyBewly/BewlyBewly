@@ -235,7 +235,9 @@
 
     .main-content .card-content .post-content.repost,
     .main-content .card-content .post-content .original-card-content .article-container,
-    .main-content .card-content .deleted {
+    .main-content .card-content .deleted,
+    .card .more-panel,
+    .card .more-panel:after {
       background-color: var(--bg2);
     }
 
@@ -252,6 +254,7 @@
     #page-follows .list-item .title,
     #page-follows .follow-sidenav .follow-list-container .follow-item,
     #page-video .page-head__left .video-title,
+    .card .more-panel,
     .original-card-content .title,
     .pgc-space-follow-item .pgc-item-info .pgc-item-title,
     .search-component-input input,
@@ -401,6 +404,8 @@
     #page-dynamic .bili-dyn-item,
     .original-card-content .video-container,
     .main-content .card-content .post-content .original-card-content .article-container,
+    .card .more-panel,
+    .card .more-panel:after,
     .fans-action-btn.follow,
     .btn.ghost,
     .btn.ghost:focus,
