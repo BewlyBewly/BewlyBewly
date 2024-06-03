@@ -29,11 +29,11 @@ label {
   --b-border-width: 2px;
 }
 
-input[type='checkbox'] + span::after {
+input[type="checkbox"] + span::after {
   box-sizing: border-box;
 }
 
-input[type='checkbox'] {
+input[type="checkbox"] {
   &:hover + span {
     --at-apply: bg-$bew-fill-2;
   }

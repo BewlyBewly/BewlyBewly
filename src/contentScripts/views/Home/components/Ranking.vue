@@ -264,8 +264,7 @@ defineExpose({ initData })
 
 <style lang="scss" scoped>
 .active {
-  --at-apply: scale-110 bg-$bew-theme-color-auto text-$bew-text-auto
-    shadow-$bew-shadow-2;
+  --at-apply: scale-110 bg-$bew-theme-color-auto text-$bew-text-auto shadow-$bew-shadow-2;
 }
 
 .hide {

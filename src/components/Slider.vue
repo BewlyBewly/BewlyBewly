@@ -57,11 +57,10 @@ label {
   --b-thumb-height: calc(20px - var(--b-border-width));
 }
 
-input[type='range'] {
+input[type="range"] {
   &::-webkit-slider-thumb {
-    --at-apply: appearance-none w-$b-thumb-height h-$b-thumb-height bg-white
-      rounded-$b-thumb-height ring-$bew-border-color ring-2 cursor-pointer
-      duration-300;
+    --at-apply: appearance-none w-$b-thumb-height h-$b-thumb-height bg-white rounded-$b-thumb-height
+      ring-$bew-border-color ring-2 cursor-pointer duration-300;
   }
 
   &::-webkit-slider-thumb:hover {
@@ -69,9 +68,8 @@ input[type='range'] {
   }
 
   &::-moz-range-thumb {
-    --at-apply: appearance-none w-$b-thumb-height h-$b-thumb-height bg-white
-      rounded-$b-thumb-height ring-$bew-border-color ring-2 cursor-pointer
-      duration-300;
+    --at-apply: appearance-none w-$b-thumb-height h-$b-thumb-height bg-white rounded-$b-thumb-height
+      ring-$bew-border-color ring-2 cursor-pointer duration-300;
   }
 
   &::-moz-range-thumb:hover {

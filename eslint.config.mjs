@@ -5,6 +5,10 @@ export default antfu(
   {
     formatters: {
       css: 'prettier',
+      prettierOptions: {
+        printWidth: 120,
+        singleQuote: false,
+      },
     },
     rules: {
       'vue/max-attributes-per-line': [

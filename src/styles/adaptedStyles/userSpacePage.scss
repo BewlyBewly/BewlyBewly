@@ -47,19 +47,9 @@
     #page-video #submit-video-type-filter a.active,
     .n .n-data.router-link-active .n-data-k,
     .n .n-data.router-link-active .n-data-v,
-    .wrapper
-      .edit-video-modal
-      .target-favlist
-      .target-favitem:hover
-      .target-fav-title
-      .fav-meta
-      .fav-name,
+    .wrapper .edit-video-modal .target-favlist .target-favitem:hover .target-fav-title .fav-meta .fav-name,
     a:hover,
-    #page-index
-      .channel
-      .section-right-options
-      .play-all-channel:hover
-      .video-commonplayer_play,
+    #page-index .channel .section-right-options .play-all-channel:hover .video-commonplayer_play,
     #page-follows .follow-tabs span.active,
     #page-follows .follow-tabs span:hover,
     .favInfo-box .favInfo-details .fav-name:hover,
@@ -105,7 +95,7 @@
     #page-fav .fav-main .fav-action-bottom .select-cancel,
     #page-fav .fav-main .fav-action-top .back-to-info:hover,
     .sub-tabs .filter-content .cur-filter:hover,
-    .fans-name[style*='color'],
+    .fans-name[style*="color"],
     .dynamic-keyword {
       color: var(--bew-theme-color) !important;
     }
@@ -195,18 +185,8 @@
     .bp-svg-icon.comment-hover,
     .custom-like-icon.zan-a-hover,
     .bp-svg-icon.transmit-hover,
-    .wrapper
-      .edit-video-modal
-      .target-favlist
-      .target-favitem
-      .target-fav-title
-      .fav-select.selected,
-    #page-fav
-      .fav-main
-      .fav-action-bottom
-      .fav-action-fixtop
-      .clearfix:not(.filter-disable)
-      .icon,
+    .wrapper .edit-video-modal .target-favlist .target-favitem .target-fav-title .fav-select.selected,
+    #page-fav .fav-main .fav-action-bottom .fav-action-fixtop .clearfix:not(.filter-disable) .icon,
     .page-head .v-filter-line .style .icon.active,
     .page-head .v-filter-line .style .icon:hover,
     .i-live .i-live-off-guest a .i-live-arrow,
@@ -251,13 +231,7 @@
     #page-article .row .breadcrumb .item,
     .album-list__title,
     .bangumi-pagelistbox .p,
-    .wrapper
-      .edit-video-modal
-      .target-favlist
-      .target-favitem
-      .target-fav-title
-      .fav-meta
-      .fav-name,
+    .wrapper .edit-video-modal .target-favlist .target-favitem .target-fav-title .fav-meta .fav-name,
     .wrapper .edit-video-modal .edit-video-title,
     #page-series-detail .channel-detail .content .breadcrumb .item,
     .user-info .info-content .info-value,
@@ -299,10 +273,7 @@
     #page-index .channel .section-right-options .play-all-channel,
     .section .operation,
     .list-item .desc,
-    #page-follows
-      .modal-container.edit-video-modal
-      .target-follow-name
-      .target-follow-notice,
+    #page-follows .modal-container.edit-video-modal .target-follow-name .target-follow-notice,
     #page-fav .search-empty-hint p,
     .small-item .meta,
     #page-fav .fav-main .fav-meta {
@@ -359,13 +330,7 @@
     .create-wrapper .create-input .series-desc .series-desc-box,
     .create-wrapper .create-input .series-kw input,
     .create-wrapper .create-input .series-kw .rec-kw .keyword-content .keyword,
-    .create-wrapper
-      .create-input
-      .series-kw
-      .rec-kw
-      .keyword-content
-      .keyword
-      .keyword-txt,
+    .create-wrapper .create-input .series-kw .rec-kw .keyword-content .keyword .keyword-txt,
     .create-wrapper .choose-action .back-btn,
     .create-wrapper .choose-action .cancel-btn,
     .create-wrapper .create-action .back-btn,
@@ -373,12 +338,7 @@
     .be-dropdown-menu,
     .edit-media-list .edit-mask .edit-board .head,
     .edit-media-list .edit-mask .edit-board .edit-info .info-wrap .name-input,
-    .edit-media-list
-      .edit-mask
-      .edit-board
-      .edit-info
-      .info-wrap
-      .media-list-intro,
+    .edit-media-list .edit-mask .edit-board .edit-info .info-wrap .media-list-intro,
     .pgc-space-follow-item .bangumi-options .opt-list,
     .space_input,
     #page-setting #setting-new-tag-btn,
@@ -423,10 +383,7 @@
     .section .operation,
     .section .count,
     .large-item .cover img,
-    #page-follows
-      .modal-container.edit-video-modal
-      .modal-body
-      .target-followlist {
+    #page-follows .modal-container.edit-video-modal .modal-body .target-followlist {
       border-color: var(--bew-border-color);
     }
 

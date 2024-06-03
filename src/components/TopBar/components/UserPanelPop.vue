@@ -144,8 +144,8 @@ async function logout() {
   --at-apply: grid grid-cols-3 gap-x-2 mb-2;
 
   a {
-    --at-apply: p-2 m-0 rounded-$bew-radius text-sm flex flex-col items-center
-      transition-all duration-300 bg-$bew-fill-1 // hover:bg-$bew-theme-color
+    --at-apply: p-2 m-0 rounded-$bew-radius text-sm flex flex-col items-center transition-all duration-300
+      bg-$bew-fill-1 // hover:bg-$bew-theme-color
       hover: text-white;
 
     > * {
@@ -170,7 +170,7 @@ async function logout() {
   --at-apply: flex justify-between flex-col mt-4;
 
   a {
-    --at-apply: 'px-4 py-2 mb-1 flex justify-between items-center rounded-$bew-radius transition-all duration-300 hover:bg-$bew-fill-2';
+    --at-apply: "px-4 py-2 mb-1 flex justify-between items-center rounded-$bew-radius transition-all duration-300 hover:bg-$bew-fill-2";
 
     span {
       --at-apply: text-$bew-text-2;
@@ -179,6 +179,6 @@ async function logout() {
 }
 
 #logout {
-  --at-apply: 'text-red-400 important:block px-4 py-2 rounded-$bew-radius duration-300 cursor-pointer hover:bg-$bew-fill-2';
+  --at-apply: "text-red-400 important:block px-4 py-2 rounded-$bew-radius duration-300 cursor-pointer hover:bg-$bew-fill-2";
 }
 </style>

@@ -37,11 +37,7 @@
       .bar-right
       .copy-link:hover,
     .note-up .up-desc-container .desc-top .attention-btn-container:hover,
-    .report-dialog
-      .vui_dialog--footer
-      .report-dialog-footer
-      .button-wrap
-      .comfirm-report:hover,
+    .report-dialog .vui_dialog--footer .report-dialog-footer .button-wrap .comfirm-report:hover,
     .collection-m-exp .bottom .btn:hover {
       background-color: var(--bew-theme-color-80);
     }
@@ -50,13 +46,7 @@
       background-color: var(--bew-theme-color-80) !important;
     }
 
-    .follow-dialog-wrap-exp
-      .follow-dialog-window
-      .content
-      .group-list
-      .add-group
-      .input-group
-      .submitGroup {
+    .follow-dialog-wrap-exp .follow-dialog-window .content .group-list .add-group .input-group .submitGroup {
       background-color: var(--bew-theme-color-10);
     }
 
@@ -80,8 +70,8 @@
     .ql-snow.ql-toolbar button:hover,
     .ql-snow .ql-toolbar button:hover,
     .up-name.is_vip,
-    .up-detail .up-detail-top .up-name[style*='color: rgb(251, 114, 153)'],
-    .up-detail .up-detail-top .up-name[style*='color:#FB7299;'] {
+    .up-detail .up-detail-top .up-name[style*="color: rgb(251, 114, 153)"],
+    .up-detail .up-detail-top .up-name[style*="color:#FB7299;"] {
       color: var(--bew-theme-color) !important;
     }
 
@@ -179,7 +169,7 @@
     .cur-play-icon,
     .playing-gif,
     .multi-page-v1 .cur-list .list-box li.on img,
-    .coin-operated-m-exp .like-checkbox input[type='checkbox']:checked + i {
+    .coin-operated-m-exp .like-checkbox input[type="checkbox"]:checked + i {
       filter: var(--bew-filter-icon-glow);
     }
   }
@@ -196,19 +186,11 @@
     }
 
     .rcmd-tab-switcher .rcmd-tab-move.right .rcmd-tab-move-inner {
-      background: linear-gradient(
-        270deg,
-        var(--bew-bg) 61.53%,
-        transparent 100%
-      );
+      background: linear-gradient(270deg, var(--bew-bg) 61.53%, transparent 100%);
     }
 
     .rcmd-tab-switcher .rcmd-tab-move.left .rcmd-tab-move-inner {
-      background: linear-gradient(
-        90deg,
-        var(--bew-bg) 61.53%,
-        transparent 100%
-      );
+      background: linear-gradient(90deg, var(--bew-bg) 61.53%, transparent 100%);
     }
 
     .note-list .note-card-container .note-card,

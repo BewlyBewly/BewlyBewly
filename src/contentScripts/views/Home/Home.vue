@@ -282,6 +282,6 @@ function toggleTabContentLoading(loading: boolean) {
 }
 
 .tab-activated {
-  --at-apply: 'bg-$bew-theme-color-auto text-$bew-text-auto border-$bew-theme-color dark:border-white';
+  --at-apply: "bg-$bew-theme-color-auto text-$bew-text-auto border-$bew-theme-color dark:border-white";
 }
 </style>

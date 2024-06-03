@@ -397,9 +397,9 @@ function getHistoryList(type: Business, view_at = 0 as number) {
   --at-apply: relative text-$bew-text-2;
 
   &::after {
-    --at-apply: absolute bottom-0 left-0 w-full h-12px bg-$bew-theme-color
-      opacity-0 transform scale-x-0 -z-1 transition-all duration-300;
-    content: '';
+    --at-apply: absolute bottom-0 left-0 w-full h-12px bg-$bew-theme-color opacity-0 transform scale-x-0 -z-1 transition-all
+      duration-300;
+    content: "";
   }
 }
 

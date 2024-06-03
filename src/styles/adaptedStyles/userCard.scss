@@ -18,7 +18,7 @@
     #id-card {
       background-color: var(--bew-elevated-solid-1);
 
-      .idc-uname[style*='color'],
+      .idc-uname[style*="color"],
       .idc-uname:hover {
         color: var(--bew-theme-color) !important;
       }

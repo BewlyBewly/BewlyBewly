@@ -4,7 +4,7 @@
   }
 
   body .special-cover::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -15,35 +15,23 @@
   }
 
   // #region new anime playback & movie page
-  [class*='numberListItem_number_list_item'][class*='numberListItem_select'],
-  [class*='follow_btnFollow'],
+  [class*="numberListItem_number_list_item"][class*="numberListItem_select"],
+  [class*="follow_btnFollow"],
   .squirtle-controller.squirtle-pgc .squirtle-progress-timeline,
-  .squirtle-controller.squirtle-pgc
-    .squirtle-video-volume
-    .squirtle-volume
-    .squirtle-volume-bar
-    .squirtle-volume-dot,
+  .squirtle-controller.squirtle-pgc .squirtle-video-volume .squirtle-volume .squirtle-volume-bar .squirtle-volume-dot,
   .squirtle-controller.squirtle-pgc
     .squirtle-video-volume
     .squirtle-volume
     .squirtle-volume-bar
     .squirtle-volume-percent,
-  .squirtle-controller.squirtle-pgc
-    label.bui-switch-label
-    input:checked
-    + .bui-switch,
-  .squirtle-controller.squirtle-pgc
-    label.bui-switch-label.bui-switch-animbg
-    input:checked
-    + .bui-switch {
+  .squirtle-controller.squirtle-pgc label.bui-switch-label input:checked + .bui-switch,
+  .squirtle-controller.squirtle-pgc label.bui-switch-label.bui-switch-animbg input:checked + .bui-switch {
     background-color: var(--bew-theme-color);
   }
 
-  [class*='numberListItem_badge'],
-  [class*='vipPaybar_textWrap'],
-  [class*='imageListItem_wrap']
-    [class*='imageListItem_coverWrap']
-    [class*='imageListItem_badge'],
+  [class*="numberListItem_badge"],
+  [class*="vipPaybar_textWrap"],
+  [class*="imageListItem_wrap"] [class*="imageListItem_coverWrap"] [class*="imageListItem_badge"],
   .squirtle-controller.squirtle-pgc
     .squirtle-video-setting
     .squirtle-side-setting
@@ -53,31 +41,26 @@
     background-color: var(--bew-theme-color) !important;
   }
 
-  [class*='promptBar_remindActionWrap']
-    [class*='promptBar_btnItemWrap']
-    [class*='positionBtn_btn'] {
+  [class*="promptBar_remindActionWrap"] [class*="promptBar_btnItemWrap"] [class*="positionBtn_btn"] {
     background: var(--bew-theme-color) !important;
   }
 
-  [class*='follow_btnFollow']:hover {
+  [class*="follow_btnFollow"]:hover {
     background-color: var(--bew-theme-color-80);
   }
 
-  [class*='mediainfo_mediaToolbar'] [class*='mediainfo_btnHome'] {
+  [class*="mediainfo_mediaToolbar"] [class*="mediainfo_btnHome"] {
     background-color: var(--bew-theme-color-10);
   }
 
-  [class*='mediainfo_mediaToolbar'] [class*='mediainfo_btnHome'],
-  [class*='mediainfo_mediaRight']
-    [class*='mediainfo_media_desc_section']
-    [class*='mediainfo_display_area']
-    [class*='mediainfo_ellipsis'],
-  [class*='mediainfo_mediaRight'] [class*='mediainfo_media_desc'] i,
-  [class*='upinfo_btn_follow_up'],
-  .squirtle-controller.squirtle-pgc
-    .squirtle-video-setting
-    .squirtle-setting-panel-wrap
-    .squirtle-single-select:hover,
+  [class*="mediainfo_mediaToolbar"] [class*="mediainfo_btnHome"],
+  [class*="mediainfo_mediaRight"]
+    [class*="mediainfo_media_desc_section"]
+    [class*="mediainfo_display_area"]
+    [class*="mediainfo_ellipsis"],
+  [class*="mediainfo_mediaRight"] [class*="mediainfo_media_desc"] i,
+  [class*="upinfo_btn_follow_up"],
+  .squirtle-controller.squirtle-pgc .squirtle-video-setting .squirtle-setting-panel-wrap .squirtle-single-select:hover,
   .squirtle-controller.squirtle-pgc
     .squirtle-video-setting
     .squirtle-side-setting
@@ -86,29 +69,21 @@
     color: var(--bew-theme-color);
   }
 
-  [class*='RecommendItem_wrap']
-    [class*='RecommendItem_right_wrap']
-    [class*='RecommendItem_title']:hover,
-  [class*='upinfo_upLink'] [class*='upinfo_upName'][class*='upinfo_vip'],
-  .squirtle-controller.squirtle-pgc
-    .squirtle-block-wrap
-    .squirtle-select-list
-    .squirtle-select-item.active,
-  [class*='rankTab_sponsor_rank_tab']
-    li[class*='rankTab_tab_item'][class*='rankTab_active'],
-  [class*='rankTab_sponsor_rank_tab'] li[class*='rankTab_tab_item']:hover,
-  [class*='sponsor_sponsor_module']
-    [class*='sponsor_sponsor_info']
-    [class*='sponsor_btn_show_rank']:hover,
-  [class*='rankList_sponsor_rank_item'][class*='rankList_pos_rank_module']
-    [class*='rankList_sp_right']
-    [class*='rankList_sp_user']
-    [class*='rankList_sp_name'][style*='color'] {
+  [class*="RecommendItem_wrap"] [class*="RecommendItem_right_wrap"] [class*="RecommendItem_title"]:hover,
+  [class*="upinfo_upLink"] [class*="upinfo_upName"][class*="upinfo_vip"],
+  .squirtle-controller.squirtle-pgc .squirtle-block-wrap .squirtle-select-list .squirtle-select-item.active,
+  [class*="rankTab_sponsor_rank_tab"] li[class*="rankTab_tab_item"][class*="rankTab_active"],
+  [class*="rankTab_sponsor_rank_tab"] li[class*="rankTab_tab_item"]:hover,
+  [class*="sponsor_sponsor_module"] [class*="sponsor_sponsor_info"] [class*="sponsor_btn_show_rank"]:hover,
+  [class*="rankList_sponsor_rank_item"][class*="rankList_pos_rank_module"]
+    [class*="rankList_sp_right"]
+    [class*="rankList_sp_user"]
+    [class*="rankList_sp_name"][style*="color"] {
     color: var(--bew-theme-color) !important;
   }
 
-  [class*='mediainfo_mediaToolbar'] [class*='mediainfo_btnHome'] svg path,
-  #bilibili_pbp svg rect[clip-path='url(#pbp-played-path)'],
+  [class*="mediainfo_mediaToolbar"] [class*="mediainfo_btnHome"] svg path,
+  #bilibili_pbp svg rect[clip-path="url(#pbp-played-path)"],
   .squirtle-controller.squirtle-pgc
     .squirtle-video-setting
     .squirtle-side-setting
@@ -130,29 +105,29 @@
   //   fill: var(--bew-theme-color) !important;
   // }
 
-  [class*='PlayingIcon_playIcon'] svg path {
+  [class*="PlayingIcon_playIcon"] svg path {
     stroke: var(--bew-theme-color);
   }
 
-  [class*='rankTab_sponsor_rank_tab'] [class*='rankTab_indicator'] {
+  [class*="rankTab_sponsor_rank_tab"] [class*="rankTab_indicator"] {
     border-color: var(--bew-theme-color);
   }
 
-  [class*='rankTab_sponsor_rank_tab'] [class*='rankTab_indicator']:after {
+  [class*="rankTab_sponsor_rank_tab"] [class*="rankTab_indicator"]:after {
     display: none;
   }
 
   &.dark {
     .home-container .main-container,
-    [class*='mediainfo_mediaRight'] [class*='mediainfo_media_desc'] i {
+    [class*="mediainfo_mediaRight"] [class*="mediainfo_media_desc"] i {
       background-color: var(--bew-bg);
     }
 
-    [class*='eplist_ep_list_wrapper'],
-    [class*='eplist_ep_list_wrapper'],
-    [class*='rankList_sponsor_rank_item'][class*='rankList_pos_rank_module']
-      [class*='rankList_sp_right']
-      [class*='rankList_sp_msg'] {
+    [class*="eplist_ep_list_wrapper"],
+    [class*="eplist_ep_list_wrapper"],
+    [class*="rankList_sponsor_rank_item"][class*="rankList_pos_rank_module"]
+      [class*="rankList_sp_right"]
+      [class*="rankList_sp_msg"] {
       background-color: var(--bew-content-solid-1);
     }
 
@@ -160,99 +135,78 @@
       background-color: unset;
     }
 
-    [class*='upinfo_upInfoCard'] {
+    [class*="upinfo_upInfoCard"] {
       background-color: var(--bew-fill-1);
     }
 
-    [class*='follow_btnFollow'][class*='follow_followed'] {
+    [class*="follow_btnFollow"][class*="follow_followed"] {
       background-color: var(--bew-fill-2) !important;
     }
 
-    [class*='SectionSelector_SectionSelector']
-      [class*='SectionSelector_expand'] {
-      background: linear-gradient(
-        270deg,
-        var(--bew-content-solid-1) 46.21%,
-        transparent
-      );
+    [class*="SectionSelector_SectionSelector"] [class*="SectionSelector_expand"] {
+      background: linear-gradient(270deg, var(--bew-content-solid-1) 46.21%, transparent);
     }
 
-    [class*='numberListItem_number_list_item'] {
+    [class*="numberListItem_number_list_item"] {
       --bg1: var(--bew-fill-1);
     }
 
-    [class*='mediainfo_mediaInfo'],
-    [class*='recommend_wrap'],
-    [class*='rankList_sponsor_rank_item'][class*='rankList_pos_rank_module']
-      [class*='rankList_sp_right']
-      [class*='rankList_sp_msg'],
-    [class*='sponsor_sponsor_module'] {
+    [class*="mediainfo_mediaInfo"],
+    [class*="recommend_wrap"],
+    [class*="rankList_sponsor_rank_item"][class*="rankList_pos_rank_module"]
+      [class*="rankList_sp_right"]
+      [class*="rankList_sp_msg"],
+    [class*="sponsor_sponsor_module"] {
       border-color: var(--bew-border-color);
     }
 
-    [class*='mediainfo_mediaRight']
-      [class*='mediainfo_media_desc_section']
-      [class*='mediainfo_display_area']
-      [class*='mediainfo_ellipsis'] {
-      background: linear-gradient(
-        90deg,
-        hsla(0, 0%, 100%, 0),
-        var(--bew-bg) 20%,
-        var(--bew-bg)
-      );
+    [class*="mediainfo_mediaRight"]
+      [class*="mediainfo_media_desc_section"]
+      [class*="mediainfo_display_area"]
+      [class*="mediainfo_ellipsis"] {
+      background: linear-gradient(90deg, hsla(0, 0%, 100%, 0), var(--bew-bg) 20%, var(--bew-bg));
     }
 
-    [class*='numberListItem_title'],
-    [class*='recommend_wrap'] [class*='recommend_title'],
-    [class*='RecommendItem_wrap']
-      [class*='RecommendItem_right_wrap']
-      [class*='RecommendItem_title'],
-    [class*='rankView_sponsor_rank_module']
-      [class*='rankView_sponsor_rank_header']
-      [class*='rankView_title'],
-    [class*='rankList_sponsor_rank_item'][class*='rankList_pos_rank_module']
-      [class*='rankList_sp_right']
-      [class*='rankList_sp_msg'],
-    [class*='rankTab_sponsor_rank_tab'] li[class*='rankTab_tab_item'],
-    [class*='sponsor_sponsor_module']
-      [class*='sponsor_sponsor_info']
-      [class*='sponsor_sponsor_count']
-      span,
-    [class*='sponsor_sponsor_module']
-      [class*='sponsor_sponsor_info']
-      [class*='sponsor_btn_show_rank'],
-    [class*='rankList_sponsor_rank_item'][class*='rankList_pos_rank_module']
-      [class*='rankList_sp_right']
-      [class*='rankList_sp_user']
-      [class*='rankList_sp_name'] {
+    [class*="numberListItem_title"],
+    [class*="recommend_wrap"] [class*="recommend_title"],
+    [class*="RecommendItem_wrap"] [class*="RecommendItem_right_wrap"] [class*="RecommendItem_title"],
+    [class*="rankView_sponsor_rank_module"] [class*="rankView_sponsor_rank_header"] [class*="rankView_title"],
+    [class*="rankList_sponsor_rank_item"][class*="rankList_pos_rank_module"]
+      [class*="rankList_sp_right"]
+      [class*="rankList_sp_msg"],
+    [class*="rankTab_sponsor_rank_tab"] li[class*="rankTab_tab_item"],
+    [class*="sponsor_sponsor_module"] [class*="sponsor_sponsor_info"] [class*="sponsor_sponsor_count"] span,
+    [class*="sponsor_sponsor_module"] [class*="sponsor_sponsor_info"] [class*="sponsor_btn_show_rank"],
+    [class*="rankList_sponsor_rank_item"][class*="rankList_pos_rank_module"]
+      [class*="rankList_sp_right"]
+      [class*="rankList_sp_user"]
+      [class*="rankList_sp_name"] {
       color: var(--bew-text-1);
     }
 
-    [class*='RecommendItem_wrap']
-      [class*='RecommendItem_right_wrap']
-      [class*='RecommendItem_sub_wrap']
-      [class*='RecommendItem_showindex'],
-    [class*='score_score'],
-    [class*='rankList_sponsor_rank_item'][class*='rankList_pos_rank_module']
-      [class*='rankList_sp_left']
-      [class*='rankList_face_wrap']
-      [class*='rankList_sp_rank'],
-    [class*='sponsor_sponsor_module']
-      [class*='sponsor_sponsor_info']
-      [class*='sponsor_sponsor_count'] {
+    [class*="RecommendItem_wrap"]
+      [class*="RecommendItem_right_wrap"]
+      [class*="RecommendItem_sub_wrap"]
+      [class*="RecommendItem_showindex"],
+    [class*="score_score"],
+    [class*="rankList_sponsor_rank_item"][class*="rankList_pos_rank_module"]
+      [class*="rankList_sp_left"]
+      [class*="rankList_face_wrap"]
+      [class*="rankList_sp_rank"],
+    [class*="sponsor_sponsor_module"] [class*="sponsor_sponsor_info"] [class*="sponsor_sponsor_count"] {
       color: var(--bew-text-2);
     }
 
-    [class*='rankList_sponsor_rank_item'][class*='rankList_pos_rank_module']
-      [class*='rankList_sp_right']
-      [class*='rankList_sp_msg'][class*='rankList_empty'] {
+    [class*="rankList_sponsor_rank_item"][class*="rankList_pos_rank_module"]
+      [class*="rankList_sp_right"]
+      [class*="rankList_sp_msg"][class*="rankList_empty"] {
       color: var(--bew-text-3);
     }
 
-    [class*='rankList_sponsor_rank_item'][class*='rankList_pos_rank_module']
-      [class*='rankList_sp_left']
-      [class*='rankList_face_wrap']
-      [class*='rankList_svg'] {
+    [class*="rankList_sponsor_rank_item"][class*="rankList_pos_rank_module"]
+      [class*="rankList_sp_left"]
+      [class*="rankList_face_wrap"]
+      [class*="rankList_svg"] {
       fill: var(--bew-border-color);
     }
   }
@@ -267,20 +221,8 @@
   .main-container .tool-bar .coin-info:hover span,
   .main-container .tool-bar .like-info.active span,
   .main-container .tool-bar .like-info:hover span,
-  .main-container
-    .tool-bar
-    .share-info
-    .share-more
-    .share-wrapper
-    .share-btn:hover
-    i,
-  .main-container
-    .tool-bar
-    .share-info
-    .share-more
-    .share-wrapper
-    .share-btn:hover
-    span,
+  .main-container .tool-bar .share-info .share-more .share-wrapper .share-btn:hover i,
+  .main-container .tool-bar .share-info .share-more .share-wrapper .share-btn:hover span,
   .main-container .tool-bar .share-info:hover i,
   .main-container .tool-bar .share-info:hover span,
   .main-container .tool-bar .mobile-info:hover i,
@@ -293,12 +235,7 @@
     color: var(--bew-theme-color);
   }
 
-  .main-container
-    .review-module
-    .review-list
-    .review-item
-    .review-header
-    #review-author-nick-name.review-author.is-vip,
+  .main-container .review-module .review-list .review-item .review-header #review-author-nick-name.review-author.is-vip,
   .up-info > a .up-name.vip,
   .main-container .review-module .review-list .review-item:hover .review-title,
   .main-container .review-module .module-title .more-link:hover,
@@ -349,12 +286,7 @@
     .main-container .media-info .media-right .media-desc,
     .main-container .season-list .series-title,
     .main-container .season-list .ss-list-wrapper .ss-item .ss-info .ss-title,
-    .main-container
-      .recom-wrapper
-      .recom-list
-      .recom-item
-      .info-wrapper
-      .video-title,
+    .main-container .recom-wrapper .recom-list .recom-item .info-wrapper .video-title,
     .main-container .plp-l .comment-wrapper .b-head,
     .main-container .media-info .media-right .pub-wrapper .home-link,
     .main-container .ep-list-wrapper .list-title h4,
@@ -379,26 +311,11 @@
     .main-container .tool-bar span,
     .main-container .tool-bar i,
     .main-container .season-list .ss-list-wrapper .ss-item .ss-info .pub-info,
-    .main-container
-      .recom-wrapper
-      .recom-list
-      .recom-item
-      .info-wrapper
-      .video-subtitle,
-    .main-container
-      .recom-wrapper
-      .recom-list
-      .recom-item
-      .info-wrapper
-      .video-count,
+    .main-container .recom-wrapper .recom-list .recom-item .info-wrapper .video-subtitle,
+    .main-container .recom-wrapper .recom-list .recom-item .info-wrapper .video-count,
     .main-container .media-info .media-right .media-count,
     .main-container .review-module .review-list .review-item .pub-time,
-    .main-container
-      .review-module
-      .review-list
-      .review-item
-      .review-header
-      #review-author-nick-name.review-author,
+    .main-container .review-module .review-list .review-item .review-header #review-author-nick-name.review-author,
     .main-container .media-info .media-right .media-tool-bar .btn-rating,
     .main-container .nav-tools .tool-item,
     .main-container .sponsor-module .sponsor-info .sponsor-count,
@@ -410,11 +327,7 @@
       color: var(--bew-text-3);
     }
 
-    .main-container
-      .media-info
-      .media-right
-      .media-tool-bar
-      .btn-follow.active {
+    .main-container .media-info .media-right .media-tool-bar .btn-follow.active {
       color: var(--bew-fill-4);
     }
 
@@ -437,12 +350,7 @@
       color: var(--bew-border-color);
     }
 
-    .main-container
-      .media-info
-      .media-right
-      .pub-wrapper
-      .up-info-wrapper
-      .split-line {
+    .main-container .media-info .media-right .pub-wrapper .up-info-wrapper .split-line {
       background-color: var(--bew-border-color);
     }
 
@@ -462,11 +370,7 @@
       background-color: var(--bew-fill-1);
     }
 
-    .main-container
-      .media-info
-      .media-right
-      .media-tool-bar
-      .btn-follow.active {
+    .main-container .media-info .media-right .media-tool-bar .btn-follow.active {
       background-color: var(--bew-fill-2) !important;
     }
 
