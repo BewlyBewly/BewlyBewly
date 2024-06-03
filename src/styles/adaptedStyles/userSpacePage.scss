@@ -234,7 +234,8 @@
     }
 
     .main-content .card-content .post-content.repost,
-    .main-content .card-content .post-content .original-card-content .article-container {
+    .main-content .card-content .post-content .original-card-content .article-container,
+    .main-content .card-content .deleted {
       background-color: var(--bg2);
     }
 
