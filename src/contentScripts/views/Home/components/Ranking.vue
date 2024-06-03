@@ -264,10 +264,10 @@ defineExpose({ initData })
 
 <style lang="scss" scoped>
 .active {
-  --at-apply: "scale-110 bg-$bew-theme-color-auto text-$bew-text-auto shadow-$bew-shadow-2";
+  --uno: "scale-110 bg-$bew-theme-color-auto text-$bew-text-auto shadow-$bew-shadow-2";
 }
 
 .hide {
-  --at-apply: "h-[calc(100vh-70)] translate-y--70px";
+  --uno: "h-[calc(100vh-70)] translate-y--70px";
 }
 </style>

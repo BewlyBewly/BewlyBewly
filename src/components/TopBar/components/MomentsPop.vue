@@ -442,20 +442,20 @@ defineExpose({
 
 <style lang="scss" scoped>
 .tab {
-  --at-apply: "relative text-$bew-text-2";
+  --uno: "relative text-$bew-text-2";
 
   &::after {
-    --at-apply: "absolute bottom-0 left-0 w-full h-12px bg-$bew-theme-color opacity-0 transform scale-x-0 -z-1";
-    --at-apply: "transition-all duration-300";
+    --uno: "absolute bottom-0 left-0 w-full h-12px bg-$bew-theme-color opacity-0 transform scale-x-0 -z-1";
+    --uno: "transition-all duration-300";
     content: "";
   }
 }
 
 .tab-selected {
-  --at-apply: "font-bold text-$bew-text-1";
+  --uno: "font-bold text-$bew-text-1";
 
   &::after {
-    --at-apply: "scale-x-80 opacity-40";
+    --uno: "scale-x-80 opacity-40";
   }
 }
 </style>

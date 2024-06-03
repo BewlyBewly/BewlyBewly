@@ -1,41 +1,41 @@
 .page-fade-enter-active,
 .page-fade-leave-active {
-  --at-apply: "transition-opacity duration-500 transform-gpu";
+  --uno: "transition-opacity duration-500 transform-gpu";
 }
 .page-fade-enter-from,
 .page-fade-leave-to {
-  --at-apply: "opacity-0";
+  --uno: "opacity-0";
 }
 .page-fade-leave-to {
-  --at-apply: "hidden";
+  --uno: "hidden";
 }
 
 .fade-enter-active,
 .fade-leave-active {
-  --at-apply: "transition-opacity duration-500";
+  --uno: "transition-opacity duration-500";
 }
 .fade-enter-from,
 .fade-leave-to {
-  --at-apply: "opacity-0";
+  --uno: "opacity-0";
 }
 
 .list-enter-active,
 .list-leave-active {
-  --at-apply: "transition-all duration-500";
+  --uno: "transition-all duration-500";
 }
 .list-enter-from,
 .list-leave-to {
-  --at-apply: "opacity-0 translate-y-6 transform-gpu";
+  --uno: "opacity-0 translate-y-6 transform-gpu";
 }
 .list-leave-to {
-  --at-apply: "hidden";
+  --uno: "hidden";
 }
 
 .modal-enter-active,
 .modal-leave-active {
-  --at-apply: "transition-all duration-500 transform-gpu";
+  --uno: "transition-all duration-500 transform-gpu";
 }
 .modal-enter-from,
 .modal-leave-to {
-  --at-apply: "opacity-0 scale-105";
+  --uno: "opacity-0 scale-105";
 }

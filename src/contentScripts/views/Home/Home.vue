@@ -255,33 +255,33 @@ function toggleTabContentLoading(loading: boolean) {
 <style scoped lang="scss">
 .bg-enter-active,
 .bg-leave-active {
-  --at-apply: "duration-1000 ease-in-out";
+  --uno: "duration-1000 ease-in-out";
 }
 .bg-enter-from,
 .bg-leave-to {
-  --at-apply: "h-100vh";
+  --uno: "h-100vh";
 }
 .bg-leave-to {
-  --at-apply: "hidden";
+  --uno: "hidden";
 }
 
 .content-enter-active,
 .content-leave-active {
-  --at-apply: "duration-1000 ease-in-out";
+  --uno: "duration-1000 ease-in-out";
 }
 .content-enter-from,
 .content-leave-to {
-  --at-apply: "opacity-0 h-100vh";
+  --uno: "opacity-0 h-100vh";
 }
 .content-leave-to {
-  --at-apply: "hidden";
+  --uno: "hidden";
 }
 
 .hide {
-  --at-apply: "important-translate-y--70px";
+  --uno: "important-translate-y--70px";
 }
 
 .tab-activated {
-  --at-apply: "bg-$bew-theme-color-auto text-$bew-text-auto border-$bew-theme-color dark:border-white";
+  --uno: "bg-$bew-theme-color-auto text-$bew-text-auto border-$bew-theme-color dark:border-white";
 }
 </style>

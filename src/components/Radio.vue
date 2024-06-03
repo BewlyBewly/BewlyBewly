@@ -35,19 +35,19 @@ input[type="checkbox"] + span::after {
 
 input[type="checkbox"] {
   &:hover + span {
-    --at-apply: "bg-$bew-fill-2";
+    --uno: "bg-$bew-fill-2";
   }
 
   &:active + span::after {
-    --at-apply: "scale-90";
+    --uno: "scale-90";
   }
 
   &:checked + span {
-    --at-apply: "bg-$bew-theme-color-60 border-$bew-theme-color";
+    --uno: "bg-$bew-theme-color-60 border-$bew-theme-color";
   }
 
   &:checked:hover + span {
-    --at-apply: "bg-$bew-theme-color-80 border-$bew-theme-color";
+    --uno: "bg-$bew-theme-color-80 border-$bew-theme-color";
     box-shadow:
       0 0 6px 2px var(--bew-theme-color-40),
       inset 0 0 6px var(--bew-theme-color-30);
@@ -59,7 +59,7 @@ input[type="checkbox"] {
   }
 
   &:checked + span::after {
-    --at-apply: "border-$bew-theme-color translate-x-full";
+    --uno: "border-$bew-theme-color translate-x-full";
   }
 }
 </style>

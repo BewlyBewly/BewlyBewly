@@ -67,15 +67,15 @@ function handleClick(evt: MouseEvent) {
   --b-button-shadow-hover: var(--b-button-shadow);
   --b-button-shadow-active: var(--b-button-shadow);
 
-  --at-apply: "bg-$b-button-color hover:bg-$b-button-color-hover box-border";
-  --at-apply: "rounded-$b-button-radius p-x-$b-button-padding transform-gpu active:scale-95";
-  --at-apply: "duration-300 flex items-center gap-2 text-size-$b-button-font-size";
-  --at-apply: "text-$b-button-text-color lh-$b-button-height h-$b-button-height";
-  --at-apply: "border-solid border-width-$b-button-border-width border-$b-button-border-color";
-  --at-apply: "shadow-$b-button-shadow hover:shadow-$b-button-shadow-hover active:shadow-$b-button-shadow-active";
+  --uno: "bg-$b-button-color hover:bg-$b-button-color-hover box-border";
+  --uno: "rounded-$b-button-radius p-x-$b-button-padding transform-gpu active:scale-95";
+  --uno: "duration-300 flex items-center gap-2 text-size-$b-button-font-size";
+  --uno: "text-$b-button-text-color lh-$b-button-height h-$b-button-height";
+  --uno: "border-solid border-width-$b-button-border-width border-$b-button-border-color";
+  --uno: "shadow-$b-button-shadow hover:shadow-$b-button-shadow-hover active:shadow-$b-button-shadow-active";
 
   & svg {
-    --at-apply: "text-size-$b-button-icon-size";
+    --uno: "text-size-$b-button-icon-size";
   }
 
   // &--type-default {
@@ -120,11 +120,11 @@ function handleClick(evt: MouseEvent) {
   }
 
   &--custom-color {
-    --at-apply: "hover:opacity-70";
+    --uno: "hover:opacity-70";
   }
 
   &--strong {
-    --at-apply: "fw-800";
+    --uno: "fw-800";
   }
 }
 </style>

@@ -361,4 +361,3 @@ function isMusic(item: FavoriteResource) {
   }
 }
 </style>
-~/components/TopBar/types
