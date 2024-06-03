@@ -305,42 +305,42 @@ async function handleClearSearchHistory() {
 
 <style lang="scss" scoped>
 ::v-deep(.suggest_high_light) {
-  --at-apply: text-$bew-theme-color not-italic;
+  --at-apply: "text-$bew-theme-color not-italic";
 }
 
 .result-list-enter-active,
 .result-list-leave-active {
-  --at-apply: transition-all duration-300 ease-in-out;
+  --at-apply: "transition-all duration-300 ease-in-out";
 }
 
 .result-list-enter-from,
 .result-list-leave-to {
-  --at-apply: transform translate-y-4 opacity-0 scale-95;
+  --at-apply: "transform translate-y-4 opacity-0 scale-95";
 }
 
 .focus-character-enter-active,
 .focus-character-leave-active {
-  --at-apply: transition-all duration-300 ease-in-out;
+  --at-apply: "transition-all duration-300 ease-in-out";
 }
 
 .focus-character-enter-from,
 .focus-character-leave-to {
-  --at-apply: transform translate-y-6 opacity-0;
+  --at-apply: "transform translate-y-6 opacity-0";
 }
 
 .mask-enter-active,
 .mask-leave-active {
-  --at-apply: transition-all duration-300 ease-in-out;
+  --at-apply: "transition-all duration-300 ease-in-out";
 }
 
 .mask-enter-from,
 .mask-leave-to {
-  --at-apply: opacity-0;
+  --at-apply: "opacity-0";
 }
 
 .mask-enter-to,
 .mask-leave-from {
-  --at-apply: opacity-100;
+  --at-apply: "opacity-100";
 }
 
 #search-wrap {
@@ -349,21 +349,21 @@ async function handleClearSearchHistory() {
   --b-search-bar-color-focus: var(--b-search-bar-color);
 
   @mixin card-content {
-    --at-apply: text-base outline-none w-full bg-$b-search-bar-color shadow-$bew-shadow-2 transform-gpu;
+    --at-apply: "text-base outline-none w-full bg-$b-search-bar-color shadow-$bew-shadow-2 transform-gpu";
     backdrop-filter: var(--bew-filter-glass-1);
   }
 
   .search-bar {
     input {
       @include card-content;
-      --at-apply: shadow-$bew-shadow-2;
+      --at-apply: "shadow-$bew-shadow-2";
 
       &:hover {
-        --at-apply: bg-$b-search-bar-color-hover;
+        --at-apply: "bg-$b-search-bar-color-hover";
       }
 
       &:focus {
-        --at-apply: bg-$b-search-bar-color-focus;
+        --at-apply: "bg-$b-search-bar-color-focus";
         box-shadow:
           0 6px 16px var(--bew-theme-color-40),
           inset 0 0 6px var(--bew-theme-color-30);
@@ -371,7 +371,7 @@ async function handleClearSearchHistory() {
     }
 
     &.focus input {
-      --at-apply: border-$bew-theme-color rounded-$bew-radius;
+      --at-apply: "border-$bew-theme-color rounded-$bew-radius";
       box-shadow:
         0 6px 16px var(--bew-theme-color-40),
         inset 0 0 6px var(--bew-theme-color-30);
@@ -389,16 +389,16 @@ async function handleClearSearchHistory() {
 
   #search-history {
     @include search-content;
-    --at-apply: bg-$bew-elevated-1;
+    --at-apply: "bg-$bew-elevated-1";
 
     .history-list {
       .title {
-        --at-apply: text-lg font-500;
+        --at-apply: "text-lg font-500";
       }
 
       .history-item-container {
         .history-item {
-          --at-apply: relative cursor-pointer duration-300;
+          --at-apply: "relative cursor-pointer duration-300";
           --at-apply: "py-2 px-6 bg-$bew-fill-1 hover:bg-$bew-theme-color-20 hover:text-$bew-theme-color rounded-$bew-radius-half";
         }
       }
@@ -407,13 +407,13 @@ async function handleClearSearchHistory() {
 
   #search-suggestion {
     @include search-content;
-    --at-apply: bg-$bew-elevated-1;
+    --at-apply: "bg-$bew-elevated-1";
 
     .suggestion-item {
       @include search-content-item;
 
       &.active {
-        --at-apply: bg-$bew-fill-2;
+        --at-apply: "bg-$bew-fill-2";
       }
     }
   }

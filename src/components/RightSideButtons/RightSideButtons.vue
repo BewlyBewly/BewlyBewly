@@ -77,7 +77,7 @@ const hoveringDockItem = reactive<HoveringDockItem>({
   --b-button-shadow-active: var(--bew-shadow-1);
 
   svg {
-    --at-apply: w-20px h-20px shrink-0;
+    --at-apply: "w-20px h-20px shrink-0";
   }
 }
 </style>

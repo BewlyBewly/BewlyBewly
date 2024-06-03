@@ -198,7 +198,7 @@ function handleBackToTopOrRefresh() {
 <style lang="scss" scoped>
 .dock-wrap {
   > * {
-    --at-apply: pointer-events-auto;
+    --at-apply: "pointer-events-auto";
   }
 }
 
@@ -206,7 +206,7 @@ function handleBackToTopOrRefresh() {
   &-left,
   &-right,
   &-bottom {
-    --at-apply: absolute z--1;
+    --at-apply: "absolute z--1";
   }
 
   &-left {
@@ -218,63 +218,63 @@ function handleBackToTopOrRefresh() {
   }
 
   &-bottom {
-    --at-apply: left-0 bottom-0 w-full h-14px hover-h-60px;
+    --at-apply: "left-0 bottom-0 w-full h-14px hover-h-60px";
   }
 }
 
 .dock-content {
-  --at-apply: absolute flex justify-center items-center;
+  --at-apply: "absolute flex justify-center items-center";
 
   &.left {
     --at-apply: "left-2 after:right--4px";
   }
   &.left.hide {
-    --at-apply: opacity-0 translate-x--100%;
+    --at-apply: "opacity-0 translate-x--100%";
   }
 
   &.right {
     --at-apply: "right-2 after:left--4px";
   }
   &.right.hide {
-    --at-apply: opacity-0 translate-x-100%;
+    --at-apply: "opacity-0 translate-x-100%";
   }
 
   &.bottom {
-    --at-apply: top-unset bottom-0;
+    --at-apply: "top-unset bottom-0";
   }
   &.bottom.hide {
-    --at-apply: opacity-0 translate-y-100%;
+    --at-apply: "opacity-0 translate-y-100%";
   }
 
   .divider {
-    --at-apply: my-1 mx-3 h-4px bg-$bew-fill-1 rounded-4;
+    --at-apply: "my-1 mx-3 h-4px bg-$bew-fill-1 rounded-4";
   }
 
   &.bottom .divider {
-    --at-apply: w-4px h-auto my-3 mx-1;
+    --at-apply: "w-4px h-auto my-3 mx-1";
   }
 
   .dock-content-inner {
-    --at-apply: duration-300 ease-in-out transform-gpu;
+    --at-apply: "duration-300 ease-in-out transform-gpu";
     --at-apply: "p-2 m-2 bg-$bew-content-2 dark:bg-$bew-elevated-1";
-    --at-apply: flex flex-col gap-2 shrink-0;
-    --at-apply: rounded-full border-$bew-border-color;
-    --at-apply: shadow-$bew-shadow-2;
+    --at-apply: "flex flex-col gap-2 shrink-0";
+    --at-apply: "rounded-full border-$bew-border-color";
+    --at-apply: "shadow-$bew-shadow-2";
     backdrop-filter: var(--bew-filter-glass-1);
   }
 
   &.bottom .dock-content-inner {
-    --at-apply: flex-row;
+    --at-apply: "flex-row";
   }
 
   .back-to-top-or-refresh-btn {
     --at-apply: "absolute md:bottom--45px bottom--35px";
     --at-apply: "transform active:important-scale-90 hover:scale-110";
     --at-apply: "md:w-45px w-35px md:h-45px h-35px";
-    --at-apply: grid place-items-center;
-    --at-apply: filter-$bew-filter-glass-1;
+    --at-apply: "grid place-items-center";
+    --at-apply: "filter-$bew-filter-glass-1";
     --at-apply: "bg-$bew-elevated-1 hover:bg-$bew-content-1-hover";
-    --at-apply: rounded-full shadow-$bew-shadow-2;
+    --at-apply: "rounded-full shadow-$bew-shadow-2";
 
     backdrop-filter: var(--bew-filter-glass-1);
     transition:
@@ -285,14 +285,14 @@ function handleBackToTopOrRefresh() {
     box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
 
     &.active {
-      --at-apply: important-bg-$bew-theme-color-auto text-$bew-text-auto;
+      --at-apply: "important-bg-$bew-theme-color-auto text-$bew-text-auto";
       --at-apply: "shadow-$shadow-active dark:shadow-$shadow-dark";
-      --at-apply: active: shadow-$shadow-active-active dark-active: shadow-$shadow-dark-active;
+      --at-apply: "active:shadow-$shadow-active-active dark-active:shadow-$shadow-dark-active";
     }
   }
 
   &.bottom .back-to-top-or-refresh-btn {
-    --at-apply: bottom-unset md: right--45px right--35px;
+    --at-apply: "bottom-unset md:right--45px right--35px";
   }
 }
 
@@ -305,10 +305,10 @@ function handleBackToTopOrRefresh() {
   --at-apply: "transform active:important-scale-90 hover:scale-110";
   --at-apply: "md:w-45px w-35px";
   --at-apply: "md:lh-45px lh-35px";
-  --at-apply: p-0 flex items-center justify-center;
-  --at-apply: aspect-square relative;
-  --at-apply: leading-0;
-  --at-apply: rounded-60px antialiased;
+  --at-apply: "p-0 flex items-center justify-center";
+  --at-apply: "aspect-square relative";
+  --at-apply: "leading-0";
+  --at-apply: "rounded-60px antialiased";
   --at-apply: "bg-$bew-content-1 hover:bg-$bew-fill-2 cursor-pointer";
   --at-apply: "dark:bg-$bew-fill-1 dark-hover:bg-$bew-fill-4";
 
@@ -327,13 +327,13 @@ function handleBackToTopOrRefresh() {
   }
 
   &.active {
-    --at-apply: important-bg-$bew-theme-color-auto text-$bew-text-auto;
+    --at-apply: "important-bg-$bew-theme-color-auto text-$bew-text-auto";
     --at-apply: "shadow-$shadow-active dark:shadow-$shadow-dark";
-    --at-apply: active: shadow-$shadow-active-active dark-active: shadow-$shadow-dark-active;
+    --at-apply: "active:shadow-$shadow-active-active dark-active:shadow-$shadow-dark-active";
   }
 
   svg {
-    --at-apply: md: w-22px w-18px md: h-22px h-18px block align-middle;
+    --at-apply: "md:w-22px w-18px md:h-22px h-18px block align-middle";
   }
 }
 </style>

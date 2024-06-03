@@ -20,27 +20,26 @@ defineProps<{
 
 <style lang="scss" scoped>
 .b-tooltip-wrapper {
-  --at-apply: flex items-center relative;
+  --at-apply: "flex items-center relative";
 
   .b-tooltip {
-    --at-apply: absolute px-2 lh-2em rounded-8 pointer-events-none text-sm opacity-0 duration-300 shadow-$bew-shadow-2;
-    white-space: nowrap;
+    --at-apply: "absolute px-2 lh-2em rounded-8 pointer-events-none text-sm opacity-0 duration-300 shadow-$bew-shadow-2 whitespace-nowrap";
 
     &--placement-right {
-      --at-apply: left-[calc(100%+0.5em)];
+      --at-apply: "left-[calc(100%+0.5em)]";
     }
 
     &--placement-left {
-      --at-apply: right-[calc(100%+0.5em)];
+      --at-apply: "right-[calc(100%+0.5em)]";
     }
 
     &--placement-top {
-      --at-apply: top--2.5em left-1/2;
+      --at-apply: "top--2.5em left-1/2";
       transform: translateX(-50%);
     }
 
     &--placement-bottom {
-      --at-apply: bottom--2.5em left-1/2;
+      --at-apply: "bottom--2.5em left-1/2";
       transform: translateX(-50%);
     }
 
@@ -49,16 +48,16 @@ defineProps<{
     }
 
     &--type-dark {
-      --at-apply: text-white bg-black;
+      --at-apply: "text-white bg-black";
     }
 
     &--type-white {
-      --at-apply: text-black bg-white;
+      --at-apply: "text-black bg-white";
     }
   }
 
   &:hover .b-tooltip {
-    --at-apply: opacity-100;
+    --at-apply: "opacity-100";
   }
 }
 </style>

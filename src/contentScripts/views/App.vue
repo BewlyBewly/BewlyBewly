@@ -393,10 +393,10 @@ provide<BewlyAppProvider>('BEWLY_APP', {
 
 .top-bar-enter-from,
 .top-bar-leave-to {
-  --at-apply: opacity-0 transform -translate-y-full;
+  --at-apply: "opacity-0 transform -translate-y-full";
 }
 
 .bewly-wrapper {
-  --at-apply: text-size-$bew-base-font-size;
+  --at-apply: "text-size-$bew-base-font-size";
 }
 </style>
