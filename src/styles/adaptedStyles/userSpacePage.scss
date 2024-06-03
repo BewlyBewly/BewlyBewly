@@ -233,6 +233,14 @@
       --bg2: var(--bew-bg);
     }
 
+    .main-content .card-content .post-content.repost,
+    .main-content .card-content .post-content .original-card-content .article-container,
+    .main-content .card-content .deleted,
+    .card .more-panel,
+    .card .more-panel:after {
+      background-color: var(--bg2);
+    }
+
     .n .n-inner,
     #page-index .col-1,
     #page-index .col-2 .section,
@@ -246,6 +254,8 @@
     #page-follows .list-item .title,
     #page-follows .follow-sidenav .follow-list-container .follow-item,
     #page-video .page-head__left .video-title,
+    .card .more-panel,
+    .original-card-content .title,
     .pgc-space-follow-item .pgc-item-info .pgc-item-title,
     .search-component-input input,
     #page-article .row .breadcrumb .item,
@@ -392,6 +402,10 @@
     .bangumi-pagelistbox .custom-right .custom-right-inner.custompage,
     .feed-dynamic,
     #page-dynamic .bili-dyn-item,
+    .original-card-content .video-container,
+    .main-content .card-content .post-content .original-card-content .article-container,
+    .card .more-panel,
+    .card .more-panel:after,
     .fans-action-btn.follow,
     .btn.ghost,
     .btn.ghost:focus,
@@ -574,9 +588,11 @@
     }
 
     .search-page,
+    .feed-dynamic-content .feed-card .loading-content.bg-white,
     .card,
     .feed-dynamic-content .bb-comment,
     #page-dynamic .bili-dyn-item,
+    .original-card-content .video-container,
     #page-series-index .channel-option.no-channel,
     .n .n-inner,
     #page-index .col-1,
