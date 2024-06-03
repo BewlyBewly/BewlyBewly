@@ -78,7 +78,10 @@
     #page-follows .modal-container.edit-video-modal .target-followitem:hover,
     #page-follows .follow-main .follow-action-bottom li:hover,
     #page-fav .fav-main .search-types:hover,
-    #page-fav .fav-main .fav-action-bottom .search-results-num i {
+    #page-fav .fav-main .fav-action-bottom .search-results-num i,
+    .video-container.can-hover:hover .text-area .title,
+    .card .button-area .more-button:hover,
+    .card .more-panel .child-button:hover {
       color: var(--bew-theme-color);
     }
 
@@ -96,7 +99,9 @@
     #page-fav .fav-main .fav-action-top .back-to-info:hover,
     .sub-tabs .filter-content .cur-filter:hover,
     .fans-name[style*="color"],
-    .dynamic-keyword {
+    .dynamic-keyword,
+    .card .main-content .user-name a[style*="color"],
+    .content-full .dynamic-link-hover-bg {
       color: var(--bew-theme-color) !important;
     }
 
@@ -154,7 +159,8 @@
     .game-card__btn,
     .be-tags-container .tag.new-tag,
     #page-fav .fav-sidenav .fav-item.cur:hover .icon-cursor,
-    .favInfo-box .collection-details .collection-btn {
+    .favInfo-box .collection-details .collection-btn,
+    .video-container .types {
       background-color: var(--bew-theme-color);
     }
 
@@ -286,7 +292,8 @@
     #page-follows .modal-container.edit-video-modal .target-follow-name .target-follow-notice,
     #page-fav .search-empty-hint p,
     .small-item .meta,
-    #page-fav .fav-main .fav-meta {
+    #page-fav .fav-main .fav-meta,
+    .video-container .text-area .content {
       color: var(--bew-text-2);
     }
 
@@ -542,7 +549,8 @@
     #page-fav .fav-main .filter-item .filter-type .be-dropdown-item:hover,
     #page-fav .fav-main .fav-video-list.is-batch .small-item.selected,
     #page-fav .fav-main .fav-video-list.is-batch .small-item:hover,
-    .search-nav-item:hover {
+    .search-nav-item:hover,
+    .dynamic-link-hover-bg:hover {
       background-color: var(--bew-fill-2);
     }
 
