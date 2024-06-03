@@ -298,6 +298,6 @@ defineExpose({
 
 <style lang="scss" scoped>
 .activated-category {
-  --at-apply: bg-$bew-theme-color text-white;
+  --uno: "bg-$bew-theme-color text-white";
 }
 </style>

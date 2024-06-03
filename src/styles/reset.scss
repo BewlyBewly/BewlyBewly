@@ -42,7 +42,7 @@ pre {
 }
 
 .ps {
-  padding-inline-start: 0 
+  padding-inline-start: 0;
 }
 
 /*
@@ -51,9 +51,9 @@ pre {
 */
 
 button,
-[type='button'],
-[type='reset'],
-[type='submit'] {
+[type="button"],
+[type="reset"],
+[type="submit"] {
   -webkit-appearance: button; /* 1 */
   background-color: transparent; /* 2 */
   background-image: none; /* 2 */
@@ -198,8 +198,7 @@ a {
   kbd,
   samp,
   pre {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-      'Liberation Mono', 'Courier New', monospace; /* 1 */
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; /* 1 */
     font-size: 1em; /* 2 */
   }
 
@@ -330,7 +329,7 @@ a {
   2. Correct the outline style in Safari.
   */
 
-  [type='search'] {
+  [type="search"] {
     -webkit-appearance: textfield; /* 1 */
     outline-offset: -2px; /* 2 */
   }
@@ -422,7 +421,7 @@ a {
   */
 
   button,
-  [role='button'] {
+  [role="button"] {
     cursor: pointer;
   }
 

@@ -39,10 +39,10 @@ defineProps<{
 
 <style lang="scss" scoped>
 :deep(.right-content > *) {
-  --at-apply: float-right clear-both;
+  --uno: "float-right clear-both";
 }
 
 .b-settings-item + .b-settings-item {
-  --at-apply: border-t-1 border-$bew-border-color;
+  --uno: "border-t-1 border-$bew-border-color";
 }
 </style>

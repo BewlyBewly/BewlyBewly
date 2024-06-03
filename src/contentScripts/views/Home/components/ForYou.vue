@@ -578,6 +578,6 @@ defineExpose({ initData })
 
 <style lang="scss" scoped>
 .activated-dislike-reason {
-  --at-apply: bg-$bew-theme-color-20 color-$bew-theme-color;
+  --uno: "bg-$bew-theme-color-20 color-$bew-theme-color";
 }
 </style>

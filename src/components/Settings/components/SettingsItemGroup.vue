@@ -25,6 +25,6 @@ defineProps<{
 
 <style lang="scss" scoped>
 .b-settings-item-group + .b-settings-item-group {
-  --at-apply: mt-6
+  --uno: "mt-6";
 }
 </style>

@@ -754,32 +754,32 @@ defineExpose({
 <style lang="scss" scoped>
 .slide-in-enter-active,
 .slide-in-leave-active {
-  --at-apply: transition-all duration-300 pointer-events-none transform-gpu;
+  --uno: "transition-all duration-300 pointer-events-none transform-gpu";
 }
 
 .slide-in-leave-to,
 .slide-in-enter-from {
-  --at-apply: transform important:translate-y-4 opacity-0;
+  --uno: "transform important: translate-y-4 opacity-0";
 }
 
 .slide-out-enter-active,
 .slide-out-leave-active {
-  --at-apply: transition-all duration-300 pointer-events-none transform-gpu;
+  --uno: "transition-all duration-300 pointer-events-none transform-gpu";
 }
 
 .slide-out-leave-to,
 .slide-out-enter-from {
-  --at-apply: transform important:-translate-y-4 opacity-0;
+  --uno: "transform important: -translate-y-4 opacity-0";
 }
 
 .fade-enter-active,
 .fade-leave-active {
-  --at-apply: transition-all duration-600;
+  --uno: "transition-all duration-600";
 }
 
 .fade-leave-to,
 .fade-enter-from {
-  --at-apply: opacity-0;
+  --uno: "opacity-0";
 }
 
 .hide {
@@ -787,72 +787,66 @@ defineExpose({
 }
 
 .bew-popover {
-  --at-apply: absolute top-60px left-1/2
-    transform -translate-x-1/2
-    overflow-visible
-    after:content-empty
-    after:opacity-100 after:w-full after:h-100px
-    after:absolute after:top--30px after:left-1/2 after:-z-1
-    after:transform after:-translate-x-1/2;
+  --uno: "absolute top-60px left-1/2";
+  --uno: "transform -translate-x-1/2";
+  --uno: "overflow-visible";
+  --uno: "after:content-empty";
+  --uno: "after:opacity-100 after:w-full after:h-100px";
+  --uno: "after:absolute after:top--30px after:left-1/2 after:-z-1";
+  --uno: "after:transform after:-translate-x-1/2";
 }
 
 .logo.activated {
-  --at-apply: bg-$bew-theme-color dark:bg-white;
+  --uno: "bg-$bew-theme-color dark:bg-white";
 
   svg {
-    --at-apply: fill-white dark:fill-$bew-theme-color;
+    --uno: "fill-white dark:fill-$bew-theme-color";
   }
 }
 
 .right-side {
-
   .unread-message {
-    --at-apply: absolute -top-1 right-0
-      important:px-1 important:py-2 rounded-full
-      text-xs leading-0 z-1 min-w-16px h-16px
-      flex justify-center items-center
-      bg-$bew-theme-color  text-white;
+    --uno: "absolute -top-1 right-0";
+    --uno: "important:px-1 important:py-2 rounded-full";
+    --uno: "text-xs leading-0 z-1 min-w-16px h-16px";
+    --uno: "flex justify-center items-center";
+    --uno: "bg-$bew-theme-color  text-white";
     box-shadow: 0 2px 4px rgba(var(--tw-shadow-color), 0.4);
   }
 
   .right-side-item {
-    --at-apply: relative text-$bew-text-1 flex items-center;
+    --uno: "relative text-$bew-text-1 flex items-center";
 
     &:not(.avatar) a {
-      --at-apply: text-xl flex items-center p-2 rounded-40px duration-300 relative z-5;
-      // --at-apply: after:content-empty after:absolute after:w-120% after:h-120% after:z-0 after:bg-yellow;
+      --uno: "text-xl flex items-center p-2 rounded-40px duration-300 relative z-5";
     }
 
-    &.active a, &:not(.upload) a:hover {
+    &.active a,
+    &:not(.upload) a:hover {
       --un-drop-shadow: drop-shadow(0 0 6px white);
-      --at-apply: bg-$bew-fill-2;
+      --uno: "bg-$bew-fill-2";
     }
   }
 
   .right-side-item .login {
     --un-drop-shadow: drop-shadow(0 0 6px var(--bew-theme-color));
-    --at-apply: rounded-full mx-1
-      important:text-$bew-theme-color important:px-4
-      hover:important-bg-$bew-theme-color hover:important-text-white
-      flex items-center justify-center important:text-base w-120px
-      border-solid border-$bew-theme-color border-2
-      important:dark:filter;
+    --uno: "rounded-full mx-1 important:text-$bew-theme-color important:px-4 hover:important-bg-$bew-theme-color hover:important-text-white flex items-center justify-center important:text-base w-120px border-solid border-$bew-theme-color border-2 important:dark:filter";
   }
 
   .avatar {
-    --at-apply: flex items-center ml-2px pr-2 relative z-1;
+    --uno: "flex items-center ml-2px pr-2 relative z-1";
 
     .avatar-img,
     .avatar-shadow {
-      --at-apply: duration-300;
+      --uno: "duration-300";
 
       &.hover {
-        --at-apply: transform scale-230 important:translate-y-36px;
+        --uno: "transform scale-230 important: translate-y-36px";
       }
     }
 
     .avatar-shadow {
-      --at-apply: pointer-events-none;
+      --uno: "pointer-events-none";
     }
   }
 }

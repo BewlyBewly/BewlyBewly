@@ -33,32 +33,33 @@ input[type="checkbox"] + span::after {
   box-sizing: border-box;
 }
 
-input[type="checkbox"]{
-
+input[type="checkbox"] {
   &:hover + span {
-    --at-apply: bg-$bew-fill-2;
+    --uno: "bg-$bew-fill-2";
   }
 
   &:active + span::after {
-    --at-apply: scale-90;
+    --uno: "scale-90";
   }
 
   &:checked + span {
-    --at-apply: bg-$bew-theme-color-60 border-$bew-theme-color;
+    --uno: "bg-$bew-theme-color-60 border-$bew-theme-color";
   }
 
   &:checked:hover + span {
-    --at-apply: bg-$bew-theme-color-80 border-$bew-theme-color;
-    box-shadow: 0 0 6px 2px var(--bew-theme-color-40), inset 0 0 6px var(--bew-theme-color-30);
+    --uno: "bg-$bew-theme-color-80 border-$bew-theme-color";
+    box-shadow:
+      0 0 6px 2px var(--bew-theme-color-40),
+      inset 0 0 6px var(--bew-theme-color-30);
   }
 
   & + span,
   & + span::after {
-    transition: .3s cubic-bezier(.25,.15,.29,1.51);
+    transition: 0.3s cubic-bezier(0.25, 0.15, 0.29, 1.51);
   }
 
   &:checked + span::after {
-    --at-apply: border-$bew-theme-color translate-x-full;
+    --uno: "border-$bew-theme-color translate-x-full";
   }
 }
 </style>

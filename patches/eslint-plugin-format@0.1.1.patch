@@ -1,0 +1,58 @@
+diff --git a/dist/index.mjs b/dist/index.mjs
+index 12b3a7684cf7c12692c6e3980d05315f0522d9a3..4cd39ecbe6f345d72182af6b61bb24652b7f0751 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -35,11 +35,34 @@ const prettier = {
+     return {
+       Program() {
+         const sourceCode = context.sourceCode.text;
++        try {
+         const formatted = format$1(sourceCode, {
+           filepath: context.filename,
+           ...context.options[0] || {}
+         });
+         reportDifferences(context, sourceCode, formatted);
++        } catch (error) {
++          let loc = {
++            start: { line: 1, column: 0 },
++            end: { line: 1, column: 0 },
++          }
++
++          if (error instanceof Error) {
++            const locationMatch = error.message.match(/\((?<line>\d):(?<column>\d)\)/)
++            if (locationMatch?.groups) {
++              const { line, column } = locationMatch.groups
++              loc = {
++                start: { line: +line, column: +column },
++                end: { line: +line, column: +column },
++              }
++            }
++          }
++
++          context.report({
++            loc,
++            message: 'Failed to format the code',
++          })
++        }
+       }
+     };
+   }
+@@ -77,8 +100,18 @@ const dprint = {
+     return {
+       Program() {
+         const sourceCode = context.sourceCode.text;
++        try {
+         const formatted = format(sourceCode, context.filename, context.options[0] || {});
+         reportDifferences(context, sourceCode, formatted);
++        } catch (error) {
++          context.report({
++            loc: {
++              start: { line: 1, column: 0 },
++              end: { line: 1, column: 0 },
++            },
++            message: 'Failed to format the code',
++          })
++        }
+       }
+     };
+   }

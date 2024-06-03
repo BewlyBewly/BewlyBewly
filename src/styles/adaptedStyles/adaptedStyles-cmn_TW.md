@@ -6,6 +6,7 @@
 
 ## 樣式表檔案撰寫風格
 
+<!-- eslint-skip -->
 ``` scss
 .bewly-design.pageName {
   // 在此處實施對頁面的特定修改，例如調整佈局，並將那些樣式放在這裡。

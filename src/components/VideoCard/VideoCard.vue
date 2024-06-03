@@ -516,6 +516,6 @@ function handleUndo() {
 
 <style lang="scss" scoped>
 .more-active {
-  --at-apply: opacity-100 bg-$bew-fill-3;
+  --uno: "opacity-100 bg-$bew-fill-3";
 }
 </style>

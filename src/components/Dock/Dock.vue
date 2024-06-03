@@ -198,95 +198,101 @@ function handleBackToTopOrRefresh() {
 <style lang="scss" scoped>
 .dock-wrap {
   > * {
-    --at-apply: pointer-events-auto;
+    --uno: "pointer-events-auto";
   }
 }
 
 .dock-edge {
-  &-left, &-right, &-bottom {
-    --at-apply: absolute z--1;
+  &-left,
+  &-right,
+  &-bottom {
+    --uno: "absolute z--1";
   }
 
   &-left {
-    --at-apply: left-0 top-0 w-14px h-full hover:w-60px;
+    --uno: "left-0 top-0 w-14px h-full hover:w-60px";
   }
 
   &-right {
-    --at-apply: right-0 top-0 w-14px h-full hover:w-60px;
+    --uno: "right-0 top-0 w-14px h-full hover:w-60px";
   }
 
   &-bottom {
-    --at-apply: left-0 bottom-0 w-full h-14px hover-h-60px;
+    --uno: "left-0 bottom-0 w-full h-14px hover-h-60px";
   }
 }
 
 .dock-content {
-  --at-apply: absolute flex justify-center items-center;
+  --uno: "absolute flex justify-center items-center";
 
   &.left {
-    --at-apply: left-2 after:right--4px;
+    --uno: "left-2 after:right--4px";
   }
   &.left.hide {
-    --at-apply: opacity-0 translate-x--100%;
+    --uno: "opacity-0 translate-x--100%";
   }
 
   &.right {
-    --at-apply: right-2 after:left--4px;
+    --uno: "right-2 after:left--4px";
   }
   &.right.hide {
-    --at-apply: opacity-0 translate-x-100%;
+    --uno: "opacity-0 translate-x-100%";
   }
 
   &.bottom {
-    --at-apply: top-unset bottom-0;
+    --uno: "top-unset bottom-0";
   }
   &.bottom.hide {
-    --at-apply: opacity-0 translate-y-100%;
+    --uno: "opacity-0 translate-y-100%";
   }
 
   .divider {
-    --at-apply: my-1 mx-3 h-4px bg-$bew-fill-1 rounded-4;
+    --uno: "my-1 mx-3 h-4px bg-$bew-fill-1 rounded-4";
   }
 
   &.bottom .divider {
-    --at-apply: w-4px h-auto my-3 mx-1;
+    --uno: "w-4px h-auto my-3 mx-1";
   }
 
   .dock-content-inner {
-    --at-apply: duration-300 ease-in-out transform-gpu;
-    --at-apply: p-2 m-2 bg-$bew-content-2 dark:bg-$bew-elevated-1;
-    --at-apply: flex flex-col gap-2 shrink-0;
-    --at-apply: rounded-full border-$bew-border-color;
-    --at-apply: shadow-$bew-shadow-2;
+    --uno: "duration-300 ease-in-out transform-gpu";
+    --uno: "p-2 m-2 bg-$bew-content-2 dark:bg-$bew-elevated-1";
+    --uno: "flex flex-col gap-2 shrink-0";
+    --uno: "rounded-full border-$bew-border-color";
+    --uno: "shadow-$bew-shadow-2";
     backdrop-filter: var(--bew-filter-glass-1);
   }
 
   &.bottom .dock-content-inner {
-    --at-apply: flex-row;
+    --uno: "flex-row";
   }
 
   .back-to-top-or-refresh-btn {
-    --at-apply: absolute md:bottom--45px bottom--35px;
-    --at-apply: transform active:important-scale-90 hover:scale-110;
-    --at-apply: md:w-45px w-35px md:h-45px h-35px;
-    --at-apply: grid place-items-center;
-    --at-apply: filter-$bew-filter-glass-1;
-    --at-apply: bg-$bew-elevated-1 hover:bg-$bew-content-1-hover;
-    --at-apply: rounded-full shadow-$bew-shadow-2;
+    --uno: "absolute md:bottom--45px bottom--35px";
+    --uno: "transform active:important-scale-90 hover:scale-110";
+    --uno: "md:w-45px w-35px md:h-45px h-35px";
+    --uno: "grid place-items-center";
+    --uno: "filter-$bew-filter-glass-1";
+    --uno: "bg-$bew-elevated-1 hover:bg-$bew-content-1-hover";
+    --uno: "rounded-full shadow-$bew-shadow-2";
 
     backdrop-filter: var(--bew-filter-glass-1);
-    transition: transform 300ms cubic-bezier(0.34, 2, 0.6, 1), background 300ms ease, color 300ms ease, box-shadow 600ms ease;
+    transition:
+      transform 300ms cubic-bezier(0.34, 2, 0.6, 1),
+      background 300ms ease,
+      color 300ms ease,
+      box-shadow 600ms ease;
     box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
 
     &.active {
-      --at-apply: important-bg-$bew-theme-color-auto text-$bew-text-auto;
-      --at-apply: shadow-$shadow-active  dark:shadow-$shadow-dark;
-      --at-apply: active:shadow-$shadow-active-active dark-active:shadow-$shadow-dark-active;
+      --uno: "important-bg-$bew-theme-color-auto text-$bew-text-auto";
+      --uno: "shadow-$shadow-active dark:shadow-$shadow-dark";
+      --uno: "active:shadow-$shadow-active-active dark-active:shadow-$shadow-dark-active";
     }
   }
 
   &.bottom .back-to-top-or-refresh-btn {
-    --at-apply: bottom-unset md:right--45px right--35px;
+    --uno: "bottom-unset md:right--45px right--35px";
   }
 }
 
@@ -296,31 +302,38 @@ function handleBackToTopOrRefresh() {
   --shadow-dark-active: 0 4px 20px rgba(255, 255, 255, 0.8);
   --shadow-active-active: 0 4px 20px var(--bew-theme-color-90);
 
-  --at-apply: transform active:important-scale-90 hover:scale-110;
-  --at-apply: md:w-45px w-35px;
-  --at-apply: md:lh-45px lh-35px;
-  --at-apply: p-0 flex items-center justify-center;
-  --at-apply: aspect-square relative;
-  --at-apply: leading-0;
-  --at-apply: rounded-60px antialiased;
-  --at-apply: bg-$bew-content-1 hover:bg-$bew-fill-2 cursor-pointer;
-  --at-apply: dark:bg-$bew-fill-1 dark-hover:bg-$bew-fill-4;;
+  --uno: "transform active:important-scale-90 hover:scale-110";
+  --uno: "md:w-45px w-35px";
+  --uno: "md:lh-45px lh-35px";
+  --uno: "p-0 flex items-center justify-center";
+  --uno: "aspect-square relative";
+  --uno: "leading-0";
+  --uno: "rounded-60px antialiased";
+  --uno: "bg-$bew-content-1 hover:bg-$bew-fill-2 cursor-pointer";
+  --uno: "dark:bg-$bew-fill-1 dark-hover:bg-$bew-fill-4";
 
   box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-1);
-  transition: transform 300ms cubic-bezier(0.34, 2, 0.6, 1), background 300ms ease, color 300ms ease, box-shadow 600ms ease;
+  transition:
+    transform 300ms cubic-bezier(0.34, 2, 0.6, 1),
+    background 300ms ease,
+    color 300ms ease,
+    box-shadow 600ms ease;
 
   &:hover {
-    box-shadow: var(--bew-shadow-edge-glow-1), 0 0 0 2px var(--bew-fill-2), var(--bew-shadow-2);
+    box-shadow:
+      var(--bew-shadow-edge-glow-1),
+      0 0 0 2px var(--bew-fill-2),
+      var(--bew-shadow-2);
   }
 
   &.active {
-    --at-apply: important-bg-$bew-theme-color-auto text-$bew-text-auto;
-    --at-apply: shadow-$shadow-active  dark:shadow-$shadow-dark;
-    --at-apply: active:shadow-$shadow-active-active dark-active:shadow-$shadow-dark-active;
+    --uno: "important-bg-$bew-theme-color-auto text-$bew-text-auto";
+    --uno: "shadow-$shadow-active dark:shadow-$shadow-dark";
+    --uno: "active:shadow-$shadow-active-active dark-active:shadow-$shadow-dark-active";
   }
 
   svg {
-    --at-apply: md:w-22px w-18px md:h-22px h-18px block align-middle;
+    --uno: "md:w-22px w-18px md:h-22px h-18px block align-middle";
   }
 }
 </style>
