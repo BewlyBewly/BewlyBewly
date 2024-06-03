@@ -81,7 +81,12 @@
     #page-fav .fav-main .fav-action-bottom .search-results-num i,
     .video-container.can-hover:hover .text-area .title,
     .card .button-area .more-button:hover,
-    .card .more-panel .child-button:hover {
+    .card .more-panel .child-button:hover,
+    .expand-btn,
+    .up-info .up-focus-btn,
+    .article-container:hover .text-area .title,
+    .bp-popup-panel .title-ctnr .popup-title,
+    .bl-button--ghost:not(:hover) {
       color: var(--bew-theme-color);
     }
 
@@ -101,11 +106,12 @@
     .fans-name[style*="color"],
     .dynamic-keyword,
     .card .main-content .user-name a[style*="color"],
-    .content-full .dynamic-link-hover-bg {
+    .dynamic-link-hover-bg {
       color: var(--bew-theme-color) !important;
     }
 
-    .i-live .i-live-fo-btn:hover {
+    .i-live .i-live-fo-btn:hover,
+    .expand-btn:hover {
       color: var(--bew-theme-color-80);
     }
 
@@ -121,7 +127,10 @@
     #page-index #i-ann-content textarea:hover,
     .btn.default,
     .i-live .i-live-fo-btn,
-    .be-pager-options-elevator input:focus {
+    .be-pager-options-elevator input:focus,
+    .up-info .up-focus-btn,
+    .bl-button--ghost,
+    .bl-button--ghost:hover {
       border-color: var(--bew-theme-color);
     }
 
@@ -160,7 +169,9 @@
     .be-tags-container .tag.new-tag,
     #page-fav .fav-sidenav .fav-item.cur:hover .icon-cursor,
     .favInfo-box .collection-details .collection-btn,
-    .video-container .types {
+    .video-container .types,
+    .bl-button--primary,
+    .bl-button--ghost:hover {
       background-color: var(--bew-theme-color);
     }
 
@@ -169,7 +180,8 @@
     .h .h-follow:hover,
     .game-card__btn:hover,
     .favInfo-box .favInfo-details .fav-options .fav-play:hover,
-    .favInfo-box .collection-details .collection-btn:hover {
+    .favInfo-box .collection-details .collection-btn:hover,
+    .bl-button--primary:hover {
       background-color: var(--bew-theme-color-80);
     }
 
@@ -268,7 +280,8 @@
     .favInfo-box .collection-details .title .title-name,
     #page-follows .modal-container.edit-video-modal .target-followitem,
     #page-fav .fav-main .search-input input,
-    #page-fav .fav-main .fav-action-bottom .search-results-num {
+    #page-fav .fav-main .fav-action-bottom .search-results-num,
+    .card .main-content .user-name a {
       color: var(--bew-text-1);
     }
 
@@ -498,7 +511,8 @@
     .be-dropdown-menu,
     .dialog-wrapper,
     .edit-media-list .edit-mask .edit-board,
-    .pgc-space-follow-item .bangumi-options .opt-list {
+    .pgc-space-follow-item .bangumi-options .opt-list,
+    .bp-popup-panel {
       background-color: var(--bew-elevated-solid-1);
     }
 
