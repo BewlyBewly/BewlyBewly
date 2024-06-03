@@ -801,8 +801,7 @@ defineExpose({
 
 .right-side {
   .unread-message {
-    --at-apply: absolute -top-1 right-0 important: px-1 important: py-2 rounded-full text-xs leading-0 z-1 min-w-16px h-16px
-      flex justify-center items-center bg-$bew-theme-color text-white;
+    --at-apply: "absolute -top-1 right-0 important:px-1 important:py-2 rounded-full text-xs leading-0 z-1 min-w-16px h-16px flex justify-center items-center bg-$bew-theme-color text-white";
     box-shadow: 0 2px 4px rgba(var(--tw-shadow-color), 0.4);
   }
 
