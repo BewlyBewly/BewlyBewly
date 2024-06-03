@@ -415,8 +415,13 @@ function handleUndo() {
               </div>
               <div text="base $bew-text-2" w-fit m="t-2" flex="~ items-center wrap">
                 <!-- Author Avatar -->
-                <span flex="inline items-center">
-                  <div v-if="horizontal" flex mb-2>
+                <span
+                  :style="{
+                    marginBottom: horizontal ? '0.5rem' : '0',
+                  }"
+                  flex="inline items-center"
+                >
+                  <div v-if="horizontal" flex>
                     <a
                       v-if="video.authorFace"
                       :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
@@ -504,7 +509,7 @@ function handleUndo() {
     <VideoCardSkeleton
       v-if="skeleton"
       :horizontal="horizontal"
-      important-mb-1
+      important-mb-0
     />
   </div>
 </template>
