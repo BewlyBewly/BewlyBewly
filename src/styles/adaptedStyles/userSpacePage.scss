@@ -35,6 +35,10 @@
     border-radius: 4px;
   }
 
+  .masonry_grid_v2 .container {
+    position: static;
+  }
+
   // #region theme color adaption part
   // Increase the priority of the style inside by writing a non-existent selector in :not()
   // 淺色模式下主要對 theme color 調整配合 bewlybewly 配色
