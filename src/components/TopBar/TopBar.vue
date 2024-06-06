@@ -218,6 +218,7 @@ watch(
     if (!newVal)
       getUnreadMessageCount()
   },
+  { immediate: true },
 )
 
 watch(
@@ -229,6 +230,7 @@ watch(
     if (!newVal)
       await getTopBarNewMomentsCount()
   },
+  { immediate: true },
 )
 
 watch(() => popupVisible.favorites, (newVal, oldVal) => {
@@ -259,8 +261,6 @@ onBeforeMount(() => {
 
 async function initData() {
   await getUserInfo()
-  getUnreadMessageCount()
-  getTopBarNewMomentsCount()
 
   // automatically update notifications and moments count
   setInterval(() => {
@@ -319,7 +319,7 @@ async function getUnreadMessageCount() {
 
   try {
     let res
-    res = await useApiClient().notification.getUnreadMsg()
+    res = await api.notification.getUnreadMsg()
     if (res.code === 0) {
       Object.assign(unReadMessage, res.data)
       Object.entries(unReadMessage).forEach(([key, value]) => {
@@ -330,7 +330,7 @@ async function getUnreadMessageCount() {
       })
     }
 
-    res = await useApiClient().notification.getUnreadDm()
+    res = await api.notification.getUnreadDm()
     if (res.code === 0) {
       Object.assign(unReadDm, res.data)
       if (typeof unReadDm.follow_unread === 'number')
@@ -352,7 +352,7 @@ async function getTopBarNewMomentsCount() {
   let result = 0
 
   try {
-    const res = await useApiClient().moment.getTopBarNewMomentsCount()
+    const res = await api.moment.getTopBarNewMomentsCount()
     if (res.code === 0) {
       if (typeof res.data.update_info.item.count === 'number')
         result = res.data.update_info.item.count
