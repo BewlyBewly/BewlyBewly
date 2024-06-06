@@ -75,7 +75,9 @@ const popupVisible = reactive({
   more: false,
 })
 const api = useApiClient()
-const isLogin = ref<boolean>(false)
+// initially, assume the user is logged in cuz data retrieval is slow, which may show the login
+// button even after login. if the user is not logged in, the login button will show up later
+const isLogin = ref<boolean>(true)
 const unReadMessage = reactive<UnReadMessage | NonNullable<unknown>>(
   {},
 ) as UnwrapNestedRefs<UnReadMessage>
