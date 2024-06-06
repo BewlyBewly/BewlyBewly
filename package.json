@@ -2,7 +2,7 @@
   "name": "bewly-bewly",
   "displayName": "BewlyBewly",
   "type": "module",
-  "version": "0.19.2",
+  "version": "0.19.3",
   "private": true,
   "packageManager": "pnpm@9.1.4",
   "description": "Just make a few small changes to your Bilibili homepage.",
