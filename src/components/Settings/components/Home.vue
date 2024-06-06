@@ -218,7 +218,26 @@ function handleToggleHomeTab(tab: any) {
           </Button>
         </div>
       </ChildSettingsDialog>
+      <SettingsItem title="播放量过滤">
+        <div class="flex">
+          <span v-if="settings.isFilterByView">
+            <input v-model="settings.filterByView" type="number" text-right>
+            次
+          </span>
+          <Radio v-model="settings.isFilterByView" />
+        </div>
+      </SettingsItem>
+      <SettingsItem title="时长过滤">
+        <div class="flex">
+          <span v-if="settings.isFilterByDuration">
+            <input v-model="settings.filterByDuration" type="number" text-right>
+            秒
+          </span>
+          <Radio v-model="settings.isFilterByDuration" />
+        </div>
+      </SettingsItem>
     </SettingsItemGroup>
+
     <SettingsItemGroup
       :title="$t('settings.group_home_tabs')"
     >

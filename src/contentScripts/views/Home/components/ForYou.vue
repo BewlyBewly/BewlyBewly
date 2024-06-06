@@ -17,6 +17,7 @@ import type { AppForYouResult, Item as AppVideoItem, ThreePointV2 } from '~/mode
 import { Type as ThreePointV2Type } from '~/models/video/appForYou'
 import type { forYouResult, Item as VideoItem } from '~/models/video/forYou'
 import { getTvSign, TVAppKey } from '~/utils/authProvider'
+import { FilterType, useFilter } from '~/utils/func'
 import { isVerticalVideo } from '~/utils/uriParse'
 
 const props = defineProps<{
@@ -27,6 +28,8 @@ const emit = defineEmits<{
   (e: 'beforeLoading'): void
   (e: 'afterLoading'): void
 }>()
+
+const filterFunc = useFilter([FilterType.duration, FilterType.views], [['duration'], ['stat', 'view']])
 
 const { t } = useI18n()
 
@@ -188,7 +191,10 @@ async function getRecommendVideos() {
       const resData = [] as VideoItem[]
 
       response.data.item.forEach((item: VideoItem) => {
-        resData.push(item)
+        if (!filterFunc.value || filterFunc.value(item))
+          resData.push(item)
+
+        // resData.push(item)
       })
 
       // when videoList has length property, it means it is the first time to load
@@ -235,7 +241,7 @@ async function getAppRecommendVideos() {
 
       response.data.items.forEach((item: AppVideoItem) => {
         // Remove banner & ad cards
-        if (!item.card_type.includes('banner') && item.card_type !== 'cm_v1')
+        if (!item.card_type.includes('banner') && item.card_type !== 'cm_v1' && (!filterFunc.value || filterFunc.value(item)))
           resData.push(item)
       })
 
