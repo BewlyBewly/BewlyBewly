@@ -7,6 +7,10 @@
     line-height: 3em;
   }
 
+  .reply-box .box-normal {
+    padding-right: 20px;
+  }
+
   // #region theme color adaption part
   // Increase the priority of the style inside by writing a non-existent selector in :not()
   :not(fdjslfds) {
