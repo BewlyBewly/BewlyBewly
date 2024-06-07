@@ -205,7 +205,8 @@
     .note-single-item .go-video-btn:hover,
     .note-list-del-popup span.btn-ok,
     .el-pagination.is-background .el-pager li:not(.disabled).active,
-    .dialog-note-footer .btn-confirm {
+    .dialog-note-footer .btn-confirm,
+    .checkbox .box.checked {
       background-color: var(--bew-theme-color);
     }
 
@@ -228,12 +229,6 @@
     .bangumi-pagelistbox .p.active,
     .note-tabs .van-tabs_active-bar {
       background-color: var(--bew-theme-color) !important;
-    }
-
-    .checkbox .box.checked {
-      background: var(--bew-theme-color)
-        url(//s1.hdslb.com/bfs/static/jinkela/note-list/assets/ic_check.svg)
-        no-repeat 50% / 9px;
     }
 
     .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-fill,
