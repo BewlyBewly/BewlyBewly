@@ -17,7 +17,8 @@
   :not(fdjslfds) {
     .note-list .list-note-operation,
     .note-pc .note-container .note-header .note-operation,
-    .note-up .up-desc-container .desc-top .attention-btn-container {
+    .note-up .up-desc-container .desc-top .attention-btn-container,
+    .bili-guide-electric {
       background-color: var(--bew-theme-color);
     }
 
@@ -113,6 +114,7 @@
     .ql-snow .ql-toolbar .ql-picker-label:hover .ql-fill,
     .ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke.ql-fill,
     .ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke.ql-fill,
+    .bili-guide-three .bili-active svg,
     .ql-snow.ql-toolbar button.ql-active .ql-fill,
     .ql-snow .ql-toolbar button.ql-active .ql-fill,
     .ql-snow.ql-toolbar button.ql-active .ql-stroke.ql-fill,

@@ -90,7 +90,26 @@
     .up-info .up-focus-btn,
     .article-container:hover .text-area .title,
     .bp-popup-panel .title-ctnr .popup-title,
-    .bl-button--ghost:not(:hover) {
+    #page-series-index .no-channel-container em,
+    .bl-button--ghost:not(:hover),
+    .manage-note--header .tools-btns .edit-btn--ghost,
+    .note-single-item .go-video-btn,
+    .note-list-del-popup span.btn-no,
+    .ql-snow.ql-toolbar .ql-picker-item.ql-selected,
+    .ql-snow .ql-toolbar .ql-picker-item.ql-selected,
+    .ql-snow.ql-toolbar .ql-picker-item:hover,
+    .ql-snow .ql-toolbar .ql-picker-item:hover,
+    .ql-snow.ql-toolbar .ql-picker-label.ql-active,
+    .ql-snow .ql-toolbar .ql-picker-label.ql-active,
+    .ql-snow.ql-toolbar .ql-picker-label:hover,
+    .ql-snow .ql-toolbar .ql-picker-label:hover,
+    .ql-snow.ql-toolbar button.ql-active,
+    .ql-snow .ql-toolbar button.ql-active,
+    .ql-snow.ql-toolbar button:focus,
+    .ql-snow .ql-toolbar button:focus,
+    .ql-snow.ql-toolbar button:hover,
+    .ql-snow .ql-toolbar button:hover,
+    .dialog-note-content a {
       color: var(--bew-theme-color);
     }
 
@@ -110,7 +129,9 @@
     .fans-name[style*="color"],
     .dynamic-keyword,
     .card .main-content .user-name a[style*="color"],
-    .dynamic-link-hover-bg {
+    .dynamic-link-hover-bg,
+    .van-tabs-bar .van-tabs-tab.van-tabs-tab-active,
+    .dialog-note-footer .btn-cancel {
       color: var(--bew-theme-color) !important;
     }
 
@@ -134,7 +155,10 @@
     .be-pager-options-elevator input:focus,
     .up-info .up-focus-btn,
     .bl-button--ghost,
-    .bl-button--ghost:hover {
+    .bl-button--ghost:hover,
+    .manage-note--header .tools-btns .edit-btn--ghost,
+    .note-single-item .go-video-btn,
+    .dialog-note-footer .btn-cancel {
       border-color: var(--bew-theme-color);
     }
 
@@ -175,7 +199,13 @@
     .favInfo-box .collection-details .collection-btn,
     .video-container .types,
     .bl-button--primary,
-    .bl-button--ghost:hover {
+    #page-series-index .channel-option.no-channel .create-channel,
+    .bl-button--ghost:hover,
+    .manage-note--header .tools-btns .publish-btn,
+    .note-single-item .go-video-btn:hover,
+    .note-list-del-popup span.btn-ok,
+    .el-pagination.is-background .el-pager li:not(.disabled).active,
+    .dialog-note-footer .btn-confirm {
       background-color: var(--bew-theme-color);
     }
 
@@ -195,8 +225,75 @@
     .create-wrapper .create-action .next-btn,
     .edit-media-list .edit-mask .edit-board .edit-info .submit-btn,
     .bangumi-pagelistbox .p:hover,
-    .bangumi-pagelistbox .p.active {
+    .bangumi-pagelistbox .p.active,
+    .note-tabs .van-tabs_active-bar {
       background-color: var(--bew-theme-color) !important;
+    }
+
+    .checkbox .box.checked {
+      background: var(--bew-theme-color) url(//s1.hdslb.com/bfs/static/jinkela/note-list/assets/ic_check.svg) no-repeat 50% / 9px;
+    }
+
+    .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-fill,
+    .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-fill,
+    .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill,
+    .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill,
+    .ql-snow.ql-toolbar .ql-picker-item:hover .ql-fill,
+    .ql-snow .ql-toolbar .ql-picker-item:hover .ql-fill,
+    .ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke.ql-fill,
+    .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke.ql-fill,
+    .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-fill,
+    .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-fill,
+    .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke.ql-fill,
+    .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke.ql-fill,
+    .ql-snow.ql-toolbar .ql-picker-label:hover .ql-fill,
+    .ql-snow .ql-toolbar .ql-picker-label:hover .ql-fill,
+    .ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke.ql-fill,
+    .ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke.ql-fill,
+    .ql-snow.ql-toolbar button.ql-active .ql-fill,
+    .ql-snow .ql-toolbar button.ql-active .ql-fill,
+    .ql-snow.ql-toolbar button.ql-active .ql-stroke.ql-fill,
+    .ql-snow .ql-toolbar button.ql-active .ql-stroke.ql-fill,
+    .ql-snow.ql-toolbar button:focus .ql-fill,
+    .ql-snow .ql-toolbar button:focus .ql-fill,
+    .ql-snow.ql-toolbar button:focus .ql-stroke.ql-fill,
+    .ql-snow .ql-toolbar button:focus .ql-stroke.ql-fill,
+    .ql-snow.ql-toolbar button:hover .ql-fill,
+    .ql-snow .ql-toolbar button:hover .ql-fill,
+    .ql-snow.ql-toolbar button:hover .ql-stroke.ql-fill,
+    .ql-snow .ql-toolbar button:hover .ql-stroke.ql-fill {
+      fill: var(--bew-theme-color);
+    }
+
+    .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke,
+    .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke,
+    .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter,
+    .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter,
+    .ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke,
+    .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke,
+    .ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke-miter,
+    .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke-miter,
+    .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke,
+    .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke,
+    .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke-miter,
+    .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke-miter,
+    .ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke,
+    .ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke,
+    .ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke-miter,
+    .ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke-miter,
+    .ql-snow.ql-toolbar button.ql-active .ql-stroke,
+    .ql-snow .ql-toolbar button.ql-active .ql-stroke,
+    .ql-snow.ql-toolbar button.ql-active .ql-stroke-miter,
+    .ql-snow .ql-toolbar button.ql-active .ql-stroke-miter,
+    .ql-snow.ql-toolbar button:focus .ql-stroke,
+    .ql-snow .ql-toolbar button:focus .ql-stroke,
+    .ql-snow.ql-toolbar button:focus .ql-stroke-miter,
+    .ql-snow .ql-toolbar button:focus .ql-stroke-miter,
+    .ql-snow.ql-toolbar button:hover .ql-stroke,
+    .ql-snow .ql-toolbar button:hover .ql-stroke,
+    .ql-snow.ql-toolbar button:hover .ql-stroke-miter,
+    .ql-snow .ql-toolbar button:hover .ql-stroke-miter {
+      stroke: var(--bew-theme-color)
     }
 
     .i-m-title .icon-i-title,
@@ -221,10 +318,12 @@
     .search-nav-item.search-nav-actived .num,
     .search-nav-item.search-nav-actived .text,
     .bangumi-pagelistbox .p:hover,
-    .bangumi-pagelistbox .p.active {
+    .bangumi-pagelistbox .p.active,
+    .note-single-item a.go-video-btn:hover {
       color: white !important;
     }
   }
+
   // #endregion
 
   // #region dark mode adaption part
@@ -235,12 +334,36 @@
       --bg2: var(--bew-bg);
     }
 
+    .note-list .note-header,
+    .note-list .note-tabs,
+    .note-list-item,
+    .note-single-item,
+    .van-dialog {
+      background-color: var(--bg1);
+    }
+
     .main-content .card-content .post-content.repost,
     .main-content .card-content .post-content .original-card-content .article-container,
     .main-content .card-content .deleted,
     .card .more-panel,
-    .card .more-panel:after {
+    .card .more-panel:after,
+    .note-list-del-popup {
       background-color: var(--bg2);
+    }
+
+    .note-list-item,
+    .editor-innter .ql-editor {
+      &::-webkit-scrollbar-thumb {
+        background-color: rgba(120, 120, 140, 0.44);
+      }
+    }
+
+    .note-list-item::-webkit-scrollbar-track {
+      background-color: var(--bg1);
+    }
+
+    .editor-innter .ql-editor::-webkit-scrollbar-track {
+      background-color: var(--bew-content-1);
     }
 
     .n .n-inner,
@@ -285,8 +408,18 @@
     #page-follows .modal-container.edit-video-modal .target-followitem,
     #page-fav .fav-main .search-input input,
     #page-fav .fav-main .fav-action-bottom .search-results-num,
-    .card .main-content .user-name a {
+    .card .main-content .user-name a,
+    .note-header .note-title .note-text,
+    .note-single-item .note-item__detail--title,
+    .ql-snow.ql-toolbar button,
+    .ql-snow.ql-toolbar .ql-bar .ql-size,
+    .protocal-dialog .van-dialog__title,
+    .dialog-note-content {
       color: var(--bew-text-1);
+    }
+
+    .van-tabs-bar .van-tabs-tab {
+      color: var(--bew-text-1) !important;
     }
 
     .btn.ghost,
@@ -310,15 +443,50 @@
     #page-fav .search-empty-hint p,
     .small-item .meta,
     #page-fav .fav-main .fav-meta,
-    .video-container .text-area .content {
+    .video-container .text-area .content,
+    .ql-toolbar.ql-snow + .ql-container.ql-snow,
+    .el-pagination.is-background .btn-next,
+    .el-pagination.is-background .btn-prev,
+    .el-pagination.is-background .el-pager li {
       color: var(--bew-text-2);
     }
 
     .bili-dyn-interaction__item__desc .bili-rich-text__content,
     .opus-list .opus-item-time,
     .list-item .meta,
-    .favInfo-box .favInfo-details .fav-options .meta {
+    .favInfo-box .favInfo-details .fav-options .meta,
+    .manage-note--header .status-bar .text,
+    .note-header .note-title .note-count,
+    .note-single-item .note-item__detail--summary {
       color: var(--bew-text-3);
+    }
+
+    .el-pagination.is-background .btn-next.disabled,
+    .el-pagination.is-background .btn-next:disabled,
+    .el-pagination.is-background .btn-prev.disabled,
+    .el-pagination.is-background .btn-prev:disabled,
+    .el-pagination.is-background .el-pager li.disabled {
+      color: var(--bew-text-4);
+    }
+
+    .note-list-del-popup p {
+      color: white;
+    }
+
+    .ql-snow .ql-fill {
+      fill: var(--bew-text-1);
+    }
+
+    .ql-snow.readonly-toolbar .ql-fill {
+      fill: var(--bew-text-2);
+    }
+
+    .ql-snow .ql-stroke {
+      fill: var(--bg2);
+    }
+
+    .ql-snow .ql-stroke {
+      stroke: var(--bew-text-1);
     }
 
     .section,
@@ -433,6 +601,10 @@
       border-color: transparent;
     }
 
+    .manage-note #web-toolbar {
+      border-top-color: var(--bew-border-color);
+    }
+
     .i-pin-c {
       box-shadow: unset;
     }
@@ -521,7 +693,8 @@
     }
 
     .series-item .split-line,
-    .wrapper .edit-video-modal .favlist-body:after {
+    .wrapper .edit-video-modal .favlist-body:after,
+    .note-tabs .van-tabs-bar:after {
       background-color: var(--bew-border-color);
     }
 
@@ -572,6 +745,13 @@
       background-color: var(--bew-fill-2);
     }
 
+    .ql-toolbar.ql-snow + .ql-container.ql-snow,
+    .el-pagination.is-background .btn-next,
+    .el-pagination.is-background .btn-prev,
+    .el-pagination.is-background .el-pager li {
+      background-color: var(--bew-content-1);
+    }
+
     #page-setting #setting-new-tag-btn {
       background: var(--bew-content-solid-1);
     }
@@ -587,8 +767,15 @@
     #page-index .col-1,
     #page-index .col-1::after,
     #page-index .col-2 .section,
-    #page-dynamic .col-2 .section {
+    #page-dynamic .col-2 .section,
+    .note-single-item--selected {
       background-color: var(--bew-content-solid-1);
+    }
+
+    .my-notes-manage-note,
+    #web-toolbar,
+    #web-toolbar .ql-picker-options {
+      background-color: var(--bew-content-solid-2);
     }
 
     .be-dropdown-item:hover,
@@ -602,5 +789,6 @@
       opacity: 0.6;
     }
   }
+
   // #endregion
 }
