@@ -231,7 +231,8 @@
     }
 
     .checkbox .box.checked {
-      background: var(--bew-theme-color) url(//s1.hdslb.com/bfs/static/jinkela/note-list/assets/ic_check.svg) no-repeat 50% / 9px;
+      background: var(--bew-theme-color)
+        url(//s1.hdslb.com/bfs/static/jinkela/note-list/assets/ic_check.svg) no-repeat 50% / 9px;
     }
 
     .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-fill,
@@ -293,7 +294,7 @@
     .ql-snow .ql-toolbar button:hover .ql-stroke,
     .ql-snow.ql-toolbar button:hover .ql-stroke-miter,
     .ql-snow .ql-toolbar button:hover .ql-stroke-miter {
-      stroke: var(--bew-theme-color)
+      stroke: var(--bew-theme-color);
     }
 
     .i-m-title .icon-i-title,
