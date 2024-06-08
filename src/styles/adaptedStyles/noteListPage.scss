@@ -161,7 +161,9 @@
     .el-pagination.is-background .btn-next,
     .el-pagination.is-background .btn-prev,
     .el-pagination.is-background .el-pager li,
-    .ql-container {
+    .ql-container,
+    .my-notes-empty,
+    .pub-notes-empty {
       color: var(--bew-text-2);
     }
 
@@ -230,6 +232,10 @@
     #web-toolbar .ql-picker-options,
     .view-manage-note {
       background-color: var(--bew-content-solid-2);
+    }
+
+    .ql-toolbar.ql-snow .ql-picker-options {
+      box-shadow: 0 2px 8px rgb(255 255 255 / 20%);
     }
   }
 }
