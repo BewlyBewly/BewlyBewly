@@ -68,6 +68,12 @@ const api = useApiClient()
 // Used to click and control herf attribute
 const isClick = ref<boolean>(false)
 
+function getBilibiliVideoUrl(video: Video) {
+  const baseUrl = `https://www.bilibili.com/video/${video.bvid ?? `av${video.aid}`}`
+  const currentTime = getCurrentTime()
+  return currentTime ? `${baseUrl}/?t=${currentTime}` : baseUrl
+}
+
 const videoUrl = computed(() => {
   if (props.removed || !isClick.value || !props.video)
     return undefined
@@ -75,7 +81,7 @@ const videoUrl = computed(() => {
   if (props.video.url)
     return props.video.url
   else if (props.video.bvid || props.video.aid)
-    return `https://www.bilibili.com/video/${props.video.bvid ?? `av${props.video.aid}`}`
+    return getBilibiliVideoUrl(props.video)
   else if (props.video.epid)
     return `https://www.bilibili.com/bangumi/play/ep${props.video.epid}`
   else
@@ -107,6 +113,15 @@ const mouseEnterTimeOut = ref()
 const mouseLeaveTimeOut = ref()
 const previewVideoUrl = ref<string>('')
 const contentVisibility = ref<'auto' | 'visible'>('auto')
+const videoElement = ref(null)
+
+function getCurrentTime() {
+  if (videoElement.value) {
+    const currentTime = videoElement.value.currentTime
+    return currentTime
+  }
+  return null
+}
 
 watch(() => isHover.value, (newValue) => {
   if (!props.video || !newValue)
@@ -265,6 +280,7 @@ function handleUndo() {
             <Transition v-if="!removed && showPreview && settings.enableVideoPreview" name="fade">
               <video
                 v-if="previewVideoUrl && isHover"
+                ref="videoElement"
                 autoplay muted
                 :controls="settings.enableVideoCtrlBarOnVideoCard"
                 :style="{ pointerEvents: settings.enableVideoCtrlBarOnVideoCard ? 'auto' : 'none' }"
