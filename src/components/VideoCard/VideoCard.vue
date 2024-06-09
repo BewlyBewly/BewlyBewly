@@ -68,10 +68,10 @@ const api = useApiClient()
 // Used to click and control herf attribute
 const isClick = ref<boolean>(false)
 
-function getBilibiliVideoUrl(video: Video) {
+function getCurrentVideoUrl(video: Video) {
   const baseUrl = `https://www.bilibili.com/video/${video.bvid ?? `av${video.aid}`}`
   const currentTime = getCurrentTime()
-  return currentTime ? `${baseUrl}/?t=${currentTime}` : baseUrl
+  return currentTime && currentTime > 5 ? `${baseUrl}/?t=${currentTime}` : baseUrl
 }
 
 const videoUrl = computed(() => {
@@ -81,7 +81,7 @@ const videoUrl = computed(() => {
   if (props.video.url)
     return props.video.url
   else if (props.video.bvid || props.video.aid)
-    return getBilibiliVideoUrl(props.video)
+    return getCurrentVideoUrl(props.video)
   else if (props.video.epid)
     return `https://www.bilibili.com/bangumi/play/ep${props.video.epid}`
   else
@@ -113,7 +113,7 @@ const mouseEnterTimeOut = ref()
 const mouseLeaveTimeOut = ref()
 const previewVideoUrl = ref<string>('')
 const contentVisibility = ref<'auto' | 'visible'>('auto')
-const videoElement = ref(null)
+const videoElement = ref<HTMLVideoElement | null>(null)
 
 function getCurrentTime() {
   if (videoElement.value) {
