@@ -19,20 +19,20 @@ BewlyBewly 是一个用于 BiliBili 的浏览器扩展，旨在通过重新设�
 
 该项目使用 [vitesse-webext](https://github.com/antfu/vitesse-webext) 模板进行开发。如果没有这个模板，可能无法开发出这个项目。
 
-## 🔨 构建（Firefox）
+## 🔨 Build (Firefox)
 
-请确保您已在本地安装了 [Node.js](https://nodejs.org/) 和 [pnpm](https://pnpm.io/)，建议使用 [Visual Studio Code](https://code.visualstudio.com/) 进行开发。
+Please make sure you have [Node.js](https://nodejs.org/) and [pnpm](https://pnpm.io/) installed locally, and it is recommended to use [Visual Studio Code](https://code.visualstudio.com/) for development.
 
-1. 要构建扩展，请运行
+1. To build the extension, run
 
 ```bash
-# 安装依赖
+# Install dependencies
 pnpm install
 
 pnpm build-firefox
 ```
 
-2. 在浏览器中加载生成的 `extension-firefox/` 文件夹，扩展将在 [www.bilibili.com](https://www.bilibili.com) 上生效。
+2. Load the generated `extension-firefox/` folder in the browser, The extension will then take effect on [www.bilibili.com](https://www.bilibili.com).
 
 [Chrome & Edge](/docs/CONTRIBUTING.md#building-chrome-or-edge)
 
