@@ -38,7 +38,7 @@ const handleThrottledPageRefresh = useThrottleFn(() => handlePageRefresh.value?.
 const handleThrottledReachBottom = useThrottleFn(() => handleReachBottom.value?.(), 500)
 const handleThrottledBackToTop = useThrottleFn(() => handleBackToTop(), 1000)
 const topBarRef = ref()
-const reachTop = ref<boolean>(false)
+const reachTop = ref<boolean>(true)
 
 const isVideoPage = computed(() => {
   if (/https?:\/\/(www.)?bilibili.com\/video\/.*/.test(location.href))
@@ -393,10 +393,10 @@ provide<BewlyAppProvider>('BEWLY_APP', {
 
 .top-bar-enter-from,
 .top-bar-leave-to {
-  --at-apply: opacity-0 transform -translate-y-full;
+  --uno: "opacity-0 transform -translate-y-full";
 }
 
 .bewly-wrapper {
-  --at-apply: text-size-$bew-base-font-size;
+  --uno: "text-size-$bew-base-font-size";
 }
 </style>

@@ -192,7 +192,7 @@ function toggleTabContentLoading(loading: boolean) {
         ease-in-out flex="~ justify-between items-start gap-4"
         :class="{ hide: shouldMoveTabsUp }"
       >
-        <section flex="~ items-center gap-3 wrap">
+        <section v-if="!(!settings.alwaysShowTabsOnHomePage && currentTabs.length === 1)" flex="~ items-center gap-3 wrap">
           <button
             v-for="tab in currentTabs" :key="tab.page"
             :class="{ 'tab-activated': activatedPage === tab.page }"
@@ -216,9 +216,10 @@ function toggleTabContentLoading(loading: boolean) {
         </section>
 
         <div
+          v-if="settings.enableGridLayoutSwitcher"
           style="backdrop-filter: var(--bew-filter-glass-1)"
           flex="~ gap-1 shrink-0" p-1 h-35px bg="$bew-elevated-1" transform-gpu
-          rounded="$bew-radius" shadow="$bew-shadow-1" box-border border="1 $bew-border-color"
+          ml-auto rounded="$bew-radius" shadow="$bew-shadow-1" box-border border="1 $bew-border-color"
         >
           <div
             v-for="icon in gridLayoutIcons" :key="icon.value"
@@ -254,34 +255,33 @@ function toggleTabContentLoading(loading: boolean) {
 <style scoped lang="scss">
 .bg-enter-active,
 .bg-leave-active {
-  --at-apply: duration-1000 ease-in-out;
+  --uno: "duration-1000 ease-in-out";
 }
 .bg-enter-from,
 .bg-leave-to {
-  --at-apply: h-100vh;
+  --uno: "h-100vh";
 }
 .bg-leave-to {
-  --at-apply: hidden
+  --uno: "hidden";
 }
 
 .content-enter-active,
 .content-leave-active {
-  --at-apply: duration-1000 ease-in-out;
+  --uno: "duration-1000 ease-in-out";
 }
 .content-enter-from,
 .content-leave-to {
-  --at-apply: opacity-0 h-100vh;
+  --uno: "opacity-0 h-100vh";
 }
 .content-leave-to {
-  --at-apply: hidden
+  --uno: "hidden";
 }
 
 .hide {
-  --at-apply: important-translate-y--70px;
+  --uno: "important-translate-y--70px";
 }
 
 .tab-activated {
-  --at-apply: bg-$bew-theme-color-auto text-$bew-text-auto
-    border-$bew-theme-color dark:border-white;
+  --uno: "bg-$bew-theme-color-auto text-$bew-text-auto border-$bew-theme-color dark:border-white";
 }
 </style>

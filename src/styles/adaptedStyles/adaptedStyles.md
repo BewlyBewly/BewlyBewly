@@ -13,43 +13,55 @@ In `index.ts`, we will write some regex rules to match the style used on a speci
     line-height: 3em;
   }
 
-  ...
+  // ...
 
   // #region theme color adaption part
   // Increase the priority of the style inside by writing a non-existent selector in `:not()`
   :not(fdjslfds) {
-    a, b, c {
+    a,
+    b,
+    c {
       color: var(--bew-theme-color);
     }
 
-    d, e, f {
+    d,
+    e,
+    f {
       // PLEASE NOTE THAT USING `!important` SHOULD BE A LAST RESORT
       color: var(--bew-theme-color) !important;
     }
 
-    g, h, i {
+    g,
+    h,
+    i {
       background-color: var(--bew-theme-color);
     }
 
-    j, k, l {
+    j,
+    k,
+    l {
       background-color: var(--bew-theme-color) !important;
     }
 
-    ...
+    // ...
   }
   // #endregion
 
   // #region dark mode adaption part
   &.dark {
-    aa, bb, cc {
+    aa,
+    bb,
+    cc {
       color: var(--bew-text-1);
     }
 
-    dd, ee, ff {
+    dd,
+    ee,
+    ff {
       color: var(--bew-text-1) !important;
     }
 
-    ...
+    // ...
   }
   // #endregion
 }

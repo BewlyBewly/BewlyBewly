@@ -8,12 +8,7 @@
   }
 
   // UP主觉得很赞
-  .reply-item
-    .root-reply-container
-    .content-warp
-    .root-reply
-    .reply-tag-list
-    .reply-tag-item {
+  .reply-item .root-reply-container .content-warp .root-reply .reply-tag-list .reply-tag-item {
     color: var(--bew-text-2) !important;
     background-color: var(--bew-fill-1) !important;
   }
@@ -123,12 +118,7 @@
   .bb-comment .comment-list .list-item .info .btn-hover:hover,
   .comment-bilibili-fold .comment-list .list-item .info .btn-hover:hover,
   .bb-comment .comment-list .list-item .reply-box .view-more .btn-more:hover,
-  .comment-bilibili-fold
-    .comment-list
-    .list-item
-    .reply-box
-    .view-more
-    .btn-more:hover,
+  .comment-bilibili-fold .comment-list .list-item .reply-box .view-more .btn-more:hover,
   .bb-comment .stick,
   .comment-bilibili-fold .stick,
   .bb-comment .comment-header .tabs-order li.on,
@@ -222,17 +212,11 @@
     .bb-comment .comment-send .textarea-container:hover textarea,
     .comment-bilibili-fold .comment-send .textarea-container:hover textarea,
     .bb-comment .comment-send-lite .textarea-container:hover textarea,
-    .comment-bilibili-fold
-      .comment-send-lite
-      .textarea-container:hover
-      textarea,
+    .comment-bilibili-fold .comment-send-lite .textarea-container:hover textarea,
     .bb-comment .comment-send .textarea-container.focus textarea,
     .comment-bilibili-fold .comment-send .textarea-container.focus textarea,
     .bb-comment .comment-send-lite .textarea-container.focus textarea,
-    .comment-bilibili-fold
-      .comment-send-lite
-      .textarea-container.focus
-      textarea,
+    .comment-bilibili-fold .comment-send-lite .textarea-container.focus textarea,
     .bili-dyn-forward-publishing__editor:not(.disabled):focus,
     .bili-dyn-forward-publishing__editor:not(.disabled):hover {
       background-color: var(--bew-content-solid-1);
@@ -249,12 +233,7 @@
     .bb-comment .comment-list .list-item .info .btn-hover:hover,
     .comment-bilibili-fold .comment-list .list-item .info .btn-hover:hover,
     .bb-comment .comment-list .list-item .reply-box .view-more .btn-more:hover,
-    .comment-bilibili-fold
-      .comment-list
-      .list-item
-      .reply-box
-      .view-more
-      .btn-more:hover {
+    .comment-bilibili-fold .comment-list .list-item .reply-box .view-more .btn-more:hover {
       background-color: var(--bew-fill-2);
     }
 
@@ -270,6 +249,11 @@
     .bili-dyn-forward-item__uname,
     .bb-comment .comment-list .list-item .user .name {
       color: var(--bew-text-1) !important;
+    }
+
+    .bb-comment .comment-list .list-item .reply-box .view-more,
+    .comment-bilibili-fold .comment-list .list-item .reply-box .view-more {
+      color: var(--bew-text-2);
     }
 
     .bb-comment .comment-header,

@@ -133,59 +133,51 @@ async function logout() {
 
 <style lang="scss" scoped>
 #user-info-panel {
-  --at-apply: p-4 rounded-$bew-radius w-300px -z-1
-    bg-$bew-elevated-solid-1 shadow-$bew-shadow-3;
+  --uno: "p-4 rounded-$bew-radius w-300px -z-1 bg-$bew-elevated-solid-1 shadow-$bew-shadow-3";
 }
 
 #base-info {
-  --at-apply: mt-8 text-xl font-medium flex items-center justify-center;
+  --uno: "mt-8 text-xl font-medium flex items-center justify-center";
 }
 
 #channel-info {
-  --at-apply: grid grid-cols-3 gap-x-2 mb-2;
+  --uno: "grid grid-cols-3 gap-x-2 mb-2";
 
   a {
-    --at-apply: p-2 m-0 rounded-$bew-radius text-sm
-      flex flex-col items-center transition-all duration-300
-      bg-$bew-fill-1
-      // hover:bg-$bew-theme-color
-      hover:text-white;
+    --uno: "p-2 m-0 rounded-$bew-radius text-sm flex flex-col items-center transition-all duration-300";
+    --uno: "bg-$bew-fill-1 hover:bg-$bew-theme-color hover:text-white";
 
     > * {
-      // --at-apply: transition-all duration-300;
+      --uno: "transition-all duration-300";
     }
 
-    &:hover .num + div{
-      --at-apply: text-white;
+    &:hover .num + div {
+      --uno: "text-white";
     }
 
     .num {
-      --at-apply: font-semibold text-xl;
+      --uno: "font-semibold text-xl";
 
       + div {
-        --at-apply: text-$bew-text-2 mt-1 text-xs font-semibold;
+        --uno: "text-$bew-text-2 mt-1 text-xs font-semibold";
       }
     }
   }
 }
 
 #other-link {
-  --at-apply: flex justify-between flex-col mt-4;
+  --uno: "flex justify-between flex-col mt-4";
 
   a {
-    --at-apply: px-4 py-2 mb-1 flex justify-between items-center
-      rounded-$bew-radius transition-all duration-300
-      hover:bg-$bew-fill-2;
+    --uno: "px-4 py-2 mb-1 flex justify-between items-center rounded-$bew-radius transition-all duration-300 hover:bg-$bew-fill-2";
 
     span {
-      --at-apply: text-$bew-text-2;
+      --uno: "text-$bew-text-2";
     }
   }
 }
 
 #logout {
-  --at-apply: text-red-400 important:block px-4 py-2 rounded-$bew-radius
-    duration-300 cursor-pointer
-    hover:bg-$bew-fill-2;
+  --uno: "text-red-400 important:block px-4 py-2 rounded-$bew-radius duration-300 cursor-pointer hover:bg-$bew-fill-2";
 }
 </style>

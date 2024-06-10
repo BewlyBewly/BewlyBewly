@@ -17,7 +17,7 @@
       height: calc(100vh - 70px);
 
       &::after {
-        content: '';
+        content: "";
         top: 0;
         left: 0;
         position: absolute;
@@ -182,13 +182,7 @@
     .bili-im .list-item .name,
     .bili-im .list-item .last-word,
     .bili-im .message .message-content:not(.is-img),
-    .bili-im
-      .msg-notify
-      .cover-container
-      .table-container
-      .modules
-      .module
-      .detail,
+    .bili-im .msg-notify .cover-container .table-container .modules .module .detail,
     .bili-im .core-style,
     .detail .content,
     .follow-btn.active,
@@ -224,13 +218,7 @@
 
     .line-3,
     .line-3 *,
-    .bili-im
-      .msg-notify
-      .cover-container
-      .table-container
-      .modules
-      .module
-      .mtitle,
+    .bili-im .msg-notify .cover-container .table-container .modules .module .mtitle,
     .content .btnrow .btn.clear:hover {
       color: var(--bew-text-3);
     }

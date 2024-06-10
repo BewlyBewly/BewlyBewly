@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onKeyStroke } from '@vueuse/core'
 import type { Ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useToast } from 'vue-toastification'
 
 import Button from '~/components/Button.vue'
@@ -18,6 +19,17 @@ import type { forYouResult, Item as VideoItem } from '~/models/video/forYou'
 import { getTvSign, TVAppKey } from '~/utils/authProvider'
 import { isVerticalVideo } from '~/utils/uriParse'
 
+const props = defineProps<{
+  gridLayout: GridLayout
+}>()
+
+const emit = defineEmits<{
+  (e: 'beforeLoading'): void
+  (e: 'afterLoading'): void
+}>()
+
+const { t } = useI18n()
+
 // https://github.com/starknt/BewlyBewly/blob/fad999c2e482095dc3840bb291af53d15ff44130/src/contentScripts/views/Home/components/ForYou.vue#L16
 interface VideoElement {
   uniqueId: string
@@ -28,15 +40,6 @@ interface AppVideoElement {
   uniqueId: string
   item?: AppVideoItem
 }
-
-const props = defineProps<{
-  gridLayout: GridLayout
-}>()
-
-const emit = defineEmits<{
-  (e: 'beforeLoading'): void
-  (e: 'afterLoading'): void
-}>()
 
 const gridValue = computed((): string => {
   if (props.gridLayout === 'adaptive')
@@ -329,6 +332,11 @@ function closeDislikeDialog() {
 }
 
 function handleAppDislike() {
+  if (!accessKey.value) {
+    toast.warning(t('auth.auth_access_key_first'))
+    return
+  }
+
   loadingDislikeDialog.value = true
   const params = {
     access_key: accessKey.value,
@@ -540,7 +548,7 @@ defineExpose({ initData })
             title: `${video.item.title}`,
             cover: `${video.item.cover}`,
             author: video.item?.mask?.avatar.text,
-            authorFace: video.item?.mask?.avatar.cover,
+            authorFace: video.item?.mask?.avatar.cover || video.item?.avatar?.cover,
             followed: video.item?.bottom_rcmd_reason === '已关注' || video.item?.bottom_rcmd_reason === '已關注',
             mid: video.item?.mask?.avatar.up_id,
             capsuleText: video.item?.desc?.split('·')[1],
@@ -548,6 +556,7 @@ defineExpose({ initData })
             viewStr: video.item.cover_left_text_1,
             danmakuStr: video.item.cover_left_text_2,
             cid: video.item?.player_args?.cid,
+            url: video.item?.goto === 'bangumi' ? video.item.uri : '',
             type: video.item.card_goto === 'bangumi' ? 'bangumi' : isVerticalVideo(video.item.uri!) ? 'vertical' : 'horizontal',
           } : undefined"
           show-preview
@@ -569,6 +578,6 @@ defineExpose({ initData })
 
 <style lang="scss" scoped>
 .activated-dislike-reason {
-  --at-apply: bg-$bew-theme-color-20 color-$bew-theme-color;
+  --uno: "bg-$bew-theme-color-20 color-$bew-theme-color";
 }
 </style>

@@ -15,7 +15,9 @@
     }
 
     .bili-video-card .bili-video-card__wrap {
-      transition: box-shadow 0.3s ease-in-out, background 0.3s ease-in-out;
+      transition:
+        box-shadow 0.3s ease-in-out,
+        background 0.3s ease-in-out;
       border-radius: var(--bew-radius-half);
     }
 

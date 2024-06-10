@@ -9,6 +9,7 @@ export const accessKey = useStorageLocal('accessKey', '')
 
 export interface Settings {
   language: string
+  enableGridLayoutSwitcher: boolean
   enableHorizontalScrolling: boolean
   openLinkInCurrentTab: boolean
   enableVideoPreview: boolean
@@ -48,6 +49,7 @@ export interface Settings {
 
   recommendationMode: 'web' | 'app'
   homePageTabVisibilityList: { page: HomeSubPage, visible: boolean }[]
+  alwaysShowTabsOnHomePage: boolean
   useSearchPageModeOnHomePage: boolean
   searchPageModeWallpaperFixed: boolean
   alwaysShowTheTopBarLogoOnSearchPageMode: boolean
@@ -58,6 +60,7 @@ export interface Settings {
 }
 export const settings = useStorageLocal('settings', ref<Settings>({
   language: '',
+  enableGridLayoutSwitcher: true,
   enableHorizontalScrolling: false,
   openLinkInCurrentTab: false,
   enableVideoPreview: true,
@@ -97,6 +100,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
 
   recommendationMode: 'web',
   homePageTabVisibilityList: [],
+  alwaysShowTabsOnHomePage: false,
   useSearchPageModeOnHomePage: false,
   searchPageModeWallpaperFixed: false,
   alwaysShowTheTopBarLogoOnSearchPageMode: false,

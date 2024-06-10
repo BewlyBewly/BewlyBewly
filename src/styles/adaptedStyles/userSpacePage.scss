@@ -31,6 +31,14 @@
     color: white !important;
   }
 
+  .large-item .cover {
+    border-radius: 4px;
+  }
+
+  .masonry_grid_v2 .container {
+    position: static;
+  }
+
   // #region theme color adaption part
   // Increase the priority of the style inside by writing a non-existent selector in :not()
   // 淺色模式下主要對 theme color 調整配合 bewlybewly 配色
@@ -43,19 +51,9 @@
     #page-video #submit-video-type-filter a.active,
     .n .n-data.router-link-active .n-data-k,
     .n .n-data.router-link-active .n-data-v,
-    .wrapper
-      .edit-video-modal
-      .target-favlist
-      .target-favitem:hover
-      .target-fav-title
-      .fav-meta
-      .fav-name,
+    .wrapper .edit-video-modal .target-favlist .target-favitem:hover .target-fav-title .fav-meta .fav-name,
     a:hover,
-    #page-index
-      .channel
-      .section-right-options
-      .play-all-channel:hover
-      .video-commonplayer_play,
+    #page-index .channel .section-right-options .play-all-channel:hover .video-commonplayer_play,
     #page-follows .follow-tabs span.active,
     #page-follows .follow-tabs span:hover,
     .favInfo-box .favInfo-details .fav-name:hover,
@@ -78,7 +76,21 @@
     #page-index .channel .section-right-options .play-all-channel:hover,
     .section .operation:hover,
     #page-video .play-all-btn:hover .video-commonplayer_play,
-    .i-live .i-live-fo-btn {
+    .i-live .i-live-fo-btn,
+    .favInfo-box .favInfo-details .fav-options .meta.selected,
+    #page-follows .follow-main .follow-action-bottom .select-cancel,
+    #page-follows .modal-container.edit-video-modal .target-followitem:hover,
+    #page-follows .follow-main .follow-action-bottom li:hover,
+    #page-fav .fav-main .search-types:hover,
+    #page-fav .fav-main .fav-action-bottom .search-results-num i,
+    .video-container.can-hover:hover .text-area .title,
+    .card .button-area .more-button:hover,
+    .card .more-panel .child-button:hover,
+    .expand-btn,
+    .up-info .up-focus-btn,
+    .article-container:hover .text-area .title,
+    .bp-popup-panel .title-ctnr .popup-title,
+    .bl-button--ghost:not(:hover) {
       color: var(--bew-theme-color);
     }
 
@@ -95,12 +107,15 @@
     #page-fav .fav-main .fav-action-bottom .select-cancel,
     #page-fav .fav-main .fav-action-top .back-to-info:hover,
     .sub-tabs .filter-content .cur-filter:hover,
-    .fans-name[style*='color'],
-    .dynamic-keyword {
+    .fans-name[style*="color"],
+    .dynamic-keyword,
+    .card .main-content .user-name a[style*="color"],
+    .dynamic-link-hover-bg {
       color: var(--bew-theme-color) !important;
     }
 
-    .i-live .i-live-fo-btn:hover {
+    .i-live .i-live-fo-btn:hover,
+    .expand-btn:hover {
       color: var(--bew-theme-color-80);
     }
 
@@ -115,7 +130,11 @@
     #page-index #i-ann-content textarea:focus,
     #page-index #i-ann-content textarea:hover,
     .btn.default,
-    .i-live .i-live-fo-btn {
+    .i-live .i-live-fo-btn,
+    .be-pager-options-elevator input:focus,
+    .up-info .up-focus-btn,
+    .bl-button--ghost,
+    .bl-button--ghost:hover {
       border-color: var(--bew-theme-color);
     }
 
@@ -153,7 +172,10 @@
     .game-card__btn,
     .be-tags-container .tag.new-tag,
     #page-fav .fav-sidenav .fav-item.cur:hover .icon-cursor,
-    .favInfo-box .collection-details .collection-btn {
+    .favInfo-box .collection-details .collection-btn,
+    .video-container .types,
+    .bl-button--primary,
+    .bl-button--ghost:hover {
       background-color: var(--bew-theme-color);
     }
 
@@ -162,7 +184,8 @@
     .h .h-follow:hover,
     .game-card__btn:hover,
     .favInfo-box .favInfo-details .fav-options .fav-play:hover,
-    .favInfo-box .collection-details .collection-btn:hover {
+    .favInfo-box .collection-details .collection-btn:hover,
+    .bl-button--primary:hover {
       background-color: var(--bew-theme-color-80);
     }
 
@@ -184,21 +207,14 @@
     .bp-svg-icon.comment-hover,
     .custom-like-icon.zan-a-hover,
     .bp-svg-icon.transmit-hover,
-    .wrapper
-      .edit-video-modal
-      .target-favlist
-      .target-favitem
-      .target-fav-title
-      .fav-select.selected,
-    #page-fav
-      .fav-main
-      .fav-action-bottom
-      .fav-action-fixtop
-      .clearfix:not(.filter-disable)
-      .icon,
+    .wrapper .edit-video-modal .target-favlist .target-favitem .target-fav-title .fav-select.selected,
+    #page-fav .fav-main .fav-action-bottom .fav-action-fixtop .clearfix:not(.filter-disable) .icon,
     .page-head .v-filter-line .style .icon.active,
     .page-head .v-filter-line .style .icon:hover,
-    .i-live .i-live-off-guest a .i-live-arrow {
+    .i-live .i-live-off-guest a .i-live-arrow,
+    #page-follows .follow-main .follow-action-bottom .icon-copy,
+    .search-component .icon-follow-search:hover,
+    #page-fav .fav-main .search-input .icon-search:hover {
       filter: var(--bew-filter-icon-glow);
     }
 
@@ -219,6 +235,14 @@
       --bg2: var(--bew-bg);
     }
 
+    .main-content .card-content .post-content.repost,
+    .main-content .card-content .post-content .original-card-content .article-container,
+    .main-content .card-content .deleted,
+    .card .more-panel,
+    .card .more-panel:after {
+      background-color: var(--bg2);
+    }
+
     .n .n-inner,
     #page-index .col-1,
     #page-index .col-2 .section,
@@ -232,18 +256,14 @@
     #page-follows .list-item .title,
     #page-follows .follow-sidenav .follow-list-container .follow-item,
     #page-video .page-head__left .video-title,
+    .card .more-panel,
+    .original-card-content .title,
     .pgc-space-follow-item .pgc-item-info .pgc-item-title,
     .search-component-input input,
     #page-article .row .breadcrumb .item,
     .album-list__title,
     .bangumi-pagelistbox .p,
-    .wrapper
-      .edit-video-modal
-      .target-favlist
-      .target-favitem
-      .target-fav-title
-      .fav-meta
-      .fav-name,
+    .wrapper .edit-video-modal .target-favlist .target-favitem .target-fav-title .fav-meta .fav-name,
     .wrapper .edit-video-modal .edit-video-title,
     #page-series-detail .channel-detail .content .breadcrumb .item,
     .user-info .info-content .info-value,
@@ -261,7 +281,11 @@
     #page-dynamic .col-2 .section,
     .game-card .game-card__info-title,
     .favInfo-box .collection-details .title .icon-heji,
-    .favInfo-box .collection-details .title .title-name {
+    .favInfo-box .collection-details .title .title-name,
+    #page-follows .modal-container.edit-video-modal .target-followitem,
+    #page-fav .fav-main .search-input input,
+    #page-fav .fav-main .fav-action-bottom .search-results-num,
+    .card .main-content .user-name a {
       color: var(--bew-text-1);
     }
 
@@ -281,13 +305,19 @@
     #page-index .col-1 .section .more,
     #page-index .channel .section-right-options .play-all-channel,
     .section .operation,
-    .list-item .desc {
+    .list-item .desc,
+    #page-follows .modal-container.edit-video-modal .target-follow-name .target-follow-notice,
+    #page-fav .search-empty-hint p,
+    .small-item .meta,
+    #page-fav .fav-main .fav-meta,
+    .video-container .text-area .content {
       color: var(--bew-text-2);
     }
 
     .bili-dyn-interaction__item__desc .bili-rich-text__content,
     .opus-list .opus-item-time,
-    .list-item .meta {
+    .list-item .meta,
+    .favInfo-box .favInfo-details .fav-options .meta {
       color: var(--bew-text-3);
     }
 
@@ -334,13 +364,7 @@
     .create-wrapper .create-input .series-desc .series-desc-box,
     .create-wrapper .create-input .series-kw input,
     .create-wrapper .create-input .series-kw .rec-kw .keyword-content .keyword,
-    .create-wrapper
-      .create-input
-      .series-kw
-      .rec-kw
-      .keyword-content
-      .keyword
-      .keyword-txt,
+    .create-wrapper .create-input .series-kw .rec-kw .keyword-content .keyword .keyword-txt,
     .create-wrapper .choose-action .back-btn,
     .create-wrapper .choose-action .cancel-btn,
     .create-wrapper .create-action .back-btn,
@@ -348,12 +372,7 @@
     .be-dropdown-menu,
     .edit-media-list .edit-mask .edit-board .head,
     .edit-media-list .edit-mask .edit-board .edit-info .info-wrap .name-input,
-    .edit-media-list
-      .edit-mask
-      .edit-board
-      .edit-info
-      .info-wrap
-      .media-list-intro,
+    .edit-media-list .edit-mask .edit-board .edit-info .info-wrap .media-list-intro,
     .pgc-space-follow-item .bangumi-options .opt-list,
     .space_input,
     #page-setting #setting-new-tag-btn,
@@ -370,6 +389,10 @@
     .bangumi-pagelistbox .custom-right .custom-right-inner.custompage,
     .feed-dynamic,
     #page-dynamic .bili-dyn-item,
+    .original-card-content .video-container,
+    .main-content .card-content .post-content .original-card-content .article-container,
+    .card .more-panel,
+    .card .more-panel:after,
     .fans-action-btn.follow,
     .btn.ghost,
     .btn.ghost:focus,
@@ -397,7 +420,8 @@
     #page-index .channel .section-right-options .play-all-channel,
     .section .operation,
     .section .count,
-    .large-item .cover img {
+    .large-item .cover img,
+    #page-follows .modal-container.edit-video-modal .modal-body .target-followlist {
       border-color: var(--bew-border-color);
     }
 
@@ -411,6 +435,10 @@
 
     .i-pin-c {
       box-shadow: unset;
+    }
+
+    .large-item .cover img {
+      box-shadow: 0 0 0 1px var(--bew-border-color);
     }
 
     .section-title,
@@ -487,7 +515,8 @@
     .be-dropdown-menu,
     .dialog-wrapper,
     .edit-media-list .edit-mask .edit-board,
-    .pgc-space-follow-item .bangumi-options .opt-list {
+    .pgc-space-follow-item .bangumi-options .opt-list,
+    .bp-popup-panel {
       background-color: var(--bew-elevated-solid-1);
     }
 
@@ -538,7 +567,8 @@
     #page-fav .fav-main .filter-item .filter-type .be-dropdown-item:hover,
     #page-fav .fav-main .fav-video-list.is-batch .small-item.selected,
     #page-fav .fav-main .fav-video-list.is-batch .small-item:hover,
-    .search-nav-item:hover {
+    .search-nav-item:hover,
+    .dynamic-link-hover-bg:hover {
       background-color: var(--bew-fill-2);
     }
 
@@ -547,9 +577,11 @@
     }
 
     .search-page,
+    .feed-dynamic-content .feed-card .loading-content.bg-white,
     .card,
     .feed-dynamic-content .bb-comment,
     #page-dynamic .bili-dyn-item,
+    .original-card-content .video-container,
     #page-series-index .channel-option.no-channel,
     .n .n-inner,
     #page-index .col-1,

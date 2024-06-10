@@ -234,7 +234,6 @@ function setCurrentTitle() {
 
 <style lang="scss" scoped>
 .menu-item-activated {
-  --at-apply: text-white dark-text-black
-    important-dark-bg-white important-bg-$bew-theme-color;
+  --uno: "text-white dark-text-black important-dark-bg-white important-bg-$bew-theme-color";
 }
 </style>

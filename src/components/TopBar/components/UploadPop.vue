@@ -266,13 +266,10 @@
 
 <style lang="scss" scoped>
 .upload-item {
-  --at-apply: flex items-center p-2 rounded-$bew-radius mb-1 last:mb-0
-    transition-all duration-300
-    hover:bg-$bew-fill-2;
+  --uno: "flex items-center p-2 rounded-$bew-radius mb-1 last:mb-0 transition-all duration-300 hover:bg-$bew-fill-2";
 
   .item-icon {
-    --at-apply: mr-2;
-
+    --uno: "mr-2";
   }
 }
 </style>

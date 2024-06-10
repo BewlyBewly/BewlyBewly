@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { Icon } from '@iconify/vue'
+
 import Button from '~/components/Button.vue'
 import { useApiClient } from '~/composables/api'
 import { settings } from '~/logic'
@@ -200,6 +202,7 @@ function handleUndo() {
     rounded="$bew-radius"
     ring="active:8 active:$bew-fill-3"
     bg="active:$bew-fill-3"
+    transform="~ translate-z-0"
     mb-4
   >
     <!-- By directly using predefined unocss width properties, it is possible to dynamically set the width attribute -->
@@ -228,6 +231,7 @@ function handleUndo() {
             :w="wValue" h-fit relative bg="$bew-fill-4" rounded="$bew-radius"
             cursor-pointer
             group-hover:z-2
+            transform="~ translate-z-0"
           >
             <!-- Video cover -->
             <img
@@ -272,13 +276,19 @@ function handleUndo() {
             </Transition>
 
             <!-- Ranking Number -->
-            <div v-if="video.rank" absolute p-2 group-hover:opacity-0 duration-300>
+            <div
+              v-if="video.rank"
+              pos="absolute top-0"
+              p-2 group-hover:opacity-0
+              duration-300
+            >
               <div
                 v-if="Number(video.rank) <= 3"
-                bg="$bew-theme-color" text-center lh-30px h-30px w-30px
+                bg="$bew-theme-color" text-center lh-0 h-30px w-30px
                 text-white rounded="1/2" shadow="$bew-shadow-1"
                 border="1 $bew-theme-color"
-                text="2xl" fw-bold
+                grid="~ place-content-center"
+                text="xl" fw-bold
               >
                 {{ video.rank }}
               </div>
@@ -335,7 +345,7 @@ function handleUndo() {
                   <div i-mingcute:carplay-line />
                 </Tooltip>
                 <Tooltip v-else :content="$t('common.added')" placement="bottom" type="dark">
-                  <div i-line-md:confirm />
+                  <Icon icon="line-md:confirm" />
                 </Tooltip>
               </button>
             </template>
@@ -405,8 +415,13 @@ function handleUndo() {
               </div>
               <div text="base $bew-text-2" w-fit m="t-2" flex="~ items-center wrap">
                 <!-- Author Avatar -->
-                <span flex="inline items-center">
-                  <div v-if="horizontal" flex mb-2>
+                <span
+                  :style="{
+                    marginBottom: horizontal ? '0.5rem' : '0',
+                  }"
+                  flex="inline items-center"
+                >
+                  <div v-if="horizontal" flex>
                     <a
                       v-if="video.authorFace"
                       :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
@@ -494,19 +509,13 @@ function handleUndo() {
     <VideoCardSkeleton
       v-if="skeleton"
       :horizontal="horizontal"
-      mb-0
+      important-mb-0
     />
   </div>
 </template>
 
 <style lang="scss" scoped>
-// .video-card.is-dislike {
-//   > *:not(#dislike-control) {
-//     --at-apply: invisible pointer-events-none duration-0 transition-none;
-//   }
-// }
-
 .more-active {
-  --at-apply: opacity-100 bg-$bew-fill-3;
+  --uno: "opacity-100 bg-$bew-fill-3";
 }
 </style>

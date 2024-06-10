@@ -18,22 +18,22 @@ const wValue = computed((): string => {
     mb-4 pointer-events-none select-none
   >
     <div aspect-video bg="$bew-fill-4" rounded="$bew-radius" />
-    <div flex mt-4>
+    <div flex mt-5>
       <div
         m="r-4" w="36px" h="36px" rounded="1/2" bg="$bew-fill-4"
         shrink-0
       />
-      <div w-full>
-        <div grid gap-2>
-          <div w-full h-5 bg="$bew-fill-3" />
-          <div w="3/4" h-5 bg="$bew-fill-3" />
+      <div w="[calc(100%-30px)]">
+        <div flex="~ col gap-3" mb-4 w-inherit>
+          <div w-full h-5 bg="$bew-fill-3" rounded-4px />
+          <div w="3/4" h-5 bg="$bew-fill-3" rounded-4px />
         </div>
-        <div grid gap-2 mt-2>
-          <div w="40%" h-4 bg="$bew-fill-2" />
-          <div w="80%" h-4 bg="$bew-fill-2" />
+        <div flex="~ col gap-2" mb-2>
+          <div w="40%" h-4 bg="$bew-fill-2" rounded-4px />
+          <div w="60%" h-4 bg="$bew-fill-2" rounded-4px />
         </div>
         <div
-          text="transparent sm" inline-block mt-4 p="x-2" h-7
+          text="transparent sm" inline-block p="x-2" lh-6
           bg="$bew-fill-1" rounded-4
         >
           hello world
@@ -61,16 +61,25 @@ const wValue = computed((): string => {
       w-full mt-0
       flex="~ gap-4"
     >
-      <div w-full>
+      <div w="[calc(100%-30px)]">
         <div grid gap-2>
-          <div w-full h-5 bg="$bew-fill-3" />
-          <div w="3/4" h-5 bg="$bew-fill-3" />
+          <div w-full h-5 bg="$bew-fill-3" rounded-4px />
         </div>
 
-        <div mt-4 flex>
+        <div mt-4 flex="~ col gap-2">
+          <div flex="~ items-center justify-start" w-inherit>
+            <div
+              m="r-2" w="30px" h="30px" rounded="1/2" bg="$bew-fill-4"
+              shrink-0
+            />
+
+            <div w="40%" h-5 bg="$bew-fill-2" rounded-4px />
+          </div>
+          <div w="60%" h-5 bg="$bew-fill-2" rounded-4px />
           <div
-            text="transparent sm" inline-block p="x-2" h-7 bg="$bew-fill-1"
-            rounded-4
+            text="transparent sm" inline-block w-fit
+            lh-6 p="x-2" mt-1
+            bg="$bew-fill-1" rounded-4
           >
             hello world
           </div>

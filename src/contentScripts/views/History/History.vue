@@ -292,7 +292,7 @@ function jumpToLoginPage() {
             <!-- Cover -->
             <div
               pos="relative"
-              bg="$bew-fill-5"
+              bg="$bew-fill-4"
               w="full md:full lg:250px"
               flex="shrink-0"
               rounded="$bew-radius"
@@ -364,7 +364,7 @@ function jumpToLoginPage() {
             </div>
 
             <!-- Description -->
-            <div flex justify-between w-full>
+            <div flex justify-between w-full h-full>
               <div flex="~ col">
                 <a
                   :href="`${getHistoryUrl(historyItem)}`" target="_blank" rel="noopener noreferrer"

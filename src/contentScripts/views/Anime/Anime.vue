@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import BangumiCard from '~/components/BangumiCard/BangumiCard.vue'
+import BangumiCardSkeleton from '~/components/BangumiCard/BangumiCardSkeleton.vue'
 import Button from '~/components/Button.vue'
 import Empty from '~/components/Empty.vue'
 import HorizontalScrollView from '~/components/HorizontalScrollView.vue'
 import Loading from '~/components/Loading.vue'
-import LongCoverCard from '~/components/LongCoverCard/LongCoverCard.vue'
-import LongCoverCardSkeleton from '~/components/LongCoverCard/LongCoverCardSkeleton.vue'
 import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import type { List as PopularAnimeItem, PopularAnimeResult } from '~/models/anime/popular'
@@ -132,10 +132,6 @@ function getPopularAnimeList() {
 <template>
   <div>
     <div>
-      <!-- <section mb-8>
-        <PopularAnimeCarousel />
-      </section> -->
-
       <!-- Your Watchlist -->
       <section v-if="getUserID()" class="anime-section">
         <div flex justify-between items-center mb-6>
@@ -156,31 +152,41 @@ function getPopularAnimeList() {
         <HorizontalScrollView w="[calc(100%+1.5rem)]">
           <div w-full flex>
             <template v-if="isLoadingAnimeWatchList">
-              <LongCoverCardSkeleton
+              <BangumiCardSkeleton
                 v-for="item in 6" :key="item"
                 w="2xl:[calc(100%/6-1.5rem)] xl:[calc(100%/5-1.5rem)] lg:[calc(100%/4-1.5rem)] md:[calc(100%/3-1.5rem)] sm:[calc(100%/2-1.5rem)] [calc(100%-1.5rem)]"
                 last:w="2xl:1/6 xl:1/5 lg:1/4 md:1/3 sm:1/2 full"
                 shrink-0
-                m="r-6"
+                mr-6 important-mb-0
                 last:pr-6
               />
             </template>
-            <LongCoverCard
+            <BangumiCard
               v-for="item in animeWatchList"
               :key="item.short_url"
-              :url="item.url"
-              :cover="item.cover"
-              :title="item.title"
-              :capsule-text="item.is_finish
-                ? $t('anime.total_episodes', { ep: item.total_count })
-                : $t('anime.update_to_n_episodes', {
-                  ep: item.formal_ep_count,
-                })"
-              :desc="item.progress !== '' ? item.progress : $t('anime.havent_seen')"
+              :bangumi="{
+                url: item.url,
+                cover: item.cover,
+                coverHover: item?.horizontal_cover_16_9,
+                title: item.title,
+                desc: item.progress !== '' ? item.progress : $t('anime.havent_seen'),
+                evaluate: item.evaluate,
+                tags: item.styles,
+                capsuleText: item.is_finish
+                  ? $t('anime.total_episodes', { ep: item.total_count })
+                  : $t('anime.update_to_n_episodes', {
+                    ep: item.formal_ep_count,
+                  }),
+                badge: {
+                  text: item.badge_info.text || '',
+                  bgColor: item.badge_info.bg_color || '',
+                  bgColorDark: item.badge_info.bg_color_night || '',
+                },
+              }"
               w="2xl:[calc(100%/6-1.5rem)] xl:[calc(100%/5-1.5rem)] lg:[calc(100%/4-1.5rem)] md:[calc(100%/3-1.5rem)] sm:[calc(100%/2-1.5rem)] [calc(100%-1.5rem)]"
               last:w="2xl:1/6 xl:1/5 lg:1/4 md:1/3 sm:1/2 full"
               shrink-0
-              m="r-6"
+              mr-6 important-mb-0
               last:pr-6
             />
           </div>
@@ -207,29 +213,36 @@ function getPopularAnimeList() {
         <HorizontalScrollView w="[calc(100%+1.5rem)]">
           <div w-full flex>
             <template v-if="isLoadingPopularAnime">
-              <LongCoverCardSkeleton
+              <BangumiCardSkeleton
                 v-for="item in 6" :key="item"
                 w="2xl:[calc(100%/6-1.5rem)] xl:[calc(100%/5-1.5rem)] lg:[calc(100%/4-1.5rem)] md:[calc(100%/3-1.5rem)] sm:[calc(100%/2-1.5rem)] [calc(100%-1.5rem)]"
                 last:w="2xl:1/6 xl:1/5 lg:1/4 md:1/3 sm:1/2 full"
                 shrink-0
-                m="r-6"
+                mr-6 important-mb-0
                 last:pr-6
               />
             </template>
-            <LongCoverCard
+            <BangumiCard
               v-for="item in popularAnimeList"
               :key="item.url"
               w="2xl:[calc(100%/6-1.5rem)] xl:[calc(100%/5-1.5rem)] lg:[calc(100%/4-1.5rem)] md:[calc(100%/3-1.5rem)] sm:[calc(100%/2-1.5rem)] [calc(100%-1.5rem)]"
               last:w="2xl:1/6 xl:1/5 lg:1/4 md:1/3 sm:1/2 full"
               shrink-0
-              m="r-6"
+              mr-6 important-mb-0
               last:pr-6
-              :url="item.url"
-              :cover="item.cover"
-              :title="item.title"
-              :desc="$t('anime.follow', { num: numFormatter(item.stat.series_follow) })"
-              :capsule-text="item.rating.replace('分', '')"
-              :rank="item.rank"
+              :bangumi="{
+                url: item.url,
+                cover: item.cover,
+                title: item.title,
+                desc: $t('anime.follow', { num: numFormatter(item.stat.series_follow) }),
+                capsuleText: item.rating.replace('分', ''),
+                rank: item.rank,
+                badge: {
+                  text: item.badge_info.text || '',
+                  bgColor: item.badge_info.bg_color || '',
+                  bgColorDark: item.badge_info.bg_color_night || '',
+                },
+              }"
             />
           </div>
         </HorizontalScrollView>
@@ -252,25 +265,26 @@ function getPopularAnimeList() {
           {{ $t('anime.recommended_for_you') }}
         </h3>
         <div grid="~ 2xl:cols-6 xl:cols-5 lg:cols-4 md:cols-3 sm:cols-2 cols-1 gap-6">
-          <LongCoverCard
+          <BangumiCard
             v-for="item in recommendAnimeList"
             :key="item.episode_id"
-            :url="item.link ?? ''"
-            :cover="item.cover"
-            :cover-hover="item?.hover?.img"
-            :tags="item?.hover?.text"
-            :title="item.title"
-            :desc="item.sub_title"
-            :capsule-text="item.rating"
-            mb-10
+            :bangumi="{
+              url: item.link ?? '',
+              cover: item.cover,
+              coverHover: item?.hover?.img,
+              tags: item?.hover?.text,
+              title: item.title,
+              desc: item.sub_title,
+              evaluate: item.evaluate,
+              capsuleText: item.rating,
+            }"
             @mouseenter="activatedSeasonId = item.season_id"
             @mouseleave="activatedSeasonId = 0"
           />
 
           <template v-if="isLoadingRecommendAnime">
-            <LongCoverCardSkeleton
+            <BangumiCardSkeleton
               v-for="item in 30" :key="item"
-              mb-10
             />
           </template>
         </div>
@@ -287,6 +301,6 @@ function getPopularAnimeList() {
 
 <style lang="scss" scoped>
 .anime-section {
-  --at-apply: mb-8 mt-14 first:mt-0;
+  --uno: "mb-8 mt-14 first:mt-0";
 }
 </style>

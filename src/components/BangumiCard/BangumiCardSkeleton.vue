@@ -10,6 +10,7 @@ defineProps<{
       display: horizontal ? 'flex' : 'block',
     }"
     gap-4
+    mb-6
   >
     <div
       rounded="$bew-radius" aspect="12/16" overflow-hidden mb-4 bg="$bew-fill-4"

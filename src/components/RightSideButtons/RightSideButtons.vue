@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
+
 import Button from '~/components/Button.vue'
 import { useDark } from '~/composables/useDark'
 
@@ -31,14 +33,18 @@ const hoveringDockItem = reactive<HoveringDockItem>({
         >
           <Transition name="fade">
             <div v-show="hoveringDockItem.themeMode" absolute>
-              <div v-if="isDark" i-line-md:sunny-outline-to-moon-loop-transition text-xl />
-              <div v-else i-line-md:moon-alt-to-sunny-outline-loop-transition text-xl />
+              <!-- <div v-if="isDark" i-line-md:sunny-outline-to-moon-loop-transition text-xl />
+              <div v-else i-line-md:moon-alt-to-sunny-outline-loop-transition text-xl /> -->
+              <Icon v-if="isDark" icon="line-md:sunny-outline-to-moon-loop-transition" />
+              <Icon v-else icon="line-md:moon-alt-to-sunny-outline-loop-transition" />
             </div>
           </Transition>
           <Transition name="fade">
             <div v-show="!hoveringDockItem.themeMode" absolute>
-              <div v-if="isDark" i-line-md:sunny-outline-to-moon-transition text-xl />
-              <div v-else i-line-md:moon-to-sunny-outline-transition text-xl />
+              <!-- <div v-if="isDark" i-line-md:sunny-outline-to-moon-transition text-xl />
+              <div v-else i-line-md:moon-to-sunny-outline-transition text-xl /> -->
+              <Icon v-if="isDark" icon="line-md:sunny-outline-to-moon-transition" />
+              <Icon v-else icon="line-md:moon-to-sunny-outline-transition" />
             </div>
           </Transition>
         </Button>
@@ -71,7 +77,7 @@ const hoveringDockItem = reactive<HoveringDockItem>({
   --b-button-shadow-active: var(--bew-shadow-1);
 
   svg {
-    --at-apply: w-20px h-20px shrink-0;
+    --uno: "w-20px h-20px shrink-0";
   }
 }
 </style>

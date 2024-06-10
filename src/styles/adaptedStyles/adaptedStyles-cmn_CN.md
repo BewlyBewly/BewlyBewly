@@ -13,43 +13,55 @@
     line-height: 3em;
   }
 
-  ...
+  // ...
 
   // #region theme color adaption part
   // 通过在 `:not()` 中编写一个不存在的选择器来增加内部样式的优先级。
   :not(fdjslfds) {
-    a, b, c {
+    a,
+    b,
+    c {
       color: var(--bew-theme-color);
     }
 
-    d, e, f {
+    d,
+    e,
+    f {
       // 请注意，使用 `!important` 应该是最后万不得已的手段
       color: var(--bew-theme-color) !important;
     }
 
-    g, h, i {
+    g,
+    h,
+    i {
       background-color: var(--bew-theme-color);
     }
 
-    j, k, l {
+    j,
+    k,
+    l {
       background-color: var(--bew-theme-color) !important;
     }
 
-    ...
+    // ...
   }
   // #endregion
 
   // #region dark mode adaption part
   &.dark {
-    aa, bb, cc {
+    aa,
+    bb,
+    cc {
       color: var(--bew-text-1);
     }
 
-    dd, ee, ff {
+    dd,
+    ee,
+    ff {
       color: var(--bew-text-1) !important;
     }
 
-    ...
+    // ...
   }
   // #endregion
 }

@@ -75,7 +75,9 @@ const popupVisible = reactive({
   more: false,
 })
 const api = useApiClient()
-const isLogin = ref<boolean>(false)
+// initially, assume the user is logged in cuz data retrieval is slow, which may show the login
+// button even after login. if the user is not logged in, the login button will show up later
+const isLogin = ref<boolean>(true)
 const unReadMessage = reactive<UnReadMessage | NonNullable<unknown>>(
   {},
 ) as UnwrapNestedRefs<UnReadMessage>
@@ -210,12 +212,18 @@ watch(() => settings.value.autoHideTopBar, (newVal) => {
 watch(
   () => popupVisible.notifications,
   (newVal, oldVal) => {
+    // Stop loading new message counts on the message page, because it resets to 0 when the
+    // users reads the messages on this page
+    if (oldVal === undefined && /https?:\/\/message.bilibili.com(.)*?$/.test(location.href))
+      return
+
     if (newVal === oldVal)
       return
 
     if (!newVal)
       getUnreadMessageCount()
   },
+  { immediate: true },
 )
 
 watch(
@@ -227,6 +235,7 @@ watch(
     if (!newVal)
       await getTopBarNewMomentsCount()
   },
+  { immediate: true },
 )
 
 watch(() => popupVisible.favorites, (newVal, oldVal) => {
@@ -257,8 +266,6 @@ onBeforeMount(() => {
 
 async function initData() {
   await getUserInfo()
-  getUnreadMessageCount()
-  getTopBarNewMomentsCount()
 
   // automatically update notifications and moments count
   setInterval(() => {
@@ -317,7 +324,7 @@ async function getUnreadMessageCount() {
 
   try {
     let res
-    res = await useApiClient().notification.getUnreadMsg()
+    res = await api.notification.getUnreadMsg()
     if (res.code === 0) {
       Object.assign(unReadMessage, res.data)
       Object.entries(unReadMessage).forEach(([key, value]) => {
@@ -328,7 +335,7 @@ async function getUnreadMessageCount() {
       })
     }
 
-    res = await useApiClient().notification.getUnreadDm()
+    res = await api.notification.getUnreadDm()
     if (res.code === 0) {
       Object.assign(unReadDm, res.data)
       if (typeof unReadDm.follow_unread === 'number')
@@ -350,7 +357,7 @@ async function getTopBarNewMomentsCount() {
   let result = 0
 
   try {
-    const res = await useApiClient().moment.getTopBarNewMomentsCount()
+    const res = await api.moment.getTopBarNewMomentsCount()
     if (res.code === 0) {
       if (typeof res.data.update_info.item.count === 'number')
         result = res.data.update_info.item.count
@@ -419,10 +426,9 @@ defineExpose({
               v-show="showLogo"
               ref="logo" href="//www.bilibili.com"
               class="group logo"
-              style="backdrop-filter: var(--bew-filter-glass-1)"
-              flex items-center border="1 $bew-border-color"
-              rounded="50px" p="x-4" shadow="$bew-shadow-2" duration-300
-              bg="$bew-elevated-1 hover:$bew-theme-color dark-hover:white"
+              flex items-center border="1 transparent hover:$bew-border-color"
+              rounded="50px" p="x-4" shadow="hover:$bew-shadow-2" duration-300
+              bg="hover:$bew-theme-color dark-hover:white"
               w-auto h-50px transform-gpu
             >
               <svg
@@ -755,32 +761,32 @@ defineExpose({
 <style lang="scss" scoped>
 .slide-in-enter-active,
 .slide-in-leave-active {
-  --at-apply: transition-all duration-300 pointer-events-none transform-gpu;
+  --uno: "transition-all duration-300 pointer-events-none transform-gpu";
 }
 
 .slide-in-leave-to,
 .slide-in-enter-from {
-  --at-apply: transform important:translate-y-4 opacity-0;
+  --uno: "transform important: translate-y-4 opacity-0";
 }
 
 .slide-out-enter-active,
 .slide-out-leave-active {
-  --at-apply: transition-all duration-300 pointer-events-none transform-gpu;
+  --uno: "transition-all duration-300 pointer-events-none transform-gpu";
 }
 
 .slide-out-leave-to,
 .slide-out-enter-from {
-  --at-apply: transform important:-translate-y-4 opacity-0;
+  --uno: "transform important: -translate-y-4 opacity-0";
 }
 
 .fade-enter-active,
 .fade-leave-active {
-  --at-apply: transition-all duration-600;
+  --uno: "transition-all duration-600";
 }
 
 .fade-leave-to,
 .fade-enter-from {
-  --at-apply: opacity-0;
+  --uno: "opacity-0";
 }
 
 .hide {
@@ -788,72 +794,66 @@ defineExpose({
 }
 
 .bew-popover {
-  --at-apply: absolute top-60px left-1/2
-    transform -translate-x-1/2
-    overflow-visible
-    after:content-empty
-    after:opacity-100 after:w-full after:h-100px
-    after:absolute after:top--30px after:left-1/2 after:-z-1
-    after:transform after:-translate-x-1/2;
+  --uno: "absolute top-60px left-1/2";
+  --uno: "transform -translate-x-1/2";
+  --uno: "overflow-visible";
+  --uno: "after:content-empty";
+  --uno: "after:opacity-100 after:w-full after:h-100px";
+  --uno: "after:absolute after:top--30px after:left-1/2 after:-z-1";
+  --uno: "after:transform after:-translate-x-1/2";
 }
 
 .logo.activated {
-  --at-apply: bg-$bew-theme-color dark:bg-white;
+  --uno: "bg-$bew-theme-color dark:bg-white";
 
   svg {
-    --at-apply: fill-white dark:fill-$bew-theme-color;
+    --uno: "fill-white dark:fill-$bew-theme-color";
   }
 }
 
 .right-side {
-
   .unread-message {
-    --at-apply: absolute -top-1 right-0
-      important:px-1 important:py-2 rounded-full
-      text-xs leading-0 z-1 min-w-16px h-16px
-      flex justify-center items-center
-      bg-$bew-theme-color  text-white;
+    --uno: "absolute -top-1 right-0";
+    --uno: "important:px-1 important:py-2 rounded-full";
+    --uno: "text-xs leading-0 z-1 min-w-16px h-16px";
+    --uno: "flex justify-center items-center";
+    --uno: "bg-$bew-theme-color  text-white";
     box-shadow: 0 2px 4px rgba(var(--tw-shadow-color), 0.4);
   }
 
   .right-side-item {
-    --at-apply: relative text-$bew-text-1 flex items-center;
+    --uno: "relative text-$bew-text-1 flex items-center";
 
     &:not(.avatar) a {
-      --at-apply: text-xl flex items-center p-2 rounded-40px duration-300 relative z-5;
-      // --at-apply: after:content-empty after:absolute after:w-120% after:h-120% after:z-0 after:bg-yellow;
+      --uno: "text-xl flex items-center p-2 rounded-40px duration-300 relative z-5";
     }
 
-    &.active a, &:not(.upload) a:hover {
+    &.active a,
+    &:not(.upload) a:hover {
       --un-drop-shadow: drop-shadow(0 0 6px white);
-      --at-apply: bg-$bew-fill-2;
+      --uno: "bg-$bew-fill-2";
     }
   }
 
   .right-side-item .login {
     --un-drop-shadow: drop-shadow(0 0 6px var(--bew-theme-color));
-    --at-apply: rounded-full mx-1
-      important:text-$bew-theme-color important:px-4
-      hover:important-bg-$bew-theme-color hover:important-text-white
-      flex items-center justify-center important:text-base w-120px
-      border-solid border-$bew-theme-color border-2
-      important:dark:filter;
+    --uno: "rounded-full mx-1 important:text-$bew-theme-color important:px-4 hover:important-bg-$bew-theme-color hover:important-text-white flex items-center justify-center important:text-base w-120px border-solid border-$bew-theme-color border-2 important:dark:filter";
   }
 
   .avatar {
-    --at-apply: flex items-center ml-2px pr-2 relative z-1;
+    --uno: "flex items-center ml-2px pr-2 relative z-1";
 
     .avatar-img,
     .avatar-shadow {
-      --at-apply: duration-300;
+      --uno: "duration-300";
 
       &.hover {
-        --at-apply: transform scale-230 important:translate-y-36px;
+        --uno: "transform scale-230 important: translate-y-36px";
       }
     }
 
     .avatar-shadow {
-      --at-apply: pointer-events-none;
+      --uno: "pointer-events-none";
     }
   }
 }

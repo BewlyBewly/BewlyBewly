@@ -11,38 +11,15 @@
   // Increase the priority of the style inside by writing a non-existent selector in :not()
   :not(fdjslfds) {
     .page-content .right-side .rank-module .rank-list .item a:hover,
-    .page-content
-      .left-side
-      .article-list
-      .article-list-holder
-      .article-item:hover
-      .item-holder
-      .article-title,
+    .page-content .left-side .article-list .article-list-holder .article-item:hover .item-holder .article-title,
     .page-content .right-side .rank-module .rank-tabs-bar .rank-tabs-list li.on,
     .page-content .right-side .up-list .up-item .info-holder .head .follow,
-    .page-content
-      .right-side
-      .up-list
-      .up-item
-      .info-holder
-      .head
-      .nick-name:hover,
-    .page-content
-      .right-side
-      .up-list
-      .up-item
-      .info-holder
-      .dynamic
-      .arc-title:hover,
+    .page-content .right-side .up-list .up-item .info-holder .head .nick-name:hover,
+    .page-content .right-side .up-list .up-item .info-holder .dynamic .arc-title:hover,
     .categories-bar .tag-item.on,
     .nav-tab-bar .tab-item.on,
     .nav-tab-bar .tab-item.on a,
-    .page-content
-      .left-side
-      .partitio-name
-      .filter
-      .filter-btn-lst
-      .filter-btn:hover,
+    .page-content .left-side .partitio-name .filter .filter-btn-lst .filter-btn:hover,
     .page-content .right-side .rank-module .complete-rank:hover,
     .article-detail .topic-info,
     .right-side-bar .side-toolbar .toolbar-item:hover .iconfont,
@@ -64,12 +41,7 @@
       color: var(--bew-theme-color) !important;
     }
 
-    .page-content
-      .right-side
-      .rank-module
-      .rank-list
-      .item:nth-child(-n + 3)
-      .rank-index,
+    .page-content .right-side .rank-module .rank-list .item:nth-child(-n + 3) .rank-index,
     .article-detail .unfollow,
     .modal-box-holder .modal-box .modal-footer .modal-btn-primary,
     .bili-dialog-bomb .appeal-box .submit .confirm {
@@ -117,13 +89,7 @@
     .nav-tab-bar .tab-item,
     .page-content .left-side .partitio-name,
     .page-content .right-side .rank-module .rank-tabs-bar label,
-    .page-content
-      .left-side
-      .article-list
-      .article-list-holder
-      .article-item
-      .item-holder
-      .article-title-holder,
+    .page-content .left-side .article-list .article-list-holder .article-item .item-holder .article-title-holder,
     .page-content .right-side .rank-module .rank-list .item a,
     .page-content .right-side .up-list .title,
     .page-content .right-side .up-list .up-item .info-holder .head .nick-name,
@@ -137,13 +103,7 @@
     .right-side-bar .catalog-panel .catalog-item,
     .fixed-top-header .inner > p,
     .fixed-top-header .inner .up-info,
-    .page-content
-      .right-side
-      .search-module
-      .search-block
-      .search-word-panel
-      .history-item
-      a,
+    .page-content .right-side .search-module .search-block .search-word-panel .history-item a,
     .categories-bar .tag-item,
     .page-content .right-side .rank-module .complete-rank,
     .article-detail .bangumi-rate-panel .info .title,
@@ -156,17 +116,11 @@
       color: var(--bew-text-1);
     }
 
-    span[style*='color:#000000'] {
+    span[style*="color:#000000"] {
       color: var(--bew-text-1) !important;
     }
 
-    .page-content
-      .left-side
-      .article-list
-      .article-list-holder
-      .article-item
-      .item-holder
-      .article-desc,
+    .page-content .left-side .article-list .article-list-holder .article-item .item-holder .article-desc,
     .page-content .right-side .up-list .up-item .info-holder .dynamic,
     .page-content .right-side .more .help .info,
     .page-content .right-side .more .link .info,
@@ -192,21 +146,8 @@
       color: var(--bew-text-2) !important;
     }
 
-    .page-content
-      .left-side
-      .article-list
-      .article-list-holder
-      .article-item
-      .item-holder
-      .article-info-bar
-      *,
-    .page-content
-      .right-side
-      .up-list
-      .up-item
-      .info-holder
-      .dynamic
-      .arc-title,
+    .page-content .left-side .article-list .article-list-holder .article-item .item-holder .article-info-bar *,
+    .page-content .right-side .up-list .up-item .info-holder .dynamic .arc-title,
     .page-content
       .left-side
       .article-list
@@ -225,13 +166,7 @@
     .page-content .right-side .rank-module .rank-list .item,
     .page-content .right-side .up-list,
     .article-up-info,
-    .page-content
-      .right-side
-      .up-list
-      .up-item
-      .info-holder
-      .head
-      .follow.followed,
+    .page-content .right-side .up-list .up-item .info-holder .head .follow.followed,
     .modal-box-holder .modal-box .modal-footer .modal-btn-default,
     .ql-container,
     .view-note .note-content .ql-container .ql-editor,
@@ -258,14 +193,7 @@
     .right-side-bar .catalog:after,
     .right-side-bar .catalog-panel,
     .page-content .right-side .search-module .search-block .search-word-panel,
-    .page-content
-      .right-side
-      .search-module
-      .search-block
-      .search-word-panel
-      .panel-title
-      p
-      span,
+    .page-content .right-side .search-module .search-block .search-word-panel .panel-title p span,
     .page-content .left-side .partitio-name .filter .filter-btn-lst,
     .to-top,
     .bili-dialog-bomb .appeal-box {
@@ -284,18 +212,8 @@
     }
 
     .right-side-bar .catalog-panel .catalog-item:hover,
-    .page-content
-      .right-side
-      .search-module
-      .search-block
-      .search-word-panel
-      .history-item:hover,
-    .page-content
-      .right-side
-      .search-module
-      .search-block
-      .search-word-panel
-      .suggest-item:hover,
+    .page-content .right-side .search-module .search-block .search-word-panel .history-item:hover,
+    .page-content .right-side .search-module .search-block .search-word-panel .suggest-item:hover,
     .followed,
     .van-popover.van-followed .follow_dropdown li:hover {
       background-color: var(--bew-fill-2);
@@ -321,21 +239,9 @@
     .modal-box-holder .modal-box .modal-footer .modal-btn-default,
     .modal-box-holder .modal-box .modal-footer .modal-btn-primary,
     .page-content .right-side .up-list .fresh-btn,
-    .page-content
-      .right-side
-      .search-module
-      .search-block
-      .search-word-panel
-      .panel-title
-      .split-line,
+    .page-content .right-side .search-module .search-block .search-word-panel .panel-title .split-line,
     .bili-dialog-bomb .appeal-box .header,
-    .bili-dialog-bomb
-      .appeal-box
-      .wrap
-      .container
-      .textarea
-      .textarea-wrap
-      textarea,
+    .bili-dialog-bomb .appeal-box .wrap .container .textarea .textarea-wrap textarea,
     .bili-dialog-bomb .appeal-box .submit .cancel,
     .bili-dialog-bomb .appeal-box .submit,
     .van-popover.van-followed,

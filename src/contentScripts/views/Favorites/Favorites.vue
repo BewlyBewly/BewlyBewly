@@ -352,7 +352,7 @@ function isMusic(item: FavoriteResource) {
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, .35);
+    background-color: rgba(255, 255, 255, 0.35);
     border-radius: 20px;
   }
 
@@ -361,4 +361,3 @@ function isMusic(item: FavoriteResource) {
   }
 }
 </style>
-~/components/TopBar/types

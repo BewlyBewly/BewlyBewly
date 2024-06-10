@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
+
 import Button from '~/components/Button.vue'
 import { useBewlyApp } from '~/composables/useAppProvider'
 
@@ -29,11 +31,16 @@ const { reachTop } = useBewlyApp()
       @click="reachTop ? emit('refresh') : emit('backToTop')"
     >
       <Transition name="fade">
-        <div
-          v-if="reachTop" i-line-md:rotate-270 text-lg shrink-0 rotate-90
-          absolute
+        <Icon
+          v-if="reachTop"
+          icon="line-md:rotate-270"
+          shrink-0 rotate-90 absolute text-2xl
         />
-        <div v-else i-line-md:arrow-small-up text-lg shrink-0 absolute />
+        <Icon
+          v-else
+          icon="line-md:arrow-small-up"
+          shrink-0 absolute text-2xl
+        />
       </Transition>
     </Button>
   </div>

@@ -15,7 +15,6 @@
   // #region theme color adaption part
   // Increase the priority of the style inside by writing a non-existent selector in `:not()`
   :not(fdjslfds) {
-
     .note-list .list-note-operation,
     .note-pc .note-container .note-header .note-operation,
     .note-up .up-desc-container .desc-top .attention-btn-container {
@@ -30,7 +29,13 @@
     .note-pc .note-container .note-header .note-operation:hover,
     .user-card-m-exp .user-info-wrapper .info .btn-box .like:hover,
     .coin-operated-m-exp .coin-bottom .bi-btn:hover,
-    .video-share-popover .video-share-dropdown .dropdown-top .dropdown-top-left .capture-bar .bar-right .copy-link:hover,
+    .video-share-popover
+      .video-share-dropdown
+      .dropdown-top
+      .dropdown-top-left
+      .capture-bar
+      .bar-right
+      .copy-link:hover,
     .note-up .up-desc-container .desc-top .attention-btn-container:hover,
     .report-dialog .vui_dialog--footer .report-dialog-footer .button-wrap .comfirm-report:hover,
     .collection-m-exp .bottom .btn:hover {
@@ -65,8 +70,8 @@
     .ql-snow.ql-toolbar button:hover,
     .ql-snow .ql-toolbar button:hover,
     .up-name.is_vip,
-    .up-detail .up-detail-top .up-name[style*='color: rgb(251, 114, 153)'],
-    .up-detail .up-detail-top .up-name[style*='color:#FB7299;'] {
+    .up-detail .up-detail-top .up-name[style*="color: rgb(251, 114, 153)"],
+    .up-detail .up-detail-top .up-name[style*="color:#FB7299;"] {
       color: var(--bew-theme-color) !important;
     }
 
@@ -87,7 +92,11 @@
     }
 
     // Tick icon for  danmaku enable
-    .bui-danmaku-switch .bui-danmaku-switch-input:checked+.bui-danmaku-switch-label .bui-danmaku-switch-on path:nth-child(2),
+    .bui-danmaku-switch
+      .bui-danmaku-switch-input:checked
+      + .bui-danmaku-switch-label
+      .bui-danmaku-switch-on
+      path:nth-child(2),
     .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-fill,
     .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-fill,
     .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill,
@@ -160,7 +169,7 @@
     .cur-play-icon,
     .playing-gif,
     .multi-page-v1 .cur-list .list-box li.on img,
-    .coin-operated-m-exp .like-checkbox input[type='checkbox']:checked+i {
+    .coin-operated-m-exp .like-checkbox input[type="checkbox"]:checked + i {
       filter: var(--bew-filter-icon-glow);
     }
   }
@@ -169,18 +178,25 @@
 
   // #region dark mode adaption part
   &.dark {
-
-    .note-list .note-card-container .note-card,
-    .resizable-component .ql-tag-blot .time-tag-item,
-    .ql-toolbar {
-      background-color: var(--bew-fill-1);
-    }
-
     .video-ai-assistant .video-ai-assistant-bg::before,
     .note-pc .note-container .note-header .back-note-list:hover,
     .note-pc .note-container .note-header .jump-note-package:hover,
     .note-pc .note-container .note-header .close-note:hover {
       background: var(--bew-fill-2);
+    }
+
+    .rcmd-tab-switcher .rcmd-tab-move.right .rcmd-tab-move-inner {
+      background: linear-gradient(270deg, var(--bew-bg) 61.53%, transparent 100%);
+    }
+
+    .rcmd-tab-switcher .rcmd-tab-move.left .rcmd-tab-move-inner {
+      background: linear-gradient(90deg, var(--bew-bg) 61.53%, transparent 100%);
+    }
+
+    .note-list .note-card-container .note-card,
+    .resizable-component .ql-tag-blot .time-tag-item,
+    .ql-toolbar {
+      background-color: var(--bew-fill-1);
     }
 
     .note-pc .note-container,
