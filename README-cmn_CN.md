@@ -47,7 +47,7 @@ pnpm build-firefox
 
 - Chrome: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>
 - Edge (不推荐): <https://microsoftedge.microsoft.com/addons/detail/bewlybewly/kceadhehfjdiakpiphpjgolbgehjdmja>
-- Firefox: <https://addons.mozilla.org/lt/firefox/addon/bewlybewly/>
+- Firefox: <https://addons.mozilla.org/zh-CN/firefox/addon/bewlybewly/>
 
 #### 对于 Firefox 用户
 
