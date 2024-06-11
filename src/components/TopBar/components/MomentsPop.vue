@@ -29,21 +29,24 @@ const api = useApiClient()
 
 const moments = reactive<MomentCard[]>([])
 const addedWatchLaterList = reactive<number[]>([])
-const momentTabs = reactive<MomentTab[]>([
-  {
-    type: 'video',
-    name: t('topbar.moments_dropdown.tabs.videos'),
-  },
-  {
-    type: 'live',
-    name: t('topbar.moments_dropdown.tabs.live'),
-  },
-  {
-    type: 'article',
-    name: t('topbar.moments_dropdown.tabs.articles'),
-  },
-])
-const selectedMomentTab = ref<MomentTab>(momentTabs[0])
+const momentTabs = computed((): MomentTab[] => {
+  return [
+    {
+      type: 'video',
+      name: t('topbar.moments_dropdown.tabs.videos'),
+    },
+    {
+      type: 'live',
+      name: t('topbar.moments_dropdown.tabs.live'),
+    },
+    {
+      type: 'article',
+      name: t('topbar.moments_dropdown.tabs.articles'),
+    },
+  ]
+},
+)
+const selectedMomentTab = ref<MomentTab>(momentTabs.value[0])
 const isLoading = ref<boolean>(false)
 const noMoreContent = ref<boolean>(false) // when noMoreContent is true, the user can't scroll down to load more content
 const livePage = ref<number>(1)
