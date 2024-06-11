@@ -49,7 +49,7 @@ pnpm build-firefox
 
 - Chrome: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>
 - Edge (NOT RECOMMENDED): <https://microsoftedge.microsoft.com/addons/detail/bewlybewly/kceadhehfjdiakpiphpjgolbgehjdmja>
-- Firefox: <https://addons.mozilla.org/lt/firefox/addon/bewlybewly/>
+- Firefox: <https://addons.mozilla.org/en-US/firefox/addon/bewlybewly/>
 
 #### To Firefox users
 
