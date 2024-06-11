@@ -7,16 +7,19 @@ import { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
 import type { DockItem } from '~/stores/mainStore'
 import { useMainStore } from '~/stores/mainStore'
+import handleWheelNavigationChange from '~/utils/wheelNavigationChange'
 
 import Tooltip from '../Tooltip.vue'
 import type { HoveringDockItem } from './types'
 
-defineProps<{
+const props = defineProps<{
   activatedPage: AppPage
 }>()
 
+// const activatedPage = ref<string | null>(null);
 const emit = defineEmits(['changePage', 'settingsVisibilityChange', 'refresh', 'backToTop'])
 
+const dockContainerInnerRef = ref<HTMLElement | null>(null)
 const mainStore = useMainStore()
 const { isDark, toggleDark } = useDark()
 const { reachTop } = useBewlyApp()
@@ -71,7 +74,31 @@ onMounted(() => {
     hideDock.value = true
 
   currentDockItems.value = computeDockItem()
+
+  if (dockContainerInnerRef.value) {
+    dockContainerInnerRef.value.addEventListener('wheel', event => handleWheelNavigationChange(
+      event,
+      currentDockItems.value,
+      props.activatedPage,
+      setActiveDockItem,
+    ), { passive: false })
+  }
 })
+
+onBeforeUnmount(() => {
+  if (dockContainerInnerRef.value) {
+    dockContainerInnerRef.value.removeEventListener('wheel', event => handleWheelNavigationChange(
+      event,
+      currentDockItems.value,
+      props.activatedPage,
+      setActiveDockItem,
+    ))
+  }
+})
+
+function setActiveDockItem(item: DockItem) {
+  emit('changePage', item.page)
+}
 
 function toggleDockHide(hide: boolean) {
   if (settings.value.autoHideDock)
@@ -115,6 +142,7 @@ function handleBackToTopOrRefresh() {
       @mouseleave="toggleDockHide(true)"
     >
       <div
+        ref="dockContainerInnerRef"
         class="dock-content-inner"
       >
         <template v-for="dockItem in currentDockItems" :key="dockItem.page">
@@ -122,7 +150,7 @@ function handleBackToTopOrRefresh() {
             <button
               class="dock-item group"
               :class="{ active: activatedPage === dockItem.page }"
-              @click="emit('changePage', dockItem.page)"
+              @click="setActiveDockItem(dockItem)"
             >
               <div
                 v-show="activatedPage !== dockItem.page"

@@ -2,6 +2,7 @@
 import { useI18n } from 'vue-i18n'
 
 import { settings } from '~/logic'
+import handleWheelNavigationChange from '~/utils/wheelNavigationChange'
 
 import OverlayScrollbarsComponent from '../OverlayScrollbarsComponent'
 import type { MenuItem } from './types'
@@ -23,6 +24,7 @@ const settingsMenu = {
 const activatedMenuItem = ref<MenuType>(MenuType.General)
 const title = ref<string>(t('settings.title'))
 const preventCloseSettings = ref<boolean>(false)
+const settingsMenuUlContainerRef = ref<HTMLElement | null>(null)
 const scrollbarRef = ref()
 
 watch(
@@ -91,6 +93,26 @@ watch(() => settings.value.language, () => {
 
 onMounted(() => {
   setCurrentTitle()
+
+  if (settingsMenuUlContainerRef.value) {
+    settingsMenuUlContainerRef.value.addEventListener('wheel', event => handleWheelNavigationChange(
+      event,
+      settingsMenuItems.value,
+      activatedMenuItem.value,
+      changeMenuItem,
+    ), { passive: false })
+  }
+})
+
+onBeforeUnmount(() => {
+  if (settingsMenuUlContainerRef.value) {
+    settingsMenuUlContainerRef.value.removeEventListener('wheel', event => handleWheelNavigationChange(
+      event,
+      settingsMenuItems.value,
+      activatedMenuItem.value,
+      changeMenuItem,
+    ))
+  }
 })
 
 function handleClose() {
@@ -99,8 +121,8 @@ function handleClose() {
   emit('close')
 }
 
-function changeMenuItem(menuItem: MenuType) {
-  activatedMenuItem.value = menuItem
+function changeMenuItem(menuItem: MenuItem) {
+  activatedMenuItem.value = menuItem.value
   setCurrentTitle()
 }
 
@@ -132,6 +154,7 @@ function setCurrentTitle() {
         shrink-0 p="x-4" pos="absolute left--84px" z-2
       >
         <ul
+          ref="settingsMenuUlContainerRef"
           style="
             --un-shadow: var(--bew-shadow-4), var(--bew-shadow-edge-glow-2);
             backdrop-filter: var(--bew-filter-glass-2);
@@ -150,7 +173,7 @@ function setCurrentTitle() {
               rounded-30px flex items-center overflow-x-hidden
               duration-300 bg="hover:$bew-fill-2"
               :class="{ 'menu-item-activated': menuItem.value === activatedMenuItem }"
-              @click="changeMenuItem(menuItem.value)"
+              @click="changeMenuItem(menuItem)"
             >
               <div
                 v-show="menuItem.value !== activatedMenuItem"

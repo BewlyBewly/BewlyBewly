@@ -8,6 +8,7 @@ import { homePageGridLayout, settings } from '~/logic'
 import type { HomeTab } from '~/stores/mainStore'
 import { useMainStore } from '~/stores/mainStore'
 import emitter from '~/utils/mitt'
+import handleWheelNavigationChange from '~/utils/wheelNavigationChange'
 
 import type { GridLayoutIcon } from './types'
 import { HomeSubPage } from './types'
@@ -29,6 +30,8 @@ const shouldMoveTabsUp = ref<boolean>(false)
 const tabContentLoading = ref<boolean>(false)
 const currentTabs = ref<HomeTab[]>([])
 const tabPageRef = ref()
+const tabContainerRef = ref<HTMLElement | null>(null)
+const gridContainerRef = ref<HTMLElement | null>(null)
 
 const gridLayoutIcons = computed((): GridLayoutIcon[] => {
   return [
@@ -93,11 +96,49 @@ onMounted(() => {
 
   currentTabs.value = computeTabs()
   activatedPage.value = currentTabs.value[0].page
+
+  if (gridContainerRef.value) {
+    gridContainerRef.value.addEventListener('wheel', event => handleWheelNavigationChange(
+      event,
+      gridLayoutIcons.value,
+      homePageGridLayout.value,
+      setActiveGridLayoutIcon,
+    ), { passive: false })
+  }
+  if (tabContainerRef.value) {
+    tabContainerRef.value.addEventListener('wheel', event => handleWheelNavigationChange(
+      event,
+      currentTabs.value,
+      activatedPage.value,
+      handleChangeTab,
+    ), { passive: false })
+  }
 })
 
 onUnmounted(() => {
   emitter.off('topBarVisibleChange')
+
+  if (gridContainerRef.value) {
+    gridContainerRef.value.removeEventListener('wheel', event => handleWheelNavigationChange(
+      event,
+      gridLayoutIcons.value,
+      homePageGridLayout.value,
+      setActiveGridLayoutIcon,
+    ))
+  }
+  if (tabContainerRef.value) {
+    tabContainerRef.value.removeEventListener('wheel', event => handleWheelNavigationChange(
+      event,
+      currentTabs.value,
+      activatedPage.value,
+      handleChangeTab,
+    ))
+  }
 })
+
+function setActiveGridLayoutIcon(icon: GridLayoutIcon) {
+  homePageGridLayout.value = icon.value
+}
 
 function handleChangeTab(tab: HomeTab) {
   if (activatedPage.value === tab.page) {
@@ -192,7 +233,11 @@ function toggleTabContentLoading(loading: boolean) {
         ease-in-out flex="~ justify-between items-start gap-4"
         :class="{ hide: shouldMoveTabsUp }"
       >
-        <section v-if="!(!settings.alwaysShowTabsOnHomePage && currentTabs.length === 1)" flex="~ items-center gap-3 wrap">
+        <section
+          v-if="!(!settings.alwaysShowTabsOnHomePage && currentTabs.length === 1)"
+          ref="tabContainerRef"
+          flex="~ items-center gap-3 wrap"
+        >
           <button
             v-for="tab in currentTabs" :key="tab.page"
             :class="{ 'tab-activated': activatedPage === tab.page }"
@@ -217,6 +262,7 @@ function toggleTabContentLoading(loading: boolean) {
 
         <div
           v-if="settings.enableGridLayoutSwitcher"
+          ref="gridContainerRef"
           style="backdrop-filter: var(--bew-filter-glass-1)"
           flex="~ gap-1 shrink-0" p-1 h-35px bg="$bew-elevated-1" transform-gpu
           ml-auto rounded="$bew-radius" shadow="$bew-shadow-1" box-border border="1 $bew-border-color"
