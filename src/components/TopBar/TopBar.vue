@@ -723,23 +723,24 @@ defineExpose({
               <a
                 href="https://member.bilibili.com/platform/upload/video/frame"
                 target="_blank"
+                :title="$t('topbar.upload')"
                 bg="$bew-theme-color"
                 rounded-40px
                 un-text="!white !base"
                 mx-1
                 flex="~"
                 justify="center"
-                w="xl:100px 38px"
-                h="xl:auto 38px"
-                p="xl:auto x-4"
+                w="38px"
+                h="38px"
+                p="x-4"
                 shadow
                 filter="hover:brightness-110"
                 style="--un-shadow: 0 0 10px var(--bew-theme-color-60)"
               >
                 <div i-mingcute:upload-2-line flex-shrink-0 />
-                <span m="l-2" class="hidden xl:block">{{
+                <!-- <span m="l-2" class="hidden xl:block">{{
                   $t('topbar.upload')
-                }}</span>
+                }}</span> -->
               </a>
 
               <Transition name="slide-in">
