@@ -138,13 +138,13 @@
       }
     }
 
-    // .note-list-item::-webkit-scrollbar-track {
-    //   background-color: var(--bg1);
-    // }
+    .note-list-item::-webkit-scrollbar-track {
+      background-color: var(--bew-bg);
+    }
 
-    // .editor-innter .ql-editor::-webkit-scrollbar-track {
-    //   background-color: var(--bew-content-1);
-    // }
+    .editor-innter .ql-editor::-webkit-scrollbar-track {
+      background-color: var(--bew-content-1);
+    }
 
     .note-header .note-title .note-text,
     .note-single-item .note-item__detail--title,
