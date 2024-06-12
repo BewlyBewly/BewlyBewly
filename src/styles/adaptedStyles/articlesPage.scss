@@ -7,6 +7,10 @@
     line-height: 3em;
   }
 
+  .reply-box.fixed-box {
+    padding-right: 20px;
+  }
+
   // #region theme color adaption part
   // Increase the priority of the style inside by writing a non-existent selector in :not()
   :not(fdjslfds) {
@@ -33,7 +37,9 @@
     .interaction-info .hover-item:hover,
     .interaction-info .hover-item:hover i,
     .normal-article-holder a,
-    .read-article-holder .card-text-label {
+    .read-article-holder .card-text-label,
+    .share-dynamic-dialog .sdd-card .name,
+    .bili-dialog-bomb .appeal-box .wrap .container .textarea .memo a {
       color: var(--bew-theme-color);
     }
 
@@ -44,7 +50,8 @@
     .page-content .right-side .rank-module .rank-list .item:nth-child(-n + 3) .rank-index,
     .article-detail .unfollow,
     .modal-box-holder .modal-box .modal-footer .modal-btn-primary,
-    .bili-dialog-bomb .appeal-box .submit .confirm {
+    .bili-dialog-bomb .appeal-box .submit .confirm,
+    .bili-dialog-bomb .appeal-box .wrap .container .options .option .checkbox.checked:before {
       background-color: var(--bew-theme-color);
     }
 
@@ -52,7 +59,8 @@
     .page-content .right-side .up-list .up-item .info-holder .head .follow,
     .categories-bar .tag-item.on,
     .modal-box-holder .modal-box .modal-footer .modal-btn-primary,
-    .read-article-holder .card-text-label {
+    .read-article-holder .card-text-label,
+    .bili-dialog-bomb .appeal-box .wrap .container .options .option .checkbox.checked {
       border-color: var(--bew-theme-color);
     }
 
@@ -82,6 +90,7 @@
       filter: drop-shadow(680px 0 0 var(--bew-theme-color));
     }
   }
+
   // #endregion
 
   // #region dark mode adaption part
@@ -112,7 +121,9 @@
     .view-note .note-content .ql-container .ql-editor,
     .bili-dialog-bomb .appeal-box .wrap .container .question,
     .van-popover.van-followed,
-    .van-popover.van-followed .follow_dropdown li:hover {
+    .van-popover.van-followed .follow_dropdown li:hover,
+    .share-dynamic-dialog .sdd-head,
+    .share-success-dialog .info {
       color: var(--bew-text-1);
     }
 
@@ -138,7 +149,10 @@
     .article-breadcrumb .slash,
     .article-detail .bangumi-rate-panel .info .desc,
     .modal-box-holder .modal-box .modal-footer .modal-btn-default,
-    .bili-dialog-bomb .appeal-box .submit .cancel {
+    .bili-dialog-bomb .appeal-box .submit .cancel,
+    .interaction-info .toolbar .share-box .qrcode-tit,
+    .share-dynamic-dialog .sdd-input,
+    .share-success-dialog .hint {
       color: var(--bew-text-2);
     }
 
@@ -158,7 +172,8 @@
       .list-mark,
     .interaction-info .toolbar .share-box,
     .interaction-info,
-    .followed {
+    .followed,
+    .share-dynamic-dialog .sdd-card .sdd-card-content {
       color: var(--bew-text-3);
     }
 
@@ -179,12 +194,25 @@
 
     .article-container,
     .page-content .right-side .rank-module .complete-rank,
-    .comment-wrapper .comment-m {
+    .bili-comment.browser-pc,
+    .reply-box.fixed-box,
+    .comment-wrapper .comment-m,
+    .share-dynamic-dialog,
+    .share-dynamic-dialog .sdd-card .sdd-card-content,
+    .share-success-dialog {
       background-color: var(--bew-content-solid-1);
+    }
+
+    .interaction-info .toolbar .share-box .qrcode-box {
+      background-color: var(--bew-content-solid-2);
     }
 
     .comment-wrapper .comment-m {
       --bew-bg: var(--bew-content-solid-1);
+    }
+
+    .share-dynamic-dialog .sdd-card {
+      background-color: var(--bew-bg);
     }
 
     .right-side-bar .to-top,
@@ -246,11 +274,15 @@
     .bili-dialog-bomb .appeal-box .submit,
     .van-popover.van-followed,
     .followed,
-    .read-article-holder .row-video-holder {
+    .read-article-holder .row-video-holder,
+    .interaction-info .toolbar .share-box .qrcode-box,
+    .share-dynamic-dialog .sdd-action-bar,
+    .share-dynamic-dialog .sdd-head {
       border-color: var(--bew-border-color);
     }
 
-    .to-top {
+    .to-top,
+    .share-success-dialog {
       border-color: var(--bew-elevated-solid-1);
     }
 
@@ -261,6 +293,22 @@
     .page-content .right-side .up-list .fresh-btn:before {
       filter: brightness(2) contrast(0);
     }
+
+    .interaction-info .toolbar .share-box .qrcode-box {
+      box-shadow: 0 0 4px var(--bew-border-color);
+    }
+
+    .interaction-info .toolbar .share-box .qrcode-ctnr {
+      background: white;
+      box-sizing: border-box;
+      padding: 5px;
+    }
+
+    .interaction-info .toolbar .share-box .qrcode-ctnr canvas {
+      width: 122px;
+      height: 122px;
+    }
   }
+
   // #endregion
 }

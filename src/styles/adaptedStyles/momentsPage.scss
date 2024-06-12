@@ -20,6 +20,10 @@
     position: relative;
   }
 
+  .reply-box.fixed-box {
+    padding-right: 20px;
+  }
+
   :not(fjlsfd) {
     .dyn-orig-author__following.following-icon:before,
     .bili-dyn-live-users__more:hover:after,
@@ -43,6 +47,10 @@
     .bili-topic-new__default__create__icon:after,
     .bili-topic-new__default__create__icon:before {
       background-color: var(--bew-theme-color);
+    }
+
+    .bili-set-follow-group__add__btn {
+      background-color: var(--bew-theme-color-10);
     }
 
     .bili-dyn-publishing__action:not(.disabled):hover {
@@ -102,7 +110,8 @@
       filter: invert(1);
     }
 
-    .bili-button.primary.plain {
+    .bili-button.primary.plain,
+    .bili-set-follow-group__list.is-disabled:after {
       background-color: transparent;
     }
   }
@@ -281,7 +290,7 @@
     }
 
     .bili-topic-search__popover {
-      background-color: var(--bew-fill-1);
+      background-color: var(--bew-content-solid-2);
       border-color: var(--bew-border-color);
     }
 

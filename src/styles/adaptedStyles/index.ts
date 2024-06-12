@@ -45,6 +45,12 @@ async function setupStyles() {
     document.documentElement.classList.add('watchLaterPage')
   }
 
+  // user note page 笔记页
+  else if (/https?:\/\/space.bilibili\.com\.*\/v\/note-list/.test(currentUrl)) {
+    await import('./notePage.scss')
+    document.documentElement.classList.add('notePage')
+  }
+
   // user space page 空间页
   else if (/https?:\/\/space.bilibili\.com\.*/.test(currentUrl)) {
     await import('./userSpacePage.scss')
