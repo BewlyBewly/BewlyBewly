@@ -50,6 +50,7 @@
       background-color: var(--bew-theme-color-10);
     }
 
+    .video-sections-v1 .video-sections-head_first-line .first-line-left .first-line-title:hover,
     .note-detail .note-operation .tab-action-item.is-active .tab-icon {
       color: var(--bew-theme-color);
     }
@@ -195,6 +196,10 @@
 
     .note-list .note-card-container .note-card,
     .resizable-component .ql-tag-blot .time-tag-item,
+    .ql-toolbar {
+      background-color: var(--bew-fill-1);
+    }
+
     .bpx-player-container[data-revision="1"]
       .bpx-player-sending-bar
       .bpx-player-video-inputbar
@@ -206,9 +211,8 @@
       .bpx-player-dm-btn-send.bui-disabled
       .bui-button-blue
       .modal-wrapper
-      .modal-header-close:hover,
-    .ql-toolbar {
-      background-color: var(--bew-fill-1);
+      .modal-header-close:hover {
+      background-color: var(--bew-fill-3);
     }
 
     .note-pc .note-container,
