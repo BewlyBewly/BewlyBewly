@@ -481,6 +481,7 @@
       #page-fav .fav-main .fav-action-bottom li,
       .sub-tabs span,
       #page-follows .follow-tabs,
+      #page-index .col-2 .section .user-auth .profession-description,
       .elec .elec-count,
       #page-index .col-2 .section .user-auth .auth-description,
       #page-series-index .channel-item .channel-name,
@@ -589,6 +590,10 @@
     #page-index .col-2 .section,
     #page-dynamic .col-2 .section {
       background-color: var(--bew-content-solid-1);
+    }
+
+    .elec .new-elec-trigger:hover {
+      background-color: rgb(65 31 39);
     }
 
     .be-dropdown-item:hover,
