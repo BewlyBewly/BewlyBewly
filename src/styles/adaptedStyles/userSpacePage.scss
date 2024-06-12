@@ -56,6 +56,8 @@
     .n .n-data.router-link-active .n-data-k,
     .n .n-data.router-link-active .n-data-v,
     .wrapper .edit-video-modal .target-favlist .target-favitem:hover .target-fav-title .fav-meta .fav-name,
+    .i-live .i-live-off-guest a,
+    .modal-wrapper .modal-header-close:hover,
     a:hover,
     .h .h-v-host:hover,
     #page-index .channel .section-right-options .play-all-channel:hover .video-commonplayer_play,
@@ -562,7 +564,6 @@
     .feed-dynamic-header-title,
     .bb-comment .operation .opera-list,
     .comment-bilibili-fold .operation .opera-list,
-    .title,
     .bili-at-popup__user-name {
       color: var(--bew-text-1);
     }
@@ -714,6 +715,10 @@
     .emoji-box .emoji-text:hover,
     .emoji-box .emoji-tabs .tab-link.on {
       background-color: var(--bew-content-2);
+    }
+
+    .elec .new-elec-trigger:hover {
+      background-color: rgb(65 31 39);
     }
 
     .emoji-box.bottom:before,

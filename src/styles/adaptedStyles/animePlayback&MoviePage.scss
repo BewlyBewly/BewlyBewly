@@ -50,7 +50,7 @@
   }
 
   [class*="mediainfo_mediaToolbar"] [class*="mediainfo_btnHome"],
-  .SectionSelector_SectionSelector__TZ_QZ .SectionSelector_sectionItem__rFNEH.SectionSelector_active__dySMp {
+  [class*="SectionSelector_SectionSelector"] [class*="SectionSelector_sectionItem"][class*="SectionSelector_active"] {
     background-color: var(--bew-theme-color-10);
   }
 
