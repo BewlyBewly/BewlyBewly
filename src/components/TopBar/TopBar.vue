@@ -848,7 +848,7 @@ defineExpose({
       --uno: "duration-300";
 
       &.hover {
-        --uno: "transform scale-230 important: translate-y-36px";
+        --uno: "transform scale-230 translate-y-36px";
       }
     }
 
