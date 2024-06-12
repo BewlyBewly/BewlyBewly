@@ -47,8 +47,8 @@ async function setupStyles() {
 
   // user note page 笔记页
   else if (/https?:\/\/space.bilibili\.com\.*\/v\/note-list/.test(currentUrl)) {
-    await import('./noteListPage.scss')
-    document.documentElement.classList.add('noteListPage')
+    await import('./notePage.scss')
+    document.documentElement.classList.add('notePage')
   }
 
   // user space page 空间页

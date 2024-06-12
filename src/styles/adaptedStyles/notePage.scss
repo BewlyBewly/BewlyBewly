@@ -1,6 +1,7 @@
-.bewly-design.noteListPage {
-  // 主题样式
-  :not(fjdsl) {
+.bewly-design.notePage {
+  // #region theme color adaption part
+  // Increase the priority of the style inside by writing a non-existent selector in `:not()`
+  :not(fdjslfds) {
     #page-series-index .no-channel-container em,
     .manage-note--header .tools-btns .edit-btn--ghost,
     .note-single-item .go-video-btn,
@@ -114,19 +115,20 @@
       color: white !important;
     }
   }
+  // #endregion
 
-  // 深色模式
+  // #region dark mode adaption part
   &.dark {
     .note-list .note-header,
     .note-list .note-tabs,
     .note-list-item,
     .note-single-item,
     .van-dialog {
-      background-color: var(--bg1);
+      background-color: var(--bew-bg);
     }
 
     .note-list-del-popup {
-      background-color: var(--bg2);
+      background-color: var(--bew-content-solid-1);
     }
 
     .note-list-item,
@@ -136,13 +138,13 @@
       }
     }
 
-    .note-list-item::-webkit-scrollbar-track {
-      background-color: var(--bg1);
-    }
+    // .note-list-item::-webkit-scrollbar-track {
+    //   background-color: var(--bg1);
+    // }
 
-    .editor-innter .ql-editor::-webkit-scrollbar-track {
-      background-color: var(--bew-content-1);
-    }
+    // .editor-innter .ql-editor::-webkit-scrollbar-track {
+    //   background-color: var(--bew-content-1);
+    // }
 
     .note-header .note-title .note-text,
     .note-single-item .note-item__detail--title,
@@ -214,28 +216,29 @@
       background-color: var(--bew-border-color);
     }
 
-    .ql-toolbar.ql-snow + .ql-container.ql-snow,
     .el-pagination.is-background .btn-next,
     .el-pagination.is-background .btn-prev,
     .el-pagination.is-background .el-pager li,
-    .ql-container {
-      background-color: var(--bew-content-1);
-    }
-
-    .note-single-item--selected,
-    .note-tooltip.info {
+    .ql-container,
+    #web-toolbar,
+    #web-toolbar .ql-picker-options,
+    .view-manage-note,
+    .note-tooltip.info,
+    .my-notes-manage-note {
       background-color: var(--bew-content-solid-1);
     }
 
-    .my-notes-manage-note,
-    #web-toolbar,
-    #web-toolbar .ql-picker-options,
-    .view-manage-note {
-      background-color: var(--bew-content-solid-2);
+    .ql-toolbar.ql-snow + .ql-container.ql-snow {
+      background-color: var(--bew-fill-1);
+    }
+
+    .note-single-item--selected {
+      background-color: var(--bew-fill-2);
     }
 
     .ql-toolbar.ql-snow .ql-picker-options {
       box-shadow: 0 2px 8px rgb(255 255 255 / 20%);
     }
   }
+  // #endregion
 }
