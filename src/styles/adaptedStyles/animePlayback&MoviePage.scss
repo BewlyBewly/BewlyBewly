@@ -49,7 +49,8 @@
     background-color: var(--bew-theme-color-80);
   }
 
-  [class*="mediainfo_mediaToolbar"] [class*="mediainfo_btnHome"] {
+  [class*="mediainfo_mediaToolbar"] [class*="mediainfo_btnHome"],
+  [class*="SectionSelector_SectionSelector"] [class*="SectionSelector_sectionItem"][class*="SectionSelector_active"] {
     background-color: var(--bew-theme-color-10);
   }
 
@@ -97,7 +98,8 @@
     .squirtle-single-side-setting
     .squirtle-single-setting-other-choice.active
     .squirtle-svg-icon.active
-    path {
+    path,
+  .bui-danmaku-switch-on path:nth-child(2) {
     fill: var(--bew-theme-color);
   }
 
@@ -210,6 +212,7 @@
       fill: var(--bew-border-color);
     }
   }
+
   // #endregion
 
   // #region Old anime playback & movie page
@@ -383,5 +386,6 @@
       background-color: var(--bew-bg);
     }
   }
+
   // #endregion
 }
