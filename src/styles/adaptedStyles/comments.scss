@@ -60,14 +60,16 @@
     filter: var(--bew-filter-icon-glow);
   }
 
-  // 登录后发表评论
-  .reply-box.disabled .box-normal .reply-box-warp .disable-mask .no-login-mask .login-btn:hover {
-    background-color: var(--bew-theme-color-80);
-  }
+  :not(fdjslfds) {
+    // 登录后发表评论
+    .reply-box.disabled .box-normal .reply-box-warp .disable-mask .no-login-mask .login-btn:hover {
+      background-color: var(--bew-theme-color-80);
+    }
 
-  // 登录后查看评论
-  .reply-list .login-prompt:hover {
-    background-color: var(--bew-theme-color-40);
+    // 登录后查看评论
+    .reply-list .login-prompt:hover {
+      background-color: var(--bew-theme-color-40);
+    }
   }
 
   &.dark {
