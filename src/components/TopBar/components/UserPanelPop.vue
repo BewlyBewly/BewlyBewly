@@ -145,12 +145,13 @@ async function logout() {
 
   a {
     --uno: "p-2 m-0 rounded-$bew-radius text-sm flex flex-col items-center transition-all duration-300";
-    --uno: "bg-$bew-fill-1 hover:bg-$bew-theme-color hover:text-white";
+    --uno: "bg-$bew-fill-1 hover:bg-$bew-theme-color";
 
     > * {
       --uno: "transition-all duration-300";
     }
 
+    &:hover .num,
     &:hover .num + div {
       --uno: "text-white";
     }
