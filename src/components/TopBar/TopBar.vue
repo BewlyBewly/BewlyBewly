@@ -426,6 +426,9 @@ defineExpose({
               v-show="showLogo"
               ref="logo" href="//www.bilibili.com"
               class="group logo"
+              :style="{
+                transform: popupVisible.channels ? `translateX(0)` : `translateX(calc(-1 * var(--bew-base-font-size)))`,
+              }"
               flex items-center border="1 transparent hover:$bew-border-color"
               rounded="50px" p="x-4" shadow="hover:$bew-shadow-2" duration-300
               bg="hover:$bew-theme-color dark-hover:white"
