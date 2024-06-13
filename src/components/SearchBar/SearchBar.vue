@@ -348,7 +348,7 @@ async function handleClearSearchHistory() {
   --b-search-bar-color-focus: var(--b-search-bar-color);
 
   @mixin card-content {
-    --uno: "text-base outline-none w-full bg-$b-search-bar-color transform-gpu";
+    --uno: "text-base outline-none w-full bg-$b-search-bar-color transform-gpu border-1 border-$bew-border-color";
     backdrop-filter: var(--bew-filter-glass-1);
     box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
   }

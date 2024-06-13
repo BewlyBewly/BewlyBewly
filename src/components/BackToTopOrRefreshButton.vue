@@ -16,15 +16,16 @@ const { reachTop } = useBewlyApp()
     <Button
       size="small"
       center
+      round
       style="
         --b-button-width: 45px;
         --b-button-height: 45px;
         --b-button-border-width: 1px;
         --b-button-color: var(--bew-elevated-1);
         --b-button-color-hover: var(--bew-elevated-1-hover);
-        --b-button-shadow: var(--bew-shadow-1);
-        --b-button-shadow-hover: var(--bew-shadow-2);
-        --b-button-shadow-active: var(--bew-shadow-1);
+        --b-button-shadow: var(--bew-shadow-1), var(--bew-shadow-edge-glow-1);
+        --b-button-shadow-hover: var(--bew-shadow-2), var(--bew-shadow-edge-glow-1);
+        --b-button-shadow-active: var(--bew-shadow-1), var(--bew-shadow-edge-glow-1);
         backdrop-filter: var(--bew-filter-glass-1);
       "
       transform-gpu
