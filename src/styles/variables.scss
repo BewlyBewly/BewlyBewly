@@ -11,10 +11,10 @@
     drop-shadow(0 0 0.5px var(--bew-theme-color)) drop-shadow(0 0 2px var(--bew-theme-color-80));
 
   // #region shadow
-  --bew-shadow-1: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.05);
-  --bew-shadow-2: 0 10px 15px -3px rgb(0 0 0 / 0.12), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --bew-shadow-3: 0 20px 25px -5px rgb(0 0 0 / 0.14), 0 8px 10px -6px rgb(0 0 0 / 0.12);
-  --bew-shadow-4: 0 34px 50px -20px rgb(0 0 0 / 0.16), 0 32px 45px -12px rgb(0 0 0 / 0.14),
+  --bew-shadow-1: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.04);
+  --bew-shadow-2: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.06);
+  --bew-shadow-3: 0 20px 25px -5px rgb(0 0 0 / 0.12), 0 8px 10px -6px rgb(0 0 0 / 0.08);
+  --bew-shadow-4: 0 34px 50px -20px rgb(0 0 0 / 0.14), 0 32px 45px -12px rgb(0 0 0 / 0.1),
     0 30px 40px -8px rgb(0 0 0 / 0.12);
 
   --bew-shadow-edge-glow-1: inset 0 0 4px rgba(0, 0, 0, 0.04);
@@ -136,11 +136,11 @@
   // dark mode
 
   // #region shadow
-  --bew-shadow-1: 0 4px 6px -1px rgb(0 0 0 / 0.15), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --bew-shadow-2: 0 10px 15px -3px rgb(0 0 0 / 0.22), 0 4px 6px -4px rgb(0 0 0 / 0.16);
-  --bew-shadow-3: 0 20px 25px -5px rgb(0 0 0 / 0.22), 0 8px 10px -6px rgb(0 0 0 / 0.16);
-  --bew-shadow-4: 0 34px 50px -20px rgb(0 0 0 / 0.44), 0 32px 45px -12px rgb(0 0 0 / 0.3),
-    0 30px 40px -8px rgb(0 0 0 / 0.18);
+  --bew-shadow-1: 0 4px 6px -1px rgb(0 0 0 / 0.18), 0 2px 4px -2px rgb(0 0 0 / 0.14);
+  --bew-shadow-2: 0 10px 15px -3px rgb(0 0 0 / 0.2), 0 4px 6px -4px rgb(0 0 0 / 0.16);
+  --bew-shadow-3: 0 20px 25px -5px rgb(0 0 0 / 0.22), 0 8px 10px -6px rgb(0 0 0 / 0.18);
+  --bew-shadow-4: 0 34px 50px -20px rgb(0 0 0 / 0.24), 0 32px 45px -12px rgb(0 0 0 / 0.2),
+    0 30px 40px -8px rgb(0 0 0 / 0.22);
 
   --bew-shadow-edge-glow-1: inset 0 0 4px rgba(255, 255, 255, 0.06);
   --bew-shadow-edge-glow-2: inset 0 0 8px rgba(255, 255, 255, 0.1);
