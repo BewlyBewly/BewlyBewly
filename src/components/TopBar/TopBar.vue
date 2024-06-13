@@ -690,7 +690,7 @@ defineExpose({
                 </a>
 
                 <Transition name="slide-in">
-                  <WatchLaterPop v-if="popupVisible.watchLater" class="bew-popover" />
+                  <WatchLaterPop v-if="popupVisible.watchLater" class="bew-popover" ml--30px />
                 </Transition>
               </div>
 
