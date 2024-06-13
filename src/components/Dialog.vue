@@ -103,7 +103,7 @@ function handleConfirm() {
         />
         <div
           style="
-            box-shadow: var(--bew-shadow-3) var(--bew-shadow-edge-glow-2);
+            box-shadow: var(--bew-shadow-3), var(--bew-shadow-edge-glow-2);
           "
           :style="{
             width: dialogWidth,
@@ -111,7 +111,7 @@ function handleConfirm() {
             backdropFilter: frostedGlass ? 'var(--bew-filter-glass-2)' : 'none',
             backgroundColor: frostedGlass ? 'var(--bew-elevated-1)' : 'var(--bew-elevated-solid-1)',
           }"
-          pos="absolute top-1/2 left-1/2" rounded="$bew-radius"
+          pos="absolute top-1/2 left-1/2" rounded="$bew-radius" border="1 $bew-border-color"
           transform="translate--1/2" z-2 overflow="x-hidden y-overlay"
           antialiased
         >
