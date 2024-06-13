@@ -98,7 +98,7 @@
         background-color: var(--bew-content-solid-1);
       }
 
-      &.el-popper,  // .el-select-dropdown.el-popper
+      &.el-popper,  // & -> .el-select-dropdown
       .btn_other,
       .area-code-select,
       .bili-mini-login-register-wrapper .register-btn {
@@ -126,7 +126,7 @@
         background-color: white;
       }
 
-      &.el-popper,  // .el-select-dropdown.el-popper
+      &.el-popper,  // & -> .el-select-dropdown
       .btn_other,
       .tab__form,
       .tab__form .form__separator-line,
@@ -140,12 +140,12 @@
         border-color: var(--bew-border-color);
       }
 
-      // .el-select-dropdown.el-popper[x-placement^="bottom"] .popper__arrow
+      // & -> .el-select-dropdown
       &.el-popper[x-placement^="bottom"] .popper__arrow {
         border-bottom-color: var(--bew-border-color);
       }
 
-      // .el-select-dropdown.el-popper[x-placement^="bottom"] .popper__arrow:after
+      // & -> .el-select-dropdown
       &.el-popper[x-placement^="bottom"] .popper__arrow:after {
         border-bottom-color: var(--bew-content-solid-2);
       }
