@@ -40,12 +40,6 @@ const handleThrottledBackToTop = useThrottleFn(() => handleBackToTop(), 1000)
 const topBarRef = ref()
 const reachTop = ref<boolean>(true)
 
-const isVideoPage = computed(() => {
-  if (/https?:\/\/(www.)?bilibili.com\/video\/.*/.test(location.href))
-    return true
-  return false
-})
-
 const isSearchPage = computed(() => {
   if (/https?:\/\/search.bilibili.com\/.*$/.test(location.href))
     return true
@@ -56,17 +50,18 @@ const isTopBarFixed = computed(() => {
   if (
     isHomePage()
     // video page
-    || /https?:\/\/(www.)?bilibili.com\/(video|list)\/.*/.test(location.href)
+    || /https?:\/\/(?:www.)?bilibili.com\/(?:video|list)\/.*/.test(location.href)
     // anime playback & movie page
-    || /https?:\/\/(www.)?bilibili.com\/bangumi\/play\/.*/.test(location.href)
+    || /https?:\/\/(?:www.)?bilibili.com\/bangumi\/play\/.*/.test(location.href)
     // moment page
     || /https?:\/\/t.bilibili.com.*/.test(location.href)
     // channel, anime, chinese anime, tv shows, movie, variety shows, mooc
-    || /https?:\/\/(www.)?bilibili.com\/(v|anime|guochuang|tv|movie|variety|mooc).*/.test(location.href)
+    || /https?:\/\/(?:www.)?bilibili.com\/(?:v|anime|guochuang|tv|movie|variety|mooc).*/.test(location.href)
     // articles page
-    || /https?:\/\/(www.)?bilibili.com\/read\/home.*/.test(location.href)
-  )
+    || /https?:\/\/(?:www.)?bilibili.com\/read\/home.*/.test(location.href)
+  ) {
     return true
+  }
   return false
 })
 
@@ -365,7 +360,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
           <main m-auto max-w="$bew-page-max-width">
             <div
               p="t-80px" m-auto
-              :w="isVideoPage ? '[calc(100%-160px)]' : 'lg:85% md:[calc(90%-60px)] [calc(100%-140px)]'"
+              w="lg:85% md:[calc(90%-60px)] [calc(100%-140px)]"
             >
               <!-- control button group -->
               <BackToTopOrRefreshButton

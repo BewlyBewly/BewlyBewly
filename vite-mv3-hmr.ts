@@ -97,8 +97,8 @@ function normalizeFsUrl(url: string, type: string) {
     normalizeViteUrl(url, type)
       .replace(/^\//, '')
       // `\0plugin-vue:export-helper` EXPORT_HELPER_ID
-      // eslint-disable-next-line no-control-regex
-      .replace(/\u0000/g, '__x00__')
+
+      .replace(/\0/g, '__x00__')
       // filenames starting with "_" are reserved for use by the system.
       .replace(/^_+/, match => '~'.repeat(match.length)),
   )

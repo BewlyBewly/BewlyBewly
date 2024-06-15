@@ -214,7 +214,7 @@ watch(
   (newVal, oldVal) => {
     // Stop loading new message counts on the message page, because it resets to 0 when the
     // users reads the messages on this page
-    if (oldVal === undefined && /https?:\/\/message.bilibili.com(.)*?$/.test(location.href))
+    if (oldVal === undefined && /https?:\/\/message.bilibili.com.*$/.test(location.href))
       return
 
     if (newVal === oldVal)
