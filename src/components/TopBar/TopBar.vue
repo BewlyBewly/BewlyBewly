@@ -75,7 +75,9 @@ const popupVisible = reactive({
   more: false,
 })
 const api = useApiClient()
-const isLogin = ref<boolean>(false)
+// initially, assume the user is logged in cuz data retrieval is slow, which may show the login
+// button even after login. if the user is not logged in, the login button will show up later
+const isLogin = ref<boolean>(true)
 const unReadMessage = reactive<UnReadMessage | NonNullable<unknown>>(
   {},
 ) as UnwrapNestedRefs<UnReadMessage>
@@ -210,12 +212,18 @@ watch(() => settings.value.autoHideTopBar, (newVal) => {
 watch(
   () => popupVisible.notifications,
   (newVal, oldVal) => {
+    // Stop loading new message counts on the message page, because it resets to 0 when the
+    // users reads the messages on this page
+    if (oldVal === undefined && /https?:\/\/message.bilibili.com.*$/.test(location.href))
+      return
+
     if (newVal === oldVal)
       return
 
     if (!newVal)
       getUnreadMessageCount()
   },
+  { immediate: true },
 )
 
 watch(
@@ -227,6 +235,7 @@ watch(
     if (!newVal)
       await getTopBarNewMomentsCount()
   },
+  { immediate: true },
 )
 
 watch(() => popupVisible.favorites, (newVal, oldVal) => {
@@ -257,8 +266,6 @@ onBeforeMount(() => {
 
 async function initData() {
   await getUserInfo()
-  getUnreadMessageCount()
-  getTopBarNewMomentsCount()
 
   // automatically update notifications and moments count
   setInterval(() => {
@@ -317,7 +324,7 @@ async function getUnreadMessageCount() {
 
   try {
     let res
-    res = await useApiClient().notification.getUnreadMsg()
+    res = await api.notification.getUnreadMsg()
     if (res.code === 0) {
       Object.assign(unReadMessage, res.data)
       Object.entries(unReadMessage).forEach(([key, value]) => {
@@ -328,7 +335,7 @@ async function getUnreadMessageCount() {
       })
     }
 
-    res = await useApiClient().notification.getUnreadDm()
+    res = await api.notification.getUnreadDm()
     if (res.code === 0) {
       Object.assign(unReadDm, res.data)
       if (typeof unReadDm.follow_unread === 'number')
@@ -350,7 +357,7 @@ async function getTopBarNewMomentsCount() {
   let result = 0
 
   try {
-    const res = await useApiClient().moment.getTopBarNewMomentsCount()
+    const res = await api.moment.getTopBarNewMomentsCount()
     if (res.code === 0) {
       if (typeof res.data.update_info.item.count === 'number')
         result = res.data.update_info.item.count
@@ -419,6 +426,9 @@ defineExpose({
               v-show="showLogo"
               ref="logo" href="//www.bilibili.com"
               class="group logo"
+              :style="{
+                transform: popupVisible.channels ? `translateX(0)` : `translateX(calc(-1 * var(--bew-base-font-size)))`,
+              }"
               flex items-center border="1 transparent hover:$bew-border-color"
               rounded="50px" p="x-4" shadow="hover:$bew-shadow-2" duration-300
               bg="hover:$bew-theme-color dark-hover:white"
@@ -473,9 +483,12 @@ defineExpose({
         flex="inline xl:1 justify-center items-center"
       >
         <div
-          style="backdrop-filter: var(--bew-filter-glass-1)"
+          style="
+            backdrop-filter: var(--bew-filter-glass-1);
+            box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
+          "
           ml-auto flex h-55px p-2 bg="$bew-elevated-1"
-          text="$bew-text-1" border="1 $bew-border-color" rounded-full shadow="$bew-shadow-2"
+          text="$bew-text-1" border="1 $bew-border-color" rounded-full
           transform-gpu
         >
           <div v-if="!isLogin" class="right-side-item">
@@ -677,7 +690,7 @@ defineExpose({
                 </a>
 
                 <Transition name="slide-in">
-                  <WatchLaterPop v-if="popupVisible.watchLater" class="bew-popover" />
+                  <WatchLaterPop v-if="popupVisible.watchLater" class="bew-popover" ml--30px />
                 </Transition>
               </div>
 
@@ -716,23 +729,24 @@ defineExpose({
               <a
                 href="https://member.bilibili.com/platform/upload/video/frame"
                 target="_blank"
+                :title="$t('topbar.upload')"
                 bg="$bew-theme-color"
                 rounded-40px
                 un-text="!white !base"
                 mx-1
                 flex="~"
                 justify="center"
-                w="xl:100px 38px"
-                h="xl:auto 38px"
-                p="xl:auto x-4"
+                w="38px"
+                h="38px"
+                p="x-4"
                 shadow
                 filter="hover:brightness-110"
                 style="--un-shadow: 0 0 10px var(--bew-theme-color-60)"
               >
                 <div i-mingcute:upload-2-line flex-shrink-0 />
-                <span m="l-2" class="hidden xl:block">{{
+                <!-- <span m="l-2" class="hidden xl:block">{{
                   $t('topbar.upload')
-                }}</span>
+                }}</span> -->
               </a>
 
               <Transition name="slide-in">
@@ -841,7 +855,7 @@ defineExpose({
       --uno: "duration-300";
 
       &.hover {
-        --uno: "transform scale-230 important: translate-y-36px";
+        --uno: "transform scale-230 translate-y-36px";
       }
     }
 

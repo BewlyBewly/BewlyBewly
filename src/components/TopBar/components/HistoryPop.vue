@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useDateFormat } from '@vueuse/core'
 import type { Ref } from 'vue'
-import { onMounted, reactive, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import Empty from '~/components/Empty.vue'
@@ -16,7 +15,7 @@ import { isHomePage, removeHttpFromUrl, scrollToTop } from '~/utils/main'
 const { t } = useI18n()
 const api = useApiClient()
 const historys = reactive<Array<HistoryItem>>([])
-const historyTabs = reactive([
+const historyTabs = computed(() => [
   {
     id: 0,
     name: t('topbar.moments_dropdown.tabs.videos'),
@@ -103,7 +102,7 @@ function onClickTab(tabId: number) {
     return
 
   activatedTab.value = tabId
-  historyTabs.forEach((tab) => {
+  historyTabs.value.forEach((tab) => {
     tab.isSelected = tab.id === tabId
   })
 }

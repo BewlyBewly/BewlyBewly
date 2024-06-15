@@ -123,8 +123,9 @@ async function handleMessage(payload: HMRPayload) {
           pagePath === payloadPath
           || payload.path === '/index.html'
           || (pagePath.endsWith('/') && `${pagePath}index.html` === payloadPath)
-        )
+        ) {
           location.reload()
+        }
       }
       else {
         location.reload()

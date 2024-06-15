@@ -15,8 +15,10 @@ defineProps<{
     </p>
 
     <main
+      style="box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-1);"
       mt-2 px-4 mx--4 rounded="$bew-radius"
       bg="$bew-content-1 dark:$bew-fill-1"
+      shadow="$bew-shadow-edge-glow-1"
     >
       <slot />
     </main>

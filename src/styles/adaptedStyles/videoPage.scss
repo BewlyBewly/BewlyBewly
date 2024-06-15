@@ -12,9 +12,48 @@
     position: relative;
   }
 
+  .qrcode .van-qrcode {
+    padding: 5px;
+  }
+
+  .qrcode .van-qrcode canvas {
+    width: 90px;
+    height: 90px;
+  }
+
   // #region theme color adaption part
   // Increase the priority of the style inside by writing a non-existent selector in `:not()`
   :not(fdjslfds) {
+    .content .group-list li input[type="checkbox"] + i {
+      border-width: 1px;
+      border-radius: 5px;
+      border-color: #bec3cc;
+    }
+
+    .coin-operated-m-exp .like-checkbox input[type="checkbox"]:checked + i {
+      border-radius: 3px;
+    }
+
+    .content .group-list li input[type="checkbox"]:checked + i,
+    .content .group-list li input[type="checkbox"]:checked:hover + i,
+    .coin-operated-m-exp .like-checkbox input[type="checkbox"]:checked + i,
+    .video-share-popover
+      .video-share-dropdown
+      .dropdown-top
+      .dropdown-top-left
+      .capture-bar
+      .bar-left
+      > label
+      #check-timestamp:checked::after {
+      background: var(--bew-theme-color) url(//s1.hdslb.com/bfs/static/jinkela/note-list/assets/ic_check.svg) no-repeat
+        50% / 9px;
+    }
+
+    .content .group-list li input[type="checkbox"] + i,
+    .content .group-list li input[type="checkbox"]:hover + i {
+      background: unset;
+    }
+
     .note-list .list-note-operation,
     .note-pc .note-container .note-header .note-operation,
     .note-up .up-desc-container .desc-top .attention-btn-container {
@@ -46,10 +85,12 @@
       background-color: var(--bew-theme-color-80) !important;
     }
 
+    .collection-m-exp .content .group-list .add-group .input-group .submit,
     .follow-dialog-wrap-exp .follow-dialog-window .content .group-list .add-group .input-group .submitGroup {
       background-color: var(--bew-theme-color-10);
     }
 
+    .video-sections-v1 .video-sections-head_first-line .first-line-left .first-line-title:hover,
     .note-detail .note-operation .tab-action-item.is-active .tab-icon {
       color: var(--bew-theme-color);
     }
@@ -81,7 +122,11 @@
 
     .coin-operated-m-exp .mc-box:hover,
     .coin-operated-m-exp .mc-box.on,
-    .note-pc .note-container .note-header .note-operation {
+    .note-pc .note-container .note-header .note-operation,
+    .content .group-list li:hover input[type="checkbox"] + i,
+    .content .group-list li input[type="checkbox"]:checked + i,
+    .content .group-list li input[type="checkbox"]:checked:hover + i,
+    .coin-operated-m-exp .like-checkbox input[type="checkbox"]:checked + i {
       border-color: var(--bew-theme-color);
     }
 
@@ -168,8 +213,7 @@
     .bpx-player-viewpoint-menu-item-active,
     .cur-play-icon,
     .playing-gif,
-    .multi-page-v1 .cur-list .list-box li.on img,
-    .coin-operated-m-exp .like-checkbox input[type="checkbox"]:checked + i {
+    .multi-page-v1 .cur-list .list-box li.on img {
       filter: var(--bew-filter-icon-glow);
     }
   }
@@ -197,6 +241,21 @@
     .resizable-component .ql-tag-blot .time-tag-item,
     .ql-toolbar {
       background-color: var(--bew-fill-1);
+    }
+
+    .bpx-player-container[data-revision="1"]
+      .bpx-player-sending-bar
+      .bpx-player-video-inputbar
+      .bpx-player-dm-btn-send.bui-disabled
+      .bui-button-blue,
+    .bpx-player-container[data-revision="2"]
+      .bpx-player-sending-bar
+      .bpx-player-video-inputbar
+      .bpx-player-dm-btn-send.bui-disabled
+      .bui-button-blue
+      .modal-wrapper
+      .modal-header-close:hover {
+      background-color: var(--bew-fill-3);
     }
 
     .note-pc .note-container,

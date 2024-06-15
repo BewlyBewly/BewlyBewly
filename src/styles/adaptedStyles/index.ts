@@ -34,15 +34,21 @@ async function setupStyles() {
   }
 
   // history page 历史记录页
-  else if (/https?:\/\/(www\.)?bilibili\.com\/account\/history.*/.test(currentUrl)) {
+  else if (/https?:\/\/(?:www\.)?bilibili\.com\/account\/history.*/.test(currentUrl)) {
     await import('./historyPage.scss')
     document.documentElement.classList.add('historyPage')
   }
 
   // watch later page 稍候再看页
-  else if (/https?:\/\/(www\.)?bilibili\.com\/watchlater\/#\/list.*/.test(currentUrl)) {
+  else if (/https?:\/\/(?:www\.)?bilibili\.com\/watchlater\/#\/list.*/.test(currentUrl)) {
     await import('./watchLaterPage.scss')
     document.documentElement.classList.add('watchLaterPage')
+  }
+
+  // user note page 笔记页
+  else if (/https?:\/\/space.bilibili\.com\.*\/v\/note-list/.test(currentUrl)) {
+    await import('./notePage.scss')
+    document.documentElement.classList.add('notePage')
   }
 
   // user space page 空间页
@@ -59,11 +65,11 @@ async function setupStyles() {
 
   // video page 视频页
   else if (
-    /https?:\/\/(www\.)?bilibili\.com\/video\/.*/.test(currentUrl)
+    /https?:\/\/(?:www\.)?bilibili\.com\/video\/.*/.test(currentUrl)
     // watch later playlist 稍候再看播放页
-    || /https?:\/\/(www\.)?bilibili\.com\/list\/watchlater.*/.test(currentUrl)
+    || /https?:\/\/(?:www\.)?bilibili\.com\/list\/watchlater.*/.test(currentUrl)
     // favorite playlist 收藏播放页
-    || /https?:\/\/(www\.)?bilibili\.com\/list\/ml.*/.test(currentUrl)
+    || /https?:\/\/(?:www\.)?bilibili\.com\/list\/ml.*/.test(currentUrl)
   ) {
     await import('./videoPage.scss')
     document.documentElement.classList.add('videoPage')
@@ -71,7 +77,7 @@ async function setupStyles() {
 
   else if (
     // anime playback & movie page 番剧播放页与电影播放页
-    /https?:\/\/(www\.)?bilibili\.com\/bangumi\/play\/.*/.test(currentUrl)
+    /https?:\/\/(?:www\.)?bilibili\.com\/bangumi\/play\/.*/.test(currentUrl)
   ) {
     await import('./animePlayback&MoviePage.scss')
     document.documentElement.classList.add('animePlaybackAndMoviePage')
@@ -79,26 +85,26 @@ async function setupStyles() {
 
   // anime page & chinese anime page 番剧页 与 国创动漫
   else if (
-    /https?:\/\/(www\.)?bilibili\.com\/(anime|guochuang).*/.test(currentUrl)) {
+    /https?:\/\/(?:www\.)?bilibili\.com\/(?:anime|guochuang).*/.test(currentUrl)) {
     await import('./animePage.scss')
     document.documentElement.classList.add('animePage')
   }
 
   // channel page e.g. tv shows, movie, variety shows, mooc page 分区页
   else if (
-    /https?:\/\/(www\.)?bilibili\.com\/(tv|movie|variety|mooc|documentary).*/.test(currentUrl)) {
+    /https?:\/\/(?:www\.)?bilibili\.com\/(?:tv|movie|variety|mooc|documentary).*/.test(currentUrl)) {
     await import('./channelPage.scss')
     document.documentElement.classList.add('channelPage')
   }
 
   // articles page 专栏页
-  else if (/https?:\/\/(www\.)?bilibili\.com\/read.*/.test(currentUrl)) {
+  else if (/https?:\/\/(?:www\.)?bilibili\.com\/read.*/.test(currentUrl)) {
     await import('./articlesPage.scss')
     document.documentElement.classList.add('articlesPage')
   }
 
   // 404 page 404页
-  else if (/^https?:\/\/(www\.)?bilibili\.com\/404.*$/.test(currentUrl)) {
+  else if (/^https?:\/\/(?:www\.)?bilibili\.com\/404.*$/.test(currentUrl)) {
     await import('./error404Page.scss')
     document.documentElement.classList.add('error404Page')
   }

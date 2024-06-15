@@ -118,6 +118,9 @@ function handleChangeTab(tab: HomeTab) {
     handleThrottledBackToTop(settings.value.useSearchPageModeOnHomePage ? 510 : 0)
   }
 
+  if (tabContentLoading.value)
+    toggleTabContentLoading(false)
+
   activatedPage.value = tab.page
 }
 

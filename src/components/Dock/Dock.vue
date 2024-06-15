@@ -258,8 +258,8 @@ function handleBackToTopOrRefresh() {
     --uno: "duration-300 ease-in-out transform-gpu";
     --uno: "p-2 m-2 bg-$bew-content-2 dark:bg-$bew-elevated-1";
     --uno: "flex flex-col gap-2 shrink-0";
-    --uno: "rounded-full border-$bew-border-color";
-    --uno: "shadow-$bew-shadow-2";
+    --uno: "rounded-full border-1 border-$bew-border-color";
+    box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
     backdrop-filter: var(--bew-filter-glass-1);
   }
 
@@ -274,7 +274,7 @@ function handleBackToTopOrRefresh() {
     --uno: "grid place-items-center";
     --uno: "filter-$bew-filter-glass-1";
     --uno: "bg-$bew-elevated-1 hover:bg-$bew-content-1-hover";
-    --uno: "rounded-full shadow-$bew-shadow-2";
+    --uno: "rounded-full shadow-$bew-shadow-2 border-1 border-$bew-border-color";
 
     backdrop-filter: var(--bew-filter-glass-1);
     transition:

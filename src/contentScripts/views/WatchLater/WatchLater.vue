@@ -106,7 +106,7 @@ function handleClearAllWatchLater() {
       csrf: getCSRF(),
     }).then((res) => {
       if (res.code === 0)
-        getAllWatchLaterList()
+        initData()
     }).finally(() => {
       isLoading.value = false
     })
@@ -124,7 +124,7 @@ function handleRemoveWatchedVideos() {
     })
       .then((res) => {
         if (res.code === 0)
-          getAllWatchLaterList()
+          initData()
       })
   }
 }

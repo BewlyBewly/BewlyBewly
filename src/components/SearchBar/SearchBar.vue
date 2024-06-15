@@ -207,8 +207,7 @@ async function handleClearSearchHistory() {
         p="l-6 r-18 y-3"
         h-50px
         text="$bew-text-1"
-        un-border="3 solid transparent focus:$bew-theme-color"
-        ring="1 $bew-border-color"
+        un-border="1 solid $bew-border-color focus:$bew-theme-color"
         transition="all duration-300"
         type="text"
         @focus="isFocus = true"
@@ -349,30 +348,24 @@ async function handleClearSearchHistory() {
   --b-search-bar-color-focus: var(--b-search-bar-color);
 
   @mixin card-content {
-    --uno: "text-base outline-none w-full bg-$b-search-bar-color shadow-$bew-shadow-2 transform-gpu";
+    --uno: "text-base outline-none w-full bg-$b-search-bar-color transform-gpu border-1 border-$bew-border-color";
     backdrop-filter: var(--bew-filter-glass-1);
+    box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
   }
 
   .search-bar {
     input {
       @include card-content;
-      --uno: "shadow-$bew-shadow-2";
 
       &:hover {
         --uno: "bg-$b-search-bar-color-hover";
-      }
-
-      &:focus {
-        --uno: "bg-$b-search-bar-color-focus";
-        box-shadow:
-          0 6px 16px var(--bew-theme-color-40),
-          inset 0 0 6px var(--bew-theme-color-30);
       }
     }
 
     &.focus input {
       --uno: "border-$bew-theme-color rounded-$bew-radius";
       box-shadow:
+        0 0 0 2px var(--bew-theme-color),
         0 6px 16px var(--bew-theme-color-40),
         inset 0 0 6px var(--bew-theme-color-30);
     }
