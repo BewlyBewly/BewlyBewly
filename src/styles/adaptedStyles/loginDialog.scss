@@ -99,17 +99,20 @@
       }
 
       &.el-popper,  // & -> .el-select-dropdown
-      .btn_other,
-      .area-code-select,
-      .bili-mini-login-register-wrapper .register-btn {
-        background-color: var(--bew-content-solid-2);
+      .area-code-select {
+        background-color: var(--bew-elevated-solid-1);
+      }
+
+      .bili-mini-login-register-wrapper .register-btn,
+      .btn_other {
+        background-color: transparent;
       }
 
       .area-code-select .option:hover,
       .forget-tip .forget-tip-line:hover,
       .el-select-dropdown__item.hover,
       .el-select-dropdown__item:hover {
-        background-color: var(--bew-bg);
+        background-color: var(--bew-fill-2);
       }
 
       .login-tab-line,
