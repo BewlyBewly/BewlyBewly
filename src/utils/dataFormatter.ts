@@ -33,7 +33,7 @@ export function numFormatter(num: number) {
       { value: 1e9, symbol: 'B' },
     ]
   }
-  const rx = /\.0+$|(\.[0-9]*[1-9])0+$/
+  const rx = /\.0+$|(\.\d*[1-9])0+$/
   const item = lookup.slice().reverse().find((item) => {
     return num >= item.value
   })

@@ -73,8 +73,9 @@ onMounted(() => {
         >= momentsWrap.value.scrollHeight - 20
         && moments.length > 0
         && !isLoading.value
-      )
+      ) {
         getData()
+      }
     })
   }
 })
