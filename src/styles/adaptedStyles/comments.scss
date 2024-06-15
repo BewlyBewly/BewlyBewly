@@ -303,6 +303,22 @@
       border-color: var(--Ye1);
       color: var(--Or7);
     }
+
+    // .show-reply
+    .sub-reply-item.show-reply,
+    .reply-item .root-reply-container.show-reply {
+      background-color: var(--bew-content-solid-1-hover);
+      animation-name: enterAnimation-jumpReply;
+    }
+
+    @keyframes enterAnimation-jumpReply {
+      0% {
+        background-color: var(--bew-content-solid-1-hover);
+      }
+      100% {
+        background-color: #dff6fb00;
+      }
+    }
   }
   // #endregion
 }
