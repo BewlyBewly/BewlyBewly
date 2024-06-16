@@ -39,7 +39,8 @@
     .normal-article-holder a,
     .read-article-holder .card-text-label,
     .share-dynamic-dialog .sdd-card .name,
-    .bili-dialog-bomb .appeal-box .wrap .container .textarea .memo a {
+    .bili-dialog-bomb .appeal-box .wrap .container .textarea .memo a,
+    .article-tags .tag-item:hover {
       color: var(--bew-theme-color);
     }
 

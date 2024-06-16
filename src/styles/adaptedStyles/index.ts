@@ -104,6 +104,18 @@ async function setupStyles() {
     document.documentElement.classList.add('articlesPage')
   }
 
+  // articles list page 专栏列表页
+  else if (/https?:\/\/(?:www\.)?bilibili\.com\/read\/readlist.*/.test(currentUrl)) {
+    await import('./articlesListPage.scss')
+    document.documentElement.classList.add('articlesListPage')
+  }
+
+  // articles ranking page 专栏排行榜页
+  else if (/https?:\/\/(?:www\.)?bilibili\.com\/read\/ranking.*/.test(currentUrl)) {
+    await import('./articlesRankingPage.scss')
+    document.documentElement.classList.add('articlesRankingPage')
+  }
+
   // 404 page 404页
   else if (/^https?:\/\/(?:www\.)?bilibili\.com\/404.*$/.test(currentUrl)) {
     await import('./error404Page.scss')

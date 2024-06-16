@@ -1,0 +1,51 @@
+.bewly-design.articlesRankingPage {
+  // #region theme color adaption part
+  // Increase the priority of the style inside by writing a non-existent selector in `:not()`
+  :not(fdjslfds) {
+    #App .rank-module .tab-bar .tab-item.on,
+    #App .rank-module .tab-bar .tab-item:hover,
+    #App .rank-module .article-list .article-item .item-holder .article-content:hover .article-title,
+    #App
+      .rank-module
+      .article-list
+      .article-item
+      .item-holder
+      .article-content
+      .article-left-block
+      .article-info-bar
+      .reply:hover,
+    #App .rank-module .article-list .article-item .item-holder .score-module .score {
+      color: var(--bew-theme-color);
+    }
+
+    #App .rank-module .tab-bar .tab-item.on {
+      border-color: var(--bew-theme-color);
+    }
+  }
+  // #endregion
+
+  // #region dark mode adaption part
+  &.dark {
+    #App,
+    #App .rank-module .article-list .article-item .item-holder .article-content .article-title {
+      color: var(--bew-text-1);
+    }
+
+    #App .rank-module .tips {
+      color: var(--bew-text-2);
+    }
+
+    #App .rank-module .tips {
+      background-color: var(--bew-fill-1);
+    }
+
+    #App .rank-module .article-list .article-item {
+      background-color: var(--bew-bg);
+    }
+
+    #App .rank-module .article-list .article-item .item-holder .article-content {
+      border-color: var(--bew-border-color);
+    }
+  }
+  // #endregion
+}
