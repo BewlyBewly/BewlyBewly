@@ -98,6 +98,12 @@ async function setupStyles() {
     document.documentElement.classList.add('channelPage')
   }
 
+  // articles page 专栏页
+  else if (/https?:\/\/(?:www\.)?bilibili\.com\/read.*/.test(currentUrl)) {
+    await import('./articlesPage.scss')
+    document.documentElement.classList.add('articlesPage')
+  }
+
   // articles list page 专栏列表页
   else if (/https?:\/\/(?:www\.)?bilibili\.com\/read\/readlist.*/.test(currentUrl)) {
     await import('./articlesListPage.scss')
@@ -108,12 +114,6 @@ async function setupStyles() {
   else if (/https?:\/\/(?:www\.)?bilibili\.com\/read\/ranking.*/.test(currentUrl)) {
     await import('./articlesRankingPage.scss')
     document.documentElement.classList.add('articlesRankingPage')
-  }
-
-  // articles page 专栏页
-  else if (/https?:\/\/(?:www\.)?bilibili\.com\/read.*/.test(currentUrl)) {
-    await import('./articlesPage.scss')
-    document.documentElement.classList.add('articlesPage')
   }
 
   // 404 page 404页
