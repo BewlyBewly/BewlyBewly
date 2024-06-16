@@ -18,10 +18,6 @@
       color: var(--bew-theme-color);
     }
 
-    #App .rank-module .tips {
-      background-color: var(--bew-theme-color-20);
-    }
-
     #App .rank-module .tab-bar .tab-item.on {
       border-color: var(--bew-theme-color);
     }
@@ -37,6 +33,10 @@
 
     #App .rank-module .tips {
       color: var(--bew-text-2);
+    }
+
+    #App .rank-module .tips {
+      background-color: var(--bew-fill-1);
     }
 
     #App .rank-module .article-list .article-item {
