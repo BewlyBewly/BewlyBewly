@@ -107,13 +107,15 @@ if (settings.value.adaptToOtherPageStyles && isHomePage()) {
 }
 
 if (isSupportedPages()) {
-  // remove the original top bar
+  // remove the original top bar and adjust the height of the top bar to match the bewly top bar
   injectCSS(`
     .bili-header .bili-header__bar,
     #internationalHeader,
     .link-navbar,
-    #home_nav {
+    #home_nav,
+    #biliMainHeader {
       visibility: hidden;
+      height: var(--bew-top-bar-height) !important;
     }
   `)
 }

@@ -386,8 +386,10 @@ defineExpose({
     :class="{ hide: hideTopBar }"
   >
     <main
-      max-w="$bew-page-max-width" m-auto flex="~ justify-between items-center gap-4"
-      p="lg:x-20 md:x-16 x-14" h="70px"
+      max-w="$bew-page-max-width"
+      flex="~ justify-between items-center gap-4"
+      p="lg:x-20 md:x-16 x-14" m-auto
+      h="$bew-top-bar-height"
     >
       <!-- Top bar mask -->
       <div
