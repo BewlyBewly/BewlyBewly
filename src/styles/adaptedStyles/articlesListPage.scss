@@ -1,0 +1,74 @@
+.bewly-design.articlesListPage {
+  // #region theme color adaption part
+  // Increase the priority of the style inside by writing a non-existent selector in `:not()`
+  :not(fdjslfds) {
+    .list-container .article-list-block .article-item .item-holder .article-content:hover .article-title,
+    .list-container
+      .article-list-block
+      .article-item
+      .item-holder
+      .article-content
+      .article-left-block
+      .article-info-bar
+      .reply:hover {
+      color: var(--bew-theme-color);
+    }
+
+    .error-container .error-panel .rollback-btn,
+    .error-container .error-manga .change-img-btn,
+    .list-container .list-info-block .right-side .up-info-block .follow-btn:not(.on),
+    .modalBox .sure {
+      background-color: var(--bew-theme-color);
+    }
+  }
+  // #endregion
+
+  // #region dark mode adaption part
+  &.dark {
+    .list-container .list-info-block .right-side .title,
+    .list-container .list-info-block .right-side .up-info-block .up-name,
+    .list-container .article-list-block .article-item .item-holder .article-content .article-title,
+    .modalBox,
+    .modalBox .cancel {
+      color: var(--bew-text-1);
+    }
+
+    .list-container .list-info-block .right-side .col,
+    .list-container .list-info-block .right-side .summary,
+    .list-container .list-info-block .right-side .up-info-block .follow-btn.on {
+      color: var(--bew-text-2);
+    }
+
+    .error-container .error-panel,
+    .error-container .error-split,
+    .error-container .error-manga,
+    .list-container .list-info-block,
+    .list-container .article-list-block,
+    .list-container .article-list-block .article-item {
+      background-color: var(--bew-bg);
+    }
+
+    .modalBox {
+      background-color: var(--bew-content-solid-1);
+    }
+
+    .list-container .list-info-block .right-side .col .split-line {
+      background-color: var(--bew-border-color);
+    }
+
+    .list-container .list-info-block .right-side .up-info-block .follow-btn.on {
+      background-color: var(--bew-fill-1);
+    }
+
+    .modalBox .cancel {
+      background-color: var(--bew-fill-2);
+    }
+
+    .list-container .list-info-block .right-side .up-info-block .follow-btn.on,
+    .list-container .article-list-block .article-item .item-holder .article-content .article-left-block,
+    .modalBox .cancel {
+      border-color: var(--bew-border-color);
+    }
+  }
+  // #endregion
+}
