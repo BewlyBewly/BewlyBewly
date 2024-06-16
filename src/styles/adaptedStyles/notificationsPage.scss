@@ -1,20 +1,11 @@
-#message-navbar {
-  display: none;
-
-  + .container {
-    margin-top: 0;
-    padding-top: 70px;
-    height: calc(100vh - 70px);
-  }
-}
 .bewly-design.notificationsPage {
   #message-navbar {
     display: none;
 
     + .container {
       margin-top: 0;
-      padding-top: 70px;
-      height: calc(100vh - 70px);
+      padding-top: var(--bew-top-bar-height);
+      height: calc(100vh - var(--bew-top-bar-height));
 
       &::after {
         content: "";
