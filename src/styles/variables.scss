@@ -1,31 +1,53 @@
 :host,
 :root {
+  --bew-page-max-width: 2280px;
+
   --bew-base-font-size: 14px;
+
   --bew-radius: 12px;
   --bew-radius-half: calc(var(--bew-radius) / 2);
 
   --bew-top-bar-height: 70px;
 
+  // #region Filters
+  // Use this in all components (except dialogs) if you want to add a frosted glass effect
   --bew-filter-glass-1: blur(20px) saturate(180%);
+
+  // Use this in dialogs if you want to add a frosted glass effect
   --bew-filter-glass-2: blur(40px) saturate(180%);
+
+  // Apply this to the Bilibili icon if it is an image with the brand's original blue or pink color
+  // Change it to glow effect to matches the user's theme color
   --bew-filter-icon-glow: saturate(0) brightness(2) drop-shadow(0 0 0.2px white)
     drop-shadow(0 0 0.5px var(--bew-theme-color)) drop-shadow(0 0 0.5px var(--bew-theme-color))
     drop-shadow(0 0 0.5px var(--bew-theme-color)) drop-shadow(0 0 2px var(--bew-theme-color-80));
+  // #endregion
 
-  // #region shadow
+  // #region Shadows
+  // The shadows of the card, button, and other slightly elevated components1
   --bew-shadow-1: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.04);
+
+  // The shadows of the top bar, header, elevated fixed buttons/cards and other components that are in the a fixed or sticky position
   --bew-shadow-2: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.06);
+
+  // The shadows of the popover, dropdown
   --bew-shadow-3: 0 20px 25px -5px rgb(0 0 0 / 0.12), 0 8px 10px -6px rgb(0 0 0 / 0.08);
+
+  // Only used in the dialog
   --bew-shadow-4: 0 34px 50px -20px rgb(0 0 0 / 0.14), 0 32px 45px -12px rgb(0 0 0 / 0.1),
     0 30px 40px -8px rgb(0 0 0 / 0.12);
 
+  // Use this to imitate the frosted glass edge effect in components with a frosted glass design (except dialogs)
   --bew-shadow-edge-glow-1: inset 0 0 4px rgba(0, 0, 0, 0.04);
+
+  // Use this for dialogs with the frosted glass effect
   --bew-shadow-edge-glow-2: inset 0 0 8px rgba(0, 0, 0, 0.06);
   // #endregion
 
+  // #region Theme Color & Status Colors
   --bew-logo-color: var(--bew-theme-color);
 
-  // #region colors
+  // In light mode use the theme color; in dark mode use white
   --bew-theme-color-auto: var(--bew-theme-color);
 
   --bew-theme-color: rgb(0 161 214);
@@ -84,7 +106,8 @@
   --bew-error-color-90: rgba(219 65 108 / 0.9);
   // #endregion
 
-  // #region text colors
+  // #region Text colors
+  // In light mode, use black; in dark mode, use white
   --bew-text-auto: white;
 
   --bew-text-1: hsl(217 19% 10%);
@@ -93,14 +116,19 @@
   --bew-text-4: hsl(215 19% 36% / 40%);
   // #endregion
 
+  // #region Webpage background colors
+  // Used as a webpage background color, but not on the Bilibili homepage (www.bilibili.com)
   --bew-bg: hsl(0 0% 100%);
+
+  // Used as the background color of the Bilibili homepage (www.bilibili.com)
   --bew-homepage-bg: hsl(240 31% 96%);
   --bew-homepage-bg-mask-opacity: 0;
   --bew-homepage-bg-mask: hsl(240 31% 96% / var(--bew-homepage-bg-mask-opacity));
+  // #endregion
 
   --bew-content-opacity: 0.74;
 
-  // #region content colors, used to buttons, cards, popover and so on
+  // #region Content colors, used to buttons, cards, popover and so on
   --bew-content-1: hsl(0 0% 100% / var(--bew-content-opacity));
   --bew-content-1-hover: hsl(0 0% 85% / var(--bew-content-opacity));
   --bew-content-2: hsl(240 31% 95% / var(--bew-content-opacity));
@@ -120,17 +148,24 @@
   --bew-elevated-solid-1-hover: hsl(0 0% 85%);
   --bew-elevated-solid-2: hsl(0 0% 100%);
   --bew-elevated-solid-2-hover: hsl(0 0% 85%);
-
   // #endregion
 
+  // #region Gray semi-transparent colors
+  // You can used for buttons, input fields and the other components on the top of elements
   --bew-fill-1: rgba(131 131 145 / 13%);
+
+  // Used this for hovering color if it within the top layer of elements,
+  // not just when hovering over the element itself; otherwise, use `--bew-content-*-hover` or `--bew-elevated--hover`
   --bew-fill-2: rgb(131 131 145 / 23%);
+
+  // You can used for the disabled state of elements on the top layer
   --bew-fill-3: rgb(131 131 145 / 33%);
+
+  // You can use this as the frosted glass mask, such as on the right side of the "Watch Later" page panel and the "Favorites" page panel
   --bew-fill-4: rgb(131 131 145 / 43%);
+  // #endregion
 
   --bew-border-color: rgb(131 131 145 / 18%);
-
-  --bew-page-max-width: 2280px;
 }
 
 :host(.dark),
