@@ -23,7 +23,7 @@
 
   // #region theme color adaption part
   // Increase the priority of the style inside by writing a non-existent selector in `:not()`
-  :not(fdjslfds) {
+  :not(foobar) {
     .content .group-list li input[type="checkbox"] + i {
       border-width: 1px;
       border-radius: 5px;

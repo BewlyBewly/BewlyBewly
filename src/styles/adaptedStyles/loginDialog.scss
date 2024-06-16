@@ -1,0 +1,187 @@
+.bewly-design {
+  // #region theme color adaption part
+  // Increase the priority of the style inside by writing a non-existent selector in `:not()`
+  :not(foobar) {
+    // 视频页 | 番剧播放页
+    .bili-mini,
+    .el-select-dropdown,
+    // 空间页 | 搜索页 | 电影播放页 | 专栏页 | 番剧页 | 国创动漫页 | 首页(未登录情况下等待一段时间后会弹)
+    .bili-mini-mask {
+      // 密码输入框的眼睛组件
+      // 使用 !important 可能不是一个好的解决方法, 但这是我找到的唯一一个可行的方法
+      .eye-btn {
+        --thememini-color: var(--bew-theme-color) !important;
+      }
+
+      .bili-mini-content-wp .login-scan-desc p a,
+      .login-tab-item.active-tab,
+      .clickable,
+      .login-agreement-wp span,
+      .area-code-select .checked,
+      .bili-mini-password .forget,
+      .bili-mini-tab .isActive,
+      .bili-mini-scan-text a,
+      .bili-mini-tel .bili-mini-tel_right .text,
+      .bili-mini-agreement-wrapper a,
+      .bili-mini-login-register-wrapper .register-btn:hover {
+        color: var(--bew-theme-color);
+      }
+
+      .el-select-dropdown__item.selected {
+        color: var(--bew-theme-color) !important;
+      }
+
+      .btn_primary,
+      .bili-mini-login-register-wrapper .login-btn {
+        background-color: var(--bew-theme-color);
+      }
+
+      .btn_primary.disabled {
+        background-color: var(--bew-theme-color) !important;
+      }
+
+      .bili-mini-login-register-wrapper .login-btn:hover {
+        background-color: var(--bew-theme-color-80);
+      }
+
+      .bili-mini-login-register-wrapper .register-btn:hover {
+        border-color: var(--bew-theme-color);
+      }
+    }
+  }
+  // #endregion
+
+  // #region dark mode adaption part
+  &.dark {
+    .bili-mini,
+    .el-select-dropdown,
+    .bili-mini-mask {
+      .bili-mini-content-wp .login-scan-title,
+      .bili-mini-content-wp .login-scan-desc p,
+      .login-tab-item,
+      .tab__form,
+      .btn_other,
+      .forget-tip .title,
+      .bili-mini-customer-title,
+      .bili-mini-scan-title,
+      .bili-mini-scan-text,
+      .bili-mini-login-register-wrapper .register-btn,
+      .bili-mini-tab,
+      .bili-mini-account .text,
+      .bili-mini-password .text,
+      .bili-mini-account input,
+      .bili-mini-password input,
+      .bili-mini-code .text,
+      .bili-mini-code input,
+      .bili-mini-tel .bili-mini-tel_left .el-input__inner,
+      .bili-mini-tel .bili-mini-tel_left .tel-input {
+        color: var(--bew-text-1);
+      }
+
+      .login-sns-title,
+      .login-sns-name,
+      .login-agreement-wp p,
+      .login-agreement-wp .link_word,
+      .forget-tip .desc,
+      .el-select-dropdown__item,
+      .third-party-login-wrapper .title,
+      .third-party-login-wrapper .sns,
+      .bili-mini-agreement-wrapper {
+        color: var(--bew-text-2);
+      }
+
+      .bili-mini-content-wp,
+      .bili-mini-content-wp .scan-tips-icon,
+      .forget-tip,
+      .bili-mini,
+      .el-input__inner {
+        background-color: var(--bew-content-solid-1);
+      }
+
+      &.el-popper,  // & -> .el-select-dropdown
+      .area-code-select {
+        background-color: var(--bew-elevated-solid-1);
+      }
+
+      .bili-mini-login-register-wrapper .register-btn,
+      .btn_other {
+        background-color: transparent;
+      }
+
+      .area-code-select .option:hover,
+      .forget-tip .forget-tip-line:hover,
+      .el-select-dropdown__item.hover,
+      .el-select-dropdown__item:hover {
+        background-color: var(--bew-fill-2);
+      }
+
+      .login-tab-line,
+      .bili-mini-line,
+      .bili-mini-tab-line,
+      .bili-mini-tel .bili-mini-tel_right .line {
+        background-color: var(--bew-border-color);
+      }
+
+      .bili-mini-content-wp .login-scan-box,
+      .bili-mini-content-wp .login_qrcode_tip,
+      .bili-mini-content-wp .login-client-qr-code,
+      .bili-mini-scan-code {
+        background-color: white;
+      }
+
+      &.el-popper,  // & -> .el-select-dropdown
+      .btn_other,
+      .tab__form,
+      .tab__form .form__separator-line,
+      .login-sms-wp__vertical-line,
+      .area-code-select,
+      .bili-mini-account,
+      .bili-mini-password,
+      .bili-mini-tel,
+      .bili-mini-code,
+      .bili-mini-login-register-wrapper .register-btn {
+        border-color: var(--bew-border-color);
+      }
+
+      // & -> .el-select-dropdown
+      &.el-popper[x-placement^="bottom"] .popper__arrow {
+        border-bottom-color: var(--bew-border-color);
+      }
+
+      // & -> .el-select-dropdown
+      &.el-popper[x-placement^="bottom"] .popper__arrow:after {
+        border-bottom-color: var(--bew-content-solid-2);
+      }
+
+      .tab__form .form__item input,
+      .bili-mini-account input,
+      .bili-mini-password input {
+        box-shadow: inset 0 0 0 1000px var(--bew-content-solid-1);
+      }
+
+      .bili-mini-content-wp .login-client-qr-code img,
+      .bili-mini-scan-download {
+        box-shadow: 0 0 0 5px white;
+      }
+
+      .bili-mini-content-wp .login-client-qr-code {
+        border-radius: 10px;
+      }
+
+      // 弹窗窗口关闭按钮
+      .bili-mini-close-icon {
+        filter: invert(1);
+      }
+
+      .forget-tip .arrow {
+        display: none;
+      }
+
+      // 因为隐藏了 .forget-tip .arrow , 所以这里调整一下位置
+      .forget-tip {
+        top: 40px;
+      }
+    }
+  }
+  // #endregion
+}

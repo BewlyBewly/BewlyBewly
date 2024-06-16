@@ -1,76 +1,82 @@
 .bewly-design {
   // #region new comments components
-  // 評論人用戶名
-  .reply-item .root-reply-container .content-warp .user-info .user-name,
-  .sub-reply-item .sub-user-info .sub-user-name {
-    // --520c991b: var(--bew-theme-color);
-    color: var(--bew-text-1) !important;
-  }
 
-  // UP主觉得很赞
-  .reply-item .root-reply-container .content-warp .root-reply .reply-tag-list .reply-tag-item {
-    color: var(--bew-text-2) !important;
-    background-color: var(--bew-fill-1) !important;
-  }
-
-  // Like & dislike icon
-  .like-icon,
-  .dislike-icon,
-  .sub-like-icon,
-  .sub-dislike-icon {
-    color: var(--bew-text-3) !important;
-  }
-
-  .like-icon:hover,
-  .like-icon.liked,
-  .dislike-icon:hover,
-  .dislike-icon.disliked,
-  .sub-like-icon:hover,
-  .sub-like-icon.liked,
-  .sub-dislike-icon:hover,
-  .sub-dislike-icon.disliked {
-    color: var(--bew-theme-color) !important;
-  }
-
-  .reply-operation .operation-icon:hover,
-  .bb-comment .comment-list .list-item .text .vote-link,
-  .comment-bilibili-fold .comment-list .list-item .text .vote-link,
-  .bb-comment .comment-list .list-item .text-con .vote-link,
-  .comment-bilibili-fold .comment-list .list-item .text-con .vote-link,
-  .bb-comment .comment-list .list-item .text .lottery-link,
-  .comment-bilibili-fold .comment-list .list-item .text .lottery-link,
-  .bb-comment .comment-list .list-item .text-con .lottery-link,
-  .comment-bilibili-fold .comment-list .list-item .text-con .lottery-link,
-  .bb-comment .comment-list .list-item .text .comment-jump-url,
-  .comment-bilibili-fold .comment-list .list-item .text .comment-jump-url,
-  .bb-comment .comment-list .list-item .text-con .comment-jump-url,
-  .comment-bilibili-fold .comment-list .list-item .text-con .comment-jump-url {
-    color: var(--bew-theme-color);
-  }
-
-  .bili-comment.browser-pc * a:hover {
-    color: var(--bew-theme-color-80);
-  }
-
-  .reply-content-container .reply-content .icon,
-  .bb-comment .comment-list .list-item .text .jump-img,
-  .comment-bilibili-fold .comment-list .list-item .text .jump-img,
-  .bb-comment .comment-list .list-item .text-con .jump-img,
-  .comment-bilibili-fold .comment-list .list-item .text-con .jump-img {
-    filter: var(--bew-filter-icon-glow);
-  }
-
-  &.dark {
-    // Comment input box
-    // .reply-box .box-normal .reply-box-warp .reply-box-textarea {
-    //   background-color: var(--bew-fill-1);
-    //   border-color: var(--bew-border-color);
-    // }
-
-    .bili-comment.browser-pc {
-      // background-color: var(--bew-content-solid-1);
+  // #region theme color adaption part
+  // Increase the priority of the style inside by writing a non-existent selector in `:not()`
+  :not(foobar) {
+    .like-icon:hover,
+    .like-icon.liked,
+    .dislike-icon:hover,
+    .dislike-icon.disliked,
+    .sub-like-icon:hover,
+    .sub-like-icon.liked,
+    .sub-dislike-icon:hover,
+    .sub-dislike-icon.disliked {
+      color: var(--bew-theme-color) !important;
     }
 
+    .reply-operation .operation-icon:hover,
+    .bb-comment .comment-list .list-item .text .vote-link,
+    .comment-bilibili-fold .comment-list .list-item .text .vote-link,
+    .bb-comment .comment-list .list-item .text-con .vote-link,
+    .comment-bilibili-fold .comment-list .list-item .text-con .vote-link,
+    .bb-comment .comment-list .list-item .text .lottery-link,
+    .comment-bilibili-fold .comment-list .list-item .text .lottery-link,
+    .bb-comment .comment-list .list-item .text-con .lottery-link,
+    .comment-bilibili-fold .comment-list .list-item .text-con .lottery-link,
+    .bb-comment .comment-list .list-item .text .comment-jump-url,
+    .comment-bilibili-fold .comment-list .list-item .text .comment-jump-url,
+    .bb-comment .comment-list .list-item .text-con .comment-jump-url,
+    .comment-bilibili-fold .comment-list .list-item .text-con .comment-jump-url {
+      color: var(--bew-theme-color);
+    }
+
+    .bili-comment.browser-pc * a:hover {
+      color: var(--bew-theme-color-80);
+    }
+
+    // 登录后发表评论
+    .reply-box.disabled .box-normal .reply-box-warp .disable-mask .no-login-mask .login-btn:hover {
+      background-color: var(--bew-theme-color-80);
+    }
+
+    // 登录后查看评论
+    .reply-list .login-prompt:hover {
+      background-color: var(--bew-theme-color-40);
+    }
+
+    .reply-content-container .reply-content .icon,
+    .bb-comment .comment-list .list-item .text .jump-img,
+    .comment-bilibili-fold .comment-list .list-item .text .jump-img,
+    .bb-comment .comment-list .list-item .text-con .jump-img,
+    .comment-bilibili-fold .comment-list .list-item .text-con .jump-img {
+      filter: var(--bew-filter-icon-glow);
+    }
+  }
+  // #endregion
+
+  // #region dark mode adaption part
+  &.dark {
+    // 評論人用戶名
+    .reply-item .root-reply-container .content-warp .user-info .user-name,
+    .sub-reply-item .sub-user-info .sub-user-name {
+      // --520c991b: var(--bew-theme-color);
+      color: var(--bew-text-1) !important;
+    }
+
+    // UP主觉得很赞
+    .reply-item .root-reply-container .content-warp .root-reply .reply-tag-list .reply-tag-item {
+      color: var(--bew-text-2) !important;
+      background-color: var(--bew-fill-1) !important;
+    }
+
+    // Like & dislike icon
+    .like-icon,
+    .dislike-icon,
+    .sub-like-icon,
+    .sub-dislike-icon {
+      color: var(--bew-text-3) !important;
+    }
     .reply-box .box-normal .reply-box-warp,
     .reply-box .box-expand .reply-box-emoji .emoji-btn,
     .reply-box .box-expand .at-btn,
@@ -87,6 +93,8 @@
       filter: invert(1) hue-rotate(180deg);
     }
   }
+  // #endregion
+
   // #endregion
 
   // #region Old comments components

@@ -3,29 +3,35 @@
     background-color: var(--bew-bg);
   }
 
-  #bili-header-container {
-    // background-color: var(--bew-bg) !important;
-  }
-
   .z-top-container {
     background-color: transparent;
     box-shadow: none;
   }
 
-  .bili-header .bili-header__channel .channel-entry-more__link--current,
-  .bili-header .bili-header__channel .channel-link--current {
-    color: var(--bew-theme-color);
-  }
+  // #region theme color adaption part
+  // Increase the priority of the style inside by writing a non-existent selector in `:not()`
+  :not(foobar) {
+    .bili-header .bili-header__channel .channel-entry-more__link--current,
+    .bili-header .bili-header__channel .channel-link--current {
+      color: var(--bew-theme-color);
+    }
 
-  .card-loaded {
-    background-color: var(--bew-elevated-solid-1);
-  }
+    .brand_blue {
+      color: var(--bew-theme-color) !important;
+    }
 
-  .brand_blue {
-    color: var(--bew-theme-color) !important;
+    .login-tip {
+      background: var(--bew-theme-color);
+    }
   }
+  // #endregion
 
-  .van-popover {
-    background-color: var(--bew-elevated-solid-1);
+  // #region dark mode adaption part
+  &.dark {
+    .card-loaded,
+    .van-popover {
+      background-color: var(--bew-elevated-solid-1);
+    }
   }
+  // #endregion
 }

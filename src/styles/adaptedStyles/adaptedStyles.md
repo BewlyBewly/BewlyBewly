@@ -17,7 +17,7 @@ In `index.ts`, we will write some regex rules to match the style used on a speci
 
   // #region theme color adaption part
   // Increase the priority of the style inside by writing a non-existent selector in `:not()`
-  :not(fdjslfds) {
+  :not(foobar) {
     a,
     b,
     c {
