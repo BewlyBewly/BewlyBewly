@@ -17,7 +17,7 @@
 
   // #region theme color adaption part
   // 通过在 `:not()` 中编写一个不存在的选择器来增加内部样式的优先级。
-  :not(fdjslfds) {
+  :not(foobar) {
     a,
     b,
     c {
