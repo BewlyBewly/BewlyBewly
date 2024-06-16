@@ -105,11 +105,9 @@ function closeAllTopBarPopup(exceptionKey?: keyof typeof popupVisible) {
 const channels = useDelayedHover({
   beforeEnter: () => closeAllTopBarPopup('channels'),
   enter: () => {
-    logo.value.classList.add('activated')
     popupVisible.channels = true
   },
   leave: () => {
-    logo.value.classList.remove('activated')
     popupVisible.channels = false
   },
 })
@@ -119,18 +117,12 @@ const avatar = useDelayedHover({
   beforeEnter: () => closeAllTopBarPopup('userPanel'),
   enter: () => {
     popupVisible.userPanel = true
-    avatarImg.value.classList.add('hover')
-    avatarShadow.value.classList.add('hover')
   },
   beforeLeave: () => {
     popupVisible.userPanel = false
-    avatarImg.value.classList.remove('hover')
-    avatarShadow.value.classList.remove('hover')
   },
   leave: () => {
     popupVisible.userPanel = false
-    avatarImg.value.classList.remove('hover')
-    avatarShadow.value.classList.remove('hover')
   },
 })
 
@@ -428,11 +420,9 @@ defineExpose({
               v-show="showLogo"
               ref="logo" href="//www.bilibili.com"
               class="group logo"
-              :style="{
-                transform: popupVisible.channels ? `translateX(0)` : `translateX(calc(-1 * var(--bew-base-font-size)))`,
-              }"
+              :class="{ activated: popupVisible.channels }"
               flex items-center border="1 transparent hover:$bew-border-color"
-              rounded="50px" p="x-4" shadow="hover:$bew-shadow-2" duration-300
+              rounded="50px" p="x-4" ml--4 duration-300
               bg="hover:$bew-theme-color dark-hover:white"
               w-auto h-50px transform-gpu
             >
@@ -511,6 +501,7 @@ defineExpose({
                 :href="`https://space.bilibili.com/${mid}`"
                 :target="isHomePage() ? '_blank' : '_self'"
                 class="avatar-img"
+                :class="{ hover: popupVisible.userPanel }"
                 rounded-full
                 z-1
                 w-38px
@@ -526,6 +517,7 @@ defineExpose({
               <div
                 ref="avatarShadow"
                 class="avatar-shadow"
+                :class="{ hover: popupVisible.userPanel }"
                 pos="absolute top-0"
                 bg="cover center"
                 blur-sm
@@ -813,7 +805,7 @@ defineExpose({
 }
 
 .logo.activated {
-  --uno: "bg-$bew-theme-color dark:bg-white";
+  --uno: "bg-$bew-theme-color dark:bg-white translate-x-[calc(var(--bew-base-font-size))] shadow-$bew-shadow-2";
 
   svg {
     --uno: "fill-white dark:fill-$bew-theme-color";
