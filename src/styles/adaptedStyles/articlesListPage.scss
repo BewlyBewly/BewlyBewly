@@ -56,12 +56,9 @@
       background-color: var(--bew-border-color);
     }
 
-    .list-container .list-info-block .right-side .up-info-block .follow-btn.on {
-      background-color: var(--bew-fill-1);
-    }
-
+    .list-container .list-info-block .right-side .up-info-block .follow-btn.on,
     .modalBox .cancel {
-      background-color: var(--bew-fill-2);
+      background-color: var(--bew-fill-1);
     }
 
     .list-container .list-info-block .right-side .up-info-block .follow-btn.on,
