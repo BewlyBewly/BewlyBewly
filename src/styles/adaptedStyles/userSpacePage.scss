@@ -99,7 +99,8 @@
     .comment-bilibili-fold .operation .opera-list li:hover,
     .bili-topic-new__default__create__text,
     .subscribe-list li .subscribe-link,
-    .i-live:hover .i-live-title {
+    .i-live:hover .i-live-title,
+    #page-article .row .breadcrumb .item.cur {
       color: var(--bew-theme-color);
     }
 
@@ -622,8 +623,14 @@
       background-color: var(--bew-elevated-solid-1);
     }
 
+    .article-card__no-img {
+      background-color: var(--bew-elevated-solid-2);
+      // 感觉设置成 --bew-elevated-solid-1 不太明显
+    }
+
     .series-item .split-line,
-    .wrapper .edit-video-modal .favlist-body:after {
+    .wrapper .edit-video-modal .favlist-body:after,
+    #page-article .row .breadline {
       background-color: var(--bew-border-color);
     }
 
