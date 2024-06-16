@@ -5,6 +5,7 @@ import { useToast } from 'vue-toastification'
 import draggable from 'vuedraggable'
 
 import Button from '~/components/Button.vue'
+import Input from '~/components/Input.vue'
 import Radio from '~/components/Radio.vue'
 import { accessKey, settings } from '~/logic'
 import { useMainStore } from '~/stores/mainStore'
@@ -218,21 +219,34 @@ function handleToggleHomeTab(tab: any) {
           </Button>
         </div>
       </ChildSettingsDialog>
+    </SettingsItemGroup>
+
+    <SettingsItemGroup title="Recommendation Filters">
       <SettingsItem title="播放量过滤">
-        <div class="flex">
-          <span v-if="settings.isFilterByView">
-            <input v-model="settings.filterByView" type="number" text-right>
-            次
-          </span>
+        <div flex="~ justify-end" w-full>
+          <Input
+            v-if="settings.isFilterByView"
+            v-model="settings.filterByView" type="number" :min="1" :max="1000000"
+            flex-1
+          >
+            <template #suffix>
+              次
+            </template>
+          </Input>
           <Radio v-model="settings.isFilterByView" />
         </div>
       </SettingsItem>
       <SettingsItem title="时长过滤">
-        <div class="flex">
-          <span v-if="settings.isFilterByDuration">
-            <input v-model="settings.filterByDuration" type="number" text-right>
-            秒
-          </span>
+        <div flex="~ justify-end" w-full>
+          <Input
+            v-if="settings.isFilterByDuration"
+            v-model="settings.filterByDuration" type="number" :min="1" :max="1000000"
+            flex-1
+          >
+            <template #suffix>
+              秒
+            </template>
+          </Input>
           <Radio v-model="settings.isFilterByDuration" />
         </div>
       </SettingsItem>

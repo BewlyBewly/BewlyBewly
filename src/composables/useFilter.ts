@@ -59,7 +59,12 @@ export function factoryFilter(filterOpt: FilterType[], keyList: KeyPath): Functi
 export function useFilter(filterOpt: FilterType[], keyList: KeyPath) {
   const filter = ref<Function | null>(null)
 
-  watch(() => [settings.value.isFilterByDuration, settings.value.isFilterByView, settings.value.filterByDuration, settings.value.filterByView], ([isD, isV]) => {
+  watch(() => [
+    settings.value.isFilterByDuration,
+    settings.value.isFilterByView,
+    settings.value.filterByDuration,
+    settings.value.filterByView,
+  ], ([isD, isV]) => {
     if (!isD && !isV) {
       filter.value = null
       return

@@ -3,6 +3,9 @@ type Size = 'small' | 'medium' | 'large'
 interface Props {
   modelValue: string
   size?: Size
+  type?: 'text' | 'password' | 'email' | 'number'
+  min?: number
+  max?: number
 }
 const props = withDefaults(defineProps<Props>(), { size: 'medium' })
 
@@ -16,15 +19,21 @@ onMounted(() => {
 </script>
 
 <template>
-  <input
-    v-model="modelValue" type="text" class="b-input"
+  <div
+    focus-within:ring="2px $bew-theme-color"
     p="x-4 y-2"
-    rounded="$bew-radius" outline-none transition-all duration-300
-    bg="$bew-fill-1"
-    focus:shadow focus:ring="2px $bew-theme-color"
-    @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
-    @keydown.enter="$emit('enter')"
+    rounded="$bew-radius" transition-all duration-300
+    bg="$bew-fill-1" flex="~ gap-2"
   >
+    <slot name="prefix" />
+    <input
+      v-model="modelValue" :type="type" :min="min" :max="max"
+      outline-none flex-1
+      @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+      @keydown.enter="$emit('enter')"
+    >
+    <slot name="suffix" />
+  </div>
 </template>
 
 <style lang="scss" scoped>

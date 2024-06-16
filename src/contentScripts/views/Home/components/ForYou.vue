@@ -11,6 +11,7 @@ import Empty from '~/components/Empty.vue'
 import VideoCard from '~/components/VideoCard/VideoCard.vue'
 import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
+import { FilterType, useFilter } from '~/composables/useFilter'
 import { LanguageType } from '~/enums/appEnums'
 import type { GridLayout } from '~/logic'
 import { accessKey, settings } from '~/logic'
@@ -18,7 +19,6 @@ import type { AppForYouResult, Item as AppVideoItem, ThreePointV2 } from '~/mode
 import { Type as ThreePointV2Type } from '~/models/video/appForYou'
 import type { forYouResult, Item as VideoItem } from '~/models/video/forYou'
 import { getTvSign, TVAppKey } from '~/utils/authProvider'
-import { FilterType, useFilter } from '~/utils/func'
 import { isVerticalVideo } from '~/utils/uriParse'
 
 const props = defineProps<{
