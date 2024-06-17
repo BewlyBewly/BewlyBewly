@@ -8,8 +8,6 @@
   .bili-video-card.is-rcmd:not(.enable-no-interest),
   .ad-report,
   .brand-ad-list,
-  // 检测到您的页面展示可能受到浏览器插件影响，建议您将当前页面加入插件白名单，以保障您的浏览体验～
-  .adblock-tips,
   // 搜尋結果的遊戲廣告
   .activity-game-list,
   // 视频页游戏卡片
@@ -24,4 +22,9 @@
     margin-top: 0px !important;
     margin-bottom: 24px;
   }
+}
+
+// 检测到您的页面展示可能受到浏览器插件影响，建议您将当前页面加入插件白名单，以保障您的浏览体验～
+.adblock-tips {
+  display: none !important;
 }
