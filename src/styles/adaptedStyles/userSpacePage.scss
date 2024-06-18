@@ -623,11 +623,6 @@
       background-color: var(--bew-elevated-solid-1);
     }
 
-    .article-card__no-img {
-      background-color: var(--bew-elevated-solid-2);
-      // 感觉设置成 --bew-elevated-solid-1 不太明显
-    }
-
     .series-item .split-line,
     .wrapper .edit-video-modal .favlist-body:after,
     #page-article .row .breadline {
@@ -660,7 +655,8 @@
     #pin-wrapper #pin-layer-search,
     #pin-wrapper .pin-layer-reason #pin-layer-reason-input input,
     .section .count,
-    .btn-cancel {
+    .btn-cancel,
+    .article-card__no-img {
       background-color: var(--bew-fill-1);
     }
 
