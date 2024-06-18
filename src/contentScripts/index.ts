@@ -67,12 +67,12 @@ function isSupportedPages() {
     || /https?:\/\/(?:www\.)?bilibili\.com\/read\/(?!pcpreview).*/.test(currentUrl)
     // 404 page
     || /^https?:\/\/(?:www\.)?bilibili\.com\/404.*$/.test(currentUrl)
-  )
+  ) {
     return true
-
-  else
+  }
+  else {
     return false
-}
+  }
 
 let beforeLoadedStyleEl: HTMLStyleElement | undefined
 
