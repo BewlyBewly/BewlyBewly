@@ -24,11 +24,11 @@ async function setupStyles() {
     document.documentElement.classList.add('notificationsPage')
   }
 
-  // moments page 动态页
+  // moments page, new articles page 动态页, 新版专栏页
   else if (
     // moments
     /https?:\/\/t\.bilibili\.com\.*/.test(currentUrl)
-    // moment detail
+    // moment detail, new articles page
     || /https?:\/\/www\.bilibili\.com\/opus\/.*/.test(currentUrl)) {
     await import('./momentsPage.scss')
     document.documentElement.classList.add('momentsPage')
@@ -91,14 +91,14 @@ async function setupStyles() {
     document.documentElement.classList.add('animePage')
   }
 
-  // channel page e.g. tv shows, movie, variety shows, mooc page 分区页
+  // channel page e.g. tv shows, movie, variety shows & mooc pages 分区页
   else if (
     /https?:\/\/(?:www\.)?bilibili\.com\/(?:tv|movie|variety|mooc|documentary).*/.test(currentUrl)) {
     await import('./channelPage.scss')
     document.documentElement.classList.add('channelPage')
   }
 
-  // articles page 专栏页
+  // articles, articles list & articles ranking pages 专栏页, 专栏列表页, 专栏排行榜页
   else if (/https?:\/\/(?:www\.)?bilibili\.com\/read.*/.test(currentUrl)) {
     await import('./articlesPage.scss')
     document.documentElement.classList.add('articlesPage')
