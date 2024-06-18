@@ -3,36 +3,30 @@
     margin-top: 10px;
   }
 
-  // .header-channel {
-  //   background-color: transparent;
-  //   padding: 10px 20px;
-  //   box-shadow: none;
-  //   z-index: 60;
-  // }
+  // fix when the container does not fill the recommended container in large screen situations
+  .recommended-container_floor-aside .container {
+    max-width: 100% !important;
+  }
 
-  // .header-channel-fixed {
-  //   background-color: var(--bew-elevated-2);
-  //   backdrop-filter: var(--bew-filter-glass-1);
-  //   border-radius: var(--bew-radius);
-  //   box-shadow: var(--bew-shadow-2);
-  // }
+  // adjust the fixed header in original bilibili homepage
+  .header-channel {
+    background-color: transparent;
+    backdrop-filter: var(--bew-filter-glass-1);
+    background: var(--bew-elevated-1);
+    border-radius: var(--bew-radius);
+    margin: 10px 20px;
+    width: calc(100% - 40px);
+    box-shadow: var(--bew-shadow-2), var(--bew-shadow-edge-glow-1);
+  }
 
-  // .header-channel-fixed-center {
-  //   background-color: var(--bew-border-color);
-  // }
+  .header-channel-fixed-right-item {
+    background-color: var(--bew-fill-1);
+    border-color: var(--bew-border-color);
 
-  // .header-channel-fixed-right-item {
-  //   background-color: var(--bew-fill-1);
-  //   border: none;
-  // }
-
-  // .header-channel-fixed-right-item:hover {
-  //   background-color: var(--bew-fill-2);
-  // }
-
-  // .single-card.floor-card .living>img {
-  //   filter: var(--bew-filter-icon-glow);
-  // }
+    &:hover {
+      background-color: var(--bew-fill-2);
+    }
+  }
 
   .bili-live-card .bili-live-card__info--living img,
   .single-card.floor-card .living > img {

@@ -12,7 +12,7 @@ export default defineConfig(() => ({
   target: 'esnext',
   ignoreWatch: ['**/extension/**', '**/extension-firefox/**'],
   splitting: false,
-  sourcemap: isDev ? 'inline' : false,
+  sourcemap: false, // https://github.com/vitejs/vite-plugin-vue/issues/35
   define: {
     '__DEV__': JSON.stringify(isDev),
     'process.env.NODE_ENV': JSON.stringify(isDev ? 'development' : 'production'),

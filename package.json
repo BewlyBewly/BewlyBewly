@@ -2,9 +2,9 @@
   "name": "bewly-bewly",
   "displayName": "BewlyBewly",
   "type": "module",
-  "version": "0.19.4",
+  "version": "0.19.8",
   "private": true,
-  "packageManager": "pnpm@9.3.0",
+  "packageManager": "pnpm@9.4.0",
   "description": "Just make a few small changes to your Bilibili homepage.",
   "homepage": "https://github.com/hakadao/BewlyBewly",
   "scripts": {
@@ -38,7 +38,6 @@
     "knip": "knip",
     "submit": "run-p submit:*",
     "submit:chrome": "pnpm wxt submit --chrome-zip ./extension.zip",
-    "submit:edge": "pnpm wxt submit --edge-zip ./extension.zip",
     "submit:firefox": "pnpm wxt submit --firefox-zip ./extension-firefox.zip --firefox-sources-zip ./extension-firefox-sources.zip"
   },
   "dependencies": {

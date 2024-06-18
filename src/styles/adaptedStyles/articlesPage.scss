@@ -36,7 +36,6 @@
     .video-link__to,
     .interaction-info .hover-item:hover,
     .interaction-info .hover-item:hover i,
-    .normal-article-holder a,
     .read-article-holder .card-text-label,
     .share-dynamic-dialog .sdd-card .name,
     .bili-dialog-bomb .appeal-box .wrap .container .textarea .memo a,
@@ -62,7 +61,9 @@
       .article-content
       .article-left-block
       .article-info-bar
-      .reply:hover {
+      .reply:hover,
+    .article-up-info .nameplate-ctnr .info .info-bottom a,
+    .article-up-info .nameplate-ctnr .info .info-bottom a:hover {
       color: var(--bew-theme-color);
     }
 
@@ -78,7 +79,8 @@
     .error-container .error-panel .rollback-btn,
     .error-container .error-manga .change-img-btn,
     .list-container .list-info-block .right-side .up-info-block .follow-btn:not(.on),
-    .modalBox .sure {
+    .modalBox .sure,
+    .promote-hint {
       background-color: var(--bew-theme-color);
     }
 
@@ -158,7 +160,10 @@
     .list-container .list-info-block .right-side .up-info-block .up-name,
     .list-container .article-list-block .article-item .item-holder .article-content .article-title,
     .modalBox,
-    .modalBox .cancel {
+    .modalBox .cancel,
+    .normal-article-holder .color-default,
+    .normal-article-holder h1,
+    .article-up-info .nameplate-ctnr .info {
       color: var(--bew-text-1);
     }
 
@@ -191,7 +196,8 @@
     #App .rank-module .tips,
     .list-container .list-info-block .right-side .col,
     .list-container .list-info-block .right-side .summary,
-    .list-container .list-info-block .right-side .up-info-block .follow-btn.on {
+    .list-container .list-info-block .right-side .up-info-block .follow-btn.on,
+    .article-up-info .nameplate-ctnr .info .n-type {
       color: var(--bew-text-2);
     }
 
@@ -316,7 +322,8 @@
     .page-content .left-side .partitio-name .filter .filter-btn-lst,
     .to-top,
     .bili-dialog-bomb .appeal-box,
-    .modalBox {
+    .modalBox,
+    .article-up-info .nameplate-ctnr {
       background-color: var(--bew-elevated-solid-1);
     }
 
@@ -381,13 +388,19 @@
     .list-container .list-info-block .right-side .col .split-line,
     .list-container .list-info-block .right-side .up-info-block .follow-btn.on,
     .list-container .article-list-block .article-item .item-holder .article-content .article-left-block,
-    .modalBox .cancel {
+    .modalBox .cancel,
+    .article-up-info .nameplate-ctnr,
+    .article-up-info .nameplate-ctnr .info {
       border-color: var(--bew-border-color);
     }
 
     .to-top,
     .share-success-dialog {
       border-color: var(--bew-elevated-solid-1);
+    }
+
+    .rql-editor .ql-editor blockquote {
+      border-color: var(--bew-text-4);
     }
 
     .nav-tab-bar .tab-item:before {

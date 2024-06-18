@@ -114,6 +114,14 @@
     .bili-set-follow-group__list.is-disabled:after {
       background-color: transparent;
     }
+
+    .opus-module-content blockquote:before {
+      background-color: var(--bew-text-4);
+    }
+
+    .qrcode-box__content {
+      box-shadow: 0 0 0 5px white;
+    }
   }
   // #endregion
 

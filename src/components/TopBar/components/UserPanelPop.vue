@@ -179,6 +179,6 @@ async function logout() {
 }
 
 #logout {
-  --uno: "text-red-400 important:block px-4 py-2 rounded-$bew-radius duration-300 cursor-pointer hover:bg-$bew-fill-2";
+  --uno: "text-$bew-error-color important:block px-4 py-2 rounded-$bew-radius duration-300 cursor-pointer hover:bg-$bew-fill-2";
 }
 </style>
