@@ -1,5 +1,7 @@
 .bewly-design.videoPage {
-  .user-card-m-exp .layout {
+  .user-card-m-exp .layout,
+  .up-detail .up-detail-top .up-name.is_vip:hover .mask,
+  .up-detail .up-detail-top .up-name.small-vip:hover .mask {
     display: none;
   }
 
@@ -111,6 +113,7 @@
     .ql-snow.ql-toolbar button:hover,
     .ql-snow .ql-toolbar button:hover,
     .up-name.is_vip,
+    .up-name.small-vip,
     .up-detail .up-detail-top .up-name[style*="color: rgb(251, 114, 153)"],
     .up-detail .up-detail-top .up-name[style*="color:#FB7299;"] {
       color: var(--bew-theme-color) !important;
@@ -118,6 +121,14 @@
 
     .upinfo-btn-panel .not-follow-charge-btn:hover {
       color: var(--bew-theme-color-80);
+    }
+
+    .up-name.is_vip:hover,
+    .up-name.small-vip:hover,
+    .up-detail .up-detail-top .up-name:hover,
+    .up-detail .up-detail-top .up-name[style*="color: rgb(251, 114, 153)"]:hover,
+    .up-detail .up-detail-top .up-name[style*="color:#FB7299;"]:hover {
+      color: var(--bew-theme-color-70) !important;
     }
 
     .coin-operated-m-exp .mc-box:hover,
