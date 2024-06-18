@@ -99,7 +99,8 @@
     .comment-bilibili-fold .operation .opera-list li:hover,
     .bili-topic-new__default__create__text,
     .subscribe-list li .subscribe-link,
-    .i-live:hover .i-live-title {
+    .i-live:hover .i-live-title,
+    #page-article .row .breadcrumb .item.cur {
       color: var(--bew-theme-color);
     }
 
@@ -624,7 +625,8 @@
     }
 
     .series-item .split-line,
-    .wrapper .edit-video-modal .favlist-body:after {
+    .wrapper .edit-video-modal .favlist-body:after,
+    #page-article .row .breadline {
       background-color: var(--bew-border-color);
     }
 
@@ -654,7 +656,8 @@
     #pin-wrapper #pin-layer-search,
     #pin-wrapper .pin-layer-reason #pin-layer-reason-input input,
     .section .count,
-    .btn-cancel {
+    .btn-cancel,
+    .article-card__no-img {
       background-color: var(--bew-fill-1);
     }
 
