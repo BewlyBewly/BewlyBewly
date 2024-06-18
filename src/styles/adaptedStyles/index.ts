@@ -91,14 +91,14 @@ async function setupStyles() {
     document.documentElement.classList.add('animePage')
   }
 
-  // channel page e.g. tv shows, movie, variety shows, mooc page 分区页
+  // channel page e.g. tv shows, movie, variety shows & mooc pages 分区页
   else if (
     /https?:\/\/(?:www\.)?bilibili\.com\/(?:tv|movie|variety|mooc|documentary).*/.test(currentUrl)) {
     await import('./channelPage.scss')
     document.documentElement.classList.add('channelPage')
   }
 
-  // articles, articles list, articles ranking page 专栏页, 专栏列表页, 专栏排行榜页
+  // articles, articles list & articles ranking pages 专栏页, 专栏列表页, 专栏排行榜页
   else if (/https?:\/\/(?:www\.)?bilibili\.com\/read.*/.test(currentUrl)) {
     await import('./articlesPage.scss')
     document.documentElement.classList.add('articlesPage')
