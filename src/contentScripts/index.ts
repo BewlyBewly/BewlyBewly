@@ -73,6 +73,7 @@ function isSupportedPages() {
   else {
     return false
   }
+}
 
 let beforeLoadedStyleEl: HTMLStyleElement | undefined
 
