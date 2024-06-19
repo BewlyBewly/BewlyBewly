@@ -260,23 +260,4 @@ function handleUploadWallpaper(e: Event) {
 .selected-wallpaper {
   --uno: "border-$bew-theme-color-60";
 }
-.img-no-error {
-  position: relative;
-  &::before {
-    content: " ";
-    display: block;
-    width: 100%;
-    height: 100%;
-    background: var(--bew-fill-1);
-    border-radius: var(--bew-radius);
-  }
-  &::after {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    content: "error";
-    display: block;
-  }
-}
 </style>
