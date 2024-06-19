@@ -58,7 +58,7 @@
 
     .note-list .list-note-operation,
     .note-pc .note-container .note-header .note-operation,
-    .note-up .up-desc-container .desc-top .attention-btn-container {
+    .note-up .up-desc-container .desc-top .attention-btn-container:not(.is-attention) {
       background-color: var(--bew-theme-color);
     }
 
@@ -78,8 +78,10 @@
       .bar-right
       .copy-link:hover,
     .note-up .up-desc-container .desc-top .attention-btn-container:hover,
+    .note-up .up-desc-container .desc-top .attention-btn-container.is-attention:hover,
     .report-dialog .vui_dialog--footer .report-dialog-footer .button-wrap .comfirm-report:hover,
-    .collection-m-exp .bottom .btn:hover {
+    .collection-m-exp .bottom .btn:hover,
+    .upinfo-btn-panel .following-charge-btn:hover {
       background-color: var(--bew-theme-color-80);
     }
 
@@ -129,6 +131,12 @@
     .up-detail .up-detail-top .up-name[style*="color: rgb(251, 114, 153)"]:hover,
     .up-detail .up-detail-top .up-name[style*="color:#FB7299;"]:hover {
       color: var(--bew-theme-color-80) !important;
+    }
+
+    .user-card-m-exp .user-info-wrapper .info .btn-box .liked:hover,
+    .note-pc .note-container .note-header .note-operation.detail,
+    .note-up .up-desc-container .desc-top .attention-btn-container:hover {
+      color: white;
     }
 
     .coin-operated-m-exp .mc-box:hover,
@@ -279,7 +287,8 @@
     }
 
     .note-detail .note-operation .sanlian-box,
-    .ql-snow .ql-picker-options {
+    .ql-snow .ql-picker-options,
+    .note-up .up-desc-container .desc-top .attention-btn-container.is-attention {
       background-color: var(--bew-elevated-solid-2);
     }
 
