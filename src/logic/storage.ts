@@ -86,7 +86,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   enableWallpaperMasking: false,
   wallpaperMaskOpacity: 80,
   wallpaperBlurIntensity: 0,
-  uploadedWallpaper: [],
+  customizeWallpaper: null,
 
   searchPageDarkenOnSearchFocus: true,
   searchPageBlurredOnSearchFocus: false,
