@@ -273,7 +273,8 @@
       .bpx-player-dm-btn-send.bui-disabled
       .bui-button-blue
       .modal-wrapper
-      .modal-header-close:hover {
+      .modal-header-close:hover,
+    .note-up .up-desc-container .desc-top .attention-btn-container.is-attention {
       background-color: var(--bew-fill-3);
     }
 
@@ -287,8 +288,7 @@
     }
 
     .note-detail .note-operation .sanlian-box,
-    .ql-snow .ql-picker-options,
-    .note-up .up-desc-container .desc-top .attention-btn-container.is-attention {
+    .ql-snow .ql-picker-options {
       background-color: var(--bew-elevated-solid-2);
     }
 
