@@ -74,6 +74,30 @@ function changeWallpaper(url: string) {
 
   settings.value.wallpaper = url
 }
+function fileToBase64(inputFile: File) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.readAsDataURL(inputFile)
+    reader.onload = () => resolve(reader.result)
+    reader.onerror = error => reject(error)
+  })
+}
+function handleUploadWallpaper(e: Event) {
+  const file = (e.target as HTMLInputElement)?.files?.[0]
+  if (!file)
+    return
+  // img to base64 on browser
+  fileToBase64(file).then((base64) => {
+  // 使用base64字符串
+    changeWallpaper(base64 as string)
+    settings.value.uploadedWallpaper = [{
+      name: file.name,
+      url: base64 as string,
+    }]
+  }).catch(() => {
+  // 处理错误
+  })
+}
 </script>
 
 <template>
@@ -159,14 +183,33 @@ function changeWallpaper(url: string) {
           >
             <div i-tabler:photo-off text="3xl $bew-text-3" />
           </picture>
-          <Tooltip v-for="item in WALLPAPERS" :key="item.url" placement="top" :content="item.name" aspect-video>
+          <input
+            id="uploadBg" type="file" accept="image/*" hidden
+            @change="handleUploadWallpaper"
+          >
+          <label for="uploadBg">
+            <picture
+              aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
+              un-border="4 transparent" cursor-pointer
+              grid place-items-center
+            >
+              <div class="i-tabler:world-upload" text="3xl $bew-text-3" />
+            </picture>
+          </label>
+
+          <Tooltip v-for="item in [...settings.uploadedWallpaper, ...WALLPAPERS]" :key="item.url" placement="top" :content="item.name" aspect-video>
             <picture
               aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
               un-border="4 transparent" w-full
               :class="{ 'selected-wallpaper': settings.wallpaper === item.url }"
               @click="changeWallpaper(item.url)"
             >
-              <img :src="item.thumbnail" alt="" w-full h-full object-cover>
+              <img
+                :src="item.thumbnail || item.url"
+                :alt="item.name"
+                w-full h-full object-cover
+                class="img-no-error"
+              >
             </picture>
           </Tooltip>
         </div>
@@ -216,5 +259,24 @@ function changeWallpaper(url: string) {
 <style lang="scss" scoped>
 .selected-wallpaper {
   --uno: "border-$bew-theme-color-60";
+}
+.img-no-error {
+  position: relative;
+  &::before {
+    content: " ";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--bew-fill-1);
+    border-radius: var(--bew-radius);
+  }
+  &::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    content: "error";
+    display: block;
+  }
 }
 </style>
