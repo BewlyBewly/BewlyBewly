@@ -55,6 +55,7 @@ const themeOptions = computed<Array<{ value: string, label: string }>>(() => {
     },
   ]
 })
+const uploadWallpaperRef = ref(null)
 
 watch(() => settings.value.wallpaper, (newValue) => {
   changeWallpaper(newValue)
@@ -74,6 +75,7 @@ function changeWallpaper(url: string) {
 
   settings.value.wallpaper = url
 }
+
 function fileToBase64(inputFile: File) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
@@ -82,7 +84,10 @@ function fileToBase64(inputFile: File) {
     reader.onerror = error => reject(error)
   })
 }
+
 function handleUploadWallpaper(e: Event) {
+  if (uploadWallpaperRef.value)
+    (uploadWallpaperRef.value as HTMLInputElement).click()
   const file = (e.target as HTMLInputElement)?.files?.[0]
   if (!file)
     return
@@ -90,13 +95,18 @@ function handleUploadWallpaper(e: Event) {
   fileToBase64(file).then((base64) => {
   // 使用base64字符串
     changeWallpaper(base64 as string)
-    settings.value.uploadedWallpaper = [{
+    settings.value.customizeWallpaper = {
       name: file.name,
       url: base64 as string,
-    }]
+    }
   }).catch(() => {
   // 处理错误
   })
+}
+
+function handleRemoveCustomWallpaper() {
+  changeWallpaper('')
+  settings.value.customizeWallpaper = null
 }
 </script>
 
@@ -183,21 +193,62 @@ function handleUploadWallpaper(e: Event) {
           >
             <div i-tabler:photo-off text="3xl $bew-text-3" />
           </picture>
+
+          <!-- Upload wallpaper input -->
           <input
-            id="uploadBg" type="file" accept="image/*" hidden
+            ref="uploadWallpaperRef" type="file" accept="image/*" hidden
             @change="handleUploadWallpaper"
           >
-          <label for="uploadBg">
-            <picture
-              aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
-              un-border="4 transparent" cursor-pointer
-              grid place-items-center
-            >
-              <div class="i-tabler:world-upload" text="3xl $bew-text-3" />
-            </picture>
-          </label>
 
-          <Tooltip v-for="item in [...settings.uploadedWallpaper, ...WALLPAPERS]" :key="item.url" placement="top" :content="item.name" aspect-video>
+          <Tooltip placement="top" :content="settings.customizeWallpaper?.name || ''" aspect-video>
+            <picture
+              class="group"
+              :class="{ 'selected-wallpaper': settings.wallpaper === settings.customizeWallpaper?.url }"
+              aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
+              un-border="4 transparent" w-full
+              flex="~ items-center justify-center"
+              @click="changeWallpaper(settings.customizeWallpaper?.url || '')"
+            >
+              <div
+                v-if="settings.customizeWallpaper"
+                class="opacity-0 group-hover:opacity-100" duration-300
+                pos="absolute top-4px right-4px" z-1 text="14px" flex="~ gap-1"
+              >
+                <button
+                  bg="$bew-content-1" rounded-full w-28px h-28px
+                  grid place-items-center
+                  @click="handleUploadWallpaper"
+                >
+                  <i i-mingcute:edit-2-line />
+                </button>
+                <button
+                  bg="$bew-content-1" rounded-full w-28px h-28px
+                  grid place-items-center
+                  @click="handleRemoveCustomWallpaper"
+                >
+                  <i i-mingcute:delete-2-line />
+                </button>
+              </div>
+              <div
+                v-if="!settings.customizeWallpaper"
+                absolute w-full h-full grid place-items-center
+                @click="handleUploadWallpaper"
+              >
+                <div
+                  i-mingcute:upload-line
+                  text="3xl $bew-text-3"
+                />
+              </div>
+              <img
+                v-else
+                :src="settings.customizeWallpaper.thumbnail || settings.customizeWallpaper.url"
+                :alt="settings.customizeWallpaper.name"
+                w-full h-full object-cover
+              >
+            </picture>
+          </Tooltip>
+
+          <Tooltip v-for="item in WALLPAPERS" :key="item.url" placement="top" :content="item.name" aspect-video>
             <picture
               aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
               un-border="4 transparent" w-full

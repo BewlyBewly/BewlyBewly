@@ -34,7 +34,7 @@ export interface Settings {
   enableWallpaperMasking: boolean
   wallpaperMaskOpacity: number
   wallpaperBlurIntensity: number
-  uploadedWallpaper: wallpaperItem[]
+  customizeWallpaper: wallpaperItem | null
 
   searchPageDarkenOnSearchFocus: boolean
   searchPageBlurredOnSearchFocus: boolean
