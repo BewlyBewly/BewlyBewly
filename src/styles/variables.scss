@@ -45,6 +45,8 @@
   // #endregion
 
   // #region Theme Color & Status Colors
+  // To add a hover effect to theme or status colors, use the `--bew-*-color` for the base color and `--bew-*-color-80` for the hover state
+
   --bew-logo-color: var(--bew-theme-color);
 
   // In light mode use the theme color; in dark mode use white
