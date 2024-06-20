@@ -204,7 +204,7 @@ function handleRemoveCustomWallpaper() {
             <picture
               class="group"
               :class="{ 'selected-wallpaper': settings.wallpaper === settings.customizeWallpaper?.url }"
-              aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
+              aspect-video bg="$bew-theme-color-20" rounded="$bew-radius" overflow-hidden
               un-border="4 transparent" w-full
               flex="~ items-center justify-center"
               @click="changeWallpaper(settings.customizeWallpaper?.url || '')"
@@ -235,8 +235,8 @@ function handleRemoveCustomWallpaper() {
                 @click="handleUploadWallpaper"
               >
                 <div
-                  i-mingcute:upload-line
-                  text="3xl $bew-text-3"
+                  i-tabler:photo-up
+                  text="3xl $bew-theme-color"
                 />
               </div>
               <img
