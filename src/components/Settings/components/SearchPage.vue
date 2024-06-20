@@ -100,16 +100,7 @@ function changeSearchBarFocusCharacter(url: string) {
       </SettingsItem>
     </SettingsItemGroup>
 
-    <SettingsItemGroup :title="$t('settings.group_wallpaper')">
-      <SettingsItem :title="$t('settings.individually_set_search_page_wallpaper')">
-        <template #desc>
-          <span color="$bew-warning-color">{{ $t('common.performance_impact_warn') }}</span>
-        </template>
-
-        <Radio v-model="settings.individuallySetSearchPageWallpaper" />
-      </SettingsItem>
-      <ChangeWallpaper v-if="settings.individuallySetSearchPageWallpaper" type="searchPage" />
-    </SettingsItemGroup>
+    <ChangeWallpaper type="searchPage" />
   </div>
 </template>
 
