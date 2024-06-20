@@ -70,6 +70,22 @@ html.dark.bewly-design {
   }
 }
 
+// Adjust broken image icon
+img {
+  position: relative;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-image: url("/assets/broken-image.png");
+    background-size: 25px;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
 // Change OverlayScrollbar color
 .os-scrollbar .os-scrollbar-handle {
   --os-handle-bg: rgba(120, 120, 140, 0.44);
