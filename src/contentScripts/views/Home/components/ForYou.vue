@@ -320,6 +320,7 @@ function closeVideoOptions() {
 
 function closeAppVideoOptions() {
   showVideoOptions.value = false
+  activatedVideoId.value = 0
   activatedAppVideoIdx.value = 0
 }
 
