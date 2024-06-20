@@ -8,21 +8,21 @@ export const SEARCH_BAR_CHARACTERS: { name: string, url: string }[] = [
 export interface wallpaperItem { name: string, url: string, thumbnail?: string }
 
 export const WALLPAPERS: wallpaperItem[] = [
-  {
-    name: 'Unsplash Random Nature Image',
-    url: 'https://source.unsplash.com/1920x1080/?nature',
-    thumbnail: 'https://source.unsplash.com/1920x1080/?nature',
-  },
-  {
-    name: 'Unsplash Random Building Image',
-    url: 'https://source.unsplash.com/1920x1080/?building',
-    thumbnail: 'https://source.unsplash.com/1920x1080/?building',
-  },
-  {
-    name: 'Unsplash Random Night Scene Image',
-    url: 'https://source.unsplash.com/1920x1080/?night-scene',
-    thumbnail: 'https://source.unsplash.com/1920x1080/?night-scene',
-  },
+  // {
+  //   name: 'Unsplash Random Nature Image',
+  //   url: 'https://source.unsplash.com/1920x1080/?nature',
+  //   thumbnail: 'https://source.unsplash.com/1920x1080/?nature',
+  // },
+  // {
+  //   name: 'Unsplash Random Building Image',
+  //   url: 'https://source.unsplash.com/1920x1080/?building',
+  //   thumbnail: 'https://source.unsplash.com/1920x1080/?building',
+  // },
+  // {
+  //   name: 'Unsplash Random Night Scene Image',
+  //   url: 'https://source.unsplash.com/1920x1080/?night-scene',
+  //   thumbnail: 'https://source.unsplash.com/1920x1080/?night-scene',
+  // },
   {
     name: 'LoremPicsum Random Image',
     url: 'https://picsum.photos/2560/1440/?nature',
