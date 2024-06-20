@@ -17,6 +17,18 @@ interface Props {
 const uploadWallpaperRef = ref(null)
 
 const isGlobal = computed(() => props.type === 'global')
+const isBuildInWallpaper = computed(() => {
+  return isGlobal.value ? settings.value.wallpaperMode === 'buildIn' : settings.value.searchPageWallpaperMode === 'buildIn'
+})
+
+function changeWallpaperType(type: 'buildIn' | 'byUrl') {
+  if (isGlobal.value) {
+    settings.value.wallpaperMode = type
+  }
+  else {
+    settings.value.searchPageWallpaperMode = type
+  }
+}
 
 function changeWallpaper(url: string) {
   if (isGlobal.value) {
@@ -73,27 +85,27 @@ function handleRemoveCustomWallpaper() {
         <div
           flex-1 py-1 cursor-pointer text-center rounded="$bew-radius"
           :style="{
-            background: (isGlobal ? settings.wallpaperMode : settings.searchPageWallpaperMode) === 'buildIn' ? 'var(--bew-theme-color)' : '',
-            color: (isGlobal ? settings.wallpaperMode : settings.searchPageWallpaperMode) === 'buildIn' ? 'white' : '',
+            background: isBuildInWallpaper ? 'var(--bew-theme-color)' : '',
+            color: isBuildInWallpaper ? 'white' : '',
           }"
-          @click="isGlobal ? settings.wallpaperMode = 'buildIn' : settings.searchPageWallpaperMode = 'buildIn'"
+          @click="changeWallpaperType('buildIn')"
         >
           {{ $t('settings.wallpaper_mode_opt.build_in') }}
         </div>
         <div
           flex-1 py-1 cursor-pointer text-center rounded="$bew-radius"
           :style="{
-            background: (isGlobal ? settings.wallpaperMode : settings.searchPageWallpaperMode) === 'byUrl' ? 'var(--bew-theme-color)' : '',
-            color: (isGlobal ? settings.wallpaperMode : settings.searchPageWallpaperMode) === 'byUrl' ? 'white' : '',
+            background: !isBuildInWallpaper ? 'var(--bew-theme-color)' : '',
+            color: !isBuildInWallpaper ? 'white' : '',
           }"
-          @click="isGlobal ? settings.wallpaperMode = 'buildIn' : settings.searchPageWallpaperMode = 'buildIn'"
+          @click="changeWallpaperType('byUrl')"
         >
           {{ $t('settings.wallpaper_mode_opt.by_url') }}
         </div>
       </div>
     </SettingsItem>
 
-    <SettingsItem v-if="(isGlobal ? settings.wallpaperMode : settings.searchPageWallpaperMode) === 'buildIn'" :title="$t('settings.choose_ur_wallpaper')" next-line>
+    <SettingsItem v-if="isBuildInWallpaper" :title="$t('settings.choose_ur_wallpaper')" next-line>
       <div grid="~ xl:cols-5 lg:cols-4 cols-3 gap-4">
         <picture
           aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
