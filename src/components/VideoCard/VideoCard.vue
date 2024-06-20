@@ -422,8 +422,7 @@ function handleUndo() {
                   class="opacity-0 group-hover/desc:opacity-100"
                   :class="{ 'more-active': moreBtnActive }"
                   shrink-0 w-30px h-30px m="t--3px r--8px" translate-x--8px
-                  grid place-items-center
-                  pointer="auto" rounded="50%" duration-300
+                  grid place-items-center cursor-pointer rounded="50%" duration-300
                   @click.prevent="handleMoreBtnClick"
                 >
                   <div i-mingcute:more-2-line text="lg" />
