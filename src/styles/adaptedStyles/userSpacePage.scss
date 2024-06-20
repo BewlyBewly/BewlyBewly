@@ -1,11 +1,3 @@
-#app {
-  &.owner,
-  &.fans,
-  &.visitor {
-    margin-top: 15px;
-  }
-}
-
 .bewly-design.userSpacePage {
   .wrapper .edit-video-modal .target-favlist {
     padding: 12px 36px;
@@ -105,7 +97,10 @@
     .follow-dialog-wrap .follow-dialog-window .content .group-list .add-group .input-group .submit,
     .bb-comment .operation .opera-list li:hover,
     .comment-bilibili-fold .operation .opera-list li:hover,
-    .bili-topic-new__default__create__text {
+    .bili-topic-new__default__create__text,
+    .subscribe-list li .subscribe-link,
+    .i-live:hover .i-live-title,
+    #page-article .row .breadcrumb .item.cur {
       color: var(--bew-theme-color);
     }
 
@@ -162,7 +157,8 @@
     .content .group-list li input[type="checkbox"]:checked:hover + i,
     .comment-bilibili-con .btn .btn-cancel:hover,
     .comment-bilibili-con .btn .btn-submit,
-    #page-setting #setting-new-tag:focus + #setting-new-tag-btn {
+    #page-setting #setting-new-tag:focus + #setting-new-tag-btn,
+    .subscribe-list li .subscribe-link:after {
       border-color: var(--bew-theme-color);
     }
 
@@ -210,7 +206,8 @@
     .follow-dialog-wrap .follow-dialog-window .bottom .btn,
     .comment-bilibili-con .btn .btn-submit,
     .bili-topic-new__default__create__icon:after,
-    .bili-topic-new__default__create__icon:before {
+    .bili-topic-new__default__create__icon:before,
+    .btn-subscribe:not(.btn-cancel) {
       background-color: var(--bew-theme-color);
     }
 
@@ -349,7 +346,9 @@
     .follow-dialog-wrap .follow-dialog-window .title,
     .follow-dialog-wrap .follow-dialog-window .content .group-list li,
     .be-input,
-    .pugv-container .pugv-item .item-infos .main-title {
+    .pugv-container .pugv-item .item-infos .main-title,
+    .subscribe-list li .subscribe-title,
+    .i-live .i-live-text {
       color: var(--bew-text-1);
     }
 
@@ -497,7 +496,8 @@
     .follow-dialog-wrap .follow-dialog-window .title,
     .follow-dialog-wrap .follow-dialog-window .bottom,
     .static-popup,
-    .bili-at-popup {
+    .bili-at-popup,
+    .btn-cancel {
       border-color: var(--bew-border-color);
     }
 
@@ -579,7 +579,8 @@
     .feed-dynamic-header-search,
     .section .count,
     .list-create .text,
-    .btn-container .btn {
+    .btn-container .btn,
+    .user-info .info-content .info-tags .info-tag .tag-content {
       color: var(--bew-text-2);
     }
 
@@ -624,7 +625,8 @@
     }
 
     .series-item .split-line,
-    .wrapper .edit-video-modal .favlist-body:after {
+    .wrapper .edit-video-modal .favlist-body:after,
+    #page-article .row .breadline {
       background-color: var(--bew-border-color);
     }
 
@@ -653,7 +655,9 @@
     #page-index #i-ann-content textarea,
     #pin-wrapper #pin-layer-search,
     #pin-wrapper .pin-layer-reason #pin-layer-reason-input input,
-    .section .count {
+    .section .count,
+    .btn-cancel,
+    .article-card__no-img {
       background-color: var(--bew-fill-1);
     }
 

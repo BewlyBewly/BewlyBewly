@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
 import { onKeyStroke } from '@vueuse/core'
 import type { Ref } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -490,7 +491,10 @@ defineExpose({ initData })
             </div>
             {{ reason.name }}
           </div>
-          <div v-if="selectedDislikeReason === reason.id" i-line-md:confirm />
+          <Icon
+            v-if="selectedDislikeReason === reason.id" icon="line-md:confirm"
+            w-18px h-18px
+          />
         </li>
       </ul>
     </Dialog>

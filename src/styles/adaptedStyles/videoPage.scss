@@ -1,5 +1,7 @@
 .bewly-design.videoPage {
-  .user-card-m-exp .layout {
+  .user-card-m-exp .layout,
+  .up-detail .up-detail-top .up-name.is_vip:hover .mask,
+  .up-detail .up-detail-top .up-name.small-vip:hover .mask {
     display: none;
   }
 
@@ -23,7 +25,7 @@
 
   // #region theme color adaption part
   // Increase the priority of the style inside by writing a non-existent selector in `:not()`
-  :not(fdjslfds) {
+  :not(foobar) {
     .content .group-list li input[type="checkbox"] + i {
       border-width: 1px;
       border-radius: 5px;
@@ -111,6 +113,7 @@
     .ql-snow.ql-toolbar button:hover,
     .ql-snow .ql-toolbar button:hover,
     .up-name.is_vip,
+    .up-name.small-vip,
     .up-detail .up-detail-top .up-name[style*="color: rgb(251, 114, 153)"],
     .up-detail .up-detail-top .up-name[style*="color:#FB7299;"] {
       color: var(--bew-theme-color) !important;
@@ -118,6 +121,14 @@
 
     .upinfo-btn-panel .not-follow-charge-btn:hover {
       color: var(--bew-theme-color-80);
+    }
+
+    .up-name.is_vip:hover,
+    .up-name.small-vip:hover,
+    .up-detail .up-detail-top .up-name:hover,
+    .up-detail .up-detail-top .up-name[style*="color: rgb(251, 114, 153)"]:hover,
+    .up-detail .up-detail-top .up-name[style*="color:#FB7299;"]:hover {
+      color: var(--bew-theme-color-80) !important;
     }
 
     .coin-operated-m-exp .mc-box:hover,
@@ -296,7 +307,8 @@
 
     .note-list .note-card-container .note-card .user-info .user-name,
     .note-up .up-desc-container .desc-bottom,
-    .note-detail .note-operation .tab-action-item .tab-action-icon .tab-num {
+    .note-detail .note-operation .tab-action-item .tab-action-icon .tab-num,
+    .reply-item .root-reply-container .content-warp .vote-info__text {
       color: var(--bew-text-2);
     }
 

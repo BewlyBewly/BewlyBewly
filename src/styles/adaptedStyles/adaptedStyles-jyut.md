@@ -17,7 +17,7 @@
 
   // #region theme color adaption part
   // 用 `:not()` 選取選取唔存在嘅元素愛嚟提高喺呢度入邊嘅優先權
-  :not(fdjslfds) {
+  :not(foobar) {
     a,
     b,
     c {

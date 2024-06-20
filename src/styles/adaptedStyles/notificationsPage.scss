@@ -1,20 +1,11 @@
-#message-navbar {
-  display: none;
-
-  + .container {
-    margin-top: 0;
-    padding-top: 70px;
-    height: calc(100vh - 70px);
-  }
-}
 .bewly-design.notificationsPage {
   #message-navbar {
     display: none;
 
     + .container {
       margin-top: 0;
-      padding-top: 70px;
-      height: calc(100vh - 70px);
+      padding-top: var(--bew-top-bar-height);
+      height: calc(100vh - var(--bew-top-bar-height));
 
       &::after {
         content: "";
@@ -31,13 +22,17 @@
     }
   }
 
+  .message-list::-webkit-scrollbar-thumb {
+    background: rgba(120, 120, 140, 0.44);
+  }
+
   #link-message-container {
     z-index: 1;
   }
 
   // #region theme color adaption part
   // Increase the priority of the style inside by writing a non-existent selector in `:not()`
-  :not(fdjslfds) {
+  :not(foobar) {
     .space-left {
       .item:hover a,
       .item.active a,
@@ -68,7 +63,11 @@
     .reply-card .action-button:not(.del-button):hover > svg *,
     .at-card .action-button:not(.del-button):hover > svg *,
     .action-button.active svg *,
-    .bili-im .left .title .back-link:hover {
+    .bili-im .left .title .back-link:hover,
+    .bl-button--shallow-o:hover,
+    .bl-button--shallow-o:active,
+    .bl-button--shallow-o.active,
+    .bl-button--shallow-o[active] {
       color: var(--bew-theme-color);
     }
 
@@ -102,7 +101,11 @@
     .send-btn.active,
     .operate-btn,
     .bl-button--ghost,
-    .bl-button--ghost:hover {
+    .bl-button--ghost:hover,
+    .bl-button--shallow-o:hover,
+    .bl-button--shallow-o:active,
+    .bl-button--shallow-o.active,
+    .bl-button--shallow-o[active] {
       border-color: var(--bew-theme-color);
     }
 
@@ -125,13 +128,21 @@
     .send-button,
     .notify-number,
     .bl-button--primary,
-    .bl-button--ghost:hover {
+    .bl-button--ghost:hover,
+    .message .message-content.is-me {
       background-color: var(--bew-theme-color);
     }
 
     .is-up > .message > .message-content,
     .toggle.active {
       background-color: var(--bew-theme-color) !important;
+    }
+
+    .bl-button--shallow-o:active,
+    .bl-button--shallow-o.active,
+    .bl-button--shallow-o[active],
+    .cs-actions-wrap .cs-actions .cs-action-item:hover {
+      background-color: var(--bew-theme-color-20);
     }
 
     .send-btn.active:hover,
@@ -143,6 +154,8 @@
     .emoji-container .emotion-btn-box:hover,
     .image-upload-btn.opened,
     .image-upload-btn:hover,
+    .customer-actions-wraper .customer-actions-btn:active,
+    .customer-actions-wraper .customer-actions-btn:hover,
     .helper-btn.active::before {
       filter: var(--bew-filter-icon-glow);
     }
@@ -194,7 +207,10 @@
     .bp-popup-panel .content-text,
     .tab-list,
     .group-helper-msg-list .name,
-    .share-card.video-type .content {
+    .share-card.video-type .content,
+    .bili-im,
+    .bl-button--shallow-o,
+    .cs-self-service .cs-self-service-list .cs-self-service-item .tool-title {
       color: var(--bew-text-1);
     }
 
@@ -212,7 +228,8 @@
     .content .btnrow .btn.save.disabled,
     .content .btnrow .btn.clear,
     .msg-push-new__leave-message--text,
-    .bp-icon-font.icon-close:before {
+    .bp-icon-font.icon-close:before,
+    .cs-actions-wrap .cs-actions .cs-action-item {
       color: var(--bew-text-2);
     }
 
@@ -240,7 +257,9 @@
     .content .input-section .row .emoji-btn,
     .content .btnrow .btn.clear,
     .reply-textarea,
-    .action-menu .menu-list {
+    .action-menu .menu-list,
+    .bl-button--shallow-o,
+    .cs-actions-wrap {
       border-color: var(--bew-border-color);
     }
 
@@ -286,7 +305,11 @@
     .toggle,
     .content .btnrow .btn.save.disabled,
     .reply-textarea,
-    .list-item.top {
+    .list-item.top,
+    .cs-self-service .cs-self-service-list .cs-self-service-item,
+    .cs-order-notice,
+    .cs-rich-text-answer .rich-answer-evaluate .ev-thumb,
+    .cs-q-tab-area ul.cs-q-tabs li.cs-q-tab-item.active {
       background-color: var(--bew-fill-1);
     }
 
@@ -322,14 +345,23 @@
       background-color: var(--bew-content-solid-1);
     }
 
+    .cs-q-tab-area ul.cs-q-tabs {
+      background-color: var(--bew-content-solid-2);
+    }
+
     .static-popup,
     .action-menu .menu-list,
     .action-menu .menu-list:before,
     .bp-popup-panel,
     .group-helper-msg-list,
     .tab-list .tab-item.active::before,
-    .group-helper-msg-list::after {
+    .group-helper-msg-list::after,
+    .cs-actions-wrap {
       background-color: var(--bew-elevated-solid-1);
+    }
+
+    .cs-q-tab-area.shadow:after {
+      background: linear-gradient(270deg, var(--bew-content-solid-2) 0%, transparent 100%);
     }
 
     .follow-btn.inactive,

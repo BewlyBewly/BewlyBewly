@@ -14,7 +14,7 @@ export default defineConfig({
     outDir: r(isFirefox ? 'extension-firefox/dist/contentScripts' : 'extension/dist/contentScripts'),
     cssCodeSplit: false,
     emptyOutDir: false,
-    sourcemap: isDev ? 'inline' : false,
+    sourcemap: false, // https://github.com/vitejs/vite-plugin-vue/issues/35
     lib: {
       entry: r('src/contentScripts/index.ts'),
       name: packageJson.name,

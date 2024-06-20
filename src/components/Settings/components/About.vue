@@ -136,11 +136,19 @@ async function checkGitHubRelease() {
         </a>
         <a
           href="https://discord.gg/TS6vgBmZVp" target="_blank"
-          p="y-2 x-4" flex items-center bg="#5866F2 dark:#a0a7f8" un-text="!white dark:!black"
+          p="y-2 x-4" flex items-center bg="#5866f2 dark:#a0a7f8" un-text="!white dark:!black"
           rounded-12
           w-100px
         >
           <div i-tabler:brand-discord mr-2 shrink-0 /> Discord
+        </a>
+        <a
+          href="https://x.com/search?q=BewlyBewly%20(from%3Ahakadaooo%20OR%20from%3Ahakadaoooo)&src=typed_query" target="_blank"
+          p="y-2 x-4" flex items-center bg="#1d9bf0 dark:#7ec6f7" un-text="!white dark:!black"
+          rounded-12
+          w-100px
+        >
+          <div i-tabler:brand-twitter mr-2 shrink-0 /> Twitter
         </a>
       </section>
       <section mt-4 flex="~ col gap-2 items-center">

@@ -105,11 +105,9 @@ function closeAllTopBarPopup(exceptionKey?: keyof typeof popupVisible) {
 const channels = useDelayedHover({
   beforeEnter: () => closeAllTopBarPopup('channels'),
   enter: () => {
-    logo.value.classList.add('activated')
     popupVisible.channels = true
   },
   leave: () => {
-    logo.value.classList.remove('activated')
     popupVisible.channels = false
   },
 })
@@ -119,18 +117,12 @@ const avatar = useDelayedHover({
   beforeEnter: () => closeAllTopBarPopup('userPanel'),
   enter: () => {
     popupVisible.userPanel = true
-    avatarImg.value.classList.add('hover')
-    avatarShadow.value.classList.add('hover')
   },
   beforeLeave: () => {
     popupVisible.userPanel = false
-    avatarImg.value.classList.remove('hover')
-    avatarShadow.value.classList.remove('hover')
   },
   leave: () => {
     popupVisible.userPanel = false
-    avatarImg.value.classList.remove('hover')
-    avatarShadow.value.classList.remove('hover')
   },
 })
 
@@ -214,7 +206,7 @@ watch(
   (newVal, oldVal) => {
     // Stop loading new message counts on the message page, because it resets to 0 when the
     // users reads the messages on this page
-    if (oldVal === undefined && /https?:\/\/message.bilibili.com(.)*?$/.test(location.href))
+    if (oldVal === undefined && /https?:\/\/message.bilibili.com.*$/.test(location.href))
       return
 
     if (newVal === oldVal)
@@ -386,15 +378,17 @@ defineExpose({
     :class="{ hide: hideTopBar }"
   >
     <main
-      max-w="$bew-page-max-width" m-auto flex="~ justify-between items-center gap-4"
-      p="lg:x-20 md:x-16 x-14" h="70px"
+      max-w="$bew-page-max-width"
+      flex="~ justify-between items-center gap-4"
+      p="lg:x-20 md:x-16 x-14" m-auto
+      h="$bew-top-bar-height"
     >
       <!-- Top bar mask -->
       <div
         v-if="mask"
         style="
-          mask-image: linear-gradient(to bottom,  black 40%, transparent);
-          backdrop-filter:var(--bew-filter-glass-1)
+          mask-image: linear-gradient(to bottom,  black 50%, transparent);
+          backdrop-filter: var(--bew-filter-glass-1);
         "
         pos="absolute top-0 left-0" w-full h-80px
         pointer-events-none transform-gpu
@@ -403,7 +397,7 @@ defineExpose({
         <div
           v-if="mask"
           pos="absolute top-0 left-0" w-full h-80px
-          pointer-events-none opacity-70
+          pointer-events-none
           :style="{
             background: `linear-gradient(to bottom, ${(
               settings.wallpaper
@@ -426,8 +420,9 @@ defineExpose({
               v-show="showLogo"
               ref="logo" href="//www.bilibili.com"
               class="group logo"
+              :class="{ activated: popupVisible.channels }"
               flex items-center border="1 transparent hover:$bew-border-color"
-              rounded="50px" p="x-4" shadow="hover:$bew-shadow-2" duration-300
+              rounded="50px" p="x-4" ml--4 duration-300
               bg="hover:$bew-theme-color dark-hover:white"
               w-auto h-50px transform-gpu
             >
@@ -506,6 +501,7 @@ defineExpose({
                 :href="`https://space.bilibili.com/${mid}`"
                 :target="isHomePage() ? '_blank' : '_self'"
                 class="avatar-img"
+                :class="{ hover: popupVisible.userPanel }"
                 rounded-full
                 z-1
                 w-38px
@@ -521,6 +517,7 @@ defineExpose({
               <div
                 ref="avatarShadow"
                 class="avatar-shadow"
+                :class="{ hover: popupVisible.userPanel }"
                 pos="absolute top-0"
                 bg="cover center"
                 blur-sm
@@ -687,7 +684,7 @@ defineExpose({
                 </a>
 
                 <Transition name="slide-in">
-                  <WatchLaterPop v-if="popupVisible.watchLater" class="bew-popover" />
+                  <WatchLaterPop v-if="popupVisible.watchLater" class="bew-popover" ml--30px />
                 </Transition>
               </div>
 
@@ -808,7 +805,7 @@ defineExpose({
 }
 
 .logo.activated {
-  --uno: "bg-$bew-theme-color dark:bg-white";
+  --uno: "bg-$bew-theme-color dark:bg-white translate-x-[calc(var(--bew-base-font-size))] shadow-$bew-shadow-2";
 
   svg {
     --uno: "fill-white dark:fill-$bew-theme-color";

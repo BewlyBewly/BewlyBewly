@@ -13,7 +13,7 @@
 
   // #region theme color adaption part
   // Increase the priority of the style inside by writing a non-existent selector in :not()
-  :not(fdjslfds) {
+  :not(foobar) {
     .page-content .right-side .rank-module .rank-list .item a:hover,
     .page-content .left-side .article-list .article-list-holder .article-item:hover .item-holder .article-title,
     .page-content .right-side .rank-module .rank-tabs-bar .rank-tabs-list li.on,
@@ -36,10 +36,34 @@
     .video-link__to,
     .interaction-info .hover-item:hover,
     .interaction-info .hover-item:hover i,
-    .normal-article-holder a,
     .read-article-holder .card-text-label,
     .share-dynamic-dialog .sdd-card .name,
-    .bili-dialog-bomb .appeal-box .wrap .container .textarea .memo a {
+    .bili-dialog-bomb .appeal-box .wrap .container .textarea .memo a,
+    .article-tags .tag-item:hover,
+    #App .rank-module .tab-bar .tab-item.on,
+    #App .rank-module .tab-bar .tab-item:hover,
+    #App .rank-module .article-list .article-item .item-holder .article-content:hover .article-title,
+    #App
+      .rank-module
+      .article-list
+      .article-item
+      .item-holder
+      .article-content
+      .article-left-block
+      .article-info-bar
+      .reply:hover,
+    #App .rank-module .article-list .article-item .item-holder .score-module .score,
+    .list-container .article-list-block .article-item .item-holder .article-content:hover .article-title,
+    .list-container
+      .article-list-block
+      .article-item
+      .item-holder
+      .article-content
+      .article-left-block
+      .article-info-bar
+      .reply:hover,
+    .article-up-info .nameplate-ctnr .info .info-bottom a,
+    .article-up-info .nameplate-ctnr .info .info-bottom a:hover {
       color: var(--bew-theme-color);
     }
 
@@ -51,7 +75,12 @@
     .article-detail .unfollow,
     .modal-box-holder .modal-box .modal-footer .modal-btn-primary,
     .bili-dialog-bomb .appeal-box .submit .confirm,
-    .bili-dialog-bomb .appeal-box .wrap .container .options .option .checkbox.checked:before {
+    .bili-dialog-bomb .appeal-box .wrap .container .options .option .checkbox.checked:before,
+    .error-container .error-panel .rollback-btn,
+    .error-container .error-manga .change-img-btn,
+    .list-container .list-info-block .right-side .up-info-block .follow-btn:not(.on),
+    .modalBox .sure,
+    .promote-hint {
       background-color: var(--bew-theme-color);
     }
 
@@ -60,7 +89,8 @@
     .categories-bar .tag-item.on,
     .modal-box-holder .modal-box .modal-footer .modal-btn-primary,
     .read-article-holder .card-text-label,
-    .bili-dialog-bomb .appeal-box .wrap .container .options .option .checkbox.checked {
+    .bili-dialog-bomb .appeal-box .wrap .container .options .option .checkbox.checked,
+    #App .rank-module .tab-bar .tab-item.on {
       border-color: var(--bew-theme-color);
     }
 
@@ -123,7 +153,17 @@
     .van-popover.van-followed,
     .van-popover.van-followed .follow_dropdown li:hover,
     .share-dynamic-dialog .sdd-head,
-    .share-success-dialog .info {
+    .share-success-dialog .info,
+    #App,
+    #App .rank-module .article-list .article-item .item-holder .article-content .article-title,
+    .list-container .list-info-block .right-side .title,
+    .list-container .list-info-block .right-side .up-info-block .up-name,
+    .list-container .article-list-block .article-item .item-holder .article-content .article-title,
+    .modalBox,
+    .modalBox .cancel,
+    .normal-article-holder .color-default,
+    .normal-article-holder h1,
+    .article-up-info .nameplate-ctnr .info {
       color: var(--bew-text-1);
     }
 
@@ -152,7 +192,12 @@
     .bili-dialog-bomb .appeal-box .submit .cancel,
     .interaction-info .toolbar .share-box .qrcode-tit,
     .share-dynamic-dialog .sdd-input,
-    .share-success-dialog .hint {
+    .share-success-dialog .hint,
+    #App .rank-module .tips,
+    .list-container .list-info-block .right-side .col,
+    .list-container .list-info-block .right-side .summary,
+    .list-container .list-info-block .right-side .up-info-block .follow-btn.on,
+    .article-up-info .nameplate-ctnr .info .n-type {
       color: var(--bew-text-2);
     }
 
@@ -173,7 +218,53 @@
     .interaction-info .toolbar .share-box,
     .interaction-info,
     .followed,
-    .share-dynamic-dialog .sdd-card .sdd-card-content {
+    .share-dynamic-dialog .sdd-card .sdd-card-content,
+    #App
+      .rank-module
+      .article-list
+      .article-item
+      .item-holder
+      .article-content
+      .article-left-block
+      .article-info-bar
+      .up-content
+      .nick-name,
+    #App
+      .rank-module
+      .article-list
+      .article-item
+      .item-holder
+      .article-content
+      .article-left-block
+      .article-info-bar
+      .category,
+    #App
+      .rank-module
+      .article-list
+      .article-item
+      .item-holder
+      .article-content
+      .article-left-block
+      .article-info-bar
+      .like,
+    #App
+      .rank-module
+      .article-list
+      .article-item
+      .item-holder
+      .article-content
+      .article-left-block
+      .article-info-bar
+      .reply,
+    #App
+      .rank-module
+      .article-list
+      .article-item
+      .item-holder
+      .article-content
+      .article-left-block
+      .article-info-bar
+      .view {
       color: var(--bew-text-3);
     }
 
@@ -188,7 +279,13 @@
     .bili-dialog-bomb .appeal-box .header,
     .bili-dialog-bomb .appeal-box .submit,
     .bili-dialog-bomb .appeal-box .submit .cancel,
-    .bili-button.primary.plain {
+    .bili-button.primary.plain,
+    .error-container .error-panel,
+    .error-container .error-split,
+    .error-container .error-manga,
+    .list-container .list-info-block,
+    .list-container .article-list-block,
+    .list-container .article-list-block .article-item {
       background-color: transparent;
     }
 
@@ -224,7 +321,9 @@
     .page-content .right-side .search-module .search-block .search-word-panel .panel-title p span,
     .page-content .left-side .partitio-name .filter .filter-btn-lst,
     .to-top,
-    .bili-dialog-bomb .appeal-box {
+    .bili-dialog-bomb .appeal-box,
+    .modalBox,
+    .article-up-info .nameplate-ctnr {
       background-color: var(--bew-elevated-solid-1);
     }
 
@@ -235,7 +334,10 @@
 
     .page-content .right-side .rank-module .rank-list .item .rank-index,
     .article-read-info .spoiler,
-    .page-content .right-side .up-list .fresh-btn {
+    .page-content .right-side .up-list .fresh-btn,
+    #App .rank-module .tips,
+    .list-container .list-info-block .right-side .up-info-block .follow-btn.on,
+    .modalBox .cancel {
       background-color: var(--bew-fill-1);
     }
 
@@ -245,6 +347,10 @@
     .followed,
     .van-popover.van-followed .follow_dropdown li:hover {
       background-color: var(--bew-fill-2);
+    }
+
+    #App .rank-module .article-list .article-item {
+      background-color: transparent;
     }
 
     .page-content .left-side .article-list .article-list-holder .article-item,
@@ -277,13 +383,24 @@
     .read-article-holder .row-video-holder,
     .interaction-info .toolbar .share-box .qrcode-box,
     .share-dynamic-dialog .sdd-action-bar,
-    .share-dynamic-dialog .sdd-head {
+    .share-dynamic-dialog .sdd-head,
+    #App .rank-module .article-list .article-item .item-holder .article-content,
+    .list-container .list-info-block .right-side .col .split-line,
+    .list-container .list-info-block .right-side .up-info-block .follow-btn.on,
+    .list-container .article-list-block .article-item .item-holder .article-content .article-left-block,
+    .modalBox .cancel,
+    .article-up-info .nameplate-ctnr,
+    .article-up-info .nameplate-ctnr .info {
       border-color: var(--bew-border-color);
     }
 
     .to-top,
     .share-success-dialog {
       border-color: var(--bew-elevated-solid-1);
+    }
+
+    .rql-editor .ql-editor blockquote {
+      border-color: var(--bew-text-4);
     }
 
     .nav-tab-bar .tab-item:before {

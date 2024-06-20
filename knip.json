@@ -9,7 +9,9 @@
     "*.config.*"
   ],
   "ignoreDependencies": [
-    "@iconify/json", "uno.css", "lint-staged"
+    "@iconify/json",
+    "uno.css",
+    "lint-staged"
   ],
   "ignoreBinaries": ["gh"],
   "rules": {
