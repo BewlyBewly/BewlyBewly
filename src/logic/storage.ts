@@ -1,4 +1,5 @@
 import { useStorageLocal } from '~/composables/useStorageLocal'
+import type { wallpaperItem } from '~/constants/imgs'
 import type { HomeSubPage } from '~/contentScripts/views/Home/types'
 import type { AppPage } from '~/enums/appEnums'
 
@@ -33,6 +34,7 @@ export interface Settings {
   enableWallpaperMasking: boolean
   wallpaperMaskOpacity: number
   wallpaperBlurIntensity: number
+  customizeWallpaper: wallpaperItem | null
 
   searchPageDarkenOnSearchFocus: boolean
   searchPageBlurredOnSearchFocus: boolean
@@ -84,6 +86,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   enableWallpaperMasking: false,
   wallpaperMaskOpacity: 80,
   wallpaperBlurIntensity: 0,
+  customizeWallpaper: null,
 
   searchPageDarkenOnSearchFocus: true,
   searchPageBlurredOnSearchFocus: false,
