@@ -33,16 +33,12 @@ const hoveringDockItem = reactive<HoveringDockItem>({
         >
           <Transition name="fade">
             <div v-show="hoveringDockItem.themeMode" absolute>
-              <!-- <div v-if="isDark" i-line-md:sunny-outline-to-moon-loop-transition text-xl />
-              <div v-else i-line-md:moon-alt-to-sunny-outline-loop-transition text-xl /> -->
               <Icon v-if="isDark" icon="line-md:sunny-outline-to-moon-loop-transition" />
               <Icon v-else icon="line-md:moon-alt-to-sunny-outline-loop-transition" />
             </div>
           </Transition>
           <Transition name="fade">
             <div v-show="!hoveringDockItem.themeMode" absolute>
-              <!-- <div v-if="isDark" i-line-md:sunny-outline-to-moon-transition text-xl />
-              <div v-else i-line-md:moon-to-sunny-outline-transition text-xl /> -->
               <Icon v-if="isDark" icon="line-md:sunny-outline-to-moon-transition" />
               <Icon v-else icon="line-md:moon-to-sunny-outline-transition" />
             </div>
@@ -51,13 +47,16 @@ const hoveringDockItem = reactive<HoveringDockItem>({
       </Tooltip>
       <Tooltip :content="$t('dock.settings')" placement="left">
         <Button
-          class="ctrl-btn"
+          class="ctrl-btn group"
           style="backdrop-filter: var(--bew-filter-glass-1);"
           center size="small" round
           @click="emit('settings-visibility-change')"
         >
-          <div>
-            <div i-mingcute:settings-3-line text-xl />
+          <div mt--2px>
+            <i
+              i-mingcute:settings-3-line w-20px h-20px group-hover:rotate-180
+              transition="all 2000 ease-out"
+            />
           </div>
         </Button>
       </Tooltip>
