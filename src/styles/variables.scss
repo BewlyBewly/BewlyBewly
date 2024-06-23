@@ -45,6 +45,8 @@
   // #endregion
 
   // #region Theme Color & Status Colors
+  // To add a hover effect to theme or status colors, use the `--bew-*-color` for the base color and `--bew-*-color-80` for the hover state
+
   --bew-logo-color: var(--bew-theme-color);
 
   // In light mode use the theme color; in dark mode use white
@@ -111,8 +113,13 @@
   --bew-text-auto: white;
 
   --bew-text-1: hsl(217 19% 10%);
+
+  // It can also be used for the text that is followed or subscribed to
   --bew-text-2: hsl(215 19% 24% / 80%);
+
   --bew-text-3: hsl(215 19% 28% / 60%);
+
+  // It can also be used for the text that is disabled
   --bew-text-4: hsl(215 19% 36% / 40%);
   // #endregion
 
@@ -129,6 +136,10 @@
   --bew-content-opacity: 0.74;
 
   // #region Content colors, used to buttons, cards, popover and so on
+  // Variable names that don't contain `solid` are used to frosted glass effect elements
+
+  // `--bew-content-*` for the flat background elements
+  // #region `--bew-content-*` background colors
   --bew-content-1: hsl(0 0% 100% / var(--bew-content-opacity));
   --bew-content-1-hover: hsl(0 0% 85% / var(--bew-content-opacity));
   --bew-content-2: hsl(240 31% 95% / var(--bew-content-opacity));
@@ -138,7 +149,10 @@
   --bew-content-solid-1-hover: hsl(0 0% 85%);
   --bew-content-solid-2: hsl(240 31% 95%);
   --bew-content-solid-2-hover: hsl(240 31% 85%);
+  // #endregion
 
+  // `--bew-elevated-*` for popup, dialog and difference layers with difference elevation levels
+  // #region `--bew-elevated-*` background colors
   --bew-elevated-1: hsl(0 0% 100% / var(--bew-content-opacity));
   --bew-elevated-1-hover: hsl(0 0% 85% / var(--bew-content-opacity));
   --bew-elevated-2: hsl(0 0% 100% / var(--bew-content-opacity));
@@ -148,6 +162,7 @@
   --bew-elevated-solid-1-hover: hsl(0 0% 85%);
   --bew-elevated-solid-2: hsl(0 0% 100%);
   --bew-elevated-solid-2-hover: hsl(0 0% 85%);
+  // #endregion
   // #endregion
 
   // #region Gray semi-transparent colors

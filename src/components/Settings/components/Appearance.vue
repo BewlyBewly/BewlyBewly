@@ -2,14 +2,10 @@
 import { useThrottleFn } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 
-import Input from '~/components/Input.vue'
-import Radio from '~/components/Radio.vue'
 import Select from '~/components/Select.vue'
-import Slider from '~/components/Slider.vue'
-import Tooltip from '~/components/Tooltip.vue'
-import { WALLPAPERS } from '~/constants/imgs'
 import { settings } from '~/logic'
 
+import ChangeWallpaper from './ChangeWallpaper.vue'
 import SettingsItem from './SettingsItem.vue'
 import SettingsItemGroup from './SettingsItemGroup.vue'
 
@@ -122,99 +118,9 @@ function changeWallpaper(url: string) {
       </SettingsItem>
     </SettingsItemGroup>
 
-    <SettingsItemGroup :title="$t('settings.group_wallpaper')">
-      <SettingsItem :title="$t('settings.wallpaper_mode')" :desc="$t('settings.wallpaper_mode_desc')">
-        <div w-full flex rounded="$bew-radius" bg="$bew-fill-1" p-1>
-          <div
-            flex-1 py-1 cursor-pointer text-center rounded="$bew-radius"
-            :style="{
-              background: settings.wallpaperMode === 'buildIn' ? 'var(--bew-theme-color)' : '',
-              color: settings.wallpaperMode === 'buildIn' ? 'white' : '',
-            }"
-            @click="settings.wallpaperMode = 'buildIn'"
-          >
-            {{ $t('settings.wallpaper_mode_opt.build_in') }}
-          </div>
-          <div
-            flex-1 py-1 cursor-pointer text-center rounded="$bew-radius"
-            :style="{
-              background: settings.wallpaperMode === 'byUrl' ? 'var(--bew-theme-color)' : '',
-              color: settings.wallpaperMode === 'byUrl' ? 'white' : '',
-            }"
-            @click="settings.wallpaperMode = 'byUrl'"
-          >
-            {{ $t('settings.wallpaper_mode_opt.by_url') }}
-          </div>
-        </div>
-      </SettingsItem>
-
-      <SettingsItem v-if="settings.wallpaperMode === 'buildIn'" :title="$t('settings.choose_ur_wallpaper')" next-line>
-        <div grid="~ xl:cols-5 lg:cols-4 cols-3 gap-4">
-          <picture
-            aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
-            un-border="4 transparent" cursor-pointer
-            grid place-items-center
-            :class="{ 'selected-wallpaper': settings.wallpaper === '' }"
-            @click="changeWallpaper('')"
-          >
-            <div i-tabler:photo-off text="3xl $bew-text-3" />
-          </picture>
-          <Tooltip v-for="item in WALLPAPERS" :key="item.url" placement="top" :content="item.name" aspect-video>
-            <picture
-              aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
-              un-border="4 transparent" w-full
-              :class="{ 'selected-wallpaper': settings.wallpaper === item.url }"
-              @click="changeWallpaper(item.url)"
-            >
-              <img :src="item.thumbnail" alt="" w-full h-full object-cover>
-            </picture>
-          </Tooltip>
-        </div>
-      </SettingsItem>
-      <SettingsItem v-else :title="$t('settings.image_url')" next-line>
-        <div flex items-center gap-4>
-          <picture
-            aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
-            un-border="4 transparent" cursor-pointer shrink-0
-            w="xl:1/5 lg:1/4 md:1/3"
-          >
-            <img
-              v-if="settings.wallpaper" :src="settings.wallpaper" alt="" loading="lazy"
-              w-full h-full object-cover
-              onerror="this.style.display='none'; this.onerror=null;"
-            >
-          </picture>
-          <div>
-            <Input v-model="settings.wallpaper" w-full />
-            <p color="sm $bew-text-3" mt-2>
-              {{ $t('settings.image_url_hint') }}
-            </p>
-          </div>
-        </div>
-      </SettingsItem>
-
-      <SettingsItem :title="$t('settings.enable_wallpaper_masking')">
-        <template #desc>
-          <span color="$bew-warning-color">{{ $t('common.performance_impact_warn') }}</span>
-        </template>
-
-        <Radio v-model="settings.enableWallpaperMasking" />
-      </SettingsItem>
-      <SettingsItem v-if="settings.enableWallpaperMasking" :title="$t('settings.wallpaper_mask_opacity')">
-        <Slider v-model="settings.wallpaperMaskOpacity" :label="`${settings.wallpaperMaskOpacity}%`" />
-      </SettingsItem>
-      <SettingsItem v-if="settings.enableWallpaperMasking" :title="$t('settings.wallpaper_blur_intensity')">
-        <template #desc>
-          <span color="$bew-warning-color">{{ $t('common.performance_impact_warn') }}</span>
-        </template>
-        <Slider v-model="settings.wallpaperBlurIntensity" :min="0" :max="60" :label="`${settings.wallpaperBlurIntensity}px`" />
-      </SettingsItem>
-    </SettingsItemGroup>
+    <ChangeWallpaper type="global" />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.selected-wallpaper {
-  --uno: "border-$bew-theme-color-60";
-}
 </style>

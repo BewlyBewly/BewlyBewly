@@ -167,8 +167,8 @@ function handleBackToTopOrRefresh() {
         </Tooltip>
 
         <Tooltip :content="$t('dock.settings')" :placement="tooltipPlacement">
-          <button class="dock-item" @click="emit('settingsVisibilityChange')">
-            <div i-mingcute:settings-3-line text-xl />
+          <button class="dock-item group" @click="emit('settingsVisibilityChange')">
+            <div i-mingcute:settings-3-line text-xl group-hover:rotate-180 transition="all 2000 ease-out" />
           </button>
         </Tooltip>
       </div>
@@ -281,7 +281,7 @@ function handleBackToTopOrRefresh() {
       transform 300ms cubic-bezier(0.34, 2, 0.6, 1),
       background 300ms ease,
       color 300ms ease,
-      box-shadow 600ms ease;
+      box-shadow 300ms ease;
     box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
 
     &.active {

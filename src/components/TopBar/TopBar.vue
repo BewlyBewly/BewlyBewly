@@ -387,8 +387,8 @@ defineExpose({
       <div
         v-if="mask"
         style="
-          mask-image: linear-gradient(to bottom,  black 40%, transparent);
-          backdrop-filter:var(--bew-filter-glass-1)
+          mask-image: linear-gradient(to bottom,  black 50%, transparent);
+          backdrop-filter: var(--bew-filter-glass-1);
         "
         pos="absolute top-0 left-0" w-full h-80px
         pointer-events-none transform-gpu
@@ -397,7 +397,7 @@ defineExpose({
         <div
           v-if="mask"
           pos="absolute top-0 left-0" w-full h-80px
-          pointer-events-none opacity-70
+          pointer-events-none
           :style="{
             background: `linear-gradient(to bottom, ${(
               settings.wallpaper

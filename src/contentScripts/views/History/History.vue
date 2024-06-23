@@ -420,12 +420,30 @@ function jumpToLoginPage() {
                     Live
                   </span>
                 </a>
-                <p display="block xl:none" text="$bew-text-3 sm" mt-auto mb-2>
-                  {{
-                    useDateFormat(historyItem.view_at * 1000, 'YYYY-MM-DD HH:mm:ss')
-                      .value
-                  }}
-                </p>
+                <div
+                  display="xl:none"
+                  flex items-center
+                  text="$bew-text-3 sm"
+                  mt-auto
+                >
+                  <span text-xl mr-2 lh-0>
+                    <i
+                      v-if="historyItem.history.dt === 1 || historyItem.history.dt === 3 || historyItem.history.dt === 5 || historyItem.history.dt === 7"
+                      i-mingcute:cellphone-line
+                    />
+                    <i v-if="historyItem.history.dt === 2" i-mingcute:tv-1-line />
+                    <i
+                      v-if="historyItem.history.dt === 4 || historyItem.history.dt === 6" i-mingcute:pad-line
+                    />
+                    <i v-if="historyItem.history.dt === 33" i-mingcute:tv-2-line />
+                  </span>
+                  <span>
+                    {{
+                      useDateFormat(historyItem.view_at * 1000, 'YYYY-MM-DD HH:mm:ss')
+                        .value
+                    }}
+                  </span>
+                </div>
               </div>
 
               <button
