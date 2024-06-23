@@ -201,11 +201,11 @@ function setCurrentTitle() {
           <div
             style="
               backdrop-filter: var(--bew-filter-glass-1);
-              box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-1);
+              box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
             "
             text="!16px hover:$bew-theme-color" w="32px" h="32px"
             flex="~ items-center justify-center shrink-0"
-            bg="$bew-fill-1 hover:$bew-theme-color-30"
+            bg="$bew-elevated-2 dark:$bew-fill-1 hover:$bew-theme-color-30"
             rounded-8 cursor="pointer" border="1 $bew-border-color" box-border
             duration-300
             @click="handleClose"
