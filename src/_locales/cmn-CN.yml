@@ -110,8 +110,8 @@ settings:
   choose_ur_wallpaper: 选择你的背景
   image_url: 图片 URL
   image_url_hint: |-
-    URL 示例: https://pic.imgdb.cn/item/638e1d63b1fccdcd36103811.jpg
-    https://pic.imgdb.cn/item/638e1d7ab1fccdcd36106346.jpg
+    URL 示例: https://cdn.jsdelivr.net/gh/BewlyBewly/Imgs/wallpapers/rocky-mountain-cloudscape.jpg
+    https://cdn.jsdelivr.net/gh/BewlyBewly/Imgs/wallpapers/green-white-mountains.jpg
   enable_wallpaper_masking: 启用背景遮罩效果
   wallpaper_mask_opacity: 背景遮罩透明度调整
   wallpaper_blur_intensity: 背景模糊强度调整
