@@ -425,24 +425,24 @@ function jumpToLoginPage() {
                   flex items-center
                   text="$bew-text-3 sm"
                   mt-auto
-                  mb-2
                 >
-                  <div
-                    v-if="historyItem.history.dt === 1 || historyItem.history.dt === 3 || historyItem.history.dt === 5 || historyItem.history.dt === 7"
-                    i-mingcute:cellphone-line class="historyItemDevice"
-                  />
-                  <div v-if="historyItem.history.dt === 2" i-mingcute:tv-1-line class="historyItemDevice" />
-                  <div
-                    v-if="historyItem.history.dt === 4 || historyItem.history.dt === 6" i-mingcute:pad-line
-                    class="historyItemDevice"
-                  />
-                  <div v-if="historyItem.history.dt === 33" i-mingcute:tv-2-line class="historyItemDevice" />
-                  <div>
+                  <span text-xl mr-2 lh-0>
+                    <i
+                      v-if="historyItem.history.dt === 1 || historyItem.history.dt === 3 || historyItem.history.dt === 5 || historyItem.history.dt === 7"
+                      i-mingcute:cellphone-line
+                    />
+                    <i v-if="historyItem.history.dt === 2" i-mingcute:tv-1-line />
+                    <i
+                      v-if="historyItem.history.dt === 4 || historyItem.history.dt === 6" i-mingcute:pad-line
+                    />
+                    <i v-if="historyItem.history.dt === 33" i-mingcute:tv-2-line />
+                  </span>
+                  <span>
                     {{
                       useDateFormat(historyItem.view_at * 1000, 'YYYY-MM-DD HH:mm:ss')
                         .value
                     }}
-                  </div>
+                  </span>
                 </div>
               </div>
 
@@ -537,7 +537,4 @@ function jumpToLoginPage() {
 </template>
 
 <style lang="scss" scoped>
-.historyItemDevice {
-  --uno: "text-[18px] mr-[8px]";
-}
 </style>
