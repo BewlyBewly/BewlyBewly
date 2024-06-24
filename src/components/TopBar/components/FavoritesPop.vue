@@ -95,13 +95,14 @@ function getFavoriteResources() {
     keyword: '',
   })
     .then((res) => {
-      if (res.code === 0) {
-        if (Array.isArray(res.data.medias) && res.data.medias.length > 0)
-          favoriteResources.push(...res.data.medias)
+      const { code, data } = res
+      if (code === 0) {
+        if ('medias' in data && Array.isArray(data.medias) && data.medias.length > 0)
+          favoriteResources.push(...data.medias)
 
         if (
-          res.data.medias === null
-          || (res.data.medias.length < 20 && favoriteResources.length > 0)
+          !data.medias
+          || (data.medias.length < 20 && favoriteResources.length > 0)
         ) {
           isLoading.value = false
           noMoreContent.value = true

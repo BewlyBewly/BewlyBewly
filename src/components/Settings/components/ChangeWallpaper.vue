@@ -5,6 +5,7 @@ import Slider from '~/components/Slider.vue'
 import Tooltip from '~/components/Tooltip.vue'
 import { WALLPAPERS } from '~/constants/imgs'
 import { settings } from '~/logic'
+import { compressAndResizeImage } from '~/utils/main'
 
 import SettingsItem from './SettingsItem.vue'
 import SettingsItemGroup from './SettingsItemGroup.vue'
@@ -27,6 +28,14 @@ function changeWallpaperType(type: 'buildIn' | 'byUrl') {
   }
   else {
     settings.value.searchPageWallpaperMode = type
+  }
+
+  // Set the wallpaper to empty if it's a locally uploaded wallpaper to prevent the `QUOTA_BYTES quota exceeded` error
+  if (type === 'byUrl') {
+    if (settings.value.wallpaper.startsWith('data:image/'))
+      settings.value.wallpaper = ''
+    else if (settings.value.searchPageWallpaper.startsWith('data:image/'))
+      settings.value.searchPageWallpaper = ''
   }
 }
 
@@ -59,16 +68,19 @@ function handleUploadWallpaper(e: Event) {
   const file = (e.target as HTMLInputElement)?.files?.[0]
   if (!file)
     return
-  // img to base64 on browser
-  fileToBase64(file).then((base64) => {
-  // 使用base64字符串
-    changeWallpaper(base64 as string)
-    settings.value.customizeWallpaper = {
-      name: file.name,
-      url: base64 as string,
-    }
-  }).catch(() => {
-  // 处理错误
+
+  compressAndResizeImage(file, 2560, 1440, 0.9, (compressedFile: File) => {
+    // img to base64 on browser
+    fileToBase64(compressedFile).then((base64) => {
+      // 使用base64字符串
+      changeWallpaper(base64 as string)
+      settings.value.customizeWallpaper = {
+        name: file.name,
+        url: base64 as string,
+      }
+    }).catch(() => {
+      // 处理错误
+    })
   })
 }
 
@@ -149,6 +161,7 @@ function handleRemoveCustomWallpaper() {
                 pos="absolute top-4px right-4px" z-1 text="14px" flex="~ gap-1"
               >
                 <button
+                  style="backdrop-filter: var(--bew-filter-glass-1);"
                   bg="$bew-content-1" rounded-full w-28px h-28px
                   grid place-items-center
                   @click="handleUploadWallpaper"
@@ -156,6 +169,7 @@ function handleRemoveCustomWallpaper() {
                   <i i-mingcute:edit-2-line />
                 </button>
                 <button
+                  style="backdrop-filter: var(--bew-filter-glass-1);"
                   bg="$bew-content-1" rounded-full w-28px h-28px
                   grid place-items-center
                   @click="handleRemoveCustomWallpaper"
