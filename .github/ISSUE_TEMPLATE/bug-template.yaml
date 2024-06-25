@@ -21,6 +21,10 @@ body:
         浏览器: (如 Chrome)
         浏览器版本: (如 123.0.6312.107)
         BewlyBewly 版本: (如 0.18.9)
+      value: |
+        浏览器:
+        浏览器版本:
+        BewlyBewly 版本:
     validations:
       required: true
 
