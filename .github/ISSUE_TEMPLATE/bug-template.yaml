@@ -17,13 +17,13 @@ body:
       label: 环境
       description: 插件版本和浏览器版本
       placeholder: |
-        浏览器: (如 Chrome)
-        浏览器版本: (如 123.0.6312.107)
-        BewlyBewly 版本: (如 0.18.9)
+        浏览器 (如 Chrome):
+        浏览器版本 (如 126.0.6478.126):
+        BewlyBewly 版本 (如 0.20.1):
       value: |
-        浏览器:
-        浏览器版本:
-        BewlyBewly 版本:
+        浏览器 (如 Chrome):
+        浏览器版本 (如 126.0.6478.126):
+        BewlyBewly 版本 (如 0.20.1):
     validations:
       required: true
 
