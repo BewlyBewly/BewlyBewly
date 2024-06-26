@@ -153,15 +153,15 @@
 
   // `--bew-elevated-*` for popup, dialog and difference layers with difference elevation levels
   // #region `--bew-elevated-*` background colors
-  --bew-elevated-1: hsl(0 0% 100% / var(--bew-content-opacity));
-  --bew-elevated-1-hover: hsl(0 0% 85% / var(--bew-content-opacity));
-  --bew-elevated-2: hsl(0 0% 100% / var(--bew-content-opacity));
-  --bew-elevated-2-hover: hsl(0 0% 85% / var(--bew-content-opacity));
+  --bew-elevated: hsl(0 0% 100% / var(--bew-content-opacity));
+  --bew-elevated-hover: hsl(0 0% 85% / var(--bew-content-opacity));
+  --bew-elevated: hsl(0 0% 100% / var(--bew-content-opacity));
+  --bew-elevated-hover: hsl(0 0% 85% / var(--bew-content-opacity));
 
-  --bew-elevated-solid-1: hsl(0 0% 100%);
-  --bew-elevated-solid-1-hover: hsl(0 0% 85%);
-  --bew-elevated-solid-2: hsl(0 0% 100%);
-  --bew-elevated-solid-2-hover: hsl(0 0% 85%);
+  --bew-elevated-solid: hsl(0 0% 100%);
+  --bew-elevated-solid-hover: hsl(0 0% 85%);
+  --bew-elevated-solid: hsl(0 0% 100%);
+  --bew-elevated-solid-hover: hsl(0 0% 85%);
   // #endregion
   // #endregion
 
@@ -222,15 +222,11 @@
   --bew-content-solid-2: hsl(240 14% 15%);
   --bew-content-solid-2-hover: hsl(240 14% 31%);
 
-  --bew-elevated-1: hsl(230 12% 15% / var(--bew-content-opacity));
-  --bew-elevated-1-hover: hsl(230 12% 31% / var(--bew-content-opacity));
-  --bew-elevated-2: hsl(230 12% 18% / var(--bew-content-opacity));
-  --bew-elevated-2-hover: hsl(230 12% 34% / var(--bew-content-opacity));
+  --bew-elevated: hsl(230 12% 16% / var(--bew-content-opacity));
+  --bew-elevated-hover: hsl(230 12% 32% / var(--bew-content-opacity));
 
-  --bew-elevated-solid-1: hsl(230 12% 15%);
-  --bew-elevated-solid-1-hover: hsl(230 12% 31%);
-  --bew-elevated-solid-2: hsl(230 12% 18%);
-  --bew-elevated-solid-2-hover: hsl(230 12% 34%);
+  --bew-elevated-solid: hsl(230 12% 16%);
+  --bew-elevated-solid-hover: hsl(230 12% 32%);
 
   --bew-fill-1: rgb(131 131 145 / 14%);
   --bew-fill-2: rgb(131 131 145 / 24%);
@@ -296,8 +292,8 @@
   --bg1: var(--bew-bg);
   --bg2: var(--bew-content-solid-2);
   --bg3: var(--bew-content-solid-2);
-  --bg1_float: var(--bew-elevated-solid-1);
-  --bg2_float: var(--bew-elevated-solid-2);
+  --bg1_float: var(--bew-elevated-solid);
+  --bg2_float: var(--bew-elevated-solid);
   --text_white: var(--Wh0_u);
   --text1: var(--bew-text-1);
   --text2: var(--bew-text-2);
@@ -311,7 +307,7 @@
   --graph_white: var(--bew-content-solid-1);
   --graph_bg_thin: var(--bew-content-solid-1);
   --graph_bg_regular: var(--bew-content-solid-1);
-  --graph_bg_thick: var(--bew-elevated-solid-2);
+  --graph_bg_thick: var(--bew-elevated-solid);
   --graph_weak: var(--Ga3);
   --graph_medium: var(--Ga5);
   --graph_icon: var(--Ga7);

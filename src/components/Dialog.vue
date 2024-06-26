@@ -109,7 +109,7 @@ function handleConfirm() {
             width: dialogWidth,
             maxWidth: dialogMaxWidth,
             backdropFilter: frostedGlass ? 'var(--bew-filter-glass-2)' : 'none',
-            backgroundColor: frostedGlass ? 'var(--bew-elevated-1)' : 'var(--bew-elevated-solid-1)',
+            backgroundColor: frostedGlass ? 'var(--bew-elevated)' : 'var(--bew-elevated-solid)',
           }"
           pos="absolute top-1/2 left-1/2" rounded="$bew-radius" border="1 $bew-border-color"
           transform="translate--1/2" z-2 overflow="x-hidden y-overlay"
@@ -128,7 +128,7 @@ function handleConfirm() {
 
           <header
             style="
-              text-shadow: 0 0 15px var(--bew-elevated-solid-1), 0 0 20px var(--bew-elevated-solid-1)
+              text-shadow: 0 0 15px var(--bew-elevated-solid), 0 0 20px var(--bew-elevated-solid)
             "
             pos="sticky top-0 left-0" w-full h-70px px-8 flex
             items-center justify-between

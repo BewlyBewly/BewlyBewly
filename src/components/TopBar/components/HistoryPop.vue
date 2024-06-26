@@ -167,7 +167,7 @@ function getHistoryList(type: Business, view_at = 0 as number) {
 
 <template>
   <div
-    bg="$bew-elevated-solid-1"
+    bg="$bew-elevated-solid"
     w="380px"
     rounded="$bew-radius"
     pos="relative"
@@ -181,7 +181,7 @@ function getHistoryList(type: Business, view_at = 0 as number) {
       p="y-4 x-6"
       pos="fixed top-0 left-0"
       w="full"
-      bg="$bew-elevated-1"
+      bg="$bew-elevated"
       z="2"
       border="!rounded-t-$bew-radius"
     >

@@ -133,7 +133,7 @@ async function logout() {
 
 <style lang="scss" scoped>
 #user-info-panel {
-  --uno: "p-4 rounded-$bew-radius w-300px -z-1 bg-$bew-elevated-solid-1 shadow-$bew-shadow-3";
+  --uno: "p-4 rounded-$bew-radius w-300px -z-1 bg-$bew-elevated-solid shadow-$bew-shadow-3";
 }
 
 #base-info {

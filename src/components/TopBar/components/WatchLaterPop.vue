@@ -53,7 +53,7 @@ function getAllWatchLaterList() {
   <div
     w="380px"
     shadow="$bew-shadow-2"
-    bg="$bew-elevated-solid-1"
+    bg="$bew-elevated-solid"
     rounded="$bew-radius"
     pos="relative"
     of="hidden"
@@ -66,7 +66,7 @@ function getAllWatchLaterList() {
       p="y-4 x-6"
       pos="fixed top-0 left-0"
       w="full"
-      bg="$bew-elevated-1"
+      bg="$bew-elevated"
       z="2"
       border="!rounded-t-$bew-radius"
     >

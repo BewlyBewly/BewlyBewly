@@ -256,7 +256,7 @@ function handleBackToTopOrRefresh() {
 
   .dock-content-inner {
     --uno: "duration-300 ease-in-out transform-gpu";
-    --uno: "p-2 m-2 bg-$bew-content-2 dark:bg-$bew-elevated-1";
+    --uno: "p-2 m-2 bg-$bew-content-2 dark:bg-$bew-elevated";
     --uno: "flex flex-col gap-2 shrink-0";
     --uno: "rounded-full border-1 border-$bew-border-color";
     box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
@@ -273,7 +273,7 @@ function handleBackToTopOrRefresh() {
     --uno: "md:w-45px w-35px md:h-45px h-35px";
     --uno: "grid place-items-center";
     --uno: "filter-$bew-filter-glass-1";
-    --uno: "bg-$bew-elevated-1 hover:bg-$bew-content-1-hover";
+    --uno: "bg-$bew-elevated hover:bg-$bew-content-1-hover";
     --uno: "rounded-full shadow-$bew-shadow-2 border-1 border-$bew-border-color";
 
     backdrop-filter: var(--bew-filter-glass-1);

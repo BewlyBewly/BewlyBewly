@@ -137,7 +137,7 @@ defineExpose({
 
 <template>
   <div
-    bg="$bew-elevated-solid-1"
+    bg="$bew-elevated-solid"
     w="500px"
     h="430px"
     rounded="$bew-radius"

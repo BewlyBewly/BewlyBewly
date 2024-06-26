@@ -73,7 +73,7 @@ function getUnreadMessageCount() {
 
 <template>
   <div
-    bg="$bew-elevated-solid-1"
+    bg="$bew-elevated-solid"
     w="170px"
     p="4"
     rounded="$bew-radius"

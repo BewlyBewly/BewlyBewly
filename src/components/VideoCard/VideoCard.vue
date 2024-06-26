@@ -310,7 +310,7 @@ function handleUndo() {
               </div>
               <div
                 v-else
-                bg="$bew-elevated-solid-1" text-center lh-30px h-30px w-30px
+                bg="$bew-elevated-solid" text-center lh-30px h-30px w-30px
                 rounded="1/2" shadow="$bew-shadow-1"
                 border="1 $bew-border-color"
               >

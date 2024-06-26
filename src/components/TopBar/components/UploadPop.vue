@@ -1,7 +1,7 @@
 <template>
   <div
     flex="~ col"
-    bg="$bew-elevated-solid-1"
+    bg="$bew-elevated-solid"
     rounded="$bew-radius"
     shadow="$bew-shadow-3"
     p="4"

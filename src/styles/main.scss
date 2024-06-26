@@ -122,7 +122,7 @@ img {
 // Adapt the colors of the two Bilibili Evolved's buttons on the left side to BewlyBewly theme
 .bewly-design {
   .be-settings > .sidebar > * {
-    background-color: var(--bew-elevated-solid-1) !important;
+    background-color: var(--bew-elevated-solid) !important;
     opacity: 0.4;
 
     &:hover {
