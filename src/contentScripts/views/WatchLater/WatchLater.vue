@@ -295,67 +295,79 @@ function jumpToLoginPage() {
 
     <aside relative w="full md:40% lg:30% xl:25%" order="1 md:2 lg:2">
       <div
-        pos="sticky top-120px" flex="~ col gap-4" justify-start my-10 w-full
-        h="auto md:[calc(100vh-160px)]" p-6
-        rounded="$bew-radius" overflow-hidden bg="$bew-fill-3"
+        pos="sticky top-120px"
+        w-full h="auto md:[calc(100vh-160px)]"
+        my-10
+        rounded="$bew-radius"
+        overflow-hidden
       >
+        <!-- Frosted Glass Cover -->
         <div
-          pos="absolute top-0 left-0" w-full h-full bg-cover bg-center
+          pos="absolute top-0 left-0" w-full h-full
           z--1
         >
           <div
-            absolute w-full h-full backdrop-blur-40px transform-gpu
+            absolute w-full h-full
             bg="$bew-fill-4"
           />
           <img
             v-if="currentWatchLaterList[0]"
             :src="removeHttpFromUrl(`${currentWatchLaterList[0].pic}@480w_270h_1c`)"
-            w-full h-full object="cover center"
+            w-full h-full object="cover center" blur-40px
           >
         </div>
 
-        <picture
-          rounded="$bew-radius" style="box-shadow: 0 16px 24px -12px rgba(0, 0, 0, .36)"
-          aspect-video mb-4 bg="$bew-fill-2"
+        <!-- Content -->
+        <main
+          pos="absolute top-0 left-0"
+          w-full h-full
+          overflow-overlay
+          flex="~ col gap-4 justify-start"
+          p-6
         >
-          <img
-            v-if="currentWatchLaterList[0]" :src="removeHttpFromUrl(`${currentWatchLaterList[0].pic}@480w_270h_1c`)"
-            rounded="$bew-radius" aspect-video w-full
+          <picture
+            rounded="$bew-radius" style="box-shadow: 0 16px 24px -12px rgba(0, 0, 0, .36)"
+            aspect-video mb-4 bg="$bew-fill-2"
           >
-        </picture>
+            <img
+              v-if="currentWatchLaterList[0]" :src="removeHttpFromUrl(`${currentWatchLaterList[0].pic}@480w_270h_1c`)"
+              rounded="$bew-radius" aspect-video w-full
+            >
+          </picture>
 
-        <h3 text="3xl white" fw-600 style="text-shadow: 0 0 12px rgba(0,0,0,.3)">
-          {{ t('watch_later.title') }} ({{ watchLaterCount }})
-        </h3>
-        <p v-if="watchLaterCount > 0" flex="~ col" gap-4>
-          <Button
-            color="rgba(255,255,255,.35)" block text-color="white" strong flex-1
-            @click="handlePlayAll"
-          >
-            <template #left>
-              <div i-tabler:player-play />
-            </template>
-            {{ t('common.play_all') }}
-          </Button>
-          <Button
-            color="rgba(255,255,255,.35)" block text-color="white" strong flex-1
-            @click="handleClearAllWatchLater"
-          >
-            <template #left>
-              <div i-tabler:trash />
-            </template>
-            {{ t('watch_later.clear_all') }}
-          </Button>
-          <Button
-            color="rgba(255,255,255,.35)" block text-color="white" strong flex-1
-            @click="handleRemoveWatchedVideos"
-          >
-            <template #left>
-              <div i-tabler:circle-minus />
-            </template>
-            {{ t('watch_later.remove_watched_videos') }}
-          </Button>
-        </p>
+          <h3 text="3xl white" fw-600 style="text-shadow: 0 0 12px rgba(0,0,0,.3)">
+            {{ t('watch_later.title') }} ({{ watchLaterCount }})
+          </h3>
+          <p v-if="watchLaterCount > 0" flex="~ col" gap-4>
+            <Button
+              color="rgba(255,255,255,.35)" block text-color="white" strong flex-1
+              @click="handlePlayAll"
+            >
+              <template #left>
+                <div i-tabler:player-play />
+              </template>
+              {{ t('common.play_all') }}
+            </Button>
+            <Button
+              color="rgba(255,255,255,.35)" block text-color="white" strong flex-1
+              @click="handleClearAllWatchLater"
+            >
+              <template #left>
+                <div i-tabler:trash />
+              </template>
+              {{ t('watch_later.clear_all') }}
+            </Button>
+            <Button
+              color="rgba(255,255,255,.35)" block text-color="white" strong flex-1
+              @click="handleRemoveWatchedVideos"
+            >
+              <template #left>
+                <div i-tabler:circle-minus />
+              </template>
+              {{ t('watch_later.remove_watched_videos') }}
+            </Button>
+          </p>
+        </main>
       </div>
     </aside>
   </div>

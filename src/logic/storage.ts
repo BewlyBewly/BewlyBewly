@@ -34,7 +34,7 @@ export interface Settings {
   enableWallpaperMasking: boolean
   wallpaperMaskOpacity: number
   wallpaperBlurIntensity: number
-  customizeWallpaper: wallpaperItem | null
+  locallyUploadedWallpaper: wallpaperItem | null
 
   searchPageDarkenOnSearchFocus: boolean
   searchPageBlurredOnSearchFocus: boolean
@@ -86,7 +86,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   enableWallpaperMasking: false,
   wallpaperMaskOpacity: 80,
   wallpaperBlurIntensity: 0,
-  customizeWallpaper: null,
+  locallyUploadedWallpaper: null,
 
   searchPageDarkenOnSearchFocus: true,
   searchPageBlurredOnSearchFocus: false,

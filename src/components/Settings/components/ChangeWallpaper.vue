@@ -74,7 +74,7 @@ function handleUploadWallpaper(e: Event) {
     fileToBase64(compressedFile).then((base64) => {
       // 使用base64字符串
       changeWallpaper(base64 as string)
-      settings.value.customizeWallpaper = {
+      settings.value.locallyUploadedWallpaper = {
         name: file.name,
         url: base64 as string,
       }
@@ -86,7 +86,7 @@ function handleUploadWallpaper(e: Event) {
 
 function handleRemoveCustomWallpaper() {
   changeWallpaper('')
-  settings.value.customizeWallpaper = null
+  settings.value.locallyUploadedWallpaper = null
 }
 </script>
 
@@ -144,19 +144,19 @@ function handleRemoveCustomWallpaper() {
             @change="handleUploadWallpaper"
           >
 
-          <Tooltip placement="top" :content="settings.customizeWallpaper?.name || ''" aspect-video>
+          <Tooltip placement="top" :content="settings.locallyUploadedWallpaper?.name || ''" aspect-video>
             <picture
               class="group"
               :class="{ 'selected-wallpaper': isGlobal
-                ? settings.wallpaper === settings.customizeWallpaper?.url
-                : settings.searchPageWallpaper === settings.customizeWallpaper?.url }"
+                ? settings.wallpaper === settings.locallyUploadedWallpaper?.url
+                : settings.searchPageWallpaper === settings.locallyUploadedWallpaper?.url }"
               aspect-video bg="$bew-theme-color-20" rounded="$bew-radius" overflow-hidden
               un-border="4 transparent" w-full
               flex="~ items-center justify-center"
-              @click="changeWallpaper(settings.customizeWallpaper?.url || '')"
+              @click="changeWallpaper(settings.locallyUploadedWallpaper?.url || '')"
             >
               <div
-                v-if="settings.customizeWallpaper"
+                v-if="settings.locallyUploadedWallpaper"
                 class="opacity-0 group-hover:opacity-100" duration-300
                 pos="absolute top-4px right-4px" z-1 text="14px" flex="~ gap-1"
               >
@@ -178,7 +178,7 @@ function handleRemoveCustomWallpaper() {
                 </button>
               </div>
               <div
-                v-if="!settings.customizeWallpaper"
+                v-if="!settings.locallyUploadedWallpaper"
                 absolute w-full h-full grid place-items-center
                 @click="handleUploadWallpaper"
               >
@@ -189,8 +189,8 @@ function handleRemoveCustomWallpaper() {
               </div>
               <img
                 v-else
-                :src="settings.customizeWallpaper.thumbnail || settings.customizeWallpaper.url"
-                :alt="settings.customizeWallpaper.name"
+                :src="settings.locallyUploadedWallpaper.thumbnail || settings.locallyUploadedWallpaper.url"
+                :alt="settings.locallyUploadedWallpaper.name"
                 w-full h-full object-cover
               >
             </picture>
