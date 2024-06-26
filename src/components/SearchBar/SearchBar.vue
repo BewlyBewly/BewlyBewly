@@ -343,8 +343,8 @@ async function handleClearSearchHistory() {
 }
 
 #search-wrap {
-  --b-search-bar-color: var(--bew-content-1);
-  --b-search-bar-color-hover: var(--bew-content-1-hover);
+  --b-search-bar-color: var(--bew-content);
+  --b-search-bar-color-hover: var(--bew-content-hover);
   --b-search-bar-color-focus: var(--b-search-bar-color);
 
   @mixin card-content {

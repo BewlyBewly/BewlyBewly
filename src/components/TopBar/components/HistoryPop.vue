@@ -228,7 +228,7 @@ function getHistoryList(type: Business, view_at = 0 as number) {
         <Empty
           v-if="!isLoading && historys.length === 0"
           pos="absolute top-0 left-0"
-          bg="$bew-content-1"
+          bg="$bew-content"
           z="0" w="full" h="full"
           flex="~ items-center"
         />

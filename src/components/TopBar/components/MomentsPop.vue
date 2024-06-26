@@ -332,7 +332,7 @@ defineExpose({
         <Empty
           v-if="!isLoading && moments.length === 0"
           pos="absolute top-0 left-0"
-          bg="$bew-content-1"
+          bg="$bew-content"
           z="0" w="full" h="full"
           flex="~ items-center"
         />

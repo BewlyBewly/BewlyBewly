@@ -152,7 +152,7 @@ defineExpose({
       pos="fixed top-0 left-0"
       w="full"
       h-50px
-      bg="$bew-content-1"
+      bg="$bew-content"
       z="2"
       un-border="!rounded-t-$bew-radius"
     >
@@ -210,7 +210,7 @@ defineExpose({
         <Loading
           v-if="isLoading && favoriteResources.length === 0"
           pos="absolute left-0"
-          bg="$bew-content-1"
+          bg="$bew-content"
           z="1"
           w="full"
           h="full"

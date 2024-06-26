@@ -85,14 +85,14 @@
       #home_v3_module_page_switch.home-page-switch-wrapper .inner-content-body-container .prev-page,
       .time-line-wrapper .time-line-body .timeline-common-content .next-page,
       .time-line-wrapper .time-line-body .timeline-common-content .prev-page {
-        background-color: var(--bew-content-solid-1);
+        background-color: var(--bew-content-solid);
       }
 
       .nav-tool-container .channel-entry .channel-item:hover,
       .nav-tool-container .new-q:hover,
       .nav-tool-container .top:hover,
       .nav-tool-container .service:hover {
-        background-color: var(--bew-content-solid-1-hover);
+        background-color: var(--bew-content-solid-hover);
       }
 
       .section-title-v2-wrapper .title-left .week-day-wrapper .week-day-item.active {
@@ -100,7 +100,7 @@
       }
 
       .section-title-v2-wrapper .title-right:hover {
-        background-color: var(--bew-content-solid-1-hover);
+        background-color: var(--bew-content-solid-hover);
       }
 
       .recommend-feed-line-rank-wrapper.feenline-rank-wrapper {

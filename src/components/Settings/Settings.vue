@@ -137,7 +137,7 @@ function setCurrentTitle() {
             backdrop-filter: var(--bew-filter-glass-2);
           "
           flex="~ gap-2 col" rounded="30px hover:25px" p-2 shadow
-          bg="$bew-content-2 hover:$bew-elevated dark:$bew-elevated dark-hover:$bew-elevated"
+          bg="$bew-content-alt hover:$bew-elevated dark:$bew-elevated dark-hover:$bew-elevated"
           scale="group-hover:105" duration-300 overflow-hidden antialiased transform-gpu
           border="1 $bew-border-color"
         >
@@ -174,7 +174,7 @@ function setCurrentTitle() {
           --un-shadow: var(--bew-shadow-4), var(--bew-shadow-edge-glow-2);
           backdrop-filter: var(--bew-filter-glass-2);
         "
-        relative overflow="x-hidde" w-full h-full bg="$bew-content-2 dark:$bew-elevated"
+        relative overflow="x-hidde" w-full h-full bg="$bew-content-alt dark:$bew-elevated"
         shadow rounded="$bew-radius" border="1 $bew-border-color" transform-gpu
       >
         <header

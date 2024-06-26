@@ -52,8 +52,8 @@ function handleClick(evt: MouseEvent) {
 
 <style lang="scss" scoped>
 .b-button {
-  --b-button-color: var(--bew-content-solid-1);
-  --b-button-color-hover: var(--bew-content-solid-1-hover);
+  --b-button-color: var(--bew-content-solid);
+  --b-button-color-hover: var(--bew-content-solid-hover);
   --b-button-text-color: var(--bew-text-1);
   --b-button-radius: var(--bew-radius);
   --b-button-padding: 14px;
