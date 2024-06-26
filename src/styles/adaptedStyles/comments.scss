@@ -209,7 +209,7 @@
     .bb-comment .comment-send-lite.comment-send-lite,
     .comment-bilibili-fold .comment-send-lite.comment-send-lite,
     .comment-wrapper .comment-m {
-      // background-color: var(--bew-content-solid-1);
+      // background-color: var(--bew-content-solid);
       background-color: var(--bew-bg);
     }
 
@@ -227,7 +227,7 @@
     .comment-bilibili-fold .comment-send-lite .textarea-container.focus textarea,
     .bili-dyn-forward-publishing__editor:not(.disabled):focus,
     .bili-dyn-forward-publishing__editor:not(.disabled):hover {
-      background-color: var(--bew-content-solid-1);
+      background-color: var(--bew-content-solid);
     }
 
     .forw-area {

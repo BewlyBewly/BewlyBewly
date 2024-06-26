@@ -130,7 +130,7 @@
     [class*="rankList_sponsor_rank_item"][class*="rankList_pos_rank_module"]
       [class*="rankList_sp_right"]
       [class*="rankList_sp_msg"] {
-      background-color: var(--bew-content-solid-1);
+      background-color: var(--bew-content-solid);
     }
 
     .special.wide .main-container {
@@ -146,7 +146,7 @@
     }
 
     [class*="SectionSelector_SectionSelector"] [class*="SectionSelector_expand"] {
-      background: linear-gradient(270deg, var(--bew-content-solid-1) 46.21%, transparent);
+      background: linear-gradient(270deg, var(--bew-content-solid) 46.21%, transparent);
     }
 
     [class*="numberListItem_number_list_item"] {
@@ -362,7 +362,7 @@
     .main-container .review-module .review-list .review-item .review-body,
     .main-container .nav-tools .tool-item,
     .main-container .season-list .ss-list-wrapper .expand-more {
-      background-color: var(--bew-content-solid-1);
+      background-color: var(--bew-content-solid);
     }
 
     .ep-list-wrapper .ep-item.cursor,

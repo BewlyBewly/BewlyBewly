@@ -12,7 +12,7 @@
   .header-channel {
     background-color: transparent;
     backdrop-filter: var(--bew-filter-glass-1);
-    background: var(--bew-elevated-1);
+    background: var(--bew-elevated);
     border-radius: var(--bew-radius);
     margin: 10px 20px;
     width: calc(100% - 40px);
@@ -39,7 +39,7 @@
     }
 
     .single-card.floor-card .badge {
-      background-color: var(--bew-content-solid-1);
+      background-color: var(--bew-content-solid);
     }
   }
 }

@@ -140,28 +140,28 @@
 
   // `--bew-content-*` for the flat background elements
   // #region `--bew-content-*` background colors
-  --bew-content-1: hsl(0 0% 100% / var(--bew-content-opacity));
-  --bew-content-1-hover: hsl(0 0% 85% / var(--bew-content-opacity));
-  --bew-content-2: hsl(240 31% 95% / var(--bew-content-opacity));
-  --bew-content-2-hover: hsl(240 31% 80% / var(--bew-content-opacity));
+  --bew-content: hsl(0 0% 100% / var(--bew-content-opacity));
+  --bew-content-hover: hsl(0 0% 85% / var(--bew-content-opacity));
+  --bew-content-alt: hsl(240 31% 95% / var(--bew-content-opacity));
+  --bew-content-alt-hover: hsl(240 31% 80% / var(--bew-content-opacity));
 
-  --bew-content-solid-1: hsl(0 0% 100%);
-  --bew-content-solid-1-hover: hsl(0 0% 85%);
-  --bew-content-solid-2: hsl(240 31% 95%);
-  --bew-content-solid-2-hover: hsl(240 31% 85%);
+  --bew-content-solid: hsl(0 0% 100%);
+  --bew-content-solid-hover: hsl(0 0% 85%);
+  --bew-content-alt-solid: hsl(240 31% 95%);
+  --bew-content-alt-solid-hover: hsl(240 31% 85%);
   // #endregion
 
   // `--bew-elevated-*` for popup, dialog and difference layers with difference elevation levels
   // #region `--bew-elevated-*` background colors
-  --bew-elevated-1: hsl(0 0% 100% / var(--bew-content-opacity));
-  --bew-elevated-1-hover: hsl(0 0% 85% / var(--bew-content-opacity));
-  --bew-elevated-2: hsl(0 0% 100% / var(--bew-content-opacity));
-  --bew-elevated-2-hover: hsl(0 0% 85% / var(--bew-content-opacity));
+  --bew-elevated: hsl(0 0% 100% / var(--bew-content-opacity));
+  --bew-elevated-hover: hsl(0 0% 85% / var(--bew-content-opacity));
+  --bew-elevated: hsl(0 0% 100% / var(--bew-content-opacity));
+  --bew-elevated-hover: hsl(0 0% 85% / var(--bew-content-opacity));
 
-  --bew-elevated-solid-1: hsl(0 0% 100%);
-  --bew-elevated-solid-1-hover: hsl(0 0% 85%);
-  --bew-elevated-solid-2: hsl(0 0% 100%);
-  --bew-elevated-solid-2-hover: hsl(0 0% 85%);
+  --bew-elevated-solid: hsl(0 0% 100%);
+  --bew-elevated-solid-hover: hsl(0 0% 85%);
+  --bew-elevated-solid: hsl(0 0% 100%);
+  --bew-elevated-solid-hover: hsl(0 0% 85%);
   // #endregion
   // #endregion
 
@@ -212,25 +212,21 @@
   --bew-homepage-bg: hsl(230 12% 6%);
   --bew-homepage-bg-mask: hsl(230 12% 6% / var(--bew-homepage-bg-mask-opacity));
 
-  --bew-content-1: hsl(230 12% 12% / var(--bew-content-opacity));
-  --bew-content-1-hover: hsl(230 12% 28% / var(--bew-content-opacity));
-  --bew-content-2: hsl(240 14% 15% / var(--bew-content-opacity));
-  --bew-content-2-hover: hsl(240 14% 31% / var(--bew-content-opacity));
+  --bew-content: hsl(230 12% 12% / var(--bew-content-opacity));
+  --bew-content-hover: hsl(230 12% 28% / var(--bew-content-opacity));
+  --bew-content-alt: hsl(240 14% 15% / var(--bew-content-opacity));
+  --bew-content-alt-hover: hsl(240 14% 31% / var(--bew-content-opacity));
 
-  --bew-content-solid-1: hsl(230 12% 12%);
-  --bew-content-solid-1-hover: hsl(230 12% 28%);
-  --bew-content-solid-2: hsl(240 14% 15%);
-  --bew-content-solid-2-hover: hsl(240 14% 31%);
+  --bew-content-solid: hsl(230 12% 12%);
+  --bew-content-solid-hover: hsl(230 12% 28%);
+  --bew-content-alt-solid: hsl(240 14% 15%);
+  --bew-content-alt-solid-hover: hsl(240 14% 31%);
 
-  --bew-elevated-1: hsl(230 12% 15% / var(--bew-content-opacity));
-  --bew-elevated-1-hover: hsl(230 12% 31% / var(--bew-content-opacity));
-  --bew-elevated-2: hsl(230 12% 18% / var(--bew-content-opacity));
-  --bew-elevated-2-hover: hsl(230 12% 34% / var(--bew-content-opacity));
+  --bew-elevated: hsl(230 12% 16% / var(--bew-content-opacity));
+  --bew-elevated-hover: hsl(230 12% 32% / var(--bew-content-opacity));
 
-  --bew-elevated-solid-1: hsl(230 12% 15%);
-  --bew-elevated-solid-1-hover: hsl(230 12% 31%);
-  --bew-elevated-solid-2: hsl(230 12% 18%);
-  --bew-elevated-solid-2-hover: hsl(230 12% 34%);
+  --bew-elevated-solid: hsl(230 12% 16%);
+  --bew-elevated-solid-hover: hsl(230 12% 32%);
 
   --bew-fill-1: rgb(131 131 145 / 14%);
   --bew-fill-2: rgb(131 131 145 / 24%);
@@ -294,10 +290,10 @@
   --pay_yellow: var(--Ye5);
   --pay_yellow_thin: var(--Ye1);
   --bg1: var(--bew-bg);
-  --bg2: var(--bew-content-solid-2);
-  --bg3: var(--bew-content-solid-2);
-  --bg1_float: var(--bew-elevated-solid-1);
-  --bg2_float: var(--bew-elevated-solid-2);
+  --bg2: var(--bew-content-alt-solid);
+  --bg3: var(--bew-content-alt-solid);
+  --bg1_float: var(--bew-elevated-solid);
+  --bg2_float: var(--bew-elevated-solid);
   --text_white: var(--Wh0_u);
   --text1: var(--bew-text-1);
   --text2: var(--bew-text-2);
@@ -308,10 +304,10 @@
   --line_light: var(--bew-fill-1);
   --line_regular: var(--bew-fill-2);
   --line_bold: var(--bew-fill-3);
-  --graph_white: var(--bew-content-solid-1);
-  --graph_bg_thin: var(--bew-content-solid-1);
-  --graph_bg_regular: var(--bew-content-solid-1);
-  --graph_bg_thick: var(--bew-elevated-solid-2);
+  --graph_white: var(--bew-content-solid);
+  --graph_bg_thin: var(--bew-content-solid);
+  --graph_bg_regular: var(--bew-content-solid);
+  --graph_bg_thick: var(--bew-elevated-solid);
   --graph_weak: var(--Ga3);
   --graph_medium: var(--Ga5);
   --graph_icon: var(--Ga7);
@@ -330,16 +326,16 @@
 
   --graph_bg_thin_rgb: 13, 14, 17;
 
-  --bpx-aux-header-bg: var(--bew-content-solid-1);
+  --bpx-aux-header-bg: var(--bew-content-solid);
   --bpx-aux-header-icon: var(--bew-text-2);
   --bpx-aux-header-font: var(--bew-text-1);
-  --bpx-aux-content-bg: var(--bew-content-solid-1);
+  --bpx-aux-content-bg: var(--bew-bg);
   --bpx-aux-content-font1: var(--bew-text-1);
   --bpx-aux-content-font2: var(--bew-text-2);
-  --bpx-aux-footer-bg: var(--bew-content-solid-1);
+  --bpx-aux-footer-bg: var(--bew-content-solid);
   --bpx-aux-footer-font: var(--bew-text-3);
   --bpx-aux-footer-font-hover: var(--bew-text-1);
-  --bpx-dmsend-main-bg: var(--bew-content-solid-1);
+  --bpx-dmsend-main-bg: var(--bew-content-solid);
   --bpx-dmsend-input-bg: var(--bew-fill-1);
   --bpx-dmsend-info-font: var(--bew-text-1);
   --bpx-dmsend-switch-icon: var(--bew-text-2);

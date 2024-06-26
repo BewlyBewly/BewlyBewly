@@ -342,11 +342,11 @@
     .config,
     .bili-im,
     .bili-im .message-list {
-      background-color: var(--bew-content-solid-1);
+      background-color: var(--bew-content-solid);
     }
 
     .cs-q-tab-area ul.cs-q-tabs {
-      background-color: var(--bew-content-solid-2);
+      background-color: var(--bew-content-alt-solid);
     }
 
     .static-popup,
@@ -357,11 +357,11 @@
     .tab-list .tab-item.active::before,
     .group-helper-msg-list::after,
     .cs-actions-wrap {
-      background-color: var(--bew-elevated-solid-1);
+      background-color: var(--bew-elevated-solid);
     }
 
     .cs-q-tab-area.shadow:after {
-      background: linear-gradient(270deg, var(--bew-content-solid-2) 0%, transparent 100%);
+      background: linear-gradient(270deg, var(--bew-content-alt-solid) 0%, transparent 100%);
     }
 
     .follow-btn.inactive,

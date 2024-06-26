@@ -462,8 +462,8 @@ defineExpose({
           <SearchBar
             v-if="props.showSearchBar"
             style="
-              --b-search-bar-color: var(--bew-elevated-1);
-              --b-search-bar-hover: var(--bew-elevated-1-hover);
+              --b-search-bar-color: var(--bew-elevated);
+              --b-search-bar-hover: var(--bew-elevated-hover);
             "
           />
         </Transition>
@@ -479,7 +479,7 @@ defineExpose({
             backdrop-filter: var(--bew-filter-glass-1);
             box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
           "
-          ml-auto flex h-55px p-2 bg="$bew-elevated-1"
+          ml-auto flex h-55px p-2 bg="$bew-elevated"
           text="$bew-text-1" border="1 $bew-border-color" rounded-full
           transform-gpu
         >

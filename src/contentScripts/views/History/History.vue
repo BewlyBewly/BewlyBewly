@@ -482,7 +482,7 @@ function jumpToLoginPage() {
           p="x-14px"
           lh-35px h-35px
           rounded="$bew-radius"
-          bg="$bew-content-solid-1"
+          bg="$bew-content-solid"
           shadow="$bew-shadow-1"
           outline-none
           w-full

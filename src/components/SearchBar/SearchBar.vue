@@ -343,8 +343,8 @@ async function handleClearSearchHistory() {
 }
 
 #search-wrap {
-  --b-search-bar-color: var(--bew-content-1);
-  --b-search-bar-color-hover: var(--bew-content-1-hover);
+  --b-search-bar-color: var(--bew-content);
+  --b-search-bar-color-hover: var(--bew-content-hover);
   --b-search-bar-color-focus: var(--b-search-bar-color);
 
   @mixin card-content {
@@ -382,7 +382,7 @@ async function handleClearSearchHistory() {
 
   #search-history {
     @include search-content;
-    --uno: "bg-$bew-elevated-1";
+    --uno: "bg-$bew-elevated";
 
     .history-list {
       .title {
@@ -400,7 +400,7 @@ async function handleClearSearchHistory() {
 
   #search-suggestion {
     @include search-content;
-    --uno: "bg-$bew-elevated-1";
+    --uno: "bg-$bew-elevated";
 
     .suggestion-item {
       @include search-content-item;

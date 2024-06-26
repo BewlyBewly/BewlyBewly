@@ -193,7 +193,7 @@ function isMusic(item: FavoriteResource) {
       <div
         fixed z-10 absolute p-2 flex="~ gap-2"
         items-center
-        bg="$bew-elevated-solid-1" rounded="$bew-radius" shadow="$bew-shadow-2" mt--2 transition="all 300 ease-in-out"
+        bg="$bew-elevated-solid" rounded="$bew-radius" shadow="$bew-shadow-2" mt--2 transition="all 300 ease-in-out"
         :class="{ hide: shouldMoveCtrlBarUp }"
       >
         <Select v-model="selectedCategory" w-150px :options="categoryOptions" @change="(val) => changeCategory(val.value)" />
@@ -268,64 +268,81 @@ function isMusic(item: FavoriteResource) {
 
     <aside relative w="full md:40% lg:30% xl:25%" class="hidden md:block" order="1 md:2 lg:2">
       <div
-        pos="sticky top-120px" flex="~ col gap-4" justify-start my-10 w-full
-        h="auto md:[calc(100vh-160px)]" p-6
-        rounded="$bew-radius" overflow-hidden bg="$bew-fill-3"
+        pos="sticky top-120px"
+        w-full h="auto md:[calc(100vh-160px)]"
+        my-10
+        rounded="$bew-radius"
+        overflow-hidden
       >
+        <!-- Frosted Glass Cover -->
         <div
-          pos="absolute top-0 left-0" w-full h-full bg-cover bg-center
+          pos="absolute top-0 left-0" w-full h-full
           z--1
         >
           <div
-            absolute w-full h-full backdrop-blur-40px transform-gpu
+            absolute w-full h-full
             bg="$bew-fill-4"
           />
           <img
             v-if="activatedCategoryCover"
             :src="removeHttpFromUrl(`${activatedCategoryCover}@480w_270h_1c`)"
-            w-full h-full object="cover center"
+            w-full h-full object="cover center" blur-40px
           >
         </div>
 
-        <picture
-          rounded="$bew-radius" style="box-shadow: 0 16px 24px -12px rgba(0, 0, 0, .36)"
-          aspect-video mb-4 bg="$bew-fill-2"
+        <!-- Content -->
+        <main
+          pos="absolute top-0 left-0"
+          w-full h-full
+          overflow-overlay
+          flex="~ col gap-4 justify-start"
+          p-6
         >
-          <img
-            v-if="activatedCategoryCover" :src="removeHttpFromUrl(`${activatedCategoryCover}@480w_270h_1c`)"
-            rounded="$bew-radius" aspect-video w-full object-cover
+          <picture
+            rounded="$bew-radius" style="box-shadow: 0 16px 24px -12px rgba(0, 0, 0, .36)"
+            aspect-video mb-4 bg="$bew-fill-2"
           >
-          <div v-else aspect-video w-full>
-            <!-- <Empty /> -->
-          </div>
-        </picture>
+            <img
+              v-if="activatedCategoryCover" :src="removeHttpFromUrl(`${activatedCategoryCover}@480w_270h_1c`)"
+              rounded="$bew-radius" aspect-video w-full object-cover
+            >
+            <div v-else aspect-video w-full>
+              <!-- <Empty /> -->
+            </div>
+          </picture>
 
-        <h3 text="3xl white" fw-600 style="text-shadow: 0 0 12px rgba(0,0,0,.3)">
-          {{ selectedCategory?.title }}
-        </h3>
-        <p flex="~ col" gap-4>
-          <Button
-            color="rgba(255,255,255,.35)" block text-color="white" strong flex-1
-            @click="handlePlayAll"
+          <h3 text="3xl white" fw-600 style="text-shadow: 0 0 12px rgba(0,0,0,.3)">
+            {{ selectedCategory?.title }}
+          </h3>
+          <p flex="~ col" gap-4>
+            <Button
+              color="rgba(255,255,255,.35)" block text-color="white" strong flex-1
+              @click="handlePlayAll"
+            >
+              <template #left>
+                <div i-tabler:player-play />
+              </template>
+              {{ t('common.play_all') }}
+            </Button>
+          </p>
+          <ul
+            class="category-list" h-full min-h-200px
+            overflow-overlay
+            border="1 color-[rgba(255,255,255,.2)]"
+            rounded="$bew-radius"
           >
-            <template #left>
-              <div i-tabler:player-play />
-            </template>
-            {{ t('common.play_all') }}
-          </Button>
-        </p>
-        <ul class="category-list" h-full overflow-overlay border="1 color-[rgba(255,255,255,.2)]" rounded="$bew-radius">
-          <li
-            v-for="item in favoriteCategories" :key="item.id"
-            border-b="1 color-[rgba(255,255,255,.2)]"
-            lh-30px px-4 cursor-pointer hover:bg="[rgba(255,255,255,.35)]"
-            duration-300 color-white flex justify-between
-            :style="{ background: item.id === selectedCategory?.id ? 'rgba(255,255,255,.35)' : '', pointerEvents: isFullPageLoading ? 'none' : 'auto' }"
-            @click="changeCategory(item)"
-          >
-            <span>{{ item.title }}</span> <span ml-2 color-white color-opacity-60>{{ item.media_count }}</span>
-          </li>
-        </ul>
+            <li
+              v-for="item in favoriteCategories" :key="item.id"
+              border-b="1 color-[rgba(255,255,255,.2)]"
+              lh-30px px-4 cursor-pointer hover:bg="[rgba(255,255,255,.35)]"
+              duration-300 color-white flex justify-between
+              :style="{ background: item.id === selectedCategory?.id ? 'rgba(255,255,255,.35)' : '', pointerEvents: isFullPageLoading ? 'none' : 'auto' }"
+              @click="changeCategory(item)"
+            >
+              <span>{{ item.title }}</span> <span ml-2 color-white color-opacity-60>{{ item.media_count }}</span>
+            </li>
+          </ul>
+        </main>
       </div>
     </aside>
   </div>

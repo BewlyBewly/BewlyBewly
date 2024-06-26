@@ -295,7 +295,7 @@
   // 深色模式下對主題顏色調整
   &.dark {
     .bili-dyn-item {
-      --bg1: var(--bew-content-solid-1);
+      --bg1: var(--bew-content-solid);
       --bg2: var(--bew-bg);
     }
 
@@ -506,7 +506,7 @@
     }
 
     .emoji-box {
-      border-color: var(--bew-content-solid-2);
+      border-color: var(--bew-content-alt-solid);
     }
 
     #page-fav .fav-main .small-item {
@@ -621,7 +621,7 @@
     .follow-dialog-wrap .follow-dialog-window .title,
     .follow-dialog-wrap .follow-dialog-window .content,
     .bili-at-popup__user--selected {
-      background-color: var(--bew-elevated-solid-1);
+      background-color: var(--bew-elevated-solid);
     }
 
     .series-item .split-line,
@@ -631,7 +631,7 @@
     }
 
     .col-full {
-      background-color: var(--bew-content-solid-1);
+      background-color: var(--bew-content-solid);
       box-shadow: 0 0 0 1px var(--bew-border-color);
     }
 
@@ -680,7 +680,7 @@
     }
 
     #page-setting #setting-new-tag-btn {
-      background: var(--bew-content-solid-1);
+      background: var(--bew-content-solid);
     }
 
     .search-page,
@@ -695,7 +695,7 @@
     #page-index .col-1::after,
     #page-index .col-2 .section,
     #page-dynamic .col-2 .section {
-      background-color: var(--bew-content-solid-1);
+      background-color: var(--bew-content-solid);
     }
 
     .main-content .card-content .post-content.repost,
@@ -706,19 +706,19 @@
     .bb-comment .operation .opera-list,
     .comment-bilibili-fold .operation .opera-list,
     .bili-at-popup {
-      background-color: var(--bew-content-solid-2);
+      background-color: var(--bew-content-alt-solid);
     }
 
     .emoji-box .emoji-tabs,
     .bb-comment .operation .opera-list li:hover,
     .comment-bilibili-fold .operation .opera-list li:hover,
     .pagination {
-      background-color: var(--bew-content-1);
+      background-color: var(--bew-content);
     }
 
     .emoji-box .emoji-text:hover,
     .emoji-box .emoji-tabs .tab-link.on {
-      background-color: var(--bew-content-2);
+      background-color: var(--bew-content-alt);
     }
 
     .elec .new-elec-trigger:hover {

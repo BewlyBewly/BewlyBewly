@@ -24,13 +24,13 @@ function handleClose() {
         --un-shadow: var(--bew-shadow-3) var(--bew-shadow-edge-glow-2);
         backdrop-filter: var(--bew-filter-glass-2);
       "
-      pos="fixed top-1/2 left-1/2" bg="$bew-content-2 dark:$bew-elevated-1" rounded="$bew-radius"
+      pos="fixed top-1/2 left-1/2" bg="$bew-content-alt dark:$bew-elevated" rounded="$bew-radius"
       transform="translate--1/2 translate-z-0 gpu" z-2 shadow overflow="x-hidden y-overlay" w="$b-dialog-width"
       h="$b-dialog-height" antialiased
     >
       <header
         style="
-          text-shadow: 0 0 15px var(--bew-elevated-solid-1), 0 0 20px var(--bew-elevated-solid-1)
+          text-shadow: 0 0 15px var(--bew-elevated-solid), 0 0 20px var(--bew-elevated-solid)
         "
         pos="sticky top-0 left-0" w-full h-80px px-8 flex
         items-center justify-between

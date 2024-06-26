@@ -49,7 +49,7 @@ const genres = computed(() => [
     shadow="$bew-shadow-3"
     flex="~"
     p="4"
-    bg="$bew-elevated-1"
+    bg="$bew-elevated"
     rounded="$bew-radius"
   >
     <ul

@@ -80,7 +80,7 @@
 
     .bili-dyn-home--member,
     #app {
-      --bg1: var(--bew-content-solid-1);
+      --bg1: var(--bew-content-solid);
       --bg2: var(--bew-bg);
     }
 
@@ -246,7 +246,7 @@
     .bili-dyn-live-users__title,
     .bili-dyn-list-loading,
     .video-container {
-      background-color: var(--bew-content-solid-1);
+      background-color: var(--bew-content-solid);
     }
 
     .bili-rich-textarea__inner {
@@ -298,7 +298,7 @@
     }
 
     .bili-topic-search__popover {
-      background-color: var(--bew-content-solid-2);
+      background-color: var(--bew-content-alt-solid);
       border-color: var(--bew-border-color);
     }
 
@@ -323,11 +323,11 @@
     .bili-dyn-card-video__body,
     .bili-dyn-card-pgc__body,
     .feed-card .loading-content {
-      background-color: var(--bew-content-solid-1);
+      background-color: var(--bew-content-solid);
     }
 
     .bili-dyn-item__panel .bili-comment {
-      --bg1: var(--bew-content-solid-1);
+      --bg1: var(--bew-content-solid);
     }
 
     .reference .dyn-goods__wrap,
@@ -368,7 +368,7 @@
     }
 
     .bili-dyn-version-control__btn {
-      background-color: var(--bew-content-solid-1);
+      background-color: var(--bew-content-solid);
       border-color: var(--bew-border-color);
       color: var(--bew-text-1);
     }

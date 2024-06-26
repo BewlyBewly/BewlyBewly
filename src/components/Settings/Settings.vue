@@ -137,7 +137,7 @@ function setCurrentTitle() {
             backdrop-filter: var(--bew-filter-glass-2);
           "
           flex="~ gap-2 col" rounded="30px hover:25px" p-2 shadow
-          bg="$bew-content-2 hover:$bew-elevated-1 dark:$bew-elevated-1 dark-hover:$bew-elevated-2"
+          bg="$bew-content-alt hover:$bew-elevated dark:$bew-elevated dark-hover:$bew-elevated"
           scale="group-hover:105" duration-300 overflow-hidden antialiased transform-gpu
           border="1 $bew-border-color"
         >
@@ -174,7 +174,7 @@ function setCurrentTitle() {
           --un-shadow: var(--bew-shadow-4), var(--bew-shadow-edge-glow-2);
           backdrop-filter: var(--bew-filter-glass-2);
         "
-        relative overflow="x-hidde" w-full h-full bg="$bew-content-2 dark:$bew-elevated-1"
+        relative overflow="x-hidde" w-full h-full bg="$bew-content-alt dark:$bew-elevated"
         shadow rounded="$bew-radius" border="1 $bew-border-color" transform-gpu
       >
         <header
@@ -182,7 +182,7 @@ function setCurrentTitle() {
           pos="fixed top-0 left-0" p="x-11"
           z-1 rounded="t-$bew-radius"
           style="
-            text-shadow: 0 0 10px var(--bew-elevated-solid-1), 0 0 15px var(--bew-elevated-solid-1)
+            text-shadow: 0 0 10px var(--bew-elevated-solid), 0 0 15px var(--bew-elevated-solid)
           "
         >
           <!-- Mask -->
@@ -201,11 +201,11 @@ function setCurrentTitle() {
           <div
             style="
               backdrop-filter: var(--bew-filter-glass-1);
-              box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-1);
+              box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
             "
             text="!16px hover:$bew-theme-color" w="32px" h="32px"
             flex="~ items-center justify-center shrink-0"
-            bg="$bew-fill-1 hover:$bew-theme-color-30"
+            bg="$bew-elevated dark:$bew-fill-1 hover:$bew-theme-color-30"
             rounded-8 cursor="pointer" border="1 $bew-border-color" box-border
             duration-300
             @click="handleClose"

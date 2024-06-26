@@ -440,7 +440,7 @@ defineExpose({ initData })
       <div
         style="backdrop-filter: var(--bew-filter-glass-1);"
         :style="{ transform: `translate(${videoOptionsPosition.left}, ${videoOptionsPosition.top})` }"
-        p-2 bg="$bew-elevated-1" rounded="$bew-radius" pos="absolute top-0 left-0"
+        p-2 bg="$bew-elevated" rounded="$bew-radius" pos="absolute top-0 left-0"
         w-150px m="t-4 l-[calc(-150px+1rem)]"
         shadow="$bew-shadow-1" z-10
       >
