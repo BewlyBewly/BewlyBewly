@@ -38,10 +38,10 @@
     0 30px 40px -8px rgb(0 0 0 / 0.12);
 
   // Use this to imitate the frosted glass edge effect in components with a frosted glass design (except dialogs)
-  --bew-shadow-edge-glow-1: inset 0 0 4px rgba(0, 0, 0, 0.04);
+  --bew-shadow-edge-glow-1: inset 0 0 4px rgba(0, 0, 0, 0.06);
 
   // Use this for dialogs with the frosted glass effect
-  --bew-shadow-edge-glow-2: inset 0 0 8px rgba(0, 0, 0, 0.06);
+  --bew-shadow-edge-glow-2: inset 0 0 8px rgba(0, 0, 0, 0.08);
   // #endregion
 
   // #region Theme Color & Status Colors
@@ -133,7 +133,7 @@
   --bew-homepage-bg-mask: hsl(240 31% 96% / var(--bew-homepage-bg-mask-opacity));
   // #endregion
 
-  --bew-content-opacity: 0.74;
+  --bew-content-opacity: 0.68;
 
   // #region Content colors, used to buttons, cards, popover and so on
   // Variable names that don't contain `solid` are used to frosted glass effect elements
@@ -195,7 +195,7 @@
     0 30px 40px -8px rgb(0 0 0 / 0.22);
 
   --bew-shadow-edge-glow-1: inset 0 0 4px rgba(255, 255, 255, 0.06);
-  --bew-shadow-edge-glow-2: inset 0 0 8px rgba(255, 255, 255, 0.1);
+  --bew-shadow-edge-glow-2: inset 0 0 8px rgba(255, 255, 255, 0.08);
   // #endregion
 
   --bew-logo-color: var(--bew-text-1);
@@ -212,21 +212,21 @@
   --bew-homepage-bg: hsl(230 12% 6%);
   --bew-homepage-bg-mask: hsl(230 12% 6% / var(--bew-homepage-bg-mask-opacity));
 
-  --bew-content: hsl(230 12% 12% / var(--bew-content-opacity));
-  --bew-content-hover: hsl(230 12% 28% / var(--bew-content-opacity));
-  --bew-content-alt: hsl(240 14% 15% / var(--bew-content-opacity));
-  --bew-content-alt-hover: hsl(240 14% 31% / var(--bew-content-opacity));
+  --bew-content: hsl(230 12% 10% / var(--bew-content-opacity));
+  --bew-content-hover: hsl(230 12% 26% / var(--bew-content-opacity));
+  --bew-content-alt: hsl(240 14% 13% / var(--bew-content-opacity));
+  --bew-content-alt-hover: hsl(240 14% 29% / var(--bew-content-opacity));
 
-  --bew-content-solid: hsl(230 12% 12%);
-  --bew-content-solid-hover: hsl(230 12% 28%);
-  --bew-content-alt-solid: hsl(240 14% 15%);
-  --bew-content-alt-solid-hover: hsl(240 14% 31%);
+  --bew-content-solid: hsl(230 12% 10%);
+  --bew-content-solid-hover: hsl(230 12% 26%);
+  --bew-content-alt-solid: hsl(240 14% 13%);
+  --bew-content-alt-solid-hover: hsl(240 14% 29%);
 
-  --bew-elevated: hsl(230 12% 16% / var(--bew-content-opacity));
-  --bew-elevated-hover: hsl(230 12% 32% / var(--bew-content-opacity));
+  --bew-elevated: hsl(230 12% 14% / var(--bew-content-opacity));
+  --bew-elevated-hover: hsl(230 12% 30% / var(--bew-content-opacity));
 
-  --bew-elevated-solid: hsl(230 12% 16%);
-  --bew-elevated-solid-hover: hsl(230 12% 32%);
+  --bew-elevated-solid: hsl(230 12% 14%);
+  --bew-elevated-solid-hover: hsl(230 12% 30%);
 
   --bew-fill-1: rgb(131 131 145 / 14%);
   --bew-fill-2: rgb(131 131 145 / 24%);
