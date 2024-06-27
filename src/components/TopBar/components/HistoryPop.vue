@@ -171,7 +171,8 @@ function getHistoryList(type: Business, view_at = 0 as number) {
     w="380px"
     rounded="$bew-radius"
     pos="relative"
-    style="box-shadow: var(--bew-shadow-2)"
+    shadow="[var(--bew-shadow-edge-glow-1),var(--bew-shadow-3)]"
+    border="1 $bew-border-color"
   >
     <!-- top bar -->
     <header
