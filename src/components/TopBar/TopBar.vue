@@ -472,14 +472,62 @@ defineExpose({
       <!-- right content -->
       <div
         class="right-side"
-        flex="inline xl:1 justify-center items-center"
+        flex="inline xl:1 justify-end items-center"
       >
+        <!-- Avatar -->
+        <div
+          v-if="isLogin"
+          ref="avatar"
+          class="avatar right-side-item"
+        >
+          <a
+            ref="avatarImg"
+            :href="`https://space.bilibili.com/${mid}`"
+            :target="isHomePage() ? '_blank' : '_self'"
+            class="avatar-img"
+            :class="{ hover: popupVisible.userPanel }"
+            :style="{
+              backgroundImage: `url(${`${userInfo.face}`.replace(
+                'http:',
+                '',
+              )})`,
+            }"
+            rounded-full w-40px h-40px
+            shadow="$bew-shadow-2"
+            bg="$bew-fill-3 cover center"
+            z-1
+          />
+          <div
+            ref="avatarShadow"
+            class="avatar-shadow"
+            :class="{ hover: popupVisible.userPanel }"
+            :style="{
+              backgroundImage: `url(${`${userInfo.face}`.replace(
+                'http:',
+                '',
+              )})`,
+            }"
+            pos="absolute top-0" z-0 pointer-events-none
+            bg="cover center" blur-sm
+            rounded-full
+            w-40px h-40px
+          />
+          <Transition name="slide-in">
+            <UserPanelPop
+              v-if="popupVisible.userPanel"
+              :user-info="userInfo"
+              after:h="!0"
+              class="bew-popover"
+            />
+          </Transition>
+        </div>
+
         <div
           style="
             backdrop-filter: var(--bew-filter-glass-1);
             box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
           "
-          ml-auto flex h-55px p-2 bg="$bew-elevated"
+          flex h-50px px-6px bg="$bew-elevated"
           text="$bew-text-1" border="1 $bew-border-color" rounded-full
           transform-gpu
         >
@@ -491,58 +539,6 @@ defineExpose({
             </a>
           </div>
           <template v-if="isLogin">
-            <!-- Avatar -->
-            <div
-              ref="avatar"
-              class="avatar right-side-item"
-            >
-              <a
-                ref="avatarImg"
-                :href="`https://space.bilibili.com/${mid}`"
-                :target="isHomePage() ? '_blank' : '_self'"
-                class="avatar-img"
-                :class="{ hover: popupVisible.userPanel }"
-                rounded-full
-                z-1
-                w-38px
-                h-38px
-                bg="$bew-fill-3 cover center"
-                :style="{
-                  backgroundImage: `url(${`${userInfo.face}`.replace(
-                    'http:',
-                    '',
-                  )})`,
-                }"
-              />
-              <div
-                ref="avatarShadow"
-                class="avatar-shadow"
-                :class="{ hover: popupVisible.userPanel }"
-                pos="absolute top-0"
-                bg="cover center"
-                blur-sm
-                opacity="60"
-                rounded-full
-                z-0
-                w-38px
-                h-38px
-                :style="{
-                  backgroundImage: `url(${`${userInfo.face}`.replace(
-                    'http:',
-                    '',
-                  )})`,
-                }"
-              />
-              <Transition name="slide-in">
-                <UserPanelPop
-                  v-if="popupVisible.userPanel"
-                  :user-info="userInfo"
-                  after:h="!0"
-                  class="bew-popover"
-                />
-              </Transition>
-            </div>
-
             <!-- TODO: need to refactor to this -->
             <!-- <div display="lg:flex none">
               <div v-for="item in topBarItems" :key="item.i18nKey" class="right-side-item">
@@ -727,12 +723,8 @@ defineExpose({
                 bg="$bew-theme-color"
                 rounded-40px
                 un-text="!white !base"
-                mx-1
-                flex="~"
-                justify="center"
-                w="38px"
-                h="38px"
-                p="x-4"
+                w-35px h-35px ml-1
+                flex="~ justify-center"
                 shadow
                 filter="hover:brightness-110"
                 style="--un-shadow: 0 0 10px var(--bew-theme-color-60)"
@@ -827,12 +819,13 @@ defineExpose({
 
     &:not(.avatar) a {
       --uno: "text-xl flex items-center p-2 rounded-40px duration-300 relative z-5";
+      --uno: "h-35px h-35px";
     }
 
     &.active a,
     &:not(.upload) a:hover {
       --un-drop-shadow: drop-shadow(0 0 6px white);
-      --uno: "bg-$bew-fill-2";
+      --uno: "bg-$bew-fill-2 shadow-[var(--bew-shadow-edge-glow-1),var(--bew-shadow-1)]";
     }
   }
 
@@ -842,7 +835,7 @@ defineExpose({
   }
 
   .avatar {
-    --uno: "flex items-center ml-2px pr-2 relative z-1";
+    --uno: "flex items-center mr-4 relative z-1";
 
     .avatar-img,
     .avatar-shadow {
@@ -854,7 +847,11 @@ defineExpose({
     }
 
     .avatar-shadow {
-      --uno: "pointer-events-none";
+      --uno: "opacity-0";
+
+      &.hover {
+        --uno: "opacity-60";
+      }
     }
   }
 }

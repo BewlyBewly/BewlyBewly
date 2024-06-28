@@ -138,11 +138,12 @@ defineExpose({
 <template>
   <div
     bg="$bew-elevated-solid"
-    w="500px"
+    w="450px"
     h="430px"
     rounded="$bew-radius"
     pos="relative"
-    style="box-shadow: var(--bew-shadow-2)"
+    shadow="[var(--bew-shadow-edge-glow-1),var(--bew-shadow-3)]"
+    border="1 $bew-border-color"
   >
     <!-- top bar -->
     <header
@@ -242,14 +243,14 @@ defineExpose({
             <section flex="~ gap-4" item-start>
               <div
                 bg="$bew-fill-1"
-                w="150px"
+                w="120px"
                 flex="shrink-0"
                 rounded="$bew-radius-half"
                 overflow="hidden"
               >
                 <div pos="relative">
                   <img
-                    w="150px"
+                    w="120px"
                     class="aspect-video"
                     :src="`${removeHttpFromUrl(item.cover)}@256w_144h_1c`"
                     :alt="item.title"
@@ -277,7 +278,7 @@ defineExpose({
                 </h3>
                 <div
                   text="$bew-text-2 sm"
-                  m="t-4"
+                  m="t-2"
                   flex="~"
                   items-center
                 >

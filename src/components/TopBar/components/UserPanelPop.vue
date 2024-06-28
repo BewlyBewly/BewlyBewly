@@ -133,7 +133,9 @@ async function logout() {
 
 <style lang="scss" scoped>
 #user-info-panel {
-  --uno: "p-4 rounded-$bew-radius w-300px -z-1 bg-$bew-elevated-solid shadow-$bew-shadow-3";
+  --uno: "p-4 rounded-$bew-radius w-300px -z-1 bg-$bew-elevated";
+  --uno: "border-1 border-$bew-border-color shadow-[var(--bew-shadow-edge-glow-1),var(--bew-shadow-3)]";
+  backdrop-filter: var(--bew-filter-glass-1);
 }
 
 #base-info {
@@ -145,7 +147,7 @@ async function logout() {
 
   a {
     --uno: "p-2 m-0 rounded-$bew-radius text-sm flex flex-col items-center transition-all duration-300";
-    --uno: "bg-$bew-fill-1 hover:bg-$bew-theme-color";
+    --uno: "bg-$bew-fill-1 shadow-[var(--bew-shadow-edge-glow-1)] hover:bg-$bew-theme-color";
 
     > * {
       --uno: "transition-all duration-300";
@@ -171,6 +173,7 @@ async function logout() {
 
   a {
     --uno: "px-4 py-2 mb-1 flex justify-between items-center rounded-$bew-radius transition-all duration-300 hover:bg-$bew-fill-2";
+    --uno: "hover:shadow-[var(--bew-shadow-edge-glow-1),var(--bew-shadow-1)]";
 
     span {
       --uno: "text-$bew-text-2";
@@ -180,5 +183,6 @@ async function logout() {
 
 #logout {
   --uno: "text-$bew-error-color important:block px-4 py-2 rounded-$bew-radius duration-300 cursor-pointer hover:bg-$bew-fill-2";
+  --uno: "hover:shadow-[var(--bew-shadow-edge-glow-1),var(--bew-shadow-1)]";
 }
 </style>

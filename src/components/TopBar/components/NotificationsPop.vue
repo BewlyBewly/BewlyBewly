@@ -77,8 +77,9 @@ function getUnreadMessageCount() {
     w="170px"
     p="4"
     rounded="$bew-radius"
+    shadow="[var(--bew-shadow-edge-glow-1),var(--bew-shadow-3)]"
+    border="1 $bew-border-color"
     flex="~ col"
-    shadow="$bew-shadow-3"
   >
     <a
       v-for="item in list"
