@@ -105,8 +105,7 @@ function getAllWatchLaterList() {
         <Loading
           v-if="isLoading && watchLaterList.length === 0"
           h="full"
-          flex="~"
-          items="center"
+          flex="~ items-center"
         />
 
         <!-- empty -->
@@ -116,6 +115,7 @@ function getAllWatchLaterList() {
           bg="$bew-content"
           z="0" w="full" h="full"
           flex="~ items-center"
+          rounded="$bew-radius"
         />
 
         <!-- watchlater -->

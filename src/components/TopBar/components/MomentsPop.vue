@@ -336,6 +336,7 @@ defineExpose({
           bg="$bew-content"
           z="0" w="full" h="full"
           flex="~ items-center"
+          rounded="$bew-radius-half"
         />
 
         <!-- moments -->

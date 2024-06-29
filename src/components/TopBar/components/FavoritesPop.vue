@@ -223,8 +223,8 @@ defineExpose({
         <!-- empty -->
         <Empty
           v-if="!isLoading && favoriteResources.length === 0"
-          w="full"
-          h="full"
+          w="full" h="full"
+          rounded="$bew-radius-half"
         />
 
         <!-- historys -->
