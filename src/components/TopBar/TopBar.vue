@@ -565,13 +565,13 @@ defineExpose({
                 <template v-if="unReadMessageCount > 0">
                   <div
                     v-if="settings.topBarIconBadges === 'number'"
-                    class="unread-message"
+                    class="unread-num-dot"
                   >
                     {{ unReadMessageCount > 99 ? '99+' : unReadMessageCount }}
                   </div>
                   <div
                     v-else-if="settings.topBarIconBadges === 'dot'"
-                    w-8px h-8px bg="$bew-theme-color" rounded-8px pos="absolute right-0 top-0"
+                    class="unread-dot"
                   />
                 </template>
                 <a
@@ -599,13 +599,13 @@ defineExpose({
                 <template v-if="newMomentsCount > 0">
                   <div
                     v-if="settings.topBarIconBadges === 'number'"
-                    class="unread-message"
+                    class="unread-num-dot"
                   >
                     {{ newMomentsCount > 99 ? '99+' : newMomentsCount }}
                   </div>
                   <div
                     v-else-if="settings.topBarIconBadges === 'dot'"
-                    w-8px h-8px bg="$bew-theme-color" rounded-8px pos="absolute right-0 top-0"
+                    class="unread-dot"
                   />
                 </template>
                 <a
@@ -805,13 +805,17 @@ defineExpose({
 }
 
 .right-side {
-  .unread-message {
-    --uno: "absolute -top-1 right-0";
+  .unread-num-dot {
+    --uno: "absolute top-1 right--1";
     --uno: "important:px-1 important:py-2 rounded-full";
     --uno: "text-xs leading-0 z-1 min-w-16px h-16px";
     --uno: "flex justify-center items-center";
     --uno: "bg-$bew-theme-color  text-white";
     box-shadow: 0 2px 4px rgba(var(--tw-shadow-color), 0.4);
+  }
+
+  .unread-dot {
+    --uno: "w-8px h-8px bg-$bew-theme-color rounded-8px absolute right-0 top-1";
   }
 
   .right-side-item {
