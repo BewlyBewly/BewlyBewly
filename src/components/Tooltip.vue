@@ -1,14 +1,24 @@
 <script lang="ts" setup>
 defineProps<{
   content: string
-  placement: 'left' | 'right' | 'top' | 'bottom'
+  placement: 'left' | 'right' | 'top' | 'bottom' | 'bottom-left' | 'bottom-right'
   type?: 'default' | 'dark' | 'white'
 }>()
+
+const tooltipPos = ref({ left: 0, top: 0 })
+const tooltipRef = ref(null)
 </script>
 
 <template>
-  <span class="b-tooltip-wrapper">
+  <span
+    class="b-tooltip-wrapper"
+    :style="{
+      top: `${tooltipPos.top}px`,
+      left: `${tooltipPos.left}px`,
+    }"
+  >
     <div
+      ref="tooltipRef"
       class="b-tooltip"
       :class="[`b-tooltip--placement-${placement ?? 'top'}`, `b-tooltip--type-${type ?? 'default'}`]"
     >
@@ -34,13 +44,19 @@ defineProps<{
     }
 
     &--placement-top {
-      --uno: "top--2.5em left-1/2";
-      transform: translateX(-50%);
+      --uno: "top--2.5em left-1/2 translate-x--1/2";
     }
 
     &--placement-bottom {
-      --uno: "bottom--2.5em left-1/2";
-      transform: translateX(-50%);
+      --uno: "bottom--2.5em left-1/2 translate-x--1/2";
+    }
+
+    &--placement-bottom-left {
+      --uno: "bottom--2.5em left--2";
+    }
+
+    &--placement-bottom-right {
+      --uno: "bottom--2.5em right--2";
     }
 
     &--type-default {
