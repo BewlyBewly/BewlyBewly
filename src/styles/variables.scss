@@ -179,7 +179,7 @@
   // You can use this as the frosted glass mask, such as on the right side of the "Watch Later" page panel and the "Favorites" page panel
   --bew-fill-4: rgb(131 131 145 / 43%);
 
-  --bew-fill-alt: rgb(255 255 255 / 33%);
+  --bew-fill-alt: rgb(255 255 255 / 43%);
   // #endregion
 
   --bew-border-color: rgb(131 131 145 / 18%);
@@ -250,6 +250,7 @@
   --bew-filter-glass-2: none;
   --bew-shadow-edge-glow-1: 0 0 0 transparent;
   --bew-shadow-edge-glow-2: 0 0 0 transparent;
+  --bew-fill-alt: var(--bew-content-solid);
 }
 
 :host(.reduce-frosted-glass-blur),
