@@ -94,7 +94,7 @@ function handleBackToTopOrRefresh() {
     pos="absolute top-0" flex="~ col justify-center items-center" w-full h-full
     z-1 pointer-events-none
   >
-    <!-- Edge div -->
+    <!-- Edge Div -->
     <div
       v-if="settings.autoHideDock && hideDock"
       class="dock-edge"
@@ -103,6 +103,37 @@ function handleBackToTopOrRefresh() {
       @mouseleave="toggleDockHide(true)"
     />
 
+    <template v-if="settings.dockPosition === 'bottom' && !reachTop ">
+      <div pointer-events-none>
+        <div
+          v-if="!hideDock"
+          style="
+                mask-image: linear-gradient(to top,  black 20%, transparent);
+              "
+          :style="{ backdropFilter: settings.disableFrostedGlass ? 'none' : 'blur(4px)' }"
+          pos="absolute bottom-0 left-0" w-full h-40px
+          pointer-events-none transform-gpu
+        />
+
+        <Transition name="fade">
+          <div
+            v-if="!hideDock"
+            pos="absolute bottom-0 left-0" w-full h-60px
+            pointer-events-none opacity-60
+            :style="{
+              background: `linear-gradient(to top, ${(
+                settings.wallpaper
+                || settings.useSearchPageModeOnHomePage
+                && settings.searchPageWallpaper
+                && settings.individuallySetSearchPageWallpaper)
+                ? 'rgba(0,0,0,.6)' : 'var(--bew-homepage-bg)'}, transparent)`,
+            }"
+          />
+        </Transition>
+      </div>
+    </template>
+
+    <!-- Dock Content -->
     <div
       class="dock-content"
       :class="{
@@ -223,7 +254,7 @@ function handleBackToTopOrRefresh() {
 }
 
 .dock-content {
-  --uno: "absolute flex justify-center items-center";
+  --uno: "absolute flex justify-center items-center duration-300";
 
   &.left {
     --uno: "left-2 after:right--4px";
@@ -309,7 +340,7 @@ function handleBackToTopOrRefresh() {
   --uno: "aspect-square relative";
   --uno: "leading-0";
   --uno: "rounded-60px antialiased";
-  --uno: "bg-$bew-content hover:bg-$bew-fill-2 cursor-pointer";
+  --uno: "bg-$bew-fill-alt hover:bg-$bew-fill-2 cursor-pointer";
   --uno: "dark:bg-$bew-fill-1 dark-hover:bg-$bew-fill-4";
 
   box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-1);
@@ -330,10 +361,20 @@ function handleBackToTopOrRefresh() {
     --uno: "important-bg-$bew-theme-color-auto text-$bew-text-auto";
     --uno: "shadow-$shadow-active dark:shadow-$shadow-dark";
     --uno: "active:shadow-$shadow-active-active dark-active:shadow-$shadow-dark-active";
+    --uno: "after:content-empty after:absolute after:top-140% after:z--1 after:w-full after:h-full";
+    --uno: "after:bg-$bew-theme-color-auto after:opacity-30 after:rounded-full after:blur-20px after:scale-80";
   }
 
   svg {
     --uno: "md:w-22px w-18px md:h-22px h-18px block align-middle";
   }
+}
+
+.left .dock-item {
+  --uno: "after:top-0 after:right-140%";
+}
+
+.right .dock-item {
+  --uno: "after:top-0 after:left-140%";
 }
 </style>
