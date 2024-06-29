@@ -174,7 +174,7 @@ function setCurrentTitle() {
           --un-shadow: var(--bew-shadow-4), var(--bew-shadow-edge-glow-2);
           backdrop-filter: var(--bew-filter-glass-2);
         "
-        relative overflow="x-hidde" w-full h-full bg="$bew-content-alt dark:$bew-elevated"
+        relative overflow="x-hidde" w-full h-full bg="$bew-elevated-alt"
         shadow rounded="$bew-radius" border="1 $bew-border-color" transform-gpu
       >
         <header

@@ -155,19 +155,19 @@
   // #region `--bew-elevated-*` background colors
   --bew-elevated: hsl(0 0% 100% / var(--bew-content-opacity));
   --bew-elevated-hover: hsl(0 0% 85% / var(--bew-content-opacity));
-  --bew-elevated: hsl(0 0% 100% / var(--bew-content-opacity));
-  --bew-elevated-hover: hsl(0 0% 85% / var(--bew-content-opacity));
+  --bew-elevated-alt: var(--bew-content-alt);
+  --bew-elevated-alt-hover: var(--bew-content-alt-hover);
 
   --bew-elevated-solid: hsl(0 0% 100%);
   --bew-elevated-solid-hover: hsl(0 0% 85%);
-  --bew-elevated-solid: hsl(0 0% 100%);
-  --bew-elevated-solid-hover: hsl(0 0% 85%);
+  --bew-elevated-alt-solid: var(--bew-content-alt-solid);
+  --bew-elevated-alt-solid-hover: var(--bew-content-alt-alt-solid-hover);
   // #endregion
   // #endregion
 
   // #region Gray semi-transparent colors
   // You can used for buttons, input fields and the other components on the top of elements
-  --bew-fill-1: rgba(131 131 145 / 13%);
+  --bew-fill-1: rgb(131 131 145 / 13%);
 
   // Used this for hovering color if it within the top layer of elements,
   // not just when hovering over the element itself; otherwise, use `--bew-content-*-hover` or `--bew-elevated--hover`
@@ -178,6 +178,8 @@
 
   // You can use this as the frosted glass mask, such as on the right side of the "Watch Later" page panel and the "Favorites" page panel
   --bew-fill-4: rgb(131 131 145 / 43%);
+
+  --bew-fill-alt: rgb(255 255 255 / 33%);
   // #endregion
 
   --bew-border-color: rgb(131 131 145 / 18%);
@@ -224,14 +226,19 @@
 
   --bew-elevated: hsl(230 12% 14% / var(--bew-content-opacity));
   --bew-elevated-hover: hsl(230 12% 30% / var(--bew-content-opacity));
+  --bew-elevated-alt: var(--bew-elevated);
+  --bew-elevated-alt-hover: var(--bew-elevated-hover);
 
   --bew-elevated-solid: hsl(230 12% 14%);
   --bew-elevated-solid-hover: hsl(230 12% 30%);
+  --bew-elevated-alt-solid: var(--bew-elevated-solid);
+  --bew-elevated-alt-solid-hover: var(--bew-elevated-hover-solid);
 
   --bew-fill-1: rgb(131 131 145 / 14%);
   --bew-fill-2: rgb(131 131 145 / 24%);
   --bew-fill-3: rgb(131 131 145 / 34%);
   --bew-fill-4: rgb(131 131 145 / 44%);
+  --bew-fill-alt: var(--bew-fill-1);
 
   --bew-border-color: rgb(131 131 145 / 26%);
 }
