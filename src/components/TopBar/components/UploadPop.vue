@@ -1,7 +1,8 @@
 <template>
   <div
+    style="backdrop-filter: var(--bew-filter-glass-1);"
+    bg="$bew-elevated"
     flex="~ col"
-    bg="$bew-elevated-solid"
     rounded="$bew-radius"
     p="4"
     w="150px"

@@ -357,10 +357,10 @@ function handleUndo() {
                 duration-300
                 @click.prevent="toggleWatchLater"
               >
-                <Tooltip v-if="!isInWatchLater" :content="$t('common.save_to_watch_later')" placement="bottom" type="dark">
+                <Tooltip v-if="!isInWatchLater" :content="$t('common.save_to_watch_later')" placement="bottom-right" type="dark">
                   <div i-mingcute:carplay-line />
                 </Tooltip>
-                <Tooltip v-else :content="$t('common.added')" placement="bottom" type="dark">
+                <Tooltip v-else :content="$t('common.added')" placement="bottom-right" type="dark">
                   <Icon icon="line-md:confirm" />
                 </Tooltip>
               </button>

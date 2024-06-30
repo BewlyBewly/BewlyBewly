@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useMouseInElement } from '@vueuse/core'
 import type { Ref, UnwrapNestedRefs } from 'vue'
-import { onMounted, watch } from 'vue'
 
 import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
@@ -100,6 +99,16 @@ function closeAllTopBarPopup(exceptionKey?: keyof typeof popupVisible) {
       popupVisible[key as keyof typeof popupVisible] = false
   })
 }
+
+const rightSideInactive = computed(() => {
+  let isInactive = false
+  Object.entries(popupVisible).forEach(([key, value]) => {
+    if (value && key !== 'userPanel') {
+      isInactive = true
+    }
+  })
+  return isInactive
+})
 
 // Channels
 const channels = useDelayedHover({
@@ -387,9 +396,9 @@ defineExpose({
       <div
         v-if="mask"
         style="
-          mask-image: linear-gradient(to bottom,  black 50%, transparent);
-          backdrop-filter: var(--bew-filter-glass-1);
+          mask-image: linear-gradient(to bottom,  black 20%, transparent);
         "
+        :style="{ backdropFilter: settings.disableFrostedGlass ? 'none' : 'blur(4px)' }"
         pos="absolute top-0 left-0" w-full h-80px
         pointer-events-none transform-gpu
       />
@@ -397,7 +406,7 @@ defineExpose({
         <div
           v-if="mask"
           pos="absolute top-0 left-0" w-full h-80px
-          pointer-events-none
+          pointer-events-none opacity-80
           :style="{
             background: `linear-gradient(to bottom, ${(
               settings.wallpaper
@@ -479,6 +488,7 @@ defineExpose({
           v-if="isLogin"
           ref="avatar"
           class="avatar right-side-item"
+          shadow="$bew-shadow-2" rounded-full
         >
           <a
             ref="avatarImg"
@@ -523,11 +533,14 @@ defineExpose({
         </div>
 
         <div
+          class="others"
+          :class="{ inactive: rightSideInactive }"
           style="
             backdrop-filter: var(--bew-filter-glass-1);
             box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
           "
           flex h-50px px-6px bg="$bew-elevated"
+          transition="transition-property-colors duration-150"
           text="$bew-text-1" border="1 $bew-border-color" rounded-full
           transform-gpu
         >
@@ -565,13 +578,13 @@ defineExpose({
                 <template v-if="unReadMessageCount > 0">
                   <div
                     v-if="settings.topBarIconBadges === 'number'"
-                    class="unread-message"
+                    class="unread-num-dot"
                   >
                     {{ unReadMessageCount > 99 ? '99+' : unReadMessageCount }}
                   </div>
                   <div
                     v-else-if="settings.topBarIconBadges === 'dot'"
-                    w-8px h-8px bg="$bew-theme-color" rounded-8px pos="absolute right-0 top-0"
+                    class="unread-dot"
                   />
                 </template>
                 <a
@@ -599,13 +612,13 @@ defineExpose({
                 <template v-if="newMomentsCount > 0">
                   <div
                     v-if="settings.topBarIconBadges === 'number'"
-                    class="unread-message"
+                    class="unread-num-dot"
                   >
                     {{ newMomentsCount > 99 ? '99+' : newMomentsCount }}
                   </div>
                   <div
                     v-else-if="settings.topBarIconBadges === 'dot'"
-                    w-8px h-8px bg="$bew-theme-color" rounded-8px pos="absolute right-0 top-0"
+                    class="unread-dot"
                   />
                 </template>
                 <a
@@ -805,13 +818,43 @@ defineExpose({
 }
 
 .right-side {
-  .unread-message {
-    --uno: "absolute -top-1 right-0";
+  .avatar {
+    --uno: "flex items-center mr-4 relative z-1";
+
+    .avatar-img,
+    .avatar-shadow {
+      --uno: "duration-300";
+
+      &.hover {
+        --uno: "transform scale-230 translate-y-36px";
+      }
+    }
+
+    .avatar-shadow {
+      --uno: "opacity-0";
+
+      &.hover {
+        --uno: "opacity-60";
+      }
+    }
+  }
+
+  .others.inactive,
+  .others:hover {
+    --uno: "important-backdrop-filter-none important-bg-$bew-elevated-solid";
+  }
+
+  .unread-num-dot {
+    --uno: "absolute top-4px right--4px";
     --uno: "important:px-1 important:py-2 rounded-full";
-    --uno: "text-xs leading-0 z-1 min-w-16px h-16px";
+    --uno: "text-xs leading-0 z-3 min-w-14px h-14px";
     --uno: "flex justify-center items-center";
     --uno: "bg-$bew-theme-color  text-white";
     box-shadow: 0 2px 4px rgba(var(--tw-shadow-color), 0.4);
+  }
+
+  .unread-dot {
+    --uno: "w-8px h-8px bg-$bew-theme-color rounded-8px absolute right-0 top-4px";
   }
 
   .right-side-item {
@@ -832,27 +875,6 @@ defineExpose({
   .right-side-item .login {
     --un-drop-shadow: drop-shadow(0 0 6px var(--bew-theme-color));
     --uno: "rounded-full mx-1 important:text-$bew-theme-color important:px-4 hover:important-bg-$bew-theme-color hover:important-text-white flex items-center justify-center important:text-base w-120px border-solid border-$bew-theme-color border-2 important:dark:filter";
-  }
-
-  .avatar {
-    --uno: "flex items-center mr-4 relative z-1";
-
-    .avatar-img,
-    .avatar-shadow {
-      --uno: "duration-300";
-
-      &.hover {
-        --uno: "transform scale-230 translate-y-36px";
-      }
-    }
-
-    .avatar-shadow {
-      --uno: "opacity-0";
-
-      &.hover {
-        --uno: "opacity-60";
-      }
-    }
   }
 }
 </style>

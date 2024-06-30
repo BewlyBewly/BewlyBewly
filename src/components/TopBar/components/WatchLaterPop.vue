@@ -51,8 +51,9 @@ function getAllWatchLaterList() {
 
 <template>
   <div
+    style="backdrop-filter: var(--bew-filter-glass-1);"
+    bg="$bew-elevated"
     w="380px"
-    bg="$bew-elevated-solid"
     rounded="$bew-radius"
     pos="relative"
     of="hidden"
@@ -105,8 +106,7 @@ function getAllWatchLaterList() {
         <Loading
           v-if="isLoading && watchLaterList.length === 0"
           h="full"
-          flex="~"
-          items="center"
+          flex="~ items-center"
         />
 
         <!-- empty -->
@@ -116,6 +116,7 @@ function getAllWatchLaterList() {
           bg="$bew-content"
           z="0" w="full" h="full"
           flex="~ items-center"
+          rounded="$bew-radius"
         />
 
         <!-- watchlater -->

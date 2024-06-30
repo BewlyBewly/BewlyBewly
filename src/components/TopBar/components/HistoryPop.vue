@@ -167,7 +167,8 @@ function getHistoryList(type: Business, view_at = 0 as number) {
 
 <template>
   <div
-    bg="$bew-elevated-solid"
+    style="backdrop-filter: var(--bew-filter-glass-1);"
+    bg="$bew-elevated"
     w="380px"
     rounded="$bew-radius"
     pos="relative"
@@ -221,8 +222,7 @@ function getHistoryList(type: Business, view_at = 0 as number) {
         <Loading
           v-if="isLoading && historys.length === 0"
           h="full"
-          flex="~"
-          items="center"
+          flex="~ items-center"
         />
 
         <!-- empty -->
@@ -232,6 +232,7 @@ function getHistoryList(type: Business, view_at = 0 as number) {
           bg="$bew-content"
           z="0" w="full" h="full"
           flex="~ items-center"
+          rounded="$bew-radius"
         />
 
         <!-- historys -->

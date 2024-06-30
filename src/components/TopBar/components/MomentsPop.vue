@@ -276,7 +276,8 @@ defineExpose({
 
 <template>
   <div
-    bg="$bew-elevated-solid"
+    style="backdrop-filter: var(--bew-filter-glass-1);"
+    bg="$bew-elevated"
     w="380px"
     rounded="$bew-radius"
     pos="relative"
@@ -336,6 +337,7 @@ defineExpose({
           bg="$bew-content"
           z="0" w="full" h="full"
           flex="~ items-center"
+          rounded="$bew-radius-half"
         />
 
         <!-- moments -->

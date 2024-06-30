@@ -215,7 +215,7 @@ function handleOsScroll() {
     reachTop.value = false
   }
 
-  if (clientHeight + scrollTop >= scrollHeight - 150)
+  if (clientHeight + scrollTop >= scrollHeight - 300)
     handleThrottledReachBottom()
 
   if (isHomePage())
