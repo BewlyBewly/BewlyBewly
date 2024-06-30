@@ -21,7 +21,7 @@ const historyList = reactive<Array<HistoryItem>>([])
 const currentPageNum = ref<number>(1)
 const keyword = ref<string>()
 const historyStatus = ref<boolean>()
-const { handlePageRefresh, handleReachBottom } = useBewlyApp()
+const { handlePageRefresh, handleReachBottom, haveScrollbar } = useBewlyApp()
 
 const HistoryBusiness = computed(() => {
   return Business
@@ -79,6 +79,10 @@ function getHistoryList() {
         }
 
         noMoreContent.value = false
+
+        if (!haveScrollbar()) {
+          getHistoryList()
+        }
       }
       isLoading.value = false
     })

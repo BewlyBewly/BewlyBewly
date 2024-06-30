@@ -18,7 +18,7 @@ const noMoreContent = ref<boolean>()
 const allWatchLaterList = ref<VideoItem[]>([])
 const currentWatchLaterList = ref<VideoItem[]>([])
 const watchLaterCount = ref<number>(0)
-const { handlePageRefresh, handleReachBottom } = useBewlyApp()
+const { handlePageRefresh, handleReachBottom, haveScrollbar } = useBewlyApp()
 const pageNum = ref<number>(1)
 
 onMounted(() => {
@@ -81,6 +81,10 @@ function getCurrentWatchLaterList() {
   }
   pageNum.value++
   currentWatchLaterList.value.push(...currentList)
+
+  if (!haveScrollbar()) {
+    getCurrentWatchLaterList()
+  }
 }
 
 function deleteWatchLaterItem(index: number, aid: number) {

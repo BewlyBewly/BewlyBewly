@@ -176,7 +176,6 @@ async function getRecommendVideos() {
     const pendingVideos: VideoElement[] = Array.from({ length: pageSize }, () => ({
       uniqueId: `unique-id-${(videoList.value.length || 0) + i++})}`,
     } satisfies VideoElement))
-    let lastVideoListLength = videoList.value.length
     videoList.value.push(...pendingVideos)
 
     const response: forYouResult = await api.video.getRecommendVideos({
@@ -195,8 +194,6 @@ async function getRecommendVideos() {
       response.data.item.forEach((item: VideoItem) => {
         if (!filterFunc.value || filterFunc.value(item))
           resData.push(item)
-
-        // resData.push(item)
       })
 
       // when videoList has length property, it means it is the first time to load
@@ -205,10 +202,10 @@ async function getRecommendVideos() {
       }
       else {
         resData.forEach((item) => {
-          videoList.value[lastVideoListLength++] = {
+          videoList.value.push({
             uniqueId: `${item.id}`,
             item,
-          }
+          })
         })
       }
 
@@ -231,7 +228,6 @@ async function getAppRecommendVideos() {
     const pendingVideos: AppVideoElement[] = Array.from({ length: pageSize }, () => ({
       uniqueId: `unique-id-${(appVideoList.value.length || 0) + i++})}`,
     } satisfies AppVideoElement))
-    let lastVideoListLength = appVideoList.value.length
     appVideoList.value.push(...pendingVideos)
 
     const response: AppForYouResult = await api.video.getAppRecommendVideos({
@@ -257,10 +253,10 @@ async function getAppRecommendVideos() {
       }
       else {
         resData.forEach((item) => {
-          appVideoList.value[lastVideoListLength++] = {
+          appVideoList.value.push({
             uniqueId: `${item.idx}`,
             item,
-          }
+          })
         })
       }
 
@@ -273,8 +269,6 @@ async function getAppRecommendVideos() {
     }
   }
   finally {
-    // Since the video list in app recommendation mode will filter the ad cards,
-    // after loading, the video list will be filtered again to remove the empty cards
     appVideoList.value = appVideoList.value.filter(video => video.item)
   }
 }

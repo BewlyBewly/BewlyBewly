@@ -30,7 +30,7 @@ const activatedCategoryCover = ref<string>('')
 const shouldMoveCtrlBarUp = ref<boolean>(false)
 const currentPageNum = ref<number>(1)
 const keyword = ref<string>('')
-const { handlePageRefresh, handleReachBottom } = useBewlyApp()
+const { handlePageRefresh, handleReachBottom, haveScrollbar } = useBewlyApp()
 const isLoading = ref<boolean>(true)
 const isFullPageLoading = ref<boolean>(false)
 const noMoreContent = ref<boolean>()
@@ -130,6 +130,9 @@ async function getFavoriteResources(
 
       if (!res.data.medias)
         noMoreContent.value = true
+
+      if (!haveScrollbar())
+        await getFavoriteResources(selectedCategory.value!.id, ++currentPageNum.value, keyword)
     }
   }
   finally {
