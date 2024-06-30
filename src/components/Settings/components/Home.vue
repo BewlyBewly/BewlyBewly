@@ -5,6 +5,7 @@ import { useToast } from 'vue-toastification'
 import draggable from 'vuedraggable'
 
 import Button from '~/components/Button.vue'
+import Input from '~/components/Input.vue'
 import Radio from '~/components/Radio.vue'
 import { accessKey, settings } from '~/logic'
 import { useMainStore } from '~/stores/mainStore'
@@ -219,6 +220,41 @@ function handleToggleHomeTab(tab: any) {
         </div>
       </ChildSettingsDialog>
     </SettingsItemGroup>
+
+    <SettingsItemGroup
+      :title="$t('settings.group_recommendation_filters')"
+      :desc="$t('settings.group_recommendation_filters_desc')"
+    >
+      <SettingsItem :title="$t('settings.filter_by_view_count')">
+        <div flex="~ justify-end" w-full>
+          <Input
+            v-if="settings.enableFilterByViewCount"
+            v-model="settings.filterByViewCount" type="number" :min="1" :max="1000000"
+            flex-1
+          >
+            <template #suffix>
+              {{ $t('settings.filter_by_view_count_unit') }}
+            </template>
+          </Input>
+          <Radio v-model="settings.enableFilterByViewCount" />
+        </div>
+      </SettingsItem>
+      <SettingsItem :title="$t('settings.filter_by_duration')">
+        <div flex="~ justify-end" w-full>
+          <Input
+            v-if="settings.enableFilterByDuration"
+            v-model="settings.filterByDuration" type="number" :min="1" :max="1000000"
+            flex-1
+          >
+            <template #suffix>
+              {{ $t('settings.filter_by_duration_unit') }}
+            </template>
+          </Input>
+          <Radio v-model="settings.enableFilterByDuration" />
+        </div>
+      </SettingsItem>
+    </SettingsItemGroup>
+
     <SettingsItemGroup
       :title="$t('settings.group_home_tabs')"
     >

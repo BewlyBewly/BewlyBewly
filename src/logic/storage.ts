@@ -50,6 +50,11 @@ export interface Settings {
   searchPageWallpaperBlurIntensity: number
 
   recommendationMode: 'web' | 'app'
+  // filter setting
+  enableFilterByViewCount: boolean
+  filterByViewCount: number
+  enableFilterByDuration: boolean
+  filterByDuration: number
   homePageTabVisibilityList: { page: HomeSubPage, visible: boolean }[]
   alwaysShowTabsOnHomePage: boolean
   useSearchPageModeOnHomePage: boolean
@@ -102,6 +107,12 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   searchPageWallpaperBlurIntensity: 0,
 
   recommendationMode: 'web',
+  // filter setting
+  enableFilterByViewCount: false,
+  filterByViewCount: 10000,
+  enableFilterByDuration: false,
+  filterByDuration: 3600,
+
   homePageTabVisibilityList: [],
   alwaysShowTabsOnHomePage: false,
   useSearchPageModeOnHomePage: false,
