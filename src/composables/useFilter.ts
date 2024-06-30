@@ -6,21 +6,40 @@ function compareNumber(item: any, keyPath: string[], filterValue: number) {
   return get(item, keyPath) > filterValue
 }
 
+function compareNumberString(item: any, keyPath: string[], filterValue: number) {
+  const value = get(item, keyPath)
+
+  // for example: `1.2万`, `1.2萬`, `-` (indicates no data)
+  if (typeof value === 'string' && (value.includes('万') || value.includes('萬'))) {
+    const processedValue = value.replace(/万|萬/g, '')
+    return Number(processedValue) * 10000 > filterValue
+  }
+
+  const numericValue = Number(value)
+  return !Number.isNaN(numericValue) && numericValue > filterValue
+}
+
 export enum FilterType {
-  views,
+  viewCount,
+  viewCountStr,
   duration,
 }
 
 const funcMap = {
-  [FilterType.views]: {
+  [FilterType.viewCount]: {
     func: compareNumber,
-    enabledKey: 'isFilterByView',
-    valueKey: 'filterByView',
+    enabledKey: 'enableFilterByViewCount',
+    valueKey: 'filterByViewCount',
   },
   [FilterType.duration]: {
     func: compareNumber,
-    enabledKey: 'isFilterByDuration',
+    enabledKey: 'enableFilterByDuration',
     valueKey: 'filterByDuration',
+  },
+  [FilterType.viewCountStr]: {
+    func: compareNumberString,
+    enabledKey: 'enableFilterByViewCount',
+    valueKey: 'filterByViewCount',
   },
 }
 
@@ -46,9 +65,9 @@ export function factoryFilter(filterOpt: FilterType[], keyList: KeyPath): Functi
 
   return (item: object): boolean => {
     const result = funcs.every(({ keyPath, func, value }) => {
-      // let check = func(item, keyPath, value)
+      // const check = func(item, keyPath, value)
       // if (!check) {
-      //   console.log('当前项目被拦截! 原因: ', '目标路径值 :>> ', keyPath, '大于', value, 'currentValue :>> ', get(item, keyPath));
+      //   console.log('当前项目被拦截! 原因: ', '目标路径值 :>> ', keyPath, '大于', value, 'currentValue :>> ', get(item, keyPath))
       // }
       return func(item, keyPath, value)
     })
@@ -60,10 +79,10 @@ export function useFilter(filterOpt: FilterType[], keyList: KeyPath) {
   const filter = ref<Function | null>(null)
 
   watch(() => [
-    settings.value.isFilterByDuration,
-    settings.value.isFilterByView,
+    settings.value.enableFilterByDuration,
+    settings.value.enableFilterByViewCount,
     settings.value.filterByDuration,
-    settings.value.filterByView,
+    settings.value.filterByViewCount,
   ], ([isD, isV]) => {
     if (!isD && !isV) {
       filter.value = null

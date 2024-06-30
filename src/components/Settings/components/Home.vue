@@ -225,21 +225,21 @@ function handleToggleHomeTab(tab: any) {
       <SettingsItem title="播放量过滤">
         <div flex="~ justify-end" w-full>
           <Input
-            v-if="settings.isFilterByView"
-            v-model="settings.filterByView" type="number" :min="1" :max="1000000"
+            v-if="settings.enableFilterByViewCount"
+            v-model="settings.filterByViewCount" type="number" :min="1" :max="1000000"
             flex-1
           >
             <template #suffix>
               次
             </template>
           </Input>
-          <Radio v-model="settings.isFilterByView" />
+          <Radio v-model="settings.enableFilterByViewCount" />
         </div>
       </SettingsItem>
       <SettingsItem title="时长过滤">
         <div flex="~ justify-end" w-full>
           <Input
-            v-if="settings.isFilterByDuration"
+            v-if="settings.enableFilterByDuration"
             v-model="settings.filterByDuration" type="number" :min="1" :max="1000000"
             flex-1
           >
@@ -247,7 +247,7 @@ function handleToggleHomeTab(tab: any) {
               秒
             </template>
           </Input>
-          <Radio v-model="settings.isFilterByDuration" />
+          <Radio v-model="settings.enableFilterByDuration" />
         </div>
       </SettingsItem>
     </SettingsItemGroup>

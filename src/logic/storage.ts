@@ -51,9 +51,9 @@ export interface Settings {
 
   recommendationMode: 'web' | 'app'
   // filter setting
-  isFilterByView: boolean
-  filterByView: number
-  isFilterByDuration: boolean
+  enableFilterByViewCount: boolean
+  filterByViewCount: number
+  enableFilterByDuration: boolean
   filterByDuration: number
   homePageTabVisibilityList: { page: HomeSubPage, visible: boolean }[]
   alwaysShowTabsOnHomePage: boolean
@@ -108,9 +108,9 @@ export const settings = useStorageLocal('settings', ref<Settings>({
 
   recommendationMode: 'web',
   // filter setting
-  isFilterByView: false,
-  filterByView: 10000,
-  isFilterByDuration: false,
+  enableFilterByViewCount: false,
+  filterByViewCount: 10000,
+  enableFilterByDuration: false,
   filterByDuration: 3600,
 
   homePageTabVisibilityList: [],

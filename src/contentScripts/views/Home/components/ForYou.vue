@@ -30,7 +30,8 @@ const emit = defineEmits<{
   (e: 'afterLoading'): void
 }>()
 
-const filterFunc = useFilter([FilterType.duration, FilterType.views], [['duration'], ['stat', 'view']])
+const filterFunc = useFilter([FilterType.duration, FilterType.viewCount], [['duration'], ['stat', 'view']])
+const appFilterFunc = useFilter([FilterType.duration, FilterType.viewCountStr], [['player_args', 'duration'], ['cover_left_text_1']])
 
 const { t } = useI18n()
 
@@ -62,7 +63,7 @@ const needToLoginFirst = ref<boolean>(false)
 const containerRef = ref<HTMLElement>() as Ref<HTMLElement>
 const refreshIdx = ref<number>(1)
 const noMoreContent = ref<boolean>(false)
-const { handleReachBottom, handlePageRefresh, scrollbarRef } = useBewlyApp()
+const { handleReachBottom, handlePageRefresh, scrollbarRef, haveScrollbar } = useBewlyApp()
 const showVideoOptions = ref<boolean>(false)
 const appVideoOptions = ref<ThreePointV2[] | undefined>([])
 const videoOptions = reactive<{ id: number, name: string }[]>([
@@ -210,12 +211,16 @@ async function getRecommendVideos() {
           }
         })
       }
+
+      if (!haveScrollbar()) {
+        getRecommendVideos()
+      }
     }
     else if (response.code === 62011) {
       needToLoginFirst.value = true
     }
   }
-  catch {
+  finally {
     videoList.value = videoList.value.filter(video => video.item)
   }
 }
@@ -242,7 +247,7 @@ async function getAppRecommendVideos() {
 
       response.data.items.forEach((item: AppVideoItem) => {
         // Remove banner & ad cards
-        if (!item.card_type.includes('banner') && item.card_type !== 'cm_v1' && (!filterFunc.value || filterFunc.value(item)))
+        if (!item.card_type.includes('banner') && item.card_type !== 'cm_v1' && (!appFilterFunc.value || appFilterFunc.value(item)))
           resData.push(item)
       })
 
@@ -257,6 +262,10 @@ async function getAppRecommendVideos() {
             item,
           }
         })
+      }
+
+      if (!haveScrollbar()) {
+        getAppRecommendVideos()
       }
     }
     else if (response.code === 62011) {
