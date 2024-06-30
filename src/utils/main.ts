@@ -1,5 +1,3 @@
-import { useBewlyApp } from '~/composables/useAppProvider'
-
 /**
  * Get cookie by name
  * @param name cookie name
