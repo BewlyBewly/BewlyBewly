@@ -111,15 +111,15 @@ function handleBackToTopOrRefresh() {
                 mask-image: linear-gradient(to top,  black 20%, transparent);
               "
           :style="{ backdropFilter: settings.disableFrostedGlass ? 'none' : 'blur(4px)' }"
-          pos="absolute bottom-0 left-0" w-full h-40px
+          pos="absolute bottom-0 left-0" w-full h-80px
           pointer-events-none transform-gpu
         />
 
         <Transition name="fade">
           <div
             v-if="!hideDock"
-            pos="absolute bottom-0 left-0" w-full h-60px
-            pointer-events-none opacity-60
+            pos="absolute bottom-0 left-0" w-full h-80px
+            pointer-events-none opacity-80
             :style="{
               background: `linear-gradient(to top, ${(
                 settings.wallpaper

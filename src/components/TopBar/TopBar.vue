@@ -397,7 +397,7 @@ defineExpose({
         <div
           v-if="mask"
           pos="absolute top-0 left-0" w-full h-80px
-          pointer-events-none opacity-60
+          pointer-events-none opacity-80
           :style="{
             background: `linear-gradient(to bottom, ${(
               settings.wallpaper
