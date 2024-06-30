@@ -253,6 +253,11 @@
   --bew-fill-alt: var(--bew-content-solid);
 }
 
+:host(.disable-frosted-glass.dark),
+:root.disable-frosted-glass.dark {
+  --bew-fill-alt: var(--bew-fill-1);
+}
+
 :host(.reduce-frosted-glass-blur),
 :root.reduce-frosted-glass-blur {
   --bew-filter-glass-1: blur(10px) saturate(180%);
