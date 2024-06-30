@@ -479,6 +479,7 @@ defineExpose({
           v-if="isLogin"
           ref="avatar"
           class="avatar right-side-item"
+          shadow="$bew-shadow-2" rounded-full
         >
           <a
             ref="avatarImg"
