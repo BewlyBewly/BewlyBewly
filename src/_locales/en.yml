@@ -49,6 +49,9 @@ settings:
   group_logo: LOGO
   group_search_bar: Search Bar
   group_recommendation_mode: Recommendation Mode
+  group_recommendation_filters: Recommendation Filters
+  group_recommendation_filters_desc: |
+    Do not set the restricted value too large, as this may increase loading time!
   group_search_page_mode: Search Page Mode
   group_home_tabs: Home Tabs
 
@@ -138,6 +141,10 @@ settings:
     The access key is valid for about one month. After that, remember to re-authorize the BewlyBewly to use the access key.
   authorize_app_more_info_access_key: More information about the access key
   scan_qrcode_desc: Use the Bilibili mobile app to scan this QR code in order to authorize the access key.
+  filter_by_view_count: Filter by view count
+  filter_by_view_count_unit: views
+  filter_by_duration: Filter by duration
+  filter_by_duration_unit: sec
   use_search_page_mode: Use search page mode on homepage
   settings_shared_with_the_search_page: Settings shared with the search page
   settings_shared_with_the_search_page_desc: Those settings are used in common with the search page

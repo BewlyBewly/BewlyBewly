@@ -221,8 +221,11 @@ function handleToggleHomeTab(tab: any) {
       </ChildSettingsDialog>
     </SettingsItemGroup>
 
-    <SettingsItemGroup title="Recommendation Filters">
-      <SettingsItem title="播放量过滤">
+    <SettingsItemGroup
+      :title="$t('settings.group_recommendation_filters')"
+      :desc="$t('settings.group_recommendation_filters_desc')"
+    >
+      <SettingsItem :title="$t('settings.filter_by_view_count')">
         <div flex="~ justify-end" w-full>
           <Input
             v-if="settings.enableFilterByViewCount"
@@ -230,13 +233,13 @@ function handleToggleHomeTab(tab: any) {
             flex-1
           >
             <template #suffix>
-              次
+              {{ $t('settings.filter_by_view_count_unit') }}
             </template>
           </Input>
           <Radio v-model="settings.enableFilterByViewCount" />
         </div>
       </SettingsItem>
-      <SettingsItem title="时长过滤">
+      <SettingsItem :title="$t('settings.filter_by_duration')">
         <div flex="~ justify-end" w-full>
           <Input
             v-if="settings.enableFilterByDuration"
@@ -244,7 +247,7 @@ function handleToggleHomeTab(tab: any) {
             flex-1
           >
             <template #suffix>
-              秒
+              {{ $t('settings.filter_by_duration_unit') }}
             </template>
           </Input>
           <Radio v-model="settings.enableFilterByDuration" />
