@@ -361,20 +361,10 @@ function handleBackToTopOrRefresh() {
     --uno: "important-bg-$bew-theme-color-auto text-$bew-text-auto";
     --uno: "shadow-$shadow-active dark:shadow-$shadow-dark";
     --uno: "active:shadow-$shadow-active-active dark-active:shadow-$shadow-dark-active";
-    --uno: "after:content-empty after:absolute after:top-140% after:z--1 after:w-full after:h-full";
-    --uno: "after:bg-$bew-theme-color-auto after:opacity-30 after:rounded-full after:blur-20px after:scale-80";
   }
 
   svg {
     --uno: "md:w-22px w-18px md:h-22px h-18px block align-middle";
   }
-}
-
-.left .dock-item {
-  --uno: "after:top-0 after:right-140%";
-}
-
-.right .dock-item {
-  --uno: "after:top-0 after:left-140%";
 }
 </style>
