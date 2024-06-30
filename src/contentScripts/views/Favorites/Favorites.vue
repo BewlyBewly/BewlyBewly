@@ -112,8 +112,6 @@ async function getFavoriteResources(
   pn: number,
   keyword = '' as string,
 ) {
-  if (pn === 1)
-    isFullPageLoading.value = true
   isLoading.value = true
   try {
     const res: FavoritesResult = await api.favorite.getFavoriteResources({
@@ -137,7 +135,6 @@ async function getFavoriteResources(
   }
   finally {
     isLoading.value = false
-    isFullPageLoading.value = false
   }
 }
 
