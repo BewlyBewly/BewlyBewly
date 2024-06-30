@@ -82,7 +82,7 @@ function getCurrentWatchLaterList() {
   pageNum.value++
   currentWatchLaterList.value.push(...currentList)
 
-  if (!haveScrollbar()) {
+  if (!haveScrollbar() && !noMoreContent.value) {
     getCurrentWatchLaterList()
   }
 }

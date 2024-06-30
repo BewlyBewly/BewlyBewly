@@ -145,7 +145,7 @@ async function getFollowedUsersVideos() {
         })
       }
 
-      if (!haveScrollbar()) {
+      if (!haveScrollbar() && !noMoreContent.value) {
         getFollowedUsersVideos()
       }
     }

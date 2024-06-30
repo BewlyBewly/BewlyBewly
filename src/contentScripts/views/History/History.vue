@@ -80,7 +80,7 @@ function getHistoryList() {
 
         noMoreContent.value = false
 
-        if (!haveScrollbar()) {
+        if (!haveScrollbar() && !noMoreContent.value) {
           getHistoryList()
         }
       }

@@ -31,7 +31,7 @@ const shouldMoveCtrlBarUp = ref<boolean>(false)
 const currentPageNum = ref<number>(1)
 const keyword = ref<string>('')
 const { handlePageRefresh, handleReachBottom, haveScrollbar } = useBewlyApp()
-const isLoading = ref<boolean>(true)
+const isLoading = ref<boolean>(false)
 const isFullPageLoading = ref<boolean>(false)
 const noMoreContent = ref<boolean>()
 
@@ -112,6 +112,8 @@ async function getFavoriteResources(
   pn: number,
   keyword = '' as string,
 ) {
+  // if (pn === 1)
+  //   isFullPageLoading.value = true
   isLoading.value = true
   try {
     const res: FavoritesResult = await api.favorite.getFavoriteResources({
@@ -129,16 +131,19 @@ async function getFavoriteResources(
       if (!res.data.medias)
         noMoreContent.value = true
 
-      if (!haveScrollbar())
+      if (!haveScrollbar() && !noMoreContent.value)
         await getFavoriteResources(selectedCategory.value!.id, ++currentPageNum.value, keyword)
     }
   }
   finally {
     isLoading.value = false
+    // isFullPageLoading.value = false
   }
 }
 
 async function changeCategory(categoryItem: FavoriteCategory) {
+  if (isLoading.value)
+    return
   currentPageNum.value = 1
   selectedCategory.value = categoryItem
   favoriteResources.length = 0
