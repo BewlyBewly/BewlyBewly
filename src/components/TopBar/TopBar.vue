@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useMouseInElement } from '@vueuse/core'
 import type { Ref, UnwrapNestedRefs } from 'vue'
-import { onMounted, watch } from 'vue'
 
 import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
@@ -100,6 +99,16 @@ function closeAllTopBarPopup(exceptionKey?: keyof typeof popupVisible) {
       popupVisible[key as keyof typeof popupVisible] = false
   })
 }
+
+const rightSideInactive = computed(() => {
+  let isInactive = false
+  Object.entries(popupVisible).forEach(([key, value]) => {
+    if (value && key !== 'userPanel') {
+      isInactive = true
+    }
+  })
+  return isInactive
+})
 
 // Channels
 const channels = useDelayedHover({
@@ -524,11 +533,14 @@ defineExpose({
         </div>
 
         <div
+          class="others"
+          :class="{ inactive: rightSideInactive }"
           style="
             backdrop-filter: var(--bew-filter-glass-1);
             box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
           "
           flex h-50px px-6px bg="$bew-elevated"
+          transition="transition-property-colors duration-150"
           text="$bew-text-1" border="1 $bew-border-color" rounded-full
           transform-gpu
         >
@@ -806,6 +818,32 @@ defineExpose({
 }
 
 .right-side {
+  .avatar {
+    --uno: "flex items-center mr-4 relative z-1";
+
+    .avatar-img,
+    .avatar-shadow {
+      --uno: "duration-300";
+
+      &.hover {
+        --uno: "transform scale-230 translate-y-36px";
+      }
+    }
+
+    .avatar-shadow {
+      --uno: "opacity-0";
+
+      &.hover {
+        --uno: "opacity-60";
+      }
+    }
+  }
+
+  .others.inactive,
+  .others:hover {
+    --uno: "important-backdrop-filter-none important-bg-$bew-elevated-solid";
+  }
+
   .unread-num-dot {
     --uno: "absolute top-4px right--4px";
     --uno: "important:px-1 important:py-2 rounded-full";
@@ -837,27 +875,6 @@ defineExpose({
   .right-side-item .login {
     --un-drop-shadow: drop-shadow(0 0 6px var(--bew-theme-color));
     --uno: "rounded-full mx-1 important:text-$bew-theme-color important:px-4 hover:important-bg-$bew-theme-color hover:important-text-white flex items-center justify-center important:text-base w-120px border-solid border-$bew-theme-color border-2 important:dark:filter";
-  }
-
-  .avatar {
-    --uno: "flex items-center mr-4 relative z-1";
-
-    .avatar-img,
-    .avatar-shadow {
-      --uno: "duration-300";
-
-      &.hover {
-        --uno: "transform scale-230 translate-y-36px";
-      }
-    }
-
-    .avatar-shadow {
-      --uno: "opacity-0";
-
-      &.hover {
-        --uno: "opacity-60";
-      }
-    }
   }
 }
 </style>

@@ -137,7 +137,8 @@ defineExpose({
 
 <template>
   <div
-    bg="$bew-elevated-solid"
+    style="backdrop-filter: var(--bew-filter-glass-1);"
+    bg="$bew-elevated"
     w="450px"
     h="430px"
     rounded="$bew-radius"
