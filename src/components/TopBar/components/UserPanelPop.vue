@@ -4,11 +4,12 @@ import { useI18n } from 'vue-i18n'
 import { useApiClient } from '~/composables/api'
 import { revokeAccessKey } from '~/utils/authProvider'
 import { numFormatter } from '~/utils/dataFormatter'
+import { LV0_ICON, LV1_ICON, LV2_ICON, LV3_ICON, LV4_ICON, LV5_ICON, LV6_ICON, LV6d_ICON } from '~/utils/lvIcons'
 import { getCSRF, getUserID, isHomePage } from '~/utils/main'
 
 import type { UserInfo, UserStat } from '../types'
 
-defineProps<{
+const props = defineProps<{
   userInfo: UserInfo
 }>()
 
@@ -49,6 +50,33 @@ async function logout() {
     location.reload()
   })
 }
+
+const lvIcons = {
+  0: LV0_ICON,
+  1: LV1_ICON,
+  2: LV2_ICON,
+  3: LV3_ICON,
+  4: LV4_ICON,
+  5: LV5_ICON,
+  6: LV6_ICON,
+}
+
+function getLvIcon(level: num) {
+  return lvIcons[level] || ''
+}
+
+function getProgressBarWidth() {
+  const { next_exp: nextExp, current_exp: currentExp, current_min: minExp } = props.userInfo.level_info
+
+  const totalExp = nextExp - minExp
+  const earnedExp = currentExp - minExp
+
+  if (totalExp === 0)
+    return '0%'
+
+  const percentage = (earnedExp / totalExp) * 100
+  return `${percentage.toFixed(2)}%`
+}
 </script>
 
 <template>
@@ -83,6 +111,53 @@ async function logout() {
       >{{
         $t('topbar.user_dropdown.b_coins') + userInfo.wallet?.bcoin_balance
       }}</a>
+    </div>
+    <div
+      flex="~ col"
+      w="full"
+      cursor="pointer"
+      m="t-1 b-3"
+    >
+      <a
+        flex="~"
+        items="center"
+        justify="center"
+        m="b-1"
+        href="//account.bilibili.com/account/record?type=exp"
+        target="_blank"
+      >
+        <div
+          flex="~"
+          items="center"
+          w="32px"
+          h="16px"
+          v-html="getLvIcon(userInfo.level_info.current_level)"
+        />
+        <div relative mx="1" w="240px" h="2px" bg="[var(--bew-text-4)]">
+          <div
+            absolute
+            t="0"
+            l="0"
+            h="2px"
+            rounded="2px"
+            bg="#f3cb85"
+            :style="{ width: getProgressBarWidth() }"
+          />
+        </div>
+        <div
+          class="level-next"
+          flex="~"
+          items="center"
+          w="32px"
+          h="16px"
+          v-html="getLvIcon(userInfo.level_info.current_level + 1)"
+        />
+      </a>
+      <div text="sm [var(--bew-text-2)]">
+        当前成长 {{ userInfo.level_info.current_exp }}，距离升级 Lv.
+        {{ userInfo.level_info.current_level + 1 }} 还需要
+        {{ userInfo.level_info.next_exp - userInfo.level_info.current_exp }}
+      </div>
     </div>
     <div id="channel-info">
       <a
@@ -140,6 +215,10 @@ async function logout() {
 
 #base-info {
   --uno: "mt-8 text-xl font-medium flex items-center justify-center";
+}
+
+.level-next :deep(svg .level-bg) {
+  fill: #c9ccd0;
 }
 
 #channel-info {
