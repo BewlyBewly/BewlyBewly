@@ -113,11 +113,11 @@ function getProgressBarWidth() {
       }}</a>
     </div>
     <div
+      v-if="userInfo.level_info.current_level >= 1 && userInfo.level_info.current_level <= 5"
       flex="~ col"
       w="full"
       cursor="pointer"
       m="t-1 b-3"
-      v-if="userInfo.level_info.current_level >= 1 && userInfo.level_info.current_level <= 5"
     >
       <a
         flex="~"
