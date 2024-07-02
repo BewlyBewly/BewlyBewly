@@ -61,7 +61,7 @@ const lvIcons = {
   6: LV6_ICON,
 }
 
-function getLvIcon(level: num) {
+function getLvIcon(level: number) {
   return lvIcons[level] || ''
 }
 
