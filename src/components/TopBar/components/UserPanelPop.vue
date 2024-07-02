@@ -4,7 +4,7 @@ import { useI18n } from 'vue-i18n'
 import { useApiClient } from '~/composables/api'
 import { revokeAccessKey } from '~/utils/authProvider'
 import { numFormatter } from '~/utils/dataFormatter'
-import { LV0_ICON, LV1_ICON, LV2_ICON, LV3_ICON, LV4_ICON, LV5_ICON, LV6_ICON, LV6d_ICON } from '~/utils/lvIcons'
+import { LV0_ICON, LV1_ICON, LV2_ICON, LV3_ICON, LV4_ICON, LV5_ICON, LV6_ICON } from '~/utils/lvIcons'
 import { getCSRF, getUserID, isHomePage } from '~/utils/main'
 
 import type { UserInfo, UserStat } from '../types'
