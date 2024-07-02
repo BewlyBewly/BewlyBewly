@@ -326,7 +326,8 @@
     .cs-self-service .cs-self-service-list .cs-self-service-item,
     .cs-order-notice,
     .cs-rich-text-answer .rich-answer-evaluate .ev-thumb,
-    .cs-q-tab-area ul.cs-q-tabs li.cs-q-tab-item.active {
+    .cs-q-tab-area ul.cs-q-tabs li.cs-q-tab-item.active,
+    .bili-im .name.name-loading {
       background-color: var(--bew-fill-1);
     }
 
@@ -347,8 +348,7 @@
 
     .space-left,
     .space-right,
-    .emoji-list .emoji,
-    .bili-im .name {
+    .emoji-list .emoji {
       background-color: transparent;
     }
 
