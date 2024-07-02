@@ -51,7 +51,7 @@ async function logout() {
   })
 }
 
-const lvIcons = {
+const lvIcons: { [key: number]: string } = {
   0: LV0_ICON,
   1: LV1_ICON,
   2: LV2_ICON,
@@ -61,7 +61,7 @@ const lvIcons = {
   6: LV6_ICON,
 }
 
-function getLvIcon(level: number) {
+function getLvIcon(level: number): string {
   return lvIcons[level] || ''
 }
 
