@@ -67,6 +67,8 @@ function isSupportedPages() {
     || /https?:\/\/(?:www\.)?bilibili\.com\/read\/(?!pcpreview).*/.test(currentUrl)
     // 404 page
     || /^https?:\/\/(?:www\.)?bilibili\.com\/404.*$/.test(currentUrl)
+    // creative center page
+    || /^https?:\/\/member\.bilibili\.com\/platform.*$/.test(currentUrl)
   ) {
     return true
   }

@@ -109,6 +109,12 @@ async function setupStyles() {
     await import('./error404Page.scss')
     document.documentElement.classList.add('error404Page')
   }
+
+  // creative center page 创作中心页
+  else if (/^https?:\/\/member\.bilibili\.com\/platform.*$/.test(currentUrl)) {
+    await import('./forceDarkMode.scss')
+    document.documentElement.classList.add('forceDarkMode')
+  }
 }
 
 setupStyles()
