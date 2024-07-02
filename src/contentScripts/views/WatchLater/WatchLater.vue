@@ -171,7 +171,7 @@ function jumpToLoginPage() {
               <!-- Cover -->
               <div
                 pos="relative"
-                bg="$bew-fill-4"
+                bg="$bew-skeleton"
                 w="full md:full lg:250px"
                 flex="shrink-0"
                 rounded="$bew-radius"
@@ -331,7 +331,7 @@ function jumpToLoginPage() {
         >
           <picture
             rounded="$bew-radius" style="box-shadow: 0 16px 24px -12px rgba(0, 0, 0, .36)"
-            aspect-video mb-4 bg="$bew-fill-2"
+            aspect-video mb-4 bg="$bew-skeleton"
           >
             <img
               v-if="currentWatchLaterList[0]" :src="removeHttpFromUrl(`${currentWatchLaterList[0].pic}@480w_270h_1c`)"

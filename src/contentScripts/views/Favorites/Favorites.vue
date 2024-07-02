@@ -305,7 +305,7 @@ function isMusic(item: FavoriteResource) {
         >
           <picture
             rounded="$bew-radius" style="box-shadow: 0 16px 24px -12px rgba(0, 0, 0, .36)"
-            aspect-video mb-4 bg="$bew-fill-2"
+            aspect-video mb-4 bg="$bew-skeleton"
           >
             <img
               v-if="activatedCategoryCover" :src="removeHttpFromUrl(`${activatedCategoryCover}@480w_270h_1c`)"

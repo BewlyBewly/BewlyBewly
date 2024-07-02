@@ -249,7 +249,7 @@ function getHistoryList(type: Business, view_at = 0 as number) {
             <section flex="~ gap-4 item-start">
               <!-- Video cover, live cover, ariticle cover -->
               <div
-                bg="$bew-fill-1"
+                bg="$bew-skeleton"
                 w="150px"
                 flex="shrink-0"
                 border="rounded-$bew-radius-half"

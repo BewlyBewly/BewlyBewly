@@ -296,7 +296,7 @@ function jumpToLoginPage() {
             <!-- Cover -->
             <div
               pos="relative"
-              bg="$bew-fill-4"
+              bg="$bew-skeleton"
               w="full md:full lg:250px"
               flex="shrink-0"
               rounded="$bew-radius"

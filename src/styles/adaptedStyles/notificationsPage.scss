@@ -326,8 +326,7 @@
     .cs-self-service .cs-self-service-list .cs-self-service-item,
     .cs-order-notice,
     .cs-rich-text-answer .rich-answer-evaluate .ev-thumb,
-    .cs-q-tab-area ul.cs-q-tabs li.cs-q-tab-item.active,
-    .bili-im .name.name-loading {
+    .cs-q-tab-area ul.cs-q-tabs li.cs-q-tab-item.active {
       background-color: var(--bew-fill-1);
     }
 
@@ -344,6 +343,10 @@
 
     .msg-push-new__leave-message {
       background-color: var(--bew-fill-3);
+    }
+
+    .bili-im .name.name-loading {
+      background-color: var(--bew-skeleton);
     }
 
     .space-left,

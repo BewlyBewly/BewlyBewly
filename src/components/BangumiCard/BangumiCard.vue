@@ -51,7 +51,7 @@ const { isDark } = useDark()
       <div
         :style="{ width: horizontal ? '170px' : '100%' }"
         tabindex="-1" block
-        rounded="$bew-radius" w-full bg="$bew-fill-4" relative shrink-0
+        rounded="$bew-radius" w-full bg="$bew-skeleton" relative shrink-0
       >
         <div aspect="12/16" overflow-hidden rounded="$bew-radius">
           <!-- badge -->

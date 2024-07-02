@@ -243,7 +243,7 @@ defineExpose({
           >
             <section flex="~ gap-4" item-start>
               <div
-                bg="$bew-fill-1"
+                bg="$bew-skeleton"
                 w="120px"
                 flex="shrink-0"
                 rounded="$bew-radius-half"

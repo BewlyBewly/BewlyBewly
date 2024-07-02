@@ -368,13 +368,14 @@ defineExpose({
             <a
               :href="moment.link"
               :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
+              rounded="1/2"
+              w="40px" h="40px" m="r-4"
+              bg="$bew-skeleton"
             >
               <img
                 :src="`${moment.authorFace}@50w_50h_1c`"
                 rounded="1/2"
-                w="40px"
-                h="40px"
-                m="r-4"
+                w="40px" h="40px"
               >
             </a>
 
@@ -409,9 +410,11 @@ defineExpose({
                 </div>
               </div>
               <div
+                class="group"
                 flex="~ items-center justify-center" w="82px"
                 h="46px" m="l-4"
-                class="group"
+                rounded="$bew-radius-half"
+                bg="$bew-skeleton"
               >
                 <img
                   :src="`${moment.cover}@128w_72h_1c`"
