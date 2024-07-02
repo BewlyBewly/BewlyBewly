@@ -524,6 +524,7 @@ defineExpose({
           />
           <Transition name="slide-in">
             <UserPanelPop
+              v-if="popupVisible.userPanel"
               :user-info="userInfo"
               after:h="!0"
               class="bew-popover"

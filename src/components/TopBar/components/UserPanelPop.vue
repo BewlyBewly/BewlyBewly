@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import DOMPurify from 'dompurify'
 import { useI18n } from 'vue-i18n'
 
 import { useApiClient } from '~/composables/api'
@@ -32,6 +33,19 @@ const otherLinks = computed((): { name: string, url: string }[] => {
   ]
 })
 
+const levelProgressBarWidth = computed(() => {
+  const { next_exp: nextExp, current_exp: currentExp, current_min: minExp } = props.userInfo.level_info
+
+  const totalExp = nextExp - minExp
+  const earnedExp = currentExp - minExp
+
+  if (totalExp === 0)
+    return '0%'
+
+  const percentage = (earnedExp / totalExp) * 100
+  return `${percentage.toFixed(2)}%`
+})
+
 const userStat = reactive<UserStat>({} as UserStat)
 
 onMounted(() => {
@@ -63,19 +77,6 @@ const lvIcons: { [key: number]: string } = {
 
 function getLvIcon(level: number): string {
   return lvIcons[level] || ''
-}
-
-function getProgressBarWidth() {
-  const { next_exp: nextExp, current_exp: currentExp, current_min: minExp } = props.userInfo.level_info
-
-  const totalExp = nextExp - minExp
-  const earnedExp = currentExp - minExp
-
-  if (totalExp === 0)
-    return '0%'
-
-  const percentage = (earnedExp / totalExp) * 100
-  return `${percentage.toFixed(2)}%`
 }
 </script>
 
@@ -112,54 +113,48 @@ function getProgressBarWidth() {
         $t('topbar.user_dropdown.b_coins') + userInfo.wallet?.bcoin_balance
       }}</a>
     </div>
-    <div
-      v-if="userInfo.level_info.current_level >= 1 && userInfo.level_info.current_level <= 5"
-      flex="~ col"
-      w="full"
-      cursor="pointer"
-      m="t-1 b-3"
+
+    <template
+      v-if="userInfo?.level_info?.current_level >= 1 && userInfo?.level_info?.current_level <= 5"
     >
       <a
-        flex="~"
-        items="center"
-        justify="center"
-        m="b-1"
         href="//account.bilibili.com/account/record?type=exp"
         target="_blank"
+        block bg="$bew-fill-1 hover:$bew-fill-2" p="2" rounded="$bew-radius"
+        shadow="[var(--bew-shadow-edge-glow-1)]"
+        my-2
       >
         <div
-          flex="~"
-          items="center"
-          w="32px"
-          h="16px"
-          v-html="getLvIcon(userInfo.level_info.current_level)"
-        />
-        <div relative mx="1" w="240px" h="2px" bg="[var(--bew-text-4)]">
+          flex="~ items-center justify-center gap-2"
+        >
           <div
-            absolute
-            t="0"
-            l="0"
-            h="2px"
-            rounded="2px"
-            bg="#f3cb85"
-            :style="{ width: getProgressBarWidth() }"
+            flex="~ items-center"
+            class="level"
+            v-html="DOMPurify.sanitize(getLvIcon(userInfo.level_info.current_level))"
+          />
+          <div relative w="full" h="2px" bg="$bew-fill-1">
+            <div
+              pos="absolute top-0 left-0" h-2px
+              h="2px"
+              rounded="2px"
+              bg="$bew-warning-color"
+              :style="{ width: levelProgressBarWidth }"
+            />
+          </div>
+          <div
+            class="level level-next"
+            flex="~ items-center"
+            v-html="DOMPurify.sanitize(getLvIcon(userInfo.level_info.current_level + 1))"
           />
         </div>
-        <div
-          class="level-next"
-          flex="~"
-          items="center"
-          w="32px"
-          h="16px"
-          v-html="getLvIcon(userInfo.level_info.current_level + 1)"
-        />
+        <div text="sm [var(--bew-text-2)]">
+          当前成长 {{ userInfo.level_info.current_exp }}，距离升级 Lv.
+          {{ userInfo.level_info.current_level + 1 }} 还需要
+          {{ userInfo.level_info.next_exp - userInfo.level_info.current_exp }}
+        </div>
       </a>
-      <div text="sm [var(--bew-text-2)]">
-        当前成长 {{ userInfo.level_info.current_exp }}，距离升级 Lv.
-        {{ userInfo.level_info.current_level + 1 }} 还需要
-        {{ userInfo.level_info.next_exp - userInfo.level_info.current_exp }}
-      </div>
-    </div>
+    </template>
+
     <div id="channel-info">
       <a
         class="group"
@@ -218,8 +213,12 @@ function getProgressBarWidth() {
   --uno: "mt-8 text-xl font-medium flex items-center justify-center";
 }
 
+.level :deep(svg) {
+  --uno: "w-25px h-16px";
+}
+
 .level-next :deep(svg .level-bg) {
-  fill: #c9ccd0;
+  --uno: "fill-#c9ccd0";
 }
 
 #channel-info {
@@ -227,15 +226,10 @@ function getProgressBarWidth() {
 
   a {
     --uno: "p-2 m-0 rounded-$bew-radius text-sm flex flex-col items-center transition-all duration-300";
-    --uno: "bg-$bew-fill-1 shadow-[var(--bew-shadow-edge-glow-1)] hover:bg-$bew-theme-color";
+    --uno: "bg-$bew-fill-1 hover:bg-$bew-fill-2 shadow-[var(--bew-shadow-edge-glow-1)]";
 
     > * {
       --uno: "transition-all duration-300";
-    }
-
-    &:hover .num,
-    &:hover .num + div {
-      --uno: "text-white";
     }
 
     .num {
