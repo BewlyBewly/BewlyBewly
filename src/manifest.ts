@@ -42,7 +42,6 @@ export async function getManifest() {
     ],
     host_permissions: [
       '*://*.bilibili.com/*',
-      '*://*.mcbbs.net/*',
       '*://*.hdslb.com/*',
     ],
     content_scripts: [
