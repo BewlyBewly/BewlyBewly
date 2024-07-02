@@ -70,6 +70,21 @@
       background-color: var(--bew-fill-1) !important;
     }
 
+    .sub-reply-item.show-reply,
+    .reply-item .root-reply-container.show-reply {
+      background-color: var(--bew-fill-1);
+      animation: jumpReply 5s forwards;
+    }
+
+    @keyframes jumpReply {
+      0% {
+        background-color: var(--bew-theme-color-10);
+      }
+      100% {
+        background-color: var(--bew-fill-1);
+      }
+    }
+
     // Like & dislike icon
     .like-icon,
     .dislike-icon,
