@@ -5,7 +5,7 @@ import { useI18n } from 'vue-i18n'
 import { useApiClient } from '~/composables/api'
 import { revokeAccessKey } from '~/utils/authProvider'
 import { numFormatter } from '~/utils/dataFormatter'
-import { LV0_ICON, LV1_ICON, LV2_ICON, LV3_ICON, LV4_ICON, LV5_ICON, LV6_ICON } from '~/utils/lvIcons'
+import { LV0_ICON, LV1_ICON, LV2_ICON, LV3_ICON, LV4_ICON, LV5_ICON, LV6_ICON, LV6_LIGHTNING_ICON } from '~/utils/lvIcons'
 import { getCSRF, getUserID, isHomePage } from '~/utils/main'
 
 import type { UserInfo, UserStat } from '../types'
@@ -65,40 +65,37 @@ async function logout() {
   })
 }
 
-const lvIcons: { [key: number]: string } = {
-  0: LV0_ICON,
-  1: LV1_ICON,
-  2: LV2_ICON,
-  3: LV3_ICON,
-  4: LV4_ICON,
-  5: LV5_ICON,
-  6: LV6_ICON,
-}
+const levelIcons: string[] = [
+  LV0_ICON,
+  LV1_ICON,
+  LV2_ICON,
+  LV3_ICON,
+  LV4_ICON,
+  LV5_ICON,
+  LV6_ICON,
+  LV6_LIGHTNING_ICON,
+]
 
-function getLvIcon(level: number): string {
-  return lvIcons[level] || ''
+function getLvIcon(level: number, isSigma: boolean = false): string {
+  if (level === 6 && isSigma) {
+    return LV6_LIGHTNING_ICON
+  }
+  return levelIcons[level] || ''
 }
 </script>
 
 <template>
   <div id="user-info-panel">
-    <div id="base-info">
+    <div
+      text="xl" flex="~ items-center justify-center"
+      mt-8 font-medium
+    >
       {{ userInfo.uname ? userInfo.uname : '-' }}
-      <div
-        flex items-center bg="$bew-theme-color" p="x-3 y-1" ml-2
-        text="white base" rounded="$bew-radius"
-        leading-none
-      >
-        <span>{{ userInfo.level_info?.current_level ? userInfo.level_info.current_level : '0' }}</span>
-        <div v-if="userInfo.is_senior_member" i-tabler:bolt />
-      </div>
     </div>
     <div
-      class="text-sm text-$bew-text-2"
-      flex="~"
-      items="center"
-      justify="center"
-      m="t-1 b-3"
+      text="xs $bew-text-2"
+      flex="~ items-center justify-center"
+      m="t-1 b-2"
     >
       <a
         class="group mr-4"
@@ -114,25 +111,23 @@ function getLvIcon(level: number): string {
       }}</a>
     </div>
 
-    <template
-      v-if="userInfo?.level_info?.current_level >= 1 && userInfo?.level_info?.current_level <= 5"
+    <a
+      href="//account.bilibili.com/account/record?type=exp"
+      target="_blank"
+      block mb-2 w-full
+      flex="~ col justify-center items-center"
     >
-      <a
-        href="//account.bilibili.com/account/record?type=exp"
-        target="_blank"
-        block bg="$bew-fill-1 hover:$bew-fill-2" p="2" rounded="$bew-radius"
-        shadow="[var(--bew-shadow-edge-glow-1)]"
-        my-2
-      >
+      <template v-if="userInfo?.level_info?.current_level < 6">
         <div
           flex="~ items-center justify-center gap-2"
+          w-full
         >
           <div
             flex="~ items-center"
             class="level"
             v-html="DOMPurify.sanitize(getLvIcon(userInfo.level_info.current_level))"
           />
-          <div relative w="full" h="2px" bg="$bew-fill-1">
+          <div relative w="full" h="2px" bg="$bew-fill-3">
             <div
               pos="absolute top-0 left-0" h-2px
               h="2px"
@@ -147,13 +142,22 @@ function getLvIcon(level: number): string {
             v-html="DOMPurify.sanitize(getLvIcon(userInfo.level_info.current_level + 1))"
           />
         </div>
-        <div text="sm [var(--bew-text-2)]">
-          当前成长 {{ userInfo.level_info.current_exp }}，距离升级 Lv.
+        <div w-full text="xs $bew-text-3">
+          当前成长 {{ userInfo.level_info.current_exp }}，升级 LV.
           {{ userInfo.level_info.current_level + 1 }} 还需要
-          {{ userInfo.level_info.next_exp - userInfo.level_info.current_exp }}
+          {{ userInfo.level_info.next_exp - userInfo.level_info.current_exp || 0 }}
         </div>
-      </a>
-    </template>
+      </template>
+      <template v-else>
+        <!-- class="level" -->
+        <div
+          :style="{ width: userInfo?.is_senior_member ? '36px' : '28px' }"
+          h-26px
+          flex="~ items-center"
+          v-html="DOMPurify.sanitize(getLvIcon(userInfo?.level_info?.current_level, userInfo?.is_senior_member))"
+        />
+      </template>
+    </a>
 
     <div id="channel-info">
       <a
@@ -207,10 +211,6 @@ function getLvIcon(level: number): string {
   --uno: "p-4 rounded-$bew-radius w-300px -z-1 bg-$bew-elevated";
   --uno: "border-1 border-$bew-border-color shadow-[var(--bew-shadow-edge-glow-1),var(--bew-shadow-3)]";
   backdrop-filter: var(--bew-filter-glass-1);
-}
-
-#base-info {
-  --uno: "mt-8 text-xl font-medium flex items-center justify-center";
 }
 
 .level :deep(svg) {
