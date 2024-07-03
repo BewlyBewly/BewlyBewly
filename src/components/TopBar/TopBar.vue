@@ -487,7 +487,7 @@ defineExpose({
         <div
           v-if="isLogin"
           ref="avatar"
-          class="avatar right-side-item"
+          class="avatar right-side-item relative"
           shadow="$bew-shadow-2" rounded-full
         >
           <a
@@ -521,6 +521,12 @@ defineExpose({
             bg="cover center" blur-sm
             rounded-full
             w-40px h-40px
+          />
+          <div
+            v-if="userInfo.vip?.status === 1"
+            class="vip-img bg-[url(https://i0.hdslb.com/bfs/seed/jinkela/short/user-avatar/big-vip.svg)] bg-cover bg-no-repeat w-27.5% h-27.5% z-111"
+            :class="{ hover: popupVisible.userPanel }"
+            :style="{ opacity: popupVisible.userPanel ? 1 : 0 }"
           />
           <Transition name="slide-in">
             <UserPanelPop
@@ -835,6 +841,14 @@ defineExpose({
 
       &.hover {
         --uno: "opacity-60";
+      }
+    }
+
+    .vip-img {
+      --uno: "absolute bottom-0 right-0 transition-all duration-300";
+
+      &.hover {
+        --uno: "transform scale-180 translate-y-55px translate-15px";
       }
     }
   }
