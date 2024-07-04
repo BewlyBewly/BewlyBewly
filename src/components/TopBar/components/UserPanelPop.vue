@@ -144,9 +144,13 @@ function getLvIcon(level: number, isSigma: boolean = false): string {
         </div>
         <div w-full text="xs $bew-text-3">
           <!-- Current XP: 103; need 500 more for LV2. -->
-          当前成长 {{ userInfo.level_info.current_exp }}，升级 LV.
-          {{ userInfo.level_info.current_level + 1 }} 还需要
-          {{ userInfo.level_info.next_exp - userInfo.level_info.current_exp || 0 }}
+          {{
+            $t('topbar.user_dropdown.exp_desc', {
+              current_exp: userInfo.level_info.current_exp,
+              level: userInfo.level_info.current_level + 1,
+              need_exp: userInfo.level_info.next_exp - userInfo.level_info.current_exp || 0,
+            })
+          }}
         </div>
       </template>
       <template v-else>
