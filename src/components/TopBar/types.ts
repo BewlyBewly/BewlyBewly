@@ -5,7 +5,7 @@ export interface UserInfo {
     current_level: number
     current_min: number
     current_exp: number
-    next_exp: string
+    next_exp: number
   }
   mid: number
   money: number // 硬幣
