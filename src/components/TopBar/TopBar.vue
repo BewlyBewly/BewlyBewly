@@ -523,7 +523,7 @@ defineExpose({
             w-40px h-40px
           />
           <svg
-            v-if="true || userInfo.vip?.status === 1"
+            v-if="userInfo.vip?.status === 1"
             class="vip-img"
             :class="{ hover: popupVisible.userPanel }"
             :style="{ opacity: popupVisible.userPanel ? 1 : 0 }"
