@@ -154,10 +154,9 @@ function getLvIcon(level: number, isSigma: boolean = false): string {
         </div>
       </template>
       <template v-else>
-        <!-- class="level" -->
         <div
           :style="{ width: userInfo?.is_senior_member ? '36px' : '28px' }"
-          h-26px
+          h-20px
           flex="~ items-center"
           v-html="DOMPurify.sanitize(getLvIcon(userInfo?.level_info?.current_level, userInfo?.is_senior_member))"
         />

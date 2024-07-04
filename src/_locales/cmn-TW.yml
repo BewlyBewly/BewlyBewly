@@ -244,6 +244,7 @@ topbar:
   user_dropdown:
     money: 硬幣：
     b_coins: B幣：
+    exp_desc: '當前經驗 {current_exp}，升級到 LV {level} 還需要 {need_exp}'
     following: 追蹤中
     followers: 粉絲
     posts: 動向
