@@ -10,6 +10,9 @@ export interface UserInfo {
   mid: number
   money: number // 硬幣
   uname: string // username
+  vip: {
+    status: number // 1 is vip
+  }
   wallet: {
     mid: number
     bcoin_balance: number // b幣
