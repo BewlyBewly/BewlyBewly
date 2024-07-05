@@ -7,7 +7,8 @@ import './userCard.scss'
 import './videoPlayer.scss'
 import './loginDialog.scss'
 
-import { isHomePage } from '~/utils/main'
+import { runWhenIdle } from '~/utils/lazyLoad'
+import { delay, isHomePage } from '~/utils/main'
 
 async function setupStyles() {
   const currentUrl = document.URL
@@ -114,6 +115,22 @@ async function setupStyles() {
   else if (/^https?:\/\/member\.bilibili\.com\/platform.*$/.test(currentUrl)) {
     await import('./forceDarkMode.scss')
     document.documentElement.classList.add('forceDarkMode')
+    runWhenIdle(() => {
+      delay(5000)
+
+      // Get all div elements on the page
+      const divs = document.querySelectorAll('div')
+
+      // Iterate over each div element
+      divs.forEach((div) => {
+        // Get the computed style of the div
+        const style = window.getComputedStyle(div)
+        // Check if the background-image property is not 'none'
+        if (style.backgroundImage !== 'none') {
+          div.style.filter = 'var(--bew-filter-force-dark)'
+        }
+      })
+    })
   }
 }
 

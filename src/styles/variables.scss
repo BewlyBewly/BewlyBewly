@@ -246,6 +246,11 @@
   --bew-border-color: rgb(131 131 145 / 26%);
 }
 
+:root.dark.forceDarkMode,
+:host(.dark.forceDarkMode) {
+  --bew-filter-force-dark: invert(0.94) hue-rotate(180deg) brightness(1.125);
+}
+
 :host(.disable-frosted-glass),
 :root.disable-frosted-glass {
   --bew-content-opacity: 1;
