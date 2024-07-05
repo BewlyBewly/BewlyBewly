@@ -49,7 +49,7 @@ const genres = computed(() => [
     shadow="[var(--bew-shadow-3),var(--bew-shadow-edge-glow-1)]"
     flex="~"
     p="4"
-    bg="$bew-elevated"
+    bg="$bew-elevated-alt"
     rounded="$bew-radius"
     border="1 $bew-border-color"
   >
@@ -71,7 +71,7 @@ const genres = computed(() => [
           items="center"
           w="170px"
           p="x-2 y-2"
-          hover:bg="$bew-fill-2"
+          hover:bg="$bew-fill-alt"
           hover:shadow="[var(--bew-shadow-1),var(--bew-shadow-edge-glow-1)]"
           transition="duration-300"
           border="rounded-$bew-radius"
