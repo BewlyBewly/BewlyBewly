@@ -1,14 +1,16 @@
 <script setup lang="ts">
+import DOMPurify from 'dompurify'
 import { useI18n } from 'vue-i18n'
 
 import { useApiClient } from '~/composables/api'
 import { revokeAccessKey } from '~/utils/authProvider'
 import { numFormatter } from '~/utils/dataFormatter'
+import { LV0_ICON, LV1_ICON, LV2_ICON, LV3_ICON, LV4_ICON, LV5_ICON, LV6_ICON, LV6_LIGHTNING_ICON } from '~/utils/lvIcons'
 import { getCSRF, getUserID, isHomePage } from '~/utils/main'
 
 import type { UserInfo, UserStat } from '../types'
 
-defineProps<{
+const props = defineProps<{
   userInfo: UserInfo
 }>()
 
@@ -31,6 +33,19 @@ const otherLinks = computed((): { name: string, url: string }[] => {
   ]
 })
 
+const levelProgressBarWidth = computed(() => {
+  const { next_exp: nextExp, current_exp: currentExp, current_min: minExp } = props.userInfo.level_info
+
+  const totalExp = nextExp - minExp
+  const earnedExp = currentExp - minExp
+
+  if (totalExp === 0)
+    return '0%'
+
+  const percentage = (earnedExp / totalExp) * 100
+  return `${percentage.toFixed(2)}%`
+})
+
 const userStat = reactive<UserStat>({} as UserStat)
 
 onMounted(() => {
@@ -49,27 +64,38 @@ async function logout() {
     location.reload()
   })
 }
+
+const levelIcons: string[] = [
+  LV0_ICON,
+  LV1_ICON,
+  LV2_ICON,
+  LV3_ICON,
+  LV4_ICON,
+  LV5_ICON,
+  LV6_ICON,
+  LV6_LIGHTNING_ICON,
+]
+
+function getLvIcon(level: number, isSigma: boolean = false): string {
+  if (level === 6 && isSigma) {
+    return LV6_LIGHTNING_ICON
+  }
+  return levelIcons[level] || ''
+}
 </script>
 
 <template>
   <div id="user-info-panel">
-    <div id="base-info">
+    <div
+      text="xl" flex="~ items-center justify-center"
+      mt-8 font-medium
+    >
       {{ userInfo.uname ? userInfo.uname : '-' }}
-      <div
-        flex items-center bg="$bew-theme-color" p="x-3 y-1" ml-2
-        text="white base" rounded="$bew-radius"
-        leading-none
-      >
-        <span>{{ userInfo.level_info?.current_level ? userInfo.level_info.current_level : '0' }}</span>
-        <div v-if="userInfo.is_senior_member" i-tabler:bolt />
-      </div>
     </div>
     <div
-      class="text-sm text-$bew-text-2"
-      flex="~"
-      items="center"
-      justify="center"
-      m="t-1 b-3"
+      text="xs $bew-text-2"
+      flex="~ items-center justify-center"
+      m="t-1 b-2"
     >
       <a
         class="group mr-4"
@@ -84,6 +110,59 @@ async function logout() {
         $t('topbar.user_dropdown.b_coins') + userInfo.wallet?.bcoin_balance
       }}</a>
     </div>
+
+    <a
+      href="//account.bilibili.com/account/record?type=exp"
+      target="_blank"
+      block mb-2 w-full
+      flex="~ col justify-center items-center"
+    >
+      <template v-if="userInfo?.level_info?.current_level < 6">
+        <div
+          flex="~ items-center justify-center gap-2"
+          w-full
+        >
+          <div
+            flex="~ items-center"
+            class="level"
+            v-html="DOMPurify.sanitize(getLvIcon(userInfo.level_info.current_level))"
+          />
+          <div relative w="full" h="2px" bg="$bew-fill-3">
+            <div
+              pos="absolute top-0 left-0" h-2px
+              h="2px"
+              rounded="2px"
+              bg="$bew-warning-color"
+              :style="{ width: levelProgressBarWidth }"
+            />
+          </div>
+          <div
+            class="level level-next"
+            flex="~ items-center"
+            v-html="DOMPurify.sanitize(getLvIcon(userInfo.level_info.current_level + 1))"
+          />
+        </div>
+        <div w-full text="xs $bew-text-3">
+          <!-- Current XP: 103; need 500 more for LV2. -->
+          {{
+            $t('topbar.user_dropdown.exp_desc', {
+              current_exp: userInfo.level_info.current_exp,
+              level: userInfo.level_info.current_level + 1,
+              need_exp: userInfo.level_info.next_exp - userInfo.level_info.current_exp || 0,
+            })
+          }}
+        </div>
+      </template>
+      <template v-else>
+        <div
+          :style="{ width: userInfo?.is_senior_member ? '36px' : '28px' }"
+          h-20px
+          flex="~ items-center"
+          v-html="DOMPurify.sanitize(getLvIcon(userInfo?.level_info?.current_level, userInfo?.is_senior_member))"
+        />
+      </template>
+    </a>
+
     <div id="channel-info">
       <a
         class="group"
@@ -138,8 +217,12 @@ async function logout() {
   backdrop-filter: var(--bew-filter-glass-1);
 }
 
-#base-info {
-  --uno: "mt-8 text-xl font-medium flex items-center justify-center";
+.level :deep(svg) {
+  --uno: "w-25px h-16px";
+}
+
+.level-next :deep(svg .level-bg) {
+  --uno: "fill-#c9ccd0";
 }
 
 #channel-info {
@@ -147,15 +230,10 @@ async function logout() {
 
   a {
     --uno: "p-2 m-0 rounded-$bew-radius text-sm flex flex-col items-center transition-all duration-300";
-    --uno: "bg-$bew-fill-1 shadow-[var(--bew-shadow-edge-glow-1)] hover:bg-$bew-theme-color";
+    --uno: "bg-$bew-fill-1 hover:bg-$bew-fill-2 shadow-[var(--bew-shadow-edge-glow-1)]";
 
     > * {
       --uno: "transition-all duration-300";
-    }
-
-    &:hover .num,
-    &:hover .num + div {
-      --uno: "text-white";
     }
 
     .num {

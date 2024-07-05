@@ -133,7 +133,8 @@
     .notify-number,
     .bl-button--primary,
     .bl-button--ghost:hover,
-    .message .message-content.is-me {
+    .message .message-content.is-me,
+    .notify-dot {
       background-color: var(--bew-theme-color);
     }
 

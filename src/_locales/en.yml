@@ -242,6 +242,7 @@ topbar:
   user_dropdown:
     money: 'Money: '
     b_coins: 'B-coins: '
+    exp_desc: 'Current XP: {current_exp}; need {need_exp} more for LV {level}'
     following: FOLLOWING
     followers: FOLLOWERS
     posts: POSTS
