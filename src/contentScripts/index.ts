@@ -118,6 +118,12 @@ if (isSupportedPages()) {
       visibility: hidden;
       height: var(--bew-top-bar-height) !important;
     }
+
+    /* some pages have a white bar at the top; changing the top margin fixes this problem */
+    .banner-wrapper,
+    .home-banner-wrapper {
+      margin-top: calc(-1 * var(--bew-top-bar-height)) !important;
+    }
   `)
 }
 

@@ -10,6 +10,7 @@ export interface BewlyAppProvider {
   handleReachBottom: Ref<(() => void) | undefined>
   handlePageRefresh: Ref<(() => void) | undefined>
   handleBackToTop: (targetScrollTop?: number) => void
+  haveScrollbar: () => boolean
 }
 
 export function useBewlyApp(): BewlyAppProvider {

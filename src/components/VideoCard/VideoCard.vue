@@ -243,7 +243,7 @@ function handleUndo() {
           <div
             class="group/cover"
             shrink-0
-            :w="wValue" h-fit relative bg="$bew-fill-4" rounded="$bew-radius"
+            :w="wValue" h-fit relative bg="$bew-skeleton" rounded="$bew-radius"
             cursor-pointer
             group-hover:z-2
             transform="~ translate-z-0"
@@ -310,7 +310,7 @@ function handleUndo() {
               </div>
               <div
                 v-else
-                bg="$bew-elevated-solid-1" text-center lh-30px h-30px w-30px
+                bg="$bew-elevated-solid" text-center lh-30px h-30px w-30px
                 rounded="1/2" shadow="$bew-shadow-1"
                 border="1 $bew-border-color"
               >
@@ -357,10 +357,10 @@ function handleUndo() {
                 duration-300
                 @click.prevent="toggleWatchLater"
               >
-                <Tooltip v-if="!isInWatchLater" :content="$t('common.save_to_watch_later')" placement="bottom" type="dark">
+                <Tooltip v-if="!isInWatchLater" :content="$t('common.save_to_watch_later')" placement="bottom-right" type="dark">
                   <div i-mingcute:carplay-line />
                 </Tooltip>
-                <Tooltip v-else :content="$t('common.added')" placement="bottom" type="dark">
+                <Tooltip v-else :content="$t('common.added')" placement="bottom-right" type="dark">
                   <Icon icon="line-md:confirm" />
                 </Tooltip>
               </button>
@@ -382,7 +382,7 @@ function handleUndo() {
                 v-if="video.authorFace"
                 :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
                 m="r-4" w="36px" h="36px" rounded="1/2"
-                object="center cover" bg="$bew-fill-4" cursor="pointer"
+                object="center cover" bg="$bew-skeleton" cursor="pointer"
                 position-relative
                 @click.stop=""
               >
@@ -441,7 +441,7 @@ function handleUndo() {
                       v-if="video.authorFace"
                       :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
                       m="r-2" w="30px" h="30px" rounded="1/2"
-                      object="center cover" bg="$bew-fill-4" cursor="pointer" relative
+                      object="center cover" bg="$bew-skeleton" cursor="pointer" relative
                       @click.stop=""
                     >
                       <img

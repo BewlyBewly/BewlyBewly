@@ -276,11 +276,13 @@ defineExpose({
 
 <template>
   <div
-    bg="$bew-elevated-solid-1"
+    style="backdrop-filter: var(--bew-filter-glass-1);"
+    bg="$bew-elevated"
     w="380px"
     rounded="$bew-radius"
     pos="relative"
-    shadow="$bew-shadow-2"
+    shadow="[var(--bew-shadow-edge-glow-1),var(--bew-shadow-3)]"
+    border="1 $bew-border-color"
   >
     <!-- top bar -->
     <header
@@ -291,7 +293,7 @@ defineExpose({
       p="y-4 x-6"
       pos="fixed top-0 left-0"
       w="full"
-      bg="$bew-elevated-1"
+      bg="$bew-elevated"
       z="1"
       border="!rounded-t-$bew-radius"
     >
@@ -332,9 +334,10 @@ defineExpose({
         <Empty
           v-if="!isLoading && moments.length === 0"
           pos="absolute top-0 left-0"
-          bg="$bew-content-1"
+          bg="$bew-content"
           z="0" w="full" h="full"
           flex="~ items-center"
+          rounded="$bew-radius-half"
         />
 
         <!-- moments -->
@@ -365,13 +368,14 @@ defineExpose({
             <a
               :href="moment.link"
               :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
+              rounded="1/2"
+              w="40px" h="40px" m="r-4"
+              bg="$bew-skeleton"
             >
               <img
                 :src="`${moment.authorFace}@50w_50h_1c`"
                 rounded="1/2"
-                w="40px"
-                h="40px"
-                m="r-4"
+                w="40px" h="40px"
               >
             </a>
 
@@ -406,9 +410,11 @@ defineExpose({
                 </div>
               </div>
               <div
+                class="group"
                 flex="~ items-center justify-center" w="82px"
                 h="46px" m="l-4"
-                class="group"
+                rounded="$bew-radius-half"
+                bg="$bew-skeleton"
               >
                 <img
                   :src="`${moment.cover}@128w_72h_1c`"

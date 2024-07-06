@@ -49,6 +49,9 @@ settings:
   group_logo: LOGO
   group_search_bar: 搜索栏
   group_recommendation_mode: 推荐模式
+  group_recommendation_filters: 推荐过滤
+  group_recommendation_filters_desc: |
+    请勿将限制值设置得太大，不然可能会增加加载时间！
   group_search_page_mode: 搜索页模式
   group_home_tabs: 首页标签栏
 
@@ -137,6 +140,10 @@ settings:
     授权使用后能在首页推送 bilibili App 端算法的推荐视频，授权 key 有效期约为一个月，过后记得重新授权获取 access key。
   authorize_app_more_info_access_key: 关于 access key
   scan_qrcode_desc: 使用 Bilibili 移动应用程序扫描此二维码，以授权获取 access key。
+  filter_by_view_count: 按播放数筛选
+  filter_by_view_count_unit: 次
+  filter_by_duration: 按时长筛选
+  filter_by_duration_unit: 秒
   use_search_page_mode: 首页使用搜索页模式
   settings_shared_with_the_search_page: 与搜索页共用的配置
   settings_shared_with_the_search_page_desc: 这些设置都与搜索页共用
@@ -234,6 +241,7 @@ topbar:
   user_dropdown:
     money: 硬币：
     b_coins: B币：
+    exp_desc: '当前成长 {current_exp}，升级到 LV {level} 还需要 {need_exp}'
     following: 关注
     followers: 粉丝
     posts: 动态

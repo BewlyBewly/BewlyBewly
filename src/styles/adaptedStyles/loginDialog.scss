@@ -95,12 +95,12 @@
       .forget-tip,
       .bili-mini,
       .el-input__inner {
-        background-color: var(--bew-content-solid-1);
+        background-color: var(--bew-content-solid);
       }
 
       &.el-popper,  // & -> .el-select-dropdown
       .area-code-select {
-        background-color: var(--bew-elevated-solid-1);
+        background-color: var(--bew-elevated-solid);
       }
 
       .bili-mini-login-register-wrapper .register-btn,
@@ -150,13 +150,13 @@
 
       // & -> .el-select-dropdown
       &.el-popper[x-placement^="bottom"] .popper__arrow:after {
-        border-bottom-color: var(--bew-content-solid-2);
+        border-bottom-color: var(--bew-content-alt-solid);
       }
 
       .tab__form .form__item input,
       .bili-mini-account input,
       .bili-mini-password input {
-        box-shadow: inset 0 0 0 1000px var(--bew-content-solid-1);
+        box-shadow: inset 0 0 0 1000px var(--bew-content-solid);
       }
 
       .bili-mini-content-wp .login-client-qr-code img,

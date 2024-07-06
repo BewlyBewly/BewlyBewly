@@ -49,6 +49,9 @@ settings:
   group_logo: LOGO
   group_search_bar: 搜尋欄
   group_recommendation_mode: 推介模式
+  group_recommendation_filters: 推介篩選
+  group_recommendation_filters_desc: |
+    限制嘅數值唔好設太大，唔係嘅話會影響載入時間！
   group_search_page_mode: 搵嘢頁模式
   group_home_tabs: 主頁分頁欄
 
@@ -140,6 +143,10 @@ settings:
     access key。
   authorize_app_more_info_access_key: 關於 access key
   scan_qrcode_desc: 用 Bilibili 流動應用程式去 scan 呢個 QR code 愛嚟授權取得 access key。
+  filter_by_view_count: 根據觀看次數篩選
+  filter_by_view_count_unit: 次
+  filter_by_duration: 根據條片長度篩選
+  filter_by_duration_unit: 秒
   use_search_page_mode: 主頁使用搵嘢頁模式
   settings_shared_with_the_search_page: 同搵嘢頁共用嘅設定
   settings_shared_with_the_search_page_desc: 呢啲設定都同搵嘢頁共用
@@ -237,6 +244,7 @@ topbar:
   user_dropdown:
     money: 銀仔：
     b_coins: B銀：
+    exp_desc: '當前經驗 {current_exp}，升到 LV {level} 仲要 {need_exp}'
     following: 追緊
     followers: 擁躉
     posts: 動向

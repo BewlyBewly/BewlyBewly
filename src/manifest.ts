@@ -42,12 +42,18 @@ export async function getManifest() {
     ],
     host_permissions: [
       '*://*.bilibili.com/*',
-      '*://*.mcbbs.net/*',
       '*://*.hdslb.com/*',
     ],
     content_scripts: [
       {
-        matches: ['*://www.bilibili.com/*', '*://search.bilibili.com/*', '*://t.bilibili.com/*', '*://space.bilibili.com/*', '*://message.bilibili.com/*'],
+        matches: [
+          '*://www.bilibili.com/*',
+          '*://search.bilibili.com/*',
+          '*://t.bilibili.com/*',
+          '*://space.bilibili.com/*',
+          '*://message.bilibili.com/*',
+          '*://www.hdslb.com/*',
+        ],
         js: ['./dist/contentScripts/index.global.js'],
         css: ['./dist/contentScripts/style.css'],
         run_at: 'document_start',

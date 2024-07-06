@@ -51,12 +51,14 @@ function getAllWatchLaterList() {
 
 <template>
   <div
+    style="backdrop-filter: var(--bew-filter-glass-1);"
+    bg="$bew-elevated"
     w="380px"
-    shadow="$bew-shadow-2"
-    bg="$bew-elevated-solid-1"
     rounded="$bew-radius"
     pos="relative"
     of="hidden"
+    shadow="[var(--bew-shadow-edge-glow-1),var(--bew-shadow-3)]"
+    border="1 $bew-border-color"
   >
     <!-- top bar -->
     <header
@@ -66,7 +68,7 @@ function getAllWatchLaterList() {
       p="y-4 x-6"
       pos="fixed top-0 left-0"
       w="full"
-      bg="$bew-elevated-1"
+      bg="$bew-elevated"
       z="2"
       border="!rounded-t-$bew-radius"
     >
@@ -104,17 +106,17 @@ function getAllWatchLaterList() {
         <Loading
           v-if="isLoading && watchLaterList.length === 0"
           h="full"
-          flex="~"
-          items="center"
+          flex="~ items-center"
         />
 
         <!-- empty -->
         <Empty
           v-if="!isLoading && watchLaterList.length === 0"
           pos="absolute top-0 left-0"
-          bg="$bew-content-1"
+          bg="$bew-content"
           z="0" w="full" h="full"
           flex="~ items-center"
+          rounded="$bew-radius"
         />
 
         <!-- watchlater -->
@@ -131,7 +133,7 @@ function getAllWatchLaterList() {
             <section flex="~ gap-4 item-start">
               <!-- Video cover, live cover, ariticle cover -->
               <div
-                bg="$bew-fill-1"
+                bg="$bew-skeleton"
                 w="150px"
                 flex="shrink-0"
                 border="rounded-$bew-radius-half"

@@ -11,31 +11,31 @@ const list = reactive([
     name: t('topbar.noti_dropdown.replys'),
     url: 'https://message.bilibili.com/#/reply',
     unreadCount: 0,
-    icon: 'i-mingcute:chat-3-line',
+    icon: 'i-solar:reply-2-bold-duotone',
   },
   {
     name: t('topbar.noti_dropdown.mentions'),
     url: 'https://message.bilibili.com/#/at',
     unreadCount: 0,
-    icon: 'i-mingcute:at-line',
+    icon: 'i-solar:mention-circle-bold-duotone',
   },
   {
     name: t('topbar.noti_dropdown.likes'),
     url: 'https://message.bilibili.com/#/love',
     unreadCount: 0,
-    icon: 'i-mingcute:thumb-up-2-line',
+    icon: 'i-solar:like-bold-duotone',
   },
   {
     name: t('topbar.noti_dropdown.messages'),
     url: 'https://message.bilibili.com/#/system',
     unreadCount: 0,
-    icon: 'i-mingcute:mail-line',
+    icon: 'i-solar:chat-line-bold-duotone',
   },
   {
     name: t('topbar.noti_dropdown.chats'),
     url: 'https://message.bilibili.com/#/whisper',
     unreadCount: 0,
-    icon: 'i-mingcute:message-3-line',
+    icon: 'i-solar:chat-round-bold-duotone',
   },
 ],
 )
@@ -73,12 +73,14 @@ function getUnreadMessageCount() {
 
 <template>
   <div
-    bg="$bew-elevated-solid-1"
+    style="backdrop-filter: var(--bew-filter-glass-1);"
+    bg="$bew-elevated"
     w="170px"
     p="4"
     rounded="$bew-radius"
+    shadow="[var(--bew-shadow-edge-glow-1),var(--bew-shadow-3)]"
+    border="1 $bew-border-color"
     flex="~ col"
-    shadow="$bew-shadow-3"
   >
     <a
       v-for="item in list"
@@ -95,7 +97,7 @@ function getUnreadMessageCount() {
       items="center"
       h="35px"
     >
-      <i :class="item.icon" />
+      <i :class="item.icon" text="$bew-text-2" />
       <span class="flex-1 ml-2 mr-1">{{ item.name }}</span>
       <template v-if="item.unreadCount > 0">
         <div

@@ -21,7 +21,7 @@ const historyList = reactive<Array<HistoryItem>>([])
 const currentPageNum = ref<number>(1)
 const keyword = ref<string>()
 const historyStatus = ref<boolean>()
-const { handlePageRefresh, handleReachBottom } = useBewlyApp()
+const { handlePageRefresh, handleReachBottom, haveScrollbar } = useBewlyApp()
 
 const HistoryBusiness = computed(() => {
   return Business
@@ -79,6 +79,10 @@ function getHistoryList() {
         }
 
         noMoreContent.value = false
+
+        if (!haveScrollbar() && !noMoreContent.value) {
+          getHistoryList()
+        }
       }
       isLoading.value = false
     })
@@ -292,7 +296,7 @@ function jumpToLoginPage() {
             <!-- Cover -->
             <div
               pos="relative"
-              bg="$bew-fill-4"
+              bg="$bew-skeleton"
               w="full md:full lg:250px"
               flex="shrink-0"
               rounded="$bew-radius"
@@ -482,7 +486,7 @@ function jumpToLoginPage() {
           p="x-14px"
           lh-35px h-35px
           rounded="$bew-radius"
-          bg="$bew-content-solid-1"
+          bg="$bew-content-solid"
           shadow="$bew-shadow-1"
           outline-none
           w-full

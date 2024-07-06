@@ -128,7 +128,7 @@
     }
 
     .note-list-del-popup {
-      background-color: var(--bew-content-solid-1);
+      background-color: var(--bew-content-solid);
     }
 
     .note-list-item,
@@ -143,7 +143,7 @@
     }
 
     .editor-innter .ql-editor::-webkit-scrollbar-track {
-      background-color: var(--bew-content-1);
+      background-color: var(--bew-content);
     }
 
     .note-header .note-title .note-text,
@@ -225,7 +225,7 @@
     .view-manage-note,
     .note-tooltip.info,
     .my-notes-manage-note {
-      background-color: var(--bew-content-solid-1);
+      background-color: var(--bew-content-solid);
     }
 
     .ql-toolbar.ql-snow + .ql-container.ql-snow {

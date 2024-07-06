@@ -42,7 +42,7 @@ const offset = ref<string>('')
 const updateBaseline = ref<string>('')
 const noMoreContent = ref<boolean>(false)
 const noMoreContentWarning = ref<boolean>(false)
-const { handleReachBottom, handlePageRefresh } = useBewlyApp()
+const { handleReachBottom, handlePageRefresh, haveScrollbar } = useBewlyApp()
 
 onMounted(async () => {
   initData()
@@ -147,6 +147,10 @@ async function getFollowedUsersVideos() {
             item,
           }
         })
+      }
+
+      if (!haveScrollbar() && !noMoreContent.value) {
+        getFollowedUsersVideos()
       }
     }
     else if (response.code === -101) {

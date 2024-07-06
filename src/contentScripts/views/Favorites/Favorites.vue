@@ -30,8 +30,8 @@ const activatedCategoryCover = ref<string>('')
 const shouldMoveCtrlBarUp = ref<boolean>(false)
 const currentPageNum = ref<number>(1)
 const keyword = ref<string>('')
-const { handlePageRefresh, handleReachBottom } = useBewlyApp()
-const isLoading = ref<boolean>(true)
+const { handlePageRefresh, handleReachBottom, haveScrollbar } = useBewlyApp()
+const isLoading = ref<boolean>(false)
 const isFullPageLoading = ref<boolean>(false)
 const noMoreContent = ref<boolean>()
 
@@ -112,8 +112,8 @@ async function getFavoriteResources(
   pn: number,
   keyword = '' as string,
 ) {
-  if (pn === 1)
-    isFullPageLoading.value = true
+  // if (pn === 1)
+  //   isFullPageLoading.value = true
   isLoading.value = true
   try {
     const res: FavoritesResult = await api.favorite.getFavoriteResources({
@@ -130,15 +130,20 @@ async function getFavoriteResources(
 
       if (!res.data.medias)
         noMoreContent.value = true
+
+      if (!haveScrollbar() && !noMoreContent.value)
+        await getFavoriteResources(selectedCategory.value!.id, ++currentPageNum.value, keyword)
     }
   }
   finally {
     isLoading.value = false
-    isFullPageLoading.value = false
+    // isFullPageLoading.value = false
   }
 }
 
 async function changeCategory(categoryItem: FavoriteCategory) {
+  if (isLoading.value)
+    return
   currentPageNum.value = 1
   selectedCategory.value = categoryItem
   favoriteResources.length = 0
@@ -193,7 +198,7 @@ function isMusic(item: FavoriteResource) {
       <div
         fixed z-10 absolute p-2 flex="~ gap-2"
         items-center
-        bg="$bew-elevated-solid-1" rounded="$bew-radius" shadow="$bew-shadow-2" mt--2 transition="all 300 ease-in-out"
+        bg="$bew-elevated-solid" rounded="$bew-radius" shadow="$bew-shadow-2" mt--2 transition="all 300 ease-in-out"
         :class="{ hide: shouldMoveCtrlBarUp }"
       >
         <Select v-model="selectedCategory" w-150px :options="categoryOptions" @change="(val) => changeCategory(val.value)" />
@@ -300,7 +305,7 @@ function isMusic(item: FavoriteResource) {
         >
           <picture
             rounded="$bew-radius" style="box-shadow: 0 16px 24px -12px rgba(0, 0, 0, .36)"
-            aspect-video mb-4 bg="$bew-fill-2"
+            aspect-video mb-4 bg="$bew-skeleton"
           >
             <img
               v-if="activatedCategoryCover" :src="removeHttpFromUrl(`${activatedCategoryCover}@480w_270h_1c`)"

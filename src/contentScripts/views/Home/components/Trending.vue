@@ -35,7 +35,7 @@ const isLoading = ref<boolean>(false)
 const containerRef = ref<HTMLElement>() as Ref<HTMLElement>
 const pn = ref<number>(1)
 const noMoreContent = ref<boolean>(false)
-const { handleReachBottom, handlePageRefresh } = useBewlyApp()
+const { handleReachBottom, handlePageRefresh, haveScrollbar } = useBewlyApp()
 
 onMounted(async () => {
   await initData()
@@ -114,6 +114,10 @@ async function getTrendingVideos() {
             item,
           }
         })
+      }
+
+      if (!haveScrollbar() && !noMoreContent.value) {
+        getTrendingVideos()
       }
     }
   }

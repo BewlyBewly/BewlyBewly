@@ -162,7 +162,7 @@ function handleRemoveCustomWallpaper() {
               >
                 <button
                   style="backdrop-filter: var(--bew-filter-glass-1);"
-                  bg="$bew-content-1" rounded-full w-28px h-28px
+                  bg="$bew-content" rounded-full w-28px h-28px
                   grid place-items-center
                   @click="handleUploadWallpaper"
                 >
@@ -170,7 +170,7 @@ function handleRemoveCustomWallpaper() {
                 </button>
                 <button
                   style="backdrop-filter: var(--bew-filter-glass-1);"
-                  bg="$bew-content-1" rounded-full w-28px h-28px
+                  bg="$bew-content" rounded-full w-28px h-28px
                   grid place-items-center
                   @click="handleRemoveCustomWallpaper"
                 >

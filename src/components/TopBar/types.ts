@@ -5,11 +5,14 @@ export interface UserInfo {
     current_level: number
     current_min: number
     current_exp: number
-    next_exp: string
+    next_exp: number
   }
   mid: number
   money: number // 硬幣
   uname: string // username
+  vip: {
+    status: number // 1 is vip
+  }
   wallet: {
     mid: number
     bcoin_balance: number // b幣

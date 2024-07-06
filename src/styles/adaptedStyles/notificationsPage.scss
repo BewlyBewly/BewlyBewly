@@ -67,7 +67,11 @@
     .bl-button--shallow-o:hover,
     .bl-button--shallow-o:active,
     .bl-button--shallow-o.active,
-    .bl-button--shallow-o[active] {
+    .bl-button--shallow-o[active],
+    .notify-wrapper .notify-push .set-push:not(.disabled),
+    .msg-notify .link:hover,
+    .msg-more,
+    .error .btn {
       color: var(--bew-theme-color);
     }
 
@@ -129,7 +133,8 @@
     .notify-number,
     .bl-button--primary,
     .bl-button--ghost:hover,
-    .message .message-content.is-me {
+    .message .message-content.is-me,
+    .notify-dot {
       background-color: var(--bew-theme-color);
     }
 
@@ -156,7 +161,9 @@
     .image-upload-btn:hover,
     .customer-actions-wraper .customer-actions-btn:active,
     .customer-actions-wraper .customer-actions-btn:hover,
-    .helper-btn.active::before {
+    .helper-btn.active::before,
+    .load-more .icon,
+    .msg-notify .link:hover i {
       filter: var(--bew-filter-icon-glow);
     }
   }
@@ -204,7 +211,10 @@
     .reply-textarea,
     .ar-recommend-item__info--title,
     .action-menu .menu-list a,
+    .context-menu,
     .bp-popup-panel .content-text,
+    .bp-popup-panel .selector-box,
+    .textarea,
     .tab-list,
     .group-helper-msg-list .name,
     .share-card.video-type .content,
@@ -238,6 +248,10 @@
     .bili-im .msg-notify .cover-container .table-container .modules .module .mtitle,
     .content .btnrow .btn.clear:hover {
       color: var(--bew-text-3);
+    }
+
+    .notify-wrapper .notify-push .set-push.disabled {
+      color: var(--bew-text-4);
     }
 
     .divider,
@@ -282,6 +296,10 @@
       box-shadow: unset;
     }
 
+    .lds-spinner div:after {
+      background-color: var(--bew-text-1);
+    }
+
     .config .config-item:not(:first-child)::before,
     .bili-im .msg-notify hr,
     .divider-last::before,
@@ -319,12 +337,17 @@
     .bp-emoji-box .emoji:hover,
     .bp-emoji-box2 .emoji-cover.selected,
     .bp-emoji-box2 .emoji:hover,
-    .action-menu .menu-list a:hover {
+    .action-menu .menu-list a:hover,
+    .context-menu li:hover {
       background-color: var(--bew-fill-2);
     }
 
     .msg-push-new__leave-message {
       background-color: var(--bew-fill-3);
+    }
+
+    .bili-im .name.name-loading {
+      background-color: var(--bew-skeleton);
     }
 
     .space-left,
@@ -342,26 +365,27 @@
     .config,
     .bili-im,
     .bili-im .message-list {
-      background-color: var(--bew-content-solid-1);
+      background-color: var(--bew-content-solid);
     }
 
     .cs-q-tab-area ul.cs-q-tabs {
-      background-color: var(--bew-content-solid-2);
+      background-color: var(--bew-content-alt-solid);
     }
 
     .static-popup,
     .action-menu .menu-list,
     .action-menu .menu-list:before,
+    .context-menu,
     .bp-popup-panel,
     .group-helper-msg-list,
     .tab-list .tab-item.active::before,
     .group-helper-msg-list::after,
     .cs-actions-wrap {
-      background-color: var(--bew-elevated-solid-1);
+      background-color: var(--bew-elevated-solid);
     }
 
     .cs-q-tab-area.shadow:after {
-      background: linear-gradient(270deg, var(--bew-content-solid-2) 0%, transparent 100%);
+      background: linear-gradient(270deg, var(--bew-content-alt-solid) 0%, transparent 100%);
     }
 
     .follow-btn.inactive,

@@ -70,6 +70,21 @@
       background-color: var(--bew-fill-1) !important;
     }
 
+    .sub-reply-item.show-reply,
+    .reply-item .root-reply-container.show-reply {
+      background-color: var(--bew-fill-1);
+      animation: jumpReply 5s forwards;
+    }
+
+    @keyframes jumpReply {
+      0% {
+        background-color: var(--bew-theme-color-10);
+      }
+      100% {
+        background-color: var(--bew-fill-1);
+      }
+    }
+
     // Like & dislike icon
     .like-icon,
     .dislike-icon,
@@ -209,7 +224,7 @@
     .bb-comment .comment-send-lite.comment-send-lite,
     .comment-bilibili-fold .comment-send-lite.comment-send-lite,
     .comment-wrapper .comment-m {
-      // background-color: var(--bew-content-solid-1);
+      // background-color: var(--bew-content-solid);
       background-color: var(--bew-bg);
     }
 
@@ -227,7 +242,7 @@
     .comment-bilibili-fold .comment-send-lite .textarea-container.focus textarea,
     .bili-dyn-forward-publishing__editor:not(.disabled):focus,
     .bili-dyn-forward-publishing__editor:not(.disabled):hover {
-      background-color: var(--bew-content-solid-1);
+      background-color: var(--bew-content-solid);
     }
 
     .forw-area {

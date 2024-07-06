@@ -17,8 +17,9 @@ const list = computed((): { name: string, url: string, icon: string }[] => [
 
 <template>
   <div
-    style="box-shadow: var(--bew-shadow-3)"
-    bg="$bew-elevated-solid-1"
+    style="backdrop-filter: var(--bew-filter-glass-1);"
+    bg="$bew-elevated"
+    shadow="$bew-shadow-3"
     w="180px"
     p="4"
     rounded="$bew-radius"

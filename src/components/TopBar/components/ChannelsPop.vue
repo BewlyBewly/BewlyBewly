@@ -46,11 +46,12 @@ const genres = computed(() => [
 <template>
   <div
     style="backdrop-filter: var(--bew-filter-glass-1);"
-    shadow="$bew-shadow-3"
+    shadow="[var(--bew-shadow-3),var(--bew-shadow-edge-glow-1)]"
     flex="~"
     p="4"
-    bg="$bew-elevated-1"
+    bg="$bew-elevated-alt"
     rounded="$bew-radius"
+    border="1 $bew-border-color"
   >
     <ul
       v-for="(item, index) in [0, 10, 20, 30]"
@@ -70,7 +71,8 @@ const genres = computed(() => [
           items="center"
           w="170px"
           p="x-2 y-2"
-          hover:bg="$bew-fill-2"
+          hover:bg="$bew-fill-alt"
+          hover:shadow="[var(--bew-shadow-1),var(--bew-shadow-edge-glow-1)]"
           transition="duration-300"
           border="rounded-$bew-radius"
         >

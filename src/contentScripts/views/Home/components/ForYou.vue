@@ -11,6 +11,7 @@ import Empty from '~/components/Empty.vue'
 import VideoCard from '~/components/VideoCard/VideoCard.vue'
 import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
+import { FilterType, useFilter } from '~/composables/useFilter'
 import { LanguageType } from '~/enums/appEnums'
 import type { GridLayout } from '~/logic'
 import { accessKey, settings } from '~/logic'
@@ -28,6 +29,9 @@ const emit = defineEmits<{
   (e: 'beforeLoading'): void
   (e: 'afterLoading'): void
 }>()
+
+const filterFunc = useFilter([FilterType.duration, FilterType.viewCount], [['duration'], ['stat', 'view']])
+const appFilterFunc = useFilter([FilterType.duration, FilterType.viewCountStr], [['player_args', 'duration'], ['cover_left_text_1']])
 
 const { t } = useI18n()
 
@@ -59,7 +63,7 @@ const needToLoginFirst = ref<boolean>(false)
 const containerRef = ref<HTMLElement>() as Ref<HTMLElement>
 const refreshIdx = ref<number>(1)
 const noMoreContent = ref<boolean>(false)
-const { handleReachBottom, handlePageRefresh, scrollbarRef } = useBewlyApp()
+const { handleReachBottom, handlePageRefresh, scrollbarRef, haveScrollbar } = useBewlyApp()
 const showVideoOptions = ref<boolean>(false)
 const appVideoOptions = ref<ThreePointV2[] | undefined>([])
 const videoOptions = reactive<{ id: number, name: string }[]>([
@@ -172,7 +176,6 @@ async function getRecommendVideos() {
     const pendingVideos: VideoElement[] = Array.from({ length: pageSize }, () => ({
       uniqueId: `unique-id-${(videoList.value.length || 0) + i++})}`,
     } satisfies VideoElement))
-    let lastVideoListLength = videoList.value.length
     videoList.value.push(...pendingVideos)
 
     const response: forYouResult = await api.video.getRecommendVideos({
@@ -189,7 +192,8 @@ async function getRecommendVideos() {
       const resData = [] as VideoItem[]
 
       response.data.item.forEach((item: VideoItem) => {
-        resData.push(item)
+        if (!filterFunc.value || filterFunc.value(item))
+          resData.push(item)
       })
 
       // when videoList has length property, it means it is the first time to load
@@ -198,18 +202,22 @@ async function getRecommendVideos() {
       }
       else {
         resData.forEach((item) => {
-          videoList.value[lastVideoListLength++] = {
+          videoList.value.push({
             uniqueId: `${item.id}`,
             item,
-          }
+          })
         })
+      }
+
+      if (!haveScrollbar()) {
+        getRecommendVideos()
       }
     }
     else if (response.code === 62011) {
       needToLoginFirst.value = true
     }
   }
-  catch {
+  finally {
     videoList.value = videoList.value.filter(video => video.item)
   }
 }
@@ -220,7 +228,6 @@ async function getAppRecommendVideos() {
     const pendingVideos: AppVideoElement[] = Array.from({ length: pageSize }, () => ({
       uniqueId: `unique-id-${(appVideoList.value.length || 0) + i++})}`,
     } satisfies AppVideoElement))
-    let lastVideoListLength = appVideoList.value.length
     appVideoList.value.push(...pendingVideos)
 
     const response: AppForYouResult = await api.video.getAppRecommendVideos({
@@ -236,7 +243,7 @@ async function getAppRecommendVideos() {
 
       response.data.items.forEach((item: AppVideoItem) => {
         // Remove banner & ad cards
-        if (!item.card_type.includes('banner') && item.card_type !== 'cm_v1')
+        if (!item.card_type.includes('banner') && item.card_type !== 'cm_v1' && (!appFilterFunc.value || appFilterFunc.value(item)))
           resData.push(item)
       })
 
@@ -246,11 +253,15 @@ async function getAppRecommendVideos() {
       }
       else {
         resData.forEach((item) => {
-          appVideoList.value[lastVideoListLength++] = {
+          appVideoList.value.push({
             uniqueId: `${item.idx}`,
             item,
-          }
+          })
         })
+      }
+
+      if (!haveScrollbar()) {
+        getAppRecommendVideos()
       }
     }
     else if (response.code === 62011) {
@@ -258,8 +269,6 @@ async function getAppRecommendVideos() {
     }
   }
   finally {
-    // Since the video list in app recommendation mode will filter the ad cards,
-    // after loading, the video list will be filtered again to remove the empty cards
     appVideoList.value = appVideoList.value.filter(video => video.item)
   }
 }
@@ -434,7 +443,7 @@ defineExpose({ initData })
       <div
         style="backdrop-filter: var(--bew-filter-glass-1);"
         :style="{ transform: `translate(${videoOptionsPosition.left}, ${videoOptionsPosition.top})` }"
-        p-2 bg="$bew-elevated-1" rounded="$bew-radius" pos="absolute top-0 left-0"
+        p-2 bg="$bew-elevated" rounded="$bew-radius" pos="absolute top-0 left-0"
         w-150px m="t-4 l-[calc(-150px+1rem)]"
         shadow="$bew-shadow-1" z-10
       >

@@ -167,11 +167,13 @@ function getHistoryList(type: Business, view_at = 0 as number) {
 
 <template>
   <div
-    bg="$bew-elevated-solid-1"
+    style="backdrop-filter: var(--bew-filter-glass-1);"
+    bg="$bew-elevated"
     w="380px"
     rounded="$bew-radius"
     pos="relative"
-    style="box-shadow: var(--bew-shadow-2)"
+    shadow="[var(--bew-shadow-edge-glow-1),var(--bew-shadow-3)]"
+    border="1 $bew-border-color"
   >
     <!-- top bar -->
     <header
@@ -181,7 +183,7 @@ function getHistoryList(type: Business, view_at = 0 as number) {
       p="y-4 x-6"
       pos="fixed top-0 left-0"
       w="full"
-      bg="$bew-elevated-1"
+      bg="$bew-elevated"
       z="2"
       border="!rounded-t-$bew-radius"
     >
@@ -220,17 +222,17 @@ function getHistoryList(type: Business, view_at = 0 as number) {
         <Loading
           v-if="isLoading && historys.length === 0"
           h="full"
-          flex="~"
-          items="center"
+          flex="~ items-center"
         />
 
         <!-- empty -->
         <Empty
           v-if="!isLoading && historys.length === 0"
           pos="absolute top-0 left-0"
-          bg="$bew-content-1"
+          bg="$bew-content"
           z="0" w="full" h="full"
           flex="~ items-center"
+          rounded="$bew-radius"
         />
 
         <!-- historys -->
@@ -247,7 +249,7 @@ function getHistoryList(type: Business, view_at = 0 as number) {
             <section flex="~ gap-4 item-start">
               <!-- Video cover, live cover, ariticle cover -->
               <div
-                bg="$bew-fill-1"
+                bg="$bew-skeleton"
                 w="150px"
                 flex="shrink-0"
                 border="rounded-$bew-radius-half"

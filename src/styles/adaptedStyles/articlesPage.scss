@@ -297,15 +297,15 @@
     .share-dynamic-dialog,
     .share-dynamic-dialog .sdd-card .sdd-card-content,
     .share-success-dialog {
-      background-color: var(--bew-content-solid-1);
+      background-color: var(--bew-content-solid);
     }
 
     .interaction-info .toolbar .share-box .qrcode-box {
-      background-color: var(--bew-content-solid-2);
+      background-color: var(--bew-content-alt-solid);
     }
 
     .comment-wrapper .comment-m {
-      --bew-bg: var(--bew-content-solid-1);
+      --bew-bg: var(--bew-content-solid);
     }
 
     .share-dynamic-dialog .sdd-card {
@@ -324,12 +324,12 @@
     .bili-dialog-bomb .appeal-box,
     .modalBox,
     .article-up-info .nameplate-ctnr {
-      background-color: var(--bew-elevated-solid-1);
+      background-color: var(--bew-elevated-solid);
     }
 
     .fixed-top-header,
     .modal-box-holder .modal-box {
-      background-color: var(--bew-elevated-solid-2);
+      background-color: var(--bew-elevated-solid);
     }
 
     .page-content .right-side .rank-module .rank-list .item .rank-index,
@@ -396,7 +396,7 @@
 
     .to-top,
     .share-success-dialog {
-      border-color: var(--bew-elevated-solid-1);
+      border-color: var(--bew-elevated-solid);
     }
 
     .rql-editor .ql-editor blockquote {

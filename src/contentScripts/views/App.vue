@@ -215,7 +215,7 @@ function handleOsScroll() {
     reachTop.value = false
   }
 
-  if (clientHeight + scrollTop >= scrollHeight - 150)
+  if (clientHeight + scrollTop >= scrollHeight - 300)
     handleThrottledReachBottom()
 
   if (isHomePage())
@@ -279,6 +279,17 @@ function handleReduceFrostedGlassBlur() {
 //     window.open(`https://www.bilibili.com/video/${bvid}`, '_self')
 // }
 
+/**
+ * Checks if the current viewport has a scrollbar.
+ * @returns {boolean} Returns true if the viewport has a scrollbar, false otherwise.
+ */
+function haveScrollbar() {
+  const osInstance = scrollbarRef.value?.osInstance()
+  const { viewport } = osInstance.elements()
+  const { scrollHeight } = viewport // get scroll offset
+  return scrollHeight > window.innerHeight
+}
+
 provide<BewlyAppProvider>('BEWLY_APP', {
   activatedPage,
   mainAppRef,
@@ -287,6 +298,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
   handleBackToTop,
   handlePageRefresh,
   handleReachBottom,
+  haveScrollbar,
 })
 </script>
 

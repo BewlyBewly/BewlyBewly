@@ -343,14 +343,14 @@ async function handleClearSearchHistory() {
 }
 
 #search-wrap {
-  --b-search-bar-color: var(--bew-content-1);
-  --b-search-bar-color-hover: var(--bew-content-1-hover);
+  --b-search-bar-color: var(--bew-content);
+  --b-search-bar-color-hover: var(--bew-content-hover);
   --b-search-bar-color-focus: var(--b-search-bar-color);
 
   @mixin card-content {
     --uno: "text-base outline-none w-full bg-$b-search-bar-color transform-gpu border-1 border-$bew-border-color";
+    --uno: "shadow-[var(--bew-shadow-2),var(--bew-shadow-edge-glow-1)]";
     backdrop-filter: var(--bew-filter-glass-1);
-    box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
   }
 
   .search-bar {
@@ -378,11 +378,12 @@ async function handleClearSearchHistory() {
 
   @mixin search-content-item {
     --uno: "px-4 py-2 w-full rounded-$bew-radius duration-300 cursor-pointer not-first:mt-1 tracking-wider hover:bg-$bew-fill-2";
+    --uno: "hover:shadow-[var(--bew-shadow-1),var(--bew-shadow-edge-glow-1)]";
   }
 
   #search-history {
     @include search-content;
-    --uno: "bg-$bew-elevated-1";
+    --uno: "bg-$bew-elevated";
 
     .history-list {
       .title {
@@ -400,13 +401,13 @@ async function handleClearSearchHistory() {
 
   #search-suggestion {
     @include search-content;
-    --uno: "bg-$bew-elevated-1";
+    --uno: "bg-$bew-elevated";
 
     .suggestion-item {
       @include search-content-item;
 
       &.active {
-        --uno: "bg-$bew-fill-2";
+        --uno: "bg-$bew-fill-2 shadow-[var(--bew-shadow-1),var(--bew-shadow-edge-glow-1)]";
       }
     }
   }
