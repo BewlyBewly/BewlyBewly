@@ -66,7 +66,7 @@ function getAllWatchLaterList() {
       flex="~"
       justify="between"
       p="y-4 x-6"
-      pos="fixed top-0 left-0"
+      pos="relative top-0 left-0"
       w="full"
       bg="$bew-elevated"
       z="2"
@@ -95,10 +95,10 @@ function getAllWatchLaterList() {
     </header>
 
     <!-- watchLater wrapper -->
-    <main overflow-hidden rounded="$bew-radius">
+    <main overflow-hidden rounded="b-$bew-radius">
       <div
         flex="~ col gap-2"
-        h="430px"
+        h="380px"
         overflow="y-scroll"
         p="x-4"
       >
@@ -125,7 +125,7 @@ function getAllWatchLaterList() {
             v-for="item in watchLaterList"
             :key="item.aid"
             :href="getWatchLaterUrl(item.bvid)" :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
-            m="last:b-4 first:t-50px" p="2"
+            m="last:b-4" p="2"
             rounded="$bew-radius"
             hover:bg="$bew-fill-2"
             duration-300
