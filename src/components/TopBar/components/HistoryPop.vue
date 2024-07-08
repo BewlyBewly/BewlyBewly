@@ -359,7 +359,12 @@ function getHistoryList(type: Business, view_at = 0 as number) {
                   {{ historyItem.title }}
                 </h3>
                 <div text="$bew-text-2 sm" m="t-4" flex="~" align="items-center">
-                  {{ historyItem.author_name }}
+                  <a
+                    :href="`https://space.bilibili.com/${historyItem.author_mid}`"
+                    :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
+                  >
+                    {{ historyItem.author_name }}
+                  </a>
                   <span
                     v-if="historyItem.live_status === 1"
                     text="$bew-theme-color"
