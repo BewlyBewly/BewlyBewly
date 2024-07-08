@@ -294,7 +294,7 @@ defineExpose({
       justify="between"
       items-center
       p="y-4 x-6"
-      pos="relative top-0 left-0"
+      pos="fixed top-0 left-0"
       w="full"
       bg="$bew-elevated"
       z="1"
@@ -323,8 +323,8 @@ defineExpose({
     </header>
 
     <!-- moments wrapper -->
-    <main overflow-hidden rounded="b-$bew-radius">
-      <div ref="momentsWrap" h="380px" overflow="y-scroll x-hidden" p="x-4">
+    <main overflow-hidden rounded="$bew-radius">
+      <div ref="momentsWrap" h="430px" overflow="y-scroll x-hidden" p="x-4">
         <!-- loading -->
         <Loading
           v-if="isLoading && moments.length === 0"
@@ -351,7 +351,7 @@ defineExpose({
             :key="index"
             :href="moment.link" :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
             flex="~ justify-between"
-            m="b-2" p="2"
+            m="b-2 first:t-50px" p="2"
             rounded="$bew-radius"
             hover:bg="$bew-fill-2"
             duration-300

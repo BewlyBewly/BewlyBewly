@@ -151,7 +151,7 @@ defineExpose({
       style="backdrop-filter: var(--bew-filter-glass-1)"
       flex="~" items-center justify-between
       p="x-6"
-      pos="relative top-0 left-0"
+      pos="fixed top-0 left-0"
       w="full"
       h-50px
       bg="$bew-content"
@@ -178,9 +178,9 @@ defineExpose({
       </div>
     </header>
 
-    <main flex="~" overflow-hidden rounded="b-$bew-radius">
+    <main flex="~" overflow-hidden rounded="$bew-radius">
       <aside
-        w="120px" h="380px" overflow="y-scroll" rounded="bl-$bew-radius"
+        w="120px" h="430px" overflow="y-scroll" rounded="l-$bew-radius"
         flex="shrink-0" bg="$bew-fill-1"
       >
         <ul grid="~ cols-1">
@@ -189,6 +189,7 @@ defineExpose({
             :key="item.id"
             :class="activatedMediaId === item.id ? 'activated-category' : ''"
             p="y-2 x-6"
+            first:m="t-[50px]"
             cursor="pointer"
             transition="~ duration-300"
             @click="changeCategory(item)"
@@ -202,7 +203,7 @@ defineExpose({
       <div
         ref="favoriteVideosWrap"
         flex="~ col gap-2 1"
-        h="380px"
+        h="430px"
         overflow="y-scroll"
         p="x-4"
         pos="relative"
@@ -236,7 +237,7 @@ defineExpose({
             :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
             hover:bg="$bew-fill-2"
             rounded="$bew-radius"
-            m="last:b-4" p="2"
+            m="first:t-50px last:b-4" p="2"
             class="group"
             transition="~ duration-300"
           >
