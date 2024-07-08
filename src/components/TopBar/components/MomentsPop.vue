@@ -344,12 +344,11 @@ defineExpose({
         />
 
         <!-- moments -->
-        <TransitionGroup v-if="!isLoading && moments.length !== 0">
-          <!-- 使用一个透明的块而非 margin-top 以防止显示动画出现先上弹后回弹的问题 #889 -->
-          <a>
-            <div h="50px" />
-          </a>
-        </TransitionGroup>
+
+        <!-- Use a transparent `div` instead of `margin-top` to prevent the list item bouncing problem -->
+        <!-- https://github.com/BewlyBewly/BewlyBewly/pull/889#issue-2394127922 -->
+        <div v-if="!isLoading && moments.length > 0" min-h="50px" />
+
         <TransitionGroup name="list">
           <a
             v-for="(moment, index) in moments"
