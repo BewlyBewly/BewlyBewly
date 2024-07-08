@@ -88,14 +88,12 @@ function getUnreadMessageCount() {
       :href="item.url"
       :target="isHomePage() ? '_blank' : '_self'"
       pos="relative"
+      flex="~ items-center gap-2"
       p="x-4 y-2"
       bg="hover:$bew-fill-2"
       rounded="$bew-radius"
       transition="all duration-300"
       m="b-1 last:b-0"
-      flex="~"
-      items="center"
-      h="35px"
     >
       <i :class="item.icon" text="$bew-text-2" />
       <span class="flex-1 ml-2 mr-1">{{ item.name }}</span>
