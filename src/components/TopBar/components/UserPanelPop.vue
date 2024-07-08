@@ -26,7 +26,7 @@ const otherLinks = computed((): { name: string, url: string, icon: string }[] =>
     {
       name: t('topbar.user_dropdown.uploads_manager'),
       url: 'https://member.bilibili.com/v2#/upload-manager/article',
-      icon: 'i-solar:video-frame-play-horizontal-bold-duotone',
+      icon: 'i-solar:video-library-bold-duotone',
     },
     {
       name: t('topbar.user_dropdown.accout_settings'),
