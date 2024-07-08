@@ -134,13 +134,13 @@ function getLvIcon(level: number, isSigma: boolean = false): string {
         class="group mr-4"
         href="https://account.bilibili.com/account/coin"
         :target="isHomePage() ? '_blank' : '_self'"
-      >{{ $t('topbar.user_dropdown.money') + userInfo.money }}</a>
+      >{{ $t('topbar.user_dropdown.money') + (userInfo.money ?? '-') }}</a>
       <a
         class="group"
         href="https://pay.bilibili.com/pay-v2-web/bcoin_index"
         :target="isHomePage() ? '_blank' : '_self'"
       >{{
-        $t('topbar.user_dropdown.b_coins') + userInfo.wallet?.bcoin_balance
+        $t('topbar.user_dropdown.b_coins') + (userInfo.wallet?.bcoin_balance ?? '-')
       }}</a>
     </div>
 
