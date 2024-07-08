@@ -228,7 +228,13 @@ defineExpose({
           rounded="$bew-radius-half"
         />
 
-        <!-- historys -->
+        <!-- favorites -->
+        <TransitionGroup v-if="!isLoading && favoriteResources.length !== 0">
+          <!-- 使用一个透明的块而非 margin-top 以防止显示动画出现先上弹后回弹的问题 #889 -->
+          <a>
+            <div h="50px" />
+          </a>
+        </TransitionGroup>
         <TransitionGroup name="list">
           <a
             v-for="item in favoriteResources"
@@ -237,7 +243,7 @@ defineExpose({
             :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
             hover:bg="$bew-fill-2"
             rounded="$bew-radius"
-            m="first:t-50px last:b-4" p="2"
+            m="last:b-4" p="2"
             class="group"
             transition="~ duration-300"
           >

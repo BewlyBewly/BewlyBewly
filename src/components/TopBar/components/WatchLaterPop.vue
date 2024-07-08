@@ -120,12 +120,18 @@ function getAllWatchLaterList() {
         />
 
         <!-- watchlater -->
+        <TransitionGroup v-if="!isLoading && watchLaterList.length !== 0">
+          <!-- 使用一个透明的块而非 margin-top 以防止显示动画出现先上弹后回弹的问题 #889 -->
+          <a>
+            <div h="50px" />
+          </a>
+        </TransitionGroup>
         <TransitionGroup name="list">
           <a
             v-for="item in watchLaterList"
             :key="item.aid"
             :href="getWatchLaterUrl(item.bvid)" :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
-            m="last:b-4 first:t-50px" p="2"
+            m="last:b-4" p="2"
             rounded="$bew-radius"
             hover:bg="$bew-fill-2"
             duration-300
