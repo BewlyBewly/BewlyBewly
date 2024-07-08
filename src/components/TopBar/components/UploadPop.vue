@@ -1,281 +1,70 @@
+<script setup>
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
+const list = computed(() => {
+  return [
+    {
+      name: t('topbar.upload_dropdown.article'),
+      url: 'https://member.bilibili.com/platform/upload/text/apply',
+      icon: 'i-solar:document-add-bold-duotone',
+    },
+    {
+      name: t('topbar.upload_dropdown.music'),
+      url: 'https://member.bilibili.com/platform/upload/audio/frame',
+      icon: 'i-solar:music-notes-bold-duotone',
+    },
+    {
+      name: t('topbar.upload_dropdown.sticker'),
+      url: 'https://member.bilibili.com/platform/upload/sticker',
+      icon: 'i-solar:sticker-smile-square-bold-duotone',
+    },
+    {
+      name: t('topbar.upload_dropdown.video'),
+      url: 'https://member.bilibili.com/platform/upload/video/frame',
+      icon: 'i-solar:video-frame-bold-duotone',
+    },
+    {
+      name: t('topbar.upload_dropdown.manager'),
+      url: 'https://member.bilibili.com/platform/upload-manager/article',
+      icon: 'i-solar:video-library-bold-duotone',
+    },
+  ]
+})
+</script>
+
 <template>
   <div
     style="backdrop-filter: var(--bew-filter-glass-1);"
     bg="$bew-elevated"
-    flex="~ col"
     rounded="$bew-radius"
     p="4"
     w="150px"
     shadow="[var(--bew-shadow-edge-glow-1),var(--bew-shadow-3)]"
     border="1 $bew-border-color"
+    flex="~ col"
   >
     <a
+      v-for="(item, index) in list"
+      :key="index"
       class="upload-item"
-      href="//member.bilibili.com/platform/upload/text/apply"
+      :href="item.url"
       target="_blank"
+      flex="~ items-center gap-2"
+      p="x-4 y-2"
+      bg="hover:$bew-fill-2"
+      rounded="$bew-radius"
+      transition="all duration-300"
+      m="b-1 last:b-0"
     >
-      <svg
-        width="26"
-        height="26"
-        viewBox="0 0 26 26"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        class="item-icon"
-      >
-        <rect
-          opacity="0.01"
-          x="1"
-          y="1"
-          width="24"
-          height="24"
-          fill="#C4C4C4"
-        />
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M5.5 3.5H15.5C17.9853 3.5 20 5.51472 20 8V12.5C20 13.0523 20.4477 13.5 21 13.5C21.5523 13.5 22 13.0523 22 12.5V11.5C22 11.4989 22 11.4977 22 11.4966V8C22 4.41015 19.0899 1.5 15.5 1.5H5.5C4.11929 1.5 3 2.61929 3 4V21C3 22.3807 4.11929 23.5 5.5 23.5H14.2615H15H15.2615C15.8138 23.5 16.2615 23.0523 16.2615 22.5C16.2615 21.9477 15.8138 21.5 15.2615 21.5H15H14.2615H5.5C5.22386 21.5 5 21.2761 5 21V4C5 3.72386 5.22386 3.5 5.5 3.5Z"
-          fill="var(--bew-text-1)"
-        />
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M7 10C7 9.44772 7.44772 9 8 9H14C14.5523 9 15 9.44772 15 10C15 10.5523 14.5523 11 14 11H8C7.44772 11 7 10.5523 7 10Z"
-          fill="var(--bew-text-1)"
-        />
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M7 14C7 13.4477 7.44772 13 8 13H11C11.5523 13 12 13.4477 12 14C12 14.5523 11.5523 15 11 15H8C7.44772 15 7 14.5523 7 14Z"
-          fill="var(--bew-text-1)"
-        />
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M22.0502 15.348C21.4644 14.7622 20.5146 14.7622 19.9288 15.348L17.454 17.8228C17.0634 18.2134 17.0634 18.8465 17.454 19.237C17.8445 19.6276 18.4777 19.6276 18.8682 19.237L20.9895 17.1157L23.1108 19.237C23.5013 19.6276 24.1345 19.6276 24.525 19.237C24.9156 18.8465 24.9156 18.2134 24.525 17.8228L22.0502 15.348Z"
-          fill="var(--bew-text-1)"
-        />
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M20.9895 14.9758C21.5418 14.9758 21.9895 15.4235 21.9895 15.9758L21.9895 22.5C21.9895 23.0523 21.5418 23.5 20.9895 23.5C20.4372 23.5 19.9895 23.0523 19.9895 22.5L19.9895 15.9758C19.9895 15.4235 20.4372 14.9758 20.9895 14.9758Z"
-          fill="var(--bew-text-1)"
-        />
-      </svg>
+      <i :class="item.icon" text="$bew-text-2" />
 
-      <div>{{ $t('topbar.upload_dropdown.article') }}</div>
-    </a>
-    <a
-      class="upload-item"
-      href="//member.bilibili.com/platform/upload/audio/frame"
-      target="_blank"
-    >
-      <svg
-        width="26"
-        height="26"
-        viewBox="0 0 26 26"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        class="item-icon"
-      >
-        <rect
-          opacity="0.01"
-          x="0.5"
-          y="1"
-          width="24"
-          height="24"
-          fill="#C4C4C4"
-        />
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M5 3.5H15C17.4853 3.5 19.5 5.51472 19.5 8V11.5V12.5C19.5 13.0523 19.9477 13.5 20.5 13.5C21.0523 13.5 21.5 13.0523 21.5 12.5V11.5V8C21.5 4.41015 18.5899 1.5 15 1.5H5C3.61929 1.5 2.5 2.61929 2.5 4V21C2.5 22.3807 3.61929 23.5 5 23.5H13.5H14.0802H14.5C15.0523 23.5 15.5 23.0523 15.5 22.5C15.5 21.9477 15.0523 21.5 14.5 21.5H14.0802H13.5H5C4.72386 21.5 4.5 21.2761 4.5 21V4C4.5 3.72386 4.72386 3.5 5 3.5Z"
-          fill="var(--bew-text-1)"
-        />
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M21.5611 15.348C20.9753 14.7622 20.0255 14.7622 19.4397 15.348L16.9649 17.8228C16.5743 18.2134 16.5743 18.8465 16.9649 19.237C17.3554 19.6276 17.9886 19.6276 18.3791 19.237L20.5004 17.1157L22.6217 19.237C23.0122 19.6276 23.6454 19.6276 24.0359 19.237C24.4265 18.8465 24.4265 18.2134 24.0359 17.8228L21.5611 15.348Z"
-          fill="var(--bew-text-1)"
-        />
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M20.5004 14.9758C21.0527 14.9758 21.5004 15.4235 21.5004 15.9758L21.5004 22.5C21.5004 23.0523 21.0527 23.5 20.5004 23.5C19.9481 23.5 19.5004 23.0523 19.5004 22.5L19.5004 15.9758C19.5004 15.4235 19.9481 14.9758 20.5004 14.9758Z"
-          fill="var(--bew-text-1)"
-        />
-        <path
-          d="M12.7504 9.54767V12.5477"
-          stroke="var(--bew-text-1)"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-        <path
-          d="M8.75037 13.9222C8.75037 13.1631 9.39507 12.5477 10.1904 12.5477H12.7504V14.1731C12.7504 14.9323 12.1057 15.5477 11.3104 15.5477H10.1904C9.39507 15.5477 8.75037 14.9323 8.75037 14.1731V13.9222Z"
-          stroke="var(--bew-text-1)"
-          stroke-width="2"
-          stroke-linejoin="round"
-        />
-        <path
-          d="M15.2504 10.0477L12.7504 9.54767"
-          stroke="var(--bew-text-1)"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
-
-      <div>{{ $t('topbar.upload_dropdown.music') }}</div>
-    </a>
-    <a
-      class="upload-item"
-      href="//member.bilibili.com/platform/upload/sticker"
-      target="_blank"
-    >
-      <svg
-        width="26"
-        height="26"
-        viewBox="0 0 26 26"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        class="item-icon"
-      >
-        <path d="M24 2H0V26H24V2Z" fill="white" fill-opacity="0.01" />
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M23.0607 15.348C22.4749 14.7622 21.5251 14.7622 20.9393 15.348L18.4645 17.8228C18.0739 18.2134 18.0739 18.8465 18.4645 19.237C18.855 19.6276 19.4882 19.6276 19.8787 19.237L22 17.1157L24.1213 19.237C24.5118 19.6276 25.145 19.6276 25.5355 19.237C25.9261 18.8465 25.9261 18.2134 25.5355 17.8228L23.0607 15.348Z"
-          fill="var(--bew-text-1)"
-        />
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M22 14.9759C22.5523 14.9759 23 15.4236 23 15.9759L23 22.5C23 23.0523 22.5523 23.5 22 23.5C21.4477 23.5 21 23.0523 21 22.5L21 15.9759C21 15.4236 21.4477 14.9759 22 14.9759Z"
-          fill="var(--bew-text-1)"
-        />
-        <path d="M24 1H0V25H24V1Z" fill="white" fill-opacity="0.01" />
-        <path
-          d="M22 12.4875C22 6.96464 17.5229 2.48749 12 2.48749C6.47715 2.48749 2 6.96464 2 12.4875C2 18.0103 6.47715 22.4875 12 22.4875C13.8026 22.4875 15.4938 22.0105 16.9543 21.176"
-          stroke="var(--bew-text-1)"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-        <path
-          d="M12 16.4132C13.6072 16.4132 14.2501 15.1274 14.2501 15.1274H9.74991C9.74991 15.1274 10.3928 16.4132 12 16.4132Z"
-          stroke="var(--bew-text-1)"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-        <path
-          d="M15.5 9.48749V11.4875"
-          stroke="var(--bew-text-1)"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-        <path
-          d="M8.5 9.48749V11.4875"
-          stroke="var(--bew-text-1)"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
-
-      <div>{{ $t('topbar.upload_dropdown.sticker') }}</div>
-    </a>
-    <a
-      class="upload-item"
-      href="//member.bilibili.com/platform/upload/video/frame"
-      target="_blank"
-    >
-      <svg
-        width="26"
-        height="26"
-        viewBox="0 0 26 26"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        class="item-icon"
-      >
-        <rect opacity="0.01" x="1.55603" width="24" height="24" fill="#C4C4C4" />
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M21.556 10.1866C21.0037 10.1866 20.556 10.6343 20.556 11.1866V12.5712C20.556 13.1234 21.0037 13.5712 21.556 13.5712C22.1083 13.5712 22.556 13.1234 22.556 12.5712V11.1866C22.556 10.6343 22.1083 10.1866 21.556 10.1866ZM14.556 20.5C14.0037 20.5 13.556 20.9477 13.556 21.5C13.556 22.0523 14.0037 22.5 14.556 22.5H15.556C16.1083 22.5 16.556 22.0523 16.556 21.5C16.556 20.9477 16.1083 20.5 15.556 20.5H14.556Z"
-          fill="var(--bew-text-1)"
-        />
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M22.6093 15.348C22.0235 14.7622 21.0738 14.7622 20.488 15.348L18.0131 17.8229C17.6226 18.2134 17.6226 18.8465 18.0131 19.2371C18.4037 19.6276 19.0368 19.6276 19.4274 19.2371L21.5487 17.1158L23.67 19.2371C24.0605 19.6276 24.6937 19.6276 25.0842 19.2371C25.4747 18.8465 25.4747 18.2134 25.0842 17.8229L22.6093 15.348Z"
-          fill="var(--bew-text-1)"
-        />
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M21.5487 14.9759C22.101 14.9759 22.5487 15.4236 22.5487 15.9759L22.5487 22.5C22.5487 23.0523 22.101 23.5 21.5487 23.5C20.9964 23.5 20.5487 23.0523 20.5487 22.5L20.5487 15.9759C20.5487 15.4236 20.9964 14.9759 21.5487 14.9759Z"
-          fill="var(--bew-text-1)"
-        />
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M3.20868 5.5H19.556C20.1083 5.5 20.556 5.94771 20.556 6.5V11.8911H22.556V6.5C22.556 4.84315 21.2129 3.5 19.556 3.5H3.20868C1.55183 3.5 0.208679 4.84315 0.208679 6.5V19.5C0.208679 21.1569 1.55182 22.5 3.20868 22.5H15.453V20.5H3.20868C2.65639 20.5 2.20868 20.0523 2.20868 19.5V6.5C2.20868 5.94772 2.6564 5.5 3.20868 5.5Z"
-          fill="var(--bew-text-1)"
-        />
-        <path
-          d="M13.3617 12.134C14.0284 12.5189 14.0284 13.4811 13.3617 13.866L10.3617 15.5981C9.69503 15.983 8.86169 15.5019 8.86169 14.7321V11.2679C8.86169 10.4981 9.69503 10.017 10.3617 10.4019L13.3617 12.134Z"
-          fill="var(--bew-text-1)"
-        />
-      </svg>
-
-      <div>{{ $t('topbar.upload_dropdown.video') }}</div>
-    </a>
-    <a
-      class="upload-item"
-      href="//member.bilibili.com/platform/upload-manager/article"
-      target="_blank"
-    >
-      <svg
-        width="26"
-        height="26"
-        viewBox="0 0 26 26"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        class="item-icon"
-      >
-        <rect
-          opacity="0.01"
-          x="1.5"
-          y="1"
-          width="24"
-          height="24"
-          fill="#C4C4C4"
-        />
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M16 3.5H6C5.72386 3.5 5.5 3.72386 5.5 4V21C5.5 21.2761 5.72386 21.5 6 21.5H10.5H11.5C12.0523 21.5 12.5 21.9477 12.5 22.5C12.5 23.0523 12.0523 23.5 11.5 23.5H10.5H6C4.61929 23.5 3.5 22.3807 3.5 21V4C3.5 2.61929 4.61929 1.5 6 1.5H16C19.5899 1.5 22.5 4.41015 22.5 8V11.2806V11.818V12.2806C22.5 12.8329 22.0523 13.2806 21.5 13.2806C20.9477 13.2806 20.5 12.8329 20.5 12.2806V11.818V11.2806V8C20.5 5.51472 18.4853 3.5 16 3.5ZM15 10.634C15.6667 11.0189 15.6667 11.9811 15 12.366L12 14.0981C11.3333 14.483 10.5 14.0019 10.5 13.2321V9.76795C10.5 8.99815 11.3333 8.51702 12 8.90192L15 10.634ZM23.9227 20.238C24.2799 19.6192 24.2799 18.8568 23.9227 18.238L22.3274 15.4748C21.9701 14.856 21.3098 14.4748 20.5953 14.4748H17.4047C16.6902 14.4748 16.0299 14.856 15.6727 15.4748L14.0774 18.238C13.7201 18.8568 13.7201 19.6192 14.0774 20.238L15.6727 23.0011C16.0299 23.6199 16.6902 24.0011 17.4047 24.0011H20.5953C21.3098 24.0011 21.9701 23.6199 22.3274 23.0011L23.9227 20.238ZM17.2604 16.7248C17.3497 16.5701 17.5148 16.4748 17.6934 16.4748H20.3066C20.4853 16.4748 20.6503 16.5701 20.7397 16.7248L22.0463 18.988C22.1356 19.1427 22.1356 19.3333 22.0463 19.488L20.7397 21.7511C20.6503 21.9058 20.4853 22.0011 20.3066 22.0011H17.6934C17.5148 22.0011 17.3497 21.9058 17.2604 21.7511L15.9538 19.488C15.8644 19.3333 15.8644 19.1427 15.9538 18.988L17.2604 16.7248ZM19 17.9879C18.3096 17.9879 17.75 18.5476 17.75 19.2379C17.75 19.9283 18.3096 20.4879 19 20.4879C19.6904 20.4879 20.25 19.9283 20.25 19.2379C20.25 18.5476 19.6904 17.9879 19 17.9879Z"
-          fill="var(--bew-text-1)"
-        />
-      </svg>
-
-      <div>{{ $t('topbar.upload_dropdown.manager') }}</div>
+      <div>{{ item.name }}</div>
     </a>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.upload-item {
-  --uno: "flex items-center p-2 rounded-$bew-radius mb-1 last:mb-0 transition-all duration-300 hover:bg-$bew-fill-2";
 
-  .item-icon {
-    --uno: "mr-2";
-  }
-
-  svg {
-    --uno: "w-21px h-21px";
-  }
-}
 </style>
