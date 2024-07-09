@@ -181,13 +181,27 @@ function handleConfirm() {
             <Button type="tertiary" @click="handleClose">
               <div>
                 {{ $t('common.cancel') }}
-                <span v-show="showShortcut" text="xs $bew-text-2">(Esc)</span>
+                <span
+                  v-show="showShortcut"
+                  text="xs $bew-text-2 lh-0" p="x-1" rounded-4px bg="$bew-fill-1"
+                  border="1 $bew-border-color"
+                  mix-blend-color-dodge
+                >
+                  ESC
+                </span>
               </div>
             </Button>
             <Button type="primary" @click="handleConfirm">
               <div>
                 {{ $t('common.confirm') }}
-                <span v-show="showShortcut" text="xs">(Enter)</span>
+                <span
+                  v-show="showShortcut"
+                  text="xs $bew-text-2 lh-0" p="x-1" rounded-4px bg="$bew-fill-1"
+                  border="1 $bew-border-color"
+                  mix-blend-color-dodge
+                >
+                  ENTER
+                </span>
               </div>
             </Button>
           </footer>
