@@ -109,6 +109,30 @@ async function setupStyles() {
     await import('./error404Page.scss')
     document.documentElement.classList.add('error404Page')
   }
+
+  // creative center page 创作中心页
+  else if (/^https?:\/\/member\.bilibili\.com\/platform.*$/.test(currentUrl)) {
+    await import('./forceDarkMode.scss')
+    document.documentElement.classList.add('forceDarkMode')
+    await import('./creativeCenterPage.scss')
+    document.documentElement.classList.add('creativeCenterPage')
+    // runWhenIdle(() => {
+    //   delay(5000)
+
+    //   // Get all div elements on the page
+    //   const divs = document.querySelectorAll('div')
+
+    //   // Iterate over each div element
+    //   divs.forEach((div) => {
+    //     // Get the computed style of the div
+    //     const style = window.getComputedStyle(div)
+    //     // Check if the background-image property is not 'none'
+    //     if (style.backgroundImage !== 'none') {
+    //       div.style.filter = 'var(--bew-filter-force-dark)'
+    //     }
+    //   })
+    // })
+  }
 }
 
 setupStyles()

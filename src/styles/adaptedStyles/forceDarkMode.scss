@@ -1,0 +1,16 @@
+html.bewly-design.forceDarkMode.dark {
+  filter: var(--bew-filter-force-dark) !important;
+  background-color: white;
+}
+
+.bewly-design.forceDarkMode {
+  &.dark {
+    img,
+    video,
+    iframe,
+    [style*="background-image: url"],
+    [style*="background: url"] {
+      filter: var(--bew-filter-force-dark);
+    }
+  }
+}
