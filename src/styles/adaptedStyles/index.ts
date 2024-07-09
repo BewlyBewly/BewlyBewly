@@ -7,8 +7,7 @@ import './userCard.scss'
 import './videoPlayer.scss'
 import './loginDialog.scss'
 
-import { runWhenIdle } from '~/utils/lazyLoad'
-import { delay, isHomePage } from '~/utils/main'
+import { isHomePage } from '~/utils/main'
 
 async function setupStyles() {
   const currentUrl = document.URL
