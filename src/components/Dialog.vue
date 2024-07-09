@@ -14,12 +14,14 @@ const props = withDefaults(defineProps<{
   maxWidth?: string | number
   contentHeight?: string | number
   contentMaxHeight?: string | number
+  showFooter?: boolean
   centerFooter?: boolean
   loading?: boolean
   preventCloseWhenLoading?: boolean
 }>(), {
   preventCloseWhenLoading: true,
   frostedGlass: true,
+  showFooter: true,
 })
 
 const emit = defineEmits(['close', 'confirm'])
@@ -175,6 +177,7 @@ function handleConfirm() {
             <slot />
           </main>
           <footer
+            v-if="showFooter"
             :style="{ justifyContent: centerFooter || center ? 'center' : 'flex-end' }"
             flex="~ gap-2" p="x-8 t-2 b-6"
           >
