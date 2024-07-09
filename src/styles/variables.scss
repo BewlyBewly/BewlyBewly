@@ -248,7 +248,7 @@
 
 :root.dark.forceDarkMode,
 :host(.dark.forceDarkMode) {
-  --bew-filter-force-dark: invert(0.94) hue-rotate(180deg) brightness(1.125);
+  --bew-filter-force-dark: invert(0.98) hue-rotate(180deg) brightness(1.1);
 }
 
 :host(.disable-frosted-glass),
