@@ -176,7 +176,7 @@ function handleConfirm() {
           </main>
           <footer
             :style="{ justifyContent: centerFooter || center ? 'center' : 'flex-end' }"
-            flex="~ gap-2" p="x-8 t-6 b-6"
+            flex="~ gap-2" p="x-8 t-2 b-6"
           >
             <Button type="tertiary" @click="handleClose">
               <div>
