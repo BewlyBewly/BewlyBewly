@@ -228,7 +228,12 @@ defineExpose({
           rounded="$bew-radius-half"
         />
 
-        <!-- historys -->
+        <!-- favorites -->
+
+        <!-- Use a transparent `div` instead of `margin-top` to prevent the list item bouncing problem -->
+        <!-- https://github.com/BewlyBewly/BewlyBewly/pull/889#issue-2394127922 -->
+        <div v-if="!isLoading && favoriteResources.length > 0" min-h="50px" />
+
         <TransitionGroup name="list">
           <a
             v-for="item in favoriteResources"
@@ -237,7 +242,7 @@ defineExpose({
             :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
             hover:bg="$bew-fill-2"
             rounded="$bew-radius"
-            m="first:t-50px last:b-4" p="2"
+            m="last:b-4" p="2"
             class="group"
             transition="~ duration-300"
           >

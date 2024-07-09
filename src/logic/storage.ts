@@ -78,7 +78,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   dockPosition: 'right',
   autoHideDock: false,
   blockAds: false,
-  disableFrostedGlass: false,
+  disableFrostedGlass: true,
   reduceFrostedGlassBlur: false,
   dockItemVisibilityList: [],
   disableLightDarkModeSwitcherOnDock: false,

@@ -18,6 +18,7 @@ interface MomentCard {
   title: string
   author: string
   authorFace: string
+  authorJumpUrl?: string
   pubTime?: string
   cover: string
   link: string
@@ -132,6 +133,7 @@ function checkIfHasNewMomentsThenUpdateMoments() {
             title: items[i].title,
             author: items[i].author.name,
             authorFace: items[i].author.face,
+            authorJumpUrl: items[i].author.jump_url,
             pubTime: items[i].pub_time,
             cover: items[i].cover,
             link: items[i].jump_url,
@@ -184,6 +186,7 @@ function getTopBarMoments() {
             title: item.title,
             author: item.author.name,
             authorFace: item.author.face,
+            authorJumpUrl: item.author.jump_url,
             pubTime: item.pub_time,
             cover: item.cover,
             link: item.jump_url,
@@ -342,13 +345,17 @@ defineExpose({
 
         <!-- moments -->
 
+        <!-- Use a transparent `div` instead of `margin-top` to prevent the list item bouncing problem -->
+        <!-- https://github.com/BewlyBewly/BewlyBewly/pull/889#issue-2394127922 -->
+        <div v-if="!isLoading && moments.length > 0" min-h="50px" />
+
         <TransitionGroup name="list">
           <a
             v-for="(moment, index) in moments"
             :key="index"
             :href="moment.link" :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
             flex="~ justify-between"
-            m="b-2 first:t-50px" p="2"
+            m="b-2" p="2"
             rounded="$bew-radius"
             hover:bg="$bew-fill-2"
             duration-300
@@ -366,7 +373,7 @@ defineExpose({
               style="box-shadow: 0 0 4px var(--bew-theme-color)"
             />
             <a
-              :href="moment.link"
+              :href="moment.authorJumpUrl"
               :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
               rounded="1/2"
               w="40px" h="40px" m="r-4"
@@ -383,7 +390,14 @@ defineExpose({
               <div>
                 <!-- <span v-if="selectedTab !== 1">{{ `${moment.name} ${t('topbar.moments_dropdown.uploaded')}` }}</span> -->
                 <!-- <span v-else>{{ `${moment.name} ${t('topbar.moments_dropdown.now_streaming')}` }}</span> -->
-                <span font-bold>{{ moment.author }}</span>
+
+                <a
+                  :href="moment.authorJumpUrl"
+                  :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
+                  font-bold
+                >
+                  {{ moment.author }}
+                </a>
                 <div overflow-hidden text-ellipsis break-anywhere>
                   {{ moment.title }}
                 </div>
