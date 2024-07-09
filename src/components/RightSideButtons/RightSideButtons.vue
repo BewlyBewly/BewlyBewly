@@ -4,6 +4,7 @@ import { Icon } from '@iconify/vue'
 import Button from '~/components/Button.vue'
 import { useDark } from '~/composables/useDark'
 
+import Dialog from '../Dialog.vue'
 import Tooltip from '../Tooltip.vue'
 import type { HoveringDockItem } from './types'
 
@@ -14,6 +15,8 @@ const hoveringDockItem = reactive<HoveringDockItem>({
   themeMode: false,
   settings: false,
 })
+
+const showBewlyPageDialog = ref<boolean>(false)
 </script>
 
 <template>
@@ -22,6 +25,14 @@ const hoveringDockItem = reactive<HoveringDockItem>({
     pointer-events-none
   >
     <div flex="~ gap-2 col" pointer-events-auto>
+      <Button
+        class="ctrl-btn"
+        style="backdrop-filter: var(--bew-filter-glass-1);"
+        center size="small" round
+        @click="showBewlyPageDialog = true"
+      >
+        <i i-mingcute:classify-2-line w-20px h-20px shrink-0 />
+      </Button>
       <Tooltip :content="isDark ? $t('dock.dark_mode') : $t('dock.light_mode')" placement="left">
         <Button
           class="ctrl-btn"
@@ -62,6 +73,16 @@ const hoveringDockItem = reactive<HoveringDockItem>({
       </Tooltip>
     </div>
   </div>
+  <Dialog
+    v-if="showBewlyPageDialog"
+    title="fjkdsfjlsjdfls"
+    width="80%"
+    content-height="80dvh"
+    :show-footer="false"
+    @close="showBewlyPageDialog = false"
+  >
+    fdsfdsfds
+  </Dialog>
 </template>
 
 <style lang="scss" scoped>
