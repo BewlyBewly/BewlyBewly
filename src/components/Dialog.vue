@@ -44,7 +44,7 @@ const dialogWidth = computed(() => {
   return typeof props.width === 'number' ? `${props.width}px` : props.width || '400px'
 })
 const dialogMaxWidth = computed(() => {
-  return typeof props.maxWidth === 'number' ? `${props.maxWidth}px` : props.maxWidth || '400px'
+  return typeof props.maxWidth === 'number' ? `${props.maxWidth}px` : props.maxWidth || 'unset'
 })
 const dialogContentHeight = computed(() => {
   return typeof props.contentHeight === 'number' ? `${props.contentHeight}px` : props.contentHeight || 'auto'
@@ -93,8 +93,8 @@ function handleConfirm() {
       <div
         v-if="showDialog"
         class="dialog"
-        pos="fixed top-0 left-0" w-full h-full z-100 z-10002
-        transform-gpu
+        pos="fixed top-0 left-0" w-full h-full z-10002
+        transform-gpu pointer-events-auto
       >
         <div
           bg="black opacity-40 dark:opacity-40"
@@ -103,7 +103,7 @@ function handleConfirm() {
         />
         <div
           style="
-            box-shadow: var(--bew-shadow-3), var(--bew-shadow-edge-glow-2);
+            box-shadow: var(--bew-shadow-4), var(--bew-shadow-edge-glow-2);
           "
           :style="{
             width: dialogWidth,
