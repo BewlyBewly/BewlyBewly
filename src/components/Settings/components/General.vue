@@ -123,12 +123,6 @@ function handleToggleDockItem(dockItem: any) {
       </SettingsItem> -->
     </SettingsItemGroup>
 
-    <SettingsItemGroup>
-      <SettingsItem :title="$t('settings.block_ads')">
-        <Radio v-model="settings.blockAds" />
-      </SettingsItem>
-    </SettingsItemGroup>
-
     <SettingsItemGroup :title="$t('settings.group_performance')">
       <SettingsItem :title="$t('settings.disable_frosted_glass')">
         <Radio v-model="settings.disableFrostedGlass" />
@@ -138,6 +132,12 @@ function handleToggleDockItem(dockItem: any) {
         :title="$t('settings.reduce_frosted_glass_blur')"
       >
         <Radio v-model="settings.reduceFrostedGlassBlur" />
+      </SettingsItem>
+    </SettingsItemGroup>
+
+    <SettingsItemGroup>
+      <SettingsItem :title="$t('settings.block_ads')">
+        <Radio v-model="settings.blockAds" />
       </SettingsItem>
     </SettingsItemGroup>
 
