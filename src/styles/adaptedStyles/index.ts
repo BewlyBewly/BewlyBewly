@@ -133,6 +133,11 @@ async function setupStyles() {
     //   })
     // })
   }
+  // account settings page
+  else if (/^https?:\/\/account\.bilibili\.com\/.*$/.test(currentUrl)) {
+    await import('./accountSettingsPage.scss')
+    document.documentElement.classList.add('accountSettingsPage')
+  }
 }
 
 setupStyles()

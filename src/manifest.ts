@@ -53,6 +53,7 @@ export async function getManifest() {
           '*://space.bilibili.com/*',
           '*://message.bilibili.com/*',
           '*://member.bilibili.com/*',
+          '*://account.bilibili.com/*',
           '*://www.hdslb.com/*',
         ],
         js: ['./dist/contentScripts/index.global.js'],
