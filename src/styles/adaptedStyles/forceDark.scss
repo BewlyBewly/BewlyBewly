@@ -1,9 +1,9 @@
-html.bewly-design.forceDarkMode.dark {
+html.bewly-design.forceDark.dark {
   filter: var(--bew-filter-force-dark) !important;
   background-color: white;
 }
 
-.bewly-design.forceDarkMode {
+.bewly-design.forceDark {
   &.dark {
     img,
     video,

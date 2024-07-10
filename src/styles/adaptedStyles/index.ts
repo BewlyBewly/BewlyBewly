@@ -112,8 +112,8 @@ async function setupStyles() {
 
   // creative center page 创作中心页
   else if (/^https?:\/\/member\.bilibili\.com\/platform.*$/.test(currentUrl)) {
-    await import('./forceDarkMode.scss')
-    document.documentElement.classList.add('forceDarkMode')
+    await import('./forceDark.scss')
+    document.documentElement.classList.add('forceDark')
     await import('./creativeCenterPage.scss')
     document.documentElement.classList.add('creativeCenterPage')
     // runWhenIdle(() => {
