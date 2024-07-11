@@ -6,8 +6,6 @@
 <img width="300" alt="BewlyBewly icon" src="https://cdn.jsdelivr.net/gh/BewlyBewly/Imgs/logos/bewlybewly-vtuber-logo.png"><br/>
 </p>
 
-<h1 align="center" style="margin-top: 0px;">BewlyBewly</h1>
-
 <p align="center">係咁以執吓你嘅 Bilibili 主頁。</p>
 
 <!-- ![min1](https://github.com/hakadao/BewlyBewly/assets/33394391/951f9e2a-d0e1-452c-83a9-dc6d85c4d441)

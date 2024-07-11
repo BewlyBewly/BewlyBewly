@@ -6,8 +6,6 @@ English | [官话 - 简体中文](README-cmn_CN.md) | [官話 - 正體中文](RE
 <img width="300" alt="BewlyBewly icon" src="https://cdn.jsdelivr.net/gh/BewlyBewly/Imgs/logos/bewlybewly-vtuber-logo.png"><br/>
 </p>
 
-<h1 align="center" style="margin-top: 0px;">BewlyBewly</h1>
-
 <p align="center">Just make a few small changes to your Bilibili homepage.</p>
 
 <!-- ![min1](https://github.com/hakadao/BewlyBewly/assets/33394391/951f9e2a-d0e1-452c-83a9-dc6d85c4d441)
