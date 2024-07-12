@@ -406,7 +406,7 @@ function handleUndo() {
               </a>
             </div>
             <div class="group/desc" flex="~ col" w="full" align="items-start">
-              <div flex="~ gap-1 justify-between items-start" w="full" pos="relative">
+              <div flex="~ gap-1 justify-between items-start" w="full" h="50px" pos="relative">
                 <h3
                   class="keep-two-lines"
                   text="lg overflow-ellipsis $bew-text-1"
