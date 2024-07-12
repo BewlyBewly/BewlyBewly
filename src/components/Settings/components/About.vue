@@ -11,7 +11,6 @@ import { version } from '../../../../package.json'
 
 const importSettingsRef = ref<HTMLElement>()
 const hasNewVersion = ref<boolean>(false)
-const flatVersionLogo = ref<boolean>(false)
 const dialogVisible = reactive({
   justWannaChangeTheJob: false,
 })
@@ -94,28 +93,24 @@ async function checkGitHubRelease() {
     <div flex="~ col gap-4" items-center mt-8>
       <div relative>
         <img
-          v-show="flatVersionLogo"
-          :src="`${browser.runtime.getURL('/assets/icon-512-flat.png')}`" alt="" width="80"
-          @click="flatVersionLogo = !flatVersionLogo"
+          :src="`${browser.runtime.getURL('/assets/bewly-vtuber-style-logo.png')}`" alt="" height="120"
         >
-        <img
-          v-show="!flatVersionLogo"
-          :src="`${browser.runtime.getURL('/assets/icon-512.png')}`" alt="" width="80"
-          drop-shadow-md
-          @click="flatVersionLogo = !flatVersionLogo"
-        >
+
         <a
           v-if="hasNewVersion"
           href="https://github.com/hakadao/BewlyBewly/releases" target="_blank"
           style="backdrop-filter: var(--bew-filter-glass);"
-          pos="absolute bottom-0 right-0" transform="translate-x-50%" un-text="xs white" p="y-1 x-2" bg="$bew-theme-color"
+          pos="absolute bottom-0 right-0" transform="translate-x-50%" un-text="xs $bew-text-1" p="y-1 x-2" bg="$bew-fill-3"
           rounded-12
         >
           NEW
         </a>
       </div>
       <section text-xl>
-        BewlyBewly <a href="https://github.com/hakadao/BewlyBewly/releases" target="_blank" un-text="sm color-$bew-text-2 hover:color-$bew-text-3">v{{ version }}</a>
+        <p>BewlyBewly</p>
+        <p text-center>
+          <a href="https://github.com/hakadao/BewlyBewly/releases" target="_blank" un-text="sm color-$bew-text-2 hover:color-$bew-text-3">v{{ version }}</a>
+        </p>
       </section>
       <section mt-4 flex gap-2>
         <a
