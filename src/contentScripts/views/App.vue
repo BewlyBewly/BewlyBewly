@@ -303,7 +303,13 @@ provide<BewlyAppProvider>('BEWLY_APP', {
 </script>
 
 <template>
-  <div id="bewly-wrapper" ref="mainAppRef" class="bewly-wrapper" :class="{ dark: isDark }" text="$bew-text-1">
+  <div
+    id="bewly-wrapper"
+    ref="mainAppRef"
+    class="bewly-wrapper"
+    :class="{ dark: isDark }"
+    text="$bew-text-1"
+  >
     <!-- Background -->
     <template v-if="isHomePage() && !settings.useOriginalBilibiliHomepage">
       <AppBackground :activated-page="activatedPage" />
@@ -405,5 +411,10 @@ provide<BewlyAppProvider>('BEWLY_APP', {
 
 .bewly-wrapper {
   --uno: "text-size-$bew-base-font-size";
+
+  // To fix the filter used in `.bewly-wrapper` that cause the positions of elements become discorded.
+  > * > * {
+    filter: var(--bew-filter-force-dark);
+  }
 }
 </style>

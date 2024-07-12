@@ -123,6 +123,24 @@ function handleToggleDockItem(dockItem: any) {
       </SettingsItem> -->
     </SettingsItemGroup>
 
+    <SettingsItemGroup :title="$t('settings.group_performance')">
+      <SettingsItem :title="$t('settings.disable_frosted_glass')">
+        <Radio v-model="settings.disableFrostedGlass" />
+      </SettingsItem>
+      <SettingsItem
+        v-if="!settings.disableFrostedGlass"
+        :title="$t('settings.reduce_frosted_glass_blur')"
+      >
+        <Radio v-model="settings.reduceFrostedGlassBlur" />
+      </SettingsItem>
+    </SettingsItemGroup>
+
+    <SettingsItemGroup>
+      <SettingsItem :title="$t('settings.block_ads')">
+        <Radio v-model="settings.blockAds" />
+      </SettingsItem>
+    </SettingsItemGroup>
+
     <SettingsItemGroup :title="$t('settings.group_video_card')">
       <SettingsItem :title="$t('settings.enable_video_preview')">
         <Radio v-model="settings.enableVideoPreview" />
@@ -135,24 +153,6 @@ function handleToggleDockItem(dockItem: any) {
           <Radio v-model="settings.hoverVideoCardDelayed" />
         </SettingsItem>
       </template>
-    </SettingsItemGroup>
-
-    <SettingsItemGroup>
-      <SettingsItem :title="$t('settings.block_ads')">
-        <Radio v-model="settings.blockAds" />
-      </SettingsItem>
-    </SettingsItemGroup>
-
-    <SettingsItemGroup :title="$t('settings.group_performance')">
-      <SettingsItem :title="$t('settings.disable_frosted_glass')">
-        <Radio v-model="settings.disableFrostedGlass" />
-      </SettingsItem>
-      <SettingsItem
-        v-if="!settings.disableFrostedGlass"
-        :title="$t('settings.reduce_frosted_glass_blur')"
-      >
-        <Radio v-model="settings.reduceFrostedGlassBlur" />
-      </SettingsItem>
     </SettingsItemGroup>
 
     <SettingsItemGroup :title="$t('settings.group_topbar')">

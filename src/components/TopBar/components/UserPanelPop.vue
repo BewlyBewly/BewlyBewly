@@ -26,7 +26,7 @@ const otherLinks = computed((): { name: string, url: string, icon: string }[] =>
     {
       name: t('topbar.user_dropdown.uploads_manager'),
       url: 'https://member.bilibili.com/v2#/upload-manager/article',
-      icon: 'i-solar:video-frame-play-horizontal-bold-duotone',
+      icon: 'i-solar:video-library-bold-duotone',
     },
     {
       name: t('topbar.user_dropdown.accout_settings'),
@@ -134,13 +134,13 @@ function getLvIcon(level: number, isSigma: boolean = false): string {
         class="group mr-4"
         href="https://account.bilibili.com/account/coin"
         :target="isHomePage() ? '_blank' : '_self'"
-      >{{ $t('topbar.user_dropdown.money') + userInfo.money }}</a>
+      >{{ $t('topbar.user_dropdown.money') + (userInfo.money ?? '-') }}</a>
       <a
         class="group"
         href="https://pay.bilibili.com/pay-v2-web/bcoin_index"
         :target="isHomePage() ? '_blank' : '_self'"
       >{{
-        $t('topbar.user_dropdown.b_coins') + userInfo.wallet?.bcoin_balance
+        $t('topbar.user_dropdown.b_coins') + (userInfo.wallet?.bcoin_balance ?? '-')
       }}</a>
     </div>
 

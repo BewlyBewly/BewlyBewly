@@ -120,12 +120,17 @@ function getAllWatchLaterList() {
         />
 
         <!-- watchlater -->
+
+        <!-- Use a transparent `div` instead of `margin-top` to prevent the list item bouncing problem -->
+        <!-- https://github.com/BewlyBewly/BewlyBewly/pull/889#issue-2394127922 -->
+        <div v-if="!isLoading && watchLaterList.length > 0" min-h="50px" />
+
         <TransitionGroup name="list">
           <a
             v-for="item in watchLaterList"
             :key="item.aid"
             :href="getWatchLaterUrl(item.bvid)" :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
-            m="last:b-4 first:t-50px" p="2"
+            m="last:b-4" p="2"
             rounded="$bew-radius"
             hover:bg="$bew-fill-2"
             duration-300

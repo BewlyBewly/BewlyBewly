@@ -345,13 +345,17 @@ defineExpose({
 
         <!-- moments -->
 
+        <!-- Use a transparent `div` instead of `margin-top` to prevent the list item bouncing problem -->
+        <!-- https://github.com/BewlyBewly/BewlyBewly/pull/889#issue-2394127922 -->
+        <div v-if="!isLoading && moments.length > 0" min-h="50px" />
+
         <TransitionGroup name="list">
           <a
             v-for="(moment, index) in moments"
             :key="index"
             :href="moment.link" :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
             flex="~ justify-between"
-            m="b-2 first:t-50px" p="2"
+            m="b-2" p="2"
             rounded="$bew-radius"
             hover:bg="$bew-fill-2"
             duration-300

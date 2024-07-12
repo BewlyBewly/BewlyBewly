@@ -14,12 +14,14 @@ const props = withDefaults(defineProps<{
   maxWidth?: string | number
   contentHeight?: string | number
   contentMaxHeight?: string | number
+  showFooter?: boolean
   centerFooter?: boolean
   loading?: boolean
   preventCloseWhenLoading?: boolean
 }>(), {
   preventCloseWhenLoading: true,
   frostedGlass: true,
+  showFooter: true,
 })
 
 const emit = defineEmits(['close', 'confirm'])
@@ -44,7 +46,7 @@ const dialogWidth = computed(() => {
   return typeof props.width === 'number' ? `${props.width}px` : props.width || '400px'
 })
 const dialogMaxWidth = computed(() => {
-  return typeof props.maxWidth === 'number' ? `${props.maxWidth}px` : props.maxWidth || '400px'
+  return typeof props.maxWidth === 'number' ? `${props.maxWidth}px` : props.maxWidth || 'unset'
 })
 const dialogContentHeight = computed(() => {
   return typeof props.contentHeight === 'number' ? `${props.contentHeight}px` : props.contentHeight || 'auto'
@@ -93,8 +95,8 @@ function handleConfirm() {
       <div
         v-if="showDialog"
         class="dialog"
-        pos="fixed top-0 left-0" w-full h-full z-100 z-10002
-        transform-gpu
+        pos="fixed top-0 left-0" w-full h-full z-10002
+        transform-gpu pointer-events-auto
       >
         <div
           bg="black opacity-40 dark:opacity-40"
@@ -103,7 +105,7 @@ function handleConfirm() {
         />
         <div
           style="
-            box-shadow: var(--bew-shadow-3), var(--bew-shadow-edge-glow-2);
+            box-shadow: var(--bew-shadow-4), var(--bew-shadow-edge-glow-2);
           "
           :style="{
             width: dialogWidth,
@@ -175,19 +177,34 @@ function handleConfirm() {
             <slot />
           </main>
           <footer
+            v-if="showFooter"
             :style="{ justifyContent: centerFooter || center ? 'center' : 'flex-end' }"
-            flex="~ gap-2" p="x-8 t-6 b-6"
+            flex="~ gap-2" p="x-8 t-2 b-6"
           >
             <Button type="tertiary" @click="handleClose">
               <div>
                 {{ $t('common.cancel') }}
-                <span v-show="showShortcut" text="xs $bew-text-2">(Esc)</span>
+                <span
+                  v-show="showShortcut"
+                  text="xs $bew-text-2 lh-0" p="x-1" rounded-4px bg="$bew-fill-1"
+                  border="1 $bew-border-color"
+                  mix-blend-color-dodge
+                >
+                  ESC
+                </span>
               </div>
             </Button>
             <Button type="primary" @click="handleConfirm">
               <div>
                 {{ $t('common.confirm') }}
-                <span v-show="showShortcut" text="xs">(Enter)</span>
+                <span
+                  v-show="showShortcut"
+                  text="xs $bew-text-2 lh-0" p="x-1" rounded-4px bg="$bew-fill-1"
+                  border="1 $bew-border-color"
+                  mix-blend-color-dodge
+                >
+                  ENTER
+                </span>
               </div>
             </Button>
           </footer>

@@ -41,7 +41,7 @@ settings:
   # Settings group
   group_common: Common
   group_video_card: Video Card
-  group_performance: Performance
+  group_performance: Frosted Glass & Performance
   group_topbar: Top Bar
   group_dock: Dock
   group_color: Color
@@ -248,7 +248,7 @@ topbar:
     posts: POSTS
     accout_settings: Account settings
     uploads_manager: Uploads manager
-    b_coins_wallet: B-coins Wallet
+    b_coins_wallet: B-coins wallet
     orders: Orders
     workshop: My workshop
     my_stream_info: My stream info

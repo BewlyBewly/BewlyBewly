@@ -109,6 +109,20 @@ async function setupStyles() {
     await import('./error404Page.scss')
     document.documentElement.classList.add('error404Page')
   }
+
+  // creative center page 创作中心页
+  else if (/^https?:\/\/member\.bilibili\.com\/platform.*$/.test(currentUrl)) {
+    await import('./forceDark.scss')
+    document.documentElement.classList.add('forceDark')
+    await import('./creativeCenterPage.scss')
+    document.documentElement.classList.add('creativeCenterPage')
+  }
+
+  // account settings page
+  else if (/^https?:\/\/account\.bilibili\.com\/.*$/.test(currentUrl)) {
+    await import('./accountSettingsPage.scss')
+    document.documentElement.classList.add('accountSettingsPage')
+  }
 }
 
 setupStyles()
