@@ -244,10 +244,10 @@ topbar:
   user_dropdown:
     money: 硬幣：
     b_coins: B幣：
-    exp_desc: '當前經驗 {current_exp}，升級到 LV {level} 還需要 {need_exp}'
+    exp_desc: '目前經驗 {current_exp}，升級到 LV {level} 還需要 {need_exp}'
     following: 追蹤中
     followers: 粉絲
-    posts: 動向
+    posts: 動態
     accout_settings: 帳戶資訊
     uploads_manager: 內容管理
     b_coins_wallet: B幣錢包
@@ -343,11 +343,11 @@ watch_later:
   clear_all: 清空稍後觀看
   clear_all_confirm: |-
     要清空稍後觀看的影片嗎？
-    此操作無法撤消，你確定要清空稍後觀看的影片嗎？
+    此操作無法復原，你確定要清空稍後觀看的影片嗎？
   remove_watched_videos: 移除看過的影片
   remove_watched_videos_confirm: |-
     要移除看過的影片嗎？
-    此操作無法撤消，你確定要移除看過的影片嗎？
+    此操作無法復原，你確定要移除看過的影片嗎？
 search_bar:
   history_title: 搜尋記錄
   clear_history: 清除所有搜尋記錄
