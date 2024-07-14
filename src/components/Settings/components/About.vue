@@ -118,7 +118,7 @@ async function checkGitHubRelease() {
       >
         <section w-full>
           <h3 class="title">
-            Links
+            {{ $t('settings.links') }}
           </h3>
           <div grid="~ xl:cols-5 lg:cols-4 md:cols-3 cols-2 gap-2">
             <a
@@ -160,19 +160,22 @@ async function checkGitHubRelease() {
               un-text="#f87171 dark:#fca5a5"
               @click="dialogVisible.sponsor = true"
             >
-              <div i-tabler:heart /> Sponsor
+              <div i-tabler:heart /> {{ $t('settings.sponsor') }}
             </button>
             <Dialog
               v-if="dialogVisible.sponsor"
               width="50%"
               max-width="600px"
-              title="Sponsor"
+              :title="$t('settings.sponsor')"
               content-height="50vh"
               append-to-bewly-body
               @close="dialogVisible.sponsor = false"
             >
               <p mb-4>
-                Afdian / 爱发电:
+                {{ $t('settings.sponsor_desc') }}
+              </p>
+              <p mb-4>
+                1. {{ $t('settings.afdian') }}:
                 <a
                   href="https://afdian.net/@hakadao" target="_blank"
                   color="$bew-theme-color"
@@ -184,7 +187,7 @@ async function checkGitHubRelease() {
               >
 
               <p mb-4 mt-6>
-                Buy me a coffee:
+                2. Buy me a coffee:
                 <a
                   href="https://buymeacoffee.com/hakadao" target="_blank"
                   color="$bew-theme-color"
@@ -302,7 +305,7 @@ async function checkGitHubRelease() {
 }
 
 .link-card {
-  --uno: "w-full h-46px px-4 py-2 flex items-center rounded-$bew-radius";
+  --uno: "w-full h-48px px-4 py-2 flex items-center rounded-$bew-radius";
   --uno: "duration-300";
 
   > div {

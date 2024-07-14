@@ -166,6 +166,10 @@ settings:
   topbar_visibility_desc: 用于兼容 Bilibili Evolved 自定义顶栏
 
   # About
+  links: 链接
+  sponsor: 赞助
+  sponsor_desc: 喜欢这个项目并希望看到它蓬勃发展吗？请考虑赞助它！您的支持是这个项目发展的动力。
+  afdian: 爱发电
   import_settings: 导入设置
   export_settings: 导出设置
   export_settings_desc: 一些敏感的数据，例如 access key，可能需要重新获取

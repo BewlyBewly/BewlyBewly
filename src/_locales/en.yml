@@ -167,6 +167,10 @@ settings:
   topbar_visibility_desc: Compatible with Bilibili Evolved customize top bar
 
   # About
+  links: Links
+  sponsor: Sponsor
+  sponsor_desc: If you like this project and would like to see it glow, please consider sponsoring it. Your support is the driving force behind the project's development.
+  afdian: Afdian
   import_settings: Import Settings
   export_settings: Export Settings
   export_settings_desc: Some sensitive content, such as access key, will not be exported and may need to be reacquired again.

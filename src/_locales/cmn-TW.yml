@@ -169,6 +169,10 @@ settings:
   follow_bilibili_evolved_color_desc: 每次變更 Bilibili Evolved 主題色後，記得重新選取此選項以更新配置
 
   # About
+  links: 連結
+  sponsor: 贊助
+  sponsor_desc: 喜歡這份專案並希望看到它蓬勃發展嗎？請考慮贊助它！您的支持是此專案發展的動力。
+  afdian: 爱发电
   import_settings: 匯入設定
   export_settings: 匯出設定
   export_settings_desc: 一些敏感性資訊，例如 access key，可能需要重新取得
