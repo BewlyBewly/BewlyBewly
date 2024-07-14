@@ -14,6 +14,7 @@ export function useDark() {
       return currentSystemColorScheme.value
   })
   const isDark = computed(() => currentAppColorScheme.value === 'dark')
+  let themeChangeTimer: NodeJS.Timeout | null = null
 
   // Watch for changes in the 'settings.value.theme' variable and add the 'dark' class to the 'mainApp' element
   // to prevent some Unocss dark-specific styles from failing to take effect
@@ -30,22 +31,25 @@ export function useDark() {
    * to prevent some Unocss dark-specific styles from failing to take effect
    */
   function setAppAppearance() {
+    if (themeChangeTimer)
+      clearInterval(themeChangeTimer)
+
     if (isDark.value) {
       document.querySelector('#bewly')?.classList.add('dark')
       document.documentElement.classList.add('dark')
-      setCookie('theme_style', 'dark', 365 * 10)
       // TODO: find a better way implement this
-      executeTimes(() => {
+      themeChangeTimer = executeTimes(() => {
+        setCookie('theme_style', 'dark', 365 * 10)
         window.dispatchEvent(new CustomEvent('global.themeChange', { detail: 'dark' }))
-      }, 15, 200)
+      }, 10, 200)
     }
     else {
       document.querySelector('#bewly')?.classList.remove('dark')
       document.documentElement.classList.remove('dark')
-      setCookie('theme_style', 'light', 365 * 10)
-      executeTimes(() => {
+      themeChangeTimer = executeTimes(() => {
+        setCookie('theme_style', 'light', 365 * 10)
         window.dispatchEvent(new CustomEvent('global.themeChange', { detail: 'light' }))
-      }, 15, 200)
+      }, 10, 200)
     }
   }
 
