@@ -2,7 +2,7 @@ import { usePreferredDark } from '@vueuse/core'
 
 import { settings } from '~/logic'
 import { runWhenIdle } from '~/utils/lazyLoad'
-import { delay, setCookie } from '~/utils/main'
+import { setCookie } from '~/utils/main'
 import { executeTimes } from '~/utils/timer'
 
 export function useDark() {
