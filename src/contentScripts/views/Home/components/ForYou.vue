@@ -208,10 +208,6 @@ async function getRecommendVideos() {
           })
         })
       }
-
-      if (!haveScrollbar()) {
-        getRecommendVideos()
-      }
     }
     else if (response.code === 62011) {
       needToLoginFirst.value = true
@@ -219,6 +215,11 @@ async function getRecommendVideos() {
   }
   finally {
     videoList.value = videoList.value.filter(video => video.item)
+
+    await nextTick()
+    if (!haveScrollbar()) {
+      getRecommendVideos()
+    }
   }
 }
 
@@ -259,10 +260,6 @@ async function getAppRecommendVideos() {
           })
         })
       }
-
-      if (!haveScrollbar()) {
-        getAppRecommendVideos()
-      }
     }
     else if (response.code === 62011) {
       needToLoginFirst.value = true
@@ -270,6 +267,11 @@ async function getAppRecommendVideos() {
   }
   finally {
     appVideoList.value = appVideoList.value.filter(video => video.item)
+
+    await nextTick()
+    if (!haveScrollbar()) {
+      getAppRecommendVideos()
+    }
   }
 }
 
