@@ -1,6 +1,9 @@
 import { usePreferredDark } from '@vueuse/core'
 
 import { settings } from '~/logic'
+import { runWhenIdle } from '~/utils/lazyLoad'
+import { setCookie } from '~/utils/main'
+import { executeTimes } from '~/utils/timer'
 
 export function useDark() {
   const isPreferredDark = usePreferredDark()
@@ -31,10 +34,19 @@ export function useDark() {
     if (isDark.value) {
       document.querySelector('#bewly')?.classList.add('dark')
       document.documentElement.classList.add('dark')
+      setCookie('theme_style', 'dark', 365 * 10)
+      // TODO: find a better way implement this
+      executeTimes(() => {
+        window.dispatchEvent(new CustomEvent('global.themeChange', { detail: 'dark' }))
+      }, 15, 200)
     }
     else {
       document.querySelector('#bewly')?.classList.remove('dark')
       document.documentElement.classList.remove('dark')
+      setCookie('theme_style', 'light', 365 * 10)
+      executeTimes(() => {
+        window.dispatchEvent(new CustomEvent('global.themeChange', { detail: 'light' }))
+      }, 15, 200)
     }
   }
 
