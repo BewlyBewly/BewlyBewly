@@ -71,6 +71,8 @@ function isSupportedPages() {
     || /^https?:\/\/member\.bilibili\.com\/platform.*$/.test(currentUrl)
     // account settings page 帳號中心頁
     || /^https?:\/\/account\.bilibili\.com\/.*$/.test(currentUrl)
+    // 登录页
+    || /^https?:\/\/passport\.bilibili\.com\/login.*$/.test(currentUrl)
   ) {
     return true
   }

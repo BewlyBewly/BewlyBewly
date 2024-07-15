@@ -1,0 +1,28 @@
+.bewly-design {
+  body {
+    background-color: var(--bew-bg);
+  }
+
+  #app {
+    background-color: var(--bew-bg);
+  }
+
+  .login-scan__qrcode .qrcode__tip .img,
+  .login-scan__qrcode .scan-tips-icon {
+    background-color: var(--bew-bg);
+  }
+
+  .btn_other {
+    color: var(--bew-text-1);
+    background: #83839124;
+  }
+
+  .input {
+    background: var(--bew-elevated-solid);
+  }
+}
+// 隐藏多余元素
+.top-header,
+.international-footer {
+  display: none;
+}
