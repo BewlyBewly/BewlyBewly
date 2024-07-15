@@ -250,7 +250,7 @@ topbar:
     following: FOLLOWING
     followers: FOLLOWERS
     posts: POSTS
-    accout_settings: Account settings
+    account_settings: Account settings
     uploads_manager: Uploads manager
     b_coins_wallet: B-coins wallet
     orders: Orders
