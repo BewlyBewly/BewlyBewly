@@ -22,12 +22,19 @@
     }
 
     .h2,
-    .bottom-btn {
+    .bottom-btn,
+    .BgmInfo .right .bottom .btn {
       background-color: var(--bg3) !important;
     }
 
     .main {
       background-color: var(--bg1) !important;
+    }
+
+    // 想听原版 按钮
+    .BgmInfo .right .bottom .btn:hover {
+      background-color: var(--brand_blue);
+      color: var(--Graph_white);
     }
 
     .bottom-btn {
