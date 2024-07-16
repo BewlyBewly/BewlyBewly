@@ -3,4 +3,45 @@
     --bpx-toast-fn-color: var(--bew-theme-color);
     --bpx-toast-fn-hover-color: var(--bew-theme-color-80);
   }
+
+  #musicApp {
+    background-color: var(--bg3) !important;
+
+    .h2 .title svg,
+    .h2 .title span,
+    .BgmInfo .right .title,
+    .main .container .title,
+    .video-list .title,
+    .bottom-btn {
+      color: var(--text1);
+    }
+
+    .BgmInfo .right .singer,
+    .BgmInfo .right .des {
+      color: var(--text3);
+    }
+
+    .h2,
+    .bottom-btn {
+      background-color: var(--bg3) !important;
+    }
+
+    .main {
+      background-color: var(--bg1) !important;
+    }
+
+    .bottom-btn {
+      border-color: var(--line_regular);
+    }
+
+    .container {
+      width: 336px;
+    }
+
+    @media (min-width: 1681px) {
+      .container {
+        width: 397px;
+      }
+    }
+  }
 }
