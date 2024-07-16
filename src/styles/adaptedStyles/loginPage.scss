@@ -19,7 +19,8 @@
       color: var(--bew-text-1);
     }
 
-    .btn_other {
+    .btn_other,
+    .area-code-select .option:hover {
       border: 2px;
       color: var(--bew-text-1);
       background: #83839124;
