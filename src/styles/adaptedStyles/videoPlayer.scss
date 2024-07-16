@@ -41,7 +41,7 @@
       }
 
       .BgmInfo .left:after {
-        border-color: var(--graph_bg_regular);
+        border-color: var(--bew-content-solid);
       }
 
       .main {
@@ -51,7 +51,7 @@
       // 想听原版 按钮
       .BgmInfo .right .bottom .btn:hover {
         background-color: var(--bew-theme-color) !important;
-        color: var(--bew-content-solid);
+        color: var(--Graph_white);
       }
 
       .bottom-btn {
