@@ -20,6 +20,11 @@
       color: var(--bew-theme-color) !important;
     }
 
+    path,
+    .eye-btn:hover svg path[data-v-51f92a9c] {
+      fill: var(--bew-theme-color) !important;
+    }
+
     .btn_primary,
     .disabled {
       background: var(--bew-theme-color) !important;
@@ -52,6 +57,8 @@
     }
   }
   // #endregion
+
+  // #region 深色模式
   &.dark {
     p,
     .login-scan__txt p,
@@ -69,13 +76,18 @@
       background: #83839124;
     }
 
+    .login-scan__qrcode .qrcode__tip,
+    .login-scan__qrcode .qrcode__tip img {
+      background: var(--bew-bg);
+    }
+
     body,
     #app,
-    .login-scan__qrcode .qrcode__tip .img,
     .login-scan__qrcode .scan-tips-icon,
     .forget-tip,
     .area-code-select {
       background-color: var(--bew-bg);
     }
   }
+  // #endregion 深色模式
 }
