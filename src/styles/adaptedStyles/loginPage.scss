@@ -4,23 +4,26 @@
   .international-footer {
     display: none;
   }
+
+  .login-scan__qrcode {
+    background: #fff;
+  }
   // #region 主题颜色适配部分
   body,
   #app,
   .login-scan__qrcode .qrcode__tip .img,
   .login-scan__qrcode .scan-tips-icon,
+  .forget-tip,
   .area-code-select {
     background-color: var(--bew-bg);
-  }
-
-  .login-scan__qrcode {
-    background: #fff;
   }
 
   p,
   .login-scan__txt p,
   .third-party-login-wrapper .title[data-v-2aa36dd0],
-  .tabs_wp div {
+  .tabs_wp div,
+  .forget-tip .title,
+  .forget-tip .desc {
     color: var(--bew-text-1);
   }
 
@@ -64,6 +67,11 @@
   .main__right .tab__form .form__separator-line {
     border-width: 2px;
     border-color: var(--bew-border-color);
-    // #endregion
   }
+
+  .tab-sms__vertical-line {
+    width: 2px;
+    border-left: 2px solid var(--bew-border-color);
+  }
+  // #endregion
 }
