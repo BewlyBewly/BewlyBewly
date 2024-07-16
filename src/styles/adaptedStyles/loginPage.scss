@@ -10,22 +10,6 @@
   }
   // #region 主题颜色适配部分
   :not(foobar) {
-    p,
-    .login-scan__txt p,
-    .third-party-login-wrapper .title[data-v-2aa36dd0],
-    .tabs_wp div,
-    .forget-tip .title,
-    .forget-tip .desc {
-      color: var(--bew-text-1);
-    }
-
-    .btn_other,
-    .area-code-select .option:hover {
-      border: 2px;
-      color: var(--bew-text-1);
-      background: #83839124;
-    }
-
     a.clickable,
     .area-code-select .checked {
       color: var(--bew-theme-color);
@@ -69,6 +53,22 @@
   }
   // #endregion
   &.dark {
+    p,
+    .login-scan__txt p,
+    .third-party-login-wrapper .title[data-v-2aa36dd0],
+    .tabs_wp div,
+    .forget-tip .title,
+    .forget-tip .desc {
+      color: var(--bew-text-1);
+    }
+
+    .btn_other,
+    .area-code-select .option:hover {
+      border: 2px;
+      color: var(--bew-text-1);
+      background: #83839124;
+    }
+
     body,
     #app,
     .login-scan__qrcode .qrcode__tip .img,
