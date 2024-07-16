@@ -5,42 +5,6 @@
   }
 
   #musicApp {
-    background-color: var(--bg3) !important;
-
-    .h2 .title svg,
-    .h2 .title span,
-    .BgmInfo .right .title,
-    .main .container .title,
-    .video-list .title,
-    .bottom-btn {
-      color: var(--text1);
-    }
-
-    .BgmInfo .right .singer,
-    .BgmInfo .right .des {
-      color: var(--text3);
-    }
-
-    .h2,
-    .bottom-btn,
-    .BgmInfo .right .bottom .btn {
-      background-color: var(--bg3) !important;
-    }
-
-    .main {
-      background-color: var(--bg1) !important;
-    }
-
-    // 想听原版 按钮
-    .BgmInfo .right .bottom .btn:hover {
-      background-color: var(--brand_blue);
-      color: var(--Graph_white);
-    }
-
-    .bottom-btn {
-      border-color: var(--line_regular);
-    }
-
     .container {
       width: 336px;
     }
@@ -48,6 +12,50 @@
     @media (min-width: 1681px) {
       .container {
         width: 397px;
+      }
+    }
+  }
+
+  &.dark {
+    #musicApp {
+      background-color: var(--bew-content-alt-solid) !important;
+
+      .h2 .title svg,
+      .h2 .title span,
+      .BgmInfo .right .title,
+      .main .container .title,
+      .video-list .title,
+      .bottom-btn {
+        color: var(--bew-text-1);
+      }
+
+      .BgmInfo .right .singer,
+      .BgmInfo .right .des {
+        color: var(--bew-text-3);
+      }
+
+      .h2,
+      .bottom-btn,
+      .BgmInfo .right .bottom .btn {
+        background-color: var(--bew-content-alt-solid) !important;
+      }
+
+      .BgmInfo .left:after {
+        border-color: var(--graph_bg_regular);
+      }
+
+      .main {
+        background-color: var(--bew-bg) !important;
+      }
+
+      // 想听原版 按钮
+      .BgmInfo .right .bottom .btn:hover {
+        background-color: var(--bew-theme-color) !important;
+        color: var(--bew-content-solid);
+      }
+
+      .bottom-btn {
+        border-color: var(--bew-fill-2);
       }
     }
   }
