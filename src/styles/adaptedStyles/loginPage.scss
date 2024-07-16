@@ -12,13 +12,39 @@
     background-color: var(--bew-bg);
   }
 
+  p,
+  .login-scan__txt p,
+  .third-party-login-wrapper .title[data-v-2aa36dd0] {
+    color: var(--bew-text-1);
+  }
+
   .btn_other {
     color: var(--bew-text-1);
     background: #83839124;
   }
 
+  a.clickable {
+    color: var(--bew-theme-color);
+  }
+  .tabs_wp .tab_active,
+  .tab_active,
+  .clickable {
+    color: var(--bew-theme-color);
+    color: var(--bew-theme-color);
+  }
+
+  .btn_primary,
+  .disabled {
+    background: var(--bew-theme-color);
+  }
+
   .input {
     background: var(--bew-elevated-solid);
+  }
+
+  .main__right .tab__form {
+    border-width: 1px;
+    border-color: var(--bew-border-color);
   }
 }
 // 隐藏多余元素
