@@ -19,10 +19,12 @@
     .up a:hover * {
       transition: 0.3s;
     }
+  }
 
-    // #region theme color adaption part
-    // Increase the priority of the style inside by writing a non-existent selector in `:not()`
-    :not(foobar) {
+  // #region theme color adaption part
+  // Increase the priority of the style inside by writing a non-existent selector in `:not()`
+  :not(foobar) {
+    #musicApp {
       .BgmInfo .right .bottom .btn {
         color: var(--bew-theme-color);
       }
@@ -45,8 +47,8 @@
         background-color: var(--bew-theme-color-10);
       }
     }
-    // #endregion
   }
+  // #endregion
 
   // #region dark mode adaption part
   &.dark {
