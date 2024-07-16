@@ -29,7 +29,7 @@ const otherLinks = computed((): { name: string, url: string, icon: string }[] =>
       icon: 'i-solar:video-library-bold-duotone',
     },
     {
-      name: t('topbar.user_dropdown.accout_settings'),
+      name: t('topbar.user_dropdown.account_settings'),
       url: 'https://account.bilibili.com/account/home',
       icon: 'i-solar:user-circle-bold-duotone',
     },

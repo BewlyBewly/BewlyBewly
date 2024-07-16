@@ -169,6 +169,10 @@ settings:
   topbar_visibility_desc: 用於兼容 Bilibili Evolved 客製化頂欄
 
   # About
+  links: 拎
+  sponsor: 贊助
+  sponsor_desc: 鍾意呢份專案又想佢愈做愈好？可以考慮贊助吓！你嘅支持就係呢份專案發展嘅動力。
+  afdian: 愛發電
   import_settings: 匯入設定
   export_settings: 匯出設定
   export_settings_desc: 一啲敏感性資訊，例如 access key，可能要你重新攞過
@@ -248,7 +252,7 @@ topbar:
     following: 追緊
     followers: 擁躉
     posts: 動向
-    accout_settings: 帳戶資料
+    account_settings: 帳戶設定
     uploads_manager: 內容管理
     b_coins_wallet: B銀荷包
     orders: 訂單資訊
