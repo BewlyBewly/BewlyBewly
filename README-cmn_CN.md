@@ -49,7 +49,7 @@ pnpm build-firefox
 
 > [!TIP]
 >
-> 如果您无法正常访问 Chrome Web Store ，请使用[CRX搜搜镜像](https://www.crxsoso.com/webstore/detail/bbbiejemhfihiooipfcjmjmbfdmobobp)或考虑使用<strong>Edge & Chrome 的另一种安装方法</strong>
+> 如果您无法正常访问 Chrome Web Store ，请使用[CRX搜搜镜像](https://www.crxsoso.com/webstore/detail/bbbiejemhfihiooipfcjmjmbfdmobobp)或使用<strong>Edge & Chrome 的另一种安装方法</strong>
 #### 对于 Firefox 用户
 
 > [!WARNING]
