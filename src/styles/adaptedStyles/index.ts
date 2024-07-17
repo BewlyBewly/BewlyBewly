@@ -18,6 +18,7 @@ async function setupStyles() {
     document.documentElement.classList.add('homePage')
   }
 
+  // 登录页
   else if (/https?:\/\/passport\.bilibili\.com\/login*/.test(currentUrl)) {
     await import('./loginPage.scss')
     document.documentElement.classList.add('loginPage')
