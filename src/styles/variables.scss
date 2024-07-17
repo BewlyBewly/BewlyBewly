@@ -9,7 +9,7 @@
 
   --bew-top-bar-height: 70px;
 
-  // #region Filters
+  // #region Filters 磨砂玻璃、发光样式
   // Use this in all components (except dialogs) if you want to add a frosted glass effect
   // 如果您想添加磨砂玻璃效果，请在所有组件（对话框除外）中使用此功能
   --bew-filter-glass-1: blur(20px) saturate(180%);
@@ -27,7 +27,7 @@
     drop-shadow(0 0 0.5px var(--bew-theme-color)) drop-shadow(0 0 2px var(--bew-theme-color-80));
   // #endregion
 
-  // #region Shadows
+  // #region Shadows 阴影
   // The shadows of the card, button, and other slightly elevated components1
   // 卡片、按钮和其他略微隆起部件的阴影1
   --bew-shadow-1: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.04);
