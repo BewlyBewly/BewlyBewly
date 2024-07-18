@@ -153,7 +153,6 @@ export function useDark() {
       }
     }
     else {
-      const htmlTag = document.querySelector('html')
       if (!document.documentElement.classList.contains('bili_dark')) {
         document.documentElement.classList.add('bili_dark')
       }
