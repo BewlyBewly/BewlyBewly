@@ -148,15 +148,14 @@ export function useDark() {
     }
 
     if (currentAppColorScheme.value === 'dark') {
-      const htmlTag = document.querySelector('html')
-      if (htmlTag && htmlTag.classList.contains('bili_dark')) {
-        htmlTag.classList.remove('bili_dark')
+      if (document.documentElement.classList.contains('bili_dark')) {
+        document.documentElement.classList.remove('bili_dark')
       }
     }
     else {
       const htmlTag = document.querySelector('html')
-      if (htmlTag && !htmlTag.classList.contains('bili_dark')) {
-        htmlTag.classList.add('bili_dark')
+      if (!document.documentElement.classList.contains('bili_dark')) {
+        document.documentElement.classList.add('bili_dark')
       }
     }
   }
