@@ -1,4 +1,5 @@
 .bewly-design.loginPage {
+  // #region 固定修改
   // 隐藏多余元素
   .top-header,
   .international-footer {
@@ -7,7 +8,9 @@
 
   .login-scan__qrcode {
     background: #fff;
+    border-radius: 10px;
   }
+  // #endregion
   // #region 主题颜色适配部分
   :not(foobar) {
     a.clickable,
@@ -34,7 +37,6 @@
       background: var(--bew-elevated-solid);
     }
 
-    .login-scan__qrcode,
     .area-code-select {
       border: 2px solid var(--bew-border-color);
     }
@@ -69,11 +71,14 @@
       color: var(--bew-text-1);
     }
 
-    .btn_other,
-    .area-code-select .option:hover {
+    .btn_other {
       border: 2px;
-      color: var(--bew-text-1);
+      color: var(--bew-text-2);
       background: #83839124;
+    }
+
+    .area-code-select .option:hover {
+      background: var(--bew-fill-2);
     }
 
     .login-scan__qrcode .qrcode__tip,
@@ -87,6 +92,15 @@
     .forget-tip,
     .area-code-select {
       background-color: var(--bew-bg);
+    }
+
+    .forget-tip .arrow {
+      display: none;
+    }
+
+    // 因为隐藏了 .forget-tip .arrow , 所以这里调整一下位置
+    .forget-tip {
+      top: 60px;
     }
   }
   // #endregion 深色模式
