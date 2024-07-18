@@ -146,6 +146,19 @@ export function useDark() {
         }, { once: true })
       })
     }
+
+    if (currentAppColorScheme.value === 'dark') {
+      const htmlTag = document.querySelector('html')
+      if (htmlTag && htmlTag.classList.contains('bili_dark')) {
+        htmlTag.classList.remove('bili_dark')
+      }
+    }
+    else {
+      const htmlTag = document.querySelector('html')
+      if (htmlTag && !htmlTag.classList.contains('bili_dark')) {
+        htmlTag.classList.add('bili_dark')
+      }
+    }
   }
 
   return {
