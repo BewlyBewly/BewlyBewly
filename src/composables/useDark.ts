@@ -147,6 +147,7 @@ export function useDark() {
       })
     }
 
+    // Only used as a temporary solution, which will eventually be removed
     if (currentAppColorScheme.value === 'dark') {
       if (document.documentElement.classList.contains('bili_dark')) {
         document.documentElement.classList.remove('bili_dark')
