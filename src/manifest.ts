@@ -54,6 +54,7 @@ export async function getManifest() {
           '*://message.bilibili.com/*',
           '*://member.bilibili.com/*',
           '*://account.bilibili.com/*',
+          '*://passport.bilibili.com/*',
           '*://www.hdslb.com/*',
         ],
         js: ['./dist/contentScripts/index.global.js'],

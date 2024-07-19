@@ -1,0 +1,107 @@
+.bewly-design.loginPage {
+  // #region 固定修改
+  // 隐藏多余元素
+  .top-header,
+  .international-footer {
+    display: none;
+  }
+
+  .login-scan__qrcode {
+    background: #fff;
+    border-radius: 10px;
+  }
+  // #endregion
+  // #region 主题颜色适配部分
+  :not(foobar) {
+    a.clickable,
+    .area-code-select .checked {
+      color: var(--bew-theme-color);
+    }
+
+    .tabs_wp .tab_active,
+    .clickable {
+      color: var(--bew-theme-color) !important;
+    }
+
+    path,
+    .eye-btn:hover svg path[data-v-51f92a9c] {
+      fill: var(--bew-theme-color) !important;
+    }
+
+    .btn_primary,
+    .disabled {
+      background: var(--bew-theme-color) !important;
+    }
+
+    .input {
+      background: var(--bew-elevated-solid);
+    }
+
+    .area-code-select {
+      border: 2px solid var(--bew-border-color);
+    }
+
+    .main__middle-line,
+    .tabs_wp div:nth-child(2n) {
+      width: 2px;
+      background: var(--bew-border-color);
+    }
+
+    .main__right .tab__form,
+    .main__right .tab__form .form__separator-line {
+      border-width: 2px;
+      border-color: var(--bew-border-color);
+    }
+
+    .tab-sms__vertical-line {
+      width: 2px;
+      border-left: 2px solid var(--bew-border-color);
+    }
+  }
+  // #endregion
+
+  // #region 深色模式
+  &.dark {
+    p,
+    .login-scan__txt p,
+    .third-party-login-wrapper .title[data-v-2aa36dd0],
+    .tabs_wp div,
+    .forget-tip .title,
+    .forget-tip .desc {
+      color: var(--bew-text-1);
+    }
+
+    .btn_other {
+      border: 2px;
+      color: var(--bew-text-2);
+      background: #83839124;
+    }
+
+    .area-code-select .option:hover {
+      background: var(--bew-fill-2);
+    }
+
+    .login-scan__qrcode .qrcode__tip,
+    .login-scan__qrcode .qrcode__tip img {
+      background: var(--bew-bg);
+    }
+
+    body,
+    #app,
+    .login-scan__qrcode .scan-tips-icon,
+    .forget-tip,
+    .area-code-select {
+      background-color: var(--bew-bg);
+    }
+
+    .forget-tip .arrow {
+      display: none;
+    }
+
+    // 因为隐藏了 .forget-tip .arrow , 所以这里调整一下位置
+    .forget-tip {
+      top: 60px;
+    }
+  }
+  // #endregion 深色模式
+}
