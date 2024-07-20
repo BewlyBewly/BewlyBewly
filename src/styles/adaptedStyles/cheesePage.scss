@@ -12,6 +12,10 @@
     display: none;
   }
 
+  .item {
+    border: none;
+  }
+
   .tags,
   .rank-index {
     background: #83839124;
@@ -19,8 +23,14 @@
 
   .backTop-item,
   .block-list .slider-contro .slider-next:hover,
-  .block-list .slider-contro .slider-prev:hover {
+  .block-list .slider-contro .slider-prev:hover,
+  .search-container .search__bar #nav-searchform {
     background-color: #83839124;
+  }
+
+  .search-container .search__bar #nav-searchform {
+    border: 2px solid var(--bew-border-color);
+    border-radius: 20px;
   }
   // #endregion
   // #region 主题色
@@ -43,6 +53,14 @@
       background: var(--bew-theme-color);
     }
 
+    .search-container .search__bar #nav-searchform.is-focus {
+      border: 2px solid var(--bew-theme-color);
+    }
+
+    .backTop-item {
+      border: 1px solid var(--bew-border-color);
+    }
+
     .backTop-item:hover {
       color: var(--bew-theme-color);
       border: 1px solid var(--bew-theme-color);
@@ -51,6 +69,7 @@
       background-image: linear-gradient(270deg, rgba(11, 163, 149, 0), var(--bew-theme-color));
     }
   }
+  // #endregion
   // #region 深色修改
   &.dark {
     p.ell,
@@ -88,13 +107,16 @@
     }
 
     .backTop-item--txt,
-    .buyListBar-content-item--title {
+    .buyListBar-content-item--title,
+    .search-container .search__bar .search-content .search-input::-webkit-input-placeholder {
       color: var(--bew-text-1);
     }
 
     .backTop-item--txt,
     .buyListBar-content-item--title,
-    .rank-index {
+    .rank-index,
+    .search-container .search__bar .search-btn,
+    .search-container .search__bar .search-content .search-input {
       color: var(--bew-text-2);
     }
 
