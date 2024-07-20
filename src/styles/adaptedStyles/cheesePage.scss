@@ -12,11 +12,14 @@
     display: none;
   }
 
-  .tags {
+  .tags,
+  .rank-index {
     background: #83839124;
   }
 
-  .backTop-item {
+  .backTop-item,
+  .block-list .slider-contro .slider-next:hover,
+  .block-list .slider-contro .slider-prev:hover {
     background-color: #83839124;
   }
   // #endregion
@@ -62,7 +65,9 @@
     .title,
     .title .more,
     .time-line-wrapper .time,
-    .block-page-progress {
+    .block-page-progress,
+    .block-list .slider-contro .slider-next,
+    .block-list .slider-contro .slider-prev {
       color: var(--bew-text-1);
     }
 
@@ -88,7 +93,8 @@
     }
 
     .backTop-item--txt,
-    .buyListBar-content-item--title {
+    .buyListBar-content-item--title,
+    .rank-index {
       color: var(--bew-text-2);
     }
 
