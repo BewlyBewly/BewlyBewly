@@ -77,11 +77,15 @@ async function setupStyles() {
     || /https?:\/\/(?:www\.)?bilibili\.com\/list\/watchlater.*/.test(currentUrl)
     // favorite playlist 收藏播放页
     || /https?:\/\/(?:www\.)?bilibili\.com\/list\/ml.*/.test(currentUrl)
-    // 课堂影片播放页
-    || /https?:\/\/(?:www\.)?bilibili\.com\/cheese\/play\/ep.*/.test(currentUrl)
   ) {
     await import('./videoPage.scss')
     document.documentElement.classList.add('videoPage')
+  }
+
+  // cheese video page 课堂影片播放页面
+  else if (/^https?:\/\/(?:www\.)?bilibili\.com\/cheese\/play\/.*$/.test(currentUrl)) {
+    await import('./cheeseVideoPage.scss')
+    document.documentElement.classList.add('cheeseVideoPage')
   }
 
   else if (
@@ -133,15 +137,9 @@ async function setupStyles() {
   }
 
   // cheese page 课堂页面
-  else if (/^https?:\/\/www\.bilibili\.com\/cheese.*$/.test(currentUrl)) {
+  else if (/^https?:\/\/(?:www\.)?bilibili\.com\/cheese.*$/.test(currentUrl)) {
     await import('./cheesePage.scss')
     document.documentElement.classList.add('cheesePage')
-  }
-
-  // cheese video page 课堂影片播放页面
-  else if (/^https?:\/\/www\.bilibili\.com\/cheese\/play\/.*$/.test(currentUrl)) {
-    await import('./cheeseVideoPage.scss')
-    document.documentElement.classList.add('cheeseVideoPage')
   }
 }
 
