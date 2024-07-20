@@ -88,6 +88,11 @@ async function setupStyles() {
     document.documentElement.classList.add('cheeseVideoPage')
   }
 
+  else if (/^https?:\/\/(?:www\.)?bilibili\.com\/cheese\/mine\/.*$/.test(currentUrl)) {
+    await import('./cheeseminePage.scss')
+    document.documentElement.classList.add('cheeseminePage')
+  }
+
   else if (
     // anime playback & movie page 番剧播放页与电影播放页
     /https?:\/\/(?:www\.)?bilibili\.com\/bangumi\/play\/.*/.test(currentUrl)
