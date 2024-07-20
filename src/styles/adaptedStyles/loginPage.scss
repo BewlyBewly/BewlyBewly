@@ -38,24 +38,24 @@
     }
 
     .area-code-select {
-      border: 2px solid var(--bew-border-color);
+      border: 1px solid var(--bew-border-color);
     }
 
     .main__middle-line,
     .tabs_wp div:nth-child(2n) {
-      width: 2px;
+      width: 1px;
       background: var(--bew-border-color);
     }
 
     .main__right .tab__form,
     .main__right .tab__form .form__separator-line {
-      border-width: 2px;
+      border-width: 1px;
       border-color: var(--bew-border-color);
     }
 
     .tab-sms__vertical-line {
-      width: 2px;
-      border-left: 2px solid var(--bew-border-color);
+      width: 1px;
+      border-left: 1px solid var(--bew-border-color);
     }
   }
   // #endregion
@@ -72,7 +72,7 @@
     }
 
     .btn_other {
-      border: 2px;
+      border: 1px;
       color: var(--bew-text-2);
       background: #83839124;
     }
@@ -86,7 +86,6 @@
       background: var(--bew-bg);
     }
 
-    body,
     #app,
     .login-scan__qrcode .scan-tips-icon,
     .forget-tip,
