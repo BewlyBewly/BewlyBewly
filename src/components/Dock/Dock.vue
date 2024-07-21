@@ -103,36 +103,6 @@ function handleBackToTopOrRefresh() {
       @mouseleave="toggleDockHide(true)"
     />
 
-    <template v-if="settings.dockPosition === 'bottom' && !reachTop ">
-      <div pointer-events-none>
-        <div
-          v-if="!hideDock"
-          style="
-                mask-image: linear-gradient(to top,  black 20%, transparent);
-              "
-          :style="{ backdropFilter: settings.disableFrostedGlass ? 'none' : 'blur(4px)' }"
-          pos="absolute bottom-0 left-0" w-full h-80px
-          pointer-events-none transform-gpu
-        />
-
-        <Transition name="fade">
-          <div
-            v-if="!hideDock"
-            pos="absolute bottom-0 left-0" w-full h-80px
-            pointer-events-none opacity-80
-            :style="{
-              background: `linear-gradient(to top, ${(
-                settings.wallpaper
-                || settings.useSearchPageModeOnHomePage
-                && settings.searchPageWallpaper
-                && settings.individuallySetSearchPageWallpaper)
-                ? 'rgba(0,0,0,.6)' : 'var(--bew-homepage-bg)'}, transparent)`,
-            }"
-          />
-        </Transition>
-      </div>
-    </template>
-
     <!-- Dock Content -->
     <div
       class="dock-content"
