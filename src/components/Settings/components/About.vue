@@ -222,7 +222,7 @@ async function checkGitHubRelease() {
             </Tooltip>
           </div>
         </section>
-        <section>
+        <!-- <section>
           <h3 class="title">
             {{ $t('settings.contributors') }}
           </h3>
@@ -234,7 +234,7 @@ async function checkGitHubRelease() {
               w-full
             >
           </a>
-        </section>
+        </section> -->
       </section>
       <section mt-4>
         <Button
