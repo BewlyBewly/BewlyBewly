@@ -163,7 +163,7 @@ function handleBackToTopOrRefresh() {
 
           <button
             class="dock-item"
-            bg="!dark-hover:$bew-bg" transform="!dark-hover:scale-100" shadow="!dark-hover:[inset_0_0_8px_hsla(226deg,85%,77%,1)]"
+            bg="!dark-hover:$bew-bg" transform="!dark-hover:scale-100" shadow="!dark-hover:[inset_4px_-2px_8px_hsla(226deg,85%,77%,1)]"
             @click="toggleDark"
             @mouseenter="hoveringDockItem.themeMode = true"
             @mouseleave="hoveringDockItem.themeMode = false"
