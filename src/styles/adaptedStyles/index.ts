@@ -18,6 +18,12 @@ async function setupStyles() {
     document.documentElement.classList.add('homePage')
   }
 
+  // passport page 登录页
+  else if (/https?:\/\/passport\.bilibili\.com\/.*/.test(currentUrl)) {
+    await import('./passportPage.scss')
+    document.documentElement.classList.add('passportPage')
+  }
+
   // notifications page 消息页
   else if (/https?:\/\/message\.bilibili\.com\.*/.test(currentUrl)) {
     await import('./pages/notificationsPage.scss')
@@ -117,15 +123,15 @@ async function setupStyles() {
     await import('./pages/creativeCenterPage.scss')
     document.documentElement.classList.add('creativeCenterPage')
   }
-
+  
   // account settings page 帳戶設定頁
   else if (/^https?:\/\/account\.bilibili\.com\/.*$/.test(currentUrl)) {
     await import('./pages/accountSettingsPage.scss')
     document.documentElement.classList.add('accountSettingsPage')
   }
 
-  // account settings page 登入頁
-  else if (/^https?:\/\/passport\.bilibili\.com\/login.*$/.test(currentUrl)) {
+  // passport page 登入頁
+  else if (/^https?:\/\/passport\.bilibili\.com\/.*$/.test(currentUrl)) {
     await import('./pages/loginPage.scss')
     document.documentElement.classList.add('loginPage')
   }
