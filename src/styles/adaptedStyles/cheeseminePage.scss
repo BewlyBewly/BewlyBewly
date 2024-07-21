@@ -1,0 +1,52 @@
+.bewly-design.cheeseminePage {
+  // #region 固定修改
+  .wrap,
+  .exchange .code {
+    border: 1px solid var(--bew-border-color);
+  }
+
+  .wrap .left .tabbar .tab_item:hover,
+  .tickets .nav,
+  .exchange .code {
+    background: #83839124;
+  }
+
+  .wrap .right {
+    border-left: 1px solid var(--bew-border-color);
+  }
+  // #endregion
+  // #region 主题色
+  :not(foobar) {
+    .wrap .left .tabbar .router-link-active,
+    .exchange .submit {
+      background: var(--bew-theme-color);
+    }
+
+    .wrap .left .tabbar .tab_item:hover,
+    .tickets .nav .navtab_active {
+      color: var(--bew-theme-color);
+    }
+  }
+  // #endregion
+  // #region 深色修改
+  &.dark {
+    .paid .title,
+    .paid .content_wrap .content .list .list_word .list_title,
+    .tickets .title,
+    .exchange .title {
+      color: var(--bew-text-1);
+    }
+
+    .wrap .left .tabbar .tab_item,
+    .tickets .nav .navtab,
+    .exchange .rule .rule_title,
+    .exchange .rule .rule_desc {
+      color: var(--bew-text-2);
+    }
+
+    .wrap {
+      background: var(--bew-bg);
+    }
+    // #endregion
+  }
+}

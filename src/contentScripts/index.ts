@@ -73,6 +73,8 @@ function isSupportedPages() {
     || /^https?:\/\/account\.bilibili\.com\/.*$/.test(currentUrl)
     // 登录页
     || /^https?:\/\/passport\.bilibili\.com\/login.*$/.test(currentUrl)
+    // 课堂页
+    || /^https?:\/\/www\.bilibili\.com\/cheese.*$/.test(currentUrl)
   ) {
     return true
   }
