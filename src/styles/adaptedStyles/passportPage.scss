@@ -1,4 +1,4 @@
-.bewly-design.loginPage {
+.bewly-design.passportPage {
   // #region 固定修改
   // 隐藏多余元素
   .top-header,
@@ -10,11 +10,21 @@
     background: #fff;
     border-radius: 10px;
   }
+
+  .risk-input-wp {
+    border: 1px solid var(--bew-border-color);
+  }
+
+  .account-step-icon-todo {
+    border: none;
+    background: #83839124;
+  }
   // #endregion
   // #region 主题颜色适配部分
   :not(foobar) {
     a.clickable,
-    .area-code-select .checked {
+    .area-code-select .checked,
+    .geetest_holder.geetest_silver .geetest_head .geetest_tips .geetest_mark {
       color: var(--bew-theme-color);
     }
 
@@ -24,7 +34,7 @@
     }
 
     path,
-    .eye-btn:hover svg path[data-v-51f92a9c] {
+    .eye-btn:hover svg path {
       fill: var(--bew-theme-color) !important;
     }
 
@@ -33,29 +43,38 @@
       background: var(--bew-theme-color) !important;
     }
 
+    .find-password-btn,
+    .account-step-icon-doing {
+      background: var(--bew-theme-color);
+    }
+
     .input {
       background: var(--bew-elevated-solid);
     }
 
+    .geetest_holder.geetest_silver .geetest_panel .geetest_commit {
+      background-color: var(--bew-theme-color);
+    }
+
     .area-code-select {
-      border: 2px solid var(--bew-border-color);
+      border: 1px solid var(--bew-border-color);
     }
 
     .main__middle-line,
     .tabs_wp div:nth-child(2n) {
-      width: 2px;
+      width: 1px;
       background: var(--bew-border-color);
     }
 
     .main__right .tab__form,
     .main__right .tab__form .form__separator-line {
-      border-width: 2px;
+      border-width: 1px;
       border-color: var(--bew-border-color);
     }
 
     .tab-sms__vertical-line {
-      width: 2px;
-      border-left: 2px solid var(--bew-border-color);
+      width: 1px;
+      border-left: 1px solid var(--bew-border-color);
     }
   }
   // #endregion
@@ -64,15 +83,22 @@
   &.dark {
     p,
     .login-scan__txt p,
-    .third-party-login-wrapper .title[data-v-2aa36dd0],
+    .third-party-login-wrapper .title,
     .tabs_wp div,
     .forget-tip .title,
-    .forget-tip .desc {
+    .forget-tip .desc,
+    .fst-color,
+    .confirm-pwd-before {
       color: var(--bew-text-1);
     }
 
+    .bread-cut-txt,
+    .account-step-icon-todo {
+      color: var(--bew-text-2);
+    }
+
     .btn_other {
-      border: 2px;
+      border: 1px;
       color: var(--bew-text-2);
       background: #83839124;
     }
@@ -90,7 +116,8 @@
     #app,
     .login-scan__qrcode .scan-tips-icon,
     .forget-tip,
-    .area-code-select {
+    .area-code-select,
+    .geetest_holder.geetest_silver .geetest_head {
       background-color: var(--bew-bg);
     }
 
