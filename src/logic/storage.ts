@@ -59,7 +59,6 @@ export interface Settings {
   alwaysShowTabsOnHomePage: boolean
   useSearchPageModeOnHomePage: boolean
   searchPageModeWallpaperFixed: boolean
-  alwaysShowTheTopBarLogoOnSearchPageMode: boolean
 
   adaptToOtherPageStyles: boolean
   showTopBar: boolean
@@ -117,7 +116,6 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   alwaysShowTabsOnHomePage: false,
   useSearchPageModeOnHomePage: false,
   searchPageModeWallpaperFixed: false,
-  alwaysShowTheTopBarLogoOnSearchPageMode: false,
 
   adaptToOtherPageStyles: true,
   showTopBar: true,
