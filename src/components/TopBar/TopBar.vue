@@ -98,6 +98,13 @@ const isTopBarFixed = computed(() => {
   return false
 })
 
+const showTopBar = computed(() => {
+  const isCreativeCenter = /https?:\/\/member.bilibili.com\/platform\/home.*/.test(location.href)
+  if (settings.value.showTopBar && !isCreativeCenter)
+    return true
+  return false
+})
+
 // #region Popups visibility control
 const popupVisible = reactive({
   channels: false,
@@ -421,7 +428,7 @@ defineExpose({
 <template>
   <Transition name="top-bar">
     <header
-      v-if="settings.showTopBar"
+      v-if="showTopBar"
       ref="headerTarget"
       w="full" transition="all 300 ease-in-out"
       :class="{ hide: hideTopBar }"
