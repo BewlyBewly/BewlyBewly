@@ -68,6 +68,20 @@ export function useDark() {
       setCookie('theme_style', 'light', 365 * 10)
       window.dispatchEvent(new CustomEvent('global.themeChange', { detail: 'light' }))
     }
+
+    // Only used as a temporary solution, which will eventually be removed
+    // It seems like Bilibili already supports dark mode when the `bili_dark` class is added to the `html` element
+    // but it's not yet fully refined.
+    if (currentAppColorScheme.value === 'dark') {
+      if (document.documentElement.classList.contains('bili_dark')) {
+        document.documentElement.classList.remove('bili_dark')
+      }
+    }
+    // else {
+    //   if (!document.documentElement.classList.contains('bili_dark')) {
+    //     document.documentElement.classList.add('bili_dark')
+    //   }
+    // }
   }
 
   function toggleDark(e: MouseEvent) {

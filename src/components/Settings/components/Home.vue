@@ -325,10 +325,6 @@ function handleToggleHomeTab(tab: any) {
         <SettingsItem :title="$t('settings.search_page_mode_wallpaper_fixed')">
           <Radio v-model="settings.searchPageModeWallpaperFixed" />
         </SettingsItem>
-
-        <SettingsItem :title="$t('settings.always_show_the_top_bar_logo')">
-          <Radio v-model="settings.alwaysShowTheTopBarLogoOnSearchPageMode" />
-        </SettingsItem>
       </template>
     </SettingsItemGroup>
   </div>

@@ -1,0 +1,83 @@
+.bewly-design.loginPage {
+  // #region theme color adaption part
+  // Increase the priority of the style inside by writing a non-existent selector in :not()
+  :not(foobar) {
+    .clickable,
+    .area-code-select .checked {
+      color: var(--bew-theme-color);
+    }
+
+    .tabs_wp .tab_active {
+      color: var(--bew-theme-color) !important;
+    }
+
+    .btn_primary {
+      background-color: var(--bew-theme-color);
+    }
+
+    .btn_primary.disabled {
+      background-color: var(--bew-theme-color-60) !important;
+    }
+
+    .eye-btn:hover svg path {
+      fill: var(--bew-theme-color) !important;
+    }
+  }
+  // #endregion
+
+  // #region dark mode adaption part
+  &.dark {
+    #app {
+      background-color: var(--bew-bg);
+    }
+
+    .main__middle-line,
+    .tabs_wp div:nth-child(2n) {
+      background-color: var(--bew-border-color);
+    }
+
+    .login-scan__qrcode {
+      background-color: white;
+    }
+
+    .btn_other,
+    .main__right .tab__form {
+      background-color: var(--bew-fill-1);
+    }
+
+    .area-code-select .option:hover {
+      background-color: var(--bew-fill-2);
+    }
+
+    .area-code-select {
+      background-color: var(--bew-elevated-solid);
+    }
+
+    .main__right .tab__form,
+    .main__right .tab__form .form__separator-line,
+    .btn_other,
+    .tab-sms__vertical-line,
+    .area-code-select {
+      border-color: var(--bew-border-color);
+    }
+
+    .btn_other {
+      color: var(--bew-text-1);
+    }
+
+    .login-scan__txt p,
+    .third-party-login-wrapper .title,
+    .tabs_wp div {
+      color: var(--bew-text-2);
+    }
+
+    .login-protocol {
+      color: var(--bew-text-3);
+    }
+
+    .top-header {
+      filter: invert(1) hue-rotate(180deg);
+    }
+  }
+  // #endregion
+}

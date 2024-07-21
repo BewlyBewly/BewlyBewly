@@ -220,7 +220,8 @@
     .share-card.video-type .content,
     .bili-im,
     .bl-button--shallow-o,
-    .cs-self-service .cs-self-service-list .cs-self-service-item .tool-title {
+    .cs-self-service .cs-self-service-list .cs-self-service-item .tool-title,
+    .auto-reply-push__desc {
       color: var(--bew-text-1);
     }
 
@@ -239,7 +240,9 @@
     .content .btnrow .btn.clear,
     .msg-push-new__leave-message--text,
     .bp-icon-font.icon-close:before,
-    .cs-actions-wrap .cs-actions .cs-action-item {
+    .cs-actions-wrap .cs-actions .cs-action-item,
+    .ar-recommend-item__info--desc .time,
+    .ar-recommend-item__info--view {
       color: var(--bew-text-2);
     }
 
@@ -327,7 +330,8 @@
     .cs-self-service .cs-self-service-list .cs-self-service-item,
     .cs-order-notice,
     .cs-rich-text-answer .rich-answer-evaluate .ev-thumb,
-    .cs-q-tab-area ul.cs-q-tabs li.cs-q-tab-item.active {
+    .cs-q-tab-area ul.cs-q-tabs li.cs-q-tab-item.active,
+    .auto-reply-push {
       background-color: var(--bew-fill-1);
     }
 
