@@ -118,10 +118,16 @@ async function setupStyles() {
     document.documentElement.classList.add('creativeCenterPage')
   }
 
-  // account settings page
+  // account settings page 帳戶設定頁
   else if (/^https?:\/\/account\.bilibili\.com\/.*$/.test(currentUrl)) {
     await import('./accountSettingsPage.scss')
     document.documentElement.classList.add('accountSettingsPage')
+  }
+
+  // account settings page 登入頁
+  else if (/^https?:\/\/passport\.bilibili\.com\/login.*$/.test(currentUrl)) {
+    await import('./loginPage.scss')
+    document.documentElement.classList.add('loginPage')
   }
 }
 

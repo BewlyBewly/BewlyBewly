@@ -69,8 +69,10 @@ function isSupportedPages() {
     || /^https?:\/\/(?:www\.)?bilibili\.com\/404.*$/.test(currentUrl)
     // creative center page 創作中心頁
     || /^https?:\/\/member\.bilibili\.com\/platform.*$/.test(currentUrl)
-    // account settings page 帳號中心頁
+    // account settings page 帳號設定頁
     || /^https?:\/\/account\.bilibili\.com\/.*$/.test(currentUrl)
+    // login page
+    || /^https?:\/\/passport\.bilibili\.com\/login.*$/.test(currentUrl)
   ) {
     return true
   }
