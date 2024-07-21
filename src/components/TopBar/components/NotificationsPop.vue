@@ -47,9 +47,10 @@ function getUnreadMessageCount() {
   api.notification.getUnreadMsg().then((res) => {
     if (res.code === 0) {
       const resData = res.data
-      list.value[0].unreadCount = resData.reply
+
+      list.value[0].unreadCount = resData.recv_reply
       list.value[1].unreadCount = resData.at
-      list.value[2].unreadCount = resData.like
+      list.value[2].unreadCount = resData.recv_like
       list.value[3].unreadCount = resData.sys_msg
     }
   }).catch(() => {
