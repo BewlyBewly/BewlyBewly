@@ -5,6 +5,7 @@ import type { Ref, UnwrapNestedRefs } from 'vue'
 import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { useDelayedHover } from '~/composables/useDelayedHover'
+import { TOP_BAR_VISIBILITY_CHANGE } from '~/constants/globalEvents'
 import { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
 import { getUserID, isHomePage } from '~/utils/main'
@@ -416,7 +417,7 @@ async function getTopBarNewMomentsCount() {
 
 function toggleTopBarVisible(visible: boolean) {
   hideTopBar.value = !visible
-  emitter.emit('topBarVisibleChange', visible)
+  emitter.emit(TOP_BAR_VISIBILITY_CHANGE, visible)
 }
 
 defineExpose({
