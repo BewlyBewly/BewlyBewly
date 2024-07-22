@@ -69,12 +69,10 @@ function isSupportedPages() {
     || /^https?:\/\/(?:www\.)?bilibili\.com\/404.*$/.test(currentUrl)
     // creative center page 創作中心頁
     || /^https?:\/\/member\.bilibili\.com\/platform.*$/.test(currentUrl)
-    // account settings page 帳號中心頁
+    // account settings page 帳號設定頁
     || /^https?:\/\/account\.bilibili\.com\/.*$/.test(currentUrl)
-    // 登录页
+    // login page 登录页
     || /^https?:\/\/passport\.bilibili\.com\/.*$/.test(currentUrl)
-    // 课堂页
-    || /^https?:\/\/www\.bilibili\.com\/cheese.*$/.test(currentUrl)
   ) {
     return true
   }

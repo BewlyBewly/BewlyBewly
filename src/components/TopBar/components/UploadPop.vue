@@ -40,7 +40,7 @@ const list = computed(() => {
     bg="$bew-elevated"
     rounded="$bew-radius"
     p="4"
-    w="150px"
+    min-w="120px"
     shadow="[var(--bew-shadow-edge-glow-1),var(--bew-shadow-3)]"
     border="1 $bew-border-color"
     flex="~ col"
@@ -60,7 +60,7 @@ const list = computed(() => {
     >
       <i :class="item.icon" text="$bew-text-2" />
 
-      <div>{{ item.name }}</div>
+      <div text-nowrap>{{ item.name }}</div>
     </a>
   </div>
 </template>

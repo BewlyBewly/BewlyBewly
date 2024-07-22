@@ -6,7 +6,7 @@ import { isHomePage } from '~/utils/main'
 
 const { t } = useI18n()
 const api = useApiClient()
-const list = reactive([
+const list = computed(() => [
   {
     name: t('topbar.noti_dropdown.replys'),
     url: 'https://message.bilibili.com/#/reply',
@@ -37,8 +37,7 @@ const list = reactive([
     unreadCount: 0,
     icon: 'i-solar:chat-round-bold-duotone',
   },
-],
-)
+])
 
 onMounted(() => {
   getUnreadMessageCount()
@@ -48,25 +47,26 @@ function getUnreadMessageCount() {
   api.notification.getUnreadMsg().then((res) => {
     if (res.code === 0) {
       const resData = res.data
-      list[0].unreadCount = resData.reply
-      list[1].unreadCount = resData.at
-      list[2].unreadCount = resData.like
-      list[3].unreadCount = resData.sys_msg
+
+      list.value[0].unreadCount = resData.recv_reply
+      list.value[1].unreadCount = resData.at
+      list.value[2].unreadCount = resData.recv_like
+      list.value[3].unreadCount = resData.sys_msg
     }
   }).catch(() => {
-    list[0].unreadCount = 0
-    list[1].unreadCount = 0
-    list[2].unreadCount = 0
-    list[3].unreadCount = 0
+    list.value[0].unreadCount = 0
+    list.value[1].unreadCount = 0
+    list.value[2].unreadCount = 0
+    list.value[3].unreadCount = 0
   })
 
   api.notification.getUnreadDm().then((res) => {
     if (res.code === 0) {
       const resData = res.data
-      list[4].unreadCount = resData.follow_unread
+      list.value[4].unreadCount = resData.follow_unread
     }
   }).catch(() => {
-    list[4].unreadCount = 0
+    list.value[4].unreadCount = 0
   })
 }
 </script>
@@ -75,7 +75,6 @@ function getUnreadMessageCount() {
   <div
     style="backdrop-filter: var(--bew-filter-glass-1);"
     bg="$bew-elevated"
-    w="180px"
     p="4"
     rounded="$bew-radius"
     shadow="[var(--bew-shadow-edge-glow-1),var(--bew-shadow-3)]"
@@ -97,21 +96,21 @@ function getUnreadMessageCount() {
     >
       <div flex="~ items-center gap-2">
         <i :class="item.icon" text="$bew-text-2" />
-        <span class="flex-1 ml-2 mr-1">{{ item.name }}</span>
+        <span flex="1 shrink-0" text-nowrap>{{ item.name }}</span>
       </div>
-      <template v-if="item.unreadCount > 0">
-        <div
-          bg="$bew-theme-color"
-          rounded="$bew-radius"
-          text="white xs leading-none center"
-          grid="~ place-items-center"
-          px-1
-          min-w="14px"
-          h="14px"
-        >
-          {{ item.unreadCount > 99 ? '99+' : item.unreadCount }}
-        </div>
-      </template>
+      <!-- Use visibility to control the number of notifications to prevent width changes as soon as there is a number -->
+      <div
+        bg="$bew-theme-color"
+        rounded="$bew-radius"
+        text="white xs leading-none center"
+        grid="~ place-items-center"
+        px-1
+        min-w="14px"
+        h="14px"
+        :style="{ visibility: item.unreadCount > 0 ? 'visible' : 'hidden' }"
+      >
+        {{ item.unreadCount > 99 ? '99+' : item.unreadCount }}
+      </div>
     </a>
   </div>
 </template>

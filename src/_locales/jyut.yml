@@ -154,7 +154,6 @@ settings:
   home_tabs_adjustment: 分頁欄調整
   home_tabs_adjustment_desc: 第一個啓用嘅分頁項目會係開始頁面
   always_show_tabs_on_home_page: 永遠顯示主頁分頁欄
-  always_show_the_top_bar_logo: 永遠顯示頂欄 Logo
 
   # Compatibility
   # Common
