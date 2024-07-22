@@ -114,7 +114,7 @@ function handleConfirm() {
             backgroundColor: frostedGlass ? 'var(--bew-elevated)' : 'var(--bew-elevated-solid)',
           }"
           pos="absolute top-1/2 left-1/2" rounded="$bew-radius" border="1 $bew-border-color"
-          transform="translate--1/2" z-2 overflow="x-hidden y-overlay"
+          transform="translate--1/2" z-2
           antialiased
         >
           <!-- loading masking -->
@@ -173,9 +173,9 @@ function handleConfirm() {
             :style="{
               height: dialogContentHeight,
               maxHeight: dialogContentMaxHeight,
-              paddingBottom: !showFooter ? '1.5rem' : '0.5rem',
+              paddingBottom: !showFooter ? '2rem' : '0.5rem',
             }"
-            p="x-12 y-2" relative overflow-overlay
+            p="x-12 y-2" relative overflow="x-hidden y-overlay"
           >
             <!-- <div h-80px mt--8 /> -->
             <slot />
