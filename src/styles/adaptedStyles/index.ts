@@ -124,7 +124,7 @@ async function setupStyles() {
     document.documentElement.classList.add('accountSettingsPage')
   }
 
-  // account settings page 登入頁
+  // login page 登入頁
   else if (/^https?:\/\/passport\.bilibili\.com\/login.*$/.test(currentUrl)) {
     await import('./pages/loginPage.scss')
     document.documentElement.classList.add('loginPage')
