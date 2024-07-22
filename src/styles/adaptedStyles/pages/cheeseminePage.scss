@@ -14,6 +14,11 @@
   .wrap .right {
     border-left: 1px solid var(--bew-border-color);
   }
+
+  .coupon-item .coupon-content .info-wrapper,
+  .coupon-item .coupon-desc {
+    border: 1px solid var(--bew-border-color);
+  }
   // #endregion
   // #region 主题色
   :not(foobar) {
@@ -23,7 +28,8 @@
     }
 
     .wrap .left .tabbar .tab_item:hover,
-    .tickets .nav .navtab_active {
+    .tickets .nav .navtab_active,
+    .coupon-item .coupon-content .info-wrapper .info .title:hover {
       color: var(--bew-theme-color);
     }
   }
@@ -33,19 +39,28 @@
     .paid .title,
     .paid .content_wrap .content .list .list_word .list_title,
     .tickets .title,
-    .exchange .title {
+    .exchange .title,
+    .coupon-item .coupon-content .info-wrapper .info .title,
+    .coupon-item .coupon-content .info-wrapper .info .info-bottom-wrapper .more,
+    .coupon-item .coupon-desc {
       color: var(--bew-text-1);
     }
 
     .wrap .left .tabbar .tab_item,
     .tickets .nav .navtab,
     .exchange .rule .rule_title,
-    .exchange .rule .rule_desc {
+    .exchange .rule .rule_desc,
+    .coupon-item .coupon-content .info-wrapper .info .time {
       color: var(--bew-text-2);
     }
 
     .wrap {
       background: var(--bew-bg);
+    }
+
+    .coupon-item,
+    .coupon-item .coupon-content .info-wrapper {
+      background: #83839124;
     }
     // #endregion
   }
