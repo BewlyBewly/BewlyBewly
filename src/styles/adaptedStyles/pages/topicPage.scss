@@ -26,6 +26,10 @@
     .share-popover .share-popover__qrcode canvas {
       box-shadow: 0 0 0 2px white;
     }
+
+    .topic-tv-icon svg path {
+      fill: var(--bew-theme-color);
+    }
   }
   // #endregion
 
@@ -45,7 +49,15 @@
     }
 
     .active-card .active-content__desc {
-      color: var(--bew-color-2);
+      color: var(--bew-text-1);
+    }
+
+    .action-item__data {
+      color: var(--bew-text-2);
+    }
+
+    .action-item__icon {
+      filter: invert(1) hue-rotate(180deg);
     }
   }
   // #endregion
