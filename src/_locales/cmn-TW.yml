@@ -41,7 +41,7 @@ settings:
   # Settings group
   group_common: 常用
   group_video_card: 影片卡片
-  group_performance: 效能
+  group_performance: 毛玻璃與效能
   group_topbar: 頂欄
   group_dock: Dock
   group_color: 顏色
@@ -154,7 +154,6 @@ settings:
   home_tabs_adjustment: 標籤欄調整
   home_tabs_adjustment_desc: 第一個啟用的標籤項目調整頁面將是起始頁面
   always_show_tabs_on_home_page: 總是顯示首頁標籤欄
-  always_show_the_top_bar_logo: 永遠顯示頂欄 Logo
 
   # Compatibility
   # Common
@@ -169,6 +168,10 @@ settings:
   follow_bilibili_evolved_color_desc: 每次變更 Bilibili Evolved 主題色後，記得重新選取此選項以更新配置
 
   # About
+  links: 連結
+  sponsor: 贊助
+  sponsor_desc: 喜歡這份專案並希望看到它蓬勃發展嗎？請考慮贊助它！您的支持是此專案發展的動力。
+  afdian: 爱发电
   import_settings: 匯入設定
   export_settings: 匯出設定
   export_settings_desc: 一些敏感性資訊，例如 access key，可能需要重新取得
@@ -244,11 +247,11 @@ topbar:
   user_dropdown:
     money: 硬幣：
     b_coins: B幣：
-    exp_desc: '當前經驗 {current_exp}，升級到 LV {level} 還需要 {need_exp}'
+    exp_desc: '目前經驗 {current_exp}，升級到 LV {level} 還需要 {need_exp}'
     following: 追蹤中
     followers: 粉絲
-    posts: 動向
-    accout_settings: 帳戶資訊
+    posts: 動態
+    account_settings: 帳戶設定
     uploads_manager: 內容管理
     b_coins_wallet: B幣錢包
     orders: 訂單資訊
@@ -343,11 +346,11 @@ watch_later:
   clear_all: 清空稍後觀看
   clear_all_confirm: |-
     要清空稍後觀看的影片嗎？
-    此操作無法撤消，你確定要清空稍後觀看的影片嗎？
+    此操作無法復原，你確定要清空稍後觀看的影片嗎？
   remove_watched_videos: 移除看過的影片
   remove_watched_videos_confirm: |-
     要移除看過的影片嗎？
-    此操作無法撤消，你確定要移除看過的影片嗎？
+    此操作無法復原，你確定要移除看過的影片嗎？
 search_bar:
   history_title: 搜尋記錄
   clear_history: 清除所有搜尋記錄

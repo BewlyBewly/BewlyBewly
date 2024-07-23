@@ -1,6 +1,9 @@
 import { usePreferredDark } from '@vueuse/core'
 
 import { settings } from '~/logic'
+import { runWhenIdle } from '~/utils/lazyLoad'
+import { setCookie } from '~/utils/main'
+import { executeTimes } from '~/utils/timer'
 
 export function useDark() {
   const isPreferredDark = usePreferredDark()
@@ -12,6 +15,7 @@ export function useDark() {
       return currentSystemColorScheme.value
   })
   const isDark = computed(() => currentAppColorScheme.value === 'dark')
+  let themeChangeTimer: NodeJS.Timeout | null = null
 
   // Watch for changes in the 'settings.value.theme' variable and add the 'dark' class to the 'mainApp' element
   // to prevent some Unocss dark-specific styles from failing to take effect
@@ -23,19 +27,61 @@ export function useDark() {
     { immediate: true },
   )
 
+  onMounted(() => {
+    // Because some shadow dom may not be loaded when the page has already loaded, we need to wait until the page is idle
+    runWhenIdle(() => {
+      if (isDark.value) {
+        setCookie('theme_style', 'dark', 365 * 10)
+        // TODO: find a better way implement this
+        themeChangeTimer = executeTimes(() => {
+          window.dispatchEvent(new CustomEvent('global.themeChange', { detail: 'dark' }))
+        }, 10, 500)
+      }
+      else {
+        setCookie('theme_style', 'light', 365 * 10)
+        themeChangeTimer = executeTimes(() => {
+          window.dispatchEvent(new CustomEvent('global.themeChange', { detail: 'light' }))
+        }, 10, 500)
+      }
+    })
+  })
+
   /**
    * Watch for changes in the 'settings.value.theme' variable and add the 'dark' class to the 'mainApp' element
    * to prevent some Unocss dark-specific styles from failing to take effect
    */
   function setAppAppearance() {
+    if (themeChangeTimer)
+      clearInterval(themeChangeTimer)
+
     if (isDark.value) {
       document.querySelector('#bewly')?.classList.add('dark')
       document.documentElement.classList.add('dark')
+
+      setCookie('theme_style', 'dark', 365 * 10)
+      window.dispatchEvent(new CustomEvent('global.themeChange', { detail: 'dark' }))
     }
     else {
       document.querySelector('#bewly')?.classList.remove('dark')
       document.documentElement.classList.remove('dark')
+
+      setCookie('theme_style', 'light', 365 * 10)
+      window.dispatchEvent(new CustomEvent('global.themeChange', { detail: 'light' }))
     }
+
+    // Only used as a temporary solution, which will eventually be removed
+    // It seems like Bilibili already supports dark mode when the `bili_dark` class is added to the `html` element
+    // but it's not yet fully refined.
+    if (currentAppColorScheme.value === 'dark') {
+      if (document.documentElement.classList.contains('bili_dark')) {
+        document.documentElement.classList.remove('bili_dark')
+      }
+    }
+    // else {
+    //   if (!document.documentElement.classList.contains('bili_dark')) {
+    //     document.documentElement.classList.add('bili_dark')
+    //   }
+    // }
   }
 
   function toggleDark(e: MouseEvent) {

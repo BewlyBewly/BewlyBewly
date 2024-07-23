@@ -1,17 +1,16 @@
 <script lang="ts" setup>
 import QRCodeVue from 'qrcode.vue'
-import type { Ref } from 'vue'
 import { useToast } from 'vue-toastification'
 import draggable from 'vuedraggable'
 
 import Button from '~/components/Button.vue'
+import Dialog from '~/components/Dialog.vue'
 import Input from '~/components/Input.vue'
 import Radio from '~/components/Radio.vue'
 import { accessKey, settings } from '~/logic'
 import { useMainStore } from '~/stores/mainStore'
 import { getTVLoginQRCode, pollTVLoginQRCode, revokeAccessKey } from '~/utils/authProvider'
 
-import ChildSettingsDialog from './ChildSettingsDialog.vue'
 import SearchPage from './SearchPage.vue'
 import SettingsItem from './SettingsItem.vue'
 import SettingsItemGroup from './SettingsItemGroup.vue'
@@ -25,8 +24,6 @@ const loginQRCodeUrl = ref<string>()
 const pollLoginQRCodeInterval = ref<any>(null)
 const authCode = ref<string>('')
 const qrcodeMsg = ref<string>('')
-
-const preventCloseSettings = inject('preventCloseSettings') as Ref<boolean>
 
 onDeactivated(() => {
   clearInterval(pollLoginQRCodeInterval.value)
@@ -44,7 +41,6 @@ function changeAppRecommendationMode() {
 
 async function handleAuthorize() {
   showQRCodeDialog.value = true
-  preventCloseSettings.value = true
   try {
     await setLoginQRCode()
     pollLoginQRCode()
@@ -83,7 +79,6 @@ function pollLoginQRCode() {
       qrcodeMsg.value = pollRes.message
     if (pollRes.code === 0) {
       showQRCodeDialog.value = false
-      preventCloseSettings.value = false
       accessKey.value = pollRes.data.access_token
       clearInterval(pollLoginQRCodeInterval.value)
       toast.success('授权成功')
@@ -100,17 +95,6 @@ function pollLoginQRCode() {
 function handleCloseQRCodeDialog() {
   clearInterval(pollLoginQRCodeInterval.value)
   showQRCodeDialog.value = false
-  preventCloseSettings.value = false
-}
-
-function handleOpenSearchPageModeSharedSettings() {
-  showSearchPageModeSharedSettings.value = true
-  preventCloseSettings.value = true
-}
-
-function handleCloseSearchPageModeSharedSettings() {
-  showSearchPageModeSharedSettings.value = false
-  preventCloseSettings.value = false
 }
 
 function resetHomeTabs() {
@@ -184,12 +168,13 @@ function handleToggleHomeTab(tab: any) {
         </div>
       </SettingsItem>
 
-      <ChildSettingsDialog
+      <Dialog
         v-if="showQRCodeDialog"
+        width="50%"
+        max-width="800px"
+        append-to-bewly-body
+        :show-footer="false"
         :title="$t('settings.authorize_app')" center
-        style="
-          --b-dialog-width: 65%;
-        "
         @close="handleCloseQRCodeDialog"
       >
         <div flex="~ col gap-4 items-center">
@@ -218,7 +203,7 @@ function handleToggleHomeTab(tab: any) {
             {{ $t('common.refresh') }}
           </Button>
         </div>
-      </ChildSettingsDialog>
+      </Dialog>
     </SettingsItemGroup>
 
     <SettingsItemGroup
@@ -304,30 +289,30 @@ function handleToggleHomeTab(tab: any) {
           <template #desc>
             <span color="$bew-warning-color">{{ $t('settings.settings_shared_with_the_search_page_desc') }}</span>
           </template>
-          <Button type="secondary" block center @click="handleOpenSearchPageModeSharedSettings">
+          <Button type="secondary" block center @click="showSearchPageModeSharedSettings = true">
             {{ $t('settings.btn.open_settings') }}
           </Button>
 
-          <ChildSettingsDialog
+          <Dialog
             v-if="showSearchPageModeSharedSettings"
+            width="80%"
+            max-width="900px"
+            content-height="64vh"
+            :show-footer="false"
             :title="$t('settings.settings_shared_with_the_search_page')"
-            style="--b-dialog-height: 85%;"
-            @close="handleCloseSearchPageModeSharedSettings"
+            append-to-bewly-body
+            @close="showSearchPageModeSharedSettings = false"
           >
             <template #desc>
               <span color="$bew-warning-color">{{ $t('settings.settings_shared_with_the_search_page_desc') }}</span>
             </template>
 
             <SearchPage />
-          </ChildSettingsDialog>
+          </Dialog>
         </SettingsItem>
 
         <SettingsItem :title="$t('settings.search_page_mode_wallpaper_fixed')">
           <Radio v-model="settings.searchPageModeWallpaperFixed" />
-        </SettingsItem>
-
-        <SettingsItem :title="$t('settings.always_show_the_top_bar_logo')">
-          <Radio v-model="settings.alwaysShowTheTopBarLogoOnSearchPageMode" />
         </SettingsItem>
       </template>
     </SettingsItemGroup>

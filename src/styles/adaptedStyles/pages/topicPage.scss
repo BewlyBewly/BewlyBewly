@@ -1,0 +1,64 @@
+.bewly-design.topicPage {
+  // #region theme color adaption part
+  // Increase the priority of the style inside by writing a non-existent selector in `:not()`
+  :not(foobar) {
+    .topic-nav button {
+      background-color: var(--bew-theme-color);
+    }
+
+    .bili-topic-selector__bulletin__clear {
+      background-color: var(--bew-theme-color-20);
+    }
+
+    .topic-detail__header {
+      background: linear-gradient(var(--bew-theme-color-10), transparent) !important;
+    }
+
+    .launch-user__name:hover,
+    .bili-dyn-interaction__item__desc .bili-rich-text-module:hover {
+      color: var(--bew-theme-color);
+    }
+
+    .topic-nav span:before {
+      filter: var(--bew-filter-icon-glow);
+    }
+
+    .share-popover .share-popover__qrcode canvas {
+      box-shadow: 0 0 0 2px white;
+    }
+
+    .topic-tv-icon svg path {
+      fill: var(--bew-theme-color);
+    }
+  }
+  // #endregion
+
+  // #region dark mode adaption part
+  &.dark {
+    .topic-detail {
+      --bg3: var(--bew-bg);
+      --bg1: var(--bew-content-solid);
+    }
+
+    .active-card {
+      background-color: var(--bew-content-solid);
+    }
+
+    .bili-rich-textarea__inner {
+      background-color: transparent;
+    }
+
+    .active-card .active-content__desc {
+      color: var(--bew-text-1);
+    }
+
+    .action-item__data {
+      color: var(--bew-text-2);
+    }
+
+    .action-item__icon {
+      filter: invert(1) hue-rotate(180deg);
+    }
+  }
+  // #endregion
+}

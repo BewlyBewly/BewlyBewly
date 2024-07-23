@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 type Size = 'small' | 'medium' | 'large'
 interface Props {
-  modelValue: string
+  modelValue: string | number
   size?: Size
   type?: 'text' | 'password' | 'email' | 'number'
   min?: number
@@ -11,7 +11,7 @@ const props = withDefaults(defineProps<Props>(), { size: 'medium' })
 
 defineEmits(['update:modelValue', 'enter'])
 
-const modelValue = ref<string>('')
+const modelValue = ref<string | number>('')
 
 onMounted(() => {
   modelValue.value = props.modelValue

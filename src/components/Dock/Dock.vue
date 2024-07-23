@@ -103,36 +103,6 @@ function handleBackToTopOrRefresh() {
       @mouseleave="toggleDockHide(true)"
     />
 
-    <template v-if="settings.dockPosition === 'bottom' && !reachTop ">
-      <div pointer-events-none>
-        <div
-          v-if="!hideDock"
-          style="
-                mask-image: linear-gradient(to top,  black 20%, transparent);
-              "
-          :style="{ backdropFilter: settings.disableFrostedGlass ? 'none' : 'blur(4px)' }"
-          pos="absolute bottom-0 left-0" w-full h-80px
-          pointer-events-none transform-gpu
-        />
-
-        <Transition name="fade">
-          <div
-            v-if="!hideDock"
-            pos="absolute bottom-0 left-0" w-full h-80px
-            pointer-events-none opacity-80
-            :style="{
-              background: `linear-gradient(to top, ${(
-                settings.wallpaper
-                || settings.useSearchPageModeOnHomePage
-                && settings.searchPageWallpaper
-                && settings.individuallySetSearchPageWallpaper)
-                ? 'rgba(0,0,0,.6)' : 'var(--bew-homepage-bg)'}, transparent)`,
-            }"
-          />
-        </Transition>
-      </div>
-    </template>
-
     <!-- Dock Content -->
     <div
       class="dock-content"
@@ -152,7 +122,10 @@ function handleBackToTopOrRefresh() {
           <Tooltip :content="$t(dockItem.i18nKey)" :placement="tooltipPlacement">
             <button
               class="dock-item group"
-              :class="{ active: activatedPage === dockItem.page }"
+              :class="{
+                active: activatedPage === dockItem.page,
+                inactive: hoveringDockItem.themeMode && isDark,
+              }"
               @click="emit('changePage', dockItem.page)"
             >
               <div
@@ -175,9 +148,22 @@ function handleBackToTopOrRefresh() {
         <Tooltip
           v-if="!settings.disableLightDarkModeSwitcherOnDock"
           :content="isDark ? $t('dock.dark_mode') : $t('dock.light_mode')" :placement="tooltipPlacement"
+          class="group"
         >
+          <!-- moon -->
+          <div
+            v-if="isDark"
+            pos="absolute top-0 left-0 group-hover:top-2px group-hover:left--4px"
+            w-full h-full bg-white rounded="1/2"
+            z--2 pointer-events-none
+            shadow="group-hover:[-8px_4px_160px_20px_hsla(226deg,85%,77%,1),-8px_4px_100px_12px_hsla(226deg,85%,77%,0.8),-8px_4px_60px_10px_hsla(226deg,85%,77%,0.6),-8px_4px_20px_4px_hsla(226deg,85%,77%,0.4),-4px_2px_8px_0_hsla(226deg,85%,77%,0.8)]"
+            opacity-0 group-hover:opacity-100
+            duration-600
+          />
+
           <button
             class="dock-item"
+            bg="!dark-hover:$bew-bg" transform="!dark-hover:scale-100" shadow="!dark-hover:[inset_4px_-2px_8px_hsla(226deg,85%,77%,1)]"
             @click="toggleDark"
             @mouseenter="hoveringDockItem.themeMode = true"
             @mouseleave="hoveringDockItem.themeMode = false"
@@ -198,7 +184,13 @@ function handleBackToTopOrRefresh() {
         </Tooltip>
 
         <Tooltip :content="$t('dock.settings')" :placement="tooltipPlacement">
-          <button class="dock-item group" @click="emit('settingsVisibilityChange')">
+          <button
+            class="dock-item group"
+            :class="{
+              inactive: hoveringDockItem.themeMode && isDark,
+            }"
+            @click="emit('settingsVisibilityChange')"
+          >
             <div i-mingcute:settings-3-line text-xl group-hover:rotate-180 transition="all 2000 ease-out" />
           </button>
         </Tooltip>
@@ -207,6 +199,9 @@ function handleBackToTopOrRefresh() {
       <button
         v-if="settings.moveBackToTopOrRefreshButtonToDock && activatedPage !== AppPage.Search"
         class="back-to-top-or-refresh-btn"
+        :class="{
+          inactive: hoveringDockItem.themeMode && isDark,
+        }"
         @click="handleBackToTopOrRefresh"
       >
         <Transition name="fade">
@@ -312,13 +307,18 @@ function handleBackToTopOrRefresh() {
       transform 300ms cubic-bezier(0.34, 2, 0.6, 1),
       background 300ms ease,
       color 300ms ease,
-      box-shadow 300ms ease;
+      box-shadow 300ms ease,
+      opacity 600ms ease;
     box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
 
     &.active {
       --uno: "important-bg-$bew-theme-color-auto text-$bew-text-auto";
       --uno: "shadow-$shadow-active dark:shadow-$shadow-dark";
       --uno: "active:shadow-$shadow-active-active dark-active:shadow-$shadow-dark-active";
+    }
+
+    &.inactive {
+      --uno: "opacity-80 !shadow-none";
     }
   }
 
@@ -333,7 +333,7 @@ function handleBackToTopOrRefresh() {
   --shadow-dark-active: 0 4px 20px rgba(255, 255, 255, 0.8);
   --shadow-active-active: 0 4px 20px var(--bew-theme-color-90);
 
-  --uno: "transform active:important-scale-90 hover:scale-110";
+  --uno: "relative transform active:important-scale-90 hover:scale-110";
   --uno: "md:w-45px w-35px";
   --uno: "md:lh-45px lh-35px";
   --uno: "p-0 flex items-center justify-center";
@@ -348,7 +348,8 @@ function handleBackToTopOrRefresh() {
     transform 300ms cubic-bezier(0.34, 2, 0.6, 1),
     background 300ms ease,
     color 300ms ease,
-    box-shadow 600ms ease;
+    box-shadow 600ms ease,
+    opacity 600ms ease;
 
   &:hover {
     box-shadow:
@@ -361,6 +362,10 @@ function handleBackToTopOrRefresh() {
     --uno: "important-bg-$bew-theme-color-auto text-$bew-text-auto";
     --uno: "shadow-$shadow-active dark:shadow-$shadow-dark";
     --uno: "active:shadow-$shadow-active-active dark-active:shadow-$shadow-dark-active";
+  }
+
+  &.inactive {
+    --uno: "opacity-80 !shadow-none";
   }
 
   svg {

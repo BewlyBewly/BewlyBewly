@@ -1,0 +1,19 @@
+.bewly-design.creativeCenterPage {
+  // #region theme color adaption part
+  // Increase the priority of the style inside by writing a non-existent selector in `:not()`
+  :not(foobar) {
+  }
+  // #endregion
+
+  // #region dark mode adaption part
+  &.dark {
+    #appeal-main .err-wrapper.err-no-list,
+    .loading_wrap .loading .animate,
+    micro-app[name="allowance-excitation"] .loading > .loading-img,
+    micro-app[name="template-incentive"] .header-bg,
+    micro-app[name="upower-manage"] .rights .level-right:after {
+      filter: var(--bew-filter-force-dark);
+    }
+  }
+  // #endregion
+}
