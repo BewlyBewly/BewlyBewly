@@ -26,6 +26,11 @@ BewlyBewly 是一个用于 BiliBili 的浏览器扩展，旨在通过重新设�
 >
 > 此外，BewlyBewly 的 Chrome Web Store 版本将更快地解决和修复关键性错误。
 
+> [!NOTE]
+> 如果你的电脑无法访问 Chrome Web Store，你可以尝试去 crx 搜搜下载：<https://www.crxsoso.com/webstore/detail/bbbiejemhfihiooipfcjmjmbfdmobobp>
+>
+> 但与此项目在 Chrome Web Store 是否一致且未经修改不太能保证，但是经过测试是正常的，使用时请慎重，出现后果本项目概不负责
+
 - Chrome: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>
 - Edge: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>
 - Firefox: <https://addons.mozilla.org/zh-CN/firefox/addon/bewlybewly/>
