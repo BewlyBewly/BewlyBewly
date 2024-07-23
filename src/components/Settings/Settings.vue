@@ -22,7 +22,6 @@ const settingsMenu = {
 }
 const activatedMenuItem = ref<MenuType>(MenuType.General)
 const title = ref<string>(t('settings.title'))
-const preventCloseSettings = ref<boolean>(false)
 const scrollbarRef = ref()
 
 watch(
@@ -32,8 +31,6 @@ watch(
     osInstance.elements().viewport.scrollTop = 0
   },
 )
-
-provide('preventCloseSettings', preventCloseSettings)
 
 const settingsMenuItems = computed((): MenuItem[] => {
   return [
@@ -94,8 +91,6 @@ onMounted(() => {
 })
 
 function handleClose() {
-  if (preventCloseSettings.value)
-    return
   emit('close')
 }
 
@@ -126,9 +121,6 @@ function setCurrentTitle() {
     >
       <aside
         class="group"
-        :style="{
-          pointerEvents: preventCloseSettings ? 'none' : 'unset',
-        }"
         shrink-0 p="x-4" pos="absolute left--84px" z-2
       >
         <ul
@@ -141,9 +133,6 @@ function setCurrentTitle() {
           scale="group-hover:105" duration-300 overflow-hidden antialiased transform-gpu
           border="1 $bew-border-color"
         >
-          <!-- mask -->
-          <div v-if="preventCloseSettings" pos="absolute top-0 left-0" w-full h-full bg="black opacity-20 dark:opacity-40" />
-
           <li v-for="menuItem in settingsMenuItems" :key="menuItem.value">
             <a
               cursor-pointer w="40px group-hover:150px" h-40px
@@ -223,7 +212,7 @@ function setCurrentTitle() {
           h-inherit
         >
           <main
-            pos="absolute top-80px left-0" w-full min-h="[calc(100%-80px)]" p="x-12 b-8"
+            pos="absolute top-80px left-0" w-full min-h="[calc(100%-80px)]" p="x-12 b-10"
           >
             <!-- <div h-80px mt--8 /> -->
 

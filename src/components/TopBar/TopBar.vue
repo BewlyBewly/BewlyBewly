@@ -5,6 +5,7 @@ import type { Ref, UnwrapNestedRefs } from 'vue'
 import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { useDelayedHover } from '~/composables/useDelayedHover'
+import { OVERLAY_SCROLL_BAR_SCROLL, TOP_BAR_VISIBILITY_CHANGE } from '~/constants/globalEvents'
 import { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
 import { getUserID, isHomePage } from '~/utils/main'
@@ -291,11 +292,21 @@ onMounted(async () => {
   initData()
   await nextTick()
   toggleTopBarVisible(true)
-  window.addEventListener('scroll', handleScroll)
+
+  emitter.off(OVERLAY_SCROLL_BAR_SCROLL)
+  if (isHomePage() && !settings.value.useOriginalBilibiliHomepage) {
+    emitter.on(OVERLAY_SCROLL_BAR_SCROLL, () => {
+      handleScroll()
+    })
+  }
+  else {
+    window.addEventListener('scroll', handleScroll)
+  }
 })
 
-onBeforeMount(() => {
+onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
+  emitter.off(OVERLAY_SCROLL_BAR_SCROLL)
 })
 
 async function initData() {
@@ -309,7 +320,7 @@ async function initData() {
 }
 
 function handleScroll() {
-  if (isHomePage()) {
+  if (isHomePage() && !settings.value.useOriginalBilibiliHomepage) {
     const osInstance = scrollbarRef.value?.osInstance()
     scrollTop.value = osInstance.elements().viewport.scrollTop as number
   }
@@ -416,7 +427,7 @@ async function getTopBarNewMomentsCount() {
 
 function toggleTopBarVisible(visible: boolean) {
   hideTopBar.value = !visible
-  emitter.emit('topBarVisibleChange', visible)
+  emitter.emit(TOP_BAR_VISIBILITY_CHANGE, visible)
 }
 
 defineExpose({
@@ -437,7 +448,7 @@ defineExpose({
       <main
         max-w="$bew-page-max-width"
         flex="~ justify-between items-center gap-4"
-        p="lg:x-20 md:x-16 x-14" m-auto
+        p="x-12" m-auto
         h="$bew-top-bar-height"
       >
         <!-- Top bar mask -->
