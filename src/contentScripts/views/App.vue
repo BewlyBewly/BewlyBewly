@@ -13,9 +13,11 @@ import Settings from '~/components/Settings/Settings.vue'
 import TopBar from '~/components/TopBar/TopBar.vue'
 import type { BewlyAppProvider } from '~/composables/useAppProvider'
 import { useDark } from '~/composables/useDark'
+import { OVERLAY_SCROLL_BAR_SCROLL } from '~/constants/globalEvents'
 import { AppPage, LanguageType } from '~/enums/appEnums'
 import { accessKey, settings } from '~/logic'
 import { getUserID, hexToRGBA, isHomePage, scrollToTop } from '~/utils/main'
+import emitter from '~/utils/mitt'
 
 const { isDark } = useDark()
 const activatedPage = ref<AppPage>(settings.value.dockItemVisibilityList.find(e => e.visible === true)?.page ?? AppPage.Home)
@@ -177,6 +179,8 @@ function handleAdaptToOtherPageStylesChange() {
 }
 
 function handleOsScroll() {
+  emitter.emit(OVERLAY_SCROLL_BAR_SCROLL)
+
   const osInstance = scrollbarRef.value?.osInstance()
   const { viewport } = osInstance.elements()
   const { scrollTop, scrollHeight, clientHeight } = viewport // get scroll offset

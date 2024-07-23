@@ -11,6 +11,7 @@ import type { FavoriteCategory, FavoriteResource } from '~/components/TopBar/typ
 import VideoCard from '~/components/VideoCard/VideoCard.vue'
 import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
+import { TOP_BAR_VISIBILITY_CHANGE } from '~/constants/globalEvents'
 import { settings } from '~/logic'
 import type { FavoritesResult, Media as FavoriteItem } from '~/models/video/favorite'
 import type { FavoritesCategoryResult, List as CategoryItem } from '~/models/video/favoriteCategory'
@@ -41,8 +42,8 @@ onMounted(async () => {
 
   initPageAction()
 
-  emitter.off('topBarVisibleChange')
-  emitter.on('topBarVisibleChange', (val) => {
+  emitter.off(TOP_BAR_VISIBILITY_CHANGE)
+  emitter.on(TOP_BAR_VISIBILITY_CHANGE, (val) => {
     shouldMoveCtrlBarUp.value = false
 
     // Allow moving tabs up only when the top bar is not hidden & is set to auto-hide
@@ -59,7 +60,7 @@ onMounted(async () => {
 })
 
 onUnmounted(() => {
-  emitter.off('topBarVisibleChange')
+  emitter.off(TOP_BAR_VISIBILITY_CHANGE)
 })
 
 function initPageAction() {
