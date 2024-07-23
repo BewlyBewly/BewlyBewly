@@ -11,7 +11,8 @@
     .loading_wrap .loading .animate,
     micro-app[name="allowance-excitation"] .loading > .loading-img,
     micro-app[name="template-incentive"] .header-bg,
-    micro-app[name="upower-manage"] .rights .level-right:after {
+    micro-app[name="upower-manage"] .rights .level-right:after,
+    micro-app[name="video-up"] .video-complete .bg {
       filter: var(--bew-filter-force-dark);
     }
   }
