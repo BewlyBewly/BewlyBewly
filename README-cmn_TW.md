@@ -89,7 +89,7 @@ pnpm build-firefox
 
 ## 🤝 貢獻
 
-詳情 [CONTRIBUTION.md](docs/CONTRIBUTING.md)
+詳情 [CONTRIBUTION.md](docs/CONTRIBUTING-cmn_TW.md)
 
 ### 貢獻者
 
