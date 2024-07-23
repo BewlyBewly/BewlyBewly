@@ -104,6 +104,12 @@ async function setupStyles() {
     document.documentElement.classList.add('articlesPage')
   }
 
+  // topic page 话题页
+  else if (/https?:\/\/(?:www\.)?bilibili\.com\/v\/topic\/detail\/.*/.test(currentUrl)) {
+    await import('./pages/topicPage.scss')
+    document.documentElement.classList.add('topicPage')
+  }
+
   // 404 page 404页
   else if (/^https?:\/\/(?:www\.)?bilibili\.com\/404.*$/.test(currentUrl)) {
     await import('./pages/error404Page.scss')
