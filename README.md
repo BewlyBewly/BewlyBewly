@@ -79,7 +79,7 @@ See [CONTRIBUTING.md](docs/CONTRIBUTING.md)
 
 ### Contributors
 
-![Contributors](https://contrib.rocks/image?repo=hakadao/BewlyBewly)
+[![Contributors](https://contrib.rocks/image?repo=hakadao/BewlyBewly)](https://github.com/BewlyBewly/BewlyBewly/graphs/contributors)
 
 ## ❤️ Credits
 
