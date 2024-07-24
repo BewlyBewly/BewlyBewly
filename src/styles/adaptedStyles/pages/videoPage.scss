@@ -234,6 +234,17 @@
     .multi-page-v1 .cur-list .list-box li.on img {
       filter: var(--bew-filter-icon-glow);
     }
+
+    .video-share-popover
+      .video-share-dropdown
+      .dropdown-top
+      .dropdown-top-left
+      .capture-bar
+      .bar-left
+      > label
+      #check-timestamp:checked {
+      overflow: hidden;
+    }
   }
 
   // #endregion
