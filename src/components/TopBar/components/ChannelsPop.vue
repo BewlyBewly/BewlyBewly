@@ -34,12 +34,19 @@ const genres = computed(() => [
   { name: t('topbar.logo_dropdown.vtubers'), icon: '#channel-vtuber', href: 'https://www.bilibili.com/v/virtual' },
   { name: t('topbar.logo_dropdown.charitable_events'), icon: '#channel-love', href: 'https://love.bilibili.com' },
   { name: t('topbar.logo_dropdown.moocs'), icon: '#channel-gongkaike', href: 'https://www.bilibili.com/mooc' },
+])
+
+const otherLinks = computed(() => [
   { name: t('topbar.logo_dropdown.articles'), icon: '#channel-read', href: 'https://www.bilibili.com/read/home' },
   { name: t('topbar.logo_dropdown.live'), icon: '#channel-live', href: 'https://live.bilibili.com' },
   { name: t('topbar.logo_dropdown.activities'), icon: '#channel-activity', href: 'https://www.bilibili.com/blackboard/activity-list.html' },
   { name: t('topbar.logo_dropdown.paid_courses'), icon: '#channel-zhishi', href: 'https://www.bilibili.com/cheese' },
   { name: t('topbar.logo_dropdown.community'), icon: '#channel-blackroom', href: 'https://www.bilibili.com/blackboard/activity-5zJxM3spoS.html' },
   { name: t('topbar.logo_dropdown.music_plus'), icon: '#channel-musicplus', href: 'https://www.bilibili.com/v/musicplus' },
+  { name: 'Game Center', icon: 'i-mingcute:game-2-fill', color: '#69B1DD', href: 'https://game.bilibili.com/platform' },
+  { name: 'Bilibili Store', icon: 'i-mingcute:store-fill', color: '#E4C081', href: 'https://show.bilibili.com/platform/home.html' },
+  { name: 'Manga', icon: 'i-mingcute:store-fill', color: '#E4C081', href: 'https://manga.bilibili.com' },
+  { name: 'Game Competitions', icon: 'i-mingcute:sword-fill', color: '#C8D3DF', href: 'https://www.bilibili.com/match/home' },
 ])
 </script>
 
@@ -47,7 +54,7 @@ const genres = computed(() => [
   <div
     style="backdrop-filter: var(--bew-filter-glass-1);"
     shadow="[var(--bew-shadow-3),var(--bew-shadow-edge-glow-1)]"
-    flex="~"
+    flex="~ gap-1"
     p="4"
     bg="$bew-elevated-alt"
     rounded="$bew-radius"
@@ -56,25 +63,16 @@ const genres = computed(() => [
     <ul
       v-for="(item, index) in [0, 10, 20, 30]"
       :key="index"
-      m="r-1 last-of-type:r-0"
+      class="link-list"
     >
       <li
         v-for="genre in genres.slice(item, item + 10)"
         :key="genre.name"
-        m="b-1 last-of-type:b-0"
-        text="sm"
+        class="link-item"
       >
         <a
           :href="genre.href"
           :target="isHomePage() ? '_blank' : '_self'"
-          flex="~"
-          items="center"
-          w="170px"
-          p="x-2 y-2"
-          hover:bg="$bew-fill-alt"
-          hover:shadow="[var(--bew-shadow-1),var(--bew-shadow-edge-glow-1)]"
-          transition="duration-300"
-          border="rounded-$bew-radius"
         >
           <svg aria-hidden="true" class="svg-icon">
             <use :xlink:href="genre.icon" />
@@ -83,16 +81,64 @@ const genres = computed(() => [
         </a>
       </li>
     </ul>
+    <ul
+      v-for="(item, index) in [0]"
+      :key="index"
+      class="link-list"
+    >
+      <li
+        v-for="otherLink in otherLinks.slice(item, item + 10)"
+        :key="otherLink.name"
+        class="link-item"
+      >
+        <a
+          :href="otherLink.href"
+          :target="isHomePage() ? '_blank' : '_self'"
+        >
+          <svg
+            v-if="otherLink.icon.startsWith('#')"
+            class="svg-icon"
+            aria-hidden="true"
+          >
+            <use :xlink:href="otherLink.icon" />
+          </svg>
+          <div
+            v-else
+            class="icon"
+          >
+            <i
+              :class="otherLink.icon"
+              :style="{ color: otherLink.color }"
+            />
+          </div>
+          <span>{{ otherLink.name }}</span>
+        </a>
+      </li>
+    </ul>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.link-list {
+  --uno: "last-of-type:p-4 last-of-type:bg-$bew-fill-1 last-of-type:m--4 last-of-type:rounded-r-$bew-radius";
+  --uno: "last-of-type:ml-2";
+}
+
+.link-item {
+  --uno: "mb-1 last-of-type:mb-0 text-sm";
+
+  a {
+    --uno: "flex items-center w-170px h-38px p-2 rounded-$bew-radius duration-300";
+    --uno: "hover:bg-$bew-fill-alt hover:shadow-[var(--bew-shadow-1),var(--bew-shadow-edge-glow-1)]";
+  }
+}
+
 .svg-icon {
-  width: 2em;
-  height: 2em;
-  vertical-align: bottom;
-  fill: currentColor;
-  overflow: hidden;
-  margin-right: 1rem;
+  --uno: "w-2em h-2em mr-4 vertical-bottom fill-current overflow-hidden";
+}
+
+.icon {
+  --uno: "w-2em h-2em mr-4 bg-$bew-content-solid vertical-bottom fill-current overflow-hidden";
+  --uno: "text-sm grid place-items-center rounded-1/2";
 }
 </style>
