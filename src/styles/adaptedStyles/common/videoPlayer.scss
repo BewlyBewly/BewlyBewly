@@ -52,6 +52,12 @@
 
   // #region dark mode adaption part
   &.dark {
+    .normal {
+      --Text1: var(--bew-text-1);
+      --Text2: var(--bew-text-2);
+      --Text3: var(--bew-text-3);
+    }
+
     #musicApp {
       background-color: var(--bew-elevated-solid) !important;
 
@@ -63,7 +69,8 @@
         background-color: var(--bew-fill-1) !important;
       }
 
-      .container::after {
+      .container::after,
+      .recommendList:after {
         background-color: var(--bew-border-color);
       }
 
@@ -72,27 +79,17 @@
       }
 
       .h2 .title svg,
-      .h2 .title span,
-      .BgmInfo .right .title,
-      .main .container .title,
-      .video-list .title,
-      .bottom-btn {
+      .h2 .title span {
         color: var(--bew-text-1);
       }
 
-      .BgmInfo .right .singer,
-      .BgmInfo .right .des,
       .h2 .close,
-      .card .up .name .nameText,
       .card .up svg {
         color: var(--bew-text-2);
       }
 
-      .no-more .text {
-        color: var(--bew-text-3);
-      }
-
-      .bottom-btn {
+      .bottom-btn,
+      .BgmInfo .left:after {
         border-color: var(--bew-border-color);
       }
 
