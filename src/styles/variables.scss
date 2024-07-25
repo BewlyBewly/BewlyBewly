@@ -9,47 +9,59 @@
 
   --bew-top-bar-height: 70px;
 
-  // #region Filters
+  // #region Filters 磨砂玻璃、发光样式
   // Use this in all components (except dialogs) if you want to add a frosted glass effect
+  // 如果您想添加磨砂玻璃效果，请在所有组件（对话框除外）中使用此功能
   --bew-filter-glass-1: blur(20px) saturate(180%);
 
   // Use this in dialogs if you want to add a frosted glass effect
+  // 如果要在对话框中添加磨砂玻璃效果，请使用此功能
   --bew-filter-glass-2: blur(40px) saturate(180%);
 
   // Apply this to the Bilibili icon if it is an image with the brand's original blue or pink color
   // Change it to glow effect to matches the user's theme color
+  // 如果 Bilibili 图标是带有品牌原有蓝色或粉色的图像，则将此应用于该图标
+  // 将其改为发光效果，以匹配用户的主题颜色
   --bew-filter-icon-glow: saturate(0) brightness(2) drop-shadow(0 0 0.2px white)
     drop-shadow(0 0 0.5px var(--bew-theme-color)) drop-shadow(0 0 0.5px var(--bew-theme-color))
     drop-shadow(0 0 0.5px var(--bew-theme-color)) drop-shadow(0 0 2px var(--bew-theme-color-80));
   // #endregion
 
-  // #region Shadows
+  // #region Shadows 阴影
   // The shadows of the card, button, and other slightly elevated components1
+  // 卡片、按钮和其他略微隆起部件的阴影1
   --bew-shadow-1: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.04);
 
   // The shadows of the top bar, header, elevated fixed buttons/cards and other components that are in the a fixed or sticky position
+  // 顶栏、页眉、高架固定按钮/卡片和其他处于固定或粘性位置的组件的阴影
   --bew-shadow-2: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.06);
 
   // The shadows of the popover, dropdown
+  // 弹出窗口、下拉窗口的阴影
   --bew-shadow-3: 0 20px 25px -5px rgb(0 0 0 / 0.12), 0 8px 10px -6px rgb(0 0 0 / 0.08);
 
   // Only used in the dialog
+  // 仅在对话框中使用
   --bew-shadow-4: 0 34px 50px -20px rgb(0 0 0 / 0.14), 0 32px 45px -12px rgb(0 0 0 / 0.1),
     0 30px 40px -8px rgb(0 0 0 / 0.12);
 
   // Use this to imitate the frosted glass edge effect in components with a frosted glass design (except dialogs)
+  // 在采用磨砂玻璃设计的组件（对话框除外）中，使用此功能可模仿磨砂玻璃边缘效果
   --bew-shadow-edge-glow-1: inset 0 0 4px rgba(255, 255, 255, 0.4);
 
   // Use this for dialogs with the frosted glass effect
+  // 将其用于具有磨砂玻璃效果的对话框
   --bew-shadow-edge-glow-2: inset 0 0 8px rgba(255, 255, 255, 0.42);
   // #endregion
 
-  // #region Theme Color & Status Colors
+  // #region Theme Color & Status Colors 主题颜色 & 状态色
   // To add a hover effect to theme or status colors, use the `--bew-*-color` for the base color and `--bew-*-color-80` for the hover state
+  // 要为主题或状态颜色添加悬停效果，请使用 `--bew-*-color` 作为基色，并使用 `--bew-*-color-80` 作为悬停状态
 
   --bew-logo-color: var(--bew-theme-color);
 
   // In light mode use the theme color; in dark mode use white
+  // 在浅色模式下，使用主题色；在深色模式下，使用白色
   --bew-theme-color-auto: var(--bew-theme-color);
 
   --bew-theme-color: hsl(195 100% 42%);
