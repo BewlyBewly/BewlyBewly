@@ -12,8 +12,14 @@
     micro-app[name="allowance-excitation"] .loading > .loading-img,
     micro-app[name="template-incentive"] .header-bg,
     micro-app[name="upower-manage"] .rights .level-right:after,
-    micro-app[name="video-up"] .video-complete .bg {
+    micro-app[name="video-up"] .video-complete .bg,
+    .article-card.v2 .cover-wrp .duration,
+    .bmc-video-card .video-preview__duration {
       filter: var(--bew-filter-force-dark);
+    }
+
+    .nav-item.message iframe {
+      filter: none !important;
     }
   }
   // #endregion
