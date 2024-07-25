@@ -6,7 +6,7 @@ import { isHomePage } from '~/utils/main'
 
 const { t } = useI18n()
 const api = useApiClient()
-const list = computed(() => [
+const list = ref<{ name: string, url: string, unreadCount: number, icon: string }[]>([
   {
     name: t('topbar.noti_dropdown.replys'),
     url: 'https://message.bilibili.com/#/reply',
@@ -100,14 +100,14 @@ function getUnreadMessageCount() {
       </div>
       <!-- Use visibility to control the number of notifications to prevent width changes as soon as there is a number -->
       <div
+        :style="{ visibility: item.unreadCount > 0 ? 'visible' : 'hidden' }"
         bg="$bew-theme-color"
         rounded="$bew-radius"
         text="white xs leading-none center"
         grid="~ place-items-center"
         px-1
-        min-w="14px"
-        h="14px"
-        :style="{ visibility: item.unreadCount > 0 ? 'visible' : 'hidden' }"
+        min-w="16px"
+        h="16px"
       >
         {{ item.unreadCount > 99 ? '99+' : item.unreadCount }}
       </div>
