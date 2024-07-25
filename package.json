@@ -1,8 +1,8 @@
 {
   "name": "bewly-bewly",
-  "displayName": "BewlyBewly",
+  "displayName": "BewlyBewly-Beta",
   "type": "module",
-  "version": "0.26.0",
+  "version": "0.26.01",
   "private": true,
   "packageManager": "pnpm@9.5.0",
   "description": "Just make a few small changes to your Bilibili homepage.",
