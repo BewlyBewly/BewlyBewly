@@ -122,7 +122,8 @@ if (isSupportedPages()) {
     #internationalHeader,
     .link-navbar,
     #home_nav,
-    #biliMainHeader {
+    #biliMainHeader,
+    #bili-header-container {
       visibility: hidden;
       height: var(--bew-top-bar-height) !important;
     }

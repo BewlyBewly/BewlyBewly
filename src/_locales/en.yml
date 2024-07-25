@@ -242,6 +242,10 @@ topbar:
     paid_courses: Paid Courses
     community: Community
     music_plus: New Song Hotlist
+    game_center: Game Center
+    comic_con_and_goods: Comic Con & Goods
+    manga: Manga
+    game_competitions: Game Competitions
   user_dropdown:
     money: 'Money: '
     b_coins: 'B-coins: '

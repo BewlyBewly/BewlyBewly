@@ -177,9 +177,9 @@ async function checkGitHubRelease() {
               <p mb-4>
                 1. {{ $t('settings.afdian') }}:
                 <a
-                  href="https://afdian.net/@hakadao" target="_blank"
+                  href="https://afdian.com/@hakadao" target="_blank"
                   color="$bew-theme-color"
-                >https://afdian.net/@hakadao</a>
+                >https://afdian.com/@hakadao</a>
               </p>
               <img
                 :src="browser.runtime.getURL('/assets/sponsor/afdian.jpg')" alt=""

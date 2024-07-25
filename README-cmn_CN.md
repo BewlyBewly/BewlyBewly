@@ -17,23 +17,6 @@ BewlyBewly 是一个用于 BiliBili 的浏览器扩展，旨在通过重新设�
 
 该项目使用 [vitesse-webext](https://github.com/antfu/vitesse-webext) 模板进行开发。如果没有这个模板，可能无法开发出这个项目。
 
-## 🔨 Build (Firefox)
-
-Please make sure you have [Node.js](https://nodejs.org/) and [pnpm](https://pnpm.io/) installed locally, and it is recommended to use [Visual Studio Code](https://code.visualstudio.com/) for development.
-
-1. To build the extension, run
-
-```bash
-# Install dependencies
-pnpm install
-
-pnpm build-firefox
-```
-
-2. Load the generated `extension-firefox/` folder in the browser, The extension will then take effect on [www.bilibili.com](https://www.bilibili.com).
-
-[Chrome & Edge](/docs/CONTRIBUTING.md#building-chrome-or-edge)
-
 ## ⬇️ 安装
 
 ### 在线安装
@@ -42,6 +25,11 @@ pnpm build-firefox
 > 即使在 Edge 浏览器中，我们也强烈建议您使用 Chrome 应用商店进行安装。在审核速度上，Chrome > 应用商店的审核速度比 Edge 应用商店快得多。
 >
 > 此外，BewlyBewly 的 Chrome Web Store 版本将更快地解决和修复关键性错误。
+
+> [!NOTE]
+> 如果你的电脑无法访问 Chrome Web Store，你可以尝试去 crx 搜搜下载：<https://www.crxsoso.com/webstore/detail/bbbiejemhfihiooipfcjmjmbfdmobobp>
+>
+> 但与此项目在 Chrome Web Store 是否一致且未经修改不太能保证，但是经过测试是正常的，使用时请慎重，出现后果本项目概不负责
 
 - Chrome: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>
 - Edge: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>
@@ -90,13 +78,13 @@ pnpm build-firefox
 
 </details>
 
-## 🤝 贡献
+## 🤝 贡献与构建项目
 
-查看 [CONTRIBUTION.md](docs/CONTRIBUTING-cmn_CN.md)
+查看 [CONTRIBUTING.md](docs/CONTRIBUTING-cmn_CN.md)
 
 ### 贡献者
 
-![Contributors](https://contrib.rocks/image?repo=hakadao/BewlyBewly)
+[![Contributors](https://contrib.rocks/image?repo=hakadao/BewlyBewly)](https://github.com/BewlyBewly/BewlyBewly/graphs/contributors)
 
 ## ❤️ 鸣谢
 
