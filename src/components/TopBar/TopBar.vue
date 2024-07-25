@@ -923,15 +923,15 @@ defineExpose({
 
   .unread-num-dot {
     --uno: "absolute top-4px right--4px";
-    --uno: "important:px-1 important:py-2 rounded-full";
-    --uno: "text-xs leading-0 z-3 min-w-14px h-14px";
-    --uno: "flex justify-center items-center";
+    --uno: "important:px-1 rounded-full";
+    --uno: "text-xs leading-0 z-6 min-w-16px h-16px";
+    --uno: "grid place-items-center";
     --uno: "bg-$bew-theme-color  text-white";
     box-shadow: 0 2px 4px rgba(var(--tw-shadow-color), 0.4);
   }
 
   .unread-dot {
-    --uno: "w-8px h-8px bg-$bew-theme-color rounded-8px absolute right-0 top-4px";
+    --uno: "w-8px h-8px bg-$bew-theme-color rounded-8px absolute right-0 top-6px";
   }
 
   .right-side-item {
