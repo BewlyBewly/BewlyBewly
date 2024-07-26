@@ -135,6 +135,12 @@ async function setupStyles() {
     await import('./pages/loginPage.scss')
     document.documentElement.classList.add('loginPage')
   }
+
+  // blackboard page 社区页面
+  else if (/^https?:\/\/(?:www\.)?bilibili\.com\/blackboard.*$/.test(currentUrl)) {
+    await import('./pages/blackboardPage.scss')
+    document.documentElement.classList.add('blackboardPage')
+  }
 }
 
 setupStyles()

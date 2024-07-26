@@ -73,6 +73,8 @@ function isSupportedPages() {
     || /^https?:\/\/account\.bilibili\.com\/.*$/.test(currentUrl)
     // login page
     || /^https?:\/\/passport\.bilibili\.com\/login.*$/.test(currentUrl)
+    // blackboard page 社区页面
+    || /^https?:\/\/(?:www\.)?bilibili\.com\/blackboard.*$/.test(currentUrl)
   ) {
     return true
   }
