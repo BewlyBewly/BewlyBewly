@@ -40,7 +40,7 @@
   // 淺色模式下主要對 theme color 調整配合 bewlybewly 配色
   // 深色模式下才對主要邊框和背景色調整
   // 淺色模式下顏色避免太大調整
-  :not(fjdsl) {
+  :not(foobar) {
     .n .n-btn.active,
     .be-tab-item.is-active,
     #navigator a:hover,
@@ -100,7 +100,8 @@
     .bili-topic-new__default__create__text,
     .subscribe-list li .subscribe-link,
     .i-live:hover .i-live-title,
-    #page-article .row .breadcrumb .item.cur {
+    #page-article .row .breadcrumb .item.cur,
+    .bili-dyn-topic__card {
       color: var(--bew-theme-color);
     }
 
@@ -128,6 +129,10 @@
     .i-live .i-live-fo-btn:hover,
     .expand-btn:hover {
       color: var(--bew-theme-color-80);
+    }
+
+    .bili-dyn-topic__card:hover {
+      color: var(--bew-theme-color-80) !important;
     }
 
     .n .n-cursor,
@@ -259,7 +264,8 @@
     .i-live .i-live-off-guest a .i-live-arrow,
     #page-follows .follow-main .follow-action-bottom .icon-copy,
     .search-component .icon-follow-search:hover,
-    #page-fav .fav-main .search-input .icon-search:hover {
+    #page-fav .fav-main .search-input .icon-search:hover,
+    .dyn-orig-author__following.following-icon:before {
       filter: var(--bew-filter-icon-glow);
     }
 
