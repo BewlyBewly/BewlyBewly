@@ -43,10 +43,10 @@ const otherLinks = computed(() => [
   { name: t('topbar.logo_dropdown.paid_courses'), icon: '#channel-zhishi', href: 'https://www.bilibili.com/cheese' },
   { name: t('topbar.logo_dropdown.community'), icon: '#channel-blackroom', href: 'https://www.bilibili.com/blackboard/activity-5zJxM3spoS.html' },
   { name: t('topbar.logo_dropdown.music_plus'), icon: '#channel-musicplus', href: 'https://www.bilibili.com/v/musicplus' },
-  { name: 'Game Center', icon: 'i-mingcute:game-2-fill', color: '#69B1DD', href: 'https://game.bilibili.com/platform' },
-  { name: 'Bilibili Store', icon: 'i-mingcute:store-fill', color: '#E4C081', href: 'https://show.bilibili.com/platform/home.html' },
-  { name: 'Manga', icon: 'i-mingcute:store-fill', color: '#E4C081', href: 'https://manga.bilibili.com' },
-  { name: 'Game Competitions', icon: 'i-mingcute:sword-fill', color: '#C8D3DF', href: 'https://www.bilibili.com/match/home' },
+  { name: t('topbar.logo_dropdown.game_center'), icon: 'i-mingcute:game-2-fill', color: '#69B1DD', href: 'https://game.bilibili.com/platform' },
+  { name: t('topbar.logo_dropdown.comic_con_and_goods'), icon: 'i-mingcute:store-fill', color: '#E4C081', href: 'https://show.bilibili.com/platform/home.html' },
+  { name: t('topbar.logo_dropdown.manga'), icon: 'i-mingcute:cat-fill', color: '#FFC1CC', href: 'https://manga.bilibili.com' },
+  { name: t('topbar.logo_dropdown.game_competitions'), icon: 'i-mingcute:sword-fill', color: '#C8D3DF', href: 'https://www.bilibili.com/match/home' },
 ])
 </script>
 
@@ -89,19 +89,20 @@ const otherLinks = computed(() => [
       <li
         v-for="otherLink in otherLinks.slice(item, item + 10)"
         :key="otherLink.name"
-        class="link-item"
+        class="link-item group"
       >
         <a
           :href="otherLink.href"
           :target="isHomePage() ? '_blank' : '_self'"
         >
-          <svg
-            v-if="otherLink.icon.startsWith('#')"
-            class="svg-icon"
-            aria-hidden="true"
-          >
-            <use :xlink:href="otherLink.icon" />
-          </svg>
+          <div v-if="otherLink.icon.startsWith('#')" class="icon">
+            <svg
+              aria-hidden="true"
+            >
+              <use :xlink:href="otherLink.icon" />
+            </svg>
+          </div>
+
           <div
             v-else
             class="icon"
@@ -128,17 +129,22 @@ const otherLinks = computed(() => [
   --uno: "mb-1 last-of-type:mb-0 text-sm";
 
   a {
-    --uno: "flex items-center w-170px h-38px p-2 rounded-$bew-radius duration-300";
+    --uno: "flex items-center text-nowrap min-w-160px h-38px p-2 pr-3 rounded-$bew-radius duration-300";
     --uno: "hover:bg-$bew-fill-alt hover:shadow-[var(--bew-shadow-1),var(--bew-shadow-edge-glow-1)]";
   }
 }
 
 .svg-icon {
-  --uno: "w-2em h-2em mr-4 vertical-bottom fill-current overflow-hidden";
+  --uno: "w-2em h-2em mr-3 vertical-bottom fill-current overflow-hidden";
 }
 
 .icon {
-  --uno: "w-2em h-2em mr-4 bg-$bew-content-solid vertical-bottom fill-current overflow-hidden";
-  --uno: "text-sm grid place-items-center rounded-1/2";
+  --uno: "w-2em h-2em mr-3 bg-$bew-content-solid vertical-bottom fill-current overflow-hidden";
+  --uno: "text-1.25em grid place-items-center rounded-1/2 shrink-0";
+  --uno: "border-1 border-$bew-border-color";
+
+  svg {
+    --uno: "w-1.25em h-1.25em";
+  }
 }
 </style>

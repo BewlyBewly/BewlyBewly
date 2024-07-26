@@ -13,6 +13,12 @@ English | [官话 - 简体中文](README-cmn_CN.md) | [官話 - 正體中文](RE
 
 ## 👋 Introduction
 
+> [!NOTE]
+> BewlyBewly mainly focuses on page adjustments and optimization rather than improving functionally and efficiency.
+>
+> The dark mode will only be adapted to commonly used pages due to its efficiency and maintenance difficulty, while less
+> frequently used pages will not to be adapted.
+
 BewlyBewly is a browser extension for BiliBili that aims to enhance the user experience by redesigning the BiliBili UI.
 The design is inspired by YouTube, Vision OS, and iOS, resulting in a more visually appealing and user-friendly interface.
 This project uses the [vitesse-webext](https://github.com/antfu/vitesse-webext) template for development.

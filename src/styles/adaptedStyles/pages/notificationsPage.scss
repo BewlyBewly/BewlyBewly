@@ -71,7 +71,8 @@
     .notify-wrapper .notify-push .set-push:not(.disabled),
     .msg-notify .link:hover,
     .msg-more,
-    .error .btn {
+    .error .btn,
+    .detail .content.active:hover {
       color: var(--bew-theme-color);
     }
 
@@ -87,7 +88,9 @@
       color: white;
     }
 
-    .at:hover {
+    .at:hover,
+    .im-dynamic-link:hover,
+    .im-topic-link:hover {
       color: var(--bew-theme-color-80);
     }
 
@@ -134,7 +137,8 @@
     .bl-button--primary,
     .bl-button--ghost:hover,
     .message .message-content.is-me,
-    .notify-dot {
+    .notify-dot,
+    .content .kw-search-row .create-btn {
       background-color: var(--bew-theme-color);
     }
 
@@ -221,7 +225,8 @@
     .bili-im,
     .bl-button--shallow-o,
     .cs-self-service .cs-self-service-list .cs-self-service-item .tool-title,
-    .auto-reply-push__desc {
+    .auto-reply-push__desc,
+    .content .row .left .title {
       color: var(--bew-text-1);
     }
 
@@ -242,7 +247,8 @@
     .bp-icon-font.icon-close:before,
     .cs-actions-wrap .cs-actions .cs-action-item,
     .ar-recommend-item__info--desc .time,
-    .ar-recommend-item__info--view {
+    .ar-recommend-item__info--view,
+    .content .row .left .desc {
       color: var(--bew-text-2);
     }
 
@@ -308,7 +314,8 @@
     .divider-last::before,
     .divider-last::after,
     .header::after,
-    .split-line {
+    .split-line,
+    .content .chr {
       background-color: var(--bew-border-color);
     }
 
@@ -331,7 +338,8 @@
     .cs-order-notice,
     .cs-rich-text-answer .rich-answer-evaluate .ev-thumb,
     .cs-q-tab-area ul.cs-q-tabs li.cs-q-tab-item.active,
-    .auto-reply-push {
+    .auto-reply-push,
+    .content .kw-search-row .kw-search {
       background-color: var(--bew-fill-1);
     }
 
