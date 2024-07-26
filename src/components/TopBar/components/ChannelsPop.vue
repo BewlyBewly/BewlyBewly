@@ -89,7 +89,7 @@ const otherLinks = computed(() => [
       <li
         v-for="otherLink in otherLinks.slice(item, item + 10)"
         :key="otherLink.name"
-        class="link-item"
+        class="link-item group"
       >
         <a
           :href="otherLink.href"
@@ -141,7 +141,7 @@ const otherLinks = computed(() => [
 .icon {
   --uno: "w-2em h-2em mr-3 bg-$bew-content-solid vertical-bottom fill-current overflow-hidden";
   --uno: "text-1.25em grid place-items-center rounded-1/2 shrink-0";
-  --uno: "shadow-[var(--bew-shadow-1),var(--bew-shadow-edge-glow-1)]";
+  --uno: "border-1 border-$bew-border-color";
 
   svg {
     --uno: "w-1.25em h-1.25em";
