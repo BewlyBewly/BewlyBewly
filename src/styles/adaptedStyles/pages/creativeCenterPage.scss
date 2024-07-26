@@ -25,6 +25,10 @@
     .nav-item.message iframe {
       filter: none !important;
     }
+
+    .b-read-editor {
+      background-color: var(--bew-bg);
+    }
   }
   // #endregion
 }
