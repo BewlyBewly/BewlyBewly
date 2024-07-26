@@ -457,7 +457,7 @@ defineExpose({
           style="
             mask-image: linear-gradient(to bottom,  black 20%, transparent);
           "
-          :style="{ backdropFilter: settings.disableFrostedGlass ? 'none' : 'blur(4px)' }"
+          :style="{ backdropFilter: settings.disableFrostedGlass ? 'none' : 'blur(12px)' }"
           pos="absolute top-0 left-0" w-full h-80px
           pointer-events-none transform-gpu
         />
