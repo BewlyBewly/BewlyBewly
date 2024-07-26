@@ -181,6 +181,11 @@ defineExpose({ initData })
         {{ $t('common.login') }}
       </Button>
     </Empty>
+    <Empty v-if="videoList.length === 0 && !needToLoginFirst" mt-6 :description="$t('common.no_content')">
+      <Button type="primary" @click="initData()">
+        {{ $t('common.refresh') }}
+      </Button>
+    </Empty>
     <div
       v-else
       ref="containerRef"
