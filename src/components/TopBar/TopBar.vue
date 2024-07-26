@@ -534,72 +534,14 @@ defineExpose({
           class="right-side"
           flex="inline xl:1 justify-end items-center"
         >
-          <!-- Avatar -->
-          <div
-            v-if="isLogin"
-            ref="avatar"
-            class="avatar right-side-item relative"
-            shadow="$bew-shadow-2" rounded-full
-          >
-            <a
-              ref="avatarImg"
-              :href="`https://space.bilibili.com/${mid}`"
-              :target="isHomePage() ? '_blank' : '_self'"
-              class="avatar-img"
-              :class="{ hover: popupVisible.userPanel }"
-              :style="{
-                backgroundImage: `url(${`${userInfo.face}`.replace(
-                  'http:',
-                  '',
-                )})`,
-              }"
-              rounded-full w-40px h-40px
-              shadow="$bew-shadow-2"
-              bg="$bew-fill-3 cover center"
-              z-1
-            />
-            <div
-              ref="avatarShadow"
-              class="avatar-shadow"
-              :class="{ hover: popupVisible.userPanel }"
-              :style="{
-                backgroundImage: `url(${`${userInfo.face}`.replace(
-                  'http:',
-                  '',
-                )})`,
-              }"
-              pos="absolute top-0" z-0 pointer-events-none
-              bg="cover center" blur-sm
-              rounded-full
-              w-40px h-40px
-            />
-            <svg
-              v-if="userInfo.vip?.status === 1"
-              class="vip-img"
-              :class="{ hover: popupVisible.userPanel }"
-              :style="{ opacity: popupVisible.userPanel ? 1 : 0 }"
-              bg="[url(https://i0.hdslb.com/bfs/seed/jinkela/short/user-avatar/big-vip.svg)] cover no-repeat"
-              w="27.5%" h="27.5%" z-1
-              pos="absolute bottom-0 right-0" duration-300
-            />
-            <Transition name="slide-in">
-              <UserPanelPop
-                v-if="popupVisible.userPanel"
-                :user-info="userInfo"
-                after:h="!0"
-                class="bew-popover"
-              />
-            </Transition>
-          </div>
-
           <div
             class="others"
             :class="{ inactive: rightSideInactive }"
             style="
-            backdrop-filter: var(--bew-filter-glass-1);
-            box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
-          "
-            flex h-50px px-6px bg="$bew-elevated"
+              backdrop-filter: var(--bew-filter-glass-1);
+              box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
+            "
+            flex="~ items-center gap-1" h-50px px-6px bg="$bew-elevated"
             transition="transition-property-colors duration-150"
             text="$bew-text-1" border="1 $bew-border-color" rounded-full
             transform-gpu
@@ -629,40 +571,6 @@ defineExpose({
 
               <!-- TODO: need to refactor to above code -->
               <div class="hidden lg:flex" gap-1>
-                <!-- Notifications -->
-                <div
-                  ref="notifications"
-                  class="right-side-item"
-                  :class="{ active: popupVisible.notifications }"
-                >
-                  <template v-if="unReadMessageCount > 0">
-                    <div
-                      v-if="settings.topBarIconBadges === 'number'"
-                      class="unread-num-dot"
-                    >
-                      {{ unReadMessageCount > 99 ? '99+' : unReadMessageCount }}
-                    </div>
-                    <div
-                      v-else-if="settings.topBarIconBadges === 'dot'"
-                      class="unread-dot"
-                    />
-                  </template>
-                  <a
-                    href="https://message.bilibili.com"
-                    :target="isHomePage() ? '_blank' : '_self'"
-                    :title="$t('topbar.notifications')"
-                  >
-                    <div i-tabler:bell />
-                  </a>
-
-                  <Transition name="slide-in">
-                    <NotificationsPop
-                      v-if="popupVisible.notifications"
-                      class="bew-popover"
-                    />
-                  </Transition>
-                </div>
-
                 <!-- Moments -->
                 <div
                   ref="moments"
@@ -753,7 +661,10 @@ defineExpose({
                   </a>
 
                   <Transition name="slide-in">
-                    <WatchLaterPop v-if="popupVisible.watchLater" class="bew-popover" ml--30px />
+                    <WatchLaterPop
+                      v-if="popupVisible.watchLater"
+                      class="bew-popover"
+                    />
                   </Transition>
                 </div>
 
@@ -784,25 +695,22 @@ defineExpose({
                 </Transition>
               </div>
 
+              <div
+                w-4px h="40%" bg="$bew-fill-1" mx-1
+                rounded-4px
+              />
+
               <!-- Upload -->
               <div
                 ref="upload"
-                class="upload right-side-item"
+                class="right-side-item"
               >
                 <a
                   href="https://member.bilibili.com/platform/upload/video/frame"
                   target="_blank"
                   :title="$t('topbar.upload')"
-                  bg="$bew-theme-color"
-                  rounded-40px
-                  un-text="!white !base"
-                  w-35px h-35px ml-1
-                  flex="~ justify-center"
-                  shadow
-                  filter="hover:brightness-110"
-                  style="--un-shadow: 0 0 10px var(--bew-theme-color-60)"
                 >
-                  <div i-mingcute:upload-2-line flex-shrink-0 />
+                  <div i-mingcute:upload-line flex-shrink-0 />
                 <!-- <span m="l-2" class="hidden xl:block">{{
                   $t('topbar.upload')
                 }}</span> -->
@@ -812,12 +720,103 @@ defineExpose({
                   <UploadPop
                     v-if="popupVisible.upload"
                     class="bew-popover"
-                    pos="!left-auto !right-0"
-                    transform="!translate-x-0"
+                  />
+                </Transition>
+              </div>
+
+              <!-- Notifications -->
+              <div
+                ref="notifications"
+                class="right-side-item"
+                :class="{ active: popupVisible.notifications }"
+              >
+                <template v-if="unReadMessageCount > 0">
+                  <div
+                    v-if="settings.topBarIconBadges === 'number'"
+                    class="unread-num-dot"
+                  >
+                    {{ unReadMessageCount > 99 ? '99+' : unReadMessageCount }}
+                  </div>
+                  <div
+                    v-else-if="settings.topBarIconBadges === 'dot'"
+                    class="unread-dot"
+                  />
+                </template>
+                <a
+                  href="https://message.bilibili.com"
+                  :target="isHomePage() ? '_blank' : '_self'"
+                  :title="$t('topbar.notifications')"
+                >
+                  <div i-tabler:bell />
+                </a>
+
+                <Transition name="slide-in">
+                  <NotificationsPop
+                    v-if="popupVisible.notifications"
+                    class="bew-popover"
                   />
                 </Transition>
               </div>
             </template>
+          </div>
+
+          <!-- Avatar -->
+          <div
+            v-if="isLogin"
+            ref="avatar"
+            class="avatar right-side-item relative"
+            shadow="$bew-shadow-2" rounded-full
+          >
+            <a
+              ref="avatarImg"
+              :href="`https://space.bilibili.com/${mid}`"
+              :target="isHomePage() ? '_blank' : '_self'"
+              class="avatar-img"
+              :class="{ hover: popupVisible.userPanel }"
+              :style="{
+                backgroundImage: `url(${`${userInfo.face}`.replace(
+                  'http:',
+                  '',
+                )})`,
+              }"
+              rounded-full w-40px h-40px
+              shadow="$bew-shadow-2"
+              bg="$bew-fill-3 cover center"
+              z-1
+            />
+            <div
+              ref="avatarShadow"
+              class="avatar-shadow"
+              :class="{ hover: popupVisible.userPanel }"
+              :style="{
+                backgroundImage: `url(${`${userInfo.face}`.replace(
+                  'http:',
+                  '',
+                )})`,
+              }"
+              pos="absolute top-0" z-0 pointer-events-none
+              bg="cover center" blur-sm
+              rounded-full
+              w-40px h-40px
+            />
+            <svg
+              v-if="userInfo.vip?.status === 1"
+              class="vip-img"
+              :class="{ hover: popupVisible.userPanel }"
+              :style="{ opacity: popupVisible.userPanel ? 1 : 0 }"
+              bg="[url(https://i0.hdslb.com/bfs/seed/jinkela/short/user-avatar/big-vip.svg)] cover no-repeat"
+              w="27.5%" h="27.5%" z-1
+              pos="absolute bottom-0 right-0" duration-300
+            />
+            <Transition name="slide-in">
+              <UserPanelPop
+                v-if="popupVisible.userPanel"
+                class="bew-popover"
+                :user-info="userInfo"
+                after:h="!0"
+                pos="!left-auto !right-0" transform="!translate-x-0"
+              />
+            </Transition>
           </div>
         </div>
       </main>
@@ -890,14 +889,14 @@ defineExpose({
 
 .right-side {
   .avatar {
-    --uno: "flex items-center mr-4 relative z-1";
+    --uno: "flex items-center ml-4 relative z-1";
 
     .avatar-img,
     .avatar-shadow {
       --uno: "duration-300";
 
       &.hover {
-        --uno: "transform scale-230 translate-y-36px";
+        --uno: "transform scale-230 translate-y-50px translate-x--36px";
       }
     }
 
@@ -922,7 +921,7 @@ defineExpose({
   }
 
   .unread-num-dot {
-    --uno: "absolute top-4px right--4px";
+    --uno: "absolute top--4px right--6px";
     --uno: "important:px-1 rounded-full";
     --uno: "text-xs leading-0 z-6 min-w-16px h-16px";
     --uno: "grid place-items-center";
@@ -931,7 +930,7 @@ defineExpose({
   }
 
   .unread-dot {
-    --uno: "w-8px h-8px bg-$bew-theme-color rounded-8px absolute right-0 top-6px";
+    --uno: "w-8px h-8px bg-$bew-theme-color rounded-8px absolute right-0 top-2px";
   }
 
   .right-side-item {
@@ -943,7 +942,7 @@ defineExpose({
     }
 
     &.active a,
-    &:not(.upload) a:hover {
+    & a:hover {
       --un-drop-shadow: drop-shadow(0 0 6px white);
       --uno: "bg-$bew-fill-2 shadow-[var(--bew-shadow-edge-glow-1),var(--bew-shadow-1)]";
     }
