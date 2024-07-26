@@ -5,6 +5,7 @@ import Button from '~/components/Button.vue'
 import { useDark } from '~/composables/useDark'
 
 import Dialog from '../Dialog.vue'
+import PageContent from '../PageContent.vue'
 import Tooltip from '../Tooltip.vue'
 import type { HoveringDockItem } from './types'
 
@@ -81,7 +82,7 @@ const showBewlyPageDialog = ref<boolean>(false)
     :show-footer="false"
     @close="showBewlyPageDialog = false"
   >
-    fdsfdsfds
+    <PageContent within-dialog />
   </Dialog>
 </template>
 

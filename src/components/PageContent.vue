@@ -2,6 +2,8 @@
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { AppPage } from '~/enums/appEnums'
 
+defineProps<{ withinDialog?: boolean }>()
+
 const { activatedPage } = useBewlyApp()
 const pages = {
   [AppPage.Home]: defineAsyncComponent(() => import('~/contentScripts/views/Home/Home.vue')),
@@ -15,9 +17,13 @@ const pages = {
 
 <template>
   <main m-auto max-w="$bew-page-max-width">
+    <!-- By directly using predefined unocss width properties, it is possible to dynamically set the width attribute -->
+    <div w="lg:85% md:[calc(90%-60px)] [calc(100%-140px)]" hidden />
+
     <div
-      p="t-80px" m-auto
-      w="lg:85% md:[calc(90%-60px)] [calc(100%-140px)]"
+      :style="{ marginTop: withinDialog ? '0' : 'calc(var(--bew-top-bar-height) + 10px)' }"
+      m-auto
+      :w="withinDialog ? '' : 'lg:85% md:[calc(90%-60px)] [calc(100%-140px)]'"
     >
       <Transition name="page-fade">
         <Component :is="pages[activatedPage]" />
