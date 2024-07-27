@@ -10,6 +10,7 @@ import Dock from '~/components/Dock/Dock.vue'
 import OverlayScrollbarsComponent from '~/components/OverlayScrollbarsComponent'
 import RightSideButtons from '~/components/RightSideButtons/RightSideButtons.vue'
 import Settings from '~/components/Settings/Settings.vue'
+import OldTopBar from '~/components/TopBar/OldTopBar.vue'
 import TopBar from '~/components/TopBar/TopBar.vue'
 import type { BewlyAppProvider } from '~/composables/useAppProvider'
 import { useDark } from '~/composables/useDark'
@@ -303,7 +304,12 @@ provide<BewlyAppProvider>('BEWLY_APP', {
 
     <!-- TopBar -->
     <div m-auto max-w="$bew-page-max-width">
+      <OldTopBar
+        v-if="settings.useOldTopBar"
+        pos="top-0 left-0" z="99 hover:1001" w-full
+      />
       <TopBar
+        v-else
         pos="top-0 left-0" z="99 hover:1001" w-full
       />
     </div>
