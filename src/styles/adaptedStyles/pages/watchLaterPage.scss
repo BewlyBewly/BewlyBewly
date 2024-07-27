@@ -3,7 +3,6 @@
   // Increase the priority of the style inside by writing a non-existent selector in :not()
   :not(foobar) {
     .watch-later-list header .s-btn,
-    .watch-later-list header .d-btn,
     .bili-dialog .con .btn-box .btn-submit,
     .bili-dialog .con .btn-box .btn-cancel:hover {
       border-color: var(--bew-theme-color);
@@ -14,7 +13,6 @@
     }
 
     .watch-later-list header .s-btn,
-    .watch-later-list header .d-btn,
     .watch-later-list .list-box .av-item .av-about .t:hover,
     .watch-later-list .list-box .av-item .av-about .info .user:hover,
     .bili-dialog .con .btn-box .btn-cancel:hover {
@@ -36,6 +34,13 @@
 
     .bili-dialog .con .btn-box .btn-cancel {
       background-color: transparent;
+    }
+
+    // disabled button
+    .watch-later-list header .d-btn {
+      cursor: not-allowed;
+      color: var(--bew-text-3);
+      border-color: var(--bew-border-color);
     }
   }
   // #endregion
