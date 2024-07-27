@@ -704,6 +704,7 @@ defineExpose({
               <div
                 ref="upload"
                 class="right-side-item"
+                :class="{ active: popupVisible.upload }"
               >
                 <a
                   href="https://member.bilibili.com/platform/upload/video/frame"
@@ -711,9 +712,6 @@ defineExpose({
                   :title="$t('topbar.upload')"
                 >
                   <div i-mingcute:upload-2-line flex-shrink-0 />
-                <!-- <span m="l-2" class="hidden xl:block">{{
-                  $t('topbar.upload')
-                }}</span> -->
                 </a>
 
                 <Transition name="slide-in">
@@ -764,8 +762,8 @@ defineExpose({
           <div
             v-if="isLogin"
             ref="avatar"
-            class="avatar right-side-item relative"
-            shadow="$bew-shadow-2" rounded-full
+            :class="{ hover: popupVisible.userPanel }"
+            class="avatar right-side-item"
           >
             <a
               ref="avatarImg"
@@ -779,10 +777,6 @@ defineExpose({
                   '',
                 )})`,
               }"
-              rounded-full w-40px h-40px
-              shadow="$bew-shadow-2"
-              bg="$bew-fill-3 cover center"
-              z-1
             />
             <div
               ref="avatarShadow"
@@ -794,10 +788,6 @@ defineExpose({
                   '',
                 )})`,
               }"
-              pos="absolute top-0" z-0 pointer-events-none
-              bg="cover center" blur-sm
-              rounded-full
-              w-40px h-40px
             />
             <svg
               v-if="userInfo.vip?.status === 1"
@@ -889,19 +879,29 @@ defineExpose({
 
 .right-side {
   .avatar {
-    --uno: "flex items-center ml-4 relative z-1";
+    --uno: "flex items-center ml-4 relative z-1 rounded-1/2";
+
+    // Add a safety zone to prevent the avatar from collapsing quickly after leaving
+    &:hover::after,
+    &.hover::after {
+      --uno: "content-empty absolute right-0 top-20px w-110px h-100px";
+    }
 
     .avatar-img,
     .avatar-shadow {
-      --uno: "duration-300";
+      --uno: "duration-300 rounded-1/2 w-40px h-40px bg-cover bg-center";
 
       &.hover {
         --uno: "transform scale-230 translate-y-50px translate-x--36px";
       }
     }
 
+    .avatar-img {
+      --uno: "z-1 shadow-$bew-shadow-2";
+    }
+
     .avatar-shadow {
-      --uno: "opacity-0";
+      --uno: "opacity-0 absolute top-0 z-0 pointer-events-none blur-sm";
 
       &.hover {
         --uno: "opacity-60";
@@ -921,16 +921,16 @@ defineExpose({
   }
 
   .unread-num-dot {
-    --uno: "absolute top--4px right--6px";
+    --uno: "absolute top--2px left-1/2";
+    --uno: "translate-x--1/2";
     --uno: "important:px-1 rounded-full";
-    --uno: "text-xs leading-0 z-6 min-w-16px h-16px";
+    --uno: "text-xs leading-0 z-6 min-w-14px h-14px";
     --uno: "grid place-items-center";
-    --uno: "bg-$bew-theme-color  text-white";
-    box-shadow: 0 2px 4px rgba(var(--tw-shadow-color), 0.4);
+    --uno: "bg-$bew-theme-color text-white shadow-$bew-shadow-1";
   }
 
   .unread-dot {
-    --uno: "w-8px h-8px bg-$bew-theme-color rounded-8px absolute right-0 top-2px";
+    --uno: "w-8px h-8px bg-$bew-theme-color rounded-8px absolute right-2px top-2px";
   }
 
   .right-side-item {
@@ -944,7 +944,7 @@ defineExpose({
     &.active a,
     & a:hover {
       --un-drop-shadow: drop-shadow(0 0 6px white);
-      --uno: "bg-$bew-fill-2 shadow-[var(--bew-shadow-edge-glow-1),var(--bew-shadow-1)]";
+      --uno: "bg-$bew-fill-2";
     }
   }
 
