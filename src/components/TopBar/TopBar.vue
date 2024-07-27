@@ -710,7 +710,7 @@ defineExpose({
                   target="_blank"
                   :title="$t('topbar.upload')"
                 >
-                  <div i-mingcute:upload-line flex-shrink-0 />
+                  <div i-mingcute:upload-2-line flex-shrink-0 />
                 <!-- <span m="l-2" class="hidden xl:block">{{
                   $t('topbar.upload')
                 }}</span> -->
@@ -805,8 +805,8 @@ defineExpose({
               :class="{ hover: popupVisible.userPanel }"
               :style="{ opacity: popupVisible.userPanel ? 1 : 0 }"
               bg="[url(https://i0.hdslb.com/bfs/seed/jinkela/short/user-avatar/big-vip.svg)] cover no-repeat"
-              w="27.5%" h="27.5%" z-1
-              pos="absolute bottom-0 right-0" duration-300
+              w="30%" h="30%" z-1
+              pos="absolute bottom--14px right-24px" duration-300
             />
             <Transition name="slide-in">
               <UserPanelPop
