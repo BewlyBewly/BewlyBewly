@@ -106,7 +106,6 @@
     "*": "eslint --fix"
   },
   "webExt": {
-    "sourceDir": "extension",
     "run": {
       "startUrl": [
         "https://www.bilibili.com/"
