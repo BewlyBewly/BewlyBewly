@@ -303,7 +303,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
     </div>
 
     <!-- TopBar -->
-    <div m-auto max-w="$bew-page-max-width">
+    <div m-auto max-w="$bew-page-max-width" pointer-events-none>
       <OldTopBar
         v-if="settings.useOldTopBar"
         pos="top-0 left-0" z="99 hover:1001" w-full

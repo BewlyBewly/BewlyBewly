@@ -442,6 +442,7 @@ defineExpose({
       v-if="showTopBar"
       ref="headerTarget"
       w="full" transition="all 300 ease-in-out"
+      pointer-events-none
       :class="{ hide: hideTopBar }"
       :style="{ position: isTopBarFixed ? 'fixed' : 'absolute' }"
     >
