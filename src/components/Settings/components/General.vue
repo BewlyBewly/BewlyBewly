@@ -156,6 +156,9 @@ function handleToggleDockItem(dockItem: any) {
     </SettingsItemGroup>
 
     <SettingsItemGroup :title="$t('settings.group_topbar')">
+      <SettingsItem :title="$t('settings.use_old_topbar')">
+        <Radio v-model="settings.useOldTopBar" />
+      </SettingsItem>
       <SettingsItem :title="$t('settings.auto_hide_topbar')">
         <Radio v-model="settings.autoHideTopBar" />
       </SettingsItem>
