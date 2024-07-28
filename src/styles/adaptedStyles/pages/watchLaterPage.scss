@@ -35,13 +35,6 @@
     .bili-dialog .con .btn-box .btn-cancel {
       background-color: transparent;
     }
-
-    // disabled button
-    .watch-later-list header .d-btn {
-      cursor: not-allowed;
-      color: var(--bew-text-3);
-      border-color: var(--bew-border-color);
-    }
   }
   // #endregion
 
@@ -59,9 +52,14 @@
       color: var(--bew-text-2);
     }
 
+    .watch-later-list header .d-btn {
+      color: var(--bew-text-3);
+    }
+
     .watch-later-list .list-box .av-item .av-about,
     .bili-dialog .con header,
-    .bili-dialog .con .btn-box .btn-cancel {
+    .bili-dialog .con .btn-box .btn-cancel,
+    .watch-later-list header .d-btn {
       border-color: var(--bew-border-color);
     }
 
