@@ -921,8 +921,7 @@ defineExpose({
   }
 
   .unread-num-dot {
-    --uno: "absolute top--2px left-1/2";
-    --uno: "translate-x--1/2";
+    --uno: "absolute top--2px right--4px";
     --uno: "important:px-1 rounded-full";
     --uno: "text-xs leading-0 z-6 min-w-14px h-14px";
     --uno: "grid place-items-center";
