@@ -120,12 +120,14 @@ function getLvIcon(level: number, isSigma: boolean = false): string {
     shadow="[var(--bew-shadow-3),var(--bew-shadow-edge-glow-1)]"
   >
     <div
-      text="xl" font-medium
+      text="xl" flex="~ items-center justify-center"
+      mt-8 font-medium
     >
       {{ userInfo.uname ? userInfo.uname : '-' }}
     </div>
     <div
       text="xs $bew-text-2"
+      flex="~ items-center justify-center"
       m="t-1 b-2"
     >
       <a
@@ -146,7 +148,7 @@ function getLvIcon(level: number, isSigma: boolean = false): string {
       href="//account.bilibili.com/account/record?type=exp"
       target="_blank"
       block mb-2 w-full
-      flex="~ col justify-center items-start"
+      flex="~ col justify-center items-center"
     >
       <template v-if="userInfo?.level_info?.current_level < 6">
         <div
@@ -174,6 +176,7 @@ function getLvIcon(level: number, isSigma: boolean = false): string {
           />
         </div>
         <div w-full text="xs $bew-text-3">
+          <!-- Current XP: 103; need 500 more for LV2. -->
           {{
             $t('topbar.user_dropdown.exp_desc', {
               current_exp: userInfo.level_info.current_exp,
@@ -186,8 +189,8 @@ function getLvIcon(level: number, isSigma: boolean = false): string {
       <template v-else>
         <div
           :style="{ width: userInfo?.is_senior_member ? '36px' : '28px' }"
-          class="level"
-          h-20px block
+          h-20px
+          flex="~ items-center"
           v-html="DOMPurify.sanitize(getLvIcon(userInfo?.level_info?.current_level, userInfo?.is_senior_member))"
         />
       </template>

@@ -80,6 +80,7 @@ settings:
   block_ads: Block ads
   disable_frosted_glass: Disable frosted glass effect
   reduce_frosted_glass_blur: Reduce the intensity of the frosted glass blur
+  use_old_topbar: Use the old top bar
   auto_hide_topbar: Automatically hide the top bar
   topbar_icon_badges: Icon badges
   topbar_icon_badges_opt:
