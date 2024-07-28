@@ -148,6 +148,11 @@ async function setupStyles() {
     document.documentElement.classList.add('loginPage')
   }
 
+  // blackboard page 社区页面
+  else if (/^https?:\/\/(?:www\.)?bilibili\.com\/blackboard.*$/.test(currentUrl)) {
+    await import('./pages/blackboardPage.scss')
+    document.documentElement.classList.add('blackboardPage')
+
   // cheese page 课堂页面
   else if (/^https?:\/\/(?:www\.)?bilibili\.com\/cheese.*$/.test(currentUrl)) {
     await import('./pages/cheesePage.scss')
