@@ -714,6 +714,7 @@ defineExpose({
                         v-if="popupVisible.favorites"
                         ref="favoritesPopRef"
                         class="bew-popover"
+                        ml--20px
                       />
                     </KeepAlive>
                   </Transition>
@@ -734,7 +735,11 @@ defineExpose({
                   </a>
 
                   <Transition name="slide-in">
-                    <HistoryPop v-if="popupVisible.history" class="bew-popover" />
+                    <HistoryPop
+                      v-if="popupVisible.history"
+                      class="bew-popover"
+                      ml--20px
+                    />
                   </Transition>
                 </div>
 
@@ -753,7 +758,11 @@ defineExpose({
                   </a>
 
                   <Transition name="slide-in">
-                    <WatchLaterPop v-if="popupVisible.watchLater" class="bew-popover" ml--30px />
+                    <WatchLaterPop
+                      v-if="popupVisible.watchLater"
+                      class="bew-popover"
+                      ml--60px
+                    />
                   </Transition>
                 </div>
 
