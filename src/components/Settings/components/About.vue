@@ -253,7 +253,7 @@ async function checkGitHubRelease() {
           @close="dialogVisible.justWannaChangeTheJob = false"
         >
           <template #title>
-            <div text-18px font-bold>
+            <div text-xl font-bold>
               {{ $t('settings.just_wanna_change_the_job') }}
             </div>
             <a
@@ -263,14 +263,18 @@ async function checkGitHubRelease() {
               Gmail: hakadao2000@gmail.com
             </a>
           </template>
-          <div text-16.5px mb-2>
+          <div
+            whitespace-pre-wrap
+            text-base bg="$bew-fill-1" rounded="$bew-radius" p-4 mb-8
+            v-html="DOMPurify.sanitize($t('settings.just_wanna_change_the_job_hint'))"
+          />
+          <div text-base mb-2>
             {{ $t('settings.contact_me') }}
             <a href="mailto:hakadao2000@gmail.com" color="$bew-theme-color">hakadao2000@gmail.com</a>,
             GitHub: <a href="https://github.com/hakadao" target="_blank" color="$bew-theme-color">Hakadao</a>
           </div>
           <div
-            whitespace-pre-wrap lh-8 text-16.5px
-            :frosted-glass="false"
+            whitespace-pre-wrap lh-8 text-base
             v-html="DOMPurify.sanitize($t('settings.just_wanna_change_the_job_desc'))"
           />
 
