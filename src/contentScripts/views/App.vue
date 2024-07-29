@@ -4,14 +4,6 @@ import type { Ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import browser from 'webextension-polyfill'
 
-import AppBackground from '~/components/AppBackground.vue'
-import BackToTopOrRefreshButton from '~/components/BackToTopOrRefreshButton.vue'
-import Dock from '~/components/Dock/Dock.vue'
-import OverlayScrollbarsComponent from '~/components/OverlayScrollbarsComponent'
-import PageContent from '~/components/PageContent.vue'
-import RightSideButtons from '~/components/RightSideButtons/RightSideButtons.vue'
-import Settings from '~/components/Settings/Settings.vue'
-import TopBar from '~/components/TopBar/TopBar.vue'
 import type { BewlyAppProvider } from '~/composables/useAppProvider'
 import { useDark } from '~/composables/useDark'
 import { OVERLAY_SCROLL_BAR_SCROLL } from '~/constants/globalEvents'
@@ -297,7 +289,12 @@ provide<BewlyAppProvider>('BEWLY_APP', {
 
     <!-- TopBar -->
     <div m-auto max-w="$bew-page-max-width">
+      <OldTopBar
+        v-if="settings.useOldTopBar"
+        pos="top-0 left-0" z="99 hover:1001" w-full
+      />
       <TopBar
+        v-else
         pos="top-0 left-0" z="99 hover:1001" w-full
       />
     </div>

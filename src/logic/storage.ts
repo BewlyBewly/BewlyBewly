@@ -16,6 +16,7 @@ export interface Settings {
   enableVideoPreview: boolean
   enableVideoCtrlBarOnVideoCard: boolean
   hoverVideoCardDelayed: boolean
+  useOldTopBar: boolean
   autoHideTopBar: boolean
   topBarIconBadges: 'number' | 'dot' | 'none'
   blockAds: boolean
@@ -72,6 +73,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   enableVideoPreview: true,
   enableVideoCtrlBarOnVideoCard: false,
   hoverVideoCardDelayed: false,
+  useOldTopBar: false,
   autoHideTopBar: false,
   topBarIconBadges: 'number',
   dockPosition: 'right',

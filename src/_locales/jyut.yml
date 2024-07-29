@@ -80,6 +80,7 @@ settings:
   block_ads: 封鎖廣告
   disable_frosted_glass: 閂咗毛玻璃效果
   reduce_frosted_glass_blur: 降低毛玻璃模糊強度
+  use_old_topbar: 用返舊版頂欄
   auto_hide_topbar: 自動收埋頂欄
   topbar_icon_badges: 圖示邊位標記
   topbar_icon_badges_opt:

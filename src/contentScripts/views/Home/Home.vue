@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { useThrottleFn } from '@vueuse/core'
 
-import Logo from '~/components/Logo.vue'
-import SearchBar from '~/components/SearchBar/SearchBar.vue'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { TOP_BAR_VISIBILITY_CHANGE } from '~/constants/globalEvents'
 import { homePageGridLayout, settings } from '~/logic'

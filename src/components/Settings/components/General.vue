@@ -2,9 +2,6 @@
 import { useI18n } from 'vue-i18n'
 import draggable from 'vuedraggable'
 
-import Button from '~/components/Button.vue'
-import Radio from '~/components/Radio.vue'
-import Select from '~/components/Select.vue'
 import { settings } from '~/logic'
 import { useMainStore } from '~/stores/mainStore'
 
@@ -156,6 +153,9 @@ function handleToggleDockItem(dockItem: any) {
     </SettingsItemGroup>
 
     <SettingsItemGroup :title="$t('settings.group_topbar')">
+      <SettingsItem :title="$t('settings.use_old_topbar')">
+        <Radio v-model="settings.useOldTopBar" />
+      </SettingsItem>
       <SettingsItem :title="$t('settings.auto_hide_topbar')">
         <Radio v-model="settings.autoHideTopBar" />
       </SettingsItem>
