@@ -13,3 +13,4 @@ dist-ssr
 extension/
 extension-firefox/
 node_modules
+web-ext-profile
