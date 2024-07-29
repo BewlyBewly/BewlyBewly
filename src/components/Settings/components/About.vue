@@ -258,23 +258,23 @@ async function checkGitHubRelease() {
             </div>
             <a
               href="mailto:hakadao2000@gmail.com"
-              block text-14px color="$bew-theme-color" mt-2
+              block color="$bew-theme-color" mt-2
             >
               Gmail: hakadao2000@gmail.com
             </a>
           </template>
           <div
             whitespace-pre-wrap
-            text-base bg="$bew-fill-1" rounded="$bew-radius" p-4 mb-8
+            bg="$bew-fill-1" rounded="$bew-radius" p-4 mb-8
             v-html="DOMPurify.sanitize($t('settings.just_wanna_change_the_job_hint'))"
           />
-          <div text-base mb-2>
+          <div mb-2>
             {{ $t('settings.contact_me') }}
             <a href="mailto:hakadao2000@gmail.com" color="$bew-theme-color">hakadao2000@gmail.com</a>,
             GitHub: <a href="https://github.com/hakadao" target="_blank" color="$bew-theme-color">Hakadao</a>
           </div>
           <div
-            whitespace-pre-wrap lh-8 text-base
+            whitespace-pre-wrap lh-8
             v-html="DOMPurify.sanitize($t('settings.just_wanna_change_the_job_desc'))"
           />
 
@@ -302,7 +302,7 @@ async function checkGitHubRelease() {
 }
 
 .title {
-  --uno: "text-base fw-bold mb-2";
+  --uno: "fw-bold mb-2";
 }
 
 .link-card {
