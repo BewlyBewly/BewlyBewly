@@ -11,7 +11,6 @@ import { settings } from '~/logic'
 import { getUserID, isHomePage } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
-import SearchBar from '../SearchBar/SearchBar.vue'
 import ChannelsPop from './components/ChannelsPop.vue'
 import FavoritesPop from './components/FavoritesPop.vue'
 import HistoryPop from './components/HistoryPop.vue'

@@ -4,14 +4,6 @@ import type { Ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import browser from 'webextension-polyfill'
 
-import AppBackground from '~/components/AppBackground.vue'
-import BackToTopOrRefreshButton from '~/components/BackToTopOrRefreshButton.vue'
-import Dock from '~/components/Dock/Dock.vue'
-import OverlayScrollbarsComponent from '~/components/OverlayScrollbarsComponent'
-import RightSideButtons from '~/components/RightSideButtons/RightSideButtons.vue'
-import Settings from '~/components/Settings/Settings.vue'
-import OldTopBar from '~/components/TopBar/OldTopBar.vue'
-import TopBar from '~/components/TopBar/TopBar.vue'
 import type { BewlyAppProvider } from '~/composables/useAppProvider'
 import { useDark } from '~/composables/useDark'
 import { OVERLAY_SCROLL_BAR_SCROLL } from '~/constants/globalEvents'
@@ -290,7 +282,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
         v-if="isHomePage() && !settings.useOriginalBilibiliHomepage"
         pointer-events-auto
         :activated-page="activatedPage"
-        @change-page="pageName => changeActivatePage(pageName)"
+        @change-page="(page: AppPage) => changeActivatePage(page)"
         @settings-visibility-change="toggleSettings"
         @refresh="handleThrottledPageRefresh"
         @back-to-top="handleThrottledBackToTop"

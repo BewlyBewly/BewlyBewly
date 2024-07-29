@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import Logo from '~/components/Logo.vue'
-import SearchBar from '~/components/SearchBar/SearchBar.vue'
 import { settings } from '~/logic'
 </script>
 

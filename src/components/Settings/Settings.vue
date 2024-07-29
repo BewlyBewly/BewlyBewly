@@ -3,7 +3,6 @@ import { useI18n } from 'vue-i18n'
 
 import { settings } from '~/logic'
 
-import OverlayScrollbarsComponent from '../OverlayScrollbarsComponent'
 import type { MenuItem } from './types'
 import { MenuType } from './types'
 

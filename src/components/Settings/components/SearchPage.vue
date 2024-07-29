@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import Radio from '~/components/Radio.vue'
-import Tooltip from '~/components/Tooltip.vue'
 import { SEARCH_BAR_CHARACTERS } from '~/constants/imgs'
 import { settings } from '~/logic'
 

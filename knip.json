@@ -5,6 +5,7 @@
     "src/background/index.ts",
     "src/options/main.ts",
     "src/popup/main.ts",
+    "src/components/**",
     "scripts/*.ts",
     "*.config.*"
   ],

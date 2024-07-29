@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
 
-import Button from '~/components/Button.vue'
 import { useDark } from '~/composables/useDark'
 
 import Tooltip from '../Tooltip.vue'

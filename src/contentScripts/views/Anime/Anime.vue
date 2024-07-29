@@ -1,10 +1,4 @@
 <script setup lang="ts">
-import BangumiCard from '~/components/BangumiCard/BangumiCard.vue'
-import BangumiCardSkeleton from '~/components/BangumiCard/BangumiCardSkeleton.vue'
-import Button from '~/components/Button.vue'
-import Empty from '~/components/Empty.vue'
-import HorizontalScrollView from '~/components/HorizontalScrollView.vue'
-import Loading from '~/components/Loading.vue'
 import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import type { List as PopularAnimeItem, PopularAnimeResult } from '~/models/anime/popular'

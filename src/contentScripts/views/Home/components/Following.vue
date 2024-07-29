@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
 
-import Button from '~/components/Button.vue'
-import Empty from '~/components/Empty.vue'
-import VideoCard from '~/components/VideoCard/VideoCard.vue'
 import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import type { GridLayout } from '~/logic'
