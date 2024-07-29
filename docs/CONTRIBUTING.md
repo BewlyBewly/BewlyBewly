@@ -10,6 +10,28 @@ This project is built using [Vite](https://vitejs.dev/), please make sure you ha
 
 ### Development (Chrome or Edge)
 
+#### The First Method for Chrome or Edge (RECOMMENDED)
+
+1. Run the pnpm command
+
+```bash
+# Install dependencies
+pnpm install
+
+# Create a profile folder for the extension to store the login status
+mkdir web-ext-profile
+
+# Run the project
+pnpm dev
+
+# After typing this commend, it will automatically open a new Chrome window that opens BiliBili website
+pnpm start:chromium
+```
+
+2. Every time you change the extension, it will reload, and you can see the changes by refreshing the webpage
+
+#### The Alternative Method for Chrome or Edge
+
 1. Run the pnpm command
 
 ```bash
@@ -43,6 +65,28 @@ pnpm build
 Then package it to the `extension` folder
 
 ### Development (Firefox)
+
+#### The First Method for Firefox (RECOMMENDED)
+
+1. Run the pnpm command
+
+```bash
+# Install dependencies
+pnpm install
+
+# Create a profile folder for the extension to store the login status
+mkdir web-ext-profile
+
+# Run the project
+pnpm dev
+
+# After typing this commend, it will automatically open a new Firefox window that opens BiliBili website
+pnpm start:firefox
+```
+
+2. Every time you change the extension, it will reload, and you can see the changes by refreshing the webpage
+
+#### The Alternative Method for Firefox
 
 1. Run the pnpm command
 
