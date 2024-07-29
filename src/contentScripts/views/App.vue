@@ -275,7 +275,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
         v-if="isHomePage() && !settings.useOriginalBilibiliHomepage"
         pointer-events-auto
         :activated-page="activatedPage"
-        @change-page="pageName => changeActivatePage(pageName)"
+        @change-page="(page: AppPage) => changeActivatePage(page)"
         @settings-visibility-change="toggleSettings"
         @refresh="handleThrottledPageRefresh"
         @back-to-top="handleThrottledBackToTop"
