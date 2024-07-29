@@ -27,7 +27,7 @@ const keyword = ref<string>('')
 const { handlePageRefresh, handleReachBottom, haveScrollbar } = useBewlyApp()
 const isLoading = ref<boolean>(false)
 const isFullPageLoading = ref<boolean>(false)
-const noMoreContent = ref<boolean>()
+const noMoreContent = ref<boolean>(false)
 
 onMounted(async () => {
   await getFavoriteCategories()
@@ -195,7 +195,7 @@ function isMusic(item: FavoriteResource) {
         bg="$bew-elevated-solid" rounded="$bew-radius" shadow="$bew-shadow-2" mt--2 transition="all 300 ease-in-out"
         :class="{ hide: shouldMoveCtrlBarUp }"
       >
-        <Select v-model="selectedCategory" w-150px :options="categoryOptions" @change="(val) => changeCategory(val.value)" />
+        <Select v-model="selectedCategory" w-150px :options="categoryOptions" @change="(val: FavoriteCategory) => changeCategory(val)" />
         <Input v-model="keyword" w-250px @enter="handleSearch" />
         <Button type="primary" @click="handleSearch">
           <template #left>

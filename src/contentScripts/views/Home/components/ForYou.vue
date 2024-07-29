@@ -544,7 +544,7 @@ defineExpose({ initData })
           more-btn
           :more-btn-active="video.item && video.item.id === activatedVideoId"
           :removed="video.item && dislikedVideoUniqueKeys.includes(getVideoUniqueKey(video.item))"
-          @more-click="(e) => handleMoreClick(e, video.item!)"
+          @more-click="(e: MouseEvent) => handleMoreClick(e, video.item!)"
           @undo="handleUndoDislike(video.item!)"
         />
       </template>
@@ -576,7 +576,7 @@ defineExpose({ initData })
           more-btn
           :more-btn-active="video.item && video.item.idx === activatedAppVideoIdx"
           :removed="video.item && dislikedAppVideoUniqueKeys.includes(getAppVideoUniqueKey(video.item))"
-          @more-click="(e) => handleAppMoreClick(e, video.item!)"
+          @more-click="(e: MouseEvent) => handleAppMoreClick(e, video.item!)"
           @undo="handleAppUndoDislike(video.item!)"
         />
         <!-- :more-options="video.three_point_v2" -->
