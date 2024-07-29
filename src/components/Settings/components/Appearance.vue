@@ -2,7 +2,6 @@
 import { useThrottleFn } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 
-import Select from '~/components/Select.vue'
 import { settings } from '~/logic'
 
 import ChangeWallpaper from './ChangeWallpaper.vue'

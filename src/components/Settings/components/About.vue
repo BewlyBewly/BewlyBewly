@@ -2,9 +2,6 @@
 import DOMPurify from 'dompurify'
 import browser from 'webextension-polyfill'
 
-import Button from '~/components/Button.vue'
-import Dialog from '~/components/Dialog.vue'
-import Tooltip from '~/components/Tooltip.vue'
 import { settings } from '~/logic'
 
 import { version } from '../../../../package.json'

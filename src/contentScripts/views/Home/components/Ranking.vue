@@ -1,11 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 
-import BangumiCard from '~/components/BangumiCard/BangumiCard.vue'
-import BangumiCardSkeleton from '~/components/BangumiCard/BangumiCardSkeleton.vue'
-import OverlayScrollbarsComponent from '~/components/OverlayScrollbarsComponent'
-import VideoCard from '~/components/VideoCard/VideoCard.vue'
-import VideoCardSkeleton from '~/components/VideoCard/VideoCardSkeleton.vue'
 import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { TOP_BAR_VISIBILITY_CHANGE } from '~/constants/globalEvents'

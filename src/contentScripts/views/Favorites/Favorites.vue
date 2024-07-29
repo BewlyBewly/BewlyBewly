@@ -1,14 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 
-import Button from '~/components/Button.vue'
-import Empty from '~/components/Empty.vue'
-import Input from '~/components/Input.vue'
-import Loading from '~/components/Loading.vue'
-import Select from '~/components/Select.vue'
-import Tooltip from '~/components/Tooltip.vue'
 import type { FavoriteCategory, FavoriteResource } from '~/components/TopBar/types'
-import VideoCard from '~/components/VideoCard/VideoCard.vue'
 import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { TOP_BAR_VISIBILITY_CHANGE } from '~/constants/globalEvents'

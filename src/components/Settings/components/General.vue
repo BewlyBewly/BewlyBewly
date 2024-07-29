@@ -2,9 +2,6 @@
 import { useI18n } from 'vue-i18n'
 import draggable from 'vuedraggable'
 
-import Button from '~/components/Button.vue'
-import Radio from '~/components/Radio.vue'
-import Select from '~/components/Select.vue'
 import { settings } from '~/logic'
 import { useMainStore } from '~/stores/mainStore'
 
