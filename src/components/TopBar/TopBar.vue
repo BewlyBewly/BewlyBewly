@@ -488,10 +488,10 @@ defineExpose({
               :class="{ activated: popupVisible.channels }"
               style="backdrop-filter: var(--bew-filter-glass-1);"
               grid="~ place-items-center" border="1 $bew-border-color"
-              rounded="50px" duration-300
+              rounded="46px" duration-300
               bg="$bew-elevated hover:$bew-theme-color dark-hover:white"
               shadow="$bew-shadow-2"
-              w-50px h-50px transform-gpu
+              w-46px h-46px transform-gpu
             >
 
               <svg
@@ -521,9 +521,9 @@ defineExpose({
             <SearchBar
               v-if="showSearchBar"
               style="
-              --b-search-bar-color: var(--bew-elevated);
-              --b-search-bar-hover: var(--bew-elevated-hover);
-            "
+                --b-search-bar-color: var(--bew-elevated);
+                --b-search-bar-hover: var(--bew-elevated-hover);
+              "
             />
           </Transition>
         </div>
@@ -540,7 +540,7 @@ defineExpose({
               backdrop-filter: var(--bew-filter-glass-1);
               box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
             "
-            flex="~ items-center gap-1" h-50px px-6px bg="$bew-elevated"
+            flex="~ items-center gap-1" h-46px px-5px bg="$bew-elevated"
             transition="transition-property-colors duration-150"
             text="$bew-text-1" border="1 $bew-border-color" rounded-full
             transform-gpu
@@ -694,65 +694,68 @@ defineExpose({
                 </Transition>
               </div>
 
-              <div
-                w-4px h="40%" bg="$bew-fill-1" mx-1
-                rounded-4px
-              />
+              <div class="hidden lg:flex" gap-1 items-center>
+                <!-- Divider -->
+                <div
+                  w-4px h-22px bg="$bew-fill-1" mx-1
+                  rounded-4px
+                />
 
-              <!-- Upload -->
-              <div
-                ref="upload"
-                class="right-side-item"
-                :class="{ active: popupVisible.upload }"
-              >
-                <a
-                  href="https://member.bilibili.com/platform/upload/video/frame"
-                  target="_blank"
-                  :title="$t('topbar.upload')"
+                <!-- Upload -->
+                <div
+                  ref="upload"
+                  class="right-side-item"
+                  :class="{ active: popupVisible.upload }"
                 >
-                  <div i-mingcute:upload-2-line flex-shrink-0 />
-                </a>
-
-                <Transition name="slide-in">
-                  <UploadPop
-                    v-if="popupVisible.upload"
-                    class="bew-popover"
-                  />
-                </Transition>
-              </div>
-
-              <!-- Notifications -->
-              <div
-                ref="notifications"
-                class="right-side-item"
-                :class="{ active: popupVisible.notifications }"
-              >
-                <template v-if="unReadMessageCount > 0">
-                  <div
-                    v-if="settings.topBarIconBadges === 'number'"
-                    class="unread-num-dot"
+                  <a
+                    href="https://member.bilibili.com/platform/upload/video/frame"
+                    target="_blank"
+                    :title="$t('topbar.upload')"
                   >
-                    {{ unReadMessageCount > 99 ? '99+' : unReadMessageCount }}
-                  </div>
-                  <div
-                    v-else-if="settings.topBarIconBadges === 'dot'"
-                    class="unread-dot"
-                  />
-                </template>
-                <a
-                  href="https://message.bilibili.com"
-                  :target="isHomePage() ? '_blank' : '_self'"
-                  :title="$t('topbar.notifications')"
-                >
-                  <div i-tabler:bell />
-                </a>
+                    <div i-mingcute:upload-2-line flex-shrink-0 />
+                  </a>
 
-                <Transition name="slide-in">
-                  <NotificationsPop
-                    v-if="popupVisible.notifications"
-                    class="bew-popover"
-                  />
-                </Transition>
+                  <Transition name="slide-in">
+                    <UploadPop
+                      v-if="popupVisible.upload"
+                      class="bew-popover"
+                    />
+                  </Transition>
+                </div>
+
+                <!-- Notifications -->
+                <div
+                  ref="notifications"
+                  class="right-side-item"
+                  :class="{ active: popupVisible.notifications }"
+                >
+                  <template v-if="unReadMessageCount > 0">
+                    <div
+                      v-if="settings.topBarIconBadges === 'number'"
+                      class="unread-num-dot"
+                    >
+                      {{ unReadMessageCount > 99 ? '99+' : unReadMessageCount }}
+                    </div>
+                    <div
+                      v-else-if="settings.topBarIconBadges === 'dot'"
+                      class="unread-dot"
+                    />
+                  </template>
+                  <a
+                    href="https://message.bilibili.com"
+                    :target="isHomePage() ? '_blank' : '_self'"
+                    :title="$t('topbar.notifications')"
+                  >
+                    <div i-tabler:bell />
+                  </a>
+
+                  <Transition name="slide-in">
+                    <NotificationsPop
+                      v-if="popupVisible.notifications"
+                      class="bew-popover"
+                    />
+                  </Transition>
+                </div>
               </div>
             </template>
           </div>
@@ -935,8 +938,8 @@ defineExpose({
     --uno: "relative text-$bew-text-1 flex items-center";
 
     &:not(.avatar) a {
-      --uno: "text-xl flex items-center p-2 rounded-40px duration-300 relative z-5";
-      --uno: "h-35px h-35px";
+      --uno: "text-xl grid place-items-center rounded-40px duration-300 relative z-5";
+      --uno: "h-34px w-34px";
     }
 
     &.active a,
