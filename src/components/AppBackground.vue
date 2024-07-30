@@ -41,8 +41,9 @@ function setAppWallpaperMaskingOpacity() {
       <!-- linear gradient background -->
       <div
         v-if="settings.useLinearGradientThemeColorBackground && isDark"
+        :style="{ opacity: activatedPage === AppPage.Search ? 1 : 0.4 }"
         pos="absolute top-0 left-0" w-full h-full z-0 pointer-events-none
-        of-hidden opacity-60
+        of-hidden
       >
         <div
           pos="absolute bottom--20% left-50%" transform="translate-x--1/2" w="120%" h="60%" bg="$bew-theme-color"
