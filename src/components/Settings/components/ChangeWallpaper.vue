@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import Input from '~/components/Input.vue'
-import Radio from '~/components/Radio.vue'
-import Slider from '~/components/Slider.vue'
-import Tooltip from '~/components/Tooltip.vue'
 import { WALLPAPERS } from '~/constants/imgs'
 import { settings } from '~/logic'
 import { compressAndResizeImage } from '~/utils/main'

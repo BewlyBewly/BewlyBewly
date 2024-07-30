@@ -15,8 +15,13 @@ defineProps<{
   activatedPage: AppPage
 }>()
 
-const emit = defineEmits(['changePage', 'settingsVisibilityChange', 'refresh', 'backToTop'])
-
+// const emit = defineEmits(['changePage', 'settingsVisibilityChange', 'refresh', 'backToTop'])
+const emit = defineEmits<{
+  (e: 'changePage', page: AppPage): void
+  (e: 'settingsVisibilityChange'): void
+  (e: 'refresh'): void
+  (e: 'backToTop'): void
+}>()
 const mainStore = useMainStore()
 const { isDark, toggleDark } = useDark()
 const { reachTop } = useBewlyApp()

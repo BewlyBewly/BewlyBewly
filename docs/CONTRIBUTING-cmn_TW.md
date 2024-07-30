@@ -10,6 +10,28 @@
 
 ### 開發（Chrome 或 Edge）
 
+#### Chrome 或 Edge 的第一種方法 （推薦）
+
+1. 執行 pnpm 指令
+
+```bash
+# 安裝依賴
+pnpm install
+
+# 建立一個用戶的帳戶資料夾，用於擴充功能存儲登入狀態
+mkdir web-ext-profile
+
+# 運行專案
+pnpm dev
+
+# 打完這條指令之後，會自動開啓一個新的 Chrome 視窗並打開 BiliBili 網站
+pnpm start:chromium
+```
+
+2. 之後每次修改擴充功能，他都會重新載入內容，你可以透過重新整理頁面來查看變更內容
+
+#### Chrome 或 Edge 的另外一種方法
+
 1. 執行 pnpm 指令
 
 ```bash
@@ -43,6 +65,28 @@ pnpm build
 然後打包 `extension` 下的檔案
 
 ### 開發（Firefox）
+
+#### Firefox 的第一種方法 （推薦）
+
+1. 執行 pnpm 命令
+
+```bash
+# 安裝依賴
+pnpm install
+
+# 建立一個用戶的帳戶資料夾，用於擴充功能存儲登入狀態
+mkdir web-ext-profile
+
+# 運行專案
+pnpm dev
+
+# 打完這條指令之後，會自動開啓一個新的 Firefox 視窗並打開 BiliBili 網站
+pnpm start:firefox
+```
+
+2. 之後每次修改擴充功能，它都會重新加載，你可以透過重新整理頁面來查看變更內容
+
+#### Firefox 的另一種方法
 
 1. 執行 pnpm 命令
 

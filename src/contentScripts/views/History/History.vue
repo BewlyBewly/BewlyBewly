@@ -2,9 +2,6 @@
 import { useDateFormat } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 
-import Button from '~/components/Button.vue'
-import Empty from '~/components/Empty.vue'
-import Progress from '~/components/Progress.vue'
 import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import type { HistoryResult, List as HistoryItem } from '~/models/history/history'

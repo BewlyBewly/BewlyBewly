@@ -5,6 +5,7 @@ import type { App } from 'vue'
 import Toast, { POSITION } from 'vue-toastification'
 import { getCurrentContext } from 'webext-bridge'
 
+import components from '~/components'
 import { i18n } from '~/utils/i18n'
 
 const pinia = createPinia()
@@ -29,5 +30,6 @@ export async function setupApp(app: App) {
       newestOnTop: true,
       position: POSITION.TOP_RIGHT,
     })
+  app.use(components)
   app.use(pinia)
 }
