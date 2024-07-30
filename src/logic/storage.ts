@@ -83,7 +83,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   reduceFrostedGlassBlur: false,
   dockItemVisibilityList: [],
   disableLightDarkModeSwitcherOnDock: false,
-  moveBackToTopOrRefreshButtonToDock: false,
+  moveBackToTopOrRefreshButtonToDock: true,
 
   theme: 'auto',
   themeColor: '#00a1d6',
