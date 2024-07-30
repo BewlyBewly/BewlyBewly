@@ -30,6 +30,7 @@ export interface Settings {
 
   theme: 'light' | 'dark' | 'auto'
   themeColor: string
+  useLinearGradientThemeColorBackground: boolean
   wallpaperMode: 'buildIn' | 'byUrl'
   wallpaper: string
   enableWallpaperMasking: boolean
@@ -87,6 +88,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
 
   theme: 'auto',
   themeColor: '#00a1d6',
+  useLinearGradientThemeColorBackground: false,
   wallpaperMode: 'buildIn',
   wallpaper: '',
   enableWallpaperMasking: false,
