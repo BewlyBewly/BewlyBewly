@@ -899,7 +899,7 @@ defineExpose({
     }
 
     .avatar-img {
-      --uno: "z-1 shadow-$bew-shadow-2";
+      --uno: "z-1";
     }
 
     .avatar-shadow {
