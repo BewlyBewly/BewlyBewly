@@ -496,7 +496,7 @@ defineExpose({
 
               <svg
                 t="1720198072316" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                p-id="1477" width="40" height="40"
+                p-id="1477" width="38" height="38"
                 un-fill="$bew-theme-color dark:white" un-group-hover:fill="white dark:$bew-theme-color"
                 duration-300 mt--1px
               >
@@ -758,57 +758,57 @@ defineExpose({
                 </div>
               </div>
             </template>
-          </div>
 
-          <!-- Avatar -->
-          <div
-            v-if="isLogin"
-            ref="avatar"
-            :class="{ hover: popupVisible.userPanel }"
-            class="avatar right-side-item"
-          >
-            <a
-              ref="avatarImg"
-              :href="`https://space.bilibili.com/${mid}`"
-              :target="isHomePage() ? '_blank' : '_self'"
-              class="avatar-img"
-              :class="{ hover: popupVisible.userPanel }"
-              :style="{
-                backgroundImage: `url(${`${userInfo.face}`.replace(
-                  'http:',
-                  '',
-                )})`,
-              }"
-            />
+            <!-- Avatar -->
             <div
-              ref="avatarShadow"
-              class="avatar-shadow"
+              v-if="isLogin"
+              ref="avatar"
               :class="{ hover: popupVisible.userPanel }"
-              :style="{
-                backgroundImage: `url(${`${userInfo.face}`.replace(
-                  'http:',
-                  '',
-                )})`,
-              }"
-            />
-            <svg
-              v-if="userInfo.vip?.status === 1"
-              class="vip-img"
-              :class="{ hover: popupVisible.userPanel }"
-              :style="{ opacity: popupVisible.userPanel ? 1 : 0 }"
-              bg="[url(https://i0.hdslb.com/bfs/seed/jinkela/short/user-avatar/big-vip.svg)] cover no-repeat"
-              w="30%" h="30%" z-1
-              pos="absolute bottom--14px right-24px" duration-300
-            />
-            <Transition name="slide-in">
-              <UserPanelPop
-                v-if="popupVisible.userPanel"
-                class="bew-popover"
-                :user-info="userInfo"
-                after:h="!0"
-                pos="!left-auto !right-0" transform="!translate-x-0"
+              class="avatar right-side-item"
+            >
+              <a
+                ref="avatarImg"
+                :href="`https://space.bilibili.com/${mid}`"
+                :target="isHomePage() ? '_blank' : '_self'"
+                class="avatar-img"
+                :class="{ hover: popupVisible.userPanel }"
+                :style="{
+                  backgroundImage: `url(${`${userInfo.face}`.replace(
+                    'http:',
+                    '',
+                  )})`,
+                }"
               />
-            </Transition>
+              <div
+                ref="avatarShadow"
+                class="avatar-shadow"
+                :class="{ hover: popupVisible.userPanel }"
+                :style="{
+                  backgroundImage: `url(${`${userInfo.face}`.replace(
+                    'http:',
+                    '',
+                  )})`,
+                }"
+              />
+              <svg
+                v-if="userInfo.vip?.status === 1"
+                class="vip-img"
+                :class="{ hover: popupVisible.userPanel }"
+                :style="{ opacity: popupVisible.userPanel ? 1 : 0 }"
+                bg="[url(https://i0.hdslb.com/bfs/seed/jinkela/short/user-avatar/big-vip.svg)] contain no-repeat"
+                w="28%" h="28%" z-1
+                pos="absolute bottom--20px right-28px" duration-300
+              />
+              <Transition name="slide-in">
+                <UserPanelPop
+                  v-if="popupVisible.userPanel"
+                  class="bew-popover"
+                  :user-info="userInfo"
+                  after:h="!0"
+                  pos="!left-auto !right-0" transform="!translate-x-0"
+                />
+              </Transition>
+            </div>
           </div>
         </div>
       </main>
@@ -881,7 +881,7 @@ defineExpose({
 
 .right-side {
   .avatar {
-    --uno: "flex items-center ml-4 relative z-1 rounded-1/2";
+    --uno: "flex items-center relative z-1 rounded-1/2";
 
     // Add a safety zone to prevent the avatar from collapsing quickly after leaving
     &:hover::after,
@@ -891,10 +891,10 @@ defineExpose({
 
     .avatar-img,
     .avatar-shadow {
-      --uno: "duration-300 rounded-1/2 w-40px h-40px bg-cover bg-center";
+      --uno: "duration-300 rounded-1/2 w-34px h-34px ml-1 bg-cover bg-center";
 
       &.hover {
-        --uno: "transform scale-230 translate-y-50px translate-x--36px";
+        --uno: "transform scale-230 translate-y-60px translate-x--36px";
       }
     }
 
@@ -938,7 +938,7 @@ defineExpose({
     --uno: "relative text-$bew-text-1 flex items-center";
 
     &:not(.avatar) a {
-      --uno: "text-xl grid place-items-center rounded-40px duration-300 relative z-5";
+      --uno: "text-lg grid place-items-center rounded-40px duration-300 relative z-5";
       --uno: "h-34px w-34px";
     }
 
