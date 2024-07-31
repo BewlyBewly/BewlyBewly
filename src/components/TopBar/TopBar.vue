@@ -487,15 +487,15 @@ defineExpose({
               :class="{ activated: popupVisible.channels }"
               style="backdrop-filter: var(--bew-filter-glass-1);"
               grid="~ place-items-center" border="1 $bew-border-color"
-              rounded="50px" duration-300
+              rounded="46px" duration-300
               bg="$bew-elevated hover:$bew-theme-color dark-hover:white"
               shadow="$bew-shadow-2"
-              w-50px h-50px transform-gpu
+              w-46px h-46px transform-gpu
             >
 
               <svg
                 t="1720198072316" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                p-id="1477" width="40" height="40"
+                p-id="1477" width="38" height="38"
                 un-fill="$bew-theme-color dark:white" un-group-hover:fill="white dark:$bew-theme-color"
                 duration-300 mt--1px
               >
@@ -520,9 +520,9 @@ defineExpose({
             <SearchBar
               v-if="showSearchBar"
               style="
-              --b-search-bar-color: var(--bew-elevated);
-              --b-search-bar-hover: var(--bew-elevated-hover);
-            "
+                --b-search-bar-color: var(--bew-elevated);
+                --b-search-bar-hover: var(--bew-elevated-hover);
+              "
             />
           </Transition>
         </div>
@@ -539,7 +539,7 @@ defineExpose({
               backdrop-filter: var(--bew-filter-glass-1);
               box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
             "
-            flex="~ items-center gap-1" h-50px px-6px bg="$bew-elevated"
+            flex="~ items-center gap-1" h-46px px-5px bg="$bew-elevated"
             transition="transition-property-colors duration-150"
             text="$bew-text-1" border="1 $bew-border-color" rounded-full
             transform-gpu
@@ -693,118 +693,121 @@ defineExpose({
                 </Transition>
               </div>
 
-              <div
-                w-4px h="40%" bg="$bew-fill-1" mx-1
-                rounded-4px
-              />
+              <div class="hidden lg:flex" gap-1 items-center>
+                <!-- Divider -->
+                <div
+                  w-4px h-22px bg="$bew-fill-1" mx-1
+                  rounded-4px
+                />
 
-              <!-- Upload -->
-              <div
-                ref="upload"
-                class="right-side-item"
-                :class="{ active: popupVisible.upload }"
-              >
-                <a
-                  href="https://member.bilibili.com/platform/upload/video/frame"
-                  target="_blank"
-                  :title="$t('topbar.upload')"
+                <!-- Upload -->
+                <div
+                  ref="upload"
+                  class="right-side-item"
+                  :class="{ active: popupVisible.upload }"
                 >
-                  <div i-mingcute:upload-2-line flex-shrink-0 />
-                </a>
-
-                <Transition name="slide-in">
-                  <UploadPop
-                    v-if="popupVisible.upload"
-                    class="bew-popover"
-                  />
-                </Transition>
-              </div>
-
-              <!-- Notifications -->
-              <div
-                ref="notifications"
-                class="right-side-item"
-                :class="{ active: popupVisible.notifications }"
-              >
-                <template v-if="unReadMessageCount > 0">
-                  <div
-                    v-if="settings.topBarIconBadges === 'number'"
-                    class="unread-num-dot"
+                  <a
+                    href="https://member.bilibili.com/platform/upload/video/frame"
+                    target="_blank"
+                    :title="$t('topbar.upload')"
                   >
-                    {{ unReadMessageCount > 99 ? '99+' : unReadMessageCount }}
-                  </div>
-                  <div
-                    v-else-if="settings.topBarIconBadges === 'dot'"
-                    class="unread-dot"
-                  />
-                </template>
-                <a
-                  href="https://message.bilibili.com"
-                  :target="isHomePage() ? '_blank' : '_self'"
-                  :title="$t('topbar.notifications')"
-                >
-                  <div i-tabler:bell />
-                </a>
+                    <div i-mingcute:upload-2-line flex-shrink-0 />
+                  </a>
 
-                <Transition name="slide-in">
-                  <NotificationsPop
-                    v-if="popupVisible.notifications"
-                    class="bew-popover"
-                  />
-                </Transition>
+                  <Transition name="slide-in">
+                    <UploadPop
+                      v-if="popupVisible.upload"
+                      class="bew-popover"
+                    />
+                  </Transition>
+                </div>
+
+                <!-- Notifications -->
+                <div
+                  ref="notifications"
+                  class="right-side-item"
+                  :class="{ active: popupVisible.notifications }"
+                >
+                  <template v-if="unReadMessageCount > 0">
+                    <div
+                      v-if="settings.topBarIconBadges === 'number'"
+                      class="unread-num-dot"
+                    >
+                      {{ unReadMessageCount > 99 ? '99+' : unReadMessageCount }}
+                    </div>
+                    <div
+                      v-else-if="settings.topBarIconBadges === 'dot'"
+                      class="unread-dot"
+                    />
+                  </template>
+                  <a
+                    href="https://message.bilibili.com"
+                    :target="isHomePage() ? '_blank' : '_self'"
+                    :title="$t('topbar.notifications')"
+                  >
+                    <div i-tabler:bell />
+                  </a>
+
+                  <Transition name="slide-in">
+                    <NotificationsPop
+                      v-if="popupVisible.notifications"
+                      class="bew-popover"
+                    />
+                  </Transition>
+                </div>
               </div>
             </template>
-          </div>
 
-          <!-- Avatar -->
-          <div
-            v-if="isLogin"
-            ref="avatar"
-            :class="{ hover: popupVisible.userPanel }"
-            class="avatar right-side-item"
-          >
-            <a
-              ref="avatarImg"
-              :href="`https://space.bilibili.com/${mid}`"
-              :target="isHomePage() ? '_blank' : '_self'"
-              class="avatar-img"
-              :class="{ hover: popupVisible.userPanel }"
-              :style="{
-                backgroundImage: `url(${`${userInfo.face}`.replace(
-                  'http:',
-                  '',
-                )})`,
-              }"
-            />
+            <!-- Avatar -->
             <div
-              ref="avatarShadow"
-              class="avatar-shadow"
+              v-if="isLogin"
+              ref="avatar"
               :class="{ hover: popupVisible.userPanel }"
-              :style="{
-                backgroundImage: `url(${`${userInfo.face}`.replace(
-                  'http:',
-                  '',
-                )})`,
-              }"
-            />
-            <svg
-              v-if="userInfo.vip?.status === 1"
-              class="vip-img"
-              :class="{ hover: popupVisible.userPanel }"
-              :style="{ opacity: popupVisible.userPanel ? 1 : 0 }"
-              bg="[url(https://i0.hdslb.com/bfs/seed/jinkela/short/user-avatar/big-vip.svg)] cover no-repeat"
-              w="30%" h="30%" z-1
-              pos="absolute bottom--14px right-24px" duration-300
-            />
-            <Transition name="slide-in">
-              <UserPanelPop
-                v-if="popupVisible.userPanel"
-                class="bew-popover"
-                :user-info="userInfo"
-                after:h="!0"
-                pos="!left-auto !right-0" transform="!translate-x-0"
+              class="avatar right-side-item"
+            >
+              <a
+                ref="avatarImg"
+                :href="`https://space.bilibili.com/${mid}`"
+                :target="isHomePage() ? '_blank' : '_self'"
+                class="avatar-img"
+                :class="{ hover: popupVisible.userPanel }"
+                :style="{
+                  backgroundImage: `url(${`${userInfo.face}`.replace(
+                    'http:',
+                    '',
+                  )})`,
+                }"
               />
-            </Transition>
+              <div
+                ref="avatarShadow"
+                class="avatar-shadow"
+                :class="{ hover: popupVisible.userPanel }"
+                :style="{
+                  backgroundImage: `url(${`${userInfo.face}`.replace(
+                    'http:',
+                    '',
+                  )})`,
+                }"
+              />
+              <svg
+                v-if="userInfo.vip?.status === 1"
+                class="vip-img"
+                :class="{ hover: popupVisible.userPanel }"
+                :style="{ opacity: popupVisible.userPanel ? 1 : 0 }"
+                bg="[url(https://i0.hdslb.com/bfs/seed/jinkela/short/user-avatar/big-vip.svg)] contain no-repeat"
+                w="28%" h="28%" z-1
+                pos="absolute bottom--20px right-28px" duration-300
+              />
+              <Transition name="slide-in">
+                <UserPanelPop
+                  v-if="popupVisible.userPanel"
+                  class="bew-popover"
+                  :user-info="userInfo"
+                  after:h="!0"
+                  pos="!left-auto !right-0" transform="!translate-x-0"
+                />
+              </Transition>
+            </div>
           </div>
         </div>
       </main>
@@ -877,7 +880,7 @@ defineExpose({
 
 .right-side {
   .avatar {
-    --uno: "flex items-center ml-4 relative z-1 rounded-1/2";
+    --uno: "flex items-center relative z-1 rounded-1/2";
 
     // Add a safety zone to prevent the avatar from collapsing quickly after leaving
     &:hover::after,
@@ -887,15 +890,15 @@ defineExpose({
 
     .avatar-img,
     .avatar-shadow {
-      --uno: "duration-300 rounded-1/2 w-40px h-40px bg-cover bg-center";
+      --uno: "duration-300 rounded-1/2 w-34px h-34px ml-1 bg-cover bg-center";
 
       &.hover {
-        --uno: "transform scale-230 translate-y-50px translate-x--36px";
+        --uno: "transform scale-230 translate-y-60px translate-x--36px";
       }
     }
 
     .avatar-img {
-      --uno: "z-1 shadow-$bew-shadow-2";
+      --uno: "z-1";
     }
 
     .avatar-shadow {
@@ -934,8 +937,8 @@ defineExpose({
     --uno: "relative text-$bew-text-1 flex items-center";
 
     &:not(.avatar) a {
-      --uno: "text-xl flex items-center p-2 rounded-40px duration-300 relative z-5";
-      --uno: "h-35px h-35px";
+      --uno: "text-lg grid place-items-center rounded-40px duration-300 relative z-5";
+      --uno: "h-34px w-34px";
     }
 
     &.active a,

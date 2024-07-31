@@ -169,7 +169,7 @@ async function handleClearSearchHistory() {
 </script>
 
 <template>
-  <div id="search-wrap" w="full" max-w="550px" pos="relative">
+  <div id="search-wrap" w="full" max-w="550px" h-46px pos="relative">
     <div
       v-if="!darkenOnFocus && isFocus"
       pos="fixed top-0 left-0"
@@ -192,7 +192,12 @@ async function handleClearSearchHistory() {
       :style="{ backdropFilter: isFocus ? 'blur(15px)' : 'blur(0)' }"
     />
 
-    <div class="search-bar group" :class="isFocus ? 'focus' : ''" flex="~" items-center pos="relative">
+    <div
+      class="search-bar group"
+      :class="isFocus ? 'focus' : ''"
+      flex="~ items-center" pos="relative"
+      h-inherit
+    >
       <Transition name="focus-character">
         <img
           v-show="focusedCharacter && isFocus" :src="focusedCharacter"
@@ -205,7 +210,7 @@ async function handleClearSearchHistory() {
         v-model="keyword"
         rounded="60px focus:$bew-radius"
         p="l-6 r-18 y-3"
-        h-50px
+        h-inherit
         text="$bew-text-1"
         un-border="1 solid $bew-border-color focus:$bew-theme-color"
         transition="all duration-300"
@@ -234,7 +239,7 @@ async function handleClearSearchHistory() {
         transition="all duration-300"
         border-none
         outline-none
-        pos="absolute right-2"
+        pos="absolute right-6px"
         bg="hover:$bew-fill-2"
         filter="group-focus-within:~"
         style="--un-drop-shadow: drop-shadow(0 0 6px var(--bew-theme-color))"

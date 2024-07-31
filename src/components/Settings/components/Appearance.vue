@@ -115,6 +115,10 @@ function changeWallpaper(url: string) {
           </div>
         </div>
       </SettingsItem>
+
+      <SettingsItem title="Use linear gradient theme color background when in dark mode">
+        <Radio v-model="settings.useLinearGradientThemeColorBackground" />
+      </SettingsItem>
     </SettingsItemGroup>
 
     <ChangeWallpaper type="global" />

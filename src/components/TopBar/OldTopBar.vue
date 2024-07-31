@@ -488,15 +488,15 @@ defineExpose({
               :class="{ activated: popupVisible.channels }"
               style="backdrop-filter: var(--bew-filter-glass-1);"
               grid="~ place-items-center" border="1 $bew-border-color"
-              rounded="50px" duration-300
+              rounded="46px" duration-300
               bg="$bew-elevated hover:$bew-theme-color dark-hover:white"
               shadow="$bew-shadow-2"
-              w-50px h-50px transform-gpu
+              w-46px h-46px transform-gpu
             >
 
               <svg
                 t="1720198072316" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                p-id="1477" width="40" height="40"
+                p-id="1477" width="38" height="38"
                 un-fill="$bew-theme-color dark:white" un-group-hover:fill="white dark:$bew-theme-color"
                 duration-300 mt--1px
               >
@@ -595,10 +595,10 @@ defineExpose({
             class="others"
             :class="{ inactive: rightSideInactive }"
             style="
-            backdrop-filter: var(--bew-filter-glass-1);
-            box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
-          "
-            flex h-50px px-6px bg="$bew-elevated"
+              backdrop-filter: var(--bew-filter-glass-1);
+              box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
+            "
+            flex h-46px px-5px bg="$bew-elevated"
             transition="transition-property-colors duration-150"
             text="$bew-text-1" border="1 $bew-border-color" rounded-full
             transform-gpu
@@ -946,7 +946,7 @@ defineExpose({
     --uno: "relative text-$bew-text-1 flex items-center";
 
     &:not(.avatar) a {
-      --uno: "text-xl flex items-center p-2 rounded-40px duration-300 relative z-5";
+      --uno: "text-lg flex items-center p-2 rounded-40px duration-300 relative z-5";
       --uno: "h-35px h-35px";
     }
 
