@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import DOMPurify from 'dompurify'
 import browser from 'webextension-polyfill'
 
 import { settings } from '~/logic'
