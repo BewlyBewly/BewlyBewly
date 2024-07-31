@@ -626,7 +626,9 @@
     .follow-dialog-wrap .follow-dialog-window,
     .follow-dialog-wrap .follow-dialog-window .title,
     .follow-dialog-wrap .follow-dialog-window .content,
-    .bili-at-popup__user--selected {
+    .bili-at-popup__user--selected,
+    .bili-emoji__pkg:not(.active):hover,
+    .bili-emoji__list__item:hover {
       background-color: var(--bew-elevated-solid);
     }
 
@@ -734,7 +736,8 @@
     .emoji-box.bottom:before,
     .btn-container .btn,
     .follow-dialog-wrap .follow-dialog-window .content .group-list ul .follow-group-mask,
-    .comment-bilibili-con .btn .btn-cancel {
+    .comment-bilibili-con .btn .btn-cancel,
+    .bili-dyn-forward-publishing__tools__item.emoji {
       background: unset;
     }
 
