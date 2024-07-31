@@ -38,32 +38,33 @@ function setAppWallpaperMaskingOpacity() {
 <template>
   <div>
     <Transition name="fade">
+      <!-- TODO: use linear-gradient to implement this -->
       <!-- linear gradient background -->
       <div
         v-if="settings.useLinearGradientThemeColorBackground && isDark"
         :style="{ opacity: activatedPage === AppPage.Search ? 1 : 0.4 }"
         pos="absolute top-0 left-0" w-full h-full z-0 pointer-events-none
-        of-hidden
+        of-hidden transform-gpu
       >
         <div
           pos="absolute bottom--20% left-50%" transform="translate-x--1/2" w="120%" h="60%" bg="$bew-theme-color"
-          important-blur-140 important-saturate-240
-          rounded-full z-1
+          important-blur-80 important-saturate-240 transform-gpu
+          rounded="1/2" z-1
         />
         <div
           pos="absolute bottom--30% left-50%" transform="translate-x--1/2" w="110%" h="50%" bg="$bew-theme-color"
-          important-blur-120 important-brightness-120
-          rounded-full z-2
+          important-blur-80 important-brightness-120 transform-gpu
+          rounded="1/2" z-2
         />
         <div
           pos="absolute bottom--30% left-50%" transform="translate-x--1/2" w="110%" h="50%" bg="$bew-theme-color"
-          important-blur-100 important-brightness-180
-          rounded-full z-3
+          important-blur-60 important-brightness-180 transform-gpu
+          rounded="1/2" z-3
         />
         <div
           pos="absolute bottom--36% left-50%" transform="translate-x--1/2" w="110%" h="40%" bg-white
-          important-blur-100
-          rounded-full z-3
+          important-blur-60 transform-gpu
+          rounded="1/2" z-3
         />
       </div>
     </Transition>
