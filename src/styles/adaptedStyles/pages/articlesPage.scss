@@ -163,7 +163,9 @@
     .modalBox .cancel,
     .normal-article-holder .color-default,
     .normal-article-holder h1,
-    .article-up-info .nameplate-ctnr .info {
+    .article-up-info .nameplate-ctnr .info,
+    .read-article-holder .bangumi-card-holder .bangumi-title,
+    .read-article-holder .article-card-holder .article-card-wrap .title {
       color: var(--bew-text-1);
     }
 
@@ -390,7 +392,9 @@
     .list-container .article-list-block .article-item .item-holder .article-content .article-left-block,
     .modalBox .cancel,
     .article-up-info .nameplate-ctnr,
-    .article-up-info .nameplate-ctnr .info {
+    .article-up-info .nameplate-ctnr .info,
+    .read-article-holder .bangumi-card-holder,
+    .read-article-holder .article-card-holder {
       border-color: var(--bew-border-color);
     }
 
