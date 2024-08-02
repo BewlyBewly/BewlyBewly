@@ -220,7 +220,8 @@
       background-color: var(--bew-theme-color-10);
     }
 
-    .bili-topic-new__default__create__icon {
+    .bili-topic-new__default__create__icon,
+    .bili-topic-selector__bulletin__clear {
       background-color: var(--bew-theme-color-20);
     }
 
@@ -626,7 +627,9 @@
     .follow-dialog-wrap .follow-dialog-window,
     .follow-dialog-wrap .follow-dialog-window .title,
     .follow-dialog-wrap .follow-dialog-window .content,
-    .bili-at-popup__user--selected {
+    .bili-at-popup__user--selected,
+    .bili-emoji__pkg:not(.active):hover,
+    .bili-emoji__list__item:hover {
       background-color: var(--bew-elevated-solid);
     }
 
@@ -685,7 +688,8 @@
       background-color: var(--bew-fill-2);
     }
 
-    #page-setting #setting-new-tag-btn {
+    #page-setting #setting-new-tag-btn,
+    .bili-dyn-forward-publishing__editor {
       background: var(--bew-content-solid);
     }
 
@@ -734,7 +738,8 @@
     .emoji-box.bottom:before,
     .btn-container .btn,
     .follow-dialog-wrap .follow-dialog-window .content .group-list ul .follow-group-mask,
-    .comment-bilibili-con .btn .btn-cancel {
+    .comment-bilibili-con .btn .btn-cancel,
+    .bili-dyn-forward-publishing__tools__item.emoji {
       background: unset;
     }
 
