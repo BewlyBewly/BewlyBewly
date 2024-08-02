@@ -1,8 +1,8 @@
 .bewly-design.creativeCenterPage {
   // #region theme color adaption part
   // Increase the priority of the style inside by writing a non-existent selector in `:not()`
-  :not(foobar) {
-  }
+  // :not(foobar) {
+  // }
   // #endregion
 
   // #region dark mode adaption part
@@ -14,12 +14,20 @@
     micro-app[name="upower-manage"] .rights .level-right:after,
     micro-app[name="video-up"] .video-complete .bg,
     .article-card.v2 .cover-wrp .duration,
-    .bmc-video-card .video-preview__duration {
+    .bmc-video-card .video-preview__duration,
+    .setting .watermark-setting .watermark-wrp .watermark-position-wrp,
+    .chief-recommend-module .carousel-box .carousel-module .panel .title {
       filter: var(--bew-filter-force-dark);
     }
 
-    .nav-item.message iframe {
+    .nav-item.message iframe,
+    .setting .watermark-setting .watermark-wrp .watermark-position-wrp .preview-img {
       filter: none !important;
+    }
+
+    .setting-card-switch,
+    .note-setting-wrp {
+      color: black;
     }
   }
   // #endregion
