@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import { Icon } from '@iconify/vue'
+
+import { settings } from '~/logic'
 
 import type { MenuItem } from './types'
 import { MenuType } from './types'
-import { settings } from '~/logic'
 
 const emit = defineEmits(['close'])
 
@@ -21,7 +21,6 @@ const settingsMenu = {
 }
 const activatedMenuItem = ref<MenuType>(MenuType.General)
 const title = ref<string>(t('settings.title'))
-const preventCloseSettings = ref<boolean>(false)
 const scrollbarRef = ref()
 
 watch(
@@ -32,38 +31,36 @@ watch(
   },
 )
 
-provide('preventCloseSettings', preventCloseSettings)
-
 const settingsMenuItems = computed((): MenuItem[] => {
   return [
     {
       value: MenuType.General,
-      icon: 'mingcute:settings-3-line',
-      iconActivated: 'mingcute:settings-3-fill',
+      icon: 'i-mingcute:settings-3-line',
+      iconActivated: 'i-mingcute:settings-3-fill',
       title: t('settings.menu_general'),
     },
     {
       value: MenuType.Appearance,
       title: t('settings.menu_appearance'),
-      icon: 'mingcute:paint-brush-line',
-      iconActivated: 'mingcute:paint-brush-fill',
+      icon: 'i-mingcute:paint-brush-line',
+      iconActivated: 'i-mingcute:paint-brush-fill',
     },
     {
       value: MenuType.SearchPage,
-      icon: 'mingcute:search-2-line',
-      iconActivated: 'mingcute:search-2-fill',
+      icon: 'i-mingcute:search-2-line',
+      iconActivated: 'i-mingcute:search-2-fill',
       title: t('settings.menu_search_page'),
     },
     {
       value: MenuType.Home,
-      icon: 'mingcute:home-5-line',
-      iconActivated: 'mingcute:home-5-fill',
+      icon: 'i-mingcute:home-5-line',
+      iconActivated: 'i-mingcute:home-5-fill',
       title: t('settings.menu_home'),
     },
     {
       value: MenuType.Compatibility,
-      icon: 'mingcute:polygon-line',
-      iconActivated: 'mingcute:polygon-fill',
+      icon: 'i-mingcute:polygon-line',
+      iconActivated: 'i-mingcute:polygon-fill',
       title: t('settings.menu_compatibility'),
     },
     // {
@@ -74,8 +71,8 @@ const settingsMenuItems = computed((): MenuItem[] => {
     // },
     {
       value: MenuType.About,
-      icon: 'mingcute:information-line',
-      iconActivated: 'mingcute:information-fill',
+      icon: 'i-mingcute:information-line',
+      iconActivated: 'i-mingcute:information-fill',
       title: t('settings.menu_about'),
     },
   ]
@@ -93,8 +90,6 @@ onMounted(() => {
 })
 
 function handleClose() {
-  if (preventCloseSettings.value)
-    return
   emit('close')
 }
 
@@ -120,14 +115,11 @@ function setCurrentTitle() {
 
     <div
       id="settings-window" pos="fixed top-1/2 left-1/2" w="90%" h="90%"
-      max-w-1000px max-h-900px transform="~ translate-x--1/2 translate-y--1/2"
+      max-w-1000px max-h-900px transform="~ translate-x--1/2 translate-y--1/2 gpu"
       flex justify-between items-center
     >
       <aside
         class="group"
-        :style="{
-          pointerEvents: preventCloseSettings ? 'none' : 'unset',
-        }"
         shrink-0 p="x-4" pos="absolute left--84px" z-2
       >
         <ul
@@ -136,13 +128,10 @@ function setCurrentTitle() {
             backdrop-filter: var(--bew-filter-glass-2);
           "
           flex="~ gap-2 col" rounded="30px hover:25px" p-2 shadow
-          bg="$bew-content-2 hover:$bew-elevated-1 dark:$bew-elevated-1 dark-hover:$bew-elevated-2"
-          scale="group-hover:105" duration-300 overflow-hidden antialiased
+          bg="$bew-content-alt hover:$bew-elevated dark:$bew-elevated dark-hover:$bew-elevated"
+          scale="group-hover:105" duration-300 overflow-hidden antialiased transform-gpu
           border="1 $bew-border-color"
         >
-          <!-- mask -->
-          <div v-if="preventCloseSettings" pos="absolute top-0 left-0" w-full h-full bg="black opacity-20 dark:opacity-40" />
-
           <li v-for="menuItem in settingsMenuItems" :key="menuItem.value">
             <a
               cursor-pointer w="40px group-hover:150px" h-40px
@@ -151,15 +140,15 @@ function setCurrentTitle() {
               :class="{ 'menu-item-activated': menuItem.value === activatedMenuItem }"
               @click="changeMenuItem(menuItem.value)"
             >
-              <Icon
+              <div
                 v-show="menuItem.value !== activatedMenuItem"
                 text="xl center" w-40px h-20px flex="~ shrink-0" justify-center
-                :icon="menuItem.icon"
+                :class="menuItem.icon"
               />
-              <Icon
+              <div
                 v-show="menuItem.value === activatedMenuItem"
                 text="xl center" w-40px h-20px flex="~ shrink-0" justify-center
-                :icon="menuItem.iconActivated"
+                :class="menuItem.iconActivated"
               />
               <span shrink-0>{{ menuItem.title }}</span>
             </a>
@@ -173,15 +162,15 @@ function setCurrentTitle() {
           --un-shadow: var(--bew-shadow-4), var(--bew-shadow-edge-glow-2);
           backdrop-filter: var(--bew-filter-glass-2);
         "
-        relative overflow="x-hidde" w-full h-full bg="$bew-content-2 dark:$bew-elevated-1"
-        shadow rounded="$bew-radius" border="1 $bew-border-color"
+        relative overflow="x-hidde" w-full h-full bg="$bew-elevated-alt"
+        shadow rounded="$bew-radius" border="1 $bew-border-color" transform-gpu
       >
         <header
           flex justify-between items-center w-full h-80px
           pos="fixed top-0 left-0" p="x-11"
           z-1 rounded="t-$bew-radius"
           style="
-            text-shadow: 0 0 10px var(--bew-elevated-solid-1), 0 0 15px var(--bew-elevated-solid-1)
+            text-shadow: 0 0 10px var(--bew-elevated-solid), 0 0 15px var(--bew-elevated-solid)
           "
         >
           <!-- Mask -->
@@ -192,19 +181,24 @@ function setCurrentTitle() {
               -webkit-mask-image: linear-gradient(to bottom, black 0, transparent 100%);
               backdrop-filter: blur(6px);
             "
-            z--1 rounded-inherit
+            z--1 rounded-inherit transform-gpu
           />
           <div text="3xl" fw-bold>
             {{ title }}
           </div>
           <div
-            style="backdrop-filter: var(--bew-filter-glass-1)"
-            text-2xl leading-0 bg="$bew-fill-1 hover:$bew-theme-color-30" w="32px" h="32px"
-            p="1" rounded-8 cursor="pointer"
-            hover:ring="2 $bew-theme-color" hover:text="$bew-theme-color" duration-300
+            style="
+              backdrop-filter: var(--bew-filter-glass-1);
+              box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
+            "
+            text="!16px hover:$bew-theme-color" w="32px" h="32px"
+            flex="~ items-center justify-center shrink-0"
+            bg="$bew-elevated dark:$bew-fill-1 hover:$bew-theme-color-30"
+            rounded-8 cursor="pointer" border="1 $bew-border-color" box-border
+            duration-300
             @click="handleClose"
           >
-            <ic-baseline-clear />
+            <div i-ic-baseline-clear />
           </div>
         </header>
         <OverlayScrollbarsComponent
@@ -217,7 +211,7 @@ function setCurrentTitle() {
           h-inherit
         >
           <main
-            pos="absolute top-80px left-0" w-full min-h="[calc(100%-80px)]" p="x-12 b-8"
+            pos="absolute top-80px left-0" w-full min-h="[calc(100%-80px)]" p="x-12 b-10"
           >
             <!-- <div h-80px mt--8 /> -->
 
@@ -233,7 +227,6 @@ function setCurrentTitle() {
 
 <style lang="scss" scoped>
 .menu-item-activated {
-  --at-apply: text-white dark-text-black
-    important-dark-bg-white important-bg-$bew-theme-color;
+  --uno: "text-white dark-text-black important-dark-bg-white important-bg-$bew-theme-color";
 }
 </style>

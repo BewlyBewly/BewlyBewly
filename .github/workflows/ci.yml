@@ -3,13 +3,29 @@ name: CI
 on:
   push:
     branches:
+      # The branch where the project source code resides
+      # 项目源代码所在的分支
       - dev
       - main
+    paths-ignore:
+      # Changes involving the following path files will not trigger the workflow
+      # 涉及以下路径文件的更改不会触发工作流
+      - LICENSE
+      - README-cmn_CN.md
+      - README-cmn_TW.md
+      - README-jyut.md
+      - docs/**
 
   pull_request:
     branches:
       - dev
       - main
+    paths-ignore:
+      - LICENSE
+      - README-cmn_CN.md
+      - README-cmn_TW.md
+      - README-jyut.md
+      - docs/**
 
 jobs:
   test:
@@ -44,8 +60,29 @@ jobs:
         if: ${{ matrix.os == 'ubuntu-latest' }}
         run: pnpm run typecheck
 
-      - name: Build
-        run: pnpm run build
-
       - name: Test
         run: pnpm run test
+
+      - name: Knip
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        run: pnpm run knip
+
+      - name: Build Extension
+        run: pnpm build
+
+      - name: Upload Zip
+        if: ${{ matrix.os == 'ubuntu-latest' && matrix.node == 'lts/*' && github.ref_name == 'main' }}
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: BewlyBewly Zip
+          path: extension
+
+      - name: Build Extension-Firefox
+        run: pnpm build-firefox
+
+      - name: Upload Zip
+        if: ${{ matrix.os == 'ubuntu-latest' && matrix.node == 'lts/*' && github.ref_name == 'main' }}
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: BewlyBewly-Firefox Zip
+          path: extension-firefox

@@ -51,7 +51,7 @@ interface API {
 }
 // 重载API 可以为函数
 type APIFunction = (message: Message, sender?: any, sendResponse?: Function) => any
-type APIType = API | APIFunction
+export type APIType = API | APIFunction
 interface APIMAP {
   [key: string]: APIType
 }
@@ -119,14 +119,14 @@ function apiListenerFactory(API_MAP: APIMAP) {
 }
 
 export {
-  type FetchAfterHandler,
-  toJsonHandler,
-  toData,
-  sendResponseHandler,
-  AHS,
-  type Message,
   type _FETCH,
+  AHS,
   type API,
-  type APIMAP,
   apiListenerFactory,
+  type APIMAP,
+  type FetchAfterHandler,
+  type Message,
+  sendResponseHandler,
+  toData,
+  toJsonHandler,
 }

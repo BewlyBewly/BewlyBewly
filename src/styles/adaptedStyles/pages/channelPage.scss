@@ -1,0 +1,78 @@
+.bewly-design.channelPage {
+  .banner-wrapper {
+    background-color: black;
+    margin-bottom: 0 !important;
+    padding-bottom: 20px !important;
+  }
+
+  .index-module {
+    padding-bottom: 20px;
+    background: linear-gradient(0deg, #111319 40px, rgba(17, 19, 25, 0.8) 60.12%, rgba(20, 20, 20, 0.0001));
+  }
+
+  .promotion-c,
+  .link-c .link,
+  .section-title .subTitle {
+    background-color: var(--bew-fill-1);
+  }
+
+  .hover-c .title,
+  :not(.index-module) > .inner-c .title,
+  .link-c .link,
+  .section-title .subTitle {
+    color: var(--bew-text-1);
+  }
+
+  .banner-wrapper .side-list .side-item .title,
+  .section-title .subTitle.highlight {
+    color: white;
+  }
+
+  .link-c .link {
+    border-color: var(--bew-border-color);
+  }
+
+  // #region theme color adaption part
+  // Increase the priority of the style inside by writing a non-existent selector in :not()
+  :not(fjdslfds) {
+    .channel-swiper .channel-carousel-tool .channel-nav-click li.active,
+    .hot-module .left .goto,
+    .switch-c.checked,
+    .section-title .subTitle.highlight {
+      background-color: var(--bew-theme-color);
+    }
+
+    .inner-c .play-icon.button,
+    .hover-c .play-icon.button,
+    .hot-module .left .goto:hover {
+      background-color: var(--bew-theme-color-80);
+    }
+
+    .index-module .all-a:hover .all,
+    .index-module .all-a:hover .arrow-all,
+    .index-module .sub-m:hover,
+    .hot-module .hot-item:hover .title,
+    .promotion-c:hover .title,
+    .hover-c:hover .title,
+    .switch-c .round {
+      color: var(--bew-theme-color);
+    }
+  }
+  // #endregion
+
+  // #region dark mode adaption part
+  &.dark {
+    .channel-swiper .channel-carousel-tool .channel-nav-click li {
+      background-color: var(--bew-fill-1);
+    }
+
+    .channel-container .el-input__inner {
+      box-shadow: 0 0 0 1px var(--bew-border-color) inset;
+    }
+
+    .season-cover {
+      background-color: transparent;
+    }
+  }
+  // #endregion
+}

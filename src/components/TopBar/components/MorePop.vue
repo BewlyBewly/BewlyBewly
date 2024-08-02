@@ -1,23 +1,25 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+
 import { getUserID, isHomePage } from '~/utils/main'
 
 const { t } = useI18n()
 
-const list = [
+const list = computed((): { name: string, url: string, icon: string }[] => [
   { name: t('topbar.notifications'), url: '//message.bilibili.com', icon: 'i-mingcute:notification-line' },
   { name: t('topbar.moments'), url: '//t.bilibili.com/', icon: 'i-tabler:windmill' },
   { name: t('topbar.favorites'), url: `//space.bilibili.com/${getUserID() ?? ''}/favlist`, icon: 'i-mingcute:star-line' },
   { name: t('topbar.history'), url: '//www.bilibili.com/account/history', icon: 'i-mingcute:time-line' },
   { name: t('topbar.watch_later'), url: '//www.bilibili.com/watchlater/#/list', icon: 'i-mingcute:carplay-line' },
   { name: t('topbar.creative_center'), url: '//member.bilibili.com/platform/home', icon: 'i-mingcute:bulb-line' },
-]
+])
 </script>
 
 <template>
   <div
-    style="box-shadow: var(--bew-shadow-3)"
-    bg="$bew-elevated-solid-1"
+    style="backdrop-filter: var(--bew-filter-glass-1);"
+    bg="$bew-elevated"
+    shadow="$bew-shadow-3"
     w="180px"
     p="4"
     rounded="$bew-radius"

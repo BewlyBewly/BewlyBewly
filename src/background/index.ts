@@ -1,4 +1,5 @@
 import browser from 'webextension-polyfill'
+
 import { setupAllMsgLstnrs } from './messageListeners'
 
 browser.runtime.onInstalled.addListener((): void => {
@@ -13,7 +14,7 @@ function isExtensionUri(url: string) {
 // eslint-disable-next-line node/prefer-global/process
 if (process.env.FIREFOX) {
   browser.webRequest.onBeforeSendHeaders.addListener(
-    (details) => {
+    (details: any) => {
       const requestHeaders: browser.WebRequest.HttpHeaders = []
       if (details.documentUrl) {
         const url = new URL(details.documentUrl)

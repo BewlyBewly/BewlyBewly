@@ -18,9 +18,9 @@ common:
   please_log_in_first: 請先登入
   login: 登入
   save_to_watch_later: 稍後觀看
-  added: 已添加
+  added: 已新增
   performance_impact_warn: 這個功能可能會降低效能
-  enable: 啓用
+  enable: 啟用
   disable: 停用
   refresh: 重新整理
   reset: 重置
@@ -39,9 +39,9 @@ settings:
   menu_compatibility: 相容性
 
   # Settings group
-  group_common: 通用
+  group_common: 常用
   group_video_card: 影片卡片
-  group_performance: 效能
+  group_performance: 毛玻璃與效能
   group_topbar: 頂欄
   group_dock: Dock
   group_color: 顏色
@@ -50,6 +50,9 @@ settings:
   group_search_bar: 搜尋欄
   group_recommendation_mode: 推薦模式
   group_search_page_mode: 搜尋頁模式
+  group_recommendation_filters: 推薦過濾
+  group_recommendation_filters_desc: |
+    限制的數值不要設太大，不然載入時間可能會增加！
   group_home_tabs: 首頁標籤欄
 
   # Settings buttons
@@ -68,6 +71,7 @@ settings:
   chk_box:
     show: 顯示
     hidden: 隱藏
+  enable_grid_layout_switcher: 啟用版面格線佈局切換器
   enable_horizontal_scrolling: 啟用橫向捲動
   enable_horizontal_scrolling_desc: 啟用後，滑鼠捲動時將直接捲動橫向捲軸列表
   enable_video_preview: 啟用影片預覽功能
@@ -76,6 +80,7 @@ settings:
   block_ads: 封鎖廣告
   disable_frosted_glass: 停用毛玻璃效果
   reduce_frosted_glass_blur: 降低毛玻璃模糊強度
+  use_old_topbar: 使用舊版頂欄
   auto_hide_topbar: 自動隱藏頂欄
   topbar_icon_badges: 圖示標記樣式
   topbar_icon_badges_opt:
@@ -90,8 +95,9 @@ settings:
     bottom: 底部
   auto_hide_dock: 自動隱藏 Dock
   dock_content_adjustment: Dock 內容調整
-  dock_content_adjustment_desc: 第一個啓用的 Dock 項目的頁面將是起始頁面
-  always_show_the_top_bar_logo: 永遠顯示頂欄 Logo
+  dock_content_adjustment_desc: 第一個啟用的 Dock 項目的頁面將是起始頁面
+  disable_light_dark_mode_switcher: 關閉淺/深色模式切換按鈕
+  move_back_to_top_and_refresh_to_dock: 將返回頂部和重新整理按鈕移動到 Dock
 
   # Appearance
   theme: 主題
@@ -108,9 +114,9 @@ settings:
   choose_ur_wallpaper: 選擇你的背景
   image_url: 圖片 URL
   image_url_hint: |-
-    URL 示例: https://pic.imgdb.cn/item/638e1d63b1fccdcd36103811.jpg
-    https://pic.imgdb.cn/item/638e1d7ab1fccdcd36106346.jpg
-  enable_wallpaper_masking: 啓用背景遮蔽效果
+    URL 示例: https://cdn.jsdelivr.net/gh/BewlyBewly/Imgs/wallpapers/rocky-mountain-cloudscape.jpg
+    https://cdn.jsdelivr.net/gh/BewlyBewly/Imgs/wallpapers/green-white-mountains.jpg
+  enable_wallpaper_masking: 啟用背景遮蔽效果
   wallpaper_mask_opacity: 背景遮蔽透明度調節
   wallpaper_blur_intensity: 背景模糊強度調節
 
@@ -119,7 +125,7 @@ settings:
   logo_color_opt:
     white: 白
     theme_color: 主題色
-  enable_logo_glowing_effect: 啓用 Logo 發光效果
+  enable_logo_glowing_effect: 啟用 Logo 發光效果
   logo_visibility: Logo 可視性
   bg_darkens_when_the_search_bar_is_focused: 當搜尋欄聚焦時背景變暗
   bg_blurs_when_the_search_bar_is_focused: 當搜尋欄聚焦時背景變模糊
@@ -134,16 +140,21 @@ settings:
     由於B站對以前的API實施了限制，要請求 access key 的方法不再運作。我們建議使用 Web 模式 🫠
   authorize_app: 授權 BewlyBewly 使用 access key
   authorize_app_desc: >
-    授權使用後能在首頁推送 bilibili 手機端推介演算法的影片，授權 key 的有效期約爲一個月，過了有效期後，請記得重新取得授權以取得 access
+    授權使用後能在首頁推送 bilibili 手機端推介演算法的影片，授權 key 的有效期約為一個月，過了有效期後，請記得重新取得授權以取得 access
     key。
   authorize_app_more_info_access_key: 關於 access key
   scan_qrcode_desc: 使用 Bilibili 手機應用程式掃描這個QR碼，以授權取得 access key。
+  filter_by_view_count: 按觀看次數篩選
+  filter_by_view_count_unit: 次
+  filter_by_duration: 按影片長度篩選
+  filter_by_duration_unit: 秒
   use_search_page_mode: 首頁使用搜尋頁模式
   settings_shared_with_the_search_page: 與搜尋頁共用的設定
   settings_shared_with_the_search_page_desc: 這些設定都與搜尋頁共用
   search_page_mode_wallpaper_fixed: 將搜尋頁模式的背景固定
   home_tabs_adjustment: 標籤欄調整
-  home_tabs_adjustment_desc: 第一個啓用的標籤項目調整頁面將是起始頁面
+  home_tabs_adjustment_desc: 第一個啟用的標籤項目調整頁面將是起始頁面
+  always_show_tabs_on_home_page: 總是顯示首頁標籤欄
 
   # Compatibility
   # Common
@@ -158,12 +169,25 @@ settings:
   follow_bilibili_evolved_color_desc: 每次變更 Bilibili Evolved 主題色後，記得重新選取此選項以更新配置
 
   # About
+  links: 連結
+  sponsor: 贊助
+  sponsor_desc: 喜歡這份專案並希望看到它蓬勃發展嗎？請考慮贊助它！您的支持是此專案發展的動力。
+  afdian: 爱发电
   import_settings: 匯入設定
   export_settings: 匯出設定
   export_settings_desc: 一些敏感性資訊，例如 access key，可能需要重新取得
   contributors: 貢獻者
 
   just_wanna_change_the_job: 我只想換一份好一點的工作...
+  just_wanna_change_the_job_hint: |-
+    Let's just consider this a piece of performance art.
+
+    Now I'm still working at my old company, which has started to gradually appreciate my contributes. I work on both front-end & back-end there.
+    I'm not foolish enough to mess up in the current situation; Instead, I will try to create my own environment and gradually become a versatile person.
+    The Logos for BewlyBewly, whether they are new or old, or even the VTuber style of logo, are all designed and made by me. I have always been working hard to develop my ability to produce independent projects.
+
+    Additionally, I am very grateful for the people who have contracted me by email or other means during this time, whether they ending up helping me or not.
+    However, I particularly want to wish a certain product manager who lured people into working for free while boasting about his own capabilities, thinking I would stupidly believe everything he said? I wish you a lifetime of only managing products you dislike for other companies.
   just_wanna_change_the_job_desc: |-
     首先十分抱歉在这里打扰您，我是一名前端开发者，坐标广州，我想换一份好一点的工作
     BewlyBewly 其实是我在找工作的时候做的一个项目，那时试过有快半年是完全没有工作的状态，面试时一直刁难要么就是被礼貌拒绝
@@ -183,16 +207,13 @@ settings:
 
     我目前只是想找一间公司是重视和比较规范前端的，因为我不想自己收拾别人的烂摊子身边人也不知道只是觉得我进度慢就是慢，再为了这种事情加班
     坐标广州，我不是希望进去一定要做出什么成就出来，在做开源过程中也对项目负责人和开发者不同的想法观念略有感受。我只想进去了解一下正确的前端规范和能与其他志同道合的人一起工作。如果有合适的前端工作机会请联系我，谢谢！
-  contact_me: 联系我
+  contact_me: 聯繫我
 auth:
-  err_tip: 無法授權 access key
-  plz_login_first: 請先登入 bilibili
-  receive_verified_url_err: 不明錯誤，請重新整理頁面後再試一次。
-  failed_to_get_accesskey: 無法取得 access key
+  auth_access_key_first: 在這之前請先授權 BewlyBewly 使用 access key
 topbar:
   sign_in: 登入
   notifications: 通知
-  moments: 動向
+  moments: 動態
   favorites: 收藏
   history: 記錄
   watch_later: 稍後觀看
@@ -231,15 +252,20 @@ topbar:
     live: 直播
     activities: 活動
     paid_courses: 付費課堂
-    community: 社羣中心
+    community: 社群中心
     music_plus: 新歌熱榜
+    game_center: 遊戲中心
+    comic_con_and_goods: 動漫節與周邊
+    manga: 漫畫
+    game_competitions: 遊戲賽事
   user_dropdown:
     money: 硬幣：
     b_coins: B幣：
+    exp_desc: '目前經驗 {current_exp}，升級到 LV {level} 還需要 {need_exp}'
     following: 追蹤中
     followers: 粉絲
-    posts: 動向
-    accout_settings: 帳戶資訊
+    posts: 動態
+    account_settings: 帳戶設定
     uploads_manager: 內容管理
     b_coins_wallet: B幣錢包
     orders: 訂單資訊
@@ -251,7 +277,7 @@ topbar:
     replys: 回覆留言
     mentions: 提及我的
     likes: 按讚訊息
-    messages: 系统通知
+    messages: 系統通知
     chats: 聊天室
   moments_dropdown:
     tabs:
@@ -281,7 +307,7 @@ home:
   not_interested: 不感興趣
   tell_us_why: 為什麼這樣做...
   video_removed: 影片已移除
-  for_you: 爲你推薦
+  for_you: 為你推薦
   following: 正在跟隨
   trending: 發燒影片
   ranking: 排行
@@ -326,16 +352,19 @@ history:
     你確定要啟用觀看記錄嗎？
 favorites:
   unfavorite: 取消收藏
+  unfavorite_confirm: |-
+    要取消收藏選中的影片嗎？
+    此操作無法撤消，你確定要取消收藏選中的影片嗎？
 watch_later:
   title: 稍後觀看
   clear_all: 清空稍後觀看
   clear_all_confirm: |-
     要清空稍後觀看的影片嗎？
-    此操作無法撤消，你確定要清空稍後觀看的影片嗎？
+    此操作無法復原，你確定要清空稍後觀看的影片嗎？
   remove_watched_videos: 移除看過的影片
   remove_watched_videos_confirm: |-
     要移除看過的影片嗎？
-    此操作無法撤消，你確定要移除看過的影片嗎？
+    此操作無法復原，你確定要移除看過的影片嗎？
 search_bar:
   history_title: 搜尋記錄
   clear_history: 清除所有搜尋記錄

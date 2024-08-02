@@ -1,16 +1,15 @@
 /// <reference types="vitest" />
 
 import { dirname, relative } from 'node:path'
+
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
+import replace from '@rollup/plugin-replace'
+import Vue from '@vitejs/plugin-vue'
+import UnoCSS from 'unocss/vite'
+import AutoImport from 'unplugin-auto-import/vite'
 import type { UserConfig } from 'vite'
 import { defineConfig } from 'vite'
-import Vue from '@vitejs/plugin-vue'
-import replace from '@rollup/plugin-replace'
-import Icons from 'unplugin-icons/vite'
-import IconsResolver from 'unplugin-icons/resolver'
-import Components from 'unplugin-vue-components/vite'
-import AutoImport from 'unplugin-auto-import/vite'
-import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
-import UnoCSS from 'unocss/vite'
+
 import { isDev, isFirefox, isSafari, port, r } from './scripts/utils'
 import { MV3Hmr } from './vite-mv3-hmr'
 
@@ -33,26 +32,7 @@ export const sharedConfig: UserConfig = {
           ],
         },
       ],
-      dirs: [r('src/composables')],
-      dts: r('src/auto-imports.d.ts'),
     }),
-
-    // https://github.com/antfu/unplugin-vue-components
-    Components({
-      extensions: ['vue', 'ts'],
-      dirs: [r('src/components')],
-      // generate `components.d.ts` for ts support with Volar
-      dts: r('src/components.d.ts'),
-      resolvers: [
-        // auto import icons
-        IconsResolver({
-          componentPrefix: '',
-        }),
-      ],
-    }),
-
-    // https://github.com/antfu/unplugin-icons
-    Icons(),
 
     // https://github.com/intlify/bundle-tools/tree/main/packages/unplugin-vue-i18n
     VueI18nPlugin({
@@ -106,7 +86,7 @@ export default defineConfig(({ command }) => ({
   build: {
     outDir: r(isFirefox ? 'extension-firefox/dist' : isSafari ? 'extension-safari/dist' : 'extension/dist'),
     emptyOutDir: false,
-    sourcemap: isDev ? 'inline' : false,
+    sourcemap: false, // https://github.com/vitejs/vite-plugin-vue/issues/35
     // https://developer.chrome.com/docs/webstore/program_policies/#:~:text=Code%20Readability%20Requirements
     terserOptions: {
       mangle: false,

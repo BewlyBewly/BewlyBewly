@@ -1,12 +1,15 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
+import { Icon } from '@iconify/vue'
 import { onMounted, reactive, ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 
-// import { isNewArticle, setLastOffsetID, setLastestOffsetID } from '../notify'
-
-import type { TopBarMomentResult } from '~/models/moment/topBarMoment'
+import Empty from '~/components/Empty.vue'
+import Loading from '~/components/Loading.vue'
+import Tooltip from '~/components/Tooltip.vue'
+import { useApiClient } from '~/composables/api'
 import type { TopBarLiveMomentResult } from '~/models/moment/topBarLiveMoment'
-import { getCSRF, isHomePage, smoothScrollToTop } from '~/utils/main'
+import type { TopBarMomentResult } from '~/models/moment/topBarMoment'
+import { getCSRF, isHomePage, scrollToTop } from '~/utils/main'
 
 type MomentType = 'video' | 'live' | 'article'
 interface MomentTab { type: MomentType, name: any }
@@ -15,6 +18,7 @@ interface MomentCard {
   title: string
   author: string
   authorFace: string
+  authorJumpUrl?: string
   pubTime?: string
   cover: string
   link: string
@@ -26,21 +30,24 @@ const api = useApiClient()
 
 const moments = reactive<MomentCard[]>([])
 const addedWatchLaterList = reactive<number[]>([])
-const momentTabs = reactive<MomentTab[]>([
-  {
-    type: 'video',
-    name: t('topbar.moments_dropdown.tabs.videos'),
-  },
-  {
-    type: 'live',
-    name: t('topbar.moments_dropdown.tabs.live'),
-  },
-  {
-    type: 'article',
-    name: t('topbar.moments_dropdown.tabs.articles'),
-  },
-])
-const selectedMomentTab = ref<MomentTab>(momentTabs[0])
+const momentTabs = computed((): MomentTab[] => {
+  return [
+    {
+      type: 'video',
+      name: t('topbar.moments_dropdown.tabs.videos'),
+    },
+    {
+      type: 'live',
+      name: t('topbar.moments_dropdown.tabs.live'),
+    },
+    {
+      type: 'article',
+      name: t('topbar.moments_dropdown.tabs.articles'),
+    },
+  ]
+},
+)
+const selectedMomentTab = ref<MomentTab>(momentTabs.value[0])
 const isLoading = ref<boolean>(false)
 const noMoreContent = ref<boolean>(false) // when noMoreContent is true, the user can't scroll down to load more content
 const livePage = ref<number>(1)
@@ -54,7 +61,7 @@ watch(() => selectedMomentTab.value.type, (newVal, oldVal) => {
     return
 
   if (momentsWrap.value)
-    smoothScrollToTop(momentsWrap.value, 300)
+    scrollToTop(momentsWrap.value)
 
   initData()
 }, { immediate: true })
@@ -67,8 +74,9 @@ onMounted(() => {
         >= momentsWrap.value.scrollHeight - 20
         && moments.length > 0
         && !isLoading.value
-      )
+      ) {
         getData()
+      }
     })
   }
 })
@@ -125,6 +133,7 @@ function checkIfHasNewMomentsThenUpdateMoments() {
             title: items[i].title,
             author: items[i].author.name,
             authorFace: items[i].author.face,
+            authorJumpUrl: items[i].author.jump_url,
             pubTime: items[i].pub_time,
             cover: items[i].cover,
             link: items[i].jump_url,
@@ -177,6 +186,7 @@ function getTopBarMoments() {
             title: item.title,
             author: item.author.name,
             authorFace: item.author.face,
+            authorJumpUrl: item.author.jump_url,
             pubTime: item.pub_time,
             cover: item.cover,
             link: item.jump_url,
@@ -269,11 +279,13 @@ defineExpose({
 
 <template>
   <div
-    bg="$bew-elevated-solid-1"
+    style="backdrop-filter: var(--bew-filter-glass-1);"
+    bg="$bew-elevated"
     w="380px"
     rounded="$bew-radius"
     pos="relative"
-    shadow="$bew-shadow-2"
+    shadow="[var(--bew-shadow-edge-glow-1),var(--bew-shadow-3)]"
+    border="1 $bew-border-color"
   >
     <!-- top bar -->
     <header
@@ -284,7 +296,7 @@ defineExpose({
       p="y-4 x-6"
       pos="fixed top-0 left-0"
       w="full"
-      bg="$bew-elevated-1"
+      bg="$bew-elevated"
       z="1"
       border="!rounded-t-$bew-radius"
     >
@@ -325,12 +337,17 @@ defineExpose({
         <Empty
           v-if="!isLoading && moments.length === 0"
           pos="absolute top-0 left-0"
-          bg="$bew-content-1"
+          bg="$bew-content"
           z="0" w="full" h="full"
           flex="~ items-center"
+          rounded="$bew-radius-half"
         />
 
         <!-- moments -->
+
+        <!-- Use a transparent `div` instead of `margin-top` to prevent the list item bouncing problem -->
+        <!-- https://github.com/BewlyBewly/BewlyBewly/pull/889#issue-2394127922 -->
+        <div v-if="!isLoading && moments.length > 0" min-h="50px" />
 
         <TransitionGroup name="list">
           <a
@@ -338,7 +355,7 @@ defineExpose({
             :key="index"
             :href="moment.link" :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
             flex="~ justify-between"
-            m="b-2 first:t-50px" p="2"
+            m="b-2" p="2"
             rounded="$bew-radius"
             hover:bg="$bew-fill-2"
             duration-300
@@ -356,15 +373,16 @@ defineExpose({
               style="box-shadow: 0 0 4px var(--bew-theme-color)"
             />
             <a
-              :href="moment.link"
+              :href="moment.authorJumpUrl"
               :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
+              rounded="1/2"
+              w="40px" h="40px" m="r-4"
+              bg="$bew-skeleton"
             >
               <img
                 :src="`${moment.authorFace}@50w_50h_1c`"
                 rounded="1/2"
-                w="40px"
-                h="40px"
-                m="r-4"
+                w="40px" h="40px"
               >
             </a>
 
@@ -372,7 +390,14 @@ defineExpose({
               <div>
                 <!-- <span v-if="selectedTab !== 1">{{ `${moment.name} ${t('topbar.moments_dropdown.uploaded')}` }}</span> -->
                 <!-- <span v-else>{{ `${moment.name} ${t('topbar.moments_dropdown.now_streaming')}` }}</span> -->
-                <span font-bold>{{ moment.author }}</span>
+
+                <a
+                  :href="moment.authorJumpUrl"
+                  :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
+                  font-bold
+                >
+                  {{ moment.author }}
+                </a>
                 <div overflow-hidden text-ellipsis break-anywhere>
                   {{ moment.title }}
                 </div>
@@ -393,15 +418,17 @@ defineExpose({
                     flex="~"
                     items="center"
                   >
-                    <fluent:live-24-filled m="r-2" />
+                    <div i-fluent:live-24-filled m="r-2" />
                     {{ $t('topbar.moments_dropdown.live_status') }}
                   </div>
                 </div>
               </div>
               <div
+                class="group"
                 flex="~ items-center justify-center" w="82px"
                 h="46px" m="l-4"
-                class="group"
+                rounded="$bew-radius-half"
+                bg="$bew-skeleton"
               >
                 <img
                   :src="`${moment.cover}@128w_72h_1c`"
@@ -410,7 +437,6 @@ defineExpose({
                   rounded="$bew-radius-half"
                 >
                 <div
-
                   opacity-0 group-hover:opacity-100
                   pos="absolute" duration-300 bg="black opacity-60"
                   rounded="$bew-radius-half" p-1
@@ -418,10 +444,10 @@ defineExpose({
                   @click.prevent="toggleWatchLater(moment.rid || 0)"
                 >
                   <Tooltip v-if="!addedWatchLaterList.includes(moment.rid || 0)" :content="$t('common.save_to_watch_later')" placement="bottom" type="dark">
-                    <mingcute:carplay-line />
+                    <div i-mingcute:carplay-line />
                   </Tooltip>
                   <Tooltip v-else :content="$t('common.added')" placement="bottom" type="dark">
-                    <line-md:confirm />
+                    <Icon icon="line-md:confirm" />
                   </Tooltip>
                 </div>
               </div>
@@ -431,7 +457,7 @@ defineExpose({
 
         <!-- loading -->
         <Transition name="fade">
-          <loading v-if="isLoading && moments.length !== 0" m="-t-4" />
+          <Loading v-if="isLoading && moments.length !== 0" m="-t-4" />
         </Transition>
       </div>
     </main>
@@ -440,19 +466,20 @@ defineExpose({
 
 <style lang="scss" scoped>
 .tab {
-  --at-apply: relative text-$bew-text-2;
+  --uno: "relative text-$bew-text-2";
 
   &::after {
-    --at-apply: absolute bottom-0 left-0 w-full h-12px bg-$bew-theme-color opacity-0 transform scale-x-0 -z-1 transition-all duration-300;
-    content: '';
+    --uno: "absolute bottom-0 left-0 w-full h-12px bg-$bew-theme-color opacity-0 transform scale-x-0 -z-1";
+    --uno: "transition-all duration-300";
+    content: "";
   }
 }
 
 .tab-selected {
-  --at-apply: font-bold text-$bew-text-1;
+  --uno: "font-bold text-$bew-text-1";
 
   &::after {
-    --at-apply: scale-x-80 opacity-40;
+    --uno: "scale-x-80 opacity-40";
   }
 }
 </style>

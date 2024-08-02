@@ -3,17 +3,21 @@
 English | [官话 - 简体中文](README-cmn_CN.md) | [官話 - 正體中文](README-cmn_TW.md) | [廣東話](README-jyut.md)
 
 <p align="center" style="margin-bottom: 0px !important;">
-<img width="150" alt="bewlybewly icon" src="https://user-images.githubusercontent.com/33394391/160250512-410b71fc-7f25-4caf-b850-429227ff082a.png"><br/>
+<img width="300" alt="BewlyBewly icon" src="https://cdn.jsdelivr.net/gh/BewlyBewly/Imgs/logos/bewlybewly-vtuber-logo.png"><br/>
 </p>
-
-<h1 align="center" style="margin-top: 0px;">BewlyBewly</h1>
 
 <p align="center">Just make a few small changes to your Bilibili homepage.</p>
 
-![min1](https://github.com/hakadao/BewlyBewly/assets/33394391/951f9e2a-d0e1-452c-83a9-dc6d85c4d441)
-![min2](https://github.com/hakadao/BewlyBewly/assets/33394391/3e75dd20-f60b-4645-b434-23a24c72959c)
+<!-- ![min1](https://github.com/hakadao/BewlyBewly/assets/33394391/951f9e2a-d0e1-452c-83a9-dc6d85c4d441)
+![min2](https://github.com/hakadao/BewlyBewly/assets/33394391/3e75dd20-f60b-4645-b434-23a24c72959c) -->
 
 ## 👋 Introduction
+
+> [!NOTE]
+> BewlyBewly mainly focuses on page adjustments and optimization rather than improving functionally and efficiency.
+>
+> The dark mode will only be adapted to commonly used pages due to its efficiency and maintenance difficulty, while less
+> frequently used pages will not to be adapted.
 
 BewlyBewly is a browser extension for BiliBili that aims to enhance the user experience by redesigning the BiliBili UI.
 The design is inspired by YouTube, Vision OS, and iOS, resulting in a more visually appealing and user-friendly interface.
@@ -31,8 +35,8 @@ Without this template, it may not be possible to develop this project.
 > Additionally, the Chrome Web Store version of BewlyBewly will address and fix critical bugs more quickly.
 
 - Chrome: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>
-- Edge (NOT RECOMMENDED): <https://microsoftedge.microsoft.com/addons/detail/bewlybewly/kceadhehfjdiakpiphpjgolbgehjdmja>
-- Firefox: <https://addons.mozilla.org/lt/firefox/addon/bewlybewly/>
+- Edge: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>
+- Firefox: <https://addons.mozilla.org/en-US/firefox/addon/bewlybewly/>
 
 #### To Firefox users
 
@@ -75,13 +79,13 @@ simply drag and drop the downloaded `extension.zip` file into the browser to com
 
 </details>
 
-## 🤝 Contribution
+## 🤝 Contribution & Build
 
-See [CONTRIBUTION.md](docs/CONTRIBUTING.md)
+See [CONTRIBUTING.md](docs/CONTRIBUTING.md)
 
 ### Contributors
 
-![Contributors](https://contrib.rocks/image?repo=hakadao/BewlyBewly)
+[![Contributors](https://contrib.rocks/image?repo=hakadao/BewlyBewly)](https://github.com/BewlyBewly/BewlyBewly/graphs/contributors)
 
 ## ❤️ Credits
 

@@ -1,5 +1,6 @@
 import fs from 'fs-extra'
 import type { Manifest } from 'webextension-polyfill'
+
 import type PkgType from '../package.json'
 import { isDev, isFirefox, isSafari, port, r } from '../scripts/utils'
 
@@ -41,12 +42,21 @@ export async function getManifest() {
     ],
     host_permissions: [
       '*://*.bilibili.com/*',
-      '*://*.mcbbs.net/*',
       '*://*.hdslb.com/*',
     ],
     content_scripts: [
       {
-        matches: ['*://www.bilibili.com/*', '*://search.bilibili.com/*', '*://t.bilibili.com/*', '*://space.bilibili.com/*', '*://message.bilibili.com/*'],
+        matches: [
+          '*://www.bilibili.com/*',
+          '*://search.bilibili.com/*',
+          '*://t.bilibili.com/*',
+          '*://space.bilibili.com/*',
+          '*://message.bilibili.com/*',
+          '*://member.bilibili.com/*',
+          '*://account.bilibili.com/*',
+          '*://www.hdslb.com/*',
+          '*://passport.bilibili.com/*',
+        ],
         js: ['./dist/contentScripts/index.global.js'],
         css: ['./dist/contentScripts/style.css'],
         run_at: 'document_start',

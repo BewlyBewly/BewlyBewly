@@ -3,17 +3,20 @@
 [English](README.md) | [官话 - 简体中文](README-cmn_CN.md) | 官話 - 正體中文 | [廣東話](README-jyut.md)
 
 <p align="center" style="margin-bottom: 0px !important;">
-<img width="150" alt="bewlybewly icon" src="https://user-images.githubusercontent.com/33394391/160250512-410b71fc-7f25-4caf-b850-429227ff082a.png"><br/>
+<img width="300" alt="BewlyBewly icon" src="https://cdn.jsdelivr.net/gh/BewlyBewly/Imgs/logos/bewlybewly-vtuber-logo.png"><br/>
 </p>
-
-<h1 align="center" style="margin-top: 0px;">BewlyBewly</h1>
 
 <p align="center">只需對您的 Bilibili 主頁進行一些小改動就好。</p>
 
-![min1](https://github.com/hakadao/BewlyBewly/assets/33394391/951f9e2a-d0e1-452c-83a9-dc6d85c4d441)
-![min2](https://github.com/hakadao/BewlyBewly/assets/33394391/3e75dd20-f60b-4645-b434-23a24c72959c)
+<!-- ![min1](https://github.com/hakadao/BewlyBewly/assets/33394391/951f9e2a-d0e1-452c-83a9-dc6d85c4d441)
+![min2](https://github.com/hakadao/BewlyBewly/assets/33394391/3e75dd20-f60b-4645-b434-23a24c72959c) -->
 
 ## 👋 介紹
+
+> [!NOTE]
+> BewlyBewly 主要著重於頁面調整和改良，而不是完善功能和提升效率。
+>
+> 由於考慮到效率和維護困難度，深色模式只會適應常用的頁面，而較少使用的頁面則不會支護。
 
 BewlyBewly 是一個針對 BiliBili 的瀏覽器擴充功能，旨在透過重新設計 BiliBili 的介面來提升用戶體驗。設計靈感來自於 YouTube、Vision OS 和 iOS，使介面更具視覺吸引力和用戶友好性。
 
@@ -29,8 +32,8 @@ BewlyBewly 是一個針對 BiliBili 的瀏覽器擴充功能，旨在透過重�
 > 此外，BewlyBewly 的 Chrome Web Store 版本將更快地解決和修復關鍵性的錯誤。
 
 - Chrome: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>
-- Edge (不推薦): <https://microsoftedge.microsoft.com/addons/detail/bewlybewly/kceadhehfjdiakpiphpjgolbgehjdmja>
-- Firefox: <https://addons.mozilla.org/lt/firefox/addon/bewlybewly/>
+- Edge: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>
+- Firefox: <https://addons.mozilla.org/zh-TW/firefox/addon/bewlybewly/>
 
 #### 給 Firefox 使用者的提示
 
@@ -72,13 +75,13 @@ BewlyBewly 是一個針對 BiliBili 的瀏覽器擴充功能，旨在透過重�
 
 </details>
 
-## 🤝 貢獻
+## 🤝 貢獻與建置專案
 
-詳情 [CONTRIBUTION.md](docs/CONTRIBUTING.md)
+詳情 [CONTRIBUTING.md](docs/CONTRIBUTING-cmn_TW.md)
 
 ### 貢獻者
 
-![Contributors](https://contrib.rocks/image?repo=hakadao/BewlyBewly)
+[![Contributors](https://contrib.rocks/image?repo=hakadao/BewlyBewly)](https://github.com/BewlyBewly/BewlyBewly/graphs/contributors)
 
 ## ❤️ 鳴謝
 

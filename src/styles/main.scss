@@ -37,7 +37,7 @@ html.bewly-design > ::-webkit-scrollbar-track {
 
 html.bewly-design,
 .bewly-design body {
-  font-size: 14px !important;
+  // font-size: 14px !important;
   min-width: unset !important;
   filter: none !important;
   color: var(--bew-text-1);
@@ -57,6 +57,7 @@ html.dark.bewly-design {
   line-break: anywhere;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
 }
 
 .bewly-design {
@@ -66,8 +67,29 @@ html.dark.bewly-design {
   h4,
   h5,
   h6 {
-    --at-apply: color-$bew-text-1;
+    --uno: "color-$bew-text-1";
   }
+}
+
+// Adjust broken image icon
+img {
+  position: relative;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-image: url("/assets/broken-image.png");
+    background-size: 25px;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
+// Prevent the scrollbar from being covered by the other elements
+.os-scrollbar {
+  --uno: "z-100000";
 }
 
 // Change OverlayScrollbar color
@@ -106,7 +128,7 @@ html.dark.bewly-design {
 // Adapt the colors of the two Bilibili Evolved's buttons on the left side to BewlyBewly theme
 .bewly-design {
   .be-settings > .sidebar > * {
-    background-color: var(--bew-elevated-solid-1) !important;
+    background-color: var(--bew-elevated-solid) !important;
     opacity: 0.4;
 
     &:hover {

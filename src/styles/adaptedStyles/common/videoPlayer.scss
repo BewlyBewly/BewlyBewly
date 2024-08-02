@@ -1,0 +1,106 @@
+.bewly-design {
+  .bpx-player-toast-row .bpx-player-toast-item {
+    --bpx-toast-fn-color: var(--bew-theme-color);
+    --bpx-toast-fn-hover-color: var(--bew-theme-color-80);
+  }
+
+  // https://github.com/BewlyBewly/BewlyBewly/issues/899
+  #musicApp {
+    .container {
+      width: 336px;
+    }
+
+    @media (min-width: 1681px) {
+      .container {
+        width: 397px;
+      }
+    }
+
+    .up a:hover * {
+      transition: 0.3s;
+    }
+  }
+
+  // #region theme color adaption part
+  // Increase the priority of the style inside by writing a non-existent selector in `:not()`
+  :not(foobar) {
+    #musicApp {
+      .BgmInfo .right .bottom .btn {
+        color: var(--bew-theme-color);
+      }
+
+      .card .title:hover,
+      .h2 .close:hover,
+      .up a:hover * {
+        color: var(--bew-theme-color) !important;
+      }
+
+      .BgmInfo .right .bottom .btn:hover {
+        color: white;
+      }
+
+      .BgmInfo .right .bottom .btn:hover {
+        background-color: var(--bew-theme-color);
+      }
+
+      .BgmInfo .right .bottom .btn {
+        background-color: var(--bew-theme-color-10);
+      }
+    }
+  }
+  // #endregion
+
+  // #region dark mode adaption part
+  &.dark {
+    #musicApp {
+      background-color: var(--bew-elevated-solid) !important;
+
+      .bottom-btn {
+        background-color: var(--bew-fill-1);
+      }
+
+      .main {
+        background-color: var(--bew-fill-1) !important;
+      }
+
+      .container::after {
+        background-color: var(--bew-border-color);
+      }
+
+      .h2 {
+        background-color: transparent;
+      }
+
+      .h2 .title svg,
+      .h2 .title span,
+      .BgmInfo .right .title,
+      .main .container .title,
+      .video-list .title,
+      .bottom-btn {
+        color: var(--bew-text-1);
+      }
+
+      .BgmInfo .right .singer,
+      .BgmInfo .right .des,
+      .h2 .close,
+      .card .up .name .nameText,
+      .card .up svg {
+        color: var(--bew-text-2);
+      }
+
+      .no-more .text {
+        color: var(--bew-text-3);
+      }
+
+      .bottom-btn {
+        border-color: var(--bew-border-color);
+      }
+
+      .card .up span {
+        filter: invert(1) hue-rotate(180deg);
+        mix-blend-mode: screen;
+      }
+    }
+  }
+  // #endregion
+}

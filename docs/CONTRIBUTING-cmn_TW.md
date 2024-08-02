@@ -10,6 +10,28 @@
 
 ### 開發（Chrome 或 Edge）
 
+#### Chrome 或 Edge 的第一種方法 （推薦）
+
+1. 執行 pnpm 指令
+
+```bash
+# 安裝依賴
+pnpm install
+
+# 建立一個用戶的帳戶資料夾，用於擴充功能存儲登入狀態
+mkdir web-ext-profile
+
+# 運行專案
+pnpm dev
+
+# 打完這條指令之後，會自動開啓一個新的 Chrome 視窗並打開 BiliBili 網站
+pnpm start:chromium
+```
+
+2. 之後每次修改擴充功能，他都會重新載入內容，你可以透過重新整理頁面來查看變更內容
+
+#### Chrome 或 Edge 的另外一種方法
+
 1. 執行 pnpm 指令
 
 ```bash
@@ -44,6 +66,28 @@ pnpm build
 
 ### 開發（Firefox）
 
+#### Firefox 的第一種方法 （推薦）
+
+1. 執行 pnpm 命令
+
+```bash
+# 安裝依賴
+pnpm install
+
+# 建立一個用戶的帳戶資料夾，用於擴充功能存儲登入狀態
+mkdir web-ext-profile
+
+# 運行專案
+pnpm dev
+
+# 打完這條指令之後，會自動開啓一個新的 Firefox 視窗並打開 BiliBili 網站
+pnpm start:firefox
+```
+
+2. 之後每次修改擴充功能，它都會重新加載，你可以透過重新整理頁面來查看變更內容
+
+#### Firefox 的另一種方法
+
 1. 執行 pnpm 命令
 
 ```bash
@@ -76,8 +120,7 @@ pnpm build-firefox
 
 #### 永久分支
 
-- **Dev**：用於錯誤修正開發新功能、性能改進或修改國際化（i18n）文件的分支。
-- **Main**：主分支，代表穩定且可發布的版本。
+- **Main**：用於錯誤修正開發新功能、性能改進或修改國際化（i18n）文件的分支。
 
 #### 其他臨時分支
 
@@ -85,12 +128,14 @@ pnpm build-firefox
 - **doc/**：專門用於修正文檔，無功能更改的分支。
 - **fix/**：專門用於修正 dev 分支中的錯誤的分支。
 
-### 提交規範
+### Commit 規範
+
+你也可以參考 [Angular commit message guidelines](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines)
 
 - `feat`：新功能
 - `fix`：錯誤修復
 - `docs`：文檔更新
-- `style`：樣式調整
+- `style`：不影響程式碼含義的更改（空白、格式、缺少分號等）
 - `refactor`：重構程式碼
 - `test`：添加或更新測試
 - `chore`：對構建過程或工具鏈進行更改

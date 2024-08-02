@@ -1,7 +1,8 @@
 import { defineConfig } from 'vite'
-import { sharedConfig } from './vite.config'
-import { isDev, isFirefox, isSafari, r } from './scripts/utils'
+
 import packageJson from './package.json'
+import { isDev, isFirefox, isSafari, r } from './scripts/utils'
+import { sharedConfig } from './vite.config'
 
 // bundling the content script using Vite
 export default defineConfig({
@@ -13,7 +14,7 @@ export default defineConfig({
     outDir: r(isFirefox ? 'extension-firefox/dist/contentScripts' : isSafari ? 'extension-safari/dist/contentScripts' : 'extension/dist/contentScripts'),
     cssCodeSplit: false,
     emptyOutDir: false,
-    sourcemap: isDev ? 'inline' : false,
+    sourcemap: false, // https://github.com/vitejs/vite-plugin-vue/issues/35
     lib: {
       entry: r('src/contentScripts/index.ts'),
       name: packageJson.name,

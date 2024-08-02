@@ -10,6 +10,28 @@
 
 ### 開發（Chrome 或 Edge）
 
+#### Chrome 或 Edge 嘅第一種方法 （推介）
+
+1. 執行 pnpm 指令
+
+```bash
+# 安裝依賴
+pnpm install
+
+# 建立一個用家帳戶資料夾，用於延伸功能存儲登入狀態
+mkdir web-ext-profile
+
+# 運行專案
+pnpm dev
+
+# 打完呢條指令之後，會自動開啓一個新嘅 Chrome 視窗並且打開 BiliBili 網站
+pnpm start:chromium
+```
+
+2. 之後每次修改延伸功能，佢會重新載入，你可以 refresh 個網頁睇吓改變之後嘅效果
+
+#### Chrome 或 Edge 嘅另外一種方法
+
 1. 執行 pnpm 指令
 
 ```bash
@@ -32,9 +54,9 @@ pnpm dev
 
 每一次執過 code 之後，你都要撳 [Extensions Reloader](https://chromewebstore.google.com/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) 粒掣，然之後 refresh 個 page，確保係有效果。
 
-#### 建立（Chrome 或 Edge）
+#### 建置（Chrome 或 Edge）
 
-建置延新功能，要執行下底嘅指令
+建置延伸功能，要執行下底嘅指令
 
 ```bash
 pnpm build
@@ -43,6 +65,28 @@ pnpm build
 然之後打包 `extension` 下嘅檔案
 
 ### 開發（Firefox）
+
+#### Firefox 嘅第一種方法 （推介）
+
+1. 執行 pnpm 指令
+
+```bash
+# 安裝依賴
+pnpm install
+
+# 建立一個用家帳戶資料夾，用於延伸功能存儲登入狀態
+mkdir web-ext-profile
+
+# 運行專案
+pnpm dev
+
+# 打完呢條指令之後，會自動開啓一個新嘅 Firefox 視窗並且打開 BiliBili 網站
+pnpm start:firefox
+```
+
+2. 之後每次修改延伸功能，佢會重新載入，你可以 refresh 個網頁睇吓改變之後嘅效果
+
+#### Firefox 嘅另外一種方法
 
 1. 執行 pnpm 指令
 
@@ -62,7 +106,7 @@ pnpm dev
 
 #### 建立（Firefox）
 
-建置延新功能，要執行下底嘅指令
+建置延伸功能，要執行下底嘅指令
 
 ```bash
 pnpm build-firefox
@@ -76,8 +120,7 @@ pnpm build-firefox
 
 #### 永久分支
 
-- **Dev**：用呢個分支進行執 bug、新功能嘅開發、改進效能抑或執語系檔（i18n）。
-- **Main**：主分支，代表穩定同可以發布嘅版本。
+- **Main**：用呢個分支進行執 bug、新功能嘅開發、改進效能抑或執語系檔（i18n）。
 
 #### 其他臨時分支
 
@@ -85,12 +128,14 @@ pnpm build-firefox
 - **doc/**：專門愛嚟執文檔，無功能變動嘅分支。
 - **fix/**：專門愛嚟執 dev 分支上嘅 bug。
 
-### 提交慣例
+### Commit 慣例
+
+你亦可以參考 [Angular commit message guidelines](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines)
 
 - `feat`：新功能
 - `fix`：執 bugs
 - `docs`：文檔更新
-- `style`：執樣式
+- `style`：唔影響代碼意思嘅變動（空白、格式、冇咗分號等）
 - `refactor`：代碼重構
 - `test`：新增或更新測試
 - `chore`：對建設過程或工具鏈進行更改

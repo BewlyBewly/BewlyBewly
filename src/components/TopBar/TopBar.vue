@@ -1,56 +1,111 @@
 <script setup lang="ts">
+import { useMouseInElement } from '@vueuse/core'
 import type { Ref, UnwrapNestedRefs } from 'vue'
-import { onMounted, watch } from 'vue'
-import type { UnReadDm, UnReadMessage, UserInfo } from './types'
-import { updateInterval } from './notify'
 
-// import NotificationsPop from './components/NotificationsPop.vue'
-// import MomentsPop from './components/MomentsPop.vue'
-// import FavoritesPop from './components/FavoritesPop.vue'
-// import HistoryPop from './components/HistoryPop.vue'
-import { getUserID, isHomePage } from '~/utils/main'
+import { useApiClient } from '~/composables/api'
+import { useBewlyApp } from '~/composables/useAppProvider'
+import { useDelayedHover } from '~/composables/useDelayedHover'
+import { OVERLAY_SCROLL_BAR_SCROLL, TOP_BAR_VISIBILITY_CHANGE } from '~/constants/globalEvents'
+import { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
+import { getUserID, isHomePage } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
-// import { useTopBarStore } from '~/stores/topBarStore'
+import ChannelsPop from './components/ChannelsPop.vue'
+import FavoritesPop from './components/FavoritesPop.vue'
+import HistoryPop from './components/HistoryPop.vue'
+import MomentsPop from './components/MomentsPop.vue'
+import MorePop from './components/MorePop.vue'
+import NotificationsPop from './components/NotificationsPop.vue'
+import UploadPop from './components/UploadPop.vue'
+import UserPanelPop from './components/UserPanelPop.vue'
+import WatchLaterPop from './components/WatchLaterPop.vue'
+import { updateInterval } from './notify'
+import type { UnReadDm, UnReadMessage, UserInfo } from './types'
 
-const props = withDefaults(defineProps<Props>(), {
-  showSearchBar: true,
-  showLogo: true,
-})
+// import { useTopBarStore } from '~/stores/topBarStore'
 
 // const popups = { NotificationsPop, MomentsPop, FavoritesPop, HistoryPop }
 
 // const topBarStore = useTopBarStore()
 
-interface Props {
-  showSearchBar?: boolean
-  showLogo?: boolean
-  mask?: boolean
-}
-
 // const topBarItems = computed(() => {
 //   return topBarStore.topBarItems
 // })
 
-const { activatedPage, scrollbarRef } = useBewlyApp()
+const { activatedPage, scrollbarRef, reachTop } = useBewlyApp()
 
 const mid = getUserID() || ''
 const userInfo = reactive<UserInfo | NonNullable<unknown>>({}) as UnwrapNestedRefs<UserInfo>
 
 const hideTopBar = ref<boolean>(false)
-const hoveringTopBar = ref<boolean>(false)
+const headerTarget = ref(null)
+const { isOutside: isOutsideTopBar } = useMouseInElement(headerTarget)
 
-// const showChannelsPop = ref<boolean>(false)
-// const showUserPanelPop = ref<boolean>(false)
-// const showNotificationsPop = ref<boolean>(false)
-// const showMomentsPop = ref<boolean>(false)
-// const showFavoritesPop = ref<boolean>(false)
-// const showHistoryPop = ref<boolean>(false)
-// const showWatchLaterPop = ref<boolean>(false)
-// const showUploadPop = ref<boolean>(false)
-// const showMorePop = ref<boolean>(false)
+const api = useApiClient()
 
+// initially, assume the user is logged in cuz data retrieval is slow, which may show the login
+// button even after login. if the user is not logged in, the login button will show up later
+const isLogin = ref<boolean>(true)
+
+const logo = ref<HTMLElement>() as Ref<HTMLElement>
+const avatarImg = ref<HTMLImageElement>() as Ref<HTMLImageElement>
+const avatarShadow = ref<HTMLImageElement>() as Ref<HTMLImageElement>
+const favoritesPopRef = ref<any>()
+const momentsPopRef = ref()
+
+const scrollTop = ref<number>(0)
+const oldScrollTop = ref<number>(0)
+
+const isSearchPage = computed(() => {
+  if (/https?:\/\/search.bilibili.com\/.*$/.test(location.href))
+    return true
+  return false
+})
+
+const showSearchBar = computed(() => {
+  if (isHomePage()) {
+    if (settings.value.useOriginalBilibiliHomepage)
+      return true
+    if (activatedPage.value === AppPage.Search)
+      return false
+    if (settings.value.useSearchPageModeOnHomePage && activatedPage.value === AppPage.Home && reachTop.value)
+      return false
+  }
+  else {
+    if (isSearchPage.value)
+      return false
+  }
+  return true
+})
+
+const isTopBarFixed = computed(() => {
+  if (
+    (isHomePage() && settings.value.useOriginalBilibiliHomepage)
+    // video page
+    || /https?:\/\/(?:www.)?bilibili.com\/(?:video|list)\/.*/.test(location.href)
+    // anime playback & movie page
+    || /https?:\/\/(?:www.)?bilibili.com\/bangumi\/play\/.*/.test(location.href)
+    // moment page
+    || /https?:\/\/t.bilibili.com.*/.test(location.href)
+    // channel, anime, chinese anime, tv shows, movie, variety shows, mooc
+    || /https?:\/\/(?:www.)?bilibili.com\/(?:v|anime|guochuang|tv|movie|variety|mooc).*/.test(location.href)
+    // articles page
+    || /https?:\/\/(?:www.)?bilibili.com\/read\/home.*/.test(location.href)
+  ) {
+    return true
+  }
+  return false
+})
+
+const showTopBar = computed(() => {
+  const isCreativeCenter = /https?:\/\/member.bilibili.com\/platform.*/.test(location.href)
+  if (settings.value.showTopBar && !isCreativeCenter)
+    return true
+  return false
+})
+
+// #region Popups visibility control
 const popupVisible = reactive({
   channels: false,
   userPanel: false,
@@ -62,23 +117,6 @@ const popupVisible = reactive({
   upload: false,
   more: false,
 })
-const api = useApiClient()
-const isLogin = ref<boolean>(false)
-const unReadMessage = reactive<UnReadMessage | NonNullable<unknown>>(
-  {},
-) as UnwrapNestedRefs<UnReadMessage>
-const unReadDm = reactive<UnReadDm>({} as UnwrapNestedRefs<UnReadDm>)
-const unReadMessageCount = ref<number>(0)
-const newMomentsCount = ref<number>(0)
-
-const logo = ref<HTMLElement>() as Ref<HTMLElement>
-const avatarImg = ref<HTMLImageElement>() as Ref<HTMLImageElement>
-const avatarShadow = ref<HTMLImageElement>() as Ref<HTMLImageElement>
-const favoritesPopRef = ref<any>()
-const momentsPopRef = ref()
-
-const scrollTop = ref<number>(0)
-const oldScrollTop = ref<number>(0)
 
 function closeAllTopBarPopup(exceptionKey?: keyof typeof popupVisible) {
   Object.keys(popupVisible).forEach((key) => {
@@ -87,15 +125,23 @@ function closeAllTopBarPopup(exceptionKey?: keyof typeof popupVisible) {
   })
 }
 
+const rightSideInactive = computed(() => {
+  let isInactive = false
+  Object.entries(popupVisible).forEach(([key, value]) => {
+    if (value && key !== 'userPanel') {
+      isInactive = true
+    }
+  })
+  return isInactive
+})
+
 // Channels
 const channels = useDelayedHover({
   beforeEnter: () => closeAllTopBarPopup('channels'),
   enter: () => {
-    logo.value.classList.add('activated')
     popupVisible.channels = true
   },
   leave: () => {
-    logo.value.classList.remove('activated')
     popupVisible.channels = false
   },
 })
@@ -105,18 +151,12 @@ const avatar = useDelayedHover({
   beforeEnter: () => closeAllTopBarPopup('userPanel'),
   enter: () => {
     popupVisible.userPanel = true
-    avatarImg.value.classList.add('hover')
-    avatarShadow.value.classList.add('hover')
   },
   beforeLeave: () => {
     popupVisible.userPanel = false
-    avatarImg.value.classList.remove('hover')
-    avatarShadow.value.classList.remove('hover')
   },
   leave: () => {
     popupVisible.userPanel = false
-    avatarImg.value.classList.remove('hover')
-    avatarShadow.value.classList.remove('hover')
   },
 })
 
@@ -130,6 +170,7 @@ const notifications = useDelayedHover({
     popupVisible.notifications = false
   },
 })
+
 // Moments
 const moments = useDelayedHover({
   beforeEnter: () => closeAllTopBarPopup('moments'),
@@ -141,6 +182,7 @@ const moments = useDelayedHover({
     popupVisible.moments = false
   },
 })
+
 // Favorites
 const favorites = useDelayedHover({
   beforeEnter: () => closeAllTopBarPopup('favorites'),
@@ -151,6 +193,7 @@ const favorites = useDelayedHover({
     popupVisible.favorites = false
   },
 })
+
 // History
 const history = useDelayedHover({
   beforeEnter: () => closeAllTopBarPopup('history'),
@@ -161,6 +204,7 @@ const history = useDelayedHover({
     popupVisible.history = false
   },
 })
+
 // Watch Later
 const watchLater = useDelayedHover({
   beforeEnter: () => closeAllTopBarPopup('watchLater'),
@@ -171,6 +215,7 @@ const watchLater = useDelayedHover({
     popupVisible.watchLater = false
   },
 })
+
 // Upload
 const upload = useDelayedHover({
   beforeEnter: () => closeAllTopBarPopup('upload'),
@@ -181,6 +226,7 @@ const upload = useDelayedHover({
     popupVisible.upload = false
   },
 })
+
 // More
 const more = useDelayedHover({
   beforeEnter: () => closeAllTopBarPopup(),
@@ -190,6 +236,8 @@ const more = useDelayedHover({
   leave: () => popupVisible.more = false,
 })
 
+// #endregion
+
 watch(() => settings.value.autoHideTopBar, (newVal) => {
   if (!newVal)
     toggleTopBarVisible(true)
@@ -198,12 +246,18 @@ watch(() => settings.value.autoHideTopBar, (newVal) => {
 watch(
   () => popupVisible.notifications,
   (newVal, oldVal) => {
+    // Stop loading new message counts on the message page, because it resets to 0 when the
+    // users reads the messages on this page
+    if (oldVal === undefined && /https?:\/\/message.bilibili.com.*$/.test(location.href))
+      return
+
     if (newVal === oldVal)
       return
 
-    if (newVal)
+    if (!newVal)
       getUnreadMessageCount()
   },
+  { immediate: true },
 )
 
 watch(
@@ -212,9 +266,10 @@ watch(
     if (newVal === oldVal)
       return
 
-    if (newVal)
+    if (!newVal)
       await getTopBarNewMomentsCount()
   },
+  { immediate: true },
 )
 
 watch(() => popupVisible.favorites, (newVal, oldVal) => {
@@ -236,17 +291,25 @@ onMounted(async () => {
   initData()
   await nextTick()
   toggleTopBarVisible(true)
-  window.addEventListener('scroll', handleScroll)
+
+  emitter.off(OVERLAY_SCROLL_BAR_SCROLL)
+  if (isHomePage() && !settings.value.useOriginalBilibiliHomepage) {
+    emitter.on(OVERLAY_SCROLL_BAR_SCROLL, () => {
+      handleScroll()
+    })
+  }
+  else {
+    window.addEventListener('scroll', handleScroll)
+  }
 })
 
-onBeforeMount(() => {
+onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
+  emitter.off(OVERLAY_SCROLL_BAR_SCROLL)
 })
 
 async function initData() {
   await getUserInfo()
-  getUnreadMessageCount()
-  getTopBarNewMomentsCount()
 
   // automatically update notifications and moments count
   setInterval(() => {
@@ -256,7 +319,7 @@ async function initData() {
 }
 
 function handleScroll() {
-  if (isHomePage()) {
+  if (isHomePage() && !settings.value.useOriginalBilibiliHomepage) {
     const osInstance = scrollbarRef.value?.osInstance()
     scrollTop.value = osInstance.elements().viewport.scrollTop as number
   }
@@ -267,7 +330,7 @@ function handleScroll() {
   if (scrollTop.value === 0)
     toggleTopBarVisible(true)
 
-  if (settings.value.autoHideTopBar && !hoveringTopBar.value && scrollTop.value !== 0) {
+  if (settings.value.autoHideTopBar && isOutsideTopBar && scrollTop.value !== 0) {
     if (scrollTop.value > oldScrollTop.value)
       toggleTopBarVisible(false)
 
@@ -297,6 +360,13 @@ async function getUserInfo() {
   }
 }
 
+// #region Notifications
+const unReadMessage = reactive<UnReadMessage | NonNullable<unknown>>(
+  {},
+) as UnwrapNestedRefs<UnReadMessage>
+const unReadDm = reactive<UnReadDm>({} as UnwrapNestedRefs<UnReadDm>)
+const unReadMessageCount = ref<number>(0)
+
 async function getUnreadMessageCount() {
   if (!isLogin.value)
     return
@@ -305,18 +375,18 @@ async function getUnreadMessageCount() {
 
   try {
     let res
-    res = await useApiClient().notification.getUnreadMsg()
+    res = await api.notification.getUnreadMsg()
     if (res.code === 0) {
       Object.assign(unReadMessage, res.data)
       Object.entries(unReadMessage).forEach(([key, value]) => {
-        if (key !== 'up') {
+        if (key !== 'up' && key !== 'recv_reply' && key !== 'recv_like') {
           if (typeof value === 'number')
             result += value
         }
       })
     }
 
-    res = await useApiClient().notification.getUnreadDm()
+    res = await api.notification.getUnreadDm()
     if (res.code === 0) {
       Object.assign(unReadDm, res.data)
       if (typeof unReadDm.follow_unread === 'number')
@@ -330,6 +400,10 @@ async function getUnreadMessageCount() {
     unReadMessageCount.value = result
   }
 }
+// #endregion
+
+// #region Moments
+const newMomentsCount = ref<number>(0)
 
 async function getTopBarNewMomentsCount() {
   if (!isLogin.value)
@@ -338,7 +412,7 @@ async function getTopBarNewMomentsCount() {
   let result = 0
 
   try {
-    const res = await useApiClient().moment.getTopBarNewMomentsCount()
+    const res = await api.moment.getTopBarNewMomentsCount()
     if (res.code === 0) {
       if (typeof res.data.update_info.item.count === 'number')
         result = res.data.update_info.item.count
@@ -348,10 +422,11 @@ async function getTopBarNewMomentsCount() {
     newMomentsCount.value = result
   }
 }
+// #endregion
 
 function toggleTopBarVisible(visible: boolean) {
   hideTopBar.value = !visible
-  emitter.emit('topBarVisibleChange', visible)
+  emitter.emit(TOP_BAR_VISIBILITY_CHANGE, visible)
 }
 
 defineExpose({
@@ -361,168 +436,125 @@ defineExpose({
 </script>
 
 <template>
-  <header
-    w="full" transition="all 300 ease-in-out"
-    :class="{ hide: hideTopBar }"
-    @mouseenter="hoveringTopBar = true"
-    @mouseleave="hoveringTopBar = false"
-  >
-    <main
-      max-w="$bew-page-max-width" m-auto flex="~ justify-between items-center gap-4"
-      p="lg:x-20 md:x-16 x-14" h="70px"
+  <Transition name="top-bar">
+    <header
+      v-if="showTopBar"
+      ref="headerTarget"
+      w="full" transition="all 300 ease-in-out"
+      :class="{ hide: hideTopBar }"
+      :style="{ position: isTopBarFixed ? 'fixed' : 'absolute' }"
     >
-      <!-- Top bar mask -->
-      <div
-        v-if="mask"
-        style="
-          mask-image: linear-gradient(to bottom,  black 40%, transparent);
-          backdrop-filter:var(--bew-filter-glass-1)
-        "
-        pos="absolute top-0 left-0" w-full h-80px
-        pointer-events-none
-      />
-      <Transition name="fade">
+      <main
+        max-w="$bew-page-max-width"
+        flex="~ justify-between items-center gap-4"
+        p="x-12" m-auto
+        h="$bew-top-bar-height"
+      >
+        <!-- Top bar mask -->
         <div
-          v-if="mask"
+          v-if="!reachTop"
+          style="
+            mask-image: linear-gradient(to bottom,  black 20%, transparent);
+          "
+          :style="{ backdropFilter: settings.disableFrostedGlass ? 'none' : 'blur(12px)' }"
           pos="absolute top-0 left-0" w-full h-80px
-          pointer-events-none opacity-70
-          :style="{
-            background: `linear-gradient(to bottom, ${(settings.wallpaper
-              || settings.useSearchPageModeOnHomePage && settings.searchPageWallpaper && settings.individuallySetSearchPageWallpaper) && isHomePage()
-              ? 'rgba(0,0,0,.6)' : 'var(--bew-bg)'}, transparent)`,
-          }"
+          pointer-events-none transform-gpu
         />
-      </Transition>
+        <Transition name="fade">
+          <div
+            v-if="!reachTop"
+            pos="absolute top-0 left-0" w-full h-80px
+            pointer-events-none opacity-80
+            :style="{
+              background: `linear-gradient(to bottom, ${(
+                settings.wallpaper
+                || settings.useSearchPageModeOnHomePage
+                && settings.searchPageWallpaper
+                && settings.individuallySetSearchPageWallpaper)
+                && isHomePage()
+                ? 'rgba(0,0,0,.6)' : `${isHomePage() ? 'var(--bew-homepage-bg)' : 'var(--bew-bg)'}`}, transparent)`,
+            }"
+          />
+        </Transition>
 
-      <div shrink-0 flex="inline xl:1 justify-center">
-        <div
-          ref="channels"
-          z-1 relative w-fit mr-auto
-        >
-          <Transition name="slide-out">
+        <div shrink-0 flex="inline xl:1 justify-center">
+          <div
+            ref="channels"
+            z-1 relative w-fit mr-auto
+          >
             <a
-              v-show="showLogo"
               ref="logo" href="//www.bilibili.com"
               class="group logo"
-              style="backdrop-filter: var(--bew-filter-glass-1)"
-              flex items-center border="1 $bew-border-color"
-              rounded="50px" p="x-4" shadow="$bew-shadow-2" duration-300
-              bg="$bew-elevated-1 hover:$bew-theme-color dark-hover:white"
-              w-auto h-50px
+              :class="{ activated: popupVisible.channels }"
+              style="backdrop-filter: var(--bew-filter-glass-1);"
+              grid="~ place-items-center" border="1 $bew-border-color"
+              rounded="46px" duration-300
+              bg="$bew-elevated hover:$bew-theme-color dark-hover:white"
+              shadow="$bew-shadow-2"
+              w-46px h-46px transform-gpu
             >
-              <svg
-                t="1645466458357"
-                viewBox="0 0 2299 1024"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                p-id="2663"
-                width="50"
-                height="40"
-                duration-300
-                un-fill="$bew-theme-color dark:white" un-group-hover:fill="white dark:$bew-theme-color"
-              >
-                <path
-                  d="M1775.840814 322.588002c6.0164 1.002733 53.144869-9.525967 55.150336-6.016401 3.0082 4.5123 24.065601 155.92504 18.550567 156.927774s-44.621635 10.027334-44.621635 10.027334c-3.0082-20.556034-28.577901-147.903173-29.079268-160.938707m75.205003-14.539634l20.556034 162.944174c10.5287-0.501367 53.144869-3.509567 57.155803-4.010934-6.0164-61.668103-16.545101-158.933241-16.545101-158.93324-20.054668-4.010934-41.112069-4.010934-61.166736 0m-40.610702 226.116376s92.752838-23.564234 126.344406-12.0328c17.046467 61.668103 48.131202 407.611118 51.139402 421.649386-21.057401 2.506833-90.246004 8.523234-95.761037 10.027333-4.5123-26.071068-81.72277-403.098818-81.722771-419.643919m343.436183-207.565809c5.515034 1.5041 54.648969-5.013667 55.150335-1.5041 1.002733 12.032801 6.0164 157.42914 0.501367 157.930507s-44.621635 4.010934-44.621635 4.010934c-1.002733-20.054668-12.032801-146.90044-11.030067-160.437341m75.70637-4.010933l4.010933 160.938707c10.5287 0 52.643502 2.506833 57.155803 2.005467-1.002733-61.668103 0-158.933241 0-158.933241-20.054668-3.509567-40.610702-5.013667-61.166736-4.010933m-64.676303 216.089043s94.758304-12.534167 126.845772 2.506833c7.019134 72.196803 6.0164 408.613852 7.019134 422.652119-21.558768 0-90.246004 1.002733-95.761038 2.005467-1.002733-26.071068-39.607968-410.619319-38.103868-427.164419m-220.099977-413.627519c54.648969 278.759879 96.262404 755.058234 97.766504 785.641602 0 0 43.117535 1.002733 91.750105 4.010934C2105.740095 614.383415 2070.644427 134.575493 2071.145794 119.033126c-12.032801-13.536901-126.344406 6.0164-126.344406 6.0164m-120.328005 659.297196c-10.5287-78.213204-290.291313-166.955108-447.720454-138.377206 0 0-19.553301-172.470141-27.073801-339.425248-6.517767-143.390873-1.002733-282.770813 0.501366-305.833681-10.5287-7.5205-123.837572 46.627102-185.004308 69.188603 0 0 73.199537 309.844614 126.344406 952.59671 0 0 84.730971 9.0246 230.12731-19.051934s317.365114-115.815705 302.825481-219.097244m-341.932083 140.88404l-24.566967-176.982441c6.0164-3.0082 156.927774 53.144869 172.971507 63.172203-2.506833 11.030067-148.40454 113.810238-148.40454 113.810238M610.664628 322.588002c6.0164 1.002733 53.144869-9.525967 55.150335-6.016401 3.0082 4.5123 24.065601 155.92504 18.550568 156.927774s-44.621635 10.027334-44.621635 10.027334c-3.0082-20.556034-28.577901-147.903173-29.079268-160.938707m75.205003-14.539634l20.556034 162.944174c10.5287-0.501367 53.144869-3.509567 57.155803-4.010934-6.517767-61.668103-16.545101-158.933241-16.545101-158.93324-20.054668-4.010934-41.112069-4.010934-61.166736 0m-40.610702 226.116376s92.752838-23.564234 126.344406-12.0328c17.046467 61.668103 48.131202 407.611118 51.139402 421.649386-21.057401 2.506833-90.246004 8.523234-95.761037 10.027333-4.5123-26.071068-81.72277-403.098818-81.722771-419.643919m343.436182-207.565809c5.515034 1.5041 54.648969-5.013667 55.150336-1.5041 1.002733 12.032801 6.0164 157.42914 0.501367 157.930507s-44.621635 4.010934-44.621635 4.010934c-1.002733-20.054668-11.531434-146.90044-11.030068-160.437341m75.706371-4.010933l4.010933 160.938707c10.5287 0 52.643502 2.506833 57.155803 2.005467-1.002733-61.668103 0-158.933241 0-158.933241-20.054668-3.509567-40.610702-4.5123-61.166736-4.010933m-64.676303 216.089043s94.758304-12.534167 126.845772 2.506833c7.019134 72.196803 6.0164 408.613852 7.019134 422.652119-21.558768 0-90.246004 1.002733-95.761038 2.005467-0.501367-26.071068-39.607968-410.619319-38.103868-427.164419m-220.099977-413.627519c54.648969 278.759879 96.262404 755.058234 97.766504 785.641602 0 0 43.117535 1.002733 91.750105 4.010934-28.577901-300.318647-63.67357-780.126569-63.172203-796.170303-12.032801-13.035534-126.344406 6.517767-126.344406 6.517767m-120.328005 659.297196c-10.5287-78.213204-290.291313-166.955108-447.720454-138.377206 0 0-19.553301-172.470141-27.073801-339.425248-6.517767-143.390873-1.002733-282.770813 0.501366-305.833681C174.475608-6.308547 61.166736 47.337689 0 69.89919c0 0 73.199537 309.844614 126.344406 952.59671 0 0 84.730971 9.0246 230.12731-19.051934s317.365114-115.815705 302.825481-219.097244m-341.932083 140.88404l-24.566967-176.982441c6.0164-3.0082 156.927774 53.144869 172.971507 63.172203-2.506833 11.030067-148.40454 113.810238-148.40454 113.810238"
-                  p-id="2664"
-                />
-              </svg>
-            </a>
-          </Transition>
 
-          <Transition name="slide-in">
-            <ChannelsPop
-              v-show="popupVisible.channels"
-              class="bew-popover"
-              pos="!left-0 !top-70px"
-              transform="!translate-x-0"
+              <svg
+                t="1720198072316" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                p-id="1477" width="38" height="38"
+                un-fill="$bew-theme-color dark:white" un-group-hover:fill="white dark:$bew-theme-color"
+                duration-300 mt--1px
+              >
+                >
+                <path d="M450.803484 456.506027l-120.670435 23.103715 10.333298 45.288107 119.454151-23.102578-9.117014-45.289244z m65.04448 120.060586c-29.483236 63.220622-55.926329 15.502222-55.926328 15.502223l-19.754098 12.768142s38.90176 53.192249 75.986489 12.764729c43.770311 40.42752 77.203911-13.068516 77.203911-13.068516l-17.934791-11.55072c0.001138-0.304924-31.305956 44.983182-59.575183-16.415858z m59.57632-74.773617L695.182222 524.895573l10.029511-45.288106-120.364373-23.103716-9.423076 45.289245z m237.784178-88.926436c-1.905778-84.362809-75.487004-100.540871-75.487004-100.540871s-57.408853-0.316302-131.944676-0.95232l54.237867-52.332089s8.562916-10.784996-6.026809-22.834062c-14.592-12.051342-15.543182-6.660551-20.615396-3.487289-4.441884 3.169849-69.462471 66.920676-80.878933 78.340551-29.494613 0-60.2624-0.319716-90.075591-0.319716h10.466418s-77.705671-76.754489-82.781298-80.241777c-5.075627-3.488427-5.709369-8.56064-20.616533 3.487289-14.589724 12.05248-6.026809 22.8352-6.026809 22.8352l55.504213 53.919288c-60.261262 0-112.280462 0.319716-136.383147 1.268623-78.025387 22.521173-71.99744 100.859449-71.99744 100.859449s0.950044 168.100978 0 253.103217c8.562916 85.00224 73.899804 98.636231 73.899805 98.636231s26.007324 0.63488 45.357511 0.63488c1.900089 5.391929 3.486151 32.034133 33.302756 32.034134 29.495751 0 33.30048-32.034133 33.30048-32.034134s217.263218-0.950044 235.340231-0.950044c0.953458 9.196658 5.394204 33.619058 35.207395 33.303893 29.494613-0.636018 31.714418-35.20512 31.714418-35.20512s10.151253-0.95232 40.280747 0c70.413653-13.005938 74.534684-95.468658 74.534684-95.468657s-1.265209-169.689316-0.312889-254.056676zM752.628622 681.8304c0 13.319964-10.467556 24.102684-23.471218 24.102684H300.980907c-13.003662 0-23.47008-10.78272-23.47008-24.102684V397.961671c0-13.32224 10.467556-24.106098 23.47008-24.106098h428.176497c13.003662 0 23.471218 10.783858 23.471218 24.106098v283.868729z" p-id="1478" /></svg>
+            </a>
+
+            <Transition name="slide-in">
+              <ChannelsPop
+                v-show="popupVisible.channels"
+                class="bew-popover"
+                pos="!left-0 !top-70px"
+                transform="!translate-x-0"
+              />
+            </Transition>
+          </div>
+        </div>
+
+        <!-- search bar -->
+        <div flex="inline 1 md:justify-center <md:justify-end items-center" w="full">
+          <Transition name="slide-out">
+            <SearchBar
+              v-if="showSearchBar"
+              style="
+                --b-search-bar-color: var(--bew-elevated);
+                --b-search-bar-hover: var(--bew-elevated-hover);
+              "
             />
           </Transition>
         </div>
-      </div>
 
-      <!-- search bar -->
-      <div flex="inline 1 md:justify-center <md:justify-end items-center" w="full">
-        <Transition name="slide-out">
-          <SearchBar
-            v-if="props.showSearchBar"
-            style="
-              --b-search-bar-color: var(--bew-elevated-1);
-              --b-search-bar-hover: var(--bew-elevated-1-hover);
-            "
-          />
-        </Transition>
-      </div>
-
-      <!-- right content -->
-      <div
-        class="right-side"
-        flex="inline xl:1 justify-center items-center"
-      >
+        <!-- right content -->
         <div
-          style="backdrop-filter: var(--bew-filter-glass-1)"
-          ml-auto flex h-55px p-2 bg="$bew-elevated-1"
-          text="$bew-text-1" border="1 $bew-border-color" rounded-full shadow="$bew-shadow-2"
+          class="right-side"
+          flex="inline xl:1 justify-end items-center"
         >
-          <div v-if="!isLogin" class="right-side-item">
-            <a href="https://passport.bilibili.com/login" class="login">
-              <ic:outline-account-circle class="text-xl mr-2" />{{
-                $t('topbar.sign_in')
-              }}
-            </a>
-          </div>
-          <template v-if="isLogin">
-            <!-- Avatar -->
-            <div
-              ref="avatar"
-              class="avatar right-side-item"
-            >
-              <a
-                ref="avatarImg"
-                :href="`https://space.bilibili.com/${mid}`"
-                :target="isHomePage() ? '_blank' : '_self'"
-                class="avatar-img"
-                rounded-full
-                z-1
-                w-38px
-                h-38px
-                bg="$bew-fill-3 cover center"
-                :style="{
-                  backgroundImage: `url(${`${userInfo.face}`.replace(
-                    'http:',
-                    '',
-                  )})`,
-                }"
-              />
-              <div
-                ref="avatarShadow"
-                class="avatar-shadow"
-                pos="absolute top-0"
-                bg="cover center"
-                blur-sm
-                opacity="60"
-                rounded-full
-                z-0
-                w-38px
-                h-38px
-                :style="{
-                  backgroundImage: `url(${`${userInfo.face}`.replace(
-                    'http:',
-                    '',
-                  )})`,
-                }"
-              />
-              <Transition name="slide-in">
-                <UserPanelPop
-                  v-if="popupVisible.userPanel"
-                  :user-info="userInfo"
-                  after:h="!0"
-                  class="bew-popover"
-                />
-              </Transition>
+          <div
+            class="others"
+            :class="{ inactive: rightSideInactive }"
+            style="
+              backdrop-filter: var(--bew-filter-glass-1);
+              box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
+            "
+            flex="~ items-center gap-1" h-46px px-5px bg="$bew-elevated"
+            transition="transition-property-colors duration-150"
+            text="$bew-text-1" border="1 $bew-border-color" rounded-full
+            transform-gpu
+          >
+            <div v-if="!isLogin" class="right-side-item">
+              <a href="https://passport.bilibili.com/login" class="login">
+                <div i-ic:outline-account-circle class="text-xl mr-2" />{{
+                  $t('topbar.sign_in')
+                }}
+              </a>
             </div>
-
-            <!-- TODO: need to refactor to this -->
-            <!-- <div display="lg:flex none">
+            <template v-if="isLogin">
+              <!-- TODO: need to refactor to this -->
+              <!-- <div display="lg:flex none">
               <div v-for="item in topBarItems" :key="item.i18nKey" class="right-side-item">
                 <a :href="item.url" target="_blank" :title="$t(item.i18nKey)">
                   <Icon :icon="item.icon" />
@@ -536,235 +568,293 @@ defineExpose({
               </div>
             </div> -->
 
-            <!-- TODO: need to refactor to above code -->
-            <div class="hidden lg:flex" gap-1>
-              <!-- Notifications -->
-              <div
-                ref="notifications"
-                class="right-side-item"
-                :class="{ active: popupVisible.notifications }"
-              >
-                <template v-if="unReadMessageCount > 0">
-                  <div
-                    v-if="settings.topBarIconBadges === 'number'"
-                    class="unread-message"
+              <!-- TODO: need to refactor to above code -->
+              <div class="hidden lg:flex" gap-1>
+                <!-- Moments -->
+                <div
+                  ref="moments"
+                  class="right-side-item"
+                  :class="{ active: popupVisible.moments }"
+                >
+                  <template v-if="newMomentsCount > 0">
+                    <div
+                      v-if="settings.topBarIconBadges === 'number'"
+                      class="unread-num-dot"
+                    >
+                      {{ newMomentsCount > 99 ? '99+' : newMomentsCount }}
+                    </div>
+                    <div
+                      v-else-if="settings.topBarIconBadges === 'dot'"
+                      class="unread-dot"
+                    />
+                  </template>
+                  <a
+                    href="https://t.bilibili.com"
+                    :target="isHomePage() ? '_blank' : '_self'"
+                    :title="$t('topbar.moments')"
                   >
-                    {{ unReadMessageCount > 99 ? '99+' : unReadMessageCount }}
-                  </div>
-                  <div
-                    v-else-if="settings.topBarIconBadges === 'dot'"
-                    w-8px h-8px bg="$bew-theme-color" rounded-8px pos="absolute right-0 top-0"
-                  />
-                </template>
-                <a
-                  href="https://message.bilibili.com"
-                  :target="isHomePage() ? '_blank' : '_self'"
-                  :title="$t('topbar.notifications')"
+                    <div i-tabler:windmill />
+                  </a>
+
+                  <Transition name="slide-in">
+                    <MomentsPop v-show="popupVisible.moments" ref="momentsPopRef" class="bew-popover" />
+                  </Transition>
+                </div>
+
+                <!-- Favorites -->
+                <div
+                  ref="favorites"
+                  class="right-side-item"
+                  :class="{ active: popupVisible.favorites }"
                 >
-                  <tabler:bell />
-                </a>
-
-                <Transition name="slide-in">
-                  <NotificationsPop
-                    v-if="popupVisible.notifications"
-                    class="bew-popover"
-                  />
-                </Transition>
-              </div>
-
-              <!-- Moments -->
-              <div
-                ref="moments"
-                class="right-side-item"
-                :class="{ active: popupVisible.moments }"
-              >
-                <template v-if="newMomentsCount > 0">
-                  <div
-                    v-if="settings.topBarIconBadges === 'number'"
-                    class="unread-message"
+                  <a
+                    :href="`https://space.bilibili.com/${mid}/favlist`"
+                    :target="isHomePage() ? '_blank' : '_self'"
+                    :title="$t('topbar.favorites')"
                   >
-                    {{ newMomentsCount > 99 ? '99+' : newMomentsCount }}
-                  </div>
-                  <div
-                    v-else-if="settings.topBarIconBadges === 'dot'"
-                    w-8px h-8px bg="$bew-theme-color" rounded-8px pos="absolute right-0 top-0"
-                  />
-                </template>
-                <a
-                  href="https://t.bilibili.com"
-                  :target="isHomePage() ? '_blank' : '_self'"
-                  :title="$t('topbar.moments')"
+                    <div i-mingcute:star-line />
+                  </a>
+
+                  <Transition name="slide-in">
+                    <KeepAlive>
+                      <FavoritesPop
+                        v-if="popupVisible.favorites"
+                        ref="favoritesPopRef"
+                        class="bew-popover"
+                      />
+                    </KeepAlive>
+                  </Transition>
+                </div>
+
+                <!-- History -->
+                <div
+                  ref="history"
+                  class="right-side-item"
+                  :class="{ active: popupVisible.history }"
                 >
-                  <tabler:windmill />
-                </a>
+                  <a
+                    href="https://www.bilibili.com/account/history"
+                    :target="isHomePage() ? '_blank' : '_self'"
+                    :title="$t('topbar.history')"
+                  >
+                    <div i-mingcute:time-line />
+                  </a>
 
-                <Transition name="slide-in">
-                  <MomentsPop v-show="popupVisible.moments" ref="momentsPopRef" class="bew-popover" />
-                </Transition>
-              </div>
+                  <Transition name="slide-in">
+                    <HistoryPop v-if="popupVisible.history" class="bew-popover" />
+                  </Transition>
+                </div>
 
-              <!-- Favorites -->
-              <div
-                ref="favorites"
-                class="right-side-item"
-                :class="{ active: popupVisible.favorites }"
-              >
-                <a
-                  :href="`https://space.bilibili.com/${mid}/favlist`"
-                  :target="isHomePage() ? '_blank' : '_self'"
-                  :title="$t('topbar.favorites')"
+                <!-- Watch later -->
+                <div
+                  ref="watchLater"
+                  class="right-side-item"
+                  :class="{ active: popupVisible.watchLater }"
                 >
-                  <mingcute:star-line />
-                </a>
+                  <a
+                    href="https://www.bilibili.com/watchlater/#/list"
+                    :target="isHomePage() ? '_blank' : '_self'"
+                    :title="$t('topbar.watch_later')"
+                  >
+                    <div i-mingcute:carplay-line />
+                  </a>
 
-                <Transition name="slide-in">
-                  <KeepAlive>
-                    <FavoritesPop
-                      v-if="popupVisible.favorites"
-                      ref="favoritesPopRef"
+                  <Transition name="slide-in">
+                    <WatchLaterPop
+                      v-if="popupVisible.watchLater"
                       class="bew-popover"
                     />
-                  </KeepAlive>
-                </Transition>
+                  </Transition>
+                </div>
+
+                <!-- Creative center -->
+                <div class="right-side-item">
+                  <a
+                    href="https://member.bilibili.com/platform/home"
+                    target="_blank"
+                    :title="$t('topbar.creative_center')"
+                  >
+                    <div i-mingcute:bulb-line />
+                  </a>
+                </div>
               </div>
 
-              <!-- History -->
+              <!-- More -->
               <div
-                ref="history"
-                class="right-side-item"
-                :class="{ active: popupVisible.history }"
+                ref="more"
+                class="right-side-item lg:!hidden flex"
+                :class="{ active: popupVisible.more }"
               >
-                <a
-                  href="https://www.bilibili.com/account/history"
-                  :target="isHomePage() ? '_blank' : '_self'"
-                  :title="$t('topbar.history')"
-                >
-                  <mingcute:time-line />
+                <a title="More">
+                  <div i-mingcute:menu-line />
                 </a>
 
                 <Transition name="slide-in">
-                  <HistoryPop v-if="popupVisible.history" class="bew-popover" />
+                  <MorePop v-show="popupVisible.more" class="bew-popover" />
                 </Transition>
               </div>
 
-              <!-- Watch later -->
-              <div
-                ref="watchLater"
-                class="right-side-item"
-                :class="{ active: popupVisible.watchLater }"
-              >
-                <a
-                  href="https://www.bilibili.com/watchlater/#/list"
-                  :target="isHomePage() ? '_blank' : '_self'"
-                  :title="$t('topbar.watch_later')"
+              <div class="hidden lg:flex" gap-1 items-center>
+                <!-- Divider -->
+                <div
+                  w-4px h-22px bg="$bew-fill-1" mx-1
+                  rounded-4px
+                />
+
+                <!-- Upload -->
+                <div
+                  ref="upload"
+                  class="right-side-item"
+                  :class="{ active: popupVisible.upload }"
                 >
-                  <mingcute:carplay-line />
-                </a>
+                  <a
+                    href="https://member.bilibili.com/platform/upload/video/frame"
+                    target="_blank"
+                    :title="$t('topbar.upload')"
+                  >
+                    <div i-mingcute:upload-2-line flex-shrink-0 />
+                  </a>
 
-                <Transition name="slide-in">
-                  <WatchLaterPop v-if="popupVisible.watchLater" class="bew-popover" />
-                </Transition>
-              </div>
+                  <Transition name="slide-in">
+                    <UploadPop
+                      v-if="popupVisible.upload"
+                      class="bew-popover"
+                    />
+                  </Transition>
+                </div>
 
-              <!-- Creative center -->
-              <div class="right-side-item">
-                <a
-                  href="https://member.bilibili.com/platform/home"
-                  target="_blank"
-                  :title="$t('topbar.creative_center')"
+                <!-- Notifications -->
+                <div
+                  ref="notifications"
+                  class="right-side-item"
+                  :class="{ active: popupVisible.notifications }"
                 >
-                  <mingcute:bulb-line />
-                </a>
+                  <template v-if="unReadMessageCount > 0">
+                    <div
+                      v-if="settings.topBarIconBadges === 'number'"
+                      class="unread-num-dot"
+                    >
+                      {{ unReadMessageCount > 99 ? '99+' : unReadMessageCount }}
+                    </div>
+                    <div
+                      v-else-if="settings.topBarIconBadges === 'dot'"
+                      class="unread-dot"
+                    />
+                  </template>
+                  <a
+                    href="https://message.bilibili.com"
+                    :target="isHomePage() ? '_blank' : '_self'"
+                    :title="$t('topbar.notifications')"
+                  >
+                    <div i-tabler:bell />
+                  </a>
+
+                  <Transition name="slide-in">
+                    <NotificationsPop
+                      v-if="popupVisible.notifications"
+                      class="bew-popover"
+                    />
+                  </Transition>
+                </div>
               </div>
-            </div>
+            </template>
 
-            <!-- More -->
+            <!-- Avatar -->
             <div
-              ref="more"
-              class="right-side-item lg:!hidden flex"
-              :class="{ active: popupVisible.more }"
-            >
-              <a title="More">
-                <mingcute:menu-line />
-              </a>
-
-              <Transition name="slide-in">
-                <MorePop v-show="popupVisible.more" class="bew-popover" />
-              </Transition>
-            </div>
-
-            <!-- Upload -->
-            <div
-              ref="upload"
-              class="upload right-side-item"
+              v-if="isLogin"
+              ref="avatar"
+              :class="{ hover: popupVisible.userPanel }"
+              class="avatar right-side-item"
             >
               <a
-                href="https://member.bilibili.com/platform/upload/video/frame"
-                target="_blank"
-                bg="$bew-theme-color"
-                rounded-40px
-                un-text="!white !base"
-                m="x-1"
-                flex="~"
-                justify="center"
-                w="xl:100px 42px"
-                h="xl:auto 42px"
-                p="xl:auto x-4"
-                shadow
-                filter="hover:brightness-110"
-                style="--un-shadow: 0 0 10px var(--bew-theme-color-60)"
-              >
-                <mingcute:upload-2-line flex-shrink-0 />
-                <span m="l-2" class="hidden xl:block">{{
-                  $t('topbar.upload')
-                }}</span>
-              </a>
-
+                ref="avatarImg"
+                :href="`https://space.bilibili.com/${mid}`"
+                :target="isHomePage() ? '_blank' : '_self'"
+                class="avatar-img"
+                :class="{ hover: popupVisible.userPanel }"
+                :style="{
+                  backgroundImage: `url(${`${userInfo.face}`.replace(
+                    'http:',
+                    '',
+                  )})`,
+                }"
+              />
+              <div
+                ref="avatarShadow"
+                class="avatar-shadow"
+                :class="{ hover: popupVisible.userPanel }"
+                :style="{
+                  backgroundImage: `url(${`${userInfo.face}`.replace(
+                    'http:',
+                    '',
+                  )})`,
+                }"
+              />
+              <svg
+                v-if="userInfo.vip?.status === 1"
+                class="vip-img"
+                :class="{ hover: popupVisible.userPanel }"
+                :style="{ opacity: popupVisible.userPanel ? 1 : 0 }"
+                bg="[url(https://i0.hdslb.com/bfs/seed/jinkela/short/user-avatar/big-vip.svg)] contain no-repeat"
+                w="28%" h="28%" z-1
+                pos="absolute bottom--20px right-28px" duration-300
+              />
               <Transition name="slide-in">
-                <UploadPop
-                  v-if="popupVisible.upload"
+                <UserPanelPop
+                  v-if="popupVisible.userPanel"
                   class="bew-popover"
-                  pos="!left-auto !right-0"
-                  transform="!translate-x-0"
+                  :user-info="userInfo"
+                  after:h="!0"
+                  pos="!left-auto !right-0" transform="!translate-x-0"
                 />
               </Transition>
             </div>
-          </template>
+          </div>
         </div>
-      </div>
-    </main>
-  </header>
+      </main>
+    </header>
+  </Transition>
 </template>
 
 <style lang="scss" scoped>
+.top-bar-enter-active,
+.top-bar-leave-active {
+  transition: all 0.5s ease;
+}
+
+.top-bar-enter-from,
+.top-bar-leave-to {
+  --uno: "opacity-0 transform -translate-y-full";
+}
+
 .slide-in-enter-active,
 .slide-in-leave-active {
-  --at-apply: transition-all duration-300 pointer-events-none transform-gpu;
+  --uno: "transition-all duration-300 pointer-events-none transform-gpu";
 }
 
 .slide-in-leave-to,
 .slide-in-enter-from {
-  --at-apply: transform important:translate-y-4 opacity-0;
+  --uno: "transform important: translate-y-4 opacity-0";
 }
 
 .slide-out-enter-active,
 .slide-out-leave-active {
-  --at-apply: transition-all duration-300 pointer-events-none transform-gpu;
+  --uno: "transition-all duration-300 pointer-events-none transform-gpu";
 }
 
 .slide-out-leave-to,
 .slide-out-enter-from {
-  --at-apply: transform important:-translate-y-4 opacity-0;
+  --uno: "transform important: -translate-y-4 opacity-0";
 }
 
 .fade-enter-active,
 .fade-leave-active {
-  --at-apply: transition-all duration-600;
+  --uno: "transition-all duration-600";
 }
 
 .fade-leave-to,
 .fade-enter-from {
-  --at-apply: opacity-0;
+  --uno: "opacity-0";
 }
 
 .hide {
@@ -772,73 +862,96 @@ defineExpose({
 }
 
 .bew-popover {
-  --at-apply: absolute top-60px left-1/2
-    transform -translate-x-1/2
-    overflow-visible
-    after:content-empty
-    after:opacity-100 after:w-full after:h-100px
-    after:absolute after:top--30px after:left-1/2 after:-z-1
-    after:transform after:-translate-x-1/2;
+  --uno: "absolute top-60px left-1/2";
+  --uno: "transform -translate-x-1/2";
+  --uno: "overflow-visible";
+  --uno: "after:content-empty";
+  --uno: "after:opacity-100 after:w-full after:h-100px";
+  --uno: "after:absolute after:top--30px after:left-1/2 after:-z-1";
+  --uno: "after:transform after:-translate-x-1/2";
 }
 
 .logo.activated {
-  --at-apply: bg-$bew-theme-color dark:bg-white;
+  --uno: "bg-$bew-theme-color dark:bg-white";
 
   svg {
-    --at-apply: fill-white dark:fill-$bew-theme-color;
+    --uno: "fill-white dark:fill-$bew-theme-color";
   }
 }
 
 .right-side {
+  .avatar {
+    --uno: "flex items-center relative z-1 rounded-1/2";
 
-  .unread-message {
-    --at-apply: absolute -top-1 right-0
-      important:px-1 important:py-2 rounded-full
-      text-xs leading-0 z-1 min-w-16px h-16px
-      flex justify-center items-center
-      bg-$bew-theme-color  text-white;
-    box-shadow: 0 2px 4px rgba(var(--tw-shadow-color), 0.4);
+    // Add a safety zone to prevent the avatar from collapsing quickly after leaving
+    &:hover::after,
+    &.hover::after {
+      --uno: "content-empty absolute right-0 top-20px w-110px h-100px";
+    }
+
+    .avatar-img,
+    .avatar-shadow {
+      --uno: "duration-300 rounded-1/2 w-34px h-34px ml-1 bg-cover bg-center";
+
+      &.hover {
+        --uno: "transform scale-230 translate-y-60px translate-x--36px";
+      }
+    }
+
+    .avatar-img {
+      --uno: "z-1";
+    }
+
+    .avatar-shadow {
+      --uno: "opacity-0 absolute top-0 z-0 pointer-events-none blur-sm";
+
+      &.hover {
+        --uno: "opacity-60";
+      }
+    }
+
+    .vip-img {
+      &.hover {
+        --uno: "transform scale-180 translate-y-55px translate-15px";
+      }
+    }
+  }
+
+  .others.inactive,
+  .others:hover {
+    --uno: "important-backdrop-filter-none important-bg-$bew-elevated-solid";
+  }
+
+  .unread-num-dot {
+    --uno: "absolute top--2px right--4px";
+    --uno: "important:px-1 rounded-full";
+    --uno: "text-xs leading-0 z-6 min-w-14px h-14px";
+    --uno: "grid place-items-center";
+    --uno: "bg-$bew-theme-color text-white shadow-$bew-shadow-1";
+  }
+
+  .unread-dot {
+    --uno: "w-8px h-8px bg-$bew-theme-color rounded-8px absolute right-2px top-2px";
   }
 
   .right-side-item {
-    --at-apply: relative text-$bew-text-1 flex items-center;
+    --uno: "relative text-$bew-text-1 flex items-center";
 
     &:not(.avatar) a {
-      --at-apply: text-xl flex items-center p-2 rounded-40px duration-300 relative z-5;
-      // --at-apply: after:content-empty after:absolute after:w-120% after:h-120% after:z-0 after:bg-yellow;
+      --uno: "text-lg grid place-items-center rounded-40px duration-300 relative z-5";
+      --uno: "h-34px w-34px";
     }
 
-    &.active a, &:not(.upload) a:hover {
+    &.active a,
+    & a:hover {
       --un-drop-shadow: drop-shadow(0 0 6px white);
-      --at-apply: bg-$bew-fill-2;
+      --uno: "bg-$bew-fill-2";
     }
   }
 
   .right-side-item .login {
     --un-drop-shadow: drop-shadow(0 0 6px var(--bew-theme-color));
-    --at-apply: rounded-full mx-1
-      important:text-$bew-theme-color important:px-4
-      hover:important-bg-$bew-theme-color hover:important-text-white
-      flex items-center justify-center important:text-base w-120px
-      border-solid border-$bew-theme-color border-2
-      important:dark:filter;
-  }
-
-  .avatar {
-    --at-apply: flex items-center ml-2px pr-2 relative z-1;
-
-    .avatar-img,
-    .avatar-shadow {
-      --at-apply: duration-300;
-
-      &.hover {
-        --at-apply: transform scale-230 important:translate-y-36px;
-      }
-    }
-
-    .avatar-shadow {
-      --at-apply: pointer-events-none;
-    }
+    --uno: "rounded-full mx-1 important:text-$bew-theme-color important:px-4 hover:important-bg-$bew-theme-color hover:important-text-white flex items-center justify-center important:text-base w-120px border-solid border-$bew-theme-color border-2 important:dark:filter";
   }
 }
 </style>

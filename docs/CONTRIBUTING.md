@@ -10,6 +10,28 @@ This project is built using [Vite](https://vitejs.dev/), please make sure you ha
 
 ### Development (Chrome or Edge)
 
+#### The First Method for Chrome or Edge (RECOMMENDED)
+
+1. Run the pnpm command
+
+```bash
+# Install dependencies
+pnpm install
+
+# Create a profile folder for the extension to store the login status
+mkdir web-ext-profile
+
+# Run the project
+pnpm dev
+
+# After typing this commend, it will automatically open a new Chrome window that opens BiliBili website
+pnpm start:chromium
+```
+
+2. Every time you change the extension, it will reload, and you can see the changes by refreshing the webpage
+
+#### The Alternative Method for Chrome or Edge
+
 1. Run the pnpm command
 
 ```bash
@@ -44,6 +66,28 @@ Then package it to the `extension` folder
 
 ### Development (Firefox)
 
+#### The First Method for Firefox (RECOMMENDED)
+
+1. Run the pnpm command
+
+```bash
+# Install dependencies
+pnpm install
+
+# Create a profile folder for the extension to store the login status
+mkdir web-ext-profile
+
+# Run the project
+pnpm dev
+
+# After typing this commend, it will automatically open a new Firefox window that opens BiliBili website
+pnpm start:firefox
+```
+
+2. Every time you change the extension, it will reload, and you can see the changes by refreshing the webpage
+
+#### The Alternative Method for Firefox
+
 1. Run the pnpm command
 
 ```bash
@@ -76,8 +120,7 @@ Then package it to the `extension-firefox` folder
 
 #### Permanent Branches
 
-- **Dev**: Use this branch for bug fixes, developing new features, performance improvements, or modifications to internationalization (i18n) files.
-- **Main**: Main branch, represents the stable and publishable version.
+- **Main**: Use this branch for bug fixes, developing new features, performance improvements, or modifications to internationalization (i18n) files.
 
 #### Other Temporary Branches
 
@@ -87,10 +130,12 @@ Then package it to the `extension-firefox` folder
 
 ### Commit Convention
 
+You can also refer to the [Angular commit message guidelines](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines)
+
 - `feat`: New feature
 - `fix`: Bug fix
 - `docs`: Documentation update
-- `style`: Adjust styles
+- `style`: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
 - `refactor`: Code refactoring
 - `test`: Add or update tests
 - `chore`: Changes to the build process or toolchain

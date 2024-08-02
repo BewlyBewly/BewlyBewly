@@ -41,7 +41,7 @@ settings:
   # Settings group
   group_common: Common
   group_video_card: Video Card
-  group_performance: Performance
+  group_performance: Frosted Glass & Performance
   group_topbar: Top Bar
   group_dock: Dock
   group_color: Color
@@ -49,6 +49,9 @@ settings:
   group_logo: LOGO
   group_search_bar: Search Bar
   group_recommendation_mode: Recommendation Mode
+  group_recommendation_filters: Recommendation Filters
+  group_recommendation_filters_desc: |
+    Do not set the restricted value too large, as this may increase loading time!
   group_search_page_mode: Search Page Mode
   group_home_tabs: Home Tabs
 
@@ -68,6 +71,7 @@ settings:
   chk_box:
     show: Show
     hidden: Hidden
+  enable_grid_layout_switcher: Enable grid layout switcher
   enable_horizontal_scrolling: Enable horizontal scrolling
   enable_horizontal_scrolling_desc: After enabling, mouse scrolling will directly scroll the horizontal scroll list
   enable_video_preview: Enable video preview feature
@@ -76,6 +80,7 @@ settings:
   block_ads: Block ads
   disable_frosted_glass: Disable frosted glass effect
   reduce_frosted_glass_blur: Reduce the intensity of the frosted glass blur
+  use_old_topbar: Use the old top bar
   auto_hide_topbar: Automatically hide the top bar
   topbar_icon_badges: Icon badges
   topbar_icon_badges_opt:
@@ -91,6 +96,8 @@ settings:
   auto_hide_dock: Automatically hide the dock
   dock_content_adjustment: Dock content adjustment
   dock_content_adjustment_desc: The page of the first activated dock item will be the startup page
+  disable_light_dark_mode_switcher: Disable light/dark mode switcher
+  move_back_to_top_and_refresh_to_dock: Move the back-to-top and refresh buttons to the dock
 
   # Appearance
   theme: Theme
@@ -107,8 +114,8 @@ settings:
   choose_ur_wallpaper: Choose your wallpaper
   image_url: Image URL
   image_url_hint: |-
-    URL examples: https://pic.imgdb.cn/item/638e1d63b1fccdcd36103811.jpg
-    https://pic.imgdb.cn/item/638e1d7ab1fccdcd36106346.jpg
+    URL examples: https://cdn.jsdelivr.net/gh/BewlyBewly/Imgs/wallpapers/rocky-mountain-cloudscape.jpg
+    https://cdn.jsdelivr.net/gh/BewlyBewly/Imgs/wallpapers/green-white-mountains.jpg
   enable_wallpaper_masking: Enable wallpaper masking
   wallpaper_mask_opacity: Wallpaper masking opacity
   wallpaper_blur_intensity: Wallpaper blur intensity
@@ -135,13 +142,17 @@ settings:
     The access key is valid for about one month. After that, remember to re-authorize the BewlyBewly to use the access key.
   authorize_app_more_info_access_key: More information about the access key
   scan_qrcode_desc: Use the Bilibili mobile app to scan this QR code in order to authorize the access key.
+  filter_by_view_count: Filter by view count
+  filter_by_view_count_unit: views
+  filter_by_duration: Filter by duration
+  filter_by_duration_unit: sec
   use_search_page_mode: Use search page mode on homepage
   settings_shared_with_the_search_page: Settings shared with the search page
   settings_shared_with_the_search_page_desc: Those settings are used in common with the search page
   search_page_mode_wallpaper_fixed: Make the wallpaper of the search page mode fixed
   home_tabs_adjustment: Tabs adjustment
   home_tabs_adjustment_desc: The first activated tab is the default page
-  always_show_the_top_bar_logo: Always show the top bar logo
+  always_show_tabs_on_home_page: Always show tabs on the home page
 
   # Compatibility
   # Common
@@ -156,12 +167,25 @@ settings:
   topbar_visibility_desc: Compatible with Bilibili Evolved customize top bar
 
   # About
+  links: Links
+  sponsor: Sponsor
+  sponsor_desc: If you like this project and would like to see it glow, please consider sponsoring it. Your support is the driving force behind the project's development.
+  afdian: Afdian
   import_settings: Import Settings
   export_settings: Export Settings
   export_settings_desc: Some sensitive content, such as access key, will not be exported and may need to be reacquired again.
   contributors: Contributors
 
   just_wanna_change_the_job: i just wanna switch to a better job...
+  just_wanna_change_the_job_hint: |-
+    Let's just consider this a piece of performance art.
+
+    Now I'm still working at my old company, which has started to gradually appreciate my contributes. I work on both front-end & back-end there.
+    I'm not foolish enough to mess up in the current situation; Instead, I will try to create my own environment and gradually become a versatile person.
+    The Logos for BewlyBewly, whether they are new or old, or even the VTuber style of logo, are all designed and made by me. I have always been working hard to develop my ability to produce independent projects.
+
+    Additionally, I am very grateful for the people who have contracted me by email or other means during this time, whether they ending up helping me or not.
+    However, I particularly want to wish a certain product manager who lured people into working for free while boasting about his own capabilities, thinking I would stupidly believe everything he said? I wish you a lifetime of only managing products you dislike for other companies.
   just_wanna_change_the_job_desc: |-
     首先十分抱歉在这里打扰您，我是一名前端开发者，坐标广州，我想换一份好一点的工作
     BewlyBewly 其实是我在找工作的时候做的一个项目，那时试过有快半年是完全没有工作的状态，面试时一直刁难要么就是被礼貌拒绝
@@ -183,10 +207,7 @@ settings:
     坐标广州，我不是希望进去一定要做出什么成就出来，在做开源过程中也对项目负责人和开发者不同的想法观念略有感受。我只想进去了解一下正确的前端规范和能与其他志同道合的人一起工作。如果有合适的前端工作机会请联系我，谢谢！
   contact_me: 联系我
 auth:
-  err_tip: Failed to grant access key
-  plz_login_first: Please login to bilibili first
-  receive_verified_url_err: Unknown error, please refresh the page and try again.
-  failed_to_get_accesskey: Failed to get access key
+  auth_access_key_first: Before doing this, authorize BewlyBewly to use the access key.
 topbar:
   sign_in: Sign in
   notifications: Notifications
@@ -231,15 +252,20 @@ topbar:
     paid_courses: Paid Courses
     community: Community
     music_plus: New Song Hotlist
+    game_center: Game Center
+    comic_con_and_goods: Comic Con & Goods
+    manga: Manga
+    game_competitions: Game Competitions
   user_dropdown:
     money: 'Money: '
     b_coins: 'B-coins: '
+    exp_desc: 'Current XP: {current_exp}; need {need_exp} more for LV {level}'
     following: FOLLOWING
     followers: FOLLOWERS
     posts: POSTS
-    accout_settings: Account settings
+    account_settings: Account settings
     uploads_manager: Uploads manager
-    b_coins_wallet: B-coins Wallet
+    b_coins_wallet: B-coins wallet
     orders: Orders
     workshop: My workshop
     my_stream_info: My stream info
@@ -322,6 +348,9 @@ history:
   turn_on_watch_history_confirm: Turn on watch history? Are you sure you want to turn on watch history?
 favorites:
   unfavorite: Unfavorite
+  unfavorite_confirm: |-
+    Remove selected video(s)?
+    This operation cannot be reversed. Are you sure you want to remove the selected video(s) from your favorites?
 watch_later:
   title: Watch Later
   clear_all: Clear all watch later

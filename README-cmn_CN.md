@@ -3,17 +3,20 @@
 [English](README.md) | 官话 - 简体中文 | [官話 - 正體中文](README-cmn_TW.md) | [廣東話](README-jyut.md)
 
 <p align="center" style="margin-bottom: 0px !important;">
-<img width="150" alt="bewlybewly icon" src="https://user-images.githubusercontent.com/33394391/160250512-410b71fc-7f25-4caf-b850-429227ff082a.png"><br/>
+<img width="300" alt="BewlyBewly icon" src="https://cdn.jsdelivr.net/gh/BewlyBewly/Imgs/logos/bewlybewly-vtuber-logo.png"><br/>
 </p>
-
-<h1 align="center" style="margin-top: 0px;">BewlyBewly</h1>
 
 <p align="center">只需对您的 Bilibili 主页进行一些小更改即可。</p>
 
-![min1](https://github.com/hakadao/BewlyBewly/assets/33394391/951f9e2a-d0e1-452c-83a9-dc6d85c4d441)
-![min2](https://github.com/hakadao/BewlyBewly/assets/33394391/3e75dd20-f60b-4645-b434-23a24c72959c)
+<!-- ![min1](https://github.com/hakadao/BewlyBewly/assets/33394391/951f9e2a-d0e1-452c-83a9-dc6d85c4d441)
+![min2](https://github.com/hakadao/BewlyBewly/assets/33394391/3e75dd20-f60b-4645-b434-23a24c72959c) -->
 
 ## 👋 介绍
+
+> [!NOTE]
+> BewlyBewly 主要专注页面的调整和优化，而不是完善功能和提升效率。
+>
+> 由于效率和维护难度的原因，暗色模式只会适应常用页面，而不会适应不常用的页面。
 
 BewlyBewly 是一个用于 BiliBili 的浏览器扩展，旨在通过重新设计 BiliBili 用户界面来提升用户体验。设计灵感来自于 YouTube、Vision OS 和 iOS，从而实现了更具视觉吸引力和用户友好性的界面。
 
@@ -28,9 +31,14 @@ BewlyBewly 是一个用于 BiliBili 的浏览器扩展，旨在通过重新设�
 >
 > 此外，BewlyBewly 的 Chrome Web Store 版本将更快地解决和修复关键性错误。
 
+> [!NOTE]
+> 如果你的电脑无法访问 Chrome Web Store，你可以尝试去 crx 搜搜下载：<https://www.crxsoso.com/webstore/detail/bbbiejemhfihiooipfcjmjmbfdmobobp>
+>
+> 但与此项目在 Chrome Web Store 是否一致且未经修改不太能保证，但是经过测试是正常的，使用时请慎重，出现后果本项目概不负责
+
 - Chrome: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>
-- Edge (不推荐): <https://microsoftedge.microsoft.com/addons/detail/bewlybewly/kceadhehfjdiakpiphpjgolbgehjdmja>
-- Firefox: <https://addons.mozilla.org/lt/firefox/addon/bewlybewly/>
+- Edge: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>
+- Firefox: <https://addons.mozilla.org/zh-CN/firefox/addon/bewlybewly/>
 
 #### 对于 Firefox 用户
 
@@ -72,13 +80,13 @@ BewlyBewly 是一个用于 BiliBili 的浏览器扩展，旨在通过重新设�
 
 </details>
 
-## 🤝 贡献
+## 🤝 贡献与构建项目
 
-查看 [CONTRIBUTION.md](docs/CONTRIBUTING.md)
+查看 [CONTRIBUTING.md](docs/CONTRIBUTING-cmn_CN.md)
 
 ### 贡献者
 
-![Contributors](https://contrib.rocks/image?repo=hakadao/BewlyBewly)
+[![Contributors](https://contrib.rocks/image?repo=hakadao/BewlyBewly)](https://github.com/BewlyBewly/BewlyBewly/graphs/contributors)
 
 ## ❤️ 鸣谢
 

@@ -1,0 +1,38 @@
+.bewly-design.searchPage {
+  body {
+    background-color: var(--bew-bg) !important;
+  }
+
+  // .dark,
+  .search-layout {
+    .keyword,
+    .search-input-wrap .suggest_high_light {
+      color: var(--bew-theme-color);
+    }
+
+    .media-footer-badge {
+      background-color: var(--bew-theme-color) !important;
+    }
+
+    .bili-video-card .bili-video-card__wrap {
+      transition:
+        box-shadow 0.3s ease-in-out,
+        background 0.3s ease-in-out;
+      border-radius: var(--bew-radius-half);
+    }
+
+    .bili-video-card:hover .bili-video-card__wrap {
+      background-color: var(--bew-fill-2);
+      box-shadow: 0 0 0 8px var(--bew-fill-2);
+    }
+
+    .bili-video-card:hover .bili-video-card__info--tit {
+      transition: color 0.3s ease-in-out;
+    }
+
+    .search-loading-container .loading-text .loading-gif,
+    .bili-live-card .bili-live-card__info--living img {
+      filter: var(--bew-filter-icon-glow);
+    }
+  }
+}

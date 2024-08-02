@@ -1,0 +1,41 @@
+.bewly-design.accountSettingsPage {
+  // #region theme color adaption part
+  // Increase the priority of the style inside by writing a non-existent selector in `:not()`
+  :not(foobar) {
+    // do nothing..
+  }
+  // #endregion
+
+  // #region dark mode adaption part
+  &.dark {
+    .top-img,
+    .top_bg {
+      filter: invert(1) hue-rotate(180deg);
+    }
+
+    .security_content {
+      filter: invert(0.98) hue-rotate(180deg) brightness(1.1);
+
+      img,
+      video,
+      iframe,
+      [style*="background-image: url"],
+      [style*="background: url"],
+      .invitation-img {
+        filter: invert(0.98) hue-rotate(180deg) brightness(1.1);
+      }
+    }
+
+    .mp-img {
+      background-color: black;
+    }
+
+    .xts,
+    .table-normal *,
+    .record-login-descript,
+    .black-btn:not(:hover) {
+      color: black;
+    }
+  }
+  // #endregion
+}

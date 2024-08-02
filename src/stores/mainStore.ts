@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+
 import { HomeSubPage } from '~/contentScripts/views/Home/types'
 import { AppPage } from '~/enums/appEnums'
 
@@ -17,17 +18,17 @@ export interface HomeTab {
 export const useMainStore = defineStore('main', () => {
   const dockItems = computed((): DockItem[] => {
     return [
-      { i18nKey: 'dock.home', icon: 'mingcute:home-5-line', iconActivated: 'mingcute:home-5-fill', page: AppPage.Home },
-      { i18nKey: 'dock.search', icon: 'mingcute:search-2-line', iconActivated: 'mingcute:search-2-fill', page: AppPage.Search },
-      { i18nKey: 'dock.anime', icon: 'mingcute:tv-2-line', iconActivated: 'mingcute:tv-2-fill', page: AppPage.Anime },
-      { i18nKey: 'dock.favorites', icon: 'mingcute:star-line', iconActivated: 'mingcute:star-fill', page: AppPage.Favorites },
-      { i18nKey: 'dock.history', icon: 'mingcute:time-line', iconActivated: 'mingcute:time-fill', page: AppPage.History },
-      { i18nKey: 'dock.watch_later', icon: 'mingcute:carplay-line', iconActivated: 'mingcute:carplay-fill', page: AppPage.WatchLater },
+      { i18nKey: 'dock.home', icon: 'i-mingcute:home-5-line', iconActivated: 'i-mingcute:home-5-fill', page: AppPage.Home },
+      { i18nKey: 'dock.search', icon: 'i-mingcute:search-2-line', iconActivated: 'i-mingcute:search-2-fill', page: AppPage.Search },
+      { i18nKey: 'dock.anime', icon: 'i-mingcute:tv-2-line', iconActivated: 'i-mingcute:tv-2-fill', page: AppPage.Anime },
+      { i18nKey: 'dock.favorites', icon: 'i-mingcute:star-line', iconActivated: 'i-mingcute:star-fill', page: AppPage.Favorites },
+      { i18nKey: 'dock.history', icon: 'i-mingcute:time-line', iconActivated: 'i-mingcute:time-fill', page: AppPage.History },
+      { i18nKey: 'dock.watch_later', icon: 'i-mingcute:carplay-line', iconActivated: 'i-mingcute:carplay-fill', page: AppPage.WatchLater },
     ]
   })
 
-  const homeTabs = computed((): HomeTab[] => {
-    return [
+  const homeTabs = shallowReadonly<HomeTab[]>(
+    [
       {
         i18nKey: 'home.for_you',
         page: HomeSubPage.ForYou,
@@ -48,8 +49,8 @@ export const useMainStore = defineStore('main', () => {
         i18nKey: 'home.ranking',
         page: HomeSubPage.Ranking,
       },
-    ]
-  })
+    ],
+  )
 
   return { dockItems, homeTabs }
 })

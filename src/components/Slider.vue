@@ -54,26 +54,26 @@ label {
   --b-slider-height: 10px;
   --b-slider-width: 100%;
   --b-thumb-width: calc(20px - var(--b-border-width));
-  --b-thumb-height:  calc(20px - var(--b-border-width));
+  --b-thumb-height: calc(20px - var(--b-border-width));
 }
 
 input[type="range"] {
   &::-webkit-slider-thumb {
-    --at-apply: appearance-none w-$b-thumb-height h-$b-thumb-height bg-white rounded-$b-thumb-height
-      ring-$bew-border-color ring-2 cursor-pointer duration-300;
+    --uno: "appearance-none w-$b-thumb-height h-$b-thumb-height bg-white rounded-$b-thumb-height";
+    --uno: "ring-$bew-border-color ring-2 cursor-pointer duration-300";
   }
 
   &::-webkit-slider-thumb:hover {
-    --at-apply: ring-$bew-theme-color;
+    --uno: "ring-$bew-theme-color";
   }
 
   &::-moz-range-thumb {
-    --at-apply: appearance-none w-$b-thumb-height h-$b-thumb-height bg-white rounded-$b-thumb-height
-      ring-$bew-border-color ring-2 cursor-pointer duration-300;
+    --uno: "appearance-none w-$b-thumb-height h-$b-thumb-height bg-white rounded-$b-thumb-height";
+    --uno: "ring-$bew-border-color ring-2 cursor-pointer duration-300";
   }
 
   &::-moz-range-thumb:hover {
-    --at-apply: ring-$bew-theme-color;
+    --uno: "ring-$bew-theme-color";
   }
 }
 </style>

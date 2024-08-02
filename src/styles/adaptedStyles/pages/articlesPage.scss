@@ -1,0 +1,435 @@
+.bewly-design.articlesPage {
+  body {
+    background-color: unset;
+  }
+
+  .right-side-bar .catalog {
+    line-height: 3em;
+  }
+
+  .reply-box.fixed-box {
+    padding-right: 20px;
+  }
+
+  // #region theme color adaption part
+  // Increase the priority of the style inside by writing a non-existent selector in :not()
+  :not(foobar) {
+    .page-content .right-side .rank-module .rank-list .item a:hover,
+    .page-content .left-side .article-list .article-list-holder .article-item:hover .item-holder .article-title,
+    .page-content .right-side .rank-module .rank-tabs-bar .rank-tabs-list li.on,
+    .page-content .right-side .up-list .up-item .info-holder .head .follow,
+    .page-content .right-side .up-list .up-item .info-holder .head .nick-name:hover,
+    .page-content .right-side .up-list .up-item .info-holder .dynamic .arc-title:hover,
+    .categories-bar .tag-item.on,
+    .nav-tab-bar .tab-item.on,
+    .nav-tab-bar .tab-item.on a,
+    .page-content .left-side .partitio-name .filter .filter-btn-lst .filter-btn:hover,
+    .page-content .right-side .rank-module .complete-rank:hover,
+    .article-detail .topic-info,
+    .right-side-bar .side-toolbar .toolbar-item:hover .iconfont,
+    .right-side-bar .side-toolbar .toolbar-item:hover > .toolbar-item__num,
+    .right-side-bar .catalog:hover .catalog-text,
+    .right-side-bar .catalog:hover .icon-catalog,
+    .right-side-bar .catalog-panel .catalog-item:hover,
+    .right-side-bar .catalog-panel .catalog-item--on .icon-bilibili-tv,
+    .nav-tab-bar .tab-item:hover,
+    .video-link__to,
+    .interaction-info .hover-item:hover,
+    .interaction-info .hover-item:hover i,
+    .read-article-holder .card-text-label,
+    .share-dynamic-dialog .sdd-card .name,
+    .bili-dialog-bomb .appeal-box .wrap .container .textarea .memo a,
+    .article-tags .tag-item:hover,
+    #App .rank-module .tab-bar .tab-item.on,
+    #App .rank-module .tab-bar .tab-item:hover,
+    #App .rank-module .article-list .article-item .item-holder .article-content:hover .article-title,
+    #App
+      .rank-module
+      .article-list
+      .article-item
+      .item-holder
+      .article-content
+      .article-left-block
+      .article-info-bar
+      .reply:hover,
+    #App .rank-module .article-list .article-item .item-holder .score-module .score,
+    .list-container .article-list-block .article-item .item-holder .article-content:hover .article-title,
+    .list-container
+      .article-list-block
+      .article-item
+      .item-holder
+      .article-content
+      .article-left-block
+      .article-info-bar
+      .reply:hover,
+    .article-up-info .nameplate-ctnr .info .info-bottom a,
+    .article-up-info .nameplate-ctnr .info .info-bottom a:hover {
+      color: var(--bew-theme-color);
+    }
+
+    .right-side-bar .catalog-panel .catalog-item--on {
+      color: var(--bew-theme-color) !important;
+    }
+
+    .page-content .right-side .rank-module .rank-list .item:nth-child(-n + 3) .rank-index,
+    .article-detail .unfollow,
+    .modal-box-holder .modal-box .modal-footer .modal-btn-primary,
+    .bili-dialog-bomb .appeal-box .submit .confirm,
+    .bili-dialog-bomb .appeal-box .wrap .container .options .option .checkbox.checked:before,
+    .error-container .error-panel .rollback-btn,
+    .error-container .error-manga .change-img-btn,
+    .list-container .list-info-block .right-side .up-info-block .follow-btn:not(.on),
+    .modalBox .sure,
+    .promote-hint {
+      background-color: var(--bew-theme-color);
+    }
+
+    .page-content .right-side .rank-module .rank-tabs-bar .rank-tabs-list li.on,
+    .page-content .right-side .up-list .up-item .info-holder .head .follow,
+    .categories-bar .tag-item.on,
+    .modal-box-holder .modal-box .modal-footer .modal-btn-primary,
+    .read-article-holder .card-text-label,
+    .bili-dialog-bomb .appeal-box .wrap .container .options .option .checkbox.checked,
+    #App .rank-module .tab-bar .tab-item.on {
+      border-color: var(--bew-theme-color);
+    }
+
+    .nav-tab-bar .logo,
+    .article-detail .topic-info:before {
+      filter: var(--bew-filter-icon-glow);
+    }
+
+    .nav-tab-bar .tab-item.on {
+      // width: 28px;
+      height: 28px;
+      overflow: hidden;
+
+      &::before {
+        transform: translateY(-28px);
+        filter: drop-shadow(0 28px 0 var(--bew-theme-color));
+      }
+    }
+
+    .page-content .left-side .article-list .tips-holder {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-content .left-side .article-list .tips-holder .no-more {
+      transform: translateX(-680px);
+      filter: drop-shadow(680px 0 0 var(--bew-theme-color));
+    }
+  }
+
+  // #endregion
+
+  // #region dark mode adaption part
+  &.dark {
+    .nav-tab-bar .tab-item,
+    .page-content .left-side .partitio-name,
+    .page-content .right-side .rank-module .rank-tabs-bar label,
+    .page-content .left-side .article-list .article-list-holder .article-item .item-holder .article-title-holder,
+    .page-content .right-side .rank-module .rank-list .item a,
+    .page-content .right-side .up-list .title,
+    .page-content .right-side .up-list .up-item .info-holder .head .nick-name,
+    .page-content .right-side .more .top-bar,
+    .page-content .right-side .more .help .title,
+    .page-content .right-side .more .link .title,
+    .article-container .title-container .title,
+    .normal-article-holder,
+    .article-up-info .up-name,
+    .right-side-bar .catalog-panel__title,
+    .right-side-bar .catalog-panel .catalog-item,
+    .fixed-top-header .inner > p,
+    .fixed-top-header .inner .up-info,
+    .page-content .right-side .search-module .search-block .search-word-panel .history-item a,
+    .categories-bar .tag-item,
+    .page-content .right-side .rank-module .complete-rank,
+    .article-detail .bangumi-rate-panel .info .title,
+    .page-content .right-side .up-list .fresh-btn,
+    .ql-container,
+    .view-note .note-content .ql-container .ql-editor,
+    .bili-dialog-bomb .appeal-box .wrap .container .question,
+    .van-popover.van-followed,
+    .van-popover.van-followed .follow_dropdown li:hover,
+    .share-dynamic-dialog .sdd-head,
+    .share-success-dialog .info,
+    #App,
+    #App .rank-module .article-list .article-item .item-holder .article-content .article-title,
+    .list-container .list-info-block .right-side .title,
+    .list-container .list-info-block .right-side .up-info-block .up-name,
+    .list-container .article-list-block .article-item .item-holder .article-content .article-title,
+    .modalBox,
+    .modalBox .cancel,
+    .normal-article-holder .color-default,
+    .normal-article-holder h1,
+    .article-up-info .nameplate-ctnr .info,
+    .read-article-holder .bangumi-card-holder .bangumi-title,
+    .read-article-holder .article-card-holder .article-card-wrap .title {
+      color: var(--bew-text-1);
+    }
+
+    span[style*="color:#000000"] {
+      color: var(--bew-text-1) !important;
+    }
+
+    .page-content .left-side .article-list .article-list-holder .article-item .item-holder .article-desc,
+    .page-content .right-side .up-list .up-item .info-holder .dynamic,
+    .page-content .right-side .more .help .info,
+    .page-content .right-side .more .link .info,
+    .article-read-info .publish-text,
+    .article-up-info .avatar-info-pannel,
+    .article-read-info *,
+    .right-side-bar .catalog,
+    .right-side-bar .side-toolbar .toolbar-item .iconfont,
+    .right-side-bar .side-toolbar .toolbar-item,
+    .right-side-bar .to-top .iconfont,
+    .right-side-bar .catalog-panel__info,
+    .page-content .right-side .search-module .search-block .search-word-panel,
+    .article-breadcrumb .breadcrumb-title,
+    .article-breadcrumb .breadcrumb-name,
+    .article-breadcrumb .slash,
+    .article-detail .bangumi-rate-panel .info .desc,
+    .modal-box-holder .modal-box .modal-footer .modal-btn-default,
+    .bili-dialog-bomb .appeal-box .submit .cancel,
+    .interaction-info .toolbar .share-box .qrcode-tit,
+    .share-dynamic-dialog .sdd-input,
+    .share-success-dialog .hint,
+    #App .rank-module .tips,
+    .list-container .list-info-block .right-side .col,
+    .list-container .list-info-block .right-side .summary,
+    .list-container .list-info-block .right-side .up-info-block .follow-btn.on,
+    .article-up-info .nameplate-ctnr .info .n-type {
+      color: var(--bew-text-2);
+    }
+
+    .normal-article-holder blockquote * {
+      color: var(--bew-text-2) !important;
+    }
+
+    .page-content .left-side .article-list .article-list-holder .article-item .item-holder .article-info-bar *,
+    .page-content .right-side .up-list .up-item .info-holder .dynamic .arc-title,
+    .page-content
+      .left-side
+      .article-list
+      .article-list-holder
+      .article-item
+      .item-holder
+      .article-title-holder
+      .list-mark,
+    .interaction-info .toolbar .share-box,
+    .interaction-info,
+    .followed,
+    .share-dynamic-dialog .sdd-card .sdd-card-content,
+    #App
+      .rank-module
+      .article-list
+      .article-item
+      .item-holder
+      .article-content
+      .article-left-block
+      .article-info-bar
+      .up-content
+      .nick-name,
+    #App
+      .rank-module
+      .article-list
+      .article-item
+      .item-holder
+      .article-content
+      .article-left-block
+      .article-info-bar
+      .category,
+    #App
+      .rank-module
+      .article-list
+      .article-item
+      .item-holder
+      .article-content
+      .article-left-block
+      .article-info-bar
+      .like,
+    #App
+      .rank-module
+      .article-list
+      .article-item
+      .item-holder
+      .article-content
+      .article-left-block
+      .article-info-bar
+      .reply,
+    #App
+      .rank-module
+      .article-list
+      .article-item
+      .item-holder
+      .article-content
+      .article-left-block
+      .article-info-bar
+      .view {
+      color: var(--bew-text-3);
+    }
+
+    .page-content .left-side .article-list .article-list-holder .article-item,
+    .page-content .right-side .rank-module .rank-list .item,
+    .page-content .right-side .up-list,
+    .article-up-info,
+    .page-content .right-side .up-list .up-item .info-holder .head .follow.followed,
+    .modal-box-holder .modal-box .modal-footer .modal-btn-default,
+    .ql-container,
+    .view-note .note-content .ql-container .ql-editor,
+    .bili-dialog-bomb .appeal-box .header,
+    .bili-dialog-bomb .appeal-box .submit,
+    .bili-dialog-bomb .appeal-box .submit .cancel,
+    .bili-button.primary.plain,
+    .error-container .error-panel,
+    .error-container .error-split,
+    .error-container .error-manga,
+    .list-container .list-info-block,
+    .list-container .article-list-block,
+    .list-container .article-list-block .article-item {
+      background-color: transparent;
+    }
+
+    .article-container,
+    .page-content .right-side .rank-module .complete-rank,
+    .bili-comment.browser-pc,
+    .reply-box.fixed-box,
+    .comment-wrapper .comment-m,
+    .share-dynamic-dialog,
+    .share-dynamic-dialog .sdd-card .sdd-card-content,
+    .share-success-dialog {
+      background-color: var(--bew-content-solid);
+    }
+
+    .interaction-info .toolbar .share-box .qrcode-box {
+      background-color: var(--bew-content-alt-solid);
+    }
+
+    .comment-wrapper .comment-m {
+      --bew-bg: var(--bew-content-solid);
+    }
+
+    .share-dynamic-dialog .sdd-card {
+      background-color: var(--bew-bg);
+    }
+
+    .right-side-bar .to-top,
+    .right-side-bar .side-toolbar,
+    .right-side-bar .catalog,
+    .right-side-bar .catalog:after,
+    .right-side-bar .catalog-panel,
+    .page-content .right-side .search-module .search-block .search-word-panel,
+    .page-content .right-side .search-module .search-block .search-word-panel .panel-title p span,
+    .page-content .left-side .partitio-name .filter .filter-btn-lst,
+    .to-top,
+    .bili-dialog-bomb .appeal-box,
+    .modalBox,
+    .article-up-info .nameplate-ctnr {
+      background-color: var(--bew-elevated-solid);
+    }
+
+    .fixed-top-header,
+    .modal-box-holder .modal-box {
+      background-color: var(--bew-elevated-solid);
+    }
+
+    .page-content .right-side .rank-module .rank-list .item .rank-index,
+    .article-read-info .spoiler,
+    .page-content .right-side .up-list .fresh-btn,
+    #App .rank-module .tips,
+    .list-container .list-info-block .right-side .up-info-block .follow-btn.on,
+    .modalBox .cancel {
+      background-color: var(--bew-fill-1);
+    }
+
+    .right-side-bar .catalog-panel .catalog-item:hover,
+    .page-content .right-side .search-module .search-block .search-word-panel .history-item:hover,
+    .page-content .right-side .search-module .search-block .search-word-panel .suggest-item:hover,
+    .followed,
+    .van-popover.van-followed .follow_dropdown li:hover {
+      background-color: var(--bew-fill-2);
+    }
+
+    #App .rank-module .article-list .article-item {
+      background-color: transparent;
+    }
+
+    .page-content .left-side .article-list .article-list-holder .article-item,
+    .page-content .right-side .up-list .title,
+    .page-content .right-side .rank-module .rank-tabs-bar,
+    .page-content .right-side .more .top-bar,
+    .article-container__content,
+    .page-content
+      .left-side
+      .article-list
+      .article-list-holder
+      .article-item
+      .item-holder
+      .article-title-holder
+      .list-mark,
+    .page-content .right-side .search-module .search-block,
+    .page-content .right-side .search-module .search-block .search-word-panel,
+    .categories-bar,
+    .modal-box-holder .modal-box .modal-head .modal-title,
+    .modal-box-holder .modal-box .modal-footer .modal-btn-default,
+    .modal-box-holder .modal-box .modal-footer .modal-btn-primary,
+    .page-content .right-side .up-list .fresh-btn,
+    .page-content .right-side .search-module .search-block .search-word-panel .panel-title .split-line,
+    .bili-dialog-bomb .appeal-box .header,
+    .bili-dialog-bomb .appeal-box .wrap .container .textarea .textarea-wrap textarea,
+    .bili-dialog-bomb .appeal-box .submit .cancel,
+    .bili-dialog-bomb .appeal-box .submit,
+    .van-popover.van-followed,
+    .followed,
+    .read-article-holder .row-video-holder,
+    .interaction-info .toolbar .share-box .qrcode-box,
+    .share-dynamic-dialog .sdd-action-bar,
+    .share-dynamic-dialog .sdd-head,
+    #App .rank-module .article-list .article-item .item-holder .article-content,
+    .list-container .list-info-block .right-side .col .split-line,
+    .list-container .list-info-block .right-side .up-info-block .follow-btn.on,
+    .list-container .article-list-block .article-item .item-holder .article-content .article-left-block,
+    .modalBox .cancel,
+    .article-up-info .nameplate-ctnr,
+    .article-up-info .nameplate-ctnr .info,
+    .read-article-holder .bangumi-card-holder,
+    .read-article-holder .article-card-holder {
+      border-color: var(--bew-border-color);
+    }
+
+    .to-top,
+    .share-success-dialog {
+      border-color: var(--bew-elevated-solid);
+    }
+
+    .rql-editor .ql-editor blockquote {
+      border-color: var(--bew-text-4);
+    }
+
+    .nav-tab-bar .tab-item:before {
+      filter: invert(1) hue-rotate(180deg);
+    }
+
+    .page-content .right-side .up-list .fresh-btn:before {
+      filter: brightness(2) contrast(0);
+    }
+
+    .interaction-info .toolbar .share-box .qrcode-box {
+      box-shadow: 0 0 4px var(--bew-border-color);
+    }
+
+    .interaction-info .toolbar .share-box .qrcode-ctnr {
+      background: white;
+      box-sizing: border-box;
+      padding: 5px;
+    }
+
+    .interaction-info .toolbar .share-box .qrcode-ctnr canvas {
+      width: 122px;
+      height: 122px;
+    }
+  }
+
+  // #endregion
+}

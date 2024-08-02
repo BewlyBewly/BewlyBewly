@@ -41,7 +41,7 @@ settings:
   # Settings group
   group_common: 通用
   group_video_card: 视频卡片
-  group_performance: 性能
+  group_performance: 毛玻璃和性能
   group_topbar: 顶栏
   group_dock: Dock 栏
   group_color: 颜色
@@ -49,6 +49,9 @@ settings:
   group_logo: LOGO
   group_search_bar: 搜索栏
   group_recommendation_mode: 推荐模式
+  group_recommendation_filters: 推荐过滤
+  group_recommendation_filters_desc: |
+    请勿将限制值设置得太大，不然可能会增加加载时间！
   group_search_page_mode: 搜索页模式
   group_home_tabs: 首页标签栏
 
@@ -68,6 +71,7 @@ settings:
   chk_box:
     show: 显示
     hidden: 隐藏
+  enable_grid_layout_switcher: 启用页面网格布局切换器
   enable_horizontal_scrolling: 启用横向滚动
   enable_horizontal_scrolling_desc: 启用后，鼠标滚动时将直接滚动横向滚动列表
   enable_video_preview: 启用视频预览功能
@@ -76,6 +80,7 @@ settings:
   block_ads: 屏蔽广告
   disable_frosted_glass: 禁用毛玻璃效果
   reduce_frosted_glass_blur: 降低毛玻璃模糊强度
+  use_old_topbar: 使用旧版顶栏
   auto_hide_topbar: 自动隐藏顶栏
   topbar_icon_badges: 图标角标
   topbar_icon_badges_opt:
@@ -91,6 +96,8 @@ settings:
   auto_hide_dock: 自动隐藏 Dock 栏
   dock_content_adjustment: Dock 内容调整
   dock_content_adjustment_desc: 第一个激活的 Dock 项的页面将会是启动页面
+  disable_light_dark_mode_switcher: 禁用亮/暗色模式切换按钮
+  move_back_to_top_and_refresh_to_dock: 将返回顶部和刷新按钮移动到 Dock 栏
 
   # Appearance
   theme: 主题
@@ -107,8 +114,8 @@ settings:
   choose_ur_wallpaper: 选择你的背景
   image_url: 图片 URL
   image_url_hint: |-
-    URL 示例: https://pic.imgdb.cn/item/638e1d63b1fccdcd36103811.jpg
-    https://pic.imgdb.cn/item/638e1d7ab1fccdcd36106346.jpg
+    URL 示例: https://cdn.jsdelivr.net/gh/BewlyBewly/Imgs/wallpapers/rocky-mountain-cloudscape.jpg
+    https://cdn.jsdelivr.net/gh/BewlyBewly/Imgs/wallpapers/green-white-mountains.jpg
   enable_wallpaper_masking: 启用背景遮罩效果
   wallpaper_mask_opacity: 背景遮罩透明度调整
   wallpaper_blur_intensity: 背景模糊强度调整
@@ -134,13 +141,17 @@ settings:
     授权使用后能在首页推送 bilibili App 端算法的推荐视频，授权 key 有效期约为一个月，过后记得重新授权获取 access key。
   authorize_app_more_info_access_key: 关于 access key
   scan_qrcode_desc: 使用 Bilibili 移动应用程序扫描此二维码，以授权获取 access key。
+  filter_by_view_count: 按播放数筛选
+  filter_by_view_count_unit: 次
+  filter_by_duration: 按时长筛选
+  filter_by_duration_unit: 秒
   use_search_page_mode: 首页使用搜索页模式
   settings_shared_with_the_search_page: 与搜索页共用的配置
   settings_shared_with_the_search_page_desc: 这些设置都与搜索页共用
   search_page_mode_wallpaper_fixed: 将搜索页模式的壁纸固定
   home_tabs_adjustment: 标签栏调整
   home_tabs_adjustment_desc: 第一个激活的标签项是默认界面
-  always_show_the_top_bar_logo: 总是显示顶栏 Logo
+  always_show_tabs_on_home_page: 总是显示首页标签栏
 
   # Compatibility
   # Common
@@ -155,12 +166,25 @@ settings:
   topbar_visibility_desc: 用于兼容 Bilibili Evolved 自定义顶栏
 
   # About
+  links: 链接
+  sponsor: 赞助
+  sponsor_desc: 喜欢这个项目并希望看到它蓬勃发展吗？请考虑赞助它！您的支持是这个项目发展的动力。
+  afdian: 爱发电
   import_settings: 导入设置
   export_settings: 导出设置
   export_settings_desc: 一些敏感的数据，例如 access key，可能需要重新获取
   contributors: 贡献者
 
   just_wanna_change_the_job: 我只想换一份好一点的工作...
+  just_wanna_change_the_job_hint: |-
+    Let's just consider this a piece of performance art.
+
+    Now I'm still working at my old company, which has started to gradually appreciate my contributes. I work on both front-end & back-end there.
+    I'm not foolish enough to mess up in the current situation; Instead, I will try to create my own environment and gradually become a versatile person.
+    The Logos for BewlyBewly, whether they are new or old, or even the VTuber style of logo, are all designed and made by me. I have always been working hard to develop my ability to produce independent projects.
+
+    Additionally, I am very grateful for the people who have contracted me by email or other means during this time, whether they ending up helping me or not.
+    However, I particularly want to wish a certain product manager who lured people into working for free while boasting about his own capabilities, thinking I would stupidly believe everything he said? I wish you a lifetime of only managing products you dislike for other companies.
   just_wanna_change_the_job_desc: |-
     首先十分抱歉在这里打扰您，我是一名前端开发者，坐标广州，我想换一份好一点的工作
     BewlyBewly 其实是我在找工作的时候做的一个项目，那时试过有快半年是完全没有工作的状态，面试时一直刁难要么就是被礼貌拒绝
@@ -182,10 +206,7 @@ settings:
     坐标广州，我不是希望进去一定要做出什么成就出来，在做开源过程中也对项目负责人和开发者不同的想法观念略有感受。我只想进去了解一下正确的前端规范和能与其他志同道合的人一起工作。如果有合适的前端工作机会请联系我，谢谢！
   contact_me: 联系我
 auth:
-  err_tip: 授权 access key 失败
-  plz_login_first: 请先登录 bilibili
-  receive_verified_url_err: 未知错误，请刷新页面后重试
-  failed_to_get_accesskey: 获取 access key 失败
+  auth_access_key_first: 在这之前请先授权 BewlyBewly 使用 access key
 topbar:
   sign_in: 登录
   notifications: 通知
@@ -230,13 +251,18 @@ topbar:
     paid_courses: 课堂
     community: 社区中心
     music_plus: 新歌热榜
+    game_center: 游戏中心
+    comic_con_and_goods: 漫展和周边
+    manga: 漫画
+    game_competitions: 游戏赛事
   user_dropdown:
     money: 硬币：
     b_coins: B币：
+    exp_desc: '当前成长 {current_exp}，升级到 LV {level} 还需要 {need_exp}'
     following: 关注
     followers: 粉丝
     posts: 动态
-    accout_settings: 个人中心
+    account_settings: 账号设置
     uploads_manager: 投稿管理
     b_coins_wallet: B币钱包
     orders: 订单中心
@@ -323,6 +349,9 @@ history:
     你确定要开启观看历史吗？
 favorites:
   unfavorite: 取消收藏
+  unfavorite_confirm: |-
+    要取消收藏选中的视频吗？
+    该操作无法撤销，你确定要取消收藏选中的视频吗？
 watch_later:
   title: 稍后再看
   clear_all: 清空稍后再看

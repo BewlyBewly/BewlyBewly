@@ -1,0 +1,758 @@
+.bewly-design.userSpacePage {
+  .wrapper .edit-video-modal .target-favlist {
+    padding: 12px 36px;
+  }
+
+  .ps {
+    padding: 0;
+  }
+
+  .be-tab-cursor:after,
+  .sub-tabs a.active:before,
+  #page-follows .follow-tabs span.active:before {
+    display: none;
+  }
+
+  .btn-content:hover,
+  .btn.default {
+    background-color: unset;
+  }
+
+  .favInfo-box .favInfo-details .fav-options .fav-play:hover,
+  .favInfo-box .collection-details .collection-btn:hover {
+    color: white !important;
+  }
+
+  .large-item .cover {
+    border-radius: 4px;
+  }
+
+  .masonry_grid_v2 .container {
+    position: static;
+  }
+
+  .comment-bilibili-mask {
+    position: fixed;
+  }
+
+  // #region theme color adaption part
+  // Increase the priority of the style inside by writing a non-existent selector in :not()
+  // 淺色模式下主要對 theme color 調整配合 bewlybewly 配色
+  // 深色模式下才對主要邊框和背景色調整
+  // 淺色模式下顏色避免太大調整
+  :not(foobar) {
+    .n .n-btn.active,
+    .be-tab-item.is-active,
+    #navigator a:hover,
+    #page-video #submit-video-type-filter a.active,
+    .n .n-data.router-link-active .n-data-k,
+    .n .n-data.router-link-active .n-data-v,
+    .wrapper .edit-video-modal .target-favlist .target-favitem:hover .target-fav-title .fav-meta .fav-name,
+    .i-live .i-live-off-guest a,
+    .modal-wrapper .modal-header-close:hover,
+    a:hover,
+    .h .h-v-host:hover,
+    #page-index .channel .section-right-options .play-all-channel:hover .video-commonplayer_play,
+    #page-follows .follow-tabs span.active,
+    #page-follows .follow-tabs span:hover,
+    .favInfo-box .favInfo-details .fav-name:hover,
+    .sub-tabs a.active,
+    #page-subs .action .sub-action,
+    .album-list__tab--active .album-list__tab-name,
+    #page-fav .fav-main .filter-item .text:hover,
+    .fans-action-btn:hover,
+    .search-keyword-highlight,
+    .v-search-count,
+    .feed-dynamic-header-search-count,
+    .card .main-content .button-bar .single-button .text-bar.selected,
+    .wrapper .edit-video-modal .edit-video-subtitle,
+    .list-style .iconfont.active,
+    .list-style .iconfont:hover,
+    .bili-dyn-interaction__item__desc .bili-rich-text-module:hover,
+    .btn.default:hover,
+    .section-title .play-all-channel:hover,
+    #page-index .col-1 .section .more:hover,
+    #page-index .channel .section-right-options .play-all-channel:hover,
+    .section .operation:hover,
+    #page-video .play-all-btn:hover .video-commonplayer_play,
+    .i-live .i-live-fo-btn,
+    .favInfo-box .favInfo-details .fav-options .meta.selected,
+    #page-follows .follow-main .follow-action-bottom .select-cancel,
+    #page-follows .modal-container.edit-video-modal .target-followitem:hover,
+    #page-follows .follow-main .follow-action-bottom li:hover,
+    #page-fav .fav-main .search-types:hover,
+    #page-fav .fav-main .fav-action-bottom .search-results-num i,
+    .video-container.can-hover:hover .text-area .title,
+    .card .button-area .more-button:hover,
+    .card .more-panel .child-button:hover,
+    #page-series-index .no-channel-container em,
+    .expand-btn,
+    .up-info .up-focus-btn,
+    .article-container:hover .text-area .title,
+    .bp-popup-panel .title-ctnr .popup-title,
+    .bl-button--ghost:not(:hover),
+    .modal-wrapper .modal-header-close:hover,
+    .btn-container .btn:hover,
+    .follow-dialog-wrap .follow-dialog-window .content .group-list li:hover,
+    .follow-dialog-wrap .follow-dialog-window .content .group-list .add-group .input-group .submit,
+    .bb-comment .operation .opera-list li:hover,
+    .comment-bilibili-fold .operation .opera-list li:hover,
+    .bili-topic-new__default__create__text,
+    .subscribe-list li .subscribe-link,
+    .i-live:hover .i-live-title,
+    #page-article .row .breadcrumb .item.cur,
+    .bili-dyn-topic__card {
+      color: var(--bew-theme-color);
+    }
+
+    #navigator-fixed a:active,
+    #navigator-fixed a:hover,
+    .n .n-statistics .n-fs:hover p,
+    .n .n-statistics .n-gz:hover p,
+    #navigator a:hover,
+    a:not(.btn):hover,
+    .be-dropdown-item:hover,
+    #page-fav .fav-main .filter-item .filter-type .be-dropdown-item:hover i,
+    #page-fav .fav-main .filter-item .filter-type .be-dropdown-item:hover span,
+    #page-fav .fav-main .fav-action-bottom li:hover,
+    #page-fav .fav-main .fav-action-bottom .select-cancel,
+    #page-fav .fav-main .fav-action-top .back-to-info:hover,
+    .sub-tabs .filter-content .cur-filter:hover,
+    .fans-name[style*="color"],
+    .dynamic-keyword,
+    .card .main-content .user-name a[style*="color"],
+    .dynamic-link-hover-bg,
+    .im-popup .bp-popup-panel .title-ctnr .popup-title {
+      color: var(--bew-theme-color) !important;
+    }
+
+    .i-live .i-live-fo-btn:hover,
+    .expand-btn:hover {
+      color: var(--bew-theme-color-80);
+    }
+
+    .bili-dyn-topic__card:hover {
+      color: var(--bew-theme-color-80) !important;
+    }
+
+    .n .n-cursor,
+    .be-tab-cursor,
+    .bangumi-pagelistbox .p:hover,
+    .bangumi-pagelistbox .p.active,
+    .btn.primary,
+    .be-pager-item-active,
+    .sub-tabs a.active,
+    .be-input_inner:focus,
+    #page-index #i-ann-content textarea:focus,
+    #page-index #i-ann-content textarea:hover,
+    .btn.default,
+    .i-live .i-live-fo-btn,
+    .be-pager-options-elevator input:focus,
+    .up-info .up-focus-btn,
+    .bl-button--ghost,
+    .bl-button--ghost:hover,
+    .h .report-popup-item.checked .report-popup-item-checkbox,
+    .h .report-popup .report-popup-tip__radio input[type="radio"]:checked + label:before,
+    .btn-container .btn:hover,
+    .follow-dialog-wrap .follow-dialog-window .content .group-list .add-group .add-btn:hover,
+    .follow-dialog-wrap .follow-dialog-window .content .group-list .add-group .input-group,
+    .follow-dialog-wrap .follow-dialog-window .content .group-list .add-group .input-group .submit,
+    .content .group-list li:hover input[type="checkbox"] + i,
+    .content .group-list li input[type="checkbox"]:checked + i,
+    .content .group-list li input[type="checkbox"]:checked:hover + i,
+    .comment-bilibili-con .btn .btn-cancel:hover,
+    .comment-bilibili-con .btn .btn-submit,
+    #page-setting #setting-new-tag:focus + #setting-new-tag-btn,
+    .subscribe-list li .subscribe-link:after {
+      border-color: var(--bew-theme-color);
+    }
+
+    #page-follows .follow-main .follow-action-top .back-to-info:hover,
+    #page-fav .fav-main .fav-action-top .back-to-info:hover,
+    .fans-action-btn:hover,
+    .g-search input:focus,
+    #pin-wrapper #pin-layer-search:focus,
+    #pin-wrapper .pin-layer-reason #pin-layer-reason-input input:focus,
+    .search-component.search-component-focus,
+    .search-component:hover,
+    .btn.primary:focus,
+    .btn.primary:hover {
+      border-color: var(--bew-theme-color) !important;
+    }
+
+    .i-live .i-live-fo-btn:hover {
+      border-color: var(--bew-theme-color-80);
+    }
+
+    .n .n-cursor,
+    #pin-wrapper .pin-layer-vlist .small-item.selected,
+    .be-switch-container.is-checked .be-switch,
+    .h .h-follow,
+    #page-follows .follow-sidenav .follow-list-container .follow-item.cur,
+    #page-follows .follow-tabs span.active:after,
+    .contribution-sidenav .contribution-item.cur,
+    #page-setting .setting-index-module:hover,
+    .btn.primary,
+    #page-fav .fav-sidenav .fav-item.cur,
+    .favInfo-box .favInfo-details .fav-options .fav-play,
+    .be-pager-item-active,
+    .search-nav-item.search-nav-actived,
+    #page-series-detail .channel-option .modify-channel,
+    .game-card__btn,
+    .be-tags-container .tag.new-tag,
+    #page-fav .fav-sidenav .fav-item.cur:hover .icon-cursor,
+    .favInfo-box .collection-details .collection-btn,
+    #page-series-index .channel-option.no-channel .create-channel,
+    .video-container .types,
+    .bl-button--primary,
+    .bl-button--ghost:hover,
+    .h .report-popup-item.checked .report-popup-item-checkbox,
+    .h .report-popup .report-popup-tip__radio input[type="radio"]:checked + label:after,
+    .follow-dialog-wrap .follow-dialog-window .bottom .btn,
+    .comment-bilibili-con .btn .btn-submit,
+    .bili-topic-new__default__create__icon:after,
+    .bili-topic-new__default__create__icon:before,
+    .btn-subscribe:not(.btn-cancel) {
+      background-color: var(--bew-theme-color);
+    }
+
+    .follow-dialog-wrap .follow-dialog-window .content .group-list .add-group .input-group .submit {
+      background-color: var(--bew-theme-color-10);
+    }
+
+    .bili-topic-new__default__create__icon,
+    .bili-topic-selector__bulletin__clear {
+      background-color: var(--bew-theme-color-20);
+    }
+
+    .btn.primary:focus,
+    .btn.primary:hover,
+    .h .h-follow:hover,
+    .game-card__btn:hover,
+    .favInfo-box .favInfo-details .fav-options .fav-play:hover,
+    .favInfo-box .collection-details .collection-btn:hover,
+    .bl-button--primary:hover,
+    .comment-bilibili-con .btn .btn-submit:hover {
+      background-color: var(--bew-theme-color-80);
+    }
+
+    .h .h-guest-hint {
+      background-color: var(--bew-theme-color-90);
+    }
+
+    .create-wrapper .choose-action .confirm-btn,
+    .create-wrapper .choose-action .next-btn,
+    .create-wrapper .create-action .confirm-btn,
+    .create-wrapper .create-action .next-btn,
+    .edit-media-list .edit-mask .edit-board .edit-info .submit-btn,
+    .bangumi-pagelistbox .p:hover,
+    .bangumi-pagelistbox .p.active {
+      background-color: var(--bew-theme-color) !important;
+    }
+
+    .i-m-title .icon-i-title,
+    .g-search .search-btn:hover,
+    .i-m-btn:hover .icon,
+    .i-live .i-live-off-host:hover .i-live-icon,
+    .i-live .i-live-off-host:hover .r-arrow,
+    .bp-svg-icon.comment-hover,
+    .custom-like-icon.zan-a-hover,
+    .bp-svg-icon.transmit-hover,
+    .wrapper .edit-video-modal .target-favlist .target-favitem .target-fav-title .fav-select.selected,
+    #page-fav .fav-main .fav-action-bottom .fav-action-fixtop .clearfix:not(.filter-disable) .icon,
+    .page-head .v-filter-line .style .icon.active,
+    .page-head .v-filter-line .style .icon:hover,
+    .i-live .i-live-off-guest a .i-live-arrow,
+    #page-follows .follow-main .follow-action-bottom .icon-copy,
+    .search-component .icon-follow-search:hover,
+    #page-fav .fav-main .search-input .icon-search:hover,
+    .dyn-orig-author__following.following-icon:before {
+      filter: var(--bew-filter-icon-glow);
+    }
+
+    .search-nav-item.search-nav-actived .num,
+    .search-nav-item.search-nav-actived .text,
+    .bangumi-pagelistbox .p:hover,
+    .bangumi-pagelistbox .p.active,
+    .comment-bilibili-con .btn .btn-submit:hover {
+      color: white !important;
+    }
+
+    .content .group-list li input[type="checkbox"] + i {
+      background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAMZJREFUOBFjZACCY8cuSP/4+6ebkYHB4T8DgyRIjFgA1PMcqOcABzNLqZWVwVNGkGE///45w8DANIGZ898iOxOT58QaBlJ36MwZyb/fmeIYGP4VsDOzmDDuO3xmGSMD00VHW6NOUgxCV7v/8Lny/wz/9JlA3gS5DF0BqXyQGSCzGIAuBAYBdQDILCbqGIUwZdRARFiQyxoNQ3JDDqFvCIQhqDwDFUEIR5PHApkBMosJVDhCyjPyDILpApkBMov6BSzIBmpWAQCEVFxRmF8CTgAAAABJRU5ErkJggg==);
+      border-width: 1px;
+      border-radius: 5px;
+      border-color: #bec3cc;
+    }
+
+    .content .group-list li input[type="checkbox"]:hover + i {
+      background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAMZJREFUOBFjZACCY8cuSP/4+6ebkYHB4T8DgyRIjFgA1PMcqOcABzNLqZWVwVNGkGE///45w8DANIGZ898iOxOT58QaBlJ36MwZyb/fmeIYGP4VsDOzmDDuO3xmGSMD00VHW6NOUgxCV7v/8Lny/wz/9JlA3gS5DF0BqXyQGSCzGIAuBAYBdQDILCbqGIUwZdRARFiQyxoNQ3JDDqFvCIQhqDwDFUEIR5PHApkBMosJVDhCyjPyDILpApkBMov6BSzIBmpWAQCEVFxRmF8CTgAAAABJRU5ErkJggg==);
+    }
+
+    .content .group-list li input[type="checkbox"]:checked + i,
+    .content .group-list li input[type="checkbox"]:checked:hover + i {
+      background: var(--bew-theme-color) url(//s1.hdslb.com/bfs/static/jinkela/note-list/assets/ic_check.svg) no-repeat
+        50% / 9px;
+    }
+  }
+
+  // #endregion
+
+  // #region dark mode adaption part
+  // 深色模式下對主題顏色調整
+  &.dark {
+    .bili-dyn-item {
+      --bg1: var(--bew-content-solid);
+      --bg2: var(--bew-bg);
+    }
+
+    .n .n-inner,
+    #page-index .col-1,
+    #page-index .col-2 .section,
+    #page-dynamic .col-2 .section {
+      border: none;
+      box-shadow: 0 0 0 1px var(--bew-border-color);
+    }
+
+    .n .n-data .n-data-v,
+    .breadcrumb .item.cur,
+    #page-follows .list-item .title,
+    #page-follows .follow-sidenav .follow-list-container .follow-item,
+    #page-video .page-head__left .video-title,
+    .card .more-panel,
+    .original-card-content .title,
+    .pgc-space-follow-item .pgc-item-info .pgc-item-title,
+    .search-component-input input,
+    #page-article .row .breadcrumb .item,
+    .album-list__title,
+    .bangumi-pagelistbox .p,
+    .wrapper .edit-video-modal .target-favlist .target-favitem .target-fav-title .fav-meta .fav-name,
+    .wrapper .edit-video-modal .edit-video-title,
+    #page-series-detail .channel-detail .content .breadcrumb .item,
+    .user-info .info-content .info-value,
+    .opus-list .opus-item-title,
+    .elec .elec-setting,
+    .elec .elec-total-c-num,
+    .g-search input,
+    #page-index #i-ann-content textarea,
+    #pin-wrapper #pin-layer-search,
+    #pin-wrapper .pin-layer-reason #pin-layer-reason-input input,
+    .btn.default,
+    .n .n-inner,
+    #page-index .col-1,
+    #page-index .col-2 .section,
+    #page-dynamic .col-2 .section,
+    .game-card .game-card__info-title,
+    .favInfo-box .collection-details .title .icon-heji,
+    .favInfo-box .collection-details .title .title-name,
+    #page-follows .modal-container.edit-video-modal .target-followitem,
+    #page-fav .fav-main .search-input input,
+    #page-fav .fav-main .fav-action-bottom .search-results-num,
+    .card .main-content .user-name a,
+    .h .report-popup-tip,
+    .follow-dialog-wrap .follow-dialog-window .title,
+    .follow-dialog-wrap .follow-dialog-window .content .group-list li,
+    .be-input,
+    .pugv-container .pugv-item .item-infos .main-title,
+    .subscribe-list li .subscribe-title,
+    .i-live .i-live-text {
+      color: var(--bew-text-1);
+    }
+
+    .btn.ghost,
+    .btn.ghost:focus,
+    .btn.ghost:hover,
+    #pin-wrapper .pin-layer-header-counter,
+    .channel-add-video .text,
+    .series-item .item-title .qipapnum,
+    .series-item .header .btn-row .btn,
+    #page-series-index .channel-index .breadcrumb .item.cur .create-series-icon,
+    .bili-dyn-interaction__item__desc .bili-rich-text-module,
+    .user-info .user-info-title .change-info-btn,
+    .user-info .info-content .info-command,
+    .opus-list .opus-item-content,
+    .section-title .play-all-channel,
+    #page-index .col-1 .section .more,
+    #page-index .channel .section-right-options .play-all-channel,
+    .section .operation,
+    .list-item .desc,
+    #page-follows .modal-container.edit-video-modal .target-follow-name .target-follow-notice,
+    #page-fav .search-empty-hint p,
+    .small-item .meta,
+    #page-fav .fav-main .fav-meta,
+    .video-container .text-area .content,
+    .h .report-popup-item-text,
+    .follow-dialog-wrap .follow-dialog-window .content .info .uname,
+    .selector-box,
+    .textarea {
+      color: var(--bew-text-2);
+    }
+
+    .bili-dyn-interaction__item__desc .bili-rich-text__content,
+    .opus-list .opus-item-time,
+    .list-item .meta,
+    .favInfo-box .favInfo-details .fav-options .meta,
+    .content-text,
+    .report-tip {
+      color: var(--bew-text-3);
+    }
+
+    .section,
+    #page-index .fav-covers,
+    #page-index .channel .channel-item,
+    .i-pin-v .be-tab,
+    .i-m-r2,
+    #page-index .col-2 .section-title,
+    .user-info .user-info-title,
+    .article-content,
+    .s-content,
+    .i-m-upload,
+    #pin-wrapper .pin-layer-header,
+    #page-follows .follow-main .follow-header.follow-header-info,
+    .list-item,
+    #page-follows .follow-sidenav,
+    #page-follows .follow-sidenav .nav-container.follow-container,
+    #page-follows .follow-main,
+    #page-follows .list-item:last-child,
+    .contribution-sidenav ~ .main-content,
+    .contribution-sidenav,
+    #page-fav .fav-main .favList-info,
+    #page-fav .fav-main,
+    #page-fav .fav-sidenav,
+    #page-setting .setting-index-module,
+    #page-setting .setting-index-container,
+    #page-fav .fav-sidenav .nav-container,
+    #page-fav .fav-sidenav .playlist-group,
+    #page-fav .fav-sidenav .watch-later,
+    #page-subs .mini-item,
+    #page-follows .follow-main .follow-action-top,
+    .modal-wrapper .modal-title,
+    #page-fav .fav-main .filter-item.search,
+    #page-fav .fav-main .search-types,
+    .be-input_inner,
+    .be-dropdown-item.be-dropdown-item-delimiter,
+    #page-myalbum .album-content,
+    #pin-wrapper #pin-layer,
+    .i-mp-action-menu,
+    .modal-wrapper,
+    .create-wrapper .dialog-title,
+    .create-wrapper .create-input .series-title input,
+    .create-wrapper .create-input .series-desc .series-desc-box,
+    .create-wrapper .create-input .series-kw input,
+    .create-wrapper .create-input .series-kw .rec-kw .keyword-content .keyword,
+    .create-wrapper .create-input .series-kw .rec-kw .keyword-content .keyword .keyword-txt,
+    .create-wrapper .choose-action .back-btn,
+    .create-wrapper .choose-action .cancel-btn,
+    .create-wrapper .create-action .back-btn,
+    .create-wrapper .create-action .cancel-btn,
+    .be-dropdown-menu,
+    .edit-media-list .edit-mask .edit-board .head,
+    .edit-media-list .edit-mask .edit-board .edit-info .info-wrap .name-input,
+    .edit-media-list .edit-mask .edit-board .edit-info .info-wrap .media-list-intro,
+    .pgc-space-follow-item .bangumi-options .opt-list,
+    .space_input,
+    #page-setting #setting-new-tag-btn,
+    #page-follows .follow-main .follow-action-top .back-to-info,
+    #page-video .play-all-btn,
+    #page-fav .fav-main .fav-action-top,
+    #page-fav .fav-main .fav-action-top .back-to-info,
+    #page-fav .fav-main .fav-video-list.is-batch .small-item.selected,
+    #page-fav .fav-main .fav-video-list.is-batch .small-item:hover,
+    .i-live .i-live-unfo-btn,
+    .i-live .i-live-fo-count,
+    #page-collection-detail .filter,
+    .bangumi-pagelistbox .p,
+    .bangumi-pagelistbox .custom-right .custom-right-inner.custompage,
+    .feed-dynamic,
+    #page-dynamic .bili-dyn-item,
+    .original-card-content .video-container,
+    .main-content .card-content .post-content .original-card-content .article-container,
+    .card .more-panel,
+    .card .more-panel:after,
+    .fans-action-btn.follow,
+    .btn.ghost,
+    .btn.ghost:focus,
+    .btn.ghost:hover,
+    .series-item .item-title .qipapnum:before,
+    .series-item .item-title .qipapnum,
+    .series-item .header .btn-row .btn,
+    #page-series-index .channel-index .breadcrumb .item.cur .create-series-icon,
+    #page-series-detail .filter,
+    .user-info .user-info-title .change-info-btn,
+    .fav-header,
+    .opus-list .opus-item,
+    .elec .elec-avatar,
+    .btn.default:hover,
+    .section-title .play-all-channel:hover,
+    #page-index .col-1 .section .more:hover,
+    #page-index .channel .section-right-options .play-all-channel:hover,
+    .section .operation:hover,
+    .g-search input,
+    #page-index #i-ann-content textarea,
+    #pin-wrapper #pin-layer-search,
+    #pin-wrapper .pin-layer-reason #pin-layer-reason-input input,
+    .section-title .play-all-channel,
+    #page-index .col-1 .section .more,
+    #page-index .channel .section-right-options .play-all-channel,
+    .section .operation,
+    .section .count,
+    .large-item .cover img,
+    #page-follows .modal-container.edit-video-modal .modal-body .target-followlist,
+    .btn-container .btn,
+    .h .space-report-popup .modal-wrapper .modal-body,
+    .follow-dialog-wrap .follow-dialog-window .title,
+    .follow-dialog-wrap .follow-dialog-window .bottom,
+    .static-popup,
+    .bili-at-popup,
+    .btn-cancel {
+      border-color: var(--bew-border-color);
+    }
+
+    .feed-dynamic-content .card {
+      border-color: var(--bew-border-color) !important;
+    }
+
+    .emoji-box {
+      border-color: var(--bew-content-alt-solid);
+    }
+
+    #page-fav .fav-main .small-item {
+      border-color: transparent;
+    }
+
+    .i-pin-c {
+      box-shadow: unset;
+    }
+
+    .large-item .cover img {
+      box-shadow: 0 0 0 1px var(--bew-border-color);
+    }
+
+    .section-title,
+    #page-index .col-2 .section .user-auth.no-auth .no-auth-title .goto-auth,
+    .user-info .user-info-title .info-title,
+    .article-title,
+    #page-index .channel.guest .channel-item .channel-title .channel-name,
+    #page-index .channel .channel-item .channel-name,
+    .large-item .title,
+    #pin-wrapper .pin-layer-vlist .small-item .title,
+    #page-setting .setting-privacy-item .setting-privacy-name,
+    #page-setting .setting-index-module,
+    .favInfo-box .favInfo-details .fav-name,
+    #page-follows .follow-main .follow-action-bottom li,
+    .modal-wrapper .modal-title,
+    #page-fav .fav-sidenav .nav-title .text,
+    .be-dropdown-item,
+    a,
+    // span,
+    .create-wrapper .dialog-title,
+    .create-wrapper .create-input .command,
+    .create-wrapper .choose-action .back-btn,
+    .create-wrapper .choose-action .cancel-btn,
+    .create-wrapper .create-action .back-btn,
+    .create-wrapper .create-action .cancel-btn,
+    .edit-media-list .edit-mask .edit-board .head,
+    .edit-media-list .edit-mask .edit-board .edit-info .info-wrap .title,
+    .edit-media-list .edit-mask .edit-board .edit-info .upload-cover-wrapper .cover-title,
+    .pgc-space-follow-item .bangumi-options .opt-list li,
+    #page-setting #setting-new-tag-btn,
+    #page-follows .follow-main .follow-action-top .back-to-info,
+    #page-video .play-all-btn,
+    #page-fav .fav-main .filter-item,
+    #page-fav .fav-main .filter-item .filter-type .be-dropdown-item span,
+    #page-fav .fav-main .fav-action-bottom li,
+    .sub-tabs span,
+    #page-follows .follow-tabs,
+    .elec .elec-count,
+    #page-index .col-2 .section .user-auth .auth-description,
+    #page-series-index .channel-item .channel-name,
+    #page-collection-detail .channel-detail .content .breadcrumb .item,
+    .bangumi-pagelistbox .custom-right .custom-right-inner.custompage,
+    .feed-dynamic-header-title,
+    .bb-comment .operation .opera-list,
+    .comment-bilibili-fold .operation .opera-list,
+    .bili-at-popup__user-name {
+      color: var(--bew-text-1);
+    }
+
+    .i-m-btn,
+    .elec .elec-total-count,
+    .pgc-space-follow-item .pgc-item-info .pgc-item-desc,
+    #page-follows .follow-main .follow-action-bottom .select-counter,
+    #page-follows .list-item .auth-description,
+    .edit-media-list .edit-mask .edit-board .edit-info .media-list-type,
+    #page-fav .fav-main .fav-action-top .back-to-info,
+    .v-search-result,
+    .feed-dynamic-header-search,
+    .section .count,
+    .list-create .text,
+    .btn-container .btn,
+    .user-info .info-content .info-tags .info-tag .tag-content {
+      color: var(--bew-text-2);
+    }
+
+    .emoji.kaomoji {
+      color: white;
+    }
+
+    .section .count:before,
+    .series-item .item-title .qipapnum:before,
+    .follow-dialog-wrap .follow-dialog-window .layout {
+      display: none;
+    }
+
+    .emoji-box,
+    .emoji-box .emoji-tabs .tab-link:hover,
+    .comment-bilibili-con,
+    .static-popup,
+    .emoji-cover.selected,
+    .emoji,
+    .ps .ps__rail-x:hover,
+    .ps .ps__rail-y:hover,
+    .ps .ps__rail-x:focus,
+    .ps .ps__rail-y:focus,
+    .ps .ps__rail-x.ps--clicking,
+    .ps .ps__rail-y.ps--clicking {
+      background-color: var(--bew-bg);
+    }
+
+    #pin-wrapper #pin-layer,
+    .i-mp-action-menu,
+    .modal-wrapper,
+    .be-dropdown-menu,
+    .dialog-wrapper,
+    .edit-media-list .edit-mask .edit-board,
+    .pgc-space-follow-item .bangumi-options .opt-list,
+    .bp-popup-panel,
+    .follow-dialog-wrap .follow-dialog-window,
+    .follow-dialog-wrap .follow-dialog-window .title,
+    .follow-dialog-wrap .follow-dialog-window .content,
+    .bili-at-popup__user--selected,
+    .bili-emoji__pkg:not(.active):hover,
+    .bili-emoji__list__item:hover {
+      background-color: var(--bew-elevated-solid);
+    }
+
+    .series-item .split-line,
+    .wrapper .edit-video-modal .favlist-body:after,
+    #page-article .row .breadline {
+      background-color: var(--bew-border-color);
+    }
+
+    .col-full {
+      background-color: var(--bew-content-solid);
+      box-shadow: 0 0 0 1px var(--bew-border-color);
+    }
+
+    #page-video #submit-video-type-filter,
+    .fans-action-follow,
+    .album-list__tabs,
+    #page-follows .follow-main .follow-action-bottom .follow-action-fixtop,
+    #page-fav .fav-sidenav .icon-cursor,
+    #page-setting #setting-new-tag-btn,
+    #page-fav .fav-main .fav-action-bottom .fav-action-fixtop,
+    .bangumi-pagelistbox .p,
+    .bangumi-pagelistbox .custom-right .custom-right-inner.custompage,
+    .btn.ghost,
+    .btn.ghost:focus,
+    .btn.ghost:hover,
+    .channel-add-video,
+    .series-item .item-title .qipapnum,
+    .list-create,
+    #page-series-detail .channel-add-video,
+    .g-search input,
+    #page-index #i-ann-content textarea,
+    #pin-wrapper #pin-layer-search,
+    #pin-wrapper .pin-layer-reason #pin-layer-reason-input input,
+    .section .count,
+    .btn-cancel,
+    .article-card__no-img {
+      background-color: var(--bew-fill-1);
+    }
+
+    #pin-wrapper .pin-layer-vlist .small-item:hover,
+    .i-mp-action-item:hover,
+    .create-wrapper .choose-action .back-btn,
+    .create-wrapper .choose-action .cancel-btn,
+    .create-wrapper .create-action .back-btn,
+    .create-wrapper .create-action .cancel-btn,
+    #page-fav .fav-sidenav .fav-item:hover,
+    #page-follows .follow-sidenav .follow-list-container .follow-item:hover,
+    .contribution-sidenav .contribution-item:hover,
+    .pgc-space-follow-item .bangumi-options .opt-list li:hover,
+    #page-fav .fav-main .filter-item .filter-type .be-dropdown-item:hover,
+    #page-fav .fav-main .fav-video-list.is-batch .small-item.selected,
+    #page-fav .fav-main .fav-video-list.is-batch .small-item:hover,
+    .search-nav-item:hover,
+    .dynamic-link-hover-bg:hover {
+      background-color: var(--bew-fill-2);
+    }
+
+    #page-setting #setting-new-tag-btn,
+    .bili-dyn-forward-publishing__editor {
+      background: var(--bew-content-solid);
+    }
+
+    .search-page,
+    .feed-dynamic-content .feed-card .loading-content.bg-white,
+    .card,
+    .feed-dynamic-content .bb-comment,
+    #page-dynamic .bili-dyn-item,
+    .original-card-content .video-container,
+    #page-series-index .channel-option.no-channel,
+    .n .n-inner,
+    #page-index .col-1,
+    #page-index .col-1::after,
+    #page-index .col-2 .section,
+    #page-dynamic .col-2 .section {
+      background-color: var(--bew-content-solid);
+    }
+
+    .main-content .card-content .post-content.repost,
+    .main-content .card-content .post-content .original-card-content .article-container,
+    .main-content .card-content .deleted,
+    .card .more-panel,
+    .card .more-panel:after,
+    .bb-comment .operation .opera-list,
+    .comment-bilibili-fold .operation .opera-list,
+    .bili-at-popup {
+      background-color: var(--bew-content-alt-solid);
+    }
+
+    .emoji-box .emoji-tabs,
+    .bb-comment .operation .opera-list li:hover,
+    .comment-bilibili-fold .operation .opera-list li:hover,
+    .pagination {
+      background-color: var(--bew-content);
+    }
+
+    .emoji-box .emoji-text:hover,
+    .emoji-box .emoji-tabs .tab-link.on {
+      background-color: var(--bew-content-alt);
+    }
+
+    .elec .new-elec-trigger:hover {
+      background-color: rgb(65 31 39);
+    }
+
+    .emoji-box.bottom:before,
+    .btn-container .btn,
+    .follow-dialog-wrap .follow-dialog-window .content .group-list ul .follow-group-mask,
+    .comment-bilibili-con .btn .btn-cancel,
+    .bili-dyn-forward-publishing__tools__item.emoji {
+      background: unset;
+    }
+
+    .be-dropdown-item:hover,
+    .elec .elec-status,
+    .elec .elec-status-bg,
+    .elec .elec-status-bg-grey {
+      background: unset !important;
+    }
+
+    .pgc-space-follow-item .bangumi-options .opt-list li.disabled {
+      opacity: 0.6;
+    }
+  }
+  // #endregion
+}

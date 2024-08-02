@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+
 import { isHomePage } from '~/utils/main'
 
 const { t } = useI18n()
@@ -33,45 +34,45 @@ const genres = computed(() => [
   { name: t('topbar.logo_dropdown.vtubers'), icon: '#channel-vtuber', href: 'https://www.bilibili.com/v/virtual' },
   { name: t('topbar.logo_dropdown.charitable_events'), icon: '#channel-love', href: 'https://love.bilibili.com' },
   { name: t('topbar.logo_dropdown.moocs'), icon: '#channel-gongkaike', href: 'https://www.bilibili.com/mooc' },
+])
+
+const otherLinks = computed(() => [
   { name: t('topbar.logo_dropdown.articles'), icon: '#channel-read', href: 'https://www.bilibili.com/read/home' },
   { name: t('topbar.logo_dropdown.live'), icon: '#channel-live', href: 'https://live.bilibili.com' },
   { name: t('topbar.logo_dropdown.activities'), icon: '#channel-activity', href: 'https://www.bilibili.com/blackboard/activity-list.html' },
   { name: t('topbar.logo_dropdown.paid_courses'), icon: '#channel-zhishi', href: 'https://www.bilibili.com/cheese' },
   { name: t('topbar.logo_dropdown.community'), icon: '#channel-blackroom', href: 'https://www.bilibili.com/blackboard/activity-5zJxM3spoS.html' },
   { name: t('topbar.logo_dropdown.music_plus'), icon: '#channel-musicplus', href: 'https://www.bilibili.com/v/musicplus' },
+  { name: t('topbar.logo_dropdown.game_center'), icon: 'i-mingcute:game-2-fill', color: '#69B1DD', href: 'https://game.bilibili.com/platform' },
+  { name: t('topbar.logo_dropdown.comic_con_and_goods'), icon: 'i-mingcute:store-fill', color: '#E4C081', href: 'https://show.bilibili.com/platform/home.html' },
+  { name: t('topbar.logo_dropdown.manga'), icon: 'i-mingcute:cat-fill', color: '#FFC1CC', href: 'https://manga.bilibili.com' },
+  { name: t('topbar.logo_dropdown.game_competitions'), icon: 'i-mingcute:sword-fill', color: '#C8D3DF', href: 'https://www.bilibili.com/match/home' },
 ])
 </script>
 
 <template>
   <div
     style="backdrop-filter: var(--bew-filter-glass-1);"
-    shadow="$bew-shadow-3"
-    flex="~"
+    shadow="[var(--bew-shadow-3),var(--bew-shadow-edge-glow-1)]"
+    flex="~ gap-1"
     p="4"
-    bg="$bew-elevated-1"
+    bg="$bew-elevated-alt"
     rounded="$bew-radius"
+    border="1 $bew-border-color"
   >
     <ul
       v-for="(item, index) in [0, 10, 20, 30]"
       :key="index"
-      m="r-1 last-of-type:r-0"
+      class="link-list"
     >
       <li
         v-for="genre in genres.slice(item, item + 10)"
         :key="genre.name"
-        m="b-1 last-of-type:b-0"
-        text="sm"
+        class="link-item"
       >
         <a
           :href="genre.href"
           :target="isHomePage() ? '_blank' : '_self'"
-          flex="~"
-          items="center"
-          w="170px"
-          p="x-2 y-2"
-          hover:bg="$bew-fill-2"
-          transition="duration-300"
-          border="rounded-$bew-radius"
         >
           <svg aria-hidden="true" class="svg-icon">
             <use :xlink:href="genre.icon" />
@@ -80,16 +81,70 @@ const genres = computed(() => [
         </a>
       </li>
     </ul>
+    <ul
+      v-for="(item, index) in [0]"
+      :key="index"
+      class="link-list"
+    >
+      <li
+        v-for="otherLink in otherLinks.slice(item, item + 10)"
+        :key="otherLink.name"
+        class="link-item group"
+      >
+        <a
+          :href="otherLink.href"
+          :target="isHomePage() ? '_blank' : '_self'"
+        >
+          <div v-if="otherLink.icon.startsWith('#')" class="icon">
+            <svg
+              aria-hidden="true"
+            >
+              <use :xlink:href="otherLink.icon" />
+            </svg>
+          </div>
+
+          <div
+            v-else
+            class="icon"
+          >
+            <i
+              :class="otherLink.icon"
+              :style="{ color: otherLink.color }"
+            />
+          </div>
+          <span>{{ otherLink.name }}</span>
+        </a>
+      </li>
+    </ul>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.link-list {
+  --uno: "last-of-type:p-4 last-of-type:bg-$bew-fill-1 last-of-type:m--4 last-of-type:rounded-r-$bew-radius";
+  --uno: "last-of-type:ml-2";
+}
+
+.link-item {
+  --uno: "mb-1 last-of-type:mb-0 text-sm";
+
+  a {
+    --uno: "flex items-center text-nowrap min-w-160px h-38px p-2 pr-3 rounded-$bew-radius duration-300";
+    --uno: "hover:bg-$bew-fill-alt hover:shadow-[var(--bew-shadow-1),var(--bew-shadow-edge-glow-1)]";
+  }
+}
+
 .svg-icon {
-  width: 2em;
-  height: 2em;
-  vertical-align: bottom;
-  fill: currentColor;
-  overflow: hidden;
-  margin-right: 1rem;
+  --uno: "w-2em h-2em mr-3 vertical-bottom fill-current overflow-hidden";
+}
+
+.icon {
+  --uno: "w-2em h-2em mr-3 bg-$bew-content-solid vertical-bottom fill-current overflow-hidden";
+  --uno: "text-1.25em grid place-items-center rounded-1/2 shrink-0";
+  --uno: "border-1 border-$bew-border-color";
+
+  svg {
+    --uno: "w-1.25em h-1.25em";
+  }
 }
 </style>

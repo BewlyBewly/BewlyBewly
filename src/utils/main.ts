@@ -68,27 +68,15 @@ export function hexToRGBA(hex: string, alpha: number): string {
 /**
  * Smooth scroll to the top of the html element
  */
-export function smoothScrollToTop(element: HTMLElement, duration: number, targetScrollTop = 0 as number) {
+export function scrollToTop(element: HTMLElement, targetScrollTop = 0 as number) {
   // cancel if already on top
   if (element.scrollTop === targetScrollTop)
     return
 
-  const cosParameter = (element.scrollTop - targetScrollTop) / 2
-  let scrollCount = 0
-  let oldTimestamp = 0
-
-  function step(newTimestamp: number) {
-    if (oldTimestamp !== 0) {
-      // if duration is 0 scrollCount will be Infinity
-      scrollCount += (Math.PI * (newTimestamp - oldTimestamp)) / duration
-      if (scrollCount >= Math.PI)
-        return (element.scrollTop = targetScrollTop)
-      element.scrollTop = targetScrollTop + cosParameter + cosParameter * Math.cos(scrollCount)
-    }
-    oldTimestamp = newTimestamp
-    window.requestAnimationFrame(step)
-  }
-  window.requestAnimationFrame(step)
+  element.scrollTo({
+    top: targetScrollTop,
+    behavior: 'smooth',
+  })
 }
 
 export function injectCSS(css: string): HTMLStyleElement {
@@ -115,12 +103,83 @@ export function delay(ms: number) {
  */
 export function isHomePage(): boolean {
   if (
-    /https?:\/\/(www\.)bilibili.com\/?(#\/?)?$/.test(location.href)
+    /https?:\/\/(?:www\.)?bilibili.com\/?(?:#\/?)?$/.test(location.href)
     // https://github.com/hakadao/BewlyBewly/issues/525 #525
-    || /https?:\/\/(www\.)bilibili.com(\/)?(\?.*)?$/.test(location.href)
-    || /https?:\/\/(www\.)bilibili.com\/index\.html$/.test(location.href)
-    || /https?:\/\/(www\.)?bilibili.com\/\?spm_id_from=(.)*/.test(location.href)
-  )
+    || /https?:\/\/(?:www\.)?bilibili.com\/?(?:\?.*)?$/.test(location.href)
+    || /https?:\/\/(?:www\.)?bilibili.com\/index\.html$/.test(location.href)
+    || /https?:\/\/(?:www\.)?bilibili.com\/\?spm_id_from=.*/.test(location.href)
+  ) {
     return true
+  }
   return false
+}
+
+/**
+ * Compresses and resizes an image file.
+ *
+ * @param file - The image file to compress and resize.
+ * @param maxWidth - The maximum width of the resized image.
+ * @param maxHeight - The maximum height of the resized image.
+ * @param quality - The quality of the compressed image (0-1).
+ * @param callback - The callback function to execute with the compressed file.
+ */
+export function compressAndResizeImage(file: File, maxWidth: number, maxHeight: number, quality: number, callback: any) {
+  // Create an Image object
+  const img = new Image()
+
+  // Create a FileReader to read the file
+  const reader = new FileReader()
+  reader.onload = function (e) {
+    img.src = e.target?.result as string
+
+    img.onload = function () {
+      // Create a canvas
+      const canvas = document.createElement('canvas')
+      const ctx = canvas.getContext('2d')
+
+      // Calculate new size
+      let width = img.width
+      let height = img.height
+
+      if (width > height) {
+        if (width > maxWidth) {
+          height = Math.round(height * maxWidth / width)
+          width = maxWidth
+        }
+      }
+      else {
+        if (height > maxHeight) {
+          width = Math.round(width * maxHeight / height)
+          height = maxHeight
+        }
+      }
+
+      // Set canvas dimensions
+      canvas.width = width
+      canvas.height = height
+
+      if (!ctx) {
+        console.error('compressAndResizeImage => ctx is null')
+        return
+      }
+
+      // Draw the image on the canvas
+      ctx.drawImage(img, 0, 0, width, height)
+
+      // Compress the image
+      canvas.toBlob((blob) => {
+        // Create a new blob file
+        const compressedFile = new File([blob as Blob], file.name, {
+          type: 'image/jpeg',
+          lastModified: Date.now(),
+        })
+
+        // Execute the callback with the new compressed file
+        callback(compressedFile)
+      }, 'image/jpeg', quality)
+    }
+  }
+
+  // Read the file as a Data URL (base64)
+  reader.readAsDataURL(file)
 }

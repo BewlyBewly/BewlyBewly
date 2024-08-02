@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+
 import type { AppPage } from '~/enums/appEnums'
 import { TopBarPopup } from '~/enums/appEnums'
 import { getUserID } from '~/utils/main'

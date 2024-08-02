@@ -1,4 +1,5 @@
 import fs from 'fs-extra'
+
 import { getManifest } from '../src/manifest'
 import { isFirefox, isSafari, log, r } from './utils'
 

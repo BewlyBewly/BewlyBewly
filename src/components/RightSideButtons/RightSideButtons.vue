@@ -1,97 +1,18 @@
 <script setup lang="ts">
-import { usePreferredDark } from '@vueuse/core'
+import { Icon } from '@iconify/vue'
+
+import { useDark } from '~/composables/useDark'
+
+import Tooltip from '../Tooltip.vue'
 import type { HoveringDockItem } from './types'
-import { settings } from '~/logic'
 
 const emit = defineEmits(['settings-visibility-change'])
-const { mainAppRef } = useBewlyApp()
+const { isDark, toggleDark } = useDark()
 
 const hoveringDockItem = reactive<HoveringDockItem>({
   themeMode: false,
   settings: false,
 })
-
-const isPreferredDark = usePreferredDark()
-const currentSystemColorScheme = computed(() => isPreferredDark.value ? 'dark' : 'light')
-
-const currentAppColorScheme = computed((): 'dark' | 'light' => {
-  if (settings.value.theme !== 'auto')
-    return settings.value.theme
-  else
-    return currentSystemColorScheme.value
-})
-
-function toggleDark(e: MouseEvent) {
-  const updateThemeSettings = () => {
-    if (currentAppColorScheme.value !== currentSystemColorScheme.value)
-      settings.value.theme = 'auto'
-    else
-      settings.value.theme = isPreferredDark.value ? 'light' : 'dark'
-  }
-
-  const isAppearanceTransition = typeof document !== 'undefined'
-  // @ts-expect-error: Transition API
-    && document.startViewTransition
-    && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  if (!isAppearanceTransition) {
-    updateThemeSettings()
-  }
-  else {
-    const x = e.clientX
-    const y = e.clientY
-    const endRadius = Math.hypot(
-      Math.max(x, innerWidth - x),
-      Math.max(y, innerHeight - y),
-    )
-    // https://github.com/vueuse/vueuse/pull/3129
-    const style = document.createElement('style')
-    const styleString = `
-    *, *::before, *::after
-    {-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important}`
-    style.appendChild(document.createTextNode(styleString))
-    document.head.appendChild(style)
-
-    // Since normal dom style cannot be applied in shadow dom style
-    // We need to add this style again to the shadow dom
-    const shadowDomStyle = document.createElement('style')
-    const shadowDomStyleString = `
-    *, *::before, *::after
-    {-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important}`
-    shadowDomStyle.appendChild(document.createTextNode(shadowDomStyleString))
-    mainAppRef.value.appendChild(shadowDomStyle)
-
-    // @ts-expect-error: Transition API
-    const transition = document.startViewTransition(async () => {
-      updateThemeSettings()
-      await nextTick()
-    })
-
-    transition.ready.then(() => {
-      const clipPath = [
-      `circle(0px at ${x}px ${y}px)`,
-      `circle(${endRadius}px at ${x}px ${y}px)`,
-      ]
-      const animation = document.documentElement.animate(
-        {
-          clipPath: currentAppColorScheme.value === 'dark'
-            ? [...clipPath].reverse()
-            : clipPath,
-        },
-        {
-          duration: 300,
-          easing: 'ease-in-out',
-          pseudoElement: currentAppColorScheme.value === 'dark'
-            ? '::view-transition-old(root)'
-            : '::view-transition-new(root)',
-        },
-      )
-      animation.addEventListener('finish', () => {
-        document.head.removeChild(style!)
-        mainAppRef.value.removeChild(shadowDomStyle!)
-      }, { once: true })
-    })
-  }
-}
 </script>
 
 <template>
@@ -100,7 +21,7 @@ function toggleDark(e: MouseEvent) {
     pointer-events-none
   >
     <div flex="~ gap-2 col" pointer-events-auto>
-      <Tooltip :content="currentAppColorScheme === 'dark' ? $t('dock.dark_mode') : $t('dock.light_mode')" placement="left">
+      <Tooltip :content="isDark ? $t('dock.dark_mode') : $t('dock.light_mode')" placement="left">
         <Button
           class="ctrl-btn"
           style="backdrop-filter: var(--bew-filter-glass-1);"
@@ -111,26 +32,31 @@ function toggleDark(e: MouseEvent) {
         >
           <Transition name="fade">
             <div v-show="hoveringDockItem.themeMode" absolute>
-              <line-md:sunny-outline-to-moon-loop-transition v-if="currentAppColorScheme === 'dark'" />
-              <line-md:moon-alt-to-sunny-outline-loop-transition v-else />
+              <Icon v-if="isDark" icon="line-md:sunny-outline-to-moon-loop-transition" />
+              <Icon v-else icon="line-md:moon-alt-to-sunny-outline-loop-transition" />
             </div>
           </Transition>
           <Transition name="fade">
             <div v-show="!hoveringDockItem.themeMode" absolute>
-              <line-md:sunny-outline-to-moon-transition v-if="currentAppColorScheme === 'dark'" />
-              <line-md:moon-to-sunny-outline-transition v-else />
+              <Icon v-if="isDark" icon="line-md:sunny-outline-to-moon-transition" />
+              <Icon v-else icon="line-md:moon-to-sunny-outline-transition" />
             </div>
           </Transition>
         </Button>
       </Tooltip>
       <Tooltip :content="$t('dock.settings')" placement="left">
         <Button
-          class="ctrl-btn"
+          class="ctrl-btn group"
           style="backdrop-filter: var(--bew-filter-glass-1);"
           center size="small" round
           @click="emit('settings-visibility-change')"
         >
-          <mingcute:settings-3-line />
+          <div mt--2px>
+            <i
+              i-mingcute:settings-3-line w-20px h-20px group-hover:rotate-180
+              transition="all 2000 ease-out"
+            />
+          </div>
         </Button>
       </Tooltip>
     </div>
@@ -142,14 +68,14 @@ function toggleDark(e: MouseEvent) {
   --b-button-width: 40px;
   --b-button-height: 40px;
   --b-button-border-width: 1px;
-  --b-button-color: var(--bew-elevated-1);
-  --b-button-color-hover: var(--bew-elevated-1-hover);
+  --b-button-color: var(--bew-elevated);
+  --b-button-color-hover: var(--bew-elevated-hover);
   --b-button-shadow: var(--bew-shadow-1);
   --b-button-shadow-hover: var(--bew-shadow-2);
   --b-button-shadow-active: var(--bew-shadow-1);
 
   svg {
-    --at-apply: w-20px h-20px shrink-0;
+    --uno: "w-20px h-20px shrink-0";
   }
 }
 </style>
