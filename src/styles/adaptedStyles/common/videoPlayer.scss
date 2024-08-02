@@ -25,6 +25,8 @@
   // Increase the priority of the style inside by writing a non-existent selector in `:not()`
   :not(foobar) {
     #musicApp {
+      background-color: var(--bew-elevated-alt-solid);
+
       .BgmInfo .right .bottom .btn {
         color: var(--bew-theme-color);
       }
@@ -59,8 +61,6 @@
     }
 
     #musicApp {
-      background-color: var(--bew-elevated-solid) !important;
-
       .bottom-btn {
         background-color: var(--bew-fill-1);
       }
