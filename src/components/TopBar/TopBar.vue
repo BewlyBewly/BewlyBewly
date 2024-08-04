@@ -490,7 +490,7 @@ defineExpose({
               grid="~ place-items-center" border="1 $bew-border-color"
               rounded="46px" duration-300
               bg="$bew-elevated hover:$bew-theme-color dark-hover:white"
-              shadow="$bew-shadow-2"
+              shadow="[var(--bew-shadow-edge-glow-1),var(--bew-shadow-2)]"
               w-46px h-46px transform-gpu
             >
 
