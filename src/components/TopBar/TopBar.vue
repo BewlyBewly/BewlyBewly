@@ -545,9 +545,13 @@ defineExpose({
             text="$bew-text-1" border="1 $bew-border-color" rounded-full
             transform-gpu
           >
-            <div v-if="!isLogin" class="right-side-item">
+            <div
+              v-if="!isLogin"
+              class="right-side-item"
+              important-w-auto
+            >
               <a href="https://passport.bilibili.com/login" class="login">
-                <div i-ic:outline-account-circle class="text-xl mr-2" />{{
+                <div i-solar:user-circle-bold-duotone class="text-xl mr-2" />{{
                   $t('topbar.sign_in')
                 }}
               </a>
@@ -950,8 +954,8 @@ defineExpose({
   }
 
   .right-side-item .login {
-    --un-drop-shadow: drop-shadow(0 0 6px var(--bew-theme-color));
-    --uno: "rounded-full mx-1 important:text-$bew-theme-color important:px-4 hover:important-bg-$bew-theme-color hover:important-text-white flex items-center justify-center important:text-base w-120px border-solid border-$bew-theme-color border-2 important:dark:filter";
+    --uno: "!w-auto !flex items-center bg-$bew-theme-color-10";
+    --uno: "rounded-full important:text-$bew-theme-color important:px-4 hover:important-bg-$bew-theme-color hover:important-text-white important:text-base";
   }
 }
 </style>
