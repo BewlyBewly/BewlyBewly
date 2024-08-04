@@ -57,6 +57,8 @@ export interface Settings {
   filterByViewCount: number
   enableFilterByDuration: boolean
   filterByDuration: number
+  enableFilterByTitle: boolean
+  filterByTitle: { title: string, remark: string }[]
   homePageTabVisibilityList: { page: HomeSubPage, visible: boolean }[]
   alwaysShowTabsOnHomePage: boolean
   useSearchPageModeOnHomePage: boolean
@@ -115,6 +117,8 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   filterByViewCount: 10000,
   enableFilterByDuration: false,
   filterByDuration: 3600,
+  enableFilterByTitle: false,
+  filterByTitle: [],
 
   homePageTabVisibilityList: [],
   alwaysShowTabsOnHomePage: false,

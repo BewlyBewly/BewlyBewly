@@ -234,6 +234,65 @@ function handleToggleHomeTab(tab: any) {
           <Radio v-model="settings.enableFilterByDuration" />
         </div>
       </SettingsItem>
+
+      <SettingsItem title="Filter by title">
+        <Radio v-model="settings.enableFilterByTitle" />
+        <template #bottom>
+          <List
+            highlight-first
+            w-full
+          >
+            <ListItem>
+              <div max-w-80px>
+                index
+              </div>
+              <div>title</div>
+              <div>remark</div>
+              <div max-w-100px>
+                action
+              </div>
+            </ListItem>
+            <ListItem>
+              <div max-w-80px>
+                0
+              </div>
+              <Input size="small" placeholder="title" w-full />
+              <Input size="small" placeholder="remark" w-full />
+              <div flex="~ gap-1" max-w-100px>
+                <Button size="small" type="tertiary">
+                  <template #left>
+                    <i i-mingcute:check-line />
+                  </template>
+                </Button>
+                <Button size="small" type="tertiary">
+                  <template #left>
+                    <i i-mingcute:close-line />
+                  </template>
+                </Button>
+              </div>
+            </ListItem>
+            <ListItem v-for="(item, index) in settings.filterByTitle" :key="item.title">
+              <div max-w-80px>
+                {{ index + 1 }}
+              </div>
+              <Input v-model="item.title" size="small" placeholder="title" w-full />
+              <Input v-model="item.remark" size="small" placeholder="remark" w-full />
+              <div flex="~ gap-1" max-w-100px>
+                <Button size="small" type="tertiary">
+                  <template #left>
+                    <i i-mingcute:check-line />
+                  </template>
+                </Button>
+                <Button size="small" type="tertiary">
+                  <template #left>
+                    <i i-mingcute:close-line />
+                  </template>
+                </Button>
+              </div>
+            </ListItem>
+          </List>
+        </template>
+      </SettingsItem>
     </SettingsItemGroup>
 
     <SettingsItemGroup
