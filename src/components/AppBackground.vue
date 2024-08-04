@@ -68,6 +68,7 @@ function setAppWallpaperMaskingOpacity() {
           background: themeColorLinearGradientBackground,
         }"
         pos="absolute top-0 left-0" w-full h-full z-0 pointer-events-none
+        filter="!saturate-80"
       />
     </Transition>
 
