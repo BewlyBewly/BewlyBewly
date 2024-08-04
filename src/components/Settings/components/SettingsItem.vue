@@ -2,14 +2,13 @@
 defineProps<{
   title?: string
   desc?: string
-  nextLine?: boolean
 }>()
 </script>
 
 <template>
   <div class="b-settings-item" py-4>
     <div flex="~ gap-4" justify-betwee items-center text-base>
-      <div :w="nextLine ? 'full' : '5/7'">
+      <div w="5/7">
         <div>
           <slot name="title">
             {{ title }}
@@ -26,13 +25,13 @@ defineProps<{
         </div>
       </div>
 
-      <div v-if="!nextLine" w="2/7" class="right-content">
+      <div w="2/7" class="right-content">
         <slot />
       </div>
     </div>
 
-    <div v-if="nextLine" mt-4>
-      <slot />
+    <div v-if="$slots.bottom" mt-4>
+      <slot name="bottom" />
     </div>
   </div>
 </template>
