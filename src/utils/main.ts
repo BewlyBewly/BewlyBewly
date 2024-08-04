@@ -109,7 +109,7 @@ export function hexToHSL(hex: string, alpha: number | null = null): string {
 
   if (alpha !== null)
     return `hsla(${h}, ${s}%, ${l}%, ${alpha})`
-  return `hsla(${h}, ${s}%, ${l}%)`
+  return `hsl(${h}, ${s}%, ${l}%)`
 }
 
 /**
