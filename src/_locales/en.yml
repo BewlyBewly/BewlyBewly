@@ -106,6 +106,7 @@ settings:
     dark: Dark
     auto: Auto
   theme_color: Theme color
+  gradient_theme_color_background: Use a gradient theme color as the background in dark mode
   wallpaper_mode: Wallpaper mode
   wallpaper_mode_desc: 'By URL: Choose an image from the Internet and use its URL to set it as the wallpaper.'
   wallpaper_mode_opt:
