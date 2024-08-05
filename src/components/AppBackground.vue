@@ -22,11 +22,10 @@ const themeColorLightness = computed((): number => {
 })
 const themeColorLinearGradientBackground = computed((): string => {
   return `linear-gradient(180deg, 
-    transparent 0% 38%,
-    hsl(${themeColorHue.value}, ${themeColorSaturation.value + 6}%, ${themeColorLightness.value * 0.42}%) 56%, 
-    hsl(${themeColorHue.value}, ${themeColorSaturation.value}%, ${themeColorLightness.value}%) 76%,
-    hsl(${themeColorHue.value}, ${themeColorSaturation.value}%, ${themeColorLightness.value + 20}%) 90%,
-    hsl(${themeColorHue.value}, ${themeColorSaturation.value}%, 96%) 100%)`
+    transparent 0% 44%,
+    hsla(${themeColorHue.value}, ${themeColorSaturation.value + 20}%, ${themeColorLightness.value}%, 0.4) 62%, 
+    hsl(${themeColorHue.value}, ${themeColorSaturation.value}%, ${themeColorLightness.value}%) 80%,
+    hsl(${themeColorHue.value}, ${themeColorSaturation.value}%, 100%) 100%)`
 })
 
 watch(() => settings.value.wallpaperMaskOpacity, () => {
@@ -68,7 +67,7 @@ function setAppWallpaperMaskingOpacity() {
           background: themeColorLinearGradientBackground,
         }"
         pos="absolute top-0 left-0" w-full h-full z-0 pointer-events-none
-        filter="!saturate-80"
+        important-contrast-80
       />
     </Transition>
 
