@@ -180,7 +180,7 @@ defineExpose({
 
     <main flex="~" overflow-hidden rounded="$bew-radius">
       <aside
-        w="120px" h="430px" overflow="y-scroll" rounded="l-$bew-radius"
+        w="120px" h="430px" overflow="y-auto" rounded="l-$bew-radius"
         flex="shrink-0" bg="$bew-fill-1"
       >
         <ul grid="~ cols-1">

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import DOMPurify from 'dompurify'
 import browser from 'webextension-polyfill'
 
 import { settings } from '~/logic'
@@ -233,7 +232,7 @@ async function checkGitHubRelease() {
           </a>
         </section> -->
       </section>
-      <section mt-4>
+      <!-- <section mt-4>
         <Button
           type="tertiary" mx-auto
           @click="dialogVisible.justWannaChangeTheJob = true"
@@ -290,7 +289,7 @@ async function checkGitHubRelease() {
             w-200px h-200px
           />
         </Dialog>
-      </section>
+      </section> -->
     </div>
   </div>
 </template>
