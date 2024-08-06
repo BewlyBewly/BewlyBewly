@@ -7,7 +7,6 @@ html.bewly-design.forceDark.dark {
   &.dark {
     img,
     video,
-    iframe,
     [style*="background-image: url"],
     [style*="background: url"] {
       filter: var(--bew-filter-force-dark);
