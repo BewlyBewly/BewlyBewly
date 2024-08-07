@@ -62,15 +62,9 @@ const otherLinks = computed((): { name: string, url: string, icon: string }[] =>
 })
 
 const levelProgressBarWidth = computed(() => {
-  const { next_exp: nextExp, current_exp: currentExp, current_min: minExp } = props.userInfo.level_info
+  const { next_exp: nextExp, current_exp: currentExp } = props.userInfo.level_info
 
-  const totalExp = nextExp - minExp
-  const earnedExp = currentExp - minExp
-
-  if (totalExp === 0)
-    return '0%'
-
-  const percentage = (earnedExp / totalExp) * 100
+  const percentage = (currentExp / nextExp) * 100
   return `${percentage.toFixed(2)}%`
 })
 

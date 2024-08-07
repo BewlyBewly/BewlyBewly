@@ -175,7 +175,7 @@ function handleToggleDockItem(dockItem: any) {
       <SettingsItem :title="$t('settings.auto_hide_dock')">
         <Radio v-model="settings.autoHideDock" />
       </SettingsItem>
-      <SettingsItem next-line :desc="$t('settings.dock_content_adjustment_desc')">
+      <SettingsItem :desc="$t('settings.dock_content_adjustment_desc')">
         <template #title>
           <div flex="~ gap-4 items-center">
             {{ $t('settings.dock_content_adjustment') }}
@@ -187,26 +187,29 @@ function handleToggleDockItem(dockItem: any) {
             </Button>
           </div>
         </template>
-        <draggable
-          v-model="settings.dockItemVisibilityList"
-          item-key="page"
-          :component-data="{ style: 'display: flex; gap: 0.5rem; flex-wrap: wrap;' }"
-        >
-          <template #item="{ element }">
-            <div
-              flex="~ gap-2 items-center" p="x-4 y-2" bg="$bew-fill-1" rounded="$bew-radius" cursor-all-scroll
-              duration-300
-              :style="{
-                background: element.visible ? 'var(--bew-theme-color)' : 'var(--bew-fill-1)',
-                color: element.visible ? 'white' : 'var(--bew-text-1)',
-              }"
-              @click="handleToggleDockItem(element)"
-            >
-              <div :class="pageOptions.find((page:any) => (page.value === element.page))?.icon as string" />
-              {{ pageOptions.find(option => option.value === element.page)?.label }}
-            </div>
-          </template>
-        </draggable>
+
+        <template #bottom>
+          <draggable
+            v-model="settings.dockItemVisibilityList"
+            item-key="page"
+            :component-data="{ style: 'display: flex; gap: 0.5rem; flex-wrap: wrap;' }"
+          >
+            <template #item="{ element }">
+              <div
+                flex="~ gap-2 items-center" p="x-4 y-2" bg="$bew-fill-1" rounded="$bew-radius" cursor-all-scroll
+                duration-300
+                :style="{
+                  background: element.visible ? 'var(--bew-theme-color)' : 'var(--bew-fill-1)',
+                  color: element.visible ? 'white' : 'var(--bew-text-1)',
+                }"
+                @click="handleToggleDockItem(element)"
+              >
+                <div :class="pageOptions.find((page:any) => (page.value === element.page))?.icon as string" />
+                {{ pageOptions.find(option => option.value === element.page)?.label }}
+              </div>
+            </template>
+          </draggable>
+        </template>
       </SettingsItem>
       <SettingsItem :title="$t('settings.disable_light_dark_mode_switcher')">
         <Radio v-model="settings.disableLightDarkModeSwitcherOnDock" />
