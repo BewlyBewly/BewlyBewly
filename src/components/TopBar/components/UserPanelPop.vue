@@ -23,6 +23,7 @@ const mid = computed(() => {
 
 const otherLinks = computed((): { name: string, url: string, icon: string }[] => {
   return [
+
     {
       name: t('topbar.user_dropdown.uploads_manager'),
       url: 'https://member.bilibili.com/v2#/upload-manager/article',
@@ -32,6 +33,11 @@ const otherLinks = computed((): { name: string, url: string, icon: string }[] =>
       name: t('topbar.user_dropdown.account_settings'),
       url: 'https://account.bilibili.com/account/home',
       icon: 'i-solar:user-circle-bold-duotone',
+    },
+    {
+      name: t('topbar.user_dropdown.bilibili_premium'),
+      url: 'https://account.bilibili.com/big',
+      icon: 'i-solar:accessibility-bold-duotone',
     },
     {
       name: t('topbar.user_dropdown.b_coins_wallet'),

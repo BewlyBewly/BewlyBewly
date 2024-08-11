@@ -264,6 +264,7 @@ topbar:
     following: FOLLOWING
     followers: FOLLOWERS
     posts: POSTS
+    bilibili_premium: Bilibili Premium
     account_settings: Account settings
     uploads_manager: Uploads manager
     b_coins_wallet: B-coins wallet

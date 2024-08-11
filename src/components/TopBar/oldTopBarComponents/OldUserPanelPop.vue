@@ -34,6 +34,11 @@ const otherLinks = computed((): { name: string, url: string, icon: string }[] =>
       icon: 'i-solar:user-circle-bold-duotone',
     },
     {
+      name: t('topbar.user_dropdown.bilibili_premium'),
+      url: 'https://account.bilibili.com/big',
+      icon: 'i-solar:accessibility-bold-duotone',
+    },
+    {
       name: t('topbar.user_dropdown.b_coins_wallet'),
       url: 'https://pay.bilibili.com/',
       icon: 'i-solar:wallet-money-bold-duotone',
