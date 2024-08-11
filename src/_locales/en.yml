@@ -159,6 +159,7 @@ settings:
   # Common
   use_original_bilibili_homepage: Use the original Bilibili homepage
   use_original_bilibili_homepage_desc: After you change it, the page will automatically refresh if you are on the homepage!
+  use_original_bilibili_topbar: Use the original Bilibili top bar
   adapt_to_other_page_styles: Adapt to other page styles
   adapt_to_other_page_styles_desc: Adapt to some common pages to match with the BewlyBewly theme
   # Bilibili Evolved
