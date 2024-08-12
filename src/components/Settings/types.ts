@@ -1,5 +1,6 @@
 export enum MenuType {
   General = 'General',
+  DesktopAndDock = 'DesktopAndDock',
   Appearance = 'Appearance',
   SearchPage = 'SearchPage',
   Home = 'Home',
