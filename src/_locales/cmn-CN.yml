@@ -158,6 +158,7 @@ settings:
   # Common
   use_original_bilibili_homepage: 使用原版 Bilibili 首页
   use_original_bilibili_homepage_desc: 在您更改此设置后，如果在首页上，页面将自动刷新！
+  use_original_bilibili_topbar: 使用原版 Bilibili 顶栏
   adapt_to_other_page_styles: 适应其他页面样式
   adapt_to_other_page_styles_desc: 适应一些常见页面，以与 BewlyBewly 主题相匹配
   # Bilibili Evolved
@@ -263,6 +264,7 @@ topbar:
     following: 关注
     followers: 粉丝
     posts: 动态
+    bilibili_premium: Bilibili 大会员
     account_settings: 账号设置
     uploads_manager: 投稿管理
     b_coins_wallet: B币钱包

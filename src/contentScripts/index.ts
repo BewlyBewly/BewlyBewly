@@ -117,34 +117,18 @@ if (settings.value.adaptToOtherPageStyles && isHomePage()) {
   `)
 }
 
-if (isSupportedPages()) {
-  // remove the original top bar and adjust the height of the top bar to match the bewly top bar
-  injectCSS(`
-    .bili-header .bili-header__bar,
-    #internationalHeader,
-    .link-navbar,
-    #home_nav,
-    #biliMainHeader,
-    #bili-header-container {
-      visibility: hidden;
-      height: var(--bew-top-bar-height) !important;
-    }
-
-    /* some pages have a white bar at the top; changing the top margin fixes this problem */
-    .banner-wrapper,
-    .home-banner-wrapper {
-      margin-top: calc(-1 * var(--bew-top-bar-height)) !important;
-    }
-  `)
-}
-
 document.addEventListener('DOMContentLoaded', () => {
   // Remove the original Bilibili homepage if in Bilibili homepage & useOriginalBilibiliHomepage is enabled
   if (!settings.value.useOriginalBilibiliHomepage && isHomePage()) {
-    // const originalPageContent = document.querySelector('#i_cecream')
-    // if (originalPageContent)
-    //   originalPageContent.innerHTML = ''
+    const originalTopBar = document.querySelector('#i_cecream > .bili-feed4 > .bili-header')
+    const originalTopBarInnerUselessContents = document.querySelectorAll('#i_cecream > .bili-feed4 > .bili-header > *:not(.bili-header__bar)')
+
     document.body.innerHTML = ''
+
+    if (originalTopBar)
+      document.body.appendChild(originalTopBar)
+    if (originalTopBarInnerUselessContents)
+      originalTopBarInnerUselessContents.forEach(item => (item as HTMLElement).style.display = 'none')
   }
   if (beforeLoadedStyleEl)
     document.documentElement.removeChild(beforeLoadedStyleEl)
