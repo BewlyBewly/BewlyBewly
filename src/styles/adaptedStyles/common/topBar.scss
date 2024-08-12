@@ -1,5 +1,9 @@
 .bewly-design {
   // Implement specific modifications to the page, like tweaking the layout, and place those styles here
+  .large-header {
+    background-color: transparent;
+  }
+
   .bili-header .slide-down,
   .bili-header .mini-header {
     background-color: var(--bew-elevated) !important;

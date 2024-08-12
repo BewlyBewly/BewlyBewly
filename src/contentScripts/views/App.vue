@@ -9,7 +9,7 @@ import { useDark } from '~/composables/useDark'
 import { OVERLAY_SCROLL_BAR_SCROLL } from '~/constants/globalEvents'
 import { AppPage, LanguageType } from '~/enums/appEnums'
 import { accessKey, settings } from '~/logic'
-import { getUserID, hexToHSL, isHomePage, scrollToTop } from '~/utils/main'
+import { getUserID, isHomePage, scrollToTop } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
 const { isDark } = useDark()
