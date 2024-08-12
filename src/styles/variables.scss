@@ -333,7 +333,7 @@
   --graph_white: var(--bew-content-solid);
   --graph_bg_thin: var(--bew-content-solid);
   --graph_bg_regular: var(--bew-content-solid);
-  --graph_bg_thick: var(--bew-elevated-solid);
+  --graph_bg_thick: color-mix(in oklab, var(--bew-content-solid), #fff 20%);
   --graph_weak: var(--Ga3);
   --graph_medium: var(--Ga5);
   --graph_icon: var(--Ga7);

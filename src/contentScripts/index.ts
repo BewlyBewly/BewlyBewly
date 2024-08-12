@@ -113,18 +113,23 @@ if (settings.value.adaptToOtherPageStyles && isHomePage()) {
   `)
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Remove the original Bilibili homepage if in Bilibili homepage & useOriginalBilibiliHomepage is enabled
+document.addEventListener('DOMContentLoaded', async () => {
   if (!settings.value.useOriginalBilibiliHomepage && isHomePage()) {
-    const originalTopBar = document.querySelector('#i_cecream > .bili-feed4 > .bili-header')
-    const originalTopBarInnerUselessContents = document.querySelectorAll('#i_cecream > .bili-feed4 > .bili-header > *:not(.bili-header__bar)')
+    const originalTopBar = document.querySelector<HTMLElement>('#i_cecream > .bili-feed4 > .bili-header')
+    const originalTopBarInnerUselessContents = document.querySelectorAll<HTMLElement>('#i_cecream > .bili-feed4 > .bili-header > *:not(.bili-header__bar)')
 
+    if (originalTopBar) {
+      // always show the background on the original bilibili top bar
+      originalTopBar.querySelector('.bili-header__bar')?.classList.add('slide-down')
+    }
+
+    // Remove the original Bilibili homepage if in Bilibili homepage & useOriginalBilibiliHomepage is enabled
     document.body.innerHTML = ''
 
-    if (originalTopBar)
-      document.body.appendChild(originalTopBar)
     if (originalTopBarInnerUselessContents)
       originalTopBarInnerUselessContents.forEach(item => (item as HTMLElement).style.display = 'none')
+    if (originalTopBar)
+      document.body.appendChild(originalTopBar)
   }
   if (beforeLoadedStyleEl)
     document.documentElement.removeChild(beforeLoadedStyleEl)

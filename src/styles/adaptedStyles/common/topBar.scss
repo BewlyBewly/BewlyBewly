@@ -1,0 +1,26 @@
+.bewly-design {
+  // Implement specific modifications to the page, like tweaking the layout, and place those styles here
+  .bili-header .slide-down,
+  .bili-header .mini-header {
+    background-color: var(--bew-elevated) !important;
+    backdrop-filter: var(--bew-filter-glass-1);
+  }
+
+  // #region theme color adaption part
+  // Increase the priority of the style inside by writing a non-existent selector in `:not()`
+  :not(foobar) {
+    .bili-header .header-upload-entry {
+      background-color: var(--bew-theme-color);
+    }
+
+    .bili-header .header-upload-entry:hover {
+      background-color: var(--bew-theme-color-80);
+    }
+  }
+  // #endregion
+
+  // #region dark mode adaption part
+  // &.dark {
+  // }
+  // #endregion
+}
