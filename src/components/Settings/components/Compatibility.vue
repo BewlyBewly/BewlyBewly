@@ -22,6 +22,9 @@ function changeThemeColor(color: string) {
 <template>
   <div>
     <SettingsItemGroup :title="$t('settings.group_common')">
+      <SettingsItem :title="$t('settings.use_original_bilibili_topbar')">
+        <Radio v-model="settings.useOriginalBilibiliTopBar" />
+      </SettingsItem>
       <SettingsItem :title="$t('settings.use_original_bilibili_homepage')">
         <template #desc>
           <span color="$bew-error-color" v-text="$t('settings.use_original_bilibili_homepage_desc')" />

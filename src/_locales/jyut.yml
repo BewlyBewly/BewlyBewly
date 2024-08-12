@@ -32,6 +32,7 @@ settings:
 
   # Settings menu
   menu_general: 一般
+  menu_desktop_and_dock: 桌面同 Dock
   menu_appearance: 版面
   menu_home: 主頁
   menu_search_page: 搵嘢頁
@@ -161,6 +162,7 @@ settings:
   # Common
   use_original_bilibili_homepage: 用返原本嘅 Bilibili 主頁
   use_original_bilibili_homepage_desc: 改咗之後，如果你喺主頁，個頁面就會自動重新整理！
+  use_original_bilibili_topbar: 用返原本嘅 Bilibili 頂欄
   adapt_to_other_page_styles: 適應其他版面風格
   adapt_to_other_page_styles_desc: 執執啲常用嘅版面，襯返 BewlyBewly 主題風格
   # Bilibili Evolved
@@ -266,6 +268,7 @@ topbar:
     following: 追緊
     followers: 擁躉
     posts: 動向
+    bilibili_premium: Bilibili 大會員
     account_settings: 帳戶設定
     uploads_manager: 內容管理
     b_coins_wallet: B銀荷包
