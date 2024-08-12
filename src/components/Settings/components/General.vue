@@ -2,7 +2,6 @@
 import { useI18n } from 'vue-i18n'
 
 import { settings } from '~/logic'
-import { useMainStore } from '~/stores/mainStore'
 
 import SettingsItem from './SettingsItem.vue'
 import SettingsItemGroup from './SettingsItemGroup.vue'
