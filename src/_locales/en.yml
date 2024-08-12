@@ -32,6 +32,7 @@ settings:
 
   # Settings menu
   menu_general: General
+  menu_desktop_and_dock: Desktop & Dock
   menu_appearance: Appearance
   menu_search_page: Search Page
   menu_home: Home
