@@ -153,13 +153,9 @@ function setAppThemeColor() {
   const bewlyElement = document.querySelector('#bewly') as HTMLElement
   if (bewlyElement) {
     bewlyElement.style.setProperty('--bew-theme-color', settings.value.themeColor)
-    for (let i = 0; i < 9; i++)
-      bewlyElement.style.setProperty(`--bew-theme-color-${i + 1}0`, hexToHSL(settings.value.themeColor, i * 0.1 + 0.1))
   }
 
   document.documentElement.style.setProperty('--bew-theme-color', settings.value.themeColor)
-  for (let i = 0; i < 9; i++)
-    document.documentElement.style.setProperty(`--bew-theme-color-${i + 1}0`, hexToHSL(settings.value.themeColor, i * 0.1 + 0.1))
 }
 
 function handleBackToTop(targetScrollTop = 0 as number) {
