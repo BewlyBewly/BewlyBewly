@@ -32,6 +32,7 @@ settings:
 
   # Settings menu
   menu_general: 常规
+  menu_desktop_and_dock: 桌面和 Dock 栏
   menu_appearance: 外观
   menu_search_page: 搜索页
   menu_home: 首页

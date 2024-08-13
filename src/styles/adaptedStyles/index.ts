@@ -1,5 +1,6 @@
 import './common/common.scss'
 import './common/comments.scss'
+import './common/topBar.scss'
 import './common/footer.scss'
 import './common/modal.scss'
 import './common/btn.scss'
