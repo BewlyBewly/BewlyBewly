@@ -64,6 +64,7 @@ export interface Settings {
 
   adaptToOtherPageStyles: boolean
   showTopBar: boolean
+  useOriginalBilibiliTopBar: boolean
   useOriginalBilibiliHomepage: boolean
 }
 export const settings = useStorageLocal('settings', ref<Settings>({
@@ -123,6 +124,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
 
   adaptToOtherPageStyles: true,
   showTopBar: true,
+  useOriginalBilibiliTopBar: false,
   useOriginalBilibiliHomepage: false,
 }), { mergeDefaults: true })
 
