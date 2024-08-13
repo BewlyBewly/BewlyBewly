@@ -85,6 +85,10 @@
       }
     }
 
+    .bili-dyn-forward-publishing__editor {
+      background-color: var(--bew-content-solid);
+    }
+
     // Like & dislike icon
     .like-icon,
     .dislike-icon,
@@ -311,7 +315,6 @@
     .comment-bilibili-fold .comment-send .textarea-container .ipt-txt,
     .bb-comment .comment-send-lite .textarea-container .ipt-txt,
     .comment-bilibili-fold .comment-send-lite .textarea-container .ipt-txt,
-    .bili-dyn-forward-publishing__editor,
     .textarea-container textarea {
       background-color: var(--bew-fill-1);
       border-color: var(--bew-border-color);
