@@ -8,7 +8,7 @@
     p="x-4 y-2"
     flex="~ gap-2"
     bg="odd:$bew-fill-1 hover:!$bew-fill-2"
-    rounded="first:t-$bew-radius last:b-$bew-radius"
+    rounded="$bew-radius"
     duration-300
   >
     <slot />
@@ -22,7 +22,7 @@
   }
 
   & + & {
-    --uno: "border-t-1 border-$bew-border-color";
+    --uno: "mt-1 border-$bew-border-color";
   }
 }
 </style>
