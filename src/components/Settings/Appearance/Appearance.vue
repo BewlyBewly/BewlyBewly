@@ -4,9 +4,9 @@ import { useI18n } from 'vue-i18n'
 
 import { settings } from '~/logic'
 
-import ChangeWallpaper from './ChangeWallpaper.vue'
-import SettingsItem from './SettingsItem.vue'
-import SettingsItemGroup from './SettingsItemGroup.vue'
+import ChangeWallpaper from '../components/ChangeWallpaper.vue'
+import SettingsItem from '../components/SettingsItem.vue'
+import SettingsItemGroup from '../components/SettingsItemGroup.vue'
 
 const { t } = useI18n()
 

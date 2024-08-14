@@ -3,8 +3,8 @@ import { useI18n } from 'vue-i18n'
 
 import { settings } from '~/logic'
 
-import SettingsItem from './SettingsItem.vue'
-import SettingsItemGroup from './SettingsItemGroup.vue'
+import SettingsItem from '../components/SettingsItem.vue'
+import SettingsItemGroup from '../components/SettingsItemGroup.vue'
 
 const { t, locale } = useI18n()
 

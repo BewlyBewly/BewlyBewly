@@ -7,9 +7,9 @@ import { accessKey, settings } from '~/logic'
 import { useMainStore } from '~/stores/mainStore'
 import { getTVLoginQRCode, pollTVLoginQRCode, revokeAccessKey } from '~/utils/authProvider'
 
-import SearchPage from './SearchPage.vue'
-import SettingsItem from './SettingsItem.vue'
-import SettingsItemGroup from './SettingsItemGroup.vue'
+import SettingsItem from '../components/SettingsItem.vue'
+import SettingsItemGroup from '../components/SettingsItemGroup.vue'
+import SearchPage from '../SearchPage/SearchPage.vue'
 
 const mainStore = useMainStore()
 const toast = useToast()
