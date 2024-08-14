@@ -11,14 +11,14 @@ const emit = defineEmits(['close'])
 const { t } = useI18n()
 
 const settingsMenu = {
-  [MenuType.General]: defineAsyncComponent(() => import('./components/General.vue')),
-  [MenuType.DesktopAndDock]: defineAsyncComponent(() => import('./components/DesktopAndDock.vue')),
-  [MenuType.Appearance]: defineAsyncComponent(() => import('./components/Appearance.vue')),
-  [MenuType.SearchPage]: defineAsyncComponent(() => import('./components/SearchPage.vue')),
-  [MenuType.Home]: defineAsyncComponent(() => import('./components/Home.vue')),
-  [MenuType.Compatibility]: defineAsyncComponent(() => import('./components/Compatibility.vue')),
-  // [MenuType.BilibiliSettings]: defineAsyncComponent(() => import('./components/BilibiliSettings.vue')),
-  [MenuType.About]: defineAsyncComponent(() => import('./components/About.vue')),
+  [MenuType.General]: defineAsyncComponent(() => import('./General/General.vue')),
+  [MenuType.DesktopAndDock]: defineAsyncComponent(() => import('./DesktopAndDock/DesktopAndDock.vue')),
+  [MenuType.Appearance]: defineAsyncComponent(() => import('./Appearance/Appearance.vue')),
+  [MenuType.SearchPage]: defineAsyncComponent(() => import('./SearchPage/SearchPage.vue')),
+  [MenuType.Home]: defineAsyncComponent(() => import('./Home/Home.vue')),
+  [MenuType.Compatibility]: defineAsyncComponent(() => import('./Compatibility/Compatibility.vue')),
+  // [MenuType.BilibiliSettings]: defineAsyncComponent(() => import('./BilibiliSettings/BilibiliSettings.vue')),
+  [MenuType.About]: defineAsyncComponent(() => import('./About/About.vue')),
 }
 const activatedMenuItem = ref<MenuType>(MenuType.General)
 const title = ref<string>(t('settings.title'))
