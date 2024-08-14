@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 type Size = 'small' | 'medium' | 'large'
 interface Props {
-  modelValue: string | number
   size?: Size
   type?: 'text' | 'password' | 'email' | 'number'
   min?: number
@@ -10,9 +9,9 @@ interface Props {
 }
 const props = withDefaults(defineProps<Props>(), { size: 'medium' })
 
-defineEmits(['update:modelValue', 'enter'])
+defineEmits(['enter'])
 
-const modelValue = ref<string | number>('')
+const modelValue = defineModel<string | number>()
 
 const height = computed(() => {
   if (props.size === 'small')
@@ -28,10 +27,6 @@ const padding = computed(() => {
   if (props.size === 'small')
     return '0 calc(var(--bew-base-font-size) * 0.5)'
   return '0 var(--bew-base-font-size)'
-})
-
-onMounted(() => {
-  modelValue.value = props.modelValue
 })
 </script>
 
@@ -58,7 +53,6 @@ onMounted(() => {
       :placeholder="placeholder"
       w-inherit h-inherit
       outline-none flex-1
-      @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
       @keydown.enter="$emit('enter')"
     >
 
