@@ -113,7 +113,8 @@ if (settings.value.adaptToOtherPageStyles && isHomePage()) {
   `)
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
+function onDOMLoaded() {
+  // Remove the original Bilibili homepage if in Bilibili homepage & useOriginalBilibiliHomepage is enabled
   if (!settings.value.useOriginalBilibiliHomepage && isHomePage()) {
     const originalTopBar = document.querySelector<HTMLElement>('#i_cecream > .bili-feed4 > .bili-header')
     const originalTopBarInnerUselessContents = document.querySelectorAll<HTMLElement>('#i_cecream > .bili-feed4 > .bili-header > *:not(.bili-header__bar)')
@@ -138,7 +139,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Then inject the app
     injectApp()
   }
-})
+}
+
+if (document.readyState !== 'loading')
+  onDOMLoaded()
+else
+  document.addEventListener('DOMContentLoaded', () => onDOMLoaded())
 
 function injectApp() {
   // Inject app when idle
