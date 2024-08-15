@@ -286,7 +286,7 @@ function handleDeleteTitleFilterItem(index: number) {
         </div>
       </SettingsItem>
 
-      <div flex="~ gap-4">
+      <div grid="~ gap-4 lg:cols-2 cols-1">
         <SettingsItem title="Filter by title">
           <Radio v-model="settings.enableFilterByTitle" />
           <template #bottom>
@@ -337,13 +337,25 @@ function handleDeleteTitleFilterItem(index: number) {
                   </Button>
                 </div>
               </ListItem>
-              <ListItem v-for="(item, index) in settings.filterByTitle" :key="item.title">
+              <ListItem v-for="(item, index) in settings.filterByTitle" :key="item.title" @dblclick="handleEditTitleFilterItem(index)">
                 <div max-w-80px>
                   {{ index + 1 }}
                 </div>
                 <template v-if="titleFilterEditingIndex === index">
-                  <Input v-model="editTitleFilterItem.title" size="small" placeholder="title" w-full />
-                  <Input v-model="editTitleFilterItem.remark" size="small" placeholder="remark" w-full />
+                  <Input
+                    v-model="editTitleFilterItem.title"
+                    size="small"
+                    placeholder="title"
+                    w-full
+                    @enter="handleConfirmTitleFilterItem(index)"
+                  />
+                  <Input
+                    v-model="editTitleFilterItem.remark"
+                    size="small"
+                    placeholder="remark"
+                    w-full
+                    @enter="handleConfirmTitleFilterItem(index)"
+                  />
                 </template>
                 <template v-else>
                   <div break-anywhere>
@@ -433,13 +445,25 @@ function handleDeleteTitleFilterItem(index: number) {
                   </Button>
                 </div>
               </ListItem>
-              <ListItem v-for="(item, index) in settings.filterByTitle" :key="item.title">
+              <ListItem v-for="(item, index) in settings.filterByTitle" :key="item.title" @dblclick="handleEditTitleFilterItem(index)">
                 <div max-w-80px>
                   {{ index + 1 }}
                 </div>
                 <template v-if="titleFilterEditingIndex === index">
-                  <Input v-model="editTitleFilterItem.title" size="small" placeholder="title" w-full />
-                  <Input v-model="editTitleFilterItem.remark" size="small" placeholder="remark" w-full />
+                  <Input
+                    v-model="editTitleFilterItem.title"
+                    size="small"
+                    placeholder="title"
+                    w-full
+                    @enter="handleConfirmTitleFilterItem(index)"
+                  />
+                  <Input
+                    v-model="editTitleFilterItem.remark"
+                    size="small"
+                    placeholder="remark"
+                    w-full
+                    @enter="handleConfirmTitleFilterItem(index)"
+                  />
                 </template>
                 <template v-else>
                   <div break-anywhere>
