@@ -52,13 +52,17 @@ export interface Settings {
   searchPageWallpaperBlurIntensity: number
 
   recommendationMode: 'web' | 'app'
+
   // filter setting
   enableFilterByViewCount: boolean
   filterByViewCount: number
   enableFilterByDuration: boolean
   filterByDuration: number
   enableFilterByTitle: boolean
-  filterByTitle: { title: string, remark: string }[]
+  filterByTitle: { keyword: string, remark: string }[]
+  enableFilterByUser: boolean
+  filterByUser: { keyword: string, remark: string }[]
+
   homePageTabVisibilityList: { page: HomeSubPage, visible: boolean }[]
   alwaysShowTabsOnHomePage: boolean
   useSearchPageModeOnHomePage: boolean
@@ -113,6 +117,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   searchPageWallpaperBlurIntensity: 0,
 
   recommendationMode: 'web',
+
   // filter setting
   enableFilterByViewCount: false,
   filterByViewCount: 10000,
@@ -120,6 +125,8 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   filterByDuration: 3600,
   enableFilterByTitle: false,
   filterByTitle: [],
+  enableFilterByUser: false,
+  filterByUser: [],
 
   homePageTabVisibilityList: [],
   alwaysShowTabsOnHomePage: false,

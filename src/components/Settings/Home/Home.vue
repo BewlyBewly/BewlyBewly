@@ -10,6 +10,8 @@ import { getTVLoginQRCode, pollTVLoginQRCode, revokeAccessKey } from '~/utils/au
 import SettingsItem from '../components/SettingsItem.vue'
 import SettingsItemGroup from '../components/SettingsItemGroup.vue'
 import SearchPage from '../SearchPage/SearchPage.vue'
+import FilterByTitleTable from './components/FilterByTitleTable.vue'
+import FilterByUserTable from './components/FilterByUserTable.vue'
 
 const mainStore = useMainStore()
 const toast = useToast()
@@ -109,57 +111,6 @@ function handleToggleHomeTab(tab: any) {
   else
     tab.visible = true
 }
-
-// #region filter by title
-const addTitleFilterItem = ref<{ title: string, remark: string }>({ title: '', remark: '' })
-const editTitleFilterItem = ref<{ title: string, remark: string }>({ title: '', remark: '' })
-const titleFilterEditingIndex = ref<number>(-1)
-
-function handleAddTitleFilter() {
-  if (!addTitleFilterItem.value.title.trim())
-    return
-
-  const hasDuplicate = settings.value.filterByTitle.find(
-    (item, itemIndex) => item.title === addTitleFilterItem.value.title.trim() && itemIndex !== titleFilterEditingIndex.value,
-  )
-  if (hasDuplicate) {
-    toast.warning('This title filter already exist!!!')
-    return
-  }
-  settings.value.filterByTitle.unshift({ ...addTitleFilterItem.value })
-  nextTick(() => {
-    handleClearTitleFilter()
-  })
-}
-
-function handleClearTitleFilter() {
-  addTitleFilterItem.value = { title: '', remark: '' }
-}
-
-function handleEditTitleFilterItem(index: number) {
-  titleFilterEditingIndex.value = index
-  editTitleFilterItem.value = { ...settings.value.filterByTitle[index] }
-}
-
-function handleConfirmTitleFilterItem(index: number) {
-  if (!editTitleFilterItem.value.title.trim())
-    return
-
-  const hasDuplicate = settings.value.filterByTitle.find(
-    (item, itemIndex) => item.title === editTitleFilterItem.value.title.trim() && itemIndex !== index,
-  )
-  if (hasDuplicate) {
-    toast.warning('This title filter already exist!!!')
-    return
-  }
-  settings.value.filterByTitle[index] = { ...editTitleFilterItem.value }
-  titleFilterEditingIndex.value = -1
-}
-
-function handleDeleteTitleFilterItem(index: number) {
-  settings.value.filterByTitle.splice(index, 1)
-}
-// #endregion
 </script>
 
 <template>
@@ -290,217 +241,13 @@ function handleDeleteTitleFilterItem(index: number) {
         <SettingsItem title="Filter by title">
           <Radio v-model="settings.enableFilterByTitle" />
           <template #bottom>
-            <List
-              highlight-first
-              pin-top
-              w-full h-400px overflow-overlay
-            >
-              <ListItem min-h-44px>
-                <div max-w-80px>
-                  index
-                </div>
-                <div>title</div>
-                <div>remark</div>
-                <div max-w-80px>
-                  action
-                </div>
-              </ListItem>
-
-              <ListItem>
-                <div max-w-80px>
-                  0
-                </div>
-                <Input
-                  v-model="addTitleFilterItem.title"
-                  size="small"
-                  placeholder="title"
-                  w-full
-                  @enter="handleAddTitleFilter"
-                />
-                <Input
-                  v-model="addTitleFilterItem.remark"
-                  size="small"
-                  placeholder="remark"
-                  w-full
-                  @enter="handleAddTitleFilter"
-                />
-                <div flex="~ gap-1" max-w-80px>
-                  <Button size="small" type="primary" @click="handleAddTitleFilter">
-                    <template #left>
-                      <i i-mingcute:add-line />
-                    </template>
-                  </Button>
-                  <Button size="small" type="tertiary" @click="handleClearTitleFilter">
-                    <template #left>
-                      <i i-mingcute:broom-line />
-                    </template>
-                  </Button>
-                </div>
-              </ListItem>
-              <ListItem v-for="(item, index) in settings.filterByTitle" :key="item.title" @dblclick="handleEditTitleFilterItem(index)">
-                <div max-w-80px>
-                  {{ index + 1 }}
-                </div>
-                <template v-if="titleFilterEditingIndex === index">
-                  <Input
-                    v-model="editTitleFilterItem.title"
-                    size="small"
-                    placeholder="title"
-                    w-full
-                    @enter="handleConfirmTitleFilterItem(index)"
-                  />
-                  <Input
-                    v-model="editTitleFilterItem.remark"
-                    size="small"
-                    placeholder="remark"
-                    w-full
-                    @enter="handleConfirmTitleFilterItem(index)"
-                  />
-                </template>
-                <template v-else>
-                  <div break-anywhere>
-                    {{ item.title }}
-                  </div>
-                  <div break-anywhere>
-                    {{ item.remark }}
-                  </div>
-                </template>
-                <div flex="~ gap-1" max-w-80px>
-                  <template v-if="titleFilterEditingIndex === index">
-                    <Button size="small" type="tertiary" @click="handleConfirmTitleFilterItem(index)">
-                      <template #left>
-                        <i i-mingcute:check-line />
-                      </template>
-                    </Button>
-                    <Button size="small" type="tertiary" @click="titleFilterEditingIndex = -1">
-                      <template #left>
-                        <i i-mingcute:close-line />
-                      </template>
-                    </Button>
-                  </template>
-                  <template v-else>
-                    <Button size="small" type="tertiary" @click="handleEditTitleFilterItem(index)">
-                      <template #left>
-                        <i i-mingcute:edit-2-line />
-                      </template>
-                    </Button>
-                    <Button size="small" type="tertiary" @click="handleDeleteTitleFilterItem(index)">
-                      <template #left>
-                        <i i-mingcute:delete-2-line />
-                      </template>
-                    </Button>
-                  </template>
-                </div>
-              </ListItem>
-            </List>
+            <FilterByTitleTable />
           </template>
         </SettingsItem>
         <SettingsItem title="Filter by user">
-          <Radio v-model="settings.enableFilterByTitle" />
+          <Radio v-model="settings.enableFilterByUser" />
           <template #bottom>
-            <List
-              highlight-first
-              pin-top
-              w-full h-400px overflow-overlay
-            >
-              <ListItem min-h-44px>
-                <div max-w-80px>
-                  index
-                </div>
-                <div>title</div>
-                <div>remark</div>
-                <div max-w-140px>
-                  action
-                </div>
-              </ListItem>
-
-              <ListItem>
-                <div max-w-80px>
-                  0
-                </div>
-                <Input
-                  v-model="addTitleFilterItem.title"
-                  size="small"
-                  placeholder="title"
-                  w-full
-                  @enter="handleAddTitleFilter"
-                />
-                <Input
-                  v-model="addTitleFilterItem.remark"
-                  size="small"
-                  placeholder="remark"
-                  w-full
-                  @enter="handleAddTitleFilter"
-                />
-                <div flex="~ gap-1" max-w-140px>
-                  <Button size="small" type="primary" @click="handleAddTitleFilter">
-                    <template #left>
-                      <i i-mingcute:add-line />
-                    </template>
-                  </Button>
-                  <Button size="small" type="tertiary" @click="handleClearTitleFilter">
-                    <template #left>
-                      <i i-mingcute:broom-line />
-                    </template>
-                  </Button>
-                </div>
-              </ListItem>
-              <ListItem v-for="(item, index) in settings.filterByTitle" :key="item.title" @dblclick="handleEditTitleFilterItem(index)">
-                <div max-w-80px>
-                  {{ index + 1 }}
-                </div>
-                <template v-if="titleFilterEditingIndex === index">
-                  <Input
-                    v-model="editTitleFilterItem.title"
-                    size="small"
-                    placeholder="title"
-                    w-full
-                    @enter="handleConfirmTitleFilterItem(index)"
-                  />
-                  <Input
-                    v-model="editTitleFilterItem.remark"
-                    size="small"
-                    placeholder="remark"
-                    w-full
-                    @enter="handleConfirmTitleFilterItem(index)"
-                  />
-                </template>
-                <template v-else>
-                  <div break-anywhere>
-                    {{ item.title }}
-                  </div>
-                  <div break-anywhere>
-                    {{ item.remark }}
-                  </div>
-                </template>
-                <div flex="~ gap-1" max-w-140px>
-                  <template v-if="titleFilterEditingIndex === index">
-                    <Button size="small" type="tertiary" @click="handleConfirmTitleFilterItem(index)">
-                      <template #left>
-                        <i i-mingcute:check-line />
-                      </template>
-                    </Button>
-                    <Button size="small" type="tertiary" @click="titleFilterEditingIndex = -1">
-                      <template #left>
-                        <i i-mingcute:close-line />
-                      </template>
-                    </Button>
-                  </template>
-                  <template v-else>
-                    <Button size="small" type="tertiary" @click="handleEditTitleFilterItem(index)">
-                      <template #left>
-                        <i i-mingcute:edit-2-line />
-                      </template>
-                    </Button>
-                    <Button size="small" type="tertiary" @click="handleDeleteTitleFilterItem(index)">
-                      <template #left>
-                        <i i-mingcute:delete-2-line />
-                      </template>
-                    </Button>
-                  </template>
-                </div>
-              </ListItem>
-            </List>
+            <FilterByUserTable />
           </template>
         </SettingsItem>
       </div>

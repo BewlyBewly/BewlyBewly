@@ -13,6 +13,8 @@ defineEmits(['enter'])
 
 const modelValue = defineModel<string | number>()
 
+const inputRef = ref<HTMLInputElement | null>(null)
+
 const height = computed(() => {
   if (props.size === 'small')
     return '30px'
@@ -28,6 +30,12 @@ const padding = computed(() => {
     return '0 calc(var(--bew-base-font-size) * 0.5)'
   return '0 var(--bew-base-font-size)'
 })
+
+function focus() {
+  inputRef.value?.focus()
+}
+
+defineExpose({ focus })
 </script>
 
 <template>
@@ -45,6 +53,7 @@ const padding = computed(() => {
     </div>
 
     <input
+      ref="inputRef"
       v-model="modelValue"
       :style="{ lineHeight: height }"
       :type="type"
