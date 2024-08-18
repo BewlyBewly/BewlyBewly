@@ -43,12 +43,11 @@ export function factoryFilter(funcMap: FuncMap, filterOpt: FilterType[], keyList
 
   return (item: object): boolean => {
     const result = funcs.every(({ keyPath, func, value }) => {
-      const check = func(item, keyPath, value)
-      if (!check) {
-        // console.log('当前项目被拦截! 原因: ', '目标路径值 :>> ', keyPath, '大于', value, 'currentValue :>> ', get(item, keyPath))
-        // console.log('当前项目被拦截! 原因: ', '目标路径值 :>> ', keyPath, '過濾內容', value, 'currentValue :>> ', get(item, keyPath))
-      }
-      // console.log('wtf')
+      // const check = func(item, keyPath, value)
+      // if (!check) {
+      //   // console.log('当前项目被拦截! 原因: ', '目标路径值 :>> ', keyPath, '大于', value, 'currentValue :>> ', get(item, keyPath))
+      //   console.log('当前项目被拦截! 原因: ', '目标路径值 :>> ', keyPath, '過濾內容', value, 'currentValue :>> ', get(item, keyPath))
+      // }
 
       return func(item, keyPath, value)
     })
@@ -140,7 +139,7 @@ export function useFilter(filterOpt: FilterType[], keyList: KeyPath) {
     const value = get(item, keyPath)
 
     return !(filterByUserStringValues.includes(`${value}`.toUpperCase())
-      && filterByUserRegExpValues.some(regex => regex.test(value)))
+      || filterByUserRegExpValues.some(regex => regex.test(value)))
   }
   // #endregion
 
@@ -167,7 +166,7 @@ export function useFilter(filterOpt: FilterType[], keyList: KeyPath) {
     },
     [FilterType.user]: {
       func: compareUser,
-      enabledKey: 'enableFilterByTitle',
+      enabledKey: 'enableFilterByUser',
       valueKey: '',
     },
   }
