@@ -99,7 +99,7 @@ export function useFilter(filterOpt: FilterType[], keyList: KeyPath) {
       filterByTitleRegExpValues.push(new RegExp(item.keyword.slice(1, -1), 'i'))
     }
     else {
-      filterByTitleStringValues.push(item.keyword)
+      filterByTitleStringValues.push(`${item.keyword}`.toUpperCase())
     }
   })
 
@@ -112,7 +112,7 @@ export function useFilter(filterOpt: FilterType[], keyList: KeyPath) {
   function compareTitle(item: any, keyPath: string[], _filterValue: string) {
     const value = get(item, keyPath)
 
-    return !(filterByTitleStringValues.some(keyword => value.includes(keyword))
+    return !(filterByTitleStringValues.some(keyword => `${value}`.toUpperCase().includes(keyword))
       || filterByTitleRegExpValues.some(regex => regex.test(value)))
   }
   // #endregion
@@ -126,7 +126,7 @@ export function useFilter(filterOpt: FilterType[], keyList: KeyPath) {
       filterByUserRegExpValues.push(new RegExp(item.keyword.slice(1, -1), 'i'))
     }
     else {
-      filterByUserStringValues.push(item.keyword)
+      filterByUserStringValues.push(`${item.keyword}`.toUpperCase())
     }
   })
 
@@ -139,7 +139,7 @@ export function useFilter(filterOpt: FilterType[], keyList: KeyPath) {
   function compareUser(item: any, keyPath: string[], _filterValue: string) {
     const value = get(item, keyPath)
 
-    return !(filterByUserStringValues.includes(value)
+    return !(filterByUserStringValues.includes(`${value}`.toUpperCase())
       && filterByUserRegExpValues.some(regex => regex.test(value)))
   }
   // #endregion
