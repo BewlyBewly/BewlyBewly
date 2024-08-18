@@ -208,7 +208,7 @@ function handleToggleHomeTab(tab: any) {
       :title="$t('settings.group_recommendation_filters')"
       :desc="$t('settings.group_recommendation_filters_desc')"
     >
-      <SettingsItem title="Disable filter for followed user">
+      <SettingsItem title="Disable filters for followed users">
         <Radio v-model="settings.disableFilterForFollowedUser" />
       </SettingsItem>
       <SettingsItem :title="$t('settings.filter_by_view_count')">
