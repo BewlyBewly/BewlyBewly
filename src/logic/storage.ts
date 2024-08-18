@@ -54,6 +54,7 @@ export interface Settings {
   recommendationMode: 'web' | 'app'
 
   // filter setting
+  disableFilterForFollowedUser: boolean
   enableFilterByViewCount: boolean
   filterByViewCount: number
   enableFilterByDuration: boolean
@@ -119,6 +120,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   recommendationMode: 'web',
 
   // filter setting
+  disableFilterForFollowedUser: false,
   enableFilterByViewCount: false,
   filterByViewCount: 10000,
   enableFilterByDuration: false,

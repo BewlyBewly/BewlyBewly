@@ -27,10 +27,12 @@ const emit = defineEmits<{
 }>()
 
 const filterFunc = useFilter(
+  ['is_followed'],
   [FilterType.duration, FilterType.viewCount, FilterType.title, FilterType.user, FilterType.user],
   [['duration'], ['stat', 'view'], ['title'], ['owner', 'name'], ['owner', 'mid']],
 )
 const appFilterFunc = useFilter(
+  ['bottom_rcmd_reason'],
   [FilterType.duration, FilterType.viewCountStr, FilterType.title, FilterType.user, FilterType.user],
   [['player_args', 'duration'], ['cover_left_text_1'], ['title'], ['mask', 'avatar', 'text'], ['mask', 'avatar', 'up_id']],
 )

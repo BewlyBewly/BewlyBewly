@@ -18,44 +18,7 @@ type FuncMap = { [key in FilterType]: {
 
 type KeyPath = Array<string>[]
 
-export function factoryFilter(funcMap: FuncMap, filterOpt: FilterType[], keyList: KeyPath): Function {
-  interface FuncParams {
-    keyPath: string[]
-    func: Function
-    value?: number | string
-  }
-
-  const funcs: FuncParams[] = []
-
-  filterOpt.forEach((type, index) => {
-    const { func, enabledKey, valueKey } = funcMap[type]
-    if ((settings.value as { [key: string]: any })[enabledKey]) {
-      const funcParams: FuncParams = {
-        keyPath: keyList[index],
-        func,
-        value: valueKey ? (settings.value as { [key: string]: any })[valueKey] : '',
-      }
-      // if (valueKey)
-      //   funcParams.value = (settings.value as { [key: string]: any })[valueKey]
-      funcs.push(funcParams)
-    }
-  })
-
-  return (item: object): boolean => {
-    const result = funcs.every(({ keyPath, func, value }) => {
-      // const check = func(item, keyPath, value)
-      // if (!check) {
-      //   // console.log('当前项目被拦截! 原因: ', '目标路径值 :>> ', keyPath, '大于', value, 'currentValue :>> ', get(item, keyPath))
-      //   console.log('当前项目被拦截! 原因: ', '目标路径值 :>> ', keyPath, '過濾內容', value, 'currentValue :>> ', get(item, keyPath))
-      // }
-
-      return func(item, keyPath, value)
-    })
-    return result
-  }
-}
-
-export function useFilter(filterOpt: FilterType[], keyList: KeyPath) {
+export function useFilter(isFollowedKeyPath: string[], filterOpt: FilterType[], keyList: KeyPath) {
   /**
    * Compares a number value in an object with a filter value.
    * Return `true` if the number value is greater than the filter value, `false` otherwise.
@@ -190,5 +153,55 @@ export function useFilter(filterOpt: FilterType[], keyList: KeyPath) {
     filter.value = factoryFilter(funcMap, filterOpt, keyList)
   }, { immediate: true })
 
+  function factoryFilter(funcMap: FuncMap, filterOpt: FilterType[], keyList: KeyPath): Function {
+    interface FuncParams {
+      keyPath: string[]
+      func: Function
+      value?: number | string
+    }
+
+    const funcs: FuncParams[] = []
+
+    filterOpt.forEach((type, index) => {
+      const { func, enabledKey, valueKey } = funcMap[type]
+      if ((settings.value as { [key: string]: any })[enabledKey]) {
+        const funcParams: FuncParams = {
+          keyPath: keyList[index],
+          func,
+          value: valueKey ? (settings.value as { [key: string]: any })[valueKey] : '',
+        }
+        // if (valueKey)
+        //   funcParams.value = (settings.value as { [key: string]: any })[valueKey]
+        funcs.push(funcParams)
+      }
+    })
+
+    return (item: object): boolean => {
+      const result = funcs.every(({ keyPath, func, value }) => {
+        // const check = func(item, keyPath, value)
+        // if (!check) {
+        //   // console.log('当前项目被拦截! 原因: ', '目标路径值 :>> ', keyPath, '大于', value, 'currentValue :>> ', get(item, keyPath))
+        //   console.log('当前项目被拦截! 原因: ', '目标路径值 :>> ', keyPath, '過濾內容', value, 'currentValue :>> ', get(item, keyPath))
+        // }
+        if (isAllowedContent(item))
+          return true
+
+        return func(item, keyPath, value)
+      })
+      return result
+    }
+  }
+
+  function isAllowedContent(item: any): boolean {
+    if (settings.value.recommendationMode === 'web') {
+      const isFollowed = get(item, isFollowedKeyPath)
+      return isFollowed && settings.value.disableFilterForFollowedUser
+    }
+    if (settings.value.recommendationMode === 'app') {
+      const isFollowed = get(item, isFollowedKeyPath) === '已关注' || get(item, isFollowedKeyPath) === '已關注'
+      return isFollowed && settings.value.disableFilterForFollowedUser
+    }
+    return false
+  }
   return filter
 }

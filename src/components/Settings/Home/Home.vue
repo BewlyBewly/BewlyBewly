@@ -208,6 +208,9 @@ function handleToggleHomeTab(tab: any) {
       :title="$t('settings.group_recommendation_filters')"
       :desc="$t('settings.group_recommendation_filters_desc')"
     >
+      <SettingsItem title="Disable filter for followed user">
+        <Radio v-model="settings.disableFilterForFollowedUser" />
+      </SettingsItem>
       <SettingsItem :title="$t('settings.filter_by_view_count')">
         <div flex="~ justify-end" w-full>
           <Input
@@ -237,17 +240,27 @@ function handleToggleHomeTab(tab: any) {
         </div>
       </SettingsItem>
 
-      <div grid="~ gap-4 lg:cols-2 cols-1">
-        <SettingsItem title="Filter by title">
+      <div grid="~ lg:gap-4 lg:cols-2 cols-1" lg:border="t-1 $bew-border-color">
+        <SettingsItem title="Filter by title" border="lg:none t-1 $bew-border-color">
           <Radio v-model="settings.enableFilterByTitle" />
           <template #bottom>
-            <FilterByTitleTable />
+            <FilterByTitleTable
+              :style="{
+                pointerEvents: settings.enableFilterByTitle ? 'auto' : 'none',
+                opacity: settings.enableFilterByTitle ? '1' : '0.6',
+              }"
+            />
           </template>
         </SettingsItem>
-        <SettingsItem title="Filter by user">
+        <SettingsItem title="Filter by user" border="lg:none b-1 $bew-border-color">
           <Radio v-model="settings.enableFilterByUser" />
           <template #bottom>
-            <FilterByUserTable />
+            <FilterByUserTable
+              :style="{
+                pointerEvents: settings.enableFilterByUser ? 'auto' : 'none',
+                opacity: settings.enableFilterByUser ? '1' : '0.6',
+              }"
+            />
           </template>
         </SettingsItem>
       </div>
