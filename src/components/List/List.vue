@@ -23,7 +23,7 @@ withDefaults(defineProps<{
   }
 
   &.pin-top :deep(.b-list-item:first-child) {
-    --uno: "sticky top-0";
+    --uno: "sticky top-0 z-1";
   }
 }
 </style>
