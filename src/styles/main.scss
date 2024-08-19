@@ -87,6 +87,14 @@ img {
   }
 }
 
+code {
+  background-color: var(--bew-fill-1);
+  padding: 0 4px;
+  margin: 0 2px;
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px var(--bew-border-color);
+}
+
 // Prevent the scrollbar from being covered by the other elements
 .os-scrollbar {
   --uno: "z-100000";

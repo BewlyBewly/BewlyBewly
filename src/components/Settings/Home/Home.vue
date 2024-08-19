@@ -208,10 +208,10 @@ function handleToggleHomeTab(tab: any) {
       :title="$t('settings.group_recommendation_filters')"
       :desc="$t('settings.group_recommendation_filters_desc')"
     >
-      <SettingsItem title="Disable filters for followed users">
+      <SettingsItem :title="$t('settings.disable_filters_for_followed_users')" :desc="$t('settings.disable_filters_for_followed_users_desc')">
         <Radio v-model="settings.disableFilterForFollowedUser" />
       </SettingsItem>
-      <SettingsItem :title="$t('settings.filter_by_view_count')">
+      <SettingsItem :title="$t('settings.filter_by_view_count')" :desc="$t('settings.filter_by_view_count_desc')">
         <div flex="~ justify-end" w-full>
           <Input
             v-if="settings.enableFilterByViewCount"
@@ -225,7 +225,7 @@ function handleToggleHomeTab(tab: any) {
           <Radio v-model="settings.enableFilterByViewCount" />
         </div>
       </SettingsItem>
-      <SettingsItem :title="$t('settings.filter_by_duration')">
+      <SettingsItem :title="$t('settings.filter_by_duration')" :desc="$t('settings.filter_by_duration_desc')">
         <div flex="~ justify-end" w-full>
           <Input
             v-if="settings.enableFilterByDuration"
@@ -241,7 +241,14 @@ function handleToggleHomeTab(tab: any) {
       </SettingsItem>
 
       <div grid="~ lg:gap-4 lg:cols-2 cols-1" lg:border="t-1 $bew-border-color">
-        <SettingsItem title="Filter by title" border="lg:none t-1 $bew-border-color">
+        <SettingsItem
+          class="unrestricted-width-settings-item"
+          :title="$t('settings.filter_by_title')"
+          border="lg:none t-1 $bew-border-color"
+        >
+          <template #desc>
+            <div v-html="$t('settings.filter_by_title_desc')" />
+          </template>
           <Radio v-model="settings.enableFilterByTitle" />
           <template #bottom>
             <FilterByTitleTable
@@ -252,7 +259,14 @@ function handleToggleHomeTab(tab: any) {
             />
           </template>
         </SettingsItem>
-        <SettingsItem title="Filter by user" border="lg:none b-1 $bew-border-color">
+        <SettingsItem
+          class="unrestricted-width-settings-item"
+          :title="$t('settings.filter_by_user')"
+          border="lg:none b-1 $bew-border-color"
+        >
+          <template #desc>
+            <div v-html="$t('settings.filter_by_user_desc')" />
+          </template>
           <Radio v-model="settings.enableFilterByUser" />
           <template #bottom>
             <FilterByUserTable
@@ -349,5 +363,13 @@ function handleToggleHomeTab(tab: any) {
 </template>
 
 <style lang="scss" scoped>
+.unrestricted-width-settings-item {
+  :deep(.left-content) {
+    --uno: w-full;
+  }
 
+  :deep(.right-content) {
+    --uno: w-auto;
+  }
+}
 </style>
