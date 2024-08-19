@@ -9,7 +9,7 @@
     "scripts/*.ts",
     "*.config.*"
   ],
-  "ignore": ["src/components/Settings/BiliBiliSettings/**"],
+  "ignore": ["src/components/Settings/**"],
   "ignoreDependencies": [
     "@iconify/json",
     "uno.css",
