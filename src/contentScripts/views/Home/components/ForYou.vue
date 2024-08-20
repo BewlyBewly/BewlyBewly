@@ -177,10 +177,15 @@ function initPageAction() {
 async function getRecommendVideos() {
   try {
     let i = 0
-    const pendingVideos: VideoElement[] = Array.from({ length: pageSize }, () => ({
-      uniqueId: `unique-id-${(videoList.value.length || 0) + i++})}`,
-    } satisfies VideoElement))
-    videoList.value.push(...pendingVideos)
+    if (!filterFunc.value || (videoList.value.length < pageSize && filterFunc.value)) {
+      const pendingVideos: VideoElement[] = Array.from({
+        length: videoList.value.length < pageSize ? pageSize - videoList.value.length : pageSize,
+      }, () => ({
+        uniqueId: `unique-id-${(videoList.value.length || 0) + i++})}`,
+      } satisfies VideoElement))
+
+      videoList.value.push(...pendingVideos)
+    }
 
     const response: forYouResult = await api.video.getRecommendVideos({
       fresh_idx: refreshIdx.value++,
@@ -206,10 +211,19 @@ async function getRecommendVideos() {
       }
       else {
         resData.forEach((item) => {
-          videoList.value.push({
-            uniqueId: `${item.id}`,
-            item,
-          })
+          const findFirstEmptyItemIndex = videoList.value.findIndex(video => !video.item)
+          if (findFirstEmptyItemIndex !== -1) {
+            videoList.value[findFirstEmptyItemIndex] = {
+              uniqueId: `${item.id}`,
+              item,
+            }
+          }
+          else {
+            videoList.value.push({
+              uniqueId: `${item.id}`,
+              item,
+            })
+          }
         })
       }
     }
@@ -218,10 +232,12 @@ async function getRecommendVideos() {
     }
   }
   finally {
-    videoList.value = videoList.value.filter(video => video.item)
+    const filledItems = videoList.value.filter(video => video.item)
+    if (filledItems.length > pageSize)
+      videoList.value = filledItems
 
     await nextTick()
-    if (!haveScrollbar()) {
+    if (!haveScrollbar() || filledItems.length < pageSize || filledItems.length < 1) {
       getRecommendVideos()
     }
   }
@@ -230,10 +246,15 @@ async function getRecommendVideos() {
 async function getAppRecommendVideos() {
   try {
     let i = 0
-    const pendingVideos: AppVideoElement[] = Array.from({ length: pageSize }, () => ({
-      uniqueId: `unique-id-${(appVideoList.value.length || 0) + i++})}`,
-    } satisfies AppVideoElement))
-    appVideoList.value.push(...pendingVideos)
+    if (!appFilterFunc.value || (appVideoList.value.length < pageSize && appFilterFunc.value)) {
+      const pendingVideos: AppVideoElement[] = Array.from({
+        length: appVideoList.value.length < pageSize ? pageSize - appVideoList.value.length : pageSize,
+      }, () => ({
+        uniqueId: `unique-id-${(appVideoList.value.length || 0) + i++})}`,
+      } satisfies AppVideoElement))
+
+      appVideoList.value.push(...pendingVideos)
+    }
 
     const response: AppForYouResult = await api.video.getAppRecommendVideos({
       access_key: accessKey.value,
@@ -258,10 +279,19 @@ async function getAppRecommendVideos() {
       }
       else {
         resData.forEach((item) => {
-          appVideoList.value.push({
-            uniqueId: `${item.idx}`,
-            item,
-          })
+          const findFirstEmptyItemIndex = appVideoList.value.findIndex(video => !video.item)
+          if (findFirstEmptyItemIndex !== -1) {
+            appVideoList.value[findFirstEmptyItemIndex] = {
+              uniqueId: `${item.idx}`,
+              item,
+            }
+          }
+          else {
+            appVideoList.value.push({
+              uniqueId: `${item.idx}`,
+              item,
+            })
+          }
         })
       }
     }
@@ -270,10 +300,12 @@ async function getAppRecommendVideos() {
     }
   }
   finally {
-    appVideoList.value = appVideoList.value.filter(video => video.item)
+    const filledItems = appVideoList.value.filter(video => video.item)
+    if (filledItems.length > pageSize)
+      appVideoList.value = filledItems
 
     await nextTick()
-    if (!haveScrollbar()) {
+    if (!haveScrollbar() || filledItems.length < pageSize || filledItems.length < 1) {
       getAppRecommendVideos()
     }
   }
@@ -591,6 +623,7 @@ defineExpose({ initData })
       </template>
     </div>
 
+    <Loading v-if="isLoading" />
     <!-- no more content -->
     <Empty v-if="noMoreContent" class="pb-4" :description="$t('common.no_more_content')" />
   </div>
