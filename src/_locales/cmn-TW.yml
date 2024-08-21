@@ -22,7 +22,7 @@ common:
   performance_impact_warn: 這個功能可能會降低效能
   no_more_content: 沒有更多內容了
 
-  operations:
+  operation:
     add: 添加
     edit: 編輯
     delete: 刪除

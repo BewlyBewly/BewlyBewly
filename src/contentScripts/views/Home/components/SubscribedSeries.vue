@@ -180,7 +180,7 @@ defineExpose({ initData })
     </Empty>
     <Empty v-if="videoList.length === 0 && !needToLoginFirst" mt-6 :description="$t('common.no_more_content')">
       <Button type="primary" @click="initData()">
-        {{ $t('common.operations.refresh') }}
+        {{ $t('common.operation.refresh') }}
       </Button>
     </Empty>
     <div
