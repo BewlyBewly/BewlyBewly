@@ -105,7 +105,7 @@ function handleToggleDockItem(dockItem: any) {
               <template #left>
                 <div i-mingcute:back-line />
               </template>
-              {{ $t('common.reset') }}
+              {{ $t('common.operations.reset') }}
             </Button>
           </div>
         </template>

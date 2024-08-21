@@ -20,13 +20,18 @@ common:
   save_to_watch_later: Save to Watch later
   added: Added
   performance_impact_warn: This feature may cause performance *DECREASE*
-  enable: Enable
-  disable: Disable
-  refresh: Refresh
-  reset: Reset
   no_more_content: No more content now, owari da
-  confirm: Confirm
-  cancel: Cancel
+
+  operations:
+    add: Add
+    edit: Edit
+    delete: Delete
+    confirm: Confirm
+    cancel: Cancel
+    enable: Enable
+    disable: Disable
+    refresh: Refresh
+    reset: Reset
 settings:
   title: Settings
 

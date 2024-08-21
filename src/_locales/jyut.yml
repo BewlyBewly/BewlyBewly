@@ -20,13 +20,18 @@ common:
   save_to_watch_later: 陣間至睇
   added: 已添加
   performance_impact_warn: 呢個功能可能會降低效能
-  enable: 打開
-  disable: 閂埋
-  refresh: 重新整理
-  reset: 重置
   no_more_content: 唔使睇喇，冇嘢喇
-  confirm: 確定
-  cancel: 取消
+
+  operations:
+    add: 添加
+    edit: 編輯
+    delete: 刪除
+    confirm: 確定
+    cancel: 取消
+    enable: 開
+    disable: 閂
+    refresh: 重新整理
+    reset: 重設
 settings:
   title: 設定
 
