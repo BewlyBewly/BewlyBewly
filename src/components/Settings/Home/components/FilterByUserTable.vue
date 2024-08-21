@@ -1,9 +1,11 @@
 <script lang="ts" setup>
 import { onKeyStroke } from '@vueuse/core'
+import { useI18n } from 'vue-i18n'
 import { useToast } from 'vue-toastification'
 
 import { settings } from '~/logic'
 
+const { t } = useI18n()
 const toast = useToast()
 
 const addingFilter = ref<{ keyword: string, remark: string }>({ keyword: '', remark: '' })
@@ -20,7 +22,7 @@ function handleAddFilter() {
     (item, itemIndex) => item.keyword === addingFilter.value.keyword.trim() && itemIndex !== editingIndex.value,
   )
   if (hasDuplicate) {
-    toast.warning('This user filter already exist!!!')
+    toast.warning(t('settings.filter_item_already_exist'))
     return
   }
   addingFilter.value.keyword = addingFilter.value.keyword.trim()
@@ -81,7 +83,7 @@ onKeyStroke('Escape', (e: KeyboardEvent) => {
       <Input
         v-model="addingFilter.keyword"
         size="small"
-        placeholder="Username / mid"
+        :placeholder="$t('settings.filter_by_user_table.username_or_mid')"
         w-full
         @click="editingIndex = -1"
         @enter="handleAddFilter"
@@ -89,19 +91,22 @@ onKeyStroke('Escape', (e: KeyboardEvent) => {
       <Input
         v-model="addingFilter.remark"
         size="small"
-        placeholder="remark"
+        :placeholder="$t('common.table.remark')"
         w-full
         @click="editingIndex = -1"
         @enter="handleAddFilter"
       />
-      <div flex="~ gap-1" max-w-80px>
-        <Button size="small" type="primary" @click="handleAddFilter">
-          <template #left>
-            <i i-mingcute:add-line />
-          </template>
-          Add
-        </Button>
-      </div>
+
+      <Button
+        size="small" type="primary"
+        style="--b-button-width: 150px"
+        @click="handleAddFilter"
+      >
+        <template #left>
+          <i i-mingcute:add-line />
+        </template>
+        {{ $t('common.operation.add') }}
+      </Button>
     </div>
     <List
       highlight-first
@@ -110,12 +115,12 @@ onKeyStroke('Escape', (e: KeyboardEvent) => {
     >
       <ListItem min-h-44px>
         <div max-w-50px>
-          index
+          {{ $t('common.table.index') }}
         </div>
-        <div>Username / mid</div>
-        <div>remark</div>
+        <div>{{ $t('settings.filter_by_user_table.username_or_mid') }}</div>
+        <div>{{ $t('common.table.remark') }}</div>
         <div max-w-80px>
-          action
+          {{ $t('common.table.operations') }}
         </div>
       </ListItem>
 
@@ -133,7 +138,7 @@ onKeyStroke('Escape', (e: KeyboardEvent) => {
             ref="keywordRef"
             v-model="editingFilter.keyword"
             size="small"
-            placeholder="title"
+            :placeholder="$t('settings.filter_by_user_table.username_or_mid')"
             w-full
             @enter="handleConfirmFilter(index)"
           />
@@ -141,7 +146,7 @@ onKeyStroke('Escape', (e: KeyboardEvent) => {
             ref="remarkRef"
             v-model="editingFilter.remark"
             size="small"
-            placeholder="remark"
+            :placeholder="$t('common.table.remark')"
             w-full
             @enter="handleConfirmFilter(index)"
           />

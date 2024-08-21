@@ -32,6 +32,14 @@ common:
     disable: Disable
     refresh: Refresh
     reset: Reset
+
+  table:
+    index: Index
+    title: Title
+    name: Name
+    remark: Remark
+    operations: Operations
+
 settings:
   title: Settings
 
@@ -159,6 +167,7 @@ settings:
   filter_by_duration: Filter by duration
   filter_by_duration_desc: Filtered out videos with less than the duration you set.
   filter_by_duration_unit: sec
+  filter_item_already_exist: This filter item already exists!
   filter_by_title: Filter by title
   filter_by_title_desc: |-
     Filtered out the videos that contain the titles you set (case-insensitive).
@@ -175,6 +184,8 @@ settings:
     In the table below, you can press the <code>Enter</code> key to add a new filter or confirm a modification.
     Press the <code>Esc</code> key to cancel the modification.
     Double-click the column to edit the current column.
+  filter_by_user_table:
+    username_or_mid: Username / Mid
 
   use_search_page_mode: Use search page mode on homepage
   settings_shared_with_the_search_page: Settings shared with the search page

@@ -32,6 +32,14 @@ common:
     disable: 禁用
     refresh: 刷新
     reset: 重置
+
+  table:
+    index: 索引
+    title: 标题
+    name: 名称
+    remark: 备注
+    operations: 操作
+
 settings:
   title: 设置
 
@@ -158,6 +166,7 @@ settings:
   filter_by_duration: 按时长筛选
   filter_by_duration_desc: 筛选掉时长小于您设置的视频。
   filter_by_duration_unit: 秒
+  filter_item_already_exist: 这个筛选项目已经存在！
   filter_by_title: 按标题筛选
   filter_by_title_desc: >
     按标题筛选掉包含您设置关键字的视频（不区分大小写），也可以使用正则表达式，如 <code>/abc&#124;\d+/</code>，用 <code>/</code> 包裹。
@@ -172,6 +181,8 @@ settings:
     在下表中，您可以按 <code>Enter</code> 键添加新的筛选条件或确认修改。
     按 <code>Esc</code> 键取消修改。
     双击列以编辑当前列。
+  filter_by_user_table:
+    username_or_mid: 用户名 / Mid
 
   use_search_page_mode: 首页使用搜索页模式
   settings_shared_with_the_search_page: 与搜索页共用的配置
