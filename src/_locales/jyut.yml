@@ -32,6 +32,14 @@ common:
     disable: 閂
     refresh: 重新整理
     reset: 重設
+
+  table:
+    index: 索引
+    title: 標題
+    name: 名稱
+    remark: 備註
+    operations: 操作
+
 settings:
   title: 設定
 
@@ -151,10 +159,34 @@ settings:
     access key。
   authorize_app_more_info_access_key: 關於 access key
   scan_qrcode_desc: 用 Bilibili 流動應用程式去 scan 呢個 QR code 愛嚟授權取得 access key。
+
+  disable_filters_for_followed_users: Follow 緊嘅人唔受啲過濾條件限制
+  disable_filters_for_followed_users_desc: >
+    開咗呢個功能嘅話，你 Follow 緊嘅人唔會俾啲過濾條件限制。
   filter_by_view_count: 根據觀看次數篩選
+  filter_by_view_count_desc: 避開啲觀看次數唔夠你設嗰個數嘅片。
   filter_by_view_count_unit: 次
   filter_by_duration: 根據條片長度篩選
+  filter_by_duration_desc: 避開啲片長唔夠你設嗰個時間嘅片。
   filter_by_duration_unit: 秒
+  filter_item_already_exist: 呢個篩選條件已經有咗喇！
+  filter_by_title: 根據標題篩選
+  filter_by_title_desc: |-
+    避開啲標題係你指定嘅字嘅片（唔理大細楷），抑或用正則表達式，好似 <code>/abc&#124;\d+/</code> 噉，用兩個 <code>/</code> 包住。
+    <br/>
+    喺下低個表度，撳 <code>Enter</code> 就可以加新嘅篩選條件，抑或確定你上先改咗嘅嘢。
+    撳 <code>Esc</code> 就取消你改咗嘅嘢。
+    撳兩吓欄位就可以改返入邊嘅嘢。
+  filter_by_user: 根據用戶篩選
+  filter_by_user_desc: |-
+    避開啲 po 片嗰位係你指定嘅用戶名（全名，唔理大細楷）抑或 mid 嘅片，抑或用正則表達式，好似 <code>/abc&#124;\d+/</code> 噉，用兩個 <code>/</code> 包住。
+    <br/>
+    喺下低個表度，撳 <code>Enter</code> 就可以加新嘅篩選條件，抑或確定你上先改咗嘅嘢。
+    撳 <code>Esc</code> 就取消你改咗嘅嘢。
+    撳兩吓欄位就可以改返入邊嘅嘢。
+  filter_by_user_table:
+    username_or_mid: 用戶名 / Mid
+
   use_search_page_mode: 主頁使用搵嘢頁模式
   settings_shared_with_the_search_page: 同搵嘢頁共用嘅設定
   settings_shared_with_the_search_page_desc: 呢啲設定都同搵嘢頁共用

@@ -1,41 +1,81 @@
 <script lang="ts" setup>
 type Size = 'small' | 'medium' | 'large'
 interface Props {
-  modelValue: string | number
   size?: Size
   type?: 'text' | 'password' | 'email' | 'number'
   min?: number
   max?: number
+  placeholder?: string
 }
 const props = withDefaults(defineProps<Props>(), { size: 'medium' })
 
-defineEmits(['update:modelValue', 'enter'])
+defineEmits(['enter'])
 
-const modelValue = ref<string | number>('')
+const modelValue = defineModel<string | number>()
 
-onMounted(() => {
-  modelValue.value = props.modelValue
+const inputRef = ref<HTMLInputElement | null>(null)
+
+const height = computed(() => {
+  if (props.size === 'small')
+    return '30px'
+  if (props.size === 'medium')
+    return '35px'
+  if (props.size === 'large')
+    return '40px'
+  return '35px'
 })
+
+const padding = computed(() => {
+  if (props.size === 'small')
+    return '0 calc(var(--bew-base-font-size) * 0.5)'
+  return '0 var(--bew-base-font-size)'
+})
+
+function focus() {
+  inputRef.value?.focus()
+}
+
+defineExpose({ focus })
 </script>
 
 <template>
   <div
+    :style="{ height, padding }"
     focus-within:ring="2px $bew-theme-color"
-    p="x-4 y-2"
+    p="x-4"
     rounded="$bew-radius" transition-all duration-300
     bg="$bew-fill-1" flex="~ gap-2"
   >
-    <slot name="prefix" />
+    <div v-if="$slots.prefix" class="prefix">
+      <div>
+        <slot name="prefix" />
+      </div>
+    </div>
+
     <input
-      v-model="modelValue" :type="type" :min="min" :max="max"
+      ref="inputRef"
+      v-model="modelValue"
+      :style="{ lineHeight: height }"
+      :type="type"
+      :min="min"
+      :max="max"
+      :placeholder="placeholder"
+      w-inherit h-inherit
       outline-none flex-1
-      @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
       @keydown.enter="$emit('enter')"
     >
-    <slot name="suffix" />
+
+    <div v-if="$slots.suffix" class="suffix">
+      <div>
+        <slot name="suffix" />
+      </div>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-
+.prefix,
+.suffix {
+  --uno: "flex items-center";
+}
 </style>

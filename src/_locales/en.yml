@@ -32,6 +32,14 @@ common:
     disable: Disable
     refresh: Refresh
     reset: Reset
+
+  table:
+    index: Index
+    title: Title
+    name: Name
+    remark: Remark
+    operations: Operations
+
 settings:
   title: Settings
 
@@ -149,10 +157,36 @@ settings:
     The access key is valid for about one month. After that, remember to re-authorize the BewlyBewly to use the access key.
   authorize_app_more_info_access_key: More information about the access key
   scan_qrcode_desc: Use the Bilibili mobile app to scan this QR code in order to authorize the access key.
+
+  disable_filters_for_followed_users: Disable filters for followed users
+  disable_filters_for_followed_users_desc: >
+    If you enable this option, all filters you set will be disabled for the users you follow.
   filter_by_view_count: Filter by view count
+  filter_by_view_count_desc: Filtered out videos with less than the view count you set.
   filter_by_view_count_unit: views
   filter_by_duration: Filter by duration
+  filter_by_duration_desc: Filtered out videos with less than the duration you set.
   filter_by_duration_unit: sec
+  filter_item_already_exist: This filter item already exists!
+  filter_by_title: Filter by title
+  filter_by_title_desc: |-
+    Filtered out the videos that contain the titles you set (case-insensitive).
+    Alternatively, use regex, such as <code>/abc&#124;\d+/</code>, wrapped in <code>/</code>.
+    <br/>
+    In the table below, you can press the <code>Enter</code> key to add a new filter or confirm a modification.
+    Press the <code>Esc</code> key to cancel the modification.
+    Double-click the column to edit the current column.
+  filter_by_user: Filter by user
+  filter_by_user_desc: |-
+    Filtered out the videos that are uploaded by the username (full name, case-insensitive) or mid you set.
+    Alternatively, use regex, such as <code>/abc&#124;\d+/</code>, wrapped in <code>/</code>.
+    <br/>
+    In the table below, you can press the <code>Enter</code> key to add a new filter or confirm a modification.
+    Press the <code>Esc</code> key to cancel the modification.
+    Double-click the column to edit the current column.
+  filter_by_user_table:
+    username_or_mid: Username / Mid
+
   use_search_page_mode: Use search page mode on homepage
   settings_shared_with_the_search_page: Settings shared with the search page
   settings_shared_with_the_search_page_desc: Those settings are used in common with the search page

@@ -38,6 +38,7 @@ export const sharedConfig: UserConfig = {
     VueI18nPlugin({
       runtimeOnly: true,
       compositionOnly: true,
+      strictMessage: false,
       include: [r('./src/_locales/**')],
     }),
 

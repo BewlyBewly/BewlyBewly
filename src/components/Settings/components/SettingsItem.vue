@@ -7,8 +7,8 @@ defineProps<{
 
 <template>
   <div class="b-settings-item" py-4>
-    <div flex="~ gap-4" justify-betwee items-center text-base>
-      <div w="5/7">
+    <div flex="~ gap-4" justify-between items-center text-base>
+      <div class="left-content" w="5/7">
         <div>
           <slot name="title">
             {{ title }}
@@ -25,7 +25,7 @@ defineProps<{
         </div>
       </div>
 
-      <div w="2/7" class="right-content">
+      <div class="right-content" w="2/7">
         <slot />
       </div>
     </div>

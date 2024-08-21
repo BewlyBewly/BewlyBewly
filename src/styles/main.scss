@@ -1,7 +1,7 @@
-.bewly-design * {
+* {
   outline-color: var(--bew-theme-color-80);
-  outline-width: 2px;
-  outline-offset: -2px;
+  // outline-width: 2px;
+  // outline-offset: 2px;
 }
 
 .bewly-design.dark * {
@@ -85,6 +85,15 @@ img {
     background-position: center;
     background-repeat: no-repeat;
   }
+}
+
+code {
+  background-color: var(--bew-fill-1);
+  padding: 0 4px;
+  margin: 0 2px;
+  border-radius: 4px;
+  font-weight: 600;
+  box-shadow: 0 0 0 1px var(--bew-border-color);
 }
 
 // Prevent the scrollbar from being covered by the other elements
