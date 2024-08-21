@@ -187,7 +187,7 @@ function handleConfirm() {
           >
             <Button type="tertiary" @click="handleClose">
               <div>
-                {{ $t('common.operations.cancel') }}
+                {{ $t('common.operation.cancel') }}
                 <span
                   v-show="showShortcut"
                   text="xs $bew-text-2 lh-0" p="x-1" rounded-4px bg="$bew-fill-1"
@@ -200,7 +200,7 @@ function handleConfirm() {
             </Button>
             <Button type="primary" @click="handleConfirm">
               <div>
-                {{ $t('common.operations.confirm') }}
+                {{ $t('common.operation.confirm') }}
                 <span
                   v-show="showShortcut"
                   text="xs $bew-text-2 lh-0" p="x-1" rounded-4px bg="$bew-fill-1"

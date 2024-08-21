@@ -22,7 +22,7 @@ common:
   performance_impact_warn: This feature may cause performance *DECREASE*
   no_more_content: No more content now, owari da
 
-  operations:
+  operation:
     add: Add
     edit: Edit
     delete: Delete
