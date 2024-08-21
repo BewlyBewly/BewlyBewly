@@ -198,7 +198,7 @@ function handleToggleHomeTab(tab: any) {
             type="secondary"
             @click="setLoginQRCode"
           >
-            {{ $t('common.refresh') }}
+            {{ $t('common.operations.refresh') }}
           </Button>
         </div>
       </Dialog>
@@ -291,7 +291,7 @@ function handleToggleHomeTab(tab: any) {
               <template #left>
                 <div i-mingcute:back-line />
               </template>
-              {{ $t('common.reset') }}
+              {{ $t('common.operations.reset') }}
             </Button>
           </div>
         </template>
