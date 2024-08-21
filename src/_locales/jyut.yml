@@ -147,9 +147,9 @@ settings:
   authorize_app_more_info_access_key: 關於 access key
   scan_qrcode_desc: 用 Bilibili 流動應用程式去 scan 呢個 QR code 愛嚟授權取得 access key。
 
-  disable_filters_for_followed_users: 跟緊嘅用戶唔受啲過濾條件限制
+  disable_filters_for_followed_users: Follow 緊嘅人唔受啲過濾條件限制
   disable_filters_for_followed_users_desc: >
-    開咗呢個功能，跟緊嘅人都唔會俾啲過濾條件限制。
+    開咗呢個功能嘅話，你 Follow 緊嘅人唔會俾啲過濾條件限制。
   filter_by_view_count: 根據觀看次數篩選
   filter_by_view_count_desc: 避開啲觀看次數唔夠你設嗰個數嘅片。
   filter_by_view_count_unit: 次
