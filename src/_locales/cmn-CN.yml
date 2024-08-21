@@ -143,10 +143,31 @@ settings:
     授权使用后能在首页推送 bilibili App 端算法的推荐视频，授权 key 有效期约为一个月，过后记得重新授权获取 access key。
   authorize_app_more_info_access_key: 关于 access key
   scan_qrcode_desc: 使用 Bilibili 移动应用程序扫描此二维码，以授权获取 access key。
+
+  disable_filters_for_followed_users: 关注的用户不受过滤条件限制
+  disable_filters_for_followed_users_desc: >
+    如果启用此选项，您关注的用户不受过滤条件限制。
   filter_by_view_count: 按播放数筛选
+  filter_by_view_count_desc: 筛选掉播放数小于您设置的视频。
   filter_by_view_count_unit: 次
   filter_by_duration: 按时长筛选
+  filter_by_duration_desc: 筛选掉时长小于您设置的视频。
   filter_by_duration_unit: 秒
+  filter_by_title: 按标题筛选
+  filter_by_title_desc: >
+    按标题筛选掉包含您设置关键字的视频（不区分大小写），也可以使用正则表达式，如 <code>/abc&#124;\d+/</code>，用 <code>/</code> 包裹。
+    <br/>
+    在下表中，您可以按 <code>Enter</code> 键添加新的筛选条件或确认修改。
+    按 <code>Esc</code> 键取消修改。
+    双击列以编辑当前列。
+  filter_by_user: 按用户筛选
+  filter_by_user_desc: >
+    筛选掉包含您设置的用户名（全名，不区分大小写）或 mid 上传的视频，也可以使用正则表达式，如 <code>/abc&#124;\d+/</code>，用 <code>/</code> 包裹。
+    <br/>
+    在下表中，您可以按 <code>Enter</code> 键添加新的筛选条件或确认修改。
+    按 <code>Esc</code> 键取消修改。
+    双击列以编辑当前列。
+
   use_search_page_mode: 首页使用搜索页模式
   settings_shared_with_the_search_page: 与搜索页共用的配置
   settings_shared_with_the_search_page_desc: 这些设置都与搜索页共用
