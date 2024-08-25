@@ -139,7 +139,7 @@ settings:
   logo_color: Logo 顏色
   logo_color_opt:
     white: 白
-    theme_color: 主題色
+    theme_color: 主題顏色
   enable_logo_glowing_effect: 啟用 Logo 發光效果
   logo_visibility: Logo 可視性
   bg_darkens_when_the_search_bar_is_focused: 當搜尋欄聚焦時背景變暗
@@ -172,14 +172,14 @@ settings:
   filter_item_already_exist: 這個篩選項目已經存在！
   filter_by_title: 按標題篩選
   filter_by_title_desc: |-
-    按標題篩選掉包含您設定的字串的影片（不區分大小寫），或使用正常表達式，如 <code>/abc&#124;\d+/</code>，用 <code>/</code> 包裡。
+    按標題篩選掉包含您設定的字串的影片（不區分大小寫），或使用正規表示式，如 <code>/abc&#124;\d+/</code>，用 <code>/</code> 包裡。
     <br/>
     在下面的表格中，您可以按 <code>Enter</code> 鍵新增新的篩選條件或確認變更。
     按 <code>Esc</code> 鍵取消變更。
     按兩下欄位以編輯目前欄位。
   filter_by_user: 按使用者篩選
   filter_by_user_desc: |-
-    篩選掉包含您設定的使用者名稱（全名，不區分大小寫）或 mid 所上傳的影片，或使用正規表達式，如 <code>/abc&#124;\d+/</code>，用 <code>/</code> 包裹。
+    篩選掉包含您設定的使用者名稱（全名，不區分大小寫）或 mid 所上傳的影片，或使用正規表示式，如 <code>/abc&#124;\d+/</code>，用 <code>/</code> 包裡。
     <br/>
     在下面的表格中，您可以按 <code>Enter</code> 鍵建立新的篩選條件或確認變更。
     按 <code>Esc</code> 鍵取消變更。
