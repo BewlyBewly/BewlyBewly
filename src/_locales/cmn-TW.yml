@@ -23,7 +23,7 @@ common:
   no_more_content: 沒有更多內容了
 
   operation:
-    add: 添加
+    add: 新增
     edit: 編輯
     delete: 刪除
     confirm: 確定
@@ -122,12 +122,12 @@ settings:
   theme_color: 主題色
   gradient_theme_color_background: 在深色模式下使用漸層主題色作為背景
   wallpaper_mode: 背景圖片模式
-  wallpaper_mode_desc: '使用 URL: 直接用網上圖片的 URL 來設定背景圖片。'
+  wallpaper_mode_desc: '使用網址: 直接使用網路圖片的網址來設定背景圖片。'
   wallpaper_mode_opt:
     build_in: 內建
-    by_url: 使用 URL
+    by_url: 使用網址
   choose_ur_wallpaper: 選擇你的背景
-  image_url: 圖片 URL
+  image_url: 圖片網址
   image_url_hint: |-
     URL 示例: https://cdn.jsdelivr.net/gh/BewlyBewly/Imgs/wallpapers/rocky-mountain-cloudscape.jpg
     https://cdn.jsdelivr.net/gh/BewlyBewly/Imgs/wallpapers/green-white-mountains.jpg
@@ -139,7 +139,7 @@ settings:
   logo_color: Logo 顏色
   logo_color_opt:
     white: 白
-    theme_color: 主題色
+    theme_color: 主題顏色
   enable_logo_glowing_effect: 啟用 Logo 發光效果
   logo_visibility: Logo 可視性
   bg_darkens_when_the_search_bar_is_focused: 當搜尋欄聚焦時背景變暗
@@ -158,11 +158,11 @@ settings:
     授權使用後能在首頁推送 bilibili 手機端推介演算法的影片，授權 key 的有效期約為一個月，過了有效期後，請記得重新取得授權以取得 access
     key。
   authorize_app_more_info_access_key: 關於 access key
-  scan_qrcode_desc: 使用 Bilibili 手機應用程式掃描這個QR碼，以授權取得 access key。
+  scan_qrcode_desc: 使用 Bilibili 手機應用程式掃描這個 QR Code，以授權取得 access key。
 
-  disable_filters_for_followed_users: 正在跟隨的用戶不受過濾條件限制
+  disable_filters_for_followed_users: 正在跟隨的使用者不受過濾條件限制
   disable_filters_for_followed_users_desc: >
-    如果啟用此選項，正在跟隨的用戶不受過濾條件限制。
+    如果啟用此選項，正在跟隨的使用者不受過濾條件限制。
   filter_by_view_count: 按觀看次數篩選
   filter_by_view_count_desc: 篩選掉觀看次數少於您設定的影片。
   filter_by_view_count_unit: 次
@@ -172,20 +172,20 @@ settings:
   filter_item_already_exist: 這個篩選項目已經存在！
   filter_by_title: 按標題篩選
   filter_by_title_desc: |-
-    按標題篩選掉包含您設定的字串的影片（不區分大小寫），或使用正規表達式，如 <code>/abc&#124;\d+/</code>，用 <code>/</code> 包裹。
+    按標題篩選掉包含您設定的字串的影片（不區分大小寫），或使用正規表示式，如 <code>/abc&#124;\d+/</code>，用 <code>/</code> 包裡。
     <br/>
-    在下面的表格中，您可以按 <code>Enter</code> 鍵添加新篩選條件或確認變更。
+    在下面的表格中，您可以按 <code>Enter</code> 鍵新增新的篩選條件或確認變更。
     按 <code>Esc</code> 鍵取消變更。
-    按兩下欄位以編輯當前欄位。
-  filter_by_user: 按用戶篩選
+    按兩下欄位以編輯目前欄位。
+  filter_by_user: 按使用者篩選
   filter_by_user_desc: |-
-    篩選掉包含您設定的使用者名稱（全名，不區分大小寫）或 mid 所上傳的影片，或使用正規表達式，如 <code>/abc&#124;\d+/</code>，用 <code>/</code> 包裹。
+    篩選掉包含您設定的使用者名稱（全名，不區分大小寫）或 mid 所上傳的影片，或使用正規表示式，如 <code>/abc&#124;\d+/</code>，用 <code>/</code> 包裡。
     <br/>
     在下面的表格中，您可以按 <code>Enter</code> 鍵建立新的篩選條件或確認變更。
     按 <code>Esc</code> 鍵取消變更。
-    按兩下欄位以編輯當前欄位。
+    按兩下欄位以編輯目前欄位。
   filter_by_user_table:
-    username_or_mid: 用戶名 / Mid
+    username_or_mid: 使用者名稱 / Mid
 
   use_search_page_mode: 首頁使用搜尋頁模式
   settings_shared_with_the_search_page: 與搜尋頁共用的設定
@@ -313,7 +313,7 @@ topbar:
     workshop: 我的工作坊
     my_stream_info: 實況資訊
     my_courses: 我的課程
-    log_out: 退出登入
+    log_out: 登出
   noti_dropdown:
     replys: 回覆留言
     mentions: 提及我的
