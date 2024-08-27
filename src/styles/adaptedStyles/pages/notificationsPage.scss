@@ -1,7 +1,9 @@
+#message-navbar {
+  display: none;
+}
+
 .bewly-design.notificationsPage {
   #message-navbar {
-    display: none;
-
     + .container {
       margin-top: 0;
       padding-top: var(--bew-top-bar-height);
