@@ -74,8 +74,9 @@ watch(() => settings.value.reduceFrostedGlassBlur, () => {
   handleReduceFrostedGlassBlur()
 })
 
-watch(() => settings.value.useOriginalBilibiliTopBar, () => {
-  settings.value.showTopBar = !settings.value.useOriginalBilibiliTopBar
+watch(() => settings.value.useOriginalBilibiliTopBar, (newVal) => {
+  if (newVal)
+    settings.value.showTopBar = !settings.value.useOriginalBilibiliTopBar
   document.documentElement.classList.toggle('remove-bili-top-bar', !settings.value.useOriginalBilibiliTopBar)
 }, { immediate: true })
 

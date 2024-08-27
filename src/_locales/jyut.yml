@@ -56,7 +56,7 @@ settings:
   group_common: 通用
   group_video_card: 影片卡片
   group_performance: 毛玻璃同效能
-  group_topbar: 頂欄
+  group_topbar: 頂部欄
   group_dock: Dock
   group_color: 顏色
   group_wallpaper: 背景圖片
@@ -94,8 +94,8 @@ settings:
   block_ads: 封鎖廣告
   disable_frosted_glass: 閂咗毛玻璃效果
   reduce_frosted_glass_blur: 降低毛玻璃模糊強度
-  use_old_topbar: 用返舊版頂欄
-  auto_hide_topbar: 自動收埋頂欄
+  use_old_topbar: 用返舊版頂部欄
+  auto_hide_topbar: 自動收埋頂部欄
   topbar_icon_badges: 圖示邊位標記
   topbar_icon_badges_opt:
     number: 數字
@@ -197,16 +197,16 @@ settings:
 
   # Compatibility
   # Common
+  topbar_visibility: BewlyBewly 頂部欄可視性
+  topbar_visibility_desc: 若然你係用緊 Bilibili Evolved 嘅頂部欄，你可以喺度閂咗 BewlyBewly 嘅頂部欄去。
   use_original_bilibili_homepage: 用返原本嘅 Bilibili 主頁
   use_original_bilibili_homepage_desc: 改咗之後，如果你喺主頁，個頁面就會自動重新整理！
-  use_original_bilibili_topbar: 用返原本嘅 Bilibili 頂欄
+  use_original_bilibili_topbar: 用返原本嘅 Bilibili 頂部欄
   adapt_to_other_page_styles: 適應其他版面風格
   adapt_to_other_page_styles_desc: 執執啲常用嘅版面，襯返 BewlyBewly 主題風格
   # Bilibili Evolved
-  follow_bilibili_evolved_color: 跟返 Bilibili Evolved 佈景色
-  follow_bilibili_evolved_color_desc: 每次換完 Bilibili Evolved 佈景色嗰陣，記得揀多一次呢個選項愛嚟更新佈置
-  topbar_visibility: 頂欄可視性
-  topbar_visibility_desc: 用於兼容 Bilibili Evolved 客製化頂欄
+  follow_bilibili_evolved_color: 跟返 Bilibili Evolved 主題色
+  follow_bilibili_evolved_color_desc: 每次換完 Bilibili Evolved 主題色嗰陣，記得揀多一次呢個選項愛嚟更新佈置
 
   # About
   links: 拎
@@ -270,7 +270,7 @@ topbar:
   user_dropdown:
     money: 銀仔：
     b_coins: B銀：
-    exp_desc: '當前經驗 {current_exp}，升到 LV {level} 仲要 {need_exp}'
+    exp_desc: '而家經驗 {current_exp}，升到 LV {level} 仲要 {need_exp}'
     following: 追緊
     followers: 擁躉
     posts: 動向

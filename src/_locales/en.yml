@@ -197,6 +197,8 @@ settings:
 
   # Compatibility
   # Common
+  topbar_visibility: BewlyBewly's top bar visibility
+  topbar_visibility_desc: If you are using Bilibili Evolved's top bar, you can turn BewlyBewly's top bar off here.
   use_original_bilibili_homepage: Use the original Bilibili homepage
   use_original_bilibili_homepage_desc: After you change it, the page will automatically refresh if you are on the homepage!
   use_original_bilibili_topbar: Use the original Bilibili top bar
@@ -205,8 +207,6 @@ settings:
   # Bilibili Evolved
   follow_bilibili_evolved_color: Follow the Bilibili Evolved theme color
   follow_bilibili_evolved_color_desc: After changing the theme color in Bilibili Evolved, you will need to re-select this option in order to update the theme color.
-  topbar_visibility: Top bar visibility
-  topbar_visibility_desc: Compatible with Bilibili Evolved customize top bar
 
   # About
   links: Links

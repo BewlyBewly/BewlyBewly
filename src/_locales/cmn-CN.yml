@@ -194,6 +194,8 @@ settings:
 
   # Compatibility
   # Common
+  topbar_visibility: 顶栏可见性
+  topbar_visibility_desc: 如果您正在使用 Bilibili Evolved 的顶栏，您可以在这里关闭 BewlyBewly 的顶栏。
   use_original_bilibili_homepage: 使用原版 Bilibili 首页
   use_original_bilibili_homepage_desc: 在您更改此设置后，如果在首页上，页面将自动刷新！
   use_original_bilibili_topbar: 使用原版 Bilibili 顶栏
@@ -202,8 +204,6 @@ settings:
   # Bilibili Evolved
   follow_bilibili_evolved_color: 使用 Bilibili Evolved 主题色
   follow_bilibili_evolved_color_desc: 每次选完 Bilibili Evolved 主题色时，记得重新选中这一选项以更新配置
-  topbar_visibility: 顶栏可见性
-  topbar_visibility_desc: 用于兼容 Bilibili Evolved 自定义顶栏
 
   # About
   links: 链接
