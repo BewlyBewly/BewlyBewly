@@ -114,12 +114,17 @@ if (settings.value.adaptToOtherPageStyles && isHomePage()) {
 }
 
 function onDOMLoaded() {
+  let originalTopBar: HTMLElement | null = null
   // Remove the original Bilibili homepage if in Bilibili homepage & useOriginalBilibiliHomepage is enabled
   if (!settings.value.useOriginalBilibiliHomepage && isHomePage()) {
-    const originalTopBar = document.querySelector<HTMLElement>('#i_cecream > .bili-feed4 > .bili-header')
+    originalTopBar = document.querySelector<HTMLElement>('#i_cecream > .bili-feed4 > .bili-header')
     const originalTopBarInnerUselessContents = document.querySelectorAll<HTMLElement>('#i_cecream > .bili-feed4 > .bili-header > *:not(.bili-header__bar)')
 
     if (originalTopBar) {
+      // Set the original Bilibili top bar to `display: none` to prevent it from showing before the load
+      // see: https://github.com/BewlyBewly/BewlyBewly/issues/967
+      originalTopBar.style.display = 'none'
+
       // always show the background on the original bilibili top bar
       originalTopBar.querySelector('.bili-header__bar')?.classList.add('slide-down')
     }
@@ -137,7 +142,11 @@ function onDOMLoaded() {
 
   if (isSupportedPages()) {
     // Then inject the app
-    injectApp()
+    injectApp().then(() => {
+      // Reset the original Bilibili top bar display style
+      if (originalTopBar)
+        originalTopBar.style.display = 'unset'
+    })
   }
 }
 
@@ -147,38 +156,42 @@ else
   document.addEventListener('DOMContentLoaded', () => onDOMLoaded())
 
 function injectApp() {
-  // Inject app when idle
-  runWhenIdle(async () => {
-  // mount component to context window
-    const container = document.createElement('div')
-    container.id = 'bewly'
-    const root = document.createElement('div')
-    const styleEl = document.createElement('link')
-    // Fix #69 https://github.com/hakadao/BewlyBewly/issues/69
-    // https://medium.com/@emilio_martinez/shadow-dom-open-vs-closed-1a8cf286088a - open shadow dom
-    const shadowDOM = container.attachShadow?.({ mode: 'open' }) || container
-    styleEl.setAttribute('rel', 'stylesheet')
-    styleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
-    shadowDOM.appendChild(styleEl)
-    shadowDOM.appendChild(root)
-    container.style.opacity = '0'
-    container.style.transition = 'opacity 0.5s'
-    styleEl.onload = () => {
-    // To prevent abrupt style transitions caused by sudden style changes
-      setTimeout(() => {
-        container.style.opacity = '1'
-      }, 500)
-    }
+  return new Promise<void>((resolve) => {
+    // Inject app when idle
+    runWhenIdle(async () => {
+    // mount component to context window
+      const container = document.createElement('div')
+      container.id = 'bewly'
+      const root = document.createElement('div')
+      const styleEl = document.createElement('link')
+      // Fix #69 https://github.com/hakadao/BewlyBewly/issues/69
+      // https://medium.com/@emilio_martinez/shadow-dom-open-vs-closed-1a8cf286088a - open shadow dom
+      const shadowDOM = container.attachShadow?.({ mode: 'open' }) || container
+      styleEl.setAttribute('rel', 'stylesheet')
+      styleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
+      shadowDOM.appendChild(styleEl)
+      shadowDOM.appendChild(root)
+      container.style.opacity = '0'
+      container.style.transition = 'opacity 0.5s'
+      styleEl.onload = () => {
+      // To prevent abrupt style transitions caused by sudden style changes
+        setTimeout(() => {
+          container.style.opacity = '1'
+        }, 500)
+      }
 
-    // inject svg icons
-    const svgDiv = document.createElement('div')
-    svgDiv.innerHTML = SVG_ICONS
-    shadowDOM.appendChild(svgDiv)
+      // inject svg icons
+      const svgDiv = document.createElement('div')
+      svgDiv.innerHTML = SVG_ICONS
+      shadowDOM.appendChild(svgDiv)
 
-    document.body.appendChild(container)
+      document.body.appendChild(container)
 
-    const app = createApp(App)
-    setupApp(app)
-    app.mount(root)
+      const app = createApp(App)
+      setupApp(app)
+      app.mount(root)
+
+      resolve()
+    })
   })
 }
