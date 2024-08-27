@@ -19,7 +19,7 @@ common:
   login: Login
   save_to_watch_later: Save to Watch later
   added: Added
-  performance_impact_warn: This feature may cause performance *DECREASE*
+  performance_impact_warn: This feature may cause performance *DECREASE*!
   no_more_content: No more content now, owari da
 
   operation:
@@ -87,7 +87,7 @@ settings:
     hidden: Hidden
   enable_grid_layout_switcher: Enable grid layout switcher
   enable_horizontal_scrolling: Enable horizontal scrolling
-  enable_horizontal_scrolling_desc: After enabling, mouse scrolling will directly scroll the horizontal scroll list
+  enable_horizontal_scrolling_desc: After enabling, mouse scrolling will directly scroll the horizontal scroll list.
   enable_video_preview: Enable video preview feature
   enable_video_ctrl_bar_on_video_card: Display the video control bar on the video card
   hover_video_card_delayed: Delayed video preview on hover over the video card
@@ -102,14 +102,14 @@ settings:
     dot: Dot
     none: Do not show
   dock_position: Dock position
-  dock_position_desc: Position on screen
+  dock_position_desc: Position on screen.
   dock_position_opt:
     left: Left
     right: Right
     bottom: Bottom
   auto_hide_dock: Automatically hide the dock
   dock_content_adjustment: Dock content adjustment
-  dock_content_adjustment_desc: The page of the first activated dock item will be the startup page
+  dock_content_adjustment_desc: The page of the first activated dock item will be the startup page.
   disable_light_dark_mode_switcher: Disable light/dark mode switcher
   move_back_to_top_and_refresh_to_dock: Move the back-to-top and refresh buttons to the dock
 
@@ -189,10 +189,10 @@ settings:
 
   use_search_page_mode: Use search page mode on homepage
   settings_shared_with_the_search_page: Settings shared with the search page
-  settings_shared_with_the_search_page_desc: Those settings are used in common with the search page
+  settings_shared_with_the_search_page_desc: Those settings are used in common with the search page.
   search_page_mode_wallpaper_fixed: Make the wallpaper of the search page mode fixed
   home_tabs_adjustment: Tabs adjustment
-  home_tabs_adjustment_desc: The first activated tab is the default page
+  home_tabs_adjustment_desc: The first activated tab is the default page.
   always_show_tabs_on_home_page: Always show tabs on the home page
 
   # Compatibility
@@ -203,7 +203,7 @@ settings:
   use_original_bilibili_homepage_desc: After you change it, the page will automatically refresh if you are on the homepage!
   use_original_bilibili_topbar: Use the original Bilibili top bar
   adapt_to_other_page_styles: Adapt to other page styles
-  adapt_to_other_page_styles_desc: Adapt to some common pages to match with the BewlyBewly theme
+  adapt_to_other_page_styles_desc: Adapt to some common pages to match with the BewlyBewly theme.
   # Bilibili Evolved
   follow_bilibili_evolved_color: Follow the Bilibili Evolved theme color
   follow_bilibili_evolved_color_desc: After changing the theme color in Bilibili Evolved, you will need to re-select this option in order to update the theme color.

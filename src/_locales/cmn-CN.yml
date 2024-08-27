@@ -19,7 +19,7 @@ common:
   login: 登录
   save_to_watch_later: 稍后再看
   added: 已添加
-  performance_impact_warn: 这个功能可能会影响性能
+  performance_impact_warn: 这个功能可能会影响性能！
   no_more_content: 没有更多内容了
 
   operation:
@@ -87,7 +87,7 @@ settings:
     hidden: 隐藏
   enable_grid_layout_switcher: 启用页面网格布局切换器
   enable_horizontal_scrolling: 启用横向滚动
-  enable_horizontal_scrolling_desc: 启用后，鼠标滚动时将直接滚动横向滚动列表
+  enable_horizontal_scrolling_desc: 启用后，鼠标滚动时将直接滚动横向滚动列表。
   enable_video_preview: 启用视频预览功能
   enable_video_ctrl_bar_on_video_card: 在视频卡片上显示视频控制栏
   hover_video_card_delayed: 将鼠标悬停在视频卡片上时延迟视频预览
@@ -102,14 +102,14 @@ settings:
     dot: 圆点
     none: 不显示
   dock_position: Dock 栏位置
-  dock_position_desc: 在屏幕中摆放位置
+  dock_position_desc: 在屏幕中摆放位置。
   dock_position_opt:
     left: 左侧
     right: 右侧
     bottom: 底部
   auto_hide_dock: 自动隐藏 Dock 栏
   dock_content_adjustment: Dock 内容调整
-  dock_content_adjustment_desc: 第一个激活的 Dock 项的页面将会是启动页面
+  dock_content_adjustment_desc: 第一个激活的 Dock 项的页面将会是启动页面。
   disable_light_dark_mode_switcher: 禁用亮/暗色模式切换按钮
   move_back_to_top_and_refresh_to_dock: 将返回顶部和刷新按钮移动到 Dock 栏
 
@@ -186,7 +186,7 @@ settings:
 
   use_search_page_mode: 首页使用搜索页模式
   settings_shared_with_the_search_page: 与搜索页共用的配置
-  settings_shared_with_the_search_page_desc: 这些设置都与搜索页共用
+  settings_shared_with_the_search_page_desc: 这些设置都与搜索页共用。
   search_page_mode_wallpaper_fixed: 将搜索页模式的壁纸固定
   home_tabs_adjustment: 标签栏调整
   home_tabs_adjustment_desc: 第一个激活的标签项是默认界面
@@ -200,10 +200,10 @@ settings:
   use_original_bilibili_homepage_desc: 在您更改此设置后，如果在首页上，页面将自动刷新！
   use_original_bilibili_topbar: 使用原版 Bilibili 顶栏
   adapt_to_other_page_styles: 适应其他页面样式
-  adapt_to_other_page_styles_desc: 适应一些常见页面，以与 BewlyBewly 主题相匹配
+  adapt_to_other_page_styles_desc: 适应一些常见页面，以与 BewlyBewly 主题相匹配。
   # Bilibili Evolved
   follow_bilibili_evolved_color: 使用 Bilibili Evolved 主题色
-  follow_bilibili_evolved_color_desc: 每次选完 Bilibili Evolved 主题色时，记得重新选中这一选项以更新配置
+  follow_bilibili_evolved_color_desc: 每次选完 Bilibili Evolved 主题色时，记得重新选中这一选项以更新配置。
 
   # About
   links: 链接
@@ -212,7 +212,7 @@ settings:
   afdian: 爱发电
   import_settings: 导入设置
   export_settings: 导出设置
-  export_settings_desc: 一些敏感的数据，例如 access key，可能需要重新获取
+  export_settings_desc: 一些敏感的数据，例如 access key，可能需要重新获取。
   contributors: 贡献者
 auth:
   auth_access_key_first: 在这之前请先授权 BewlyBewly 使用 access key
