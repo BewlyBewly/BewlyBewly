@@ -16,10 +16,18 @@
         position: absolute;
         width: 100%;
         height: 100%;
-        background: url(https://s1.hdslb.com/bfs/static/blive/blfe-message-web/static/img/infocenterbg.a1a0d152.jpg)
-          top/cover no-repeat fixed;
-        opacity: 0.3;
+        background: url(https://s1.hdslb.com/bfs/static/blive/blfe-message-web/static/img/light_bg.8e46311e.png)
+          bottom/cover no-repeat fixed;
         pointer-events: none;
+      }
+    }
+  }
+
+  &.dark #message-navbar {
+    + .container {
+      &::after {
+        background: url(https://s1.hdslb.com/bfs/static/blive/blfe-message-web/static/img/dark_bg.e136e3d5.png)
+          bottom/cover no-repeat fixed;
       }
     }
   }
@@ -177,11 +185,6 @@
 
   // #region dark mode adaption part
   &.dark {
-    // remove background in dark mode
-    #message-navbar + .container::after {
-      display: none;
-    }
-
     .space-left {
       .title,
       .item a {
@@ -321,6 +324,11 @@
       background-color: var(--bew-border-color);
     }
 
+    .space-left,
+    .space-right {
+      background-color: var(--bew-content);
+    }
+
     .bili-im .left,
     .bili-im .msg-notify,
     .bili-im .msg-push-new,
@@ -364,8 +372,6 @@
       background-color: var(--bew-skeleton);
     }
 
-    .space-left,
-    .space-right,
     .emoji-list .emoji {
       background-color: transparent;
     }
