@@ -27,7 +27,7 @@ if (isFirefox) {
 
 const currentUrl = document.URL
 
-function isSupportedPages() {
+function isSupportedPages(): boolean {
   if (
     // homepage
     isHomePage()
@@ -113,18 +113,20 @@ if (settings.value.adaptToOtherPageStyles && isHomePage()) {
   `)
 }
 
-function onDOMLoaded() {
+// Set the original Bilibili top bar to `display: none` to prevent it from showing before the load
+// see: https://github.com/BewlyBewly/BewlyBewly/issues/967
+let removeOriginalTopBar: HTMLStyleElement | null = null
+if (!settings.value.useOriginalBilibiliTopBar && isSupportedPages())
+  removeOriginalTopBar = injectCSS(`.bili-header { display: none !important; }`)
+
+async function onDOMLoaded() {
   let originalTopBar: HTMLElement | null = null
   // Remove the original Bilibili homepage if in Bilibili homepage & useOriginalBilibiliHomepage is enabled
   if (!settings.value.useOriginalBilibiliHomepage && isHomePage()) {
-    originalTopBar = document.querySelector<HTMLElement>('#i_cecream > .bili-feed4 > .bili-header')
-    const originalTopBarInnerUselessContents = document.querySelectorAll<HTMLElement>('#i_cecream > .bili-feed4 > .bili-header > *:not(.bili-header__bar)')
+    originalTopBar = document.querySelector<HTMLElement>('.bili-header')
+    const originalTopBarInnerUselessContents = document.querySelectorAll<HTMLElement>('.bili-header > *:not(.bili-header__bar)')
 
     if (originalTopBar) {
-      // Set the original Bilibili top bar to `display: none` to prevent it from showing before the load
-      // see: https://github.com/BewlyBewly/BewlyBewly/issues/967
-      originalTopBar.style.display = 'none'
-
       // always show the background on the original bilibili top bar
       originalTopBar.querySelector('.bili-header__bar')?.classList.add('slide-down')
     }
@@ -142,12 +144,12 @@ function onDOMLoaded() {
 
   if (isSupportedPages()) {
     // Then inject the app
-    injectApp().then(() => {
-      // Reset the original Bilibili top bar display style
-      if (originalTopBar)
-        originalTopBar.style.display = 'unset'
-    })
+    await injectApp()
   }
+
+  // Reset the original Bilibili top bar display style
+  if (removeOriginalTopBar)
+    document.documentElement.removeChild(removeOriginalTopBar)
 }
 
 if (document.readyState !== 'loading')
