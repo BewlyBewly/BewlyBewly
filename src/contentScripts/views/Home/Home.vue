@@ -31,9 +31,9 @@ const tabPageRef = ref()
 
 const gridLayoutIcons = computed((): GridLayoutIcon[] => {
   return [
-    { icon: 'i-f7:square-grid-3x2', iconActivated: 'i-f7:square-grid-3x2-fill', value: 'adaptive' },
-    { icon: 'i-f7:rectangle-grid-2x2', iconActivated: 'i-f7:rectangle-grid-2x2-fill', value: 'twoColumns' },
-    { icon: 'i-f7:rectangle-grid-1x2', iconActivated: 'i-f7:rectangle-grid-1x2-fill', value: 'oneColumn' },
+    { icon: 'i-mingcute:table-3-line', iconActivated: 'i-mingcute:table-3-fill', value: 'adaptive' },
+    { icon: 'i-mingcute:layout-grid-line', iconActivated: 'i-mingcute:layout-grid-fill', value: 'twoColumns' },
+    { icon: 'i-mingcute:list-check-3-line', iconActivated: 'i-mingcute:list-check-3-fill', value: 'oneColumn' },
   ]
 })
 
