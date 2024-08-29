@@ -145,16 +145,15 @@ function getPopularAnimeList() {
 
         <HorizontalScrollView w="[calc(100%+1.5rem)]">
           <div w-full flex>
-            <template v-if="isLoadingAnimeWatchList">
-              <BangumiCardSkeleton
-                v-for="item in 6" :key="item"
-                w="2xl:[calc(100%/6-1.5rem)] xl:[calc(100%/5-1.5rem)] lg:[calc(100%/4-1.5rem)] md:[calc(100%/3-1.5rem)] sm:[calc(100%/2-1.5rem)] [calc(100%-1.5rem)]"
-                last:w="2xl:1/6 xl:1/5 lg:1/4 md:1/3 sm:1/2 full"
-                shrink-0
-                mr-6 important-mb-0
-                last:pr-6
-              />
-            </template>
+            <BangumiCardSkeleton
+              v-for="item in 6"
+              v-show="isLoadingAnimeWatchList" :key="item"
+              w="2xl:[calc(100%/6-1.5rem)] xl:[calc(100%/5-1.5rem)] lg:[calc(100%/4-1.5rem)] md:[calc(100%/3-1.5rem)] sm:[calc(100%/2-1.5rem)] [calc(100%-1.5rem)]"
+              last:w="2xl:1/6 xl:1/5 lg:1/4 md:1/3 sm:1/2 full"
+              shrink-0
+              mr-6 important-mb-0
+              last:pr-6
+            />
             <BangumiCard
               v-for="item in animeWatchList"
               :key="item.short_url"
@@ -206,16 +205,15 @@ function getPopularAnimeList() {
 
         <HorizontalScrollView w="[calc(100%+1.5rem)]">
           <div w-full flex>
-            <template v-if="isLoadingPopularAnime">
-              <BangumiCardSkeleton
-                v-for="item in 6" :key="item"
-                w="2xl:[calc(100%/6-1.5rem)] xl:[calc(100%/5-1.5rem)] lg:[calc(100%/4-1.5rem)] md:[calc(100%/3-1.5rem)] sm:[calc(100%/2-1.5rem)] [calc(100%-1.5rem)]"
-                last:w="2xl:1/6 xl:1/5 lg:1/4 md:1/3 sm:1/2 full"
-                shrink-0
-                mr-6 important-mb-0
-                last:pr-6
-              />
-            </template>
+            <BangumiCardSkeleton
+              v-for="item in 6"
+              v-show="isLoadingPopularAnime" :key="item"
+              w="2xl:[calc(100%/6-1.5rem)] xl:[calc(100%/5-1.5rem)] lg:[calc(100%/4-1.5rem)] md:[calc(100%/3-1.5rem)] sm:[calc(100%/2-1.5rem)] [calc(100%-1.5rem)]"
+              last:w="2xl:1/6 xl:1/5 lg:1/4 md:1/3 sm:1/2 full"
+              shrink-0
+              mr-6 important-mb-0
+              last:pr-6
+            />
             <BangumiCard
               v-for="item in popularAnimeList"
               :key="item.url"
@@ -276,11 +274,12 @@ function getPopularAnimeList() {
             @mouseleave="activatedSeasonId = 0"
           />
 
-          <template v-if="isLoadingRecommendAnime">
-            <BangumiCardSkeleton
-              v-for="item in 30" :key="item"
-            />
-          </template>
+          <BangumiCardSkeleton
+            v-for="item in 30"
+            v-show="isLoadingRecommendAnime"
+            :key="item"
+            important-mb-0
+          />
         </div>
       </section>
     </div>
