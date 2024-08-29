@@ -158,7 +158,7 @@ const { isDark } = useDark()
           marginTop: horizontal ? '0' : '1rem',
         }"
       >
-        <p un-text="lg" mb-4>
+        <p un-text="lg" mb-2>
           <a
             :href="bangumi.url" target="_blank" rel="noopener noreferrer"
             class="keep-two-lines"
