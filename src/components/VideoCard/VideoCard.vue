@@ -398,10 +398,11 @@ function handleUndo() {
                   pos="absolute bottom--2px right--2px"
                   w-14px h-14px
                   bg="$bew-theme-color"
+                  border="2 outset solid white"
                   rounded="1/2"
                   grid place-items-center
                 >
-                  <div color-white text-sm class="i-mingcute:check-fill w-10px h-10px" />
+                  <div color-white text-sm class="i-mingcute:check-fill w-8px h-8px" />
                 </div>
               </a>
             </div>
@@ -428,7 +429,7 @@ function handleUndo() {
                   <div i-mingcute:more-2-line text="lg" />
                 </div>
               </div>
-              <div text="base $bew-text-2" w-fit m="t-2" flex="~ items-center wrap">
+              <div text="sm $bew-text-2" w-fit m="t-2" flex="~ items-center wrap">
                 <!-- Author Avatar -->
                 <span
                   :style="{
@@ -456,10 +457,11 @@ function handleUndo() {
                         pos="absolute bottom--2px right--2px"
                         w-14px h-14px
                         bg="$bew-theme-color"
+                        border="2 outset solid white"
                         rounded="1/2"
                         grid place-items-center
                       >
-                        <div color-white text-sm class="i-mingcute:check-fill w-10px h-10px" />
+                        <div color-white text-sm class="i-mingcute:check-fill w-8px h-8px" />
                       </div>
                     </a>
                   </div>
@@ -480,7 +482,7 @@ function handleUndo() {
               <div flex="~ items-center gap-1 wrap">
                 <!-- View & Danmaku Count -->
                 <div
-                  text="$bew-text-2" rounded="$bew-radius"
+                  text="sm $bew-text-2" rounded="$bew-radius"
                   inline-block
                 >
                   <span v-if="video.view || video.viewStr">

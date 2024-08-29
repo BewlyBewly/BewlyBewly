@@ -167,19 +167,19 @@ const { isDark } = useDark()
             {{ bangumi.title }}
           </a>
         </p>
-        <p v-if="bangumi.view || bangumi.follow" text="$bew-text-2" mb-2>
+        <p v-if="bangumi.view || bangumi.follow" text="sm $bew-text-2" mb-2>
           <span v-if="bangumi.view" mr-4>{{ $t('common.view', { count: numFormatter(bangumi.view) }, bangumi.view) }}</span>
           <span v-if="bangumi.follow">{{ $t('common.anime_follow_count', { count: numFormatter(bangumi.follow) }, bangumi.follow) }}</span>
         </p>
-        <div text="$bew-text-2" flex flex-wrap gap-2 items-center>
+        <div text="sm $bew-text-2" flex flex-wrap gap-2 items-center>
           <div
             v-if="bangumi.capsuleText"
             text="$bew-theme-color" bg="$bew-theme-color-20"
-            p="x-3" h-27px lh-27px rounded-4
+            p="x-2" h-22px lh-22px rounded-24px
           >
             {{ bangumi.capsuleText }}
           </div>
-          <span> {{ bangumi.desc }} </span>
+          <span lh-22px> {{ bangumi.desc }} </span>
         </div>
       </div>
     </a>
