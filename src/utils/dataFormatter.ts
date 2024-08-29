@@ -38,7 +38,9 @@ export function numFormatter(num: number | string): string {
     if (num.includes('萬') || num.includes('万')) {
       num = (Number(num.replaceAll('萬', '').replaceAll('万', '')) || 0) * 10000
     }
-    num = Number(num)
+    else {
+      num = Number(num)
+    }
   }
   const item = lookup.slice().reverse().find((item) => {
     return num >= item.value
