@@ -312,6 +312,7 @@ dock:
   settings: 设置
 home:
   not_interested: 不感兴趣
+  not_interested_desc: 你可以使用 <kbd>↑</kbd> 和 <kbd>↓</kbd> 来选择原因，或者直接使用数字键选择原因，按 <kbd>Enter</kbd> 就直接提交。
   tell_us_why: 为什么这么做...
   video_removed: 视频已移除
   for_you: 个性推荐

@@ -537,7 +537,7 @@ defineExpose({ initData })
     <Dialog
       v-if="showDislikeDialog"
       :title="$t('home.tell_us_why')"
-      width="400px"
+      width="420px"
       append-to-bewly-body
       :loading="loadingDislikeDialog"
       @close="closeDislikeDialog"
@@ -567,6 +567,7 @@ defineExpose({ initData })
           />
         </li>
       </ul>
+      <p text="$bew-text-3 sm" mt-4 v-html="$t('home.not_interested_desc')" />
     </Dialog>
 
     <Empty v-if="needToLoginFirst" mt-6 :description="$t('common.please_log_in_first')">

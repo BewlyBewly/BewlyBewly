@@ -315,6 +315,7 @@ dock:
   settings: Settings
 home:
   not_interested: Not interested
+  not_interested_desc: You can use <kbd>↑</kbd> and <kbd>↓</kbd> to choose the reason, or using number keys to choose the reason directly, press <kbd>Enter</kbd> to confirm.
   tell_us_why: Choose a reason why
   video_removed: Video removed
   for_you: For you
