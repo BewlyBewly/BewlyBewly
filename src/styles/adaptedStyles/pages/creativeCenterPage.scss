@@ -1,4 +1,8 @@
 .bewly-design.creativeCenterPage {
+  // 隐藏原版顶栏
+  #app .cc-header {
+    display: none;
+  }
   // #region theme color adaption part
   // Increase the priority of the style inside by writing a non-existent selector in `:not()`
   // :not(foobar) {
@@ -20,14 +24,18 @@
       filter: var(--bew-filter-force-dark);
     }
 
-    .nav-item.message iframe,
+    .bre-img-corpper-modal__corpbox,
     .setting .watermark-setting .watermark-wrp .watermark-position-wrp .preview-img {
-      filter: none !important;
+      background-color: #fff !important;
     }
 
     .setting-card-switch,
     .note-setting-wrp {
       color: black;
+    }
+
+    .b-read-editor {
+      background-color: var(--bew-bg);
     }
   }
   // #endregion
