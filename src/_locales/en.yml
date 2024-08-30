@@ -173,16 +173,16 @@ settings:
     Filtered out the videos that contain the titles you set (case-insensitive).
     Alternatively, use regex, such as <code>/abc&#124;\d+/</code>, wrapped in <code>/</code>.
     <br/>
-    In the table below, you can press the <code>Enter</code> key to add a new filter or confirm a modification.
-    Press the <code>Esc</code> key to cancel the modification.
+    In the table below, you can press the <kbd>Enter</kbd> key to add a new filter or confirm a modification.
+    Press the <kbd>Esc</kbd> key to cancel the modification.
     Double-click the column to edit the current column.
   filter_by_user: Filter by user
   filter_by_user_desc: |-
     Filtered out the videos that are uploaded by the username (full name, case-insensitive) or mid you set.
     Alternatively, use regex, such as <code>/abc&#124;\d+/</code>, wrapped in <code>/</code>.
     <br/>
-    In the table below, you can press the <code>Enter</code> key to add a new filter or confirm a modification.
-    Press the <code>Esc</code> key to cancel the modification.
+    In the table below, you can press the <kbd>Enter</kbd> key to add a new filter or confirm a modification.
+    Press the <kbd>Esc</kbd> key to cancel the modification.
     Double-click the column to edit the current column.
   filter_by_user_table:
     username_or_mid: Username / Mid

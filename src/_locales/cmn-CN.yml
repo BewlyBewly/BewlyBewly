@@ -171,15 +171,15 @@ settings:
   filter_by_title_desc: >
     按标题筛选掉包含您设置关键字的视频（不区分大小写），也可以使用正则表达式，如 <code>/abc&#124;\d+/</code>，用 <code>/</code> 包裹。
     <br/>
-    在下表中，您可以按 <code>Enter</code> 键添加新的筛选条件或确认修改。
-    按 <code>Esc</code> 键取消修改。
+    在下表中，您可以按 <kbd>Enter</kbd> 键添加新的筛选条件或确认修改。
+    按 <kbd>Esc</kbd> 键取消修改。
     双击列以编辑当前列。
   filter_by_user: 按用户筛选
   filter_by_user_desc: >
     筛选掉包含您设置的用户名（全名，不区分大小写）或 mid 上传的视频，也可以使用正则表达式，如 <code>/abc&#124;\d+/</code>，用 <code>/</code> 包裹。
     <br/>
-    在下表中，您可以按 <code>Enter</code> 键添加新的筛选条件或确认修改。
-    按 <code>Esc</code> 键取消修改。
+    在下表中，您可以按 <kbd>Enter</kbd> 键添加新的筛选条件或确认修改。
+    按 <kbd>Esc</kbd> 键取消修改。
     双击列以编辑当前列。
   filter_by_user_table:
     username_or_mid: 用户名 / Mid
