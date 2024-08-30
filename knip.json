@@ -9,12 +9,13 @@
     "scripts/*.ts",
     "*.config.*"
   ],
+  "ignore": ["src/components/Settings/**"],
   "ignoreDependencies": [
     "@iconify/json",
     "uno.css",
     "lint-staged"
   ],
-  "ignoreBinaries": ["gh"],
+  "ignoreBinaries": ["gh", "xcrun"],
   "rules": {
     "types": "off",
     "enumMembers": "off",

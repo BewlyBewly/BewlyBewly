@@ -2,8 +2,8 @@
 import { settings } from '~/logic'
 import { isHomePage } from '~/utils/main'
 
-import SettingsItem from './SettingsItem.vue'
-import SettingsItemGroup from './SettingsItemGroup.vue'
+import SettingsItem from '../components/SettingsItem.vue'
+import SettingsItemGroup from '../components/SettingsItemGroup.vue'
 
 watch(() => settings.value.useOriginalBilibiliHomepage, () => {
   if (isHomePage())
@@ -22,6 +22,9 @@ function changeThemeColor(color: string) {
 <template>
   <div>
     <SettingsItemGroup :title="$t('settings.group_common')">
+      <SettingsItem :title="$t('settings.topbar_visibility')" :desc="$t('settings.topbar_visibility_desc')">
+        <Radio v-model="settings.showTopBar" :label="settings.showTopBar ? $t('settings.chk_box.show') : $t('settings.chk_box.hidden')" />
+      </SettingsItem>
       <SettingsItem :title="$t('settings.use_original_bilibili_topbar')">
         <Radio v-model="settings.useOriginalBilibiliTopBar" />
       </SettingsItem>
@@ -49,10 +52,6 @@ function changeThemeColor(color: string) {
           }"
           @click="changeThemeColor(bilibiliEvolvedThemeColor)"
         />
-      </SettingsItem>
-
-      <SettingsItem :title="$t('settings.topbar_visibility')" :desc="$t('settings.topbar_visibility_desc')">
-        <Radio v-model="settings.showTopBar" :label="settings.showTopBar ? $t('settings.chk_box.show') : $t('settings.chk_box.hidden')" />
       </SettingsItem>
     </SettingsItemGroup>
   </div>

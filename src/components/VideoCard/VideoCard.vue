@@ -398,10 +398,11 @@ function handleUndo() {
                   pos="absolute bottom--2px right--2px"
                   w-14px h-14px
                   bg="$bew-theme-color"
+                  border="2 outset solid white"
                   rounded="1/2"
                   grid place-items-center
                 >
-                  <div color-white text-sm class="i-mingcute:check-fill w-10px h-10px" />
+                  <div color-white text-sm class="i-mingcute:check-fill w-8px h-8px" />
                 </div>
               </a>
             </div>
@@ -428,7 +429,7 @@ function handleUndo() {
                   <div i-mingcute:more-2-line text="lg" />
                 </div>
               </div>
-              <div text="base $bew-text-2" w-fit m="t-2" flex="~ items-center wrap">
+              <div text="sm $bew-text-2" w-fit m="t-2" flex="~ items-center wrap">
                 <!-- Author Avatar -->
                 <span
                   :style="{
@@ -456,10 +457,11 @@ function handleUndo() {
                         pos="absolute bottom--2px right--2px"
                         w-14px h-14px
                         bg="$bew-theme-color"
+                        border="2 outset solid white"
                         rounded="1/2"
                         grid place-items-center
                       >
-                        <div color-white text-sm class="i-mingcute:check-fill w-10px h-10px" />
+                        <div color-white text-sm class="i-mingcute:check-fill w-8px h-8px" />
                       </div>
                     </a>
                   </div>
@@ -480,15 +482,15 @@ function handleUndo() {
               <div flex="~ items-center gap-1 wrap">
                 <!-- View & Danmaku Count -->
                 <div
-                  text="$bew-text-2" rounded="$bew-radius"
+                  text="sm $bew-text-2" rounded="$bew-radius"
                   inline-block
                 >
                   <span v-if="video.view || video.viewStr">
-                    {{ video.view ? $t('common.view', { count: numFormatter(video.view) }, video.view) : `${video.viewStr}${$t('common.viewWithoutNum')}` }}
+                    {{ video.view ? $t('common.view', { count: numFormatter(video.view) }, video.view) : `${numFormatter(video.viewStr || '0')}${$t('common.viewWithoutNum')}` }}
                   </span>
                   <template v-if="video.danmaku || video.danmakuStr">
                     <span text-xs font-light mx-4px>•</span>
-                    <span>{{ video.danmaku ? $t('common.danmaku', { count: numFormatter(video.danmaku) }, video.danmaku) : `${video.danmakuStr}${$t('common.danmakuWithoutNum')}` }}</span>
+                    <span>{{ video.danmaku ? $t('common.danmaku', { count: numFormatter(video.danmaku) }, video.danmaku) : `${numFormatter(video.danmakuStr || '0')}${$t('common.danmakuWithoutNum')}` }}</span>
                   </template>
                   <br>
                 </div>

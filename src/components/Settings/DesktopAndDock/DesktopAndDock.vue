@@ -5,8 +5,8 @@ import draggable from 'vuedraggable'
 import { settings } from '~/logic'
 import { useMainStore } from '~/stores/mainStore'
 
-import SettingsItem from './SettingsItem.vue'
-import SettingsItemGroup from './SettingsItemGroup.vue'
+import SettingsItem from '../components/SettingsItem.vue'
+import SettingsItemGroup from '../components/SettingsItemGroup.vue'
 
 const { t } = useI18n()
 const mainStore = useMainStore()
@@ -105,7 +105,7 @@ function handleToggleDockItem(dockItem: any) {
               <template #left>
                 <div i-mingcute:back-line />
               </template>
-              {{ $t('common.reset') }}
+              {{ $t('common.operation.reset') }}
             </Button>
           </div>
         </template>

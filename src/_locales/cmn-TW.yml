@@ -19,14 +19,27 @@ common:
   login: 登入
   save_to_watch_later: 稍後觀看
   added: 已新增
-  performance_impact_warn: 這個功能可能會降低效能
-  enable: 啟用
-  disable: 停用
-  refresh: 重新整理
-  reset: 重置
+  performance_impact_warn: 這個功能可能會降低效能！
   no_more_content: 沒有更多內容了
-  confirm: 確定
-  cancel: 取消
+
+  operation:
+    add: 新增
+    edit: 編輯
+    delete: 刪除
+    confirm: 確定
+    cancel: 取消
+    enable: 啟用
+    disable: 停用
+    refresh: 重新整理
+    reset: 重設
+
+  table:
+    index: 索引
+    title: 標題
+    name: 名稱
+    remark: 備註
+    operations: 操作
+
 settings:
   title: 設定
 
@@ -74,7 +87,7 @@ settings:
     hidden: 隱藏
   enable_grid_layout_switcher: 啟用版面格線佈局切換器
   enable_horizontal_scrolling: 啟用橫向捲動
-  enable_horizontal_scrolling_desc: 啟用後，滑鼠捲動時將直接捲動橫向捲軸列表
+  enable_horizontal_scrolling_desc: 啟用後，滑鼠捲動時將直接捲動橫向捲軸列表。
   enable_video_preview: 啟用影片預覽功能
   enable_video_ctrl_bar_on_video_card: 在影片卡片上顯示影片控制欄
   hover_video_card_delayed: 將滑鼠懸停在影片卡片上時延遲影片預覽
@@ -89,14 +102,14 @@ settings:
     dot: 圓點
     none: 不顯示
   dock_position: Dock 位置
-  dock_position_desc: 螢幕上的位置
+  dock_position_desc: 螢幕上的位置。
   dock_position_opt:
     left: 左側
     right: 右側
     bottom: 底部
   auto_hide_dock: 自動隱藏 Dock
   dock_content_adjustment: Dock 內容調整
-  dock_content_adjustment_desc: 第一個啟用的 Dock 項目的頁面將是起始頁面
+  dock_content_adjustment_desc: 第一個啟用的 Dock 項目的頁面將是起始頁面。
   disable_light_dark_mode_switcher: 關閉淺/深色模式切換按鈕
   move_back_to_top_and_refresh_to_dock: 將返回頂部和重新整理按鈕移動到 Dock
 
@@ -109,14 +122,14 @@ settings:
   theme_color: 主題色
   gradient_theme_color_background: 在深色模式下使用漸層主題色作為背景
   wallpaper_mode: 背景圖片模式
-  wallpaper_mode_desc: '使用 URL: 直接用網上圖片的 URL 來設定背景圖片。'
+  wallpaper_mode_desc: '使用網址: 直接使用網路圖片的網址來設定背景圖片。'
   wallpaper_mode_opt:
     build_in: 內建
-    by_url: 使用 URL
+    by_url: 使用網址
   choose_ur_wallpaper: 選擇你的背景
-  image_url: 圖片 URL
+  image_url: 圖片網址
   image_url_hint: |-
-    URL 示例: https://cdn.jsdelivr.net/gh/BewlyBewly/Imgs/wallpapers/rocky-mountain-cloudscape.jpg
+    網址範例: https://cdn.jsdelivr.net/gh/BewlyBewly/Imgs/wallpapers/rocky-mountain-cloudscape.jpg
     https://cdn.jsdelivr.net/gh/BewlyBewly/Imgs/wallpapers/green-white-mountains.jpg
   enable_wallpaper_masking: 啟用背景遮蔽效果
   wallpaper_mask_opacity: 背景遮蔽透明度調節
@@ -126,7 +139,7 @@ settings:
   logo_color: Logo 顏色
   logo_color_opt:
     white: 白
-    theme_color: 主題色
+    theme_color: 主題顏色
   enable_logo_glowing_effect: 啟用 Logo 發光效果
   logo_visibility: Logo 可視性
   bg_darkens_when_the_search_bar_is_focused: 當搜尋欄聚焦時背景變暗
@@ -138,38 +151,60 @@ settings:
   recommendation_mode: 推薦模式
   recommendation_mode_desc: |
     如果您想要使用手機端的推薦演算法，請先授權 BewlyBewly 使用 access key。
-  recommendation_mode_desc2: |
-    由於B站對以前的API實施了限制，要請求 access key 的方法不再運作。我們建議使用 Web 模式 🫠
   authorize_app: 授權 BewlyBewly 使用 access key
   authorize_app_desc: >
     授權使用後能在首頁推送 bilibili 手機端推介演算法的影片，授權 key 的有效期約為一個月，過了有效期後，請記得重新取得授權以取得 access
     key。
   authorize_app_more_info_access_key: 關於 access key
-  scan_qrcode_desc: 使用 Bilibili 手機應用程式掃描這個QR碼，以授權取得 access key。
+  scan_qrcode_desc: 使用 Bilibili 手機應用程式掃描這個 QR Code，以授權取得 access key。
+
+  disable_filters_for_followed_users: 正在跟隨的使用者不受過濾條件限制
+  disable_filters_for_followed_users_desc: >
+    如果啟用此選項，正在跟隨的使用者不受過濾條件限制。
   filter_by_view_count: 按觀看次數篩選
+  filter_by_view_count_desc: 篩選掉觀看次數少於您設定的影片。
   filter_by_view_count_unit: 次
   filter_by_duration: 按影片長度篩選
+  filter_by_duration_desc: 篩選掉時長少於您設定的影片。
   filter_by_duration_unit: 秒
+  filter_item_already_exist: 這個篩選項目已經存在！
+  filter_by_title: 按標題篩選
+  filter_by_title_desc: |-
+    按標題篩選掉包含您設定的字串的影片（不區分大小寫），或使用正規表示式，如 <code>/abc&#124;\d+/</code>，用 <code>/</code> 包裡。
+    <br/>
+    在下面的表格中，您可以按 <code>Enter</code> 鍵新增新的篩選條件或確認變更。
+    按 <code>Esc</code> 鍵取消變更。
+    按兩下欄位以編輯目前欄位。
+  filter_by_user: 按使用者篩選
+  filter_by_user_desc: |-
+    篩選掉包含您設定的使用者名稱（全名，不區分大小寫）或 mid 所上傳的影片，或使用正規表示式，如 <code>/abc&#124;\d+/</code>，用 <code>/</code> 包裡。
+    <br/>
+    在下面的表格中，您可以按 <code>Enter</code> 鍵建立新的篩選條件或確認變更。
+    按 <code>Esc</code> 鍵取消變更。
+    按兩下欄位以編輯目前欄位。
+  filter_by_user_table:
+    username_or_mid: 使用者名稱 / Mid
+
   use_search_page_mode: 首頁使用搜尋頁模式
   settings_shared_with_the_search_page: 與搜尋頁共用的設定
-  settings_shared_with_the_search_page_desc: 這些設定都與搜尋頁共用
+  settings_shared_with_the_search_page_desc: 這些設定都與搜尋頁共用。
   search_page_mode_wallpaper_fixed: 將搜尋頁模式的背景固定
   home_tabs_adjustment: 標籤欄調整
-  home_tabs_adjustment_desc: 第一個啟用的標籤項目調整頁面將是起始頁面
+  home_tabs_adjustment_desc: 第一個啟用的標籤項目調整頁面將是起始頁面。
   always_show_tabs_on_home_page: 總是顯示首頁標籤欄
 
   # Compatibility
   # Common
+  topbar_visibility: 頂欄可視性
+  topbar_visibility_desc: 如果你正在使用 Bilibili Evolved 的頂欄，你可以在這裡關閉 BewlyBewly 的頂欄。
   use_original_bilibili_homepage: 使用原版 Bilibili 首頁
   use_original_bilibili_homepage_desc: 當您變更此設定後，如果在首頁上，頁面將自動重新整理！
   use_original_bilibili_topbar: 使用原版 Bilibili 頂欄
   adapt_to_other_page_styles: 適應其他頁面風格
-  adapt_to_other_page_styles_desc: 適應一些常見頁面，以配合 BewlyBewly 主題
+  adapt_to_other_page_styles_desc: 適應一些常見頁面，以配合 BewlyBewly 主題。
   # Bilibili Evolved
-  topbar_visibility: 頂欄可視性
-  topbar_visibility_desc: 用於與 Bilibili Evolved 客製化頂欄相容
   follow_bilibili_evolved_color: 使用 Bilibili Evolved 主題色
-  follow_bilibili_evolved_color_desc: 每次變更 Bilibili Evolved 主題色後，記得重新選取此選項以更新配置
+  follow_bilibili_evolved_color_desc: 每次變更 Bilibili Evolved 主題色後，記得重新選取此選項以更新配置。
 
   # About
   links: 連結
@@ -178,39 +213,8 @@ settings:
   afdian: 爱发电
   import_settings: 匯入設定
   export_settings: 匯出設定
-  export_settings_desc: 一些敏感性資訊，例如 access key，可能需要重新取得
+  export_settings_desc: 一些敏感性資訊，例如 access key，可能需要重新取得。
   contributors: 貢獻者
-
-  just_wanna_change_the_job: 我只想換一份好一點的工作...
-  just_wanna_change_the_job_hint: |-
-    Let's just consider this a piece of performance art.
-
-    Now I'm still working at my old company, which has started to gradually appreciate my contributes. I work on both front-end & back-end there.
-    I'm not foolish enough to mess up in the current situation; Instead, I will try to create my own environment and gradually become a versatile person.
-    The Logos for BewlyBewly, whether they are new or old, or even the VTuber style of logo, are all designed and made by me. I have always been working hard to develop my ability to produce independent projects.
-
-    Additionally, I am very grateful for the people who have contracted me by email or other means during this time, whether they ending up helping me or not.
-    However, I particularly want to wish a certain product manager who lured people into working for free while boasting about his own capabilities, thinking I would stupidly believe everything he said? I wish you a lifetime of only managing products you dislike for other companies.
-  just_wanna_change_the_job_desc: |-
-    首先十分抱歉在这里打扰您，我是一名前端开发者，坐标广州，我想换一份好一点的工作
-    BewlyBewly 其实是我在找工作的时候做的一个项目，那时试过有快半年是完全没有工作的状态，面试时一直刁难要么就是被礼貌拒绝
-
-    我知道以我的能力是完全可以从0开始做一个以我认为巨大的工程出来，但是面试的时候多数注重的地方往往只是在你对技术有如何的深入
-    技术确实非常重要，但是我认为一个人的能力不仅仅是技术
-    从 BewlyBewly 中，我从界面、配色、用户体验、一个产品用户真正想要的功能最后到实现我都是自己一个人完成的，包括弹窗按钮那些组件
-    在没有 pr 之前我就已经完成了很大一部分的功能以及界面，自己摸索和解决的不少问题与实现优化的功能，我也知道如何在b站插件几乎是饱和的情况下如何做出别具一格的作品。但是也要感谢后面的 PR 以及 issue 的反馈，让我能够更好的完善这个项目！！！
-
-    之后我确实也靠 BewlyBewly 进到了小公司工作一直到现在，现在的公司说是招前端进去主要还是看后端，我后端也是会一点但是没有前端好
-    目前公司内容也很杂，之前也为了某些变态的任务加上公司原本前端十分感人的代码在开发新功能的同时不得不自己也重构代码，但是公司给我的感觉就是因为我能力太差导致那个进度特慢，包括同事也是，同事一点前端都不会我重构了多少屎山代码说了也不明白，某些前端问题我自己也难以预测和修复最后还是做到慢就是做得慢。
-    那次我还因此加班来确保任务尽快完成，做完之后后续还有分给我的任务时也时不是提一嘴阴阳我做得慢我能力不行
-    这件事情也只是其中的一件，但是公司不注重前端甚至完全忽视前端对垃圾代码的感受我确实有点接受不了，其他前端同事给我一种感觉是能跑就好我简直无语
-
-    我知道这么说我可能太自大，我其实主要想简单说明一下目前情况，我承认我技术上确实没太厉害，公司里前端很大还是靠自己摸索的，有些处理我也不知道符合不符合规范
-    但是我能力是可以的，我是可以完全从0到1写出 BewlyBewly 出来，甚至之前和身边人说他们也觉得我有病，笑我写的代码（当然后面重构后我也觉得自己之前写的有病）
-
-    我目前只是想找一间公司是重视和比较规范前端的，因为我不想自己收拾别人的烂摊子身边人也不知道只是觉得我进度慢就是慢，再为了这种事情加班
-    坐标广州，我不是希望进去一定要做出什么成就出来，在做开源过程中也对项目负责人和开发者不同的想法观念略有感受。我只想进去了解一下正确的前端规范和能与其他志同道合的人一起工作。如果有合适的前端工作机会请联系我，谢谢！
-  contact_me: 聯繫我
 auth:
   auth_access_key_first: 在這之前請先授權 BewlyBewly 使用 access key
 topbar:
@@ -276,7 +280,7 @@ topbar:
     workshop: 我的工作坊
     my_stream_info: 實況資訊
     my_courses: 我的課程
-    log_out: 退出登入
+    log_out: 登出
   noti_dropdown:
     replys: 回覆留言
     mentions: 提及我的

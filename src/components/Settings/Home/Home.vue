@@ -7,9 +7,11 @@ import { accessKey, settings } from '~/logic'
 import { useMainStore } from '~/stores/mainStore'
 import { getTVLoginQRCode, pollTVLoginQRCode, revokeAccessKey } from '~/utils/authProvider'
 
-import SearchPage from './SearchPage.vue'
-import SettingsItem from './SettingsItem.vue'
-import SettingsItemGroup from './SettingsItemGroup.vue'
+import SettingsItem from '../components/SettingsItem.vue'
+import SettingsItemGroup from '../components/SettingsItemGroup.vue'
+import SearchPage from '../SearchPage/SearchPage.vue'
+import FilterByTitleTable from './components/FilterByTitleTable.vue'
+import FilterByUserTable from './components/FilterByUserTable.vue'
 
 const mainStore = useMainStore()
 const toast = useToast()
@@ -196,7 +198,7 @@ function handleToggleHomeTab(tab: any) {
             type="secondary"
             @click="setLoginQRCode"
           >
-            {{ $t('common.refresh') }}
+            {{ $t('common.operation.refresh') }}
           </Button>
         </div>
       </Dialog>
@@ -206,7 +208,10 @@ function handleToggleHomeTab(tab: any) {
       :title="$t('settings.group_recommendation_filters')"
       :desc="$t('settings.group_recommendation_filters_desc')"
     >
-      <SettingsItem :title="$t('settings.filter_by_view_count')">
+      <SettingsItem :title="$t('settings.disable_filters_for_followed_users')" :desc="$t('settings.disable_filters_for_followed_users_desc')">
+        <Radio v-model="settings.disableFilterForFollowedUser" />
+      </SettingsItem>
+      <SettingsItem :title="$t('settings.filter_by_view_count')" :desc="$t('settings.filter_by_view_count_desc')">
         <div flex="~ justify-end" w-full>
           <Input
             v-if="settings.enableFilterByViewCount"
@@ -220,7 +225,7 @@ function handleToggleHomeTab(tab: any) {
           <Radio v-model="settings.enableFilterByViewCount" />
         </div>
       </SettingsItem>
-      <SettingsItem :title="$t('settings.filter_by_duration')">
+      <SettingsItem :title="$t('settings.filter_by_duration')" :desc="$t('settings.filter_by_duration_desc')">
         <div flex="~ justify-end" w-full>
           <Input
             v-if="settings.enableFilterByDuration"
@@ -234,6 +239,45 @@ function handleToggleHomeTab(tab: any) {
           <Radio v-model="settings.enableFilterByDuration" />
         </div>
       </SettingsItem>
+
+      <div grid="~ lg:gap-4 lg:cols-2 cols-1" lg:border="t-1 $bew-border-color">
+        <SettingsItem
+          class="unrestricted-width-settings-item"
+          :title="$t('settings.filter_by_title')"
+          border="lg:none t-1 $bew-border-color"
+        >
+          <template #desc>
+            <div v-html="$t('settings.filter_by_title_desc')" />
+          </template>
+          <Radio v-model="settings.enableFilterByTitle" />
+          <template #bottom>
+            <FilterByTitleTable
+              :style="{
+                pointerEvents: settings.enableFilterByTitle ? 'auto' : 'none',
+                opacity: settings.enableFilterByTitle ? '1' : '0.6',
+              }"
+            />
+          </template>
+        </SettingsItem>
+        <SettingsItem
+          class="unrestricted-width-settings-item"
+          :title="$t('settings.filter_by_user')"
+          border="lg:none b-1 $bew-border-color"
+        >
+          <template #desc>
+            <div v-html="$t('settings.filter_by_user_desc')" />
+          </template>
+          <Radio v-model="settings.enableFilterByUser" />
+          <template #bottom>
+            <FilterByUserTable
+              :style="{
+                pointerEvents: settings.enableFilterByUser ? 'auto' : 'none',
+                opacity: settings.enableFilterByUser ? '1' : '0.6',
+              }"
+            />
+          </template>
+        </SettingsItem>
+      </div>
     </SettingsItemGroup>
 
     <SettingsItemGroup
@@ -247,7 +291,7 @@ function handleToggleHomeTab(tab: any) {
               <template #left>
                 <div i-mingcute:back-line />
               </template>
-              {{ $t('common.reset') }}
+              {{ $t('common.operation.reset') }}
             </Button>
           </div>
         </template>
@@ -319,5 +363,13 @@ function handleToggleHomeTab(tab: any) {
 </template>
 
 <style lang="scss" scoped>
+.unrestricted-width-settings-item {
+  :deep(.left-content) {
+    --uno: w-full;
+  }
 
+  :deep(.right-content) {
+    --uno: w-auto;
+  }
+}
 </style>
