@@ -88,15 +88,18 @@ img {
 }
 
 code {
+  display: inline-block;
   background-color: var(--bew-fill-1);
-  padding: 0 4px;
-  margin: 0 2px;
+  padding: 0 0.5em;
+  margin: 0.24em 0.2em;
   border-radius: 4px;
   font-weight: 600;
+  line-height: 1.24;
   box-shadow: 0 0 0 1px var(--bew-border-color);
 }
 
 kbd {
+  display: inline-block;
   background-color: var(--bew-fill-1);
   padding: 0 0.5em;
   margin: 0.24em 0.2em;
@@ -104,9 +107,8 @@ kbd {
   box-shadow:
     0 0 0 1px var(--bew-border-color),
     0 2.4px 0 0 var(--bew-fill-2);
-  line-height: 1.4;
+  line-height: 1.24;
   cursor: pointer;
-  display: inline-block;
   transition: 0.3s;
 
   &:hover {
