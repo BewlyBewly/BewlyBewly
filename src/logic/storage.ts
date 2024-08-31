@@ -16,12 +16,15 @@ export interface Settings {
   enableVideoPreview: boolean
   enableVideoCtrlBarOnVideoCard: boolean
   hoverVideoCardDelayed: boolean
-  useOldTopBar: boolean
-  autoHideTopBar: boolean
-  topBarIconBadges: 'number' | 'dot' | 'none'
   blockAds: boolean
   disableFrostedGlass: boolean
   reduceFrostedGlassBlur: boolean
+
+  // Desktop & Dock
+  useOldTopBar: boolean
+  topBarLinkOpenMode: 'currentTab' | 'currentTabIfNotHomepage' | 'newTab'
+  autoHideTopBar: boolean
+  topBarIconBadges: 'number' | 'dot' | 'none'
   dockPosition: 'left' | 'right' | 'bottom'
   autoHideDock: boolean
   dockItemVisibilityList: { page: AppPage, visible: boolean }[]
@@ -82,14 +85,17 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   enableVideoPreview: true,
   enableVideoCtrlBarOnVideoCard: false,
   hoverVideoCardDelayed: false,
+  blockAds: false,
+  disableFrostedGlass: true,
+  reduceFrostedGlassBlur: false,
+
+  // Desktop & Dock
   useOldTopBar: false,
+  topBarLinkOpenMode: 'currentTabIfNotHomepage',
   autoHideTopBar: false,
   topBarIconBadges: 'number',
   dockPosition: 'right',
   autoHideDock: false,
-  blockAds: false,
-  disableFrostedGlass: true,
-  reduceFrostedGlassBlur: false,
   dockItemVisibilityList: [],
   disableLightDarkModeSwitcherOnDock: false,
   moveBackToTopOrRefreshButtonToDock: true,

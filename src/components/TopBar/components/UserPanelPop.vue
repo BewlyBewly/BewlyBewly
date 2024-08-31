@@ -9,6 +9,7 @@ import { LV0_ICON, LV1_ICON, LV2_ICON, LV3_ICON, LV4_ICON, LV5_ICON, LV6_ICON, L
 import { getCSRF, getUserID, isHomePage } from '~/utils/main'
 
 import type { UserInfo, UserStat } from '../types'
+import ALink from './ALink.vue'
 
 const props = defineProps<{
   userInfo: UserInfo
@@ -128,23 +129,24 @@ function getLvIcon(level: number, isSigma: boolean = false): string {
       text="xs $bew-text-2"
       m="t-1 b-2"
     >
-      <a
+      <ALink
         class="group mr-4"
         href="https://account.bilibili.com/account/coin"
-        :target="isHomePage() ? '_blank' : '_self'"
-      >{{ $t('topbar.user_dropdown.money') + (userInfo.money ?? '-') }}</a>
-      <a
+      >
+        {{ $t('topbar.user_dropdown.money') + (userInfo.money ?? '-') }}
+      </ALink>
+      <ALink
         class="group"
         href="https://pay.bilibili.com/pay-v2-web/bcoin_index"
-        :target="isHomePage() ? '_blank' : '_self'"
-      >{{
-        $t('topbar.user_dropdown.b_coins') + (userInfo.wallet?.bcoin_balance ?? '-')
-      }}</a>
+      >
+        {{
+          $t('topbar.user_dropdown.b_coins') + (userInfo.wallet?.bcoin_balance ?? '-')
+        }}
+      </ALink>
     </div>
 
-    <a
+    <ALink
       href="//account.bilibili.com/account/record?type=exp"
-      target="_blank"
       block mb-2 w-full
       flex="~ col justify-center items-start"
     >
@@ -191,35 +193,32 @@ function getLvIcon(level: number, isSigma: boolean = false): string {
           v-html="DOMPurify.sanitize(getLvIcon(userInfo?.level_info?.current_level, userInfo?.is_senior_member))"
         />
       </template>
-    </a>
+    </ALink>
 
     <div grid="~ cols-3 gap-2" mb-2>
-      <a
+      <ALink
         class="channel-info-item"
         :href="`https://space.bilibili.com/${mid}/fans/follow`"
-        :target="isHomePage() ? '_blank' : '_self'"
         :title="`${userStat.following}`"
       >
         <div class="num">
           {{ userStat.following ? numFormatter(userStat.following) : '0' }}
         </div>
         <div>{{ $t('topbar.user_dropdown.following') }}</div>
-      </a>
-      <a
+      </ALink>
+      <ALink
         class="channel-info-item"
         :href="`https://space.bilibili.com/${mid}/fans/fans`"
-        :target="isHomePage() ? '_blank' : '_self'"
         :title="`${userStat.follower}`"
       >
         <div class="num">
           {{ userStat.follower ? numFormatter(userStat.follower) : '0' }}
         </div>
         <div>{{ $t('topbar.user_dropdown.followers') }}</div>
-      </a>
-      <a
+      </ALink>
+      <ALink
         class="channel-info-item"
         :href="`https://space.bilibili.com/${mid}/dynamic`"
-        :target="isHomePage() ? '_blank' : '_self'"
         :title="`${userStat.dynamic_count}`"
       >
         <div class="num">
@@ -228,7 +227,7 @@ function getLvIcon(level: number, isSigma: boolean = false): string {
           }}
         </div>
         <div>{{ $t('topbar.user_dropdown.posts') }}</div>
-      </a>
+      </ALink>
     </div>
 
     <div

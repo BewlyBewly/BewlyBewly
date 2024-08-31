@@ -9,6 +9,8 @@ import type { List as VideoItem, WatchLaterResult } from '~/models/video/watchLa
 import { calcCurrentTime } from '~/utils/dataFormatter'
 import { isHomePage, removeHttpFromUrl } from '~/utils/main'
 
+import ALink from './ALink.vue'
+
 const api = useApiClient()
 const watchLaterList = reactive<VideoItem[]>([])
 const isLoading = ref<boolean>()
@@ -79,18 +81,18 @@ function getAllWatchLaterList() {
       </div>
 
       <div flex="~ gap-4">
-        <a
-          :href="playAllUrl" :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
+        <ALink
+          :href="playAllUrl" rel="noopener noreferrer"
           flex="~" items="center"
         >
           <span text="sm">{{ $t('common.play_all') }}</span>
-        </a>
-        <a
-          :href="viewAllUrl" :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
+        </ALink>
+        <ALink
+          :href="viewAllUrl" rel="noopener noreferrer"
           flex="~" items="center"
         >
           <span text="sm">{{ $t('common.view_all') }}</span>
-        </a>
+        </ALink>
       </div>
     </header>
 
@@ -126,10 +128,10 @@ function getAllWatchLaterList() {
         <div v-if="!isLoading && watchLaterList.length > 0" min-h="50px" />
 
         <TransitionGroup name="list">
-          <a
+          <ALink
             v-for="item in watchLaterList"
             :key="item.aid"
-            :href="getWatchLaterUrl(item.bvid)" :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
+            :href="getWatchLaterUrl(item.bvid)" rel="noopener noreferrer"
             m="last:b-4" p="2"
             rounded="$bew-radius"
             hover:bg="$bew-fill-2"
@@ -179,7 +181,6 @@ function getAllWatchLaterList() {
                     (item.progress / item.duration) * 100
                   "
                 />
-
               </div>
 
               <!-- Description -->
@@ -194,11 +195,10 @@ function getAllWatchLaterList() {
                 </h3>
                 <div text="$bew-text-2 sm" m="t-4" flex="~" align="items-center">
                   {{ item.owner.name }}
-
                 </div>
               </div>
             </section>
-          </a>
+          </ALink>
         </TransitionGroup>
 
         <!-- loading -->

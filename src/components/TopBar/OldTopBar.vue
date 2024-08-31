@@ -11,6 +11,7 @@ import { settings } from '~/logic'
 import { getUserID, isHomePage } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
+import ALink from './components/ALink.vue'
 import ChannelsPop from './components/ChannelsPop.vue'
 import FavoritesPop from './components/FavoritesPop.vue'
 import HistoryPop from './components/HistoryPop.vue'
@@ -540,10 +541,9 @@ defineExpose({
             class="avatar right-side-item relative"
             shadow="$bew-shadow-2" rounded-full
           >
-            <a
+            <ALink
               ref="avatarImg"
               :href="`https://space.bilibili.com/${mid}`"
-              :target="isHomePage() ? '_blank' : '_self'"
               class="avatar-img"
               :class="{ hover: popupVisible.userPanel }"
               :style="{
@@ -646,13 +646,12 @@ defineExpose({
                       class="unread-dot"
                     />
                   </template>
-                  <a
+                  <ALink
                     href="https://message.bilibili.com"
-                    :target="isHomePage() ? '_blank' : '_self'"
                     :title="$t('topbar.notifications')"
                   >
                     <div i-tabler:bell />
-                  </a>
+                  </ALink>
 
                   <Transition name="slide-in">
                     <NotificationsPop
@@ -680,13 +679,12 @@ defineExpose({
                       class="unread-dot"
                     />
                   </template>
-                  <a
+                  <ALink
                     href="https://t.bilibili.com"
-                    :target="isHomePage() ? '_blank' : '_self'"
                     :title="$t('topbar.moments')"
                   >
                     <div i-tabler:windmill />
-                  </a>
+                  </ALink>
 
                   <Transition name="slide-in">
                     <MomentsPop v-show="popupVisible.moments" ref="momentsPopRef" class="bew-popover" />
@@ -699,13 +697,12 @@ defineExpose({
                   class="right-side-item"
                   :class="{ active: popupVisible.favorites }"
                 >
-                  <a
+                  <ALink
                     :href="`https://space.bilibili.com/${mid}/favlist`"
-                    :target="isHomePage() ? '_blank' : '_self'"
                     :title="$t('topbar.favorites')"
                   >
                     <div i-mingcute:star-line />
-                  </a>
+                  </ALink>
 
                   <Transition name="slide-in">
                     <KeepAlive>
@@ -725,13 +722,12 @@ defineExpose({
                   class="right-side-item"
                   :class="{ active: popupVisible.history }"
                 >
-                  <a
+                  <ALink
                     href="https://www.bilibili.com/account/history"
-                    :target="isHomePage() ? '_blank' : '_self'"
                     :title="$t('topbar.history')"
                   >
                     <div i-mingcute:time-line />
-                  </a>
+                  </ALink>
 
                   <Transition name="slide-in">
                     <HistoryPop
@@ -748,13 +744,12 @@ defineExpose({
                   class="right-side-item"
                   :class="{ active: popupVisible.watchLater }"
                 >
-                  <a
+                  <ALink
                     href="https://www.bilibili.com/watchlater/#/list"
-                    :target="isHomePage() ? '_blank' : '_self'"
                     :title="$t('topbar.watch_later')"
                   >
                     <div i-mingcute:carplay-line />
-                  </a>
+                  </ALink>
 
                   <Transition name="slide-in">
                     <WatchLaterPop

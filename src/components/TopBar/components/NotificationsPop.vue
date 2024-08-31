@@ -2,7 +2,8 @@
 import { useI18n } from 'vue-i18n'
 
 import { useApiClient } from '~/composables/api'
-import { isHomePage } from '~/utils/main'
+
+import ALink from './ALink.vue'
 
 const { t } = useI18n()
 const api = useApiClient()
@@ -81,11 +82,10 @@ function getUnreadMessageCount() {
     border="1 $bew-border-color"
     flex="~ col"
   >
-    <a
+    <ALink
       v-for="item in list"
       :key="item.name"
       :href="item.url"
-      :target="isHomePage() ? '_blank' : '_self'"
       pos="relative"
       flex="~ items-center justify-between gap-2"
       p="x-4 y-2"
@@ -111,6 +111,6 @@ function getUnreadMessageCount() {
       >
         {{ item.unreadCount > 99 ? '99+' : item.unreadCount }}
       </div>
-    </a>
+    </ALink>
   </div>
 </template>

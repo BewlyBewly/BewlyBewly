@@ -9,7 +9,9 @@ import Tooltip from '~/components/Tooltip.vue'
 import { useApiClient } from '~/composables/api'
 import type { TopBarLiveMomentResult } from '~/models/moment/topBarLiveMoment'
 import type { TopBarMomentResult } from '~/models/moment/topBarMoment'
-import { getCSRF, isHomePage, scrollToTop } from '~/utils/main'
+import { getCSRF, scrollToTop } from '~/utils/main'
+
+import ALink from './ALink.vue'
 
 type MomentType = 'video' | 'live' | 'article'
 interface MomentTab { type: MomentType, name: any }
@@ -314,12 +316,12 @@ defineExpose({
           {{ tab.name }}
         </div>
       </div>
-      <a
-        href="https://t.bilibili.com/" :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
+      <ALink
+        href="https://t.bilibili.com/" rel="noopener noreferrer"
         flex="~ items-center"
       >
         <span text="sm">{{ $t('common.view_all') }}</span>
-      </a>
+      </ALink>
     </header>
 
     <!-- moments wrapper -->
@@ -350,10 +352,10 @@ defineExpose({
         <div v-if="!isLoading && moments.length > 0" min-h="50px" />
 
         <TransitionGroup name="list">
-          <a
+          <ALink
             v-for="(moment, index) in moments"
             :key="index"
-            :href="moment.link" :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
+            :href="moment.link" rel="noopener noreferrer"
             flex="~ justify-between"
             m="b-2" p="2"
             rounded="$bew-radius"
@@ -372,9 +374,9 @@ defineExpose({
               pos="absolute -top-12px -left-12px"
               style="box-shadow: 0 0 4px var(--bew-theme-color)"
             />
-            <a
+            <ALink
               :href="moment.authorJumpUrl"
-              :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
+              rel="noopener noreferrer"
               rounded="1/2"
               w="40px" h="40px" m="r-4"
               bg="$bew-skeleton"
@@ -384,20 +386,20 @@ defineExpose({
                 rounded="1/2"
                 w="40px" h="40px"
               >
-            </a>
+            </ALink>
 
             <div flex="~" justify="between" w="full">
               <div>
                 <!-- <span v-if="selectedTab !== 1">{{ `${moment.name} ${t('topbar.moments_dropdown.uploaded')}` }}</span> -->
                 <!-- <span v-else>{{ `${moment.name} ${t('topbar.moments_dropdown.now_streaming')}` }}</span> -->
 
-                <a
+                <ALink
                   :href="moment.authorJumpUrl"
-                  :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
+                  rel="noopener noreferrer"
                   font-bold
                 >
                   {{ moment.author }}
-                </a>
+                </ALink>
                 <div overflow-hidden text-ellipsis break-anywhere>
                   {{ moment.title }}
                 </div>
@@ -452,7 +454,7 @@ defineExpose({
                 </div>
               </div>
             </div>
-          </a>
+          </ALink>
         </TransitionGroup>
 
         <!-- loading -->

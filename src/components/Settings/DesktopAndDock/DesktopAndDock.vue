@@ -44,6 +44,24 @@ const dockPositions = computed(() => {
     },
   ]
 })
+
+const topBarLinkOpenModeOptions = computed(() => {
+  return [
+    {
+      label: 'current tab',
+      value: 'currentTab',
+    },
+    {
+      label: 'current tab if not homepage',
+      value: 'currentTabIfNotHomepage',
+    },
+    {
+      label: 'new tab',
+      value: 'newTab',
+    },
+  ]
+})
+
 const pageOptions = computed((): { label: string, icon: string, value: string }[] => {
   return mainStore.dockItems.map((e: any) => {
     return {
@@ -77,6 +95,9 @@ function handleToggleDockItem(dockItem: any) {
     <SettingsItemGroup :title="$t('settings.group_topbar')">
       <SettingsItem :title="$t('settings.use_old_topbar')">
         <Radio v-model="settings.useOldTopBar" />
+      </SettingsItem>
+      <SettingsItem title="link open mode">
+        <Select v-model="settings.topBarLinkOpenMode" :options="topBarLinkOpenModeOptions" w="full" />
       </SettingsItem>
       <SettingsItem :title="$t('settings.auto_hide_topbar')">
         <Radio v-model="settings.autoHideTopBar" />
