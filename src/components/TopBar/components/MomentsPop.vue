@@ -286,6 +286,7 @@ defineExpose({
     pos="relative"
     shadow="[var(--bew-shadow-edge-glow-1),var(--bew-shadow-3)]"
     border="1 $bew-border-color"
+    flex="~ col"
   >
     <!-- top bar -->
     <header
@@ -294,7 +295,6 @@ defineExpose({
       justify="between"
       items-center
       p="y-4 x-6"
-      pos="fixed top-0 left-0"
       w="full"
       bg="$bew-elevated"
       z="1"
@@ -323,7 +323,7 @@ defineExpose({
     </header>
 
     <!-- moments wrapper -->
-    <main overflow-hidden rounded="$bew-radius">
+    <main overflow-hidden>
       <div ref="momentsWrap" h="430px" overflow="y-scroll x-hidden" p="x-4">
         <!-- loading -->
         <Loading
@@ -344,11 +344,6 @@ defineExpose({
         />
 
         <!-- moments -->
-
-        <!-- Use a transparent `div` instead of `margin-top` to prevent the list item bouncing problem -->
-        <!-- https://github.com/BewlyBewly/BewlyBewly/pull/889#issue-2394127922 -->
-        <div v-if="!isLoading && moments.length > 0" min-h="50px" />
-
         <TransitionGroup name="list">
           <a
             v-for="(moment, index) in moments"

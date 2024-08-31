@@ -145,13 +145,13 @@ defineExpose({
     pos="relative"
     shadow="[var(--bew-shadow-edge-glow-1),var(--bew-shadow-3)]"
     border="1 $bew-border-color"
+    flex="~ col"
   >
     <!-- top bar -->
     <header
       style="backdrop-filter: var(--bew-filter-glass-1)"
       flex="~" items-center justify-between
       p="x-6"
-      pos="fixed top-0 left-0"
       w="full"
       h-50px
       bg="$bew-content"
@@ -178,9 +178,9 @@ defineExpose({
       </div>
     </header>
 
-    <main flex="~" overflow-hidden rounded="$bew-radius">
+    <main flex="~" overflow-hidden>
       <aside
-        w="140px" h="430px" overflow="y-auto" rounded="l-$bew-radius"
+        w="140px" h="430px" overflow="y-auto"
         flex="shrink-0" bg="$bew-fill-1"
       >
         <ul grid="~ cols-1">
@@ -189,7 +189,6 @@ defineExpose({
             :key="item.id"
             :class="activatedMediaId === item.id ? 'activated-category' : ''"
             p="y-2 x-6"
-            first:m="t-[50px]"
             cursor="pointer"
             transition="~ duration-300"
             @click="changeCategory(item)"
@@ -207,6 +206,7 @@ defineExpose({
         overflow="y-scroll"
         p="x-4"
         pos="relative"
+        mt-2
       >
         <!-- loading -->
         <Loading
@@ -229,11 +229,6 @@ defineExpose({
         />
 
         <!-- favorites -->
-
-        <!-- Use a transparent `div` instead of `margin-top` to prevent the list item bouncing problem -->
-        <!-- https://github.com/BewlyBewly/BewlyBewly/pull/889#issue-2394127922 -->
-        <div v-if="!isLoading && favoriteResources.length > 0" min-h="50px" />
-
         <TransitionGroup name="list">
           <a
             v-for="item in favoriteResources"
