@@ -13,9 +13,10 @@ import { getUserID, isHomePage, scrollToTop } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
 const { isDark } = useDark()
-const activatedPage = ref<AppPage>(settings.value.dockItemVisibilityList.find(e => e.visible === true)?.page ?? AppPage.Home)
 const { locale } = useI18n()
 const [showSettings, toggleSettings] = useToggle(false)
+
+const activatedPage = ref<AppPage>(settings.value.dockItemVisibilityList.find(e => e.visible === true)?.page ?? AppPage.Home)
 const pages = {
   [AppPage.Home]: defineAsyncComponent(() => import('./Home/Home.vue')),
   [AppPage.Search]: defineAsyncComponent(() => import('./Search/Search.vue')),
@@ -33,6 +34,25 @@ const handleThrottledReachBottom = useThrottleFn(() => handleReachBottom.value?.
 const handleThrottledBackToTop = useThrottleFn(() => handleBackToTop(), 1000)
 const topBarRef = ref()
 const reachTop = ref<boolean>(true)
+
+const iframeDrawerUrl = ref<string>('')
+const showIframeDrawer = ref<boolean>(false)
+
+const inIframe = computed((): boolean => {
+  return window.self !== window.top
+})
+
+const showBewlyPage = computed((): boolean => {
+  if (showIframeDrawer.value) {
+    return true
+  }
+  else {
+    nextTick(() => {
+      return isHomePage() && !inIframe.value && !settings.value.useOriginalBilibiliHomepage
+    })
+    return true && !inIframe.value
+  }
+})
 
 watch(
   () => activatedPage.value,
@@ -242,6 +262,11 @@ function handleReduceFrostedGlassBlur() {
   }
 }
 
+function openIframeDrawer(url: string, _title: string = '') {
+  iframeDrawerUrl.value = url
+  showIframeDrawer.value = true
+}
+
 /**
  * Checks if the current viewport has a scrollbar.
  * @returns {boolean} Returns true if the viewport has a scrollbar, false otherwise.
@@ -261,6 +286,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
   handleBackToTop,
   handlePageRefresh,
   handleReachBottom,
+  openIframeDrawer,
   haveScrollbar,
 })
 </script>
@@ -274,7 +300,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
     text="$bew-text-1"
   >
     <!-- Background -->
-    <template v-if="isHomePage() && !settings.useOriginalBilibiliHomepage">
+    <template v-if="showBewlyPage">
       <AppBackground :activated-page="activatedPage" />
     </template>
 
@@ -284,9 +310,13 @@ provide<BewlyAppProvider>('BEWLY_APP', {
     </KeepAlive>
 
     <!-- Dock & RightSideButtons -->
-    <div pos="absolute top-0 left-0" w-full h-full overflow-hidden pointer-events-none>
+    <div
+      v-if="!inIframe"
+      pos="absolute top-0 left-0" w-full h-full overflow-hidden
+      pointer-events-none
+    >
       <Dock
-        v-if="isHomePage() && !settings.useOriginalBilibiliHomepage"
+        v-if="showBewlyPage"
         pointer-events-auto
         :activated-page="activatedPage"
         @change-page="(page: AppPage) => changeActivatePage(page)"
@@ -302,7 +332,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
     </div>
 
     <!-- TopBar -->
-    <div m-auto max-w="$bew-page-max-width">
+    <div v-if="!inIframe" m-auto max-w="$bew-page-max-width">
       <OldTopBar
         v-if="settings.useOldTopBar"
         pos="top-0 left-0" z="99 hover:1001" w-full
@@ -315,9 +345,9 @@ provide<BewlyAppProvider>('BEWLY_APP', {
 
     <div
       pos="absolute top-0 left-0" w-full h-full
-      :style="{ height: isHomePage() && !settings.useOriginalBilibiliHomepage ? '100dvh' : '0' }"
+      :style="{ height: showBewlyPage ? '100dvh' : '0' }"
     >
-      <template v-if="isHomePage() && !settings.useOriginalBilibiliHomepage">
+      <template v-if="showBewlyPage">
         <OverlayScrollbarsComponent ref="scrollbarRef" element="div" h-inherit defer @os-scroll="handleOsScroll">
           <main m-auto max-w="$bew-page-max-width">
             <div
@@ -339,6 +369,13 @@ provide<BewlyAppProvider>('BEWLY_APP', {
         </OverlayScrollbarsComponent>
       </template>
     </div>
+
+    <IframeDrawer
+      v-if="settings.videoCardOpenLinkMode === 'drawer'"
+      v-model="showIframeDrawer"
+      :url="iframeDrawerUrl"
+      @close="showIframeDrawer = false"
+    />
   </div>
 </template>
 

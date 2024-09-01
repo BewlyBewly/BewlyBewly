@@ -12,7 +12,7 @@ export interface Settings {
   language: string
   enableGridLayoutSwitcher: boolean
   enableHorizontalScrolling: boolean
-  openLinkInCurrentTab: boolean
+  videoCardOpenLinkMode: 'drawer' | 'newTab'
   enableVideoPreview: boolean
   enableVideoCtrlBarOnVideoCard: boolean
   hoverVideoCardDelayed: boolean
@@ -81,7 +81,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   language: '',
   enableGridLayoutSwitcher: true,
   enableHorizontalScrolling: false,
-  openLinkInCurrentTab: false,
+  videoCardOpenLinkMode: 'drawer',
   enableVideoPreview: true,
   enableVideoCtrlBarOnVideoCard: false,
   hoverVideoCardDelayed: false,
