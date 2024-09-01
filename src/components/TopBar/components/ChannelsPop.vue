@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 
-import { isHomePage } from '~/utils/main'
-
 import ALink from './ALink.vue'
 
 const { t } = useI18n()
