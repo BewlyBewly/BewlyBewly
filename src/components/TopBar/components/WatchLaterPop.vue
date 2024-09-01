@@ -7,7 +7,7 @@ import Progress from '~/components/Progress.vue'
 import { useApiClient } from '~/composables/api'
 import type { List as VideoItem, WatchLaterResult } from '~/models/video/watchLater'
 import { calcCurrentTime } from '~/utils/dataFormatter'
-import { isHomePage, removeHttpFromUrl } from '~/utils/main'
+import { removeHttpFromUrl } from '~/utils/main'
 
 import ALink from './ALink.vue'
 
