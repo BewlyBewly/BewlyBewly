@@ -117,7 +117,7 @@ if (settings.value.adaptToOtherPageStyles && isHomePage()) {
 // see: https://github.com/BewlyBewly/BewlyBewly/issues/967
 let removeOriginalTopBar: HTMLStyleElement | null = null
 if (!settings.value.useOriginalBilibiliTopBar && isSupportedPages())
-  removeOriginalTopBar = injectCSS(`.bili-header { display: none !important; }`)
+  removeOriginalTopBar = injectCSS(`.bili-header { visibility: hidden !important; }`)
 
 async function onDOMLoaded() {
   let originalTopBar: HTMLElement | null = null
@@ -144,7 +144,7 @@ async function onDOMLoaded() {
 
   if (isSupportedPages()) {
     // Then inject the app
-    if (isHomePage()) {
+    if (isHomePage() && !settings.value.useOriginalBilibiliHomepage) {
       injectApp()
     }
     else {
