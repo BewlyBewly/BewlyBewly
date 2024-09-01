@@ -144,7 +144,12 @@ async function onDOMLoaded() {
 
   if (isSupportedPages()) {
     // Then inject the app
-    await injectApp()
+    if (isHomePage()) {
+      injectApp()
+    }
+    else {
+      await injectAppWhenIdle()
+    }
   }
 
   // Reset the original Bilibili top bar display style
@@ -157,43 +162,46 @@ if (document.readyState !== 'loading')
 else
   document.addEventListener('DOMContentLoaded', () => onDOMLoaded())
 
-function injectApp() {
+function injectAppWhenIdle() {
   return new Promise<void>((resolve) => {
     // Inject app when idle
     runWhenIdle(async () => {
-    // mount component to context window
-      const container = document.createElement('div')
-      container.id = 'bewly'
-      const root = document.createElement('div')
-      const styleEl = document.createElement('link')
-      // Fix #69 https://github.com/hakadao/BewlyBewly/issues/69
-      // https://medium.com/@emilio_martinez/shadow-dom-open-vs-closed-1a8cf286088a - open shadow dom
-      const shadowDOM = container.attachShadow?.({ mode: 'open' }) || container
-      styleEl.setAttribute('rel', 'stylesheet')
-      styleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
-      shadowDOM.appendChild(styleEl)
-      shadowDOM.appendChild(root)
-      container.style.opacity = '0'
-      container.style.transition = 'opacity 0.5s'
-      styleEl.onload = () => {
-      // To prevent abrupt style transitions caused by sudden style changes
-        setTimeout(() => {
-          container.style.opacity = '1'
-        }, 500)
-      }
-
-      // inject svg icons
-      const svgDiv = document.createElement('div')
-      svgDiv.innerHTML = SVG_ICONS
-      shadowDOM.appendChild(svgDiv)
-
-      document.body.appendChild(container)
-
-      const app = createApp(App)
-      setupApp(app)
-      app.mount(root)
-
+      injectApp()
       resolve()
     })
   })
+}
+
+function injectApp() {
+  // mount component to context window
+  const container = document.createElement('div')
+  container.id = 'bewly'
+  const root = document.createElement('div')
+  const styleEl = document.createElement('link')
+  // Fix #69 https://github.com/hakadao/BewlyBewly/issues/69
+  // https://medium.com/@emilio_martinez/shadow-dom-open-vs-closed-1a8cf286088a - open shadow dom
+  const shadowDOM = container.attachShadow?.({ mode: 'open' }) || container
+  styleEl.setAttribute('rel', 'stylesheet')
+  styleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
+  shadowDOM.appendChild(styleEl)
+  shadowDOM.appendChild(root)
+  container.style.opacity = '0'
+  container.style.transition = 'opacity 0.5s'
+  styleEl.onload = () => {
+    // To prevent abrupt style transitions caused by sudden style changes
+    setTimeout(() => {
+      container.style.opacity = '1'
+    }, 500)
+  }
+
+  // inject svg icons
+  const svgDiv = document.createElement('div')
+  svgDiv.innerHTML = SVG_ICONS
+  shadowDOM.appendChild(svgDiv)
+
+  document.body.appendChild(container)
+
+  const app = createApp(App)
+  setupApp(app)
+  app.mount(root)
 }
