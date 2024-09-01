@@ -48,15 +48,15 @@ const dockPositions = computed(() => {
 const topBarLinkOpenModeOptions = computed(() => {
   return [
     {
-      label: 'current tab',
+      label: t('settings.topbar_link_open_mode_opt.current_tab'),
       value: 'currentTab',
     },
     {
-      label: 'current tab if not homepage',
+      label: t('settings.topbar_link_open_mode_opt.current_tab_if_not_homepage'),
       value: 'currentTabIfNotHomepage',
     },
     {
-      label: 'new tab',
+      label: t('settings.topbar_link_open_mode_opt.new_tab'),
       value: 'newTab',
     },
   ]
@@ -96,7 +96,7 @@ function handleToggleDockItem(dockItem: any) {
       <SettingsItem :title="$t('settings.use_old_topbar')">
         <Radio v-model="settings.useOldTopBar" />
       </SettingsItem>
-      <SettingsItem title="link open mode">
+      <SettingsItem :title="$t('settings.topbar_link_open_mode')">
         <Select v-model="settings.topBarLinkOpenMode" :options="topBarLinkOpenModeOptions" w="full" />
       </SettingsItem>
       <SettingsItem :title="$t('settings.auto_hide_topbar')">

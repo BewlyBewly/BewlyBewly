@@ -94,7 +94,14 @@ settings:
   block_ads: Block ads
   disable_frosted_glass: Disable frosted glass effect
   reduce_frosted_glass_blur: Reduce the intensity of the frosted glass blur
+
+  # Desktop & Dock
   use_old_topbar: Use the old top bar
+  topbar_link_open_mode: Link open mode
+  topbar_link_open_mode_opt:
+    current_tab: Current tab
+    current_tab_if_not_homepage: Current tab if not the homepage, otherwise new tab
+    new_tab: New tab
   auto_hide_topbar: Automatically hide the top bar
   topbar_icon_badges: Icon badges
   topbar_icon_badges_opt:
