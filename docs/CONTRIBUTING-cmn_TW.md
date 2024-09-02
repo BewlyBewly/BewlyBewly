@@ -10,7 +10,10 @@
 
 ### 開發（Chrome 或 Edge）
 
-#### Chrome 或 Edge 的第一種方法 （推薦）
+#### Chrome 或 Edge 的第一種方法
+
+<details>
+ <summary>詳細內容</summary>
 
 1. 執行 pnpm 指令
 
@@ -30,7 +33,12 @@ pnpm start:chromium
 
 2. 之後每次修改擴充功能，他都會重新載入內容，你可以透過重新整理頁面來查看變更內容
 
+</details>
+
 #### Chrome 或 Edge 的另外一種方法
+
+<details>
+ <summary>詳細內容</summary>
 
 1. 執行 pnpm 指令
 
@@ -54,6 +62,8 @@ pnpm dev
 
 每次修改後，您需要點選 [Extensions Reloader](https://chromewebstore.google.com/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) 按鈕，然後重新整理頁面，以確保更改生效。
 
+</details>
+
 #### 建置（Chrome 或 Edge）
 
 建置此擴充功能，需要執行以下指令
@@ -66,7 +76,10 @@ pnpm build
 
 ### 開發（Firefox）
 
-#### Firefox 的第一種方法 （推薦）
+#### Firefox 的第一種方法
+
+<details>
+ <summary>詳細內容</summary>
 
 1. 執行 pnpm 命令
 
@@ -86,7 +99,12 @@ pnpm start:firefox
 
 2. 之後每次修改擴充功能，它都會重新加載，你可以透過重新整理頁面來查看變更內容
 
+</details>
+
 #### Firefox 的另一種方法
+
+<details>
+ <summary>詳細內容</summary>
 
 1. 執行 pnpm 命令
 
@@ -103,6 +121,8 @@ pnpm dev
 <img width="655" alt="image" src="https://github.com/hakadao/BewlyBewly/assets/33394391/7c49e4ca-2a87-4c56-bc00-3259d6eba128">
 
 3. 然後在瀏覽器中使用 `extension-firefox/` 資料夾載入此擴充功能。
+
+</details>
 
 #### 構建（Firefox）
 
