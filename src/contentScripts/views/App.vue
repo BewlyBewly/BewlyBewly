@@ -43,17 +43,12 @@ const inIframe = computed((): boolean => {
 })
 
 const showBewlyPage = computed((): boolean => {
-  if (showIframeDrawer.value) {
-    return true
-  }
   if (inIframe.value) {
     return false
   }
-
-  nextTick(() => {
+  else {
     return isHomePage() && !inIframe.value && !settings.value.useOriginalBilibiliHomepage
-  })
-  return !inIframe.value
+  }
 })
 
 watch(
