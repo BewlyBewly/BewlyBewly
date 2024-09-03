@@ -46,11 +46,14 @@ const showBewlyPage = computed((): boolean => {
   if (showIframeDrawer.value) {
     return true
   }
+  if (inIframe.value) {
+    return true
+  }
   else {
     nextTick(() => {
       return isHomePage() && !inIframe.value && !settings.value.useOriginalBilibiliHomepage
     })
-    return true && !inIframe.value
+    return !inIframe.value
   }
 })
 
@@ -371,8 +374,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
     </div>
 
     <IframeDrawer
-      v-if="settings.videoCardOpenLinkMode === 'drawer'"
-      v-model="showIframeDrawer"
+      v-if="settings.videoCardOpenLinkMode === 'drawer' && showIframeDrawer"
       :url="iframeDrawerUrl"
       @close="showIframeDrawer = false"
     />

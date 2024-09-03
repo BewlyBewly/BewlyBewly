@@ -81,7 +81,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   language: '',
   enableGridLayoutSwitcher: true,
   enableHorizontalScrolling: false,
-  videoCardOpenLinkMode: 'drawer',
+  videoCardOpenLinkMode: 'newTab',
   enableVideoPreview: true,
   enableVideoCtrlBarOnVideoCard: false,
   hoverVideoCardDelayed: false,
