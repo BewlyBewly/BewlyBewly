@@ -47,14 +47,13 @@ const showBewlyPage = computed((): boolean => {
     return true
   }
   if (inIframe.value) {
-    return true
+    return false
   }
-  else {
-    nextTick(() => {
-      return isHomePage() && !inIframe.value && !settings.value.useOriginalBilibiliHomepage
-    })
-    return !inIframe.value
-  }
+
+  nextTick(() => {
+    return isHomePage() && !inIframe.value && !settings.value.useOriginalBilibiliHomepage
+  })
+  return !inIframe.value
 })
 
 watch(
