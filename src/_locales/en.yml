@@ -94,7 +94,14 @@ settings:
   block_ads: Block ads
   disable_frosted_glass: Disable frosted glass effect
   reduce_frosted_glass_blur: Reduce the intensity of the frosted glass blur
+
+  # Desktop & Dock
   use_old_topbar: Use the old top bar
+  topbar_link_open_mode: Link open mode
+  topbar_link_open_mode_opt:
+    current_tab: Current tab
+    current_tab_if_not_homepage: Current tab if not the homepage, otherwise new tab
+    new_tab: New tab
   auto_hide_topbar: Automatically hide the top bar
   topbar_icon_badges: Icon badges
   topbar_icon_badges_opt:
@@ -173,16 +180,16 @@ settings:
     Filtered out the videos that contain the titles you set (case-insensitive).
     Alternatively, use regex, such as <code>/abc&#124;\d+/</code>, wrapped in <code>/</code>.
     <br/>
-    In the table below, you can press the <code>Enter</code> key to add a new filter or confirm a modification.
-    Press the <code>Esc</code> key to cancel the modification.
+    In the table below, you can press the <kbd>Enter</kbd> key to add a new filter or confirm a modification.
+    Press the <kbd>Esc</kbd> key to cancel the modification.
     Double-click the column to edit the current column.
   filter_by_user: Filter by user
   filter_by_user_desc: |-
     Filtered out the videos that are uploaded by the username (full name, case-insensitive) or mid you set.
     Alternatively, use regex, such as <code>/abc&#124;\d+/</code>, wrapped in <code>/</code>.
     <br/>
-    In the table below, you can press the <code>Enter</code> key to add a new filter or confirm a modification.
-    Press the <code>Esc</code> key to cancel the modification.
+    In the table below, you can press the <kbd>Enter</kbd> key to add a new filter or confirm a modification.
+    Press the <kbd>Esc</kbd> key to cancel the modification.
     Double-click the column to edit the current column.
   filter_by_user_table:
     username_or_mid: Username / Mid
@@ -315,6 +322,7 @@ dock:
   settings: Settings
 home:
   not_interested: Not interested
+  not_interested_desc: You can use <kbd>↑</kbd> and <kbd>↓</kbd> to choose the reason, or using number keys to choose the reason directly, press <kbd>Enter</kbd> to confirm.
   tell_us_why: Choose a reason why
   video_removed: Video removed
   for_you: For you

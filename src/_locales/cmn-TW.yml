@@ -94,7 +94,14 @@ settings:
   block_ads: 封鎖廣告
   disable_frosted_glass: 停用毛玻璃效果
   reduce_frosted_glass_blur: 降低毛玻璃模糊強度
+
+  # Desktop and Dock
   use_old_topbar: 使用舊版頂欄
+  topbar_link_open_mode: 頂欄連結開啟模式
+  topbar_link_open_mode_opt:
+    current_tab: 目前索引標籤
+    current_tab_if_not_homepage: 不在首頁則在目前索引標籤開啟，否則在新索引標籤
+    new_tab: 新索引標籤
   auto_hide_topbar: 自動隱藏頂欄
   topbar_icon_badges: 圖示標記樣式
   topbar_icon_badges_opt:
@@ -172,15 +179,15 @@ settings:
   filter_by_title_desc: |-
     按標題篩選掉包含您設定的字串的影片（不區分大小寫），或使用正規表示式，如 <code>/abc&#124;\d+/</code>，用 <code>/</code> 包裡。
     <br/>
-    在下面的表格中，您可以按 <code>Enter</code> 鍵新增新的篩選條件或確認變更。
-    按 <code>Esc</code> 鍵取消變更。
+    在下面的表格中，您可以按 <kbd>Enter</kbd> 鍵新增新的篩選條件或確認變更。
+    按 <kbd>Esc</kbd> 鍵取消變更。
     按兩下欄位以編輯目前欄位。
   filter_by_user: 按使用者篩選
   filter_by_user_desc: |-
     篩選掉包含您設定的使用者名稱（全名，不區分大小寫）或 mid 所上傳的影片，或使用正規表示式，如 <code>/abc&#124;\d+/</code>，用 <code>/</code> 包裡。
     <br/>
-    在下面的表格中，您可以按 <code>Enter</code> 鍵建立新的篩選條件或確認變更。
-    按 <code>Esc</code> 鍵取消變更。
+    在下面的表格中，您可以按 <kbd>Enter</kbd> 鍵建立新的篩選條件或確認變更。
+    按 <kbd>Esc</kbd> 鍵取消變更。
     按兩下欄位以編輯目前欄位。
   filter_by_user_table:
     username_or_mid: 使用者名稱 / Mid
@@ -313,6 +320,7 @@ dock:
   settings: 設定
 home:
   not_interested: 不感興趣
+  not_interested_desc: 你可以用 <kbd>↑</kbd> 和 <kbd>↓</kbd> 來選擇原因，或者直接使用數字鍵來選擇原因，按 <kbd>Enter</kbd> 就直接提交。
   tell_us_why: 為什麼這樣做...
   video_removed: 影片已移除
   for_you: 為你推薦

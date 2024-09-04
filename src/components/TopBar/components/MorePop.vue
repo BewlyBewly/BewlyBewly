@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 
-import { getUserID, isHomePage } from '~/utils/main'
+import { getUserID } from '~/utils/main'
+
+import ALink from './ALink.vue'
 
 const { t } = useI18n()
 
@@ -25,11 +27,10 @@ const list = computed((): { name: string, url: string, icon: string }[] => [
     rounded="$bew-radius"
     flex="~ col"
   >
-    <a
+    <ALink
       v-for="item in list"
       :key="item.name"
       :href="item.url"
-      :target="isHomePage() ? '_blank' : '_self'"
       pos="relative"
       p="x-4 y-2"
       bg="hover:$bew-fill-2"
@@ -41,6 +42,6 @@ const list = computed((): { name: string, url: string, icon: string }[] => [
     >
       <i :class="item.icon" class="mr-4" />
       <span class="flex-1">{{ item.name }}</span>
-    </a>
+    </ALink>
   </div>
 </template>

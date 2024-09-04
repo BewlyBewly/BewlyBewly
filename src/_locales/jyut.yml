@@ -94,7 +94,14 @@ settings:
   block_ads: 封鎖廣告
   disable_frosted_glass: 閂咗毛玻璃效果
   reduce_frosted_glass_blur: 降低毛玻璃模糊強度
+
+  # Desktop and Dock
   use_old_topbar: 用返舊版頂部欄
+  topbar_link_open_mode: 頂部欄連結開啟模式
+  topbar_link_open_mode_opt:
+    current_tab: 目前分頁
+    current_tab_if_not_homepage: 唔喺主頁就喺目前分頁度開啓，否則開新嘅分頁
+    new_tab: 新開分頁
   auto_hide_topbar: 自動收埋頂部欄
   topbar_icon_badges: 圖示邊位標記
   topbar_icon_badges_opt:
@@ -172,15 +179,15 @@ settings:
   filter_by_title_desc: |-
     避開啲標題係你指定嘅字嘅片（唔理大細楷），抑或用正則表達式，好似 <code>/abc&#124;\d+/</code> 噉，用兩個 <code>/</code> 包住。
     <br/>
-    喺下低個表度，撳 <code>Enter</code> 就可以加新嘅篩選條件，抑或確定你上先改咗嘅嘢。
-    撳 <code>Esc</code> 就取消你改咗嘅嘢。
+    喺下低個表度，撳 <kbd>Enter</kbd> 就可以加新嘅篩選條件，抑或確定你上先改咗嘅嘢。
+    撳 <kbd>Esc</kbd> 就取消你改咗嘅嘢。
     撳兩吓欄位就可以改返入邊嘅嘢。
   filter_by_user: 根據用戶篩選
   filter_by_user_desc: |-
     避開啲 po 片嗰位係你指定嘅用戶名（全名，唔理大細楷）抑或 mid 嘅片，抑或用正則表達式，好似 <code>/abc&#124;\d+/</code> 噉，用兩個 <code>/</code> 包住。
     <br/>
-    喺下低個表度，撳 <code>Enter</code> 就可以加新嘅篩選條件，抑或確定你上先改咗嘅嘢。
-    撳 <code>Esc</code> 就取消你改咗嘅嘢。
+    喺下低個表度，撳 <kbd>Enter</kbd> 就可以加新嘅篩選條件，抑或確定你上先改咗嘅嘢。
+    撳 <kbd>Esc</kbd> 就取消你改咗嘅嘢。
     撳兩吓欄位就可以改返入邊嘅嘢。
   filter_by_user_table:
     username_or_mid: 用戶名 / Mid
@@ -313,6 +320,7 @@ dock:
   settings: 設定
 home:
   not_interested: 唔鍾意
+  not_interested_desc: 你可以用 <kbd>↑</kbd> 同 <kbd>↓</kbd> 嚟揀個理由，抑或用數字鍵嚟直接揀理由，撳 <kbd>Enter</kbd> 就直接提交。
   tell_us_why: 點解噉做...
   video_removed: 已經鏟咗條片
   for_you: 估你心水
