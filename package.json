@@ -1,12 +1,12 @@
 {
   "name": "bewly-bewly",
-  "displayName": "BewlyBewly",
+  "displayName": "BewlyBewly-Beta",
   "type": "module",
-  "version": "0.29.0",
+  "version": "0.29.01",
   "private": true,
   "packageManager": "pnpm@9.5.0",
   "description": "Just make a few small changes to your Bilibili homepage.",
-  "homepage": "https://github.com/hakadao/BewlyBewly",
+  "homepage": "https://github.com/hakadao/BewlyBewly-Beta",
   "scripts": {
     "dev": "npm run clear && cross-env NODE_ENV=development run-p dev:*",
     "dev-firefox": "npm run clear-firefox && cross-env NODE_ENV=development FIREFOX=true run-p dev:*",
