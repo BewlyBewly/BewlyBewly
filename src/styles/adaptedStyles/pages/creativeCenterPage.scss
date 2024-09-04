@@ -16,12 +16,17 @@
     .article-card.v2 .cover-wrp .duration,
     .bmc-video-card .video-preview__duration,
     .setting .watermark-setting .watermark-wrp .watermark-position-wrp,
-    .chief-recommend-module .carousel-box .carousel-module .panel .title {
+    .chief-recommend-module .carousel-box .carousel-module .panel .title,
+    micro-app[name="video-up"] .cover-editor-panel-image,
+    micro-app[name="video-up"] .cover-upload-mask-btn,
+    micro-app[name="video-up"] .color-picker-color .list,
+    micro-app[name="video-up"] .tool-bar-text .btn-color {
       filter: var(--bew-filter-force-dark);
     }
 
     .nav-item.message iframe,
-    .setting .watermark-setting .watermark-wrp .watermark-position-wrp .preview-img {
+    .setting .watermark-setting .watermark-wrp .watermark-position-wrp .preview-img,
+    micro-app[name="video-up"] .cover-editor-sidebar-item-icon {
       filter: none !important;
     }
 
