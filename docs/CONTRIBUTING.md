@@ -10,7 +10,10 @@ This project is built using [Vite](https://vitejs.dev/), please make sure you ha
 
 ### Development (Chrome or Edge)
 
-#### The First Method for Chrome or Edge (RECOMMENDED)
+#### The First Method for Chrome or Edge
+
+<details>
+ <summary>Show more</summary>
 
 1. Run the pnpm command
 
@@ -30,7 +33,12 @@ pnpm start:chromium
 
 2. Every time you change the extension, it will reload, and you can see the changes by refreshing the webpage
 
+</details>
+
 #### The Alternative Method for Chrome or Edge
+
+<details>
+ <summary>Show more</summary>
 
 1. Run the pnpm command
 
@@ -54,6 +62,8 @@ pnpm dev
 
 After each modification, you need to click the [Reload Extensions](https://chromewebstore.google.com/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) button and refresh the page to apply the changes.
 
+</details>
+
 #### Building (Chrome or Edge)
 
 To build the extension, run
@@ -66,7 +76,10 @@ Then package it to the `extension` folder
 
 ### Development (Firefox)
 
-#### The First Method for Firefox (RECOMMENDED)
+#### The First Method for Firefox
+
+<details>
+ <summary>Show more</summary>
 
 1. Run the pnpm command
 
@@ -86,7 +99,12 @@ pnpm start:firefox
 
 2. Every time you change the extension, it will reload, and you can see the changes by refreshing the webpage
 
+</details>
+
 #### The Alternative Method for Firefox
+
+<details>
+ <summary>Show more</summary>
 
 1. Run the pnpm command
 
@@ -103,6 +121,8 @@ pnpm dev
 <img width="655" alt="image" src="https://github.com/hakadao/BewlyBewly/assets/33394391/7c49e4ca-2a87-4c56-bc00-3259d6eba128">
 
 3. Load the generated `extension-firefox/` folder in the browser
+
+</details>
 
 #### Building (Firefox)
 
