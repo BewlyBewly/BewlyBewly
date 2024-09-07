@@ -40,6 +40,10 @@ common:
     remark: Remark
     operations: Operations
 
+iframe_drawer:
+  open_in_new_tab: Open in new tab
+  close: Close
+
 settings:
   title: Settings
 

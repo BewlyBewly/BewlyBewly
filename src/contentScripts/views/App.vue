@@ -259,7 +259,7 @@ function handleReduceFrostedGlassBlur() {
   }
 }
 
-function openIframeDrawer(url: string, _title: string = '') {
+function openIframeDrawer(url: string) {
   iframeDrawerUrl.value = url
   showIframeDrawer.value = true
 }
@@ -368,7 +368,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
     </div>
 
     <IframeDrawer
-      v-if="settings.videoCardOpenLinkMode === 'drawer' && showIframeDrawer"
+      v-if="settings.videoCardLinkOpenMode === 'drawer' && showIframeDrawer"
       :url="iframeDrawerUrl"
       @close="showIframeDrawer = false"
     />

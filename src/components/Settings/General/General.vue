@@ -86,9 +86,9 @@ watch(() => settings.value.language, (newValue) => {
     </SettingsItemGroup>
 
     <SettingsItemGroup :title="$t('settings.group_video_card')">
-      <SettingsItem title="Video card open link mode">
+      <SettingsItem title="Video card and bangumi card link opening behavior">
         <Select
-          v-model="settings.videoCardOpenLinkMode"
+          v-model="settings.videoCardLinkOpenMode"
           :options="videoCardOpenModeOptions"
           w="full"
         />

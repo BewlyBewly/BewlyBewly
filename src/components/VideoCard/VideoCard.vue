@@ -189,13 +189,10 @@ function handelMouseLeave() {
 }
 
 function handleClick(event: MouseEvent) {
-  if (settings.value.videoCardOpenLinkMode === 'drawer' && videoUrl.value) {
+  if (settings.value.videoCardLinkOpenMode === 'drawer' && videoUrl.value) {
     event.preventDefault()
 
-    openIframeDrawer(
-      videoUrl.value,
-      props.video?.title || '',
-    )
+    openIframeDrawer(videoUrl.value)
   }
 }
 
