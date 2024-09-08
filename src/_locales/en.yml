@@ -97,7 +97,7 @@ settings:
   video_card_link_opening_behavior_opt:
     drawer: Open in drawer
     new_tab: New tab
-  enable_video_preview: Enable video preview feature
+  enable_video_preview: Enable video preview feature (if possible)
   enable_video_ctrl_bar_on_video_card: Display the video control bar on the video card
   hover_video_card_delayed: Delayed video preview on hover over the video card
   block_ads: Block ads

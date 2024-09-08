@@ -97,7 +97,7 @@ settings:
   video_card_link_opening_behavior_opt:
     drawer: 抽屉打开
     new_tab: 新索引标籤
-  enable_video_preview: 启用视频预览功能
+  enable_video_preview: 启用视频预览功能（如果可以的话）
   enable_video_ctrl_bar_on_video_card: 在视频卡片上显示视频控制栏
   hover_video_card_delayed: 将鼠标悬停在视频卡片上时延迟视频预览
   block_ads: 屏蔽广告
