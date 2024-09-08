@@ -321,7 +321,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
         @refresh="handleThrottledPageRefresh"
         @back-to-top="handleThrottledBackToTop"
       />
-      <RightSideButtons
+      <SideBar
         v-else
         pointer-events-auto
         @settings-visibility-change="toggleSettings"

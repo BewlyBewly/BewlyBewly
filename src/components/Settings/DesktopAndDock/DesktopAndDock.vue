@@ -31,15 +31,15 @@ const topBarIconBadgesOptions = computed(() => {
 const dockPositions = computed(() => {
   return [
     {
-      label: t('settings.dock_position_opt.left'),
+      label: t('common.position.left'),
       value: 'left',
     },
     {
-      label: t('settings.dock_position_opt.right'),
+      label: t('common.position.right'),
       value: 'right',
     },
     {
-      label: t('settings.dock_position_opt.bottom'),
+      label: t('common.position.bottom'),
       value: 'bottom',
     },
   ]
@@ -70,6 +70,19 @@ const pageOptions = computed((): { label: string, icon: string, value: string }[
       value: e.page,
     }
   })
+})
+
+const sidebarPositions = computed(() => {
+  return [
+    {
+      label: t('common.position.left'),
+      value: 'left',
+    },
+    {
+      label: t('common.position.right'),
+      value: 'right',
+    },
+  ]
 })
 
 function resetDockContent() {
@@ -159,6 +172,14 @@ function handleToggleDockItem(dockItem: any) {
       </SettingsItem>
       <SettingsItem :title="$t('settings.move_back_to_top_and_refresh_to_dock')">
         <Radio v-model="settings.moveBackToTopOrRefreshButtonToDock" />
+      </SettingsItem>
+    </SettingsItemGroup>
+    <SettingsItemGroup :title="$t('settings.group_sidebar')" :desc="$t('settings.group_sidebar_desc')">
+      <SettingsItem :title="$t('settings.sidebar_position')">
+        <Select v-model="settings.sidebarPosition" :options="sidebarPositions" w="full" />
+      </SettingsItem>
+      <SettingsItem :title="$t('settings.auto_hide_sidebar')">
+        <Radio v-model="settings.autoHideSidebar" />
       </SettingsItem>
     </SettingsItemGroup>
   </div>

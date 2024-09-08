@@ -40,6 +40,12 @@ common:
     remark: 备注
     operations: 操作
 
+  position:
+    left: 左侧
+    right: 右侧
+    top: 顶部
+    bottom: 底部
+
 iframe_drawer:
   open_in_new_tab: 在新标签页打开
   close: 关闭
@@ -62,6 +68,8 @@ settings:
   group_performance: 毛玻璃和性能
   group_topbar: 顶栏
   group_dock: Dock 栏
+  group_sidebar: 侧边栏
+  group_sidebar_desc: 位于主页以外的页面右侧或左侧，通常有亮/暗模式切换按钮和设置按钮。
   group_color: 颜色
   group_wallpaper: 背景图片
   group_logo: LOGO
@@ -122,15 +130,13 @@ settings:
     none: 不显示
   dock_position: Dock 栏位置
   dock_position_desc: 在屏幕中摆放位置。
-  dock_position_opt:
-    left: 左侧
-    right: 右侧
-    bottom: 底部
   auto_hide_dock: 自动隐藏 Dock 栏
   dock_content_adjustment: Dock 内容调整
   dock_content_adjustment_desc: 第一个激活的 Dock 项的页面将会是启动页面。
   disable_light_dark_mode_switcher: 禁用亮/暗色模式切换按钮
   move_back_to_top_and_refresh_to_dock: 将返回顶部和刷新按钮移动到 Dock 栏
+  sidebar_position: 侧边栏位置
+  auto_hide_sidebar: 自动隐藏侧边栏
 
   # Appearance
   theme: 主题
