@@ -143,7 +143,7 @@ function setCurrentTitle() {
             <a
               cursor-pointer w="40px group-hover:180px" h-40px
               rounded-30px flex items-center overflow-x-hidden
-              duration-300 bg="group-hover:$bew-fill-2"
+              duration-300 bg="hover:$bew-fill-2"
               :class="{ 'menu-item-activated': menuItem.value === activatedMenuItem }"
               @click="changeMenuItem(menuItem.value)"
             >
