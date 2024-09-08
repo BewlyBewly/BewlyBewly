@@ -10,6 +10,7 @@ export const accessKey = useStorageLocal('accessKey', '')
 
 export interface Settings {
   language: string
+  touchScreenOptimization: boolean
   enableGridLayoutSwitcher: boolean
   enableHorizontalScrolling: boolean
 
@@ -83,6 +84,7 @@ export interface Settings {
 }
 export const settings = useStorageLocal('settings', ref<Settings>({
   language: '',
+  touchScreenOptimization: false,
   enableGridLayoutSwitcher: true,
   enableHorizontalScrolling: false,
 

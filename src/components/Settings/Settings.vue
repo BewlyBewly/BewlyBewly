@@ -126,7 +126,7 @@ function setCurrentTitle() {
       flex justify-between items-center
     >
       <aside
-        class="group"
+        :class="{ group: !settings.touchScreenOptimization }"
         shrink-0 p="x-4" pos="absolute left--84px" z-2
       >
         <ul
@@ -134,8 +134,8 @@ function setCurrentTitle() {
             --un-shadow: var(--bew-shadow-4), var(--bew-shadow-edge-glow-2);
             backdrop-filter: var(--bew-filter-glass-2);
           "
-          flex="~ gap-2 col" rounded="30px hover:25px" p-2 shadow
-          bg="$bew-content-alt hover:$bew-elevated dark:$bew-elevated dark-hover:$bew-elevated"
+          flex="~ gap-2 col" rounded="30px group-hover:25px" p-2 shadow
+          bg="$bew-content-alt group-hover:$bew-elevated dark:$bew-elevated dark-group-hover:$bew-elevated"
           scale="group-hover:105" duration-300 overflow-hidden antialiased transform-gpu
           border="1 $bew-border-color"
         >
@@ -143,7 +143,7 @@ function setCurrentTitle() {
             <a
               cursor-pointer w="40px group-hover:180px" h-40px
               rounded-30px flex items-center overflow-x-hidden
-              duration-300 bg="hover:$bew-fill-2"
+              duration-300 bg="group-hover:$bew-fill-2"
               :class="{ 'menu-item-activated': menuItem.value === activatedMenuItem }"
               @click="changeMenuItem(menuItem.value)"
             >

@@ -58,6 +58,10 @@ watch(() => settings.value.language, (newValue) => {
         />
       </SettingsItem>
 
+      <SettingsItem :title="$t('settings.touch_screen_optimization')" :desc="$t('settings.touch_screen_optimization_desc')">
+        <Radio v-model="settings.touchScreenOptimization" />
+      </SettingsItem>
+
       <SettingsItem :title="$t('settings.enable_grid_layout_switcher')">
         <Radio v-model="settings.enableGridLayoutSwitcher" />
       </SettingsItem>

@@ -1,3 +1,6 @@
+import { settings } from '~/logic'
+
+// DISABLED WHEN IN TOUCHSCREEN OPTIMIZATION IS ENABLED IN SETTINGS
 export function useDelayedHover({ enterDelay = 250, leaveDelay = 310, beforeEnter, enter, beforeLeave, leave }:
 { enterDelay?: number, leaveDelay?: number, beforeEnter?: Function, enter: Function, beforeLeave?: Function, leave: Function }) {
   const el = ref<HTMLElement>()
@@ -40,8 +43,10 @@ export function useDelayedHover({ enterDelay = 250, leaveDelay = 310, beforeEnte
 
   watch(el, (el, _, onCleanup) => {
     if (el) {
-      el.addEventListener('mouseenter', handleMouseEnter)
-      el.addEventListener('mouseleave', handleMouseLeave)
+      if (!settings.value.touchScreenOptimization) {
+        el.addEventListener('mouseenter', handleMouseEnter)
+        el.addEventListener('mouseleave', handleMouseLeave)
+      }
     }
 
     onCleanup(() => {
@@ -51,6 +56,17 @@ export function useDelayedHover({ enterDelay = 250, leaveDelay = 310, beforeEnte
       }
     })
   }, { flush: 'post' })
+
+  watch(() => settings.value.touchScreenOptimization, (newValue) => {
+    if (newValue) {
+      el.value?.removeEventListener('mouseenter', handleMouseEnter)
+      el.value?.removeEventListener('mouseleave', handleMouseLeave)
+    }
+    else {
+      el.value?.addEventListener('mouseenter', handleMouseEnter)
+      el.value?.addEventListener('mouseleave', handleMouseLeave)
+    }
+  }, { immediate: true })
 
   return el
 }
