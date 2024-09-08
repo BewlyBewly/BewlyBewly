@@ -92,6 +92,11 @@ settings:
   enable_grid_layout_switcher: 启用页面网格布局切换器
   enable_horizontal_scrolling: 启用横向滚动
   enable_horizontal_scrolling_desc: 启用后，鼠标滚动时将直接滚动横向滚动列表。
+
+  video_card_link_opening_behavior: 视频卡片和番剧卡片链接打开行为
+  video_card_link_opening_behavior_opt:
+    drawer: 抽屉打开
+    new_tab: 新索引标籤
   enable_video_preview: 启用视频预览功能
   enable_video_ctrl_bar_on_video_card: 在视频卡片上显示视频控制栏
   hover_video_card_delayed: 将鼠标悬停在视频卡片上时延迟视频预览

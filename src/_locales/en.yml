@@ -92,6 +92,11 @@ settings:
   enable_grid_layout_switcher: Enable grid layout switcher
   enable_horizontal_scrolling: Enable horizontal scrolling
   enable_horizontal_scrolling_desc: After enabling, mouse scrolling will directly scroll the horizontal scroll list.
+
+  video_card_link_opening_behavior: Video card and bangumi card link opening behavior
+  video_card_link_opening_behavior_opt:
+    drawer: Open in drawer
+    new_tab: New tab
   enable_video_preview: Enable video preview feature
   enable_video_ctrl_bar_on_video_card: Display the video control bar on the video card
   hover_video_card_delayed: Delayed video preview on hover over the video card

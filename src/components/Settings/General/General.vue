@@ -32,12 +32,12 @@ const langOptions = computed(() => {
 const videoCardOpenModeOptions = computed(() => {
   return [
     {
-      label: 'Drawer',
+      label: t('settings.video_card_link_opening_behavior_opt.drawer'),
       value: 'drawer',
     },
     {
-      label: 'New Tab',
-      value: 'newTab',
+      label: t('settings.video_card_link_opening_behavior_opt.new_tab'),
+      value: 'new_tab',
     },
   ]
 })
@@ -86,7 +86,7 @@ watch(() => settings.value.language, (newValue) => {
     </SettingsItemGroup>
 
     <SettingsItemGroup :title="$t('settings.group_video_card')">
-      <SettingsItem title="Video card and bangumi card link opening behavior">
+      <SettingsItem :title="$t('settings.video_card_link_opening_behavior')">
         <Select
           v-model="settings.videoCardLinkOpenMode"
           :options="videoCardOpenModeOptions"
