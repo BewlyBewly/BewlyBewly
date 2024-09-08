@@ -40,6 +40,10 @@ common:
     remark: 備註
     operations: 操作
 
+iframe_drawer:
+  open_in_new_tab: 喺新嘅分頁度打開連結
+  close: 關閉
+
 settings:
   title: 設定
 
@@ -88,6 +92,11 @@ settings:
   enable_grid_layout_switcher: 使用版面格線佈局切換器
   enable_horizontal_scrolling: 使用橫向捲動
   enable_horizontal_scrolling_desc: 用咗之後，轆緊滑鼠就可以直接打橫掃水平捲軸列表。
+
+  video_card_link_opening_behavior: 影片同番劇卡片連結開啓行爲
+  video_card_link_opening_behavior_opt:
+    drawer: 喺櫃桶度開啓
+    new_tab: 新開分頁
   enable_video_preview: 使用影片預覽功能
   enable_video_ctrl_bar_on_video_card: 喺影片卡片上顯示影片控制欄
   hover_video_card_delayed: 滑鼠停留喺影片卡片嗰陣遲啲進行影片預覽

@@ -40,6 +40,10 @@ common:
     remark: 備註
     operations: 操作
 
+iframe_drawer:
+  open_in_new_tab: 在新索引標籤開啟連結
+  close: 關閉
+
 settings:
   title: 設定
 
@@ -88,6 +92,11 @@ settings:
   enable_grid_layout_switcher: 啟用版面格線佈局切換器
   enable_horizontal_scrolling: 啟用橫向捲動
   enable_horizontal_scrolling_desc: 啟用後，滑鼠捲動時將直接捲動橫向捲軸列表。
+
+  video_card_link_opening_behavior: 影片和番劇卡片連結開啟行為
+  video_card_link_opening_behavior_opt:
+    drawer: 抽屜開啟
+    new_tab: 新索引標籤
   enable_video_preview: 啟用影片預覽功能
   enable_video_ctrl_bar_on_video_card: 在影片卡片上顯示影片控制欄
   hover_video_card_delayed: 將滑鼠懸停在影片卡片上時延遲影片預覽

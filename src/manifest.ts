@@ -65,6 +65,7 @@ export async function getManifest() {
         css: ['./dist/contentScripts/style.css'],
         run_at: 'document_start',
         match_about_blank: true,
+        all_frames: true,
       },
     ],
     web_accessible_resources: [
