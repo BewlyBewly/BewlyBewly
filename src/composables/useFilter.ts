@@ -1,8 +1,10 @@
 import { settings } from '~/logic'
+import { isVerticalVideo } from '~/utils/uriParse'
 
 const get = (obj: any, path: string[]) => path.reduce((acc, part) => acc && acc[part], obj)
 
 export enum FilterType {
+  filterOutVerticalVideos,
   viewCount,
   viewCountStr,
   duration,
@@ -19,6 +21,11 @@ type FuncMap = { [key in FilterType]: {
 type KeyPath = Array<string>[]
 
 export function useFilter(isFollowedKeyPath: string[], filterOpt: FilterType[], keyList: KeyPath) {
+  function filterOutVerticalVideos(item: any, keyPath: string[], _filterValue: number) {
+    const value = get(item, keyPath)
+    return !isVerticalVideo(value)
+  }
+
   /**
    * Compares a number value in an object with a filter value.
    * Return `true` if the number value is greater than the filter value, `false` otherwise.
@@ -107,6 +114,11 @@ export function useFilter(isFollowedKeyPath: string[], filterOpt: FilterType[], 
   // #endregion
 
   const funcMap: FuncMap = {
+    [FilterType.filterOutVerticalVideos]: {
+      func: filterOutVerticalVideos,
+      enabledKey: 'filterOutVerticalVideos',
+      valueKey: '',
+    },
     [FilterType.viewCount]: {
       func: compareNumber,
       enabledKey: 'enableFilterByViewCount',
@@ -137,6 +149,7 @@ export function useFilter(isFollowedKeyPath: string[], filterOpt: FilterType[], 
   const filter = ref<Function | null>(null)
 
   watch(() => [
+    settings.value.filterOutVerticalVideos,
     settings.value.enableFilterByDuration,
     settings.value.enableFilterByViewCount,
     settings.value.enableFilterByTitle,
@@ -145,8 +158,8 @@ export function useFilter(isFollowedKeyPath: string[], filterOpt: FilterType[], 
     settings.value.filterByViewCount,
     settings.value.filterByTitle,
     settings.value.filterByUser,
-  ], ([durationFilter, viewCountFilter, titleFilter, userFilter]) => {
-    if (!durationFilter && !viewCountFilter && !titleFilter && !userFilter) {
+  ], ([filterOutVerticalVideos, durationFilter, viewCountFilter, titleFilter, userFilter]) => {
+    if (!filterOutVerticalVideos && !durationFilter && !viewCountFilter && !titleFilter && !userFilter) {
       filter.value = null
       return
     }

@@ -177,6 +177,7 @@ settings:
   disable_filters_for_followed_users: 正在跟隨的使用者不受過濾條件限制
   disable_filters_for_followed_users_desc: >
     如果啟用此選項，正在跟隨的使用者不受過濾條件限制。
+  filter_out_vertical_videos: 過濾直式影片（僅在 app 推薦模式下有效）
   filter_by_view_count: 按觀看次數篩選
   filter_by_view_count_desc: 篩選掉觀看次數少於您設定的影片。
   filter_by_view_count_unit: 次

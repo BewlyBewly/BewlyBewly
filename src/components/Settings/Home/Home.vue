@@ -211,6 +211,9 @@ function handleToggleHomeTab(tab: any) {
       <SettingsItem :title="$t('settings.disable_filters_for_followed_users')" :desc="$t('settings.disable_filters_for_followed_users_desc')">
         <Radio v-model="settings.disableFilterForFollowedUser" />
       </SettingsItem>
+      <SettingsItem :title="$t('settings.filter_out_vertical_videos')">
+        <Radio v-model="settings.filterOutVerticalVideos" />
+      </SettingsItem>
       <SettingsItem :title="$t('settings.filter_by_view_count')" :desc="$t('settings.filter_by_view_count_desc')">
         <div flex="~ justify-end" w-full>
           <Input

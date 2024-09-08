@@ -61,6 +61,7 @@ export interface Settings {
 
   // filter setting
   disableFilterForFollowedUser: boolean
+  filterOutVerticalVideos: boolean
   enableFilterByViewCount: boolean
   filterByViewCount: number
   enableFilterByDuration: boolean
@@ -133,6 +134,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
 
   // filter setting
   disableFilterForFollowedUser: false,
+  filterOutVerticalVideos: false,
   enableFilterByViewCount: false,
   filterByViewCount: 10000,
   enableFilterByDuration: false,

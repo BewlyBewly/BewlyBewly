@@ -176,6 +176,7 @@ settings:
   disable_filters_for_followed_users: 关注的用户不受过滤条件限制
   disable_filters_for_followed_users_desc: >
     如果启用此选项，您关注的用户不受过滤条件限制。
+  filter_out_vertical_videos: 过滤竖屏视频（仅在 app 推荐模式下有效）
   filter_by_view_count: 按播放数筛选
   filter_by_view_count_desc: 筛选掉播放数小于您设置的视频。
   filter_by_view_count_unit: 次

@@ -33,8 +33,8 @@ const filterFunc = useFilter(
 )
 const appFilterFunc = useFilter(
   ['bottom_rcmd_reason'],
-  [FilterType.duration, FilterType.viewCountStr, FilterType.title, FilterType.user, FilterType.user],
-  [['player_args', 'duration'], ['cover_left_text_1'], ['title'], ['mask', 'avatar', 'text'], ['mask', 'avatar', 'up_id']],
+  [FilterType.filterOutVerticalVideos, FilterType.duration, FilterType.viewCountStr, FilterType.title, FilterType.user, FilterType.user],
+  [['uri'], ['player_args', 'duration'], ['cover_left_text_1'], ['title'], ['mask', 'avatar', 'text'], ['mask', 'avatar', 'up_id']],
 )
 
 const { t } = useI18n()

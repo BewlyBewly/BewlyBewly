@@ -177,6 +177,7 @@ settings:
   disable_filters_for_followed_users: Disable filters for followed users
   disable_filters_for_followed_users_desc: >
     If you enable this option, all filters you set will be disabled for the users you follow.
+  filter_out_vertical_videos: Filter out vertical videos (only works on the app recommendation mode)
   filter_by_view_count: Filter by view count
   filter_by_view_count_desc: Filtered out videos with less than the view count you set.
   filter_by_view_count_unit: views
