@@ -81,13 +81,16 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   language: '',
   enableGridLayoutSwitcher: true,
   enableHorizontalScrolling: false,
+
+  disableFrostedGlass: true,
+  reduceFrostedGlassBlur: false,
+
+  blockAds: false,
+
   videoCardLinkOpenMode: 'newTab',
   enableVideoPreview: true,
   enableVideoCtrlBarOnVideoCard: false,
   hoverVideoCardDelayed: false,
-  blockAds: false,
-  disableFrostedGlass: true,
-  reduceFrostedGlassBlur: false,
 
   // Desktop & Dock
   useOldTopBar: false,
