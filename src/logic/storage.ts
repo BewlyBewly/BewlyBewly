@@ -12,13 +12,16 @@ export interface Settings {
   language: string
   enableGridLayoutSwitcher: boolean
   enableHorizontalScrolling: boolean
+
+  disableFrostedGlass: boolean
+  reduceFrostedGlassBlur: boolean
+
+  blockAds: boolean
+
   videoCardLinkOpenMode: 'drawer' | 'newTab'
   enableVideoPreview: boolean
   enableVideoCtrlBarOnVideoCard: boolean
   hoverVideoCardDelayed: boolean
-  blockAds: boolean
-  disableFrostedGlass: boolean
-  reduceFrostedGlassBlur: boolean
 
   // Desktop & Dock
   useOldTopBar: boolean
