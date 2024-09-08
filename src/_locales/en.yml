@@ -105,15 +105,15 @@ settings:
   reduce_frosted_glass_blur: Reduce the intensity of the frosted glass blur
 
   # Desktop & Dock
-  use_old_topbar: Use the old top bar
-  topbar_link_open_mode: Link open mode
-  topbar_link_open_mode_opt:
+  use_old_top_bar: Use the old top bar
+  top_bar_link_opening_behavior: Top bar link opening behavior
+  top_bar_link_opening_behavior_opt:
     current_tab: Current tab
     current_tab_if_not_homepage: Current tab if not the homepage, otherwise new tab
     new_tab: New tab
-  auto_hide_topbar: Automatically hide the top bar
-  topbar_icon_badges: Icon badges
-  topbar_icon_badges_opt:
+  auto_hide_top_bar: Automatically hide the top bar
+  top_bar_icon_badges: Icon badges
+  top_bar_icon_badges_opt:
     number: Number
     dot: Dot
     none: Do not show

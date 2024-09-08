@@ -105,15 +105,15 @@ settings:
   reduce_frosted_glass_blur: 降低毛玻璃模糊強度
 
   # Desktop and Dock
-  use_old_topbar: 使用舊版頂欄
-  topbar_link_open_mode: 頂欄連結開啟模式
-  topbar_link_open_mode_opt:
+  use_old_top_bar: 使用舊版頂欄
+  top_bar_link_opening_behavior: 頂欄連結開啟行為
+  top_bar_link_opening_behavior_opt:
     current_tab: 目前索引標籤
     current_tab_if_not_homepage: 不在首頁則在目前索引標籤開啟，否則在新索引標籤
     new_tab: 新索引標籤
-  auto_hide_topbar: 自動隱藏頂欄
-  topbar_icon_badges: 圖示標記樣式
-  topbar_icon_badges_opt:
+  auto_hide_top_bar: 自動隱藏頂欄
+  top_bar_icon_badges: 圖示標記樣式
+  top_bar_icon_badges_opt:
     number: 數字
     dot: 圓點
     none: 不顯示

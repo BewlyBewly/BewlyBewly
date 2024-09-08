@@ -14,15 +14,15 @@ const mainStore = useMainStore()
 const topBarIconBadgesOptions = computed(() => {
   return [
     {
-      label: t('settings.topbar_icon_badges_opt.number'),
+      label: t('settings.top_bar_icon_badges_opt.number'),
       value: 'number',
     },
     {
-      label: t('settings.topbar_icon_badges_opt.dot'),
+      label: t('settings.top_bar_icon_badges_opt.dot'),
       value: 'dot',
     },
     {
-      label: t('settings.topbar_icon_badges_opt.none'),
+      label: t('settings.top_bar_icon_badges_opt.none'),
       value: 'none',
     },
   ]
@@ -48,15 +48,15 @@ const dockPositions = computed(() => {
 const topBarLinkOpenModeOptions = computed(() => {
   return [
     {
-      label: t('settings.topbar_link_open_mode_opt.current_tab'),
+      label: t('settings.top_bar_link_opening_behavior_opt.current_tab'),
       value: 'currentTab',
     },
     {
-      label: t('settings.topbar_link_open_mode_opt.current_tab_if_not_homepage'),
+      label: t('settings.top_bar_link_opening_behavior_opt.current_tab_if_not_homepage'),
       value: 'currentTabIfNotHomepage',
     },
     {
-      label: t('settings.topbar_link_open_mode_opt.new_tab'),
+      label: t('settings.top_bar_link_opening_behavior_opt.new_tab'),
       value: 'newTab',
     },
   ]
@@ -93,16 +93,16 @@ function handleToggleDockItem(dockItem: any) {
 <template>
   <div>
     <SettingsItemGroup :title="$t('settings.group_topbar')">
-      <SettingsItem :title="$t('settings.use_old_topbar')">
+      <SettingsItem :title="$t('settings.use_old_top_bar')">
         <Radio v-model="settings.useOldTopBar" />
       </SettingsItem>
-      <SettingsItem :title="$t('settings.topbar_link_open_mode')">
+      <SettingsItem :title="$t('settings.top_bar_link_opening_behavior')">
         <Select v-model="settings.topBarLinkOpenMode" :options="topBarLinkOpenModeOptions" w="full" />
       </SettingsItem>
-      <SettingsItem :title="$t('settings.auto_hide_topbar')">
+      <SettingsItem :title="$t('settings.auto_hide_top_bar')">
         <Radio v-model="settings.autoHideTopBar" />
       </SettingsItem>
-      <SettingsItem :title="$t('settings.topbar_icon_badges')">
+      <SettingsItem :title="$t('settings.top_bar_icon_badges')">
         <Select v-model="settings.topBarIconBadges" :options="topBarIconBadgesOptions" w="full" />
       </SettingsItem>
     </SettingsItemGroup>
