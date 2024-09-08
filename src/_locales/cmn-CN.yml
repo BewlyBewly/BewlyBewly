@@ -315,11 +315,11 @@ topbar:
     now_streaming: 正在直播：
     live_status: 直播中
   upload_dropdown:
-    article: 专栏
-    music: 音频
-    sticker: 贴纸
-    video: 视频
-    manager: 投稿
+    article: 上传专栏
+    music: 上传音频
+    sticker: 上传贴纸
+    video: 上传视频
+    manager: 投稿管理
 dock:
   search: 搜索
   home: 首页
