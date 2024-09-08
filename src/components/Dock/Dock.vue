@@ -78,7 +78,7 @@ onMounted(() => {
   currentDockItems.value = computeDockItem()
 })
 
-function toggleDockHide(hide: boolean) {
+function toggleHideDock(hide: boolean) {
   if (settings.value.autoHideDock)
     hideDock.value = hide
   else
@@ -104,8 +104,8 @@ function handleBackToTopOrRefresh() {
       v-if="settings.autoHideDock && hideDock"
       class="dock-edge"
       :class="`dock-edge-${settings.dockPosition}`"
-      @mouseenter="toggleDockHide(false)"
-      @mouseleave="toggleDockHide(true)"
+      @mouseenter="toggleHideDock(false)"
+      @mouseleave="toggleHideDock(true)"
     />
 
     <!-- Dock Content -->
@@ -117,8 +117,8 @@ function handleBackToTopOrRefresh() {
         bottom: settings.dockPosition === 'bottom',
         hide: hideDock,
       }"
-      @mouseenter="toggleDockHide(false)"
-      @mouseleave="toggleDockHide(true)"
+      @mouseenter="toggleHideDock(false)"
+      @mouseleave="toggleHideDock(true)"
     >
       <div
         class="dock-content-inner"
