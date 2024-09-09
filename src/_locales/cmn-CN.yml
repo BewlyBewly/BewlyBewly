@@ -40,6 +40,16 @@ common:
     remark: 备注
     operations: 操作
 
+  position:
+    left: 左侧
+    right: 右侧
+    top: 顶部
+    bottom: 底部
+
+iframe_drawer:
+  open_in_new_tab: 在新标签页打开
+  close: 关闭
+
 settings:
   title: 设置
 
@@ -58,6 +68,8 @@ settings:
   group_performance: 毛玻璃和性能
   group_topbar: 顶栏
   group_dock: Dock 栏
+  group_sidebar: 侧边栏
+  group_sidebar_desc: 位于主页以外的页面右侧或左侧，通常有亮/暗模式切换按钮和设置按钮。
   group_color: 颜色
   group_wallpaper: 背景图片
   group_logo: LOGO
@@ -82,13 +94,21 @@ settings:
     mandarin_cn: 官话 - 简体中文
     mandarin_tw: 官話 - 正體中文
     jyut: 廣東話
+  touch_screen_optimization: 触屏体验改进
+  touch_screen_optimization_desc: >
+    启用后，如顶栏，你可能需要点击项目以查看更多信息，而不是鼠标直接悬停查看。（旧版顶栏不支持此功能）
   chk_box:
     show: 显示
     hidden: 隐藏
   enable_grid_layout_switcher: 启用页面网格布局切换器
   enable_horizontal_scrolling: 启用横向滚动
   enable_horizontal_scrolling_desc: 启用后，鼠标滚动时将直接滚动横向滚动列表。
-  enable_video_preview: 启用视频预览功能
+
+  video_card_link_opening_behavior: 视频卡片和番剧卡片链接打开行为
+  video_card_link_opening_behavior_opt:
+    drawer: 抽屉打开
+    new_tab: 新索引标籤
+  enable_video_preview: 启用视频预览功能（如果可以的话）
   enable_video_ctrl_bar_on_video_card: 在视频卡片上显示视频控制栏
   hover_video_card_delayed: 将鼠标悬停在视频卡片上时延迟视频预览
   block_ads: 屏蔽广告
@@ -96,29 +116,27 @@ settings:
   reduce_frosted_glass_blur: 降低毛玻璃模糊强度
 
   # Desktop & Dock
-  use_old_topbar: 使用旧版顶栏
-  topbar_link_open_mode: 顶栏链接打开模式
-  topbar_link_open_mode_opt:
+  use_old_top_bar: 使用旧版顶栏
+  top_bar_link_opening_behavior: 顶栏链接打开行为
+  top_bar_link_opening_behavior_opt:
     current_tab: 当前标签页
     current_tab_if_not_homepage: 不在首页则当前标签页打开，否则在新标签页
     new_tab: 新标签页
-  auto_hide_topbar: 自动隐藏顶栏
-  topbar_icon_badges: 图标角标
-  topbar_icon_badges_opt:
+  auto_hide_top_bar: 自动隐藏顶栏
+  top_bar_icon_badges: 图标角标
+  top_bar_icon_badges_opt:
     number: 数字
     dot: 圆点
     none: 不显示
   dock_position: Dock 栏位置
   dock_position_desc: 在屏幕中摆放位置。
-  dock_position_opt:
-    left: 左侧
-    right: 右侧
-    bottom: 底部
   auto_hide_dock: 自动隐藏 Dock 栏
   dock_content_adjustment: Dock 内容调整
   dock_content_adjustment_desc: 第一个激活的 Dock 项的页面将会是启动页面。
   disable_light_dark_mode_switcher: 禁用亮/暗色模式切换按钮
   move_back_to_top_and_refresh_to_dock: 将返回顶部和刷新按钮移动到 Dock 栏
+  sidebar_position: 侧边栏位置
+  auto_hide_sidebar: 自动隐藏侧边栏
 
   # Appearance
   theme: 主题
@@ -167,6 +185,7 @@ settings:
   disable_filters_for_followed_users: 关注的用户不受过滤条件限制
   disable_filters_for_followed_users_desc: >
     如果启用此选项，您关注的用户不受过滤条件限制。
+  filter_out_vertical_videos: 过滤竖屏视频（仅在 app 推荐模式下有效）
   filter_by_view_count: 按播放数筛选
   filter_by_view_count_desc: 筛选掉播放数小于您设置的视频。
   filter_by_view_count_unit: 次
@@ -302,11 +321,11 @@ topbar:
     now_streaming: 正在直播：
     live_status: 直播中
   upload_dropdown:
-    article: 专栏
-    music: 音频
-    sticker: 贴纸
-    video: 视频
-    manager: 投稿
+    article: 上传专栏
+    music: 上传音频
+    sticker: 上传贴纸
+    video: 上传视频
+    manager: 投稿管理
 dock:
   search: 搜索
   home: 首页

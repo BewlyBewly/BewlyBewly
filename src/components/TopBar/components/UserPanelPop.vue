@@ -3,10 +3,11 @@ import DOMPurify from 'dompurify'
 import { useI18n } from 'vue-i18n'
 
 import { useApiClient } from '~/composables/api'
+import { settings } from '~/logic'
 import { revokeAccessKey } from '~/utils/authProvider'
 import { numFormatter } from '~/utils/dataFormatter'
 import { LV0_ICON, LV1_ICON, LV2_ICON, LV3_ICON, LV4_ICON, LV5_ICON, LV6_ICON, LV6_LIGHTNING_ICON } from '~/utils/lvIcons'
-import { getCSRF, getUserID } from '~/utils/main'
+import { getCSRF, getUserID, isHomePage } from '~/utils/main'
 
 import type { UserInfo, UserStat } from '../types'
 import ALink from './ALink.vue'
@@ -111,6 +112,21 @@ function getLvIcon(level: number, isSigma: boolean = false): string {
   }
   return levelIcons[level] || ''
 }
+
+function handleClickChannel() {
+  if (settings.value.topBarLinkOpenMode === 'newTab') {
+    window.open(`https://space.bilibili.com/${mid.value}`, '_blank')
+  }
+  else if (settings.value.topBarLinkOpenMode === 'currentTabIfNotHomepage') {
+    if (isHomePage())
+      window.open(`https://space.bilibili.com/${mid.value}`, '_blank')
+    else
+      window.open(`https://space.bilibili.com/${mid.value}`, '_self')
+  }
+  else {
+    window.open(`https://space.bilibili.com/${mid.value}`, '_self')
+  }
+}
 </script>
 
 <template>
@@ -121,9 +137,17 @@ function getLvIcon(level: number, isSigma: boolean = false): string {
     shadow="[var(--bew-shadow-3),var(--bew-shadow-edge-glow-1)]"
   >
     <div
-      text="xl" font-medium
+      text="xl" font-medium flex="~ items-center gap-2"
     >
-      {{ userInfo.uname ? userInfo.uname : '-' }}
+      <Button
+        v-if="settings.touchScreenOptimization"
+        type="secondary" strong @click="handleClickChannel"
+      >
+        {{ userInfo.uname ? userInfo.uname : '-' }}
+      </Button>
+      <span v-else>
+        {{ userInfo.uname ? userInfo.uname : '-' }}
+      </span>
     </div>
     <div
       text="xs $bew-text-2"

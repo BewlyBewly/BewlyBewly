@@ -40,6 +40,16 @@ common:
     remark: 備註
     operations: 操作
 
+  position:
+    left: 左邊
+    right: 右邊
+    top: 上頭
+    bottom: 下低
+
+iframe_drawer:
+  open_in_new_tab: 喺新嘅分頁度打開連結
+  close: 關閉
+
 settings:
   title: 設定
 
@@ -58,6 +68,8 @@ settings:
   group_performance: 毛玻璃同效能
   group_topbar: 頂部欄
   group_dock: Dock
+  group_sidebar: 側邊欄
+  group_sidebar_desc: 喺主頁以外嘅頁面嘅右邊或左邊，通常有淺/深色模式切換掣同設定掣。
   group_color: 顏色
   group_wallpaper: 背景圖片
   group_logo: LOGO
@@ -82,13 +94,21 @@ settings:
     mandarin_cn: 官话 - 简体中文
     mandarin_tw: 官話 - 正體中文
     jyut: 廣東話
+  touch_screen_optimization: 觸控螢幕體驗改進
+  touch_screen_optimization_desc: >
+    呢個設定開咗之後，好似頂部欄噉，撳咗啲嘢先至可以睇到更多嘅資料，而唔係淨係靠游標懸停就睇到。（舊版頂部欄唔支援呢個功能）
   chk_box:
     show: 擺出嚟
     hidden: 收埋
   enable_grid_layout_switcher: 使用版面格線佈局切換器
   enable_horizontal_scrolling: 使用橫向捲動
   enable_horizontal_scrolling_desc: 用咗之後，轆緊滑鼠就可以直接打橫掃水平捲軸列表。
-  enable_video_preview: 使用影片預覽功能
+
+  video_card_link_opening_behavior: 影片同番劇卡片連結開啓行爲
+  video_card_link_opening_behavior_opt:
+    drawer: 喺櫃桶度開啓
+    new_tab: 新開分頁
+  enable_video_preview: 使用影片預覽功能（若然得嘅話）
   enable_video_ctrl_bar_on_video_card: 喺影片卡片上顯示影片控制欄
   hover_video_card_delayed: 滑鼠停留喺影片卡片嗰陣遲啲進行影片預覽
   block_ads: 封鎖廣告
@@ -96,29 +116,27 @@ settings:
   reduce_frosted_glass_blur: 降低毛玻璃模糊強度
 
   # Desktop and Dock
-  use_old_topbar: 用返舊版頂部欄
-  topbar_link_open_mode: 頂部欄連結開啟模式
-  topbar_link_open_mode_opt:
+  use_old_top_bar: 用返舊版頂部欄
+  top_bar_link_opening_behavior: 頂部欄連結開啓行爲
+  top_bar_link_opening_behavior_opt:
     current_tab: 目前分頁
     current_tab_if_not_homepage: 唔喺主頁就喺目前分頁度開啓，否則開新嘅分頁
     new_tab: 新開分頁
-  auto_hide_topbar: 自動收埋頂部欄
-  topbar_icon_badges: 圖示邊位標記
-  topbar_icon_badges_opt:
+  auto_hide_top_bar: 自動收埋頂部欄
+  top_bar_icon_badges: 圖示邊位標記
+  top_bar_icon_badges_opt:
     number: 數字
     dot: 圓點
     none: 唔顯示
   dock_position: Dock 放位
   dock_position_desc: 放喺螢幕邊度。
-  dock_position_opt:
-    left: 左邊
-    right: 右邊
-    bottom: 下低
   auto_hide_dock: 自動收埋 Dock
   dock_content_adjustment: Dock 內容調整
   dock_content_adjustment_desc: 第一個啓用嘅 Dock 項個頁面會係開始頁面。
   disable_light_dark_mode_switcher: 閂咗淺/深色主題切換粒掣
   move_back_to_top_and_refresh_to_dock: 將返去頂部同重新整理粒掣擺到落 Dock 度
+  sidebar_position: 側邊欄位置
+  auto_hide_sidebar: 自動收埋側邊欄
 
   # Appearance
   theme: 色系
@@ -168,6 +186,7 @@ settings:
   disable_filters_for_followed_users: Follow 緊嘅人唔受啲過濾條件限制
   disable_filters_for_followed_users_desc: >
     開咗呢個功能嘅話，你 Follow 緊嘅人唔會俾啲過濾條件限制。
+  filter_out_vertical_videos: 避開啲打戙嘅片（淨係得 app 推介模式下有效）
   filter_by_view_count: 根據觀看次數篩選
   filter_by_view_count_desc: 避開啲觀看次數唔夠你設嗰個數嘅片。
   filter_by_view_count_unit: 次

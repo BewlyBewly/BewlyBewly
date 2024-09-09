@@ -11,20 +11,33 @@ const { t, locale } = useI18n()
 const langOptions = computed(() => {
   return [
     {
-      value: 'en',
       label: t('settings.select_language_opt.english'),
+      value: 'en',
     },
     {
-      value: 'cmn-CN',
       label: t('settings.select_language_opt.mandarin_cn'),
+      value: 'cmn-CN',
     },
     {
-      value: 'cmn-TW',
       label: t('settings.select_language_opt.mandarin_tw'),
+      value: 'cmn-TW',
     },
     {
-      value: 'jyut',
       label: t('settings.select_language_opt.jyut'),
+      value: 'jyut',
+    },
+  ]
+})
+
+const videoCardOpenModeOptions = computed(() => {
+  return [
+    {
+      label: t('settings.video_card_link_opening_behavior_opt.drawer'),
+      value: 'drawer',
+    },
+    {
+      label: t('settings.video_card_link_opening_behavior_opt.new_tab'),
+      value: 'new_tab',
     },
   ]
 })
@@ -45,6 +58,10 @@ watch(() => settings.value.language, (newValue) => {
         />
       </SettingsItem>
 
+      <SettingsItem :title="$t('settings.touch_screen_optimization')" :desc="$t('settings.touch_screen_optimization_desc')">
+        <Radio v-model="settings.touchScreenOptimization" />
+      </SettingsItem>
+
       <SettingsItem :title="$t('settings.enable_grid_layout_switcher')">
         <Radio v-model="settings.enableGridLayoutSwitcher" />
       </SettingsItem>
@@ -52,10 +69,6 @@ watch(() => settings.value.language, (newValue) => {
       <SettingsItem :title="$t('settings.enable_horizontal_scrolling')" :desc="$t('settings.enable_horizontal_scrolling_desc')">
         <Radio v-model="settings.enableHorizontalScrolling" />
       </SettingsItem>
-
-      <!-- <SettingsItem title="Open link in current tab">
-        <Radio v-model="settings.openLinkInCurrentTab" />
-      </SettingsItem> -->
     </SettingsItemGroup>
 
     <SettingsItemGroup :title="$t('settings.group_performance')">
@@ -77,6 +90,13 @@ watch(() => settings.value.language, (newValue) => {
     </SettingsItemGroup>
 
     <SettingsItemGroup :title="$t('settings.group_video_card')">
+      <SettingsItem :title="$t('settings.video_card_link_opening_behavior')">
+        <Select
+          v-model="settings.videoCardLinkOpenMode"
+          :options="videoCardOpenModeOptions"
+          w="full"
+        />
+      </SettingsItem>
       <SettingsItem :title="$t('settings.enable_video_preview')">
         <Radio v-model="settings.enableVideoPreview" />
       </SettingsItem>

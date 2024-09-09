@@ -3,6 +3,7 @@ import { Icon } from '@iconify/vue'
 
 import Button from '~/components/Button.vue'
 import { useApiClient } from '~/composables/api'
+import { useBewlyApp } from '~/composables/useAppProvider'
 import { settings } from '~/logic'
 import type { VideoPreviewResult } from '~/models/video/videoPreview'
 import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils/dataFormatter'
@@ -64,9 +65,7 @@ const emit = defineEmits<{
 }>()
 
 const api = useApiClient()
-
-// Used to click and control herf attribute
-const isClick = ref<boolean>(false)
+const { openIframeDrawer } = useBewlyApp()
 
 function getCurrentVideoUrl(video: Video) {
   const baseUrl = `https://www.bilibili.com/video/${video.bvid ?? `av${video.aid}`}`
@@ -75,7 +74,7 @@ function getCurrentVideoUrl(video: Video) {
 }
 
 const videoUrl = computed(() => {
-  if (props.removed || !isClick.value || !props.video)
+  if (props.removed || !props.video)
     return undefined
 
   if (props.video.url)
@@ -189,14 +188,11 @@ function handelMouseLeave() {
   clearTimeout(mouseLeaveTimeOut.value)
 }
 
-function switchClickState(flag: boolean) {
-  if (flag) {
-    isClick.value = flag
-  }
-  else {
-    setTimeout(() => {
-      isClick.value = flag
-    })
+function handleClick(event: MouseEvent) {
+  if (settings.value.videoCardLinkOpenMode === 'drawer' && videoUrl.value) {
+    event.preventDefault()
+
+    openIframeDrawer(videoUrl.value)
   }
 }
 
@@ -235,9 +231,7 @@ function handleUndo() {
           :href="videoUrl" target="_blank" rel="noopener noreferrer"
           @mouseenter="handleMouseEnter"
           @mouseleave="handelMouseLeave"
-          @mousedown="switchClickState(true)"
-          @mouseup="switchClickState(false)"
-          @dragend="switchClickState(false)"
+          @click="handleClick"
         >
           <!-- Cover -->
           <div
@@ -424,7 +418,7 @@ function handleUndo() {
                   :class="{ 'more-active': moreBtnActive }"
                   shrink-0 w-30px h-30px m="t--3px r--8px" translate-x--8px
                   grid place-items-center cursor-pointer rounded="50%" duration-300
-                  @click.prevent="handleMoreBtnClick"
+                  @click.stop.prevent="handleMoreBtnClick"
                 >
                   <div i-mingcute:more-2-line text="lg" />
                 </div>

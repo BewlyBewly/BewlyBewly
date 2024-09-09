@@ -10,15 +10,19 @@ export const accessKey = useStorageLocal('accessKey', '')
 
 export interface Settings {
   language: string
+  touchScreenOptimization: boolean
   enableGridLayoutSwitcher: boolean
   enableHorizontalScrolling: boolean
-  openLinkInCurrentTab: boolean
+
+  disableFrostedGlass: boolean
+  reduceFrostedGlassBlur: boolean
+
+  blockAds: boolean
+
+  videoCardLinkOpenMode: 'drawer' | 'newTab'
   enableVideoPreview: boolean
   enableVideoCtrlBarOnVideoCard: boolean
   hoverVideoCardDelayed: boolean
-  blockAds: boolean
-  disableFrostedGlass: boolean
-  reduceFrostedGlassBlur: boolean
 
   // Desktop & Dock
   useOldTopBar: boolean
@@ -30,6 +34,8 @@ export interface Settings {
   dockItemVisibilityList: { page: AppPage, visible: boolean }[]
   disableLightDarkModeSwitcherOnDock: boolean
   moveBackToTopOrRefreshButtonToDock: boolean
+  sidebarPosition: 'left' | 'right'
+  autoHideSidebar: boolean
 
   theme: 'light' | 'dark' | 'auto'
   themeColor: string
@@ -58,6 +64,7 @@ export interface Settings {
 
   // filter setting
   disableFilterForFollowedUser: boolean
+  filterOutVerticalVideos: boolean
   enableFilterByViewCount: boolean
   filterByViewCount: number
   enableFilterByDuration: boolean
@@ -79,15 +86,19 @@ export interface Settings {
 }
 export const settings = useStorageLocal('settings', ref<Settings>({
   language: '',
+  touchScreenOptimization: false,
   enableGridLayoutSwitcher: true,
   enableHorizontalScrolling: false,
-  openLinkInCurrentTab: false,
+
+  disableFrostedGlass: true,
+  reduceFrostedGlassBlur: false,
+
+  blockAds: false,
+
+  videoCardLinkOpenMode: 'newTab',
   enableVideoPreview: true,
   enableVideoCtrlBarOnVideoCard: false,
   hoverVideoCardDelayed: false,
-  blockAds: false,
-  disableFrostedGlass: true,
-  reduceFrostedGlassBlur: false,
 
   // Desktop & Dock
   useOldTopBar: false,
@@ -99,6 +110,8 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   dockItemVisibilityList: [],
   disableLightDarkModeSwitcherOnDock: false,
   moveBackToTopOrRefreshButtonToDock: true,
+  sidebarPosition: 'right',
+  autoHideSidebar: false,
 
   theme: 'auto',
   themeColor: '#00a1d6',
@@ -127,6 +140,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
 
   // filter setting
   disableFilterForFollowedUser: false,
+  filterOutVerticalVideos: false,
   enableFilterByViewCount: false,
   filterByViewCount: 10000,
   enableFilterByDuration: false,

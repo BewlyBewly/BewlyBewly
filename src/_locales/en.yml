@@ -40,6 +40,16 @@ common:
     remark: Remark
     operations: Operations
 
+  position:
+    left: Left
+    right: Right
+    top: Top
+    bottom: Bottom
+
+iframe_drawer:
+  open_in_new_tab: Open in new tab
+  close: Close
+
 settings:
   title: Settings
 
@@ -58,6 +68,8 @@ settings:
   group_performance: Frosted Glass & Performance
   group_topbar: Top Bar
   group_dock: Dock
+  group_sidebar: Sidebar
+  group_sidebar_desc: Located on the right or left side of pages other than the homepage, typically includes a light/dark mode toggle button and settings button.
   group_color: Color
   group_wallpaper: Wallpaper
   group_logo: LOGO
@@ -82,13 +94,21 @@ settings:
     mandarin_cn: Mandarin - Simplified Chinese
     mandarin_tw: Mandarin - Traditional Chinese
     jyut: Cantonese
+  touch_screen_optimization: Touch screen optimization
+  touch_screen_optimization_desc: >
+    After this setting is turned on, like the top bar, you must click on items to view more information instead of hovering over them. (This feature is not supported by the old top bar.)
   chk_box:
     show: Show
     hidden: Hidden
   enable_grid_layout_switcher: Enable grid layout switcher
   enable_horizontal_scrolling: Enable horizontal scrolling
   enable_horizontal_scrolling_desc: After enabling, mouse scrolling will directly scroll the horizontal scroll list.
-  enable_video_preview: Enable video preview feature
+
+  video_card_link_opening_behavior: Video card and bangumi card link opening behavior
+  video_card_link_opening_behavior_opt:
+    drawer: Open in drawer
+    new_tab: New tab
+  enable_video_preview: Enable video preview feature (if possible)
   enable_video_ctrl_bar_on_video_card: Display the video control bar on the video card
   hover_video_card_delayed: Delayed video preview on hover over the video card
   block_ads: Block ads
@@ -96,29 +116,27 @@ settings:
   reduce_frosted_glass_blur: Reduce the intensity of the frosted glass blur
 
   # Desktop & Dock
-  use_old_topbar: Use the old top bar
-  topbar_link_open_mode: Link open mode
-  topbar_link_open_mode_opt:
+  use_old_top_bar: Use the old top bar
+  top_bar_link_opening_behavior: Top bar link opening behavior
+  top_bar_link_opening_behavior_opt:
     current_tab: Current tab
     current_tab_if_not_homepage: Current tab if not the homepage, otherwise new tab
     new_tab: New tab
-  auto_hide_topbar: Automatically hide the top bar
-  topbar_icon_badges: Icon badges
-  topbar_icon_badges_opt:
+  auto_hide_top_bar: Automatically hide the top bar
+  top_bar_icon_badges: Icon badges
+  top_bar_icon_badges_opt:
     number: Number
     dot: Dot
     none: Do not show
   dock_position: Dock position
   dock_position_desc: Position on screen.
-  dock_position_opt:
-    left: Left
-    right: Right
-    bottom: Bottom
   auto_hide_dock: Automatically hide the dock
   dock_content_adjustment: Dock content adjustment
   dock_content_adjustment_desc: The page of the first activated dock item will be the startup page.
   disable_light_dark_mode_switcher: Disable light/dark mode switcher
   move_back_to_top_and_refresh_to_dock: Move the back-to-top and refresh buttons to the dock
+  sidebar_position: Sidebar position
+  auto_hide_sidebar: Automatically hide the sidebar
 
   # Appearance
   theme: Theme
@@ -168,6 +186,7 @@ settings:
   disable_filters_for_followed_users: Disable filters for followed users
   disable_filters_for_followed_users_desc: >
     If you enable this option, all filters you set will be disabled for the users you follow.
+  filter_out_vertical_videos: Filter out vertical videos (only works on the app recommendation mode)
   filter_by_view_count: Filter by view count
   filter_by_view_count_desc: Filtered out videos with less than the view count you set.
   filter_by_view_count_unit: views

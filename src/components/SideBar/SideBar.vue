@@ -2,25 +2,61 @@
 import { Icon } from '@iconify/vue'
 
 import { useDark } from '~/composables/useDark'
+import { settings } from '~/logic'
 
 import Tooltip from '../Tooltip.vue'
 import type { HoveringDockItem } from './types'
 
 const emit = defineEmits(['settings-visibility-change'])
 const { isDark, toggleDark } = useDark()
+const hideSidebar = ref<boolean>(false)
 
 const hoveringDockItem = reactive<HoveringDockItem>({
   themeMode: false,
   settings: false,
 })
+
+onMounted(() => {
+  if (settings.value.autoHideSidebar)
+    hideSidebar.value = true
+})
+
+function toggleHideSidebar(hide: boolean) {
+  if (settings.value.autoHideSidebar)
+    hideSidebar.value = hide
+  else
+    hideSidebar.value = false
+}
 </script>
 
 <template>
   <div
-    pos="fixed top-0 right-6px" h-full flex items-center z-10
+    :class="{
+      'left-side': settings.sidebarPosition === 'left',
+      'right-side': settings.sidebarPosition === 'right',
+      'hide': hideSidebar,
+    }"
+    pos="fixed top-0" h-full flex items-center z-10
     pointer-events-none
   >
-    <div flex="~ gap-2 col" pointer-events-auto>
+    <!-- Edge Div -->
+    <div
+      v-if="settings.autoHideSidebar && hideSidebar"
+      class="sidebar-edge"
+      :class="`sidebar-edge-${settings.sidebarPosition}`"
+      pointer-events-auto
+      @mouseenter="toggleHideSidebar(false)"
+      @mouseleave="toggleHideSidebar(true)"
+    />
+
+    <div
+      class="sidebar-content"
+      flex="~ gap-2 col"
+      pointer-events-auto
+      duration-300
+      @mouseenter="toggleHideSidebar(false)"
+      @mouseleave="toggleHideSidebar(true)"
+    >
       <Tooltip :content="isDark ? $t('dock.dark_mode') : $t('dock.light_mode')" placement="left">
         <Button
           class="ctrl-btn"
@@ -77,5 +113,33 @@ const hoveringDockItem = reactive<HoveringDockItem>({
   svg {
     --uno: "w-20px h-20px shrink-0";
   }
+}
+
+.left-side {
+  --uno: "left-6px";
+}
+
+.right-side {
+  --uno: "right-6px";
+}
+
+.sidebar-edge {
+  --uno: "absolute top-0 w-14px h-full hover:w-60px duration-300";
+
+  &-left {
+    --uno: "left-0";
+  }
+
+  &-right {
+    --uno: "right-0";
+  }
+}
+
+.hide.left-side .sidebar-content {
+  --uno: "translate-x--100% opacity-0 pointer-events-none";
+}
+
+.hide.right-side .sidebar-content {
+  --uno: "translate-x-100% opacity-0 pointer-events-none";
 }
 </style>

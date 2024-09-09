@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import { useBewlyApp } from '~/composables/useAppProvider'
 import { useDark } from '~/composables/useDark'
+import { settings } from '~/logic'
 import { numFormatter } from '~/utils/dataFormatter'
 import { removeHttpFromUrl } from '~/utils/main'
 
 import BangumiCardSkeleton from './BangumiCardSkeleton.vue'
 
-defineProps<{
+const props = defineProps<{
   skeleton?: boolean
   bangumi: Bangumi
   horizontal?: boolean
@@ -31,6 +33,15 @@ interface Bangumi {
 }
 
 const { isDark } = useDark()
+const { openIframeDrawer } = useBewlyApp()
+
+function handleClick(event: MouseEvent) {
+  if (settings.value.videoCardLinkOpenMode === 'drawer' && props.bangumi.url) {
+    event.preventDefault()
+
+    openIframeDrawer(props.bangumi.url)
+  }
+}
 </script>
 
 <template>
@@ -46,6 +57,7 @@ const { isDark } = useDark()
       content-visibility-auto intrinsic-size-400px
       transition="all ease-in-out 300"
       rounded="$bew-radius" h-fit
+      @click="handleClick"
     >
       <!-- Cover -->
       <div

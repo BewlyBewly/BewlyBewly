@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useMouseInElement } from '@vueuse/core'
+import { onClickOutside, useMouseInElement } from '@vueuse/core'
 import type { Ref, UnwrapNestedRefs } from 'vue'
 
 import { useApiClient } from '~/composables/api'
@@ -127,8 +127,8 @@ function closeAllTopBarPopup(exceptionKey?: keyof typeof popupVisible) {
 
 const rightSideInactive = computed(() => {
   let isInactive = false
-  Object.entries(popupVisible).forEach(([key, value]) => {
-    if (value && key !== 'userPanel') {
+  Object.entries(popupVisible).forEach(([_key, value]) => {
+    if (value) {
       isInactive = true
     }
   })
@@ -136,104 +136,63 @@ const rightSideInactive = computed(() => {
 })
 
 // Channels
-const channels = useDelayedHover({
-  beforeEnter: () => closeAllTopBarPopup('channels'),
-  enter: () => {
-    popupVisible.channels = true
-  },
-  leave: () => {
-    popupVisible.channels = false
-  },
-})
-
+const channels = setupTopBarItemHoverEvent('channels')
 // Avatar
-const avatar = useDelayedHover({
-  beforeEnter: () => closeAllTopBarPopup('userPanel'),
-  enter: () => {
-    popupVisible.userPanel = true
-  },
-  beforeLeave: () => {
-    popupVisible.userPanel = false
-  },
-  leave: () => {
-    popupVisible.userPanel = false
-  },
-})
-
+const avatar = setupTopBarItemHoverEvent('userPanel')
 // Notifications
-const notifications = useDelayedHover({
-  beforeEnter: () => closeAllTopBarPopup('notifications'),
-  enter: () => {
-    popupVisible.notifications = true
-  },
-  leave: () => {
-    popupVisible.notifications = false
-  },
-})
-
+const notifications = setupTopBarItemHoverEvent('notifications')
 // Moments
-const moments = useDelayedHover({
-  beforeEnter: () => closeAllTopBarPopup('moments'),
-  enter: () => {
-    popupVisible.moments = true
-    momentsPopRef.value && momentsPopRef.value.checkIfHasNewMomentsThenUpdateMoments()
-  },
-  leave: () => {
-    popupVisible.moments = false
-  },
-})
-
+const moments = setupTopBarItemHoverEvent('moments')
 // Favorites
-const favorites = useDelayedHover({
-  beforeEnter: () => closeAllTopBarPopup('favorites'),
-  enter: () => {
-    popupVisible.favorites = true
-  },
-  leave: () => {
-    popupVisible.favorites = false
-  },
-})
-
+const favorites = setupTopBarItemHoverEvent('favorites')
 // History
-const history = useDelayedHover({
-  beforeEnter: () => closeAllTopBarPopup('history'),
-  enter: () => {
-    popupVisible.history = true
-  },
-  leave: () => {
-    popupVisible.history = false
-  },
-})
-
+const history = setupTopBarItemHoverEvent('history')
 // Watch Later
-const watchLater = useDelayedHover({
-  beforeEnter: () => closeAllTopBarPopup('watchLater'),
-  enter: () => {
-    popupVisible.watchLater = true
-  },
-  leave: () => {
-    popupVisible.watchLater = false
-  },
-})
-
+const watchLater = setupTopBarItemHoverEvent('watchLater')
 // Upload
-const upload = useDelayedHover({
-  beforeEnter: () => closeAllTopBarPopup('upload'),
-  enter: () => {
-    popupVisible.upload = true
-  },
-  leave: () => {
-    popupVisible.upload = false
-  },
-})
-
+const upload = setupTopBarItemHoverEvent('upload')
 // More
-const more = useDelayedHover({
-  beforeEnter: () => closeAllTopBarPopup(),
-  enter: () => {
-    popupVisible.more = true
-  },
-  leave: () => popupVisible.more = false,
+const more = setupTopBarItemHoverEvent('more')
+
+const topBarItemElements = {
+  channels,
+  userPanel: avatar,
+  notifications,
+  moments,
+  favorites,
+  history,
+  watchLater,
+  upload,
+}
+
+function setupTopBarItemHoverEvent(key: keyof typeof popupVisible) {
+  return useDelayedHover({
+    beforeEnter: () => closeAllTopBarPopup(key),
+    enter: () => {
+      popupVisible[key] = true
+    },
+    leave: () => {
+      popupVisible[key] = false
+    },
+  })
+}
+
+const currentClickedTopBarItem = ref<keyof typeof popupVisible | null>(null)
+
+function handleClickTopBarItem(event: MouseEvent, key: keyof typeof popupVisible) {
+  if (settings.value.touchScreenOptimization) {
+    event.preventDefault()
+    closeAllTopBarPopup(key)
+    popupVisible[key] = !popupVisible[key]
+    currentClickedTopBarItem.value = key
+  }
+}
+
+Object.entries(topBarItemElements).forEach(([key, val]) => {
+  onClickOutside(val, () => {
+    if (currentClickedTopBarItem.value === key)
+      popupVisible[key as keyof typeof popupVisible] = false
+  })
 })
 
 // #endregion
@@ -492,6 +451,7 @@ defineExpose({
               bg="$bew-elevated hover:$bew-theme-color dark-hover:white"
               shadow="[var(--bew-shadow-edge-glow-1),var(--bew-shadow-2)]"
               w-46px h-46px transform-gpu
+              @click="event => handleClickTopBarItem(event, 'channels')"
             >
 
               <svg
@@ -579,6 +539,7 @@ defineExpose({
                   ref="moments"
                   class="right-side-item"
                   :class="{ active: popupVisible.moments }"
+                  @click="event => handleClickTopBarItem(event, 'moments')"
                 >
                   <template v-if="newMomentsCount > 0">
                     <div
@@ -600,7 +561,12 @@ defineExpose({
                   </ALink>
 
                   <Transition name="slide-in">
-                    <MomentsPop v-show="popupVisible.moments" ref="momentsPopRef" class="bew-popover" />
+                    <MomentsPop
+                      v-show="popupVisible.moments"
+                      ref="momentsPopRef"
+                      class="bew-popover"
+                      @click.stop="() => {}"
+                    />
                   </Transition>
                 </div>
 
@@ -609,6 +575,7 @@ defineExpose({
                   ref="favorites"
                   class="right-side-item"
                   :class="{ active: popupVisible.favorites }"
+                  @click="event => handleClickTopBarItem(event, 'favorites')"
                 >
                   <ALink
                     :href="`https://space.bilibili.com/${mid}/favlist`"
@@ -623,6 +590,7 @@ defineExpose({
                         v-if="popupVisible.favorites"
                         ref="favoritesPopRef"
                         class="bew-popover"
+                        @click.stop="() => {}"
                       />
                     </KeepAlive>
                   </Transition>
@@ -633,6 +601,7 @@ defineExpose({
                   ref="history"
                   class="right-side-item"
                   :class="{ active: popupVisible.history }"
+                  @click="event => handleClickTopBarItem(event, 'history')"
                 >
                   <ALink
                     href="https://www.bilibili.com/account/history"
@@ -643,7 +612,11 @@ defineExpose({
                   </ALink>
 
                   <Transition name="slide-in">
-                    <HistoryPop v-if="popupVisible.history" class="bew-popover" />
+                    <HistoryPop
+                      v-if="popupVisible.history"
+                      class="bew-popover"
+                      @click.stop="() => {}"
+                    />
                   </Transition>
                 </div>
 
@@ -652,6 +625,7 @@ defineExpose({
                   ref="watchLater"
                   class="right-side-item"
                   :class="{ active: popupVisible.watchLater }"
+                  @click="event => handleClickTopBarItem(event, 'watchLater')"
                 >
                   <ALink
                     href="https://www.bilibili.com/watchlater/#/list"
@@ -664,6 +638,7 @@ defineExpose({
                     <WatchLaterPop
                       v-if="popupVisible.watchLater"
                       class="bew-popover"
+                      @click.stop="() => {}"
                     />
                   </Transition>
                 </div>
@@ -685,20 +660,25 @@ defineExpose({
                 ref="more"
                 class="right-side-item lg:!hidden flex"
                 :class="{ active: popupVisible.more }"
+                @click="event => handleClickTopBarItem(event, 'more')"
               >
                 <a title="More">
                   <div i-mingcute:menu-line />
                 </a>
 
                 <Transition name="slide-in">
-                  <MorePop v-show="popupVisible.more" class="bew-popover" />
+                  <MorePop
+                    v-show="popupVisible.more"
+                    class="bew-popover"
+                    @click.stop="() => {}"
+                  />
                 </Transition>
               </div>
 
               <div class="hidden lg:flex" gap-1 items-center>
                 <!-- Divider -->
                 <div
-                  w-4px h-22px bg="$bew-fill-1" mx-1
+                  w-2px h-16px bg="$bew-border-color" mx-1
                   rounded-4px
                 />
 
@@ -707,6 +687,7 @@ defineExpose({
                   ref="upload"
                   class="right-side-item"
                   :class="{ active: popupVisible.upload }"
+                  @click="event => handleClickTopBarItem(event, 'upload')"
                 >
                   <a
                     href="https://member.bilibili.com/platform/upload/video/frame"
@@ -720,6 +701,7 @@ defineExpose({
                     <UploadPop
                       v-if="popupVisible.upload"
                       class="bew-popover"
+                      @click.stop="() => {}"
                     />
                   </Transition>
                 </div>
@@ -729,6 +711,7 @@ defineExpose({
                   ref="notifications"
                   class="right-side-item"
                   :class="{ active: popupVisible.notifications }"
+                  @click="event => handleClickTopBarItem(event, 'notifications')"
                 >
                   <template v-if="unReadMessageCount > 0">
                     <div
@@ -754,6 +737,7 @@ defineExpose({
                     <NotificationsPop
                       v-if="popupVisible.notifications"
                       class="bew-popover"
+                      @click.stop="() => {}"
                     />
                   </Transition>
                 </div>
@@ -766,6 +750,7 @@ defineExpose({
               ref="avatar"
               :class="{ hover: popupVisible.userPanel }"
               class="avatar right-side-item"
+              @click="event => handleClickTopBarItem(event, 'userPanel')"
             >
               <ALink
                 ref="avatarImg"
@@ -806,6 +791,7 @@ defineExpose({
                   :user-info="userInfo"
                   after:h="!0"
                   pos="!left-auto !right-0" transform="!translate-x-0"
+                  @click.stop="() => {}"
                 />
               </Transition>
             </div>
