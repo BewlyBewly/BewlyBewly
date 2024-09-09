@@ -278,11 +278,11 @@ function handleBackToTopOrRefresh() {
   }
 
   .divider {
-    --uno: "my-1 mx-3 h-4px bg-$bew-fill-1 rounded-4";
+    --uno: "my-1 mx-3 h-3px bg-$bew-border-color rounded-4";
   }
 
   &.bottom .divider {
-    --uno: "w-4px h-auto my-3 mx-1";
+    --uno: "w-3px h-auto my-3 mx-1";
   }
 
   .dock-content-inner {
