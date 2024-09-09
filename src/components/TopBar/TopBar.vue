@@ -679,7 +679,7 @@ defineExpose({
               <div class="hidden lg:flex" gap-1 items-center>
                 <!-- Divider -->
                 <div
-                  w-4px h-22px bg="$bew-fill-1" mx-1
+                  w-2px h-16px bg="$bew-border-color" mx-1
                   rounded-4px
                 />
 
