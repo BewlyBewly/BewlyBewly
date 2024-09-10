@@ -10,26 +10,36 @@ export const accessKey = useStorageLocal('accessKey', '')
 
 export interface Settings {
   language: string
+  touchScreenOptimization: boolean
   enableGridLayoutSwitcher: boolean
   enableHorizontalScrolling: boolean
-  openLinkInCurrentTab: boolean
+
+  disableFrostedGlass: boolean
+  reduceFrostedGlassBlur: boolean
+
+  blockAds: boolean
+
+  videoCardLinkOpenMode: 'drawer' | 'newTab'
   enableVideoPreview: boolean
   enableVideoCtrlBarOnVideoCard: boolean
   hoverVideoCardDelayed: boolean
+
+  // Desktop & Dock
   useOldTopBar: boolean
+  topBarLinkOpenMode: 'currentTab' | 'currentTabIfNotHomepage' | 'newTab'
   autoHideTopBar: boolean
   topBarIconBadges: 'number' | 'dot' | 'none'
-  blockAds: boolean
-  disableFrostedGlass: boolean
-  reduceFrostedGlassBlur: boolean
   dockPosition: 'left' | 'right' | 'bottom'
   autoHideDock: boolean
   dockItemVisibilityList: { page: AppPage, visible: boolean }[]
   disableLightDarkModeSwitcherOnDock: boolean
   moveBackToTopOrRefreshButtonToDock: boolean
+  sidebarPosition: 'left' | 'right'
+  autoHideSidebar: boolean
 
   theme: 'light' | 'dark' | 'auto'
   themeColor: string
+  useLinearGradientThemeColorBackground: boolean
   wallpaperMode: 'buildIn' | 'byUrl'
   wallpaper: string
   enableWallpaperMasking: boolean
@@ -51,11 +61,19 @@ export interface Settings {
   searchPageWallpaperBlurIntensity: number
 
   recommendationMode: 'web' | 'app'
+
   // filter setting
+  disableFilterForFollowedUser: boolean
+  filterOutVerticalVideos: boolean
   enableFilterByViewCount: boolean
   filterByViewCount: number
   enableFilterByDuration: boolean
   filterByDuration: number
+  enableFilterByTitle: boolean
+  filterByTitle: { keyword: string, remark: string }[]
+  enableFilterByUser: boolean
+  filterByUser: { keyword: string, remark: string }[]
+
   homePageTabVisibilityList: { page: HomeSubPage, visible: boolean }[]
   alwaysShowTabsOnHomePage: boolean
   useSearchPageModeOnHomePage: boolean
@@ -63,30 +81,41 @@ export interface Settings {
 
   adaptToOtherPageStyles: boolean
   showTopBar: boolean
+  useOriginalBilibiliTopBar: boolean
   useOriginalBilibiliHomepage: boolean
 }
 export const settings = useStorageLocal('settings', ref<Settings>({
   language: '',
+  touchScreenOptimization: false,
   enableGridLayoutSwitcher: true,
   enableHorizontalScrolling: false,
-  openLinkInCurrentTab: false,
+
+  disableFrostedGlass: true,
+  reduceFrostedGlassBlur: false,
+
+  blockAds: false,
+
+  videoCardLinkOpenMode: 'newTab',
   enableVideoPreview: true,
   enableVideoCtrlBarOnVideoCard: false,
   hoverVideoCardDelayed: false,
+
+  // Desktop & Dock
   useOldTopBar: false,
+  topBarLinkOpenMode: 'currentTabIfNotHomepage',
   autoHideTopBar: false,
   topBarIconBadges: 'number',
   dockPosition: 'right',
   autoHideDock: false,
-  blockAds: false,
-  disableFrostedGlass: true,
-  reduceFrostedGlassBlur: false,
   dockItemVisibilityList: [],
   disableLightDarkModeSwitcherOnDock: false,
-  moveBackToTopOrRefreshButtonToDock: false,
+  moveBackToTopOrRefreshButtonToDock: true,
+  sidebarPosition: 'right',
+  autoHideSidebar: false,
 
   theme: 'auto',
   themeColor: '#00a1d6',
+  useLinearGradientThemeColorBackground: false,
   wallpaperMode: 'buildIn',
   wallpaper: '',
   enableWallpaperMasking: false,
@@ -108,11 +137,18 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   searchPageWallpaperBlurIntensity: 0,
 
   recommendationMode: 'web',
+
   // filter setting
+  disableFilterForFollowedUser: false,
+  filterOutVerticalVideos: false,
   enableFilterByViewCount: false,
   filterByViewCount: 10000,
   enableFilterByDuration: false,
   filterByDuration: 3600,
+  enableFilterByTitle: false,
+  filterByTitle: [],
+  enableFilterByUser: false,
+  filterByUser: [],
 
   homePageTabVisibilityList: [],
   alwaysShowTabsOnHomePage: false,
@@ -121,6 +157,7 @@ export const settings = useStorageLocal('settings', ref<Settings>({
 
   adaptToOtherPageStyles: true,
   showTopBar: true,
+  useOriginalBilibiliTopBar: false,
   useOriginalBilibiliHomepage: false,
 }), { mergeDefaults: true })
 

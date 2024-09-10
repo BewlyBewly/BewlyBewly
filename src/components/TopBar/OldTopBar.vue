@@ -11,6 +11,7 @@ import { settings } from '~/logic'
 import { getUserID, isHomePage } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
+import ALink from './components/ALink.vue'
 import ChannelsPop from './components/ChannelsPop.vue'
 import FavoritesPop from './components/FavoritesPop.vue'
 import HistoryPop from './components/HistoryPop.vue'
@@ -488,15 +489,15 @@ defineExpose({
               :class="{ activated: popupVisible.channels }"
               style="backdrop-filter: var(--bew-filter-glass-1);"
               grid="~ place-items-center" border="1 $bew-border-color"
-              rounded="50px" duration-300
+              rounded="46px" duration-300
               bg="$bew-elevated hover:$bew-theme-color dark-hover:white"
               shadow="$bew-shadow-2"
-              w-50px h-50px transform-gpu
+              w-46px h-46px transform-gpu
             >
 
               <svg
                 t="1720198072316" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                p-id="1477" width="40" height="40"
+                p-id="1477" width="38" height="38"
                 un-fill="$bew-theme-color dark:white" un-group-hover:fill="white dark:$bew-theme-color"
                 duration-300 mt--1px
               >
@@ -540,10 +541,9 @@ defineExpose({
             class="avatar right-side-item relative"
             shadow="$bew-shadow-2" rounded-full
           >
-            <a
+            <ALink
               ref="avatarImg"
               :href="`https://space.bilibili.com/${mid}`"
-              :target="isHomePage() ? '_blank' : '_self'"
               class="avatar-img"
               :class="{ hover: popupVisible.userPanel }"
               :style="{
@@ -595,10 +595,10 @@ defineExpose({
             class="others"
             :class="{ inactive: rightSideInactive }"
             style="
-            backdrop-filter: var(--bew-filter-glass-1);
-            box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
-          "
-            flex h-50px px-6px bg="$bew-elevated"
+              backdrop-filter: var(--bew-filter-glass-1);
+              box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
+            "
+            flex h-46px px-5px bg="$bew-elevated"
             transition="transition-property-colors duration-150"
             text="$bew-text-1" border="1 $bew-border-color" rounded-full
             transform-gpu
@@ -646,13 +646,12 @@ defineExpose({
                       class="unread-dot"
                     />
                   </template>
-                  <a
+                  <ALink
                     href="https://message.bilibili.com"
-                    :target="isHomePage() ? '_blank' : '_self'"
                     :title="$t('topbar.notifications')"
                   >
                     <div i-tabler:bell />
-                  </a>
+                  </ALink>
 
                   <Transition name="slide-in">
                     <NotificationsPop
@@ -680,13 +679,12 @@ defineExpose({
                       class="unread-dot"
                     />
                   </template>
-                  <a
+                  <ALink
                     href="https://t.bilibili.com"
-                    :target="isHomePage() ? '_blank' : '_self'"
                     :title="$t('topbar.moments')"
                   >
                     <div i-tabler:windmill />
-                  </a>
+                  </ALink>
 
                   <Transition name="slide-in">
                     <MomentsPop v-show="popupVisible.moments" ref="momentsPopRef" class="bew-popover" />
@@ -699,13 +697,12 @@ defineExpose({
                   class="right-side-item"
                   :class="{ active: popupVisible.favorites }"
                 >
-                  <a
+                  <ALink
                     :href="`https://space.bilibili.com/${mid}/favlist`"
-                    :target="isHomePage() ? '_blank' : '_self'"
                     :title="$t('topbar.favorites')"
                   >
                     <div i-mingcute:star-line />
-                  </a>
+                  </ALink>
 
                   <Transition name="slide-in">
                     <KeepAlive>
@@ -725,13 +722,12 @@ defineExpose({
                   class="right-side-item"
                   :class="{ active: popupVisible.history }"
                 >
-                  <a
+                  <ALink
                     href="https://www.bilibili.com/account/history"
-                    :target="isHomePage() ? '_blank' : '_self'"
                     :title="$t('topbar.history')"
                   >
                     <div i-mingcute:time-line />
-                  </a>
+                  </ALink>
 
                   <Transition name="slide-in">
                     <HistoryPop
@@ -748,13 +744,12 @@ defineExpose({
                   class="right-side-item"
                   :class="{ active: popupVisible.watchLater }"
                 >
-                  <a
+                  <ALink
                     href="https://www.bilibili.com/watchlater/#/list"
-                    :target="isHomePage() ? '_blank' : '_self'"
                     :title="$t('topbar.watch_later')"
                   >
                     <div i-mingcute:carplay-line />
-                  </a>
+                  </ALink>
 
                   <Transition name="slide-in">
                     <WatchLaterPop
@@ -946,7 +941,7 @@ defineExpose({
     --uno: "relative text-$bew-text-1 flex items-center";
 
     &:not(.avatar) a {
-      --uno: "text-xl flex items-center p-2 rounded-40px duration-300 relative z-5";
+      --uno: "text-lg flex items-center p-2 rounded-40px duration-300 relative z-5";
       --uno: "h-35px h-35px";
     }
 

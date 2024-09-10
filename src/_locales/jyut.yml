@@ -19,19 +19,43 @@ common:
   login: 登入
   save_to_watch_later: 陣間至睇
   added: 已添加
-  performance_impact_warn: 呢個功能可能會降低效能
-  enable: 打開
-  disable: 閂埋
-  refresh: 重新整理
-  reset: 重置
+  performance_impact_warn: 呢個功能可能會降低效能！
   no_more_content: 唔使睇喇，冇嘢喇
-  confirm: 確定
-  cancel: 取消
+
+  operation:
+    add: 新增
+    edit: 編輯
+    delete: 刪除
+    confirm: 確定
+    cancel: 取消
+    enable: 開
+    disable: 閂
+    refresh: 重新整理
+    reset: 重設
+
+  table:
+    index: 索引
+    title: 標題
+    name: 名稱
+    remark: 備註
+    operations: 操作
+
+  position:
+    left: 左邊
+    right: 右邊
+    top: 上頭
+    bottom: 下低
+
+iframe_drawer:
+  open_in_new_tab: 喺新嘅分頁度打開連結
+  close: 關閉
+
 settings:
   title: 設定
 
   # Settings menu
   menu_general: 一般
+  menu_desktop_and_dock: 桌面同 Dock
   menu_appearance: 版面
   menu_home: 主頁
   menu_search_page: 搵嘢頁
@@ -42,8 +66,10 @@ settings:
   group_common: 通用
   group_video_card: 影片卡片
   group_performance: 毛玻璃同效能
-  group_topbar: 頂欄
+  group_topbar: 頂部欄
   group_dock: Dock
+  group_sidebar: 側邊欄
+  group_sidebar_desc: 喺主頁以外嘅頁面嘅右邊或左邊，通常有淺/深色模式切換掣同設定掣。
   group_color: 顏色
   group_wallpaper: 背景圖片
   group_logo: LOGO
@@ -68,36 +94,49 @@ settings:
     mandarin_cn: 官话 - 简体中文
     mandarin_tw: 官話 - 正體中文
     jyut: 廣東話
+  touch_screen_optimization: 觸控螢幕體驗改進
+  touch_screen_optimization_desc: >
+    呢個設定開咗之後，好似頂部欄噉，撳咗啲嘢先至可以睇到更多嘅資料，而唔係淨係靠游標懸停就睇到。（舊版頂部欄唔支援呢個功能）
   chk_box:
     show: 擺出嚟
     hidden: 收埋
   enable_grid_layout_switcher: 使用版面格線佈局切換器
   enable_horizontal_scrolling: 使用橫向捲動
-  enable_horizontal_scrolling_desc: 用咗之後，轆緊滑鼠就可以直接打橫掃水平捲軸列表
-  enable_video_preview: 使用影片預覽功能
+  enable_horizontal_scrolling_desc: 用咗之後，轆緊滑鼠就可以直接打橫掃水平捲軸列表。
+
+  video_card_link_opening_behavior: 影片同番劇卡片連結開啓行爲
+  video_card_link_opening_behavior_opt:
+    drawer: 喺櫃桶度開啓
+    new_tab: 新開分頁
+  enable_video_preview: 使用影片預覽功能（若然得嘅話）
   enable_video_ctrl_bar_on_video_card: 喺影片卡片上顯示影片控制欄
   hover_video_card_delayed: 滑鼠停留喺影片卡片嗰陣遲啲進行影片預覽
   block_ads: 封鎖廣告
   disable_frosted_glass: 閂咗毛玻璃效果
   reduce_frosted_glass_blur: 降低毛玻璃模糊強度
-  use_old_topbar: 用返舊版頂欄
-  auto_hide_topbar: 自動收埋頂欄
-  topbar_icon_badges: 圖示邊位標記
-  topbar_icon_badges_opt:
+
+  # Desktop and Dock
+  use_old_top_bar: 用返舊版頂部欄
+  top_bar_link_opening_behavior: 頂部欄連結開啓行爲
+  top_bar_link_opening_behavior_opt:
+    current_tab: 目前分頁
+    current_tab_if_not_homepage: 唔喺主頁就喺目前分頁度開啓，否則開新嘅分頁
+    new_tab: 新開分頁
+  auto_hide_top_bar: 自動收埋頂部欄
+  top_bar_icon_badges: 圖示邊位標記
+  top_bar_icon_badges_opt:
     number: 數字
     dot: 圓點
     none: 唔顯示
   dock_position: Dock 放位
-  dock_position_desc: 放喺螢幕邊度
-  dock_position_opt:
-    left: 左邊
-    right: 右邊
-    bottom: 下低
+  dock_position_desc: 放喺螢幕邊度。
   auto_hide_dock: 自動收埋 Dock
   dock_content_adjustment: Dock 內容調整
-  dock_content_adjustment_desc: 第一個啓用嘅 Dock 項個頁面會係開始頁面
+  dock_content_adjustment_desc: 第一個啓用嘅 Dock 項個頁面會係開始頁面。
   disable_light_dark_mode_switcher: 閂咗淺/深色主題切換粒掣
   move_back_to_top_and_refresh_to_dock: 將返去頂部同重新整理粒掣擺到落 Dock 度
+  sidebar_position: 側邊欄位置
+  auto_hide_sidebar: 自動收埋側邊欄
 
   # Appearance
   theme: 色系
@@ -105,16 +144,17 @@ settings:
     light: 淺色
     dark: 深色
     auto: 自動
-  theme_color: 佈景色
+  theme_color: 主題色
+  gradient_theme_color_background: 使用漸層主題色作為深色模式嘅背景
   wallpaper_mode: 背景圖片模式
-  wallpaper_mode_desc: '使用 URL: 直接用網上圖片嘅 URL 嚟到設定背景圖片。'
+  wallpaper_mode_desc: '使用網址: 直接用網上圖片嘅網址嚟到設定背景圖片。'
   wallpaper_mode_opt:
     build_in: 內建
-    by_url: 使用 URL
+    by_url: 使用網址
   choose_ur_wallpaper: 揀張背景
-  image_url: 圖片 URL
+  image_url: 圖片網址
   image_url_hint: |-
-    URL 示例: https://cdn.jsdelivr.net/gh/BewlyBewly/Imgs/wallpapers/rocky-mountain-cloudscape.jpg
+    網址範例: https://cdn.jsdelivr.net/gh/BewlyBewly/Imgs/wallpapers/rocky-mountain-cloudscape.jpg
     https://cdn.jsdelivr.net/gh/BewlyBewly/Imgs/wallpapers/green-white-mountains.jpg
   enable_wallpaper_masking: 使用背景遮蔽效果
   wallpaper_mask_opacity: 背景遮蔽透明度調節
@@ -136,37 +176,61 @@ settings:
   recommendation_mode: 推介模式
   recommendation_mode_desc: |
     若然你想用手機版嘅推介演算法，就要俾 BewlyBewly 批准使用存取 access key。
-  recommendation_mode_desc2: |
-    事緣B站對之前嘅 API 做咗啲限制，之前取得 access key 嘅功能直接 short 咗。都係建議閣下用返 Web Mode 啦 🫠
   authorize_app: 授權 BewlyBewly 使用 access key
   authorize_app_desc: >
     授咗權嘅話，你就會收到基於 bilibili 手機版推介演算法所推介嘅內容，兼且授權 key 只有約一個月有效期，到期後記得要重新授權嚟取得存取
     access key。
   authorize_app_more_info_access_key: 關於 access key
   scan_qrcode_desc: 用 Bilibili 流動應用程式去 scan 呢個 QR code 愛嚟授權取得 access key。
+
+  disable_filters_for_followed_users: Follow 緊嘅人唔受啲過濾條件限制
+  disable_filters_for_followed_users_desc: >
+    開咗呢個功能嘅話，你 Follow 緊嘅人唔會俾啲過濾條件限制。
+  filter_out_vertical_videos: 避開啲打戙嘅片（淨係得 app 推介模式下有效）
   filter_by_view_count: 根據觀看次數篩選
+  filter_by_view_count_desc: 避開啲觀看次數唔夠你設嗰個數嘅片。
   filter_by_view_count_unit: 次
   filter_by_duration: 根據條片長度篩選
+  filter_by_duration_desc: 避開啲片長唔夠你設嗰個時間嘅片。
   filter_by_duration_unit: 秒
+  filter_item_already_exist: 呢個篩選條件已經有咗喇！
+  filter_by_title: 根據標題篩選
+  filter_by_title_desc: |-
+    避開啲標題係你指定嘅字嘅片（唔理大細楷），抑或用正則表達式，好似 <code>/abc&#124;\d+/</code> 噉，用兩個 <code>/</code> 包住。
+    <br/>
+    喺下低個表度，撳 <kbd>Enter</kbd> 就可以加新嘅篩選條件，抑或確定你上先改咗嘅嘢。
+    撳 <kbd>Esc</kbd> 就取消你改咗嘅嘢。
+    撳兩吓欄位就可以改返入邊嘅嘢。
+  filter_by_user: 根據用戶篩選
+  filter_by_user_desc: |-
+    避開啲 po 片嗰位係你指定嘅用戶名（全名，唔理大細楷）抑或 mid 嘅片，抑或用正則表達式，好似 <code>/abc&#124;\d+/</code> 噉，用兩個 <code>/</code> 包住。
+    <br/>
+    喺下低個表度，撳 <kbd>Enter</kbd> 就可以加新嘅篩選條件，抑或確定你上先改咗嘅嘢。
+    撳 <kbd>Esc</kbd> 就取消你改咗嘅嘢。
+    撳兩吓欄位就可以改返入邊嘅嘢。
+  filter_by_user_table:
+    username_or_mid: 用戶名 / Mid
+
   use_search_page_mode: 主頁使用搵嘢頁模式
   settings_shared_with_the_search_page: 同搵嘢頁共用嘅設定
-  settings_shared_with_the_search_page_desc: 呢啲設定都同搵嘢頁共用
+  settings_shared_with_the_search_page_desc: 呢啲設定同搵嘢頁嗰度共用。
   search_page_mode_wallpaper_fixed: 定住搵嘢頁模式嘅背景
   home_tabs_adjustment: 分頁欄調整
-  home_tabs_adjustment_desc: 第一個啓用嘅分頁項目會係開始頁面
+  home_tabs_adjustment_desc: 第一個啓用嘅分頁項目會係開始頁面。
   always_show_tabs_on_home_page: 永遠顯示主頁分頁欄
 
   # Compatibility
   # Common
+  topbar_visibility: BewlyBewly 頂部欄可視性
+  topbar_visibility_desc: 若然你係用緊 Bilibili Evolved 嘅頂部欄，你可以喺度閂咗 BewlyBewly 嘅頂部欄去。
   use_original_bilibili_homepage: 用返原本嘅 Bilibili 主頁
   use_original_bilibili_homepage_desc: 改咗之後，如果你喺主頁，個頁面就會自動重新整理！
+  use_original_bilibili_topbar: 用返原本嘅 Bilibili 頂部欄
   adapt_to_other_page_styles: 適應其他版面風格
-  adapt_to_other_page_styles_desc: 執執啲常用嘅版面，襯返 BewlyBewly 主題風格
+  adapt_to_other_page_styles_desc: 執執啲常用嘅版面，襯返 BewlyBewly 主題風格。
   # Bilibili Evolved
-  follow_bilibili_evolved_color: 跟返 Bilibili Evolved 佈景色
-  follow_bilibili_evolved_color_desc: 每次換完 Bilibili Evolved 佈景色嗰陣，記得揀多一次呢個選項愛嚟更新佈置
-  topbar_visibility: 頂欄可視性
-  topbar_visibility_desc: 用於兼容 Bilibili Evolved 客製化頂欄
+  follow_bilibili_evolved_color: 跟返 Bilibili Evolved 主題色
+  follow_bilibili_evolved_color_desc: 每次換完 Bilibili Evolved 主題色嗰陣，記得揀多一次呢個選項愛嚟更新佈置。
 
   # About
   links: 拎
@@ -175,30 +239,8 @@ settings:
   afdian: 愛發電
   import_settings: 匯入設定
   export_settings: 匯出設定
-  export_settings_desc: 一啲敏感性資訊，例如 access key，可能要你重新攞過
+  export_settings_desc: 一啲敏感性資訊，例如 access key，可能要你攞多次先至得。
   contributors: 貢獻者
-
-  just_wanna_change_the_job: 我淨係想搵份好啲嘅工做...
-  just_wanna_change_the_job_desc: |-
-    首先十分抱歉在这里打扰您，我是一名前端开发者，坐标广州，我想换一份好一点的工作
-    BewlyBewly 其实是我在找工作的时候做的一个项目，那时试过有快半年是完全没有工作的状态，面试时一直刁难要么就是被礼貌拒绝
-
-    我知道以我的能力是完全可以从0开始做一个以我认为巨大的工程出来，但是面试的时候多数注重的地方往往只是在你对技术有如何的深入
-    技术确实非常重要，但是我认为一个人的能力不仅仅是技术
-    从 BewlyBewly 中，我从界面、配色、用户体验、一个产品用户真正想要的功能最后到实现我都是自己一个人完成的，包括弹窗按钮那些组件
-    在没有 pr 之前我就已经完成了很大一部分的功能以及界面，自己摸索和解决的不少问题与实现优化的功能，我也知道如何在b站插件几乎是饱和的情况下如何做出别具一格的作品。但是也要感谢后面的 PR 以及 issue 的反馈，让我能够更好的完善这个项目！！！
-
-    之后我确实也靠 BewlyBewly 进到了小公司工作一直到现在，现在的公司说是招前端进去主要还是看后端，我后端也是会一点但是没有前端好
-    目前公司内容也很杂，之前也为了某些变态的任务加上公司原本前端十分感人的代码在开发新功能的同时不得不自己也重构代码，但是公司给我的感觉就是因为我能力太差导致那个进度特慢，包括同事也是，同事一点前端都不会我重构了多少屎山代码说了也不明白，某些前端问题我自己也难以预测和修复最后还是做到慢就是做得慢。
-    那次我还因此加班来确保任务尽快完成，做完之后后续还有分给我的任务时也时不是提一嘴阴阳我做得慢我能力不行
-    这件事情也只是其中的一件，但是公司不注重前端甚至完全忽视前端对垃圾代码的感受我确实有点接受不了，其他前端同事给我一种感觉是能跑就好我简直无语
-
-    我知道这么说我可能太自大，我其实主要想简单说明一下目前情况，我承认我技术上确实没太厉害，公司里前端很大还是靠自己摸索的，有些处理我也不知道符合不符合规范
-    但是我能力是可以的，我是可以完全从0到1写出 BewlyBewly 出来，甚至之前和身边人说他们也觉得我有病，笑我写的代码（当然后面重构后我也觉得自己之前写的有病）
-
-    我目前只是想找一间公司是重视和比较规范前端的，因为我不想自己收拾别人的烂摊子身边人也不知道只是觉得我进度慢就是慢，再为了这种事情加班
-    坐标广州，我不是希望进去一定要做出什么成就出来，在做开源过程中也对项目负责人和开发者不同的想法观念略有感受。我只想进去了解一下正确的前端规范和能与其他志同道合的人一起工作。如果有合适的前端工作机会请联系我，谢谢！
-  contact_me: 联系我
 auth:
   auth_access_key_first: 整之前記得先授權 BewlyBewly 去用 access key
 topbar:
@@ -252,10 +294,11 @@ topbar:
   user_dropdown:
     money: 銀仔：
     b_coins: B銀：
-    exp_desc: '當前經驗 {current_exp}，升到 LV {level} 仲要 {need_exp}'
+    exp_desc: '而家經驗 {current_exp}，升到 LV {level} 仲要 {need_exp}'
     following: 追緊
     followers: 擁躉
     posts: 動向
+    bilibili_premium: Bilibili 大會員
     account_settings: 帳戶設定
     uploads_manager: 內容管理
     b_coins_wallet: B銀荷包
@@ -296,6 +339,7 @@ dock:
   settings: 設定
 home:
   not_interested: 唔鍾意
+  not_interested_desc: 你可以用 <kbd>↑</kbd> 同 <kbd>↓</kbd> 嚟揀個理由，抑或用數字鍵嚟直接揀理由，撳 <kbd>Enter</kbd> 就直接提交。
   tell_us_why: 點解噉做...
   video_removed: 已經鏟咗條片
   for_you: 估你心水

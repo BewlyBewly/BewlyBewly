@@ -3,6 +3,7 @@ import { Icon } from '@iconify/vue'
 
 import Button from '~/components/Button.vue'
 import { useApiClient } from '~/composables/api'
+import { useBewlyApp } from '~/composables/useAppProvider'
 import { settings } from '~/logic'
 import type { VideoPreviewResult } from '~/models/video/videoPreview'
 import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils/dataFormatter'
@@ -64,9 +65,7 @@ const emit = defineEmits<{
 }>()
 
 const api = useApiClient()
-
-// Used to click and control herf attribute
-const isClick = ref<boolean>(false)
+const { openIframeDrawer } = useBewlyApp()
 
 function getCurrentVideoUrl(video: Video) {
   const baseUrl = `https://www.bilibili.com/video/${video.bvid ?? `av${video.aid}`}`
@@ -75,7 +74,7 @@ function getCurrentVideoUrl(video: Video) {
 }
 
 const videoUrl = computed(() => {
-  if (props.removed || !isClick.value || !props.video)
+  if (props.removed || !props.video)
     return undefined
 
   if (props.video.url)
@@ -189,14 +188,11 @@ function handelMouseLeave() {
   clearTimeout(mouseLeaveTimeOut.value)
 }
 
-function switchClickState(flag: boolean) {
-  if (flag) {
-    isClick.value = flag
-  }
-  else {
-    setTimeout(() => {
-      isClick.value = flag
-    })
+function handleClick(event: MouseEvent) {
+  if (settings.value.videoCardLinkOpenMode === 'drawer' && videoUrl.value) {
+    event.preventDefault()
+
+    openIframeDrawer(videoUrl.value)
   }
 }
 
@@ -235,9 +231,7 @@ function handleUndo() {
           :href="videoUrl" target="_blank" rel="noopener noreferrer"
           @mouseenter="handleMouseEnter"
           @mouseleave="handelMouseLeave"
-          @mousedown="switchClickState(true)"
-          @mouseup="switchClickState(false)"
-          @dragend="switchClickState(false)"
+          @click="handleClick"
         >
           <!-- Cover -->
           <div
@@ -398,10 +392,11 @@ function handleUndo() {
                   pos="absolute bottom--2px right--2px"
                   w-14px h-14px
                   bg="$bew-theme-color"
+                  border="2 outset solid white"
                   rounded="1/2"
                   grid place-items-center
                 >
-                  <div color-white text-sm class="i-mingcute:check-fill w-10px h-10px" />
+                  <div color-white text-sm class="i-mingcute:check-fill w-8px h-8px" />
                 </div>
               </a>
             </div>
@@ -423,12 +418,12 @@ function handleUndo() {
                   :class="{ 'more-active': moreBtnActive }"
                   shrink-0 w-30px h-30px m="t--3px r--8px" translate-x--8px
                   grid place-items-center cursor-pointer rounded="50%" duration-300
-                  @click.prevent="handleMoreBtnClick"
+                  @click.stop.prevent="handleMoreBtnClick"
                 >
                   <div i-mingcute:more-2-line text="lg" />
                 </div>
               </div>
-              <div text="base $bew-text-2" w-fit m="t-2" flex="~ items-center wrap">
+              <div text="sm $bew-text-2" w-fit m="t-2" flex="~ items-center wrap">
                 <!-- Author Avatar -->
                 <span
                   :style="{
@@ -456,10 +451,11 @@ function handleUndo() {
                         pos="absolute bottom--2px right--2px"
                         w-14px h-14px
                         bg="$bew-theme-color"
+                        border="2 outset solid white"
                         rounded="1/2"
                         grid place-items-center
                       >
-                        <div color-white text-sm class="i-mingcute:check-fill w-10px h-10px" />
+                        <div color-white text-sm class="i-mingcute:check-fill w-8px h-8px" />
                       </div>
                     </a>
                   </div>
@@ -480,15 +476,15 @@ function handleUndo() {
               <div flex="~ items-center gap-1 wrap">
                 <!-- View & Danmaku Count -->
                 <div
-                  text="$bew-text-2" rounded="$bew-radius"
+                  text="sm $bew-text-2" rounded="$bew-radius"
                   inline-block
                 >
                   <span v-if="video.view || video.viewStr">
-                    {{ video.view ? $t('common.view', { count: numFormatter(video.view) }, video.view) : `${video.viewStr}${$t('common.viewWithoutNum')}` }}
+                    {{ video.view ? $t('common.view', { count: numFormatter(video.view) }, video.view) : `${numFormatter(video.viewStr || '0')}${$t('common.viewWithoutNum')}` }}
                   </span>
                   <template v-if="video.danmaku || video.danmakuStr">
                     <span text-xs font-light mx-4px>•</span>
-                    <span>{{ video.danmaku ? $t('common.danmaku', { count: numFormatter(video.danmaku) }, video.danmaku) : `${video.danmakuStr}${$t('common.danmakuWithoutNum')}` }}</span>
+                    <span>{{ video.danmaku ? $t('common.danmaku', { count: numFormatter(video.danmaku) }, video.danmaku) : `${numFormatter(video.danmakuStr || '0')}${$t('common.danmakuWithoutNum')}` }}</span>
                   </template>
                   <br>
                 </div>

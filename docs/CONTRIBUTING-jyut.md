@@ -10,6 +10,36 @@
 
 ### 開發（Chrome 或 Edge）
 
+#### Chrome 或 Edge 嘅第一種方法
+
+<details>
+ <summary>詳細內容</summary>
+
+1. 執行 pnpm 指令
+
+```bash
+# 安裝依賴
+pnpm install
+
+# 建立一個用家帳戶資料夾，用於延伸功能存儲登入狀態
+mkdir web-ext-profile
+
+# 運行專案
+pnpm dev
+
+# 打完呢條指令之後，會自動開啓一個新嘅 Chrome 視窗並且打開 BiliBili 網站
+pnpm start:chromium
+```
+
+2. 之後每次修改延伸功能，佢會重新載入，你可以 refresh 個網頁睇吓改變之後嘅效果
+
+</details>
+
+#### Chrome 或 Edge 嘅另外一種方法
+
+<details>
+ <summary>詳細內容</summary>
+
 1. 執行 pnpm 指令
 
 ```bash
@@ -32,9 +62,11 @@ pnpm dev
 
 每一次執過 code 之後，你都要撳 [Extensions Reloader](https://chromewebstore.google.com/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) 粒掣，然之後 refresh 個 page，確保係有效果。
 
-#### 建立（Chrome 或 Edge）
+</details>
 
-建置延新功能，要執行下底嘅指令
+#### 建置（Chrome 或 Edge）
+
+建置延伸功能，要執行下底嘅指令
 
 ```bash
 pnpm build
@@ -43,6 +75,36 @@ pnpm build
 然之後打包 `extension` 下嘅檔案
 
 ### 開發（Firefox）
+
+#### Firefox 嘅第一種方法
+
+<details>
+ <summary>詳細內容</summary>
+
+1. 執行 pnpm 指令
+
+```bash
+# 安裝依賴
+pnpm install
+
+# 建立一個用家帳戶資料夾，用於延伸功能存儲登入狀態
+mkdir web-ext-profile
+
+# 運行專案
+pnpm dev
+
+# 打完呢條指令之後，會自動開啓一個新嘅 Firefox 視窗並且打開 BiliBili 網站
+pnpm start:firefox
+```
+
+2. 之後每次修改延伸功能，佢會重新載入，你可以 refresh 個網頁睇吓改變之後嘅效果
+
+</details>
+
+#### Firefox 嘅另外一種方法
+
+<details>
+ <summary>詳細內容</summary>
 
 1. 執行 pnpm 指令
 
@@ -60,9 +122,11 @@ pnpm dev
 
 3. 喺瀏覽器度載入產生嘅 `extension-firefox/` 資料夾
 
-#### 建立（Firefox）
+</details>
 
-建置延新功能，要執行下底嘅指令
+#### 建置（Firefox）
+
+建置延伸功能，要執行下底嘅指令
 
 ```bash
 pnpm build-firefox

@@ -11,6 +11,36 @@
 
 ### 开发 (Chrome or Edge)
 
+#### Chrome 或 Edge 的第一种方法
+
+<details>
+ <summary>详细内容</summary>
+
+1. 运行 pnpm 命令
+
+```bash
+# 安装依赖
+pnpm install
+
+# 创建一个用于存储登录状态的扩展程序文件夹
+mkdir web-ext-profile
+
+# 运行项目
+pnpm dev
+
+# 打完这条指令之后，会自动打开一个新的 Chrome 窗口并打开 BiliBili 网站
+pnpm start:chromium
+```
+
+2. 每次修改扩展程序，它都会重新加载，您可以通过刷新网页来查看更改
+
+</details>
+
+#### Chrome 或 Edge 的另外一种方法
+
+<details>
+ <summary>详细内容</summary>
+
 1. 运行 pnpm 命令
 
   ```bash
@@ -33,6 +63,8 @@
 
 每次修改后，您需要单击 [Reload Extensions](https://chromewebstore.google.com/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) 按钮并刷新页面以确保应用更改。
 
+</details>
+
 #### 构建 (Chrome or Edge)
 
 要构建拓展程序，运行
@@ -44,6 +76,36 @@ pnpm build
 然后打包到 `extension` 文件夹
 
 ### 开发 (Firefox)
+
+#### Firefox 的第一种方法
+
+<details>
+ <summary>详细内容</summary>
+
+1. 运行 pnpm 命令
+
+```bash
+# 安装依赖
+pnpm install
+
+# 创建一个用于存储登录状态的扩展程序文件夹
+mkdir web-ext-profile
+
+# 运行项目
+pnpm dev
+
+# 打完这条指令之后，会自动打开一个新的 Firefox 窗口并打开 BiliBili 网站
+pnpm start:firefox
+```
+
+2. 每次修改扩展程序，它都会重新加载，您可以通过刷新网页来查看更改
+
+</details>
+
+#### Firefox 的另外一种方法
+
+<details>
+ <summary>详细内容</summary>
 
 1. 运行 pnpm 命令
 
@@ -60,6 +122,8 @@ pnpm dev
 <img width="655" alt="image" src="https://github.com/hakadao/BewlyBewly/assets/33394391/7c49e4ca-2a87-4c56-bc00-3259d6eba128">
 
 3. 在浏览器中加载生成的 `extension-firefox/` 文件夹
+
+</details>
 
 #### 构建 (Firefox)
 

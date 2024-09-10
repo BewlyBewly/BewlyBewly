@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import DOMPurify from 'dompurify'
 import browser from 'webextension-polyfill'
 
 import { settings } from '~/logic'
@@ -233,7 +232,7 @@ async function checkGitHubRelease() {
           </a>
         </section> -->
       </section>
-      <section mt-4>
+      <!-- <section mt-4>
         <Button
           type="tertiary" mx-auto
           @click="dialogVisible.justWannaChangeTheJob = true"
@@ -253,24 +252,28 @@ async function checkGitHubRelease() {
           @close="dialogVisible.justWannaChangeTheJob = false"
         >
           <template #title>
-            <div text-18px font-bold>
+            <div text-xl font-bold>
               {{ $t('settings.just_wanna_change_the_job') }}
             </div>
             <a
               href="mailto:hakadao2000@gmail.com"
-              block text-14px color="$bew-theme-color" mt-2
+              block color="$bew-theme-color" mt-2
             >
               Gmail: hakadao2000@gmail.com
             </a>
           </template>
-          <div text-16.5px mb-2>
+          <div
+            whitespace-pre-wrap
+            bg="$bew-fill-1" rounded="$bew-radius" p-4 mb-8
+            v-html="DOMPurify.sanitize($t('settings.just_wanna_change_the_job_hint'))"
+          />
+          <div mb-2>
             {{ $t('settings.contact_me') }}
             <a href="mailto:hakadao2000@gmail.com" color="$bew-theme-color">hakadao2000@gmail.com</a>,
             GitHub: <a href="https://github.com/hakadao" target="_blank" color="$bew-theme-color">Hakadao</a>
           </div>
           <div
-            whitespace-pre-wrap lh-8 text-16.5px
-            :frosted-glass="false"
+            whitespace-pre-wrap lh-8
             v-html="DOMPurify.sanitize($t('settings.just_wanna_change_the_job_desc'))"
           />
 
@@ -286,7 +289,7 @@ async function checkGitHubRelease() {
             w-200px h-200px
           />
         </Dialog>
-      </section>
+      </section> -->
     </div>
   </div>
 </template>
@@ -298,7 +301,7 @@ async function checkGitHubRelease() {
 }
 
 .title {
-  --uno: "text-base fw-bold mb-2";
+  --uno: "fw-bold mb-2";
 }
 
 .link-card {

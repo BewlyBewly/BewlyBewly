@@ -85,6 +85,10 @@
       }
     }
 
+    .bili-dyn-forward-publishing__editor {
+      background-color: var(--bew-content-solid);
+    }
+
     // Like & dislike icon
     .like-icon,
     .dislike-icon,
@@ -245,7 +249,8 @@
       background-color: var(--bew-content-solid);
     }
 
-    .forw-area {
+    .forw-area,
+    .bili-rich-textarea__inner {
       background-color: transparent;
     }
 
@@ -310,7 +315,6 @@
     .comment-bilibili-fold .comment-send .textarea-container .ipt-txt,
     .bb-comment .comment-send-lite .textarea-container .ipt-txt,
     .comment-bilibili-fold .comment-send-lite .textarea-container .ipt-txt,
-    .bili-dyn-forward-publishing__editor,
     .textarea-container textarea {
       background-color: var(--bew-fill-1);
       border-color: var(--bew-border-color);
@@ -329,6 +333,10 @@
       background-color: var(--Ye1);
       border-color: var(--Ye1);
       color: var(--Or7);
+    }
+
+    .bili-rich-textarea::-webkit-scrollbar-thumb {
+      background-color: rgba(120, 120, 140, 0.44);
     }
   }
   // #endregion

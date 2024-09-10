@@ -1,7 +1,7 @@
-.bewly-design * {
+* {
   outline-color: var(--bew-theme-color-80);
-  outline-width: 2px;
-  outline-offset: -2px;
+  // outline-width: 2px;
+  // outline-offset: 2px;
 }
 
 .bewly-design.dark * {
@@ -84,6 +84,43 @@ img {
     background-size: 25px;
     background-position: center;
     background-repeat: no-repeat;
+  }
+}
+
+code {
+  display: inline-block;
+  background-color: var(--bew-fill-1);
+  padding: 0 0.5em;
+  margin: 0.24em 0.2em;
+  border-radius: 4px;
+  font-weight: 600;
+  line-height: 1.24;
+  box-shadow: 0 0 0 1px var(--bew-border-color);
+}
+
+kbd {
+  display: inline-block;
+  background-color: var(--bew-fill-1);
+  padding: 0 0.5em;
+  margin: 0.24em 0.2em;
+  border-radius: 4px;
+  box-shadow:
+    0 0 0 1px var(--bew-border-color),
+    0 2.4px 0 0 var(--bew-fill-2);
+  line-height: 1.24;
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    background-color: var(--bew-fill-2);
+  }
+
+  &:active {
+    background-color: var(--bew-fill-3);
+    translate: 0 2.4px;
+    box-shadow:
+      0 0 0 1px var(--bew-border-color),
+      0 -2.4px 0 0 var(--bew-fill-2);
   }
 }
 

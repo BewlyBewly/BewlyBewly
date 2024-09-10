@@ -26,8 +26,16 @@ const emit = defineEmits<{
   (e: 'afterLoading'): void
 }>()
 
-const filterFunc = useFilter([FilterType.duration, FilterType.viewCount], [['duration'], ['stat', 'view']])
-const appFilterFunc = useFilter([FilterType.duration, FilterType.viewCountStr], [['player_args', 'duration'], ['cover_left_text_1']])
+const filterFunc = useFilter(
+  ['is_followed'],
+  [FilterType.duration, FilterType.viewCount, FilterType.title, FilterType.user, FilterType.user],
+  [['duration'], ['stat', 'view'], ['title'], ['owner', 'name'], ['owner', 'mid']],
+)
+const appFilterFunc = useFilter(
+  ['bottom_rcmd_reason'],
+  [FilterType.filterOutVerticalVideos, FilterType.duration, FilterType.viewCountStr, FilterType.title, FilterType.user, FilterType.user],
+  [['uri'], ['player_args', 'duration'], ['cover_left_text_1'], ['title'], ['mask', 'avatar', 'text'], ['mask', 'avatar', 'up_id']],
+)
 
 const { t } = useI18n()
 
@@ -77,7 +85,7 @@ const dislikedAppVideoUniqueKeys = ref<string[]>([])
 const showDislikeDialog = ref<boolean>(false)
 const selectedDislikeReason = ref<number>(1)
 const loadingDislikeDialog = ref<boolean>(false)
-const pageSize = 30
+const PAGE_SIZE = 30
 
 onKeyStroke((e: KeyboardEvent) => {
   if (showDislikeDialog.value) {
@@ -169,14 +177,19 @@ function initPageAction() {
 async function getRecommendVideos() {
   try {
     let i = 0
-    const pendingVideos: VideoElement[] = Array.from({ length: pageSize }, () => ({
-      uniqueId: `unique-id-${(videoList.value.length || 0) + i++})}`,
-    } satisfies VideoElement))
-    videoList.value.push(...pendingVideos)
+    if (!filterFunc.value || (videoList.value.length < PAGE_SIZE && filterFunc.value)) {
+      const pendingVideos: VideoElement[] = Array.from({
+        length: videoList.value.length < PAGE_SIZE ? PAGE_SIZE - videoList.value.length : PAGE_SIZE,
+      }, () => ({
+        uniqueId: `unique-id-${(videoList.value.length || 0) + i++})}`,
+      } satisfies VideoElement))
+
+      videoList.value.push(...pendingVideos)
+    }
 
     const response: forYouResult = await api.video.getRecommendVideos({
       fresh_idx: refreshIdx.value++,
-      ps: pageSize,
+      ps: PAGE_SIZE,
     })
 
     if (!response.data) {
@@ -198,10 +211,29 @@ async function getRecommendVideos() {
       }
       else {
         resData.forEach((item) => {
-          videoList.value.push({
-            uniqueId: `${item.id}`,
-            item,
-          })
+          // If the `filterFunc` is unset, indicating that the user hasn't specified the filter,
+          // skep the `findFirstEmptyItemIndex` check to enhance the performance
+          if (!filterFunc.value) {
+            videoList.value.push({
+              uniqueId: `${item.id}`,
+              item,
+            })
+          }
+          else {
+            const findFirstEmptyItemIndex = videoList.value.findIndex(video => !video.item)
+            if (findFirstEmptyItemIndex !== -1) {
+              videoList.value[findFirstEmptyItemIndex] = {
+                uniqueId: `${item.id}`,
+                item,
+              }
+            }
+            else {
+              videoList.value.push({
+                uniqueId: `${item.id}`,
+                item,
+              })
+            }
+          }
         })
       }
     }
@@ -210,11 +242,14 @@ async function getRecommendVideos() {
     }
   }
   finally {
-    videoList.value = videoList.value.filter(video => video.item)
+    const filledItems = videoList.value.filter(video => video.item)
+    videoList.value = filledItems
 
-    await nextTick()
-    if (!haveScrollbar()) {
-      getRecommendVideos()
+    if (!needToLoginFirst.value) {
+      await nextTick()
+      if (!haveScrollbar() || filledItems.length < PAGE_SIZE || filledItems.length < 1) {
+        getRecommendVideos()
+      }
     }
   }
 }
@@ -222,10 +257,15 @@ async function getRecommendVideos() {
 async function getAppRecommendVideos() {
   try {
     let i = 0
-    const pendingVideos: AppVideoElement[] = Array.from({ length: pageSize }, () => ({
-      uniqueId: `unique-id-${(appVideoList.value.length || 0) + i++})}`,
-    } satisfies AppVideoElement))
-    appVideoList.value.push(...pendingVideos)
+    if (!appFilterFunc.value || (appVideoList.value.length < PAGE_SIZE && appFilterFunc.value)) {
+      const pendingVideos: AppVideoElement[] = Array.from({
+        length: appVideoList.value.length < PAGE_SIZE ? PAGE_SIZE - appVideoList.value.length : PAGE_SIZE,
+      }, () => ({
+        uniqueId: `unique-id-${(appVideoList.value.length || 0) + i++})}`,
+      } satisfies AppVideoElement))
+
+      appVideoList.value.push(...pendingVideos)
+    }
 
     const response: AppForYouResult = await api.video.getAppRecommendVideos({
       access_key: accessKey.value,
@@ -250,10 +290,29 @@ async function getAppRecommendVideos() {
       }
       else {
         resData.forEach((item) => {
-          appVideoList.value.push({
-            uniqueId: `${item.idx}`,
-            item,
-          })
+          // If the `appFilterFunc` is unset, indicating that the user hasn't specified the filter,
+          // skep the `findFirstEmptyItemIndex` check to enhance the performance
+          if (!appFilterFunc.value) {
+            appVideoList.value.push({
+              uniqueId: `${item.idx}`,
+              item,
+            })
+          }
+          else {
+            const findFirstEmptyItemIndex = appVideoList.value.findIndex(video => !video.item)
+            if (findFirstEmptyItemIndex !== -1) {
+              appVideoList.value[findFirstEmptyItemIndex] = {
+                uniqueId: `${item.idx}`,
+                item,
+              }
+            }
+            else {
+              appVideoList.value.push({
+                uniqueId: `${item.idx}`,
+                item,
+              })
+            }
+          }
         })
       }
     }
@@ -262,11 +321,14 @@ async function getAppRecommendVideos() {
     }
   }
   finally {
-    appVideoList.value = appVideoList.value.filter(video => video.item)
+    const filledItems = appVideoList.value.filter(video => video.item)
+    appVideoList.value = filledItems
 
-    await nextTick()
-    if (!haveScrollbar()) {
-      getAppRecommendVideos()
+    if (!needToLoginFirst.value) {
+      await nextTick()
+      if (!haveScrollbar() || filledItems.length < PAGE_SIZE || filledItems.length < 1) {
+        getAppRecommendVideos()
+      }
     }
   }
 }
@@ -475,7 +537,7 @@ defineExpose({ initData })
     <Dialog
       v-if="showDislikeDialog"
       :title="$t('home.tell_us_why')"
-      width="400px"
+      width="420px"
       append-to-bewly-body
       :loading="loadingDislikeDialog"
       @close="closeDislikeDialog"
@@ -505,6 +567,7 @@ defineExpose({ initData })
           />
         </li>
       </ul>
+      <p text="$bew-text-3 sm" mt-4 v-html="$t('home.not_interested_desc')" />
     </Dialog>
 
     <Empty v-if="needToLoginFirst" mt-6 :description="$t('common.please_log_in_first')">
@@ -583,6 +646,7 @@ defineExpose({ initData })
       </template>
     </div>
 
+    <Loading v-show="isLoading" />
     <!-- no more content -->
     <Empty v-if="noMoreContent" class="pb-4" :description="$t('common.no_more_content')" />
   </div>

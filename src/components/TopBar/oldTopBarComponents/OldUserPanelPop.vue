@@ -8,6 +8,7 @@ import { numFormatter } from '~/utils/dataFormatter'
 import { LV0_ICON, LV1_ICON, LV2_ICON, LV3_ICON, LV4_ICON, LV5_ICON, LV6_ICON, LV6_LIGHTNING_ICON } from '~/utils/lvIcons'
 import { getCSRF, getUserID, isHomePage } from '~/utils/main'
 
+import ALink from '../components/ALink.vue'
 import type { UserInfo, UserStat } from '../types'
 
 const props = defineProps<{
@@ -32,6 +33,11 @@ const otherLinks = computed((): { name: string, url: string, icon: string }[] =>
       name: t('topbar.user_dropdown.account_settings'),
       url: 'https://account.bilibili.com/account/home',
       icon: 'i-solar:user-circle-bold-duotone',
+    },
+    {
+      name: t('topbar.user_dropdown.bilibili_premium'),
+      url: 'https://account.bilibili.com/big',
+      icon: 'i-solar:accessibility-bold-duotone',
     },
     {
       name: t('topbar.user_dropdown.b_coins_wallet'),
@@ -197,32 +203,29 @@ function getLvIcon(level: number, isSigma: boolean = false): string {
     </a>
 
     <div grid="~ cols-3 gap-2" mb-2>
-      <a
+      <ALink
         class="channel-info-item"
         :href="`https://space.bilibili.com/${mid}/fans/follow`"
-        :target="isHomePage() ? '_blank' : '_self'"
         :title="`${userStat.following}`"
       >
         <div class="num">
           {{ userStat.following ? numFormatter(userStat.following) : '0' }}
         </div>
         <div>{{ $t('topbar.user_dropdown.following') }}</div>
-      </a>
-      <a
+      </ALink>
+      <ALink
         class="channel-info-item"
         :href="`https://space.bilibili.com/${mid}/fans/fans`"
-        :target="isHomePage() ? '_blank' : '_self'"
         :title="`${userStat.follower}`"
       >
         <div class="num">
           {{ userStat.follower ? numFormatter(userStat.follower) : '0' }}
         </div>
         <div>{{ $t('topbar.user_dropdown.followers') }}</div>
-      </a>
-      <a
+      </ALink>
+      <ALink
         class="channel-info-item"
         :href="`https://space.bilibili.com/${mid}/dynamic`"
-        :target="isHomePage() ? '_blank' : '_self'"
         :title="`${userStat.dynamic_count}`"
       >
         <div class="num">
@@ -231,7 +234,7 @@ function getLvIcon(level: number, isSigma: boolean = false): string {
           }}
         </div>
         <div>{{ $t('topbar.user_dropdown.posts') }}</div>
-      </a>
+      </ALink>
     </div>
 
     <div

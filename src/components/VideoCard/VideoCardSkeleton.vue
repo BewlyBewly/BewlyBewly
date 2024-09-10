@@ -24,16 +24,16 @@ const wValue = computed((): string => {
         shrink-0
       />
       <div w="[calc(100%-30px)]">
-        <div flex="~ col gap-3" mb-4 w-inherit>
+        <div flex="~ col gap-2" mb-4 w-inherit>
           <div w-full h-5 bg="$bew-skeleton" rounded-4px />
           <div w="3/4" h-5 bg="$bew-skeleton" rounded-4px />
         </div>
-        <div flex="~ col gap-2" mb-2>
-          <div w="40%" h-4 bg="$bew-skeleton" rounded-4px />
-          <div w="60%" h-4 bg="$bew-skeleton" rounded-4px />
+        <div flex="~ col gap-2" mb-3>
+          <div w="40%" h-3 bg="$bew-skeleton" rounded-4px />
+          <div w="60%" h-3 bg="$bew-skeleton" rounded-4px />
         </div>
         <div
-          text="transparent sm" inline-block p="x-2" lh-6
+          text="transparent sm" inline-block p="x-2" lh-22px
           bg="$bew-skeleton" rounded-4
         >
           hello world
@@ -75,7 +75,7 @@ const wValue = computed((): string => {
 
             <div w="40%" h-5 bg="$bew-skeleton" rounded-4px />
           </div>
-          <div w="60%" h-5 bg="$bew-skeleton" rounded-4px />
+          <div w="60%" h-4 bg="$bew-skeleton" rounded-4px />
           <div
             text="transparent sm" inline-block w-fit
             lh-6 p="x-2" mt-1

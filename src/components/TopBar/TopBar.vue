@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useMouseInElement } from '@vueuse/core'
+import { onClickOutside, useMouseInElement } from '@vueuse/core'
 import type { Ref, UnwrapNestedRefs } from 'vue'
 
 import { useApiClient } from '~/composables/api'
@@ -11,6 +11,7 @@ import { settings } from '~/logic'
 import { getUserID, isHomePage } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
+import ALink from './components/ALink.vue'
 import ChannelsPop from './components/ChannelsPop.vue'
 import FavoritesPop from './components/FavoritesPop.vue'
 import HistoryPop from './components/HistoryPop.vue'
@@ -127,8 +128,8 @@ function closeAllTopBarPopup(exceptionKey?: keyof typeof popupVisible) {
 
 const rightSideInactive = computed(() => {
   let isInactive = false
-  Object.entries(popupVisible).forEach(([key, value]) => {
-    if (value && key !== 'userPanel') {
+  Object.entries(popupVisible).forEach(([_key, value]) => {
+    if (value) {
       isInactive = true
     }
   })
@@ -136,104 +137,63 @@ const rightSideInactive = computed(() => {
 })
 
 // Channels
-const channels = useDelayedHover({
-  beforeEnter: () => closeAllTopBarPopup('channels'),
-  enter: () => {
-    popupVisible.channels = true
-  },
-  leave: () => {
-    popupVisible.channels = false
-  },
-})
-
+const channels = setupTopBarItemHoverEvent('channels')
 // Avatar
-const avatar = useDelayedHover({
-  beforeEnter: () => closeAllTopBarPopup('userPanel'),
-  enter: () => {
-    popupVisible.userPanel = true
-  },
-  beforeLeave: () => {
-    popupVisible.userPanel = false
-  },
-  leave: () => {
-    popupVisible.userPanel = false
-  },
-})
-
+const avatar = setupTopBarItemHoverEvent('userPanel')
 // Notifications
-const notifications = useDelayedHover({
-  beforeEnter: () => closeAllTopBarPopup('notifications'),
-  enter: () => {
-    popupVisible.notifications = true
-  },
-  leave: () => {
-    popupVisible.notifications = false
-  },
-})
-
+const notifications = setupTopBarItemHoverEvent('notifications')
 // Moments
-const moments = useDelayedHover({
-  beforeEnter: () => closeAllTopBarPopup('moments'),
-  enter: () => {
-    popupVisible.moments = true
-    momentsPopRef.value && momentsPopRef.value.checkIfHasNewMomentsThenUpdateMoments()
-  },
-  leave: () => {
-    popupVisible.moments = false
-  },
-})
-
+const moments = setupTopBarItemHoverEvent('moments')
 // Favorites
-const favorites = useDelayedHover({
-  beforeEnter: () => closeAllTopBarPopup('favorites'),
-  enter: () => {
-    popupVisible.favorites = true
-  },
-  leave: () => {
-    popupVisible.favorites = false
-  },
-})
-
+const favorites = setupTopBarItemHoverEvent('favorites')
 // History
-const history = useDelayedHover({
-  beforeEnter: () => closeAllTopBarPopup('history'),
-  enter: () => {
-    popupVisible.history = true
-  },
-  leave: () => {
-    popupVisible.history = false
-  },
-})
-
+const history = setupTopBarItemHoverEvent('history')
 // Watch Later
-const watchLater = useDelayedHover({
-  beforeEnter: () => closeAllTopBarPopup('watchLater'),
-  enter: () => {
-    popupVisible.watchLater = true
-  },
-  leave: () => {
-    popupVisible.watchLater = false
-  },
-})
-
+const watchLater = setupTopBarItemHoverEvent('watchLater')
 // Upload
-const upload = useDelayedHover({
-  beforeEnter: () => closeAllTopBarPopup('upload'),
-  enter: () => {
-    popupVisible.upload = true
-  },
-  leave: () => {
-    popupVisible.upload = false
-  },
-})
-
+const upload = setupTopBarItemHoverEvent('upload')
 // More
-const more = useDelayedHover({
-  beforeEnter: () => closeAllTopBarPopup(),
-  enter: () => {
-    popupVisible.more = true
-  },
-  leave: () => popupVisible.more = false,
+const more = setupTopBarItemHoverEvent('more')
+
+const topBarItemElements = {
+  channels,
+  userPanel: avatar,
+  notifications,
+  moments,
+  favorites,
+  history,
+  watchLater,
+  upload,
+}
+
+function setupTopBarItemHoverEvent(key: keyof typeof popupVisible) {
+  return useDelayedHover({
+    beforeEnter: () => closeAllTopBarPopup(key),
+    enter: () => {
+      popupVisible[key] = true
+    },
+    leave: () => {
+      popupVisible[key] = false
+    },
+  })
+}
+
+const currentClickedTopBarItem = ref<keyof typeof popupVisible | null>(null)
+
+function handleClickTopBarItem(event: MouseEvent, key: keyof typeof popupVisible) {
+  if (settings.value.touchScreenOptimization) {
+    event.preventDefault()
+    closeAllTopBarPopup(key)
+    popupVisible[key] = !popupVisible[key]
+    currentClickedTopBarItem.value = key
+  }
+}
+
+Object.entries(topBarItemElements).forEach(([key, val]) => {
+  onClickOutside(val, () => {
+    if (currentClickedTopBarItem.value === key)
+      popupVisible[key as keyof typeof popupVisible] = false
+  })
 })
 
 // #endregion
@@ -488,15 +448,16 @@ defineExpose({
               :class="{ activated: popupVisible.channels }"
               style="backdrop-filter: var(--bew-filter-glass-1);"
               grid="~ place-items-center" border="1 $bew-border-color"
-              rounded="50px" duration-300
+              rounded="46px" duration-300
               bg="$bew-elevated hover:$bew-theme-color dark-hover:white"
-              shadow="$bew-shadow-2"
-              w-50px h-50px transform-gpu
+              shadow="[var(--bew-shadow-edge-glow-1),var(--bew-shadow-2)]"
+              w-46px h-46px transform-gpu
+              @click="event => handleClickTopBarItem(event, 'channels')"
             >
 
               <svg
                 t="1720198072316" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                p-id="1477" width="40" height="40"
+                p-id="1477" width="38" height="38"
                 un-fill="$bew-theme-color dark:white" un-group-hover:fill="white dark:$bew-theme-color"
                 duration-300 mt--1px
               >
@@ -521,9 +482,9 @@ defineExpose({
             <SearchBar
               v-if="showSearchBar"
               style="
-              --b-search-bar-color: var(--bew-elevated);
-              --b-search-bar-hover: var(--bew-elevated-hover);
-            "
+                --b-search-bar-color: var(--bew-elevated);
+                --b-search-bar-hover: var(--bew-elevated-hover);
+              "
             />
           </Transition>
         </div>
@@ -540,14 +501,18 @@ defineExpose({
               backdrop-filter: var(--bew-filter-glass-1);
               box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
             "
-            flex="~ items-center gap-1" h-50px px-6px bg="$bew-elevated"
+            flex="~ items-center gap-1" h-46px px-5px bg="$bew-elevated"
             transition="transition-property-colors duration-150"
             text="$bew-text-1" border="1 $bew-border-color" rounded-full
             transform-gpu
           >
-            <div v-if="!isLogin" class="right-side-item">
+            <div
+              v-if="!isLogin"
+              class="right-side-item"
+              important-w-auto
+            >
               <a href="https://passport.bilibili.com/login" class="login">
-                <div i-ic:outline-account-circle class="text-xl mr-2" />{{
+                <div i-solar:user-circle-bold-duotone class="text-xl mr-2" />{{
                   $t('topbar.sign_in')
                 }}
               </a>
@@ -575,6 +540,7 @@ defineExpose({
                   ref="moments"
                   class="right-side-item"
                   :class="{ active: popupVisible.moments }"
+                  @click="event => handleClickTopBarItem(event, 'moments')"
                 >
                   <template v-if="newMomentsCount > 0">
                     <div
@@ -588,16 +554,20 @@ defineExpose({
                       class="unread-dot"
                     />
                   </template>
-                  <a
+                  <ALink
                     href="https://t.bilibili.com"
-                    :target="isHomePage() ? '_blank' : '_self'"
                     :title="$t('topbar.moments')"
                   >
                     <div i-tabler:windmill />
-                  </a>
+                  </ALink>
 
                   <Transition name="slide-in">
-                    <MomentsPop v-show="popupVisible.moments" ref="momentsPopRef" class="bew-popover" />
+                    <MomentsPop
+                      v-show="popupVisible.moments"
+                      ref="momentsPopRef"
+                      class="bew-popover"
+                      @click.stop="() => {}"
+                    />
                   </Transition>
                 </div>
 
@@ -606,14 +576,14 @@ defineExpose({
                   ref="favorites"
                   class="right-side-item"
                   :class="{ active: popupVisible.favorites }"
+                  @click="event => handleClickTopBarItem(event, 'favorites')"
                 >
-                  <a
+                  <ALink
                     :href="`https://space.bilibili.com/${mid}/favlist`"
-                    :target="isHomePage() ? '_blank' : '_self'"
                     :title="$t('topbar.favorites')"
                   >
                     <div i-mingcute:star-line />
-                  </a>
+                  </ALink>
 
                   <Transition name="slide-in">
                     <KeepAlive>
@@ -621,6 +591,7 @@ defineExpose({
                         v-if="popupVisible.favorites"
                         ref="favoritesPopRef"
                         class="bew-popover"
+                        @click.stop="() => {}"
                       />
                     </KeepAlive>
                   </Transition>
@@ -631,17 +602,22 @@ defineExpose({
                   ref="history"
                   class="right-side-item"
                   :class="{ active: popupVisible.history }"
+                  @click="event => handleClickTopBarItem(event, 'history')"
                 >
-                  <a
+                  <ALink
                     href="https://www.bilibili.com/account/history"
-                    :target="isHomePage() ? '_blank' : '_self'"
+
                     :title="$t('topbar.history')"
                   >
                     <div i-mingcute:time-line />
-                  </a>
+                  </ALink>
 
                   <Transition name="slide-in">
-                    <HistoryPop v-if="popupVisible.history" class="bew-popover" />
+                    <HistoryPop
+                      v-if="popupVisible.history"
+                      class="bew-popover"
+                      @click.stop="() => {}"
+                    />
                   </Transition>
                 </div>
 
@@ -650,19 +626,20 @@ defineExpose({
                   ref="watchLater"
                   class="right-side-item"
                   :class="{ active: popupVisible.watchLater }"
+                  @click="event => handleClickTopBarItem(event, 'watchLater')"
                 >
-                  <a
+                  <ALink
                     href="https://www.bilibili.com/watchlater/#/list"
-                    :target="isHomePage() ? '_blank' : '_self'"
                     :title="$t('topbar.watch_later')"
                   >
                     <div i-mingcute:carplay-line />
-                  </a>
+                  </ALink>
 
                   <Transition name="slide-in">
                     <WatchLaterPop
                       v-if="popupVisible.watchLater"
                       class="bew-popover"
+                      @click.stop="() => {}"
                     />
                   </Transition>
                 </div>
@@ -684,128 +661,141 @@ defineExpose({
                 ref="more"
                 class="right-side-item lg:!hidden flex"
                 :class="{ active: popupVisible.more }"
+                @click="event => handleClickTopBarItem(event, 'more')"
               >
                 <a title="More">
                   <div i-mingcute:menu-line />
                 </a>
 
                 <Transition name="slide-in">
-                  <MorePop v-show="popupVisible.more" class="bew-popover" />
-                </Transition>
-              </div>
-
-              <div
-                w-4px h="40%" bg="$bew-fill-1" mx-1
-                rounded-4px
-              />
-
-              <!-- Upload -->
-              <div
-                ref="upload"
-                class="right-side-item"
-                :class="{ active: popupVisible.upload }"
-              >
-                <a
-                  href="https://member.bilibili.com/platform/upload/video/frame"
-                  target="_blank"
-                  :title="$t('topbar.upload')"
-                >
-                  <div i-mingcute:upload-2-line flex-shrink-0 />
-                </a>
-
-                <Transition name="slide-in">
-                  <UploadPop
-                    v-if="popupVisible.upload"
+                  <MorePop
+                    v-show="popupVisible.more"
                     class="bew-popover"
+                    @click.stop="() => {}"
                   />
                 </Transition>
               </div>
 
-              <!-- Notifications -->
-              <div
-                ref="notifications"
-                class="right-side-item"
-                :class="{ active: popupVisible.notifications }"
-              >
-                <template v-if="unReadMessageCount > 0">
-                  <div
-                    v-if="settings.topBarIconBadges === 'number'"
-                    class="unread-num-dot"
+              <div class="hidden lg:flex" gap-1 items-center>
+                <!-- Divider -->
+                <div
+                  w-2px h-16px bg="$bew-border-color" mx-1
+                  rounded-4px
+                />
+
+                <!-- Upload -->
+                <div
+                  ref="upload"
+                  class="right-side-item"
+                  :class="{ active: popupVisible.upload }"
+                  @click="event => handleClickTopBarItem(event, 'upload')"
+                >
+                  <a
+                    href="https://member.bilibili.com/platform/upload/video/frame"
+                    target="_blank"
+                    :title="$t('topbar.upload')"
                   >
-                    {{ unReadMessageCount > 99 ? '99+' : unReadMessageCount }}
-                  </div>
-                  <div
-                    v-else-if="settings.topBarIconBadges === 'dot'"
-                    class="unread-dot"
-                  />
-                </template>
-                <a
-                  href="https://message.bilibili.com"
-                  :target="isHomePage() ? '_blank' : '_self'"
-                  :title="$t('topbar.notifications')"
-                >
-                  <div i-tabler:bell />
-                </a>
+                    <div i-mingcute:upload-2-line flex-shrink-0 />
+                  </a>
 
-                <Transition name="slide-in">
-                  <NotificationsPop
-                    v-if="popupVisible.notifications"
-                    class="bew-popover"
-                  />
-                </Transition>
+                  <Transition name="slide-in">
+                    <UploadPop
+                      v-if="popupVisible.upload"
+                      class="bew-popover"
+                      @click.stop="() => {}"
+                    />
+                  </Transition>
+                </div>
+
+                <!-- Notifications -->
+                <div
+                  ref="notifications"
+                  class="right-side-item"
+                  :class="{ active: popupVisible.notifications }"
+                  @click="event => handleClickTopBarItem(event, 'notifications')"
+                >
+                  <template v-if="unReadMessageCount > 0">
+                    <div
+                      v-if="settings.topBarIconBadges === 'number'"
+                      class="unread-num-dot"
+                    >
+                      {{ unReadMessageCount > 99 ? '99+' : unReadMessageCount }}
+                    </div>
+                    <div
+                      v-else-if="settings.topBarIconBadges === 'dot'"
+                      class="unread-dot"
+                    />
+                  </template>
+                  <ALink
+                    href="https://message.bilibili.com"
+                    :target="isHomePage() ? '_blank' : '_self'"
+                    :title="$t('topbar.notifications')"
+                  >
+                    <div i-tabler:bell />
+                  </ALink>
+
+                  <Transition name="slide-in">
+                    <NotificationsPop
+                      v-if="popupVisible.notifications"
+                      class="bew-popover"
+                      @click.stop="() => {}"
+                    />
+                  </Transition>
+                </div>
               </div>
             </template>
-          </div>
 
-          <!-- Avatar -->
-          <div
-            v-if="isLogin"
-            ref="avatar"
-            :class="{ hover: popupVisible.userPanel }"
-            class="avatar right-side-item"
-          >
-            <a
-              ref="avatarImg"
-              :href="`https://space.bilibili.com/${mid}`"
-              :target="isHomePage() ? '_blank' : '_self'"
-              class="avatar-img"
-              :class="{ hover: popupVisible.userPanel }"
-              :style="{
-                backgroundImage: `url(${`${userInfo.face}`.replace(
-                  'http:',
-                  '',
-                )})`,
-              }"
-            />
+            <!-- Avatar -->
             <div
-              ref="avatarShadow"
-              class="avatar-shadow"
+              v-if="isLogin"
+              ref="avatar"
               :class="{ hover: popupVisible.userPanel }"
-              :style="{
-                backgroundImage: `url(${`${userInfo.face}`.replace(
-                  'http:',
-                  '',
-                )})`,
-              }"
-            />
-            <svg
-              v-if="userInfo.vip?.status === 1"
-              class="vip-img"
-              :class="{ hover: popupVisible.userPanel }"
-              :style="{ opacity: popupVisible.userPanel ? 1 : 0 }"
-              bg="[url(https://i0.hdslb.com/bfs/seed/jinkela/short/user-avatar/big-vip.svg)] cover no-repeat"
-              w="30%" h="30%" z-1
-              pos="absolute bottom--14px right-24px" duration-300
-            />
-            <Transition name="slide-in">
-              <UserPanelPop
-                v-if="popupVisible.userPanel"
-                class="bew-popover"
-                :user-info="userInfo"
-                after:h="!0"
-                pos="!left-auto !right-0" transform="!translate-x-0"
+              class="avatar right-side-item"
+              @click="event => handleClickTopBarItem(event, 'userPanel')"
+            >
+              <ALink
+                ref="avatarImg"
+                :href="`https://space.bilibili.com/${mid}`"
+                class="avatar-img"
+                :class="{ hover: popupVisible.userPanel }"
+                :style="{
+                  backgroundImage: `url(${`${userInfo.face}`.replace(
+                    'http:',
+                    '',
+                  )})`,
+                }"
               />
-            </Transition>
+              <div
+                ref="avatarShadow"
+                class="avatar-shadow"
+                :class="{ hover: popupVisible.userPanel }"
+                :style="{
+                  backgroundImage: `url(${`${userInfo.face}`.replace(
+                    'http:',
+                    '',
+                  )})`,
+                }"
+              />
+              <svg
+                v-if="userInfo.vip?.status === 1"
+                class="vip-img"
+                :class="{ hover: popupVisible.userPanel }"
+                :style="{ opacity: popupVisible.userPanel ? 1 : 0 }"
+                bg="[url(https://i0.hdslb.com/bfs/seed/jinkela/short/user-avatar/big-vip.svg)] contain no-repeat"
+                w="28%" h="28%" z-1
+                pos="absolute bottom--20px right-28px" duration-300
+              />
+              <Transition name="slide-in">
+                <UserPanelPop
+                  v-if="popupVisible.userPanel"
+                  class="bew-popover"
+                  :user-info="userInfo"
+                  after:h="!0"
+                  pos="!left-auto !right-0" transform="!translate-x-0"
+                  @click.stop="() => {}"
+                />
+              </Transition>
+            </div>
           </div>
         </div>
       </main>
@@ -878,7 +868,7 @@ defineExpose({
 
 .right-side {
   .avatar {
-    --uno: "flex items-center ml-4 relative z-1 rounded-1/2";
+    --uno: "flex items-center relative z-1 rounded-1/2";
 
     // Add a safety zone to prevent the avatar from collapsing quickly after leaving
     &:hover::after,
@@ -888,15 +878,15 @@ defineExpose({
 
     .avatar-img,
     .avatar-shadow {
-      --uno: "duration-300 rounded-1/2 w-40px h-40px bg-cover bg-center";
+      --uno: "duration-300 rounded-1/2 w-34px h-34px ml-1 bg-cover bg-center";
 
       &.hover {
-        --uno: "transform scale-230 translate-y-50px translate-x--36px";
+        --uno: "transform scale-230 translate-y-60px translate-x--36px";
       }
     }
 
     .avatar-img {
-      --uno: "z-1 shadow-$bew-shadow-2";
+      --uno: "z-1";
     }
 
     .avatar-shadow {
@@ -935,8 +925,8 @@ defineExpose({
     --uno: "relative text-$bew-text-1 flex items-center";
 
     &:not(.avatar) a {
-      --uno: "text-xl flex items-center p-2 rounded-40px duration-300 relative z-5";
-      --uno: "h-35px h-35px";
+      --uno: "text-lg grid place-items-center rounded-40px duration-300 relative z-5";
+      --uno: "h-34px w-34px";
     }
 
     &.active a,
@@ -947,8 +937,8 @@ defineExpose({
   }
 
   .right-side-item .login {
-    --un-drop-shadow: drop-shadow(0 0 6px var(--bew-theme-color));
-    --uno: "rounded-full mx-1 important:text-$bew-theme-color important:px-4 hover:important-bg-$bew-theme-color hover:important-text-white flex items-center justify-center important:text-base w-120px border-solid border-$bew-theme-color border-2 important:dark:filter";
+    --uno: "!w-auto !flex items-center bg-$bew-theme-color-10";
+    --uno: "rounded-full important:text-$bew-theme-color important:px-4 hover:important-bg-$bew-theme-color hover:important-text-white important:text-base";
   }
 }
 </style>

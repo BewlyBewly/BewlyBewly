@@ -4,6 +4,7 @@ import '~/styles'
 import { createApp } from 'vue'
 
 import { useDark } from '~/composables/useDark'
+import { BEWLY_MOUNTED } from '~/constants/globalEvents'
 import { settings } from '~/logic'
 import { setupApp } from '~/logic/common-setup'
 import { runWhenIdle } from '~/utils/lazyLoad'
@@ -27,7 +28,7 @@ if (isFirefox) {
 
 const currentUrl = document.URL
 
-function isSupportedPages() {
+function isSupportedPages(): boolean {
   if (
     // homepage
     isHomePage()
@@ -113,77 +114,98 @@ if (settings.value.adaptToOtherPageStyles && isHomePage()) {
   `)
 }
 
-if (isSupportedPages()) {
-  // remove the original top bar and adjust the height of the top bar to match the bewly top bar
-  injectCSS(`
-    .bili-header .bili-header__bar,
-    #internationalHeader,
-    .link-navbar,
-    #home_nav,
-    #biliMainHeader,
-    #bili-header-container {
-      visibility: hidden;
-      height: var(--bew-top-bar-height) !important;
-    }
-
-    /* some pages have a white bar at the top; changing the top margin fixes this problem */
-    .banner-wrapper,
-    .home-banner-wrapper {
-      margin-top: calc(-1 * var(--bew-top-bar-height)) !important;
-    }
-  `)
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  // Remove the original Bilibili homepage if in Bilibili homepage & useOriginalBilibiliHomepage is enabled
-  if (!settings.value.useOriginalBilibiliHomepage && isHomePage()) {
-    // const originalPageContent = document.querySelector('#i_cecream')
-    // if (originalPageContent)
-    //   originalPageContent.innerHTML = ''
-    document.body.innerHTML = ''
-  }
+window.addEventListener(BEWLY_MOUNTED, () => {
   if (beforeLoadedStyleEl)
     document.documentElement.removeChild(beforeLoadedStyleEl)
+})
+
+// Set the original Bilibili top bar to `display: none` to prevent it from showing before the load
+// see: https://github.com/BewlyBewly/BewlyBewly/issues/967
+let removeOriginalTopBar: HTMLStyleElement | null = null
+if (!settings.value.useOriginalBilibiliTopBar && isSupportedPages())
+  removeOriginalTopBar = injectCSS(`.bili-header { visibility: hidden !important; }`)
+
+async function onDOMLoaded() {
+  let originalTopBar: HTMLElement | null = null
+  // Remove the original Bilibili homepage if in Bilibili homepage & useOriginalBilibiliHomepage is enabled
+  if (!settings.value.useOriginalBilibiliHomepage && isHomePage()) {
+    originalTopBar = document.querySelector<HTMLElement>('.bili-header')
+    const originalTopBarInnerUselessContents = document.querySelectorAll<HTMLElement>('.bili-header > *:not(.bili-header__bar)')
+
+    if (originalTopBar) {
+      // always show the background on the original bilibili top bar
+      originalTopBar.querySelector('.bili-header__bar')?.classList.add('slide-down')
+    }
+
+    // Remove the original Bilibili homepage if in Bilibili homepage & useOriginalBilibiliHomepage is enabled
+    document.body.innerHTML = ''
+
+    if (originalTopBarInnerUselessContents)
+      originalTopBarInnerUselessContents.forEach(item => (item as HTMLElement).style.display = 'none')
+    if (originalTopBar)
+      document.body.appendChild(originalTopBar)
+  }
 
   if (isSupportedPages()) {
     // Then inject the app
-    injectApp()
+    if (isHomePage() && !settings.value.useOriginalBilibiliHomepage) {
+      injectApp()
+    }
+    else {
+      await injectAppWhenIdle()
+    }
   }
-})
+
+  // Reset the original Bilibili top bar display style
+  if (removeOriginalTopBar)
+    document.documentElement.removeChild(removeOriginalTopBar)
+}
+
+if (document.readyState !== 'loading')
+  onDOMLoaded()
+else
+  document.addEventListener('DOMContentLoaded', () => onDOMLoaded())
+
+function injectAppWhenIdle() {
+  return new Promise<void>((resolve) => {
+    // Inject app when idle
+    runWhenIdle(async () => {
+      injectApp()
+      resolve()
+    })
+  })
+}
 
 function injectApp() {
-  // Inject app when idle
-  runWhenIdle(async () => {
   // mount component to context window
-    const container = document.createElement('div')
-    container.id = 'bewly'
-    const root = document.createElement('div')
-    const styleEl = document.createElement('link')
-    // Fix #69 https://github.com/hakadao/BewlyBewly/issues/69
-    // https://medium.com/@emilio_martinez/shadow-dom-open-vs-closed-1a8cf286088a - open shadow dom
-    const shadowDOM = container.attachShadow?.({ mode: 'open' }) || container
-    styleEl.setAttribute('rel', 'stylesheet')
-    styleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
-    shadowDOM.appendChild(styleEl)
-    shadowDOM.appendChild(root)
-    container.style.opacity = '0'
-    container.style.transition = 'opacity 0.5s'
-    styleEl.onload = () => {
+  const container = document.createElement('div')
+  container.id = 'bewly'
+  const root = document.createElement('div')
+  const styleEl = document.createElement('link')
+  // Fix #69 https://github.com/hakadao/BewlyBewly/issues/69
+  // https://medium.com/@emilio_martinez/shadow-dom-open-vs-closed-1a8cf286088a - open shadow dom
+  const shadowDOM = container.attachShadow?.({ mode: 'open' }) || container
+  styleEl.setAttribute('rel', 'stylesheet')
+  styleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
+  shadowDOM.appendChild(styleEl)
+  shadowDOM.appendChild(root)
+  container.style.opacity = '0'
+  container.style.transition = 'opacity 0.5s'
+  styleEl.onload = () => {
     // To prevent abrupt style transitions caused by sudden style changes
-      setTimeout(() => {
-        container.style.opacity = '1'
-      }, 500)
-    }
+    setTimeout(() => {
+      container.style.opacity = '1'
+    }, 500)
+  }
 
-    // inject svg icons
-    const svgDiv = document.createElement('div')
-    svgDiv.innerHTML = SVG_ICONS
-    shadowDOM.appendChild(svgDiv)
+  // inject svg icons
+  const svgDiv = document.createElement('div')
+  svgDiv.innerHTML = SVG_ICONS
+  shadowDOM.appendChild(svgDiv)
 
-    document.body.appendChild(container)
+  document.body.appendChild(container)
 
-    const app = createApp(App)
-    setupApp(app)
-    app.mount(root)
-  })
+  const app = createApp(App)
+  setupApp(app)
+  app.mount(root)
 }

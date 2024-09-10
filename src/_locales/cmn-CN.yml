@@ -19,19 +19,43 @@ common:
   login: 登录
   save_to_watch_later: 稍后再看
   added: 已添加
-  performance_impact_warn: 这个功能可能会影响性能
-  enable: 启用
-  disable: 禁用
-  refresh: 刷新
-  reset: 重置
+  performance_impact_warn: 这个功能可能会影响性能！
   no_more_content: 没有更多内容了
-  confirm: 确定
-  cancel: 取消
+
+  operation:
+    add: 新增
+    edit: 编辑
+    delete: 删除
+    confirm: 确定
+    cancel: 取消
+    enable: 启用
+    disable: 禁用
+    refresh: 刷新
+    reset: 重置
+
+  table:
+    index: 索引
+    title: 标题
+    name: 名称
+    remark: 备注
+    operations: 操作
+
+  position:
+    left: 左侧
+    right: 右侧
+    top: 顶部
+    bottom: 底部
+
+iframe_drawer:
+  open_in_new_tab: 在新标签页打开
+  close: 关闭
+
 settings:
   title: 设置
 
   # Settings menu
   menu_general: 常规
+  menu_desktop_and_dock: 桌面和 Dock 栏
   menu_appearance: 外观
   menu_search_page: 搜索页
   menu_home: 首页
@@ -44,6 +68,8 @@ settings:
   group_performance: 毛玻璃和性能
   group_topbar: 顶栏
   group_dock: Dock 栏
+  group_sidebar: 侧边栏
+  group_sidebar_desc: 位于主页以外的页面右侧或左侧，通常有亮/暗模式切换按钮和设置按钮。
   group_color: 颜色
   group_wallpaper: 背景图片
   group_logo: LOGO
@@ -68,36 +94,49 @@ settings:
     mandarin_cn: 官话 - 简体中文
     mandarin_tw: 官話 - 正體中文
     jyut: 廣東話
+  touch_screen_optimization: 触屏体验改进
+  touch_screen_optimization_desc: >
+    启用后，如顶栏，你可能需要点击项目以查看更多信息，而不是鼠标直接悬停查看。（旧版顶栏不支持此功能）
   chk_box:
     show: 显示
     hidden: 隐藏
   enable_grid_layout_switcher: 启用页面网格布局切换器
   enable_horizontal_scrolling: 启用横向滚动
-  enable_horizontal_scrolling_desc: 启用后，鼠标滚动时将直接滚动横向滚动列表
-  enable_video_preview: 启用视频预览功能
+  enable_horizontal_scrolling_desc: 启用后，鼠标滚动时将直接滚动横向滚动列表。
+
+  video_card_link_opening_behavior: 视频卡片和番剧卡片链接打开行为
+  video_card_link_opening_behavior_opt:
+    drawer: 抽屉打开
+    new_tab: 新索引标籤
+  enable_video_preview: 启用视频预览功能（如果可以的话）
   enable_video_ctrl_bar_on_video_card: 在视频卡片上显示视频控制栏
   hover_video_card_delayed: 将鼠标悬停在视频卡片上时延迟视频预览
   block_ads: 屏蔽广告
   disable_frosted_glass: 禁用毛玻璃效果
   reduce_frosted_glass_blur: 降低毛玻璃模糊强度
-  use_old_topbar: 使用旧版顶栏
-  auto_hide_topbar: 自动隐藏顶栏
-  topbar_icon_badges: 图标角标
-  topbar_icon_badges_opt:
+
+  # Desktop & Dock
+  use_old_top_bar: 使用旧版顶栏
+  top_bar_link_opening_behavior: 顶栏链接打开行为
+  top_bar_link_opening_behavior_opt:
+    current_tab: 当前标签页
+    current_tab_if_not_homepage: 不在首页则当前标签页打开，否则在新标签页
+    new_tab: 新标签页
+  auto_hide_top_bar: 自动隐藏顶栏
+  top_bar_icon_badges: 图标角标
+  top_bar_icon_badges_opt:
     number: 数字
     dot: 圆点
     none: 不显示
   dock_position: Dock 栏位置
-  dock_position_desc: 在屏幕中摆放位置
-  dock_position_opt:
-    left: 左侧
-    right: 右侧
-    bottom: 底部
+  dock_position_desc: 在屏幕中摆放位置。
   auto_hide_dock: 自动隐藏 Dock 栏
   dock_content_adjustment: Dock 内容调整
-  dock_content_adjustment_desc: 第一个激活的 Dock 项的页面将会是启动页面
+  dock_content_adjustment_desc: 第一个激活的 Dock 项的页面将会是启动页面。
   disable_light_dark_mode_switcher: 禁用亮/暗色模式切换按钮
   move_back_to_top_and_refresh_to_dock: 将返回顶部和刷新按钮移动到 Dock 栏
+  sidebar_position: 侧边栏位置
+  auto_hide_sidebar: 自动隐藏侧边栏
 
   # Appearance
   theme: 主题
@@ -106,15 +145,16 @@ settings:
     dark: 暗色
     auto: 自动
   theme_color: 主题色
+  gradient_theme_color_background: 在暗色模式下使用渐变主题颜色作为背景
   wallpaper_mode: 背景图片模式
-  wallpaper_mode_desc: '使用 URL: 直接用网上图片的 URL 来设置背景图片。'
+  wallpaper_mode_desc: '使用网址: 直接用网上图片的网址来设置背景图片。'
   wallpaper_mode_opt:
     build_in: 内置
-    by_url: 使用 URL
+    by_url: 使用网址
   choose_ur_wallpaper: 选择你的背景
-  image_url: 图片 URL
+  image_url: 图片网址
   image_url_hint: |-
-    URL 示例: https://cdn.jsdelivr.net/gh/BewlyBewly/Imgs/wallpapers/rocky-mountain-cloudscape.jpg
+    网址示例: https://cdn.jsdelivr.net/gh/BewlyBewly/Imgs/wallpapers/rocky-mountain-cloudscape.jpg
     https://cdn.jsdelivr.net/gh/BewlyBewly/Imgs/wallpapers/green-white-mountains.jpg
   enable_wallpaper_masking: 启用背景遮罩效果
   wallpaper_mask_opacity: 背景遮罩透明度调整
@@ -141,13 +181,38 @@ settings:
     授权使用后能在首页推送 bilibili App 端算法的推荐视频，授权 key 有效期约为一个月，过后记得重新授权获取 access key。
   authorize_app_more_info_access_key: 关于 access key
   scan_qrcode_desc: 使用 Bilibili 移动应用程序扫描此二维码，以授权获取 access key。
+
+  disable_filters_for_followed_users: 关注的用户不受过滤条件限制
+  disable_filters_for_followed_users_desc: >
+    如果启用此选项，您关注的用户不受过滤条件限制。
+  filter_out_vertical_videos: 过滤竖屏视频（仅在 app 推荐模式下有效）
   filter_by_view_count: 按播放数筛选
+  filter_by_view_count_desc: 筛选掉播放数小于您设置的视频。
   filter_by_view_count_unit: 次
   filter_by_duration: 按时长筛选
+  filter_by_duration_desc: 筛选掉时长小于您设置的视频。
   filter_by_duration_unit: 秒
+  filter_item_already_exist: 这个筛选项目已经存在！
+  filter_by_title: 按标题筛选
+  filter_by_title_desc: >
+    按标题筛选掉包含您设置关键字的视频（不区分大小写），也可以使用正则表达式，如 <code>/abc&#124;\d+/</code>，用 <code>/</code> 包裹。
+    <br/>
+    在下表中，您可以按 <kbd>Enter</kbd> 键添加新的筛选条件或确认修改。
+    按 <kbd>Esc</kbd> 键取消修改。
+    双击列以编辑当前列。
+  filter_by_user: 按用户筛选
+  filter_by_user_desc: >
+    筛选掉包含您设置的用户名（全名，不区分大小写）或 mid 上传的视频，也可以使用正则表达式，如 <code>/abc&#124;\d+/</code>，用 <code>/</code> 包裹。
+    <br/>
+    在下表中，您可以按 <kbd>Enter</kbd> 键添加新的筛选条件或确认修改。
+    按 <kbd>Esc</kbd> 键取消修改。
+    双击列以编辑当前列。
+  filter_by_user_table:
+    username_or_mid: 用户名 / Mid
+
   use_search_page_mode: 首页使用搜索页模式
   settings_shared_with_the_search_page: 与搜索页共用的配置
-  settings_shared_with_the_search_page_desc: 这些设置都与搜索页共用
+  settings_shared_with_the_search_page_desc: 这些设置都与搜索页共用。
   search_page_mode_wallpaper_fixed: 将搜索页模式的壁纸固定
   home_tabs_adjustment: 标签栏调整
   home_tabs_adjustment_desc: 第一个激活的标签项是默认界面
@@ -155,15 +220,16 @@ settings:
 
   # Compatibility
   # Common
+  topbar_visibility: 顶栏可见性
+  topbar_visibility_desc: 如果您正在使用 Bilibili Evolved 的顶栏，您可以在这里关闭 BewlyBewly 的顶栏。
   use_original_bilibili_homepage: 使用原版 Bilibili 首页
   use_original_bilibili_homepage_desc: 在您更改此设置后，如果在首页上，页面将自动刷新！
+  use_original_bilibili_topbar: 使用原版 Bilibili 顶栏
   adapt_to_other_page_styles: 适应其他页面样式
-  adapt_to_other_page_styles_desc: 适应一些常见页面，以与 BewlyBewly 主题相匹配
+  adapt_to_other_page_styles_desc: 适应一些常见页面，以与 BewlyBewly 主题相匹配。
   # Bilibili Evolved
   follow_bilibili_evolved_color: 使用 Bilibili Evolved 主题色
-  follow_bilibili_evolved_color_desc: 每次选完 Bilibili Evolved 主题色时，记得重新选中这一选项以更新配置
-  topbar_visibility: 顶栏可见性
-  topbar_visibility_desc: 用于兼容 Bilibili Evolved 自定义顶栏
+  follow_bilibili_evolved_color_desc: 每次选完 Bilibili Evolved 主题色时，记得重新选中这一选项以更新配置。
 
   # About
   links: 链接
@@ -172,30 +238,8 @@ settings:
   afdian: 爱发电
   import_settings: 导入设置
   export_settings: 导出设置
-  export_settings_desc: 一些敏感的数据，例如 access key，可能需要重新获取
+  export_settings_desc: 一些敏感的数据，例如 access key，可能需要重新获取。
   contributors: 贡献者
-
-  just_wanna_change_the_job: 我只想换一份好一点的工作...
-  just_wanna_change_the_job_desc: |-
-    首先十分抱歉在这里打扰您，我是一名前端开发者，坐标广州，我想换一份好一点的工作
-    BewlyBewly 其实是我在找工作的时候做的一个项目，那时试过有快半年是完全没有工作的状态，面试时一直刁难要么就是被礼貌拒绝
-
-    我知道以我的能力是完全可以从0开始做一个以我认为巨大的工程出来，但是面试的时候多数注重的地方往往只是在你对技术有如何的深入
-    技术确实非常重要，但是我认为一个人的能力不仅仅是技术
-    从 BewlyBewly 中，我从界面、配色、用户体验、一个产品用户真正想要的功能最后到实现我都是自己一个人完成的，包括弹窗按钮那些组件
-    在没有 pr 之前我就已经完成了很大一部分的功能以及界面，自己摸索和解决的不少问题与实现优化的功能，我也知道如何在b站插件几乎是饱和的情况下如何做出别具一格的作品。但是也要感谢后面的 PR 以及 issue 的反馈，让我能够更好的完善这个项目！！！
-
-    之后我确实也靠 BewlyBewly 进到了小公司工作一直到现在，现在的公司说是招前端进去主要还是看后端，我后端也是会一点但是没有前端好
-    目前公司内容也很杂，之前也为了某些变态的任务加上公司原本前端十分感人的代码在开发新功能的同时不得不自己也重构代码，但是公司给我的感觉就是因为我能力太差导致那个进度特慢，包括同事也是，同事一点前端都不会我重构了多少屎山代码说了也不明白，某些前端问题我自己也难以预测和修复最后还是做到慢就是做得慢。
-    那次我还因此加班来确保任务尽快完成，做完之后后续还有分给我的任务时也时不是提一嘴阴阳我做得慢我能力不行
-    这件事情也只是其中的一件，但是公司不注重前端甚至完全忽视前端对垃圾代码的感受我确实有点接受不了，其他前端同事给我一种感觉是能跑就好我简直无语
-
-    我知道这么说我可能太自大，我其实主要想简单说明一下目前情况，我承认我技术上确实没太厉害，公司里前端很大还是靠自己摸索的，有些处理我也不知道符合不符合规范
-    但是我能力是可以的，我是可以完全从0到1写出 BewlyBewly 出来，甚至之前和身边人说他们也觉得我有病，笑我写的代码（当然后面重构后我也觉得自己之前写的有病）
-
-    我目前只是想找一间公司是重视和比较规范前端的，因为我不想自己收拾别人的烂摊子身边人也不知道只是觉得我进度慢就是慢，再为了这种事情加班
-    坐标广州，我不是希望进去一定要做出什么成就出来，在做开源过程中也对项目负责人和开发者不同的想法观念略有感受。我只想进去了解一下正确的前端规范和能与其他志同道合的人一起工作。如果有合适的前端工作机会请联系我，谢谢！
-  contact_me: 联系我
 auth:
   auth_access_key_first: 在这之前请先授权 BewlyBewly 使用 access key
 topbar:
@@ -253,6 +297,7 @@ topbar:
     following: 关注
     followers: 粉丝
     posts: 动态
+    bilibili_premium: Bilibili 大会员
     account_settings: 账号设置
     uploads_manager: 投稿管理
     b_coins_wallet: B币钱包
@@ -276,11 +321,11 @@ topbar:
     now_streaming: 正在直播：
     live_status: 直播中
   upload_dropdown:
-    article: 专栏
-    music: 音频
-    sticker: 贴纸
-    video: 视频
-    manager: 投稿
+    article: 上传专栏
+    music: 上传音频
+    sticker: 上传贴纸
+    video: 上传视频
+    manager: 投稿管理
 dock:
   search: 搜索
   home: 首页
@@ -293,6 +338,7 @@ dock:
   settings: 设置
 home:
   not_interested: 不感兴趣
+  not_interested_desc: 你可以使用 <kbd>↑</kbd> 和 <kbd>↓</kbd> 来选择原因，或者直接使用数字键选择原因，按 <kbd>Enter</kbd> 就直接提交。
   tell_us_why: 为什么这么做...
   video_removed: 视频已移除
   for_you: 个性推荐

@@ -11,13 +11,14 @@ const emit = defineEmits(['close'])
 const { t } = useI18n()
 
 const settingsMenu = {
-  [MenuType.General]: defineAsyncComponent(() => import('./components/General.vue')),
-  [MenuType.Appearance]: defineAsyncComponent(() => import('./components/Appearance.vue')),
-  [MenuType.SearchPage]: defineAsyncComponent(() => import('./components/SearchPage.vue')),
-  [MenuType.Home]: defineAsyncComponent(() => import('./components/Home.vue')),
-  [MenuType.Compatibility]: defineAsyncComponent(() => import('./components/Compatibility.vue')),
-  // [MenuType.BilibiliSettings]: defineAsyncComponent(() => import('./components/BilibiliSettings.vue')),
-  [MenuType.About]: defineAsyncComponent(() => import('./components/About.vue')),
+  [MenuType.General]: defineAsyncComponent(() => import('./General/General.vue')),
+  [MenuType.DesktopAndDock]: defineAsyncComponent(() => import('./DesktopAndDock/DesktopAndDock.vue')),
+  [MenuType.Appearance]: defineAsyncComponent(() => import('./Appearance/Appearance.vue')),
+  [MenuType.SearchPage]: defineAsyncComponent(() => import('./SearchPage/SearchPage.vue')),
+  [MenuType.Home]: defineAsyncComponent(() => import('./Home/Home.vue')),
+  [MenuType.Compatibility]: defineAsyncComponent(() => import('./Compatibility/Compatibility.vue')),
+  // [MenuType.BilibiliSettings]: defineAsyncComponent(() => import('./BilibiliSettings/BilibiliSettings.vue')),
+  [MenuType.About]: defineAsyncComponent(() => import('./About/About.vue')),
 }
 const activatedMenuItem = ref<MenuType>(MenuType.General)
 const title = ref<string>(t('settings.title'))
@@ -38,6 +39,12 @@ const settingsMenuItems = computed((): MenuItem[] => {
       icon: 'i-mingcute:settings-3-line',
       iconActivated: 'i-mingcute:settings-3-fill',
       title: t('settings.menu_general'),
+    },
+    {
+      value: MenuType.DesktopAndDock,
+      icon: 'i-mingcute:imac-line',
+      iconActivated: 'i-mingcute:imac-fill',
+      title: t('settings.menu_desktop_and_dock'),
     },
     {
       value: MenuType.Appearance,
@@ -119,7 +126,7 @@ function setCurrentTitle() {
       flex justify-between items-center
     >
       <aside
-        class="group"
+        :class="{ group: !settings.touchScreenOptimization }"
         shrink-0 p="x-4" pos="absolute left--84px" z-2
       >
         <ul
@@ -127,14 +134,14 @@ function setCurrentTitle() {
             --un-shadow: var(--bew-shadow-4), var(--bew-shadow-edge-glow-2);
             backdrop-filter: var(--bew-filter-glass-2);
           "
-          flex="~ gap-2 col" rounded="30px hover:25px" p-2 shadow
-          bg="$bew-content-alt hover:$bew-elevated dark:$bew-elevated dark-hover:$bew-elevated"
+          flex="~ gap-2 col" rounded="30px group-hover:25px" p-2 shadow
+          bg="$bew-content-alt group-hover:$bew-elevated dark:$bew-elevated dark-group-hover:$bew-elevated"
           scale="group-hover:105" duration-300 overflow-hidden antialiased transform-gpu
           border="1 $bew-border-color"
         >
           <li v-for="menuItem in settingsMenuItems" :key="menuItem.value">
             <a
-              cursor-pointer w="40px group-hover:150px" h-40px
+              cursor-pointer w="40px group-hover:180px" h-40px
               rounded-30px flex items-center overflow-x-hidden
               duration-300 bg="hover:$bew-fill-2"
               :class="{ 'menu-item-activated': menuItem.value === activatedMenuItem }"

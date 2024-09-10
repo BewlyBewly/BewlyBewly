@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import { useBewlyApp } from '~/composables/useAppProvider'
 import { useDark } from '~/composables/useDark'
+import { settings } from '~/logic'
 import { numFormatter } from '~/utils/dataFormatter'
 import { removeHttpFromUrl } from '~/utils/main'
 
 import BangumiCardSkeleton from './BangumiCardSkeleton.vue'
 
-defineProps<{
+const props = defineProps<{
   skeleton?: boolean
   bangumi: Bangumi
   horizontal?: boolean
@@ -31,6 +33,15 @@ interface Bangumi {
 }
 
 const { isDark } = useDark()
+const { openIframeDrawer } = useBewlyApp()
+
+function handleClick(event: MouseEvent) {
+  if (settings.value.videoCardLinkOpenMode === 'drawer' && props.bangumi.url) {
+    event.preventDefault()
+
+    openIframeDrawer(props.bangumi.url)
+  }
+}
 </script>
 
 <template>
@@ -46,6 +57,7 @@ const { isDark } = useDark()
       content-visibility-auto intrinsic-size-400px
       transition="all ease-in-out 300"
       rounded="$bew-radius" h-fit
+      @click="handleClick"
     >
       <!-- Cover -->
       <div
@@ -158,7 +170,7 @@ const { isDark } = useDark()
           marginTop: horizontal ? '0' : '1rem',
         }"
       >
-        <p un-text="lg" mb-4>
+        <p un-text="lg" mb-2>
           <a
             :href="bangumi.url" target="_blank" rel="noopener noreferrer"
             class="keep-two-lines"
@@ -167,19 +179,19 @@ const { isDark } = useDark()
             {{ bangumi.title }}
           </a>
         </p>
-        <p v-if="bangumi.view || bangumi.follow" text="$bew-text-2" mb-2>
+        <p v-if="bangumi.view || bangumi.follow" text="sm $bew-text-2" mb-2>
           <span v-if="bangumi.view" mr-4>{{ $t('common.view', { count: numFormatter(bangumi.view) }, bangumi.view) }}</span>
           <span v-if="bangumi.follow">{{ $t('common.anime_follow_count', { count: numFormatter(bangumi.follow) }, bangumi.follow) }}</span>
         </p>
-        <div text="$bew-text-2" flex flex-wrap gap-2 items-center>
+        <div text="sm $bew-text-2" flex flex-wrap gap-2 items-center>
           <div
             v-if="bangumi.capsuleText"
             text="$bew-theme-color" bg="$bew-theme-color-20"
-            p="x-3" h-27px lh-27px rounded-4
+            p="x-2" h-22px lh-22px rounded-24px
           >
             {{ bangumi.capsuleText }}
           </div>
-          <span> {{ bangumi.desc }} </span>
+          <span lh-22px> {{ bangumi.desc }} </span>
         </div>
       </div>
     </a>
