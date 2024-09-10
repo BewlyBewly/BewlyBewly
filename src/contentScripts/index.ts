@@ -4,6 +4,7 @@ import '~/styles'
 import { createApp } from 'vue'
 
 import { useDark } from '~/composables/useDark'
+import { BEWLY_MOUNTED } from '~/constants/globalEvents'
 import { settings } from '~/logic'
 import { setupApp } from '~/logic/common-setup'
 import { runWhenIdle } from '~/utils/lazyLoad'
@@ -117,6 +118,11 @@ if (settings.value.adaptToOtherPageStyles && isHomePage()) {
   `)
 }
 
+window.addEventListener(BEWLY_MOUNTED, () => {
+  if (beforeLoadedStyleEl)
+    document.documentElement.removeChild(beforeLoadedStyleEl)
+})
+
 // Set the original Bilibili top bar to `display: none` to prevent it from showing before the load
 // see: https://github.com/BewlyBewly/BewlyBewly/issues/967
 let removeOriginalTopBar: HTMLStyleElement | null = null
@@ -143,8 +149,6 @@ async function onDOMLoaded() {
     if (originalTopBar)
       document.body.appendChild(originalTopBar)
   }
-  if (beforeLoadedStyleEl)
-    document.documentElement.removeChild(beforeLoadedStyleEl)
 
   if (isSupportedPages()) {
     // Then inject the app
