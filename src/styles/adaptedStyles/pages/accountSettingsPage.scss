@@ -3,6 +3,9 @@
   // Increase the priority of the style inside by writing a non-existent selector in `:not()`
   :not(foobar) {
     // do nothing..
+    .international-footer {
+      display: none;
+    }
   }
   // #endregion
 
@@ -50,6 +53,13 @@
 
     .professional-wrapper {
       background: #83839124;
+    }
+
+    .per-left-line,
+    .per-right-line,
+    .organ-left-line,
+    .organ-right-line {
+      background: var(--bew-border-color);
     }
   }
   // #endregion
