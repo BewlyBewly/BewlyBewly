@@ -50,29 +50,6 @@
       color: var(--bew-text-2);
     }
 
-    .table-normal {
-      border-color: var(--bew-border);
-    }
-
-    .table-normal tr:nth-child(2n) {
-      background-color: var(--bew-bg2);
-    }
-
-    .table-normal tr:hover {
-      background-color: var(--bew-bg1);
-    }
-
-    .table-normal tr:hover td {
-      color: var(--bew-text1);
-    }
-
-    .table-normal tr:hover td:first-child {
-      color: var(--bew-text1);
-    }
-
-    .table-normal tr:hover td:last-child {
-    }
-
     .professional-wrapper {
       background: #83839124;
     }
