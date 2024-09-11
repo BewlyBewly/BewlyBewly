@@ -50,16 +50,6 @@ html.dark.bewly-design {
   background-color: var(--bew-bg);
 }
 
-.keep-two-lines {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  line-break: anywhere;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-}
-
 .bewly-design {
   h1,
   h2,
@@ -87,40 +77,53 @@ img {
   }
 }
 
-code {
-  display: inline-block;
-  background-color: var(--bew-fill-1);
-  padding: 0 0.5em;
-  margin: 0.24em 0.2em;
-  border-radius: 4px;
-  font-weight: 600;
-  line-height: 1.24;
-  box-shadow: 0 0 0 1px var(--bew-border-color);
-}
+.bewly-wrapper {
+  line-height: 1.4;
 
-kbd {
-  display: inline-block;
-  background-color: var(--bew-fill-1);
-  padding: 0 0.5em;
-  margin: 0.24em 0.2em;
-  border-radius: 4px;
-  box-shadow:
-    0 0 0 1px var(--bew-border-color),
-    0 2.4px 0 0 var(--bew-fill-2);
-  line-height: 1.24;
-  cursor: pointer;
-  transition: 0.3s;
-
-  &:hover {
-    background-color: var(--bew-fill-2);
+  .keep-two-lines {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-break: anywhere;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
   }
 
-  &:active {
-    background-color: var(--bew-fill-3);
-    translate: 0 2.4px;
+  code {
+    display: inline-block;
+    background-color: var(--bew-fill-1);
+    padding: 0 0.5em;
+    margin: 0.14em 0.2em;
+    border-radius: 4px;
+    font-weight: 600;
+    line-height: 1.24;
+  }
+
+  kbd {
+    display: inline-block;
+    background-color: var(--bew-fill-1);
+    padding: 0 0.5em;
+    margin: 0.14em 0.2em;
+    border-radius: 4px;
     box-shadow:
       0 0 0 1px var(--bew-border-color),
-      0 -2.4px 0 0 var(--bew-fill-2);
+      0 1.4px 0 0 var(--bew-fill-2);
+    line-height: 1.24;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: var(--bew-fill-2);
+    }
+
+    &:active {
+      background-color: var(--bew-fill-3);
+      translate: 0 1.4px;
+      box-shadow:
+        0 0 0 1px var(--bew-border-color),
+        0 -1.4px 0 0 var(--bew-fill-2);
+    }
   }
 }
 
