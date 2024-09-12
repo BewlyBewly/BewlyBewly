@@ -21,7 +21,9 @@
       iframe,
       [style*="background-image: url"],
       [style*="background: url"],
-      .invitation-img {
+      .invitation-img,
+      .no-level-img,
+      .points-header-warp {
         filter: invert(0.98) hue-rotate(180deg) brightness(1.1);
       }
     }
