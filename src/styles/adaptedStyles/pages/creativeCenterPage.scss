@@ -8,6 +8,8 @@
   // :not(foobar) {
   // }
   // #endregion
+  :not(foobar) {
+  }
 
   // #region dark mode adaption part
   &.dark {
@@ -41,6 +43,23 @@
 
     .b-read-editor {
       background-color: var(--bew-bg);
+    }
+
+    .bpx-player-video-wrap .bpx-player-seamless-replacement {
+      bottom: 0;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .bpx-player-video-wrap .bpx-player-seamless-replacement,
+    .bpx-player-video-wrap bwp-video,
+    .bpx-player-video-wrap video {
+      content-visibility: visible;
+      display: block;
+      height: 100%;
+      margin: auto;
+      width: 100%;
     }
   }
   // #endregion
