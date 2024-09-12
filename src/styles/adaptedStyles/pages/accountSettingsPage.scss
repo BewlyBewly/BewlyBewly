@@ -38,6 +38,46 @@
     .black-btn:not(:hover) {
       color: black;
     }
+
+    .official-title,
+    .title-module,
+    .professional-wrapper .title,
+    .condition-txt,
+    .el-form-item__label,
+    .professional-form-wrapper .official-label,
+    .el-input__inner,
+    .professional-form-wrapper .pro-type .el-radio__label,
+    .el-textarea__inner,
+    .el-checkbox {
+      color: var(--bew-text-1);
+    }
+
+    .ava-name,
+    .ava-text,
+    .professional-wrapper .desc,
+    .upload-txt,
+    .professional-form-wrapper .desc {
+      color: var(--bew-text-2);
+    }
+
+    .professional-wrapper,
+    .el-input__inner,
+    .el-textarea__inner,
+    .professional-form-wrapper .pro-preview-content {
+      background-color: var(--bew-content-solid);
+    }
+
+    .per-left-line,
+    .per-right-line,
+    .organ-left-line,
+    .organ-right-line {
+      background: var(--bew-border-color);
+    }
+
+    .el-input__inner:not(:focus),
+    .el-textarea__inner:not(:focus) {
+      border-color: var(--bew-border-color);
+    }
   }
   // #endregion
 }
