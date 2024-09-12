@@ -48,15 +48,15 @@
     .el-input__inner,
     .professional-form-wrapper .pro-type .el-radio__label,
     .el-textarea__inner,
-    .el-checkbox {
+    .el-checkbox,
+    .ava-name {
       color: var(--bew-text-1);
     }
 
-    .ava-name,
-    .ava-text,
     .professional-wrapper .desc,
     .upload-txt,
-    .professional-form-wrapper .desc {
+    .professional-form-wrapper .desc,
+    .ava-text {
       color: var(--bew-text-2);
     }
 
