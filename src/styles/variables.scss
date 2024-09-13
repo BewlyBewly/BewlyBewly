@@ -192,7 +192,8 @@
 }
 
 :host(.dark),
-:root.dark {
+:root.dark,
+.dark {
   // dark mode
 
   // #region shadow
