@@ -15,8 +15,15 @@
   --bili-rich-text-link-color: var(--bew-theme-color) !important;
   --bili-rich-text-link-color-hover: var(--bew-theme-color-80) !important;
 
-  #contents img[src*="https://i0.hdslb.com/bfs/activity-plat/static/20201110/4c8b2dbaded282e67c9a31daa4297c3c/AeQJlYP7e.png"]
+  #contents img[src*="https://i0.hdslb.com/bfs/activity-plat/static/20201110/4c8b2dbaded282e67c9a31daa4297c3c/AeQJlYP7e.png"],
+  #contents img[src*="https://i0.hdslb.com/bfs/reply/9f3ad0659e84c96a711b88dd33f4bc2e945045e0.png"]
   {
     filter: var(--bew-filter-icon-glow);
+  }
+}
+
+:host(bili-comment-box) {
+  #pub button:not(:hover, :active, .active) {
+    background-color: var(--bew-theme-color-60);
   }
 }
