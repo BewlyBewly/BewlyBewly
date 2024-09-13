@@ -1,3 +1,9 @@
+// :host(bili-comments-vote-card) {
+//   .option-info {
+//     color: var(--bew-text-2);
+//   }
+// }
+
 :host(bili-comment-user-info) {
   #user-name a[style*="color"] {
     color: var(--bew-theme-color) !important;
