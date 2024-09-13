@@ -202,6 +202,8 @@ function injectApp() {
     }, 500)
   }
 
+  startShadowDOMStyleInjection()
+
   // inject svg icons
   const svgDiv = document.createElement('div')
   svgDiv.innerHTML = SVG_ICONS
@@ -212,4 +214,36 @@ function injectApp() {
   const app = createApp(App)
   setupApp(app)
   app.mount(root)
+}
+
+function injectStyleToShadowDOM(shadowRoot: ShadowRoot) {
+  if (!shadowRoot.querySelector('style[data-bewly-style]')) {
+    const styleEl = document.createElement('style')
+    styleEl.setAttribute('data-bewly-style', 'true')
+    // Reset the theme color to ensure the theme color is updated
+    styleEl.textContent = `
+    @import url(${browser.runtime.getURL('dist/contentScripts/style.css')});
+    * {--bew-theme-color: ${settings.value.themeColor};}`
+    shadowRoot.appendChild(styleEl)
+  }
+}
+
+function injectStylesRecursively(root: Document | ShadowRoot) {
+  if (root instanceof ShadowRoot) {
+    injectStyleToShadowDOM(root)
+  }
+
+  root.querySelectorAll('*').forEach((element) => {
+    if (element.shadowRoot) {
+      injectStylesRecursively(element.shadowRoot)
+    }
+  })
+}
+
+function startShadowDOMStyleInjection() {
+  if (isSupportedPages()) {
+    setInterval(() => {
+      injectStylesRecursively(document)
+    }, 1000)
+  }
 }
