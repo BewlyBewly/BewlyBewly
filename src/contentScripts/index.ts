@@ -198,7 +198,7 @@ function injectApp() {
     }, 500)
   }
 
-  startShadowDOMStyleInjection()
+  // startShadowDOMStyleInjection()
 
   // inject svg icons
   const svgDiv = document.createElement('div')
@@ -212,41 +212,41 @@ function injectApp() {
   app.mount(root)
 }
 
-function startShadowDOMStyleInjection() {
-  if (isSupportedPages()) {
-    setInterval(() => {
-      injectStylesRecursively(document)
-    }, 1000)
-  }
+// function startShadowDOMStyleInjection() {
+//   if (isSupportedPages()) {
+//     setInterval(() => {
+//       injectStylesRecursively(document)
+//     }, 1000)
+//   }
 
-  function injectStylesRecursively(root: Document | ShadowRoot) {
-    if (root instanceof ShadowRoot) {
-      injectStyleToShadowDOM(root)
-    }
+//   function injectStylesRecursively(root: Document | ShadowRoot) {
+//     if (root instanceof ShadowRoot) {
+//       injectStyleToShadowDOM(root)
+//     }
 
-    root.querySelectorAll('*').forEach((element) => {
-      if (element.shadowRoot) {
-        injectStylesRecursively(element.shadowRoot)
-      }
-    })
-  }
+//     root.querySelectorAll('*').forEach((element) => {
+//       if (element.shadowRoot) {
+//         injectStylesRecursively(element.shadowRoot)
+//       }
+//     })
+//   }
 
-  function injectStyleToShadowDOM(shadowRoot: ShadowRoot) {
-    if (!shadowRoot.querySelector('style[data-bewly-style]')) {
-      const styleEl = document.createElement('style')
-      styleEl.setAttribute('data-bewly-style', 'true')
-      styleEl.textContent = `
-      @import url(${browser.runtime.getURL('dist/contentScripts/style.css')});
-      `
-      if (settings.value.adaptToOtherPageStyles) {
-        // Reset the theme color to ensure the theme color is updated
-        styleEl.textContent += `
-          * {
-            --bew-theme-color: ${settings.value.themeColor};
-          }
-        `
-      }
-      shadowRoot.appendChild(styleEl)
-    }
-  }
-}
+//   function injectStyleToShadowDOM(shadowRoot: ShadowRoot) {
+//     if (!shadowRoot.querySelector('style[data-bewly-style]')) {
+//       const styleEl = document.createElement('style')
+//       styleEl.setAttribute('data-bewly-style', 'true')
+//       styleEl.textContent = `
+//       @import url(${browser.runtime.getURL('dist/contentScripts/style.css')});
+//       `
+//       if (settings.value.adaptToOtherPageStyles) {
+//         // Reset the theme color to ensure the theme color is updated
+//         styleEl.textContent += `
+//           * {
+//             --bew-theme-color: ${settings.value.themeColor};
+//           }
+//         `
+//       }
+//       shadowRoot.appendChild(styleEl)
+//     }
+//   }
+// }
