@@ -93,7 +93,7 @@ async function checkGitHubRelease() {
 
         <a
           v-if=" hasNewVersion"
-          href="https://github.com/hakadao/BewlyBewly/releases" target="_blank"
+          href="https://github.com/TC999/BewlyBewly-Beta/releases" target="_blank"
           pos="absolute bottom-0 right-0" transform="translate-x-50%" un-text="xs $bew-text-1" p="y-1 x-2" bg="$bew-fill-1"
           rounded-12
         >
@@ -101,9 +101,9 @@ async function checkGitHubRelease() {
         </a>
       </div>
       <section text-xl text-center>
-        <p>BewlyBewly</p>
+        <p>BewlyBewly-Beta</p>
         <p text-center>
-          <a href="https://github.com/hakadao/BewlyBewly/releases" target="_blank" un-text="sm color-$bew-text-2 hover:color-$bew-text-3">v{{ version }}</a>
+          <a href="https://github.com/TC999/BewlyBewly-Beta/releases" target="_blank" un-text="sm color-$bew-text-2 hover:color-$bew-text-3">v{{ version }}</a>
         </p>
       </section>
 
@@ -118,7 +118,7 @@ async function checkGitHubRelease() {
           </h3>
           <div grid="~ xl:cols-5 lg:cols-4 md:cols-3 cols-2 gap-2">
             <a
-              href="https://github.com/hakadao/BewlyBewly" target="_blank"
+              href="https://github.com/TC999/BewlyBewly-Beta" target="_blank"
               class="link-card"
               bg="black dark:white !opacity-10 !hover:opacity-20"
               un-text="black dark:white"
