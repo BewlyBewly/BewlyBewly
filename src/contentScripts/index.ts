@@ -213,7 +213,9 @@ function injectApp() {
 }
 
 function startShadowDOMStyleInjection() {
-  if (isHomePage() && !isSupportedPages())
+  if (isHomePage())
+    return
+  if (!isSupportedPages())
     return
 
   // Create a MutationObserver to watch for Shadow DOM additions
