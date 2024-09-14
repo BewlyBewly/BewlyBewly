@@ -216,34 +216,78 @@ function injectApp() {
   app.mount(root)
 }
 
-function injectStyleToShadowDOM(shadowRoot: ShadowRoot) {
-  if (!shadowRoot.querySelector('style[data-bewly-style]')) {
-    const styleEl = document.createElement('style')
-    styleEl.setAttribute('data-bewly-style', 'true')
-    // Reset the theme color to ensure the theme color is updated
-    styleEl.textContent = `
-    @import url(${browser.runtime.getURL('dist/contentScripts/style.css')});
-    * {--bew-theme-color: ${settings.value.themeColor};}`
-    shadowRoot.appendChild(styleEl)
-  }
-}
-
-function injectStylesRecursively(root: Document | ShadowRoot) {
-  if (root instanceof ShadowRoot) {
-    injectStyleToShadowDOM(root)
-  }
-
-  root.querySelectorAll('*').forEach((element) => {
-    if (element.shadowRoot) {
-      injectStylesRecursively(element.shadowRoot)
-    }
-  })
-}
-
 function startShadowDOMStyleInjection() {
-  if (isSupportedPages()) {
-    setInterval(() => {
-      injectStylesRecursively(document)
-    }, 1000)
+  if (isHomePage())
+    return
+  if (!isSupportedPages())
+    return
+
+  // Create a MutationObserver to watch for Shadow DOM additions
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.type === 'childList') {
+        mutation.addedNodes.forEach((node) => {
+          if (node instanceof HTMLElement && node.shadowRoot) {
+            injectStyleToShadowDOM(node.shadowRoot)
+            // Observe nested Shadow DOMs recursively
+            observeShadowDOMRecursively(node.shadowRoot)
+          }
+        })
+      }
+    })
+  })
+
+  // Observe the entire document for new Shadow DOMs
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+  })
+
+  // Inject styles into existing Shadow DOMs on initial load
+  injectStylesRecursively(document)
+
+  function observeShadowDOMRecursively(shadowRoot: ShadowRoot) {
+    observer.observe(shadowRoot, {
+      childList: true,
+      subtree: true,
+    })
+
+    // Recursively observe nested Shadow DOMs within this Shadow DOM
+    shadowRoot.querySelectorAll('*').forEach((el) => {
+      if (el.shadowRoot) {
+        observeShadowDOMRecursively(el.shadowRoot)
+      }
+    })
+  }
+
+  function injectStylesRecursively(root: Document | ShadowRoot) {
+    if (root instanceof ShadowRoot) {
+      injectStyleToShadowDOM(root)
+    }
+
+    root.querySelectorAll('*').forEach((element) => {
+      if (element.shadowRoot) {
+        injectStylesRecursively(element.shadowRoot)
+      }
+    })
+  }
+
+  function injectStyleToShadowDOM(shadowRoot: ShadowRoot) {
+    if (!shadowRoot.querySelector('style[data-bewly-style]')) {
+      const styleEl = document.createElement('style')
+      styleEl.setAttribute('data-bewly-style', 'true')
+      styleEl.textContent = `
+      @import url(${browser.runtime.getURL('dist/contentScripts/style.css')});
+      `
+      if (settings.value.adaptToOtherPageStyles) {
+        // Reset the theme color to ensure the theme color is updated
+        styleEl.textContent += `
+          * {
+            --bew-theme-color: ${settings.value.themeColor};
+          }
+        `
+      }
+      shadowRoot.appendChild(styleEl)
+    }
   }
 }
