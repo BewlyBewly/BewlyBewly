@@ -37,7 +37,7 @@ const videoCardOpenModeOptions = computed(() => {
     },
     {
       label: t('settings.video_card_link_opening_behavior_opt.new_tab'),
-      value: 'new_tab',
+      value: 'newTab',
     },
   ]
 })
