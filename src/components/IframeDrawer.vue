@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onKeyStroke } from '@vueuse/core'
+import { onKeyStroke, useEventListener } from '@vueuse/core'
 
 import { isHomePage } from '~/utils/main'
 
@@ -19,25 +19,29 @@ const iframeRef = ref<HTMLIFrameElement | null>(null)
 const currentUrl = ref<string>(props.url)
 const delayCloseTimer = ref<NodeJS.Timeout | null>(null)
 
+useEventListener(window, 'popstate', updateIframeUrl)
+nextTick(() => {
+  useEventListener(iframeRef.value?.contentWindow, 'pushstate', updateCurrentUrl)
+})
+
 onMounted(async () => {
-  history.pushState({}, '', props.url)
+  history.pushState(null, '', props.url)
   show.value = true
-  await nextTick()
-  iframeRef.value?.contentWindow?.addEventListener('pushstate', updateCurrentUrl)
-  window.addEventListener('popstate', updateIframeUrl)
+})
+
+onBeforeUnmount(() => {
+  releaseIframeResources()
 })
 
 onUnmounted(() => {
-  history.pushState({}, '', 'https://www.bilibili.com')
-  iframeRef.value?.contentWindow?.removeEventListener('pushstate', updateCurrentUrl)
-  window.removeEventListener('popstate', updateIframeUrl)
+  history.replaceState(null, '', 'https://www.bilibili.com')
 })
 
 function updateCurrentUrl() {
   if (iframeRef.value?.contentWindow) {
     try {
       currentUrl.value = iframeRef.value.contentWindow.location.href
-      history.pushState({}, '', currentUrl.value)
+      history.pushState(null, '', currentUrl.value)
     }
     catch (error) {
       console.error('Unable to access iframe URL:', error)
@@ -45,26 +49,42 @@ function updateCurrentUrl() {
   }
 }
 
-function updateIframeUrl() {
+async function updateIframeUrl() {
   if (isHomePage()) {
-    handleClose()
+    await handleClose()
     return
   }
+  await nextTick()
 
   if (iframeRef.value?.contentWindow) {
     iframeRef.value.contentWindow.location.replace(location.href)
-    // iframeRef.value.contentWindow.location.reload()
   }
 }
 
-function handleClose() {
+async function handleClose() {
   if (delayCloseTimer.value) {
     clearTimeout(delayCloseTimer.value)
   }
+  await releaseIframeResources()
   show.value = false
   delayCloseTimer.value = setTimeout(() => {
     emit('close')
   }, 300)
+}
+
+async function releaseIframeResources() {
+  // Clear iframe content
+  currentUrl.value = 'about:blank'
+  iframeRef.value?.contentWindow?.document.write('')
+  await nextTick()
+  iframeRef.value?.contentWindow?.close()
+
+  // Remove iframe from the DOM
+  iframeRef.value?.parentNode?.removeChild(iframeRef.value)
+  await nextTick()
+
+  // Nullify the reference
+  iframeRef.value = null
 }
 
 function handleOpenInNewTab() {
@@ -151,7 +171,7 @@ onKeyStroke('Escape', (e: KeyboardEvent) => {
       >
         <iframe
           ref="iframeRef"
-          :src="url"
+          :src="currentUrl"
           frameborder="0"
           pointer-events-auto
           pos="absolute bottom-$bew-top-bar-height left-0"
