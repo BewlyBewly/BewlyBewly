@@ -261,7 +261,7 @@ function handleUndo() {
               </p>
               <Button
                 color="rgba(255,255,255,.35)" text-color="white" size="small"
-                @click.prevent="handleUndo"
+                @click.prevent.stop="handleUndo"
               >
                 <template #left>
                   <div i-mingcute-back-line text-lg />
@@ -334,6 +334,7 @@ function handleUndo() {
                 transform="scale-70 group-hover/cover:scale-100"
                 duration-300
                 pos="absolute top-0 left-0" z-2
+                @click.stop=""
               >
                 <slot name="coverTopLeft" />
               </div>
@@ -349,7 +350,7 @@ function handleUndo() {
                 class="opacity-0 group-hover/cover:opacity-100"
                 transform="scale-70 group-hover/cover:scale-100"
                 duration-300
-                @click.prevent="toggleWatchLater"
+                @click.prevent.stop="toggleWatchLater"
               >
                 <Tooltip v-if="!isInWatchLater" :content="$t('common.save_to_watch_later')" placement="bottom-right" type="dark">
                   <div i-mingcute:carplay-line />
