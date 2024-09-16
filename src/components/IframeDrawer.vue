@@ -27,6 +27,8 @@ nextTick(() => {
 onMounted(async () => {
   history.pushState(null, '', props.url)
   show.value = true
+  await nextTick()
+  iframeRef.value?.focus()
 })
 
 onBeforeUnmount(() => {
@@ -91,9 +93,25 @@ function handleOpenInNewTab() {
   window.open(props.url, '_blank')
 }
 
-onKeyStroke('Escape', (e: KeyboardEvent) => {
-  e.preventDefault()
-  handleClose()
+const isEscPressed = ref<boolean>(false)
+const escPressedTimer = ref<NodeJS.Timeout | null>(null)
+
+nextTick(() => {
+  onKeyStroke('Escape', (e: KeyboardEvent) => {
+    e.preventDefault()
+    if (isEscPressed.value) {
+      handleClose()
+    }
+    else {
+      isEscPressed.value = true
+      if (escPressedTimer.value) {
+        clearTimeout(escPressedTimer.value)
+      }
+      escPressedTimer.value = setTimeout(() => {
+        isEscPressed.value = false
+      }, 1300)
+    }
+  }, { target: iframeRef.value?.contentWindow })
 })
 
 // const keys = useMagicKeys()
@@ -101,7 +119,6 @@ onKeyStroke('Escape', (e: KeyboardEvent) => {
 
 // watch(() => ctrlAltT, (value) => {
 //   if (value) {
-//     console.log('ctrlAltT', value)
 //     handleOpenInNewTab()
 //   }
 // })
@@ -146,6 +163,7 @@ onKeyStroke('Escape', (e: KeyboardEvent) => {
           </div> -->
         </Button>
         <Button
+          v-if="!isEscPressed"
           style="
             --b-button-color: var(--bew-elevated-solid);
             --b-button-color-hover: var(--bew-elevated-solid-hover);
@@ -157,7 +175,18 @@ onKeyStroke('Escape', (e: KeyboardEvent) => {
             <i i-mingcute:close-line />
           </template>
           {{ $t('iframe_drawer.close') }}
-          <!-- <kbd>Esc</kbd> -->
+          <kbd>Esc</kbd>
+        </Button>
+        <Button
+          v-else
+          type="error"
+          @click="handleClose"
+        >
+          <template #left>
+            <i i-mingcute:close-line />
+          </template>
+          {{ $t('iframe_drawer.press_esc_again_to_close') }}
+          <kbd>Esc</kbd>
         </Button>
       </div>
     </Transition>

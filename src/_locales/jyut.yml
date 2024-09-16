@@ -49,6 +49,7 @@ common:
 iframe_drawer:
   open_in_new_tab: 喺新嘅分頁度打開連結
   close: 關閉
+  press_esc_again_to_close: 撳多次 Esc 關閉
 
 settings:
   title: 設定

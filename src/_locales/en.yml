@@ -49,6 +49,7 @@ common:
 iframe_drawer:
   open_in_new_tab: Open in new tab
   close: Close
+  press_esc_again_to_close: Press Esc again to close
 
 settings:
   title: Settings
