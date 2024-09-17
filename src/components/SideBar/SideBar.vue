@@ -51,7 +51,7 @@ function toggleHideSidebar(hide: boolean) {
 
     <div
       class="sidebar-content"
-      flex="~ gap-2 col"
+      flex="~ gap-2 col justify-center items-center"
       pointer-events-auto
       duration-300
       @mouseenter="toggleHideSidebar(false)"
@@ -67,13 +67,13 @@ function toggleHideSidebar(hide: boolean) {
           @mouseleave="hoveringDockItem.themeMode = false"
         >
           <Transition name="fade">
-            <div v-show="hoveringDockItem.themeMode" absolute>
+            <div v-show="hoveringDockItem.themeMode" absolute flex>
               <Icon v-if="isDark" icon="line-md:sunny-outline-to-moon-loop-transition" />
               <Icon v-else icon="line-md:moon-alt-to-sunny-outline-loop-transition" />
             </div>
           </Transition>
           <Transition name="fade">
-            <div v-show="!hoveringDockItem.themeMode" absolute>
+            <div v-show="!hoveringDockItem.themeMode" absolute flex>
               <Icon v-if="isDark" icon="line-md:sunny-outline-to-moon-transition" />
               <Icon v-else icon="line-md:moon-to-sunny-outline-transition" />
             </div>
