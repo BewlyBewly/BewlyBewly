@@ -19,9 +19,12 @@ export function setupNecessarySettingsWatchers() {
           // Since getUILanguage() cannot get the zh-HK language code
           // use getAcceptLanguages() to get the language code
           const languages: string[] = await browser.i18n.getAcceptLanguages()
-          if (languages.includes('zh-HK'))
+          if (languages.includes('zh-HK')) {
             settings.value.language = LanguageType.Cantonese
-          else settings.value.language = LanguageType.Mandarin_TW
+          }
+          else {
+            settings.value.language = LanguageType.Mandarin_TW
+          }
         }
         else {
           settings.value.language = LanguageType.English
@@ -29,6 +32,19 @@ export function setupNecessarySettingsWatchers() {
       }
 
       locale.value = settings.value.language
+
+      if (locale.value === LanguageType.Mandarin_CN) {
+        document.documentElement.lang = 'zh-CN'
+      }
+      else if (locale.value === LanguageType.Mandarin_TW) {
+        document.documentElement.lang = 'zh-TW'
+      }
+      else if (locale.value === LanguageType.Cantonese) {
+        document.documentElement.lang = 'zh-HK'
+      }
+      else {
+        document.documentElement.lang = 'en'
+      }
     },
     { immediate: true },
   )
