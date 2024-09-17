@@ -64,6 +64,7 @@ settings:
   menu_about: About
 
   # Settings group
+  group_language_and_fonts: Language and Fonts
   group_common: Common
   group_video_card: Video Card
   group_performance: Frosted Glass & Performance
@@ -95,6 +96,7 @@ settings:
     mandarin_cn: Mandarin - Simplified Chinese
     mandarin_tw: Mandarin - Traditional Chinese
     jyut: Cantonese
+  customize_font: Customize font
   touch_screen_optimization: Touch screen optimization
   touch_screen_optimization_desc: >
     After this setting is turned on, like the top bar, you must click on items to view more information instead of hovering over them. (This feature is not supported by the old top bar.)

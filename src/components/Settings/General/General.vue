@@ -49,7 +49,7 @@ watch(() => settings.value.language, (newValue) => {
 
 <template>
   <div>
-    <SettingsItemGroup :title="$t('settings.group_common')">
+    <SettingsItemGroup :title="$t('settings.group_language_and_fonts')">
       <SettingsItem :title="$t('settings.select_language')">
         <Select
           v-model="settings.language"
@@ -57,7 +57,15 @@ watch(() => settings.value.language, (newValue) => {
           w="full"
         />
       </SettingsItem>
+      <SettingsItem :title="$t('settings.customize_font')">
+        <Radio v-model="settings.customizeFont" />
+        <template v-if="settings.customizeFont" #bottom>
+          <Input v-model="settings.font" />
+        </template>
+      </SettingsItem>
+    </SettingsItemGroup>
 
+    <SettingsItemGroup :title="$t('settings.group_common')">
       <SettingsItem :title="$t('settings.touch_screen_optimization')" :desc="$t('settings.touch_screen_optimization_desc')">
         <Radio v-model="settings.touchScreenOptimization" />
       </SettingsItem>
