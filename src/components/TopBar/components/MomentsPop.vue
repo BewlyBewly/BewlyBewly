@@ -222,9 +222,8 @@ function getTopBarLiveMoments() {
         const { list } = res.data
 
         // if the length of this list is less then the pageSize, it means that it have no more contents
-        if (moments.length !== 0 && list.length < pageSize) {
+        if (list.length < pageSize) {
           noMoreContent.value = true
-          return
         }
 
         // if the length of this list is equal to the pageSize, this means that it may have the next page.
