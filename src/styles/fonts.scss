@@ -1,31 +1,38 @@
 :root,
 :host {
-  --bew-fonts: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, "Roboto Flex", Roboto, Oxygen, Ubuntu, Cantarell,
-    "Open Sans", "Helvetica Neue", Arial, sans-serif;
+  --bew-english-fonts: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, "Roboto Flex", Roboto, Oxygen, Ubuntu,
+    Cantarell, "Open Sans", "Helvetica Neue", Arial, sans-serif;
+
+  --bew-mandarin-cn-fonts: var(--bew-english-fonts), "PingFang SC", "Source Han Sans SC VF", "Noto Sans CJK SC",
+    "Source Han Sans SC", "Microsoft YaHei";
+
+  // TODO: 使用 CDN 載入 CJK 字體 to prevent 弱撚智 Microsoft JhengHei 視覺干擾
+
+  /* Microsoft JhengHei 是我見過最腦殘弱智的字體，預設下文字太細，但是 windows 正體中文又預設用這個黑體渲染，能用 cdn 換字體就換 */
+  --bew-mandarin-tw-fonts: var(--bew-english-fonts), "PingFang TC", "Source Han Sans TC VF", "Noto Sans CJK TC",
+    "Source Han Sans TC", "Microsoft JhengHei";
+
+  /* Microsoft JhengHei 是我見過最腦殘弱智的字體，預設下文字太細，但是 windows 正體中文又預設用這個黑體渲染，能用 cdn 換字體就換 */
+  --bew-cantonese-fonts: var(--bew-english-fonts), "PingFang HK", "Source Han Sans HC VF", "Noto Sans CJK HK",
+    "Source Han Sans HC", "Microsoft JhengHei";
 }
 
 .bewly-wrapper,
 .bewly-design * {
-  font-family: var(--bew-fonts) !important;
+  font-family: var(--bew-english-fonts) !important;
 }
-
-// TODO: 使用 cdn 載入CJK字體
 
 :lang(zh-CN) .bewly-wrapper,
 :lang(zh-CN).bewly-design * {
-  font-family: var(--bew-fonts), "PingFang SC", "Source Han Sans SC VF", "Noto Sans CJK SC", "Source Han Sans SC",
-    "Microsoft YaHei" !important;
+  font-family: var(--bew-mandarin-cn-fonts) !important;
 }
 
-/* Microsoft JhengHei 是我見過最腦殘弱智的字體，預設下文字太細，但是 windows 正體中文又預設用這個黑體渲染，能用 cdn 換字體就換 */
 :lang(zh-TW) .bewly-wrapper,
 :lang(zh-TW).bewly-design * {
-  font-family: var(--bew-fonts), "PingFang TC", "Source Han Sans TC VF", "Noto Sans CJK TC", "Source Han Sans TC",
-    "Microsoft JhengHei" !important;
+  font-family: var(--bew-mandarin-tw-fonts) !important;
 }
 
 :lang(zh-HK) .bewly-wrapper,
 :lang(zh-HK).bewly-design * {
-  font-family: var(--bew-fonts), "PingFang HK", "Source Han Sans HC VF", "Noto Sans CJK HK", "Source Han Sans HC",
-    "Microsoft JhengHei" !important;
+  font-family: var(--bew-cantonese-fonts) !important;
 }
