@@ -1,20 +1,25 @@
 :root,
 :host {
-  --bew-english-fonts: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, "Roboto Flex", Roboto, Oxygen, Ubuntu,
-    Cantarell, "Open Sans", "Helvetica Neue", Arial, sans-serif;
+  // 爲何 firefox 在 windows 這裏一定要設定 system-ui 否則直接預設正體中文下用明體有這種垃圾設定，即使你後面還是指定了特定字體？？？？？
+  --bew-basic-fonts: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, "Roboto Flex", "Noto Sans", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", Arial, sans-serif;
 
-  --bew-mandarin-cn-fonts: var(--bew-english-fonts), "PingFang SC", "Source Han Sans SC VF", "Noto Sans CJK SC",
-    "Source Han Sans SC", "Microsoft YaHei";
+  --bew-fallback-fonts: "PingFang SC", "PingFang HK", "PingFang TC", "Microsoft YaHei", "Microsoft JhengHei", sans-serif;
+
+  --bew-english-fonts: var(--bew-basic-fonts), var(--bew-fallback-fonts);
+
+  --bew-mandarin-cn-fonts: var(--bew-basic-fonts), "PingFang SC", "Source Han Sans SC VF", "Noto Sans CJK SC",
+    "Source Han Sans SC", "Microsoft YaHei", var(--bew-fallback-fonts);
 
   // TODO: 使用 CDN 載入 CJK 字體 to prevent 弱撚智 Microsoft JhengHei 視覺干擾
 
   /* Microsoft JhengHei 是我見過最腦殘弱智的字體，預設下文字太細，但是 windows 正體中文又預設用這個黑體渲染，能用 cdn 換字體就換 */
-  --bew-mandarin-tw-fonts: var(--bew-english-fonts), "PingFang TC", "Source Han Sans TC VF", "Noto Sans CJK TC",
-    "Source Han Sans TC", "Microsoft JhengHei";
+  --bew-mandarin-tw-fonts: var(--bew-basic-fonts), "PingFang TC", "Source Han Sans TC VF", "Noto Sans CJK TC",
+    "Source Han Sans TC", "Microsoft JhengHei", var(--bew-fallback-fonts);
 
   /* Microsoft JhengHei 是我見過最腦殘弱智的字體，預設下文字太細，但是 windows 正體中文又預設用這個黑體渲染，能用 cdn 換字體就換 */
-  --bew-cantonese-fonts: var(--bew-english-fonts), "PingFang HK", "Source Han Sans HC VF", "Noto Sans CJK HK",
-    "Source Han Sans HC", "Microsoft JhengHei";
+  --bew-cantonese-fonts: var(--bew-basic-fonts), "PingFang HK", "Source Han Sans HC VF", "Noto Sans CJK HK",
+    "Source Han Sans HC", "Microsoft JhengHei", var(--bew-fallback-fonts);
 }
 
 .bewly-wrapper,
