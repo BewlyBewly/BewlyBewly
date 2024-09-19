@@ -61,7 +61,7 @@ defineExpose({ focus })
       :max="max"
       :placeholder="placeholder"
       w-inherit h-inherit
-      outline-none flex-1
+      outline-none flex-1 bg-transparent
       @keydown.enter="$emit('enter')"
     >
 
