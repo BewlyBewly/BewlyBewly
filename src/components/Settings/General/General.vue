@@ -49,22 +49,6 @@ watch(() => settings.value.language, (newValue) => {
 
 <template>
   <div>
-    <SettingsItemGroup :title="$t('settings.group_language_and_fonts')">
-      <SettingsItem :title="$t('settings.select_language')">
-        <Select
-          v-model="settings.language"
-          :options="langOptions"
-          w="full"
-        />
-      </SettingsItem>
-      <SettingsItem :title="$t('settings.customize_font')">
-        <Radio v-model="settings.customizeFont" />
-        <template v-if="settings.customizeFont" #bottom>
-          <Input v-model="settings.font" />
-        </template>
-      </SettingsItem>
-    </SettingsItemGroup>
-
     <SettingsItemGroup :title="$t('settings.group_common')">
       <SettingsItem :title="$t('settings.touch_screen_optimization')" :desc="$t('settings.touch_screen_optimization_desc')">
         <Radio v-model="settings.touchScreenOptimization" />
@@ -76,6 +60,23 @@ watch(() => settings.value.language, (newValue) => {
 
       <SettingsItem :title="$t('settings.enable_horizontal_scrolling')" :desc="$t('settings.enable_horizontal_scrolling_desc')">
         <Radio v-model="settings.enableHorizontalScrolling" />
+      </SettingsItem>
+    </SettingsItemGroup>
+
+    <SettingsItemGroup :title="$t('settings.group_language_and_fonts')">
+      <SettingsItem :title="$t('settings.select_language')">
+        <Select
+          v-model="settings.language"
+          :options="langOptions"
+          w="full"
+        />
+      </SettingsItem>
+      <SettingsItem :title="$t('settings.customize_font')">
+        <Radio v-model="settings.customizeFont" />
+        <template v-if="settings.customizeFont" #bottom>
+          <Input v-model="settings.fontFamily" />
+          <div v-html="t('settings.customize_font_desc')" />
+        </template>
       </SettingsItem>
     </SettingsItemGroup>
 

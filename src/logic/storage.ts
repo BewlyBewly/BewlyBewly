@@ -9,7 +9,7 @@ export const accessKey = useStorageLocal('accessKey', '')
 export interface Settings {
   language: string
   customizeFont: boolean
-  font: string
+  fontFamily: string
   touchScreenOptimization: boolean
   enableGridLayoutSwitcher: boolean
   enableHorizontalScrolling: boolean
@@ -87,7 +87,7 @@ export interface Settings {
 export const settings = useStorageLocal('settings', ref<Settings>({
   language: '',
   customizeFont: false,
-  font: '',
+  fontFamily: '',
   touchScreenOptimization: false,
   enableGridLayoutSwitcher: true,
   enableHorizontalScrolling: false,

@@ -126,11 +126,11 @@ export function scrollToTop(element: HTMLElement, targetScrollTop = 0 as number)
   })
 }
 
-export function injectCSS(css: string): HTMLStyleElement {
+export function injectCSS(css: string, element: HTMLElement = document.documentElement): HTMLStyleElement {
   const el = document.createElement('style')
   el.setAttribute('rel', 'stylesheet')
   el.textContent = css
-  document.documentElement.appendChild(el)
+  element.appendChild(el)
   return el
 }
 
