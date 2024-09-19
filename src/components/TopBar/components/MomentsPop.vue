@@ -379,6 +379,7 @@ defineExpose({
               rounded="1/2"
               w="40px" h="40px" m="r-4"
               bg="$bew-skeleton"
+              shrink-0
             >
               <img
                 :src="`${moment.authorFace}@50w_50h_1c`"
