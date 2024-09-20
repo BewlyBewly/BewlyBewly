@@ -65,6 +65,7 @@ settings:
 
   # Settings group
   group_common: 通用
+  group_language_and_fonts: 語言同字型
   group_link_opening_behavior: 連結開啓行爲
   group_video_card: 影片卡片
   group_performance: 毛玻璃同效能
@@ -90,12 +91,6 @@ settings:
     open_settings: 打開設定...
 
   # General
-  select_language: 介面語言
-  select_language_opt:
-    english: 英文
-    mandarin_cn: 官话 - 简体中文
-    mandarin_tw: 官話 - 正體中文
-    jyut: 廣東話
   touch_screen_optimization: 觸控螢幕體驗改進
   touch_screen_optimization_desc: >
     呢個設定開咗之後，好似頂部欄噉，撳咗啲嘢先至可以睇到更多嘅資料，而唔係淨係靠游標懸停就睇到。（舊版頂部欄唔支援呢個功能）
@@ -106,7 +101,18 @@ settings:
   enable_horizontal_scrolling: 使用橫向捲動
   enable_horizontal_scrolling_desc: 用咗之後，轆緊滑鼠就可以直接打橫掃水平捲軸列表。
 
-  video_card_link_opening_behavior: 影片同番劇卡片連結開啓行爲
+  select_language: 介面語言
+  select_language_opt:
+    english: 英文
+    mandarin_cn: 官话 - 简体中文
+    mandarin_tw: 官話 - 正體中文
+    jyut: 廣東話
+  customize_font: 自訂字型
+  customize_font_desc: |-
+    對於舊字形嘅用戶，我哋推介 <a href="https://github.com/GuiWonder/Shanggu" target="_blank">Shanggu Fonts (尚古字型)</a> 同 <a href="https://github.com/ayaka14732/FanWunHak" target="_blank">Fan Wun Hak (繁媛黑體)</a>。
+    呢啲字型仲可以將簡體中文轉做正體中文。
+
+  video_card_link_opening_behavior: 影片同番劇卡片連結開啓行爺
   video_card_link_opening_behavior_opt:
     drawer: 喺櫃桶度開啓
     new_tab: 新開分頁

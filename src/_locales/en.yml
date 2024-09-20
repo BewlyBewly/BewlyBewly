@@ -64,8 +64,8 @@ settings:
   menu_about: About
 
   # Settings group
-  group_language_and_fonts: Language and Fonts
   group_common: Common
+  group_language_and_fonts: Language and Fonts
   group_link_opening_behavior: Link opening behavior
   group_video_card: Video Card
   group_performance: Frosted Glass & Performance
@@ -109,8 +109,8 @@ settings:
     jyut: Cantonese
   customize_font: Customize font
   customize_font_desc: |-
-    For those who prefer the traditional style of Chinese characters, <a href="https://github.com/GuiWonder/Shanggu">Shanggu Fonts (尚古)</a> and <a href="https://github.com/ayaka14732/FanWunHak">Fan Wun Hak (繁媛黑體)</a> are great options.
-    They can even convert simplified Chinese into traditional characters.
+    For users who favor the traditional style of Chinese characters, we recommend <a href="https://github.com/GuiWonder/Shanggu" target="_blank">Shanggu Fonts (尚古字體)</a> and <a href="https://github.com/ayaka14732/FanWunHak" target="_blank">Fan Wun Hak (繁媛黑體)</a>.
+    These fonts also possess the capability to convert simplified Chinese into traditional characters.
 
   video_card_link_opening_behavior: Video card and bangumi card link opening behavior
   video_card_link_opening_behavior_opt:
