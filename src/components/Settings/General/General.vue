@@ -29,6 +29,23 @@ const langOptions = computed(() => {
   ]
 })
 
+const topBarLinkOpenModeOptions = computed(() => {
+  return [
+    {
+      label: t('settings.top_bar_link_opening_behavior_opt.current_tab'),
+      value: 'currentTab',
+    },
+    {
+      label: t('settings.top_bar_link_opening_behavior_opt.current_tab_if_not_homepage'),
+      value: 'currentTabIfNotHomepage',
+    },
+    {
+      label: t('settings.top_bar_link_opening_behavior_opt.new_tab'),
+      value: 'newTab',
+    },
+  ]
+})
+
 const videoCardOpenModeOptions = computed(() => {
   return [
     {
@@ -92,13 +109,10 @@ watch(() => settings.value.language, (newValue) => {
       </SettingsItem>
     </SettingsItemGroup>
 
-    <SettingsItemGroup>
-      <SettingsItem :title="$t('settings.block_ads')">
-        <Radio v-model="settings.blockAds" />
+    <SettingsItemGroup :title="$t('settings.group_link_opening_behavior')">
+      <SettingsItem :title="$t('settings.top_bar_link_opening_behavior')">
+        <Select v-model="settings.topBarLinkOpenMode" :options="topBarLinkOpenModeOptions" w="full" />
       </SettingsItem>
-    </SettingsItemGroup>
-
-    <SettingsItemGroup :title="$t('settings.group_video_card')">
       <SettingsItem :title="$t('settings.video_card_link_opening_behavior')">
         <Select
           v-model="settings.videoCardLinkOpenMode"
@@ -106,6 +120,15 @@ watch(() => settings.value.language, (newValue) => {
           w="full"
         />
       </SettingsItem>
+    </SettingsItemGroup>
+
+    <SettingsItemGroup>
+      <SettingsItem :title="$t('settings.block_ads')">
+        <Radio v-model="settings.blockAds" />
+      </SettingsItem>
+    </SettingsItemGroup>
+
+    <SettingsItemGroup :title="$t('settings.group_video_card')">
       <SettingsItem :title="$t('settings.enable_video_preview')">
         <Radio v-model="settings.enableVideoPreview" />
       </SettingsItem>

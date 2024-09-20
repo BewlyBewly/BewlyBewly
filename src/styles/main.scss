@@ -80,6 +80,12 @@ img {
 .bewly-wrapper {
   line-height: 1.4;
 
+  * {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   .keep-two-lines {
     overflow: hidden;
     text-overflow: ellipsis;
