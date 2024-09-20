@@ -65,7 +65,7 @@ settings:
 
   # Settings group
   group_common: Common
-  group_language_and_fonts: Language and Fonts
+  group_languages_and_fonts: Languages and Fonts
   group_link_opening_behavior: Link opening behavior
   group_video_card: Video Card
   group_performance: Frosted Glass & Performance

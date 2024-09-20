@@ -80,7 +80,7 @@ watch(() => settings.value.language, (newValue) => {
       </SettingsItem>
     </SettingsItemGroup>
 
-    <SettingsItemGroup :title="$t('settings.group_language_and_fonts')">
+    <SettingsItemGroup :title="$t('settings.group_languages_and_fonts')">
       <SettingsItem :title="$t('settings.select_language')">
         <Select
           v-model="settings.language"

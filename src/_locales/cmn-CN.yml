@@ -65,7 +65,7 @@ settings:
 
   # Settings group
   group_common: 通用
-  group_language_and_fonts: 语言和字体
+  group_languages_and_fonts: 语言和字体
   group_link_opening_behavior: 链接打开行为
   group_video_card: 视频卡片
   group_performance: 毛玻璃和性能
