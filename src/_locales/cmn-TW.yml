@@ -65,6 +65,7 @@ settings:
 
   # Settings group
   group_common: 常用
+  group_link_opening_behavior: 連結開啟行為
   group_video_card: 影片卡片
   group_performance: 毛玻璃與效能
   group_topbar: 頂欄
