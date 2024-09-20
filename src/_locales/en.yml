@@ -65,6 +65,7 @@ settings:
 
   # Settings group
   group_common: Common
+  group_languages_and_fonts: Languages and Fonts
   group_link_opening_behavior: Link opening behavior
   group_video_card: Video Card
   group_performance: Frosted Glass & Performance
@@ -90,12 +91,6 @@ settings:
     open_settings: Open Settings...
 
   # General
-  select_language: Language
-  select_language_opt:
-    english: English
-    mandarin_cn: Mandarin - Simplified Chinese
-    mandarin_tw: Mandarin - Traditional Chinese
-    jyut: Cantonese
   touch_screen_optimization: Touch screen optimization
   touch_screen_optimization_desc: >
     After this setting is turned on, like the top bar, you must click on items to view more information instead of hovering over them. (This feature is not supported by the old top bar.)
@@ -105,6 +100,17 @@ settings:
   enable_grid_layout_switcher: Enable grid layout switcher
   enable_horizontal_scrolling: Enable horizontal scrolling
   enable_horizontal_scrolling_desc: After enabling, mouse scrolling will directly scroll the horizontal scroll list.
+
+  select_language: Language
+  select_language_opt:
+    english: English
+    mandarin_cn: Mandarin - Simplified Chinese
+    mandarin_tw: Mandarin - Traditional Chinese
+    jyut: Cantonese
+  customize_font: Customize font
+  customize_font_desc: |-
+    For users who favor the traditional style of Chinese characters, we recommend <a href="https://github.com/GuiWonder/Shanggu" target="_blank">Shanggu Fonts (尚古字體)</a> and <a href="https://github.com/ayaka14732/FanWunHak" target="_blank">Fan Wun Hak (繁媛黑體)</a>.
+    These fonts also possess the capability to convert simplified Chinese into traditional characters.
 
   video_card_link_opening_behavior: Video card and bangumi card link opening behavior
   video_card_link_opening_behavior_opt:

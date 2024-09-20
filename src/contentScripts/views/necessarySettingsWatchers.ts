@@ -50,6 +50,24 @@ export function setupNecessarySettingsWatchers() {
   )
 
   watch(
+    [() => settings.value.customizeFont, () => settings.value.fontFamily],
+    () => {
+      // Set the default font family
+      if (!settings.value.customizeFont && !settings.value.fontFamily) {
+        settings.value.fontFamily = `system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, "Roboto Flex", "Noto Sans", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", Arial, sans-serif`
+      }
+
+      if (settings.value.customizeFont) {
+        document.documentElement.style.setProperty('--bew-font-family', settings.value.fontFamily)
+      }
+      else {
+        document.documentElement.style.removeProperty('--bew-font-family')
+      }
+    },
+    { immediate: true },
+  )
+
+  watch(
     () => settings.value.disableFrostedGlass,
     () => {
       const bewlyElement = document.querySelector('#bewly') as HTMLElement

@@ -65,6 +65,7 @@ settings:
 
   # Settings group
   group_common: 通用
+  group_languages_and_fonts: 语言和字体
   group_link_opening_behavior: 链接打开行为
   group_video_card: 视频卡片
   group_performance: 毛玻璃和性能
@@ -90,12 +91,6 @@ settings:
     open_settings: 打开设置...
 
   # General
-  select_language: 界面语言
-  select_language_opt:
-    english: 英文
-    mandarin_cn: 官话 - 简体中文
-    mandarin_tw: 官話 - 正體中文
-    jyut: 廣東話
   touch_screen_optimization: 触屏体验改进
   touch_screen_optimization_desc: >
     启用后，如顶栏，你可能需要点击项目以查看更多信息，而不是鼠标直接悬停查看。（旧版顶栏不支持此功能）
@@ -105,6 +100,17 @@ settings:
   enable_grid_layout_switcher: 启用页面网格布局切换器
   enable_horizontal_scrolling: 启用横向滚动
   enable_horizontal_scrolling_desc: 启用后，鼠标滚动时将直接滚动横向滚动列表。
+
+  select_language: 界面语言
+  select_language_opt:
+    english: 英文
+    mandarin_cn: 官话 - 简体中文
+    mandarin_tw: 官話 - 正體中文
+    jyut: 廣東話
+  customize_font: 自定义字体
+  customize_font_desc: |-
+    对于喜欢旧字形的用户，我们推荐 <a href="https://github.com/GuiWonder/Shanggu" target="_blank">Shanggu Fonts (尚古字型)</a> 和 <a href="https://github.com/ayaka14732/FanWunHak" target="_blank">Fan Wun Hak (繁媛黑體)</a>。
+    这些字形还具有将简体中文转换为正体中文的能力。
 
   video_card_link_opening_behavior: 视频卡片和番剧卡片链接打开行为
   video_card_link_opening_behavior_opt:
