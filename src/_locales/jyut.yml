@@ -32,6 +32,8 @@ common:
     disable: 閂
     refresh: 重新整理
     reset: 重設
+    import: 匯入
+    export: 匯出
 
   table:
     index: 索引
@@ -49,6 +51,7 @@ common:
 iframe_drawer:
   open_in_new_tab: 喺新嘅分頁度打開連結
   close: 關閉
+  press_esc_again_to_close: 撳多次 Esc 關閉
 
 settings:
   title: 設定
@@ -64,6 +67,8 @@ settings:
 
   # Settings group
   group_common: 通用
+  group_languages_and_fonts: 語言同字型
+  group_link_opening_behavior: 連結開啓行爲
   group_video_card: 影片卡片
   group_performance: 毛玻璃同效能
   group_topbar: 頂部欄
@@ -88,12 +93,6 @@ settings:
     open_settings: 打開設定...
 
   # General
-  select_language: 介面語言
-  select_language_opt:
-    english: 英文
-    mandarin_cn: 官话 - 简体中文
-    mandarin_tw: 官話 - 正體中文
-    jyut: 廣東話
   touch_screen_optimization: 觸控螢幕體驗改進
   touch_screen_optimization_desc: >
     呢個設定開咗之後，好似頂部欄噉，撳咗啲嘢先至可以睇到更多嘅資料，而唔係淨係靠游標懸停就睇到。（舊版頂部欄唔支援呢個功能）
@@ -103,6 +102,17 @@ settings:
   enable_grid_layout_switcher: 使用版面格線佈局切換器
   enable_horizontal_scrolling: 使用橫向捲動
   enable_horizontal_scrolling_desc: 用咗之後，轆緊滑鼠就可以直接打橫掃水平捲軸列表。
+
+  select_language: 介面語言
+  select_language_opt:
+    english: 英文
+    mandarin_cn: 官话 - 简体中文
+    mandarin_tw: 官話 - 正體中文
+    jyut: 廣東話
+  customize_font: 自訂字型
+  customize_font_desc: |-
+    對於舊字形嘅用戶，我哋推介 <a href="https://github.com/GuiWonder/Shanggu" target="_blank">Shanggu Fonts (尚古字型)</a> 同 <a href="https://github.com/ayaka14732/FanWunHak" target="_blank">Fan Wun Hak (繁媛黑體)</a>。
+    呢啲字型仲可以將簡體中文轉做繁體/正體中文。
 
   video_card_link_opening_behavior: 影片同番劇卡片連結開啓行爲
   video_card_link_opening_behavior_opt:
@@ -159,6 +169,10 @@ settings:
   enable_wallpaper_masking: 使用背景遮蔽效果
   wallpaper_mask_opacity: 背景遮蔽透明度調節
   wallpaper_blur_intensity: 背景模糊強度調節
+  customize_css: 自訂 CSS
+  customize_css_desc: |-
+    若然你唔係幾識 CSS，請唔好立亂去改 CSS。唔係嘅話可能會搞到個頁面亂晒。
+    若然你執咗 CSS 之後遇到任何問題，唔該重新單個 BewlyBewly。
 
   # Search page
   logo_color: Logo 顏色
@@ -203,13 +217,13 @@ settings:
     撳兩吓欄位就可以改返入邊嘅嘢。
   filter_by_user: 根據用戶篩選
   filter_by_user_desc: |-
-    避開啲 po 片嗰位係你指定嘅用戶名（全名，唔理大細楷）抑或 mid 嘅片，抑或用正則表達式，好似 <code>/abc&#124;\d+/</code> 噉，用兩個 <code>/</code> 包住。
+    避開啲 po 片嗰位係你指定嘅用戶名（全名，唔理大細楷）抑或 MID 嘅片，抑或用正則表達式，好似 <code>/abc&#124;\d+/</code> 噉，用兩個 <code>/</code> 包住。
     <br/>
     喺下低個表度，撳 <kbd>Enter</kbd> 就可以加新嘅篩選條件，抑或確定你上先改咗嘅嘢。
     撳 <kbd>Esc</kbd> 就取消你改咗嘅嘢。
     撳兩吓欄位就可以改返入邊嘅嘢。
   filter_by_user_table:
-    username_or_mid: 用戶名 / Mid
+    username_or_mid: 用戶名 / MID
 
   use_search_page_mode: 主頁使用搵嘢頁模式
   settings_shared_with_the_search_page: 同搵嘢頁共用嘅設定
@@ -240,6 +254,10 @@ settings:
   import_settings: 匯入設定
   export_settings: 匯出設定
   export_settings_desc: 一啲敏感性資訊，例如 access key，可能要你攞多次先至得。
+  reset_settings: 重設設定
+  reset_settings_confirm: |-
+    重設設定？
+    噉做冇得返轉頭噃，你確定要重設你之前嘅設定？
   contributors: 貢獻者
 auth:
   auth_access_key_first: 整之前記得先授權 BewlyBewly 去用 access key

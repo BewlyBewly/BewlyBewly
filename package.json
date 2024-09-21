@@ -2,7 +2,7 @@
   "name": "bewly-bewly",
   "displayName": "BewlyBewly",
   "type": "module",
-  "version": "0.30.0",
+  "version": "0.31.0",
   "private": true,
   "packageManager": "pnpm@9.5.0",
   "description": "Just make a few small changes to your Bilibili homepage.",
@@ -44,7 +44,11 @@
     "submit:firefox": "pnpm wxt submit --firefox-zip ./extension-firefox.zip --firefox-sources-zip ./extension-firefox-sources.zip"
   },
   "dependencies": {
+    "@codemirror/lang-css": "^6.3.0",
+    "@codemirror/lang-javascript": "^6.2.2",
+    "@codemirror/theme-one-dark": "^6.1.2",
     "@types/md5": "^2.3.5",
+    "codemirror": "^6.0.1",
     "dompurify": "^3.1.5",
     "md5": "^2.3.0",
     "mitt": "^3.0.1",
@@ -52,6 +56,7 @@
     "overlayscrollbars-vue": "^0.5.9",
     "pinia": "^2.1.7",
     "qrcode.vue": "^3.4.1",
+    "vue-codemirror": "^6.1.1",
     "vue-i18n": "^9.13.1",
     "vue-toastification": "2.0.0-rc.5",
     "vuedraggable": "^4.1.0"

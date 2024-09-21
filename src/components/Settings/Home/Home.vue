@@ -95,6 +95,71 @@ function handleCloseQRCodeDialog() {
   showQRCodeDialog.value = false
 }
 
+function handleExport(filterType: 'title' | 'user') {
+  const filters = filterType === 'title' ? settings.value.filterByTitle : settings.value.filterByUser
+  const jsonString = JSON.stringify(filters, null, 2) // Pretty print JSON
+  const blob = new Blob([jsonString], { type: 'application/json' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = `filter-by-${filterType}.json`
+  a.click()
+  URL.revokeObjectURL(url)
+}
+
+function handleImport(filterType: 'title' | 'user') {
+  const input = document.createElement('input')
+  input.type = 'file'
+  input.accept = '.json'
+  input.onchange = async (e) => {
+    const file = (e.target as HTMLInputElement).files?.[0]
+    if (!file)
+      return
+
+    try {
+      const fileContent = await file.text()
+      const importedFilters = JSON.parse(fileContent) as { keyword: string, remark: string }[]
+
+      if (!Array.isArray(importedFilters) || !importedFilters.every(filter => 'keyword' in filter && 'remark' in filter)) {
+        throw new Error('Invalid file format')
+      }
+
+      if (filterType === 'title') {
+        settings.value.filterByTitle = importedFilters
+      }
+      else {
+        settings.value.filterByUser = importedFilters
+      }
+      // toast.success(`${filterType} filters imported successfully`)
+    }
+    catch (error) {
+      console.error(`Error importing filter by ${filterType}:`, error)
+      toast.error(`Failed to import ${filterType} filters: ${error instanceof Error ? error.message : 'Unknown error'}`)
+    }
+    finally {
+      input.remove()
+    }
+  }
+  input.click()
+}
+
+// Update the existing functions to use the new generic ones
+function handleExportFilterByTitle() {
+  handleExport('title')
+}
+
+function handleImportFilterByTitle() {
+  handleImport('title')
+}
+
+function handleExportFilterByUser() {
+  handleExport('user')
+}
+
+function handleImportFilterByUser() {
+  handleImport('user')
+}
+
 function resetHomeTabs() {
   settings.value.homePageTabVisibilityList = mainStore.homeTabs.map((tab) => {
     return {
@@ -253,13 +318,24 @@ function handleToggleHomeTab(tab: any) {
             <div v-html="$t('settings.filter_by_title_desc')" />
           </template>
           <Radio v-model="settings.enableFilterByTitle" />
-          <template #bottom>
-            <FilterByTitleTable
-              :style="{
-                pointerEvents: settings.enableFilterByTitle ? 'auto' : 'none',
-                opacity: settings.enableFilterByTitle ? '1' : '0.6',
-              }"
-            />
+          <template v-if="settings.enableFilterByTitle" #bottom>
+            <div flex="~ gap-2" mb-2>
+              <Button type="secondary" size="small" @click="handleImportFilterByTitle">
+                <template #left>
+                  <div i-uil:import />
+                </template>
+                <input type="file" accept=".json" hidden>
+                {{ $t('common.operation.import') }}
+              </Button>
+              <Button type="secondary" size="small" @click="handleExportFilterByTitle">
+                <template #left>
+                  <div i-uil:export />
+                </template>
+                {{ $t('common.operation.export') }}
+              </Button>
+            </div>
+
+            <FilterByTitleTable />
           </template>
         </SettingsItem>
         <SettingsItem
@@ -271,13 +347,24 @@ function handleToggleHomeTab(tab: any) {
             <div v-html="$t('settings.filter_by_user_desc')" />
           </template>
           <Radio v-model="settings.enableFilterByUser" />
-          <template #bottom>
-            <FilterByUserTable
-              :style="{
-                pointerEvents: settings.enableFilterByUser ? 'auto' : 'none',
-                opacity: settings.enableFilterByUser ? '1' : '0.6',
-              }"
-            />
+          <template v-if="settings.enableFilterByUser" #bottom>
+            <div flex="~ gap-2" mb-2>
+              <Button type="secondary" size="small" @click="handleImportFilterByUser">
+                <template #left>
+                  <div i-uil:import />
+                </template>
+                <input type="file" accept=".json" hidden>
+                {{ $t('common.operation.import') }}
+              </Button>
+              <Button type="secondary" size="small" @click="handleExportFilterByUser">
+                <template #left>
+                  <div i-uil:export />
+                </template>
+                {{ $t('common.operation.export') }}
+              </Button>
+            </div>
+
+            <FilterByUserTable />
           </template>
         </SettingsItem>
       </div>

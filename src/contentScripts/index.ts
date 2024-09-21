@@ -1,5 +1,5 @@
-import 'uno.css'
 import '~/styles'
+import 'uno.css'
 
 import { createApp } from 'vue'
 
@@ -7,6 +7,7 @@ import { useDark } from '~/composables/useDark'
 import { BEWLY_MOUNTED } from '~/constants/globalEvents'
 import { settings } from '~/logic'
 import { setupApp } from '~/logic/common-setup'
+import RESET_BEWLY_CSS from '~/styles/reset.css?raw'
 import { runWhenIdle } from '~/utils/lazyLoad'
 import { injectCSS, isHomePage } from '~/utils/main'
 import { SVG_ICONS } from '~/utils/svgIcons'
@@ -185,8 +186,11 @@ function injectApp() {
   // Fix #69 https://github.com/hakadao/BewlyBewly/issues/69
   // https://medium.com/@emilio_martinez/shadow-dom-open-vs-closed-1a8cf286088a - open shadow dom
   const shadowDOM = container.attachShadow?.({ mode: 'open' }) || container
+  const resetStyleEl = document.createElement('style')
+  resetStyleEl.textContent = `${RESET_BEWLY_CSS}`
   styleEl.setAttribute('rel', 'stylesheet')
   styleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
+  shadowDOM.appendChild(resetStyleEl)
   shadowDOM.appendChild(styleEl)
   shadowDOM.appendChild(root)
   container.style.opacity = '0'
@@ -198,6 +202,8 @@ function injectApp() {
     }, 500)
   }
 
+  startShadowDOMStyleInjection()
+
   // inject svg icons
   const svgDiv = document.createElement('div')
   svgDiv.innerHTML = SVG_ICONS
@@ -208,4 +214,80 @@ function injectApp() {
   const app = createApp(App)
   setupApp(app)
   app.mount(root)
+}
+
+function startShadowDOMStyleInjection() {
+  if (isHomePage())
+    return
+  if (!isSupportedPages())
+    return
+
+  // Create a MutationObserver to watch for Shadow DOM additions
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.type === 'childList') {
+        mutation.addedNodes.forEach((node) => {
+          if (node instanceof HTMLElement && node.shadowRoot) {
+            injectStyleToShadowDOM(node.shadowRoot)
+            // Observe nested Shadow DOMs recursively
+            observeShadowDOMRecursively(node.shadowRoot)
+          }
+        })
+      }
+    })
+  })
+
+  // Observe the entire document for new Shadow DOMs
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+  })
+
+  // Inject styles into existing Shadow DOMs on initial load
+  injectStylesRecursively(document)
+
+  function observeShadowDOMRecursively(shadowRoot: ShadowRoot) {
+    observer.observe(shadowRoot, {
+      childList: true,
+      subtree: true,
+    })
+
+    // Recursively observe nested Shadow DOMs within this Shadow DOM
+    shadowRoot.querySelectorAll('*').forEach((el) => {
+      if (el.shadowRoot) {
+        observeShadowDOMRecursively(el.shadowRoot)
+      }
+    })
+  }
+
+  function injectStylesRecursively(root: Document | ShadowRoot) {
+    if (root instanceof ShadowRoot) {
+      injectStyleToShadowDOM(root)
+    }
+
+    root.querySelectorAll('*').forEach((element) => {
+      if (element.shadowRoot) {
+        injectStylesRecursively(element.shadowRoot)
+      }
+    })
+  }
+
+  function injectStyleToShadowDOM(shadowRoot: ShadowRoot) {
+    if (!shadowRoot.querySelector('style[data-bewly-style]')) {
+      const styleEl = document.createElement('style')
+      styleEl.setAttribute('data-bewly-style', 'true')
+      styleEl.textContent = `
+      @import url(${browser.runtime.getURL('dist/contentScripts/style.css')});
+      `
+      if (settings.value.adaptToOtherPageStyles) {
+        // Reset the theme color to ensure the theme color is updated
+        styleEl.textContent += `
+          * {
+            --bew-theme-color: ${settings.value.themeColor};
+          }
+        `
+      }
+      shadowRoot.appendChild(styleEl)
+    }
+  }
 }

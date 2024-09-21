@@ -816,22 +816,22 @@ defineExpose({
 
 .slide-in-enter-active,
 .slide-in-leave-active {
-  --uno: "transition-all duration-300 pointer-events-none transform-gpu";
+  --uno: "transition-all duration-250 pointer-events-none transform-gpu";
 }
 
 .slide-in-leave-to,
 .slide-in-enter-from {
-  --uno: "transform important: translate-y-4 opacity-0";
+  --uno: "transform important:translate-y-4 opacity-0";
 }
 
 .slide-out-enter-active,
 .slide-out-leave-active {
-  --uno: "transition-all duration-300 pointer-events-none transform-gpu";
+  --uno: "transition-all duration-250 pointer-events-none transform-gpu";
 }
 
 .slide-out-leave-to,
 .slide-out-enter-from {
-  --uno: "transform important: -translate-y-4 opacity-0";
+  --uno: "transform important:-translate-y-4 opacity-0";
 }
 
 .fade-enter-active,
@@ -873,7 +873,7 @@ defineExpose({
     // Add a safety zone to prevent the avatar from collapsing quickly after leaving
     &:hover::after,
     &.hover::after {
-      --uno: "content-empty absolute right-0 top-20px w-110px h-100px";
+      --uno: "content-empty absolute right-0 top-20px w-110px h-120px";
     }
 
     .avatar-img,

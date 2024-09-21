@@ -29,6 +29,23 @@ const langOptions = computed(() => {
   ]
 })
 
+const topBarLinkOpenModeOptions = computed(() => {
+  return [
+    {
+      label: t('settings.top_bar_link_opening_behavior_opt.current_tab'),
+      value: 'currentTab',
+    },
+    {
+      label: t('settings.top_bar_link_opening_behavior_opt.current_tab_if_not_homepage'),
+      value: 'currentTabIfNotHomepage',
+    },
+    {
+      label: t('settings.top_bar_link_opening_behavior_opt.new_tab'),
+      value: 'newTab',
+    },
+  ]
+})
+
 const videoCardOpenModeOptions = computed(() => {
   return [
     {
@@ -37,7 +54,7 @@ const videoCardOpenModeOptions = computed(() => {
     },
     {
       label: t('settings.video_card_link_opening_behavior_opt.new_tab'),
-      value: 'new_tab',
+      value: 'newTab',
     },
   ]
 })
@@ -50,14 +67,6 @@ watch(() => settings.value.language, (newValue) => {
 <template>
   <div>
     <SettingsItemGroup :title="$t('settings.group_common')">
-      <SettingsItem :title="$t('settings.select_language')">
-        <Select
-          v-model="settings.language"
-          :options="langOptions"
-          w="full"
-        />
-      </SettingsItem>
-
       <SettingsItem :title="$t('settings.touch_screen_optimization')" :desc="$t('settings.touch_screen_optimization_desc')">
         <Radio v-model="settings.touchScreenOptimization" />
       </SettingsItem>
@@ -68,6 +77,23 @@ watch(() => settings.value.language, (newValue) => {
 
       <SettingsItem :title="$t('settings.enable_horizontal_scrolling')" :desc="$t('settings.enable_horizontal_scrolling_desc')">
         <Radio v-model="settings.enableHorizontalScrolling" />
+      </SettingsItem>
+    </SettingsItemGroup>
+
+    <SettingsItemGroup :title="$t('settings.group_languages_and_fonts')">
+      <SettingsItem :title="$t('settings.select_language')">
+        <Select
+          v-model="settings.language"
+          :options="langOptions"
+          w="full"
+        />
+      </SettingsItem>
+      <SettingsItem :title="$t('settings.customize_font')">
+        <Radio v-model="settings.customizeFont" />
+        <template v-if="settings.customizeFont" #bottom>
+          <Input v-model="settings.fontFamily" />
+          <div class="customize-font-desc" text="sm $bew-text-2" mt-1 v-html="t('settings.customize_font_desc')" />
+        </template>
       </SettingsItem>
     </SettingsItemGroup>
 
@@ -83,13 +109,10 @@ watch(() => settings.value.language, (newValue) => {
       </SettingsItem>
     </SettingsItemGroup>
 
-    <SettingsItemGroup>
-      <SettingsItem :title="$t('settings.block_ads')">
-        <Radio v-model="settings.blockAds" />
+    <SettingsItemGroup :title="$t('settings.group_link_opening_behavior')">
+      <SettingsItem :title="$t('settings.top_bar_link_opening_behavior')">
+        <Select v-model="settings.topBarLinkOpenMode" :options="topBarLinkOpenModeOptions" w="full" />
       </SettingsItem>
-    </SettingsItemGroup>
-
-    <SettingsItemGroup :title="$t('settings.group_video_card')">
       <SettingsItem :title="$t('settings.video_card_link_opening_behavior')">
         <Select
           v-model="settings.videoCardLinkOpenMode"
@@ -97,6 +120,15 @@ watch(() => settings.value.language, (newValue) => {
           w="full"
         />
       </SettingsItem>
+    </SettingsItemGroup>
+
+    <SettingsItemGroup>
+      <SettingsItem :title="$t('settings.block_ads')">
+        <Radio v-model="settings.blockAds" />
+      </SettingsItem>
+    </SettingsItemGroup>
+
+    <SettingsItemGroup :title="$t('settings.group_video_card')">
       <SettingsItem :title="$t('settings.enable_video_preview')">
         <Radio v-model="settings.enableVideoPreview" />
       </SettingsItem>
@@ -113,5 +145,9 @@ watch(() => settings.value.language, (newValue) => {
 </template>
 
 <style lang="scss" scoped>
-
+:deep(.customize-font-desc) {
+  a {
+    --uno: "text-$bew-theme-color hover:text-$bew-theme-color-80";
+  }
+}
 </style>

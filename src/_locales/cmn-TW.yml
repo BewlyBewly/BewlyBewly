@@ -32,6 +32,8 @@ common:
     disable: 停用
     refresh: 重新整理
     reset: 重設
+    import: 匯入
+    export: 匯出
 
   table:
     index: 索引
@@ -49,6 +51,7 @@ common:
 iframe_drawer:
   open_in_new_tab: 在新索引標籤開啟連結
   close: 關閉
+  press_esc_again_to_close: 再次按下 Esc 關閉
 
 settings:
   title: 設定
@@ -64,6 +67,8 @@ settings:
 
   # Settings group
   group_common: 常用
+  group_languages_and_fonts: 語言與字型
+  group_link_opening_behavior: 連結開啟行為
   group_video_card: 影片卡片
   group_performance: 毛玻璃與效能
   group_topbar: 頂欄
@@ -88,12 +93,6 @@ settings:
     open_settings: 打開設定...
 
   # General
-  select_language: 介面語言
-  select_language_opt:
-    english: 英文
-    mandarin_cn: 官话 - 简体中文
-    mandarin_tw: 官話 - 正體中文
-    jyut: 廣東話
   touch_screen_optimization: 觸控螢幕體驗改進
   touch_screen_optimization_desc: >
     啟用後，如頂欄，你可能需要點選項目才能看到更多資訊，而不是滑鼠移過去就會顯示。（舊版頂欄不支援此功能）
@@ -103,6 +102,17 @@ settings:
   enable_grid_layout_switcher: 啟用版面格線佈局切換器
   enable_horizontal_scrolling: 啟用橫向捲動
   enable_horizontal_scrolling_desc: 啟用後，滑鼠捲動時將直接捲動橫向捲軸列表。
+
+  select_language: 介面語言
+  select_language_opt:
+    english: 英文
+    mandarin_cn: 官话 - 简体中文
+    mandarin_tw: 官話 - 正體中文
+    jyut: 廣東話
+  customize_font: 自訂字型
+  customize_font_desc: |-
+    對於喜歡舊字形的用戶，我們推薦 <a href="https://github.com/GuiWonder/Shanggu" target="_blank">Shanggu Fonts (尚古字型)</a> 和 <a href="https://github.com/ayaka14732/FanWunHak" target="_blank">Fan Wun Hak (繁媛黑體)</a>。
+    這些字型還具有將簡體中文轉換為繁體/正體中文的能力。
 
   video_card_link_opening_behavior: 影片和番劇卡片連結開啟行為
   video_card_link_opening_behavior_opt:
@@ -159,6 +169,10 @@ settings:
   enable_wallpaper_masking: 啟用背景遮蔽效果
   wallpaper_mask_opacity: 背景遮蔽透明度調節
   wallpaper_blur_intensity: 背景模糊強度調節
+  customize_css: 自訂 CSS
+  customize_css_desc: |-
+    如果你不熟悉 CSS，請不要修改 CSS。否則可能會導致意外的顯示問題。
+    如果你在修改 CSS 後遇到任何問題，請重新安裝 BewlyBewly。
 
   # Search page
   logo_color: Logo 顏色
@@ -203,13 +217,13 @@ settings:
     按兩下欄位以編輯目前欄位。
   filter_by_user: 按使用者篩選
   filter_by_user_desc: |-
-    篩選掉包含您設定的使用者名稱（全名，不區分大小寫）或 mid 所上傳的影片，或使用正規表示式，如 <code>/abc&#124;\d+/</code>，用 <code>/</code> 包裡。
+    篩選掉包含您設定的使用者名稱（全名，不區分大小寫）或 MID 所上傳的影片，或使用正規表示式，如 <code>/abc&#124;\d+/</code>，用 <code>/</code> 包裡。
     <br/>
     在下面的表格中，您可以按 <kbd>Enter</kbd> 鍵建立新的篩選條件或確認變更。
     按 <kbd>Esc</kbd> 鍵取消變更。
     按兩下欄位以編輯目前欄位。
   filter_by_user_table:
-    username_or_mid: 使用者名稱 / Mid
+    username_or_mid: 使用者名稱 / MID
 
   use_search_page_mode: 首頁使用搜尋頁模式
   settings_shared_with_the_search_page: 與搜尋頁共用的設定
@@ -240,6 +254,10 @@ settings:
   import_settings: 匯入設定
   export_settings: 匯出設定
   export_settings_desc: 一些敏感性資訊，例如 access key，可能需要重新取得。
+  reset_settings: 重設設定
+  reset_settings_confirm: |-
+    重設設定？
+    此操作無法撤消，你確定要重設你的設定嗎？
   contributors: 貢獻者
 auth:
   auth_access_key_first: 在這之前請先授權 BewlyBewly 使用 access key

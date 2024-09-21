@@ -29,7 +29,7 @@ function onClickOption(val: OptionType) {
   window.removeEventListener('click', () => {})
   label.value = val.label
   emit('update:modelValue', val.value)
-  emit('change', val)
+  emit('change', val.value)
   showOptions.value = false
 }
 

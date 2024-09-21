@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 import browser from 'webextension-polyfill'
 
-import { settings } from '~/logic'
+import { originalSettings, settings } from '~/logic'
 
 import { version } from '../../../../package.json'
+
+const { t } = useI18n()
 
 const importSettingsRef = ref<HTMLElement>()
 const hasNewVersion = ref<boolean>(false)
@@ -59,6 +62,17 @@ function handleExportSettings() {
   a.download = 'bewly-settings.json'
   a.click()
   URL.revokeObjectURL(url)
+}
+
+function handleResetSettings() {
+  const result = confirm(
+    t('settings.reset_settings_confirm'),
+  )
+  if (result) {
+    // Remember the last selected language when resetting settings
+    originalSettings.language = settings.value.language
+    settings.value = originalSettings
+  }
 }
 
 async function checkGitHubRelease() {
@@ -198,7 +212,7 @@ async function checkGitHubRelease() {
         </section>
         <section w-full>
           <h3 class="title">
-            {{ `${$t('settings.import_settings')} / ${$t('settings.export_settings')}` }}
+            {{ `${$t('settings.import_settings')} / ${$t('settings.export_settings')} / ${$t('settings.reset_settings')}` }}
           </h3>
           <div flex="~ gap-2">
             <Button class="btn" @click="handleImportSettings">
@@ -216,6 +230,12 @@ async function checkGitHubRelease() {
                 {{ $t('settings.export_settings') }}
               </Button>
             </Tooltip>
+            <Button class="btn" @click="handleResetSettings">
+              <template #left>
+                <i i-mingcute:back-line />
+              </template>
+              {{ $t('settings.reset_settings') }}
+            </Button>
           </div>
         </section>
         <!-- <section>
