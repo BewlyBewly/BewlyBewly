@@ -47,6 +47,9 @@ export interface Settings {
   wallpaperBlurIntensity: number
   locallyUploadedWallpaper: wallpaperItem | null
 
+  customizeCSS: boolean
+  customizeCSSContent: string
+
   searchPageDarkenOnSearchFocus: boolean
   searchPageBlurredOnSearchFocus: boolean
   searchPageLogoColor: 'white' | 'themeColor'
@@ -124,6 +127,9 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   wallpaperMaskOpacity: 80,
   wallpaperBlurIntensity: 0,
   locallyUploadedWallpaper: null,
+
+  customizeCSS: false,
+  customizeCSSContent: '',
 
   searchPageDarkenOnSearchFocus: true,
   searchPageBlurredOnSearchFocus: false,

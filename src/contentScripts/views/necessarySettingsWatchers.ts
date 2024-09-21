@@ -1,8 +1,10 @@
+import { useEventListener } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 
+import { BEWLY_MOUNTED } from '~/constants/globalEvents'
 import { LanguageType } from '~/enums/appEnums'
 import { accessKey, settings } from '~/logic'
-import { getUserID } from '~/utils/main'
+import { getUserID, injectCSS } from '~/utils/main'
 
 export function setupNecessarySettingsWatchers() {
   const { locale } = useI18n()
@@ -127,6 +129,31 @@ export function setupNecessarySettingsWatchers() {
       }
 
       document.documentElement.style.setProperty('--bew-theme-color', settings.value.themeColor)
+    },
+    { immediate: true },
+  )
+
+  let styleEL: HTMLStyleElement | null = null
+  let bewlyStyleEL: HTMLStyleElement | null = null
+  watch(
+    [() => settings.value.customizeCSS, () => settings.value.customizeCSSContent],
+    () => {
+      const bewlyEl: HTMLElement | null = document.querySelector('#bewly')
+      const bewlyShadow: ShadowRoot | null = bewlyEl?.shadowRoot || null
+
+      if (settings.value.customizeCSS) {
+        styleEL = injectCSS(settings.value.customizeCSSContent)
+
+        if (bewlyShadow)
+          bewlyStyleEL = injectCSS(settings.value.customizeCSSContent, bewlyShadow)
+      }
+      else {
+        if (styleEL)
+          document.documentElement.removeChild(styleEL)
+
+        if (bewlyShadow && bewlyStyleEL)
+          bewlyShadow.removeChild(bewlyStyleEL)
+      }
     },
     { immediate: true },
   )

@@ -167,6 +167,10 @@ settings:
   enable_wallpaper_masking: Enable wallpaper masking
   wallpaper_mask_opacity: Wallpaper masking opacity
   wallpaper_blur_intensity: Wallpaper blur intensity
+  customize_css: Customize CSS
+  customize_css_desc: |-
+    If you are unfamiliar with CSS, please DO NOT modify CSS. Doing so may cause unexpected display issues.
+    If you encounter any problems after modifying CSS, please reinstall BewlyBewly.
 
   # Search page
   logo_color: Logo color

@@ -167,6 +167,10 @@ settings:
   enable_wallpaper_masking: 啟用背景遮蔽效果
   wallpaper_mask_opacity: 背景遮蔽透明度調節
   wallpaper_blur_intensity: 背景模糊強度調節
+  customize_css: 自訂 CSS
+  customize_css_desc: |-
+    如果你不熟悉 CSS，請不要修改 CSS。否則可能會導致意外的顯示問題。
+    如果你在修改 CSS 後遇到任何問題，請重新安裝 BewlyBewly。
 
   # Search page
   logo_color: Logo 顏色

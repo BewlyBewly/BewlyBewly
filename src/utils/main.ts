@@ -126,7 +126,7 @@ export function scrollToTop(element: HTMLElement, targetScrollTop = 0 as number)
   })
 }
 
-export function injectCSS(css: string, element: HTMLElement = document.documentElement): HTMLStyleElement {
+export function injectCSS(css: string, element: HTMLElement | ShadowRoot = document.documentElement): HTMLStyleElement {
   const el = document.createElement('style')
   el.setAttribute('rel', 'stylesheet')
   el.textContent = css
