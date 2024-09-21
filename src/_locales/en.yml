@@ -32,6 +32,8 @@ common:
     disable: Disable
     refresh: Refresh
     reset: Reset
+    import: Import
+    export: Export
 
   table:
     index: Index

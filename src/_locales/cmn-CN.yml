@@ -32,6 +32,8 @@ common:
     disable: 禁用
     refresh: 刷新
     reset: 重置
+    import: 导入
+    export: 导出
 
   table:
     index: 索引
