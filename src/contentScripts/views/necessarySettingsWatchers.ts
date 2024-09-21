@@ -1,7 +1,5 @@
-import { useEventListener } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 
-import { BEWLY_MOUNTED } from '~/constants/globalEvents'
 import { LanguageType } from '~/enums/appEnums'
 import { accessKey, settings } from '~/logic'
 import { getUserID, injectCSS } from '~/utils/main'
