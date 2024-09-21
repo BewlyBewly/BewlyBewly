@@ -44,6 +44,21 @@ const API_FAVORITE = {
     },
     afterHandle: AHS.J_D,
   },
+  // https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/fav/action.md#%E6%89%B9%E9%87%8F%E7%A7%BB%E5%8A%A8%E5%86%85%E5%AE%B9
+  patchMoveFavoriteResources: {
+    url: 'https://api.bilibili.com/x/v3/fav/resource/move',
+    _fetch: {
+      method: 'post',
+    },
+    params: {
+      src_media_id: 0,
+      tar_media_id: 0,
+      mid: 0,
+      resources: '',
+      csrf: '',
+    },
+    afterHandle: AHS.J_D,
+  },
 } satisfies APIMAP
 
 export default API_FAVORITE
