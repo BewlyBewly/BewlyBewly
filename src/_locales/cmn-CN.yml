@@ -251,6 +251,10 @@ settings:
   import_settings: 导入设置
   export_settings: 导出设置
   export_settings_desc: 一些敏感的数据，例如 access key，可能需要重新获取。
+  reset_settings: 重置设置
+  reset_settings_confirm: |-
+    重置设置？
+    该操作无法撤销。你确定要重置你的设置吗？
   contributors: 贡献者
 auth:
   auth_access_key_first: 在这之前请先授权 BewlyBewly 使用 access key

@@ -252,6 +252,10 @@ settings:
   import_settings: 匯入設定
   export_settings: 匯出設定
   export_settings_desc: 一啲敏感性資訊，例如 access key，可能要你攞多次先至得。
+  reset_settings: 重設設定
+  reset_settings_confirm: |-
+    重設設定？
+    噉做冇得返轉頭噃，你確定要重設你之前嘅設定？
   contributors: 貢獻者
 auth:
   auth_access_key_first: 整之前記得先授權 BewlyBewly 去用 access key

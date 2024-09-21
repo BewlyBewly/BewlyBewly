@@ -87,7 +87,8 @@ export interface Settings {
   useOriginalBilibiliTopBar: boolean
   useOriginalBilibiliHomepage: boolean
 }
-export const settings = useStorageLocal('settings', ref<Settings>({
+
+export const originalSettings: Settings = {
   language: '',
   customizeFont: false,
   fontFamily: '',
@@ -167,7 +168,9 @@ export const settings = useStorageLocal('settings', ref<Settings>({
   showTopBar: true,
   useOriginalBilibiliTopBar: false,
   useOriginalBilibiliHomepage: false,
-}), { mergeDefaults: true })
+}
+
+export const settings = useStorageLocal('settings', ref<Settings>(originalSettings), { mergeDefaults: true })
 
 export type GridLayout = 'adaptive' | 'twoColumns' | 'oneColumn'
 export const homePageGridLayout = useStorageLocal('homePageGridLayout', ref<GridLayout>('adaptive'), { mergeDefaults: true })

@@ -254,6 +254,10 @@ settings:
   import_settings: Import Settings
   export_settings: Export Settings
   export_settings_desc: Some sensitive content, such as access key, will not be exported and may need to be reacquired again.
+  reset_settings: Reset Settings
+  reset_settings_confirm: |-
+    Reset settings?
+    This operation cannot be reversed. Are you sure you want to reset your settings?
   contributors: Contributors
 auth:
   auth_access_key_first: Before doing this, authorize BewlyBewly to use the access key.
