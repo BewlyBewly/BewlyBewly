@@ -215,13 +215,13 @@ settings:
     撳兩吓欄位就可以改返入邊嘅嘢。
   filter_by_user: 根據用戶篩選
   filter_by_user_desc: |-
-    避開啲 po 片嗰位係你指定嘅用戶名（全名，唔理大細楷）抑或 mid 嘅片，抑或用正則表達式，好似 <code>/abc&#124;\d+/</code> 噉，用兩個 <code>/</code> 包住。
+    避開啲 po 片嗰位係你指定嘅用戶名（全名，唔理大細楷）抑或 MID 嘅片，抑或用正則表達式，好似 <code>/abc&#124;\d+/</code> 噉，用兩個 <code>/</code> 包住。
     <br/>
     喺下低個表度，撳 <kbd>Enter</kbd> 就可以加新嘅篩選條件，抑或確定你上先改咗嘅嘢。
     撳 <kbd>Esc</kbd> 就取消你改咗嘅嘢。
     撳兩吓欄位就可以改返入邊嘅嘢。
   filter_by_user_table:
-    username_or_mid: 用戶名 / Mid
+    username_or_mid: 用戶名 / MID
 
   use_search_page_mode: 主頁使用搵嘢頁模式
   settings_shared_with_the_search_page: 同搵嘢頁共用嘅設定
