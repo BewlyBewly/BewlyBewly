@@ -110,7 +110,7 @@ settings:
   customize_font: 自訂字型
   customize_font_desc: |-
     對於喜歡舊字形的用戶，我們推薦 <a href="https://github.com/GuiWonder/Shanggu" target="_blank">Shanggu Fonts (尚古字型)</a> 和 <a href="https://github.com/ayaka14732/FanWunHak" target="_blank">Fan Wun Hak (繁媛黑體)</a>。
-    這些字型還具有將簡體中文轉換為正體中文的能力。
+    這些字型還具有將簡體中文轉換為繁體/正體中文的能力。
 
   video_card_link_opening_behavior: 影片和番劇卡片連結開啟行為
   video_card_link_opening_behavior_opt:
