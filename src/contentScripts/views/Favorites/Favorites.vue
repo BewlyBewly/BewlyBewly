@@ -29,6 +29,8 @@ const isLoading = ref<boolean>(false)
 const isFullPageLoading = ref<boolean>(false)
 const noMoreContent = ref<boolean>(false)
 
+const currentDraggedResource = ref<FavoriteResource>()
+
 onMounted(async () => {
   await getFavoriteCategories()
   changeCategory(favoriteCategories[0])
@@ -178,6 +180,28 @@ function handleUnfavorite(favoriteResource: FavoriteResource) {
   }
 }
 
+function handleDragFavoriteResource(resource: FavoriteResource) {
+  currentDraggedResource.value = resource
+}
+
+function handleDropFavoriteResource(favoriteCategory: FavoriteCategory) {
+  if (favoriteCategory.id === selectedCategory.value?.id)
+    return
+  if (currentDraggedResource.value) {
+    api.favorite.patchMoveFavoriteResources({
+      src_media_id: selectedCategory.value?.id,
+      tar_media_id: favoriteCategory.id,
+      mid: getUserID(),
+      resources: `${currentDraggedResource.value.id}:${currentDraggedResource.value.type}`,
+      csrf: getCSRF(),
+    }).then((res) => {
+      if (res.code === 0) {
+        favoriteResources.splice(favoriteResources.indexOf(currentDraggedResource.value as FavoriteItem), 1)
+        currentDraggedResource.value = undefined
+      }
+    })
+  }
+}
 function isMusic(item: FavoriteResource) {
   return item.link.includes('bilibili://music')
 }
@@ -191,11 +215,13 @@ function isMusic(item: FavoriteResource) {
       </h3> -->
       <div
         fixed z-10 absolute p-2 flex="~ gap-2"
-        items-center
-        bg="$bew-elevated-solid" rounded="$bew-radius" shadow="$bew-shadow-2" mt--2 transition="all 300 ease-in-out"
-        :class="{ hide: shouldMoveCtrlBarUp }"
+        items-center bg="$bew-elevated-solid" rounded="$bew-radius"
+        shadow="$bew-shadow-2" mt--2 transition="all 300 ease-in-out" :class="{ hide: shouldMoveCtrlBarUp }"
       >
-        <Select v-model="selectedCategory" w-150px :options="categoryOptions" @change="(val: FavoriteCategory) => changeCategory(val)" />
+        <Select
+          v-model="selectedCategory" w-150px :options="categoryOptions"
+          @change="(val: FavoriteCategory) => changeCategory(val)"
+        />
         <Input v-model="keyword" w-250px @enter="handleSearch" />
         <Button type="primary" @click="handleSearch">
           <template #left>
@@ -217,9 +243,7 @@ function isMusic(item: FavoriteResource) {
         <div grid="~ 2xl:cols-4 xl:cols-3 lg:cols-2 md:cols-1 gap-5" m="t-55px b-6">
           <TransitionGroup name="list">
             <VideoCard
-              v-for="item in favoriteResources"
-              :key="item.id"
-              :video="{
+              v-for="item in favoriteResources" :key="item.id" :video="{
                 id: item.id,
                 duration: item.duration,
                 title: item.title,
@@ -232,16 +256,13 @@ function isMusic(item: FavoriteResource) {
                 publishedTimestamp: item.pubtime,
                 bvid: isMusic(item) ? undefined : item.bvid,
                 url: isMusic(item) ? `https://www.bilibili.com/audio/au${item.id}` : undefined,
-              }"
-              group
+              }" group @draggable="true"
+              @dragstart="handleDragFavoriteResource(item)"
             >
               <template #coverTopLeft>
                 <button
-                  p="x-2 y-1" m="1"
-                  rounded="$bew-radius"
-                  text="!white xl"
-                  bg="black opacity-60 hover:$bew-error-color-80"
-                  @click.prevent.stop="handleUnfavorite(item)"
+                  p="x-2 y-1" m="1" rounded="$bew-radius" text="!white xl"
+                  bg="black opacity-60 hover:$bew-error-color-80" @click.prevent.stop="handleUnfavorite(item)"
                 >
                   <Tooltip :content="$t('favorites.unfavorite')" placement="bottom" type="dark">
                     <div i-ic-baseline-clear />
@@ -257,49 +278,33 @@ function isMusic(item: FavoriteResource) {
 
         <!-- loading -->
         <Transition name="fade">
-          <Loading
-            v-if="isLoading && favoriteResources.length !== 0 && !noMoreContent"
-            m="-t-4"
-          />
+          <Loading v-if="isLoading && favoriteResources.length !== 0 && !noMoreContent" m="-t-4" />
         </Transition>
       </template>
     </main>
 
     <aside relative w="full md:40% lg:30% xl:25%" class="hidden md:block" order="1 md:2 lg:2">
       <div
-        pos="sticky top-120px"
-        w-full h="auto md:[calc(100vh-160px)]"
-        my-10
-        rounded="$bew-radius"
+        pos="sticky top-120px" w-full h="auto md:[calc(100vh-160px)]" my-10 rounded="$bew-radius"
         overflow-hidden
       >
         <!-- Frosted Glass Cover -->
-        <div
-          pos="absolute top-0 left-0" w-full h-full
-          z--1
-        >
-          <div
-            absolute w-full h-full
-            bg="$bew-fill-4"
-          />
+        <div pos="absolute top-0 left-0" w-full h-full z--1>
+          <div absolute w-full h-full bg="$bew-fill-4" />
           <img
-            v-if="activatedCategoryCover"
-            :src="removeHttpFromUrl(`${activatedCategoryCover}@480w_270h_1c`)"
-            w-full h-full object="cover center" blur-40px
+            v-if="activatedCategoryCover" :src="removeHttpFromUrl(`${activatedCategoryCover}@480w_270h_1c`)" w-full
+            h-full object="cover center" blur-40px
           >
         </div>
 
         <!-- Content -->
         <main
-          pos="absolute top-0 left-0"
-          w-full h-full
-          overflow-overlay
-          flex="~ col gap-4 justify-start"
+          pos="absolute top-0 left-0" w-full h-full overflow-overlay flex="~ col gap-4 justify-start"
           p-6
         >
           <picture
-            rounded="$bew-radius" style="box-shadow: 0 16px 24px -12px rgba(0, 0, 0, .36)"
-            aspect-video mb-4 bg="$bew-skeleton"
+            rounded="$bew-radius" style="box-shadow: 0 16px 24px -12px rgba(0, 0, 0, .36)" aspect-video mb-4
+            bg="$bew-skeleton"
           >
             <img
               v-if="activatedCategoryCover" :src="removeHttpFromUrl(`${activatedCategoryCover}@480w_270h_1c`)"
@@ -325,20 +330,20 @@ function isMusic(item: FavoriteResource) {
             </Button>
           </p>
           <ul
-            class="category-list" h-full min-h-200px
-            overflow-overlay
-            border="1 color-[rgba(255,255,255,.2)]"
+            class="category-list" h-full min-h-200px overflow-overlay border="1 color-[rgba(255,255,255,.2)]"
             rounded="$bew-radius"
           >
             <li
-              v-for="item in favoriteCategories" :key="item.id"
-              border-b="1 color-[rgba(255,255,255,.2)]"
-              lh-30px px-4 cursor-pointer hover:bg="[rgba(255,255,255,.35)]"
-              duration-300 color-white flex justify-between
-              :style="{ background: item.id === selectedCategory?.id ? 'rgba(255,255,255,.35)' : '', pointerEvents: isFullPageLoading ? 'none' : 'auto' }"
-              @click="changeCategory(item)"
+              v-for="item in favoriteCategories" :key="item.id" border-b="1 color-[rgba(255,255,255,.2)]" lh-30px px-4
+              cursor-pointer hover:bg="[rgba(255,255,255,.35)]" duration-300 color-white flex
+              justify-between:style="{ background: item.id === selectedCategory?.id ? 'rgba(255,255,255,.35)' : '', pointerEvents: isFullPageLoading ? 'none' : 'auto' }"
+              @click="changeCategory(item)" @dragenter="e => e.target.style.background = 'rgba(255,255,255,.5)'"
+              @dragleave="e => e.target.style.background = item.id === selectedCategory?.id ? 'rgba(255,255,255,.35)' : ''"
+              @dragover="e => e.preventDefault()"
+              @drop="e => { e.target.style.background = item.id === selectedCategory?.id ? 'rgba(255,255,255,.35)' : ''; handleDropFavoriteResource(item) }"
             >
-              <span>{{ item.title }}</span> <span ml-2 color-white color-opacity-60>{{ item.media_count }}</span>
+              <span :style="{ pointerEvents: 'none' }">{{ item.title }}</span>
+              <span :style="{ pointerEvents: 'none' }" ml-2 color-white color-opacity-60>{{ item.media_count }}</span>
             </li>
           </ul>
         </main>
