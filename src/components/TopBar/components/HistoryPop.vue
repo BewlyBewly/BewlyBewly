@@ -144,6 +144,11 @@ function getHistoryUrl(item: HistoryItem) {
  * @param view_at Last viewed timestamp
  */
 function getHistoryList(type: Business, view_at = 0 as number) {
+  if (isLoading.value)
+    return
+  if (noMoreContent.value)
+    return
+
   isLoading.value = true
   api.history.getHistoryList({
     type,
@@ -154,10 +159,8 @@ function getHistoryList(type: Business, view_at = 0 as number) {
         if (Array.isArray(res.data.list) && res.data.list.length > 0)
           historys.push(...res.data.list)
 
-        if (historys.length !== 0 && res.data.list.length < 20) {
-          isLoading.value = false
+        if (res.data.list.length < 20) {
           noMoreContent.value = true
-          return
         }
 
         noMoreContent.value = false

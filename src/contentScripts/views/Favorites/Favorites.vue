@@ -241,7 +241,7 @@ function isMusic(item: FavoriteResource) {
                   rounded="$bew-radius"
                   text="!white xl"
                   bg="black opacity-60 hover:$bew-error-color-80"
-                  @click.prevent="handleUnfavorite(item)"
+                  @click.prevent.stop="handleUnfavorite(item)"
                 >
                   <Tooltip :content="$t('favorites.unfavorite')" placement="bottom" type="dark">
                     <div i-ic-baseline-clear />

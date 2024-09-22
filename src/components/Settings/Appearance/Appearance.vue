@@ -122,6 +122,20 @@ function changeWallpaper(url: string) {
     </SettingsItemGroup>
 
     <ChangeWallpaper type="global" />
+
+    <SettingsItemGroup>
+      <SettingsItem :title="$t('settings.customize_css')">
+        <Radio v-model="settings.customizeCSS" />
+        <template #desc>
+          <span text="$bew-error-color">
+            {{ $t('settings.customize_css_desc') }}
+          </span>
+        </template>
+        <template v-if="settings.customizeCSS" #bottom>
+          <CodeEditor v-model="settings.customizeCSSContent" language="css" />
+        </template>
+      </SettingsItem>
+    </SettingsItemGroup>
   </div>
 </template>
 

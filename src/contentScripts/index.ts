@@ -1,5 +1,5 @@
-import 'uno.css'
 import '~/styles'
+import 'uno.css'
 
 import { createApp } from 'vue'
 
@@ -7,6 +7,7 @@ import { useDark } from '~/composables/useDark'
 import { BEWLY_MOUNTED } from '~/constants/globalEvents'
 import { settings } from '~/logic'
 import { setupApp } from '~/logic/common-setup'
+import RESET_BEWLY_CSS from '~/styles/reset.css?raw'
 import { runWhenIdle } from '~/utils/lazyLoad'
 import { injectCSS, isHomePage } from '~/utils/main'
 import { SVG_ICONS } from '~/utils/svgIcons'
@@ -189,8 +190,11 @@ function injectApp() {
   // Fix #69 https://github.com/hakadao/BewlyBewly/issues/69
   // https://medium.com/@emilio_martinez/shadow-dom-open-vs-closed-1a8cf286088a - open shadow dom
   const shadowDOM = container.attachShadow?.({ mode: 'open' }) || container
+  const resetStyleEl = document.createElement('style')
+  resetStyleEl.textContent = `${RESET_BEWLY_CSS}`
   styleEl.setAttribute('rel', 'stylesheet')
   styleEl.setAttribute('href', browser.runtime.getURL('dist/contentScripts/style.css'))
+  shadowDOM.appendChild(resetStyleEl)
   shadowDOM.appendChild(styleEl)
   shadowDOM.appendChild(root)
   container.style.opacity = '0'

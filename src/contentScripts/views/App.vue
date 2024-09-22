@@ -1,19 +1,18 @@
 <script setup lang="ts">
 import { useThrottleFn, useToggle } from '@vueuse/core'
 import type { Ref } from 'vue'
-import { useI18n } from 'vue-i18n'
-import browser from 'webextension-polyfill'
 
 import type { BewlyAppProvider } from '~/composables/useAppProvider'
 import { useDark } from '~/composables/useDark'
 import { BEWLY_MOUNTED, OVERLAY_SCROLL_BAR_SCROLL } from '~/constants/globalEvents'
-import { AppPage, LanguageType } from '~/enums/appEnums'
-import { accessKey, settings } from '~/logic'
-import { getUserID, isHomePage, scrollToTop } from '~/utils/main'
+import { AppPage } from '~/enums/appEnums'
+import { settings } from '~/logic'
+import { isHomePage, scrollToTop } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
+import { setupNecessarySettingsWatchers } from './necessarySettingsWatchers'
+
 const { isDark } = useDark()
-const { locale } = useI18n()
 const [showSettings, toggleSettings] = useToggle(false)
 
 const activatedPage = ref<AppPage>(settings.value.dockItemVisibilityList.find(e => e.visible === true)?.page ?? AppPage.Home)
@@ -59,58 +58,11 @@ watch(
   },
 )
 
-watch(
-  () => settings.value.themeColor,
-  () => {
-    setAppThemeColor()
-  },
-  { immediate: true },
-)
-
-watch(() => settings.value.language, () => {
-  setAppLanguage()
-})
-
-watch(() => accessKey.value, () => {
-  handleChangeAccessKey()
-})
-
-watch(() => settings.value.adaptToOtherPageStyles, () => {
-  handleAdaptToOtherPageStylesChange()
-}, { immediate: true })
-
-watch(() => settings.value.blockAds, () => {
-  handleBlockAds()
-})
-
-watch(() => settings.value.disableFrostedGlass, () => {
-  handleDisableFrostedGlass()
-})
-
-watch(() => settings.value.reduceFrostedGlassBlur, () => {
-  handleReduceFrostedGlassBlur()
-})
-
-watch(() => settings.value.showTopBar, (newVal) => {
-  if (newVal)
-    settings.value.useOriginalBilibiliTopBar = false
-}, { immediate: true })
-
-watch(() => settings.value.useOriginalBilibiliTopBar, (newVal) => {
-  if (newVal)
-    settings.value.showTopBar = false
-  document.documentElement.classList.toggle('remove-bili-top-bar', !settings.value.useOriginalBilibiliTopBar)
-}, { immediate: true })
-
-onBeforeMount(() => {
-  handleBlockAds()
-  handleDisableFrostedGlass()
-  handleReduceFrostedGlassBlur()
-})
+// Setup necessary settings watchers
+setupNecessarySettingsWatchers()
 
 onMounted(() => {
   window.dispatchEvent(new CustomEvent(BEWLY_MOUNTED))
-  // openVideoPageIfBvidExists()
 
   if (isHomePage()) {
     // Force overwrite Bilibili Evolved body tag & html tag background color
@@ -124,16 +76,7 @@ onMounted(() => {
     else
       reachTop.value = true
   })
-
-  handleChangeAccessKey()
-  setAppLanguage()
 })
-
-function handleChangeAccessKey() {
-  // Clear accessKey if not logged in
-  if (!getUserID())
-    accessKey.value = ''
-}
 
 function changeActivatePage(pageName: AppPage) {
   const osInstance = scrollbarRef.value?.osInstance()
@@ -151,49 +94,11 @@ function changeActivatePage(pageName: AppPage) {
   activatedPage.value = pageName
 }
 
-async function setAppLanguage() {
-  // if there is first-time load extension, set the default language by browser display language
-  if (!settings.value.language) {
-    if (browser.i18n.getUILanguage() === 'zh-CN') {
-      settings.value.language = LanguageType.Mandarin_CN
-    }
-    else if (browser.i18n.getUILanguage() === 'zh-TW') {
-      // Since getUILanguage() cannot get the zh-HK language code
-      // use getAcceptLanguages() to get the language code
-      const languages: string[] = await browser.i18n.getAcceptLanguages()
-      if (languages.includes('zh-HK'))
-        settings.value.language = LanguageType.Cantonese
-      else settings.value.language = LanguageType.Mandarin_TW
-    }
-    else {
-      settings.value.language = LanguageType.English
-    }
-  }
-
-  locale.value = settings.value.language
-}
-
-function setAppThemeColor() {
-  const bewlyElement = document.querySelector('#bewly') as HTMLElement
-  if (bewlyElement) {
-    bewlyElement.style.setProperty('--bew-theme-color', settings.value.themeColor)
-  }
-
-  document.documentElement.style.setProperty('--bew-theme-color', settings.value.themeColor)
-}
-
 function handleBackToTop(targetScrollTop = 0 as number) {
   const osInstance = scrollbarRef.value?.osInstance()
 
   scrollToTop(osInstance.elements().viewport, targetScrollTop)
   topBarRef.value?.toggleTopBarVisible(true)
-}
-
-function handleAdaptToOtherPageStylesChange() {
-  if (settings.value.adaptToOtherPageStyles)
-    document.documentElement.classList.add('bewly-design')
-  else
-    document.documentElement.classList.remove('bewly-design')
 }
 
 function handleOsScroll() {
@@ -215,49 +120,6 @@ function handleOsScroll() {
 
   if (isHomePage())
     topBarRef.value?.handleScroll()
-}
-
-function handleBlockAds() {
-  // Do not use the "ads" keyword. AdGuard, AdBlock, and some ad-blocking extensions will
-  // detect and remove it when the class name contains "ads"
-  if (settings.value.blockAds)
-    document.documentElement.classList.add('block-useless-contents')
-  else
-    document.documentElement.classList.remove('block-useless-contents')
-}
-
-function handleDisableFrostedGlass() {
-  const bewlyElement = document.querySelector('#bewly') as HTMLElement
-  if (settings.value.disableFrostedGlass) {
-    if (bewlyElement)
-      bewlyElement.classList.add('disable-frosted-glass')
-
-    document.documentElement.classList.add('disable-frosted-glass')
-
-    settings.value.reduceFrostedGlassBlur = false
-  }
-  else {
-    if (bewlyElement)
-      bewlyElement.classList.remove('disable-frosted-glass')
-
-    document.documentElement.classList.remove('disable-frosted-glass')
-  }
-}
-
-function handleReduceFrostedGlassBlur() {
-  const bewlyElement = document.querySelector('#bewly') as HTMLElement
-  if (settings.value.reduceFrostedGlassBlur) {
-    if (bewlyElement)
-      bewlyElement.classList.add('reduce-frosted-glass-blur')
-
-    document.documentElement.classList.add('reduce-frosted-glass-blur')
-  }
-  else {
-    if (bewlyElement)
-      bewlyElement.classList.remove('reduce-frosted-glass-blur')
-
-    document.documentElement.classList.remove('reduce-frosted-glass-blur')
-  }
 }
 
 function openIframeDrawer(url: string) {
