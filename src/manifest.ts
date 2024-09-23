@@ -36,9 +36,7 @@ export async function getManifest() {
       128: './assets/icon-512.png',
     },
     permissions: [
-      'tabs',
       'storage',
-      'scripting',
       'declarativeNetRequest',
       ...isFirefox
         ? ['webRequest', 'webRequestBlocking']
