@@ -186,4 +186,15 @@ img {
     color: var(--bew-text-1) !important;
     fill: var(--bew-text-1) !important;
   }
+
+  // Bilibili Evolved's top bar
+  &.dark .custom-navbar.blur:not(.transparent, .fill) {
+    --navbar-background: var(--bew-elevated);
+    --navbar-foreground: var(--bew-text-1);
+  }
+
+  &.dark .custom-navbar:not(.transparent, .blur, .fill) {
+    --navbar-background: var(--bew-elevated-solid);
+    --navbar-foreground: var(--bew-text-1);
+  }
 }
