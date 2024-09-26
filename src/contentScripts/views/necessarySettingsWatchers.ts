@@ -67,6 +67,33 @@ export function setupNecessarySettingsWatchers() {
     { immediate: true },
   )
 
+  const removeTheIndentFromChinesePunctuationStyleEl = injectCSS(`
+    .video-info-container .special-text-indent[data-title^='《'],
+    .video-info-container .special-text-indent[data-title^='「'],
+    .video-info-container .special-text-indent[data-title^='『'], 
+    .video-info-container .special-text-indent[data-title^='【'],
+    p[title^='\\300c'],
+    p[title^='\\300e'],
+    p[title^='\\3010'],
+    h3[title^='\\300c'],
+    h3[title^='\\300e'],
+    h3[title^='\\3010'] {
+      text-indent: 0 !important;
+    }
+  `)
+  watch(
+    () => settings.value.removeTheIndentFromChinesePunctuation,
+    () => {
+      if (settings.value.removeTheIndentFromChinesePunctuation) {
+        document.documentElement.appendChild(removeTheIndentFromChinesePunctuationStyleEl)
+      }
+      else {
+        document.documentElement.removeChild(removeTheIndentFromChinesePunctuationStyleEl)
+      }
+    },
+    { immediate: true },
+  )
+
   watch(
     () => settings.value.disableFrostedGlass,
     () => {

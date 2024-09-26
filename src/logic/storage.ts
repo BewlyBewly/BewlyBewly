@@ -7,13 +7,14 @@ export const storageDemo = useStorageLocal('webext-demo', 'Storage Demo')
 export const accessKey = useStorageLocal('accessKey', '')
 
 export interface Settings {
-  language: string
-  customizeFont: boolean
-  fontFamily: string
   touchScreenOptimization: boolean
   enableGridLayoutSwitcher: boolean
   enableHorizontalScrolling: boolean
 
+  language: string
+  customizeFont: boolean
+  fontFamily: string
+  removeTheIndentFromChinesePunctuation: boolean
   disableFrostedGlass: boolean
   reduceFrostedGlassBlur: boolean
 
@@ -89,12 +90,14 @@ export interface Settings {
 }
 
 export const originalSettings: Settings = {
-  language: '',
-  customizeFont: false,
-  fontFamily: '',
   touchScreenOptimization: false,
   enableGridLayoutSwitcher: true,
   enableHorizontalScrolling: false,
+
+  language: '',
+  customizeFont: false,
+  fontFamily: '',
+  removeTheIndentFromChinesePunctuation: false,
 
   disableFrostedGlass: true,
   reduceFrostedGlassBlur: false,

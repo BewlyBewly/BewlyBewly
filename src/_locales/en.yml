@@ -113,6 +113,10 @@ settings:
   customize_font_desc: |-
     For users who favor the traditional style of Chinese characters, we recommend <a href="https://github.com/GuiWonder/Shanggu" target="_blank">Shanggu Fonts (尚古字體)</a> and <a href="https://github.com/ayaka14732/FanWunHak" target="_blank">Fan Wun Hak (繁媛黑體)</a>.
     These fonts also possess the capability to convert simplified Chinese into traditional characters.
+  remove_the_indent_from_chinese_punctuation: Remove the indent from Chinese punctuation
+  remove_the_indent_from_chinese_punctuation_desc: >
+    By default, Bilibili will specifically handle Chinese punctuation to achieve left alignment.
+    If you are using a custom font, it is recommended to remove the indent.
 
   video_card_link_opening_behavior: Video card and bangumi card link opening behavior
   video_card_link_opening_behavior_opt:
