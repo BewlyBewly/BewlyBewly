@@ -728,7 +728,6 @@ defineExpose({
                   </template>
                   <ALink
                     href="https://message.bilibili.com"
-                    :target="isHomePage() ? '_blank' : '_self'"
                     :title="$t('topbar.notifications')"
                   >
                     <div i-tabler:bell />
