@@ -101,7 +101,8 @@
     .subscribe-list li .subscribe-link,
     .i-live:hover .i-live-title,
     #page-article .row .breadcrumb .item.cur,
-    .bili-dyn-topic__card {
+    .bili-dyn-topic__card,
+    #page-collection-detail .paly-all-btn:hover .video-commonplayer_play {
       color: var(--bew-theme-color);
     }
 
@@ -165,7 +166,8 @@
     #page-setting #setting-new-tag:focus + #setting-new-tag-btn,
     .subscribe-list li .subscribe-link:after,
     #page-collection-detail .channel-add-video:hover,
-    #page-collection-detail .channel-add-video:hover .text {
+    #page-collection-detail .channel-add-video:hover .text,
+    #page-collection-detail .paly-all-btn:hover {
       border-color: var(--bew-theme-color);
     }
 
