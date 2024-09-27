@@ -198,6 +198,7 @@ export function setupNecessarySettingsWatchers() {
     (newVal) => {
       if (newVal)
         settings.value.useOriginalBilibiliTopBar = false
+      settings.value.useOriginalBilibiliTopBar = !settings.value.showTopBar
     },
     { immediate: true },
   )
@@ -208,6 +209,7 @@ export function setupNecessarySettingsWatchers() {
       if (newVal)
         settings.value.showTopBar = false
       document.documentElement.classList.toggle('remove-bili-top-bar', !settings.value.useOriginalBilibiliTopBar)
+      settings.value.showTopBar = !settings.value.useOriginalBilibiliTopBar
     },
     { immediate: true },
   )
