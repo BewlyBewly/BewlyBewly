@@ -101,7 +101,8 @@
     .subscribe-list li .subscribe-link,
     .i-live:hover .i-live-title,
     #page-article .row .breadcrumb .item.cur,
-    .bili-dyn-topic__card {
+    .bili-dyn-topic__card,
+    #page-collection-detail .paly-all-btn:hover .video-commonplayer_play {
       color: var(--bew-theme-color);
     }
 
@@ -163,7 +164,10 @@
     .comment-bilibili-con .btn .btn-cancel:hover,
     .comment-bilibili-con .btn .btn-submit,
     #page-setting #setting-new-tag:focus + #setting-new-tag-btn,
-    .subscribe-list li .subscribe-link:after {
+    .subscribe-list li .subscribe-link:after,
+    #page-collection-detail .channel-add-video:hover,
+    #page-collection-detail .channel-add-video:hover .text,
+    #page-collection-detail .paly-all-btn:hover {
       border-color: var(--bew-theme-color);
     }
 
@@ -212,7 +216,9 @@
     .comment-bilibili-con .btn .btn-submit,
     .bili-topic-new__default__create__icon:after,
     .bili-topic-new__default__create__icon:before,
-    .btn-subscribe:not(.btn-cancel) {
+    .btn-subscribe:not(.btn-cancel),
+    #page-collection-detail .channel-option .modify-channel,
+    #page-collection-detail .channel-option .modify-channel:hover {
       background-color: var(--bew-theme-color);
     }
 
@@ -587,7 +593,9 @@
     .section .count,
     .list-create .text,
     .btn-container .btn,
-    .user-info .info-content .info-tags .info-tag .tag-content {
+    .user-info .info-content .info-tags .info-tag .tag-content,
+    #page-collection-detail .channel-add-video .text,
+    #page-collection-detail .paly-all-btn {
       color: var(--bew-text-2);
     }
 
@@ -689,7 +697,8 @@
     }
 
     #page-setting #setting-new-tag-btn,
-    .bili-dyn-forward-publishing__editor {
+    .bili-dyn-forward-publishing__editor,
+    #page-collection-detail .channel-add-video {
       background: var(--bew-content-solid);
     }
 
