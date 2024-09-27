@@ -4,6 +4,8 @@ import { Icon } from '@iconify/vue'
 import { useDark } from '~/composables/useDark'
 import { settings } from '~/logic'
 
+import Dialog from '../Dialog.vue'
+import PageContent from '../PageContent.vue'
 import Tooltip from '../Tooltip.vue'
 import type { HoveringDockItem } from './types'
 
@@ -16,6 +18,7 @@ const hoveringDockItem = reactive<HoveringDockItem>({
   settings: false,
 })
 
+const showBewlyPageDialog = ref<boolean>(false)
 onMounted(() => {
   if (settings.value.autoHideSidebar)
     hideSidebar.value = true
@@ -57,6 +60,14 @@ function toggleHideSidebar(hide: boolean) {
       @mouseenter="toggleHideSidebar(false)"
       @mouseleave="toggleHideSidebar(true)"
     >
+      <Button
+        class="ctrl-btn"
+        style="backdrop-filter: var(--bew-filter-glass-1);"
+        center size="small" round
+        @click="showBewlyPageDialog = true"
+      >
+        <i i-mingcute:classify-2-line w-20px h-20px shrink-0 />
+      </Button>
       <Tooltip :content="isDark ? $t('dock.dark_mode') : $t('dock.light_mode')" placement="left">
         <Button
           class="ctrl-btn"
@@ -97,6 +108,16 @@ function toggleHideSidebar(hide: boolean) {
       </Tooltip>
     </div>
   </div>
+  <Dialog
+    v-if="showBewlyPageDialog"
+    title="fjkdsfjlsjdfls"
+    width="80%"
+    content-height="80dvh"
+    :show-footer="false"
+    @close="showBewlyPageDialog = false"
+  >
+    <PageContent within-dialog />
+  </Dialog>
 </template>
 
 <style lang="scss" scoped>
