@@ -428,14 +428,13 @@ defineExpose({
               <div
                 class="group"
                 flex="~ items-center justify-center" w="82px"
-                h="46px" m="l-4"
+                h="46px" m="l-4" shrink-0
                 rounded="$bew-radius-half"
                 bg="$bew-skeleton"
               >
                 <img
                   :src="`${moment.cover}@128w_72h_1c`"
-                  w="82px"
-                  h="46px"
+                  w="82px" h="46px"
                   rounded="$bew-radius-half"
                 >
                 <div
