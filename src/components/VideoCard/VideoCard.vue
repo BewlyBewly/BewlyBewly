@@ -243,13 +243,12 @@ function handleUndo() {
             transform="~ translate-z-0"
           >
             <!-- Video cover -->
-            <img
-              :src="`${removeHttpFromUrl(video.cover)}@672w_378h_1c`"
+            <Picture
+              :src="`${removeHttpFromUrl(video.cover)}@672w_378h_1c_!web-home-common-cover`"
               loading="lazy"
-              w="full" max-w-full align-middle aspect-video
-              bg="cover center"
+              w="full" max-w-full align-middle aspect-video object-cover
               rounded="$bew-radius"
-            >
+            />
 
             <div
               v-if="removed"
@@ -381,13 +380,14 @@ function handleUndo() {
                 position-relative
                 @click.stop=""
               >
-                <img
-                  rounded="1/2"
+
+                <Picture
                   :src="`${removeHttpFromUrl(video.authorFace)}@50w_50h_1c`"
-                  width="36"
-                  height="36"
                   loading="lazy"
-                >
+                  w="36px" h="36px"
+                  rounded="1/2"
+                />
+
                 <div
                   v-if="video.followed"
                   pos="absolute bottom--2px right--2px"
@@ -440,13 +440,12 @@ function handleUndo() {
                       object="center cover" bg="$bew-skeleton" cursor="pointer" relative
                       @click.stop=""
                     >
-                      <img
+                      <Picture
                         :src="`${removeHttpFromUrl(video.authorFace)}@50w_50h_1c`"
-                        width="30"
-                        height="30"
                         loading="lazy"
-                        object-cover rounded="1/2"
-                      >
+                        w="30px" h="30px"
+                        rounded="1/2"
+                      />
                       <div
                         v-if="video.followed"
                         pos="absolute bottom--2px right--2px"
