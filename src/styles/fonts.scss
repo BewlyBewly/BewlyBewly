@@ -29,31 +29,31 @@
 
 :lang(en) .bewly-wrapper,
 :lang(en).bewly-design,
-:lang(en).bewly-design * {
+:lang(en).bewly-design *:not(.bili-danmaku-x-dm) {
   font-family: var(--bew-font-family, var(--bew-fonts-english));
 }
 
 :lang(zh-CN) .bewly-wrapper,
 :lang(zh-CN).bewly-design,
-:lang(zh-CN).bewly-design * {
+:lang(zh-CN).bewly-design *:not(.bili-danmaku-x-dm) {
   font-family: var(--bew-font-family, var(--bew-fonts-mandarin-cn));
 }
 
 :lang(zh-TW) .bewly-wrapper,
 :lang(zh-TW).bewly-design,
-:lang(zh-TW).bewly-design * {
+:lang(zh-TW).bewly-design *:not(.bili-danmaku-x-dm) {
   font-family: var(--bew-font-family, var(--bew-fonts-mandarin-tw));
 }
 
 :lang(zh-HK) .bewly-wrapper,
 :lang(zh-HK).bewly-design,
-:lang(zh-HK).bewly-design * {
+:lang(zh-HK).bewly-design *:not(.bili-danmaku-x-dm) {
   font-family: var(--bew-font-family, var(--bew-fonts-cantonese));
 }
 
 // // 不知道爲何 firefox 用下面這一段樣式優先級別會高過的樣式，先註釋先了
 // .bewly-wrapper,
 // .bewly-design,
-// .bewly-design * {
+// .bewly-design *:not(.bili-danmaku-x-dm) {
 //   font-family: var(--bew-font-family, var(--bew-fonts-english));
 // }
