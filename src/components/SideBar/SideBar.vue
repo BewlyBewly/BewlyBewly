@@ -2,6 +2,7 @@
 import { Icon } from '@iconify/vue'
 
 import { useDark } from '~/composables/useDark'
+import { useDelayedHover } from '~/composables/useDelayedHover'
 import { settings } from '~/logic'
 
 import Tooltip from '../Tooltip.vue'
@@ -9,7 +10,21 @@ import type { HoveringDockItem } from './types'
 
 const emit = defineEmits(['settings-visibility-change'])
 const { isDark, toggleDark } = useDark()
+
 const hideSidebar = ref<boolean>(false)
+const sideBarContentHover = ref<boolean>(false)
+const sideBarContentRef = useDelayedHover({
+  enterDelay: 100,
+  leaveDelay: 600,
+  enter: () => {
+    sideBarContentHover.value = true
+    toggleHideSidebar(false)
+  },
+  leave: () => {
+    sideBarContentHover.value = false
+    toggleHideSidebar(true)
+  },
+})
 
 const hoveringDockItem = reactive<HoveringDockItem>({
   themeMode: false,
@@ -54,12 +69,14 @@ function toggleHideSidebar(hide: boolean) {
     />
 
     <div
+      ref="sideBarContentRef"
       class="sidebar-content"
+      :class="{
+        hover: sideBarContentHover,
+      }"
       flex="~ gap-2 col justify-center items-center"
       pointer-events-auto
       duration-300
-      @mouseenter="toggleHideSidebar(false)"
-      @mouseleave="toggleHideSidebar(true)"
     >
       <Tooltip :content="isDark ? $t('dock.dark_mode') : $t('dock.light_mode')" placement="left">
         <Button
@@ -148,7 +165,7 @@ function toggleHideSidebar(hide: boolean) {
   --uno: "translate-x-[calc(-50%-6px)] opacity-60";
 }
 
-.left-side:hover .sidebar-content {
+.left-side .sidebar-content.hover {
   --uno: "translate-x-0 opacity-100";
 }
 
@@ -160,7 +177,7 @@ function toggleHideSidebar(hide: boolean) {
   --uno: "translate-x-[calc(50%+6px)] opacity-60";
 }
 
-.right-side:hover .sidebar-content {
+.right-side .sidebar-content.hover {
   --uno: "translate-x-0 opacity-100";
 }
 
