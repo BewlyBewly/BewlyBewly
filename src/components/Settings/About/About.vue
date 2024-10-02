@@ -15,6 +15,8 @@ const dialogVisible = reactive({
   justWannaChangeTheJob: false,
 })
 
+const isDev = computed((): boolean => import.meta.env.DEV)
+
 onMounted(() => {
   checkGitHubRelease()
 })
@@ -106,6 +108,8 @@ async function checkGitHubRelease() {
         >
 
         <a
+          v-if="hasNewVersion"
+          href="https://github.com/hakadao/BewlyBewly/releases" target="_blank"
           v-if=" hasNewVersion"
           href="https://github.com/TC999/BewlyBewly-Beta/releases" target="_blank"
           pos="absolute bottom-0 right-0" transform="translate-x-50%" un-text="xs $bew-text-1" p="y-1 x-2" bg="$bew-fill-1"
@@ -114,10 +118,23 @@ async function checkGitHubRelease() {
           NEW
         </a>
       </div>
-      <section text-xl text-center>
-        <p>BewlyBewly-Beta</p>
+      <section text-xl text-center mt-2>
+        <p>
+          BewlyBewly-Beta
+          <span
+            v-if="isDev"
+            inline-block text="$bew-warning-color"
+          >
+            Dev
+          </span>
+        </p>
         <p text-center>
-          <a href="https://github.com/TC999/BewlyBewly-Beta/releases" target="_blank" un-text="sm color-$bew-text-2 hover:color-$bew-text-3">v{{ version }}</a>
+          <a
+            href="https://github.com/TC999/BewlyBewly-Beta/releases" target="_blank"
+            un-text="sm color-$bew-text-2 hover:color-$bew-text-3"
+          >
+            v{{ version }}
+          </a>
         </p>
       </section>
 

@@ -8,6 +8,7 @@ import './common/userCard.scss'
 import './common/videoPlayer.scss'
 import './common/loginDialog.scss'
 import './shadowDom/comments.scss'
+import './thirdParty.scss'
 
 import { isHomePage } from '~/utils/main'
 

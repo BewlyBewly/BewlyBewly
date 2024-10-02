@@ -154,6 +154,7 @@ function handleBackToTopOrRefresh() {
           v-if="!settings.disableLightDarkModeSwitcherOnDock"
           :content="isDark ? $t('dock.dark_mode') : $t('dock.light_mode')" :placement="tooltipPlacement"
           class="group"
+          pointer-events-none
         >
           <!-- moon -->
           <div
@@ -169,6 +170,7 @@ function handleBackToTopOrRefresh() {
           <button
             class="dock-item"
             bg="!dark-hover:$bew-bg" transform="!dark-hover:scale-100" shadow="!dark-hover:[inset_4px_-2px_8px_hsla(226deg,85%,77%,1)]"
+            pointer-events-auto
             @click="toggleDark"
             @mouseenter="hoveringDockItem.themeMode = true"
             @mouseleave="hoveringDockItem.themeMode = false"
