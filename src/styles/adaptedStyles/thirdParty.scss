@@ -1,0 +1,47 @@
+// #region Bilibili Evolved
+// Adapt the colors of the two Bilibili Evolved's buttons on the left side to BewlyBewly theme
+.bewly-design {
+  .be-settings > .sidebar > * {
+    background-color: var(--bew-elevated-solid) !important;
+    opacity: 0.4;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .be-settings > .sidebar > * .be-icon {
+    color: var(--bew-text-1) !important;
+    fill: var(--bew-text-1) !important;
+  }
+
+  &.dark {
+    // Bilibili Evolved's top bar
+    .custom-navbar.blur:not(.transparent, .fill) {
+      --navbar-background: var(--bew-elevated);
+      --navbar-foreground: var(--bew-text-1);
+    }
+
+    .custom-navbar:not(.transparent, .blur, .fill) {
+      --navbar-background: var(--bew-elevated-solid);
+      --navbar-foreground: var(--bew-text-1);
+    }
+
+    // 動態過濾
+    .feeds-filter {
+      background-color: var(--bew-content-solid);
+    }
+
+    // 評論區 -> 收起評論
+    .bb-comment .fold-comment,
+    .bili-comment-container .fold-comment {
+      background-color: var(--bew-content-solid);
+      color: var(--bew-text-2);
+
+      &:hover {
+        background-color: var(--bew-content-solid-hover);
+      }
+    }
+  }
+}
+// #endregion

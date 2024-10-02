@@ -170,31 +170,3 @@ img {
 .dark::view-transition-new(root) {
   z-index: 1;
 }
-
-// Adapt the colors of the two Bilibili Evolved's buttons on the left side to BewlyBewly theme
-.bewly-design {
-  .be-settings > .sidebar > * {
-    background-color: var(--bew-elevated-solid) !important;
-    opacity: 0.4;
-
-    &:hover {
-      opacity: 1;
-    }
-  }
-
-  .be-settings > .sidebar > * .be-icon {
-    color: var(--bew-text-1) !important;
-    fill: var(--bew-text-1) !important;
-  }
-
-  // Bilibili Evolved's top bar
-  &.dark .custom-navbar.blur:not(.transparent, .fill) {
-    --navbar-background: var(--bew-elevated);
-    --navbar-foreground: var(--bew-text-1);
-  }
-
-  &.dark .custom-navbar:not(.transparent, .blur, .fill) {
-    --navbar-background: var(--bew-elevated-solid);
-    --navbar-foreground: var(--bew-text-1);
-  }
-}
