@@ -34,6 +34,14 @@
     .note-setting-wrp {
       color: black;
     }
+
+    .ep-text-input label input,
+    .ep-text-area label textarea,
+    .bcc-select-input-inner,
+    .bcc-search-input {
+      color: var(--bew-text-auto); // 只能设为这个，其他都是黑色看不见
+      background: none; // 原版css样式没有这个属性，只能设为空
+    }
   }
   // #endregion
 }
