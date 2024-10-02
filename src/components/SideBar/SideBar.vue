@@ -16,9 +16,13 @@ const hoveringDockItem = reactive<HoveringDockItem>({
   settings: false,
 })
 
-onMounted(() => {
-  if (settings.value.autoHideSidebar)
+watch(() => settings.value.autoHideSidebar, (newValue) => {
+  if (newValue)
     hideSidebar.value = true
+  else
+    hideSidebar.value = false
+}, {
+  immediate: true,
 })
 
 function toggleHideSidebar(hide: boolean) {
@@ -36,8 +40,8 @@ function toggleHideSidebar(hide: boolean) {
       'right-side': settings.sidebarPosition === 'right',
       'hide': hideSidebar,
     }"
-    pos="fixed top-0" h-full flex items-center z-10
-    pointer-events-none
+    pos="fixed top-0" h-full flex items-center px-6px
+    z-10 pointer-events-none
   >
     <!-- Edge Div -->
     <div
@@ -113,14 +117,19 @@ function toggleHideSidebar(hide: boolean) {
   svg {
     --uno: "w-20px h-20px shrink-0";
   }
+
+  &::after {
+    // safety area
+    --uno: "content-empty absolute w-[calc(100%+12px)] h-[calc(100%+12px)] left--6px right--6px z--1";
+  }
 }
 
 .left-side {
-  --uno: "left-6px";
+  --uno: "left-0";
 }
 
 .right-side {
-  --uno: "right-6px";
+  --uno: "right-0";
 }
 
 .sidebar-edge {
@@ -135,8 +144,24 @@ function toggleHideSidebar(hide: boolean) {
   }
 }
 
+.left-side .sidebar-content {
+  --uno: "translate-x-[calc(-50%-6px)] opacity-60";
+}
+
+.left-side:hover .sidebar-content {
+  --uno: "translate-x-0 opacity-100";
+}
+
 .hide.left-side .sidebar-content {
   --uno: "translate-x--100% opacity-0 pointer-events-none";
+}
+
+.right-side .sidebar-content {
+  --uno: "translate-x-[calc(50%+6px)] opacity-60";
+}
+
+.right-side:hover .sidebar-content {
+  --uno: "translate-x-0 opacity-100";
 }
 
 .hide.right-side .sidebar-content {
