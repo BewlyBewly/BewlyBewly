@@ -79,6 +79,18 @@ async function setupStyles() {
     document.documentElement.classList.add('videoPage')
   }
 
+  // cheese video page 课堂影片播放页面
+  else if (/^https?:\/\/(?:www\.)?bilibili\.com\/cheese\/play\/.*$/.test(currentUrl)) {
+    await import('./pages/cheeseVideoPage.scss')
+    document.documentElement.classList.add('cheeseVideoPage')
+  }
+
+  // cheese mine page 课堂个人页面
+  else if (/^https?:\/\/(?:www\.)?bilibili\.com\/cheese\/mine\/.*$/.test(currentUrl)) {
+    await import('./pages/cheeseminePage.scss')
+    document.documentElement.classList.add('cheeseminePage')
+  }
+
   else if (
     // anime playback & movie page 番剧播放页与电影播放页
     /https?:\/\/(?:www\.)?bilibili\.com\/bangumi\/play\/.*/.test(currentUrl)
@@ -134,9 +146,21 @@ async function setupStyles() {
   }
 
   // login page 登入頁
-  else if (/^https?:\/\/passport\.bilibili\.com\/login.*$/.test(currentUrl)) {
+  else if (/^https?:\/\/passport\.bilibili\.com\/.*$/.test(currentUrl)) {
     await import('./pages/loginPage.scss')
     document.documentElement.classList.add('loginPage')
+  }
+
+  // blackboard page 社区页面
+  else if (/^https?:\/\/(?:www\.)?bilibili\.com\/blackboard.*$/.test(currentUrl)) {
+    await import('./pages/blackboardPage.scss')
+    document.documentElement.classList.add('blackboardPage')
+  }
+
+  // cheese page 课堂页面
+  else if (/^https?:\/\/(?:www\.)?bilibili\.com\/cheese.*$/.test(currentUrl)) {
+    await import('./pages/cheesePage.scss')
+    document.documentElement.classList.add('cheesePage')
   }
 }
 

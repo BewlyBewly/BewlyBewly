@@ -3,6 +3,9 @@
   // Increase the priority of the style inside by writing a non-existent selector in `:not()`
   :not(foobar) {
     // do nothing..
+    .international-footer {
+      display: none;
+    }
   }
   // #endregion
 
@@ -41,6 +44,7 @@
 
     .official-title,
     .title-module,
+
     .professional-wrapper .title,
     .condition-txt,
     .el-form-item__label,
@@ -78,6 +82,7 @@
     .el-textarea__inner:not(:focus) {
       border-color: var(--bew-border-color);
     }
+
   }
   // #endregion
 }
