@@ -166,18 +166,22 @@ export function setupNecessarySettingsWatchers() {
       const bewlyEl: HTMLElement | null = document.querySelector('#bewly')
       const bewlyShadow: ShadowRoot | null = bewlyEl?.shadowRoot || null
 
+      document.querySelectorAll('[data-bewly-customizeCSS]').forEach((el) => {
+        el.remove()
+      })
+
+      bewlyShadow?.querySelectorAll('[data-bewly-customizeCSS]').forEach((el) => {
+        el.remove()
+      })
+
       if (settings.value.customizeCSS) {
         styleEL = injectCSS(settings.value.customizeCSSContent)
+        styleEL.setAttribute('data-bewly-customizeCSS', '')
 
-        if (bewlyShadow)
+        if (bewlyShadow) {
           bewlyStyleEL = injectCSS(settings.value.customizeCSSContent, bewlyShadow)
-      }
-      else {
-        if (styleEL)
-          document.documentElement.removeChild(styleEL)
-
-        if (bewlyShadow && bewlyStyleEL)
-          bewlyShadow.removeChild(bewlyStyleEL)
+          bewlyStyleEL.setAttribute('data-bewly-customizeCSS', '')
+        }
       }
     },
     { immediate: true },

@@ -2,6 +2,7 @@
 import { Icon } from '@iconify/vue'
 
 import { useDark } from '~/composables/useDark'
+import { useDelayedHover } from '~/composables/useDelayedHover'
 import { settings } from '~/logic'
 
 import Tooltip from '../Tooltip.vue'
@@ -9,16 +10,34 @@ import type { HoveringDockItem } from './types'
 
 const emit = defineEmits(['settings-visibility-change'])
 const { isDark, toggleDark } = useDark()
+
 const hideSidebar = ref<boolean>(false)
+const sideBarContentHover = ref<boolean>(false)
+const sideBarContentRef = useDelayedHover({
+  enterDelay: 100,
+  leaveDelay: 600,
+  enter: () => {
+    sideBarContentHover.value = true
+    toggleHideSidebar(false)
+  },
+  leave: () => {
+    sideBarContentHover.value = false
+    toggleHideSidebar(true)
+  },
+})
 
 const hoveringDockItem = reactive<HoveringDockItem>({
   themeMode: false,
   settings: false,
 })
 
-onMounted(() => {
-  if (settings.value.autoHideSidebar)
+watch(() => settings.value.autoHideSidebar, (newValue) => {
+  if (newValue)
     hideSidebar.value = true
+  else
+    hideSidebar.value = false
+}, {
+  immediate: true,
 })
 
 function toggleHideSidebar(hide: boolean) {
@@ -36,8 +55,8 @@ function toggleHideSidebar(hide: boolean) {
       'right-side': settings.sidebarPosition === 'right',
       'hide': hideSidebar,
     }"
-    pos="fixed top-0" h-full flex items-center z-10
-    pointer-events-none
+    pos="fixed top-0" h-full flex items-center px-6px
+    z-10 pointer-events-none
   >
     <!-- Edge Div -->
     <div
@@ -50,12 +69,14 @@ function toggleHideSidebar(hide: boolean) {
     />
 
     <div
+      ref="sideBarContentRef"
       class="sidebar-content"
+      :class="{
+        hover: sideBarContentHover,
+      }"
       flex="~ gap-2 col justify-center items-center"
       pointer-events-auto
       duration-300
-      @mouseenter="toggleHideSidebar(false)"
-      @mouseleave="toggleHideSidebar(true)"
     >
       <Tooltip :content="isDark ? $t('dock.dark_mode') : $t('dock.light_mode')" placement="left">
         <Button
@@ -113,14 +134,19 @@ function toggleHideSidebar(hide: boolean) {
   svg {
     --uno: "w-20px h-20px shrink-0";
   }
+
+  &::after {
+    // safety area
+    --uno: "content-empty absolute w-[calc(100%+12px)] h-[calc(100%+12px)] left--6px right--6px z--1";
+  }
 }
 
 .left-side {
-  --uno: "left-6px";
+  --uno: "left-0";
 }
 
 .right-side {
-  --uno: "right-6px";
+  --uno: "right-0";
 }
 
 .sidebar-edge {
@@ -135,8 +161,24 @@ function toggleHideSidebar(hide: boolean) {
   }
 }
 
+.left-side .sidebar-content {
+  --uno: "translate-x-[calc(-50%-6px)] opacity-60";
+}
+
+.left-side .sidebar-content.hover {
+  --uno: "translate-x-0 opacity-100";
+}
+
 .hide.left-side .sidebar-content {
   --uno: "translate-x--100% opacity-0 pointer-events-none";
+}
+
+.right-side .sidebar-content {
+  --uno: "translate-x-[calc(50%+6px)] opacity-60";
+}
+
+.right-side .sidebar-content.hover {
+  --uno: "translate-x-0 opacity-100";
 }
 
 .hide.right-side .sidebar-content {

@@ -1,6 +1,5 @@
-// #region Bilibili Evolved
-// Adapt the colors of the two Bilibili Evolved's buttons on the left side to BewlyBewly theme
 .bewly-design {
+  // Adapt the colors of the two Bilibili Evolved's buttons on the left side to BewlyBewly theme
   .be-settings > .sidebar > * {
     background-color: var(--bew-elevated-solid) !important;
     opacity: 0.4;
@@ -44,4 +43,3 @@
     }
   }
 }
-// #endregion

@@ -26,7 +26,9 @@
     micro-app[name="video-up"] .cover-editor-panel-image,
     micro-app[name="video-up"] .cover-upload-mask-btn,
     micro-app[name="video-up"] .color-picker-color .list,
-    micro-app[name="video-up"] .tool-bar-text .btn-color {
+    micro-app[name="video-up"] .tool-bar-text .btn-color,
+    // Bilibili sidebar
+    .be-settings > .sidebar {
       filter: var(--bew-filter-force-dark);
     }
 
@@ -37,36 +39,13 @@
     }
 
     .setting-card-switch,
-    .note-setting-wrp {
+    .note-setting-wrp,
+    .bcc-select-input-inner {
       color: black;
     }
 
-    .ep-text-input label input,
-    .ep-text-area label textarea,
-    .bcc-select-input-inner,
     .bcc-search-input {
-      color: var(--bew-text-auto); // 只能设为这个，其他都是黑色看不见
-      background: none; // 原版css样式没有这个属性，只能设为空
-
-    .b-read-editor {
-      background-color: var(--bew-bg);
-    }
-
-    .bpx-player-video-wrap .bpx-player-seamless-replacement {
-      bottom: 0;
-      left: 0;
-      position: absolute;
-      right: 0;
-      top: 0;
-    }
-    .bpx-player-video-wrap .bpx-player-seamless-replacement,
-    .bpx-player-video-wrap bwp-video,
-    .bpx-player-video-wrap video {
-      content-visibility: visible;
-      display: block;
-      height: 100%;
-      margin: auto;
-      width: 100%;
+      background-color: unset;
     }
   }
   // #endregion
