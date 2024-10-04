@@ -83,7 +83,7 @@ function onMouseEnter() {
         transition="all duration-300"
       />
     </div>
-    <Transition>
+    <Transition name="dropdown">
       <div
         v-if="showOptions"
         style="backdrop-filter: var(--bew-filter-glass-1)"
@@ -111,13 +111,4 @@ function onMouseEnter() {
 </template>
 
 <style lang="scss" scoped>
-.v-enter-active,
-.v-leave-active {
-  --uno: "transition-all duration-340 transform-gpu";
-}
-
-.v-enter-from,
-.v-leave-to {
-  --uno: "opacity-0 transform-gpu scale-95 -translate-y-4 filter blur-sm";
-}
 </style>
