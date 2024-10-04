@@ -2,7 +2,7 @@
 defineProps<{
   src: string
   loading: 'lazy' | 'eager'
-  alt: string
+  alt?: string
 }>()
 </script>
 
@@ -13,6 +13,7 @@ defineProps<{
     <img
       :src="src"
       :loading="loading"
+      :alt="alt"
       block w-full h-full object="[inherit]" aspect-inherit
       rounded-inherit
     >
