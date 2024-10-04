@@ -34,6 +34,7 @@ const genres = computed(() => [
   { name: t('topbar.logo_dropdown.vtubers'), icon: '#channel-vtuber', href: 'https://www.bilibili.com/v/virtual' },
   { name: t('topbar.logo_dropdown.charitable_events'), icon: '#channel-love', href: 'https://love.bilibili.com' },
   { name: t('topbar.logo_dropdown.moocs'), icon: '#channel-gongkaike', href: 'https://www.bilibili.com/mooc' },
+  { name: t('topbar.logo_dropdown.weekly'), icon: '#channel-weekly', href: 'https://www.bilibili.com/v/popular/weekly/' },
 ])
 
 const otherLinks = computed(() => [
