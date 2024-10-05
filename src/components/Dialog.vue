@@ -84,8 +84,11 @@ function handleClose() {
 
 function handleConfirm() {
   emit('confirm')
-  if (!props.loading)
-    handleClose()
+  if (!props.loading) {
+    nextTick(() => {
+      handleClose()
+    })
+  }
 }
 </script>
 
