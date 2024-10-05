@@ -1,29 +1,38 @@
 <script lang="ts" setup>
 import { Icon } from '@iconify/vue'
+import type { CSSProperties } from 'vue'
+import { useToast } from 'vue-toastification'
 
 import Button from '~/components/Button.vue'
 import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
-import { settings } from '~/logic'
+import { accessKey, settings } from '~/logic'
+import type { ThreePointV2 } from '~/models/video/appForYou'
 import type { VideoPreviewResult } from '~/models/video/videoPreview'
+import { getTvSign, TVAppKey } from '~/utils/authProvider'
 import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils/dataFormatter'
 import { getCSRF, removeHttpFromUrl } from '~/utils/main'
 
 import Tooltip from '../Tooltip.vue'
+import VideoCardContextMenu from './VideoCardContextMenu/VideoCardContextMenu.vue'
 import VideoCardSkeleton from './VideoCardSkeleton.vue'
+
+const props = withDefaults(defineProps<Props>(), {
+  showWatcherLater: true,
+})
 
 interface Props {
   skeleton?: boolean
   video?: Video
+  /** 是否爲app端推介，用於調用不同取消不感興趣方法 */
+  isApp?: boolean
   showWatcherLater?: boolean
   horizontal?: boolean
   showPreview?: boolean
   moreBtn?: boolean
-  moreBtnActive?: boolean
-  removed?: boolean
 }
 
-interface Video {
+export interface Video {
   id: number
   duration?: number
   durationStr?: string
@@ -43,6 +52,7 @@ interface Video {
   capsuleText?: string
   bvid?: string
   aid?: number
+  goto?: string
   /** After set the `url`, clicking the video will navigate to this url. It won't be affected by aid, bvid or epid */
   url?: string
   /** If you want to show preview video, you should set the cid value */
@@ -52,20 +62,22 @@ interface Video {
   tag?: string
   rank?: number
   type?: 'horizontal' | 'vertical' | 'bangumi'
+  threePointV2: ThreePointV2[]
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  showWatcherLater: true,
-})
-
-const emit = defineEmits<{
-  (e: 'moreClick', event: MouseEvent): MouseEvent
-  (e: 'undo'): void
-  (e: 'tellUsWhy'): void
-}>()
-
+const toast = useToast()
+const { mainAppRef } = useBewlyApp()
 const api = useApiClient()
 const { openIframeDrawer } = useBewlyApp()
+const showVideoOptions = ref<boolean>(false)
+const videoOptionsFloatingStyles = ref<CSSProperties>({})
+// Whether the user has marked it as disliked
+const removed = ref<boolean>(false)
+
+const moreBtnRef = ref<HTMLDivElement | null>(null)
+const contextMenuRef = ref<HTMLDivElement | null>(null)
+
+const selectedDislikeOpt = ref<{ dislikeReasonId: number }>()
 
 function getCurrentVideoUrl(video: Video) {
   const baseUrl = `https://www.bilibili.com/video/${video.bvid ?? `av${video.aid}`}`
@@ -74,7 +86,7 @@ function getCurrentVideoUrl(video: Video) {
 }
 
 const videoUrl = computed(() => {
-  if (props.removed || !props.video)
+  if (removed.value || !props.video)
     return undefined
 
   if (props.video.url)
@@ -197,11 +209,50 @@ function handleClick(event: MouseEvent) {
 }
 
 function handleMoreBtnClick(event: MouseEvent) {
-  emit('moreClick', event)
+  videoOptionsFloatingStyles.value = {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    transform: `translate(${event.x}px, ${event.y}px)`,
+  }
+  showVideoOptions.value = true
 }
 
 function handleUndo() {
-  emit('undo')
+  if (props.isApp) {
+    const params = {
+      access_key: accessKey.value,
+      goto: props.video?.goto,
+      id: props.video?.id,
+      // https://github.com/magicdawn/bilibili-app-recommend/blob/cb51f75f415f48235ce048537f2013122c16b56b/src/components/VideoCard/card.service.ts#L115
+      idx: Number((Date.now() / 1000).toFixed(0)),
+      reason_id: selectedDislikeOpt.value?.dislikeReasonId, // 1 means dislike, e.g. {"id": 1, "name": "不感兴趣","toast": "将减少相似内容推荐"}
+      build: 74800100,
+      device: 'pad',
+      mobi_app: 'iphone',
+      appkey: TVAppKey.appkey,
+    }
+
+    api.video.undoDislikeVideo({
+      ...params,
+      sign: getTvSign(params),
+    }).then((res) => {
+      if (res.code === 0) {
+        removed.value = false
+      }
+      else {
+        toast.error(res.message)
+      }
+    })
+  }
+  else {
+    removed.value = false
+  }
+}
+
+function handleRemoved(selectedOpt: { dislikeReasonId: number }) {
+  selectedDislikeOpt.value = selectedOpt
+  removed.value = true
 }
 </script>
 
@@ -415,8 +466,9 @@ function handleUndo() {
 
                 <div
                   v-if="moreBtn"
+                  ref="moreBtnRef"
                   class="opacity-0 group-hover/desc:opacity-100"
-                  :class="{ 'more-active': moreBtnActive }"
+                  :class="{ 'more-active': showVideoOptions }"
                   shrink-0 w-30px h-30px m="t--3px r--8px" translate-x--8px
                   grid place-items-center cursor-pointer rounded="50%" duration-300
                   @click.stop.prevent="handleMoreBtnClick"
@@ -522,6 +574,20 @@ function handleUndo() {
       :horizontal="horizontal"
       important-mb-0
     />
+
+    <!-- context menu -->
+    <Teleport
+      v-if="showVideoOptions && video"
+      :to="mainAppRef"
+    >
+      <VideoCardContextMenu
+        ref="contextMenuRef"
+        :video="video"
+        :context-menu-styles="videoOptionsFloatingStyles"
+        @close="showVideoOptions = false"
+        @removed="handleRemoved"
+      />
+    </Teleport>
   </div>
 </template>
 
