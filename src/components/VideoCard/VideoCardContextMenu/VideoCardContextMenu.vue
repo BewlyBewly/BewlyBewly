@@ -69,7 +69,7 @@ function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
           style="backdrop-filter: var(--bew-filter-glass-1);"
           :style="contextMenuStyles"
           p-2 bg="$bew-elevated" rounded="$bew-radius"
-          w-150px m="t-4 l-[calc(-150px+1rem)]"
+          min-w-150px m="t-4 l-[calc(-150px+1rem)]"
           shadow="$bew-shadow-1" z-10
         >
           <ul flex="~ col gap-1">
@@ -77,9 +77,10 @@ function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
               <template v-for="option in video.threePointV2" :key="option.type">
                 <li
                   v-if="option.type !== ThreePointV2Type.WatchLater && option.type !== ThreePointV2Type.Feedback"
-                  bg="hover:$bew-fill-2" p="x-4 y-2" rounded="$bew-radius-half" cursor-pointer
+                  class="context-menu-item"
                   @click="handleAppMoreCommand(option.type)"
                 >
+                  <i class="item-icon" i-solar:confounded-circle-bold-duotone />
                   <span v-if="option.type === ThreePointV2Type.Dislike">{{ $t('home.not_interested') }}</span>
                   <span v-else>{{ option.title }}</span>
                 </li>
@@ -88,9 +89,10 @@ function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
             <template v-else>
               <li
                 v-for="option in videoOptions" :key="option.id"
-                bg="hover:$bew-fill-2" p="x-4 y-2" rounded="$bew-radius-half" cursor-pointer
+                class="context-menu-item"
                 @click="handleMoreCommand(option.id)"
               >
+                <i class="item-icon" i-solar:confounded-circle-bold-duotone />
                 {{ option.name }}
               </li>
             </template>
@@ -114,3 +116,14 @@ function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
     />
   </div>
 </template>
+
+<style lang="scss" scoped>
+.context-menu-item {
+  --uno: "hover:bg-$bew-fill-2 px-4 py-2 rounded-$bew-radius-half cursor-pointer";
+  --uno: "flex items-center";
+}
+
+.item-icon {
+  --uno: "mr-2 inline-block";
+}
+</style>
