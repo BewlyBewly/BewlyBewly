@@ -25,8 +25,12 @@ async function openPipWindow() {
   // https://developer.chrome.com/docs/web-platform/document-picture-in-picture
   if ('documentPictureInPicture' in window) {
     // The Document Picture-in-Picture API is supported.
+    const width = window.innerWidth * 0.8
+    const height = window.innerHeight * 0.8
     pipWindowEl.value = await (window as any).documentPictureInPicture.requestWindow({
       disallowReturnToOpener: true,
+      width,
+      height,
     })
     pipWindowEl.value.document.body.style.padding = '0'
     pipWindowEl.value.document.body.style.margin = '0'
