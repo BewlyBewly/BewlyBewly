@@ -66,9 +66,8 @@ export interface Video {
 }
 
 const toast = useToast()
-const { mainAppRef } = useBewlyApp()
+const { mainAppRef, openIframeDrawer } = useBewlyApp()
 const api = useApiClient()
-const { openIframeDrawer } = useBewlyApp()
 const showVideoOptions = ref<boolean>(false)
 const videoOptionsFloatingStyles = ref<CSSProperties>({})
 // Whether the user has marked it as disliked
@@ -250,7 +249,7 @@ function handleUndo() {
   }
 }
 
-function handleRemoved(selectedOpt: { dislikeReasonId: number }) {
+function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
   selectedDislikeOpt.value = selectedOpt
   removed.value = true
 }
@@ -582,7 +581,11 @@ function handleRemoved(selectedOpt: { dislikeReasonId: number }) {
     >
       <VideoCardContextMenu
         ref="contextMenuRef"
-        :video="video"
+        :video="{
+          ...video,
+          url: videoUrl,
+          authorUrl: authorJumpUrl,
+        }"
         :context-menu-styles="videoOptionsFloatingStyles"
         @close="showVideoOptions = false"
         @removed="handleRemoved"
