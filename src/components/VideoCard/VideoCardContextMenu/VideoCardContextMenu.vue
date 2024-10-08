@@ -16,6 +16,7 @@ const props = defineProps<{
 const emit = defineEmits<{
   (event: 'removed', selectedOpt?: { dislikeReasonId: number }): void
   (event: 'close'): void
+  (event: 'reopen'): void
 }>()
 
 const videoOptions = reactive<{ id: number, name: string }[]>([
@@ -30,6 +31,8 @@ const { openIframeDrawer } = useBewlyApp()
 
 enum VideoOption {
   OpenInNewTab,
+  OpenInCurrentTab,
+  // OpenInBackground,
   OpenInNewWindow,
   OpenInDrawer,
   ViewTheOriginalCover,
@@ -39,6 +42,8 @@ const commonOptions = computed((): { command: VideoOption, name: string, icon: s
   return [
     [
       { command: VideoOption.OpenInNewTab, name: 'Open in new tab', icon: 'i-solar:square-top-down-bold-duotone' },
+      { command: VideoOption.OpenInCurrentTab, name: 'Open in current tab', icon: 'i-solar:square-top-down-bold-duotone' },
+      // { command: VideoOption.OpenInBackground, name: 'Open in background', icon: 'i-solar:square-top-down-bold-duotone' },
       { command: VideoOption.OpenInNewWindow, name: 'Open in new window', icon: 'i-solar:maximize-square-3-bold-duotone' },
       { command: VideoOption.OpenInDrawer, name: 'Open in drawer', icon: 'i-solar:archive-up-minimlistic-bold-duotone' },
     ],
@@ -73,6 +78,15 @@ function handleCommonCommand(command: VideoOption) {
       window.open(props.video.url, '_blank')
       handleClose()
       break
+    case VideoOption.OpenInCurrentTab:
+      window.open(props.video.url, '_self')
+      handleClose()
+      break
+    // case VideoOption.OpenInBackground:
+    //   // Open tab in background
+    //   window.open(props.video.url, '_blank', 'background')
+    //   handleClose()
+    //   break
     case VideoOption.OpenInNewWindow:
       showPipWindow.value = true
       break
@@ -99,6 +113,13 @@ function handleClose() {
   emit('close')
 }
 
+function handleReopen() {
+  // showContextMenu.value = false
+  // showPipWindow.value = false
+  // console.log('reopen')
+  // emit('reopen')
+}
+
 function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
   emit('removed', selectedOpt)
   handleClose()
@@ -107,64 +128,64 @@ function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
 
 <template>
   <div>
-    <Transition name="fade">
-      <!-- more popup -->
-      <div v-if="showContextMenu">
-        <div
-          style="backdrop-filter: var(--bew-filter-glass-1);"
-          :style="contextMenuStyles"
-          p-2 bg="$bew-elevated" rounded="$bew-radius"
-          min-w-150px m="t-4 l-[calc(-150px+1rem)]"
-          shadow="$bew-shadow-1" z-10
-        >
-          <ul flex="~ col gap-1">
-            <template v-if="settings.recommendationMode === 'app'">
-              <template v-for="option in video.threePointV2" :key="option.type">
-                <li
-                  v-if="option.type !== ThreePointV2Type.WatchLater && option.type !== ThreePointV2Type.Feedback"
-                  class="context-menu-item"
-                  @click="handleAppMoreCommand(option.type)"
-                >
-                  <i class="item-icon" i-solar:confounded-circle-bold-duotone />
-                  <span v-if="option.type === ThreePointV2Type.Dislike">{{ $t('home.not_interested') }}</span>
-                  <span v-else>{{ option.title }}</span>
-                </li>
-              </template>
-            </template>
-            <template v-else>
+    <!-- more popup -->
+    <div v-if="showContextMenu">
+      <div
+        style="backdrop-filter: var(--bew-filter-glass-1); box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-1);"
+        :style="contextMenuStyles"
+        p-2 bg="$bew-elevated" rounded="$bew-radius"
+        min-w-150px m="t-4 l-[calc(-150px+1rem)]"
+        border="1 $bew-border-color"
+        z-10
+      >
+        <ul flex="~ col gap-1">
+          <template v-if="settings.recommendationMode === 'app'">
+            <template v-for="option in video.threePointV2" :key="option.type">
               <li
-                v-for="option in videoOptions" :key="option.id"
+                v-if="option.type !== ThreePointV2Type.WatchLater && option.type !== ThreePointV2Type.Feedback"
                 class="context-menu-item"
-                @click="handleMoreCommand(option.id)"
+                @click="handleAppMoreCommand(option.type)"
               >
                 <i class="item-icon" i-solar:confounded-circle-bold-duotone />
-                {{ option.name }}
+                <span v-if="option.type === ThreePointV2Type.Dislike">{{ $t('home.not_interested') }}</span>
+                <span v-else>{{ option.title }}</span>
               </li>
             </template>
+          </template>
+          <template v-else>
+            <li
+              v-for="option in videoOptions" :key="option.id"
+              class="context-menu-item"
+              @click="handleMoreCommand(option.id)"
+            >
+              <i class="item-icon" i-solar:confounded-circle-bold-duotone />
+              {{ option.name }}
+            </li>
+          </template>
 
-            <template v-for="(optionGroup, index) in commonOptions" :key="index">
-              <div class="divider" />
+          <template v-for="(optionGroup, index) in commonOptions" :key="index">
+            <div class="divider" />
 
-              <li
-                v-for="option in optionGroup"
-                :key="option.command"
-                class="context-menu-item"
-                @click="handleCommonCommand(option.command)"
-              >
-                <i class="item-icon" :class="option.icon" />
-                {{ option.name }}
-              </li>
-            </template>
-          </ul>
-        </div>
+            <li
+              v-for="option in optionGroup"
+              :key="option.command"
+              class="context-menu-item"
+              @click="handleCommonCommand(option.command)"
+            >
+              <i class="item-icon" :class="option.icon" />
+              {{ option.name }}
+            </li>
+          </template>
+        </ul>
       </div>
-    </Transition>
+    </div>
 
     <!-- mask -->
     <div
       v-if="showContextMenu"
       pos="fixed top-0 left-0" w-full h-full
       @click="handleClose"
+      @click.right.prevent.stop="handleReopen"
     />
 
     <DislikeDialog

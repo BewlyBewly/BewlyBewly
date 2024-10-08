@@ -208,6 +208,7 @@ function handleClick(event: MouseEvent) {
 }
 
 function handleMoreBtnClick(event: MouseEvent) {
+  showVideoOptions.value = false
   videoOptionsFloatingStyles.value = {
     position: 'absolute',
     top: 0,
@@ -282,6 +283,7 @@ function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
           @mouseenter="handleMouseEnter"
           @mouseleave="handelMouseLeave"
           @click="handleClick"
+          @click.right.prevent="handleMoreBtnClick"
         >
           <!-- Cover -->
           <div
@@ -588,6 +590,7 @@ function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
         }"
         :context-menu-styles="videoOptionsFloatingStyles"
         @close="showVideoOptions = false"
+        @reopen="handleMoreBtnClick"
         @removed="handleRemoved"
       />
     </Teleport>
