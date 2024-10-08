@@ -118,6 +118,7 @@ function handleReopen() {
   // showPipWindow.value = false
   // console.log('reopen')
   // emit('reopen')
+  handleClose()
 }
 
 function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
