@@ -591,9 +591,9 @@ function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
         }"
         :context-menu-styles="videoOptionsFloatingStyles"
         @close="showVideoOptions = false"
-        @reopen="handleMoreBtnClick"
         @removed="handleRemoved"
       />
+      <!-- @reopen="handleMoreBtnClick" -->
     </Teleport>
   </div>
 </template>
