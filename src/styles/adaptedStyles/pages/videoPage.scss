@@ -362,12 +362,14 @@
       border-color: var(--bew-border-color);
     }
 
+    // 标题下方警告
     .video-argue .video-argue-inner.strong {
-      background-color: #2e1617; // 标题下方警告背景色，为安卓客户端屏幕取色结果
+      background-color: #2e1617; // 安卓客户端屏幕取色结果
     }
 
+    // 稿件举报窗
     .app .navbar {
-      background-color: var(--bew-bg) !important; // 稿件举报窗
+      background-color: var(--bew-bg) !important;
     }
   }
   //  #endregion
