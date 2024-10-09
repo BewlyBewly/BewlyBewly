@@ -99,6 +99,10 @@
       background-color: var(--bew-theme-color-10);
     }
 
+    .video-argue .video-argue-inner.strong {
+      background-color: var(--bew-error-color-10);
+    }
+
     .video-sections-v1 .video-sections-head_first-line .first-line-left .first-line-title:hover,
     .note-detail .note-operation .tab-action-item.is-active .tab-icon {
       color: var(--bew-theme-color);
@@ -141,6 +145,10 @@
     .note-pc .note-container .note-header .note-operation.detail,
     .note-up .up-desc-container .desc-top .attention-btn-container:hover {
       color: white;
+    }
+
+    .video-argue .video-argue-inner.strong {
+      color: var(--bew-error-color);
     }
 
     .coin-operated-m-exp .mc-box:hover,
@@ -307,6 +315,10 @@
       background-color: var(--bew-elevated-solid);
     }
 
+    .app .navbar {
+      background-color: var(--bew-bg) !important; // 稿件举报窗
+    }
+
     .resizable-component .editor-innter {
       background-color: unset;
     }
@@ -360,14 +372,6 @@
     .note-list .note-card-container .note-card:hover,
     .note-detail .note-operation .sanlian-box {
       border-color: var(--bew-border-color);
-    }
-
-    .video-argue .video-argue-inner.strong {
-      background-color: #2e1617; // 标题下方警告背景色，为安卓客户端屏幕取色结果
-    }
-
-    .app .navbar {
-      background-color: var(--bew-bg) !important; // 稿件举报窗
     }
   }
   //  #endregion
