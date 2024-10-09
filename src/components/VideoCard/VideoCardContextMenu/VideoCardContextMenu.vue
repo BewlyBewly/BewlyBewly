@@ -40,17 +40,17 @@ enum VideoOption {
 
 const commonOptions = computed((): { command: VideoOption, name: string, icon: string, color?: string }[][] => {
   return [
-    [
-      { command: VideoOption.OpenInNewTab, name: 'Open in new tab', icon: 'i-solar:square-top-down-bold-duotone' },
-      { command: VideoOption.OpenInCurrentTab, name: 'Open in current tab', icon: 'i-solar:square-top-down-bold-duotone' },
-      // { command: VideoOption.OpenInBackground, name: 'Open in background', icon: 'i-solar:square-top-down-bold-duotone' },
-      { command: VideoOption.OpenInNewWindow, name: 'Open in new window', icon: 'i-solar:maximize-square-3-bold-duotone' },
-      { command: VideoOption.OpenInDrawer, name: 'Open in drawer', icon: 'i-solar:archive-up-minimlistic-bold-duotone' },
-    ],
+    // [
+    //   { command: VideoOption.OpenInNewTab, name: 'Open in new tab', icon: 'i-solar:square-top-down-bold-duotone' },
+    //   { command: VideoOption.OpenInCurrentTab, name: 'Open in current tab', icon: 'i-solar:square-top-down-bold-duotone' },
+    //   // { command: VideoOption.OpenInBackground, name: 'Open in background', icon: 'i-solar:square-top-down-bold-duotone' },
+    //   { command: VideoOption.OpenInNewWindow, name: 'Open in new window', icon: 'i-solar:maximize-square-3-bold-duotone' },
+    //   { command: VideoOption.OpenInDrawer, name: 'Open in drawer', icon: 'i-solar:archive-up-minimlistic-bold-duotone' },
+    // ],
 
-    [
-      { command: VideoOption.ViewTheOriginalCover, name: 'View the original cover', icon: 'i-solar:gallery-minimalistic-bold-duotone' },
-    ],
+    // [
+    //   { command: VideoOption.ViewTheOriginalCover, name: 'View the original cover', icon: 'i-solar:gallery-minimalistic-bold-duotone' },
+    // ],
   ]
 })
 
@@ -164,7 +164,7 @@ function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
             </li>
           </template>
 
-          <template v-for="(optionGroup, index) in commonOptions" :key="index">
+          <template v-for="(optionGroup, _index) in commonOptions" :key="_index">
             <div class="divider" />
 
             <li
