@@ -131,7 +131,8 @@ function openIframeDrawer(url: string) {
  * Checks if the current viewport has a scrollbar.
  * @returns {boolean} Returns true if the viewport has a scrollbar, false otherwise.
  */
-function haveScrollbar() {
+async function haveScrollbar() {
+  await nextTick()
   const osInstance = scrollbarRef.value?.osInstance()
   const { viewport } = osInstance.elements()
   const { scrollHeight } = viewport // get scroll offset
