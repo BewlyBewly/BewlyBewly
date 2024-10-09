@@ -231,7 +231,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
     </div>
 
     <IframeDrawer
-      v-if="settings.videoCardLinkOpenMode === 'drawer' && showIframeDrawer"
+      v-if="showIframeDrawer"
       :url="iframeDrawerUrl"
       @close="showIframeDrawer = false"
     />
