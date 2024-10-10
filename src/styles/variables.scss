@@ -9,7 +9,7 @@
 
   --bew-top-bar-height: 68px;
 
-  // #region Filters 过滤器
+  // #region Filters 磨砂玻璃、发光样式
   // Use this in all components (except dialogs) if you want to add a frosted glass effect
   // 如果您想添加磨砂玻璃效果，请在所有组件（对话框除外）中使用此功能
   --bew-filter-glass-1: blur(20px) saturate(180%);
@@ -54,7 +54,6 @@
   // 将其用于具有磨砂玻璃效果的对话框
   --bew-shadow-edge-glow-2: inset 1px 1px 1px -0.5px rgba(255, 255, 255, 0.2),
     inset -1px -1px 1px -0.5px rgba(255, 255, 255, 0.12), inset 0 0 8px rgba(255, 255, 255, 0.42);
-
   // #endregion
 
   // #region Theme Color & Status Colors 主题色 & 状态色
