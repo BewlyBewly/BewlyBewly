@@ -10,7 +10,7 @@ export interface BewlyAppProvider {
   handleReachBottom: Ref<(() => void) | undefined>
   handlePageRefresh: Ref<(() => void) | undefined>
   handleBackToTop: (targetScrollTop?: number) => void
-  haveScrollbar: () => boolean
+  haveScrollbar: () => Promise<boolean>
   openIframeDrawer: (url: string) => void
 }
 
