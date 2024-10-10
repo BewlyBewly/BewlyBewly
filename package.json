@@ -2,7 +2,7 @@
   "name": "bewly-bewly",
   "displayName": "BewlyBewly-Beta",
   "type": "module",
-  "version": "0.31.54",
+  "version": "0.31.61",
   "private": true,
   "packageManager": "pnpm@9.5.0",
   "description": "只需对您的 Bilibili 主页进行一些小更改即可。",
