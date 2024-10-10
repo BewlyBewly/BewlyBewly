@@ -315,12 +315,20 @@
       background-color: var(--bew-elevated-solid);
     }
 
+    .ai-summary-tips-panel .tips-panel {
+      background-color: var(--bew-bg);
+    }
+
     .app .navbar {
       background-color: var(--bew-bg) !important; // 稿件举报窗
     }
 
     .resizable-component .editor-innter {
       background-color: unset;
+    }
+
+    .ai-summary-popup-body-outline .section:hover {
+      background-color: #83839124;
     }
 
     .note-pc .note-container .note-header *,
@@ -333,7 +341,8 @@
     .video-owner-state .video-owner-state-item,
     .ql-editor .ql-color-\#000000,
     .ql-editor,
-    .up-detail .up-detail-top .up-name {
+    .up-detail .up-detail-top .up-name,
+    .ai-summary-tips-panel .tips-panel-title {
       color: var(--bew-text-1);
     }
 
