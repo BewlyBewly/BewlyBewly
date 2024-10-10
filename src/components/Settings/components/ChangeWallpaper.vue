@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import Input from '~/components/Input.vue'
-import Radio from '~/components/Radio.vue'
-import Slider from '~/components/Slider.vue'
-import Tooltip from '~/components/Tooltip.vue'
 import { WALLPAPERS } from '~/constants/imgs'
 import { settings } from '~/logic'
 import { compressAndResizeImage } from '~/utils/main'
@@ -126,115 +122,120 @@ function handleRemoveCustomWallpaper() {
         </div>
       </SettingsItem>
 
-      <SettingsItem v-if="isBuildInWallpaper" :title="$t('settings.choose_ur_wallpaper')" next-line>
-        <div grid="~ xl:cols-5 lg:cols-4 cols-3 gap-4">
-          <picture
-            aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
-            un-border="4 transparent" cursor-pointer
-            grid place-items-center
-            :class="{ 'selected-wallpaper': isGlobal ? settings.wallpaper === '' : settings.searchPageWallpaper === '' }"
-            @click="changeWallpaper('')"
-          >
-            <div i-tabler:photo-off text="3xl $bew-text-3" />
-          </picture>
-
-          <!-- Upload wallpaper input -->
-          <input
-            ref="uploadWallpaperRef" type="file" accept="image/*" hidden
-            @change="handleUploadWallpaper"
-          >
-
-          <Tooltip placement="top" :content="settings.locallyUploadedWallpaper?.name || ''" aspect-video>
-            <picture
-              class="group"
-              :class="{ 'selected-wallpaper': isGlobal
-                ? settings.wallpaper === settings.locallyUploadedWallpaper?.url
-                : settings.searchPageWallpaper === settings.locallyUploadedWallpaper?.url }"
-              aspect-video bg="$bew-theme-color-20" rounded="$bew-radius" overflow-hidden
-              un-border="4 transparent" w-full
-              flex="~ items-center justify-center"
-              @click="changeWallpaper(settings.locallyUploadedWallpaper?.url || '')"
-            >
-              <div
-                v-if="settings.locallyUploadedWallpaper"
-                class="opacity-0 group-hover:opacity-100" duration-300
-                pos="absolute top-4px right-4px" z-1 text="14px" flex="~ gap-1"
-              >
-                <button
-                  style="backdrop-filter: var(--bew-filter-glass-1);"
-                  bg="$bew-content" rounded-full w-28px h-28px
-                  grid place-items-center
-                  @click="handleUploadWallpaper"
-                >
-                  <i i-mingcute:edit-2-line />
-                </button>
-                <button
-                  style="backdrop-filter: var(--bew-filter-glass-1);"
-                  bg="$bew-content" rounded-full w-28px h-28px
-                  grid place-items-center
-                  @click="handleRemoveCustomWallpaper"
-                >
-                  <i i-mingcute:delete-2-line />
-                </button>
-              </div>
-              <div
-                v-if="!settings.locallyUploadedWallpaper"
-                absolute w-full h-full grid place-items-center
-                @click="handleUploadWallpaper"
-              >
-                <div
-                  i-tabler:photo-up
-                  text="3xl $bew-theme-color"
-                />
-              </div>
-              <img
-                v-else
-                :src="settings.locallyUploadedWallpaper.thumbnail || settings.locallyUploadedWallpaper.url"
-                :alt="settings.locallyUploadedWallpaper.name"
-                w-full h-full object-cover
-              >
-            </picture>
-          </Tooltip>
-
-          <Tooltip v-for="item in WALLPAPERS" :key="item.url" placement="top" :content="item.name" aspect-video>
+      <SettingsItem v-if="isBuildInWallpaper" :title="$t('settings.choose_ur_wallpaper')">
+        <template #bottom>
+          <div grid="~ xl:cols-5 lg:cols-4 cols-3 gap-4">
             <picture
               aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
-              un-border="4 transparent" w-full
-              :class="{ 'selected-wallpaper': isGlobal ? settings.wallpaper === item.url : settings.searchPageWallpaper === item.url }"
-              @click="changeWallpaper(item.url)"
+              un-border="4 transparent" cursor-pointer
+              grid place-items-center
+              :class="{ 'selected-wallpaper': isGlobal ? settings.wallpaper === '' : settings.searchPageWallpaper === '' }"
+              @click="changeWallpaper('')"
+            >
+              <div i-tabler:photo-off text="3xl $bew-text-3" />
+            </picture>
+
+            <Tooltip v-for="item in WALLPAPERS" :key="item.url" placement="top" :content="item.name" aspect-video>
+              <picture
+                aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
+                un-border="4 transparent" w-full
+                :class="{ 'selected-wallpaper': isGlobal ? settings.wallpaper === item.url : settings.searchPageWallpaper === item.url }"
+                @click="changeWallpaper(item.url)"
+              >
+                <img
+                  :src="item.thumbnail || item.url"
+                  :alt="item.name"
+                  w-full h-full object-cover
+                  class="img-no-error"
+                >
+              </picture>
+            </Tooltip>
+
+            <Tooltip placement="top" :content="settings.locallyUploadedWallpaper?.name || ''" aspect-video>
+              <!-- Upload wallpaper input -->
+              <input
+                ref="uploadWallpaperRef" type="file" accept="image/*"
+                hidden
+                @change="handleUploadWallpaper"
+              >
+
+              <picture
+                class="group"
+                :class="{ 'selected-wallpaper': isGlobal
+                  ? settings.wallpaper === settings.locallyUploadedWallpaper?.url
+                  : settings.searchPageWallpaper === settings.locallyUploadedWallpaper?.url }"
+                aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
+                un-border="4 transparent" w-full
+                flex="~ items-center justify-center"
+                @click="changeWallpaper(settings.locallyUploadedWallpaper?.url || '')"
+              >
+                <div
+                  v-if="settings.locallyUploadedWallpaper"
+                  class="opacity-0 group-hover:opacity-100" duration-300
+                  pos="absolute top-4px right-4px" z-1 text="14px" flex="~ gap-1"
+                >
+                  <button
+                    style="backdrop-filter: var(--bew-filter-glass-1);"
+                    bg="$bew-content" rounded-full w-28px h-28px
+                    grid place-items-center
+                    @click="handleUploadWallpaper"
+                  >
+                    <i i-mingcute:edit-2-line />
+                  </button>
+                  <button
+                    style="backdrop-filter: var(--bew-filter-glass-1);"
+                    bg="$bew-content" rounded-full w-28px h-28px
+                    grid place-items-center
+                    @click="handleRemoveCustomWallpaper"
+                  >
+                    <i i-mingcute:delete-2-line />
+                  </button>
+                </div>
+                <div
+                  v-if="!settings.locallyUploadedWallpaper"
+                  absolute w-full h-full grid place-items-center
+                  @click="handleUploadWallpaper"
+                >
+                  <div
+                    i-tabler:photo-up
+                    text="3xl $bew-text-3"
+                  />
+                </div>
+                <img
+                  v-else
+                  :src="settings.locallyUploadedWallpaper.thumbnail || settings.locallyUploadedWallpaper.url"
+                  :alt="settings.locallyUploadedWallpaper.name"
+                  w-full h-full object-cover
+                >
+              </picture>
+            </Tooltip>
+          </div>
+        </template>
+      </SettingsItem>
+      <SettingsItem v-else :title="$t('settings.image_url')">
+        <template #bottom>
+          <div flex items-center gap-4>
+            <picture
+              aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
+              un-border="4 transparent" cursor-pointer shrink-0
+              w="xl:1/5 lg:1/4 md:1/3"
             >
               <img
-                :src="item.thumbnail || item.url"
-                :alt="item.name"
+                v-if="isGlobal ? settings.wallpaper : settings.searchPageWallpaper"
+                :src="isGlobal ? settings.wallpaper : settings.searchPageWallpaper" alt="" loading="lazy"
                 w-full h-full object-cover
-                class="img-no-error"
+                onerror="this.style.display='none'; this.onerror=null;"
               >
             </picture>
-          </Tooltip>
-        </div>
-      </SettingsItem>
-      <SettingsItem v-else :title="$t('settings.image_url')" next-line>
-        <div flex items-center gap-4>
-          <picture
-            aspect-video bg="$bew-fill-1" rounded="$bew-radius" overflow-hidden
-            un-border="4 transparent" cursor-pointer shrink-0
-            w="xl:1/5 lg:1/4 md:1/3"
-          >
-            <img
-              v-if="isGlobal ? settings.wallpaper : settings.searchPageWallpaper"
-              :src="isGlobal ? settings.wallpaper : settings.searchPageWallpaper" alt="" loading="lazy"
-              w-full h-full object-cover
-              onerror="this.style.display='none'; this.onerror=null;"
-            >
-          </picture>
-          <div>
-            <Input v-if="isGlobal" v-model="settings.wallpaper" w-full />
-            <Input v-else v-model="settings.searchPageWallpaper" w-full />
-            <p color="sm $bew-text-3" mt-2>
-              {{ $t('settings.image_url_hint') }}
-            </p>
+            <div>
+              <Input v-if="isGlobal" v-model="settings.wallpaper" w-full />
+              <Input v-else v-model="settings.searchPageWallpaper" w-full />
+              <p color="sm $bew-text-3" mt-2>
+                {{ $t('settings.image_url_hint') }}
+              </p>
+            </div>
           </div>
-        </div>
+        </template>
       </SettingsItem>
 
       <SettingsItem :title="$t('settings.enable_wallpaper_masking')">

@@ -84,8 +84,11 @@ function handleClose() {
 
 function handleConfirm() {
   emit('confirm')
-  if (!props.loading)
-    handleClose()
+  if (!props.loading) {
+    nextTick(() => {
+      handleClose()
+    })
+  }
 }
 </script>
 
@@ -114,7 +117,7 @@ function handleConfirm() {
             backgroundColor: frostedGlass ? 'var(--bew-elevated)' : 'var(--bew-elevated-solid)',
           }"
           pos="absolute top-1/2 left-1/2" rounded="$bew-radius" border="1 $bew-border-color"
-          transform="translate--1/2" z-2 overflow="x-hidden y-overlay"
+          transform="translate--1/2" z-2
           antialiased
         >
           <!-- loading masking -->
@@ -132,7 +135,7 @@ function handleConfirm() {
             style="
               text-shadow: 0 0 15px var(--bew-elevated-solid), 0 0 20px var(--bew-elevated-solid)
             "
-            pos="sticky top-0 left-0" w-full h-70px px-8 flex
+            pos="sticky top-0 left-0" w-full h-70px px-12 flex
             items-center justify-between
             rounded="t-$bew-radius" z-1
           >
@@ -170,8 +173,12 @@ function handleConfirm() {
           </header>
 
           <main
-            :style="{ height: dialogContentHeight, maxHeight: dialogContentMaxHeight }"
-            p="x-8 y-2" relative overflow-scroll
+            :style="{
+              height: dialogContentHeight,
+              maxHeight: dialogContentMaxHeight,
+              paddingBottom: !showFooter ? '2rem' : '0.5rem',
+            }"
+            p="x-12 y-2" relative overflow="x-hidden y-overlay"
           >
             <!-- <div h-80px mt--8 /> -->
             <slot />
@@ -179,11 +186,11 @@ function handleConfirm() {
           <footer
             v-if="showFooter"
             :style="{ justifyContent: centerFooter || center ? 'center' : 'flex-end' }"
-            flex="~ gap-2" p="x-8 t-2 b-6"
+            flex="~ gap-2" p="x-12 t-2 b-6"
           >
             <Button type="tertiary" @click="handleClose">
               <div>
-                {{ $t('common.cancel') }}
+                {{ $t('common.operation.cancel') }}
                 <span
                   v-show="showShortcut"
                   text="xs $bew-text-2 lh-0" p="x-1" rounded-4px bg="$bew-fill-1"
@@ -196,7 +203,7 @@ function handleConfirm() {
             </Button>
             <Button type="primary" @click="handleConfirm">
               <div>
-                {{ $t('common.confirm') }}
+                {{ $t('common.operation.confirm') }}
                 <span
                   v-show="showShortcut"
                   text="xs $bew-text-2 lh-0" p="x-1" rounded-4px bg="$bew-fill-1"

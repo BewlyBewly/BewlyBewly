@@ -1,3 +1,1 @@
-<!-- 這裏沒有要求一定要用英文寫 pr 或英文寫註釋, 只要要求會看就可以了, 哪怕用翻譯來看也好 -->
-<!-- 裏面的英文註釋沒有必要一定要翻譯成中文之後再提交份 pr (這樣真的沒有任何意義), 英文應該是開發者一定要有所瞭解而不是可有可無的技能, 甚至英文好對人的長遠發展也有幫助 -->
-[CONTRIBUTING](/docs/CONTRIBUTING.md)
+<!-- see: https://github.com/BewlyBewly/BewlyBewly/blob/main/docs/CONTRIBUTING.md -->

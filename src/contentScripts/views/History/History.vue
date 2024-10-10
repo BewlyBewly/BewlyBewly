@@ -2,11 +2,9 @@
 import { useDateFormat } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 
-import Button from '~/components/Button.vue'
-import Empty from '~/components/Empty.vue'
-import Progress from '~/components/Progress.vue'
 import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
+import { settings } from '~/logic'
 import type { HistoryResult, List as HistoryItem } from '~/models/history/history'
 import { Business } from '~/models/history/history'
 import type { HistorySearchResult, List as HistorySearchItem } from '~/models/video/historySearch'
@@ -15,6 +13,8 @@ import { getCSRF, removeHttpFromUrl } from '~/utils/main'
 
 const { t } = useI18n()
 const api = useApiClient()
+const { openIframeDrawer } = useBewlyApp()
+
 const isLoading = ref<boolean>()
 const noMoreContent = ref<boolean>(false)
 const historyList = reactive<Array<HistoryItem>>([])
@@ -238,12 +238,15 @@ function jumpToLoginPage() {
       <TransitionGroup name="list">
         <a
           v-for="(historyItem, index) in historyList"
-          :key="historyItem.kid" :href="getHistoryUrl(historyItem)"
+          :key="historyItem.kid"
+          :href="settings.videoCardLinkOpenMode === 'drawer' ? undefined : getHistoryUrl(historyItem)"
           target="_blank"
+          rel="noopener noreferrer"
           block
           class="group"
           flex
           cursor-pointer
+          @click="settings.videoCardLinkOpenMode === 'drawer' && openIframeDrawer(getHistoryUrl(historyItem))"
         >
           <!-- time slot -->
           <div

@@ -15,8 +15,13 @@ defineProps<{
   activatedPage: AppPage
 }>()
 
-const emit = defineEmits(['changePage', 'settingsVisibilityChange', 'refresh', 'backToTop'])
-
+// const emit = defineEmits(['changePage', 'settingsVisibilityChange', 'refresh', 'backToTop'])
+const emit = defineEmits<{
+  (e: 'changePage', page: AppPage): void
+  (e: 'settingsVisibilityChange'): void
+  (e: 'refresh'): void
+  (e: 'backToTop'): void
+}>()
 const mainStore = useMainStore()
 const { isDark, toggleDark } = useDark()
 const { reachTop } = useBewlyApp()
@@ -73,7 +78,7 @@ onMounted(() => {
   currentDockItems.value = computeDockItem()
 })
 
-function toggleDockHide(hide: boolean) {
+function toggleHideDock(hide: boolean) {
   if (settings.value.autoHideDock)
     hideDock.value = hide
   else
@@ -99,39 +104,9 @@ function handleBackToTopOrRefresh() {
       v-if="settings.autoHideDock && hideDock"
       class="dock-edge"
       :class="`dock-edge-${settings.dockPosition}`"
-      @mouseenter="toggleDockHide(false)"
-      @mouseleave="toggleDockHide(true)"
+      @mouseenter="toggleHideDock(false)"
+      @mouseleave="toggleHideDock(true)"
     />
-
-    <template v-if="settings.dockPosition === 'bottom' && !reachTop ">
-      <div pointer-events-none>
-        <div
-          v-if="!hideDock"
-          style="
-                mask-image: linear-gradient(to top,  black 20%, transparent);
-              "
-          :style="{ backdropFilter: settings.disableFrostedGlass ? 'none' : 'blur(4px)' }"
-          pos="absolute bottom-0 left-0" w-full h-80px
-          pointer-events-none transform-gpu
-        />
-
-        <Transition name="fade">
-          <div
-            v-if="!hideDock"
-            pos="absolute bottom-0 left-0" w-full h-80px
-            pointer-events-none opacity-80
-            :style="{
-              background: `linear-gradient(to top, ${(
-                settings.wallpaper
-                || settings.useSearchPageModeOnHomePage
-                && settings.searchPageWallpaper
-                && settings.individuallySetSearchPageWallpaper)
-                ? 'rgba(0,0,0,.6)' : 'var(--bew-homepage-bg)'}, transparent)`,
-            }"
-          />
-        </Transition>
-      </div>
-    </template>
 
     <!-- Dock Content -->
     <div
@@ -142,8 +117,8 @@ function handleBackToTopOrRefresh() {
         bottom: settings.dockPosition === 'bottom',
         hide: hideDock,
       }"
-      @mouseenter="toggleDockHide(false)"
-      @mouseleave="toggleDockHide(true)"
+      @mouseenter="toggleHideDock(false)"
+      @mouseleave="toggleHideDock(true)"
     >
       <div
         class="dock-content-inner"
@@ -179,6 +154,7 @@ function handleBackToTopOrRefresh() {
           v-if="!settings.disableLightDarkModeSwitcherOnDock"
           :content="isDark ? $t('dock.dark_mode') : $t('dock.light_mode')" :placement="tooltipPlacement"
           class="group"
+          pointer-events-none
         >
           <!-- moon -->
           <div
@@ -193,7 +169,8 @@ function handleBackToTopOrRefresh() {
 
           <button
             class="dock-item"
-            bg="!dark-hover:$bew-bg" transform="!dark-hover:scale-100" shadow="!dark-hover:[inset_0_0_8px_hsla(226deg,85%,77%,1)]"
+            bg="!dark-hover:$bew-bg" transform="!dark-hover:scale-100" shadow="!dark-hover:[inset_4px_-2px_8px_hsla(226deg,85%,77%,1)]"
+            pointer-events-auto
             @click="toggleDark"
             @mouseenter="hoveringDockItem.themeMode = true"
             @mouseleave="hoveringDockItem.themeMode = false"
@@ -303,11 +280,11 @@ function handleBackToTopOrRefresh() {
   }
 
   .divider {
-    --uno: "my-1 mx-3 h-4px bg-$bew-fill-1 rounded-4";
+    --uno: "my-1 mx-3 h-3px bg-$bew-border-color rounded-4";
   }
 
   &.bottom .divider {
-    --uno: "w-4px h-auto my-3 mx-1";
+    --uno: "w-3px h-auto my-3 mx-1";
   }
 
   .dock-content-inner {

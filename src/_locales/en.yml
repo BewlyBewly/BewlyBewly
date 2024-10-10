@@ -19,19 +19,46 @@ common:
   login: Login
   save_to_watch_later: Save to Watch later
   added: Added
-  performance_impact_warn: This feature may cause performance *DECREASE*
-  enable: Enable
-  disable: Disable
-  refresh: Refresh
-  reset: Reset
+  performance_impact_warn: This feature may cause performance *DECREASE*!
   no_more_content: No more content now, owari da
-  confirm: Confirm
-  cancel: Cancel
+
+  operation:
+    add: Add
+    edit: Edit
+    delete: Delete
+    confirm: Confirm
+    cancel: Cancel
+    enable: Enable
+    disable: Disable
+    refresh: Refresh
+    reset: Reset
+    import: Import
+    export: Export
+
+  table:
+    index: Index
+    title: Title
+    name: Name
+    remark: Remark
+    operations: Operations
+
+  position:
+    left: Left
+    right: Right
+    top: Top
+    bottom: Bottom
+
+iframe_drawer:
+  open_in_new_tab: Open in new tab
+  close: Close
+  press_esc_again_to_close: Press Esc again to close
+
 settings:
   title: Settings
 
   # Settings menu
   menu_general: General
+  menu_desktop_and_dock: Desktop & Dock
   menu_appearance: Appearance
   menu_search_page: Search Page
   menu_home: Home
@@ -40,10 +67,14 @@ settings:
 
   # Settings group
   group_common: Common
+  group_languages_and_fonts: Languages & Fonts
+  group_link_opening_behavior: Link Opening Behavior
   group_video_card: Video Card
   group_performance: Frosted Glass & Performance
   group_topbar: Top Bar
   group_dock: Dock
+  group_sidebar: Sidebar
+  group_sidebar_desc: Located on the right or left side of pages other than the homepage, typically includes a light/dark mode toggle button and settings button.
   group_color: Color
   group_wallpaper: Wallpaper
   group_logo: LOGO
@@ -62,41 +93,64 @@ settings:
     open_settings: Open Settings...
 
   # General
+  touch_screen_optimization: Touch screen optimization
+  touch_screen_optimization_desc: >
+    After this setting is turned on, like the top bar, you must click on items to view more information instead of hovering over them. (This feature is not supported by the old top bar.)
+  chk_box:
+    show: Show
+    hidden: Hidden
+  enable_grid_layout_switcher: Enable grid layout switcher
+  enable_horizontal_scrolling: Enable horizontal scrolling
+  enable_horizontal_scrolling_desc: After enabling, mouse scrolling will directly scroll the horizontal scroll list.
+
   select_language: Language
   select_language_opt:
     english: English
     mandarin_cn: Mandarin - Simplified Chinese
     mandarin_tw: Mandarin - Traditional Chinese
     jyut: Cantonese
-  chk_box:
-    show: Show
-    hidden: Hidden
-  enable_grid_layout_switcher: Enable grid layout switcher
-  enable_horizontal_scrolling: Enable horizontal scrolling
-  enable_horizontal_scrolling_desc: After enabling, mouse scrolling will directly scroll the horizontal scroll list
-  enable_video_preview: Enable video preview feature
+  customize_font: Customize font
+  customize_font_desc: |-
+    For users who favor the traditional style of Chinese characters, we recommend <a href="https://github.com/GuiWonder/Shanggu" target="_blank">Shanggu Fonts (尚古字體)</a> and <a href="https://github.com/ayaka14732/FanWunHak" target="_blank">Fan Wun Hak (繁媛黑體)</a>.
+    These fonts also possess the capability to convert simplified Chinese into traditional characters.
+  remove_the_indent_from_chinese_punctuation: Remove the indent from Chinese punctuation
+  remove_the_indent_from_chinese_punctuation_desc: >
+    By default, Bilibili will specifically handle Chinese punctuation to achieve left alignment.
+    If you are using a custom font, it is recommended to remove the indent.
+
+  video_card_link_opening_behavior: Video card and bangumi card link opening behavior
+  video_card_link_opening_behavior_opt:
+    drawer: Open in drawer
+    new_tab: New tab
+  enable_video_preview: Enable video preview feature (if possible)
   enable_video_ctrl_bar_on_video_card: Display the video control bar on the video card
   hover_video_card_delayed: Delayed video preview on hover over the video card
   block_ads: Block ads
   disable_frosted_glass: Disable frosted glass effect
   reduce_frosted_glass_blur: Reduce the intensity of the frosted glass blur
-  auto_hide_topbar: Automatically hide the top bar
-  topbar_icon_badges: Icon badges
-  topbar_icon_badges_opt:
+
+  # Desktop & Dock
+  use_old_top_bar: Use the old top bar
+  top_bar_link_opening_behavior: Top bar link opening behavior
+  top_bar_link_opening_behavior_opt:
+    current_tab: Current tab
+    current_tab_if_not_homepage: Current tab if not the homepage, otherwise new tab
+    new_tab: New tab
+  auto_hide_top_bar: Automatically hide the top bar
+  top_bar_icon_badges: Icon badges
+  top_bar_icon_badges_opt:
     number: Number
     dot: Dot
     none: Do not show
   dock_position: Dock position
-  dock_position_desc: Position on screen
-  dock_position_opt:
-    left: Left
-    right: Right
-    bottom: Bottom
+  dock_position_desc: Position on screen.
   auto_hide_dock: Automatically hide the dock
   dock_content_adjustment: Dock content adjustment
-  dock_content_adjustment_desc: The page of the first activated dock item will be the startup page
+  dock_content_adjustment_desc: The page of the first activated dock item will be the startup page.
   disable_light_dark_mode_switcher: Disable light/dark mode switcher
   move_back_to_top_and_refresh_to_dock: Move the back-to-top and refresh buttons to the dock
+  sidebar_position: Sidebar position
+  auto_hide_sidebar: Automatically hide the sidebar
 
   # Appearance
   theme: Theme
@@ -105,6 +159,7 @@ settings:
     dark: Dark
     auto: Auto
   theme_color: Theme color
+  gradient_theme_color_background: Use a gradient theme color as the background in dark mode
   wallpaper_mode: Wallpaper mode
   wallpaper_mode_desc: 'By URL: Choose an image from the Internet and use its URL to set it as the wallpaper.'
   wallpaper_mode_opt:
@@ -118,6 +173,10 @@ settings:
   enable_wallpaper_masking: Enable wallpaper masking
   wallpaper_mask_opacity: Wallpaper masking opacity
   wallpaper_blur_intensity: Wallpaper blur intensity
+  customize_css: Customize CSS
+  customize_css_desc: |-
+    If you are unfamiliar with CSS, please DO NOT modify CSS. Doing so may cause unexpected display issues.
+    If you encounter any problems after modifying CSS, please reinstall BewlyBewly.
 
   # Search page
   logo_color: Logo color
@@ -141,30 +200,57 @@ settings:
     The access key is valid for about one month. After that, remember to re-authorize the BewlyBewly to use the access key.
   authorize_app_more_info_access_key: More information about the access key
   scan_qrcode_desc: Use the Bilibili mobile app to scan this QR code in order to authorize the access key.
+
+  disable_filters_for_followed_users: Disable filters for followed users
+  disable_filters_for_followed_users_desc: >
+    If you enable this option, all filters you set will be disabled for the users you follow.
+  filter_out_vertical_videos: Filter out vertical videos (only works on the app recommendation mode)
   filter_by_view_count: Filter by view count
+  filter_by_view_count_desc: Filtered out videos with less than the view count you set.
   filter_by_view_count_unit: views
   filter_by_duration: Filter by duration
+  filter_by_duration_desc: Filtered out videos with less than the duration you set.
   filter_by_duration_unit: sec
+  filter_item_already_exist: This filter item already exists!
+  filter_by_title: Filter by title
+  filter_by_title_desc: |-
+    Filtered out the videos that contain the titles you set (case-insensitive).
+    Alternatively, use regex, such as <code>/abc&#124;\d+/</code>, wrapped in <code>/</code>.
+    <br/>
+    In the table below, you can press the <kbd>Enter</kbd> key to add a new filter or confirm a modification.
+    Press the <kbd>Esc</kbd> key to cancel the modification.
+    Double-click the column to edit the current column.
+  filter_by_user: Filter by user
+  filter_by_user_desc: |-
+    Filtered out the videos that are uploaded by the username (full name, case-insensitive) or MID you set.
+    Alternatively, use regex, such as <code>/abc&#124;\d+/</code>, wrapped in <code>/</code>.
+    <br/>
+    In the table below, you can press the <kbd>Enter</kbd> key to add a new filter or confirm a modification.
+    Press the <kbd>Esc</kbd> key to cancel the modification.
+    Double-click the column to edit the current column.
+  filter_by_user_table:
+    username_or_mid: Username / MID
+
   use_search_page_mode: Use search page mode on homepage
   settings_shared_with_the_search_page: Settings shared with the search page
-  settings_shared_with_the_search_page_desc: Those settings are used in common with the search page
+  settings_shared_with_the_search_page_desc: Those settings are used in common with the search page.
   search_page_mode_wallpaper_fixed: Make the wallpaper of the search page mode fixed
   home_tabs_adjustment: Tabs adjustment
-  home_tabs_adjustment_desc: The first activated tab is the default page
+  home_tabs_adjustment_desc: The first activated tab is the default page.
   always_show_tabs_on_home_page: Always show tabs on the home page
-  always_show_the_top_bar_logo: Always show the top bar logo
 
   # Compatibility
   # Common
+  topbar_visibility: BewlyBewly's top bar visibility
+  topbar_visibility_desc: If you are using Bilibili Evolved's top bar, you can turn BewlyBewly's top bar off here.
   use_original_bilibili_homepage: Use the original Bilibili homepage
   use_original_bilibili_homepage_desc: After you change it, the page will automatically refresh if you are on the homepage!
+  use_original_bilibili_topbar: Use the original Bilibili top bar
   adapt_to_other_page_styles: Adapt to other page styles
-  adapt_to_other_page_styles_desc: Adapt to some common pages to match with the BewlyBewly theme
+  adapt_to_other_page_styles_desc: Adapt to some common pages to match with the BewlyBewly theme.
   # Bilibili Evolved
   follow_bilibili_evolved_color: Follow the Bilibili Evolved theme color
   follow_bilibili_evolved_color_desc: After changing the theme color in Bilibili Evolved, you will need to re-select this option in order to update the theme color.
-  topbar_visibility: Top bar visibility
-  topbar_visibility_desc: Compatible with Bilibili Evolved customize top bar
 
   # About
   links: Links
@@ -174,29 +260,11 @@ settings:
   import_settings: Import Settings
   export_settings: Export Settings
   export_settings_desc: Some sensitive content, such as access key, will not be exported and may need to be reacquired again.
+  reset_settings: Reset Settings
+  reset_settings_confirm: |-
+    Reset settings?
+    This operation cannot be reversed. Are you sure you want to reset your settings?
   contributors: Contributors
-
-  just_wanna_change_the_job: i just wanna switch to a better job...
-  just_wanna_change_the_job_desc: |-
-    首先十分抱歉在这里打扰您，我是一名前端开发者，坐标广州，我想换一份好一点的工作
-    BewlyBewly 其实是我在找工作的时候做的一个项目，那时试过有快半年是完全没有工作的状态，面试时一直刁难要么就是被礼貌拒绝
-
-    我知道以我的能力是完全可以从0开始做一个以我认为巨大的工程出来，但是面试的时候多数注重的地方往往只是在你对技术有如何的深入
-    技术确实非常重要，但是我认为一个人的能力不仅仅是技术
-    从 BewlyBewly 中，我从界面、配色、用户体验、一个产品用户真正想要的功能最后到实现我都是自己一个人完成的，包括弹窗按钮那些组件
-    在没有 pr 之前我就已经完成了很大一部分的功能以及界面，自己摸索和解决的不少问题与实现优化的功能，我也知道如何在b站插件几乎是饱和的情况下如何做出别具一格的作品。但是也要感谢后面的 PR 以及 issue 的反馈，让我能够更好的完善这个项目！！！
-
-    之后我确实也靠 BewlyBewly 进到了小公司工作一直到现在，现在的公司说是招前端进去主要还是看后端，我后端也是会一点但是没有前端好
-    目前公司内容也很杂，之前也为了某些变态的任务加上公司原本前端十分感人的代码在开发新功能的同时不得不自己也重构代码，但是公司给我的感觉就是因为我能力太差导致那个进度特慢，包括同事也是，同事一点前端都不会我重构了多少屎山代码说了也不明白，某些前端问题我自己也难以预测和修复最后还是做到慢就是做得慢。
-    那次我还因此加班来确保任务尽快完成，做完之后后续还有分给我的任务时也时不是提一嘴阴阳我做得慢我能力不行
-    这件事情也只是其中的一件，但是公司不注重前端甚至完全忽视前端对垃圾代码的感受我确实有点接受不了，其他前端同事给我一种感觉是能跑就好我简直无语
-
-    我知道这么说我可能太自大，我其实主要想简单说明一下目前情况，我承认我技术上确实没太厉害，公司里前端很大还是靠自己摸索的，有些处理我也不知道符合不符合规范
-    但是我能力是可以的，我是可以完全从0到1写出 BewlyBewly 出来，甚至之前和身边人说他们也觉得我有病，笑我写的代码（当然后面重构后我也觉得自己之前写的有病）
-
-    我目前只是想找一间公司是重视和比较规范前端的，因为我不想自己收拾别人的烂摊子身边人也不知道只是觉得我进度慢就是慢，再为了这种事情加班
-    坐标广州，我不是希望进去一定要做出什么成就出来，在做开源过程中也对项目负责人和开发者不同的想法观念略有感受。我只想进去了解一下正确的前端规范和能与其他志同道合的人一起工作。如果有合适的前端工作机会请联系我，谢谢！
-  contact_me: 联系我
 auth:
   auth_access_key_first: Before doing this, authorize BewlyBewly to use the access key.
 topbar:
@@ -243,6 +311,10 @@ topbar:
     paid_courses: Paid Courses
     community: Community
     music_plus: New Song Hotlist
+    game_center: Game Center
+    comic_con_and_goods: Comic Con & Goods
+    manga: Manga
+    game_competitions: Game Competitions
   user_dropdown:
     money: 'Money: '
     b_coins: 'B-coins: '
@@ -250,6 +322,7 @@ topbar:
     following: FOLLOWING
     followers: FOLLOWERS
     posts: POSTS
+    bilibili_premium: Bilibili Premium
     account_settings: Account settings
     uploads_manager: Uploads manager
     b_coins_wallet: B-coins wallet
@@ -290,6 +363,7 @@ dock:
   settings: Settings
 home:
   not_interested: Not interested
+  not_interested_desc: You can use <kbd>↑</kbd> and <kbd>↓</kbd> to choose the reason, or using number keys to choose the reason directly, press <kbd>Enter</kbd> to confirm.
   tell_us_why: Choose a reason why
   video_removed: Video removed
   for_you: For you

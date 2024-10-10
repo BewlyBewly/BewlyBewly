@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { useThrottleFn } from '@vueuse/core'
 
-import Logo from '~/components/Logo.vue'
-import SearchBar from '~/components/SearchBar/SearchBar.vue'
 import { useBewlyApp } from '~/composables/useAppProvider'
+import { TOP_BAR_VISIBILITY_CHANGE } from '~/constants/globalEvents'
 import { homePageGridLayout, settings } from '~/logic'
 import type { HomeTab } from '~/stores/mainStore'
 import { useMainStore } from '~/stores/mainStore'
@@ -32,9 +31,9 @@ const tabPageRef = ref()
 
 const gridLayoutIcons = computed((): GridLayoutIcon[] => {
   return [
-    { icon: 'i-f7:square-grid-3x2', iconActivated: 'i-f7:square-grid-3x2-fill', value: 'adaptive' },
-    { icon: 'i-f7:rectangle-grid-2x2', iconActivated: 'i-f7:rectangle-grid-2x2-fill', value: 'twoColumns' },
-    { icon: 'i-f7:rectangle-grid-1x2', iconActivated: 'i-f7:rectangle-grid-1x2-fill', value: 'oneColumn' },
+    { icon: 'i-mingcute:table-3-line', iconActivated: 'i-mingcute:table-3-fill', value: 'adaptive' },
+    { icon: 'i-mingcute:layout-grid-line', iconActivated: 'i-mingcute:layout-grid-fill', value: 'twoColumns' },
+    { icon: 'i-mingcute:list-check-3-line', iconActivated: 'i-mingcute:list-check-3-fill', value: 'oneColumn' },
   ]
 })
 
@@ -62,8 +61,8 @@ function computeTabs(): HomeTab[] {
 
 onMounted(() => {
   showSearchPageMode.value = true
-  emitter.off('topBarVisibleChange')
-  emitter.on('topBarVisibleChange', (val) => {
+  emitter.off(TOP_BAR_VISIBILITY_CHANGE)
+  emitter.on(TOP_BAR_VISIBILITY_CHANGE, (val) => {
     shouldMoveTabsUp.value = false
 
     // Allow moving tabs up only when the top bar is not hidden & is set to auto-hide
@@ -96,7 +95,7 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  emitter.off('topBarVisibleChange')
+  emitter.off(TOP_BAR_VISIBILITY_CHANGE)
 })
 
 function handleChangeTab(tab: HomeTab) {
@@ -191,7 +190,7 @@ function toggleTabContentLoading(loading: boolean) {
       </Transition>
 
       <header
-        pos="sticky top-80px" w-full z-9 mb-9 duration-300
+        pos="sticky top-[calc(var(--bew-top-bar-height)+10px)]" w-full z-9 mb-8 duration-300
         ease-in-out flex="~ justify-between items-start gap-4"
         :class="{ hide: shouldMoveTabsUp }"
       >

@@ -13,27 +13,16 @@ English | [官话 - 简体中文](README-cmn_CN.md) | [官話 - 正體中文](RE
 
 ## 👋 Introduction
 
+> [!NOTE]
+> BewlyBewly mainly focuses on page adjustments and optimization rather than improving functionally and efficiency.
+>
+> The dark mode will only be adapted to commonly used pages due to its efficiency and maintenance difficulty, while less
+> frequently used pages will not to be adapted.
+
 BewlyBewly is a browser extension for BiliBili that aims to enhance the user experience by redesigning the BiliBili UI.
 The design is inspired by YouTube, Vision OS, and iOS, resulting in a more visually appealing and user-friendly interface.
 This project uses the [vitesse-webext](https://github.com/antfu/vitesse-webext) template for development.
 Without this template, it may not be possible to develop this project.
-
-## 🔨 Build (Firefox)
-
-Please make sure you have [Node.js](https://nodejs.org/) and [pnpm](https://pnpm.io/) installed locally, and it is recommended to use [Visual Studio Code](https://code.visualstudio.com/) for development.
-
-1. To build the extension, run
-
-```bash
-# Install dependencies
-pnpm install
-
-pnpm build-firefox
-```
-
-2. Load the generated `extension-firefox/` folder in the browser, The extension will then take effect on [www.bilibili.com](https://www.bilibili.com).
-
-[Chrome & Edge](/docs/CONTRIBUTING.md#building-chrome-or-edge)
 
 ## ⬇️ Installation
 
@@ -90,13 +79,13 @@ simply drag and drop the downloaded `extension.zip` file into the browser to com
 
 </details>
 
-## 🤝 Contribution
+## 🤝 Contribution & Build
 
-See [CONTRIBUTION.md](docs/CONTRIBUTING.md)
+See [CONTRIBUTING.md](docs/CONTRIBUTING.md)
 
 ### Contributors
 
-![Contributors](https://contrib.rocks/image?repo=hakadao/BewlyBewly)
+[![Contributors](https://contrib.rocks/image?repo=hakadao/BewlyBewly)](https://github.com/BewlyBewly/BewlyBewly/graphs/contributors)
 
 ## ❤️ Credits
 

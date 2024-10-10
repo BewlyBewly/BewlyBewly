@@ -1,13 +1,9 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 
-import BangumiCard from '~/components/BangumiCard/BangumiCard.vue'
-import BangumiCardSkeleton from '~/components/BangumiCard/BangumiCardSkeleton.vue'
-import OverlayScrollbarsComponent from '~/components/OverlayScrollbarsComponent'
-import VideoCard from '~/components/VideoCard/VideoCard.vue'
-import VideoCardSkeleton from '~/components/VideoCard/VideoCardSkeleton.vue'
 import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
+import { TOP_BAR_VISIBILITY_CHANGE } from '~/constants/globalEvents'
 import type { GridLayout } from '~/logic'
 import { settings } from '~/logic'
 import type { List as RankingVideoItem, RankingResult } from '~/models/video/ranking'
@@ -86,7 +82,7 @@ watch(() => activatedRankingType.value.id, () => {
 })
 
 onMounted(() => {
-  emitter.on('topBarVisibleChange', (val) => {
+  emitter.on(TOP_BAR_VISIBILITY_CHANGE, (val) => {
     shouldMoveAsideUp.value = false
 
     // Allow moving tabs up only when the top bar is not hidden & is set to auto-hide
@@ -131,7 +127,7 @@ function getData() {
 }
 
 onBeforeUnmount(() => {
-  emitter.off('topBarVisibleChange')
+  emitter.off(TOP_BAR_VISIBILITY_CHANGE)
 })
 
 function getRankingVideos() {

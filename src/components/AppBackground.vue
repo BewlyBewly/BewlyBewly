@@ -1,8 +1,32 @@
 <script setup lang="ts">
+import { useDark } from '~/composables/useDark'
 import { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
+import { hexToHSL } from '~/utils/main'
 
 const props = defineProps<{ activatedPage: AppPage }>()
+
+const { isDark } = useDark()
+
+const themeColorHsl = computed(() => {
+  return hexToHSL(settings.value.themeColor).replace('hsl(', '').replace(')', '')
+})
+const themeColorHue = computed((): number => {
+  return Number(themeColorHsl.value.split(',')[0]) || 0
+})
+const themeColorSaturation = computed((): number => {
+  return Number(themeColorHsl.value.split(',')[1].replace('%', '')) || 0
+})
+const themeColorLightness = computed((): number => {
+  return Number(themeColorHsl.value.split(',')[2].replace('%', '')) || 0
+})
+const themeColorLinearGradientBackground = computed((): string => {
+  return `linear-gradient(180deg, 
+    transparent 0% 44%,
+    hsla(${themeColorHue.value}, ${themeColorSaturation.value + 20}%, ${themeColorLightness.value}%, 0.4) 62%, 
+    hsl(${themeColorHue.value}, ${themeColorSaturation.value}%, ${themeColorLightness.value}%) 80%,
+    hsl(${themeColorHue.value}, ${themeColorSaturation.value}%, 100%) 100%)`
+})
 
 watch(() => settings.value.wallpaperMaskOpacity, () => {
   setAppWallpaperMaskingOpacity()
@@ -33,44 +57,58 @@ function setAppWallpaperMaskingOpacity() {
 </script>
 
 <template>
-  <Transition name="fade">
-    <div v-if="activatedPage === AppPage.Search">
-      <!-- background -->
+  <div>
+    <!-- linear gradient background -->
+    <Transition name="fade">
       <div
-        pos="absolute top-0 left-0" w-full h-full duration-300 bg="cover center $bew-homepage-bg"
-        z--1 transform-gpu
-        :style="{ backgroundImage: `url('${settings.individuallySetSearchPageWallpaper ? settings.searchPageWallpaper : settings.wallpaper}')` }"
+        v-if="settings.useLinearGradientThemeColorBackground && isDark"
+        :style="{
+          opacity: activatedPage === AppPage.Search ? 1 : 0.4,
+          background: themeColorLinearGradientBackground,
+        }"
+        pos="absolute top-0 left-0" w-full h-full z-0 pointer-events-none
       />
-      <!-- background mask -->
-      <Transition name="fade">
+    </Transition>
+
+    <Transition name="fade">
+      <div v-if="activatedPage === AppPage.Search">
+        <!-- background -->
         <div
-          v-if="(!settings.individuallySetSearchPageWallpaper && settings.enableWallpaperMasking) || (settings.searchPageEnableWallpaperMasking)"
-          pos="absolute top-0 left-0" w-full h-full pointer-events-none bg="$bew-homepage-bg-mask"
-          duration-300 z--1 transform-gpu
-          :style="{
-            backdropFilter: `blur(${settings.individuallySetSearchPageWallpaper ? settings.searchPageWallpaperBlurIntensity : settings.wallpaperBlurIntensity}px)`,
-          }"
+          pos="absolute top-0 left-0" w-full h-full duration-300 bg="cover center $bew-homepage-bg"
+          z--1 transform-gpu
+          :style="{ backgroundImage: `url('${settings.individuallySetSearchPageWallpaper ? settings.searchPageWallpaper : settings.wallpaper}')` }"
         />
-      </Transition>
-    </div>
-    <div v-else>
-      <!-- background -->
-      <div
-        :style="{ backgroundImage: `url('${settings.wallpaper}')` }"
-        pos="absolute top-0 left-0" w-full h-full duration-300 bg="cover center $bew-homepage-bg"
-        z--1 transform-gpu
-      />
-      <!-- background mask -->
-      <Transition name="fade">
+        <!-- background mask -->
+        <Transition name="fade">
+          <div
+            v-if="(!settings.individuallySetSearchPageWallpaper && settings.enableWallpaperMasking) || (settings.searchPageEnableWallpaperMasking)"
+            pos="absolute top-0 left-0" w-full h-full pointer-events-none bg="$bew-homepage-bg-mask"
+            duration-300 z--1 transform-gpu
+            :style="{
+              backdropFilter: `blur(${settings.individuallySetSearchPageWallpaper ? settings.searchPageWallpaperBlurIntensity : settings.wallpaperBlurIntensity}px)`,
+            }"
+          />
+        </Transition>
+      </div>
+      <div v-else>
+        <!-- background -->
         <div
-          v-if="settings.enableWallpaperMasking"
-          pos="absolute top-0 left-0" w-full h-full pointer-events-none bg="$bew-homepage-bg-mask"
-          duration-300 z--1 transform-gpu
-          :style="{
-            backdropFilter: `blur(${settings.wallpaperBlurIntensity}px)`,
-          }"
+          :style="{ backgroundImage: `url('${settings.wallpaper}')` }"
+          pos="absolute top-0 left-0" w-full h-full duration-300 bg="cover center $bew-homepage-bg"
+          z--1 transform-gpu
         />
-      </Transition>
-    </div>
-  </Transition>
+        <!-- background mask -->
+        <Transition name="fade">
+          <div
+            v-if="settings.enableWallpaperMasking"
+            pos="absolute top-0 left-0" w-full h-full pointer-events-none bg="$bew-homepage-bg-mask"
+            duration-300 z--1 transform-gpu
+            :style="{
+              backdropFilter: `blur(${settings.wallpaperBlurIntensity}px)`,
+            }"
+          />
+        </Transition>
+      </div>
+    </Transition>
+  </div>
 </template>

@@ -48,21 +48,68 @@ export function openLinkToNewTab(url: string) {
 }
 
 /**
- * Convert a hex color value to RGBA, thanks ChatGPT 🫡
+ * Convert a hex color value to HSLA, thanks ChatGPT 🫡
  * @param hex hex color value
  * @param alpha color opacity
- * @returns RGBA or RGB color string
+ * @returns HSLA or HSL color string
  */
-export function hexToRGBA(hex: string, alpha: number): string {
-  const r = Number.parseInt(hex.slice(1, 3), 16)
-  const g = Number.parseInt(hex.slice(3, 5), 16)
-  const b = Number.parseInt(hex.slice(5, 7), 16)
+export function hexToHSL(hex: string, alpha: number | null = null): string {
+  // Remove the hash at the start if it's there
+  hex = hex.replace(/^#/, '')
 
-  if (alpha)
-    return `rgba(${r}, ${g}, ${b}, ${alpha})`
+  // Ensure the input is valid
+  if (hex.length !== 6) {
+    throw new Error('Invalid HEX color.')
+  }
 
-  else
-    return `rgb(${r}, ${g}, ${b})`
+  // Parse the r, g, b values
+  let r = Number.parseInt(hex.substring(0, 2), 16)
+  let g = Number.parseInt(hex.substring(2, 4), 16)
+  let b = Number.parseInt(hex.substring(4, 6), 16)
+
+  // Convert r, g, b to percentages
+  r /= 255
+  g /= 255
+  b /= 255
+
+  // Find the greatest and smallest channel values
+  const max = Math.max(r, g, b)
+  const min = Math.min(r, g, b)
+  let h: number = 0
+  let s: number = 0
+  let l: number = (max + min) / 2
+
+  // Calculate the hue
+  if (max === min) {
+    h = s = 0 // achromatic
+  }
+  else {
+    const d = max - min
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min)
+
+    switch (max) {
+      case r:
+        h = (g - b) / d + (g < b ? 6 : 0)
+        break
+      case g:
+        h = (b - r) / d + 2
+        break
+      case b:
+        h = (r - g) / d + 4
+        break
+    }
+
+    h /= 6
+  }
+
+  // Convert to degrees and percentages
+  h = Math.round(h * 360)
+  s = Math.round(s * 100)
+  l = Math.round(l * 100)
+
+  if (alpha !== null)
+    return `hsla(${h}, ${s}%, ${l}%, ${alpha})`
+  return `hsl(${h}, ${s}%, ${l}%)`
 }
 
 /**
@@ -79,11 +126,11 @@ export function scrollToTop(element: HTMLElement, targetScrollTop = 0 as number)
   })
 }
 
-export function injectCSS(css: string): HTMLStyleElement {
+export function injectCSS(css: string, element: HTMLElement | ShadowRoot = document.documentElement): HTMLStyleElement {
   const el = document.createElement('style')
   el.setAttribute('rel', 'stylesheet')
   el.textContent = css
-  document.documentElement.appendChild(el)
+  element.appendChild(el)
   return el
 }
 
@@ -99,15 +146,14 @@ export function delay(ms: number) {
 
 /**
  * Check if the current page is the home page
+ * @param url the url to check
  * @returns true if the current page is the home page
  */
-export function isHomePage(): boolean {
+export function isHomePage(url: string = location.href): boolean {
   if (
-    /https?:\/\/(?:www\.)?bilibili.com\/?(?:#\/?)?$/.test(location.href)
-    // https://github.com/hakadao/BewlyBewly/issues/525 #525
-    || /https?:\/\/(?:www\.)?bilibili.com\/?(?:\?.*)?$/.test(location.href)
-    || /https?:\/\/(?:www\.)?bilibili.com\/index\.html$/.test(location.href)
-    || /https?:\/\/(?:www\.)?bilibili.com\/\?spm_id_from=.*/.test(location.href)
+    /https?:\/\/(?:www\.)?bilibili.com\/?(?:#\/?)?$/.test(url)
+    || /https?:\/\/(?:www\.)?bilibili.com\/index\.html$/.test(url)
+    || /https?:\/\/(?:www\.)?bilibili.com\/\?spm_id_from=.*/.test(url)
   ) {
     return true
   }
@@ -182,4 +228,30 @@ export function compressAndResizeImage(file: File, maxWidth: number, maxHeight: 
 
   // Read the file as a Data URL (base64)
   reader.readAsDataURL(file)
+}
+
+/**
+ * Compare two versions
+ * @param version1
+ * @param version2
+ * @returns 1 if version1 is greater than version2, -1 if version1 is less than version2, 0 if version1 is equal to version2
+ */
+export function compareVersions(version1: string, version2: string): number {
+  const v1Parts = version1.split('.').map(Number)
+  const v2Parts = version2.split('.').map(Number)
+
+  // Determine the longer length for iteration
+  const maxLength = Math.max(v1Parts.length, v2Parts.length)
+
+  for (let i = 0; i < maxLength; i++) {
+    const num1 = v1Parts[i] || 0 // Defaults to 0 if undefined
+    const num2 = v2Parts[i] || 0 // Defaults to 0 if undefined
+
+    if (num1 > num2)
+      return 1
+    if (num1 < num2)
+      return -1
+  }
+
+  return 0 // Versions are equal
 }

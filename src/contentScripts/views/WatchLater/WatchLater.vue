@@ -2,17 +2,17 @@
 import { useDateFormat } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 
-import Button from '~/components/Button.vue'
-import Empty from '~/components/Empty.vue'
-import Progress from '~/components/Progress.vue'
 import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
+import { settings } from '~/logic'
 import type { List as VideoItem, WatchLaterResult } from '~/models/video/watchLater'
 import { calcCurrentTime } from '~/utils/dataFormatter'
 import { getCSRF, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
 
 const { t } = useI18n()
 const api = useApiClient()
+const { openIframeDrawer } = useBewlyApp()
+
 const isLoading = ref<boolean>()
 const noMoreContent = ref<boolean>()
 const allWatchLaterList = ref<VideoItem[]>([])
@@ -155,9 +155,12 @@ function jumpToLoginPage() {
           <a
             v-for="(item, index) in currentWatchLaterList"
             :key="item.aid"
-            :href="`https://www.bilibili.com/list/watchlater?bvid=${item.bvid}`" target="_blank" rel="noopener noreferrer"
+            :href="settings.videoCardLinkOpenMode === 'drawer' ? undefined : `https://www.bilibili.com/list/watchlater?bvid=${item.bvid}`"
+            target="_blank"
+            rel="noopener noreferrer"
             class="group"
             flex cursor-pointer
+            @click="settings.videoCardLinkOpenMode === 'drawer' && openIframeDrawer(`https://www.bilibili.com/list/watchlater?bvid=${item.bvid}`)"
           >
             <section
               rounded="$bew-radius"

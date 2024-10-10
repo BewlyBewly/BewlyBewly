@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
 
-import Button from '~/components/Button.vue'
-import Empty from '~/components/Empty.vue'
-import VideoCard from '~/components/VideoCard/VideoCard.vue'
 import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import type { GridLayout } from '~/logic'
@@ -179,6 +176,11 @@ defineExpose({ initData })
     <Empty v-if="needToLoginFirst" mt-6 :description="$t('common.please_log_in_first')">
       <Button type="primary" @click="jumpToLoginPage()">
         {{ $t('common.login') }}
+      </Button>
+    </Empty>
+    <Empty v-if="videoList.length === 0 && !needToLoginFirst" mt-6 :description="$t('common.no_more_content')">
+      <Button type="primary" @click="initData()">
+        {{ $t('common.operation.refresh') }}
       </Button>
     </Empty>
     <div

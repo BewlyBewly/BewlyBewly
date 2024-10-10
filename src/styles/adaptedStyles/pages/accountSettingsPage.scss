@@ -1,0 +1,83 @@
+.bewly-design.accountSettingsPage {
+  // #region theme color adaption part
+  // Increase the priority of the style inside by writing a non-existent selector in `:not()`
+  :not(foobar) {
+    // do nothing..
+  }
+  // #endregion
+
+  // #region dark mode adaption part
+  &.dark {
+    .top-img,
+    .top_bg {
+      filter: invert(1) hue-rotate(180deg);
+    }
+
+    .security_content {
+      filter: invert(0.98) hue-rotate(180deg) brightness(1.1);
+
+      img,
+      video,
+      iframe,
+      [style*="background-image: url"],
+      [style*="background: url"],
+      .invitation-img,
+      .no-level-img,
+      .points-header-warp {
+        filter: invert(0.98) hue-rotate(180deg) brightness(1.1);
+      }
+    }
+
+    .mp-img {
+      background-color: black;
+    }
+
+    .xts,
+    .table-normal *,
+    .record-login-descript,
+    .black-btn:not(:hover) {
+      color: black;
+    }
+
+    .official-title,
+    .title-module,
+    .professional-wrapper .title,
+    .condition-txt,
+    .el-form-item__label,
+    .professional-form-wrapper .official-label,
+    .el-input__inner,
+    .professional-form-wrapper .pro-type .el-radio__label,
+    .el-textarea__inner,
+    .el-checkbox,
+    .ava-name {
+      color: var(--bew-text-1);
+    }
+
+    .professional-wrapper .desc,
+    .upload-txt,
+    .professional-form-wrapper .desc,
+    .ava-text {
+      color: var(--bew-text-2);
+    }
+
+    .professional-wrapper,
+    .el-input__inner,
+    .el-textarea__inner,
+    .professional-form-wrapper .pro-preview-content {
+      background-color: var(--bew-content-solid);
+    }
+
+    .per-left-line,
+    .per-right-line,
+    .organ-left-line,
+    .organ-right-line {
+      background: var(--bew-border-color);
+    }
+
+    .el-input__inner:not(:focus),
+    .el-textarea__inner:not(:focus) {
+      border-color: var(--bew-border-color);
+    }
+  }
+  // #endregion
+}

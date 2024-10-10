@@ -64,7 +64,7 @@ In `index.ts`, we will write some regex rules to match the style used on a speci
     // ...
   }
   // #endregion
-}
+}
 ```
 
 ## Why use the above writing style?

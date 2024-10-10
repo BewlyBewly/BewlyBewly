@@ -1,16 +1,10 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 
-import Button from '~/components/Button.vue'
-import Empty from '~/components/Empty.vue'
-import Input from '~/components/Input.vue'
-import Loading from '~/components/Loading.vue'
-import Select from '~/components/Select.vue'
-import Tooltip from '~/components/Tooltip.vue'
 import type { FavoriteCategory, FavoriteResource } from '~/components/TopBar/types'
-import VideoCard from '~/components/VideoCard/VideoCard.vue'
 import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
+import { TOP_BAR_VISIBILITY_CHANGE } from '~/constants/globalEvents'
 import { settings } from '~/logic'
 import type { FavoritesResult, Media as FavoriteItem } from '~/models/video/favorite'
 import type { FavoritesCategoryResult, List as CategoryItem } from '~/models/video/favoriteCategory'
@@ -33,7 +27,7 @@ const keyword = ref<string>('')
 const { handlePageRefresh, handleReachBottom, haveScrollbar } = useBewlyApp()
 const isLoading = ref<boolean>(false)
 const isFullPageLoading = ref<boolean>(false)
-const noMoreContent = ref<boolean>()
+const noMoreContent = ref<boolean>(false)
 
 onMounted(async () => {
   await getFavoriteCategories()
@@ -41,8 +35,8 @@ onMounted(async () => {
 
   initPageAction()
 
-  emitter.off('topBarVisibleChange')
-  emitter.on('topBarVisibleChange', (val) => {
+  emitter.off(TOP_BAR_VISIBILITY_CHANGE)
+  emitter.on(TOP_BAR_VISIBILITY_CHANGE, (val) => {
     shouldMoveCtrlBarUp.value = false
 
     // Allow moving tabs up only when the top bar is not hidden & is set to auto-hide
@@ -59,7 +53,7 @@ onMounted(async () => {
 })
 
 onUnmounted(() => {
-  emitter.off('topBarVisibleChange')
+  emitter.off(TOP_BAR_VISIBILITY_CHANGE)
 })
 
 function initPageAction() {
@@ -201,7 +195,7 @@ function isMusic(item: FavoriteResource) {
         bg="$bew-elevated-solid" rounded="$bew-radius" shadow="$bew-shadow-2" mt--2 transition="all 300 ease-in-out"
         :class="{ hide: shouldMoveCtrlBarUp }"
       >
-        <Select v-model="selectedCategory" w-150px :options="categoryOptions" @change="(val) => changeCategory(val.value)" />
+        <Select v-model="selectedCategory" w-150px :options="categoryOptions" @change="(val: FavoriteCategory) => changeCategory(val)" />
         <Input v-model="keyword" w-250px @enter="handleSearch" />
         <Button type="primary" @click="handleSearch">
           <template #left>
@@ -247,7 +241,7 @@ function isMusic(item: FavoriteResource) {
                   rounded="$bew-radius"
                   text="!white xl"
                   bg="black opacity-60 hover:$bew-error-color-80"
-                  @click.prevent="handleUnfavorite(item)"
+                  @click.prevent.stop="handleUnfavorite(item)"
                 >
                   <Tooltip :content="$t('favorites.unfavorite')" placement="bottom" type="dark">
                     <div i-ic-baseline-clear />

@@ -1,28 +1,38 @@
 <script lang="ts" setup>
 import { Icon } from '@iconify/vue'
+import type { CSSProperties } from 'vue'
+import { useToast } from 'vue-toastification'
 
 import Button from '~/components/Button.vue'
 import { useApiClient } from '~/composables/api'
-import { settings } from '~/logic'
+import { useBewlyApp } from '~/composables/useAppProvider'
+import { accessKey, settings } from '~/logic'
+import type { ThreePointV2 } from '~/models/video/appForYou'
 import type { VideoPreviewResult } from '~/models/video/videoPreview'
+import { getTvSign, TVAppKey } from '~/utils/authProvider'
 import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils/dataFormatter'
 import { getCSRF, removeHttpFromUrl } from '~/utils/main'
 
 import Tooltip from '../Tooltip.vue'
+import VideoCardContextMenu from './VideoCardContextMenu/VideoCardContextMenu.vue'
 import VideoCardSkeleton from './VideoCardSkeleton.vue'
+
+const props = withDefaults(defineProps<Props>(), {
+  showWatcherLater: true,
+})
 
 interface Props {
   skeleton?: boolean
   video?: Video
+  /** 是否爲app端推介，用於調用不同取消不感興趣方法 */
+  isApp?: boolean
   showWatcherLater?: boolean
   horizontal?: boolean
   showPreview?: boolean
   moreBtn?: boolean
-  moreBtnActive?: boolean
-  removed?: boolean
 }
 
-interface Video {
+export interface Video {
   id: number
   duration?: number
   durationStr?: string
@@ -42,6 +52,7 @@ interface Video {
   capsuleText?: string
   bvid?: string
   aid?: number
+  goto?: string
   /** After set the `url`, clicking the video will navigate to this url. It won't be affected by aid, bvid or epid */
   url?: string
   /** If you want to show preview video, you should set the cid value */
@@ -51,22 +62,21 @@ interface Video {
   tag?: string
   rank?: number
   type?: 'horizontal' | 'vertical' | 'bangumi'
+  threePointV2: ThreePointV2[]
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  showWatcherLater: true,
-})
-
-const emit = defineEmits<{
-  (e: 'moreClick', event: MouseEvent): MouseEvent
-  (e: 'undo'): void
-  (e: 'tellUsWhy'): void
-}>()
-
+const toast = useToast()
+const { mainAppRef, openIframeDrawer } = useBewlyApp()
 const api = useApiClient()
+const showVideoOptions = ref<boolean>(false)
+const videoOptionsFloatingStyles = ref<CSSProperties>({})
+// Whether the user has marked it as disliked
+const removed = ref<boolean>(false)
 
-// Used to click and control herf attribute
-const isClick = ref<boolean>(false)
+const moreBtnRef = ref<HTMLDivElement | null>(null)
+const contextMenuRef = ref<HTMLDivElement | null>(null)
+
+const selectedDislikeOpt = ref<{ dislikeReasonId: number }>()
 
 function getCurrentVideoUrl(video: Video) {
   const baseUrl = `https://www.bilibili.com/video/${video.bvid ?? `av${video.aid}`}`
@@ -75,7 +85,7 @@ function getCurrentVideoUrl(video: Video) {
 }
 
 const videoUrl = computed(() => {
-  if (props.removed || !isClick.value || !props.video)
+  if (removed.value || !props.video)
     return undefined
 
   if (props.video.url)
@@ -189,23 +199,60 @@ function handelMouseLeave() {
   clearTimeout(mouseLeaveTimeOut.value)
 }
 
-function switchClickState(flag: boolean) {
-  if (flag) {
-    isClick.value = flag
-  }
-  else {
-    setTimeout(() => {
-      isClick.value = flag
-    })
+function handleClick(event: MouseEvent) {
+  if (settings.value.videoCardLinkOpenMode === 'drawer' && videoUrl.value) {
+    event.preventDefault()
+
+    openIframeDrawer(videoUrl.value)
   }
 }
 
 function handleMoreBtnClick(event: MouseEvent) {
-  emit('moreClick', event)
+  showVideoOptions.value = false
+  videoOptionsFloatingStyles.value = {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    transform: `translate(${event.x}px, ${event.y}px)`,
+  }
+  showVideoOptions.value = true
 }
 
 function handleUndo() {
-  emit('undo')
+  if (props.isApp) {
+    const params = {
+      access_key: accessKey.value,
+      goto: props.video?.goto,
+      id: props.video?.id,
+      // https://github.com/magicdawn/bilibili-app-recommend/blob/cb51f75f415f48235ce048537f2013122c16b56b/src/components/VideoCard/card.service.ts#L115
+      idx: Number((Date.now() / 1000).toFixed(0)),
+      reason_id: selectedDislikeOpt.value?.dislikeReasonId, // 1 means dislike, e.g. {"id": 1, "name": "不感兴趣","toast": "将减少相似内容推荐"}
+      build: 74800100,
+      device: 'pad',
+      mobi_app: 'iphone',
+      appkey: TVAppKey.appkey,
+    }
+
+    api.video.undoDislikeVideo({
+      ...params,
+      sign: getTvSign(params),
+    }).then((res) => {
+      if (res.code === 0) {
+        removed.value = false
+      }
+      else {
+        toast.error(res.message)
+      }
+    })
+  }
+  else {
+    removed.value = false
+  }
+}
+
+function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
+  selectedDislikeOpt.value = selectedOpt
+  removed.value = true
 }
 </script>
 
@@ -235,9 +282,8 @@ function handleUndo() {
           :href="videoUrl" target="_blank" rel="noopener noreferrer"
           @mouseenter="handleMouseEnter"
           @mouseleave="handelMouseLeave"
-          @mousedown="switchClickState(true)"
-          @mouseup="switchClickState(false)"
-          @dragend="switchClickState(false)"
+          @click="handleClick"
+          @click.right.prevent="handleMoreBtnClick"
         >
           <!-- Cover -->
           <div
@@ -249,13 +295,12 @@ function handleUndo() {
             transform="~ translate-z-0"
           >
             <!-- Video cover -->
-            <img
-              :src="`${removeHttpFromUrl(video.cover)}@672w_378h_1c`"
+            <Picture
+              :src="`${removeHttpFromUrl(video.cover)}@672w_378h_1c_!web-home-common-cover`"
               loading="lazy"
-              w="full" max-w-full align-middle aspect-video
-              bg="cover center"
+              w="full" max-w-full align-middle aspect-video object-cover
               rounded="$bew-radius"
-            >
+            />
 
             <div
               v-if="removed"
@@ -267,7 +312,7 @@ function handleUndo() {
               </p>
               <Button
                 color="rgba(255,255,255,.35)" text-color="white" size="small"
-                @click.prevent="handleUndo"
+                @click.prevent.stop="handleUndo"
               >
                 <template #left>
                   <div i-mingcute-back-line text-lg />
@@ -340,6 +385,7 @@ function handleUndo() {
                 transform="scale-70 group-hover/cover:scale-100"
                 duration-300
                 pos="absolute top-0 left-0" z-2
+                @click.stop=""
               >
                 <slot name="coverTopLeft" />
               </div>
@@ -355,7 +401,7 @@ function handleUndo() {
                 class="opacity-0 group-hover/cover:opacity-100"
                 transform="scale-70 group-hover/cover:scale-100"
                 duration-300
-                @click.prevent="toggleWatchLater"
+                @click.prevent.stop="toggleWatchLater"
               >
                 <Tooltip v-if="!isInWatchLater" :content="$t('common.save_to_watch_later')" placement="bottom-right" type="dark">
                   <div i-mingcute:carplay-line />
@@ -386,22 +432,24 @@ function handleUndo() {
                 position-relative
                 @click.stop=""
               >
-                <img
-                  rounded="1/2"
+
+                <Picture
                   :src="`${removeHttpFromUrl(video.authorFace)}@50w_50h_1c`"
-                  width="36"
-                  height="36"
                   loading="lazy"
-                >
+                  w="36px" h="36px"
+                  rounded="1/2"
+                />
+
                 <div
                   v-if="video.followed"
                   pos="absolute bottom--2px right--2px"
                   w-14px h-14px
                   bg="$bew-theme-color"
+                  border="2 outset solid white"
                   rounded="1/2"
                   grid place-items-center
                 >
-                  <div color-white text-sm class="i-mingcute:check-fill w-10px h-10px" />
+                  <div color-white text-sm class="i-mingcute:check-fill w-8px h-8px" />
                 </div>
               </a>
             </div>
@@ -419,16 +467,18 @@ function handleUndo() {
 
                 <div
                   v-if="moreBtn"
+                  ref="moreBtnRef"
                   class="opacity-0 group-hover/desc:opacity-100"
-                  :class="{ 'more-active': moreBtnActive }"
+                  :class="{ 'more-active': showVideoOptions }"
+                  bg="hover:$bew-fill-2 active:$bew-fill-3"
                   shrink-0 w-30px h-30px m="t--3px r--8px" translate-x--8px
                   grid place-items-center cursor-pointer rounded="50%" duration-300
-                  @click.prevent="handleMoreBtnClick"
+                  @click.stop.prevent="handleMoreBtnClick"
                 >
                   <div i-mingcute:more-2-line text="lg" />
                 </div>
               </div>
-              <div text="base $bew-text-2" w-fit m="t-2" flex="~ items-center wrap">
+              <div text="sm $bew-text-2" w-fit m="t-2" flex="~ items-center wrap">
                 <!-- Author Avatar -->
                 <span
                   :style="{
@@ -444,22 +494,22 @@ function handleUndo() {
                       object="center cover" bg="$bew-skeleton" cursor="pointer" relative
                       @click.stop=""
                     >
-                      <img
+                      <Picture
                         :src="`${removeHttpFromUrl(video.authorFace)}@50w_50h_1c`"
-                        width="30"
-                        height="30"
                         loading="lazy"
-                        object-cover rounded="1/2"
-                      >
+                        w="30px" h="30px"
+                        rounded="1/2"
+                      />
                       <div
                         v-if="video.followed"
                         pos="absolute bottom--2px right--2px"
                         w-14px h-14px
                         bg="$bew-theme-color"
+                        border="2 outset solid white"
                         rounded="1/2"
                         grid place-items-center
                       >
-                        <div color-white text-sm class="i-mingcute:check-fill w-10px h-10px" />
+                        <div color-white text-sm class="i-mingcute:check-fill w-8px h-8px" />
                       </div>
                     </a>
                   </div>
@@ -480,15 +530,15 @@ function handleUndo() {
               <div flex="~ items-center gap-1 wrap">
                 <!-- View & Danmaku Count -->
                 <div
-                  text="$bew-text-2" rounded="$bew-radius"
+                  text="sm $bew-text-2" rounded="$bew-radius"
                   inline-block
                 >
                   <span v-if="video.view || video.viewStr">
-                    {{ video.view ? $t('common.view', { count: numFormatter(video.view) }, video.view) : `${video.viewStr}${$t('common.viewWithoutNum')}` }}
+                    {{ video.view ? $t('common.view', { count: numFormatter(video.view) }, video.view) : `${numFormatter(video.viewStr || '0')}${$t('common.viewWithoutNum')}` }}
                   </span>
                   <template v-if="video.danmaku || video.danmakuStr">
                     <span text-xs font-light mx-4px>•</span>
-                    <span>{{ video.danmaku ? $t('common.danmaku', { count: numFormatter(video.danmaku) }, video.danmaku) : `${video.danmakuStr}${$t('common.danmakuWithoutNum')}` }}</span>
+                    <span>{{ video.danmaku ? $t('common.danmaku', { count: numFormatter(video.danmaku) }, video.danmaku) : `${numFormatter(video.danmakuStr || '0')}${$t('common.danmakuWithoutNum')}` }}</span>
                   </template>
                   <br>
                 </div>
@@ -526,11 +576,30 @@ function handleUndo() {
       :horizontal="horizontal"
       important-mb-0
     />
+
+    <!-- context menu -->
+    <Teleport
+      v-if="showVideoOptions && video"
+      :to="mainAppRef"
+    >
+      <VideoCardContextMenu
+        ref="contextMenuRef"
+        :video="{
+          ...video,
+          url: videoUrl,
+          authorUrl: authorJumpUrl,
+        }"
+        :context-menu-styles="videoOptionsFloatingStyles"
+        @close="showVideoOptions = false"
+        @removed="handleRemoved"
+      />
+      <!-- @reopen="handleMoreBtnClick" -->
+    </Teleport>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .more-active {
-  --uno: "opacity-100 bg-$bew-fill-3";
+  --uno: "opacity-100";
 }
 </style>

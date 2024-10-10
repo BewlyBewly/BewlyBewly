@@ -9,7 +9,9 @@ import Tooltip from '~/components/Tooltip.vue'
 import { useApiClient } from '~/composables/api'
 import type { TopBarLiveMomentResult } from '~/models/moment/topBarLiveMoment'
 import type { TopBarMomentResult } from '~/models/moment/topBarMoment'
-import { getCSRF, isHomePage, scrollToTop } from '~/utils/main'
+import { getCSRF, scrollToTop } from '~/utils/main'
+
+import ALink from './ALink.vue'
 
 type MomentType = 'video' | 'live' | 'article'
 interface MomentTab { type: MomentType, name: any }
@@ -220,9 +222,8 @@ function getTopBarLiveMoments() {
         const { list } = res.data
 
         // if the length of this list is less then the pageSize, it means that it have no more contents
-        if (moments.length !== 0 && list.length < pageSize) {
+        if (list.length < pageSize) {
           noMoreContent.value = true
-          return
         }
 
         // if the length of this list is equal to the pageSize, this means that it may have the next page.
@@ -314,12 +315,12 @@ defineExpose({
           {{ tab.name }}
         </div>
       </div>
-      <a
-        href="https://t.bilibili.com/" :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
+      <ALink
+        href="https://t.bilibili.com/" rel="noopener noreferrer"
         flex="~ items-center"
       >
         <span text="sm">{{ $t('common.view_all') }}</span>
-      </a>
+      </ALink>
     </header>
 
     <!-- moments wrapper -->
@@ -350,10 +351,10 @@ defineExpose({
         <div v-if="!isLoading && moments.length > 0" min-h="50px" />
 
         <TransitionGroup name="list">
-          <a
+          <ALink
             v-for="(moment, index) in moments"
             :key="index"
-            :href="moment.link" :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
+            :href="moment.link" rel="noopener noreferrer"
             flex="~ justify-between"
             m="b-2" p="2"
             rounded="$bew-radius"
@@ -372,32 +373,33 @@ defineExpose({
               pos="absolute -top-12px -left-12px"
               style="box-shadow: 0 0 4px var(--bew-theme-color)"
             />
-            <a
+            <ALink
               :href="moment.authorJumpUrl"
-              :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
+              rel="noopener noreferrer"
               rounded="1/2"
               w="40px" h="40px" m="r-4"
               bg="$bew-skeleton"
+              shrink-0
             >
               <img
                 :src="`${moment.authorFace}@50w_50h_1c`"
                 rounded="1/2"
                 w="40px" h="40px"
               >
-            </a>
+            </ALink>
 
             <div flex="~" justify="between" w="full">
               <div>
                 <!-- <span v-if="selectedTab !== 1">{{ `${moment.name} ${t('topbar.moments_dropdown.uploaded')}` }}</span> -->
                 <!-- <span v-else>{{ `${moment.name} ${t('topbar.moments_dropdown.now_streaming')}` }}</span> -->
 
-                <a
+                <ALink
                   :href="moment.authorJumpUrl"
-                  :target="isHomePage() ? '_blank' : '_self'" rel="noopener noreferrer"
+                  rel="noopener noreferrer"
                   font-bold
                 >
                   {{ moment.author }}
-                </a>
+                </ALink>
                 <div overflow-hidden text-ellipsis break-anywhere>
                   {{ moment.title }}
                 </div>
@@ -426,14 +428,13 @@ defineExpose({
               <div
                 class="group"
                 flex="~ items-center justify-center" w="82px"
-                h="46px" m="l-4"
+                h="46px" m="l-4" shrink-0
                 rounded="$bew-radius-half"
                 bg="$bew-skeleton"
               >
                 <img
                   :src="`${moment.cover}@128w_72h_1c`"
-                  w="82px"
-                  h="46px"
+                  w="82px" h="46px"
                   rounded="$bew-radius-half"
                 >
                 <div
@@ -452,7 +453,7 @@ defineExpose({
                 </div>
               </div>
             </div>
-          </a>
+          </ALink>
         </TransitionGroup>
 
         <!-- loading -->

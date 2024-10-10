@@ -1,7 +1,7 @@
-.bewly-design * {
+* {
   outline-color: var(--bew-theme-color-80);
-  outline-width: 2px;
-  outline-offset: -2px;
+  // outline-width: 2px;
+  // outline-offset: 2px;
 }
 
 .bewly-design.dark * {
@@ -50,16 +50,6 @@ html.dark.bewly-design {
   background-color: var(--bew-bg);
 }
 
-.keep-two-lines {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  line-break: anywhere;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-}
-
 .bewly-design {
   h1,
   h2,
@@ -85,6 +75,67 @@ img {
     background-position: center;
     background-repeat: no-repeat;
   }
+}
+
+.bewly-wrapper {
+  line-height: 1.4;
+
+  * {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .keep-two-lines {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-break: anywhere;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+
+  code {
+    display: inline-block;
+    background-color: var(--bew-fill-1);
+    padding: 0 0.5em;
+    margin: 0.14em 0.2em;
+    border-radius: 4px;
+    font-weight: 600;
+    line-height: 1.24;
+  }
+
+  kbd {
+    display: inline-block;
+    background-color: var(--bew-fill-1);
+    padding: 0 0.5em;
+    margin: 0.14em 0.2em;
+    border-radius: 4px;
+    box-shadow:
+      0 0 0 1px var(--bew-border-color),
+      0 1.4px 0 0 var(--bew-fill-2);
+    line-height: 1.24;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: var(--bew-fill-2);
+    }
+
+    &:active {
+      background-color: var(--bew-fill-3);
+      translate: 0 1.4px;
+      box-shadow:
+        0 0 0 1px var(--bew-border-color),
+        0 -1.4px 0 0 var(--bew-fill-2);
+    }
+  }
+}
+
+// Prevent the scrollbar from being covered by the other elements
+.os-scrollbar {
+  --uno: "z-100000";
 }
 
 // Change OverlayScrollbar color
@@ -118,21 +169,4 @@ img {
 }
 .dark::view-transition-new(root) {
   z-index: 1;
-}
-
-// Adapt the colors of the two Bilibili Evolved's buttons on the left side to BewlyBewly theme
-.bewly-design {
-  .be-settings > .sidebar > * {
-    background-color: var(--bew-elevated-solid) !important;
-    opacity: 0.4;
-
-    &:hover {
-      opacity: 1;
-    }
-  }
-
-  .be-settings > .sidebar > * .be-icon {
-    color: var(--bew-text-1) !important;
-    fill: var(--bew-text-1) !important;
-  }
 }

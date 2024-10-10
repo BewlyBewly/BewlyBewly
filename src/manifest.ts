@@ -2,7 +2,7 @@ import fs from 'fs-extra'
 import type { Manifest } from 'webextension-polyfill'
 
 import type PkgType from '../package.json'
-import { isDev, isFirefox, port, r } from '../scripts/utils'
+import { isDev, isFirefox, isSafari, port, r } from '../scripts/utils'
 
 export async function getManifest() {
   const pkg = await fs.readJSON(r('package.json')) as typeof PkgType
@@ -23,18 +23,20 @@ export async function getManifest() {
     //   page: './dist/options/index.html',
     //   open_in_tab: true,
     // },
-    background: isFirefox
-      ? { scripts: ['./dist/background/index.js'] }
+
+    // Setting `persistent` to true in Manifest V3 results in an error in Firefox
+    // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/background
+    background: (isFirefox || isSafari)
+      ? { scripts: ['./dist/background/index.js'], persistent: isFirefox ? undefined : false }
       : { service_worker: './dist/background/index.js' },
+
     icons: {
       16: './assets/icon-512.png',
       48: './assets/icon-512.png',
       128: './assets/icon-512.png',
     },
     permissions: [
-      'tabs',
       'storage',
-      'scripting',
       'declarativeNetRequest',
       ...isFirefox
         ? ['webRequest', 'webRequestBlocking']
@@ -55,11 +57,13 @@ export async function getManifest() {
           '*://member.bilibili.com/*',
           '*://account.bilibili.com/*',
           '*://www.hdslb.com/*',
+          '*://passport.bilibili.com/*',
         ],
         js: ['./dist/contentScripts/index.global.js'],
         css: ['./dist/contentScripts/style.css'],
         run_at: 'document_start',
         match_about_blank: true,
+        all_frames: true,
       },
     ],
     web_accessible_resources: [
