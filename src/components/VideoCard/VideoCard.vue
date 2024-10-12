@@ -283,7 +283,6 @@ function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
           @mouseenter="handleMouseEnter"
           @mouseleave="handelMouseLeave"
           @click="handleClick"
-          @click.right.prevent="handleMoreBtnClick"
         >
           <!-- Cover -->
           <div
