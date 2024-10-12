@@ -31,25 +31,61 @@
 
 :lang(en) .bewly-wrapper,
 :lang(en).bewly-design,
-:lang(en).bewly-design *:not(.bili-danmaku-x-dm) {
+// Do not change the danmaku font because the Bilibili video player can change the font of danmaku
+:lang(en).bewly-design *:not(.bili-danmaku-x-dm),
+// 热搜点评
+:lang(en).bewly-design .base-video-sections-v1 .video-sections-head_first-line .first-line-left .first-line-title,
+// 接下来播放
+:lang(en).bewly-design .recommend-list-v1 .rec-title,
+// Font for the recommended video list on the right side of the video https://github.com/BewlyBewly/BewlyBewly/issues/1061
+:lang(en).bewly-design .card-box .info .title,
+// Search page video card title https://search.bilibili.com/all?keyword=test
+:lang(en).bewly-design .bili-video-card .bili-video-card__info--tit {
   font-family: var(--bew-font-family, var(--bew-fonts-english));
 }
 
 :lang(zh-CN) .bewly-wrapper,
 :lang(zh-CN).bewly-design,
-:lang(zh-CN).bewly-design *:not(.bili-danmaku-x-dm) {
+// Do not change the danmaku font because the Bilibili video player can change the font of danmaku
+:lang(zh-CN).bewly-design *:not(.bili-danmaku-x-dm),
+// 热搜点评
+:lang(zh-CN).bewly-design .base-video-sections-v1 .video-sections-head_first-line .first-line-left .first-line-title,
+// 接下来播放
+:lang(zh-CN).bewly-design .recommend-list-v1 .rec-title,
+// Font for the recommended video list on the right side of the video https://github.com/BewlyBewly/BewlyBewly/issues/1061
+:lang(zh-CN).bewly-design .card-box .info .title,
+// Search page video card title https://search.bilibili.com/all?keyword=test
+:lang(zh-CN).bewly-design .bili-video-card .bili-video-card__info--tit {
   font-family: var(--bew-font-family, var(--bew-fonts-mandarin-cn));
 }
 
 :lang(zh-TW) .bewly-wrapper,
 :lang(zh-TW).bewly-design,
-:lang(zh-TW).bewly-design *:not(.bili-danmaku-x-dm) {
+// Do not change the danmaku font because the Bilibili video player can change the font of danmaku
+:lang(zh-TW).bewly-design *:not(.bili-danmaku-x-dm),
+// 热搜点评
+:lang(zh-TW).bewly-design .base-video-sections-v1 .video-sections-head_first-line .first-line-left .first-line-title,
+// 接下来播放
+:lang(zh-TW).bewly-design .recommend-list-v1 .rec-title,
+// Font for the recommended video list on the right side of the video https://github.com/BewlyBewly/BewlyBewly/issues/1061
+:lang(zh-TW).bewly-design .card-box .info .title,
+// Search page video card title https://search.bilibili.com/all?keyword=test
+:lang(zh-TW).bewly-design .bili-video-card .bili-video-card__info--tit {
   font-family: var(--bew-font-family, var(--bew-fonts-mandarin-tw));
 }
 
 :lang(zh-HK) .bewly-wrapper,
 :lang(zh-HK).bewly-design,
-:lang(zh-HK).bewly-design *:not(.bili-danmaku-x-dm) {
+// Do not change the danmaku font because the Bilibili video player can change the font of danmaku
+:lang(zh-HK).bewly-design *:not(.bili-danmaku-x-dm),
+// 热搜点评
+:lang(zh-HK).bewly-design .base-video-sections-v1 .video-sections-head_first-line .first-line-left .first-line-title,
+// 接下来播放
+:lang(zh-HK).bewly-design .recommend-list-v1 .rec-title,
+// Font for the recommended video list on the right side of the video https://github.com/BewlyBewly/BewlyBewly/issues/1061
+:lang(zh-HK).bewly-design .card-box .info .title,
+// Search page video card title https://search.bilibili.com/all?keyword=test
+:lang(zh-HK).bewly-design .bili-video-card .bili-video-card__info--tit {
   font-family: var(--bew-font-family, var(--bew-fonts-cantonese));
 }
 
