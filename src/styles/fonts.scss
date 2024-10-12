@@ -1,7 +1,7 @@
 :root,
 :host {
-  --bew-fonts-basic: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, "Roboto Flex", "Noto Sans", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue";
+  --bew-fonts-basic: -apple-system, BlinkMacSystemFont, Inter, "SF Pro Text", "Segoe UI Variable Text", "Segoe UI",
+    "Roboto Flex", Roboto, "Noto Sans", Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue";
   --bew-fonts-fallback: system-ui, Arial, sans-serif;
 
   --bew-fonts-english: var(--bew-fonts-basic), var(--bew-fonts-fallback);
