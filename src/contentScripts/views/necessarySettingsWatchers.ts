@@ -54,7 +54,7 @@ export function setupNecessarySettingsWatchers() {
     () => {
       // Set the default font family
       if (!settings.value.customizeFont && !settings.value.fontFamily) {
-        settings.value.fontFamily = `-apple-system, BlinkMacSystemFont, Inter, "SF Pro Text", "Segoe UI Variable Text", "Segoe UI", "Roboto Flex", Roboto, "Noto Sans", Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", Arial, sans-serif`
+        settings.value.fontFamily = `-apple-system, BlinkMacSystemFont, Inter, "Segoe UI Variable", "Segoe UI", "Roboto Flex", Roboto, "Noto Sans", Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", Arial, sans-serif`
       }
 
       if (settings.value.customizeFont) {

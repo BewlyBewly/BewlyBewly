@@ -1,7 +1,9 @@
+/** font-family 選用字型設定感謝 胡雨晴 hafterain (https://github.com/hafterain) 提供幫助 ❤️❤️❤️ */
+
 :root,
 :host {
-  --bew-fonts-basic: -apple-system, BlinkMacSystemFont, Inter, "SF Pro Text", "Segoe UI Variable Text", "Segoe UI",
-    "Roboto Flex", Roboto, "Noto Sans", Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue";
+  --bew-fonts-basic: -apple-system, BlinkMacSystemFont, Inter, "Segoe UI Variable", "Segoe UI", "Roboto Flex", Roboto,
+    "Noto Sans", Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue";
   --bew-fonts-fallback: system-ui, Arial, sans-serif;
 
   --bew-fonts-english: var(--bew-fonts-basic), var(--bew-fonts-fallback);
