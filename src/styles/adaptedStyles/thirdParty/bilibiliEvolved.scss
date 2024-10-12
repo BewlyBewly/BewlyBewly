@@ -41,5 +41,26 @@
         background-color: var(--bew-content-solid-hover);
       }
     }
+
+    .widgets-panel,
+    .settings-panel-popup .settings-panel,
+    .settings-panel-popup .settings-panel .settings-panel-content .main .component-list .settings-panel-search-bar,
+    .settings-panel-content .sidebar > * .settings-panel-sub-page,
+    .be-button.light {
+      background-color: var(--bew-bg);
+    }
+
+    .settings-panel-popup .settings-panel .settings-panel-header,
+    .widgets-panel,
+    .be-icon {
+      color: var(--bew-text-1);
+      fill: var(--bew-text-1);
+    }
+
+    .component-settings .display-name,
+    .settings-panel-content .sidebar > * .settings-panel-sub-page,
+    .be-button .content-container {
+      color: var(--bew-text-1);
+    }
   }
 }
