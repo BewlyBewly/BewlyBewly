@@ -78,9 +78,11 @@ const contextMenuRef = ref<HTMLDivElement | null>(null)
 
 const selectedDislikeOpt = ref<{ dislikeReasonId: number }>()
 
+const videoCurrentTime = ref<number | null>(null)
+
 function getCurrentVideoUrl(video: Video) {
   const baseUrl = `https://www.bilibili.com/video/${video.bvid ?? `av${video.aid}`}`
-  const currentTime = getCurrentTime()
+  const currentTime = videoCurrentTime.value
   return currentTime && currentTime > 5 ? `${baseUrl}/?t=${currentTime}` : baseUrl
 }
 
@@ -200,6 +202,8 @@ function handelMouseLeave() {
 }
 
 function handleClick(event: MouseEvent) {
+  videoCurrentTime.value = getCurrentTime()
+
   if (settings.value.videoCardLinkOpenMode === 'drawer' && videoUrl.value) {
     event.preventDefault()
 
@@ -283,7 +287,6 @@ function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
           @mouseenter="handleMouseEnter"
           @mouseleave="handelMouseLeave"
           @click="handleClick"
-          @click.right.prevent="handleMoreBtnClick"
         >
           <!-- Cover -->
           <div

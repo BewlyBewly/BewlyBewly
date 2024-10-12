@@ -33,6 +33,7 @@
       &::after {
         background: url(https://s1.hdslb.com/bfs/static/blive/blfe-message-web/static/img/dark_bg.e136e3d5.png)
           bottom/cover no-repeat fixed;
+        opacity: 0.2;
       }
     }
   }
@@ -189,7 +190,8 @@
   // #endregion
 
   // #region dark mode adaption part
-  &.dark {
+  &.dark,
+  &.bili_dark {
     .space-left {
       .title,
       .item a {
