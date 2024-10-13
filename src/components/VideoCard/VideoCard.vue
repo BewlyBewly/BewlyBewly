@@ -4,11 +4,11 @@ import type { CSSProperties } from 'vue'
 import { useToast } from 'vue-toastification'
 
 import Button from '~/components/Button.vue'
-import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { accessKey, settings } from '~/logic'
 import type { ThreePointV2 } from '~/models/video/appForYou'
 import type { VideoPreviewResult } from '~/models/video/videoPreview'
+import api from '~/utils/api'
 import { getTvSign, TVAppKey } from '~/utils/authProvider'
 import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils/dataFormatter'
 import { getCSRF, removeHttpFromUrl } from '~/utils/main'
@@ -67,7 +67,6 @@ export interface Video {
 
 const toast = useToast()
 const { mainAppRef, openIframeDrawer } = useBewlyApp()
-const api = useApiClient()
 const showVideoOptions = ref<boolean>(false)
 const videoOptionsFloatingStyles = ref<CSSProperties>({})
 // Whether the user has marked it as disliked

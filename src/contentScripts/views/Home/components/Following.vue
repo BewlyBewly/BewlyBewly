@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
 
-import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import type { GridLayout } from '~/logic'
 import type { DataItem as MomentItem, MomentResult } from '~/models/moment/moment'
+import api from '~/utils/api'
 
 // https://github.com/starknt/BewlyBewly/blob/fad999c2e482095dc3840bb291af53d15ff44130/src/contentScripts/views/Home/components/ForYou.vue#L16
 interface VideoElement {
@@ -28,8 +28,6 @@ const gridValue = computed((): string => {
     return '~ cols-1 xl:cols-2 gap-4'
   return '~ cols-1 gap-4'
 })
-
-const api = useApiClient()
 
 const videoList = ref<VideoElement[]>([])
 const isLoading = ref<boolean>(false)

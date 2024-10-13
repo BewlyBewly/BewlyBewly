@@ -48,6 +48,4 @@ export class APIClient {
 
 const api = new APIClient()
 
-export function useApiClient() {
-  return api
-}
+export default api

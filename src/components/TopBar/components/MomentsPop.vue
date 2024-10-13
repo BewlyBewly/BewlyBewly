@@ -6,9 +6,9 @@ import { useI18n } from 'vue-i18n'
 import Empty from '~/components/Empty.vue'
 import Loading from '~/components/Loading.vue'
 import Tooltip from '~/components/Tooltip.vue'
-import { useApiClient } from '~/composables/api'
 import type { TopBarLiveMomentResult } from '~/models/moment/topBarLiveMoment'
 import type { TopBarMomentResult } from '~/models/moment/topBarMoment'
+import api from '~/utils/api'
 import { getCSRF, scrollToTop } from '~/utils/main'
 
 import ALink from './ALink.vue'
@@ -28,7 +28,6 @@ interface MomentCard {
 }
 
 const { t } = useI18n()
-const api = useApiClient()
 
 const moments = reactive<MomentCard[]>([])
 const addedWatchLaterList = reactive<number[]>([])

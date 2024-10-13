@@ -2,7 +2,7 @@
 import DOMPurify from 'dompurify'
 import { useI18n } from 'vue-i18n'
 
-import { useApiClient } from '~/composables/api'
+import api from '~/utils/api'
 import { revokeAccessKey } from '~/utils/authProvider'
 import { numFormatter } from '~/utils/dataFormatter'
 import { LV0_ICON, LV1_ICON, LV2_ICON, LV3_ICON, LV4_ICON, LV5_ICON, LV6_ICON, LV6_LIGHTNING_ICON } from '~/utils/lvIcons'
@@ -16,7 +16,6 @@ const props = defineProps<{
 }>()
 
 const { t } = useI18n()
-const api = useApiClient()
 
 const mid = computed(() => {
   return getUserID()
