@@ -1,6 +1,6 @@
 import browser from 'webextension-polyfill'
 
-import { setupApiMsgLstnrs } from './messageListeners/apis'
+import { setupApiMsgLstnrs } from './messageListeners/api'
 import { setupTabMsgLstnrs } from './messageListeners/tab'
 
 browser.runtime.onInstalled.addListener((): void => {
