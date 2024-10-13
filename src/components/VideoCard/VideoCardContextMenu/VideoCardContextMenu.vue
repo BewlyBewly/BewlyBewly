@@ -4,6 +4,7 @@ import type { CSSProperties } from 'vue'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { settings } from '~/logic'
 import { Type as ThreePointV2Type } from '~/models/video/appForYou'
+import { openLinkInBackground } from '~/utils/tab'
 
 import type { Video } from '../VideoCard.vue'
 import DislikeDialog from './components/DislikeDialog.vue'
@@ -30,27 +31,27 @@ const showPipWindow = ref<boolean>(false)
 const { openIframeDrawer } = useBewlyApp()
 
 enum VideoOption {
-  OpenInNewTab,
-  OpenInCurrentTab,
+  OpenLinkInNewTab,
+  OpenLinkInCurrentTab,
   // OpenInBackground,
-  OpenInNewWindow,
-  OpenInDrawer,
+  OpenLinkInNewWindow,
+  OpenLinkInDrawer,
   ViewTheOriginalCover,
 }
 
 const commonOptions = computed((): { command: VideoOption, name: string, icon: string, color?: string }[][] => {
   return [
-    // [
-    //   { command: VideoOption.OpenInNewTab, name: 'Open in new tab', icon: 'i-solar:square-top-down-bold-duotone' },
-    //   { command: VideoOption.OpenInCurrentTab, name: 'Open in current tab', icon: 'i-solar:square-top-down-bold-duotone' },
-    //   // { command: VideoOption.OpenInBackground, name: 'Open in background', icon: 'i-solar:square-top-down-bold-duotone' },
-    //   { command: VideoOption.OpenInNewWindow, name: 'Open in new window', icon: 'i-solar:maximize-square-3-bold-duotone' },
-    //   { command: VideoOption.OpenInDrawer, name: 'Open in drawer', icon: 'i-solar:archive-up-minimlistic-bold-duotone' },
-    // ],
+    [
+      { command: VideoOption.OpenLinkInNewTab, name: 'Open Link in New Tab', icon: 'i-solar:square-top-down-bold-duotone' },
+      { command: VideoOption.OpenLinkInCurrentTab, name: 'Open Link in Current Tab', icon: 'i-solar:square-top-down-bold-duotone' },
+      // { command: VideoOption.OpenInBackground, name: 'Open in background', icon: 'i-solar:square-top-down-bold-duotone' },
+      { command: VideoOption.OpenLinkInNewWindow, name: 'Open Link in New Window', icon: 'i-solar:maximize-square-3-bold-duotone' },
+      { command: VideoOption.OpenLinkInDrawer, name: 'Open Link in Drawer', icon: 'i-solar:archive-up-minimlistic-bold-duotone' },
+    ],
 
-    // [
-    //   { command: VideoOption.ViewTheOriginalCover, name: 'View the original cover', icon: 'i-solar:gallery-minimalistic-bold-duotone' },
-    // ],
+    [
+      { command: VideoOption.ViewTheOriginalCover, name: 'View the original cover', icon: 'i-solar:gallery-minimalistic-bold-duotone' },
+    ],
   ]
 })
 
@@ -74,11 +75,16 @@ function handleAppMoreCommand(command: ThreePointV2Type) {
 
 function handleCommonCommand(command: VideoOption) {
   switch (command) {
-    case VideoOption.OpenInNewTab:
-      window.open(props.video.url, '_blank')
+    case VideoOption.OpenLinkInNewTab:
+      openLinkInBackground(props.video.url!)
+      // // Focus back on the original tab
+      // if (newTab) {
+      //   newTab.blur() // Remove focus from the new tab
+      //   window.focus() // Bring focus back to the current tab
+      // }
       handleClose()
       break
-    case VideoOption.OpenInCurrentTab:
+    case VideoOption.OpenLinkInCurrentTab:
       window.open(props.video.url, '_self')
       handleClose()
       break
@@ -87,10 +93,10 @@ function handleCommonCommand(command: VideoOption) {
     //   window.open(props.video.url, '_blank', 'background')
     //   handleClose()
     //   break
-    case VideoOption.OpenInNewWindow:
+    case VideoOption.OpenLinkInNewWindow:
       showPipWindow.value = true
       break
-    case VideoOption.OpenInDrawer:
+    case VideoOption.OpenLinkInDrawer:
       openIframeDrawer(props.video.url || '')
       handleClose()
       break

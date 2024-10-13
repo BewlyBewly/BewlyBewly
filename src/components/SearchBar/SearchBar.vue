@@ -2,7 +2,7 @@
 import { onKeyStroke, useDebounceFn } from '@vueuse/core'
 import DOMPurify from 'dompurify'
 
-import { useApiClient } from '~/composables/api'
+import api from '~/utils/api'
 import { findLeafActiveElement } from '~/utils/element'
 
 import type { HistoryItem, SuggestionItem, SuggestionResponse } from './searchHistoryProvider'
@@ -19,7 +19,6 @@ defineProps<{
   focusedCharacter?: string
 }>()
 
-const api = useApiClient()
 const keywordRef = ref<HTMLInputElement>()
 const isFocus = ref<boolean>(false)
 const keyword = ref<string>('')

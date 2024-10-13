@@ -2,15 +2,14 @@
 import { useDateFormat } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 
-import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { settings } from '~/logic'
 import type { List as VideoItem, WatchLaterResult } from '~/models/video/watchLater'
+import api from '~/utils/api'
 import { calcCurrentTime } from '~/utils/dataFormatter'
 import { getCSRF, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
 
 const { t } = useI18n()
-const api = useApiClient()
 const { openIframeDrawer } = useBewlyApp()
 
 const isLoading = ref<boolean>()
