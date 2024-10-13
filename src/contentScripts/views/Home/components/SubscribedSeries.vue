@@ -191,6 +191,7 @@ defineExpose({ initData })
         v-for="video in videoList"
         :key="video.uniqueId"
         :skeleton="!video.item"
+        type="bangumi"
         :video="video.item ? {
           id: video.item.modules.module_author.mid,
           title: `${video.item.modules.module_dynamic.major.pgc?.title}`,

@@ -262,8 +262,10 @@ settings:
     重置设置？
     该操作无法撤销。你确定要重置你的设置吗？
   contributors: 贡献者
+
 auth:
   auth_access_key_first: 在这之前请先授权 BewlyBewly 使用 access key
+
 topbar:
   sign_in: 登录
   notifications: 通知
@@ -348,6 +350,7 @@ topbar:
     sticker: 上传贴纸
     video: 上传视频
     manager: 投稿管理
+
 dock:
   search: 搜索
   home: 首页
@@ -358,21 +361,40 @@ dock:
   dark_mode: 暗色模式
   light_mode: 亮色模式
   settings: 设置
-home:
-  not_interested: 不感兴趣
-  not_interested_desc: 你可以使用 <kbd>↑</kbd> 和 <kbd>↓</kbd> 来选择原因，或者直接使用数字键选择原因，按 <kbd>Enter</kbd> 就直接提交。
-  tell_us_why: 为什么这么做...
+
+video_card:
+  operation:
+    not_interested: 不感兴趣
+    open_in_background: 后台打开
+    open_in_new_window: 新标签页打开
+    open_in_current_tab: 当前标签页打开
+    open_in_drawer: 抽屉打开
+
+    copy_video_link: 复制视频链接
+    copy_bv_number: 复制 BV 号
+    copy_av_number: 复制 AV 号
+
+    view_the_original_cover: 查看封面
+    view_this_user_channel: 查看该用户频道
+
   video_removed: 视频已移除
+
+home:
+  tell_us_why: 为什么这么做...
+  not_interested_desc: 你可以使用 <kbd>↑</kbd> 和 <kbd>↓</kbd> 来选择原因，或者直接使用数字键选择原因，按 <kbd>Enter</kbd> 就直接提交。
+
   for_you: 个性推荐
   following: 正在关注
   trending: 热门视频
   ranking: 排行
   subscribed_series: 订阅剧集
+
 ranking:
   all: 全部
   chinese_anime_related: 中国动画相关
   original_content: 原创内容
   debut_work: 新人作品
+
 anime:
   total_episodes: 全 {ep} 话
   update_to_n_episodes: 更新至 {ep} 话
@@ -391,6 +413,7 @@ anime:
       fri: 周五
       sat: 周六
       sun: 周日
+
 history:
   clear_all_watch_history: 清除所有观看历史
   clear_all_watch_history_confirm: |-
@@ -406,11 +429,13 @@ history:
   turn_on_watch_history_confirm: |-
     要开启观看历史吗？
     你确定要开启观看历史吗？
+
 favorites:
   unfavorite: 取消收藏
   unfavorite_confirm: |-
     要取消收藏选中的视频吗？
     该操作无法撤销，你确定要取消收藏选中的视频吗？
+
 watch_later:
   title: 稍后再看
   clear_all: 清空稍后再看
@@ -421,6 +446,7 @@ watch_later:
   remove_watched_videos_confirm: |-
     要清除已观看的视频吗？
     该操作无法撤销，你确定要清除已观看的视频吗？
+
 search_bar:
   history_title: 搜索历史
   clear_history: 清空搜索历史

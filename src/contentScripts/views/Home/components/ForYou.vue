@@ -344,6 +344,7 @@ defineExpose({ initData })
           v-for="video in videoList"
           :key="video.uniqueId"
           :skeleton="!video.item"
+          type="rcmd"
           :video="video.item ? {
             id: video.item.id,
             duration: video.item.duration,
@@ -370,7 +371,7 @@ defineExpose({ initData })
           :key="video.uniqueId"
           ref="videoCardRef"
           :skeleton="!video.item"
-          :is-app="true"
+          type="appRcmd"
           :video="video.item ? {
             id: video.item.args.aid ?? 0,
             durationStr: video.item.cover_right_text,
