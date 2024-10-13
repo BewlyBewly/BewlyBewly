@@ -14,6 +14,25 @@
     fill: var(--bew-text-1) !important;
   }
 
+  // Bilibili Evolved 设置面板
+  .be-about-page-content .script-meta-info .meta-info-version,
+  .component-description a,
+  .component-description a:hover {
+    color: var(--bew-theme-color);
+  }
+
+  .be-switch-box.checked .bar {
+    background-color: var(--bew-theme-color-50);
+  }
+
+  .be-button.primary {
+    background-color: var(--bew-theme-color-80) !important;
+  }
+
+  .be-switch-box.checked .bar .thumb {
+    background-color: var(--bew-theme-color);
+  }
+
   &.dark {
     // Bilibili Evolved's top bar
     .custom-navbar.blur:not(.transparent, .fill) {
@@ -42,25 +61,59 @@
       }
     }
 
+    // Bilibili Evolved 设置面板
     .widgets-panel,
     .settings-panel-popup .settings-panel,
     .settings-panel-popup .settings-panel .settings-panel-content .main .component-list .settings-panel-search-bar,
     .settings-panel-content .sidebar > * .settings-panel-sub-page,
-    .be-button.light {
+    .be-button.light,
+    .online-registry,
+    .be-dropdown,
+    .be-dropdown .selected-item,
+    .be-dropdown .selected,
+    .be-dropdown .dropdown-popup .bex-dropdown-item,
+    .component-detail,
+    .manage-panel .batch-add-popup,
+    .toast-card {
       background-color: var(--bew-bg);
     }
 
     .settings-panel-popup .settings-panel .settings-panel-header,
     .widgets-panel,
-    .be-icon {
+    .be-icon,
+    .settings-panel-content .sidebar > * .component-tags-item {
       color: var(--bew-text-1);
       fill: var(--bew-text-1);
     }
 
     .component-settings .display-name,
     .settings-panel-content .sidebar > * .settings-panel-sub-page,
-    .be-button .content-container {
+    .be-button .content-container,
+    .online-registry,
+    .be-dropdown .selected-item,
+    .be-dropdown .dropdown-popup .bex-dropdown-item,
+    .component-detail,
+    .component-detail-tags .tag,
+    .manage-panel .batch-add-popup,
+    .toast-card-title,
+    .toast-card-message {
       color: var(--bew-text-1);
+    }
+
+    .be-textbox input,
+    .be-textbox input[type="text"],
+    .be-text-area textarea,
+    .component-detail-internal-data .internal-name,
+    .be-about-page-content .script-meta-info .meta-info-description {
+      color: var(--bew-text-2);
+    }
+
+    .be-button:not(.disabled).light:hover,
+    .be-button:not(.disabled):hover,
+    .component-detail-tags .tag,
+    .settings-panel-content .sidebar > * .icon-list:hover ~ .component-tags,
+    .settings-panel-content .sidebar > * .component-tags:hover {
+      background-color: #83839124;
     }
   }
 }
