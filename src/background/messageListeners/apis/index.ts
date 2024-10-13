@@ -36,7 +36,7 @@ const FullAPI = Object.assign({}, ...API_COLLECTION)
 // Create a message listener for each API
 const handleMessage = apiListenerFactory(FullAPI)
 
-export function setupAllMsgLstnrs() {
+export function setupApiMsgLstnrs() {
   browser.runtime.onConnect.removeListener(handleConnect)
   browser.runtime.onConnect.addListener(handleConnect)
 }

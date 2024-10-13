@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
-import browser from 'webextension-polyfill'
 
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { settings } from '~/logic'
 import { Type as ThreePointV2Type } from '~/models/video/appForYou'
+import { openLinkInBackground } from '~/utils/tab'
 
 import type { Video } from '../VideoCard.vue'
 import DislikeDialog from './components/DislikeDialog.vue'
@@ -76,10 +76,7 @@ function handleAppMoreCommand(command: ThreePointV2Type) {
 function handleCommonCommand(command: VideoOption) {
   switch (command) {
     case VideoOption.OpenLinkInNewTab:
-      browser.tabs.create({
-        url: props.video.url || '',
-        active: false,
-      })
+      openLinkInBackground(props.video.url!)
       // // Focus back on the original tab
       // if (newTab) {
       //   newTab.blur() // Remove focus from the new tab

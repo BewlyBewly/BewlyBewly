@@ -1,15 +1,26 @@
-// import browser from 'webextension-polyfill'
+import browser from 'webextension-polyfill'
 
-// interface Message {
-//   contentScriptQuery: string
-//   [key: string]: any
-// }
+interface Message {
+  contentScriptQuery: string
+  [key: string]: any
+}
 
-// browser.runtime.onMessage.addListener((message: Message, sender?: any, sendResponse?: Function) => {
-//   if (message.contentScriptQuery === 'openLinkInNewTab') {
-//     browser.tabs.create({ url: message.url, active: false }, (newTab) => {
-//       console.log(`New tab created: ${newTab.id}`)
-//       sendResponse({ message: 'Tab opened successfully!' })
-//     })
-//   }
-// })
+export enum TAB_MESSAGE {
+  OPEN_LINK_IN_BACKGROUND = 'openLinkInBackground',
+}
+
+function handleMessage(message: Message) {
+  if (message.contentScriptQuery === TAB_MESSAGE.OPEN_LINK_IN_BACKGROUND) {
+    return browser.tabs.create({ url: message.url, active: false })
+  }
+}
+
+export function setupTabMsgLstnrs() {
+  browser.runtime.onMessage.removeListener(handleConnect)
+  browser.runtime.onMessage.addListener(handleConnect)
+}
+
+function handleConnect() {
+  browser.runtime.onMessage.removeListener(handleMessage)
+  browser.runtime.onMessage.addListener(handleMessage)
+}
