@@ -2,12 +2,12 @@
 import { onClickOutside, useMouseInElement } from '@vueuse/core'
 import type { Ref, UnwrapNestedRefs } from 'vue'
 
-import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { useDelayedHover } from '~/composables/useDelayedHover'
 import { OVERLAY_SCROLL_BAR_SCROLL, TOP_BAR_VISIBILITY_CHANGE } from '~/constants/globalEvents'
 import { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
+import api from '~/utils/api'
 import { getUserID, isHomePage } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
@@ -42,8 +42,6 @@ const userInfo = reactive<UserInfo | NonNullable<unknown>>({}) as UnwrapNestedRe
 const hideTopBar = ref<boolean>(false)
 const headerTarget = ref(null)
 const { isOutside: isOutsideTopBar } = useMouseInElement(headerTarget)
-
-const api = useApiClient()
 
 // initially, assume the user is logged in cuz data retrieval is slow, which may show the login
 // button even after login. if the user is not logged in, the login button will show up later

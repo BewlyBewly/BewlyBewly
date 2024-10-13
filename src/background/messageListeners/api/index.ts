@@ -1,6 +1,6 @@
 import browser from 'webextension-polyfill'
 
-import { apiListenerFactory } from '../utils'
+import { apiListenerFactory } from '../../utils'
 import API_ANIME from './anime'
 import API_AUTH from './auth'
 import API_FAVORITE from './favorite'
@@ -36,7 +36,7 @@ const FullAPI = Object.assign({}, ...API_COLLECTION)
 // Create a message listener for each API
 const handleMessage = apiListenerFactory(FullAPI)
 
-export function setupAllMsgLstnrs() {
+export function setupApiMsgLstnrs() {
   browser.runtime.onConnect.removeListener(handleConnect)
   browser.runtime.onConnect.addListener(handleConnect)
 }

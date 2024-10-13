@@ -2,17 +2,16 @@
 import { useI18n } from 'vue-i18n'
 
 import type { FavoriteCategory, FavoriteResource } from '~/components/TopBar/types'
-import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { TOP_BAR_VISIBILITY_CHANGE } from '~/constants/globalEvents'
 import { settings } from '~/logic'
 import type { FavoritesResult, Media as FavoriteItem } from '~/models/video/favorite'
 import type { FavoritesCategoryResult, List as CategoryItem } from '~/models/video/favoriteCategory'
+import api from '~/utils/api'
 import { getCSRF, getUserID, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
 const { t } = useI18n()
-const api = useApiClient()
 
 const favoriteCategories = reactive<CategoryItem[]>([])
 const favoriteResources = reactive<FavoriteItem[]>([])

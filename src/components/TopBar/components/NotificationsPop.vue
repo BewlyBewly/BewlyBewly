@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 
-import { useApiClient } from '~/composables/api'
+import api from '~/utils/api'
 
 import ALink from './ALink.vue'
 
 const { t } = useI18n()
-const api = useApiClient()
 const list = ref<{ name: string, url: string, unreadCount: number, icon: string }[]>([
   {
     name: t('topbar.noti_dropdown.replys'),

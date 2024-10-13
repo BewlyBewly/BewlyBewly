@@ -131,6 +131,14 @@ img {
         0 -1.4px 0 0 var(--bew-fill-2);
     }
   }
+
+  a.link {
+    color: var(--bew-theme-color);
+
+    &:hover {
+      color: var(--bew-theme-color-80);
+    }
+  }
 }
 
 // Prevent the scrollbar from being covered by the other elements

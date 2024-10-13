@@ -1,5 +1,5 @@
-import type { APIMAP } from '../utils'
-import { AHS } from '../utils'
+import type { APIMAP } from '../../utils'
+import { AHS } from '../../utils'
 
 const API_NOTIFICATION = {
   getUnreadMsg: {

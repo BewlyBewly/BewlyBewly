@@ -2,7 +2,6 @@
 import { onKeyStroke } from '@vueuse/core'
 import type { Ref } from 'vue'
 
-import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { FilterType, useFilter } from '~/composables/useFilter'
 import { LanguageType } from '~/enums/appEnums'
@@ -11,6 +10,7 @@ import { accessKey, settings } from '~/logic'
 import type { AppForYouResult, Item as AppVideoItem } from '~/models/video/appForYou'
 import { Type as ThreePointV2Type } from '~/models/video/appForYou'
 import type { forYouResult, Item as VideoItem } from '~/models/video/forYou'
+import api from '~/utils/api'
 import { TVAppKey } from '~/utils/authProvider'
 import { isVerticalVideo } from '~/utils/uriParse'
 
@@ -53,7 +53,6 @@ const gridValue = computed((): string => {
   return '~ cols-1 gap-4'
 })
 
-const api = useApiClient()
 const videoList = ref<VideoElement[]>([])
 const appVideoList = ref<AppVideoElement[]>([])
 const isLoading = ref<boolean>(false)
