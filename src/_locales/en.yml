@@ -368,6 +368,7 @@ dock:
 video_card:
   operation:
     not_interested: Not Interested
+    open_in_new_tab: Open in New Tab
     open_in_background: Open In Background
     open_in_new_window: Open in New Window
     open_in_current_tab: Open in Current Tab

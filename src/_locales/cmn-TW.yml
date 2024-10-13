@@ -366,8 +366,9 @@ dock:
 video_card:
   operation:
     not_interested: 不感興趣
+    open_in_new_tab: 新標籤頁開啟
     open_in_background: 後台開啟
-    open_in_new_window: 新索引標籤開啟
+    open_in_new_window: 新視窗開啟
     open_in_current_tab: 目前索引標籤開啟
     open_in_drawer: 抽屜開啟
 

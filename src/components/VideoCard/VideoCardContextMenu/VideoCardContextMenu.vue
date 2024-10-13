@@ -33,7 +33,7 @@ const showPipWindow = ref<boolean>(false)
 const { openIframeDrawer } = useBewlyApp()
 
 enum VideoOption {
-  // OpenInNewTab,
+  OpenInNewTab,
   OpenInBackground,
   OpenInCurrentTab,
   OpenInNewWindow,
@@ -50,7 +50,7 @@ enum VideoOption {
 const commonOptions = computed((): { command: VideoOption, name: string, icon: string, color?: string }[][] => {
   let result = [
     [
-      // { command: VideoOption.OpenInNewTab, name: 'Open in New Tab', icon: 'i-solar:square-top-down-bold-duotone' },
+      { command: VideoOption.OpenInNewTab, name: t('video_card.operation.open_in_new_tab'), icon: 'i-solar:square-top-down-bold-duotone' },
       { command: VideoOption.OpenInBackground, name: t('video_card.operation.open_in_background'), icon: 'i-solar:square-top-down-bold-duotone' },
       { command: VideoOption.OpenInNewWindow, name: t('video_card.operation.open_in_new_window'), icon: 'i-solar:maximize-square-3-bold-duotone' },
       { command: VideoOption.OpenInCurrentTab, name: t('video_card.operation.open_in_current_tab'), icon: 'i-solar:square-top-down-bold-duotone' },
@@ -59,13 +59,13 @@ const commonOptions = computed((): { command: VideoOption, name: string, icon: s
 
     [
       { command: VideoOption.CopyVideoLink, name: t('video_card.operation.copy_video_link'), icon: 'i-solar:copy-bold-duotone' },
-      { command: VideoOption.CopyBVNumber, name: t('video_card.operation.copy_bv_number'), icon: 'i-solar:copy-bold-duotone' },
-      { command: VideoOption.CopyAVNumber, name: t('video_card.operation.copy_av_number'), icon: 'i-solar:copy-bold-duotone' },
+      // { command: VideoOption.CopyBVNumber, name: t('video_card.operation.copy_bv_number'), icon: 'i-solar:copy-bold-duotone' },
+      // { command: VideoOption.CopyAVNumber, name: t('video_card.operation.copy_av_number'), icon: 'i-solar:copy-bold-duotone' },
     ],
 
     [
       { command: VideoOption.ViewTheOriginalCover, name: t('video_card.operation.view_the_original_cover'), icon: 'i-solar:gallery-minimalistic-bold-duotone' },
-      { command: VideoOption.ViewThisUserChannel, name: t('video_card.operation.view_this_user_channel'), icon: 'i-solar:user-bold-duotone' },
+      // { command: VideoOption.ViewThisUserChannel, name: t('video_card.operation.view_this_user_channel'), icon: 'i-solar:user-bold-duotone' },
     ],
   ]
   if (getVideoType() === 'bangumi') {
@@ -123,7 +123,7 @@ function handleCommonCommand(command: VideoOption) {
       handleClose()
       break
     case VideoOption.CopyAVNumber:
-      navigator.clipboard.writeText(props.video.id.toString())
+      navigator.clipboard.writeText(`av${props.video.id.toString()}`)
       handleClose()
       break
 
