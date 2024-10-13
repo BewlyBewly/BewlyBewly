@@ -92,7 +92,7 @@ watch(() => settings.value.language, (newValue) => {
         <Radio v-model="settings.customizeFont" />
         <template v-if="settings.customizeFont" #bottom>
           <Input v-model="settings.fontFamily" @keydown.stop.passive="() => {}" />
-          <div class="customize-font-desc" text="sm $bew-text-2" mt-1 v-html="t('settings.customize_font_desc')" />
+          <div text="sm $bew-text-2" mt-1 v-html="t('settings.customize_font_desc')" />
         </template>
       </SettingsItem>
       <SettingsItem :title="$t('settings.remove_the_indent_from_chinese_punctuation')" :desc="$t('settings.remove_the_indent_from_chinese_punctuation_desc')">
@@ -148,9 +148,4 @@ watch(() => settings.value.language, (newValue) => {
 </template>
 
 <style lang="scss" scoped>
-:deep(.customize-font-desc) {
-  a {
-    --uno: "text-$bew-theme-color hover:text-$bew-theme-color-80";
-  }
-}
 </style>
