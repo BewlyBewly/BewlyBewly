@@ -19,13 +19,15 @@ import VideoCardSkeleton from './VideoCardSkeleton.vue'
 
 const props = withDefaults(defineProps<Props>(), {
   showWatcherLater: true,
+  type: 'common',
+  moreBtn: true,
 })
 
 interface Props {
   skeleton?: boolean
   video?: Video
-  /** 是否爲app端推介，用於調用不同取消不感興趣方法 */
-  isApp?: boolean
+  /** rcmd: recommend video; appRcmd: app recommend video; bangumi: bangumi video; common: common video */
+  type: 'rcmd' | 'appRcmd' | 'bangumi' | 'common'
   showWatcherLater?: boolean
   horizontal?: boolean
   showPreview?: boolean
@@ -222,7 +224,7 @@ function handleMoreBtnClick(event: MouseEvent) {
 }
 
 function handleUndo() {
-  if (props.isApp) {
+  if (props.type === 'appRcmd') {
     const params = {
       access_key: accessKey.value,
       goto: props.video?.goto,
@@ -257,6 +259,8 @@ function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
   selectedDislikeOpt.value = selectedOpt
   removed.value = true
 }
+
+provide('getVideoType', () => props.type!)
 </script>
 
 <template>
@@ -310,7 +314,7 @@ function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
               bg="$bew-fill-4" backdrop-blur-20px mix-blend-luminosity rounded="$bew-radius" z-2
             >
               <p mb-2 color-white text-lg>
-                {{ $t('home.video_removed') }}
+                {{ $t('video_card.video_removed') }}
               </p>
               <Button
                 color="rgba(255,255,255,.35)" text-color="white" size="small"

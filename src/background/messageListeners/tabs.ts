@@ -5,12 +5,12 @@ interface Message {
   [key: string]: any
 }
 
-export enum TAB_MESSAGE {
+export enum TABS_MESSAGE {
   OPEN_LINK_IN_BACKGROUND = 'openLinkInBackground',
 }
 
 function handleMessage(message: Message) {
-  if (message.contentScriptQuery === TAB_MESSAGE.OPEN_LINK_IN_BACKGROUND) {
+  if (message.contentScriptQuery === TABS_MESSAGE.OPEN_LINK_IN_BACKGROUND) {
     return browser.tabs.create({ url: message.url, active: false })
   }
 }

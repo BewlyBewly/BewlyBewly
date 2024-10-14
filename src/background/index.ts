@@ -1,7 +1,7 @@
 import browser from 'webextension-polyfill'
 
 import { setupApiMsgLstnrs } from './messageListeners/api'
-import { setupTabMsgLstnrs } from './messageListeners/tab'
+import { setupTabMsgLstnrs } from './messageListeners/tabs'
 
 browser.runtime.onInstalled.addListener((): void => {
   // eslint-disable-next-line no-console
