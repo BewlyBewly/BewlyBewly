@@ -9,50 +9,61 @@
 
   --bew-top-bar-height: 68px;
 
-  // #region Filters
+  // #region Filters 磨砂玻璃、发光样式
   // Use this in all components (except dialogs) if you want to add a frosted glass effect
+  // 如果您想添加磨砂玻璃效果，请在所有组件（对话框除外）中使用此功能
   --bew-filter-glass-1: blur(20px) saturate(180%);
 
   // Use this in dialogs if you want to add a frosted glass effect
+  // 如果要在对话框中添加磨砂玻璃效果，请使用此功能
   --bew-filter-glass-2: blur(40px) saturate(180%);
 
   // Apply this to the Bilibili icon if it is an image with the brand's original blue or pink color
   // Change it to glow effect to matches the user's theme color
+  // 如果 Bilibili 图标是带有品牌原有蓝色或粉色的图片，则将此应用于该图标。
+  // 将其更改为与用户主题颜色相匹配的发光效果
   --bew-filter-icon-glow: saturate(0) brightness(2) drop-shadow(0 0 0.2px white)
     drop-shadow(0 0 0.5px var(--bew-theme-color)) drop-shadow(0 0 0.5px var(--bew-theme-color))
     drop-shadow(0 0 0.5px var(--bew-theme-color)) drop-shadow(0 0 2px var(--bew-theme-color-80));
   // #endregion
 
-  // #region Shadows
+  // #region Shadows 阴影
   // The shadows of the card, button, and other slightly elevated components1
+  // 卡片、按钮和其他略微隆起部件的阴影1
   --bew-shadow-1: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.04);
 
   // The shadows of the top bar, header, elevated fixed buttons/cards and other components that are in the a fixed or sticky position
+  // 顶栏、页眉、高架固定按钮/卡片和其他处于固定或粘性位置的组件的阴影
   --bew-shadow-2: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.06);
 
   // The shadows of the popover, dropdown
+  // 弹出窗口、下拉窗口的阴影
   --bew-shadow-3: 0 20px 25px -5px rgb(0 0 0 / 0.12), 0 8px 10px -6px rgb(0 0 0 / 0.08);
 
   // Only used in the dialog
+  // 仅在对话框中使用
   --bew-shadow-4: 0 34px 50px -20px rgb(0 0 0 / 0.14), 0 32px 45px -12px rgb(0 0 0 / 0.1),
     0 30px 40px -8px rgb(0 0 0 / 0.12);
 
   // Use this to imitate the frosted glass edge effect in components with a frosted glass design (except dialogs)
+  // 在采用磨砂玻璃设计的组件（对话框除外）中，使用此功能可模仿磨砂玻璃边缘效果
   --bew-shadow-edge-glow-1: inset 1px 1px 1px -0.5px rgba(255, 255, 255, 0.2),
     inset -1px -1px 1px -0.5px rgba(255, 255, 255, 0.12), inset 0 0 4px rgba(255, 255, 255, 0.4);
 
   // Use this for dialogs with the frosted glass effect
+  // 将其用于具有磨砂玻璃效果的对话框
   --bew-shadow-edge-glow-2: inset 1px 1px 1px -0.5px rgba(255, 255, 255, 0.2),
     inset -1px -1px 1px -0.5px rgba(255, 255, 255, 0.12), inset 0 0 8px rgba(255, 255, 255, 0.42);
-
   // #endregion
 
-  // #region Theme Color & Status Colors
+  // #region Theme Color & Status Colors 主题色 & 状态色
   // To add a hover effect to theme or status colors, use the `--bew-*-color` for the base color and `--bew-*-color-80` for the hover state
+  // 要为主题或状态颜色添加悬停效果，请使用 `--bew-*-color` 作为基色，并使用 `--bew-*-color-80` 作为悬停状态
 
   --bew-logo-color: var(--bew-theme-color);
 
   // In light mode use the theme color; in dark mode use white
+  // 在浅色模式下，使用主题色；在深色模式下，使用白色
   --bew-theme-color-auto: var(--bew-theme-color);
 
   --bew-theme-color: hsl(195 100% 42%);
@@ -111,26 +122,31 @@
   --bew-error-color-90: color-mix(in oklab, var(--bew-error-color), transparent 10%);
   // #endregion
 
-  // #region Text colors
+  // #region Text colors 文本颜色
   // In light mode, use black; in dark mode, use white
+  // 在浅色模式下，使用黑色；在深色模式下，使用白色
   --bew-text-auto: white;
 
   --bew-text-1: hsl(217 19% 10%);
 
   // It can also be used for the text that is followed or subscribed to
+  // 也可用于关注或订阅的文本
   --bew-text-2: hsl(215 19% 24% / 80%);
 
   --bew-text-3: hsl(215 19% 28% / 60%);
 
   // It can also be used for the text that is disabled
+  // 也可用于禁用的文本
   --bew-text-4: hsl(215 19% 36% / 40%);
   // #endregion
 
-  // #region Webpage background colors
+  // #region Webpage background colors 网页背景颜色
   // Used as a webpage background color, but not on the Bilibili homepage (www.bilibili.com)
+  // 用作网页背景色，但不用于 Bilibili 主页 (www.bilibili.com)
   --bew-bg: hsl(0 0% 100%);
 
   // Used as the background color of the Bilibili homepage (www.bilibili.com)
+  // 用作 Bilibili 主页的背景色 (www.bilibili.com)
   --bew-homepage-bg: hsl(240 31% 96%);
   --bew-homepage-bg-mask-opacity: 0;
   --bew-homepage-bg-mask: hsl(240 31% 96% / var(--bew-homepage-bg-mask-opacity));
@@ -138,11 +154,13 @@
 
   --bew-content-opacity: 0.68;
 
-  // #region Content colors, used to buttons, cards, popover and so on
+  // #region Content colors, used to buttons, cards, popover and so on 用于按钮、卡片、弹出窗口等的内容颜色
   // Variable names that don't contain `solid` are used to frosted glass effect elements
+  // 不包含 `solid` 的变量名用于磨砂玻璃效果元素
 
   // `--bew-content-*` for the flat background elements
-  // #region `--bew-content-*` background colors
+  // `--bew-content-*` 用于平面背景元素
+  // #region `--bew-content-*` background colors 背景色
   --bew-content: hsl(0 0% 100% / var(--bew-content-opacity));
   --bew-content-hover: hsl(0 0% 85% / var(--bew-content-opacity));
   --bew-content-alt: hsl(240 31% 95% / var(--bew-content-opacity));
@@ -155,7 +173,8 @@
   // #endregion
 
   // `--bew-elevated-*` for popup, dialog and difference layers with difference elevation levels
-  // #region `--bew-elevated-*` background colors
+  // `--bew-elevated-*` 用于弹出层、对话层和差值层，具有不同的高度水平
+  // #region `--bew-elevated-*` background colors 背景色
   --bew-elevated: hsl(0 0% 100% / var(--bew-content-opacity));
   --bew-elevated-hover: hsl(0 0% 85% / var(--bew-content-opacity));
   --bew-elevated-alt: var(--bew-content-alt);
@@ -168,23 +187,29 @@
   // #endregion
   // #endregion
 
-  // #region Gray semi-transparent colors
+  // #region Gray semi-transparent colors 灰色半透明色
   // You can used for buttons, input fields and the other components on the top of elements
+  // 可用于按钮、输入框和元素顶部的其他组件
   --bew-fill-1: rgb(131 131 145 / 13%);
 
   // Used this for hovering color if it within the top layer of elements,
   // not just when hovering over the element itself; otherwise, use `--bew-content-*-hover` or `--bew-elevated--hover`
+  // 如果悬停在元素的顶层，则使用此颜色、
+  // 否则，使用 `--bew-content-*-hover` 或`-bew-elevated--hover`。
   --bew-fill-2: rgb(131 131 145 / 23%);
 
   // You can used for the disabled state of elements on the top layer
+  // 您可以用它来显示顶层元素的禁用状态
   --bew-fill-3: rgb(131 131 145 / 33%);
 
   // You can use this as the frosted glass mask, such as on the right side of the "Watch Later" page panel and the "Favorites" page panel
+  // 您可以将其用作磨砂玻璃遮罩，如 “稍后观看 ”页面面板和 “收藏 ”页面面板的右侧。
   --bew-fill-4: rgb(131 131 145 / 43%);
 
   --bew-fill-alt: rgb(255 255 255 / 43%);
 
   // This color is used in skeleton screens
+  // 这种颜色用于镂空屏幕
   --bew-skeleton: var(--bew-fill-2);
   // #endregion
 
@@ -193,9 +218,9 @@
 
 :host(.dark),
 :root.dark {
-  // dark mode
+  // dark mode 深色模式
 
-  // #region shadow
+  // #region shadow 阴影
   --bew-shadow-1: 0 4px 6px -1px rgb(0 0 0 / 0.18), 0 2px 4px -2px rgb(0 0 0 / 0.14);
   --bew-shadow-2: 0 10px 15px -3px rgb(0 0 0 / 0.2), 0 4px 6px -4px rgb(0 0 0 / 0.16);
   --bew-shadow-3: 0 20px 25px -5px rgb(0 0 0 / 0.22), 0 8px 10px -6px rgb(0 0 0 / 0.18);

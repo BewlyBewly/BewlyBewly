@@ -98,8 +98,7 @@ const isTopBarFixed = computed(() => {
 })
 
 const showTopBar = computed(() => {
-  const isCreativeCenter = /https?:\/\/member.bilibili.com\/platform.*/.test(location.href)
-  if (settings.value.showTopBar && !isCreativeCenter)
+  if (settings.value.showTopBar)
     return true
   return false
 })
