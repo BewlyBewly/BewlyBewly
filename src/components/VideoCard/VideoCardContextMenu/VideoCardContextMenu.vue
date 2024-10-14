@@ -4,7 +4,7 @@ import { useI18n } from 'vue-i18n'
 
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { Type as ThreePointV2Type } from '~/models/video/appForYou'
-import { openLinkInBackground } from '~/utils/tab'
+import { openLinkInBackground } from '~/utils/tabs'
 
 import type { Video } from '../VideoCard.vue'
 import DislikeDialog from './components/DislikeDialog.vue'
