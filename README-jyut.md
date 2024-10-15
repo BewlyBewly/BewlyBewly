@@ -13,12 +13,12 @@
 
 ## 👋 介紹
 
-> [!NOTE]
+> [!IMPORTANT]
 > BewlyBewly 主要着重頁面調整同埋改善, 而唔係完善功能同提升效率
 >
 > 事關考慮到維護嘅效率同埋難度, 深色模式淨係會適應常用頁面, 一啲冇咁常用嘅頁面唔會適應調整
 
-> [!WARNING]
+> [!CAUTION]
 > 如果你單緊呢個延伸功能，你嘅瀏覽器可能會話佢可以睇到你嘅瀏覽紀錄。
 >
 > 呢個係因爲 BewlyBewly 用咗["tabs" 權限](https://developer.chrome.com/docs/extensions/reference/api/tabs)，呢個權限亦都可以用嚟讀取每個分頁，從而知道瀏覽紀錄，但係喺呢度冇用到。
@@ -34,7 +34,7 @@ BewlyBewly 係一個用於 BiliBili 嘅瀏覽器延伸功能，目的係透過�
 
 ### 線上單嘢
 
-> [!Caution]
+> [!TIP]
 > 即使你用嘅係 Edge browser，我哋都係建議你喺返 Chrome 線上應用程式商店單撈。事關喺審核速度上，Chrome 線上應用程式商店照計係快過 Edge 的附加元件好鬼死多。~~Edge Add-ons 收皮啦屌~~
 >
 > 仲有，BewlyBewly 喺 Chrome 線上應用程式商店嘅版本執啲嚴重性嘅 bug 速度係會快趣過 Edge 附加元件好多嘅 ~~Edge Add-ons 你幾時死~~

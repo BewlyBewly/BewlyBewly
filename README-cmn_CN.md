@@ -13,10 +13,18 @@
 
 ## 👋 介绍
 
-> [!NOTE]
+> [!IMPORTANT]
 > BewlyBewly 主要专注页面的调整和优化，而不是完善功能和提升效率。
 >
 > 由于效率和维护难度的原因，暗色模式只会适应常用页面，而不会适应不常用的页面。
+
+> [!CAUTION]
+> 如果您正在安装此扩展程序，您的浏览器可能会提示它可以读取您的浏览历史记录。
+>
+> 这是因为 BewlyBewly 使用了["tabs" 权限](https://developer.chrome.com/docs/extensions/reference/api/tabs)，该权限也可用于读取每个标签页，从而了解浏览历史，但在这里并未使用。
+>
+> **一些浏览器会提到最坏的情况和最高的风险，以确保您在安装后的安全。**
+> 此外，这个项目是开源的，所以您可以看到它究竟做了什么。
 
 BewlyBewly 是一个用于 BiliBili 的浏览器扩展，旨在通过重新设计 BiliBili 用户界面来提升用户体验。设计灵感来自于 YouTube、Vision OS 和 iOS，从而实现了更具视觉吸引力和用户友好性的界面。
 
@@ -26,23 +34,15 @@ BewlyBewly 是一个用于 BiliBili 的浏览器扩展，旨在通过重新设�
 
 ### 在线安装
 
-> [!Caution]
+> [!TIP]
 > 即使在 Edge 浏览器中，我们也强烈建议您使用 Chrome 应用商店进行安装。在审核速度上，Chrome > 应用商店的审核速度比 Edge 应用商店快得多。
 >
 > 此外，BewlyBewly 的 Chrome Web Store 版本将更快地解决和修复关键性错误。
 
-> [!NOTE]
+> [!IMPORTANT]
 > 如果你的电脑无法访问 Chrome Web Store，你可以尝试去 crx 搜搜下载：<https://www.crxsoso.com/webstore/detail/bbbiejemhfihiooipfcjmjmbfdmobobp>
 >
 > 但与此项目在 Chrome Web Store 是否一致且未经修改不太能保证，但是经过测试是正常的，使用时请慎重，出现后果本项目概不负责
-
-> [!WARNING]
-> 如果您正在安装此扩展程序，您的浏览器可能会提示它可以读取您的浏览历史记录。
->
-> 这是因为 BewlyBewly 使用了["tabs" 权限](https://developer.chrome.com/docs/extensions/reference/api/tabs)，该权限也可用于读取每个标签页，从而了解浏览历史，但在这里并未使用。
->
-> **一些浏览器会提到最坏的情况和最高的风险，以确保您在安装后的安全。**
-> 此外，这个项目是开源的，所以您可以看到它究竟做了什么。
 
 - Chrome: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>
 - Edge: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>

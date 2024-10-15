@@ -13,12 +13,12 @@
 
 ## 👋 介紹
 
-> [!NOTE]
+> [!IMPORTANT]
 > BewlyBewly 主要著重於頁面調整和改良，而不是完善功能和提升效率。
 >
 > 由於考慮到效率和維護困難度，深色模式只會適應常用的頁面，而較少使用的頁面則不會支護。
 
-> [!WARNING]
+> [!CAUTION]
 > 如果您正在安裝此擴充功能，您的瀏覽器可能會提示它可以讀取您的瀏覽歷史記錄。
 >
 > 這是因爲 BewlyBewly 使用了["tabs" 權限](https://developer.chrome.com/docs/extensions/reference/api/tabs)，該權限也可用於讀取每個分頁，從而瞭解瀏覽歷史，但在這裏並未使用。
@@ -34,7 +34,7 @@ BewlyBewly 是一個針對 BiliBili 的瀏覽器擴充功能，旨在透過重�
 
 ### 線上安裝
 
-> [!Caution]
+> [!TIP]
 > 即使您使用的是 Edge 瀏覽器，我們仍然強烈建議您從 Chrome 線上應用程式商店安裝。在審核速度上，Chrome 線上應用程式商店比 Edge 的附加元件快很多。
 >
 > 此外，BewlyBewly 的 Chrome Web Store 版本將更快地解決和修復關鍵性的錯誤。
