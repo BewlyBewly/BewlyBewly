@@ -125,7 +125,7 @@ watchEffect(() => {
   if (inIframe.value)
     return null
 
-  window.addEventListener('message', ({ data }) => {
+  useEventListener(window, 'message', ({ data }) => {
     switch (data) {
       case DRAWER_VIDEO_ENTER_PAGE_FULL:
         headerShow.value = false
@@ -224,9 +224,12 @@ watchEffect(() => {
         <iframe
           ref="iframeRef"
           :src="currentUrl"
+          :style="{
+            bottom: headerShow ? `var(--bew-top-bar-height)` : '0',
+          }"
           frameborder="0"
           pointer-events-auto
-          :pos="`absolute ${headerShow ? 'bottom-$bew-top-bar-height' : 'bottom-0'} left-0`"
+          pos="absolute  left-0"
           w-full h-full
         />
       </div>
