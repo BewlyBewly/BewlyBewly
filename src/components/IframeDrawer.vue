@@ -102,10 +102,13 @@ function handleOpenInNewTab() {
 
 const isEscPressed = ref<boolean>(false)
 const escPressedTimer = ref<NodeJS.Timeout | null>(null)
+const disableEscPress = ref<boolean>(false)
 
 nextTick(() => {
   onKeyStroke('Escape', (e: KeyboardEvent) => {
     e.preventDefault()
+    if (disableEscPress.value)
+      return
     if (isEscPressed.value) {
       handleClose()
     }
@@ -129,9 +132,11 @@ watchEffect(() => {
     switch (data) {
       case DRAWER_VIDEO_ENTER_PAGE_FULL:
         headerShow.value = false
+        disableEscPress.value = true
         break
       case DRAWER_VIDEO_EXIT_PAGE_FULL:
         headerShow.value = true
+        disableEscPress.value = false
         break
     }
   })
