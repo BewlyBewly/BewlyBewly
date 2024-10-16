@@ -255,3 +255,22 @@ export function compareVersions(version1: string, version2: string): number {
 
   return 0 // Versions are equal
 }
+
+export function queryDomUntilFound(selector: string, timeout = 500, abort?: AbortController): Promise<HTMLElement | null> {
+  return new Promise((resolve) => {
+    const interval = setInterval(() => {
+      const element = document.querySelector(selector)
+      if (element) {
+        clearInterval(interval)
+        resolve(element as HTMLElement)
+      }
+    }, timeout)
+
+    if (abort) {
+      abort.signal.addEventListener('abort', () => {
+        clearInterval(interval)
+        resolve(null)
+      })
+    }
+  })
+}
