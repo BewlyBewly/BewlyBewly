@@ -60,6 +60,7 @@ function getAllWatchLaterList() {
     of="hidden"
     shadow="[var(--bew-shadow-edge-glow-1),var(--bew-shadow-3)]"
     border="1 $bew-border-color"
+    flex="~ col"
   >
     <!-- top bar -->
     <header
@@ -67,7 +68,6 @@ function getAllWatchLaterList() {
       flex="~"
       justify="between"
       p="y-4 x-6"
-      pos="fixed top-0 left-0"
       w="full"
       bg="$bew-elevated"
       z="2"
@@ -121,11 +121,6 @@ function getAllWatchLaterList() {
         />
 
         <!-- watchlater -->
-
-        <!-- Use a transparent `div` instead of `margin-top` to prevent the list item bouncing problem -->
-        <!-- https://github.com/BewlyBewly/BewlyBewly/pull/889#issue-2394127922 -->
-        <div v-if="!isLoading && watchLaterList.length > 0" min-h="50px" />
-
         <TransitionGroup name="list">
           <ALink
             v-for="item in watchLaterList"
