@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onKeyStroke, useEventListener } from '@vueuse/core'
 
-import { DRAWER_VIDEO_ENTER_PAGE_FULL, DRAWER_VIDEO_EXIT_PAGE_FULL } from '~/constants/globalEvents'
+import { DRAWER_HISTORY_CHANGED, DRAWER_VIDEO_ENTER_PAGE_FULL, DRAWER_VIDEO_EXIT_PAGE_FULL } from '~/constants/globalEvents'
 import { isHomePage } from '~/utils/main'
 
 // TODO: support shortcuts like `Ctrl+Alt+T` to open in new tab, `Esc` to close
@@ -97,7 +97,7 @@ async function releaseIframeResources() {
 }
 
 function handleOpenInNewTab() {
-  window.open(props.url, '_blank')
+  window.open(iframeRef.value?.contentWindow?.location.href || props.url, '_blank')
 }
 
 const isEscPressed = ref<boolean>(false)
@@ -137,6 +137,11 @@ watchEffect(() => {
       case DRAWER_VIDEO_EXIT_PAGE_FULL:
         headerShow.value = true
         disableEscPress.value = false
+        break
+      case DRAWER_HISTORY_CHANGED:
+        if (iframeRef.value?.contentWindow) {
+          history.pushState(null, '', iframeRef.value.contentWindow.location.href)
+        }
         break
     }
   })
