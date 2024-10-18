@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { useThrottleFn, useToggle } from '@vueuse/core'
+import { useEventListener, useThrottleFn, useToggle } from '@vueuse/core'
 import type { Ref } from 'vue'
 
 import type { BewlyAppProvider } from '~/composables/useAppProvider'
 import { useDark } from '~/composables/useDark'
-import { BEWLY_MOUNTED, DRAWER_VIDEO_ENTER_PAGE_FULL, DRAWER_VIDEO_EXIT_PAGE_FULL, OVERLAY_SCROLL_BAR_SCROLL } from '~/constants/globalEvents'
+import { BEWLY_MOUNTED, DRAWER_HISTORY_CHANGED, DRAWER_VIDEO_ENTER_PAGE_FULL, DRAWER_VIDEO_EXIT_PAGE_FULL, OVERLAY_SCROLL_BAR_SCROLL } from '~/constants/globalEvents'
 import { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
 import { isHomePage, queryDomUntilFound, scrollToTop } from '~/utils/main'
@@ -35,6 +35,7 @@ const topBarRef = ref()
 const reachTop = ref<boolean>(true)
 
 const iframeDrawerUrl = ref<string>('')
+const nowIframeDrawerUrl = ref<string>('')
 const showIframeDrawer = ref<boolean>(false)
 
 const inIframe = computed((): boolean => {
@@ -124,10 +125,11 @@ function handleOsScroll() {
 
 function openIframeDrawer(url: string) {
   iframeDrawerUrl.value = url
+  nowIframeDrawerUrl.value = url
   showIframeDrawer.value = true
 }
 
-// In drawer video, watch btn className changed and post message to parent
+// drawer iframe logic
 watchEffect(async (onCleanUp) => {
   if (!inIframe.value)
     return null
@@ -144,6 +146,7 @@ watchEffect(async (onCleanUp) => {
   })
 
   const abort = new AbortController()
+  // In drawer video, watch btn className changed and post message to parent
   queryDomUntilFound('.bpx-player-ctrl-btn.bpx-player-ctrl-web', 500, abort).then((openVideo2WebFullBtn) => {
     if (!openVideo2WebFullBtn)
       return
@@ -153,6 +156,22 @@ watchEffect(async (onCleanUp) => {
   onCleanUp(() => {
     observer.disconnect()
     abort.abort()
+  })
+
+  // listen drawer iframe history change
+  useEventListener(window, 'popstate', () => {
+    parent.postMessage(DRAWER_HISTORY_CHANGED)
+  })
+  // We do not have global injection script to inject `history.pushState`.
+  // This is a relatively stupid method.
+  useEventListener(window, 'click', () => {
+    const nowPathname = location.pathname
+    setTimeout(() => {
+      if (nowPathname !== nowIframeDrawerUrl.value) {
+        nowIframeDrawerUrl.value = nowPathname
+        parent.postMessage(DRAWER_HISTORY_CHANGED)
+      }
+    }, 0)
   })
 })
 
