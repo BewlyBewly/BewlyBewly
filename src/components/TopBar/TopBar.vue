@@ -124,16 +124,6 @@ function closeAllTopBarPopup(exceptionKey?: keyof typeof popupVisible) {
   })
 }
 
-const rightSideInactive = computed(() => {
-  let isInactive = false
-  Object.entries(popupVisible).forEach(([_key, value]) => {
-    if (value) {
-      isInactive = true
-    }
-  })
-  return isInactive
-})
-
 // Channels
 const channels = setupTopBarItemHoverEvent('channels')
 // Avatar
@@ -412,16 +402,16 @@ defineExpose({
         <div
           v-if="!reachTop"
           style="
-            mask-image: linear-gradient(to bottom,  black 20%, transparent);
+            mask-image: linear-gradient(to bottom,  black 40px, transparent);
           "
-          :style="{ backdropFilter: settings.disableFrostedGlass ? 'none' : 'blur(12px)' }"
-          pos="absolute top-0 left-0" w-full h-80px
+          :style="{ backdropFilter: settings.disableFrostedGlass ? 'none' : 'var(--bew-filter-glass-1)' }"
+          pos="absolute top-0 left-0" w-full h-120px
           pointer-events-none transform-gpu
         />
         <Transition name="fade">
           <div
             v-if="!reachTop"
-            pos="absolute top-0 left-0" w-full h-80px
+            pos="absolute top-0 left-0" w-full h-120px
             pointer-events-none opacity-80
             :style="{
               background: `linear-gradient(to bottom, ${(
@@ -494,14 +484,8 @@ defineExpose({
         >
           <div
             class="others"
-            :class="{ inactive: rightSideInactive }"
-            style="
-              backdrop-filter: var(--bew-filter-glass-1);
-              box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
-            "
-            flex="~ items-center gap-1" h-46px px-5px bg="$bew-elevated"
-            transition="transition-property-colors duration-150"
-            text="$bew-text-1" border="1 $bew-border-color" rounded-full
+            flex="~ items-center gap-1" h-46px px-5px
+            text="$bew-text-1"
             transform-gpu
           >
             <div
@@ -782,6 +766,7 @@ defineExpose({
                 w="28%" h="28%" z-1
                 pos="absolute bottom--20px right-28px" duration-300
               />
+
               <Transition name="slide-in">
                 <UserPanelPop
                   v-if="popupVisible.userPanel"
@@ -865,7 +850,15 @@ defineExpose({
 
 .right-side {
   .avatar {
-    --uno: "flex items-center relative z-1 rounded-1/2";
+    --uno: "flex justify-center items-center relative z-1 rounded-1/2 w-46px h-46px";
+    --uno: "bg-$bew-elevated border-1 border-$bew-border-color";
+    --uno: "shadow-[var(--bew-shadow-edge-glow-1),var(--bew-shadow-2)]";
+    backdrop-filter: var(--bew-filter-glass-1);
+
+    &.hover,
+    &:hover {
+      --uno: "backdrop-filter-none bg-$bew-elevated-solid";
+    }
 
     // Add a safety zone to prevent the avatar from collapsing quickly after leaving
     &:hover::after,
@@ -875,7 +868,7 @@ defineExpose({
 
     .avatar-img,
     .avatar-shadow {
-      --uno: "duration-300 rounded-1/2 w-34px h-34px ml-1 bg-cover bg-center";
+      --uno: "shrink-0 duration-300 rounded-1/2 w-34px h-34px bg-cover bg-center";
 
       &.hover {
         --uno: "transform scale-230 translate-y-60px translate-x--36px";
@@ -899,11 +892,6 @@ defineExpose({
         --uno: "transform scale-180 translate-y-55px translate-15px";
       }
     }
-  }
-
-  .others.inactive,
-  .others:hover {
-    --uno: "important-backdrop-filter-none important-bg-$bew-elevated-solid";
   }
 
   .unread-num-dot {
