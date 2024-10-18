@@ -205,7 +205,7 @@ function handelMouseLeave() {
 function handleClick(event: MouseEvent) {
   videoCurrentTime.value = getCurrentTime()
 
-  if (settings.value.videoCardLinkOpenMode === 'drawer' && videoUrl.value) {
+  if (settings.value.videoCardLinkOpenMode === 'drawer' && videoUrl.value && !event.ctrlKey) {
     event.preventDefault()
 
     openIframeDrawer(videoUrl.value)
