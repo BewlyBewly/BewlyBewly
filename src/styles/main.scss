@@ -47,7 +47,7 @@ html.dark.bewly-design {
 
 .bewly-design *::selection,
 .bewly-wrapper *::selection {
-  background: color-mix(in oklab, var(--bew-theme-color-30), var(--bew-bg, white) 20%) !important;
+  background: color-mix(in oklab, var(--bew-theme-color-40), var(--bew-bg, white) 20%) !important;
   color: revert !important;
 }
 
