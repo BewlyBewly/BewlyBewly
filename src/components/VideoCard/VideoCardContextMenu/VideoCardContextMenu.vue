@@ -59,13 +59,13 @@ const commonOptions = computed((): { command: VideoOption, name: string, icon: s
 
     [
       { command: VideoOption.CopyVideoLink, name: t('video_card.operation.copy_video_link'), icon: 'i-solar:copy-bold-duotone' },
-      // { command: VideoOption.CopyBVNumber, name: t('video_card.operation.copy_bv_number'), icon: 'i-solar:copy-bold-duotone' },
-      // { command: VideoOption.CopyAVNumber, name: t('video_card.operation.copy_av_number'), icon: 'i-solar:copy-bold-duotone' },
+      { command: VideoOption.CopyBVNumber, name: t('video_card.operation.copy_bv_number'), icon: 'i-solar:copy-bold-duotone' },
+      { command: VideoOption.CopyAVNumber, name: t('video_card.operation.copy_av_number'), icon: 'i-solar:copy-bold-duotone' },
     ],
 
     [
       { command: VideoOption.ViewTheOriginalCover, name: t('video_card.operation.view_the_original_cover'), icon: 'i-solar:gallery-minimalistic-bold-duotone' },
-      // { command: VideoOption.ViewThisUserChannel, name: t('video_card.operation.view_this_user_channel'), icon: 'i-solar:user-bold-duotone' },
+      { command: VideoOption.ViewThisUserChannel, name: t('video_card.operation.view_this_user_channel'), icon: 'i-solar:user-bold-duotone' },
     ],
   ]
   if (getVideoType() === 'bangumi') {

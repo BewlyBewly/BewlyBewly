@@ -31,7 +31,7 @@ html.bewly-design > ::-webkit-scrollbar-track {
 }
 
 ::selection {
-  background: var(--bew-fill-3) !important;
+  background: color-mix(in oklab, var(--bew-theme-color-30), white 20%);
   color: revert !important;
 }
 
