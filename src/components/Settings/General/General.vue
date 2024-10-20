@@ -98,7 +98,7 @@ watch(() => settings.value.language, (newValue) => {
       <SettingsItem :title="$t('settings.remove_the_indent_from_chinese_punctuation')" :desc="$t('settings.remove_the_indent_from_chinese_punctuation_desc')">
         <Radio v-model="settings.removeTheIndentFromChinesePunctuation" />
       </SettingsItem>
-      <SettingsItem :title="$t('settings.override_danmaku_font')" :desc="$t('settings.override_danmaku_font_desc')">
+      <SettingsItem v-if="settings.customizeFont" :title="$t('settings.override_danmaku_font')" :desc="$t('settings.override_danmaku_font_desc')">
         <Radio v-model="settings.overrideDanmakuFont" />
       </SettingsItem>
     </SettingsItemGroup>
