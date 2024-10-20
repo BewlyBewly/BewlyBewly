@@ -122,7 +122,8 @@
     .dynamic-keyword,
     .card .main-content .user-name a[style*="color"],
     .dynamic-link-hover-bg,
-    .im-popup .bp-popup-panel .title-ctnr .popup-title {
+    .im-popup .bp-popup-panel .title-ctnr .popup-title,
+    .paly-all-btn:hover .video-commonplayer_play {
       color: var(--bew-theme-color) !important;
     }
 
@@ -163,7 +164,9 @@
     .comment-bilibili-con .btn .btn-cancel:hover,
     .comment-bilibili-con .btn .btn-submit,
     #page-setting #setting-new-tag:focus + #setting-new-tag-btn,
-    .subscribe-list li .subscribe-link:after {
+    .subscribe-list li .subscribe-link:after,
+    #page-collection-detail .channel-add-video:hover,
+    #page-collection-detail .channel-add-video:hover .text {
       border-color: var(--bew-theme-color);
     }
 
@@ -176,7 +179,8 @@
     .search-component.search-component-focus,
     .search-component:hover,
     .btn.primary:focus,
-    .btn.primary:hover {
+    .btn.primary:hover,
+    .paly-all-btn:hover {
       border-color: var(--bew-theme-color) !important;
     }
 
@@ -197,7 +201,6 @@
     .favInfo-box .favInfo-details .fav-options .fav-play,
     .be-pager-item-active,
     .search-nav-item.search-nav-actived,
-    #page-series-detail .channel-option .modify-channel,
     .game-card__btn,
     .be-tags-container .tag.new-tag,
     #page-fav .fav-sidenav .fav-item.cur:hover .icon-cursor,
@@ -214,6 +217,10 @@
     .bili-topic-new__default__create__icon:before,
     .btn-subscribe:not(.btn-cancel) {
       background-color: var(--bew-theme-color);
+    }
+
+    .channel-option .modify-channel {
+      background-color: var(--bew-theme-color) !important;
     }
 
     .follow-dialog-wrap .follow-dialog-window .content .group-list .add-group .input-group .submit {
@@ -234,6 +241,10 @@
     .bl-button--primary:hover,
     .comment-bilibili-con .btn .btn-submit:hover {
       background-color: var(--bew-theme-color-80);
+    }
+
+    .channel-option .modify-channel:hover {
+      background-color: var(--bew-theme-color-80) !important;
     }
 
     .h .h-guest-hint {
@@ -504,7 +515,9 @@
     .follow-dialog-wrap .follow-dialog-window .bottom,
     .static-popup,
     .bili-at-popup,
-    .btn-cancel {
+    .btn-cancel,
+    #page-series-detail .channel-detail .channel-action-row .be-dropdown,
+    #page-series-detail .paly-all-btn {
       border-color: var(--bew-border-color);
     }
 
@@ -587,7 +600,13 @@
     .section .count,
     .list-create .text,
     .btn-container .btn,
-    .user-info .info-content .info-tags .info-tag .tag-content {
+    .user-info .info-content .info-tags .info-tag .tag-content,
+    #page-collection-detail .channel-add-video .text,
+    #page-collection-detail .paly-all-btn,
+    #page-series-detail .channel-detail .channel-action-row .be-dropdown .icon-ic_more,
+    #page-series-detail .channel-add-video .text,
+    #page-series-detail .paly-all-btn .video-commonplayer_play,
+    #page-series-detail .paly-all-btn {
       color: var(--bew-text-2);
     }
 
@@ -689,7 +708,8 @@
     }
 
     #page-setting #setting-new-tag-btn,
-    .bili-dyn-forward-publishing__editor {
+    .bili-dyn-forward-publishing__editor,
+    #page-collection-detail .channel-add-video {
       background: var(--bew-content-solid);
     }
 

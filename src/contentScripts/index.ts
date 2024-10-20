@@ -9,9 +9,10 @@ import { settings } from '~/logic'
 import { setupApp } from '~/logic/common-setup'
 import RESET_BEWLY_CSS from '~/styles/reset.css?raw'
 import { runWhenIdle } from '~/utils/lazyLoad'
-import { injectCSS, isHomePage } from '~/utils/main'
+import { compareVersions, injectCSS, isHomePage } from '~/utils/main'
 import { SVG_ICONS } from '~/utils/svgIcons'
 
+import { version } from '../../package.json'
 import App from './views/App.vue'
 
 const isFirefox: boolean = /Firefox/i.test(navigator.userAgent)
@@ -178,9 +179,35 @@ function injectAppWhenIdle() {
 }
 
 function injectApp() {
+  // Remove bewly element if it already exists and the version is less than the current version
+  // Only the development mode bewly element remains
+  const bewlyElArr: NodeListOf<Element> = document.querySelectorAll('#bewly')
+  if (bewlyElArr.length > 0) {
+    alert(`
+      You have multiple versions of BewlyBewly installed. Please retain only one to avoid conflicts and issues!
+      您安装了多个版本的 BewlyBewly。请只保留一个版本以避免冲突和问题！
+      您安裝了多個版本的 BewlyBewly。請只保留一個版本以避免衝突和問題！
+      你單咗幾個版本嘅 BewlyBewly。請淨係留一個版本嚟避免衝突同問題！
+    `)
+
+    bewlyElArr.forEach((el: Element) => {
+      const elVersion = el.getAttribute('data-version') || '0.0.0'
+      const elIsDev = el.getAttribute('data-dev') === 'true'
+
+      // Remove bewly element if the version is less than the current version
+      if (compareVersions(elVersion, version) < 0)
+        el.remove()
+      // Only the development mode element remains
+      else if (!elIsDev)
+        el.remove()
+    })
+  }
+
   // mount component to context window
   const container = document.createElement('div')
   container.id = 'bewly'
+  container.setAttribute('data-version', version)
+  container.setAttribute('data-dev', import.meta.env.DEV ? 'true' : 'false')
   const root = document.createElement('div')
   const styleEl = document.createElement('link')
   // Fix #69 https://github.com/hakadao/BewlyBewly/issues/69
@@ -202,7 +229,7 @@ function injectApp() {
     }, 500)
   }
 
-  startShadowDOMStyleInjection()
+  // startShadowDOMStyleInjection()
 
   // inject svg icons
   const svgDiv = document.createElement('div')
@@ -216,78 +243,78 @@ function injectApp() {
   app.mount(root)
 }
 
-function startShadowDOMStyleInjection() {
-  if (isHomePage())
-    return
-  if (!isSupportedPages())
-    return
+// function startShadowDOMStyleInjection() {
+//   if (isHomePage())
+//     return
+//   if (!isSupportedPages())
+//     return
 
-  // Create a MutationObserver to watch for Shadow DOM additions
-  const observer = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      if (mutation.type === 'childList') {
-        mutation.addedNodes.forEach((node) => {
-          if (node instanceof HTMLElement && node.shadowRoot) {
-            injectStyleToShadowDOM(node.shadowRoot)
-            // Observe nested Shadow DOMs recursively
-            observeShadowDOMRecursively(node.shadowRoot)
-          }
-        })
-      }
-    })
-  })
+//   // Create a MutationObserver to watch for Shadow DOM additions
+//   const observer = new MutationObserver((mutations) => {
+//     mutations.forEach((mutation) => {
+//       if (mutation.type === 'childList') {
+//         mutation.addedNodes.forEach((node) => {
+//           if (node instanceof HTMLElement && node.shadowRoot) {
+//             injectStyleToShadowDOM(node.shadowRoot)
+//             // Observe nested Shadow DOMs recursively
+//             observeShadowDOMRecursively(node.shadowRoot)
+//           }
+//         })
+//       }
+//     })
+//   })
 
-  // Observe the entire document for new Shadow DOMs
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true,
-  })
+//   // Observe the entire document for new Shadow DOMs
+//   observer.observe(document.body, {
+//     childList: true,
+//     subtree: true,
+//   })
 
-  // Inject styles into existing Shadow DOMs on initial load
-  injectStylesRecursively(document)
+//   // Inject styles into existing Shadow DOMs on initial load
+//   injectStylesRecursively(document)
 
-  function observeShadowDOMRecursively(shadowRoot: ShadowRoot) {
-    observer.observe(shadowRoot, {
-      childList: true,
-      subtree: true,
-    })
+//   function observeShadowDOMRecursively(shadowRoot: ShadowRoot) {
+//     observer.observe(shadowRoot, {
+//       childList: true,
+//       subtree: true,
+//     })
 
-    // Recursively observe nested Shadow DOMs within this Shadow DOM
-    shadowRoot.querySelectorAll('*').forEach((el) => {
-      if (el.shadowRoot) {
-        observeShadowDOMRecursively(el.shadowRoot)
-      }
-    })
-  }
+//     // Recursively observe nested Shadow DOMs within this Shadow DOM
+//     shadowRoot.querySelectorAll('*').forEach((el) => {
+//       if (el.shadowRoot) {
+//         observeShadowDOMRecursively(el.shadowRoot)
+//       }
+//     })
+//   }
 
-  function injectStylesRecursively(root: Document | ShadowRoot) {
-    if (root instanceof ShadowRoot) {
-      injectStyleToShadowDOM(root)
-    }
+//   function injectStylesRecursively(root: Document | ShadowRoot) {
+//     if (root instanceof ShadowRoot) {
+//       injectStyleToShadowDOM(root)
+//     }
 
-    root.querySelectorAll('*').forEach((element) => {
-      if (element.shadowRoot) {
-        injectStylesRecursively(element.shadowRoot)
-      }
-    })
-  }
+//     root.querySelectorAll('*').forEach((element) => {
+//       if (element.shadowRoot) {
+//         injectStylesRecursively(element.shadowRoot)
+//       }
+//     })
+//   }
 
-  function injectStyleToShadowDOM(shadowRoot: ShadowRoot) {
-    if (!shadowRoot.querySelector('style[data-bewly-style]')) {
-      const styleEl = document.createElement('style')
-      styleEl.setAttribute('data-bewly-style', 'true')
-      styleEl.textContent = `
-      @import url(${browser.runtime.getURL('dist/contentScripts/style.css')});
-      `
-      if (settings.value.adaptToOtherPageStyles) {
-        // Reset the theme color to ensure the theme color is updated
-        styleEl.textContent += `
-          * {
-            --bew-theme-color: ${settings.value.themeColor};
-          }
-        `
-      }
-      shadowRoot.appendChild(styleEl)
-    }
-  }
-}
+//   function injectStyleToShadowDOM(shadowRoot: ShadowRoot) {
+//     if (!shadowRoot.querySelector('style[data-bewly-style]')) {
+//       const styleEl = document.createElement('style')
+//       styleEl.setAttribute('data-bewly-style', 'true')
+//       styleEl.textContent = `
+//       @import url(${browser.runtime.getURL('dist/contentScripts/style.css')});
+//       `
+//       if (settings.value.adaptToOtherPageStyles) {
+//         // Reset the theme color to ensure the theme color is updated
+//         styleEl.textContent += `
+//           * {
+//             --bew-theme-color: ${settings.value.themeColor};
+//           }
+//         `
+//       }
+//       shadowRoot.appendChild(styleEl)
+//     }
+//   }
+// }

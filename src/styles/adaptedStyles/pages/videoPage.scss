@@ -30,6 +30,7 @@
       border-width: 1px;
       border-radius: 5px;
       border-color: #bec3cc;
+      border-style: solid;
     }
 
     .coin-operated-m-exp .like-checkbox input[type="checkbox"]:checked + i {
@@ -62,7 +63,9 @@
       background-color: var(--bew-theme-color);
     }
 
-    .user-card-m-exp .user-info-wrapper .info .user .user-label {
+    .user-card-m-exp .user-info-wrapper .info .user .user-label,
+    #pub button,
+    .editor-innter div:last-child div {
       background-color: var(--bew-theme-color) !important;
     }
 
@@ -96,6 +99,10 @@
     .collection-m-exp .content .group-list .add-group .input-group .submit,
     .follow-dialog-wrap-exp .follow-dialog-window .content .group-list .add-group .input-group .submitGroup {
       background-color: var(--bew-theme-color-10);
+    }
+
+    .video-argue .video-argue-inner.strong {
+      background-color: var(--bew-error-color-10);
     }
 
     .video-sections-v1 .video-sections-head_first-line .first-line-left .first-line-title:hover,
@@ -142,6 +149,10 @@
       color: white;
     }
 
+    .video-argue .video-argue-inner.strong {
+      color: var(--bew-error-color);
+    }
+
     .coin-operated-m-exp .mc-box:hover,
     .coin-operated-m-exp .mc-box.on,
     .note-pc .note-container .note-header .note-operation,
@@ -150,6 +161,10 @@
     .content .group-list li input[type="checkbox"]:checked:hover + i,
     .coin-operated-m-exp .like-checkbox input[type="checkbox"]:checked + i {
       border-color: var(--bew-theme-color);
+    }
+
+    .editor-innter div:last-child {
+      border-color: var(--bew-theme-color) !important;
     }
 
     .upinfo-btn-panel .not-follow-charge-btn:hover,
@@ -234,8 +249,9 @@
     .upinfo-btn-panel .new-charge-btn .charge-btn-icon img,
     .bpx-player-viewpoint-menu-item-active,
     .cur-play-icon,
-    .playing-gif,
-    .multi-page-v1 .cur-list .list-box li.on img {
+    .multi-page-v1 .cur-list .list-box li.on img,
+    .upinfo-btn-panel .new-charge-btn .charge-btn-icon img,
+    .playing-gif {
       filter: var(--bew-filter-icon-glow);
     }
 
@@ -306,6 +322,10 @@
       background-color: var(--bew-elevated-solid);
     }
 
+    .app .navbar {
+      background-color: var(--bew-bg) !important; // 稿件举报窗
+    }
+
     .resizable-component .editor-innter {
       background-color: unset;
     }
@@ -324,7 +344,8 @@
       color: var(--bew-text-1);
     }
 
-    .user-card-m-exp .user-info-wrapper .info .user .name {
+    .user-card-m-exp .user-info-wrapper .info .user .name,
+    .editor-innter div:last-child div:last-child {
       color: var(--bew-text-1) !important;
     }
 

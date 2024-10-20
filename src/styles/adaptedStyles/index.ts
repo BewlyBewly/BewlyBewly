@@ -8,6 +8,7 @@ import './common/userCard.scss'
 import './common/videoPlayer.scss'
 import './common/loginDialog.scss'
 import './shadowDom/comments.scss'
+import './thirdParty/bilibiliEvolved.scss'
 
 import { isHomePage } from '~/utils/main'
 
@@ -73,6 +74,8 @@ async function setupStyles() {
     || /https?:\/\/(?:www\.)?bilibili\.com\/list\/watchlater.*/.test(currentUrl)
     // favorite playlist 收藏播放页
     || /https?:\/\/(?:www\.)?bilibili\.com\/list\/ml.*/.test(currentUrl)
+    // 视频合集
+    || /https?:\/\/(?:www\.)?bilibili\.com\/list\/.*/.test(currentUrl)
   ) {
     await import('./pages/videoPage.scss')
     document.documentElement.classList.add('videoPage')

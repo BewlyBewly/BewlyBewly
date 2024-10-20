@@ -4,14 +4,13 @@ import { onMounted, reactive, ref } from 'vue'
 import Empty from '~/components/Empty.vue'
 import Loading from '~/components/Loading.vue'
 import Progress from '~/components/Progress.vue'
-import { useApiClient } from '~/composables/api'
 import type { List as VideoItem, WatchLaterResult } from '~/models/video/watchLater'
+import api from '~/utils/api'
 import { calcCurrentTime } from '~/utils/dataFormatter'
 import { removeHttpFromUrl } from '~/utils/main'
 
 import ALink from './ALink.vue'
 
-const api = useApiClient()
 const watchLaterList = reactive<VideoItem[]>([])
 const isLoading = ref<boolean>()
 const viewAllUrl = computed((): string => {

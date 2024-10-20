@@ -132,7 +132,7 @@ function changeWallpaper(url: string) {
           </span>
         </template>
         <template v-if="settings.customizeCSS" #bottom>
-          <CodeEditor v-model="settings.customizeCSSContent" language="css" />
+          <CodeEditor v-model="settings.customizeCSSContent" language="css" @keydown.stop.passive="() => {}" />
         </template>
       </SettingsItem>
     </SettingsItemGroup>

@@ -60,6 +60,7 @@ settings:
   menu_general: 一般
   menu_desktop_and_dock: 桌面同 Dock
   menu_appearance: 版面
+  menu_bewly_pages: BewlyBewly 頁面
   menu_home: 主頁
   menu_search_page: 搵嘢頁
   menu_compatibility: 相容性
@@ -111,27 +112,36 @@ settings:
     jyut: 廣東話
   customize_font: 自訂字型
   customize_font_desc: |-
-    對於舊字形嘅用戶，我哋推介 <a href="https://github.com/GuiWonder/Shanggu" target="_blank">Shanggu Fonts (尚古字型)</a> 同 <a href="https://github.com/ayaka14732/FanWunHak" target="_blank">Fan Wun Hak (繁媛黑體)</a>。
+    對於舊字形嘅用戶，我哋推介 <a class="link" href="https://github.com/GuiWonder/Shanggu" target="_blank">Shanggu Fonts (尚古字型)</a> 同 <a class="link" href="https://github.com/ayaka14732/FanWunHak" target="_blank">Fan Wun Hak (繁媛黑體)</a>。
     呢啲字型仲可以將簡體中文轉做繁體/正體中文。
+  override_danmaku_font: 覆蓋彈幕字型
+  override_danmaku_font_desc: >
+    設定彈幕字型做你嘅自訂字型覆蓋預設值。影片播放器之後唔得改彈幕字型。
+  remove_the_indent_from_chinese_punctuation: 移除中文標點符號嘅縮排
+  remove_the_indent_from_chinese_punctuation_desc: >
+    Bilibili 預設會專登執吓中文標點符號，令到佢可以左對齊。如果你係用緊自訂字字型，最好係移除縮排。
 
-  video_card_link_opening_behavior: 影片同番劇卡片連結開啓行爲
-  video_card_link_opening_behavior_opt:
-    drawer: 喺櫃桶度開啓
-    new_tab: 新開分頁
-  enable_video_preview: 使用影片預覽功能（若然得嘅話）
-  enable_video_ctrl_bar_on_video_card: 喺影片卡片上顯示影片控制欄
-  hover_video_card_delayed: 滑鼠停留喺影片卡片嗰陣遲啲進行影片預覽
-  block_ads: 封鎖廣告
   disable_frosted_glass: 閂咗毛玻璃效果
   reduce_frosted_glass_blur: 降低毛玻璃模糊強度
 
-  # Desktop and Dock
-  use_old_top_bar: 用返舊版頂部欄
-  top_bar_link_opening_behavior: 頂部欄連結開啓行爲
-  top_bar_link_opening_behavior_opt:
+  link_opening_behavior_opt:
     current_tab: 目前分頁
     current_tab_if_not_homepage: 唔喺主頁就喺目前分頁度開啓，否則開新嘅分頁
     new_tab: 新開分頁
+    drawer: 喺櫃桶度開啓
+  top_bar_link_opening_behavior: 頂部欄連結開啓行爲
+  video_card_link_opening_behavior: 影片同番劇卡片連結開啓行爲
+  search_bar_link_opening_behavior: 搜尋欄連結開啓行爲
+  close_drawer_without_pressing_esc_again: 閂櫃桶嗰陣唔使再撳多次 <kbd>Esc</kbd>
+
+  block_ads: 封鎖廣告
+
+  enable_video_preview: 使用影片預覽功能（若然得嘅話）
+  enable_video_ctrl_bar_on_video_card: 喺影片卡片上顯示影片控制欄
+  hover_video_card_delayed: 滑鼠停留喺影片卡片嗰陣遲啲進行影片預覽
+
+  # Desktop and Dock
+  use_old_top_bar: 用返舊版頂部欄
   auto_hide_top_bar: 自動收埋頂部欄
   top_bar_icon_badges: 圖示邊位標記
   top_bar_icon_badges_opt:
@@ -259,8 +269,10 @@ settings:
     重設設定？
     噉做冇得返轉頭噃，你確定要重設你之前嘅設定？
   contributors: 貢獻者
+
 auth:
   auth_access_key_first: 整之前記得先授權 BewlyBewly 去用 access key
+
 topbar:
   sign_in: 登入
   notifications: 通知
@@ -345,6 +357,7 @@ topbar:
     sticker: 出貼圖
     video: Po 片
     manager: 內容管理
+
 dock:
   search: 搵嘢
   home: 主頁
@@ -355,21 +368,41 @@ dock:
   dark_mode: 深色模式
   light_mode: 淺色模式
   settings: 設定
+
+video_card:
+  operation:
+    not_interested: 唔鍾意
+    open_in_new_tab: 新分頁開啓
+    open_in_background: 後台開啓
+    open_in_new_window: 新視窗開啓
+    open_in_current_tab: 目前分頁開啓
+    open_in_drawer: 櫃桶開啓
+
+    copy_video_link: 複製影片連結
+    copy_bv_number: 複製 BV 號
+    copy_av_number: 複製 AV 號
+
+    view_the_original_cover: 睇吓封面
+    view_this_user_channel: 睇下呢位用戶嘅頻道
+
+  video_removed: 經已鏟咗條片
+
 home:
-  not_interested: 唔鍾意
-  not_interested_desc: 你可以用 <kbd>↑</kbd> 同 <kbd>↓</kbd> 嚟揀個理由，抑或用數字鍵嚟直接揀理由，撳 <kbd>Enter</kbd> 就直接提交。
   tell_us_why: 點解噉做...
-  video_removed: 已經鏟咗條片
+  not_interested_desc: 你可以用 <kbd>↑</kbd> 同 <kbd>↓</kbd> 嚟揀個理由，抑或用數字鍵嚟直接揀理由，撳 <kbd>Enter</kbd> 就直接提交。
+
   for_you: 估你心水
   following: Follow 緊
   trending: 時下至 Hit
   ranking: 排行
   subscribed_series: 訂閱劇集
+
 ranking:
   all: 全部
   chinese_anime_related: 中國動畫相關
   original_content: 原創內容
   debut_work: 新人作品
+
 anime:
   total_episodes: 共 {ep} 集
   update_to_n_episodes: 更新到 {ep} 集
@@ -388,6 +421,7 @@ anime:
       fri: 週五
       sat: 週六
       sun: 週日
+
 history:
   title: 收睇記錄
   turn_on_watch_history: 開返收睇記錄
@@ -403,11 +437,13 @@ history:
   turn_on_watch_history_confirm: |-
     係咪要開返收睇記錄呀？
     你確定要開返收睇記錄？
+
 favorites:
   unfavorite: 唔愛喇
   unfavorite_confirm: |-
     係咪要剷走你揀過啲片呀？
     噉做冇得返轉頭噃，你確定要剷走你揀過啲片？
+
 watch_later:
   title: 陣間至睇
   clear_all: 剷曬陣間至睇啲片
@@ -418,6 +454,7 @@ watch_later:
   remove_watched_videos_confirm: |-
     係咪要剷走你睇過啲片呀？
     噉做冇得返轉頭噃，你確定要剷走你睇過啲片？
+
 search_bar:
   history_title: 搜尋記錄
   clear_history: 剷晒你啲搜尋記錄

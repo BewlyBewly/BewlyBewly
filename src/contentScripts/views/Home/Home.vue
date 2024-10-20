@@ -3,7 +3,7 @@ import { useThrottleFn } from '@vueuse/core'
 
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { TOP_BAR_VISIBILITY_CHANGE } from '~/constants/globalEvents'
-import { homePageGridLayout, settings } from '~/logic'
+import { gridLayout, settings } from '~/logic'
 import type { HomeTab } from '~/stores/mainStore'
 import { useMainStore } from '~/stores/mainStore'
 import emitter from '~/utils/mitt'
@@ -226,15 +226,15 @@ function toggleTabContentLoading(loading: boolean) {
           <div
             v-for="icon in gridLayoutIcons" :key="icon.value"
             :style="{
-              backgroundColor: homePageGridLayout === icon.value ? 'var(--bew-theme-color-auto)' : '',
-              color: homePageGridLayout === icon.value ? 'var(--bew-text-auto)' : 'unset',
+              backgroundColor: gridLayout.home === icon.value ? 'var(--bew-theme-color-auto)' : '',
+              color: gridLayout.home === icon.value ? 'var(--bew-text-auto)' : 'unset',
             }"
             flex="~ justify-center items-center"
             w-full
             h-full p="x-2 y-1" rounded="$bew-radius-half" bg="hover:$bew-fill-2" duration-300
-            cursor-pointer @click="homePageGridLayout = icon.value"
+            cursor-pointer @click="gridLayout.home = icon.value"
           >
-            <div :class="homePageGridLayout === icon.value ? icon.iconActivated : icon.icon" text-base />
+            <div :class="gridLayout.home === icon.value ? icon.iconActivated : icon.icon" text-base />
           </div>
         </div>
       </header>
@@ -244,7 +244,7 @@ function toggleTabContentLoading(loading: boolean) {
           <Component
             :is="pages[activatedPage]" :key="activatedPage"
             ref="tabPageRef"
-            :grid-layout="homePageGridLayout"
+            :grid-layout="gridLayout.home"
             @before-loading="toggleTabContentLoading(true)"
             @after-loading="toggleTabContentLoading(false)"
           />

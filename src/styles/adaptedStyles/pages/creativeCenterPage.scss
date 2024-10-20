@@ -20,7 +20,9 @@
     micro-app[name="video-up"] .cover-editor-panel-image,
     micro-app[name="video-up"] .cover-upload-mask-btn,
     micro-app[name="video-up"] .color-picker-color .list,
-    micro-app[name="video-up"] .tool-bar-text .btn-color {
+    micro-app[name="video-up"] .tool-bar-text .btn-color,
+    // Bilibili sidebar
+    .be-settings > .sidebar {
       filter: var(--bew-filter-force-dark);
     }
 
@@ -31,8 +33,13 @@
     }
 
     .setting-card-switch,
-    .note-setting-wrp {
+    .note-setting-wrp,
+    .bcc-select-input-inner {
       color: black;
+    }
+
+    .bcc-search-input {
+      background-color: unset;
     }
   }
   // #endregion

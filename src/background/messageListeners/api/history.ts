@@ -1,5 +1,5 @@
-import type { APIMAP } from '../utils'
-import { AHS } from '../utils'
+import type { APIMAP } from '../../utils'
+import { AHS } from '../../utils'
 
 const API_HISTORY = {
   // https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/history&toview/history.md#%E8%8E%B7%E5%8F%96%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95%E5%88%97%E8%A1%A8_web%E7%AB%AF

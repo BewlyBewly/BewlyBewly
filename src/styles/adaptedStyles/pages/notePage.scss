@@ -35,6 +35,10 @@
       border-color: var(--bew-theme-color);
     }
 
+    .editor-innter div:last-child {
+      border-color: var(--bew-theme-color) !important;
+    }
+
     #page-series-index .channel-option.no-channel .create-channel,
     .manage-note--header .tools-btns .publish-btn,
     .note-single-item .go-video-btn:hover,
@@ -45,7 +49,8 @@
       background-color: var(--bew-theme-color);
     }
 
-    .note-tabs .van-tabs_active-bar {
+    .note-tabs .van-tabs_active-bar,
+    .editor-innter div:last-child div {
       background-color: var(--bew-theme-color) !important;
     }
 
@@ -127,10 +132,6 @@
       background-color: var(--bew-bg);
     }
 
-    .note-list-del-popup {
-      background-color: var(--bew-content-solid);
-    }
-
     .note-list-item,
     .editor-innter .ql-editor {
       &::-webkit-scrollbar-thumb {
@@ -155,7 +156,8 @@
       color: var(--bew-text-1);
     }
 
-    .van-tabs-bar .van-tabs-tab {
+    .van-tabs-bar .van-tabs-tab,
+    .editor-innter div:last-child div:last-child {
       color: var(--bew-text-1) !important;
     }
 
@@ -224,6 +226,7 @@
     #web-toolbar .ql-picker-options,
     .view-manage-note,
     .note-tooltip.info,
+    .note-list-del-popup,
     .my-notes-manage-note {
       background-color: var(--bew-content-solid);
     }

@@ -6,9 +6,9 @@ import { useI18n } from 'vue-i18n'
 import Empty from '~/components/Empty.vue'
 import Loading from '~/components/Loading.vue'
 import Tooltip from '~/components/Tooltip.vue'
-import { useApiClient } from '~/composables/api'
 import type { TopBarLiveMomentResult } from '~/models/moment/topBarLiveMoment'
 import type { TopBarMomentResult } from '~/models/moment/topBarMoment'
+import api from '~/utils/api'
 import { getCSRF, scrollToTop } from '~/utils/main'
 
 import ALink from './ALink.vue'
@@ -28,7 +28,6 @@ interface MomentCard {
 }
 
 const { t } = useI18n()
-const api = useApiClient()
 
 const moments = reactive<MomentCard[]>([])
 const addedWatchLaterList = reactive<number[]>([])
@@ -428,14 +427,13 @@ defineExpose({
               <div
                 class="group"
                 flex="~ items-center justify-center" w="82px"
-                h="46px" m="l-4"
+                h="46px" m="l-4" shrink-0
                 rounded="$bew-radius-half"
                 bg="$bew-skeleton"
               >
                 <img
                   :src="`${moment.cover}@128w_72h_1c`"
-                  w="82px"
-                  h="46px"
+                  w="82px" h="46px"
                   rounded="$bew-radius-half"
                 >
                 <div

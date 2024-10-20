@@ -39,3 +39,12 @@
 .modal-leave-to {
   --uno: "opacity-0 scale-105";
 }
+
+.dropdown-enter-active,
+.dropdown-leave-active {
+  --uno: "transition-all duration-300 transform-gpu";
+}
+.dropdown-enter-from,
+.dropdown-leave-to {
+  --uno: "opacity-0 transform-gpu scale-95 -translate-y-4 filter blur-sm";
+}

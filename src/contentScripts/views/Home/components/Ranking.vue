@@ -1,19 +1,19 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 
-import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { TOP_BAR_VISIBILITY_CHANGE } from '~/constants/globalEvents'
-import type { GridLayout } from '~/logic'
+import type { GridLayoutType } from '~/logic'
 import { settings } from '~/logic'
 import type { List as RankingVideoItem, RankingResult } from '~/models/video/ranking'
 import type { List as RankingPgcItem, RankingPgcResult } from '~/models/video/rankingPgc'
+import api from '~/utils/api'
 import emitter from '~/utils/mitt'
 
 import type { RankingType } from '../types'
 
 const props = defineProps<{
-  gridLayout: GridLayout
+  gridLayout: GridLayoutType
 }>()
 
 const emit = defineEmits<{
@@ -22,7 +22,6 @@ const emit = defineEmits<{
 }>()
 
 const { t } = useI18n()
-const api = useApiClient()
 const { handleBackToTop, handlePageRefresh } = useBewlyApp()
 
 const gridValue = computed((): string => {

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { onKeyStroke, useEventListener } from '@vueuse/core'
 
+import { DRAWER_VIDEO_ENTER_PAGE_FULL, DRAWER_VIDEO_EXIT_PAGE_FULL } from '~/constants/globalEvents'
+import { settings } from '~/logic'
 import { isHomePage } from '~/utils/main'
 
 // TODO: support shortcuts like `Ctrl+Alt+T` to open in new tab, `Esc` to close
@@ -15,9 +17,13 @@ const emit = defineEmits<{
 }>()
 
 const show = ref(false)
+const headerShow = ref(false)
 const iframeRef = ref<HTMLIFrameElement | null>(null)
 const currentUrl = ref<string>(props.url)
 const delayCloseTimer = ref<NodeJS.Timeout | null>(null)
+const inIframe = computed((): boolean => {
+  return window.self !== window.top
+})
 
 useEventListener(window, 'popstate', updateIframeUrl)
 nextTick(() => {
@@ -27,6 +33,7 @@ nextTick(() => {
 onMounted(async () => {
   history.pushState(null, '', props.url)
   show.value = true
+  headerShow.value = true
   await nextTick()
   iframeRef.value?.focus()
 })
@@ -69,6 +76,7 @@ async function handleClose() {
   }
   await releaseIframeResources()
   show.value = false
+  headerShow.value = false
   delayCloseTimer.value = setTimeout(() => {
     emit('close')
   }, 300)
@@ -95,10 +103,18 @@ function handleOpenInNewTab() {
 
 const isEscPressed = ref<boolean>(false)
 const escPressedTimer = ref<NodeJS.Timeout | null>(null)
+const disableEscPress = ref<boolean>(false)
 
 nextTick(() => {
   onKeyStroke('Escape', (e: KeyboardEvent) => {
     e.preventDefault()
+    if (settings.value.closeDrawerWithoutPressingEscAgain) {
+      clearTimeout(escPressedTimer.value!)
+      handleClose()
+      return
+    }
+    if (disableEscPress.value)
+      return
     if (isEscPressed.value) {
       handleClose()
     }
@@ -112,6 +128,24 @@ nextTick(() => {
       }, 1300)
     }
   }, { target: iframeRef.value?.contentWindow })
+})
+
+watchEffect(() => {
+  if (inIframe.value)
+    return null
+
+  useEventListener(window, 'message', ({ data }) => {
+    switch (data) {
+      case DRAWER_VIDEO_ENTER_PAGE_FULL:
+        headerShow.value = false
+        disableEscPress.value = true
+        break
+      case DRAWER_VIDEO_EXIT_PAGE_FULL:
+        headerShow.value = true
+        disableEscPress.value = false
+        break
+    }
+  })
 })
 
 // const keys = useMagicKeys()
@@ -140,7 +174,7 @@ nextTick(() => {
 
     <Transition name="fade">
       <div
-        v-if="show"
+        v-if="headerShow"
         pos="relative top-0" flex="~ items-center justify-end gap-2"
         max-w="$bew-page-max-width" w-full h="$bew-top-bar-height"
         m-auto px-4
@@ -195,15 +229,18 @@ nextTick(() => {
     <Transition name="drawer">
       <div
         v-if="show"
-        pos="absolute top-$bew-top-bar-height left-0" of-hidden bg="$bew-bg"
+        :pos="`absolute ${headerShow ? 'top-$bew-top-bar-height' : 'top-0'} left-0`" of-hidden bg="$bew-bg"
         rounded="t-$bew-radius" w-full h-full
       >
         <iframe
           ref="iframeRef"
           :src="currentUrl"
+          :style="{
+            bottom: headerShow ? `var(--bew-top-bar-height)` : '0',
+          }"
           frameborder="0"
           pointer-events-auto
-          pos="absolute bottom-$bew-top-bar-height left-0"
+          pos="absolute  left-0"
           w-full h-full
         />
       </div>

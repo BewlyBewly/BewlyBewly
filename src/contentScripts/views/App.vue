@@ -4,10 +4,10 @@ import type { Ref } from 'vue'
 
 import type { BewlyAppProvider } from '~/composables/useAppProvider'
 import { useDark } from '~/composables/useDark'
-import { BEWLY_MOUNTED, OVERLAY_SCROLL_BAR_SCROLL } from '~/constants/globalEvents'
+import { BEWLY_MOUNTED, DRAWER_VIDEO_ENTER_PAGE_FULL, DRAWER_VIDEO_EXIT_PAGE_FULL, OVERLAY_SCROLL_BAR_SCROLL } from '~/constants/globalEvents'
 import { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
-import { isHomePage, scrollToTop } from '~/utils/main'
+import { isHomePage, queryDomUntilFound, scrollToTop } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
 import { setupNecessarySettingsWatchers } from './necessarySettingsWatchers'
@@ -120,11 +120,41 @@ function openIframeDrawer(url: string) {
   showIframeDrawer.value = true
 }
 
+// In drawer video, watch btn className changed and post message to parent
+watchEffect(async (onCleanUp) => {
+  if (!inIframe.value)
+    return null
+
+  const observer = new MutationObserver(([{ target: el }]) => {
+    if (!(el instanceof HTMLElement))
+      return null
+    if (el.classList.contains('bpx-state-entered')) {
+      parent.postMessage(DRAWER_VIDEO_ENTER_PAGE_FULL)
+    }
+    else {
+      parent.postMessage(DRAWER_VIDEO_EXIT_PAGE_FULL)
+    }
+  })
+
+  const abort = new AbortController()
+  queryDomUntilFound('.bpx-player-ctrl-btn.bpx-player-ctrl-web', 500, abort).then((openVideo2WebFullBtn) => {
+    if (!openVideo2WebFullBtn)
+      return
+    observer.observe(openVideo2WebFullBtn, { attributes: true })
+  })
+
+  onCleanUp(() => {
+    observer.disconnect()
+    abort.abort()
+  })
+})
+
 /**
  * Checks if the current viewport has a scrollbar.
  * @returns {boolean} Returns true if the viewport has a scrollbar, false otherwise.
  */
-function haveScrollbar() {
+async function haveScrollbar() {
+  await nextTick()
   const osInstance = scrollbarRef.value?.osInstance()
   const { viewport } = osInstance.elements()
   const { scrollHeight } = viewport // get scroll offset
@@ -214,7 +244,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
     </div>
 
     <IframeDrawer
-      v-if="settings.videoCardLinkOpenMode === 'drawer' && showIframeDrawer"
+      v-if="showIframeDrawer"
       :url="iframeDrawerUrl"
       @close="showIframeDrawer = false"
     />

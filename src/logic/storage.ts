@@ -7,26 +7,33 @@ export const storageDemo = useStorageLocal('webext-demo', 'Storage Demo')
 export const accessKey = useStorageLocal('accessKey', '')
 
 export interface Settings {
-  language: string
-  customizeFont: boolean
-  fontFamily: string
   touchScreenOptimization: boolean
   enableGridLayoutSwitcher: boolean
   enableHorizontalScrolling: boolean
 
+  language: string
+  customizeFont: boolean
+  fontFamily: string
+  overrideDanmakuFont: boolean
+  removeTheIndentFromChinesePunctuation: boolean
   disableFrostedGlass: boolean
   reduceFrostedGlassBlur: boolean
 
+  enableVideoPreview: boolean
+
+  // Link Opening Behavior
+  videoCardLinkOpenMode: 'drawer' | 'newTab'
+  topBarLinkOpenMode: 'currentTab' | 'currentTabIfNotHomepage' | 'newTab'
+  searchBarLinkOpenMode: 'currentTab' | 'currentTabIfNotHomepage' | 'newTab'
+  closeDrawerWithoutPressingEscAgain: boolean
+
   blockAds: boolean
 
-  videoCardLinkOpenMode: 'drawer' | 'newTab'
-  enableVideoPreview: boolean
   enableVideoCtrlBarOnVideoCard: boolean
   hoverVideoCardDelayed: boolean
 
   // Desktop & Dock
   useOldTopBar: boolean
-  topBarLinkOpenMode: 'currentTab' | 'currentTabIfNotHomepage' | 'newTab'
   autoHideTopBar: boolean
   topBarIconBadges: 'number' | 'dot' | 'none'
   dockPosition: 'left' | 'right' | 'bottom'
@@ -89,26 +96,33 @@ export interface Settings {
 }
 
 export const originalSettings: Settings = {
-  language: '',
-  customizeFont: false,
-  fontFamily: '',
   touchScreenOptimization: false,
   enableGridLayoutSwitcher: true,
   enableHorizontalScrolling: false,
 
+  language: '',
+  customizeFont: false,
+  fontFamily: '',
+  overrideDanmakuFont: true,
+  removeTheIndentFromChinesePunctuation: false,
+
   disableFrostedGlass: true,
   reduceFrostedGlassBlur: false,
 
+  // Link Opening Behavior
+  videoCardLinkOpenMode: 'newTab',
+  topBarLinkOpenMode: 'currentTabIfNotHomepage',
+  searchBarLinkOpenMode: 'currentTabIfNotHomepage',
+  closeDrawerWithoutPressingEscAgain: false,
+
   blockAds: false,
 
-  videoCardLinkOpenMode: 'newTab',
   enableVideoPreview: true,
   enableVideoCtrlBarOnVideoCard: false,
   hoverVideoCardDelayed: false,
 
   // Desktop & Dock
   useOldTopBar: false,
-  topBarLinkOpenMode: 'currentTabIfNotHomepage',
   autoHideTopBar: false,
   topBarIconBadges: 'number',
   dockPosition: 'right',
@@ -172,5 +186,18 @@ export const originalSettings: Settings = {
 
 export const settings = useStorageLocal('settings', ref<Settings>(originalSettings), { mergeDefaults: true })
 
-export type GridLayout = 'adaptive' | 'twoColumns' | 'oneColumn'
-export const homePageGridLayout = useStorageLocal('homePageGridLayout', ref<GridLayout>('adaptive'), { mergeDefaults: true })
+export type GridLayoutType = 'adaptive' | 'twoColumns' | 'oneColumn'
+
+export interface GridLayout {
+  home: GridLayoutType
+}
+
+export const gridLayout = useStorageLocal('gridLayout', ref<GridLayout>({
+  home: 'adaptive',
+}), { mergeDefaults: true })
+
+export const sidePanel = useStorageLocal('sidePanel', ref<{
+  home: boolean
+}>({
+  home: true,
+}), { mergeDefaults: true })
