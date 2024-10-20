@@ -175,5 +175,18 @@ export const originalSettings: Settings = {
 
 export const settings = useStorageLocal('settings', ref<Settings>(originalSettings), { mergeDefaults: true })
 
-export type GridLayout = 'adaptive' | 'twoColumns' | 'oneColumn'
-export const homePageGridLayout = useStorageLocal('homePageGridLayout', ref<GridLayout>('adaptive'), { mergeDefaults: true })
+export type GridLayoutType = 'adaptive' | 'twoColumns' | 'oneColumn'
+
+export interface GridLayout {
+  home: GridLayoutType
+}
+
+export const gridLayout = useStorageLocal('gridLayout', ref<GridLayout>({
+  home: 'adaptive',
+}), { mergeDefaults: true })
+
+export const sidePanel = useStorageLocal('sidePanel', ref<{
+  home: boolean
+}>({
+  home: true,
+}), { mergeDefaults: true })
