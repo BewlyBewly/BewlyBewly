@@ -117,24 +117,26 @@ settings:
   remove_the_indent_from_chinese_punctuation_desc: >
     Bilibili 預設會專登執吓中文標點符號，令到佢可以左對齊。如果你係用緊自訂字字型，最好係移除縮排。
 
-  video_card_link_opening_behavior: 影片同番劇卡片連結開啓行爲
-  video_card_link_opening_behavior_opt:
-    drawer: 喺櫃桶度開啓
-    new_tab: 新開分頁
-  enable_video_preview: 使用影片預覽功能（若然得嘅話）
-  enable_video_ctrl_bar_on_video_card: 喺影片卡片上顯示影片控制欄
-  hover_video_card_delayed: 滑鼠停留喺影片卡片嗰陣遲啲進行影片預覽
-  block_ads: 封鎖廣告
   disable_frosted_glass: 閂咗毛玻璃效果
   reduce_frosted_glass_blur: 降低毛玻璃模糊強度
 
-  # Desktop and Dock
-  use_old_top_bar: 用返舊版頂部欄
-  top_bar_link_opening_behavior: 頂部欄連結開啓行爲
-  top_bar_link_opening_behavior_opt:
+  link_opening_behavior_opt:
     current_tab: 目前分頁
     current_tab_if_not_homepage: 唔喺主頁就喺目前分頁度開啓，否則開新嘅分頁
     new_tab: 新開分頁
+    drawer: 喺櫃桶度開啓
+  top_bar_link_opening_behavior: 頂部欄連結開啓行爲
+  video_card_link_opening_behavior: 影片同番劇卡片連結開啓行爲
+  search_bar_link_opening_behavior: 搜尋欄連結開啓行爲
+
+  block_ads: 封鎖廣告
+
+  enable_video_preview: 使用影片預覽功能（若然得嘅話）
+  enable_video_ctrl_bar_on_video_card: 喺影片卡片上顯示影片控制欄
+  hover_video_card_delayed: 滑鼠停留喺影片卡片嗰陣遲啲進行影片預覽
+
+  # Desktop and Dock
+  use_old_top_bar: 用返舊版頂部欄
   auto_hide_top_bar: 自動收埋頂部欄
   top_bar_icon_badges: 圖示邊位標記
   top_bar_icon_badges_opt:

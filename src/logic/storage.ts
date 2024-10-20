@@ -18,16 +18,20 @@ export interface Settings {
   disableFrostedGlass: boolean
   reduceFrostedGlassBlur: boolean
 
+  enableVideoPreview: boolean
+
+  // Link Opening Behavior
+  videoCardLinkOpenMode: 'drawer' | 'newTab'
+  topBarLinkOpenMode: 'currentTab' | 'currentTabIfNotHomepage' | 'newTab'
+  searchBarLinkOpenMode: 'currentTab' | 'currentTabIfNotHomepage' | 'newTab'
+
   blockAds: boolean
 
-  videoCardLinkOpenMode: 'drawer' | 'newTab'
-  enableVideoPreview: boolean
   enableVideoCtrlBarOnVideoCard: boolean
   hoverVideoCardDelayed: boolean
 
   // Desktop & Dock
   useOldTopBar: boolean
-  topBarLinkOpenMode: 'currentTab' | 'currentTabIfNotHomepage' | 'newTab'
   autoHideTopBar: boolean
   topBarIconBadges: 'number' | 'dot' | 'none'
   dockPosition: 'left' | 'right' | 'bottom'
@@ -102,16 +106,19 @@ export const originalSettings: Settings = {
   disableFrostedGlass: true,
   reduceFrostedGlassBlur: false,
 
+  // Link Opening Behavior
+  videoCardLinkOpenMode: 'newTab',
+  topBarLinkOpenMode: 'currentTabIfNotHomepage',
+  searchBarLinkOpenMode: 'currentTabIfNotHomepage',
+
   blockAds: false,
 
-  videoCardLinkOpenMode: 'newTab',
   enableVideoPreview: true,
   enableVideoCtrlBarOnVideoCard: false,
   hoverVideoCardDelayed: false,
 
   // Desktop & Dock
   useOldTopBar: false,
-  topBarLinkOpenMode: 'currentTabIfNotHomepage',
   autoHideTopBar: false,
   topBarIconBadges: 'number',
   dockPosition: 'right',

@@ -2,8 +2,10 @@
 import { onKeyStroke, useDebounceFn } from '@vueuse/core'
 import DOMPurify from 'dompurify'
 
+import { settings } from '~/logic'
 import api from '~/utils/api'
 import { findLeafActiveElement } from '~/utils/element'
+import { isHomePage } from '~/utils/main'
 
 import type { HistoryItem, SuggestionItem, SuggestionResponse } from './searchHistoryProvider'
 import {
@@ -75,7 +77,15 @@ const handleInput = useDebounceFn(() => {
 
 async function navigateToSearchResultPage(keyword: string) {
   if (keyword) {
-    window.open(`//search.bilibili.com/all?keyword=${encodeURIComponent(keyword)}`, '_blank')
+    let target = '_blank'
+    if (settings.value.searchBarLinkOpenMode === 'currentTabIfNotHomepage')
+      target = isHomePage() ? '_blank' : '_self'
+    else if (settings.value.searchBarLinkOpenMode === 'currentTab')
+      target = '_self'
+    else if (settings.value.searchBarLinkOpenMode === 'newTab')
+      target = '_blank'
+
+    window.open(`//search.bilibili.com/all?keyword=${encodeURIComponent(keyword)}`, target)
     const searchItem = {
       value: keyword,
       timestamp: Number(new Date()),
@@ -382,7 +392,6 @@ async function handleClearSearchHistory() {
 
   @mixin search-content-item {
     --uno: "px-4 py-2 w-full rounded-$bew-radius duration-300 cursor-pointer not-first:mt-1 tracking-wider hover:bg-$bew-fill-2";
-    --uno: "hover:shadow-[var(--bew-shadow-1),var(--bew-shadow-edge-glow-1)]";
   }
 
   #search-history {
