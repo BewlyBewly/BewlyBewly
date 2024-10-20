@@ -33,6 +33,8 @@ const hoveringDockItem = reactive<HoveringDockItem>({
   settings: false,
 })
 
+const showBewlyPageDialog = ref<boolean>(false)
+
 watch(() => settings.value.autoHideSidebar, (newValue) => {
   if (newValue)
     hideSidebar.value = true
