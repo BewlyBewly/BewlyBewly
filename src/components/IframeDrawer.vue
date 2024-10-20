@@ -2,6 +2,7 @@
 import { onKeyStroke, useEventListener } from '@vueuse/core'
 
 import { DRAWER_VIDEO_ENTER_PAGE_FULL, DRAWER_VIDEO_EXIT_PAGE_FULL } from '~/constants/globalEvents'
+import { settings } from '~/logic'
 import { isHomePage } from '~/utils/main'
 
 // TODO: support shortcuts like `Ctrl+Alt+T` to open in new tab, `Esc` to close
@@ -107,6 +108,11 @@ const disableEscPress = ref<boolean>(false)
 nextTick(() => {
   onKeyStroke('Escape', (e: KeyboardEvent) => {
     e.preventDefault()
+    if (settings.value.closeDrawerWithoutPressingEscAgain) {
+      clearTimeout(escPressedTimer.value!)
+      handleClose()
+      return
+    }
     if (disableEscPress.value)
       return
     if (isEscPressed.value) {

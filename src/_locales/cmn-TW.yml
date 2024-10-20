@@ -132,6 +132,7 @@ settings:
   top_bar_link_opening_behavior: 頂欄連結開啟行為
   video_card_link_opening_behavior: 影片和番劇卡片連結開啟行為
   search_bar_link_opening_behavior: 搜尋欄連結開啟行為
+  close_drawer_without_pressing_esc_again: 關閉抽屜時不用再次按 <kbd>Esc</kbd> 關閉
 
   block_ads: 封鎖廣告
 

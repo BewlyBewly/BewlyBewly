@@ -25,6 +25,7 @@ export interface Settings {
   videoCardLinkOpenMode: 'drawer' | 'newTab'
   topBarLinkOpenMode: 'currentTab' | 'currentTabIfNotHomepage' | 'newTab'
   searchBarLinkOpenMode: 'currentTab' | 'currentTabIfNotHomepage' | 'newTab'
+  closeDrawerWithoutPressingEscAgain: boolean
 
   blockAds: boolean
 
@@ -112,6 +113,7 @@ export const originalSettings: Settings = {
   videoCardLinkOpenMode: 'newTab',
   topBarLinkOpenMode: 'currentTabIfNotHomepage',
   searchBarLinkOpenMode: 'currentTabIfNotHomepage',
+  closeDrawerWithoutPressingEscAgain: false,
 
   blockAds: false,
 

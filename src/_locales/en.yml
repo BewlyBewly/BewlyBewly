@@ -132,6 +132,7 @@ settings:
   top_bar_link_opening_behavior: Top bar link opening behavior
   video_card_link_opening_behavior: Video card and bangumi card link opening behavior
   search_bar_link_opening_behavior: Search bar link opening behavior
+  close_drawer_without_pressing_esc_again: Close the drawer without pressing <kbd>Esc</kbd> again
 
   block_ads: Block ads
 

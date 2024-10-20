@@ -131,6 +131,7 @@ settings:
   top_bar_link_opening_behavior: 頂部欄連結開啓行爲
   video_card_link_opening_behavior: 影片同番劇卡片連結開啓行爲
   search_bar_link_opening_behavior: 搜尋欄連結開啓行爲
+  close_drawer_without_pressing_esc_again: 閂櫃桶嗰陣唔使再撳多次 <kbd>Esc</kbd>
 
   block_ads: 封鎖廣告
 

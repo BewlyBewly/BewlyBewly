@@ -133,6 +133,12 @@ watch(() => settings.value.language, (newValue) => {
           w="full"
         />
       </SettingsItem>
+      <SettingsItem>
+        <template #title>
+          <div v-html="$t('settings.close_drawer_without_pressing_esc_again')" />
+        </template>
+        <Radio v-model="settings.closeDrawerWithoutPressingEscAgain" />
+      </SettingsItem>
     </SettingsItemGroup>
 
     <SettingsItemGroup>
