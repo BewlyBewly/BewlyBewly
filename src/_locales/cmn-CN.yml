@@ -113,6 +113,9 @@ settings:
   customize_font_desc: |-
     对于喜欢旧字形的用户，我们推荐 <a class="link" href="https://github.com/GuiWonder/Shanggu" target="_blank">Shanggu Fonts (尚古字型)</a> 和 <a class="link" href="https://github.com/ayaka14732/FanWunHak" target="_blank">Fan Wun Hak (繁媛黑體)</a>。
     这些字形还具有将简体中文转换为繁体/正体中文的能力。
+  override_danmaku_font: 覆盖弹幕字体
+  override_danmaku_font_desc: >
+    设置弹幕字体为您的自定义字体以覆盖默认设置。之后视频播放器将无法更改它。
   remove_the_indent_from_chinese_punctuation: 移除中文标点符号的缩进
   remove_the_indent_from_chinese_punctuation_desc: >
     Bilibili 默认会专门处理中文标点符号以实现左对齐。

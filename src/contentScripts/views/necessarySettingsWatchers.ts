@@ -67,6 +67,38 @@ export function setupNecessarySettingsWatchers() {
     { immediate: true },
   )
 
+  let danmakuFontStyleEl: HTMLStyleElement | null = null
+  watch(
+    () => settings.value.overrideDanmakuFont,
+    () => {
+      let fallbackFontFamily = ''
+      if (locale.value === LanguageType.Mandarin_CN) {
+        fallbackFontFamily = 'var(--bew-fonts-mandarin-cn)'
+      }
+      else if (locale.value === LanguageType.Mandarin_TW) {
+        fallbackFontFamily = 'var(--bew-fonts-mandarin-tw)'
+      }
+      else if (locale.value === LanguageType.Cantonese) {
+        fallbackFontFamily = 'var(--bew-fonts-cantonese)'
+      }
+      else {
+        fallbackFontFamily = 'var(--bew-fonts-english)'
+      }
+
+      if (settings.value.overrideDanmakuFont) {
+        danmakuFontStyleEl = injectCSS(`
+          .bili-danmaku-x-dm {
+            font-family: var(--bew-font-family, ${fallbackFontFamily}) !important;
+          }
+        `)
+      }
+      else {
+        danmakuFontStyleEl?.remove()
+      }
+    },
+    { immediate: true },
+  )
+
   const removeTheIndentFromChinesePunctuationStyleEl = injectCSS(`
     .video-info-container .special-text-indent[data-title^='《'],
     .video-info-container .special-text-indent[data-title^='「'],

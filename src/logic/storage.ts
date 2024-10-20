@@ -14,6 +14,7 @@ export interface Settings {
   language: string
   customizeFont: boolean
   fontFamily: string
+  overrideDanmakuFont: boolean
   removeTheIndentFromChinesePunctuation: boolean
   disableFrostedGlass: boolean
   reduceFrostedGlassBlur: boolean
@@ -101,6 +102,7 @@ export const originalSettings: Settings = {
   language: '',
   customizeFont: false,
   fontFamily: '',
+  overrideDanmakuFont: true,
   removeTheIndentFromChinesePunctuation: false,
 
   disableFrostedGlass: true,
