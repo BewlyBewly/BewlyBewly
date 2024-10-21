@@ -81,13 +81,13 @@ function getAllWatchLaterList() {
 
       <div flex="~ gap-4">
         <ALink
-          :href="playAllUrl" rel="noopener noreferrer"
+          :href="playAllUrl"
           flex="~" items="center"
         >
           <span text="sm">{{ $t('common.play_all') }}</span>
         </ALink>
         <ALink
-          :href="viewAllUrl" rel="noopener noreferrer"
+          :href="viewAllUrl"
           flex="~" items="center"
         >
           <span text="sm">{{ $t('common.view_all') }}</span>
@@ -130,7 +130,7 @@ function getAllWatchLaterList() {
           <ALink
             v-for="item in watchLaterList"
             :key="item.aid"
-            :href="getWatchLaterUrl(item.bvid)" rel="noopener noreferrer"
+            :href="getWatchLaterUrl(item.bvid)"
             m="last:b-4" p="2"
             rounded="$bew-radius"
             hover:bg="$bew-fill-2"

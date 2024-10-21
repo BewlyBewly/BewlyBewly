@@ -206,7 +206,7 @@ function getHistoryList(type: Business, view_at = 0 as number) {
         </div>
       </div>
       <ALink
-        href="https://www.bilibili.com/account/history" rel="noopener noreferrer"
+        href="https://www.bilibili.com/account/history"
         flex="~ items-center"
       >
         <span text="sm">{{ $t('common.view_all') }}</span>
@@ -249,7 +249,7 @@ function getHistoryList(type: Business, view_at = 0 as number) {
           <ALink
             v-for="historyItem in historys"
             :key="historyItem.kid"
-            :href="getHistoryUrl(historyItem)" rel="noopener noreferrer"
+            :href="getHistoryUrl(historyItem)"
             m="last:b-4" p="2"
             rounded="$bew-radius"
             hover:bg="$bew-fill-2"
@@ -370,7 +370,6 @@ function getHistoryList(type: Business, view_at = 0 as number) {
                 <div text="$bew-text-2 sm" m="t-4" flex="~" align="items-center">
                   <ALink
                     :href="`https://space.bilibili.com/${historyItem.author_mid}`"
-                    rel="noopener noreferrer"
                   >
                     {{ historyItem.author_name }}
                   </ALink>

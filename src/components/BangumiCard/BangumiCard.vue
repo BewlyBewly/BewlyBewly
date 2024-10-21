@@ -52,7 +52,7 @@ function handleClick(event: MouseEvent) {
       :style="{
         display: horizontal ? 'flex' : 'block',
       }"
-      :href="bangumi.url" target="_blank" rel="noopener noreferrer"
+      :href="bangumi.url" target="_blank"
       gap-4 hover:bg="$bew-fill-2" hover:ring="8 $bew-fill-2"
       content-visibility-auto intrinsic-size-400px
       transition="all ease-in-out 300"
@@ -172,7 +172,7 @@ function handleClick(event: MouseEvent) {
       >
         <p un-text="lg" mb-2>
           <a
-            :href="bangumi.url" target="_blank" rel="noopener noreferrer"
+            :href="bangumi.url" target="_blank"
             class="keep-two-lines"
             :title="bangumi.title"
           >

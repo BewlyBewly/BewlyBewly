@@ -163,13 +163,13 @@ defineExpose({
 
       <div flex="~ gap-4">
         <ALink
-          :href="playAllUrl" rel="noopener noreferrer"
+          :href="playAllUrl"
           flex="~" items="center"
         >
           <span text="sm">{{ $t('common.play_all') }}</span>
         </ALink>
         <ALink
-          :href="viewAllUrl" rel="noopener noreferrer"
+          :href="viewAllUrl"
           flex="~" items="center"
         >
           <span text="sm">{{ $t('common.view_all') }}</span>
@@ -238,7 +238,6 @@ defineExpose({
             v-for="item in favoriteResources"
             :key="item.id"
             :href="isMusic(item) ? `https://www.bilibili.com/audio/au${item.id}` : `//www.bilibili.com/video/${item.bvid}`"
-            rel="noopener noreferrer"
             hover:bg="$bew-fill-2"
             rounded="$bew-radius"
             m="last:b-4" p="2"

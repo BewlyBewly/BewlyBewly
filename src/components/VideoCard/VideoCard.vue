@@ -286,7 +286,7 @@ provide('getVideoType', () => props.type!)
       >
         <a
           :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }"
-          :href="videoUrl" target="_blank" rel="noopener noreferrer"
+          :href="videoUrl" target="_blank"
           @mouseenter="handleMouseEnter"
           @mouseleave="handelMouseLeave"
           @click="handleClick"
@@ -432,7 +432,7 @@ provide('getVideoType', () => props.type!)
             <div v-if="!horizontal" flex>
               <a
                 v-if="video.authorFace"
-                :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
+                :href="authorJumpUrl" target="_blank"
                 m="r-4" w="36px" h="36px" rounded="1/2"
                 object="center cover" bg="$bew-skeleton" cursor="pointer"
                 position-relative
@@ -466,7 +466,7 @@ provide('getVideoType', () => props.type!)
                   text="lg overflow-ellipsis $bew-text-1"
                   cursor="pointer"
                 >
-                  <a :href="videoUrl" target="_blank" :title="video.title" rel="noopener noreferrer">
+                  <a :href="videoUrl" target="_blank" :title="video.title">
                     {{ video.title }}
                   </a>
                 </h3>
@@ -495,7 +495,7 @@ provide('getVideoType', () => props.type!)
                   <div v-if="horizontal" flex>
                     <a
                       v-if="video.authorFace"
-                      :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
+                      :href="authorJumpUrl" target="_blank"
                       m="r-2" w="30px" h="30px" rounded="1/2"
                       object="center cover" bg="$bew-skeleton" cursor="pointer" relative
                       @click.stop=""
@@ -525,7 +525,7 @@ provide('getVideoType', () => props.type!)
                     class="channel-name"
                     un-text="hover:$bew-text-1"
                     cursor-pointer mr-4
-                    :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
+                    :href="authorJumpUrl" target="_blank"
                     @click.stop=""
                   >
                     <span>{{ video.author }}</span>

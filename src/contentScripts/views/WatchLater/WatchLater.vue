@@ -156,7 +156,6 @@ function jumpToLoginPage() {
             :key="item.aid"
             :href="settings.videoCardLinkOpenMode === 'drawer' ? undefined : `https://www.bilibili.com/list/watchlater?bvid=${item.bvid}`"
             target="_blank"
-            rel="noopener noreferrer"
             class="group"
             flex cursor-pointer
             @click="settings.videoCardLinkOpenMode === 'drawer' && openIframeDrawer(`https://www.bilibili.com/list/watchlater?bvid=${item.bvid}`)"
@@ -233,7 +232,7 @@ function jumpToLoginPage() {
                     class="keep-two-lines"
                     overflow="hidden"
                     un-text="lg overflow-ellipsis"
-                    :href="removeHttpFromUrl(`https://www.bilibili.com/list/watchlater?bvid=${item.bvid}`)" target="_blank" rel="noopener noreferrer"
+                    :href="removeHttpFromUrl(`https://www.bilibili.com/list/watchlater?bvid=${item.bvid}`)" target="_blank"
                   >
                     {{ item.title }}
                   </a>
@@ -249,7 +248,7 @@ function jumpToLoginPage() {
                     hover:bg="$bew-theme-color-10"
                     duration-300
                     pr-2
-                    :href="`//space.bilibili.com/${item.owner.mid}`" target="_blank" rel="noopener noreferrer"
+                    :href="`//space.bilibili.com/${item.owner.mid}`" target="_blank"
                   >
                     <img
                       :src="removeHttpFromUrl(`${item.owner.face}@40w_40h_1c`)"

@@ -240,7 +240,6 @@ function jumpToLoginPage() {
           :key="historyItem.kid"
           :href="settings.videoCardLinkOpenMode === 'drawer' ? undefined : getHistoryUrl(historyItem)"
           target="_blank"
-          rel="noopener noreferrer"
           block
           class="group"
           flex
@@ -373,7 +372,7 @@ function jumpToLoginPage() {
             <div flex justify-between w-full h-full>
               <div flex="~ col">
                 <a
-                  :href="`${getHistoryUrl(historyItem)}`" target="_blank" rel="noopener noreferrer"
+                  :href="`${getHistoryUrl(historyItem)}`" target="_blank"
                   :title="historyItem.show_title ? historyItem.show_title : historyItem.title"
                 >
                   <h3
@@ -395,7 +394,7 @@ function jumpToLoginPage() {
                   hover:bg="$bew-theme-color-10"
                   duration-300
                   pr-2
-                  :href="historyItem.author_mid ? `https://space.bilibili.com/${historyItem.author_mid}` : historyItem.uri" target="_blank" rel="noopener noreferrer"
+                  :href="historyItem.author_mid ? `https://space.bilibili.com/${historyItem.author_mid}` : historyItem.uri" target="_blank"
                 >
                   <img
                     :src="
