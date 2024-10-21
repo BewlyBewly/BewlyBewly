@@ -99,7 +99,8 @@ onKeyStroke('Escape', (e: KeyboardEvent) => {
 
       <Button
         size="small" type="primary"
-        style="--b-button-width: 150px"
+        shrink-0
+        style="--b-button-width: 80px"
         @click="handleAddFilter"
       >
         <template #left>
