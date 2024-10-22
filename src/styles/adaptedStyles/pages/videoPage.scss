@@ -64,7 +64,8 @@
     }
 
     .user-card-m-exp .user-info-wrapper .info .user .user-label,
-    #pub button {
+    #pub button,
+    .editor-innter div:last-child div {
       background-color: var(--bew-theme-color) !important;
     }
 
@@ -160,6 +161,10 @@
     .content .group-list li input[type="checkbox"]:checked:hover + i,
     .coin-operated-m-exp .like-checkbox input[type="checkbox"]:checked + i {
       border-color: var(--bew-theme-color);
+    }
+
+    .editor-innter div:last-child {
+      border-color: var(--bew-theme-color) !important;
     }
 
     .upinfo-btn-panel .not-follow-charge-btn:hover,
@@ -348,7 +353,8 @@
       color: var(--bew-text-1);
     }
 
-    .user-card-m-exp .user-info-wrapper .info .user .name {
+    .user-card-m-exp .user-info-wrapper .info .user .name,
+    .editor-innter div:last-child div:last-child {
       color: var(--bew-text-1) !important;
     }
 

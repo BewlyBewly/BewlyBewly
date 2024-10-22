@@ -30,11 +30,6 @@ html.bewly-design > ::-webkit-scrollbar-track {
   background: transparent;
 }
 
-::selection {
-  background: color-mix(in oklab, var(--bew-theme-color-30), white 20%);
-  color: revert !important;
-}
-
 html.bewly-design,
 .bewly-design body {
   // font-size: 14px !important;
@@ -50,15 +45,10 @@ html.dark.bewly-design {
   background-color: var(--bew-bg);
 }
 
-.bewly-design {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    --uno: "color-$bew-text-1";
-  }
+.bewly-design *::selection,
+.bewly-wrapper *::selection {
+  background: color-mix(in oklab, var(--bew-theme-color-40), var(--bew-bg, white) 20%) !important;
+  color: revert !important;
 }
 
 // Adjust broken image icon

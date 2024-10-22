@@ -60,6 +60,7 @@ settings:
   menu_general: General
   menu_desktop_and_dock: Desktop & Dock
   menu_appearance: Appearance
+  menu_bewly_pages: BewlyBewly Pages
   menu_search_page: Search Page
   menu_home: Home
   menu_compatibility: Compatibility
@@ -113,29 +114,35 @@ settings:
   customize_font_desc: |-
     For users who favor the traditional style of Chinese characters, we recommend <a class="link" href="https://github.com/GuiWonder/Shanggu" target="_blank">Shanggu Fonts (尚古字體)</a> and <a class="link" href="https://github.com/ayaka14732/FanWunHak" target="_blank">Fan Wun Hak (繁媛黑體)</a>.
     These fonts also possess the capability to convert simplified Chinese into traditional characters.
+  override_danmaku_font: Override danmaku font
+  override_danmaku_font_desc: >
+    Set the danmaku font to your customized font to override the default. The video player won't be able to change it afterwards.
   remove_the_indent_from_chinese_punctuation: Remove the indent from Chinese punctuation
   remove_the_indent_from_chinese_punctuation_desc: >
     By default, Bilibili will specifically handle Chinese punctuation to achieve left alignment.
     If you are using a custom font, it is recommended to remove the indent.
 
-  video_card_link_opening_behavior: Video card and bangumi card link opening behavior
-  video_card_link_opening_behavior_opt:
-    drawer: Open in drawer
-    new_tab: New tab
-  enable_video_preview: Enable video preview feature (if possible)
-  enable_video_ctrl_bar_on_video_card: Display the video control bar on the video card
-  hover_video_card_delayed: Delayed video preview on hover over the video card
-  block_ads: Block ads
   disable_frosted_glass: Disable frosted glass effect
   reduce_frosted_glass_blur: Reduce the intensity of the frosted glass blur
 
-  # Desktop & Dock
-  use_old_top_bar: Use the old top bar
-  top_bar_link_opening_behavior: Top bar link opening behavior
-  top_bar_link_opening_behavior_opt:
+  link_opening_behavior_opt:
     current_tab: Current tab
     current_tab_if_not_homepage: Current tab if not the homepage, otherwise new tab
     new_tab: New tab
+    drawer: Open in drawer
+  top_bar_link_opening_behavior: Top bar link opening behavior
+  video_card_link_opening_behavior: Video card and bangumi card link opening behavior
+  search_bar_link_opening_behavior: Search bar link opening behavior
+  close_drawer_without_pressing_esc_again: Close the drawer without pressing <kbd>Esc</kbd> again
+
+  block_ads: Block ads
+
+  enable_video_preview: Enable video preview feature (if possible)
+  enable_video_ctrl_bar_on_video_card: Display the video control bar on the video card
+  hover_video_card_delayed: Delayed video preview on hover over the video card
+
+  # Desktop & Dock
+  use_old_top_bar: Use the old top bar
   auto_hide_top_bar: Automatically hide the top bar
   top_bar_icon_badges: Icon badges
   top_bar_icon_badges_opt:

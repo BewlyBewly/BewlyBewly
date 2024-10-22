@@ -5,7 +5,7 @@ import type { Ref } from 'vue'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { FilterType, useFilter } from '~/composables/useFilter'
 import { LanguageType } from '~/enums/appEnums'
-import type { GridLayout } from '~/logic'
+import type { GridLayoutType } from '~/logic'
 import { accessKey, settings } from '~/logic'
 import type { AppForYouResult, Item as AppVideoItem } from '~/models/video/appForYou'
 import { Type as ThreePointV2Type } from '~/models/video/appForYou'
@@ -15,7 +15,7 @@ import { TVAppKey } from '~/utils/authProvider'
 import { isVerticalVideo } from '~/utils/uriParse'
 
 const props = defineProps<{
-  gridLayout: GridLayout
+  gridLayout: GridLayoutType
 }>()
 
 const emit = defineEmits<{

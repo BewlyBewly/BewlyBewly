@@ -1,4 +1,4 @@
-import type { GridLayout } from '~/logic'
+import type { GridLayoutType } from '~/logic'
 
 export enum HomeSubPage {
   ForYou = 'ForYou',
@@ -19,5 +19,5 @@ export interface RankingType {
 export interface GridLayoutIcon {
   icon: string
   iconActivated: string
-  value: GridLayout
+  value: GridLayoutType
 }

@@ -60,6 +60,7 @@ settings:
   menu_general: 一般
   menu_desktop_and_dock: 桌面同 Dock
   menu_appearance: 版面
+  menu_bewly_pages: BewlyBewly 頁面
   menu_home: 主頁
   menu_search_page: 搵嘢頁
   menu_compatibility: 相容性
@@ -113,28 +114,34 @@ settings:
   customize_font_desc: |-
     對於舊字形嘅用戶，我哋推介 <a class="link" href="https://github.com/GuiWonder/Shanggu" target="_blank">Shanggu Fonts (尚古字型)</a> 同 <a class="link" href="https://github.com/ayaka14732/FanWunHak" target="_blank">Fan Wun Hak (繁媛黑體)</a>。
     呢啲字型仲可以將簡體中文轉做繁體/正體中文。
+  override_danmaku_font: 覆蓋彈幕字型
+  override_danmaku_font_desc: >
+    設定彈幕字型做你嘅自訂字型覆蓋預設值。影片播放器之後唔得改彈幕字型。
   remove_the_indent_from_chinese_punctuation: 移除中文標點符號嘅縮排
   remove_the_indent_from_chinese_punctuation_desc: >
     Bilibili 預設會專登執吓中文標點符號，令到佢可以左對齊。如果你係用緊自訂字字型，最好係移除縮排。
 
-  video_card_link_opening_behavior: 影片同番劇卡片連結開啓行爲
-  video_card_link_opening_behavior_opt:
-    drawer: 喺櫃桶度開啓
-    new_tab: 新開分頁
-  enable_video_preview: 使用影片預覽功能（若然得嘅話）
-  enable_video_ctrl_bar_on_video_card: 喺影片卡片上顯示影片控制欄
-  hover_video_card_delayed: 滑鼠停留喺影片卡片嗰陣遲啲進行影片預覽
-  block_ads: 封鎖廣告
   disable_frosted_glass: 閂咗毛玻璃效果
   reduce_frosted_glass_blur: 降低毛玻璃模糊強度
 
-  # Desktop and Dock
-  use_old_top_bar: 用返舊版頂部欄
-  top_bar_link_opening_behavior: 頂部欄連結開啓行爲
-  top_bar_link_opening_behavior_opt:
+  link_opening_behavior_opt:
     current_tab: 目前分頁
     current_tab_if_not_homepage: 唔喺主頁就喺目前分頁度開啓，否則開新嘅分頁
     new_tab: 新開分頁
+    drawer: 喺櫃桶度開啓
+  top_bar_link_opening_behavior: 頂部欄連結開啓行爲
+  video_card_link_opening_behavior: 影片同番劇卡片連結開啓行爲
+  search_bar_link_opening_behavior: 搜尋欄連結開啓行爲
+  close_drawer_without_pressing_esc_again: 閂櫃桶嗰陣唔使再撳多次 <kbd>Esc</kbd>
+
+  block_ads: 封鎖廣告
+
+  enable_video_preview: 使用影片預覽功能（若然得嘅話）
+  enable_video_ctrl_bar_on_video_card: 喺影片卡片上顯示影片控制欄
+  hover_video_card_delayed: 滑鼠停留喺影片卡片嗰陣遲啲進行影片預覽
+
+  # Desktop and Dock
+  use_old_top_bar: 用返舊版頂部欄
   auto_hide_top_bar: 自動收埋頂部欄
   top_bar_icon_badges: 圖示邊位標記
   top_bar_icon_badges_opt:

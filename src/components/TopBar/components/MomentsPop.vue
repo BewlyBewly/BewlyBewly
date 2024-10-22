@@ -315,7 +315,7 @@ defineExpose({
         </div>
       </div>
       <ALink
-        href="https://t.bilibili.com/" rel="noopener noreferrer"
+        href="https://t.bilibili.com/"
         flex="~ items-center"
       >
         <span text="sm">{{ $t('common.view_all') }}</span>
@@ -353,7 +353,7 @@ defineExpose({
           <ALink
             v-for="(moment, index) in moments"
             :key="index"
-            :href="moment.link" rel="noopener noreferrer"
+            :href="moment.link"
             flex="~ justify-between"
             m="b-2" p="2"
             rounded="$bew-radius"
@@ -374,7 +374,6 @@ defineExpose({
             />
             <ALink
               :href="moment.authorJumpUrl"
-              rel="noopener noreferrer"
               rounded="1/2"
               w="40px" h="40px" m="r-4"
               bg="$bew-skeleton"
@@ -394,7 +393,6 @@ defineExpose({
 
                 <ALink
                   :href="moment.authorJumpUrl"
-                  rel="noopener noreferrer"
                   font-bold
                 >
                   {{ moment.author }}

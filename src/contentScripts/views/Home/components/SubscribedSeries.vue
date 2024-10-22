@@ -2,7 +2,7 @@
 import type { Ref } from 'vue'
 
 import { useBewlyApp } from '~/composables/useAppProvider'
-import type { GridLayout } from '~/logic'
+import type { GridLayoutType } from '~/logic'
 import type { DataItem as MomentItem, MomentResult } from '~/models/moment/moment'
 import api from '~/utils/api'
 
@@ -13,7 +13,7 @@ interface VideoElement {
 }
 
 const props = defineProps<{
-  gridLayout: GridLayout
+  gridLayout: GridLayoutType
 }>()
 
 const emit = defineEmits<{

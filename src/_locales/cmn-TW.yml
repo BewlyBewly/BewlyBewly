@@ -60,6 +60,7 @@ settings:
   menu_general: 一般
   menu_desktop_and_dock: 桌面與 Dock
   menu_appearance: 外觀
+  menu_bewly_pages: BewlyBewly 頁面
   menu_home: 首頁
   menu_search_page: 搜尋頁
   menu_about: 關於
@@ -113,29 +114,35 @@ settings:
   customize_font_desc: |-
     對於喜歡舊字形的用戶，我們推薦 <a class="link" href="https://github.com/GuiWonder/Shanggu" target="_blank">Shanggu Fonts (尚古字型)</a> 和 <a class="link" href="https://github.com/ayaka14732/FanWunHak" target="_blank">Fan Wun Hak (繁媛黑體)</a>。
     這些字型還具有將簡體中文轉換為繁體/正體中文的能力。
+  override_danmaku_font: 覆蓋彈幕字型
+  override_danmaku_font_desc: >
+    設定彈幕字型為您的自訂字型以覆蓋預設值。影片播放器將無法在之後更改彈幕字型。
   remove_the_indent_from_chinese_punctuation: 移除中文標點符號的縮排
   remove_the_indent_from_chinese_punctuation_desc: >
     Bilibili 預設會特別處理中文標點符號以達到左對齊。
     如果你正在使用自訂字型，建議移除縮排。
 
-  video_card_link_opening_behavior: 影片和番劇卡片連結開啟行為
-  video_card_link_opening_behavior_opt:
-    drawer: 抽屜開啟
-    new_tab: 新索引標籤
-  enable_video_preview: 啟用影片預覽功能（如果可以的話）
-  enable_video_ctrl_bar_on_video_card: 在影片卡片上顯示影片控制欄
-  hover_video_card_delayed: 將滑鼠懸停在影片卡片上時延遲影片預覽
-  block_ads: 封鎖廣告
   disable_frosted_glass: 停用毛玻璃效果
   reduce_frosted_glass_blur: 降低毛玻璃模糊強度
 
-  # Desktop and Dock
-  use_old_top_bar: 使用舊版頂欄
-  top_bar_link_opening_behavior: 頂欄連結開啟行為
-  top_bar_link_opening_behavior_opt:
+  link_opening_behavior_opt:
     current_tab: 目前索引標籤
     current_tab_if_not_homepage: 不在首頁則在目前索引標籤開啟，否則在新索引標籤
     new_tab: 新索引標籤
+    drawer: 抽屜開啟
+  top_bar_link_opening_behavior: 頂欄連結開啟行為
+  video_card_link_opening_behavior: 影片和番劇卡片連結開啟行為
+  search_bar_link_opening_behavior: 搜尋欄連結開啟行為
+  close_drawer_without_pressing_esc_again: 關閉抽屜時不用再次按 <kbd>Esc</kbd> 關閉
+
+  block_ads: 封鎖廣告
+
+  enable_video_preview: 啟用影片預覽功能（如果可以的話）
+  enable_video_ctrl_bar_on_video_card: 在影片卡片上顯示影片控制欄
+  hover_video_card_delayed: 將滑鼠懸停在影片卡片上時延遲影片預覽
+
+  # Desktop and Dock
+  use_old_top_bar: 使用舊版頂欄
   auto_hide_top_bar: 自動隱藏頂欄
   top_bar_icon_badges: 圖示標記樣式
   top_bar_icon_badges_opt:
