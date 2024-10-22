@@ -183,12 +183,12 @@ function injectApp() {
   // Only the development mode bewly element remains
   const bewlyElArr: NodeListOf<Element> = document.querySelectorAll('#bewly')
   if (bewlyElArr.length > 0) {
-    alert(`
-      You have multiple versions of BewlyBewly installed. Please retain only one to avoid conflicts and issues!
-      您安装了多个版本的 BewlyBewly。请只保留一个版本以避免冲突和问题！
-      您安裝了多個版本的 BewlyBewly。請只保留一個版本以避免衝突和問題！
-      你單咗幾個版本嘅 BewlyBewly。請淨係留一個版本嚟避免衝突同問題！
-    `)
+    // alert(`
+    //   You have multiple versions of BewlyBewly installed. Please retain only one to avoid conflicts and issues!
+    //   您安装了多个版本的 BewlyBewly。请只保留一个版本以避免冲突和问题！
+    //   您安裝了多個版本的 BewlyBewly。請只保留一個版本以避免衝突和問題！
+    //   你單咗幾個版本嘅 BewlyBewly。請淨係留一個版本嚟避免衝突同問題！
+    // `)
 
     bewlyElArr.forEach((el: Element) => {
       const elVersion = el.getAttribute('data-version') || '0.0.0'
