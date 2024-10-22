@@ -16,14 +16,7 @@ const { isDark } = useDark()
 const [showSettings, toggleSettings] = useToggle(false)
 
 const activatedPage = ref<AppPage>(settings.value.dockItemVisibilityList.find(e => e.visible === true)?.page ?? AppPage.Home)
-const pages = {
-  [AppPage.Home]: defineAsyncComponent(() => import('./Home/Home.vue')),
-  [AppPage.Search]: defineAsyncComponent(() => import('./Search/Search.vue')),
-  [AppPage.Anime]: defineAsyncComponent(() => import('./Anime/Anime.vue')),
-  [AppPage.History]: defineAsyncComponent(() => import('./History/History.vue')),
-  [AppPage.WatchLater]: defineAsyncComponent(() => import('./WatchLater/WatchLater.vue')),
-  [AppPage.Favorites]: defineAsyncComponent(() => import('./Favorites/Favorites.vue')),
-}
+
 const mainAppRef = ref<HTMLElement>() as Ref<HTMLElement>
 const scrollbarRef = ref()
 const handlePageRefresh = ref<() => void>()
@@ -239,23 +232,13 @@ provide<BewlyAppProvider>('BEWLY_APP', {
     >
       <template v-if="showBewlyPage">
         <OverlayScrollbarsComponent ref="scrollbarRef" element="div" h-inherit defer @os-scroll="handleOsScroll">
-          <main m-auto max-w="$bew-page-max-width">
-            <div
-              p="t-[calc(var(--bew-top-bar-height)+10px)]" m-auto
-              w="lg:85% md:[calc(90%-60px)] [calc(100%-140px)]"
-            >
-              <!-- control button group -->
-              <BackToTopOrRefreshButton
-                v-if="activatedPage !== AppPage.Search && !settings.moveBackToTopOrRefreshButtonToDock"
-                @refresh="handleThrottledPageRefresh"
-                @back-to-top="handleThrottledBackToTop"
-              />
-
-              <Transition name="page-fade">
-                <Component :is="pages[activatedPage]" />
-              </Transition>
-            </div>
-          </main>
+          <!-- control button group -->
+          <BackToTopOrRefreshButton
+            v-if="activatedPage !== AppPage.Search && !settings.moveBackToTopOrRefreshButtonToDock"
+            @refresh="handleThrottledPageRefresh"
+            @back-to-top="handleThrottledBackToTop"
+          />
+          <PageContent />
         </OverlayScrollbarsComponent>
       </template>
     </div>

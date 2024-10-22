@@ -5,6 +5,8 @@ import { useDark } from '~/composables/useDark'
 import { useDelayedHover } from '~/composables/useDelayedHover'
 import { settings } from '~/logic'
 
+import Dialog from '../Dialog.vue'
+import PageContent from '../PageContent.vue'
 import Tooltip from '../Tooltip.vue'
 import type { HoveringDockItem } from './types'
 
@@ -30,6 +32,8 @@ const hoveringDockItem = reactive<HoveringDockItem>({
   themeMode: false,
   settings: false,
 })
+
+const showBewlyPageDialog = ref<boolean>(false)
 
 watch(() => settings.value.autoHideSidebar, (newValue) => {
   if (newValue)
@@ -78,6 +82,14 @@ function toggleHideSidebar(hide: boolean) {
       pointer-events-auto
       duration-300
     >
+      <Button
+        class="ctrl-btn"
+        style="backdrop-filter: var(--bew-filter-glass-1);"
+        center size="small" round
+        @click="showBewlyPageDialog = true"
+      >
+        <i i-mingcute:classify-2-line w-20px h-20px shrink-0 />
+      </Button>
       <Tooltip :content="isDark ? $t('dock.dark_mode') : $t('dock.light_mode')" placement="left">
         <Button
           class="ctrl-btn"
@@ -118,6 +130,16 @@ function toggleHideSidebar(hide: boolean) {
       </Tooltip>
     </div>
   </div>
+  <Dialog
+    v-if="showBewlyPageDialog"
+    title="fjkdsfjlsjdfls"
+    width="80%"
+    content-height="80dvh"
+    :show-footer="false"
+    @close="showBewlyPageDialog = false"
+  >
+    <PageContent within-dialog />
+  </Dialog>
 </template>
 
 <style lang="scss" scoped>
