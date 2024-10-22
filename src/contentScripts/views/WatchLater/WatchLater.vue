@@ -155,7 +155,7 @@ function jumpToLoginPage() {
             v-for="(item, index) in currentWatchLaterList"
             :key="item.aid"
             :href="settings.videoCardLinkOpenMode === 'drawer' ? undefined : `https://www.bilibili.com/list/watchlater?bvid=${item.bvid}`"
-            target="_blank"
+            :target="settings.videoCardLinkOpenMode === 'currentTab' ? '_self' : '_blank'"
             class="group"
             flex cursor-pointer
             @click="settings.videoCardLinkOpenMode === 'drawer' && openIframeDrawer(`https://www.bilibili.com/list/watchlater?bvid=${item.bvid}`)"

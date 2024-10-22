@@ -49,6 +49,10 @@ const openModeOptions = computed(() => {
 const videoCardOpenModeOptions = computed(() => {
   return [
     {
+      label: t('settings.link_opening_behavior_opt.current_tab'),
+      value: 'currentTab',
+    },
+    {
       label: t('settings.link_opening_behavior_opt.drawer'),
       value: 'drawer',
     },

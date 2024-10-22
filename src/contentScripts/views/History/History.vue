@@ -239,7 +239,7 @@ function jumpToLoginPage() {
           v-for="(historyItem, index) in historyList"
           :key="historyItem.kid"
           :href="settings.videoCardLinkOpenMode === 'drawer' ? undefined : getHistoryUrl(historyItem)"
-          target="_blank"
+          :target="settings.videoCardLinkOpenMode === 'currentTab' ? '_self' : '_blank'"
           block
           class="group"
           flex

@@ -286,7 +286,7 @@ provide('getVideoType', () => props.type!)
       >
         <a
           :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }"
-          :href="videoUrl" target="_blank"
+          :href="videoUrl" :target="settings.videoCardLinkOpenMode === 'currentTab' ? '_self' : '_blank'"
           @mouseenter="handleMouseEnter"
           @mouseleave="handelMouseLeave"
           @click="handleClick"
