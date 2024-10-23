@@ -15,7 +15,16 @@ import { setupNecessarySettingsWatchers } from './necessarySettingsWatchers'
 const { isDark } = useDark()
 const [showSettings, toggleSettings] = useToggle(false)
 
-const activatedPage = ref<AppPage>(settings.value.dockItemVisibilityList.find(e => e.visible === true)?.page ?? AppPage.Home)
+// Get the 'page' query parameter from the URL
+function getPageParam(): AppPage | null {
+  const urlParams = new URLSearchParams(window.location.search)
+  const result = urlParams.get('page') as AppPage | null
+  if (result && Object.values(AppPage).includes(result))
+    return result
+  return null
+}
+
+const activatedPage = ref<AppPage>(getPageParam() || (settings.value.dockItemVisibilityList.find(e => e.visible === true)?.page || AppPage.Home))
 const pages = {
   [AppPage.Home]: defineAsyncComponent(() => import('./Home/Home.vue')),
   [AppPage.Search]: defineAsyncComponent(() => import('./Search/Search.vue')),
@@ -53,6 +62,10 @@ const showBewlyPage = computed((): boolean => {
 watch(
   () => activatedPage.value,
   () => {
+    // Update the URL query parameter when activatedPage changes
+    const url = new URL(window.location.href)
+    url.searchParams.set('page', activatedPage.value)
+    window.history.replaceState({}, '', url.toString())
     const osInstance = scrollbarRef.value.osInstance()
     osInstance.elements().viewport.scrollTop = 0
   },

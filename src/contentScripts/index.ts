@@ -34,8 +34,6 @@ function isSupportedPages(): boolean {
   if (
     // homepage
     isHomePage()
-    // fix #166 https://github.com/hakadao/BewlyBewly/issues/166
-    || /https?:\/\/www\.bilibili\.com\/\?bvid=.*$/.test(currentUrl)
 
     // video page
     || /https?:\/\/(?:www\.)?bilibili\.com\/(?:video|list)\/.*/.test(currentUrl)

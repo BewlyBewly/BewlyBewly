@@ -154,6 +154,7 @@ export function isHomePage(url: string = location.href): boolean {
     /https?:\/\/(?:www\.)?bilibili.com\/?(?:#\/?)?$/.test(url)
     || /https?:\/\/(?:www\.)?bilibili.com\/index\.html$/.test(url)
     || /https?:\/\/(?:www\.)?bilibili.com\/\?spm_id_from=.*/.test(url)
+    || /https?:\/\/www\.bilibili\.com\/\?.*$/.test(url)
   ) {
     return true
   }
