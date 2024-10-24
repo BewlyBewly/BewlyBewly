@@ -65,7 +65,7 @@ const commonOptions = computed((): { command: VideoOption, name: string, icon: s
 
     [
       { command: VideoOption.ViewTheOriginalCover, name: t('video_card.operation.view_the_original_cover'), icon: 'i-solar:gallery-minimalistic-bold-duotone' },
-      { command: VideoOption.ViewThisUserChannel, name: t('video_card.operation.view_this_user_channel'), icon: 'i-solar:user-bold-duotone' },
+      // { command: VideoOption.ViewThisUserChannel, name: t('video_card.operation.view_this_user_channel'), icon: 'i-solar:user-bold-duotone' },
     ],
   ]
   if (getVideoType() === 'bangumi') {
@@ -170,7 +170,7 @@ function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
       <div
         style="backdrop-filter: var(--bew-filter-glass-1); box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-1);"
         :style="contextMenuStyles"
-        p-2 bg="$bew-elevated" rounded="$bew-radius"
+        p-1 bg="$bew-elevated" rounded="$bew-radius"
         min-w-200px m="t-4 l-[calc(-200px+1rem)]"
         border="1 $bew-border-color"
         z-10
@@ -244,7 +244,7 @@ function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
 
 <style lang="scss" scoped>
 .context-menu-item {
-  --uno: "hover:bg-$bew-fill-2 px-4 py-2 rounded-$bew-radius-half cursor-pointer";
+  --uno: "hover:bg-$bew-fill-2 text-sm px-4 py-2 rounded-$bew-radius-half cursor-pointer";
   --uno: "flex items-center";
 }
 
@@ -253,6 +253,6 @@ function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
 }
 
 .divider {
-  --uno: "w-full h-1px my-1 bg-$bew-border-color";
+  --uno: "w-full h-1px px-2px bg-$bew-border-color";
 }
 </style>
