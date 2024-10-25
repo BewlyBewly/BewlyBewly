@@ -110,5 +110,25 @@ export async function getManifest() {
     }
   }
 
+  if (!isFirefox) {
+    manifest.content_scripts?.push({
+      matches: [
+        '*://www.bilibili.com/*',
+        '*://search.bilibili.com/*',
+        '*://t.bilibili.com/*',
+        '*://space.bilibili.com/*',
+        '*://message.bilibili.com/*',
+        '*://member.bilibili.com/*',
+        '*://account.bilibili.com/*',
+        '*://www.hdslb.com/*',
+        '*://passport.bilibili.com/*',
+      ],
+      js: ['./dist/inject/index.js'],
+      run_at: 'document_start',
+      all_frames: true,
+      world: 'MAIN',
+    } as any)
+  }
+
   return manifest
 }

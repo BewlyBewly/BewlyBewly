@@ -27,7 +27,8 @@ const inIframe = computed((): boolean => {
 
 useEventListener(window, 'popstate', updateIframeUrl)
 nextTick(() => {
-  useEventListener(iframeRef.value?.contentWindow, 'pushstate', updateCurrentUrl)
+  useEventListener(iframeRef.value?.contentWindow, 'historyChange', updateCurrentUrl)
+  useEventListener(iframeRef.value?.contentWindow, 'popstate', updateCurrentUrl)
 })
 
 onMounted(async () => {
@@ -98,7 +99,7 @@ async function releaseIframeResources() {
 }
 
 function handleOpenInNewTab() {
-  window.open(props.url, '_blank')
+  window.open(currentUrl.value, '_blank')
 }
 
 const isEscPressed = ref<boolean>(false)
@@ -234,7 +235,7 @@ watchEffect(() => {
       >
         <iframe
           ref="iframeRef"
-          :src="currentUrl"
+          :src="props.url"
           :style="{
             bottom: headerShow ? `var(--bew-top-bar-height)` : '0',
           }"
