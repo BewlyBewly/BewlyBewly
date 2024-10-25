@@ -95,3 +95,11 @@
 // .bewly-design *:not(.bili-danmaku-x-dm) {
 //   font-family: var(--bew-font-family, var(--bew-fonts-english));
 // }
+
+span.duration,
+span.bpx-player-ctrl-time-current,
+span.bpx-player-ctrl-time-duration,
+div.stat-item.duration, 
+div.bpx-player-progress-preview-time {
+  font-feature-settings: "tnum";
+}
