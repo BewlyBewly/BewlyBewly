@@ -76,7 +76,7 @@ setupNecessarySettingsWatchers()
 
 onMounted(() => {
   window.dispatchEvent(new CustomEvent(BEWLY_MOUNTED))
-
+  document.head.appendChild(Object.assign(document.createElement('link'), {rel: "stylesheet", href: "https://fonts.loli.net/css2?family=Onest:wght@100..900"}));
   if (isHomePage()) {
     // Force overwrite Bilibili Evolved body tag & html tag background color
     document.body.style.setProperty('background-color', 'unset', 'important')
