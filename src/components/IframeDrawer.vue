@@ -26,9 +26,9 @@ const inIframe = computed((): boolean => {
 })
 
 useEventListener(window, 'popstate', updateIframeUrl)
-nextTick(() => {
-  useEventListener(iframeRef.value?.contentWindow, 'pushstate', updateCurrentUrl)
-})
+// nextTick(() => {
+//   useEventListener(iframeRef.value?.contentWindow, 'pushstate', updateCurrentUrl)
+// })
 
 onMounted(async () => {
   history.pushState(null, '', props.url)
@@ -46,17 +46,17 @@ onUnmounted(() => {
   history.replaceState(null, '', 'https://www.bilibili.com')
 })
 
-function updateCurrentUrl() {
-  if (iframeRef.value?.contentWindow) {
-    try {
-      currentUrl.value = iframeRef.value.contentWindow.location.href
-      history.pushState(null, '', currentUrl.value)
-    }
-    catch (error) {
-      console.error('Unable to access iframe URL:', error)
-    }
-  }
-}
+// function updateCurrentUrl() {
+//   if (iframeRef.value?.contentWindow) {
+//     try {
+//       currentUrl.value = iframeRef.value.contentWindow.location.href.replace(/\/$/, '')
+//       history.pushState(null, '', currentUrl.value.replace(/\/$/, ''))
+//     }
+//     catch (error) {
+//       console.error('Unable to access iframe URL:', error)
+//     }
+//   }
+// }
 
 async function updateIframeUrl() {
   if (isHomePage()) {
@@ -66,7 +66,7 @@ async function updateIframeUrl() {
   await nextTick()
 
   if (iframeRef.value?.contentWindow) {
-    iframeRef.value.contentWindow.location.replace(location.href)
+    iframeRef.value.contentWindow.location.replace(location.href.replace(/\/$/, ''))
   }
 }
 
@@ -98,7 +98,9 @@ async function releaseIframeResources() {
 }
 
 function handleOpenInNewTab() {
-  window.open(props.url, '_blank')
+  // window.open(props.url, '_blank')
+  if (iframeRef.value)
+    window.open(iframeRef.value.contentWindow?.location.href.replace(/\/$/, ''), '_blank')
 }
 
 const isEscPressed = ref<boolean>(false)
