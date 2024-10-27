@@ -22,6 +22,7 @@ const pages = {
   [HomeSubPage.SubscribedSeries]: defineAsyncComponent(() => import('./components/SubscribedSeries.vue')),
   [HomeSubPage.Trending]: defineAsyncComponent(() => import('./components/Trending.vue')),
   [HomeSubPage.Ranking]: defineAsyncComponent(() => import('./components/Ranking.vue')),
+  [HomeSubPage.Live]: defineAsyncComponent(() => import('./components/Live.vue')),
 }
 const showSearchPageMode = ref<boolean>(false)
 const shouldMoveTabsUp = ref<boolean>(false)

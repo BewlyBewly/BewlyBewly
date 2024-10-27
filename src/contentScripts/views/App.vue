@@ -7,7 +7,7 @@ import { useDark } from '~/composables/useDark'
 import { BEWLY_MOUNTED, DRAWER_VIDEO_ENTER_PAGE_FULL, DRAWER_VIDEO_EXIT_PAGE_FULL, OVERLAY_SCROLL_BAR_SCROLL } from '~/constants/globalEvents'
 import { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
-import { isHomePage, queryDomUntilFound, scrollToTop } from '~/utils/main'
+import { isHomePage, openLinkToNewTab, queryDomUntilFound, scrollToTop } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
 import { setupNecessarySettingsWatchers } from './necessarySettingsWatchers'
@@ -136,6 +136,17 @@ function handleOsScroll() {
 }
 
 function openIframeDrawer(url: string) {
+  const isSameOrigin = (origin: URL, destination: URL) =>
+    origin.protocol === destination.protocol && origin.host === destination.host && origin.port === destination.port
+
+  const currentUrl = new URL(location.href)
+  const destination = new URL(url)
+
+  if (!isSameOrigin(currentUrl, destination)) {
+    openLinkToNewTab(url)
+    return
+  }
+
   iframeDrawerUrl.value = url
   showIframeDrawer.value = true
 }

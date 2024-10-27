@@ -6,6 +6,7 @@ export enum HomeSubPage {
   SubscribedSeries = 'SubscribedSeries',
   Trending = 'Trending',
   Ranking = 'Ranking',
+  Live = 'Live',
 }
 
 export interface RankingType {

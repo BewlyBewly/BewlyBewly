@@ -43,8 +43,8 @@ export function removeHttpFromUrl(url: string): string {
   return url.replace(/^https?:/, '')
 }
 
-export function openLinkToNewTab(url: string) {
-  window.open(url, '_blank', 'noopener noreferrer')
+export function openLinkToNewTab(url: string, features: string = '') {
+  window.open(url, '_blank', features)
 }
 
 /**

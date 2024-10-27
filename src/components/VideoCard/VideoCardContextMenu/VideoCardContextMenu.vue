@@ -68,7 +68,7 @@ const commonOptions = computed((): { command: VideoOption, name: string, icon: s
       // { command: VideoOption.ViewThisUserChannel, name: t('video_card.operation.view_this_user_channel'), icon: 'i-solar:user-bold-duotone' },
     ],
   ]
-  if (getVideoType() === 'bangumi') {
+  if (getVideoType() === 'bangumi' || getVideoType() === 'live') {
     result = result.map((group) => {
       return group.filter((opt) => {
         return opt.command !== VideoOption.CopyBVNumber && opt.command !== VideoOption.CopyAVNumber && opt.command !== VideoOption.ViewThisUserChannel
