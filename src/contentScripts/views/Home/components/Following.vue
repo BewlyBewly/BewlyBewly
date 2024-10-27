@@ -194,6 +194,12 @@ defineExpose({ initData })
           danmakuStr: video.item.modules.module_dynamic.major.archive?.stat.danmaku,
           capsuleText: video.item.modules.module_author.pub_time,
           bvid: video.item.modules.module_dynamic.major.archive?.bvid,
+          badge: video.item.modules.module_dynamic.major.archive?.badge.text !== '投稿视频' ? {
+            bgColor: video.item.modules.module_dynamic.major.archive?.badge.bg_color,
+            color: video.item.modules.module_dynamic.major.archive?.badge.color,
+            iconUrl: video.item.modules.module_dynamic.major.archive?.badge.icon_url,
+            text: video.item.modules.module_dynamic.major.archive?.badge.text,
+          } : undefined,
         } : undefined"
         show-preview
         :horizontal="gridLayout !== 'adaptive'"
