@@ -303,7 +303,7 @@ provide('getVideoType', () => props.type!)
             <!-- Video cover -->
             <Picture
               :src="`${removeHttpFromUrl(video.cover)}@672w_378h_1c_!web-home-common-cover`"
-              loading="lazy"
+              loading="eager"
               w="full" max-w-full align-middle aspect-video object-cover
               rounded="$bew-radius"
             />
