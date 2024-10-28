@@ -105,6 +105,7 @@ async function getFollowedUsersVideos() {
 
     const response: FollowingLiveResult = await api.live.getFollowingLiveList({
       page: page.value,
+      page_size: 9,
     })
 
     if (response.code === -101) {
@@ -114,6 +115,9 @@ async function getFollowedUsersVideos() {
     }
 
     if (response.code === 0) {
+      if (response.data.list.length < 9)
+        noMoreContent.value = true
+
       page.value++
 
       const resData = [] as FollowingLiveItem[]
