@@ -155,7 +155,7 @@ function jumpToLoginPage() {
             v-for="(item, index) in currentWatchLaterList"
             :key="item.aid"
             :href="settings.videoCardLinkOpenMode === 'drawer' ? undefined : `https://www.bilibili.com/list/watchlater?bvid=${item.bvid}`"
-            target="_blank"
+            :target="settings.videoCardLinkOpenMode === 'currentTab' ? '_self' : '_blank'"
             class="group"
             flex cursor-pointer
             @click="settings.videoCardLinkOpenMode === 'drawer' && openIframeDrawer(`https://www.bilibili.com/list/watchlater?bvid=${item.bvid}`)"
@@ -278,7 +278,7 @@ function jumpToLoginPage() {
                     opacity-0 group-hover:opacity-100
                     p-2
                     duration-300
-                    @click.prevent="deleteWatchLaterItem(index, item.aid)"
+                    @click.prevent.stop="deleteWatchLaterItem(index, item.aid)"
                   >
                     <div i-tabler:trash />
                   </button>

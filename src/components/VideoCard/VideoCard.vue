@@ -50,21 +50,35 @@ export interface Video {
   viewStr?: string
   danmaku?: number
   danmakuStr?: string
+
   publishedTimestamp?: number
   capsuleText?: string
+
   bvid?: string
   aid?: number
+  // used for live
+  roomid?: number
+  epid?: number
   goto?: string
   /** After set the `url`, clicking the video will navigate to this url. It won't be affected by aid, bvid or epid */
   url?: string
   /** If you want to show preview video, you should set the cid value */
   cid?: number
-  epid?: number
+
   followed?: boolean
+  liveStatus?: number
+
   tag?: string
   rank?: number
   type?: 'horizontal' | 'vertical' | 'bangumi'
   threePointV2: ThreePointV2[]
+
+  badge?: {
+    bgColor: string
+    color: string
+    iconUrl?: string
+    text: string
+  }
 }
 
 const toast = useToast()
@@ -97,6 +111,8 @@ const videoUrl = computed(() => {
     return getCurrentVideoUrl(props.video)
   else if (props.video.epid)
     return `https://www.bilibili.com/bangumi/play/ep${props.video.epid}`
+  else if (props.video.roomid)
+    return `https://live.bilibili.com/${props.video.roomid}`
   else
     return ''
 })
@@ -286,7 +302,7 @@ provide('getVideoType', () => props.type!)
       >
         <a
           :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }"
-          :href="videoUrl" target="_blank"
+          :href="videoUrl" :target="settings.videoCardLinkOpenMode === 'currentTab' ? '_self' : '_blank'"
           @mouseenter="handleMouseEnter"
           @mouseleave="handelMouseLeave"
           @click="handleClick"
@@ -303,7 +319,7 @@ provide('getVideoType', () => props.type!)
             <!-- Video cover -->
             <Picture
               :src="`${removeHttpFromUrl(video.cover)}@672w_378h_1c_!web-home-common-cover`"
-              loading="lazy"
+              loading="eager"
               w="full" max-w-full align-middle aspect-video object-cover
               rounded="$bew-radius"
             />
@@ -394,6 +410,28 @@ provide('getVideoType', () => props.type!)
                 @click.stop=""
               >
                 <slot name="coverTopLeft" />
+              </div>
+
+              <div
+                v-if="video.liveStatus === 1"
+                class="group-hover:opacity-0"
+                pos="absolute left-0 top-0" bg="$bew-theme-color" text="xs white"
+                p="x-2 y-1" m-1 inline-block rounded="$bew-radius" duration-300
+              >
+                LIVE
+              </div>
+
+              <div
+                v-if="video.badge && Object.keys(video.badge).length > 0"
+                class="group-hover:opacity-0"
+                :style="{
+                  backgroundColor: video.badge.bgColor,
+                  color: video.badge.color,
+                }"
+                pos="absolute right-0 top-0" bg="$bew-theme-color" text="xs white"
+                p="x-2 y-1" m-1 inline-block rounded="$bew-radius" duration-300
+              >
+                {{ video.badge.text }}
               </div>
 
               <!-- Watcher later button -->

@@ -239,7 +239,7 @@ function jumpToLoginPage() {
           v-for="(historyItem, index) in historyList"
           :key="historyItem.kid"
           :href="settings.videoCardLinkOpenMode === 'drawer' ? undefined : getHistoryUrl(historyItem)"
-          target="_blank"
+          :target="settings.videoCardLinkOpenMode === 'currentTab' ? '_self' : '_blank'"
           block
           class="group"
           flex
@@ -457,7 +457,7 @@ function jumpToLoginPage() {
                 opacity-0 group-hover:opacity-100
                 p-2
                 duration-300
-                @click.prevent="deleteHistoryItem(index, historyItem)"
+                @click.prevent.stop="deleteHistoryItem(index, historyItem)"
               >
                 <div i-tabler:trash />
               </button>

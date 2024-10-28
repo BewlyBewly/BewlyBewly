@@ -43,8 +43,8 @@ export function removeHttpFromUrl(url: string): string {
   return url.replace(/^https?:/, '')
 }
 
-export function openLinkToNewTab(url: string) {
-  window.open(url, '_blank', 'noopener noreferrer')
+export function openLinkToNewTab(url: string, features: string = '') {
+  window.open(url, '_blank', features)
 }
 
 /**
@@ -154,6 +154,7 @@ export function isHomePage(url: string = location.href): boolean {
     /https?:\/\/(?:www\.)?bilibili.com\/?(?:#\/?)?$/.test(url)
     || /https?:\/\/(?:www\.)?bilibili.com\/index\.html$/.test(url)
     || /https?:\/\/(?:www\.)?bilibili.com\/\?spm_id_from=.*/.test(url)
+    || /https?:\/\/www\.bilibili\.com\/\?.*$/.test(url)
   ) {
     return true
   }

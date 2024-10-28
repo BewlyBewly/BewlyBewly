@@ -1,6 +1,6 @@
 .page-fade-enter-active,
 .page-fade-leave-active {
-  --uno: "transition-opacity duration-500 transform-gpu";
+  --uno: "transition-opacity duration-300 transform-gpu";
 }
 .page-fade-enter-from,
 .page-fade-leave-to {
@@ -12,7 +12,7 @@
 
 .fade-enter-active,
 .fade-leave-active {
-  --uno: "transition-opacity duration-500";
+  --uno: "transition-opacity duration-300";
 }
 .fade-enter-from,
 .fade-leave-to {

@@ -22,7 +22,7 @@ export interface Settings {
   enableVideoPreview: boolean
 
   // Link Opening Behavior
-  videoCardLinkOpenMode: 'drawer' | 'newTab'
+  videoCardLinkOpenMode: 'drawer' | 'newTab' | 'currentTab'
   topBarLinkOpenMode: 'currentTab' | 'currentTabIfNotHomepage' | 'newTab'
   searchBarLinkOpenMode: 'currentTab' | 'currentTabIfNotHomepage' | 'newTab'
   closeDrawerWithoutPressingEscAgain: boolean

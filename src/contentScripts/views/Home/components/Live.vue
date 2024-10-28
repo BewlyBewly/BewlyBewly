@@ -3,13 +3,13 @@ import type { Ref } from 'vue'
 
 import { useBewlyApp } from '~/composables/useAppProvider'
 import type { GridLayoutType } from '~/logic'
-import type { DataItem as MomentItem, MomentResult } from '~/models/moment/moment'
+import type { FollowingLiveResult, List as FollowingLiveItem } from '~/models/live/getFollowingLiveList'
 import api from '~/utils/api'
 
 // https://github.com/starknt/BewlyBewly/blob/fad999c2e482095dc3840bb291af53d15ff44130/src/contentScripts/views/Home/components/ForYou.vue#L16
 interface VideoElement {
   uniqueId: string
-  item?: MomentItem
+  item?: FollowingLiveItem
 }
 
 const props = defineProps<{
@@ -33,8 +33,7 @@ const videoList = ref<VideoElement[]>([])
 const isLoading = ref<boolean>(false)
 const needToLoginFirst = ref<boolean>(false)
 const containerRef = ref<HTMLElement>() as Ref<HTMLElement>
-const offset = ref<string>('')
-const updateBaseline = ref<string>('')
+const page = ref<number>(1)
 const noMoreContent = ref<boolean>(false)
 const { handleReachBottom, handlePageRefresh, haveScrollbar } = useBewlyApp()
 
@@ -65,8 +64,7 @@ function initPageAction() {
 }
 
 async function initData() {
-  offset.value = ''
-  updateBaseline.value = ''
+  page.value = 1
   videoList.value.length = 0
   noMoreContent.value = false
 
@@ -91,10 +89,10 @@ async function getFollowedUsersVideos() {
   if (noMoreContent.value)
     return
 
-  if (offset.value === '0') {
-    noMoreContent.value = true
-    return
-  }
+  // if (list.value === '0') {
+  //   noMoreContent.value = true
+  //   return
+  // }
 
   try {
     let i = 0
@@ -105,10 +103,9 @@ async function getFollowedUsersVideos() {
     let lastVideoListLength = videoList.value.length
     videoList.value.push(...pendingVideos)
 
-    const response: MomentResult = await api.moment.getMoments({
-      type: 'video',
-      offset: Number(offset.value),
-      update_baseline: updateBaseline.value,
+    const response: FollowingLiveResult = await api.live.getFollowingLiveList({
+      page: page.value,
+      page_size: 9,
     })
 
     if (response.code === -101) {
@@ -118,23 +115,25 @@ async function getFollowedUsersVideos() {
     }
 
     if (response.code === 0) {
-      offset.value = response.data.offset
-      updateBaseline.value = response.data.update_baseline
+      if (response.data.list.length < 9)
+        noMoreContent.value = true
 
-      const resData = [] as MomentItem[]
+      page.value++
 
-      response.data.items.forEach((item: MomentItem) => {
+      const resData = [] as FollowingLiveItem[]
+
+      response.data.list.forEach((item: FollowingLiveItem) => {
         resData.push(item)
       })
 
       // when videoList has length property, it means it is the first time to load
       if (!videoList.value.length) {
-        videoList.value = resData.map(item => ({ uniqueId: `${item.id_str}`, item }))
+        videoList.value = resData.map(item => ({ uniqueId: `${item.roomid}`, item }))
       }
       else {
         resData.forEach((item) => {
           videoList.value[lastVideoListLength++] = {
-            uniqueId: `${item.id_str}`,
+            uniqueId: `${item.roomid}`,
             item,
           }
         })
@@ -183,25 +182,19 @@ defineExpose({ initData })
         :key="video.uniqueId"
         :skeleton="!video.item"
         :video="video.item ? {
-          id: Number(video.item.modules.module_dynamic.major.archive?.aid),
-          durationStr: video.item.modules.module_dynamic.major.archive?.duration_text,
-          title: `${video.item.modules.module_dynamic.major.archive?.title}`,
-          cover: `${video.item.modules.module_dynamic.major.archive?.cover}`,
-          author: video.item.modules.module_author.name,
-          authorFace: video.item.modules.module_author.face,
-          mid: video.item.modules.module_author.mid,
-          viewStr: video.item.modules.module_dynamic.major.archive?.stat.play,
-          danmakuStr: video.item.modules.module_dynamic.major.archive?.stat.danmaku,
-          capsuleText: video.item.modules.module_author.pub_time,
-          bvid: video.item.modules.module_dynamic.major.archive?.bvid,
-          badge: video.item.modules.module_dynamic.major.archive?.badge.text !== '投稿视频' ? {
-            bgColor: video.item.modules.module_dynamic.major.archive?.badge.bg_color,
-            color: video.item.modules.module_dynamic.major.archive?.badge.color,
-            iconUrl: video.item.modules.module_dynamic.major.archive?.badge.icon_url,
-            text: video.item.modules.module_dynamic.major.archive?.badge.text,
-          } : undefined,
+          // id: Number(video.item.modules.module_dynamic.major.archive?.aid),
+          title: `${video.item.title}`,
+          cover: `${video.item.room_cover}`,
+          author: video.item.uname,
+          authorFace: video.item.face,
+          mid: video.item.uid,
+          viewStr: video.item.text_small,
+          tag: video.item.area_name_v2,
+          roomid: video.item.roomid,
+          liveStatus: video.item.live_status,
         } : undefined"
-        show-preview
+        type="live"
+        :show-watcher-later="false"
         :horizontal="gridLayout !== 'adaptive'"
       />
     </div>
