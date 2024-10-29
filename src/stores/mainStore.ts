@@ -49,6 +49,10 @@ export const useMainStore = defineStore('main', () => {
         i18nKey: 'home.ranking',
         page: HomeSubPage.Ranking,
       },
+      {
+        i18nKey: 'home.live',
+        page: HomeSubPage.Live,
+      },
     ],
   )
 

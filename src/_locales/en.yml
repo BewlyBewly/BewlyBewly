@@ -60,6 +60,7 @@ settings:
   menu_general: General
   menu_desktop_and_dock: Desktop & Dock
   menu_appearance: Appearance
+  menu_bewly_pages: BewlyBewly Pages
   menu_search_page: Search Page
   menu_home: Home
   menu_compatibility: Compatibility
@@ -111,31 +112,37 @@ settings:
     jyut: Cantonese
   customize_font: Customize font
   customize_font_desc: |-
-    For users who favor the traditional style of Chinese characters, we recommend <a href="https://github.com/GuiWonder/Shanggu" target="_blank">Shanggu Fonts (尚古字體)</a> and <a href="https://github.com/ayaka14732/FanWunHak" target="_blank">Fan Wun Hak (繁媛黑體)</a>.
+    For users who favor the traditional style of Chinese characters, we recommend <a class="link" href="https://github.com/GuiWonder/Shanggu" target="_blank">Shanggu Fonts (尚古字體)</a> and <a class="link" href="https://github.com/ayaka14732/FanWunHak" target="_blank">Fan Wun Hak (繁媛黑體)</a>.
     These fonts also possess the capability to convert simplified Chinese into traditional characters.
+  override_danmaku_font: Override danmaku font
+  override_danmaku_font_desc: >
+    Set the danmaku font to your customized font to override the default. The video player won't be able to change it afterwards.
   remove_the_indent_from_chinese_punctuation: Remove the indent from Chinese punctuation
   remove_the_indent_from_chinese_punctuation_desc: >
     By default, Bilibili will specifically handle Chinese punctuation to achieve left alignment.
     If you are using a custom font, it is recommended to remove the indent.
 
-  video_card_link_opening_behavior: Video card and bangumi card link opening behavior
-  video_card_link_opening_behavior_opt:
-    drawer: Open in drawer
-    new_tab: New tab
-  enable_video_preview: Enable video preview feature (if possible)
-  enable_video_ctrl_bar_on_video_card: Display the video control bar on the video card
-  hover_video_card_delayed: Delayed video preview on hover over the video card
-  block_ads: Block ads
   disable_frosted_glass: Disable frosted glass effect
   reduce_frosted_glass_blur: Reduce the intensity of the frosted glass blur
 
-  # Desktop & Dock
-  use_old_top_bar: Use the old top bar
-  top_bar_link_opening_behavior: Top bar link opening behavior
-  top_bar_link_opening_behavior_opt:
+  link_opening_behavior_opt:
     current_tab: Current tab
     current_tab_if_not_homepage: Current tab if not the homepage, otherwise new tab
     new_tab: New tab
+    drawer: Open in drawer
+  top_bar_link_opening_behavior: Top bar link opening behavior
+  video_card_link_opening_behavior: Video card and bangumi card link opening behavior
+  search_bar_link_opening_behavior: Search bar link opening behavior
+  close_drawer_without_pressing_esc_again: Close the drawer without pressing <kbd>Esc</kbd> again
+
+  block_ads: Block ads
+
+  enable_video_preview: Enable video preview feature (if possible)
+  enable_video_ctrl_bar_on_video_card: Display the video control bar on the video card
+  hover_video_card_delayed: Delayed video preview on hover over the video card
+
+  # Desktop & Dock
+  use_old_top_bar: Use the old top bar
   auto_hide_top_bar: Automatically hide the top bar
   top_bar_icon_badges: Icon badges
   top_bar_icon_badges_opt:
@@ -265,8 +272,10 @@ settings:
     Reset settings?
     This operation cannot be reversed. Are you sure you want to reset your settings?
   contributors: Contributors
+
 auth:
   auth_access_key_first: Before doing this, authorize BewlyBewly to use the access key.
+
 topbar:
   sign_in: Sign in
   notifications: Notifications
@@ -351,6 +360,7 @@ topbar:
     sticker: Sticker
     video: Video
     manager: Manager
+
 dock:
   search: Search
   home: Home
@@ -361,21 +371,42 @@ dock:
   dark_mode: Dark Mode
   light_mode: Light Mode
   settings: Settings
-home:
-  not_interested: Not interested
-  not_interested_desc: You can use <kbd>↑</kbd> and <kbd>↓</kbd> to choose the reason, or using number keys to choose the reason directly, press <kbd>Enter</kbd> to confirm.
-  tell_us_why: Choose a reason why
+
+video_card:
+  operation:
+    not_interested: Not Interested
+    open_in_new_tab: Open in New Tab
+    open_in_background: Open In Background
+    open_in_new_window: Open in New Window
+    open_in_current_tab: Open in Current Tab
+    open_in_drawer: Open in Drawer
+
+    copy_video_link: Copy Video Link
+    copy_bv_number: Copy BV Number
+    copy_av_number: Copy AV Number
+
+    view_the_original_cover: View the Original Cover
+    view_this_user_channel: View This User Channel
+
   video_removed: Video removed
+
+home:
+  tell_us_why: Choose a reason why
+  not_interested_desc: You can use <kbd>↑</kbd> and <kbd>↓</kbd> to choose the reason, or using number keys to choose the reason directly, press <kbd>Enter</kbd> to confirm.
+
   for_you: For you
   following: Following
   trending: Trending
   ranking: Ranking
   subscribed_series: Subscribed Series
+  live: Live
+
 ranking:
   all: All
   chinese_anime_related: Chinese Anime-related
   original_content: Original Content
   debut_work: Debut Work
+
 anime:
   total_episodes: EP {ep}
   update_to_n_episodes: Update to EP {ep}
@@ -394,6 +425,7 @@ anime:
       fri: FRI
       sat: SAT
       sun: SUN
+
 history:
   title: Watch History
   search_watch_history: Search watch history
@@ -407,11 +439,13 @@ history:
     Are you sure you want to pause watch history?
   turn_on_watch_history: Turn on watch history
   turn_on_watch_history_confirm: Turn on watch history? Are you sure you want to turn on watch history?
+
 favorites:
   unfavorite: Unfavorite
   unfavorite_confirm: |-
     Remove selected video(s)?
     This operation cannot be reversed. Are you sure you want to remove the selected video(s) from your favorites?
+
 watch_later:
   title: Watch Later
   clear_all: Clear all watch later
@@ -422,6 +456,7 @@ watch_later:
   remove_watched_videos_confirm: |-
     Remove watched videos?
     This operation cannot be reversed. Are you sure you want to remove watched videos?
+
 search_bar:
   history_title: Search History
   clear_history: Clear search history

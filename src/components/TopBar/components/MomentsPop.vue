@@ -6,9 +6,9 @@ import { useI18n } from 'vue-i18n'
 import Empty from '~/components/Empty.vue'
 import Loading from '~/components/Loading.vue'
 import Tooltip from '~/components/Tooltip.vue'
-import { useApiClient } from '~/composables/api'
 import type { TopBarLiveMomentResult } from '~/models/moment/topBarLiveMoment'
 import type { TopBarMomentResult } from '~/models/moment/topBarMoment'
+import api from '~/utils/api'
 import { getCSRF, scrollToTop } from '~/utils/main'
 
 import ALink from './ALink.vue'
@@ -28,7 +28,6 @@ interface MomentCard {
 }
 
 const { t } = useI18n()
-const api = useApiClient()
 
 const moments = reactive<MomentCard[]>([])
 const addedWatchLaterList = reactive<number[]>([])
@@ -316,7 +315,7 @@ defineExpose({
         </div>
       </div>
       <ALink
-        href="https://t.bilibili.com/" rel="noopener noreferrer"
+        href="https://t.bilibili.com/"
         flex="~ items-center"
       >
         <span text="sm">{{ $t('common.view_all') }}</span>
@@ -354,7 +353,7 @@ defineExpose({
           <ALink
             v-for="(moment, index) in moments"
             :key="index"
-            :href="moment.link" rel="noopener noreferrer"
+            :href="moment.link"
             flex="~ justify-between"
             m="b-2" p="2"
             rounded="$bew-radius"
@@ -375,7 +374,6 @@ defineExpose({
             />
             <ALink
               :href="moment.authorJumpUrl"
-              rel="noopener noreferrer"
               rounded="1/2"
               w="40px" h="40px" m="r-4"
               bg="$bew-skeleton"
@@ -395,7 +393,6 @@ defineExpose({
 
                 <ALink
                   :href="moment.authorJumpUrl"
-                  rel="noopener noreferrer"
                   font-bold
                 >
                   {{ moment.author }}

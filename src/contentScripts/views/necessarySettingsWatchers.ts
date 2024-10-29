@@ -54,7 +54,7 @@ export function setupNecessarySettingsWatchers() {
     () => {
       // Set the default font family
       if (!settings.value.customizeFont && !settings.value.fontFamily) {
-        settings.value.fontFamily = `-apple-system, BlinkMacSystemFont, "Segoe UI", Inter, "Roboto Flex", "Noto Sans", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", Arial, sans-serif`
+        settings.value.fontFamily = `-apple-system, BlinkMacSystemFont, Inter, "Segoe UI Variable", "Segoe UI", "Roboto Flex", Roboto, "Noto Sans", Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", Arial, sans-serif`
       }
 
       if (settings.value.customizeFont) {
@@ -62,6 +62,38 @@ export function setupNecessarySettingsWatchers() {
       }
       else {
         document.documentElement.style.removeProperty('--bew-font-family')
+      }
+    },
+    { immediate: true },
+  )
+
+  let danmakuFontStyleEl: HTMLStyleElement | null = null
+  watch(
+    () => settings.value.overrideDanmakuFont,
+    () => {
+      let fallbackFontFamily = ''
+      if (locale.value === LanguageType.Mandarin_CN) {
+        fallbackFontFamily = 'var(--bew-fonts-mandarin-cn)'
+      }
+      else if (locale.value === LanguageType.Mandarin_TW) {
+        fallbackFontFamily = 'var(--bew-fonts-mandarin-tw)'
+      }
+      else if (locale.value === LanguageType.Cantonese) {
+        fallbackFontFamily = 'var(--bew-fonts-cantonese)'
+      }
+      else {
+        fallbackFontFamily = 'var(--bew-fonts-english)'
+      }
+
+      if (settings.value.overrideDanmakuFont) {
+        danmakuFontStyleEl = injectCSS(`
+          .bewly-design .bili-danmaku-x-dm {
+            font-family: var(--bew-font-family, ${fallbackFontFamily}) !important;
+          }
+        `)
+      }
+      else {
+        danmakuFontStyleEl?.remove()
       }
     },
     { immediate: true },

@@ -53,18 +53,19 @@
       background-color: var(--bew-theme-color-10);
     }
 
-    .bili-dyn-publishing__action:not(.disabled):hover {
+    .bili-topic-new__default__create__icon,
+    .bili-pics-uploader__add:hover:after,
+    .bili-pics-uploader__add:hover:before,
+    .bili-dyn-publishing__action.toarticle:hover {
+      background-color: var(--bew-theme-color-20);
+    }
+
+    .bili-dyn-publishing__action.launcher:not(.disabled):hover {
       background-color: var(--bew-theme-color-80);
     }
 
     .bili-pics-uploader__add:hover {
       border-color: var(--bew-theme-color-40);
-    }
-
-    .bili-topic-new__default__create__icon,
-    .bili-pics-uploader__add:hover:after,
-    .bili-pics-uploader__add:hover:before {
-      background-color: var(--bew-theme-color-20);
     }
 
     .side-toolbar__action.is-active svg path,
@@ -199,7 +200,7 @@
     border-color: var(--bew-theme-color);
   }
 
-  .bili-dyn-publishing__action,
+  .bili-dyn-publishing__action.launcher,
   .dyn-goods__one__action button,
   .dyn-reserve__action button,
   .dyn-additional-common__action button {

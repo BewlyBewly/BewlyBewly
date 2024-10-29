@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { useThrottleFn, useToggle } from '@vueuse/core'
+import { useEventListener, useThrottleFn, useToggle } from '@vueuse/core'
 import type { Ref } from 'vue'
 
 import type { BewlyAppProvider } from '~/composables/useAppProvider'
 import { useDark } from '~/composables/useDark'
-import { BEWLY_MOUNTED, OVERLAY_SCROLL_BAR_SCROLL } from '~/constants/globalEvents'
+import { BEWLY_MOUNTED, DRAWER_VIDEO_ENTER_PAGE_FULL, DRAWER_VIDEO_EXIT_PAGE_FULL, OVERLAY_SCROLL_BAR_SCROLL } from '~/constants/globalEvents'
 import { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
-import { isHomePage, scrollToTop } from '~/utils/main'
+import { isHomePage, openLinkToNewTab, queryDomUntilFound, scrollToTop } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
 import { setupNecessarySettingsWatchers } from './necessarySettingsWatchers'
@@ -15,7 +15,16 @@ import { setupNecessarySettingsWatchers } from './necessarySettingsWatchers'
 const { isDark } = useDark()
 const [showSettings, toggleSettings] = useToggle(false)
 
-const activatedPage = ref<AppPage>(settings.value.dockItemVisibilityList.find(e => e.visible === true)?.page ?? AppPage.Home)
+// Get the 'page' query parameter from the URL
+function getPageParam(): AppPage | null {
+  const urlParams = new URLSearchParams(window.location.search)
+  const result = urlParams.get('page') as AppPage | null
+  if (result && Object.values(AppPage).includes(result))
+    return result
+  return null
+}
+
+const activatedPage = ref<AppPage>(getPageParam() || (settings.value.dockItemVisibilityList.find(e => e.visible === true)?.page || AppPage.Home))
 const pages = {
   [AppPage.Home]: defineAsyncComponent(() => import('./Home/Home.vue')),
   [AppPage.Search]: defineAsyncComponent(() => import('./Search/Search.vue')),
@@ -53,6 +62,10 @@ const showBewlyPage = computed((): boolean => {
 watch(
   () => activatedPage.value,
   () => {
+    // Update the URL query parameter when activatedPage changes
+    const url = new URL(window.location.href)
+    url.searchParams.set('page', activatedPage.value)
+    window.history.replaceState({}, '', url.toString())
     const osInstance = scrollbarRef.value.osInstance()
     osInstance.elements().viewport.scrollTop = 0
   },
@@ -123,9 +136,49 @@ function handleOsScroll() {
 }
 
 function openIframeDrawer(url: string) {
+  const isSameOrigin = (origin: URL, destination: URL) =>
+    origin.protocol === destination.protocol && origin.host === destination.host && origin.port === destination.port
+
+  const currentUrl = new URL(location.href)
+  const destination = new URL(url)
+
+  if (!isSameOrigin(currentUrl, destination)) {
+    openLinkToNewTab(url)
+    return
+  }
+
   iframeDrawerUrl.value = url
   showIframeDrawer.value = true
 }
+
+// In drawer video, watch btn className changed and post message to parent
+watchEffect(async (onCleanUp) => {
+  if (!inIframe.value)
+    return null
+
+  const observer = new MutationObserver(([{ target: el }]) => {
+    if (!(el instanceof HTMLElement))
+      return null
+    if (el.classList.contains('bpx-state-entered')) {
+      parent.postMessage(DRAWER_VIDEO_ENTER_PAGE_FULL)
+    }
+    else {
+      parent.postMessage(DRAWER_VIDEO_EXIT_PAGE_FULL)
+    }
+  })
+
+  const abort = new AbortController()
+  queryDomUntilFound('.bpx-player-ctrl-btn.bpx-player-ctrl-web', 500, abort).then((openVideo2WebFullBtn) => {
+    if (!openVideo2WebFullBtn)
+      return
+    observer.observe(openVideo2WebFullBtn, { attributes: true })
+  })
+
+  onCleanUp(() => {
+    observer.disconnect()
+    abort.abort()
+  })
+})
 
 /**
  * Checks if the current viewport has a scrollbar.
@@ -137,6 +190,21 @@ async function haveScrollbar() {
   const { viewport } = osInstance.elements()
   const { scrollHeight } = viewport // get scroll offset
   return scrollHeight > window.innerHeight
+}
+
+// When opening a video in drawer mode, listen for changes to the drawer's inner iframe url.
+// When the iframe's url changes, update the parent url to match the iframe's url.
+const beforeUrl = ref<string>(location.href.replace(/\/$/, ''))
+if (inIframe.value) {
+  useEventListener(window, 'pushstate', handleIframeUrlChange)
+  useEventListener(window, 'click', handleIframeUrlChange)
+
+  function handleIframeUrlChange() {
+    if (beforeUrl.value.replace(/\/$/, '') !== parent.location.href.replace(/\/$/, '')) {
+      parent.history.pushState(null, '', location.href.replace(/\/$/, ''))
+    }
+    beforeUrl.value = location.href.replace(/\/$/, '')
+  }
 }
 
 provide<BewlyAppProvider>('BEWLY_APP', {

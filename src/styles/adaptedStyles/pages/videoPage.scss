@@ -63,7 +63,9 @@
       background-color: var(--bew-theme-color);
     }
 
-    .user-card-m-exp .user-info-wrapper .info .user .user-label {
+    .user-card-m-exp .user-info-wrapper .info .user .user-label,
+    #pub button,
+    .editor-innter div:last-child div {
       background-color: var(--bew-theme-color) !important;
     }
 
@@ -161,6 +163,10 @@
       border-color: var(--bew-theme-color);
     }
 
+    .editor-innter div:last-child {
+      border-color: var(--bew-theme-color) !important;
+    }
+
     .upinfo-btn-panel .not-follow-charge-btn:hover,
     .user-card-m-exp .user-info-wrapper .info .btn-box .like:not(.liked):hover,
     .coin-operated-m-exp .coin-bottom .bi-btn:hover {
@@ -243,8 +249,9 @@
     .upinfo-btn-panel .new-charge-btn .charge-btn-icon img,
     .bpx-player-viewpoint-menu-item-active,
     .cur-play-icon,
-    .playing-gif,
-    .multi-page-v1 .cur-list .list-box li.on img {
+    .multi-page-v1 .cur-list .list-box li.on img,
+    .upinfo-btn-panel .new-charge-btn .charge-btn-icon img,
+    .playing-gif {
       filter: var(--bew-filter-icon-glow);
     }
 
@@ -346,7 +353,8 @@
       color: var(--bew-text-1);
     }
 
-    .user-card-m-exp .user-info-wrapper .info .user .name {
+    .user-card-m-exp .user-info-wrapper .info .user .name,
+    .editor-innter div:last-child div:last-child {
       color: var(--bew-text-1) !important;
     }
 

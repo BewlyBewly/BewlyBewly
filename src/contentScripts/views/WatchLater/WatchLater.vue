@@ -2,15 +2,14 @@
 import { useDateFormat } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 
-import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { settings } from '~/logic'
 import type { List as VideoItem, WatchLaterResult } from '~/models/video/watchLater'
+import api from '~/utils/api'
 import { calcCurrentTime } from '~/utils/dataFormatter'
 import { getCSRF, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
 
 const { t } = useI18n()
-const api = useApiClient()
 const { openIframeDrawer } = useBewlyApp()
 
 const isLoading = ref<boolean>()
@@ -156,8 +155,7 @@ function jumpToLoginPage() {
             v-for="(item, index) in currentWatchLaterList"
             :key="item.aid"
             :href="settings.videoCardLinkOpenMode === 'drawer' ? undefined : `https://www.bilibili.com/list/watchlater?bvid=${item.bvid}`"
-            target="_blank"
-            rel="noopener noreferrer"
+            :target="settings.videoCardLinkOpenMode === 'currentTab' ? '_self' : '_blank'"
             class="group"
             flex cursor-pointer
             @click="settings.videoCardLinkOpenMode === 'drawer' && openIframeDrawer(`https://www.bilibili.com/list/watchlater?bvid=${item.bvid}`)"
@@ -234,7 +232,7 @@ function jumpToLoginPage() {
                     class="keep-two-lines"
                     overflow="hidden"
                     un-text="lg overflow-ellipsis"
-                    :href="removeHttpFromUrl(`https://www.bilibili.com/list/watchlater?bvid=${item.bvid}`)" target="_blank" rel="noopener noreferrer"
+                    :href="removeHttpFromUrl(`https://www.bilibili.com/list/watchlater?bvid=${item.bvid}`)" target="_blank"
                   >
                     {{ item.title }}
                   </a>
@@ -250,7 +248,7 @@ function jumpToLoginPage() {
                     hover:bg="$bew-theme-color-10"
                     duration-300
                     pr-2
-                    :href="`//space.bilibili.com/${item.owner.mid}`" target="_blank" rel="noopener noreferrer"
+                    :href="`//space.bilibili.com/${item.owner.mid}`" target="_blank"
                   >
                     <img
                       :src="removeHttpFromUrl(`${item.owner.face}@40w_40h_1c`)"
@@ -280,7 +278,7 @@ function jumpToLoginPage() {
                     opacity-0 group-hover:opacity-100
                     p-2
                     duration-300
-                    @click.prevent="deleteWatchLaterItem(index, item.aid)"
+                    @click.prevent.stop="deleteWatchLaterItem(index, item.aid)"
                   >
                     <div i-tabler:trash />
                   </button>

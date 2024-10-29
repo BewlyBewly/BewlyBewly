@@ -60,6 +60,7 @@ settings:
   menu_general: 常规
   menu_desktop_and_dock: 桌面和 Dock 栏
   menu_appearance: 外观
+  menu_bewly_pages: BewlyBewly 页面
   menu_search_page: 搜索页
   menu_home: 首页
   menu_compatibility: 兼容性
@@ -111,31 +112,37 @@ settings:
     jyut: 廣東話
   customize_font: 自定义字体
   customize_font_desc: |-
-    对于喜欢旧字形的用户，我们推荐 <a href="https://github.com/GuiWonder/Shanggu" target="_blank">Shanggu Fonts (尚古字型)</a> 和 <a href="https://github.com/ayaka14732/FanWunHak" target="_blank">Fan Wun Hak (繁媛黑體)</a>。
+    对于喜欢旧字形的用户，我们推荐 <a class="link" href="https://github.com/GuiWonder/Shanggu" target="_blank">Shanggu Fonts (尚古字型)</a> 和 <a class="link" href="https://github.com/ayaka14732/FanWunHak" target="_blank">Fan Wun Hak (繁媛黑體)</a>。
     这些字形还具有将简体中文转换为繁体/正体中文的能力。
+  override_danmaku_font: 覆盖弹幕字体
+  override_danmaku_font_desc: >
+    设置弹幕字体为您的自定义字体以覆盖默认设置。之后视频播放器将无法更改它。
   remove_the_indent_from_chinese_punctuation: 移除中文标点符号的缩进
   remove_the_indent_from_chinese_punctuation_desc: >
     Bilibili 默认会专门处理中文标点符号以实现左对齐。
     如果你正在使用自定义字体，建议移除缩进。
 
-  video_card_link_opening_behavior: 视频卡片和番剧卡片链接打开行为
-  video_card_link_opening_behavior_opt:
-    drawer: 抽屉打开
-    new_tab: 新标签页
-  enable_video_preview: 启用视频预览功能（如果可以的话）
-  enable_video_ctrl_bar_on_video_card: 在视频卡片上显示视频控制栏
-  hover_video_card_delayed: 将鼠标悬停在视频卡片上时延迟视频预览
-  block_ads: 屏蔽广告
   disable_frosted_glass: 禁用毛玻璃效果
   reduce_frosted_glass_blur: 降低毛玻璃模糊强度
 
-  # Desktop & Dock
-  use_old_top_bar: 使用旧版顶栏
-  top_bar_link_opening_behavior: 顶栏链接打开行为
-  top_bar_link_opening_behavior_opt:
+  link_opening_behavior_opt:
     current_tab: 当前标签页
     current_tab_if_not_homepage: 不在首页则当前标签页打开，否则在新标签页
     new_tab: 新标签页
+    drawer: 抽屉打开
+  top_bar_link_opening_behavior: 顶栏链接打开行为
+  video_card_link_opening_behavior: 视频卡片和番剧卡片链接打开行为
+  search_bar_link_opening_behavior: 搜索栏链接打开行为
+  close_drawer_without_pressing_esc_again: 关闭抽屉时不用再次按 <kbd>Esc</kbd> 关闭
+
+  block_ads: 屏蔽广告
+
+  enable_video_preview: 启用视频预览功能（如果可以的话）
+  enable_video_ctrl_bar_on_video_card: 在视频卡片上显示视频控制栏
+  hover_video_card_delayed: 将鼠标悬停在视频卡片上时延迟视频预览
+
+  # Desktop & Dock
+  use_old_top_bar: 使用旧版顶栏
   auto_hide_top_bar: 自动隐藏顶栏
   top_bar_icon_badges: 图标角标
   top_bar_icon_badges_opt:
@@ -262,8 +269,10 @@ settings:
     重置设置？
     该操作无法撤销。你确定要重置你的设置吗？
   contributors: 贡献者
+
 auth:
   auth_access_key_first: 在这之前请先授权 BewlyBewly 使用 access key
+
 topbar:
   sign_in: 登录
   notifications: 通知
@@ -348,6 +357,7 @@ topbar:
     sticker: 上传贴纸
     video: 上传视频
     manager: 投稿管理
+
 dock:
   search: 搜索
   home: 首页
@@ -358,21 +368,42 @@ dock:
   dark_mode: 暗色模式
   light_mode: 亮色模式
   settings: 设置
-home:
-  not_interested: 不感兴趣
-  not_interested_desc: 你可以使用 <kbd>↑</kbd> 和 <kbd>↓</kbd> 来选择原因，或者直接使用数字键选择原因，按 <kbd>Enter</kbd> 就直接提交。
-  tell_us_why: 为什么这么做...
+
+video_card:
+  operation:
+    not_interested: 不感兴趣
+    open_in_new_tab: 新标签页打开
+    open_in_background: 后台打开
+    open_in_new_window: 新窗口打开
+    open_in_current_tab: 当前标签页打开
+    open_in_drawer: 抽屉打开
+
+    copy_video_link: 复制视频链接
+    copy_bv_number: 复制 BV 号
+    copy_av_number: 复制 AV 号
+
+    view_the_original_cover: 查看封面
+    view_this_user_channel: 查看该用户频道
+
   video_removed: 视频已移除
+
+home:
+  tell_us_why: 为什么这么做...
+  not_interested_desc: 你可以使用 <kbd>↑</kbd> 和 <kbd>↓</kbd> 来选择原因，或者直接使用数字键选择原因，按 <kbd>Enter</kbd> 就直接提交。
+
   for_you: 个性推荐
   following: 正在关注
   trending: 热门视频
   ranking: 排行
   subscribed_series: 订阅剧集
+  live: 直播
+
 ranking:
   all: 全部
   chinese_anime_related: 中国动画相关
   original_content: 原创内容
   debut_work: 新人作品
+
 anime:
   total_episodes: 全 {ep} 话
   update_to_n_episodes: 更新至 {ep} 话
@@ -391,6 +422,7 @@ anime:
       fri: 周五
       sat: 周六
       sun: 周日
+
 history:
   clear_all_watch_history: 清除所有观看历史
   clear_all_watch_history_confirm: |-
@@ -406,11 +438,13 @@ history:
   turn_on_watch_history_confirm: |-
     要开启观看历史吗？
     你确定要开启观看历史吗？
+
 favorites:
   unfavorite: 取消收藏
   unfavorite_confirm: |-
     要取消收藏选中的视频吗？
     该操作无法撤销，你确定要取消收藏选中的视频吗？
+
 watch_later:
   title: 稍后再看
   clear_all: 清空稍后再看
@@ -421,6 +455,7 @@ watch_later:
   remove_watched_videos_confirm: |-
     要清除已观看的视频吗？
     该操作无法撤销，你确定要清除已观看的视频吗？
+
 search_bar:
   history_title: 搜索历史
   clear_history: 清空搜索历史

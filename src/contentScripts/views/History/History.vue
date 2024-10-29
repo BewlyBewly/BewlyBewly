@@ -2,17 +2,16 @@
 import { useDateFormat } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 
-import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { settings } from '~/logic'
 import type { HistoryResult, List as HistoryItem } from '~/models/history/history'
 import { Business } from '~/models/history/history'
 import type { HistorySearchResult, List as HistorySearchItem } from '~/models/video/historySearch'
+import api from '~/utils/api'
 import { calcCurrentTime } from '~/utils/dataFormatter'
 import { getCSRF, removeHttpFromUrl } from '~/utils/main'
 
 const { t } = useI18n()
-const api = useApiClient()
 const { openIframeDrawer } = useBewlyApp()
 
 const isLoading = ref<boolean>()
@@ -240,8 +239,7 @@ function jumpToLoginPage() {
           v-for="(historyItem, index) in historyList"
           :key="historyItem.kid"
           :href="settings.videoCardLinkOpenMode === 'drawer' ? undefined : getHistoryUrl(historyItem)"
-          target="_blank"
-          rel="noopener noreferrer"
+          :target="settings.videoCardLinkOpenMode === 'currentTab' ? '_self' : '_blank'"
           block
           class="group"
           flex
@@ -374,7 +372,7 @@ function jumpToLoginPage() {
             <div flex justify-between w-full h-full>
               <div flex="~ col">
                 <a
-                  :href="`${getHistoryUrl(historyItem)}`" target="_blank" rel="noopener noreferrer"
+                  :href="`${getHistoryUrl(historyItem)}`" target="_blank"
                   :title="historyItem.show_title ? historyItem.show_title : historyItem.title"
                 >
                   <h3
@@ -396,7 +394,7 @@ function jumpToLoginPage() {
                   hover:bg="$bew-theme-color-10"
                   duration-300
                   pr-2
-                  :href="historyItem.author_mid ? `https://space.bilibili.com/${historyItem.author_mid}` : historyItem.uri" target="_blank" rel="noopener noreferrer"
+                  :href="historyItem.author_mid ? `https://space.bilibili.com/${historyItem.author_mid}` : historyItem.uri" target="_blank"
                 >
                   <img
                     :src="
@@ -459,7 +457,7 @@ function jumpToLoginPage() {
                 opacity-0 group-hover:opacity-100
                 p-2
                 duration-300
-                @click.prevent="deleteHistoryItem(index, historyItem)"
+                @click.prevent.stop="deleteHistoryItem(index, historyItem)"
               >
                 <div i-tabler:trash />
               </button>

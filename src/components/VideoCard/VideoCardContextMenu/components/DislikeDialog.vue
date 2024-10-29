@@ -5,9 +5,9 @@ import { useI18n } from 'vue-i18n'
 import { useToast } from 'vue-toastification'
 
 import type { Video } from '~/components/VideoCard/VideoCard.vue'
-import { useApiClient } from '~/composables/api'
 import { accessKey } from '~/logic'
 import { Type as ThreePointV2Type } from '~/models/video/appForYou'
+import api from '~/utils/api'
 import { getTvSign, TVAppKey } from '~/utils/authProvider'
 
 const props = defineProps<{
@@ -24,7 +24,6 @@ const showDislikeDialog = defineModel<boolean>()
 
 const toast = useToast()
 const { t } = useI18n()
-const api = useApiClient()
 
 const loadingDislikeDialog = ref<boolean>(false)
 const selectedDislikeReason = ref<number>(1)

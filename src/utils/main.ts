@@ -43,8 +43,8 @@ export function removeHttpFromUrl(url: string): string {
   return url.replace(/^https?:/, '')
 }
 
-export function openLinkToNewTab(url: string) {
-  window.open(url, '_blank', 'noopener noreferrer')
+export function openLinkToNewTab(url: string, features: string = '') {
+  window.open(url, '_blank', features)
 }
 
 /**
@@ -154,6 +154,7 @@ export function isHomePage(url: string = location.href): boolean {
     /https?:\/\/(?:www\.)?bilibili.com\/?(?:#\/?)?$/.test(url)
     || /https?:\/\/(?:www\.)?bilibili.com\/index\.html$/.test(url)
     || /https?:\/\/(?:www\.)?bilibili.com\/\?spm_id_from=.*/.test(url)
+    || /https?:\/\/www\.bilibili\.com\/\?.*$/.test(url)
   ) {
     return true
   }
@@ -254,4 +255,23 @@ export function compareVersions(version1: string, version2: string): number {
   }
 
   return 0 // Versions are equal
+}
+
+export function queryDomUntilFound(selector: string, timeout = 500, abort?: AbortController): Promise<HTMLElement | null> {
+  return new Promise((resolve) => {
+    const interval = setInterval(() => {
+      const element = document.querySelector(selector)
+      if (element) {
+        clearInterval(interval)
+        resolve(element as HTMLElement)
+      }
+    }, timeout)
+
+    if (abort) {
+      abort.signal.addEventListener('abort', () => {
+        clearInterval(interval)
+        resolve(null)
+      })
+    }
+  })
 }

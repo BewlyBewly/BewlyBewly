@@ -4,14 +4,13 @@ import { onMounted, reactive, ref } from 'vue'
 import Empty from '~/components/Empty.vue'
 import Loading from '~/components/Loading.vue'
 import Progress from '~/components/Progress.vue'
-import { useApiClient } from '~/composables/api'
 import type { List as VideoItem, WatchLaterResult } from '~/models/video/watchLater'
+import api from '~/utils/api'
 import { calcCurrentTime } from '~/utils/dataFormatter'
 import { removeHttpFromUrl } from '~/utils/main'
 
 import ALink from './ALink.vue'
 
-const api = useApiClient()
 const watchLaterList = reactive<VideoItem[]>([])
 const isLoading = ref<boolean>()
 const viewAllUrl = computed((): string => {
@@ -82,13 +81,13 @@ function getAllWatchLaterList() {
 
       <div flex="~ gap-4">
         <ALink
-          :href="playAllUrl" rel="noopener noreferrer"
+          :href="playAllUrl"
           flex="~" items="center"
         >
           <span text="sm">{{ $t('common.play_all') }}</span>
         </ALink>
         <ALink
-          :href="viewAllUrl" rel="noopener noreferrer"
+          :href="viewAllUrl"
           flex="~" items="center"
         >
           <span text="sm">{{ $t('common.view_all') }}</span>
@@ -131,7 +130,7 @@ function getAllWatchLaterList() {
           <ALink
             v-for="item in watchLaterList"
             :key="item.aid"
-            :href="getWatchLaterUrl(item.bvid)" rel="noopener noreferrer"
+            :href="getWatchLaterUrl(item.bvid)"
             m="last:b-4" p="2"
             rounded="$bew-radius"
             hover:bg="$bew-fill-2"

@@ -4,11 +4,11 @@ import type { CSSProperties } from 'vue'
 import { useToast } from 'vue-toastification'
 
 import Button from '~/components/Button.vue'
-import { useApiClient } from '~/composables/api'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { accessKey, settings } from '~/logic'
 import type { ThreePointV2 } from '~/models/video/appForYou'
 import type { VideoPreviewResult } from '~/models/video/videoPreview'
+import api from '~/utils/api'
 import { getTvSign, TVAppKey } from '~/utils/authProvider'
 import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils/dataFormatter'
 import { getCSRF, removeHttpFromUrl } from '~/utils/main'
@@ -19,13 +19,15 @@ import VideoCardSkeleton from './VideoCardSkeleton.vue'
 
 const props = withDefaults(defineProps<Props>(), {
   showWatcherLater: true,
+  type: 'common',
+  moreBtn: true,
 })
 
 interface Props {
   skeleton?: boolean
   video?: Video
-  /** 是否爲app端推介，用於調用不同取消不感興趣方法 */
-  isApp?: boolean
+  /** rcmd: recommend video; appRcmd: app recommend video; bangumi: bangumi video; common: common video */
+  type: 'rcmd' | 'appRcmd' | 'bangumi' | 'common'
   showWatcherLater?: boolean
   horizontal?: boolean
   showPreview?: boolean
@@ -48,26 +50,39 @@ export interface Video {
   viewStr?: string
   danmaku?: number
   danmakuStr?: string
+
   publishedTimestamp?: number
   capsuleText?: string
+
   bvid?: string
   aid?: number
+  // used for live
+  roomid?: number
+  epid?: number
   goto?: string
   /** After set the `url`, clicking the video will navigate to this url. It won't be affected by aid, bvid or epid */
   url?: string
   /** If you want to show preview video, you should set the cid value */
   cid?: number
-  epid?: number
+
   followed?: boolean
+  liveStatus?: number
+
   tag?: string
   rank?: number
   type?: 'horizontal' | 'vertical' | 'bangumi'
   threePointV2: ThreePointV2[]
+
+  badge?: {
+    bgColor: string
+    color: string
+    iconUrl?: string
+    text: string
+  }
 }
 
 const toast = useToast()
 const { mainAppRef, openIframeDrawer } = useBewlyApp()
-const api = useApiClient()
 const showVideoOptions = ref<boolean>(false)
 const videoOptionsFloatingStyles = ref<CSSProperties>({})
 // Whether the user has marked it as disliked
@@ -78,9 +93,11 @@ const contextMenuRef = ref<HTMLDivElement | null>(null)
 
 const selectedDislikeOpt = ref<{ dislikeReasonId: number }>()
 
+const videoCurrentTime = ref<number | null>(null)
+
 function getCurrentVideoUrl(video: Video) {
   const baseUrl = `https://www.bilibili.com/video/${video.bvid ?? `av${video.aid}`}`
-  const currentTime = getCurrentTime()
+  const currentTime = videoCurrentTime.value
   return currentTime && currentTime > 5 ? `${baseUrl}/?t=${currentTime}` : baseUrl
 }
 
@@ -94,6 +111,8 @@ const videoUrl = computed(() => {
     return getCurrentVideoUrl(props.video)
   else if (props.video.epid)
     return `https://www.bilibili.com/bangumi/play/ep${props.video.epid}`
+  else if (props.video.roomid)
+    return `https://live.bilibili.com/${props.video.roomid}`
   else
     return ''
 })
@@ -200,7 +219,9 @@ function handelMouseLeave() {
 }
 
 function handleClick(event: MouseEvent) {
-  if (settings.value.videoCardLinkOpenMode === 'drawer' && videoUrl.value) {
+  videoCurrentTime.value = getCurrentTime()
+
+  if (settings.value.videoCardLinkOpenMode === 'drawer' && videoUrl.value && !event.ctrlKey && !event.metaKey) {
     event.preventDefault()
 
     openIframeDrawer(videoUrl.value)
@@ -219,7 +240,7 @@ function handleMoreBtnClick(event: MouseEvent) {
 }
 
 function handleUndo() {
-  if (props.isApp) {
+  if (props.type === 'appRcmd') {
     const params = {
       access_key: accessKey.value,
       goto: props.video?.goto,
@@ -254,6 +275,8 @@ function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
   selectedDislikeOpt.value = selectedOpt
   removed.value = true
 }
+
+provide('getVideoType', () => props.type!)
 </script>
 
 <template>
@@ -279,11 +302,10 @@ function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
       >
         <a
           :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }"
-          :href="videoUrl" target="_blank" rel="noopener noreferrer"
+          :href="videoUrl" :target="settings.videoCardLinkOpenMode === 'currentTab' ? '_self' : '_blank'"
           @mouseenter="handleMouseEnter"
           @mouseleave="handelMouseLeave"
           @click="handleClick"
-          @click.right.prevent="handleMoreBtnClick"
         >
           <!-- Cover -->
           <div
@@ -297,7 +319,7 @@ function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
             <!-- Video cover -->
             <Picture
               :src="`${removeHttpFromUrl(video.cover)}@672w_378h_1c_!web-home-common-cover`"
-              loading="lazy"
+              loading="eager"
               w="full" max-w-full align-middle aspect-video object-cover
               rounded="$bew-radius"
             />
@@ -308,7 +330,7 @@ function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
               bg="$bew-fill-4" backdrop-blur-20px mix-blend-luminosity rounded="$bew-radius" z-2
             >
               <p mb-2 color-white text-lg>
-                {{ $t('home.video_removed') }}
+                {{ $t('video_card.video_removed') }}
               </p>
               <Button
                 color="rgba(255,255,255,.35)" text-color="white" size="small"
@@ -390,6 +412,28 @@ function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
                 <slot name="coverTopLeft" />
               </div>
 
+              <div
+                v-if="video.liveStatus === 1"
+                class="group-hover:opacity-0"
+                pos="absolute left-0 top-0" bg="$bew-theme-color" text="xs white"
+                p="x-2 y-1" m-1 inline-block rounded="$bew-radius" duration-300
+              >
+                LIVE
+              </div>
+
+              <div
+                v-if="video.badge && Object.keys(video.badge).length > 0"
+                class="group-hover:opacity-0"
+                :style="{
+                  backgroundColor: video.badge.bgColor,
+                  color: video.badge.color,
+                }"
+                pos="absolute right-0 top-0" bg="$bew-theme-color" text="xs white"
+                p="x-2 y-1" m-1 inline-block rounded="$bew-radius" duration-300
+              >
+                {{ video.badge.text }}
+              </div>
+
               <!-- Watcher later button -->
               <button
                 v-if="showWatcherLater"
@@ -426,7 +470,7 @@ function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
             <div v-if="!horizontal" flex>
               <a
                 v-if="video.authorFace"
-                :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
+                :href="authorJumpUrl" target="_blank"
                 m="r-4" w="36px" h="36px" rounded="1/2"
                 object="center cover" bg="$bew-skeleton" cursor="pointer"
                 position-relative
@@ -460,7 +504,7 @@ function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
                   text="lg overflow-ellipsis $bew-text-1"
                   cursor="pointer"
                 >
-                  <a :href="videoUrl" target="_blank" :title="video.title" rel="noopener noreferrer">
+                  <a :href="videoUrl" target="_blank" :title="video.title">
                     {{ video.title }}
                   </a>
                 </h3>
@@ -489,7 +533,7 @@ function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
                   <div v-if="horizontal" flex>
                     <a
                       v-if="video.authorFace"
-                      :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
+                      :href="authorJumpUrl" target="_blank"
                       m="r-2" w="30px" h="30px" rounded="1/2"
                       object="center cover" bg="$bew-skeleton" cursor="pointer" relative
                       @click.stop=""
@@ -519,7 +563,7 @@ function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
                     class="channel-name"
                     un-text="hover:$bew-text-1"
                     cursor-pointer mr-4
-                    :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
+                    :href="authorJumpUrl" target="_blank"
                     @click.stop=""
                   >
                     <span>{{ video.author }}</span>
