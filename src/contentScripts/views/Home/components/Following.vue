@@ -97,6 +97,9 @@ async function getFollowedUsersVideos() {
   }
 
   try {
+    // 如果 videoList 不是空的，获取最后一个真实视频的 uniqueId
+    const lastUniqueId = videoList.value.length > 0 ? videoList.value.slice(-1)[0].uniqueId : ''
+
     let i = 0
     // https://github.com/starknt/BewlyBewly/blob/fad999c2e482095dc3840bb291af53d15ff44130/src/contentScripts/views/Home/components/ForYou.vue#L208
     const pendingVideos: VideoElement[] = Array.from({ length: 30 }, () => ({
@@ -132,9 +135,15 @@ async function getFollowedUsersVideos() {
         videoList.value = resData.map(item => ({ uniqueId: `${item.id_str}`, item }))
       }
       else {
-        resData.forEach((item) => {
+        resData.forEach((item, index) => {
+          const currentUniqueId = `${item.id_str}`
+
+          if (index === 0 && currentUniqueId === lastUniqueId) {
+            return
+          }
+
           videoList.value[lastVideoListLength++] = {
-            uniqueId: `${item.id_str}`,
+            uniqueId: currentUniqueId,
             item,
           }
         })
