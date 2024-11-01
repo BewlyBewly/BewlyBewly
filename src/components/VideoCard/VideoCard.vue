@@ -27,7 +27,7 @@ interface Props {
   skeleton?: boolean
   video?: Video
   /** rcmd: recommend video; appRcmd: app recommend video; bangumi: bangumi video; common: common video */
-  type: 'rcmd' | 'appRcmd' | 'bangumi' | 'common'
+  type?: 'rcmd' | 'appRcmd' | 'bangumi' | 'common'
   showWatcherLater?: boolean
   horizontal?: boolean
   showPreview?: boolean
