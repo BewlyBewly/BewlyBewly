@@ -149,11 +149,11 @@ defineExpose({ initData })
           title: video.item.title,
           desc: video.item.desc,
           cover: video.item.pic,
-          authorList: [{
-            author: video.item.owner.name,
+          author: {
+            name: video.item.owner.name,
             authorFace: video.item.owner.face,
             mid: video.item.owner.mid,
-          }],
+          },
           view: video.item.stat.view,
           danmaku: video.item.stat.danmaku,
           publishedTimestamp: video.item.pubdate,

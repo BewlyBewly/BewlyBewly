@@ -14,8 +14,9 @@ import { getCSRF, removeHttpFromUrl } from '~/utils/main'
 
 import Tooltip from '../Tooltip.vue'
 import type { Video } from './types'
-import { getAuthorJumpUrl, getCurrentTime, getCurrentVideoUrl } from './utils'
-import VideoCardAvatar from './VideoCardAvatar.vue'
+import { getCurrentTime, getCurrentVideoUrl } from './utils'
+import VideoCardAuthorAvatar from './VideoCardAuthor/components/VideoCardAuthorAvatar.vue'
+import VideoCardAuthorName from './VideoCardAuthor/components/VideoCardAuthorName.vue'
 import VideoCardContextMenu from './VideoCardContextMenu/VideoCardContextMenu.vue'
 import VideoCardSkeleton from './VideoCardSkeleton.vue'
 
@@ -396,8 +397,9 @@ provide('getVideoType', () => props.type!)
             flex="~"
           >
             <!-- Author Avatar -->
-            <VideoCardAvatar
-              v-if="!horizontal && video.authorList"
+            <VideoCardAuthorAvatar
+              v-if="!horizontal"
+              :author="video.author"
               :author-list="video.authorList"
             />
             <div class="group/desc" flex="~ col" w="full" align="items-start">
@@ -433,26 +435,15 @@ provide('getVideoType', () => props.type!)
                   }"
                   flex="inline items-center"
                 >
-                  <VideoCardAvatar
-                    v-if="horizontal && video.authorList"
+                  <VideoCardAuthorAvatar
+                    v-if="horizontal"
+                    :author="video.author"
                     :author-list="video.authorList"
                   />
-
-                  <a
-                    v-if="video.authorList"
-                    class="channel-name"
-                    un-text="hover:$bew-text-1"
-                    cursor-pointer mr-4
-                    :href="getAuthorJumpUrl(video.authorList[0])" target="_blank"
-                    @click.stop=""
-                  >
-                    <span>
-                      {{ video.authorList[0].author }}
-                      <span v-if="video.authorList.length > 1">
-                        {{ $t('video_card.group_contribution', { num: video.authorList.length }) }}
-                      </span>
-                    </span>
-                  </a>
+                  <VideoCardAuthorName
+                    :author="video.author"
+                    :author-list="video.authorList"
+                  />
                 </span>
               </div>
 

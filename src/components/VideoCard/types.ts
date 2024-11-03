@@ -8,7 +8,10 @@ export interface Video {
   desc?: string
   cover: string
 
+  /** `author` for individual submissions by UP; `authorList` for collaborative submissions by UP */
+  author?: Author
   authorList?: Author[]
+
   view?: number
   viewStr?: string
   danmaku?: number
@@ -45,7 +48,7 @@ export interface Video {
 }
 
 export interface Author {
-  author?: string
+  name?: string
   /** After set the `authorUrl`, clicking the author's name or avatar will navigate to this url. It won't be affected by mid */
   authorUrl?: string
   authorFace: string

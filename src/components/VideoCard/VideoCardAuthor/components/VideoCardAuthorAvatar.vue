@@ -1,11 +1,14 @@
 <script lang="ts" setup>
 import { removeHttpFromUrl } from '~/utils/main'
 
-import type { Author } from './types'
-import { getAuthorJumpUrl } from './utils'
+import type { Author } from '../../types'
+import { getAuthorJumpUrl } from '../../utils'
 
 const props = withDefaults(defineProps<{
-  authorList: Author[]
+  // 单个作者用 `author`, 多个作者用 `authorList`
+  author?: Author
+
+  authorList?: Author[]
   maxCount?: number
 }>(), {
   maxCount: 2, // 最多显示的头像数量
@@ -16,16 +19,16 @@ const displayedAvatars = computed(() => props.authorList?.slice(0, props.maxCoun
 </script>
 
 <template>
-  <div v-if="displayedAvatars.length > 0" flex>
+  <div v-if="author || authorList" flex>
     <div
       pos="relative"
       m="r-4" h="36px"
-      :style="{ width: `${26 + Math.min(maxCount + 1, authorList.length) * 10}px` }"
+      :style="{ width: `${26 + Math.min(maxCount + 1, authorList?.length || 0) * 10}px` }"
     >
       <a
-        v-for="(author, index) in displayedAvatars"
+        v-for="(item, index) in displayedAvatars"
         :key="index"
-        :href="getAuthorJumpUrl(author)" target="_blank"
+        :href="getAuthorJumpUrl(item)" target="_blank"
         w="36px" h="36px" rounded="1/2"
         object="center cover" bg="$bew-skeleton" cursor="pointer"
         position-relative
@@ -34,7 +37,7 @@ const displayedAvatars = computed(() => props.authorList?.slice(0, props.maxCoun
       >
         <!-- Avatar -->
         <Picture
-          :src="`${removeHttpFromUrl(author.authorFace)}@50w_50h_1c`"
+          :src="`${removeHttpFromUrl(item.authorFace)}@50w_50h_1c`"
           pos="absolute top-0"
           loading="lazy"
           w="36px" h="36px"
@@ -43,7 +46,7 @@ const displayedAvatars = computed(() => props.authorList?.slice(0, props.maxCoun
 
         <!-- Following Flag -->
         <div
-          v-if="author.followed"
+          v-if="item.followed"
           pos="absolute top-23px left-23px"
           w-14px h-14px
           bg="$bew-theme-color"
@@ -57,7 +60,7 @@ const displayedAvatars = computed(() => props.authorList?.slice(0, props.maxCoun
 
       <!-- More avatars not shown -->
       <span
-        v-if="authorList.length > maxCount"
+        v-if="authorList && authorList.length > maxCount"
         pos="absolute right-0"
         w="36px" h="36px"
         bg="$bew-skeleton"

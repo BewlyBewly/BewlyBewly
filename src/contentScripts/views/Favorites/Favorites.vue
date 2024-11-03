@@ -223,11 +223,11 @@ function isMusic(item: FavoriteResource) {
                 duration: item.duration,
                 title: item.title,
                 cover: item.cover,
-                authorList: [{
-                  author: item.upper.name,
+                author: {
+                  name: item.upper.name,
                   authorFace: item.upper.face,
                   mid: item.upper.mid,
-                }],
+                },
                 view: item.cnt_info.play,
                 danmaku: item.cnt_info.danmaku,
                 publishedTimestamp: item.pubtime,

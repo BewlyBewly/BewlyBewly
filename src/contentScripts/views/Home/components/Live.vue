@@ -185,11 +185,11 @@ defineExpose({ initData })
           // id: Number(video.item.modules.module_dynamic.major.archive?.aid),
           title: `${video.item.title}`,
           cover: `${video.item.room_cover}`,
-          authorList: [{
-            author: video.item.uname,
+          author: {
+            name: video.item.uname,
             authorFace: video.item.face,
             mid: video.item.uid,
-          }],
+          },
           viewStr: video.item.text_small,
           tag: video.item.area_name_v2,
           roomid: video.item.roomid,

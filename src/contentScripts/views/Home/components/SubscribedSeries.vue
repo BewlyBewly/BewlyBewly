@@ -196,12 +196,12 @@ defineExpose({ initData })
           id: video.item.modules.module_author.mid,
           title: `${video.item.modules.module_dynamic.major.pgc?.title}`,
           cover: `${video.item.modules.module_dynamic.major.pgc?.cover}`,
-          authorList: [{
-            author: video.item.modules.module_author.name,
+          author: {
+            name: video.item.modules.module_author.name,
             authorUrl: video.item.modules.module_author.jump_url,
             authorFace: video.item.modules.module_author.face,
             mid: video.item.modules.module_author.mid,
-          }],
+          },
           viewStr: video.item.modules.module_dynamic.major.pgc?.stat.play,
           danmakuStr: video.item.modules.module_dynamic.major.pgc?.stat.danmaku,
           capsuleText: video.item.modules.module_author.pub_time,

@@ -144,7 +144,7 @@ async function getFollowedUsersVideos() {
           const currentUniqueId = `${item.id_str}`
           const currentBvid = item.modules.module_dynamic.major.archive?.bvid
           const author: Author = {
-            author: item.modules.module_author.name,
+            name: item.modules.module_author.name,
             authorFace: item.modules.module_author.face,
             mid: item.modules.module_author.mid,
           }
