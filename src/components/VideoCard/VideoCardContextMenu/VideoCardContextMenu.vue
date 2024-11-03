@@ -6,11 +6,12 @@ import { useBewlyApp } from '~/composables/useAppProvider'
 import { Type as ThreePointV2Type } from '~/models/video/appForYou'
 import { openLinkInBackground } from '~/utils/tabs'
 
-import type { Video } from '../VideoCard.vue'
+import type { Author, Video } from '../types'
 import DislikeDialog from './components/DislikeDialog.vue'
 
 const props = defineProps<{
   video: Video
+  author?: Author
   contextMenuStyles: CSSProperties
 }>()
 const emit = defineEmits<{
@@ -132,7 +133,7 @@ function handleCommonCommand(command: VideoOption) {
       handleClose()
       break
     case VideoOption.ViewThisUserChannel:
-      window.open(`https://space.bilibili.com/${props.video.mid}`, '_blank')
+      window.open(`https://space.bilibili.com/${props.author?.mid}`, '_blank')
       handleClose()
       break
   }

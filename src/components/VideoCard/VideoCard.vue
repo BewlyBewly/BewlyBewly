@@ -6,7 +6,6 @@ import { useToast } from 'vue-toastification'
 import Button from '~/components/Button.vue'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { accessKey, settings } from '~/logic'
-import type { ThreePointV2 } from '~/models/video/appForYou'
 import type { VideoPreviewResult } from '~/models/video/videoPreview'
 import api from '~/utils/api'
 import { getTvSign, TVAppKey } from '~/utils/authProvider'
@@ -14,6 +13,9 @@ import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils/dataFormat
 import { getCSRF, removeHttpFromUrl } from '~/utils/main'
 
 import Tooltip from '../Tooltip.vue'
+import type { Video } from './types'
+import { getAuthorJumpUrl, getCurrentTime, getCurrentVideoUrl } from './utils'
+import VideoCardAvatar from './VideoCardAvatar.vue'
 import VideoCardContextMenu from './VideoCardContextMenu/VideoCardContextMenu.vue'
 import VideoCardSkeleton from './VideoCardSkeleton.vue'
 
@@ -34,53 +36,6 @@ interface Props {
   moreBtn?: boolean
 }
 
-export interface Video {
-  id: number
-  duration?: number
-  durationStr?: string
-  title: string
-  desc?: string
-  cover: string
-  author?: string
-  authorFace?: string
-  /** After set the `authorUrl`, clicking the author's name or avatar will navigate to this url. It won't be affected by mid */
-  authorUrl?: string
-  mid?: number
-  view?: number
-  viewStr?: string
-  danmaku?: number
-  danmakuStr?: string
-
-  publishedTimestamp?: number
-  capsuleText?: string
-
-  bvid?: string
-  aid?: number
-  // used for live
-  roomid?: number
-  epid?: number
-  goto?: string
-  /** After set the `url`, clicking the video will navigate to this url. It won't be affected by aid, bvid or epid */
-  url?: string
-  /** If you want to show preview video, you should set the cid value */
-  cid?: number
-
-  followed?: boolean
-  liveStatus?: number
-
-  tag?: string
-  rank?: number
-  type?: 'horizontal' | 'vertical' | 'bangumi'
-  threePointV2: ThreePointV2[]
-
-  badge?: {
-    bgColor: string
-    color: string
-    iconUrl?: string
-    text: string
-  }
-}
-
 const toast = useToast()
 const { mainAppRef, openIframeDrawer } = useBewlyApp()
 const showVideoOptions = ref<boolean>(false)
@@ -95,12 +50,6 @@ const selectedDislikeOpt = ref<{ dislikeReasonId: number }>()
 
 const videoCurrentTime = ref<number | null>(null)
 
-function getCurrentVideoUrl(video: Video) {
-  const baseUrl = `https://www.bilibili.com/video/${video.bvid ?? `av${video.aid}`}`
-  const currentTime = videoCurrentTime.value
-  return currentTime && currentTime > 5 ? `${baseUrl}/?t=${currentTime}` : baseUrl
-}
-
 const videoUrl = computed(() => {
   if (removed.value || !props.video)
     return undefined
@@ -108,23 +57,11 @@ const videoUrl = computed(() => {
   if (props.video.url)
     return props.video.url
   else if (props.video.bvid || props.video.aid)
-    return getCurrentVideoUrl(props.video)
+    return getCurrentVideoUrl(props.video, videoCurrentTime)
   else if (props.video.epid)
     return `https://www.bilibili.com/bangumi/play/ep${props.video.epid}`
   else if (props.video.roomid)
     return `https://live.bilibili.com/${props.video.roomid}`
-  else
-    return ''
-})
-
-const authorJumpUrl = computed(() => {
-  if (!props.video)
-    return
-
-  if (props.video.authorUrl)
-    return props.video.authorUrl
-  else if (props.video.mid)
-    return `//space.bilibili.com/${props.video.mid}`
   else
     return ''
 })
@@ -143,14 +80,6 @@ const mouseLeaveTimeOut = ref()
 const previewVideoUrl = ref<string>('')
 const contentVisibility = ref<'auto' | 'visible'>('auto')
 const videoElement = ref<HTMLVideoElement | null>(null)
-
-function getCurrentTime() {
-  if (videoElement.value) {
-    const currentTime = videoElement.value.currentTime
-    return currentTime
-  }
-  return null
-}
 
 watch(() => isHover.value, (newValue) => {
   if (!props.video || !newValue)
@@ -219,7 +148,7 @@ function handelMouseLeave() {
 }
 
 function handleClick(event: MouseEvent) {
-  videoCurrentTime.value = getCurrentTime()
+  videoCurrentTime.value = getCurrentTime(videoElement)
 
   if (settings.value.videoCardLinkOpenMode === 'drawer' && videoUrl.value && !event.ctrlKey && !event.metaKey) {
     event.preventDefault()
@@ -467,36 +396,10 @@ provide('getVideoType', () => props.type!)
             flex="~"
           >
             <!-- Author Avatar -->
-            <div v-if="!horizontal" flex>
-              <a
-                v-if="video.authorFace"
-                :href="authorJumpUrl" target="_blank"
-                m="r-4" w="36px" h="36px" rounded="1/2"
-                object="center cover" bg="$bew-skeleton" cursor="pointer"
-                position-relative
-                @click.stop=""
-              >
-
-                <Picture
-                  :src="`${removeHttpFromUrl(video.authorFace)}@50w_50h_1c`"
-                  loading="lazy"
-                  w="36px" h="36px"
-                  rounded="1/2"
-                />
-
-                <div
-                  v-if="video.followed"
-                  pos="absolute bottom--2px right--2px"
-                  w-14px h-14px
-                  bg="$bew-theme-color"
-                  border="2 outset solid white"
-                  rounded="1/2"
-                  grid place-items-center
-                >
-                  <div color-white text-sm class="i-mingcute:check-fill w-8px h-8px" />
-                </div>
-              </a>
-            </div>
+            <VideoCardAvatar
+              v-if="!horizontal && video.authorList"
+              :author-list="video.authorList"
+            />
             <div class="group/desc" flex="~ col" w="full" align="items-start">
               <div flex="~ gap-1 justify-between items-start" w="full" pos="relative">
                 <h3
@@ -530,43 +433,25 @@ provide('getVideoType', () => props.type!)
                   }"
                   flex="inline items-center"
                 >
-                  <div v-if="horizontal" flex>
-                    <a
-                      v-if="video.authorFace"
-                      :href="authorJumpUrl" target="_blank"
-                      m="r-2" w="30px" h="30px" rounded="1/2"
-                      object="center cover" bg="$bew-skeleton" cursor="pointer" relative
-                      @click.stop=""
-                    >
-                      <Picture
-                        :src="`${removeHttpFromUrl(video.authorFace)}@50w_50h_1c`"
-                        loading="lazy"
-                        w="30px" h="30px"
-                        rounded="1/2"
-                      />
-                      <div
-                        v-if="video.followed"
-                        pos="absolute bottom--2px right--2px"
-                        w-14px h-14px
-                        bg="$bew-theme-color"
-                        border="2 outset solid white"
-                        rounded="1/2"
-                        grid place-items-center
-                      >
-                        <div color-white text-sm class="i-mingcute:check-fill w-8px h-8px" />
-                      </div>
-                    </a>
-                  </div>
+                  <VideoCardAvatar
+                    v-if="horizontal && video.authorList"
+                    :author-list="video.authorList"
+                  />
 
                   <a
-                    v-if="video.author"
+                    v-if="video.authorList"
                     class="channel-name"
                     un-text="hover:$bew-text-1"
                     cursor-pointer mr-4
-                    :href="authorJumpUrl" target="_blank"
+                    :href="getAuthorJumpUrl(video.authorList[0])" target="_blank"
                     @click.stop=""
                   >
-                    <span>{{ video.author }}</span>
+                    <span>
+                      {{ video.authorList[0].author }}
+                      <span v-if="video.authorList.length > 1">
+                        {{ $t('video_card.group_contribution', { num: video.authorList.length }) }}
+                      </span>
+                    </span>
                   </a>
                 </span>
               </div>
@@ -631,8 +516,8 @@ provide('getVideoType', () => props.type!)
         :video="{
           ...video,
           url: videoUrl,
-          authorUrl: authorJumpUrl,
         }"
+        :author="video.authorList?.[0]"
         :context-menu-styles="videoOptionsFloatingStyles"
         @close="showVideoOptions = false"
         @removed="handleRemoved"
