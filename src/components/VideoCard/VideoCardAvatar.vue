@@ -55,7 +55,9 @@ const displayedAvatars = computed(() => props.authorList?.slice(0, props.maxCoun
         </div>
       </a>
 
+      <!-- More avatars not shown -->
       <span
+        v-if="authorList.length > maxCount"
         pos="absolute right-0"
         w="36px" h="36px"
         bg="$bew-skeleton"
