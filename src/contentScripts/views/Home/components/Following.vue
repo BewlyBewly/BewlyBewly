@@ -161,7 +161,12 @@ async function getFollowedUsersVideos() {
           }
           else if (currentBvid === lastBvid) {
             // UP主联合投稿视频
-            lastVideo?.authorList?.push(author)
+
+            // 当联合投稿的数据是分两次获取时，有概率会出现多个重复内容
+            // 遍历authorList里面每个up的mid值，如果不存在再添加up信息
+            if (!lastVideo?.authorList?.some(existingAuthor => existingAuthor.mid === author.mid)) {
+              lastVideo?.authorList?.push(author)
+            }
             return
           }
           else {
