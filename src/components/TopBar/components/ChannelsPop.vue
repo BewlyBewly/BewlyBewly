@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 
-import ALink from './ALink.vue'
-
 const { t } = useI18n()
 
 const genres = computed(() => [
@@ -72,6 +70,7 @@ const otherLinks = computed(() => [
       >
         <ALink
           :href="genre.href"
+          type="topBar"
         >
           <svg aria-hidden="true" class="svg-icon">
             <use :xlink:href="genre.icon" />
@@ -92,6 +91,7 @@ const otherLinks = computed(() => [
       >
         <ALink
           :href="otherLink.href"
+          type="topBar"
         >
           <div v-if="otherLink.icon.startsWith('#')" class="icon">
             <svg

@@ -218,12 +218,11 @@ function handelMouseLeave() {
   clearTimeout(mouseLeaveTimeOut.value)
 }
 
-function handleClick(event: MouseEvent) {
+async function handleClick(event: MouseEvent) {
   videoCurrentTime.value = getCurrentTime()
 
   if (settings.value.videoCardLinkOpenMode === 'drawer' && videoUrl.value && !event.ctrlKey && !event.metaKey) {
     event.preventDefault()
-
     openIframeDrawer(videoUrl.value)
   }
 }
@@ -300,9 +299,11 @@ provide('getVideoType', () => props.type!)
         w="full"
         rounded="$bew-radius"
       >
-        <a
+        <ALink
           :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }"
-          :href="videoUrl" :target="settings.videoCardLinkOpenMode === 'currentTab' ? '_self' : '_blank'"
+          :href="videoUrl"
+          type="videoCard"
+          custom-click-event
           @mouseenter="handleMouseEnter"
           @mouseleave="handelMouseLeave"
           @click="handleClick"
@@ -610,7 +611,7 @@ provide('getVideoType', () => props.type!)
               </div>
             </div>
           </div>
-        </a>
+        </ALink>
       </div>
     </div>
 

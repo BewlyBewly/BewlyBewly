@@ -3,8 +3,6 @@ import { useI18n } from 'vue-i18n'
 
 import { getUserID } from '~/utils/main'
 
-import ALink from './ALink.vue'
-
 const { t } = useI18n()
 
 const list = computed((): { name: string, url: string, icon: string }[] => [
@@ -31,6 +29,7 @@ const list = computed((): { name: string, url: string, icon: string }[] => [
       v-for="item in list"
       :key="item.name"
       :href="item.url"
+      type="topBar"
       pos="relative"
       p="x-4 y-2"
       bg="hover:$bew-fill-2"

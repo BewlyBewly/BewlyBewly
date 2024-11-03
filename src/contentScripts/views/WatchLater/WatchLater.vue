@@ -163,13 +163,13 @@ function jumpToLoginPage() {
       <template v-else>
         <!-- watcher later list -->
         <TransitionGroup name="list">
-          <a
+          <ALink
             v-for="(item, index) in currentWatchLaterList"
             :key="item.aid"
             :href="`https://www.bilibili.com/list/watchlater?bvid=${item.bvid}`"
+            type="videoCard"
             class="group"
             flex cursor-pointer
-            @click.prevent="handleLinkClick(`https://www.bilibili.com/list/watchlater?bvid=${item.bvid}`)"
           >
             <section
               rounded="$bew-radius"
@@ -295,10 +295,9 @@ function jumpToLoginPage() {
                     <div i-tabler:trash />
                   </button>
                 </div>
-
               </div>
             </section>
-          </a>
+          </ALink>
         </TransitionGroup>
         <!-- loading -->
         <Transition name="fade">

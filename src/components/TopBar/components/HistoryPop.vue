@@ -12,8 +12,6 @@ import api from '~/utils/api'
 import { calcCurrentTime } from '~/utils/dataFormatter'
 import { removeHttpFromUrl, scrollToTop } from '~/utils/main'
 
-import ALink from './ALink.vue'
-
 const { t } = useI18n()
 const historys = reactive<Array<HistoryItem>>([])
 const historyTabs = computed(() => [
@@ -207,6 +205,7 @@ function getHistoryList(type: Business, view_at = 0 as number) {
       </div>
       <ALink
         href="https://www.bilibili.com/account/history"
+        type="topBar"
         flex="~ items-center"
       >
         <span text="sm">{{ $t('common.view_all') }}</span>
@@ -250,6 +249,7 @@ function getHistoryList(type: Business, view_at = 0 as number) {
             v-for="historyItem in historys"
             :key="historyItem.kid"
             :href="getHistoryUrl(historyItem)"
+            type="topBar"
             m="last:b-4" p="2"
             rounded="$bew-radius"
             hover:bg="$bew-fill-2"
@@ -370,6 +370,7 @@ function getHistoryList(type: Business, view_at = 0 as number) {
                 <div text="$bew-text-2 sm" m="t-4" flex="~" align="items-center">
                   <ALink
                     :href="`https://space.bilibili.com/${historyItem.author_mid}`"
+                    type="topBar"
                   >
                     {{ historyItem.author_name }}
                   </ALink>
