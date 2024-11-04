@@ -11,7 +11,6 @@ import api from '~/utils/api'
 import { getUserID, isHomePage } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
-import ALink from './components/ALink.vue'
 import ChannelsPop from './components/ChannelsPop.vue'
 import FavoritesPop from './components/FavoritesPop.vue'
 import HistoryPop from './components/HistoryPop.vue'
@@ -554,6 +553,7 @@ defineExpose({
                   <ALink
                     href="https://t.bilibili.com"
                     :title="$t('topbar.moments')"
+                    type="topBar"
                   >
                     <div i-tabler:windmill />
                   </ALink>
@@ -578,6 +578,7 @@ defineExpose({
                   <ALink
                     :href="`https://space.bilibili.com/${mid}/favlist`"
                     :title="$t('topbar.favorites')"
+                    type="topBar"
                   >
                     <div i-mingcute:star-line />
                   </ALink>
@@ -603,8 +604,8 @@ defineExpose({
                 >
                   <ALink
                     href="https://www.bilibili.com/account/history"
-
                     :title="$t('topbar.history')"
+                    type="topBar"
                   >
                     <div i-mingcute:time-line />
                   </ALink>
@@ -628,6 +629,7 @@ defineExpose({
                   <ALink
                     href="https://www.bilibili.com/watchlater/#/list"
                     :title="$t('topbar.watch_later')"
+                    type="topBar"
                   >
                     <div i-mingcute:carplay-line />
                   </ALink>
@@ -726,6 +728,7 @@ defineExpose({
                   <ALink
                     href="https://message.bilibili.com"
                     :title="$t('topbar.notifications')"
+                    type="topBar"
                   >
                     <div i-tabler:bell />
                   </ALink>
@@ -752,6 +755,7 @@ defineExpose({
               <ALink
                 ref="avatarImg"
                 :href="`https://space.bilibili.com/${mid}`"
+                type="topBar"
                 class="avatar-img"
                 :class="{ hover: popupVisible.userPanel }"
                 :style="{
