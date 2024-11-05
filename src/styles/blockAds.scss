@@ -16,6 +16,10 @@
   .pop-live-small-mode,
   // 视频页面的侧栏
   .slide-ad-exp,
+  // 动态页的广告
+  .bili-dyn-ads {
+    display: none !important;
+  }
   // 主頁右下廣告卡片
   .adcard {
     display: none !important;
