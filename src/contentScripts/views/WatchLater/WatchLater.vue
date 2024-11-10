@@ -136,6 +136,18 @@ function handlePlayAll() {
   openLinkToNewTab('https://www.bilibili.com/list/watchlater')
 }
 
+function handleLinkClick(url: string) {
+  if (settings.value.videoCardLinkOpenMode === 'drawer') {
+    openIframeDrawer(url) // 在抽屉打开
+  }
+  else if (settings.value.videoCardLinkOpenMode === 'currentTab') {
+    window.open(url, '_self') // 在当前标签页打开
+  }
+  else {
+    openLinkToNewTab(url) // 在新标签页打开
+  }
+}
+
 function jumpToLoginPage() {
   location.href = 'https://passport.bilibili.com/login'
 }
@@ -151,14 +163,13 @@ function jumpToLoginPage() {
       <template v-else>
         <!-- watcher later list -->
         <TransitionGroup name="list">
-          <a
+          <ALink
             v-for="(item, index) in currentWatchLaterList"
             :key="item.aid"
-            :href="settings.videoCardLinkOpenMode === 'drawer' ? undefined : `https://www.bilibili.com/list/watchlater?bvid=${item.bvid}`"
-            :target="settings.videoCardLinkOpenMode === 'currentTab' ? '_self' : '_blank'"
+            :href="`https://www.bilibili.com/list/watchlater?bvid=${item.bvid}`"
+            type="videoCard"
             class="group"
             flex cursor-pointer
-            @click="settings.videoCardLinkOpenMode === 'drawer' && openIframeDrawer(`https://www.bilibili.com/list/watchlater?bvid=${item.bvid}`)"
           >
             <section
               rounded="$bew-radius"
@@ -232,7 +243,7 @@ function jumpToLoginPage() {
                     class="keep-two-lines"
                     overflow="hidden"
                     un-text="lg overflow-ellipsis"
-                    :href="removeHttpFromUrl(`https://www.bilibili.com/list/watchlater?bvid=${item.bvid}`)" target="_blank"
+                    @click.stop.prevent="handleLinkClick(`https://www.bilibili.com/list/watchlater?bvid=${item.bvid}`)"
                   >
                     {{ item.title }}
                   </a>
@@ -249,6 +260,7 @@ function jumpToLoginPage() {
                     duration-300
                     pr-2
                     :href="`//space.bilibili.com/${item.owner.mid}`" target="_blank"
+                    @click.stop
                   >
                     <img
                       :src="removeHttpFromUrl(`${item.owner.face}@40w_40h_1c`)"
@@ -278,15 +290,14 @@ function jumpToLoginPage() {
                     opacity-0 group-hover:opacity-100
                     p-2
                     duration-300
-                    @click.prevent="deleteWatchLaterItem(index, item.aid)"
+                    @click.prevent.stop="deleteWatchLaterItem(index, item.aid)"
                   >
                     <div i-tabler:trash />
                   </button>
                 </div>
-
               </div>
             </section>
-          </a>
+          </ALink>
         </TransitionGroup>
         <!-- loading -->
         <Transition name="fade">

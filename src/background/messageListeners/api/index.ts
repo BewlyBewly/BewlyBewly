@@ -5,6 +5,7 @@ import API_ANIME from './anime'
 import API_AUTH from './auth'
 import API_FAVORITE from './favorite'
 import API_HISTORY from './history'
+import API_LIVE from './live'
 import API_MOMENT from './moment'
 import API_NOTIFICATION from './notification'
 import API_RANKING from './ranking'
@@ -25,6 +26,7 @@ export const API_COLLECTION = {
   USER: API_USER,
   VIDEO: API_VIDEO,
   WATCHLATER: API_WATCHLATER,
+  LIVE: API_LIVE,
 
   [Symbol.iterator]() {
     return Object.values(this).values()

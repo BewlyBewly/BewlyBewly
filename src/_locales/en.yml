@@ -311,7 +311,7 @@ topbar:
     vlog: VLOG
     funny: Funny
     standalone_gaming: Standalone Gaming
-    vtubers: Vtubers & Vups
+    vtubers: VTubers & Vups
     charitable_events: Charitable Events
     moocs: MOOCs
     articles: Articles
@@ -399,6 +399,7 @@ home:
   trending: Trending
   ranking: Ranking
   subscribed_series: Subscribed Series
+  live: Live
 
 ranking:
   all: All

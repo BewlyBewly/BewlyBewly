@@ -15,11 +15,17 @@
   // 大家围观的直播
   .pop-live-small-mode,
   // 视频页面的侧栏
-  .slide-ad-exp {
+  .slide-ad-exp,
+  // 动态页的广告
+  .bili-dyn-ads {
+    display: none !important;
+  }
+  // 主頁右下廣告卡片
+  .adcard {
     display: none !important;
   }
 
-  // 首頁推介頂部卡片間距調整
+  // 主頁推介頂部卡片間距調整
   .recommended-container_floor-aside .container > *:nth-of-type(n + 8) {
     margin-top: 0px !important;
     margin-bottom: 24px;

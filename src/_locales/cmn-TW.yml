@@ -309,7 +309,7 @@ topbar:
     vlog: VLOG
     funny: 搞笑
     standalone_gaming: 單機遊戲
-    vtubers: Vtubers & Vups
+    vtubers: VTubers & Vups
     charitable_events: 慈善
     moocs: 線上課堂
     articles: 專欄
@@ -397,6 +397,7 @@ home:
   trending: 發燒影片
   ranking: 排行
   subscribed_series: 訂閱劇集
+  live: 直播
 
 ranking:
   all: 全部
