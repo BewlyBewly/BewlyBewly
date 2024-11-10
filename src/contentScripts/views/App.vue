@@ -192,20 +192,20 @@ async function haveScrollbar() {
   return scrollHeight > window.innerHeight
 }
 
-// When opening a video in drawer mode, listen for changes to the drawer's inner iframe url.
-// When the iframe's url changes, update the parent url to match the iframe's url.
-const beforeUrl = ref<string>(location.href.replace(/\/$/, ''))
-if (inIframe.value) {
-  useEventListener(window, 'pushstate', handleIframeUrlChange)
-  useEventListener(window, 'click', handleIframeUrlChange)
+// // When opening a video in drawer mode, listen for changes to the drawer's inner iframe url.
+// // When the iframe's url changes, update the parent url to match the iframe's url.
+// const beforeUrl = ref<string>(location.href.replace(/\/$/, ''))
+// if (inIframe.value) {
+//   // useEventListener(window, 'pushstate', handleIframeUrlChange)
+//   useEventListener(window, 'click', handleIframeUrlChange)
 
-  function handleIframeUrlChange() {
-    if (beforeUrl.value.replace(/\/$/, '') !== parent.location.href.replace(/\/$/, '')) {
-      parent.history.pushState(null, '', location.href.replace(/\/$/, ''))
-    }
-    beforeUrl.value = location.href.replace(/\/$/, '')
-  }
-}
+//   function handleIframeUrlChange() {
+//     if (beforeUrl.value.replace(/\/$/, '') !== parent.location.href.replace(/\/$/, '')) {
+//       parent.history.pushState(null, '', location.href.replace(/\/$/, ''))
+//     }
+//     beforeUrl.value = location.href.replace(/\/$/, '')
+//   }
+// }
 
 provide<BewlyAppProvider>('BEWLY_APP', {
   activatedPage,
