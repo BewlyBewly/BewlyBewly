@@ -5,7 +5,6 @@ import { createApp } from 'vue'
 
 import { useDark } from '~/composables/useDark'
 import { BEWLY_MOUNTED } from '~/constants/globalEvents'
-import injectCode from '~/inject/index?raw'
 import { settings } from '~/logic'
 import { setupApp } from '~/logic/common-setup'
 import RESET_BEWLY_CSS from '~/styles/reset.css?raw'
@@ -240,18 +239,6 @@ function injectApp() {
   const app = createApp(App)
   setupApp(app)
   app.mount(root)
-}
-
-function injectScript() {
-  const myScript = document.createElement('script')
-  myScript.innerHTML = injectCode
-  document.documentElement.appendChild(myScript)
-}
-
-// only fireFox can use script tab inject
-// chrome need define manifest.json -> content_scripts -> world: 'MAIN'
-if (isFirefox) {
-  injectScript()
 }
 
 // function startShadowDOMStyleInjection() {
