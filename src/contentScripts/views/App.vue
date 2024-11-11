@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useEventListener, useThrottleFn, useToggle } from '@vueuse/core'
+import { useThrottleFn, useToggle } from '@vueuse/core'
 import type { Ref } from 'vue'
 
 import type { BewlyAppProvider } from '~/composables/useAppProvider'
@@ -191,21 +191,6 @@ async function haveScrollbar() {
   const { scrollHeight } = viewport // get scroll offset
   return scrollHeight > window.innerHeight
 }
-
-// // When opening a video in drawer mode, listen for changes to the drawer's inner iframe url.
-// // When the iframe's url changes, update the parent url to match the iframe's url.
-// const beforeUrl = ref<string>(location.href.replace(/\/$/, ''))
-// if (inIframe.value) {
-//   // useEventListener(window, 'pushstate', handleIframeUrlChange)
-//   useEventListener(window, 'click', handleIframeUrlChange)
-
-//   function handleIframeUrlChange() {
-//     if (beforeUrl.value.replace(/\/$/, '') !== parent.location.href.replace(/\/$/, '')) {
-//       parent.history.pushState(null, '', location.href.replace(/\/$/, ''))
-//     }
-//     beforeUrl.value = location.href.replace(/\/$/, '')
-//   }
-// }
 
 provide<BewlyAppProvider>('BEWLY_APP', {
   activatedPage,
