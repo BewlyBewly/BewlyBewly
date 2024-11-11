@@ -24,7 +24,7 @@ const API_ANIME = {
       pn: 1,
       ps: 15,
       type: 1,
-      follow_status: 0,
+      follow_status: 0, // 0: 全部, 1: 想看, 2: 在看, 3: 看过
       vmid: '',
     },
     afterHandle: AHS.J_D,

@@ -308,7 +308,7 @@ topbar:
     vlog: VLOG
     funny: 搞笑
     standalone_gaming: 單機遊戲
-    vtubers: Vtubers & Vups
+    vtubers: VTubers & Vups
     charitable_events: 慈善
     moocs: 線上學堂
     articles: 專欄
@@ -325,7 +325,7 @@ topbar:
     money: 銀仔：
     b_coins: B銀：
     exp_desc: '而家經驗 {current_exp}，升到 LV {level} 仲要 {need_exp}'
-    following: 追緊
+    following: 跟緊
     followers: 擁躉
     posts: 動向
     bilibili_premium: Bilibili 大會員
@@ -340,7 +340,7 @@ topbar:
   noti_dropdown:
     replys: 覆我
     mentions: 提我
-    likes: 畀我 like
+    likes: 讚我
     messages: 系统通知
     chats: 傾偈室
   moments_dropdown:
@@ -392,7 +392,7 @@ home:
   not_interested_desc: 你可以用 <kbd>↑</kbd> 同 <kbd>↓</kbd> 嚟揀個理由，抑或用數字鍵嚟直接揀理由，撳 <kbd>Enter</kbd> 就直接提交。
 
   for_you: 估你心水
-  following: Follow 緊
+  following: 跟緊啲人
   trending: 時下至 Hit
   ranking: 排行
   subscribed_series: 訂閱劇集

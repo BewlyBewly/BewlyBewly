@@ -64,6 +64,7 @@ function getAnimeWatchList() {
   api.anime.getAnimeWatchList({
     vmid: getUserID() ?? 0,
     pn: 1,
+    follow_status: 2,
     ps: 30,
   })
     .then((response: WatchListResult) => {

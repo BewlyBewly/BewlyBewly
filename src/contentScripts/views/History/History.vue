@@ -3,7 +3,6 @@ import { useDateFormat } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 
 import { useBewlyApp } from '~/composables/useAppProvider'
-import { settings } from '~/logic'
 import type { HistoryResult, List as HistoryItem } from '~/models/history/history'
 import { Business } from '~/models/history/history'
 import type { HistorySearchResult, List as HistorySearchItem } from '~/models/video/historySearch'
@@ -12,7 +11,6 @@ import { calcCurrentTime } from '~/utils/dataFormatter'
 import { getCSRF, removeHttpFromUrl } from '~/utils/main'
 
 const { t } = useI18n()
-const { openIframeDrawer } = useBewlyApp()
 
 const isLoading = ref<boolean>()
 const noMoreContent = ref<boolean>(false)
@@ -143,19 +141,19 @@ function getHistoryUrl(item: HistoryItem): string {
   // Video
   if (item.history.business === Business.ARCHIVE) {
     if (item?.videos && item.videos > 0)
-      return `//www.bilibili.com/video/${item.history.bvid}?p=${item.history.page}`
-    return `//www.bilibili.com/video/${item.history.bvid}`
+      return `https://www.bilibili.com/video/${item.history.bvid}?p=${item.history.page}`
+    return `https://www.bilibili.com/video/${item.history.bvid}`
   }
   // Live
   else if (item.history.business === Business.LIVE) {
-    return `//live.bilibili.com/${item.history.oid}`
+    return `https://live.bilibili.com/${item.history.oid}`
   }
   // Article
   else if (item.history.business === Business.ARTICLE || item.history.business === Business.ARTICLE_LIST) {
     if (item.history.cid === 0)
-      return `//www.bilibili.com/read/cv${item.history.oid}`
+      return `https://www.bilibili.com/read/cv${item.history.oid}`
     else
-      return `//www.bilibili.com/read/cv${item.history.cid}`
+      return `https://www.bilibili.com/read/cv${item.history.cid}`
   }
   return ''
 }
@@ -235,16 +233,15 @@ function jumpToLoginPage() {
       </h3>
       <!-- historyList -->
       <TransitionGroup name="list">
-        <a
+        <ALink
           v-for="(historyItem, index) in historyList"
           :key="historyItem.kid"
-          :href="settings.videoCardLinkOpenMode === 'drawer' ? undefined : getHistoryUrl(historyItem)"
-          :target="settings.videoCardLinkOpenMode === 'currentTab' ? '_self' : '_blank'"
+          type="videoCard"
+          :href="getHistoryUrl(historyItem)"
           block
           class="group"
           flex
           cursor-pointer
-          @click="settings.videoCardLinkOpenMode === 'drawer' && openIframeDrawer(getHistoryUrl(historyItem))"
         >
           <!-- time slot -->
           <div
@@ -463,7 +460,7 @@ function jumpToLoginPage() {
               </button>
             </div>
           </section>
-        </a>
+        </ALink>
       </TransitionGroup>
 
       <!-- no more content -->
