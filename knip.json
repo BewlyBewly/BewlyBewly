@@ -9,7 +9,7 @@
     "scripts/*.ts",
     "*.config.*"
   ],
-  "ignore": ["src/components/Settings/**"],
+  "ignore": ["src/components/Settings/**", "src/inject/**"],
   "ignoreDependencies": [
     "@iconify/json",
     "uno.css",

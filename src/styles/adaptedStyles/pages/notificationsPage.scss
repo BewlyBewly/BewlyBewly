@@ -8,6 +8,12 @@
 }
 
 .bewly-design.notificationsPage {
+  // remove original Bilibili background image
+  body,
+  &.bili_dark body {
+    background: unset;
+  }
+
   #message-navbar {
     + .container {
       margin-top: 0;
