@@ -34,12 +34,22 @@
 
     .setting-card-switch,
     .note-setting-wrp,
-    .bcc-select-input-inner {
+    .bcc-select-input-inner,
+    .ep-table .ep-table-head-tr .ep-table-tr-item,
+    .ep-table .ep-table-tr-item,
+    .ep-section-edit-video-list-item-tip,
+    .video-title-edit > input {
       color: black;
     }
 
-    .bcc-search-input {
+    .bcc-search-input,
+    .ep-text-input label input,
+    .ep-text-area label textarea {
       background-color: unset;
+    }
+
+    .ep-text-input {
+      background: unset;
     }
   }
   // #endregion
