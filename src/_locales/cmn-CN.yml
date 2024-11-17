@@ -385,7 +385,7 @@ video_card:
     view_the_original_cover: 查看封面
     view_this_user_channel: 查看该用户频道
 
-  group_contribution: 等{num}人联合创作
+  group_contribution: '{firstAuthor} 等 {num} 人联合创作'
   video_removed: 视频已移除
 
 home:

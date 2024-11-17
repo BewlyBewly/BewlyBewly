@@ -399,9 +399,8 @@ provide('getVideoType', () => props.type!)
           >
             <!-- Author Avatar -->
             <VideoCardAuthorAvatar
-              v-if="!horizontal"
+              v-if="!horizontal && video.author"
               :author="video.author"
-              :author-list="video.authorList"
             />
             <div class="group/desc" flex="~ col" w="full" align="items-start">
               <div flex="~ gap-1 justify-between items-start" w="full" pos="relative">
@@ -437,13 +436,11 @@ provide('getVideoType', () => props.type!)
                   flex="inline items-center"
                 >
                   <VideoCardAuthorAvatar
-                    v-if="horizontal"
+                    v-if="horizontal && video.author"
                     :author="video.author"
-                    :author-list="video.authorList"
                   />
                   <VideoCardAuthorName
                     :author="video.author"
-                    :author-list="video.authorList"
                   />
                 </span>
               </div>

@@ -4,26 +4,25 @@ import { getAuthorJumpUrl } from '~/components/VideoCard/utils'
 import type { Author } from '../../types'
 
 defineProps<{
-  // 单个作者用 `author`, 多个作者用 `authorList`
-  author?: Author
-  authorList?: Author[]
+  author?: Author | Author[]
 }>()
 </script>
 
 <template>
   <a
-    v-if="author || authorList"
     class="channel-name"
     un-text="hover:$bew-text-1"
     cursor-pointer mr-4
-    :href="getAuthorJumpUrl(author || (authorList && authorList[0]))"
+    :href="getAuthorJumpUrl(Array.isArray(author) ? author[0] : author)"
     target="_blank"
     @click.stop=""
   >
     <span>
-      {{ author?.name || (authorList && authorList[0].name) }}
-      <span v-if="authorList && authorList.length > 1">
-        {{ $t('video_card.group_contribution', { num: authorList.length }) }}
+      <span v-if="Array.isArray(author) && author.length > 1">
+        {{ $t('video_card.group_contribution', { firstAuthor: author[0].name, num: author.length }) }}
+      </span>
+      <span v-else>
+        {{ Array.isArray(author) ? author[0].name : author?.name }}
       </span>
     </span>
   </a>

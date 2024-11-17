@@ -226,7 +226,7 @@ defineExpose({ initData })
           durationStr: video.item.modules.module_dynamic.major.archive?.duration_text,
           title: `${video.item.modules.module_dynamic.major.archive?.title}`,
           cover: `${video.item.modules.module_dynamic.major.archive?.cover}`,
-          authorList: video.authorList,
+          author: video.authorList,
           viewStr: video.item.modules.module_dynamic.major.archive?.stat.play,
           danmakuStr: video.item.modules.module_dynamic.major.archive?.stat.danmaku,
           capsuleText: video.item.modules.module_author.pub_time,

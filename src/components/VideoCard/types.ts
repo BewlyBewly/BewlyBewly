@@ -9,8 +9,7 @@ export interface Video {
   cover: string
 
   /** `author` for individual submissions by UP; `authorList` for collaborative submissions by UP */
-  author?: Author
-  authorList?: Author[]
+  author?: Author | Author[]
 
   view?: number
   viewStr?: string
