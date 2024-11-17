@@ -417,7 +417,6 @@ provide('getVideoType', () => props.type!)
                 <div
                   v-if="moreBtn"
                   ref="moreBtnRef"
-                  class="opacity-0 group-hover/desc:opacity-100"
                   :class="{ 'more-active': showVideoOptions }"
                   bg="hover:$bew-fill-2 active:$bew-fill-3"
                   shrink-0 w-30px h-30px m="t--3px r--8px" translate-x--8px
