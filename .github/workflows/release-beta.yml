@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         node: [lts/*, lts/-1]
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest]
       fail-fast: false
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
@@ -43,7 +43,6 @@ jobs:
         run: pnpm pack:xpi
 
       - name: 上传
-        if: ${{ matrix.os == 'ubuntu-latest' && matrix.node == 'lts/*' }}
         uses: actions/upload-artifact@v4.3.1
         with:
           name: extension
