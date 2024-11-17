@@ -6,7 +6,7 @@ import { useBewlyApp } from '~/composables/useAppProvider'
 import { Type as ThreePointV2Type } from '~/models/video/appForYou'
 import { openLinkInBackground } from '~/utils/tabs'
 
-import type { Video } from '../VideoCard.vue'
+import type { Video } from '../types'
 import DislikeDialog from './components/DislikeDialog.vue'
 
 const props = defineProps<{
@@ -65,7 +65,6 @@ const commonOptions = computed((): { command: VideoOption, name: string, icon: s
 
     [
       { command: VideoOption.ViewTheOriginalCover, name: t('video_card.operation.view_the_original_cover'), icon: 'i-solar:gallery-minimalistic-bold-duotone' },
-      // { command: VideoOption.ViewThisUserChannel, name: t('video_card.operation.view_this_user_channel'), icon: 'i-solar:user-bold-duotone' },
     ],
   ]
   if (getVideoType() === 'bangumi' || getVideoType() === 'live') {
@@ -129,10 +128,6 @@ function handleCommonCommand(command: VideoOption) {
 
     case VideoOption.ViewTheOriginalCover:
       window.open(props.video.cover, '_blank')
-      handleClose()
-      break
-    case VideoOption.ViewThisUserChannel:
-      window.open(`https://space.bilibili.com/${props.video.mid}`, '_blank')
       handleClose()
       break
   }

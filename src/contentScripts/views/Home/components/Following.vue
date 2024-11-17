@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
 
+import type { Author } from '~/components/VideoCard/types'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import type { GridLayoutType } from '~/logic'
 import type { DataItem as MomentItem, MomentResult } from '~/models/moment/moment'
@@ -8,8 +9,10 @@ import api from '~/utils/api'
 
 // https://github.com/starknt/BewlyBewly/blob/fad999c2e482095dc3840bb291af53d15ff44130/src/contentScripts/views/Home/components/ForYou.vue#L16
 interface VideoElement {
-  uniqueId: string
+  uniqueId: string // 用于标识一条视频（无法用来区分UP主联合投稿）
+  bvid?: string // 用于标识UP主联合投稿视频
   item?: MomentItem
+  authorList?: Author[]
 }
 
 const props = defineProps<{
@@ -97,8 +100,10 @@ async function getFollowedUsersVideos() {
   }
 
   try {
-    // 如果 videoList 不是空的，获取最后一个真实视频的 uniqueId
-    const lastUniqueId = videoList.value.length > 0 ? videoList.value.slice(-1)[0].uniqueId : ''
+    // 如果 videoList 不是空的，获取最后一个真实视频的 uniqueId 和 bvid
+    let lastVideo: VideoElement | null = videoList.value.length > 0 ? videoList.value.slice(-1)[0] : null
+    const lastUniqueId = lastVideo ? lastVideo.uniqueId : ''
+    let lastBvid = lastVideo ? lastVideo.bvid : ''
 
     let i = 0
     // https://github.com/starknt/BewlyBewly/blob/fad999c2e482095dc3840bb291af53d15ff44130/src/contentScripts/views/Home/components/ForYou.vue#L208
@@ -137,15 +142,40 @@ async function getFollowedUsersVideos() {
       else {
         resData.forEach((item, index) => {
           const currentUniqueId = `${item.id_str}`
+          const currentBvid = item.modules.module_dynamic.major.archive?.bvid
+          const author: Author = {
+            name: item.modules.module_author.name,
+            authorFace: item.modules.module_author.face,
+            mid: item.modules.module_author.mid,
+          }
+          const currentVideo: VideoElement = {
+            uniqueId: currentUniqueId,
+            bvid: currentBvid,
+            item,
+            authorList: [author],
+          }
 
           if (index === 0 && currentUniqueId === lastUniqueId) {
+            // 重复视频
             return
           }
+          else if (currentBvid === lastBvid) {
+            // UP主联合投稿视频
 
-          videoList.value[lastVideoListLength++] = {
-            uniqueId: currentUniqueId,
-            item,
+            // 当联合投稿的数据是分两次获取时，有概率会出现多个重复内容
+            // 遍历authorList里面每个up的mid值，如果不存在再添加up信息
+            if (!lastVideo?.authorList?.some(existingAuthor => existingAuthor.mid === author.mid)) {
+              lastVideo?.authorList?.push(author)
+            }
+            return
           }
+          else {
+            // UP主个人投稿视频
+            videoList.value[lastVideoListLength++] = currentVideo
+          }
+
+          lastVideo = currentVideo
+          lastBvid = currentBvid
         })
       }
 
@@ -196,9 +226,7 @@ defineExpose({ initData })
           durationStr: video.item.modules.module_dynamic.major.archive?.duration_text,
           title: `${video.item.modules.module_dynamic.major.archive?.title}`,
           cover: `${video.item.modules.module_dynamic.major.archive?.cover}`,
-          author: video.item.modules.module_author.name,
-          authorFace: video.item.modules.module_author.face,
-          mid: video.item.modules.module_author.mid,
+          author: video.authorList,
           viewStr: video.item.modules.module_dynamic.major.archive?.stat.play,
           danmakuStr: video.item.modules.module_dynamic.major.archive?.stat.danmaku,
           capsuleText: video.item.modules.module_author.pub_time,
