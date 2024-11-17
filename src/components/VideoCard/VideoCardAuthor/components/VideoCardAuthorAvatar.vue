@@ -25,9 +25,9 @@ const displayedAvatars = computed(() => {
     :style="{
       width: Array.isArray(author) && author.length > 1 ? `${28 + (displayedAvatars?.length) * 6}px` : '34px',
       height: Array.isArray(author) && author.length > 1 ? '28px' : '34px',
+      marginRight: '12px',
     }"
     pos="relative"
-    mr-2
     shrink-0
   >
     <a
