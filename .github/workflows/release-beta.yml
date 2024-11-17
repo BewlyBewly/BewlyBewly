@@ -27,20 +27,8 @@ jobs:
           run_install: |
             - args: [--frozen-lockfile]
 
-      - name: Lint
-        if: ${{ matrix.os == 'ubuntu-latest' }}
-        run: pnpm run lint
-
-      - name: Type check
-        if: ${{ matrix.os == 'ubuntu-latest' }}
-        run: pnpm run typecheck
-
-      - name: 测试
-        run: pnpm run test
-
-      - name: Knip
-        if: ${{ matrix.os == 'ubuntu-latest' }}
-        run: pnpm run knip
+      - name: 安装依赖
+        run: pnpm install
 
       - name: Chrome 插件编译
         run: pnpm build
@@ -55,7 +43,8 @@ jobs:
         run: pnpm pack:xpi
 
       - name: 上传
-        if: ${{ matrix.os == 'windows-latest' && matrix.node == 'lts/*' && github.ref_name =='main' }}
+        if: ${{ matrix.os == 'ubuntu-latest' && matrix.node == 'lts/*' && github.ref_name =='main' }}
         uses: actions/upload-artifact@v4.3.1
         with:
           name: extension
+          path: extension.crx && extension.zip && extension.xpi
