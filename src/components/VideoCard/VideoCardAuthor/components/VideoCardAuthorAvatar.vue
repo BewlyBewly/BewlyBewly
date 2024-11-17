@@ -22,9 +22,13 @@ const displayedAvatars = computed(() => {
 
 <template>
   <div
+    :style="{
+      width: Array.isArray(author) && author.length > 1 ? `${28 + (displayedAvatars?.length) * 6}px` : '34px',
+      height: Array.isArray(author) && author.length > 1 ? '28px' : '34px',
+    }"
     pos="relative"
-    m="r-4" h="36px"
-    :style="{ width: `${26 + Math.min(maxCount + 1, displayedAvatars?.length || 0) * 10}px` }"
+    mr-2
+    shrink-0
   >
     <a
       v-for="(item, index) in displayedAvatars"
@@ -36,8 +40,8 @@ const displayedAvatars = computed(() => {
       :style="{
         zIndex: displayedAvatars.length - index,
         left: `${index * 6}px`,
-        width: displayedAvatars.length > 1 ? `28px` : '36px',
-        height: displayedAvatars.length > 1 ? `28px` : '36px',
+        width: displayedAvatars.length > 1 ? `28px` : '34px',
+        height: displayedAvatars.length > 1 ? `28px` : '34px',
       }"
       @click.stop=""
     >
@@ -52,8 +56,8 @@ const displayedAvatars = computed(() => {
 
       <!-- Following Flag -->
       <div
-        v-if="item.followed"
-        pos="absolute top-23px left-23px"
+        v-if="item.followed && !Array.isArray(author)"
+        pos="absolute top-22px left-24px"
         w-14px h-14px
         bg="$bew-theme-color"
         border="2 outset solid white"
@@ -65,14 +69,6 @@ const displayedAvatars = computed(() => {
     </a>
 
     <!-- More avatars not shown -->
-    <!-- <i
-      v-if="Array.isArray(author) && author.length > maxCount"
-      i-solar:menu-dots-circle-bold-duotone
-      pos="absolute right--4px"
-
-      z-1
-      w="28px" h="28px"
-    /> -->
     <span
       v-if="Array.isArray(author) && author.length > maxCount"
       pos="absolute right--4px"

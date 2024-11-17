@@ -384,7 +384,6 @@ video_card:
     copy_av_number: 複製 AV 號
 
     view_the_original_cover: 檢視封面
-    view_this_user_channel: 檢視該用戶頻道
 
   group_contribution: '{firstAuthor} 等 {num} 人共同創作'
   video_removed: 影片已移除

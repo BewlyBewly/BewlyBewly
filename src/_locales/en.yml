@@ -386,7 +386,6 @@ video_card:
     copy_av_number: Copy AV Number
 
     view_the_original_cover: View the Original Cover
-    view_this_user_channel: View This User Channel
 
   group_contribution: '{firstAuthor} and {num} others contributed'
   video_removed: Video removed

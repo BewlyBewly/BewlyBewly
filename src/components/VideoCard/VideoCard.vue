@@ -506,7 +506,6 @@ provide('getVideoType', () => props.type!)
           ...video,
           url: videoUrl,
         }"
-        :author="video.authorList?.[0]"
         :context-menu-styles="videoOptionsFloatingStyles"
         @close="showVideoOptions = false"
         @removed="handleRemoved"
