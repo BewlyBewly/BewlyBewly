@@ -55,7 +55,7 @@ jobs:
         run: pnpm pack:xpi
 
       - name: 上传
-        if: ${{ matrix.os == 'ubuntu-latest' && matrix.node == 'lts/*' && github.ref_name =='main' }}
+        if: ${{ matrix.os == 'windows-latest' && matrix.node == 'lts/*' && github.ref_name =='main' }}
         uses: actions/upload-artifact@v4.3.1
         with:
           name: extension
