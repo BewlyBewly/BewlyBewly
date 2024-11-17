@@ -51,7 +51,9 @@ const pages = [
 
     <!-- Content -->
     <div class="flex-1 p-4">
-      <Component :is="pages.find(page => page.value === activePage)?.component" />
+      <Transition name="page-fade">
+        <Component :is="pages.find(page => page.value === activePage)?.component" />
+      </Transition>
     </div>
   </div>
 </template>
