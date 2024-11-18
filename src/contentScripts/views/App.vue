@@ -266,7 +266,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
           <main m-auto max-w="$bew-page-max-width">
             <div
               p="t-[calc(var(--bew-top-bar-height)+10px)]" m-auto
-              w="lg:85% md:[calc(90%-60px)] [calc(100%-140px)]"
+              w="lg:[calc(100%-200px)] md:[calc(90%-60px)] [calc(100%-140px)]"
             >
               <!-- control button group -->
               <BackToTopOrRefreshButton
