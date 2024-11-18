@@ -419,7 +419,7 @@ provide('getVideoType', () => props.type!)
                   ref="moreBtnRef"
                   :class="{ 'more-active': showVideoOptions }"
                   bg="hover:$bew-fill-2 active:$bew-fill-3"
-                  shrink-0 w-30px h-30px m="t--3px r--8px" translate-x--8px
+                  shrink-0 w-30px h-30px m="t--3px r--4px"
                   grid place-items-center cursor-pointer rounded="50%" duration-300
                   @click.stop.prevent="handleMoreBtnClick"
                 >
