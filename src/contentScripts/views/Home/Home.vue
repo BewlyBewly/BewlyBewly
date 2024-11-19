@@ -198,33 +198,42 @@ function toggleTabContentLoading(loading: boolean) {
         <section
           v-if="!(!settings.alwaysShowTabsOnHomePage && currentTabs.length === 1)"
           style="backdrop-filter: var(--bew-filter-glass-1)"
-          flex="~ items-center gap-1 wrap"
           bg="$bew-elevated" p-1
-          h-38px
-          rounded-full
+          h-38px rounded-full
+          text="sm"
           shadow="[var(--bew-shadow-1),var(--bew-shadow-edge-glow-1)]"
           box-border border="1 $bew-border-color"
         >
-          <button
-            v-for="tab in currentTabs" :key="tab.page"
-            :class="{ 'tab-activated': activatedPage === tab.page }"
-            px-4 h-full
-            bg="transparent hover:$bew-fill-2" rounded-full
-            cursor-pointer duration-300
-            flex="~ gap-2 items-center" relative
-            @click="handleChangeTab(tab)"
+          <OverlayScrollbarsComponent
+            class="home-tabs-inside"
+            element="div" defer
+            :options="{
+              x: 'scroll',
+              y: 'hidden',
+            }"
+            h-full of-hidden
           >
-            <span class="text-center">{{ $t(tab.i18nKey) }}</span>
+            <button
+              v-for="tab in currentTabs" :key="tab.page"
+              :class="{ 'tab-activated': activatedPage === tab.page }"
+              px-3 h-inherit
+              bg="transparent hover:$bew-fill-2" rounded-full
+              cursor-pointer duration-300
+              flex="~ gap-2 items-center shrink-0" relative
+              @click="handleChangeTab(tab)"
+            >
+              <span class="text-center">{{ $t(tab.i18nKey) }}</span>
 
-            <Transition name="fade">
-              <div
-                v-show="activatedPage === tab.page && tabContentLoading"
-                i-svg-spinners:ring-resize
-                pos="absolute right-4px top-4px" duration-300
-                text="8px $bew-text-auto"
-              />
-            </Transition>
-          </button>
+              <Transition name="fade">
+                <div
+                  v-show="activatedPage === tab.page && tabContentLoading"
+                  i-svg-spinners:ring-resize
+                  pos="absolute right-4px top-4px" duration-300
+                  text="8px $bew-text-auto"
+                />
+              </Transition>
+            </button>
+          </OverlayScrollbarsComponent>
         </section>
 
         <div
@@ -294,6 +303,15 @@ function toggleTabContentLoading(loading: boolean) {
 
 .hide {
   --uno: "important-translate-y--70px";
+}
+
+.home-tabs-inside {
+  :deep([data-overlayscrollbars-contents]) {
+    --uno: "flex items-center gap-1 h-inherit rounded-full";
+  }
+  :deep(.os-scrollbar) {
+    --uno: "mb--4px";
+  }
 }
 
 .tab-activated {
