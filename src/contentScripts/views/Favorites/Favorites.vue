@@ -287,6 +287,7 @@ function isMusic(item: FavoriteResource) {
             v-if="activatedCategoryCover"
             :src="removeHttpFromUrl(`${activatedCategoryCover}@480w_270h_1c`)"
             w-full h-full object="cover center" blur-40px
+            relative z--1
           >
         </div>
 
