@@ -301,9 +301,9 @@ function handleBackToTopOrRefresh() {
   }
 
   .back-to-top-or-refresh-btn {
-    --uno: "absolute md:bottom--45px bottom--35px";
+    --uno: "absolute lg:bottom--45px bottom--35px";
     --uno: "transform active:important-scale-90 hover:scale-110";
-    --uno: "md:w-45px w-35px md:h-45px h-35px";
+    --uno: "lg:w-45px w-35px lg:h-45px h-35px";
     --uno: "grid place-items-center";
     --uno: "filter-$bew-filter-glass-1";
     --uno: "bg-$bew-elevated hover:bg-$bew-content-hover";
@@ -330,7 +330,7 @@ function handleBackToTopOrRefresh() {
   }
 
   &.bottom .back-to-top-or-refresh-btn {
-    --uno: "bottom-unset md:right--45px right--35px";
+    --uno: "bottom-unset lg:right--45px right--35px";
   }
 }
 
@@ -341,8 +341,8 @@ function handleBackToTopOrRefresh() {
   --shadow-active-active: 0 4px 20px var(--bew-theme-color-90);
 
   --uno: "relative transform active:important-scale-90 hover:scale-110";
-  --uno: "md:w-45px w-35px";
-  --uno: "md:lh-45px lh-35px";
+  --uno: "lg:w-45px w-35px";
+  --uno: "lg:lh-45px lh-35px";
   --uno: "p-0 flex items-center justify-center";
   --uno: "aspect-square relative";
   --uno: "leading-0";
@@ -376,7 +376,7 @@ function handleBackToTopOrRefresh() {
   }
 
   svg {
-    --uno: "md:w-22px w-18px md:h-22px h-18px block align-middle";
+    --uno: "lg:w-22px w-18px lg:h-22px h-18px block align-middle";
   }
 }
 </style>
