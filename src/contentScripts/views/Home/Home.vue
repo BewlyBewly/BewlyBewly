@@ -195,13 +195,22 @@ function toggleTabContentLoading(loading: boolean) {
         ease-in-out flex="~ justify-between items-start gap-4"
         :class="{ hide: shouldMoveTabsUp }"
       >
-        <section v-if="!(!settings.alwaysShowTabsOnHomePage && currentTabs.length === 1)" flex="~ items-center gap-3 wrap">
+        <section
+          v-if="!(!settings.alwaysShowTabsOnHomePage && currentTabs.length === 1)"
+          style="backdrop-filter: var(--bew-filter-glass-1)"
+          flex="~ items-center gap-1 wrap"
+          bg="$bew-elevated" p-1
+          h-38px
+          rounded-full
+          shadow="[var(--bew-shadow-1),var(--bew-shadow-edge-glow-1)]"
+          box-border border="1 $bew-border-color"
+        >
           <button
             v-for="tab in currentTabs" :key="tab.page"
             :class="{ 'tab-activated': activatedPage === tab.page }"
-            style="backdrop-filter: var(--bew-filter-glass-1)"
-            px-4 lh-35px h-35px bg="$bew-elevated hover:$bew-elevated-hover" rounded="$bew-radius"
-            cursor-pointer shadow="$bew-shadow-1" box-border border="1 $bew-border-color" duration-300
+            px-4 h-full
+            bg="transparent hover:$bew-fill-2" rounded-full
+            cursor-pointer duration-300
             flex="~ gap-2 items-center" relative
             @click="handleChangeTab(tab)"
           >
@@ -221,8 +230,10 @@ function toggleTabContentLoading(loading: boolean) {
         <div
           v-if="settings.enableGridLayoutSwitcher"
           style="backdrop-filter: var(--bew-filter-glass-1)"
-          flex="~ gap-1 shrink-0" p-1 h-35px bg="$bew-elevated" transform-gpu
-          ml-auto rounded="$bew-radius" shadow="$bew-shadow-1" box-border border="1 $bew-border-color"
+          flex="~ gap-1 shrink-0" p-1 h-38px bg="$bew-elevated" transform-gpu
+          ml-auto rounded-full
+          shadow="[var(--bew-shadow-1),var(--bew-shadow-edge-glow-1)]"
+          box-border border="1 $bew-border-color"
         >
           <div
             v-for="icon in gridLayoutIcons" :key="icon.value"
@@ -231,9 +242,10 @@ function toggleTabContentLoading(loading: boolean) {
               color: gridLayout.home === icon.value ? 'var(--bew-text-auto)' : 'unset',
             }"
             flex="~ justify-center items-center"
-            w-full
-            h-full p="x-2 y-1" rounded="$bew-radius-half" bg="hover:$bew-fill-2" duration-300
-            cursor-pointer @click="gridLayout.home = icon.value"
+            h-full aspect-square
+            rounded-full bg="hover:$bew-fill-2" duration-300
+            cursor-pointer
+            @click="gridLayout.home = icon.value"
           >
             <div :class="gridLayout.home === icon.value ? icon.iconActivated : icon.icon" text-base />
           </div>
