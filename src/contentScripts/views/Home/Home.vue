@@ -8,6 +8,7 @@ import type { HomeTab } from '~/stores/mainStore'
 import { useMainStore } from '~/stores/mainStore'
 import emitter from '~/utils/mitt'
 
+import Tabs from './components/HomeTabs.vue'
 import type { GridLayoutIcon } from './types'
 import { HomeSubPage } from './types'
 
@@ -92,6 +93,7 @@ onMounted(() => {
   })
 
   currentTabs.value = computeTabs()
+
   activatedPage.value = currentTabs.value[0].page
 })
 
@@ -189,52 +191,18 @@ function toggleTabContentLoading(loading: boolean) {
           />
         </div>
       </Transition>
-
       <header
         pos="sticky top-[calc(var(--bew-top-bar-height)+10px)]" w-full z-9 mb-8 duration-300
         ease-in-out flex="~ justify-between items-start gap-4"
         :class="{ hide: shouldMoveTabsUp }"
       >
-        <section
+        <Tabs
           v-if="!(!settings.alwaysShowTabsOnHomePage && currentTabs.length === 1)"
-          style="backdrop-filter: var(--bew-filter-glass-1)"
-          bg="$bew-elevated" p-1
-          h-38px rounded-full
-          text="sm"
-          shadow="[var(--bew-shadow-1),var(--bew-shadow-edge-glow-1)]"
-          box-border border="1 $bew-border-color"
-        >
-          <OverlayScrollbarsComponent
-            class="home-tabs-inside"
-            element="div" defer
-            :options="{
-              x: 'scroll',
-              y: 'hidden',
-            }"
-            h-full of-hidden
-          >
-            <button
-              v-for="tab in currentTabs" :key="tab.page"
-              :class="{ 'tab-activated': activatedPage === tab.page }"
-              px-3 h-inherit
-              bg="transparent hover:$bew-fill-2" rounded-full
-              cursor-pointer duration-300
-              flex="~ gap-2 items-center shrink-0" relative
-              @click="handleChangeTab(tab)"
-            >
-              <span class="text-center">{{ $t(tab.i18nKey) }}</span>
-
-              <Transition name="fade">
-                <div
-                  v-show="activatedPage === tab.page && tabContentLoading"
-                  i-svg-spinners:ring-resize
-                  pos="absolute right-4px top-4px" duration-300
-                  text="8px $bew-text-auto"
-                />
-              </Transition>
-            </button>
-          </OverlayScrollbarsComponent>
-        </section>
+          :tabs="currentTabs"
+          :model-value="activatedPage"
+          :loading="tabContentLoading"
+          @tab-click="handleChangeTab"
+        />
 
         <div
           v-if="settings.enableGridLayoutSwitcher"
