@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n'
 
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { Type as ThreePointV2Type } from '~/models/video/appForYou'
+import { openLinkToNewTab } from '~/utils/main'
 import { openLinkInBackground } from '~/utils/tabs'
 
 import type { Video } from '../types'
@@ -97,6 +98,10 @@ function handleAppMoreCommand(command: ThreePointV2Type) {
 
 function handleCommonCommand(command: VideoOption) {
   switch (command) {
+    case VideoOption.OpenInNewTab:
+      openLinkToNewTab(props.video.url!)
+      handleClose()
+      break
     case VideoOption.OpenInBackground:
       openLinkInBackground(props.video.url!)
       handleClose()

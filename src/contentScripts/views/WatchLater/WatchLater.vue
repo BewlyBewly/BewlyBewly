@@ -330,6 +330,7 @@ function jumpToLoginPage() {
             v-if="currentWatchLaterList[0]"
             :src="removeHttpFromUrl(`${currentWatchLaterList[0].pic}@480w_270h_1c`)"
             w-full h-full object="cover center" blur-40px
+            relative z--1
           >
         </div>
 
