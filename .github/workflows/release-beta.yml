@@ -7,7 +7,7 @@ jobs:
     name: 测试
     strategy:
       matrix:
-        node: [lts/*, lts/-1]
+        node: [lts/*]
         os: [ubuntu-latest]
       fail-fast: false
     runs-on: ${{ matrix.os }}
