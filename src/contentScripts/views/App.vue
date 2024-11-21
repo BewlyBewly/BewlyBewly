@@ -29,6 +29,7 @@ const pages = {
   [AppPage.Home]: defineAsyncComponent(() => import('./Home/Home.vue')),
   [AppPage.Search]: defineAsyncComponent(() => import('./Search/Search.vue')),
   [AppPage.Anime]: defineAsyncComponent(() => import('./Anime/Anime.vue')),
+  [AppPage.FeedYou]: defineAsyncComponent(() => import('./FeedYou/FeedYou.vue')),
   [AppPage.History]: defineAsyncComponent(() => import('./History/History.vue')),
   [AppPage.WatchLater]: defineAsyncComponent(() => import('./WatchLater/WatchLater.vue')),
   [AppPage.Favorites]: defineAsyncComponent(() => import('./Favorites/Favorites.vue')),

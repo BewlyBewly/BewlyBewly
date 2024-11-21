@@ -21,6 +21,7 @@ export const useMainStore = defineStore('main', () => {
       { i18nKey: 'dock.home', icon: 'i-mingcute:home-5-line', iconActivated: 'i-mingcute:home-5-fill', page: AppPage.Home },
       { i18nKey: 'dock.search', icon: 'i-mingcute:search-2-line', iconActivated: 'i-mingcute:search-2-fill', page: AppPage.Search },
       { i18nKey: 'dock.anime', icon: 'i-mingcute:tv-2-line', iconActivated: 'i-mingcute:tv-2-fill', page: AppPage.Anime },
+      { i18nKey: 'dock.feed_you', icon: 'i-mingcute:list-expansion-line', iconActivated: 'i-mingcute:list-expansion-fill', page: AppPage.FeedYou },
       { i18nKey: 'dock.favorites', icon: 'i-mingcute:star-line', iconActivated: 'i-mingcute:star-fill', page: AppPage.Favorites },
       { i18nKey: 'dock.history', icon: 'i-mingcute:time-line', iconActivated: 'i-mingcute:time-fill', page: AppPage.History },
       { i18nKey: 'dock.watch_later', icon: 'i-mingcute:carplay-line', iconActivated: 'i-mingcute:carplay-fill', page: AppPage.WatchLater },
