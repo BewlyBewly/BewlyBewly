@@ -4,7 +4,7 @@ import { useI18n } from 'vue-i18n'
 import type { FavoriteCategory } from '~/components/TopBar/types'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { AppPage } from '~/enums/appEnums'
-import { getCSRF } from '~/utils/main'
+import { getCSRF, openLinkToNewTab } from '~/utils/main'
 
 import FavoritesVideoCard from '../Favorites/components/FavoritesVideoCard.vue'
 import { favoritesProvider } from '../Favorites/FavoritesProvider'
@@ -56,16 +56,16 @@ const {
 
 // ==================== 页面切换逻辑 ====================
 const activatedPage = ref<AppPage>(AppPage.History)
-const pages: Partial<Record<AppPage, ReturnType<typeof defineAsyncComponent>>> = {
-  [AppPage.WatchLater]: defineAsyncComponent(() => import('../WatchLater/WatchLater.vue')),
-  [AppPage.History]: defineAsyncComponent(() => import('../History/History.vue')),
-  [AppPage.Favorites]: defineAsyncComponent(() => import('../Favorites/Favorites.vue')),
-}
-const pagesTitle: Partial<Record<AppPage, ComputedRef<string>>> = {
-  [AppPage.WatchLater]: computed(() => `${t('watch_later.title')} (${watchLaterTotalCount.value ?? 0})`),
-  [AppPage.History]: computed(() => t('history.title')),
-  [AppPage.Favorites]: computed(() => t('favorites.title')),
-}
+// const pages: Partial<Record<AppPage, ReturnType<typeof defineAsyncComponent>>> = {
+//   [AppPage.WatchLater]: defineAsyncComponent(() => import('../WatchLater/WatchLater.vue')),
+//   [AppPage.History]: defineAsyncComponent(() => import('../History/History.vue')),
+//   [AppPage.Favorites]: defineAsyncComponent(() => import('../Favorites/Favorites.vue')),
+// }
+// const pagesTitle: Partial<Record<AppPage, ComputedRef<string>>> = {
+//   [AppPage.WatchLater]: computed(() => `${t('watch_later.title')} (${watchLaterTotalCount.value ?? 0})`),
+//   [AppPage.History]: computed(() => t('history.title')),
+//   [AppPage.Favorites]: computed(() => t('favorites.title')),
+// }
 
 const showViewDialog = ref<boolean>(false)
 
@@ -73,12 +73,24 @@ const showViewDialog = ref<boolean>(false)
 function handleClick(page: AppPage) {
   activatedPage.value = page
   showViewDialog.value = true
+
+  switch (page) {
+    case AppPage.WatchLater:
+      openLinkToNewTab('https://www.bilibili.com/?page=WatchLater')
+      break
+    case AppPage.History:
+      openLinkToNewTab('https://www.bilibili.com/?page=History')
+      break
+    case AppPage.Favorites:
+      openLinkToNewTab('https://www.bilibili.com/?page=Favorites')
+      break
+  }
 }
 
 // 关闭弹窗
-function closeDialog() {
-  showViewDialog.value = false
-}
+// function closeDialog() {
+//   showViewDialog.value = false
+// }
 
 // ==================== 页面生命周期事件 ====================
 onMounted(async () => {
@@ -290,7 +302,7 @@ function resetFavoritesData() {
       </template>
     </main>
 
-    <!-- dialog -->
+    <!--    &lt;!&ndash; dialog &ndash;&gt;
     <Dialog
       v-if="showViewDialog"
       width="90%"
@@ -305,6 +317,6 @@ function resetFavoritesData() {
         parent="dialog"
         :category-item-index="favoritesCategories.findIndex(category => category === favoritesSelectedCategory)"
       />
-    </Dialog>
+    </Dialog> -->
   </div>
 </template>
