@@ -11,8 +11,9 @@ import emitter from '~/utils/mitt'
 import FavoritesVideoCard from './components/FavoritesVideoCard.vue'
 import { favoritesProvider } from './FavoritesProvider'
 
-withDefaults(defineProps<{
+const props = withDefaults(defineProps<{
   parent?: 'tab-page' | 'dialog' // 区分是在标签页还是对话框中打开页面
+  categoryItemIndex?: number // 尝试使用过selectedCategory传参，但会导致Select组件无法正常显示选中的值
 }>(), {
   parent: 'tab-page',
 })
@@ -41,7 +42,7 @@ const {
 
 onMounted(async () => {
   await getFavoriteCategories()
-  changeCategory(favoriteCategories[0])
+  await changeCategory(favoriteCategories[props.categoryItemIndex ?? 0])
 
   initPageAction()
 
