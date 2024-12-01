@@ -16,7 +16,7 @@ const API_HISTORY = {
     afterHandle: AHS.J_D,
   },
   searchHistoryList: {
-    url: 'https://api.bilibili.com/x/web-goblin/history/search',
+    url: 'https://api.bilibili.com/x/web-interface/history/search',
     _fetch: {
       method: 'get',
     },

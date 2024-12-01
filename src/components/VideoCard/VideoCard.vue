@@ -6,7 +6,6 @@ import { useToast } from 'vue-toastification'
 import Button from '~/components/Button.vue'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { accessKey, settings } from '~/logic'
-import type { ThreePointV2 } from '~/models/video/appForYou'
 import type { VideoPreviewResult } from '~/models/video/videoPreview'
 import api from '~/utils/api'
 import { getTvSign, TVAppKey } from '~/utils/authProvider'
@@ -14,6 +13,10 @@ import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils/dataFormat
 import { getCSRF, removeHttpFromUrl } from '~/utils/main'
 
 import Tooltip from '../Tooltip.vue'
+import type { Video } from './types'
+import { getCurrentTime, getCurrentVideoUrl } from './utils'
+import VideoCardAuthorAvatar from './VideoCardAuthor/components/VideoCardAuthorAvatar.vue'
+import VideoCardAuthorName from './VideoCardAuthor/components/VideoCardAuthorName.vue'
 import VideoCardContextMenu from './VideoCardContextMenu/VideoCardContextMenu.vue'
 import VideoCardSkeleton from './VideoCardSkeleton.vue'
 
@@ -27,44 +30,11 @@ interface Props {
   skeleton?: boolean
   video?: Video
   /** rcmd: recommend video; appRcmd: app recommend video; bangumi: bangumi video; common: common video */
-  type: 'rcmd' | 'appRcmd' | 'bangumi' | 'common'
+  type?: 'rcmd' | 'appRcmd' | 'bangumi' | 'common'
   showWatcherLater?: boolean
   horizontal?: boolean
   showPreview?: boolean
   moreBtn?: boolean
-}
-
-export interface Video {
-  id: number
-  duration?: number
-  durationStr?: string
-  title: string
-  desc?: string
-  cover: string
-  author?: string
-  authorFace?: string
-  /** After set the `authorUrl`, clicking the author's name or avatar will navigate to this url. It won't be affected by mid */
-  authorUrl?: string
-  mid?: number
-  view?: number
-  viewStr?: string
-  danmaku?: number
-  danmakuStr?: string
-  publishedTimestamp?: number
-  capsuleText?: string
-  bvid?: string
-  aid?: number
-  goto?: string
-  /** After set the `url`, clicking the video will navigate to this url. It won't be affected by aid, bvid or epid */
-  url?: string
-  /** If you want to show preview video, you should set the cid value */
-  cid?: number
-  epid?: number
-  followed?: boolean
-  tag?: string
-  rank?: number
-  type?: 'horizontal' | 'vertical' | 'bangumi'
-  threePointV2: ThreePointV2[]
 }
 
 const toast = useToast()
@@ -81,12 +51,6 @@ const selectedDislikeOpt = ref<{ dislikeReasonId: number }>()
 
 const videoCurrentTime = ref<number | null>(null)
 
-function getCurrentVideoUrl(video: Video) {
-  const baseUrl = `https://www.bilibili.com/video/${video.bvid ?? `av${video.aid}`}`
-  const currentTime = videoCurrentTime.value
-  return currentTime && currentTime > 5 ? `${baseUrl}/?t=${currentTime}` : baseUrl
-}
-
 const videoUrl = computed(() => {
   if (removed.value || !props.video)
     return undefined
@@ -94,21 +58,11 @@ const videoUrl = computed(() => {
   if (props.video.url)
     return props.video.url
   else if (props.video.bvid || props.video.aid)
-    return getCurrentVideoUrl(props.video)
+    return getCurrentVideoUrl(props.video, videoCurrentTime)
   else if (props.video.epid)
     return `https://www.bilibili.com/bangumi/play/ep${props.video.epid}`
-  else
-    return ''
-})
-
-const authorJumpUrl = computed(() => {
-  if (!props.video)
-    return
-
-  if (props.video.authorUrl)
-    return props.video.authorUrl
-  else if (props.video.mid)
-    return `//space.bilibili.com/${props.video.mid}`
+  else if (props.video.roomid)
+    return `https://live.bilibili.com/${props.video.roomid}`
   else
     return ''
 })
@@ -127,14 +81,6 @@ const mouseLeaveTimeOut = ref()
 const previewVideoUrl = ref<string>('')
 const contentVisibility = ref<'auto' | 'visible'>('auto')
 const videoElement = ref<HTMLVideoElement | null>(null)
-
-function getCurrentTime() {
-  if (videoElement.value) {
-    const currentTime = videoElement.value.currentTime
-    return currentTime
-  }
-  return null
-}
 
 watch(() => isHover.value, (newValue) => {
   if (!props.video || !newValue)
@@ -203,11 +149,10 @@ function handelMouseLeave() {
 }
 
 function handleClick(event: MouseEvent) {
-  videoCurrentTime.value = getCurrentTime()
+  videoCurrentTime.value = getCurrentTime(videoElement)
 
-  if (settings.value.videoCardLinkOpenMode === 'drawer' && videoUrl.value) {
+  if (settings.value.videoCardLinkOpenMode === 'drawer' && videoUrl.value && !event.ctrlKey && !event.metaKey) {
     event.preventDefault()
-
     openIframeDrawer(videoUrl.value)
   }
 }
@@ -284,9 +229,11 @@ provide('getVideoType', () => props.type!)
         w="full"
         rounded="$bew-radius"
       >
-        <a
+        <ALink
           :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }"
-          :href="videoUrl" target="_blank" rel="noopener noreferrer"
+          :href="videoUrl"
+          type="videoCard"
+          custom-click-event
           @mouseenter="handleMouseEnter"
           @mouseleave="handelMouseLeave"
           @click="handleClick"
@@ -303,7 +250,7 @@ provide('getVideoType', () => props.type!)
             <!-- Video cover -->
             <Picture
               :src="`${removeHttpFromUrl(video.cover)}@672w_378h_1c_!web-home-common-cover`"
-              loading="lazy"
+              loading="eager"
               w="full" max-w-full align-middle aspect-video object-cover
               rounded="$bew-radius"
             />
@@ -396,6 +343,28 @@ provide('getVideoType', () => props.type!)
                 <slot name="coverTopLeft" />
               </div>
 
+              <div
+                v-if="video.liveStatus === 1"
+                class="group-hover:opacity-0"
+                pos="absolute left-0 top-0" bg="$bew-theme-color" text="xs white"
+                p="x-2 y-1" m-1 inline-block rounded="$bew-radius" duration-300
+              >
+                LIVE
+              </div>
+
+              <div
+                v-if="video.badge && Object.keys(video.badge).length > 0"
+                class="group-hover:opacity-0"
+                :style="{
+                  backgroundColor: video.badge.bgColor,
+                  color: video.badge.color,
+                }"
+                pos="absolute right-0 top-0" bg="$bew-theme-color" text="xs white"
+                p="x-2 y-1" m-1 inline-block rounded="$bew-radius" duration-300
+              >
+                {{ video.badge.text }}
+              </div>
+
               <!-- Watcher later button -->
               <button
                 v-if="showWatcherLater"
@@ -429,36 +398,10 @@ provide('getVideoType', () => props.type!)
             flex="~"
           >
             <!-- Author Avatar -->
-            <div v-if="!horizontal" flex>
-              <a
-                v-if="video.authorFace"
-                :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
-                m="r-4" w="36px" h="36px" rounded="1/2"
-                object="center cover" bg="$bew-skeleton" cursor="pointer"
-                position-relative
-                @click.stop=""
-              >
-
-                <Picture
-                  :src="`${removeHttpFromUrl(video.authorFace)}@50w_50h_1c`"
-                  loading="lazy"
-                  w="36px" h="36px"
-                  rounded="1/2"
-                />
-
-                <div
-                  v-if="video.followed"
-                  pos="absolute bottom--2px right--2px"
-                  w-14px h-14px
-                  bg="$bew-theme-color"
-                  border="2 outset solid white"
-                  rounded="1/2"
-                  grid place-items-center
-                >
-                  <div color-white text-sm class="i-mingcute:check-fill w-8px h-8px" />
-                </div>
-              </a>
-            </div>
+            <VideoCardAuthorAvatar
+              v-if="!horizontal && video.author"
+              :author="video.author"
+            />
             <div class="group/desc" flex="~ col" w="full" align="items-start">
               <div flex="~ gap-1 justify-between items-start" w="full" pos="relative">
                 <h3
@@ -466,7 +409,7 @@ provide('getVideoType', () => props.type!)
                   text="lg overflow-ellipsis $bew-text-1"
                   cursor="pointer"
                 >
-                  <a :href="videoUrl" target="_blank" :title="video.title" rel="noopener noreferrer">
+                  <a :href="videoUrl" target="_blank" :title="video.title">
                     {{ video.title }}
                   </a>
                 </h3>
@@ -474,10 +417,9 @@ provide('getVideoType', () => props.type!)
                 <div
                   v-if="moreBtn"
                   ref="moreBtnRef"
-                  class="opacity-0 group-hover/desc:opacity-100"
                   :class="{ 'more-active': showVideoOptions }"
                   bg="hover:$bew-fill-2 active:$bew-fill-3"
-                  shrink-0 w-30px h-30px m="t--3px r--8px" translate-x--8px
+                  shrink-0 w-30px h-30px m="t--3px r--4px"
                   grid place-items-center cursor-pointer rounded="50%" duration-300
                   @click.stop.prevent="handleMoreBtnClick"
                 >
@@ -492,44 +434,13 @@ provide('getVideoType', () => props.type!)
                   }"
                   flex="inline items-center"
                 >
-                  <div v-if="horizontal" flex>
-                    <a
-                      v-if="video.authorFace"
-                      :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
-                      m="r-2" w="30px" h="30px" rounded="1/2"
-                      object="center cover" bg="$bew-skeleton" cursor="pointer" relative
-                      @click.stop=""
-                    >
-                      <Picture
-                        :src="`${removeHttpFromUrl(video.authorFace)}@50w_50h_1c`"
-                        loading="lazy"
-                        w="30px" h="30px"
-                        rounded="1/2"
-                      />
-                      <div
-                        v-if="video.followed"
-                        pos="absolute bottom--2px right--2px"
-                        w-14px h-14px
-                        bg="$bew-theme-color"
-                        border="2 outset solid white"
-                        rounded="1/2"
-                        grid place-items-center
-                      >
-                        <div color-white text-sm class="i-mingcute:check-fill w-8px h-8px" />
-                      </div>
-                    </a>
-                  </div>
-
-                  <a
-                    v-if="video.author"
-                    class="channel-name"
-                    un-text="hover:$bew-text-1"
-                    cursor-pointer mr-4
-                    :href="authorJumpUrl" target="_blank" rel="noopener noreferrer"
-                    @click.stop=""
-                  >
-                    <span>{{ video.author }}</span>
-                  </a>
+                  <VideoCardAuthorAvatar
+                    v-if="horizontal && video.author"
+                    :author="video.author"
+                  />
+                  <VideoCardAuthorName
+                    :author="video.author"
+                  />
                 </span>
               </div>
 
@@ -572,7 +483,7 @@ provide('getVideoType', () => props.type!)
               </div>
             </div>
           </div>
-        </a>
+        </ALink>
       </div>
     </div>
 
@@ -593,7 +504,6 @@ provide('getVideoType', () => props.type!)
         :video="{
           ...video,
           url: videoUrl,
-          authorUrl: authorJumpUrl,
         }"
         :context-menu-styles="videoOptionsFloatingStyles"
         @close="showVideoOptions = false"

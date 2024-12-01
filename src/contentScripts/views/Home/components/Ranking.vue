@@ -3,7 +3,7 @@ import { useI18n } from 'vue-i18n'
 
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { TOP_BAR_VISIBILITY_CHANGE } from '~/constants/globalEvents'
-import type { GridLayout } from '~/logic'
+import type { GridLayoutType } from '~/logic'
 import { settings } from '~/logic'
 import type { List as RankingVideoItem, RankingResult } from '~/models/video/ranking'
 import type { List as RankingPgcItem, RankingPgcResult } from '~/models/video/rankingPgc'
@@ -13,7 +13,7 @@ import emitter from '~/utils/mitt'
 import type { RankingType } from '../types'
 
 const props = defineProps<{
-  gridLayout: GridLayout
+  gridLayout: GridLayoutType
 }>()
 
 const emit = defineEmits<{
@@ -200,9 +200,11 @@ defineExpose({ initData })
             title: video.title,
             desc: video.desc,
             cover: video.pic,
-            author: video.owner.name,
-            authorFace: video.owner.face,
-            mid: video.owner.mid,
+            author: {
+              name: video.owner.name,
+              authorFace: video.owner.face,
+              mid: video.owner.mid,
+            },
             view: video.stat.view,
             danmaku: video.stat.danmaku,
             publishedTimestamp: video.pubdate,

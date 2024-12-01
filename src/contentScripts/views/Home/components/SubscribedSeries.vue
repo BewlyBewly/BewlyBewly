@@ -2,7 +2,7 @@
 import type { Ref } from 'vue'
 
 import { useBewlyApp } from '~/composables/useAppProvider'
-import type { GridLayout } from '~/logic'
+import type { GridLayoutType } from '~/logic'
 import type { DataItem as MomentItem, MomentResult } from '~/models/moment/moment'
 import api from '~/utils/api'
 
@@ -13,7 +13,7 @@ interface VideoElement {
 }
 
 const props = defineProps<{
-  gridLayout: GridLayout
+  gridLayout: GridLayoutType
 }>()
 
 const emit = defineEmits<{
@@ -196,10 +196,12 @@ defineExpose({ initData })
           id: video.item.modules.module_author.mid,
           title: `${video.item.modules.module_dynamic.major.pgc?.title}`,
           cover: `${video.item.modules.module_dynamic.major.pgc?.cover}`,
-          author: video.item.modules.module_author.name,
-          authorFace: video.item.modules.module_author.face,
-          mid: video.item.modules.module_author.mid,
-          authorUrl: video.item.modules.module_author.jump_url,
+          author: {
+            name: video.item.modules.module_author.name,
+            authorUrl: video.item.modules.module_author.jump_url,
+            authorFace: video.item.modules.module_author.face,
+            mid: video.item.modules.module_author.mid,
+          },
           viewStr: video.item.modules.module_dynamic.major.pgc?.stat.play,
           danmakuStr: video.item.modules.module_dynamic.major.pgc?.stat.danmaku,
           capsuleText: video.item.modules.module_author.pub_time,

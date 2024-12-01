@@ -5,7 +5,7 @@ import type { Ref } from 'vue'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { FilterType, useFilter } from '~/composables/useFilter'
 import { LanguageType } from '~/enums/appEnums'
-import type { GridLayout } from '~/logic'
+import type { GridLayoutType } from '~/logic'
 import { accessKey, settings } from '~/logic'
 import type { AppForYouResult, Item as AppVideoItem } from '~/models/video/appForYou'
 import { Type as ThreePointV2Type } from '~/models/video/appForYou'
@@ -15,7 +15,7 @@ import { TVAppKey } from '~/utils/authProvider'
 import { isVerticalVideo } from '~/utils/uriParse'
 
 const props = defineProps<{
-  gridLayout: GridLayout
+  gridLayout: GridLayoutType
 }>()
 
 const emit = defineEmits<{
@@ -350,10 +350,12 @@ defineExpose({ initData })
             duration: video.item.duration,
             title: video.item.title,
             cover: video.item.pic,
-            author: video.item.owner.name,
-            authorFace: video.item.owner.face,
-            followed: !!video.item.is_followed,
-            mid: video.item.owner.mid,
+            author: {
+              name: video.item.owner.name,
+              authorFace: video.item.owner.face,
+              followed: !!video.item.is_followed,
+              mid: video.item.owner.mid,
+            },
             view: video.item.stat.view,
             danmaku: video.item.stat.danmaku,
             publishedTimestamp: video.item.pubdate,
@@ -377,10 +379,12 @@ defineExpose({ initData })
             durationStr: video.item.cover_right_text,
             title: `${video.item.title}`,
             cover: `${video.item.cover}`,
-            author: video.item?.mask?.avatar.text,
-            authorFace: video.item?.mask?.avatar.cover || video.item?.avatar?.cover,
-            followed: video.item?.bottom_rcmd_reason === '已关注' || video.item?.bottom_rcmd_reason === '已關注',
-            mid: video.item?.mask?.avatar.up_id,
+            author: {
+              name: video.item?.mask?.avatar.text,
+              authorFace: video.item?.mask?.avatar.cover || video.item?.avatar?.cover,
+              followed: video.item?.bottom_rcmd_reason === '已关注' || video.item?.bottom_rcmd_reason === '已關注',
+              mid: video.item?.mask?.avatar.up_id,
+            },
             capsuleText: video.item?.desc?.split('·')[1],
             bvid: video.item.bvid,
             viewStr: video.item.cover_left_text_1,

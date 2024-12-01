@@ -11,8 +11,6 @@ import type { TopBarMomentResult } from '~/models/moment/topBarMoment'
 import api from '~/utils/api'
 import { getCSRF, scrollToTop } from '~/utils/main'
 
-import ALink from './ALink.vue'
-
 type MomentType = 'video' | 'live' | 'article'
 interface MomentTab { type: MomentType, name: any }
 interface MomentCard {
@@ -315,7 +313,8 @@ defineExpose({
         </div>
       </div>
       <ALink
-        href="https://t.bilibili.com/" rel="noopener noreferrer"
+        href="https://t.bilibili.com/"
+        type="topBar"
         flex="~ items-center"
       >
         <span text="sm">{{ $t('common.view_all') }}</span>
@@ -353,7 +352,8 @@ defineExpose({
           <ALink
             v-for="(moment, index) in moments"
             :key="index"
-            :href="moment.link" rel="noopener noreferrer"
+            :href="moment.link"
+            type="topBar"
             flex="~ justify-between"
             m="b-2" p="2"
             rounded="$bew-radius"
@@ -374,7 +374,7 @@ defineExpose({
             />
             <ALink
               :href="moment.authorJumpUrl"
-              rel="noopener noreferrer"
+              type="topBar"
               rounded="1/2"
               w="40px" h="40px" m="r-4"
               bg="$bew-skeleton"
@@ -394,7 +394,7 @@ defineExpose({
 
                 <ALink
                   :href="moment.authorJumpUrl"
-                  rel="noopener noreferrer"
+                  type="topBar"
                   font-bold
                 >
                   {{ moment.author }}

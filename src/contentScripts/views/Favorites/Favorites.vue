@@ -223,9 +223,11 @@ function isMusic(item: FavoriteResource) {
                 duration: item.duration,
                 title: item.title,
                 cover: item.cover,
-                author: item.upper.name,
-                authorFace: item.upper.face,
-                mid: item.upper.mid,
+                author: {
+                  name: item.upper.name,
+                  authorFace: item.upper.face,
+                  mid: item.upper.mid,
+                },
                 view: item.cnt_info.play,
                 danmaku: item.cnt_info.danmaku,
                 publishedTimestamp: item.pubtime,
@@ -285,6 +287,7 @@ function isMusic(item: FavoriteResource) {
             v-if="activatedCategoryCover"
             :src="removeHttpFromUrl(`${activatedCategoryCover}@480w_270h_1c`)"
             w-full h-full object="cover center" blur-40px
+            relative z--1
           >
         </div>
 

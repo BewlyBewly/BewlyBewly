@@ -9,8 +9,6 @@ import api from '~/utils/api'
 import { calcCurrentTime } from '~/utils/dataFormatter'
 import { removeHttpFromUrl } from '~/utils/main'
 
-import ALink from './ALink.vue'
-
 const watchLaterList = reactive<VideoItem[]>([])
 const isLoading = ref<boolean>()
 const viewAllUrl = computed((): string => {
@@ -81,13 +79,15 @@ function getAllWatchLaterList() {
 
       <div flex="~ gap-4">
         <ALink
-          :href="playAllUrl" rel="noopener noreferrer"
+          :href="playAllUrl"
+          type="topBar"
           flex="~" items="center"
         >
           <span text="sm">{{ $t('common.play_all') }}</span>
         </ALink>
         <ALink
-          :href="viewAllUrl" rel="noopener noreferrer"
+          :href="viewAllUrl"
+          type="topBar"
           flex="~" items="center"
         >
           <span text="sm">{{ $t('common.view_all') }}</span>
@@ -130,7 +130,8 @@ function getAllWatchLaterList() {
           <ALink
             v-for="item in watchLaterList"
             :key="item.aid"
-            :href="getWatchLaterUrl(item.bvid)" rel="noopener noreferrer"
+            :href="getWatchLaterUrl(item.bvid)"
+            type="topBar"
             m="last:b-4" p="2"
             rounded="$bew-radius"
             hover:bg="$bew-fill-2"

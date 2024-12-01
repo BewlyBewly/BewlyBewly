@@ -2,9 +2,9 @@
 import { SEARCH_BAR_CHARACTERS } from '~/constants/imgs'
 import { settings } from '~/logic'
 
-import ChangeWallpaper from '../components/ChangeWallpaper.vue'
-import SettingsItem from '../components/SettingsItem.vue'
-import SettingsItemGroup from '../components/SettingsItemGroup.vue'
+import ChangeWallpaper from '../../components/ChangeWallpaper.vue'
+import SettingsItem from '../../components/SettingsItem.vue'
+import SettingsItemGroup from '../../components/SettingsItemGroup.vue'
 
 watch(() => settings.value.individuallySetSearchPageWallpaper, (newValue) => {
   if (newValue)

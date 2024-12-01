@@ -18,14 +18,16 @@ function handleAddFilter() {
   if (!addingFilter.value.keyword.trim())
     return
 
-  const hasDuplicate = settings.value.filterByTitle.find(
+  const hasDuplicate = settings.value.filterByUser.find(
     (item, itemIndex) => item.keyword === addingFilter.value.keyword.trim() && itemIndex !== editingIndex.value,
   )
   if (hasDuplicate) {
-    toast.warning('This title filter already exist!!!')
+    toast.warning(t('settings.filter_item_already_exist'))
     return
   }
-  settings.value.filterByTitle.unshift({ ...addingFilter.value })
+  addingFilter.value.keyword = addingFilter.value.keyword.trim()
+  addingFilter.value.remark = addingFilter.value.remark.trim()
+  settings.value.filterByUser.unshift({ ...addingFilter.value })
   nextTick(() => {
     handleClearAddingFilter()
   })
@@ -37,7 +39,7 @@ function handleClearAddingFilter() {
 
 async function handleEditFilter(index: number, focusItem: 'keyword' | 'remark' = 'keyword') {
   editingIndex.value = index
-  editingFilter.value = { ...settings.value.filterByTitle[index] }
+  editingFilter.value = { ...settings.value.filterByUser[index] }
   await nextTick()
 
   const inputElement = focusItem === 'keyword' ? keywordRef.value : remarkRef.value
@@ -53,22 +55,20 @@ function handleConfirmFilter(index: number) {
   if (!editingFilter.value.keyword.trim())
     return
 
-  const hasDuplicate = settings.value.filterByTitle.find(
+  const hasDuplicate = settings.value.filterByUser.find(
     (item, itemIndex) => item.keyword === editingFilter.value.keyword.trim() && itemIndex !== index,
   )
   if (hasDuplicate) {
-    toast.warning(t('settings.filter_item_already_exist'))
+    toast.warning('This title filter already exist!!!')
     return
   }
-  addingFilter.value.keyword = addingFilter.value.keyword.trim()
-  addingFilter.value.remark = addingFilter.value.remark.trim()
-  settings.value.filterByTitle[index] = { ...editingFilter.value }
+  settings.value.filterByUser[index] = { ...editingFilter.value }
   if (index !== -1)
     editingIndex.value = -1
 }
 
 function handleDeleteFilter(index: number) {
-  settings.value.filterByTitle.splice(index, 1)
+  settings.value.filterByUser.splice(index, 1)
 }
 
 onKeyStroke('Escape', (e: KeyboardEvent) => {
@@ -83,7 +83,7 @@ onKeyStroke('Escape', (e: KeyboardEvent) => {
       <Input
         v-model="addingFilter.keyword"
         size="small"
-        :placeholder="$t('common.table.title')"
+        :placeholder="$t('settings.filter_by_user_table.username_or_mid')"
         w-full
         @click="editingIndex = -1"
         @enter="handleAddFilter"
@@ -99,7 +99,8 @@ onKeyStroke('Escape', (e: KeyboardEvent) => {
 
       <Button
         size="small" type="primary"
-        style="--b-button-width: 150px"
+        shrink-0
+        style="--b-button-width: 80px"
         @click="handleAddFilter"
       >
         <template #left>
@@ -108,7 +109,6 @@ onKeyStroke('Escape', (e: KeyboardEvent) => {
         {{ $t('common.operation.add') }}
       </Button>
     </div>
-
     <List
       highlight-first
       pin-top
@@ -118,7 +118,7 @@ onKeyStroke('Escape', (e: KeyboardEvent) => {
         <div max-w-50px>
           {{ $t('common.table.index') }}
         </div>
-        <div>{{ $t('common.table.title') }}</div>
+        <div>{{ $t('settings.filter_by_user_table.username_or_mid') }}</div>
         <div>{{ $t('common.table.remark') }}</div>
         <div max-w-80px>
           {{ $t('common.table.operations') }}
@@ -126,7 +126,7 @@ onKeyStroke('Escape', (e: KeyboardEvent) => {
       </ListItem>
 
       <ListItem
-        v-for="(item, index) in settings.filterByTitle" :key="item.keyword"
+        v-for="(item, index) in settings.filterByUser" :key="item.keyword"
         :style="{
           background: editingIndex === index ? 'var(--bew-theme-color-20) !important' : '',
         }"
@@ -139,7 +139,7 @@ onKeyStroke('Escape', (e: KeyboardEvent) => {
             ref="keywordRef"
             v-model="editingFilter.keyword"
             size="small"
-            :placeholder="$t('common.table.title')"
+            :placeholder="$t('settings.filter_by_user_table.username_or_mid')"
             w-full
             @enter="handleConfirmFilter(index)"
           />

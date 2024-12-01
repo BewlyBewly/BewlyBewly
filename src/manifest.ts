@@ -66,6 +66,25 @@ export async function getManifest() {
         match_about_blank: true,
         all_frames: true,
       },
+      {
+        matches: [
+          '*://www.bilibili.com/*',
+          '*://search.bilibili.com/*',
+          '*://t.bilibili.com/*',
+          '*://space.bilibili.com/*',
+          '*://message.bilibili.com/*',
+          '*://member.bilibili.com/*',
+          '*://account.bilibili.com/*',
+          '*://www.hdslb.com/*',
+          '*://passport.bilibili.com/*',
+        ],
+        js: ['./dist/inject/index.js'],
+        run_at: 'document_start',
+        all_frames: true,
+        // eslint-disable-next-line ts/ban-ts-comment
+        // @ts-expect-error
+        world: 'MAIN',
+      },
     ],
     web_accessible_resources: [
       {

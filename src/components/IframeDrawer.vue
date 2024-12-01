@@ -2,6 +2,7 @@
 import { onKeyStroke, useEventListener } from '@vueuse/core'
 
 import { DRAWER_VIDEO_ENTER_PAGE_FULL, DRAWER_VIDEO_EXIT_PAGE_FULL } from '~/constants/globalEvents'
+import { settings } from '~/logic'
 import { isHomePage } from '~/utils/main'
 
 // TODO: support shortcuts like `Ctrl+Alt+T` to open in new tab, `Esc` to close
@@ -26,7 +27,8 @@ const inIframe = computed((): boolean => {
 
 useEventListener(window, 'popstate', updateIframeUrl)
 nextTick(() => {
-  useEventListener(iframeRef.value?.contentWindow, 'pushstate', updateCurrentUrl)
+  useEventListener(iframeRef.value?.contentWindow, 'historyChange', updateCurrentUrl)
+  useEventListener(iframeRef.value?.contentWindow, 'popstate', updateCurrentUrl)
 })
 
 onMounted(async () => {
@@ -48,8 +50,8 @@ onUnmounted(() => {
 function updateCurrentUrl() {
   if (iframeRef.value?.contentWindow) {
     try {
-      currentUrl.value = iframeRef.value.contentWindow.location.href
-      history.pushState(null, '', currentUrl.value)
+      currentUrl.value = iframeRef.value.contentWindow.location.href.replace(/\/$/, '')
+      history.pushState(null, '', currentUrl.value.replace(/\/$/, ''))
     }
     catch (error) {
       console.error('Unable to access iframe URL:', error)
@@ -65,7 +67,7 @@ async function updateIframeUrl() {
   await nextTick()
 
   if (iframeRef.value?.contentWindow) {
-    iframeRef.value.contentWindow.location.replace(location.href)
+    iframeRef.value.contentWindow.location.replace(location.href.replace(/\/$/, ''))
   }
 }
 
@@ -97,7 +99,8 @@ async function releaseIframeResources() {
 }
 
 function handleOpenInNewTab() {
-  window.open(props.url, '_blank')
+  if (iframeRef.value)
+    window.open(iframeRef.value.contentWindow?.location.href.replace(/\/$/, ''), '_blank')
 }
 
 const isEscPressed = ref<boolean>(false)
@@ -107,6 +110,11 @@ const disableEscPress = ref<boolean>(false)
 nextTick(() => {
   onKeyStroke('Escape', (e: KeyboardEvent) => {
     e.preventDefault()
+    if (settings.value.closeDrawerWithoutPressingEscAgain) {
+      clearTimeout(escPressedTimer.value!)
+      handleClose()
+      return
+    }
     if (disableEscPress.value)
       return
     if (isEscPressed.value) {
@@ -228,7 +236,7 @@ watchEffect(() => {
       >
         <iframe
           ref="iframeRef"
-          :src="currentUrl"
+          :src="props.url"
           :style="{
             bottom: headerShow ? `var(--bew-top-bar-height)` : '0',
           }"

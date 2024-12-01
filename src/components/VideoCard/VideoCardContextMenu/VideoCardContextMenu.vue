@@ -4,9 +4,10 @@ import { useI18n } from 'vue-i18n'
 
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { Type as ThreePointV2Type } from '~/models/video/appForYou'
+import { openLinkToNewTab } from '~/utils/main'
 import { openLinkInBackground } from '~/utils/tabs'
 
-import type { Video } from '../VideoCard.vue'
+import type { Video } from '../types'
 import DislikeDialog from './components/DislikeDialog.vue'
 
 const props = defineProps<{
@@ -65,10 +66,9 @@ const commonOptions = computed((): { command: VideoOption, name: string, icon: s
 
     [
       { command: VideoOption.ViewTheOriginalCover, name: t('video_card.operation.view_the_original_cover'), icon: 'i-solar:gallery-minimalistic-bold-duotone' },
-      { command: VideoOption.ViewThisUserChannel, name: t('video_card.operation.view_this_user_channel'), icon: 'i-solar:user-bold-duotone' },
     ],
   ]
-  if (getVideoType() === 'bangumi') {
+  if (getVideoType() === 'bangumi' || getVideoType() === 'live') {
     result = result.map((group) => {
       return group.filter((opt) => {
         return opt.command !== VideoOption.CopyBVNumber && opt.command !== VideoOption.CopyAVNumber && opt.command !== VideoOption.ViewThisUserChannel
@@ -98,6 +98,10 @@ function handleAppMoreCommand(command: ThreePointV2Type) {
 
 function handleCommonCommand(command: VideoOption) {
   switch (command) {
+    case VideoOption.OpenInNewTab:
+      openLinkToNewTab(props.video.url!)
+      handleClose()
+      break
     case VideoOption.OpenInBackground:
       openLinkInBackground(props.video.url!)
       handleClose()
@@ -129,10 +133,6 @@ function handleCommonCommand(command: VideoOption) {
 
     case VideoOption.ViewTheOriginalCover:
       window.open(props.video.cover, '_blank')
-      handleClose()
-      break
-    case VideoOption.ViewThisUserChannel:
-      window.open(`https://space.bilibili.com/${props.video.mid}`, '_blank')
       handleClose()
       break
   }
@@ -170,7 +170,7 @@ function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
       <div
         style="backdrop-filter: var(--bew-filter-glass-1); box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-1);"
         :style="contextMenuStyles"
-        p-2 bg="$bew-elevated" rounded="$bew-radius"
+        p-1 bg="$bew-elevated" rounded="$bew-radius"
         min-w-200px m="t-4 l-[calc(-200px+1rem)]"
         border="1 $bew-border-color"
         z-10
@@ -244,7 +244,7 @@ function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
 
 <style lang="scss" scoped>
 .context-menu-item {
-  --uno: "hover:bg-$bew-fill-2 px-4 py-2 rounded-$bew-radius-half cursor-pointer";
+  --uno: "hover:bg-$bew-fill-2 text-sm px-2.5 py-1.75 rounded-$bew-radius-half cursor-pointer";
   --uno: "flex items-center";
 }
 
@@ -253,6 +253,6 @@ function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
 }
 
 .divider {
-  --uno: "w-full h-1px my-1 bg-$bew-border-color";
+  --uno: "w-full h-1px px-2px bg-$bew-border-color";
 }
 </style>
