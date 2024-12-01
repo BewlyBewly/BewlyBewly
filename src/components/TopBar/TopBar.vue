@@ -55,13 +55,41 @@ const momentsPopRef = ref()
 const scrollTop = ref<number>(0)
 const oldScrollTop = ref<number>(0)
 
-const isSearchPage = computed(() => {
+const isSearchPage = computed((): boolean => {
   if (/https?:\/\/search.bilibili.com\/.*$/.test(location.href))
     return true
   return false
 })
 
-const showSearchBar = computed(() => {
+// 當使用背景時，強制 icon 變白色用於區分背景
+const forceWhiteIcon = computed((): boolean => {
+  if (!isHomePage())
+    return false
+  if (activatedPage.value === AppPage.Search) {
+    if (settings.value.individuallySetSearchPageWallpaper) {
+      if (settings.value.searchPageWallpaper)
+        return true
+      return false
+    }
+    return !!settings.value.wallpaper
+  }
+  else {
+    if (settings.value.wallpaper) {
+      return true
+    }
+    else {
+      if (settings.value.useSearchPageModeOnHomePage) {
+        if (settings.value.individuallySetSearchPageWallpaper && !!settings.value.searchPageWallpaper)
+          return true
+        else if (settings.value.wallpaper)
+          return true
+      }
+    }
+    return false
+  }
+})
+
+const showSearchBar = computed((): boolean => {
   if (isHomePage()) {
     if (settings.value.useOriginalBilibiliHomepage)
       return true
@@ -77,7 +105,7 @@ const showSearchBar = computed(() => {
   return true
 })
 
-const isTopBarFixed = computed(() => {
+const isTopBarFixed = computed((): boolean => {
   if (
     (isHomePage() && settings.value.useOriginalBilibiliHomepage)
     // video page
@@ -96,7 +124,7 @@ const isTopBarFixed = computed(() => {
   return false
 })
 
-const showTopBar = computed(() => {
+const showTopBar = computed((): boolean => {
   const isCreativeCenter = /https?:\/\/member.bilibili.com\/platform.*/.test(location.href)
   if (settings.value.showTopBar && !isCreativeCenter)
     return true
@@ -122,16 +150,6 @@ function closeAllTopBarPopup(exceptionKey?: keyof typeof popupVisible) {
       popupVisible[key as keyof typeof popupVisible] = false
   })
 }
-
-const rightSideInactive = computed(() => {
-  let isInactive = false
-  Object.entries(popupVisible).forEach(([_key, value]) => {
-    if (value) {
-      isInactive = true
-    }
-  })
-  return isInactive
-})
 
 // Channels
 const channels = setupTopBarItemHoverEvent('channels')
@@ -411,20 +429,24 @@ defineExpose({
         <div
           v-if="!reachTop"
           style="
-            mask-image: linear-gradient(to bottom,  black 20%, transparent);
+            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1),  rgba(0, 0, 0, 0.9) 40px, transparent);
           "
-          :style="{ backdropFilter: settings.disableFrostedGlass ? 'none' : 'blur(12px)' }"
-          pos="absolute top-0 left-0" w-full h-80px
+          :style="{ backdropFilter: settings.disableFrostedGlass ? 'none' : 'var(--bew-filter-glass-1)' }"
+          pos="absolute top-0 left-0" w-full h="[calc(var(--bew-top-bar-height)+20px)]"
           pointer-events-none transform-gpu
         />
 
         <Transition name="fade">
           <div
-            v-if="!reachTop && (!isHomePage() || settings.useOriginalBilibiliHomepage)"
-            pos="absolute top-0 left-0" w-full h-80px
-            pointer-events-none opacity-80
+            v-if="!reachTop"
+            pos="absolute top-0 left-0" w-full h="[calc(var(--bew-top-bar-height)+10px)]"
+            pointer-events-none opacity-100
             :style="{
-              background: `linear-gradient(to bottom, var(--bew-bg), transparent)`,
+              background: `linear-gradient(to bottom, ${
+                forceWhiteIcon
+                  ? 'rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4) calc(var(--bew-top-bar-height) / 2)'
+                  : 'color-mix(in oklab, var(--bew-bg), transparent 20%), color-mix(in oklab, var(--bew-bg), transparent 40%) calc(var(--bew-top-bar-height) / 2)'
+              }, transparent)`,
             }"
           />
         </Transition>
@@ -437,20 +459,20 @@ defineExpose({
             <a
               ref="logo" href="//www.bilibili.com"
               class="group logo"
-              :class="{ activated: popupVisible.channels }"
-              style="backdrop-filter: var(--bew-filter-glass-1);"
-              grid="~ place-items-center" border="1 $bew-border-color"
+              :class="{
+                activated: popupVisible.channels,
+              }"
+              grid="~ place-items-center"
               rounded="46px" duration-300
-              bg="$bew-elevated hover:$bew-theme-color dark-hover:white"
-              shadow="[var(--bew-shadow-edge-glow-1),var(--bew-shadow-2)]"
               w-46px h-46px transform-gpu
+              bg="hover:$bew-theme-color dark-hover:white"
               @click="event => handleClickTopBarItem(event, 'channels')"
             >
-
               <svg
                 t="1720198072316" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
                 p-id="1477" width="38" height="38"
                 un-fill="$bew-theme-color dark:white" un-group-hover:fill="white dark:$bew-theme-color"
+                filter="drop-shadow-[0_0_4px_var(--bew-theme-color-60)] dark:drop-shadow-[0_0_4px_var(--bew-theme-color)]"
                 duration-300 mt--1px
               >
                 >
@@ -488,14 +510,8 @@ defineExpose({
         >
           <div
             class="others"
-            :class="{ inactive: rightSideInactive }"
-            style="
-              backdrop-filter: var(--bew-filter-glass-1);
-              box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
-            "
-            flex="~ items-center gap-1" h-46px px-5px bg="$bew-elevated"
-            transition="transition-property-colors duration-150"
-            text="$bew-text-1" border="1 $bew-border-color" rounded-full
+            flex="~ items-center gap-1" h-46px px-5px
+            text="$bew-text-1"
             transform-gpu
           >
             <div
@@ -547,6 +563,7 @@ defineExpose({
                     />
                   </template>
                   <ALink
+                    :class="{ 'white-icon': forceWhiteIcon }"
                     href="https://t.bilibili.com"
                     :title="$t('topbar.moments')"
                     type="topBar"
@@ -572,6 +589,7 @@ defineExpose({
                   @click="event => handleClickTopBarItem(event, 'favorites')"
                 >
                   <ALink
+                    :class="{ 'white-icon': forceWhiteIcon }"
                     :href="`https://space.bilibili.com/${mid}/favlist`"
                     :title="$t('topbar.favorites')"
                     type="topBar"
@@ -599,6 +617,7 @@ defineExpose({
                   @click="event => handleClickTopBarItem(event, 'history')"
                 >
                   <ALink
+                    :class="{ 'white-icon': forceWhiteIcon }"
                     href="https://www.bilibili.com/account/history"
                     :title="$t('topbar.history')"
                     type="topBar"
@@ -623,6 +642,7 @@ defineExpose({
                   @click="event => handleClickTopBarItem(event, 'watchLater')"
                 >
                   <ALink
+                    :class="{ 'white-icon': forceWhiteIcon }"
                     href="https://www.bilibili.com/watchlater/#/list"
                     :title="$t('topbar.watch_later')"
                     type="topBar"
@@ -642,6 +662,7 @@ defineExpose({
                 <!-- Creative center -->
                 <div class="right-side-item">
                   <a
+                    :class="{ 'white-icon': forceWhiteIcon }"
                     href="https://member.bilibili.com/platform/home"
                     target="_blank"
                     :title="$t('topbar.creative_center')"
@@ -658,7 +679,10 @@ defineExpose({
                 :class="{ active: popupVisible.more }"
                 @click="event => handleClickTopBarItem(event, 'more')"
               >
-                <a title="More">
+                <a
+                  :class="{ 'white-icon': forceWhiteIcon }"
+                  title="More"
+                >
                   <div i-mingcute:menu-line />
                 </a>
 
@@ -674,6 +698,7 @@ defineExpose({
               <div class="hidden lg:flex" gap-1 items-center>
                 <!-- Divider -->
                 <div
+                  :class="{ 'white-icon': forceWhiteIcon }"
                   w-2px h-16px bg="$bew-border-color" mx-1
                   rounded-4px
                 />
@@ -686,6 +711,7 @@ defineExpose({
                   @click="event => handleClickTopBarItem(event, 'upload')"
                 >
                   <a
+                    :class="{ 'white-icon': forceWhiteIcon }"
                     href="https://member.bilibili.com/platform/upload/video/frame"
                     target="_blank"
                     :title="$t('topbar.upload')"
@@ -722,6 +748,7 @@ defineExpose({
                     />
                   </template>
                   <ALink
+                    :class="{ 'white-icon': forceWhiteIcon }"
                     href="https://message.bilibili.com"
                     :title="$t('topbar.notifications')"
                     type="topBar"
@@ -781,6 +808,7 @@ defineExpose({
                 w="28%" h="28%" z-1
                 pos="absolute bottom--20px right-28px" duration-300
               />
+
               <Transition name="slide-in">
                 <UserPanelPop
                   v-if="popupVisible.userPanel"
@@ -864,7 +892,15 @@ defineExpose({
 
 .right-side {
   .avatar {
-    --uno: "flex items-center relative z-1 rounded-1/2";
+    --uno: "flex justify-center items-center relative z-1 rounded-1/2 w-46px h-46px";
+    // --uno: "bg-$bew-elevated border-1 border-$bew-border-color";
+    // --uno: "shadow-[var(--bew-shadow-edge-glow-1),var(--bew-shadow-2)]";
+    // backdrop-filter: var(--bew-filter-glass-1);
+
+    &.hover,
+    &:hover {
+      // --uno: "backdrop-filter-none bg-$bew-elevated-solid";
+    }
 
     // Add a safety zone to prevent the avatar from collapsing quickly after leaving
     &:hover::after,
@@ -874,7 +910,7 @@ defineExpose({
 
     .avatar-img,
     .avatar-shadow {
-      --uno: "duration-300 rounded-1/2 w-34px h-34px ml-1 bg-cover bg-center";
+      --uno: "shrink-0 duration-300 rounded-1/2 w-34px h-34px bg-cover bg-center";
 
       &.hover {
         --uno: "transform scale-230 translate-y-60px translate-x--36px";
@@ -900,11 +936,6 @@ defineExpose({
     }
   }
 
-  .others.inactive,
-  .others:hover {
-    --uno: "important-backdrop-filter-none important-bg-$bew-elevated-solid";
-  }
-
   .unread-num-dot {
     --uno: "absolute top--2px right--4px";
     --uno: "important:px-1 rounded-full";
@@ -923,12 +954,17 @@ defineExpose({
     &:not(.avatar) a {
       --uno: "text-lg grid place-items-center rounded-40px duration-300 relative z-5";
       --uno: "h-34px w-34px";
+      filter: drop-shadow(0 0 4px var(--bew-bg));
     }
 
     &.active a,
     & a:hover {
-      --un-drop-shadow: drop-shadow(0 0 6px white);
       --uno: "bg-$bew-fill-2";
+    }
+
+    .white-icon {
+      --uno: "text-white";
+      filter: drop-shadow(0 0 4px black) !important;
     }
   }
 
