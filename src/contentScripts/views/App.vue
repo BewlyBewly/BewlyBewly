@@ -259,7 +259,10 @@ provide<BewlyAppProvider>('BEWLY_APP', {
 
     <div
       pos="absolute top-0 left-0" w-full h-full
-      :style="{ height: showBewlyPage ? '100dvh' : '0' }"
+      :style="{
+        height: showBewlyPage ? '100dvh' : '0',
+        maskImage: isHomePage() ? 'linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) calc(var(--bew-top-bar-height) / 4), black var(--bew-top-bar-height), black)' : 'none',
+      }"
     >
       <template v-if="showBewlyPage">
         <OverlayScrollbarsComponent ref="scrollbarRef" element="div" h-inherit defer @os-scroll="handleOsScroll">

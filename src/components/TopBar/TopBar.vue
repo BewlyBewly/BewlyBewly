@@ -417,19 +417,14 @@ defineExpose({
           pos="absolute top-0 left-0" w-full h-80px
           pointer-events-none transform-gpu
         />
+
         <Transition name="fade">
           <div
-            v-if="!reachTop"
+            v-if="!reachTop && (!isHomePage() || settings.useOriginalBilibiliHomepage)"
             pos="absolute top-0 left-0" w-full h-80px
             pointer-events-none opacity-80
             :style="{
-              background: `linear-gradient(to bottom, ${(
-                settings.wallpaper
-                || settings.useSearchPageModeOnHomePage
-                && settings.searchPageWallpaper
-                && settings.individuallySetSearchPageWallpaper)
-                && isHomePage()
-                ? 'rgba(0,0,0,.6)' : `${isHomePage() ? 'var(--bew-homepage-bg)' : 'var(--bew-bg)'}`}, transparent)`,
+              background: `linear-gradient(to bottom, var(--bew-bg), transparent)`,
             }"
           />
         </Transition>
