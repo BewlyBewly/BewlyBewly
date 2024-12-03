@@ -123,6 +123,7 @@ function setCurrentTitle() {
         shrink-0 p="x-4" pos="absolute left--84px" z-2
       >
         <ul
+          relative
           style="
             --un-shadow: var(--bew-shadow-4), var(--bew-shadow-edge-glow-2);
             /*删除filter-glass，可以让侧边栏文字变得清晰*/
@@ -133,6 +134,16 @@ function setCurrentTitle() {
           scale="group-hover:105" duration-300 overflow-hidden antialiased transform-gpu
           border="1 $bew-border-color"
         >
+          /*添加一个div，用来模糊背景*/
+          <div 
+            absolute 
+            inset-0 
+            style="
+              backdrop-filter: var(--bew-filter-glass-2);
+              z-index: -1;
+            "
+          ></div>
+
           <li v-for="menuItem in settingsMenuItems" :key="menuItem.value">
             <a
               cursor-pointer w="40px group-hover:180px" h-40px
