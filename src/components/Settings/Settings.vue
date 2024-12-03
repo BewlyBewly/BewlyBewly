@@ -125,7 +125,8 @@ function setCurrentTitle() {
         <ul
           style="
             --un-shadow: var(--bew-shadow-4), var(--bew-shadow-edge-glow-2);
-            backdrop-filter: var(--bew-filter-glass-2);
+            /*删除filter-glass，可以让侧边栏文字变得清晰*/
+            /*backdrop-filter: var(--bew-filter-glass-2);*/
           "
           flex="~ gap-2 col" rounded="30px group-hover:25px" p-2 shadow
           bg="$bew-content-alt group-hover:$bew-elevated dark:$bew-elevated dark-group-hover:$bew-elevated"
