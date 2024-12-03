@@ -23,26 +23,6 @@
     height: 90px;
   }
 
-  .video-pod__list {
-    .simple-base-item.normal .title-txt {
-      color: var(--bew-text-1) !important;
-    }
-
-    .simple-base-item.active .title-txt,
-    .pod-item.simple:hover .title-txt {
-      color: var(--brand_blue) !important;
-      transition: color 0.25s ease-in-out;
-    }
-
-    .simple-base-item.normal:hover {
-      background: var(--Ga1_s) !important;
-    }
-
-    .simple-base-item.active:hover {
-      background: var(--Wh0) !important;
-    }
-  }
-
   // #region theme color adaption part
   // Increase the priority of the style inside by writing a non-existent selector in `:not()`
   :not(foobar) {
@@ -423,29 +403,6 @@
     .note-detail .note-operation .sanlian-box {
       border-color: var(--bew-border-color);
     }
-
-    .video-pod__list {
-      .simple-base-item.normal .title-txt {
-        color: var(--bew-text-1) !important;
-      }
-
-      .simple-base-item.active .title-txt,
-      .pod-item.simple:hover .title-txt {
-        color: var(--brand_blue) !important;
-        transition: color 0.25s ease-in-out;
-      }
-
-      .pod-item.simple:hover,
-      .simple-base-item.normal:hover {
-        background: var(--bew-content-solid) !important;
-      }
-
-      .pod-item.active:hover,
-      .simple-base-item.active:hover {
-        background: var(--bew-bg) !important;
-      }
-    }
   }
-
   //  #endregion
 }
