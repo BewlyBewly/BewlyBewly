@@ -122,53 +122,53 @@ function setCurrentTitle() {
         :class="{ group: !settings.touchScreenOptimization }"
         shrink-0 p="x-4" pos="absolute left--84px" z-2
       >
-      <ul
-        style="
-          --un-shadow: var(--bew-shadow-4), var(--bew-shadow-edge-glow-2);
-          position: relative;
-        "
-        flex="~ gap-2 col" rounded="30px group-hover:25px" p-2 shadow
-        bg="$bew-content-alt group-hover:$bew-elevated dark:$bew-elevated dark-group-hover:$bew-elevated"
-        scale="group-hover:105" duration-300 overflow-hidden antialiased transform-gpu
-        border="1 $bew-border-color"
-      >
-        <style scoped>
-          ul::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: inherit;
-            z-index: -1;
-            backdrop-filter: var(--bew-filter-glass-2);
-            pointer-events: none;
-          }
-        </style>
-      
-        <li v-for="menuItem in settingsMenuItems" :key="menuItem.value">
-          
-            cursor-pointer w="40px group-hover:180px" h-40px
-            rounded-30px flex items-center overflow-x-hidden
-            duration-300 bg="hover:$bew-fill-2"
-            :class="{ 'menu-item-activated': menuItem.value === activatedMenuItem }"
-            @click="changeMenuItem(menuItem.value)"
-          >
-            <div
-              v-show="menuItem.value !== activatedMenuItem"
-              text="xl center" w-40px h-20px flex="~ shrink-0" justify-center
-              :class="menuItem.icon"
-            />
-            <div
-              v-show="menuItem.value === activatedMenuItem"
-              text="xl center" w-40px h-20px flex="~ shrink-0" justify-center
-              :class="menuItem.iconActivated"
-            />
-            <span shrink-0>{{ menuItem.title }}</span>
-          </a>
-        </li>
-      </ul>
+        <ul
+          style="
+            --un-shadow: var(--bew-shadow-4), var(--bew-shadow-edge-glow-2);
+            position: relative;
+          "
+          flex="~ gap-2 col" rounded="30px group-hover:25px" p-2 shadow
+          bg="$bew-content-alt group-hover:$bew-elevated dark:$bew-elevated dark-group-hover:$bew-elevated"
+          scale="group-hover:105" duration-300 overflow-hidden antialiased transform-gpu
+          border="1 $bew-border-color"
+        >
+          <style scoped>
+            ul::before {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background: inherit;
+              z-index: -1;
+              backdrop-filter: var(--bew-filter-glass-2);
+              pointer-events: none;
+            }
+          </style>
+
+          <li v-for="menuItem in settingsMenuItems" :key="menuItem.value">
+            <a
+              cursor-pointer w="40px group-hover:180px" h-40px
+              rounded-30px flex items-center overflow-x-hidden
+              duration-300 bg="hover:$bew-fill-2"
+              :class="{ 'menu-item-activated': menuItem.value === activatedMenuItem }"
+              @click="changeMenuItem(menuItem.value)"
+            >
+              <div
+                v-show="menuItem.value !== activatedMenuItem"
+                text="xl center" w-40px h-20px flex="~ shrink-0" justify-center
+                :class="menuItem.icon"
+              />
+              <div
+                v-show="menuItem.value === activatedMenuItem"
+                text="xl center" w-40px h-20px flex="~ shrink-0" justify-center
+                :class="menuItem.iconActivated"
+              />
+              <span shrink-0>{{ menuItem.title }}</span>
+            </a>
+          </li>
+        </ul>
       </aside>
 
       <div
