@@ -1,15 +1,6 @@
-import './common/common.scss'
-import './common/comments.scss'
-import './common/topBar.scss'
-import './common/footer.scss'
-import './common/modal.scss'
-import './common/btn.scss'
-import './common/userCard.scss'
-import './common/videoPlayer.scss'
-import './common/loginDialog.scss'
-import './shadowDom/comments.scss'
-import './thirdParties/bilibiliEvolved.scss'
-import './thirdParties/bilibiliEnhanceVideoList.scss'
+import './common'
+import './shadowDom'
+import './thirdParties'
 
 import { isHomePage } from '~/utils/main'
 
