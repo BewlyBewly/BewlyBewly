@@ -9,7 +9,7 @@ import './common/videoPlayer.scss'
 import './common/loginDialog.scss'
 import './shadowDom/comments.scss'
 import './thirdParty/bilibiliEvolved.scss'
-import './thirdParty/bilibiliVideoList.scss'
+import './thirdParty/bilibiliEnhanceVideoList.scss'
 
 import { isHomePage } from '~/utils/main'
 

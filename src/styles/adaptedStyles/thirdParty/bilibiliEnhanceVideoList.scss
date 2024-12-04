@@ -1,21 +1,27 @@
+// B站|bilibili 分P视频详情页优化
+// https://greasyfork.org/zh-CN/scripts/490676-b站-bilibili-分p视频详情页优化
+
 .bewly-design.videoPage {
   .video-pod__list {
+    .title-txt {
+      transition: color 0.2s ease-in-out;
+    }
+
     .simple-base-item.normal .title-txt {
-      color: var(--bew-text-1) !important;
+      color: var(--bew-text-1);
     }
 
     .simple-base-item.active .title-txt,
     .simple-base-item.normal:hover .title-txt {
-      color: var(--brand_blue) !important;
-      transition: color 0.2s ease-in-out;
+      color: var(--bew-theme-color);
     }
 
     .simple-base-item.normal:hover {
-      background: var(--Ga1_s) !important;
+      background-color: var(--Ga1_s);
     }
 
     .simple-base-item.active:hover {
-      background: var(--Wh0) !important;
+      background-color: var(--Wh0);
     }
   }
 
@@ -23,24 +29,19 @@
   &.dark {
     .video-pod__list {
       .simple-base-item.normal .title-txt {
-        color: var(--bew-text-1) !important;
+        color: var(--bew-text-1);
       }
 
       .simple-base-item.active .title-txt,
       .simple-base-item.normal:hover .title-txt {
-        color: var(--brand_blue) !important;
-        transition: color 0.2s ease-in-out;
-      }
-
-      .pod-item.simple:hover,
-      .simple-base-item.normal:hover {
-        background: var(--bew-content-solid) !important;
+        color: var(--bew-theme-color);
       }
 
       .pod-item.active:hover,
       .simple-base-item.active:hover {
-        background: var(--bew-bg) !important;
+        background-color: var(--bew-bg);
       }
     }
   }
+  // #endregion
 }
