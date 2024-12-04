@@ -8,8 +8,8 @@ import './common/userCard.scss'
 import './common/videoPlayer.scss'
 import './common/loginDialog.scss'
 import './shadowDom/comments.scss'
-import './thirdParty/bilibiliEvolved.scss'
-import './thirdParty/bilibiliEnhanceVideoList.scss'
+import './thirdParties/bilibiliEvolved.scss'
+import './thirdParties/bilibiliEnhanceVideoList.scss'
 
 import { isHomePage } from '~/utils/main'
 
