@@ -4,7 +4,7 @@
   #internationalHeader,
   .link-navbar,
   #home_nav,
-  #biliMainHeader,
+  &:not(.historyPage) #biliMainHeader,
   #bili-header-container {
     visibility: hidden;
     height: var(--bew-top-bar-height) !important;
