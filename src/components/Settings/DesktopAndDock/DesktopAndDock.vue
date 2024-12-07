@@ -147,6 +147,9 @@ function handleToggleDockItem(dockItem: any) {
           </draggable>
         </template>
       </SettingsItem>
+      <SettingsItem :title="$t('settings.disable_dock_glowing_effect')">
+        <Radio v-model="settings.disableDockGlowingEffect" />
+      </SettingsItem>
       <SettingsItem :title="$t('settings.disable_light_dark_mode_switcher')">
         <Radio v-model="settings.disableLightDarkModeSwitcherOnDock" />
       </SettingsItem>

@@ -39,6 +39,7 @@ export interface Settings {
   dockPosition: 'left' | 'right' | 'bottom'
   autoHideDock: boolean
   dockItemVisibilityList: { page: AppPage, visible: boolean }[]
+  disableDockGlowingEffect: boolean
   disableLightDarkModeSwitcherOnDock: boolean
   moveBackToTopOrRefreshButtonToDock: boolean
   sidebarPosition: 'left' | 'right'
@@ -128,6 +129,7 @@ export const originalSettings: Settings = {
   dockPosition: 'right',
   autoHideDock: false,
   dockItemVisibilityList: [],
+  disableDockGlowingEffect: false,
   disableLightDarkModeSwitcherOnDock: false,
   moveBackToTopOrRefreshButtonToDock: true,
   sidebarPosition: 'right',

@@ -153,7 +153,8 @@ settings:
   auto_hide_dock: 自動收埋 Dock
   dock_content_adjustment: Dock 內容調整
   dock_content_adjustment_desc: 第一個啓用嘅 Dock 項個頁面會係開始頁面。
-  disable_light_dark_mode_switcher: 閂咗淺/深色主題切換粒掣
+  disable_dock_glowing_effect: 熄咗 Dock 發光效果去
+  disable_light_dark_mode_switcher: 閂咗淺 / 深色主題切換粒掣去
   move_back_to_top_and_refresh_to_dock: 將返去頂部同重新整理粒掣擺到落 Dock 度
   sidebar_position: 側邊欄位置
   auto_hide_sidebar: 自動收埋側邊欄

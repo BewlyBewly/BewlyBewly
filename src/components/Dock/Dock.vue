@@ -128,8 +128,9 @@ function handleBackToTopOrRefresh() {
             <button
               class="dock-item group"
               :class="{
-                active: activatedPage === dockItem.page,
-                inactive: hoveringDockItem.themeMode && isDark,
+                'active': activatedPage === dockItem.page,
+                'inactive': hoveringDockItem.themeMode && isDark,
+                'disable-glowing-effect': settings.disableDockGlowingEffect,
               }"
               @click="emit('changePage', dockItem.page)"
             >
@@ -363,6 +364,10 @@ function handleBackToTopOrRefresh() {
       var(--bew-shadow-edge-glow-1),
       0 0 0 2px var(--bew-fill-2),
       var(--bew-shadow-2);
+  }
+
+  &.disable-glowing-effect {
+    box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2) !important;
   }
 
   &.active {
