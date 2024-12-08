@@ -363,6 +363,7 @@ dock:
   search: 搜索
   home: 首页
   anime: 番剧
+  feed_you: 个人
   history: 观看历史
   favorites: 收藏
   watch_later: 稍后再看
@@ -441,6 +442,7 @@ history:
     你确定要开启观看历史吗？
 
 favorites:
+  title: 收藏
   unfavorite: 取消收藏
   unfavorite_confirm: |-
     要取消收藏选中的视频吗？

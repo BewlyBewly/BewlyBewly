@@ -9,6 +9,7 @@ export enum AppPage {
   Home = 'Home',
   Search = 'Search',
   Anime = 'Anime',
+  FeedYou = 'FeedYou',
   History = 'History',
   Favorites = 'Favorites',
   WatchLater = 'WatchLater',

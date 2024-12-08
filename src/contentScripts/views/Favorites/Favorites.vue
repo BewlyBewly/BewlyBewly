@@ -1,36 +1,48 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 
-import type { FavoriteCategory, FavoriteResource } from '~/components/TopBar/types'
+import type { FavoriteCategory } from '~/components/TopBar/types'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { TOP_BAR_VISIBILITY_CHANGE } from '~/constants/globalEvents'
 import { settings } from '~/logic'
-import type { FavoritesResult, Media as FavoriteItem } from '~/models/video/favorite'
-import type { FavoritesCategoryResult, List as CategoryItem } from '~/models/video/favoriteCategory'
-import api from '~/utils/api'
-import { getCSRF, getUserID, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
+import { getCSRF, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
+import FavoritesVideoCard from './components/FavoritesVideoCard.vue'
+import { favoritesProvider } from './FavoritesProvider'
+
+const props = withDefaults(defineProps<{
+  parent?: 'tab-page' | 'dialog' // 区分是在标签页还是对话框中打开页面
+  categoryItemIndex?: number // 尝试使用过selectedCategory传参，但会导致Select组件无法正常显示选中的值
+}>(), {
+  parent: 'tab-page',
+})
+
 const { t } = useI18n()
+const { handlePageRefresh, handleReachBottom } = useBewlyApp()
 
-const favoriteCategories = reactive<CategoryItem[]>([])
-const favoriteResources = reactive<FavoriteItem[]>([])
-const categoryOptions = reactive<Array<{ value: any, label: string }>>([])
-
-const selectedCategory = ref<FavoriteCategory>()
-const activatedCategoryCover = ref<string>('')
-
-const shouldMoveCtrlBarUp = ref<boolean>(false)
-const currentPageNum = ref<number>(1)
-const keyword = ref<string>('')
-const { handlePageRefresh, handleReachBottom, haveScrollbar } = useBewlyApp()
-const isLoading = ref<boolean>(false)
-const isFullPageLoading = ref<boolean>(false)
-const noMoreContent = ref<boolean>(false)
+const {
+  favoriteCategories,
+  favoriteResources,
+  categoryOptions,
+  selectedCategory,
+  activatedCategoryCover,
+  shouldMoveCtrlBarUp,
+  currentPageNum,
+  keyword,
+  isLoading,
+  isFullPageLoading,
+  noMoreContent,
+  getFavoriteCategories,
+  getFavoriteResources,
+  changeCategory,
+  handleUnfavorite,
+  handleSearch,
+} = favoritesProvider()
 
 onMounted(async () => {
   await getFavoriteCategories()
-  changeCategory(favoriteCategories[0])
+  await changeCategory(favoriteCategories[props.categoryItemIndex ?? 0])
 
   initPageAction()
 
@@ -75,110 +87,12 @@ function initPageAction() {
   }
 }
 
-async function getFavoriteCategories() {
-  await api.favorite.getFavoriteCategories({
-    up_mid: getUserID(),
-  })
-    .then((res: FavoritesCategoryResult) => {
-      if (res.code === 0) {
-        Object.assign(favoriteCategories, res.data.list)
-
-        categoryOptions.length = 0
-        favoriteCategories.forEach((item) => {
-          categoryOptions.push({
-            label: item.title,
-            value: item,
-          })
-        })
-      }
-    })
-}
-
-/**
- * Get favorite video resources
- * @param media_id
- * @param pn
- * @param keyword
- */
-async function getFavoriteResources(
-  media_id: number,
-  pn: number,
-  keyword = '' as string,
-) {
-  // if (pn === 1)
-  //   isFullPageLoading.value = true
-  isLoading.value = true
-  try {
-    const res: FavoritesResult = await api.favorite.getFavoriteResources({
-      media_id,
-      pn,
-      keyword,
-    })
-
-    if (res.code === 0) {
-      activatedCategoryCover.value = res.data.info.cover
-
-      if (Array.isArray(res.data.medias) && res.data.medias.length > 0)
-        favoriteResources.push(...res.data.medias)
-
-      if (!res.data.medias)
-        noMoreContent.value = true
-
-      if (!haveScrollbar() && !noMoreContent.value)
-        await getFavoriteResources(selectedCategory.value!.id, ++currentPageNum.value, keyword)
-    }
-  }
-  finally {
-    isLoading.value = false
-    // isFullPageLoading.value = false
-  }
-}
-
-async function changeCategory(categoryItem: FavoriteCategory) {
-  if (isLoading.value)
-    return
-  currentPageNum.value = 1
-  selectedCategory.value = categoryItem
-  favoriteResources.length = 0
-  noMoreContent.value = false
-
-  getFavoriteResources(categoryItem.id, 1)
-}
-
-function handleSearch() {
-  currentPageNum.value = 1
-  favoriteResources.length = 0
-  noMoreContent.value = false
-
-  getFavoriteResources(selectedCategory.value!.id, currentPageNum.value, keyword.value)
-}
-
 function handlePlayAll() {
   openLinkToNewTab(`https://www.bilibili.com/list/ml${selectedCategory.value?.id}`)
 }
 
 function jumpToLoginPage() {
   location.href = 'https://passport.bilibili.com/login'
-}
-
-function handleUnfavorite(favoriteResource: FavoriteResource) {
-  const result = confirm(
-    t('favorites.unfavorite_confirm'),
-  )
-  if (result) {
-    api.favorite.patchDelFavoriteResources({
-      resources: `${favoriteResource.id}:${favoriteResource.type}`,
-      media_id: selectedCategory.value?.id,
-      csrf: getCSRF(),
-    }).then((res) => {
-      if (res.code === 0)
-        favoriteResources.splice(favoriteResources.indexOf(favoriteResource as FavoriteItem), 1)
-    })
-  }
-}
-
-function isMusic(item: FavoriteResource) {
-  return item.link.includes('bilibili://music')
 }
 </script>
 
@@ -215,41 +129,12 @@ function isMusic(item: FavoriteResource) {
         <!-- favorite list -->
         <div grid="~ 2xl:cols-4 xl:cols-3 lg:cols-2 md:cols-1 gap-5" m="t-55px b-6">
           <TransitionGroup name="list">
-            <VideoCard
-              v-for="item in favoriteResources"
-              :key="item.id"
-              :video="{
-                id: item.id,
-                duration: item.duration,
-                title: item.title,
-                cover: item.cover,
-                author: {
-                  name: item.upper.name,
-                  authorFace: item.upper.face,
-                  mid: item.upper.mid,
-                },
-                view: item.cnt_info.play,
-                danmaku: item.cnt_info.danmaku,
-                publishedTimestamp: item.pubtime,
-                bvid: isMusic(item) ? undefined : item.bvid,
-                url: isMusic(item) ? `https://www.bilibili.com/audio/au${item.id}` : undefined,
-              }"
-              group
-            >
-              <template #coverTopLeft>
-                <button
-                  p="x-2 y-1" m="1"
-                  rounded="$bew-radius"
-                  text="!white xl"
-                  bg="black opacity-60 hover:$bew-error-color-80"
-                  @click.prevent.stop="handleUnfavorite(item)"
-                >
-                  <Tooltip :content="$t('favorites.unfavorite')" placement="bottom" type="dark">
-                    <div i-ic-baseline-clear />
-                  </Tooltip>
-                </button>
-              </template>
-            </VideoCard>
+            <template v-for="item in favoriteResources" :key="item.id">
+              <FavoritesVideoCard
+                :item="item"
+                @unfavorite="handleUnfavorite(item)"
+              />
+            </template>
           </TransitionGroup>
         </div>
 
@@ -268,7 +153,8 @@ function isMusic(item: FavoriteResource) {
 
     <aside relative w="full md:40% lg:30% xl:25%" class="hidden md:block" order="1 md:2 lg:2">
       <div
-        pos="sticky top-120px"
+        :class="{ 'top-120px': parent === 'tab-page' }"
+        pos="sticky top-0"
         w-full h="auto md:[calc(100vh-160px)]"
         my-10
         rounded="$bew-radius"
