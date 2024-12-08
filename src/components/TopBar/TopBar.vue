@@ -442,27 +442,28 @@ defineExpose({
         <div
           v-if="!reachTop"
           style="
-            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1),  rgba(0, 0, 0, 0.9) 40px, transparent);
+            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1) 14px, rgba(0, 0, 0, 0.9) 40px, transparent);
           "
-          :style="{ backdropFilter: settings.disableFrostedGlass ? 'none' : 'var(--bew-filter-glass-1)' }"
+          :style="{ backdropFilter: settings.disableFrostedGlass ? 'none' : 'blur(12px)' }"
           pos="absolute top-0 left-0" w-full h="[calc(var(--bew-top-bar-height)+20px)]"
           pointer-events-none transform-gpu
         />
 
-        <Transition name="fade">
-          <div
-            v-if="!reachTop"
-            pos="absolute top-0 left-0" w-full h="[calc(var(--bew-top-bar-height)+20px)]"
-            pointer-events-none opacity-100
-            :style="{
-              background: `linear-gradient(to bottom, ${
-                forceWhiteIcon
-                  ? 'rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2) calc(var(--bew-top-bar-height) / 2)'
-                  : 'color-mix(in oklab, var(--bew-bg), transparent 20%), color-mix(in oklab, var(--bew-bg), transparent 40%) calc(var(--bew-top-bar-height) / 2)'
-              }, transparent)`,
-            }"
-          />
-        </Transition>
+        <!-- <Transition name="fade"> -->
+        <div
+          pos="absolute top-0 left-0" w-full
+          pointer-events-none opacity-100 duration-300
+          :style="{
+            background: `linear-gradient(to bottom, ${
+              forceWhiteIcon
+                ? 'rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4) calc(var(--bew-top-bar-height) / 2)'
+                : 'color-mix(in oklab, var(--bew-bg), transparent 20%), color-mix(in oklab, var(--bew-bg), transparent 40%) calc(var(--bew-top-bar-height) / 2)'
+            }, transparent)`,
+            opacity: reachTop ? 0.8 : 1,
+            height: reachTop ? 'var(--bew-top-bar-height)' : 'calc(var(--bew-top-bar-height) + 20px)',
+          }"
+        />
+        <!-- </Transition> -->
 
         <div shrink-0 flex="inline xl:1 justify-center">
           <div
