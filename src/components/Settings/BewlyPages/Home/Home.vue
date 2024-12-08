@@ -397,8 +397,8 @@ function handleToggleHomeTab(tab: any) {
                 flex="~ gap-2 items-center" p="x-4 y-2" bg="$bew-fill-1" rounded="$bew-radius" cursor-all-scroll
                 duration-300
                 :style="{
-                  background: element.visible ? 'var(--bew-theme-color)' : 'var(--bew-fill-1)',
-                  color: element.visible ? 'white' : 'var(--bew-text-1)',
+                  background: element.visible ? 'var(--bew-theme-color-20)' : 'var(--bew-fill-1)',
+                  color: element.visible ? 'var(--bew-theme-color)' : 'var(--bew-text-1)',
                 }"
                 @click="handleToggleHomeTab(element)"
               >
