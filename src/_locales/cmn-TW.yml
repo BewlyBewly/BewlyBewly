@@ -154,6 +154,7 @@ settings:
   auto_hide_dock: 自動隱藏 Dock
   dock_content_adjustment: Dock 內容調整
   dock_content_adjustment_desc: 第一個啟用的 Dock 項目的頁面將是起始頁面。
+  disable_dock_glowing_effect: 關閉 Dock 發光效果
   disable_light_dark_mode_switcher: 關閉淺/深色模式切換按鈕
   move_back_to_top_and_refresh_to_dock: 將返回頂部和重新整理按鈕移動到 Dock
   sidebar_position: 側邊欄位置
