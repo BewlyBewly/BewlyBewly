@@ -99,8 +99,10 @@ async function releaseIframeResources() {
 }
 
 function handleOpenInNewTab() {
-  if (iframeRef.value)
+  if (iframeRef.value) {
     window.open(iframeRef.value.contentWindow?.location.href.replace(/\/$/, ''), '_blank')
+    handleClose()
+  }
 }
 
 const isEscPressed = ref<boolean>(false)
