@@ -49,7 +49,8 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          run_install: false
+          run_install: |
+            - args: [--frozen-lockfile]
 
       - name: Lint
         if: ${{ matrix.os == 'ubuntu-latest' }}
