@@ -7,11 +7,13 @@ import { useDark } from '~/composables/useDark'
 import { BEWLY_MOUNTED, DRAWER_VIDEO_ENTER_PAGE_FULL, DRAWER_VIDEO_EXIT_PAGE_FULL, OVERLAY_SCROLL_BAR_SCROLL } from '~/constants/globalEvents'
 import { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
+import { type DockItem, useMainStore } from '~/stores/mainStore'
 import { isHomePage, openLinkToNewTab, queryDomUntilFound, scrollToTop } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
 import { setupNecessarySettingsWatchers } from './necessarySettingsWatchers'
 
+const mainStore = useMainStore()
 const { isDark } = useDark()
 const [showSettings, toggleSettings] = useToggle(false)
 
@@ -24,7 +26,7 @@ function getPageParam(): AppPage | null {
   return null
 }
 
-const activatedPage = ref<AppPage>(getPageParam() || (settings.value.dockItemVisibilityList.find(e => e.visible === true)?.page || AppPage.Home))
+const activatedPage = ref<AppPage>(getPageParam() || (settings.value.dockItemsConfig.find(e => e.visible === true)?.page || AppPage.Home))
 const pages = {
   [AppPage.Home]: defineAsyncComponent(() => import('./Home/Home.vue')),
   [AppPage.Search]: defineAsyncComponent(() => import('./Search/Search.vue')),
@@ -43,8 +45,11 @@ const handleThrottledBackToTop = useThrottleFn(() => handleBackToTop(), 1000)
 const topBarRef = ref()
 const reachTop = ref<boolean>(true)
 
-const iframeDrawerUrl = ref<string>('')
+const iframeDrawerURL = ref<string>('')
 const showIframeDrawer = ref<boolean>(false)
+
+const iframePageURL = ref<string>('')
+const iframePageRef = ref()
 
 const inIframe = computed((): boolean => {
   return window.self !== window.top
@@ -54,21 +59,41 @@ const showBewlyPage = computed((): boolean => {
   if (inIframe.value) {
     return false
   }
+  else if (iframePageURL.value) {
+    return false
+  }
   else {
     return isHomePage() && !inIframe.value && !settings.value.useOriginalBilibiliHomepage
   }
 })
 
+const isFirstTimeActivatedPageChange = ref<boolean>(true)
 watch(
   () => activatedPage.value,
-  () => {
-    // Update the URL query parameter when activatedPage changes
-    const url = new URL(window.location.href)
-    url.searchParams.set('page', activatedPage.value)
-    window.history.replaceState({}, '', url.toString())
-    const osInstance = scrollbarRef.value.osInstance()
-    osInstance.elements().viewport.scrollTop = 0
+  (newVal) => {
+    // Set the iframePageURL when the activatedPage changes and the `dockItem.useOriginalBiliPage` is true
+    const dockItem = settings.value.dockItemsConfig.find(e => e.page === newVal)
+    if (dockItem && dockItem.useOriginalBiliPage) {
+      const dockItem = settings.value.dockItemsConfig.find(e => e.page === activatedPage.value)
+      if (dockItem && dockItem.useOriginalBiliPage)
+        // iframePageURL.value = dockItem.page === AppPage.Home ? '' : mainStore.getBiliWebPageURLByPage(dockItem.page)
+        iframePageURL.value = mainStore.getBiliWebPageURLByPage(dockItem.page)
+    }
+
+    if (!isFirstTimeActivatedPageChange.value) {
+      // Update the URL query parameter when activatedPage changes
+      const url = new URL(window.location.href)
+      url.searchParams.set('page', activatedPage.value)
+      window.history.replaceState({}, '', url.toString())
+    }
+
+    if (scrollbarRef.value) {
+      const osInstance = scrollbarRef.value.osInstance()
+      osInstance.elements().viewport.scrollTop = 0
+    }
+    isFirstTimeActivatedPageChange.value = false
   },
+  { immediate: true },
 )
 
 // Setup necessary settings watchers
@@ -91,6 +116,28 @@ onMounted(() => {
   })
 })
 
+function handleDockItemClick(dockItem: DockItem) {
+  // Opening in a new tab while still on the current tab doesn't require changing the `activatedPage`
+  if (dockItem.openInNewTab) {
+    openLinkToNewTab(`https://www.bilibili.com/?page=${dockItem.page}`)
+  }
+  else {
+    if (dockItem.useOriginalBiliPage) {
+      // It seem like the `activatedPage` watcher above will handle this, so no need to set iframePageURL.value here
+      // iframePageURL.value = dockItem.url
+    }
+    else {
+      iframePageURL.value = ''
+      nextTick(() => {
+        changeActivatePage(dockItem.page)
+      })
+    }
+
+    // When not opened in a new tab, change the `activatedPage`
+    activatedPage.value = dockItem.page
+  }
+}
+
 function changeActivatePage(pageName: AppPage) {
   const osInstance = scrollbarRef.value?.osInstance()
   const scrollTop: number = osInstance.elements().viewport.scrollTop
@@ -109,9 +156,12 @@ function changeActivatePage(pageName: AppPage) {
 
 function handleBackToTop(targetScrollTop = 0 as number) {
   const osInstance = scrollbarRef.value?.osInstance()
+  if (osInstance) {
+    scrollToTop(osInstance.elements().viewport, targetScrollTop)
+    topBarRef.value?.toggleTopBarVisible(true)
+  }
 
-  scrollToTop(osInstance.elements().viewport, targetScrollTop)
-  topBarRef.value?.toggleTopBarVisible(true)
+  iframePageRef.value?.handleBackToTop()
 }
 
 function handleOsScroll() {
@@ -147,7 +197,7 @@ function openIframeDrawer(url: string) {
     return
   }
 
-  iframeDrawerUrl.value = url
+  iframeDrawerURL.value = url
   showIframeDrawer.value = true
 }
 
@@ -230,13 +280,13 @@ provide<BewlyAppProvider>('BEWLY_APP', {
       pointer-events-none
     >
       <Dock
-        v-if="showBewlyPage"
+        v-if="showBewlyPage || iframePageURL"
         pointer-events-auto
         :activated-page="activatedPage"
-        @change-page="(page: AppPage) => changeActivatePage(page)"
         @settings-visibility-change="toggleSettings"
         @refresh="handleThrottledPageRefresh"
         @back-to-top="handleThrottledBackToTop"
+        @dock-item-click="handleDockItemClick"
       />
       <SideBar
         v-else
@@ -263,7 +313,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
         height: showBewlyPage ? '100dvh' : '0',
       }"
     >
-      <template v-if="showBewlyPage">
+      <template v-if="showBewlyPage && activatedPage">
         <OverlayScrollbarsComponent ref="scrollbarRef" element="div" h-inherit defer @os-scroll="handleOsScroll">
           <main m-auto max-w="$bew-page-max-width">
             <div
@@ -284,11 +334,15 @@ provide<BewlyAppProvider>('BEWLY_APP', {
           </main>
         </OverlayScrollbarsComponent>
       </template>
+      <Transition name="page-fade">
+        <!-- You must always use `!inIframe` to prevent nested calls to the BiliBili homepage when useOriginalBiliPage is set to true on the BewlyBewly homepage -->
+        <IframePage v-if="!inIframe && iframePageURL && activatedPage " ref="iframePageRef" :url="iframePageURL" />
+      </Transition>
     </div>
 
     <IframeDrawer
       v-if="showIframeDrawer"
-      :url="iframeDrawerUrl"
+      :url="iframeDrawerURL"
       @close="showIframeDrawer = false"
     />
   </div>

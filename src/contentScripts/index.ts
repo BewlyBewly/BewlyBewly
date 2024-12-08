@@ -127,8 +127,13 @@ if (!settings.value.useOriginalBilibiliTopBar && isSupportedPages())
 
 async function onDOMLoaded() {
   let originalTopBar: HTMLElement | null = null
+
+  // DO NOT change the home page when in iframe because it will cause nested calls to the homepage
+  const inIframe = window.self !== window.top
+  const changeHomePage = !settings.value.useOriginalBilibiliHomepage && isHomePage() && !inIframe
+
   // Remove the original Bilibili homepage if in Bilibili homepage & useOriginalBilibiliHomepage is enabled
-  if (!settings.value.useOriginalBilibiliHomepage && isHomePage()) {
+  if (changeHomePage) {
     originalTopBar = document.querySelector<HTMLElement>('.bili-header')
     const originalTopBarInnerUselessContents = document.querySelectorAll<HTMLElement>('.bili-header > *:not(.bili-header__bar)')
 
@@ -148,7 +153,7 @@ async function onDOMLoaded() {
 
   if (isSupportedPages()) {
     // Then inject the app
-    if (isHomePage() && !settings.value.useOriginalBilibiliHomepage) {
+    if (changeHomePage) {
       injectApp()
     }
     else {
