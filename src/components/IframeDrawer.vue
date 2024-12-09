@@ -3,7 +3,7 @@ import { onKeyStroke, useEventListener } from '@vueuse/core'
 
 import { DRAWER_VIDEO_ENTER_PAGE_FULL, DRAWER_VIDEO_EXIT_PAGE_FULL } from '~/constants/globalEvents'
 import { settings } from '~/logic'
-import { isHomePage } from '~/utils/main'
+import { isHomePage, isInIframe } from '~/utils/main'
 
 // TODO: support shortcuts like `Ctrl+Alt+T` to open in new tab, `Esc` to close
 
@@ -21,9 +21,6 @@ const headerShow = ref(false)
 const iframeRef = ref<HTMLIFrameElement | null>(null)
 const currentUrl = ref<string>(props.url)
 const delayCloseTimer = ref<NodeJS.Timeout | null>(null)
-const inIframe = computed((): boolean => {
-  return window.self !== window.top
-})
 
 useEventListener(window, 'popstate', updateIframeUrl)
 nextTick(() => {
@@ -99,8 +96,10 @@ async function releaseIframeResources() {
 }
 
 function handleOpenInNewTab() {
-  if (iframeRef.value)
+  if (iframeRef.value) {
     window.open(iframeRef.value.contentWindow?.location.href.replace(/\/$/, ''), '_blank')
+    handleClose()
+  }
 }
 
 const isEscPressed = ref<boolean>(false)
@@ -133,7 +132,7 @@ nextTick(() => {
 })
 
 watchEffect(() => {
-  if (inIframe.value)
+  if (isInIframe())
     return null
 
   useEventListener(window, 'message', ({ data }) => {

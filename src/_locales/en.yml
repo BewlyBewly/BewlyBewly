@@ -154,6 +154,9 @@ settings:
   auto_hide_dock: Automatically hide the dock
   dock_content_adjustment: Dock content adjustment
   dock_content_adjustment_desc: The page of the first activated dock item will be the startup page.
+  dock_item_open_in_new_tab: Open in new tab
+  dock_item_use_original_bili_web_page: Use the original Bilibili web page
+  disable_dock_glowing_effect: Disable the dock glowing effect
   disable_light_dark_mode_switcher: Disable light/dark mode switcher
   move_back_to_top_and_refresh_to_dock: Move the back-to-top and refresh buttons to the dock
   sidebar_position: Sidebar position

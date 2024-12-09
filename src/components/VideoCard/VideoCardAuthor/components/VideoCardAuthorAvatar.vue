@@ -48,7 +48,6 @@ const displayedAvatars = computed(() => {
       <!-- Avatar -->
       <Picture
         :src="`${removeHttpFromUrl(item.authorFace)}@50w_50h_1c`"
-        pos="absolute top-0"
         loading="lazy"
         w-inherit h-inherit
         rounded="1/2"
