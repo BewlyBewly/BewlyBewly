@@ -398,7 +398,7 @@ function handleBackToTopOrRefresh() {
   }
 
   &.active {
-    --uno: "important-bg-$bew-theme-color-auto text-$bew-text-auto";
+    --uno: "important-bg-$bew-theme-color-auto text-$bew-text-auto dark:text-$bew-theme-color";
     --uno: "shadow-$shadow-active dark:shadow-$shadow-dark";
     --uno: "active:shadow-$shadow-active-active dark-active:shadow-$shadow-dark-active";
   }

@@ -442,7 +442,7 @@ defineExpose({
         <div
           v-if="!reachTop"
           style="
-            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1) 14px, rgba(0, 0, 0, 0.9) 40px, transparent);
+            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1) 20px, rgba(0, 0, 0, 0.9) 40px, transparent);
           "
           :style="{ backdropFilter: settings.disableFrostedGlass ? 'none' : 'blur(12px)' }"
           pos="absolute top-0 left-0" w-full h="[calc(var(--bew-top-bar-height)+20px)]"
@@ -727,13 +727,15 @@ defineExpose({
                   :class="{ active: popupVisible.upload }"
                   @click="event => handleClickTopBarItem(event, 'upload')"
                 >
+                  <!-- :class="{ 'white-icon': forceWhiteIcon }" -->
                   <a
-                    :class="{ 'white-icon': forceWhiteIcon }"
                     href="https://member.bilibili.com/platform/upload/video/frame"
                     target="_blank"
                     :title="$t('topbar.upload')"
+                    color="$bew-theme-color"
+                    bg="$bew-theme-color-10 hover:!$bew-theme-color-40"
                   >
-                    <div i-mingcute:upload-2-line flex-shrink-0 />
+                    <div i-mingcute:upload-line flex-shrink-0 />
                   </a>
 
                   <Transition name="slide-in">
