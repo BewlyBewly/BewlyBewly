@@ -445,7 +445,7 @@ defineExpose({
             mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1) 20px, rgba(0, 0, 0, 0.9) 40px, transparent);
           "
           :style="{ backdropFilter: settings.disableFrostedGlass ? 'none' : 'blur(12px)' }"
-          pos="absolute top-0 left-0" w-full h="[calc(var(--bew-top-bar-height)+20px)]"
+          pos="absolute top-0 left-0" w-full h="[calc(var(--bew-top-bar-height)+16px)]"
           pointer-events-none transform-gpu
         />
 
@@ -727,13 +727,14 @@ defineExpose({
                   :class="{ active: popupVisible.upload }"
                   @click="event => handleClickTopBarItem(event, 'upload')"
                 >
-                  <!-- :class="{ 'white-icon': forceWhiteIcon }" -->
                   <a
+                    class="upload"
+                    :class="{ 'white-icon': forceWhiteIcon }"
                     href="https://member.bilibili.com/platform/upload/video/frame"
                     target="_blank"
                     :title="$t('topbar.upload')"
-                    color="$bew-theme-color"
-                    bg="$bew-theme-color-10 hover:!$bew-theme-color-40"
+                    color="!$bew-theme-color"
+                    bg="$bew-theme-color-10 hover:!$bew-theme-color-30"
                   >
                     <div i-mingcute:upload-line flex-shrink-0 />
                   </a>
@@ -978,6 +979,10 @@ defineExpose({
     &.active a,
     & a:hover {
       --uno: "bg-$bew-fill-2";
+    }
+
+    &.active a.upload {
+      --uno: "!bg-$bew-theme-color-30";
     }
 
     .white-icon {
