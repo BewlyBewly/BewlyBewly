@@ -1,6 +1,5 @@
 name: Bug Report
 description: 报告问题
-title: ''
 labels: [bug]
 
 body:
