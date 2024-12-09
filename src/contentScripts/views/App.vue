@@ -63,6 +63,14 @@ const showBewlyPage = computed((): boolean => {
   }
 })
 
+const showIframePage = computed((): boolean => {
+  // If the iframe is not the BiliBili homepage, then don't show the iframe page
+  if (!isHomePage(window.self.location.href))
+    return false
+  // use `!isInIframe()` to prevent nested calls to the BiliBili homepage
+  return !isInIframe() && !!iframePageURL.value && !!activatedPage.value
+})
+
 const isFirstTimeActivatedPageChange = ref<boolean>(true)
 watch(
   () => activatedPage.value,
@@ -276,7 +284,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
       pointer-events-none
     >
       <Dock
-        v-if="showBewlyPage || iframePageURL"
+        v-if="showBewlyPage || showIframePage"
         pointer-events-auto
         :activated-page="activatedPage"
         @settings-visibility-change="toggleSettings"
@@ -331,8 +339,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
         </OverlayScrollbarsComponent>
       </template>
       <Transition name="page-fade">
-        <!-- You must always use `!isInIframe()` to prevent nested calls to the BiliBili homepage when useOriginalBiliPage is set to true on the BewlyBewly homepage -->
-        <IframePage v-if="!isInIframe() && iframePageURL && activatedPage " ref="iframePageRef" :url="iframePageURL" />
+        <IframePage v-if="showIframePage" ref="iframePageRef" :url="iframePageURL" />
       </Transition>
     </div>
 
