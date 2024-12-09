@@ -8,7 +8,7 @@ import { BEWLY_MOUNTED, DRAWER_VIDEO_ENTER_PAGE_FULL, DRAWER_VIDEO_EXIT_PAGE_FUL
 import { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
 import { type DockItem, useMainStore } from '~/stores/mainStore'
-import { isHomePage, openLinkToNewTab, queryDomUntilFound, scrollToTop } from '~/utils/main'
+import { isHomePage, isInIframe, openLinkToNewTab, queryDomUntilFound, scrollToTop } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
 import { setupNecessarySettingsWatchers } from './necessarySettingsWatchers'
@@ -51,19 +51,15 @@ const showIframeDrawer = ref<boolean>(false)
 const iframePageURL = ref<string>('')
 const iframePageRef = ref()
 
-const inIframe = computed((): boolean => {
-  return window.self !== window.top
-})
-
 const showBewlyPage = computed((): boolean => {
-  if (inIframe.value) {
+  if (isInIframe()) {
     return false
   }
   else if (iframePageURL.value) {
     return false
   }
   else {
-    return isHomePage() && !inIframe.value && !settings.value.useOriginalBilibiliHomepage
+    return isHomePage() && !isInIframe() && !settings.value.useOriginalBilibiliHomepage
   }
 })
 
@@ -203,7 +199,7 @@ function openIframeDrawer(url: string) {
 
 // In drawer video, watch btn className changed and post message to parent
 watchEffect(async (onCleanUp) => {
-  if (!inIframe.value)
+  if (!isInIframe())
     return null
 
   const observer = new MutationObserver(([{ target: el }]) => {
@@ -275,7 +271,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
 
     <!-- Dock & RightSideButtons -->
     <div
-      v-if="!inIframe"
+      v-if="!isInIframe()"
       pos="absolute top-0 left-0" w-full h-full overflow-hidden
       pointer-events-none
     >
@@ -296,7 +292,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
     </div>
 
     <!-- TopBar -->
-    <div v-if="!inIframe" m-auto max-w="$bew-page-max-width">
+    <div v-if="!isInIframe()" m-auto max-w="$bew-page-max-width">
       <OldTopBar
         v-if="settings.useOldTopBar"
         pos="top-0 left-0" z="99 hover:1001" w-full
@@ -335,8 +331,8 @@ provide<BewlyAppProvider>('BEWLY_APP', {
         </OverlayScrollbarsComponent>
       </template>
       <Transition name="page-fade">
-        <!-- You must always use `!inIframe` to prevent nested calls to the BiliBili homepage when useOriginalBiliPage is set to true on the BewlyBewly homepage -->
-        <IframePage v-if="!inIframe && iframePageURL && activatedPage " ref="iframePageRef" :url="iframePageURL" />
+        <!-- You must always use `!isInIframe()` to prevent nested calls to the BiliBili homepage when useOriginalBiliPage is set to true on the BewlyBewly homepage -->
+        <IframePage v-if="!isInIframe() && iframePageURL && activatedPage " ref="iframePageRef" :url="iframePageURL" />
       </Transition>
     </div>
 

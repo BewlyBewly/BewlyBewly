@@ -9,7 +9,7 @@ import { settings } from '~/logic'
 import { setupApp } from '~/logic/common-setup'
 import RESET_BEWLY_CSS from '~/styles/reset.css?raw'
 import { runWhenIdle } from '~/utils/lazyLoad'
-import { compareVersions, injectCSS, isHomePage } from '~/utils/main'
+import { compareVersions, injectCSS, isHomePage, isInIframe } from '~/utils/main'
 import { SVG_ICONS } from '~/utils/svgIcons'
 
 import { version } from '../../package.json'
@@ -129,8 +129,7 @@ async function onDOMLoaded() {
   let originalTopBar: HTMLElement | null = null
 
   // DO NOT change the home page when in iframe because it will cause nested calls to the homepage
-  const inIframe = window.self !== window.top
-  const changeHomePage = !settings.value.useOriginalBilibiliHomepage && isHomePage() && !inIframe
+  const changeHomePage = !isInIframe() && !settings.value.useOriginalBilibiliHomepage && isHomePage()
 
   // Remove the original Bilibili homepage if in Bilibili homepage & useOriginalBilibiliHomepage is enabled
   if (changeHomePage) {
