@@ -229,7 +229,7 @@ function toggleTabContentLoading(loading: boolean) {
                   v-show="activatedPage === tab.page && tabContentLoading"
                   i-svg-spinners:ring-resize
                   pos="absolute right-4px top-4px" duration-300
-                  text="8px $bew-text-auto"
+                  text="8px $bew-text-2"
                 />
               </Transition>
             </button>
@@ -247,8 +247,9 @@ function toggleTabContentLoading(loading: boolean) {
           <div
             v-for="icon in gridLayoutIcons" :key="icon.value"
             :style="{
-              backgroundColor: gridLayout.home === icon.value ? 'var(--bew-theme-color-auto)' : '',
-              color: gridLayout.home === icon.value ? 'var(--bew-text-auto)' : 'unset',
+              backgroundColor: gridLayout.home === icon.value ? 'var(--bew-fill-3)' : '',
+              color: gridLayout.home === icon.value ? 'var(--bew-text-1)' : 'var(--bew-text-2)',
+              fontWeight: gridLayout.home === icon.value ? 'bold' : 'normal',
             }"
             flex="~ justify-center items-center"
             h-full aspect-square
@@ -315,6 +316,6 @@ function toggleTabContentLoading(loading: boolean) {
 }
 
 .tab-activated {
-  --uno: "bg-$bew-theme-color-auto text-$bew-text-auto border-$bew-theme-color dark:border-white";
+  --uno: "bg-$bew-fill-3 text-$bew-text-1 fw-bold";
 }
 </style>
