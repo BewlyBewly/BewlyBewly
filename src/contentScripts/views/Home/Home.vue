@@ -217,7 +217,7 @@ function toggleTabContentLoading(loading: boolean) {
               v-for="tab in currentTabs" :key="tab.page"
               :class="{ 'tab-activated': activatedPage === tab.page }"
               px-3 h-inherit
-              bg="transparent hover:$bew-fill-2" rounded-full
+              bg="transparent hover:$bew-fill-2" text="$bew-text-2" rounded-full
               cursor-pointer duration-300
               flex="~ gap-2 items-center shrink-0" relative
               @click="handleChangeTab(tab)"
@@ -229,7 +229,7 @@ function toggleTabContentLoading(loading: boolean) {
                   v-show="activatedPage === tab.page && tabContentLoading"
                   i-svg-spinners:ring-resize
                   pos="absolute right-4px top-4px" duration-300
-                  text="8px $bew-text-auto"
+                  text="8px $bew-text-2"
                 />
               </Transition>
             </button>
@@ -247,11 +247,11 @@ function toggleTabContentLoading(loading: boolean) {
           <div
             v-for="icon in gridLayoutIcons" :key="icon.value"
             :style="{
-              backgroundColor: gridLayout.home === icon.value ? 'var(--bew-theme-color-auto)' : '',
-              color: gridLayout.home === icon.value ? 'var(--bew-text-auto)' : 'unset',
+              backgroundColor: gridLayout.home === icon.value ? 'var(--bew-fill-3)' : '',
+              color: gridLayout.home === icon.value ? 'var(--bew-text-1)' : 'var(--bew-text-2)',
             }"
             flex="~ justify-center items-center"
-            h-full aspect-square
+            h-full aspect-square text="$bew-text-2"
             rounded-full bg="hover:$bew-fill-2" duration-300
             cursor-pointer
             @click="gridLayout.home = icon.value"
@@ -315,6 +315,6 @@ function toggleTabContentLoading(loading: boolean) {
 }
 
 .tab-activated {
-  --uno: "bg-$bew-theme-color-auto text-$bew-text-auto border-$bew-theme-color dark:border-white";
+  --uno: "bg-$bew-fill-3 text-$bew-text-1 fw-bold";
 }
 </style>

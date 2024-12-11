@@ -38,7 +38,9 @@ export interface Settings {
   topBarIconBadges: 'number' | 'dot' | 'none'
   dockPosition: 'left' | 'right' | 'bottom'
   autoHideDock: boolean
+  /** @deprecated use dockItemsConfig instead */
   dockItemVisibilityList: { page: AppPage, visible: boolean }[]
+  dockItemsConfig: { page: AppPage, visible: boolean, openInNewTab: boolean, useOriginalBiliPage: boolean }[]
   disableDockGlowingEffect: boolean
   disableLightDarkModeSwitcherOnDock: boolean
   moveBackToTopOrRefreshButtonToDock: boolean
@@ -128,7 +130,9 @@ export const originalSettings: Settings = {
   topBarIconBadges: 'number',
   dockPosition: 'right',
   autoHideDock: false,
+  /** @deprecated use dockItemsConfig instead */
   dockItemVisibilityList: [],
+  dockItemsConfig: [],
   disableDockGlowingEffect: false,
   disableLightDarkModeSwitcherOnDock: false,
   moveBackToTopOrRefreshButtonToDock: true,

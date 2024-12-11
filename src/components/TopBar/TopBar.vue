@@ -440,27 +440,28 @@ defineExpose({
         <div
           v-if="!reachTop"
           style="
-            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1),  rgba(0, 0, 0, 0.9) 40px, transparent);
+            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1) 20px, rgba(0, 0, 0, 0.9) 40px, transparent);
           "
-          :style="{ backdropFilter: settings.disableFrostedGlass ? 'none' : 'var(--bew-filter-glass-1)' }"
-          pos="absolute top-0 left-0" w-full h="[calc(var(--bew-top-bar-height)+20px)]"
+          :style="{ backdropFilter: settings.disableFrostedGlass ? 'none' : 'blur(12px)' }"
+          pos="absolute top-0 left-0" w-full h="[calc(var(--bew-top-bar-height)+16px)]"
           pointer-events-none transform-gpu
         />
 
-        <Transition name="fade">
-          <div
-            v-if="!reachTop"
-            pos="absolute top-0 left-0" w-full h="[calc(var(--bew-top-bar-height)+20px)]"
-            pointer-events-none opacity-100
-            :style="{
-              background: `linear-gradient(to bottom, ${
-                forceWhiteIcon
-                  ? 'rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2) calc(var(--bew-top-bar-height) / 2)'
-                  : 'color-mix(in oklab, var(--bew-bg), transparent 20%), color-mix(in oklab, var(--bew-bg), transparent 40%) calc(var(--bew-top-bar-height) / 2)'
-              }, transparent)`,
-            }"
-          />
-        </Transition>
+        <!-- <Transition name="fade"> -->
+        <div
+          pos="absolute top-0 left-0" w-full
+          pointer-events-none opacity-100 duration-300
+          :style="{
+            background: `linear-gradient(to bottom, ${
+              forceWhiteIcon
+                ? 'rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4) calc(var(--bew-top-bar-height) / 2)'
+                : 'color-mix(in oklab, var(--bew-bg), transparent 20%), color-mix(in oklab, var(--bew-bg), transparent 40%) calc(var(--bew-top-bar-height) / 2)'
+            }, transparent)`,
+            opacity: reachTop ? 0.8 : 1,
+            height: reachTop ? 'var(--bew-top-bar-height)' : 'calc(var(--bew-top-bar-height) + 20px)',
+          }"
+        />
+        <!-- </Transition> -->
 
         <div shrink-0 flex="inline xl:1 justify-center">
           <div
@@ -725,12 +726,15 @@ defineExpose({
                   @click="event => handleClickTopBarItem(event, 'upload')"
                 >
                   <a
+                    class="upload"
                     :class="{ 'white-icon': forceWhiteIcon }"
                     href="https://member.bilibili.com/platform/upload/video/frame"
                     target="_blank"
                     :title="$t('topbar.upload')"
+                    color="!$bew-theme-color"
+                    bg="$bew-theme-color-10 hover:!$bew-theme-color-30"
                   >
-                    <div i-mingcute:upload-2-line flex-shrink-0 />
+                    <div i-mingcute:upload-line flex-shrink-0 />
                   </a>
 
                   <Transition name="slide-in">
@@ -973,6 +977,10 @@ defineExpose({
     &.active a,
     & a:hover {
       --uno: "bg-$bew-fill-2";
+    }
+
+    &.active a.upload {
+      --uno: "!bg-$bew-theme-color-30";
     }
 
     .white-icon {

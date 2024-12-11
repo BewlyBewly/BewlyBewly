@@ -4,7 +4,8 @@
   #internationalHeader,
   .link-navbar,
   #home_nav,
-  &:not(.historyPage) #biliMainHeader,
+  // only hide the top bar on the home page
+  .homePage #biliMainHeader,
   #bili-header-container {
     visibility: hidden;
     height: var(--bew-top-bar-height) !important;
