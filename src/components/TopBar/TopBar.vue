@@ -72,6 +72,8 @@ const forceWhiteIcon = computed((): boolean => {
     )
     // watch later & history page
     || /https?:\/\/(?:www.)?bilibili.com\/(?:watchlater|account\/history).*/.test(location.href)
+    // user space page 空間頁
+    || /https?:\/\/space.bilibili\.com\.*/.test(location.href)
   ) {
     return true
   }
