@@ -7,12 +7,15 @@ body:
     attributes:
       value: |
         ## BUG 提出
+        提问题之前请先看看 https://github.com/BewlyBewly/BewlyBewly/wiki 
+        标题直接随便写bug、错误、有问题类似简单带过的 issue 直接 close 不解释，如果是旧版本的问题或是已经有人提问过的问题将会关闭
+
+        ### Edge
         Edge 受遥遥领先的 Edge Addons 审核导致版本更新永远落后于 Chrome，且审核问题不是我们控制的，所以后面已经直接取消上架 Edge Addons
         Edge 浏览器也可以通过 [Chrome Web Store 下载](https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp)，不要因为 **Edge 浏览器** 在 [Chrome Web Store](https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp) 上弹出大提示而又下回 Edge 版本
 
+        ### Safari
         不会上架 Safari，DKLM苹果我注册苹果开发者每年送苹果 99 美元连资格也不给，系统和客服一直说系统说你有一个或多个问题导致无法注册也没解决办法，另外 Apple 傻閪弱智on9笨柒豬閪脑回路 Safari 和系统更新绑定，Safari 我屌你老母吔屎啦快撚啲死柒咗佢啦邊撚個會用佢
-
-        如果是旧版本的问题或是已经有人提问过的问题将会关闭
 
   - type: textarea
     attributes:
