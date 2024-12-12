@@ -7,7 +7,7 @@ body:
     attributes:
       value: |
         ## BUG 提出
-        提问题之前请先看看 https://github.com/BewlyBewly/BewlyBewly/wiki 
+        提问题之前请先看看 https://github.com/BewlyBewly/BewlyBewly/wiki
         标题直接随便写bug、错误、有问题类似简单带过的 issue 直接 close 不解释，如果是旧版本的问题或是已经有人提问过的问题将会关闭
 
         ### Edge
