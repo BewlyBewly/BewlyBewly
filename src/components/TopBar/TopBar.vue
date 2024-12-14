@@ -444,7 +444,7 @@ defineExpose({
         <div
           v-if="!reachTop"
           style="
-            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1) 20px, rgba(0, 0, 0, 0.9) 40px, transparent);
+            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1) 24px, rgba(0, 0, 0, 0.9) 44px, transparent);
           "
           :style="{ backdropFilter: settings.disableFrostedGlass ? 'none' : 'blur(12px)' }"
           pos="absolute top-0 left-0" w-full h="[calc(var(--bew-top-bar-height)+16px)]"
@@ -732,11 +732,12 @@ defineExpose({
                   <a
                     class="upload"
                     :class="{ 'white-icon': forceWhiteIcon }"
+                    :style="{ backdropFilter: 'var(--bew-filter-glass-1)' }"
                     href="https://member.bilibili.com/platform/upload/video/frame"
                     target="_blank"
                     :title="$t('topbar.upload')"
-                    color="!$bew-theme-color"
-                    bg="$bew-theme-color-10 hover:!$bew-theme-color-30"
+                    color="$bew-theme-color"
+                    bg="$bew-theme-color-20 hover:!$bew-theme-color-40"
                   >
                     <div i-mingcute:upload-line flex-shrink-0 />
                   </a>
@@ -990,6 +991,14 @@ defineExpose({
     .white-icon {
       --uno: "text-white";
       filter: drop-shadow(0 0 6px black) !important;
+
+      &.upload {
+        --uno: "bg-$bew-fill-2 hover:!bg-$bew-fill-4";
+      }
+
+      &.upload.active {
+        --uno: "!bg-$bew-fill-4";
+      }
     }
   }
 
