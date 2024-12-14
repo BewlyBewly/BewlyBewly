@@ -29,7 +29,7 @@ const shouldMoveTabsUp = ref<boolean>(false)
 const tabContentLoading = ref<boolean>(false)
 const currentTabs = ref<HomeTab[]>([])
 const tabPageRef = ref()
-
+const topBarVisibility = ref<boolean>(false)
 const gridLayoutIcons = computed((): GridLayoutIcon[] => {
   return [
     { icon: 'i-mingcute:table-3-line', iconActivated: 'i-mingcute:table-3-fill', value: 'adaptive' },
@@ -64,6 +64,7 @@ onMounted(() => {
   showSearchPageMode.value = true
   emitter.off(TOP_BAR_VISIBILITY_CHANGE)
   emitter.on(TOP_BAR_VISIBILITY_CHANGE, (val) => {
+    topBarVisibility.value = val
     shouldMoveTabsUp.value = false
 
     // Allow moving tabs up only when the top bar is not hidden & is set to auto-hide
@@ -267,6 +268,7 @@ function toggleTabContentLoading(loading: boolean) {
             :is="pages[activatedPage]" :key="activatedPage"
             ref="tabPageRef"
             :grid-layout="gridLayout.home"
+            :top-bar-visibility="topBarVisibility"
             @before-loading="toggleTabContentLoading(true)"
             @after-loading="toggleTabContentLoading(false)"
           />

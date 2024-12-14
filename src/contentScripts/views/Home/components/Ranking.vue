@@ -2,18 +2,17 @@
 import { useI18n } from 'vue-i18n'
 
 import { useBewlyApp } from '~/composables/useAppProvider'
-// import { TOP_BAR_VISIBILITY_CHANGE } from '~/constants/globalEvents'
 import type { GridLayoutType } from '~/logic'
 import { settings } from '~/logic'
 import type { List as RankingVideoItem, RankingResult } from '~/models/video/ranking'
 import type { List as RankingPgcItem, RankingPgcResult } from '~/models/video/rankingPgc'
 import api from '~/utils/api'
 
-// import emitter from '~/utils/mitt'
 import type { RankingType } from '../types'
 
 const props = defineProps<{
   gridLayout: GridLayoutType
+  topBarVisibility: boolean
 }>()
 
 const emit = defineEmits<{
@@ -80,27 +79,22 @@ watch(() => activatedRankingType.value.id, () => {
   initData()
 })
 
+watch(() => props.topBarVisibility, () => {
+  shouldMoveAsideUp.value = false
+
+  // Allow moving tabs up only when the top bar is not hidden & is set to auto-hide
+  // This feature is primarily designed to compatible with the Bilibili Evolved's top bar
+  // Even when the BewlyBewly top bar is hidden, the Bilibili Evolved top bar still exists, so not moving up
+  if (settings.value.autoHideTopBar && settings.value.showTopBar) {
+    if (props.topBarVisibility)
+      shouldMoveAsideUp.value = false
+
+    else
+      shouldMoveAsideUp.value = true
+  }
+})
+
 onMounted(() => {
-  // emitter.off(TOP_BAR_VISIBILITY_CHANGE)
-  // emitter.on(TOP_BAR_VISIBILITY_CHANGE, (val) => {
-  //   shouldMoveAsideUp.value = false
-
-  //   // Allow moving tabs up only when the top bar is not hidden & is set to auto-hide
-  //   // This feature is primarily designed to compatible with the Bilibili Evolved's top bar
-  //   // Even when the BewlyBewly top bar is hidden, the Bilibili Evolved top bar still exists, so not moving up
-  //   if (settings.value.autoHideTopBar && settings.value.showTopBar) {
-  //     if (val)
-  //       shouldMoveAsideUp.value = false
-
-  //     else
-  //       shouldMoveAsideUp.value = true
-  //   }
-  // })
-
-  // onUnmounted(() => {
-  //   emitter.off(TOP_BAR_VISIBILITY_CHANGE)
-  // })
-
   initData()
   initPageAction()
 })
