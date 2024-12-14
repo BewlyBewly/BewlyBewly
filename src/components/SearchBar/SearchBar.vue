@@ -217,6 +217,7 @@ async function handleClearSearchHistory() {
       <input
         ref="keywordRef"
         v-model="keyword"
+        class="group"
         rounded="60px focus:$bew-radius"
         p="l-6 r-18 y-3"
         h-inherit
@@ -244,7 +245,7 @@ async function handleClearSearchHistory() {
       <button
         p-2
         rounded-full
-        text="lg leading-0 $bew-text-1 group-focus-within:$bew-theme-color"
+        text="lg leading-0 $b-search-bar-normal-icon-color group-hover:$b-search-bar-hover-icon-color group-focus-within:$b-search-bar-focus-icon-color"
         transition="all duration-300"
         border-none
         outline-none
@@ -357,12 +358,15 @@ async function handleClearSearchHistory() {
 }
 
 #search-wrap {
-  --b-search-bar-color: var(--bew-content);
-  --b-search-bar-color-hover: var(--bew-content-hover);
-  --b-search-bar-color-focus: var(--b-search-bar-color);
+  --b-search-bar-normal-color: var(--bew-content);
+  --b-search-bar-hover-color: var(--bew-content-hover);
+  --b-search-bar-focus-color: var(--b-search-bar-normal-color);
+  --b-search-bar-normal-icon-color: var(--bew-text-1);
+  --b-search-bar-hover-icon-color: var(--bew-theme-color);
+  --b-search-bar-focus-icon-color: var(--bew-theme-color);
 
   @mixin card-content {
-    --uno: "text-base outline-none w-full bg-$b-search-bar-color transform-gpu border-1 border-$bew-border-color";
+    --uno: "text-base outline-none w-full bg-$b-search-bar-normal-color transform-gpu border-1 border-$bew-border-color";
     --uno: "shadow-[var(--bew-shadow-2),var(--bew-shadow-edge-glow-1)]";
     backdrop-filter: var(--bew-filter-glass-1);
   }
@@ -372,7 +376,11 @@ async function handleClearSearchHistory() {
       @include card-content;
 
       &:hover {
-        --uno: "bg-$b-search-bar-color-hover";
+        --uno: "bg-$b-search-bar-hover-color";
+      }
+
+      &:focus {
+        --uno: "bg-$b-search-bar-focus-color";
       }
     }
 

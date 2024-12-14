@@ -519,9 +519,9 @@ defineExpose({
             <SearchBar
               v-if="showSearchBar"
               style="
-              --b-search-bar-color: var(--bew-elevated);
-              --b-search-bar-hover: var(--bew-elevated-hover);
-            "
+                --b-search-bar-normal-color: var(--bew-elevated);
+                --b-search-bar-hover-color: var(--bew-elevated-hover);
+              "
             />
           </Transition>
         </div>

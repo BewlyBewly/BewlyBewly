@@ -489,7 +489,7 @@ defineExpose({
                 p-id="1477" width="38" height="38"
                 :style="{
                   fill: forceWhiteIcon ? 'white' : 'var(--bew-theme-color)',
-                  filter: forceWhiteIcon ? 'drop-shadow(0 0 6px black)' : 'drop-shadow(0 0 4px var(--bew-theme-color-60))',
+                  filter: forceWhiteIcon ? 'drop-shadow(0 0 4px rgba(0, 0, 0, 0.6))' : 'drop-shadow(0 0 4px var(--bew-theme-color-60))',
                 }"
                 group-hover:fill="!white"
                 group-hover:filter="!none"
@@ -514,10 +514,12 @@ defineExpose({
           <Transition name="slide-out">
             <SearchBar
               v-if="showSearchBar"
-              style="
-                --b-search-bar-color: var(--bew-elevated);
-                --b-search-bar-hover: var(--bew-elevated-hover);
-              "
+              :style="{
+                '--b-search-bar-normal-color': settings.disableFrostedGlass ? 'var(--bew-elevated)' : 'color-mix(in oklab, var(--bew-elevated-solid), transparent 90%)',
+                '--b-search-bar-hover-color': 'var(--bew-elevated-hover)',
+                '--b-search-bar-focus-color': 'var(--bew-elevated)',
+                '--b-search-bar-normal-icon-color': forceWhiteIcon ? 'white' : 'var(--bew-text-1)',
+              }"
             />
           </Transition>
         </div>
@@ -732,7 +734,6 @@ defineExpose({
                   <a
                     class="upload"
                     :class="{ 'white-icon': forceWhiteIcon }"
-                    :style="{ backdropFilter: 'var(--bew-filter-glass-1)' }"
                     href="https://member.bilibili.com/platform/upload/video/frame"
                     target="_blank"
                     :title="$t('topbar.upload')"
@@ -976,7 +977,7 @@ defineExpose({
     &:not(.avatar) a {
       --uno: "text-lg grid place-items-center rounded-40px duration-300 relative z-5";
       --uno: "h-34px w-34px";
-      filter: drop-shadow(0 0 6px var(--bew-bg));
+      filter: drop-shadow(0 0 4px var(--bew-bg));
     }
 
     &.active a,
@@ -990,7 +991,7 @@ defineExpose({
 
     .white-icon {
       --uno: "text-white";
-      filter: drop-shadow(0 0 6px black) !important;
+      filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.6)) !important;
 
       &.upload {
         --uno: "bg-$bew-fill-2 hover:!bg-$bew-fill-4";
