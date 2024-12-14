@@ -81,20 +81,25 @@ watch(() => activatedRankingType.value.id, () => {
 })
 
 onMounted(() => {
-  emitter.on(TOP_BAR_VISIBILITY_CHANGE, (val) => {
-    shouldMoveAsideUp.value = false
+  // emitter.off(TOP_BAR_VISIBILITY_CHANGE)
+  // emitter.on(TOP_BAR_VISIBILITY_CHANGE, (val) => {
+  //   shouldMoveAsideUp.value = false
 
-    // Allow moving tabs up only when the top bar is not hidden & is set to auto-hide
-    // This feature is primarily designed to compatible with the Bilibili Evolved's top bar
-    // Even when the BewlyBewly top bar is hidden, the Bilibili Evolved top bar still exists, so not moving up
-    if (settings.value.autoHideTopBar && settings.value.showTopBar) {
-      if (val)
-        shouldMoveAsideUp.value = false
+  //   // Allow moving tabs up only when the top bar is not hidden & is set to auto-hide
+  //   // This feature is primarily designed to compatible with the Bilibili Evolved's top bar
+  //   // Even when the BewlyBewly top bar is hidden, the Bilibili Evolved top bar still exists, so not moving up
+  //   if (settings.value.autoHideTopBar && settings.value.showTopBar) {
+  //     if (val)
+  //       shouldMoveAsideUp.value = false
 
-      else
-        shouldMoveAsideUp.value = true
-    }
-  })
+  //     else
+  //       shouldMoveAsideUp.value = true
+  //   }
+  // })
+
+  // onUnmounted(() => {
+  //   emitter.off(TOP_BAR_VISIBILITY_CHANGE)
+  // })
 
   initData()
   initPageAction()
@@ -125,9 +130,9 @@ function getData() {
     getRankingVideos()
 }
 
-onBeforeUnmount(() => {
-  emitter.off(TOP_BAR_VISIBILITY_CHANGE)
-})
+// onBeforeUnmount(() => {
+//   emitter.off(TOP_BAR_VISIBILITY_CHANGE)
+// })
 
 function getRankingVideos() {
   videoList.length = 0
