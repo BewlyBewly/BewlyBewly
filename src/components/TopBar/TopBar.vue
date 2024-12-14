@@ -514,11 +514,13 @@ defineExpose({
           <Transition name="slide-out">
             <SearchBar
               v-if="showSearchBar"
+              class="search-bar"
               :style="{
-                '--b-search-bar-normal-color': settings.disableFrostedGlass ? 'var(--bew-elevated)' : 'color-mix(in oklab, var(--bew-elevated-solid), transparent 90%)',
+                '--b-search-bar-normal-color': settings.disableFrostedGlass ? 'var(--bew-elevated)' : 'color-mix(in oklab, var(--bew-elevated-solid), transparent 80%)',
                 '--b-search-bar-hover-color': 'var(--bew-elevated-hover)',
                 '--b-search-bar-focus-color': 'var(--bew-elevated)',
                 '--b-search-bar-normal-icon-color': forceWhiteIcon ? 'white' : 'var(--bew-text-1)',
+                '--b-search-bar-normal-text-color': forceWhiteIcon ? 'white' : 'var(--bew-text-1)',
               }"
             />
           </Transition>
@@ -894,6 +896,12 @@ defineExpose({
 
 .hide {
   transform: translateY(-100%);
+}
+
+:deep(.search-bar) {
+  input:not(:focus, :focus-within) {
+    --uno: "!border-$bew-border-color !shadow-$bew-shadow-1";
+  }
 }
 
 .bew-popover {

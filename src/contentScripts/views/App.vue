@@ -321,7 +321,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
         <OverlayScrollbarsComponent ref="scrollbarRef" element="div" h-inherit defer @os-scroll="handleOsScroll">
           <main m-auto max-w="$bew-page-max-width">
             <div
-              p="t-[calc(var(--bew-top-bar-height)+20px)]" m-auto
+              p="t-[calc(var(--bew-top-bar-height)+10px)]" m-auto
               w="lg:[calc(100%-200px)] [calc(100%-150px)]"
             >
               <!-- control button group -->

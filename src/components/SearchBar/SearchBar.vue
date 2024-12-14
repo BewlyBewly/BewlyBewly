@@ -221,7 +221,7 @@ async function handleClearSearchHistory() {
         rounded="60px focus:$bew-radius"
         p="l-6 r-18 y-3"
         h-inherit
-        text="$bew-text-1"
+        text="$b-search-bar-normal-text-color group-focus-within:$b-search-bar-focus-text-color group-hover:$b-search-bar-hover-text-color"
         un-border="1 solid $bew-border-color focus:$bew-theme-color"
         transition="all duration-300"
         type="text"
@@ -360,10 +360,15 @@ async function handleClearSearchHistory() {
 #search-wrap {
   --b-search-bar-normal-color: var(--bew-content);
   --b-search-bar-hover-color: var(--bew-content-hover);
-  --b-search-bar-focus-color: var(--b-search-bar-normal-color);
+  --b-search-bar-focus-color: var(--bew-content-hover);
+
   --b-search-bar-normal-icon-color: var(--bew-text-1);
   --b-search-bar-hover-icon-color: var(--bew-theme-color);
   --b-search-bar-focus-icon-color: var(--bew-theme-color);
+
+  --b-search-bar-normal-text-color: var(--bew-text-1);
+  --b-search-bar-hover-text-color: var(--bew-text-1);
+  --b-search-bar-focus-text-color: var(--bew-text-1);
 
   @mixin card-content {
     --uno: "text-base outline-none w-full bg-$b-search-bar-normal-color transform-gpu border-1 border-$bew-border-color";

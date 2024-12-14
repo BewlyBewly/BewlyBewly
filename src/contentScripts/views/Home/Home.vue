@@ -192,7 +192,7 @@ function toggleTabContentLoading(loading: boolean) {
       </Transition>
 
       <header
-        pos="sticky top-[calc(var(--bew-top-bar-height)+20px)]" w-full z-9 mb-4 duration-300
+        pos="sticky top-[calc(var(--bew-top-bar-height)+10px)]" w-full z-9 m="b-4" duration-300
         ease-in-out flex="~ justify-between items-start gap-4"
         :class="{ hide: shouldMoveTabsUp }"
       >
@@ -309,7 +309,7 @@ function toggleTabContentLoading(loading: boolean) {
 
 .home-tabs-inside {
   :deep([data-overlayscrollbars-contents]) {
-    --uno: "flex items-center gap-1 h-inherit rounded-full";
+    --uno: "flex items-center gap-1 h-inherit rounded-$bew-radius-half";
   }
   :deep(.os-scrollbar) {
     --uno: "mb--4px";
