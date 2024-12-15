@@ -3,6 +3,7 @@ import { useI18n } from 'vue-i18n'
 import draggable from 'vuedraggable'
 
 import { settings } from '~/logic'
+import type { DockItem } from '~/stores/mainStore'
 import { useMainStore } from '~/stores/mainStore'
 
 import SettingsItem from '../components/SettingsItem.vue'
@@ -69,12 +70,12 @@ const sidebarPositions = computed(() => {
 })
 
 function resetDockContent() {
-  settings.value.dockItemsConfig = mainStore.dockItems.map((e: any) => {
+  settings.value.dockItemsConfig = mainStore.dockItems.map((e: DockItem) => {
     return {
       page: e.page,
       visible: true,
       openInNewTab: false,
-      useOriginalBiliPage: false,
+      useOriginalBiliPage: !e.hasBewlyPage,
     }
   })
 }
@@ -149,7 +150,9 @@ function handleToggleDockItem(dockItem: any) {
                   </div>
                 </div>
                 <div flex="~ gap-4 items-center justify-between wrap">
-                  <div flex="~ items-center">
+                  <div
+                    flex="~ items-center"
+                  >
                     {{ $t('settings.dock_item_use_original_bili_web_page') }}
                     <Radio v-model="element.useOriginalBiliPage" />
                   </div>
