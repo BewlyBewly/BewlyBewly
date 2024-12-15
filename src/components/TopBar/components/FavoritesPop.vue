@@ -44,7 +44,11 @@ watch(activatedMediaId, (newVal: number, oldVal: number) => {
   getFavoriteResources()
 })
 
-onMounted(async () => {
+onMounted(() => {
+  initData()
+})
+
+async function initData() {
   await getFavoriteCategories()
   activatedMediaId.value = favoriteCategories[0].id
   activatedFavoriteTitle.value = favoriteCategories[0].title
@@ -67,7 +71,7 @@ onMounted(async () => {
       }
     })
   }
-})
+}
 
 async function getFavoriteCategories() {
   await api.favorite.getFavoriteCategories({

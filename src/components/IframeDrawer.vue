@@ -28,12 +28,13 @@ nextTick(() => {
   useEventListener(iframeRef.value?.contentWindow, 'popstate', updateCurrentUrl)
 })
 
-onMounted(async () => {
+onMounted(() => {
   history.pushState(null, '', props.url)
   show.value = true
   headerShow.value = true
-  await nextTick()
-  iframeRef.value?.focus()
+  nextTick(() => {
+    iframeRef.value?.focus()
+  })
 })
 
 onBeforeUnmount(() => {

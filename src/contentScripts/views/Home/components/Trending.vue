@@ -35,8 +35,8 @@ const pn = ref<number>(1)
 const noMoreContent = ref<boolean>(false)
 const { handleReachBottom, handlePageRefresh, haveScrollbar } = useBewlyApp()
 
-onMounted(async () => {
-  await initData()
+onMounted(() => {
+  initData()
   initPageAction()
 })
 

@@ -277,20 +277,20 @@ watch(activatedPage, () => {
   toggleTopBarVisible(true)
 })
 
-onMounted(async () => {
+onMounted(() => {
   initData()
-  await nextTick()
-  toggleTopBarVisible(true)
-
-  emitter.off(OVERLAY_SCROLL_BAR_SCROLL)
-  if (isHomePage() && !settings.value.useOriginalBilibiliHomepage) {
-    emitter.on(OVERLAY_SCROLL_BAR_SCROLL, () => {
-      handleScroll()
-    })
-  }
-  else {
-    window.addEventListener('scroll', handleScroll)
-  }
+  nextTick(() => {
+    toggleTopBarVisible(true)
+    emitter.off(OVERLAY_SCROLL_BAR_SCROLL)
+    if (isHomePage() && !settings.value.useOriginalBilibiliHomepage) {
+      emitter.on(OVERLAY_SCROLL_BAR_SCROLL, () => {
+        handleScroll()
+      })
+    }
+    else {
+      window.addEventListener('scroll', handleScroll)
+    }
+  })
 })
 
 onUnmounted(() => {

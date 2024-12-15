@@ -28,12 +28,7 @@ const isLoading = ref<boolean>(false)
 const isFullPageLoading = ref<boolean>(false)
 const noMoreContent = ref<boolean>(false)
 
-onMounted(async () => {
-  await getFavoriteCategories()
-  changeCategory(favoriteCategories[0])
-
-  initPageAction()
-
+onMounted(() => {
   emitter.off(TOP_BAR_VISIBILITY_CHANGE)
   emitter.on(TOP_BAR_VISIBILITY_CHANGE, (val) => {
     shouldMoveCtrlBarUp.value = false
@@ -49,7 +44,15 @@ onMounted(async () => {
         shouldMoveCtrlBarUp.value = true
     }
   })
+
+  initPageAction()
+  initData()
 })
+
+async function initData() {
+  await getFavoriteCategories()
+  changeCategory(favoriteCategories[0])
+}
 
 onUnmounted(() => {
   emitter.off(TOP_BAR_VISIBILITY_CHANGE)
