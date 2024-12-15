@@ -70,7 +70,7 @@ export const useMainStore = defineStore('main', () => {
         page: AppPage.History,
         openInNewTab: false,
         useOriginalBiliPage: false,
-        url: `https://www.bilibili.com/account/history`,
+        url: `https://www.bilibili.com/history`,
         hasBewlyPage: true,
       },
       {

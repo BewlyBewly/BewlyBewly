@@ -641,7 +641,7 @@ defineExpose({
                 >
                   <ALink
                     :class="{ 'white-icon': forceWhiteIcon }"
-                    href="https://www.bilibili.com/account/history"
+                    href="https://www.bilibili.com/history"
                     :title="$t('topbar.history')"
                     type="topBar"
                   >

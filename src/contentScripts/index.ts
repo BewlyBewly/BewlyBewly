@@ -50,6 +50,7 @@ function isSupportedPages(): boolean {
     // moment detail
     || /https?:\/\/(?:www\.)?bilibili\.com\/opus\/.*/.test(currentUrl)
     // history page
+    || /https?:\/\/(?:www\.)?bilibili\.com\/history.*/.test(currentUrl)
     || /https?:\/\/(?:www\.)?bilibili\.com\/account\/history.*/.test(currentUrl)
     // watcher later page
     || /https?:\/\/(?:www\.)?bilibili\.com\/watchlater\/#\/list.*/.test(currentUrl)
