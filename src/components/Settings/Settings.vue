@@ -132,20 +132,13 @@ function setCurrentTitle() {
           scale="group-hover:105" duration-300 overflow-hidden antialiased transform-gpu
           border="1 $bew-border-color"
         >
-          <style scoped>
-            ul::before {
-              content: '';
-              position: absolute;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-              background: inherit;
-              z-index: -1;
-              backdrop-filter: var(--bew-filter-glass-2);
-              pointer-events: none;
-            }
-          </style>
+          <!-- frosted glass background -->
+          <!-- https://github.com/BewlyBewly/BewlyBewly/issues/1162 -->
+          <div
+            style="backdrop-filter: var(--bew-filter-glass-2);"
+            pos="absolute top-0 left-0" z--1
+            w-full h-full pointer-events-none
+          />
 
           <li v-for="menuItem in settingsMenuItems" :key="menuItem.value">
             <a
