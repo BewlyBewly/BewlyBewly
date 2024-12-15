@@ -125,9 +125,8 @@ function setCurrentTitle() {
         <ul
           style="
             --un-shadow: var(--bew-shadow-4), var(--bew-shadow-edge-glow-2);
-            position: relative;
           "
-          flex="~ gap-2 col" rounded="30px group-hover:25px" p-2 shadow
+          relative flex="~ gap-2 col" rounded="30px group-hover:25px" p-2 shadow
           bg="$bew-content-alt group-hover:$bew-elevated dark:$bew-elevated dark-group-hover:$bew-elevated"
           scale="group-hover:105" duration-300 overflow-hidden antialiased transform-gpu
           border="1 $bew-border-color"
