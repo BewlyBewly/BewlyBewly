@@ -29,7 +29,7 @@ const shouldMoveTabsUp = ref<boolean>(false)
 const tabContentLoading = ref<boolean>(false)
 const currentTabs = ref<HomeTab[]>([])
 const tabPageRef = ref()
-
+const topBarVisibility = ref<boolean>(false)
 const gridLayoutIcons = computed((): GridLayoutIcon[] => {
   return [
     { icon: 'i-mingcute:table-3-line', iconActivated: 'i-mingcute:table-3-fill', value: 'adaptive' },
@@ -64,6 +64,7 @@ onMounted(() => {
   showSearchPageMode.value = true
   emitter.off(TOP_BAR_VISIBILITY_CHANGE)
   emitter.on(TOP_BAR_VISIBILITY_CHANGE, (val) => {
+    topBarVisibility.value = val
     shouldMoveTabsUp.value = false
 
     // Allow moving tabs up only when the top bar is not hidden & is set to auto-hide
@@ -191,7 +192,7 @@ function toggleTabContentLoading(loading: boolean) {
       </Transition>
 
       <header
-        pos="sticky top-[calc(var(--bew-top-bar-height)+10px)]" w-full z-9 mb-4 duration-300
+        pos="sticky top-[calc(var(--bew-top-bar-height)+10px)]" w-full z-9 m="b-4" duration-300
         ease-in-out flex="~ justify-between items-start gap-4"
         :class="{ hide: shouldMoveTabsUp }"
       >
@@ -267,6 +268,7 @@ function toggleTabContentLoading(loading: boolean) {
             :is="pages[activatedPage]" :key="activatedPage"
             ref="tabPageRef"
             :grid-layout="gridLayout.home"
+            :top-bar-visibility="topBarVisibility"
             @before-loading="toggleTabContentLoading(true)"
             @after-loading="toggleTabContentLoading(false)"
           />
@@ -307,7 +309,7 @@ function toggleTabContentLoading(loading: boolean) {
 
 .home-tabs-inside {
   :deep([data-overlayscrollbars-contents]) {
-    --uno: "flex items-center gap-1 h-inherit rounded-full";
+    --uno: "flex items-center gap-1 h-inherit rounded-$bew-radius-half";
   }
   :deep(.os-scrollbar) {
     --uno: "mb--4px";
