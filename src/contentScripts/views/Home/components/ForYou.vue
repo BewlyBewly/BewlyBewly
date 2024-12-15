@@ -97,11 +97,11 @@ watch(() => settings.value.recommendationMode, () => {
   initData()
 })
 
-onMounted(async () => {
+onMounted(() => {
   // Delay by 0.2 seconds to obtain the `settings.value.recommendationMode` value
   // otherwise the `settings.value.recommendationMode` value will be undefined
   // i have no idea to fix that...
-  setTimeout(async () => {
+  setTimeout(() => {
     initData()
   }, 200)
 

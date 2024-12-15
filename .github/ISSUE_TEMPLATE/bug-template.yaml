@@ -1,46 +1,73 @@
-name: Bug Report
-description: 报告问题
+name: 问题报告
+description: 遇到错误请在此报告。
 labels: [bug]
 
 body:
   - type: markdown
     attributes:
       value: |
-        ## BUG 提出
-        Edge 受遥遥领先的 Edge Addons 审核导致版本更新永远落后于 Chrome，且审核问题不是我们控制的，所以后面已经直接取消上架 Edge Addons
-        Edge 浏览器也可以通过 [Chrome Web Store 下载](https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp)，不要因为 **Edge 浏览器** 在 [Chrome Web Store](https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp) 上弹出大提示而又下回 Edge 版本
+        ## 问题报告
+        报告问题之前请先看“[常見問題](https://github.com/BewlyBewly/BewlyBewly/wiki/%E5%B8%B8%E8%A6%8B%E5%95%8F%E9%A1%8C)”页面。
 
-        不会上架 Safari，DKLM苹果我注册苹果开发者每年送苹果 99 美元连资格也不给，系统和客服一直说系统说你有一个或多个问题导致无法注册也没解决办法，另外 Apple 傻閪弱智on9笨柒豬閪脑回路 Safari 和系统更新绑定，Safari 我屌你老母吔屎啦快撚啲死柒咗佢啦邊撚個會用佢
+        标题不填或直接随便写类似“bug”“错误”“有问题”简单带过的 issue 直接 close + lock 不解释，如果是旧版本的问题或是已经有人提问过的问题将会关闭。
 
-        如果是旧版本的问题或是已经有人提问过的问题将会关闭
+        功能请求不是在问题报告里面写的，请[开启空 issue](https://github.com/BewlyBewly/BewlyBewly/issues/new)。
+
+        ### Edge
+        Edge 受遥遥领先的 Edge Addons 审核导致版本更新永远落后于 Google Chrome，且审核问题不是我们控制的，所以后面已经直接取消上架 Edge Addons。
+
+        [Edge 浏览器也可以通过 Chrome Web Store 下载](https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp)，**不要因为 Edge 浏览器在 Chrome Web Store 上弹出大提示而又下回 Edge 版本**。
+
+        ### Safari
+        不会上架 Safari，DKLM 苹果我注册苹果开发者每年送苹果 99 美元连资格也不给，系统和客服一直说系统说你有一个或多个问题导致无法注册也没解决办法，另外 Apple 傻閪弱智 on9 笨柒豬閪脑回路 Safari 和系统更新绑定，Safari 我屌你老母吔屎啦快撚啲死柒咗佢啦邊撚個會用佢
 
   - type: textarea
     attributes:
-      label: 环境
-      description: 插件版本和浏览器版本
+      label: 环境信息
+      description: 扩展版本、浏览器版本、做出的自定义设置。
       placeholder: |
-        浏览器 (如 Chrome):
-        浏览器版本 (如 126.0.6478.126):
-        BewlyBewly 版本 (如 0.20.1):
+        - 浏览器（如 Google Chrome）：
+        - 浏览器版本（如 126.0.6478.126）：
+        - BewlyBewly 版本（如 0.20.1）：
+
+        如果你修改了 BewlyBewly 的设置，请写在下面：
+
       value: |
-        浏览器 (如 Chrome):
-        浏览器版本 (如 126.0.6478.126):
-        BewlyBewly 版本 (如 0.20.1):
+        - 浏览器（如 Google Chrome）：
+        - 浏览器版本（如 126.0.6478.126）：
+        - BewlyBewly 版本（如 0.20.1）：
+
+        如果你修改了 BewlyBewly 的设置，请写在下面：
+
     validations:
       required: true
 
   - type: textarea
     attributes:
       label: 问题描述
-      description: 如何重现, 最好带有截图或视频以便排查
+      description: 如何重现，最好带有截图或视频以便排查。
       placeholder: |
-        请预先搜索是否有提到的 issue 否则重复的 issue 会被关闭
+        请预先搜索此问题是否在其他 issue 中出现过，重复的 issue 会被 close + lock。
     validations:
       required: true
 
   - type: textarea
     attributes:
-      label: 预期结果
-      description: 预期结果
+      label: 预期行为
+      description: 你认为应该是什么行为。
     validations:
       required: false
+
+  - type: checkboxes
+    attributes:
+      label: 最终确认
+      description: 你必须确认以下所有内容，看都不看直接打勾将被 close + lock。
+      options:
+        - label: 我确认此问题未在其他 issue 中出现过。
+          required: true
+        - label: 我确认我已阅读“[常見問題](https://github.com/BewlyBewly/BewlyBewly/wiki/%E5%B8%B8%E8%A6%8B%E5%95%8F%E9%A1%8C)”页面，其中没有对应我问题的解决方案。
+          required: true
+        - label: 我确认我正在使用最新的 BewlyBewly 版本。
+          required: true
+        - label: 我确认我做出的任何自定义设置（如果有）已经写明。
+          required: true

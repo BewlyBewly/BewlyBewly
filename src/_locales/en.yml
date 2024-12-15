@@ -371,6 +371,7 @@ dock:
   history: History
   favorites: Favorites
   watch_later: Watch later
+  moments: Moments
   dark_mode: Dark Mode
   light_mode: Light Mode
   settings: Settings

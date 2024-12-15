@@ -285,20 +285,21 @@ watch(activatedPage, () => {
   toggleTopBarVisible(true)
 })
 
-onMounted(async () => {
+onMounted(() => {
   initData()
-  await nextTick()
-  toggleTopBarVisible(true)
+  nextTick(() => {
+    toggleTopBarVisible(true)
 
-  emitter.off(OVERLAY_SCROLL_BAR_SCROLL)
-  if (isHomePage() && !settings.value.useOriginalBilibiliHomepage) {
-    emitter.on(OVERLAY_SCROLL_BAR_SCROLL, () => {
-      handleScroll()
-    })
-  }
-  else {
-    window.addEventListener('scroll', handleScroll)
-  }
+    emitter.off(OVERLAY_SCROLL_BAR_SCROLL)
+    if (isHomePage() && !settings.value.useOriginalBilibiliHomepage) {
+      emitter.on(OVERLAY_SCROLL_BAR_SCROLL, () => {
+        handleScroll()
+      })
+    }
+    else {
+      window.addEventListener('scroll', handleScroll)
+    }
+  })
 })
 
 onUnmounted(() => {
@@ -519,8 +520,8 @@ defineExpose({
             <SearchBar
               v-if="showSearchBar"
               style="
-              --b-search-bar-color: var(--bew-elevated);
-              --b-search-bar-hover: var(--bew-elevated-hover);
+              --b-search-bar-normal-color: var(--bew-elevated);
+              --b-search-bar-hover-color: var(--bew-elevated-hover);
             "
             />
           </Transition>

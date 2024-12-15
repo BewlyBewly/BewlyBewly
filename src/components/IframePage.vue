@@ -7,8 +7,10 @@ const headerShow = ref(false)
 const iframeRef = ref<HTMLIFrameElement | null>(null)
 const currentUrl = ref<string>(props.url)
 
-onMounted(async () => {
-
+onMounted(() => {
+  nextTick(() => {
+    iframeRef.value?.focus()
+  })
 })
 
 onBeforeUnmount(() => {
