@@ -1,10 +1,22 @@
 .bewly-design.userSpacePage {
-  .wrapper .edit-video-modal .target-favlist {
-    padding: 12px 36px;
+  // #region new user space page
+
+  // #region resolve https://github.com/BewlyBewly/BewlyBewly/issues/1157
+  .header .header-toutu {
+    z-index: 0;
   }
 
-  .ps {
-    padding: 0;
+  .header .header-upinfo-bg-shadow,
+  .header .header-upinfo {
+    z-index: 1;
+  }
+  // #endregion
+
+  // #endregion
+
+  // #region old user space page
+  .wrapper .edit-video-modal .target-favlist {
+    padding: 12px 36px;
   }
 
   .be-tab-cursor:after,
@@ -774,5 +786,6 @@
       opacity: 0.6;
     }
   }
+  // #endregion
   // #endregion
 }
