@@ -30,7 +30,10 @@ async function setupStyles() {
   }
 
   // history page 历史记录页
-  else if (/https?:\/\/(?:www\.)?bilibili\.com\/account\/history.*/.test(currentUrl)) {
+  else if (
+    /https?:\/\/(?:www\.)?bilibili\.com\/account\/history.*/.test(currentUrl)
+    || /https?:\/\/(?:www\.)?bilibili\.com\/history.*/.test(currentUrl)
+  ) {
     await import('./pages/historyPage.scss')
     document.documentElement.classList.add('historyPage')
   }

@@ -12,6 +12,7 @@ export enum AppPage {
   History = 'History',
   Favorites = 'Favorites',
   WatchLater = 'WatchLater',
+  Moments = 'Moments',
 }
 
 export enum TopBarPopup {

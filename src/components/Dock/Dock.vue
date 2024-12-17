@@ -79,22 +79,38 @@ function computeDockItem(): DockItem[] {
       }))
   }
 
+  if (Array.isArray(settings.value.dockItemsConfig) && settings.value.dockItemsConfig.length < mainStore.dockItems.length) {
+    // Add missing items to dockItemsConfig
+    const missingItems = mainStore.dockItems.filter(dock => !settings.value.dockItemsConfig.some(item => item.page === dock.page))
+    settings.value.dockItemsConfig = [
+      ...settings.value.dockItemsConfig,
+      ...missingItems.map(dock => ({ page: dock.page, visible: true, openInNewTab: false, useOriginalBiliPage: false })),
+    ]
+  }
   // if dockItemVisibilityList not fresh , set it to default
-  if (!settings.value.dockItemsConfig.length || settings.value.dockItemsConfig.length !== mainStore.dockItems.length)
-    settings.value.dockItemsConfig = mainStore.dockItems.map(dock => ({ page: dock.page, visible: true, openInNewTab: false, useOriginalBiliPage: false }))
+  else if (!Array.isArray(settings.value.dockItemsConfig) || settings.value.dockItemsConfig.length !== mainStore.dockItems.length) {
+    settings.value.dockItemsConfig = mainStore.dockItems.map(dock =>
+      ({ page: dock.page, visible: true, openInNewTab: false, useOriginalBiliPage: false }),
+    )
+  }
 
   const targetDockItems: DockItem[] = []
 
   settings.value.dockItemsConfig.forEach((item) => {
     const foundItem = mainStore.dockItems.find(defaultItem => defaultItem.page === item.page)
+    // If the dock item does not have Bewly page, then use the original BiliBili page
+    if (!foundItem?.hasBewlyPage)
+      item.useOriginalBiliPage = true
+
     item.visible && targetDockItems.push({
       i18nKey: foundItem?.i18nKey || '',
       icon: foundItem?.icon || '',
       iconActivated: foundItem?.iconActivated || '',
       page: foundItem?.page || AppPage.Home,
       openInNewTab: item.openInNewTab,
-      useOriginalBiliPage: item.useOriginalBiliPage || false,
+      useOriginalBiliPage: item.useOriginalBiliPage || !foundItem?.hasBewlyPage,
       url: foundItem?.url || '',
+      hasBewlyPage: foundItem?.hasBewlyPage || false,
     })
   })
   return targetDockItems
