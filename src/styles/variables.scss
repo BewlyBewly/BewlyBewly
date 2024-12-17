@@ -39,11 +39,11 @@
 
   // Use this to imitate the frosted glass edge effect in components with a frosted glass design (except dialogs)
   --bew-shadow-edge-glow-1: inset 1px 1px 1px -0.5px rgba(255, 255, 255, 0.2),
-    inset -1px -1px 1px -0.5px rgba(255, 255, 255, 0.12), inset 0 0 4px rgba(255, 255, 255, 0.4);
+    inset -1px -1px 1px -0.5px rgba(255, 255, 255, 0.12), inset 0 0 10px rgba(255, 255, 255, 0.6);
 
   // Use this for dialogs with the frosted glass effect
   --bew-shadow-edge-glow-2: inset 1px 1px 1px -0.5px rgba(255, 255, 255, 0.2),
-    inset -1px -1px 1px -0.5px rgba(255, 255, 255, 0.12), inset 0 0 8px rgba(255, 255, 255, 0.42);
+    inset -1px -1px 1px -0.5px rgba(255, 255, 255, 0.12), inset 0 0 14px rgba(255, 255, 255, 0.62);
 
   // #endregion
 
@@ -52,8 +52,8 @@
 
   --bew-logo-color: var(--bew-theme-color);
 
-  // In light mode use the theme color; in dark mode use white
-  --bew-theme-color-auto: var(--bew-theme-color);
+  // In light mode use the black; in dark mode use white
+  --bew-theme-color-auto: var(--bew-text-1);
 
   --bew-theme-color: hsl(195 100% 42%);
   --bew-theme-color-10: color-mix(in oklab, var(--bew-theme-color), transparent 90%);
@@ -203,14 +203,14 @@
     0 30px 40px -8px rgb(0 0 0 / 0.22);
 
   --bew-shadow-edge-glow-1: inset 1px 1px 1px -0.5px rgba(255, 255, 255, 0.12),
-    inset -1px -1px 1px -0.5px rgba(255, 255, 255, 0.04), inset 0 0 4px rgba(255, 255, 255, 0.06);
+    inset -1px -1px 1px -0.5px rgba(255, 255, 255, 0.04), inset 0 0 10px rgba(255, 255, 255, 0.04);
   --bew-shadow-edge-glow-2: inset 1px 1px 1px -0.5px rgba(255, 255, 255, 0.12),
-    inset -1px -1px 1px -0.5px rgba(255, 255, 255, 0.04), inset 0 0 8px rgba(255, 255, 255, 0.08);
+    inset -1px -1px 1px -0.5px rgba(255, 255, 255, 0.04), inset 0 0 14px rgba(255, 255, 255, 0.06);
   // #endregion
 
   --bew-logo-color: var(--bew-text-1);
 
-  --bew-theme-color-auto: white;
+  --bew-theme-color-auto: var(--bew-text-1);
 
   --bew-text-auto: black;
   --bew-text-1: hsl(215 19% 98%);

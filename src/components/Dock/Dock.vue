@@ -383,9 +383,9 @@ function handleBackToTopOrRefresh() {
 }
 
 .dock-item {
-  --shadow-dark: 0 4px 30px 4px rgba(255, 255, 255, 0.6);
+  --shadow-dark: 0 4px 30px 4px var(--bew-theme-color-60);
   --shadow-active: 0 4px 30px var(--bew-theme-color-70);
-  --shadow-dark-active: 0 4px 20px rgba(255, 255, 255, 0.8);
+  --shadow-dark-active: 0 4px 20px var(--bew-theme-color-80);
   --shadow-active-active: 0 4px 20px var(--bew-theme-color-90);
 
   --uno: "relative transform active:important-scale-90 hover:scale-110";
@@ -418,7 +418,7 @@ function handleBackToTopOrRefresh() {
   }
 
   &.active {
-    --uno: "important-bg-$bew-theme-color-auto text-$bew-text-auto dark:text-$bew-theme-color";
+    --uno: "important-bg-$bew-theme-color-80 text-white";
     --uno: "shadow-$shadow-active dark:shadow-$shadow-dark";
     --uno: "active:shadow-$shadow-active-active dark-active:shadow-$shadow-dark-active";
   }
