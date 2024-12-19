@@ -36,7 +36,7 @@ const displayedAvatars = computed(() => {
       :href="getAuthorJumpUrl(item)" target="_blank"
       rounded="1/2"
       object="center cover" bg="$bew-skeleton" cursor="pointer"
-      position-relative
+      position-absolute top-0 inline-block
       :style="{
         zIndex: displayedAvatars.length - index,
         left: `${index * 6}px`,
