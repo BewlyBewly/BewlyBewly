@@ -218,7 +218,7 @@ function toggleTabContentLoading(loading: boolean) {
               v-for="tab in currentTabs" :key="tab.page"
               :class="{ 'tab-activated': activatedPage === tab.page }"
               px-3 h-inherit
-              bg="transparent hover:$bew-fill-2" text="$bew-text-1" fw-bold rounded-full
+              bg="transparent hover:$bew-fill-2" text="$bew-text-2 hover:$bew-text-1" fw-bold rounded-full
               cursor-pointer duration-300
               flex="~ gap-2 items-center shrink-0" relative
               @click="handleChangeTab(tab)"
@@ -249,7 +249,7 @@ function toggleTabContentLoading(loading: boolean) {
             v-for="icon in gridLayoutIcons" :key="icon.value"
             :class="{ 'grid-layout-item-activated': gridLayout.home === icon.value }"
             flex="~ justify-center items-center"
-            h-full aspect-square text="$bew-text-1"
+            h-full aspect-square text="$bew-text-2 hover:$bew-text-1"
             rounded-full bg="hover:$bew-fill-2" duration-300
             cursor-pointer
             @click="gridLayout.home = icon.value"
