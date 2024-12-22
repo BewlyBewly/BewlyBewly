@@ -232,7 +232,7 @@ function injectApp() {
     }, 500)
   }
 
-  startShadowDOMStyleInjection()
+  // startShadowDOMStyleInjection()
 
   // inject svg icons
   const svgDiv = document.createElement('div')
@@ -246,97 +246,98 @@ function injectApp() {
   app.mount(root)
 }
 
-function startShadowDOMStyleInjection() {
-  if (isHomePage() || !isSupportedPages())
-    return
+// 實際使用實在太卡，註釋了先
+// function startShadowDOMStyleInjection() {
+//   if (isHomePage() || !isSupportedPages())
+//     return
 
-  const styleCache = new WeakSet() // Track which shadow roots have been processed
+//   const styleCache = new WeakSet() // Track which shadow roots have been processed
 
-  function injectStyleToShadowDOM(shadowRoot: ShadowRoot) {
-    if (styleCache.has(shadowRoot))
-      return
+//   function injectStyleToShadowDOM(shadowRoot: ShadowRoot) {
+//     if (styleCache.has(shadowRoot))
+//       return
 
-    const styleEl = document.createElement('style')
-    styleEl.setAttribute('data-bewly-style', 'true')
-    styleEl.textContent = `
-      @import url(${browser.runtime.getURL('dist/contentScripts/style.css')});
-      ${settings.value.adaptToOtherPageStyles
-      ? `
-        * {
-          --bew-theme-color: ${settings.value.themeColor};
-          --bew-theme-color-10: color-mix(in oklab, var(--bew-theme-color), transparent 90%);
-          --bew-theme-color-20: color-mix(in oklab, var(--bew-theme-color), transparent 80%);
-          --bew-theme-color-30: color-mix(in oklab, var(--bew-theme-color), transparent 70%);
-          --bew-theme-color-40: color-mix(in oklab, var(--bew-theme-color), transparent 60%);
-          --bew-theme-color-50: color-mix(in oklab, var(--bew-theme-color), transparent 50%);
-          --bew-theme-color-60: color-mix(in oklab, var(--bew-theme-color), transparent 40%);
-          --bew-theme-color-70: color-mix(in oklab, var(--bew-theme-color), transparent 30%);
-          --bew-theme-color-80: color-mix(in oklab, var(--bew-theme-color), transparent 20%);
-          --bew-theme-color-90: color-mix(in oklab, var(--bew-theme-color), transparent 10%);
-        }
-      `
-      : ''}
-    `
-    shadowRoot.appendChild(styleEl)
-    styleCache.add(shadowRoot)
-  }
+//     const styleEl = document.createElement('style')
+//     styleEl.setAttribute('data-bewly-style', 'true')
+//     styleEl.textContent = `
+//       @import url(${browser.runtime.getURL('dist/contentScripts/style.css')});
+//       ${settings.value.adaptToOtherPageStyles
+//       ? `
+//         * {
+//           --bew-theme-color: ${settings.value.themeColor};
+//           --bew-theme-color-10: color-mix(in oklab, var(--bew-theme-color), transparent 90%);
+//           --bew-theme-color-20: color-mix(in oklab, var(--bew-theme-color), transparent 80%);
+//           --bew-theme-color-30: color-mix(in oklab, var(--bew-theme-color), transparent 70%);
+//           --bew-theme-color-40: color-mix(in oklab, var(--bew-theme-color), transparent 60%);
+//           --bew-theme-color-50: color-mix(in oklab, var(--bew-theme-color), transparent 50%);
+//           --bew-theme-color-60: color-mix(in oklab, var(--bew-theme-color), transparent 40%);
+//           --bew-theme-color-70: color-mix(in oklab, var(--bew-theme-color), transparent 30%);
+//           --bew-theme-color-80: color-mix(in oklab, var(--bew-theme-color), transparent 20%);
+//           --bew-theme-color-90: color-mix(in oklab, var(--bew-theme-color), transparent 10%);
+//         }
+//       `
+//       : ''}
+//     `
+//     shadowRoot.appendChild(styleEl)
+//     styleCache.add(shadowRoot)
+//   }
 
-  function processShadowDOM(node: HTMLElement) {
-    if (node.shadowRoot) {
-      injectStyleToShadowDOM(node.shadowRoot)
-      observeShadowRoot(node.shadowRoot)
-    }
+//   function processShadowDOM(node: HTMLElement) {
+//     if (node.shadowRoot) {
+//       injectStyleToShadowDOM(node.shadowRoot)
+//       observeShadowRoot(node.shadowRoot)
+//     }
 
-    // Process child elements with shadow roots
-    node.querySelectorAll('*').forEach((el) => {
-      if (el instanceof HTMLElement && el.shadowRoot) {
-        injectStyleToShadowDOM(el.shadowRoot)
-        observeShadowRoot(el.shadowRoot)
-      }
-    })
-  }
+//     // Process child elements with shadow roots
+//     node.querySelectorAll('*').forEach((el) => {
+//       if (el instanceof HTMLElement && el.shadowRoot) {
+//         injectStyleToShadowDOM(el.shadowRoot)
+//         observeShadowRoot(el.shadowRoot)
+//       }
+//     })
+//   }
 
-  function observeShadowRoot(shadowRoot: ShadowRoot) {
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.type === 'childList') {
-          mutation.addedNodes.forEach((node) => {
-            if (node instanceof HTMLElement)
-              processShadowDOM(node)
-          })
-        }
-      })
-    })
+//   function observeShadowRoot(shadowRoot: ShadowRoot) {
+//     const observer = new MutationObserver((mutations) => {
+//       mutations.forEach((mutation) => {
+//         if (mutation.type === 'childList') {
+//           mutation.addedNodes.forEach((node) => {
+//             if (node instanceof HTMLElement)
+//               processShadowDOM(node)
+//           })
+//         }
+//       })
+//     })
 
-    observer.observe(shadowRoot, {
-      childList: true,
-      subtree: true,
-    })
-  }
+//     observer.observe(shadowRoot, {
+//       childList: true,
+//       subtree: true,
+//     })
+//   }
 
-  // Initial setup
-  const rootObserver = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      if (mutation.type === 'childList') {
-        mutation.addedNodes.forEach((node) => {
-          if (node instanceof HTMLElement)
-            processShadowDOM(node)
-        })
-      }
-    })
-  })
+//   // Initial setup
+//   const rootObserver = new MutationObserver((mutations) => {
+//     mutations.forEach((mutation) => {
+//       if (mutation.type === 'childList') {
+//         mutation.addedNodes.forEach((node) => {
+//           if (node instanceof HTMLElement)
+//             processShadowDOM(node)
+//         })
+//       }
+//     })
+//   })
 
-  // Start observing document body
-  rootObserver.observe(document.body, {
-    childList: true,
-    subtree: true,
-  })
+//   // Start observing document body
+//   rootObserver.observe(document.body, {
+//     childList: true,
+//     subtree: true,
+//   })
 
-  // Process existing shadow DOMs
-  document.querySelectorAll('*').forEach((el) => {
-    if (el instanceof HTMLElement && el.shadowRoot) {
-      injectStyleToShadowDOM(el.shadowRoot)
-      observeShadowRoot(el.shadowRoot)
-    }
-  })
-}
+//   // Process existing shadow DOMs
+//   document.querySelectorAll('*').forEach((el) => {
+//     if (el instanceof HTMLElement && el.shadowRoot) {
+//       injectStyleToShadowDOM(el.shadowRoot)
+//       observeShadowRoot(el.shadowRoot)
+//     }
+//   })
+// }
