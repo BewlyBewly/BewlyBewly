@@ -124,10 +124,16 @@ async function setupStyles() {
     document.documentElement.classList.add('creativeCenterPage')
   }
 
-  // account settings page 帳戶設定頁
-  else if (/^https?:\/\/account\.bilibili\.com\/.*$/.test(currentUrl)) {
+  // account settings page 帳戶設定頁，除了大會員頁
+  else if (/^https?:\/\/account\.bilibili\.com\/(?!big).*$/.test(currentUrl)) {
     await import('./pages/accountSettingsPage.scss')
     document.documentElement.classList.add('accountSettingsPage')
+  }
+
+  // premium page bilibili 大會員頁
+  else if (/^https?:\/\/account\.bilibili\.com\/big.*$/.test(currentUrl)) {
+    await import('./pages/premiumPage.scss')
+    document.documentElement.classList.add('premiumPage')
   }
 
   // login page 登入頁

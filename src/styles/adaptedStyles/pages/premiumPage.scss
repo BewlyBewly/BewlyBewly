@@ -1,0 +1,31 @@
+.premiumPage {
+  #biliMainHeader {
+    height: unset;
+  }
+
+  &.bewly-design {
+    --brand_pink: var(--Pi5);
+
+    .home-banner-wrapper .banner-hover-group {
+      background: linear-gradient(
+        180deg,
+        rgba(var(--bg1_rgb), 0),
+        rgba(var(--bg1_rgb), 0.07) 11.79%,
+        rgba(var(--bg1_rgb), 0.08) 21.38%,
+        rgba(var(--bg1_rgb), 0.0704) 29.12%,
+        rgba(var(--bg1_rgb), 0.120652) 35.34%,
+        rgba(var(--bg1_rgb), 0.181481) 40.37%,
+        rgba(var(--bg1_rgb), 0.2512) 44.56%,
+        rgba(var(--bg1_rgb), 0.328119) 48.24%,
+        rgba(var(--bg1_rgb), 0.410548) 51.76%,
+        rgba(var(--bg1_rgb), 0.4968) 55.44%,
+        rgba(var(--bg1_rgb), 0.585185) 59.63%,
+        rgba(var(--bg1_rgb), 0.674015) 64.66%,
+        rgba(var(--bg1_rgb), 0.7616) 70.88%,
+        rgba(var(--bg1_rgb), 0.846252) 78.62%,
+        rgba(var(--bg1_rgb), 0.926281) 88.21%,
+        var(--bg1)
+      );
+    }
+  }
+}

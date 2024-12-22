@@ -74,6 +74,8 @@ const forceWhiteIcon = computed((): boolean => {
     || /https?:\/\/(?:www.)?bilibili.com\/(?:watchlater|account\/history).*/.test(location.href)
     // user space page 空間頁
     || /https?:\/\/space.bilibili\.com\.*/.test(location.href)
+    // premium page bilibili 大會員頁
+    || /https?:\/\/account\.bilibili\.com\/big.*$/.test(location.href)
   ) {
     return true
   }
@@ -133,6 +135,8 @@ const isTopBarFixed = computed((): boolean => {
     || /https?:\/\/(?:www.)?bilibili.com\/(?:v|anime|guochuang|tv|movie|variety|mooc).*/.test(location.href)
     // articles page
     || /https?:\/\/(?:www.)?bilibili.com\/read\/home.*/.test(location.href)
+    // premium page bilibili 大會員頁
+    || /https?:\/\/account\.bilibili\.com\/big.*$/.test(location.href)
   ) {
     return true
   }
