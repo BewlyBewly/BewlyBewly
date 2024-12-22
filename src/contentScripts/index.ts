@@ -232,7 +232,7 @@ function injectApp() {
     }, 500)
   }
 
-  // startShadowDOMStyleInjection()
+  startShadowDOMStyleInjection()
 
   // inject svg icons
   const svgDiv = document.createElement('div')
@@ -246,78 +246,88 @@ function injectApp() {
   app.mount(root)
 }
 
-// function startShadowDOMStyleInjection() {
-//   if (isHomePage())
-//     return
-//   if (!isSupportedPages())
-//     return
+function startShadowDOMStyleInjection() {
+  if (isHomePage() || !isSupportedPages())
+    return
 
-//   // Create a MutationObserver to watch for Shadow DOM additions
-//   const observer = new MutationObserver((mutations) => {
-//     mutations.forEach((mutation) => {
-//       if (mutation.type === 'childList') {
-//         mutation.addedNodes.forEach((node) => {
-//           if (node instanceof HTMLElement && node.shadowRoot) {
-//             injectStyleToShadowDOM(node.shadowRoot)
-//             // Observe nested Shadow DOMs recursively
-//             observeShadowDOMRecursively(node.shadowRoot)
-//           }
-//         })
-//       }
-//     })
-//   })
+  const styleCache = new WeakSet() // Track which shadow roots have been processed
 
-//   // Observe the entire document for new Shadow DOMs
-//   observer.observe(document.body, {
-//     childList: true,
-//     subtree: true,
-//   })
+  function injectStyleToShadowDOM(shadowRoot: ShadowRoot) {
+    if (styleCache.has(shadowRoot))
+      return
 
-//   // Inject styles into existing Shadow DOMs on initial load
-//   injectStylesRecursively(document)
+    const styleEl = document.createElement('style')
+    styleEl.setAttribute('data-bewly-style', 'true')
+    styleEl.textContent = `
+      @import url(${browser.runtime.getURL('dist/contentScripts/style.css')});
+      ${settings.value.adaptToOtherPageStyles
+      ? `
+        * {
+          --bew-theme-color: ${settings.value.themeColor};
+        }
+      `
+      : ''}
+    `
+    shadowRoot.appendChild(styleEl)
+    styleCache.add(shadowRoot)
+  }
 
-//   function observeShadowDOMRecursively(shadowRoot: ShadowRoot) {
-//     observer.observe(shadowRoot, {
-//       childList: true,
-//       subtree: true,
-//     })
+  function processShadowDOM(node: HTMLElement) {
+    if (node.shadowRoot) {
+      injectStyleToShadowDOM(node.shadowRoot)
+      observeShadowRoot(node.shadowRoot)
+    }
 
-//     // Recursively observe nested Shadow DOMs within this Shadow DOM
-//     shadowRoot.querySelectorAll('*').forEach((el) => {
-//       if (el.shadowRoot) {
-//         observeShadowDOMRecursively(el.shadowRoot)
-//       }
-//     })
-//   }
+    // Process child elements with shadow roots
+    node.querySelectorAll('*').forEach((el) => {
+      if (el instanceof HTMLElement && el.shadowRoot) {
+        injectStyleToShadowDOM(el.shadowRoot)
+        observeShadowRoot(el.shadowRoot)
+      }
+    })
+  }
 
-//   function injectStylesRecursively(root: Document | ShadowRoot) {
-//     if (root instanceof ShadowRoot) {
-//       injectStyleToShadowDOM(root)
-//     }
+  function observeShadowRoot(shadowRoot: ShadowRoot) {
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'childList') {
+          mutation.addedNodes.forEach((node) => {
+            if (node instanceof HTMLElement)
+              processShadowDOM(node)
+          })
+        }
+      })
+    })
 
-//     root.querySelectorAll('*').forEach((element) => {
-//       if (element.shadowRoot) {
-//         injectStylesRecursively(element.shadowRoot)
-//       }
-//     })
-//   }
+    observer.observe(shadowRoot, {
+      childList: true,
+      subtree: true,
+    })
+  }
 
-//   function injectStyleToShadowDOM(shadowRoot: ShadowRoot) {
-//     if (!shadowRoot.querySelector('style[data-bewly-style]')) {
-//       const styleEl = document.createElement('style')
-//       styleEl.setAttribute('data-bewly-style', 'true')
-//       styleEl.textContent = `
-//       @import url(${browser.runtime.getURL('dist/contentScripts/style.css')});
-//       `
-//       if (settings.value.adaptToOtherPageStyles) {
-//         // Reset the theme color to ensure the theme color is updated
-//         styleEl.textContent += `
-//           * {
-//             --bew-theme-color: ${settings.value.themeColor};
-//           }
-//         `
-//       }
-//       shadowRoot.appendChild(styleEl)
-//     }
-//   }
-// }
+  // Initial setup
+  const rootObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.type === 'childList') {
+        mutation.addedNodes.forEach((node) => {
+          if (node instanceof HTMLElement)
+            processShadowDOM(node)
+        })
+      }
+    })
+  })
+
+  // Start observing document body
+  rootObserver.observe(document.body, {
+    childList: true,
+    subtree: true,
+  })
+
+  // Process existing shadow DOMs
+  document.querySelectorAll('*').forEach((el) => {
+    if (el instanceof HTMLElement && el.shadowRoot) {
+      injectStyleToShadowDOM(el.shadowRoot)
+      observeShadowRoot(el.shadowRoot)
+    }
+  })
+}
