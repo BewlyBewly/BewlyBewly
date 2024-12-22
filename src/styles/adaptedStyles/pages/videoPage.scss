@@ -65,7 +65,8 @@
 
     .note-list .list-note-operation,
     .note-pc .note-container .note-header .note-operation,
-    .note-up .up-desc-container .desc-top .attention-btn-container:not(.is-attention) {
+    .note-up .up-desc-container .desc-top .attention-btn-container:not(.is-attention),
+    .up-detail .up-detail-top .live-status:hover {
       background-color: var(--bew-theme-color);
     }
 

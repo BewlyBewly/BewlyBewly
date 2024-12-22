@@ -264,6 +264,15 @@ function startShadowDOMStyleInjection() {
       ? `
         * {
           --bew-theme-color: ${settings.value.themeColor};
+          --bew-theme-color-10: color-mix(in oklab, var(--bew-theme-color), transparent 90%);
+          --bew-theme-color-20: color-mix(in oklab, var(--bew-theme-color), transparent 80%);
+          --bew-theme-color-30: color-mix(in oklab, var(--bew-theme-color), transparent 70%);
+          --bew-theme-color-40: color-mix(in oklab, var(--bew-theme-color), transparent 60%);
+          --bew-theme-color-50: color-mix(in oklab, var(--bew-theme-color), transparent 50%);
+          --bew-theme-color-60: color-mix(in oklab, var(--bew-theme-color), transparent 40%);
+          --bew-theme-color-70: color-mix(in oklab, var(--bew-theme-color), transparent 30%);
+          --bew-theme-color-80: color-mix(in oklab, var(--bew-theme-color), transparent 20%);
+          --bew-theme-color-90: color-mix(in oklab, var(--bew-theme-color), transparent 10%);
         }
       `
       : ''}
