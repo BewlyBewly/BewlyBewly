@@ -177,6 +177,21 @@ export function setupNecessarySettingsWatchers() {
       document.documentElement.classList.remove('block-useless-contents')
   }, { immediate: true })
 
+  /**
+   * 搜尋結果的上方的廣告，但有時是年末總結、年度報告這些
+   */
+  const blockTopSearchPageAdsStyleEl = injectCSS(`
+    .activity-game-list {
+      display: none !important;
+    }
+  `)
+  watch(() => settings.value.blockTopSearchPageAds, () => {
+    if (settings.value.blockTopSearchPageAds)
+      document.documentElement.appendChild(blockTopSearchPageAdsStyleEl)
+    else
+      document.documentElement.removeChild(blockTopSearchPageAdsStyleEl)
+  }, { immediate: true })
+
   watch(
     () => settings.value.themeColor,
     () => {

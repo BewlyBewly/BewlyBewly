@@ -28,6 +28,7 @@ export interface Settings {
   closeDrawerWithoutPressingEscAgain: boolean
 
   blockAds: boolean
+  blockTopSearchPageAds: boolean
 
   enableVideoCtrlBarOnVideoCard: boolean
   hoverVideoCardDelayed: boolean
@@ -119,6 +120,7 @@ export const originalSettings: Settings = {
   closeDrawerWithoutPressingEscAgain: false,
 
   blockAds: false,
+  blockTopSearchPageAds: false,
 
   enableVideoPreview: true,
   enableVideoCtrlBarOnVideoCard: false,

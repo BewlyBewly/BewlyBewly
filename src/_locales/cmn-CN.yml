@@ -136,6 +136,10 @@ settings:
   close_drawer_without_pressing_esc_again: 关闭抽屉时不用再次按 <kbd>Esc</kbd> 关闭
 
   block_ads: 屏蔽广告
+  block_top_search_page_ads: 屏蔽 Bilibili 搜索页上方的广告
+  block_top_search_page_ads_desc: >
+    有时候，搜索结果上方的广告实际上是年末总结或年度报告。
+    如果你不想这些内容被误删除，请禁用此选项。
 
   enable_video_preview: 启用视频预览功能（如果可以的话）
   enable_video_ctrl_bar_on_video_card: 在视频卡片上显示视频控制栏

@@ -135,6 +135,9 @@ settings:
   close_drawer_without_pressing_esc_again: 閂櫃桶嗰陣唔使再撳多次 <kbd>Esc</kbd>
 
   block_ads: 封鎖廣告
+  block_top_search_page_ads: 封鎖 Bilibili 搵嘢頁上方的廣告
+  block_top_search_page_ads_desc: >
+    有時喺搵嘢結果上高嘅廣告，其實係年結報告抑或週年報告嚟㗎。若然你唔想佢哋唔覺意俾人刪咗，就請你閂咗呢個選項啦。
 
   enable_video_preview: 使用影片預覽功能（若然得嘅話）
   enable_video_ctrl_bar_on_video_card: 喺影片卡片上顯示影片控制欄

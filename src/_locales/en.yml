@@ -136,6 +136,10 @@ settings:
   close_drawer_without_pressing_esc_again: Close the drawer without pressing <kbd>Esc</kbd> again
 
   block_ads: Block ads
+  block_top_search_page_ads: Block Bilibili top search page ads
+  block_top_search_page_ads_desc: >
+    Sometimes, the ads above search results are actually year-end summaries or annual reports.
+    If you don't want these to be accidentally removed, please disable this option.
 
   enable_video_preview: Enable video preview feature (if possible)
   enable_video_ctrl_bar_on_video_card: Display the video control bar on the video card
