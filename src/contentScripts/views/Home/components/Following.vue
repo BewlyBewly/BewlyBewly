@@ -4,6 +4,7 @@ import type { Ref } from 'vue'
 import type { Author } from '~/components/VideoCard/types'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import type { GridLayoutType } from '~/logic'
+import type { FollowingLiveResult, List as FollowingLiveItem } from '~/models/live/getFollowingLiveList'
 import type { DataItem as MomentItem, MomentResult } from '~/models/moment/moment'
 import api from '~/utils/api'
 
@@ -13,6 +14,11 @@ interface VideoElement {
   bvid?: string // 用于标识UP主联合投稿视频
   item?: MomentItem
   authorList?: Author[]
+}
+
+interface LiveVideoElement {
+  uniqueId: string
+  item?: FollowingLiveItem
 }
 
 const props = defineProps<{
@@ -33,6 +39,7 @@ const gridValue = computed((): string => {
 })
 
 const videoList = ref<VideoElement[]>([])
+const liveVideoList = ref<LiveVideoElement[]>([])
 const isLoading = ref<boolean>(false)
 const needToLoginFirst = ref<boolean>(false)
 const containerRef = ref<HTMLElement>() as Ref<HTMLElement>
@@ -42,6 +49,7 @@ const noMoreContent = ref<boolean>(false)
 const { handleReachBottom, handlePageRefresh, haveScrollbar } = useBewlyApp()
 
 onMounted(() => {
+  getLiveVideoList()
   initData()
   initPageAction()
 })
@@ -87,6 +95,60 @@ async function getData() {
   finally {
     isLoading.value = false
     emit('afterLoading')
+  }
+}
+
+/**
+ * Get all livestreaming videos of followed users
+ */
+const livePage = ref<number>(1)
+async function getLiveVideoList() {
+  let lastLiveVideoListLength = liveVideoList.value.length
+  try {
+    const response: FollowingLiveResult = await api.live.getFollowingLiveList({
+      page: livePage.value,
+      page_size: 9,
+    })
+
+    if (response.code === -101) {
+      noMoreContent.value = true
+      needToLoginFirst.value = true
+      return
+    }
+
+    if (response.code === 0) {
+      if (response.data.list.length < 9)
+        noMoreContent.value = true
+
+      livePage.value++
+
+      const resData = [] as FollowingLiveItem[]
+
+      response.data.list.forEach((item: FollowingLiveItem) => {
+        // 只保留正在直播的
+        if (item.live_status === 1)
+          resData.push(item)
+      })
+
+      // when videoList has length property, it means it is the first time to load
+      if (!liveVideoList.value.length) {
+        liveVideoList.value = resData.map(item => ({ uniqueId: `${item.roomid}`, item }))
+      }
+      else {
+        resData.forEach((item) => {
+          liveVideoList.value[lastLiveVideoListLength++] = {
+            uniqueId: `${item.roomid}`,
+            item,
+          }
+        })
+      }
+    }
+  }
+  finally {
+    // 當直播列表結果大於9時（9是返回的列表數量）且如果最后一支影片還是正在直播，則繼續獲取
+    if (liveVideoList.value.length > 9 && liveVideoList.value[liveVideoList.value.length - 1]?.item?.live_status === 1) {
+      getFollowedUsersVideos()
+    }
   }
 }
 
@@ -217,6 +279,29 @@ defineExpose({ initData })
       m="b-0 t-0" relative w-full h-full
       :grid="gridValue"
     >
+      <VideoCard
+        v-for="video in liveVideoList"
+        :key="video.uniqueId"
+        :skeleton="!video.item"
+        :video="video.item ? {
+          // id: Number(video.item.modules.module_dynamic.major.archive?.aid),
+          title: `${video.item.title}`,
+          cover: `${video.item.room_cover}`,
+          author: {
+            name: video.item.uname,
+            authorFace: video.item.face,
+            mid: video.item.uid,
+          },
+          viewStr: video.item.text_small,
+          tag: video.item.area_name_v2,
+          roomid: video.item.roomid,
+          liveStatus: video.item.live_status,
+        } : undefined"
+        type="live"
+        :show-watcher-later="false"
+        :horizontal="gridLayout !== 'adaptive'"
+      />
+
       <VideoCard
         v-for="video in videoList"
         :key="video.uniqueId"
