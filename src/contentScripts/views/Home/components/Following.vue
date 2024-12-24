@@ -49,13 +49,8 @@ const updateBaseline = ref<string>('')
 const noMoreContent = ref<boolean>(false)
 const { handleReachBottom, handlePageRefresh, haveScrollbar } = useBewlyApp()
 
-watch(() => settings.value.followingTabShowLivestreamingVideos, (newValue) => {
-  if (newValue) {
-    getLiveVideoList()
-  }
-}, { immediate: true })
-
 onMounted(() => {
+  getLiveVideoList()
   initData()
   initPageAction()
 })
