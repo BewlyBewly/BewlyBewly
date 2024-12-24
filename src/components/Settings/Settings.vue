@@ -120,7 +120,7 @@ function setCurrentTitle() {
     >
       <aside
         :class="{ group: !settings.touchScreenOptimization }"
-        shrink-0 p="x-4" pos="absolute left--84px" z-2
+        shrink-0 p="x-4" pos="absolute xl:left--84px left--44px" z-2
       >
         <ul
           style="
