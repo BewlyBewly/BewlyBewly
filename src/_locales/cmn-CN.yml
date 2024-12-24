@@ -80,10 +80,11 @@ settings:
   group_wallpaper: 背景图片
   group_logo: LOGO
   group_search_bar: 搜索栏
-  group_recommendation_mode: 推荐模式
-  group_recommendation_filters: 推荐过滤
+  group_recommendation_mode: “个性推荐” 推荐模式
+  group_recommendation_filters: “个性推荐” 过滤
   group_recommendation_filters_desc: |
     请勿将限制值设置得太大，不然可能会增加加载时间！
+  group_following: 正在关注
   group_search_page_mode: 搜索页模式
   group_home_tabs: 首页标签栏
 
@@ -241,6 +242,8 @@ settings:
     双击列以编辑当前列。
   filter_by_user_table:
     username_or_mid: 用户名 / MID
+
+  following_tab_show_livestreaming_videos: 在 “正在关注” 中显示直播视频
 
   use_search_page_mode: 首页使用搜索页模式
   settings_shared_with_the_search_page: 与搜索页共用的配置

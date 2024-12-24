@@ -80,10 +80,11 @@ settings:
   group_wallpaper: Wallpaper
   group_logo: LOGO
   group_search_bar: Search Bar
-  group_recommendation_mode: Recommendation Mode
-  group_recommendation_filters: Recommendation Filters
+  group_recommendation_mode: \"For you\" Recommendation Mode
+  group_recommendation_filters: \"For you\" Recommendation Filters
   group_recommendation_filters_desc: |
     Do not set the restricted value too large, as this may increase loading time!
+  group_following: Following
   group_search_page_mode: Search Page Mode
   group_home_tabs: Home Tabs
 
@@ -244,6 +245,8 @@ settings:
     Double-click the column to edit the current column.
   filter_by_user_table:
     username_or_mid: Username / MID
+
+  following_tab_show_livestreaming_videos: Show Live-streaming videos in the "Following" tab
 
   use_search_page_mode: Use search page mode on homepage
   settings_shared_with_the_search_page: Settings shared with the search page

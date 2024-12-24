@@ -370,6 +370,12 @@ function handleToggleHomeTab(tab: any) {
       </div>
     </SettingsItemGroup>
 
+    <SettingsItemGroup :title="$t('settings.group_following')">
+      <SettingsItem :title="$t('settings.following_tab_show_livestreaming_videos')">
+        <Radio v-model="settings.followingTabShowLivestreamingVideos" />
+      </SettingsItem>
+    </SettingsItemGroup>
+
     <SettingsItemGroup
       :title="$t('settings.group_home_tabs')"
     >

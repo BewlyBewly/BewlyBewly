@@ -80,10 +80,11 @@ settings:
   group_wallpaper: 背景圖片
   group_logo: LOGO
   group_search_bar: 搜尋欄
-  group_recommendation_mode: 推介模式
-  group_recommendation_filters: 推介篩選
+  group_recommendation_mode: 「估你心水」推介模式
+  group_recommendation_filters: 「估你心水」過濾
   group_recommendation_filters_desc: |
     限制嘅數值唔好設太大，唔係嘅話會影響載入時間！
+  group_following: 跟緊啲人
   group_search_page_mode: 搵嘢頁模式
   group_home_tabs: 主頁分頁欄
 
@@ -240,6 +241,8 @@ settings:
     撳兩吓欄位就可以改返入邊嘅嘢。
   filter_by_user_table:
     username_or_mid: 用戶名 / MID
+
+  following_tab_show_livestreaming_videos: 喺「跟緊啲人」入邊顯示實況直播
 
   use_search_page_mode: 主頁使用搵嘢頁模式
   settings_shared_with_the_search_page: 同搵嘢頁共用嘅設定

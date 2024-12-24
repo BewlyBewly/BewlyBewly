@@ -80,11 +80,12 @@ settings:
   group_wallpaper: 背景圖片
   group_logo: LOGO
   group_search_bar: 搜尋欄
-  group_recommendation_mode: 推薦模式
-  group_search_page_mode: 搜尋頁模式
-  group_recommendation_filters: 推薦過濾
+  group_recommendation_mode: 「為你推薦」推薦模式
+  group_recommendation_filters: 「為你推薦」過濾
   group_recommendation_filters_desc: |
     限制的數值不要設太大，不然載入時間可能會增加！
+  group_following: 正在跟隨
+  group_search_page_mode: 搜尋頁模式
   group_home_tabs: 首頁標籤欄
 
   # Settings buttons
@@ -242,6 +243,8 @@ settings:
     按兩下欄位以編輯目前欄位。
   filter_by_user_table:
     username_or_mid: 使用者名稱 / MID
+
+  following_tab_show_livestreaming_videos: 在「正在跟隨」中顯示實況直播
 
   use_search_page_mode: 首頁使用搜尋頁模式
   settings_shared_with_the_search_page: 與搜尋頁共用的設定

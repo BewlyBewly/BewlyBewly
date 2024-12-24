@@ -4,6 +4,7 @@ import type { Ref } from 'vue'
 import type { Author } from '~/components/VideoCard/types'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import type { GridLayoutType } from '~/logic'
+import { settings } from '~/logic'
 import type { FollowingLiveResult, List as FollowingLiveItem } from '~/models/live/getFollowingLiveList'
 import type { DataItem as MomentItem, MomentResult } from '~/models/moment/moment'
 import api from '~/utils/api'
@@ -48,8 +49,13 @@ const updateBaseline = ref<string>('')
 const noMoreContent = ref<boolean>(false)
 const { handleReachBottom, handlePageRefresh, haveScrollbar } = useBewlyApp()
 
+watch(() => settings.value.followingTabShowLivestreamingVideos, (newValue) => {
+  if (newValue) {
+    getLiveVideoList()
+  }
+}, { immediate: true })
+
 onMounted(() => {
-  getLiveVideoList()
   initData()
   initPageAction()
 })
@@ -279,28 +285,30 @@ defineExpose({ initData })
       m="b-0 t-0" relative w-full h-full
       :grid="gridValue"
     >
-      <VideoCard
-        v-for="video in liveVideoList"
-        :key="video.uniqueId"
-        :skeleton="!video.item"
-        :video="video.item ? {
-          // id: Number(video.item.modules.module_dynamic.major.archive?.aid),
-          title: `${video.item.title}`,
-          cover: `${video.item.room_cover}`,
-          author: {
-            name: video.item.uname,
-            authorFace: video.item.face,
-            mid: video.item.uid,
-          },
-          viewStr: video.item.text_small,
-          tag: video.item.area_name_v2,
-          roomid: video.item.roomid,
-          liveStatus: video.item.live_status,
-        } : undefined"
-        type="live"
-        :show-watcher-later="false"
-        :horizontal="gridLayout !== 'adaptive'"
-      />
+      <template v-if="settings.followingTabShowLivestreamingVideos">
+        <VideoCard
+          v-for="video in liveVideoList"
+          :key="video.uniqueId"
+          :skeleton="!video.item"
+          :video="video.item ? {
+            // id: Number(video.item.modules.module_dynamic.major.archive?.aid),
+            title: `${video.item.title}`,
+            cover: `${video.item.room_cover}`,
+            author: {
+              name: video.item.uname,
+              authorFace: video.item.face,
+              mid: video.item.uid,
+            },
+            viewStr: video.item.text_small,
+            tag: video.item.area_name_v2,
+            roomid: video.item.roomid,
+            liveStatus: video.item.live_status,
+          } : undefined"
+          type="live"
+          :show-watcher-later="false"
+          :horizontal="gridLayout !== 'adaptive'"
+        />
+      </template>
 
       <VideoCard
         v-for="video in videoList"
