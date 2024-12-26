@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
+import { useWindowSize } from '@vueuse/core'
+import { computed, onMounted, ref } from 'vue'
 
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { useDark } from '~/composables/useDark'
@@ -134,6 +136,39 @@ function handleBackToTopOrRefresh() {
   else
     emit('backToTop')
 }
+
+const dockContentRef = ref<HTMLElement>()
+const { height: windowHeight } = useWindowSize()
+
+const dockScale = computed((): number => {
+  if (!dockContentRef.value)
+    return 1
+
+  const dockHeight = dockContentRef.value.scrollHeight
+  const maxAllowedHeight = windowHeight.value - 100
+
+  if (dockHeight > maxAllowedHeight) {
+    return maxAllowedHeight / dockHeight
+  }
+
+  return 1
+})
+
+const dockTransformStyle = computed((): { transform: string, transformOrigin: string } => {
+  const position = settings.value.dockPosition
+  const scale = dockScale.value
+
+  const origin = {
+    left: 'left center',
+    right: 'right center',
+    bottom: 'bottom center',
+  }[position] || 'center center'
+
+  return {
+    transform: `scale(${scale})`,
+    transformOrigin: origin,
+  }
+})
 </script>
 
 <template>
@@ -153,6 +188,7 @@ function handleBackToTopOrRefresh() {
 
     <!-- Dock Content -->
     <div
+      ref="dockContentRef"
       class="dock-content"
       :class="{
         left: settings.dockPosition === 'left',
@@ -160,6 +196,7 @@ function handleBackToTopOrRefresh() {
         bottom: settings.dockPosition === 'bottom',
         hide: hideDock,
       }"
+      :style="dockTransformStyle"
       @mouseenter="toggleHideDock(false)"
       @mouseleave="toggleHideDock(true)"
     >
