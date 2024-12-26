@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
-import { useWindowSize } from '@vueuse/core'
-import { computed, onMounted, ref } from 'vue'
+import { useElementSize, useWindowSize } from '@vueuse/core'
+import { computed, ref } from 'vue'
 
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { useDark } from '~/composables/useDark'
@@ -138,30 +138,38 @@ function handleBackToTopOrRefresh() {
 }
 
 const dockContentRef = ref<HTMLElement>()
-const { height: windowHeight } = useWindowSize()
+const { width: windowWidth, height: windowHeight } = useWindowSize()
+const { width: dockWidth, height: dockHeight } = useElementSize(dockContentRef)
 
 const dockScale = computed((): number => {
-  if (!dockContentRef.value)
+  if (!dockHeight.value || !dockWidth.value)
     return 1
 
-  const dockHeight = dockContentRef.value.scrollHeight
   const maxAllowedHeight = windowHeight.value - 100
+  const maxAllowedWidth = windowWidth.value - 100
 
-  if (dockHeight > maxAllowedHeight) {
-    return maxAllowedHeight / dockHeight
-  }
+  // Calculate scale factors for both dimensions
+  const heightScale = dockHeight.value > maxAllowedHeight
+    ? maxAllowedHeight / dockHeight.value
+    : 1
 
-  return 1
+  const widthScale = dockWidth.value > maxAllowedWidth
+    ? maxAllowedWidth / dockWidth.value
+    : 1
+
+  // Use the smaller scale to ensure dock fits in both dimensions
+  return Math.min(heightScale, widthScale)
 })
 
 const dockTransformStyle = computed((): { transform: string, transformOrigin: string } => {
   const position = settings.value.dockPosition
   const scale = dockScale.value
 
+  // Adjust origin based on dock position
   const origin = {
     left: 'left center',
     right: 'right center',
-    bottom: 'bottom center',
+    bottom: 'center bottom',
   }[position] || 'center center'
 
   return {
