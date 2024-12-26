@@ -312,18 +312,18 @@ function jumpToLoginPage() {
     <aside relative w="full md:40% lg:30% xl:25%" order="1 md:2 lg:2">
       <div
         pos="sticky top-120px"
-        w-full h="auto md:[calc(100vh-160px)]"
+        w-full h="230px md:[calc(100vh-160px)]"
         my-10
         rounded="$bew-radius"
         overflow-hidden
       >
         <!-- Frosted Glass Cover -->
         <div
-          pos="absolute top-0 left-0" w-full h-full
+          pos="absolute top-0 left-0" w-full h-inherit
           z--1
         >
           <div
-            absolute w-full h-full
+            absolute w-full h-inherit
             bg="$bew-fill-4"
           />
           <img
@@ -337,12 +337,13 @@ function jumpToLoginPage() {
         <!-- Content -->
         <main
           pos="absolute top-0 left-0"
-          w-full h-full
+          w-full h-inherit
           overflow-overlay
           flex="~ col gap-4 justify-start"
           p-6
         >
           <picture
+            class="hidden md:block"
             rounded="$bew-radius" style="box-shadow: 0 16px 24px -12px rgba(0, 0, 0, .36)"
             aspect-video mb-4 bg="$bew-skeleton"
           >
