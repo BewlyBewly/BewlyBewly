@@ -911,7 +911,7 @@ defineExpose({
 .bew-popover {
   --uno: "absolute top-60px left-1/2";
   --uno: "transform -translate-x-1/2";
-  --uno: "overflow-visible";
+  --uno: "overflow-hidden";
   --uno: "after:content-empty";
   --uno: "after:opacity-100 after:w-full after:h-100px";
   --uno: "after:absolute after:top--30px after:left-1/2 after:-z-1";

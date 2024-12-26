@@ -170,6 +170,7 @@ function getHistoryList(type: Business, view_at = 0 as number) {
 <template>
   <div
     style="backdrop-filter: var(--bew-filter-glass-1);"
+    h="[calc(100vh-100px)]" max-h-500px important-overflow-y-overlay
     bg="$bew-elevated"
     w="380px"
     rounded="$bew-radius"
@@ -183,11 +184,10 @@ function getHistoryList(type: Business, view_at = 0 as number) {
       flex="~"
       justify="between"
       p="y-4 x-6"
-      pos="fixed top-0 left-0"
+      pos="sticky top-0 left-0"
       w="full"
       bg="$bew-elevated"
       z="2"
-      border="!rounded-t-$bew-radius"
     >
       <div flex="~">
         <div
@@ -217,7 +217,6 @@ function getHistoryList(type: Business, view_at = 0 as number) {
       <div
         ref="historysWrap"
         flex="~ col gap-2"
-        h="430px"
         overflow="y-scroll"
         p="x-4"
       >
@@ -239,11 +238,6 @@ function getHistoryList(type: Business, view_at = 0 as number) {
         />
 
         <!-- historys -->
-
-        <!-- Use a transparent `div` instead of `margin-top` to prevent the list item bouncing problem -->
-        <!-- https://github.com/BewlyBewly/BewlyBewly/pull/889#issue-2394127922 -->
-        <div v-if="!isLoading && historys.length > 0" min-h="50px" />
-
         <TransitionGroup name="list">
           <ALink
             v-for="historyItem in historys"

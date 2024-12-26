@@ -51,6 +51,7 @@ const otherLinks = computed(() => [
 <template>
   <div
     style="backdrop-filter: var(--bew-filter-glass-1);"
+    h="[calc(100vh-100px)]" max-h-fit important-overflow-y-auto
     shadow="[var(--bew-shadow-3),var(--bew-shadow-edge-glow-1)]"
     flex="~ gap-1"
     p="4"
@@ -119,7 +120,7 @@ const otherLinks = computed(() => [
 
 <style lang="scss" scoped>
 .link-list {
-  --uno: "last-of-type:p-4 last-of-type:bg-$bew-fill-1 last-of-type:m--4 last-of-type:rounded-r-$bew-radius";
+  --uno: "last-of-type:p-4 last-of-type:bg-$bew-fill-1 last-of-type:h-fit last-of-type:m--4";
   --uno: "last-of-type:ml-2";
 }
 

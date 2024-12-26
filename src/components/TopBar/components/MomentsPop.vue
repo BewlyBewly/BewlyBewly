@@ -278,6 +278,7 @@ defineExpose({
 <template>
   <div
     style="backdrop-filter: var(--bew-filter-glass-1);"
+    h="[calc(100vh-100px)]" max-h-500px important-overflow-y-overlay
     bg="$bew-elevated"
     w="380px"
     rounded="$bew-radius"
@@ -287,16 +288,13 @@ defineExpose({
   >
     <!-- top bar -->
     <header
-      style="backdrop-filter: var(--bew-filter-glass-1)"
-      flex="~"
-      justify="between"
-      items-center
+      style="backdrop-filter: var(--bew-filter-glass-1);"
+      flex="~ justify-between items-center"
       p="y-4 x-6"
-      pos="fixed top-0 left-0"
+      pos="sticky top-0 left-0"
       w="full"
-      bg="$bew-elevated"
       z="1"
-      border="!rounded-t-$bew-radius"
+      bg="$bew-elevated"
     >
       <div flex="~">
         <div
@@ -323,7 +321,7 @@ defineExpose({
 
     <!-- moments wrapper -->
     <main overflow-hidden rounded="$bew-radius">
-      <div ref="momentsWrap" h="430px" overflow="y-scroll x-hidden" p="x-4">
+      <div ref="momentsWrap" overflow="y-scroll x-hidden" p="x-4">
         <!-- loading -->
         <Loading
           v-if="isLoading && moments.length === 0"
@@ -343,11 +341,6 @@ defineExpose({
         />
 
         <!-- moments -->
-
-        <!-- Use a transparent `div` instead of `margin-top` to prevent the list item bouncing problem -->
-        <!-- https://github.com/BewlyBewly/BewlyBewly/pull/889#issue-2394127922 -->
-        <div v-if="!isLoading && moments.length > 0" min-h="50px" />
-
         <TransitionGroup name="list">
           <ALink
             v-for="(moment, index) in moments"
