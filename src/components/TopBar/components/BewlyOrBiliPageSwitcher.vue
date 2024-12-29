@@ -2,6 +2,7 @@
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { settings } from '~/logic'
 import { useMainStore } from '~/stores/mainStore'
+import { isHomePage } from '~/utils/main'
 
 const { activatedPage } = useBewlyApp()
 const { getDockItemByPage } = useMainStore()
@@ -31,7 +32,7 @@ function switchPage(useOriginalBiliPage: boolean) {
 
 <template>
   <div
-    v-if="getDockItemByPage(activatedPage)?.hasBewlyPage"
+    v-if="getDockItemByPage(activatedPage)?.hasBewlyPage && isHomePage() && !settings.useOriginalBilibiliHomepage"
     style="backdrop-filter: var(--bew-filter-glass-1);"
     flex="~ gap-1" bg="$bew-elevated" p-1 rounded-full
     h-34px
