@@ -360,21 +360,21 @@ const dockTransformStyle = computed((): { transform: string, transformOrigin: st
     --uno: "left-2 after:right--4px";
   }
   &.left.hide {
-    --uno: "opacity-0 translate-x--100%";
+    --uno: "opacity-0 !translate-x--100%";
   }
 
   &.right {
     --uno: "right-2 after:left--4px";
   }
   &.right.hide {
-    --uno: "opacity-0 translate-x-100%";
+    --uno: "opacity-0 !translate-x-100%";
   }
 
   &.bottom {
     --uno: "top-unset bottom-0";
   }
   &.bottom.hide {
-    --uno: "opacity-0 translate-y-100%";
+    --uno: "opacity-0 !translate-y-100%";
   }
 
   .divider {
