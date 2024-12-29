@@ -9,6 +9,7 @@ import { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
 import type { DockItem } from '~/stores/mainStore'
 import { useMainStore } from '~/stores/mainStore'
+import { isHomePage } from '~/utils/main'
 
 import Tooltip from '../Tooltip.vue'
 import type { HoveringDockItem } from './types'
@@ -57,7 +58,7 @@ const showBackToTopOrRefreshButton = computed((): boolean => {
   }
 
   return settings.value.moveBackToTopOrRefreshButtonToDock
-    && props.activatedPage !== AppPage.Search
+    && props.activatedPage !== AppPage.Search && isHomePage()
 })
 
 watch(() => settings.value.autoHideDock, (newValue) => {
@@ -137,6 +138,10 @@ function handleBackToTopOrRefresh() {
     emit('backToTop')
 }
 
+function isDockItemActivated(dockItem: DockItem): boolean {
+  return props.activatedPage === dockItem.page && isHomePage()
+}
+
 const dockContentRef = ref<HTMLElement>()
 const { width: windowWidth, height: windowHeight } = useWindowSize()
 const { width: dockWidth, height: dockHeight } = useElementSize(dockContentRef)
@@ -182,8 +187,8 @@ const dockTransformStyle = computed((): { transform: string, transformOrigin: st
 <template>
   <aside
     class="dock-wrap"
-    pos="absolute top-0" flex="~ col justify-center items-center" w-full h-full
-    z-1 pointer-events-none
+    pos="fixed top-0" flex="~ col justify-center items-center" w-full h-full
+    z-10 pointer-events-none
   >
     <!-- Edge Div -->
     <div
@@ -216,19 +221,19 @@ const dockTransformStyle = computed((): { transform: string, transformOrigin: st
             <button
               class="dock-item group"
               :class="{
-                'active': activatedPage === dockItem.page,
+                'active': isDockItemActivated(dockItem),
                 'inactive': hoveringDockItem.themeMode && isDark,
                 'disable-glowing-effect': settings.disableDockGlowingEffect,
               }"
               @click="handleDockItemClick(dockItem)"
             >
               <div
-                v-show="activatedPage !== dockItem.page"
+                v-show="!isDockItemActivated(dockItem)"
                 :class="dockItem.icon"
                 text-xl
               />
               <div
-                v-show="activatedPage === dockItem.page"
+                v-show="isDockItemActivated(dockItem)"
                 :class="dockItem.iconActivated"
                 text-xl
               />

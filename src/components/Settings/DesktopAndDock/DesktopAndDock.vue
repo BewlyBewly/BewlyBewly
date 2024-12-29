@@ -107,15 +107,18 @@ function handleToggleDockItem(dockItem: any) {
     </SettingsItemGroup>
 
     <SettingsItemGroup :title="$t('settings.group_dock')">
+      <SettingsItem :title="$t('settings.always_use_dock')" :desc="$t('settings.always_use_dock_desc')">
+        <Radio v-model="settings.alwaysUseDock" />
+      </SettingsItem>
+      <SettingsItem :title="$t('settings.auto_hide_dock')">
+        <Radio v-model="settings.autoHideDock" />
+      </SettingsItem>
       <SettingsItem :title="$t('settings.dock_position')" :desc="$t('settings.dock_position_desc')">
         <Select
           v-model="settings.dockPosition"
           :options="dockPositions"
           w="full"
         />
-      </SettingsItem>
-      <SettingsItem :title="$t('settings.auto_hide_dock')">
-        <Radio v-model="settings.autoHideDock" />
       </SettingsItem>
       <SettingsItem :desc="$t('settings.dock_content_adjustment_desc')">
         <template #title>

@@ -155,9 +155,11 @@ settings:
     number: 数字
     dot: 圆点
     none: 不显示
+  always_use_dock: 总是使用 Dock 栏
+  always_use_dock_desc: 启用后，Dock 栏将始终显示，侧边栏将隐藏。我们推荐你同时启用自动隐藏 Dock 栏。
+  auto_hide_dock: 自动隐藏 Dock 栏
   dock_position: Dock 栏位置
   dock_position_desc: 在屏幕中摆放位置。
-  auto_hide_dock: 自动隐藏 Dock 栏
   dock_content_adjustment: Dock 内容调整
   dock_content_adjustment_desc: 第一个激活的 Dock 项的页面将会是启动页面。
   dock_item_open_in_new_tab: 在新标签页打开

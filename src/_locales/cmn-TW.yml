@@ -155,9 +155,11 @@ settings:
     number: 數字
     dot: 圓點
     none: 不顯示
+  always_use_dock: 總是使用 Dock
+  always_use_dock_desc: 啟用後，Dock 將始終顯示，側邊欄將隱藏。我們推薦你同時啟用自動隱藏 Dock。
+  auto_hide_dock: 自動隱藏 Dock
   dock_position: Dock 位置
   dock_position_desc: 螢幕上的位置。
-  auto_hide_dock: 自動隱藏 Dock
   dock_content_adjustment: Dock 內容調整
   dock_content_adjustment_desc: 第一個啟用的 Dock 項目的頁面將是起始頁面。
   dock_item_open_in_new_tab: 在新索引標籤開啟

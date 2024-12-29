@@ -38,8 +38,9 @@ export interface Settings {
   autoHideTopBar: boolean
   showBewlyOrBiliPageSwitcher: boolean
   topBarIconBadges: 'number' | 'dot' | 'none'
-  dockPosition: 'left' | 'right' | 'bottom'
+  alwaysUseDock: boolean
   autoHideDock: boolean
+  dockPosition: 'left' | 'right' | 'bottom'
   /** @deprecated use dockItemsConfig instead */
   dockItemVisibilityList: { page: AppPage, visible: boolean }[]
   dockItemsConfig: { page: AppPage, visible: boolean, openInNewTab: boolean, useOriginalBiliPage: boolean }[]
@@ -134,8 +135,9 @@ export const originalSettings: Settings = {
   autoHideTopBar: false,
   showBewlyOrBiliPageSwitcher: true,
   topBarIconBadges: 'number',
-  dockPosition: 'right',
+  alwaysUseDock: true,
   autoHideDock: false,
+  dockPosition: 'right',
   /** @deprecated use dockItemsConfig instead */
   dockItemVisibilityList: [],
   dockItemsConfig: [],

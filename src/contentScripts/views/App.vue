@@ -127,9 +127,14 @@ function handleDockItemClick(dockItem: DockItem) {
       // iframePageURL.value = dockItem.url
     }
     else {
-      nextTick(() => {
-        changeActivatePage(dockItem.page)
-      })
+      if (isHomePage()) {
+        nextTick(() => {
+          changeActivatePage(dockItem.page)
+        })
+      }
+      else {
+        location.href = `https://www.bilibili.com/?page=${dockItem.page}`
+      }
     }
 
     // When not opened in a new tab, change the `activatedPage`
@@ -279,7 +284,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
       pointer-events-none
     >
       <Dock
-        v-if="showBewlyPage || iframePageURL"
+        v-if="settings.alwaysUseDock || (showBewlyPage || iframePageURL)"
         pointer-events-auto
         :activated-page="activatedPage"
         @settings-visibility-change="toggleSettings"
