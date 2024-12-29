@@ -11,6 +11,7 @@ import api from '~/utils/api'
 import { getUserID, isHomePage } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
+import BewlyOrBiliPageSwitcher from './components/BewlyOrBiliPageSwitcher.vue'
 import ChannelsPop from './components/ChannelsPop.vue'
 import FavoritesPop from './components/FavoritesPop.vue'
 import HistoryPop from './components/HistoryPop.vue'
@@ -471,10 +472,10 @@ defineExpose({
         />
         <!-- </Transition> -->
 
-        <div shrink-0 flex="inline xl:1 justify-center">
+        <div shrink-0 flex="inline xl:1 justify-start items-center gap-2">
           <div
             ref="channels"
-            z-1 relative w-fit mr-auto
+            z-1 relative w-fit
           >
             <a
               ref="logo" href="//www.bilibili.com"
@@ -490,7 +491,7 @@ defineExpose({
             >
               <svg
                 t="1720198072316" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                p-id="1477" width="38" height="38"
+                p-id="1477" width="36" height="36"
                 :style="{
                   fill: forceWhiteIcon ? 'white' : 'var(--bew-theme-color)',
                   filter: forceWhiteIcon ? 'drop-shadow(0 0 4px rgba(0, 0, 0, 0.6))' : 'drop-shadow(0 0 4px var(--bew-theme-color-60))',
@@ -511,6 +512,8 @@ defineExpose({
               />
             </Transition>
           </div>
+
+          <BewlyOrBiliPageSwitcher v-if="settings.showBewlyOrBiliPageSwitcher" z-1 />
         </div>
 
         <!-- search bar -->

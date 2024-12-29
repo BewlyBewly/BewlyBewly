@@ -149,6 +149,7 @@ settings:
   # Desktop & Dock
   use_old_top_bar: Use the old top bar
   auto_hide_top_bar: Automatically hide the top bar
+  show_bewly_or_bili_page_switcher: Show BewlyBewly/Bilibili page switcher
   top_bar_icon_badges: Icon badges
   top_bar_icon_badges_opt:
     number: Number

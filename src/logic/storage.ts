@@ -36,6 +36,7 @@ export interface Settings {
   // Desktop & Dock
   useOldTopBar: boolean
   autoHideTopBar: boolean
+  showBewlyOrBiliPageSwitcher: boolean
   topBarIconBadges: 'number' | 'dot' | 'none'
   dockPosition: 'left' | 'right' | 'bottom'
   autoHideDock: boolean
@@ -131,6 +132,7 @@ export const originalSettings: Settings = {
   // Desktop & Dock
   useOldTopBar: false,
   autoHideTopBar: false,
+  showBewlyOrBiliPageSwitcher: true,
   topBarIconBadges: 'number',
   dockPosition: 'right',
   autoHideDock: false,

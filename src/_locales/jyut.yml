@@ -147,6 +147,7 @@ settings:
   # Desktop and Dock
   use_old_top_bar: 用返舊版頂部欄
   auto_hide_top_bar: 自動收埋頂部欄
+  show_bewly_or_bili_page_switcher: 顯示 BewlyBewly/Bilibili 頁面切換掣
   top_bar_icon_badges: 圖示邊位標記
   top_bar_icon_badges_opt:
     number: 數字
