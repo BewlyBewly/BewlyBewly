@@ -1,11 +1,17 @@
 <script setup lang="ts">
+import { useDark } from '~/composables/useDark'
+
 const props = defineProps<{
   url: string
 }>()
-
+const { isDark } = useDark()
 const headerShow = ref(false)
 const iframeRef = ref<HTMLIFrameElement | null>(null)
 const currentUrl = ref<string>(props.url)
+
+watch(() => isDark.value, (newValue) => {
+  iframeRef.value?.contentDocument?.documentElement.classList.toggle('dark', newValue)
+})
 
 onMounted(() => {
   nextTick(() => {
