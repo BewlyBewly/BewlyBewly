@@ -65,9 +65,11 @@ const isSearchPage = computed((): boolean => {
 // 當使用背景時，強制 icon 變白色用於區分背景
 const forceWhiteIcon = computed((): boolean => {
   if (
+    // 首頁使用原生 bilibili 首頁時由於原版有 banner，所以強制 icon 變白色用於區分背景
+    (isHomePage() && settings.value.useOriginalBilibiliHomepage)
     // 分區頁面由於上面有背景，所以強制 icon 變白色用於區分背景
     // channel, anime, chinese anime, tv shows, movie, variety shows, mooc but not including video page
-    (
+    || (
       /https?:\/\/(?:www.)?bilibili.com\/(?:v|anime|guochuang|tv|movie|variety|mooc).*/.test(location.href)
       && !/https?:\/\/(?:www.)?bilibili.com\/video.*/.test(location.href)
     )
