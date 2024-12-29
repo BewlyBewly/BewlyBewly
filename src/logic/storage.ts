@@ -135,7 +135,7 @@ export const originalSettings: Settings = {
   autoHideTopBar: false,
   showBewlyOrBiliPageSwitcher: true,
   topBarIconBadges: 'number',
-  alwaysUseDock: true,
+  alwaysUseDock: false,
   autoHideDock: false,
   dockPosition: 'right',
   /** @deprecated use dockItemsConfig instead */
