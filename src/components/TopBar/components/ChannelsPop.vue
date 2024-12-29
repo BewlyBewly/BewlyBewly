@@ -56,8 +56,8 @@ const otherLinks = computed(() => [
       y: 'scroll',
     }"
     style="backdrop-filter: var(--bew-filter-glass-1);"
-    h="[calc(100vh-100px)]" max-h-445px
-    w="[calc(100vw-100px)]" max-w-709px
+    h="[calc(100vh-100px)]" max-h="445px"
+    w="[calc(100vw-100px)]" max-w="758px"
     shadow="[var(--bew-shadow-3),var(--bew-shadow-edge-glow-1)]"
     bg="$bew-elevated-alt"
     rounded="$bew-radius"
@@ -65,7 +65,7 @@ const otherLinks = computed(() => [
   >
     <div
       flex="~ gap-1 wrap"
-      p="4"
+      p="4" w-inherit
     >
       <ul
         v-for="(item, index) in [0, 10, 20, 30]"
