@@ -57,14 +57,14 @@ const otherLinks = computed(() => [
     }"
     style="backdrop-filter: var(--bew-filter-glass-1);"
     h="[calc(100vh-100px)]" max-h="445px"
-    w="[calc(100vw-100px)]" max-w="758px"
+    w="[calc(100vw-100px)]" max-w="fit"
     shadow="[var(--bew-shadow-3),var(--bew-shadow-edge-glow-1)]"
     bg="$bew-elevated-alt"
     rounded="$bew-radius"
     border="1 $bew-border-color"
   >
     <div
-      flex="~ gap-1 wrap"
+      flex="~ gap-1"
       p="4" w-inherit
     >
       <ul
@@ -129,8 +129,8 @@ const otherLinks = computed(() => [
 
 <style lang="scss" scoped>
 .link-list {
-  --uno: "last-of-type:p-4 last-of-type:bg-$bew-fill-1 last-of-type:h-fit last-of-type:m--4";
-  --uno: "last-of-type:ml-2";
+  // --uno: "last-of-type:p-4 last-of-type:bg-$bew-fill-1 last-of-type:h-fit last-of-type:m--4";
+  // --uno: "last-of-type:ml-2";
 }
 
 .link-item {
