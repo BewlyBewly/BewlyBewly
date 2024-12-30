@@ -10,10 +10,12 @@ const { getDockItemByPage } = useMainStore()
 const options = readonly([
   {
     name: 'BewlyBewly',
+    shortName: 'Bewly',
     useOriginalBiliPage: false,
   },
   {
     name: 'BiliBili',
+    shortName: 'Bili',
     useOriginalBiliPage: true,
   },
 ])
@@ -42,11 +44,16 @@ function switchPage(useOriginalBiliPage: boolean) {
       :class="{
         active: option.useOriginalBiliPage === currentPage?.useOriginalBiliPage,
       }"
-      rounded-inherit text="$bew-text-2 hover:$bew-text-1 xs" p="x-4 y-1" bg="hover:$bew-fill-2"
+      rounded-inherit text="$bew-text-2 hover:$bew-text-1 xs" p="x-2 lg:x-4" bg="hover:$bew-fill-2"
       fw-bold duration-300
       @click="switchPage(option.useOriginalBiliPage)"
     >
-      {{ option.name }}
+      <span class="hidden lg:block">
+        {{ option.name }}
+      </span>
+      <span class="block lg:hidden">
+        {{ option.shortName }}
+      </span>
     </button>
   </div>
 </template>

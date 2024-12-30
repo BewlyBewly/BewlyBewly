@@ -200,6 +200,7 @@ function toggleTabContentLoading(loading: boolean) {
           v-if="!(!settings.alwaysShowTabsOnHomePage && currentTabs.length === 1)"
           style="backdrop-filter: var(--bew-filter-glass-1)"
           bg="$bew-elevated" p-1
+          w="[calc(100vw-280px)]" max-w="fit"
           h-38px rounded-full
           text="sm"
           shadow="[var(--bew-shadow-1),var(--bew-shadow-edge-glow-1)]"
