@@ -277,8 +277,9 @@ defineExpose({
 
 <template>
   <div
-    style="backdrop-filter: var(--bew-filter-glass-1);"
-    h="[calc(100vh-100px)]" max-h-500px important-overflow-y-overlay
+    ref="momentsWrap"
+    style="backdrop-filter: var(--bew-filter-glass-1);" h="[calc(100vh-100px)]" max-h-500px
+    important-overflow-y-overlay
     bg="$bew-elevated"
     w="380px"
     rounded="$bew-radius"
@@ -320,139 +321,137 @@ defineExpose({
     </header>
 
     <!-- moments wrapper -->
-    <main overflow-hidden rounded="$bew-radius">
-      <div ref="momentsWrap" overflow="y-scroll x-hidden" p="x-4">
-        <!-- loading -->
-        <Loading
-          v-if="isLoading && moments.length === 0"
-          h="full"
-          flex="~"
-          items="center"
-        />
+    <main rounded="$bew-radius" overflow-hidden p="x-4">
+      <!-- loading -->
+      <Loading
+        v-if="isLoading && moments.length === 0"
+        h="full"
+        flex="~"
+        items="center"
+      />
 
-        <!-- empty -->
-        <Empty
-          v-if="!isLoading && moments.length === 0"
-          pos="absolute top-0 left-0"
-          bg="$bew-content"
-          z="0" w="full" h="full"
-          flex="~ items-center"
-          rounded="$bew-radius-half"
-        />
+      <!-- empty -->
+      <Empty
+        v-if="!isLoading && moments.length === 0"
+        pos="absolute top-0 left-0"
+        bg="$bew-content"
+        z="0" w="full" h="full"
+        flex="~ items-center"
+        rounded="$bew-radius-half"
+      />
 
-        <!-- moments -->
-        <TransitionGroup name="list">
+      <!-- moments -->
+      <TransitionGroup name="list">
+        <ALink
+          v-for="(moment, index) in moments"
+          :key="index"
+          :href="moment.link"
+          type="topBar"
+          flex="~ justify-between"
+          m="b-2" p="2"
+          rounded="$bew-radius"
+          hover:bg="$bew-fill-2"
+          duration-300
+          pos="relative"
+        >
+          <!-- new moment dot -->
+          <div
+            v-if="isNewMoment(index)"
+            rounded="full"
+            w="8px"
+            h="8px"
+            m="-2"
+            bg="$bew-theme-color"
+            pos="absolute -top-12px -left-12px"
+            style="box-shadow: 0 0 4px var(--bew-theme-color)"
+          />
           <ALink
-            v-for="(moment, index) in moments"
-            :key="index"
-            :href="moment.link"
+            :href="moment.authorJumpUrl"
             type="topBar"
-            flex="~ justify-between"
-            m="b-2" p="2"
-            rounded="$bew-radius"
-            hover:bg="$bew-fill-2"
-            duration-300
-            pos="relative"
+            rounded="1/2"
+            w="40px" h="40px" m="r-4"
+            bg="$bew-skeleton"
+            shrink-0
           >
-            <!-- new moment dot -->
-            <div
-              v-if="isNewMoment(index)"
-              rounded="full"
-              w="8px"
-              h="8px"
-              m="-2"
-              bg="$bew-theme-color"
-              pos="absolute -top-12px -left-12px"
-              style="box-shadow: 0 0 4px var(--bew-theme-color)"
-            />
-            <ALink
-              :href="moment.authorJumpUrl"
-              type="topBar"
+            <img
+              :src="`${moment.authorFace}@50w_50h_1c`"
               rounded="1/2"
-              w="40px" h="40px" m="r-4"
-              bg="$bew-skeleton"
-              shrink-0
+              w="40px" h="40px"
             >
-              <img
-                :src="`${moment.authorFace}@50w_50h_1c`"
-                rounded="1/2"
-                w="40px" h="40px"
+          </ALink>
+
+          <div flex="~" justify="between" w="full">
+            <div>
+              <!-- <span v-if="selectedTab !== 1">{{ `${moment.name} ${t('topbar.moments_dropdown.uploaded')}` }}</span> -->
+              <!-- <span v-else>{{ `${moment.name} ${t('topbar.moments_dropdown.now_streaming')}` }}</span> -->
+
+              <ALink
+                :href="moment.authorJumpUrl"
+                type="topBar"
+                font-bold
               >
-            </ALink>
-
-            <div flex="~" justify="between" w="full">
-              <div>
-                <!-- <span v-if="selectedTab !== 1">{{ `${moment.name} ${t('topbar.moments_dropdown.uploaded')}` }}</span> -->
-                <!-- <span v-else>{{ `${moment.name} ${t('topbar.moments_dropdown.now_streaming')}` }}</span> -->
-
-                <ALink
-                  :href="moment.authorJumpUrl"
-                  type="topBar"
-                  font-bold
-                >
-                  {{ moment.author }}
-                </ALink>
-                <div overflow-hidden text-ellipsis break-anywhere>
-                  {{ moment.title }}
-                </div>
-                <div
-                  text="$bew-text-2 sm"
-                  m="y-2"
-                >
-                  <!-- publish time -->
-                  <div v-if="selectedMomentTab.type !== 'live'">
-                    {{ moment.pubTime }}
-                  </div>
-
-                  <!-- Live -->
-                  <div
-                    v-else
-                    text="$bew-theme-color"
-                    font="bold"
-                    flex="~"
-                    items="center"
-                  >
-                    <div i-fluent:live-24-filled m="r-2" />
-                    {{ $t('topbar.moments_dropdown.live_status') }}
-                  </div>
-                </div>
+                {{ moment.author }}
+              </ALink>
+              <div overflow-hidden text-ellipsis break-anywhere>
+                {{ moment.title }}
               </div>
               <div
-                class="group"
-                flex="~ items-center justify-center" w="82px"
-                h="46px" m="l-4" shrink-0
-                rounded="$bew-radius-half"
-                bg="$bew-skeleton"
+                text="$bew-text-2 sm"
+                m="y-2"
               >
-                <img
-                  :src="`${moment.cover}@128w_72h_1c`"
-                  w="82px" h="46px"
-                  rounded="$bew-radius-half"
-                >
+                <!-- publish time -->
+                <div v-if="selectedMomentTab.type !== 'live'">
+                  {{ moment.pubTime }}
+                </div>
+
+                <!-- Live -->
                 <div
-                  opacity-0 group-hover:opacity-100
-                  pos="absolute" duration-300 bg="black opacity-60"
-                  rounded="$bew-radius-half" p-1
-                  z-1 color-white
-                  @click.prevent="toggleWatchLater(moment.rid || 0)"
+                  v-else
+                  text="$bew-theme-color"
+                  font="bold"
+                  flex="~"
+                  items="center"
                 >
-                  <Tooltip v-if="!addedWatchLaterList.includes(moment.rid || 0)" :content="$t('common.save_to_watch_later')" placement="bottom" type="dark">
-                    <div i-mingcute:carplay-line />
-                  </Tooltip>
-                  <Tooltip v-else :content="$t('common.added')" placement="bottom" type="dark">
-                    <Icon icon="line-md:confirm" />
-                  </Tooltip>
+                  <div i-fluent:live-24-filled m="r-2" />
+                  {{ $t('topbar.moments_dropdown.live_status') }}
                 </div>
               </div>
             </div>
-          </ALink>
-        </TransitionGroup>
+            <div
+              class="group"
+              flex="~ items-center justify-center" w="82px"
+              h="46px" m="l-4" shrink-0
+              rounded="$bew-radius-half"
+              bg="$bew-skeleton"
+            >
+              <img
+                :src="`${moment.cover}@128w_72h_1c`"
+                w="82px" h="46px"
+                rounded="$bew-radius-half"
+              >
+              <div
+                opacity-0 group-hover:opacity-100
+                pos="absolute" duration-300 bg="black opacity-60"
+                rounded="$bew-radius-half" p-1
+                z-1 color-white
+                @click.prevent="toggleWatchLater(moment.rid || 0)"
+              >
+                <Tooltip v-if="!addedWatchLaterList.includes(moment.rid || 0)" :content="$t('common.save_to_watch_later')" placement="bottom" type="dark">
+                  <div i-mingcute:carplay-line />
+                </Tooltip>
+                <Tooltip v-else :content="$t('common.added')" placement="bottom" type="dark">
+                  <Icon icon="line-md:confirm" />
+                </Tooltip>
+              </div>
+            </div>
+          </div>
+        </ALink>
+      </TransitionGroup>
 
-        <!-- loading -->
-        <Transition name="fade">
-          <Loading v-if="isLoading && moments.length !== 0" m="-t-4" />
-        </Transition>
-      </div>
+      <!-- loading -->
+      <Transition name="fade">
+        <Loading v-if="isLoading && moments.length !== 0" m="-t-4" />
+      </Transition>
     </main>
   </div>
 </template>
