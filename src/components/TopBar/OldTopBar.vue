@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useMouseInElement } from '@vueuse/core'
+import { onKeyStroke, useMouseInElement } from '@vueuse/core'
 import type { Ref, UnwrapNestedRefs } from 'vue'
 
 import { useBewlyApp } from '~/composables/useAppProvider'
@@ -422,6 +422,11 @@ async function getTopBarNewMomentsCount() {
   }
 }
 // #endregion
+
+// https://github.com/BewlyBewly/BewlyBewly/issues/1220
+onKeyStroke('/', () => {
+  toggleTopBarVisible(true)
+})
 
 function toggleTopBarVisible(visible: boolean) {
   hideTopBar.value = !visible
