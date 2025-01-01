@@ -129,7 +129,6 @@ if (!settings.value.useOriginalBilibiliTopBar && isSupportedPages())
 async function onDOMLoaded() {
   let originalTopBar: HTMLElement | null = null
 
-  // DO NOT change the home page when in iframe because it will cause nested calls to the homepage
   const changeHomePage = !isInIframe() && !settings.value.useOriginalBilibiliHomepage && isHomePage()
 
   // Remove the original Bilibili homepage if in Bilibili homepage & useOriginalBilibiliHomepage is enabled
@@ -153,7 +152,7 @@ async function onDOMLoaded() {
 
   if (isSupportedPages()) {
     // Then inject the app
-    if (changeHomePage) {
+    if (isHomePage()) {
       injectApp()
     }
     else {

@@ -1,12 +1,14 @@
 <script lang="ts" setup>
 import { useBewlyApp } from '~/composables/useAppProvider'
+import { IFRAME_PAGE_SWITCH_BEWLY, IFRAME_PAGE_SWITCH_BILI } from '~/constants/globalEvents'
 import { settings } from '~/logic'
 import { useMainStore } from '~/stores/mainStore'
-import { isHomePage } from '~/utils/main'
+// import { useSettingsStore } from '~/stores/settingsStore'
+import { isInIframe } from '~/utils/main'
 
 const { activatedPage } = useBewlyApp()
 const { getDockItemByPage } = useMainStore()
-
+// const { getDockItemConfigByPage } = useSettingsStore()
 const options = readonly([
   {
     name: 'BewlyBewly',
@@ -20,8 +22,15 @@ const options = readonly([
   },
 ])
 
-const currentPage = computed(() => {
-  return settings.value.dockItemsConfig.find(dockItem => dockItem.page === activatedPage.value)
+const showBewlyOrBiliPageSwitcher = computed(() => {
+  if (!isInIframe() && getDockItemByPage(activatedPage.value)?.hasBewlyPage)
+    return true
+  if (isInIframe())
+    return true
+  // const dockItemConfig = getDockItemConfigByPage(activatedPage.value)
+  // if (dockItemConfig?.useOriginalBiliPage && isInIframe())
+  //   return true
+  return false
 })
 
 function switchPage(useOriginalBiliPage: boolean) {
@@ -29,12 +38,19 @@ function switchPage(useOriginalBiliPage: boolean) {
   if (dockItem) {
     dockItem.useOriginalBiliPage = useOriginalBiliPage
   }
+
+  if (isInIframe()) {
+    if (useOriginalBiliPage)
+      parent.postMessage(IFRAME_PAGE_SWITCH_BILI, '*')
+    else
+      parent.postMessage(IFRAME_PAGE_SWITCH_BEWLY, '*')
+  }
 }
 </script>
 
 <template>
   <div
-    v-if="getDockItemByPage(activatedPage)?.hasBewlyPage && isHomePage() && !settings.useOriginalBilibiliHomepage"
+    v-if="showBewlyOrBiliPageSwitcher"
     style="backdrop-filter: var(--bew-filter-glass-1);"
     flex="~ gap-1" bg="$bew-elevated" p-1 rounded-full
     h-34px
@@ -42,7 +58,7 @@ function switchPage(useOriginalBiliPage: boolean) {
     <button
       v-for="option in options" :key="option.name"
       :class="{
-        active: option.useOriginalBiliPage === currentPage?.useOriginalBiliPage,
+        active: option.useOriginalBiliPage === isInIframe(),
       }"
       rounded-inherit text="$bew-text-2 hover:$bew-text-1 xs" p="x-2 lg:x-4" bg="hover:$bew-fill-2"
       fw-bold duration-300

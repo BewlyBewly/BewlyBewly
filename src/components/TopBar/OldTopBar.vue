@@ -488,6 +488,7 @@ defineExpose({
           >
             <a
               ref="logo" href="//www.bilibili.com"
+              target="_top"
               class="group logo"
               :class="{ activated: popupVisible.channels }"
               style="backdrop-filter: var(--bew-filter-glass-1);"

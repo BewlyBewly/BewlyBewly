@@ -8,7 +8,7 @@ import { OVERLAY_SCROLL_BAR_SCROLL, TOP_BAR_VISIBILITY_CHANGE } from '~/constant
 import { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
 import api from '~/utils/api'
-import { getUserID, isHomePage } from '~/utils/main'
+import { getUserID, isHomePage, isInIframe } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
 import BewlyOrBiliPageSwitcher from './components/BewlyOrBiliPageSwitcher.vue'
@@ -67,6 +67,7 @@ const forceWhiteIcon = computed((): boolean => {
   if (
     // 首頁使用原生 bilibili 首頁時由於原版有 banner，所以強制 icon 變白色用於區分背景
     (isHomePage() && settings.value.useOriginalBilibiliHomepage)
+    || (isInIframe() && isHomePage())
     // 分區頁面由於上面有背景，所以強制 icon 變白色用於區分背景
     // channel, anime, chinese anime, tv shows, movie, variety shows, mooc but not including video page
     || (
@@ -127,13 +128,15 @@ const showSearchBar = computed((): boolean => {
 
 const isTopBarFixed = computed((): boolean => {
   if (
-    (isHomePage() && settings.value.useOriginalBilibiliHomepage)
+    isHomePage()
     // video page
     || /https?:\/\/(?:www.)?bilibili.com\/(?:video|list)\/.*/.test(location.href)
     // anime playback & movie page
     || /https?:\/\/(?:www.)?bilibili.com\/bangumi\/play\/.*/.test(location.href)
     // moment page
     || /https?:\/\/t.bilibili.com.*/.test(location.href)
+    // watch later page
+    || /https?:\/\/(?:www\.)?bilibili\.com\/watchlater\/#\/list.*/.test(location.href)
     // channel, anime, chinese anime, tv shows, movie, variety shows, mooc
     || /https?:\/\/(?:www.)?bilibili.com\/(?:v|anime|guochuang|tv|movie|variety|mooc).*/.test(location.href)
     // articles page
@@ -486,6 +489,7 @@ defineExpose({
           >
             <a
               ref="logo" href="//www.bilibili.com"
+              target="_top"
               class="group logo"
               :class="{
                 activated: popupVisible.channels,
