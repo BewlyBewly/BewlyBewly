@@ -205,7 +205,7 @@ function getHistoryList(type: Business, view_at = 0 as number) {
         </div>
       </div>
       <ALink
-        href="https://www.bilibili.com/account/history"
+        href="https://www.bilibili.com/history"
         type="topBar"
         flex="~ items-center"
       >
