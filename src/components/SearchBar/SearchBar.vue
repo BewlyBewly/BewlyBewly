@@ -412,7 +412,7 @@ async function handleClearSearchHistory() {
     --uno: "bg-$bew-elevated";
 
     .history-list {
-      --uno: "h-[calc(100vh-100px)] max-h-fit important-overflow-y-auto";
+      --uno: "h-[calc(100vh-100px)] max-h-[420px] important-overflow-y-auto";
 
       .title {
         --uno: "text-lg font-500";
@@ -430,7 +430,7 @@ async function handleClearSearchHistory() {
   #search-suggestion {
     @include search-content;
     --uno: "bg-$bew-elevated";
-    --uno: "h-[calc(100vh-100px)] max-h-fit important-overflow-y-auto";
+    --uno: "h-[calc(100vh-100px)] max-h-[420px] important-overflow-y-auto";
 
     .suggestion-item {
       @include search-content-item;
