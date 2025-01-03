@@ -4,7 +4,7 @@ import { IFRAME_PAGE_SWITCH_BEWLY, IFRAME_PAGE_SWITCH_BILI } from '~/constants/g
 import { settings } from '~/logic'
 import { useMainStore } from '~/stores/mainStore'
 // import { useSettingsStore } from '~/stores/settingsStore'
-import { isInIframe } from '~/utils/main'
+import { isHomePage, isInIframe } from '~/utils/main'
 
 const { activatedPage } = useBewlyApp()
 const { getDockItemByPage } = useMainStore()
@@ -23,9 +23,9 @@ const options = readonly([
 ])
 
 const showBewlyOrBiliPageSwitcher = computed(() => {
-  if (!isInIframe() && getDockItemByPage(activatedPage.value)?.hasBewlyPage)
+  if (!isInIframe() && getDockItemByPage(activatedPage.value)?.hasBewlyPage && isHomePage())
     return true
-  if (isInIframe())
+  if (isInIframe() && getDockItemByPage(activatedPage.value)?.hasBewlyPage)
     return true
   // const dockItemConfig = getDockItemConfigByPage(activatedPage.value)
   // if (dockItemConfig?.useOriginalBiliPage && isInIframe())
