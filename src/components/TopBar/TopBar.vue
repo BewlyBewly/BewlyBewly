@@ -446,7 +446,7 @@ defineExpose({
       v-if="showTopBar"
       ref="headerTarget"
       w="full" transition="all 300 ease-in-out"
-      :class="{ hide: hideTopBar }"
+      :class="{ 'hide': hideTopBar, 'force-white-icon': forceWhiteIcon }"
       :style="{ position: isTopBarFixed ? 'fixed' : 'absolute' }"
     >
       <main
@@ -537,8 +537,8 @@ defineExpose({
                 '--b-search-bar-normal-color': settings.disableFrostedGlass ? 'var(--bew-elevated)' : 'color-mix(in oklab, var(--bew-elevated-solid), transparent 80%)',
                 '--b-search-bar-hover-color': 'var(--bew-elevated-hover)',
                 '--b-search-bar-focus-color': 'var(--bew-elevated)',
-                '--b-search-bar-normal-icon-color': forceWhiteIcon ? 'white' : 'var(--bew-text-1)',
-                '--b-search-bar-normal-text-color': forceWhiteIcon ? 'white' : 'var(--bew-text-1)',
+                '--b-search-bar-normal-icon-color': forceWhiteIcon && !settings.disableFrostedGlass ? 'white' : 'var(--bew-text-1)',
+                '--b-search-bar-normal-text-color': forceWhiteIcon && !settings.disableFrostedGlass ? 'white' : 'var(--bew-text-1)',
               }"
             />
           </Transition>
@@ -754,11 +754,10 @@ defineExpose({
                   <a
                     class="upload"
                     :class="{ 'white-icon': forceWhiteIcon }"
+                    style="backdrop-filter: var(--bew-filter-glass-1);"
                     href="https://member.bilibili.com/platform/upload/video/frame"
                     target="_blank"
                     :title="$t('topbar.upload')"
-                    color="$bew-theme-color"
-                    bg="$bew-theme-color-20 hover:!$bew-theme-color-40"
                   >
                     <div i-mingcute:upload-line flex-shrink-0 />
                   </a>
@@ -1011,8 +1010,21 @@ defineExpose({
       --uno: "bg-$bew-fill-2";
     }
 
+    &.active a.white-icon,
+    & a:hover.white-icon {
+      --uno: "bg-white bg-opacity-20";
+    }
+
+    & a.upload {
+      --uno: "bg-$bew-theme-color-20 hover:bg-$bew-theme-color-40 text-$bew-theme-color";
+    }
+
     &.active a.upload {
-      --uno: "!bg-$bew-theme-color-30";
+      --uno: "bg-$bew-theme-color-40";
+    }
+
+    &.active a.upload.white-icon {
+      --uno: "!bg-white !bg-opacity-40";
     }
 
     .white-icon {
@@ -1020,11 +1032,8 @@ defineExpose({
       filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.6)) !important;
 
       &.upload {
-        --uno: "bg-$bew-fill-2 hover:!bg-$bew-fill-4";
-      }
-
-      &.upload.active {
-        --uno: "!bg-$bew-fill-4";
+        --uno: "!bg-white !bg-opacity-20 hover:!bg-white hover:!bg-opacity-40 !filter-none";
+        --uno: "!text-white";
       }
     }
   }
