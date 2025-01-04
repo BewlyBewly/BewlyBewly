@@ -83,9 +83,21 @@ function isSupportedPages(): boolean {
   }
 }
 
+export function isBlockedPages(): boolean {
+  if (
+    // https://github.com/BewlyBewly/BewlyBewly/issues/1246
+    /https?:\/\/(?:t\.)?bilibili\.com\/share\/card\/index.*/.test(currentUrl)
+  ) {
+    return true
+  }
+  else {
+    return false
+  }
+}
+
 let beforeLoadedStyleEl: HTMLStyleElement | undefined
 
-if (isSupportedPages()) {
+if (isSupportedPages() && !isBlockedPages()) {
   if (settings.value.adaptToOtherPageStyles)
     useDark()
 
@@ -150,7 +162,7 @@ async function onDOMLoaded() {
       document.body.appendChild(originalTopBar)
   }
 
-  if (isSupportedPages()) {
+  if (isSupportedPages() && !isBlockedPages()) {
     // Then inject the app
     if (isHomePage()) {
       injectApp()
