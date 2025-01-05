@@ -85,7 +85,7 @@ function isSupportedPages(): boolean {
   }
 }
 
-// Only support dock record original bilibili page
+// Only supports Bilibili page URLs recorded in the dock
 export function isSupportedIframePages(): boolean {
   if (
     isInIframe()
