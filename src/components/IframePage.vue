@@ -58,7 +58,7 @@ defineExpose({
 
 <template>
   <div
-    pos="absolute top-0 left-0" of-hidden w-100vw h-100vh
+    pos="relative top-0 left-0" of-hidden w-full h-full
   >
     <!-- Iframe -->
     <iframe
@@ -69,7 +69,7 @@ defineExpose({
       }"
       frameborder="0"
       pointer-events-auto
-      pos="absolute  left-0"
+      pos="absolute left-0"
       w-inherit h-inherit
     />
   </div>

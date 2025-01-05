@@ -46,6 +46,10 @@ html.dark.bewly-design {
   background-color: var(--bew-bg);
 }
 
+html.bewly-design.hidden-header #biliMainHeader {
+  display: none;
+}
+
 .bewly-design *::selection,
 .bewly-wrapper *::selection {
   background: color-mix(in oklab, var(--bew-theme-color-60), var(--bew-bg, white) 20%) !important;
