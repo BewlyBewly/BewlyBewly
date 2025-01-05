@@ -314,11 +314,9 @@ function handleToggleHomeTab(tab: any) {
           :title="$t('settings.filter_by_title')"
           border="lg:none t-1 $bew-border-color"
         >
-          <template #desc>
-            <div v-html="$t('settings.filter_by_title_desc')" />
-          </template>
           <Radio v-model="settings.enableFilterByTitle" />
           <template v-if="settings.enableFilterByTitle" #bottom>
+            <div text="$bew-text-2 sm" v-html="$t('settings.filter_by_title_desc')" />
             <div flex="~ gap-2" mb-2>
               <Button type="secondary" size="small" @click="handleImportFilterByTitle">
                 <template #left>
@@ -343,11 +341,9 @@ function handleToggleHomeTab(tab: any) {
           :title="$t('settings.filter_by_user')"
           border="lg:none b-1 $bew-border-color"
         >
-          <template #desc>
-            <div v-html="$t('settings.filter_by_user_desc')" />
-          </template>
           <Radio v-model="settings.enableFilterByUser" />
           <template v-if="settings.enableFilterByUser" #bottom>
+            <div text="$bew-text-2 sm" v-html="$t('settings.filter_by_user_desc')" />
             <div flex="~ gap-2" mb-2>
               <Button type="secondary" size="small" @click="handleImportFilterByUser">
                 <template #left>
@@ -368,6 +364,12 @@ function handleToggleHomeTab(tab: any) {
           </template>
         </SettingsItem>
       </div>
+    </SettingsItemGroup>
+
+    <SettingsItemGroup :title="$t('settings.group_following')">
+      <SettingsItem :title="$t('settings.following_tab_show_livestreaming_videos')">
+        <Radio v-model="settings.followingTabShowLivestreamingVideos" />
+      </SettingsItem>
     </SettingsItemGroup>
 
     <SettingsItemGroup

@@ -80,10 +80,11 @@ settings:
   group_wallpaper: 背景图片
   group_logo: LOGO
   group_search_bar: 搜索栏
-  group_recommendation_mode: 推荐模式
-  group_recommendation_filters: 推荐过滤
+  group_recommendation_mode: “个性推荐” 推荐模式
+  group_recommendation_filters: “个性推荐” 过滤
   group_recommendation_filters_desc: |
     请勿将限制值设置得太大，不然可能会增加加载时间！
+  group_following: 正在关注
   group_search_page_mode: 搜索页模式
   group_home_tabs: 首页标签栏
 
@@ -136,6 +137,10 @@ settings:
   close_drawer_without_pressing_esc_again: 关闭抽屉时不用再次按 <kbd>Esc</kbd> 关闭
 
   block_ads: 屏蔽广告
+  block_top_search_page_ads: 屏蔽 Bilibili 搜索页上方的广告
+  block_top_search_page_ads_desc: >
+    有时候，搜索结果上方的广告实际上是年末总结或年度报告。
+    如果你不想这些内容被误删除，请禁用此选项。
 
   enable_video_preview: 启用视频预览功能（如果可以的话）
   enable_video_ctrl_bar_on_video_card: 在视频卡片上显示视频控制栏
@@ -144,14 +149,17 @@ settings:
   # Desktop & Dock
   use_old_top_bar: 使用旧版顶栏
   auto_hide_top_bar: 自动隐藏顶栏
+  show_bewly_or_bili_page_switcher: 显示 BewlyBewly/Bilibili 页面切换器
   top_bar_icon_badges: 图标角标
   top_bar_icon_badges_opt:
     number: 数字
     dot: 圆点
     none: 不显示
+  always_use_dock: 总是使用 Dock 栏
+  always_use_dock_desc: 启用后，Dock 栏将始终显示，侧边栏将隐藏。我们推荐你同时启用自动隐藏 Dock 栏。
+  auto_hide_dock: 自动隐藏 Dock 栏
   dock_position: Dock 栏位置
   dock_position_desc: 在屏幕中摆放位置。
-  auto_hide_dock: 自动隐藏 Dock 栏
   dock_content_adjustment: Dock 内容调整
   dock_content_adjustment_desc: 第一个激活的 Dock 项的页面将会是启动页面。
   dock_item_open_in_new_tab: 在新标签页打开
@@ -237,6 +245,8 @@ settings:
     双击列以编辑当前列。
   filter_by_user_table:
     username_or_mid: 用户名 / MID
+
+  following_tab_show_livestreaming_videos: 在 “正在关注” 中显示直播视频
 
   use_search_page_mode: 首页使用搜索页模式
   settings_shared_with_the_search_page: 与搜索页共用的配置

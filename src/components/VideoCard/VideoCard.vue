@@ -350,6 +350,7 @@ provide('getVideoType', () => props.type!)
                 p="x-2 y-1" m-1 inline-block rounded="$bew-radius" duration-300
               >
                 LIVE
+                <i i-svg-spinners:pulse-3 align-middle mt--0.2em />
               </div>
 
               <div
@@ -401,6 +402,7 @@ provide('getVideoType', () => props.type!)
             <VideoCardAuthorAvatar
               v-if="!horizontal && video.author"
               :author="video.author"
+              :is-live="video.liveStatus === 1"
             />
             <div class="group/desc" flex="~ col" w="full" align="items-start">
               <div flex="~ gap-1 justify-between items-start" w="full" pos="relative">
@@ -437,6 +439,7 @@ provide('getVideoType', () => props.type!)
                   <VideoCardAuthorAvatar
                     v-if="horizontal && video.author"
                     :author="video.author"
+                    :is-live="video.liveStatus === 1"
                   />
                   <VideoCardAuthorName
                     :author="video.author"

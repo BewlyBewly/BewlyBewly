@@ -48,12 +48,13 @@
   // Use this to imitate the frosted glass edge effect in components with a frosted glass design (except dialogs)
   // 在采用磨砂玻璃设计的组件（对话框除外）中，使用此功能可模仿磨砂玻璃边缘效果
   --bew-shadow-edge-glow-1: inset 1px 1px 1px -0.5px rgba(255, 255, 255, 0.2),
-    inset -1px -1px 1px -0.5px rgba(255, 255, 255, 0.12), inset 0 0 4px rgba(255, 255, 255, 0.4);
+    inset -1px -1px 1px -0.5px rgba(255, 255, 255, 0.12), inset 0 0 10px rgba(255, 255, 255, 0.6);
 
   // Use this for dialogs with the frosted glass effect
   // 将其用于具有磨砂玻璃效果的对话框
   --bew-shadow-edge-glow-2: inset 1px 1px 1px -0.5px rgba(255, 255, 255, 0.2),
-    inset -1px -1px 1px -0.5px rgba(255, 255, 255, 0.12), inset 0 0 8px rgba(255, 255, 255, 0.42);
+    inset -1px -1px 1px -0.5px rgba(255, 255, 255, 0.12), inset 0 0 14px rgba(255, 255, 255, 0.62);
+
   // #endregion
 
   // #region Theme Color & Status Colors 主题色 & 状态色
@@ -62,9 +63,8 @@
 
   --bew-logo-color: var(--bew-theme-color);
 
-  // In light mode use the theme color; in dark mode use white
-  // 在浅色模式下，使用主题色；在深色模式下，使用白色
-  --bew-theme-color-auto: var(--bew-theme-color);
+  // In light mode use the black; in dark mode use white
+  --bew-theme-color-auto: var(--bew-text-1);
 
   --bew-theme-color: hsl(195 100% 42%);
   --bew-theme-color-10: color-mix(in oklab, var(--bew-theme-color), transparent 90%);
@@ -227,14 +227,14 @@
     0 30px 40px -8px rgb(0 0 0 / 0.22);
 
   --bew-shadow-edge-glow-1: inset 1px 1px 1px -0.5px rgba(255, 255, 255, 0.12),
-    inset -1px -1px 1px -0.5px rgba(255, 255, 255, 0.04), inset 0 0 4px rgba(255, 255, 255, 0.06);
+    inset -1px -1px 1px -0.5px rgba(255, 255, 255, 0.04), inset 0 0 10px rgba(255, 255, 255, 0.04);
   --bew-shadow-edge-glow-2: inset 1px 1px 1px -0.5px rgba(255, 255, 255, 0.12),
-    inset -1px -1px 1px -0.5px rgba(255, 255, 255, 0.04), inset 0 0 8px rgba(255, 255, 255, 0.08);
+    inset -1px -1px 1px -0.5px rgba(255, 255, 255, 0.04), inset 0 0 14px rgba(255, 255, 255, 0.06);
   // #endregion
 
   --bew-logo-color: var(--bew-text-1);
 
-  --bew-theme-color-auto: white;
+  --bew-theme-color-auto: var(--bew-text-1);
 
   --bew-text-auto: black;
   --bew-text-1: hsl(215 19% 98%);
@@ -355,6 +355,7 @@
   --line_regular: var(--bew-fill-2);
   --line_bold: var(--bew-fill-3);
   --graph_white: var(--bew-content-solid);
+  --graph_bg_bright: color-mix(in oklab, var(--bew-content-solid), #fff 20%);
   --graph_bg_thin: var(--bew-content-solid);
   --graph_bg_regular: var(--bew-content-solid);
   --graph_bg_thick: color-mix(in oklab, var(--bew-content-solid), #fff 20%);
@@ -391,9 +392,10 @@
   --bpx-dmsend-switch-icon: var(--bew-text-2);
   --bpx-dmsend-border: var(--bew-border-color);
   --bpx-dmsend-input-font: var(--bew-text-1);
-  --bg1_rgb: var(--bew-fill-4);
+  --bg1_rgb: 13, 14, 17;
 }
 
+// #region Bilibili original css variables
 :root.bewly-design {
   --Ga0: #f6f7f8;
   --Ga0_s: #f6f7f8;
@@ -422,7 +424,11 @@
   --Ga10_t: #18191c;
   --Ga11: #ffffff;
   --Ga12: #f1f2f3;
+  --Ga12_s: #f6f7f8;
+  --Ga13: #f1f2f3;
+  --Ga13_s: #f1f2f3;
   --Wh0: #ffffff;
+  --Wh0_s: #ffffff;
   --Wh0_t: #ffffff;
   --Ba0: #000000;
   --Ba0_s: #000000;
@@ -478,8 +484,8 @@
   --Ye3: #ffdb93;
   --Ye4: #ffc65d;
   --Ye5: #ffb027;
-  --Ye6: #e58900;
-  --Ye7: #b76800;
+  --Ye6: #fa9600;
+  --Ye7: #c26e00;
   --Ye8: #8a4a00;
   --Ye9: #5b2e00;
   --Ye10: #2f1600;
@@ -582,14 +588,45 @@
   --Si8: #4d5d7c;
   --Si9: #323d54;
   --Si10: #191e2b;
+  --Ga0_rgb: 246, 247, 248;
+  --Ga0_s_rgb: 246, 247, 248;
+  --Ga1_rgb: 241, 242, 243;
+  --Ga1_s_rgb: 241, 242, 243;
+  --Ga2_rgb: 227, 229, 231;
+  --Ga3_rgb: 201, 204, 208;
+  --Ga5_rgb: 148, 153, 160;
+  --Ga7_rgb: 97, 102, 109;
+  --Ga10_rgb: 24, 25, 28;
+  --Ga11_rgb: 255, 255, 255;
+  --Ga12_rgb: 241, 242, 243;
+  --Ga12_s_rgb: 246, 247, 248;
+  --Ga13_rgb: 241, 242, 243;
+  --Ga13_s_rgb: 241, 242, 243;
+  --Wh0_rgb: 255, 255, 255;
+  --Wh0_s_rgb: 255, 255, 255;
+  --Ba0_rgb: 0, 0, 0;
+  --Pi1_rgb: 255, 236, 241;
+  --Pi5_rgb: 255, 102, 153;
+  --Re1_rgb: 254, 236, 234;
+  --Re5_rgb: 248, 90, 84;
+  --Or1_rgb: 255, 240, 227;
+  --Or5_rgb: 255, 127, 36;
+  --Ye1_rgb: 255, 246, 228;
+  --Ye5_rgb: 255, 176, 39;
+  --Ye6_rgb: 250, 150, 0;
+  --Gr1_rgb: 228, 248, 234;
+  --Gr5_rgb: 42, 200, 100;
+  --Lb1_rgb: 223, 246, 253;
+  --Lb5_rgb: 0, 174, 236;
+  --Lb7_rgb: 0, 105, 157;
 }
 
 // https://s1.hdslb.com/bfs/static/jinkela/long/laputa-css/dark.css
 :root.dark.bewly-design {
-  --Ga0: #0d0d0e;
+  --Ga0: #101011;
   --Ga0_s: #1e2022;
   --Ga0_t: #1e2022;
-  --Ga1: #000000;
+  --Ga1: #0a0b0c;
   --Ga1_s: #232527;
   --Ga1_t: #232527;
   --Ga1_e: #232527;
@@ -613,7 +650,11 @@
   --Ga10_t: #e7e9eb;
   --Ga11: #242628;
   --Ga12: #1f2022;
+  --Ga12_s: #2b2c2f;
+  --Ga13: #1a1b1d;
+  --Ga13_s: #2f3134;
   --Wh0: #17181a;
+  --Wh0_s: #2f3134;
   --Wh0_t: #17181a;
   --Ba0: #000000;
   --Ba0_s: #ffffff;
@@ -773,4 +814,36 @@
   --Si8: #c8ced6;
   --Si9: #dce0e5;
   --Si10: #f0f2f4;
+  --Ga0_rgb: 16, 16, 17;
+  --Ga0_s_rgb: 30, 32, 34;
+  --Ga1_rgb: 10, 11, 12;
+  --Ga1_s_rgb: 35, 37, 39;
+  --Ga2_rgb: 47, 49, 52;
+  --Ga3_rgb: 70, 73, 77;
+  --Ga5_rgb: 117, 122, 129;
+  --Ga7_rgb: 162, 167, 174;
+  --Ga10_rgb: 231, 233, 235;
+  --Ga11_rgb: 36, 38, 40;
+  --Ga12_rgb: 31, 32, 34;
+  --Ga12_s_rgb: 43, 44, 47;
+  --Ga13_rgb: 26, 27, 29;
+  --Ga13_s_rgb: 47, 49, 52;
+  --Wh0_rgb: 23, 24, 26;
+  --Wh0_s_rgb: 47, 49, 52;
+  --Ba0_rgb: 0, 0, 0;
+  --Pi1_rgb: 47, 26, 34;
+  --Pi5_rgb: 212, 78, 125;
+  --Re1_rgb: 46, 22, 23;
+  --Re5_rgb: 209, 64, 62;
+  --Or1_rgb: 48, 27, 16;
+  --Or5_rgb: 214, 96, 17;
+  --Ye1_rgb: 52, 36, 16;
+  --Ye5_rgb: 219, 135, 0;
+  --Ye6_rgb: 225, 156, 44;
+  --Gr1_rgb: 17, 39, 27;
+  --Gr5_rgb: 31, 162, 81;
+  --Lb1_rgb: 11, 32, 42;
+  --Lb5_rgb: 0, 135, 189;
+  --Lb7_rgb: 88, 177, 212;
 }
+// #endregion

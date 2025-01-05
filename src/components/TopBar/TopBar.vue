@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onClickOutside, useMouseInElement } from '@vueuse/core'
+import { onClickOutside, onKeyStroke, useMouseInElement } from '@vueuse/core'
 import type { Ref, UnwrapNestedRefs } from 'vue'
 
 import { useBewlyApp } from '~/composables/useAppProvider'
@@ -8,9 +8,10 @@ import { OVERLAY_SCROLL_BAR_SCROLL, TOP_BAR_VISIBILITY_CHANGE } from '~/constant
 import { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
 import api from '~/utils/api'
-import { getUserID, isHomePage } from '~/utils/main'
+import { getUserID, isHomePage, isInIframe } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
+import BewlyOrBiliPageSwitcher from './components/BewlyOrBiliPageSwitcher.vue'
 import ChannelsPop from './components/ChannelsPop.vue'
 import FavoritesPop from './components/FavoritesPop.vue'
 import HistoryPop from './components/HistoryPop.vue'
@@ -64,9 +65,12 @@ const isSearchPage = computed((): boolean => {
 // 當使用背景時，強制 icon 變白色用於區分背景
 const forceWhiteIcon = computed((): boolean => {
   if (
+    // 首頁使用原生 bilibili 首頁時由於原版有 banner，所以強制 icon 變白色用於區分背景
+    (isHomePage() && settings.value.useOriginalBilibiliHomepage)
+    || (isInIframe() && isHomePage())
     // 分區頁面由於上面有背景，所以強制 icon 變白色用於區分背景
     // channel, anime, chinese anime, tv shows, movie, variety shows, mooc but not including video page
-    (
+    || (
       /https?:\/\/(?:www.)?bilibili.com\/(?:v|anime|guochuang|tv|movie|variety|mooc).*/.test(location.href)
       && !/https?:\/\/(?:www.)?bilibili.com\/video.*/.test(location.href)
     )
@@ -74,6 +78,8 @@ const forceWhiteIcon = computed((): boolean => {
     || /https?:\/\/(?:www.)?bilibili.com\/(?:watchlater|account\/history).*/.test(location.href)
     // user space page 空間頁
     || /https?:\/\/space.bilibili\.com\.*/.test(location.href)
+    // premium page bilibili 大會員頁
+    || /https?:\/\/account\.bilibili\.com\/big.*$/.test(location.href)
   ) {
     return true
   }
@@ -122,17 +128,21 @@ const showSearchBar = computed((): boolean => {
 
 const isTopBarFixed = computed((): boolean => {
   if (
-    (isHomePage() && settings.value.useOriginalBilibiliHomepage)
+    isHomePage()
     // video page
     || /https?:\/\/(?:www.)?bilibili.com\/(?:video|list)\/.*/.test(location.href)
     // anime playback & movie page
     || /https?:\/\/(?:www.)?bilibili.com\/bangumi\/play\/.*/.test(location.href)
     // moment page
     || /https?:\/\/t.bilibili.com.*/.test(location.href)
+    // watch later page
+    || /https?:\/\/(?:www\.)?bilibili\.com\/watchlater\/#\/list.*/.test(location.href)
     // channel, anime, chinese anime, tv shows, movie, variety shows, mooc
     || /https?:\/\/(?:www.)?bilibili.com\/(?:v|anime|guochuang|tv|movie|variety|mooc).*/.test(location.href)
     // articles page
     || /https?:\/\/(?:www.)?bilibili.com\/read\/home.*/.test(location.href)
+    // premium page bilibili 大會員頁
+    || /https?:\/\/account\.bilibili\.com\/big.*$/.test(location.href)
   ) {
     return true
   }
@@ -412,6 +422,11 @@ async function getTopBarNewMomentsCount() {
 }
 // #endregion
 
+// https://github.com/BewlyBewly/BewlyBewly/issues/1220
+onKeyStroke('/', () => {
+  toggleTopBarVisible(true)
+})
+
 function toggleTopBarVisible(visible: boolean) {
   hideTopBar.value = !visible
   emitter.emit(TOP_BAR_VISIBILITY_CHANGE, visible)
@@ -429,7 +444,7 @@ defineExpose({
       v-if="showTopBar"
       ref="headerTarget"
       w="full" transition="all 300 ease-in-out"
-      :class="{ hide: hideTopBar }"
+      :class="{ 'hide': hideTopBar, 'force-white-icon': forceWhiteIcon }"
       :style="{ position: isTopBarFixed ? 'fixed' : 'absolute' }"
     >
       <main
@@ -465,13 +480,14 @@ defineExpose({
         />
         <!-- </Transition> -->
 
-        <div shrink-0 flex="inline xl:1 justify-center">
+        <div shrink-0 flex="inline xl:1 justify-start items-center gap-2">
           <div
             ref="channels"
-            z-1 relative w-fit mr-auto
+            z-1 relative w-fit
           >
             <a
               ref="logo" href="//www.bilibili.com"
+              target="_top"
               class="group logo"
               :class="{
                 activated: popupVisible.channels,
@@ -484,7 +500,7 @@ defineExpose({
             >
               <svg
                 t="1720198072316" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                p-id="1477" width="38" height="38"
+                p-id="1477" width="36" height="36"
                 :style="{
                   fill: forceWhiteIcon ? 'white' : 'var(--bew-theme-color)',
                   filter: forceWhiteIcon ? 'drop-shadow(0 0 4px rgba(0, 0, 0, 0.6))' : 'drop-shadow(0 0 4px var(--bew-theme-color-60))',
@@ -505,6 +521,8 @@ defineExpose({
               />
             </Transition>
           </div>
+
+          <BewlyOrBiliPageSwitcher v-if="settings.showBewlyOrBiliPageSwitcher" z-1 />
         </div>
 
         <!-- search bar -->
@@ -517,8 +535,8 @@ defineExpose({
                 '--b-search-bar-normal-color': settings.disableFrostedGlass ? 'var(--bew-elevated)' : 'color-mix(in oklab, var(--bew-elevated-solid), transparent 80%)',
                 '--b-search-bar-hover-color': 'var(--bew-elevated-hover)',
                 '--b-search-bar-focus-color': 'var(--bew-elevated)',
-                '--b-search-bar-normal-icon-color': forceWhiteIcon ? 'white' : 'var(--bew-text-1)',
-                '--b-search-bar-normal-text-color': forceWhiteIcon ? 'white' : 'var(--bew-text-1)',
+                '--b-search-bar-normal-icon-color': forceWhiteIcon && !settings.disableFrostedGlass ? 'white' : 'var(--bew-text-1)',
+                '--b-search-bar-normal-text-color': forceWhiteIcon && !settings.disableFrostedGlass ? 'white' : 'var(--bew-text-1)',
               }"
             />
           </Transition>
@@ -734,11 +752,10 @@ defineExpose({
                   <a
                     class="upload"
                     :class="{ 'white-icon': forceWhiteIcon }"
+                    style="backdrop-filter: var(--bew-filter-glass-1);"
                     href="https://member.bilibili.com/platform/upload/video/frame"
                     target="_blank"
                     :title="$t('topbar.upload')"
-                    color="$bew-theme-color"
-                    bg="$bew-theme-color-20 hover:!$bew-theme-color-40"
                   >
                     <div i-mingcute:upload-line flex-shrink-0 />
                   </a>
@@ -905,7 +922,7 @@ defineExpose({
 .bew-popover {
   --uno: "absolute top-60px left-1/2";
   --uno: "transform -translate-x-1/2";
-  --uno: "overflow-visible";
+  --uno: "overflow-hidden";
   --uno: "after:content-empty";
   --uno: "after:opacity-100 after:w-full after:h-100px";
   --uno: "after:absolute after:top--30px after:left-1/2 after:-z-1";
@@ -991,8 +1008,21 @@ defineExpose({
       --uno: "bg-$bew-fill-2";
     }
 
+    &.active a.white-icon,
+    & a:hover.white-icon {
+      --uno: "bg-white bg-opacity-20";
+    }
+
+    & a.upload {
+      --uno: "bg-$bew-theme-color-20 hover:bg-$bew-theme-color-40 text-$bew-theme-color";
+    }
+
     &.active a.upload {
-      --uno: "!bg-$bew-theme-color-30";
+      --uno: "bg-$bew-theme-color-40";
+    }
+
+    &.active a.upload.white-icon {
+      --uno: "!bg-white !bg-opacity-40";
     }
 
     .white-icon {
@@ -1000,11 +1030,8 @@ defineExpose({
       filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.6)) !important;
 
       &.upload {
-        --uno: "bg-$bew-fill-2 hover:!bg-$bew-fill-4";
-      }
-
-      &.upload.active {
-        --uno: "!bg-$bew-fill-4";
+        --uno: "!bg-white !bg-opacity-20 hover:!bg-white hover:!bg-opacity-40 !filter-none";
+        --uno: "!text-white";
       }
     }
   }

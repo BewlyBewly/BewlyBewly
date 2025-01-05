@@ -18,12 +18,14 @@ const list = computed((): { name: string, url: string, icon: string }[] => [
 <template>
   <div
     style="backdrop-filter: var(--bew-filter-glass-1);"
-    bg="$bew-elevated"
-    shadow="$bew-shadow-3"
+    h="[calc(100vh-100px)]" max-h-264px important-overflow-y-auto
     w="180px"
+    bg="$bew-elevated"
     p="4"
     rounded="$bew-radius"
     flex="~ col"
+    shadow="[var(--bew-shadow-edge-glow-1),var(--bew-shadow-3)]"
+    border="1 $bew-border-color"
   >
     <ALink
       v-for="item in list"

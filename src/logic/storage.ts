@@ -28,6 +28,7 @@ export interface Settings {
   closeDrawerWithoutPressingEscAgain: boolean
 
   blockAds: boolean
+  blockTopSearchPageAds: boolean
 
   enableVideoCtrlBarOnVideoCard: boolean
   hoverVideoCardDelayed: boolean
@@ -35,9 +36,11 @@ export interface Settings {
   // Desktop & Dock
   useOldTopBar: boolean
   autoHideTopBar: boolean
+  showBewlyOrBiliPageSwitcher: boolean
   topBarIconBadges: 'number' | 'dot' | 'none'
-  dockPosition: 'left' | 'right' | 'bottom'
+  alwaysUseDock: boolean
   autoHideDock: boolean
+  dockPosition: 'left' | 'right' | 'bottom'
   /** @deprecated use dockItemsConfig instead */
   dockItemVisibilityList: { page: AppPage, visible: boolean }[]
   dockItemsConfig: { page: AppPage, visible: boolean, openInNewTab: boolean, useOriginalBiliPage: boolean }[]
@@ -87,6 +90,8 @@ export interface Settings {
   enableFilterByUser: boolean
   filterByUser: { keyword: string, remark: string }[]
 
+  followingTabShowLivestreamingVideos: boolean
+
   homePageTabVisibilityList: { page: HomeSubPage, visible: boolean }[]
   alwaysShowTabsOnHomePage: boolean
   useSearchPageModeOnHomePage: boolean
@@ -119,6 +124,7 @@ export const originalSettings: Settings = {
   closeDrawerWithoutPressingEscAgain: false,
 
   blockAds: false,
+  blockTopSearchPageAds: false,
 
   enableVideoPreview: true,
   enableVideoCtrlBarOnVideoCard: false,
@@ -127,9 +133,11 @@ export const originalSettings: Settings = {
   // Desktop & Dock
   useOldTopBar: false,
   autoHideTopBar: false,
+  showBewlyOrBiliPageSwitcher: true,
   topBarIconBadges: 'number',
-  dockPosition: 'right',
+  alwaysUseDock: false,
   autoHideDock: false,
+  dockPosition: 'right',
   /** @deprecated use dockItemsConfig instead */
   dockItemVisibilityList: [],
   dockItemsConfig: [],
@@ -178,6 +186,8 @@ export const originalSettings: Settings = {
   filterByTitle: [],
   enableFilterByUser: false,
   filterByUser: [],
+
+  followingTabShowLivestreamingVideos: true,
 
   homePageTabVisibilityList: [],
   alwaysShowTabsOnHomePage: false,

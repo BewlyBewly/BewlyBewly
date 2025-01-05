@@ -81,6 +81,7 @@ function getHistoryList() {
           getHistoryList()
         }
       }
+    }).finally(() => {
       isLoading.value = false
     })
 }
@@ -105,6 +106,7 @@ function searchHistoryList() {
 
         noMoreContent.value = false
       }
+    }).finally(() => {
       isLoading.value = false
     })
 }

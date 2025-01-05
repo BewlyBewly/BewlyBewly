@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
+import { useElementSize, useWindowSize } from '@vueuse/core'
+import { computed, ref } from 'vue'
 
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { useDark } from '~/composables/useDark'
@@ -7,6 +9,7 @@ import { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
 import type { DockItem } from '~/stores/mainStore'
 import { useMainStore } from '~/stores/mainStore'
+import { isHomePage } from '~/utils/main'
 
 import Tooltip from '../Tooltip.vue'
 import type { HoveringDockItem } from './types'
@@ -55,7 +58,7 @@ const showBackToTopOrRefreshButton = computed((): boolean => {
   }
 
   return settings.value.moveBackToTopOrRefreshButtonToDock
-    && props.activatedPage !== AppPage.Search
+    && props.activatedPage !== AppPage.Search && isHomePage()
 })
 
 watch(() => settings.value.autoHideDock, (newValue) => {
@@ -134,13 +137,58 @@ function handleBackToTopOrRefresh() {
   else
     emit('backToTop')
 }
+
+function isDockItemActivated(dockItem: DockItem): boolean {
+  return props.activatedPage === dockItem.page && isHomePage()
+}
+
+const dockContentRef = ref<HTMLElement>()
+const { width: windowWidth, height: windowHeight } = useWindowSize()
+const { width: dockWidth, height: dockHeight } = useElementSize(dockContentRef)
+
+const dockScale = computed((): number => {
+  if (!dockHeight.value || !dockWidth.value)
+    return 1
+
+  const maxAllowedHeight = windowHeight.value - 100
+  const maxAllowedWidth = windowWidth.value - 100
+
+  // Calculate scale factors for both dimensions
+  const heightScale = dockHeight.value > maxAllowedHeight
+    ? maxAllowedHeight / dockHeight.value
+    : 1
+
+  const widthScale = dockWidth.value > maxAllowedWidth
+    ? maxAllowedWidth / dockWidth.value
+    : 1
+
+  // Use the smaller scale to ensure dock fits in both dimensions
+  return Math.min(heightScale, widthScale)
+})
+
+const dockTransformStyle = computed((): { transform: string, transformOrigin: string } => {
+  const position = settings.value.dockPosition
+  const scale = dockScale.value
+
+  // Adjust origin based on dock position
+  const origin = {
+    left: 'left center',
+    right: 'right center',
+    bottom: 'center bottom',
+  }[position] || 'center center'
+
+  return {
+    transform: `scale(${scale})`,
+    transformOrigin: origin,
+  }
+})
 </script>
 
 <template>
   <aside
     class="dock-wrap"
-    pos="absolute top-0" flex="~ col justify-center items-center" w-full h-full
-    z-1 pointer-events-none
+    pos="fixed top-0" flex="~ col justify-center items-center" w-full h-full
+    z-10 pointer-events-none
   >
     <!-- Edge Div -->
     <div
@@ -153,6 +201,7 @@ function handleBackToTopOrRefresh() {
 
     <!-- Dock Content -->
     <div
+      ref="dockContentRef"
       class="dock-content"
       :class="{
         left: settings.dockPosition === 'left',
@@ -160,6 +209,7 @@ function handleBackToTopOrRefresh() {
         bottom: settings.dockPosition === 'bottom',
         hide: hideDock,
       }"
+      :style="dockTransformStyle"
       @mouseenter="toggleHideDock(false)"
       @mouseleave="toggleHideDock(true)"
     >
@@ -171,19 +221,19 @@ function handleBackToTopOrRefresh() {
             <button
               class="dock-item group"
               :class="{
-                'active': activatedPage === dockItem.page,
+                'active': isDockItemActivated(dockItem),
                 'inactive': hoveringDockItem.themeMode && isDark,
                 'disable-glowing-effect': settings.disableDockGlowingEffect,
               }"
               @click="handleDockItemClick(dockItem)"
             >
               <div
-                v-show="activatedPage !== dockItem.page"
+                v-show="!isDockItemActivated(dockItem)"
                 :class="dockItem.icon"
                 text-xl
               />
               <div
-                v-show="activatedPage === dockItem.page"
+                v-show="isDockItemActivated(dockItem)"
                 :class="dockItem.iconActivated"
                 text-xl
               />
@@ -310,21 +360,21 @@ function handleBackToTopOrRefresh() {
     --uno: "left-2 after:right--4px";
   }
   &.left.hide {
-    --uno: "opacity-0 translate-x--100%";
+    --uno: "opacity-0 !translate-x--100%";
   }
 
   &.right {
     --uno: "right-2 after:left--4px";
   }
   &.right.hide {
-    --uno: "opacity-0 translate-x-100%";
+    --uno: "opacity-0 !translate-x-100%";
   }
 
   &.bottom {
     --uno: "top-unset bottom-0";
   }
   &.bottom.hide {
-    --uno: "opacity-0 translate-y-100%";
+    --uno: "opacity-0 !translate-y-100%";
   }
 
   .divider {
@@ -383,9 +433,9 @@ function handleBackToTopOrRefresh() {
 }
 
 .dock-item {
-  --shadow-dark: 0 4px 30px 4px rgba(255, 255, 255, 0.6);
+  --shadow-dark: 0 4px 30px 4px var(--bew-theme-color-60);
   --shadow-active: 0 4px 30px var(--bew-theme-color-70);
-  --shadow-dark-active: 0 4px 20px rgba(255, 255, 255, 0.8);
+  --shadow-dark-active: 0 4px 20px var(--bew-theme-color-80);
   --shadow-active-active: 0 4px 20px var(--bew-theme-color-90);
 
   --uno: "relative transform active:important-scale-90 hover:scale-110";
@@ -418,7 +468,7 @@ function handleBackToTopOrRefresh() {
   }
 
   &.active {
-    --uno: "important-bg-$bew-theme-color-auto text-$bew-text-auto dark:text-$bew-theme-color";
+    --uno: "important-bg-$bew-theme-color-80 text-white";
     --uno: "shadow-$shadow-active dark:shadow-$shadow-dark";
     --uno: "active:shadow-$shadow-active-active dark-active:shadow-$shadow-dark-active";
   }

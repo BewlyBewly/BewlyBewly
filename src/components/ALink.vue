@@ -25,17 +25,19 @@ const openMode = computed(() => {
   return 'newTab'
 })
 
+// Since BewlyBewly sometimes uses an iframe to open the original Bilibili page in the current tab
+// please set the target to `_top` instead of `_self`
 const target = computed(() => {
   if (openMode.value === 'newTab') {
     return '_blank'
   }
   if (openMode.value === 'currentTabIfNotHomepage') {
-    return isHomePage() ? '_blank' : '_self'
+    return isHomePage() ? '_blank' : '_top'
   }
   if (openMode.value === 'currentTab') {
-    return '_self'
+    return '_top'
   }
-  return '_self'
+  return '_top'
 })
 
 function handleClick(event: MouseEvent) {

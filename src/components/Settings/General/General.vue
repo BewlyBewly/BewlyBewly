@@ -149,6 +149,9 @@ watch(() => settings.value.language, (newValue) => {
       <SettingsItem :title="$t('settings.block_ads')">
         <Radio v-model="settings.blockAds" />
       </SettingsItem>
+      <SettingsItem :title="$t('settings.block_top_search_page_ads')" :desc="$t('settings.block_top_search_page_ads_desc')">
+        <Radio v-model="settings.blockTopSearchPageAds" />
+      </SettingsItem>
     </SettingsItemGroup>
 
     <SettingsItemGroup :title="$t('settings.group_video_card')">

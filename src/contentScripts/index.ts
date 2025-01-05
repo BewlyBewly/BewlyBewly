@@ -87,9 +87,21 @@ function isSupportedPages(): boolean {
   }
 }
 
+export function isBlockedPages(): boolean {
+  if (
+    // https://github.com/BewlyBewly/BewlyBewly/issues/1246
+    /https?:\/\/(?:t\.)?bilibili\.com\/share\/card\/index.*/.test(currentUrl)
+  ) {
+    return true
+  }
+  else {
+    return false
+  }
+}
+
 let beforeLoadedStyleEl: HTMLStyleElement | undefined
 
-if (isSupportedPages()) {
+if (isSupportedPages() && !isBlockedPages()) {
   if (settings.value.adaptToOtherPageStyles)
     useDark()
 
@@ -133,7 +145,6 @@ if (!settings.value.useOriginalBilibiliTopBar && isSupportedPages())
 async function onDOMLoaded() {
   let originalTopBar: HTMLElement | null = null
 
-  // DO NOT change the home page when in iframe because it will cause nested calls to the homepage
   const changeHomePage = !isInIframe() && !settings.value.useOriginalBilibiliHomepage && isHomePage()
 
   // Remove the original Bilibili homepage if in Bilibili homepage & useOriginalBilibiliHomepage is enabled
@@ -155,9 +166,9 @@ async function onDOMLoaded() {
       document.body.appendChild(originalTopBar)
   }
 
-  if (isSupportedPages()) {
+  if (isSupportedPages() && !isBlockedPages()) {
     // Then inject the app
-    if (changeHomePage) {
+    if (isHomePage()) {
       injectApp()
     }
     else {
@@ -250,78 +261,98 @@ function injectApp() {
   app.mount(root)
 }
 
+// 實際使用實在太卡，註釋了先
 // function startShadowDOMStyleInjection() {
-//   if (isHomePage())
-//     return
-//   if (!isSupportedPages())
+//   if (isHomePage() || !isSupportedPages())
 //     return
 
-//   // Create a MutationObserver to watch for Shadow DOM additions
-//   const observer = new MutationObserver((mutations) => {
+//   const styleCache = new WeakSet() // Track which shadow roots have been processed
+
+//   function injectStyleToShadowDOM(shadowRoot: ShadowRoot) {
+//     if (styleCache.has(shadowRoot))
+//       return
+
+//     const styleEl = document.createElement('style')
+//     styleEl.setAttribute('data-bewly-style', 'true')
+//     styleEl.textContent = `
+//       @import url(${browser.runtime.getURL('dist/contentScripts/style.css')});
+//       ${settings.value.adaptToOtherPageStyles
+//       ? `
+//         * {
+//           --bew-theme-color: ${settings.value.themeColor};
+//           --bew-theme-color-10: color-mix(in oklab, var(--bew-theme-color), transparent 90%);
+//           --bew-theme-color-20: color-mix(in oklab, var(--bew-theme-color), transparent 80%);
+//           --bew-theme-color-30: color-mix(in oklab, var(--bew-theme-color), transparent 70%);
+//           --bew-theme-color-40: color-mix(in oklab, var(--bew-theme-color), transparent 60%);
+//           --bew-theme-color-50: color-mix(in oklab, var(--bew-theme-color), transparent 50%);
+//           --bew-theme-color-60: color-mix(in oklab, var(--bew-theme-color), transparent 40%);
+//           --bew-theme-color-70: color-mix(in oklab, var(--bew-theme-color), transparent 30%);
+//           --bew-theme-color-80: color-mix(in oklab, var(--bew-theme-color), transparent 20%);
+//           --bew-theme-color-90: color-mix(in oklab, var(--bew-theme-color), transparent 10%);
+//         }
+//       `
+//       : ''}
+//     `
+//     shadowRoot.appendChild(styleEl)
+//     styleCache.add(shadowRoot)
+//   }
+
+//   function processShadowDOM(node: HTMLElement) {
+//     if (node.shadowRoot) {
+//       injectStyleToShadowDOM(node.shadowRoot)
+//       observeShadowRoot(node.shadowRoot)
+//     }
+
+//     // Process child elements with shadow roots
+//     node.querySelectorAll('*').forEach((el) => {
+//       if (el instanceof HTMLElement && el.shadowRoot) {
+//         injectStyleToShadowDOM(el.shadowRoot)
+//         observeShadowRoot(el.shadowRoot)
+//       }
+//     })
+//   }
+
+//   function observeShadowRoot(shadowRoot: ShadowRoot) {
+//     const observer = new MutationObserver((mutations) => {
+//       mutations.forEach((mutation) => {
+//         if (mutation.type === 'childList') {
+//           mutation.addedNodes.forEach((node) => {
+//             if (node instanceof HTMLElement)
+//               processShadowDOM(node)
+//           })
+//         }
+//       })
+//     })
+
+//     observer.observe(shadowRoot, {
+//       childList: true,
+//       subtree: true,
+//     })
+//   }
+
+//   // Initial setup
+//   const rootObserver = new MutationObserver((mutations) => {
 //     mutations.forEach((mutation) => {
 //       if (mutation.type === 'childList') {
 //         mutation.addedNodes.forEach((node) => {
-//           if (node instanceof HTMLElement && node.shadowRoot) {
-//             injectStyleToShadowDOM(node.shadowRoot)
-//             // Observe nested Shadow DOMs recursively
-//             observeShadowDOMRecursively(node.shadowRoot)
-//           }
+//           if (node instanceof HTMLElement)
+//             processShadowDOM(node)
 //         })
 //       }
 //     })
 //   })
 
-//   // Observe the entire document for new Shadow DOMs
-//   observer.observe(document.body, {
+//   // Start observing document body
+//   rootObserver.observe(document.body, {
 //     childList: true,
 //     subtree: true,
 //   })
 
-//   // Inject styles into existing Shadow DOMs on initial load
-//   injectStylesRecursively(document)
-
-//   function observeShadowDOMRecursively(shadowRoot: ShadowRoot) {
-//     observer.observe(shadowRoot, {
-//       childList: true,
-//       subtree: true,
-//     })
-
-//     // Recursively observe nested Shadow DOMs within this Shadow DOM
-//     shadowRoot.querySelectorAll('*').forEach((el) => {
-//       if (el.shadowRoot) {
-//         observeShadowDOMRecursively(el.shadowRoot)
-//       }
-//     })
-//   }
-
-//   function injectStylesRecursively(root: Document | ShadowRoot) {
-//     if (root instanceof ShadowRoot) {
-//       injectStyleToShadowDOM(root)
+//   // Process existing shadow DOMs
+//   document.querySelectorAll('*').forEach((el) => {
+//     if (el instanceof HTMLElement && el.shadowRoot) {
+//       injectStyleToShadowDOM(el.shadowRoot)
+//       observeShadowRoot(el.shadowRoot)
 //     }
-
-//     root.querySelectorAll('*').forEach((element) => {
-//       if (element.shadowRoot) {
-//         injectStylesRecursively(element.shadowRoot)
-//       }
-//     })
-//   }
-
-//   function injectStyleToShadowDOM(shadowRoot: ShadowRoot) {
-//     if (!shadowRoot.querySelector('style[data-bewly-style]')) {
-//       const styleEl = document.createElement('style')
-//       styleEl.setAttribute('data-bewly-style', 'true')
-//       styleEl.textContent = `
-//       @import url(${browser.runtime.getURL('dist/contentScripts/style.css')});
-//       `
-//       if (settings.value.adaptToOtherPageStyles) {
-//         // Reset the theme color to ensure the theme color is updated
-//         styleEl.textContent += `
-//           * {
-//             --bew-theme-color: ${settings.value.themeColor};
-//           }
-//         `
-//       }
-//       shadowRoot.appendChild(styleEl)
-//     }
-//   }
+//   })
 // }

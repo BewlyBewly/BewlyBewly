@@ -1,19 +1,21 @@
 <script setup lang="ts">
-import { useThrottleFn, useToggle } from '@vueuse/core'
+import { useEventListener, useThrottleFn, useToggle } from '@vueuse/core'
 import type { Ref } from 'vue'
 
 import type { BewlyAppProvider } from '~/composables/useAppProvider'
 import { useDark } from '~/composables/useDark'
-import { BEWLY_MOUNTED, DRAWER_VIDEO_ENTER_PAGE_FULL, DRAWER_VIDEO_EXIT_PAGE_FULL, OVERLAY_SCROLL_BAR_SCROLL } from '~/constants/globalEvents'
+import { BEWLY_MOUNTED, DRAWER_VIDEO_ENTER_PAGE_FULL, DRAWER_VIDEO_EXIT_PAGE_FULL, IFRAME_PAGE_SWITCH_BEWLY, IFRAME_PAGE_SWITCH_BILI, OVERLAY_SCROLL_BAR_SCROLL } from '~/constants/globalEvents'
 import { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
 import { type DockItem, useMainStore } from '~/stores/mainStore'
+import { useSettingsStore } from '~/stores/settingsStore'
 import { isHomePage, isInIframe, openLinkToNewTab, queryDomUntilFound, scrollToTop } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
 import { setupNecessarySettingsWatchers } from './necessarySettingsWatchers'
 
 const mainStore = useMainStore()
+const settingsStore = useSettingsStore()
 const { isDark } = useDark()
 const [showSettings, toggleSettings] = useToggle(false)
 
@@ -50,7 +52,24 @@ const iframeDrawerURL = ref<string>('')
 const showIframeDrawer = ref<boolean>(false)
 
 const iframePageRef = ref()
-
+useEventListener(window, 'message', ({ data }) => {
+  switch (data) {
+    case IFRAME_PAGE_SWITCH_BEWLY:
+      {
+        const currentDockItemConfig = settingsStore.getDockItemConfigByPage(activatedPage.value)
+        if (currentDockItemConfig)
+          currentDockItemConfig.useOriginalBiliPage = false
+      }
+      break
+    case IFRAME_PAGE_SWITCH_BILI:
+      {
+        const currentDockItemConfig = settingsStore.getDockItemConfigByPage(activatedPage.value)
+        if (currentDockItemConfig)
+          currentDockItemConfig.useOriginalBiliPage = true
+      }
+      break
+  }
+})
 const iframePageURL = computed((): string => {
   // If the iframe is not the BiliBili homepage or in iframe, then don't show the iframe page
   if (!isHomePage(window.self.location.href) || isInIframe())
@@ -61,7 +80,6 @@ const iframePageURL = computed((): string => {
   }
   return ''
 })
-
 const showBewlyPage = computed((): boolean => {
   if (isInIframe())
     return false
@@ -73,7 +91,7 @@ const showBewlyPage = computed((): boolean => {
   if (iframePageURL.value)
     return false
 
-  return isHomePage() && !isInIframe() && !settings.value.useOriginalBilibiliHomepage
+  return isHomePage() && !settings.value.useOriginalBilibiliHomepage
 })
 
 const isFirstTimeActivatedPageChange = ref<boolean>(true)
@@ -127,9 +145,14 @@ function handleDockItemClick(dockItem: DockItem) {
       // iframePageURL.value = dockItem.url
     }
     else {
-      nextTick(() => {
-        changeActivatePage(dockItem.page)
-      })
+      if (isHomePage()) {
+        nextTick(() => {
+          changeActivatePage(dockItem.page)
+        })
+      }
+      else {
+        location.href = `https://www.bilibili.com/?page=${dockItem.page}`
+      }
     }
 
     // When not opened in a new tab, change the `activatedPage`
@@ -200,6 +223,18 @@ function openIframeDrawer(url: string) {
   showIframeDrawer.value = true
 }
 
+/**
+ * Checks if the current viewport has a scrollbar.
+ * @returns {boolean} Returns true if the viewport has a scrollbar, false otherwise.
+ */
+async function haveScrollbar() {
+  await nextTick()
+  const osInstance = scrollbarRef.value?.osInstance()
+  const { viewport } = osInstance.elements()
+  const { scrollHeight } = viewport // get scroll offset
+  return scrollHeight > window.innerHeight
+}
+
 // In drawer video, watch btn className changed and post message to parent
 watchEffect(async (onCleanUp) => {
   if (!isInIframe())
@@ -228,18 +263,6 @@ watchEffect(async (onCleanUp) => {
     abort.abort()
   })
 })
-
-/**
- * Checks if the current viewport has a scrollbar.
- * @returns {boolean} Returns true if the viewport has a scrollbar, false otherwise.
- */
-async function haveScrollbar() {
-  await nextTick()
-  const osInstance = scrollbarRef.value?.osInstance()
-  const { viewport } = osInstance.elements()
-  const { scrollHeight } = viewport // get scroll offset
-  return scrollHeight > window.innerHeight
-}
 
 provide<BewlyAppProvider>('BEWLY_APP', {
   activatedPage,
@@ -279,7 +302,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
       pointer-events-none
     >
       <Dock
-        v-if="showBewlyPage || iframePageURL"
+        v-if="settings.alwaysUseDock || (showBewlyPage || iframePageURL)"
         pointer-events-auto
         :activated-page="activatedPage"
         @settings-visibility-change="toggleSettings"
@@ -295,7 +318,20 @@ provide<BewlyAppProvider>('BEWLY_APP', {
     </div>
 
     <!-- TopBar -->
-    <div v-if="!isInIframe()" m-auto max-w="$bew-page-max-width">
+    <div
+      v-if="
+        // When the user switches to the original Bilibili page, BewlyBewly will only show the top bar inside the iframe.
+        // This helps prevent the outside top bar from covering the contents.
+        // reference: https://github.com/BewlyBewly/BewlyBewly/issues/1235
+
+        // when on home page and not using original bilibili page, show top bar
+        (isHomePage() && !settingsStore.getDockItemIsUseOriginalBiliPage(activatedPage) && !isInIframe())
+          // when in iframe and using original bilibili page, show top bar
+          || (settingsStore.getDockItemIsUseOriginalBiliPage(activatedPage) && isInIframe())
+          // when not on home page, show top bar
+          || !isHomePage()"
+      m-auto max-w="$bew-page-max-width"
+    >
       <OldTopBar
         v-if="settings.useOldTopBar"
         pos="top-0 left-0" z="99 hover:1001" w-full
@@ -307,12 +343,13 @@ provide<BewlyAppProvider>('BEWLY_APP', {
     </div>
 
     <div
+      v-if="!settings.useOriginalBilibiliHomepage"
       pos="absolute top-0 left-0" w-full h-full
       :style="{
         height: showBewlyPage || iframePageURL ? '100dvh' : '0',
       }"
     >
-      <template v-if="!iframePageURL && showBewlyPage && activatedPage">
+      <template v-if="showBewlyPage">
         <OverlayScrollbarsComponent ref="scrollbarRef" element="div" h-inherit defer @os-scroll="handleOsScroll">
           <main m-auto max-w="$bew-page-max-width">
             <div
@@ -333,7 +370,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
           </main>
         </OverlayScrollbarsComponent>
       </template>
-      <IframePage v-if="iframePageURL" ref="iframePageRef" :url="iframePageURL" />
+      <IframePage v-else-if="iframePageURL && !isInIframe()" ref="iframePageRef" :url="iframePageURL" />
     </div>
 
     <IframeDrawer

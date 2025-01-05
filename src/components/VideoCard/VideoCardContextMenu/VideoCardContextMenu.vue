@@ -200,7 +200,7 @@ function handleRemoved(selectedOpt?: { dislikeReasonId: number }) {
             </li>
           </template>
 
-          <div v-if="getVideoType() !== 'common'" class="divider" />
+          <div v-if="getVideoType() === 'rcmd'" class="divider" />
 
           <template v-for="(optionGroup, index) in commonOptions" :key="index">
             <li

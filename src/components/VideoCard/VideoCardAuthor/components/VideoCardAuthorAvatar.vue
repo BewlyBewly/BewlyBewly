@@ -7,6 +7,7 @@ import { getAuthorJumpUrl } from '../../utils'
 const props = withDefaults(defineProps<{
   author: Author | Author[]
   maxCount?: number
+  isLive?: boolean
 }>(), {
   maxCount: 3, // 最多显示的头像数量
 })
@@ -36,7 +37,7 @@ const displayedAvatars = computed(() => {
       :href="getAuthorJumpUrl(item)" target="_blank"
       rounded="1/2"
       object="center cover" bg="$bew-skeleton" cursor="pointer"
-      position-relative
+      position-absolute top-0 inline-block
       :style="{
         zIndex: displayedAvatars.length - index,
         left: `${index * 6}px`,
@@ -64,6 +65,14 @@ const displayedAvatars = computed(() => {
         grid place-items-center
       >
         <div color-white text-sm class="i-mingcute:check-fill w-8px h-8px" />
+      </div>
+      <div
+        v-else-if="isLive" pos="absolute top-22px left-24px"
+        w-14px h-14px
+        bg="$bew-theme-color"
+        rounded="1/2" grid place-items-center
+      >
+        <div color-white text-sm class="i-svg-spinners:pulse-3 w-12px h-12px" />
       </div>
     </a>
 
