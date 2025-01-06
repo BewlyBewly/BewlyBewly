@@ -31,6 +31,8 @@ if (isFirefox) {
 const currentUrl = document.URL
 
 function isSupportedPages(): boolean {
+  if (isInIframe())
+    return false
   if (
     // homepage
     isHomePage()
@@ -87,10 +89,23 @@ function isSupportedPages(): boolean {
   }
 }
 
-export function isBlockedPages(): boolean {
+// Only supports Bilibili page URLs recorded in the dock
+export function isSupportedIframePages(): boolean {
   if (
-    // https://github.com/BewlyBewly/BewlyBewly/issues/1246
-    /https?:\/\/(?:t\.)?bilibili\.com\/share\/card\/index.*/.test(currentUrl)
+    isInIframe()
+    && (
+      isHomePage()
+      || /https?:\/\/search\.bilibili\.com\/all.*/.test(currentUrl)
+      || /https?:\/\/www\.bilibili\.com\/anime.*/.test(currentUrl)
+      || /https?:\/\/space\.bilibili\.com\/\d+\/favlist.*/.test(currentUrl)
+      || /https?:\/\/www\.bilibili\.com\/history.*/.test(currentUrl)
+      || /https?:\/\/www\.bilibili\.com\/watchlater\/#\/list.*/.test(currentUrl)
+      || (
+        /https?:\/\/t\.bilibili\.com.*/.test(currentUrl)
+        // https://github.com/BewlyBewly/BewlyBewly/issues/1246
+        && !/https?:\/\/t\.bilibili\.com\/share\/card\/index.*/.test(currentUrl)
+      )
+    )
   ) {
     return true
   }
@@ -101,7 +116,7 @@ export function isBlockedPages(): boolean {
 
 let beforeLoadedStyleEl: HTMLStyleElement | undefined
 
-if (isSupportedPages() && !isBlockedPages()) {
+if (isSupportedPages() || isSupportedIframePages()) {
   if (settings.value.adaptToOtherPageStyles)
     useDark()
 
@@ -166,7 +181,7 @@ async function onDOMLoaded() {
       document.body.appendChild(originalTopBar)
   }
 
-  if (isSupportedPages() && !isBlockedPages()) {
+  if (isSupportedPages() || isSupportedIframePages()) {
     // Then inject the app
     if (isHomePage()) {
       injectApp()
