@@ -67,13 +67,6 @@ const videoUrl = computed(() => {
     return ''
 })
 
-const wValue = computed((): string => {
-  if (props.horizontal)
-    return 'xl:280px lg:250px md:200px 200px'
-  else
-    return 'w-full'
-})
-
 const isInWatchLater = ref<boolean>(false)
 const isHover = ref<boolean>(false)
 const mouseEnterTimeOut = ref()
@@ -219,10 +212,6 @@ provide('getVideoType', () => props.type!)
     transform="~ translate-z-0"
     mb-4
   >
-    <!-- By directly using predefined unocss width properties, it is possible to dynamically set the width attribute -->
-    <div hidden w="xl:280px lg:250px md:200px 200px" />
-    <div hidden w="full" />
-
     <div v-if="!skeleton && video">
       <div
         class="video-card group"
@@ -241,8 +230,9 @@ provide('getVideoType', () => props.type!)
           <!-- Cover -->
           <div
             class="group/cover"
+            :class="horizontal ? 'horizontal-card-cover' : 'vertical-card-cover'"
             shrink-0
-            :w="wValue" h-fit relative bg="$bew-skeleton" rounded="$bew-radius"
+            h-fit relative bg="$bew-skeleton" rounded="$bew-radius"
             cursor-pointer
             group-hover:z-2
             transform="~ translate-z-0"
@@ -518,6 +508,14 @@ provide('getVideoType', () => props.type!)
 </template>
 
 <style lang="scss" scoped>
+.horizontal-card-cover {
+  --uno: "xl:w-280px lg:w-250px md:w-200px w-200px";
+}
+
+.vertical-card-cover {
+  --uno: "w-full";
+}
+
 .more-active {
   --uno: "opacity-100";
 }

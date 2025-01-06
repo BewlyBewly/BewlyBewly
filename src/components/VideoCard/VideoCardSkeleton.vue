@@ -1,15 +1,8 @@
 <script setup lang="ts">
-const props = defineProps<{
+defineProps<{
   horizontal?: boolean
   hasTag?: boolean
 }>()
-
-const wValue = computed((): string => {
-  if (props.horizontal)
-    return 'xl:280px lg:250px md:200px 200px'
-  else
-    return 'w-full'
-})
 </script>
 
 <template>
@@ -53,7 +46,8 @@ const wValue = computed((): string => {
 
     <!-- Cover -->
     <div
-      :w="wValue" shrink-0 aspect-video h-fit bg="$bew-skeleton"
+      :class="horizontal ? 'horizontal-card-cover' : 'vertical-card-cover'"
+      shrink-0 aspect-video h-fit bg="$bew-skeleton"
       rounded="$bew-radius"
     />
     <!-- Other Information -->
@@ -88,3 +82,13 @@ const wValue = computed((): string => {
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.horizontal-card-cover {
+  --uno: "xl:w-280px lg:w-250px md:w-200px w-200px";
+}
+
+.vertical-card-cover {
+  --uno: "w-full";
+}
+</style>
