@@ -23,18 +23,18 @@ const emit = defineEmits<{
 const { t } = useI18n()
 const { handleBackToTop, handlePageRefresh } = useBewlyApp()
 
-const gridValue = computed((): string => {
+const gridClass = computed((): string => {
   if (props.gridLayout === 'adaptive') {
     // eslint-disable-next-line ts/no-use-before-define
     if (!activatedRankingType.value.seasonType)
-      return '~ 2xl:cols-4 xl:cols-3 lg:cols-2 md:cols-1 gap-5'
+      return 'grid-adaptive-video'
     else
-      return '~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-5'
+      return 'grid-adaptive-bangumi'
   }
 
   if (props.gridLayout === 'twoColumns')
-    return '~ cols-1 xl:cols-2 gap-4'
-  return '~ cols-1 gap-4'
+    return 'grid-two-columns'
+  return 'grid-one-column'
 })
 
 const rankingTypes = computed((): RankingType[] => {
@@ -182,13 +182,7 @@ defineExpose({ initData })
       </OverlayScrollbarsComponent>
     </aside>
 
-    <!-- By directly using predefined unocss grid properties, it is possible to dynamically set the grid attribute -->
-    <div hidden grid="~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-5" />
-    <div hidden grid="~ 2xl:cols-4 xl:cols-3 lg:cols-2 md:cols-1 gap-5" />
-    <div hidden grid="~ cols-1 xl:cols-2 gap-4" />
-    <div hidden grid="~ cols-1 gap-4" />
-
-    <main w-full :grid="gridValue">
+    <main w-full :class="gridClass">
       <template v-if="!('seasonType' in activatedRankingType)">
         <VideoCard
           v-for="(video, index) in videoList"
@@ -265,5 +259,21 @@ defineExpose({ initData })
 
 .hide {
   --uno: "h-[calc(100vh-70)] translate-y--70px";
+}
+
+.grid-adaptive-video {
+  --uno: "grid 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 sm:cols-1 cols-1 gap-5";
+}
+
+.grid-adaptive-bangumi {
+  --uno: "grid 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-5";
+}
+
+.grid-two-columns {
+  --uno: "grid cols-1 xl:cols-2 gap-4";
+}
+
+.grid-one-column {
+  --uno: "grid cols-1 gap-4";
 }
 </style>

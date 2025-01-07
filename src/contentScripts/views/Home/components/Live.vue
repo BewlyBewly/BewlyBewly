@@ -21,12 +21,12 @@ const emit = defineEmits<{
   (e: 'afterLoading'): void
 }>()
 
-const gridValue = computed((): string => {
+const gridClass = computed((): string => {
   if (props.gridLayout === 'adaptive')
-    return '~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-5'
+    return 'grid-adaptive'
   if (props.gridLayout === 'twoColumns')
-    return '~ cols-1 xl:cols-2 gap-4'
-  return '~ cols-1 gap-4'
+    return 'grid-two-columns'
+  return 'grid-one-column'
 })
 
 const videoList = ref<VideoElement[]>([])
@@ -161,11 +161,6 @@ defineExpose({ initData })
 
 <template>
   <div>
-    <!-- By directly using predefined unocss grid properties, it is possible to dynamically set the grid attribute -->
-    <div hidden grid="~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-5" />
-    <div hidden grid="~ cols-1 xl:cols-2 gap-4" />
-    <div hidden grid="~ cols-1 gap-4" />
-
     <Empty v-if="needToLoginFirst" mt-6 :description="$t('common.please_log_in_first')">
       <Button type="primary" @click="jumpToLoginPage()">
         {{ $t('common.login') }}
@@ -175,7 +170,7 @@ defineExpose({ initData })
       v-else
       ref="containerRef"
       m="b-0 t-0" relative w-full h-full
-      :grid="gridValue"
+      :class="gridClass"
     >
       <VideoCard
         v-for="video in videoList"
@@ -207,4 +202,15 @@ defineExpose({ initData })
 </template>
 
 <style lang="scss" scoped>
+.grid-adaptive {
+  --uno: "grid 2xl:cols-6 xl:cols-5 lg:cols-4 md:cols-3 sm:cols-2 cols-1 gap-5";
+}
+
+.grid-two-columns {
+  --uno: "grid cols-1 xl:cols-2 gap-4";
+}
+
+.grid-one-column {
+  --uno: "grid cols-1 gap-4";
+}
 </style>

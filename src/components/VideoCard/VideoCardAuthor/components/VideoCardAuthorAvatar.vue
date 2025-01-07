@@ -24,10 +24,10 @@ const displayedAvatars = computed(() => {
 <template>
   <div
     :style="{
-      width: Array.isArray(author) && author.length > 1 ? `${28 + (displayedAvatars?.length) * 6}px` : '34px',
-      height: Array.isArray(author) && author.length > 1 ? '28px' : '34px',
-      marginRight: '12px',
+      width: Array.isArray(author) && author.length > 1 ? `${28 + (displayedAvatars?.length) * 6}px` : '30px',
+      height: Array.isArray(author) && author.length > 1 ? '28px' : '30px',
     }"
+    mr-2
     pos="relative"
     shrink-0
   >
@@ -41,8 +41,8 @@ const displayedAvatars = computed(() => {
       :style="{
         zIndex: displayedAvatars.length - index,
         left: `${index * 6}px`,
-        width: displayedAvatars.length > 1 ? `28px` : '34px',
-        height: displayedAvatars.length > 1 ? `28px` : '34px',
+        width: displayedAvatars.length > 1 ? `28px` : '30px',
+        height: displayedAvatars.length > 1 ? `28px` : '30px',
       }"
       @click.stop=""
     >
@@ -57,7 +57,7 @@ const displayedAvatars = computed(() => {
       <!-- Following Flag -->
       <div
         v-if="item.followed && !Array.isArray(author)"
-        pos="absolute top-22px left-24px"
+        pos="absolute top-18px left-20px"
         w-14px h-14px
         bg="$bew-theme-color"
         border="2 outset solid white"
@@ -67,7 +67,7 @@ const displayedAvatars = computed(() => {
         <div color-white text-sm class="i-mingcute:check-fill w-8px h-8px" />
       </div>
       <div
-        v-else-if="isLive" pos="absolute top-22px left-24px"
+        v-else-if="isLive" pos="absolute top-18px left-20px"
         w-14px h-14px
         bg="$bew-theme-color"
         rounded="1/2" grid place-items-center

@@ -6,6 +6,7 @@ import { useToast } from 'vue-toastification'
 import Button from '~/components/Button.vue'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { accessKey, settings } from '~/logic'
+import type { VideoInfo } from '~/models/video/videoInfo'
 import type { VideoPreviewResult } from '~/models/video/videoPreview'
 import api from '~/utils/api'
 import { getTvSign, TVAppKey } from '~/utils/authProvider'
@@ -67,13 +68,6 @@ const videoUrl = computed(() => {
     return ''
 })
 
-const wValue = computed((): string => {
-  if (props.horizontal)
-    return 'xl:280px lg:250px md:200px 200px'
-  else
-    return 'w-full'
-})
-
 const isInWatchLater = ref<boolean>(false)
 const isHover = ref<boolean>(false)
 const mouseEnterTimeOut = ref()
@@ -82,15 +76,28 @@ const previewVideoUrl = ref<string>('')
 const contentVisibility = ref<'auto' | 'visible'>('auto')
 const videoElement = ref<HTMLVideoElement | null>(null)
 
-watch(() => isHover.value, (newValue) => {
+watch(() => isHover.value, async (newValue) => {
   if (!props.video || !newValue)
     return
 
   if (props.showPreview && settings.value.enableVideoPreview
-    && !previewVideoUrl.value && props.video.cid) {
+    && !previewVideoUrl.value && (props.video.aid || props.video.bvid)) {
+    let cid = props.video.cid
+    if (!cid) {
+      try {
+        const res: VideoInfo = await api.video.getVideoInfo({
+          bvid: props.video.bvid,
+        })
+        if (res.code === 0)
+          cid = res.data.cid
+      }
+      catch {
+
+      }
+    }
     api.video.getVideoPreview({
       bvid: props.video.bvid,
-      cid: props.video.cid,
+      cid,
     }).then((res: VideoPreviewResult) => {
       if (res.code === 0)
         previewVideoUrl.value = res.data.durl[0].url
@@ -110,6 +117,8 @@ function toggleWatchLater() {
       .then((res) => {
         if (res.code === 0)
           isInWatchLater.value = true
+        else
+          toast.error(res.message)
       })
   }
   else {
@@ -120,6 +129,8 @@ function toggleWatchLater() {
       .then((res) => {
         if (res.code === 0)
           isInWatchLater.value = false
+        else
+          toast.error(res.message)
       })
   }
 }
@@ -219,10 +230,6 @@ provide('getVideoType', () => props.type!)
     transform="~ translate-z-0"
     mb-4
   >
-    <!-- By directly using predefined unocss width properties, it is possible to dynamically set the width attribute -->
-    <div hidden w="xl:280px lg:250px md:200px 200px" />
-    <div hidden w="full" />
-
     <div v-if="!skeleton && video">
       <div
         class="video-card group"
@@ -241,8 +248,9 @@ provide('getVideoType', () => props.type!)
           <!-- Cover -->
           <div
             class="group/cover"
+            :class="horizontal ? 'horizontal-card-cover' : 'vertical-card-cover'"
             shrink-0
-            :w="wValue" h-fit relative bg="$bew-skeleton" rounded="$bew-radius"
+            h-fit relative bg="$bew-skeleton" rounded="$bew-radius"
             cursor-pointer
             group-hover:z-2
             transform="~ translate-z-0"
@@ -408,7 +416,7 @@ provide('getVideoType', () => props.type!)
               <div flex="~ gap-1 justify-between items-start" w="full" pos="relative">
                 <h3
                   class="keep-two-lines"
-                  text="lg overflow-ellipsis $bew-text-1"
+                  text="overflow-ellipsis $bew-text-1"
                   cursor="pointer"
                 >
                   <a :href="videoUrl" target="_blank" :title="video.title">
@@ -463,17 +471,17 @@ provide('getVideoType', () => props.type!)
                   <br>
                 </div>
               </div>
-              <div mt-2 flex="~ gap-1">
+              <div mt-2 flex="~ gap-1 wrap" text="xs">
                 <!-- Tag -->
                 <span
                   v-if="video.tag"
-                  text="$bew-theme-color sm" lh-6 p="x-2" rounded="$bew-radius" bg="$bew-theme-color-20"
+                  text="$bew-theme-color" lh-6 p="x-2" rounded="$bew-radius" bg="$bew-theme-color-20"
                 >
                   {{ video.tag }}
                 </span>
                 <span
                   v-if="video.publishedTimestamp || video.capsuleText"
-                  bg="$bew-fill-1" p="x-2" rounded="$bew-radius" text="sm $bew-text-3" lh-6
+                  bg="$bew-fill-1" p="x-2" rounded="$bew-radius" text="$bew-text-3" lh-6
                   mr-1
                 >
                   {{ video.publishedTimestamp ? calcTimeSince(video.publishedTimestamp * 1000) : video.capsuleText?.trim() }}
@@ -518,6 +526,14 @@ provide('getVideoType', () => props.type!)
 </template>
 
 <style lang="scss" scoped>
+.horizontal-card-cover {
+  --uno: "xl:w-280px lg:w-250px md:w-200px w-200px";
+}
+
+.vertical-card-cover {
+  --uno: "w-full";
+}
+
 .more-active {
   --uno: "opacity-100";
 }
