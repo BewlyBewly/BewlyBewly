@@ -117,6 +117,8 @@ function toggleWatchLater() {
       .then((res) => {
         if (res.code === 0)
           isInWatchLater.value = true
+        else
+          toast.error(res.message)
       })
   }
   else {
@@ -127,6 +129,8 @@ function toggleWatchLater() {
       .then((res) => {
         if (res.code === 0)
           isInWatchLater.value = false
+        else
+          toast.error(res.message)
       })
   }
 }
