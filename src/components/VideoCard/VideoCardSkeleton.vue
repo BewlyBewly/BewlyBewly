@@ -13,10 +13,10 @@ defineProps<{
     <div aspect-video bg="$bew-skeleton" rounded="$bew-radius" />
     <div flex mt-5>
       <div
-        m="r-2" w="30px" h="30px" rounded="1/2" bg="$bew-skeleton"
+        m="r-4" w="34px" h="34px" rounded="1/2" bg="$bew-skeleton"
         shrink-0
       />
-      <div w="[calc(100%-30px)]">
+      <div w="[calc(100%-34px)]">
         <div flex="~ col gap-2" mb-4 w-inherit>
           <div w-full h-5 bg="$bew-skeleton" rounded-4px />
           <div w="3/4" h-5 bg="$bew-skeleton" rounded-4px />

@@ -24,10 +24,10 @@ const displayedAvatars = computed(() => {
 <template>
   <div
     :style="{
-      width: Array.isArray(author) && author.length > 1 ? `${28 + (displayedAvatars?.length) * 6}px` : '30px',
-      height: Array.isArray(author) && author.length > 1 ? '28px' : '30px',
+      width: Array.isArray(author) && author.length > 1 ? `${28 + (displayedAvatars?.length) * 6}px` : '34px',
+      height: Array.isArray(author) && author.length > 1 ? '28px' : '34px',
     }"
-    mr-2
+    mr-4
     pos="relative"
     shrink-0
   >
@@ -41,8 +41,8 @@ const displayedAvatars = computed(() => {
       :style="{
         zIndex: displayedAvatars.length - index,
         left: `${index * 6}px`,
-        width: displayedAvatars.length > 1 ? `28px` : '30px',
-        height: displayedAvatars.length > 1 ? `28px` : '30px',
+        width: displayedAvatars.length > 1 ? `28px` : '34px',
+        height: displayedAvatars.length > 1 ? `28px` : '34px',
       }"
       @click.stop=""
     >

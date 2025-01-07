@@ -165,7 +165,7 @@ defineExpose({ initData })
 
 <style lang="scss" scoped>
 .grid-adaptive {
-  --uno: "grid 2xl:cols-6 xl:cols-5 lg:cols-4 md:cols-3 sm:cols-2 cols-1 gap-5";
+  --uno: "grid 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 sm:cols-1 cols-1 gap-5";
 }
 
 .grid-two-columns {
