@@ -398,7 +398,7 @@ provide('getVideoType', () => props.type!)
               <div flex="~ gap-1 justify-between items-start" w="full" pos="relative">
                 <h3
                   class="keep-two-lines"
-                  text="lg overflow-ellipsis $bew-text-1"
+                  text="overflow-ellipsis $bew-text-1"
                   cursor="pointer"
                 >
                   <a :href="videoUrl" target="_blank" :title="video.title">
@@ -453,17 +453,17 @@ provide('getVideoType', () => props.type!)
                   <br>
                 </div>
               </div>
-              <div mt-2 flex="~ gap-1">
+              <div mt-2 flex="~ gap-1 wrap" text="xs">
                 <!-- Tag -->
                 <span
                   v-if="video.tag"
-                  text="$bew-theme-color sm" lh-6 p="x-2" rounded="$bew-radius" bg="$bew-theme-color-20"
+                  text="$bew-theme-color" lh-6 p="x-2" rounded="$bew-radius" bg="$bew-theme-color-20"
                 >
                   {{ video.tag }}
                 </span>
                 <span
                   v-if="video.publishedTimestamp || video.capsuleText"
-                  bg="$bew-fill-1" p="x-2" rounded="$bew-radius" text="sm $bew-text-3" lh-6
+                  bg="$bew-fill-1" p="x-2" rounded="$bew-radius" text="$bew-text-3" lh-6
                   mr-1
                 >
                   {{ video.publishedTimestamp ? calcTimeSince(video.publishedTimestamp * 1000) : video.capsuleText?.trim() }}

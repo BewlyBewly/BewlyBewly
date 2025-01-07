@@ -216,7 +216,7 @@ function isMusic(item: FavoriteResource) {
           <Loading v-if="isFullPageLoading" w-full h-full pos="absolute top-0 left-0" mt--50px />
         </Transition>
         <!-- favorite list -->
-        <div grid="~ 2xl:cols-4 xl:cols-3 lg:cols-2 md:cols-1 gap-5" m="t-55px b-6">
+        <div grid="~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 sm:cols-1 cols-1 gap-5" m="t-55px b-6">
           <TransitionGroup name="list">
             <VideoCard
               v-for="item in favoriteResources"
