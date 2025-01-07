@@ -85,11 +85,11 @@ function isSupportedPages(): boolean {
   }
 }
 
-// Only supports Bilibili page URLs recorded in the dock
 export function isSupportedIframePages(): boolean {
   if (
     isInIframe()
     && (
+      // supports Bilibili page URLs recorded in the dock
       isHomePage()
       || /https?:\/\/search\.bilibili\.com\/all.*/.test(currentUrl)
       || /https?:\/\/www\.bilibili\.com\/anime.*/.test(currentUrl)
@@ -101,6 +101,16 @@ export function isSupportedIframePages(): boolean {
         // https://github.com/BewlyBewly/BewlyBewly/issues/1246
         && !/https?:\/\/t\.bilibili\.com\/share\/card\/index.*/.test(currentUrl)
       )
+
+      // Since `Open in drawer` will open the video page within an iframe, so we need to support the following pages
+      // video page
+      || /https?:\/\/(?:www\.)?bilibili\.com\/(?:video|list)\/.*/.test(currentUrl)
+      // anime playback & movie page
+      || /https?:\/\/(?:www\.)?bilibili\.com\/bangumi\/play\/.*/.test(currentUrl)
+      // watch later playlist
+      || /https?:\/\/(?:www\.)?bilibili\.com\/list\/watchlater.*/.test(currentUrl)
+      // favorite playlist
+      || /https?:\/\/(?:www\.)?bilibili\.com\/list\/ml.*/.test(currentUrl)
     )
   ) {
     return true
