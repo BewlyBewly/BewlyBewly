@@ -6,6 +6,7 @@ import { useToast } from 'vue-toastification'
 import Button from '~/components/Button.vue'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { accessKey, settings } from '~/logic'
+import type { VideoInfo } from '~/models/video/videoInfo'
 import type { VideoPreviewResult } from '~/models/video/videoPreview'
 import api from '~/utils/api'
 import { getTvSign, TVAppKey } from '~/utils/authProvider'
@@ -75,15 +76,28 @@ const previewVideoUrl = ref<string>('')
 const contentVisibility = ref<'auto' | 'visible'>('auto')
 const videoElement = ref<HTMLVideoElement | null>(null)
 
-watch(() => isHover.value, (newValue) => {
+watch(() => isHover.value, async (newValue) => {
   if (!props.video || !newValue)
     return
 
   if (props.showPreview && settings.value.enableVideoPreview
-    && !previewVideoUrl.value && props.video.cid) {
+    && !previewVideoUrl.value && (props.video.aid || props.video.bvid)) {
+    let cid = props.video.cid
+    if (!cid) {
+      try {
+        const res: VideoInfo = await api.video.getVideoInfo({
+          bvid: props.video.bvid,
+        })
+        if (res.code === 0)
+          cid = res.data.cid
+      }
+      catch {
+
+      }
+    }
     api.video.getVideoPreview({
       bvid: props.video.bvid,
-      cid: props.video.cid,
+      cid,
     }).then((res: VideoPreviewResult) => {
       if (res.code === 0)
         previewVideoUrl.value = res.data.durl[0].url
