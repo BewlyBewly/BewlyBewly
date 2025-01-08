@@ -262,7 +262,7 @@ defineExpose({ initData })
 }
 
 .grid-adaptive-video {
-  --uno: "grid 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 sm:cols-1 cols-1 gap-5";
+  --uno: "grid 2xl:cols-4 xl:cols-3 lg:cols-2 md:cols-1 sm:cols-1 cols-1 gap-5";
 }
 
 .grid-adaptive-bangumi {

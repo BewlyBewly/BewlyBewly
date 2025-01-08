@@ -416,7 +416,7 @@ provide('getVideoType', () => props.type!)
               <div flex="~ gap-1 justify-between items-start" w="full" pos="relative">
                 <h3
                   class="keep-two-lines"
-                  text="overflow-ellipsis $bew-text-1"
+                  text="overflow-ellipsis $bew-text-1 lg"
                   cursor="pointer"
                 >
                   <a :href="videoUrl" target="_blank" :title="video.title">
@@ -429,7 +429,7 @@ provide('getVideoType', () => props.type!)
                   ref="moreBtnRef"
                   :class="{ 'more-active': showVideoOptions }"
                   bg="hover:$bew-fill-2 active:$bew-fill-3"
-                  shrink-0 w-30px h-30px m="t--3px r--4px"
+                  shrink-0 w-32px h-32px m="t--3px r--4px"
                   grid place-items-center cursor-pointer rounded="50%" duration-300
                   @click.stop.prevent="handleMoreBtnClick"
                 >
@@ -471,7 +471,7 @@ provide('getVideoType', () => props.type!)
                   <br>
                 </div>
               </div>
-              <div mt-2 flex="~ gap-1 wrap" text="xs">
+              <div mt-2 flex="~ gap-1 wrap" text="sm">
                 <!-- Tag -->
                 <span
                   v-if="video.tag"
