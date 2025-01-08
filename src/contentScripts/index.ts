@@ -103,6 +103,7 @@ export function isSupportedIframePages(): boolean {
         /https?:\/\/t\.bilibili\.com.*/.test(currentUrl)
         // https://github.com/BewlyBewly/BewlyBewly/issues/1246
         && !/https?:\/\/t\.bilibili\.com\/share\/card\/index.*/.test(currentUrl)
+        // https://github.com/BewlyBewly/BewlyBewly/issues/1256
         && !/https?:\/\/t\.bilibili\.com\/h5\/dynamic\/vote.*/.test(currentUrl)
       )
 
