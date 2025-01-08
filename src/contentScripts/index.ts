@@ -50,6 +50,7 @@ function isSupportedPages(): boolean {
     // moments
     || (
       /https?:\/\/t\.bilibili\.com\.*/.test(currentUrl)
+      // https://github.com/BewlyBewly/BewlyBewly/issues/1256
       && !/https?:\/\/t\.bilibili\.com\/vote.*/.test(currentUrl)
     )
     // moment detail
