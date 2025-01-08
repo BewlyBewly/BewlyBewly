@@ -48,7 +48,11 @@ function isSupportedPages(): boolean {
     // search page
     || /https?:\/\/search\.bilibili\.com\.*/.test(currentUrl)
     // moments
-    || /https?:\/\/t\.bilibili\.com\.*/.test(currentUrl)
+    || (
+      /https?:\/\/t\.bilibili\.com\.*/.test(currentUrl)
+      // https://github.com/BewlyBewly/BewlyBewly/issues/1256
+      && !/https?:\/\/t\.bilibili\.com\/vote.*/.test(currentUrl)
+    )
     // moment detail
     || /https?:\/\/(?:www\.)?bilibili\.com\/opus\/.*/.test(currentUrl)
     // history page
@@ -100,6 +104,8 @@ export function isSupportedIframePages(): boolean {
         /https?:\/\/t\.bilibili\.com.*/.test(currentUrl)
         // https://github.com/BewlyBewly/BewlyBewly/issues/1246
         && !/https?:\/\/t\.bilibili\.com\/share\/card\/index.*/.test(currentUrl)
+        // https://github.com/BewlyBewly/BewlyBewly/issues/1256
+        && !/https?:\/\/t\.bilibili\.com\/h5\/dynamic\/vote.*/.test(currentUrl)
       )
 
       // Since `Open in drawer` will open the video page within an iframe, so we need to support the following pages
