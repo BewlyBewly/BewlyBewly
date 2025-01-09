@@ -70,7 +70,7 @@ export function useDark() {
       document.querySelector('#bewly')?.classList.remove('dark')
       document.documentElement.classList.remove('dark')
       nextTick(() => {
-        document.body?.classList.remove('dark')
+        document.body.classList.remove('dark')
       })
       document.documentElement.classList.remove('bili_dark')
 
