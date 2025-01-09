@@ -277,7 +277,8 @@
   --bew-filter-glass-2: blur(20px) saturate(180%);
 }
 
-:root.bewly-design {
+:root.bewly-design,
+:root.bewly-design * {
   --brand_pink: var(--bew-theme-color);
   --brand_pink_thin: var(--bew-theme-color-20);
   --brand_blue: var(--bew-theme-color);
@@ -290,7 +291,7 @@
   --brand_blue_active: var(--bew-theme-color);
   --brand_blue_disabled: var(--bew-theme-color-60);
 
-  --text_link: var(--bew-theme-color);
+  --text_link: var(--bew-theme-color-80);
 
   --bpx-fn-color: var(--bew-theme-color);
   --bpx-primary-color: var(--bew-theme-color);
@@ -300,9 +301,22 @@
   --bpx-toast-fn-color: var(--bew-theme-color);
   --bpx-toast-fn-hover-color: var(--bew-theme-color-80);
   --bpx-primary-color: var(--bew-theme-color);
+
+  --Lb0: color-mix(in oklab, var(--bew-theme-color), white 75%);
+  --Lb1: color-mix(in oklab, var(--bew-theme-color), white 60%);
+  --Lb2: color-mix(in oklab, var(--bew-theme-color), white 45%);
+  --Lb3: color-mix(in oklab, var(--bew-theme-color), white 30%);
+  --Lb4: color-mix(in oklab, var(--bew-theme-color), white 15%);
+  --Lb5: var(--bew-theme-color);
+  --Lb6: color-mix(in oklab, var(--bew-theme-color), black 15%);
+  --Lb7: color-mix(in oklab, var(--bew-theme-color), black 30%);
+  --Lb8: color-mix(in oklab, var(--bew-theme-color), black 45%);
+  --Lb9: color-mix(in oklab, var(--bew-theme-color), black 60%);
+  --Lb10: color-mix(in oklab, var(--bew-theme-color), black 75%);
 }
 
-:root.dark.bewly-design {
+:root.dark.bewly-design,
+:root.dark.bewly-design * {
   // --brand_pink: var(--bew-theme-color);
   // --brand_pink_thin: var(--bew-theme-color-20);
   // --brand_blue: var(--bew-theme-color);
@@ -369,6 +383,18 @@
   --bpx-dmsend-border: var(--bew-border-color);
   --bpx-dmsend-input-font: var(--bew-text-1);
   --bg1_rgb: 13, 14, 17;
+
+  --Lb0: color-mix(in oklab, var(--bew-theme-color), black 75%);
+  --Lb1: color-mix(in oklab, var(--bew-theme-color), black 60%);
+  --Lb2: color-mix(in oklab, var(--bew-theme-color), black 45%);
+  --Lb3: color-mix(in oklab, var(--bew-theme-color), black 30%);
+  --Lb4: color-mix(in oklab, var(--bew-theme-color), black 15%);
+  --Lb5: var(--bew-theme-color);
+  --Lb6: color-mix(in oklab, var(--bew-theme-color), white 15%);
+  --Lb7: color-mix(in oklab, var(--bew-theme-color), white 30%);
+  --Lb8: color-mix(in oklab, var(--bew-theme-color), white 45%);
+  --Lb9: color-mix(in oklab, var(--bew-theme-color), white 60%);
+  --Lb10: color-mix(in oklab, var(--bew-theme-color), white 75%);
 }
 
 // #region Bilibili original css variables
