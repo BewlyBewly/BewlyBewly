@@ -58,7 +58,7 @@ export function useDark() {
       document.querySelector('#bewly')?.classList.add('dark')
       document.documentElement.classList.add('dark')
       nextTick(() => {
-        document.body?.classList?.add('dark')
+        document.body?.classList.add('dark')
       })
       // bili_dark is bilibili's official dark mode class
       document.documentElement.classList.add('bili_dark')
@@ -70,7 +70,7 @@ export function useDark() {
       document.querySelector('#bewly')?.classList?.remove('dark')
       document.documentElement.classList.remove('dark')
       nextTick(() => {
-        document.body?.classList?.remove('dark')
+        document.body?.classList.remove('dark')
       })
       document.documentElement.classList.remove('bili_dark')
 
