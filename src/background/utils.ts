@@ -75,7 +75,7 @@ function apiListenerFactory(API_MAP: APIMAP) {
       return doRequest(message, api, sendResponse, cookies)
     }
 
-    return doRequest(message, api)
+    return doRequest(message, api, sendResponse)
   }
 }
 
