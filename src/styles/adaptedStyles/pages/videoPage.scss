@@ -377,6 +377,7 @@
     .ql-editor .ql-color-\#000000,
     .ql-editor,
     .up-detail .up-detail-top .up-name,
+
     .ai-summary-tips-panel .tips-panel-title,
     ._TipsPopover_1lury_1 ._Panel_1lury_10 ._PanelContent_1lury_19,
     ._TipsPopover_1lury_1 ._Panel_1lury_10 ._PanelContent_1lury_19 ._Title_1lury_32 {
@@ -419,6 +420,16 @@
     .note-list .note-card-container .note-card:hover,
     .note-detail .note-operation .sanlian-box {
       border-color: var(--bew-border-color);
+    }
+
+    // 标题下方警告
+    .video-argue .video-argue-inner.strong {
+      background-color: #2e1617; // 安卓客户端屏幕取色结果
+    }
+
+    // 稿件举报窗
+    .app .navbar {
+      background-color: var(--bew-bg) !important;
     }
   }
   //  #endregion
