@@ -281,6 +281,10 @@
       #check-timestamp:checked {
       overflow: hidden;
     }
+
+    ._VideoAssistant_196qs_1 ._Header_196qs_20 ._Header__Left_196qs_28 ._StatusBar_196qs_34 ._StatusText_196qs_43 {
+      background-image: linear-gradient(90.24deg, var(--bew-theme-color) 0.4%, var(--bew-theme-color) 101.46%);
+    }
   }
 
   // #endregion
@@ -345,7 +349,8 @@
       background-color: var(--bew-elevated-solid);
     }
 
-    .ai-summary-tips-panel .tips-panel {
+    .ai-summary-tips-panel .tips-panel,
+    ._TipsPopover_1lury_1 ._Panel_1lury_10 ._PanelContent_1lury_19 {
       background-color: var(--bew-bg);
     }
 
@@ -372,7 +377,9 @@
     .ql-editor .ql-color-\#000000,
     .ql-editor,
     .up-detail .up-detail-top .up-name,
-    .ai-summary-tips-panel .tips-panel-title {
+    .ai-summary-tips-panel .tips-panel-title,
+    ._TipsPopover_1lury_1 ._Panel_1lury_10 ._PanelContent_1lury_19,
+    ._TipsPopover_1lury_1 ._Panel_1lury_10 ._PanelContent_1lury_19 ._Title_1lury_32 {
       color: var(--bew-text-1);
     }
 
