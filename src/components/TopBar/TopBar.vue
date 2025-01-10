@@ -148,8 +148,10 @@ const isTopBarFixed = computed((): boolean => {
   }
   return false
 })
+
 const showTopBar = computed((): boolean => {
-  if (settings.value.showTopBar)
+  const isCreativeCenter = /https?:\/\/member.bilibili.com\/platform.*/.test(location.href)
+  if (settings.value.showTopBar && !isCreativeCenter)
     return true
   return false
 })
