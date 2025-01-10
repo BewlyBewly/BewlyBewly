@@ -1,4 +1,20 @@
 .bewly-design.loginPage {
+  .login-pwd,
+  .tab-sms {
+    .tab__form,
+    .btn_wp {
+      width: 420px;
+    }
+  }
+
+  .tab-sms {
+    .btn_wp {
+      .btn_primary {
+        width: 420px !important;
+      }
+    }
+  }
+
   // #region theme color adaption part
   // Increase the priority of the style inside by writing a non-existent selector in :not()
   :not(foobar) {
