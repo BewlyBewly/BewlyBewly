@@ -15,6 +15,10 @@
     }
   }
 
+  .top-header,
+  .international-footer {
+    display: none;
+  }
   // #region theme color adaption part
   // Increase the priority of the style inside by writing a non-existent selector in :not()
   :not(foobar) {
@@ -45,6 +49,16 @@
   &.dark {
     #app {
       background-color: var(--bew-bg);
+    }
+
+    .login-scan__qrcode .qrcode__tip,
+    .login-scan__qrcode .qrcode__tip img {
+      background: var(--bew-bg);
+    }
+
+    .login-scan__qrcode .scan-tips-icon {
+      background: var(--bew-bg) url(//s1.hdslb.com/bfs/static/jinkela/passport-pc/assets/qr-tips.png) no-repeat;
+      background-size: 100% 100%;
     }
 
     .main__middle-line,
