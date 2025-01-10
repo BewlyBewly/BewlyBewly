@@ -21,12 +21,12 @@ const emit = defineEmits<{
   (e: 'afterLoading'): void
 }>()
 
-const gridValue = computed((): string => {
+const gridClass = computed((): string => {
   if (props.gridLayout === 'adaptive')
-    return '~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-5'
+    return 'grid-adaptive'
   if (props.gridLayout === 'twoColumns')
-    return '~ cols-1 xl:cols-2 gap-4'
-  return '~ cols-1 gap-4'
+    return 'grid-two-columns'
+  return 'grid-one-column'
 })
 
 const videoList = ref<VideoElement[]>([])
@@ -39,7 +39,7 @@ const noMoreContent = ref<boolean>(false)
 const noMoreContentWarning = ref<boolean>(false)
 const { handleReachBottom, handlePageRefresh, haveScrollbar } = useBewlyApp()
 
-onMounted(async () => {
+onMounted(() => {
   initData()
   initPageAction()
 })
@@ -166,11 +166,6 @@ defineExpose({ initData })
 
 <template>
   <div>
-    <!-- By directly using predefined unocss grid properties, it is possible to dynamically set the grid attribute -->
-    <div hidden grid="~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-5" />
-    <div hidden grid="~ cols-1 xl:cols-2 gap-4" />
-    <div hidden grid="~ cols-1 gap-4" />
-
     <Empty v-if="needToLoginFirst" mt-6 :description="$t('common.please_log_in_first')">
       <Button type="primary" @click="jumpToLoginPage()">
         {{ $t('common.login') }}
@@ -185,7 +180,7 @@ defineExpose({ initData })
       v-else
       ref="containerRef"
       m="b-0 t-0" relative w-full h-full
-      :grid="gridValue"
+      :class="gridClass"
     >
       <VideoCard
         v-for="video in videoList"
@@ -196,10 +191,12 @@ defineExpose({ initData })
           id: video.item.modules.module_author.mid,
           title: `${video.item.modules.module_dynamic.major.pgc?.title}`,
           cover: `${video.item.modules.module_dynamic.major.pgc?.cover}`,
-          author: video.item.modules.module_author.name,
-          authorFace: video.item.modules.module_author.face,
-          mid: video.item.modules.module_author.mid,
-          authorUrl: video.item.modules.module_author.jump_url,
+          author: {
+            name: video.item.modules.module_author.name,
+            authorUrl: video.item.modules.module_author.jump_url,
+            authorFace: video.item.modules.module_author.face,
+            mid: video.item.modules.module_author.mid,
+          },
           viewStr: video.item.modules.module_dynamic.major.pgc?.stat.play,
           danmakuStr: video.item.modules.module_dynamic.major.pgc?.stat.danmaku,
           capsuleText: video.item.modules.module_author.pub_time,
@@ -216,4 +213,15 @@ defineExpose({ initData })
 </template>
 
 <style lang="scss" scoped>
+.grid-adaptive {
+  --uno: "grid 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 sm:cols-1 cols-1 gap-5";
+}
+
+.grid-two-columns {
+  --uno: "grid cols-1 xl:cols-2 gap-4";
+}
+
+.grid-one-column {
+  --uno: "grid cols-1 gap-4";
+}
 </style>

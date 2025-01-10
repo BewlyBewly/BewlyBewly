@@ -2,18 +2,17 @@
 import { useI18n } from 'vue-i18n'
 
 import { useBewlyApp } from '~/composables/useAppProvider'
-import { TOP_BAR_VISIBILITY_CHANGE } from '~/constants/globalEvents'
 import type { GridLayoutType } from '~/logic'
 import { settings } from '~/logic'
 import type { List as RankingVideoItem, RankingResult } from '~/models/video/ranking'
 import type { List as RankingPgcItem, RankingPgcResult } from '~/models/video/rankingPgc'
 import api from '~/utils/api'
-import emitter from '~/utils/mitt'
 
 import type { RankingType } from '../types'
 
 const props = defineProps<{
   gridLayout: GridLayoutType
+  topBarVisibility: boolean
 }>()
 
 const emit = defineEmits<{
@@ -24,18 +23,18 @@ const emit = defineEmits<{
 const { t } = useI18n()
 const { handleBackToTop, handlePageRefresh } = useBewlyApp()
 
-const gridValue = computed((): string => {
+const gridClass = computed((): string => {
   if (props.gridLayout === 'adaptive') {
     // eslint-disable-next-line ts/no-use-before-define
     if (!activatedRankingType.value.seasonType)
-      return '~ 2xl:cols-4 xl:cols-3 lg:cols-2 md:cols-1 gap-5'
+      return 'grid-adaptive-video'
     else
-      return '~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-5'
+      return 'grid-adaptive-bangumi'
   }
 
   if (props.gridLayout === 'twoColumns')
-    return '~ cols-1 xl:cols-2 gap-4'
-  return '~ cols-1 gap-4'
+    return 'grid-two-columns'
+  return 'grid-one-column'
 })
 
 const rankingTypes = computed((): RankingType[] => {
@@ -80,22 +79,22 @@ watch(() => activatedRankingType.value.id, () => {
   initData()
 })
 
+watch(() => props.topBarVisibility, () => {
+  shouldMoveAsideUp.value = false
+
+  // Allow moving tabs up only when the top bar is not hidden & is set to auto-hide
+  // This feature is primarily designed to compatible with the Bilibili Evolved's top bar
+  // Even when the BewlyBewly top bar is hidden, the Bilibili Evolved top bar still exists, so not moving up
+  if (settings.value.autoHideTopBar && settings.value.showTopBar) {
+    if (props.topBarVisibility)
+      shouldMoveAsideUp.value = false
+
+    else
+      shouldMoveAsideUp.value = true
+  }
+})
+
 onMounted(() => {
-  emitter.on(TOP_BAR_VISIBILITY_CHANGE, (val) => {
-    shouldMoveAsideUp.value = false
-
-    // Allow moving tabs up only when the top bar is not hidden & is set to auto-hide
-    // This feature is primarily designed to compatible with the Bilibili Evolved's top bar
-    // Even when the BewlyBewly top bar is hidden, the Bilibili Evolved top bar still exists, so not moving up
-    if (settings.value.autoHideTopBar && settings.value.showTopBar) {
-      if (val)
-        shouldMoveAsideUp.value = false
-
-      else
-        shouldMoveAsideUp.value = true
-    }
-  })
-
   initData()
   initPageAction()
 })
@@ -125,9 +124,9 @@ function getData() {
     getRankingVideos()
 }
 
-onBeforeUnmount(() => {
-  emitter.off(TOP_BAR_VISIBILITY_CHANGE)
-})
+// onBeforeUnmount(() => {
+//   emitter.off(TOP_BAR_VISIBILITY_CHANGE)
+// })
 
 function getRankingVideos() {
   videoList.length = 0
@@ -183,13 +182,7 @@ defineExpose({ initData })
       </OverlayScrollbarsComponent>
     </aside>
 
-    <!-- By directly using predefined unocss grid properties, it is possible to dynamically set the grid attribute -->
-    <div hidden grid="~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-5" />
-    <div hidden grid="~ 2xl:cols-4 xl:cols-3 lg:cols-2 md:cols-1 gap-5" />
-    <div hidden grid="~ cols-1 xl:cols-2 gap-4" />
-    <div hidden grid="~ cols-1 gap-4" />
-
-    <main w-full :grid="gridValue">
+    <main w-full :class="gridClass">
       <template v-if="!('seasonType' in activatedRankingType)">
         <VideoCard
           v-for="(video, index) in videoList"
@@ -200,9 +193,11 @@ defineExpose({ initData })
             title: video.title,
             desc: video.desc,
             cover: video.pic,
-            author: video.owner.name,
-            authorFace: video.owner.face,
-            mid: video.owner.mid,
+            author: {
+              name: video.owner.name,
+              authorFace: video.owner.face,
+              mid: video.owner.mid,
+            },
             view: video.stat.view,
             danmaku: video.stat.danmaku,
             publishedTimestamp: video.pubdate,
@@ -264,5 +259,21 @@ defineExpose({ initData })
 
 .hide {
   --uno: "h-[calc(100vh-70)] translate-y--70px";
+}
+
+.grid-adaptive-video {
+  --uno: "grid 2xl:cols-4 xl:cols-3 lg:cols-2 md:cols-1 sm:cols-1 cols-1 gap-5";
+}
+
+.grid-adaptive-bangumi {
+  --uno: "grid 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-5";
+}
+
+.grid-two-columns {
+  --uno: "grid cols-1 xl:cols-2 gap-4";
+}
+
+.grid-one-column {
+  --uno: "grid cols-1 gap-4";
 }
 </style>

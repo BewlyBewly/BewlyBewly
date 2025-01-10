@@ -10,7 +10,6 @@ import { LV0_ICON, LV1_ICON, LV2_ICON, LV3_ICON, LV4_ICON, LV5_ICON, LV6_ICON, L
 import { getCSRF, getUserID, isHomePage } from '~/utils/main'
 
 import type { UserInfo, UserStat } from '../types'
-import ALink from './ALink.vue'
 
 const props = defineProps<{
   userInfo: UserInfo
@@ -130,8 +129,9 @@ function handleClickChannel() {
 
 <template>
   <div
-    style="backdrop-filter: var(--bew-filter-glass-1);"
-    p-4 rounded="$bew-radius" w-300px z--1 bg="$bew-elevated-alt"
+    style="backdrop-filter: var(--bew-filter-glass-1); max-height: 560px;"
+    w-300px h="[calc(100vh-100px)]" important-overflow-y-auto
+    p-4 rounded="$bew-radius" z--1 bg="$bew-elevated-alt"
     border="1 $bew-border-color"
     shadow="[var(--bew-shadow-3),var(--bew-shadow-edge-glow-1)]"
   >
@@ -155,12 +155,14 @@ function handleClickChannel() {
       <ALink
         class="group mr-4"
         href="https://account.bilibili.com/account/coin"
+        type="topBar"
       >
         {{ $t('topbar.user_dropdown.money') + (userInfo.money ?? '-') }}
       </ALink>
       <ALink
         class="group"
         href="https://pay.bilibili.com/pay-v2-web/bcoin_index"
+        type="topBar"
       >
         {{
           $t('topbar.user_dropdown.b_coins') + (userInfo.wallet?.bcoin_balance ?? '-')
@@ -170,6 +172,7 @@ function handleClickChannel() {
 
     <ALink
       href="//account.bilibili.com/account/record?type=exp"
+      type="topBar"
       block mb-2 w-full
       flex="~ col justify-center items-start"
     >
@@ -223,6 +226,7 @@ function handleClickChannel() {
         class="channel-info-item"
         :href="`https://space.bilibili.com/${mid}/fans/follow`"
         :title="`${userStat.following}`"
+        type="topBar"
       >
         <div class="num">
           {{ userStat.following ? numFormatter(userStat.following) : '0' }}
@@ -233,6 +237,7 @@ function handleClickChannel() {
         class="channel-info-item"
         :href="`https://space.bilibili.com/${mid}/fans/fans`"
         :title="`${userStat.follower}`"
+        type="topBar"
       >
         <div class="num">
           {{ userStat.follower ? numFormatter(userStat.follower) : '0' }}
@@ -243,6 +248,7 @@ function handleClickChannel() {
         class="channel-info-item"
         :href="`https://space.bilibili.com/${mid}/dynamic`"
         :title="`${userStat.dynamic_count}`"
+        type="topBar"
       >
         <div class="num">
           {{

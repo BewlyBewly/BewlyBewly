@@ -4,7 +4,7 @@ import { onKeyStroke } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 import { useToast } from 'vue-toastification'
 
-import type { Video } from '~/components/VideoCard/VideoCard.vue'
+import type { Video } from '~/components/VideoCard/types'
 import { accessKey } from '~/logic'
 import { Type as ThreePointV2Type } from '~/models/video/appForYou'
 import api from '~/utils/api'

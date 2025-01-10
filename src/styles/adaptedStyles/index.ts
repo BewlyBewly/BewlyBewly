@@ -1,14 +1,6 @@
-import './common/common.scss'
-import './common/comments.scss'
-import './common/topBar.scss'
-import './common/footer.scss'
-import './common/modal.scss'
-import './common/btn.scss'
-import './common/userCard.scss'
-import './common/videoPlayer.scss'
-import './common/loginDialog.scss'
-import './shadowDom/comments.scss'
-import './thirdParty/bilibiliEvolved.scss'
+import './common'
+import './shadowDom'
+import './thirdParties'
 
 import { isHomePage } from '~/utils/main'
 
@@ -38,7 +30,10 @@ async function setupStyles() {
   }
 
   // history page 历史记录页
-  else if (/https?:\/\/(?:www\.)?bilibili\.com\/account\/history.*/.test(currentUrl)) {
+  else if (
+    /https?:\/\/(?:www\.)?bilibili\.com\/account\/history.*/.test(currentUrl)
+    || /https?:\/\/(?:www\.)?bilibili\.com\/history.*/.test(currentUrl)
+  ) {
     await import('./pages/historyPage.scss')
     document.documentElement.classList.add('historyPage')
   }
@@ -129,10 +124,16 @@ async function setupStyles() {
     document.documentElement.classList.add('creativeCenterPage')
   }
 
-  // account settings page 帳戶設定頁
-  else if (/^https?:\/\/account\.bilibili\.com\/.*$/.test(currentUrl)) {
+  // account settings page 帳戶設定頁，除了大會員頁
+  else if (/^https?:\/\/account\.bilibili\.com\/(?!big).*$/.test(currentUrl)) {
     await import('./pages/accountSettingsPage.scss')
     document.documentElement.classList.add('accountSettingsPage')
+  }
+
+  // premium page bilibili 大會員頁
+  else if (/^https?:\/\/account\.bilibili\.com\/big.*$/.test(currentUrl)) {
+    await import('./pages/premiumPage.scss')
+    document.documentElement.classList.add('premiumPage')
   }
 
   // login page 登入頁

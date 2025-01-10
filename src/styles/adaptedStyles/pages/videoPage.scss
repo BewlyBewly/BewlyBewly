@@ -26,6 +26,12 @@
   // #region theme color adaption part
   // Increase the priority of the style inside by writing a non-existent selector in `:not()`
   :not(foobar) {
+    ._VideoAssistant_196qs_1._Light_196qs_12,
+    ._VideoAssistant_196qs_1._Dark_196qs_16 {
+      --app_bg: var(--bew-elevated-alt-solid);
+      --app_graph_bg: var(--bew-fill-1);
+    }
+
     .content .group-list li input[type="checkbox"] + i {
       border-width: 1px;
       border-radius: 5px;
@@ -59,7 +65,8 @@
 
     .note-list .list-note-operation,
     .note-pc .note-container .note-header .note-operation,
-    .note-up .up-desc-container .desc-top .attention-btn-container:not(.is-attention) {
+    .note-up .up-desc-container .desc-top .attention-btn-container:not(.is-attention),
+    .up-detail .up-detail-top .live-status:hover {
       background-color: var(--bew-theme-color);
     }
 
@@ -103,6 +110,15 @@
 
     .video-argue .video-argue-inner.strong {
       background-color: var(--bew-error-color-10);
+    }
+
+    ._Fallback_1t0d5_1 ._Main_1t0d5_10 ._Item_1t0d5_15 {
+      background-color: var(--bew-content);
+    }
+
+    ._SeekSections_1iu0q_1 ._Item_1iu0q_1 ._Parts_1iu0q_16 ._Part_1iu0q_16 ._Time_1iu0q_28 ._TimeText_1iu0q_35,
+    ._SeekSections_1iu0q_1 ._Item_1iu0q_1 ._Parts_1iu0q_16 ._Part_1iu0q_16:hover {
+      background-color: var(--bew-fill-1);
     }
 
     .video-sections-v1 .video-sections-head_first-line .first-line-left .first-line-title:hover,
@@ -288,8 +304,15 @@
 
     .note-list .note-card-container .note-card,
     .resizable-component .ql-tag-blot .time-tag-item,
-    .ql-toolbar {
+    .ql-toolbar,
+    ._Tabs_krx6h_1 ._TabItem_krx6h_8._Active_krx6h_36,
+    ._SeekSections_1iu0q_1 ._Item_1iu0q_1,
+    ._Fallback_1t0d5_1 ._Main_1t0d5_10 ._Item_1t0d5_15 {
       background-color: var(--bew-fill-1);
+    }
+
+    ._SeekSections_1iu0q_1 ._Item_1iu0q_1 ._Parts_1iu0q_16 ._Part_1iu0q_16:hover {
+      background-color: var(--bew-fill-2);
     }
 
     .bpx-player-container[data-revision="1"]

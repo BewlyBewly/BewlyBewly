@@ -29,7 +29,7 @@ const shouldMoveTabsUp = ref<boolean>(false)
 const tabContentLoading = ref<boolean>(false)
 const currentTabs = ref<HomeTab[]>([])
 const tabPageRef = ref()
-
+const topBarVisibility = ref<boolean>(false)
 const gridLayoutIcons = computed((): GridLayoutIcon[] => {
   return [
     { icon: 'i-mingcute:table-3-line', iconActivated: 'i-mingcute:table-3-fill', value: 'adaptive' },
@@ -64,6 +64,7 @@ onMounted(() => {
   showSearchPageMode.value = true
   emitter.off(TOP_BAR_VISIBILITY_CHANGE)
   emitter.on(TOP_BAR_VISIBILITY_CHANGE, (val) => {
+    topBarVisibility.value = val
     shouldMoveTabsUp.value = false
 
     // Allow moving tabs up only when the top bar is not hidden & is set to auto-hide
@@ -191,49 +192,68 @@ function toggleTabContentLoading(loading: boolean) {
       </Transition>
 
       <header
-        pos="sticky top-[calc(var(--bew-top-bar-height)+10px)]" w-full z-9 mb-8 duration-300
+        pos="sticky top-[calc(var(--bew-top-bar-height)+10px)]" w-full z-9 m="b-4" duration-300
         ease-in-out flex="~ justify-between items-start gap-4"
         :class="{ hide: shouldMoveTabsUp }"
       >
-        <section v-if="!(!settings.alwaysShowTabsOnHomePage && currentTabs.length === 1)" flex="~ items-center gap-3 wrap">
-          <button
-            v-for="tab in currentTabs" :key="tab.page"
-            :class="{ 'tab-activated': activatedPage === tab.page }"
-            style="backdrop-filter: var(--bew-filter-glass-1)"
-            px-4 lh-35px h-35px bg="$bew-elevated hover:$bew-elevated-hover" rounded="$bew-radius"
-            cursor-pointer shadow="$bew-shadow-1" box-border border="1 $bew-border-color" duration-300
-            flex="~ gap-2 items-center" relative
-            @click="handleChangeTab(tab)"
+        <section
+          v-if="!(!settings.alwaysShowTabsOnHomePage && currentTabs.length === 1)"
+          style="backdrop-filter: var(--bew-filter-glass-1)"
+          bg="$bew-elevated" p-1
+          w="[calc(100vw-280px)]" max-w="fit"
+          h-38px rounded-full
+          text="sm"
+          shadow="[var(--bew-shadow-1),var(--bew-shadow-edge-glow-1)]"
+          box-border border="1 $bew-border-color"
+        >
+          <OverlayScrollbarsComponent
+            class="home-tabs-inside"
+            element="div" defer
+            :options="{
+              x: 'scroll',
+              y: 'hidden',
+            }"
+            h-full of-hidden
           >
-            <span class="text-center">{{ $t(tab.i18nKey) }}</span>
+            <button
+              v-for="tab in currentTabs" :key="tab.page"
+              :class="{ 'tab-activated': activatedPage === tab.page }"
+              px-3 h-inherit
+              bg="transparent hover:$bew-fill-2" text="$bew-text-2 hover:$bew-text-1" fw-bold rounded-full
+              cursor-pointer duration-300
+              flex="~ gap-2 items-center shrink-0" relative
+              @click="handleChangeTab(tab)"
+            >
+              <span class="text-center">{{ $t(tab.i18nKey) }}</span>
 
-            <Transition name="fade">
-              <div
-                v-show="activatedPage === tab.page && tabContentLoading"
-                i-svg-spinners:ring-resize
-                pos="absolute right-4px top-4px" duration-300
-                text="8px $bew-text-auto"
-              />
-            </Transition>
-          </button>
+              <Transition name="fade">
+                <div
+                  v-show="activatedPage === tab.page && tabContentLoading"
+                  i-svg-spinners:ring-resize
+                  pos="absolute right-4px top-4px" duration-300
+                  text="8px white"
+                />
+              </Transition>
+            </button>
+          </OverlayScrollbarsComponent>
         </section>
 
         <div
           v-if="settings.enableGridLayoutSwitcher"
           style="backdrop-filter: var(--bew-filter-glass-1)"
-          flex="~ gap-1 shrink-0" p-1 h-35px bg="$bew-elevated" transform-gpu
-          ml-auto rounded="$bew-radius" shadow="$bew-shadow-1" box-border border="1 $bew-border-color"
+          flex="~ gap-1 shrink-0" p-1 h-38px bg="$bew-elevated" transform-gpu
+          ml-auto rounded-full
+          shadow="[var(--bew-shadow-1),var(--bew-shadow-edge-glow-1)]"
+          box-border border="1 $bew-border-color"
         >
           <div
             v-for="icon in gridLayoutIcons" :key="icon.value"
-            :style="{
-              backgroundColor: gridLayout.home === icon.value ? 'var(--bew-theme-color-auto)' : '',
-              color: gridLayout.home === icon.value ? 'var(--bew-text-auto)' : 'unset',
-            }"
+            :class="{ 'grid-layout-item-activated': gridLayout.home === icon.value }"
             flex="~ justify-center items-center"
-            w-full
-            h-full p="x-2 y-1" rounded="$bew-radius-half" bg="hover:$bew-fill-2" duration-300
-            cursor-pointer @click="gridLayout.home = icon.value"
+            h-full aspect-square text="$bew-text-2 hover:$bew-text-1"
+            rounded-full bg="hover:$bew-fill-2" duration-300
+            cursor-pointer
+            @click="gridLayout.home = icon.value"
           >
             <div :class="gridLayout.home === icon.value ? icon.iconActivated : icon.icon" text-base />
           </div>
@@ -246,6 +266,7 @@ function toggleTabContentLoading(loading: boolean) {
             :is="pages[activatedPage]" :key="activatedPage"
             ref="tabPageRef"
             :grid-layout="gridLayout.home"
+            :top-bar-visibility="topBarVisibility"
             @before-loading="toggleTabContentLoading(true)"
             @after-loading="toggleTabContentLoading(false)"
           />
@@ -284,7 +305,20 @@ function toggleTabContentLoading(loading: boolean) {
   --uno: "important-translate-y--70px";
 }
 
+.home-tabs-inside {
+  :deep([data-overlayscrollbars-contents]) {
+    --uno: "flex items-center gap-1 h-inherit rounded-$bew-radius-half";
+  }
+  :deep(.os-scrollbar) {
+    --uno: "mb--4px";
+  }
+}
+
 .tab-activated {
-  --uno: "bg-$bew-theme-color-auto text-$bew-text-auto border-$bew-theme-color dark:border-white";
+  --uno: "bg-$bew-theme-color-auto text-$bew-text-auto";
+}
+
+.grid-layout-item-activated {
+  --uno: "bg-$bew-theme-color-auto text-$bew-text-auto";
 }
 </style>

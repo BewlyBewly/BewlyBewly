@@ -3,7 +3,7 @@ import { onKeyStroke, useEventListener } from '@vueuse/core'
 
 import { DRAWER_VIDEO_ENTER_PAGE_FULL, DRAWER_VIDEO_EXIT_PAGE_FULL } from '~/constants/globalEvents'
 import { settings } from '~/logic'
-import { isHomePage } from '~/utils/main'
+import { isHomePage, isInIframe } from '~/utils/main'
 
 // TODO: support shortcuts like `Ctrl+Alt+T` to open in new tab, `Esc` to close
 
@@ -21,21 +21,20 @@ const headerShow = ref(false)
 const iframeRef = ref<HTMLIFrameElement | null>(null)
 const currentUrl = ref<string>(props.url)
 const delayCloseTimer = ref<NodeJS.Timeout | null>(null)
-const inIframe = computed((): boolean => {
-  return window.self !== window.top
-})
 
 useEventListener(window, 'popstate', updateIframeUrl)
-// nextTick(() => {
-//   useEventListener(iframeRef.value?.contentWindow, 'pushstate', updateCurrentUrl)
-// })
+nextTick(() => {
+  useEventListener(iframeRef.value?.contentWindow, 'historyChange', updateCurrentUrl)
+  useEventListener(iframeRef.value?.contentWindow, 'popstate', updateCurrentUrl)
+})
 
-onMounted(async () => {
+onMounted(() => {
   history.pushState(null, '', props.url)
   show.value = true
   headerShow.value = true
-  await nextTick()
-  iframeRef.value?.focus()
+  nextTick(() => {
+    iframeRef.value?.focus()
+  })
 })
 
 onBeforeUnmount(() => {
@@ -46,17 +45,17 @@ onUnmounted(() => {
   history.replaceState(null, '', 'https://www.bilibili.com')
 })
 
-// function updateCurrentUrl() {
-//   if (iframeRef.value?.contentWindow) {
-//     try {
-//       currentUrl.value = iframeRef.value.contentWindow.location.href.replace(/\/$/, '')
-//       history.pushState(null, '', currentUrl.value.replace(/\/$/, ''))
-//     }
-//     catch (error) {
-//       console.error('Unable to access iframe URL:', error)
-//     }
-//   }
-// }
+function updateCurrentUrl() {
+  if (iframeRef.value?.contentWindow) {
+    try {
+      currentUrl.value = iframeRef.value.contentWindow.location.href.replace(/\/$/, '')
+      history.pushState(null, '', currentUrl.value.replace(/\/$/, ''))
+    }
+    catch (error) {
+      console.error('Unable to access iframe URL:', error)
+    }
+  }
+}
 
 async function updateIframeUrl() {
   if (isHomePage()) {
@@ -98,9 +97,10 @@ async function releaseIframeResources() {
 }
 
 function handleOpenInNewTab() {
-  // window.open(props.url, '_blank')
-  if (iframeRef.value)
+  if (iframeRef.value) {
     window.open(iframeRef.value.contentWindow?.location.href.replace(/\/$/, ''), '_blank')
+    handleClose()
+  }
 }
 
 const isEscPressed = ref<boolean>(false)
@@ -133,7 +133,7 @@ nextTick(() => {
 })
 
 watchEffect(() => {
-  if (inIframe.value)
+  if (isInIframe())
     return null
 
   useEventListener(window, 'message', ({ data }) => {
@@ -236,7 +236,7 @@ watchEffect(() => {
       >
         <iframe
           ref="iframeRef"
-          :src="currentUrl"
+          :src="props.url"
           :style="{
             bottom: headerShow ? `var(--bew-top-bar-height)` : '0',
           }"

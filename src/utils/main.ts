@@ -275,3 +275,11 @@ export function queryDomUntilFound(selector: string, timeout = 500, abort?: Abor
     }
   })
 }
+
+/**
+ * Check if the current page is in an iframe
+ * @returns true if the current page is in an iframe
+ */
+export function isInIframe(): boolean {
+  return window.self !== window.top
+}

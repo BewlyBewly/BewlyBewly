@@ -28,12 +28,7 @@ const isLoading = ref<boolean>(false)
 const isFullPageLoading = ref<boolean>(false)
 const noMoreContent = ref<boolean>(false)
 
-onMounted(async () => {
-  await getFavoriteCategories()
-  changeCategory(favoriteCategories[0])
-
-  initPageAction()
-
+onMounted(() => {
   emitter.off(TOP_BAR_VISIBILITY_CHANGE)
   emitter.on(TOP_BAR_VISIBILITY_CHANGE, (val) => {
     shouldMoveCtrlBarUp.value = false
@@ -49,7 +44,15 @@ onMounted(async () => {
         shouldMoveCtrlBarUp.value = true
     }
   })
+
+  initPageAction()
+  initData()
 })
+
+async function initData() {
+  await getFavoriteCategories()
+  changeCategory(favoriteCategories[0])
+}
 
 onUnmounted(() => {
   emitter.off(TOP_BAR_VISIBILITY_CHANGE)
@@ -213,7 +216,7 @@ function isMusic(item: FavoriteResource) {
           <Loading v-if="isFullPageLoading" w-full h-full pos="absolute top-0 left-0" mt--50px />
         </Transition>
         <!-- favorite list -->
-        <div grid="~ 2xl:cols-4 xl:cols-3 lg:cols-2 md:cols-1 gap-5" m="t-55px b-6">
+        <div grid="~ 2xl:cols-4 xl:cols-3 lg:cols-2 md:cols-1 sm:cols-1 cols-1 gap-5" m="t-55px b-6">
           <TransitionGroup name="list">
             <VideoCard
               v-for="item in favoriteResources"
@@ -223,9 +226,11 @@ function isMusic(item: FavoriteResource) {
                 duration: item.duration,
                 title: item.title,
                 cover: item.cover,
-                author: item.upper.name,
-                authorFace: item.upper.face,
-                mid: item.upper.mid,
+                author: {
+                  name: item.upper.name,
+                  authorFace: item.upper.face,
+                  mid: item.upper.mid,
+                },
                 view: item.cnt_info.play,
                 danmaku: item.cnt_info.danmaku,
                 publishedTimestamp: item.pubtime,
@@ -285,6 +290,7 @@ function isMusic(item: FavoriteResource) {
             v-if="activatedCategoryCover"
             :src="removeHttpFromUrl(`${activatedCategoryCover}@480w_270h_1c`)"
             w-full h-full object="cover center" blur-40px
+            relative z--1
           >
         </div>
 

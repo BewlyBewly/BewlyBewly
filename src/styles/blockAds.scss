@@ -8,18 +8,25 @@
   .bili-video-card.is-rcmd:not(.enable-no-interest),
   .ad-report,
   .brand-ad-list,
-  // 搜尋結果的遊戲廣告
-  .activity-game-list,
   // 视频页游戏卡片
   .video-page-game-card-small,
   // 大家围观的直播
   .pop-live-small-mode,
   // 视频页面的侧栏
-  .slide-ad-exp {
+  .slide-ad-exp,
+  .video-card-ad-small,
+  // 动态页的广告
+  .bili-dyn-ads {
+    display: none !important;
+  }
+  // 主頁右下廣告卡片
+  .adcard,
+  // 主頁下載桌面版提示
+  .desktop-download-tip {
     display: none !important;
   }
 
-  // 首頁推介頂部卡片間距調整
+  // 主頁推介頂部卡片間距調整
   .recommended-container_floor-aside .container > *:nth-of-type(n + 8) {
     margin-top: 0px !important;
     margin-bottom: 24px;

@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import { useBewlyApp } from '~/composables/useAppProvider'
 import { useDark } from '~/composables/useDark'
-import { settings } from '~/logic'
 import { numFormatter } from '~/utils/dataFormatter'
 import { removeHttpFromUrl } from '~/utils/main'
 
 import BangumiCardSkeleton from './BangumiCardSkeleton.vue'
 
-const props = defineProps<{
+defineProps<{
   skeleton?: boolean
   bangumi: Bangumi
   horizontal?: boolean
@@ -33,31 +31,22 @@ interface Bangumi {
 }
 
 const { isDark } = useDark()
-const { openIframeDrawer } = useBewlyApp()
-
-function handleClick(event: MouseEvent) {
-  if (settings.value.videoCardLinkOpenMode === 'drawer' && props.bangumi.url) {
-    event.preventDefault()
-
-    openIframeDrawer(props.bangumi.url)
-  }
-}
 </script>
 
 <template>
   <div mb-6>
-    <a
+    <ALink
       v-if="!skeleton && bangumi"
       class="group"
       :style="{
         display: horizontal ? 'flex' : 'block',
       }"
-      :href="bangumi.url" target="_blank"
+      :href="bangumi.url"
+      type="videoCard"
       gap-4 hover:bg="$bew-fill-2" hover:ring="8 $bew-fill-2"
       content-visibility-auto intrinsic-size-400px
       transition="all ease-in-out 300"
       rounded="$bew-radius" h-fit
-      @click="handleClick"
     >
       <!-- Cover -->
       <div
@@ -102,7 +91,6 @@ function handleClick(event: MouseEvent) {
             aspect="12/16"
             pos="relative"
           >
-
             <!-- anime genres -->
             <div
               v-if="bangumi.evaluate || (Array.isArray(bangumi.tags) && bangumi.tags?.length > 0)"
@@ -119,7 +107,9 @@ function handleClick(event: MouseEvent) {
                 );
               "
             >
-              <div mb-4 text="white group-hover:shadow-[0_0_4px_rgba(0,0,0,1)]">{{ bangumi.evaluate }}</div>
+              <div mb-4 text="white group-hover:shadow-[0_0_4px_rgba(0,0,0,1)]">
+                {{ bangumi.evaluate }}
+              </div>
               <template v-if="Array.isArray(bangumi.tags) && bangumi.tags?.length > 0">
                 <div flex="~ wrap" gap-2>
                   <span
@@ -194,7 +184,7 @@ function handleClick(event: MouseEvent) {
           <span lh-22px> {{ bangumi.desc }} </span>
         </div>
       </div>
-    </a>
+    </ALink>
     <BangumiCardSkeleton
       v-else-if="skeleton"
       :horizontal="horizontal"

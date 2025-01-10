@@ -1,4 +1,15 @@
+.historyPage {
+  .history-record.fixed {
+    position: unset;
+  }
+}
+
 .bewly-design.historyPage {
+  // #region new history page
+
+  // #endregion
+
+  // #region old history page
   // #region theme color adaption part
   // Increase the priority of the style inside by writing a non-existent selector in `:not()`
   :not(foobar) {
@@ -125,4 +136,5 @@
       background-color: var(--bew-content-solid) !important;
     }
   }
+  // #endregion
 }

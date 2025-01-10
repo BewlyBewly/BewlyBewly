@@ -80,10 +80,11 @@ settings:
   group_wallpaper: Wallpaper
   group_logo: LOGO
   group_search_bar: Search Bar
-  group_recommendation_mode: Recommendation Mode
-  group_recommendation_filters: Recommendation Filters
+  group_recommendation_mode: \"For you\" Recommendation Mode
+  group_recommendation_filters: \"For you\" Recommendation Filters
   group_recommendation_filters_desc: |
     Do not set the restricted value too large, as this may increase loading time!
+  group_following: Following
   group_search_page_mode: Search Page Mode
   group_home_tabs: Home Tabs
 
@@ -136,6 +137,10 @@ settings:
   close_drawer_without_pressing_esc_again: Close the drawer without pressing <kbd>Esc</kbd> again
 
   block_ads: Block ads
+  block_top_search_page_ads: Block Bilibili top search page ads
+  block_top_search_page_ads_desc: >
+    Sometimes, the ads above search results are actually year-end summaries or annual reports.
+    If you don't want these to be accidentally removed, please disable this option.
 
   enable_video_preview: Enable video preview feature (if possible)
   enable_video_ctrl_bar_on_video_card: Display the video control bar on the video card
@@ -144,16 +149,22 @@ settings:
   # Desktop & Dock
   use_old_top_bar: Use the old top bar
   auto_hide_top_bar: Automatically hide the top bar
+  show_bewly_or_bili_page_switcher: Show BewlyBewly/Bilibili page switcher
   top_bar_icon_badges: Icon badges
   top_bar_icon_badges_opt:
     number: Number
     dot: Dot
     none: Do not show
+  always_use_dock: Always use the dock
+  always_use_dock_desc: The dock will always be visible and the sidebar will be hidden. We also recommend enabling auto-hide for the dock.
+  auto_hide_dock: Automatically hide the dock
   dock_position: Dock position
   dock_position_desc: Position on screen.
-  auto_hide_dock: Automatically hide the dock
   dock_content_adjustment: Dock content adjustment
   dock_content_adjustment_desc: The page of the first activated dock item will be the startup page.
+  dock_item_open_in_new_tab: Open in new tab
+  dock_item_use_original_bili_web_page: Use the original Bilibili web page
+  disable_dock_glowing_effect: Disable the dock glowing effect
   disable_light_dark_mode_switcher: Disable light/dark mode switcher
   move_back_to_top_and_refresh_to_dock: Move the back-to-top and refresh buttons to the dock
   sidebar_position: Sidebar position
@@ -238,6 +249,8 @@ settings:
   filter_by_user_table:
     username_or_mid: Username / MID
 
+  following_tab_show_livestreaming_videos: Show Live-streaming videos in the "Following" tab
+
   use_search_page_mode: Use search page mode on homepage
   settings_shared_with_the_search_page: Settings shared with the search page
   settings_shared_with_the_search_page_desc: Those settings are used in common with the search page.
@@ -311,7 +324,7 @@ topbar:
     vlog: VLOG
     funny: Funny
     standalone_gaming: Standalone Gaming
-    vtubers: Vtubers & Vups
+    vtubers: VTubers & Vups
     charitable_events: Charitable Events
     moocs: MOOCs
     articles: Articles
@@ -368,6 +381,7 @@ dock:
   history: History
   favorites: Favorites
   watch_later: Watch later
+  moments: Moments
   dark_mode: Dark Mode
   light_mode: Light Mode
   settings: Settings
@@ -386,8 +400,8 @@ video_card:
     copy_av_number: Copy AV Number
 
     view_the_original_cover: View the Original Cover
-    view_this_user_channel: View This User Channel
 
+  group_contribution: '{firstAuthor} and {num} others contributed'
   video_removed: Video removed
 
 home:

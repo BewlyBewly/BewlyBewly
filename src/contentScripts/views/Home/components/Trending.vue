@@ -21,12 +21,12 @@ const emit = defineEmits<{
   (e: 'afterLoading'): void
 }>()
 
-const gridValue = computed((): string => {
+const gridClass = computed((): string => {
   if (props.gridLayout === 'adaptive')
-    return '~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-5'
+    return 'grid-adaptive'
   if (props.gridLayout === 'twoColumns')
-    return '~ cols-1 xl:cols-2 gap-4'
-  return '~ cols-1 gap-4'
+    return 'grid-two-columns'
+  return 'grid-one-column'
 })
 const videoList = ref<VideoElement[]>([])
 const isLoading = ref<boolean>(false)
@@ -35,8 +35,8 @@ const pn = ref<number>(1)
 const noMoreContent = ref<boolean>(false)
 const { handleReachBottom, handlePageRefresh, haveScrollbar } = useBewlyApp()
 
-onMounted(async () => {
-  await initData()
+onMounted(() => {
+  initData()
   initPageAction()
 })
 
@@ -129,15 +129,10 @@ defineExpose({ initData })
 
 <template>
   <div>
-    <!-- By directly using predefined unocss grid properties, it is possible to dynamically set the grid attribute -->
-    <div hidden grid="~ 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 gap-5" />
-    <div hidden grid="~ cols-1 xl:cols-2 gap-4" />
-    <div hidden grid="~ cols-1 gap-4" />
-
     <div
       ref="containerRef"
       m="b-0 t-0" relative w-full h-full
-      :grid="gridValue"
+      :class="gridClass"
     >
       <VideoCard
         v-for="video in videoList"
@@ -149,9 +144,11 @@ defineExpose({ initData })
           title: video.item.title,
           desc: video.item.desc,
           cover: video.item.pic,
-          author: video.item.owner.name,
-          authorFace: video.item.owner.face,
-          mid: video.item.owner.mid,
+          author: {
+            name: video.item.owner.name,
+            authorFace: video.item.owner.face,
+            mid: video.item.owner.mid,
+          },
           view: video.item.stat.view,
           danmaku: video.item.stat.danmaku,
           publishedTimestamp: video.item.pubdate,
@@ -167,4 +164,15 @@ defineExpose({ initData })
 </template>
 
 <style lang="scss" scoped>
+.grid-adaptive {
+  --uno: "grid 2xl:cols-5 xl:cols-4 lg:cols-3 md:cols-2 sm:cols-1 cols-1 gap-5";
+}
+
+.grid-two-columns {
+  --uno: "grid cols-1 xl:cols-2 gap-4";
+}
+
+.grid-one-column {
+  --uno: "grid cols-1 gap-4";
+}
 </style>

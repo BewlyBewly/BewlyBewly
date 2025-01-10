@@ -12,6 +12,10 @@ export default defineConfig({
       ],
     },
   },
+  blocklist: [
+    'ps',
+    'container',
+  ],
   presets: [
     presetUno(),
     presetAttributify(),

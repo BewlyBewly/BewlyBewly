@@ -8,7 +8,6 @@ import { numFormatter } from '~/utils/dataFormatter'
 import { LV0_ICON, LV1_ICON, LV2_ICON, LV3_ICON, LV4_ICON, LV5_ICON, LV6_ICON, LV6_LIGHTNING_ICON } from '~/utils/lvIcons'
 import { getCSRF, getUserID, isHomePage } from '~/utils/main'
 
-import ALink from '../components/ALink.vue'
 import type { UserInfo, UserStat } from '../types'
 
 const props = defineProps<{
@@ -206,6 +205,7 @@ function getLvIcon(level: number, isSigma: boolean = false): string {
         class="channel-info-item"
         :href="`https://space.bilibili.com/${mid}/fans/follow`"
         :title="`${userStat.following}`"
+        type="topBar"
       >
         <div class="num">
           {{ userStat.following ? numFormatter(userStat.following) : '0' }}
@@ -216,6 +216,7 @@ function getLvIcon(level: number, isSigma: boolean = false): string {
         class="channel-info-item"
         :href="`https://space.bilibili.com/${mid}/fans/fans`"
         :title="`${userStat.follower}`"
+        type="topBar"
       >
         <div class="num">
           {{ userStat.follower ? numFormatter(userStat.follower) : '0' }}
@@ -226,6 +227,7 @@ function getLvIcon(level: number, isSigma: boolean = false): string {
         class="channel-info-item"
         :href="`https://space.bilibili.com/${mid}/dynamic`"
         :title="`${userStat.dynamic_count}`"
+        type="topBar"
       >
         <div class="num">
           {{

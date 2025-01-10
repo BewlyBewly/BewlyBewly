@@ -120,18 +120,25 @@ function setCurrentTitle() {
     >
       <aside
         :class="{ group: !settings.touchScreenOptimization }"
-        shrink-0 p="x-4" pos="absolute left--84px" z-2
+        shrink-0 p="x-4" pos="absolute xl:left--84px left--44px" z-2
       >
         <ul
           style="
             --un-shadow: var(--bew-shadow-4), var(--bew-shadow-edge-glow-2);
-            backdrop-filter: var(--bew-filter-glass-2);
           "
-          flex="~ gap-2 col" rounded="30px group-hover:25px" p-2 shadow
+          relative flex="~ gap-2 col" rounded="30px group-hover:25px" p-2 shadow
           bg="$bew-content-alt group-hover:$bew-elevated dark:$bew-elevated dark-group-hover:$bew-elevated"
           scale="group-hover:105" duration-300 overflow-hidden antialiased transform-gpu
           border="1 $bew-border-color"
         >
+          <!-- frosted glass background -->
+          <!-- https://github.com/BewlyBewly/BewlyBewly/issues/1162 -->
+          <div
+            style="backdrop-filter: var(--bew-filter-glass-2);"
+            pos="absolute top-0 left-0" z--1
+            w-full h-full pointer-events-none
+          />
+
           <li v-for="menuItem in settingsMenuItems" :key="menuItem.value">
             <a
               cursor-pointer w="40px group-hover:180px" h-40px
@@ -227,6 +234,6 @@ function setCurrentTitle() {
 
 <style lang="scss" scoped>
 .menu-item-activated {
-  --uno: "text-white dark-text-black important-dark-bg-white important-bg-$bew-theme-color";
+  --uno: "text-$bew-text-auto bg-$bew-theme-color-auto";
 }
 </style>

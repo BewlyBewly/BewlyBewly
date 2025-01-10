@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 
-import ALink from './ALink.vue'
-
 const { t } = useI18n()
 
 const genres = computed(() => [
@@ -51,76 +49,88 @@ const otherLinks = computed(() => [
 </script>
 
 <template>
-  <div
+  <OverlayScrollbarsComponent
+    element="div" defer
+    :options="{
+      x: 'hidden',
+      y: 'scroll',
+    }"
     style="backdrop-filter: var(--bew-filter-glass-1);"
+    h="[calc(100vh-100px)]" max-h="445px"
+    w="[calc(100vw-100px)]" max-w="fit"
     shadow="[var(--bew-shadow-3),var(--bew-shadow-edge-glow-1)]"
-    flex="~ gap-1"
-    p="4"
     bg="$bew-elevated-alt"
     rounded="$bew-radius"
     border="1 $bew-border-color"
   >
-    <ul
-      v-for="(item, index) in [0, 10, 20, 30]"
-      :key="index"
-      class="link-list"
+    <div
+      flex="~ gap-1"
+      p="4" w-inherit
     >
-      <li
-        v-for="genre in genres.slice(item, item + 10)"
-        :key="genre.name"
-        class="link-item"
+      <ul
+        v-for="(item, index) in [0, 10, 20, 30]"
+        :key="index"
+        class="link-list"
       >
-        <ALink
-          :href="genre.href"
+        <li
+          v-for="genre in genres.slice(item, item + 10)"
+          :key="genre.name"
+          class="link-item"
         >
-          <svg aria-hidden="true" class="svg-icon">
-            <use :xlink:href="genre.icon" />
-          </svg>
-          <span>{{ genre.name }}</span>
-        </ALink>
-      </li>
-    </ul>
-    <ul
-      v-for="(item, index) in [0]"
-      :key="index"
-      class="link-list"
-    >
-      <li
-        v-for="otherLink in otherLinks.slice(item, item + 10)"
-        :key="otherLink.name"
-        class="link-item group"
-      >
-        <ALink
-          :href="otherLink.href"
-        >
-          <div v-if="otherLink.icon.startsWith('#')" class="icon">
-            <svg
-              aria-hidden="true"
-            >
-              <use :xlink:href="otherLink.icon" />
-            </svg>
-          </div>
-
-          <div
-            v-else
-            class="icon"
+          <ALink
+            :href="genre.href"
+            type="topBar"
           >
-            <i
-              :class="otherLink.icon"
-              :style="{ color: otherLink.color }"
-            />
-          </div>
-          <span>{{ otherLink.name }}</span>
-        </ALink>
-      </li>
-    </ul>
-  </div>
+            <svg aria-hidden="true" class="svg-icon">
+              <use :xlink:href="genre.icon" />
+            </svg>
+            <span>{{ genre.name }}</span>
+          </ALink>
+        </li>
+      </ul>
+      <ul
+        v-for="(item, index) in [0]"
+        :key="index"
+        class="link-list"
+      >
+        <li
+          v-for="otherLink in otherLinks.slice(item, item + 10)"
+          :key="otherLink.name"
+          class="link-item group"
+        >
+          <ALink
+            :href="otherLink.href"
+            type="topBar"
+          >
+            <div v-if="otherLink.icon.startsWith('#')" class="icon">
+              <svg
+                aria-hidden="true"
+              >
+                <use :xlink:href="otherLink.icon" />
+              </svg>
+            </div>
+
+            <div
+              v-else
+              class="icon"
+            >
+              <i
+                :class="otherLink.icon"
+                :style="{ color: otherLink.color }"
+              />
+            </div>
+            <span>{{ otherLink.name }}</span>
+          </ALink>
+        </li>
+      </ul>
+    </div>
+  </OverlayScrollbarsComponent>
 </template>
 
 <style lang="scss" scoped>
 .link-list {
-  --uno: "last-of-type:p-4 last-of-type:bg-$bew-fill-1 last-of-type:m--4 last-of-type:rounded-r-$bew-radius";
-  --uno: "last-of-type:ml-2";
+  // --uno: "last-of-type:p-4 last-of-type:bg-$bew-fill-1 last-of-type:h-fit last-of-type:m--4";
+  // --uno: "last-of-type:ml-2";
 }
 
 .link-item {

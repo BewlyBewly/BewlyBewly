@@ -3,8 +3,6 @@ import { useI18n } from 'vue-i18n'
 
 import api from '~/utils/api'
 
-import ALink from './ALink.vue'
-
 const { t } = useI18n()
 const list = ref<{ name: string, url: string, unreadCount: number, icon: string }[]>([
   {
@@ -85,6 +83,7 @@ function getUnreadMessageCount() {
       v-for="item in list"
       :key="item.name"
       :href="item.url"
+      type="topBar"
       pos="relative"
       flex="~ items-center justify-between gap-2"
       p="x-4 y-2"
