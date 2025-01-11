@@ -302,7 +302,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
       pointer-events-none
     >
       <Dock
-        v-if="settings.alwaysUseDock || (showBewlyPage || iframePageURL)"
+        v-if="!settings.useOriginalBilibiliHomepage && (settings.alwaysUseDock || (showBewlyPage || iframePageURL))"
         pointer-events-auto
         :activated-page="activatedPage"
         @settings-visibility-change="toggleSettings"
@@ -324,8 +324,10 @@ provide<BewlyAppProvider>('BEWLY_APP', {
         // This helps prevent the outside top bar from covering the contents.
         // reference: https://github.com/BewlyBewly/BewlyBewly/issues/1235
 
-        // when on home page and not using original bilibili page, show top bar
-        (isHomePage() && !settingsStore.getDockItemIsUseOriginalBiliPage(activatedPage) && !isInIframe())
+        // when using original bilibili homepage, show top bar
+        settings.useOriginalBilibiliHomepage
+          // when on home page and not using original bilibili page, show top bar
+          || (isHomePage() && !settingsStore.getDockItemIsUseOriginalBiliPage(activatedPage) && !isInIframe())
           // when in iframe and using original bilibili page, show top bar
           || (settingsStore.getDockItemIsUseOriginalBiliPage(activatedPage) && isInIframe())
           // when not on home page, show top bar
