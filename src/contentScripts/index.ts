@@ -187,6 +187,13 @@ async function onDOMLoaded() {
     // Remove the original Bilibili homepage if in Bilibili homepage & useOriginalBilibiliHomepage is enabled
     document.body.innerHTML = ''
 
+    // Remove the Bilibili Evolved homepage
+    injectCSS(`
+      .home-redesign-base {
+        display: none !important;
+      }
+    `)
+
     if (originalTopBarInnerUselessContents)
       originalTopBarInnerUselessContents.forEach(item => (item as HTMLElement).style.display = 'none')
     if (originalTopBar)
