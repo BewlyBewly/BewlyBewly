@@ -2,6 +2,8 @@
 // 1. 直接返回data
 // 2. json化后返回data
 
+import type Browser from 'webextension-polyfill'
+
 type FetchAfterHandler = ((data: Response) => Promise<any>) | ((data: any) => any)
 
 function toJsonHandler(data: Response): Promise<any> {
@@ -57,7 +59,7 @@ interface APIMAP {
 }
 // 工厂函数API_LISTENER_FACTORY
 function apiListenerFactory(API_MAP: APIMAP) {
-  return (message: Message, sender?: any, sendResponse?: Function) => {
+  return async (message: Message, sender?: Browser.Runtime.MessageSender, sendResponse?: Function) => {
     const contentScriptQuery = message.contentScriptQuery
     // 检测是否有contentScriptQuery
     if (!contentScriptQuery || !API_MAP[contentScriptQuery])
@@ -65,56 +67,74 @@ function apiListenerFactory(API_MAP: APIMAP) {
     if (API_MAP[contentScriptQuery] instanceof Function)
       return (API_MAP[contentScriptQuery] as APIFunction)(message, sender, sendResponse)
 
-    try {
-      let { contentScriptQuery, ...rest } = message
-      // rest above two part body or params
-      rest = rest || {}
+    const api = API_MAP[contentScriptQuery] as API
 
-      let { _fetch, url, params = {}, afterHandle } = API_MAP[contentScriptQuery] as API
-      const { method, headers, body } = _fetch as _FETCH
-      const isGET = method.toLocaleLowerCase() === 'get'
-      // merge params and body
-      const targetParams = Object.assign({}, params)
-      let targetBody = Object.assign({}, body)
-      Object.keys(rest).forEach((key) => {
-        if (body && body[key] !== undefined)
-          targetBody[key] = rest[key]
-        else
-          targetParams[key] = rest[key]
-      })
-
-      // generate params
-      if (Object.keys(targetParams).length) {
-        const urlParams = new URLSearchParams()
-        for (const key in targetParams)
-          targetParams[key] && urlParams.append(key, targetParams[key])
-        url += `?${urlParams.toString()}`
-      }
-      // generate body
-      if (!isGET) {
-        targetBody = (headers && headers['Content-Type'] && headers['Content-Type'].includes('application/x-www-form-urlencoded'))
-          ? new URLSearchParams(targetBody)
-          : JSON.stringify(targetBody)
-      }
-      // get cant take body
-      const fetchOpt = { method, headers }
-      !isGET && Object.assign(fetchOpt, { body: targetBody })
-
-      // fetch and after handle
-      let baseFunc = fetch(url, fetchOpt)
-      afterHandle.forEach((func) => {
-        if (func.name === sendResponseHandler.name && sendResponse)
-          // sendResponseHandler 是一个特殊的后处理函数，需要传入sendResponse
-          baseFunc = baseFunc.then(sendResponseHandler(sendResponse))
-        else
-          baseFunc = baseFunc.then(func)
-      })
-      baseFunc.catch(console.error)
-      return baseFunc
+    // eslint-disable-next-line node/prefer-global/process
+    if (process.env.FIREFOX && sender && sender.tab && sender.tab.cookieStoreId) {
+      const cookies = await browser.cookies.getAll({ storeId: sender.tab.cookieStoreId })
+      return doRequest(message, api, sendResponse, cookies)
     }
-    catch (e) {
-      console.error(e)
+
+    return doRequest(message, api, sendResponse)
+  }
+}
+
+function doRequest(message: Message, api: API, sendResponse?: Function, cookies?: Browser.Cookies.Cookie[]) {
+  try {
+    let { contentScriptQuery, ...rest } = message
+    // rest above two part body or params
+    rest = rest || {}
+
+    let { _fetch, url, params = {}, afterHandle } = api
+    const { method, headers = {}, body } = _fetch as _FETCH
+    const isGET = method.toLocaleLowerCase() === 'get'
+    // merge params and body
+    const targetParams = Object.assign({}, params)
+    let targetBody = Object.assign({}, body)
+    Object.keys(rest).forEach((key) => {
+      if (body && body[key] !== undefined)
+        targetBody[key] = rest[key]
+      else
+        targetParams[key] = rest[key]
+    })
+
+    // generate params
+    if (Object.keys(targetParams).length) {
+      const urlParams = new URLSearchParams()
+      for (const key in targetParams)
+        targetParams[key] && urlParams.append(key, targetParams[key])
+      url += `?${urlParams.toString()}`
     }
+    // generate body
+    if (!isGET) {
+      targetBody = (headers && headers['Content-Type'] && headers['Content-Type'].includes('application/x-www-form-urlencoded'))
+        ? new URLSearchParams(targetBody)
+        : JSON.stringify(targetBody)
+    }
+    // generate cookies
+    if (cookies) {
+      const cookieStr = cookies.map(cookie => `${cookie.name}=${cookie.value}`).join('; ')
+      headers['firefox-multi-account-cookie'] = cookieStr
+    }
+    // get cant take body
+    const fetchOpt = { method, headers }
+    !isGET && Object.assign(fetchOpt, { body: targetBody })
+    // fetch and after handle
+    let baseFunc = fetch(url, {
+      ...fetchOpt,
+    })
+    afterHandle.forEach((func) => {
+      if (func.name === sendResponseHandler.name && sendResponse)
+        // sendResponseHandler 是一个特殊的后处理函数，需要传入sendResponse
+        baseFunc = baseFunc.then(sendResponseHandler(sendResponse))
+      else
+        baseFunc = baseFunc.then(func)
+    })
+    baseFunc.catch(console.error)
+    return baseFunc
+  }
+  catch (e) {
+    console.error(e)
   }
 }
 
