@@ -6,7 +6,10 @@
 
 .bewly-design.historyPage {
   // #region new history page
-
+  .history-record.fixed .main-breadcrums {
+    background-color: var(--bew-elevated);
+    backdrop-filter: var(--bew-filter-glass-1);
+  }
   // #endregion
 
   // #region old history page
