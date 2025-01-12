@@ -98,6 +98,9 @@ function handleToggleDockItem(dockItem: any) {
       <SettingsItem :title="$t('settings.auto_hide_top_bar')">
         <Radio v-model="settings.autoHideTopBar" />
       </SettingsItem>
+      <SettingsItem :title="$t('settings.show_bewly_or_bili_top_bar_switcher')">
+        <Radio v-model="settings.showBewlyOrBiliTopBarSwitcher" />
+      </SettingsItem>
       <SettingsItem :title="$t('settings.show_bewly_or_bili_page_switcher')">
         <Radio v-model="settings.showBewlyOrBiliPageSwitcher" />
       </SettingsItem>
