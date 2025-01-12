@@ -128,10 +128,20 @@ if (isSupportedPages() || isSupportedIframePages()) {
   if (settings.value.adaptToOtherPageStyles)
     useDark()
 
-  if (settings.value.adaptToOtherPageStyles)
+  if (settings.value.adaptToOtherPageStyles) {
     document.documentElement.classList.add('bewly-design')
-  else
+
+    // Remove the Bilibili Evolved's dark mode style
+    runWhenIdle(async () => {
+      const darkModeStyle = document.head.querySelector('#dark-mode')
+      if (darkModeStyle)
+        document.head.removeChild(darkModeStyle)
+    })
+  }
+
+  else {
     document.documentElement.classList.remove('bewly-design')
+  }
 }
 
 if (settings.value.adaptToOtherPageStyles && isHomePage()) {
