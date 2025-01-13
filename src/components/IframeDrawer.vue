@@ -26,6 +26,14 @@ useEventListener(window, 'popstate', updateIframeUrl)
 nextTick(() => {
   useEventListener(iframeRef.value?.contentWindow, 'historyChange', updateCurrentUrl)
   useEventListener(iframeRef.value?.contentWindow, 'popstate', updateCurrentUrl)
+  useEventListener(iframeRef.value?.contentWindow, 'load', () => {
+    if (headerShow.value) {
+      iframeRef.value?.contentDocument?.documentElement.classList.add('hidden-header')
+    }
+    else {
+      iframeRef.value?.contentDocument?.documentElement.classList.remove('hidden-header')
+    }
+  })
 })
 
 onMounted(() => {
@@ -238,11 +246,11 @@ watchEffect(() => {
           ref="iframeRef"
           :src="props.url"
           :style="{
-            bottom: headerShow ? `var(--bew-top-bar-height)` : '0',
+            // bottom: headerShow ? `var(--bew-top-bar-height)` : '0',
           }"
           frameborder="0"
           pointer-events-auto
-          pos="absolute  left-0"
+          pos="relative left-0"
           w-full h-full
         />
       </div>
