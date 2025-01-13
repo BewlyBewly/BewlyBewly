@@ -13,27 +13,30 @@ export interface Transfromer {
  */
 export function createTransformer(target: MaybeElementRef, transfromer: Transfromer, isChromium: boolean = true): Ref<CSSProperties> {
   const style = ref<CSSProperties>({})
-  const rect = useElementBounding(target)
+  const rect = useElementBounding(target, {
+    windowResize: true,
+    windowScroll: true,
+  })
 
   watchEffect(() => {
+    let x = transfromer.x
+    let y = transfromer.y
+
     if (transfromer.center) {
       if (typeof transfromer.x === 'number') {
-        transfromer.x = `calc(${transfromer.x}px - ${rect.width.value / 2}px)`
+        x = `calc(${transfromer.x}px - ${rect.width.value / 2}px)`
       }
       else {
-        transfromer.x = `calc(${transfromer.x} - ${rect.width.value / 2}px)`
+        x = `calc(${transfromer.x} - ${rect.width.value / 2}px)`
       }
 
       if (typeof transfromer.y === 'number') {
-        transfromer.y = `calc(${transfromer.y}px - ${rect.height.value / 2}px)`
+        y = `calc(${transfromer.y}px - ${rect.height.value / 2}px)`
       }
       else {
-        transfromer.y = `calc(${transfromer.y} - ${rect.height.value / 2}px)`
+        y = `calc(${transfromer.y} - ${rect.height.value / 2}px)`
       }
     }
-
-    const x = typeof transfromer.x === 'number' ? `${transfromer.x}px` : transfromer.x
-    const y = typeof transfromer.y === 'number' ? `${transfromer.y}px` : transfromer.y
 
     if (isChromium) {
       style.value = {
