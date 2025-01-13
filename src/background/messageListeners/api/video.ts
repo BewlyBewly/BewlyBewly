@@ -73,9 +73,9 @@ const API_VIDEO = {
     },
     afterHandle: AHS.J_D,
   },
-  // https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/video/info.md#%E8%8E%B7%E5%8F%96%E8%A7%86%E9%A2%91%E8%B6%85%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AFweb%E7%AB%AF
+  // https://socialsisteryi.github.io/bilibili-API-collect/docs/video/info.html#%E8%8E%B7%E5%8F%96%E8%A7%86%E9%A2%91%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AF-web%E7%AB%AF
   getVideoInfo: {
-    url: 'https://api.bilibili.com/x/web-interface/view/detail',
+    url: 'https://api.bilibili.com/x/web-interface/view',
     _fetch: {
       method: 'get',
     },

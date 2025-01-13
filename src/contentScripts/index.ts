@@ -31,6 +31,8 @@ if (isFirefox) {
 const currentUrl = document.URL
 
 function isSupportedPages(): boolean {
+  if (isInIframe())
+    return false
   if (
     // homepage
     isHomePage()
@@ -45,8 +47,11 @@ function isSupportedPages(): boolean {
     || /https?:\/\/(?:www\.)?bilibili\.com\/list\/ml.*/.test(currentUrl)
     // search page
     || /https?:\/\/search\.bilibili\.com\.*/.test(currentUrl)
-    // moments
-    || /https?:\/\/t\.bilibili\.com\.*/.test(currentUrl)
+    // moments page
+    // https://github.com/BewlyBewly/BewlyBewly/issues/1246
+    // https://github.com/BewlyBewly/BewlyBewly/issues/1256
+    // https://github.com/BewlyBewly/BewlyBewly/issues/1266
+    || /https?:\/\/t\.bilibili\.com(?!\/vote|\/share).*/.test(currentUrl)
     // moment detail
     || /https?:\/\/(?:www\.)?bilibili\.com\/opus\/.*/.test(currentUrl)
     // history page
@@ -83,10 +88,32 @@ function isSupportedPages(): boolean {
   }
 }
 
-export function isBlockedPages(): boolean {
+export function isSupportedIframePages(): boolean {
   if (
-    // https://github.com/BewlyBewly/BewlyBewly/issues/1246
-    /https?:\/\/(?:t\.)?bilibili\.com\/share\/card\/index.*/.test(currentUrl)
+    isInIframe()
+    && (
+      // supports Bilibili page URLs recorded in the dock
+      isHomePage()
+      || /https?:\/\/search\.bilibili\.com\/all.*/.test(currentUrl)
+      || /https?:\/\/www\.bilibili\.com\/anime.*/.test(currentUrl)
+      || /https?:\/\/space\.bilibili\.com\/\d+\/favlist.*/.test(currentUrl)
+      || /https?:\/\/www\.bilibili\.com\/history.*/.test(currentUrl)
+      || /https?:\/\/www\.bilibili\.com\/watchlater\/#\/list.*/.test(currentUrl)
+      // moments page
+      // https://github.com/BewlyBewly/BewlyBewly/issues/1246
+      // https://github.com/BewlyBewly/BewlyBewly/issues/1256
+      // https://github.com/BewlyBewly/BewlyBewly/issues/1266
+      || /https?:\/\/t\.bilibili\.com(?!\/vote|\/share).*/.test(currentUrl)
+      // Since `Open in drawer` will open the video page within an iframe, so we need to support the following pages
+      // video page
+      || /https?:\/\/(?:www\.)?bilibili\.com\/(?:video|list)\/.*/.test(currentUrl)
+      // anime playback & movie page
+      || /https?:\/\/(?:www\.)?bilibili\.com\/bangumi\/play\/.*/.test(currentUrl)
+      // watch later playlist
+      || /https?:\/\/(?:www\.)?bilibili\.com\/list\/watchlater.*/.test(currentUrl)
+      // favorite playlist
+      || /https?:\/\/(?:www\.)?bilibili\.com\/list\/ml.*/.test(currentUrl)
+    )
   ) {
     return true
   }
@@ -97,14 +124,24 @@ export function isBlockedPages(): boolean {
 
 let beforeLoadedStyleEl: HTMLStyleElement | undefined
 
-if (isSupportedPages() && !isBlockedPages()) {
+if (isSupportedPages() || isSupportedIframePages()) {
   if (settings.value.adaptToOtherPageStyles)
     useDark()
 
-  if (settings.value.adaptToOtherPageStyles)
+  if (settings.value.adaptToOtherPageStyles) {
     document.documentElement.classList.add('bewly-design')
-  else
+
+    // Remove the Bilibili Evolved's dark mode style
+    runWhenIdle(async () => {
+      const darkModeStyle = document.head.querySelector('#dark-mode')
+      if (darkModeStyle)
+        document.head.removeChild(darkModeStyle)
+    })
+  }
+
+  else {
     document.documentElement.classList.remove('bewly-design')
+  }
 }
 
 if (settings.value.adaptToOtherPageStyles && isHomePage()) {
@@ -156,13 +193,20 @@ async function onDOMLoaded() {
     // Remove the original Bilibili homepage if in Bilibili homepage & useOriginalBilibiliHomepage is enabled
     document.body.innerHTML = ''
 
+    // Remove the Bilibili Evolved homepage
+    injectCSS(`
+      .home-redesign-base {
+        display: none !important;
+      }
+    `)
+
     if (originalTopBarInnerUselessContents)
       originalTopBarInnerUselessContents.forEach(item => (item as HTMLElement).style.display = 'none')
     if (originalTopBar)
       document.body.appendChild(originalTopBar)
   }
 
-  if (isSupportedPages() && !isBlockedPages()) {
+  if (isSupportedPages() || isSupportedIframePages()) {
     // Then inject the app
     if (isHomePage()) {
       injectApp()

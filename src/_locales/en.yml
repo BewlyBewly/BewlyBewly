@@ -149,6 +149,7 @@ settings:
   # Desktop & Dock
   use_old_top_bar: Use the old top bar
   auto_hide_top_bar: Automatically hide the top bar
+  show_bewly_or_bili_top_bar_switcher: Show BewlyBewly/Bilibili top bar switcher
   show_bewly_or_bili_page_switcher: Show BewlyBewly/Bilibili page switcher
   top_bar_icon_badges: Icon badges
   top_bar_icon_badges_opt:
@@ -290,6 +291,9 @@ auth:
   auth_access_key_first: Before doing this, authorize BewlyBewly to use the access key.
 
 topbar:
+  switch_to_bewly_top_bar: Switch to BewlyBewly top bar
+  switch_to_bili_top_bar: Switch to BiliBili/Bilibili-Evolved top bar
+
   sign_in: Sign in
   notifications: Notifications
   moments: Moments

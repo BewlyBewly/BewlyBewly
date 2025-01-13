@@ -11,6 +11,7 @@ const currentUrl = ref<string>(props.url)
 
 watch(() => isDark.value, (newValue) => {
   iframeRef.value?.contentDocument?.documentElement.classList.toggle('dark', newValue)
+  iframeRef.value?.contentDocument?.body?.classList.toggle('dark', newValue)
 })
 
 onMounted(() => {

@@ -149,6 +149,7 @@ settings:
   # Desktop & Dock
   use_old_top_bar: 使用旧版顶栏
   auto_hide_top_bar: 自动隐藏顶栏
+  show_bewly_or_bili_top_bar_switcher: 显示 BewlyBewly/Bilibili 顶栏切换器
   show_bewly_or_bili_page_switcher: 显示 BewlyBewly/Bilibili 页面切换器
   top_bar_icon_badges: 图标角标
   top_bar_icon_badges_opt:
@@ -287,6 +288,9 @@ auth:
   auth_access_key_first: 在这之前请先授权 BewlyBewly 使用 access key
 
 topbar:
+  switch_to_bewly_top_bar: 切换到 BewlyBewly 顶栏
+  switch_to_bili_top_bar: 切换到 Bilibili/Bilibili-Evolved 顶栏
+
   sign_in: 登录
   notifications: 通知
   moments: 动态

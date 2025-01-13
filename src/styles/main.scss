@@ -56,6 +56,12 @@ html.bewly-design.hidden-header #biliMainHeader {
   color: revert !important;
 }
 
+.bewly-design {
+  input {
+    background-color: transparent;
+  }
+}
+
 // Adjust broken image icon
 img {
   position: relative;

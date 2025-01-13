@@ -24,6 +24,11 @@
     padding-right: 20px;
   }
 
+  .fixed-author-header {
+    background-color: var(--bew-elevated);
+    backdrop-filter: var(--bew-filter-glass-1);
+  }
+
   :not(fjlsfd) {
     .dyn-orig-author__following.following-icon:before,
     .bili-dyn-live-users__more:hover:after,
@@ -80,9 +85,12 @@
     }
 
     .bili-dyn-home--member,
-    #app {
-      --bg1: var(--bew-content-solid);
-      --bg2: var(--bew-bg);
+    #app,
+    .opus-detail {
+      * {
+        --bg1: var(--bew-content-solid);
+        --bg2: var(--bew-fill-1);
+      }
     }
 
     .fixed-author-header__author__name,
@@ -349,7 +357,7 @@
       color: var(--bew-border-color);
     }
 
-    .bili-dyn-title__text {
+    .bili-dyn-title__text:not(:hover) {
       color: var(--bew-text-1) !important;
     }
 

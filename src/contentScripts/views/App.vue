@@ -303,7 +303,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
     ref="mainAppRef"
     class="bewly-wrapper"
     :class="{ dark: isDark }"
-    text="$bew-text-1"
+    text="$bew-text-1 size-$bew-base-font-size"
   >
     <!-- Background -->
     <template v-if="showBewlyPage">
@@ -322,7 +322,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
       pointer-events-none
     >
       <Dock
-        v-if="settings.alwaysUseDock || (showBewlyPage || iframePageURL)"
+        v-if="!settings.useOriginalBilibiliHomepage && (settings.alwaysUseDock || (showBewlyPage || iframePageURL))"
         pointer-events-auto
         :activated-page="activatedPage"
         @settings-visibility-change="toggleSettings"
@@ -342,6 +342,8 @@ provide<BewlyAppProvider>('BEWLY_APP', {
       v-if="showTopBar"
       m-auto max-w="$bew-page-max-width"
     >
+      <BewlyOrBiliTopBarSwitcher v-if="settings.showBewlyOrBiliTopBarSwitcher" />
+
       <OldTopBar
         v-if="settings.useOldTopBar"
         pos="top-0 left-0" z="99 hover:1001" w-full
@@ -393,8 +395,6 @@ provide<BewlyAppProvider>('BEWLY_APP', {
 
 <style lang="scss" scoped>
 .bewly-wrapper {
-  --uno: "text-size-$bew-base-font-size";
-
   // To fix the filter used in `.bewly-wrapper` that cause the positions of elements become discorded.
   > * > * {
     filter: var(--bew-filter-force-dark);
