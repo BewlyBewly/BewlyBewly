@@ -27,7 +27,7 @@ export function createTransformer(target: MaybeElementRef, transfromer: Transfro
     let x = transfromer.x
     let y = transfromer.y
 
-    if (transfromer.center) {
+    if (transfromer.center && isChromium) {
       if (typeof transfromer.x === 'number') {
         x = `calc(${transfromer.x}px - ${rect.width.value / 2}px)`
       }
