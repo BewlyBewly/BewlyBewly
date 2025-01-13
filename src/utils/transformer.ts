@@ -7,11 +7,16 @@ export interface Transfromer {
   center?: boolean
 }
 
+function checkChromium(): boolean {
+  return navigator.userAgent.includes('Chrome')
+}
+
 /**
  * Covert transform to top and left style, if no chromium, use transform
  * @param transfromer
  */
-export function createTransformer(target: MaybeElementRef, transfromer: Transfromer, isChromium: boolean = true): Ref<CSSProperties> {
+export function createTransformer(target: MaybeElementRef, transfromer: Transfromer): Ref<CSSProperties> {
+  const isChromium = checkChromium()
   const style = ref<CSSProperties>({})
   const rect = useElementBounding(target, {
     windowResize: true,
