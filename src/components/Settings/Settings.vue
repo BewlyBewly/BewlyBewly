@@ -2,6 +2,7 @@
 import { useI18n } from 'vue-i18n'
 
 import { settings } from '~/logic'
+import { createTransformer } from '~/utils/transformer'
 
 import type { MenuItem } from './types'
 import { MenuType } from './types'
@@ -21,6 +22,12 @@ const settingsMenu = {
 }
 const activatedMenuItem = ref<MenuType>(MenuType.General)
 const title = ref<string>(t('settings.title'))
+const window = ref<HTMLDivElement>()
+const windowTransformer = createTransformer(window, {
+  x: '50%',
+  y: '50%',
+  center: true,
+})
 const scrollbarRef = ref()
 
 watch(
@@ -114,9 +121,12 @@ function setCurrentTitle() {
     />
 
     <div
-      id="settings-window" pos="fixed top-1/2 left-1/2" w="90%" h="90%"
-      max-w-1000px max-h-900px transform="~ translate-x--1/2 translate-y--1/2 gpu"
-      flex justify-between items-center
+      id="settings-window"
+      ref="window"
+      :style="windowTransformer"
+      pos="fixed" w="90%" h="90%"
+      max-w-1000px max-h-900px
+      flex="~ justify-between items-center"
     >
       <aside
         :class="{ group: !settings.touchScreenOptimization }"
@@ -169,7 +179,7 @@ function setCurrentTitle() {
           --un-shadow: var(--bew-shadow-4), var(--bew-shadow-edge-glow-2);
           backdrop-filter: var(--bew-filter-glass-2);
         "
-        relative overflow="x-hidde" w-full h-full bg="$bew-elevated-alt"
+        relative overflow="x-hidden" w-full h-full bg="$bew-elevated-alt"
         shadow rounded="$bew-radius" border="1 $bew-border-color" transform-gpu
       >
         <header
