@@ -1,37 +1,28 @@
 .bewly-design.videoPage {
-  .user-card-m-exp .layout,
   .up-detail .up-detail-top .up-name.is_vip:hover .mask,
-  .up-detail .up-detail-top .up-name.small-vip:hover .mask {
+  .up-detail .up-detail-top .up-name.small-vip:hover .mask,
+  .up-detail .up-detail-top .up-name.vip:hover .mask {
     display: none;
   }
 
-  .user-card-m-exp .user-info-wrapper {
-    background-color: var(--bew-bg);
-    border-radius: 0 0 8px 8px;
+  // ai 小助手
+  [class^="_VideoAssistant"] {
+    --app_bg: #f1f6fc;
+    --app_graph_bg: #e6ecf4;
   }
 
-  .collection-m-exp {
-    position: relative;
+  [class^="_VideoAssistant"] * {
+    --brand_blue: var(--bew-bili-blue);
   }
 
-  .qrcode .van-qrcode {
-    padding: 5px;
-  }
-
-  .qrcode .van-qrcode canvas {
-    width: 90px;
-    height: 90px;
+  &.dark [class^="_VideoAssistant"] {
+    --app_bg: var(--bew-elevated-alt-solid);
+    --app_graph_bg: var(--bew-fill-1);
   }
 
   // #region theme color adaption part
   // Increase the priority of the style inside by writing a non-existent selector in `:not()`
   :not(foobar) {
-    ._VideoAssistant_196qs_1._Light_196qs_12,
-    ._VideoAssistant_196qs_1._Dark_196qs_16 {
-      --app_bg: var(--bew-elevated-alt-solid);
-      --app_graph_bg: var(--bew-fill-1);
-    }
-
     .content .group-list li input[type="checkbox"] + i {
       border-width: 1px;
       border-radius: 5px;
@@ -144,7 +135,8 @@
     .up-name.is_vip,
     .up-name.small-vip,
     .up-detail .up-detail-top .up-name[style*="color: rgb(251, 114, 153)"],
-    .up-detail .up-detail-top .up-name[style*="color:#FB7299;"] {
+    .up-detail .up-detail-top .up-name[style*="color:#FB7299;"],
+    .user-card-m-exp .user-info-wrapper .info .user .name[style*="color: rgb(251, 114, 153)"] {
       color: var(--bew-theme-color) !important;
     }
 
@@ -403,6 +395,10 @@
     .note-list .note-card-container .note-card:hover,
     .note-detail .note-operation .sanlian-box {
       border-color: var(--bew-border-color);
+    }
+
+    .qrcode .van-qrcode {
+      box-shadow: 0 0 0 5px white;
     }
   }
   //  #endregion
