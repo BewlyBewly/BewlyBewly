@@ -21,6 +21,7 @@ const props = defineProps<{
 // const emit = defineEmits(['pageChange', 'settingsVisibilityChange', 'refresh', 'backToTop'])
 const emit = defineEmits<{
   (e: 'dockItemClick', dockItem: DockItem): void
+  (e: 'dockItemMiddleClick', dockItem: DockItem): void
   (e: 'settingsVisibilityChange'): void
   (e: 'refresh'): void
   (e: 'backToTop'): void
@@ -131,6 +132,11 @@ function handleDockItemClick(dockItem: DockItem) {
   emit('dockItemClick', dockItem)
 }
 
+function handleDockItemMiddleClick(dockItem: DockItem) {
+  activatedDockItem.value = dockItem
+  emit('dockItemMiddleClick', dockItem)
+}
+
 function handleBackToTopOrRefresh() {
   if (reachTop.value)
     emit('refresh')
@@ -226,6 +232,7 @@ const dockTransformStyle = computed((): { transform: string, transformOrigin: st
                 'disable-glowing-effect': settings.disableDockGlowingEffect,
               }"
               @click="handleDockItemClick(dockItem)"
+              @click.middle="handleDockItemMiddleClick(dockItem)"
             >
               <div
                 v-show="!isDockItemActivated(dockItem)"
