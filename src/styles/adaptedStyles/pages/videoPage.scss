@@ -336,19 +336,17 @@
     }
 
     .note-pc .note-container,
-    .note-detail {
+    .note-detail,
+    .note-detail .note-operation .sanlian-box,
+    .ql-snow .ql-picker-options,
+    .ai-summary-tips-panel .tips-panel,
+    ._TipsPopover_1lury_1 ._Panel_1lury_10 ._PanelContent_1lury_19,
+    .ai-summary-popup-body-outline .section:hover {
       background-color: var(--bew-elevated-solid);
     }
 
     .note-pc .note-container .note-header {
       background-color: var(--bew-elevated-solid) !important;
-    }
-
-    .note-detail .note-operation .sanlian-box,
-    .ql-snow .ql-picker-options,
-    .ai-summary-tips-panel .tips-panel,
-    ._TipsPopover_1lury_1 ._Panel_1lury_10 ._PanelContent_1lury_19 {
-      background-color: var(--bew-elevated-solid);
     }
 
     .app .navbar {
@@ -357,10 +355,6 @@
 
     .resizable-component .editor-innter {
       background-color: unset;
-    }
-
-    .ai-summary-popup-body-outline .section:hover {
-      background-color: var(--bew-elevated-solid);
     }
 
     .note-pc .note-container .note-header *,
