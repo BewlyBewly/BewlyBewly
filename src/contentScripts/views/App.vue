@@ -283,7 +283,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
     ref="mainAppRef"
     class="bewly-wrapper"
     :class="{ dark: isDark }"
-    text="$bew-text-1"
+    text="$bew-text-1 size-$bew-base-font-size"
   >
     <!-- Background -->
     <template v-if="showBewlyPage">
@@ -302,7 +302,7 @@ provide<BewlyAppProvider>('BEWLY_APP', {
       pointer-events-none
     >
       <Dock
-        v-if="settings.alwaysUseDock || (showBewlyPage || iframePageURL)"
+        v-if="!settings.useOriginalBilibiliHomepage && (settings.alwaysUseDock || (showBewlyPage || iframePageURL))"
         pointer-events-auto
         :activated-page="activatedPage"
         @settings-visibility-change="toggleSettings"
@@ -324,14 +324,18 @@ provide<BewlyAppProvider>('BEWLY_APP', {
         // This helps prevent the outside top bar from covering the contents.
         // reference: https://github.com/BewlyBewly/BewlyBewly/issues/1235
 
-        // when on home page and not using original bilibili page, show top bar
-        (isHomePage() && !settingsStore.getDockItemIsUseOriginalBiliPage(activatedPage) && !isInIframe())
+        // when using original bilibili homepage, show top bar
+        settings.useOriginalBilibiliHomepage
+          // when on home page and not using original bilibili page, show top bar
+          || (isHomePage() && !settingsStore.getDockItemIsUseOriginalBiliPage(activatedPage) && !isInIframe())
           // when in iframe and using original bilibili page, show top bar
           || (settingsStore.getDockItemIsUseOriginalBiliPage(activatedPage) && isInIframe())
           // when not on home page, show top bar
           || !isHomePage()"
       m-auto max-w="$bew-page-max-width"
     >
+      <BewlyOrBiliTopBarSwitcher v-if="settings.showBewlyOrBiliTopBarSwitcher" />
+
       <OldTopBar
         v-if="settings.useOldTopBar"
         pos="top-0 left-0" z="99 hover:1001" w-full
@@ -383,8 +387,6 @@ provide<BewlyAppProvider>('BEWLY_APP', {
 
 <style lang="scss" scoped>
 .bewly-wrapper {
-  --uno: "text-size-$bew-base-font-size";
-
   // To fix the filter used in `.bewly-wrapper` that cause the positions of elements become discorded.
   > * > * {
     filter: var(--bew-filter-force-dark);

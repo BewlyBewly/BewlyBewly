@@ -3,17 +3,12 @@
     background-color: var(--bew-bg) !important;
   }
 
-  // .dark,
+  .search-input-container .search-fixed-header {
+    background-color: var(--bew-elevated);
+    backdrop-filter: var(--bew-filter-glass-1);
+  }
+
   .search-layout {
-    .keyword,
-    .search-input-wrap .suggest_high_light {
-      color: var(--bew-theme-color);
-    }
-
-    .media-footer-badge {
-      background-color: var(--bew-theme-color) !important;
-    }
-
     .bili-video-card .bili-video-card__wrap {
       transition:
         box-shadow 0.3s ease-in-out,
@@ -29,10 +24,27 @@
     .bili-video-card:hover .bili-video-card__info--tit {
       transition: color 0.3s ease-in-out;
     }
+  }
 
-    .search-loading-container .loading-text .loading-gif,
-    .bili-live-card .bili-live-card__info--living img {
-      filter: var(--bew-filter-icon-glow);
+  // #region theme color adaption part
+  // Increase the priority of the style inside by writing a non-existent selector in `:not()`
+  :not(foobar) {
+    .search-layout {
+      .keyword,
+      .search-input-wrap .suggest_high_light {
+        color: var(--bew-theme-color);
+      }
+
+      .media-footer-badge {
+        background-color: var(--bew-theme-color) !important;
+      }
+
+      .search-loading-container .loading-text .loading-gif,
+      .bili-live-card .bili-live-card__info--living img,
+      .bili-video-card .bili-video-card__info--living img {
+        filter: var(--bew-filter-icon-glow);
+      }
     }
   }
+  // #endregion
 }

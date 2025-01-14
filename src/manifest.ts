@@ -40,7 +40,7 @@ export async function getManifest() {
       'declarativeNetRequest',
       'tabs',
       ...isFirefox
-        ? ['webRequest', 'webRequestBlocking']
+        ? ['webRequest', 'webRequestBlocking', 'cookies']
         : [],
     ],
     host_permissions: [

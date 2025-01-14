@@ -23,6 +23,8 @@ const options = readonly([
 ])
 
 const showBewlyOrBiliPageSwitcher = computed(() => {
+  if (settings.value.useOriginalBilibiliHomepage)
+    return false
   if (!isInIframe() && getDockItemByPage(activatedPage.value)?.hasBewlyPage && isHomePage())
     return true
   if (isInIframe() && getDockItemByPage(activatedPage.value)?.hasBewlyPage)

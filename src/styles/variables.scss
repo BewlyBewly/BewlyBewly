@@ -14,7 +14,7 @@
   --bew-filter-glass-1: blur(20px) saturate(180%);
 
   // Use this in dialogs if you want to add a frosted glass effect
-  --bew-filter-glass-2: blur(40px) saturate(180%);
+  --bew-filter-glass-2: blur(30px) saturate(180%);
 
   // Apply this to the Bilibili icon if it is an image with the brand's original blue or pink color
   // Change it to glow effect to matches the user's theme color
@@ -317,10 +317,6 @@
 
 :root.dark.bewly-design,
 :root.dark.bewly-design * {
-  // --brand_pink: var(--bew-theme-color);
-  // --brand_pink_thin: var(--bew-theme-color-20);
-  // --brand_blue: var(--bew-theme-color);
-  // --brand_blue_thin: var(--bew-theme-color-20);
   --stress_red: var(--Re5);
   --stress_red_thin: var(--Re1);
   --success_green: var(--Gr5);
@@ -330,10 +326,18 @@
   --pay_yellow: var(--Ye5);
   --pay_yellow_thin: var(--Ye1);
   --bg1: var(--bew-bg);
-  --bg2: var(--bew-content-alt-solid);
+  --bg2: var(--bew-content-solid);
   --bg3: var(--bew-content-alt-solid);
   --bg1_float: var(--bew-elevated-solid);
   --bg2_float: var(--bew-elevated-solid);
+  --graph_white: var(--bew-bg);
+  --graph_bg_thin: var(--bew-content-solid);
+  --graph_bg_regular: var(--bew-content-alt-solid);
+  --graph_bg_thick: var(--bew-elevated-solid);
+  --graph_weak: var(--bew-content-solid-hover);
+  --graph_medium: var(--bew-content-alt-solid-hover);
+  --graph_icon: var(--Ga7);
+  --shadow: var(--Ba0);
   --text_white: var(--Wh0_u);
   --text1: var(--bew-text-1);
   --text2: var(--bew-text-2);
@@ -344,26 +348,6 @@
   --line_light: var(--bew-fill-1);
   --line_regular: var(--bew-fill-2);
   --line_bold: var(--bew-fill-3);
-  --graph_white: var(--bew-content-solid);
-  --graph_bg_bright: color-mix(in oklab, var(--bew-content-solid), #fff 20%);
-  --graph_bg_thin: var(--bew-content-solid);
-  --graph_bg_regular: var(--bew-content-solid);
-  --graph_bg_thick: color-mix(in oklab, var(--bew-content-solid), #fff 20%);
-  --graph_weak: var(--Ga3);
-  --graph_medium: var(--Ga5);
-  --graph_icon: var(--Ga7);
-  --shadow: var(--Ba0);
-
-  // --bpx-primary-color: var(--bew-theme-color);
-  // --bpx-fn-color: var(--bew-theme-color);
-  // --bpx-fn-hover-color: var(--bew-theme-color);
-
-  // --brand_pink_hover: var(--bew-theme-color-80);
-  // --brand_pink_active: var(--bew-theme-color);
-  // --brand_pink_disabled: var(--bew-theme-color-60);
-  // --brand_blue_hover: var(--bew-theme-color-80);
-  // --brand_blue_active: var(--bew-theme-color);
-  // --brand_blue_disabled: var(--bew-theme-color-60);
 
   --graph_bg_thin_rgb: 13, 14, 17;
 

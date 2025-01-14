@@ -11,6 +11,11 @@
     height: var(--bew-top-bar-height) !important;
   }
 
+  // Remove the Bilibili Evolved's top bar
+  .custom-navbar {
+    display: none;
+  }
+
   // some pages have a white bar at the top; changing the top margin fixes this problem
   .banner-wrapper,
   .home-banner-wrapper {

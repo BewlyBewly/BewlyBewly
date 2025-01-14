@@ -98,7 +98,11 @@ async function handleDelete(value: string) {
   searchHistory.value = await removeSearchHistory(value)
 }
 
-function handleKeyUp() {
+function handleKeyUp(e: KeyboardEvent) {
+  // Skip the key event triggered by IME
+  if (e.isComposing)
+    return
+
   if (selectedIndex.value <= 0) {
     selectedIndex.value = 0
     return
@@ -124,7 +128,11 @@ function handleKeyUp() {
   })
 }
 
-function handleKeyDown() {
+function handleKeyDown(e: KeyboardEvent) {
+  // Skip the key event triggered by IME
+  if (e.isComposing)
+    return
+
   let isShowSuggestion = false
   if (isFocus.value && suggestions.length !== 0)
     isShowSuggestion = true

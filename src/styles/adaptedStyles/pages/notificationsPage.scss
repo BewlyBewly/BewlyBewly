@@ -36,7 +36,7 @@
       &::after {
         background: url(https://s1.hdslb.com/bfs/static/blive/blfe-message-web/static/img/dark_bg.e136e3d5.png)
           bottom/cover no-repeat fixed;
-        opacity: 0.2;
+        opacity: 0.4;
       }
     }
   }
@@ -211,6 +211,10 @@
       filter: contrast(0) brightness(2);
     }
 
+    .bili-im {
+      box-shadow: unset;
+    }
+
     .space-right .space-right-top .title,
     .space-right .line-2,
     .line-1 .name-field,
@@ -334,9 +338,12 @@
       background-color: var(--bew-border-color);
     }
 
-    .space-left,
+    .space-left {
+      background-color: color-mix(in oklab, var(--bew-content-solid), transparent 40%);
+    }
+
     .space-right {
-      background-color: var(--bew-content);
+      background-color: color-mix(in oklab, var(--bew-content-solid), transparent 60%);
     }
 
     .bili-im .left,
@@ -395,7 +402,7 @@
     .config,
     .bili-im,
     .bili-im .message-list {
-      background-color: var(--bew-content-solid);
+      background-color: var(--bew-fill-1);
     }
 
     .cs-q-tab-area ul.cs-q-tabs {
