@@ -75,22 +75,25 @@ export function createTransformer(trigger: Ref<MaybeElement>, transfromer: Trans
   }
 
   function generateStyle(originStyle: string | undefined | null): string {
-    const s = (originStyle || '').split(';').map((item) => {
-      const [key, value] = item.split(':')
+    const s = (originStyle || '')
+      .split(';')
+      .map((item) => {
+        const [key, value] = item.split(':')
 
-      if (!key || !value) {
-        return {}
-      }
+        if (!key || !value) {
+          return {}
+        }
 
-      return {
-        [key.trim()]: value.trim(),
-      }
-    }).reduce((acc, item) => {
-      return {
-        ...acc,
-        ...item,
-      }
-    }, {})
+        return {
+          [key.trim()]: value.trim(),
+        }
+      })
+      .reduce((acc, item) => {
+        return {
+          ...acc,
+          ...item,
+        }
+      }, {})
 
     for (const key in style.value) {
       // @ts-expect-error ignore
