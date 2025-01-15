@@ -24,10 +24,14 @@ const settingsMenu = {
 const activatedMenuItem = ref<MenuType>(MenuType.General)
 const title = ref<string>(t('settings.title'))
 const window = ref<HTMLDivElement>()
-const windowTransformer = createTransformer(window, {
+createTransformer(window, {
   x: '50%',
   y: '50%',
-  center: true,
+  notrigger: true,
+  centerTarget: {
+    x: true,
+    y: true,
+  },
 })
 
 const scrollbarRef = ref()
@@ -121,7 +125,6 @@ onClickOutside(window, handleClose)
   <div
     id="settings-window"
     ref="window"
-    :style="windowTransformer"
     pos="fixed" w="90%" h="90%"
     max-w-1000px max-h-900px
     flex="~ justify-between items-center"
