@@ -114,9 +114,12 @@ export function createTransformer(trigger: Ref<MaybeElement>, transfromer: Trans
     const targetVisibility = useElementVisibility(() => unrefElement(target))
     watch(targetVisibility, (visible) => {
       if (visible) {
-        update()
-        const style = unrefElement(target)?.getAttribute('style')
-        unrefElement(target)?.setAttribute('style', generateStyle(style))
+        const targetElement = unrefElement(target)
+        if (targetElement) {
+          update()
+          const style = targetElement.getAttribute('style')
+          targetElement.setAttribute('style', generateStyle(style))
+        }
       }
     }, { flush: 'pre' })
 
@@ -133,10 +136,12 @@ export function createTransformer(trigger: Ref<MaybeElement>, transfromer: Trans
     // })
 
     // v-if
-    watch(() => unrefElement(target), (target) => {
-      update()
-      const style = unrefElement(target)?.getAttribute('style')
-      unrefElement(target)?.setAttribute('style', generateStyle(style))
+    watch(() => unrefElement(target), (targetElement) => {
+      if (targetElement) {
+        update()
+        const style = targetElement.getAttribute('style')
+        targetElement.setAttribute('style', generateStyle(style))
+      }
     }, { flush: 'pre' })
   }
 
