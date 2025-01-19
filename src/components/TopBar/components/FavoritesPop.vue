@@ -25,7 +25,7 @@ const favoriteVideosWrap = ref<HTMLElement>() as Ref<HTMLElement>
 const viewAllUrl = computed((): string => {
   return `//space.bilibili.com/${getUserID()}/favlist?fid=${
     activatedMediaId.value
-  }`
+  }&ftype=create`
 })
 
 const playAllUrl = computed((): string => {
