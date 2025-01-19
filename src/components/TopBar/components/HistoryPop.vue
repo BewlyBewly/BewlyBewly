@@ -310,14 +310,15 @@ function getHistoryList(type: Business, view_at = 0 as number) {
                   <div
                     v-if="historyItem.live_status === 1"
                     pos="absolute top-0 left-0"
-                    bg="$bew-error-color"
+                    bg="$bew-theme-color"
                     text="xs white"
                     p="x-2 y-1"
                     m="1"
-                    rounded="$bew-radius-half"
+                    rounded-full
                     font="semibold"
                   >
                     LIVE
+                    <i i-svg-spinners:pulse-3 align-middle mt--0.2em />
                   </div>
                   <div
                     v-else
@@ -374,8 +375,9 @@ function getHistoryList(type: Business, view_at = 0 as number) {
                   items-center
                   gap-1
                   m="l-2"
-                ><div i-tabler:live-photo />
+                >
                   LIVE
+                  <i i-svg-spinners:pulse-3 align-middle mt--0.2em />
                 </span>
               </div>
               <p text="$bew-text-2 sm">
