@@ -100,6 +100,8 @@ function onClickTab(tabId: number) {
   if (isLoading.value)
     return
 
+  noMoreContent.value = false
+
   activatedTab.value = tabId
   historyTabs.value.forEach((tab) => {
     tab.isSelected = tab.id === tabId
@@ -159,8 +161,6 @@ function getHistoryList(type: Business, view_at = 0 as number) {
         if (res.data.list.length < 20) {
           noMoreContent.value = true
         }
-
-        noMoreContent.value = false
       }
       isLoading.value = false
     })
@@ -327,7 +327,7 @@ function getHistoryList(type: Business, view_at = 0 as number) {
                     text="xs white"
                     p="x-2 y-1"
                     m="1"
-                    rounded="$bew-radius-half"
+                    rounded="full"
                   >
                     OFFLINE
                   </div>
