@@ -206,10 +206,7 @@ const topBarItemElements: Record<keyof typeof popupVisible, Ref<HTMLElement | un
   more,
 }
 
-const channelsTransformer = createTransformer(topBarItemElements.channels, {
-  x: '50%',
-  y: '70px',
-})
+const channelsTransformer = setupTopBarItemTransformer('channels')
 const avatarTransformer = setupTopBarItemTransformer('userPanel')
 const notificationsTransformer = setupTopBarItemTransformer('notifications')
 const momentsTransformer = setupTopBarItemTransformer('moments')
