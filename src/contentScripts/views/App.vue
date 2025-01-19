@@ -9,7 +9,7 @@ import { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
 import { type DockItem, useMainStore } from '~/stores/mainStore'
 import { useSettingsStore } from '~/stores/settingsStore'
-import { isHomePage, isInIframe, openLinkToNewTab, queryDomUntilFound, scrollToTop } from '~/utils/main'
+import { isHomePage, isInIframe, isVideoOrBangumiPage, openLinkToNewTab, queryDomUntilFound, scrollToTop } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
 import { setupNecessarySettingsWatchers } from './necessarySettingsWatchers'
@@ -94,6 +94,10 @@ const showBewlyPage = computed((): boolean => {
   return isHomePage() && !settings.value.useOriginalBilibiliHomepage
 })
 const showTopBar = computed((): boolean => {
+  // When using the open in drawer feature, the iframe inside the page will hide the top bar
+  if (isVideoOrBangumiPage() && isInIframe())
+    return false
+
   // When the user switches to the original Bilibili page, BewlyBewly will only show the top bar inside the iframe.
   // This helps prevent the outside top bar from covering the contents.
   // reference: https://github.com/BewlyBewly/BewlyBewly/issues/1235
