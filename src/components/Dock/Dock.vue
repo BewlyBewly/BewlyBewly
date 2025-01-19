@@ -9,7 +9,7 @@ import { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
 import type { DockItem } from '~/stores/mainStore'
 import { useMainStore } from '~/stores/mainStore'
-import { isHomePage } from '~/utils/main'
+import { isHomePage, openLinkToNewTab } from '~/utils/main'
 
 import Tooltip from '../Tooltip.vue'
 import type { HoveringDockItem } from './types'
@@ -127,14 +127,19 @@ function toggleHideDock(hide: boolean) {
     hideDock.value = false
 }
 
-function handleDockItemClick(dockItem: DockItem) {
+function handleDockItemClick($event: MouseEvent, dockItem: DockItem) {
+  if ($event.ctrlKey || $event.metaKey) {
+    openDockItemInNewTab(dockItem)
+    return
+  }
+
   activatedDockItem.value = dockItem
   emit('dockItemClick', dockItem)
 }
 
-function handleDockItemMiddleClick(dockItem: DockItem) {
+function openDockItemInNewTab(dockItem: DockItem) {
   activatedDockItem.value = dockItem
-  emit('dockItemMiddleClick', dockItem)
+  openLinkToNewTab(`https://www.bilibili.com/?page=${dockItem.page}`)
 }
 
 function handleBackToTopOrRefresh() {
@@ -231,8 +236,8 @@ const dockTransformStyle = computed((): { transform: string, transformOrigin: st
                 'inactive': hoveringDockItem.themeMode && isDark,
                 'disable-glowing-effect': settings.disableDockGlowingEffect,
               }"
-              @click="handleDockItemClick(dockItem)"
-              @click.middle="handleDockItemMiddleClick(dockItem)"
+              @click="handleDockItemClick($event, dockItem)"
+              @click.middle="openDockItemInNewTab(dockItem)"
             >
               <div
                 v-show="!isDockItemActivated(dockItem)"

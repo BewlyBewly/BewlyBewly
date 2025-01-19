@@ -160,11 +160,6 @@ function handleDockItemClick(dockItem: DockItem) {
   }
 }
 
-function handleDockItemMiddleClick(dockItem: DockItem) {
-  openLinkToNewTab(`https://www.bilibili.com/?page=${dockItem.page}`);
-}
-
-
 function changeActivatePage(pageName: AppPage) {
   const osInstance = scrollbarRef.value?.osInstance()
   const scrollTop: number = osInstance.elements().viewport.scrollTop
@@ -314,7 +309,6 @@ provide<BewlyAppProvider>('BEWLY_APP', {
         @refresh="handleThrottledPageRefresh"
         @back-to-top="handleThrottledBackToTop"
         @dock-item-click="handleDockItemClick"
-        @dock-item-middle-click="handleDockItemMiddleClick"
       />
       <SideBar
         v-else
