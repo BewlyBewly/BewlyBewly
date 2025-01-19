@@ -150,8 +150,15 @@ const isTopBarFixed = computed((): boolean => {
 })
 
 const showTopBar = computed((): boolean => {
-  const isCreativeCenter = /https?:\/\/member.bilibili.com\/platform.*/.test(location.href)
-  if (settings.value.showTopBar && !isCreativeCenter)
+  if (
+    // Creative center page
+    /https?:\/\/member.bilibili.com\/platform.*/.test(location.href)
+    // https://github.com/BewlyBewly/BewlyBewly/issues/1276
+    || /https?:\/\/(?:www\.)?bilibili\.com\/read\/(?:preview|pcpreview).*/.test(location.href)
+  ) {
+    return false
+  }
+  if (settings.value.showTopBar)
     return true
   return false
 })

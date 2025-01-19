@@ -70,8 +70,7 @@ function isSupportedPages(): boolean {
     // channel page e.g. tv shows, movie, variety shows, mooc page
     || /https?:\/\/(?:www\.)?bilibili\.com\/(?:tv|movie|variety|mooc|documentary).*/.test(currentUrl)
     // article page
-    // www.bilibili.com/read/pcpreview 是专栏浏览页, 因布局问题不做适配 #846
-    || /https?:\/\/(?:www\.)?bilibili\.com\/read\/(?!pcpreview).*/.test(currentUrl)
+    || /https?:\/\/(?:www\.)?bilibili\.com\/read\/.*/.test(currentUrl)
     // 404 page
     || /^https?:\/\/(?:www\.)?bilibili\.com\/404.*$/.test(currentUrl)
     // creative center page 創作中心頁
