@@ -1,5 +1,5 @@
 import type { MaybeElement } from '@vueuse/core'
-import { unrefElement, useEventListener } from '@vueuse/core'
+import { unrefElement, useElementVisibility } from '@vueuse/core'
 import type { CSSProperties } from 'vue'
 
 interface TransfromerCenter {
@@ -34,43 +34,49 @@ export function createTransformer(trigger: Ref<MaybeElement>, transfromer: Trans
   }, { immediate: true })
 
   function update() {
-    let x = transfromer.x
-    let y = transfromer.y
+    let x = '0px'
+    let y = '0px'
+
+    if (typeof transfromer.x === 'number') {
+      x = `${transfromer.x}px`
+    }
+    else {
+      x = transfromer.x
+    }
+
+    if (typeof transfromer.y === 'number') {
+      y = `${transfromer.y}px`
+    }
+    else {
+      y = transfromer.y
+    }
 
     if (target.value && transfromer.centerTarget && isChromium) {
       const el = unrefElement(target.value)
       const targetRect = el!.getBoundingClientRect()
 
       if (transfromer.centerTarget.x) {
-        if (typeof transfromer.x === 'number') {
-          x = `calc(${transfromer.x}px - ${targetRect.width / 2}px)`
-        }
-        else {
-          x = `calc(${transfromer.x} - ${targetRect.width / 2}px)`
-        }
+        x = `calc(${transfromer.x} - ${targetRect.width / 2}px)`
       }
 
       if (transfromer.centerTarget.y) {
-        if (typeof transfromer.y === 'number') {
-          y = `calc(${transfromer.y}px - ${targetRect.height / 2}px)`
-        }
-        else {
-          y = `calc(${transfromer.y} - ${targetRect.height / 2}px)`
-        }
+        y = `calc(${transfromer.y} - ${targetRect.height / 2}px)`
       }
     }
 
     if (isChromium) {
       style.value = {
+        // transition: 'none !important',
+        transform: 'none !important',
         top: y,
         left: x,
       }
     }
     else {
-      style.value = {
-        transform: `translate(${x}, ${y})`,
-        transformOrigin: transfromer.centerTarget ? 'center' : 'top left',
-      }
+      // nothing, use inherit transform
+      // style.value = {
+      //   transform: `translate(${x}, ${y})`,
+      // }
     }
   }
 
@@ -78,14 +84,14 @@ export function createTransformer(trigger: Ref<MaybeElement>, transfromer: Trans
     const s = (originStyle || '')
       .split(';')
       .map((item) => {
-        const [key, value] = item.split(':')
+        const [key, value] = item.split(':').map(item => item.trim())
 
         if (!key || !value) {
           return {}
         }
 
         return {
-          [key.trim()]: value.trim(),
+          [key]: value,
         }
       })
       .reduce((acc, item) => {
@@ -103,24 +109,36 @@ export function createTransformer(trigger: Ref<MaybeElement>, transfromer: Trans
     return Object.keys(s).map(key => `${key}:${s[key]}`).join(';')
   }
 
-  // v-show
-  useEventListener(() => unrefElement(target), 'transitionstart', () => {
-    update()
-    const style = unrefElement(target)?.getAttribute('style')
-    unrefElement(target)?.setAttribute('style', generateStyle(style))
-  })
+  if (isChromium) {
+    // v-show
+    const targetVisibility = useElementVisibility(() => unrefElement(target))
+    watch(targetVisibility, (visible) => {
+      if (visible) {
+        update()
+        const style = unrefElement(target)?.getAttribute('style')
+        unrefElement(target)?.setAttribute('style', generateStyle(style))
+      }
+    }, { flush: 'pre' })
 
-  useEventListener(() => unrefElement(target), 'transitionend', () => {
-    const style = unrefElement(target)?.getAttribute('style')
-    unrefElement(target)?.setAttribute('style', generateStyle(style))
-  })
+    // v-show
+    // useEventListener(() => unrefElement(target), 'transitionstart', () => {
+    //   update()
+    //   const style = unrefElement(target)?.getAttribute('style')
+    //   unrefElement(target)?.setAttribute('style', generateStyle(style))
+    // })
 
-  // v-if
-  watch(target, (target) => {
-    update()
-    const style = unrefElement(target)?.getAttribute('style')
-    unrefElement(target)?.setAttribute('style', generateStyle(style))
-  })
+    // useEventListener(() => unrefElement(target), 'transitionend', () => {
+    //   const style = unrefElement(target)?.getAttribute('style')
+    //   unrefElement(target)?.setAttribute('style', generateStyle(style))
+    // })
+
+    // v-if
+    watch(() => unrefElement(target), (target) => {
+      update()
+      const style = unrefElement(target)?.getAttribute('style')
+      unrefElement(target)?.setAttribute('style', generateStyle(style))
+    }, { flush: 'pre' })
+  }
 
   return target
 }

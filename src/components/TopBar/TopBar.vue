@@ -221,8 +221,8 @@ const moreTransformer = setupTopBarItemTransformer('more')
 
 function setupTopBarItemTransformer(key: keyof typeof popupVisible) {
   const transformer = createTransformer(topBarItemElements[key], {
-    x: '50%',
-    y: '50px',
+    x: '0px',
+    y: '60px',
     centerTarget: {
       x: true,
     },
@@ -545,6 +545,8 @@ defineExpose({
                 v-if="popupVisible.channels"
                 ref="channelsTransformer"
                 class="bew-popover"
+                pos="!left-0 !top-70px"
+                transform="!translate-x-0"
               />
             </Transition>
           </div>
@@ -953,7 +955,8 @@ defineExpose({
 }
 
 .bew-popover {
-  --uno: "absolute";
+  --uno: "absolute top-60px left-1/2";
+  --uno: "transform -translate-x-1/2";
   --uno: "overflow-hidden";
   --uno: "after:content-empty";
   --uno: "after:opacity-100 after:w-full after:h-100px";

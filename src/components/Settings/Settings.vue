@@ -122,122 +122,128 @@ onClickOutside(window, handleClose)
 </script>
 
 <template>
-  <div
-    id="settings-window"
-    ref="window"
-    pos="fixed" w="90%" h="90%"
-    max-w-1000px max-h-900px
-    flex="~ justify-between items-center"
-  >
-    <aside
-      :class="{ group: !settings.touchScreenOptimization }"
-      shrink-0 p="x-4" pos="absolute xl:left--84px left--44px" z-2
+  <div class="fixed w-full h-full top-0 left-0">
+    <div
+      class="fixed w-full h-full top-0 left-0"
+      @click="handleClose"
+    />
+    <div
+      id="settings-window"
+      ref="window"
+      pos="fixed top-1/2 left-1/2" w="90%" h="90%"
+      max-w-1000px max-h-900px transform="~ translate-x--1/2 translate-y--1/2 gpu"
+      flex="~ justify-between items-center"
     >
-      <ul
-        style="
+      <aside
+        :class="{ group: !settings.touchScreenOptimization }"
+        shrink-0 p="x-4" pos="absolute xl:left--84px left--44px" z-2
+      >
+        <ul
+          style="
             --un-shadow: var(--bew-shadow-4), var(--bew-shadow-edge-glow-2);
           "
-        relative flex="~ gap-2 col" rounded="30px group-hover:25px" p-2 shadow
-        bg="$bew-content-alt group-hover:$bew-elevated dark:$bew-elevated dark-group-hover:$bew-elevated"
-        scale="group-hover:105" duration-300 overflow-hidden antialiased transform-gpu
-        border="1 $bew-border-color"
-      >
-        <!-- frosted glass background -->
-        <!-- https://github.com/BewlyBewly/BewlyBewly/issues/1162 -->
-        <div
-          style="backdrop-filter: var(--bew-filter-glass-2);"
-          pos="absolute top-0 left-0" z--1
-          w-full h-full pointer-events-none
-        />
+          relative flex="~ gap-2 col" rounded="30px group-hover:25px" p-2 shadow
+          bg="$bew-content-alt group-hover:$bew-elevated dark:$bew-elevated dark-group-hover:$bew-elevated"
+          scale="group-hover:105" duration-300 overflow-hidden antialiased transform-gpu
+          border="1 $bew-border-color"
+        >
+          <!-- frosted glass background -->
+          <!-- https://github.com/BewlyBewly/BewlyBewly/issues/1162 -->
+          <div
+            style="backdrop-filter: var(--bew-filter-glass-2);"
+            pos="absolute top-0 left-0" z--1
+            w-full h-full pointer-events-none
+          />
 
-        <li v-for="menuItem in settingsMenuItems" :key="menuItem.value">
-          <a
-            cursor-pointer w="40px group-hover:180px" h-40px
-            rounded-30px flex items-center overflow-x-hidden
-            duration-300 bg="hover:$bew-fill-2"
-            :class="{ 'menu-item-activated': menuItem.value === activatedMenuItem }"
-            @click="changeMenuItem(menuItem.value)"
-          >
-            <div
-              v-show="menuItem.value !== activatedMenuItem"
-              text="xl center" w-40px h-20px flex="~ shrink-0" justify-center
-              :class="menuItem.icon"
-            />
-            <div
-              v-show="menuItem.value === activatedMenuItem"
-              text="xl center" w-40px h-20px flex="~ shrink-0" justify-center
-              :class="menuItem.iconActivated"
-            />
-            <span shrink-0>{{ menuItem.title }}</span>
-          </a>
-        </li>
-      </ul>
-    </aside>
+          <li v-for="menuItem in settingsMenuItems" :key="menuItem.value">
+            <a
+              cursor-pointer w="40px group-hover:180px" h-40px
+              rounded-30px flex items-center overflow-x-hidden
+              duration-300 bg="hover:$bew-fill-2"
+              :class="{ 'menu-item-activated': menuItem.value === activatedMenuItem }"
+              @click="changeMenuItem(menuItem.value)"
+            >
+              <div
+                v-show="menuItem.value !== activatedMenuItem"
+                text="xl center" w-40px h-20px flex="~ shrink-0" justify-center
+                :class="menuItem.icon"
+              />
+              <div
+                v-show="menuItem.value === activatedMenuItem"
+                text="xl center" w-40px h-20px flex="~ shrink-0" justify-center
+                :class="menuItem.iconActivated"
+              />
+              <span shrink-0>{{ menuItem.title }}</span>
+            </a>
+          </li>
+        </ul>
+      </aside>
 
-    <div
-      class="settings-content"
-      style="
+      <div
+        class="settings-content"
+        style="
           --un-shadow: var(--bew-shadow-4), var(--bew-shadow-edge-glow-2);
           backdrop-filter: var(--bew-filter-glass-2);
         "
-      relative overflow="x-hidden" w-full h-full bg="$bew-elevated-alt"
-      shadow rounded="$bew-radius" border="1 $bew-border-color" transform-gpu
-    >
-      <header
-        flex justify-between items-center w-full h-80px
-        pos="fixed top-0 left-0" p="x-11"
-        z-1 rounded="t-$bew-radius"
-        style="
+        relative overflow="x-hidden" w-full h-full bg="$bew-elevated-alt"
+        shadow rounded="$bew-radius" border="1 $bew-border-color" transform-gpu
+      >
+        <header
+          flex justify-between items-center w-full h-80px
+          pos="fixed top-0 left-0" p="x-11"
+          z-1 rounded="t-$bew-radius"
+          style="
             text-shadow: 0 0 10px var(--bew-elevated-solid), 0 0 15px var(--bew-elevated-solid)
           "
-      >
-        <!-- Mask -->
-        <div
-          pos="absolute top-0 left-0" w-inherit h-inherit pointer-events-none
-          style="
+        >
+          <!-- Mask -->
+          <div
+            pos="absolute top-0 left-0" w-inherit h-inherit pointer-events-none
+            style="
               mask-image: linear-gradient(to bottom,  black 0, transparent 100%);
               -webkit-mask-image: linear-gradient(to bottom, black 0, transparent 100%);
               backdrop-filter: blur(6px);
             "
-          z--1 rounded-inherit transform-gpu
-        />
-        <div text="3xl" fw-bold>
-          {{ title }}
-        </div>
-        <div
-          style="
+            z--1 rounded-inherit transform-gpu
+          />
+          <div text="3xl" fw-bold>
+            {{ title }}
+          </div>
+          <div
+            style="
               backdrop-filter: var(--bew-filter-glass-1);
               box-shadow: var(--bew-shadow-edge-glow-1), var(--bew-shadow-2);
             "
-          text="!16px hover:$bew-theme-color" w="32px" h="32px"
-          flex="~ items-center justify-center shrink-0"
-          bg="$bew-elevated dark:$bew-fill-1 hover:$bew-theme-color-30"
-          rounded-8 cursor="pointer" border="1 $bew-border-color" box-border
-          duration-300
-          @click="handleClose"
-        >
-          <div i-ic-baseline-clear />
-        </div>
-      </header>
-      <OverlayScrollbarsComponent
-        ref="scrollbarRef"
-        style="
+            text="!16px hover:$bew-theme-color" w="32px" h="32px"
+            flex="~ items-center justify-center shrink-0"
+            bg="$bew-elevated dark:$bew-fill-1 hover:$bew-theme-color-30"
+            rounded-8 cursor="pointer" border="1 $bew-border-color" box-border
+            duration-300
+            @click="handleClose"
+          >
+            <div i-ic-baseline-clear />
+          </div>
+        </header>
+        <OverlayScrollbarsComponent
+          ref="scrollbarRef"
+          style="
             mask-image: linear-gradient(to bottom, transparent 0%, black 80px 30%);
             -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 80px 30%);
           "
-        element="div" defer
-        h-inherit
-      >
-        <main
-          pos="absolute top-80px left-0" w-full min-h="[calc(100%-80px)]" p="x-12 b-10"
+          element="div" defer
+          h-inherit
         >
-          <!-- <div h-80px mt--8 /> -->
+          <main
+            pos="absolute top-80px left-0" w-full min-h="[calc(100%-80px)]" p="x-12 b-10"
+          >
+            <!-- <div h-80px mt--8 /> -->
 
-          <Transition name="page-fade">
-            <Component :is="settingsMenu[activatedMenuItem as keyof typeof settingsMenu]" />
-          </Transition>
-        </main>
-      </OverlayScrollbarsComponent>
+            <Transition name="page-fade">
+              <Component :is="settingsMenu[activatedMenuItem as keyof typeof settingsMenu]" />
+            </Transition>
+          </main>
+        </OverlayScrollbarsComponent>
+      </div>
     </div>
   </div>
 </template>
