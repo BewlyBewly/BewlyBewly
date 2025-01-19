@@ -30,11 +30,11 @@ nextTick(() => {
 
   useEventListener(iframeRef.value?.contentWindow, 'DOMContentLoaded', () => {
     if (headerShow.value) {
-      iframeRef.value?.contentWindow?.document.documentElement.classList.add('remove-bili-top-bar-without-placeholder')
+      iframeRef.value?.contentWindow?.document.documentElement.classList.add('remove-top-bar-without-placeholder')
       removeTopBarClassInjected.value = true
     }
     else {
-      iframeRef.value?.contentWindow?.document.documentElement.classList.remove('remove-bili-top-bar-without-placeholder')
+      iframeRef.value?.contentWindow?.document.documentElement.classList.remove('remove-top-bar-without-placeholder')
       removeTopBarClassInjected.value = false
     }
   })
@@ -250,7 +250,7 @@ watchEffect(() => {
           ref="iframeRef"
           :src="props.url"
           :style="{
-            // Prevent top bar shaking when before the remove-bili-top-bar-without-placeholder class is injected
+            // Prevent top bar shaking when before the remove-top-bar-without-placeholder class is injected
             top: !removeTopBarClassInjected ? `calc(-1 * var(--bew-top-bar-height))` : '0',
           }"
           frameborder="0"
