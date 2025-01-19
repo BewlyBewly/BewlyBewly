@@ -44,5 +44,11 @@
         background-color: var(--bew-content-solid-hover);
       }
     }
+
+    // 直播信息擴充
+    .be-live-list {
+      background-color: var(--bew-content-solid);
+      color: var(--bew-text-1);
+    }
   }
 }
