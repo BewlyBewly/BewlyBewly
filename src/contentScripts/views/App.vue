@@ -99,12 +99,12 @@ const showTopBar = computed((): boolean => {
   // reference: https://github.com/BewlyBewly/BewlyBewly/issues/1235
 
   // when using original bilibili homepage, show top bar
-  settings.useOriginalBilibiliHomepage
-    // when on home page and not using original bilibili page, show top bar
-    || (isHomePage() && !settingsStore.getDockItemIsUseOriginalBiliPage(activatedPage) && !isInIframe())
-    // when in iframe and using original bilibili page, show top bar
-    || (settingsStore.getDockItemIsUseOriginalBiliPage(activatedPage) && isInIframe())
-    // when not on home page, show top bar
+  return settings.value.useOriginalBilibiliHomepage
+  // when on home page and not using original bilibili page, show top bar
+    || (isHomePage() && !settingsStore.getDockItemIsUseOriginalBiliPage(activatedPage.value) && !isInIframe())
+  // when in iframe and using original bilibili page, show top bar
+    || (settingsStore.getDockItemIsUseOriginalBiliPage(activatedPage.value) && isInIframe())
+  // when not on home page, show top bar
     || !isHomePage()
 })
 
