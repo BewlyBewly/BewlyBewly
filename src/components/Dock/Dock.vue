@@ -9,7 +9,7 @@ import { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
 import type { DockItem } from '~/stores/mainStore'
 import { useMainStore } from '~/stores/mainStore'
-import { isHomePage } from '~/utils/main'
+import { isHomePage, openLinkToNewTab } from '~/utils/main'
 
 import Tooltip from '../Tooltip.vue'
 import type { HoveringDockItem } from './types'
@@ -21,6 +21,7 @@ const props = defineProps<{
 // const emit = defineEmits(['pageChange', 'settingsVisibilityChange', 'refresh', 'backToTop'])
 const emit = defineEmits<{
   (e: 'dockItemClick', dockItem: DockItem): void
+  (e: 'dockItemMiddleClick', dockItem: DockItem): void
   (e: 'settingsVisibilityChange'): void
   (e: 'refresh'): void
   (e: 'backToTop'): void
@@ -126,9 +127,19 @@ function toggleHideDock(hide: boolean) {
     hideDock.value = false
 }
 
-function handleDockItemClick(dockItem: DockItem) {
+function handleDockItemClick($event: MouseEvent, dockItem: DockItem) {
+  if ($event.ctrlKey || $event.metaKey) {
+    openDockItemInNewTab(dockItem)
+    return
+  }
+
   activatedDockItem.value = dockItem
   emit('dockItemClick', dockItem)
+}
+
+function openDockItemInNewTab(dockItem: DockItem) {
+  activatedDockItem.value = dockItem
+  openLinkToNewTab(`https://www.bilibili.com/?page=${dockItem.page}`)
 }
 
 function handleBackToTopOrRefresh() {
@@ -187,7 +198,7 @@ const dockTransformStyle = computed((): { transform: string, transformOrigin: st
 <template>
   <aside
     class="dock-wrap"
-    pos="fixed top-0" flex="~ col justify-center items-center" w-full h-full
+    pos="fixed top-0" z-100 flex="~ col justify-center items-center" w-full h-full
     z-10 pointer-events-none
   >
     <!-- Edge Div -->
@@ -225,7 +236,8 @@ const dockTransformStyle = computed((): { transform: string, transformOrigin: st
                 'inactive': hoveringDockItem.themeMode && isDark,
                 'disable-glowing-effect': settings.disableDockGlowingEffect,
               }"
-              @click="handleDockItemClick(dockItem)"
+              @click="handleDockItemClick($event, dockItem)"
+              @click.middle="openDockItemInNewTab(dockItem)"
             >
               <div
                 v-show="!isDockItemActivated(dockItem)"

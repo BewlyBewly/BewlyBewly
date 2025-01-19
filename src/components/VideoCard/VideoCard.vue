@@ -354,7 +354,7 @@ provide('getVideoType', () => props.type!)
               <div
                 v-if="video.liveStatus === 1"
                 class="group-hover:opacity-0"
-                pos="absolute left-0 top-0" bg="$bew-theme-color" text="xs white"
+                pos="absolute left-0 top-0" bg="$bew-theme-color" text="xs white" fw-bold
                 p="x-2 y-1" m-1 inline-block rounded="$bew-radius" duration-300
               >
                 LIVE

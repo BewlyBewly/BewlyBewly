@@ -162,6 +162,25 @@ export function isHomePage(url: string = location.href): boolean {
 }
 
 /**
+ * Check if the current page is a video or bangumi page
+ * @param url the url to check
+ * @returns true if the current page is a video or bangumi page
+ */
+export function isVideoOrBangumiPage(url: string = location.href): boolean {
+  if ( // video page
+    /https?:\/\/(?:www\.)?bilibili\.com\/(?:video|list)\/.*/.test(url)
+    // anime playback & movie page
+    || /https?:\/\/(?:www\.)?bilibili\.com\/bangumi\/play\/.*/.test(url)
+    // watch later playlist
+    || /https?:\/\/(?:www\.)?bilibili\.com\/list\/watchlater.*/.test(url)
+    // favorite playlist
+    || /https?:\/\/(?:www\.)?bilibili\.com\/list\/ml.*/.test(url)) {
+    return true
+  }
+  return false
+}
+
+/**
  * Compresses and resizes an image file.
  *
  * @param file - The image file to compress and resize.
