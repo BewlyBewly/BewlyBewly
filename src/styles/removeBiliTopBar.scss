@@ -22,3 +22,9 @@
     margin-top: calc(-1 * var(--bew-top-bar-height)) !important;
   }
 }
+
+.remove-bili-top-bar-without-placeholder {
+  #biliMainHeader {
+    display: none;
+  }
+}
