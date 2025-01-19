@@ -10,7 +10,7 @@ import type { HistoryResult, List as HistoryItem } from '~/models/history/histor
 import { Business } from '~/models/history/history'
 import api from '~/utils/api'
 import { calcCurrentTime } from '~/utils/dataFormatter'
-import { removeHttpFromUrl, scrollToTop } from '~/utils/main'
+import { getCSRF, removeHttpFromUrl, scrollToTop } from '~/utils/main'
 
 const { t } = useI18n()
 const historys = reactive<Array<HistoryItem>>([])
@@ -100,6 +100,8 @@ function onClickTab(tabId: number) {
   if (isLoading.value)
     return
 
+  noMoreContent.value = false
+
   activatedTab.value = tabId
   historyTabs.value.forEach((tab) => {
     tab.isSelected = tab.id === tabId
@@ -159,10 +161,19 @@ function getHistoryList(type: Business, view_at = 0 as number) {
         if (res.data.list.length < 20) {
           noMoreContent.value = true
         }
-
-        noMoreContent.value = false
       }
       isLoading.value = false
+    })
+}
+
+function deleteHistoryItem(index: number, historyItem: HistoryItem) {
+  api.history.deleteHistoryItem({
+    kid: `${historyItem.history.business}_${historyItem.history.oid}`,
+    csrf: getCSRF(),
+  })
+    .then((res) => {
+      if (res.code === 0)
+        historys.splice(index, 1)
     })
 }
 </script>
@@ -239,9 +250,10 @@ function getHistoryList(type: Business, view_at = 0 as number) {
       <!-- historys -->
       <TransitionGroup name="list">
         <ALink
-          v-for="historyItem in historys"
+          v-for="(historyItem, index) in historys"
           :key="historyItem.kid"
           :href="getHistoryUrl(historyItem)"
+          class="group"
           type="topBar"
           m="last:b-4" p="2"
           rounded="$bew-radius"
@@ -252,11 +264,27 @@ function getHistoryList(type: Business, view_at = 0 as number) {
             <!-- Video cover, live cover, ariticle cover -->
             <div
               bg="$bew-skeleton"
+              pos="relative"
               w="150px"
               flex="shrink-0"
               border="rounded-$bew-radius-half"
               overflow="hidden"
             >
+              <!-- Delete button -->
+              <div
+                class="group-hover:opacity-100 opacity-0"
+                pos="absolute top-0 right-0" z-1 w-24px h-24px
+                bg="black opacity-60 hover:$bew-error-color"
+                grid="~ place-items-center"
+                m="1"
+                text="white xs"
+                duration-300
+                border="rounded-full"
+                @click.stop.prevent="deleteHistoryItem(index, historyItem)"
+              >
+                <i i-mingcute:close-line />
+              </div>
+
               <!-- Video -->
               <template v-if="activatedTab === 0">
                 <div pos="relative">
@@ -310,14 +338,15 @@ function getHistoryList(type: Business, view_at = 0 as number) {
                   <div
                     v-if="historyItem.live_status === 1"
                     pos="absolute top-0 left-0"
-                    bg="$bew-error-color"
+                    bg="$bew-theme-color"
                     text="xs white"
                     p="x-2 y-1"
                     m="1"
-                    rounded="$bew-radius-half"
+                    rounded-full
                     font="semibold"
                   >
                     LIVE
+                    <i i-svg-spinners:pulse-3 align-middle mt--0.2em />
                   </div>
                   <div
                     v-else
@@ -326,7 +355,7 @@ function getHistoryList(type: Business, view_at = 0 as number) {
                     text="xs white"
                     p="x-2 y-1"
                     m="1"
-                    rounded="$bew-radius-half"
+                    rounded="full"
                   >
                     OFFLINE
                   </div>
@@ -374,8 +403,9 @@ function getHistoryList(type: Business, view_at = 0 as number) {
                   items-center
                   gap-1
                   m="l-2"
-                ><div i-tabler:live-photo />
+                >
                   LIVE
+                  <i i-svg-spinners:pulse-3 align-middle mt--0.2em />
                 </span>
               </div>
               <p text="$bew-text-2 sm">

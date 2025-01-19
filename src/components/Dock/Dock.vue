@@ -193,7 +193,7 @@ const dockTransformStyle = computed((): { transform: string, transformOrigin: st
 <template>
   <aside
     class="dock-wrap"
-    pos="fixed top-0" flex="~ col justify-center items-center" w-full h-full
+    pos="fixed top-0" z-100 flex="~ col justify-center items-center" w-full h-full
     z-10 pointer-events-none
   >
     <!-- Edge Div -->

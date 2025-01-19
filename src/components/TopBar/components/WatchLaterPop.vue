@@ -7,7 +7,7 @@ import Progress from '~/components/Progress.vue'
 import type { List as VideoItem, WatchLaterResult } from '~/models/video/watchLater'
 import api from '~/utils/api'
 import { calcCurrentTime } from '~/utils/dataFormatter'
-import { removeHttpFromUrl } from '~/utils/main'
+import { getCSRF, removeHttpFromUrl } from '~/utils/main'
 
 const watchLaterList = reactive<VideoItem[]>([])
 const isLoading = ref<boolean>()
@@ -44,6 +44,18 @@ function getAllWatchLaterList() {
         Object.assign(watchLaterList, res.data.list)
 
       isLoading.value = false
+    })
+}
+
+function deleteWatchLaterItem(index: number, aid: number) {
+  api.watchlater.removeFromWatchLater({
+    aid,
+    csrf: getCSRF(),
+  })
+    .then((res) => {
+      if (res.code === 0) {
+        watchLaterList.splice(index, 1)
+      }
     })
 }
 </script>
@@ -121,9 +133,10 @@ function getAllWatchLaterList() {
       <!-- watchlater -->
       <TransitionGroup name="list">
         <ALink
-          v-for="item in watchLaterList"
+          v-for="(item, index) in watchLaterList"
           :key="item.aid"
           :href="getWatchLaterUrl(item.bvid)"
+          class="group"
           type="topBar"
           m="last:b-4" p="2"
           rounded="$bew-radius"
@@ -134,11 +147,27 @@ function getAllWatchLaterList() {
             <!-- Video cover, live cover, ariticle cover -->
             <div
               bg="$bew-skeleton"
+              pos="relative"
               w="150px"
               flex="shrink-0"
               border="rounded-$bew-radius-half"
               overflow="hidden"
             >
+              <!-- Delete button -->
+              <div
+                class="group-hover:opacity-100 opacity-0"
+                pos="absolute top-0 right-0" z-1 w-24px h-24px
+                bg="black opacity-60 hover:$bew-error-color"
+                grid="~ place-items-center"
+                m="1"
+                text="white xs"
+                duration-300
+                border="rounded-full"
+                @click.stop.prevent="deleteWatchLaterItem(index, item.aid)"
+              >
+                <i i-mingcute:close-line />
+              </div>
+
               <!-- Video -->
               <div pos="relative">
                 <img
