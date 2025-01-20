@@ -100,26 +100,11 @@ export function setupNecessarySettingsWatchers() {
   )
 
   const removeTheIndentFromChinesePunctuationStyleEl = injectCSS(`
-    .video-info-container .special-text-indent[data-title^='“'],
-    .video-info-container .special-text-indent[data-title^='《'],
-    .video-info-container .special-text-indent[data-title^='「'],
-    .video-info-container .special-text-indent[data-title^='『'],
-    .video-info-container .special-text-indent[data-title^='【'],
-    a[title^='“'],
-    a[title^='《'],
-    a[title^='「'],
-    a[title^='『'],
-    a[title^='【'],
-    p[title^='“'],
-    p[title^='《'],
-    p[title^='「'],
-    p[title^='『'],
-    p[title^='【'],
-    h3[title^='“'],
-    h3[title^='《'],
-    h3[title^='「'],
-    h3[title^='『'],
-    h3[title^='【'] {
+    .video-info-container .special-text-indent[data-title^='“'],a[title^='“'],p[title^='“'],h3[title^='“'],
+    .video-info-container .special-text-indent[data-title^='《'],a[title^='《'],p[title^='《'],h3[title^='《'],
+    .video-info-container .special-text-indent[data-title^='「'],a[title^='「'],p[title^='「'],h3[title^='「'],
+    .video-info-container .special-text-indent[data-title^='『'],a[title^='『'],p[title^='『'],h3[title^='『'],
+    .video-info-container .special-text-indent[data-title^='【'],a[title^='【'],p[title^='【'],h3[title^='【'] {
       text-indent: 0 !important;
     }
   `)
