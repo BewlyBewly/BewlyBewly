@@ -100,13 +100,23 @@ export function setupNecessarySettingsWatchers() {
   )
 
   const removeTheIndentFromChinesePunctuationStyleEl = injectCSS(`
+    .video-info-container .special-text-indent[data-title^='“'],
     .video-info-container .special-text-indent[data-title^='《'],
     .video-info-container .special-text-indent[data-title^='「'],
     .video-info-container .special-text-indent[data-title^='『'], 
     .video-info-container .special-text-indent[data-title^='【'],
+    a[title^='\\201c'],
+    a[title^='\\300a'],
+    a[title^='\\300c'],
+    a[title^='\\300e'],
+    a[title^='\\3010'],
+    p[title^='\\201c'],
+    p[title^='\\300a'],
     p[title^='\\300c'],
     p[title^='\\300e'],
     p[title^='\\3010'],
+    h3[title^='\\201c'],
+    h3[title^='\\300a'],
     h3[title^='\\300c'],
     h3[title^='\\300e'],
     h3[title^='\\3010'] {
