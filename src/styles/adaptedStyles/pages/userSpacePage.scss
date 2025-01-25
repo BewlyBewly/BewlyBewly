@@ -328,9 +328,10 @@
   // #region dark mode adaption part
   // 深色模式下對主題顏色調整
   &.dark {
-    .bili-dyn-item {
+    .bili-dyn-item,
+    .bili-dyn-item * {
       --bg1: var(--bew-content-solid);
-      --bg2: var(--bew-bg);
+      --bg2: var(--bew-fill-1);
     }
 
     .n .n-inner,
