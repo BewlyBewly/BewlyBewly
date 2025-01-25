@@ -12,7 +12,7 @@ import { getCSRF, removeHttpFromUrl } from '~/utils/main'
 const watchLaterList = reactive<VideoItem[]>([])
 const isLoading = ref<boolean>()
 const viewAllUrl = computed((): string => {
-  return 'https://www.bilibili.com/watchlater/#/list'
+  return 'https://www.bilibili.com/watchlater/list'
 })
 const playAllUrl = computed((): string => {
   return 'https://www.bilibili.com/list/watchlater'
