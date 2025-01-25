@@ -65,7 +65,7 @@ body:
       label: 最终确认
       description: 请确认以下所有内容，否则将被 close。
       options:
-        - label: 我确认我停用 BewlyBewly 且刷新后还是出现这问题，这不是b站本身问题。
+        - label: 我确认在停用 BewlyBewly 并强制刷新（按住Shift的同时按刷新键）后，问题不再出现，确认了这不是b站问题。
           required: false
         - label: 我确认此问题未在其他 issue 中出现过。
           required: false
