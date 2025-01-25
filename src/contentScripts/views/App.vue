@@ -123,6 +123,17 @@ watch(
       window.history.replaceState({}, '', url.toString())
     }
 
+    // Remove the original Bilibili top bar when using original bilibili page to avoid two top bars showing
+    const biliHeader = document.querySelector('.bili-header') as HTMLElement | null
+    if (biliHeader) {
+      if (settingsStore.getDockItemIsUseOriginalBiliPage(activatedPage.value) && !isInIframe()) {
+        biliHeader.style.visibility = 'hidden'
+      }
+      else {
+        biliHeader.style.visibility = 'visible'
+      }
+    }
+
     if (scrollbarRef.value) {
       const osInstance = scrollbarRef.value.osInstance()
       osInstance.elements().viewport.scrollTop = 0
