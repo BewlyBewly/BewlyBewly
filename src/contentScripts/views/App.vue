@@ -12,6 +12,7 @@ import { useSettingsStore } from '~/stores/settingsStore'
 import { isHomePage, isInIframe, isVideoOrBangumiPage, openLinkToNewTab, queryDomUntilFound, scrollToTop } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
+import { isSupportedIframePages } from '..'
 import { setupNecessarySettingsWatchers } from './necessarySettingsWatchers'
 
 const mainStore = useMainStore()
@@ -125,7 +126,7 @@ watch(
 
     // Remove the original Bilibili top bar when using original bilibili page to avoid two top bars showing
     const biliHeader = document.querySelector('.bili-header') as HTMLElement | null
-    if (biliHeader) {
+    if (biliHeader && isSupportedIframePages()) {
       if (settingsStore.getDockItemIsUseOriginalBiliPage(activatedPage.value) && !isInIframe()) {
         biliHeader.style.visibility = 'hidden'
       }

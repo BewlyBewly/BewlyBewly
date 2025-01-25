@@ -37,6 +37,9 @@ function isSupportedPages(): boolean {
     // homepage
     isHomePage()
 
+    // popular page https://www.bilibili.com/v/popular/all
+    || /https?:\/\/(?:www\.)?bilibili\.com\/v\/popular\/all.*/.test(currentUrl)
+
     // video page
     || /https?:\/\/(?:www\.)?bilibili\.com\/(?:video|list)\/.*/.test(currentUrl)
     // anime playback & movie page
