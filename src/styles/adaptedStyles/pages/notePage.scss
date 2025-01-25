@@ -124,12 +124,26 @@
 
   // #region dark mode adaption part
   &.dark {
+    body,
+    #app {
+      background-color: var(--bew-bg) !important;
+    }
+
     .note-list .note-header,
     .note-list .note-tabs,
     .note-list-item,
-    .note-single-item,
+    .note-single-item {
+      background-color: var(--bew-content-solid);
+    }
+
     .van-dialog {
-      background-color: var(--bew-bg);
+      background-color: var(--bew-elevated-solid);
+    }
+
+    .ql-toolbar .toolbar-mask,
+    .readonly-toolbar .toolbar-mask,
+    .manage-note #web-toolbar {
+      background-color: transparent;
     }
 
     .note-list-item,
@@ -145,6 +159,31 @@
 
     .editor-innter .ql-editor::-webkit-scrollbar-track {
       background-color: var(--bew-content);
+    }
+
+    .note-tabs .van-tabs-bar:after {
+      background-color: var(--bew-border-color);
+    }
+
+    .el-pagination.is-background .btn-next,
+    .el-pagination.is-background .btn-prev,
+    .el-pagination.is-background .el-pager li,
+    .ql-container,
+    // #web-toolbar,
+    // #web-toolbar .ql-picker-options,
+    .view-manage-note,
+    .note-tooltip.info,
+    .note-list-del-popup {
+      background-color: var(--bew-content-solid);
+    }
+
+    .ql-toolbar.ql-snow + .ql-container.ql-snow {
+      background-color: var(--bew-fill-1);
+    }
+
+    .note-single-item--selected,
+    .my-notes-manage-note {
+      background-color: var(--bew-fill-2);
     }
 
     .note-header .note-title .note-text,
@@ -212,31 +251,6 @@
 
     .protocal-dialog .van-dialog__header {
       border-bottom-color: var(--bew-border-color);
-    }
-
-    .note-tabs .van-tabs-bar:after {
-      background-color: var(--bew-border-color);
-    }
-
-    .el-pagination.is-background .btn-next,
-    .el-pagination.is-background .btn-prev,
-    .el-pagination.is-background .el-pager li,
-    .ql-container,
-    #web-toolbar,
-    #web-toolbar .ql-picker-options,
-    .view-manage-note,
-    .note-tooltip.info,
-    .note-list-del-popup,
-    .my-notes-manage-note {
-      background-color: var(--bew-content-solid);
-    }
-
-    .ql-toolbar.ql-snow + .ql-container.ql-snow {
-      background-color: var(--bew-fill-1);
-    }
-
-    .note-single-item--selected {
-      background-color: var(--bew-fill-2);
     }
 
     .ql-toolbar.ql-snow .ql-picker-options {
