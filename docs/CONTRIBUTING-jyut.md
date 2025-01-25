@@ -113,7 +113,7 @@ pnpm start:firefox
 pnpm install
 
 # 運行專案
-pnpm dev
+pnpm dev-firefox
 ```
 
 2. 喺瀏覽器度輸入 `about:addons`，撳 `Extensions` 然之後 `Debug Add-ons`

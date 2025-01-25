@@ -113,7 +113,7 @@ pnpm start:firefox
 pnpm install
 
 # Run the project
-pnpm dev
+pnpm dev-firefox
 ```
 
 2. In the browser, enter `about:addons`, click on `Extensions` and then `Debug Add-ons`
