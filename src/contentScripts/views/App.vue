@@ -12,7 +12,6 @@ import { useSettingsStore } from '~/stores/settingsStore'
 import { isHomePage, isInIframe, isVideoOrBangumiPage, openLinkToNewTab, queryDomUntilFound, scrollToTop } from '~/utils/main'
 import emitter from '~/utils/mitt'
 
-import { isSupportedIframePages } from '..'
 import { setupNecessarySettingsWatchers } from './necessarySettingsWatchers'
 
 const mainStore = useMainStore()
