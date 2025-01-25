@@ -39,7 +39,6 @@ function isSupportedPages(): boolean {
 
     // popular page https://www.bilibili.com/v/popular/all
     || /https?:\/\/(?:www\.)?bilibili\.com\/v\/popular\/all.*/.test(currentUrl)
-
     // video page
     || /https?:\/\/(?:www\.)?bilibili\.com\/(?:video|list)\/.*/.test(currentUrl)
     // anime playback & movie page
@@ -83,6 +82,8 @@ function isSupportedPages(): boolean {
     || /^https?:\/\/account\.bilibili\.com\/.*$/.test(currentUrl)
     // login page
     || /^https?:\/\/passport\.bilibili\.com\/login.*$/.test(currentUrl)
+    // music center page 新歌熱榜 https://music.bilibili.com/pc/music-center/
+    || /https?:\/\/music\.bilibili\.com\/pc\/music-center.*$/.test(currentUrl)
   ) {
     return true
   }
