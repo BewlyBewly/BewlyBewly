@@ -14,16 +14,17 @@ function toggleBewlyTopBar() {
     z-10
     w-full
     flex="~ items-center justify-center"
-    p="t-20px"
     m="t-[calc(var(--bew-top-bar-height)-20px)]"
+    p="t-30px"
   >
     <button
       style="backdrop-filter: var(--bew-filter-glass-1);"
+      pos="absolute"
       class="opacity-0 group-hover:opacity-100"
-      transform="translate-y--100% group-hover:translate-y-0"
+      transform="translate-y--100% group-hover:translate-y-0 hover:translate-y-0"
       flex="~ items-center gap-2"
       text="$bew-text-2 sm"
-      bg="$bew-elevated" p="x-2 y-1"
+      bg="$bew-elevated" p="x-2 y-1" mt-2
       rounded="full" shadow="$bew-shadow-1"
       duration-300
       @click="toggleBewlyTopBar"
