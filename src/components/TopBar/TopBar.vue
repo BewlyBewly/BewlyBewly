@@ -74,8 +74,6 @@ const forceWhiteIcon = computed((): boolean => {
       /https?:\/\/(?:www.)?bilibili.com\/(?:v|anime|guochuang|tv|movie|variety|mooc).*/.test(location.href)
       && !/https?:\/\/(?:www.)?bilibili.com\/video.*/.test(location.href)
     )
-    // watch later & history page
-    || /https?:\/\/(?:www.)?bilibili.com\/(?:watchlater|account\/history).*/.test(location.href)
     // user space page 空間頁
     || /https?:\/\/space.bilibili\.com\.*/.test(location.href)
     // premium page bilibili 大會員頁
@@ -135,8 +133,6 @@ const isTopBarFixed = computed((): boolean => {
     || /https?:\/\/(?:www.)?bilibili.com\/bangumi\/play\/.*/.test(location.href)
     // moment page
     || /https?:\/\/t.bilibili.com.*/.test(location.href)
-    // watch later page
-    || /https?:\/\/(?:www\.)?bilibili\.com\/watchlater\/#\/list.*/.test(location.href)
     // channel, anime, chinese anime, tv shows, movie, variety shows, mooc
     || /https?:\/\/(?:www.)?bilibili.com\/(?:v|anime|guochuang|tv|movie|variety|mooc).*/.test(location.href)
     // articles page
