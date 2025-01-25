@@ -65,6 +65,8 @@ body:
       label: 最终确认
       description: 请确认以下所有内容，否则将被 close。
       options:
+        - label: 我确认我停用 BewlyBewly 且刷新后还是出现这问题，这不是b站本身问题。
+          required: false
         - label: 我确认此问题未在其他 issue 中出现过。
           required: false
         - label: 我确认我已阅读“[常見問題](https://github.com/BewlyBewly/BewlyBewly/wiki/%E5%B8%B8%E8%A6%8B%E5%95%8F%E9%A1%8C)”页面，其中没有对应我问题的解决方案。
