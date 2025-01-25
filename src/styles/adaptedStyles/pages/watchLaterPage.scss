@@ -1,4 +1,19 @@
 .bewly-design.watchLaterPage {
+  // #region new watch later page
+
+  .watchlater-list-nav.fixed {
+    background-color: var(--bew-elevated);
+    backdrop-filter: var(--bew-filter-glass-1);
+  }
+
+  .watchlater-list-nav .breadcrums-nav {
+    background-color: transparent;
+  }
+
+  // #endregion
+
+  // #region old watch later page
+
   // #region theme color adaption part
   // Increase the priority of the style inside by writing a non-existent selector in :not()
   :not(foobar) {
@@ -72,5 +87,7 @@
       background-color: var(--bew-elevated-solid);
     }
   }
+  // #endregion
+
   // #endregion
 }
