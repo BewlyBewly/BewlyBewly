@@ -171,9 +171,7 @@ window.addEventListener(BEWLY_MOUNTED, () => {
 
 // Set the original Bilibili top bar to `display: none` to prevent it from showing before the load
 // see: https://github.com/BewlyBewly/BewlyBewly/issues/967
-let removeOriginalTopBar: HTMLStyleElement | null = null
-if (!settings.value.useOriginalBilibiliTopBar && isSupportedPages())
-  removeOriginalTopBar = injectCSS(`.bili-header { visibility: hidden !important; }`)
+const removeOriginalTopBar = injectCSS(`.bili-header, #biliMainHeader { visibility: hidden !important; }`)
 
 async function onDOMLoaded() {
   let originalTopBar: HTMLElement | null = null
