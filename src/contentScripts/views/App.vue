@@ -161,6 +161,9 @@ function handleDockItemClick(dockItem: DockItem) {
     if (dockItem.useOriginalBiliPage) {
       // It seem like the `activatedPage` watcher above will handle this, so no need to set iframePageURL.value here
       // iframePageURL.value = dockItem.url
+      if (!isHomePage()) {
+        location.href = `https://www.bilibili.com/?page=${dockItem.page}`
+      }
     }
     else {
       if (isHomePage()) {
