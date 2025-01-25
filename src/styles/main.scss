@@ -38,7 +38,7 @@ html.bewly-design,
 
 .dark.bewly-design body,
 html.dark.bewly-design {
-  background-color: var(--bew-bg);
+  background-color: var(--bew-bg) !important;
 }
 
 .bewly-design *::selection,

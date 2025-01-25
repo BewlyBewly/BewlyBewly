@@ -334,7 +334,7 @@
   --bg1_float: var(--bew-elevated-solid);
   --bg2_float: var(--bew-elevated-solid);
   // --graph_white: var(--bew-bg);
-  --graph_bg_thin: var(--bew-bg);
+  --graph_bg_thin: color-mix(in oklab, var(--bew-content-solid), black 10%);
   --graph_bg_regular: var(--bew-content-solid);
   --graph_bg_thick: color-mix(in oklab, var(--bew-content-solid), white 10%);
   --graph_weak: color-mix(in oklab, var(--bew-content-solid), white 20%);
