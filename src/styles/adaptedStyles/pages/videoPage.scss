@@ -24,10 +24,8 @@
   // Increase the priority of the style inside by writing a non-existent selector in `:not()`
   :not(foobar) {
     .content .group-list li input[type="checkbox"] + i {
-      border-width: 1px;
       border-radius: 5px;
-      border-color: #bec3cc;
-      border-style: solid;
+      border: 1px solid var(--bew-border-color);
     }
 
     .coin-operated-m-exp .like-checkbox input[type="checkbox"]:checked + i {
@@ -299,7 +297,8 @@
     .ql-toolbar,
     ._Tabs_krx6h_1 ._TabItem_krx6h_8._Active_krx6h_36,
     ._SeekSections_1iu0q_1 ._Item_1iu0q_1,
-    ._Fallback_1t0d5_1 ._Main_1t0d5_10 ._Item_1t0d5_15 {
+    ._Fallback_1t0d5_1 ._Main_1t0d5_10 ._Item_1t0d5_15,
+    .video-argue .video-argue-inner.general {
       background-color: var(--bew-fill-1);
     }
 
@@ -371,7 +370,8 @@
       color: var(--bew-text-2);
     }
 
-    .note-list .note-card-container .note-card .note-info {
+    .note-list .note-card-container .note-card .note-info,
+    .video-argue .video-argue-inner.general {
       color: var(--bew-text-3);
     }
 
