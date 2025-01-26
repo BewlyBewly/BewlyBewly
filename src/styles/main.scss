@@ -5,6 +5,13 @@
   // outline-offset: 2px;
 }
 
+.dark {
+  input,
+  textarea {
+    color-scheme: dark;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
