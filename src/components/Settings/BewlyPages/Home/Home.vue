@@ -316,7 +316,7 @@ function handleToggleHomeTab(tab: any) {
         >
           <Radio v-model="settings.enableFilterByTitle" />
           <template v-if="settings.enableFilterByTitle" #bottom>
-            <div text="$bew-text-2 sm" v-html="$t('settings.filter_by_title_desc')" />
+            <div text="$bew-text-2 sm" mb-2 v-html="$t('settings.filter_by_title_desc')" />
             <div flex="~ gap-2" mb-2>
               <Button type="secondary" size="small" @click="handleImportFilterByTitle">
                 <template #left>
@@ -343,7 +343,7 @@ function handleToggleHomeTab(tab: any) {
         >
           <Radio v-model="settings.enableFilterByUser" />
           <template v-if="settings.enableFilterByUser" #bottom>
-            <div text="$bew-text-2 sm" v-html="$t('settings.filter_by_user_desc')" />
+            <div text="$bew-text-2 sm" mb-2 v-html="$t('settings.filter_by_user_desc')" />
             <div flex="~ gap-2" mb-2>
               <Button type="secondary" size="small" @click="handleImportFilterByUser">
                 <template #left>

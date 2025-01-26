@@ -79,7 +79,7 @@ onKeyStroke('Escape', (e: KeyboardEvent) => {
 
 <template>
   <div>
-    <div flex="~ gap-1" bg="$bew-fill-1" p-2 mb-4 rounded="$bew-radius">
+    <div flex="~ gap-1" bg="$bew-fill-1" p-2 mb-2 rounded="$bew-radius">
       <Input
         v-model="addingFilter.keyword"
         size="small"
