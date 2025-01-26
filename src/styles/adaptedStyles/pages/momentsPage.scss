@@ -116,8 +116,9 @@
       box-shadow: inset 0 -0.5px 0 0 var(--bew-border-color);
     }
 
-    .side-toolbar__btn.backtop span:before {
-      filter: invert(1);
+    .side-toolbar__btn.backtop span:before,
+    .opus-formula-node {
+      filter: invert(1) hue-rotate(180deg);
     }
 
     .bili-button.primary.plain,

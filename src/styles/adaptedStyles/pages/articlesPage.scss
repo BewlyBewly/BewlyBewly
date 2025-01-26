@@ -11,6 +11,11 @@
     padding-right: 20px;
   }
 
+  .fixed-top-header {
+    background-color: var(--bew-elevated);
+    backdrop-filter: var(--bew-filter-glass-1);
+  }
+
   // #region theme color adaption part
   // Increase the priority of the style inside by writing a non-existent selector in :not()
   :not(foobar) {
@@ -67,7 +72,9 @@
       color: var(--bew-theme-color);
     }
 
-    .right-side-bar .catalog-panel .catalog-item--on {
+    .right-side-bar .catalog-panel .catalog-item--on,
+    .right-side-bar .side-toolbar .toolbar-on,
+    .right-side-bar .side-toolbar .toolbar-on > .iconfont {
       color: var(--bew-theme-color) !important;
     }
 
@@ -329,11 +336,8 @@
     .to-top,
     .bili-dialog-bomb .appeal-box,
     .modalBox,
-    .article-up-info .nameplate-ctnr {
-      background-color: var(--bew-elevated-solid);
-    }
-
-    .fixed-top-header,
+    .article-up-info .nameplate-ctnr,
+    .right-side-bar .single-btn,
     .modal-box-holder .modal-box {
       background-color: var(--bew-elevated-solid);
     }
@@ -424,14 +428,11 @@
     }
 
     .interaction-info .toolbar .share-box .qrcode-ctnr {
-      background: white;
-      box-sizing: border-box;
-      padding: 5px;
+      box-shadow: 0 0 0 4px white;
     }
 
-    .interaction-info .toolbar .share-box .qrcode-ctnr canvas {
-      width: 122px;
-      height: 122px;
+    .latex {
+      filter: invert(1) hue-rotate(180deg);
     }
   }
 
