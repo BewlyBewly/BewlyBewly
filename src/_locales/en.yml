@@ -80,8 +80,10 @@ settings:
   group_wallpaper: Wallpaper
   group_logo: LOGO
   group_search_bar: Search Bar
-  group_recommendation_mode: \"For you\" Recommendation Mode
-  group_recommendation_filters: \"For you\" Recommendation Filters
+  group_recommendation_mode: |-
+    "For you" Recommendation Mode
+  group_recommendation_filters: |-
+    "For you" Recommendation Filters
   group_recommendation_filters_desc: |
     Do not set the restricted value too large, as this may increase loading time!
   group_following: Following
