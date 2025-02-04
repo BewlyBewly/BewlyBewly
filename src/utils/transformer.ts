@@ -2,15 +2,15 @@ import type { MaybeElement } from '@vueuse/core'
 import { unrefElement, useElementVisibility } from '@vueuse/core'
 import type { CSSProperties } from 'vue'
 
-interface TransfromerCenter {
+interface TransformerCenter {
   x?: boolean
   y?: boolean
 }
 
-export interface Transfromer {
+export interface Transformer {
   x: number | string
   y: number | string
-  centerTarget?: TransfromerCenter
+  centerTarget?: TransformerCenter
   notrigger?: boolean
 }
 
@@ -20,15 +20,15 @@ function checkChromium(): boolean {
 
 /**
  * Covert transform to top and left style, if no chromium, use transform
- * @param transfromer
+ * @param transformer
  */
-export function createTransformer(trigger: Ref<MaybeElement>, transfromer: Transfromer) {
+export function createTransformer(trigger: Ref<MaybeElement>, transformer: Transformer) {
   const target = ref<MaybeElement>()
   const isChromium = checkChromium()
   const style = ref<CSSProperties>({})
 
   watch(trigger, () => {
-    if (transfromer.notrigger) {
+    if (transformer.notrigger) {
       target.value = unrefElement(trigger)
     }
   }, { immediate: true })
@@ -37,30 +37,30 @@ export function createTransformer(trigger: Ref<MaybeElement>, transfromer: Trans
     let x = '0px'
     let y = '0px'
 
-    if (typeof transfromer.x === 'number') {
-      x = `${transfromer.x}px`
+    if (typeof transformer.x === 'number') {
+      x = `${transformer.x}px`
     }
     else {
-      x = transfromer.x
+      x = transformer.x
     }
 
-    if (typeof transfromer.y === 'number') {
-      y = `${transfromer.y}px`
+    if (typeof transformer.y === 'number') {
+      y = `${transformer.y}px`
     }
     else {
-      y = transfromer.y
+      y = transformer.y
     }
 
-    if (target.value && transfromer.centerTarget && isChromium) {
+    if (target.value && transformer.centerTarget && isChromium) {
       const el = unrefElement(target.value)
       const targetRect = el!.getBoundingClientRect()
 
-      if (transfromer.centerTarget.x) {
-        x = `calc(${transfromer.x} - ${targetRect.width / 2}px)`
+      if (transformer.centerTarget.x) {
+        x = `calc(${transformer.x} - ${targetRect.width / 2}px)`
       }
 
-      if (transfromer.centerTarget.y) {
-        y = `calc(${transfromer.y} - ${targetRect.height / 2}px)`
+      if (transformer.centerTarget.y) {
+        y = `calc(${transformer.y} - ${targetRect.height / 2}px)`
       }
     }
 
