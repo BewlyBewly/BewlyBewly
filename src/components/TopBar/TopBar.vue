@@ -10,6 +10,7 @@ import { settings } from '~/logic'
 import api from '~/utils/api'
 import { getUserID, isHomePage, isInIframe } from '~/utils/main'
 import emitter from '~/utils/mitt'
+import { createTransformer } from '~/utils/transformer'
 
 import BewlyOrBiliPageSwitcher from './components/BewlyOrBiliPageSwitcher.vue'
 import ChannelsPop from './components/ChannelsPop.vue'
@@ -50,8 +51,6 @@ const isLogin = ref<boolean>(true)
 const logo = ref<HTMLElement>() as Ref<HTMLElement>
 const avatarImg = ref<HTMLImageElement>() as Ref<HTMLImageElement>
 const avatarShadow = ref<HTMLImageElement>() as Ref<HTMLImageElement>
-const favoritesPopRef = ref<any>()
-const momentsPopRef = ref()
 
 const scrollTop = ref<number>(0)
 const oldScrollTop = ref<number>(0)
@@ -198,7 +197,7 @@ const upload = setupTopBarItemHoverEvent('upload')
 // More
 const more = setupTopBarItemHoverEvent('more')
 
-const topBarItemElements = {
+const topBarItemElements: Record<keyof typeof popupVisible, Ref<HTMLElement | undefined>> = {
   channels,
   userPanel: avatar,
   notifications,
@@ -207,6 +206,29 @@ const topBarItemElements = {
   history,
   watchLater,
   upload,
+  more,
+}
+
+const channelsTransformer = setupTopBarItemTransformer('channels')
+const avatarTransformer = setupTopBarItemTransformer('userPanel')
+const notificationsTransformer = setupTopBarItemTransformer('notifications')
+const momentsTransformer = setupTopBarItemTransformer('moments')
+const favoritesTransformer = setupTopBarItemTransformer('favorites')
+const historyTransformer = setupTopBarItemTransformer('history')
+const watchLaterTransformer = setupTopBarItemTransformer('watchLater')
+const uploadTransformer = setupTopBarItemTransformer('upload')
+const moreTransformer = setupTopBarItemTransformer('more')
+
+function setupTopBarItemTransformer(key: keyof typeof popupVisible) {
+  const transformer = createTransformer(topBarItemElements[key], {
+    x: '0px',
+    y: '60px',
+    centerTarget: {
+      x: true,
+    },
+  })
+
+  return transformer
 }
 
 function setupTopBarItemHoverEvent(key: keyof typeof popupVisible) {
@@ -280,8 +302,9 @@ watch(() => popupVisible.favorites, (newVal, oldVal) => {
     return
   if (newVal) {
     nextTick(() => {
-      if (favoritesPopRef.value)
-        favoritesPopRef.value.refreshFavoriteResources()
+      if (favoritesTransformer.value)
+      // @ts-expect-error allow
+        favoritesTransformer.value.refreshFavoriteResources()
     })
   }
 })
@@ -519,7 +542,8 @@ defineExpose({
 
             <Transition name="slide-in">
               <ChannelsPop
-                v-show="popupVisible.channels"
+                v-if="popupVisible.channels"
+                ref="channelsTransformer"
                 class="bew-popover"
                 pos="!left-0 !top-70px"
                 transform="!translate-x-0"
@@ -618,7 +642,7 @@ defineExpose({
                   <Transition name="slide-in">
                     <MomentsPop
                       v-show="popupVisible.moments"
-                      ref="momentsPopRef"
+                      ref="momentsTransformer"
                       class="bew-popover"
                       @click.stop="() => {}"
                     />
@@ -645,7 +669,7 @@ defineExpose({
                     <KeepAlive>
                       <FavoritesPop
                         v-if="popupVisible.favorites"
-                        ref="favoritesPopRef"
+                        ref="favoritesTransformer"
                         class="bew-popover"
                         @click.stop="() => {}"
                       />
@@ -672,6 +696,7 @@ defineExpose({
                   <Transition name="slide-in">
                     <HistoryPop
                       v-if="popupVisible.history"
+                      ref="historyTransformer"
                       class="bew-popover"
                       @click.stop="() => {}"
                     />
@@ -697,6 +722,7 @@ defineExpose({
                   <Transition name="slide-in">
                     <WatchLaterPop
                       v-if="popupVisible.watchLater"
+                      ref="watchLaterTransformer"
                       class="bew-popover"
                       @click.stop="() => {}"
                     />
@@ -733,6 +759,7 @@ defineExpose({
                 <Transition name="slide-in">
                   <MorePop
                     v-show="popupVisible.more"
+                    ref="moreTransformer"
                     class="bew-popover"
                     @click.stop="() => {}"
                   />
@@ -768,6 +795,7 @@ defineExpose({
                   <Transition name="slide-in">
                     <UploadPop
                       v-if="popupVisible.upload"
+                      ref="uploadTransformer"
                       class="bew-popover"
                       @click.stop="() => {}"
                     />
@@ -805,6 +833,7 @@ defineExpose({
                   <Transition name="slide-in">
                     <NotificationsPop
                       v-if="popupVisible.notifications"
+                      ref="notificationsTransformer"
                       class="bew-popover"
                       @click.stop="() => {}"
                     />
@@ -858,9 +887,10 @@ defineExpose({
               <Transition name="slide-in">
                 <UserPanelPop
                   v-if="popupVisible.userPanel"
-                  class="bew-popover"
+                  ref="avatarTransformer"
                   :user-info="userInfo"
                   after:h="!0"
+                  class="bew-popover"
                   pos="!left-auto !right-0" transform="!translate-x-0"
                   @click.stop="() => {}"
                 />
@@ -891,7 +921,7 @@ defineExpose({
 
 .slide-in-leave-to,
 .slide-in-enter-from {
-  --uno: "transform important:translate-y-4 opacity-0";
+  --uno: "transform !top-full opacity-0";
 }
 
 .slide-out-enter-active,
