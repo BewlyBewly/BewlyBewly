@@ -918,7 +918,7 @@ defineExpose({
 
 .slide-in-leave-to,
 .slide-in-enter-from {
-  --uno: "transform important:translate-y-4 opacity-0";
+  --uno: "transform !top-full opacity-0";
 }
 
 .slide-out-enter-active,
