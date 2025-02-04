@@ -20,6 +20,7 @@ function checkChromium(): boolean {
 
 /**
  * Covert transform to top and left style, if no chromium, use transform
+ * @param trigger
  * @param transformer
  */
 export function createTransformer(trigger: Ref<MaybeElement>, transformer: Transformer) {
