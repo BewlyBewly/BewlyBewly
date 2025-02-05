@@ -94,7 +94,7 @@
     "unocss": "0.59.4",
     "unplugin-auto-import": "^0.17.6",
     "vite": "^5.3.6",
-    "vitest": "^1.6.0",
+    "vitest": "^1.6.1",
     "vue": "^3.4.27",
     "vue-tsc": "^2.0.21",
     "web-ext": "^8.1.0",
