@@ -325,11 +325,11 @@
     // 處理性別圖標背景顔色
 
     .upinfo .gender:has(.sic-BDC-male_line) {
-      background-color: var(--Lb5_u) !important;
+      background-color: var(--bew-bili-blue) !important;
     }
 
     .upinfo .gender:has(.sic-BDC-female_line) {
-      background-color: var(--Pi5_u) !important;
+      background-color: var(--bew-bili-pink) !important;
     }
   }
 
