@@ -321,6 +321,16 @@
       background: var(--bew-theme-color) url(//s1.hdslb.com/bfs/static/jinkela/note-list/assets/ic_check.svg) no-repeat
         50% / 9px;
     }
+
+    // 處理性別圖標背景顔色
+
+    .upinfo .gender:has(.sic-BDC-male_line) {
+      background-color: var(--Lb5_u) !important;
+    }
+
+    .upinfo .gender:has(.sic-BDC-female_line) {
+      background-color: var(--Pi5_u) !important;
+    }
   }
 
   // #endregion
