@@ -27,7 +27,8 @@ export function useDark() {
     { immediate: true },
   )
 
-  onMounted(() => {
+  // use watchEffect instead of onMounted because onMounted is only aviailable in setup function
+  watchEffect(() => {
     // Because some shadow dom may not be loaded when the page has already loaded, we need to wait until the page is idle
     runWhenIdle(() => {
       if (isDark.value) {

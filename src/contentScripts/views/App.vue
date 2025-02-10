@@ -180,9 +180,10 @@ function handleDockItemClick(dockItem: DockItem) {
     }
     else {
       if (isHomePage()) {
-        nextTick(() => {
+        // Replace NextTick with setTimeout(200), otherwise osInstance in function 'changeActivatePage' will be undefined
+        setTimeout(() => {
           changeActivatePage(dockItem.page)
-        })
+        }, 200)
       }
       else {
         location.href = `https://www.bilibili.com/?page=${dockItem.page}`
