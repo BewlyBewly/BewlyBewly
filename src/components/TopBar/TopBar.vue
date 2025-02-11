@@ -222,7 +222,7 @@ const moreTransformer = setupTopBarItemTransformer('more')
 function setupTopBarItemTransformer(key: keyof typeof popupVisible) {
   const transformer = createTransformer(topBarItemElements[key], {
     x: '0px',
-    y: '60px',
+    y: '50px',
     centerTarget: {
       x: true,
     },
@@ -233,6 +233,8 @@ function setupTopBarItemTransformer(key: keyof typeof popupVisible) {
 
 function setupTopBarItemHoverEvent(key: keyof typeof popupVisible) {
   return useDelayedHover({
+    enterDelay: 320,
+    leaveDelay: 320,
     beforeEnter: () => closeAllTopBarPopup(key),
     enter: () => {
       popupVisible[key] = true
@@ -545,7 +547,7 @@ defineExpose({
                 v-if="popupVisible.channels"
                 ref="channelsTransformer"
                 class="bew-popover"
-                pos="!left-0 !top-70px"
+                pos="!left-0"
                 transform="!translate-x-0"
               />
             </Transition>
@@ -921,12 +923,12 @@ defineExpose({
 
 .slide-in-leave-to,
 .slide-in-enter-from {
-  --uno: "transform !top-full opacity-0";
+  --uno: "transform mt--10px opacity-0";
 }
 
 .slide-out-enter-active,
 .slide-out-leave-active {
-  --uno: "transition-all duration-250 pointer-events-none transform-gpu";
+  --uno: "transition-all duration-300 pointer-events-none transform-gpu";
 }
 
 .slide-out-leave-to,
@@ -955,8 +957,7 @@ defineExpose({
 }
 
 .bew-popover {
-  --uno: "absolute top-60px left-1/2";
-  --uno: "transform -translate-x-1/2";
+  --uno: "absolute";
   --uno: "overflow-hidden";
   --uno: "after:content-empty";
   --uno: "after:opacity-100 after:w-full after:h-100px";
@@ -995,7 +996,7 @@ defineExpose({
       --uno: "shrink-0 duration-300 rounded-1/2 w-34px h-34px bg-cover bg-center";
 
       &.hover {
-        --uno: "transform scale-230 translate-y-60px translate-x--36px";
+        --uno: "transform scale-230 translate-y-50px translate-x--36px";
       }
     }
 
