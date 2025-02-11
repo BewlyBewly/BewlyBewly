@@ -271,6 +271,9 @@ async function haveScrollbar() {
     const { scrollHeight } = viewport // get scroll offset
     return scrollHeight > window.innerHeight
   }
+  else {
+    return false
+  }
 }
 
 // In drawer video, watch btn className changed and post message to parent
