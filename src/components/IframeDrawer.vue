@@ -96,7 +96,13 @@ async function handleClose() {
 async function releaseIframeResources() {
   // Clear iframe content
   currentUrl.value = 'about:blank'
-  iframeRef.value?.contentWindow?.document.write('')
+  /**
+   * eg: When use 'iframeRef.value?.contentWindow?.document' of t.bilibili.com iframe on bilibili.com, there may be cross domain issues
+   * set the src to 'about:blank' to avoid this issue, it also can release the memory
+   */
+  if (iframeRef.value) {
+    iframeRef.value.src = 'about:blank'
+  }
   await nextTick()
   iframeRef.value?.contentWindow?.close()
 
