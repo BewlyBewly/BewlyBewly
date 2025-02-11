@@ -242,7 +242,7 @@ async function getFollowedUsersVideos() {
         })
       }
 
-      if (!haveScrollbar() && !noMoreContent.value) {
+      if (!await haveScrollbar() && !noMoreContent.value) {
         getFollowedUsersVideos()
       }
     }

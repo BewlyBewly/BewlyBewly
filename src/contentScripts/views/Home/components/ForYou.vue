@@ -227,7 +227,7 @@ async function getRecommendVideos() {
 
     if (!needToLoginFirst.value) {
       await nextTick()
-      if (!haveScrollbar() || filledItems.length < PAGE_SIZE || filledItems.length < 1) {
+      if (!await haveScrollbar() || filledItems.length < PAGE_SIZE || filledItems.length < 1) {
         getRecommendVideos()
       }
     }
@@ -306,7 +306,7 @@ async function getAppRecommendVideos() {
 
     if (!needToLoginFirst.value) {
       await nextTick()
-      if (!haveScrollbar() || filledItems.length < PAGE_SIZE || filledItems.length < 1) {
+      if (!await haveScrollbar() || filledItems.length < PAGE_SIZE || filledItems.length < 1) {
         getAppRecommendVideos()
       }
     }

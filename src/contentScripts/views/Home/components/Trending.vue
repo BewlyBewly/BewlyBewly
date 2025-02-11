@@ -114,7 +114,7 @@ async function getTrendingVideos() {
         })
       }
 
-      if (!haveScrollbar() && !noMoreContent.value) {
+      if (!await haveScrollbar() && !noMoreContent.value) {
         getTrendingVideos()
       }
     }

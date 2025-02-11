@@ -127,7 +127,7 @@ async function getFavoriteResources(
       if (!res.data.medias)
         noMoreContent.value = true
 
-      if (!haveScrollbar() && !noMoreContent.value)
+      if (!await haveScrollbar() && !noMoreContent.value)
         await getFavoriteResources(selectedCategory.value!.id, ++currentPageNum.value, keyword)
     }
   }
