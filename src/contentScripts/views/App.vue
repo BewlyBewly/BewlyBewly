@@ -264,9 +264,12 @@ function openIframeDrawer(url: string) {
 async function haveScrollbar() {
   await nextTick()
   const osInstance = scrollbarRef.value?.osInstance()
-  const { viewport } = osInstance.elements()
-  const { scrollHeight } = viewport // get scroll offset
-  return scrollHeight > window.innerHeight
+  // If the scrollbarRef is not ready, return false
+  if (osInstance) {
+    const { viewport } = osInstance.elements()
+    const { scrollHeight } = viewport // get scroll offset
+    return scrollHeight > window.innerHeight
+  }
 }
 
 // In drawer video, watch btn className changed and post message to parent
