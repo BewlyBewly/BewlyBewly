@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import Empty from '~/components/Empty.vue'
 import Loading from '~/components/Loading.vue'
 import Progress from '~/components/Progress.vue'
