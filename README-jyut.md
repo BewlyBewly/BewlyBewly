@@ -19,6 +19,11 @@
 > 事關考慮到維護嘅效率同埋難度, 深色模式淨係會適應常用頁面, 一啲冇咁常用嘅頁面唔會適應調整
 
 > [!CAUTION]
+> App Store 上嘅 [Bewley](https://apps.apple.com/app/bewley/id6741677642) 唔係我哋發佈，我哋唔會對佢負責同做擔保。 **Safari 亦不受此專案支援。**
+>
+> **Bewley 已經違反本專案使用的 MIT 許可證（未包含本專案許可證原文）。**
+
+> [!CAUTION]
 > 如果你單緊呢個延伸功能，你嘅瀏覽器可能會話佢可以睇到你嘅瀏覽紀錄。
 >
 > 呢個係因爲 BewlyBewly 用咗["tabs" 權限](https://developer.chrome.com/docs/extensions/reference/api/tabs)，呢個權限亦都可以用嚟讀取每個分頁，從而知道瀏覽紀錄，但係喺呢度冇用到。

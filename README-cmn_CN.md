@@ -19,6 +19,11 @@
 > 由于效率和维护难度的原因，暗色模式只会适应常用页面，而不会适应不常用的页面。
 
 > [!CAUTION]
+> App Store 上的 [Bewley](https://apps.apple.com/app/bewley/id6741677642) 不由我们上传，我们不为其背书。 **Safari 亦不受此项目支持。**
+>
+> **Bewley 已经违反本项目使用的 MIT 许可证（未包含本项目许可证原文）。**
+
+> [!CAUTION]
 > 如果您正在安装此扩展程序，您的浏览器可能会提示它可以读取您的浏览历史记录。
 >
 > 这是因为 BewlyBewly 使用了["tabs" 权限](https://developer.chrome.com/docs/extensions/reference/api/tabs)，该权限也可用于读取每个标签页，从而了解浏览历史，但在这里并未使用。
