@@ -20,6 +20,11 @@ English | [官话 - 简体中文](README-cmn_CN.md) | [官話 - 正體中文](RE
 > frequently used pages will not to be adapted.
 
 > [!CAUTION]
+> [Bewley](https://apps.apple.com/app/bewley/id6741677642) on the App Store is not uploaded by us and we do not endorse it. **Safari is not actively supported by this project.** If you need any technical support for Bewley, please contact the developer on the App Store.
+> 
+> **Bewley has violated the MIT license used by this project (the original license of this project is not included).**
+
+> [!CAUTION]
 > If you are installing this extension, your browser will probably say that it can read your browser history.
 >
 > This is because BewlyBewly uses the ["tabs" permission](https://developer.chrome.com/docs/extensions/reference/api/tabs), which can also be used to read each tab, allowing it to know the browsing history, but it is not utilized here.
