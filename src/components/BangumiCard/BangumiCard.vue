@@ -57,7 +57,7 @@ const { isDark } = useDark()
         <div aspect="12/16" overflow-hidden rounded="$bew-radius">
           <!-- badge -->
           <div
-            v-if="bangumi.badge"
+            v-if="bangumi.badge && bangumi.badge.text"
             :style="{
               backgroundColor: isDark ? bangumi.badge.bgColorDark : bangumi.badge.bgColor,
             }"
