@@ -20,7 +20,7 @@ English | [官话 - 简体中文](README-cmn_CN.md) | [官話 - 正體中文](RE
 > frequently used pages will not to be adapted.
 
 > [!CAUTION]
-> [Bewley](https://apps.apple.com/app/bewley/id6741677642) on the App Store is not uploaded by us and we do not endorse it. **Safari is not actively supported by this project.** If you need any technical support for Bewley, please contact the developer on the App Store.
+> [Bewley](https://apps.apple.com/app/bewley/id6741677642) on the App Store is not uploaded by us and we do not endorse it. **Safari is not supported by this project.**
 > 
 > **Bewley has violated the MIT license used by this project (the original license of this project is not included).**
 
