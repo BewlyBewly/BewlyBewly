@@ -175,10 +175,10 @@ function handleMoreBtnClick(event: MouseEvent) {
   const { bottom, height } = moreBtnRef.value.getBoundingClientRect()
 
   /**
-   * if (screen height - bottom > 400px) then context-menu offset upwards
-   * Why 400? Because the current context-menu is not a responsive layout, it can be temporarily referred to as 400
+   * if (screen height - bottom > 406px) then context-menu offset upwards
+   * Why 406? Because the current context-menu is not a responsive layout, it can be temporarily referred to as 406
    */
-  const offsetTop = window.innerHeight - bottom > 400 ? 0 : -400 - height
+  const offsetTop = window.innerHeight - bottom > 406 ? 0 : -406 - height
 
   showVideoOptions.value = false
   videoOptionsFloatingStyles.value = {
