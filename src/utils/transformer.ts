@@ -14,10 +14,6 @@ export interface Transformer {
   notrigger?: boolean
 }
 
-function checkChromium(): boolean {
-  return navigator.userAgent.includes('Chrome')
-}
-
 /**
  * Covert transform to top and left style, if no chromium, use transform
  * @param trigger
@@ -25,7 +21,6 @@ function checkChromium(): boolean {
  */
 export function createTransformer(trigger: Ref<MaybeElement>, transformer: Transformer) {
   const target = ref<MaybeElement>()
-  const isChromium = checkChromium()
   const style = ref<CSSProperties>({})
 
   watch(trigger, () => {
@@ -52,7 +47,7 @@ export function createTransformer(trigger: Ref<MaybeElement>, transformer: Trans
       y = transformer.y
     }
 
-    if (target.value && transformer.centerTarget && isChromium) {
+    if (target.value && transformer.centerTarget) {
       const el = unrefElement(target.value)
       const targetRect = el!.getBoundingClientRect()
 
@@ -65,20 +60,16 @@ export function createTransformer(trigger: Ref<MaybeElement>, transformer: Trans
       }
     }
 
-    if (isChromium) {
-      style.value = {
-        // transition: 'none !important',
-        transform: 'none !important',
-        top: y,
-        left: x,
-      }
+    style.value = {
+      transform: 'none !important',
+      top: y,
+      left: x,
     }
-    else {
-      // nothing, use inherit transform
-      // style.value = {
-      //   transform: `translate(${x}, ${y})`,
-      // }
-    }
+
+    //   // nothing, use inherit transform
+    //   style.value = {
+    //     transform: `translate3d(${x}, ${y}, 0) !important`,
+    //   }
   }
 
   function generateStyle(originStyle: string | undefined | null): string {
@@ -110,41 +101,39 @@ export function createTransformer(trigger: Ref<MaybeElement>, transformer: Trans
     return Object.keys(s).map(key => `${key}:${s[key]}`).join(';')
   }
 
-  if (isChromium) {
-    // v-show
-    const targetVisibility = useElementVisibility(() => unrefElement(target))
-    watch(targetVisibility, (visible) => {
-      if (visible) {
-        const targetElement = unrefElement(target)
-        if (targetElement) {
-          update()
-          const style = targetElement.getAttribute('style')
-          targetElement.setAttribute('style', generateStyle(style))
-        }
-      }
-    }, { flush: 'pre' })
-
-    // v-show
-    // useEventListener(() => unrefElement(target), 'transitionstart', () => {
-    //   update()
-    //   const style = unrefElement(target)?.getAttribute('style')
-    //   unrefElement(target)?.setAttribute('style', generateStyle(style))
-    // })
-
-    // useEventListener(() => unrefElement(target), 'transitionend', () => {
-    //   const style = unrefElement(target)?.getAttribute('style')
-    //   unrefElement(target)?.setAttribute('style', generateStyle(style))
-    // })
-
-    // v-if
-    watch(() => unrefElement(target), (targetElement) => {
+  // v-show
+  const targetVisibility = useElementVisibility(() => unrefElement(target))
+  watch(targetVisibility, (visible) => {
+    if (visible) {
+      const targetElement = unrefElement(target)
       if (targetElement) {
         update()
         const style = targetElement.getAttribute('style')
         targetElement.setAttribute('style', generateStyle(style))
       }
-    }, { flush: 'pre' })
-  }
+    }
+  }, { flush: 'pre' })
+
+  // v-show
+  // useEventListener(() => unrefElement(target), 'transitionstart', () => {
+  //   update()
+  //   const style = unrefElement(target)?.getAttribute('style')
+  //   unrefElement(target)?.setAttribute('style', generateStyle(style))
+  // })
+
+  // useEventListener(() => unrefElement(target), 'transitionend', () => {
+  //   const style = unrefElement(target)?.getAttribute('style')
+  //   unrefElement(target)?.setAttribute('style', generateStyle(style))
+  // })
+
+  // v-if
+  watch(() => unrefElement(target), (targetElement) => {
+    if (targetElement) {
+      update()
+      const style = targetElement.getAttribute('style')
+      targetElement.setAttribute('style', generateStyle(style))
+    }
+  }, { flush: 'pre' })
 
   return target
 }
