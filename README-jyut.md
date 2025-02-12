@@ -19,8 +19,8 @@
 > 事關考慮到維護嘅效率同埋難度, 深色模式淨係會適應常用頁面, 一啲冇咁常用嘅頁面唔會適應調整
 
 > [!CAUTION]
-> App Store 上的 [Bewley](https://apps.apple.com/app/bewley/id6741677642) 不由我們發佈，我们不爲其背書。**Safari 亦不受此專案活躍支援。**若需任何 Bewley 技術支援，請聯絡 App Store 上的開發者。
-> 
+> App Store 上的 [Bewley](https://apps.apple.com/app/bewley/id6741677642) 不由我們發佈，我们不爲其背書。 **Safari 亦不受此專案活躍支援。** 若需任何 Bewley 技術支援，請聯絡 App Store 上的開發者。
+>
 > **Bewley 已經違反本專案使用的 MIT 許可證（未包含本專案許可證原文）。**
 
 > [!CAUTION]
