@@ -19,7 +19,7 @@
 > 由于效率和维护难度的原因，暗色模式只会适应常用页面，而不会适应不常用的页面。
 
 > [!CAUTION]
-> App Store 上的 [Bewley](https://apps.apple.com/app/bewley/id6741677642) 不由我们上传，我们不为其背书。 **Safari 亦不受此项目活跃支持。** 若需任何 Bewley 技术支持，请联系 App Store 上的开发者。
+> App Store 上的 [Bewley](https://apps.apple.com/app/bewley/id6741677642) 不由我们上传，我们不为其背书。 **Safari 亦不受此项目活跃支持。**
 >
 > **Bewley 已经违反本项目使用的 MIT 许可证（未包含本项目许可证原文）。**
 
