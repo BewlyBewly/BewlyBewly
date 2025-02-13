@@ -66,7 +66,7 @@
     .im-dynamic-link,
     .im-topic-link,
     .header .tab.active,
-    .link,
+    :not(.msg-notify) > .link,
     .dynamic-link,
     .line-1 .like-item:hover,
     .space-right .space-right-top .title a:hover,
@@ -155,14 +155,14 @@
     .notify-number,
     .bl-button--primary,
     .bl-button--ghost:hover,
-    .message .message-content.is-me,
     .notify-dot,
     .content .kw-search-row .create-btn {
       background-color: var(--bew-theme-color);
     }
 
     .is-up > .message > .message-content,
-    .toggle.active {
+    .toggle.active,
+    .message .message-content.is-me {
       background-color: var(--bew-theme-color) !important;
     }
 
@@ -245,7 +245,8 @@
     .bl-button--shallow-o,
     .cs-self-service .cs-self-service-list .cs-self-service-item .tool-title,
     .auto-reply-push__desc,
-    .content .row .left .title {
+    .content .row .left .title,
+    .msg-notify .link {
       color: var(--bew-text-1);
     }
 
@@ -434,7 +435,8 @@
       fill: var(--bew-text-3);
     }
 
-    .link-progress-tv {
+    .link-progress-tv,
+    .msg-notify .link i {
       filter: invert(1) brightness(2);
     }
 
