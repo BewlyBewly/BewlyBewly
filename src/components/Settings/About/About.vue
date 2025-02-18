@@ -15,6 +15,37 @@ const dialogVisible = reactive({
   justWannaChangeTheJob: false,
 })
 
+const isSafari = computed((): boolean =>
+  /^(?:(?!chrome|android).)*safari/i.test(navigator.userAgent),
+)
+
+const safariHelpers = computed((): { name: string, avatar: string, url: string, desc: string }[] => [
+  {
+    name: 'exgphe',
+    avatar: '/assets/twitterUsers/exgphe.png',
+    url: 'https://github.com/exgphe',
+    desc: '提交 PR 支援 Safari',
+  },
+  {
+    name: '𝗦𝘁𝗲𝘃𝗲 𝕏',
+    avatar: '/assets/twitterUsers/st7evechou.jpg',
+    url: 'https://x.com/st7evechou',
+    desc: '帮忙免费上架 Safari',
+  },
+  {
+    name: '雪谋 🏖️',
+    avatar: '/assets/twitterUsers/YukiHakarigoto.jpg',
+    url: 'https://x.com/YukiHakarigoto',
+    desc: '帮解答注册苹果开发者问题',
+  },
+  {
+    name: 'Citron🍢',
+    avatar: '/assets/twitterUsers/vanillaCitron.jpg',
+    url: 'https://x.com/vanillaCitron',
+    desc: '帮解答注册苹果开发者问题',
+  },
+])
+
 const isDev = computed((): boolean => import.meta.env.DEV)
 
 onMounted(() => {
@@ -101,24 +132,24 @@ async function checkGitHubRelease() {
 
 <template>
   <div>
-    <div max-w-600px mx-auto>
+    <div max-w-800px mx-auto>
       <div relative w-200px m-auto>
         <img
           :src="`${browser.runtime.getURL('/assets/bewly-vtuber-style-logo.png')}`" alt="" width="200"
         >
 
-        <a
+        <!-- <a
           v-if="hasNewVersion"
           href="https://github.com/hakadao/BewlyBewly/releases" target="_blank"
           pos="absolute bottom-0 right-0" transform="translate-x-50%" un-text="xs $bew-text-1" p="y-1 x-2" bg="$bew-fill-1"
           rounded-12
         >
           NEW
-        </a>
+        </a> -->
       </div>
       <section text-xl text-center mt-2>
         <p>
-          BewlyBewly
+          BewlyBewly (Final Version)
           <span
             v-if="isDev"
             inline-block text="$bew-warning-color"
@@ -145,7 +176,7 @@ async function checkGitHubRelease() {
           <h3 class="title">
             {{ $t('settings.links') }}
           </h3>
-          <div grid="~ xl:cols-5 lg:cols-4 md:cols-3 cols-2 gap-2">
+          <div grid="~ xl:cols-6 lg:cols-5 md:cols-4 cols-3 gap-2">
             <a
               href="https://github.com/hakadao/BewlyBewly" target="_blank"
               class="link-card"
@@ -253,7 +284,32 @@ async function checkGitHubRelease() {
             </Button>
           </div>
         </section>
-        <!-- <section>
+        <section v-if="isSafari" w-full>
+          <h3 class="title">
+            <!-- {{ $t('settings.safari_helpers') }} -->
+            上架 Safari 商店中给予过帮助的人
+          </h3>
+          <div grid="~ lg:cols-4 md:cols-3 cols-2 gap-2" mx--2>
+            <div v-for="helper in safariHelpers" :key="helper.name">
+              <a
+                :href="helper.url" target="_blank"
+                flex="~ items-center gap-2"
+                bg="hover:$bew-fill-2"
+                p-2 rounded="$bew-radius"
+                duration-300 min-h-74px
+              >
+                <img :src="browser.runtime.getURL(helper.avatar)" alt="" w-30px h-30px rounded-full>
+                <div>
+                  <p>{{ helper.name }}</p>
+                  <p text="sm $bew-text-2">
+                    {{ helper.desc }}
+                  </p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </section>
+        <section>
           <h3 class="title">
             {{ $t('settings.contributors') }}
           </h3>
@@ -265,7 +321,7 @@ async function checkGitHubRelease() {
               w-full
             >
           </a>
-        </section> -->
+        </section>
       </section>
       <!-- <section mt-4>
         <Button
