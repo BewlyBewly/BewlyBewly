@@ -40,6 +40,10 @@ const gridClass = computed((): string => {
 })
 
 const videoList = ref<VideoElement[]>([])
+/**
+ * Get all livestreaming videos of followed users
+ */
+const livePage = ref<number>(1)
 const liveVideoList = ref<LiveVideoElement[]>([])
 const isLoading = ref<boolean>(false)
 const needToLoginFirst = ref<boolean>(false)
@@ -50,7 +54,6 @@ const noMoreContent = ref<boolean>(false)
 const { handleReachBottom, handlePageRefresh, haveScrollbar } = useBewlyApp()
 
 onMounted(() => {
-  getLiveVideoList()
   initData()
   initPageAction()
 })
@@ -79,9 +82,13 @@ function initPageAction() {
 async function initData() {
   offset.value = ''
   updateBaseline.value = ''
+  liveVideoList.value.length = 0
+  livePage.value = 1
   videoList.value.length = 0
   noMoreContent.value = false
 
+  if (settings.value.followingTabShowLivestreamingVideos)
+    getLiveVideoList()
   await getData()
 }
 
@@ -99,10 +106,6 @@ async function getData() {
   }
 }
 
-/**
- * Get all livestreaming videos of followed users
- */
-const livePage = ref<number>(1)
 async function getLiveVideoList() {
   let lastLiveVideoListLength = liveVideoList.value.length
   try {
@@ -148,7 +151,7 @@ async function getLiveVideoList() {
   finally {
     // 當直播列表結果大於9時（9是返回的列表數量）且如果最后一支影片還是正在直播，則繼續獲取
     if (liveVideoList.value.length > 9 && liveVideoList.value[liveVideoList.value.length - 1]?.item?.live_status === 1) {
-      getFollowedUsersVideos()
+      getLiveVideoList()
     }
   }
 }
