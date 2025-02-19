@@ -16,7 +16,7 @@ const dialogVisible = reactive({
 })
 
 const isSafari = computed((): boolean =>
-  /^(?:(?!chrome|android).)*safari/i.test(navigator.userAgent),
+  true || /^(?:(?!chrome|android).)*safari/i.test(navigator.userAgent),
 )
 
 const safariHelpers = computed((): { name: string, avatar: string, url: string, desc: string }[] => [
@@ -24,25 +24,25 @@ const safariHelpers = computed((): { name: string, avatar: string, url: string, 
     name: 'exgphe',
     avatar: '/assets/twitterUsers/exgphe.png',
     url: 'https://github.com/exgphe',
-    desc: '提交 PR 支援 Safari',
+    desc: t('settings.safari_helpers_desc1'),
   },
   {
     name: '𝗦𝘁𝗲𝘃𝗲 𝕏',
     avatar: '/assets/twitterUsers/st7evechou.jpg',
     url: 'https://x.com/st7evechou',
-    desc: '帮忙免费上架 Safari',
+    desc: t('settings.safari_helpers_desc2'),
   },
   {
     name: '雪谋 🏖️',
     avatar: '/assets/twitterUsers/YukiHakarigoto.jpg',
     url: 'https://x.com/YukiHakarigoto',
-    desc: '帮解答注册苹果开发者问题',
+    desc: t('settings.safari_helpers_desc3'),
   },
   {
     name: 'Citron🍢',
     avatar: '/assets/twitterUsers/vanillaCitron.jpg',
     url: 'https://x.com/vanillaCitron',
-    desc: '帮解答注册苹果开发者问题',
+    desc: t('settings.safari_helpers_desc4'),
   },
 ])
 
@@ -138,18 +138,18 @@ async function checkGitHubRelease() {
           :src="`${browser.runtime.getURL('/assets/bewly-vtuber-style-logo.png')}`" alt="" width="200"
         >
 
-        <!-- <a
+        <a
           v-if="hasNewVersion"
           href="https://github.com/hakadao/BewlyBewly/releases" target="_blank"
           pos="absolute bottom-0 right-0" transform="translate-x-50%" un-text="xs $bew-text-1" p="y-1 x-2" bg="$bew-fill-1"
           rounded-12
         >
           NEW
-        </a> -->
+        </a>
       </div>
       <section text-xl text-center mt-2>
         <p>
-          BewlyBewly (Final Version)
+          BewlyBewly
           <span
             v-if="isDev"
             inline-block text="$bew-warning-color"
@@ -286,17 +286,16 @@ async function checkGitHubRelease() {
         </section>
         <section v-if="isSafari" w-full>
           <h3 class="title">
-            <!-- {{ $t('settings.safari_helpers') }} -->
-            上架 Safari 商店中给予过帮助的人
+            {{ $t('settings.safari_helpers') }}
           </h3>
-          <div grid="~ lg:cols-4 md:cols-3 cols-2 gap-2" mx--2>
+          <div grid="~ lg:cols-2 md:cols-2 cols-1 gap-2" mx--2>
             <div v-for="helper in safariHelpers" :key="helper.name">
               <a
                 :href="helper.url" target="_blank"
                 flex="~ items-center gap-2"
                 bg="hover:$bew-fill-2"
                 p-2 rounded="$bew-radius"
-                duration-300 min-h-74px
+                duration-300
               >
                 <img :src="browser.runtime.getURL(helper.avatar)" alt="" w-30px h-30px rounded-full>
                 <div>

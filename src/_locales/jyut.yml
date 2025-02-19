@@ -281,6 +281,13 @@ settings:
   reset_settings_confirm: |-
     重設設定？
     噉做冇得返轉頭噃，你確定要重設你之前嘅設定？
+
+  safari_helpers: 幫過上架 Safari 商店嘅人
+  safari_helpers_desc1: 提交 PR 支援 Safari
+  safari_helpers_desc2: 幫手免費上架 Safari
+  safari_helpers_desc3: 幫手解答註冊蘋果開發者問題
+  safari_helpers_desc4: 幫手解答註冊蘋果開發者問題
+
   contributors: 貢獻者
 
 auth:

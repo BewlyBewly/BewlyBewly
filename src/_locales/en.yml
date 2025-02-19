@@ -287,6 +287,13 @@ settings:
   reset_settings_confirm: |-
     Reset settings?
     This operation cannot be reversed. Are you sure you want to reset your settings?
+
+  safari_helpers: Those who helped with publishing to the Safari store
+  safari_helpers_desc1: Submit PR to support Safari
+  safari_helpers_desc2: Help publish on Safari for free
+  safari_helpers_desc3: Help answer Apple developer registration questions
+  safari_helpers_desc4: Help answer Apple developer registration questions
+
   contributors: Contributors
 
 auth:

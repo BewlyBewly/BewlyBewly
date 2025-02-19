@@ -282,6 +282,13 @@ settings:
   reset_settings_confirm: |-
     重置设置？
     该操作无法撤销。你确定要重置你的设置吗？
+
+  safari_helpers: 帮助过上架 Safari 商店的人
+  safari_helpers_desc1: 提交 PR 支援 Safari
+  safari_helpers_desc2: 帮忙免费上架 Safari
+  safari_helpers_desc3: 帮解答注册苹果开发者问题
+  safari_helpers_desc4: 帮解答注册苹果开发者问题
+
   contributors: 贡献者
 
 auth:
