@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onClickOutside, useEventListener } from '@vueuse/core'
+import { useEventListener } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 
 import { settings } from '~/logic'
@@ -120,8 +120,6 @@ function setCurrentTitle() {
       title.value = item.title
   })
 }
-
-onClickOutside(settingsWindow, handleClose)
 </script>
 
 <template>
