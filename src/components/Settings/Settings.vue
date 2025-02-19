@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onClickOutside } from '@vueuse/core'
+import { onClickOutside, useEventListener } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 
 import { settings } from '~/logic'
@@ -23,15 +23,18 @@ const settingsMenu = {
 }
 const activatedMenuItem = ref<MenuType>(MenuType.General)
 const title = ref<string>(t('settings.title'))
-const window = ref<HTMLDivElement>()
-createTransformer(window, {
-  x: '50%',
-  y: '50%',
-  notrigger: true,
-  centerTarget: {
-    x: true,
-    y: true,
-  },
+const settingsWindow = ref<HTMLDivElement>()
+
+useEventListener(window, 'resize', () => {
+  createTransformer(settingsWindow, {
+    x: '50%',
+    y: '50%',
+    notrigger: true,
+    centerTarget: {
+      x: true,
+      y: true,
+    },
+  })
 })
 
 const scrollbarRef = ref()
@@ -118,7 +121,7 @@ function setCurrentTitle() {
   })
 }
 
-onClickOutside(window, handleClose)
+onClickOutside(settingsWindow, handleClose)
 </script>
 
 <template>
@@ -129,7 +132,7 @@ onClickOutside(window, handleClose)
     />
     <div
       id="settings-window"
-      ref="window"
+      ref="settingsWindow"
       pos="fixed top-1/2 left-1/2" w="90%" h="90%"
       max-w-1000px max-h-900px transform="~ translate-x--1/2 translate-y--1/2 gpu"
       flex="~ justify-between items-center"
