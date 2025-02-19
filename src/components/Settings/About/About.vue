@@ -16,7 +16,7 @@ const dialogVisible = reactive({
 })
 
 const isSafari = computed((): boolean =>
-  true || /^(?:(?!chrome|android).)*safari/i.test(navigator.userAgent),
+  /^(?:(?!chrome|android).)*safari/i.test(navigator.userAgent),
 )
 
 const safariHelpers = computed((): { name: string, avatar: string, url: string, desc: string }[] => [
