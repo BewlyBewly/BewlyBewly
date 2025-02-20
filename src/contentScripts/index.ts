@@ -195,9 +195,9 @@ async function onDOMLoaded() {
     // Remove the original Bilibili homepage if in Bilibili homepage & useOriginalBilibiliHomepage is enabled
     document.body.innerHTML = ''
 
-    // Remove the Bilibili Evolved homepage
+    // Remove the Bilibili Evolved homepage & Bilibili-Gate homepage
     injectCSS(`
-      .home-redesign-base {
+      .home-redesign-base, .bilibili-gate-root {
         display: none !important;
       }
     `)
