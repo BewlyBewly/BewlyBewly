@@ -154,7 +154,7 @@
   --bew-content-solid: hsl(0 0% 100%);
   --bew-content-solid-hover: hsl(0 0% 85%);
   --bew-content-alt-solid: hsl(240 31% 95%);
-  --bew-content-alt-solid-hover: hsl(240 31% 85%);
+  --bew-content-alt-solid-hover: hsl(240 31% 80%);
   // #endregion
 
   // `--bew-elevated-*` for popup, dialog and difference layers with difference elevation levels
@@ -173,19 +173,19 @@
 
   // #region Gray semi-transparent colors
   // You can used for buttons, input fields and the other components on the top of elements
-  --bew-fill-1: rgb(131 131 145 / 13%);
+  --bew-fill-1: rgb(131 131 145 / 15%);
 
   // Used this for hovering color if it within the top layer of elements,
   // not just when hovering over the element itself; otherwise, use `--bew-content-*-hover` or `--bew-elevated--hover`
-  --bew-fill-2: rgb(131 131 145 / 23%);
+  --bew-fill-2: rgb(131 131 145 / 30%);
 
   // You can used for the disabled state of elements on the top layer
-  --bew-fill-3: rgb(131 131 145 / 33%);
+  --bew-fill-3: rgb(131 131 145 / 45%);
 
   // You can use this as the frosted glass mask, such as on the right side of the "Watch Later" page panel and the "Favorites" page panel
-  --bew-fill-4: rgb(131 131 145 / 63%);
+  --bew-fill-4: rgb(131 131 145 / 60%);
 
-  --bew-fill-alt: rgb(255 255 255 / 43%);
+  --bew-fill-alt: rgb(255 255 255 / 45%);
 
   // This color is used in skeleton screens
   --bew-skeleton: var(--bew-fill-2);
@@ -226,29 +226,29 @@
   --bew-homepage-bg-mask: hsl(230 12% 6% / var(--bew-homepage-bg-mask-opacity));
 
   --bew-content: hsl(230 12% 10% / var(--bew-content-opacity));
-  --bew-content-hover: hsl(230 12% 26% / var(--bew-content-opacity));
+  --bew-content-hover: hsl(230 12% 25% / var(--bew-content-opacity));
   --bew-content-alt: hsl(240 14% 13% / var(--bew-content-opacity));
-  --bew-content-alt-hover: hsl(240 14% 29% / var(--bew-content-opacity));
+  --bew-content-alt-hover: hsl(240 14% 28% / var(--bew-content-opacity));
 
   --bew-content-solid: hsl(230 12% 10%);
-  --bew-content-solid-hover: hsl(230 12% 26%);
+  --bew-content-solid-hover: hsl(230 12% 25%);
   --bew-content-alt-solid: hsl(240 14% 13%);
-  --bew-content-alt-solid-hover: hsl(240 14% 29%);
+  --bew-content-alt-solid-hover: hsl(240 14% 28%);
 
-  --bew-elevated: hsl(230 12% 14% / var(--bew-content-opacity));
+  --bew-elevated: hsl(230 12% 15% / var(--bew-content-opacity));
   --bew-elevated-hover: hsl(230 12% 30% / var(--bew-content-opacity));
   --bew-elevated-alt: var(--bew-elevated);
   --bew-elevated-alt-hover: var(--bew-elevated-hover);
 
-  --bew-elevated-solid: hsl(230 12% 14%);
+  --bew-elevated-solid: hsl(230 12% 15%);
   --bew-elevated-solid-hover: hsl(230 12% 30%);
   --bew-elevated-alt-solid: var(--bew-elevated-solid);
   --bew-elevated-alt-solid-hover: var(--bew-elevated-hover-solid);
 
-  --bew-fill-1: rgb(131 131 145 / 14%);
-  --bew-fill-2: rgb(131 131 145 / 24%);
-  --bew-fill-3: rgb(131 131 145 / 34%);
-  --bew-fill-4: rgb(131 131 145 / 64%);
+  --bew-fill-1: rgb(131 131 145 / 15%);
+  --bew-fill-2: rgb(131 131 145 / 30%);
+  --bew-fill-3: rgb(131 131 145 / 45%);
+  --bew-fill-4: rgb(131 131 145 / 60%);
   --bew-fill-alt: var(--bew-fill-1);
 
   --bew-border-color: rgb(131 131 145 / 26%);
@@ -334,13 +334,13 @@
   --bg1_float: var(--bew-elevated-solid);
   --bg2_float: var(--bew-elevated-solid);
   // --graph_white: var(--bew-bg);
-  --graph_bg_thin: color-mix(in oklab, var(--bew-content-solid), black 10%);
+  --graph_bg_thin: color-mix(in oklab, var(--bew-content-solid), black 15%);
   --graph_bg_regular: var(--bew-content-solid);
-  --graph_bg_thick: color-mix(in oklab, var(--bew-content-solid), white 10%);
-  --graph_weak: color-mix(in oklab, var(--bew-content-solid), white 20%);
-  --graph_medium: color-mix(in oklab, var(--bew-content-solid), white 30%);
-  --graph_bold: color-mix(in oklab, var(--bew-content-solid), white 40%);
-  --graph_icon: color-mix(in oklab, var(--bew-content-solid), white 50%);
+  --graph_bg_thick: color-mix(in oklab, var(--bew-content-solid), white 15%);
+  --graph_weak: color-mix(in oklab, var(--bew-content-solid), white 30%);
+  --graph_medium: color-mix(in oklab, var(--bew-content-solid), white 45%);
+  --graph_bold: color-mix(in oklab, var(--bew-content-solid), white 60%);
+  --graph_icon: color-mix(in oklab, var(--bew-content-solid), white 75%);
   --shadow: var(--Ba0);
   --text_white: var(--Wh0_u);
   --text1: var(--bew-text-1);
