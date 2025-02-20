@@ -159,6 +159,7 @@ nextTick(() => {
                   --b-button-color-hover: var(--bew-elevated-solid-hover);
                 "
                 pointer-events-auto
+                shadow="!$bew-shadow-1"
                 @click="handleOpenInNewTab"
               >
                 <template #left>
@@ -176,6 +177,7 @@ nextTick(() => {
                   --b-button-color-hover: var(--bew-elevated-solid-hover);
                 "
                 pointer-events-auto
+                shadow="!$bew-shadow-1"
                 @click="handleClose"
               >
                 <template #left>
@@ -187,6 +189,7 @@ nextTick(() => {
               <Button
                 v-else
                 type="error"
+                shadow="!$bew-shadow-1"
                 @click="handleClose"
               >
                 <template #left>
