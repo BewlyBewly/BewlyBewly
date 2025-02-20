@@ -526,13 +526,13 @@ defineExpose({
         <!-- Top bar theme color gradient -->
         <Transition name="fade">
           <div
-            v-if="reachTop && !forceWhiteIcon && activatedPage !== AppPage.Search && isDark"
+            v-if="settings.showTopBarThemeColorGradient && !forceWhiteIcon && activatedPage !== AppPage.Search && isDark"
             pos="absolute top-0 left-0" w-full h="$bew-top-bar-height" pointer-events-none
             :style="{ background: 'linear-gradient(to bottom, var(--bew-theme-color-10), transparent)' }"
           />
         </Transition>
 
-        <div shrink-0 flex="inline xl:1 justify-start items-center gap-2">
+        <div shrink-0 flex="inline xl:1 justify-start items-center gap-2" pos="relative" z-1>
           <div
             ref="channels"
             z-1 relative w-fit

@@ -149,6 +149,7 @@ settings:
   # Desktop & Dock
   use_old_top_bar: 使用旧版顶栏
   auto_hide_top_bar: 自动隐藏顶栏
+  show_top_bar_theme_color_gradient: 在顶栏显示主题色渐变（仅在暗色模式下有效）
   show_bewly_or_bili_top_bar_switcher: 显示 BewlyBewly/Bilibili 顶栏切换器
   show_bewly_or_bili_page_switcher: 显示 BewlyBewly/Bilibili 页面切换器
   top_bar_icon_badges: 图标角标

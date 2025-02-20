@@ -98,6 +98,9 @@ function handleToggleDockItem(dockItem: any) {
       <SettingsItem :title="$t('settings.auto_hide_top_bar')">
         <Radio v-model="settings.autoHideTopBar" />
       </SettingsItem>
+      <SettingsItem :title="$t('settings.show_top_bar_theme_color_gradient')">
+        <Radio v-model="settings.showTopBarThemeColorGradient" />
+      </SettingsItem>
       <SettingsItem :title="$t('settings.show_bewly_or_bili_top_bar_switcher')">
         <Radio v-model="settings.showBewlyOrBiliTopBarSwitcher" />
       </SettingsItem>
