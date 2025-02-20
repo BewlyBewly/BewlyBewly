@@ -3,6 +3,7 @@ import { onClickOutside, onKeyStroke, useMouseInElement } from '@vueuse/core'
 import type { Ref, UnwrapNestedRefs } from 'vue'
 
 import { useBewlyApp } from '~/composables/useAppProvider'
+import { useDark } from '~/composables/useDark'
 import { useDelayedHover } from '~/composables/useDelayedHover'
 import { OVERLAY_SCROLL_BAR_SCROLL, TOP_BAR_VISIBILITY_CHANGE } from '~/constants/globalEvents'
 import { AppPage } from '~/enums/appEnums'
@@ -37,6 +38,7 @@ import type { UnReadDm, UnReadMessage, UserInfo } from './types'
 // })
 
 const { activatedPage, scrollbarRef, reachTop } = useBewlyApp()
+const { isDark } = useDark()
 
 const mid = getUserID() || ''
 const userInfo = reactive<UserInfo | NonNullable<unknown>>({}) as UnwrapNestedRefs<UserInfo>
@@ -507,7 +509,6 @@ defineExpose({
           pointer-events-none transform-gpu
         />
 
-        <!-- <Transition name="fade"> -->
         <div
           pos="absolute top-0 left-0" w-full
           pointer-events-none opacity-100 duration-300
@@ -521,7 +522,15 @@ defineExpose({
             height: reachTop ? 'var(--bew-top-bar-height)' : 'calc(var(--bew-top-bar-height) + 20px)',
           }"
         />
-        <!-- </Transition> -->
+
+        <!-- Top bar theme color gradient -->
+        <Transition name="fade">
+          <div
+            v-if="reachTop && !forceWhiteIcon && activatedPage !== AppPage.Search && isDark"
+            pos="absolute top-0 left-0" w-full h="$bew-top-bar-height" pointer-events-none
+            :style="{ background: 'linear-gradient(to bottom, var(--bew-theme-color-10), transparent)' }"
+          />
+        </Transition>
 
         <div shrink-0 flex="inline xl:1 justify-start items-center gap-2">
           <div
@@ -576,7 +585,7 @@ defineExpose({
               v-if="showSearchBar"
               class="search-bar"
               :style="{
-                '--b-search-bar-normal-color': settings.disableFrostedGlass ? 'var(--bew-elevated)' : 'color-mix(in oklab, var(--bew-elevated-solid), transparent 80%)',
+                '--b-search-bar-normal-color': settings.disableFrostedGlass ? 'var(--bew-elevated)' : 'color-mix(in oklab, var(--bew-elevated-solid), transparent 60%)',
                 '--b-search-bar-hover-color': 'var(--bew-elevated-hover)',
                 '--b-search-bar-focus-color': 'var(--bew-elevated)',
                 '--b-search-bar-normal-icon-color': forceWhiteIcon && !settings.disableFrostedGlass ? 'white' : 'var(--bew-text-1)',

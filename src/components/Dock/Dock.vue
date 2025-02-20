@@ -445,10 +445,10 @@ const dockTransformStyle = computed((): { transform: string, transformOrigin: st
 }
 
 .dock-item {
-  --shadow-dark: 0 4px 30px 4px var(--bew-theme-color-60);
-  --shadow-active: 0 4px 30px var(--bew-theme-color-70);
-  --shadow-dark-active: 0 4px 20px var(--bew-theme-color-80);
-  --shadow-active-active: 0 4px 20px var(--bew-theme-color-90);
+  --shadow-dark: 0 4px 30px 4px rgba(255, 255, 255, 0.6);
+  --shadow-active: 0 4px 30px var(--bew-theme-color-60);
+  --shadow-dark-active: 0 4px 20px rgba(255, 255, 255, 0.8);
+  --shadow-active-active: 0 4px 20px var(--bew-theme-color-80);
 
   --uno: "relative transform active:important-scale-90 hover:scale-110";
   --uno: "lg:w-45px w-35px";
@@ -480,7 +480,7 @@ const dockTransformStyle = computed((): { transform: string, transformOrigin: st
   }
 
   &.active {
-    --uno: "important-bg-$bew-theme-color-80 text-white";
+    --uno: "important-bg-$bew-theme-color text-white !dark:bg-white !dark:text-black";
     --uno: "shadow-$shadow-active dark:shadow-$shadow-dark";
     --uno: "active:shadow-$shadow-active-active dark-active:shadow-$shadow-dark-active";
   }
