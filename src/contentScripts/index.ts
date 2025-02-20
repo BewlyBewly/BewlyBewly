@@ -9,7 +9,7 @@ import { settings } from '~/logic'
 import { setupApp } from '~/logic/common-setup'
 import RESET_BEWLY_CSS from '~/styles/reset.css?raw'
 import { runWhenIdle } from '~/utils/lazyLoad'
-import { compareVersions, injectCSS, isHomePage, isInIframe } from '~/utils/main'
+import { compareVersions, injectCSS, isHomePage, isInIframe, isNotificationPage, isVideoOrBangumiPage } from '~/utils/main'
 import { SVG_ICONS } from '~/utils/svgIcons'
 
 import { version } from '../../package.json'
@@ -36,18 +36,10 @@ function isSupportedPages(): boolean {
   if (
     // homepage
     isHomePage()
-
+    // video or bangumi page
+    || isVideoOrBangumiPage()
     // popular page https://www.bilibili.com/v/popular/all
     || /https?:\/\/(?:www\.)?bilibili\.com\/v\/popular\/all.*/.test(currentUrl)
-    // video page
-    || /https?:\/\/(?:www\.)?bilibili\.com\/(?:video|list)\/.*/.test(currentUrl)
-    // anime playback & movie page
-    || /https?:\/\/(?:www\.)?bilibili\.com\/bangumi\/play\/.*/.test(currentUrl)
-    // watch later playlist
-    || /https?:\/\/(?:www\.)?bilibili\.com\/list\/watchlater.*/.test(currentUrl)
-    || /https?:\/\/(?:www\.)?bilibili\.com\/watchlater\/list.*/.test(currentUrl)
-    // favorite playlist
-    || /https?:\/\/(?:www\.)?bilibili\.com\/list\/ml.*/.test(currentUrl)
     // search page
     || /https?:\/\/search\.bilibili\.com\.*/.test(currentUrl)
     // moments page
@@ -98,6 +90,8 @@ export function isSupportedIframePages(): boolean {
     && (
       // supports Bilibili page URLs recorded in the dock
       isHomePage()
+      // Since `Open in drawer` will open the video page within an iframe, so we need to support the following pages
+      || isVideoOrBangumiPage()
       || /https?:\/\/search\.bilibili\.com\/all.*/.test(currentUrl)
       || /https?:\/\/www\.bilibili\.com\/anime.*/.test(currentUrl)
       || /https?:\/\/space\.bilibili\.com\/\d+\/favlist.*/.test(currentUrl)
@@ -108,15 +102,8 @@ export function isSupportedIframePages(): boolean {
       // https://github.com/BewlyBewly/BewlyBewly/issues/1256
       // https://github.com/BewlyBewly/BewlyBewly/issues/1266
       || /https?:\/\/t\.bilibili\.com(?!\/vote|\/share).*/.test(currentUrl)
-      // Since `Open in drawer` will open the video page within an iframe, so we need to support the following pages
-      // video page
-      || /https?:\/\/(?:www\.)?bilibili\.com\/(?:video|list)\/.*/.test(currentUrl)
-      // anime playback & movie page
-      || /https?:\/\/(?:www\.)?bilibili\.com\/bangumi\/play\/.*/.test(currentUrl)
-      // watch later playlist
-      || /https?:\/\/(?:www\.)?bilibili\.com\/list\/watchlater.*/.test(currentUrl)
-      // favorite playlist
-      || /https?:\/\/(?:www\.)?bilibili\.com\/list\/ml.*/.test(currentUrl)
+      // notifications page, for `Open the notifications page as a drawer`
+      || isNotificationPage()
     )
   ) {
     return true

@@ -156,6 +156,8 @@ settings:
     number: 数字
     dot: 圆点
     none: 不显示
+  open_notifications_page_as_drawer: 将通知页面作为抽屉打开
+
   always_use_dock: 总是使用 Dock 栏
   always_use_dock_desc: 启用后，Dock 栏将始终显示，侧边栏将隐藏。我们推荐你同时启用自动隐藏 Dock 栏。
   auto_hide_dock: 自动隐藏 Dock 栏

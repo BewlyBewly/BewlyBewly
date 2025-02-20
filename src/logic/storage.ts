@@ -39,6 +39,8 @@ export interface Settings {
   showBewlyOrBiliTopBarSwitcher: boolean
   showBewlyOrBiliPageSwitcher: boolean
   topBarIconBadges: 'number' | 'dot' | 'none'
+  openNotificationsPageAsDrawer: boolean
+
   alwaysUseDock: boolean
   autoHideDock: boolean
   dockPosition: 'left' | 'right' | 'bottom'
@@ -137,6 +139,8 @@ export const originalSettings: Settings = {
   showBewlyOrBiliTopBarSwitcher: true,
   showBewlyOrBiliPageSwitcher: true,
   topBarIconBadges: 'number',
+  openNotificationsPageAsDrawer: true,
+
   alwaysUseDock: false,
   autoHideDock: false,
   dockPosition: 'right',

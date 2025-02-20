@@ -158,6 +158,8 @@ settings:
     number: Number
     dot: Dot
     none: Do not show
+  open_notifications_page_as_drawer: Open the notifications page as a drawer
+
   always_use_dock: Always use the dock
   always_use_dock_desc: The dock will always be visible and the sidebar will be hidden. We also recommend enabling auto-hide for the dock.
   auto_hide_dock: Automatically hide the dock

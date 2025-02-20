@@ -154,6 +154,8 @@ settings:
     number: 數字
     dot: 圓點
     none: 唔顯示
+  open_notifications_page_as_drawer: 用櫃桶打開通知頁面
+
   always_use_dock: 點都要用 Dock
   always_use_dock_desc: 啓用後，Dock 點都要用佢而唔係用側邊欄。我哋推介你同時啓用自動收埋 Dock 去。
   auto_hide_dock: 自動收埋 Dock

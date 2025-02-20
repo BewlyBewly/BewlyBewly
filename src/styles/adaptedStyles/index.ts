@@ -2,7 +2,8 @@ import './common'
 import './shadowDom'
 import './thirdParties'
 
-import { isHomePage } from '~/utils/main'
+import { settings } from '~/logic/storage'
+import { isHomePage, isInIframe } from '~/utils/main'
 
 async function setupStyles() {
   const currentUrl = document.URL
@@ -17,6 +18,10 @@ async function setupStyles() {
   else if (/https?:\/\/message\.bilibili\.com\.*/.test(currentUrl)) {
     await import('./pages/notificationsPage.scss')
     document.documentElement.classList.add('notificationsPage')
+
+    if (isInIframe() && settings.value.openNotificationsPageAsDrawer) {
+      document.documentElement.classList.add('drawer')
+    }
   }
 
   // moments page, new articles page 动态页, 新版专栏页

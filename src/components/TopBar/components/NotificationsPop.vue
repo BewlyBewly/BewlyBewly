@@ -1,10 +1,15 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 
+import { settings } from '~/logic'
 import api from '~/utils/api'
 
+const emit = defineEmits<{
+  (e: 'itemClick', item: { name: string, url: string, unreadCount: number, icon: string }): void
+}>()
+
 const { t } = useI18n()
-const list = ref<{ name: string, url: string, unreadCount: number, icon: string }[]>([
+const list = computed((): { name: string, url: string, unreadCount: number, icon: string }[] => [
   {
     name: t('topbar.noti_dropdown.replys'),
     url: 'https://message.bilibili.com/#/reply',
@@ -67,6 +72,12 @@ function getUnreadMessageCount() {
     list.value[4].unreadCount = 0
   })
 }
+
+function handleClick(event: MouseEvent, item: { name: string, url: string, unreadCount: number, icon: string }) {
+  if (settings.value.openNotificationsPageAsDrawer) {
+    emit('itemClick', item)
+  }
+}
 </script>
 
 <template>
@@ -91,6 +102,8 @@ function getUnreadMessageCount() {
       rounded="$bew-radius"
       transition="all duration-300"
       m="b-1 last:b-0"
+      :custom-click-event="!settings.useOldTopBar && settings.openNotificationsPageAsDrawer"
+      @click="(event: MouseEvent) => handleClick(event, item)"
     >
       <div flex="~ items-center gap-2">
         <i :class="item.icon" text="$bew-text-2" />

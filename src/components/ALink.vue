@@ -41,12 +41,16 @@ const target = computed(() => {
 })
 
 function handleClick(event: MouseEvent) {
+  if (event.ctrlKey || event.metaKey || event.altKey)
+    return
+
   if (props.customClickEvent) {
+    event.preventDefault()
     emit('click', event)
     return
   }
 
-  if (openMode.value === 'drawer' && !event.ctrlKey && !event.metaKey) {
+  if (openMode.value === 'drawer') {
     event.preventDefault()
     openIframeDrawer(props.href)
   }

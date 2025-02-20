@@ -18,6 +18,7 @@ import FavoritesPop from './components/FavoritesPop.vue'
 import HistoryPop from './components/HistoryPop.vue'
 import MomentsPop from './components/MomentsPop.vue'
 import MorePop from './components/MorePop.vue'
+import NotificationsDrawer from './components/NotificationsDrawer.vue'
 import NotificationsPop from './components/NotificationsPop.vue'
 import UploadPop from './components/UploadPop.vue'
 import UserPanelPop from './components/UserPanelPop.vue'
@@ -54,6 +55,10 @@ const avatarShadow = ref<HTMLImageElement>() as Ref<HTMLImageElement>
 
 const scrollTop = ref<number>(0)
 const oldScrollTop = ref<number>(0)
+
+const drawerVisible = reactive({
+  notifications: false,
+})
 
 const isSearchPage = computed((): boolean => {
   if (/https?:\/\/search.bilibili.com\/.*$/.test(location.href))
@@ -426,6 +431,14 @@ async function getUnreadMessageCount() {
   }
   finally {
     unReadMessageCount.value = result
+  }
+}
+
+const notificationsDrawerUrl = ref<string>('https://message.bilibili.com/')
+function handleNotificationsItemClick(item: { name: string, url: string, unreadCount: number, icon: string }) {
+  if (settings.value.openNotificationsPageAsDrawer) {
+    drawerVisible.notifications = true
+    notificationsDrawerUrl.value = item.url
   }
 }
 // #endregion
@@ -823,11 +836,14 @@ defineExpose({
                       class="unread-dot"
                     />
                   </template>
+
                   <ALink
+                    :href="settings.openNotificationsPageAsDrawer ? undefined : 'https://message.bilibili.com'"
                     :class="{ 'white-icon': forceWhiteIcon }"
-                    href="https://message.bilibili.com"
                     :title="$t('topbar.notifications')"
                     type="topBar"
+                    :custom-click-event="settings.openNotificationsPageAsDrawer"
+                    @click="drawerVisible.notifications = true"
                   >
                     <div i-tabler:bell />
                   </ALink>
@@ -838,6 +854,7 @@ defineExpose({
                       ref="notificationsTransformer"
                       class="bew-popover"
                       @click.stop="() => {}"
+                      @item-click="handleNotificationsItemClick"
                     />
                   </Transition>
                 </div>
@@ -901,6 +918,12 @@ defineExpose({
           </div>
         </div>
       </main>
+
+      <NotificationsDrawer
+        v-if="drawerVisible.notifications && settings.openNotificationsPageAsDrawer"
+        :url="notificationsDrawerUrl"
+        @close="drawerVisible.notifications = false"
+      />
     </header>
   </Transition>
 </template>
@@ -1033,19 +1056,24 @@ defineExpose({
   .right-side-item {
     --uno: "relative text-$bew-text-1 flex items-center";
 
-    &:not(.avatar) a {
+    &:not(.avatar) a,
+    & .notifications {
       --uno: "text-lg grid place-items-center rounded-40px duration-300 relative z-5";
       --uno: "h-34px w-34px";
       filter: drop-shadow(0 0 4px var(--bew-bg));
     }
 
     &.active a,
-    & a:hover {
+    & a:hover,
+    & .notifications:hover,
+    & .notifications:active {
       --uno: "bg-$bew-fill-2";
     }
 
     &.active a.white-icon,
-    & a:hover.white-icon {
+    & a:hover.white-icon,
+    & .notifications:hover.white-icon,
+    & .notifications:active.white-icon {
       --uno: "bg-white bg-opacity-20";
     }
 

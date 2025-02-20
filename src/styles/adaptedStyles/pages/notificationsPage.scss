@@ -2,6 +2,38 @@
   #message-navbar {
     display: none;
   }
+
+  .side-bar {
+    font-weight: 400 !important;
+  }
+
+  &.drawer {
+    body {
+      background: unset;
+      background-color: var(--bew-homepage-bg) !important;
+    }
+
+    #message-navbar + .container,
+    #link-message-container .container {
+      width: 100vw !important;
+      max-width: unset !important;
+      margin: 0 !important;
+    }
+
+    #message-navbar + .container::after {
+      display: none;
+    }
+
+    .space-left,
+    .space-right {
+      backdrop-filter: none;
+      background-color: unset !important;
+    }
+
+    .space-left .title {
+      display: none;
+    }
+  }
 }
 
 html.bewly-design.notificationsPage {
@@ -27,6 +59,7 @@ html.bewly-design.notificationsPage {
         background: url(https://s1.hdslb.com/bfs/static/blive/blfe-message-web/static/img/light_bg.8e46311e.png)
           bottom/cover no-repeat fixed;
         pointer-events: none;
+        opacity: 0.4;
       }
     }
   }

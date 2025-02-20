@@ -107,6 +107,9 @@ function handleToggleDockItem(dockItem: any) {
       <SettingsItem :title="$t('settings.top_bar_icon_badges')">
         <Select v-model="settings.topBarIconBadges" :options="topBarIconBadgesOptions" w="full" />
       </SettingsItem>
+      <SettingsItem :title="$t('settings.open_notifications_page_as_drawer')">
+        <Radio v-model="settings.openNotificationsPageAsDrawer" />
+      </SettingsItem>
     </SettingsItemGroup>
 
     <SettingsItemGroup :title="$t('settings.group_dock')">
