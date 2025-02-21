@@ -251,7 +251,7 @@ provide('getVideoType', () => props.type!)
           :style="{ display: horizontal ? 'flex' : 'block', gap: horizontal ? '1.5rem' : '0' }"
           :href="videoUrl"
           type="videoCard"
-          custom-click-event
+          :custom-click-event="settings.videoCardLinkOpenMode === 'drawer'"
           @mouseenter="handleMouseEnter"
           @mouseleave="handelMouseLeave"
           @click="handleClick"
