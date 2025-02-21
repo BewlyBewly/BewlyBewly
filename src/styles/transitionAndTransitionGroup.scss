@@ -19,6 +19,15 @@
   --uno: "opacity-0";
 }
 
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  --uno: "opacity-100 transition-all duration-500";
+}
+.slide-fade-enter,
+.slide-fade-leave-to {
+  --uno: "opacity-0";
+}
+
 .list-enter-active,
 .list-leave-active {
   --uno: "transition-all duration-500";

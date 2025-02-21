@@ -8,6 +8,7 @@ import { useBewlyApp } from '~/composables/useAppProvider'
 import { accessKey, settings } from '~/logic'
 import type { VideoInfo } from '~/models/video/videoInfo'
 import type { VideoPreviewResult } from '~/models/video/videoPreview'
+import { useMainStore } from '~/stores/mainStore'
 import api from '~/utils/api'
 import { getTvSign, TVAppKey } from '~/utils/authProvider'
 import { calcCurrentTime, calcTimeSince, numFormatter } from '~/utils/dataFormatter'
@@ -40,6 +41,8 @@ interface Props {
 
 const toast = useToast()
 const { mainAppRef, openIframeDrawer } = useBewlyApp()
+const { setActivatedCover } = useMainStore()
+
 const showVideoOptions = ref<boolean>(false)
 const videoOptionsFloatingStyles = ref<CSSProperties>({})
 // Whether the user has marked it as disliked
@@ -136,27 +139,33 @@ function toggleWatchLater() {
 }
 
 function handleMouseEnter() {
-  // fix #789
-  contentVisibility.value = 'visible'
-  if (settings.value.hoverVideoCardDelayed) {
-    mouseEnterTimeOut.value = setTimeout(() => {
-      isHover.value = true
-      clearTimeout(mouseLeaveTimeOut.value)
-    }, 1200)
-  }
-  else {
-    mouseEnterTimeOut.value = setTimeout(() => {
-      isHover.value = true
-      clearTimeout(mouseLeaveTimeOut.value)
-    }, 500)
-  }
+  requestAnimationFrame(() => {
+    setActivatedCover(props.video?.cover || '')
+
+    // fix #789
+    contentVisibility.value = 'visible'
+    if (settings.value.hoverVideoCardDelayed) {
+      mouseEnterTimeOut.value = setTimeout(() => {
+        isHover.value = true
+        clearTimeout(mouseLeaveTimeOut.value)
+      }, 1200)
+    }
+    else {
+      mouseEnterTimeOut.value = setTimeout(() => {
+        isHover.value = true
+        clearTimeout(mouseLeaveTimeOut.value)
+      }, 500)
+    }
+  })
 }
 
 function handelMouseLeave() {
-  contentVisibility.value = 'auto'
-  isHover.value = false
-  clearTimeout(mouseEnterTimeOut.value)
-  clearTimeout(mouseLeaveTimeOut.value)
+  requestAnimationFrame(() => {
+    contentVisibility.value = 'auto'
+    isHover.value = false
+    clearTimeout(mouseEnterTimeOut.value)
+    clearTimeout(mouseLeaveTimeOut.value)
+  })
 }
 
 function handleClick(event: MouseEvent) {

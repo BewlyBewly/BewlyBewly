@@ -5,12 +5,14 @@ import { useI18n } from 'vue-i18n'
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { settings } from '~/logic'
 import type { List as VideoItem, WatchLaterResult } from '~/models/video/watchLater'
+import { useMainStore } from '~/stores/mainStore'
 import api from '~/utils/api'
 import { calcCurrentTime } from '~/utils/dataFormatter'
 import { getCSRF, openLinkToNewTab, removeHttpFromUrl } from '~/utils/main'
 
 const { t } = useI18n()
 const { openIframeDrawer } = useBewlyApp()
+const { setActivatedCover } = useMainStore()
 
 const isLoading = ref<boolean>()
 const noMoreContent = ref<boolean>()
@@ -170,6 +172,7 @@ function jumpToLoginPage() {
             type="videoCard"
             class="group"
             flex cursor-pointer
+            @mouseenter="setActivatedCover(item.pic)"
           >
             <section
               rounded="$bew-radius"

@@ -125,6 +125,8 @@ export const useMainStore = defineStore('main', () => {
     ],
   )
 
+  const activatedCover = ref<string>('')
+
   function getBiliWebPageURLByPage(page: AppPage): string {
     const dockItem = dockItems.value.find(e => e.page === page)
     return dockItem?.url || ''
@@ -134,5 +136,15 @@ export const useMainStore = defineStore('main', () => {
     return dockItems.value.find(e => e.page === page)
   }
 
-  return { dockItems, homeTabs, getBiliWebPageURLByPage, getDockItemByPage }
+  function setActivatedCover(cover: string) {
+    requestAnimationFrame(() => {
+      activatedCover.value = cover
+    })
+  }
+
+  function getActivatedCover(): string {
+    return activatedCover.value
+  }
+
+  return { dockItems, homeTabs, getBiliWebPageURLByPage, getDockItemByPage, setActivatedCover, getActivatedCover }
 })
