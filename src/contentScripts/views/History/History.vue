@@ -227,6 +227,10 @@ function handleTurnOnWatchHistory() {
 function jumpToLoginPage() {
   location.href = 'https://passport.bilibili.com/login'
 }
+
+function handleMouseEnter(item: HistoryItem) {
+  setActivatedCover(`${getHistoryItemCover(item)}@480w_270h_1c`)
+}
 </script>
 
 <template>
@@ -246,7 +250,7 @@ function jumpToLoginPage() {
           class="group"
           flex
           cursor-pointer
-          @mouseenter="setActivatedCover(getHistoryItemCover(historyItem))"
+          @mouseenter="handleMouseEnter(historyItem)"
         >
           <!-- time slot -->
           <div

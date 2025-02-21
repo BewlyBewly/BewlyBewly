@@ -153,6 +153,10 @@ function handleLinkClick(url: string) {
 function jumpToLoginPage() {
   location.href = 'https://passport.bilibili.com/login'
 }
+
+function handleMouseEnter(item: VideoItem) {
+  setActivatedCover(`${removeHttpFromUrl(item.pic)}@480w_270h_1c`)
+}
 </script>
 
 <template>
@@ -172,7 +176,7 @@ function jumpToLoginPage() {
             type="videoCard"
             class="group"
             flex cursor-pointer
-            @mouseenter="setActivatedCover(item.pic)"
+            @mouseenter="handleMouseEnter(item)"
           >
             <section
               rounded="$bew-radius"

@@ -35,7 +35,7 @@ const { isDark } = useDark()
 const { setActivatedCover } = useMainStore()
 
 function handleMouseEnter(bangumi: Bangumi) {
-  setActivatedCover(bangumi.cover)
+  setActivatedCover(`${removeHttpFromUrl(bangumi.cover)}@466w_622h.webp`)
 }
 </script>
 

@@ -23,7 +23,7 @@ const debouncedCoverUpdate = useDebounceFn((newValue: string) => {
   requestAnimationFrame(() => {
     currentActivatedCover.value = nextCover
   })
-}, 1500)
+}, 800)
 
 // Watch with immediate to handle initial value
 watch(
@@ -130,13 +130,15 @@ function setAppWallpaperMaskingOpacity() {
             <img
               :key="currentActivatedCover"
               :src="currentActivatedCover"
-              pointer-events-none pos="absolute top--40px left-0" w="100%" h="50%"
-              transform-gpu
-              object-cover
+              loading="eager"
               style="
                 mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 50%, transparent);
-                filter: blur(14px) opacity(0.15)
+                filter: blur(20px) opacity(0.15);
+                will-change: transform, opacity;
               "
+              pointer-events-none pos="absolute top--40px left-0" w="100%" h="50%"
+              of-hidden
+              transform-gpu object-cover
             >
           </Transition>
         </Transition>

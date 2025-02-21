@@ -139,33 +139,29 @@ function toggleWatchLater() {
 }
 
 function handleMouseEnter() {
-  requestAnimationFrame(() => {
-    setActivatedCover(props.video?.cover || '')
+  props.video && setActivatedCover(`${removeHttpFromUrl(props.video.cover)}@672w_378h_1c_!web-home-common-cover`)
 
-    // fix #789
-    contentVisibility.value = 'visible'
-    if (settings.value.hoverVideoCardDelayed) {
-      mouseEnterTimeOut.value = setTimeout(() => {
-        isHover.value = true
-        clearTimeout(mouseLeaveTimeOut.value)
-      }, 1200)
-    }
-    else {
-      mouseEnterTimeOut.value = setTimeout(() => {
-        isHover.value = true
-        clearTimeout(mouseLeaveTimeOut.value)
-      }, 500)
-    }
-  })
+  // fix #789
+  contentVisibility.value = 'visible'
+  if (settings.value.hoverVideoCardDelayed) {
+    mouseEnterTimeOut.value = setTimeout(() => {
+      isHover.value = true
+      clearTimeout(mouseLeaveTimeOut.value)
+    }, 1200)
+  }
+  else {
+    mouseEnterTimeOut.value = setTimeout(() => {
+      isHover.value = true
+      clearTimeout(mouseLeaveTimeOut.value)
+    }, 500)
+  }
 }
 
 function handelMouseLeave() {
-  requestAnimationFrame(() => {
-    contentVisibility.value = 'auto'
-    isHover.value = false
-    clearTimeout(mouseEnterTimeOut.value)
-    clearTimeout(mouseLeaveTimeOut.value)
-  })
+  contentVisibility.value = 'auto'
+  isHover.value = false
+  clearTimeout(mouseEnterTimeOut.value)
+  clearTimeout(mouseLeaveTimeOut.value)
 }
 
 function handleClick(event: MouseEvent) {
