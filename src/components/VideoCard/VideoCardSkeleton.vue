@@ -40,10 +40,6 @@ defineProps<{
     flex="~ gap-6"
     mb-4 pointer-events-none select-none
   >
-    <!-- By directly using predefined unocss width properties, it is possible to dynamically set the width attribute -->
-    <div hidden w="xl:280px lg:250px md:200px 200px" />
-    <div hidden w="full" />
-
     <!-- Cover -->
     <div
       :class="horizontal ? 'horizontal-card-cover' : 'vertical-card-cover'"
