@@ -57,7 +57,7 @@ export function setupNecessarySettingsWatchers() {
 
       // Set the default font family
       if (!settings.value.fontFamily && settings.value.customizeFont !== 'custom') {
-        settings.value.fontFamily = `bilifont, Onest, ShangguSans, -apple-system, BlinkMacSystemFont, InterVariable, Inter, "Segoe UI",
+        settings.value.fontFamily = `bilifont, Comme-Number, Onest, ShangguSans, -apple-system, BlinkMacSystemFont, InterVariable, Inter, "Segoe UI",
           Cantarell, "Noto Sans", "Roboto Flex", Roboto, sans-serif, ui-sans-serif, system-ui, "Apple Color Emoji", "Twemoji Mozilla", "Noto Color Emoji",
           "Segoe UI Emoji", "Segoe UI Symbol", emoji`
       }
