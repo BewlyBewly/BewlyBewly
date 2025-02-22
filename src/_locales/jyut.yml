@@ -112,6 +112,10 @@ settings:
     mandarin_tw: 官話 - 繁体中文
     jyut: 廣東話
   customize_font: 自訂字型
+  customize_font_opt:
+    default: Bilibili 預設
+    recommend: 推介
+    custom: 自訂
   customize_font_desc: |-
     對於舊字形嘅用戶，我哋推介 <a class="link" href="https://github.com/GuiWonder/Shanggu" target="_blank">Shanggu Fonts (尚古字型)</a> 同 <a class="link" href="https://github.com/ayaka14732/FanWunHak" target="_blank">Fan Wun Hak (繁媛黑體)</a>。
     呢啲字型仲可以將簡體中文轉做繁體/繁体中文。

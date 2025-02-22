@@ -52,16 +52,29 @@ export function setupNecessarySettingsWatchers() {
   watch(
     [() => settings.value.customizeFont, () => settings.value.fontFamily],
     () => {
+      if (typeof settings.value.customizeFont === 'boolean')
+        settings.value.customizeFont = 'recommend'
+
       // Set the default font family
-      if (!settings.value.customizeFont && !settings.value.fontFamily) {
-        settings.value.fontFamily = `-apple-system, BlinkMacSystemFont, Inter, "Segoe UI Variable", "Segoe UI", "Roboto Flex", Roboto, "Noto Sans", Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", Arial, sans-serif`
+      if (!settings.value.fontFamily && settings.value.customizeFont !== 'custom') {
+        settings.value.fontFamily = `bilifont, Onest, ShangguSans, -apple-system, BlinkMacSystemFont, InterVariable, Inter, "Segoe UI",
+          Cantarell, "Noto Sans", "Roboto Flex", Roboto, sans-serif, ui-sans-serif, system-ui, "Apple Color Emoji", "Twemoji Mozilla", "Noto Color Emoji",
+          "Segoe UI Emoji", "Segoe UI Symbol", emoji`
       }
 
-      if (settings.value.customizeFont) {
-        document.documentElement.style.setProperty('--bew-font-family', settings.value.fontFamily)
+      // Remove the custom fonts first
+      document.documentElement.style.removeProperty('--bew-custom-fonts')
+
+      // Under default settings, revert to Bilibili's original font-family
+      if (settings.value.customizeFont === 'default') {
+        document.documentElement.classList.remove('modify-fonts')
+      }
+      else if (settings.value.customizeFont === 'recommend') {
+        document.documentElement.classList.add('modify-fonts')
       }
       else {
-        document.documentElement.style.removeProperty('--bew-font-family')
+        document.documentElement.classList.add('modify-fonts')
+        document.documentElement.style.setProperty('--bew-custom-fonts', settings.value.fontFamily)
       }
     },
     { immediate: true },
@@ -71,24 +84,10 @@ export function setupNecessarySettingsWatchers() {
   watch(
     () => settings.value.overrideDanmakuFont,
     () => {
-      let fallbackFontFamily = ''
-      if (locale.value === LanguageType.Mandarin_CN) {
-        fallbackFontFamily = 'var(--bew-fonts-mandarin-cn)'
-      }
-      else if (locale.value === LanguageType.Mandarin_TW) {
-        fallbackFontFamily = 'var(--bew-fonts-mandarin-tw)'
-      }
-      else if (locale.value === LanguageType.Cantonese) {
-        fallbackFontFamily = 'var(--bew-fonts-cantonese)'
-      }
-      else {
-        fallbackFontFamily = 'var(--bew-fonts-english)'
-      }
-
       if (settings.value.overrideDanmakuFont) {
         danmakuFontStyleEl = injectCSS(`
           .bewly-design .bili-danmaku-x-dm {
-            font-family: var(--bew-font-family, ${fallbackFontFamily}) !important;
+            font-family: var(--bew-fonts) !important;
           }
         `)
       }

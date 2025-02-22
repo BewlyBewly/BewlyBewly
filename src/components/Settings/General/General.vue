@@ -63,6 +63,23 @@ const videoCardOpenModeOptions = computed(() => {
   ]
 })
 
+const fontPreferenceOptions = computed(() => {
+  return [
+    {
+      label: t('settings.customize_font_opt.default'),
+      value: 'default',
+    },
+    {
+      label: t('settings.customize_font_opt.recommend'),
+      value: 'recommend',
+    },
+    {
+      label: t('settings.customize_font_opt.custom'),
+      value: 'custom',
+    },
+  ]
+})
+
 watch(() => settings.value.language, (newValue) => {
   locale.value = newValue
 })
@@ -93,8 +110,12 @@ watch(() => settings.value.language, (newValue) => {
         />
       </SettingsItem>
       <SettingsItem :title="$t('settings.customize_font')">
-        <Radio v-model="settings.customizeFont" />
-        <template v-if="settings.customizeFont" #bottom>
+        <Select
+          v-model="settings.customizeFont"
+          :options="fontPreferenceOptions"
+          w="full"
+        />
+        <template v-if="settings.customizeFont === 'custom'" #bottom>
           <Input v-model="settings.fontFamily" @keydown.stop.passive="() => {}" />
           <div text="sm $bew-text-2" mt-1 v-html="t('settings.customize_font_desc')" />
         </template>

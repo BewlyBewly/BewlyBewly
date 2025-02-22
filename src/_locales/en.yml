@@ -114,6 +114,10 @@ settings:
     mandarin_tw: Mandarin - Traditional Chinese
     jyut: Cantonese
   customize_font: Customize font
+  customize_font_opt:
+    default: Bilibili Default
+    recommend: Recommend
+    custom: Custom
   customize_font_desc: |-
     For users who favor the old form of Chinese characters, we recommend <a class="link" href="https://github.com/GuiWonder/Shanggu" target="_blank">Shanggu Fonts (尚古字型)</a> and <a class="link" href="https://github.com/ayaka14732/FanWunHak" target="_blank">Fan Wun Hak (繁媛黑體)</a>.
     These fonts also possess the capability to convert simplified Chinese into traditional characters.

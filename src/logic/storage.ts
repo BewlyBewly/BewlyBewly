@@ -12,7 +12,7 @@ export interface Settings {
   enableHorizontalScrolling: boolean
 
   language: string
-  customizeFont: boolean
+  customizeFont: 'default' | 'recommend' | 'custom'
   fontFamily: string
   overrideDanmakuFont: boolean
   removeTheIndentFromChinesePunctuation: boolean
@@ -113,7 +113,7 @@ export const originalSettings: Settings = {
   enableHorizontalScrolling: false,
 
   language: '',
-  customizeFont: false,
+  customizeFont: 'recommend',
   fontFamily: '',
   overrideDanmakuFont: true,
   removeTheIndentFromChinesePunctuation: false,
