@@ -120,6 +120,8 @@ const isFirstTimeActivatedPageChange = ref<boolean>(true)
 watch(
   () => activatedPage.value,
   () => {
+    mainStore.setActivatedCover('')
+
     if (!isFirstTimeActivatedPageChange.value) {
       // Update the URL query parameter when activatedPage changes
       const url = new URL(window.location.href)

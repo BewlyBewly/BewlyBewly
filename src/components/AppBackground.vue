@@ -17,7 +17,7 @@ const isBlurredCoverLoaded = ref<boolean>(false)
 
 // Use a more aggressive debounce and skip unnecessary updates
 const debouncedCoverUpdate = useDebounceFn((newValue: string) => {
-  if (!newValue || newValue === currentActivatedCover.value)
+  if (newValue === currentActivatedCover.value)
     return
 
   const nextCover = newValue
