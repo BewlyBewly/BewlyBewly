@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useDark } from '~/composables/useDark'
-import { delay } from '~/utils/main'
 
 const props = defineProps<{
   url: string
