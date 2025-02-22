@@ -11,7 +11,7 @@ export interface DockItem {
   page: AppPage
   openInNewTab: boolean
   useOriginalBiliPage: boolean
-  url: string | string[]
+  url: string
   hasBewlyPage: boolean // Whether BewlyBewly has a page for this item
 }
 
