@@ -1,6 +1,6 @@
 # BewlyBewly
 
-[English](README.md) | [官话 - 简体中文](README-cmn_CN.md) | 官話 - 正體中文 | [廣東話](README-jyut.md)
+[English](README.md) | [官话 - 简体中文](README-cmn_CN.md) | 官話 - 繁体中文 | [廣東話](README-jyut.md)
 
 <p align="center" style="margin-bottom: 0px !important;">
 <img width="300" alt="BewlyBewly icon" src="https://cdn.jsdelivr.net/gh/BewlyBewly/Imgs/logos/bewlybewly-vtuber-logo.png"><br/>
@@ -51,7 +51,7 @@ BewlyBewly 是一個針對 BiliBili 的瀏覽器擴充功能，旨在透過重�
 #### 給 Firefox 使用者的提示
 
 > [!WARNING]
-> 使用 Firefox 瀏覽器時，請記得啟用下圖所示的所有權限，以便正常使用 BewlyBewly
+> 使用 Firefox 瀏覽器時，請記得啓用下圖所示的所有權限，以便正常使用 BewlyBewly
 
 <br/> <img width="655" alt="enable all bewlybewly permissions on firefox" src="https://github.com/hakadao/BewlyBewly/assets/33394391/9566aed8-040a-4435-a2ec-c61117f8e429">
 
