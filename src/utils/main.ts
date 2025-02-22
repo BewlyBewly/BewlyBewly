@@ -173,7 +173,7 @@ export function isVideoOrBangumiPage(url: string = location.href): boolean {
     // anime playback & movie page
     || /https?:\/\/(?:www\.)?bilibili\.com\/bangumi\/play\/.*/.test(url)
     // watch later playlist
-    || /https?:\/\/(?:www\.)?bilibili\.com\/list\/watchlater.*/.test(url)
+    || /https?:\/\/(?:www\.)?bilibili\.com\/list\/watchlater\?bvid.*/.test(url)
     || /https?:\/\/(?:www\.)?bilibili\.com\/watchlater\/list.*/.test(url)
     // favorite playlist
     || /https?:\/\/(?:www\.)?bilibili\.com\/list\/ml.*/.test(url)) {
@@ -316,5 +316,12 @@ export function queryDomUntilFound(selector: string, timeout = 500, abort?: Abor
  * @returns true if the current page is in an iframe
  */
 export function isInIframe(): boolean {
-  return window.self !== window.top
+  try {
+    return window.self !== window.top
+  }
+  catch (e) {
+    // If we can't access window.top due to security restrictions,
+    // we're definitely in an iframe
+    return true
+  }
 }

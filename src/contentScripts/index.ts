@@ -54,6 +54,7 @@ function isSupportedPages(): boolean {
     || /https?:\/\/(?:www\.)?bilibili\.com\/account\/history.*/.test(currentUrl)
     // watcher later page
     || /https?:\/\/(?:www\.)?bilibili\.com\/watchlater\/#\/list.*/.test(currentUrl)
+    || /https?:\/\/(?:www\.)?bilibili\.com\/watchlater\/list.*/.test(currentUrl)
     // user space page
     || /https?:\/\/space\.bilibili\.com\.*/.test(currentUrl)
     // notifications page
@@ -97,6 +98,7 @@ export function isSupportedIframePages(): boolean {
       || /https?:\/\/space\.bilibili\.com\/\d+\/favlist.*/.test(currentUrl)
       || /https?:\/\/www\.bilibili\.com\/history.*/.test(currentUrl)
       || /https?:\/\/www\.bilibili\.com\/watchlater\/#\/list.*/.test(currentUrl)
+      || /https?:\/\/www\.bilibili\.com\/watchlater\/list.*/.test(currentUrl)
       // moments page
       // https://github.com/BewlyBewly/BewlyBewly/issues/1246
       // https://github.com/BewlyBewly/BewlyBewly/issues/1256

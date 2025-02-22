@@ -11,7 +11,7 @@ export interface DockItem {
   page: AppPage
   openInNewTab: boolean
   useOriginalBiliPage: boolean
-  url: string
+  url: string | string[]
   hasBewlyPage: boolean // Whether BewlyBewly has a page for this item
 }
 
@@ -80,7 +80,7 @@ export const useMainStore = defineStore('main', () => {
         page: AppPage.WatchLater,
         openInNewTab: false,
         useOriginalBiliPage: false,
-        url: `https://www.bilibili.com/watchlater/#/list`,
+        url: `https://www.bilibili.com/watchlater/list`,
         hasBewlyPage: true,
       },
       {
