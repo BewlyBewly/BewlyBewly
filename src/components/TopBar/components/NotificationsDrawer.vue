@@ -20,6 +20,7 @@ const show = ref(false)
 const headerShow = ref(false)
 const iframeRef = ref<HTMLIFrameElement | null>(null)
 const currentUrl = ref<string>(props.url || 'https://message.bilibili.com/')
+const showIframe = ref(false)
 const delayCloseTimer = ref<NodeJS.Timeout | null>(null)
 
 onMounted(() => {
@@ -201,15 +202,19 @@ nextTick(() => {
             </div>
           </div>
 
-          <!-- Iframe -->
-          <iframe
-            ref="iframeRef"
-            :src="currentUrl"
-            frameborder="0"
-            pointer-events-auto
-            pos="relative right-0"
-            w-inherit max-w-inherit h-full
-          />
+          <Transition name="fade">
+            <!-- Iframe -->
+            <iframe
+              v-show="showIframe"
+              ref="iframeRef"
+              :src="currentUrl"
+              frameborder="0"
+              pointer-events-auto
+              pos="relative right-0"
+              w-inherit
+              max-w-inherit h-full @load="showIframe = true"
+            />
+          </Transition>
         </div>
       </Transition>
     </div>

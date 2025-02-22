@@ -20,6 +20,7 @@ const show = ref(false)
 const headerShow = ref(false)
 const iframeRef = ref<HTMLIFrameElement | null>(null)
 const currentUrl = ref<string>(props.url)
+const showIframe = ref<boolean>(false)
 const delayCloseTimer = ref<NodeJS.Timeout | null>(null)
 const removeTopBarClassInjected = ref<boolean>(false)
 
@@ -252,18 +253,22 @@ watchEffect(() => {
         :pos="`absolute ${headerShow ? 'top-$bew-top-bar-height' : 'top-0'} left-0`" of-hidden bg="$bew-bg"
         rounded="t-$bew-radius" w-full h-full
       >
-        <iframe
-          ref="iframeRef"
-          :src="props.url"
-          :style="{
-            // Prevent top bar shaking when before the remove-top-bar-without-placeholder class is injected
-            top: !removeTopBarClassInjected ? `calc(-1 * var(--bew-top-bar-height))` : '0',
-          }"
-          frameborder="0"
-          pointer-events-auto
-          pos="relative left-0"
-          w-full h-full
-        />
+        <Transition name="fade">
+          <iframe
+            v-show="showIframe"
+            ref="iframeRef"
+            :src="props.url"
+            :style="{
+              // Prevent top bar shaking when before the remove-top-bar-without-placeholder class is injected
+              top: !removeTopBarClassInjected ? `calc(-1 * var(--bew-top-bar-height))` : '0',
+            }"
+            frameborder="0"
+            pointer-events-auto
+            pos="relative left-0"
+            w-full
+            h-full @load="showIframe = true"
+          />
+        </Transition>
       </div>
     </Transition>
   </div>

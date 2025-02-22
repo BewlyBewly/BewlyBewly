@@ -20,14 +20,14 @@ watch(() => props.url, () => {
   showIframe.value = false
 })
 
-// Only show loading animation after 2 seconds to prevent annoying flash when content loads quickly
+// Only show loading animation after 1.5 seconds to prevent annoying flash when content loads quickly
 const showLoadingTimeout = ref()
 watch(() => showIframe.value, async (newValue) => {
   clearTimeout(showLoadingTimeout.value)
   if (!newValue) {
     showLoadingTimeout.value = setTimeout(() => {
       showLoading.value = true
-    }, 2000)
+    }, 1500)
   }
   else {
     showLoading.value = false
