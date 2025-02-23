@@ -2,12 +2,12 @@
 
 :root,
 :host {
-  --bew-fonts-basic: bilifont, CJKEmDash, Numbers, Onest, ShangguSansSCVF, -apple-system, BlinkMacSystemFont,
-    InterVariable, Inter, "Segoe UI", Cantarell, "Noto Sans", "Roboto Flex", Roboto;
+  --bew-fonts-basic: CJKEmDash, Numbers, Onest, ShangguSansSCVF, -apple-system, BlinkMacSystemFont, InterVariable, Inter,
+    "Segoe UI", Cantarell, "Noto Sans", "Roboto Flex", Roboto;
   --bew-fonts-fallback: sans-serif, ui-sans-serif, system-ui, "Apple Color Emoji", "Twemoji Mozilla", "Noto Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", emoji;
 
-  --bew-fonts: var(--bew-custom-fonts, var(--bew-fonts-basic), var(--bew-fonts-fallback));
+  --bew-fonts: bilifont, var(--bew-custom-fonts, var(--bew-fonts-basic), var(--bew-fonts-fallback));
 }
 
 .bewly-wrapper,
