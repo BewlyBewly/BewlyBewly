@@ -221,9 +221,9 @@
   --bew-text-3: hsl(215 19% 82% / 60%);
   --bew-text-4: hsl(215 19% 74% / 40%);
 
-  --bew-bg: hsl(230 12% 6%);
-  --bew-homepage-bg: hsl(230 12% 6%);
-  --bew-homepage-bg-mask: hsl(230 12% 6% / var(--bew-homepage-bg-mask-opacity));
+  --bew-bg: hsl(230 12% 4%);
+  --bew-homepage-bg: hsl(230 12% 4%);
+  --bew-homepage-bg-mask: hsl(230 12% 4% / var(--bew-homepage-bg-mask-opacity));
 
   --bew-content: hsl(230 12% 10% / var(--bew-content-opacity));
   --bew-content-hover: hsl(230 12% 25% / var(--bew-content-opacity));
@@ -370,7 +370,7 @@
   --bpx-dmsend-switch-icon: var(--bew-text-2);
   --bpx-dmsend-border: var(--bew-border-color);
   --bpx-dmsend-input-font: var(--bew-text-1);
-  --bg1_rgb: 13, 14, 17;
+  --bg1_rgb: 9, 9, 11;
 
   --Lb0: color-mix(in oklab, var(--bew-theme-color), black 75%);
   --Lb1: color-mix(in oklab, var(--bew-theme-color), black 60%);
