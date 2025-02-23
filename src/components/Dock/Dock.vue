@@ -340,9 +340,14 @@ const dockTransformStyle = computed((): { transform: string, transformOrigin: st
       <!-- Back to top & refresh buttons -->
       <div
         v-if="showBackToTopOrRefreshButton"
-        pos="absolute bottom-0"
-        transform="translate-y-100%"
-        flex="~ col gap-2"
+        :style="{
+          bottom: settings.dockPosition === 'bottom' ? 'unset' : 0,
+          right: settings.dockPosition === 'bottom' ? 0 : 'unset',
+          transform: settings.dockPosition === 'bottom' ? 'translate(100%, 0)' : 'translateY(100%)',
+          flexDirection: settings.dockPosition === 'bottom' ? 'row' : 'column',
+        }"
+        pos="absolute"
+        flex="~ gap-2"
       >
         <template
           v-if="settings.backToTopAndRefreshButtonsAreSeparated"
