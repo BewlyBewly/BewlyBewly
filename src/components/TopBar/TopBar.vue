@@ -928,11 +928,13 @@ defineExpose({
         </div>
       </main>
 
-      <NotificationsDrawer
-        v-if="drawerVisible.notifications && settings.openNotificationsPageAsDrawer"
-        :url="notificationsDrawerUrl"
-        @close="drawerVisible.notifications = false"
-      />
+      <KeepAlive v-if="settings.openNotificationsPageAsDrawer">
+        <NotificationsDrawer
+          v-if="drawerVisible.notifications"
+          :url="notificationsDrawerUrl"
+          @close="drawerVisible.notifications = false"
+        />
+      </KeepAlive>
     </header>
   </Transition>
 </template>
