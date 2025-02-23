@@ -168,6 +168,7 @@ settings:
   always_use_dock: Always use the dock
   always_use_dock_desc: The dock will always be visible and the sidebar will be hidden. We also recommend enabling auto-hide for the dock.
   auto_hide_dock: Automatically hide the dock
+  half_hide_dock: Half-hide dock
   dock_position: Dock position
   dock_position_desc: Position on screen.
   dock_content_adjustment: Dock content adjustment

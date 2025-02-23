@@ -44,6 +44,7 @@ export interface Settings {
 
   alwaysUseDock: boolean
   autoHideDock: boolean
+  halfHideDock: boolean
   dockPosition: 'left' | 'right' | 'bottom'
   /** @deprecated use dockItemsConfig instead */
   dockItemVisibilityList: { page: AppPage, visible: boolean }[]
@@ -145,6 +146,7 @@ export const originalSettings: Settings = {
 
   alwaysUseDock: false,
   autoHideDock: false,
+  halfHideDock: false,
   dockPosition: 'right',
   /** @deprecated use dockItemsConfig instead */
   dockItemVisibilityList: [],

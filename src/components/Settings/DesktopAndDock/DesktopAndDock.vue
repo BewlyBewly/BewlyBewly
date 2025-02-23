@@ -69,6 +69,16 @@ const sidebarPositions = computed(() => {
   ]
 })
 
+watch(() => settings.value.halfHideDock, (newValue) => {
+  if (newValue)
+    settings.value.autoHideDock = false
+})
+
+watch(() => settings.value.autoHideDock, (newValue) => {
+  if (newValue)
+    settings.value.halfHideDock = false
+})
+
 function resetDockContent() {
   settings.value.dockItemsConfig = mainStore.dockItems.map((e: DockItem) => {
     return {
@@ -121,6 +131,9 @@ function handleToggleDockItem(dockItem: any) {
       </SettingsItem>
       <SettingsItem :title="$t('settings.auto_hide_dock')">
         <Radio v-model="settings.autoHideDock" />
+      </SettingsItem>
+      <SettingsItem :title="$t('settings.half_hide_dock')">
+        <Radio v-model="settings.halfHideDock" />
       </SettingsItem>
       <SettingsItem :title="$t('settings.dock_position')" :desc="$t('settings.dock_position_desc')">
         <Select

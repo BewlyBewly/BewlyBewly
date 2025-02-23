@@ -166,6 +166,7 @@ settings:
   always_use_dock: 总是使用 Dock 栏
   always_use_dock_desc: 启用后，Dock 栏将始终显示，侧边栏将隐藏。我们推荐你同时启用自动隐藏 Dock 栏。
   auto_hide_dock: 自动隐藏 Dock 栏
+  half_hide_dock: 半隐藏 Dock 栏
   dock_position: Dock 栏位置
   dock_position_desc: 在屏幕中摆放位置。
   dock_content_adjustment: Dock 内容调整

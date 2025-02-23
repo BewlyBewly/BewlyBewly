@@ -164,6 +164,7 @@ settings:
   always_use_dock: 點都要用 Dock
   always_use_dock_desc: 啓用後，Dock 點都要用佢而唔係用側邊欄。我哋推介你同時啓用自動收埋 Dock 去。
   auto_hide_dock: 自動收埋 Dock
+  half_hide_dock: 收埋一半 Dock
   dock_position: Dock 放位
   dock_position_desc: 放喺螢幕邊度。
   dock_content_adjustment: Dock 內容調整

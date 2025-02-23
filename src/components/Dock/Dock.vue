@@ -5,6 +5,7 @@ import { computed, ref } from 'vue'
 
 import { useBewlyApp } from '~/composables/useAppProvider'
 import { useDark } from '~/composables/useDark'
+import { useDelayedHover } from '~/composables/useDelayedHover'
 import { AppPage } from '~/enums/appEnums'
 import { settings } from '~/logic'
 import type { DockItem } from '~/stores/mainStore'
@@ -32,6 +33,20 @@ const { isDark, toggleDark } = useDark()
 const { reachTop } = useBewlyApp()
 
 const hideDock = ref<boolean>(false)
+const dockContentHover = ref<boolean>(false)
+const dockContentRef = useDelayedHover({
+  enterDelay: 100,
+  leaveDelay: 600,
+  enter: () => {
+    dockContentHover.value = true
+    toggleHideDock(false)
+  },
+  leave: () => {
+    dockContentHover.value = false
+    toggleHideDock(true)
+  },
+})
+
 const hoveringDockItem = reactive<HoveringDockItem>({
   themeMode: false,
   settings: false,
@@ -153,7 +168,6 @@ function isDockItemActivated(dockItem: DockItem): boolean {
   return props.activatedPage === dockItem.page && isHomePage()
 }
 
-const dockContentRef = ref<HTMLElement>()
 const { width: windowWidth, height: windowHeight } = useWindowSize()
 const { width: dockWidth, height: dockHeight } = useElementSize(dockContentRef)
 
@@ -215,10 +229,12 @@ const dockTransformStyle = computed((): { transform: string, transformOrigin: st
       ref="dockContentRef"
       class="dock-content"
       :class="{
-        left: settings.dockPosition === 'left',
-        right: settings.dockPosition === 'right',
-        bottom: settings.dockPosition === 'bottom',
-        hide: hideDock,
+        'left': settings.dockPosition === 'left',
+        'right': settings.dockPosition === 'right',
+        'bottom': settings.dockPosition === 'bottom',
+        'hide': hideDock,
+        'half-hide': settings.halfHideDock,
+        'hover': dockContentHover,
       }"
       :style="dockTransformStyle"
       @mouseenter="toggleHideDock(false)"
@@ -371,22 +387,31 @@ const dockTransformStyle = computed((): { transform: string, transformOrigin: st
   &.left {
     --uno: "left-2 after:right--4px";
   }
-  &.left.hide {
+  &.left.hide:not(.hover) {
     --uno: "opacity-0 !translate-x--100%";
+  }
+  &.left.half-hide:not(.hover) {
+    --uno: "!opacity-60 !translate-x-[calc(-50%-8px)]";
   }
 
   &.right {
     --uno: "right-2 after:left--4px";
   }
-  &.right.hide {
+  &.right.hide:not(.hover) {
     --uno: "opacity-0 !translate-x-100%";
+  }
+  &.right.half-hide:not(.hover) {
+    --uno: "!opacity-60 !translate-x-[calc(50%+8px)]";
   }
 
   &.bottom {
     --uno: "top-unset bottom-0";
   }
-  &.bottom.hide {
+  &.bottom.hide:not(.hover) {
     --uno: "opacity-0 !translate-y-100%";
+  }
+  &.bottom.half-hide:not(.hover) {
+    --uno: "!opacity-60 !translate-y-[calc(50%+8px)]";
   }
 
   .divider {
