@@ -16,7 +16,7 @@ injectCSS(`
 
   @font-face {
     font-family: "ShangguSansSCVF";
-    src: url(${browser.runtime.getURL('/assets/fonts/ShanguSansSC-VF.ttf')}) format("truetype-variations");
+    src: url(${browser.runtime.getURL('/assets/fonts/ShangguSansSC-VF.ttf')}) format("truetype-variations");
   }
 
   @font-face {
