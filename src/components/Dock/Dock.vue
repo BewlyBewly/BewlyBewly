@@ -73,8 +73,7 @@ const showBackToTopOrRefreshButton = computed((): boolean => {
     return false
   }
 
-  return settings.value.moveBackToTopOrRefreshButtonToDock
-    && props.activatedPage !== AppPage.Search && isHomePage()
+  return props.activatedPage !== AppPage.Search && isHomePage()
 })
 
 watch(() => settings.value.autoHideDock, (newValue) => {

@@ -200,9 +200,6 @@ function handleToggleDockItem(dockItem: any) {
       <SettingsItem :title="$t('settings.disable_light_dark_mode_switcher')">
         <Radio v-model="settings.disableLightDarkModeSwitcherOnDock" />
       </SettingsItem>
-      <SettingsItem :title="$t('settings.move_back_to_top_and_refresh_to_dock')">
-        <Radio v-model="settings.moveBackToTopOrRefreshButtonToDock" />
-      </SettingsItem>
     </SettingsItemGroup>
     <SettingsItemGroup :title="$t('settings.group_sidebar')" :desc="$t('settings.group_sidebar_desc')">
       <SettingsItem :title="$t('settings.sidebar_position')">

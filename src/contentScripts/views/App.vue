@@ -395,13 +395,6 @@ provide<BewlyAppProvider>('BEWLY_APP', {
                 p="t-[calc(var(--bew-top-bar-height)+10px)]" m-auto
                 w="lg:[calc(100%-200px)] [calc(100%-150px)]"
               >
-                <!-- control button group -->
-                <BackToTopOrRefreshButton
-                  v-if="activatedPage !== AppPage.Search && !settings.moveBackToTopOrRefreshButtonToDock"
-                  @refresh="handleThrottledPageRefresh"
-                  @back-to-top="handleThrottledBackToTop"
-                />
-
                 <Transition name="page-fade">
                   <Component :is="pages[activatedPage]" />
                 </Transition>

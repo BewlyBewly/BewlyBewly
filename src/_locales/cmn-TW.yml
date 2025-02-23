@@ -175,7 +175,6 @@ settings:
   dock_item_use_original_bili_web_page: 使用原版 Bilibili 網頁
   disable_dock_glowing_effect: 關閉 Dock 發光效果
   disable_light_dark_mode_switcher: 關閉淺/深色模式切換按鈕
-  move_back_to_top_and_refresh_to_dock: 將返回頂部和重新整理按鈕移動到 Dock
   sidebar_position: 側邊欄位置
   auto_hide_sidebar: 自動隱藏側邊欄
 

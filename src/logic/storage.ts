@@ -51,7 +51,6 @@ export interface Settings {
   dockItemsConfig: { page: AppPage, visible: boolean, openInNewTab: boolean, useOriginalBiliPage: boolean }[]
   disableDockGlowingEffect: boolean
   disableLightDarkModeSwitcherOnDock: boolean
-  moveBackToTopOrRefreshButtonToDock: boolean
   sidebarPosition: 'left' | 'right'
   autoHideSidebar: boolean
 
@@ -153,7 +152,6 @@ export const originalSettings: Settings = {
   dockItemsConfig: [],
   disableDockGlowingEffect: false,
   disableLightDarkModeSwitcherOnDock: false,
-  moveBackToTopOrRefreshButtonToDock: true,
   sidebarPosition: 'right',
   autoHideSidebar: false,
 
