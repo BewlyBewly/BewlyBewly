@@ -128,8 +128,12 @@ function setAppWallpaperMaskingOpacity() {
         />
 
         <!-- blurred cover background -->
-        <Transition v-if="!settings.wallpaper" name="fade">
-          <Transition v-show="isBlurredCoverLoaded" name="slide-fade">
+        <Transition name="fade">
+          <Transition
+            v-if="!settings.wallpaper && !settings.disableFrostedGlass"
+            v-show="isBlurredCoverLoaded"
+            name="slide-fade"
+          >
             <img
               :key="currentActivatedCover"
               :src="currentActivatedCover"
