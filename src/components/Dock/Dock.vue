@@ -161,8 +161,8 @@ function handleBackToTopOrRefresh(action: 'backToTop' | 'refresh' | 'auto' = 'au
     emit('backToTop')
   }
   else if (action === 'refresh') {
-    emit('backToTop')
     emit('refresh')
+    emit('backToTop')
   }
   else {
     if (reachTop.value)
