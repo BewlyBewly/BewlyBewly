@@ -183,8 +183,8 @@ const dockScale = computed((): number => {
   if (!dockHeight.value || !dockWidth.value)
     return 1
 
-  const maxAllowedHeight = windowHeight.value - 100
-  const maxAllowedWidth = windowWidth.value - 100
+  const maxAllowedHeight = windowHeight.value - 180
+  const maxAllowedWidth = windowWidth.value - 180
 
   // Calculate scale factors for both dimensions
   const heightScale = dockHeight.value > maxAllowedHeight
