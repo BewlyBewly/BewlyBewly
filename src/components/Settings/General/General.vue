@@ -138,6 +138,9 @@ watch(() => settings.value.language, (newValue) => {
       >
         <Radio v-model="settings.reduceFrostedGlassBlur" />
       </SettingsItem>
+      <SettingsItem :title="$t('settings.disable_shadow')">
+        <Radio v-model="settings.disableShadow" />
+      </SettingsItem>
     </SettingsItemGroup>
 
     <SettingsItemGroup :title="$t('settings.group_link_opening_behavior')">

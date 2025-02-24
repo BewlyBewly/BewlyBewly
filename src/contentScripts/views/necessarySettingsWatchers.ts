@@ -161,6 +161,22 @@ export function setupNecessarySettingsWatchers() {
     { immediate: true },
   )
 
+  watch(() => settings.value.disableShadow, (newValue) => {
+    const bewlyElement = document.querySelector('#bewly') as HTMLElement
+    if (newValue) {
+      if (bewlyElement)
+        bewlyElement.classList.add('disable-shadow')
+
+      document.documentElement.classList.add('disable-shadow')
+    }
+    else {
+      if (bewlyElement)
+        bewlyElement.classList.remove('disable-shadow')
+
+      document.documentElement.classList.remove('disable-shadow')
+    }
+  }, { immediate: true })
+
   watch(() => settings.value.blockAds, () => {
     // Do not use the "ads" keyword. AdGuard, AdBlock, and some ad-blocking extensions will
     // detect and remove it when the class name contains "ads"

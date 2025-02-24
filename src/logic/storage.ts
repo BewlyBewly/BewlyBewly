@@ -16,8 +16,10 @@ export interface Settings {
   fontFamily: string
   overrideDanmakuFont: boolean
   removeTheIndentFromChinesePunctuation: boolean
+
   disableFrostedGlass: boolean
   reduceFrostedGlassBlur: boolean
+  disableShadow: boolean
 
   enableVideoPreview: boolean
 
@@ -122,6 +124,7 @@ export const originalSettings: Settings = {
 
   disableFrostedGlass: true,
   reduceFrostedGlassBlur: false,
+  disableShadow: false,
 
   // Link Opening Behavior
   videoCardLinkOpenMode: 'newTab',

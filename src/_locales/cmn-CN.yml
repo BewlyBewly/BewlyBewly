@@ -129,6 +129,7 @@ settings:
 
   disable_frosted_glass: 禁用毛玻璃效果
   reduce_frosted_glass_blur: 降低毛玻璃模糊强度
+  disable_shadow: 禁用阴影
 
   link_opening_behavior_opt:
     current_tab: 当前标签页

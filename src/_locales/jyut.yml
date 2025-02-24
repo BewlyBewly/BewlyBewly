@@ -128,6 +128,7 @@ settings:
 
   disable_frosted_glass: 閂咗毛玻璃效果
   reduce_frosted_glass_blur: 降低毛玻璃模糊強度
+  disable_shadow: 閂咗陰影
 
   link_opening_behavior_opt:
     current_tab: 目前分頁

@@ -131,6 +131,7 @@ settings:
 
   disable_frosted_glass: Disable frosted glass effect
   reduce_frosted_glass_blur: Reduce the intensity of the frosted glass blur
+  disable_shadow: Disable shadow
 
   link_opening_behavior_opt:
     current_tab: Current tab

@@ -280,6 +280,13 @@
   --bew-filter-glass-2: blur(20px) saturate(180%);
 }
 
+:host(.disable-shadow),
+:root.disable-shadow {
+  --bew-shadow-1: 0 0 0 transparent;
+  --bew-shadow-2: 0 0 0 transparent;
+  --bew-shadow-3: 0 0 0 transparent;
+  --bew-shadow-4: 0 0 0 transparent;
+}
 :root.bewly-design,
 :root.bewly-design * {
   --brand_pink: var(--bew-theme-color);
