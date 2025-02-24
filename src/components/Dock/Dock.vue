@@ -441,7 +441,7 @@ const dockTransformStyle = computed((): { transform: string, transformOrigin: st
     --uno: "opacity-0 !translate-x--100%";
   }
   &.left.half-hide:not(.hover) {
-    --uno: "!opacity-60 !translate-x-[calc(-50%-8px)]";
+    --uno: "!opacity-60 !translate-x--50%";
   }
 
   &.right {
@@ -451,7 +451,7 @@ const dockTransformStyle = computed((): { transform: string, transformOrigin: st
     --uno: "opacity-0 !translate-x-100%";
   }
   &.right.half-hide:not(.hover) {
-    --uno: "!opacity-60 !translate-x-[calc(50%+8px)]";
+    --uno: "!opacity-60 !translate-x-50%";
   }
 
   &.bottom {
@@ -461,7 +461,7 @@ const dockTransformStyle = computed((): { transform: string, transformOrigin: st
     --uno: "opacity-0 !translate-y-100%";
   }
   &.bottom.half-hide:not(.hover) {
-    --uno: "!opacity-60 !translate-y-[calc(50%+8px)]";
+    --uno: "!opacity-60 !translate-y-50%";
   }
 
   .divider {
