@@ -141,24 +141,28 @@ function setCurrentTitle() {
       >
         <ul
           style="
-            --un-shadow: var(--bew-shadow-4), var(--bew-shadow-edge-glow-2);
+            box-shadow: var(--bew-shadow-4);
           "
-          relative flex="~ gap-2 col" rounded="30px group-hover:25px" p-2 shadow
+          relative flex="~ gap-2 col" rounded="30px group-hover:25px" p-2
           bg="$bew-content-alt group-hover:$bew-elevated dark:$bew-elevated dark-group-hover:$bew-elevated"
           scale="group-hover:105" duration-300 overflow-hidden antialiased transform-gpu
-          border="1 $bew-border-color"
         >
           <!-- frosted glass background -->
           <!-- https://github.com/BewlyBewly/BewlyBewly/issues/1162 -->
           <div
-            style="backdrop-filter: var(--bew-filter-glass-2);"
+            style="
+              box-shadow: var(--bew-shadow-edge-glow-2);
+              backdrop-filter: var(--bew-filter-glass-2);
+            "
             pos="absolute top-0 left-0" z--1
             w-full h-full pointer-events-none
+            border="1 $bew-border-color" transform-gpu
+            rounded-inherit duration-inherit
           />
 
           <li v-for="menuItem in settingsMenuItems" :key="menuItem.value">
             <a
-              cursor-pointer w="40px group-hover:180px" h-40px
+              cursor-pointer w="40px group-hover:200px" h-40px
               rounded-30px flex items-center overflow-x-hidden
               duration-300 bg="hover:$bew-fill-2"
               :class="{ 'menu-item-activated': menuItem.value === activatedMenuItem }"
