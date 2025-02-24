@@ -202,6 +202,7 @@ const dockScale = computed((): number => {
 const dockTransformStyle = computed((): { transform: string, transformOrigin: string } => {
   const position = settings.value.dockPosition
   const scale = dockScale.value
+  dockContentRef.value?.style.setProperty('--scale', `${scale}`)
 
   // Adjust origin based on dock position
   const origin = {
@@ -431,7 +432,7 @@ const dockTransformStyle = computed((): { transform: string, transformOrigin: st
 }
 
 .dock-content {
-  --uno: "absolute flex justify-center items-center duration-300";
+  --uno: "absolute flex justify-center items-center duration-300 scale-$scale";
 
   &.left {
     --uno: "left-2 after:right--4px";
