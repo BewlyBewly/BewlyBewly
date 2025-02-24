@@ -14,9 +14,6 @@ const { getActivatedCover } = useMainStore()
 
 const currentActivatedCover = ref<string>('')
 const isBlurredCoverLoaded = ref<boolean>(false)
-const isSafari = computed((): boolean =>
-  /^(?:(?!chrome|android).)*safari/i.test(navigator.userAgent),
-)
 
 // Use a more aggressive debounce and skip unnecessary updates
 const debouncedCoverUpdate = useDebounceFn((newValue: string) => {
@@ -132,9 +129,8 @@ function setAppWallpaperMaskingOpacity() {
 
         <!-- blurred cover background -->
         <Transition name="fade">
-          <!-- I bet Safari users will love this effect. Safari is the best browser in the world, no cap. -->
           <Transition
-            v-if="isSafari || !settings.wallpaper && !settings.disableFrostedGlass"
+            v-if="!settings.wallpaper && !settings.disableFrostedGlass"
             v-show="isBlurredCoverLoaded"
             name="slide-fade"
           >
