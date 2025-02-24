@@ -19,9 +19,8 @@
 > 事關考慮到維護嘅效率同埋難度, 深色模式淨係會適應常用頁面, 一啲冇咁常用嘅頁面唔會適應調整
 
 > [!CAUTION]
-> App Store 上嘅 [Bewley](https://apps.apple.com/app/bewley/id6741677642) 唔係我哋發佈，我哋唔會對佢負責同做擔保。 **Safari 亦不受此專案支援。**
->
-> **Bewley 已經違反本專案使用的 MIT 許可證（未包含本專案許可證原文）。**
+> [BLBewly](https://apps.apple.com/us/app/blbewly/id6742200021) 係 Safari 上嘅免費 BewlyBewly 延伸功能。我哋感謝 [𝗦𝘁𝗲𝘃𝗲 𝕏](https://x.com/st7evechou) 幫手免費將應用程式發佈到 Safari。
+> 但係，Safari 版本遇到嘅問題唔喺我哋嘅維護範圍內，我哋唔會考慮 Safari 維護。
 
 > [!CAUTION]
 > 如果你單緊呢個延伸功能，你嘅瀏覽器可能會話佢可以睇到你嘅瀏覽紀錄。

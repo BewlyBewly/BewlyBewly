@@ -19,9 +19,8 @@
 > 由于效率和维护难度的原因，暗色模式只会适应常用页面，而不会适应不常用的页面。
 
 > [!CAUTION]
-> App Store 上的 [Bewley](https://apps.apple.com/app/bewley/id6741677642) 不由我们上传，我们不为其背书。 **Safari 亦不受此项目支持。**
->
-> **Bewley 已经违反本项目使用的 MIT 许可证（未包含本项目许可证原文）。**
+> [BLBewly](https://apps.apple.com/us/app/blbewly/id6742200021) 是 Safari 上的免费 BewlyBewly 扩展程序。我们感谢 [𝗦𝘁𝗲𝘃𝗲 𝕏](https://x.com/st7evechou) 帮助我们免费将应用发布到 Safari。
+> 但是，Safari 版本遇到的问题不在我们的维护范围内，我们不考虑 Safari 维护。
 
 > [!CAUTION]
 > 如果您正在安装此扩展程序，您的浏览器可能会提示它可以读取您的浏览历史记录。
@@ -47,7 +46,7 @@ BewlyBewly 是一个用于 BiliBili 的浏览器扩展，旨在通过重新设�
 > [!IMPORTANT]
 > 如果你的电脑无法访问 Chrome Web Store，你可以尝试去 crx 搜搜下载：<https://www.crxsoso.com/webstore/detail/bbbiejemhfihiooipfcjmjmbfdmobobp>
 >
-> 但与此项目在 Chrome Web Store 是否一致且未经修改不太能保证，但是经过测试是正常的，使用时请慎重，出现后果本项目概不负责
+> 但与此项目在 Chrome Web Store 是否一致且未经修改不太能保证，但是经过测试是正常的，使用时请慎重，出现任何后果本项目概不负责
 
 - Chrome: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>
 - Edge: <https://chromewebstore.google.com/detail/bewlybewly/bbbiejemhfihiooipfcjmjmbfdmobobp>

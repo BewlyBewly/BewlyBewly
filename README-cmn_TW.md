@@ -19,9 +19,8 @@
 > 由於考慮到效率和維護困難度，深色模式只會適應常用的頁面，而較少使用的頁面則不會支護。
 
 > [!CAUTION]
-> App Store 上的 [Bewley](https://apps.apple.com/app/bewley/id6741677642) 不由我們發佈，我们不爲其背書。 **Safari 亦不受此專案支援。**
->
-> **Bewley 已經違反本專案使用的 MIT 許可證（未包含本專案許可證原文）。**
+> [BLBewly](https://apps.apple.com/us/app/blbewly/id6742200021) 是 Safari 上的免費 BewlyBewly 擴充程式。我們感謝 [𝗦𝘁𝗲𝘃𝗲 𝕏](https://x.com/st7evechou) 協助我們免費將應用程式發佈到 Safari。
+> 但是，Safari 版本遇到的問題不在我們的維護範圍內，我們不考慮 Safari 維護。
 
 > [!CAUTION]
 > 如果您正在安裝此擴充功能，您的瀏覽器可能會提示它可以讀取您的瀏覽歷史記錄。

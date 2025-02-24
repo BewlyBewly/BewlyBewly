@@ -20,9 +20,9 @@ English | [官话 - 简体中文](README-cmn_CN.md) | [官話 - 繁体中文](RE
 > frequently used pages will not to be adapted.
 
 > [!CAUTION]
-> [Bewley](https://apps.apple.com/app/bewley/id6741677642) on the App Store is not uploaded by us and we do not endorse it. **Safari is not supported by this project.**
->
-> **Bewley has violated the MIT license used by this project (the original license of this project is not included).**
+> [BLBewly](https://apps.apple.com/us/app/blbewly/id6742200021) is a free BewlyBewly extension on Safari. We thank [𝗦𝘁𝗲𝘃𝗲 𝕏](https://x.com/st7evechou) for their help with the free publication of the app to Safari.
+> However, issues encountered with the Safari version are outside of our maintenance scope,
+> and we are not considering Safari maintenance.
 
 > [!CAUTION]
 > If you are installing this extension, your browser will probably say that it can read your browser history.
