@@ -85,7 +85,7 @@ export function setupNecessarySettingsWatchers() {
     () => {
       if (settings.value.overrideDanmakuFont) {
         danmakuFontStyleEl = injectCSS(`
-          .bewly-design .bili-danmaku-x-dm {
+          .bewly-design.modify-fonts .bili-danmaku-x-dm {
             font-family: var(--bew-fonts) !important;
           }
         `)
