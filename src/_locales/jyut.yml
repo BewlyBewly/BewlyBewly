@@ -109,7 +109,7 @@ settings:
   select_language_opt:
     english: 英文
     mandarin_cn: 官话 - 简体中文
-    mandarin_tw: 官話 - 繁体中文
+    mandarin_tw: 官話 - 繁體中文
     jyut: 廣東話
   customize_font: 自訂字型
   customize_font_opt:
@@ -118,7 +118,7 @@ settings:
     custom: 自訂
   customize_font_desc: |-
     對於舊字形嘅用戶，我哋推介 <a class="link" href="https://github.com/GuiWonder/Shanggu" target="_blank">Shanggu Fonts (尚古字型)</a> 同 <a class="link" href="https://github.com/ayaka14732/FanWunHak" target="_blank">Fan Wun Hak (繁媛黑體)</a>。
-    呢啲字型仲可以將簡體中文轉做繁體/繁体中文。
+    呢啲字型仲可以將簡體中文轉做繁體/繁體中文。
   override_danmaku_font: 覆蓋彈幕字型
   override_danmaku_font_desc: >
     設定彈幕字型做你嘅自訂字型覆蓋預設值。影片播放器之後唔得改彈幕字型。
