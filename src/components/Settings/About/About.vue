@@ -162,7 +162,7 @@ async function checkGitHubRelease() {
             href="https://github.com/hakadao/BewlyBewly/releases" target="_blank"
             un-text="sm color-$bew-text-2 hover:color-$bew-text-3"
           >
-            v{{ version }}
+            v{{ version }} - Farewell
           </a>
         </p>
       </section>
